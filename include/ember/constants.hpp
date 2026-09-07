@@ -8,6 +8,8 @@
 namespace ember::constants {
 
 inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+inline constexpr double c_light  = c;                // spelled out where a
+                                                     // local is named c
 inline constexpr double G        = 6.67430e-8;       // cm^3 g^-1 s^-2
 inline constexpr double h        = 6.62607015e-27;   // erg s (exact)
 inline constexpr double kB       = 1.380649e-16;     // erg/K (exact)

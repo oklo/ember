@@ -13,7 +13,12 @@ right by today's standards.
 
 ## Status
 
-Early. The equation of state, composition handling and build are in and
+Built for the lowest-mass stars first; the interfaces are shaped so
+that the ultra-cold evolution of *massive* remnants - a solar remnant, or
+something near the Chandrasekhar mass - can be added as further terms rather
+than as a rewrite. See `docs/ROADMAP.md`.
+
+The equation of state, composition handling and build are in and
 tested; the solver and the remaining physics modules are being written. See
 `docs/ROADMAP.md`.
 

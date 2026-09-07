@@ -17,6 +17,37 @@ blueward turn, and down the helium-white-dwarf cooling track to below
 - [x] Relativistic Fermi-Dirac, panelled at the Fermi surface
 - [x] Limit tests: ultra-relativistic (4/3 law) and the mildly relativistic
       white-dwarf core between the two laws
+- [x] Ferguson (2005) low-temperature opacities, monotone-interpolated, with
+      table edges as errors rather than extrapolation
+- [x] Composable equation of state, proven equal to the monolithic one across
+      five regimes
+- [x] Hooks for cold, massive remnants (see below)
+
+## Beyond the first target: massive white dwarfs
+
+The 0.1 Msun star is the milestone, but the same machinery is wanted for the
+ultra-cold evolution of heavier remnants - a solar remnant, and structures
+approaching the Chandrasekhar mass - in support of an update to Adams &
+Laughlin (1997). Those are deliberately *not* built yet, but nothing about
+them should require rearranging what is here. The interfaces they need already
+exist:
+
+| What a cold massive remnant needs | Where it goes |
+|---|---|
+| Coulomb energy of the ion lattice | a new `EosComponent` |
+| Crystallisation, latent heat, Debye solid | a new `EosComponent` |
+| C/O phase separation on freezing | a new `EosComponent` |
+| Plasmon/pair neutrino losses | `NeutrinoLosses`, declared, currently null |
+| Electron conduction (Cassisi 2007, Blouin 2020) | `Conduction` + `CombinedOpacity` |
+| Carbon/oxygen interiors | `Composition` already carries C12 and O16 |
+| Arbitrary relativity at high density | already done; the electrons are exact |
+
+The electron gas is already adequate for a Chandrasekhar-mass star: what such
+an object additionally requires is the *ion* physics, which is why the
+equation of state is a sum of components and not one closed expression.
+Anything needing general relativity in the structure equations (the last
+percent of mass before the limit) would be a new `Structure` term and is noted
+but not designed.
 
 ## Next
 

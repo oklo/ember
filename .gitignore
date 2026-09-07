@@ -4,6 +4,5 @@ compile_commands.json
 *.o
 *.dSYM/
 out/
-data/opacity/*.dat
-data/eos/*.dat
-!data/**/README.md
+# Physics tables are small and versioned with the code: a result is only
+# reproducible if the numbers that produced it travel with it.

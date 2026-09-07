@@ -1,3 +1,8 @@
 add_executable(test_eos test_eos.cpp)
 target_link_libraries(test_eos PRIVATE ember)
 add_test(NAME eos COMMAND test_eos)
+add_executable(test_opacity test_opacity.cpp)
+target_link_libraries(test_opacity PRIVATE ember)
+target_compile_definitions(test_opacity PRIVATE
+  EMBER_DATA_DIR="${CMAKE_SOURCE_DIR}/data")
+add_test(NAME opacity COMMAND test_opacity)

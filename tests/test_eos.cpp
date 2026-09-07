@@ -2,9 +2,11 @@
 // is known independently of the code, so a regression shows up as a physics
 // statement rather than a changed number.
 #include "ember/eos.hpp"
+#include "ember/eos_composite.hpp"
 #include "ember/constants.hpp"
 #include <cmath>
 #include <cstdio>
+#include <algorithm>
 #include <string>
 
 using namespace ember;
@@ -133,6 +135,27 @@ int main() {
     near(cs.sum(), 1.0, 1e-12, "composition: mass fractions sum to one");
     near(cs.Z(), 0.014, 1e-12, "composition: Z as requested");
     near(cs.h1(), 0.70, 1e-12, "composition: X as requested");
+  }
+
+  // 8. The composable assembly must reproduce the monolithic one exactly.
+  //    This is what makes it safe to add Coulomb, crystallisation and phase
+  //    separation later as further terms: the sum of the present three is
+  //    provably the whole of the present physics.
+  {
+    CompositeEos ceos;
+    const double pts[][2] = {{1.0e5, 1.0e-4}, {3.0e6, 1.0e-2},
+                             {1.0e6, 1.0e4},  {1.0e6, 1.0e8}, {3.0e6, 3.0e5}};
+    double worst = 0.0;
+    for (const auto& pt : pts) {
+      const auto a = eos.eval(pt[0], pt[1], solar);
+      const auto b = ceos.eval(pt[0], pt[1], solar);
+      worst = std::max(worst, std::abs(a.P - b.P) / a.P);
+      worst = std::max(worst, std::abs(a.grad_ad - b.grad_ad) / a.grad_ad);
+      worst = std::max(worst, std::abs(a.Gamma1 - b.Gamma1) / a.Gamma1);
+    }
+    check(worst < 1e-12, "composite == monolithic over 5 regimes", worst, 0.0, 1e-12);
+    check(ceos.size() == 3, "composite carries three terms",
+          static_cast<double>(ceos.size()), 3.0, 0.0);
   }
 
   std::printf("\n%s (%d failure%s)\n", failures ? "FAILED" : "ALL PASS",
