@@ -22,6 +22,8 @@ blueward turn, and down the helium-white-dwarf cooling track to below
 - [x] Composable equation of state, proven equal to the monolithic one across
       five regimes
 - [x] Hooks for cold, massive remnants (see below)
+- [x] pp chains with He3 followed explicitly, energy derived from the mass
+      defect of the code's own nuclide masses rather than a separate Q table
 
 ## Beyond the first target: massive white dwarfs
 
@@ -56,7 +58,8 @@ but not designed.
       analytic form outside the table
 - [ ] Opacity: Ferguson 2005 (tables already assembled in the Fortran line),
       OPAL/OPLIB above, conduction from Cassisi 2007
-- [ ] Nuclear: pp chains with modern rates, He3 tracked; CNO out of equilibrium
+- [ ] CNO out of equilibrium (needed on the pre-main-sequence, where it runs
+      once and never again); Chugunov screening for dense matter
 - [ ] Atmosphere: tabulated model atmospheres, with a grey fallback
 - [ ] Henyey solver: block elimination in (ln r, ln rho, ln T, L)
 - [ ] Adaptive mesh (the "temporary points" idea, done properly)

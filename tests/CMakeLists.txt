@@ -6,3 +6,6 @@ target_link_libraries(test_opacity PRIVATE ember)
 target_compile_definitions(test_opacity PRIVATE
   EMBER_DATA_DIR="${CMAKE_SOURCE_DIR}/data")
 add_test(NAME opacity COMMAND test_opacity)
+add_executable(test_nuclear test_nuclear.cpp)
+target_link_libraries(test_nuclear PRIVATE ember)
+add_test(NAME nuclear COMMAND test_nuclear)
