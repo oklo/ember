@@ -14,10 +14,12 @@ blueward turn, and down the helium-white-dwarf cooling track to below
 - [x] Ideal + radiation + non-relativistic Fermi-Dirac electrons
 - [x] Limit tests: ideal, radiation-dominated, Chandrasekhar, Maxwell relation
 
+- [x] Relativistic Fermi-Dirac, panelled at the Fermi surface
+- [x] Limit tests: ultra-relativistic (4/3 law) and the mildly relativistic
+      white-dwarf core between the two laws
+
 ## Next
 
-- [ ] Relativistic Fermi-Dirac (the 0.1 Msun white dwarf core reaches
-      x = p_F/mc ~ 0.8, so this is not a refinement)
 - [ ] Coulomb corrections and crystallisation (Potekhin & Chabrier)
 - [ ] CMS19 / Chabrier-Debras tabulated H/He equation of state, blended to the
       analytic form outside the table

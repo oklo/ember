@@ -66,6 +66,32 @@ int main() {
     near(s.P, Pdeg, 5e-2, "degenerate limit: P = K (rho/mu_e)^5/3");
   }
 
+  // 3b. Ultra-relativistic degeneracy: P -> K' (rho/mu_e)^{4/3}, chi_rho -> 4/3.
+  //     This is the limit the non-relativistic treatment cannot reach at all,
+  //     and the 0.1 Msun white dwarf core sits between it and the 5/3 law.
+  {
+    const double T = 1.0e6, rho = 1.0e8;
+    const auto s = eos.eval(T, rho, h_pure);
+    near(s.chiRho, 4.0 / 3.0, 3e-2, "ultra-relativistic: chi_rho -> 4/3");
+    const double Kur = 1.2435e15; // dyn cm^-2 (g/cm^3)^{-4/3}, mu_e = 1
+    const double mue = 1.0 / h_pure.mu_elec_inv();
+    near(s.P, Kur * std::pow(rho / mue, 4.0 / 3.0), 5e-2,
+         "ultra-relativistic: P = K' (rho/mu_e)^4/3");
+  }
+
+  // 3c. The regime that actually matters here: a 0.1 Msun helium white dwarf
+  //     core, mildly relativistic and strongly degenerate, where neither
+  //     limiting law is accurate and only the full integral will do.
+  {
+    const double T = 3.0e6, rho = 3.0e5;
+    Composition he{}; he[Species::He4] = 1.0;
+    const auto s = eos.eval(T, rho, he);
+    const double xF = std::cbrt(rho / (1.0 / he.mu_elec_inv()) / 9.7393e5);
+    check(xF > 0.4 && xF < 1.5, "WD core is mildly relativistic (p_F/mc)", xF, 0.7, 1.0);
+    check(s.chiRho > 4.0 / 3.0 && s.chiRho < 5.0 / 3.0,
+          "WD core: 4/3 < chi_rho < 5/3", s.chiRho, 1.5, 1.0);
+  }
+
   // 4. Thermodynamic consistency: the Maxwell relation behind grad_ad.
   //    cp - cv = P delta^2 /(rho T chi_rho) must hold identically.
   {
