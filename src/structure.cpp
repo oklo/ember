@@ -2,6 +2,7 @@
 #include "ember/convection.hpp"
 #include "ember/constants.hpp"
 #include "differential.hpp"
+#include "energy.hpp"
 #include <algorithm>
 #include <cmath>
 #include <optional>
@@ -94,7 +95,7 @@ std::array<Differential<N>, NVAR> equations(const Model& model, std::size_t i,
   f[0] = (b.lnr - a.lnr) / dm - 1.0 / (4.0 * M_PI * rb * rb * rb * rhob);
   f[1] = dlnP + G * mb / (4.0 * M_PI * rb * rb * rb * rb * Pb);
   D eps_grav{};
-  if (prev) eps_grav = -(a.E - prev->E - a.P / (a.rho * a.rho) * (a.rho - prev->rho)) / dt;
+  if (prev) eps_grav = detail::gravitational_heating(a.E, a.P, a.rho, prev->E, prev->rho, dt);
   // Retains the existing left-endpoint backward energy difference. A future
   // time integrator must address its order separately from Jacobian assembly.
   f[2] = (b.L - a.L) / dm - (0.5 * (a.eps + b.eps) + eps_grav);

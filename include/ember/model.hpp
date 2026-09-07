@@ -38,7 +38,7 @@ struct Point {
 struct Model {
   double M{};                       // total mass, g
   double age{};                     // s
-  std::vector<double> m;            // mass interior to point i, g  (m[0] = 0)
+  std::vector<double> m;            // enclosed mass, g; solver uses 0 < m[0] < ... < m.back() = M
   std::vector<Point>  y;            // state at point i
   std::vector<Composition> comp;    // composition at point i
   std::vector<double> Lsurf_hist;   // diagnostics

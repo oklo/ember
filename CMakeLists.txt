@@ -12,8 +12,9 @@ endif()
 # --- Apple silicon -----------------------------------------------------------
 # The solver is latency-bound on table interpolation, not throughput-bound, so
 # the wins here are (a) the native core's wide OoO window, reached by telling
-# the compiler exactly which core it is, and (b) Accelerate's LAPACK for the
-# block eliminations.  -ffp-contract=fast lets the FMA units fuse the Hermite
+# the compiler exactly which core it is, and (b) making Accelerate available
+# for linear algebra. The current small Henyey blocks use a portable pivoted
+# kernel. -ffp-contract=fast lets the FMA units fuse the Hermite
 # polynomials, which is where the interpolators spend their time.
 include(CheckCXXCompilerFlag)
 check_cxx_compiler_flag("-mcpu=apple-m4" EMBER_HAS_M4)

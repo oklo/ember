@@ -33,6 +33,10 @@ blueward turn, and down the helium-white-dwarf cooling track to below
       physical atmosphere data remain pending
 - [x] Analytic zone Jacobian, including EOS transport responses and screened
       mass-defect heating derivatives; numerical assembly retained for tests
+- [x] Regular central boundary conditions, pivoted Henyey block elimination,
+      and damped Newton relaxation on a fixed mesh
+- [x] Complete radiative-polytrope benchmark against an independent
+      Lane–Emden solution, including spatial convergence and failure checks
 
 ## Beyond the first target: massive white dwarfs
 
@@ -74,8 +78,8 @@ but not designed.
 - [x] Model on a Lagrangian mass mesh in (ln r, ln rho, ln T, L)
 - [x] The four structure equations as zone residuals, with a Jacobian checked
       against the residual it differentiates
-- [ ] Henyey block elimination and central boundary conditions; surface
-      residuals are implemented
+- [ ] Physical stellar equilibrium with actual pp heating and an explicitly
+      selected atmosphere; requires high-temperature opacity coverage
 - [ ] Adaptive mesh (the "temporary points" idea, done properly)
 - [ ] Time stepping with error control rather than iteration-count heuristics
 - [ ] 0.1 Msun end to end

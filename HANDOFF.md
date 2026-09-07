@@ -3,8 +3,9 @@
 Written 2026-09-07 at the end of a long session. Read this first; it is meant
 to be the only thing you need.
 
-Updated 2026-09-07 after the first GitHub push and implementation of the
-analytic zone Jacobian, EOS transport responses, and nuclear derivatives.
+Updated 2026-09-07 after implementing central boundary conditions, Henyey
+block elimination, and complete-model relaxation against a Lane–Emden
+benchmark. The latest checkpoint is described below; use git for its hash.
 
 ---
 
@@ -50,7 +51,8 @@ ctest --test-dir build --output-on-failure
 ```
 
 Host is an **Apple M4 Max**, 10 performance + 4 efficiency cores. `clang`
-accepts `-mcpu=apple-m4`. Accelerate is linked for LAPACK. CMake and Ninja
+accepts `-mcpu=apple-m4`. Accelerate is linked and available, while the
+current small Henyey blocks use a portable pivoted kernel. CMake and Ninja
 were installed via Homebrew this session.
 
 `-ffast-math` is **deliberately not used** — it licenses the compiler to
@@ -61,8 +63,11 @@ table returns one. Those must surface.
 
 ## 3. Current state
 
-Six test suites, all passing (EOS, opacity, nuclear, structure, convection,
-atmosphere).
+Eight test suites, all passing (EOS, opacity, nuclear, structure, convection,
+atmosphere, Henyey, relaxation). A complete **controlled radiative polytrope**
+now converges; a physical stellar equilibrium and an evolutionary run remain
+pending. The benchmark has constant heating and opacity and an explicitly
+artificial atmosphere. It must not be reported as the 0.1 M☉ scientific run.
 
 | Module | File | Status |
 |---|---|---|
@@ -75,21 +80,37 @@ atmosphere).
 | Opacity | `opacity.hpp`, `opacity_ferguson.{hpp,cpp}` | Ferguson 2005, monotone, edges throw |
 | Interpolation | `interp.{hpp,cpp}` | monotone Hermite; parameter derivatives follow active limiter branches |
 | Nuclear | `nuclear.hpp`, `nuclear_pp.cpp` | pp chains, He3 explicit; heating derivatives include the same mass defect, neutrinos, and screening as the value |
-| Model | `model.hpp` | (ln r, ln ρ, ln T, L) on a Lagrangian mass mesh |
+| Model | `model.hpp` | (ln r, ln ρ, ln T, L); solver mesh starts at positive m[0] and ends at M |
 | Structure | `structure.{hpp,cpp}` | 4 residuals + analytic Jacobian; value-only path and numerical Jacobian retained for tests |
 | Convection | `convection.{hpp,cpp}` | BV58 MLT, Schwarzschild criterion, analytic gradient partials; wired into transport |
 | Atmosphere | `atmosphere.hpp`, `atmosphere_grey.cpp` | Eddington grey, varying opacity, adaptive integration and analytic sensitivities |
 | Atmosphere tables | `atmosphere_table.{hpp,cpp}` | strict reader and bilinear interpolation; **no production grid yet** |
-| Surface boundary | `boundary.{hpp,cpp}` | two surface residuals and analytic 2x4 Jacobian; not yet assembled into a solver |
+| Surface boundary | `boundary.{hpp,cpp}` | two surface residuals and analytic 2x4 Jacobian, assembled in relaxation |
+| Central boundary | `boundary.{hpp,cpp}` | regular unresolved central sphere: r³=3m/(4πρ), L=m*eps_total; analytic derivatives |
+| Henyey | `henyey.{hpp,cpp}` | pivoted block elimination, linear work/storage; checks original linear equations |
+| Relaxation | `relaxation.{hpp,cpp}` | damped Newton, fixed mesh/composition, explicit failure, residual AND correction convergence |
+| Continuum benchmark | `examples/radiative_polytrope.hpp`, `apps/polytrope.cpp` | independent n=3 Lane–Emden reference; JSON output via ember-polytrope |
 | Losses | `losses.hpp` | **declared, null** — plasmon neutrinos for massive WDs |
 | Conduction | `conduction.hpp` | **declared, unimplemented** — Cassisi 2007 |
 
 Data: `data/opacity/ferguson_gs98_z020.dat` (versioned with the code
 deliberately — a result is reproducible only if its numbers travel with it).
 
+Benchmark: `build/apps/ember-polytrope 256 > out/polytrope-256.json` after
+`mkdir -p out`. At 64/128/256 points, radius errors are 3.140%/0.8147%/0.2049%,
+with 6/7/7 accepted Newton updates. This checks second-order spatial
+convergence independently of the tiny nonlinear residual. See
+`docs/HENYEY.md` for the equations, units, failure behavior, and limitations.
+
 ---
 
 ## 4. Immediate next steps, in order
+
+**Next active dependency:** high-temperature opacity from item 8, to permit
+an actual stellar interior with the analytic EOS and pp heating. The Henyey
+machinery is now tested, but Ferguson alone cannot reach interior
+temperatures. A physical equilibrium and a suitable initial model are the
+next scientific solver validation; the polytrope is only controlled physics.
 
 1. **Done: mixing-length convection** in the transport equation, plus the
    Schwarzschild criterion. The bounded cubic retains small gradient
@@ -115,8 +136,15 @@ deliberately — a result is reproducible only if its numbers travel with it).
    The old left-endpoint gravitational-energy difference remains; its
    discretization order is not solved by differentiating it. Positive `dt`
    now requires a previous model on the identical mass mesh.
-4. **Henyey block elimination** + central boundary conditions. The surface
-   residuals and their Jacobian are now available in `boundary.hpp`.
+4. **Done: Henyey block elimination and central boundary conditions.**
+   Six active rows eliminate four variables with row pivoting; two
+   constraints propagate outward and close with the surface equations.
+   `relax` uses fixed physical units and a backtracking line search. It
+   requires both residual and undamped correction convergence, and returns
+   the last accepted model with an explicit failure status on exhaustion.
+   Positive `dt` supports a fixed previous model, but no age/composition
+   advance or time-step controller is implemented. A small positive inner
+   mass replaces the impossible `ln r` at m=0; check that sphere's size.
 5. **Adaptive mesh** — refine at burning shells, coarsen in isothermal cores.
    Must carry a *density* term in the smoothness measure (see §5 item 4).
 6. **Time-step control** by estimated error, not iteration-count heuristics.
@@ -130,9 +158,10 @@ deliberately — a result is reproducible only if its numbers travel with it).
 The default α = 1.9 is **not calibrated for ember**. Do not import the
 Fortran solar calibration as if the EOS and atmosphere were identical.
 
-Central-boundary and Henyey work can continue with the grey fallback while the
-physical atmosphere grid is sourced. Do not mark tabulated atmosphere physics
-complete merely because its reader passes synthetic tests.
+Physical equilibrium work can use the grey fallback while the physical
+atmosphere grid is sourced, once opacity spans the interior. Do not mark
+tabulated atmosphere physics complete merely because its reader passes
+synthetic tests.
 
 ---
 
@@ -202,6 +231,17 @@ Two more from assembling the analytic zone Jacobian:
   pp mass-defect heating value. Its derivatives now use the same masses,
   neutrino losses, and screening cap as its value. The cap is still only the
   existing weak-screening approximation, not new dense-matter physics.
+
+From the first complete boundary-value solve:
+
+- **Newton convergence is not spatial accuracy.** The coarse polytrope can
+  converge to a tiny residual while its radius differs by percent levels
+  from the continuum solution. Keep the independent Lane–Emden mesh-refinement
+  test and the check that the unresolved central sphere shrinks correctly.
+- **Damping is not convergence.** A small accepted step may only reflect a
+  line-search restriction. Require a small undamped remaining correction
+  as well as a small residual. Physics-domain errors may reject a trial;
+  they never authorize table extrapolation or an implicit fallback.
 
 ---
 

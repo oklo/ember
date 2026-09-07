@@ -25,9 +25,12 @@ Böhm–Vitense mixing-length convection with the Schwarzschild criterion; see
 surface residuals with analytic derivatives are also implemented; see
 `docs/ATMOSPHERE.md`. The zone Jacobian is analytic, including EOS transport
 responses and screened nuclear-heating derivatives, with numerical
-differences retained as a test reference; see `docs/JACOBIAN.md`. Six test
-suites pass. Physical atmosphere grids and the Henyey solver remain
-unfinished; there is no evolutionary run yet.
+differences retained as a test reference; see `docs/JACOBIAN.md`. Central
+boundary conditions and damped Henyey relaxation now converge a complete
+radiative-polytrope benchmark, with second-order convergence toward an
+independent Lane–Emden solution; see `docs/HENYEY.md`. Eight test suites pass.
+The benchmark uses controlled physics and an artificial atmosphere. A
+physical stellar equilibrium and an evolutionary run remain pending.
 
 ## Design
 

@@ -21,3 +21,9 @@ target_compile_definitions(test_atmosphere PRIVATE
   EMBER_DATA_DIR="${CMAKE_SOURCE_DIR}/data"
   EMBER_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
 add_test(NAME atmosphere COMMAND test_atmosphere)
+add_executable(test_henyey test_henyey.cpp)
+target_link_libraries(test_henyey PRIVATE ember)
+add_test(NAME henyey COMMAND test_henyey)
+add_executable(test_relaxation test_relaxation.cpp)
+target_link_libraries(test_relaxation PRIVATE ember)
+add_test(NAME relaxation COMMAND test_relaxation)

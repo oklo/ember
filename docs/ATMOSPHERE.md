@@ -119,8 +119,10 @@ The matching point is explicitly the outer boundary, with its radius
 identified with the photospheric radius and its enclosed mass with total
 mass in the thin-atmosphere approximation. A thick envelope needs a resolved
 atmospheric extension; this API does not place a fitting point at a fixed
-interior mass fraction. These two equations are ready for assembly, but the
-central boundary conditions and Henyey solver remain unimplemented.
+interior mass fraction. These equations are now assembled with the central
+conditions and interior rows by the Henyey relaxation solver; see `HENYEY.md`.
+The first complete continuum benchmark uses an explicitly artificial
+polytropic atmosphere, not a physical atmosphere grid.
 
 ## Findings from the integration tests
 

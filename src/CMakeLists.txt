@@ -9,6 +9,8 @@ add_library(ember
   atmosphere_grey.cpp
   atmosphere_table.cpp
   boundary.cpp
+  henyey.cpp
+  relaxation.cpp
   structure.cpp
   eos_ideal.cpp)
 target_include_directories(ember PUBLIC ${CMAKE_SOURCE_DIR}/include)
