@@ -6,6 +6,9 @@ add_library(ember
   eos_components.cpp
   nuclear_pp.cpp
   convection.cpp
+  atmosphere_grey.cpp
+  atmosphere_table.cpp
+  boundary.cpp
   structure.cpp
   eos_ideal.cpp)
 target_include_directories(ember PUBLIC ${CMAKE_SOURCE_DIR}/include)

@@ -16,6 +16,7 @@ public:
   explicit FergusonOpacity(const std::filesystem::path& file);
 
   OpacityState eval(double T, double rho, const Composition&) const override;
+  std::optional<DensityRange> density_range(double T, const Composition&) const override;
   const char* name() const override { return "Ferguson+2005 (GS98)"; }
 
   struct Range { double logT_min, logT_max, logR_min, logR_max, X_min, X_max; };

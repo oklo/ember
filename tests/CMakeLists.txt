@@ -15,3 +15,9 @@ add_test(NAME structure COMMAND test_structure)
 add_executable(test_convection test_convection.cpp)
 target_link_libraries(test_convection PRIVATE ember)
 add_test(NAME convection COMMAND test_convection)
+add_executable(test_atmosphere test_atmosphere.cpp)
+target_link_libraries(test_atmosphere PRIVATE ember)
+target_compile_definitions(test_atmosphere PRIVATE
+  EMBER_DATA_DIR="${CMAKE_SOURCE_DIR}/data"
+  EMBER_TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data")
+add_test(NAME atmosphere COMMAND test_atmosphere)

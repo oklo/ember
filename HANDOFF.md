@@ -3,7 +3,8 @@
 Written 2026-09-07 at the end of a long session. Read this first; it is meant
 to be the only thing you need.
 
-Updated 2026-09-07 after implementing and testing mixing-length transport.
+Updated 2026-09-07 after implementing atmosphere boundaries, surface
+residuals, and the opacity-derivative correction found by their tests.
 
 ---
 
@@ -56,22 +57,26 @@ table returns one. Those must surface.
 
 ## 3. Current state
 
-Five test suites, all passing (EOS, opacity, nuclear, structure, convection).
+Six test suites, all passing (EOS, opacity, nuclear, structure, convection,
+atmosphere).
 
 | Module | File | Status |
 |---|---|---|
 | Constants | `include/ember/constants.hpp` | CODATA 2018, IAU 2015 nominal solar |
 | Composition | `composition.{hpp,cpp}` | 8 species, AAG21 mixture, scaled to (X,Z) |
-| EOS interface | `eos.hpp` | analytic derivatives, `rho_from_PT` inversion |
+| EOS interface | `eos.hpp` | analytic derivatives; `rho_from_PT` now throws on invalid states and nonconvergence |
 | EOS components | `eos_component.hpp`, `eos_components.cpp` | ions, radiation, relativistic FD electrons |
 | Composite EOS | `eos_composite.hpp` | additive; == monolithic to 1e-12 over 5 regimes |
 | Fermi–Dirac | `src/fermi.{hpp,cpp}` | relativistic, panelled at the Fermi surface |
 | Opacity | `opacity.hpp`, `opacity_ferguson.{hpp,cpp}` | Ferguson 2005, monotone, edges throw |
-| Interpolation | `interp.{hpp,cpp}` | Fritsch–Carlson monotone Hermite |
+| Interpolation | `interp.{hpp,cpp}` | monotone Hermite; parameter derivatives follow active limiter branches |
 | Nuclear | `nuclear.hpp`, `nuclear_pp.cpp` | pp chains, He3 explicit, energy from mass defect |
 | Model | `model.hpp` | (ln r, ln ρ, ln T, L) on a Lagrangian mass mesh |
 | Structure | `structure.{hpp,cpp}` | 4 zone residuals + Jacobian (numerical, by design) |
 | Convection | `convection.{hpp,cpp}` | BV58 MLT, Schwarzschild criterion, analytic gradient partials; wired into transport |
+| Atmosphere | `atmosphere.hpp`, `atmosphere_grey.cpp` | Eddington grey, varying opacity, adaptive integration and analytic sensitivities |
+| Atmosphere tables | `atmosphere_table.{hpp,cpp}` | strict reader and bilinear interpolation; **no production grid yet** |
+| Surface boundary | `boundary.{hpp,cpp}` | two surface residuals and analytic 2x4 Jacobian; not yet assembled into a solver |
 | Losses | `losses.hpp` | **declared, null** — plasmon neutrinos for massive WDs |
 | Conduction | `conduction.hpp` | **declared, unimplemented** — Cassisi 2007 |
 
@@ -90,14 +95,19 @@ deliberately — a result is reproducible only if its numbers travel with it).
    equations and coefficient convention. This is optically thick interior
    MLT; composition mixing and optically thin losses remain separate work.
 2. **Atmosphere boundary condition.** Tabulated model atmospheres
-   (PHOENIX/BT-Settl for M dwarfs and BDs) with a grey fallback. The FORTRAN
-   line used an LB93 "case B" grey integration; a tabulated atmosphere is the
-   modern choice and matters enormously for these stars.
+   (PHOENIX/BT-Settl for M dwarfs and BDs) still need **physical data imported**.
+   Grey fallback, table reader, and surface residuals are implemented. The
+   BT-Settl AGSS2009 STRUCTURES archive timed out over HTTP/HTTPS this session;
+   spectrum files are not pressure-temperature structures. The only added
+   atmosphere table is a labeled synthetic test fixture under `tests/data`.
+   See `docs/ATMOSPHERE.md` for format, sources, and integration conventions.
+   The grey fallback uses radiative T(tau), not a convective atmosphere.
 3. **Analytic Jacobian assembly.** Keep the numerical version as the test
    reference. MLT supplies partials with respect to ∇_rad, ∇_ad, and ln U.
    Full assembly also needs derivatives of cp, δ, and ∇_ad with respect to
    the state; `EosState` currently returns their values, not those derivatives.
-4. **Henyey block elimination** + surface boundary condition.
+4. **Henyey block elimination** + central boundary conditions. The surface
+   residuals and their Jacobian are now available in `boundary.hpp`.
 5. **Adaptive mesh** — refine at burning shells, coarsen in isothermal cores.
    Must carry a *density* term in the smoothness measure (see §5 item 4).
 6. **Time-step control** by estimated error, not iteration-count heuristics.
@@ -110,6 +120,10 @@ deliberately — a result is reproducible only if its numbers travel with it).
 
 The default α = 1.9 is **not calibrated for ember**. Do not import the
 Fortran solar calibration as if the EOS and atmosphere were identical.
+
+Analytic Jacobian/solver work can continue with the grey fallback while the
+physical atmosphere grid is sourced. Do not mark tabulated atmosphere physics
+complete merely because its reader passes synthetic tests.
 
 ---
 
@@ -152,6 +166,18 @@ Do not rediscover these.
      ideal limit" with 13% of its pressure in radiation, and a shell built by
      one-point integration checked against a centred-difference equation.
      Suspect the test too.
+
+Two more lessons from connecting the atmosphere in ember:
+
+- **Differentiate the actual interpolant.** Interpolating opacity derivatives
+  separately missed the dependence of the temperature slope limiter on the
+  input opacities. The full Ferguson atmosphere test saw a ~0.6% mismatch in
+  its Teff pressure response; a direct opacity regression also failed. Both
+  pass after propagating derivatives through the limiter. No opacity values
+  were intentionally changed.
+- **An inversion must report failure.** A small pressure residual can conceal
+  a bad density when radiation dominates, and an exhausted iteration must not
+  return a density as a success. `rho_from_PT` now checks both and throws.
 
 ---
 

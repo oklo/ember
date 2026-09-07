@@ -16,6 +16,13 @@ struct Value { double y; double dydx; };
 
 Value hermite(std::span<const double> x, std::span<const double> y, double xq);
 
+// Also propagate dependence of the ordinates on an independent parameter p.
+// Differentiates the active slope-limiter branches; interpolating dy/dp as a
+// separate field is not the derivative of this nonlinear interpolation.
+struct ParametricValue { double y, dydx, dydp; };
+ParametricValue hermite(std::span<const double> x, std::span<const double> y,
+                       std::span<const double> dy_dp, double xq);
+
 // Bilinear-in-index location: index of the interval containing xq, clamped.
 std::size_t locate(std::span<const double> x, double xq);
 

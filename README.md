@@ -21,8 +21,10 @@ than as a rewrite. See `docs/ROADMAP.md`.
 The analytic equation of state, composition, Ferguson opacities, pp chains,
 and four structure residuals are implemented and tested. Transport uses
 Böhm–Vitense mixing-length convection with the Schwarzschild criterion; see
-`docs/CONVECTION.md`. Five test suites pass. The atmosphere boundary and
-Henyey solver are next; there is no evolutionary run yet.
+`docs/CONVECTION.md`. The grey atmosphere, atmosphere-table reader, and two
+surface residuals with analytic derivatives are also implemented; see
+`docs/ATMOSPHERE.md`. Six test suites pass. Physical atmosphere grids and the
+Henyey solver remain unfinished; there is no evolutionary run yet.
 
 ## Design
 
@@ -72,7 +74,7 @@ returns one. Those should surface, not be optimised away.
 | Conduction | Cassisi et al. (2007) *(pending)* |
 | Convection | Böhm–Vitense MLT, optically thick; Schwarzschild criterion |
 | Nuclear rates | JINA REACLIB / NACRE II *(pending)* |
-| Atmosphere | model-atmosphere boundary *(pending)* |
+| Atmosphere | Eddington grey implemented; table reader ready, physical grids pending |
 
 ## Licence
 

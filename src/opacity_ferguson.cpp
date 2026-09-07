@@ -47,6 +47,15 @@ bool FergusonOpacity::covers(double T, double rho, double X) const {
       && X  >= X_.front()    && X  <= X_.back();
 }
 
+std::optional<Opacity::DensityRange> FergusonOpacity::density_range(double T, const Composition& comp) const {
+  const double lt = std::log10(T), X = comp.h1();
+  if (!std::isfinite(lt) || lt < logT_.front() || lt > logT_.back()
+      || !std::isfinite(X) || X < X_.front() || X > X_.back())
+    throw std::domain_error("FergusonOpacity: temperature or composition outside table");
+  return DensityRange{std::pow(10.0, logR_.front() + 3.0 * (lt - 6.0)),
+                      std::pow(10.0, logR_.back() + 3.0 * (lt - 6.0))};
+}
+
 OpacityState FergusonOpacity::eval(double T, double rho, const Composition& comp) const {
   const double lt = std::log10(T);
   const double lr = std::log10(rho) - 3.0 * (lt - 6.0);
@@ -78,11 +87,10 @@ OpacityState FergusonOpacity::eval(double T, double rho, const Composition& comp
       col[j] = r.y; dcol[j] = r.dydx;
     }
     const auto a = interp::hermite(std::span<const double>(tt, 4),
-                                   std::span<const double>(col, 4), lt);
-    v[m] = a.y; dvdT[m] = a.dydx;
-    const auto b = interp::hermite(std::span<const double>(tt, 4),
+                                   std::span<const double>(col, 4),
                                    std::span<const double>(dcol, 4), lt);
-    dvdR[m] = b.y;
+    v[m] = a.y; dvdT[m] = a.dydx;
+    dvdR[m] = a.dydp;
   }
   double fx = 0.0;
   if (X_.size() > 1 && ix + 1 < X_.size())

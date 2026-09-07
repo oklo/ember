@@ -35,6 +35,8 @@ public:
   // Invert to density at given (T, P).  Needed by the atmosphere, which
   // integrates in pressure.  Newton on ln rho using the analytic chiRho, so it
   // converges quadratically instead of the fixed-point crawl the F77 used.
+  // Invalid states and failure to converge throw; no approximate density is
+  // returned as if the pressure constraint had been satisfied.
   double rho_from_PT(double T, double P, const Composition&,
                      double rho_guess = 0.0) const;
 };

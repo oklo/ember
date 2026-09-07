@@ -8,6 +8,7 @@
 #include <cstdio>
 #include <algorithm>
 #include <string>
+#include <limits>
 
 using namespace ember;
 using namespace ember::constants;
@@ -127,6 +128,23 @@ int main() {
     const double T = 5.0e5, rho = 3.7e-3;
     const auto s = eos.eval(T, rho, solar);
     near(eos.rho_from_PT(T, s.P, solar), rho, 1e-10, "inversion: rho(T, P(T,rho)) = rho");
+  }
+
+  // 6b. Pressure convergence must resolve density, and unreachable pressures
+  //     must not return the last unconverged iterate.
+  {
+    const double T = 1e6, rho = 1e-8;
+    const auto s = eos.eval(T, rho, solar);
+    near(eos.rho_from_PT(T, s.P, solar), rho, 2e-9,
+         "radiation-dominated inversion converges in density");
+    const double Pr = a_rad * std::pow(1e5, 4) / 3.0;
+    bool rejected = true;
+    for (double target : {0.0, -1.0, 0.5 * Pr, Pr, std::numeric_limits<double>::quiet_NaN()}) {
+      bool threw = false;
+      try { eos.rho_from_PT(1e5, target, solar); } catch (const std::exception&) { threw = true; }
+      rejected = rejected && threw;
+    }
+    check(rejected, "unreachable or invalid pressures throw", rejected, 1.0, 0.0);
   }
 
   // 7. Composition bookkeeping.

@@ -6,6 +6,7 @@
 #include <cmath>
 #include <cstdio>
 #include <string>
+#include <algorithm>
 
 using namespace ember;
 static int failures = 0;
@@ -66,6 +67,26 @@ int main() {
     const double rm = op.eval(T, rho * (1 - d), c).kappa;
     near(s.dlnk_dlnRho, (std::log(rp) - std::log(rm)) / (2 * d), 1e-4,
          "dlnk/dlnrho vs numerical");
+  }
+
+  // 3b. The density derivative must follow the temperature slope limiter.
+  {
+    double worst = 0.0;
+    constexpr double step = 1e-6;
+    for (double T : {2450.0, 2850.0, 3430.0, 3700.0, 4300.0}) {
+      for (double logR : {-6.3, -4.2, -2.6, -0.3}) {
+        const double rho = std::pow(10.0, logR + 3.0 * (std::log10(T) - 6.0));
+        const auto c = comp_with_X(0.7);
+        const auto s = op.eval(T, rho, c);
+        const double dr = (std::log(op.eval(T, rho * std::exp(step), c).kappa)
+                          - std::log(op.eval(T, rho * std::exp(-step), c).kappa)) / (2 * step);
+        const double dT = (std::log(op.eval(T * std::exp(step), rho, c).kappa)
+                          - std::log(op.eval(T * std::exp(-step), rho, c).kappa)) / (2 * step);
+        worst = std::max({worst, std::abs(dr - s.dlnk_dlnRho) / std::max(1.0, std::abs(dr)),
+                         std::abs(dT - s.dlnk_dlnT) / std::max(1.0, std::abs(dT))});
+      }
+    }
+    check(worst < 2e-5, "density derivative follows the temperature slope limiter", worst, 0.0);
   }
 
   // 4. Composition dependence is real, not a scaling law.

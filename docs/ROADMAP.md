@@ -27,6 +27,10 @@ blueward turn, and down the helium-white-dwarf cooling track to below
 - [x] Mixing-length convection and the Schwarzschild criterion, with a
       bounded cubic solve, analytic gradient partials, and a regression for
       the transport-row conditioning at grad/grad_rad below 1e-6
+- [x] Grey atmosphere with varying opacity, radiation pressure, adaptive
+      integration, and analytic sensitivities to Teff and gravity
+- [x] Atmosphere table reader and surface residuals with an analytic Jacobian;
+      physical atmosphere data remain pending
 
 ## Beyond the first target: massive white dwarfs
 
@@ -63,14 +67,16 @@ but not designed.
       OPAL/OPLIB above, conduction from Cassisi 2007
 - [ ] CNO out of equilibrium (needed on the pre-main-sequence, where it runs
       once and never again); Chugunov screening for dense matter
-- [ ] Atmosphere: tabulated model atmospheres, with a grey fallback
+- [ ] Import and validate physical model-atmosphere grids (BT-Settl archive
+      timed out; the existing atmosphere table is synthetic test data only)
 - [x] Model on a Lagrangian mass mesh in (ln r, ln rho, ln T, L)
 - [x] The four structure equations as zone residuals, with a Jacobian checked
       against the residual it differentiates
 - [ ] Analytic Jacobian assembly, including EOS derivatives of cp, delta,
       and grad_ad needed by convection; the numerical Jacobian remains the
       test reference
-- [ ] Henyey block elimination and the surface boundary condition
+- [ ] Henyey block elimination and central boundary conditions; surface
+      residuals are implemented
 - [ ] Adaptive mesh (the "temporary points" idea, done properly)
 - [ ] Time stepping with error control rather than iteration-count heuristics
 - [ ] 0.1 Msun end to end

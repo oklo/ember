@@ -3,6 +3,7 @@
 #include "fermi.hpp"
 #include <algorithm>
 #include <cmath>
+#include <limits>
 #include <stdexcept>
 
 namespace ember {
@@ -91,18 +92,30 @@ EosState IdealEos::eval(double T, double rho, const Composition& comp) const {
 
 double Eos::rho_from_PT(double T, double P, const Composition& comp,
                         double rho_guess) const {
+  if (!std::isfinite(T) || !(T > 0.0) || !std::isfinite(P) || !(P > 0.0)
+      || !std::isfinite(rho_guess) || rho_guess < 0.0)
+    throw std::domain_error("Eos::rho_from_PT: invalid T, P, or density guess");
   double rho = rho_guess > 0.0 ? rho_guess
              : P / (comp.mu_ions_inv() + comp.mu_elec_inv()) / (R_gas * T);
   for (int it = 0; it < 200; ++it) {
+    if (!std::isfinite(rho) || !(rho > 0.0))
+      throw std::domain_error("Eos::rho_from_PT: density outside representable range");
     const EosState s = eval(T, rho, comp);
-    const double f = std::log(s.P) - std::log(P);
-    if (std::abs(f) < 1e-12) break;
-    double step = f / std::max(s.chiRho, 1e-3);
+    if (!std::isfinite(s.P) || !(s.P > 0.0) || !std::isfinite(s.chiRho) || !(s.chiRho > 0.0))
+      throw std::domain_error("Eos::rho_from_PT: invalid EOS pressure or density derivative");
+    if (s.chiRho < 32.0 * std::numeric_limits<double>::epsilon())
+      throw std::domain_error("Eos::rho_from_PT: density is unresolved by total pressure");
+    const double f = std::abs(s.P - P) < 0.5 * P
+        ? std::log1p((s.P - P) / P) : std::log(s.P) - std::log(P);
+    double step = f / s.chiRho;
+    // A small relative pressure residual alone is insufficient when radiation
+    // dominates: require convergence in the inferred density as well.
+    if (std::abs(f) < 1e-12 && std::abs(step) < 1e-10) return rho;
     if (step >  0.7) step =  0.7;
     if (step < -0.7) step = -0.7;
     rho *= std::exp(-step);
   }
-  return rho;
+  throw std::runtime_error("Eos::rho_from_PT: density inversion did not converge");
 }
 
 } // namespace ember
