@@ -31,8 +31,10 @@ how.
 **The milestone that defines "working":** a 0.1 M☉ star evolved end to end —
 Hayashi track, trillions of years of hydrogen burning, the blueward turn, and
 down the helium-white-dwarf cooling track below 10⁻⁶ L☉ — in one run.
-**Push to GitHub only when that works.** (User's explicit instruction; nothing
-has been pushed yet. Use `git log` for the current local history.)
+**GitHub push is now authorized.** On 2026-09-07 the user explicitly asked
+to push the current checkpoint and continue development, superseding the
+earlier requirement to wait for the end-to-end run. The scientific milestone
+is unchanged. Use `git log` and the configured remote for current history.
 
 ---
 
@@ -116,7 +118,7 @@ deliberately — a result is reproducible only if its numbers travel with it).
 8. **Conduction** (Cassisi 2007) + `CombinedOpacity`; **OPAL/OPLIB** above
    31,600 K where Ferguson stops.
 9. **CNO out of equilibrium** (runs once on the pre-MS and never again).
-10. 0.1 M☉ end to end → **then push to GitHub**.
+10. 0.1 M☉ end to end. GitHub pushes are authorized before this milestone.
 
 The default α = 1.9 is **not calibrated for ember**. Do not import the
 Fortran solar calibration as if the EOS and atmosphere were identical.
