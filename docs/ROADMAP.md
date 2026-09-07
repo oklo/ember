@@ -31,6 +31,8 @@ blueward turn, and down the helium-white-dwarf cooling track to below
       integration, and analytic sensitivities to Teff and gravity
 - [x] Atmosphere table reader and surface residuals with an analytic Jacobian;
       physical atmosphere data remain pending
+- [x] Analytic zone Jacobian, including EOS transport responses and screened
+      mass-defect heating derivatives; numerical assembly retained for tests
 
 ## Beyond the first target: massive white dwarfs
 
@@ -72,9 +74,6 @@ but not designed.
 - [x] Model on a Lagrangian mass mesh in (ln r, ln rho, ln T, L)
 - [x] The four structure equations as zone residuals, with a Jacobian checked
       against the residual it differentiates
-- [ ] Analytic Jacobian assembly, including EOS derivatives of cp, delta,
-      and grad_ad needed by convection; the numerical Jacobian remains the
-      test reference
 - [ ] Henyey block elimination and central boundary conditions; surface
       residuals are implemented
 - [ ] Adaptive mesh (the "temporary points" idea, done properly)

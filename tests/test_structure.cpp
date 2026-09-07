@@ -9,6 +9,8 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
+#include <limits>
+#include <stdexcept>
 #include <string>
 
 using namespace ember;
@@ -45,6 +47,10 @@ public:
     return e;
   }
   const char* name() const override { return "ideal gas (structure test)"; }
+  EosResponse eval_with_derivatives(double T, double rho, const Composition& comp) const override {
+    EosResponse r{}; r.state = eval(T, rho, comp);
+    return r;  // E_rho=0; cp, delta and grad_ad are constants in this EOS.
+  }
 };
 class ConstantOpacity final : public Opacity {
 public:
@@ -54,6 +60,45 @@ public:
   }
   const char* name() const override { return "constant (structure test)"; }
 };
+
+// Compare every row and both endpoints after converting the luminosity
+// column to a local luminosity unit. Row normalization prevents tiny physical
+// terms from turning subtraction roundoff into a spurious relative failure.
+static void check_jacobian(const Model& model, const Physics& phys, double dt,
+                           const Model* prev, const std::string& label) {
+  const auto analytic = zone_residual(model, 0, phys, dt, prev);
+  const auto numerical = zone_residual_numerical(model, 0, phys, dt, prev, 3e-5);
+  const double dm = model.m[1] - model.m[0];
+  const double Lunit = std::max({std::abs(model.y[0].L), std::abs(model.y[1].L),
+      std::abs(model.y[1].L - model.y[0].L - dm * analytic.f[2]), 1.0});
+  double worst = 0.0, value_error = 0.0;
+  std::size_t worst_row = 0;
+  for (std::size_t k = 0; k < NVAR; ++k) {
+    double scale = 0.0, error = 0.0;
+    for (std::size_t endpoint = 0; endpoint < 2; ++endpoint) {
+      const auto& a = endpoint == 0 ? analytic.dfdy_lo : analytic.dfdy_hi;
+      const auto& n = endpoint == 0 ? numerical.dfdy_lo : numerical.dfdy_hi;
+      for (std::size_t v = 0; v < NVAR; ++v) {
+        const double unit = v == static_cast<std::size_t>(Var::L) ? Lunit : 1.0;
+        scale = std::max({scale, std::abs(a[k][v] * unit), std::abs(n[k][v] * unit)});
+        error = std::max(error, std::abs((a[k][v] - n[k][v]) * unit));
+      }
+    }
+    const double relative = error / std::max(scale, 1e-300);
+    if (relative > worst) { worst = relative; worst_row = k; }
+    value_error = std::max(value_error, std::abs(analytic.f[k] - numerical.f[k])
+        / std::max({std::abs(analytic.f[k]), scale, 1e-300}));
+  }
+  std::printf("       %s: worst Jacobian row %zu\n", label.c_str(), worst_row);
+  check(worst < 2e-6, label + ": all Jacobian entries", worst, 0.0);
+  check(value_error < 1e-12, label + ": values unchanged", value_error, 0.0);
+}
+
+template<class F> static void rejects(F&& f, const std::string& label) {
+  bool threw = false;
+  try { f(); } catch (const std::exception&) { threw = true; }
+  check(threw, label, threw ? 1.0 : 0.0, 1.0);
+}
 
 int main() {
   CompositeEos eos; PowerLawOpacity op; PPChains nuc;
@@ -78,30 +123,8 @@ int main() {
     check(finite, "residuals are finite", finite ? 1.0 : 0.0, 1.0);
   }
 
-  // 2. The Jacobian must differentiate the residual it is paired with.  Recompute
-  //    by a coarser difference and compare; agreement to a few parts in 1e4 is
-  //    all a difference-of-differences can offer, and is enough to catch a
-  //    wrong sign, a wrong variable, or a missing term.
-  {
-    double worst = 0.0; std::size_t wk = 0, wv = 0;
-    for (std::size_t v = 0; v < NVAR; ++v) {
-      Model mp = m, mm = m;
-      const Var vv = static_cast<Var>(v);
-      const double s = (vv == Var::L) ? 1e-4 * std::abs(m.y[0].L) : 1e-4;
-      mp.y[0][vv] += s; mm.y[0][vv] -= s;
-      const auto fp = zone_residual(mp, 0, phys, -1.0).f;
-      const auto fm = zone_residual(mm, 0, phys, -1.0).f;
-      for (std::size_t k = 0; k < NVAR; ++k) {
-        const double num = (fp[k] - fm[k]) / (2 * s);
-        const double ana = R.dfdy_lo[k][v];
-        const double scale = std::max({std::abs(num), std::abs(ana), 1e-300});
-        const double rel = std::abs(num - ana) / scale;
-        if (rel > worst) { worst = rel; wk = k; wv = v; }
-      }
-    }
-    std::printf("       (worst at equation %zu, variable %zu)\n", wk, wv);
-    check(worst < 1e-3, "Jacobian matches its own residual", worst, 0.0);
-  }
+  // 2. The production Jacobian must differentiate the value-only equations.
+  check_jacobian(m, phys, -1.0, nullptr, "low-mass interior");
 
   // 3. Mass conservation must be exact for a shell built to satisfy it: place
   //    the outer point at the radius the equation demands and the residual
@@ -175,8 +198,8 @@ int main() {
               "efficient convection leaves temperature row unscaled", coefficient, 1.0);
       }
 
-      // Both endpoints and all variables, with a coarser step than the
-      // implementation. A row-scaled comparison respects small physical
+      // Both endpoints and all variables, with independently perturbed
+      // value-only equations. A row-scaled comparison respects small physical
       // derivatives without turning roundoff in them into a false failure.
       double worst = 0.0;
       for (std::size_t endpoint = 0; endpoint < 2; ++endpoint) {
@@ -187,8 +210,8 @@ int main() {
           const double step = 1e-4 * unit;
           Model plus = t, minus = t;
           plus.y[endpoint][vv] += step; minus.y[endpoint][vv] -= step;
-          const double num = dm * (zone_residual(plus, 0, p, -1.0).f[3]
-                                - zone_residual(minus, 0, p, -1.0).f[3]) / (2e-4);
+          const double num = dm * (zone_equations(plus, 0, p, -1.0)[3]
+                                - zone_equations(minus, 0, p, -1.0)[3]) / (2e-4);
           const auto& jac = endpoint == 0 ? r.dfdy_lo : r.dfdy_hi;
           const double actual = dm * jac[3][v] * unit;
           error = std::max(error, std::abs(num - actual));
@@ -198,6 +221,92 @@ int main() {
       }
       check(worst < 2e-6, "transport Jacobian matches at both zone endpoints", worst, 0.0);
     }
+  }
+
+  // 5. Check the complete matrix under contraction and in degenerate matter.
+  //    The previous model stays fixed when the new model is perturbed.
+  {
+    Model previous = m;
+    for (auto& point : previous.y) {
+      point.lnT -= 0.01; point.lnrho -= 0.02; point.lnr += 0.01;
+    }
+    check_jacobian(m, phys, 1e11, &previous, "contracting interior");
+
+    Model wd = m;
+    Composition helium{}; helium[Species::He4] = 1.0;
+    wd.comp = {helium, helium};
+    wd.y[0] = {std::log(1e8), std::log(1e6), std::log(1e6), 1e30};
+    wd.y[1] = {std::log(1.02e8), std::log(0.95e6), std::log(0.98e6), 1.01e30};
+    check_jacobian(wd, phys, 0.0, nullptr, "degenerate helium");
+    previous = wd;
+    previous.y[0].lnrho -= 0.01; previous.y[0].lnT -= 0.02;
+    check_jacobian(wd, phys, 1e12, &previous, "contracting helium");
+
+    // Force finite-efficiency convection with the real EOS. Unlike the
+    // ideal-gas fixtures, cp, delta and grad_ad all respond to the state.
+    for (const auto& model : {m, wd}) {
+      Model t = model;
+      ConstantOpacity constant;
+      Physics p{&eos, &constant, &nuc, 1.9};
+      const auto a = eos.eval(t.T(0), t.rho(0), t.comp[0]);
+      const auto b = eos.eval(t.T(1), t.rho(1), t.comp[1]);
+      EosState mid{};
+      mid.P = 0.5 * (a.P + b.P); mid.cp = 0.5 * (a.cp + b.cp);
+      mid.delta = 0.5 * (a.delta + b.delta);
+      const double T = 0.5 * (t.T(0) + t.T(1)), rho = 0.5 * (t.rho(0) + t.rho(1));
+      const double r = 0.5 * (t.r(0) + t.r(1)), mass = 0.5 * (t.m[0] + t.m[1]);
+      constant.kappa = mixing_length_U(T, rho, 1.0, constants::G * mass / (r * r), mid, p.alpha_mlt);
+      t.y[0].L = t.y[1].L = 5.0 * 16.0 * M_PI * constants::a_rad * constants::c
+          * constants::G * mass * std::pow(T, 4) / (3.0 * constant.kappa * mid.P);
+      check_jacobian(t, p, 0.0, nullptr, t.comp[0].h1() > 0.0
+          ? "finite-efficiency interior" : "finite-efficiency helium");
+    }
+
+    wd.y[0].L = wd.y[1].L = 0.0;
+    check_jacobian(wd, phys, 0.0, nullptr, "zero luminosity");
+    wd.y[0].L = wd.y[1].L = -1e28;
+    check_jacobian(wd, phys, 0.0, nullptr, "inward luminosity");
+
+    // In an ideal gas E has no density response. Compress at fixed T to
+    // isolate the sign and magnitude of the P d(1/rho)/dt contribution.
+    TestIdealEos ideal;
+    Physics p{&ideal, &op, &nuc, 1.9};
+    previous = m; previous.y[0].lnrho -= std::log(2.0);
+    const double dt = 1e11;
+    const auto stat = zone_residual(m, 0, p, 0.0);
+    const auto dynamic = zone_residual(m, 0, p, dt, &previous);
+    const double expected = -0.5 * constants::R_gas / 0.6 * m.T(0) / dt;
+    check(std::abs((dynamic.f[2] - stat.f[2]) / expected - 1.0) < 1e-12,
+          "isothermal compression releases gravitational heat", dynamic.f[2] - stat.f[2], expected);
+    const auto rho_var = static_cast<std::size_t>(Var::lnrho);
+    const double derivative = dynamic.dfdy_lo[2][rho_var] - stat.dfdy_lo[2][rho_var];
+    check(std::abs(derivative / expected - 1.0) < 1e-12,
+          "compression derivative holds the old density fixed", derivative, expected);
+  }
+
+  // 6. Reject undefined zones and time-dependent states that cannot be
+  //    compared on the same Lagrangian mesh.
+  {
+    rejects([&] { (void)zone_residual(m, 1, phys, 0.0); }, "out-of-range zone rejected");
+    Model invalid = m; invalid.m[1] = invalid.m[0];
+    rejects([&] { (void)zone_residual(invalid, 0, phys, 0.0); }, "zero mass interval rejected");
+    rejects([&] { (void)zone_residual(m, 0, phys, 1.0); }, "positive dt requires previous model");
+    invalid = m; invalid.m[1] *= 1.01;
+    rejects([&] { (void)zone_residual(m, 0, phys, 1.0, &invalid); }, "changed previous mesh rejected");
+    rejects([&] { (void)zone_residual(m, 0, phys, std::numeric_limits<double>::quiet_NaN()); },
+            "non-finite time step rejected");
+    class ValueOnlyEos final : public Eos {
+      TestIdealEos ideal;
+    public:
+      EosState eval(double T, double rho, const Composition& comp) const override {
+        return ideal.eval(T, rho, comp);
+      }
+      const char* name() const override { return "value-only test EOS"; }
+    } value_only;
+    Physics p{&value_only, &op, &nuc, 1.9};
+    const auto reference = zone_residual_numerical(m, 0, p, 0.0);
+    check(std::isfinite(reference.f[3]), "numerical reference supports a value-only EOS", reference.f[3], 0.0);
+    rejects([&] { (void)zone_residual(m, 0, p, 0.0); }, "missing EOS derivatives are never silently zero");
   }
 
   std::printf("\n%s (%d failure%s)\n", failures ? "FAILED" : "ALL PASS",

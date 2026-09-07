@@ -1,131 +1,184 @@
 #include "ember/structure.hpp"
 #include "ember/convection.hpp"
 #include "ember/constants.hpp"
+#include "differential.hpp"
+#include <algorithm>
 #include <cmath>
+#include <optional>
+#include <stdexcept>
 
 namespace ember {
-using namespace constants;
-
 namespace {
+using constants::G;
+using detail::Differential;
+using detail::exp;
+using detail::log;
 
-// Everything the zone equations need at a point, gathered once.
-struct Local {
-  double lnr, lnT, r, rho, T, L, P, lnP;
-  double chiT, chiRho, grad_ad, cp, delta, kappa, dlnk_dlnT, dlnk_dlnRho;
-  double eps, dlneps_dlnT, dlneps_dlnRho;
-  double E;
+struct Previous { double E, rho; };
+std::optional<Previous> prepare(const Model& m, std::size_t i, const Physics& phys,
+                                double dt, const Model* prev) {
+  if (!phys.eos || !phys.opacity || !phys.nuclear)
+    throw std::invalid_argument("zone_residual: missing physics module");
+  if (m.size() < 2 || i >= m.size() - 1 || m.m.size() != m.size() || m.comp.size() != m.size())
+    throw std::invalid_argument("zone_residual: invalid zone index or model arrays");
+  if (!std::isfinite(m.m[i]) || !std::isfinite(m.m[i + 1]) || m.m[i] < 0.0
+      || !(m.m[i + 1] > m.m[i]) || !std::isfinite(dt))
+    throw std::domain_error("zone_residual: invalid mass interval or time step");
+  if (dt <= 0.0) return std::nullopt;
+  if (!prev || prev->size() != m.size() || prev->comp.size() != m.size() || prev->m != m.m)
+    throw std::invalid_argument("zone_residual: time dependence requires a previous model on the same mesh");
+  const double rho = prev->rho(i);
+  return Previous{phys.eos->eval(prev->T(i), rho, prev->comp[i]).E, rho};
+}
+
+template<std::size_t N> struct Local {
+  Differential<N> lnr, lnT, r, rho, T, L, P, E, cp, delta, grad_ad, kappa, eps;
 };
 
-Local gather(const Model& m, std::size_t i, const Physics& p) {
-  Local q{};
-  q.lnr = m.y[i].lnr;
-  q.r   = std::exp(q.lnr);
-  q.rho = std::exp(m.y[i].lnrho);
-  q.lnT = m.y[i].lnT;
-  q.T   = std::exp(q.lnT);
-  q.L   = m.y[i].L;
-  const auto e = p.eos->eval(q.T, q.rho, m.comp[i]);
-  q.P = e.P; q.lnP = std::log(e.P);
-  q.chiT = e.chiT; q.chiRho = e.chiRho; q.grad_ad = e.grad_ad; q.cp = e.cp;
-  q.delta = e.delta;
-  q.E = e.E;
-  const auto k = p.opacity->eval(q.T, q.rho, m.comp[i]);
-  q.kappa = k.kappa; q.dlnk_dlnT = k.dlnk_dlnT; q.dlnk_dlnRho = k.dlnk_dlnRho;
-  const auto n = p.nuclear->eval(q.T, q.rho, m.comp[i]);
-  q.eps = n.eps; q.dlneps_dlnT = n.dlneps_dlnT; q.dlneps_dlnRho = n.dlneps_dlnRho;
+template<std::size_t N>
+Local<N> gather(const Point& point, const Composition& comp, const Physics& phys, std::size_t offset) {
+  using D = Differential<N>;
+  for (double x : {point.lnr, point.lnrho, point.lnT, point.L})
+    if (!std::isfinite(x)) throw std::domain_error("zone_residual: non-finite mesh point");
+  Local<N> q{};
+  q.lnr = D::variable(point.lnr, offset);
+  q.r = exp(q.lnr);
+  q.rho = exp(D::variable(point.lnrho, offset + 1));
+  q.lnT = D::variable(point.lnT, offset + 2);
+  q.T = exp(q.lnT);
+  q.L = D::variable(point.L, offset + 3);
+  EosResponse response{};
+  if constexpr (N > 0) response = phys.eos->eval_with_derivatives(q.T.value, q.rho.value, comp);
+  else response.state = phys.eos->eval(q.T.value, q.rho.value, comp);
+  const auto& e = response.state;
+  const auto k = phys.opacity->eval(q.T.value, q.rho.value, comp);
+  const auto n = phys.nuclear->eval(q.T.value, q.rho.value, comp);
+  if (!(e.P > 0.0) || !(e.cp > 0.0) || !(e.delta > 0.0) || !(k.kappa > 0.0))
+    throw std::domain_error("zone_residual: invalid thermodynamic state or opacity");
+  auto material = [&](double value, double dT, double drho) {
+    D out(value);
+    if (!std::isfinite(value)) throw std::domain_error("zone_residual: non-finite physics value");
+    if constexpr (N > 0) {
+      if (!std::isfinite(dT) || !std::isfinite(drho))
+        throw std::domain_error("zone_residual: non-finite physics derivative");
+      out.d[offset + 2] = dT; out.d[offset + 1] = drho;
+    }
+    return out;
+  };
+  q.P = material(e.P, e.P * e.chiT, e.P * e.chiRho);
+  q.E = material(e.E, e.cv * q.T.value, response.dE_dlnRho);
+  q.cp = material(e.cp, response.dcp_dlnT, response.dcp_dlnRho);
+  q.delta = material(e.delta, response.ddelta_dlnT, response.ddelta_dlnRho);
+  q.grad_ad = material(e.grad_ad, response.dgrad_ad_dlnT, response.dgrad_ad_dlnRho);
+  q.kappa = material(k.kappa, k.kappa * k.dlnk_dlnT, k.kappa * k.dlnk_dlnRho);
+  q.eps = material(n.eps, n.eps * n.dlneps_dlnT, n.eps * n.dlneps_dlnRho);
   return q;
 }
 
+template<std::size_t N>
+std::array<Differential<N>, NVAR> equations(const Model& model, std::size_t i,
+    const Point& lo, const Point& hi, const Physics& phys, double dt, const std::optional<Previous>& prev) {
+  using D = Differential<N>;
+  const auto a = gather<N>(lo, model.comp[i], phys, 0);
+  const auto b = gather<N>(hi, model.comp[i + 1], phys, NVAR);
+  const double dm = model.m[i + 1] - model.m[i];
+  const double mb = 0.5 * (model.m[i] + model.m[i + 1]);
+  const D rb = 0.5 * (a.r + b.r), rhob = 0.5 * (a.rho + b.rho);
+  const D Tb = 0.5 * (a.T + b.T), Pb = 0.5 * (a.P + b.P);
+  const D kb = 0.5 * (a.kappa + b.kappa), Lb = 0.5 * (a.L + b.L);
+  const D cp = 0.5 * (a.cp + b.cp), delta = 0.5 * (a.delta + b.delta);
+  const D grad_ad = 0.5 * (a.grad_ad + b.grad_ad);
+  const D dlnP = (log(b.P) - log(a.P)) / dm;
+
+  std::array<D, NVAR> f{};
+  f[0] = (b.lnr - a.lnr) / dm - 1.0 / (4.0 * M_PI * rb * rb * rb * rhob);
+  f[1] = dlnP + G * mb / (4.0 * M_PI * rb * rb * rb * rb * Pb);
+  D eps_grav{};
+  if (prev) eps_grav = -(a.E - prev->E - a.P / (a.rho * a.rho) * (a.rho - prev->rho)) / dt;
+  // Retains the existing left-endpoint backward energy difference. A future
+  // time integrator must address its order separately from Jacobian assembly.
+  f[2] = (b.L - a.L) / dm - (0.5 * (a.eps + b.eps) + eps_grav);
+
+  const D gravity = G * mb / (rb * rb);
+  const D grad_rad = 3.0 * kb * Lb * Pb
+      / (16.0 * M_PI * constants::a_rad * constants::c * G * mb * Tb * Tb * Tb * Tb);
+  EosState midpoint{};
+  midpoint.P = Pb.value; midpoint.cp = cp.value; midpoint.delta = delta.value;
+  const double U = mixing_length_U(Tb.value, rhob.value, kb.value, gravity.value, midpoint, phys.alpha_mlt);
+  const auto convection = mixing_length_gradient(grad_rad.value, grad_ad.value, U);
+  D grad(convection.grad);
+  if constexpr (N > 0) {
+    // Constant terms in ln U do not contribute. Carry the state dependence of
+    // H_P=P/(rho*g), cp, delta, and opacity, rather than freezing efficiency.
+    const D logHp = log(Pb) - log(rhob) - log(gravity);
+    const D logU = 3.0 * log(Tb) - log(cp) - 2.0 * log(rhob) - log(kb)
+                 - 1.5 * logHp - 0.5 * log(gravity) - 0.5 * log(delta);
+    for (std::size_t v = 0; v < N; ++v)
+      grad.d[v] = convection.dgrad_dgrad_rad * grad_rad.d[v]
+                + convection.dgrad_dgrad_ad * grad_ad.d[v] + convection.dgrad_dlnU * logU.d[v];
+  }
+  // The temperature row is never multiplied by grad/grad_rad.
+  f[3] = (b.lnT - a.lnT) / dm - grad * dlnP;
+  for (const auto& row : f) {
+    if (!std::isfinite(row.value)) throw std::domain_error("zone_residual: non-finite residual");
+    for (double d : row.d)
+      if (!std::isfinite(d)) throw std::domain_error("zone_residual: non-finite Jacobian");
+  }
+  return f;
+}
 } // namespace
 
-ZoneResidual zone_residual(const Model& mdl, std::size_t i,
-                           const Physics& phys, double dt,
-                           const Model* prev) {
-  ZoneResidual R{};
-  const std::size_t j = i + 1;
-  const double dm = mdl.m[j] - mdl.m[i];
-  if (!(dm > 0.0)) return R;
+std::array<double, NVAR> zone_equations(const Model& model, std::size_t i,
+    const Physics& phys, double dt, const Model* prev) {
+  const auto old = prepare(model, i, phys, dt, prev);
+  const auto f = equations<0>(model, i, model.y[i], model.y[i + 1], phys, dt, old);
+  std::array<double, NVAR> out{};
+  for (std::size_t k = 0; k < NVAR; ++k) out[k] = f[k].value;
+  return out;
+}
 
-  // Numerical Jacobian for now, taken by perturbing the eight variables that
-  // bound the zone.  It is written this way deliberately: the analytic form
-  // will replace it once the equations themselves are settled, and having both
-  // lets the analytic version be checked against something. The MLT gradient
-  // supplies its partials; full assembly will also need state derivatives of
-  // the EOS's cp, delta, and grad_ad, beyond their current returned values.
-  auto residual = [&](const Point& yl, const Point& yh) {
-    Model tmp = mdl;               // cheap enough at this stage; the solver
-    tmp.y[i] = yl; tmp.y[j] = yh;  // will not do this per iteration
-    const Local a = gather(tmp, i, phys);
-    const Local b = gather(tmp, j, phys);
-
-    const double rb   = 0.5 * (a.r + b.r);
-    const double rhob = 0.5 * (a.rho + b.rho);
-    const double Tb   = 0.5 * (a.T + b.T);
-    const double Pb   = 0.5 * (a.P + b.P);
-    const double mb   = 0.5 * (mdl.m[i] + mdl.m[j]);
-
-    std::array<double, NVAR> f{};
-    // (1) mass conservation
-    f[0] = (b.lnr - a.lnr) / dm - 1.0 / (4.0 * M_PI * rb * rb * rb * rhob);
-    // (2) hydrostatic equilibrium
-    f[1] = (b.lnP - a.lnP) / dm + G * mb / (4.0 * M_PI * std::pow(rb, 4) * Pb);
-    // (3) energy: nuclear minus the heat taken to warm the material
-    double eps_grav = 0.0;
-    if (dt > 0.0 && prev) {
-      // -T ds/dt, written as -(dE/dt - (P/rho^2) drho/dt) so it needs no
-      // entropy from the equation of state.
-      const auto pa = phys.eos->eval(std::exp(prev->y[i].lnT),
-                                     std::exp(prev->y[i].lnrho), prev->comp[i]);
-      const double dE   = a.E - pa.E;
-      const double drho = a.rho - std::exp(prev->y[i].lnrho);
-      eps_grav = -(dE - (a.P / (a.rho * a.rho)) * drho) / dt;
-    }
-    f[2] = (b.L - a.L) / dm - (0.5 * (a.eps + b.eps) + eps_grav);
-    // (4) Schwarzschild criterion and optically thick mixing-length transport.
-    const double kb = 0.5 * (a.kappa + b.kappa);
-    const double Lb = 0.5 * (a.L + b.L);
-    const double grad_rad = 3.0 * kb * Lb * Pb
-                          / (16.0 * M_PI * a_rad * c * G * mb * std::pow(Tb, 4));
-    const double grad_ad  = 0.5 * (a.grad_ad + b.grad_ad);
-    EosState eb{};
-    eb.P = Pb;
-    eb.cp = 0.5 * (a.cp + b.cp);
-    eb.delta = 0.5 * (a.delta + b.delta);
-    const double gravity = G * mb / (rb * rb);
-    const double U = mixing_length_U(Tb, rhob, kb, gravity, eb, phys.alpha_mlt);
-    const double grad = mixing_length_gradient(grad_rad, grad_ad, U).grad;
-    // Plain gradient form at every efficiency. Never multiply this row by
-    // grad/grad_rad: in a giant that factor can be 1e-6 or smaller.
-    f[3] = (b.lnT - a.lnT) / dm - grad * ((b.lnP - a.lnP) / dm);
-    return f;
-  };
-
-  R.f = residual(mdl.y[i], mdl.y[j]);
-  constexpr double h = 1e-6;
-  for (std::size_t v = 0; v < NVAR; ++v) {
-    const Var vv = static_cast<Var>(v);
-    {
-      Point yl = mdl.y[i];
-      const double s = (vv == Var::L) ? h * (std::abs(yl.L) + 1e-3 * constants::Lsun)
-                                      : h;
-      yl[vv] += s;
-      const auto fp = residual(yl, mdl.y[j]);
-      yl[vv] -= 2 * s;
-      const auto fm = residual(yl, mdl.y[j]);
-      for (std::size_t k = 0; k < NVAR; ++k) R.dfdy_lo[k][v] = (fp[k] - fm[k]) / (2 * s);
-    }
-    {
-      Point yh = mdl.y[j];
-      const double s = (vv == Var::L) ? h * (std::abs(yh.L) + 1e-3 * constants::Lsun)
-                                      : h;
-      yh[vv] += s;
-      const auto fp = residual(mdl.y[i], yh);
-      yh[vv] -= 2 * s;
-      const auto fm = residual(mdl.y[i], yh);
-      for (std::size_t k = 0; k < NVAR; ++k) R.dfdy_hi[k][v] = (fp[k] - fm[k]) / (2 * s);
+ZoneResidual zone_residual(const Model& model, std::size_t i,
+    const Physics& phys, double dt, const Model* prev) {
+  const auto old = prepare(model, i, phys, dt, prev);
+  const auto f = equations<2 * NVAR>(model, i, model.y[i], model.y[i + 1], phys, dt, old);
+  ZoneResidual out{};
+  for (std::size_t k = 0; k < NVAR; ++k) {
+    out.f[k] = f[k].value;
+    for (std::size_t v = 0; v < NVAR; ++v) {
+      out.dfdy_lo[k][v] = f[k].d[v]; out.dfdy_hi[k][v] = f[k].d[NVAR + v];
     }
   }
-  return R;
+  return out;
+}
+
+ZoneResidual zone_residual_numerical(const Model& model, std::size_t i,
+    const Physics& phys, double dt, const Model* prev, double step) {
+  if (!std::isfinite(step) || !(step > 0.0))
+    throw std::invalid_argument("zone_residual_numerical: invalid difference step");
+  const auto old = prepare(model, i, phys, dt, prev);
+  const auto values = equations<0>(model, i, model.y[i], model.y[i + 1], phys, dt, old);
+  ZoneResidual out{};
+  for (std::size_t k = 0; k < NVAR; ++k) out.f[k] = values[k].value;
+  const double dm = model.m[i + 1] - model.m[i];
+  // Scale luminosity from this zone's flux and heating, with a 1 erg/s floor;
+  // a fixed fraction of solar luminosity is inappropriate for a cold remnant.
+  const double Lscale = std::max({std::abs(model.y[i].L), std::abs(model.y[i + 1].L),
+      std::abs(model.y[i + 1].L - model.y[i].L - dm * out.f[2]), 1.0});
+  for (std::size_t endpoint = 0; endpoint < 2; ++endpoint) {
+    auto& jac = endpoint == 0 ? out.dfdy_lo : out.dfdy_hi;
+    for (std::size_t v = 0; v < NVAR; ++v) {
+      const auto variable = static_cast<Var>(v);
+      const double h = step * (variable == Var::L ? Lscale : 1.0);
+      Point lo = model.y[i], hi = model.y[i + 1];
+      Point& point = endpoint == 0 ? lo : hi;
+      point[variable] += h;
+      const auto plus = equations<0>(model, i, lo, hi, phys, dt, old);
+      point[variable] -= 2.0 * h;
+      const auto minus = equations<0>(model, i, lo, hi, phys, dt, old);
+      for (std::size_t k = 0; k < NVAR; ++k) jac[k][v] = (plus[k].value - minus[k].value) / (2.0 * h);
+    }
+  }
+  return out;
 }
 
 } // namespace ember

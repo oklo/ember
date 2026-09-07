@@ -23,15 +23,19 @@ and four structure residuals are implemented and tested. Transport uses
 Böhm–Vitense mixing-length convection with the Schwarzschild criterion; see
 `docs/CONVECTION.md`. The grey atmosphere, atmosphere-table reader, and two
 surface residuals with analytic derivatives are also implemented; see
-`docs/ATMOSPHERE.md`. Six test suites pass. Physical atmosphere grids and the
-Henyey solver remain unfinished; there is no evolutionary run yet.
+`docs/ATMOSPHERE.md`. The zone Jacobian is analytic, including EOS transport
+responses and screened nuclear-heating derivatives, with numerical
+differences retained as a test reference; see `docs/JACOBIAN.md`. Six test
+suites pass. Physical atmosphere grids and the Henyey solver remain
+unfinished; there is no evolutionary run yet.
 
 ## Design
 
-**Analytic derivatives everywhere.** The Fortran ancestor formed its Jacobian
-by centred differences — five equation-of-state calls per zone per Newton
-iteration. Every physics module here returns its own derivatives, which costs
-accuracy nothing and time a factor of several.
+**Analytic derivatives throughout zone assembly.** Physics modules provide
+their own partials, and the structure equations propagate them by the chain
+rule. Assembly uses one EOS response per endpoint; finite differences remain
+an independent check. An EOS without the required response derivatives must
+report that explicitly.
 
 **Logarithmic variables.** The solver works in `(ln r, ln rho, ln T, L)`.
 Density spans eighteen decades between a giant's photosphere and a white

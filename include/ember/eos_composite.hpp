@@ -30,6 +30,7 @@ public:
   }
 
   EosState eval(double T, double rho, const Composition&) const override;
+  EosResponse eval_with_derivatives(double T, double rho, const Composition&) const override;
   const char* name() const override { return name_.c_str(); }
   std::size_t size() const { return parts_.size(); }
 

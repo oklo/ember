@@ -1,5 +1,6 @@
 #pragma once
 #include "ember/composition.hpp"
+#include <stdexcept>
 
 namespace ember {
 
@@ -26,11 +27,24 @@ struct EosState {
   double dPdRho_T(double rho)   const { return P * chiRho / rho; }
 };
 
+// Additional state derivatives needed by an analytic structure Jacobian.
+// Ordinary eval() remains available without computing second derivatives.
+struct EosResponse {
+  EosState state{};
+  double dE_dlnRho{};
+  double dcp_dlnT{}, dcp_dlnRho{};
+  double ddelta_dlnT{}, ddelta_dlnRho{};
+  double dgrad_ad_dlnT{}, dgrad_ad_dlnRho{};
+};
+
 class Eos {
 public:
   virtual ~Eos() = default;
   virtual EosState eval(double T, double rho, const Composition&) const = 0;
   virtual const char* name() const = 0;
+  virtual EosResponse eval_with_derivatives(double, double, const Composition&) const {
+    throw std::logic_error("Eos: analytic transport derivatives are not implemented");
+  }
 
   // Invert to density at given (T, P).  Needed by the atmosphere, which
   // integrates in pressure.  Newton on ln rho using the analytic chiRho, so it
@@ -51,6 +65,7 @@ public:
 class IdealEos final : public Eos {
 public:
   EosState eval(double T, double rho, const Composition&) const override;
+  EosResponse eval_with_derivatives(double T, double rho, const Composition&) const override;
   const char* name() const override { return "ideal+rad+degeneracy"; }
 };
 

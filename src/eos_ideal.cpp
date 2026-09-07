@@ -1,4 +1,5 @@
 #include "ember/eos.hpp"
+#include "ember/eos_composite.hpp"
 #include "ember/constants.hpp"
 #include "fermi.hpp"
 #include <algorithm>
@@ -88,6 +89,13 @@ EosState IdealEos::eval(double T, double rho, const Composition& comp) const {
   s.free_e  = nE / nI;
   s.S       = 0.0;
   return s;
+}
+
+EosResponse IdealEos::eval_with_derivatives(double T, double rho, const Composition& comp) const {
+  // The monolithic value implementation remains an independent assembly
+  // check. Its second derivatives are those of the same three components.
+  static const CompositeEos components;
+  return components.eval_with_derivatives(T, rho, comp);
 }
 
 double Eos::rho_from_PT(double T, double P, const Composition& comp,

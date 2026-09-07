@@ -3,8 +3,8 @@
 Written 2026-09-07 at the end of a long session. Read this first; it is meant
 to be the only thing you need.
 
-Updated 2026-09-07 after implementing atmosphere boundaries, surface
-residuals, and the opacity-derivative correction found by their tests.
+Updated 2026-09-07 after the first GitHub push and implementation of the
+analytic zone Jacobian, EOS transport responses, and nuclear derivatives.
 
 ---
 
@@ -34,7 +34,9 @@ down the helium-white-dwarf cooling track below 10⁻⁶ L☉ — in one run.
 **GitHub push is now authorized.** On 2026-09-07 the user explicitly asked
 to push the current checkpoint and continue development, superseding the
 earlier requirement to wait for the end-to-end run. The scientific milestone
-is unchanged. Use `git log` and the configured remote for current history.
+is unchanged. The user then explicitly confirmed creation of the private
+repository **https://github.com/oklo/ember**. `master` tracks `origin/master`;
+use `git log` and the configured remote for current history.
 
 ---
 
@@ -66,15 +68,15 @@ atmosphere).
 |---|---|---|
 | Constants | `include/ember/constants.hpp` | CODATA 2018, IAU 2015 nominal solar |
 | Composition | `composition.{hpp,cpp}` | 8 species, AAG21 mixture, scaled to (X,Z) |
-| EOS interface | `eos.hpp` | analytic derivatives; `rho_from_PT` now throws on invalid states and nonconvergence |
-| EOS components | `eos_component.hpp`, `eos_components.cpp` | ions, radiation, relativistic FD electrons |
+| EOS interface | `eos.hpp` | `EosResponse` includes cp, delta, grad_ad derivatives; missing response implementations throw; `rho_from_PT` reports failure |
+| EOS components | `eos_component.hpp`, `eos_components.cpp` | ions, radiation, relativistic FD electrons, with component Hessians |
 | Composite EOS | `eos_composite.hpp` | additive; == monolithic to 1e-12 over 5 regimes |
-| Fermi–Dirac | `src/fermi.{hpp,cpp}` | relativistic, panelled at the Fermi surface |
+| Fermi–Dirac | `src/fermi.{hpp,cpp}` | relativistic, centered density-constrained Hessians; shell split at the Fermi surface |
 | Opacity | `opacity.hpp`, `opacity_ferguson.{hpp,cpp}` | Ferguson 2005, monotone, edges throw |
 | Interpolation | `interp.{hpp,cpp}` | monotone Hermite; parameter derivatives follow active limiter branches |
-| Nuclear | `nuclear.hpp`, `nuclear_pp.cpp` | pp chains, He3 explicit, energy from mass defect |
+| Nuclear | `nuclear.hpp`, `nuclear_pp.cpp` | pp chains, He3 explicit; heating derivatives include the same mass defect, neutrinos, and screening as the value |
 | Model | `model.hpp` | (ln r, ln ρ, ln T, L) on a Lagrangian mass mesh |
-| Structure | `structure.{hpp,cpp}` | 4 zone residuals + Jacobian (numerical, by design) |
+| Structure | `structure.{hpp,cpp}` | 4 residuals + analytic Jacobian; value-only path and numerical Jacobian retained for tests |
 | Convection | `convection.{hpp,cpp}` | BV58 MLT, Schwarzschild criterion, analytic gradient partials; wired into transport |
 | Atmosphere | `atmosphere.hpp`, `atmosphere_grey.cpp` | Eddington grey, varying opacity, adaptive integration and analytic sensitivities |
 | Atmosphere tables | `atmosphere_table.{hpp,cpp}` | strict reader and bilinear interpolation; **no production grid yet** |
@@ -104,10 +106,15 @@ deliberately — a result is reproducible only if its numbers travel with it).
    atmosphere table is a labeled synthetic test fixture under `tests/data`.
    See `docs/ATMOSPHERE.md` for format, sources, and integration conventions.
    The grey fallback uses radiative T(tau), not a convective atmosphere.
-3. **Analytic Jacobian assembly.** Keep the numerical version as the test
-   reference. MLT supplies partials with respect to ∇_rad, ∇_ad, and ln U.
-   Full assembly also needs derivatives of cp, δ, and ∇_ad with respect to
-   the state; `EosState` currently returns their values, not those derivatives.
+3. **Done: analytic Jacobian assembly.** `EosResponse` now supplies the
+   transport derivatives from component Hessians. Zone assembly propagates
+   module derivatives through all four equations; `zone_equations` and
+   `zone_residual_numerical` remain independent of the transport-response
+   path for tests. Checks cover contraction, degenerate helium, finite and
+   efficient convection, and zero/inward luminosity. See `docs/JACOBIAN.md`.
+   The old left-endpoint gravitational-energy difference remains; its
+   discretization order is not solved by differentiating it. Positive `dt`
+   now requires a previous model on the identical mass mesh.
 4. **Henyey block elimination** + central boundary conditions. The surface
    residuals and their Jacobian are now available in `boundary.hpp`.
 5. **Adaptive mesh** — refine at burning shells, coarsen in isothermal cores.
@@ -123,7 +130,7 @@ deliberately — a result is reproducible only if its numbers travel with it).
 The default α = 1.9 is **not calibrated for ember**. Do not import the
 Fortran solar calibration as if the EOS and atmosphere were identical.
 
-Analytic Jacobian/solver work can continue with the grey fallback while the
+Central-boundary and Henyey work can continue with the grey fallback while the
 physical atmosphere grid is sourced. Do not mark tabulated atmosphere physics
 complete merely because its reader passes synthetic tests.
 
@@ -180,6 +187,21 @@ Two more lessons from connecting the atmosphere in ember:
 - **An inversion must report failure.** A small pressure residual can conceal
   a bad density when radiation dominates, and an exhausted iteration must not
   return a density as a success. `rho_from_PT` now checks both and throws.
+
+Two more from assembling the analytic zone Jacobian:
+
+- **Accurate values do not guarantee accurate second derivatives.** The
+  original 64-node Fermi shell produced plausible pressures but roughly 0.2%
+  errors in degenerate response derivatives, unchanged when the finite
+  difference step shrank. Splitting the shell at its center resolved them.
+  Use centered number-weighted kernels for the density-constrained electron
+  Hessians, and preserve `f(1-f)` even when `f` rounds to one. The derivation
+  is in `docs/JACOBIAN.md`; do not replace it with large cancelling terms.
+- **Differentiate the implemented heating rate.** Approximate reaction
+  energy weights and omitted screening derivatives did not differentiate the
+  pp mass-defect heating value. Its derivatives now use the same masses,
+  neutrino losses, and screening cap as its value. The cap is still only the
+  existing weak-screening approximation, not new dense-matter physics.
 
 ---
 

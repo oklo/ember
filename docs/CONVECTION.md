@@ -57,8 +57,9 @@ convective contribution in gradient units separately. Those can remain useful
 after the corresponding full gradients round to the same floating-point
 number. It also supplies analytic partial derivatives with respect to
 `grad_rad`, `grad_ad`, and `ln U`, obtained by implicit differentiation of
-the cubic. These are building blocks for the future analytic zone Jacobian;
-the zone Jacobian still uses numerical differences.
+the cubic. The analytic zone Jacobian combines these with EOS transport
+responses and the state dependence of the pressure scale height and opacity;
+see `JACOBIAN.md`. Numerical differences remain a test reference.
 
 ## Structure equation and checks
 

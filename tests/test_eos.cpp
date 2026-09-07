@@ -176,6 +176,42 @@ int main() {
           static_cast<double>(ceos.size()), 3.0, 0.0);
   }
 
+  // 9. Transport derivatives come from component Hessians, including the
+  //    implicit electron chemical potential. Compare to ordinary EOS calls.
+  {
+    CompositeEos ceos;
+    constexpr double step = 3e-4;
+    const double points[][2] = {{1e5, 1e-4}, {1e8, 1e-6}, {6e6, 80},
+                                {1e6, 1e4}, {3e6, 3e5}, {1e6, 1e8}};
+    double worst = 0.0;
+    for (const auto& point : points) {
+      const double T = point[0], rho = point[1];
+      const auto r = ceos.eval_with_derivatives(T, rho, solar);
+      const auto& s = r.state;
+      const auto tp = ceos.eval(T * std::exp(step), rho, solar);
+      const auto tm = ceos.eval(T * std::exp(-step), rho, solar);
+      const auto rp = ceos.eval(T, rho * std::exp(step), solar);
+      const auto rm = ceos.eval(T, rho * std::exp(-step), solar);
+      const double error = std::max({
+          std::abs(r.dcp_dlnT - (tp.cp - tm.cp) / (2 * step)) / s.cp,
+          std::abs(r.dcp_dlnRho - (rp.cp - rm.cp) / (2 * step)) / s.cp,
+          std::abs(r.ddelta_dlnT - (tp.delta - tm.delta) / (2 * step)) / s.delta,
+          std::abs(r.ddelta_dlnRho - (rp.delta - rm.delta) / (2 * step)) / s.delta,
+          std::abs(r.dgrad_ad_dlnT - (tp.grad_ad - tm.grad_ad) / (2 * step)) / s.grad_ad,
+          std::abs(r.dgrad_ad_dlnRho - (rp.grad_ad - rm.grad_ad) / (2 * step)) / s.grad_ad,
+          std::abs(r.dE_dlnRho - (rp.E - rm.E) / (2 * step)) / s.E});
+      std::printf("       transport derivatives T=%g rho=%g, error %.3e\n", T, rho, error);
+      worst = std::max(worst, error);
+    }
+    check(worst < 2e-5, "EOS transport derivatives over six regimes", worst, 0.0, 2e-5);
+
+    const auto r = ceos.eval_with_derivatives(1e8, 1e-6, solar);
+    near(r.dcp_dlnT / r.state.cp, 6.0, 1e-5, "radiation limit: cp scales as T^6");
+    near(r.dcp_dlnRho / r.state.cp, -2.0, 1e-5, "radiation limit: cp scales as rho^-2");
+    near(r.ddelta_dlnT / r.state.delta, 3.0, 1e-5, "radiation limit: delta scales as T^3");
+    near(r.ddelta_dlnRho / r.state.delta, -1.0, 1e-5, "radiation limit: delta scales as rho^-1");
+  }
+
   std::printf("\n%s (%d failure%s)\n", failures ? "FAILED" : "ALL PASS",
               failures, failures == 1 ? "" : "s");
   return failures ? 1 : 0;

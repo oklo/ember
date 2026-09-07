@@ -19,6 +19,8 @@ EosTerm IonGas::eval(double T, double rho, const Composition& c) const {
   t.dP_dlnRho = t.P;        // P ~ rho
   t.dE_dlnT = t.E;          // E ~ T
   t.dE_dlnRho = 0.0;
+  t.d2P_dlnT2 = t.d2P_dlnTdlnRho = t.d2P_dlnRho2 = t.P;
+  t.d2E_dlnT2 = t.E;
   return t;
 }
 
@@ -30,14 +32,17 @@ EosTerm Radiation::eval(double T, double rho, const Composition&) const {
   t.dP_dlnRho = 0.0;
   t.dE_dlnT = 4.0 * t.E;
   t.dE_dlnRho = -t.E;       // E = 3P/rho at fixed T
+  t.d2P_dlnT2 = 16.0 * t.P;
+  t.d2E_dlnT2 = 16.0 * t.E;
+  t.d2E_dlnTdlnRho = -4.0 * t.E;
   return t;
 }
 
-EosTerm ElectronGas::eval(double T, double rho, const Composition& c) const {
+static EosTerm electron_term(double T, double rho, const Composition& comp, bool second) {
   const double mc2  = me * c_light * c_light;
   const double beta = kB * T / mc2;
   const double A    = 8.0 * M_PI * std::pow(me * c_light / h, 3.0);
-  const double ne   = c.mu_elec_inv() * NA * rho;
+  const double ne   = comp.mu_elec_inv() * NA * rho;
 
   double eta;
   {
@@ -70,7 +75,23 @@ EosTerm ElectronGas::eval(double T, double rho, const Composition& c) const {
   t.dE_dlnT   = A * mc2 * (f.dIu_deta * dEta_dlnT + f.dIu_dlnb) / rho;
   // E = u(eta,beta)/rho, so at fixed T the explicit 1/rho contributes -E.
   t.dE_dlnRho = A * mc2 * (f.dIu_deta * dEta_dlnRho) / rho - t.E;
+  if (second) {
+    const auto d = fermi::density_response(eta, beta, f);
+    t.d2P_dlnT2 = (A * mc2 / 3.0) * d.d2Ip_dlnT2;
+    t.d2P_dlnTdlnRho = (A * mc2 / 3.0) * d.d2Ip_dlnTdlnRho;
+    t.d2P_dlnRho2 = (A * mc2 / 3.0) * d.d2Ip_dlnRho2;
+    t.d2E_dlnT2 = (A * mc2 / rho) * d.d2Iu_dlnT2;
+    // Specific energy contains an explicit rho^-1, unlike the integrals.
+    t.d2E_dlnTdlnRho = (A * mc2 / rho) * d.d2Iu_dlnTdlnRho - t.dE_dlnT;
+  }
   return t;
+}
+
+EosTerm ElectronGas::eval(double T, double rho, const Composition& comp) const {
+  return electron_term(T, rho, comp, false);
+}
+EosTerm ElectronGas::eval_with_derivatives(double T, double rho, const Composition& comp) const {
+  return electron_term(T, rho, comp, true);
 }
 
 CompositeEos::CompositeEos() {
@@ -80,12 +101,7 @@ CompositeEos::CompositeEos() {
   name_ = "composite(ions + radiation + electrons)";
 }
 
-EosState CompositeEos::eval(double T, double rho, const Composition& c) const {
-  if (!(T > 0.0) || !(rho > 0.0))
-    throw std::domain_error("CompositeEos: non-positive T or rho");
-  EosTerm sum{};
-  for (const auto& p : parts_) sum += p->eval(T, rho, c);
-
+static EosState assemble(const EosTerm& sum, double T, double rho, const Composition& comp) {
   EosState s{};
   s.P = sum.P;
   s.E = sum.E;
@@ -97,9 +113,47 @@ EosState CompositeEos::eval(double T, double rho, const Composition& c) const {
   s.grad_ad = s.chiT * s.P / (rho * T * s.cv * s.Gamma1);
   s.cp     = s.cv * s.Gamma1 / s.chiRho;
   s.delta  = s.chiT / s.chiRho;
-  s.mu     = 1.0 / (c.mu_ions_inv() + c.mu_elec_inv());
-  s.free_e = c.mu_elec_inv() / c.mu_ions_inv();
+  s.mu     = 1.0 / (comp.mu_ions_inv() + comp.mu_elec_inv());
+  s.free_e = comp.mu_elec_inv() / comp.mu_ions_inv();
   return s;
+}
+
+EosState CompositeEos::eval(double T, double rho, const Composition& comp) const {
+  if (!std::isfinite(T) || !std::isfinite(rho) || !(T > 0.0) || !(rho > 0.0))
+    throw std::domain_error("CompositeEos: invalid T or rho");
+  EosTerm sum{};
+  for (const auto& p : parts_) sum += p->eval(T, rho, comp);
+  return assemble(sum, T, rho, comp);
+}
+
+EosResponse CompositeEos::eval_with_derivatives(double T, double rho, const Composition& comp) const {
+  if (!std::isfinite(T) || !std::isfinite(rho) || !(T > 0.0) || !(rho > 0.0))
+    throw std::domain_error("CompositeEos: invalid T or rho");
+  EosTerm sum{};
+  for (const auto& p : parts_) sum += p->eval_with_derivatives(T, rho, comp);
+  EosResponse out{};
+  out.state = assemble(sum, T, rho, comp);
+  out.dE_dlnRho = sum.dE_dlnRho;
+  const auto& s = out.state;
+  // delta=P_T/P_rho, cp=E_T/T + P_T*delta/(rho*T),
+  // grad_ad=P*delta/(rho*T*cp); subscripts here denote logarithmic partials.
+  for (int axis = 0; axis < 2; ++axis) {
+    const double Px = axis == 0 ? sum.dP_dlnT : sum.dP_dlnRho;
+    const double PTx = axis == 0 ? sum.d2P_dlnT2 : sum.d2P_dlnTdlnRho;
+    const double PRx = axis == 0 ? sum.d2P_dlnTdlnRho : sum.d2P_dlnRho2;
+    const double ETx = axis == 0 ? sum.d2E_dlnT2 : sum.d2E_dlnTdlnRho;
+    const double dx = (PTx - s.delta * PRx) / sum.dP_dlnRho;
+    const double cvx = (ETx - (axis == 0 ? sum.dE_dlnT : 0.0)) / T;
+    const double cpx = cvx + (PTx * s.delta + sum.dP_dlnT * dx - sum.dP_dlnT * s.delta) / (rho * T);
+    const double gx = s.grad_ad * (Px / s.P - 1.0 - cpx / s.cp)
+                    + s.P * dx / (rho * T * s.cp);
+    if (axis == 0) {
+      out.dcp_dlnT = cpx; out.ddelta_dlnT = dx; out.dgrad_ad_dlnT = gx;
+    } else {
+      out.dcp_dlnRho = cpx; out.ddelta_dlnRho = dx; out.dgrad_ad_dlnRho = gx;
+    }
+  }
+  return out;
 }
 
 OpacityState CombinedOpacity::eval(double T, double rho, const Composition& c) const {

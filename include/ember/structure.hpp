@@ -35,9 +35,18 @@ struct Physics {
 };
 
 // Evaluate one zone.  `dt` <= 0 means a static model: the time-dependent term
-// in (3) is dropped rather than divided by zero.
+// in (3) is dropped rather than divided by zero. Positive dt requires prev on
+// the same mass mesh. The Jacobian uses analytic module derivatives and the
+// chain rule; no state perturbations or whole-model copies are made.
 ZoneResidual zone_residual(const Model& mdl, std::size_t i,
                            const Physics& phys, double dt,
                            const Model* prev = nullptr);
+
+// Values only, and the independent finite-difference reference Jacobian.
+std::array<double, NVAR> zone_equations(const Model&, std::size_t i,
+                                      const Physics&, double dt, const Model* prev = nullptr);
+ZoneResidual zone_residual_numerical(const Model&, std::size_t i,
+                                    const Physics&, double dt, const Model* prev = nullptr,
+                                    double relative_step = 1e-5);
 
 } // namespace ember

@@ -2,6 +2,7 @@
 #include "ember/composition.hpp"
 #include <memory>
 #include <string>
+#include <stdexcept>
 #include <vector>
 
 namespace ember {
@@ -26,11 +27,18 @@ struct EosTerm {
   double dP_dlnRho{};  // at fixed T
   double dE_dlnT{};    // at fixed rho
   double dE_dlnRho{};  // at fixed T
+  // Populated by eval_with_derivatives(). These add before cp, delta, and
+  // grad_ad are differentiated; derivatives of those ratios do not add.
+  double d2P_dlnT2{}, d2P_dlnTdlnRho{}, d2P_dlnRho2{};
+  double d2E_dlnT2{}, d2E_dlnTdlnRho{};
 
   EosTerm& operator+=(const EosTerm& o) {
     P += o.P; E += o.E; S += o.S;
     dP_dlnT += o.dP_dlnT; dP_dlnRho += o.dP_dlnRho;
     dE_dlnT += o.dE_dlnT; dE_dlnRho += o.dE_dlnRho;
+    d2P_dlnT2 += o.d2P_dlnT2; d2P_dlnTdlnRho += o.d2P_dlnTdlnRho;
+    d2P_dlnRho2 += o.d2P_dlnRho2;
+    d2E_dlnT2 += o.d2E_dlnT2; d2E_dlnTdlnRho += o.d2E_dlnTdlnRho;
     return *this;
   }
 };
@@ -40,6 +48,9 @@ public:
   virtual ~EosComponent() = default;
   virtual EosTerm eval(double T, double rho, const Composition&) const = 0;
   virtual const char* name() const = 0;
+  virtual EosTerm eval_with_derivatives(double, double, const Composition&) const {
+    throw std::logic_error("EosComponent: second derivatives are not implemented");
+  }
 };
 
 // Ideal non-degenerate ions.  Replaced by a Coulomb-corrected version once the
@@ -47,12 +58,18 @@ public:
 class IonGas final : public EosComponent {
 public:
   EosTerm eval(double T, double rho, const Composition&) const override;
+  EosTerm eval_with_derivatives(double T, double rho, const Composition& c) const override {
+    return eval(T, rho, c);
+  }
   const char* name() const override { return "ions (ideal)"; }
 };
 
 class Radiation final : public EosComponent {
 public:
   EosTerm eval(double T, double rho, const Composition&) const override;
+  EosTerm eval_with_derivatives(double T, double rho, const Composition& c) const override {
+    return eval(T, rho, c);
+  }
   const char* name() const override { return "radiation"; }
 };
 
@@ -62,6 +79,7 @@ public:
 class ElectronGas final : public EosComponent {
 public:
   EosTerm eval(double T, double rho, const Composition&) const override;
+  EosTerm eval_with_derivatives(double T, double rho, const Composition&) const override;
   const char* name() const override { return "electrons (relativistic FD)"; }
 };
 

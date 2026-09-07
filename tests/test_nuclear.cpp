@@ -7,6 +7,7 @@
 #include <cmath>
 #include <cstdio>
 #include <string>
+#include <algorithm>
 
 using namespace ember;
 static int failures = 0;
@@ -79,6 +80,29 @@ int main() {
     check(s.dXdt[static_cast<std::size_t>(Species::H1)] < 0.0, "hydrogen decreases",
           s.dXdt[static_cast<std::size_t>(Species::H1)], -1.0);
     check(s.eps > 0.0, "energy generation is positive", s.eps, 1.0);
+  }
+
+  // The solver needs derivatives of the implemented heating rate, including
+  // screening below and above its cap and different pp branch mixtures.
+  {
+    double worst = 0.0;
+    constexpr double step = 1e-5;
+    for (double Y3 : {1e-8, 1e-3, 0.05}) {
+      Composition comp = solar_scaled(0.5, 0.014);
+      comp[Species::He3] = Y3; comp[Species::He4] = 1.0 - 0.5 - 0.014 - Y3;
+      for (const auto point : {std::pair{1.55e7, 150.0}, std::pair{6e6, 100.0},
+                               std::pair{1e6, 1e4}}) {
+        const auto [T, rho] = point;
+        const auto s = nuc.eval(T, rho, comp);
+        const double dT = (std::log(nuc.eval(T * std::exp(step), rho, comp).eps)
+                          - std::log(nuc.eval(T * std::exp(-step), rho, comp).eps)) / (2 * step);
+        const double dr = (std::log(nuc.eval(T, rho * std::exp(step), comp).eps)
+                          - std::log(nuc.eval(T, rho * std::exp(-step), comp).eps)) / (2 * step);
+        worst = std::max({worst, std::abs(dT - s.dlneps_dlnT) / std::max(1.0, std::abs(dT)),
+                         std::abs(dr - s.dlneps_dlnRho) / std::max(1.0, std::abs(dr))});
+      }
+    }
+    check(worst < 2e-6, "heating derivatives include screening and mass defect", worst, 0.0);
   }
 
   std::printf("\n%s (%d failure%s)\n", failures ? "FAILED" : "ALL PASS",

@@ -28,4 +28,13 @@ struct Integrals {
 
 Integrals evaluate(double eta, double beta);
 
+// Second derivatives after enforcing n proportional to rho. Temperature
+// variations keep n fixed; density variations keep T fixed. Centered kernels
+// avoid subtracting O(eta^2) integrals to recover a small thermal response.
+struct DensityResponse {
+  double d2Ip_dlnT2{}, d2Ip_dlnTdlnRho{}, d2Ip_dlnRho2{};
+  double d2Iu_dlnT2{}, d2Iu_dlnTdlnRho{};
+};
+DensityResponse density_response(double eta, double beta, const Integrals&);
+
 } // namespace ember::fermi

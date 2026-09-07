@@ -51,7 +51,8 @@ Rate he3he4(double T9) {                   // He3(alpha,gamma)Be7 - ppII/ppIII
 // is the regime a hydrogen-burning low-mass star occupies; a cold dense
 // remnant needs Chugunov et al. (2007) instead, which is why this lives behind
 // the Nuclear interface rather than inside it.
-double screen_weak(double T, double rho, const Composition& c, double z1, double z2) {
+struct Screening { double factor, dlnf_dlnT, dlnf_dlnRho; };
+Screening screen_weak(double T, double rho, const Composition& c, double z1, double z2) {
   const double zbar  = c.mu_elec_inv() / c.mu_ions_inv();
   const double z2bar = [&] {
     double s = 0.0;
@@ -60,13 +61,14 @@ double screen_weak(double T, double rho, const Composition& c, double z1, double
     return s / c.mu_ions_inv();
   }();
   const double ne = c.mu_elec_inv() * NA * rho;
-  const double lam = std::sqrt(4.0 * M_PI * (1.602176634e-10) * ne * (z2bar + zbar) / (kB * T));
   // H12 = z1 z2 e^2 / (kT) * kappa_D ; assembled in CGS below.
   const double e2 = 4.803204673e-10 * 4.803204673e-10;
   const double kD = std::sqrt(4.0 * M_PI * e2 * ne * (z2bar + zbar) / (kB * T));
-  (void)lam;
   const double H = z1 * z2 * e2 * kD / (kB * T);
-  return std::exp(std::min(H, 2.0));   // capped: beyond this the weak limit is void
+  // Differentiate the implemented cap as well: above it the factor is
+  // constant, while below it H is proportional to rho^(1/2) T^(-3/2).
+  return {std::exp(std::min(H, 2.0)), H < 2.0 ? -1.5 * H : 0.0,
+          H < 2.0 ? 0.5 * H : 0.0};
 }
 
 } // namespace
@@ -86,15 +88,15 @@ NuclearState PPChains::eval(double T, double rho, const Composition& c) const {
   const auto r_pp   = pp(T9);
   const auto r_33   = he3he3(T9);
   const auto r_34   = he3he4(T9);
-  const double f_pp = screen_weak(T, rho, c, 1, 1);
-  const double f_33 = screen_weak(T, rho, c, 2, 2);
-  const double f_34 = screen_weak(T, rho, c, 2, 2);
+  const auto f_pp = screen_weak(T, rho, c, 1, 1);
+  const auto f_33 = screen_weak(T, rho, c, 2, 2);
+  const auto f_34 = screen_weak(T, rho, c, 2, 2);
 
   // Reactions per gram per second.  The 1/2 on identical-particle reactions is
   // the standard double-counting factor.
-  const double n_pp = 0.5 * (X / A1) * (X / A1) * rho * r_pp.v * f_pp;
-  const double n_33 = 0.5 * (Y3 / A3) * (Y3 / A3) * rho * r_33.v * f_33;
-  const double n_34 =       (Y3 / A3) * (Y4 / A4) * rho * r_34.v * f_34;
+  const double n_pp = 0.5 * (X / A1) * (X / A1) * rho * r_pp.v * f_pp.factor;
+  const double n_33 = 0.5 * (Y3 / A3) * (Y3 / A3) * rho * r_33.v * f_33.factor;
+  const double n_34 =       (Y3 / A3) * (Y4 / A4) * rho * r_34.v * f_34.factor;
 
   // Composition change first; the energy then follows from it.  Deriving the
   // release from the mass defect of the very nuclide masses the code carries,
@@ -125,15 +127,19 @@ NuclearState PPChains::eval(double T, double rho, const Composition& c) const {
   s.eps = eps_total - eps_nu;
   if (s.eps < 0.0) s.eps = 0.0;
 
-  // Temperature and density derivatives.  Every channel is binary, so each
-  // goes as rho^1; the temperature dependence is the Gamow exponent, weighted
-  // by how much of the energy each channel is currently carrying.
-  const double w_pp = n_pp * 6.67, w_33 = n_33 * 12.86, w_34 = n_34 * 19.0;
-  const double wsum = w_pp + w_33 + w_34;
-  if (wsum > 0.0) {
-    s.dlneps_dlnT = (w_pp * r_pp.dlnv_dlnT + w_33 * r_33.dlnv_dlnT
-                   + w_34 * r_34.dlnv_dlnT) / wsum;
-    s.dlneps_dlnRho = 1.0;
+  // Differentiate the same mass-defect heating rate, including the escaping
+  // neutrinos and the density/temperature dependence of screening.
+  const double c2 = c_light * c_light;
+  const double w_pp = n_pp * ((3.0 * A1 - A3) * c2 - 0.265 * MeV * NA);
+  const double w_33 = n_33 * ((2.0 * A3 - 2.0 * A1 - A4) * c2);
+  const double w_34 = n_34 * ((A3 + A1 - A4) * c2 - 0.861 * MeV * NA);
+  if (s.eps > 0.0) {
+    s.dlneps_dlnT = (w_pp * (r_pp.dlnv_dlnT + f_pp.dlnf_dlnT)
+                   + w_33 * (r_33.dlnv_dlnT + f_33.dlnf_dlnT)
+                   + w_34 * (r_34.dlnv_dlnT + f_34.dlnf_dlnT)) / s.eps;
+    s.dlneps_dlnRho = (w_pp * (1.0 + f_pp.dlnf_dlnRho)
+                     + w_33 * (1.0 + f_33.dlnf_dlnRho)
+                     + w_34 * (1.0 + f_34.dlnf_dlnRho)) / s.eps;
   }
   return s;
 }
