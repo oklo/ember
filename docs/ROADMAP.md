@@ -24,6 +24,9 @@ blueward turn, and down the helium-white-dwarf cooling track to below
 - [x] Hooks for cold, massive remnants (see below)
 - [x] pp chains with He3 followed explicitly, energy derived from the mass
       defect of the code's own nuclide masses rather than a separate Q table
+- [x] Mixing-length convection and the Schwarzschild criterion, with a
+      bounded cubic solve, analytic gradient partials, and a regression for
+      the transport-row conditioning at grad/grad_rad below 1e-6
 
 ## Beyond the first target: massive white dwarfs
 
@@ -64,12 +67,9 @@ but not designed.
 - [x] Model on a Lagrangian mass mesh in (ln r, ln rho, ln T, L)
 - [x] The four structure equations as zone residuals, with a Jacobian checked
       against the residual it differentiates
-- [ ] Analytic Jacobian assembly (the physics modules already supply every
-      derivative it needs; the present one is numerical and is the reference
-      the analytic version will be tested against)
-- [ ] Mixing-length convection in the transport equation, and the convective
-      criterion, taking care that the *form* used stays conditioned - a
-      radiative equation scaled by an efficiency of 1e-6 is not
+- [ ] Analytic Jacobian assembly, including EOS derivatives of cp, delta,
+      and grad_ad needed by convection; the numerical Jacobian remains the
+      test reference
 - [ ] Henyey block elimination and the surface boundary condition
 - [ ] Adaptive mesh (the "temporary points" idea, done properly)
 - [ ] Time stepping with error control rather than iteration-count heuristics

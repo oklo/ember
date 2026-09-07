@@ -3,6 +3,8 @@
 Written 2026-09-07 at the end of a long session. Read this first; it is meant
 to be the only thing you need.
 
+Updated 2026-09-07 after implementing and testing mixing-length transport.
+
 ---
 
 ## 1. What this is, and why it exists
@@ -29,7 +31,7 @@ how.
 Hayashi track, trillions of years of hydrogen burning, the blueward turn, and
 down the helium-white-dwarf cooling track below 10⁻⁶ L☉ — in one run.
 **Push to GitHub only when that works.** (User's explicit instruction; nothing
-has been pushed yet. Five local commits.)
+has been pushed yet. Use `git log` for the current local history.)
 
 ---
 
@@ -54,7 +56,7 @@ table returns one. Those must surface.
 
 ## 3. Current state
 
-Five commits, four test suites, all passing.
+Five test suites, all passing (EOS, opacity, nuclear, structure, convection).
 
 | Module | File | Status |
 |---|---|---|
@@ -69,6 +71,7 @@ Five commits, four test suites, all passing.
 | Nuclear | `nuclear.hpp`, `nuclear_pp.cpp` | pp chains, He3 explicit, energy from mass defect |
 | Model | `model.hpp` | (ln r, ln ρ, ln T, L) on a Lagrangian mass mesh |
 | Structure | `structure.{hpp,cpp}` | 4 zone residuals + Jacobian (numerical, by design) |
+| Convection | `convection.{hpp,cpp}` | BV58 MLT, Schwarzschild criterion, analytic gradient partials; wired into transport |
 | Losses | `losses.hpp` | **declared, null** — plasmon neutrinos for massive WDs |
 | Conduction | `conduction.hpp` | **declared, unimplemented** — Cassisi 2007 |
 
@@ -79,15 +82,21 @@ deliberately — a result is reproducible only if its numbers travel with it).
 
 ## 4. Immediate next steps, in order
 
-1. **Mixing-length convection** in the transport equation, plus the
-   convective criterion. *Read §5 item 3 first — this is where the FORTRAN
-   line lost several days.*
+1. **Done: mixing-length convection** in the transport equation, plus the
+   Schwarzschild criterion. The bounded cubic retains small gradient
+   differences in both limits; the transport row remains in plain gradient
+   form. Tests cover flux conservation, element cooling, gradient derivatives,
+   and row conditioning with ∇/∇_rad < 1e-6. See `docs/CONVECTION.md` for the
+   equations and coefficient convention. This is optically thick interior
+   MLT; composition mixing and optically thin losses remain separate work.
 2. **Atmosphere boundary condition.** Tabulated model atmospheres
    (PHOENIX/BT-Settl for M dwarfs and BDs) with a grey fallback. The FORTRAN
    line used an LB93 "case B" grey integration; a tabulated atmosphere is the
    modern choice and matters enormously for these stars.
-3. **Analytic Jacobian assembly.** All derivatives already exist in the
-   physics modules. Keep the numerical version as the test reference.
+3. **Analytic Jacobian assembly.** Keep the numerical version as the test
+   reference. MLT supplies partials with respect to ∇_rad, ∇_ad, and ln U.
+   Full assembly also needs derivatives of cp, δ, and ∇_ad with respect to
+   the state; `EosState` currently returns their values, not those derivatives.
 4. **Henyey block elimination** + surface boundary condition.
 5. **Adaptive mesh** — refine at burning shells, coarsen in isothermal cores.
    Must carry a *density* term in the smoothness measure (see §5 item 4).
@@ -98,6 +107,9 @@ deliberately — a result is reproducible only if its numbers travel with it).
    31,600 K where Ferguson stops.
 9. **CNO out of equilibrium** (runs once on the pre-MS and never again).
 10. 0.1 M☉ end to end → **then push to GitHub**.
+
+The default α = 1.9 is **not calibrated for ember**. Do not import the
+Fortran solar calibration as if the EOS and atmosphere were identical.
 
 ---
 

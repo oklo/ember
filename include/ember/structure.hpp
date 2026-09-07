@@ -16,10 +16,10 @@ namespace ember {
 //   (4) transport: d(ln T)/dm  = grad * d(ln P)/dm
 //
 // written as centred differences over the zone between points i and i+1.  The
-// gradient in (4) is the radiative one, the adiabatic one, or the mixing
-// length result between them - and the choice of *form* matters as much as the
-// value: scaling the radiative equation by a convective efficiency is only
-// well conditioned while that efficiency is of order unity, which is a lesson
+// gradient in (4) is radiative in Schwarzschild-stable zones, and the
+// Bohm-Vitense mixing-length result in unstable zones. The choice of form
+// matters as much as the value: scaling the radiative equation by a convective
+// efficiency is only well conditioned while that efficiency is of order unity, a lesson
 // this code inherits at the cost of several days.
 struct ZoneResidual {
   std::array<double, NVAR> f{};                              // residuals
@@ -31,7 +31,7 @@ struct Physics {
   const Eos* eos{};
   const Opacity* opacity{};
   const Nuclear* nuclear{};
-  double alpha_mlt{1.9};
+  double alpha_mlt{1.9};             // l/H_P, strictly positive; not calibrated
 };
 
 // Evaluate one zone.  `dt` <= 0 means a static model: the time-dependent term

@@ -5,6 +5,7 @@ add_library(ember
   opacity_ferguson.cpp
   eos_components.cpp
   nuclear_pp.cpp
+  convection.cpp
   structure.cpp
   eos_ideal.cpp)
 target_include_directories(ember PUBLIC ${CMAKE_SOURCE_DIR}/include)

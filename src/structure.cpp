@@ -1,4 +1,5 @@
 #include "ember/structure.hpp"
+#include "ember/convection.hpp"
 #include "ember/constants.hpp"
 #include <cmath>
 
@@ -10,7 +11,7 @@ namespace {
 // Everything the zone equations need at a point, gathered once.
 struct Local {
   double lnr, lnT, r, rho, T, L, P, lnP;
-  double chiT, chiRho, grad_ad, cp, kappa, dlnk_dlnT, dlnk_dlnRho;
+  double chiT, chiRho, grad_ad, cp, delta, kappa, dlnk_dlnT, dlnk_dlnRho;
   double eps, dlneps_dlnT, dlneps_dlnRho;
   double E;
 };
@@ -26,6 +27,7 @@ Local gather(const Model& m, std::size_t i, const Physics& p) {
   const auto e = p.eos->eval(q.T, q.rho, m.comp[i]);
   q.P = e.P; q.lnP = std::log(e.P);
   q.chiT = e.chiT; q.chiRho = e.chiRho; q.grad_ad = e.grad_ad; q.cp = e.cp;
+  q.delta = e.delta;
   q.E = e.E;
   const auto k = p.opacity->eval(q.T, q.rho, m.comp[i]);
   q.kappa = k.kappa; q.dlnk_dlnT = k.dlnk_dlnT; q.dlnk_dlnRho = k.dlnk_dlnRho;
@@ -47,9 +49,9 @@ ZoneResidual zone_residual(const Model& mdl, std::size_t i,
   // Numerical Jacobian for now, taken by perturbing the eight variables that
   // bound the zone.  It is written this way deliberately: the analytic form
   // will replace it once the equations themselves are settled, and having both
-  // lets the analytic version be checked against something.  Every physics
-  // module already supplies its own derivatives, so the replacement is
-  // assembly, not differentiation.
+  // lets the analytic version be checked against something. The MLT gradient
+  // supplies its partials; full assembly will also need state derivatives of
+  // the EOS's cp, delta, and grad_ad, beyond their current returned values.
   auto residual = [&](const Point& yl, const Point& yh) {
     Model tmp = mdl;               // cheap enough at this stage; the solver
     tmp.y[i] = yl; tmp.y[j] = yh;  // will not do this per iteration
@@ -79,14 +81,21 @@ ZoneResidual zone_residual(const Model& mdl, std::size_t i,
       eps_grav = -(dE - (a.P / (a.rho * a.rho)) * drho) / dt;
     }
     f[2] = (b.L - a.L) / dm - (0.5 * (a.eps + b.eps) + eps_grav);
-    // (4) transport.  Radiative gradient; convection is added with the mixing
-    // length once the atmosphere and the convection criterion are wired in.
+    // (4) Schwarzschild criterion and optically thick mixing-length transport.
     const double kb = 0.5 * (a.kappa + b.kappa);
     const double Lb = 0.5 * (a.L + b.L);
     const double grad_rad = 3.0 * kb * Lb * Pb
                           / (16.0 * M_PI * a_rad * c * G * mb * std::pow(Tb, 4));
     const double grad_ad  = 0.5 * (a.grad_ad + b.grad_ad);
-    const double grad = (grad_rad <= grad_ad) ? grad_rad : grad_ad;
+    EosState eb{};
+    eb.P = Pb;
+    eb.cp = 0.5 * (a.cp + b.cp);
+    eb.delta = 0.5 * (a.delta + b.delta);
+    const double gravity = G * mb / (rb * rb);
+    const double U = mixing_length_U(Tb, rhob, kb, gravity, eb, phys.alpha_mlt);
+    const double grad = mixing_length_gradient(grad_rad, grad_ad, U).grad;
+    // Plain gradient form at every efficiency. Never multiply this row by
+    // grad/grad_rad: in a giant that factor can be 1e-6 or smaller.
     f[3] = (b.lnT - a.lnT) / dm - grad * ((b.lnP - a.lnP) / dm);
     return f;
   };

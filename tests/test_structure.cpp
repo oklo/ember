@@ -5,6 +5,8 @@
 #include "ember/eos_composite.hpp"
 #include "ember/opacity.hpp"
 #include "ember/constants.hpp"
+#include "ember/convection.hpp"
+#include <algorithm>
 #include <cmath>
 #include <cstdio>
 #include <string>
@@ -28,6 +30,29 @@ public:
     return s;
   }
   const char* name() const override { return "power law (test)"; }
+};
+
+// An exactly ideal, monatomic gas isolates transport-row conditioning from
+// changes in the adiabatic gradient of a partially degenerate EOS.
+class TestIdealEos final : public Eos {
+public:
+  EosState eval(double T, double rho, const Composition&) const override {
+    const double gas = constants::R_gas / 0.6;
+    EosState e{};
+    e.P = gas * rho * T; e.E = 1.5 * gas * T;
+    e.chiT = e.chiRho = e.delta = 1.0;
+    e.cv = 1.5 * gas; e.cp = 2.5 * gas; e.grad_ad = 0.4;
+    return e;
+  }
+  const char* name() const override { return "ideal gas (structure test)"; }
+};
+class ConstantOpacity final : public Opacity {
+public:
+  double kappa{1.0};
+  OpacityState eval(double, double, const Composition&) const override {
+    return {kappa, 0.0, 0.0};
+  }
+  const char* name() const override { return "constant (structure test)"; }
 };
 
 int main() {
@@ -99,6 +124,80 @@ int main() {
     check(std::abs(Rt.f[0]) < 1e-2 * std::abs(dlnr / dm),
           "mass equation vanishes for a thin shell built to it",
           std::abs(Rt.f[0]) / std::abs(dlnr / dm), 0.0);
+  }
+
+  // 4. Exercise the actual transport row across the convection transition.
+  //    Opacity and luminosity set independent U and grad_rad in this fixture.
+  {
+    TestIdealEos ideal;
+    ConstantOpacity constant;
+    Physics p{&ideal, &constant, &nuc, 1.9};
+    for (const auto [rad, targetU] : {std::pair{0.2, 1.0}, std::pair{5.0, 1.0},
+                                    std::pair{1e6, 1e-12}}) {
+      Model t = m;
+      const auto a = ideal.eval(t.T(0), t.rho(0), t.comp[0]);
+      const auto b = ideal.eval(t.T(1), t.rho(1), t.comp[1]);
+      const double Tb = 0.5 * (t.T(0) + t.T(1));
+      const double rhob = 0.5 * (t.rho(0) + t.rho(1));
+      const double rb = 0.5 * (t.r(0) + t.r(1));
+      const double mb = 0.5 * (t.m[0] + t.m[1]);
+      EosState eb = a; eb.P = 0.5 * (a.P + b.P);
+      constant.kappa = mixing_length_U(Tb, rhob, 1.0,
+          constants::G * mb / (rb * rb), eb, p.alpha_mlt) / targetU;
+      const double L = rad * 16.0 * M_PI * constants::a_rad * constants::c
+          * constants::G * mb * std::pow(Tb, 4) / (3.0 * constant.kappa * eb.P);
+      t.y[0].L = t.y[1].L = L;
+      const double dm = t.m[1] - t.m[0];
+      const double dlnP = std::log(b.P) - std::log(a.P);
+      auto implied_grad = [&](const ZoneResidual& residual) {
+        return (t.y[1].lnT - t.y[0].lnT - dm * residual.f[3]) / dlnP;
+      };
+      const auto r = zone_residual(t, 0, p, -1.0);
+      const double grad = implied_grad(r);
+      if (rad < 0.4) {
+        check(std::abs(grad / rad - 1.0) < 1e-12,
+              "stable transport row uses the radiative gradient", grad, rad);
+      } else if (rad == 5.0) {
+        check(grad > 0.4 && grad < rad,
+              "unstable row retains finite superadiabaticity", grad, 0.4);
+        Physics longer = p; longer.alpha_mlt *= 2.0;
+        const double grad_longer = implied_grad(zone_residual(t, 0, longer, -1.0));
+        check(grad_longer < grad && grad_longer > 0.4,
+              "alpha_mlt changes the structure's temperature gradient", grad_longer, grad);
+      } else {
+        check(grad / rad < 1e-6 && grad > 0.4,
+              "giant-efficiency fixture reaches grad/grad_rad < 1e-6", grad / rad, 1e-6);
+        // Change outer T at fixed P by compensating rho. The coefficient of
+        // dlnT in dm*f_transport stays one even when grad/grad_rad is tiny.
+        const double coefficient = dm * (r.dfdy_hi[3][static_cast<std::size_t>(Var::lnT)]
+                                        - r.dfdy_hi[3][static_cast<std::size_t>(Var::lnrho)]);
+        check(std::abs(coefficient - 1.0) < 1e-4,
+              "efficient convection leaves temperature row unscaled", coefficient, 1.0);
+      }
+
+      // Both endpoints and all variables, with a coarser step than the
+      // implementation. A row-scaled comparison respects small physical
+      // derivatives without turning roundoff in them into a false failure.
+      double worst = 0.0;
+      for (std::size_t endpoint = 0; endpoint < 2; ++endpoint) {
+        double scale = 0.0, error = 0.0;
+        for (std::size_t v = 0; v < NVAR; ++v) {
+          const Var vv = static_cast<Var>(v);
+          const double unit = vv == Var::L ? std::abs(L) : 1.0;
+          const double step = 1e-4 * unit;
+          Model plus = t, minus = t;
+          plus.y[endpoint][vv] += step; minus.y[endpoint][vv] -= step;
+          const double num = dm * (zone_residual(plus, 0, p, -1.0).f[3]
+                                - zone_residual(minus, 0, p, -1.0).f[3]) / (2e-4);
+          const auto& jac = endpoint == 0 ? r.dfdy_lo : r.dfdy_hi;
+          const double actual = dm * jac[3][v] * unit;
+          error = std::max(error, std::abs(num - actual));
+          scale = std::max({scale, std::abs(num), std::abs(actual)});
+        }
+        worst = std::max(worst, error / scale);
+      }
+      check(worst < 2e-6, "transport Jacobian matches at both zone endpoints", worst, 0.0);
+    }
   }
 
   std::printf("\n%s (%d failure%s)\n", failures ? "FAILED" : "ALL PASS",
