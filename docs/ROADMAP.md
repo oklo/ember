@@ -61,7 +61,16 @@ but not designed.
 - [ ] CNO out of equilibrium (needed on the pre-main-sequence, where it runs
       once and never again); Chugunov screening for dense matter
 - [ ] Atmosphere: tabulated model atmospheres, with a grey fallback
-- [ ] Henyey solver: block elimination in (ln r, ln rho, ln T, L)
+- [x] Model on a Lagrangian mass mesh in (ln r, ln rho, ln T, L)
+- [x] The four structure equations as zone residuals, with a Jacobian checked
+      against the residual it differentiates
+- [ ] Analytic Jacobian assembly (the physics modules already supply every
+      derivative it needs; the present one is numerical and is the reference
+      the analytic version will be tested against)
+- [ ] Mixing-length convection in the transport equation, and the convective
+      criterion, taking care that the *form* used stays conditioned - a
+      radiative equation scaled by an efficiency of 1e-6 is not
+- [ ] Henyey block elimination and the surface boundary condition
 - [ ] Adaptive mesh (the "temporary points" idea, done properly)
 - [ ] Time stepping with error control rather than iteration-count heuristics
 - [ ] 0.1 Msun end to end
