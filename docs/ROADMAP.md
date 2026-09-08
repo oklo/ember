@@ -29,8 +29,7 @@ blueward turn, and down the helium-white-dwarf cooling track to below
       the transport-row conditioning at grad/grad_rad below 1e-6
 - [x] Grey atmosphere with varying opacity, radiation pressure, adaptive
       integration, and analytic sensitivities to Teff and gravity
-- [x] Atmosphere table reader and surface residuals with an analytic Jacobian;
-      physical atmosphere data remain pending
+- [x] Atmosphere table reader and surface residuals with an analytic Jacobian
 - [x] Analytic zone Jacobian, including EOS transport responses and screened
       mass-defect heating derivatives; numerical assembly retained for tests
 - [x] Regular central boundary conditions, pivoted Henyey block elimination,
@@ -50,6 +49,11 @@ blueward turn, and down the helium-white-dwarf cooling track to below
       excluding every server-substituted density
 - [x] Experimental 0.1 Msun static equilibrium through 4096 points; fine-mesh
       agreement, nuclear balance, independent virial and atmosphere-depth checks
+- [x] Consistent fixed-composition C2 Helmholtz EOS from FreeEOS 3.0 EOS1;
+      caloric and transport derivatives independently tested; source-fit join
+      regularization and sampled accuracy explicitly audited in `FREEEOS.md`
+- [x] Physical AMES-COND non-grey tau=100 boundary via untouched MESA cells,
+      explicit solar-mixture proxy, and a combined 4096-point stellar solve
 
 ## Beyond the first target: massive white dwarfs
 
@@ -80,21 +84,21 @@ but not designed.
 ## Next
 
 - [ ] Coulomb corrections and crystallisation (Potekhin & Chabrier)
-- [ ] Resolve EOS pressure/entropy consistency and internal-energy join defects
-      before evolution; implement validated caloric and composition responses
-      (including He3). See `CMS19.md`; do not fabricate energy or extrapolate
+- [ ] Extend the consistent potential to physical metal/He3 abundances and
+      composition responses before evolution. Improve source-fit joins and
+      qualify response accuracy; see `FREEEOS.md`. Keep CMS19's energy guard
 - [ ] Extend hot dense opacity to evolving X and other Z; the current TOPS
       import has only X=.7, Z=.02. Add conduction from Cassisi 2007
 - [ ] CNO out of equilibrium (needed on the pre-main-sequence, where it runs
       once and never again); Chugunov screening for dense matter
-- [ ] Import and validate physical model-atmosphere grids (BT-Settl archive
-      timed out; the existing atmosphere table is synthetic test data only)
+- [ ] Match modern model-atmosphere composition to the interior; quantify
+      the thin-atmosphere approximation and atmospheric-grid interpolation
 - [x] Model on a Lagrangian mass mesh in (ln r, ln rho, ln T, L)
 - [x] The four structure equations as zone residuals, with a Jacobian checked
       against the residual it differentiates
-- [ ] Quantitatively credible 0.1 Msun equilibrium: resolve local EOS consistency
-      errors and replace the grey surface with physical atmosphere structures;
-      compare against independent stellar models (see `EQUILIBRIUM.md`)
+- [ ] Quantitatively credible 0.1 Msun equilibrium: reduce mixture/source-fit
+      approximations and repeat age/composition-aware stellar and observational
+      comparisons. Current numerical and bulk checks are in `EQUILIBRIUM.md`
 - [ ] Adaptive mesh (the "temporary points" idea, done properly)
 - [ ] Time stepping with error control rather than iteration-count heuristics
 - [ ] 0.1 Msun end to end

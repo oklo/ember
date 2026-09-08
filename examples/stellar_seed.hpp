@@ -53,7 +53,7 @@ inline Model stellar_seed(std::size_t points, double mass, double radius,
   for (std::size_t i = 0; i < points; ++i) {
     const double f = std::clamp(std::log(join_T / m.T(i)) / std::log(join_T / Ts), 0.0, 1.0);
     m.y[i].lnrho += f * drho;
-    m.y[i].lnT += f * std::log(Teff / Ts);
+    m.y[i].lnT += f * std::log(surface.T / Ts);
   }
   // Match the discrete mass equation and central sphere exactly. Scaling
   // rho and m together sets total mass without a surface mass discontinuity.

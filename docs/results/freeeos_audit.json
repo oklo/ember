@@ -1,0 +1,59 @@
+{
+  "source": "FreeEOS 3.0.0 EOS1 (3,1,-2); H=.7 He=.3; all states queried cold",
+  "potential_sha256": "34f5e83c898ab74273dd3d907b2ebac77c61976b8e1d7c5e1fda8530c69d823a",
+  "sample": {
+    "count": 912,
+    "profile": "Every eighth point of the 4096-point CMS19/grey reference",
+    "random": "400 Python Random(12) states, logT uniform 3.31..6.89, logQ uniform -4.8..1.9"
+  },
+  "max_direct_local_identity_residual": 5.978550987606468e-13,
+  "source_comparison": {
+    "P": {
+      "max_fractional_difference": 2.1891880002233854e-05,
+      "temperature_K": 160944.65821782924,
+      "density_g_cm3": 4.2135638824399235
+    },
+    "E": {
+      "max_fractional_difference": 0.000488614697504719,
+      "temperature_K": 9062.70698900496,
+      "density_g_cm3": 0.0065744406998258995
+    },
+    "S": {
+      "max_fractional_difference": 0.00011026234870947782,
+      "temperature_K": 9062.70698900496,
+      "density_g_cm3": 0.0065744406998258995
+    },
+    "cv": {
+      "max_fractional_difference": 0.016568492559610237,
+      "temperature_K": 9062.70698900496,
+      "density_g_cm3": 0.0065744406998258995
+    },
+    "cp": {
+      "max_fractional_difference": 0.014121766131536706,
+      "temperature_K": 160944.65821782924,
+      "density_g_cm3": 4.2135638824399235
+    },
+    "grad_ad": {
+      "max_fractional_difference": 0.010709245518272237,
+      "temperature_K": 9062.70698900496,
+      "density_g_cm3": 0.0065744406998258995
+    },
+    "delta": {
+      "max_fractional_difference": 0.01698263751478679,
+      "temperature_K": 160944.65821782924,
+      "density_g_cm3": 4.2135638824399235
+    }
+  },
+  "molecular_join": {
+    "logQ": 0.882,
+    "logT_interval": [
+      3.95,
+      3.9625
+    ],
+    "simpson_intervals": 200,
+    "potential_change_erg_g_K": -3524103.0547589064,
+    "integrated_derivative_erg_g_K": -3522463.3223673785,
+    "difference_erg_g_K": -1639.732391527854
+  },
+  "qualification": "Sampled source agreement, not uniform physical error bounds; source-fit joins are regularized by the C2 potential"
+}

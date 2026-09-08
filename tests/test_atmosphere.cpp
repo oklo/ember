@@ -162,6 +162,26 @@ int main() {
   const std::string path = std::string(EMBER_TEST_DATA_DIR) + "/synthetic_atmosphere.dat";
   const TabulatedAtmosphere table(eos, path);
   {
+    const std::string cond_path=std::string(EMBER_DATA_DIR)+"/atmosphere/cond_gn93_tau100_solar_proxy.dat";
+    const auto solar=solar_scaled(.7,.02);
+    check(throws([&]{TabulatedAtmosphere exact(eos,cond_path);}),
+          "native solar-mixture mismatch requires an explicit proxy",1,1);
+    const TabulatedAtmosphere cond(eos,cond_path,TabulatedAtmosphere::Mixture::allow_documented_proxy);
+    // Original source cells, independent of the converted log table.
+    const auto a=cond.eval(2800,1e5,solar);
+    near(a.T,4081.407,2e-14,"COND source temperature is the tau=100 layer, not Teff");
+    near(a.Pgas,1.555799e7,2e-14,"COND source material pressure includes electrons, excludes radiation");
+    near(a.tau,100,1e-15,"physical atmosphere matches at Rosseland tau=100");
+    const double Teff=2845,g=1.8e5,h=1e-5;
+    const auto b=cond.eval(Teff,g,solar),tp=cond.eval(Teff*std::exp(h),g,solar),
+               tm=cond.eval(Teff*std::exp(-h),g,solar),gp=cond.eval(Teff,g*std::exp(h),solar),
+               gm=cond.eval(Teff,g*std::exp(-h),solar);
+    near(b.dlnP_dlnTeff,std::log(tp.P/tm.P)/(2*h),2e-8,"non-grey pressure derivative follows the actual interpolation");
+    near(b.dlnT_dlng,std::log(gp.T/gm.T)/(2*h),2e-8,"non-grey temperature includes its gravity derivative");
+    check(throws([&]{cond.eval(3400,g,solar);}) && throws([&]{cond.eval(2800,1e3,solar);}),
+          "grey-filled and source-transition regions are excluded",1,1);
+  }
+  {
     double worst = 0.0;
     for (double lt : {3.0, 3.2, 3.5, 3.8, 4.0}) {
       for (double lg : {3.0, 3.3, 4.0, 4.4, 5.0}) {

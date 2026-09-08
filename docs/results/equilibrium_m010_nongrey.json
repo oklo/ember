@@ -1,0 +1,51 @@
+{
+  "calculation": "experimental static stellar equilibrium trial",
+  "physics": {
+    "eos": "FreeEOS 3.0 EOS1 material Helmholtz potential + radiation; metals represented by helium; fixed composition",
+    "opacity": "AESOPUS 2.1 gas + TOPS ATOMIC GS98, Z=0.020, no extrapolation",
+    "opacity_blend_logT": [
+      4.4,
+      4.5
+    ],
+    "atmosphere": "AMES-COND-2000 non-grey via MESA; untouched cool-dwarf cells",
+    "tau_top": null,
+    "tau_match": 100,
+    "atmosphere_composition_approximation": "GN93 solar proxy; atmosphere and interior mixtures are not matched",
+    "nuclear": "pp chains, fixed composition, X_He3=0",
+    "composition": "X=0.7, Z=0.02, AAG21 resolved metals (GS98 opacity approximation)",
+    "alpha_mlt": 1.9
+  },
+  "limitations": "fixed-composition EOS; source-fit joins regularized by C2 interpolation (see docs/FREEEOS.md); He3 and composition evolution unavailable; thin atmosphere; interior has no grain opacity, conduction, mixing, or evolution; alpha uncalibrated",
+  "converged": true,
+  "message": "converged",
+  "points": 4096,
+  "iterations": 9,
+  "residual": 6.602241100206058e-13,
+  "correction": 6.763439369337424e-12,
+  "relative_virial_error": -6.396450834555978e-07,
+  "mass_rms_eos_maxwell_defect": 1.314978189041355e-16,
+  "max_eos_defect_location": {
+    "mass_fraction": 0.1333930407294222,
+    "temperature_K": 3780580.838044297,
+    "density_g_cm3": 261.0026690430819
+  },
+  "mass_g": 1.98840987069805e+32,
+  "seed_radius_cm": 10435500000,
+  "seed_polytropic_index": 1.5,
+  "max_eos_maxwell_defect": 4.440892098500626e-16,
+  "radius_cm": 9025924592.977772,
+  "luminosity_erg_s": 3.631147609524596e+30,
+  "Teff_K": 2812.287557058768,
+  "integrated_nuclear_luminosity_erg_s": 3.631147609524656e+30,
+  "inner_mass_fraction": 1.228584548860194e-10,
+  "max_logR": 3.94058178728018,
+  "increasing_radius": true,
+  "decreasing_temperature": true,
+  "inner_temperature_K": 4585803.067845576,
+  "inner_density_g_cm3": 350.6013300290782,
+  "recorded_date": "2026-09-07",
+  "reproduce": "build/apps/ember-equilibrium 4096 .1 .15 --eos freeeos --hot-opacity tops --seed-index 1.5 --atmosphere cond-solar-proxy",
+  "eos_potential_sha256": "34f5e83c898ab74273dd3d907b2ebac77c61976b8e1d7c5e1fda8530c69d823a",
+  "atmosphere_table_sha256": "d1b69b368ba24ba983049df195b0efcd8a8c4d07f38629042ff8d0e2021e42c2",
+  "source_accuracy_audit": "freeeos_audit.json"
+}

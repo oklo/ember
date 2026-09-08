@@ -1,4 +1,43 @@
-# CMS19 H/He tables
+# Equation-of-state data
+
+## FreeEOS 3.0 material Helmholtz potential
+
+`freeeos300_hhe_x070_potential.dat` is ember's C2 biquintic representation
+of a material free-energy potential from FreeEOS 3.0.0 EOS1. It is the
+current fixed-composition equilibrium EOS. The numerical source mixture
+is H=.7, He=.3 (metals-as-helium approximation); it is not a full-metal,
+He3-capable EOS. Original direct numerical evaluations are retained in
+`sources/freeeos300_hhe_x070_raw.json.gz`. Normal builds need no Fortran.
+
+The 305×593 source grid has .0125-dex spacing in log T and
+log Q=log[rho/(T/1e6)^1.5]. The potential retains 301×589 nodes after
+trimming derivative stencils, with 106 masked nodes. Temperature/density
+support is strict. Radiation is removed from the source before forming
+the material potential and is added analytically at runtime.
+
+See [FREEEOS.md](../../docs/FREEEOS.md) for equations, source provenance,
+reproduction from the checksum-pinned external source archive, and the
+small source-fit discontinuities regularized by this representation.
+Sampled response discrepancies reach 1–2% near those joins; mathematical
+consistency does not establish exact source reproduction or physical accuracy.
+
+```
+python3 scripts/import_freeeos_potential.py data/eos/sources/freeeos300_hhe_x070_raw.json.gz /tmp/freeeos-potential.dat
+```
+
+SHA-256:
+
+- FreeEOS 3.0.0 source archive: `4ab1c15a51385a3eab3b08c6f3f240739c0105d92ec828d635ac95720edefb09`
+- Raw evaluations: `26165748e1493438f4d62d1e04cb2eb67761a51d57c7abbf99cc0f1a01ff1e62`
+- Potential: `34f5e83c898ab74273dd3d907b2ebac77c61976b8e1d7c5e1fda8530c69d823a`
+
+All raw evaluations were reproduced byte for byte from a fresh source
+build on the development host; rebuilding the potential is byte-identical.
+FreeEOS source is GPL-2.0-or-later and remains outside ember's build; its
+source is not relicensed or linked into ember. Cite Alan Irwin and the
+FreeEOS release for these numerical calculations.
+
+## Retained CMS19 H/He tables
 
 `cms19_h_tp.dat` and `cms19_he_tp.dat` contain the original density and
 entropy columns from `TABLE_H_TP_v1` and `TABLE_HE_TP_v1` in the authors'
@@ -15,7 +54,7 @@ additive-volume tables for low-mass stars. We use pure H and He, never the
 2021 effective-hydrogen table as pure H. The optional metals-as-helium
 approximation must be explicitly selected in `Cms19Eos`.
 
-## Reproduction
+### Reproduction
 
 ```
 curl -fLO https://perso.ens-lyon.fr/gilles.chabrier/DirEOS/DirEOS2019.tar.gz
@@ -28,7 +67,7 @@ The importer and audit verify SHA-256
 Reimport was checked byte for byte against both versioned files. Python's
 standard library is sufficient; tables are read directly by C++ at runtime.
 
-## Format and support
+### Format and support
 
 Each file has 121 temperatures by 441 pressures, or 53,361 pairs of original
 values. The format is:
@@ -49,7 +88,7 @@ each entire 4×4 interpolation stencil inside density and phase masks.
 Consequently an imported rectangle does **not** imply rectangular physical
 coverage. See [CMS19 implementation and audit](../../docs/CMS19.md).
 
-## Static calculations only
+### Static calculations only
 
 Energy columns are deliberately absent. At rho=1 g/cm³, the original He
 table's internal energy decreases between log T=5.95 and 6.0 despite a

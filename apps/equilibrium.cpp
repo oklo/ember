@@ -1,6 +1,8 @@
 #include "ember/relaxation.hpp"
 #include "ember/eos_composite.hpp"
 #include "ember/eos_cms19.hpp"
+#include "ember/eos_helmholtz.hpp"
+#include "ember/atmosphere_table.hpp"
 #include "ember/opacity_aesopus.hpp"
 #include "ember/opacity_opal.hpp"
 #include "ember/opacity_tops.hpp"
@@ -39,10 +41,11 @@ template<class T> T parse(const char* text) {
 int main(int argc, char** argv) {
   using namespace ember;
   if (argc == 2 && std::string_view(argv[1]) == "--help") {
-    std::puts("usage: ember-equilibrium [mesh_points [mass_solar [seed_radius_solar]]] [--eos ionized|cms19]\n"
+    std::puts("usage: ember-equilibrium [mesh_points [mass_solar [seed_radius_solar]]] [--eos ionized|cms19|freeeos]\n"
               "       [--hot-opacity opal|tops] [--tau-top value] [--seed-index 3|1.5]\n"
+              "       [--atmosphere grey|cond-solar-proxy]\n"
               "Defaults: 128, 0.1, 0.2. Experimental static trial; convergence is not guaranteed.\n"
-              "Default EOS: ionized. Default tau_top: 1e-6 (ionized), 1e-3 (cms19).\n"
+              "Default EOS: ionized. Default tau_top: 1e-6 (ionized), 1e-3 (cms19/freeeos).\n"
               "JSON on stdout, diagnostics on stderr; exit 0 only on convergence.");
     return 0;
   }
@@ -50,25 +53,32 @@ int main(int argc, char** argv) {
     std::vector<const char*> positional;
     std::string eos_name = "ionized";
     std::string hot_opacity = "opal";
+    std::string atmosphere_name = "grey";
     double seed_index = 3;
     double tau_top = 0;
     bool tau_given = false;
     for (int i = 1; i < argc; ++i) {
       const std::string_view arg(argv[i]);
-      if (arg == "--eos" || arg == "--tau-top" || arg == "--hot-opacity" || arg == "--seed-index") {
+      if (arg == "--eos" || arg == "--tau-top" || arg == "--hot-opacity" || arg == "--seed-index"
+          || arg == "--atmosphere") {
         if (++i == argc) throw std::invalid_argument("missing option value");
         if (arg == "--eos") eos_name = argv[i];
         else if (arg == "--hot-opacity") hot_opacity = argv[i];
         else if (arg == "--seed-index") seed_index = parse<double>(argv[i]);
+        else if (arg == "--atmosphere") atmosphere_name = argv[i];
         else { tau_top = parse<double>(argv[i]); tau_given = true; }
       } else if (arg.starts_with("--")) throw std::invalid_argument("unknown option");
       else positional.push_back(argv[i]);
     }
-    if (positional.size() > 3 || (eos_name != "ionized" && eos_name != "cms19")
-        || (hot_opacity != "opal" && hot_opacity != "tops"))
+    if (positional.size() > 3 || (eos_name != "ionized" && eos_name != "cms19" && eos_name != "freeeos")
+        || (hot_opacity != "opal" && hot_opacity != "tops")
+        || (atmosphere_name != "grey" && atmosphere_name != "cond-solar-proxy"))
       throw std::invalid_argument("invalid arguments; see --help");
+    const bool cond = atmosphere_name == "cond-solar-proxy";
+    if (cond && tau_given) throw std::invalid_argument("--tau-top applies only to the grey atmosphere");
     const bool cms = eos_name == "cms19";
-    if (!tau_given) tau_top = cms ? 1e-3 : 1e-6;
+    const bool free = eos_name == "freeeos";
+    if (!tau_given) tau_top = cms || free ? 1e-3 : 1e-6;
     const std::size_t points = positional.size() > 0 ? parse<std::size_t>(positional[0]) : 128;
     const double mass = (positional.size() > 1 ? parse<double>(positional[1]) : 0.1) * constants::Msun;
     const double radius = (positional.size() > 2 ? parse<double>(positional[2]) : 0.2) * constants::Rsun;
@@ -76,6 +86,8 @@ int main(int argc, char** argv) {
     std::unique_ptr<Eos> eos;
     if (cms) eos = std::make_unique<Cms19Eos>(data + "/eos/cms19_h_tp.dat", data + "/eos/cms19_he_tp.dat",
                                              Cms19Eos::Metals::helium_proxy);
+    else if (free) eos = std::make_unique<HelmholtzTableEos>(data + "/eos/freeeos300_hhe_x070_potential.dat",
+                                             HelmholtzTableEos::Mixture::allow_documented_proxy);
     else eos = std::make_unique<CompositeEos>();
     AesopusOpacity low(data + "/opacity/aesopus21_gs98_z020.dat");
     std::unique_ptr<Opacity> high;
@@ -85,11 +97,15 @@ int main(int argc, char** argv) {
     // require both tables only in their upper-temperature overlap.
     BlendedOpacity opacity(low, *high, 4.4, 4.5);
     PPChains nuclear;
-    GreyAtmosphere atmosphere(*eos, opacity, {.tau_top = tau_top});
+    std::unique_ptr<Atmosphere> atmosphere;
+    if (cond) atmosphere = std::make_unique<TabulatedAtmosphere>(*eos,
+        data + "/atmosphere/cond_gn93_tau100_solar_proxy.dat",
+        TabulatedAtmosphere::Mixture::allow_documented_proxy);
+    else atmosphere = std::make_unique<GreyAtmosphere>(*eos, opacity, GreyAtmosphereOptions{.tau_top = tau_top});
     Physics physics{eos.get(), &opacity, &nuclear, 1.9};
-    const auto seed = example::stellar_seed(points, mass, radius, solar_scaled(0.7, 0.02), nuclear, atmosphere, seed_index);
+    const auto seed = example::stellar_seed(points, mass, radius, solar_scaled(0.7, 0.02), nuclear, *atmosphere, seed_index);
     RelaxationOptions options; options.max_iterations = 100;
-    const auto result = relax(seed, physics, atmosphere, options);
+    const auto result = relax(seed, physics, *atmosphere, options);
     const auto& m = result.model;
     const double Teff = std::pow(m.y.back().L / (4.0 * M_PI * constants::sigma_SB
                                               * std::pow(m.r(points - 1), 2)), 0.25);
@@ -132,20 +148,27 @@ int main(int argc, char** argv) {
     }
     const double surface_term = 4 * M_PI * std::pow(m.r(points - 1), 3) * previous_pressure;
     const double virial_error = (pressure_integral - surface_term) / gravity_integral - 1;
+    char tau_literal[32]; std::snprintf(tau_literal, sizeof tau_literal, "%.16g", tau_top);
     std::printf("{\n  \"calculation\": \"experimental static stellar equilibrium trial\",\n"
                 "  \"physics\": {\"eos\": \"%s\",\n"
                 "    \"opacity\": \"AESOPUS 2.1 gas + %s GS98, Z=0.020, no extrapolation\",\n"
                 "    \"opacity_blend_logT\": [4.4, 4.5],\n"
-                "    \"atmosphere\": \"radiative Eddington grey\",\n"
-                "    \"tau_top\": %.16g,\n"
+                "    \"atmosphere\": \"%s\",\n"
+                "    \"tau_top\": %s, \"tau_match\": %.16g,\n"
+                "    \"atmosphere_composition_approximation\": \"%s\",\n"
                 "    \"nuclear\": \"pp chains, fixed composition, X_He3=0\",\n"
                 "    \"composition\": \"X=0.7, Z=0.02, AAG21 resolved metals (GS98 opacity approximation)\",\n"
                 "    \"alpha_mlt\": 1.9},\n"
-                "  \"limitations\": \"%s; no grain opacity, conduction, mixing, or evolution; alpha uncalibrated\",\n"
+                "  \"limitations\": \"%s; thin atmosphere; interior has no grain opacity, conduction, mixing, or evolution; alpha uncalibrated\",\n"
                 "  \"converged\": %s, \"message\": ",
                 cms ? "CMS19 pressure/entropy + radiation; metals represented by helium; static only"
-                    : "ionized ions + radiation + FD electrons", hot_opacity == "tops" ? "TOPS ATOMIC" : "OPAL", tau_top,
-                cms ? "CMS19 thermodynamic consistency is approximate; internal energy disabled; finite top column"
+                    : free ? "FreeEOS 3.0 EOS1 material Helmholtz potential + radiation; metals represented by helium; fixed composition"
+                    : "ionized ions + radiation + FD electrons", hot_opacity == "tops" ? "TOPS ATOMIC" : "OPAL",
+                cond ? "AMES-COND-2000 non-grey via MESA; untouched cool-dwarf cells" : "radiative Eddington grey",
+                cond ? "null" : tau_literal, cond ? 100.0 : 2.0 / 3.0,
+                cond ? "GN93 solar proxy; atmosphere and interior mixtures are not matched" : "none beyond EOS and opacity choices",
+                cms ? "CMS19 thermodynamic consistency is approximate; internal energy disabled"
+                    : free ? "fixed-composition EOS; source-fit joins regularized by C2 interpolation (see docs/FREEEOS.md); He3 and composition evolution unavailable"
                     : "EOS lacks partial ionization and molecules",
                 result.converged ? "true" : "false");
     json_string(result.message);

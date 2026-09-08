@@ -1,0 +1,145 @@
+{
+  "recorded_date": "2026-09-07",
+  "common_physics": "0.1 Msun, X=.7 Z=.02 He3=0, metals-as-helium EOS, AESOPUS/TOPS GS98, MLT alpha=1.9, independent .15 Rsun n=1.5 seeds",
+  "model_comparisons": [
+    {
+      "points": 4096,
+      "converged": true,
+      "radius_Rsun": 0.12860617057924117,
+      "luminosity_Lsun": 0.0009756295341667675,
+      "Teff_K": 2844.571875130948,
+      "residual": 4.103384299014579e-10,
+      "correction": 3.063216129537327e-10,
+      "relative_virial_error": -6.584795618769235e-07,
+      "max_eos_maxwell_defect": 0.241779959483132,
+      "eos": "cms19",
+      "atmosphere": "grey",
+      "reproduce": "build/apps/ember-equilibrium 4096 .1 .15 --eos cms19 --hot-opacity tops --seed-index 1.5 --atmosphere grey"
+    },
+    {
+      "points": 4096,
+      "converged": true,
+      "radius_Rsun": 0.1293857845165482,
+      "luminosity_Lsun": 0.00093704852137273,
+      "Teff_K": 2807.52620526832,
+      "residual": 7.509240359492606e-10,
+      "correction": 2.696979603389932e-09,
+      "relative_virial_error": -6.442453169830387e-07,
+      "max_eos_maxwell_defect": 0.2412408248398071,
+      "eos": "cms19",
+      "atmosphere": "cond-solar-proxy",
+      "reproduce": "build/apps/ember-equilibrium 4096 .1 .15 --eos cms19 --hot-opacity tops --seed-index 1.5 --atmosphere cond-solar-proxy"
+    },
+    {
+      "points": 4096,
+      "converged": true,
+      "radius_Rsun": 0.12857761972144635,
+      "luminosity_Lsun": 0.001006993904745988,
+      "Teff_K": 2867.481337495949,
+      "residual": 9.608598345483989e-11,
+      "correction": 2.842020432111012e-10,
+      "relative_virial_error": -6.538466809091759e-07,
+      "max_eos_maxwell_defect": 4.440892098500626e-16,
+      "eos": "freeeos",
+      "atmosphere": "grey",
+      "reproduce": "build/apps/ember-equilibrium 4096 .1 .15 --eos freeeos --hot-opacity tops --seed-index 1.5 --atmosphere grey"
+    },
+    {
+      "points": 4096,
+      "converged": true,
+      "radius_Rsun": 0.12973874648523462,
+      "luminosity_Lsun": 0.0009485756555706886,
+      "Teff_K": 2812.287557058768,
+      "residual": 6.602241100206058e-13,
+      "correction": 6.763439369337424e-12,
+      "relative_virial_error": -6.396450834555978e-07,
+      "max_eos_maxwell_defect": 4.440892098500626e-16,
+      "eos": "freeeos",
+      "atmosphere": "cond-solar-proxy",
+      "reproduce": "build/apps/ember-equilibrium 4096 .1 .15 --eos freeeos --hot-opacity tops --seed-index 1.5 --atmosphere cond-solar-proxy"
+    }
+  ],
+  "combined_change_from_cms19_grey": {
+    "radius_fraction": 0.008806544047554876,
+    "luminosity_fraction": -0.027729663410798855,
+    "Teff_K": -32.28431807217976
+  },
+  "fine_eos_grid_dex": 0.0125,
+  "nongrey_mesh_refinement": [
+    {
+      "points": 1024,
+      "converged": true,
+      "radius_Rsun": 0.12974187951414998,
+      "luminosity_Lsun": 0.0009485454114117259,
+      "Teff_K": 2812.231184482225,
+      "residual": 2.53401681774121e-11,
+      "correction": 2.616529543353082e-11,
+      "relative_virial_error": -1.024955056438959e-05,
+      "max_eos_maxwell_defect": 4.440892098500626e-16
+    },
+    {
+      "points": 2048,
+      "converged": true,
+      "radius_Rsun": 0.1297245413166521,
+      "luminosity_Lsun": 0.0009492765360999922,
+      "Teff_K": 2812.960897232742,
+      "residual": 2.373845535796215e-10,
+      "correction": 7.131507801370499e-10,
+      "relative_virial_error": -2.559839424542965e-06,
+      "max_eos_maxwell_defect": 3.33066907387547e-16
+    },
+    {
+      "points": 4096,
+      "converged": true,
+      "radius_Rsun": 0.12973874648519357,
+      "luminosity_Lsun": 0.0009485756555728257,
+      "Teff_K": 2812.287557060798,
+      "residual": 5.830779206045092e-13,
+      "correction": 2.023468312198651e-12,
+      "relative_virial_error": -6.396450853429769e-07,
+      "max_eos_maxwell_defect": 4.440892098500626e-16
+    }
+  ],
+  "eos_grid_refinement": {
+    "coarse_grid_dex": 0.025,
+    "coarse_model": {
+      "points": 1024,
+      "converged": true,
+      "radius_Rsun": 0.12974574428243107,
+      "luminosity_Lsun": 0.000948349233541227,
+      "Teff_K": 2812.04388455036,
+      "residual": 2.539817173463413e-13,
+      "correction": 3.528849080513406e-12,
+      "relative_virial_error": -1.024955082051804e-05,
+      "max_eos_maxwell_defect": 4.440892098500626e-16
+    },
+    "fine_model": {
+      "points": 1024,
+      "converged": true,
+      "radius_Rsun": 0.12974187951414998,
+      "luminosity_Lsun": 0.0009485454114117259,
+      "Teff_K": 2812.231184482225,
+      "residual": 2.53401681774121e-11,
+      "correction": 2.616529543353082e-11,
+      "relative_virial_error": -1.024955056438959e-05,
+      "max_eos_maxwell_defect": 4.440892098500626e-16
+    },
+    "radius_fraction": -2.978724506508268e-05,
+    "luminosity_fraction": 0.00020686247593237894
+  },
+  "bhac15_5Gyr": {
+    "reference": {
+      "radius_Rsun": 0.12405347132384649,
+      "luminosity_Lsun": 0.0008714574420141362,
+      "Teff_K": 2811.0
+    },
+    "fractional_offsets": {
+      "radius_Rsun": 0.04582923073991618,
+      "luminosity_Lsun": 0.08849337883708319,
+      "Teff_K": 0.00045804235459545595
+    },
+    "Teff_difference_K": 1.2875570587680158,
+    "provenance": "../LITERATURE_COMPARISON.md"
+  },
+  "qualification": "Static fixed-composition models, not age matched; source-fit joins and atmosphere-mixture proxy remain approximations. Neither stellar R/L nor EOS-response errors show established asymptotic grid convergence."
+}

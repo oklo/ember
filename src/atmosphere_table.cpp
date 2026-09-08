@@ -11,13 +11,14 @@ namespace {
 bool positive(double x) { return std::isfinite(x) && x > 0.0; }
 }
 
-TabulatedAtmosphere::TabulatedAtmosphere(const Eos& eos, const std::filesystem::path& path)
-    : eos_(eos) {
+TabulatedAtmosphere::TabulatedAtmosphere(const Eos& eos, const std::filesystem::path& path, Mixture mixture)
+    : eos_(eos), mixture_(mixture) {
   std::ifstream in(path);
   if (!in) throw std::runtime_error("TabulatedAtmosphere: cannot open " + path.string());
   read(in);
 }
-TabulatedAtmosphere::TabulatedAtmosphere(const Eos& eos, std::istream& in) : eos_(eos) { read(in); }
+TabulatedAtmosphere::TabulatedAtmosphere(const Eos& eos, std::istream& in, Mixture mixture)
+    : eos_(eos), mixture_(mixture) { read(in); }
 
 void TabulatedAtmosphere::read(std::istream& in) {
   auto label = [&](const char* expected) {
@@ -27,11 +28,18 @@ void TabulatedAtmosphere::read(std::istream& in) {
   };
   label("EMBER_ATMOSPHERE");
   int version = 0; in >> version;
-  if (!in || version != 1) throw std::runtime_error("TabulatedAtmosphere: unsupported version");
+  if (!in || (version != 1 && version != 2)) throw std::runtime_error("TabulatedAtmosphere: unsupported version");
   label("source"); in >> std::quoted(source_);
   if (!in || source_.empty()) throw std::runtime_error("TabulatedAtmosphere: missing provenance");
   label("tau"); in >> tau_;
   if (!in || !positive(tau_)) throw std::runtime_error("TabulatedAtmosphere: invalid optical depth");
+  if (version == 2) {
+    label("composition_proxy"); in >> std::quoted(composition_proxy_);
+    if (!in || composition_proxy_.empty())
+      throw std::runtime_error("TabulatedAtmosphere: missing composition approximation");
+    if (mixture_ != Mixture::allow_documented_proxy)
+      throw std::invalid_argument("TabulatedAtmosphere: explicit solar-mixture proxy selection required");
+  }
   label("composition");
   for (double& x : composition_.X) {
     in >> x;

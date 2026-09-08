@@ -15,17 +15,21 @@ namespace ember {
 // See docs/ATMOSPHERE.md for the versioned, whitespace-delimited format.
 class TabulatedAtmosphere final : public Atmosphere {
 public:
-  TabulatedAtmosphere(const Eos&, const std::filesystem::path&);
-  TabulatedAtmosphere(const Eos&, std::istream&);
+  enum class Mixture { exact, allow_documented_proxy };
+  TabulatedAtmosphere(const Eos&, const std::filesystem::path&, Mixture = Mixture::exact);
+  TabulatedAtmosphere(const Eos&, std::istream&, Mixture = Mixture::exact);
   AtmosphereState eval(double Teff, double gravity, const Composition&) const override;
   bool covers(double Teff, double gravity, const Composition&) const;
   const char* name() const override { return source_.c_str(); }
   const Composition& composition() const { return composition_; }
   double tau_match() const { return tau_; }
+  const std::string& composition_approximation() const { return composition_proxy_; }
 private:
   void read(std::istream&);
   const Eos& eos_;
   std::string source_;
+  std::string composition_proxy_;
+  Mixture mixture_;
   Composition composition_{};
   double tau_{};
   std::vector<double> logTeff_, logg_, logT_, logPg_;

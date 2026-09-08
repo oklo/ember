@@ -1,11 +1,34 @@
 # Low-mass equilibrium: published models and observed stars
 
+## Updated EOS and non-grey reference (2026-09-07)
+
+The new 4096-point FreeEOS-potential/COND model gives R=.12973875 Rsun,
+L=.00094857566 Lsun and Teff=2812.29 K. Relative to the same BHAC15 5-Gyr
+reference below, its offsets are **+4.6% in R, +8.8% in L and +1.3 K**.
+The temperature and luminosity offsets shrink while the radius offset grows.
+Nothing was tuned to the published model. Matching tau=100 does not make
+the older COND atmosphere identical to BHAC15's atmosphere physics.
+
+This model has exact thermodynamic identities for its implemented potential,
+with declared source-fit regularization, metals-as-helium EOS and unmatched
+solar atmosphere mixture. He3 remains zero and there is no assigned age.
+See [the updated calculation and controlled comparisons](EQUILIBRIUM.md)
+and [EOS accuracy qualifications](FREEEOS.md).
+
+**The remaining tables, including all observed-star mass runs, describe
+the retained CMS19/grey checkpoint.** Those observed-star calculations have
+not yet been repeated with the new physics; their error estimates must not
+be attached to the new reference model.
+
+## Retained CMS19/grey comparisons
+
 Checked 2026-09-07 against the authors' original solar-metallicity
 [BHAC15 tracks and internal structure](https://perso.ens-lyon.fr/isabelle.baraffe/BHAC15dir/BHAC15_tracks%2Bstructure)
 and [BCAH98 solar grid](https://perso.ens-lyon.fr/isabelle.baraffe/BCAH98_models.1).
 Mass is exactly .100 Msun; published columns are linearly interpolated in
-log age to 5 Gyr. Ember is the 4096-point static model documented in
-[EQUILIBRIUM.md](EQUILIBRIUM.md), with no assigned evolutionary age.
+log age to 5 Gyr. Ember here is the 4096-point CMS19/grey model archived in
+[results/equilibrium_m010.json](results/equilibrium_m010.json), with no
+assigned evolutionary age.
 
 | Quantity | Ember | BHAC15, 5 Gyr | Ember offset |
 |---|---:|---:|---:|
@@ -34,7 +57,7 @@ EOS consistency defects in ember, plus unmatched composition. BHAC15 uses
 interior Y=.28 and a revised solar mixture with Z=.0153, while ember uses
 X=.7, Y=.28, Z=.02 with GS98 opacity and an explicit metals-as-helium EOS
 approximation. BHAC15 couples its interior to a detailed atmosphere at
-tau=100; ember currently uses a radiative Eddington grey boundary at tau=2/3.
+tau=100; this CMS19 checkpoint uses an Eddington grey boundary at tau=2/3.
 See [Baraffe et al. (2015)](https://arxiv.org/abs/1503.04107) for their physics.
 
 Ember also freezes He3=0. This is not an age-matched composition, but it

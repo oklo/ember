@@ -64,7 +64,7 @@ one composition and matching optical depth. It interpolates `log10 T` and
 `log10 Pgas` bilinearly, then adds radiation pressure and inverts the EOS.
 Derivatives differentiate that same interpolation and pressure conversion.
 They are cellwise, with possible jumps at grid lines. No corner overshoot,
-table extrapolation, composition substitution, or implicit grey fallback is
+table extrapolation, silent composition substitution, or implicit grey fallback is
 performed.
 
 The whitespace-delimited format is versioned:
@@ -87,17 +87,27 @@ an evolving surface composition will require appropriately sourced grids and
 composition interpolation. Malformed headers, duplicate axis values, missing
 nodes, non-finite values, and extra trailing data are errors.
 
-**No production atmosphere grid is bundled yet.** The only table is
-`tests/data/synthetic_atmosphere.dat`, a labeled power-law test fixture.
-Attempts on 2026-09-07 to retrieve the
-[BT-Settl AGSS2009 structures](http://phoenix.ens-lyon.fr/Grids/BT-Settl/AGSS2009/STRUCTURES/)
-timed out over HTTP and HTTPS. The public
-[PHOENIX spectra description](https://lydu.ens-lyon.fr/phoenix/doc/spectra.html)
-describes spectral flux files; those cannot supply an interior pressure
-boundary. Importing structures remains work: verify optical-depth definition
-(Rosseland versus a reference wavelength), gas versus total pressure,
-composition, units, and model provenance before conversion. Version the
-resulting physical numbers with the code.
+Version 2 adds `composition_proxy "description"` between `tau` and
+`composition`. In this version `composition` is the permitted interior
+query, not a claim about the native atmosphere abundances. It requires
+explicit construction with `Mixture::allow_documented_proxy`. Version 1
+retains the exact-composition contract and existing synthetic tests.
+
+**A physical AMES-COND-2000 boundary grid is now bundled**, extracted from
+checksum-pinned MESA tau=100 material-pressure and temperature data.
+The selected Teff=1800..3300 K, log g=3.5..6 rectangle excludes all MESA
+grey-fill, extrapolation and transition-smoothing cells. The native GN93
+solar atmosphere is an explicitly declared proxy for ember's X=.7,Z=.02
+interior, with unmatched detailed mixture and helium abundance. See
+[data provenance and reproduction](../data/atmosphere/README.md).
+
+Select it with `--atmosphere cond-solar-proxy`. `--tau-top` applies only
+to grey integrations and is rejected with this option. At Teff=2800 K,
+log g=5, the original tau=100 state is T=4081.407 K and
+Pgas=1.555799e7 dyn/cm². The stellar seed now uses this local matching
+temperature; using Teff at a deep boundary was incorrect. Tests check
+source values, analytic sensitivities, explicit proxy selection and bounds.
+The imported states come from structures, not spectral flux files.
 
 ## Surface equations
 

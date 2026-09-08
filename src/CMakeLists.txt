@@ -6,6 +6,7 @@ add_library(ember
   opacity_blend.cpp
   eos_components.cpp
   eos_cms19.cpp
+  eos_helmholtz.cpp
   nuclear_pp.cpp
   convection.cpp
   atmosphere_grey.cpp
