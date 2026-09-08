@@ -2,8 +2,10 @@ add_library(ember
   composition.cpp
   fermi.cpp
   interp.cpp
-  opacity_ferguson.cpp
+  opacity_table.cpp
+  opacity_blend.cpp
   eos_components.cpp
+  eos_cms19.cpp
   nuclear_pp.cpp
   convection.cpp
   atmosphere_grey.cpp

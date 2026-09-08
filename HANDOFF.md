@@ -1,12 +1,28 @@
 # ember — handoff
 
-Written 2026-09-07 at the end of a long session. Read this first; it is meant
-to be the only thing you need.
+Updated 2026-09-07. Read this first, then `docs/EQUILIBRIUM.md` and
+`docs/CMS19.md`. This checkpoint includes the physical static-equilibrium
+solver, its source data and audits, and literature/observational comparisons.
+Use `git status` and `git log` to distinguish subsequent work.
 
-Updated 2026-09-07 after implementing central boundary conditions, Henyey
-block elimination, and complete-model relaxation against a Lane–Emden
-benchmark. The latest checkpoint is described below; use git for its hash.
+**The 0.1 Msun static model now converges with CMS19 + AESOPUS/TOPS + MLT
++ grey atmosphere.** At 4096 points: R=.12860617 Rsun, L=.00097562953 Lsun,
+Teff=2844.57 K. Thirteen CTest suites pass. Fine-mesh R/L agreement and
+independent nuclear/virial checks pass, but **this is experimental static
+physics, not a validated evolutionary model**. The source EOS has a local
+pressure/entropy inconsistency reaching 24% along this model and a separate
+internal-energy join defect. CMS19 internal energy is explicitly unavailable;
+positive-dt structure and central boundary calls reject it. Resolve EOS
+consistency and physical atmosphere data next.
 
+Published-model and observational comparisons are recorded in
+`docs/LITERATURE_COMPARISON.md`. At .100 Msun, ember is 3.7% larger and
+12.0% brighter than BHAC15 at 5 Gyr, with Teff 34 K hotter. Additional
+4096-point runs at the adopted masses of EBLM J2114−39 B, TRAPPIST-1,
+and Proxima give radius offsets +2.3%, -1.3%, and +2.1%; TRAPPIST-1 is
+15.4% overluminous and 108 K too hot at its adopted central mass.
+Measurement dependencies and numerical checks are documented there;
+these are not formal statistical rejection levels or age-matched fits.
 ---
 
 ## 1. What this is, and why it exists
@@ -63,105 +79,181 @@ table returns one. Those must surface.
 
 ## 3. Current state
 
-Eight test suites, all passing (EOS, opacity, nuclear, structure, convection,
-atmosphere, Henyey, relaxation). A complete **controlled radiative polytrope**
-now converges; a physical stellar equilibrium and an evolutionary run remain
-pending. The benchmark has constant heating and opacity and an explicitly
-artificial atmosphere. It must not be reported as the 0.1 M☉ scientific run.
+Thirteen suites pass: eos, opacity, dense_opacity, nuclear, structure,
+convection, atmosphere, henyey, relaxation, stellar_equilibrium, cms19,
+tops and low_mass_equilibrium. The independent n=3 radiative-polytrope
+benchmark and the older ionized-EOS 0.5 Msun benchmark are retained.
 
-| Module | File | Status |
+| Module | Implementation | State |
 |---|---|---|
-| Constants | `include/ember/constants.hpp` | CODATA 2018, IAU 2015 nominal solar |
-| Composition | `composition.{hpp,cpp}` | 8 species, AAG21 mixture, scaled to (X,Z) |
-| EOS interface | `eos.hpp` | `EosResponse` includes cp, delta, grad_ad derivatives; missing response implementations throw; `rho_from_PT` reports failure |
-| EOS components | `eos_component.hpp`, `eos_components.cpp` | ions, radiation, relativistic FD electrons, with component Hessians |
-| Composite EOS | `eos_composite.hpp` | additive; == monolithic to 1e-12 over 5 regimes |
-| Fermi–Dirac | `src/fermi.{hpp,cpp}` | relativistic, centered density-constrained Hessians; shell split at the Fermi surface |
-| Opacity | `opacity.hpp`, `opacity_ferguson.{hpp,cpp}` | Ferguson 2005, monotone, edges throw |
-| Interpolation | `interp.{hpp,cpp}` | monotone Hermite; parameter derivatives follow active limiter branches |
-| Nuclear | `nuclear.hpp`, `nuclear_pp.cpp` | pp chains, He3 explicit; heating derivatives include the same mass defect, neutrinos, and screening as the value |
-| Model | `model.hpp` | (ln r, ln ρ, ln T, L); solver mesh starts at positive m[0] and ends at M |
-| Structure | `structure.{hpp,cpp}` | 4 residuals + analytic Jacobian; value-only path and numerical Jacobian retained for tests |
-| Convection | `convection.{hpp,cpp}` | BV58 MLT, Schwarzschild criterion, analytic gradient partials; wired into transport |
-| Atmosphere | `atmosphere.hpp`, `atmosphere_grey.cpp` | Eddington grey, varying opacity, adaptive integration and analytic sensitivities |
-| Atmosphere tables | `atmosphere_table.{hpp,cpp}` | strict reader and bilinear interpolation; **no production grid yet** |
-| Surface boundary | `boundary.{hpp,cpp}` | two surface residuals and analytic 2x4 Jacobian, assembled in relaxation |
-| Central boundary | `boundary.{hpp,cpp}` | regular unresolved central sphere: r³=3m/(4πρ), L=m*eps_total; analytic derivatives |
-| Henyey | `henyey.{hpp,cpp}` | pivoted block elimination, linear work/storage; checks original linear equations |
-| Relaxation | `relaxation.{hpp,cpp}` | damped Newton, fixed mesh/composition, explicit failure, residual AND correction convergence |
-| Continuum benchmark | `examples/radiative_polytrope.hpp`, `apps/polytrope.cpp` | independent n=3 Lane–Emden reference; JSON output via ember-polytrope |
-| Losses | `losses.hpp` | **declared, null** — plasmon neutrinos for massive WDs |
-| Conduction | `conduction.hpp` | **declared, unimplemented** — Cassisi 2007 |
+| Constants/composition | `constants.hpp`, `composition.{hpp,cpp}` | CODATA 2018, nominal solar units, 8 species, AAG21 metal helper |
+| Analytic EOS | `eos_components.cpp`, `eos_composite.hpp`, `fermi.{hpp,cpp}` | ions, radiation, relativistic FD electrons; component Hessians |
+| CMS19 EOS | `eos_cms19.{hpp,cpp}`, `src/jet2.hpp` | original pure-H/He TP density/entropy, additive-volume mixture, actual interpolation Hessians, strict fluid support; **static only** |
+| EOS interface | `eos.hpp` | transport response derivatives, optional density bounds, virtual PT inversion, explicit internal-energy availability |
+| Opacity | `opacity_table.{hpp,cpp}`, source wrappers | strict monotone tables in native log R or log rho, fixed Z, single-X support |
+| Low-T opacity | `opacity_aesopus.hpp`, `opacity_ferguson.hpp` | AESOPUS 2.1 gas log R to 6; Ferguson with grains also available |
+| Hot opacity | `opacity_opal.hpp`, `opacity_tops.hpp` | OPAL log R to 1; TOPS two un-clamped rectangles at X=.7, Z=.02 |
+| Blending | `opacity_blend.{hpp,cpp}` | smooth ln-kappa blends, analytic derivatives, strict overlap intersection |
+| Nuclear | `nuclear_pp.cpp` | pp chains, explicit He3, derivatives of actual mass-defect heating and weak screening |
+| Structure | `structure.{hpp,cpp}` | four residuals and analytic Jacobian; independent numerical checks; unsupported positive-dt energy rejected |
+| Convection | `convection.{hpp,cpp}` | BV58 MLT, Schwarzschild criterion, bounded cubic and analytic response |
+| Atmosphere | `atmosphere_grey.cpp` | radiative Eddington T(tau), variable opacity, adaptive integration and analytic sensitivities; EOS/opacity bounds intersect |
+| Atmosphere table | `atmosphere_table.{hpp,cpp}` | strict reader and interpolation; **only synthetic test data** |
+| Boundaries | `boundary.{hpp,cpp}` | regular unresolved central sphere and grey surface, analytic derivatives |
+| Henyey/relaxation | `henyey.cpp`, `relaxation.cpp` | pivoted blocks, iterative refinement, damped Newton with residual AND undamped correction checks |
+| Seeds/apps | `examples/stellar_seed.hpp`, `apps/equilibrium.cpp` | n=3 or n=1.5 Lane–Emden seed; rebuild mass after envelope adjustment; structured diagnostics |
+| Missing evolution | interfaces only | caloric/composition physics, mixing, adaptive mesh and timestep controller incomplete |
+| Massive WD hooks | `losses.hpp`, `conduction.hpp` | declared, unimplemented; not the current task |
 
-Data: `data/opacity/ferguson_gs98_z020.dat` (versioned with the code
-deliberately — a result is reproducible only if its numbers travel with it).
+Data travel with the code. Source hashes, strict coverage and reproduction
+commands are in `data/eos/README.md` and `data/opacity/README.md`.
+All six new imports were reproduced byte for byte with stdlib Python scripts:
 
-Benchmark: `build/apps/ember-polytrope 256 > out/polytrope-256.json` after
-`mkdir -p out`. At 64/128/256 points, radius errors are 3.140%/0.8147%/0.2049%,
-with 6/7/7 accepted Newton updates. This checks second-order spatial
-convergence independently of the tiny nonlinear residual. See
-`docs/HENYEY.md` for the equations, units, failure behavior, and limitations.
+- `scripts/import_opal.py`: 9,880 original GS98 Z=.02 cells, log T=4..7.1,
+  log R=-8..1, 10 X planes. The original source is ragged outside this box.
+- `scripts/import_aesopus.py`: 149,810 original AESOPUS 2.1 **gas** cells,
+  log T=2..4.5, log R=-8..6, 10 X planes. Archive filenames retain 2.0 but
+  headers identify 2.1; selected tables do not include grains.
+- `scripts/import_cms19.py`: 121×441 original (log rho, log S) pairs per
+  pure component on the source TP grid. Runtime masks reject unphysical
+  corners. No source energy values are imported or repaired.
+- `scripts/import_tops.py`: 3150 low-rectangle and 2556 high-rectangle cells
+  (overlapping), native rho grid, only X=.7, Z=.02. Every server-substituted
+  density is excluded. Exact returned text and request are versioned under
+  `data/opacity/sources/`; a fresh service request is not required to build.
+
+The generic `TabulatedOpacity::Range` now names its density fields
+`logD_min/max` and includes the `DensityAxis`. log R requires the -3 term
+in the temperature derivative; native log rho does not. All strict source
+bounds remain enforced. TOPS itself blends rectangles over log T=5.6..5.7;
+the stellar driver blends AESOPUS to its selected hot opacity over 4.4..4.5.
 
 ---
 
-## 4. Immediate next steps, in order
+## 4. Reproduce and continue
 
-**Next active dependency:** high-temperature opacity from item 8, to permit
-an actual stellar interior with the analytic EOS and pp heating. The Henyey
-machinery is now tested, but Ferguson alone cannot reach interior
-temperatures. A physical equilibrium and a suitable initial model are the
-next scientific solver validation; the polytrope is only controlled physics.
+### New 0.1 Msun static reference
 
-1. **Done: mixing-length convection** in the transport equation, plus the
-   Schwarzschild criterion. The bounded cubic retains small gradient
-   differences in both limits; the transport row remains in plain gradient
-   form. Tests cover flux conservation, element cooling, gradient derivatives,
-   and row conditioning with ∇/∇_rad < 1e-6. See `docs/CONVECTION.md` for the
-   equations and coefficient convention. This is optically thick interior
-   MLT; composition mixing and optically thin losses remain separate work.
-2. **Atmosphere boundary condition.** Tabulated model atmospheres
-   (PHOENIX/BT-Settl for M dwarfs and BDs) still need **physical data imported**.
-   Grey fallback, table reader, and surface residuals are implemented. The
-   BT-Settl AGSS2009 STRUCTURES archive timed out over HTTP/HTTPS this session;
-   spectrum files are not pressure-temperature structures. The only added
-   atmosphere table is a labeled synthetic test fixture under `tests/data`.
-   See `docs/ATMOSPHERE.md` for format, sources, and integration conventions.
-   The grey fallback uses radiative T(tau), not a convective atmosphere.
-3. **Done: analytic Jacobian assembly.** `EosResponse` now supplies the
-   transport derivatives from component Hessians. Zone assembly propagates
-   module derivatives through all four equations; `zone_equations` and
-   `zone_residual_numerical` remain independent of the transport-response
-   path for tests. Checks cover contraction, degenerate helium, finite and
-   efficient convection, and zero/inward luminosity. See `docs/JACOBIAN.md`.
-   The old left-endpoint gravitational-energy difference remains; its
-   discretization order is not solved by differentiating it. Positive `dt`
-   now requires a previous model on the identical mass mesh.
-4. **Done: Henyey block elimination and central boundary conditions.**
-   Six active rows eliminate four variables with row pivoting; two
-   constraints propagate outward and close with the surface equations.
-   `relax` uses fixed physical units and a backtracking line search. It
-   requires both residual and undamped correction convergence, and returns
-   the last accepted model with an explicit failure status on exhaustion.
-   Positive `dt` supports a fixed previous model, but no age/composition
-   advance or time-step controller is implemented. A small positive inner
-   mass replaces the impossible `ln r` at m=0; check that sphere's size.
-5. **Adaptive mesh** — refine at burning shells, coarsen in isothermal cores.
-   Must carry a *density* term in the smoothness measure (see §5 item 4).
-6. **Time-step control** by estimated error, not iteration-count heuristics.
-7. **CMS19 / Chabrier–Debras tabulated H/He EOS**, blended to the analytic
-   form outside the table.
-8. **Conduction** (Cassisi 2007) + `CombinedOpacity`; **OPAL/OPLIB** above
-   31,600 K where Ferguson stops.
-9. **CNO out of equilibrium** (runs once on the pre-MS and never again).
-10. 0.1 M☉ end to end. GitHub pushes are authorized before this milestone.
+```
+mkdir -p out
+build/apps/ember-equilibrium 4096 .1 .15 --eos cms19 --hot-opacity tops --seed-index 1.5 > out/equilibrium-m010-reference.json
+```
 
-The default α = 1.9 is **not calibrated for ember**. Do not import the
-Fortran solar calibration as if the EOS and atmosphere were identical.
+Use 2048 points for a smaller working model. Positional arguments are
+points, mass/Msun, seed radius/Rsun. Radius is free to relax. `--tau-top`
+can be set explicitly; default .001 for CMS19, 1e-6 for the ionized EOS.
+All composition is fixed at X=.7, Y=.28, Z=.02, He3=0. CMS19 explicitly
+represents metals as helium (effective Y=.3). MLT alpha=1.9 is uncalibrated.
+The surface is a radiative grey atmosphere matched at tau=2/3. No grain
+opacity, conduction, composition mixing or age advancement is included.
 
-Physical equilibrium work can use the grey fallback while the physical
-atmosphere grid is sourced, once opacity spans the interior. Do not mark
-tabulated atmosphere physics complete merely because its reader passes
-synthetic tests.
+At 4096 points: 12 updates, residual 4.10338e-10, undamped correction
+3.06322e-10, R=.12860617 Rsun, L=.00097562953 Lsun, Teff=2844.5719 K,
+Tc=4.5663102e6 K, rhoc=366.87522 g/cm³. Nuclear luminosity agrees with
+surface L to ~2e-15 relative; independent virial error is -6.5848e-7.
+The unresolved center is 1.23e-10 of the mass. All profiles are ordered.
+
+| Points | R/Rsun | L/Lsun | Teff (K) | Absolute virial error |
+|---:|---:|---:|---:|---:|
+| 128 | .12911938 | .0009629408 | 2829.64 | 6.856e-4 |
+| 256 | .12935265 | .0009420455 | 2811.62 | 1.699e-4 |
+| 512 | .12885921 | .0009637381 | 2833.08 | 4.229e-5 |
+| 1024 | .12862818 | .0009746770 | 2843.63 | 1.055e-5 |
+| 2048 | .12861667 | .0009751461 | 2844.10 | 2.635e-6 |
+| 4096 | .12860617 | .0009756295 | 2844.57 | 6.585e-7 |
+
+Coarse thermal results are nonmonotonic. Fine meshes agree to ~.1% in L
+and .02% in R, but R/L do not yet show clean second-order convergence;
+virial error does. Do not call a tiny nonlinear residual spatial accuracy.
+Doubling the atmosphere starting column to .002 changes the independent
+256-point R/L by .000402%/.00259%; a same-mass-mesh 2048-point perturbation
+also passes in `test_low_mass_equilibrium`. This does not validate grey
+atmospheric physics. Full current JSON/log is in ignored `out/`; compact
+reference metadata are versioned in `docs/results/equilibrium_m010.json`.
+
+### EOS dependency — read before enabling evolution
+
+`docs/CMS19.md` gives the implementation and independent source audit.
+CMS19 response derivatives follow the **actual interpolated entropy**.
+The Maxwell identity D=P*delta/(rho*T*cp*grad_ad)-1 is not artificially
+forced to zero. Max |D|=.24178 in the 4096-point star at T=27304 K,
+rho=.12394 g/cm³, m/M=.99999310; mass RMS=.0043487. Small outer mass is
+not evidence of small influence on R or L.
+
+`python3 scripts/audit_cms19_energy.py /tmp/ember-eos2019.tar.gz` reproduces
+both defects directly from original source columns:
+
+- Pure H at log T=4.45, log P[GPa]=1.35 has D=-.26498098, before ember
+  interpolation. This is a source-version consistency issue as well as an
+  interpolation accuracy question.
+- Pure He at rho=1 g/cm³ drops in internal energy from 8.88587e13 to
+  8.22697e13 erg/g between T=891251 and 1e6 K. Secant dU/dT=-6.05890e7
+  erg/g/K while listed entropy cv=+9.72478e7.
+
+Do not fabricate internal energy, silently repair table cells, loosen the
+Maxwell check, or replace an entropy-derived adiabat just to make an
+identity pass. Exploratory U-TS/free-energy and pressure-integrated-potential
+reconstructions developed negative heat capacities at source joins and
+were rejected. They exist only as ignored scratch, not library physics.
+`Cms19Eos` has no caloric state or He3 support; energy and unavailable
+abundances are NaN and dt>0 zones/center throw explicitly.
+
+The runtime conservatively masks whole 4×4 stencils by source density,
+fluid/quantum limits, and log T=3.2..7.3. It is a selected computational
+subset, not proof of accuracy everywhere inside. Grey tau_top=1e-6 falls
+below its density support; defaulting CMS19 to .001 is explicit and tested.
+Never extrapolate a surface integration below the EOS density floor.
+
+### Next actions, in order
+
+1. Resolve EOS pressure/entropy/energy consistency through dissociation,
+   ionization and model joins. Assess corrected source data or a validated
+   thermodynamic-potential implementation against the saved audit. Keep
+   static-only guards until energy identities and heat capacities pass.
+   Support He3 and composition derivatives before attempting burning evolution.
+2. Import actual pressure-temperature model atmosphere structures and replace
+   the grey boundary. BT-Settl/PHOENIX spectrum files are not structures;
+   earlier STRUCTURES archive retrieval timed out. Existing atmosphere-table
+   files are synthetic test fixtures only. See `docs/ATMOSPHERE.md`.
+3. Reassess 0.1 Msun equilibrium with those improvements and independent
+   stellar benchmarks. Extend hot opacity to evolving X; current TOPS
+   supports only .7. Add conduction when physically required.
+4. Adaptive envelope/core mesh with a density smoothness term, convective
+   composition mixing, then time-step error control and composition advance.
+5. Follow the original end-to-end 0.1 Msun milestone; massive WD ion physics
+   remains future work. GitHub pushes are authorized, as recorded in §1.
+
+### Retained old runs and practical source notes
+
+```
+build/apps/ember-polytrope 256 > out/polytrope-256.json
+build/apps/ember-equilibrium 512 .5 .6 > out/equilibrium-m050.json
+build/apps/ember-equilibrium 128 .1 .2 > out/old-ionized-m010-failure.json
+```
+
+The first two converge. The last uses the old ionized EOS/OPAL/n=3 defaults
+and still fails at the OPAL density edge; it is retained as an explicit
+failure diagnostic. The .5 Msun case has R=.94219963 Rsun, L=.019877124
+Lsun, Teff=2232.77 K; its inflated cool envelope is not realistic. The n=3
+stellar seed also proved poor for the new CMS19 .1 Msun model; n=1.5
+converges. This changes only initialization, never the solved equations.
+
+Original EOS archive URL:
+`https://perso.ens-lyon.fr/gilles.chabrier/DirEOS/DirEOS2019.tar.gz`.
+The source README and 2021 README recommend the 2019 IVL tables for stars,
+2021 interactions for brown dwarfs; never use 2021 effective H as pure H.
+Temporary originals are `/tmp/ember-eos2019.tar.gz`,
+`/tmp/ember-eos2021.tar.gz`, `/tmp/ember-aesopus21-gs98.zip`, and
+`/tmp/ember-GS98hz.gz`. Hashes and commands are documented with the data.
+They are not needed for normal compilation or tests.
+
+TOPS: `/results` can return a stale prepared calculation despite new
+parameters. Submit through `/submit`, then verify returned composition and
+grid dimensions before import. The final archived request uses the public
+form identifiers, a blank mixture name, and the exact 21-element GS98 mass
+mixture. Its returned warnings identify clamped densities; every such
+pair is excluded. Request-specific curl `-k` was needed for the local
+certificate-chain failure. All data needed for TOPS reimport are versioned.
 
 ---
 
@@ -242,6 +334,21 @@ From the first complete boundary-value solve:
   line-search restriction. Require a small undamped remaining correction
   as well as a small residual. Physics-domain errors may reject a trial;
   they never authorize table extrapolation or an implicit fallback.
+
+From connecting physical opacity to a stellar trial:
+
+- **Changing a seed's density changes its enclosed mass.** Keeping the old
+  Lane–Emden mass mesh after adjusting envelope density produced folded
+  surface layers. Rebuild the mesh consistently and inspect monotonicity.
+- **Stored points do not establish atmospheric coverage.** The earlier
+  Ferguson trial had every stored point below log R=1, yet its atmosphere
+  reached the edge. AESOPUS has now supplied that missing cool density data;
+  OPAL's hot density limit remains when that source is selected. The new
+  TOPS import supplies the .1 Msun hot dense coverage. Report the failing module explicitly.
+- **A checked correction can need refinement.** Finer stellar meshes exposed
+  a linear backward-error failure absent in the small benchmarks. Correcting
+  the original linear residual fixes this without weakening acceptance.
+  Independent virial integration then verifies spatial hydrostatic accuracy.
 
 ---
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "ember/composition.hpp"
 #include <stdexcept>
+#include <optional>
 
 namespace ember {
 
@@ -10,11 +11,11 @@ namespace ember {
 // accuracy and a factor of five in time.
 struct EosState {
   double P{};        // total pressure, gas + radiation           [dyn/cm^2]
-  double E{};        // specific internal energy                  [erg/g]
+  double E{};        // specific internal energy, if available     [erg/g]
   double S{};        // specific entropy                          [erg/g/K]
   double chiT{};     // dlnP/dlnT at constant rho
   double chiRho{};   // dlnP/dlnrho at constant T
-  double cv{};       // dE/dT at constant rho                     [erg/g/K]
+  double cv{};       // T*dS/dT at constant rho (=dE/dT if E supplied) [erg/g/K]
   double cp{};       // specific heat at constant P               [erg/g/K]
   double grad_ad{};  // dlnT/dlnP at constant S
   double Gamma1{};   // dlnP/dlnrho at constant S
@@ -42,6 +43,12 @@ public:
   virtual ~Eos() = default;
   virtual EosState eval(double T, double rho, const Composition&) const = 0;
   virtual const char* name() const = 0;
+  // A pressure/entropy table can support static structure without a reliable
+  // caloric energy. Such implementations return false and E=NaN; time-
+  // dependent structure must reject them before using E or its derivatives.
+  virtual bool has_internal_energy() const { return true; }
+  struct DensityRange { double min, max; };
+  virtual std::optional<DensityRange> density_range(double, const Composition&) const { return {}; }
   virtual EosResponse eval_with_derivatives(double, double, const Composition&) const {
     throw std::logic_error("Eos: analytic transport derivatives are not implemented");
   }
@@ -51,7 +58,7 @@ public:
   // converges quadratically instead of the fixed-point crawl the F77 used.
   // Invalid states and failure to converge throw; no approximate density is
   // returned as if the pressure constraint had been satisfied.
-  double rho_from_PT(double T, double P, const Composition&,
+  virtual double rho_from_PT(double T, double P, const Composition&,
                      double rho_guess = 0.0) const;
 };
 

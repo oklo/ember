@@ -4,6 +4,9 @@
 #include "ember/structure.hpp"
 #include "ember/eos_composite.hpp"
 #include "ember/opacity.hpp"
+#include "ember/opacity_ferguson.hpp"
+#include "ember/opacity_opal.hpp"
+#include "ember/opacity_blend.hpp"
 #include "ember/constants.hpp"
 #include "ember/convection.hpp"
 #include <algorithm>
@@ -125,6 +128,23 @@ int main() {
 
   // 2. The production Jacobian must differentiate the value-only equations.
   check_jacobian(m, phys, -1.0, nullptr, "low-mass interior");
+  {
+    FergusonOpacity low(std::string(EMBER_DATA_DIR) + "/opacity/ferguson_gs98_z020.dat");
+    OpalOpacity high(std::string(EMBER_DATA_DIR) + "/opacity/opal_gs98_z020.dat");
+    BlendedOpacity tables(low, high);
+    Physics real{&eos, &tables, &nuc, 1.9};
+    Model t = m;
+    t.comp.assign(2, solar_scaled(.7, .02));
+    check_jacobian(t, real, -1.0, nullptr, "OPAL + FD + pp interior");
+    for (double logT : {4.0, 4.23, 4.5}) {
+      for (std::size_t i = 0; i < 2; ++i) {
+        const double lt = logT + (i == 0 ? .001 : -.001);
+        t.y[i].lnT = std::log(10.0) * lt;
+        t.y[i].lnrho = std::log(10.0) * (-2.37 + 3 * (lt - 6));
+      }
+      check_jacobian(t, real, -1.0, nullptr, "opacity transition logT=" + std::to_string(logT));
+    }
+  }
 
   // 3. Mass conservation must be exact for a shell built to satisfy it: place
   //    the outer point at the radius the equation demands and the residual

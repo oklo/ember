@@ -3,6 +3,7 @@
 #include "ember/structure.hpp"
 #include <string>
 #include <vector>
+#include <limits>
 
 namespace ember {
 
@@ -23,7 +24,7 @@ struct RelaxationResult {
   Model model;  // last accepted state, including on failure; input is never modified
   bool converged{};
   std::size_t iterations{};  // accepted Newton updates
-  double residual{}, correction{};
+  double residual{}, correction{std::numeric_limits<double>::infinity()};
   std::string message;
   std::vector<RelaxationIteration> history;
 };

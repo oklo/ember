@@ -4,5 +4,6 @@ compile_commands.json
 *.o
 *.dSYM/
 out/
+__pycache__/
 # Physics tables are small and versioned with the code: a result is only
 # reproducible if the numbers that produced it travel with it.

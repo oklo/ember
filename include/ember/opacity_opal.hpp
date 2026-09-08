@@ -3,9 +3,9 @@
 
 namespace ember {
 // Fixed-Z table; errors at every edge. See data/opacity/README.md for coverage.
-class FergusonOpacity final : public TabulatedOpacity {
+class OpalOpacity final : public TabulatedOpacity {
 public:
-  explicit FergusonOpacity(const std::filesystem::path& file)
-      : TabulatedOpacity(file, "Ferguson+2005 (GS98)") {}
+  explicit OpalOpacity(const std::filesystem::path& file)
+      : TabulatedOpacity(file, "OPAL (GS98, rectangular subset)") {}
 };
 } // namespace ember

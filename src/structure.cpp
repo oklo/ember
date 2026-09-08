@@ -26,6 +26,8 @@ std::optional<Previous> prepare(const Model& m, std::size_t i, const Physics& ph
       || !(m.m[i + 1] > m.m[i]) || !std::isfinite(dt))
     throw std::domain_error("zone_residual: invalid mass interval or time step");
   if (dt <= 0.0) return std::nullopt;
+  if (!phys.eos->has_internal_energy())
+    throw std::logic_error("zone_residual: EOS has no validated internal energy for time dependence");
   if (!prev || prev->size() != m.size() || prev->comp.size() != m.size() || prev->m != m.m)
     throw std::invalid_argument("zone_residual: time dependence requires a previous model on the same mesh");
   const double rho = prev->rho(i);
@@ -67,7 +69,8 @@ Local<N> gather(const Point& point, const Composition& comp, const Physics& phys
     return out;
   };
   q.P = material(e.P, e.P * e.chiT, e.P * e.chiRho);
-  q.E = material(e.E, e.cv * q.T.value, response.dE_dlnRho);
+  if (phys.eos->has_internal_energy())
+    q.E = material(e.E, e.cv * q.T.value, response.dE_dlnRho);
   q.cp = material(e.cp, response.dcp_dlnT, response.dcp_dlnRho);
   q.delta = material(e.delta, response.ddelta_dlnT, response.ddelta_dlnRho);
   q.grad_ad = material(e.grad_ad, response.dgrad_ad_dlnT, response.dgrad_ad_dlnRho);

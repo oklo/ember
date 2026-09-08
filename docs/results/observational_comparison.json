@@ -1,0 +1,193 @@
+{
+  "recorded_date": "2026-09-07",
+  "purpose": "Conditional static-equilibrium comparison at adopted central masses; not an age/composition/activity fit or a statistical significance calculation.",
+  "solar_units": {
+    "radius_cm": 69570000000.0,
+    "luminosity_erg_s": 3.828e+33,
+    "mass_g": 1.988409870698051e+33
+  },
+  "stars": [
+    {
+      "name": "EBLM J2114−39 B",
+      "source": "https://academic.oup.com/mnras/article/530/3/2565/7645099",
+      "measurement_dependencies": "Published Davis et al. 2024 values. Eclipses and RVs anchored to an external primary radius inferred with SED/parallax and stellar models. Secondary L and Teff not measured here.",
+      "observed": {
+        "mass_Msun": 0.0993,
+        "mass_uncertainty_Msun": 0.0033,
+        "radius_Rsun": 0.125,
+        "radius_uncertainty_Rsun": 0.0016,
+        "luminosity_Lsun": null,
+        "luminosity_uncertainty_Lsun": null,
+        "Teff_K": null,
+        "Teff_uncertainty_K": null
+      },
+      "ember": {
+        "radius_Rsun": 0.12786902978794226,
+        "luminosity_Lsun": 0.0009517126590881525,
+        "Teff_K": 2835.112892838801
+      },
+      "offsets_at_adopted_mass": {
+        "radius_percent": 2.2952238303538097
+      },
+      "solve": {
+        "physics": {
+          "eos": "CMS19 pressure/entropy + radiation; metals represented by helium; static only",
+          "opacity": "AESOPUS 2.1 gas + TOPS ATOMIC GS98, Z=0.020, no extrapolation",
+          "opacity_blend_logT": [
+            4.4,
+            4.5
+          ],
+          "atmosphere": "radiative Eddington grey",
+          "tau_top": 0.001,
+          "nuclear": "pp chains, fixed composition, X_He3=0",
+          "composition": "X=0.7, Z=0.02, AAG21 resolved metals (GS98 opacity approximation)",
+          "alpha_mlt": 1.9
+        },
+        "limitations": "CMS19 thermodynamic consistency is approximate; internal energy disabled; finite top column; no grain opacity, conduction, mixing, or evolution; alpha uncalibrated",
+        "converged": true,
+        "points": 4096,
+        "iterations": 13,
+        "residual": 2.101252505326556e-11,
+        "correction": 1.558877888955189e-11,
+        "relative_virial_error": -6.581491149848517e-07,
+        "max_eos_maxwell_defect": 0.2424315830025207,
+        "mass_rms_eos_maxwell_defect": 0.004328938422502952
+      },
+      "refinement_percent_4096_vs_2048": {
+        "radius_cm": -0.009890917072741257,
+        "luminosity_erg_s": 0.060077302117589326,
+        "Teff_K": 0.01996251110500946
+      },
+      "full_output": "out/compare-eblm-j2114-fine.json",
+      "coarse_output": "out/compare-eblm-j2114.json",
+      "reproduce": "build/apps/ember-equilibrium 4096 0.0993 0.15 --eos cms19 --hot-opacity tops --seed-index 1.5 --tau-top 0.001"
+    },
+    {
+      "name": "TRAPPIST-1",
+      "source": "https://arxiv.org/html/2010.01074v2",
+      "measurement_dependencies": "Agol et al. 2021 Table 7: empirical K-band mass-luminosity mass (Mann et al. 2019); radius from adopted mass and transit density; L from Ducrot et al. 2020; Teff from L and R. Errors correlated.",
+      "observed": {
+        "mass_Msun": 0.0898,
+        "mass_uncertainty_Msun": 0.0023,
+        "radius_Rsun": 0.1192,
+        "radius_uncertainty_Rsun": 0.0013,
+        "luminosity_Lsun": 0.000553,
+        "luminosity_uncertainty_Lsun": 1.9e-05,
+        "Teff_K": 2566,
+        "Teff_uncertainty_K": 26
+      },
+      "ember": {
+        "radius_Rsun": 0.11768555462395139,
+        "luminosity_Lsun": 0.0006378861378204762,
+        "Teff_K": 2673.934670195448
+      },
+      "offsets_at_adopted_mass": {
+        "radius_percent": -1.270507865812598,
+        "luminosity_percent": 15.350115338241622,
+        "Teff_K": 107.93467019544778
+      },
+      "solve": {
+        "physics": {
+          "eos": "CMS19 pressure/entropy + radiation; metals represented by helium; static only",
+          "opacity": "AESOPUS 2.1 gas + TOPS ATOMIC GS98, Z=0.020, no extrapolation",
+          "opacity_blend_logT": [
+            4.4,
+            4.5
+          ],
+          "atmosphere": "radiative Eddington grey",
+          "tau_top": 0.001,
+          "nuclear": "pp chains, fixed composition, X_He3=0",
+          "composition": "X=0.7, Z=0.02, AAG21 resolved metals (GS98 opacity approximation)",
+          "alpha_mlt": 1.9
+        },
+        "limitations": "CMS19 thermodynamic consistency is approximate; internal energy disabled; finite top column; no grain opacity, conduction, mixing, or evolution; alpha uncalibrated",
+        "converged": true,
+        "points": 4096,
+        "iterations": 14,
+        "residual": 2.390905251559161e-10,
+        "correction": 1.864969683852102e-10,
+        "relative_virial_error": -6.576132778324251e-07,
+        "max_eos_maxwell_defect": 0.2219735550403449,
+        "mass_rms_eos_maxwell_defect": 0.007315248241490162
+      },
+      "refinement_percent_4096_vs_2048": {
+        "radius_cm": -0.0018142777649110542,
+        "luminosity_erg_s": 0.007872091928873282,
+        "Teff_K": 0.0028751339667509868
+      },
+      "full_output": "out/compare-trappist1-fine.json",
+      "coarse_output": "out/compare-trappist1.json",
+      "reproduce": "build/apps/ember-equilibrium 4096 0.0898 0.14 --eos cms19 --hot-opacity tops --seed-index 1.5 --tau-top 0.001"
+    },
+    {
+      "name": "Proxima Centauri",
+      "source": "https://arxiv.org/abs/1704.08449",
+      "measurement_dependencies": "Ribas et al. 2017: mass inferred by fitting BHAC15 to L and Teff at 4.8 Gyr, hence not independent of BHAC15. R and Teff use SED and interferometric angular-size constraint. L uncertainty from abstract/summary table.",
+      "observed": {
+        "mass_Msun": 0.12,
+        "mass_uncertainty_Msun": 0.003,
+        "radius_Rsun": 0.146,
+        "radius_uncertainty_Rsun": 0.007,
+        "luminosity_Lsun": 0.00151,
+        "luminosity_uncertainty_Lsun": 8e-05,
+        "Teff_K": 2980,
+        "Teff_uncertainty_K": 80
+      },
+      "ember": {
+        "radius_Rsun": 0.14899784802438837,
+        "luminosity_Lsun": 0.001681273702318693,
+        "Teff_K": 3027.932486137645
+      },
+      "offsets_at_adopted_mass": {
+        "radius_percent": 2.0533205646495745,
+        "luminosity_percent": 11.342629292628681,
+        "Teff_K": 47.9324861376449
+      },
+      "solve": {
+        "physics": {
+          "eos": "CMS19 pressure/entropy + radiation; metals represented by helium; static only",
+          "opacity": "AESOPUS 2.1 gas + TOPS ATOMIC GS98, Z=0.020, no extrapolation",
+          "opacity_blend_logT": [
+            4.4,
+            4.5
+          ],
+          "atmosphere": "radiative Eddington grey",
+          "tau_top": 0.002,
+          "nuclear": "pp chains, fixed composition, X_He3=0",
+          "composition": "X=0.7, Z=0.02, AAG21 resolved metals (GS98 opacity approximation)",
+          "alpha_mlt": 1.9
+        },
+        "limitations": "CMS19 thermodynamic consistency is approximate; internal energy disabled; finite top column; no grain opacity, conduction, mixing, or evolution; alpha uncalibrated",
+        "converged": true,
+        "points": 4096,
+        "iterations": 11,
+        "residual": 4.354916427473654e-11,
+        "correction": 3.637089755329315e-11,
+        "relative_virial_error": -6.5604037913225e-07,
+        "max_eos_maxwell_defect": 0.3990196769992685,
+        "mass_rms_eos_maxwell_defect": 0.004515968655727559
+      },
+      "refinement_percent_4096_vs_2048": {
+        "radius_cm": 0.0010486387645114448,
+        "luminosity_erg_s": -0.008762822986652097,
+        "Teff_K": -0.002715081510229478
+      },
+      "full_output": "out/compare-proxima-fine.json",
+      "coarse_output": "out/compare-proxima-tau002.json",
+      "reproduce": "build/apps/ember-equilibrium 4096 0.12 0.18 --eos cms19 --hot-opacity tops --seed-index 1.5 --tau-top 0.002",
+      "atmosphere_start_check": {
+        "points": 2048,
+        "tau_top": [
+          0.002,
+          0.004
+        ],
+        "percent_change": {
+          "radius_cm": 0.0011418019685294212,
+          "luminosity_erg_s": -0.008208211113203134,
+          "Teff_K": -0.0026230003250526934
+        },
+        "full_output": "out/compare-proxima-tau004.json"
+      }
+    }
+  ]
+}

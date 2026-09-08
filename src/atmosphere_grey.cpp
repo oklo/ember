@@ -5,6 +5,7 @@
 #include <cmath>
 #include <limits>
 #include <stdexcept>
+#include <string>
 
 namespace ember {
 namespace {
@@ -59,7 +60,11 @@ AtmosphereState GreyAtmosphere::eval(double Teff, double gravity, const Composit
         * (comp.mu_ions_inv() + comp.mu_elec_inv()));
     s.rho = eos_.rho_from_PT(s.T, s.P, comp, guess);
     const auto e = eos_.eval(s.T, s.rho, comp);
-    const auto k = opacity_.eval(s.T, s.rho, comp);
+    OpacityState k;
+    try { k = opacity_.eval(s.T, s.rho, comp); }
+    catch (const std::domain_error& e) {
+      throw std::domain_error(std::string("GreyAtmosphere: opacity lookup: ") + e.what());
+    }
     if (!positive(e.chiRho) || !std::isfinite(e.chiT) || !positive(k.kappa)
         || !std::isfinite(k.dlnk_dlnRho) || !std::isfinite(k.dlnk_dlnT))
       throw std::domain_error("GreyAtmosphere: invalid EOS or opacity derivatives");
@@ -78,9 +83,16 @@ AtmosphereState GreyAtmosphere::eval(double Teff, double gravity, const Composit
   };
   double lo = -std::numeric_limits<double>::infinity();
   double hi = std::numeric_limits<double>::infinity();
-  if (const auto bounds = opacity_.density_range(temperature(tau0), comp)) {
+  auto bounds = opacity_.density_range(temperature(tau0), comp);
+  if (const auto eos_bounds = eos_.density_range(temperature(tau0), comp)) {
+    if (bounds) {
+      bounds->min = std::max(bounds->min, eos_bounds->min);
+      bounds->max = std::min(bounds->max, eos_bounds->max);
+    } else bounds = Opacity::DensityRange{eos_bounds->min, eos_bounds->max};
+  }
+  if (bounds) {
     if (!positive(bounds->min) || !positive(bounds->max) || bounds->min >= bounds->max)
-      throw std::domain_error("GreyAtmosphere: invalid opacity density bounds");
+      throw std::domain_error("GreyAtmosphere: EOS/opacity density domains do not overlap");
     const double Pr = Q * (tau0 + 2.0 / 3.0);
     // Move slightly inside the declared edges so the EOS inversion's rounding
     // cannot turn an endpoint into an out-of-table density.
@@ -90,7 +102,7 @@ AtmosphereState GreyAtmosphere::eval(double Teff, double gravity, const Composit
       throw std::domain_error("GreyAtmosphere: opacity bounds cannot bracket gas pressure");
     lo = std::log(Pg_lo); hi = std::log(Pg_hi);
     if (top_residual(local(tau0, lo)) > 0.0 || top_residual(local(tau0, hi)) < 0.0)
-      throw std::domain_error("GreyAtmosphere: top pressure outside opacity table; check tau_top");
+      throw std::domain_error("GreyAtmosphere: top pressure outside EOS/opacity support; check tau_top");
     y[0] = std::clamp(y[0], lo, hi);
   }
   bool found_top = false;

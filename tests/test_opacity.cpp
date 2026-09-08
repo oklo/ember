@@ -3,6 +3,12 @@
 // opacity below 1700 K, whose absence removed the Hayashi limit from cool
 // giants in the Fortran line this code replaces).
 #include "ember/opacity_ferguson.hpp"
+#include "ember/opacity_opal.hpp"
+#include "ember/opacity_blend.hpp"
+#include <fstream>
+#include <filesystem>
+#include <chrono>
+#include <limits>
 #include <cmath>
 #include <cstdio>
 #include <string>
@@ -24,7 +30,7 @@ int main() {
   FergusonOpacity op(data);
   const auto r = op.range();
   std::printf("ember opacity - %s\n  log T %.2f..%.2f, log R %.1f..%.1f, X %.2f..%.2f\n\n",
-              op.name(), r.logT_min, r.logT_max, r.logR_min, r.logR_max, r.X_min, r.X_max);
+              op.name(), r.logT_min, r.logT_max, r.logD_min, r.logD_max, r.X_min, r.X_max);
 
   auto comp_with_X = [](double X) {
     Composition c = solar_scaled(X, 0.020);
@@ -105,6 +111,105 @@ int main() {
     threw = false;
     try { op.eval(1e6, 1.0, comp_with_X(0.70)); } catch (const std::exception&) { threw = true; }
     check(threw, "above the table ceiling throws", threw, 1.0);
+  }
+
+  OpalOpacity high(std::string(EMBER_DATA_DIR) + "/opacity/opal_gs98_z020.dat");
+  BlendedOpacity blend(op, high);
+  const auto comp = comp_with_X(0.7);
+  // Original GS98hz table 73: logT=4.00, logR=-3.0, log(kappa)=1.264;
+  // table 8: X=0, logT=6.50, logR=0, log(kappa)=1.638.
+  near(std::log10(high.eval(1e4, 1e-9, comp).kappa), 1.264, 1e-12, "OPAL hydrogen source node (GS98hz table 73)");
+  near(std::log10(high.eval(std::pow(10.0, 6.5), std::pow(10.0, 1.5), comp_with_X(0)).kappa),
+       1.638, 1e-12, "OPAL helium source node (GS98hz table 8)");
+  // Test every stored cell as well, including all boundaries and X planes.
+  {
+    std::ifstream table(std::string(EMBER_DATA_DIR) + "/opacity/opal_gs98_z020.dat");
+    std::size_t nx, nt, nr; table >> nx >> nt >> nr;
+    std::string title; std::getline(table, title);
+    std::vector<double> lr(nr), lt(nt);
+    for (double& v : lr) table >> v;
+    for (double& v : lt) table >> v;
+    double worst = 0.0;
+    for (std::size_t ix = 0; ix < nx; ++ix) {
+      double X, Z; table >> X >> Z;
+      for (double T : lt) for (double R : lr) {
+        double value; table >> value;
+        const double rho = std::pow(10.0, R + 3.0 * (T - 6.0));
+        const double got = std::log10(high.eval(std::pow(10.0, T), rho, solar_scaled(X, Z)).kappa);
+        worst = std::max(worst, std::abs(got - value));
+      }
+    }
+    check(worst < 1e-12, "OPAL reproduces every imported source cell", worst, 0.0);
+  }
+  {
+    const double k = high.eval(1e7, 2e-5, comp).kappa;
+    near(k, 0.2 * (1.0 + comp.h1()), 0.04, "hot dilute gas approaches electron scattering opacity");
+    double worst = 0.0;
+    constexpr double h = 1e-6;
+    for (double lt : {4.001, 4.123, 4.271, 4.499, 5.371, 6.573, 7.013})
+      for (double lr : {-6.13, -3.37, -0.19, 0.77}) {
+        const double T = std::pow(10.0, lt), rho = std::pow(10.0, lr + 3.0 * (lt - 6.0));
+        const auto c = comp_with_X(0.63);
+        const auto k0 = blend.eval(T, rho, c);
+        const double dt = std::log(blend.eval(T * std::exp(h), rho, c).kappa
+                                / blend.eval(T * std::exp(-h), rho, c).kappa) / (2 * h);
+        const double dr = std::log(blend.eval(T, rho * std::exp(h), c).kappa
+                                / blend.eval(T, rho * std::exp(-h), c).kappa) / (2 * h);
+        worst = std::max({worst, std::abs(dt - k0.dlnk_dlnT) / std::max(1.0, std::abs(dt)),
+                                std::abs(dr - k0.dlnk_dlnRho) / std::max(1.0, std::abs(dr))});
+      }
+    check(worst < 2e-5, "OPAL and blend derivatives follow actual opacity", worst, 0.0);
+    for (double lt : {4.0, 4.5}) {
+      const double T = std::pow(10.0, lt), rho = std::pow(10.0, -2.3 + 3 * (lt - 6));
+      const auto a = blend.eval(T * std::exp(-h), rho, comp);
+      const auto b = blend.eval(T * std::exp(h), rho, comp);
+      check(std::abs(std::log(a.kappa / b.kappa)) < 1e-4
+            && std::abs(a.dlnk_dlnT - b.dlnk_dlnT) < 1e-3
+            && std::abs(a.dlnk_dlnRho - b.dlnk_dlnRho) < 1e-3,
+            "blend value and partials are continuous at endpoint", a.kappa, b.kappa);
+    }
+  }
+  {
+    int rejected = 0;
+    for (const Opacity* source : std::array<const Opacity*, 3>{&op, &high, &blend}) {
+      try { source->eval(15000, 1e-8, solar_scaled(.7, .014)); }
+      catch (const std::domain_error&) { ++rejected; }
+      try { source->density_range(15000, solar_scaled(.7, .014)); }
+      catch (const std::domain_error&) { ++rejected; }
+    }
+    check(rejected == 6, "fixed-Z opacity rejects mismatched metallicity", rejected, 6);
+    rejected = 0;
+    for (const auto& state : std::array{std::array{1e8, 1.0}, std::array{1e6, 11.0},
+                                      std::array{1e6, 1e-10}, std::array{200.0, 1e-10},
+                                      std::array{std::numeric_limits<double>::quiet_NaN(), 1.0}}) {
+      try { blend.eval(state[0], state[1], comp); }
+      catch (const std::domain_error&) { ++rejected; }
+    }
+    check(rejected == 5, "blend never fills missing temperature/density coverage", rejected, 5);
+  }
+  {
+    const auto path = std::filesystem::temp_directory_path()
+        / ("ember-opacity-" + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()) + ".dat");
+    auto invalid = [&](std::string_view axis, double second_Z, double cell, bool truncate, bool extra) {
+      std::ofstream file(path);
+      file << "2 4 4 test\n" << axis << "\n4 5 6 7\n";
+      for (int i = 0; i < 2; ++i) {
+        file << (i == 0 ? 0.0 : 0.7) << ' ' << (i == 0 ? .02 : second_Z) << '\n';
+        for (int j = 0; j < (truncate ? 15 : 16); ++j) file << cell << ' ';
+        file << '\n';
+      }
+      if (extra) file << "extra\n";
+      file.close();
+      try { OpalOpacity bad(path); return false; }
+      catch (const std::runtime_error&) { return true; }
+    };
+    const bool rejected = invalid("-8 -8 -2 1", .02, 0, false, false)
+                       && invalid("-8 -5 -2 1", .03, 0, false, false)
+                       && invalid("-8 -5 -2 1", .02, 9.999, false, false)
+                       && invalid("-8 -5 -2 1", .02, 0, true, false)
+                       && invalid("-8 -5 -2 1", .02, 0, false, true);
+    std::filesystem::remove(path);
+    check(rejected, "invalid axes, mixed Z, missing cells and truncation throw", rejected, 1);
   }
 
   std::printf("\n%s (%d failure%s)\n", failures ? "FAILED" : "ALL PASS",

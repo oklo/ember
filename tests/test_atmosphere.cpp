@@ -4,6 +4,8 @@
 #include "ember/constants.hpp"
 #include "ember/eos_composite.hpp"
 #include "ember/opacity_ferguson.hpp"
+#include "ember/opacity_opal.hpp"
+#include "ember/opacity_blend.hpp"
 #include <algorithm>
 #include <cmath>
 #include <cstdio>
@@ -220,6 +222,25 @@ int main() {
     near(a.dlnP_dlng, dg, 2e-4, "Ferguson boundary gravity derivative matches an independent perturbation");
     check(throws([&] { grey.eval(100.0, 100.0, mixture); }),
           "opacity table errors propagate through atmosphere", 1.0, 1.0);
+  }
+  {
+    CompositeEos real_eos;
+    FergusonOpacity low(std::string(EMBER_DATA_DIR) + "/opacity/ferguson_gs98_z020.dat");
+    OpalOpacity high(std::string(EMBER_DATA_DIR) + "/opacity/opal_gs98_z020.dat");
+    BlendedOpacity blend(low, high);
+    GreyAtmosphere grey(real_eos, blend);
+    const auto mixture = solar_scaled(.7, .02);
+    constexpr double Teff = 16000, gravity = 2e5, step = 1e-5;
+    const auto a = grey.eval(Teff, gravity, mixture);
+    near(real_eos.eval(a.T, a.rho, mixture).P, a.P, 1e-10, "blended opacity atmosphere closes its EOS pressure");
+    const double dt = std::log(grey.eval(Teff * std::exp(step), gravity, mixture).P
+                            / grey.eval(Teff * std::exp(-step), gravity, mixture).P) / (2 * step);
+    const double dg = std::log(grey.eval(Teff, gravity * std::exp(step), mixture).P
+                            / grey.eval(Teff, gravity * std::exp(-step), mixture).P) / (2 * step);
+    near(a.dlnP_dlnTeff, dt, 3e-4, "grey atmosphere carries opacity blend's temperature response");
+    near(a.dlnP_dlng, dg, 3e-4, "grey atmosphere carries opacity blend's density response");
+    check(throws([&] { grey.eval(3000, gravity, mixture); }),
+          "cool high-gravity grey atmosphere reports missing density coverage", 1, 1);
   }
   {
     const double nan = std::numeric_limits<double>::quiet_NaN();

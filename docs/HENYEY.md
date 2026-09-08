@@ -60,9 +60,11 @@ componentwise backward error
 |f_i + (J dy)_i| / (|f_i| + sum_j |J_ij dy_j|).
 ```
 
-An error above `1e-10`, a singular pivot, or non-finite arithmetic reports
-failure. No diagonal perturbation or silent regularization changes the
-problem. Tests compare with an independent dense Gauss–Jordan solve and a
+If the error exceeds `1e-10`, up to three iterative-refinement solves use
+the original coefficients to correct `J*dy+f`. The correction is then checked
+again against the original matrix. An error still above `1e-10`, a singular
+pivot, or non-finite arithmetic reports failure. No diagonal perturbation or
+silent regularization changes the problem. Tests compare with an independent dense Gauss–Jordan solve and a
 known solution, force row pivoting, vary equation scales by 160 decades,
 and exercise a 2048-point system.
 
@@ -146,11 +148,19 @@ derivatives under degeneracy and contraction, equilibrium preservation with
 a fixed previous model, and failure behavior. A small Newton residual is
 not a measurement of spatial accuracy; this benchmark keeps both visible.
 
-## Next scientific validation
+## Stellar validation and next physics
 
-The next target is an equilibrium with the analytic EOS, actual pp heating,
-and an explicitly selected atmosphere. It needs high-temperature opacity:
-the bundled Ferguson table stops at about 31,600 K. Do not extend that table
-silently or present the constant-opacity benchmark as a physical star.
-Physical atmosphere grids, partial-ionization/molecular EOS, conduction,
-adaptive meshes, and composition/time evolution remain pending.
+The actual pp/FD/MLT/grey modules now converge a fixed-composition 0.5 Msun
+equilibrium with AESOPUS/OPAL opacity at 128, 256 and 512 points. The finer
+meshes required the linear iterative refinement described above. Integrated
+nuclear heating balances surface luminosity, and an independently integrated
+virial error decreases by about four per mesh doubling. This is a numerical
+validation with approximate envelope physics, not yet a realistic M dwarf.
+The newer CMS19/AESOPUS/TOPS combination also converges a 0.1 Msun model
+through 4096 points, with fine-mesh R/L agreement and virial convergence.
+It remains experimental: a local EOS pressure/entropy consistency defect
+reaches 24%, and internal energy is explicitly disabled because of a source
+join defect. Positive-dt structure calls reject that EOS. See
+[`EQUILIBRIUM.md`](EQUILIBRIUM.md) for commands, results and exact limitations.
+Physical atmosphere grids, consistent caloric/composition EOS physics,
+conduction, adaptive meshes, and composition/time evolution remain pending.

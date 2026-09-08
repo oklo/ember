@@ -37,6 +37,19 @@ blueward turn, and down the helium-white-dwarf cooling track to below
       and damped Newton relaxation on a fixed mesh
 - [x] Complete radiative-polytrope benchmark against an independent
       Lane–Emden solution, including spatial convergence and failure checks
+- [x] OPAL GS98 fixed-Z rectangular subset and smooth Ferguson blend, with
+      derivative checks and strict density/composition coverage
+- [x] AESOPUS 2.1 GS98 gas opacity to log R=6, original cells and strict bounds
+- [x] Experimental static stellar driver with structured success/failure diagnostics
+- [x] Fixed-composition 0.5 Msun equilibrium with the current approximate EOS
+      and grey atmosphere; three-mesh convergence, energy and virial checks
+- [x] Henyey iterative refinement retaining the original backward-error threshold
+- [x] CMS19 original H/He pressure/entropy cells, actual interpolation Hessians,
+      strict fluid masks and explicit static-only energy guard
+- [x] LANL TOPS hot dense opacity at X=.7, Z=.02; native-density interpolation,
+      excluding every server-substituted density
+- [x] Experimental 0.1 Msun static equilibrium through 4096 points; fine-mesh
+      agreement, nuclear balance, independent virial and atmosphere-depth checks
 
 ## Beyond the first target: massive white dwarfs
 
@@ -67,10 +80,11 @@ but not designed.
 ## Next
 
 - [ ] Coulomb corrections and crystallisation (Potekhin & Chabrier)
-- [ ] CMS19 / Chabrier-Debras tabulated H/He equation of state, blended to the
-      analytic form outside the table
-- [ ] Opacity: Ferguson 2005 (tables already assembled in the Fortran line),
-      OPAL/OPLIB above, conduction from Cassisi 2007
+- [ ] Resolve EOS pressure/entropy consistency and internal-energy join defects
+      before evolution; implement validated caloric and composition responses
+      (including He3). See `CMS19.md`; do not fabricate energy or extrapolate
+- [ ] Extend hot dense opacity to evolving X and other Z; the current TOPS
+      import has only X=.7, Z=.02. Add conduction from Cassisi 2007
 - [ ] CNO out of equilibrium (needed on the pre-main-sequence, where it runs
       once and never again); Chugunov screening for dense matter
 - [ ] Import and validate physical model-atmosphere grids (BT-Settl archive
@@ -78,8 +92,9 @@ but not designed.
 - [x] Model on a Lagrangian mass mesh in (ln r, ln rho, ln T, L)
 - [x] The four structure equations as zone residuals, with a Jacobian checked
       against the residual it differentiates
-- [ ] Physical stellar equilibrium with actual pp heating and an explicitly
-      selected atmosphere; requires high-temperature opacity coverage
+- [ ] Quantitatively credible 0.1 Msun equilibrium: resolve local EOS consistency
+      errors and replace the grey surface with physical atmosphere structures;
+      compare against independent stellar models (see `EQUILIBRIUM.md`)
 - [ ] Adaptive mesh (the "temporary points" idea, done properly)
 - [ ] Time stepping with error control rather than iteration-count heuristics
 - [ ] 0.1 Msun end to end

@@ -18,19 +18,21 @@ that the ultra-cold evolution of *massive* remnants - a solar remnant, or
 something near the Chandrasekhar mass - can be added as further terms rather
 than as a rewrite. See `docs/ROADMAP.md`.
 
-The analytic equation of state, composition, Ferguson opacities, pp chains,
-and four structure residuals are implemented and tested. Transport uses
-Böhm–Vitense mixing-length convection with the Schwarzschild criterion; see
-`docs/CONVECTION.md`. The grey atmosphere, atmosphere-table reader, and two
-surface residuals with analytic derivatives are also implemented; see
-`docs/ATMOSPHERE.md`. The zone Jacobian is analytic, including EOS transport
-responses and screened nuclear-heating derivatives, with numerical
-differences retained as a test reference; see `docs/JACOBIAN.md`. Central
-boundary conditions and damped Henyey relaxation now converge a complete
-radiative-polytrope benchmark, with second-order convergence toward an
-independent Lane–Emden solution; see `docs/HENYEY.md`. Eight test suites pass.
-The benchmark uses controlled physics and an artificial atmosphere. A
-physical stellar equilibrium and an evolutionary run remain pending.
+The physical modules and damped Henyey solver now converge an experimental
+**0.1 Msun static equilibrium** with molecular/partially ionized CMS19 H/He
+thermodynamics, AESOPUS/TOPS radiative opacity, pp heating, mixing-length
+convection and a grey atmosphere. Fine meshes settle near **R=.1286 Rsun,
+L=.000976 Lsun, Teff=2845 K**, with energy and independent virial checks.
+Thirteen test suites pass, including the independent Lane–Emden benchmark.
+
+This is not yet a calibrated physical stellar model. The source EOS has
+substantial local pressure/entropy consistency errors and an internal-energy
+join defect. CMS19 is therefore **restricted to static calculations**;
+positive-dt energy equations reject it. Physical atmosphere data, consistent
+caloric/composition physics, mixing and time-step control remain pending.
+No evolutionary run has been made. See [docs/EQUILIBRIUM.md](docs/EQUILIBRIUM.md)
+for reproduction, numerical checks and limitations, and
+[docs/CMS19.md](docs/CMS19.md) for the EOS audit.
 
 ## Design
 
@@ -75,9 +77,9 @@ returns one. Those should surface, not be optimised away.
 | Ingredient | Source |
 |---|---|
 | Composition | Asplund, Amarsi & Grevesse (2021) |
-| Low-T opacity | Ferguson et al. (2005), grains included |
-| High-T opacity | OPAL / OPLIB *(pending)* |
-| Equation of state | Chabrier, Mazevet & Soubiran (2019) *(pending)*; ideal+FD implemented |
+| Low-T opacity | AESOPUS 2.1 gas (Marigo et al. 2024), log R to 6; Ferguson (2005) also available with grains |
+| High-T opacity | LANL TOPS ATOMIC at X=.7, Z=.02; OPAL GS98 subset also available; strict smooth blends |
+| Equation of state | CMS19 pressure/entropy, experimental static only; analytic ideal+FD also available |
 | Conduction | Cassisi et al. (2007) *(pending)* |
 | Convection | Böhm–Vitense MLT, optically thick; Schwarzschild criterion |
 | Nuclear rates | JINA REACLIB / NACRE II *(pending)* |

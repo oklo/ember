@@ -1,0 +1,72 @@
+{
+  "calculation": "experimental static stellar equilibrium trial",
+  "physics": {
+    "eos": "CMS19 pressure/entropy + radiation; metals represented by helium; static only",
+    "opacity": "AESOPUS 2.1 gas + TOPS ATOMIC GS98, Z=0.020, no extrapolation",
+    "opacity_blend_logT": [
+      4.4,
+      4.5
+    ],
+    "atmosphere": "radiative Eddington grey",
+    "tau_top": 0.001,
+    "nuclear": "pp chains, fixed composition, X_He3=0",
+    "composition": "X=0.7, Z=0.02, AAG21 resolved metals (GS98 opacity approximation)",
+    "alpha_mlt": 1.9
+  },
+  "limitations": "CMS19 thermodynamic consistency is approximate; internal energy disabled; finite top column; no grain opacity, conduction, mixing, or evolution; alpha uncalibrated",
+  "converged": true,
+  "message": "converged",
+  "points": 4096,
+  "iterations": 12,
+  "residual": 4.103384299014579e-10,
+  "correction": 3.063216129537327e-10,
+  "relative_virial_error": -6.584795618769235e-07,
+  "mass_rms_eos_maxwell_defect": 0.004348723216720159,
+  "max_eos_defect_location": {
+    "mass_fraction": 0.9999930963130266,
+    "temperature_K": 27303.65436985736,
+    "density_g_cm3": 0.1239426981270359
+  },
+  "mass_g": 1.98840987069805e+32,
+  "seed_radius_cm": 10435500000,
+  "seed_polytropic_index": 1.5,
+  "max_eos_maxwell_defect": 0.241779959483132,
+  "radius_cm": 8947131287.19781,
+  "luminosity_erg_s": 3.734709856790386e+30,
+  "Teff_K": 2844.571875130948,
+  "integrated_nuclear_luminosity_erg_s": 3.734709856790394e+30,
+  "inner_mass_fraction": 1.228750005432657e-10,
+  "max_logR": 3.94610638939301,
+  "increasing_radius": true,
+  "decreasing_temperature": true,
+  "inner_temperature_K": 4566310.2,
+  "inner_density_g_cm3": 366.87522,
+  "recorded_date": "2026-09-07",
+  "reproduce": "build/apps/ember-equilibrium 4096 .1 .15 --eos cms19 --hot-opacity tops --seed-index 1.5",
+  "cms19_original_source_audit": {
+    "source_sha256": "736de2a0b26c02b897fbd906504bb6aa144f08a6d0f3cff36da62970054d149b",
+    "species": "He",
+    "density_g_cm3": 1,
+    "temperature_K": [
+      891250.9381337459,
+      1000000.0
+    ],
+    "internal_energy_erg_g": [
+      88858709158793.02,
+      82269716360273.19
+    ],
+    "secant_dU_dT_erg_g_K": -60588962.19834388,
+    "listed_entropy_cv_erg_g_K": 97247821.94151942,
+    "listed_entropy_cp_erg_g_K": 167076828.13809377,
+    "energy_decreases_while_temperature_increases": true,
+    "hydrogen_source_maxwell": {
+      "logT_K": 4.45,
+      "logP_GPa": 1.35,
+      "logrho_g_cm3": -1.03383,
+      "logS_MJ_kg_K": -0.950347,
+      "dlnrho_dlnT_P": -1.10718,
+      "dlnS_dlnP_T": -0.115371,
+      "relative_defect": -0.26498098383428004
+    }
+  }
+}

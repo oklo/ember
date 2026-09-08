@@ -3,6 +3,7 @@
 // ideal gas, constant opacity/heating, and an explicitly artificial atmosphere
 // admit an independent n=3 Lane-Emden solution with grad_rad=1/4 everywhere.
 #include "ember/atmosphere.hpp"
+#include "lane_emden.hpp"
 #include "ember/constants.hpp"
 #include "ember/model.hpp"
 #include "ember/nuclear.hpp"
@@ -62,40 +63,6 @@ public:
   }
   const char* name() const override { return "artificial polytrope boundary (not an atmosphere grid)"; }
 };
-
-struct LaneEmden {
-  double xi{}, theta{}, mass{};  // mass = -xi^2 dtheta/dxi
-};
-
-inline std::vector<LaneEmden> lane_emden(const std::vector<double>& targets) {
-  // Independent IVP: dtheta/dxi=-mass/xi^2, dmass/dxi=xi^2 theta^3.
-  // A regular series starts away from the coordinate singularity. RK4 uses
-  // a fixed maximum step much smaller than the stellar relaxation mesh.
-  double xi = 1e-6;
-  std::array<double, 2> y{1.0 - xi * xi / 6.0, xi * xi * xi / 3.0};
-  std::vector<LaneEmden> out;
-  for (double target : targets) {
-    if (target < xi || !std::isfinite(target)) throw std::invalid_argument("Lane-Emden targets must increase");
-    auto derivative = [](double x, const std::array<double, 2>& state) {
-      return std::array{-state[1] / (x * x), x * x * state[0] * state[0] * state[0]};
-    };
-    auto add = [](const auto& a, const auto& b, double scale) {
-      return std::array{a[0] + scale * b[0], a[1] + scale * b[1]};
-    };
-    while (xi < target) {
-      const double h = std::min({2e-4, 0.05 * xi, target - xi});
-      const auto k1 = derivative(xi, y);
-      const auto k2 = derivative(xi + h / 2.0, add(y, k1, h / 2.0));
-      const auto k3 = derivative(xi + h / 2.0, add(y, k2, h / 2.0));
-      const auto k4 = derivative(xi + h, add(y, k3, h));
-      for (std::size_t k = 0; k < 2; ++k) y[k] += h * (k1[k] + 2 * k2[k] + 2 * k3[k] + k4[k]) / 6.0;
-      xi += h;
-    }
-    if (!(y[0] > 0.0)) throw std::domain_error("Lane-Emden point is outside the positive polytrope");
-    out.push_back({xi, y[0], y[1]});
-  }
-  return out;
-}
 
 struct RadiativePolytrope {
   PolytropeEos eos;

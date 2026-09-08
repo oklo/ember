@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cmath>
 #include <stdexcept>
+#include <sstream>
 
 namespace ember {
 namespace {
@@ -49,10 +50,8 @@ std::array<double, NVAR> back_substitute(const Pivots& a, const std::array<doubl
   }
   return x;
 }
-} // namespace
-
-HenyeyCorrection solve_henyey(const BoundaryBlock& inner, const std::vector<ZoneResidual>& zones,
-                              const BoundaryBlock& outer) {
+HenyeyCorrection eliminate_system(const BoundaryBlock& inner, const std::vector<ZoneResidual>& zones,
+                                  const BoundaryBlock& outer) {
   std::array<Row, 2> carried{};
   for (std::size_t k = 0; k < 2; ++k) {
     std::copy(inner.dfdy[k].begin(), inner.dfdy[k].end(), carried[k].begin());
@@ -95,31 +94,52 @@ HenyeyCorrection solve_henyey(const BoundaryBlock& inner, const std::vector<Zone
   result.dy.back() = back_substitute(final_pivots, {});
   for (std::size_t i = zones.size(); i-- > 0;)
     result.dy[i] = back_substitute(saved[i], result.dy[i + 1]);
-
-  // Check the original equations, not the eliminated ones. Long double
-  // provides wider accumulation on platforms where it exceeds double.
-  auto check = [&](double f, const auto& lo, const auto& hi, std::size_t i, std::size_t j) {
-    long double residual = f, norm = std::abs(f);
-    for (std::size_t v = 0; v < NVAR; ++v) {
-      const long double a = static_cast<long double>(lo[v]) * result.dy[i][v];
-      const long double b = static_cast<long double>(hi[v]) * result.dy[j][v];
-      residual += a + b; norm += std::abs(a) + std::abs(b);
-    }
-    const double error = norm > 0.0L ? static_cast<double>(std::abs(residual) / norm) : 0.0;
-    if (!std::isfinite(error)) throw std::runtime_error("solve_henyey: non-finite linear residual");
-    result.backward_error = std::max(result.backward_error, error);
-  };
-  const std::array<double, NVAR> zero{};
-  for (std::size_t k = 0; k < 2; ++k) {
-    check(inner.f[k], inner.dfdy[k], zero, 0, 0);
-    check(outer.f[k], outer.dfdy[k], zero, zones.size(), zones.size());
-  }
-  for (std::size_t i = 0; i < zones.size(); ++i)
-    for (std::size_t k = 0; k < NVAR; ++k)
-      check(zones[i].f[k], zones[i].dfdy_lo[k], zones[i].dfdy_hi[k], i, i + 1);
-  if (result.backward_error > 1e-10)
-    throw std::runtime_error("solve_henyey: correction fails the original linear equations");
   return result;
+}
+} // namespace
+
+HenyeyCorrection solve_henyey(const BoundaryBlock& inner, const std::vector<ZoneResidual>& zones,
+                              const BoundaryBlock& outer) {
+  auto result = eliminate_system(inner, zones, outer);
+  BoundaryBlock residual_inner = inner, residual_outer = outer;
+  auto residual_zones = zones;
+  for (unsigned refinement = 0; ; ++refinement) {
+    result.backward_error = 0.0;
+    // Check the original equations, not the eliminated ones. Long double
+    // provides wider accumulation on platforms where it exceeds double.
+    auto check = [&](double f, const auto& lo, const auto& hi, std::size_t i, std::size_t j) {
+      long double residual = f, norm = std::abs(f);
+      for (std::size_t v = 0; v < NVAR; ++v) {
+        const long double a = static_cast<long double>(lo[v]) * result.dy[i][v];
+        const long double b = static_cast<long double>(hi[v]) * result.dy[j][v];
+        residual += a + b; norm += std::abs(a) + std::abs(b);
+      }
+      const double error = norm > 0.0L ? static_cast<double>(std::abs(residual) / norm) : 0.0;
+      if (!std::isfinite(error)) throw std::runtime_error("solve_henyey: non-finite linear residual");
+      result.backward_error = std::max(result.backward_error, error);
+      return static_cast<double>(residual);
+    };
+    const std::array<double, NVAR> zero{};
+    for (std::size_t k = 0; k < 2; ++k) {
+      residual_inner.f[k] = check(inner.f[k], inner.dfdy[k], zero, 0, 0);
+      residual_outer.f[k] = check(outer.f[k], outer.dfdy[k], zero, zones.size(), zones.size());
+    }
+    for (std::size_t i = 0; i < zones.size(); ++i)
+      for (std::size_t k = 0; k < NVAR; ++k)
+        residual_zones[i].f[k] = check(zones[i].f[k], zones[i].dfdy_lo[k], zones[i].dfdy_hi[k], i, i + 1);
+    if (result.backward_error <= 1e-10) return result;
+    if (refinement == 3) {
+      std::ostringstream message;
+      message << "solve_henyey: correction fails the original linear equations (backward error="
+              << result.backward_error << ')';
+      throw std::runtime_error(message.str());
+    }
+    // Iterative refinement solves A*delta=-(f+A*dy) with the original
+    // coefficients. Keep the acceptance threshold; improve the correction.
+    const auto delta = eliminate_system(residual_inner, residual_zones, residual_outer);
+    for (std::size_t i = 0; i < result.dy.size(); ++i)
+      for (std::size_t v = 0; v < NVAR; ++v) result.dy[i][v] += delta.dy[i][v];
+  }
 }
 
 } // namespace ember

@@ -91,6 +91,7 @@ RelaxationResult relax(const Model& initial, const Physics& p, const Atmosphere&
   for (;;) {
     const auto system = assemble(result.model, p, atmosphere, Lunit, dt, prev, true);
     result.residual = system.norm;
+    result.correction = std::numeric_limits<double>::infinity();
     HenyeyCorrection correction;
     try { correction = solve_henyey(system.inner, system.zones, system.outer); }
     catch (const std::runtime_error& e) {

@@ -27,6 +27,8 @@ CentralResidual central_residual(const Model& model, const Physics& phys, double
   heating.d[1] = n.eps * n.dlneps_dlnRho;
   heating.d[2] = n.eps * n.dlneps_dlnT;
   if (dt > 0.0) {
+    if (!phys.eos->has_internal_energy())
+      throw std::logic_error("central_residual: EOS has no validated internal energy for time dependence");
     if (!prev || prev->size() != model.size() || prev->comp.size() != model.size() || prev->m != model.m)
       throw std::invalid_argument("central_residual: time dependence requires previous model on the same mesh");
     const auto e = phys.eos->eval_with_derivatives(T, rho.value, model.comp.front());
