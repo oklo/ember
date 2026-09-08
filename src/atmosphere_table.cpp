@@ -76,7 +76,7 @@ void TabulatedAtmosphere::read(std::istream& in) {
 }
 
 bool TabulatedAtmosphere::covers(double Teff, double gravity, const Composition& comp) const {
-  if (!positive(Teff) || !positive(gravity)) return false;
+  if (comp.basis!=composition_.basis || !positive(Teff) || !positive(gravity)) return false;
   for (std::size_t i = 0; i < NSPEC; ++i)
     if (!std::isfinite(comp.X[i]) || comp.X[i] < 0.0
         || std::abs(comp.X[i] - composition_.X[i]) > 1e-10) return false;

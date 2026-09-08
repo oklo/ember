@@ -1,0 +1,5 @@
+EMBER_COMPOSITION_HELMHOLTZ 1 4
+0.6 "freeeos300_hhe_x060_potential.dat"
+0.65 "freeeos300_hhe_x065_potential.dat"
+0.7 "freeeos300_hhe_x070_potential.dat"
+0.75 "freeeos300_hhe_x075_potential.dat"

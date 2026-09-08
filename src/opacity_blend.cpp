@@ -22,7 +22,8 @@ OpacityState BlendedOpacity::eval(double T, double rho, const Composition& comp)
   const double la = std::log(a.kappa), lb = std::log(b.kappa);
   return {std::exp((1.0 - w) * la + w * lb),
           (1.0 - w) * a.dlnk_dlnT + w * b.dlnk_dlnT + dw * (lb - la),
-          (1.0 - w) * a.dlnk_dlnRho + w * b.dlnk_dlnRho};
+          (1.0 - w) * a.dlnk_dlnRho + w * b.dlnk_dlnRho,
+          (1.0 - w) * a.dlnk_dX + w * b.dlnk_dX};
 }
 
 std::optional<Opacity::DensityRange> BlendedOpacity::density_range(double T, const Composition& comp) const {

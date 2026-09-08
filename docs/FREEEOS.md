@@ -9,12 +9,14 @@ using its recommended EOS1 options `(3,1,-2)`. This includes molecules,
 partial and pressure ionization, electron degeneracy, Coulomb and exchange
 terms. It is an alternative physical model, not repaired CMS19 data.
 
-The numerical H/He mixture retains X=.7 and effective Y=.3 for an isolated
+The fixed-table numerical H/He mixture retains X=.7 and effective Y=.3 for an isolated
 comparison with the previous CMS19 run. Metals are still explicitly treated
-as helium, and He3 is unsupported. All queries must match the recorded
+as helium, and this fixed-table class rejects He3. All its queries must match the recorded
 fixed interior composition `solar_scaled(.7,.02)`. Opt-in to this mixture
-approximation is required at construction. Composition evolution, arbitrary
-metallicity, and a full nuclear abundance treatment remain future work.
+approximation is required at construction. The new `CompositionHelmholtzEos` family supports varying H1/He3 and
+baryonic abundances; its transformation, derivatives and separate source
+audit are described in [EVOLUTION.md](EVOLUTION.md). Arbitrary metallicity
+and physical metal EOS contributions remain future work.
 
 ## Potential and derivatives
 

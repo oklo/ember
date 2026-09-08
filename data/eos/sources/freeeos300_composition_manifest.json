@@ -1,0 +1,33 @@
+{
+  "source": "FreeEOS 3.0.0 EOS1 (3,1,-2), H/He, .0125 dex; generated 2026-09-07",
+  "planes": [
+    {
+      "X": 0.6,
+      "source": "freeeos300_hhe_x060_raw.json.gz",
+      "source_sha256": "22a070e392778143bf989990ed7683a66cfa22b13fdfdad28b46692551a2c8cf",
+      "table": "freeeos300_hhe_x060_potential.dat",
+      "table_sha256": "4efe4d8e38a00ea1213e0c777a3fc19793cf3a14bf65debacfe85d216381ced7"
+    },
+    {
+      "X": 0.65,
+      "source": "freeeos300_hhe_x065_raw.json.gz",
+      "source_sha256": "cc6d7c9b6c3b7cc80d472dfdb603fccb254e4dcbfe0d606ed9371db40b9c8d3b",
+      "table": "freeeos300_hhe_x065_potential.dat",
+      "table_sha256": "2df35f42e160e0abc9c06736c97631866d9ba876520f4d6cc8c3e08e0d34f206"
+    },
+    {
+      "X": 0.7,
+      "source": "freeeos300_hhe_x070_raw.json.gz",
+      "source_sha256": "26165748e1493438f4d62d1e04cb2eb67761a51d57c7abbf99cc0f1a01ff1e62",
+      "table": "freeeos300_hhe_x070_potential.dat",
+      "table_sha256": "34f5e83c898ab74273dd3d907b2ebac77c61976b8e1d7c5e1fda8530c69d823a"
+    },
+    {
+      "X": 0.75,
+      "source": "freeeos300_hhe_x075_raw.json.gz",
+      "source_sha256": "87077c0c68be5b88c5202b9183383613bf6a1188e4a5fbebc2a442bbb313e8ad",
+      "table": "freeeos300_hhe_x075_potential.dat",
+      "table_sha256": "f135073bc75a031155700b7999a839b93d59e4983ce4538e5be64af52aebb4ad"
+    }
+  ]
+}

@@ -44,3 +44,14 @@ The interface retains the thin-atmosphere approximation: the tau=100
 radius is identified with the photospheric radius and the omitted mass is
 neglected. Resolving that geometric extension and matching modern mixture
 and atmosphere physics remain further improvements.
+
+## Bounded initial evolution
+
+The underlying table and fixed-composition reader remain strict, including
+abundance basis. `ember-evolve` explicitly selects
+`FrozenCompositionAtmosphere`: the same GN93 T/P relation with density
+recomputed from the actual evolving EOS. It rejects |Xsurface-.7|>.005,
+He3>.005, changed metals or unsupported Teff/gravity. These operational
+limits do not establish an atmosphere-error bound. A composition-dependent
+non-grey source grid is still needed for substantial depletion; see
+[EVOLUTION.md](../../docs/EVOLUTION.md).

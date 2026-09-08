@@ -68,5 +68,7 @@
       "dlnS_dlnP_T": -0.115371,
       "relative_defect": -0.26498098383428004
     }
-  }
+  },
+  "historical_checkpoint": "2ba3bcd",
+  "historical_note": "Predates classical Debye charge-normalization correction. Reproduce this archived result at the stated checkpoint; current static values differ. See EVOLUTION.md."
 }

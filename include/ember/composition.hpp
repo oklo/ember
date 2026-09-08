@@ -15,6 +15,8 @@ enum class Species : std::size_t {
   H1 = 0, He3, He4, C12, C13, N14, O16, Zrest, COUNT
 };
 inline constexpr std::size_t NSPEC = static_cast<std::size_t>(Species::COUNT);
+inline constexpr std::array<double, NSPEC> mass_numbers{1,3,4,12,13,14,16,20};
+enum class AbundanceBasis { atomic_mass, baryon_mass };
 
 struct Nuclide { double A; double Z; std::string_view name; };
 
@@ -29,6 +31,13 @@ inline constexpr std::array<Nuclide, NSPEC> nuclides{{
 // copies freely; a stellar model carries one per zone.
 struct Composition {
   std::array<double, NSPEC> X{};
+  // Legacy static tables use atomic mass fractions. Evolution uses X_i=A_i Y_i
+  // with integer mass numbers, so sum(X)=1 conserves baryons; nuclear rest
+  // mass changes are accounted for separately in the released energy.
+  AbundanceBasis basis{AbundanceBasis::atomic_mass};
+  constexpr double abundance_weight(std::size_t i) const {
+    return basis == AbundanceBasis::baryon_mass ? mass_numbers[i] : nuclides[i].A;
+  }
 
   constexpr double operator[](Species s) const { return X[static_cast<std::size_t>(s)]; }
   constexpr double& operator[](Species s)      { return X[static_cast<std::size_t>(s)]; }
@@ -49,12 +58,12 @@ struct Composition {
   // Moles of ions and of electrons per gram, for the fully ionised mixture.
   constexpr double mu_ions_inv() const {
     double s = 0.0;
-    for (std::size_t i = 0; i < NSPEC; ++i) s += X[i] / nuclides[i].A;
+    for (std::size_t i = 0; i < NSPEC; ++i) s += X[i] / abundance_weight(i);
     return s;
   }
   constexpr double mu_elec_inv() const {
     double s = 0.0;
-    for (std::size_t i = 0; i < NSPEC; ++i) s += X[i] * nuclides[i].Z / nuclides[i].A;
+    for (std::size_t i = 0; i < NSPEC; ++i) s += X[i] * nuclides[i].Z / abundance_weight(i);
     return s;
   }
 };

@@ -55,6 +55,12 @@ blueward turn, and down the helium-white-dwarf cooling track to below
 - [x] Physical AMES-COND non-grey tau=100 boundary via untouched MESA cells,
       explicit solar-mixture proxy, and a combined 4096-point stellar solve
 
+- [x] Composition-dependent Helmholtz potential family, H1/He3 responses,
+      explicit baryonic abundance convention; metals/isotope approximations qualified
+- [x] Composition-dependent TOPS source planes, strict common density support
+- [x] Coupled implicit pp burning, conservative instantaneous convective mixing,
+      thermal first law and adaptive step-doubling; bounded 10-Gyr experiment
+
 ## Beyond the first target: massive white dwarfs
 
 The 0.1 Msun star is the milestone, but the same machinery is wanted for the
@@ -84,11 +90,11 @@ but not designed.
 ## Next
 
 - [ ] Coulomb corrections and crystallisation (Potekhin & Chabrier)
-- [ ] Extend the consistent potential to physical metal/He3 abundances and
-      composition responses before evolution. Improve source-fit joins and
+- [ ] Extend the potential to physical metals and wider H depletion; improve
+      isotope/source-fit physics and
       qualify response accuracy; see `FREEEOS.md`. Keep CMS19's energy guard
-- [ ] Extend hot dense opacity to evolving X and other Z; the current TOPS
-      import has only X=.7, Z=.02. Add conduction from Cassisi 2007
+- [ ] Extend hot dense opacity beyond X=.6..75 and to other Z; improve the
+      nominal isotope approximation. Add conduction from Cassisi 2007
 - [ ] CNO out of equilibrium (needed on the pre-main-sequence, where it runs
       once and never again); Chugunov screening for dense matter
 - [ ] Match modern model-atmosphere composition to the interior; quantify
@@ -100,7 +106,8 @@ but not designed.
       approximations and repeat age/composition-aware stellar and observational
       comparisons. Current numerical and bulk checks are in `EQUILIBRIUM.md`
 - [ ] Adaptive mesh (the "temporary points" idea, done properly)
-- [ ] Time stepping with error control rather than iteration-count heuristics
+- [x] Time stepping with error control from one full versus two half steps
+- [ ] Ledoux/diffusive transport and validation of moving convective boundaries
 - [ ] 0.1 Msun end to end
 
 ## Lessons carried over from the Fortran line

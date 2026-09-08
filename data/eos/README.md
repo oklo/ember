@@ -37,6 +37,28 @@ FreeEOS source is GPL-2.0-or-later and remains outside ember's build; its
 source is not relicensed or linked into ember. Cite Alan Irwin and the
 FreeEOS release for these numerical calculations.
 
+## Composition family
+
+`freeeos300_hhe_composition.dat` selects the four source H mass fractions
+.60, .65, .70 and .75. All use the grid and EOS1 options above, with 43, 89,
+106 and 107 masked potential nodes respectively. Original raw responses for
+every plane are archived; source and runtime SHA-256 hashes are recorded in
+`sources/freeeos300_composition_manifest.json`. All four imports reproduce
+byte for byte. The new three raw grids were generated with the same probe
+and `generate_freeeos_grid.py --hydrogen X`; every source call converged.
+
+```
+python3 scripts/verify_composition_data.py
+python3 scripts/import_freeeos_potential.py data/eos/sources/freeeos300_hhe_x065_raw.json.gz /tmp/freeeos-x065.dat --hydrogen .65
+```
+
+The runtime composition wrapper preserves H and He isotope number densities
+under an explicit density/composition transformation and adds ideal isotope
+entropy. Metals remain a He4 proxy. Source support and composition bounds
+are strict. See [EVOLUTION.md](../../docs/EVOLUTION.md) for the baryonic
+abundance convention, independent off-composition tests and limitations.
+The fixed .7 table itself has not changed.
+
 ## Retained CMS19 H/He tables
 
 `cms19_h_tp.dat` and `cms19_he_tp.dat` contain the original density and

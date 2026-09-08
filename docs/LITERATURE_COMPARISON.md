@@ -1,5 +1,11 @@
 # Low-mass equilibrium: published models and observed stars
 
+Historical comparison: these static results predate the composition/burning
+milestone and its classical Debye screening correction. They are not tests
+of the new 10-Gyr track. See [EVOLUTION.md](EVOLUTION.md) for the current
+abundance conventions, numerical results and remaining physical approximations.
+
+
 ## Updated EOS and non-grey reference (2026-09-07)
 
 The new 4096-point FreeEOS-potential/COND model gives R=.12973875 Rsun,

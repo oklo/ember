@@ -73,7 +73,7 @@ bool TabulatedOpacity::covers(double T, double rho, double X) const {
 
 std::optional<Opacity::DensityRange> TabulatedOpacity::density_range(double T, const Composition& comp) const {
   const double raw_lt = std::log10(T), X = comp.h1();
-  if (!inside(raw_lt, logT_.front(), logT_.back())
+  if (comp.basis!=AbundanceBasis::atomic_mass || !inside(raw_lt, logT_.front(), logT_.back())
       || !std::isfinite(X) || X < X_.front() || X > X_.back()
       || !std::isfinite(comp.Z()) || std::abs(comp.Z() - Z_) > 1e-10)
     throw std::domain_error("TabulatedOpacity: temperature or composition outside table");
@@ -86,7 +86,7 @@ OpacityState TabulatedOpacity::eval(double T, double rho, const Composition& com
   double lt = std::log10(T);
   double lr = std::log10(rho) - (axis_ == DensityAxis::logR ? 3.0 * (lt - 6.0) : 0.0);
   const double X  = comp.h1();
-  if (!std::isfinite(comp.Z()) || std::abs(comp.Z() - Z_) > 1e-10)
+  if (comp.basis!=AbundanceBasis::atomic_mass || !std::isfinite(comp.Z()) || std::abs(comp.Z() - Z_) > 1e-10)
     throw std::domain_error(label_ + ": composition metallicity does not match fixed-Z table");
   if (!covers(T, rho, X))
     throw std::domain_error(label_ + ": (logT=" + std::to_string(lt) +
@@ -96,9 +96,8 @@ OpacityState TabulatedOpacity::eval(double T, double rho, const Composition& com
   lr = std::clamp(lr, logD_.front(), logD_.back());
 
   // Interpolate in the density coordinate along four bracketing isotherms, then across them in
-  // log T, then linearly in X.  X is frozen through a Newton solve, so only T
-  // and rho need the smoother treatment; the chain rule below therefore only
-  // has to carry the first two.
+  // log T, then linearly in X. X is frozen through each thermal Newton solve;
+  // its separate response is piecewise constant between composition planes.
   const std::size_t ix = X_.size() == 1 ? 0 : interp::locate(X_, X);
   const std::size_t it = interp::locate(logT_, lt);
   const std::size_t t0 = std::min(it > 0 ? it - 1 : 0, logT_.size() - 4);
@@ -135,6 +134,7 @@ OpacityState TabulatedOpacity::eval(double T, double rho, const Composition& com
   s.kappa       = std::pow(10.0, logk);
   s.dlnk_dlnRho = dl_dlr;
   s.dlnk_dlnT   = dl_dlt - (axis_ == DensityAxis::logR ? 3.0 * dl_dlr : 0.0);
+  if(X_.size()>1) s.dlnk_dX=std::log(10.)*(v[1]-v[0])/(X_[ix+1]-X_[ix]);
   return s;
 }
 

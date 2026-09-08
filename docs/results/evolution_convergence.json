@@ -1,0 +1,139 @@
+{
+  "1024": {
+    "points": 1024,
+    "converged": true,
+    "steps": 23,
+    "rejected_steps": 0,
+    "initial": {
+      "age_yr": 0,
+      "step_yr": 0,
+      "R_Rsun": 0.12884233103149875,
+      "L_Lsun": 0.0009157989203360964,
+      "Teff_K": 2797.353333032368,
+      "central_X": 0.7,
+      "central_Y3": 0,
+      "step_error_norm": 0,
+      "discrete_luminosity_balance": 0,
+      "nuclear_rest_mass_balance": 0,
+      "last_halfstep_coupling_iterations": 0
+    },
+    "final": {
+      "age_yr": 10000000000,
+      "step_yr": 227000515.82770604,
+      "R_Rsun": 0.12891571547472486,
+      "L_Lsun": 0.0009194957144964301,
+      "Teff_K": 2799.374976661579,
+      "central_X": 0.697401306482217,
+      "central_Y3": 0.0025985794508634336,
+      "step_error_norm": 0.11688197076864526,
+      "discrete_luminosity_balance": 2.4424906541753444e-14,
+      "nuclear_rest_mass_balance": -1.910891056500219e-08,
+      "last_halfstep_coupling_iterations": 2
+    },
+    "max_luminosity_balance": 4.67113325797186e-09,
+    "max_nuclear_mass_balance": 1.910891056500219e-08
+  },
+  "1024-tight": {
+    "points": 1024,
+    "converged": true,
+    "steps": 39,
+    "rejected_steps": 0,
+    "initial": {
+      "age_yr": 0,
+      "step_yr": 0,
+      "R_Rsun": 0.12884233103149875,
+      "L_Lsun": 0.0009157989203360964,
+      "Teff_K": 2797.353333032368,
+      "central_X": 0.7,
+      "central_Y3": 0,
+      "step_error_norm": 0,
+      "discrete_luminosity_balance": 0,
+      "nuclear_rest_mass_balance": 0,
+      "last_halfstep_coupling_iterations": 0
+    },
+    "final": {
+      "age_yr": 10000000000,
+      "step_yr": 297936477.5454133,
+      "R_Rsun": 0.12891571344700314,
+      "L_Lsun": 0.0009194956205903601,
+      "Teff_K": 2799.3749272038312,
+      "central_X": 0.6974013708453983,
+      "central_Y3": 0.002598517385901848,
+      "step_error_norm": 0.8047040367387126,
+      "discrete_luminosity_balance": 2.922773134628187e-12,
+      "nuclear_rest_mass_balance": -5.15035791792684e-11,
+      "last_halfstep_coupling_iterations": 3
+    },
+    "max_luminosity_balance": 4.67113325797186e-09,
+    "max_nuclear_mass_balance": 2.570016965908195e-08
+  },
+  "2048": {
+    "points": 2048,
+    "converged": true,
+    "steps": 22,
+    "rejected_steps": 0,
+    "initial": {
+      "age_yr": 0,
+      "step_yr": 0,
+      "R_Rsun": 0.12882960061892942,
+      "L_Lsun": 0.0009162830587700642,
+      "Teff_K": 2797.861192329765,
+      "central_X": 0.7,
+      "central_Y3": 0,
+      "step_error_norm": 0,
+      "discrete_luminosity_balance": 0,
+      "nuclear_rest_mass_balance": 0,
+      "last_halfstep_coupling_iterations": 0
+    },
+    "final": {
+      "age_yr": 10000000000,
+      "step_yr": 519958007.29181737,
+      "R_Rsun": 0.1289079936479798,
+      "L_Lsun": 0.0009197529655141126,
+      "Teff_K": 2799.6546026964293,
+      "central_X": 0.6974002697537415,
+      "central_Y3": 0.002599615771937036,
+      "step_error_norm": 0.5803524549818917,
+      "discrete_luminosity_balance": 1.1077805339709812e-12,
+      "nuclear_rest_mass_balance": -1.2852552355724356e-10,
+      "last_halfstep_coupling_iterations": 3
+    },
+    "max_luminosity_balance": 4.616063531415193e-09,
+    "max_nuclear_mass_balance": 1.0569080055589097e-08
+  },
+  "4096": {
+    "points": 4096,
+    "converged": true,
+    "steps": 23,
+    "rejected_steps": 0,
+    "initial": {
+      "age_yr": 0,
+      "step_yr": 0,
+      "R_Rsun": 0.12884558631061385,
+      "L_Lsun": 0.0009155328260678687,
+      "Teff_K": 2797.114776173293,
+      "central_X": 0.7,
+      "central_Y3": 0,
+      "step_error_norm": 0,
+      "discrete_luminosity_balance": 0,
+      "nuclear_rest_mass_balance": 0,
+      "last_halfstep_coupling_iterations": 0
+    },
+    "final": {
+      "age_yr": 10000000000,
+      "step_yr": 463829155.5498101,
+      "R_Rsun": 0.12891498194431436,
+      "L_Lsun": 0.0009194174842119301,
+      "Teff_K": 2799.323396455053,
+      "central_X": 0.6974018215530989,
+      "central_Y3": 0.0025980645449726544,
+      "step_error_norm": 0.5256980961654278,
+      "discrete_luminosity_balance": 2.4829027722717e-12,
+      "nuclear_rest_mass_balance": -5.395639490757276e-11,
+      "last_halfstep_coupling_iterations": 3
+    },
+    "max_luminosity_balance": 4.693920585552291e-09,
+    "max_nuclear_mass_balance": 1.0790344173727817e-08
+  },
+  "interpretation": "Mesh differences remain nonmonotonic; timestep and mesh differences are numerical checks, not estimates of physical-model uncertainty. Time is since specified static composition, not formation."
+}

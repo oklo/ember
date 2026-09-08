@@ -15,7 +15,7 @@ using detail::Differential;
 using detail::exp;
 using detail::log;
 
-struct Previous { double E, rho; };
+struct Previous { double E, rho, E_hi, rho_hi; };
 std::optional<Previous> prepare(const Model& m, std::size_t i, const Physics& phys,
                                 double dt, const Model* prev) {
   if (!phys.eos || !phys.opacity || !phys.nuclear)
@@ -31,7 +31,8 @@ std::optional<Previous> prepare(const Model& m, std::size_t i, const Physics& ph
   if (!prev || prev->size() != m.size() || prev->comp.size() != m.size() || prev->m != m.m)
     throw std::invalid_argument("zone_residual: time dependence requires a previous model on the same mesh");
   const double rho = prev->rho(i);
-  return Previous{phys.eos->eval(prev->T(i), rho, prev->comp[i]).E, rho};
+  return Previous{phys.eos->eval(prev->T(i), rho, prev->comp[i]).E, rho,
+    phys.eos->eval(prev->T(i+1),prev->rho(i+1),prev->comp[i+1]).E,prev->rho(i+1)};
 }
 
 template<std::size_t N> struct Local {
@@ -98,9 +99,9 @@ std::array<Differential<N>, NVAR> equations(const Model& model, std::size_t i,
   f[0] = (b.lnr - a.lnr) / dm - 1.0 / (4.0 * M_PI * rb * rb * rb * rhob);
   f[1] = dlnP + G * mb / (4.0 * M_PI * rb * rb * rb * rb * Pb);
   D eps_grav{};
-  if (prev) eps_grav = detail::gravitational_heating(a.E, a.P, a.rho, prev->E, prev->rho, dt);
-  // Retains the existing left-endpoint backward energy difference. A future
-  // time integrator must address its order separately from Jacobian assembly.
+  if (prev) eps_grav = 0.5*(detail::gravitational_heating(a.E,a.P,a.rho,prev->E,prev->rho,dt)
+    +detail::gravitational_heating(b.E,b.P,b.rho,prev->E_hi,prev->rho_hi,dt));
+  // Match the same trapezoidal nodal mass weights used for burning/mixing.
   f[2] = (b.L - a.L) / dm - (0.5 * (a.eps + b.eps) + eps_grav);
 
   const D gravity = G * mb / (rb * rb);

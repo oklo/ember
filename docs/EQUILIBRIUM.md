@@ -1,6 +1,6 @@
 # Static stellar equilibrium
 
-The current **0.1 Msun fixed-composition equilibrium** uses a consistent
+The historical **0.1 Msun fixed-composition equilibrium** uses a consistent
 FreeEOS-based Helmholtz potential, AESOPUS/TOPS radiative opacity, pp
 heating, MLT, and an AMES-COND non-grey boundary at Rosseland tau=100.
 At 4096 points it gives **R=.12973875 Rsun, L=.00094857566 Lsun,
@@ -8,7 +8,13 @@ Teff=2812.29 K**. This is an experimental static model with declared
 composition and source-fit approximations, not an age-matched calibration
 or an evolutionary calculation.
 
-## Reproduce the current reference
+The quoted values below are archived at `6cc4fb4`. The composition/burning
+milestone corrected the classical Debye screening normalization. The same
+atomic-basis static command now gives R=.12935124 Rsun, L=.00094042956 Lsun
+and Teff=2810.43 K; see [updated static metadata](results/equilibrium_m010_screening_corrected.json).
+The new baryonic-mass evolution is documented in [EVOLUTION.md](EVOLUTION.md).
+
+## Reproduce the static calculation
 
 ```
 cmake --build build

@@ -47,5 +47,7 @@
   "reproduce": "build/apps/ember-equilibrium 4096 .1 .15 --eos freeeos --hot-opacity tops --seed-index 1.5 --atmosphere cond-solar-proxy",
   "eos_potential_sha256": "34f5e83c898ab74273dd3d907b2ebac77c61976b8e1d7c5e1fda8530c69d823a",
   "atmosphere_table_sha256": "d1b69b368ba24ba983049df195b0efcd8a8c4d07f38629042ff8d0e2021e42c2",
-  "source_accuracy_audit": "freeeos_audit.json"
+  "source_accuracy_audit": "freeeos_audit.json",
+  "historical_checkpoint": "6cc4fb4",
+  "historical_note": "Predates classical Debye charge-normalization correction. Reproduce this archived result at the stated checkpoint; current static values differ. See EVOLUTION.md."
 }

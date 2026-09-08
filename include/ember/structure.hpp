@@ -12,10 +12,13 @@ namespace ember {
 //
 //   (1) mass:      d(ln r)/dm  = 1/(4 pi r^3 rho)
 //   (2) hydrostatic: d(ln P)/dm = -G m /(4 pi r^4 P)
-//   (3) energy:    dL/dm       = eps_nuc - eps_nu - T ds/dt
+//   (3) energy:    dL/dm       = eps_deposited - du/dt - P d(1/rho)/dt
 //   (4) transport: d(ln T)/dm  = grad * d(ln P)/dm
 //
-// written as centred differences over the zone between points i and i+1.  The
+// Nuclear neutrinos are already removed from eps_deposited. Internal energy
+// includes its composition dependence but excludes nuclear rest mass.
+// Time differences are backward Euler; nodal sources use trapezoidal mass
+// weights, including both endpoints of the zone between points i and i+1. The
 // gradient in (4) is radiative in Schwarzschild-stable zones, and the
 // Bohm-Vitense mixing-length result in unstable zones. The choice of form
 // matters as much as the value: scaling the radiative equation by a convective

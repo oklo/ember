@@ -1,0 +1,116 @@
+{
+  "calculation": "experimental static stellar equilibrium trial",
+  "physics": {
+    "eos": "FreeEOS 3.0 EOS1 material Helmholtz potential + radiation; metals represented by helium; fixed composition",
+    "opacity": "AESOPUS 2.1 gas + TOPS ATOMIC GS98, Z=0.020, no extrapolation",
+    "opacity_blend_logT": [
+      4.4,
+      4.5
+    ],
+    "atmosphere": "AMES-COND-2000 non-grey via MESA; untouched cool-dwarf cells",
+    "tau_top": null,
+    "tau_match": 100,
+    "atmosphere_composition_approximation": "GN93 solar proxy; atmosphere and interior mixtures are not matched",
+    "nuclear": "pp chains, fixed composition, X_He3=0",
+    "composition": "X=0.7, Z=0.02, AAG21 resolved metals (GS98 opacity approximation)",
+    "alpha_mlt": 1.9
+  },
+  "limitations": "fixed-composition EOS; source-fit joins regularized by C2 interpolation (see docs/FREEEOS.md); He3 and composition evolution unavailable; thin atmosphere; interior has no grain opacity, conduction, mixing, or evolution; alpha uncalibrated",
+  "converged": true,
+  "message": "converged",
+  "points": 4096,
+  "iterations": 9,
+  "residual": 2.180014541070968e-11,
+  "correction": 1.296225224379489e-11,
+  "relative_virial_error": -6.39499304733171e-07,
+  "mass_rms_eos_maxwell_defect": 1.328570955798998e-16,
+  "max_eos_defect_location": {
+    "mass_fraction": 0.007847933527108612,
+    "temperature_K": 4473645.936304101,
+    "density_g_cm3": 339.8772632514156
+  },
+  "mass_g": 1.98840987069805e+32,
+  "seed_radius_cm": 10435500000,
+  "seed_polytropic_index": 1.5,
+  "max_eos_maxwell_defect": 4.440892098500626e-16,
+  "radius_cm": 8998965528.222925,
+  "luminosity_erg_s": 3.599964342831982e+30,
+  "Teff_K": 2810.430536052718,
+  "integrated_nuclear_luminosity_erg_s": 3.599964342870668e+30,
+  "inner_mass_fraction": 1.228582689160923e-10,
+  "max_logR": 3.94520295395598,
+  "increasing_radius": true,
+  "decreasing_temperature": true,
+  "history": [
+    {
+      "residual": 0.02747030053828885,
+      "correction": 1.298309239750698,
+      "damping": 0.1540465043893581,
+      "linear_error": 1.728359072523962e-16
+    },
+    {
+      "residual": 0.02327372417404624,
+      "correction": 1.101549050672631,
+      "damping": 0.181562500442332,
+      "linear_error": 1.770128231692416e-16
+    },
+    {
+      "residual": 0.01907864963883945,
+      "correction": 0.8946238662757199,
+      "damping": 0.2235576397403652,
+      "linear_error": 2.093285089925983e-16
+    },
+    {
+      "residual": 0.01484198204756425,
+      "correction": 0.7060454687097673,
+      "damping": 0.2832678756022349,
+      "linear_error": 2.479129469086707e-16
+    },
+    {
+      "residual": 0.01066809985043614,
+      "correction": 0.5196085928811742,
+      "damping": 0.384905104996477,
+      "linear_error": 1.769096383231506e-16
+    },
+    {
+      "residual": 0.006593087144560078,
+      "correction": 0.3319210410096623,
+      "damping": 0.6025529426866855,
+      "linear_error": 2.01567802345189e-16
+    },
+    {
+      "residual": 0.002953554713922326,
+      "correction": 0.1404774439348745,
+      "damping": 1,
+      "linear_error": 2.151821806910752e-16
+    },
+    {
+      "residual": 0.00048455205933928,
+      "correction": 0.004393684215698802,
+      "damping": 1,
+      "linear_error": 1.994461345631029e-16
+    },
+    {
+      "residual": 4.118869531162213e-06,
+      "correction": 3.774622773882384e-06,
+      "damping": 1,
+      "linear_error": 1.957270494451171e-16
+    },
+    {
+      "residual": 2.180014541070968e-11,
+      "correction": 1.296225224379489e-11,
+      "damping": 0,
+      "linear_error": 1.931226425508046e-16
+    }
+  ],
+  "columns": [
+    "mass_g",
+    "radius_cm",
+    "density_g_cm3",
+    "temperature_K",
+    "luminosity_erg_s"
+  ],
+  "recorded_date": "2026-09-07",
+  "note": "Same atomic-mass convention and fixed composition as 6cc4fb4, with corrected classical Debye screening charge normalization.",
+  "reproduce": "build/apps/ember-equilibrium 4096 .1 .15 --eos freeeos --hot-opacity tops --seed-index 1.5 --atmosphere cond-solar-proxy"
+}

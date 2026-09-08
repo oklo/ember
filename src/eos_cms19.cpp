@@ -131,7 +131,7 @@ struct Cms19Eos::Impl {
   Impl(const std::filesystem::path& H, const std::filesystem::path& He, Metals m) : h(H, false), he(He, true), metals(m) {}
   double hydrogen(const Composition& c) const {
     for (double x : c.X) if (!std::isfinite(x) || x < 0) throw std::domain_error("CMS19: invalid composition");
-    if (std::abs(c.sum() - 1) > 1e-10 || c[Species::He3] != 0)
+    if (c.basis!=AbundanceBasis::atomic_mass || std::abs(c.sum() - 1) > 1e-10 || c[Species::He3] != 0)
       throw std::domain_error("CMS19: normalized composition with He3=0 required");
     if (c.Z() > 1e-12 && metals != Metals::helium_proxy)
       throw std::domain_error("CMS19: metals require explicit helium-proxy approximation");

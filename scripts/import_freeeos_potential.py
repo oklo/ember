@@ -22,12 +22,16 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('source', type=Path)
     ap.add_argument('output', type=Path)
+    ap.add_argument('--hydrogen', type=float, default=.7)
     a = ap.parse_args()
     original = a.source.read_bytes()
     src = json.loads(gzip.decompress(original))
     if src['version'] != 'FreeEOS 3.0.0' or src['options'] != [3, 1, -2]:
         raise ValueError('expected FreeEOS 3.0 EOS1 source')
-    expected_eps=[.7/1.00782503,.3/4.00260325]+[0.]*18
+    if not math.isfinite(a.hydrogen) or not 0 <= a.hydrogen <= .98:
+        raise ValueError('invalid hydrogen abundance')
+    helium = .3 if a.hydrogen == .7 else 1-a.hydrogen
+    expected_eps=[a.hydrogen/1.00782503,helium/4.00260325]+[0.]*18
     if len(src['eps'])!=20 or any(abs(x-y)>1e-14 for x,y in zip(src['eps'],expected_eps)):
         raise ValueError('source composition differs from the specified H/He mixture')
     lt, lq, rows = src['logT'], src['logQ'], src['data']
@@ -75,9 +79,11 @@ def main():
         coeff=first if order==1 else second
         return sum(w*phi[k+(i-2)*stride][col] for i,w in enumerate(coeff))/(12*h**order)
     lines=['EMBER_HELMHOLTZ 1',
-           f'source "FreeEOS 3.0.0 EOS1; H=.7 He=.3; direct-source SHA256 {hashlib.sha256(original).hexdigest()}"',
-           'composition_proxy "Metals represented by helium; fixed X=.7, effective Y=.3; He3 and composition changes unsupported"',
-           'composition '+' '.join(format(v,'.17g') for v in interior_composition()),
+           (f'source "FreeEOS 3.0.0 EOS1; H=.7 He=.3; direct-source SHA256 {hashlib.sha256(original).hexdigest()}"' if a.hydrogen==.7 else
+            f'source "FreeEOS 3.0.0 EOS1; H={a.hydrogen:g} He={helium:g}; direct-source SHA256 {hashlib.sha256(original).hexdigest()}"'),
+           ('composition_proxy "Metals represented by helium; fixed X=.7, effective Y=.3; He3 and composition changes unsupported"' if a.hydrogen==.7 else
+            f'composition_proxy "Metals represented by helium; fixed X={a.hydrogen:g}; composition family node"'),
+           'composition '+' '.join(format(v,'.17g') for v in interior_composition(a.hydrogen)),
            f'log_t {nt-4} '+' '.join(format(v,'.17g') for v in lt[2:-2]),
            f'log_q {nq-4} '+' '.join(format(v,'.17g') for v in lq[2:-2]),'data']
     invalid=0

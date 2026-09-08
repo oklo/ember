@@ -18,23 +18,25 @@ that the ultra-cold evolution of *massive* remnants - a solar remnant, or
 something near the Chandrasekhar mass - can be added as further terms rather
 than as a rewrite. See `docs/ROADMAP.md`.
 
-The physical modules and damped Henyey solver now converge an experimental
-**0.1 Msun static equilibrium** with a consistent FreeEOS-based Helmholtz
-potential, AESOPUS/TOPS radiative opacity, pp heating, mixing-length
-convection and a physical AMES-COND non-grey boundary at tau=100. The
-4096-point model gives **R=.12974 Rsun, L=.0009486 Lsun, Teff=2812 K**.
-Fifteen test suites pass, including caloric identities, source-data
-comparisons, stellar mesh refinement and the independent Lane–Emden benchmark.
+The code now completes a **coupled 10-Gyr evolution experiment for a
+0.1 Msun star** with composition-dependent FreeEOS potentials and
+AESOPUS/TOPS opacity, explicit pp burning, instantaneous convective mixing,
+and an AMES-COND non-grey boundary. At 4096 points the final model has
+**R=.128915 Rsun, L=.00091942 Lsun, Teff=2799.32 K**;
+hydrogen decreases from .7 to .697402 and He3 grows to .00259806.
+Eighteen test suites pass, including source-data, conservation, coupled
+thermal evolution, timestep refinement and the independent Lane–Emden benchmark.
 
-This is not yet a calibrated physical stellar model. The fixed-composition
-EOS treats metals as helium; the atmosphere is an explicit solar-mixture
-proxy. Smoothing small FreeEOS source-fit joins changes some audited local
-responses by 1–2%, despite exact thermodynamic consistency of the potential.
-He3/composition responses, mixing and time-step control remain pending.
-No evolutionary run has been made. See [docs/EQUILIBRIUM.md](docs/EQUILIBRIUM.md)
-for reproduction, numerical checks and limitations, and
-[docs/FREEEOS.md](docs/FREEEOS.md) for the new EOS. The earlier
-[CMS19 experiment](docs/CMS19.md) retains its static-only energy guard.
+This is a bounded early-evolution experiment. Time starts from a specified
+static composition with zero He3, rather than formation. The consistent EOS
+still treats metals as helium; opacity uses a nominal isotope approximation;
+the non-grey atmosphere retains a frozen solar-mixture T/P boundary with
+explicit small-composition-change limits. The run does not reach hydrogen
+exhaustion or white-dwarf cooling. See [docs/EVOLUTION.md](docs/EVOLUTION.md)
+for equations, numerical checks, source coverage and reproduction.
+[docs/FREEEOS.md](docs/FREEEOS.md) documents the underlying potential and its
+source-fit uncertainties. The retained [CMS19 experiment](docs/CMS19.md)
+keeps its static-only energy guard.
 
 ## Design
 
@@ -80,11 +82,11 @@ returns one. Those should surface, not be optimised away.
 |---|---|
 | Composition | Asplund, Amarsi & Grevesse (2021) |
 | Low-T opacity | AESOPUS 2.1 gas (Marigo et al. 2024), log R to 6; Ferguson (2005) also available with grains |
-| High-T opacity | LANL TOPS ATOMIC at X=.7, Z=.02; OPAL GS98 subset also available; strict smooth blends |
-| Equation of state | FreeEOS 3.0 EOS1 data represented by one C2 Helmholtz potential, fixed H/He mixture; CMS19 static-only and analytic ideal+FD alternatives |
+| High-T opacity | LANL TOPS ATOMIC at X=.6/.65/.7/.75, Z=.02; OPAL GS98 subset also available; strict smooth blends |
+| Equation of state | FreeEOS 3.0 EOS1 data represented by one C2 Helmholtz potential, variable H with He3 number-density mapping; CMS19 static-only and analytic ideal+FD alternatives |
 | Conduction | Cassisi et al. (2007) *(pending)* |
 | Convection | Böhm–Vitense MLT, optically thick; Schwarzschild criterion |
-| Nuclear rates | JINA REACLIB / NACRE II *(pending)* |
+| Nuclear rates | Reduced pp network with explicit He3, atomic mass-defect heating and classical screening; modern rate/screening audit pending |
 | Atmosphere | AMES-COND-2000 non-grey tau=100 states via MESA, explicit solar-mixture proxy; Eddington grey alternative |
 
 ## Licence

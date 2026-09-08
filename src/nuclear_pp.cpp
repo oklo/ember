@@ -47,23 +47,23 @@ Rate he3he4(double T9) {                   // He3(alpha,gamma)Be7 - ppII/ppIII
   return {f, -2.0 / 3.0 + tau / 3.0};
 }
 
-// Salpeter weak screening.  Valid while the Coulomb coupling is small, which
-// is the regime a hydrogen-burning low-mass star occupies; a cold dense
+// Classical Salpeter weak screening. Valid while the Coulomb coupling is
+// small; intermediate coupling/degenerate electrons need further work. A cold dense
 // remnant needs Chugunov et al. (2007) instead, which is why this lives behind
 // the Nuclear interface rather than inside it.
 struct Screening { double factor, dlnf_dlnT, dlnf_dlnRho; };
-Screening screen_weak(double T, double rho, const Composition& c, double z1, double z2) {
-  const double zbar  = c.mu_elec_inv() / c.mu_ions_inv();
-  const double z2bar = [&] {
-    double s = 0.0;
-    for (std::size_t i = 0; i < NSPEC; ++i)
-      s += c.X[i] * nuclides[i].Z * nuclides[i].Z / nuclides[i].A;
-    return s / c.mu_ions_inv();
-  }();
-  const double ne = c.mu_elec_inv() * NA * rho;
+Screening screen_weak(double T, double rho, const Composition& comp, double z1, double z2) {
+  // Classical electron + ion charge susceptibility: ne + sum(ni Zi^2).
+  // Multiplying ion-averaged charges by ne instead of ni introduces an
+  // erroneous extra mean ionic charge in mixtures containing helium.
+  double charges=0;
+  for(std::size_t i=0;i<NSPEC;++i) {
+    const double z=nuclides[i].Z;
+    charges+=comp.X[i]*(z*z+z)/comp.abundance_weight(i);
+  }
   // H12 = z1 z2 e^2 / (kT) * kappa_D ; assembled in CGS below.
   const double e2 = 4.803204673e-10 * 4.803204673e-10;
-  const double kD = std::sqrt(4.0 * M_PI * e2 * ne * (z2bar + zbar) / (kB * T));
+  const double kD = std::sqrt(4.0 * M_PI * e2 * rho * NA * charges / (kB * T));
   const double H = z1 * z2 * e2 * kD / (kB * T);
   // Differentiate the implemented cap as well: above it the factor is
   // constant, while below it H is proportional to rho^(1/2) T^(-3/2).
@@ -81,9 +81,9 @@ NuclearState PPChains::eval(double T, double rho, const Composition& c) const {
   const double X  = c[Species::H1];
   const double Y3 = c[Species::He3];
   const double Y4 = c[Species::He4];
-  const double A1 = nuclides[static_cast<std::size_t>(Species::H1)].A;
-  const double A3 = nuclides[static_cast<std::size_t>(Species::He3)].A;
-  const double A4 = nuclides[static_cast<std::size_t>(Species::He4)].A;
+  const double A1 = c.abundance_weight(0);
+  const double A3 = c.abundance_weight(1);
+  const double A4 = c.abundance_weight(2);
 
   const auto r_pp   = pp(T9);
   const auto r_33   = he3he3(T9);
@@ -117,22 +117,28 @@ NuclearState PPChains::eval(double T, double rho, const Composition& c) const {
   d[iHe4] = ( n_33 + n_34) * A4;
 
   double dm = 0.0;
-  for (double v : d) dm += v;                 // negative: mass is lost
+  if(c.basis == AbundanceBasis::atomic_mass) {
+    for(double v:d) dm+=v; // retain the legacy static convention exactly
+  } else {
+    for(std::size_t i=0;i<NSPEC;++i) dm+=d[i]*nuclides[i].A/mass_numbers[i];
+  }
   const double eps_total = -dm * c_light * c_light;       // erg/g/s liberated
 
   // Neutrinos take their share straight out of the star.  pp emits 0.265 MeV
   // on average; the Be7 electron capture that opens ppII emits 0.861 MeV.
   constexpr double MeV = 1.602176634e-6;
   const double eps_nu = (n_pp * 0.265 + n_34 * 0.861) * MeV * NA;
+  s.eps_neutrino = eps_nu;
   s.eps = eps_total - eps_nu;
   if (s.eps < 0.0) s.eps = 0.0;
 
   // Differentiate the same mass-defect heating rate, including the escaping
   // neutrinos and the density/temperature dependence of screening.
   const double c2 = c_light * c_light;
-  const double w_pp = n_pp * ((3.0 * A1 - A3) * c2 - 0.265 * MeV * NA);
-  const double w_33 = n_33 * ((2.0 * A3 - 2.0 * A1 - A4) * c2);
-  const double w_34 = n_34 * ((A3 + A1 - A4) * c2 - 0.861 * MeV * NA);
+  const double m1=nuclides[0].A,m3=nuclides[1].A,m4=nuclides[2].A;
+  const double w_pp = n_pp * ((3.0 * m1 - m3) * c2 - 0.265 * MeV * NA);
+  const double w_33 = n_33 * ((2.0 * m3 - 2.0 * m1 - m4) * c2);
+  const double w_34 = n_34 * ((m3 + m1 - m4) * c2 - 0.861 * MeV * NA);
   if (s.eps > 0.0) {
     s.dlneps_dlnT = (w_pp * (r_pp.dlnv_dlnT + f_pp.dlnf_dlnT)
                    + w_33 * (r_33.dlnv_dlnT + f_33.dlnf_dlnT)
@@ -142,6 +148,41 @@ NuclearState PPChains::eval(double T, double rho, const Composition& c) const {
                      + w_34 * (1.0 + f_34.dlnf_dlnRho)) / s.eps;
   }
   return s;
+}
+
+NuclearResponse PPChains::composition_response(double T,double rho,const Composition& comp) const {
+  NuclearResponse result;result.state=eval(T,rho,comp);
+  if(T<1e5) return result;
+  const double w1=comp.abundance_weight(0),w3=comp.abundance_weight(1),w4=comp.abundance_weight(2);
+  const double h1=comp.X[0]/w1,h3=comp.X[1]/w3,h4=comp.X[2]/w4;
+  const auto s1=screen_weak(T,rho,comp,1,1),s2=screen_weak(T,rho,comp,2,2);
+  const double c1=.5*rho*pp(T*1e-9).v*s1.factor;
+  const double c2=.5*rho*he3he3(T*1e-9).v*s2.factor;
+  const double c3=rho*he3he4(T*1e-9).v*s2.factor;
+  double charges=0;
+  for(std::size_t j=0;j<NSPEC;++j) {
+    const double y=comp.X[j]/comp.abundance_weight(j),z=nuclides[j].Z;
+    charges+=(z*z+z)*y;
+  }
+  const double m1=nuclides[0].A,m3=nuclides[1].A,m4=nuclides[2].A;
+  constexpr double mev=1.602176634e-6;
+  const double q1=(3*m1-m3)*c_light*c_light-.265*mev*NA;
+  const double q2=(2*m3-2*m1-m4)*c_light*c_light;
+  const double q3=(m3+m1-m4)*c_light*c_light-.861*mev*NA;
+  for(std::size_t j=0;j<NSPEC;++j) {
+    const double z=nuclides[j].Z,w=comp.abundance_weight(j);
+    const double derivative=.5*(z*z+z)/(w*charges);
+    const double df1=s1.dlnf_dlnRho>0?std::log(s1.factor)*derivative:0;
+    const double df2=s2.dlnf_dlnRho>0?std::log(s2.factor)*derivative:0;
+    const double n1=c1*h1*h1*df1+(j==0?2*c1*h1/w1:0);
+    const double n2=c2*h3*h3*df2+(j==1?2*c2*h3/w3:0);
+    const double n3=c3*h3*h4*df2+(j==1?c3*h4/w3:0)+(j==2?c3*h3/w4:0);
+    result.d_dXdt_dX[0][j]=(-3*n1+2*n2-n3)*w1;
+    result.d_dXdt_dX[1][j]=(n1-2*n2-n3)*w3;
+    result.d_dXdt_dX[2][j]=(n2+n3)*w4;
+    result.deps_dX[j]=q1*n1+q2*n2+q3*n3;
+  }
+  return result;
 }
 
 } // namespace ember

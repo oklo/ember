@@ -41,8 +41,8 @@ int main() {
     check(s.eps < 1e-20, "burning is negligible at 1e5 K", s.eps, 0.0);
   }
 
-  // 3. Baryon bookkeeping: the mass fractions must not drift.  Every reaction
-  //    conserves nucleons, so the rates have to sum to zero.
+  // 3. Legacy atomic-mass bookkeeping: rest mass decreases as energy leaves.
+  //    Separate baryonic tests check nucleon conservation in that basis.
   {
     Composition c = solar_scaled(0.50, 0.014);
     c[Species::He3] = 1e-3;

@@ -1,33 +1,47 @@
 # ember — handoff
 
-Updated 2026-09-07 after the consistent-EOS/non-grey milestone. Read this,
-then `docs/EQUILIBRIUM.md`, `docs/FREEEOS.md` and
-`data/atmosphere/README.md`. Use `git status` and `git log` to distinguish
-subsequent work. GitHub pushes are authorized; the earlier static checkpoint
-was pushed as `2ba3bcd` before this work.
+Updated 2026-09-07 after composition-dependent EOS/opacity and coupled
+burning/mixing. Read this, then **`docs/EVOLUTION.md`**, `docs/FREEEOS.md`
+and the data READMEs. Use `git status` and `git log` for current history.
+GitHub pushes are authorized. The previous static/non-grey checkpoint is
+`6cc4fb4`; its numerical values predate the screening correction below.
 
-**The 0.1 Msun model now converges with a consistent FreeEOS-based C2
-Helmholtz potential and a real AMES-COND non-grey tau=100 boundary.**
-At 4096 points: R=.12973875 Rsun, L=.00094857566 Lsun, Teff=2812.29 K,
-Tc=4.58580e6 K, rhoc=350.601 g/cm³. Fifteen CTest suites pass. The maximum
-pressure/entropy Maxwell identity residual is 4.44e-16, compared with .242
-in the retained CMS19 experiment. This is consistency of the implemented
-potential, not machine-precision physical accuracy.
+**The 0.1 Msun experiment now evolves for 10 billion years with coupled pp
+burning, instantaneous convective mixing and thermal structure.** At 4096
+points: R=.12891498 Rsun, L=.00091941748 Lsun, Teff=2799.32 K,
+Tc=4.55637e6 K, rhoc=356.9611 g/cm³. H1 falls from .7 to .69740182;
+He3 rises from zero to .00259806. Eighteen CTest suites pass.
 
-**Limitations remain explicit.** The EOS is fixed X=.7, effective Y=.3
-(metals as helium), and COND is an unmatched GN93 solar-mixture proxy.
-Small FreeEOS source-fit discontinuities are regularized by the potential;
-source-response differences at audited off-grid points reach 1–2%. Source
-and stellar grid refinements are documented without claiming monotonic
-thermal convergence. The EOS caloric state and its time-dependent zone
-Jacobians are tested, but He3/composition changes, mixing and time-step
-control remain unsupported. No evolution has been run. CMS19 keeps its
-original static-only energy guard; do not remove it.
+**This is bounded initial evolution.** The age origin is the specified
+static composition, not formation. New evolution uses conserved **baryonic**
+mass and abundances; old static drivers retain atomic mass fractions.
+Nuclear rest mass defects are separately included in energy, with no
+renormalization that hides their release. Newtonian gravitational mass
+remains the conserved baryonic mass. Do not silently equate the old and
+new mass/composition conventions.
 
-The new model is about 4.6% larger and 8.8% brighter than BHAC15's .1 Msun,
-5-Gyr point, with Teff 1.3 K higher. The old observed-star mass runs in
-`docs/LITERATURE_COMPARISON.md` remain explicitly CMS19/grey results and
-must not be presented as tests of the new physics.
+Four FreeEOS potential planes cover source X=.6/.65/.7/.75, with explicit
+He3 number-density mapping and ideal isotope entropy. Metals remain the
+He4 proxy. New TOPS data cover the same X planes at GS98 Z=.02, rejecting
+every source-substituted density. Evolution explicitly uses nominal X/Z
+and He3-as-He4 opacity, capped at He3=.005. COND remains a **frozen GN93
+T/P boundary** with actual-EOS density inversion, limited to
+|Xsurface-.7|<=.005 and He3<=.005. These limits are operational assumptions,
+not calibrated physical-error bounds. No composition-dependent atmosphere
+source grid or white-dwarf cooling run exists yet.
+
+The new nuclear audit corrected the old classical Debye screening charge
+normalization (an extra mean ionic charge). This changes even static runs;
+`docs/results/equilibrium_m010_screening_corrected.json` records the updated
+atomic-basis reference. Classical weak screening and the exp(2) cap still
+need qualification for intermediate coupling/degenerate electrons.
+FreeEOS molecular-fit joins still limit sampled response accuracy to about
+1–2%. Exact discrete conservation is not a physical accuracy estimate.
+
+The 10-Gyr 4096-point track uses 23 accepted macrosteps. Largest recorded
+last-half-step luminosity and nuclear mass-defect imbalances are 4.70e-9
+and 1.08e-8 relative. Mesh differences remain nonmonotonic; timestep and
+mesh comparisons are in `docs/results/evolution_convergence.json`.
 
 ---
 
@@ -85,9 +99,10 @@ table returns one. Those must surface.
 
 ## 3. Current state
 
-Fifteen suites pass: eos, opacity, dense_opacity, nuclear, structure,
+Eighteen suites pass: eos, opacity, dense_opacity, nuclear, structure,
 convection, atmosphere, henyey, relaxation, stellar_equilibrium, cms19,
-tops, low_mass_equilibrium, helmholtz and nongrey_equilibrium. The independent n=3 radiative-polytrope
+tops, low_mass_equilibrium, helmholtz, nongrey_equilibrium,
+composition_physics, burning_mixing and coupled_evolution. The independent n=3 radiative-polytrope
 benchmark and the older ionized-EOS 0.5 Msun benchmark are retained.
 
 | Module | Implementation | State |
@@ -95,13 +110,13 @@ benchmark and the older ionized-EOS 0.5 Msun benchmark are retained.
 | Constants/composition | `constants.hpp`, `composition.{hpp,cpp}` | CODATA 2018, nominal solar units, 8 species, AAG21 metal helper |
 | Analytic EOS | `eos_components.cpp`, `eos_composite.hpp`, `fermi.{hpp,cpp}` | ions, radiation, relativistic FD electrons; component Hessians |
 | CMS19 EOS | `eos_cms19.{hpp,cpp}`, `src/jet2.hpp` | original pure-H/He TP density/entropy, additive-volume mixture, actual interpolation Hessians, strict fluid support; **static only** |
-| Helmholtz EOS | `eos_helmholtz.{hpp,cpp}` | C2 FreeEOS 3.0 EOS1 material potential; analytic P/E/S and transport derivatives; fixed H/He composition, strict support, source-fit join approximation audited |
+| Helmholtz EOS | `eos_helmholtz`, `eos_composition` | C2 FreeEOS potentials at four X values, He3 number-density mapping, analytic thermal/composition derivatives; explicit metal/isotope approximations |
 | EOS interface | `eos.hpp` | transport response derivatives, optional density bounds, virtual PT inversion, explicit internal-energy availability |
-| Opacity | `opacity_table.{hpp,cpp}`, source wrappers | strict monotone tables in native log R or log rho, fixed Z, single-X support |
+| Opacity | `opacity_table.{hpp,cpp}`, source wrappers | strict monotone tables in native log R or log rho, fixed Z, single- or multiple-X support |
 | Low-T opacity | `opacity_aesopus.hpp`, `opacity_ferguson.hpp` | AESOPUS 2.1 gas log R to 6; Ferguson with grains also available |
-| Hot opacity | `opacity_opal.hpp`, `opacity_tops.hpp` | OPAL log R to 1; TOPS two un-clamped rectangles at X=.7, Z=.02 |
+| Hot opacity | `opacity_opal.hpp`, `opacity_tops.hpp` | OPAL log R to 1; TOPS two un-clamped rectangles at X=.6/.65/.7/.75, Z=.02 |
 | Blending | `opacity_blend.{hpp,cpp}` | smooth ln-kappa blends, analytic derivatives, strict overlap intersection |
-| Nuclear | `nuclear_pp.cpp` | pp chains, explicit He3, derivatives of actual mass-defect heating and weak screening |
+| Nuclear | `nuclear_pp.cpp` | pp chains, explicit He3, atomic/baryonic bases, corrected classical screening and analytic composition/thermal derivatives |
 | Structure | `structure.{hpp,cpp}` | four residuals and analytic Jacobian; independent numerical checks; unsupported positive-dt energy rejected |
 | Convection | `convection.{hpp,cpp}` | BV58 MLT, Schwarzschild criterion, bounded cubic and analytic response |
 | Atmosphere | `atmosphere_grey.cpp` | radiative Eddington T(tau), variable opacity, adaptive integration and analytic sensitivities; EOS/opacity bounds intersect |
@@ -109,7 +124,7 @@ benchmark and the older ionized-EOS 0.5 Msun benchmark are retained.
 | Boundaries | `boundary.{hpp,cpp}` | regular unresolved central sphere and interchangeable atmosphere surface, analytic derivatives |
 | Henyey/relaxation | `henyey.cpp`, `relaxation.cpp` | pivoted blocks, iterative refinement, damped Newton with residual AND undamped correction checks |
 | Seeds/apps | `examples/stellar_seed.hpp`, `apps/equilibrium.cpp` | n=3 or n=1.5 Lane–Emden seed; rebuild mass after envelope adjustment; structured diagnostics |
-| Missing evolution | interfaces only | caloric/composition physics, mixing, adaptive mesh and timestep controller incomplete |
+| Evolution | `evolution.{hpp,cpp}`, `apps/evolve.cpp` | coupled backward-Euler burning/mixing/thermal structure; adaptive step-doubling on fixed mass mesh; bounded 10-Gyr experiment |
 | Massive WD hooks | `losses.hpp`, `conduction.hpp` | declared, unimplemented; not the current task |
 
 Data travel with the code. Source hashes, strict coverage and reproduction
@@ -142,13 +157,41 @@ the stellar driver blends AESOPUS to its selected hot opacity over 4.4..4.5.
 
 ## 4. Reproduce and continue
 
-### Current FreeEOS/COND reference
+### Current coupled evolution reference
+
+```
+build/apps/ember-evolve 4096 1e10 1e7 > out/evolution-4096-10gyr.json
+build/apps/ember-evolve 1024 1e10 1e7 .25 > out/evolution-1024-10gyr-tight.json
+python3 scripts/verify_composition_data.py
+```
+
+Positions are points, duration years, initial step years, optional tolerance
+multiplier. JSON stdout includes accepted history and full final profile;
+stderr reports progress. Each macrostep compares one full versus two half
+steps and retains the two-half-step solution. Failed steps roll back; do
+not accept the last unconverged composition or structure. Convection uses
+connected Schwarzschild regions and instantaneous mass-conserving mixing,
+iterated with the thermal solve until both converge. See EVOLUTION.md.
+
+Raw data for all four EOS composition planes and all TOPS planes are
+versioned with checksum manifests. The EOS and opacity imports reproduce
+byte for byte offline. The original external FreeEOS probe is available
+in `/tmp/ember-freeeos-reproduce/probe` on the development host; build
+instructions are in FREEEOS.md. Independent reference generation:
+
+```
+python3 scripts/generate_freeeos_composition_reference.py /tmp/ember-freeeos-reproduce/probe /tmp/composition-reference.dat
+```
+
+### Historical FreeEOS/COND static reference at `6cc4fb4`
 
 ```
 build/apps/ember-equilibrium 4096 .1 .15 --eos freeeos --hot-opacity tops --seed-index 1.5 --atmosphere cond-solar-proxy > out/equilibrium-m010-nongrey-reference.json
 ```
 
-Nine accepted updates, residual 6.60e-13, correction 6.76e-12, nuclear
+The following values belong to `6cc4fb4` before screening correction;
+the same command now gives R=.12935124, L=.00094042956, Teff=2810.43 K.
+The old checkpoint had nine accepted updates, residual 6.60e-13, correction 6.76e-12, nuclear
 balance about 2e-14 relative and independent virial error -6.396e-7.
 The 1024/2048/4096 models agree to <.014% in R and <.078% in L between
 successive meshes; virial error falls by four each doubling, while R/L
@@ -244,20 +287,22 @@ Never extrapolate a surface integration below the EOS density floor.
 
 ### Next actions, in order
 
-1. Extend/qualify the consistent potential: physical metals and He3,
-   composition responses, and smooth source molecular/other fit joins.
-   Keep source-value accuracy separate from thermodynamic identities.
-   FreeEOS has a valid fixed-composition caloric state; CMS19 remains static-only.
-2. Match a modern non-grey atmosphere mixture to the interior and quantify
-   geometric extension and atmosphere-grid interpolation. COND is a useful
-   physical first boundary, with an explicit mixture approximation.
-3. Repeat independent stellar/observational comparisons with the improved
-   physics and abundance/age constraints. Extend TOPS to evolving X; the
-   current request supports only .7. Add conduction when required.
-4. Adaptive envelope/core mesh with a density smoothness term, convective
-   composition mixing, then time-step error control and composition advance.
-5. Follow the original end-to-end 0.1 Msun milestone; massive WD ion physics
-   remains future work. GitHub pushes are authorized, as recorded in §1.
+1. Qualify pp coefficients and screening for the current partially degenerate
+   core; replace the classical capped approximation with a suitable consistent
+   prescription. The charge-normalization bug is fixed, not the full screening
+   uncertainty. Keep rate normalization and atomic/baryonic conventions explicit.
+2. Extend source composition coverage toward hydrogen depletion and improve
+   physical metals/isotope EOS treatment and source-fit joins. Do not clamp
+   the family at its current equivalent-source X limits.
+3. Obtain a composition-dependent non-grey atmosphere or quantify a justified
+   extension. The present frozen COND T/P wrapper must stop at its explicit
+   abundance caps; deleting those guards does not supply new atmosphere physics.
+4. Adaptive mesh, Ledoux/diffusive mixing and moving convective-boundary
+   validation before following a radiative core or burning shell. Repeat
+   age/composition-aware literature/observational comparisons with the new track.
+5. Conduction, thermal neutrinos and dense-ion/cooling physics for the original
+   end-to-end 0.1 Msun milestone. Massive WD physics remains future work.
+   GitHub pushes remain authorized, as recorded in §1.
 
 ### Retained old runs and practical source notes
 
@@ -326,8 +371,9 @@ Do not rediscover these.
    - NaN under strong degeneracy: at β ~ 1e-4 the FD derivative integrand is a
      shell of width ~β that a single quadrature panel never samples
    - a wrong ppII branch ratio (caught by the mass defect, **not** by
-     "mass fractions sum to zero" — they must *not*; they fall at
-     Σ dX/dt = −(ε+ε_ν)/c², and testing against zero hides the error)
+     "mass fractions sum to zero" in the atomic-mass convention, where
+     Σ dX/dt = −(ε+ε_ν)/c². In the new baryonic convention their sum is
+     zero and atomic/integer mass ratios give the released energy)
    - **and twice the *test* was wrong, not the code**: a point labelled "the
      ideal limit" with 13% of its pressure in radiation, and a shell built by
      one-point integration checked against a centred-difference equation.

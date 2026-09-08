@@ -1,6 +1,7 @@
 #pragma once
 #include "ember/composition.hpp"
 #include <optional>
+#include <limits>
 
 namespace ember {
 
@@ -8,6 +9,7 @@ struct OpacityState {
   double kappa{};      // Rosseland mean, radiative + conductive  [cm^2/g]
   double dlnk_dlnT{};
   double dlnk_dlnRho{};
+  double dlnk_dX{std::numeric_limits<double>::quiet_NaN()}; // fixed Z, He4 replaced by H1
 };
 
 class Opacity {

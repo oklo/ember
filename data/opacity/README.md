@@ -199,3 +199,33 @@ calling source wrapper must match the file. A single X plane requires an
 exact X match. Axes must be finite and strictly increasing; all X planes must have the same
 Z. Missing-cell sentinels, truncated input, trailing tokens, invalid opacity
 values and inconsistent compositions are errors.
+
+## Composition-dependent TOPS family
+
+The new `tops_gs98_composition_z020_{low,high}.dat` files add individually
+requested X=.60, .65 and .75 to the unchanged original .70 calculation.
+Every mixture uses the same GS98 Z=.02 metal pattern and 50×71 requested
+T/rho grid. H/He, all 19 metal fractions, dimensions and SHA-256 hashes are
+verified before importing. All server-substituted density cells are excluded.
+Common support is 50×63 cells per low plane and 36×71 per high plane.
+The source manifest is `sources/tops_composition_manifest.json`.
+
+```
+python3 scripts/import_tops_composition.py data/opacity/sources/tops_composition_manifest.json /tmp/ember-tops
+python3 scripts/verify_composition_data.py
+```
+
+No service requests are needed for normal builds or reimport. The optional
+`scripts/fetch_tops_composition.py` archives new calculations through the
+public TOPS form. It submits to `/submit`, uses the returned `/results` form,
+and retries timeout/stale responses without accepting a different mixture.
+HTML is converted to text by removing markup, blank lines and edge spaces,
+and replacing nonbreaking spaces with ordinary spaces; numeric values and
+warning entries are retained. Request JSON and normalized returned text
+are versioned. A request-specific `--insecure` switch is available for the
+local certificate-chain problem; certificate verification is the default.
+
+The evolution driver explicitly selects a nominal-abundance wrapper that
+uses baryonic X/Z in the atomic-mixture tables and treats He3 as He4, limited
+to He3<=.005. This is a declared opacity approximation, not isotope-resolved
+source data or an accuracy bound. See [EVOLUTION.md](../../docs/EVOLUTION.md).

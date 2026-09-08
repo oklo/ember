@@ -7,6 +7,7 @@ add_library(ember
   eos_components.cpp
   eos_cms19.cpp
   eos_helmholtz.cpp
+  eos_composition.cpp
   nuclear_pp.cpp
   convection.cpp
   atmosphere_grey.cpp
@@ -14,6 +15,7 @@ add_library(ember
   boundary.cpp
   henyey.cpp
   relaxation.cpp
+  evolution.cpp
   structure.cpp
   eos_ideal.cpp)
 target_include_directories(ember PUBLIC ${CMAKE_SOURCE_DIR}/include)

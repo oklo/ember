@@ -300,8 +300,10 @@ int main() {
           "isothermal compression releases gravitational heat", dynamic.f[2] - stat.f[2], expected);
     const auto rho_var = static_cast<std::size_t>(Var::lnrho);
     const double derivative = dynamic.dfdy_lo[2][rho_var] - stat.dfdy_lo[2][rho_var];
-    check(std::abs(derivative / expected - 1.0) < 1e-12,
-          "compression derivative holds the old density fixed", derivative, expected);
+    // The exact finite volume change gives R*T*(rho/rho_old-1).
+    // At rho/rho_old=2 its log-density derivative is twice its value.
+    check(std::abs(derivative / (2*expected) - 1.0) < 1e-12,
+          "compression derivative holds the old density fixed", derivative, 2*expected);
   }
 
   // 6. Reject undefined zones and time-dependent states that cannot be

@@ -2,6 +2,7 @@
 #include "ember/composition.hpp"
 #include <stdexcept>
 #include <optional>
+#include <array>
 
 namespace ember {
 
@@ -38,6 +39,11 @@ struct EosResponse {
   double dgrad_ad_dlnT{}, dgrad_ad_dlnRho{};
 };
 
+// Composition directions replace He4 by H1 or He3, at fixed T, rho and metals.
+struct EosCompositionResponse {
+  std::array<double,2> dP{}, dE{};
+};
+
 class Eos {
 public:
   virtual ~Eos() = default;
@@ -51,6 +57,9 @@ public:
   virtual std::optional<DensityRange> density_range(double, const Composition&) const { return {}; }
   virtual EosResponse eval_with_derivatives(double, double, const Composition&) const {
     throw std::logic_error("Eos: analytic transport derivatives are not implemented");
+  }
+  virtual EosCompositionResponse composition_response(double, double, const Composition&) const {
+    throw std::logic_error("Eos: composition responses are not implemented");
   }
 
   // Invert to density at given (T, P).  Needed by the atmosphere, which

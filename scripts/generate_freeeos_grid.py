@@ -18,12 +18,17 @@ def main():
     ap.add_argument('probe',type=Path)
     ap.add_argument('output',type=Path)
     ap.add_argument('--step',type=float,default=.0125)
+    ap.add_argument('--hydrogen',type=float,default=.7)
     a=ap.parse_args()
     if not math.isfinite(a.step) or a.step<.005 or a.step>.1:
         raise ValueError('step must be .005 .. .1 dex')
     ts=[3.2+i*a.step for i in range(round(3.8/a.step)+1)]
     qs=[-5+i*a.step for i in range(round(7.4/a.step)+1)]
-    eps=[.7/1.00782503,.3/4.00260325]+[0.]*18
+    if not math.isfinite(a.hydrogen) or not 0 <= a.hydrogen <= .98:
+        raise ValueError('hydrogen must be 0 .. .98')
+    # Preserve the original .7 reference's exact floating-point inputs.
+    helium = .3 if a.hydrogen == .7 else 1-a.hydrogen
+    eps=[a.hydrogen/1.00782503,helium/4.00260325]+[0.]*18
     header=' '.join(map(str,eps))+'\n3 1 -2\n'
     def run(part):
         text=header+''.join(f'{math.log(10)*(q+1.5*(t-6)):.17g} {math.log(10)*t:.17g}\n'

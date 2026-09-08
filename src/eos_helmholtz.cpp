@@ -83,6 +83,8 @@ HelmholtzTableEos::HelmholtzTableEos(const std::filesystem::path& file, Mixture 
 }
 
 void HelmholtzTableEos::check_composition(const Composition& c) const {
+  if (c.basis != AbundanceBasis::atomic_mass)
+    throw std::domain_error("HelmholtzTableEos: source table uses atomic mass fractions");
   for (std::size_t i=0;i<NSPEC;++i)
     if (!std::isfinite(c.X[i]) || c.X[i]<0 || std::abs(c.X[i]-composition_.X[i])>1e-10)
       throw std::domain_error("HelmholtzTableEos: fixed composition only; He3/evolution unsupported");
@@ -99,6 +101,10 @@ std::pair<std::size_t,std::size_t> HelmholtzTableEos::supported_q(std::size_t it
 
 std::optional<Eos::DensityRange> HelmholtzTableEos::density_range(double T, const Composition& c) const {
   check_composition(c);
+  return material_density_range(T);
+}
+
+Eos::DensityRange HelmholtzTableEos::material_density_range(double T) const {
   if (!positive(T) || std::log(T)<t_.front() || std::log(T)>t_.back())
     throw std::domain_error("HelmholtzTableEos: temperature outside table");
   const double t=std::log(T);
@@ -110,6 +116,10 @@ std::optional<Eos::DensityRange> HelmholtzTableEos::density_range(double T, cons
 
 EosResponse HelmholtzTableEos::eval_with_derivatives(double T, double rho, const Composition& c) const {
   check_composition(c);
+  return helmholtz_response(T,rho,material_jet(T,rho));
+}
+
+HelmholtzJet HelmholtzTableEos::material_jet(double T, double rho) const {
   if (!positive(T) || !positive(rho)) throw std::domain_error("HelmholtzTableEos: invalid state");
   const double t=std::log(T), q=std::log(rho)-1.5*(t-6*ln10);
   if (t<t_.front() || t>t_.back() || q<q_.front() || q>q_.back())
@@ -126,16 +136,21 @@ EosResponse HelmholtzTableEos::eval_with_derivatives(double T, double rho, const
       for (std::size_t a=0;a<4;++a) for (std::size_t b=0;b<4-a;++b)
         f[a][b]+=node.d[3*i+j]*bt[3*si+i][a]*bq[3*sj+j][b];
   }
-  // Transform x derivatives at fixed Q to t derivatives at fixed rho.
-  // D_t = D_x - 1.5 D_q; D_r = D_q. Add phi_rad analytically.
+  // D_t at fixed rho = D_x at fixed Q - 1.5 D_Q.
+  HelmholtzJet j{};
+  constexpr int choose[4][4]={{1,0,0,0},{1,1,0,0},{1,2,1,0},{1,3,3,1}};
+  for(int i=0;i<4;++i) for(int k=0;k<4-i;++k)
+    for(int n=0;n<=i;++n) j[i][k]+=choose[i][n]*std::pow(-1.5,n)*f[i-n][k+n];
+  return j;
+}
+
+EosResponse helmholtz_response(double T,double rho,HelmholtzJet f) {
   const double rad=-constants::a_rad*std::pow(T,3)/(3*rho);
-  const double phi=f[0][0]+rad;
-  const double ft=f[1][0]-1.5*f[0][1]+3*rad, fr=f[0][1]-rad;
-  const double ftt=f[2][0]-3*f[1][1]+2.25*f[0][2]+9*rad;
-  const double ftr=f[1][1]-1.5*f[0][2]-3*rad, frr=f[0][2]+rad;
-  const double fttt=f[3][0]-4.5*f[2][1]+6.75*f[1][2]-3.375*f[0][3]+27*rad;
-  const double fttr=f[2][1]-3*f[1][2]+2.25*f[0][3]-9*rad;
-  const double ftrr=f[1][2]-1.5*f[0][3]+3*rad, frrr=f[0][3]-rad;
+  for(int i=0;i<4;++i) for(int j=0;j<4-i;++j)
+    f[i][j]+=rad*std::pow(3.,i)*(j%2?-1.:1.);
+  const double phi=f[0][0],ft=f[1][0],fr=f[0][1];
+  const double ftt=f[2][0],ftr=f[1][1],frr=f[0][2];
+  const double fttt=f[3][0],fttr=f[2][1],ftrr=f[1][2],frrr=f[0][3];
   using D=detail::Differential<2>;
   auto dual=[](double v,double dt,double dr) { D a(v); a.d={dt,dr}; return a; };
   const auto C=dual(fr,ftr,frr), cr=1+dual(frr,ftrr,frrr)/C;
