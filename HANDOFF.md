@@ -1,3 +1,90 @@
+# Checked EOS and further production savings — 2026-09-10 23:58 UTC
+
+The autonomous 0.1 Msun trajectory to an actually evolved 100 K helium remnant
+remains unfinished. The latest overall accepted state remains 3.685 trillion
+years. Current fresh controls are approaching/passing the convection transition.
+Use actual logs and receipts; do not report a requested endpoint as completed.
+No subagents. Preserve unrelated .DS_Store files and helium coexistence probes.
+
+Production executable is now 294044ffa4e9b13e2af2e5aae8a24348772257909dfa3a98055bdfff5e924fd3.
+It includes both the 8192-result per-worker cache and sharing the electron
+calculation between the two nuclear screening evaluations. The latter reduces
+CPU time by another 14.97% in ABBA tests against the larger-cache implementation:
+50.19 versus 42.68 seconds. All four full outputs match. Complete responses and
+derivatives at 2048 saved late stellar states match exactly as well. All32 test
+suites pass across the initial run plus one fixture repair/recheck. The isolated
+copy initially lacked three archived atmosphere JSON fixtures; those were copied
+unchanged and its28 source tests pass. Native restart passes in269.3seconds.
+The main production build reproduces the short output exactly. Reports:
+docs/results/screening_shared_cache_{benchmark,profiles,validation}_v5.json.
+Experiment/build/logs: /tmp/ember-screening-combined-v5. The production short
+snapshot is /tmp/ember-screening-shared-production-check-v5, session74299 done.
+This is a new successful comparison with the larger cache. Keep the earlier
+slower v2 and rejected rounding-change v3 records. Do not claim cooling timings.
+
+Long comparison still ACTIVE with unchanged copied executables and identical
+EOS64/132-atmosphere/hot-TOPS inputs, target3.800T:
+- Original cache: session91725, PID88285, /tmp/ember-t3600-forward-512-3800gyr-v1,
+  out/evolution-cold-remnant-t3600-forward-512-3800gyr-v1.*
+- Larger cache only: session62459, PID9133, /tmp/ember-t3600-cached-512-3800gyr-v1,
+  out/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.*
+The second started about31minutes later, caught up, and has identical logged
+accepted-state prefixes. It is near3.549T and takes small steps through the
+convection transition; the first is earlier. Compare complete histories and
+CPU receipts when done. Current source-tree edits do not alter either copied
+binary or its data; receipts will record those edits. The new screening-sharing
+change is NOT part of this particular long comparison.
+
+EOS72 is ACCEPTED and installed separately in data/eos/low_density_refined_v2/.
+Family SHA544db28d28b7382eca2646f1ae6d6980d2b1f9eccff3781a69c08626c6a5f321.
+Independent new-density and old-density tests pass (1188/792 queries); all132
+existing atmosphere nodes have EOS support. Report nongrey_t3600_low_density_eos_v2.json.
+The four old density holes are resolved. Parent-manifest reassembly reproduces
+the family exactly; installed sources/ metadata records this. Bulk files stay
+local. The current stellar comparison still selects EOS64. Select EOS72 only
+in a fresh calculation with the next accepted atmosphere table.
+
+Wavelength opacity to material temperature about13,150K is COMPLETE and checked
+at XH=.15/.2, He3=0/.12, plus independent XH=.175/He3=.005. Each retains all14
+old isotherms exactly and adds only two. Four source tables retain31.92million
+absorption values exactly; the independent mixture also passes. Work directories:
+/tmp/ember-nongrey-x015-opacity-13k-v1, x020-opacity-13k-v1, x0175-opacity-13k-v1.
+Reports nongrey_opacity_13k_{extension,heldout_extension}_v1.json. All four attempted
+15000K source rows had nonfinite absorption near He I4471Angstrom and were rejected;
+record nongrey_opacity_15000_rejected_v1.json. No filling/clipping or source patch.
+The numeric guard remains at the finite table's upper material temperature.
+
+Atmosphere source work:
+- Original controller v2 /tmp/ember-nongrey-t3800-t4000-v2 now has all8 high-gravity
+  3800K nodes across v1/v2 and all4 4000K/logg5.4 nodes. Check its completion.
+  Deep low-gravity and4000K/g5.15 attempts failed the old opacity range.
+- Shallow retry controller /tmp/ember-nongrey-t3800-t4000-shallow-v1, session52954:
+  both X=.15/4000K/g5.15 models are DONE. X=.2/3800K/g4.9 failed; do not reuse.
+- Wider-opacity controller /tmp/ember-nongrey-13k-t3800-t4000-v1, session17410,
+  --jobs4, plan nongrey_13k_t3800_t4000_plan_specification.json: four3800K/g4.9
+  models are in final solves. Then two X=.2/4000K/g5.15 and four4000K/g4.9
+  models follow, using accepted same-gravity seeds. No duplicates of active
+  or completed X=.15/4000K/g5.15 models were launched.
+- Independent/depth controller /tmp/ember-nongrey-13k-independent-checks-v1,
+  session46077, --jobs2, plan nongrey_13k_independent_checks_plan_specification.json:
+  X=.175/He3=.005 at3900K/g5.15 and3700K/g5.0 are active, then X=.15/.2
+  3800K/g4.9 depth150 comparisons against the wider-source depth300 baselines.
+- The earlier independent3700K/g5.15 and3800K/g5.15 depth comparison are done;
+  depth comparison passes at0.007883%. Source work remains separate from stellar
+  evolution. Assemble an explicit144-node 3800K table as soon as its12 new nodes
+  and relevant checks finish; the later4000K table will have156 nodes.
+  Keep old132 source models. Verify reassembly/runtime/EOS, intermediate source
+  comparisons, depths and condensation before selection. Do not relax guards.
+
+GitHub was updated through afcb791. The EOS installation,13k opacity source
+work, screening-sharing improvement and updated docs above still need publication.
+The Sept10 PDF remains at3.560T; update it with the next completed fresh history,
+keeping LBA97 primary and F77 faint, four significant figures and ordinary words.
+Current paper scripts hard-code3.560T; preserve that matched-mesh transition
+comparison separately if adding a newer trajectory to the main graphs.
+
+---
+
 # Source refinement progress — 2026-09-10 23:29 UTC
 
 The 100 K remnant objective remains unfinished. Most evolved accepted state:

@@ -1,0 +1,24 @@
+{
+  "scope": "Reuse one electron susceptibility result between the two charged-particle screening evaluations within each complete nuclear response. The larger exact per-worker response cache remains in place. No source formulas, physical guards or precision are changed.",
+  "installed_in_production": true,
+  "production_executable_sha256": "294044ffa4e9b13e2af2e5aae8a24348772257909dfa3a98055bdfff5e924fd3",
+  "production_source_sha256": "d1ee1de57c42de0fb5809f10a96e8768cb3a89a88786adade5e781a24e77fd09",
+  "benchmark_sha256": "7d87bb482aa9cac2f1b2e105df35099154e80f390eaa186dd7fe87df87b858fa",
+  "cpu_reduction_fraction_relative_to_large_cache": 0.14970992755298984,
+  "production_short_output_byte_identical": true,
+  "production_receipt_sha256": "e79f4d4b34763610bd04f921d8eae5063046ad53281a2770d75d19ec0d0d3231",
+  "late_profile_states_byte_identical": 2048,
+  "test_suites_passed": 32,
+  "test_record": {
+    "initial_suites_passed": 31,
+    "initial_suites_failed_for_missing_fixture_files": 1,
+    "initial_log_sha256": "64f4b8a757995f742b14d7541f42c2b58a4f42e63d921d7e692c46960886b2fe",
+    "native_restart_passed": true,
+    "native_restart_elapsed_seconds": 269.25,
+    "fixture_recheck_passed": true,
+    "fixture_recheck_elapsed_seconds": 7.09,
+    "fixture_recheck_log_sha256": "2059cf343ee9df923203b01f488866c27322456a3810324fc719e24bb97cfbc3",
+    "explanation": "The isolated copy omitted three archived atmosphere fixture JSON files. Copying those unchanged files fixed the source-import suite; no test or implementation was weakened. The other 31 suites, including native restart, passed in the initial run."
+  },
+  "limitations": "Short 100-billion-year benchmark with concurrent source work. The longer running comparison measures the earlier response-cache change only; cooling speed remains unmeasured."
+}

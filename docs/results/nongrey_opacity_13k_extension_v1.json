@@ -1,0 +1,57 @@
+{
+  "scope": "Check hotter opacity rows while retaining every previous numeric cell.\n\nThis checks finite source tables, unchanged composition, wavelengths and density\ncoordinates, and exact retention of all earlier temperatures, electron densities\nand absorption coefficients. It does not establish accuracy between source rows.\n",
+  "passed": true,
+  "pairs": [
+    {
+      "old": "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-000/opacity/fort.63",
+      "new": "/private/tmp/ember-nongrey-x015-opacity-13k-v1/plane-000/opacity/fort.63",
+      "retained_temperature_rows": 14,
+      "new_temperature_rows": 2,
+      "retained_absorption_values": 7980000,
+      "new_absorption_values": 1140000,
+      "retained_cells_exact": true,
+      "all_source_values_finite": true
+    },
+    {
+      "old": "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-001/opacity/fort.63",
+      "new": "/private/tmp/ember-nongrey-x015-opacity-13k-v1/plane-001/opacity/fort.63",
+      "retained_temperature_rows": 14,
+      "new_temperature_rows": 2,
+      "retained_absorption_values": 7980000,
+      "new_absorption_values": 1140000,
+      "retained_cells_exact": true,
+      "all_source_values_finite": true
+    },
+    {
+      "old": "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-002/fort.63",
+      "new": "/private/tmp/ember-nongrey-x020-opacity-13k-v1/plane-000/opacity/fort.63",
+      "retained_temperature_rows": 14,
+      "new_temperature_rows": 2,
+      "retained_absorption_values": 7980000,
+      "new_absorption_values": 1140000,
+      "retained_cells_exact": true,
+      "all_source_values_finite": true
+    },
+    {
+      "old": "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-003/fort.63",
+      "new": "/private/tmp/ember-nongrey-x020-opacity-13k-v1/plane-001/opacity/fort.63",
+      "retained_temperature_rows": 14,
+      "new_temperature_rows": 2,
+      "retained_absorption_values": 7980000,
+      "new_absorption_values": 1140000,
+      "retained_cells_exact": true,
+      "all_source_values_finite": true
+    }
+  ],
+  "input_files_sha256": {
+    "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-000/opacity/fort.63": "c314bf80a6a9d42556a6af060e7e9981d44cb034f584d499f5c4183c3a815acb",
+    "/private/tmp/ember-nongrey-x015-opacity-13k-v1/plane-000/opacity/fort.63": "15676f5497bb5be124f9e6cd8ffeb936ab8a5ef8355f36b5d0c5d2afc6b78a62",
+    "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-001/opacity/fort.63": "f3e6fc8841fc0c845c90c29b230cc025150e10dc3695186b378fcb32b50e5b8f",
+    "/private/tmp/ember-nongrey-x015-opacity-13k-v1/plane-001/opacity/fort.63": "c7484de37d156cd25bc08d51c2841f8421cca05e1db480e7120ae47f49a437e0",
+    "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-002/fort.63": "64f66d2e884da93c061ff239504c1b4570757da2223099aeef206736a8992359",
+    "/private/tmp/ember-nongrey-x020-opacity-13k-v1/plane-000/opacity/fort.63": "5951a1674667f936bf8832d41a3ba396a20fee24a592fb5821b3b833d6490952",
+    "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-003/fort.63": "d252fd78b9ebcc04f940781bb419b58d562073dd1199dcf2fe8623ea79729c39",
+    "/private/tmp/ember-nongrey-x020-opacity-13k-v1/plane-001/opacity/fort.63": "1da6810bebfda1aa730de858c221ef0f246a4ed3a3afc35fd235cb3b565a3ba4"
+  },
+  "script_sha256": "08f044fdaba30aeba7a7438a552b278214780c906e3791b4910e304ddb82f7d3"
+}

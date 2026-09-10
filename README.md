@@ -52,6 +52,12 @@ runtime guards reject those unsupported states. Nearby states at the evolving
 star's gravity are supported. See the [opacity](docs/results/tops_exhaustion_hot_profile_all_v2.json)
 and [atmosphere](docs/results/nongrey_t3600_extension_v1.json) checks.
 
+A separate 72-table EOS family has now passed independent source checks in its
+wider density range. It supports all 132 atmosphere models, including those four
+low-density cases, and is ready for a subsequent fresh calculation. The running
+comparison retains its original inputs. See the
+[EOS data notes](data/eos/README.md).
+
 Both 512- and 1024-point forward trials reached 3400 K, at 3.685 and 3.683
 trillion years. Earlier fresh accuracy controls completed 3.600 trillion years:
 a fourfold tighter time control changes central hydrogen by 0.1849%; doubling
@@ -66,8 +72,10 @@ minutes at 512 points** with the tighter time control and **59.26 minutes at
 Atmosphere source generation is separate, reusable work. These are partial
 trajectories; the complete cooling-track cost remains unmeasured. Further reuse
 of complete nuclear calculations now reduces CPU time by **42.21% in a short
-benchmark**, with identical full outputs; a longer comparison is running. The
-quoted 3.600-trillion-year timings precede that change. See
+benchmark**, with identical full outputs; a longer comparison is running.
+Sharing the electron calculation within each nuclear response saves a further
+**14.97%** in a short comparison against that improved build. The quoted
+3.600-trillion-year timings precede both changes. See
 [the timing notes](docs/COMPUTATIONAL_COST.md).
 
 New [grain-opacity calculations](docs/GRAINS.md) provide separate absorption

@@ -1,0 +1,21 @@
+{
+  "scope": "Check hotter opacity rows while retaining every previous numeric cell.\n\nThis checks finite source tables, unchanged composition, wavelengths and density\ncoordinates, and exact retention of all earlier temperatures, electron densities\nand absorption coefficients. It does not establish accuracy between source rows.\n",
+  "passed": true,
+  "pairs": [
+    {
+      "old": "/private/tmp/ember-nongrey-x0125-x0175-heldout-opacity-v1/plane-001/opacity/fort.63",
+      "new": "/private/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/fort.63",
+      "retained_temperature_rows": 14,
+      "new_temperature_rows": 2,
+      "retained_absorption_values": 7980000,
+      "new_absorption_values": 1140000,
+      "retained_cells_exact": true,
+      "all_source_values_finite": true
+    }
+  ],
+  "input_files_sha256": {
+    "/private/tmp/ember-nongrey-x0125-x0175-heldout-opacity-v1/plane-001/opacity/fort.63": "babfee6e3fecbc19bf850b36331e517eb4a356b6eab048e656104a57abdac266",
+    "/private/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/fort.63": "9bbb8434ae4b6bca96db8c7a6cfa1e929aa3319f98bc22c34039877f5d0f0491"
+  },
+  "script_sha256": "08f044fdaba30aeba7a7438a552b278214780c906e3791b4910e304ddb82f7d3"
+}

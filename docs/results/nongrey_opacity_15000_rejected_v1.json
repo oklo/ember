@@ -1,0 +1,559 @@
+{
+  "scope": "Rejected 15000 K wavelength-opacity source rows. All four source compositions have finite electron densities but nonfinite absorption near the He I 4471 A line. No bad values were clipped, filled or imported. This identifies the spectral location; a corrected line-profile treatment has not been implemented.",
+  "accepted": false,
+  "source_files": [
+    {
+      "file": "/tmp/ember-nongrey-x015-hot-opacity-v1/plane-000/opacity/temperature-016/fort.63",
+      "sha256": "3036496aaebabec55a2e089c5eea3db528d2a934339678b5fcd5a6009f5fa693",
+      "nonfinite_absorption_values": 28,
+      "electron_densities_all_finite": true,
+      "bad_coordinates": [
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4469.344001206395
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4470.209549136017
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 4.641588833612777e-07,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 4.641588833612777e-07,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4473.673417427871
+        }
+      ]
+    },
+    {
+      "file": "/tmp/ember-nongrey-x015-hot-opacity-v1/plane-001/opacity/temperature-016/fort.63",
+      "sha256": "3c246a784e0d7d75790fde558d6107572f1dd136d174cbae043df079f499b34a",
+      "nonfinite_absorption_values": 28,
+      "electron_densities_all_finite": true,
+      "bad_coordinates": [
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4469.344001206395
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4470.209549136017
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 4.641588833612777e-07,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 4.641588833612777e-07,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4473.673417427871
+        }
+      ]
+    },
+    {
+      "file": "/tmp/ember-nongrey-x020-hot-opacity-v2/plane-000/opacity/temperature-016/fort.63",
+      "sha256": "cd414807e8cfb89111a2bb728577d458561f097b4462be6e1ac5ca719e26e319",
+      "nonfinite_absorption_values": 24,
+      "electron_densities_all_finite": true,
+      "bad_coordinates": [
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 4.641588833612777e-07,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 4.641588833612777e-07,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4473.673417427871
+        }
+      ]
+    },
+    {
+      "file": "/tmp/ember-nongrey-x020-hot-opacity-v2/plane-001/opacity/temperature-016/fort.63",
+      "sha256": "39da30e3be58d39d4506a0be30ef98d9ee2a349cac223bdcded65917197050a4",
+      "nonfinite_absorption_values": 24,
+      "electron_densities_all_finite": true,
+      "bad_coordinates": [
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4471.075264690502
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 4.641588833612777e-07,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4471.941147902332
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 4.641588833612777e-07,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4472.807198803956
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 1.6681005372000587e-06,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 5.994842503189402e-06,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 2.1544346900318816e-05,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 7.742636826811266e-05,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0002782559402207124,
+          "wavelength_A": 4473.673417427871
+        },
+        {
+          "temperature_K": 15000.000000000004,
+          "density_g_cm3": 0.0009999999999999994,
+          "wavelength_A": 4473.673417427871
+        }
+      ]
+    }
+  ],
+  "replacement": "Separately generated finite source rows through approximately 13,150 K, retaining fourteen earlier rows exactly. Their domain remains enforced."
+}

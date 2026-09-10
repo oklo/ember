@@ -152,7 +152,8 @@ ThermonuclearRate pp_bare_rate(double T,PPReaction which,PPRates prescription) {
   return result;
 }
 
-ScreeningState pp_screening(double T,double rho,const Composition& comp,PPReaction which,PPScreening model) {
+static ScreeningState screening_response(double T,double rho,const Composition& comp,PPReaction which,PPScreening model,
+                                         std::optional<Susceptibility>* shared_electrons) {
   validate(T,rho,comp);
   const auto r=reaction(which);
   using D=detail::Differential<NSPEC+2>;
@@ -171,7 +172,8 @@ ScreeningState pp_screening(double T,double rho,const Composition& comp,PPReacti
   ScreeningState out;
   D theta(1);
   if(model!=PPScreening::legacy_weak) {
-    const auto f=electrons(T,rho*NA*ye.value);
+    if(shared_electrons && !*shared_electrons)*shared_electrons=electrons(T,rho*NA*ye.value);
+    const auto f=shared_electrons?**shared_electrons:electrons(T,rho*NA*ye.value);
     out.electron_eta=f.eta;theta.value=f.theta;
     theta.d[0]=f.dtheta_dlnT;theta.d[1]=f.dtheta_dlnne;
     for(std::size_t j=0;j<NSPEC;++j) theta.d[j+2]=f.dtheta_dlnne*ye.d[j+2]/ye.value;
@@ -196,6 +198,10 @@ ScreeningState pp_screening(double T,double rho,const Composition& comp,PPReacti
   return out;
 }
 
+ScreeningState pp_screening(double T,double rho,const Composition& comp,PPReaction which,PPScreening model) {
+  return screening_response(T,rho,comp,which,model,nullptr);
+}
+
 NuclearResponse PPChains::composition_response(double T,double rho,const Composition& comp) const {
   validate(T,rho,comp);
   NuclearResponse result;
@@ -203,8 +209,11 @@ NuclearResponse PPChains::composition_response(double T,double rho,const Composi
   const std::array rates{pp_bare_rate(T,PPReaction::pp,rates_),pp_bare_rate(T,PPReaction::he3_he3,rates_),
     pp_bare_rate(T,PPReaction::he3_he4,rates_)};
   // Classical screening depends on charge, so both helium reactions share it.
-  const auto f1=pp_screening(T,rho,comp,PPReaction::pp,screening_);
-  const auto f2=pp_screening(T,rho,comp,PPReaction::he3_he3,screening_);
+  // The two reactions see exactly the same T, density and composition.
+  // Share their electron inversion only within this evaluation.
+  std::optional<Susceptibility> shared_electrons;
+  const auto f1=screening_response(T,rho,comp,PPReaction::pp,screening_,&shared_electrons);
+  const auto f2=screening_response(T,rho,comp,PPReaction::he3_he3,screening_,&shared_electrons);
   const std::array screens{f1,f2,f2};
   const std::array w{comp.abundance_weight(0),comp.abundance_weight(1),comp.abundance_weight(2)};
   const std::array y{comp.X[0]/w[0],comp.X[1]/w[1],comp.X[2]/w[2]};

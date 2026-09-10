@@ -1,8 +1,20 @@
 # Helium-rich non-grey atmospheres
 
-The source specification below records the original gas family. The current
-72-cell extension, metal-bearing interior EOS, mixture comparisons and
-condensate experiments are described in [FORWARD_EVOLUTION.md](FORWARD_EVOLUTION.md).
+The source specification below records the original gas family. Current stellar
+controls use 132 atmosphere models through 3600 K. A separately checked wider
+EOS supports all these models; the controls retain their original EOS inputs.
+See [the current trajectory](COLD_REMNANT.md) and [EOS data](../data/eos/README.md).
+
+Source calculations toward effective temperatures of 3800 and 4000 K are in
+progress. Their wavelength-opacity tables now extend to a material temperature
+of about 13,150 K. All 31.92 million earlier absorption values in the four
+H/He3 tables are retained exactly. Only two additional source temperatures per
+composition were calculated. A separate 15,000 K attempt produced nonfinite
+absorption near He I 4471 Angstrom and was rejected. No missing absorption was
+filled or clipped. The finite extension remains subject to atmosphere,
+interpolation and lower-boundary checks before selection by stellar evolution.
+See the [retained-cell check](results/nongrey_opacity_13k_extension_v1.json)
+and [rejected source rows](results/nongrey_opacity_15000_rejected_v1.json).
 
 `CompositionAtmosphereGrid` supplies an atmosphere boundary from independent
 LTE radiative-transfer calculations on a rectangular grid in baryonic H1,

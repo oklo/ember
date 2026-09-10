@@ -29,6 +29,12 @@ All nine tested states near its current surface composition and gravity are
 supported. The new table does not establish a cold-remnant boundary. Source
 work toward 3800/4000 K is separate and has not been accepted.
 
+A separately installed 72-plane EOS family now supports all 132 atmosphere
+nodes. Its refined composition grid passes 1188 independent source comparisons
+in the added low-density range and 792 in the original range. The current
+production comparison keeps its original 64-plane EOS; the new inputs belong
+in a fresh calculation. See the [EOS data notes](../data/eos/README.md).
+
 Fresh controls through 3.600 trillion years are complete. Tightening the time
 control changes central hydrogen by 0.1849%; doubling the mesh changes it by
 1.683%. Their awake elapsed times are 39.78 and 59.26 minutes, respectively.

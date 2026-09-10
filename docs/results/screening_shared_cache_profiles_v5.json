@@ -1,0 +1,21 @@
+{
+  "scope": "Complete nuclear state, abundance response and energy response at three saved GS98 stellar profiles near 3.600 and 3.685 trillion years. Same T, density and H/He abundances are supplied to the original and shared-electron implementations.",
+  "states": 2048,
+  "columns_per_state": 89,
+  "all_outputs_byte_identical": true,
+  "input_files_sha256": {
+    "out/evolution-cold-remnant-time-refinement-512-3600gyr-v1.json": "a2fb8ee39a5eb290d72640c392b7385d1d63bc2e6b026e2fbd1b314d6f719d02",
+    "out/evolution-cold-remnant-hot-opacity-forward-512-3700gyr-v1.json": "7b65a2239782676b8d89316815856f6cb1f8b5f560534ec9a5a4807266cba6e6",
+    "out/evolution-cold-remnant-hot-opacity-forward-1024-3700gyr-v1.json": "b906b60598064f80b10b491ea6b45bee1a9f7b66d924a4df02339d01b45f12fa"
+  },
+  "request_sha256": "772f3082b1e5cc060f7237149d771f7f0ae4b402553ef2e9dd1abcc40889ca66",
+  "probe_source_sha256": "5ca04741c00e58ae64743159b6f28f79c458a5e9344b6da3e1ab1bdce5d3e577",
+  "probe_executables_sha256": {
+    "before": "db2a461a610809943515be8c4e411c030b8f08df06b75853fa255f568a65923b",
+    "after": "68d1d174906897deda6a3ca2780454dd8e2b37df5e4123f54eb94f067096351d"
+  },
+  "output_sha256": {
+    "before": "4b3d29c7f12d2e306e386105deedb6b0cf72f3992d3d4d3a297aceda9038e90b",
+    "after": "4b3d29c7f12d2e306e386105deedb6b0cf72f3992d3d4d3a297aceda9038e90b"
+  }
+}

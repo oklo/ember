@@ -1,0 +1,15 @@
+{
+  "scope": "Separately installed 72-plane EOS family. Passed independent source checks in old and newly added density ranges and EOS integration with all 132 existing atmosphere nodes. No current stellar calculation is switched to it; use a new consistent calculation.",
+  "family_sha256": "544db28d28b7382eca2646f1ae6d6980d2b1f9eccff3781a69c08626c6a5f321",
+  "source_manifest_sha256": "3862d8741fcca0f3c68f816b887aaae1f838f9abf698a7f25278bb3a2ff4aafa",
+  "source_planes": 72,
+  "reports_sha256": {
+    "docs/results/metal_eos_low_density_source_v2.json": "318338e64d1a39babb9d89efc62181e9a37e6c2865059461ee94de6143551d3f",
+    "docs/results/metal_eos_low_density_retained_v2.json": "6af3e89e8582a73175904da0cd903e4695b067ae2d61338f18be983caba23c8f",
+    "docs/results/nongrey_t3600_low_density_eos_v2.json": "0fa54ea8a29e12f63a4be28fe92b23c305d07f88304e0e6a3dd263da10e6b763"
+  },
+  "retained_source_grid": "/tmp/ember-metal-eos-low-density-v1",
+  "new_composition_grid": "/tmp/ember-metal-eos-low-density-refinement-v2",
+  "parent_manifest_reassembly_byte_identical": true,
+  "reassembled_family_sha256": "544db28d28b7382eca2646f1ae6d6980d2b1f9eccff3781a69c08626c6a5f321"
+}

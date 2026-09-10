@@ -2,6 +2,22 @@
 
 ## Further reuse of nuclear calculations
 
+The production build also shares the electron calculation used by the two
+charged-particle screening evaluations within one nuclear response. With the
+larger response cache below already in place, this reduced CPU time by a
+further **14.97%** in the same short benchmark: 50.19 seconds versus 42.68
+seconds. All four output files are identical. Replaying 2048 saved stellar
+states near 3.600 and 3.685 trillion years also gives identical complete nuclear
+responses and derivatives. All 32 test suites pass after supplying three
+omitted fixture files to the isolated test copy; the production build reproduces
+the short output. [Benchmark](results/screening_shared_cache_benchmark_v5.json),
+[profile comparison](results/screening_shared_cache_profiles_v5.json),
+[validation](results/screening_shared_cache_validation_v5.json).
+
+This additional change is installed for subsequent runs. The longer active
+comparison still measures the preceding response-cache change alone. Neither
+short benchmark establishes the cost of shell burning or remnant cooling.
+
 The evolution driver now keeps up to **8192 complete nuclear results per
 worker**, compared with 16 previously. It reuses a result only when temperature,
 density, every abundance and both composition labels agree exactly. This avoids
@@ -48,8 +64,9 @@ A further attempt to share the electron calculation between pp reactions gave
 identical outputs but **did not establish a speedup**. An alternating comparison
 measured 73.31 seconds for the candidate versus 54.31 seconds for the unchanged
 code; CPU times were 94.82 versus 68.27 seconds. Other jobs and changing machine
-conditions contributed timing variation. The candidate remains isolated and is
-not installed. [Measurements](results/screening_reuse_benchmark_v2.json).
+conditions contributed timing variation. That earlier comparison did not
+establish a speedup; the later test above includes the larger response cache.
+[Earlier measurements](results/screening_reuse_benchmark_v2.json).
 
 ## Changes measured on September 10
 

@@ -9,6 +9,38 @@ development machine unless explicitly stated otherwise.
 
 ## GS98 baryonic H/He3 family
 
+The current stellar controls select the 64-plane family in
+`exhaustion_refined_v2/`. A separate 72-plane family is now installed in
+`low_density_refined_v2/` for a subsequent fresh calculation. It extends the
+low-density range and adds four hydrogen fractions at both helium-3 fractions.
+All 5.937 million old source states were reused; 2.220 million additional
+low-density states and eight new composition planes were calculated.
+
+The first wider family failed a heat-capacity check. After composition
+refinement, 1188 independent comparisons in the added range pass, with maximum
+heat-capacity difference 0.2952%. Another 792 comparisons in the old range pass.
+All 132 existing atmosphere models now have EOS support, including the four
+low-density models outside the older family. These are interpolation and
+consistency checks, not physical uncertainty bounds. See the
+[new-density checks](../../docs/results/metal_eos_low_density_source_v2.json),
+[old-density checks](../../docs/results/metal_eos_low_density_retained_v2.json),
+and [atmosphere integration](../../docs/results/nongrey_t3600_low_density_eos_v2.json).
+
+With the local numeric files present, reassemble the checked family without
+calculating the source again:
+
+```sh
+python3 scripts/assemble_metal_eos_family.py \
+  /tmp/ember-eos-low-density-reassembled/freeeos300_gs98_z020.dat \
+  data/eos/low_density_refined_v2/sources/low_density_parent_00_manifest.json \
+  data/eos/low_density_refined_v2/sources/low_density_parent_01_manifest.json
+```
+
+The source specifications and installation record are in that same `sources/`
+directory. The older EOS inputs and all running calculations remain intact.
+
+The following paragraphs describe the original smaller families.
+
 `freeeos300_gs98_z020.dat` selects twelve material-potential planes with
 XH=.3/.4/.5/.6/.7/.75 and X3=0/.12, fixed Z=.02. Source number densities
 match the atmosphere's GS98 representative-isotope inventory except for
