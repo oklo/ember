@@ -1,5 +1,5 @@
 {
-  "scope": "Local recovery artifacts for the completed 0 to 3.30T fresh calculation and its exact 3.30 to 3.40T restart. Raw artifacts are ignored and not published. Physical input tables must be separately restored with the recorded hashes.",
+  "scope": "Local recovery files for the completed 512-point evolution through 3.560 trillion years, the 1024-point continuation, and the earlier 3.40-trillion-year calculation. Raw files remain local and ignored. Physical input tables require separate restoration with their recorded hashes.",
   "entries": [
     {
       "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3300gyr-v1.json",
@@ -42,6 +42,62 @@
       "sha256": "24a6ec3de0d06bf1e58e4ff4527fa4b38f4b02774be1703cba4ba371d7f15237",
       "gzip_sha256": "d3b2077e2c15753da5b383f80a2bbaa1cc176cdd4f704701dd7fe46b74ee827b",
       "bytes": 427296
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-transition-512-3560gyr-v2.json",
+      "archive": "artifacts/evolution-cold-remnant-x015-transition-512-3560gyr-v2.json.gz",
+      "sha256": "405d954a48066e2bc80e9807ba31437106349e003cf16687d0970fb55cb28acb",
+      "gzip_sha256": "2f3550ada1a17af46d269f71c2e3a04374c07dce4a6fea15e6590b461014e373",
+      "bytes": 1083373
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-transition-512-3560gyr-v2.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-x015-transition-512-3560gyr-v2.receipt.json.gz",
+      "sha256": "ce6d3a5f2efcb73f972e6065445f05a65dca28e39244b3b9692bcf67456046a9",
+      "gzip_sha256": "c122dfb3090e43abe175ceabc4516a9de1ab162d02ebef07430e7ce59d3e03f5",
+      "bytes": 28224
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-transition-1024-3560gyr-continuation-v1.json",
+      "archive": "artifacts/evolution-cold-remnant-x015-transition-1024-3560gyr-continuation-v1.json.gz",
+      "sha256": "f779bce36987861dd8837819399d51245518be72a219cb167e11ae4a1fcbd7e5",
+      "gzip_sha256": "11791924a1a61d60abbfad77710434766c4d22d69022b26699f53a254d514662",
+      "bytes": 402635
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-transition-1024-3560gyr-continuation-v1.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-x015-transition-1024-3560gyr-continuation-v1.receipt.json.gz",
+      "sha256": "65615074b01500a0fdd889dcae105220e3c716c3fcfafc6d387d6bad85d5d657",
+      "gzip_sha256": "6bbca2a2ceadc46a763b5e4baf6ba32c792a857b9bca42c75efefb6bee0c93ea",
+      "bytes": 28249
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-transition-512-3560gyr-v2.restart",
+      "archive": "artifacts/evolution-cold-remnant-x015-transition-512-3560gyr-v2.restart.gz",
+      "sha256": "c6b9c52253c452ca1f9f49ca351507294089cfc9d3b3f998dbd5c6bc6577b25b",
+      "gzip_sha256": "a8e613d574f50f3f93d39b8e4f17035b7d48c9dad71e3bb9af120d581c4e4865",
+      "bytes": 159926
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-transition-1024-3560gyr-v1.restart",
+      "archive": "artifacts/evolution-cold-remnant-x015-transition-1024-3560gyr-v1.restart.gz",
+      "sha256": "0df422f48a29391c402cd332b2fe1333d80c85a0afae4dc7fbf5d9e322b59c8f",
+      "gzip_sha256": "52de13cbe872d533fb13d23e627ff2e4a7b5ab44056557101c4792922e4e9014",
+      "bytes": 303327
+    },
+    {
+      "source": "/private/tmp/ember-cold-remnant-x015-transition-3560gyr-v2/ember-evolve",
+      "archive": "artifacts/ember-evolve-transition-512-v2.gz",
+      "sha256": "7a4a808e801f1ce523f5c692d54583420a629c3139a64a36843e85f98c8849e0",
+      "gzip_sha256": "3409424a131d6366375acb3251fc0e4aec7070d0d1f260cc91b1a07d0eab2504",
+      "bytes": 428304
+    },
+    {
+      "source": "/private/tmp/ember-cold-remnant-x015-transition-1024-3560gyr-v1/ember-evolve",
+      "archive": "artifacts/ember-evolve-transition-1024-v1.gz",
+      "sha256": "1be30afccbde7c8d9fec3e085b811c2bcab8df2a51289da060a1e10bb9e6a5a2",
+      "gzip_sha256": "9625a98732975c97bcf377c68ce07aec0e119b53928d30d64810b53cff4c2ab8",
+      "bytes": 427456
     }
   ],
   "older_recovery": "September 9 local artifacts remain intact in docs/reports/2026-09-09/artifacts; the earlier paper remains in Git history."

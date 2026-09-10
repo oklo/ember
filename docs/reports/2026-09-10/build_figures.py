@@ -15,8 +15,7 @@ from matplotlib.ticker import FuncFormatter
 import numpy as np
 
 HERE = Path(__file__).resolve().parent
-FILES = ["evolution-cold-remnant-forward-512-3300gyr-v1.json.gz",
-         "evolution-cold-remnant-forward-512-3400gyr-v1.json.gz"]
+FILES = ["evolution-cold-remnant-x015-transition-512-3560gyr-v2.json.gz"]
 
 
 def f77_history(work):
@@ -78,7 +77,12 @@ def f77_history(work):
 def archived_history():
     rows = []
     columns = None
+    manifest = json.loads((HERE / 'recovery_manifest.json').read_text())
     for name in FILES:
+        entry = next(e for e in manifest['entries'] if e['archive'] == 'artifacts/' + name)
+        raw = (HERE / 'artifacts' / name).read_bytes()
+        assert hashlib.sha256(raw).hexdigest() == entry['gzip_sha256']
+        assert hashlib.sha256(gzip.decompress(raw)).hexdigest() == entry['sha256']
         with gzip.open(HERE / "artifacts" / name, "rt") as stream:
             data = json.load(stream)
         assert data["converged"] and data["mass_Msun"] == 0.1
@@ -92,7 +96,8 @@ def archived_history():
             segment = segment[1:]
         rows.extend(segment)
     assert all(a[0] < b[0] for a, b in zip(rows, rows[1:]))
-    assert rows[0][0] == 0 and rows[-1][0] == 3.4e12
+    assert rows[0][0] == 0 and rows[-1][0] == 3.56e12
+    assert len(rows) == 2354
     return columns, rows
 
 
@@ -122,7 +127,7 @@ def main():
                      else float(value) for name, value in zip(columns,row,strict=True)]
                     for row in reader]
         assert all(a[0] < b[0] for a, b in zip(rows, rows[1:]))
-        assert rows[0][0] == 0 and rows[-1][0] == 3.4e12
+        assert rows[0][0] == 0 and rows[-1][0] == 3.56e12
     values = dict(zip(columns, np.asarray(rows).T))
     with (HERE / "f77_history.csv").open(newline="") as stream:
         f77_rows = list(csv.DictReader(stream))
@@ -193,7 +198,7 @@ def main():
             ax.xaxis.set_major_formatter(FuncFormatter(lambda x, _: f"{x:.4g}"))
             ax.yaxis.set_major_formatter(FuncFormatter(lambda x, _: f"{x:.4g}"))
             if mode == "age":
-                ax.set(xlabel="Reported age (trillion yr)", xlim=(0, 3.5))
+                ax.set(xlabel="Reported age (trillion yr)", xlim=(0, 3.65))
                 if key in ["L_Lsun", "R_Rsun"]:
                     ax.set_yscale("log")
             else:

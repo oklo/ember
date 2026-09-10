@@ -25,13 +25,16 @@ def save(fig, name):
 
 def main():
     source = json.loads((HERE/'lba97_figure1_digitization.json').read_text())
-    trial = json.loads((HERE/'ember_transition_trial.json').read_text())
     with (HERE/'evolution_history.csv').open() as stream:
         reader = csv.DictReader(stream)
         rows = list(reader)
     star = {k: np.array([float(r[k]) for r in rows]) for k in
             ['age_yr', 'Teff_K', 'L_Lsun', 'central_X', 'central_Y3']}
     assert np.all(np.diff(star['age_yr']) > 0)
+    with (HERE/'evolution_1024_continuation.csv').open() as stream:
+        fine_rows = list(csv.DictReader(stream))
+    fine = {k: np.array([float(r[k]) for r in fine_rows]) for k in star}
+    assert np.all(np.diff(fine['age_yr']) > 0)
     hr = np.asarray(source['pixels']['hr'])
     c = source['calibration']['hr']
     temperature = c['left_Teff_K']+(hr[:, 0]-c['left_px'])*(c['right_Teff_K']-c['left_Teff_K'])/(c['right_px']-c['left_px'])
@@ -57,16 +60,17 @@ def main():
     handles = [Line2D([], [], color=EMBER, lw=1.8),
                Line2D([], [], color=LBA, lw=1.1, alpha=.5),
                Line2D([], [], color=LBA, marker='D', linestyle='none', ms=4),
-               Line2D([], [], color=EMBER, marker='o', markerfacecolor='none', linestyle='none', ms=4)]
-    labels = ['Ember: completed track', 'LBA97: read from Figure 1', 'LBA97: stated value',
-              f"Ember: trial at {trial['age_yr']/1e12:.4g} trillion yr"]
+               Line2D([], [], color='#706078', lw=1.1, linestyle='--', marker='o', markerfacecolor='none', ms=4)]
+    labels = ['Ember: 512 mass points', 'LBA97: read from Figure 1', 'LBA97: stated value',
+              'Ember: 1024 mass points']
     fig, axes = plt.subplots(1, 2, figsize=(7, 3.65))
     fig.subplots_adjust(left=.105, right=.985, bottom=.17, top=.79, wspace=.34)
     for ax in axes:
         ax.plot(temperature, loglum, color=LBA, lw=1.1, alpha=.5)
         ax.plot(star['Teff_K'], np.log10(star['L_Lsun']), color=EMBER, lw=1.8)
         ax.plot(star['Teff_K'][-1], np.log10(star['L_Lsun'][-1]), 'o', color=EMBER, ms=4)
-        ax.plot(trial['Teff_K'], np.log10(trial['L_Lsun']), 'o', color=EMBER, mfc='none', ms=4)
+        ax.plot(fine['Teff_K'], np.log10(fine['L_Lsun']), '--', color='#706078', lw=1.1)
+        ax.plot(fine['Teff_K'][-1], np.log10(fine['L_Lsun'][-1]), 'o', color='#706078', mfc='none', ms=5)
         for name in ['main_sequence_start', 'central_radiative_core', 'cooling_endpoint']:
             point = source['published_points'][name]
             ax.plot(point['Teff_K'], point['log10_L_Lsun'], 'D', color=LBA, ms=3.5)
@@ -98,7 +102,8 @@ def main():
         ax.plot(age/1e12, fraction, color=LBA, lw=1.1, alpha=.5)
         ax.plot(star['age_yr']/1e12, star[key], color=EMBER, lw=1.8)
         ax.plot(star['age_yr'][-1]/1e12, star[key][-1], 'o', color=EMBER, ms=4)
-        ax.plot(trial['age_yr']/1e12, trial[key], 'o', color=EMBER, mfc='none', ms=4)
+        ax.plot(fine['age_yr']/1e12, fine[key], '--', color='#706078', lw=1.1)
+        ax.plot(fine['age_yr'][-1]/1e12, fine[key][-1], 'o', color='#706078', mfc='none', ms=5)
         # A representative reading scale is clearer than a confidence band:
         # errors in tracing a printed curve are correlated and not statistical.
         example = 4 if species == 'hydrogen' else 6

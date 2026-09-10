@@ -1,6 +1,6 @@
 {
   "validated_utc": "2026-09-10T12:44:22.641822+00:00",
-  "scope": "Original completed-track source verification is retained at validated_utc. The revised paper compares Ember with LBA97 and separately marks the saved 3.548T trial. New driver checks and offline grain checks have independent dated records.",
+  "scope": "Paper updated with completed 512- and 1024-point calculations through 3.560 trillion years. Earlier CTest/source verification is preserved at its original date; no C++ implementation changed for this document update. Current run-output, receipt, profile, archive and figure-reproduction checks are recorded separately.",
   "build": {
     "directory": "/tmp/ember-cold-remnant-build-v1",
     "result": "PASS",
@@ -19,45 +19,53 @@
     "note": "Two legacy archive-replay comparisons repaired for the addition of two depth metadata fields; all recorded diagnostics retain exact equality and physical acceptance remains enforced."
   },
   "history": {
-    "rows": 1861,
-    "start_age_yr": 0.0,
-    "end_age_yr": 3400000000000.0,
-    "join": "Exact equality of physical endpoint state before removing the duplicate restart row"
+    "rows": 2354,
+    "start_age_yr": 0,
+    "end_age_yr": 3560000000000.0,
+    "origin": "Complete fresh 512-point calculation with 120 atmosphere models; no splicing of histories with different inputs.",
+    "comparison_rows": 532,
+    "comparison_scope": "1024-point continuation from saved state near 3.545 trillion years."
   },
   "recovery": {
-    "checked": 6,
+    "checked": 14,
     "result": "PASS",
     "storage": "Local only, ignored"
   },
   "paper": {
-    "pages": 9,
+    "pages": 10,
     "compiler": "Tectonic",
     "warnings": [],
-    "visual_inspection": "All nine pages of extracted text read; both new LBA97 figure pages rendered and inspected for labels, legends, captions, four-significant-figure presentation, and distinction between completed track and later saved trial.",
+    "visual_inspection": "All ten pages of extracted text read. HR, composition and convection figure pages rendered and inspected, along with the supplementary F77 abundance figure. Final wording changes clarify the chronology.",
     "files_sha256": {
-      "ember_status_and_future.tex": "bc3d4d60b0262da8bc08fd8ac997f1dcd53fee88f5f6c4f1758731632c6258f4",
-      "ember_status_and_future.pdf": "adc5d7c29bfe7e90efcf896fe77796f8dea0b40796930eea8a99904538980482",
-      "build_figures.py": "4eb20a5dc2e13ce86627eb4251bdf2c94f0cfc9da2f1b759aaf4c8c827477f35",
-      "evolution_history.csv": "7d7f2d669e43a45457cfcd5152b6d88290d9755b44fa9c2cf419313c78a93786",
-      "evolution_history.pdf": "672fa2ec3f32a4460f9722d9c01894f43d8e8f0a2f03139e41ed3f458abbe40c",
-      "evolution_history.png": "a1607b91c4a55eefedc6ff1b6a80c8749a31e81f1a9acb6f4e925b11d2d77e9d",
+      "ember_status_and_future.tex": "1308afc5e96fad4a456f94a7b2afb947940bf559a0496e147d55a9a59956f472",
+      "ember_status_and_future.pdf": "6ba3767e661bc52889796ce3e8dea91c5ab0e040252ceb273ca00b9f55044d57",
+      "build_figures.py": "7dc2e57d292ace3e4762b493ed1ab406eac8f77c911847454c1c6c2667caa25d",
+      "evolution_history.csv": "d883dd4c0fc12ad82a3a21a72bb670bcdd9701179c15bdd2090d4874dde1584e",
+      "evolution_history.pdf": "0d4b3c91c29bc208634e3efb95c733de55e7b33d0c71c6a78eaa18b38b0084eb",
+      "evolution_history.png": "42f6f8f3f607aaa798ba3e8fc3c1cbc577c55556de2559eb0fafcf5ba3e25cc1",
       "f77_history_provenance.json": "034ac1e7b867b732a303e290da9f2e206cd882a53292110a37782902162c2dd0",
       "f77_history.csv": "d1bba9ec7f73a286a1daa0eb4c102c6c56cce3ac2991a818cb44e8f84c3e6ad5",
-      "f77_matched_hydrogen.pdf": "d1d28750999b4b490d67700ef1bf0378fc14d81e507cb9d447e5f6cb0277cfc8",
-      "f77_matched_hydrogen.png": "43e1c6bae377957fe9796fb845fb0f619fc5f324c6cbf76d10c5885d03a2b4f3",
-      "build_lba97_figures.py": "f8839e02f90e860274b7ec43c4b179d6c073b81fd623ffc408132f64b2dacfcd",
+      "f77_matched_hydrogen.pdf": "d39716e4397bc09ffc922a274224b479bdc66ce2a16de9b34b955fa86002830c",
+      "f77_matched_hydrogen.png": "1a244438a08dedc4d0cc140fe094cb0b567e51cd31861e5be2ab006e08692edf",
+      "build_lba97_figures.py": "5695ab960ad92984f6c424405c8646a087cce870a962a41fa492e7e23a023b15",
       "ember_transition_trial.json": "069df004afe7ba9b2865eace6629dd358e5c364cb37b9a9601b20aac6aed9d3a",
       "lba97_figure1_digitization.json": "633d39bc97c549ec59a6561bc602088b75f7ae6d52fc621b9361ae94ebaeeaf1",
       "lba97_digitized_hr.csv": "54e99d9068af6448c146fe10b7a3b71bb14a83aa5ed7a849189d49fe1ad9cac7",
       "lba97_digitized_composition.csv": "74889482c284d5385bb4e64e259d96b4b34f5c6cfb54457da02f4be71b49c745",
-      "lba97_hr.pdf": "9804493a15ca0d3001bbf07bc9fd27ca5b56ce165f961bfe1a197196129f7150",
-      "lba97_hr.png": "13870d15609f8c6b0e6d6582fb691630dfe9fe8320d6ea703c64985eab55264f",
-      "lba97_composition.pdf": "1601fdea209d64e66bd65e0929eab9e1ff74bd7232919cbc3040f970ae564cbe",
-      "lba97_composition.png": "2ebc4d0fb98fcbdea365d767b991b61241388cbf2a23d984a1440d8a09f2e707"
+      "lba97_hr.pdf": "a52ac2dad750c8ebb0e6e246c17e1918e1ad89c0cbeb3772743299ec970cd494",
+      "lba97_hr.png": "fbc129c177fe05a74625c950ec25d4f035eec187dd17a21d2e806e8ff8df64bf",
+      "lba97_composition.pdf": "35b56e3edc365980455112112f484d372c6f03624e56b9c2adf8af3ef88f53da",
+      "lba97_composition.png": "0f36734bd633fbd7bcb9735340b487fc4472c09987817b121901622910f0e887",
+      "build_transition_figures.py": "c9b3e377e3528e0bbdb306cdee605c4647009ade7c961e6976d92568172c5907",
+      "convection_transition.pdf": "cf99fce9554df4349294ba7aa903e6a4f89da6388361ae4fa9125eaa988b87fa",
+      "convection_transition.png": "28d5c61585384f0ae45d560690ee2dd7f55587cee90886ebf083fee82710f3c6",
+      "evolution_1024_continuation.csv": "14eda0e3354c40935b31100a02f62cf275871d7935f6fb11f216735d2207826f",
+      "evolution_profile_512.csv": "741d53e8a13385eadd0409baa399882810d4c0e1c90d9181abcfbd6b9af30142",
+      "evolution_profile_1024.csv": "a879c80b564de1acd91575099c861eae5c0dab70994976521ce9ee5671e7c220"
     },
-    "csv_only_regeneration": "PASS: the two LBA97 figures (PDF and PNG) and both digitized CSV files reproduce byte for byte from only build_lba97_figures.py, the Ember history CSV, trial-state JSON and LBA97 coordinate JSON in an isolated directory. Earlier supplementary F77 figure checks remain valid; those files are unchanged.",
+    "csv_only_regeneration": "PASS: all five figures, each in PDF and PNG, and both digitized LBA97 CSV files reproduce byte for byte in an isolated directory from the published scripts and data alone. The hash-checked local raw archive separately reproduces the published 2354-state Ember CSV exactly.",
     "f77_extraction": "All21699 accepted F77 states extracted from the original hash-checked outputs. Surface and central records agree in model number, printed age and hydrogen fraction. Row counts and final ages agree with the independently recorded comparison.",
-    "presentation": "Four significant figures maximum in prose and figure labels. LBA97 line alpha0.50. Supplementary F77 alpha0.30, abrupt segments alpha0.08; no saved values removed or smoothed. Open orange points show the saved trial separately.",
+    "presentation": "At most four significant figures in prose, tables and graph labels. LBA97 curve alpha 0.50. F77 curves alpha 0.30 with abrupt segments alpha 0.08; no values deleted or smoothed. The 1024-point continuation is dashed with open endpoints in the LBA97 comparisons.",
     "lba97_digitization": "42 HR samples, 20 hydrogen samples, 15 helium-3 samples; original figure positions inspected against the source image. Axis calibration and four-pixel illustrative reading scale recorded. Stated values are distinguished from image measurements."
   },
   "source_sha256": {
@@ -280,7 +288,7 @@
     "ctest_elapsed_seconds": 1.38,
     "scope": "After the legacy receipt metadata fix; all source acceptance and schema rejection checks pass."
   },
-  "document_revision_utc": "2026-09-10T15:34:28.749164+00:00",
+  "document_revision_utc": "2026-09-10T17:07:00.867865+00:00",
   "transition_driver_validation": {
     "report": "../../results/evolution_checkpoint_counter_v1.json",
     "report_sha256": "a0df4cbd43f8530763c8056038fe6e49a5d36befab973f603ddaaf2d2fd656f4",
@@ -291,5 +299,21 @@
   "grain_validation": {
     "grain_mie_v1_audit.json": "ceb5a2efdefbefc9ca32fe6b1b3229f9d58ad8c36dcd7c139d7edcdd42d244a8",
     "grain_alumina_profile_v1.json": "d8cfe0f8a5b4e7c2b378e6bcef6ab541a01ad119070a1aa2f4f53028606dfed6"
+  },
+  "earlier_history": {
+    "rows": 1861,
+    "start_age_yr": 0.0,
+    "end_age_yr": 3400000000000.0,
+    "join": "Exact equality of physical endpoint state before removing the duplicate restart row"
+  },
+  "completed_transition_validation": {
+    "report": "../../results/evolution_transition_3560gyr_v1.json",
+    "report_sha256": "c0b9631582dba59ffaac8ce4fbaf8b798dfbbb833192030b2f621b4a1a1c34ea",
+    "checked_utc": "2026-09-10T17:07:00.867865+00:00",
+    "run_outputs_match_receipts": true,
+    "all_captured_data_hashes_agree_between_runs": true,
+    "mixing_regions_reproduce_history_convective_mass": true,
+    "earlier_512_trial_state_reappears_exactly_in_fresh_history": true,
+    "checks": "Completed requested age, finite diagnostics, monotone ages, normalized profile compositions, profile/history equality, Ledoux mixing-region evaluation, no exhaustion/cooling milestones reached."
   }
 }

@@ -24,12 +24,13 @@
 \end{center}
 
 \textbf{Current result.} Ember has evolved a star of $0.1\Ms$ through
-$3.40\times10^{12}$ yr from a static initial model at the beginning of hydrogen
-burning. The star remains fully convective: convection mixes material through
-almost its entire mass. Its hydrogen mass fraction is 0.2034 and its effective
-surface temperature is 3202 K. It has not exhausted hydrogen or become a helium
-white dwarf. The aim is to calculate that transition and the subsequent cooling
-to surface temperatures of 1000, 500 and 100 K.
+$3.560\times10^{12}$ yr from a static model at the beginning of hydrogen
+burning. Calculations with 512 and 1024 mass points both now have a central
+region stable against convection, containing about 37--38\% of the mass.
+The 512-point model has central hydrogen mass fraction 0.1518 and effective
+surface temperature 3240 K. Hydrogen burning still supplies almost all its
+luminosity; it has not become a helium white dwarf. The aim is to calculate
+that transition and subsequent cooling through 1000, 500 and 100 K.
 
 The main comparison is with the published $0.1\Ms$ model of Laughlin,
 Bodenheimer and Adams (1997), using their stated values and approximate curves
@@ -48,25 +49,33 @@ magnetism, mass loss and external heating. Its age excludes formation and
 pre-main-sequence contraction.
 
 \begin{center}\begin{tabular}{@{}lrr@{}}\toprule
-Quantity & $3.30\Tyr$ & $3.40\Tyr$ \\\midrule
-Radius ($\Rs$) & 0.1470 & 0.1459 \\
-Photon luminosity ($\Ls$) & 0.001978 & 0.002016 \\
-Effective surface temperature (K) & 3175 & 3202 \\
-Central temperature (MK) & 7.768 & 8.031 \\
-Central density ($\mathrm{g\,cm^{-3}}$) & 252.3 & 258.3 \\
-Central hydrogen mass fraction & 0.2223 & 0.2034 \\
-Central $^3$He mass fraction & 0.001358 & 0.0009703 \\
-Remaining hydrogen mass ($\Ms$) & 0.02223 & 0.02034 \\
-Convective mass fraction & 1 & 1 \\\bottomrule
+Quantity at $3.560\Tyr$ & 512 points & 1024 points \\\midrule
+Radius ($\Rs$) & 0.1428 & 0.1428 \\
+Photon luminosity ($\Ls$) & 0.002025 & 0.002027 \\
+Effective surface temperature (K) & 3240 & 3241 \\
+Central temperature (MK) & 8.469 & 8.474 \\
+Central density ($\mathrm{g\,cm^{-3}}$) & 312.0 & 315.4 \\
+Central hydrogen mass fraction & 0.1518 & 0.1491 \\
+Surface hydrogen mass fraction & 0.1747 & 0.1747 \\
+Central $^3$He mass fraction & 0.0002278 & 0.0002228 \\
+Remaining hydrogen mass ($\Ms$) & 0.01721 & 0.01718 \\
+Convective mass fraction & 0.6277 & 0.6223 \\\bottomrule
 \end{tabular}\end{center}
 
-The model uses 512 mass points. The calculation to $3.30\Tyr$ accepted 1822
-time steps and repeated three steps at smaller sizes. Continuing the saved
-model to $3.40\Tyr$ required another 38 accepted steps and no further repeats.
-Both parts used the same executable and physical inputs. Their common state
-was checked before combining the histories into 1861 distinct saved models.
-The decline in $^3$He and the recent decrease in radius occur while the star
-is still burning hydrogen, not during white-dwarf cooling.
+The 512-point calculation starts from the initial model and contains 2354
+saved states through $3.560\Tyr$. The 1024-point comparison continues an
+unchanged saved model near $3.545\Tyr$ and contains 532 states in that segment.
+Both reached their requested final age. They use the same 120-atmosphere table,
+interior physical inputs and time-step accuracy tolerances. An earlier
+calculation through $3.40\Tyr$ used 96 atmospheres; its files remain available,
+but its history has not been spliced into the newer calculation.
+
+Doubling the mass resolution changes the final luminosity by $+0.07813\%$,
+surface temperature by $+0.8654$ K, central density by $+1.108\%$ and central
+hydrogen abundance by $-1.752\%$. The total remaining hydrogen mass changes
+by $-0.1707\%$. The surface properties agree more closely than the central
+composition. These two calculations do not yet establish convergence of the
+transition age or fuel distribution; tighter time-step comparisons remain needed.
 
 \section{Comparison with the published LBA97 model}
 The main comparison is with Laughlin, Bodenheimer and Adams \cite{lba97},
@@ -81,10 +90,9 @@ the published figure. The original numerical history has not been recovered.
 was read from Figure~1 of LBA97; diamonds mark values stated in their text.
 The left panel shows the full published path from the start of hydrogen
 burning through cooling. The right panel enlarges the region reached by
-Ember. The orange curve contains Ember's accepted models through $3.40\Tyr$;
-its endpoint is marked. The open orange point shows the last saved state of
-the refined-atmosphere trial at $3.548\Tyr$, which has not completed its
-requested interval. The original pre-main-sequence contraction and the
+Ember. The orange curve contains the complete 512-point Ember calculation through
+$3.560\Tyr$. The short dashed curve and open endpoint show the 1024-point
+continuation, which reaches the same age and nearly overlaps it. The original pre-main-sequence contraction and the
 dotted diagonal guide in LBA97 are excluded. The pale line connects 42
 selected positions on the printed track; it is an approximate reconstruction,
 not the original numerical output. Neither temperature nor luminosity has
@@ -99,8 +107,8 @@ Initial luminosity ($\Ls$) & $\simeq0.000417$ & 0.0008350 \\
 Initial central density ($\mathrm{g\,cm^{-3}}$) & 309 & 381.5 \\
 Maximum $^3$He mass fraction & 0.0995 & 0.1002 \\
 Age at maximum $^3$He ($\Tyr$) & 1.38 & 0.7101 \\
-Central radiative-core formation ($\Tyr$) & 5.742 & Not yet established \\
-Hydrogen mass fraction at that transition & $\simeq0.16$ & Not yet established \\
+Age with a central radiative core ($\Tyr$) & 5.742 & By 3.560 \\
+Hydrogen mass fraction at core onset & $\simeq0.16$ & Not yet measured \\
 Highest surface temperature (K) & 5807 & Not yet reached \\\bottomrule
 \end{tabular}\end{center}
 
@@ -119,7 +127,8 @@ measurement of the error in one isolated physical ingredient.
 The pale curves are read from the inset of LBA97 Figure~1, with 20 hydrogen
 and 15 helium-3 samples. Diamonds show their stated $^3$He maximum and the
 hydrogen abundance at central radiative-core formation. Orange curves are
-Ember's completed track; the open points show the later trial state.
+Ember's 512-point calculation; the short dashed curves and open points show
+the 1024-point continuation through the same final age.
 Ages are shown as reported, without shifting or
 stretching either calculation. The representative crosses correspond to
 four image pixels: about $0.05\Tyr$ in age and 0.01 in mass fraction. They
@@ -132,8 +141,9 @@ the helium-3 trace ends as it becomes indistinguishable from the baseline.}
 The maximum $^3$He abundance agrees to within about 1\%, but Ember reaches it
 in about half the time. Ember also consumes hydrogen faster over the interval
 calculated so far. Reading the published hydrogen curve gives an age of
-roughly $5.6\Tyr$ at Ember's present abundance, compared with $3.40\Tyr$
-for Ember. The figure does not justify a more precise age comparison.
+roughly $5.6\Tyr$ at hydrogen fraction 0.2034, reached by Ember near
+$3.40\Tyr$. Both current Ember models now have central hydrogen below 0.16,
+the approximate abundance stated by LBA97 at its central-core transition. The figure does not justify a more precise age comparison.
 The luminosity--temperature track alone can conceal this difference because
 it does not show how long the star spends at each position.
 
@@ -147,16 +157,16 @@ comparisons that change one ingredient at a time are needed to separate them.
 Neither agreement with LBA97 nor a more expensive calculation establishes
 physical accuracy.
 
-\subsection{Approaching the change in convection}
-The completed $3.40\Tyr$ Ember model is still fully convective. Its smallest
+\subsection{Development of the radiative core}
+At $3.40\Tyr$, the earlier Ember model was still fully convective. Its smallest
 ratio of the temperature gradient required by radiation and conduction to
 the adiabatic gradient is 1.336, near 21.1\% of the enclosed mass; the central
 ratio is 3.090. For homogeneous material, a ratio below unity permits stable
-transport without convection. These values suggest a change first away from
+transport without convection. These values indicated a change first away from
 the center, rather than immediately forming the central radiative core
 described by LBA97.
 
-A trial with the refined atmosphere table develops a stable layer between
+An earlier trial with the refined atmosphere table developed a stable layer between
 a convective center and a convective envelope. Its saved model near
 $3.548\Tyr$ has 3.823\% of the mass in the central convective region,
 29.23\% in the stable layer and 66.95\% in the outer convective region.
@@ -166,12 +176,35 @@ Near 21.10\% of the enclosed mass, the local gradient ratio has fallen to
 opacity favor radiation in this shell; conduction supplies only 4.144\% of
 the local combined radiative and conductive transport capacity.
 
-These are preliminary results. The trial stopped because a checkpoint check
-still capped the cumulative number of rejected time steps. Both that check
-and the earlier evolution-loop limit have been corrected without changing the
-physical accuracy tolerances. A fresh calculation and a comparison with twice
-as many mass points are testing the transition. Similar hydrogen abundances
-do not make this off-center change equivalent to LBA97's central core formation.
+By $3.560\Tyr$, both mass resolutions have a stable central region:
+the earlier shell has reached the center. The stable mass fractions are
+37.23\% and 37.77\% for 512 and 1024 points, respectively, extending to
+about 45\% of the radius. A convective envelope remains outside. The chemical
+profiles are no longer uniform: central hydrogen is consumed faster than
+convection can replenish it from the envelope (Figure~\ref{fig:transition}).
+For the 512-point calculation, the saved profiles place central convection's
+disappearance between $3.548\Tyr$ and $3.560\Tyr$; they do not resolve its
+exact age. LBA97 forms its central radiative core at $5.742\Tyr$, considerably
+later, although the hydrogen abundances are now comparable.
+
+Earlier attempts stopped because the program limited the cumulative number
+of rejected time steps, including in checkpoint files. The corrected
+512-point calculation and an exact continuation of the 1024-point model
+both reach the requested age without loosening physical accuracy tolerances.
+The spatial and temporal resolution of this transition still need further checks.
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{convection_transition.pdf}
+\caption{The change from full convection, compared at two mass resolutions.
+Left: the fraction of stellar mass in convective regions falls sharply near
+$3.545\Tyr$ and continues declining. The 1024-point history shown starts at
+its saved restart; the earlier part of that curve is not reconstructed.
+Right: hydrogen profiles at $3.560\Tyr$. Both centers are now stable against
+convection, while the outer convective region retains a nearly uniform
+hydrogen fraction. The difference between central abundances is visible
+despite close agreement at the surface. The curves retain every saved value.}
+\label{fig:transition}
+\end{figure}
 
 ``Fully convective'' describes where convection occurs, not the fraction of
 the luminosity it carries. Radiation, conduction and convection share the heat
@@ -253,7 +286,7 @@ calculations are needed when the star reaches a composition, surface
 temperature or gravity not adequately covered, or when the physical treatment
 changes.
 
-The completed $3.40\Tyr$ track uses 96 atmosphere models, extending down to
+The earlier $3.40\Tyr$ track used 96 atmosphere models, extending down to
 hydrogen fraction 0.2 and up to surface temperature 3400 K. Not every
 combination in the listed temperature, gravity and abundance ranges has been
 calculated. Ember requires the surrounding atmosphere models needed for each
@@ -293,10 +326,10 @@ near $3.543\Tyr$, then stopped near $3.544\Tyr$ after exceeding the program's
 allowed total number of rejected time steps. Its last accepted model had a
 convective mass fraction of 0.7638. The stopping rule has been changed to count
 consecutive rejected attempts, while retaining the cumulative count for
-diagnostics. No accuracy tolerance has been loosened. Fresh calculations with
-the refined atmosphere table and 512 and 1024 mass points are testing the
-transition; the figures distinguish the completed reference from the later
-saved trial state while those comparisons are assessed.
+diagnostics. No accuracy tolerance has been loosened. Calculations with
+the refined 120-atmosphere table and 512 and 1024 mass points now both reach
+$3.560\Tyr$. Their comparison is reported above; the atmosphere remains
+gas-only and does not yet cover a cold remnant.
 
 Interior composition tables have undergone similar checks. The first
 zero-hydrogen extension differed from a direct FreeEOS calculation by 2.367\%
@@ -326,9 +359,12 @@ of a stellar lifetime change. Dusty atmosphere models become relevant around
 being added using published optical data and explicit grain-size choices.
 The optical calculation now passes independent scattering-program and
 small-particle checks. A first fixed-atmosphere experiment combines it with
-the computed alumina abundance. It retains absorption and scattering
-separately and tests several grain sizes; the atmosphere has not yet been
-recomputed with these opacities. Material phase, wavelength coverage and
+the computed alumina abundance. The maximum condensed mass fraction is
+$1.094\times10^{-4}$. For compact grains of radius $0.1\,\mu\mathrm{m}$,
+the integrated grain optical depths near $1\,\mu\mathrm{m}$ are 0.002610
+for absorption and 0.002829 for scattering. These values describe one fixed
+2800 K gas profile with suspended grains, not a recomputed atmosphere or a
+prediction of grain size. Absorption and scattering remain separate. Material phase, wavelength coverage and
 atmospheric feedback remain part of the implementation, as described in the
 \doc{docs/GRAINS.md}{grain-opacity notes}.
 
@@ -367,16 +403,16 @@ The discrete energy equation used in the reference is
 Here $L_\gamma$ is the photon luminosity, $L_{\rm nuc,dep}$ is nuclear heat
 left in the star, and $L_{\rm grav}$ is the contribution from changing internal
 and gravitational energy. Nuclear and thermal neutrinos are counted separately.
-At $3.40\Tyr$, in solar luminosity units,
+At $3.560\Tyr$ in the 512-point model, in solar luminosity units,
 \[
- L_{\rm nuc,dep}=0.002015,\quad
- L_{\rm grav}=6.548\times10^{-8},\quad
- L_{\nu,\rm nuclear}=4.089\times10^{-5},\quad
- L_{\nu,\rm plasma}=3.986\times10^{-11}.
+ L_{\rm nuc,dep}=0.002025,\quad
+ L_{\rm grav}=6.588\times10^{-7},\quad
+ L_{\nu,\rm nuclear}=4.335\times10^{-5},\quad
+ L_{\nu,\rm plasma}=5.777\times10^{-11}.
 \]
 The changing-energy term refers to the last implicit half step; the other
 reported diagnostics use the saved state. Before rounding, the discrete
-luminosity residual is below $10^{-15}$. This checks the equations implemented
+fractional luminosity residual at this saved endpoint is below $3\times10^{-15}$. This checks the equations implemented
 in the code, not an independent exact energy integral or the absence of
 missing physical processes.
 
@@ -441,9 +477,12 @@ External heating, encounters and hypothetical particle-physics effects belong
 to separately defined scenarios \cite{adams97}.
 
 \section{Computing time and reproducibility}
-The Ember calculation to $3.30\Tyr$ used 2351 CPU seconds and 4088 seconds of
-elapsed time while other source calculations were running. Continuing it to
-$3.40\Tyr$ used 97.00 CPU seconds. Two separate timing experiments found that
+The new 512-point calculation from the initial model through $3.560\Tyr$
+used 2184 CPU seconds (36.39 minutes), including 2353 accepted steps and
+198 rejected attempts. The final 1024-point continuation from about
+$3.545\Tyr$ used another 1063 CPU seconds; this excludes the earlier part
+of that higher-resolution calculation. The separately computed atmosphere
+tables are also excluded from these stellar timings. Two separate timing experiments found that
 reusing exactly identical nuclear calculations reduced CPU time by 12.52\%
 and 10.84\%, with identical complete output files. The combined improvement
 is about 22\% for those experiments, not a measured whole-lifetime speedup.

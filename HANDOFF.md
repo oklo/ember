@@ -1,3 +1,55 @@
+# Completed central-core models and updated PDF — 2026-09-10 17:06 UTC
+
+The user requested an updated PDF. Today's paper was overwritten in place,
+now ten pages, with the completed 3.560-trillion-year calculations, LBA97
+comparisons, a new convection/hydrogen-profile figure, and numerical grain
+results. Four significant figures and faint F77 curves remain in force.
+
+Both stellar jobs previously listed as active are COMPLETE. Process inspection
+at 16:43 UTC found no surviving stellar, atmosphere or grain-source calculations.
+No new stellar run was launched during this PDF update. The autonomous goal
+of actual evolution to a 100 K helium remnant remains unfinished.
+
+- Fresh 512-point v2: `out/evolution-cold-remnant-x015-transition-512-3560gyr-v2.*`.
+  Reached 3.560 trillion years, 2354 history states, 198 rejected attempts.
+  Central X=0.1518, surface X=0.1747, Teff=3240 K, L=0.002025 Lsun,
+  convective mass=0.6277. Native checkpoint intact. Executable SHA256
+  `7a4a808e801f1ce523f5c692d54583420a629c3139a64a36843e85f98c8849e0`.
+- 1024-point exact continuation v1: same final age, 532 segment states,
+  central X=0.1491, Teff=3241 K, L=0.002027 Lsun, convective mass=0.6223.
+  No new checkpoint was written, as intended. Older checkpoint/binary preserved.
+- BOTH final centers are now stable against convection. Actual Ledoux region
+  probe gives stable central mass fractions 37.23% and 37.77%, reaching about
+  45% of radius. The old 3.548-trillion-year 512 trial still had a convective
+  center; its age, X, He3, radius and luminosity reappear exactly in the new
+  fresh history. Central-convection disappearance is bracketed only between
+  3.548 and 3.560 trillion years, not yet accurately located.
+- At equal final age, 1024/512 luminosity differs by +0.07813%, temperature by
+  +0.8654 K, central hydrogen by -1.752%, central density by +1.108%, total
+  hydrogen mass by -0.1707%. Further mesh and time-step controls are required.
+  Hydrogen burning supplies almost all luminosity; no cooling claim is made.
+
+`scripts/summarize_transition_runs.py --mixing-probe
+/tmp/ember-evolution-mixing-probe-v1` checks source outputs and receipts,
+finite histories and normalized profiles, then evaluates actual Ledoux regions
+and exports the new small data files. Report:
+`docs/results/evolution_transition_3560gyr_v1.json`. All captured physical-data
+hashes agree between runs; neither receipt reports changes during its run.
+All five figures (PDF/PNG) and two LBA97 CSVs reproduce byte for byte from
+published data in `/tmp/ember-paper-3560-rebuild-v1`. Hash-checked local archive
+recovery reproduces the new 2354-state CSV exactly. Fourteen recovery archives
+have verified raw/compressed hashes and remain local. Earlier files are intact.
+No C++ changes were made for this paper update; the prior 32-suite pass remains
+applicable, with its original test date preserved in validation.json.
+
+Grain atmosphere coupling is still unfinished. The new text quantifies the
+existing fixed 2800 K alumina profile only; no additional grain physics was
+installed in either stellar run. The previous entry's material/chemistry and
+thermodynamic work remains necessary. Continue the scientific work after the
+PDF publication; inspect processes again before launching calculations.
+
+---
+
 # Grain optics, LBA97 comparison and transition checks — 2026-09-10 15:35 UTC
 
 The autonomous 0.1-solar-mass evolution to a correctly calculated 100 K helium

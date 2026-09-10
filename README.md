@@ -12,9 +12,9 @@ reported alongside each result.
 
 ## Status — September 10, 2026
 
-The completed **0.1 solar-mass model reaches 3.40 trillion years** from a
-specified static main-sequence model. It is still fully convective and burning
-hydrogen. **Hydrogen exhaustion and white-dwarf cooling have not been reached.**
+The completed **0.1 solar-mass model reaches 3.560 trillion years** from a
+specified static main-sequence model. It now has a central region stable against convection and an outer convective
+envelope. Hydrogen burning continues. **Hydrogen exhaustion and white-dwarf cooling have not been reached.**
 The current goal is to evolve the helium remnant to **100 K effective temperature**
 using thermodynamics, heat transport and atmospheres valid in the conditions
 the star reaches.
@@ -23,12 +23,12 @@ the star reaches.
 |---|---:|
 | Initial composition | XH = 0.7, He3 = 0, Z = 0.02; GS98 metals |
 | Mass mesh | 512 points; fixed baryonic mass of 0.1 Msun |
-| Central hydrogen mass fraction | 0.2034 |
-| Radius | 0.1459 Rsun |
-| Luminosity | 0.002016 Lsun |
-| Effective temperature | 3202 K |
-| Central temperature | 8.031 million K |
-| Convective mass fraction | 1 |
+| Central hydrogen mass fraction | 0.1518 |
+| Radius | 0.1428 Rsun |
+| Luminosity | 0.002025 Lsun |
+| Effective temperature | 3240 K |
+| Central temperature | 8.469 million K |
+| Convective mass fraction | 0.6277 |
 
 The [September 10 working paper](docs/reports/2026-09-10/ember_status_and_future.pdf)
 ([source, figures and reproduction instructions](docs/reports/2026-09-10/README.md))
@@ -41,11 +41,10 @@ remnant. The
 [handoff entry](HANDOFF.md) record subsequent work and job status.
 
 The completed run uses **64 composition tables for the equation of state**,
-refined hydrogen-poor TOPS opacity, and **96 atmosphere models** that resolve
+refined hydrogen-poor TOPS opacity, and **120 atmosphere models** that resolve
 absorption and scattering over frequency. Convection accounts for composition
-gradients; plasma-neutrino losses enter the energy equation. A calculation
-from the initial model reached 3.30 trillion years and continued from its saved
-state to 3.40 trillion years with the same executable and inputs.
+gradients; plasma-neutrino losses enter the energy equation. The new 512-point calculation
+contains 2354 states from the initial model through 3.560 trillion years.
 
 A refined table of **120 atmospheres extends to hydrogen fraction 0.1** at
 warm surface temperatures, including new points at hydrogen fraction 0.15.
@@ -54,13 +53,14 @@ discrepancy falls from 2.134% to 0.6468%. Independent checks at hydrogen
 fractions 0.125 and 0.175 differ by 0.7971% and 1.089%. These are local
 interpolation checks, not a bound on lifetime accuracy.
 
-The refined stellar trial develops a stable shell around a convective center
-near **3.55 trillion years**. Its saved 3.548-trillion-year model has about
-29.23% of the mass in that shell, spanning roughly 19–43% of the radius.
-It stopped at an obsolete checkpoint counter limit. The driver and checkpoint
-limits have been corrected and tested without changing accuracy tolerances;
-continued calculations are checking the transition and its mass resolution.
-This is not yet an established central radiative core.
+Both the 512-point and 1024-point calculations now have stable central regions,
+containing 37.23% and 37.77% of their mass, respectively, and extending to about
+45% of their radius. At the same age their luminosities differ by 0.07813%,
+but central hydrogen differs by 1.752%. The earlier stable shell has reached
+the center. Further mesh and time-step checks are needed to determine the
+transition age accurately. The earlier checkpoint counter limit was corrected
+without loosening accuracy tolerances. See the
+[completed comparison](docs/results/evolution_transition_3560gyr_v1.json).
 
 New [grain-opacity calculations](docs/GRAINS.md) provide separate absorption
 and scattering over wavelength, checked against an independent program and

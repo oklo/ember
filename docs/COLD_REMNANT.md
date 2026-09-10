@@ -10,6 +10,18 @@ publication policy in [DATA_REPRODUCTION.md](DATA_REPRODUCTION.md).
 
 ## Progress on 2026-09-10
 
+The latest 512-point and 1024-point calculations both completed **3.560 trillion
+years**. Both now have central regions stable against convection, containing
+37.23% and 37.77% of their mass. Final central hydrogen fractions are 0.1518
+and 0.1491; surface temperatures are 3240 K and 3241 K. The luminosity difference
+is 0.07813%, but the central hydrogen difference is 1.752%, requiring further
+mesh and time-step checks. Hydrogen burning continues. No stellar jobs remained
+active at the 16:43 UTC process inspection. The new 512-point checkpoint is
+intact; the 1024-point continuation wrote no new checkpoint. See
+`results/evolution_transition_3560gyr_v1.json` and the updated working paper.
+
+The paragraphs below preserve the preceding transition diagnostics.
+
 The latest gas-atmosphere table contains 120 accepted source models, including
 hydrogen fractions 0.1 and 0.15. Independent temperature checks near fractions
 0.125, 0.15 and 0.175 differ by 0.7971%, 0.6468% and 1.089%. A refined
