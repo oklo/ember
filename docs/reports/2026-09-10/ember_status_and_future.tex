@@ -31,13 +31,12 @@ surface temperature is 3202 K. It has not exhausted hydrogen or become a helium
 white dwarf. The aim is to calculate that transition and the subsequent cooling
 to surface temperatures of 1000, 500 and 100 K.
 
-The calculations below compare Ember with an independently run Fortran 77
-stellar-evolution program, here called F77. They show substantial differences
-in luminosity and hydrogen-consumption time. Understanding these differences
-is part of the work; neither agreement with an older result nor greater
-computational expense establishes physical accuracy. Throughout this paper,
-$1\Tyr=10^{12}$ yr. Reported values have at most four significant figures;
-the files used to calculate the figures retain their available precision.
+The main comparison is with the published $0.1\Ms$ model of Laughlin,
+Bodenheimer and Adams (1997), using their stated values and approximate curves
+read from their figures. The recently reconstructed F77 program is a separate,
+secondary comparison. Throughout this paper, $1\Tyr=10^{12}$ yr. Reported
+values have at most four significant figures; inferred figure values carry
+less precision than directly stated or calculated numbers.
 
 \section{The star and its evolution so far}
 The initial hydrogen mass fraction is $X_{\rm H}=0.7$, the initial $^3$He
@@ -69,105 +68,138 @@ was checked before combining the histories into 1861 distinct saved models.
 The decline in $^3$He and the recent decrease in radius occur while the star
 is still burning hydrogen, not during white-dwarf cooling.
 
-\begin{figure}[H]\centering
-\includegraphics[width=\textwidth]{evolution_history.pdf}
-\caption{Ember and two F77 calculations of a $0.1\Ms$ star. F77 uses either
-AJR or Ferguson low-temperature opacity; its other input choices are held fixed.
-Ember ends at $3.40\Tyr$ while still burning hydrogen. The F77 AJR curve
-continues through its programmed cooling stop; crosses mark the last accepted
-Ferguson model before its later failure to converge. These are different
-physical models. The clocks are shown as calculated: F77 includes contraction
-before hydrogen burning, whereas Ember begins from a static hydrogen-burning
-model. Only F77's first billion years are omitted from this overview.
-Luminosity and radius use logarithmic scales and the same nominal solar units
-for all curves. The rapid F77 transitions near the ends of the tracks are
-resolved in the saved data, although compressed on this time axis. Thin,
-translucent F77 lines keep attention on Ember. Individual steps changing a
-surface quantity by more than 5\%, or an abundance by more than 0.01, are
-drawn more faintly; no accepted data are removed or smoothed.}
-\label{fig:age}
-\end{figure}
-
-\section{What differs from the F77 calculation?}
-Ember is a C++23 development of the stellar-evolution methods reconstructed in
-\href{https://github.com/oklo/Henyey}{Henyey/F77}. The long-term evolutionary
-picture of Laughlin, Bodenheimer and Adams \cite{lba97} motivates the work;
-its lifetime is not imposed on either of the new calculations shown here.
-F77 was run from the retained source with explicitly recorded input files,
-151 initial mass points and a mixing-length parameter of 1.36. These runs
-do not recover an unarchived executable or establish the precise result of
-the original 1997 calculation.
-
-Age alone can give a misleading comparison because the two codes consume
-hydrogen at different rates. Figure~\ref{fig:hydrogen} instead compares stars
-at the same central hydrogen abundance. Near Ember's present $X_{\rm H}=0.2034$,
-the F77 AJR star is about 76\% more luminous. In common solar units its
-luminosity is approximately $0.003554\Ls$, compared with Ember's $0.002016\Ls$.
-Their surface temperatures are 3698 and 3202 K; their radii and central
-temperatures differ by less than 0.5\%. F77 reaches this abundance near
-$2.507\Tyr$, compared with Ember's $3.40\Tyr$, and retains about 56\% more $^3$He.
+\section{Comparison with the published LBA97 model}
+The main comparison is with Laughlin, Bodenheimer and Adams \cite{lba97},
+here abbreviated LBA97. Their section 3.2 and Figure~1 describe the full
+hydrogen-burning evolution of a $0.1\Ms$ star and its entry into white-dwarf
+cooling. We use numbers stated in the text and approximate values read from
+the published figure. The original numerical history has not been recovered.
 
 \begin{figure}[H]\centering
-\includegraphics[width=\textwidth]{f77_matched_hydrogen.pdf}
-\caption{Comparison at the same stage of hydrogen consumption. Hydrogen
-abundance decreases from left to right, over the interval reached by all three
-calculations. Luminosity, surface temperature, radius and central $^3$He
-abundance are plotted directly against the central hydrogen fraction; no
-stellar age is shifted and no track is extrapolated. Values above
-$X_{\rm H}=0.699$ are omitted to exclude the initial F77 contraction and
-very early adjustment. Each line connects accepted models. F77 surface
-quantities were printed to four significant figures. Its luminosity and
-radius have been converted to Ember's nominal solar units. The differences
-measure the combined effect of the codes' physical and numerical choices,
-not the isolated error of any one ingredient. The faint-line treatment is
-the same as in Figure~\ref{fig:age}.}
-\label{fig:hydrogen}
+\includegraphics[width=\textwidth]{lba97_hr.pdf}
+\caption{Ember compared with the published LBA97 evolution. The pale curve
+was read from Figure~1 of LBA97; diamonds mark values stated in their text.
+The left panel shows the full published path from the start of hydrogen
+burning through cooling. The right panel enlarges the region reached by
+Ember. The orange curve contains Ember's accepted models through $3.40\Tyr$;
+its endpoint is marked. The open orange point shows the last saved state of
+the refined-atmosphere trial at $3.548\Tyr$, which has not completed its
+requested interval. The original pre-main-sequence contraction and the
+dotted diagonal guide in LBA97 are excluded. The pale line connects 42
+selected positions on the printed track; it is an approximate reconstruction,
+not the original numerical output. Neither temperature nor luminosity has
+been adjusted to make the curves agree.}
+\label{fig:lba_hr}
 \end{figure}
-
-Changing only F77's low-temperature opacity choice from AJR to Ferguson
-increases luminosity by about 54.5\% at this hydrogen abundance. In a separate
-calculation, the two codes' pp-chain routines were evaluated at identical
-central temperature, density, hydrogen and $^3$He abundance. Their heating
-rates differ by roughly 9\%. This is much smaller than the surface-luminosity
-difference between the independently evolved stars.
-
-These results make the atmosphere and opacity, together with the resulting
-$^3$He history, leading possibilities to investigate. They do not uniquely
-separate those effects from the equation of state, nuclear screening or the
-way composition and structure are solved together. Baraffe et al.
-\cite{baraffe98} discuss how grey atmospheres can overestimate surface
-temperature and luminosity in cool low-mass stars. That supports the direction
-of a possible effect, not its size here. A decisive comparison will require
-relaxing otherwise equivalent stars while changing one physical ingredient
-at a time. F77 already includes CNO burning, conduction and an adjustable mass
-mesh; Ember does not simply add physics to a smaller F77 model.
-
-\subsection{When does the center cease to be convective?}
-At $3.40\Tyr$, Ember's smallest ratio of the temperature gradient required by
-radiation and conduction to the adiabatic gradient is 1.336. It occurs near
-21.1\% of the enclosed mass; the central ratio is 3.090. At $3.30\Tyr$ the
-corresponding ratios were 1.588 and 3.707. For homogeneous material, a ratio
-below unity permits stable transport without convection. The decreasing
-ratios suggest an approaching change, but do not yet establish a radiative
-core or its formation time. These estimates use values at mass points;
-Ember determines mixing between adjacent points during evolution.
-
-F77 was given an additional print statement to record its central convection
-flag. Removing these extra lines reproduces the unmodified program's output
-exactly for the full AJR run and a shorter, 6000-model Ferguson comparison.
-The first accepted models with a nonconvective central flag are:
 
 \begin{center}\begin{tabular}{@{}lrr@{}}\toprule
-F77 opacity & Age (Tyr) & Central hydrogen mass fraction \\\midrule
-AJR & 3.224 & 0.01756 \\
-Ferguson & 2.946 & $1.064\times10^{-5}$ \\\bottomrule
+Quantity & LBA97, published & Ember \\\midrule
+Initial surface temperature (K) & 2228 & 2764 \\
+Initial luminosity ($\Ls$) & $\simeq0.000417$ & 0.0008350 \\
+Initial central density ($\mathrm{g\,cm^{-3}}$) & 309 & 381.5 \\
+Maximum $^3$He mass fraction & 0.0995 & 0.1002 \\
+Age at maximum $^3$He ($\Tyr$) & 1.38 & 0.7101 \\
+Central radiative-core formation ($\Tyr$) & 5.742 & Not yet established \\
+Hydrogen mass fraction at that transition & $\simeq0.16$ & Not yet established \\
+Highest surface temperature (K) & 5807 & Not yet reached \\\bottomrule
 \end{tabular}\end{center}
-F77 changes its convection flag only after a finite margin beyond marginal
-stability. For AJR, the gradient first fell below unity one accepted model
-before the flag changed. The exact bounding models are retained in the data;
-the rounded ages above cannot resolve that one-step difference. The extended
-Ferguson run later failed to converge during cooling near $2.955\Tyr$.
-Its accepted earlier models remain useful, but that run did not finish cooling.
+
+The two starting states are defined differently. LBA97 includes contraction
+and defines main-sequence arrival by nuclear reactions supplying all surface
+luminosity, after about 2 billion years. Ember starts from a static
+hydrogen-burning model at age zero. That clock offset is small compared with
+the later differences, but the initial thermal and atmospheric models also
+differ. Ember initially radiates about twice the published luminosity and
+has a hotter surface. These comparisons should not be interpreted as a
+measurement of the error in one isolated physical ingredient.
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{lba97_composition.pdf}
+\caption{Hydrogen consumption and the buildup and depletion of $^3$He.
+The pale curves are read from the inset of LBA97 Figure~1, with 20 hydrogen
+and 15 helium-3 samples. Diamonds show their stated $^3$He maximum and the
+hydrogen abundance at central radiative-core formation. Orange curves are
+Ember's completed track; the open points show the later trial state.
+Ages are shown as reported, without shifting or
+stretching either calculation. The representative crosses correspond to
+four image pixels: about $0.05\Tyr$ in age and 0.01 in mass fraction. They
+illustrate reading precision, not statistical or physical uncertainty.
+The rapid final hydrogen decline is poorly resolved in the printed inset;
+the helium-3 trace ends as it becomes indistinguishable from the baseline.}
+\label{fig:lba_composition}
+\end{figure}
+
+The maximum $^3$He abundance agrees to within about 1\%, but Ember reaches it
+in about half the time. Ember also consumes hydrogen faster over the interval
+calculated so far. Reading the published hydrogen curve gives an age of
+roughly $5.6\Tyr$ at Ember's present abundance, compared with $3.40\Tyr$
+for Ember. The figure does not justify a more precise age comparison.
+The luminosity--temperature track alone can conceal this difference because
+it does not show how long the star spends at each position.
+
+LBA97 used a grey atmosphere, approximate opacity changes as hydrogen is
+consumed, and older interior opacities and nuclear rates. Ember uses
+frequency-dependent gas atmospheres, composition-specific opacity tables,
+a different equation of state and updated pp-chain rates. Grain formation
+is still omitted from Ember's evolving atmosphere. These differences are
+candidates for the changed surface properties and hydrogen-consumption rate;
+comparisons that change one ingredient at a time are needed to separate them.
+Neither agreement with LBA97 nor a more expensive calculation establishes
+physical accuracy.
+
+\subsection{Approaching the change in convection}
+The completed $3.40\Tyr$ Ember model is still fully convective. Its smallest
+ratio of the temperature gradient required by radiation and conduction to
+the adiabatic gradient is 1.336, near 21.1\% of the enclosed mass; the central
+ratio is 3.090. For homogeneous material, a ratio below unity permits stable
+transport without convection. These values suggest a change first away from
+the center, rather than immediately forming the central radiative core
+described by LBA97.
+
+A trial with the refined atmosphere table develops a stable layer between
+a convective center and a convective envelope. Its saved model near
+$3.548\Tyr$ has 3.823\% of the mass in the central convective region,
+29.23\% in the stable layer and 66.95\% in the outer convective region.
+The stable shell spans approximately 19--43\% of the stellar radius.
+Near 21.10\% of the enclosed mass, the local gradient ratio has fallen to
+0.9274, while the central ratio remains 1.421. Rising temperature and lower
+opacity favor radiation in this shell; conduction supplies only 4.144\% of
+the local combined radiative and conductive transport capacity.
+
+These are preliminary results. The trial stopped because a checkpoint check
+still capped the cumulative number of rejected time steps. Both that check
+and the earlier evolution-loop limit have been corrected without changing the
+physical accuracy tolerances. A fresh calculation and a comparison with twice
+as many mass points are testing the transition. Similar hydrogen abundances
+do not make this off-center change equivalent to LBA97's central core formation.
+
+``Fully convective'' describes where convection occurs, not the fraction of
+the luminosity it carries. Radiation, conduction and convection share the heat
+flow continuously. The model's mixing-length calculation makes the convective
+contribution approach zero at a stability boundary. Chemical mixing uses a
+stronger approximation: each connected convective region becomes uniform
+rapidly. Slow composition mixing is included in some marginally stable regions,
+but their additional heat transport still needs attention.
+
+\subsection{The reconstructed F77 program is a separate comparison}
+The recently reconstructed \href{https://github.com/oklo/Henyey}{Henyey/F77}
+program is useful for controlled code comparisons, but it does not reproduce
+the LBA97 calculation. Its AJR-opacity run first flags the center as
+nonconvective at $3.224\Tyr$ and $X_{\rm H}=0.01756$; its Ferguson-opacity
+run does so at $2.946\Tyr$ and $X_{\rm H}=1.064\times10^{-5}$.
+Both differ substantially from the published $5.742\Tyr$ and $X_{\rm H}\simeq0.16$.
+The AJR run's highest surface temperature, 5936 K, is much closer to LBA97's
+5807 K, but agreement in that one quantity does not validate the full history.
+
+The F77 reconstruction substitutes some opacity and nuclear-rate prescriptions.
+At $X_{\rm H}=0.2034$, it is about 76\% more luminous than Ember; switching
+only its low-temperature opacity choice changes its luminosity by 54.5\%.
+These comparisons establish sensitivity to the inputs, rather than identifying
+the source of the Ember--LBA97 difference. The
+\doc{docs/F77_LBA97_COMPARISON.md}{separate comparison notes} and
+\doc{docs/reports/2026-09-10/f77_matched_hydrogen.pdf}{supplementary F77 graphs}
+retain these results. The F77 curves are thin and translucent, with abrupt
+changes drawn more faintly and all accepted data preserved.
 
 \section{Physical ingredients in Ember}
 \begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.75\textwidth}@{}}
@@ -250,15 +282,21 @@ Temperature/gravity contribution at surrounding compositions & $+0.4743\%$ & $-0
 Four extra atmosphere calculations separate the composition contribution from
 the temperature/gravity contribution. The fractional differences combine
 multiplicatively, reproducing the full discrepancy. Hydrogen spacing accounts
-for most of the temperature error. Additional atmospheres at hydrogen fraction
-0.15 are therefore being calculated. New independent atmospheres at 0.125 and
-0.175 differ from the trial table by 1.539\% and 1.833\% in matching temperature.
+for most of the temperature error. Twelve additional atmospheres at hydrogen
+fraction 0.15 now form a refined table of 120 atmospheres. At the independent
+0.15 atmosphere, the matching-temperature difference falls to 0.6468\%; new
+checks at 0.125 and 0.175 differ by 0.7971\% and 1.089\%. The refinement also
+passes the original-source and interior-density checks. These remain local
+interpolation comparisons, not a bound on the stellar lifetime.
 A stellar trial using the 108-atmosphere table began losing full convection
 near $3.543\Tyr$, then stopped near $3.544\Tyr$ after exceeding the program's
 allowed total number of rejected time steps. Its last accepted model had a
-convective mass fraction of 0.7638. The transition needs further numerical
-checks and the atmosphere refinement remains unfinished, so this trial is
-not included in the plotted Ember reference.
+convective mass fraction of 0.7638. The stopping rule has been changed to count
+consecutive rejected attempts, while retaining the cumulative count for
+diagnostics. No accuracy tolerance has been loosened. Fresh calculations with
+the refined atmosphere table and 512 and 1024 mass points are testing the
+transition; the figures distinguish the completed reference from the later
+saved trial state while those comparisons are assessed.
 
 Interior composition tables have undergone similar checks. The first
 zero-hydrogen extension differed from a direct FreeEOS calculation by 2.367\%
@@ -271,7 +309,30 @@ set of independent comparisons. These measure interpolation differences for
 the tested states, not the overall physical uncertainty in the sources.
 
 \subsection{Condensates and a hydrogen-free atmosphere}
-Grain formation changes both opacity and thermodynamics. Earlier cool
+The current evolving atmosphere uses gas-only opacity. Independent chemistry
+checks found no condensates in the tested 3000--3200 K atmospheres, but found
+them in the cool upper layers of 2600--2800 K models. Effective temperature
+alone is therefore insufficient to decide whether grains form. The newer
+hydrogen-poor atmospheres still need their own checks.
+
+Grain formation can affect radiation in two ways: it removes absorbing atoms
+and molecules from the gas, and any suspended grains absorb and scatter light.
+Earlier experiments included only the first effect, assuming the condensed
+material settles out. A solar-composition 2800 K comparison changed the
+interior matching pressure by 0.1246\% and temperature by $-0.02347\%$.
+These are local gas-depletion effects, not measurements of grain opacity or
+of a stellar lifetime change. Dusty atmosphere models become relevant around
+2800 K and below \cite{chabrier00}; grain absorption and scattering are now
+being added using published optical data and explicit grain-size choices.
+The optical calculation now passes independent scattering-program and
+small-particle checks. A first fixed-atmosphere experiment combines it with
+the computed alumina abundance. It retains absorption and scattering
+separately and tests several grain sizes; the atmosphere has not yet been
+recomputed with these opacities. Material phase, wavelength coverage and
+atmospheric feedback remain part of the implementation, as described in the
+\doc{docs/GRAINS.md}{grain-opacity notes}.
+
+Grain formation also changes thermodynamics. Earlier cool
 atmosphere calculations failed an enthalpy check, so the condensate treatment
 has not been accepted for evolution. A new calculation compares gas-only and
 gas-plus-grain chemical equilibria, including the redistribution of atoms among
@@ -397,7 +458,9 @@ the stellar integrator.
 
 The \href{https://github.com/oklo/ember}{GitHub repository} contains code,
 table-generation instructions, small records of input choices and checks,
-this paper and the numerical data needed for both figures. The F77 figure data
+this paper and the numerical data needed for its figures. The LBA97 comparison
+records the selected image coordinates, axis calibration and original PDF
+checksum; its curves can be rebuilt without the original image. The F77 figure data
 are extracted from accepted models and checked against the recorded output
 hashes. Full raw outputs, generated physical tables, saved stellar states and
 executable archives remain local. Instructions for recreating the figures
@@ -427,6 +490,10 @@ relationships and color--magnitude diagrams. \emph{A\&A}, 337, 403.
 \bibitem{hrw94} Haft, M., Raffelt, G., \& Weiss, A. (1994).
 Standard and nonstandard plasma neutrino emission revisited.
 \href{https://arxiv.org/abs/astro-ph/9309014}{arXiv:astro-ph/9309014}.
+\bibitem{chabrier00} Chabrier, G., Baraffe, I., Allard, F., \& Hauschildt, P. (2000).
+Evolutionary models for very low-mass stars and brown dwarfs with dusty atmospheres.
+\emph{ApJ}, 542, 464.
+\href{https://arxiv.org/abs/astro-ph/0005557}{arXiv:astro-ph/0005557}.
 \bibitem{baiko22} Baiko, D. A., \& Chugunov, A. I. (2022).
 \emph{Ab initio} thermodynamics of one-component plasma for astrophysics of
 white dwarfs and neutron stars.

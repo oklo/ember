@@ -1,0 +1,271 @@
+{
+  "scope": "Spherical particle optics and mass normalization only; no coupled atmosphere or stellar result",
+  "source_receipt": "/private/tmp/ember-grain-sources-v3/prepared.json",
+  "source_receipt_sha256": "cbc5c624edbf2f0752313d1c83e4acefe50eb717063bceab05e76219fcfa1480",
+  "probe_sha256": "97f07b27c04971493a538657ad929a1fe006a7bf4af3d54ff42f16f3f2256660",
+  "optool_sha256": "fb6117729ebc0c708555ba7f6af9d72e5072b74097cac7eb536cc1bd67bb1051",
+  "columns": [
+    "Qabs",
+    "Qsca",
+    "Qext",
+    "scattering_asymmetry"
+  ],
+  "independent_cases": [
+    {
+      "n": 1.5,
+      "k": 0.1,
+      "size_parameter": 0.001,
+      "lxmie": [
+        0.00019925181141964055,
+        2.4022376991479305e-13,
+        0.00019925181165986433,
+        1.9797507432598458e-07
+      ],
+      "optool": [
+        0.0001992518028346951,
+        2.402237601165913e-13,
+        0.00019925180307491888,
+        7.787137e-08
+      ],
+      "absolute_difference": [
+        8.584945444421385e-12,
+        9.79820174247049e-21,
+        8.584945444421385e-12,
+        1.2010370432598456e-07
+      ],
+      "independently_compared_columns": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "n": 1.5,
+      "k": 0.1,
+      "size_parameter": 0.1,
+      "lxmie": [
+        0.020035976435112495,
+        2.4038190395541702e-05,
+        0.020060014625508035,
+        0.001978246521924271
+      ],
+      "optool": [
+        0.020035971222454638,
+        2.403818964680474e-05,
+        0.02006000941210144,
+        0.001978184
+      ],
+      "absolute_difference": [
+        5.212657857439629e-09,
+        7.487369624585745e-13,
+        5.213406595316883e-09,
+        6.252192427105493e-08
+      ],
+      "independently_compared_columns": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "n": 1.5,
+      "k": 0.1,
+      "size_parameter": 2,
+      "lxmie": [
+        0.6553104600545556,
+        1.2861679736548948,
+        1.9414784337094504,
+        0.6570830247066465
+      ],
+      "optool": [
+        0.6553104195884757,
+        1.2861680190724036,
+        1.9414784386608794,
+        0.6570831
+      ],
+      "absolute_difference": [
+        4.046607993135609e-08,
+        4.541750886488671e-08,
+        4.951429044552924e-09,
+        7.529335355194178e-08
+      ],
+      "independently_compared_columns": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "n": 1.5,
+      "k": 0.1,
+      "size_parameter": 20,
+      "lxmie": [
+        1.1026571607294586,
+        1.1529322221085396,
+        2.2555893828379983,
+        0.9423151116587835
+      ],
+      "optool": [
+        1.102657149405315,
+        1.1529321587447732,
+        2.2555893081500877,
+        0.9423151
+      ],
+      "absolute_difference": [
+        1.1324143622815086e-08,
+        6.336376645599273e-08,
+        7.468791052289703e-08,
+        1.1658783494183922e-08
+      ],
+      "independently_compared_columns": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "n": 1.5,
+      "k": 0,
+      "size_parameter": 2,
+      "lxmie": [
+        0.0,
+        1.7984181632262635,
+        1.7984181632262635,
+        0.6259531461237374
+      ],
+      "optool": [
+        0.0001798417752710254,
+        1.798417752710254,
+        1.7985975944855253,
+        0.6259532
+      ],
+      "absolute_difference": [
+        0.0001798417752710254,
+        4.1051600940811284e-07,
+        0.00017943125926178638,
+        5.387626256236899e-08
+      ],
+      "independently_compared_columns": [
+        1,
+        3
+      ]
+    },
+    {
+      "n": 3,
+      "k": 4,
+      "size_parameter": 0.1,
+      "lxmie": [
+        0.051795052141713135,
+        0.0002874801780065574,
+        0.052082532319719696,
+        -0.0013119058371235
+      ],
+      "optool": [
+        0.05179504090514934,
+        0.00028748017314339134,
+        0.05208252107829273,
+        -0.00131197
+      ],
+      "absolute_difference": [
+        1.1236563797478727e-08,
+        4.863166076438108e-12,
+        1.1241426962904644e-08,
+        6.416287649997111e-08
+      ],
+      "independently_compared_columns": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "n": 3,
+      "k": 4,
+      "size_parameter": 1,
+      "lxmie": [
+        1.104974201427519,
+        2.148430972252849,
+        3.253405173680368,
+        0.004276870346185568
+      ],
+      "optool": [
+        1.1049739360809148,
+        2.1484306669381783,
+        3.253404603019093,
+        0.004276824
+      ],
+      "absolute_difference": [
+        2.6534660424459844e-07,
+        3.053146708786869e-07,
+        5.706612751232853e-07,
+        4.634618556813297e-08
+      ],
+      "independently_compared_columns": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "n": 3,
+      "k": 4,
+      "size_parameter": 10,
+      "lxmie": [
+        0.5878745743566429,
+        1.8546887619607828,
+        2.4425633363174257,
+        0.6300340814931006
+      ],
+      "optool": [
+        0.5878744330171681,
+        1.854688574389825,
+        2.442563007406993,
+        0.6300341
+      ],
+      "absolute_difference": [
+        1.4133947479066933e-07,
+        1.875709578769147e-07,
+        3.28910432667584e-07,
+        1.8506899457371162e-08
+      ],
+      "independently_compared_columns": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "acceptance": {
+    "independent_relative": 0.0001,
+    "independent_absolute": 5e-07,
+    "rayleigh_relative": 0.0001
+  },
+  "independent_angular_resolution": 1800,
+  "angular_refinement_reason": "Optool computes g by angular quadrature. Its default 180-point grid gives a spurious negative g in the small-particle control; resolving that integral retains the original comparison tolerance.",
+  "lossless_control": "Optool imposes Qabs >= 1e-4 times the raw Qext in optool.f90. Compare its Qsca and g only for k=0. Check LX-MIE absorption and extinction against the exact lossless identity separately; no absorption floor is imported.",
+  "rayleigh_relative_errors": [
+    5.63334860537168e-07,
+    7.341619134848543e-08
+  ],
+  "size_distribution_relative_errors": {
+    "absorption": 3.3306690738754696e-16,
+    "scattering": 2.220446049250313e-16,
+    "transport_scattering": 1.1102230246251565e-15
+  },
+  "zero_grain_limit_exact": true,
+  "rejects_unsupported_wavelength": true,
+  "scripts_sha256": {
+    "grain_mie_probe.cpp": "c79e02b62a79c7c68af16f1e6e8ae5400b0110bc20356cb28311d9ab0390594f",
+    "grain_opacity.py": "456817c38bc1af171398d9f065aa85827a9a1362ebf74cb8eb240cd76129dcb0",
+    "prepare_grain_sources.py": "fd5ec781cdd60a6080e1dca829accf13a965b4ab004cfef2119353d545492d7f",
+    "audit_grain_mie.py": "e2b3fefba46f46ab4bb8bdecb849467617043d543186edb661315a7074e5c838"
+  },
+  "passed": true
+}

@@ -1,0 +1,33 @@
+{
+  "scope": "Only execution and checkpoint counters changed. Research checkpoint identities remain unchanged; physical tolerances were not loosened.",
+  "validated_utc": "2026-09-10T15:33:19.119335+00:00",
+  "source_sha256": {
+    "apps/evolve.cpp": "0f112bf404c6cbdb8fecfd7fcc3bcd18e53f75c209a20bcbb4ca451d582f28c2",
+    "apps/evolution_checkpoint.hpp": "a9a44b0deeca564dc06fbdef76edf82b4562e9a12bcc42acd6efcd11c0e5afe7",
+    "tests/test_evolution_restart.py": "e657a3148b149c09e4a2540929e3201b6dc48198861abdd2308e89b70e9d9f50"
+  },
+  "executable_sha256": "7a4a808e801f1ce523f5c692d54583420a629c3139a64a36843e85f98c8849e0",
+  "restart_test": {
+    "passed": true,
+    "elapsed_seconds": 52.65,
+    "large_lifetime_counters": [
+      15000,
+      102
+    ],
+    "same_accepted_trajectory_and_final_profile": true,
+    "large_counter_roundtrip": true,
+    "negative_and_overflow_rejected": true,
+    "log_sha256": "d68becf6c176c306e08639c55260e2e6f0709ca4d3b047a1730e03ec7b09e4e5"
+  },
+  "ctest": {
+    "passed": 32,
+    "failed": 0,
+    "elapsed_seconds": 84.76,
+    "log_sha256": "67b11fcec170bcfe9d64e14a3155fb7f8d85bf5bba10ac073e43b2bffcab4288"
+  },
+  "new_fresh_snapshot": "/tmp/ember-cold-remnant-x015-transition-3560gyr-v2",
+  "old_stopped_trials": [
+    "out/evolution-cold-remnant-x015-transition-512-3560gyr-v1.json",
+    "out/evolution-cold-remnant-x015-transition-1024-3560gyr-v1.json"
+  ]
+}

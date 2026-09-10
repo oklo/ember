@@ -1,0 +1,45 @@
+{
+  "scope": "Actual Ledoux mixing routine evaluated on the final accepted profile of the interrupted108-atmosphere trial. Profile reconstruction has log/exp roundoff and is never used for restart. This identifies local transport regions, not a converged transition age.",
+  "converged_to_requested_age": false,
+  "age_yr": 3543553455580.58,
+  "central_region_convective": true,
+  "convective_mass_fraction": 0.76375260159042,
+  "history_convective_mass_fraction": 0.7637526015904208,
+  "combined_regions": [
+    {
+      "begin": 0,
+      "end_exclusive": 172,
+      "convective": true,
+      "mass_fraction": 0.09427768934478857,
+      "inner_enclosed_fraction": 1.2286199556598062e-10,
+      "outer_enclosed_fraction": 0.09299525310724378
+    },
+    {
+      "begin": 172,
+      "end_exclusive": 232,
+      "convective": false,
+      "mass_fraction": 0.2362473984095798,
+      "inner_enclosed_fraction": 0.09556012558233336,
+      "outer_enclosed_fraction": 0.32796466440165867
+    },
+    {
+      "begin": 232,
+      "end_exclusive": 512,
+      "convective": true,
+      "mass_fraction": 0.6694749122456315,
+      "inner_enclosed_fraction": 0.3330855111070782,
+      "outer_enclosed_fraction": 1
+    }
+  ],
+  "command": [
+    "/tmp/ember-evolution-mixing-probe-v1",
+    "data/eos/exhaustion_refined_v2/freeeos300_gs98_z020.dat",
+    "data/opacity/hydrogen_poor_refined_v4"
+  ],
+  "input_sha256": {
+    "out/evolution-cold-remnant-x010-grid-diagnostic-512-3600gyr-v1.json": "a5e539a3c97afd3a600f3370d3c063df311e4a458dee95b267f770513ad4decd",
+    "/tmp/ember-evolution-mixing-probe-v1": "4e0541eb003a4352a7bec9538e02dde45e8a655571570eea4f88cfb1b0713455",
+    "scripts/evolution_mixing_probe.cpp": "6472f3a77a397259875d41f1c516d59e402af330f505b4d2fc9f01ab74b2d61c"
+  },
+  "interpretation": "The first departure from full convection is a stable layer away from the center. The center and outer envelope remain convective. This trial has not yet developed a central radiative core; no core-onset age is established."
+}

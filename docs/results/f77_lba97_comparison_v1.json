@@ -1,0 +1,174 @@
+{
+  "scope": "Compare recorded F77 milestones with the published 0.1-solar-mass example.",
+  "published": {
+    "reference": "Laughlin, Bodenheimer and Adams (1997), ApJ 482, 420-432",
+    "doi": "https://doi.org/10.1086/304125",
+    "source_pdf_sha256": "3f5298af22f71bdb50936a35c807b5f6081a11e97a89780e77421793351f8e4e",
+    "extraction": "Numbers transcribed from section 3.2, pages 422-424, and visually checked Figure 1; no curve digitization.",
+    "main_sequence_start": {
+      "age_yr": 2000000000.0,
+      "Teff_K": 2228,
+      "log10_L_Lsun": -3.38,
+      "page": 422
+    },
+    "peak_helium3": {
+      "age_yr": 1380000000000.0,
+      "central_Y3": 0.0995,
+      "page": 423,
+      "note": "Text gives 9.95 percent; Figure 1 labels 9.96 percent."
+    },
+    "radiative_core": {
+      "age_yr": 5742000000000.0,
+      "central_X": 0.16,
+      "Teff_K": 3450,
+      "log10_L_Lsun": -2.54,
+      "page": 423,
+      "age_source": "Figure 1: 5742 Gyr",
+      "unit_note": "Several prose ages on page 423 are printed as Gyr. Figure 1 and the surrounding discussion establish trillion-year evolution."
+    },
+    "maximum_Teff_K": 5807,
+    "cooling_endpoint": {
+      "Teff_K": 1651,
+      "log10_L_Lsun": -5.287,
+      "time_since_core_yr": 540000000000.0,
+      "page": 424
+    },
+    "nuclear_lifetime": "Somewhat more than 6 trillion years; no exact threshold supplied in this comparison."
+  },
+  "current_runs": [
+    {
+      "name": "ajr-20000",
+      "early_luminosity_minimum": {
+        "run": "ajr-20000",
+        "model": 82,
+        "age_yr": 1599333655.3354492,
+        "central_X": 0.6995125792760486,
+        "central_Y3": 0.0004861161477026626,
+        "L_Lsun": 0.0013310344827586207,
+        "R_Rsun": 0.11745062526951273,
+        "Teff_K": 3218.0,
+        "central_convective_flag": 1
+      },
+      "early_minimum_note": "A directly selected luminosity minimum, not the published definition that nuclear heating first supplies all surface luminosity.",
+      "peak_helium3": {
+        "run": "ajr-20000",
+        "model": 194,
+        "age_yr": 415326285070.7056,
+        "central_X": 0.5803697640283892,
+        "central_Y3": 0.07964023150845634,
+        "L_Lsun": 0.0020842789968652034,
+        "R_Rsun": 0.13495817162570073,
+        "Teff_K": 3358.0,
+        "central_convective_flag": 1
+      },
+      "first_central_nonconvective_flag": {
+        "run": "ajr-20000",
+        "model": 4429,
+        "age_yr": 3223528874706.5005,
+        "central_X": 0.01756225738834855,
+        "central_Y3": 3.9560672812182284e-07,
+        "L_Lsun": 0.0038710919540229888,
+        "R_Rsun": 0.11564984907287623,
+        "Teff_K": 4234.0,
+        "central_convective_flag": 0
+      },
+      "maximum_Teff": {
+        "run": "ajr-20000",
+        "model": 4492,
+        "age_yr": 3343883818124.016,
+        "central_X": 2.2822463447869683e-08,
+        "central_Y3": 3.7468333140310927e-19,
+        "L_Lsun": 0.00490466039707419,
+        "R_Rsun": 0.06620853816300129,
+        "Teff_K": 5936.0,
+        "central_convective_flag": 0
+      },
+      "last_accepted": {
+        "run": "ajr-20000",
+        "model": 4673,
+        "age_yr": 3435988903410.715,
+        "central_X": 1.4596128804680613e-09,
+        "central_Y3": 3.028972392023004e-17,
+        "L_Lsun": 9.381776384535005e-07,
+        "R_Rsun": 0.02701164294954722,
+        "Teff_K": 1093.0,
+        "central_convective_flag": 0
+      },
+      "returncode": 0,
+      "core_age_relative_difference": -0.43860521164986055,
+      "helium3_peak_age_relative_difference": -0.6990389238618075
+    },
+    {
+      "name": "ferguson-20000",
+      "early_luminosity_minimum": {
+        "run": "ferguson-20000",
+        "model": 83,
+        "age_yr": 1770477350.683947,
+        "central_X": 0.6994136175692223,
+        "central_Y3": 0.0005848042543369974,
+        "L_Lsun": 0.001404644723092999,
+        "R_Rsun": 0.1162501078050884,
+        "Teff_K": 3278.0,
+        "central_convective_flag": 1
+      },
+      "early_minimum_note": "A directly selected luminosity minimum, not the published definition that nuclear heating first supplies all surface luminosity.",
+      "peak_helium3": {
+        "run": "ferguson-20000",
+        "model": 192,
+        "age_yr": 379929587500.0247,
+        "central_X": 0.5833791924912294,
+        "central_Y3": 0.0774301605271962,
+        "L_Lsun": 0.002254691745036573,
+        "R_Rsun": 0.13325743855109964,
+        "Teff_K": 3445.0,
+        "central_convective_flag": 1
+      },
+      "first_central_nonconvective_flag": {
+        "run": "ferguson-20000",
+        "model": 16947,
+        "age_yr": 2946288313243.5444,
+        "central_X": 1.0642716523087034e-05,
+        "central_Y3": 1.0314557375736855e-15,
+        "L_Lsun": 0.005205151515151515,
+        "R_Rsun": 0.06222682190599396,
+        "Teff_K": 6215.0,
+        "central_convective_flag": 0
+      },
+      "maximum_Teff": {
+        "run": "ferguson-20000",
+        "model": 16954,
+        "age_yr": 2947288783051.0522,
+        "central_X": 3.730915585908971e-09,
+        "central_Y3": 3.617315998649932e-22,
+        "L_Lsun": 0.0039870532915360505,
+        "R_Rsun": 0.05331297973264337,
+        "Teff_K": 6282.0,
+        "central_convective_flag": 0
+      },
+      "last_accepted": {
+        "run": "ferguson-20000",
+        "model": 17028,
+        "age_yr": 2954711683352.6963,
+        "central_X": 1.7401140100384252e-12,
+        "central_Y3": 2.2086261000476054e-23,
+        "L_Lsun": 4.789707419017764e-06,
+        "R_Rsun": 0.02640137990513152,
+        "Teff_K": 1662.0,
+        "central_convective_flag": 0
+      },
+      "returncode": 2,
+      "core_age_relative_difference": -0.4868881377144646,
+      "helium3_peak_age_relative_difference": -0.724688704710127
+    }
+  ],
+  "conclusion": "The broad evolutionary sequence agrees, but the recorded reconstruction does not reproduce the published ages or composition at central radiative-core formation. A similar peak surface temperature is insufficient for quantitative validation.",
+  "source_differences": "The current OPACV uses the Cox-Tabor King IVa table with BFGH composition scaling, rather than the published Weiss-Keady-Magee interpolation between King IVa and Ross-Aller 2. Its nuclear rates use CF88 rather than the cited Bahcall rates. The Ferguson low-temperature option is a further change. These are documented differences, not a measured attribution of the discrepancy.",
+  "limits": "No new F77 runs, recovered historical executable, or mesh/timestep convergence study. F77 central flags have hysteresis; original brackets remain in the onset audit. Surface quantities retain the printed precision. The comparison uses the CSV solar-unit convention, without assuming the original paper used identical solar constants.",
+  "input_sha256": {
+    "/Users/greglaughlin/Projects/ember/docs/reports/2026-09-10/f77_history.csv": "d1bba9ec7f73a286a1daa0eb4c102c6c56cce3ac2991a818cb44e8f84c3e6ad5",
+    "/Users/greglaughlin/Projects/ember/docs/reports/2026-09-10/f77_history_provenance.json": "034ac1e7b867b732a303e290da9f2e206cd882a53292110a37782902162c2dd0",
+    "/Users/greglaughlin/Projects/ember/docs/results/f77_core_onset_comparison_v1.json": "e1a914c2304c4434c50405a7d74e70cf1a6f52e4f33e4484c7e20a0e30aad657",
+    "/Users/greglaughlin/Projects/low_mass_stars/f77/henyey77.f": "489af0517d452db841bfd1117f528f0e51ded78064bed10c6d25d5282ee17e04"
+  },
+  "script_sha256": "4fe2ffd626af49a486480ff59f55ac84f08d628064fe5eef7e629341190092b5"
+}

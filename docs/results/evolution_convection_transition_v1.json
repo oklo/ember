@@ -1,0 +1,114 @@
+{
+  "scope": "Offline nodal transport at a common enclosed mass and actual Ledoux mixing regions from saved accepted profiles. The last trial did not reach its requested age. Native logarithms are converted only for diagnostics, never restart.",
+  "script_sha256": "66b36067b506c11f915b99a642f767f1578147a5bd52bafdbdadc2df70046b71",
+  "profiles": [
+    {
+      "input": "out/evolution-cold-remnant-forward-512-3300gyr-v1.json",
+      "input_sha256": "37483d9f9c151d604f97f0f52192c12e7e3496113d6fc4c113ab7eecded711d8",
+      "age_yr": 3300000000000,
+      "central_X": 0.22229872567359757,
+      "row": 206,
+      "mass_fraction": 0.21099511646418143,
+      "radius_fraction": 0.36246433523301985,
+      "rho": 164.68222917764862,
+      "T_K": 5883164.221625263,
+      "L": 6.868893086502679e+30,
+      "X": 0.22229872567359757,
+      "P": 85266577662283248,
+      "grad_ad": 0.38805581300624925,
+      "radiative_opacity": 14.190581177488022,
+      "conductive_opacity": 244.99217270752345,
+      "combined_opacity": 13.413629041836986,
+      "required_gradient": 0.6162595021130661,
+      "required_over_adiabatic": 1.5880692453462664,
+      "conductive_share_of_diffusive_transport": 0.05475125549358038,
+      "central_required_over_adiabatic": 3.7070533663784944
+    },
+    {
+      "input": "out/evolution-cold-remnant-forward-512-3400gyr-v1.json",
+      "input_sha256": "c8a94386523b23fee603208c720159bda3bd01a45263f98565494768bc53be9d",
+      "age_yr": 3400000000000,
+      "central_X": 0.2033563985717181,
+      "row": 206,
+      "mass_fraction": 0.21099511646418143,
+      "radius_fraction": 0.3622646945610576,
+      "rho": 168.59489004081615,
+      "T_K": 6082210.657299099,
+      "L": 6.989076844832539e+30,
+      "X": 0.2033563985717181,
+      "P": 87970236453418640,
+      "grad_ad": 0.3881616802140831,
+      "radiative_opacity": 12.904705567976071,
+      "conductive_opacity": 254.79836011741529,
+      "combined_opacity": 12.282630414037182,
+      "required_gradient": 0.5185573106660324,
+      "required_over_adiabatic": 1.335931229430046,
+      "conductive_share_of_diffusive_transport": 0.048205296173716126,
+      "central_required_over_adiabatic": 3.0898017687325097
+    },
+    {
+      "input": "out/evolution-cold-remnant-x015-transition-512-3560gyr-v1.restart",
+      "input_sha256": "e036cc2c52ecab532e45d0a3d8cc1dc0bd286be698ca001cc788a366a56531f9",
+      "age_yr": 3548069649381.413,
+      "central_X": 0.17321878556996,
+      "row": 206,
+      "mass_fraction": 0.21099511646418143,
+      "radius_fraction": 0.3591481265323769,
+      "rho": 185.98507780903626,
+      "T_K": 6514768.656071022,
+      "L": 6.610085377902511e+30,
+      "X": 0.17437417144255868,
+      "P": 1.0017311413072565e+17,
+      "grad_ad": 0.3883224694568846,
+      "radiative_opacity": 10.876877601590284,
+      "conductive_opacity": 251.60024997396962,
+      "combined_opacity": 10.426147027643726,
+      "required_gradient": 0.3601485992851288,
+      "required_over_adiabatic": 0.9274472316496125,
+      "conductive_share_of_diffusive_transport": 0.04143933493198996,
+      "central_required_over_adiabatic": 1.4208633426646085,
+      "regions": [
+        {
+          "begin": 0,
+          "end_exclusive": 143,
+          "convective": true,
+          "mass_fraction": 0.03822611512977517,
+          "inner_enclosed_fraction": 1.2286199556598062e-10,
+          "outer_enclosed_fraction": 0.03754835545037801,
+          "inner_radius_fraction": 0.0002751553167108048,
+          "outer_radius_fraction": 0.18981775824849878
+        },
+        {
+          "begin": 143,
+          "end_exclusive": 232,
+          "convective": false,
+          "mass_fraction": 0.2922989726245932,
+          "inner_enclosed_fraction": 0.038903874809172324,
+          "outer_enclosed_fraction": 0.32796466440165867,
+          "inner_radius_fraction": 0.1921898919698607,
+          "outer_radius_fraction": 0.43219486756624875
+        },
+        {
+          "begin": 232,
+          "end_exclusive": 512,
+          "convective": true,
+          "mass_fraction": 0.6694749122456315,
+          "inner_enclosed_fraction": 0.3330855111070782,
+          "outer_enclosed_fraction": 1,
+          "inner_radius_fraction": 0.4351583375641521,
+          "outer_radius_fraction": 1.0
+        }
+      ]
+    }
+  ],
+  "probe_sha256": {
+    "/tmp/ember-evolution-physics-exhaustion-probe-v1": "e8e9dbcefd4a2a81709cee6584275217b01b98331a9bcd8dce4e5d39f1cb38b9",
+    "/tmp/ember-evolution-mixing-probe-v1": "4e0541eb003a4352a7bec9538e02dde45e8a655571570eea4f88cfb1b0713455"
+  },
+  "physical_inputs": {
+    "eos": "data/eos/exhaustion_refined_v2/freeeos300_gs98_z020.dat",
+    "radiative_opacity": "data/opacity/hydrogen_poor_refined_v4",
+    "conduction": "data/conduction/condtab21wd_metals.dat",
+    "mixing_criterion": "Ledoux"
+  }
+}

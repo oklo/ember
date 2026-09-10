@@ -14,6 +14,22 @@ supersedes the initial-step argument. Input and output checkpoint paths must
 be distinct because an existing checkpoint output is never overwritten at
 the start of a new invocation.
 
+The driver limits each invocation to 10000 accepted steps, stops after more
+than 100 consecutive rejected attempts, and requires a time step of at least
+one year. A successful step resets the consecutive rejection count. The total
+accepted and rejected counts remain in the saved state and output for checking
+the full history. Earlier executables instead stopped after 100 rejections
+accumulated over the star's entire evolution, which interrupted the trial
+near 3.544 trillion years despite continued accepted steps. Changing this rule
+does not loosen the accuracy checks or permit a new executable to read an old
+checkpoint; the revised calculation starts from its initial model. A second
+check in the checkpoint reader/writer still rejected lifetime counts above
+the old limits and stopped the refined trial near 3.548 trillion years.
+That check has also been corrected. The restart test now verifies identical
+physical evolution and saved-state recovery after starting with 15000 accepted
+and 102 rejected steps in a test fixture, and rejects negative or overflowing
+counters. Research checkpoints are never edited to bypass executable identity.
+
 For example, with the current gas boundary:
 
 ```sh

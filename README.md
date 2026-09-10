@@ -32,9 +32,11 @@ the star reaches.
 
 The [September 10 working paper](docs/reports/2026-09-10/ember_status_and_future.pdf)
 ([source, figures and reproduction instructions](docs/reports/2026-09-10/README.md))
-shows the evolution, comparisons with two F77 opacity choices, computing time
-and the physics still needed for the remnant. It includes graphs against both
-age and hydrogen abundance. The
+compares Ember with the published Laughlin, Bodenheimer and Adams (1997)
+model, using values stated in the paper and approximate curves read from its
+figures. The current F77 reconstruction is a separate supplementary comparison.
+The paper also describes computing time and the physics still needed for the
+remnant. The
 [current development plan](docs/COLD_REMNANT.md) and latest
 [handoff entry](HANDOFF.md) record subsequent work and job status.
 
@@ -45,23 +47,32 @@ gradients; plasma-neutrino losses enter the energy equation. A calculation
 from the initial model reached 3.30 trillion years and continued from its saved
 state to 3.40 trillion years with the same executable and inputs.
 
-A trial table of **108 atmospheres extends to hydrogen fraction 0.1** at
-warm surface temperatures. The new atmospheres have converged and passed depth
-checks, but interpolation differs from an independent atmosphere calculation
-by 2.13% in the temperature where interior and atmosphere join. The main cause
-is the spacing in hydrogen abundance. More closely spaced atmosphere models
-and additional independent checks are being calculated. A separate stellar
-trial uses this table to explore the next change in structure; its results
-are still being assessed. It began losing full convection near 3.543 trillion
-years and stopped near 3.544 trillion years at the program's limit on rejected
-time steps. The next work is to resolve that numerical interruption and finish
-the atmosphere checks.
+A refined table of **120 atmospheres extends to hydrogen fraction 0.1** at
+warm surface temperatures, including new points at hydrogen fraction 0.15.
+At an independent atmosphere near that composition, the matching-temperature
+discrepancy falls from 2.134% to 0.6468%. Independent checks at hydrogen
+fractions 0.125 and 0.175 differ by 0.7971% and 1.089%. These are local
+interpolation checks, not a bound on lifetime accuracy.
 
-The star is approaching conditions where radiation and conduction may carry
-heat without convection in part of its interior. The completed calculation
-has not yet formed a radiative core. F77 reaches its own central transition
-at a different hydrogen abundance. The [comparison and timing
-notes](docs/COMPUTATIONAL_COST.md) explain the different timescales.
+The refined stellar trial develops a stable shell around a convective center
+near **3.55 trillion years**. Its saved 3.548-trillion-year model has about
+29.23% of the mass in that shell, spanning roughly 19–43% of the radius.
+It stopped at an obsolete checkpoint counter limit. The driver and checkpoint
+limits have been corrected and tested without changing accuracy tolerances;
+continued calculations are checking the transition and its mass resolution.
+This is not yet an established central radiative core.
+
+New [grain-opacity calculations](docs/GRAINS.md) provide separate absorption
+and scattering over wavelength, checked against an independent program and
+small-particle analytic limits. A first fixed-atmosphere control combines them
+with the computed alumina abundance. Coupling to the atmosphere, material
+coverage, grain phase and size, settling and condensate heat transport remain
+under development; the evolving star still uses gas-only atmospheres.
+
+The [LBA97 comparison notes](docs/F77_LBA97_COMPARISON.md) distinguish the
+published model from the current F77 reconstruction. The latter reaches its
+central transition at a substantially different hydrogen abundance. The
+[timing notes](docs/COMPUTATIONAL_COST.md) explain the computational costs.
 
 **Verification:** 32 CTest suites pass with installed local inputs. Earlier
 same-physics convergence checks at two trillion years found luminosity changes

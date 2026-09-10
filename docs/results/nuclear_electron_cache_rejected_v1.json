@@ -1,0 +1,10 @@
+{
+  "scope": "Rejected attempt to cache electron susceptibility for exactly repeated T/ne. Independent CTest suites pass, but the complete-history byte comparison fails; this optimization is not retained.",
+  "before_executable_sha256": "f87cb4fcc69b09ce806666426a369c75acd7eb5ca84caef106400af37bade4fe",
+  "trial_executable_sha256": "fed6649e78c62a576939a2652ba0d66341a9942192c9e9d05f034017b7ca798e",
+  "first_different_history_row": 3,
+  "example_Lsun_before": 0.000826980996938402,
+  "example_Lsun_after": 0.0008269809969384019,
+  "trial_source_sha256": "7f57a5751f9364a9503d8cbad1dca1d6fd7f04a175a643fdb85b6b9c2ffd3374",
+  "note": "The numerical difference starts at one floating-point rounding unit. Its source has not been uniquely attributed to the cache versus compiler transformations. No exact-output or speedup claim is made."
+}

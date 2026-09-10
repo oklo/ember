@@ -53,6 +53,29 @@ def main():
         if resumed['history'][1:]!=reference['history'][4:]:raise AssertionError('restart changed the subsequent accepted trajectory')
         if resumed['restart']['history_start_age_yr']!=reference['history'][3][0]:raise AssertionError('restart age differs')
         if resumed['rejected_steps']!=reference['rejected_steps']:raise AssertionError('restart lost rejected-step count')
+        # A long history must neither invalidate a checkpoint nor consume the
+        # next invocation's step budget. Change counters in a test fixture only;
+        # keep every physical variable and input identity exactly as written.
+        lines=original_checkpoint.decode().splitlines()
+        index=next(i for i,line in enumerate(lines) if line.startswith('128 '))
+        header=lines[index].split();old_accepted=int(header[4]);old_rejected=int(header[5])
+        header[4:6]=['15000','102'];lines[index]=' '.join(header)
+        long_history=work/'long-history.restart'
+        long_history.write_text('\n'.join(lines)+'\n')
+        long_final=work/'long-final.restart'
+        continued=run('long-history',['--restart',str(long_history),'--checkpoint',str(long_final)])
+        if continued['profile']!=resumed['profile'] or continued['history']!=resumed['history']:
+            raise AssertionError('lifetime counters changed the physical trajectory')
+        if continued['rejected_steps']!=resumed['rejected_steps']-old_rejected+102:
+            raise AssertionError('cumulative rejected steps were not preserved')
+        roundtrip=run('long-final',['--restart',str(long_final)])
+        if roundtrip['profile']!=reference['profile'] or roundtrip['restart']['accepted_steps_before_restart']!=15000+len(resumed['history'])-1:
+            raise AssertionError('large lifetime counters did not round-trip')
+        for invalid in ['-1','184467440737095516160']:
+            header[4]=invalid;lines[index]=' '.join(header)
+            bad=work/'invalid-counter.restart';bad.write_text('\n'.join(lines)+'\n')
+            rejected=run('invalid-counter',['--restart',str(bad)],False)
+            if 'counter' not in rejected['message']:raise AssertionError(rejected)
         rejected=run('changed-thermal-losses',['--restart',str(checkpoint),'--thermal-neutrinos','plasma-hrw'],False)
         if 'input tables differ' not in rejected['message']:raise AssertionError(rejected)
         plasma_checkpoint=work/'plasma.restart'
@@ -104,6 +127,7 @@ def main():
                           'restart_age_yr':resumed['restart']['history_start_age_yr'],
                           'target_age_yr':reference['history'][-1][0],
                           'continued_steps':len(resumed['history'])-1,
+                          'large_lifetime_counters_preserve_trajectory_and_roundtrip':True,
                           'rejects_changed_tolerance_changed_table_and_truncation':True}))
 
 

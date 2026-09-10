@@ -1,3 +1,109 @@
+# Grain optics, LBA97 comparison and transition checks — 2026-09-10 15:35 UTC
+
+The autonomous 0.1-solar-mass evolution to a correctly calculated 100 K helium
+remnant remains active and unfinished. The user additionally asked to add grain
+opacities and to make LBA97, inferred from its paper where necessary, the main
+working-paper comparison. Preserve all earlier writing preferences: at most
+four significant figures in prose and graph labels, plain language, one paper
+per day, and faint F77 curves with abrupt segments made more transparent.
+
+The September 10 paper now has LBA97 HR and composition comparisons. It records
+42 HR positions, 20 hydrogen positions and 15 helium-3 positions from Figure 1,
+plus stated values. The original PDF and extracted image were inspected;
+selected pixels and calibration are published, not a falsely precise original
+history. LBA97 data and both PDF/PNG figures reproduce exactly from the small
+published files. F77 remains supplementary and explicitly a recent
+reconstruction with changed inputs. Both new figure pages and all nine pages
+of extracted text were checked. The completed Ember curve ends at 3.40T; open
+orange points identify a later saved trial at 3.548T. No cooling claim is made.
+The README and scientific notes are updated with the paper.
+
+The 120-atmosphere gas table is complete and independently checked:
+`/tmp/ember-nongrey-exhaustion-warm-x015-v1.dat`, SHA256
+`5ae51fad184894503119eb06a751fd8aedafdbcbb531d3683bf055123be8f924`.
+Assembly specification and result are under data/atmosphere/sources and
+`docs/results/nongrey_exhaustion_warm_x015_v1_audit.json`. No source-atmosphere
+jobs remain active. The new hydrogen-poor profiles still need condensation
+checks. This is warm gas coverage, not a cold or zero-hydrogen atmosphere.
+
+The first revised 512-point trial stopped near3.548T at a SECOND old counter
+check in `apps/evolution_checkpoint.hpp`: lifetime counters were still capped
+at10000 accepted and101 rejected despite the evolution-loop correction.
+The native checkpoint retains2061 accepted and101 rejected; its age is
+3.548T, slightly before the last state printed before the write failed.
+The 1024-point trial reached a nonconvective layer near3.545T and stopped at
+the same checkpoint check. The top-level error JSON does not contain their
+histories; preserve the logs, native checkpoints, receipts and copied binaries.
+The corrected checkpoint parser accepts arbitrary representable nonnegative
+lifetime counters and rejects negative/overflowing input. Execution limits
+remain10000 accepted steps per invocation and100 consecutive rejections.
+The expanded exact-restart test passes with15000/102 counters in a test-only
+fixture; all32 CTest suites pass in84.76s. No research checkpoint was edited.
+Report: `docs/results/evolution_checkpoint_counter_v1.json`.
+
+Active calculations (inspect processes before launching anything):
+- Corrected fresh512 run, controller77620/star77621, session82038,
+  snapshot `/tmp/ember-cold-remnant-x015-transition-3560gyr-v2`,
+  output `out/evolution-cold-remnant-x015-transition-512-3560gyr-v2.*`.
+  Target3.56T, checkpoints enabled, same120-atmosphere/EOS/TOPS/plasma inputs.
+- Exact1024 continuation, session11867, snapshot
+  `/tmp/ember-cold-remnant-x015-transition-1024-3560gyr-continuation-v1`,
+  output same descriptive stem under out. It uses the IDENTICAL older copied
+  executable and untouched v1 native checkpoint, with no checkpoint output.
+  This avoids the old writer limit while preserving all physics and restart
+  identity; it cannot produce a new native checkpoint. The corrected fresh
+  run provides future checkpoint support. The old1024 source receipt correctly
+  records that working-tree sources changed while its copied binary ran.
+
+Offline diagnostics locate the512 stable shell at roughly19–43% of radius,
+with central convective mass3.823%, stable mass29.23%, outer convective
+mass66.95%. Near enclosed mass21.10%, the required/adiabatic gradient ratio
+falls from1.588 at3.30T through1.336 at3.40T to.9274 in the saved trial.
+The center remains convective (ratio1.421). Rising T and falling opacity favor
+radiation; conduction supplies4.144% of the local diffusive capacity.
+`docs/results/evolution_convection_transition_v1.json` records the evidence.
+This is not a converged transition age or a central radiative core. The user
+asked about partial convection: heat shares vary continuously through MLT;
+instability classification is binary and connected convective regions are
+mixed instantaneously. Slow mixing exists but semiconvective heat is omitted.
+
+Grain optics implemented and checked, NOT atmosphere-coupled yet:
+- `scripts/prepare_grain_sources.py` pins LX-MIE and Optool and builds separate
+  offline tools. Normal MIT Ember does not link the GPL LX-MIE adapter.
+  Current source receipt `/tmp/ember-grain-sources-v3/prepared.json`.
+- `grain_opacity.py`, `grain_mie_probe.cpp`, `generate_grain_opacity.py` provide
+  separate absorption/scattering/g, explicit size and density, number-to-mass
+  weighting, FastChem condensate mass fractions, no spectral extrapolation.
+- Eight independent controls pass, plus Rayleigh, lossless/no-contrast,
+  size weighting, zero-grain and invalid-input checks. Optool imposes a
+  nonphysical absorption floor for lossless grains; compare scattering/g only
+  there and check zero absorption analytically. Refine its g quadrature to1800
+  angles without loosening tolerance. Final report
+  `docs/results/grain_mie_v1_audit.json`, raw `/tmp/ember-grain-mie-audit-v5`.
+- First fixed gas profile at2800K/g5.15/XH.7 contains only alumina. Explicit
+  exploratory amorphous optical data and density3.2g/cm3; radii.01/.1/1micron.
+  `docs/results/grain_alumina_profile_v1.json`, raw
+  `/tmp/ember-grain-alumina-profile-v1`. Full gas/element/pressure closure
+  rechecked; maximum condensed mass fraction.0001094. This does not include
+  atmospheric feedback or updated gas opacity.
+- Source atmosphere extends to.09micron but alumina data begin.2micron.
+  Resolve that gap physically before coupling. Phase/temperature/porosity
+  require comparisons: amorphous alumina anneals, so it is not automatically
+  the equilibrium grain phase. A coupled gas-depletion2800K profile already
+  adds CaTiO3 and gehlenite; LX-MIE includes the former, not the latter.
+  Do not silently ignore missing grains or replace their optical properties.
+- Next: complete optical-material coverage, couple absorption/emission and
+  angular scattering with T/P responses, solve the atmosphere again, check
+  flux/depth/material support and consistent condensate enthalpy. Existing
+  importer guards remain unchanged. See `docs/GRAINS.md`.
+
+Unfinished helium coexistence probes remain untracked development files;
+no phase prescription or liquid/solid EOS was installed. The rejected electron
+screening cache was fully reverted after a one-ULP output difference. Its
+negative result is retained. Continue the scientific work, not just the handoff.
+
+---
+
 # Paper comparisons, writing preferences and transition trial — 2026-09-10 13:10 UTC
 
 The user asks for autonomous evolution of the 0.1 solar-mass star to a correctly

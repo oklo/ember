@@ -1,0 +1,21 @@
+{
+  "scope": "Only the evolution execution stopping rules changed: count consecutive rejected steps and apply the accepted-step limit per invocation. The requested trajectory before either limit is reached remains byte identical to the prior binary. Nuclear cache experiment was reverted.",
+  "arguments": [
+    "128",
+    "2e11",
+    "1e8",
+    "10",
+    "sfii-svh",
+    "wd",
+    "nongrey:data/atmosphere/nongrey_gs98_z020_extended_tau100.dat",
+    "metal:data/eos/freeeos300_gs98_z020.dat",
+    "ledoux-diffusive"
+  ],
+  "before_executable_sha256": "f87cb4fcc69b09ce806666426a369c75acd7eb5ca84caef106400af37bade4fe",
+  "after_executable_sha256": "1be30afccbde7c8d9fec3e085b811c2bcab8df2a51289da060a1e10bb9e6a5a2",
+  "output_sha256": "a664bbb69fb853b7c0d895c77c464d382f3d7a0eed7d8bf5bffe80275672c629",
+  "all_output_bytes_identical": true,
+  "child_cpu_seconds": 18.486552,
+  "elapsed_seconds": 18.72852962464094,
+  "accepted_steps": 115
+}

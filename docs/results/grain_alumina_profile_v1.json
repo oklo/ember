@@ -1,0 +1,112 @@
+{
+  "scope": "All equilibrium condensates retained as suspended alumina on this fixed gas-only structure. No radiative feedback, gas-opacity update, grain growth, or settling calculation. Not an installed atmosphere.",
+  "coordinates": [
+    0.7,
+    0.0,
+    2800.0,
+    5.15
+  ],
+  "material_assumptions": {
+    "format": 1,
+    "shape": "independent compact spheres",
+    "optical_data_file": "Al2O3.dat",
+    "density_g_cm3": 3.2,
+    "density_reference": "Begemann et al. 1997, ApJ 476, 199, section 2.2: assumed compact amorphous density, not the measured porous sample density. https://hitran.org/data/Aerosols/Aerosols%20data%20from%20previous%20HITRAN/Aerosols-2016/papers/begemann_al2o3_1997.pdf",
+    "material_assumption": "Exploratory amorphous-alumina optical compilation of Kitzmann and Heng 2018, combining Begemann 1997 and Koike 1995. Temperature-independent optical constants and compact density are assumptions. Crystal phase, porosity, thermal annealing and temperature dependence require separate comparisons before atmosphere adoption.",
+    "radii_um": [
+      0.1
+    ],
+    "number_weights": [
+      1
+    ],
+    "size_distribution_assumption": "Single 0.1-micron radius for an optical control; not a grain-growth or settling prediction.",
+    "wavelength_range_um": [
+      0.2,
+      100
+    ],
+    "wavelength_count": 1200
+  },
+  "maximum_condensed_mass_fraction": 0.00010935649918402584,
+  "grain_column_g_cm2": 2.422155539479013e-06,
+  "chemistry": {
+    "element_closure": 3.6526537350312083e-09,
+    "pressure_closure": 5.033529149045535e-12,
+    "nuclei_closure": 4.218847493575595e-15,
+    "thresholds": {
+      "0": {
+        "max_condensed_mass_fraction": 0.00010935649918402586,
+        "max_element_gas_depletion": 0.8034223871198654
+      },
+      "0.001": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.687538997430238e-14
+      },
+      "0.01": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.687538997430238e-14
+      },
+      "0.1": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.687538997430238e-14
+      },
+      "1": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.3877787807814457e-14
+      },
+      "100": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.354472090042691e-14
+      }
+    },
+    "condensates": [
+      {
+        "species": "Al2O3(s,l)",
+        "max_number_per_nucleus": 1.3902623608087791e-06,
+        "largest_tau": 0.00020579607812138372
+      }
+    ]
+  },
+  "optical_controls": [
+    {
+      "radius_um": 0.01,
+      "maximum_extinction_tau": 0.014725978158197562,
+      "wavelength_at_maximum_um": 0.2845110817536592,
+      "maximum_absorption_tau": 0.014358592910555789,
+      "maximum_scattering_tau": 0.0014195592147761634,
+      "output": "/tmp/ember-grain-alumina-profile-v1/optical-depth-00.csv",
+      "output_sha256": "1b43b6cd730a0ee6641bdbcbf54b3213b7f8a98185a0c95045bcf35046c6a0f2"
+    },
+    {
+      "radius_um": 0.1,
+      "maximum_extinction_tau": 0.20414424023502756,
+      "wavelength_at_maximum_um": 0.2,
+      "maximum_absorption_tau": 0.027212294951446284,
+      "maximum_scattering_tau": 0.19093736140787274,
+      "output": "/tmp/ember-grain-alumina-profile-v1/optical-depth-01.csv",
+      "output_sha256": "5a5f51e663d5e3e34d48dea55f59f7d93c7388fba2ee85c6edcccec5c9c7a76b"
+    },
+    {
+      "radius_um": 1.0,
+      "maximum_extinction_tau": 0.02471247720126886,
+      "wavelength_at_maximum_um": 1.8576655552119068,
+      "maximum_absorption_tau": 0.007528676089202799,
+      "maximum_scattering_tau": 0.02278362243198203,
+      "output": "/tmp/ember-grain-alumina-profile-v1/optical-depth-02.csv",
+      "output_sha256": "da189f6801f0ace8296f509596c9f35f56e3d085e1658a6294a94b13b6ddc24e"
+    }
+  ],
+  "integration_scope": "Between the top and bottom tabulated mass columns; no unmodeled material is added above the top.",
+  "wavelength_coverage": "Optical control restricted to the compiled alumina data. The source atmosphere extends to 0.09 microns, below the 0.2-micron optical-data limit; full transfer coupling must resolve that gap.",
+  "input_sha256": {
+    "/tmp/ember-grain-sources-v3/prepared.json": "cbc5c624edbf2f0752313d1c83e4acefe50eb717063bceab05e76219fcfa1480",
+    "data/atmosphere/sources/grain_alumina_optics_specification.json": "e2f9960a4134f267950ec18be2b0d0ab8f1007d7c5c805293f2d10e6d6802618",
+    "data/atmosphere/sources/nongrey_gs98_z020/manifest.json": "397b421f4258030b397c8732720129a19c7d9663bdab7181380e2a7bbc7a93bb",
+    "docs/results/condensation_nongrey_family.json": "38ff563ceb92da21e727945d56f2f4822c8bef3877963e209270e470562bf1e3",
+    "data/atmosphere/sources/nongrey_gs98_z020/plane-002/model-001-001/run.log.gz": "5b016ea282bff85eaefc8344238f0b974133d44f555302163bbe4a1850902277",
+    "data/atmosphere/sources/condensation_gs98/model-028/equilibrium/source.json.gz": "f7d40eb877e77aecbabb4a7dd6db3e5e3ba6926a031bb922c0ac5c33c1fdee55"
+  },
+  "scripts_sha256": {
+    "audit_grain_profile.py": "1a47dd175ed60ccf6bc922f641107b178901665fffd6cd4888bef002bc4545eb",
+    "grain_opacity.py": "456817c38bc1af171398d9f065aa85827a9a1362ebf74cb8eb240cd76129dcb0"
+  }
+}

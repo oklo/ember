@@ -84,8 +84,8 @@ inline void check_state(const Checkpoint& state,std::size_t points,const Composi
   const auto& model=state.model;
   if(model.size()!=points || model.m.size()!=points || model.comp.size()!=points
       || !std::isfinite(model.M) || model.M<=0 || !std::isfinite(model.age) || model.age<0
-      || !std::isfinite(state.next_dt) || state.next_dt<=0 || state.accepted>10000 || state.rejected>101)
-    throw std::runtime_error("invalid checkpoint dimensions, clock or counters");
+      || !std::isfinite(state.next_dt) || state.next_dt<=0)
+    throw std::runtime_error("invalid checkpoint dimensions or clock");
   double previous_mass=0,previous_radius=0;
   for(std::size_t i=0;i<points;++i) {
     const auto& c=model.comp[i];const auto& y=model.y[i];
@@ -152,7 +152,23 @@ inline Checkpoint read_checkpoint(const fs::path& path,std::size_t expected_poin
       throw std::runtime_error("checkpoint executable or input tables differ");
   }
   Checkpoint state;auto& model=state.model;std::size_t points{};
-  in>>points>>model.M>>model.age>>state.next_dt>>state.accepted>>state.rejected;
+  // These are lifetime counters, not per-invocation execution limits. Parse
+  // unsigned values strictly: formatted extraction would accept a minus sign.
+  std::string accepted,rejected;
+  in>>points>>model.M>>model.age>>state.next_dt>>accepted>>rejected;
+  auto counter=[](const std::string& value) {
+    if(value.empty() || value.find_first_not_of("0123456789")!=std::string::npos)
+      throw std::runtime_error("invalid checkpoint counter");
+    std::size_t result=0;
+    for(char digit:value) {
+      const auto n=static_cast<std::size_t>(digit-'0');
+      if(result>(std::numeric_limits<std::size_t>::max()-n)/10)
+        throw std::runtime_error("checkpoint counter overflow");
+      result=10*result+n;
+    }
+    return result;
+  };
+  state.accepted=counter(accepted);state.rejected=counter(rejected);
   if(points!=expected_points || model.M!=expected_mass)throw std::runtime_error("checkpoint mesh or mass differs");
   model.m.resize(points);model.y.resize(points);model.comp.resize(points);
   for(std::size_t i=0;i<points;++i) {

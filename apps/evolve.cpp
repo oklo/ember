@@ -240,9 +240,18 @@ int main(int argc,char** argv) {
     };
     record(0,0,{});
     EvolutionOptions options;std::string last_failure;bool success=true;
+    // Checkpoints are written after accepted steps, so a restored state has
+    // no unresolved consecutive rejection history. Keep the total rejected
+    // count for diagnostics without treating normal adaptive retries over a
+    // trillion-year trajectory as evidence that the solver has stalled.
+    std::size_t consecutive_rejected=0;
     while(model.age<duration) {
       dt=std::min(dt,duration-model.age);
-      if(accepted>=10000 || rejected>100 || dt<year) {success=false;last_failure="step limit or minimum timestep reached: "+last_failure;break;}
+      if(accepted-accepted_before>=10000) {success=false;last_failure="accepted-step limit reached in this invocation";break;}
+      if(accepted==std::numeric_limits<std::size_t>::max() || rejected==std::numeric_limits<std::size_t>::max())
+        {success=false;last_failure="lifetime step counter overflow";break;}
+      if(consecutive_rejected>100) {success=false;last_failure="consecutive rejection limit reached: "+last_failure;break;}
+      if(dt<year) {success=false;last_failure="minimum timestep reached: "+last_failure;break;}
       const auto full=evolve_step(model,physics,atmosphere,dt,options);
       EvolutionStep first,second;
       if(full.converged) first=evolve_step(model,physics,atmosphere,.5*dt,options);
@@ -261,8 +270,8 @@ int main(int argc,char** argv) {
       } else {
         error=2;last_failure=!full.converged?full.message:!first.converged?first.message:second.message;
       }
-      if(!std::isfinite(error) || error>1) {++rejected;dt*=.5;std::fprintf(stderr,"retry dt=%.6g yr (%s; error %.3g)\n",dt/year,last_failure.c_str(),error);continue;}
-      model=second.model;++accepted;record(dt,error,second);last_failure.clear();
+      if(!std::isfinite(error) || error>1) {++rejected;++consecutive_rejected;dt*=.5;std::fprintf(stderr,"retry dt=%.6g yr (%s; error %.3g)\n",dt/year,last_failure.c_str(),error);continue;}
+      model=second.model;++accepted;consecutive_rejected=0;record(dt,error,second);last_failure.clear();
       std::fprintf(stderr,"age=%.8g yr, X=%.10g Y3=%.10g, R=%.9g L=%.9g, convective=%.8g, step error=%.3g\n",
         model.age/year,model.comp[0].X[0],model.comp[0].X[1],history.back().R,history.back().L,second.convective_mass_fraction,error);
       dt*=std::clamp(.9/std::sqrt(std::max(error,1e-6)),.5,2.);

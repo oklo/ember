@@ -1,0 +1,13 @@
+{
+  "format": 1,
+  "shape": "independent compact spheres",
+  "optical_data_file": "Al2O3.dat",
+  "density_g_cm3": 3.2,
+  "density_reference": "Begemann et al. 1997, ApJ 476, 199, section 2.2: assumed compact amorphous density, not the measured porous sample density. https://hitran.org/data/Aerosols/Aerosols%20data%20from%20previous%20HITRAN/Aerosols-2016/papers/begemann_al2o3_1997.pdf",
+  "material_assumption": "Exploratory amorphous-alumina optical compilation of Kitzmann and Heng 2018, combining Begemann 1997 and Koike 1995. Temperature-independent optical constants and compact density are assumptions. Crystal phase, porosity, thermal annealing and temperature dependence require separate comparisons before atmosphere adoption.",
+  "radii_um": [0.1],
+  "number_weights": [1],
+  "size_distribution_assumption": "Single 0.1-micron radius for an optical control; not a grain-growth or settling prediction.",
+  "wavelength_range_um": [0.2, 100],
+  "wavelength_count": 1200
+}

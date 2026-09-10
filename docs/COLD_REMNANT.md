@@ -10,6 +10,28 @@ publication policy in [DATA_REPRODUCTION.md](DATA_REPRODUCTION.md).
 
 ## Progress on 2026-09-10
 
+The latest gas-atmosphere table contains 120 accepted source models, including
+hydrogen fractions 0.1 and 0.15. Independent temperature checks near fractions
+0.125, 0.15 and 0.175 differ by 0.7971%, 0.6468% and 1.089%. A refined
+512-point trial has a saved state near 3.548 trillion years with an off-center
+stable shell; its center remains convective. Driver and checkpoint limits on
+cumulative rejected steps interrupted the trials and have now been corrected.
+The expanded restart test and all 32 CTest suites pass. Fresh evolution and an
+exact continuation of the earlier 1024-point model are checking the transition.
+See `results/evolution_convection_transition_v1.json` and the latest handoff.
+
+[Grain absorption and scattering](GRAINS.md) have been implemented as an offline
+optical calculation and checked against independent Mie and small-particle
+results. A fixed 2800 K profile control includes its calculated alumina mass.
+Atmospheric coupling, complete material coverage, grain phase/size/settling
+and condensate thermodynamics remain unfinished. The evolving star still uses
+gas-only atmospheres. The [working paper](reports/2026-09-10/ember_status_and_future.pdf)
+now compares Ember primarily with values and figure curves from LBA97, while
+keeping the reconstructed F77 results as a separate supplementary comparison.
+
+The following paragraphs preserve the earlier completed reference and the
+measurements that led to the latest refinement.
+
 The fresh gas track completed3.30 trillion years, followed by an exact restart
 to3.40 trillion years. At3.40T the512-zone star is still fully convective:
 XH=.2034, X3=.0009703, Teff3202K, Tc8.031MK,
@@ -25,7 +47,7 @@ at maximum matching-state differences7.13e-6 and1.93e-5. Independent
 XH=.15/3300K/g5.1 interpolation differs+2.134% in matching temperature and
 -.7868% in gas pressure. Four completed controls separate this into composition-only +1.652% T
 and -.7842% Pgas, plus temperature/gravity +.4743% T and -.00254% Pgas.
-New XH=.15 source nodes and independent XH=.125/.175 heldouts are running.
+Those additional source nodes and independent XH=.125/.175 checks are now complete.
 The separate stellar trial using this table began losing full convection near
 3.543 trillion years. It stopped near 3.544 trillion years after reaching the
 program's total rejected-step limit, with convective mass fraction 0.7638.
