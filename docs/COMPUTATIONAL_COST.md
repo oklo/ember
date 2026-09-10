@@ -25,8 +25,8 @@ models ended at actual Rosseland optical depths165/170, while matching at100.
 These controls measure a specific unresolved numerical effect; they are not
 duplicate production runs.
 
-The fresh512-zone stellar run reached3.30 trillion years in2350.57 child CPU
-seconds (39.18 minutes) and4088.19 UTC elapsed seconds (68.14 minutes), with1822
+The fresh512-zone stellar run reached3.30 trillion years in2351 child CPU
+seconds (39.18 minutes) and4088 UTC elapsed seconds (68.14 minutes), with1822
 accepted steps and3 rejected attempts. Concurrent jobs and possible suspension
 make elapsed time unsuitable as an isolated-machine speed benchmark. Its output
 is `out/evolution-cold-remnant-forward-512-3300gyr-v1.json`, with an adjacent
@@ -101,7 +101,10 @@ are in [the onset audit](results/f77_core_onset_comparison_v1.json) and
 [the matched-state report](results/f77_ember_matched_hydrogen_v1.json).
 
 At XH~.203 the AJR F77 and Ember radii and central temperatures are similar,
-but F77 is74.9% more luminous and15.5% hotter at the surface. Within F77,
+but F77 is 76.4% more luminous and 15.5% hotter at the surface after converting
+luminosity to common solar units. The original comparison of each code's native
+solar units gave 74.9%; the source records retain those original numbers and
+now state both conventions. Within F77,
 changing only the opacity selector to Ferguson raises luminosity54.5% at
 this composition. The two pp implementations differ by8.8--9.9% in heating
 at identical central state coordinates, while the evolved He3 inventories

@@ -218,5 +218,26 @@
     "url": "https://arxiv.org/pdf/astro-ph/9805009",
     "relevance": "Section2 identifies grey outer-boundary overestimates of Teff and luminosity in cool low-mass models. This supports a candidate mechanism, not the attribution or accuracy of either of these implementations."
   },
-  "next_discrimination": "Matched-physics relaxed controls of outer boundary, opacity, EOS, nuclear screening and composition/structure coupling. Preserve original F77 and Ember models."
+  "next_discrimination": "Matched-physics relaxed controls of outer boundary, opacity, EOS, nuclear screening and composition/structure coupling. Preserve original F77 and Ember models.",
+  "solar_unit_conventions": {
+    "original_comparison": "The pre-existing F77 state and relative-difference fields use F77 native solar units: Lsun=3.86e33 erg/s and Rsun=6.96e10 cm. Ember uses nominal Lsun=3.828e33 erg/s and Rsun=6.957e10 cm. These original values are retained, not overwritten.",
+    "common_Lsun_erg_s": 3.828e+33,
+    "common_Rsun_cm": 69570000000.0
+  },
+  "common_nominal_solar_unit_comparisons": [
+    {
+      "name": "ajr-20000",
+      "L_Lsun": 0.003554467084639498,
+      "R_Rsun": 0.1452626131953428,
+      "relative_L_difference_from_ember": 0.763565406350027,
+      "relative_R_difference_from_ember": -0.0042756580194563965
+    },
+    {
+      "name": "ferguson-20000",
+      "L_Lsun": 0.005491525600835947,
+      "R_Rsun": 0.13835963777490298,
+      "relative_L_difference_from_ember": 1.7246460150304257,
+      "relative_R_difference_from_ember": -0.05159313708051516
+    }
+  ]
 }

@@ -1,3 +1,59 @@
+# Paper comparisons, writing preferences and transition trial — 2026-09-10 13:10 UTC
+
+The user asks for autonomous evolution of the 0.1 solar-mass star to a correctly
+calculated 100 K helium remnant. That work remains active and unfinished.
+
+The September 10 paper has been rewritten for a reader arriving fresh, with
+F77 AJR and Ferguson curves against both age and hydrogen abundance. Use thin,
+translucent F77 curves; abrupt changes are drawn more faintly, with all saved
+data retained. F77 luminosity and radius now use Ember's nominal solar units.
+The luminosity difference at the present hydrogen abundance is about 76.4%;
+the earlier 74.9% comparison used each code's different solar luminosity unit.
+Both conventions are explicit in the matched-state report.
+
+Persistent user preferences: at most FOUR significant figures in writing,
+tables and figure labels; retain full precision in machine data and exact
+identifiers. Avoid internal workflow jargon. Explain what was calculated and
+what it means. Update the current paper in place during the day; keep one dated
+paper per day. The prior GitHub publication is commit36819fb; this revision
+adds the comparison figures and reader-facing rewrite after checking the PDF
+and reproducing both figures exactly from the published data.
+
+The fresh stellar trial with the 108-atmosphere table stopped before its
+requested 3.60-trillion-year age. Its last accepted model is near3.544 trillion
+years, XH=.1751, Teff3216 K, convective mass fraction.7638. It first lost full
+convection near3.543 trillion years. It accepted1988 steps and rejected101.
+The actual stop is the cumulative100-rejection guard in apps/evolve.cpp,
+not a demonstrated physical-domain failure or a successful completed track.
+Its checkpoint preserves the cumulative rejection counter, so blindly restarting
+will repeat the stop. Diagnose the numerical transition and execution limits
+without changing old checkpoint identities. Outputs and exact copied binary
+remain at the paths in the preceding entry. PID72500 is no longer running.
+The completed, separately checked reference remains3.40 trillion years.
+
+Both new independent atmospheres at XH=.125/.175 are complete. Against the
+108-atmosphere table, matching-temperature differences are1.539%/1.833% and
+pressure differences are-.02355%/-1.068%. Full source reassembly, input hashes
+and interior checks pass. Report:
+`docs/results/nongrey_x010_quarter_points_v1_audit.json`.
+
+The XH=.15 plan still runs in `/tmp/ember-nongrey-x015-refined-warm-v1`.
+Two3200 K/logg5.4 initial models stopped at too small an optical depth to
+include the matching point; a converged initial guess reached only about88.
+Both failed atmospheres now pass after a separate two-model retry with
+initial_bottom_tau1200 instead of600:
+`data/atmosphere/sources/nongrey_x015_high_gravity_retry_plan_specification.json`,
+work `/tmp/ember-nongrey-x015-high-gravity-retry-v1`, session66285. Existing
+jobs were inspected before launch. No star inputs or accepted source checks
+were changed. Finish and independently assess the refined atmosphere family.
+
+A five-second sample of the owned stellar process is preserved at
+`/tmp/ember-stellar-diagnostic-20260910.sample.txt`. Repeated nuclear-screening
+electron inversions appear costly; no optimization from that sample has yet
+been implemented. Current C++ source is unchanged since the prior32-suite pass.
+
+---
+
 # Autonomous continuation and September 10 publication — 2026-09-10 12:44 UTC
 
 This entry supersedes older live-status paragraphs. The completed reference is
@@ -10,8 +66,8 @@ and updating GitHub/README. The calculations continue during publication.
   no surviving stellar/source/condensate/F77 jobs. No existing job was signalled.
 - Finished the XH=.15 interpolation separation audit:
   `docs/results/nongrey_x015_interpolation_separation_v1_audit.json`.
-  Composition-only T +1.651994%, Pgas -.784243%; temperature/gravity
-  T +.474256%, Pgas -.00254284%. Full-grid +2.134085% T and -.786766% Pgas.
+  Composition-only T +1.652%, Pgas -.7842%; temperature/gravity
+  T +.4743%, Pgas -.002543%. Full-grid +2.134% T and -.7868% Pgas.
   Log decomposition closes below 9e-16. Hydrogen spacing dominates.
 - **Active fresh diagnostic star:** copied same 24a6ec3d... executable,
   snapshot `/tmp/ember-cold-remnant-x010-grid-diagnostic-3600gyr-v1`,
@@ -39,7 +95,7 @@ and updating GitHub/README. The calculations continue during publication.
   completed isotherms per plane at12:42. No automatic installation is attached.
 - New native source diagnostic `scripts/audit_nongrey_abundance_scale.py`
   completed, report `docs/results/nongrey_abundance_scale_v1_audit.json`.
-  At4016.89K, XH=.15/X3=.005, common abundance scales1/.15/3 preserve mass
+  At4017K, XH=.15/X3=.005, common abundance scales1/.15/3 preserve mass
   fractions to roundoff and electron densities within1.14e-6 relative, but
   sampled absorption coefficients change by up to factor27.3 (scale.15).
   Simple arbitrary abundance rescaling is therefore not verified as a route
@@ -85,7 +141,7 @@ no hydrogen-exhaustion or white-dwarf/cooling endpoint has been reached.**
   completion or claim this turn stopped them. Idle condensate waiter27809
   remains. Its missing install receipt was not written.
 - Fresh512-zone forward run0->3.30T completed,1822 accepted/3 rejected,
-  2350.57 CPU seconds and4088.19 UTC seconds. Native output/checkpoint:
+  2351 CPU seconds and4088 UTC seconds. Native output/checkpoint:
   `out/evolution-cold-remnant-forward-512-3300gyr-v1.{json,restart}`.
   Snapshot `/tmp/ember-cold-remnant-forward-3300gyr-v1`, executable SHA
   `24a6ec3de0d06bf1e58e4ff4527fa4b38f4b02774be1703cba4ba371d7f15237`.
@@ -95,9 +151,9 @@ no hydrogen-exhaustion or white-dwarf/cooling endpoint has been reached.**
   session44958,97.00 CPU seconds. Output/checkpoint
   `out/evolution-cold-remnant-forward-512-3400gyr-v1.{json,restart}`;
   copied binary and receipt `/tmp/ember-cold-remnant-forward-3400gyr-v1`.
-  XH=.2033563986, X3=.00097026465, R=.1458863734Rsun,
-  L=.00201550057Lsun, Teff3201.95296K, Tc8.031406MK,
-  rhoc258.27948g/cm3. All inputs and incoming restart hashes unchanged.
+  XH=.2034, X3=.0009703, R=.1459Rsun,
+  L=.002016Lsun, Teff3202K, Tc8.031MK,
+  rhoc258.3g/cm3. All inputs and incoming restart hashes unchanged.
   Both endpoint reports are in `docs/results/remnant_endpoints_*forward_v1.json`.
   **No stellar process remains active.** The selected96-node atmosphere
   still ends atXH=.2; do not launch blindly beyond that support or bypass
@@ -108,7 +164,7 @@ no hydrogen-exhaustion or white-dwarf/cooling endpoint has been reached.**
   Explicit36-continuation recipe
   `data/atmosphere/sources/nongrey_exhaustion_warm_x010_v2_assembly_specification.json`.
   Source reassembly/EOS/runtime audit completed, all108 nodes supported;
-  density difference-.01082..+1.99104%. Prior72-node values retained exactly.
+  density difference-.01082..+1.991%. Prior72-node values retained exactly.
   Additional112 queries preserve all96 prior warm nodes plus each old cell
   interior, including derivatives, exactly. Reports
   `nongrey_exhaustion_warm_x010_v2{,_retained_warm_v1}_audit.json`.
@@ -118,11 +174,11 @@ no hydrogen-exhaustion or white-dwarf/cooling endpoint has been reached.**
   Actual depths165/339 and170/350; matching-state maxima7.13e-6/1.93e-5 pass.
   Reports `nongrey_x010_cool_high_gravity_y{000,120}_depth_v1_audit.json`.
 - Independent XH=.15/X3=.005/3300/g5.1 comparison of the108-node candidate:
-  matching T+2.1341%, Pgas-.78677%. AtXH=.25/3100/g5.1 the prior+.69036%T
-  and-.93414%Pgas differences are unchanged. Local diagnostics, not global
+  matching T+2.134%, Pgas-.7868%. AtXH=.25/3100/g5.1 the prior+.6904%T
+  and-.9341%Pgas differences are unchanged. Local diagnostics, not global
   physical or lifetime errors. The largerXH=.15 discrepancy needs resolution.
 - Completed four-sourceXH=.25 interpolation separation audit:
-  composition-only+0.33593%T/-.20124%Pgas; T/gravity+0.35325%T/-.73438%Pgas.
+  composition-only+0.3359%T/-.2012%Pgas; T/gravity+0.3533%T/-.7344%Pgas.
   Logarithmic decomposition closes to8.9e-16. New reusable script
   `scripts/audit_nongrey_interpolation_separation.py`, report
   `docs/results/nongrey_warm_interpolation_separation_v1_audit.json`.
@@ -146,21 +202,21 @@ and why F77 differs from Ember. Findings and receipts:
 - Local F77 source matches the retained baseline hash exactly. Separate
   `/tmp/ember-f77-core-onset-v1` copies add only a diagnostic print. Unmodified
   controls reproduce original output bytes for both the6000-model Ferguson
-  check and full AJR cooling run. AJR center first nonconvective at3.22353T,
-  XH=.0175623; gradient unity crossing one model earlier. Current Ferguson
-  option first flags it at2.94629T,XH1.0643e-5; later exits2 during cooling.
+  check and full AJR cooling run. AJR center first nonconvective at3.224T,
+  XH=.01756; gradient unity crossing one model earlier. Current Ferguson
+  option first flags it at2.946T,XH1.064e-5; later exits2 during cooling.
   Do not equate these with the1997 paper's5.742T onset. Diagnostic patch,
   exact decks, hashes and brackets in `f77_core_onset_comparison_v1.json`;
   reusable `scripts/summarize_f77_core_onset.py`. All F77 jobs are done.
 - `scripts/evolution_physics_probe.cpp` now accepts explicit EOS/opacity paths.
   Offline probe `/tmp/ember-evolution-physics-exhaustion-probe-v1` at current
-  inputs: minimum diffusive/adiabatic gradient1.58798->1.33593 from3.30->3.40T,
-  at massfraction~.211; central3.70705->3.08980. Approaching loss of full
+  inputs: minimum diffusive/adiabatic gradient1.588->1.336 from3.30->3.40T,
+  at massfraction~.211; central3.707->3.090. Approaching loss of full
   convection does not prove imminent central-core onset. Nodal audit, not
   the runtime face criterion. `evolution_convection_margin_3400gyr_v1.json`.
-- At matchedXH~.203, AJR F77: age2.50737T, L.003525Lsun, Teff3698K,
-  R.1452Rsun,Tc7.9999MK; Ember:3.40T,L.0020155,Teff3202,R.14589,Tc8.0314MK.
-  F77 He3=.00151636 vs Ember.000970265. Swapping only the F77 low-T opacity
+- At matchedXH~.203, AJR F77: age2.507T, L.003525Lsun, Teff3698K,
+  R.1452Rsun,Tc8.000MK; Ember:3.40T,L.002016,Teff3202,R.1459,Tc8.031MK.
+  F77 He3=.001516 vs Ember.0009703. Swapping only the F77 low-T opacity
   to Ferguson raisesL54.5% at this H abundance. Identical central-state
   pp-heating comparisons differ~9%, not the full75% surface-luminosity gap.
   Atmosphere/opacity and composition evolution are leading explanations;
@@ -245,12 +301,12 @@ controllers. Bulk generated data remain local/ignored; leave `.DS_Store` alone.
   during the run; source edits were independent of its copied executable.
   Session16925 done. `compare_evolution_control.py` comparison report
   `docs/results/evolution_cold_remnant_control_2850gyr_v1.json`: relative
-  L difference1.36865e-7, R3.73872e-8, central H-1.41336e-7;
-  Teff difference0.000048226K. This is consistency, not lifetime convergence.
+  L difference1.369e-7, R3.739e-8, central H-1.413e-7;
+  Teff difference0.00004823K. This is consistency, not lifetime convergence.
 - Original star `out/evolution-metal-512-2850gyr-gas-restart.json` remains
-  untouched: XH=.3028875983, X3=.0046633380, R=.14876088175 Rsun,
-  L=.001857570598 Lsun, Teff3106.8375K, Tc6.878544MK,
-  rhoc241.23194g/cm3, fully convective. Original `build/apps/ember-evolve`
+  untouched: XH=.3029, X3=.004663, R=.1488 Rsun,
+  L=.001858 Lsun, Teff3107K, Tc6.879MK,
+  rhoc241.2g/cm3, fully convective. Original `build/apps/ember-evolve`
   SHA d04ae649221f0d35c448e438fea620cb72089c6a983498b34c0b2fad7877f974.
   Native restarts require identical binary/physics; no migration bypass.
 - Separate Release build `/tmp/ember-cold-remnant-build-v1`: **32/32 CTests
@@ -296,11 +352,11 @@ controllers. Bulk generated data remain local/ignored; leave `.DS_Store` alone.
 
 - EOS `data/eos/exhaustion_refined_v2/freeeos300_gs98_z020.dat`,64planes,
   true XH=0, baryonic isotope mapping.528 fresh heldouts: P/E/cv/cp maxima
-  .05213/.10875/.18413/.19216%. First-law defect1.82e-9;2048 original
+  .05213/.1088/.1841/.1922%. First-law defect1.82e-9;2048 original
   profile queries byte-identical. **Composition coverage, not dense/cold EOS.**
 - TOPS `data/opacity/hydrogen_poor_refined_v4`, with unchanged AESOPUS
   references.6 fresh X=.225/.275 heldouts at three Z: max active-source
-  interpolation difference1.7062%, old-profile difference1.1047%.
+  interpolation difference1.706%, old-profile difference1.105%.
   Source discrepancies are not lifetime error bars. All TOPS work complete.
 - Masked atmosphere v2 requires all16 interpolation/derivative corners.
   Exact grid knots may use a complete incident cell; no extrapolation or
@@ -363,10 +419,10 @@ an accepted star.
   Old direct canonical comparison2537 still runs; its queued follow-up was
   cancelled between launches and moved to the successful separate controller.
 - All4 `ember-nongrey-x020-warm-low-gravity-v1` models completed. Depth
-  comparisons passed max6.20035e-6 (X3=0) and1.97921e-5 (X3=.12).
+  comparisons passed max6.200e-6 (X3=0) and1.979e-5 (X3=.12).
   Both deeper seed-tau1000 models are chosen in the assembled extension.
-- The3000/g5.15 depth control passed max4.22481e-6 (actual tau448/1268).
-  Low-gravity depth comparison passed9.98744e-6 under
+- The3000/g5.15 depth control passed max4.225e-6 (actual tau448/1268).
+  Low-gravity depth comparison passed9.987e-6 under
   `ember-nongrey-x020-cool-low-gravity-depth-v1`,5095 done.
   High-gravity3000K control under
   `ember-nongrey-x020-cool-high-gravity-depth-v1`,90800 also completed;
@@ -374,7 +430,7 @@ an accepted star.
   All seven local depth audits are recorded in the source selection receipt.
 - Independent heldouts **both canonical completed**:
   XH=.25,X3=.005,3100/g5.1 under `ember-nongrey-x025-heldout-shallow-v1`:
-  matching T4633.2906313,Pgas11397952.41; actual bottomtau749.28.
+  matching T4633,Pgas11400000; actual bottomtau749.3.
   XH=.15,X3=.005,3300/g5.1 under `ember-nongrey-x015-heldout-atmosphere-v1`.
   The latter cannot test the grid until complete XH=.1 stencils exist.
 - XH=.1,3200/g4.9 full initializers two-cycle by~.000411 after CONREF
@@ -389,8 +445,8 @@ an accepted star.
   The same numerical remedy previously resolved a different condensate
   initialization cycle; this gas case requires its own validation.
   Both jobs under `ember-nongrey-x010-fine-initialization-v1`,16376,
-  **canonical accepted**: matchingT5796.3763/5840.3815K and
-  Pgas6510088.90/6463297.93, actual bottomtau745/754 forX3=0/.12.
+  **canonical accepted**: matchingT5796/5840K and
+  Pgas6510000/6463000, actual bottomtau745/754 forX3=0/.12.
   Remaining nine warmXH=.1 cells running97785 with the successful fine
   initializer andCONREF10, work `ember-nongrey-x010-warm-fine-v1`,
   plan `nongrey_x010_warm_fine_plan_specification.json`. Two workers.
@@ -419,7 +475,7 @@ an accepted star.
 - Full equilibrium Gibbs correction is researched offline using pinned
   FastChem gas-versus-condensed chemical potentials, including gas
   rearrangement.108state survey and finer4state phase stencils completed.
-  At1769.42K/.00406bar Delta cp~117496erg/g/K, versus the incomplete
+  At1769K/.00406bar Delta cp~117496erg/g/K, versus the incomplete
   grain-only289000. Phase-crossing stencils and very small finite differences
   need care; Delta cp may be negative. No runtime correction installed.
 - Existing condensate enthalpy gate remains. Need consistent bulk Gibbs
@@ -467,9 +523,9 @@ report, handoff and GitHub checkpoint before clearing context. No further
 stellar evolution or source-physics change was made during this packaging step.
 
 - Furthest accepted stellar model is still **2.85 trillion years**, gas-only,
-  original GS98 EOS/opacity inputs, 512 points, fully convective. XH=.3028875983,
-  X3=.0046633380, R=.14876088175 Rsun, L=.001857570598 Lsun,
-  Teff=3106.8375 K, Tc=6.878544 MK, rhoc=241.23194 g/cm3. The atmosphere
+  original GS98 EOS/opacity inputs, 512 points, fully convective. XH=.3029,
+  X3=.004663, R=.1488 Rsun, L=.001858 Lsun,
+  Teff=3107 K, Tc=6.879 MK, rhoc=241.2 g/cm3. The atmosphere
   floor remains XH=.3. No hydrogen-exhaustion or lifetime claim.
 - Report artifacts archive the original 0->2.5T and both restart segments,
   receipts, final native checkpoint and original macOS arm64 d04ae649... binary.
@@ -478,7 +534,7 @@ stellar evolution or source-physics change was made during this packaging step.
   binary: changed executable/physics bytes are incompatible with native restart.
 - Low-H EOS is available separately through XH=.1 and passed its source checks.
   Low-H opacity remains **under validation**: independent midpoint discrepancy
-  11.9011% over all eligible source cells; .918319% in the audit's hot rectangle.
+  11.90% over all eligible source cells; .9183% in the audit's hot rectangle.
   These are interpolation checks, not physical uncertainty estimates or direct
   errors on the existing star. Current stellar inputs remain unchanged.
 - TOPS refinement controller completed all FOUR raw requests: X=.15 at
@@ -488,12 +544,12 @@ stellar evolution or source-physics change was made during this packaging step.
   filenames x012/x018 are rounded labels. Retain the old coarse heldout audit.
 - Last collector accepted70/72 condensate cells. Both remaining solar2800K,
   logg4.9 cells now converge but fail the unchanged grain-enthalpy gate:
-  X3=.12 gives4.169866e-7 and X3=0 gives4.113889e-7 convective flux fraction
+  X3=.12 gives4.170e-7 and X3=0 gives4.114e-7 convective flux fraction
   in condensing layers, above1e-8. The fine-initializer controller exited on
   that physical audit failure; it is no longer merely a slow source solve.
   Both logg5.0 controls also failed. No production policy relaxation.
 - Both artificial extra-cp controls completed. For cp+1e6/+1e7 erg/g/K,
-  fractional boundary pressure changes are7.4938e-7/7.3755e-6. They remain
+  fractional boundary pressure changes are7.494e-7/7.376e-6. They remain
   diagnostic, not full grain thermodynamics or a rigorous missing-physics bound.
 - No condensate runtime install receipt existed at inspection. The old installer
   was stopped earlier; its queued stellar controller may still wait for the
@@ -528,8 +584,8 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   data/opacity/sources/hydrogen_poor/heldout_x015_z020. Generic reproducible
   script scripts/audit_tops_heldout.py compares log-opacity interpolation
   between source X=.1/.2 on3496 common original cells, excluding54 substituted
-  cells. Maximum discrepancy11.9011% atT=.002keV,rho1.5849g/cm3; maximum
-  hot-rectangle error.918319% atT=.03keV,rho.15849. Report
+  cells. Maximum discrepancy11.90% atT=.002keV,rho1.585g/cm3; maximum
+  hot-rectangle error.9183% atT=.03keV,rho.1585. Report
   docs/results/opacity_hydrogen_poor_heldout.json. Therefore the separate new
   opacity family is UNDER VALIDATION, not ready merely because its runtime
   support/derivative checks pass. Old track inputs remain unchanged.
@@ -564,14 +620,14 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   Receipt confirms no data/restart-input changes. Reports
   docs/results/{evolution,transport,nuclear}_metal_m010_2850gyr_gas.json.
   History and PNG/PDF cover ONLY2.75->2.85T. Earlier histories are retained.
-- Final XH=.3028875982546768, X3=.004663338019452628,
-  X4=.6724490637258706, Z=.02; R=.14876088174924135Rsun,
-  L=.0018575705980597992Lsun, Teff3106.83751480519K,
-  Tc6878544.13316771K, rhoc241.23194367687486g/cm3,
-  Pc1.6524980327519686e17dyn/cm2, logg5.093090139533256.
-  Fully convective/homogeneous; minimum diffusive/adiabatic ratio3.19869346,
-  maximum local conductive fraction.03288828, reduced ppII/pp.00296634.
-  Nuclear rest-mass release fraction.00282709; gravity remains fixed baryonic.
+- Final XH=.3029, X3=.004663,
+  X4=.6724, Z=.02; R=.1488Rsun,
+  L=.001858Lsun, Teff3107K,
+  Tc6879000K, rhoc241.2g/cm3,
+  Pc1.652e+17dyn/cm2, logg5.093.
+  Fully convective/homogeneous; minimum diffusive/adiabatic ratio3.199,
+  maximum local conductive fraction.03289, reduced ppII/pp.002966.
+  Nuclear rest-mass release fraction.002827; gravity remains fixed baryonic.
   XH is now close to the atmosphere floor. Substantial further evolution needs
   atmospheric support below.3. No late-time mesh/time refinements yet; do not
   infer a precise physical radius turning point from the tiny turnover.
@@ -583,7 +639,7 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   All original planes and original family unchanged. Coarse .1 spacing FAILED
   at1.22% cp/cv interpolation error; retained coarse audit and computed extra
   planes before acceptance. Final336 fresh source states PASS: max P.04985%,
-  E.10866%, cp.19344%; new XH<.3 only P.03491%,E.09190%,cp.15484%.
+  E.1087%, cp.1934%; new XH<.3 only P.03491%,E.09190%,cp.1548%.
   First-law/response errors<7.2e-10. All1536 states from2/2.5/2.75T give
   byte-identical old/new EOS probe output. Reports metal_eos_hydrogen_poor_*.
   Three old source slices (963 states) reproduce exactly with ORIGINAL probe
@@ -614,13 +670,13 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   runtime table or install receipt exists. Do not restart installer until the
   physical issue is addressed; it otherwise repeatedly revalidates everything.
 - Actual production corner XH=.7,X3=.12,2800K,g4.9 converges and conserves
-  chemistry, but grain-bearing layers carry4.169866e-7 of total flux by
+  chemistry, but grain-bearing layers carry4.170e-7 of total flux by
   convection, above unchanged1e-8 guard. grain_enthalpy_supported=false.
   Work /tmp/ember-condensate-forward-retries/focused-plane-005-g490/plane-005/teff-2800-gravity-000.
   Archived diagnostic in sources/condensation_grain_transport_rejections/
   solar_he3120_2800_g490; report condensation_grain_transport_rejection.json.
 - Tested g5.0 because it brackets the actual stellar trajectory. BOTH solar
-  He3 controls still fail grain guard:6.231848e-7 (He3=.12) and7.415962e-7
+  He3 controls still fail grain guard:6.232e-7 (He3=.12) and7.416e-7
   (He3=0). Moving the boundary does not resolve missing grain thermodynamics.
   Converged canonical outputs archived as diagnostic rejections under
   condensation_grain_transport_rejections/solar_he3{000,120}_2800_g500.
@@ -651,7 +707,7 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   XH=.7,X3=.12,2800,g4.9 corner, same canonical21 capacity. Sources
   /tmp/ember-condensate-production-thermal-source-1e{6,7}/prepared.json.
   Work /tmp/ember-condensate-production-thermal-controls/solar_he3120_2800_g490.
-  cp1e6 complete: delta P7.4938e-7, T-1.5554e-7, rho1.15105e-6 relative.
+  cp1e6 complete: delta P7.494e-7, T-1.555e-7, rho1.151e-6 relative.
   cp1e7 pending at21:35. Archives condensation_grain_transport_controls;
   final report condensation_production_corner_heat_capacity_controls.json.
   These are artificial sensitivity controls, NOT a full grain EOS or rigorous
@@ -673,18 +729,18 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   018d01593338c99562bb662b6d3285402b7d20e64576796adeac62b8824d19a7.
   Receipt confirms no data or restart-input changes. Native output checkpoint
   out/evolution-metal-512-2750gyr-gas.restart. Binary remainsd04... .
-- Final: XH=.31976956298654213, X3=.005907354423384522,
-  X4=.6543230825900733, Z=.02; R=.14885436723893694,
-  L=.001825613477418555, Teff3092.416617007074K,
-  Tc6720471.802976825K, rhoc240.35825208978363g/cm3,
-  Pc1.6446842720858246e17dyn/cm2, logg5.092544465428368.
-  Fully convective and homogeneous. Min diffusive/adiabatic ratio3.65651,
-  maxlocal conductive fraction.0322201, plasmon/L1.412159e-8,
-  maxreducedppII/pp.002253555, maxactiveppzeta.05596646.
+- Final: XH=.3198, X3=.005907,
+  X4=.6543, Z=.02; R=.1489,
+  L=.001826, Teff3092K,
+  Tc6720000K, rhoc240.4g/cm3,
+  Pc1.645e+17dyn/cm2, logg5.093.
+  Fully convective and homogeneous. Min diffusive/adiabatic ratio3.657,
+  maxlocal conductive fraction.03222, plasmon/L1.412e-8,
+  maxreducedppII/pp.002254, maxactiveppzeta.05597.
 - Reports docs/results/{evolution,transport,nuclear}_metal_m010_2750gyr_gas.json;
   evolution PDF/PNG generated and PNG visually checked. This history/plot
   contains ONLY2.5->2.75T. Original0->2.5T remains in2500gyrgas artifacts;
-  full-history He3 peak.1002124 at.710749T is in that earlier report.
+  full-history He3 peak.1002 at.7107T is in that earlier report.
   Radius has a tiny turnover around2.70T, below earlier mesh sensitivity;
   do not claim a physical turning point without late-segment refinements.
   No new2.75T refinement runs launched; previous complete2T refinements remain.
@@ -706,7 +762,7 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   The older75645 expires20:39UTC. No pending approval or rejection, no
   commits/pushes/subagents/goals. Beyond this checkpoint, substantial further
   gas evolution requires source composition coverage belowXH=.3; current
-  XH=.31977 is close to that boundary. Do not extrapolate or weaken guards.
+  XH=.3198 is close to that boundary. Do not extrapolate or weaken guards.
 
 **Latest checkpoint: 20:28 UTC. Active work continues; older checkpoints are historical.**
 
@@ -749,23 +805,23 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   strict capability superset. F77 SCVH + KingIVa/AJR83/Ferguson, CF88/GDGC,
   Hubbard-Lampe, grey atmosphere; current Ember inputs summarized FORWARD.
   No email sent. Latest heating/condensates question also answered earlier.
-- FURTHEST COMPLETE:2.5T GAS, session73844 completed~19:56.1542accepted,
-  one rejection. XH=.35995867683748073, X3=.010152583279596424,
-  X4=.6098887398829226, R=.1487487109232278, L=.0017530076547748674,
-  Teff3062.287264314398K, Tc6374821.889243306K, rhoc239.8557623365566,
-  Pc1.6405161792728554e17, logg5.093161205780678. Fully convective.
-  Min diffusive/adiabatic ratio4.97484; maxlocal conduction3.092686%;
-  plasmon/L1.349805e-8; maxppzeta.0591508; maxreducedppII/pp.00120310.
-  Integrated nuclear rest-mass release .0023918915 of fixed baryonic mass.
+- FURTHEST COMPLETE:2.5T GAS, session73844 completed~19:56.15accepted,
+  one rejection. XH=.3600, X3=.01015,
+  X4=.6099, R=.1487, L=.001753,
+  Teff3062K, Tc6375000K, rhoc239.9,
+  Pc1.641e+17, logg5.093. Fully convective.
+  Min diffusive/adiabatic ratio4.975; maxlocal conduction3.093%;
+  plasmon/L1.350e-8; maxppzeta.05915; maxreducedppII/pp.001203.
+  Integrated nuclear rest-mass release .002392 of fixed baryonic mass.
   Output out/evolution-metal-512-2500gyr-gas.json SHA
   3051b3801f1592787184b09fab58033a21a25d438306f600422daa1631a75bfb.
   Same original gas executable b904...; no condensate stellar feedback.
   Reports/plots docs/results/{evolution,transport,nuclear}_metal_m010_2500gyr_gas;
   evolution png/pdf visually checked. No2.5T numerical refinements yet.
 - TWO-TRILLION-YEAR refinements40162 now ALL COMPLETE. Full repeat is byte
-  identical. Mesh512->1024: L+.0616321%, R-.0123403%, XH-1.214223e-4,
-  X3-5.280259e-5.4x tighter time: L-.00361005%, R-.000594084%,
-  XH+1.300106e-5, X3+2.216246e-6. Summary rerun with both comparisons;
+  identical. Mesh512->1024: L+.06163%, R-.01234%, XH-1.214e-4,
+  X3-5.280e-5.4x tighter time: L-.003610%, R-.0005941%,
+  XH+1.300e-5, X3+2.216e-6. Summary rerun with both comparisons;
   docs/results/evolution_metal_m010_2tyr_gas_convergence.json. These are
   numerical segment checks, not lifetime/physical error bars.
 - NEW NATIVE RESTART SUPPORT IMPLEMENTED AND TESTED in apps/evolve.cpp and
@@ -808,15 +864,15 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   Stellar condensate controller11101 still queued, uses OLD b904binary for
   a controlled2T comparison. No condensate runtime table installed yet.
 - Warm material diagnostic COMPLETE/PASS with explicit qualification:
-  report condensation_warm_material_refinement.json; T+.0327057%,P+.288987%.
+  report condensation_warm_material_refinement.json; T+.03271%,P+.2890%.
   Fine33T model REMAINS INELIGIBLE for production (grainenthalpy false).
   Both artificial cp controls complete+archived;1e7 changes matching pressure
-  4.387998e-6, density6.444117e-6;1e6 pressure8.388176e-7. Audits check each
+  4.388e-6, density6.444e-6;1e6 pressure8.388e-7. Audits check each
   archived source/input/output and same reference, require<1e-5 boundary
   differences. No physical uncertainty bound claimed. Production1e-8 grain
   guard unchanged. Thermal/controller26103,78272,76806 allfinished.
 - Heldout2775 COMPLETE source+independentchemistry,grainflux0,deepestcond
-  tau.00079676. Archive/heldout comparison will happen under30387 oncefullgrid.
+  tau.0007968. Archive/heldout comparison will happen under30387 oncefullgrid.
   Old79951 overallmayexit1 dueits obsolete capacity21warm branch, unrelated.
 - NEW HOT CHEMISTRY AUDIT: source already uses fully vaporized bulk gas
   above6000K. Old independent audit tried FastChem beyond its tested6000K
@@ -868,10 +924,10 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   It starts fresh (native restart support is NOT implemented), and runs
   transport/nuclear audits and summary/plots automatically on success.
 - Warm33T model /tmp/ember-condensate-refined-2800 SOURCE CONVERGED, but
-  independent chemistry flags Fconv/Ftotal=1.224272682e-6 in one condensing
+  independent chemistry flags Fconv/Ftotal=1.224e-6 in one condensing
   outer layer, above the strict production1e-8 gate. Old controller77176
-  exited1 as intended. Tmatch4030.3551233K, Pmatch16463729.2576. Numerical
-  coarse/fine differences T+.03270566%, P+.28898665%, rho+.24322585%.
+  exited1 as intended. Tmatch4030K, Pmatch16460000. Numerical
+  coarse/fine differences T+.03271%, P+.2890%, rho+.2432%.
   It is NOT a production atmosphere. Archived explicitly as diagnostic at
   sources/condensation_material_refinement/refined-2800-diagnostic.
 - Native convection root cancellation was tested and ruled out: report
@@ -880,8 +936,8 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   Fortran formula changed. Actual gas cp at flagged face154500891erg/g/K.
 - NEW estimate_condensate_enthalpy.py uses pinned FastChem logK temperature
   derivatives and independent fixed-P chemistry. Report
-  condensation_warm_latent_enthalpy_estimate.json: at native face1769.41749K,
-  P4061.88979dyn/cm2, added ideal-atom-referenced cp~288772erg/g/K
+  condensation_warm_latent_enthalpy_estimate.json: at native face1769K,
+  P4062dyn/cm2, added ideal-atom-referenced cp~288772erg/g/K
   (~.187% native gas cp), converged finite-difference interval scan.
   This omits atomic excitation/reference EOS differences; not a full grain
   EOS, pseudoadiabat or rigorous missing-flux bound.
@@ -944,7 +1000,7 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
 - Cold material comparison script now actually PASSED:
   docs/results/condensation_cold_material_refinement.json, original17Topacity
   and electron values retained bit for bit in33T; SAME capacity33 executable
-  coarse/fine T+.0265223%,P+.3605097%,rho+.3323842%. This is a numerical
+  coarse/fine T+.02652%,P+.3605%,rho+.3324%. This is a numerical
   sensitivity, comparable with the cold .8095% condensation pressure effect.
   Warm33T still active;18iterations with nonmonotonic corrections. Installer
   continues to require warm material,2775/2900 and full72(EOSchecked) first.
@@ -959,13 +1015,13 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
 **Latest checkpoint: 18:52 UTC. Task still active; earlier checkpoints are historical.**
 
 - TWO-TRILLION-YEAR GAS run COMPLETE (78884): 1339 accepted, one rejected.
-  XH=.4308797380, X3=.02574632445, R=.1478253064, L=.001631953818,
-  Teff3017.374 K, Tc5.834241 MK, rhoc242.4931. Still fully convective;
-  minimum diffusive/adiabatic gradient ratio8.2433, max conduction flux2.9244%.
+  XH=.4309, X3=.02575, R=.1478, L=.001632,
+  Teff3017 K, Tc5.834 MK, rhoc242.5. Still fully convective;
+  minimum diffusive/adiabatic gradient ratio8.243, max conduction flux2.924%.
   Full output out/evolution-metal-512-2tyr-gas.json SHA
   17e5c5ebdb7d9b8acfc2f7b17e2d467d2445c0db7ca181678298d9cc119d8d47.
   Snapshot binary SHA b904902f4f86843dc957f3b004f1db78acfa983f93d370a083eecb581f00500c.
-  UTC2365.262s, child user1629.476s/system2.144s, concurrent atmosphere jobs.
+  UTC2365s, child user1629s/system2.144s, concurrent atmosphere jobs.
   Transport and nuclear audits COMPLETE. New summarize_forward_evolution.py
   produced docs/results/evolution_metal_m010_2tyr_gas.{json,png,pdf}; figure
   visually checked. Generic utility verifies receipts, age, same binary/data/
@@ -974,7 +1030,7 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   tight512 follows repeat. At18:51 repeat~.52T, mesh~.31T. Same copied binary.
   The repeat must be byte-identical; no completed2T refinement claim yet.
 - Indexed CONREF control15531 COMPLETE and archived. Canonical final relative
-  T-2.20825e-9, P+1.20904e-8, rho+1.73761e-8 versus original2750 control.
+  T-2.208e-9, P+1.209e-8, rho+1.738e-8 versus original2750 control.
   Initializer/final output NOT byte-identical; roundoff-level differences.
   NEW validated indexed initializer explicitly selected in new plan
   /tmp/ember-condensate-grid-plan-indexed.json and current grid-plan.json.
@@ -987,7 +1043,7 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   family-warm-recovery-v2,forward-retries. All complete canonical+chemistry
   accepted nodes; no conflicting alternatives or source gaps filled.
 - Solar g5.4 2800 direct model REJECTED despite small temperature correction:
-  deepest-layer total flux residual .0030436 exceeds .002. Retained source
+  deepest-layer total flux residual .003044 exceeds .002. Retained source
   inputs/outputs. NEW retry88017 starts from matching gas2800 with validated
   indexed CONREF20, then canonical; follows3000/3200. Work
   /tmp/ember-condensate-forward-retries/solar-g540-warm, log
@@ -998,7 +1054,7 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   Recovery74761: both0/1g5.15 CONREF2650 succeeded; canonical replay active.
   Old2/3g5.15 CONREF2700 also nearlydone/done; not stalled.
 - Fine33T cold2600 COMPLETE source+chemistry,10iterations. Relative against
-  original capacity21 coarse: T+.026503%,P+.360625%,rho+.332540%.
+  original capacity21 coarse: T+.02650%,P+.3606%,rho+.3325%.
   Archive condensation_material_refinement/refined-2600; report
   condensation_refined_2600.json. New material audit compares SAME capacity33
   coarse/fine and verifies original opacity/electron values retained exactly.
@@ -1044,7 +1100,7 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
 - Condensate FORWARD production target is now explicitly 72 cells with
   Teff2750/2800/3000/3200, same3H/2He3/3g axes. Versioned
   nongrey_condensate_forward_specification.json. This brackets the star's
-  initial2767.52K. The attempted126-cell2600..3200 rectangle remains rejected
+  initial2768K. The attempted126-cell2600..3200 rectangle remains rejected
   at cold XH=.3,g5.15/5.4 (bothHe3) because trialT crosses source1000K floor.
   No cold gaps are filled. Retain solved colder nodes as controls.
 - Full oldcond family14019 continues; failures now0/1g5.15 and0/1g5.4.
@@ -1060,14 +1116,14 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   /tmp/ember-condensate-family-warm-recovery-v2[.log]. New generator options
   --initialize-first, --minimum-teff, --convective-iterations(default20).
 - Solar warm2800 COMPLETE:28canonical iterations plus independent chemistry.
-  Matched17T gas comparison P+.124609%,T-.0234705%,rho+.182795%.
+  Matched17T gas comparison P+.1246%,T-.02347%,rho+.1828%.
   Archive sources/condensation_atmosphere_x700_2800_g515 and report
   docs/results/condensation_atmosphere_warm.json. New
   compare_condensate_control.py verifies source/input/opacity physics and
   revalidates compressed gas/condensed originals. Figure now3columns,
   docs/results/condensation_atmosphere_controls.{png,pdf}, visually inspected.
 - Heldout2900 COMPLETE, no condensates in its actual profile, independent
-  element closure1.77e-13.2725 initializer still runs under31059. Independent
+  element closure1.77e-13.27 initializer still runs under31059. Independent
   heldout opacity archived at sources/condensation_heldout_validation/opacity.
   NEW extra controls79951 (/tmp/ember-condensate-extra-controls.{py,log})
   queues2775 after2725 chemistry, using CONREF20 then canonical. Its other
@@ -1141,7 +1197,7 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   the source partition-function floor1000K. These are rejected, retained
   models (not a solver tolerance issue). The full126-cell2600..3200 rectangle
   is not established. Warmer production lower bound may be necessary; actual
-  star track starts2767.52K. NEW warm recovery45169 runs bothfailedplanes at
+  star track starts2768K. NEW warm recovery45169 runs bothfailedplanes at
   g5.15 starting2650, then2700/2750/2800/3000/3200. Work/log
   /tmp/ember-condensate-family-warm-recovery[.log]. Need inspect2650 support.
   --minimum-teff explicitly supports partial chains; eventual archive still
@@ -1201,8 +1257,8 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
 
 
 - Independent new gas heldout COMPLETE: XH=.375,X3=.06,3000K,g5.15.
-  Canonical2 iterations afterCONREF14. Interpolation errors T+.19584%,
-  P+.03401%,rho+.12946%. Original opacity and atmosphere/initializer artifacts
+  Canonical2 iterations afterCONREF14. Interpolation errors T+.1958%,
+  P+.03401%,rho+.1295%. Original opacity and atmosphere/initializer artifacts
   archived under `nongrey_extended_validation`; report
   `docs/results/nongrey_extended_heldout.json`. All4 required corners revalidated.
 - NEW2T gas controller78884 waits for installed extended72 table, then uses
@@ -1269,7 +1325,7 @@ sensitivities, high-Z composition choices and conditional ultra-long-term physic
   initializer9 iterations, correction.00333 at16:47. Canonical replay and
   interpolation comparison still pending. Recipe/log `/tmp/ember-heldout-continuation.{py,log}`.
 - Condensed2600K solar model and SAME17T gas control both validated/archived.
-  Isolated depletion effect: Pgas+.8095%,T-.1349%,rho+1.1038%.
+  Isolated depletion effect: Pgas+.8095%,T-.1349%,rho+1.104%.
   `docs/results/condensation_atmosphere_cold.json` updated; gas control lives
   inside `condensation_atmosphere_x700_2600_g515/gas-control/`.
   Matching gas2800 also completed at `/tmp/ember-condensate-atmosphere-gas-warm-v3`;
@@ -1320,7 +1376,7 @@ Implemented and installed:
   `data/eos/freeeos300_gs98_z020.dat`; original raw source and manifest
   archived alongside. Same representative element numbers as atmospheres;
   FreeEOS omits K (baryonic mass 4.56e-6); helium isotope entropy added once.
-  144 independent source checks: max P .061635%, E .16747%, cp .25943%.
+  144 independent source checks: max P .06164%, E .1675%, cp .2594%.
 - Shared GS98 ion inventory for screening/conduction. Ioffe source tables
   expanded through Zn to bracket Ni, without changing original values.
   Opacity conversion preserves aggregate metal atomic mass, but its fixed
@@ -1340,9 +1396,9 @@ Implemented and installed:
 
 Completed new consistent-mixture 512-point1T run:
 `out/evolution-metal-512-1tyr.{json,log}`; 925 accepted/1 rejected.
-R=.14422884460648513, L=.0013686915161790307, Teff2923.32373045,
-XH=.5331385347948866, X3=.09105648824134456, Tc5153914.71795,
-rhoc257.7343772393. Fully convective. Uses old48 non-grey gas grid,
+R=.1442, L=.001369, Teff2923,
+XH=.5331, X3=.09106, Tc5154000,
+rhoc257.7. Fully convective. Uses old48 non-grey gas grid,
 GS98 EOS/screening/conduction/opacity conversion, Ledoux. Run predates the
 EOS optimization and slow diffusion (zero coefficients, fully convective).
 Exact executable hash/wall time were NOT recorded at launch: do not invent
@@ -1351,7 +1407,7 @@ those. Further runs must snapshot executable and provenance before launch.
 Extended source work:
 - `/tmp/ember-nongrey-extended-v2`: all6 opacity planes complete,16T x19rho
   x30000 frequencies, H=.3/.45/.7 and X3=0/.12. Spec in data/atmosphere/sources.
-  T1075.69..7762.30 retains old low-T isotherms exactly. No extrapolation.
+  T1076..7762.30 retains old low-T isotherms exactly. No extrapolation.
   Original 15000K material rectangle exposed negative native HeI4471 profile
   extrapolation above its ne<=1e16 tabulation; exact probe retained in
   `/tmp/ember-helium-profile`, no ad hoc line correction.
@@ -1407,10 +1463,10 @@ independent numerical checks and the new stellar comparison. The established
 `cond-corrected` atmosphere remains the default; select the new grid with
 `nongrey:data/atmosphere/nongrey_gs98_z020_tau100.dat`.
 
-At 1e12 yr: R=.14357836 Rsun, L=.0013302286 Lsun, Teff=2909.13 K,
-Tc=5.12268e6 K, rhoc=261.626 g/cm³, XH=.53389752, X3=.09509109 and
-X4=.35101139. The star remains fully convective. He3 peaks at .10256641
-near 736.81 Gyr. There are 906 accepted macrosteps and one rejected attempt;
+At 1e12 yr: R=.1436 Rsun, L=.001330 Lsun, Teff=2909 K,
+Tc=5.123e+6 K, rhoc=261.6 g/cm³, XH=.5339, X3=.09509 and
+X4=.3510. The star remains fully convective. He3 peaks at .1026
+near 736.8 Gyr. There are 906 accepted macrosteps and one rejected attempt;
 stellar computation takes 612.3 wall seconds on the M4 Max. The age excludes
 formation and pre-main-sequence evolution. Hydrogen exhaustion, the blueward
 turn and remnant cooling have not been reached.
@@ -1441,7 +1497,7 @@ XH=.45/.7, X3=0/.12, Teff=2600/2800/3000/3200 K, logg=4.9/5.15/5.4,
 fixed Z=.02, alpha=1.9 and tau=100 matching. Each uses 300 depths and
 20,000 transfer frequencies. Four opacity planes each use 21 temperatures,
 19 densities and 30,000 frequencies. Material temperature support starts
-at 1075.69 K. No atmosphere or interior source extrapolation is enabled.
+at 1076 K. No atmosphere or interior source extrapolation is enabled.
 The filename/source label `nongrey_candidate_specification.json` is retained
 as part of the archived generation provenance; the complete family is installed.
 
@@ -1521,9 +1577,9 @@ a specified static X=.7, He3=0 composition; it excludes formation and
 pre-main-sequence evolution. This is an intermediate main-sequence model,
 not the blueward turn or a helium-white-dwarf cooling track.
 
-At **2048 points and 1e12 yr**: R=.14351457 Rsun, L=.0013495294 Lsun,
-Teff=2920.28 K, Tc=5.13439e6 K, rhoc=261.915 g/cm³, X=.53254997,
-He3=.09343622. The run accepts 926 macrosteps and rejects three attempts.
+At **2048 points and 1e12 yr**: R=.1435 Rsun, L=.001350 Lsun,
+Teff=2920 K, Tc=5.134e+6 K, rhoc=261.9 g/cm³, X=.5325,
+He3=.09344. The run accepts 926 macrosteps and rejects three attempts.
 Doubling 1024→2048 points changes R/L by .00683%/.0731%; fourfold tighter
 time tolerances at 512 points change them by .000917%/.00190%. Versioned
 records, transport/nuclear audits and a standalone figure are under
@@ -1720,7 +1776,7 @@ build/apps/ember-equilibrium 4096 .1 .15 --eos freeeos --hot-opacity tops --seed
 ```
 
 The following values belong to `6cc4fb4` before screening correction;
-the same command now gives R=.12935124, L=.00094042956, Teff=2810.43 K.
+the same command now gives R=.1294, L=.0009404, Teff=2810 K.
 The old checkpoint had nine accepted updates, residual 6.60e-13, correction 6.76e-12, nuclear
 balance about 2e-14 relative and independent virial error -6.396e-7.
 The 1024/2048/4096 models agree to <.014% in R and <.078% in L between
@@ -1758,20 +1814,20 @@ represents metals as helium (effective Y=.3). MLT alpha=1.9 is uncalibrated.
 The surface is a radiative grey atmosphere matched at tau=2/3. No grain
 opacity, conduction, composition mixing or age advancement is included.
 
-At 4096 points: 12 updates, residual 4.10338e-10, undamped correction
-3.06322e-10, R=.12860617 Rsun, L=.00097562953 Lsun, Teff=2844.5719 K,
-Tc=4.5663102e6 K, rhoc=366.87522 g/cm³. Nuclear luminosity agrees with
-surface L to ~2e-15 relative; independent virial error is -6.5848e-7.
+At 4096 points: 12 updates, residual 4.103e-10, undamped correction
+3.063e-10, R=.1286 Rsun, L=.0009756 Lsun, Teff=2845 K,
+Tc=4.566e+6 K, rhoc=366.9 g/cm³. Nuclear luminosity agrees with
+surface L to ~2e-15 relative; independent virial error is -6.585e-7.
 The unresolved center is 1.23e-10 of the mass. All profiles are ordered.
 
 | Points | R/Rsun | L/Lsun | Teff (K) | Absolute virial error |
 |---:|---:|---:|---:|---:|
-| 128 | .12911938 | .0009629408 | 2829.64 | 6.856e-4 |
-| 256 | .12935265 | .0009420455 | 2811.62 | 1.699e-4 |
-| 512 | .12885921 | .0009637381 | 2833.08 | 4.229e-5 |
-| 1024 | .12862818 | .0009746770 | 2843.63 | 1.055e-5 |
-| 2048 | .12861667 | .0009751461 | 2844.10 | 2.635e-6 |
-| 4096 | .12860617 | .0009756295 | 2844.57 | 6.585e-7 |
+| 128 | .1291 | .0009629 | 2830 | 6.856e-4 |
+| 256 | .1294 | .0009420 | 2812 | 1.699e-4 |
+| 512 | .1289 | .0009637 | 2833 | 4.229e-5 |
+| 1024 | .1286 | .0009747 | 2844 | 1.055e-5 |
+| 2048 | .1286 | .0009751 | 2844 | 2.635e-6 |
+| 4096 | .1286 | .0009756 | 2845 | 6.585e-7 |
 
 Coarse thermal results are nonmonotonic. Fine meshes agree to ~.1% in L
 and .02% in R, but R/L do not yet show clean second-order convergence;
@@ -1787,19 +1843,19 @@ reference metadata are versioned in `docs/results/equilibrium_m010.json`.
 `docs/CMS19.md` gives the implementation and independent source audit.
 CMS19 response derivatives follow the **actual interpolated entropy**.
 The Maxwell identity D=P*delta/(rho*T*cp*grad_ad)-1 is not artificially
-forced to zero. Max |D|=.24178 in the 4096-point star at T=27304 K,
-rho=.12394 g/cm³, m/M=.99999310; mass RMS=.0043487. Small outer mass is
+forced to zero. Max |D|=.2418 in the 4096-point star at T=27304 K,
+rho=.1239 g/cm³, m/M=1.000; mass RMS=.004349. Small outer mass is
 not evidence of small influence on R or L.
 
 `python3 scripts/audit_cms19_energy.py /tmp/ember-eos2019.tar.gz` reproduces
 both defects directly from original source columns:
 
-- Pure H at log T=4.45, log P[GPa]=1.35 has D=-.26498098, before ember
+- Pure H at log T=4.45, log P[GPa]=1.35 has D=-.2650, before ember
   interpolation. This is a source-version consistency issue as well as an
   interpolation accuracy question.
-- Pure He at rho=1 g/cm³ drops in internal energy from 8.88587e13 to
-  8.22697e13 erg/g between T=891251 and 1e6 K. Secant dU/dT=-6.05890e7
-  erg/g/K while listed entropy cv=+9.72478e7.
+- Pure He at rho=1 g/cm³ drops in internal energy from 8.886e+13 to
+  8.227e+13 erg/g between T=891251 and 1e6 K. Secant dU/dT=-6.059e+7
+  erg/g/K while listed entropy cv=+9.725e7.
 
 Do not fabricate internal energy, silently repair table cells, loosen the
 Maxwell check, or replace an entropy-derived adiabat just to make an
@@ -1848,8 +1904,8 @@ build/apps/ember-equilibrium 128 .1 .2 > out/old-ionized-m010-failure.json
 
 The first two converge. The last uses the old ionized EOS/OPAL/n=3 defaults
 and still fails at the OPAL density edge; it is retained as an explicit
-failure diagnostic. The .5 Msun case has R=.94219963 Rsun, L=.019877124
-Lsun, Teff=2232.77 K; its inflated cool envelope is not realistic. The n=3
+failure diagnostic. The .5 Msun case has R=.9422 Rsun, L=.01988
+Lsun, Teff=2233 K; its inflated cool envelope is not realistic. The n=3
 stellar seed also proved poor for the new CMS19 .1 Msun model; n=1.5
 converges. This changes only initialization, never the solved equations.
 
@@ -2079,12 +2135,12 @@ Timed1.3T run84690 near950Gyr, fullyconvective. Extendedgrid97824 now6newcells
 validated; warmerinitializers finishing, cold2600highgravity correctionsstill
 steadilydecreasing after~40iterations. Sourcegridnotinstalledyet.
 
-14:29 UTC: 512point1.3T run84690 COMPLETE,1417.86085wallsec underconcurrent
-sourcework. FinalR.14620742152,L.0014647156256,Teff2953.1139155,
-X.505654541594,He3.070718566033,Tc5306449.997,rhoc248.3491230.
+14:29 UTC: 512point1.3T run84690 COMPLETE,1418wallsec underconcurrent
+sourcework. FinalR.1462,L.001465,Teff2953,
+X.5057,He3.071,Tc5306000,rhoc248.3.
 Compactreport/completeinputhashes+transport/nuclearaudits in
 `docs/results/*metal_m010_1300gyr.json`; fullout andoriginalreceipt preserved.
-Mintransportgrad/ad12.989, maxconductiveflux2.837%,ppzeta.07284.
+Mintransportgrad/ad12.99, maxconductiveflux2.837%,ppzeta.07284.
 Two reference refinements active controller39959:1024points tolerances10,
 512points tolerances2.5, both1.3T with SAME snapshotted executable asbaseline;
 `out/evolution-metal-{1024,512}-1300gyr[-tight].{json,log,receipt.json}`.
@@ -2106,7 +2162,7 @@ The 512-point 1.3T run and both refinements COMPLETE. New numerical comparison
 R -.01022%, He3 -7.51e-5; fourfold tighter timestep L +.000620%, He3 +8.59e-6.
 All still fully convective. Same snapshotted executable, old 48-cell gas grid.
 Correction to previous timing wording: perf_counter excludes host suspension.
-1417.9 s was awake elapsed; UTC interval ~2973 s. See compact report/docs.
+1418 s was awake elapsed; UTC interval ~2973 s. See compact report/docs.
 
 Host sleep interrupted source throughput. AC-only `caffeinate -s -t 7200`
 PID 20431, session 17865, started 14:54:37 UTC; expires 16:54 UTC. Stop with
@@ -2123,8 +2179,8 @@ Canonical replay and strict source support remain required.
 Solar condensate opacity v3 COMPLETE: 17T from1001..7762 K, 19rho, 30000freq,
 SHA07875e83e55e912bd5e527b0df2cf30058292b30c24e904413c825ea0f8f4a05,
 `/tmp/ember-condensate-opacity-x700-v3/opacity.bin`. New spec in repo.
-Earlier 2600 K condensed model converged but was REJECTED for Tmin1053.993 K
-below old1075.69 K rectangle (21 optically thin layers); no validated.json.
+Earlier 2600 K condensed model converged but was REJECTED for Tmin1054 K
+below old1076 K rectangle (21 optically thin layers); no validated.json.
 Do not claim its result accepted. Attempts below1000 K fail original source
 partition functions. Exactly1000 K also rounds below source limit; v3 starts1001.
 Helium-rich16T table complete at `/tmp/ember-condensate-opacity-x300-y120-v1`,
@@ -2203,7 +2259,7 @@ radiative core reached. All27C++ tests passed, only scripts/docs changed since.
 The first coupled condensed atmosphere PASSES source and independent chemistry:
 `/tmp/ember-condensate-atmosphere-cold-v3`, solar 2600 K, g5.15, new 17T plane.
 11 iterations, correction5.12e-7, flux4.72e-5, hydro1.52e-7, chemical rho2.92e-13.
-Full T1054.09..4528.09 K is supported. Matching T3863.670177, P20772434.3287.
+Full T1054..4528.09 K is supported. Matching T3864, P20770000.
 Independent FC element error2.97e-9, all condensing layers Fconv0;
 condensation reaches tau.00631. Archived20 artifacts in
 `data/atmosphere/sources/condensation_atmosphere_x700_2600_g515`, report

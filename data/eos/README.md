@@ -32,7 +32,7 @@ table bytes. Existing evolution runs still select the original family.
 Coarse .1 composition spacing gave up to 1.22% heat-capacity interpolation
 error, prompting the additional planes. The installed family passes 336
 fresh source comparisons: maximum pressure, energy and heat-capacity
-differences are .04985%, .10866% and .19344%. First-law and response checks
+differences are .04985%, .1087% and .1934%. First-law and response checks
 are below 7.2e-10; 1536 archived stellar-profile queries reproduce the old
 family byte for byte. These are source/interpolation checks, not physical
 uncertainty bounds. Reports are in

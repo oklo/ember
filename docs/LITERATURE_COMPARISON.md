@@ -8,8 +8,8 @@ abundance conventions, numerical results and remaining physical approximations.
 
 ## Updated EOS and non-grey reference (2026-09-07)
 
-The new 4096-point FreeEOS-potential/COND model gives R=.12973875 Rsun,
-L=.00094857566 Lsun and Teff=2812.29 K. Relative to the same BHAC15 5-Gyr
+The new 4096-point FreeEOS-potential/COND model gives R=.1297 Rsun,
+L=.0009486 Lsun and Teff=2812 K. Relative to the same BHAC15 5-Gyr
 reference below, its offsets are **+4.6% in R, +8.8% in L and +1.3 K**.
 The temperature and luminosity offsets shrink while the radius offset grows.
 Nothing was tuned to the published model. Matching tau=100 does not make
@@ -40,21 +40,21 @@ assigned evolutionary age.
 |---|---:|---:|---:|
 | R/Rsun | .1286 | .1241 | +3.7% |
 | L/Lsun | .0009756 | .0008715 | +12.0% |
-| Teff (K) | 2844.6 | 2811 | +33.6 K (+1.2%) |
+| Teff (K) | 2845 | 2811 | +33.6 K (+1.2%) |
 | Tc (K) | 4.566e6 | 4.581e6 | -.33% |
 | rhoc (g/cm³) | 366.9 | 401.0 | -8.5% |
 
 BHAC15 uses Rsun=6.96e10 cm and Lsun=3.839e33 erg/s; these are converted
 to ember's nominal solar units before taking differences. The published
 radius is rounded to .001 Rsun, so extra comparison digits are not accuracy.
-The bracketing BHAC15 log ages are 9.689862 and 9.700961. Both have Teff=2811,
-log L/Lsun=-3.061, R/Rsun=.124, log Tc=6.661 and log rhoc=2.6031.
+The bracketing BHAC15 log ages are 9.690 and 9.701. Both have Teff=2811,
+log L/Lsun=-3.061, R/Rsun=.124, log Tc=6.661 and log rhoc=2.603.
 The same grid changes very little from 1 to approximately 10 Gyr at this
 mass: Teff=2810..2812 K, rounded radius=.124, log L/Lsun near -3.061.
 
 BCAH98 at 5 Gyr gives Teff=2812 K, log g=5.251 and log L/Lsun=-3.07:
 R≈.124 Rsun inferred from GM/g, and L≈8.51e-4 Lsun in its quoted solar units.
-Its bracketing ages are 4.49349 and 5.03219 Gyr, with identical values of
+Its bracketing ages are 4.493 and 5.032 Gyr, with identical values of
 these three columns. This is consistent with the newer grid at the
 precision useful for the current experimental model.
 
@@ -94,9 +94,9 @@ reported uncertainties; they are not independent in all columns.
 
 | Star | Adopted M/Msun | Observed R/Rsun | Ember R/Rsun | Radius offset |
 |---|---:|---:|---:|---:|
-| EBLM J2114−39 B | .0993 ± .0033 | .1250 ± .0016 | .12787 | +2.3% |
-| TRAPPIST-1 | .0898 ± .0023 | .1192 ± .0013 | .11769 | -1.3% |
-| Proxima Centauri | .120 ± .003 | .146 ± .007 | .14900 | +2.1% |
+| EBLM J2114−39 B | .0993 ± .0033 | .1250 ± .0016 | .1279 | +2.3% |
+| TRAPPIST-1 | .0898 ± .0023 | .1192 ± .0013 | .1177 | -1.3% |
+| Proxima Centauri | .120 ± .003 | .146 ± .007 | .1490 | +2.1% |
 
 | Star | Observed L/Lsun | Ember L/Lsun | Luminosity offset | Observed Teff (K) | Ember Teff (K) |
 |---|---:|---:|---:|---:|---:|

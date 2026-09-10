@@ -5,8 +5,8 @@ not a claim that Ember has produced a complete lifetime or a metallicity survey.
 
 The current shared-mixture calculation follows a fixed baryonic 0.1 Msun
 star at Z=.02 from its specified static main-sequence initial model. At
-3.40 trillion years it remains fully convective, with XH=.2033564,
-R=.1458864 Rsun, L=.00201550 Lsun and Teff=3201.95 K. The active objective
+3.40 trillion years it remains fully convective, with XH=.2034,
+R=.1459 Rsun, L=.002016 Lsun and Teff=3202 K. The active objective
 is an evolved helium remnant through Teff=100 K; see
 [COLD_REMNANT.md](COLD_REMNANT.md). Earlier numerical controls below refer
 to the preserved input families and do not establish later endpoint convergence.

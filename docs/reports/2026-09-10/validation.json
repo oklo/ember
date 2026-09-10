@@ -1,6 +1,6 @@
 {
   "validated_utc": "2026-09-10T12:44:22.641822+00:00",
-  "scope": "September 10 current source/build and paper publication. Completed stellar reference ends at 3.40T; a separate candidate-grid diagnostic and atmosphere refinements remain active.",
+  "scope": "Source/build verification recorded at validated_utc; paper, figures and prose updated at document_revision_utc. Completed reference ends at3.40T. The separate trial stopped near3.544T at its rejected-step limit and is described separately.",
   "build": {
     "directory": "/tmp/ember-cold-remnant-build-v1",
     "result": "PASS",
@@ -30,19 +30,25 @@
     "storage": "Local only, ignored"
   },
   "paper": {
-    "pages": 8,
+    "pages": 9,
     "compiler": "Tectonic",
     "warnings": [],
-    "visual_inspection": "Rendered title, history/physics, atmosphere diagnostics and reproducibility pages; text extracted across all pages.",
+    "visual_inspection": "All pages extracted and read; both revised figure pages rendered and inspected, including faint F77 curves, captions, legends and labels. Initial numerical tables and subsequent text checked for at most four significant figures.",
     "files_sha256": {
-      "ember_status_and_future.tex": "6e6cca654f953d9d8f55fa0ae59de976afa92ce7c301b256daf6ba3107def642",
-      "ember_status_and_future.pdf": "cd634b9e5204270e48eb311551b86851c68b69cc26f37f5d6de5b5b40b1f199a",
-      "build_figures.py": "fda1fbafc3475569f7a87362da02d00da7c3d138a4461aaa5f753ecaa3139e4f",
+      "ember_status_and_future.tex": "c5f99fc3dd288e1220668c8045978451920e5f1dbc49db21f816f9d84da9e499",
+      "ember_status_and_future.pdf": "01b0c4650e45614baebaf52d8b49de490e4a5e40fe2acecc692fdeb8b040ff60",
+      "build_figures.py": "4eb20a5dc2e13ce86627eb4251bdf2c94f0cfc9da2f1b759aaf4c8c827477f35",
       "evolution_history.csv": "7d7f2d669e43a45457cfcd5152b6d88290d9755b44fa9c2cf419313c78a93786",
-      "evolution_history.pdf": "91dd03dc1e40f55d2fc8721928dd86b8332793500c7826727dfcb2eb6fb0c3e5",
-      "evolution_history.png": "c840255a802c25bc57acaf851d95572bcc56fc26144e52b1410a033aa1f51fc2"
+      "evolution_history.pdf": "672fa2ec3f32a4460f9722d9c01894f43d8e8f0a2f03139e41ed3f458abbe40c",
+      "evolution_history.png": "a1607b91c4a55eefedc6ff1b6a80c8749a31e81f1a9acb6f4e925b11d2d77e9d",
+      "f77_history_provenance.json": "034ac1e7b867b732a303e290da9f2e206cd882a53292110a37782902162c2dd0",
+      "f77_history.csv": "d1bba9ec7f73a286a1daa0eb4c102c6c56cce3ac2991a818cb44e8f84c3e6ad5",
+      "f77_matched_hydrogen.pdf": "d1d28750999b4b490d67700ef1bf0378fc14d81e507cb9d447e5f6cb0277cfc8",
+      "f77_matched_hydrogen.png": "43e1c6bae377957fe9796fb845fb0f619fc5f324c6cbf76d10c5885d03a2b4f3"
     },
-    "csv_only_regeneration": "PASS: isolated directory with only CSV and plotting script; CSV and rendered PNG byte-identical. Null initial/restored gravothermal values remain missing, not zero."
+    "csv_only_regeneration": "PASS: both PDF and PNG figures reproduce byte for byte in an isolated directory containing only the plotting script, two history CSV files and the F77 extraction record.",
+    "f77_extraction": "All21699 accepted F77 states extracted from the original hash-checked outputs. Surface and central records agree in model number, printed age and hydrogen fraction. Row counts and final ages agree with the independently recorded comparison.",
+    "presentation": "Four significant figures maximum in prose and figure labels. F77 alpha0.30, abrupt segments alpha0.08; continuous paths avoid darkening from overlapping segment ends. No saved data removed or smoothed. Both codes use common nominal solar units in the figures."
   },
   "source_sha256": {
     "apps/CMakeLists.txt": "288e96e98abd7e66bc05de41e86d99fc11cc074f0f5cec931e7bc6643cb25a64",
@@ -263,5 +269,6 @@
     "failed": 0,
     "ctest_elapsed_seconds": 1.38,
     "scope": "After the legacy receipt metadata fix; all source acceptance and schema rejection checks pass."
-  }
+  },
+  "document_revision_utc": "2026-09-10T13:11:15.327533+00:00"
 }

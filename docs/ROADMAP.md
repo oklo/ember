@@ -7,7 +7,7 @@ sensitivity and wider mass–composition surveys are additional studies.
 Hydrogen-burning duration is an output to converge, not an imposed lifetime.
 
 **September 10 status:** the completed model reaches **3.40 trillion years**,
-still fully convective with XH=.2033564. The immediate work is hydrogen-poor
+still fully convective with XH=.2034. The immediate work is hydrogen-poor
 atmosphere refinement and the approaching structural transition. See
 [COLD_REMNANT.md](COLD_REMNANT.md) for the current acceptance order,
 [LIFETIME_SURVEY.md](LIFETIME_SURVEY.md) for the wider programme, and the

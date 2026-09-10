@@ -95,7 +95,7 @@ Three screening choices are available. `sfii-svh` is the evolution default;
 `sfii-legacy-screening` uses SFII rates with the old classical exp(2) cap.
 `legacy` uses both old rates and old screening. A control is not an alternative
 validated stellar prediction. At the 20-Gyr model's central state the bare
-SFII/legacy rate ratios are .9880, .9334 and 1.0628 for pp, 33 and 34.
+SFII/legacy rate ratios are .9880, .9334 and 1.063 for pp, 33 and 34.
 The pp screening exponents are .5160 (legacy), .4461 (finite-degeneracy weak)
 and .2801 (SVH), with `Theta_e=.4311`. Screening materially changes the star;
 the old 10-Gyr numerical reference must not be relabeled as the new physics.

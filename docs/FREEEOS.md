@@ -145,7 +145,7 @@ and the local identities, compares the 912 off-grid states, and integrates
 the derivative across the 9000-K molecular fit join. The recorded output is
 [results/freeeos_audit.json](results/freeeos_audit.json). Its source identity
 residual is 5.98e-13 while the finite-interval potential mismatch remains
-1639.73 erg/g/K, demonstrating why both checks are needed.
+1640 erg/g/K, demonstrating why both checks are needed.
 
 FreeEOS source is GPL-2.0-or-later and remains in the external build
 directory. The versioned files are numerical outputs and ember's own

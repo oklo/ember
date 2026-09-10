@@ -36,7 +36,7 @@ profile output at 1536 states, source support at 120 new states, analytic
 responses against finite differences and rejection of extrapolation.
 These checks do not establish composition-interpolation accuracy. A fresh
 X=.15,Z=.02 heldout gives a maximum 11.90% discrepancy against the .1/.2
-interpolation, at source T=.002 keV and rho=1.5849 g/cm3; the maximum in the
+interpolation, at source T=.002 keV and rho=1.585 g/cm3; the maximum in the
 hot rectangle is .9183%. Additional composition calculations are in progress.
 The extension has not been selected for an evolution run.
 
@@ -84,7 +84,7 @@ times 52 temperatures (log T=4.00..7.10) times 19 densities (log R=-8..1).
 All 9,880 values are original source cells; none were interpolated or filled.
 The full OPAL file is ragged, with `9.999` and blanks indicating missing
 values. This import selects only the fully populated rectangle. The upper
-temperature is 12.589 million K, **not** the original file's 8.70 dex limit.
+temperature is 12.59 million K, **not** the original file's 8.70 dex limit.
 The high-temperature, high-density corner and temperatures below log T=4
 are deliberately absent. This is radiative opacity, without conduction.
 
@@ -119,8 +119,9 @@ files without interpolation or filling. Temperature steps are 0.01 up to
 log T=3.7 and 0.02 above it. Archive filenames retain `aesopus2.0_gasbroad`,
 but every selected header identifies AESOPUS 2.1. The lowT header reports 91
 rows while actually containing 90 (2.00..2.89); the importer validates the
-complete actual grid. Some source actual-Z fields print 0.02000001 while
-Zref is 0.02000000. The importer checks these two allowed values and labels
+complete actual grid. Some source actual-Z fields differ from the reference
+metal fraction 0.02 by 1e-8. The importer checks the exact permitted source
+values and labels
 all planes by nominal Zref; it does not alter their opacity cells.
 
 Reproduce with:
@@ -163,14 +164,14 @@ Two complete rectangles retain original, un-clamped cells:
 
 The rectangles overlap; their cell counts are not unique-source counts.
 Some valid ragged points are deliberately omitted. The first temperature
-is 23209 K, the high rectangle begins at 290113 K, and the upper temperature
-is 23.209 million K. Native printed densities are retained, including their
+is 2.321e4 K, the high rectangle begins at 2.901e5 K, and the upper temperature
+is 23.21 million K. Native printed densities are retained, including their
 finite display precision. Unit conversion and logarithms are the only
 changes to numeric values; no resampling to log R takes place.
 
 `TopsOpacity` blends the rectangles over log T=5.6..5.7 using the same
 smooth log-opacity rule as the low/hot blend. Both must cover an overlap
-query, so densities above 251.19 are available only above log T=5.7.
+query, so densities above 251.2 are available only above log T=5.7.
 The stellar driver blends AESOPUS to TOPS over log T=4.4..4.5.
 
 Reproduce offline with:

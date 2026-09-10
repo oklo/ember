@@ -109,8 +109,8 @@ interior, with unmatched detailed mixture and helium abundance. See
 
 Select it with `--atmosphere cond-solar-proxy`. `--tau-top` applies only
 to grey integrations and is rejected with this option. At Teff=2800 K,
-log g=5, the original tau=100 state is T=4081.407 K and
-Pgas=1.555799e7 dyn/cm². The stellar seed now uses this local matching
+log g=5, the original tau=100 state is T=4081 K and
+Pgas=1.556e+7 dyn/cm². The stellar seed now uses this local matching
 temperature; using Teff at a deep boundary was incorrect. Tests check
 source values, analytic sensitivities, explicit proxy selection and bounds.
 The imported states come from structures, not spectral flux files.

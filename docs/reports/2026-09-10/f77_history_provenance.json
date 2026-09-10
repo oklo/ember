@@ -1,0 +1,29 @@
+{
+  "sources": [
+    {
+      "run": "ajr-20000",
+      "output_sha256": "08660152d2fa4c8fa972a4b67e746833e680fc133e85ac4ec27b2680b934a202",
+      "accepted_states": 4672,
+      "returncode": 0,
+      "first_core_flag_model": 4429
+    },
+    {
+      "run": "ferguson-20000",
+      "output_sha256": "9eb1d1d8940518527c695f8241683a5990ccff4946ea44431ade8e29efe10ac6",
+      "accepted_states": 17027,
+      "returncode": 2,
+      "first_core_flag_model": 16947
+    }
+  ],
+  "source_audit": "../../results/f77_core_onset_comparison_v1.json",
+  "join": "Accepted core diagnostics joined to the immediately preceding surface record; model IDs, ages and hydrogen fractions checked.",
+  "solar_unit_conversion": {
+    "F77_Lsun_erg_s": 3.86e+33,
+    "F77_Rsun_cm": 69600000000.0,
+    "figure_Lsun_erg_s": 3.828e+33,
+    "figure_Rsun_cm": 69570000000.0
+  },
+  "precision": "L, R and Teff retain the information in the four-significant-figure F77 output. Unit conversion adds no information. Other columns retain diagnostic precision.",
+  "figure_selection": "Age figure shows accepted F77 states from 1 Gyr onward, through the final accepted state. Hydrogen figure shows the common central-H interval, excluding XH above .699. No age shift or extrapolation.",
+  "csv_sha256": "d1bba9ec7f73a286a1daa0eb4c102c6c56cce3ac2991a818cb44e8f84c3e6ad5"
+}

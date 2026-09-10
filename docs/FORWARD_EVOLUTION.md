@@ -3,7 +3,7 @@
 Current status, September 10: a fresh calculation using the refined 64-plane
 EOS, hydrogen-poor TOPS v4 opacity, 96-node gas atmosphere and plasma-neutrino
 losses reached 3.30 trillion years, then its exact restart reached **3.40 trillion
-years**. It remains fully convective, at XH=.2033564 and Teff=3201.95 K.
+years**. It remains fully convective, at XH=.2034 and Teff=3202 K.
 See [COLD_REMNANT.md](COLD_REMNANT.md) and the
 [September 10 working paper](reports/2026-09-10/ember_status_and_future.pdf)
 for current input validation and the path to 100 K remnant cooling.
@@ -54,10 +54,10 @@ retains all original XH>=.3 planes byte for byte, and uses the same X3=0/.12
 axis and material grid: 24 planes in total. Coarse .1 spacing gave up to
 1.22% heat-capacity interpolation error in cool hydrogen-poor gas, so the
 additional composition planes were computed before acceptance. In 336 fresh
-FreeEOS comparisons, maximum differences are .04985% in pressure, .10866%
-in energy and .19344% in heat capacity, including the unchanged XH>.3 interval.
+FreeEOS comparisons, maximum differences are .04985% in pressure, .1087%
+in energy and .1934% in heat capacity, including the unchanged XH>.3 interval.
 Inside the new XH<.3 region the corresponding maxima are .03491%, .09190%
-and .15484%. First-law and response errors are below 7.2e-10. All 1536 states
+and .1548%. First-law and response errors are below 7.2e-10. All 1536 states
 from the completed 2/2.5/2.75T profiles give byte-identical EOS probe output
 under the original and extended families. Original source slices, raw new
 planes and assembly manifests are retained. See
@@ -174,7 +174,7 @@ file is `data/atmosphere/nongrey_gs98_z020_extended_tau100.dat`, SHA256
 `eec2e0553fb17e17fe16b82260a04977de6e0058d03b272992e638a1150d9532`.
 The old 48-cell family remains available. The extended family audit is
 `docs/results/nongrey_extended_gs98_eos_family_audit.json`; interior EOS
-densities at the matching states are .6785–1.9911% above the atmosphere EOS.
+densities at the matching states are .6785–1.991% above the atmosphere EOS.
 Final atmosphere cells require the
 unchanged correction, flux, hydrostatic, chemical-density and full-profile
 source-support checks before installation. Optional native CONREF refinement
@@ -185,15 +185,15 @@ for the existing validated 48-cell family.
 An independent atmosphere at XH=.375, X3=.06, 3000 K and logg=5.15 now
 checks interpolation between the new helium-rich composition corners.
 After 14 native-CONREF initialization iterations and two canonical source
-iterations, interpolated T differs by +.19584%, Pgas by +.03401%, and source
-density by +.12946%. The four corner models and the independent calculation
+iterations, interpolated T differs by +.1958%, Pgas by +.03401%, and source
+density by +.1295%. The four corner models and the independent calculation
 were revalidated against their original input/output receipts. Original
 artifacts and the local comparison are in
 `data/atmosphere/sources/nongrey_extended_validation/` and
 `docs/results/nongrey_extended_heldout.json`. This is a local comparison,
 not a global error bound for the extended family.
 
-The material rectangle for the extension is 1075.69..7762.30 K. It retains
+The material rectangle for the extension is 1076..7762.30 K. It retains
 the original low-temperature isotherms exactly and brackets the converged
 cool profiles. A proposed 15000 K rectangle exposed negative native He I
 4471 profile extrapolation above its tabulated electron-density range. No
@@ -227,7 +227,7 @@ One coupled atmosphere now passes all original-source checks: XH=.7, X3=0,
 Teff=2600 K, logg=5.15, with 300 depths and 20000 transfer frequencies.
 Its opacity table has 17 temperatures from 1001 to 7762 K, entirely
 bracketing the final 1054–4528 K profile. At tau=100 it gives
-T=3863.670 K and Pgas=2.0772434e7 dyn/cm2. The maximum flux error is
+T=3864 K and Pgas=2.077e+7 dyn/cm2. The maximum flux error is
 4.72e-5 and final undamped temperature correction 5.12e-7. Independent
 element closure is 2.97e-9; all condensing layers have zero convective heat
 flux. Condensation reaches tau=.00631, well above the matching boundary.
@@ -236,7 +236,7 @@ The original model and chemistry audit are archived under
 compact report in `docs/results/condensation_atmosphere_cold.json`.
 A converged gas control on the identical material and frequency grid isolates
 the depletion effect: matching pressure increases 0.8095%, temperature falls
-0.1349%, and density increases 1.1038%. Changing the gas-only material grid
+0.1349%, and density increases 1.104%. Changing the gas-only material grid
 from 16 to 17 temperatures accounts for a separate 0.0740% pressure change.
 The control's original artifacts are archived with the condensed atmosphere.
 This resolved boundary effect motivates a complete composition-dependent
@@ -254,7 +254,7 @@ The solar 2800 K model also passes, after 28 canonical iterations, with
 independent chemistry and original artifacts in
 `data/atmosphere/sources/condensation_atmosphere_x700_2800_g515/`.
 Against the same 17-temperature gas opacity grid, its matching pressure
-increases .12461% and temperature falls .023470%. The matched-source audit
+increases .1246% and temperature falls .02347%. The matched-source audit
 and comparison are reproducible with `scripts/compare_condensate_control.py`;
 see `docs/results/condensation_atmosphere_warm.json`.
 
@@ -271,7 +271,7 @@ Several low-hydrogen, high-gravity 2600 K calculations encounter trial layers
 below the source's 1000 K partition-function floor and are rejected. The
 explicit forward specification now uses 2750/2800/3000/3200 K, retaining all
 composition and gravity axes, for 72 cells. It brackets the star's initial
-2767.52 K. Solved colder nodes remain diagnostic controls; unsupported cold
+2768 K. Solved colder nodes remain diagnostic controls; unsupported cold
 nodes are never filled or extrapolated. Independent 2775/2900 K models will
 check the production grid, with 2725 K as a colder continuation control.
 A separate 33-temperature opacity experiment retains the original 17
@@ -279,16 +279,16 @@ isotherms exactly and adds their midpoints to check material interpolation.
 Only the source array capacity changes for this refinement; two controls on
 the original 17-temperature opacity grid agree with the original atmosphere
 boundaries to 1.56e-6 relative. The cold 2600 K material refinement passes:
-matching T changes +.02652% and pressure +.36051%. The warm 2800 K source
+matching T changes +.02652% and pressure +.3605%. The warm 2800 K source
 solve converges, but its chemistry/transport audit flags a convective flux of
-1.2243e-6 of the total in one condensing layer, above the deliberately strict
+1.224e-6 of the total in one condensing layer, above the deliberately strict
 1e-8 no-grain-enthalpy gate. The fine model remains a diagnostic, explicitly
 ineligible for a production grid. Both production import and collection keep
 the strict gate. No condensate grid has yet been installed in Ember.
 
 The flagged convective flux does not result from cancellation in the native
 mixing-length root: its rationalized form agrees to 4.44e-16 relative. At the
-actual native interface state (1769.42 K, 4061.89 dyn/cm2), an independent
+actual native interface state (1769 K, 4062 dyn/cm2), an independent
 FastChem formation-enthalpy derivative estimates an additional heat capacity
 of 2.89e5 erg/g/K, about .187% of the native gas value. This is an
 ideal-neutral-atom reference estimate, not a complete gas/grain EOS or a
@@ -302,7 +302,7 @@ by 8.39e-7 and 4.39e-6 relative, respectively. They test boundary sensitivity,
 not a rigorous bound on missing grain physics. Archived original inputs and
 outputs are independently rechecked in `audit_condensate_material.py` before
 using the fine model as an interpolation diagnostic: T changes +.03271% and
-pressure +.28899%, within the .5% material-resolution criterion. The report
+pressure +.2890%, within the .5% material-resolution criterion. The report
 explicitly retains its failed production grain-enthalpy status. Each actual
 production cell must separately pass the unmodified strict grain gate. See
 `results/condensation_warm_material_refinement.json` and
@@ -342,23 +342,23 @@ Original controls and the output-filename receipt recovery are archived in
 ## Current stellar checkpoint and usage
 
 The latest 512-point gas run reaches **2.85 trillion years** with
-R=.14876088 Rsun, L=.0018575706 Lsun, Teff=3106.84 K,
-central T=6.87854 MK and rho=241.232 g/cm3. XH=.30288760 and
-X3=.00466334; the star remains fully convective and homogeneous.
+R=.1488 Rsun, L=.001858 Lsun, Teff=3107 K,
+central T=6.879 MK and rho=241.2 g/cm3. XH=.3029 and
+X3=.004663; the star remains fully convective and homogeneous.
 The native continuation added 37 accepted steps with no rejections, bringing
 the total to 1673 accepted steps and one rejection. The
 [model report](results/evolution_metal_m010_2850gyr_gas.json) and
 [figure](results/evolution_metal_m010_2850gyr_gas.pdf) contain the
 2.75-to-2.85T continuation interval. The receipt confirms unchanged data and
 restart inputs. This still uses the original gas boundary and EOS family;
-XH=.30289 is close to their .3 source boundary. No late-segment refinement or
+XH=.3029 is close to their .3 source boundary. No late-segment refinement or
 condensate stellar feedback is claimed.
 
 The preceding 512-point gas run reaches **2.75 trillion years** with
-R=.14885437 Rsun, L=.0018256135 Lsun, Teff=3092.42 K,
-central T=6.72047 MK and rho=240.358 g/cm3. The homogeneous baryonic
-fractions are XH=.31976956, X3=.00590735, X4=.65432308 and Z=.02.
-Central pressure is 1.64468e17 dyn/cm2 and surface logg=5.09254.
+R=.1489 Rsun, L=.001826 Lsun, Teff=3092 K,
+central T=6.720 MK and rho=240.4 g/cm3. The homogeneous baryonic
+fractions are XH=.3198, X3=.005907, X4=.6543 and Z=.02.
+Central pressure is 1.645e+17 dyn/cm2 and surface logg=5.093.
 The star remains fully convective; the minimum diffusive/adiabatic gradient
 ratio is 3.66 and the maximum estimated local conductive flux fraction is
 3.22%. The largest reduced ppII/pp ratio is .002254; plasmon-only losses
@@ -376,9 +376,9 @@ of this later segment. The next composition extension must go below the
 current XH=.3 source boundaries to follow substantial further fuel depletion.
 
 The preceding 512-point gas run reaches **2.5 trillion years** with
-R=.14874871 Rsun, L=.0017530077 Lsun, Teff=3062.29 K,
-central T=6.37482 MK and rho=239.856 g/cm3. XH=.35995868 and
-X3=.01015258; the model remains fully convective. It took 1542 accepted
+R=.1487 Rsun, L=.001753 Lsun, Teff=3062 K,
+central T=6.375 MK and rho=239.9 g/cm3. XH=.3600 and
+X3=.01015; the model remains fully convective. It took 1542 accepted
 macrosteps and one rejection. The minimum diffusive/adiabatic gradient ratio
 is 4.97 and the largest estimated local conductive flux fraction is 3.09%.
 Plasmon-only losses are 1.35e-8 of surface luminosity; the largest reduced
@@ -398,9 +398,9 @@ complete stellar output byte for byte, as recorded in
 supplies the completed continuation above.
 
 The preceding 512-point run reaches **2 trillion years** with
-R=.14782531 Rsun, L=.0016319538 Lsun, Teff=3017.37 K,
-central T=5.83424 MK and rho=242.493 g/cm3. XH=.43087974 and
-X3=.02574632; the star remains fully convective. The new XH=.3 atmosphere
+R=.1478 Rsun, L=.001632 Lsun, Teff=3017 K,
+central T=5.834 MK and rho=242.5 g/cm3. XH=.4309 and
+X3=.02575; the star remains fully convective. The new XH=.3 atmosphere
 plane supports the portion below the previous XH=.45 boundary. There are
 1339 accepted macrosteps and one rejection. The minimum diffusive/adiabatic
 gradient ratio is 8.24, with maximum estimated local conductive flux fraction
@@ -408,17 +408,17 @@ gradient ratio is 8.24, with maximum estimated local conductive flux fraction
 feedback is not yet included. An independent fresh-start repeat gives
 byte-identical full history and final profile, as recorded in
 `results/evolution_metal_2tyr_gas_repeat.json`. Doubling the mesh from 512 to
-1024 points changes final L by +.06163%, R by -.01234%, and XH by -1.2142e-4;
+1024 points changes final L by +.06163%, R by -.01234%, and XH by -1.214e-4;
 see `results/evolution_metal_m010_2tyr_gas_convergence.json`. Fourfold tighter
-time tolerances change L by -.003610%, R by -.000594%, and XH by +1.3001e-5.
+time tolerances change L by -.003610%, R by -.000594%, and XH by +1.300e-5.
 These quantify repeatability and numerical
 sensitivity under the recorded inputs and
 executable, not physical accuracy or hydrogen-exhaustion convergence.
 
 The [compact track and full provenance](results/evolution_metal_m010_2tyr_gas.json),
 [figure](results/evolution_metal_m010_2tyr_gas.pdf), and companion transport and
-nuclear audits record this checkpoint. The copied executable used 1631.6
-child CPU seconds and 2365.3 UTC seconds while source jobs ran concurrently;
+nuclear audits record this checkpoint. The copied executable used 1632
+child CPU seconds and 2365 UTC seconds while source jobs ran concurrently;
 these are not isolated-machine benchmarks.
 The integrated nuclear rest-mass release is .001810 of the conserved baryonic
 mass. Energy bookkeeping includes that release, while the Newtonian gravity
@@ -426,9 +426,9 @@ calculation retains the baryonic mass coordinate. A same-mass comparison with
 another stellar code must account for this convention and approximation.
 
 The earlier 512-point control reaches **1.3 trillion years** with
-R=.14620742 Rsun, L=.0014647156 Lsun, Teff=2953.11 K,
-central T=5.30645 MK and rho=248.349 g/cm3. XH=.50565454 and
-X3=.07071857; the star remains fully convective. The minimum
+R=.1462 Rsun, L=.001465 Lsun, Teff=2953 K,
+central T=5.306 MK and rho=248.3 g/cm3. XH=.5057 and
+X3=.07072; the star remains fully convective. The minimum
 diffusive/adiabatic gradient ratio is12.99 and maximum estimated local
 conductive flux fraction2.84%. Maximum pp screening zeta=.07284;
 plasmon-only losses are1.30e-8 of surface luminosity. The run uses
@@ -436,7 +436,7 @@ plasmon-only losses are1.30e-8 of surface luminosity. The run uses
 
 The complete input/executable hashes, final quantities and conservation
 checks are in `docs/results/evolution_metal_m010_1300gyr.json`, with
-companion transport/nuclear audits. Python perf_counter measured1417.9seconds of awake elapsed time while
+companion transport/nuclear audits. Python perf_counter measured1418seconds of awake elapsed time while
 atmosphere-source jobs ran concurrently. Start and receipt-write timestamps
 span about2973seconds; system suspension is excluded by that timer on this
 host. Neither interval is a standalone performance benchmark.
@@ -450,10 +450,10 @@ Full hashes and comparisons are in
 `docs/results/evolution_metal_1300gyr_convergence.json`. The earlier 1T
 checkpoint below retains its original executable/physics provenance.
 
-At one trillion years, the new 512-point calculation has R=.14422884 Rsun,
-L=.0013686915 Lsun, Teff=2923.32 K, central T=5.15391 MK and
-rho=257.734 g/cm3. Hydrogen and helium-3 fractions are .53313853 and
-.09105649. It remains fully convective. There are 925 accepted macrosteps
+At one trillion years, the new 512-point calculation has R=.1442 Rsun,
+L=.001369 Lsun, Teff=2923 K, central T=5.154 MK and
+rho=257.7 g/cm3. Hydrogen and helium-3 fractions are .5331 and
+.09106. It remains fully convective. There are 925 accepted macrosteps
 and one rejection. This uses the new GS98 interior with the existing gas
 atmosphere family. Condensate feedback is not part of this checkpoint.
 

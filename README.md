@@ -16,46 +16,52 @@ The completed **0.1 solar-mass model reaches 3.40 trillion years** from a
 specified static main-sequence model. It is still fully convective and burning
 hydrogen. **Hydrogen exhaustion and white-dwarf cooling have not been reached.**
 The current goal is to evolve the helium remnant to **100 K effective temperature**
-with supported thermodynamics, transport and atmosphere inputs.
+using thermodynamics, heat transport and atmospheres valid in the conditions
+the star reaches.
 
 | Latest completed model | Value |
 |---|---:|
 | Initial composition | XH = 0.7, He3 = 0, Z = 0.02; GS98 metals |
 | Mass mesh | 512 points; fixed baryonic mass of 0.1 Msun |
-| Central hydrogen mass fraction | 0.2033564 |
-| Radius | 0.1458864 Rsun |
-| Luminosity | 0.00201550 Lsun |
-| Effective temperature | 3201.95 K |
-| Central temperature | 8.0314 million K |
+| Central hydrogen mass fraction | 0.2034 |
+| Radius | 0.1459 Rsun |
+| Luminosity | 0.002016 Lsun |
+| Effective temperature | 3202 K |
+| Central temperature | 8.031 million K |
 | Convective mass fraction | 1 |
 
 The [September 10 working paper](docs/reports/2026-09-10/ember_status_and_future.pdf)
 ([source, figures and reproduction instructions](docs/reports/2026-09-10/README.md))
-replaces the September 9 edition. It covers the new track, source validation,
-F77 comparison, computation cost and the remaining remnant physics. The
+shows the evolution, comparisons with two F77 opacity choices, computing time
+and the physics still needed for the remnant. It includes graphs against both
+age and hydrogen abundance. The
 [current development plan](docs/COLD_REMNANT.md) and latest
 [handoff entry](HANDOFF.md) record subsequent work and job status.
 
-The completed run selects a **64-plane GS98 EOS**, refined hydrogen-poor TOPS
-opacity, a **96-node non-grey gas atmosphere**, Ledoux convection with slow
-composition mixing, and plasma-neutrino cooling. A fresh run reached 3.30
-trillion years; its exact native restart reached 3.40 trillion years with the
-same executable and inputs. The previous 2.85-trillion-year reference is retained.
+The completed run uses **64 composition tables for the equation of state**,
+refined hydrogen-poor TOPS opacity, and **96 atmosphere models** that resolve
+absorption and scattering over frequency. Convection accounts for composition
+gradients; plasma-neutrino losses enter the energy equation. A calculation
+from the initial model reached 3.30 trillion years and continued from its saved
+state to 3.40 trillion years with the same executable and inputs.
 
-A candidate **108-node atmosphere extends warm coverage to XH = 0.1**. Source,
-depth and runtime support checks are complete, but an independent comparison
-found a 2.13% matching-temperature discrepancy, mainly from hydrogen spacing.
-New composition nodes and fresh heldouts are being calculated. A separately
-identified diagnostic stellar run uses that candidate to explore the next
-structural transition; it is outside the completed reference above.
+A trial table of **108 atmospheres extends to hydrogen fraction 0.1** at
+warm surface temperatures. The new atmospheres have converged and passed depth
+checks, but interpolation differs from an independent atmosphere calculation
+by 2.13% in the temperature where interior and atmosphere join. The main cause
+is the spacing in hydrogen abundance. More closely spaced atmosphere models
+and additional independent checks are being calculated. A separate stellar
+trial uses this table to explore the next change in structure; its results
+are still being assessed. It began losing full convection near 3.543 trillion
+years and stopped near 3.544 trillion years at the program's limit on rejected
+time steps. The next work is to resolve that numerical interruption and finish
+the atmosphere checks.
 
-The minimum local diffusive-to-adiabatic gradient ratio falls from 1.588 at
-3.30 trillion years to 1.336 at 3.40 trillion years, with the minimum away from
-the center. This suggests approach to loss of full convection; it does not
-establish a radiative-core onset. The retained F77 model reaches its own central
-transition at a different hydrogen abundance. The [comparison and timing
-notes](docs/COMPUTATIONAL_COST.md) explain why the model ages and runtimes are
-not directly interchangeable.
+The star is approaching conditions where radiation and conduction may carry
+heat without convection in part of its interior. The completed calculation
+has not yet formed a radiative core. F77 reaches its own central transition
+at a different hydrogen abundance. The [comparison and timing
+notes](docs/COMPUTATIONAL_COST.md) explain the different timescales.
 
 **Verification:** 32 CTest suites pass with installed local inputs. Earlier
 same-physics convergence checks at two trillion years found luminosity changes

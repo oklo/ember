@@ -27,7 +27,7 @@ checks are described in [NONGREY.md](NONGREY.md).
 The previous 0.1 solar-mass experiment reached **20 billion years after its
 specified initial static composition** using Solar Fusion II rate integrals
 and finite-degeneracy Salpeter–Van Horn screening. At 4096 points,
-H1 falls from .7 to .69525918 and He3 rises from zero to .00474043.
+H1 falls from .7 to .6953 and He3 rises from zero to .004740.
 The star remains inside the existing EOS, opacity and frozen-atmosphere
 composition bounds. This clock excludes formation and pre-main-sequence
 evolution. It remains an initial main-sequence experiment, not a complete
@@ -86,11 +86,11 @@ the unchanged previous model.
 
 | Points | Initial R/Rsun | R/Rsun at 20 Gyr | L/Lsun at 20 Gyr | He3 at 20 Gyr |
 |---:|---:|---:|---:|---:|
-| 1024 | 0.12491345 | 0.12508670 | 0.0008403235 | 0.0047379150 |
-| 2048 | 0.12489463 | 0.12507853 | 0.0008405985 | 0.0047408082 |
-| 4096 | 0.12490280 | 0.12507283 | 0.0008408122 | 0.0047404264 |
+| 1024 | 0.1249 | 0.1251 | 0.0008403 | 0.004738 |
+| 2048 | 0.1249 | 0.1251 | 0.0008406 | 0.004741 |
+| 4096 | 0.1249 | 0.1251 | 0.0008408 | 0.004740 |
 
-At 4096 points, Teff=2779.20 K, Tc=4.62606e6 K and rhoc=390.666 g/cm³.
+At 4096 points, Teff=2779 K, Tc=4.626e+6 K and rhoc=390.7 g/cm³.
 The reference uses 41 accepted macrosteps, with no rejected macrosteps.
 Each stores two implicit half steps. The largest recorded last-half-step
 luminosity and nuclear rest-mass imbalances are 4.96e-9 and 1.65e-8 relative.
@@ -263,11 +263,11 @@ by a factor .397 in the tested 512-point model.
 
 | Points | Initial R/Rsun | R/Rsun at 10 Gyr | L/Lsun at 10 Gyr | He3 at 10 Gyr |
 |---:|---:|---:|---:|---:|
-| 1024 | .12884233 | .12891572 | .0009194957 | .0025985795 |
-| 2048 | .12882960 | .12890799 | .0009197530 | .0025996158 |
-| 4096 | .12884559 | .12891498 | .0009194175 | .0025980645 |
+| 1024 | .1288 | .1289 | .0009195 | .002599 |
+| 2048 | .1288 | .1289 | .0009198 | .002600 |
+| 4096 | .1288 | .1289 | .0009194 | .002598 |
 
-At 4096 points, Teff=2799.32 K, Tc=4.55637e6 K and rhoc=356.961 g/cm³.
+At 4096 points, Teff=2799 K, Tc=4.556e+6 K and rhoc=357.0 g/cm³.
 The reference uses 23 accepted macrosteps, each storing two implicit half
 steps. Its largest recorded last-half-step luminosity imbalance is 4.70e-9
 relative, and nuclear mass-defect imbalance is 1.08e-8. Each recorded

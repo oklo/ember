@@ -35,7 +35,7 @@ H2-He span 1000–7000 K, H2-H spans 1000–2500 K, and H-He spans
 temperature endpoints and supplies negligible absorption outside their
 wavenumber intervals. These retained source prescriptions are additional
 approximations, particularly for H2-H in dissociation layers. The source
-H2- continuum spans 3505–151883 Å; it contributes zero outside that range.
+H2- continuum spans 3505–1.519e5 Å; it contributes zero outside that range.
 
 The atmosphere is a plane-parallel gas in LTE, with no irradiation,
 condensates, rainout, magnetic support or spots. These choices are physical
@@ -99,7 +99,7 @@ Each material isotherm runs in a fresh source process and is checkpointed
 independently. Assembly copies the original cells into the full source
 table without interpolation. Completed isotherms survive a failed later
 calculation; no incomplete atmosphere family is imported.
-The 21-temperature material grid extends down to 1075.69 K. Its explicitly
+The 21-temperature material grid extends down to 1076 K. Its explicitly
 stored temperature values preserve the earlier 19 isotherms exactly.
 `--reuse-opacity WORK` finds matching isotherm inputs even when their indices
 change after an extension, then verifies the complete run fingerprint.
@@ -274,7 +274,7 @@ are archived under `data/atmosphere/sources/nongrey_validation/`; use
 The [material interpolation audit](results/nongrey_material_interpolation.json)
 compares direct source opacities at four independent T/rho states with
 TLUSTY's bilinear interpolation in logarithmic opacity, temperature and
-density. At 2889.6/4290.4 K and densities `1.14e-5`/`1.47e-4` g/cm³, the
+density. At 2890/4290 K and densities `1.14e-5`/`1.47e-4` g/cm³, the
 interpolated Rosseland absorption means exceed the direct values by up to
 4.52%; Planck absorption means are lower by up to 10.81%. This is a larger
 numerical uncertainty than the wavelength and depth checks. Halving the temperature spacing and reducing the density log10 spacing
@@ -419,8 +419,8 @@ Teff≈2564 K and can lie below a cool-dwarf grid starting at 2600 K.
 The first [coupled non-grey trial](results/evolution_nongrey_m010_20gyr.json)
 uses a complete 24-cell cool subset at 512 stellar mesh points. It reaches
 20 billion years with 17 accepted macrosteps and no retries, remaining fully
-convective. The final state is R=.125727 Rsun, L=.000815446 Lsun,
-Teff=2750.81 K, XH=.695399 and X3=.00460057. The largest recorded luminosity
+convective. The final state is R=.1257 Rsun, L=.0008154 Lsun,
+Teff=2751 K, XH=.6954 and X3=.004601. The largest recorded luminosity
 and nuclear mass-energy balance errors are 4.7e-9 and 1.5e-8. These are
 conservation diagnostics, not physical error bars. This pilot predates the
 final derivative repairs and remains a historical source control.
@@ -435,16 +435,16 @@ and derivatives; they are never installed as physical atmosphere data.
 The complete final-source family evolves the 0.1 Msun model to **1e12 yr**
 at 512 mass points. It accepts 906 macrosteps, rejects one attempt and takes
 612.3 wall seconds on the M4 Max. The star remains fully convective throughout.
-Its final central temperature is 5.12268 million K and density is
-261.626 g/cm³. Hydrogen reaches .53389752, He3 .09509109 and He4 .35101139
-by baryonic mass. He3 peaks at .10256641 near 736.81 billion years.
+Its final central temperature is 5.123 million K and density is
+261.6 g/cm³. Hydrogen reaches .5339, He3 .09509 and He4 .3510
+by baryonic mass. He3 peaks at .1026 near 736.8 billion years.
 Time starts from the specified static XH=.7/X3=0 composition, excluding
 formation and pre-main-sequence evolution.
 
 | Atmosphere, same 512-point interior and time tolerances | R/Rsun at 1e12 yr | L/Lsun | Teff (K) | H1 | He3 |
 |---|---:|---:|---:|---:|---:|
-| COND + convective composition correction | .14354956 | .0013460338 | 2918.03 | .53259477 | .09349773 |
-| Composition-dependent non-grey gas grid | .14357836 | .0013302286 | 2909.13 | .53389752 | .09509109 |
+| COND + convective composition correction | .1435 | .001346 | 2918 | .5326 | .09350 |
+| Composition-dependent non-grey gas grid | .1436 | .001330 | 2909 | .5339 | .09509 |
 
 The new atmosphere changes final radius by +.0201%, luminosity by -1.174%
 and effective temperature by -8.90 K. The largest recorded last-half-step

@@ -3,15 +3,15 @@
 The historical **0.1 Msun fixed-composition equilibrium** uses a consistent
 FreeEOS-based Helmholtz potential, AESOPUS/TOPS radiative opacity, pp
 heating, MLT, and an AMES-COND non-grey boundary at Rosseland tau=100.
-At 4096 points it gives **R=.12973875 Rsun, L=.00094857566 Lsun,
-Teff=2812.29 K**. This is an experimental static model with declared
+At 4096 points it gives **R=.1297 Rsun, L=.0009486 Lsun,
+Teff=2812 K**. This is an experimental static model with declared
 composition and source-fit approximations, not an age-matched calibration
 or an evolutionary calculation.
 
 The quoted values below are archived at `6cc4fb4`. The composition/burning
 milestone corrected the classical Debye screening normalization. The same
-atomic-basis static command now gives R=.12935124 Rsun, L=.00094042956 Lsun
-and Teff=2810.43 K; see [updated static metadata](results/equilibrium_m010_screening_corrected.json).
+atomic-basis static command now gives R=.1294 Rsun, L=.0009404 Lsun
+and Teff=2810 K; see [updated static metadata](results/equilibrium_m010_screening_corrected.json).
 The new baryonic-mass evolution is documented in [EVOLUTION.md](EVOLUTION.md).
 
 ## Reproduce the static calculation
@@ -52,10 +52,10 @@ models use the .0125-dex potential grid. The grey runs use tau_top=.001.
 
 | EOS | Atmosphere | R/Rsun | L/Lsun | Teff (K) | Maximum local Maxwell defect |
 |---|---|---:|---:|---:|---:|
-| CMS19 | Grey, tau=2/3 | .12860617 | .0009756295 | 2844.57 | .24178 |
-| CMS19 | COND, tau=100 | .12938578 | .0009370485 | 2807.53 | .24124 |
-| FreeEOS potential | Grey, tau=2/3 | .12857762 | .0010069939 | 2867.48 | 4.44e-16 |
-| FreeEOS potential | COND, tau=100 | .12973875 | .0009485757 | 2812.29 | 4.44e-16 |
+| CMS19 | Grey, tau=2/3 | .1286 | .0009756 | 2845 | .2418 |
+| CMS19 | COND, tau=100 | .1294 | .0009370 | 2808 | .2412 |
+| FreeEOS potential | Grey, tau=2/3 | .1286 | .001007 | 2867 | 4.44e-16 |
+| FreeEOS potential | COND, tau=100 | .1297 | .0009486 | 2812 | 4.44e-16 |
 
 The combined change increases radius by .88%, decreases luminosity by
 2.77% and cools Teff by 32.28 K relative to CMS19/grey. These differences
@@ -68,7 +68,7 @@ The original [CMS19 source audit](CMS19.md) and energy guard are unchanged.
 
 Against BHAC15's .1 Msun, 5-Gyr point, the new model is approximately
 4.6% larger and 8.8% brighter, with Teff 1.3 K higher. Its inner state is
-Tc=4.58580e6 K and rhoc=350.601 g/cm³. The temperature agreement has
+Tc=4.586e+6 K and rhoc=350.6 g/cm³. The temperature agreement has
 improved, while the radius offset has grown. Unmatched abundances,
 atmosphere models and age prevent interpreting these as calibrated errors.
 The previous observed-star mass runs are clearly retained as CMS19/grey
@@ -78,9 +78,9 @@ in [LITERATURE_COMPARISON.md](LITERATURE_COMPARISON.md).
 
 | Points | R/Rsun | L/Lsun | Teff (K) | Absolute relative virial error |
 |---:|---:|---:|---:|---:|
-| 1024 | .12974188 | .0009485454 | 2812.23 | 1.025e-5 |
-| 2048 | .12972454 | .0009492765 | 2812.96 | 2.560e-6 |
-| 4096 | .12973875 | .0009485757 | 2812.29 | 6.396e-7 |
+| 1024 | .1297 | .0009485 | 2812 | 1.025e-5 |
+| 2048 | .1297 | .0009493 | 2813 | 2.560e-6 |
+| 4096 | .1297 | .0009486 | 2812 | 6.396e-7 |
 
 The 4096-point solve takes nine accepted updates, with residual 6.60e-13
 and undamped correction 6.76e-12. The pp integral and surface luminosity
@@ -157,16 +157,16 @@ physics, tau_top=.001 and surface matching at tau=2/3.
 
 | Points | R/Rsun | L/Lsun | Teff (K) | Scaled residual | Absolute relative virial error |
 |---:|---:|---:|---:|---:|---:|
-| 128 | .12911938 | .0009629408 | 2829.64 | 5.31e-10 | 6.856e-4 |
-| 256 | .12935265 | .0009420455 | 2811.62 | 1.67e-10 | 1.699e-4 |
-| 512 | .12885921 | .0009637381 | 2833.08 | 1.04e-10 | 4.229e-5 |
-| 1024 | .12862818 | .0009746770 | 2843.63 | 1.90e-11 | 1.055e-5 |
-| 2048 | .12861667 | .0009751461 | 2844.10 | 1.68e-10 | 2.635e-6 |
-| 4096 | .12860617 | .0009756295 | 2844.57 | 4.10e-10 | 6.585e-7 |
+| 128 | .1291 | .0009629 | 2830 | 5.31e-10 | 6.856e-4 |
+| 256 | .1294 | .0009420 | 2812 | 1.67e-10 | 1.699e-4 |
+| 512 | .1289 | .0009637 | 2833 | 1.04e-10 | 4.229e-5 |
+| 1024 | .1286 | .0009747 | 2844 | 1.90e-11 | 1.055e-5 |
+| 2048 | .1286 | .0009751 | 2844 | 1.68e-10 | 2.635e-6 |
+| 4096 | .1286 | .0009756 | 2845 | 4.10e-10 | 6.585e-7 |
 
-The 4096-point result has Tc=4.56631e6 K, rhoc=366.875 g/cm³ and
-R=8.94713e9 cm. It converges in 12 accepted updates with an undamped
-correction of 3.06e-10. Surface L=3.73471e30 erg/s agrees with the pp
+The 4096-point result has Tc=4.566e+6 K, rhoc=366.9 g/cm³ and
+R=8.947e+9 cm. It converges in 12 accepted updates with an undamped
+correction of 3.06e-10. Surface L=3.735e+30 erg/s agrees with the pp
 heating integral to about 2e-15 relative. Radius increases, density and
 temperature decrease, and luminosity stays positive.
 
@@ -205,11 +205,11 @@ from a .6 Rsun seed.
 
 | Points | Updates | R/Rsun | L/Lsun | Teff (K) | Scaled residual | Relative virial error |
 |---|---:|---:|---:|---:|---:|---:|
-| 128 | 18 | 0.94635323 | 0.019650339 | 2221.4802 | 5.49e-11 | 1.179e-3 |
-| 256 | 18 | 0.94342814 | 0.019831831 | 2230.0411 | 8.47e-13 | 2.927e-4 |
-| 512 | 19 | 0.94219963 | 0.019877124 | 2232.7675 | 1.34e-10 | 7.291e-5 |
+| 128 | 18 | 0.9464 | 0.01965 | 2221 | 5.49e-11 | 1.179e-3 |
+| 256 | 18 | 0.9434 | 0.01983 | 2230 | 8.47e-13 | 2.927e-4 |
+| 512 | 19 | 0.9422 | 0.01988 | 2233 | 1.34e-10 | 7.291e-5 |
 
-At 512 points the inner temperature is 8.24398e6 K and density 88.8026 g/cm³.
+At 512 points the inner temperature is 8.244e+6 K and density 88.80 g/cm³.
 Radius increases outward, density and temperature decrease, and luminosity
 is positive. Surface luminosity equals the trapezoidal pp heating integral
 to about 1e-14 relative. Radius changes by 0.130% and luminosity by 0.228%

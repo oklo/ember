@@ -134,7 +134,7 @@ Three matched-control models now pass source and independent chemistry checks:
 `sources/condensation_atmosphere_x300_he3120_2800_g515/`, plus
 `sources/condensation_atmosphere_x700_2800_g515/`.
 Their pressure changes relative to gas controls on the same material grids
-are +.8095%, +.4833% and +.12461%, respectively. They place condensation entirely in
+are +.8095%, +.4833% and +.1246%, respectively. They place condensation entirely in
 layers with zero convective heat flux. These are individual source models;
 a complete composition-dependent boundary family is still being computed.
 The attempted cold rectangle is not yet supported: XH=.3, Teff=2600 K,

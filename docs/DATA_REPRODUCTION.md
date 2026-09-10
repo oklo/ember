@@ -106,8 +106,11 @@ accepted runtime atmosphere. Large generated outputs stay ignored/local.
 ## What a fresh checkout can reproduce immediately
 
 The report PDF can be rebuilt from its LaTeX source and committed vector figure.
-The figure can be regenerated from the compact, committed history CSV using
-`docs/reports/2026-09-10/build_figures.py`. With local raw histories available,
+The figures can be regenerated from the committed Ember and F77 history CSV
+files and F77 extraction record using
+`docs/reports/2026-09-10/build_figures.py`. The F77 file contains the quantities
+needed for the graphs, extracted from accepted models; the complete printed
+outputs remain local. With local raw histories available,
 `--from-archives` repeats the history-join checks and rebuilds that CSV.
 
 For native stellar restart, use the local archived binary/checkpoint and the

@@ -56,15 +56,15 @@ accepted convective fractions and the evolved physical states were recorded.
 
 | Points | R/Rsun | L/Lsun | Teff (K) | H1 | He3 |
 |---:|---:|---:|---:|---:|---:|
-| 512 | .14354956 | .0013460338 | 2918.03 | .53259477 | .09349773 |
-| 1024 | .14352437 | .0013485435 | 2919.64 | .53255317 | .09344467 |
-| 2048 | .14351457 | .0013495294 | 2920.28 | .53254997 | .09343622 |
+| 512 | .1435 | .001346 | 2918 | .5326 | .09350 |
+| 1024 | .1435 | .001349 | 2920 | .5326 | .09344 |
+| 2048 | .1435 | .001350 | 2920 | .5325 | .09344 |
 
-The 2048-point reference has Tc=5.13439e6 K and rhoc=261.915 g/cm³. It
+The 2048-point reference has Tc=5.134e+6 K and rhoc=261.9 g/cm³. It
 uses 926 accepted macrosteps and three rejected attempts. The largest
 recorded last-half-step luminosity and nuclear mass-defect imbalances are
 1.14e-8 and 1.53e-8 relative. Every accepted model is fully mixed; final
-species spread is zero. He3 peaks at .101914 near 720.28 billion years,
+species spread is zero. He3 peaks at .1019 near 720.3 billion years,
 then declines as its destruction overtakes production in the mixed star.
 
 The 1024-to-2048 differences are .00683% in radius, .0731% in luminosity
@@ -84,15 +84,15 @@ accepted physical history; full profiles remain in the ignored `out/` files.
 The [transport audit](results/transport_m010_1tyr.json) finds a maximum
 local conductive flux fraction of about 3.04%, with .674% in the core.
 Even with conduction included, the minimum midpoint ratio of diffusive to
-adiabatic gradient is 14.76. The final mapped source H is .51825, opacity
-source Z=.0193095, and log g=5.12428. No opacity point is closer than a
+adiabatic gradient is 14.76. The final mapped source H is .5183, opacity
+source Z=.01931, and log g=5.124. No opacity point is closer than a
 factor 30 to the high-density ceiling. The estimated plasmon luminosity is
 1.48e-8 of surface luminosity; nuclear neutrinos are accounted separately
 in the burning network. Accumulated nuclear rest-mass release corresponds
 to .0763% of conserved baryonic mass, without feedback into gravitational mass.
 
 The [nuclear audit](results/nuclear_m010_1tyr.json) gives central electron
-susceptibility .5780 of its classical value and pp SVH exponent .21037.
+susceptibility .5780 of its classical value and pp SVH exponent .2104.
 Maximum active-layer pp zeta=.0771 stays below the .2 operational limit.
 The reduced ppII/pp rate ratio reaches 7.53e-5; this does not constrain the
 missing pep or other channels.

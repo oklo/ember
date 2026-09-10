@@ -12,8 +12,8 @@ publication policy in [DATA_REPRODUCTION.md](DATA_REPRODUCTION.md).
 
 The fresh gas track completed3.30 trillion years, followed by an exact restart
 to3.40 trillion years. At3.40T the512-zone star is still fully convective:
-XH=.2033564, X3=.000970265, Teff3201.953K, Tc8.0314MK,
-rhoc258.2795g/cm3. No exhaustion or cooling milestone has been reached.
+XH=.2034, X3=.0009703, Teff3202K, Tc8.031MK,
+rhoc258.3g/cm3. No exhaustion or cooling milestone has been reached.
 The96-node gas atmosphere, refined EOS/TOPSv4 inputs and copied executable
 remained fixed. See `results/remnant_endpoints_3400gyr_forward_v1.json`.
 
@@ -22,17 +22,20 @@ Reassembly, EOS support and all108 runtime stencils pass;112 queries retain
 the prior warm grid's values and derivatives exactly. Two high-gravity3200K
 depth comparisons span actual optical depths165/339 and170/350 and pass
 at maximum matching-state differences7.13e-6 and1.93e-5. Independent
-XH=.15/3300K/g5.1 interpolation differs+2.1341% in matching temperature and
--.7868% in gas pressure. Four completed controls separate this into composition-only +1.65199% T
-and -.78424% Pgas, plus temperature/gravity +.47426% T and -.00254% Pgas.
+XH=.15/3300K/g5.1 interpolation differs+2.134% in matching temperature and
+-.7868% in gas pressure. Four completed controls separate this into composition-only +1.652% T
+and -.7842% Pgas, plus temperature/gravity +.4743% T and -.00254% Pgas.
 New XH=.15 source nodes and independent XH=.125/.175 heldouts are running.
-The candidate is selected only by a separate diagnostic fresh stellar run
-toward 3.60T; its results are not part of the completed 3.40T reference.
+The separate stellar trial using this table began losing full convection near
+3.543 trillion years. It stopped near 3.544 trillion years after reaching the
+program's total rejected-step limit, with convective mass fraction 0.7638.
+It did not reach its requested age of 3.60 trillion years. These preliminary
+results need numerical checks and are separate from the completed 3.40T reference.
 See `results/nongrey_x015_interpolation_separation_v1_audit.json` and the
 latest `HANDOFF.md`. This is gas coverage, not a cold-remnant boundary.
 
-The offline current-profile gradient ratio has a minimum1.33593 at mass
-fraction.211, down from1.58798 at3.30T. The central ratio is3.08980.
+The offline current-profile gradient ratio has a minimum1.336 at mass
+fraction.211, down from1.588 at3.30T. The central ratio is3.090.
 These are diffusive-to-adiabatic nodal gradient ratios, including conduction;
 unity is the homogeneous stability threshold. They suggest approaching loss
 of full convection without establishing a central radiative-core onset or
@@ -40,9 +43,9 @@ an extrapolated transition age. Report:
 `results/evolution_convection_margin_3400gyr_v1.json`.
 
 The retained F77 source was reproduced separately with a print-only diagnostic.
-Its AJR-opacity option first flags the center nonconvective at3.22353T,
-XH=.0175623; its current Ferguson option does so at2.94629T,
-XH=1.0643e-5 and later loses convergence during cooling. These are explicit
+Its AJR-opacity option first flags the center nonconvective at3.224T,
+XH=.01756; its current Ferguson option does so at2.946T,
+XH=1.064e-5 and later loses convergence during cooling. These are explicit
 source/prescription comparisons, not the original1997 paper's transition.
 The AJR diagnostic and an unmodified-source control have identical original
 output bytes. At equal XH~.203, AJR F77 is about75% more luminous than Ember,
@@ -125,7 +128,7 @@ an extrapolated atmosphere counts as the requested evolved model.
   family whose acceptance uses fresh source points.
 - `nongrey_hydrogen_poor_specification.json` defines a gas pilot at XH=.1/.2,
   X3=0/.12, Teff=3000..3600 K and logg=4.9/5.15/5.4. Its material rectangle
-  retains the original 16 isotherms and adds 8855 and 10103 K. These are
+  retains the original 16 isotherms and adds 8855 and 1.010e4 K. These are
   prospective calculations, not installed atmospheres or validated condensate
   physics. The source pipeline checks the hottest rows first.
 - These source jobs do not write the old condensate installation receipt or
@@ -134,14 +137,14 @@ an extrapolated atmosphere counts as the requested evolved model.
   36-plane candidate extending to true XH=0. Its largest cv error is 2.367%
   in cool, trace-H molecular gas. Direct-source curvature checks select 14
   additional hydrogen coordinates (28 planes). The refined64-plane v2
-  passed528 fresh heldouts: P/E/cv/cp maxima .05213/.10875/.18413/.19216%.
+  passed528 fresh heldouts: P/E/cv/cp maxima .05213/.1088/.1841/.1922%.
   All2048 old stellar-profile queries reproduce the old EOS byte for byte.
   This validates composition interpolation, not dense or cold remnant matter.
   The source generator's exact abundance labels distinguish sub-per-mille
   composition planes.
 - Both coarse and full-resolution XH=.1, Teff3400, logg5.15 atmosphere
-  initializers converge numerically but exceed the 10103 K opacity ceiling
-  (deepest temperatures 13445 and 13423 K). Neither is accepted. A 15000 K
+  initializers converge numerically but exceed the 1.010e4 K opacity ceiling
+  (deepest temperatures 1.345e4 and 1.342e4 K). Neither is accepted. A 15000 K
   opacity pilot also fails: He I 4471 profile extrapolation yields nonfinite
   log absorption already at rho=4.64e-7, ne=2.38e16. Merely excluding the
   highest-density source row does not solve the physical coverage problem.
@@ -159,7 +162,7 @@ an extrapolated atmosphere counts as the requested evolved model.
 Before extending material opacities to accommodate a failed atmosphere,
 check its **actual** bottom optical depth. TLUSTY's TAULAS applies to grey
 initialization and does not replace the mass grid of a supplied structure.
-New continuations reached tau11076--57904 while matching at tau100.
+New continuations reached optical depths 1.108e4–5.790e4 while matching at tau100.
 `--initial-bottom-tau` explicitly truncates a verified seed using its measured
 depth profile. The final optical depth is recorded separately. Comparisons
 at multiple bottom columns must establish matching-state convergence before
@@ -213,7 +216,7 @@ equilibrium. Rainout is a different thermodynamic/transport problem.
 derivative against species densities and the enthalpy/heat-capacity responses
 against derivatives of all species' formation constants. Its three-state
 pilot is recorded in `results/condensate_free_energy_audit_v1.json`.
-At1769.42K/.00406189bar the complete correction to cp is117496erg/g/K;
+At1769K/.004062bar the complete correction to cp is 1.175e5 erg/g/K;
 the earlier grain-only estimate was289000. This difference demonstrates why
 adding a standalone grain heat capacity would omit gas rearrangement.
 

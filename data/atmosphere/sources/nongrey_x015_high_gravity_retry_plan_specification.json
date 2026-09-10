@@ -1,0 +1,37 @@
+{
+  "scope": "Repeat two XH=.15, 3200 K, logg=5.4 atmospheres with a larger initial bottom column. The first initial guess stopped near optical depth88 and did not enclose the tau100 matching point. Full standard-source calculations and all physical checks remain required. No input currently used by a star is changed.",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-fine-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "x015-y000-t3200-g540",
+      "XH": 0.15,
+      "X3": 0,
+      "teff_K": 3200,
+      "log_g": 5.4,
+      "specification": "data/atmosphere/sources/nongrey_x015_refined_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-x015-refined-opacity-v1/plane-000/opacity/fort.63",
+      "wait_for_opacity": true,
+      "initial": "/tmp/ember-nongrey-x015-heldout-atmosphere-v1/atmosphere/final",
+      "composition_continuation": true,
+      "initial_bottom_tau": 1200,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x015-y120-t3200-g540",
+      "XH": 0.15,
+      "X3": 0.12,
+      "teff_K": 3200,
+      "log_g": 5.4,
+      "specification": "data/atmosphere/sources/nongrey_x015_refined_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-x015-refined-opacity-v1/plane-001/opacity/fort.63",
+      "wait_for_opacity": true,
+      "initial": "/tmp/ember-nongrey-x015-heldout-atmosphere-v1/atmosphere/final",
+      "composition_continuation": true,
+      "initial_bottom_tau": 1200,
+      "convective_iterations": 10
+    }
+  ]
+}

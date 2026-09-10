@@ -111,9 +111,9 @@ virial error.
 
 `scripts/audit_cms19_energy.py` reads original archive columns without any
 ember interpolation. At the pure-H node log T=4.45, log P[GPa]=1.35:
-log rho=-1.03383, log S[MJ/kg/K]=-.950347,
-dlnrho/dlnT at P=-1.10718, dlnS/dlnP at T=-.115371. These source columns
-give D=-.26498098. Thus the discrepancy cannot be attributed entirely to
+log rho=-1.034, log S[MJ/kg/K]=-.9503,
+dlnrho/dlnT at P=-1.107, dlnS/dlnP at T=-.1154. These source columns
+give D=-.2650. Thus the discrepancy cannot be attributed entirely to
 ember's interpolation. Its interpolant contributes additional differences
 and must still be audited against any corrected source.
 
@@ -121,11 +121,11 @@ The same script checks original He internal energies at rho=1 g/cm³:
 
 | T (K) | U (erg/g) |
 |---:|---:|
-| 891250.938 | 8.885870916e13 |
-| 1000000 | 8.226971636e13 |
+| 891300 | 8.886e+13 |
+| 1000000 | 8.227e+13 |
 
-The energy secant is **-6.05890e7 erg/g/K**, while the upper source node's
-entropy-derived cv is **+9.72478e7 erg/g/K**. These columns cannot jointly
+The energy secant is **-6.059e+7 erg/g/K**, while the upper source node's
+entropy-derived cv is **+9.725e+7 erg/g/K**. These columns cannot jointly
 support a reliable energy equation. Exploratory reconstructions from
 U-TS or pressure integration also developed negative heat capacities at
 joins and were rejected; none entered the library or imported data.
