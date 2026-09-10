@@ -11,6 +11,7 @@ add_library(ember
   eos_composition.cpp
   eos_mixture.cpp
   nuclear_pp.cpp
+  losses.cpp
   convection.cpp
   conduction_table.cpp
   atmosphere_grey.cpp

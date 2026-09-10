@@ -1,0 +1,31 @@
+{
+  "scope": "Lower column-boundary convergence experiment; final measured optical depths and T/Pgas at tau=100 must be compared before accepting a shallower computational domain.",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-source/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "x020-y000-t3200-g515-seedtau1000",
+      "XH": 0.2,
+      "X3": 0,
+      "teff_K": 3200,
+      "log_g": 5.15,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-002/fort.63",
+      "initial": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/pilot-x020-y000-t3200-g515-refined/final",
+      "initial_bottom_tau": 1000
+    },
+    {
+      "name": "x020-y000-t3200-g515-seedtau3000",
+      "XH": 0.2,
+      "X3": 0,
+      "teff_K": 3200,
+      "log_g": 5.15,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-002/fort.63",
+      "initial": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/pilot-x020-y000-t3200-g515-refined/final",
+      "initial_bottom_tau": 3000
+    }
+  ]
+}

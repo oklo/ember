@@ -8,7 +8,7 @@ Previously published tables remain in the existing Git history; this policy does
 not rewrite that history. Do not force-add newly generated tables or archives.
 
 The development machine retains the completed inputs under `data/`, models under
-`out/`, and recovery files under `docs/reports/2026-09-09/artifacts/`. Clearing chat
+`out/`, and recovery files under `docs/reports/2026-09-10/artifacts/`. Clearing chat
 context does not remove those files. A fresh clone does not contain the new
 complete GS98/non-grey families. C++ compilation needs no source-service access,
 but stellar runs and table-dependent tests require the corresponding local inputs.
@@ -28,7 +28,7 @@ receipt; do not silently replace a pinned hash to make an import pass.
 | TOPS opacity compositions | `fetch_tops_composition.py`, `import_tops_composition.py`, `import_tops_mixtures.py` | `audit_opacity_extension.py`, `audit_tops_heldout.py`; [opacity README](../data/opacity/README.md) |
 | AESOPUS low-temperature opacity | `archive_aesopus_mixtures.py`, `import_aesopus.py`, `import_aesopus_mixtures.py` | Original source hashes and unchanged cells; [opacity README](../data/opacity/README.md) |
 | Ioffe conduction | `import_conduction.py`; direct-source reference via `conduction_reference_probe.f90`, `generate_conduction_reference.py` | [conduction README](../data/conduction/README.md), [CONDUCTION.md](CONDUCTION.md) |
-| Non-grey gas atmospheres | `prepare_nongrey_sources.py`, `generate_nongrey_grid.py`, `archive_nongrey_grid.py`, `import_nongrey_grid.py` | `audit_nongrey_family.py`, source/chemistry/flux checks; [NONGREY.md](NONGREY.md) |
+| Non-grey gas atmospheres | `prepare_nongrey_sources.py`, `generate_nongrey_grid.py`, `archive_nongrey_grid.py`, `import_nongrey_grid.py`, `run_nongrey_plan.py`, `assemble_nongrey_grid.py` | `audit_nongrey_family.py`, source/chemistry/flux checks; [NONGREY.md](NONGREY.md) |
 | Condensate experiments | `prepare_fastchem_sources.py`, `prepare_condensate_sources.py`, `generate_condensate_opacity.py`, `run_condensate_atmosphere.py`, `generate_condensate_grid.py`, archive/collect scripts | `audit_condensate_atmosphere.py`, `audit_condensate_material.py`, `audit_condensate_interpolation.py`; [FORWARD_EVOLUTION.md](FORWARD_EVOLUTION.md) |
 
 All script names in the table are under `scripts/`. The source distributions keep
@@ -45,8 +45,12 @@ python3 scripts/generate_metal_eos.py /tmp/ember-freeeos-source-build/probe \
   /tmp/ember-gs98-source --hydrogen .3 .4 .5 .6 .7 .75 --helium3 0 .12 --jobs 4
 ```
 
-For the hydrogen-poor extension, use a separate work directory and the composition
-axis `.1 .125 .15 .175 .2 .25 .3 .4 .5 .6 .7 .75`. Import and assemble the completed
+The selected zero-hydrogen composition extension is the 64-plane family
+`data/eos/exhaustion_refined_v2/freeeos300_gs98_z020.dat`. Its explicit source
+plane manifests and [528-point audit](results/metal_eos_exhaustion_refined_v2_audit.json)
+record the refined composition axis and thermal limits. The earlier 24-plane
+family uses `.1 .125 .15 .175 .2 .25 .3 .4 .5 .6 .7 .75` at He3=0/.12.
+Generate each identified family in a separate directory. Import and assemble the completed
 source planes using the commands/formats in the EOS README and each script's
 `--help`. `assemble_metal_eos_family.py` consumes source manifests **and the raw
 files they reference**; manifests alone cannot reconstruct the EOS. Recheck
@@ -66,8 +70,10 @@ Use the committed request/manifests for the complete elemental mixture and sourc
 settings. Recreate all requested compositions before importing a family. Read actual
 request fractions: rounded filenames `x012` and `x018` denote `.125` and `.175`.
 The source service is an external dependency, so retrieval is not equivalent to
-a pinned local archive. The new hydrogen-poor family remains under interpolation
-validation; the known midpoint discrepancy must not be erased on regeneration.
+a pinned local archive. The selected hydrogen-poor family is `hydrogen_poor_refined_v4`. Its independent
+active-domain source comparisons are in
+[the v4 audit](results/opacity_hydrogen_poor_refined_v4_audit.json). Preserve
+the rejected coarse midpoint audit when reproducing the refinements.
 
 AESOPUS is retrieved from the authors' distribution, then archived and imported;
 these scripts do not implement the authors' opacity engine. The source URL, hashes
@@ -101,7 +107,7 @@ accepted runtime atmosphere. Large generated outputs stay ignored/local.
 
 The report PDF can be rebuilt from its LaTeX source and committed vector figure.
 The figure can be regenerated from the compact, committed history CSV using
-`docs/reports/2026-09-09/build_figures.py`. With local raw histories available,
+`docs/reports/2026-09-10/build_figures.py`. With local raw histories available,
 `--from-archives` repeats the history-join checks and rebuilds that CSV.
 
 For native stellar restart, use the local archived binary/checkpoint and the

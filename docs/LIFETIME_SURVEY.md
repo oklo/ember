@@ -1,13 +1,16 @@
 # Toward converged lifetimes as a function of mass and composition
 
-Checkpoint: 2026-09-09. This is the scientific target and remaining work,
+Checkpoint: 2026-09-10. This is the scientific target and remaining work,
 not a claim that Ember has produced a complete lifetime or a metallicity survey.
 
 The current shared-mixture calculation follows a fixed baryonic 0.1 Msun
 star at Z=.02 from its specified static main-sequence initial model. At
-2.85 trillion years it remains fully convective, with XH=.30289,
-R=.148761 Rsun, L=.00185757 Lsun and Teff=3106.84 K. At the preceding
-two-trillion-year endpoint, an independent repeat reproduces the full
+3.40 trillion years it remains fully convective, with XH=.2033564,
+R=.1458864 Rsun, L=.00201550 Lsun and Teff=3201.95 K. The active objective
+is an evolved helium remnant through Teff=100 K; see
+[COLD_REMNANT.md](COLD_REMNANT.md). Earlier numerical controls below refer
+to the preserved input families and do not establish later endpoint convergence.
+At the two-trillion-year endpoint, an independent repeat reproduces the full
 history and final profile byte for byte; see
 [the repeat check](results/evolution_metal_2tyr_gas_repeat.json).
 Doubling the mesh at two trillion years changes luminosity by +.06163% and

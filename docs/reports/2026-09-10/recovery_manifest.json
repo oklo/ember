@@ -1,0 +1,48 @@
+{
+  "scope": "Local recovery artifacts for the completed 0 to 3.30T fresh calculation and its exact 3.30 to 3.40T restart. Raw artifacts are ignored and not published. Physical input tables must be separately restored with the recorded hashes.",
+  "entries": [
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3300gyr-v1.json",
+      "archive": "artifacts/evolution-cold-remnant-forward-512-3300gyr-v1.json.gz",
+      "sha256": "37483d9f9c151d604f97f0f52192c12e7e3496113d6fc4c113ab7eecded711d8",
+      "gzip_sha256": "6116a5dc100553a0e3f427fecdab7f607ea78aa27df56cd3dc1da4695394df1f",
+      "bytes": 857434
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3300gyr-v1.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-forward-512-3300gyr-v1.receipt.json.gz",
+      "sha256": "c99fcb0145dac40381559621a6161c9d77400035208fae94a2d185b6adea0e06",
+      "gzip_sha256": "7c55a66e539977147828f9c951dd81fc2ad99dcaa29da1d7abdbc44929ccde32",
+      "bytes": 28218
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3400gyr-v1.json",
+      "archive": "artifacts/evolution-cold-remnant-forward-512-3400gyr-v1.json.gz",
+      "sha256": "c8a94386523b23fee603208c720159bda3bd01a45263f98565494768bc53be9d",
+      "gzip_sha256": "8d28357b5eb194b253b43a55f8508773147b2fdc2ce5803c133d8d82b39b03d7",
+      "bytes": 107129
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3400gyr-v1.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-forward-512-3400gyr-v1.receipt.json.gz",
+      "sha256": "390d978bb0dd01ddb1f10fd22d0483777c0cda6031233786bec1d6f9a6e7131e",
+      "gzip_sha256": "1a865937b1487c7372eae06115159a6ba0af275129fcca92a0d41a0daaa6a909",
+      "bytes": 28358
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3400gyr-v1.restart",
+      "archive": "artifacts/evolution-cold-remnant-forward-512-3400gyr-v1.restart.gz",
+      "sha256": "c2bfd9db83ab1efc837d8e0e220c6d7414b94ad8ce51240c2e1b895fe139f8ae",
+      "gzip_sha256": "0e2eb37f32e965a54248a86366dc181ab11f301bd5be8da8b78d1082f36704c6",
+      "bytes": 159436
+    },
+    {
+      "source": "/private/tmp/ember-cold-remnant-forward-3400gyr-v1/ember-evolve",
+      "archive": "artifacts/ember-evolve.gz",
+      "sha256": "24a6ec3de0d06bf1e58e4ff4527fa4b38f4b02774be1703cba4ba371d7f15237",
+      "gzip_sha256": "d3b2077e2c15753da5b383f80a2bbaa1cc176cdd4f704701dd7fe46b74ee827b",
+      "bytes": 427296
+    }
+  ],
+  "older_recovery": "September 9 local artifacts remain intact in docs/reports/2026-09-09/artifacts; the earlier paper remains in Git history."
+}

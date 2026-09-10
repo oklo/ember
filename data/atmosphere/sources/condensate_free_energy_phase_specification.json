@@ -1,0 +1,18 @@
+[
+  {
+    "temperature_K": 1450,
+    "pressure_bar": 100
+  },
+  {
+    "temperature_K": 1750,
+    "pressure_bar": 1
+  },
+  {
+    "temperature_K": 1450,
+    "pressure_bar": 1e-05
+  },
+  {
+    "temperature_K": 1769.41749,
+    "pressure_bar": 0.0040618898
+  }
+]

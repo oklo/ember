@@ -38,7 +38,7 @@ void CompositionAtmosphereGrid::read(std::istream &in, Mixture mixture) {
   };
   label("EMBER_COMPOSITION_ATMOSPHERE");
   int version{};
-  if (!(in >> version) || version != 1)
+  if (!(in >> version) || (version != 1 && version != 2))
     throw std::runtime_error("CompositionAtmosphereGrid: version");
   label("source");
   in >> std::quoted(source_);
@@ -89,13 +89,28 @@ void CompositionAtmosphereGrid::read(std::istream &in, Mixture mixture) {
   label("data");
   logT_.resize(cells);
   logPg_.resize(cells);
+  valid_.assign(cells, true);
+  std::size_t accepted = 0;
   for (std::size_t i = 0; i < cells; ++i) {
+    if (version == 2) {
+      int present{};
+      if (!(in >> present) || (present != 0 && present != 1))
+        throw std::runtime_error("CompositionAtmosphereGrid: invalid source mask");
+      if (!present) {
+        valid_[i] = false;
+        has_missing_states_ = true;
+        continue;
+      }
+    }
     in >> logT_[i] >> logPg_[i];
     if (!in || !positive(std::pow(10., logT_[i])) ||
         !positive(std::pow(10., logPg_[i])))
       throw std::runtime_error(
           "CompositionAtmosphereGrid: invalid or missing source state");
+    ++accepted;
   }
+  if (!accepted)
+    throw std::runtime_error("CompositionAtmosphereGrid: no source states");
   std::string extra;
   if (in >> extra)
     throw std::runtime_error("CompositionAtmosphereGrid: trailing data");
@@ -124,7 +139,48 @@ bool CompositionAtmosphereGrid::covers(double Teff, double g,
   for (std::size_t i = 0; i < q.size(); ++i)
     if (q[i] < axes_[i].front() || q[i] > axes_[i].back())
       return false;
-  return true;
+  return !has_missing_states_ || stencil(q).has_value();
+}
+
+std::optional<std::array<std::size_t, 4>>
+CompositionAtmosphereGrid::stencil(const std::array<double, 4> &q) const {
+  std::array<std::size_t, 4> preferred{};
+  for (std::size_t k = 0; k < q.size(); ++k)
+    preferred[k] = interp::locate(axes_[k], q[k]);
+  if (!has_missing_states_)
+    return preferred;
+  // At an exact knot either incident cell provides a one-sided derivative.
+  // Prefer the ordinary upper-side cell. If absent, use a complete lower-
+  // side cell, preserving closed edges of the existing supported domain.
+  // No tolerance, extrapolation, or omitted derivative corner is allowed.
+  for (unsigned alternative = 0; alternative < 16; ++alternative) {
+    auto base = preferred;
+    bool eligible = true;
+    for (unsigned k = 0; k < 4; ++k) {
+      if (!(alternative & (1U << k)))
+        continue;
+      if (!base[k] || q[k] != axes_[k][base[k]]) {
+        eligible = false;
+        break;
+      }
+      --base[k];
+    }
+    if (!eligible)
+      continue;
+    bool complete = true;
+    for (unsigned corner = 0; corner < 16; ++corner) {
+      std::size_t index = 0;
+      for (unsigned k = 0; k < 4; ++k)
+        index = index * axes_[k].size() + base[k] + bool(corner & (1U << k));
+      if (!valid_[index]) {
+        complete = false;
+        break;
+      }
+    }
+    if (complete)
+      return base;
+  }
+  return std::nullopt;
 }
 std::array<double, 4>
 CompositionAtmosphereGrid::coordinates(double Teff, double g,
@@ -137,10 +193,12 @@ CompositionAtmosphereGrid::coordinates(double Teff, double g,
 std::array<double, 5>
 CompositionAtmosphereGrid::interpolate(const std::vector<double> &f,
                                        const std::array<double, 4> &q) const {
-  std::array<std::size_t, 4> base{};
+  const auto selected = stencil(q);
+  if (!selected)
+    throw std::domain_error("CompositionAtmosphereGrid: incomplete source stencil");
+  const auto &base = *selected;
   std::array<double, 4> u{}, width{};
   for (std::size_t k = 0; k < q.size(); ++k) {
-    base[k] = interp::locate(axes_[k], q[k]);
     width[k] = axes_[k][base[k] + 1] - axes_[k][base[k]];
     u[k] = (q[k] - axes_[k][base[k]]) / width[k];
   }

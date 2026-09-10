@@ -142,7 +142,10 @@ def source_state(log, convergence, teff, logg, opacity, tau=100., max_flux_error
     for r in rows:
         if not (opacity["temperature_K"][0] <= r[3] <= opacity["temperature_K"][-1]
                 and opacity["density_g_cm3"][0] <= r[5] <= opacity["density_g_cm3"][-1]):
-            raise ValueError("converged atmosphere uses opacity outside source support")
+            raise ValueError("converged atmosphere uses opacity outside source support: "
+                             f"depth={int(r[0])}, T={r[3]:.9g}, rho={r[5]:.9g}; "
+                             f"T bounds={opacity['temperature_K'][0]:.9g}..{opacity['temperature_K'][-1]:.9g}, "
+                             f"rho bounds={opacity['density_g_cm3'][0]:.9g}..{opacity['density_g_cm3'][-1]:.9g}")
     # Radiation acceleration is very small on this branch. Check the
     # hydrostatic gas-pressure column independently; this also catches a
     # wrong requested gravity or pressure convention.
@@ -164,8 +167,51 @@ def source_state(log, convergence, teff, logg, opacity, tau=100., max_flux_error
             "effective_flux_error": effective_error, "hydrostatic_error": hydro_error,
             "chemical_density_error": chemical_error,
             "iterations": last, "depths": len(rows), "tau_bracket": [a[2], b[2]],
+            "optical_depth_range": [rows[0][2], rows[-1][2]],
+            "column_mass_range": [rows[0][1], rows[-1][1]],
             "temperature_range": [min(r[3] for r in rows), max(r[3] for r in rows)],
             "density_range": [min(r[5] for r in rows), max(r[5] for r in rows)]}
+
+
+def source_diagnostics_match(saved, current):
+    """Compare current or legacy receipts without changing recorded values.
+
+    Older receipts predate the two column/depth-range diagnostics. All other
+    fields are mandatory and must reproduce exactly; partial schemas and
+    unknown fields are rejected. The original outputs still undergo the full
+    current source-state acceptance checks before this comparison.
+    """
+    added = {'optical_depth_range', 'column_mass_range'}
+    keys = set(current)
+    if not added <= keys or set(saved) not in [keys, keys-added]:
+        return False
+    return all(saved[k] == current[k] for k in saved)
+
+
+def gas_model_state(root, spec, record):
+    """Revalidate one gas source model using its own pinned source recipe."""
+    root = Path(root)
+    key = tuple(record[k] for k in ['XH', 'X3', 'teff_K', 'log_g'])
+    contents = []
+    for kind in ['log', 'convergence']:
+        path = root/record[kind]
+        if hashlib.sha256(path.read_bytes()).hexdigest() != record[kind+'_sha256']:
+            raise ValueError('source output checksum mismatch')
+        contents.append(read_text(path))
+    inputs = {}
+    kinds = ['atmosphere_input', 'element_masses', 'parameters']
+    if 'initial_structure' in record:
+        kinds.append('initial_structure')
+    for kind in kinds:
+        path = root/record[kind]
+        if hashlib.sha256(path.read_bytes()).hexdigest() != record[kind+'_sha256']:
+            raise ValueError('source input checksum mismatch')
+        inputs[kind] = read_text(path)
+    source_inputs(inputs, spec, *key, contents[0])
+    state = source_state(*contents, key[2], key[3], spec['opacity'], tau=spec['tau'])
+    if state['depths'] != spec['depths']:
+        raise ValueError('source profile depth count mismatch')
+    return state
 
 
 def import_grid(manifest, output):
@@ -210,24 +256,7 @@ def import_grid(manifest, output):
             result=validate(directory,spec,spec['provenance'],key,planes[0]['sha256'])
             records[key]=result['diagnostics']
             continue
-        contents = []
-        for kind in ["log", "convergence"]:
-            path = manifest.parent / record[kind]
-            if hashlib.sha256(path.read_bytes()).hexdigest() != record[kind+"_sha256"]:
-                raise ValueError("source output checksum mismatch")
-            contents.append(read_text(path))
-        inputs = {}
-        kinds = ["atmosphere_input", "element_masses", "parameters"]
-        if "initial_structure" in record: kinds.append("initial_structure")
-        for kind in kinds:
-            path = manifest.parent / record[kind]
-            if hashlib.sha256(path.read_bytes()).hexdigest() != record[kind+"_sha256"]:
-                raise ValueError("source input checksum mismatch")
-            inputs[kind] = read_text(path)
-        source_inputs(inputs, spec, *key, contents[0])
-        records[key] = source_state(*contents, key[2], key[3], spec["opacity"], tau=spec["tau"])
-        if records[key]["depths"] != spec["depths"]:
-            raise ValueError("source profile depth count mismatch")
+        records[key] = gas_model_state(manifest.parent, spec, record)
     if set(records) != expected:
         raise ValueError(f"incomplete physical source grid: {len(records)}/{len(expected)} models")
     lines = ["EMBER_COMPOSITION_ATMOSPHERE 1", "source "+json.dumps(spec["source"]),

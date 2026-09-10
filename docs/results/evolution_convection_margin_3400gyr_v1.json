@@ -1,0 +1,50 @@
+{
+  "scope": "Offline nodal convection-margin diagnostics from completed homogeneous profiles, using the selected refined EOS and TOPSv4 plus WD conduction. Values above1 require convection; this is not an extrapolated onset prediction or a replacement for the runtime face criterion.",
+  "profiles": [
+    {
+      "age_yr": 3300000000000.0,
+      "central_X": 0.22229872567359757,
+      "central_diffusive_over_adiabatic_gradient": 3.7070533663784944,
+      "minimum_diffusive_over_adiabatic_gradient": 1.587978099384918,
+      "minimum_at_mass_fraction": 0.2152026978228925,
+      "minimum_row": 207,
+      "central_nabla_diffusive": 1.4452519689111563,
+      "central_nabla_adiabatic": 0.38986543382920225,
+      "input": "out/evolution-cold-remnant-forward-512-3300gyr-v1.json",
+      "input_sha256": "37483d9f9c151d604f97f0f52192c12e7e3496113d6fc4c113ab7eecded711d8",
+      "probe_sha256": "e8e9dbcefd4a2a81709cee6584275217b01b98331a9bcd8dce4e5d39f1cb38b9",
+      "probe_command": [
+        "/tmp/ember-evolution-physics-exhaustion-probe-v1",
+        "--gs98",
+        "--eos-family",
+        "data/eos/exhaustion_refined_v2/freeeos300_gs98_z020.dat",
+        "--opacity-directory",
+        "data/opacity/hydrogen_poor_refined_v4"
+      ],
+      "probe_output_sha256": "71e5cce5c7bde4b3cf0803c52f7f8dfcfd05c337a38a1fc9628fb5ff208e0f58"
+    },
+    {
+      "age_yr": 3400000000000.0,
+      "central_X": 0.2033563985717181,
+      "central_diffusive_over_adiabatic_gradient": 3.0898017687325097,
+      "minimum_diffusive_over_adiabatic_gradient": 1.335931229430046,
+      "minimum_at_mass_fraction": 0.21099511646418143,
+      "minimum_row": 206,
+      "central_nabla_diffusive": 1.2048625766874272,
+      "central_nabla_adiabatic": 0.38994818013250176,
+      "input": "out/evolution-cold-remnant-forward-512-3400gyr-v1.json",
+      "input_sha256": "c8a94386523b23fee603208c720159bda3bd01a45263f98565494768bc53be9d",
+      "probe_sha256": "e8e9dbcefd4a2a81709cee6584275217b01b98331a9bcd8dce4e5d39f1cb38b9",
+      "probe_command": [
+        "/tmp/ember-evolution-physics-exhaustion-probe-v1",
+        "--gs98",
+        "--eos-family",
+        "data/eos/exhaustion_refined_v2/freeeos300_gs98_z020.dat",
+        "--opacity-directory",
+        "data/opacity/hydrogen_poor_refined_v4"
+      ],
+      "probe_output_sha256": "3c5b8f93b411f5e8f82dd1bdd466b9ef257d9a21e61e4b477737d4bbf68d8848"
+    }
+  ],
+  "script_sha256": "360a75c7584206be319b7df59508a9b739c4cfef187ba84f5bc1fbf116e23c20"
+}

@@ -1,0 +1,22 @@
+{
+  "scope": "Independent XH=.15,X3=.005,Teff3300,logg5.1 gas heldout; do not promote without new heldouts",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "atmosphere",
+      "XH": 0.15,
+      "X3": 0.005,
+      "teff_K": 3300,
+      "log_g": 5.1,
+      "specification": "data/atmosphere/sources/nongrey_x015_heldout_specification.json",
+      "opacity": "/tmp/ember-nongrey-x015-heldout-opacity-v1/plane-000/opacity/fort.63",
+      "wait_for_opacity": true,
+      "initial": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/pilot-x020-y000-t3200-g515-refined/final",
+      "composition_continuation": true,
+      "initial_bottom_tau": 1000
+    }
+  ]
+}

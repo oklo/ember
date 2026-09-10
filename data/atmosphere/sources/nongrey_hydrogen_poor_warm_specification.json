@@ -1,0 +1,76 @@
+{
+  "source": "TLUSTY208/SYNSPEC54 hydrogen-poor warm gas pilot; not yet accepted",
+  "opacity_method": "sampling",
+  "approximation": "LTE plane-parallel gas, GS98 metal proxy, source molecular EOS; effective helium mass, isotope cross sections and broadening approximated; no condensates or irradiation",
+  "hydrogen": [
+    0.1,
+    0.2
+  ],
+  "helium3": [
+    0,
+    0.12
+  ],
+  "teff_K": [
+    3000,
+    3200,
+    3400,
+    3600
+  ],
+  "log_g": [
+    4.9,
+    5.15,
+    5.4
+  ],
+  "metals": [
+    0.0040277310873548045,
+    4.525540547589668e-05,
+    0.001113471054023328,
+    0.00921354245314597,
+    0.0056
+  ],
+  "log_temperature": [
+    14,
+    3.2605683938312873,
+    4.0044307218261075
+  ],
+  "log_density": [
+    19,
+    -13,
+    -3
+  ],
+  "wavelength_A": [
+    900,
+    300000
+  ],
+  "line_threshold": 0.0001,
+  "microturbulence_km_s": 1.0,
+  "opacity_frequencies": 30000,
+  "atmosphere_frequencies": 20000,
+  "depths": 300,
+  "alpha": 1.9,
+  "tau_top": 1e-07,
+  "tau_bottom": 1000,
+  "tau": 100,
+  "synthesis_spacing_A": 0.1,
+  "temperature_step_limit": 1.03,
+  "initial_depths": 100,
+  "initial_frequencies": 5000,
+  "temperature_K": [
+    1822.0839970536194,
+    2078.684477120571,
+    2371.4214945134977,
+    2705.384086203687,
+    3086.3779681585856,
+    3521.0264638251933,
+    4016.8856461718733,
+    4582.575694955842,
+    5227.930752774402,
+    5964.169885047075,
+    6804.092115953369,
+    7762.298930895291,
+    8855.448113540959,
+    10102.54333023623
+  ],
+  "convection_derivative_step": 1e-05,
+  "material_domain_note": "Warm pilot rectangle 1822..10103 K. The nearby accepted XH=.3, Teff=3200 K, logg=5.15 profiles stay above 2199 K. This motivates a pilot only; every converged target profile must independently remain inside the new rectangle."
+}

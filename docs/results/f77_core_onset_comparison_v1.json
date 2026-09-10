@@ -1,0 +1,301 @@
+{
+  "scope": "Summarize recorded F77 center-stability transitions, retaining their brackets.\n\nThe diagnostic adds only a print call to a separate source copy. Original\noutput bytes must agree with an unmodified-source control where supplied.\nThe first nonconvective central flag and the gradient crossing are separate\nevents because F77 has ten-percent convective-flag hysteresis.\n",
+  "runs": [
+    {
+      "name": "diagnostic",
+      "opacity": "Ferguson; 6000-model control",
+      "receipt": {
+        "returncode": 0,
+        "utc_elapsed_seconds": 32.360461711883545,
+        "child_cpu_seconds": 32.175568,
+        "input_sha256": {
+          "baseline.f": "489af0517d452db841bfd1117f528f0e51ded78064bed10c6d25d5282ee17e04",
+          "diagnostic.f": "bc83b2a6750028f373f21c2c53b35829d2c3508b43011472c68538b2442caac1",
+          "diagnostic": "92e9b36c9f333d45dba1d45c409189b9359aac7a85d23da845e682edcb9b5316",
+          "deck.in": "244c4503e77dfe671ae108cfefccfabc2c19004ab25a1c020010d195862d9afd",
+          "scvh/h_tab_i.dat": "9b199919d995d8ca84d6aecc3b818aebb963d889a5c195e3ed55f2c26ecc5db0",
+          "scvh/he_tab_i.dat": "799034124a7574e1f396ad7bd2b054d55a3c9b90e32b38b0b5f9124f4c532a55",
+          "scvh/z_tab_i.dat": "2d2dfb62ec5a189c12080d0c20145d901c41753b4dd8055f0bf3dd543680fe19",
+          "ferguson/f05_z02.dat": "d7c690980c1e31610d03c8fa779b41593b22348f4b8b8c704fa55efeeee8c94b"
+        }
+      },
+      "run_completed_without_error": true,
+      "history_scope": "Prints occur only after accepted solves; a later failure does not establish the requested endpoint.",
+      "unmodified_output_bytes_identical": true,
+      "recorded_models": 5999,
+      "first": {
+        "model": 2,
+        "age_yr": 10000.0,
+        "central_X": 0.7000000000000001,
+        "central_Y3": 1.1470733073232576e-26,
+        "central_convective_flag": 1,
+        "connected_nonconvective_core_mass_fraction": 0.0,
+        "central_gradient_ratio": 20507.760730537164,
+        "central_T_K": 312638.52791777137,
+        "central_rho": 0.04358387009553727,
+        "mesh_points": 151
+      },
+      "final": {
+        "model": 6000,
+        "age_yr": 2696862142433.751,
+        "central_X": 0.04840575154772342,
+        "central_Y3": 2.730537839681244e-05,
+        "central_convective_flag": 1,
+        "connected_nonconvective_core_mass_fraction": 0.0,
+        "central_gradient_ratio": 4.967870888946843,
+        "central_T_K": 12249158.681849066,
+        "central_rho": 563.0889186645933,
+        "mesh_points": 172
+      },
+      "central_flag_transitions": [],
+      "central_gradient_unity_crossings": []
+    },
+    {
+      "name": "ajr-20000",
+      "opacity": "AJR1983; historical opacity option",
+      "receipt": {
+        "returncode": 0,
+        "utc_elapsed_seconds": 27.51966094970703,
+        "child_cpu_seconds": 27.496426,
+        "deck_sha256": "a4031c5242f3faa9d0b22b4ac85c9c9b23820a80eb80b0e2803065033f2f665a"
+      },
+      "run_completed_without_error": true,
+      "history_scope": "Prints occur only after accepted solves; a later failure does not establish the requested endpoint.",
+      "unmodified_output_bytes_identical": true,
+      "recorded_models": 4672,
+      "first": {
+        "model": 2,
+        "age_yr": 10000.0,
+        "central_X": 0.7000000000000001,
+        "central_Y3": 1.7607519625273053e-26,
+        "central_convective_flag": 1,
+        "connected_nonconvective_core_mass_fraction": 0.0,
+        "central_gradient_ratio": 19591.74703419554,
+        "central_T_K": 318858.9269939198,
+        "central_rho": 0.04619762202434161,
+        "mesh_points": 151
+      },
+      "final": {
+        "model": 4673,
+        "age_yr": 3435988903410.715,
+        "central_X": 1.4596128804680613e-09,
+        "central_Y3": 3.028972392023004e-17,
+        "central_convective_flag": 0,
+        "connected_nonconvective_core_mass_fraction": 0.9996379047555555,
+        "central_gradient_ratio": 0.0145042802612036,
+        "central_T_K": 287464.19763631094,
+        "central_rho": 43898.42485909665,
+        "mesh_points": 179
+      },
+      "central_flag_transitions": [
+        {
+          "direction": "down",
+          "before": {
+            "model": 4428,
+            "age_yr": 3223140247552.0825,
+            "central_X": 0.01808831957864419,
+            "central_Y3": 4.632172922052265e-07,
+            "central_convective_flag": 1,
+            "connected_nonconvective_core_mass_fraction": 0.0,
+            "central_gradient_ratio": 0.9162274638363543,
+            "central_T_K": 12682497.854603818,
+            "central_rho": 1435.8277624863279,
+            "mesh_points": 172
+          },
+          "after": {
+            "model": 4429,
+            "age_yr": 3223528874706.5005,
+            "central_X": 0.01756225738834855,
+            "central_Y3": 3.9560672812182284e-07,
+            "central_convective_flag": 0,
+            "connected_nonconvective_core_mass_fraction": 0.8623435556782081,
+            "central_gradient_ratio": 0.8163556429539655,
+            "central_T_K": 12642238.527866187,
+            "central_rho": 1457.5622030992527,
+            "mesh_points": 172
+          }
+        }
+      ],
+      "central_gradient_unity_crossings": [
+        {
+          "direction": "down",
+          "before": {
+            "model": 4427,
+            "age_yr": 3222798937158.8975,
+            "central_X": 0.01854287426153042,
+            "central_Y3": 5.233237337358342e-07,
+            "central_convective_flag": 1,
+            "connected_nonconvective_core_mass_fraction": 0.0,
+            "central_gradient_ratio": 1.0110986857304565,
+            "central_T_K": 12719121.057241337,
+            "central_rho": 1420.077440481247,
+            "mesh_points": 172
+          },
+          "after": {
+            "model": 4428,
+            "age_yr": 3223140247552.0825,
+            "central_X": 0.01808831957864419,
+            "central_Y3": 4.632172922052265e-07,
+            "central_convective_flag": 1,
+            "connected_nonconvective_core_mass_fraction": 0.0,
+            "central_gradient_ratio": 0.9162274638363543,
+            "central_T_K": 12682497.854603818,
+            "central_rho": 1435.8277624863279,
+            "mesh_points": 172
+          }
+        }
+      ]
+    },
+    {
+      "name": "ferguson-20000",
+      "opacity": "Ferguson; extended current preset",
+      "receipt": {
+        "returncode": 2,
+        "utc_elapsed_seconds": 74.19522786140442,
+        "child_cpu_seconds": 74.12295,
+        "deck_sha256": "c68461d9e8baed468e17895b6673a5f26f2c9da5120e7f403b33ac79605f8ef9"
+      },
+      "run_completed_without_error": false,
+      "history_scope": "Prints occur only after accepted solves; a later failure does not establish the requested endpoint.",
+      "unmodified_output_bytes_identical": null,
+      "recorded_models": 17027,
+      "first": {
+        "model": 2,
+        "age_yr": 10000.0,
+        "central_X": 0.7000000000000001,
+        "central_Y3": 1.1470733073232576e-26,
+        "central_convective_flag": 1,
+        "connected_nonconvective_core_mass_fraction": 0.0,
+        "central_gradient_ratio": 20507.760730537164,
+        "central_T_K": 312638.52791777137,
+        "central_rho": 0.04358387009553727,
+        "mesh_points": 151
+      },
+      "final": {
+        "model": 17028,
+        "age_yr": 2954711683352.6963,
+        "central_X": 1.7401140100384252e-12,
+        "central_Y3": 2.2086261000476054e-23,
+        "central_convective_flag": 0,
+        "connected_nonconvective_core_mass_fraction": 0.9921927713459059,
+        "central_gradient_ratio": 0.05067752443011776,
+        "central_T_K": 662286.5780502486,
+        "central_rho": 43961.88666915192,
+        "mesh_points": 189
+      },
+      "central_flag_transitions": [
+        {
+          "direction": "down",
+          "before": {
+            "model": 16946,
+            "age_yr": 2946207777038.7534,
+            "central_X": 5.092725457397188e-05,
+            "central_Y3": 5.034551196849421e-14,
+            "central_convective_flag": 1,
+            "connected_nonconvective_core_mass_fraction": 0.0,
+            "central_gradient_ratio": 1.2291817722475642,
+            "central_T_K": 19545581.91547511,
+            "central_rho": 4248.794764527736,
+            "mesh_points": 172
+          },
+          "after": {
+            "model": 16947,
+            "age_yr": 2946288313243.5444,
+            "central_X": 1.0642716523087034e-05,
+            "central_Y3": 1.0314557375736855e-15,
+            "central_convective_flag": 0,
+            "connected_nonconvective_core_mass_fraction": 0.6592679291708303,
+            "central_gradient_ratio": 0.3961890801520698,
+            "central_T_K": 17969296.40440116,
+            "central_rho": 4996.617082269374,
+            "mesh_points": 172
+          }
+        }
+      ],
+      "central_gradient_unity_crossings": [
+        {
+          "direction": "down",
+          "before": {
+            "model": 16946,
+            "age_yr": 2946207777038.7534,
+            "central_X": 5.092725457397188e-05,
+            "central_Y3": 5.034551196849421e-14,
+            "central_convective_flag": 1,
+            "connected_nonconvective_core_mass_fraction": 0.0,
+            "central_gradient_ratio": 1.2291817722475642,
+            "central_T_K": 19545581.91547511,
+            "central_rho": 4248.794764527736,
+            "mesh_points": 172
+          },
+          "after": {
+            "model": 16947,
+            "age_yr": 2946288313243.5444,
+            "central_X": 1.0642716523087034e-05,
+            "central_Y3": 1.0314557375736855e-15,
+            "central_convective_flag": 0,
+            "connected_nonconvective_core_mass_fraction": 0.6592679291708303,
+            "central_gradient_ratio": 0.3961890801520698,
+            "central_T_K": 17969296.40440116,
+            "central_rho": 4996.617082269374,
+            "mesh_points": 172
+          }
+        }
+      ]
+    }
+  ],
+  "diagnostic_patch": "--- baseline.f\n+++ diagnostic.f\n@@ -358,6 +358,7 @@\n       PC=PP(1)**4\n       WRITE (6,521) NMOD,AGEYR,DTY2,NIT,XLSOL,RSOL,TEFF,T(1),RHOC,\n      1   PC,XH(1)\n+      CALL COREMON(NMOD,AGEYR)\n       IF (MOD(NMOD,NPRIN).EQ.0) CALL PRINTM\n C     THE STOPPING CONVENTION OF LB93 - THE SEQUENCE ENDS WHEN\n C     THE STAR HAS FADED BELOW A MILLIONTH OF THE SOLAR\n@@ -3653,3 +3654,23 @@\n C     COMPARISON WITH THE EQUILIBRIUM-CHAIN 1964 PROGRAM IN THE\n C     REPOSITORY ROOT.\n C     ------------------------------------------------------------------\n+\n+      SUBROUTINE COREMON(IMODEL,AGE)\n+      IMPLICIT DOUBLE PRECISION (A-H,O-Z)\n+      COMMON /GRID/ XI(201),EMPT(201),EMH(201),EMPH(201),N\n+      COMMON /VARBL/ R(201),F(201),T(201),Q(201),XH(201),X3A(201)\n+      COMMON /THRM2/ GADA(201),CPZ(201),DELZ(201)\n+      COMMON /FLAGS/ ICV(201)\n+      COMMON /CVEF/ PHIZ(201),GRZ(201),GRADZ(201),ICE(201)\n+      COMMON /STARP/ XM,XMI,ZMET,QHYD\n+      COREM=0.D0\n+      DO 10 J=1,N-1\n+      IF (ICV(J).NE.0) GO TO 20\n+      COREM=EMPT(J+1)/XM\n+   10 CONTINUE\n+   20 GAB=0.5D0*(GADA(1)+GADA(2))\n+      WRITE(6,900) IMODEL,AGE,XH(1),X3A(1),ICV(1),COREM,\n+     1 GRZ(1)/GAB,T(1),Q(1)**3,N\n+  900 FORMAT('EMBER_CORE ',I6,1P3E24.16,I3,1P4E24.16,I5)\n+      RETURN\n+      END\n",
+  "compiler_commands": [
+    [
+      "/opt/homebrew/bin/gfortran",
+      "-O2",
+      "baseline.f",
+      "-o",
+      "baseline"
+    ],
+    [
+      "/opt/homebrew/bin/gfortran",
+      "-O2",
+      "diagnostic.f",
+      "-o",
+      "diagnostic"
+    ]
+  ],
+  "decks": {
+    "ajr-20000.in": "   0.10000   0.70000   0.02000   0.00000\n  15120000 1.000E+04   0.20000 5.000E-0410000   1.36000    0    2    1\n",
+    "ferguson-20000.in": "   0.10000   0.70000   0.02000   0.00000\n  15120000 1.000E+04   0.20000 5.000E-0410000   1.36000    0    0    1\n",
+    "deck.in": "   0.10000   0.70000   0.02000   0.00000\n  151 6000 1.000E+04   0.20000 5.000E-0410000   1.36000    0    0    1\n"
+  },
+  "reproduction": "Compile the preserved source and patched copy with the listed commands; run with each recorded deck from a directory containing the pinned scvh/ and ferguson/ inputs. Compare original output after removing EMBER_CORE lines.",
+  "limitations": "These reproduce the currently retained F77 source with explicitly named opacity options. They do not recover an unarchived historical executable or deck, determine a converged transition age, or transfer that age to Ember. The core diagnostic includes conductive transport through the F77 effective opacity.",
+  "input_files_sha256": {
+    "/private/tmp/ember-f77-core-onset-v1/baseline.f": "489af0517d452db841bfd1117f528f0e51ded78064bed10c6d25d5282ee17e04",
+    "/private/tmp/ember-f77-core-onset-v1/baseline.out": "ed898d5722f9701fe10c6ca1fb6557339e988bbfdbab7d8ec823f47a88046b0d",
+    "/private/tmp/ember-f77-core-onset-v1/ajr-20000.err": "6e8658cbd2bf71044b960ff59b4371a98438c32a7d4cb54ab562294b8cc4f05d",
+    "/private/tmp/ember-f77-core-onset-v1/ferguson-20000.receipt.json": "3334adc39f81e3b514b4d01fff44bbbfce9f10d351e0f0647e5899ce5c223f2d",
+    "/private/tmp/ember-f77-core-onset-v1/diagnostic.err": "6e8658cbd2bf71044b960ff59b4371a98438c32a7d4cb54ab562294b8cc4f05d",
+    "/private/tmp/ember-f77-core-onset-v1/ferguson-20000.out": "9eb1d1d8940518527c695f8241683a5990ccff4946ea44431ade8e29efe10ac6",
+    "/private/tmp/ember-f77-core-onset-v1/ajr-20000.receipt.json": "ff5fef64bb1f6e0b82cea0c112990a3ce1de87411f996d27079dd302d2f480ec",
+    "/private/tmp/ember-f77-core-onset-v1/ferguson-20000.err": "dc99536c133e111837faaba22aab19e9696573bb35d7f3aba693b1b7052bffde",
+    "/private/tmp/ember-f77-core-onset-v1/ajr-20000.in": "a4031c5242f3faa9d0b22b4ac85c9c9b23820a80eb80b0e2803065033f2f665a",
+    "/private/tmp/ember-f77-core-onset-v1/diagnostic": "92e9b36c9f333d45dba1d45c409189b9359aac7a85d23da845e682edcb9b5316",
+    "/private/tmp/ember-f77-core-onset-v1/diagnostic.out": "3c24b3c0944b7d77c7ffcc851318b2d827c8b9d7bb2f5fe9579bc7cb8f435bf6",
+    "/private/tmp/ember-f77-core-onset-v1/baseline": "b37c44986c0cae869a44db04dbf32d01059b0b3e9a54a8f070e3a70db29d2f62",
+    "/private/tmp/ember-f77-core-onset-v1/baseline.receipt.json": "42953ebcc5474ba31d080d7659f36b6cf00b1278694d5d896ebf37bb1b39e92d",
+    "/private/tmp/ember-f77-core-onset-v1/ferguson-20000.in": "c68461d9e8baed468e17895b6673a5f26f2c9da5120e7f403b33ac79605f8ef9",
+    "/private/tmp/ember-f77-core-onset-v1/ajr-20000.out": "08660152d2fa4c8fa972a4b67e746833e680fc133e85ac4ec27b2680b934a202",
+    "/private/tmp/ember-f77-core-onset-v1/baseline.err": "6e8658cbd2bf71044b960ff59b4371a98438c32a7d4cb54ab562294b8cc4f05d",
+    "/private/tmp/ember-f77-core-onset-v1/deck.in": "244c4503e77dfe671ae108cfefccfabc2c19004ab25a1c020010d195862d9afd",
+    "/private/tmp/ember-f77-core-onset-v1/baseline-build.log": "4bc84e315f2e59ddf6d3fd3a389dfda8fdfd7f3ba8d1c94048a94bda89ca77bd",
+    "/private/tmp/ember-f77-core-onset-v1/diagnostic.f": "bc83b2a6750028f373f21c2c53b35829d2c3508b43011472c68538b2442caac1",
+    "/private/tmp/ember-f77-core-onset-v1/diagnostic.receipt.json": "b663847d61cf86ce81d6bbdcff253ebd7804ea368a89dd851bb5ab13baf7e0a2",
+    "/private/tmp/ember-f77-core-onset-v1/ajr-baseline.out": "ce6bb40b8e4eea114fdf0cad8c7ac02691c204692d12810bdb9bac83de1576c6",
+    "/private/tmp/ember-f77-core-onset-v1/ajr-baseline.err": "6e8658cbd2bf71044b960ff59b4371a98438c32a7d4cb54ab562294b8cc4f05d",
+    "/private/tmp/ember-f77-core-onset-v1/ajr-baseline.receipt.json": "056b1e5a3866aa69253b8f83fc5f461cb408976ced8e327afcd75a2c14eb3e85",
+    "/private/tmp/ember-f77-core-onset-v1/scvh/h_tab_i.dat": "9b199919d995d8ca84d6aecc3b818aebb963d889a5c195e3ed55f2c26ecc5db0",
+    "/private/tmp/ember-f77-core-onset-v1/scvh/z_tab_i.dat": "2d2dfb62ec5a189c12080d0c20145d901c41753b4dd8055f0bf3dd543680fe19",
+    "/private/tmp/ember-f77-core-onset-v1/scvh/README.md": "012d263ba0c1bf14ba4e57df430082f47277feed449217923d19f6486a318ab8",
+    "/private/tmp/ember-f77-core-onset-v1/scvh/he_tab_i.dat": "799034124a7574e1f396ad7bd2b054d55a3c9b90e32b38b0b5f9124f4c532a55",
+    "/private/tmp/ember-f77-core-onset-v1/ferguson/f05_z02.dat": "d7c690980c1e31610d03c8fa779b41593b22348f4b8b8c704fa55efeeee8c94b"
+  },
+  "script_sha256": "665a4879530d46653d0ff801cae7d8b9a27ef08c5eb23996cde3b564989dddb6"
+}

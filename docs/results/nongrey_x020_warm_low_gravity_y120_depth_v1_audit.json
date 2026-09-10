@@ -1,0 +1,184 @@
+{
+  "scope": "Compare independently validated atmosphere solutions at different columns.\n\nThe final optical depths, not TAULAS or the seed trimming parameter, define\nthe tested lower boundaries. This local comparison does not bound all grid\ncells, spectral errors or the physical uncertainty of the source model.\n",
+  "coordinates": [
+    0.2,
+    0.12,
+    3400.0,
+    4.9
+  ],
+  "models": [
+    {
+      "work": "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500",
+      "state": {
+        "T": 5774.346496006463,
+        "Pgas": 5038941.130525076,
+        "source_density": 2.597183267689491e-05,
+        "column_mass": 63.43653351396062,
+        "flux_error": 5.6244241815051055e-06,
+        "correction": 2.42e-07,
+        "effective_flux_error": 0.00020640195584398224,
+        "hydrostatic_error": 7.698713812009927e-07,
+        "chemical_density_error": 3.019806626980426e-14,
+        "iterations": 1,
+        "depths": 300,
+        "tau_bracket": [
+          91.8788477566275,
+          100.79440944640764
+        ],
+        "optical_depth_range": [
+          8.040796788343029e-09,
+          2032.5125622771639
+        ],
+        "column_mass_range": [
+          7.604135999999997e-05,
+          177.48369999999997
+        ],
+        "temperature_range": [
+          2364.726270305492,
+          8512.298263697583
+        ],
+        "density_range": [
+          7.618231309162293e-11,
+          4.903406887416667e-05
+        ]
+      },
+      "seed_bottom_tau": 500.0,
+      "initializer": {
+        "base_source_sha256": "65b3eba1355d9bf0bd4591d878fcc50741ad093661b319da460782b54f6c0840",
+        "patched_source_sha256": "effbf5624af0cdd5c950ca4f48a89834b3e39b3b4b4f2eb35d3c6892678825d0",
+        "patch_sha256": "0893be0ff90aaafbbf7b537a5b6ce9ce8abed8196ef6e4aab9437b828afa91c8",
+        "executable": "/private/tmp/ember-nongrey-conref-indexed-v1/tlusty/tlusty.exe",
+        "executable_sha256": "57306e3c08850cca98f8f5a65e9f0bbe62eaa172af83daa024b2a4ab8eaafc86",
+        "indexed_russel_lookup": true,
+        "preparation_receipt_sha256": "f371eb5ba7fcee50a24264ebff310d2d83fe643a8634f0b5860acf8a19e85c26"
+      },
+      "validation_sha256": "93e5d37bbdbb66b9713cf7ced9b70add26fc3891185cb9f8f81879d2fbb41e91",
+      "relative_difference_from_deepest": {
+        "T": -9.682111531073012e-06,
+        "Pgas": 1.9792054401390757e-05,
+        "source_density": 2.72671105685518e-05
+      }
+    },
+    {
+      "work": "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000",
+      "state": {
+        "T": 5774.402404414568,
+        "Pgas": 5038841.401501937,
+        "source_density": 2.597112451937105e-05,
+        "column_mass": 63.435278001726445,
+        "flux_error": 5.626128939839603e-06,
+        "correction": 2.07e-07,
+        "effective_flux_error": 0.00020640029747009958,
+        "hydrostatic_error": 8.9440185724321e-07,
+        "chemical_density_error": 4.285460875053104e-14,
+        "iterations": 1,
+        "depths": 300,
+        "tau_bracket": [
+          95.79133235491875,
+          105.32064862755846
+        ],
+        "optical_depth_range": [
+          8.041379818961015e-09,
+          4929.526054776963
+        ],
+        "column_mass_range": [
+          7.604135999999997e-05,
+          228.49720000000005
+        ],
+        "temperature_range": [
+          2364.720431388923,
+          9347.955499513419
+        ],
+        "density_range": [
+          7.618253092244402e-11,
+          5.741378324285917e-05
+        ]
+      },
+      "seed_bottom_tau": 1000.0,
+      "initializer": {
+        "base_source_sha256": "65b3eba1355d9bf0bd4591d878fcc50741ad093661b319da460782b54f6c0840",
+        "patched_source_sha256": "effbf5624af0cdd5c950ca4f48a89834b3e39b3b4b4f2eb35d3c6892678825d0",
+        "patch_sha256": "0893be0ff90aaafbbf7b537a5b6ce9ce8abed8196ef6e4aab9437b828afa91c8",
+        "executable": "/private/tmp/ember-nongrey-conref-indexed-v1/tlusty/tlusty.exe",
+        "executable_sha256": "57306e3c08850cca98f8f5a65e9f0bbe62eaa172af83daa024b2a4ab8eaafc86",
+        "indexed_russel_lookup": true,
+        "preparation_receipt_sha256": "f371eb5ba7fcee50a24264ebff310d2d83fe643a8634f0b5860acf8a19e85c26"
+      },
+      "validation_sha256": "7d42f5a5427812ce08b497d0a7cdb520aa8e51d42ff918a2ae8795f3ae525103",
+      "relative_difference_from_deepest": {
+        "T": 0.0,
+        "Pgas": 0.0,
+        "source_density": 0.0
+      }
+    }
+  ],
+  "relative_matching_state_tolerance": 0.0001,
+  "maximum_matching_state_relative_difference": 1.9792054401390757e-05,
+  "passed": true,
+  "input_files_sha256": {
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/provenance.json": "3c14e59fe96ec57a24c3d8b45ac5b07715de0c6bb6d19ef10169b01b58ad741a",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/final/validated.json": "93e5d37bbdbb66b9713cf7ced9b70add26fc3891185cb9f8f81879d2fbb41e91",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/final/completed.json": "5e05fb16ce80c6eb6e77e4fc53169fccf06e3c952a7c54c750855e4589ce8995",
+    "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-003/fort.63": "d252fd78b9ebcc04f940781bb419b58d562073dd1199dcf2fe8623ea79729c39",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/final/run.log.gz": "5c1607b44d114e22b3d2009dda214608f3d1167990673dace282a32b1f34fb46",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/final/fort.9.gz": "ce3e8345083b86edb5f35f1d2f6fd803296a1aa7f47131f4dbd65f9d602cb39d",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/final/fort.5.gz": "55e83f633ec5a2fb52a96684d364c2ceef630c41026633f89d67d9130b8bc8a2",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/final/ember-masses.dat.gz": "d42aefa1813a67c9226e158e2517f4eea6650ef00f6697f2b617bdf4c6e51eda",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/final/tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/final/fort.8.gz": "b1816f17790a0667194a53f2c4f2fb0d3ed1e1f13dd067d7c03042c950888203",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/initializer/fort.5.gz": "55e83f633ec5a2fb52a96684d364c2ceef630c41026633f89d67d9130b8bc8a2",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/initializer/fort.7.gz": "9e4239823d1b0e298edcb013ff84cb74f2f9f9a4ab5ec3477f83899d4f94dae5",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/initializer/fort.8.gz": "b7d1835b7365edc64085475090b867d03bc65a5ea59f8a4e0fb157494b901d55",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/initializer/fort.9.gz": "e79d783f45a27b4c1009005cbc3d6930abe5679f14a0d9be36391ac5f085cd4a",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/initializer/tas.gz": "f596950c764d5421dca37119c1d11518bf037c4fa96f476ebb5967260ce192aa",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/initializer/ember-masses.dat.gz": "d42aefa1813a67c9226e158e2517f4eea6650ef00f6697f2b617bdf4c6e51eda",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/initializer/opacity.sha256.gz": "031db2078507d7c92535b217a22c06a4f8a5d3ac2fde165b765eb1428b458ebf",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/initializer/completed.json.gz": "cffa3b275f0e1f7f578b6a56efe0c7f573f6c827c360c54dc182ba5097c3f211",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/initializer/run.log.gz": "15ede6c0878837b8243a185e13c77647a33fa7b76edcf9514b483697ba29cebe",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/refined_initializer/fort.5.gz": "55e83f633ec5a2fb52a96684d364c2ceef630c41026633f89d67d9130b8bc8a2",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/refined_initializer/fort.7.gz": "6d5e7a481e71b139efd58a0ec303b2e2f2311ee1ada3fbff17ec96f96dcb624b",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/refined_initializer/fort.8.gz": "612fd804394079ea90a4cf18e10001a7e431e1bd3831dbc86eb1d65d6954f31d",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/refined_initializer/fort.9.gz": "52c268397f7fc8344701332174b3f70f8742bb001b586f079fe6ddda59e13506",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/refined_initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/refined_initializer/tas.gz": "4455260ae389dd9ae381fc1d46ab7fbeb306fe9c128f70671d0910219e3f0331",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/refined_initializer/ember-masses.dat.gz": "d42aefa1813a67c9226e158e2517f4eea6650ef00f6697f2b617bdf4c6e51eda",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/refined_initializer/opacity.sha256.gz": "031db2078507d7c92535b217a22c06a4f8a5d3ac2fde165b765eb1428b458ebf",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/refined_initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/refined_initializer/completed.json.gz": "32f2129af0b07c10757e88eb4b0e1f0ee2ddd7a8558c62b9b7b9f2a55b7afe29",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau500/refined_initializer/run.log.gz": "713824d4b8d35b7cf305dd914d27b66e2a105eccf7397c5d7ef9273d2d8bce7c",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/provenance.json": "28cf678f1aaa1ddb5d3c0eea3db0171d375d8b3b90017c2419943784d8b11ab8",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/final/validated.json": "7d42f5a5427812ce08b497d0a7cdb520aa8e51d42ff918a2ae8795f3ae525103",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/final/completed.json": "1a40df49d5f5ee21c5161a0bddca7b3fb083c84948cc2e1815696df44cabfb8d",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/final/run.log.gz": "3750287ce054197ce38e80a449c8c7f3c1e723960db89ed5db841341622658e2",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/final/fort.9.gz": "0593689461d0a981a669162c2fb137861eff80d8a252394da6ca3e705364a15e",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/final/fort.5.gz": "55e83f633ec5a2fb52a96684d364c2ceef630c41026633f89d67d9130b8bc8a2",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/final/ember-masses.dat.gz": "d42aefa1813a67c9226e158e2517f4eea6650ef00f6697f2b617bdf4c6e51eda",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/final/tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/final/fort.8.gz": "3c171396bf288266cd77459c9ac812226ce40309126211c687b80040d66ac510",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/initializer/fort.5.gz": "55e83f633ec5a2fb52a96684d364c2ceef630c41026633f89d67d9130b8bc8a2",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/initializer/fort.7.gz": "ae59c80264e406327640b2fbd090fdf528689d3dc39502daafc6f696509aeb7f",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/initializer/fort.8.gz": "adf7d85e961204a41ad929d20aebbe1777b1255389dbf4c3d7e066f1ed5f30e4",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/initializer/fort.9.gz": "41b605ae6ce22e06bc6267d80a165c2deb7e9234819c181675dda787d5c8182a",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/initializer/tas.gz": "f596950c764d5421dca37119c1d11518bf037c4fa96f476ebb5967260ce192aa",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/initializer/ember-masses.dat.gz": "d42aefa1813a67c9226e158e2517f4eea6650ef00f6697f2b617bdf4c6e51eda",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/initializer/opacity.sha256.gz": "031db2078507d7c92535b217a22c06a4f8a5d3ac2fde165b765eb1428b458ebf",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/initializer/completed.json.gz": "338782e8537cadeb284313cf301af3d6950e2d1a6f55d5a256570453a92b1505",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/initializer/run.log.gz": "401585075e4cc979bdb4640fcf75ba4a3f7d25f2f77f16be4aabd3be69183daa",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/refined_initializer/fort.5.gz": "55e83f633ec5a2fb52a96684d364c2ceef630c41026633f89d67d9130b8bc8a2",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/refined_initializer/fort.7.gz": "20671e9d4c4d23c62968ade671af1cdaedf0164752b81fe12dba9222bacddd87",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/refined_initializer/fort.8.gz": "4145a2b398bfc787a2d924d6608122f7188403cf468e114a954c57d1bcab1f3d",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/refined_initializer/fort.9.gz": "cb43bc809100096d3c445d753cd10072aabbbfcf75e51656f7b850c7b1fb6b14",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/refined_initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/refined_initializer/tas.gz": "4455260ae389dd9ae381fc1d46ab7fbeb306fe9c128f70671d0910219e3f0331",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/refined_initializer/ember-masses.dat.gz": "d42aefa1813a67c9226e158e2517f4eea6650ef00f6697f2b617bdf4c6e51eda",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/refined_initializer/opacity.sha256.gz": "031db2078507d7c92535b217a22c06a4f8a5d3ac2fde165b765eb1428b458ebf",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/refined_initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/refined_initializer/completed.json.gz": "2936aeca6701eaf0fc2b3027e6252cf096746bca9c96610a7bff1f071ca6bc12",
+    "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/refined_initializer/run.log.gz": "16642fca15180a3aee53fd3ef2d28ebd8f40fdeaa84cd6a2f6c77c2d90163bdc"
+  },
+  "script_sha256": "21d03327582104aeb75173f535f59fcb2d6d9475e144f26d7feadf89e5bce061"
+}

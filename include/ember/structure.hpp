@@ -2,6 +2,7 @@
 #include "ember/eos.hpp"
 #include "ember/model.hpp"
 #include "ember/nuclear.hpp"
+#include "ember/losses.hpp"
 #include "ember/opacity.hpp"
 #include <array>
 
@@ -12,7 +13,7 @@ namespace ember {
 //
 //   (1) mass:      d(ln r)/dm  = 1/(4 pi r^3 rho)
 //   (2) hydrostatic: d(ln P)/dm = -G m /(4 pi r^4 P)
-//   (3) energy:    dL/dm       = eps_deposited - du/dt - P d(1/rho)/dt
+//   (3) energy:    dL/dm       = eps_deposited - eps_thermal_nu - du/dt - P d(1/rho)/dt
 //   (4) transport: d(ln T)/dm  = grad * d(ln P)/dm
 //
 // Nuclear neutrinos are already removed from eps_deposited. Internal energy
@@ -39,6 +40,7 @@ struct Physics {
   ConvectiveCriterion criterion{ConvectiveCriterion::schwarzschild};
   double alpha_semiconvection{};     // Langer mixing-only closure; zero disables
   double alpha_thermohaline{};       // Kippenhahn closure; zero disables
+  const NeutrinoLosses* neutrino_losses{}; // nullptr preserves the zero-loss control
 };
 
 // Evaluate one zone.  `dt` <= 0 means a static model: the time-dependent term

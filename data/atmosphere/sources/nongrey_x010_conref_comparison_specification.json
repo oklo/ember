@@ -1,0 +1,35 @@
+{
+  "scope": "Compare shorter native convective initialization at the slowly converging low-gravity XH=.1 source. ICONRE stops the heuristic refinement after this many global iterations; convergence and final canonical replay retain their strict checks.",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "x010-y000-t3200-g490-conref10",
+      "XH": 0.1,
+      "X3": 0,
+      "teff_K": 3200,
+      "log_g": 4.9,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-000/fort.63",
+      "initial": "/tmp/ember-nongrey-x010-lower-boundary-v2/x010-y000-t3400-g515-seedtau800/final",
+      "composition_continuation": false,
+      "initial_bottom_tau": 449.87306015227927,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x010-y000-t3200-g490-conref20",
+      "XH": 0.1,
+      "X3": 0,
+      "teff_K": 3200,
+      "log_g": 4.9,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-000/fort.63",
+      "initial": "/tmp/ember-nongrey-x010-lower-boundary-v2/x010-y000-t3400-g515-seedtau800/final",
+      "composition_continuation": false,
+      "initial_bottom_tau": 449.87306015227927,
+      "convective_iterations": 20
+    }
+  ]
+}

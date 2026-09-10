@@ -1,0 +1,33 @@
+{
+  "scope": "XH=.1 warm-gas lower-boundary comparison; supported canonical final models and matching-state agreement are required.",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "x010-y000-t3400-g515-seedtau400",
+      "XH": 0.1,
+      "X3": 0,
+      "teff_K": 3400,
+      "log_g": 5.15,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-000/fort.63",
+      "initial": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/pilot-x020-y000-t3200-g515-refined/final",
+      "initial_bottom_tau": 400,
+      "composition_continuation": true
+    },
+    {
+      "name": "x010-y000-t3400-g515-seedtau800",
+      "XH": 0.1,
+      "X3": 0,
+      "teff_K": 3400,
+      "log_g": 5.15,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-000/fort.63",
+      "initial": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/pilot-x020-y000-t3200-g515-refined/final",
+      "initial_bottom_tau": 800,
+      "composition_continuation": true
+    }
+  ]
+}

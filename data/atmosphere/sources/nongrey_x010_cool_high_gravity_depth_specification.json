@@ -1,0 +1,33 @@
+{
+  "scope": "Two deeper controls of the XH=.1, Teff3200K, logg5.4 gas models whose final optical depths are only165/170. Retain the full verified seed column instead of trimming it. Compare actual bottom optical depths and canonical matching states before adoption; no automatic table installation.",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-fine-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "x010-y000-t3200-g540-deep",
+      "XH": 0.1,
+      "X3": 0,
+      "teff_K": 3200,
+      "log_g": 5.4,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-000/fort.63",
+      "initial": "/tmp/ember-nongrey-x010-lower-boundary-v2/x010-y000-t3400-g515-seedtau800/final",
+      "composition_continuation": false,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x010-y120-t3200-g540-deep",
+      "XH": 0.1,
+      "X3": 0.12,
+      "teff_K": 3200,
+      "log_g": 5.4,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-001/fort.63",
+      "initial": "/tmp/ember-nongrey-x010-lower-boundary-v2/x010-y000-t3400-g515-seedtau800/final",
+      "composition_continuation": true,
+      "convective_iterations": 10
+    }
+  ]
+}

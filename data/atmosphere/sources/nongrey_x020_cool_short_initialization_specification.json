@@ -1,0 +1,22 @@
+{
+  "scope": "Low-gravity3000K initialization control from the accepted same-temperature central-gravity model. Compare direct canonical continuation and a short native refinement. Every final must pass full source checks; neither unconverged state nor initializer becomes a grid node.",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "x020-y000-t3000-g490-conref10",
+      "XH": 0.2,
+      "X3": 0,
+      "teff_K": 3000,
+      "log_g": 4.9,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-v1/plane-002/opacity/fort.63",
+      "initial": "/tmp/ember-nongrey-x020-cool-retry-v1/x020-y000-t3000-g515/final",
+      "wait_for_seed": true,
+      "initial_bottom_tau": 300,
+      "convective_iterations": 10
+    }
+  ]
+}

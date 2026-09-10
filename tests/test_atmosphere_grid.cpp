@@ -47,22 +47,31 @@ double temperature(double x, double y, double t, double g) {
 double pressure(double x, double y, double t, double g) {
   return 5. + .2 * t + .3 * g - .4 * x + .15 * y - .03 * x * y * t * g;
 }
-std::string fixture() {
+std::string fixture(int version = 1, int missing = -1) {
   const auto c = solar_scaled(.7, .02);
   std::ostringstream s;
   s << std::setprecision(17);
-  s << "EMBER_COMPOSITION_ATMOSPHERE 1\nsource \"synthetic multiaffine "
+  s << "EMBER_COMPOSITION_ATMOSPHERE " << version << "\nsource \"synthetic multiaffine "
        "fixture, not physical data\"\n"
        "approximation \"test source\"\nbasis baryon_mass\ntau 100\nmetals";
   for (std::size_t j = 3; j < NSPEC; ++j)
     s << ' ' << c.X[j];
   s << "\nhydrogen 3 .4 .55 .7\nhelium3 2 0 .12\nlog_teff 2 3.4 3.6\nlog_g 2 "
        "4.5 5.5\ndata\n";
+  int index = 0;
   for (double x : {.4, .55, .7})
     for (double y : {0., .12})
       for (double t : {3.4, 3.6})
-        for (double g : {4.5, 5.5})
+        for (double g : {4.5, 5.5}) {
+          if (version == 2) {
+            if (index++ == missing) {
+              s << "0\n";
+              continue;
+            }
+            s << "1 ";
+          }
           s << temperature(x, y, t, g) << ' ' << pressure(x, y, t, g) << '\n';
+        }
   return s.str();
 }
 } // namespace
@@ -83,6 +92,43 @@ int main() {
   c.X[2] -= .08;
   const double t = std::pow(10., 3.47), g = std::pow(10., 5.14);
   const auto s = grid.eval(t, g, c);
+  std::istringstream complete_input(fixture(2)), partial_input(fixture(2, 0));
+  CompositionAtmosphereGrid complete(eos, complete_input, proxy);
+  CompositionAtmosphereGrid partial(eos, partial_input, proxy);
+  const auto identical = complete.eval(t, g, c);
+  check(!grid.has_missing_states() && !complete.has_missing_states() &&
+            partial.has_missing_states() && identical.T == s.T &&
+            identical.P == s.P && identical.dlnP_dlng == s.dlnP_dlng,
+        "version-2 complete source preserves the original interpolant exactly");
+  check(!partial.covers(t, g, c) && throws([&] { partial.eval(t, g, c); }) &&
+            throws([&] { partial.composition_response(t, g, c); }),
+        "missing source corner rejects both values and composition responses");
+  check(!partial.covers(std::pow(10., 3.6), g, c),
+        "zero value weight cannot hide a missing derivative corner");
+  std::istringstream edge_input(fixture(2, 16));
+  CompositionAtmosphereGrid edge(eos, edge_input, proxy);
+  auto knot = solar_scaled(.55, .02);
+  knot.basis = AbundanceBasis::baryon_mass;
+  knot.X[1] = .08;
+  knot.X[2] -= .08;
+  const auto closed = edge.eval(t, g, knot);
+  check(edge.covers(t, g, knot) &&
+            near(closed.T, grid.eval(t, g, knot).T) &&
+            near(edge.composition_response(t, g, knot).dlnT_dXH,
+                 grid.composition_response(t, g, knot).dlnT_dXH),
+        "exact knot retains the complete incident cell and its one-sided derivatives");
+  knot.X[0] += 1e-8;
+  knot.X[2] -= 1e-8;
+  check(!edge.covers(t, g, knot),
+        "incident-cell selection cannot extrapolate across an unsupported edge");
+  auto supported = c;
+  supported.X[2] -= .09;
+  supported.X[0] += .09;
+  const auto intact = partial.eval(t, g, supported), old = grid.eval(t, g, supported);
+  check(partial.covers(t, g, supported) && intact.T == old.T &&
+            intact.P == old.P && intact.dlnT_dlnTeff == old.dlnT_dlnTeff &&
+            intact.dlnP_dlng == old.dlnP_dlng,
+        "a missing state leaves other complete cells and their derivatives unchanged");
   const double radius = .15 * constants::Rsun;
   PPChains nuclear;
   const auto seed = example::stellar_seed(64, .1 * constants::Msun, radius, c,

@@ -9,6 +9,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+from fetch_tops_composition import fraction_label
 
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
@@ -26,7 +27,9 @@ def main():
             raise ValueError('plane metadata does not match family specification')
         if raw['probe_sha256']!=spec['probe_sha256'] or raw['source_archive_sha256']!=spec['source_archive_sha256']:
             raise ValueError('inconsistent source identity')
-        name=f'freeeos300_gs98_x{round(1000*x):03d}_he3{round(1000*y):03d}'
+        # Refinement may require sub-per-mille abundances. Rounded labels
+        # alias distinct physical planes; preserve the exact request value.
+        name=f'freeeos300_gs98_x{fraction_label(x,1000)}_he3{fraction_label(y,1000)}'
         target=a.output/(name+'_potential.dat');saved=archive/(name+'_raw.json.gz')
         if saved.exists() and digest(saved)!=digest(source):raise ValueError('refusing to replace a different raw source')
         shutil.copy2(source,saved)

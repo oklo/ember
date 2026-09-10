@@ -36,6 +36,7 @@ struct EvolutionStep {
   // Zero nuclear release reports zero mass imbalance (cold no-burning limit).
   double luminosity_balance{},nuclear_mass_balance{},convective_mass_fraction{};
   double nuclear_luminosity{},gravitational_luminosity{},neutrino_luminosity{};
+  double thermal_neutrino_luminosity{}; // positive sink; separate from nuclear neutrinos
   std::size_t mixed_regions{};
 };
 // Converged block iteration of burning/mixing and implicit thermal structure.

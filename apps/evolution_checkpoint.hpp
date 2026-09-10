@@ -39,13 +39,28 @@ inline std::string file_identity(const fs::path& path) {
 }
 
 inline Identities input_identities(const fs::path& executable,const fs::path& data,
-                                  const std::string& atmosphere,const std::string& eos) {
+                                  const std::string& atmosphere,const std::string& eos,
+                                  const fs::path& opacity_directory) {
   std::set<fs::path> paths;
   auto directory=[&](const fs::path& path) {
     for(const auto& entry:fs::directory_iterator(path))
       if(entry.is_regular_file() && entry.path().extension()==".dat")paths.insert(fs::canonical(entry.path()));
   };
   for(const auto* name:{"eos","opacity","conduction","atmosphere"})directory(data/name);
+  // Explicit selection and every referenced plane are part of restart
+  // identity, including planes outside the selected manifest's directory.
+  for(const auto* name:{"aesopus21_gs98_mixture.dat","tops_gs98_mixture_low.dat","tops_gs98_mixture_high.dat"}) {
+    const auto manifest=fs::canonical(opacity_directory/name);paths.insert(manifest);
+    std::ifstream in(manifest);std::string magic,axis,label;int version{};std::size_t count{};
+    in>>magic>>version>>count>>axis>>label;
+    if(!in || magic!="EMBER_OPACITY_MIXTURE" || version!=1 || count<2 || count>100)
+      throw std::runtime_error("invalid selected opacity manifest");
+    for(std::size_t i=0;i<count;++i) {
+      double z{};std::string file;in>>z>>std::quoted(file);
+      if(!in || file.empty())throw std::runtime_error("invalid selected opacity source path");
+      paths.insert(fs::canonical(manifest.parent_path()/file));
+    }
+  }
   if(atmosphere.starts_with("nongrey:"))paths.insert(fs::canonical(atmosphere.substr(8)));
   if(eos.starts_with("metal:")) {
     const auto family=fs::canonical(eos.substr(6));paths.insert(family);directory(family.parent_path());
@@ -54,6 +69,7 @@ inline Identities input_identities(const fs::path& executable,const fs::path& da
   // The binary can be copied to a new snapshot directory without changing
   // its identity. Data paths are kept explicit to avoid ambiguous families.
   identities["executable"]=file_identity(executable);
+  identities["opacity_selection"]=fs::canonical(opacity_directory).string();
   for(const auto& path:paths)identities[path.string()]=file_identity(path);
   return identities;
 }

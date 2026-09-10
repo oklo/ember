@@ -22,7 +22,7 @@ namespace ember {
 struct EosTerm {
   double P{};          // dyn/cm^2
   double E{};          // erg/g
-  double S{};          // erg/g/K   (optional; used for cooling budgets)
+  double S{};          // erg/g/K; components must declare their entropy reference
   double dP_dlnT{};    // at fixed rho
   double dP_dlnRho{};  // at fixed T
   double dE_dlnT{};    // at fixed rho
@@ -53,8 +53,9 @@ public:
   }
 };
 
-// Ideal non-degenerate ions.  Replaced by a Coulomb-corrected version once the
-// one-component-plasma terms go in; the interface does not change.
+// Ideal non-degenerate ions. Translational entropy includes ideal mixing;
+// nuclear internal partition functions are unity. This classical component
+// alone is not a quantum-ion or crystalline EOS.
 class IonGas final : public EosComponent {
 public:
   EosTerm eval(double T, double rho, const Composition&) const override;

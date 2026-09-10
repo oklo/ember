@@ -3,6 +3,7 @@
 import math
 import gzip
 import hashlib
+import itertools
 import json
 from pathlib import Path
 import struct
@@ -12,12 +13,45 @@ import tempfile
 import unittest
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"scripts"))
-from generate_nongrey_grid import composition, resample_initial_structure, input_fingerprint, continuation_structure
-from import_nongrey_grid import source_state, source_inputs, import_grid
+from generate_nongrey_grid import composition, resample_initial_structure, input_fingerprint, continuation_structure, truncate_initial_structure
+from import_nongrey_grid import source_state, source_inputs, import_grid, source_diagnostics_match
 from nongrey_opacity import read_table, validate_table, merge_isotherms
+from assemble_nongrey_grid import complete_cells
 
 
 class SourceAcceptance(unittest.TestCase):
+    def test_seed_bottom_uses_measured_optical_depth(self):
+        n=40
+        tau=[10**(-5+9*i/(n-1)) for i in range(n)]
+        mass=[2*t for t in tau]
+        rows=[[3000+t**.25, 1e12, 1e-5, 1e15] for t in tau]
+        seed=f'{n} -4\n'+'\n'.join(map(str,mass))+'\n'+'\n'.join(' '.join(map(str,r)) for r in rows)+'\n'
+        log='FINAL MODEL ATMOSPHERE\n'+'\n'.join(f'{i+1} {m} {t} 3000 1e12 1e-5 1e7 -3 .5 .5 1' for i,(m,t) in enumerate(zip(mass,tau)))
+        result=truncate_initial_structure(seed,log,1000)
+        words=result.split(); count=int(words[0])
+        self.assertLess(count,n)
+        self.assertEqual(float(words[2]),mass[0])
+        self.assertAlmostEqual(float(words[1+count]),2000,places=9)
+        self.assertEqual(int(resample_initial_structure(result,n).split()[0]),n)
+        with self.assertRaisesRegex(ValueError,'strictly inside'):
+            truncate_initial_structure(seed,log,1e5)
+        with self.assertRaisesRegex(ValueError,'mass grid'):
+            truncate_initial_structure(seed,log.replace(f'1 {mass[0]} ', '1 99 '),1000)
+
+    def test_warm_composition_extension_preserves_complete_old_cells(self):
+        old_axes = [[.3, .7], [0, .12], [2600, 2800, 3000, 3200], [4.9, 5.15, 5.4]]
+        old = set(itertools.product(*old_axes))
+        added = set(itertools.product([.2], old_axes[1], [3000, 3200], old_axes[3]))
+        axes = [[.2, .3, .7], *old_axes[1:]]
+        cells = complete_cells(axes, old | added)
+        self.assertEqual([cell for cell in cells if cell[0][0] == .3], complete_cells(old_axes, old))
+        extension = [cell for cell in cells if cell[0][0] == .2]
+        self.assertEqual(len(extension), 2)
+        self.assertTrue(all(cell[2] == [3000, 3200] for cell in extension))
+        # A lone accepted model cannot stand in for an interpolation cell.
+        lone = complete_cells(axes, old | {(.2, 0, 3200, 5.15)})
+        self.assertEqual(len(lone), len(complete_cells(old_axes, old)))
+
     def setUp(self):
         self.opacity={"temperature_K":[1000,10000],"density_g_cm3":[1e-13,1e-2]}
         self.flux=5.670374419e-5*2800**4/(4*math.pi)
@@ -41,6 +75,24 @@ class SourceAcceptance(unittest.TestCase):
         self.assertAlmostEqual(s["Pgas"],1e7,places=5)
         self.assertLess(s["tau_bracket"][0],100)
         self.assertGreater(s["tau_bracket"][1],100)
+
+    def test_legacy_depth_metadata_preserves_exact_recorded_diagnostics(self):
+        current=self.parse()
+        added={'optical_depth_range','column_mass_range'}
+        legacy={k:v for k,v in current.items() if k not in added}
+        self.assertTrue(source_diagnostics_match(current,current))
+        self.assertTrue(source_diagnostics_match(legacy,current))
+        for saved in [current,legacy]:
+            for name in ['T','Pgas','flux_error','depths','temperature_range']:
+                missing=dict(saved);missing.pop(name)
+                self.assertFalse(source_diagnostics_match(missing,current))
+            altered=dict(saved);altered['T']*=1.0000000001
+            self.assertFalse(source_diagnostics_match(altered,current))
+            self.assertFalse(source_diagnostics_match({**saved,'unknown':1},current))
+        partial=dict(current);partial.pop('optical_depth_range')
+        self.assertFalse(source_diagnostics_match(partial,current))
+        changed=dict(current);changed['optical_depth_range']=[1e-6,100]
+        self.assertFalse(source_diagnostics_match(changed,current))
 
     def test_rejects_wrong_flux_even_with_small_correction(self):
         with self.assertRaisesRegex(ValueError,"flux error"):
@@ -97,6 +149,16 @@ class SourceAcceptance(unittest.TestCase):
             self.assertAlmostEqual(rho*t/(.03*m),1,places=13)
         with self.assertRaises(ValueError): resample_initial_structure(seed,10)
         with self.assertRaises(ValueError): resample_initial_structure(seed.replace("20 -4","20 -3"),61)
+        fine=resample_initial_structure(seed,61)
+        with self.assertRaises(ValueError):resample_initial_structure(fine,20)
+        coarsened=list(map(float,resample_initial_structure(fine,20,allow_coarsen=True).split()))
+        self.assertEqual(coarsened[:2],[20,-4])
+        for i,m in enumerate(coarsened[2:22]):
+            t,ne,rho,nt=coarsened[22+4*i:26+4*i]
+            self.assertAlmostEqual(m/mass[i],1,places=13)
+            self.assertAlmostEqual(t/(3000*m**.2),1,places=13)
+            self.assertAlmostEqual(rho*t/(.03*m),1,places=13)
+        with self.assertRaises(ValueError):resample_initial_structure(fine,10,allow_coarsen=True)
 
     def test_continuation_preserves_hydrostatic_pressure(self):
         mass=[10**(-4+5*i/19) for i in range(20)]

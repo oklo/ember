@@ -8,7 +8,7 @@ from pathlib import Path
 
 from archive_condensate_model import archive_model, MODEL_FILES
 from generate_nongrey_grid import composition, input_fingerprint, temperatures, sequence
-from import_nongrey_grid import read_text, source_inputs, source_state
+from import_nongrey_grid import read_text, source_inputs, source_state, source_diagnostics_match
 from prepare_nongrey_sources import digest
 from nongrey_opacity import validate_table
 from validate_condensate_model import original, validate, PHYSICAL_KEYS
@@ -53,7 +53,7 @@ def gas_state(work, reference, opacity=None):
     result=source_state(log,read_text(original(work,'fort.9')),*coords[2:],
                         {'temperature_K':temperatures(spec),'density_g_cm3':sequence(spec['log_density'])},spec['tau'])
     saved=json.loads(read_text(original(work,'validated.json')))
-    if saved['provenance']!=provenance or saved['diagnostics']!=result:
+    if saved['provenance']!=provenance or not source_diagnostics_match(saved['diagnostics'],result):
         raise ValueError('gas validation receipt differs')
     return result
 

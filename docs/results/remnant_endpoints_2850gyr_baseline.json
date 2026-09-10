@@ -1,0 +1,61 @@
+{
+  "scope": "Report bracketed exhaustion and cooling milestones without extrapolation.\n\nAll recrossings are retained. A threshold crossing is not a claim of permanent\nextinction, a white-dwarf classification, or a converged endpoint age.\n",
+  "age_range_yr": [
+    2750000000000,
+    2850000000000
+  ],
+  "accepted_states": 38,
+  "run_reached_requested_age": true,
+  "core_hydrogen": [
+    {
+      "threshold": 0.001,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    },
+    {
+      "threshold": 0.0001,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    },
+    {
+      "threshold": 1e-05,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    }
+  ],
+  "nuclear_deposited_over_photon_luminosity": null,
+  "nuclear_diagnostic_scope": "Deposited luminosity of the selected network; pp-only in the present driver. Missing legacy data are not interpreted as zero burning.",
+  "temperature": [
+    {
+      "threshold": 1000,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    },
+    {
+      "threshold": 500,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    },
+    {
+      "threshold": 100,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    }
+  ],
+  "temperature_scope": "Downward crossings are cooling-temperature milestones only. Establish a degenerate remnant, residual-burning regime and source validity separately.",
+  "final": {
+    "age_yr": 2850000000000,
+    "central_X": 0.3028875982546768,
+    "Teff_K": 3106.83751480519,
+    "L_Lsun": 0.0018575705980597992,
+    "hydrogen_mass_Msun": null,
+    "nuclear_deposited_Lsun": null
+  },
+  "input_sha256": "b2d67c169fb29d6a87b2fb66ea8722427a2ce35c8f6b9dc475a6b2b6f15ed0b4"
+}

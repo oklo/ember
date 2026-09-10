@@ -1,0 +1,21 @@
+{
+  "scope": "Independent lower-boundary check at the warm grid high-gravity edge, whose accepted shallower solution ends at actual tau313. Canonical matching conditions must converge against the deeper source solution.",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "x020-y000-t3200-g540-deep",
+      "XH": 0.2,
+      "X3": 0,
+      "teff_K": 3200,
+      "log_g": 5.4,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-002/fort.63",
+      "initial": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/pilot-x020-y000-t3200-g515-refined/final",
+      "wait_for_seed": true,
+      "initial_bottom_tau": 3000
+    }
+  ]
+}

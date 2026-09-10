@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <optional>
+#include <unordered_map>
 
 namespace ember {
 using namespace constants;
@@ -124,6 +126,15 @@ ThermonuclearRate pp_bare_rate(double T,PPReaction which,PPRates prescription) {
     const auto v=which==PPReaction::pp?pp(T*1e-9):which==PPReaction::he3_he3?he3he3(T*1e-9):he3he4(T*1e-9);
     return {v.v,v.dlnv_dlnT};
   }
+  // Bare SFII quadrature depends only on temperature and reaction, whereas
+  // burning Newton iterations change abundances at fixed thermal states.
+  // Exact, bounded, thread-local memoization leaves screening and every
+  // composition response fully state-dependent and preserves result bits.
+  using CachedRates=std::array<std::optional<ThermonuclearRate>,3>;
+  thread_local std::unordered_map<double,CachedRates> cache;
+  const auto index=static_cast<std::size_t>(which); // reaction() validated it above
+  const auto found=cache.find(T);
+  if(found!=cache.end() && found->second[index])return *found->second[index];
   static const Quadrature q;
   const double kt=kB*T, eg=gamow_energy(r), peak=std::cbrt(eg*kt*kt/4);
   const double mu=r.m1*r.m2/(r.m1+r.m2);
@@ -135,7 +146,10 @@ ThermonuclearRate pp_bare_rate(double T,PPReaction which,PPRates prescription) {
     integral+=term;moment+=term*energy/kt;
   }
   const double rate=NA*std::sqrt(8/(M_PI*mu))/std::pow(kt,1.5)*integral;
-  return {rate,integral>0?-1.5+moment/integral:0};
+  const ThermonuclearRate result{rate,integral>0?-1.5+moment/integral:0};
+  if(found==cache.end() && cache.size()>=8192)cache.clear();
+  cache[T][index]=result;
+  return result;
 }
 
 ScreeningState pp_screening(double T,double rho,const Composition& comp,PPReaction which,PPScreening model) {

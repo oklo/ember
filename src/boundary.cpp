@@ -26,6 +26,12 @@ CentralResidual central_residual(const Model& model, const Physics& phys, double
   D heating(n.eps);
   heating.d[1] = n.eps * n.dlneps_dlnRho;
   heating.d[2] = n.eps * n.dlneps_dlnT;
+  if(phys.neutrino_losses) {
+    const auto loss=evaluate_losses(phys.neutrino_losses,T,rho.value,model.comp.front());
+    heating.value-=loss.eps;
+    heating.d[1]-=loss.eps*loss.dlneps_dlnRho;
+    heating.d[2]-=loss.eps*loss.dlneps_dlnT;
+  }
   if (dt > 0.0) {
     if (!phys.eos->has_internal_energy())
       throw std::logic_error("central_residual: EOS has no validated internal energy for time dependence");

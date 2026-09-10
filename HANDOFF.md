@@ -1,3 +1,444 @@
+# Autonomous continuation and September 10 publication — 2026-09-10 12:44 UTC
+
+This entry supersedes older live-status paragraphs. The completed reference is
+still **3.40T**, fully convective, gas-only. No hydrogen exhaustion or cooling
+endpoint has been reached. The user reaffirmed autonomous evolution through
+Teff=100 K, then explicitly requested replacing the September 9 working paper
+and updating GitHub/README. The calculations continue during publication.
+
+- Initial process inspection found all old atmosphere controls complete and
+  no surviving stellar/source/condensate/F77 jobs. No existing job was signalled.
+- Finished the XH=.15 interpolation separation audit:
+  `docs/results/nongrey_x015_interpolation_separation_v1_audit.json`.
+  Composition-only T +1.651994%, Pgas -.784243%; temperature/gravity
+  T +.474256%, Pgas -.00254284%. Full-grid +2.134085% T and -.786766% Pgas.
+  Log decomposition closes below 9e-16. Hydrogen spacing dominates.
+- **Active fresh diagnostic star:** copied same 24a6ec3d... executable,
+  snapshot `/tmp/ember-cold-remnant-x010-grid-diagnostic-3600gyr-v1`,
+  output `out/evolution-cold-remnant-x010-grid-diagnostic-512-3600gyr-v1.json`,
+  checkpoint same stem `.restart`, session59761, PID72500/controller72499.
+  Target3.60T, 512 points, same refined EOS/TOPS v4 and plasma losses,
+  selects `/tmp/ember-nongrey-exhaustion-warm-x010-v2.dat`. This candidate's
+  interpolation is under refinement; the run is diagnostic, not a replacement
+  for the completed-reference result or a validated transition. Fresh start
+  preserves native restart identity. At12:40 it had reached about2.00T.
+- **Active XH=.15 refinement:** new material specification
+  `data/atmosphere/sources/nongrey_x015_refined_warm_specification.json`;
+  two opacity planes in `/tmp/ember-nongrey-x015-refined-opacity-v1`,
+  controller72491/session96163, 2 workers. Atmosphere plan
+  `nongrey_x015_refined_warm_plan_specification.json` waits for those tables,
+  then computes12 canonical3200/3400K, g4.9/5.15/5.4, X3=0/.12 states.
+  Work `/tmp/ember-nongrey-x015-refined-warm-v1`, controller72537/session60968.
+- **Independent quarter points:** XH=.125/.175, X3=.005,3300K/g5.1,
+  specifications `nongrey_x0125_x0175_heldout{,_plan}_specification.json`.
+  Opacity work `/tmp/ember-nongrey-x0125-x0175-heldout-opacity-v1`,
+  controller72496/session7003; atmosphere work
+  `/tmp/ember-nongrey-x0125-x0175-heldout-atmosphere-v1`,
+  controller72540/session51224. Two workers each; source logs have work-name
+  `.log` alongside each work directory. Both material families had13/14
+  completed isotherms per plane at12:42. No automatic installation is attached.
+- New native source diagnostic `scripts/audit_nongrey_abundance_scale.py`
+  completed, report `docs/results/nongrey_abundance_scale_v1_audit.json`.
+  At4016.89K, XH=.15/X3=.005, common abundance scales1/.15/3 preserve mass
+  fractions to roundoff and electron densities within1.14e-6 relative, but
+  sampled absorption coefficients change by up to factor27.3 (scale.15).
+  Simple arbitrary abundance rescaling is therefore not verified as a route
+  to true zero H. This is one spectral isotherm, not a stellar-boundary error.
+  Raw controls `/tmp/ember-nongrey-abundance-scale-v1`; all completed.
+
+Publication files: new8-page paper and joined1861-state0–3.40T history under
+`docs/reports/2026-09-10`. September9 published edition removed from the
+current tree, with its ignored local `artifacts/` retained, including its old
+recovery manifest. New recovery archives contain both current histories and
+receipts, the3.40T checkpoint and exact copied executable. Bulk tables and raw
+archives remain local. README, roadmap, forward/survey summaries, reproduction
+instructions, next-session prompt and cold-EOS status now reflect September10.
+
+Validation: separate Release build passes32/32 CTest suites. Additional
+condensate archive tests exposed exact-dictionary mismatches after two new
+range diagnostics were added. `source_diagnostics_match` accepts only the
+complete legacy or current schema and requires exact equality for every
+recorded field; all current physical/source/hash checks remain. After the fix,
+13/13 condensate tests and26/26 non-grey import tests pass (targeted CTest
+retest1.38s). Paper compiles with no warnings; four representative rendered
+pages and all extracted text checked. CSV-only figure rebuilding is byte-
+identical in PNG, with all recovery hashes verified. See adjacent validation.
+
+Continue the still-active stellar/source jobs, assemble and independently audit
+the refined atmosphere only after canonical completion, then compare evolution.
+Do not stop the remnant objective at a documentation handoff. Dense matter,
+diffusion, condensates, zero-H boundaries and cooling remain substantial work.
+
+---
+
+# Continued calculations and F77 comparison — 2026-09-10 11:55 UTC
+
+**This checkpoint supersedes the live-status entries below. Furthest completed
+Ember evolution is now3.40 trillion years. It is fully convective and gas-only;
+no hydrogen-exhaustion or white-dwarf/cooling endpoint has been reached.**
+
+- Inspected processes before new launches; existing productive controllers
+  were reused through completion. No parent-owned job was signalled here.
+  At11:47 the four old cycling TLUSTY jobs, their controllers and the slow
+  direct canonical comparison were no longer listed. Their old work trees
+  lack new canonical finals/terminal manifests; do not infer successful
+  completion or claim this turn stopped them. Idle condensate waiter27809
+  remains. Its missing install receipt was not written.
+- Fresh512-zone forward run0->3.30T completed,1822 accepted/3 rejected,
+  2350.57 CPU seconds and4088.19 UTC seconds. Native output/checkpoint:
+  `out/evolution-cold-remnant-forward-512-3300gyr-v1.{json,restart}`.
+  Snapshot `/tmp/ember-cold-remnant-forward-3300gyr-v1`, executable SHA
+  `24a6ec3de0d06bf1e58e4ff4527fa4b38f4b02774be1703cba4ba371d7f15237`.
+  Physical inputs did not change. Receipt records source-tree edits in the
+  side conversation; the copied executable was independent of those edits.
+- Exact same-executable/physics restart3.30->3.40T also **completed**,
+  session44958,97.00 CPU seconds. Output/checkpoint
+  `out/evolution-cold-remnant-forward-512-3400gyr-v1.{json,restart}`;
+  copied binary and receipt `/tmp/ember-cold-remnant-forward-3400gyr-v1`.
+  XH=.2033563986, X3=.00097026465, R=.1458863734Rsun,
+  L=.00201550057Lsun, Teff3201.95296K, Tc8.031406MK,
+  rhoc258.27948g/cm3. All inputs and incoming restart hashes unchanged.
+  Both endpoint reports are in `docs/results/remnant_endpoints_*forward_v1.json`.
+  **No stellar process remains active.** The selected96-node atmosphere
+  still ends atXH=.2; do not launch blindly beyond that support or bypass
+  exact-restart identity to insert a different atmosphere.
+- All12 XH=.1 warm source nodes completed. Candidate108-node gas table:
+  `/tmp/ember-nongrey-exhaustion-warm-x010-v2.dat`, SHA
+  `ca92b939ae386e7d2edc69a5053c807ed4a92fca846963d1c4e717d08609b255`.
+  Explicit36-continuation recipe
+  `data/atmosphere/sources/nongrey_exhaustion_warm_x010_v2_assembly_specification.json`.
+  Source reassembly/EOS/runtime audit completed, all108 nodes supported;
+  density difference-.01082..+1.99104%. Prior72-node values retained exactly.
+  Additional112 queries preserve all96 prior warm nodes plus each old cell
+  interior, including derivatives, exactly. Reports
+  `nongrey_exhaustion_warm_x010_v2{,_retained_warm_v1}_audit.json`.
+  **Candidate remains in/tmp and is not installed or selected by a star.**
+- Two new3200/g5.4 depth controls completed under
+  `/tmp/ember-nongrey-x010-cool-high-gravity-depth-v1`, session30264 done.
+  Actual depths165/339 and170/350; matching-state maxima7.13e-6/1.93e-5 pass.
+  Reports `nongrey_x010_cool_high_gravity_y{000,120}_depth_v1_audit.json`.
+- Independent XH=.15/X3=.005/3300/g5.1 comparison of the108-node candidate:
+  matching T+2.1341%, Pgas-.78677%. AtXH=.25/3100/g5.1 the prior+.69036%T
+  and-.93414%Pgas differences are unchanged. Local diagnostics, not global
+  physical or lifetime errors. The largerXH=.15 discrepancy needs resolution.
+- Completed four-sourceXH=.25 interpolation separation audit:
+  composition-only+0.33593%T/-.20124%Pgas; T/gravity+0.35325%T/-.73438%Pgas.
+  Logarithmic decomposition closes to8.9e-16. New reusable script
+  `scripts/audit_nongrey_interpolation_separation.py`, report
+  `docs/results/nongrey_warm_interpolation_separation_v1_audit.json`.
+- **Active new work:** four3300/g5.1 controls atXH=.1/.2 andX3=0/.12,
+  `/tmp/ember-nongrey-x015-interpolation-separation-v1`, controller71615,
+  session34141, two workers; same-name.log. Plan
+  `data/atmosphere/sources/nongrey_x015_interpolation_separation_specification.json`.
+  At11:54 bothXH=.1 canonical finals completed; twoXH=.2 cases remain.
+  Run the separation audit with the108-node candidate, these four controls
+  and `/tmp/ember-nongrey-x015-heldout-atmosphere-v1/atmosphere` after completion.
+  No automatic installation or stellar continuation is attached to this plan.
+
+The user asked about computation cost, reusable atmospheres, F77 core onset
+and why F77 differs from Ember. Findings and receipts:
+
+- `docs/COMPUTATIONAL_COST.md`: tables are reusable; source extension and
+  verification are separate from stellar integration. Do not attribute all
+  prior machine load to the single stellar process. Prior cache benchmarks
+  gave~22% combined CPU reduction with byte-identical outputs. No matched
+  F77/Ember whole-star performance attribution has been made.
+- Local F77 source matches the retained baseline hash exactly. Separate
+  `/tmp/ember-f77-core-onset-v1` copies add only a diagnostic print. Unmodified
+  controls reproduce original output bytes for both the6000-model Ferguson
+  check and full AJR cooling run. AJR center first nonconvective at3.22353T,
+  XH=.0175623; gradient unity crossing one model earlier. Current Ferguson
+  option first flags it at2.94629T,XH1.0643e-5; later exits2 during cooling.
+  Do not equate these with the1997 paper's5.742T onset. Diagnostic patch,
+  exact decks, hashes and brackets in `f77_core_onset_comparison_v1.json`;
+  reusable `scripts/summarize_f77_core_onset.py`. All F77 jobs are done.
+- `scripts/evolution_physics_probe.cpp` now accepts explicit EOS/opacity paths.
+  Offline probe `/tmp/ember-evolution-physics-exhaustion-probe-v1` at current
+  inputs: minimum diffusive/adiabatic gradient1.58798->1.33593 from3.30->3.40T,
+  at massfraction~.211; central3.70705->3.08980. Approaching loss of full
+  convection does not prove imminent central-core onset. Nodal audit, not
+  the runtime face criterion. `evolution_convection_margin_3400gyr_v1.json`.
+- At matchedXH~.203, AJR F77: age2.50737T, L.003525Lsun, Teff3698K,
+  R.1452Rsun,Tc7.9999MK; Ember:3.40T,L.0020155,Teff3202,R.14589,Tc8.0314MK.
+  F77 He3=.00151636 vs Ember.000970265. Swapping only the F77 low-T opacity
+  to Ferguson raisesL54.5% at this H abundance. Identical central-state
+  pp-heating comparisons differ~9%, not the full75% surface-luminosity gap.
+  Atmosphere/opacity and composition evolution are leading explanations;
+  EOS, nuclear screening and time-coupling changes remain confounded.
+  `f77_ember_matched_hydrogen_v1.json` retains comparisons, rate-probe recipe
+  and primary literature context. No claim of uniquely isolated causation
+  or of Ember being a strict physics superset/validated truth.
+
+Validation this turn:25 atmosphere import tests pass; new composition-corner
+validation checks pass; source/hash/runtime/depth audits above pass. Separate
+C++ physics probe builds and evaluates both512-zone profiles. No evolution
+executable rebuilt/replaced, no original inputs or restarts modified. New bulk
+outputs remain local. Continue the atmosphere interpolation diagnosis, then
+identified-family evolution and the outstanding cold-matter work in
+`docs/COLD_REMNANT.md`; a100K evolved remnant remains the objective.
+
+---
+
+# Ctrl-C diagnostic inspection — 2026-09-10 11:17 UTC
+
+Read-only process inspection for the user's Ctrl-C question; no jobs were
+signalled and no calculation code or input families were changed. The cold-remnant
+work checkpoint below remains the implementation handoff.
+
+- Codex PID46513 is in foreground terminal group46512 onttys000. Ember
+  controllers occupy separate session/process groups with no controlling TTY.
+  A terminal Ctrl-C is therefore not itself a process-tree-wide cancellation.
+  Exact user-observed keypress behavior remains unconfirmed; clarification asked.
+- Live forward star PID69232 (wrapper69230/group69230) is progressing,
+  about1.10T at inspection, progressing toward3.3T. Native checkpoint updated within a second
+  of inspection. This is the new fresh run; furthest COMPLETED result remains2.85T.
+- Four old source attempts still cycle:64973/64986 under warm-grid controller
+  64914, and66795/66841 under CONREF-comparison controller66522. They consume
+  about four cores. Repeated corrections persist around80-109 iterations.
+  Separate slow direct canonical control66776 under66769 also uses a core;
+  it is changing, not proven to be in the same two-cycle.
+- warm-grid and cool-initialization cancellation.json records only prevent
+  subsequent launches. run_nongrey_plan.py explicitly lets active jobs finish;
+  ThreadPoolExecutor also waits for running workers. Source/snapshot wrappers
+  wait on children without an explicit interrupt cleanup/final-receipt path.
+  No current orphaning or failed Ctrl-C receipt was established from these facts.
+- Productive controllers69559 (XH=.1 fine warm extension) and69580
+  (interpolation separation) each had two canonical models completed and
+  two source children running. Old condensate waiter27809 remains asleep
+  awaiting an install receipt that does not exist, using negligible CPU.
+- Official CLI documentation distinguishes /ps (inspect background jobs)
+  from /stop (stop ALL background terminals in the current session, including
+  useful work). No /stop was executed. Read-only ps escalation approved;
+  no approval-review rejection in this diagnostic turn.
+
+---
+
+# Cold-remnant work in progress — 2026-09-10
+
+**Latest checkpoint: 10:33 UTC. This section supersedes all older status
+paragraphs below. The furthest evolved star remains 2.85 trillion years;
+no hydrogen-exhaustion or white-dwarf result has been reached.**
+
+The user authorized autonomous local implementation and calculation through a
+very cold white dwarf. The target is cooling-branch Teff=100 K with supported
+physics, with intermediate exhaustion and cooling diagnostics described in
+[docs/COLD_REMNANT.md](docs/COLD_REMNANT.md). No new publication is requested.
+Preserve the original executable, restarts, and input families. New calculations
+and source builds use separate paths. Do not interact with parent-owned
+controllers. Bulk generated data remain local/ignored; leave `.DS_Store` alone.
+
+## Completed stellar control and implementation
+
+- **Fresh forward512-zone star is running toward3.3T**, session80141,
+  `out/evolution-cold-remnant-forward-512-3300gyr-v1.{json,log,restart}`.
+  Copied executable and immutable input receipt:
+  `/tmp/ember-cold-remnant-forward-3300gyr-v1`; wrapper log same path+.log.
+  Uses the96-node gas atmosphere extension, refined64-plane EOS, TOPSv4,
+  ledoux-diffusive transport, SFII-SVH rates, WD conduction, and plasma-HRW
+  thermal neutrinos. At10:32UTC it reached0.273T, fully convective.
+  This is an exploratory gas track, not an exhaustion or cold-remnant result.
+- Fresh 512-zone control with refined EOS/TOPS and original gas atmosphere
+  **completed 0->2.85T**, 4023 CPU seconds / 6753 elapsed seconds. Output
+  `out/evolution-cold-remnant-control-512-2850gyr-v1.json`, native checkpoint
+  same prefix `.restart`, immutable binary and receipt in
+  `/tmp/ember-cold-remnant-control-2850gyr-v1`. No physical input changed
+  during the run; source edits were independent of its copied executable.
+  Session16925 done. `compare_evolution_control.py` comparison report
+  `docs/results/evolution_cold_remnant_control_2850gyr_v1.json`: relative
+  L difference1.36865e-7, R3.73872e-8, central H-1.41336e-7;
+  Teff difference0.000048226K. This is consistency, not lifetime convergence.
+- Original star `out/evolution-metal-512-2850gyr-gas-restart.json` remains
+  untouched: XH=.3028875983, X3=.0046633380, R=.14876088175 Rsun,
+  L=.001857570598 Lsun, Teff3106.8375K, Tc6.878544MK,
+  rhoc241.23194g/cm3, fully convective. Original `build/apps/ember-evolve`
+  SHA d04ae649221f0d35c448e438fea620cb72089c6a983498b34c0b2fad7877f974.
+  Native restarts require identical binary/physics; no migration bypass.
+- Separate Release build `/tmp/ember-cold-remnant-build-v1`: **32/32 CTests
+  passed** after plasma-neutrino coupling and driver cache. Full log
+  `/tmp/ember-cold-remnant-neutrino-full-tests-v1.log`. Later bare-rate cache
+  passed its4 targeted nuclear/mixing tests.25 atmosphere Python tests pass.
+- `--thermal-neutrinos none|plasma-hrw` selects an explicit HRW1994 plasma
+  sink, with analytic T/rho derivatives, central/zone energy terms and
+  checkpoint identity. History adds thermal-neutrino L as column21.
+  **Not selected in either2.85T run.** Fully ionized Ye approximation;
+  other thermal channels omitted. [docs/NEUTRINOS.md](docs/NEUTRINOS.md).
+- Exact caches reuse complete nuclear responses in the single-threaded
+  driver and temperature-only SFII bare quadratures in a thread-local
+  bounded map. Screening and composition remain state dependent. Two ABBA
+  200G benchmarks each reproduced all output bytes (115 accepted steps),
+  reducing CPU~12.5% and another10.8%, roughly22% together. Reports
+  `nuclear{,_rate}_cache_benchmark_v1.json`; sessions22632/92785 done.
+- `--opacity-directory` and snapshot receipts pin all selected input planes.
+  Energy history distinguishes deposited nuclear, nuclear-neutrino,
+  thermal-neutrino and last-halfstep gravothermal luminosity; initial/restored
+  gravothermal value is null. Endpoint summaries retain crossing brackets
+  and recrossings; they do not automatically label a model a white dwarf.
+
+## Latest cold-matter implementation
+
+- Cold analytic-electron first thermal derivatives and mixed density response
+  now use paired Fermi-surface quadrature. Independent Sommerfeld tests at
+  T100/1000/10000K andrho1e3..1e6 pass without loosening tolerances.
+  The initial test exposed a second mixed-derivative cancellation and the
+  final implementation repairs both. `cold_electron_response_v1_audit.json`.
+  **32/32 full CTests passed** again after this change, log
+  `/tmp/ember-cold-remnant-cold-electron-full-tests-v1.log`, session3674 done.
+  Analytic-component entropy is still unimplemented; no complete remnant EOS.
+- Ioffe EOSFI22 forced-phase/free-energy audit isolated two pressure-derivative
+  inconsistencies. Optional source build repairs preserve upstream bytes,
+  exact patches and separate binaries. The density-derivative discrepancy
+  drops from6.77 to1.05e-6 ideal-ion pressure units after Richardson
+  differencing; other identities agree to1.42e-8 or better.
+  `docs/DENSE_EOS.md` gives the derivation, source caveats and report paths.
+  **Offline only**, no source report sent upstream and no installed dense EOS.
+
+## Candidate physical inputs
+
+- EOS `data/eos/exhaustion_refined_v2/freeeos300_gs98_z020.dat`,64planes,
+  true XH=0, baryonic isotope mapping.528 fresh heldouts: P/E/cv/cp maxima
+  .05213/.10875/.18413/.19216%. First-law defect1.82e-9;2048 original
+  profile queries byte-identical. **Composition coverage, not dense/cold EOS.**
+- TOPS `data/opacity/hydrogen_poor_refined_v4`, with unchanged AESOPUS
+  references.6 fresh X=.225/.275 heldouts at three Z: max active-source
+  interpolation difference1.7062%, old-profile difference1.1047%.
+  Source discrepancies are not lifetime error bars. All TOPS work complete.
+- Masked atmosphere v2 requires all16 interpolation/derivative corners.
+  Exact grid knots may use a complete incident cell; no extrapolation or
+  omission of zero-weight corners. Assembler validates canonical source
+  receipts, opacities and all archived inputs; old boundary values retained.
+  `audit_nongrey_extension.py` needs independent canonical heldouts.
+- Canonical source preparation:
+  `/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json`;
+  initializer `/tmp/ember-nongrey-conref-indexed-v1/source.json`.
+  All accepted finals use the original canonical TLUSTY executable. The
+  indexed RUSSEL variant is only an initializer. Old unindexed gas control
+  is still slow; no new gas initialization-equivalence result yet.
+- Four18-isotherm material planes (1075..10103K) at XH=.1/.2 × X3=0/.12:
+  `/tmp/ember-nongrey-hydrogen-poor-v1/plane-000..003/opacity/fort.63`.
+  Warm14-row subsets1822..10103K in the corresponding `-warm-v1` directory.
+  XH=.3 material extension also complete in
+  `/tmp/ember-nongrey-x030-material-extension-v1/plane-{000,001}/opacity`.
+- `TAULAS` does not truncate a supplied mass grid. Continuations now record
+  measured seed trimming and actual final optical depth. Independent depth
+  checks at XH=.2,T3200,g5.15 passed max matching-state change3.058e-5
+  across actual tau1000/3000/11076; g5.4 comparison passed2.699e-6.
+  XH=.1,T3400,g5.15 depths1328/3235 passed1.637e-5. Reports in docs/results.
+  These are local depth checks, not global spectral or physical bounds.
+
+## Current source and validation work
+
+All source jobs have same-name `/tmp/WORK.log` files. Inspect
+`final/validated.json` and its hashes; initializer diagnostics are not canonical
+acceptance. None of these controllers automatically install a table or evolve
+an accepted star.
+
+- **Complete24-node warm extension assembled** from explicit unique source
+  plan `data/atmosphere/sources/nongrey_exhaustion_warm_v1_assembly.json`.
+  Candidate `/tmp/ember-nongrey-exhaustion-warm-v1.dat` has96 source nodes
+  (original72 plus24), with24 explicit missing colder/H-poor nodes.
+  C++/EOS/reassembly audit completed: all96 knots have supported stencils,
+  all retained boundary values reproduce exactly, source/EOS density
+  differences+.1112..1.9910%. Six old upper-T knots have changed one-sided
+  derivatives because the extension opens an upper cell. Independent
+  XH=.25/X3=.005/3100K/g5.1 comparison differs+.6904%T and-.9341%Pgas;
+  this is a local interpolation diagnostic, not a global accuracy bound.
+  Report `docs/results/nongrey_exhaustion_warm_v1_audit.json`.
+  Selected separately as
+  `data/atmosphere/nongrey_gs98_z020_exhaustion_warm_v1.dat`, SHA
+  4277d9144f7718077b9179a32b6a22a6d1dbded8213207f8b303d76218f087cb,
+  with adjacent pinned manifest and source selection receipt. This is the
+  family used by fresh forward80141; preserve its bytes throughout that run.
+  `assemble_nongrey_grid.py` now accepts
+  an explicit `--continuation-plan` and pins that file along with all sources.
+- Partial93-node predecessor passed retained-value and EOS checks exactly;
+  `nongrey_warm_partial_v3_audit.json`. Density differences+.1114..1.9910%.
+  It had only90 supported source nodes and no usable independent heldout.
+- `ember-nongrey-warm-extension-shallow-v1` finished16 accepted /8 rejected
+  source attempts. Original rejected warm-subset and excessive-depth cases
+  remain preserved. Both old deep3200/g5.15 pilots remain the chosen nodes.
+- `ember-nongrey-x020-cool-retry-v1` finished4 accepted /2 rejected.
+  Rejected3000/g4.9 cells were replaced successfully by same-temperature
+  seeds and CONREF10 under `ember-nongrey-x020-cool-short-initialization-v1`
+  and `ember-nongrey-x020-cool-short-y120-v1`; both canonical finals passed.
+  Old direct canonical comparison2537 still runs; its queued follow-up was
+  cancelled between launches and moved to the successful separate controller.
+- All4 `ember-nongrey-x020-warm-low-gravity-v1` models completed. Depth
+  comparisons passed max6.20035e-6 (X3=0) and1.97921e-5 (X3=.12).
+  Both deeper seed-tau1000 models are chosen in the assembled extension.
+- The3000/g5.15 depth control passed max4.22481e-6 (actual tau448/1268).
+  Low-gravity depth comparison passed9.98744e-6 under
+  `ember-nongrey-x020-cool-low-gravity-depth-v1`,5095 done.
+  High-gravity3000K control under
+  `ember-nongrey-x020-cool-high-gravity-depth-v1`,90800 also completed;
+  audit10273 passed, report `nongrey_x020_cool_high_gravity_depth_v1_audit.json`.
+  All seven local depth audits are recorded in the source selection receipt.
+- Independent heldouts **both canonical completed**:
+  XH=.25,X3=.005,3100/g5.1 under `ember-nongrey-x025-heldout-shallow-v1`:
+  matching T4633.2906313,Pgas11397952.41; actual bottomtau749.28.
+  XH=.15,X3=.005,3300/g5.1 under `ember-nongrey-x015-heldout-atmosphere-v1`.
+  The latter cannot test the grid until complete XH=.1 stencils exist.
+- XH=.1,3200/g4.9 full initializers two-cycle by~.000411 after CONREF
+  has turned off. Both CONREF10/20 comparisons still cycle at late iterations;
+  shortening CONREF alone did not fix them. The older11-cell plan46166 is
+  cancelled between future launches; its first2 active jobs still finish.
+  Do not infer these source processes were stopped.
+- A finer numerical opacity derivative is now tested in initialization:
+  `/tmp/ember-nongrey-conref-indexed-fine-v1/{prepared,source}.json`,
+  `prepare_atmosphere_initializer.py --convective-refinement --indexed-russel
+  --opacity-step0.0001`. Its canonical final remains the original source.
+  The same numerical remedy previously resolved a different condensate
+  initialization cycle; this gas case requires its own validation.
+  Both jobs under `ember-nongrey-x010-fine-initialization-v1`,16376,
+  **canonical accepted**: matchingT5796.3763/5840.3815K and
+  Pgas6510088.90/6463297.93, actual bottomtau745/754 forX3=0/.12.
+  Remaining nine warmXH=.1 cells running97785 with the successful fine
+  initializer andCONREF10, work `ember-nongrey-x010-warm-fine-v1`,
+  plan `nongrey_x010_warm_fine_plan_specification.json`. Two workers.
+  Depth/EOS/independentXH=.15 audits remain before adoption.
+  The builder now emits the standard continuation `source.json` receipt.
+- Four3100K/g5.1 source models atXH=.2/.3 andX3=0/.12 running41877,
+  work `ember-nongrey-warm-interpolation-separation-v1`, two workers.
+  Plan `nongrey_warm_interpolation_separation_specification.json`. Existing
+  full material opacities reused. These separate composition interpolation
+  curvature from T/gravity curvature in the independentXH=.25 comparison.
+- Old nonindexed .25/deep gas control29696 and old direct coarse trial38997
+  may still run. Previous own SIGTERM and OS stack sampling were denied;
+  no profiler sample was obtained. Do not signal parent-owned processes.
+
+## Condensates: corrected interpretation and outstanding physics
+
+- **Correction:** the earlier mutable-bulk adapter audit did not model the
+  actual Fortran interface. Both prepared TLUSTY and SYNSPEC retain fixed
+  `cbase`, initialized once, separate from mutable gas `ccomp`/`abndd`.
+  New v3 audits show **both old and new adapters exactly reproduce fresh
+  references on12 fixed-bulk calls**. Only the old adapter fails synthetic
+  bulk feedback. Reports `condensate_memory_{before,after}_v3_audit.json`
+  supersede v2's interpretation; v2 is annotated. No history dependence of
+  actual atmosphere outputs was established. The retained C++ reservoir
+  copy is defensive; existing binaries were not changed.
+- Full equilibrium Gibbs correction is researched offline using pinned
+  FastChem gas-versus-condensed chemical potentials, including gas
+  rearrangement.108state survey and finer4state phase stencils completed.
+  At1769.42K/.00406bar Delta cp~117496erg/g/K, versus the incomplete
+  grain-only289000. Phase-crossing stencils and very small finite differences
+  need care; Delta cp may be negative. No runtime correction installed.
+- Existing condensate enthalpy gate remains. Need consistent bulk Gibbs
+  baseline, volume/entropy/all responses and opacity mass normalization;
+  retain explicit distinction between local equilibrium and rainout.
+- Dense EOS EIP pilot remains offline with forced classicalGamma175 phase
+  choice; quantum helium melting, density inversion and thermodynamic
+  derivatives require validation. No dense remnant EOS installed.
+
+Next: follow fresh forward80141; complete and independently audit theXH=.1
+warm atmosphere cells and interpolation separation controls. Preserve active
+stellar inputs; any later selected atmosphere is a separately identified family.
+Continue
+condensate thermodynamics, near-exhaustion network/screening, microscopic
+transport, dense quantum EOS and truly cold atmosphere coverage. Do not count
+an extrapolated cooling law as the requested evolved cold remnant.
+
+---
+
 # Publication policy update — code and recipes, bulk tables local
 
 The user's latest instruction is to push the code used to generate the tables,
@@ -19,9 +460,8 @@ The report's `recovery_manifest.json` identifies local files, not bundled archiv
 # Session-close checkpoint — 2026-09-09, 23:09 UTC physics snapshot
 
 Read [the next-session prompt](docs/NEXT_SESSION_PROMPT.md) and
-[the scientific report](docs/reports/2026-09-09/ember_status_and_future.pdf)
-([LaTeX](docs/reports/2026-09-09/ember_status_and_future.tex),
-[recovery and validation](docs/reports/2026-09-09/README.md)). This checkpoint
+the September 9 scientific report (retained in Git history; superseded by
+[the September 10 edition](docs/reports/2026-09-10/README.md)). This checkpoint
 supersedes the status of the historical entries below. The user requested a
 report, handoff and GitHub checkpoint before clearing context. No further
 stellar evolution or source-physics change was made during this packaging step.

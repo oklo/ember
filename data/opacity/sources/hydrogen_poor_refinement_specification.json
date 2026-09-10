@@ -1,0 +1,24 @@
+{
+  "scope": "Refine X=.1..2 with independent eighth-point checks; assess X=.2..3 before forward selection. All source calculations remain separate from runtime installation.",
+  "requests": [
+    {"X": 0.1125, "Z": 0.02, "role": "heldout"},
+    {"X": 0.1375, "Z": 0.02, "role": "heldout"},
+    {"X": 0.1625, "Z": 0.02, "role": "heldout"},
+    {"X": 0.1875, "Z": 0.02, "role": "heldout"},
+    {"X": 0.25, "Z": 0.02, "role": "heldout"},
+    {"X": 0.125, "Z": 0.01, "role": "candidate_node"},
+    {"X": 0.175, "Z": 0.01, "role": "candidate_node"},
+    {"X": 0.1125, "Z": 0.01, "role": "heldout"},
+    {"X": 0.1375, "Z": 0.01, "role": "heldout"},
+    {"X": 0.1625, "Z": 0.01, "role": "heldout"},
+    {"X": 0.1875, "Z": 0.01, "role": "heldout"},
+    {"X": 0.25, "Z": 0.01, "role": "heldout"},
+    {"X": 0.125, "Z": 0.03, "role": "candidate_node"},
+    {"X": 0.175, "Z": 0.03, "role": "candidate_node"},
+    {"X": 0.1125, "Z": 0.03, "role": "heldout"},
+    {"X": 0.1375, "Z": 0.03, "role": "heldout"},
+    {"X": 0.1625, "Z": 0.03, "role": "heldout"},
+    {"X": 0.1875, "Z": 0.03, "role": "heldout"},
+    {"X": 0.25, "Z": 0.03, "role": "heldout"}
+  ]
+}

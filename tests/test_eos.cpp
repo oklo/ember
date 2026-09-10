@@ -95,6 +95,76 @@ int main() {
           "WD core: 4/3 < chi_rho < 5/3", s.chiRho, 1.5, 1.0);
   }
 
+  // Strongly degenerate thermal response: cv = pi^2 ne kB^2 T/(rho pF vF).
+  // This is tiny compared with the zero-temperature electron energy. Direct
+  // subtraction loses up to 0.2 percent at these cold states in double precision.
+  // Test electrons separately so a larger ionic heat capacity cannot hide it.
+  {
+    Composition he{};he[Species::He4]=1.;he.basis=AbundanceBasis::baryon_mass;
+    ElectronGas electrons;
+    for(double rho:{1e3,1e4,1e5,1e6}) for(double T:{100.,1000.,1e4}) {
+      const double ne=he.mu_elec_inv()*NA*rho;
+      const double pF=h*std::cbrt(3*ne/(8*M_PI)),xF=pF/(me*c_light);
+      const double vF=c_light*xF/std::sqrt(1+xF*xF);
+      const double cv=M_PI*M_PI*ne*kB*kB*T/(rho*pF*vF);
+      const double thermal_gamma=(2+xF*xF)/(3*(1+xF*xF));
+      const auto e=electrons.eval_with_derivatives(T,rho,he);
+      near(e.dE_dlnT/T,cv,3e-6,"cold electrons: Sommerfeld heat capacity");
+      near(e.S,cv,3e-6,"cold electrons: entropy tends to Sommerfeld cv");
+      near(e.dP_dlnT,thermal_gamma*rho*T*cv,3e-6,"cold electrons: thermal pressure response");
+      near(e.d2E_dlnT2,2*T*cv,5e-6,"cold electrons: heat-capacity temperature derivative");
+      near(e.d2E_dlnTdlnRho,-thermal_gamma*T*cv,5e-6,"cold electrons: heat-capacity density derivative");
+      const auto value=electrons.eval(T,rho,he);
+      near(value.dE_dlnT,e.dE_dlnT,1e-14,"cold electrons: value/response agreement");
+    }
+  }
+
+  // Entropy is an independently differentiated thermodynamic function.
+  // Check the first law and Maxwell relation from classical through cold
+  // degenerate electrons, including both sides of the entropy branch join.
+  {
+    ElectronGas electrons;IonGas ions;Radiation radiation;
+    CompositeEos composite;
+    Composition he{};he[Species::He4]=1.;he.basis=AbundanceBasis::baryon_mass;
+    const double step=1e-4;
+    for(const EosComponent* part:{static_cast<const EosComponent*>(&electrons),
+                                static_cast<const EosComponent*>(&ions),
+                                static_cast<const EosComponent*>(&radiation)}) {
+      for(double T:{100.,1e4,1e6,1e8}) for(double rho:{1e-6,1.,1e3,1e6}) {
+        const auto state=part->eval(T,rho,he);
+        const double dsT=(part->eval(T*std::exp(step),rho,he).S-
+                          part->eval(T*std::exp(-step),rho,he).S)/(2*step);
+        const double dsR=(part->eval(T,rho*std::exp(step),he).S-
+                          part->eval(T,rho*std::exp(-step),he).S)/(2*step);
+        near(dsT,state.dE_dlnT/T,2e-6,std::string(part->name())+": dS/dlnT=cv");
+        near(dsR,-state.dP_dlnT/(rho*T),2e-6,std::string(part->name())+": entropy Maxwell relation");
+      }
+    }
+    for(double T:{1e5,1e6,1e7}) {
+      auto mixture=solar;mixture.basis=AbundanceBasis::baryon_mass;
+      mixture.metal_inventory=MetalInventory::gs98;
+      const auto value=eos.eval(T,1e3,mixture);
+      const auto assembled=composite.eval(T,1e3,mixture);
+      near(value.S,assembled.S,1e-14,"entropy: independent total assembly agrees");
+      const double dsT=(composite.eval(T*std::exp(step),1e3,mixture).S-
+                        composite.eval(T*std::exp(-step),1e3,mixture).S)/(2*step);
+      near(dsT,assembled.cv,2e-6,"GS98 entropy: expanded metal mixture first law");
+    }
+    // Mixing entropy cannot be obtained from just one average ionic mass.
+    Composition hh=h_pure;hh.basis=AbundanceBasis::baryon_mass;
+    Composition mix{};mix.basis=AbundanceBasis::baryon_mass;
+    mix[Species::H1]=.2;mix[Species::He4]=.8;
+    const double ideal_mixing=-R_gas*(.2*std::log(.2)+.8/4*std::log(.8));
+    near(ions.eval(1e6,1.,mix).S-.2*ions.eval(1e6,1.,hh).S-
+         .8*ions.eval(1e6,1.,he).S,ideal_mixing,1e-13,
+         "ions: ideal mixing entropy includes species counts");
+    // Maxwell-Boltzmann limit independently fixes the electron spin factor2.
+    const double T=1e5,rho=1e-9,ne=he.mu_elec_inv()*NA*rho;
+    const double lambda=h/std::sqrt(2*M_PI*me*kB*T);
+    near(electrons.eval(T,rho,he).S,ne*kB/rho*(2.5-std::log(ne*lambda*lambda*lambda/2)),
+         1e-4,"electrons: classical Sackur-Tetrode entropy with spin2");
+  }
+
   // 4. Thermodynamic consistency: the Maxwell relation behind grad_ad.
   //    cp - cv = P delta^2 /(rho T chi_rho) must hold identically.
   {

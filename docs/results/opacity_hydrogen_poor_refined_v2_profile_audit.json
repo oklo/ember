@@ -1,0 +1,236 @@
+{
+  "scope": "Check independent TOPS compositions with Ember's actual table interpolator.\n\nTemperature and density are sampled from a frozen stellar profile and treated\nas source coordinates. There is no isotope remapping, structural re-solve or\nestimate of stellar luminosity/lifetime error. AESOPUS is held fixed in its\nblend with TOPS. The comparison isolates TOPS composition interpolation.\n",
+  "probe_sha256": "4ad6fbab49499f79ba7b423d5b099942332aa3be640df0852f336a188c7d25dc",
+  "profile_sha256": "b2d67c169fb29d6a87b2fb66ea8722427a2ce35c8f6b9dc475a6b2b6f15ed0b4",
+  "heldout_manifest_sha256": "c6cbf410110e178220809e1a311cb1880c64b2a71917973285b24d5b030eb871",
+  "runtime_table_sha256": {
+    "data/opacity/hydrogen_poor_refined_v2/tops_gs98_mixture_z020_low.dat": "a4ec2af086f53e3cec9dcb6e32773672af6a29c9cde64a63688fc7840e48d92a",
+    "data/opacity/hydrogen_poor_refined_v2/tops_gs98_mixture_z020_high.dat": "018b34e76a33f5a9f999edbb3aa7fb0e4fb4839e637e8e83597c4f814769bbec"
+  },
+  "gas_logR_support": [
+    -8,
+    6
+  ],
+  "comparisons": [
+    {
+      "X_atomic": 0.1125,
+      "Z_atomic": 0.02,
+      "profile_points": 493,
+      "heldout": {
+        "X": 0.1125,
+        "Z": 0.02,
+        "metals": {
+          "C": 0.00343672,
+          "N": 0.0010067,
+          "O": 0.00934712,
+          "Ne": 0.00209662,
+          "Na": 4.18e-05,
+          "Mg": 0.00079848,
+          "Al": 7.206e-05,
+          "Si": 0.00088114,
+          "P": 8.46e-06,
+          "S": 0.00047026,
+          "Cl": 5.84e-06,
+          "Ar": 8.67e-05,
+          "K": 4.56e-06,
+          "Ca": 7.792e-05,
+          "Ti": 3.9e-06,
+          "Cr": 2.234e-05,
+          "Mn": 1.558e-05,
+          "Fe": 0.00152866,
+          "Ni": 9.514e-05
+        },
+        "file": "tops_gs98_x011p25_z020.txt",
+        "sha256": "b27b4d98c02f0b52962beeefc388c9e43da748fec4e5d10fcc11057a5a8556f4",
+        "request": "tops_gs98_x011p25_z020.request.json",
+        "request_sha256": "c1695b6cb4e64595d64b20653643e8d077690aef982fb3173327485c14177e34",
+        "validation_role": "heldout"
+      },
+      "worst": {
+        "T_K": 33157.060796334845,
+        "rho_g_cm3": 0.020082403107976786,
+        "blended_relative_difference": -0.006634008392619628,
+        "delta_dlnk_dlnT": 0.010386711223753675,
+        "delta_dlnk_dlnrho": 0.007682901737402215
+      },
+      "max_abs_difference_dlnk_dlnT": 0.040027117275407656,
+      "max_abs_difference_dlnk_dlnrho": 0.007682901737402215
+    },
+    {
+      "X_atomic": 0.1375,
+      "Z_atomic": 0.02,
+      "profile_points": 493,
+      "heldout": {
+        "X": 0.1375,
+        "Z": 0.02,
+        "metals": {
+          "C": 0.00343672,
+          "N": 0.0010067,
+          "O": 0.00934712,
+          "Ne": 0.00209662,
+          "Na": 4.18e-05,
+          "Mg": 0.00079848,
+          "Al": 7.206e-05,
+          "Si": 0.00088114,
+          "P": 8.46e-06,
+          "S": 0.00047026,
+          "Cl": 5.84e-06,
+          "Ar": 8.67e-05,
+          "K": 4.56e-06,
+          "Ca": 7.792e-05,
+          "Ti": 3.9e-06,
+          "Cr": 2.234e-05,
+          "Mn": 1.558e-05,
+          "Fe": 0.00152866,
+          "Ni": 9.514e-05
+        },
+        "file": "tops_gs98_x013p75_z020.txt",
+        "sha256": "a4ef957562e0669cdc5336b7afcd24b1e176fbf8f2776b5c338fac3a9047948d",
+        "request": "tops_gs98_x013p75_z020.request.json",
+        "request_sha256": "a0ab23c8b5174b840d98cdf2d963fb195d63aa8a2e96c277b2ca693ac3d9f1e1",
+        "validation_role": "heldout"
+      },
+      "worst": {
+        "T_K": 42121.64507848741,
+        "rho_g_cm3": 0.042241793066636696,
+        "blended_relative_difference": -0.0029575345570506117,
+        "delta_dlnk_dlnT": 0.0002767101177789666,
+        "delta_dlnk_dlnrho": -8.423770094062588e-05
+      },
+      "max_abs_difference_dlnk_dlnT": 0.01670586319121023,
+      "max_abs_difference_dlnk_dlnrho": 0.0024029366730291754
+    },
+    {
+      "X_atomic": 0.1625,
+      "Z_atomic": 0.02,
+      "profile_points": 493,
+      "heldout": {
+        "X": 0.1625,
+        "Z": 0.02,
+        "metals": {
+          "C": 0.00343672,
+          "N": 0.0010067,
+          "O": 0.00934712,
+          "Ne": 0.00209662,
+          "Na": 4.18e-05,
+          "Mg": 0.00079848,
+          "Al": 7.206e-05,
+          "Si": 0.00088114,
+          "P": 8.46e-06,
+          "S": 0.00047026,
+          "Cl": 5.84e-06,
+          "Ar": 8.67e-05,
+          "K": 4.56e-06,
+          "Ca": 7.792e-05,
+          "Ti": 3.9e-06,
+          "Cr": 2.234e-05,
+          "Mn": 1.558e-05,
+          "Fe": 0.00152866,
+          "Ni": 9.514e-05
+        },
+        "file": "tops_gs98_x016p25_z020.txt",
+        "sha256": "6341aa77883788bea0f7418b8fcf88ae9993e91d4ddf4929b3d58441402e5f65",
+        "request": "tops_gs98_x016p25_z020.request.json",
+        "request_sha256": "7af16529f93e8f551bc4d5eef3d71e8ab487ee0efd8787a1b346dda310a756ab",
+        "validation_role": "heldout"
+      },
+      "worst": {
+        "T_K": 52880.88583908699,
+        "rho_g_cm3": 0.07902916126936349,
+        "blended_relative_difference": -0.0033236528502299523,
+        "delta_dlnk_dlnT": 0.017518577759180406,
+        "delta_dlnk_dlnrho": -0.0032165437889024595
+      },
+      "max_abs_difference_dlnk_dlnT": 0.018519266751916064,
+      "max_abs_difference_dlnk_dlnrho": 0.005980794270765422
+    },
+    {
+      "X_atomic": 0.1875,
+      "Z_atomic": 0.02,
+      "profile_points": 493,
+      "heldout": {
+        "X": 0.1875,
+        "Z": 0.02,
+        "metals": {
+          "C": 0.00343672,
+          "N": 0.0010067,
+          "O": 0.00934712,
+          "Ne": 0.00209662,
+          "Na": 4.18e-05,
+          "Mg": 0.00079848,
+          "Al": 7.206e-05,
+          "Si": 0.00088114,
+          "P": 8.46e-06,
+          "S": 0.00047026,
+          "Cl": 5.84e-06,
+          "Ar": 8.67e-05,
+          "K": 4.56e-06,
+          "Ca": 7.792e-05,
+          "Ti": 3.9e-06,
+          "Cr": 2.234e-05,
+          "Mn": 1.558e-05,
+          "Fe": 0.00152866,
+          "Ni": 9.514e-05
+        },
+        "file": "tops_gs98_x018p75_z020.txt",
+        "sha256": "449e2a729beb8583e7eb841f24c6fc5baf78aa76ea7475043ce58044d1cc26a8",
+        "request": "tops_gs98_x018p75_z020.request.json",
+        "request_sha256": "51d504c7c0ef8b99dff952c7ad68fa69f2617048f5628867b21c32a547ae629c",
+        "validation_role": "heldout"
+      },
+      "worst": {
+        "T_K": 31134.34524725665,
+        "rho_g_cm3": 0.016391265934778954,
+        "blended_relative_difference": -0.005029610872775237,
+        "delta_dlnk_dlnT": 0.025322020225206195,
+        "delta_dlnk_dlnrho": 0.0023188105062519563
+      },
+      "max_abs_difference_dlnk_dlnT": 0.07703601360358742,
+      "max_abs_difference_dlnk_dlnrho": 0.017191500462318515
+    },
+    {
+      "X_atomic": 0.25,
+      "Z_atomic": 0.02,
+      "profile_points": 493,
+      "heldout": {
+        "X": 0.25,
+        "Z": 0.02,
+        "metals": {
+          "C": 0.00343672,
+          "N": 0.0010067,
+          "O": 0.00934712,
+          "Ne": 0.00209662,
+          "Na": 4.18e-05,
+          "Mg": 0.00079848,
+          "Al": 7.206e-05,
+          "Si": 0.00088114,
+          "P": 8.46e-06,
+          "S": 0.00047026,
+          "Cl": 5.84e-06,
+          "Ar": 8.67e-05,
+          "K": 4.56e-06,
+          "Ca": 7.792e-05,
+          "Ti": 3.9e-06,
+          "Cr": 2.234e-05,
+          "Mn": 1.558e-05,
+          "Fe": 0.00152866,
+          "Ni": 9.514e-05
+        },
+        "file": "tops_gs98_x025_z020.txt",
+        "sha256": "14f00f04d8a86ea0a70878c5c4f45340d151d6a829352e13aca96e7a79c69508",
+        "request": "tops_gs98_x025_z020.request.json",
+        "request_sha256": "58fa490a675296e378d5c1c4a1436783a69d90d1b5ee712e34120bc27de0c835",
+        "validation_role": "heldout"
+      },
+      "worst": {
+        "T_K": 52880.88583908699,
+        "rho_g_cm3": 0.07902916126936349,
+        "blended_relative_difference": -0.02281851405807933,
+        "delta_dlnk_dlnT": 0.006374535760005795,
+        "delta_dlnk_dlnrho": -0.00749006940703284
+      },
+      "max_abs_difference_dlnk_dlnT": 0.11432510670386431,
+      "max_abs_difference_dlnk_dlnrho": 0.01141721703640966
+    }
+  ]
+}

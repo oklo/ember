@@ -21,6 +21,25 @@ EosTerm IonGas::eval(double T, double rho, const Composition& c) const {
   t.dE_dlnRho = 0.0;
   t.d2P_dlnT2 = t.d2P_dlnTdlnRho = t.d2P_dlnRho2 = t.P;
   t.d2E_dlnT2 = t.E;
+  // Sackur--Tetrode translational entropy, with unit nuclear internal
+  // partition functions. Distinct species have their own number densities,
+  // hence ideal mixing is included. Kinematic masses follow the declared
+  // representative-isotope convention; matching another EOS's entropy
+  // zero/internal partition functions is a separate caloric-reference task.
+  const auto add_species=[&](double number_per_baryon_mass,double mass) {
+    if(number_per_baryon_mass==0.)return;
+    const double log_lambda=std::log(h)-.5*std::log(2*M_PI*mass*amu*kB*T);
+    t.S+=R_gas*number_per_baryon_mass*
+      (2.5-std::log(number_per_baryon_mass*NA*rho)-3*log_lambda);
+  };
+  for(std::size_t i=0;i<(c.metal_inventory==MetalInventory::gs98?3:NSPEC);++i)
+    add_species(c.X[i]/c.abundance_weight(i),c.abundance_weight(i));
+  if(c.metal_inventory==MetalInventory::gs98) {
+    const double scale=c.basis==AbundanceBasis::baryon_mass?1.:gs98_atomic_mass_scale();
+    for(const auto& element:gs98_metals)
+      add_species(c.Z()*element.fraction/(element.mass_number*scale),
+        c.basis==AbundanceBasis::baryon_mass?element.mass_number:element.atomic_weight);
+  }
   return t;
 }
 
@@ -28,6 +47,7 @@ EosTerm Radiation::eval(double T, double rho, const Composition&) const {
   EosTerm t{};
   t.P = a_rad * T * T * T * T / 3.0;
   t.E = 3.0 * t.P / rho;
+  t.S = 4.0 * t.P / (rho*T);
   t.dP_dlnT = 4.0 * t.P;
   t.dP_dlnRho = 0.0;
   t.dE_dlnT = 4.0 * t.E;
@@ -70,19 +90,28 @@ static EosTerm electron_term(double T, double rho, const Composition& comp, bool
   t.P = A * mc2 * f.Ip / 3.0;
   const double u = A * mc2 * f.Iu;
   t.E = u / rho;
+  t.S = A*kB*fermi::entropy(eta,beta,f)/rho;
   t.dP_dlnT   = (A * mc2 / 3.0) * (f.dIp_deta * dEta_dlnT + f.dIp_dlnb);
   t.dP_dlnRho = (A * mc2 / 3.0) * (f.dIp_deta * dEta_dlnRho);
   t.dE_dlnT   = A * mc2 * (f.dIu_deta * dEta_dlnT + f.dIu_dlnb) / rho;
   // E = u(eta,beta)/rho, so at fixed T the explicit 1/rho contributes -E.
   t.dE_dlnRho = A * mc2 * (f.dIu_deta * dEta_dlnRho) / rho - t.E;
-  if (second) {
-    const auto d = fermi::density_response(eta, beta, f);
-    t.d2P_dlnT2 = (A * mc2 / 3.0) * d.d2Ip_dlnT2;
-    t.d2P_dlnTdlnRho = (A * mc2 / 3.0) * d.d2Ip_dlnTdlnRho;
-    t.d2P_dlnRho2 = (A * mc2 / 3.0) * d.d2Ip_dlnRho2;
-    t.d2E_dlnT2 = (A * mc2 / rho) * d.d2Iu_dlnT2;
-    // Specific energy contains an explicit rho^-1, unlike the integrals.
-    t.d2E_dlnTdlnRho = (A * mc2 / rho) * d.d2Iu_dlnTdlnRho - t.dE_dlnT;
+  if (second || eta>100.) {
+    const auto d = fermi::density_response(eta, beta, f, second);
+    // Equivalent quadrature at strong degeneracy, avoiding loss of the
+    // small thermal response. Warm-state arithmetic is retained.
+    if(eta>100.) {
+      t.dP_dlnT = (A * mc2 / 3.0) * d.dIp_dlnT;
+      t.dE_dlnT = A * mc2 * d.dIu_dlnT / rho;
+    }
+    if(second) {
+      t.d2P_dlnT2 = (A * mc2 / 3.0) * d.d2Ip_dlnT2;
+      t.d2P_dlnTdlnRho = (A * mc2 / 3.0) * d.d2Ip_dlnTdlnRho;
+      t.d2P_dlnRho2 = (A * mc2 / 3.0) * d.d2Ip_dlnRho2;
+      t.d2E_dlnT2 = (A * mc2 / rho) * d.d2Iu_dlnT2;
+      // Specific energy contains an explicit rho^-1, unlike the integrals.
+      t.d2E_dlnTdlnRho = (A * mc2 / rho) * d.d2Iu_dlnTdlnRho - t.dE_dlnT;
+    }
   }
   return t;
 }

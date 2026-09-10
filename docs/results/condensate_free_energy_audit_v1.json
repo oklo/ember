@@ -1,0 +1,282 @@
+{
+  "scope": "Audit an equilibrium-condensation Gibbs correction at fixed bulk composition.\n\nDelta(g/T) = k_B sum_j (N_j/M) ln(n_j,eq/n_j,gas), using neutral atomic\nchemical potentials. Atomic reference partition functions cancel between\nthe two equilibria. The same potential gives volume, entropy and enthalpy\ncorrections; gas-species rearrangement is included along with condensates.\n\nThis is an offline ideal-chemistry correction, not an installed atmosphere\nEOS. Condensates retain mass, occupy negligible volume and remain in local\nequilibrium. Rainout, grain opacity, transport and nonideal chemistry are\nseparate physics. A native gas EOS would need this correction applied to its\nbulk-composition potential and all its derivatives, not merely its cp.\n",
+  "script_sha256": "d80d6322f36b6d7bd387e38a63a2554ee81efdf975a0d6f3eb5e517025f1f68e",
+  "sources": [
+    "https://doi.org/10.1093/mnras/stad3515",
+    "https://github.com/NewStrangeWorlds/FastChem/tree/ae67cbd559bc64a3233a1cee6030b8e6b50520de"
+  ],
+  "input_files_sha256": {
+    "/private/tmp/ember-condensate-refined-2800/provenance.json": "e46ec9cca863b390f859f40ea99d33db575118b67e0d6a4f254c26a311fdab97",
+    "/private/tmp/ember-condensate-refined-2800/condensate-abundances.dat": "a30988c94d610234252ada8ec7ba1c19ea7ef9e6f1920a834a6eaf6bac03d16d",
+    "/Users/greglaughlin/Projects/ember/data/atmosphere/sources/condensate_free_energy_audit_states.json": "c9eeb30cf8dca308a3df3b008819be46a32a816f46b5a55a3a06f9d85be105b5",
+    "/private/tmp/ember-fastchem/verified-probe": "b233d7d5e547a76350aa70ce4eafb31a2738463ec384d57c261fb4a211b99d77",
+    "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de/input/logK/logK.dat": "eda9b9d7e62ccf7398036ee84349bd0a721b779acdc9d191cbf9fe1dd01f619c",
+    "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de/input/logK/logK_condensates.dat": "566b029470a9affb361dc4e891aa8c4918baeff0f93cf07e804d57e2ebac8467"
+  },
+  "states": [
+    {
+      "temperature_K": 1769.4174920837647,
+      "pressure_bar": 0.004061889788639392,
+      "scans": [
+        {
+          "logarithmic_step": 0.008,
+          "central": {
+            "delta_g_over_T": -113.81941775273218,
+            "delta_specific_volume": -53.41550727933645,
+            "delta_formation_enthalpy": -12386240.416259766,
+            "gas_rho": 6.552501221932541e-08,
+            "equilibrium_rho": 6.552524156106292e-08,
+            "condensed_mass_fraction": 9.727578173504702e-05
+          },
+          "delta_entropy": -6888.231875448421,
+          "delta_enthalpy": -12389552.038657866,
+          "delta_cp": 117468.10284695901,
+          "delta_cp_from_species_enthalpies": 117406.39212417573,
+          "delta_specific_volume": -53.41500505162593,
+          "delta_dvolume_dT_at_P": 0.4610760668666219,
+          "delta_dvolume_dP_at_T": 0.00993094788364463,
+          "pressure_identity_error_in_gas_volume": 3.290847686869214e-11,
+          "enthalpy_identity_error_in_kT_per_bulk_atom": -2.918963388487016e-08
+        },
+        {
+          "logarithmic_step": 0.004,
+          "central": {
+            "delta_g_over_T": -113.81941775273218,
+            "delta_specific_volume": -53.41550727933645,
+            "delta_formation_enthalpy": -12386240.416259766,
+            "gas_rho": 6.552501221932541e-08,
+            "equilibrium_rho": 6.552524156106292e-08,
+            "condensed_mass_fraction": 9.727578173504702e-05
+          },
+          "delta_entropy": -6886.491766243424,
+          "delta_enthalpy": -12386473.058992408,
+          "delta_cp": 117494.57092518602,
+          "delta_cp_from_species_enthalpies": 117490.3115657988,
+          "delta_specific_volume": -53.4149986345728,
+          "delta_dvolume_dT_at_P": 0.44929743237375697,
+          "delta_dvolume_dP_at_T": 0.009930458100180803,
+          "pressure_identity_error_in_gas_volume": 3.332895435383905e-11,
+          "enthalpy_identity_error_in_kT_per_bulk_atom": -2.0505828791674574e-09
+        },
+        {
+          "logarithmic_step": 0.002,
+          "central": {
+            "delta_g_over_T": -113.81941775273218,
+            "delta_specific_volume": -53.41550727933645,
+            "delta_formation_enthalpy": -12386240.416259766,
+            "gas_rho": 6.552501221932541e-08,
+            "equilibrium_rho": 6.552524156106292e-08,
+            "condensed_mass_fraction": 9.727578173504702e-05
+          },
+          "delta_entropy": -6886.383914745909,
+          "delta_enthalpy": -12386282.224666158,
+          "delta_cp": 117496.02774406607,
+          "delta_cp_from_species_enthalpies": 117495.51775037858,
+          "delta_specific_volume": -53.41501224172896,
+          "delta_dvolume_dT_at_P": 0.4463718342487136,
+          "delta_dvolume_dP_at_T": 0.009944243724983641,
+          "pressure_identity_error_in_gas_volume": 3.2437345280006523e-11,
+          "enthalpy_identity_error_in_kT_per_bulk_atom": -3.6851184380064157e-10
+        },
+        {
+          "logarithmic_step": 0.001,
+          "central": {
+            "delta_g_over_T": -113.81941775273218,
+            "delta_specific_volume": -53.41550727933645,
+            "delta_formation_enthalpy": -12386240.416259766,
+            "gas_rho": 6.552501221932541e-08,
+            "equilibrium_rho": 6.552524156106292e-08,
+            "condensed_mass_fraction": 9.727578173504702e-05
+          },
+          "delta_entropy": -6886.37760340009,
+          "delta_enthalpy": -12386271.057260467,
+          "delta_cp": 117496.19637836282,
+          "delta_cp_from_species_enthalpies": 117495.8406418133,
+          "delta_specific_volume": -53.41503853665931,
+          "delta_dvolume_dT_at_P": 0.4456292100438951,
+          "delta_dvolume_dP_at_T": 0.009943805465025601,
+          "pressure_identity_error_in_gas_volume": 3.071436964748727e-11,
+          "enthalpy_identity_error_in_kT_per_bulk_atom": -2.7007897785826036e-10
+        }
+      ]
+    },
+    {
+      "temperature_K": 1400,
+      "pressure_bar": 0.004,
+      "scans": [
+        {
+          "logarithmic_step": 0.008,
+          "central": {
+            "delta_g_over_T": -17677.02135262233,
+            "delta_specific_volume": -2522.875748099759,
+            "delta_formation_enthalpy": -424357359.3552246,
+            "gas_rho": 8.171207373169984e-08,
+            "equilibrium_rho": 8.172892210070093e-08,
+            "condensed_mass_fraction": 0.004409036764869087
+          },
+          "delta_entropy": -285441.67407599266,
+          "delta_enthalpy": -424366173.60006094,
+          "delta_cp": 1181355.212877196,
+          "delta_cp_from_species_enthalpies": 1181204.5153281803,
+          "delta_specific_volume": -2522.875555874958,
+          "delta_dvolume_dT_at_P": 6.071851970827255,
+          "delta_dvolume_dP_at_T": 0.5568606056939278,
+          "pressure_identity_error_in_gas_volume": 1.5707087123786317e-11,
+          "enthalpy_identity_error_in_kT_per_bulk_atom": -9.819180128915014e-08
+        },
+        {
+          "logarithmic_step": 0.004,
+          "central": {
+            "delta_g_over_T": -17677.02135262233,
+            "delta_specific_volume": -2522.875748099759,
+            "delta_formation_enthalpy": -424357359.3552246,
+            "gas_rho": 8.171207373169984e-08,
+            "equilibrium_rho": 8.172892210070093e-08,
+            "condensed_mass_fraction": 0.004409036764869087
+          },
+          "delta_entropy": -285435.78022856073,
+          "delta_enthalpy": -424357922.21365625,
+          "delta_cp": 1181418.8525989954,
+          "delta_cp_from_species_enthalpies": 1181409.197678339,
+          "delta_specific_volume": -2522.875590433936,
+          "delta_dvolume_dT_at_P": 5.993860147945705,
+          "delta_dvolume_dP_at_T": 0.5568621540362008,
+          "pressure_identity_error_in_gas_volume": 1.2883201376881299e-11,
+          "enthalpy_identity_error_in_kT_per_bulk_atom": -6.270314054069397e-09
+        },
+        {
+          "logarithmic_step": 0.002,
+          "central": {
+            "delta_g_over_T": -17677.02135262233,
+            "delta_specific_volume": -2522.875748099759,
+            "delta_formation_enthalpy": -424357359.3552246,
+            "gas_rho": 8.171207373169984e-08,
+            "equilibrium_rho": 8.172892210070093e-08,
+            "condensed_mass_fraction": 0.004409036764869087
+          },
+          "delta_entropy": -285435.41315106675,
+          "delta_enthalpy": -424357408.3051647,
+          "delta_cp": 1181422.850358894,
+          "delta_cp_from_species_enthalpies": 1181421.9883074078,
+          "delta_specific_volume": -2522.8755469252897,
+          "delta_dvolume_dT_at_P": 5.974416404674495,
+          "delta_dvolume_dP_at_T": 0.556864957218543,
+          "pressure_identity_error_in_gas_volume": 1.6438383090150793e-11,
+          "enthalpy_identity_error_in_kT_per_bulk_atom": -5.453085181127719e-10
+        },
+        {
+          "logarithmic_step": 0.001,
+          "central": {
+            "delta_g_over_T": -17677.02135262233,
+            "delta_specific_volume": -2522.875748099759,
+            "delta_formation_enthalpy": -424357359.3552246,
+            "gas_rho": 8.171207373169984e-08,
+            "equilibrium_rho": 8.172892210070093e-08,
+            "condensed_mass_fraction": 0.004409036764869087
+          },
+          "delta_entropy": -285435.39037913264,
+          "delta_enthalpy": -424357376.42445695,
+          "delta_cp": 1181422.151233809,
+          "delta_cp_from_species_enthalpies": 1181422.789015997,
+          "delta_specific_volume": -2522.875433062321,
+          "delta_dvolume_dT_at_P": 5.969572433947936,
+          "delta_dvolume_dP_at_T": 0.5568568261156619,
+          "pressure_identity_error_in_gas_volume": 2.574236237950971e-11,
+          "enthalpy_identity_error_in_kT_per_bulk_atom": -1.901534052734313e-10
+        }
+      ]
+    },
+    {
+      "temperature_K": 2400,
+      "pressure_bar": 0.1,
+      "scans": [
+        {
+          "logarithmic_step": 0.008,
+          "central": {
+            "delta_g_over_T": 0.0,
+            "delta_specific_volume": 0.0,
+            "delta_formation_enthalpy": 0.0,
+            "gas_rho": 1.1649853330709603e-06,
+            "equilibrium_rho": 1.1649853330709603e-06,
+            "condensed_mass_fraction": 0.0
+          },
+          "delta_entropy": -0.0,
+          "delta_enthalpy": -0.0,
+          "delta_cp": -0.0,
+          "delta_cp_from_species_enthalpies": 0.0,
+          "delta_specific_volume": 0.0,
+          "delta_dvolume_dT_at_P": 0.0,
+          "delta_dvolume_dP_at_T": 0.0,
+          "pressure_identity_error_in_gas_volume": 0.0,
+          "enthalpy_identity_error_in_kT_per_bulk_atom": -0.0
+        },
+        {
+          "logarithmic_step": 0.004,
+          "central": {
+            "delta_g_over_T": 0.0,
+            "delta_specific_volume": 0.0,
+            "delta_formation_enthalpy": 0.0,
+            "gas_rho": 1.1649853330709603e-06,
+            "equilibrium_rho": 1.1649853330709603e-06,
+            "condensed_mass_fraction": 0.0
+          },
+          "delta_entropy": -0.0,
+          "delta_enthalpy": -0.0,
+          "delta_cp": -0.0,
+          "delta_cp_from_species_enthalpies": 0.0,
+          "delta_specific_volume": 0.0,
+          "delta_dvolume_dT_at_P": 0.0,
+          "delta_dvolume_dP_at_T": 0.0,
+          "pressure_identity_error_in_gas_volume": 0.0,
+          "enthalpy_identity_error_in_kT_per_bulk_atom": -0.0
+        },
+        {
+          "logarithmic_step": 0.002,
+          "central": {
+            "delta_g_over_T": 0.0,
+            "delta_specific_volume": 0.0,
+            "delta_formation_enthalpy": 0.0,
+            "gas_rho": 1.1649853330709603e-06,
+            "equilibrium_rho": 1.1649853330709603e-06,
+            "condensed_mass_fraction": 0.0
+          },
+          "delta_entropy": -0.0,
+          "delta_enthalpy": -0.0,
+          "delta_cp": -0.0,
+          "delta_cp_from_species_enthalpies": 0.0,
+          "delta_specific_volume": 0.0,
+          "delta_dvolume_dT_at_P": 0.0,
+          "delta_dvolume_dP_at_T": 0.0,
+          "pressure_identity_error_in_gas_volume": 0.0,
+          "enthalpy_identity_error_in_kT_per_bulk_atom": -0.0
+        },
+        {
+          "logarithmic_step": 0.001,
+          "central": {
+            "delta_g_over_T": 0.0,
+            "delta_specific_volume": 0.0,
+            "delta_formation_enthalpy": 0.0,
+            "gas_rho": 1.1649853330709603e-06,
+            "equilibrium_rho": 1.1649853330709603e-06,
+            "condensed_mass_fraction": 0.0
+          },
+          "delta_entropy": -0.0,
+          "delta_enthalpy": -0.0,
+          "delta_cp": -0.0,
+          "delta_cp_from_species_enthalpies": 0.0,
+          "delta_specific_volume": 0.0,
+          "delta_dvolume_dT_at_P": 0.0,
+          "delta_dvolume_dP_at_T": 0.0,
+          "pressure_identity_error_in_gas_volume": 0.0,
+          "enthalpy_identity_error_in_kT_per_bulk_atom": -0.0
+        }
+      ]
+    }
+  ],
+  "source_outputs_sha256": {
+    "input.dat": "898aeabff7374520daf64c11ae7b91e88be3e92d85bdfba5a91daeb58a1ebf57",
+    "gas.json.gz": "097a07c10f3a567a788a77b832c3adc3cbdec7882afac09a5c52265d44f0d2fe",
+    "equilibrium.json.gz": "2de81f6a5a725c6f14838180b91d98acf375044feb108b5190313cbe48b10328"
+  },
+  "runtime_status": "not installed; numerical and physical joins still require validation"
+}

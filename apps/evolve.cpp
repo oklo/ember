@@ -34,6 +34,29 @@ private:
   const ember::Atmosphere& source_;
   mutable std::vector<Entry> entries_;
 };
+// The driver is single-threaded. Adjacent zones share an identical endpoint,
+// and burning residual/Jacobian calls frequently repeat the same state.
+// Retain complete PP responses keyed by every physical input; no approximate
+// lookup, rounded key or reuse across a changed composition is allowed.
+class CachedNuclear final : public ember::Nuclear {
+public:
+  explicit CachedNuclear(const ember::PPChains& source):source_(source) {}
+  ember::NuclearResponse composition_response(double T,double rho,const ember::Composition& c) const override {
+    for(const auto& e:entries_)if(e.T==T && e.rho==rho && e.c.basis==c.basis
+        && e.c.metal_inventory==c.metal_inventory && e.c.X==c.X)return e.response;
+    const auto response=source_.composition_response(T,rho,c);
+    if(entries_.size()==16)entries_.erase(entries_.begin());
+    entries_.push_back({T,rho,c,response});return response;
+  }
+  ember::NuclearState eval(double T,double rho,const ember::Composition& c) const override {
+    return composition_response(T,rho,c).state;
+  }
+  const char* name() const override { return source_.name(); }
+private:
+  struct Entry {double T,rho;ember::Composition c;ember::NuclearResponse response;};
+  const ember::PPChains& source_;
+  mutable std::vector<Entry> entries_;
+};
 void json_string(const std::string& value) {
   std::putchar('"');
   for(unsigned char ch:value) {
@@ -53,29 +76,34 @@ template<class T> T number(const char* text) {
 int main(int argc,char** argv) {
   using namespace ember;
   if(argc==2 && std::string(argv[1])=="--help") {
-    std::puts("usage: ember-evolve [points [duration_years [initial_step_years [tolerance_scale [nuclear_model [transport [atmosphere [eos [criterion]]]]]]]]]\nDefaults: 512, 1e8, 1e7, 1, sfii-svh, wd, cond-corrected. Fixed baryonic 0.1 Msun, X=.7 Z=.02 initially.\nNuclear: sfii-svh, sfii-debye, sfii-legacy-screening, legacy.\nTransport: wd (weakly damped 2021 conduction), classic, undamped, none, early (historical bounded physics).\nAtmosphere: cond-corrected, grey-convective, cond-y076, cond-top002, cond-alpha15, nongrey:/path/to/atmosphere.dat.\nEOS: proxy (historical H/He), metal:/path/to/family.dat (GS98 H/He3). Convection criterion: schwarzschild (default), ledoux, ledoux-diffusive (Langer alpha=.1, Kippenhahn alpha=1).\nImplicit pp burning and instantaneous convective mixing, step-doubling control.\nExtended X/Z opacity with elemental isotope mapping; grey convective composition correction anchored to solar COND.\nJSON on stdout, progress on stderr; exit zero only at requested duration.\nTrailing options: --checkpoint FILE writes the latest accepted state atomically; use a new path. --restart FILE restores internal variables and next step; duration is the target age. Physics, tolerances, executable bytes and original tables must match. Invoke with an executable file path.\n--checkpoint-after N writes once after N accepted steps in this invocation while continuing the calculation, for exact restart comparisons. Restart JSON history contains only the continued segment.");return 0;
+    std::puts("usage: ember-evolve [points [duration_years [initial_step_years [tolerance_scale [nuclear_model [transport [atmosphere [eos [criterion]]]]]]]]]\nDefaults: 512, 1e8, 1e7, 1, sfii-svh, wd, cond-corrected. Fixed baryonic 0.1 Msun, X=.7 Z=.02 initially.\nNuclear: sfii-svh, sfii-debye, sfii-legacy-screening, legacy.\nTransport: wd (weakly damped 2021 conduction), classic, undamped, none, early (historical bounded physics).\nAtmosphere: cond-corrected, grey-convective, cond-y076, cond-top002, cond-alpha15, nongrey:/path/to/atmosphere.dat.\nEOS: proxy (historical H/He), metal:/path/to/family.dat (GS98 H/He3). Convection criterion: schwarzschild (default), ledoux, ledoux-diffusive (Langer alpha=.1, Kippenhahn alpha=1).\nImplicit pp burning and instantaneous convective mixing, step-doubling control.\nExtended X/Z opacity with elemental isotope mapping; grey convective composition correction anchored to solar COND.\nJSON on stdout, progress on stderr; exit zero only at requested duration.\nTrailing options: --checkpoint FILE writes the latest accepted state atomically; use a new path. --restart FILE restores internal variables and next step; duration is the target age. Physics, tolerances, executable bytes and original tables must match. Invoke with an executable file path.\n--checkpoint-after N writes once after N accepted steps in this invocation while continuing the calculation, for exact restart comparisons. Restart JSON history contains only the continued segment.\n--opacity-directory DIR selects a separately validated AESOPUS/TOPS family for extended transport; default is the original data/opacity. Selection and every source plane are bound to restart identity.\n--thermal-neutrinos none|plasma-hrw selects thermal losses (default none); plasma-hrw is plasma decay only, not all thermal channels.");return 0;
   }
   try {
-    std::string restart_path,checkpoint_path;
+    std::string restart_path,checkpoint_path,opacity_directory,thermal_neutrinos;
     std::size_t checkpoint_after=0;bool after_requested=false,flags_started=false;
     std::vector<char*> positional{argv[0]};
     for(int i=1;i<argc;++i) {
       const std::string option=argv[i];
       if(option.starts_with("--")) {
         flags_started=true;
-        if(i+1==argc)throw std::invalid_argument("checkpoint option requires a value");
+        if(i+1==argc || std::string(argv[i+1]).empty())throw std::invalid_argument("driver option requires a value");
         if(option=="--restart" && restart_path.empty())restart_path=argv[++i];
         else if(option=="--checkpoint" && checkpoint_path.empty())checkpoint_path=argv[++i];
+        else if(option=="--opacity-directory" && opacity_directory.empty())opacity_directory=argv[++i];
+        else if(option=="--thermal-neutrinos" && thermal_neutrinos.empty())thermal_neutrinos=argv[++i];
         else if(option=="--checkpoint-after" && !after_requested) {
           checkpoint_after=number<std::size_t>(argv[++i]);after_requested=true;
           if(checkpoint_after==0 || checkpoint_after>10000)throw std::invalid_argument("invalid checkpoint step");
-        } else throw std::invalid_argument("unknown or repeated checkpoint option");
+        } else throw std::invalid_argument("unknown or repeated driver option");
       } else {
-        if(flags_started)throw std::invalid_argument("positional arguments must precede checkpoint options");
+        if(flags_started)throw std::invalid_argument("positional arguments must precede driver options");
         positional.push_back(argv[i]);
       }
     }
     if(after_requested && checkpoint_path.empty())throw std::invalid_argument("checkpoint-after requires checkpoint output");
+    if(thermal_neutrinos.empty())thermal_neutrinos="none";
+    if(thermal_neutrinos!="none" && thermal_neutrinos!="plasma-hrw")
+      throw std::invalid_argument("unknown thermal-neutrino model");
     if(!checkpoint_path.empty() && std::filesystem::exists(checkpoint_path))
       throw std::invalid_argument("use a new checkpoint output path");
     argc=static_cast<int>(positional.size());argv=positional.data();
@@ -107,6 +135,10 @@ int main(int argc,char** argv) {
       throw std::invalid_argument("invalid resolution or duration");
     const std::string data=EMBER_DATA_DIR;
     const bool early=transport_model=="early";
+    if(early && !opacity_directory.empty())
+      throw std::invalid_argument("early transport requires its historical opacity inputs");
+    if(opacity_directory.empty())opacity_directory=data+"/opacity";
+    opacity_directory=std::filesystem::canonical(opacity_directory).string();
     std::unique_ptr<Eos> selected_eos;
     if(eos_model.starts_with("metal:"))
       selected_eos=std::make_unique<MetalHelmholtzEos>(eos_model.substr(6),HelmholtzTableEos::Mixture::allow_documented_proxy);
@@ -116,7 +148,7 @@ int main(int argc,char** argv) {
     TopsOpacity high(data+"/opacity",TopsOpacity::Grid::composition);
     BlendedOpacity old_radiative(low,high,4.4,4.5);
     std::shared_ptr<Opacity> radiative=early?std::shared_ptr<Opacity>(std::make_shared<NominalAbundanceOpacity>(old_radiative)):
-      std::shared_ptr<Opacity>(std::make_shared<StellarMixtureOpacity>(data+"/opacity"));
+      std::shared_ptr<Opacity>(std::make_shared<StellarMixtureOpacity>(opacity_directory));
     TabulatedConduction conduction(data+"/conduction/"+(transport_model=="classic"?"condtab21_I":
       transport_model=="undamped"?"condtab21nd":"condtab21wd")+(eos_model.starts_with("metal:")?"_metals.dat":".dat"));
     const bool conductive=!early && transport_model!="none";
@@ -137,12 +169,15 @@ int main(int argc,char** argv) {
     const Atmosphere& raw_atmosphere=nongrey?static_cast<const Atmosphere&>(*grid):early?static_cast<const Atmosphere&>(frozen):atmosphere_model=="grey-convective"?
       static_cast<const Atmosphere&>(column):static_cast<const Atmosphere&>(corrected);
     CachedAtmosphere atmosphere(raw_atmosphere);
-    PPChains nuclear(nuclear_model=="legacy"?PPRates::legacy:PPRates::solar_fusion_ii,
+    PPChains nuclear_source(nuclear_model=="legacy"?PPRates::legacy:PPRates::solar_fusion_ii,
       nuclear_model=="sfii-svh"?PPScreening::salpeter_van_horn:nuclear_model=="sfii-debye"?
       PPScreening::debye_fermi:PPScreening::legacy_weak);
+    CachedNuclear nuclear(nuclear_source);
     Physics physics{&eos,&opacity,&nuclear,1.9,
       criterion=="schwarzschild"?ConvectiveCriterion::schwarzschild:ConvectiveCriterion::ledoux,
       criterion=="ledoux-diffusive"?.1:0,criterion=="ledoux-diffusive"?1.:0};
+    PlasmaNeutrinoLosses plasma_losses;
+    if(thermal_neutrinos=="plasma-hrw")physics.neutrino_losses=&plasma_losses;
     double seed_radius=.15*constants::Rsun, seed_teff=0;
     if(grid) {
       const auto support=grid->support();
@@ -153,7 +188,8 @@ int main(int argc,char** argv) {
     const driver::Selections selections{nuclear_model,transport_model,atmosphere_model,eos_model,criterion};
     driver::Identities identities;
     if(!restart_path.empty() || !checkpoint_path.empty())
-      identities=driver::input_identities(argv[0],data,atmosphere_model,eos_model);
+      identities=driver::input_identities(argv[0],data,atmosphere_model,eos_model,opacity_directory);
+    identities["thermal_neutrinos"]=thermal_neutrinos;
     Model model;std::size_t accepted=0,rejected=0;
     if(restart_path.empty()) {
       const auto seed=example::stellar_seed(points,.1*constants::Msun,seed_radius,composition,nuclear,atmosphere,1.5,seed_teff);
@@ -175,16 +211,32 @@ int main(int argc,char** argv) {
       checkpoint_written=true;
     };
     if(!checkpoint_path.empty() && !after_requested)save();
-    struct Record {double age,step,R,L,Teff,X,Y3,error,energy,mass;std::size_t iterations;double convective,Tc,rhoc,Xs,Y3s;};
+    struct Record {double age,step,R,L,Teff,X,Y3,error,energy,mass;std::size_t iterations;double convective,Tc,rhoc,Xs,Y3s,Lnuc,Lnucnu,Lgrav,MH,Lthermalnu;};
     std::vector<Record> history;
+    const auto diagnostic_weights=nodal_mass_weights(model);
     auto record=[&](double step,double error,const EvolutionStep& result) {
       const double radius=model.r(points-1),lum=model.y.back().L;
       double convective=result.convective_mass_fraction;
-      if(step==0){const auto weights=nodal_mass_weights(model);for(auto [begin,end]:convective_mixing_regions(model,physics))if(end>begin+1)for(std::size_t i=begin;i<end;++i)convective+=weights[i]/model.M;}
+      double nuclear_lum=result.nuclear_luminosity,nuclear_neutrino_lum=result.neutrino_luminosity,hydrogen_mass=0;
+      double thermal_neutrino_lum=result.thermal_neutrino_luminosity;
+      for(std::size_t i=0;i<points;++i) {
+        hydrogen_mass+=diagnostic_weights[i]*model.comp[i].h1();
+        if(step==0) {
+          const auto n=nuclear.eval(model.T(i),model.rho(i),model.comp[i]);
+          nuclear_lum+=diagnostic_weights[i]*n.eps;
+          nuclear_neutrino_lum+=diagnostic_weights[i]*n.eps_neutrino;
+          thermal_neutrino_lum+=diagnostic_weights[i]*evaluate_losses(
+              physics.neutrino_losses,model.T(i),model.rho(i),model.comp[i]).eps;
+        }
+      }
+      if(step==0){for(auto [begin,end]:convective_mixing_regions(model,physics))if(end>begin+1)for(std::size_t i=begin;i<end;++i)convective+=diagnostic_weights[i]/model.M;}
       history.push_back({model.age/year,step/year,radius/constants::Rsun,lum/constants::Lsun,
         std::pow(lum/(4*M_PI*constants::sigma_SB*radius*radius),.25),model.comp[0].X[0],model.comp[0].X[1],
         error,result.luminosity_balance,result.nuclear_mass_balance,result.coupling_iterations,
-        convective,model.T(0),model.rho(0),model.comp.back().X[0],model.comp.back().X[1]});
+        convective,model.T(0),model.rho(0),model.comp.back().X[0],model.comp.back().X[1],
+        nuclear_lum/constants::Lsun,nuclear_neutrino_lum/constants::Lsun,
+        result.gravitational_luminosity/constants::Lsun,hydrogen_mass/constants::Msun,
+        thermal_neutrino_lum/constants::Lsun});
     };
     record(0,0,{});
     EvolutionOptions options;std::string last_failure;bool success=true;
@@ -227,6 +279,9 @@ int main(int argc,char** argv) {
     }
     std::printf(",\n\"nuclear_model\":");json_string(nuclear_model);
     std::printf(",\n\"nuclear_physics\":");json_string(nuclear.name());
+    std::printf(",\n\"thermal_neutrino_model\":");json_string(thermal_neutrinos);
+    std::printf(",\n\"thermal_neutrino_physics\":");json_string(physics.neutrino_losses?physics.neutrino_losses->name():"thermal neutrinos omitted");
+    std::printf(",\n\"thermal_neutrino_limitations\":");json_string(physics.neutrino_losses?"plasma decay only; fully ionized approximation; pair, photo, bremsstrahlung and recombination omitted":"all thermal-neutrino channels omitted");
     std::printf(",\n\"transport_model\":");json_string(transport_model);
     std::printf(",\n\"eos_model\":");json_string(eos_model);
     std::printf(",\n\"metal_inventory\":");json_string(composition.metal_inventory==MetalInventory::gs98?
@@ -237,6 +292,7 @@ int main(int argc,char** argv) {
       physics.alpha_semiconvection,physics.alpha_thermohaline);
     std::printf(",\n\"atmosphere_model\":");json_string(early?"frozen":atmosphere_model);
     std::printf(",\n\"opacity\":");json_string(radiative->name());
+    std::printf(",\n\"opacity_directory\":");json_string(opacity_directory);
     std::printf(",\n\"atmosphere\":");json_string(atmosphere.name());
     std::printf(",\n\"conduction\":");json_string(conductive?conduction.name():"omitted");
     if(!nongrey)std::printf(",\n\"atmosphere_integration\":{\"log_state_tolerance\":%.17g,\"sensitivity_tolerance\":%.17g,\"tau_top\":%.17g,\"alpha\":%.17g,\"henyey_y\":%.17g}",atmosphere_options.tolerance,atmosphere_options.sensitivity_tolerance,atmosphere_options.tau_top,atmosphere_options.alpha,atmosphere_options.henyey_y);
@@ -247,18 +303,23 @@ int main(int argc,char** argv) {
       std::printf(",\n\"atmosphere_grid_support\":{\"hydrogen\":[%.17g,%.17g],\"helium3\":[%.17g,%.17g],\"teff_K\":[%.17g,%.17g],\"gravity_cm_s2\":[%.17g,%.17g]}",
         support.hydrogen[0],support.hydrogen[1],support.helium3[0],support.helium3[1],
         support.teff[0],support.teff[1],support.gravity[0],support.gravity[1]);
+      if(grid->has_missing_states())
+        std::printf(",\n\"atmosphere_grid_support_scope\":\"Outer bounds only; cells require all sixteen validated corner states, including the derivative stencil. Missing source states are rejected.\"");
     }
     std::printf(",\n\"nuclear_limitations\":\"reduced pp network: no pep, hep, ppIII or CNO; SFII pp curvature omitted; SVH approximate, not derived from FreeEOS; modern screening requires zeta<=.2\"");
+    std::printf(",\n\"history_energy_scope\":\"Nuclear deposited and nuclear-neutrino luminosities use nodal baryonic mass weights. Thermal-neutrino luminosity is the positive sink from the explicitly selected thermal model and is subtracted from deposited nuclear plus gravothermal heating. Gravothermal luminosity describes the last accepted implicit half step; null at the initial or restored state. Hydrogen mass includes all remaining core and envelope fuel.\"");
     const auto screening=pp_screening(model.T(0),model.rho(0),model.comp[0],PPReaction::pp,
       nuclear_model=="sfii-svh"?PPScreening::salpeter_van_horn:nuclear_model=="sfii-debye"?
       PPScreening::debye_fermi:PPScreening::legacy_weak);
     std::printf(",\n\"central_screening\":{\"pp_log_factor\":%.17g,\"electron_susceptibility\":%.17g,\"gamma_e\":%.17g,\"pp_zeta\":%.17g}",
       screening.log_factor,screening.electron_susceptibility,screening.gamma_e,screening.zeta);
-    std::printf(",\n\"points\":%zu,\n\"mass_basis\":\"conserved baryonic mass; nuclear rest mass release accounted in energy, Newtonian gravity\",\n\"mass_Msun\":0.1,\n\"age_origin\":\"specified static composition, not age since formation\",\n\"limitations\":\"source domains enforced; He isotope cross sections approximated, GS98 metals; atmosphere/EOS/opacity source mixture approximations; selected convection criterion; semiconvective heat flux and microscopic settling omitted; fixed mass mesh; conduction mixture and envelope join approximations\",\n\"step_error_tolerances\":{\"log_structure\":%.17g,\"absolute_abundance\":%.17g,\"relative_surface_luminosity\":%.17g},\n\"rejected_steps\":%zu,\n\"columns\":[\"age_yr\",\"step_yr\",\"R_Rsun\",\"L_Lsun\",\"Teff_K\",\"central_X\",\"central_Y3\",\"step_error_norm\",\"discrete_luminosity_balance\",\"nuclear_rest_mass_balance\",\"last_halfstep_coupling_iterations\",\"convective_mass_fraction\",\"central_T_K\",\"central_rho\",\"surface_X\",\"surface_Y3\"],\n\"history\":[\n",points,1e-5*tolerance_scale,1e-8*tolerance_scale,1e-4*tolerance_scale,rejected);
+    std::printf(",\n\"points\":%zu,\n\"mass_basis\":\"conserved baryonic mass; nuclear rest mass release accounted in energy, Newtonian gravity\",\n\"mass_Msun\":0.1,\n\"age_origin\":\"specified static composition, not age since formation\",\n\"limitations\":\"source domains enforced; He isotope cross sections approximated, GS98 metals; atmosphere/EOS/opacity source mixture approximations; selected convection criterion; semiconvective heat flux and microscopic settling omitted; fixed mass mesh; conduction mixture and envelope join approximations\",\n\"step_error_tolerances\":{\"log_structure\":%.17g,\"absolute_abundance\":%.17g,\"relative_surface_luminosity\":%.17g},\n\"rejected_steps\":%zu,\n\"columns\":[\"age_yr\",\"step_yr\",\"R_Rsun\",\"L_Lsun\",\"Teff_K\",\"central_X\",\"central_Y3\",\"step_error_norm\",\"discrete_luminosity_balance\",\"nuclear_rest_mass_balance\",\"last_halfstep_coupling_iterations\",\"convective_mass_fraction\",\"central_T_K\",\"central_rho\",\"surface_X\",\"surface_Y3\",\"nuclear_deposited_Lsun\",\"nuclear_neutrino_Lsun\",\"last_halfstep_gravothermal_Lsun\",\"hydrogen_mass_Msun\",\"thermal_neutrino_Lsun\"],\n\"history\":[\n",points,1e-5*tolerance_scale,1e-8*tolerance_scale,1e-4*tolerance_scale,rejected);
     for(std::size_t i=0;i<history.size();++i) {
       const auto& r=history[i];
-      std::printf("%s[%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%zu,%.17g,%.17g,%.17g,%.17g,%.17g]",
-        i?",\n":"",r.age,r.step,r.R,r.L,r.Teff,r.X,r.Y3,r.error,r.energy,r.mass,r.iterations,r.convective,r.Tc,r.rhoc,r.Xs,r.Y3s);
+      std::printf("%s[%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%zu,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,%.17g,",
+        i?",\n":"",r.age,r.step,r.R,r.L,r.Teff,r.X,r.Y3,r.error,r.energy,r.mass,r.iterations,r.convective,r.Tc,r.rhoc,r.Xs,r.Y3s,r.Lnuc,r.Lnucnu);
+      if(r.step==0)std::printf("null");else std::printf("%.17g",r.Lgrav);
+      std::printf(",%.17g,%.17g]",r.MH,r.Lthermalnu);
     }
     std::printf("\n],\n\"profile_columns\":[\"mass_g\",\"radius_cm\",\"density_g_cm3\",\"temperature_K\",\"luminosity_erg_s\",\"X\",\"Y3\",\"Y4\"],\n\"profile\":[\n");
     for(std::size_t i=0;i<points;++i)

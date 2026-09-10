@@ -20,8 +20,12 @@ struct Depletion {
   std::vector<int> atomic_index;
   std::vector<std::vector<int>> gas_stoich,cond_stoich;
   std::vector<double> abundance;
+  // One source process has one fixed bulk composition. MOLEQ already keeps
+  // a separate cbase reservoir; retain our own copy defensively so a future
+  // caller cannot accidentally recycle depleted gas as the bulk reservoir.
+  std::vector<double> bulk_reference;
   unsigned h{},electron{};
-  explicit Depletion(const double* bulk,int n) {
+  explicit Depletion(const double* bulk,int n) : bulk_reference(bulk,bulk+n) {
     std::ifstream input("ember-condensates.cfg");
     std::string mode,source,file;
     if(!std::getline(input,mode) || !std::getline(input,source) || !std::getline(input,file)
@@ -52,8 +56,10 @@ struct Depletion {
     for(unsigned j=0;j<chemistry->getGasSpeciesNumber();++j)gas_stoich.push_back(chemistry->getGasSpeciesStoichiometry(j));
     for(unsigned j=0;j<chemistry->getCondSpeciesNumber();++j)cond_stoich.push_back(chemistry->getCondSpeciesStoichiometry(j));
   }
-  void evaluate(double T,double P,const double* bulk,double* gas,int n) {
-    std::copy(bulk,bulk+n,gas);
+  void evaluate(double T,double P,double* gas,int n) {
+    if(static_cast<std::size_t>(n)!=bulk_reference.size())
+      throw std::runtime_error("changed depletion element count");
+    std::copy(bulk_reference.begin(),bulk_reference.end(),gas);
     if(!std::isfinite(T+P) || T<100 || P<1e-7 || P>1e9)
       throw std::domain_error("depletion outside T/P support");
     if(!active)return;
@@ -97,7 +103,7 @@ extern "C" void ember_condense_(const double* T,const double* P,const double* bu
   try {
     if(*n!=92)throw std::runtime_error("unsupported source element count");
     static Depletion state(bulk,*n);
-    state.evaluate(*T,*P,bulk,gas,*n);*error=0;
+    state.evaluate(*T,*P,gas,*n);*error=0;
   } catch(const std::exception& e) {
     std::cerr<<"EMBER DEPLETION ERROR: "<<e.what()<<'\n';*error=1;
   }

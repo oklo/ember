@@ -1,0 +1,681 @@
+{
+  "scope": "Compare an independent TOPS composition with bracketing source planes.\n\nThis measures composition interpolation at identical source T/rho coordinates,\nexcluding every substituted cell. It is not a physical opacity uncertainty.\n",
+  "manifest_sha256": {
+    "data/opacity/sources/hydrogen_poor/refined_v2_manifest.json": "1f33275f8144258d149ad408f7de66c4c9fd00662def59170df2ec83d16f78ad",
+    "data/opacity/sources/hydrogen_poor/refinement_v2_z020_heldouts/manifest.json": "c6cbf410110e178220809e1a311cb1880c64b2a71917973285b24d5b030eb871"
+  },
+  "active_domain_scope": "Source nodes within the original family rectangles and current logT joins 4.4..4.5, 5.6..5.7. Only the TOPS contribution changes; AESOPUS is held fixed. Not a stellar-profile error or a bound between source nodes.",
+  "gas_logR_support": [
+    -8.0,
+    6.0
+  ],
+  "audit_script_sha256": "a3ad3932b89d9f9f74015699a791e1322181433c148a6d05a45bb06cc84dc651",
+  "comparisons": [
+    {
+      "X": 0.1125,
+      "Z": 0.02,
+      "sources": [
+        {
+          "X": 0.1,
+          "Z": 0.02,
+          "file": "tops_gs98_x010_z020.txt",
+          "sha256": "41d5e43e05903f3e81655dd765d24dfcbfdf97d1132c090b2552a44e4ce74117",
+          "request": "tops_gs98_x010_z020.request.json",
+          "request_sha256": "4636da15edd9a3d0373019feaf6bce3ca698af1fd631d65b9b0fc522f59bd987",
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "parent_manifest": "refined_v1_manifest.json"
+        },
+        {
+          "X": 0.125,
+          "Z": 0.02,
+          "file": "../../../../docs/reports/2026-09-09/artifacts/pending_tops_refinement/tops_gs98_x012_z020.txt",
+          "request": "../../../../docs/reports/2026-09-09/artifacts/pending_tops_refinement/tops_gs98_x012_z020.request.json",
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "sha256": "9a627d8fca1af3f01698fd01595cdc6758441c796a3d6a039f93da53467dd7df",
+          "request_sha256": "c7553d60fb7ca93027349f535293cbe55cb2e5143a57851045b075dfa537d4c5",
+          "validation_role": "candidate_node",
+          "parent_manifest": "quarters_promotion_manifest.json"
+        },
+        {
+          "X": 0.1125,
+          "Z": 0.02,
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "file": "tops_gs98_x011p25_z020.txt",
+          "sha256": "b27b4d98c02f0b52962beeefc388c9e43da748fec4e5d10fcc11057a5a8556f4",
+          "request": "tops_gs98_x011p25_z020.request.json",
+          "request_sha256": "c1695b6cb4e64595d64b20653643e8d077690aef982fb3173327485c14177e34",
+          "validation_role": "heldout"
+        }
+      ],
+      "original_cell_count": 3499,
+      "excluded_cell_count": 51,
+      "worst": {
+        "T_keV": 0.0035,
+        "density_g_cm3": 3.9811,
+        "heldout": 123970.0,
+        "interpolated": 127552.78554386822,
+        "relative_difference": 0.0289004238434154
+      },
+      "hot_rectangle_worst": {
+        "T_keV": 0.04,
+        "density_g_cm3": 6309.6,
+        "heldout": 457.43,
+        "interpolated": 459.07480958989663,
+        "relative_difference": 0.003595762389647872
+      },
+      "family_density_rectangles": {
+        "low": [
+          1e-10,
+          251.19
+        ],
+        "high": [
+          1e-10,
+          10000.0
+        ]
+      },
+      "active_source_node_count": 3345,
+      "active_source_nodes_worst": {
+        "T_keV": 0.0035,
+        "density_g_cm3": 3.9811,
+        "heldout": 123970.0,
+        "interpolated": 127552.78554386822,
+        "relative_difference": 0.0289004238434154,
+        "TOPS_log_opacity_weight": 1.0,
+        "blended_relative_difference": 0.0289004238434154
+      }
+    },
+    {
+      "X": 0.1375,
+      "Z": 0.02,
+      "sources": [
+        {
+          "X": 0.125,
+          "Z": 0.02,
+          "file": "../../../../docs/reports/2026-09-09/artifacts/pending_tops_refinement/tops_gs98_x012_z020.txt",
+          "request": "../../../../docs/reports/2026-09-09/artifacts/pending_tops_refinement/tops_gs98_x012_z020.request.json",
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "sha256": "9a627d8fca1af3f01698fd01595cdc6758441c796a3d6a039f93da53467dd7df",
+          "request_sha256": "c7553d60fb7ca93027349f535293cbe55cb2e5143a57851045b075dfa537d4c5",
+          "validation_role": "candidate_node",
+          "parent_manifest": "quarters_promotion_manifest.json"
+        },
+        {
+          "X": 0.15,
+          "Z": 0.02,
+          "file": "heldout_x015_z020/tops_gs98_x015_z020.txt",
+          "sha256": "e7d629ecf93b90b60ee721e81a7320c989a38a5dc214f7d3ba1676f0df11d8ea",
+          "request": "heldout_x015_z020/tops_gs98_x015_z020.request.json",
+          "request_sha256": "c57bb888defe62058e15453e67211186d331ab4f40eb554b28090f2dd6917ebc",
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "validation_role": "candidate_node",
+          "parent_manifest": "refined_v1_manifest.json"
+        },
+        {
+          "X": 0.1375,
+          "Z": 0.02,
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "file": "tops_gs98_x013p75_z020.txt",
+          "sha256": "a4ef957562e0669cdc5336b7afcd24b1e176fbf8f2776b5c338fac3a9047948d",
+          "request": "tops_gs98_x013p75_z020.request.json",
+          "request_sha256": "a0ab23c8b5174b840d98cdf2d963fb195d63aa8a2e96c277b2ca693ac3d9f1e1",
+          "validation_role": "heldout"
+        }
+      ],
+      "original_cell_count": 3499,
+      "excluded_cell_count": 51,
+      "worst": {
+        "T_keV": 0.0035,
+        "density_g_cm3": 2.5119,
+        "heldout": 222310.0,
+        "interpolated": 228371.32219260818,
+        "relative_difference": 0.027265180120589205
+      },
+      "hot_rectangle_worst": {
+        "T_keV": 0.05,
+        "density_g_cm3": 10000.0,
+        "heldout": 307.13,
+        "interpolated": 306.03594690820216,
+        "relative_difference": -0.0035621824367461086
+      },
+      "family_density_rectangles": {
+        "low": [
+          1e-10,
+          251.19
+        ],
+        "high": [
+          1e-10,
+          10000.0
+        ]
+      },
+      "active_source_node_count": 3345,
+      "active_source_nodes_worst": {
+        "T_keV": 0.0035,
+        "density_g_cm3": 2.5119,
+        "heldout": 222310.0,
+        "interpolated": 228371.32219260818,
+        "relative_difference": 0.027265180120589205,
+        "TOPS_log_opacity_weight": 1.0,
+        "blended_relative_difference": 0.027265180120589205
+      }
+    },
+    {
+      "X": 0.1625,
+      "Z": 0.02,
+      "sources": [
+        {
+          "X": 0.15,
+          "Z": 0.02,
+          "file": "heldout_x015_z020/tops_gs98_x015_z020.txt",
+          "sha256": "e7d629ecf93b90b60ee721e81a7320c989a38a5dc214f7d3ba1676f0df11d8ea",
+          "request": "heldout_x015_z020/tops_gs98_x015_z020.request.json",
+          "request_sha256": "c57bb888defe62058e15453e67211186d331ab4f40eb554b28090f2dd6917ebc",
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "validation_role": "candidate_node",
+          "parent_manifest": "refined_v1_manifest.json"
+        },
+        {
+          "X": 0.175,
+          "Z": 0.02,
+          "file": "../../../../docs/reports/2026-09-09/artifacts/pending_tops_refinement/tops_gs98_x018_z020.txt",
+          "request": "../../../../docs/reports/2026-09-09/artifacts/pending_tops_refinement/tops_gs98_x018_z020.request.json",
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "sha256": "e6f24687907aef1a87d1d3269fe0ec4f4ebe518306c2b91921a866b03ac7911e",
+          "request_sha256": "a8d3962d0b5017ccdefeac429fc56158449734ebefa28fe045cc9c1cf4fce0e3",
+          "validation_role": "candidate_node",
+          "parent_manifest": "quarters_promotion_manifest.json"
+        },
+        {
+          "X": 0.1625,
+          "Z": 0.02,
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "file": "tops_gs98_x016p25_z020.txt",
+          "sha256": "6341aa77883788bea0f7418b8fcf88ae9993e91d4ddf4929b3d58441402e5f65",
+          "request": "tops_gs98_x016p25_z020.request.json",
+          "request_sha256": "7af16529f93e8f551bc4d5eef3d71e8ab487ee0efd8787a1b346dda310a756ab",
+          "validation_role": "heldout"
+        }
+      ],
+      "original_cell_count": 3498,
+      "excluded_cell_count": 52,
+      "worst": {
+        "T_keV": 0.004,
+        "density_g_cm3": 3.9811,
+        "heldout": 102380.0,
+        "interpolated": 104993.20216090196,
+        "relative_difference": 0.025524537613810905
+      },
+      "hot_rectangle_worst": {
+        "T_keV": 0.025,
+        "density_g_cm3": 2511.9,
+        "heldout": 940.18,
+        "interpolated": 943.4093230936402,
+        "relative_difference": 0.0034347923734181496
+      },
+      "family_density_rectangles": {
+        "low": [
+          1e-10,
+          251.19
+        ],
+        "high": [
+          1e-10,
+          10000.0
+        ]
+      },
+      "active_source_node_count": 3345,
+      "active_source_nodes_worst": {
+        "T_keV": 0.004,
+        "density_g_cm3": 3.9811,
+        "heldout": 102380.0,
+        "interpolated": 104993.20216090196,
+        "relative_difference": 0.025524537613810905,
+        "TOPS_log_opacity_weight": 1.0,
+        "blended_relative_difference": 0.025524537613810905
+      }
+    },
+    {
+      "X": 0.1875,
+      "Z": 0.02,
+      "sources": [
+        {
+          "X": 0.175,
+          "Z": 0.02,
+          "file": "../../../../docs/reports/2026-09-09/artifacts/pending_tops_refinement/tops_gs98_x018_z020.txt",
+          "request": "../../../../docs/reports/2026-09-09/artifacts/pending_tops_refinement/tops_gs98_x018_z020.request.json",
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "sha256": "e6f24687907aef1a87d1d3269fe0ec4f4ebe518306c2b91921a866b03ac7911e",
+          "request_sha256": "a8d3962d0b5017ccdefeac429fc56158449734ebefa28fe045cc9c1cf4fce0e3",
+          "validation_role": "candidate_node",
+          "parent_manifest": "quarters_promotion_manifest.json"
+        },
+        {
+          "X": 0.2,
+          "Z": 0.02,
+          "file": "tops_gs98_x020_z020.txt",
+          "sha256": "52d3d81bf6f36f445ea81db68a146132ad2e3edf778e329bb09e58dc332bfb5a",
+          "request": "tops_gs98_x020_z020.request.json",
+          "request_sha256": "e631b5b252496477b2c4b909f2d5f8700b472bff4ba66520213943ed1c8a2c26",
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "parent_manifest": "refined_v1_manifest.json"
+        },
+        {
+          "X": 0.1875,
+          "Z": 0.02,
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "file": "tops_gs98_x018p75_z020.txt",
+          "sha256": "449e2a729beb8583e7eb841f24c6fc5baf78aa76ea7475043ce58044d1cc26a8",
+          "request": "tops_gs98_x018p75_z020.request.json",
+          "request_sha256": "51d504c7c0ef8b99dff952c7ad68fa69f2617048f5628867b21c32a547ae629c",
+          "validation_role": "heldout"
+        }
+      ],
+      "original_cell_count": 3496,
+      "excluded_cell_count": 54,
+      "worst": {
+        "T_keV": 0.0035,
+        "density_g_cm3": 251.19,
+        "heldout": 5735.1,
+        "interpolated": 5828.749881406814,
+        "relative_difference": 0.0163292499532377
+      },
+      "hot_rectangle_worst": {
+        "T_keV": 0.04,
+        "density_g_cm3": 6309.6,
+        "heldout": 430.12,
+        "interpolated": 431.6367894422347,
+        "relative_difference": 0.003526433186633371
+      },
+      "family_density_rectangles": {
+        "low": [
+          1e-10,
+          251.19
+        ],
+        "high": [
+          1e-10,
+          10000.0
+        ]
+      },
+      "active_source_node_count": 3345,
+      "active_source_nodes_worst": {
+        "T_keV": 0.0035,
+        "density_g_cm3": 251.19,
+        "heldout": 5735.1,
+        "interpolated": 5828.749881406814,
+        "relative_difference": 0.0163292499532377,
+        "TOPS_log_opacity_weight": 1.0,
+        "blended_relative_difference": 0.0163292499532377
+      }
+    },
+    {
+      "X": 0.25,
+      "Z": 0.02,
+      "sources": [
+        {
+          "X": 0.2,
+          "Z": 0.02,
+          "file": "tops_gs98_x020_z020.txt",
+          "sha256": "52d3d81bf6f36f445ea81db68a146132ad2e3edf778e329bb09e58dc332bfb5a",
+          "request": "tops_gs98_x020_z020.request.json",
+          "request_sha256": "e631b5b252496477b2c4b909f2d5f8700b472bff4ba66520213943ed1c8a2c26",
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "parent_manifest": "refined_v1_manifest.json"
+        },
+        {
+          "X": 0.3,
+          "Z": 0.02,
+          "file": "../tops_gs98_x030_z020.txt",
+          "sha256": "0afc429393b164c6d522e593bf8061323987210a6fc4a0a701562271d4104e8e",
+          "request": "../tops_gs98_x030_z020.request.json",
+          "request_sha256": "65eb32442bdbd201cfd9630b6004f71bc69e3131374c4343abb51cf774cce114",
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "parent_manifest": "refined_v1_manifest.json"
+        },
+        {
+          "X": 0.25,
+          "Z": 0.02,
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "file": "tops_gs98_x025_z020.txt",
+          "sha256": "14f00f04d8a86ea0a70878c5c4f45340d151d6a829352e13aca96e7a79c69508",
+          "request": "tops_gs98_x025_z020.request.json",
+          "request_sha256": "58fa490a675296e378d5c1c4a1436783a69d90d1b5ee712e34120bc27de0c835",
+          "validation_role": "heldout"
+        }
+      ],
+      "original_cell_count": 3494,
+      "excluded_cell_count": 56,
+      "worst": {
+        "T_keV": 0.005,
+        "density_g_cm3": 2.5119,
+        "heldout": 148570.0,
+        "interpolated": 158699.09829611523,
+        "relative_difference": 0.0681772786976862
+      },
+      "hot_rectangle_worst": {
+        "T_keV": 0.03,
+        "density_g_cm3": 0.39811,
+        "heldout": 4087.7,
+        "interpolated": 4051.8549974055086,
+        "relative_difference": -0.008768990531225707
+      },
+      "family_density_rectangles": {
+        "low": [
+          1e-10,
+          251.19
+        ],
+        "high": [
+          1e-10,
+          10000.0
+        ]
+      },
+      "active_source_node_count": 3345,
+      "active_source_nodes_worst": {
+        "T_keV": 0.005,
+        "density_g_cm3": 2.5119,
+        "heldout": 148570.0,
+        "interpolated": 158699.09829611523,
+        "relative_difference": 0.0681772786976862,
+        "TOPS_log_opacity_weight": 1.0,
+        "blended_relative_difference": 0.0681772786976862
+      }
+    }
+  ]
+}

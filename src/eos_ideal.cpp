@@ -63,9 +63,14 @@ EosState IdealEos::eval(double T, double rho, const Composition& comp) const {
   const double dEta_dlnT   = -f.dIn_dlnb / f.dIn_deta;
   const double dEta_dlnRho =  f.In       / f.dIn_deta;
 
-  const double dPe_dlnT   = (A * mc2 / 3.0) * (f.dIp_deta * dEta_dlnT + f.dIp_dlnb);
+  double dPe_dlnT   = (A * mc2 / 3.0) * (f.dIp_deta * dEta_dlnT + f.dIp_dlnb);
   const double dPe_dlnRho = (A * mc2 / 3.0) * (f.dIp_deta * dEta_dlnRho);
-  const double due_dlnT   = A * mc2 * (f.dIu_deta * dEta_dlnT + f.dIu_dlnb);
+  double due_dlnT   = A * mc2 * (f.dIu_deta * dEta_dlnT + f.dIu_dlnb);
+  if(eta>100.) {
+    const auto response=fermi::density_response(eta,beta,f,false);
+    dPe_dlnT=(A*mc2/3.)*response.dIp_dlnT;
+    due_dlnT=A*mc2*response.dIu_dlnT;
+  }
 
   // --- assemble -------------------------------------------------------------
   EosState s{};
@@ -87,7 +92,8 @@ EosState IdealEos::eval(double T, double rho, const Composition& comp) const {
   s.delta   = s.chiT / s.chiRho;
   s.mu      = 1.0 / (nI + nE);
   s.free_e  = nE / nI;
-  s.S       = 0.0;
+  s.S = IonGas{}.eval(T,rho,comp).S+4*P_rad/(rho*T)
+        +A*kB*fermi::entropy(eta,beta,f)/rho;
   return s;
 }
 

@@ -30,13 +30,19 @@ struct Integrals {
 
 Integrals evaluate(double eta, double beta);
 
+// Dimensionless entropy integral -integral x^2 [f ln f+(1-f)ln(1-f)] dx.
+// Specific electron entropy is A*kB*Is/rho. The degenerate branch evaluates
+// the narrow Fermi shell directly, without subtracting chemical energy.
+double entropy(double eta, double beta, const Integrals&);
+
 // Second derivatives after enforcing n proportional to rho. Temperature
 // variations keep n fixed; density variations keep T fixed. Centered kernels
 // avoid subtracting O(eta^2) integrals to recover a small thermal response.
 struct DensityResponse {
+  double dIp_dlnT{}, dIu_dlnT{};
   double d2Ip_dlnT2{}, d2Ip_dlnTdlnRho{}, d2Ip_dlnRho2{};
   double d2Iu_dlnT2{}, d2Iu_dlnTdlnRho{};
 };
-DensityResponse density_response(double eta, double beta, const Integrals&);
+DensityResponse density_response(double eta, double beta, const Integrals&, bool second=true);
 
 } // namespace ember::fermi

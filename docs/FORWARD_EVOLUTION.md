@@ -1,14 +1,19 @@
 # Forward evolution with helium enrichment
 
-Work in progress, 2026-09-09. The new metal-bearing interior calculation has
-reached 2.85 trillion years using the installed extended 72-cell gas atmosphere
-family. At two trillion years an independent repeat gives byte-identical
-stellar output; doubling the mesh changes luminosity by +.06163% and
-fourfold tighter time tolerances change it by -.00361%. The checkpoint-enabled
-executable repeats the full 2.5-trillion-year output byte for byte and has
-continued its saved state through 2.75 to 2.85 trillion years. The condensate
-radiation experiment is still being calculated. These are intermediate main-sequence
-capabilities; no hydrogen-exhaustion or remnant-cooling claim is made.
+Current status, September 10: a fresh calculation using the refined 64-plane
+EOS, hydrogen-poor TOPS v4 opacity, 96-node gas atmosphere and plasma-neutrino
+losses reached 3.30 trillion years, then its exact restart reached **3.40 trillion
+years**. It remains fully convective, at XH=.2033564 and Teff=3201.95 K.
+See [COLD_REMNANT.md](COLD_REMNANT.md) and the
+[September 10 working paper](reports/2026-09-10/ember_status_and_future.pdf)
+for current input validation and the path to 100 K remnant cooling.
+
+**The detailed numerical comparisons below describe the preserved earlier
+2.85-trillion-year reference and its original input families.** Their
+repeatability and two-trillion-year convergence results remain useful controls;
+they are not convergence measurements of the later transition. The new
+108-node atmosphere candidate is undergoing composition refinement. No
+condensate family, hydrogen-exhaustion result or cooling endpoint is accepted.
 
 ## Elemental mixture and thermodynamics
 

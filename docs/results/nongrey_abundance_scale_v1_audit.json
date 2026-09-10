@@ -1,0 +1,100 @@
+{
+  "scope": "Test the native opacity source's abundance-scale invariance at fixed T/rho.\n\nAll abundances, including trace placeholders, are multiplied by one common\nfactor. Baryonic fractions and element masses are unchanged. This is an\noffline source diagnostic; it neither installs a different normalization nor\nsubstitutes a small hydrogen abundance for the zero-hydrogen endpoint.\n",
+  "XH": 0.15,
+  "X3": 0.005,
+  "temperature_K": 4016.8856461718733,
+  "results": [
+    {
+      "scale": 1.0,
+      "mass_fraction_max_abs_difference": 0.0,
+      "shape": [
+        30000,
+        19,
+        1
+      ],
+      "differences": {
+        "log_electron_density": {
+          "max_abs_log_difference": 0.0,
+          "relative_difference_range": [
+            0.0,
+            0.0
+          ]
+        },
+        "log_opacity": {
+          "max_abs_log_difference": 0.0,
+          "relative_difference_range": [
+            0.0,
+            0.0
+          ]
+        }
+      },
+      "work": "/private/tmp/ember-nongrey-abundance-scale-v1/scale-000",
+      "completed_sha256": "3a6e749fa2927215a2ea34c32fbc07957f93180342da3121f2cf735a4372cfd7"
+    },
+    {
+      "scale": 0.15,
+      "mass_fraction_max_abs_difference": 1.1102230246251565e-16,
+      "shape": [
+        30000,
+        19,
+        1
+      ],
+      "differences": {
+        "log_electron_density": {
+          "max_abs_log_difference": 1.1391107790359456e-06,
+          "relative_difference_range": [
+            -7.959305315878576e-07,
+            1.1391114278228754e-06
+          ]
+        },
+        "log_opacity": {
+          "max_abs_log_difference": 3.307328939437866,
+          "relative_difference_range": [
+            -0.9522620189876697,
+            26.3120757468175
+          ]
+        }
+      },
+      "work": "/private/tmp/ember-nongrey-abundance-scale-v1/scale-001",
+      "completed_sha256": "240f4e5f3c82552a6128647a675a003d31d917e951f4235dbd40711079712841"
+    },
+    {
+      "scale": 3.0,
+      "mass_fraction_max_abs_difference": 4.336808689942018e-19,
+      "shape": [
+        30000,
+        19,
+        1
+      ],
+      "differences": {
+        "log_electron_density": {
+          "max_abs_log_difference": 6.561014629369311e-07,
+          "relative_difference_range": [
+            -6.561012477024133e-07,
+            6.51605943445145e-07
+          ]
+        },
+        "log_opacity": {
+          "max_abs_log_difference": 0.8019952178001404,
+          "relative_difference_range": [
+            -0.5515666512591207,
+            1.083385067372318
+          ]
+        }
+      },
+      "work": "/private/tmp/ember-nongrey-abundance-scale-v1/scale-002",
+      "completed_sha256": "f936cff95fea8b579a8d088d656028413867484d3ae55f676a9b97b84c79bc9b"
+    }
+  ],
+  "input_files_sha256": {
+    "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json": "e05ec1dadcf08a179d62c486f08369a177ce00e7a30387ac33c219cdaa04aff5",
+    "/Users/greglaughlin/Projects/ember/data/atmosphere/sources/nongrey_x015_heldout_specification.json": "30960a4ea8f21913560bd02a34b815b8b47fa86046d1f77edb41bc2f0a10ffef",
+    "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+    "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12": "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+    "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12": "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+    "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12": "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+    "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12": "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+  },
+  "script_sha256": "37b12af1fca0a74d7542ff520edace351d80482d1f1b147b54d9b60b583d0479",
+  "interpretation": "Agreement here would test numerical normalization at this isotherm only; zero-hydrogen chemistry and TLUSTY atmosphere normalization still require separate verification."
+}

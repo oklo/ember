@@ -1,0 +1,167 @@
+{
+  "scope": "Compare completed stellar models at exactly the same age and mass mesh.\n\nThis records a fresh-start/source-family control, not a convergence error\nbound. No interpolation in age, relabelling of a restart, or extrapolation\nis performed. Different intermediate stopping ages can change step phasing.\n",
+  "script_sha256": "dde4b1d09706001efd8a7cf489543017a6852c5f3757ae99cbc350c4addcef1f",
+  "input_files_sha256": {
+    "/Users/greglaughlin/Projects/ember/out/evolution-metal-512-2850gyr-gas-restart.json": "b2d67c169fb29d6a87b2fb66ea8722427a2ce35c8f6b9dc475a6b2b6f15ed0b4",
+    "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-control-512-2850gyr-v1.json": "dcfe52c3aa91ba662cab6b8d58a02aeb222639452ea0b0ce17f1b623c0213161"
+  },
+  "age_yr": 2850000000000,
+  "unchanged_assumptions": {
+    "mass_basis": "conserved baryonic mass; nuclear rest mass release accounted in energy, Newtonian gravity",
+    "mass_Msun": 0.1,
+    "age_origin": "specified static composition, not age since formation",
+    "points": 512,
+    "metal_inventory": "GS98 elemental number pattern; inert carrier labels; representative metal isotopes",
+    "convection_criterion": "ledoux-diffusive",
+    "transport_model": "wd",
+    "nuclear_model": "sfii-svh"
+  },
+  "final_history": {
+    "R_Rsun": {
+      "reference": 0.14876088174924135,
+      "control": 0.14876088731099996,
+      "difference": 5.561758609218259e-09,
+      "relative_difference": 3.7387238794358806e-08
+    },
+    "L_Lsun": {
+      "reference": 0.0018575705980597992,
+      "control": 0.0018575708522955545,
+      "difference": 2.542357552780261e-10,
+      "relative_difference": 1.368646529739279e-07
+    },
+    "Teff_K": {
+      "reference": 3106.83751480519,
+      "control": 3106.8375630312057,
+      "difference": 4.8226015678665135e-05,
+      "relative_difference": 1.5522541957489232e-08
+    },
+    "central_X": {
+      "reference": 0.3028875982546768,
+      "control": 0.30288755544568746,
+      "difference": -4.280898935338229e-08,
+      "relative_difference": -1.4133622373467805e-07
+    },
+    "central_Y3": {
+      "reference": 0.004663338019452628,
+      "control": 0.00466333807905954,
+      "difference": 5.960691142059549e-11,
+      "relative_difference": 1.2782026773944216e-08
+    },
+    "central_T_K": {
+      "reference": 6878544.13316771,
+      "control": 6878544.316578856,
+      "difference": 0.18341114558279514,
+      "relative_difference": 2.6664239122695075e-08
+    },
+    "central_rho": {
+      "reference": 241.23194367687486,
+      "control": 241.23191806506225,
+      "difference": -2.5611812617398755e-05,
+      "relative_difference": -1.0617090020095035e-07
+    },
+    "surface_X": {
+      "reference": 0.3028875982546768,
+      "control": 0.30288755544568746,
+      "difference": -4.280898935338229e-08,
+      "relative_difference": -1.4133622373467805e-07
+    },
+    "surface_Y3": {
+      "reference": 0.004663338019452628,
+      "control": 0.00466333807905954,
+      "difference": 5.960691142059549e-11,
+      "relative_difference": 1.2782026773944216e-08
+    },
+    "convective_mass_fraction": {
+      "reference": 1.0000000000000007,
+      "control": 1.0000000000000007,
+      "difference": 0.0,
+      "relative_difference": 0.0
+    }
+  },
+  "profile": {
+    "mass_g": {
+      "max_absolute_difference": 0.0,
+      "absolute_max_point": 0,
+      "max_relative_difference_where_reference_nonzero": 0.0,
+      "relative_max_point": 511
+    },
+    "radius_cm": {
+      "max_absolute_difference": 386.931547164917,
+      "absolute_max_point": 511,
+      "max_relative_difference_where_reference_nonzero": 3.7387281626666867e-08,
+      "relative_max_point": 510
+    },
+    "density_g_cm3": {
+      "max_absolute_difference": 2.5611812617398755e-05,
+      "absolute_max_point": 0,
+      "max_relative_difference_where_reference_nonzero": 2.361697438900897e-07,
+      "relative_max_point": 502
+    },
+    "temperature_K": {
+      "max_absolute_difference": 0.18341114558279514,
+      "absolute_max_point": 0,
+      "max_relative_difference_where_reference_nonzero": 1.4345251171043822e-07,
+      "relative_max_point": 501
+    },
+    "luminosity_erg_s": {
+      "max_absolute_difference": 1.0357661485522246e+24,
+      "absolute_max_point": 170,
+      "max_relative_difference_where_reference_nonzero": 3.161556882803761e-07,
+      "relative_max_point": 0
+    },
+    "X": {
+      "max_absolute_difference": 4.280898935338229e-08,
+      "absolute_max_point": 0,
+      "max_relative_difference_where_reference_nonzero": 1.4133622373467805e-07,
+      "relative_max_point": 511
+    },
+    "Y3": {
+      "max_absolute_difference": 5.960691142059549e-11,
+      "absolute_max_point": 0,
+      "max_relative_difference_where_reference_nonzero": 1.2782026773944216e-08,
+      "relative_max_point": 511
+    },
+    "Y4": {
+      "max_absolute_difference": 4.2749382478390885e-08,
+      "absolute_max_point": 0,
+      "max_relative_difference_where_reference_nonzero": 6.357267008675328e-08,
+      "relative_max_point": 511
+    }
+  },
+  "input_descriptions": [
+    {
+      "eos_model": "metal:data/eos/freeeos300_gs98_z020.dat",
+      "atmosphere_model": "nongrey:data/atmosphere/nongrey_gs98_z020_extended_tau100.dat",
+      "opacity": "AESOPUS/TOPS X/Z family, number-density isotope mapping; GS98 metal proxy",
+      "opacity_directory": null
+    },
+    {
+      "eos_model": "metal:data/eos/exhaustion_refined_v2/freeeos300_gs98_z020.dat",
+      "atmosphere_model": "nongrey:data/atmosphere/nongrey_gs98_z020_extended_tau100.dat",
+      "opacity": "AESOPUS/TOPS X/Z family, number-density isotope mapping; GS98 metal proxy",
+      "opacity_directory": "/Users/greglaughlin/Projects/ember/data/opacity/hydrogen_poor_refined_v4"
+    }
+  ],
+  "step_error_tolerances": [
+    {
+      "log_structure": 0.0001,
+      "absolute_abundance": 1e-07,
+      "relative_surface_luminosity": 0.001
+    },
+    {
+      "log_structure": 0.0001,
+      "absolute_abundance": 1e-07,
+      "relative_surface_luminosity": 0.001
+    }
+  ],
+  "energy_diagnostics": [
+    {
+      "discrete_luminosity_balance": -1.5543122344752192e-15,
+      "nuclear_rest_mass_balance": -1.869309373958572e-09
+    },
+    {
+      "discrete_luminosity_balance": -4.440892098500626e-16,
+      "nuclear_rest_mass_balance": -2.4247718277692343e-09
+    }
+  ]
+}

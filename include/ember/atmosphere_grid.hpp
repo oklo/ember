@@ -3,6 +3,7 @@
 #include <array>
 #include <filesystem>
 #include <istream>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -29,7 +30,10 @@ public:
   struct Support {
     std::array<double, 2> hydrogen, helium3, teff, gravity;
   };
+  // Outer bounds only: a version-2 table can contain missing source states.
+  // covers() also checks the complete interpolation/derivative stencil.
   Support support() const;
+  bool has_missing_states() const { return has_missing_states_; }
   // Derivatives with H1 or He3 replacing He4; same interpolant as eval().
   struct CompositionResponse {
     double dlnT_dXH, dlnT_dX3, dlnP_dXH, dlnP_dX3;
@@ -39,6 +43,8 @@ public:
 
 private:
   void read(std::istream &, Mixture);
+  std::optional<std::array<std::size_t, 4>>
+  stencil(const std::array<double, 4> &) const;
   // Value (linear units), then dln(value)/d(XH, X3, lnTeff, lng).
   std::array<double, 5> interpolate(const std::vector<double> &,
                                     const std::array<double, 4> &) const;
@@ -49,6 +55,8 @@ private:
   std::array<double, NSPEC - 3> metals_{};
   std::array<std::vector<double>, 4> axes_;
   std::vector<double> logT_, logPg_;
+  std::vector<bool> valid_;
+  bool has_missing_states_{};
 };
 
 } // namespace ember

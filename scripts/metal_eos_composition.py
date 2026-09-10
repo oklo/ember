@@ -6,6 +6,7 @@ recorded explicitly, rather than folding all metals into helium.
 """
 import hashlib
 import json
+import math
 from pathlib import Path
 from generate_nongrey_grid import composition
 from stellar_composition import interior_composition
@@ -15,14 +16,24 @@ ELEMENTS=['H','He','C','N','O','Ne','Na','Mg','Al','Si','P','S','Cl','Ar','Ca','
 
 
 def mixture(hydrogen,helium3):
+    if not math.isfinite(hydrogen+helium3) or hydrogen<0 or helium3<0:
+        raise ValueError('invalid baryonic composition')
     carried=interior_composition(hydrogen)
     carried[1]=helium3;carried[2]-=helium3
     if min(carried)<0:raise ValueError('invalid baryonic composition')
-    abundance,_=composition(hydrogen,helium3,carried[3:])
+    # FreeEOS takes absolute element numbers per source gram and supports
+    # genuinely zero hydrogen. Its input must not inherit the atmosphere
+    # source's N(element)/N(H) normalization singularity. Keep the positive-H
+    # path byte-identical to the archived families.
+    reference_hydrogen = hydrogen if hydrogen>0 else .7
+    abundance,_=composition(reference_hydrogen,helium3 if hydrogen>0 else 0,carried[3:])
     path=ROOT/'data/atmosphere/sources/synple-elements.json'
     elements=json.loads(path.read_text())
     index={s.lower():i for i,s in enumerate(elements['symbol'])}
-    number=[hydrogen*abundance[index[s.lower()]] for s in ELEMENTS]
+    number=[reference_hydrogen*abundance[index[s.lower()]] for s in ELEMENTS]
+    if hydrogen==0:
+        number[0]=0.
+        number[1]=helium3/3+carried[2]/4
     # Convert to a normalized atomic source gram, then convert every source
     # result back to the conserved baryonic gram. Helium uses source He4.
     weights=[elements['mass'][index[s.lower()]] for s in ELEMENTS]
@@ -33,8 +44,8 @@ def mixture(hydrogen,helium3):
     return {'composition_basis':'baryon_mass','metal_mixture':'GS98',
             'hydrogen':hydrogen,'helium3':helium3,'composition':carried,
             'elements':ELEMENTS,'eps':eps,'source_mass_scale':scale,
-            'potassium_number_per_baryon_mass':hydrogen*abundance[k],
-            'potassium_baryonic_mass_fraction':hydrogen*abundance[k]*round(elements['mass'][k]),
+            'potassium_number_per_baryon_mass':reference_hydrogen*abundance[k],
+            'potassium_baryonic_mass_fraction':reference_hydrogen*abundance[k]*round(elements['mass'][k]),
             'element_metadata_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
             'metal_request_sha256':hashlib.sha256((ROOT/'data/opacity/sources/tops_gs98_x070_z020.request.json').read_bytes()).hexdigest(),
             'approximation':'Shared atmosphere GS98 element inventory; FreeEOS omits potassium; representative metal isotopes; source He4 electronic physics and analytic helium isotope entropy; inert carried metal slots retain their existing labels'}

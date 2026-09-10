@@ -1,0 +1,65 @@
+{
+  "scope": "Explicit promotion of previous quarters to candidate nodes in a NEW family. Original coarse/heldout comparisons remain preserved. These points cannot independently validate a family that contains them.",
+  "planes": [
+    {
+      "X": 0.125,
+      "Z": 0.02,
+      "file": "../../../../docs/reports/2026-09-09/artifacts/pending_tops_refinement/tops_gs98_x012_z020.txt",
+      "request": "../../../../docs/reports/2026-09-09/artifacts/pending_tops_refinement/tops_gs98_x012_z020.request.json",
+      "metals": {
+        "C": 0.00343672,
+        "N": 0.0010067,
+        "O": 0.00934712,
+        "Ne": 0.00209662,
+        "Na": 4.18e-05,
+        "Mg": 0.00079848,
+        "Al": 7.206e-05,
+        "Si": 0.00088114,
+        "P": 8.46e-06,
+        "S": 0.00047026,
+        "Cl": 5.84e-06,
+        "Ar": 8.67e-05,
+        "K": 4.56e-06,
+        "Ca": 7.792e-05,
+        "Ti": 3.9e-06,
+        "Cr": 2.234e-05,
+        "Mn": 1.558e-05,
+        "Fe": 0.00152866,
+        "Ni": 9.514e-05
+      },
+      "sha256": "9a627d8fca1af3f01698fd01595cdc6758441c796a3d6a039f93da53467dd7df",
+      "request_sha256": "c7553d60fb7ca93027349f535293cbe55cb2e5143a57851045b075dfa537d4c5",
+      "validation_role": "candidate_node"
+    },
+    {
+      "X": 0.175,
+      "Z": 0.02,
+      "file": "../../../../docs/reports/2026-09-09/artifacts/pending_tops_refinement/tops_gs98_x018_z020.txt",
+      "request": "../../../../docs/reports/2026-09-09/artifacts/pending_tops_refinement/tops_gs98_x018_z020.request.json",
+      "metals": {
+        "C": 0.00343672,
+        "N": 0.0010067,
+        "O": 0.00934712,
+        "Ne": 0.00209662,
+        "Na": 4.18e-05,
+        "Mg": 0.00079848,
+        "Al": 7.206e-05,
+        "Si": 0.00088114,
+        "P": 8.46e-06,
+        "S": 0.00047026,
+        "Cl": 5.84e-06,
+        "Ar": 8.67e-05,
+        "K": 4.56e-06,
+        "Ca": 7.792e-05,
+        "Ti": 3.9e-06,
+        "Cr": 2.234e-05,
+        "Mn": 1.558e-05,
+        "Fe": 0.00152866,
+        "Ni": 9.514e-05
+      },
+      "sha256": "e6f24687907aef1a87d1d3269fe0ec4f4ebe518306c2b91921a866b03ac7911e",
+      "request_sha256": "a8d3962d0b5017ccdefeac429fc56158449734ebefa28fe045cc9c1cf4fce0e3",
+      "validation_role": "candidate_node"
+    }
+  ]
+}

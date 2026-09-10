@@ -1,19 +1,18 @@
 # Roadmap
 
-The target that defines "working": a 0.1 solar-mass star evolved end to end,
-from the Hayashi track through hydrogen exhaustion, the blueward turn, and
-down the helium-white-dwarf cooling track to below 10^-6 Lsun, with automated
-evolution. The hydrogen-burning duration is an output to measure and converge,
-not a prescribed twelve trillion years.
+The active objective is a supported evolution of the 0.1 solar-mass reference
+from its specified static main-sequence state through hydrogen exhaustion
+and helium-remnant cooling to **Teff=100 K**. Formation/pre-main-sequence
+sensitivity and wider mass–composition surveys are additional studies.
+Hydrogen-burning duration is an output to converge, not an imposed lifetime.
 
-**Historical design checklist.** This page retains the original architecture
-plan; individual checkboxes below have not all been reconciled with subsequent
-work. For the current 2.85T gas track, implemented GS98 EOS/conduction/Ledoux
-physics, incomplete input grids and remaining lifetime requirements, use
-[FORWARD_EVOLUTION.md](FORWARD_EVOLUTION.md),
-[LIFETIME_SURVEY.md](LIFETIME_SURVEY.md), and the
-[2026-09-09 report](reports/2026-09-09/ember_status_and_future.pdf).
-An interface or proposed component below is not an implemented physical model.
+**September 10 status:** the completed model reaches **3.40 trillion years**,
+still fully convective with XH=.2033564. The immediate work is hydrogen-poor
+atmosphere refinement and the approaching structural transition. See
+[COLD_REMNANT.md](COLD_REMNANT.md) for the current acceptance order,
+[LIFETIME_SURVEY.md](LIFETIME_SURVEY.md) for the wider programme, and the
+[September 10 working paper](reports/2026-09-10/ember_status_and_future.pdf).
+The checklist below retains architecture history with current qualifications.
 
 ## Done
 
@@ -85,7 +84,7 @@ exist:
 | Coulomb energy of the ion lattice | a new `EosComponent` |
 | Crystallisation, latent heat, Debye solid | a new `EosComponent` |
 | C/O phase separation on freezing | a new `EosComponent` |
-| Plasmon/pair neutrino losses | `NeutrinoLosses`, declared, currently null |
+| Plasmon/pair neutrino losses | `NeutrinoLosses`; HRW plasma implemented, other channels pending |
 | Electron conduction (Cassisi 2007, Blouin 2020) | `Conduction` + `CombinedOpacity` |
 | Carbon/oxygen interiors | `Composition` already carries C12 and O16 |
 | Arbitrary relativity at high density | already done; the electrons are exact |
@@ -100,11 +99,10 @@ but not designed.
 ## Next
 
 - [ ] Coulomb corrections and crystallisation (Potekhin & Chabrier)
-- [ ] Extend the potential to physical metals and wider H depletion; improve
-      isotope/source-fit physics and
-      qualify response accuracy; see `FREEEOS.md`. Keep CMS19's energy guard
-- [ ] Extend hot dense opacity beyond X=.6..75 and to other Z; improve the
-      nominal isotope approximation. Add conduction from Cassisi 2007
+- [x] GS98 metal potential and refined composition coverage through zero H,
+      within the original thermal domain; cold dense EOS still pending
+- [x] Hydrogen-poor TOPS refinements, X/Z source blends and Cassisi-family
+      conduction; source and mixture approximations remain under assessment
 - [ ] CNO out of equilibrium (needed on the pre-main-sequence, where it runs
       once and never again); Chugunov screening for dense matter
 - [ ] Match modern model-atmosphere composition to the interior; quantify
@@ -117,7 +115,8 @@ but not designed.
       comparisons. Current numerical and bulk checks are in `EQUILIBRIUM.md`
 - [ ] Adaptive mesh (the "temporary points" idea, done properly)
 - [x] Time stepping with error control from one full versus two half steps
-- [ ] Ledoux/diffusive transport and validation of moving convective boundaries
+- [x] Ledoux buoyancy and semiconvective/thermohaline composition transport
+- [ ] Microscopic diffusion/settling, its energetics, and converged moving boundaries
 - [ ] 0.1 Msun end to end
 
 ## Lessons carried over from the Fortran line

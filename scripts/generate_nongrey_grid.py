@@ -159,7 +159,7 @@ def opacity_inputs(directory, prepared, spec, x, y, temperature=None):
     return abundance,masses
 
 
-def resample_initial_structure(text, depths):
+def resample_initial_structure(text, depths, *, allow_coarsen=False):
     """Refine a positive LTE molecular seed, preserving its column endpoints.
 
     This interpolates an initial guess only. Transfer, hydrostatic and energy
@@ -170,7 +170,7 @@ def resample_initial_structure(text, depths):
         raise ValueError("missing initial atmosphere")
     n, parameters = int(words[0]), int(words[1])
     values = [float(v) for v in words[2:]]
-    if n < 20 or parameters != -4 or len(values) != 5*n or depths < n:
+    if n < 20 or depths < 20 or parameters != -4 or len(values) != 5*n or (depths < n and not allow_coarsen):
         raise ValueError("invalid initial molecular LTE structure")
     if any(not math.isfinite(v) or v <= 0 for v in values):
         raise ValueError("nonpositive or nonfinite initial structure")
@@ -223,6 +223,52 @@ def atmosphere_inputs(directory, prepared, spec, table, abundance, masses, teff,
     (directory/"opacity.sha256").write_text(digest(table)+"\n")
     (directory/"physics.json").write_text(json.dumps({"data":prepared["data_sha256"]},sort_keys=True)+"\n")
     link(directory/"data",Path(prepared["synple"])/"data")
+
+
+def truncate_initial_structure(text, log, bottom_tau):
+    """Cut a verified seed at its measured Rosseland depth, without extrapolation.
+
+    TAULAS controls TLUSTY's grey initialization; it does not reset the mass
+    grid of an input structure. A continuation can otherwise inherit a much
+    deeper physical column than the nominal input optical depth suggests.
+    This changes the computational lower boundary, whose influence must be
+    checked by independently converged models at multiple column depths.
+    """
+    from bisect import bisect_right
+    words = text.replace('D', 'E').split()
+    n = int(words[0])
+    resample_initial_structure(text, n)
+    values = list(map(float, words[2:]))
+    mass, structure = values[:n], [values[n+4*i:n+4*i+4] for i in range(n)]
+    if 'FINAL MODEL ATMOSPHERE' not in log:
+        raise ValueError('missing seed optical-depth profile')
+    profile = []
+    for line in log.rsplit('FINAL MODEL ATMOSPHERE', 1)[1].splitlines():
+        row = line.replace('D', 'E').split()
+        if len(row) == 11 and row[0].isdigit():
+            profile.append(list(map(float, row)))
+    if len(profile) != n or any(r[0] != i+1 or not math.isclose(r[1], m, rel_tol=1e-7)
+                               for i, (r, m) in enumerate(zip(profile, mass))):
+        raise ValueError('seed optical depths do not match its mass grid')
+    tau = [r[2] for r in profile]
+    if any(not math.isfinite(t) or t <= 0 for t in tau) or any(a >= b for a, b in zip(tau, tau[1:])):
+        raise ValueError('invalid seed optical depths')
+    if not math.isfinite(bottom_tau) or not tau[0] < bottom_tau < tau[-1]:
+        raise ValueError('requested seed bottom is not strictly inside its source profile')
+    j = bisect_right(tau, bottom_tau)-1
+    if j < 19:
+        raise ValueError('truncated seed has fewer than twenty depth points')
+    fraction = math.log(bottom_tau/tau[j])/math.log(tau[j+1]/tau[j])
+    def mix(a, b):
+        return math.exp((1-fraction)*math.log(a)+fraction*math.log(b))
+    cut_mass, cut_structure = mass[:j+1], structure[:j+1]
+    if fraction:
+        cut_mass.append(mix(mass[j], mass[j+1]))
+        cut_structure.append([mix(a, b) for a, b in zip(structure[j], structure[j+1])])
+    result = f'{len(cut_mass)} -4\n'+'\n'.join(format(v, '.17g') for v in cut_mass)+'\n'
+    result += '\n'.join(' '.join(format(v, '.17g') for v in row) for row in cut_structure)+'\n'
+    resample_initial_structure(result, len(cut_mass))
+    return result
 
 
 def convective_tail(initial, depths):

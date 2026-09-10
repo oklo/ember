@@ -7,7 +7,7 @@ from pathlib import Path
 import numpy as np
 
 from generate_nongrey_grid import temperatures,sequence,input_fingerprint
-from import_nongrey_grid import read_text,source_inputs,source_state
+from import_nongrey_grid import read_text,source_inputs,source_state,source_diagnostics_match
 from nongrey_opacity import read_table
 from prepare_nongrey_sources import digest
 from validate_condensate_model import validate,original,PHYSICAL_KEYS
@@ -58,7 +58,8 @@ def thermal_sensitivity(path,reference,directory):
         source_inputs(inputs,spec,*coordinates,log)
         state=source_state(log,read_text(directory/'fort.9.gz'),coordinates[2],coordinates[3],
             {'temperature_K':temperatures(spec),'density_g_cm3':sequence(spec['log_density'])},spec['tau'])
-        if state!=record['diagnostics']:raise ValueError('thermal diagnostics do not reproduce source outputs')
+        if not source_diagnostics_match(record['diagnostics'],state):
+            raise ValueError('thermal diagnostics do not reproduce source outputs')
         relative={k:state[k]/reference['diagnostics'][k]-1 for k in ['T','Pgas','source_density']}
         if relative!=record['relative_boundary_difference']:raise ValueError('thermal comparison differs')
         if any(not np.isfinite(v) or abs(v)>1e-5 for v in relative.values()):

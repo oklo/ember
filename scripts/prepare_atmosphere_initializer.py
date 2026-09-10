@@ -155,7 +155,14 @@ def main():
     receipt['initialization_only']['indexed_russel_lookup']=a.indexed_russel
     if a.depletion_object:
         receipt['initialization_only']['depletion_object_sha256'] = digest(a.depletion_object)
-    (a.work / 'prepared.json').write_text(json.dumps(receipt, indent=2) + '\n')
+    prepared_path=a.work/'prepared.json'
+    prepared_path.write_text(json.dumps(receipt, indent=2) + '\n')
+    numerical=receipt['initialization_only']
+    continuation={k:numerical[k] for k in ['base_source_sha256','patched_source_sha256','patch_sha256',
+                                          'indexed_russel_lookup','opacity_derivative_relative_step']}
+    continuation.update({'executable':str(exe),'executable_sha256':digest(exe),
+                         'preparation_receipt_sha256':digest(prepared_path)})
+    (a.work/'source.json').write_text(json.dumps(continuation,indent=2)+'\n')
     print(a.work / 'prepared.json')
 
 

@@ -1,0 +1,141 @@
+{
+  "scope": "Check depletion with fixed bulk input and a synthetic mutable-bulk caller.\n\nMOLEQ keeps cbase separate from its mutable depleted gas arrays. The fixed-bulk\nsequence models that interface. Feeding gas output back as bulk input is a\nseparate robustness experiment, not evidence of a defect in actual atmospheres.\nThis tests adapter state management, not full Fortran integration or grain EOS.\n",
+  "input_files_sha256": {
+    "/private/tmp/ember-condensate-refined-2800/provenance.json": "e46ec9cca863b390f859f40ea99d33db575118b67e0d6a4f254c26a311fdab97",
+    "/private/tmp/ember-condensate-refined-2800/condensate-abundances.dat": "a30988c94d610234252ada8ec7ba1c19ea7ef9e6f1920a834a6eaf6bac03d16d",
+    "/Users/greglaughlin/Projects/ember/scripts/fastchem_depletion.cpp": "86efadfee7faa3d945ef1ba8996b8025570c28f71c85fb606ff1e4ccb6a880d0",
+    "/private/tmp/ember-fastchem/verified-build/libfastchem_lib.a": "3bdf5caeabe1140aa0056427cf7c13d8c9ce3a709ee3c01fd85c018d9e863466",
+    "/Users/greglaughlin/Projects/ember/scripts/condensate_adapter_probe.cpp": "795a130403ba163953144b4e6947ece32f169333ed2251b4e70d4ca70191b187",
+    "/Users/greglaughlin/Projects/ember/scripts/audit_condensate_memory.py": "f751b0410c07c4cf87b1415355f20878a0758c8b83f5bfa9dee29e5d46eadc03",
+    "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de/input/logK/logK.dat": "eda9b9d7e62ccf7398036ee84349bd0a721b779acdc9d191cbf9fe1dd01f619c",
+    "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de/input/logK/logK_condensates.dat": "566b029470a9affb361dc4e891aa8c4918baeff0f93cf07e804d57e2ebac8467"
+  },
+  "build_command": [
+    "c++",
+    "-std=c++17",
+    "-O3",
+    "-I/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de/fastchem_src",
+    "/private/tmp/ember-condensate-memory-after-v3/probe.cpp",
+    "/private/tmp/ember-condensate-memory-after-v3/adapter.cpp",
+    "/private/tmp/ember-fastchem/verified-build/libfastchem_lib.a",
+    "-o",
+    "/private/tmp/ember-condensate-memory-after-v3/probe"
+  ],
+  "executable_sha256": "5c4537c8d302c215516065dd56c68f9d51abfa21fe0ea7b575aba77a9caecea4",
+  "sequence": [
+    [
+      7000.0,
+      4000.0
+    ],
+    [
+      1400.0,
+      4000.0
+    ],
+    [
+      7000.0,
+      4000.0
+    ],
+    [
+      2400.0,
+      4000.0
+    ],
+    [
+      1400.0,
+      4000.0
+    ],
+    [
+      2400.0,
+      4000.0
+    ],
+    [
+      1769.41749,
+      4061.8898
+    ],
+    [
+      7000.0,
+      4000.0
+    ],
+    [
+      1400.0,
+      4000.0
+    ],
+    [
+      1769.41749,
+      4061.8898
+    ],
+    [
+      2400.0,
+      4000.0
+    ],
+    [
+      7000.0,
+      4000.0
+    ]
+  ],
+  "comparisons": {
+    "fixed_bulk": {
+      "maximum_element_change_in_bulk_abundance_units": 0.0,
+      "sequence_element_defects": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true
+    },
+    "synthetic_mutable_bulk": {
+      "maximum_element_change_in_bulk_abundance_units": 0.0,
+      "sequence_element_defects": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "passed": true
+    }
+  },
+  "maximum_cold_depletion": 0.9999976745274468,
+  "tolerance": 1e-06,
+  "passed": true,
+  "outputs_sha256": {
+    "synthetic_mutable_bulk-sequence.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+    "fixed_bulk-sequence.txt": "2d02ed98af6307896e49e33fbc63b16d1935a997dfcab402480dde2337ccad70",
+    "synthetic_mutable_bulk-sequence.input": "998a875bd95d883cd02656fa525bacc7766858300296d0c4c9c39db96ffaf811",
+    "probe.cpp": "795a130403ba163953144b4e6947ece32f169333ed2251b4e70d4ca70191b187",
+    "fixed_bulk-sequence.input": "998a875bd95d883cd02656fa525bacc7766858300296d0c4c9c39db96ffaf811",
+    "reference-3.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+    "reference-2.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+    "reference-0.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+    "adapter.cpp": "86efadfee7faa3d945ef1ba8996b8025570c28f71c85fb606ff1e4ccb6a880d0",
+    "reference-1.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+    "synthetic_mutable_bulk-sequence.txt": "2d02ed98af6307896e49e33fbc63b16d1935a997dfcab402480dde2337ccad70",
+    "fixed_bulk-sequence.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+    "reference-2.input": "f37497361c995cbc759ef49a3990be26ee4f494d715ae6c2ef3068b613fe14ea",
+    "reference-0.input": "8075bb7b146b34877aa002bb988530f6156a89582b68ecead2f7e53bc54f2ea1",
+    "reference-2.txt": "b2a067326724ef5fbf26ac7d52528fd76a4946586e1b9a17137390f278803497",
+    "reference-1.input": "700179ee0f5e8cf0d3d7998e6b18260e039d0261232ff4d41128c357e8061cbf",
+    "ember-condensates.cfg": "8346a99d1972277961c9bf0f029d78311a7fa8bd902ff8efbd93bd85956b990d",
+    "reference-3.txt": "ecb0b11827b73724d0524d9ab43e762568f5afc8f26da4dc2216fe5c388fd398",
+    "probe": "5c4537c8d302c215516065dd56c68f9d51abfa21fe0ea7b575aba77a9caecea4",
+    "reference-1.txt": "562bbfa664357c8e78737ac912b0f0d191a5d6b4897711cc7ef46e23504dc863",
+    "reference-0.txt": "ecb0b11827b73724d0524d9ab43e762568f5afc8f26da4dc2216fe5c388fd398",
+    "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reference-3.input": "0d12eca0dff0f20c8f50148fa69b6d445536c0a0bc6c7791aea2c8eeb5dfaa36"
+  }
+}

@@ -10,6 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 import resource
+import shlex
 import shutil
 import subprocess
 import time
@@ -18,6 +19,36 @@ ROOT=Path(__file__).resolve().parents[1]
 
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def input_data(arguments):
+    """Include selected families and their references, even outside data/."""
+    data={f.resolve() for directory in ['eos','opacity','conduction','atmosphere']
+          for f in (ROOT/'data'/directory).glob('*.dat')}
+    for arg in arguments:
+        if arg.startswith(('nongrey:', 'metal:')):
+            path=Path(arg.split(':',1)[1])
+            if not path.is_absolute():path=ROOT/path
+            path=path.resolve(strict=True);data.add(path)
+            if arg.startswith('metal:'):data.update(f.resolve() for f in path.parent.glob('*.dat'))
+    if '--opacity-directory' in arguments:
+        directory=Path(arguments[arguments.index('--opacity-directory')+1])
+        if not directory.is_absolute():directory=ROOT/directory
+        for name in ['aesopus21_gs98_mixture.dat','tops_gs98_mixture_low.dat','tops_gs98_mixture_high.dat']:
+            manifest=(directory/name).resolve(strict=True);data.add(manifest)
+            rows=manifest.read_text().splitlines();header=rows[0].split()
+            if len(header)!=5 or header[:2]!=['EMBER_OPACITY_MIXTURE','1'] or len(rows)-1!=int(header[2]):
+                raise ValueError('invalid selected opacity manifest')
+            for row in rows[1:]:
+                fields=shlex.split(row)
+                if len(fields)!=2:raise ValueError('invalid opacity source path')
+                data.add((manifest.parent/fields[1]).resolve(strict=True))
+    return sorted(data)
+
+
+def data_label(path):
+    try:return str(path.relative_to(ROOT))
+    except ValueError:return str(path)
 
 
 def main():
@@ -32,10 +63,10 @@ def main():
     if a.output.exists() or a.output.with_suffix('.log').exists():raise FileExistsError('output already exists')
     a.work.mkdir(parents=True);a.output.parent.mkdir(parents=True,exist_ok=True)
     executable=a.work.resolve()/'ember-evolve';shutil.copy2(a.executable,executable)
-    data=[f for directory in ['eos','opacity','conduction','atmosphere'] for f in (ROOT/'data'/directory).glob('*.dat')]
+    data=input_data(arguments)
     sources=[f for directory in ['src','include','apps','examples'] for f in (ROOT/directory).rglob('*')
              if f.is_file() and f.suffix in ['.cpp','.hpp','.txt']]
-    data_hashes={str(f.relative_to(ROOT)):sha(f) for f in sorted(data)}
+    data_hashes={data_label(f):sha(f) for f in data}
     source_hashes={str(f.relative_to(ROOT)):sha(f) for f in sorted(sources)}
     restart_inputs={}
     if '--restart' in arguments:

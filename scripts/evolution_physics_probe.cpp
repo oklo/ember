@@ -10,13 +10,24 @@
 int main(int argc,char** argv) {
   using namespace ember;
   try {
-    const bool metal=argc==2 && std::string(argv[1])=="--gs98";
-    if(argc!=1 && !metal)throw std::invalid_argument("optional --gs98 only");
+    bool metal=false;
+    std::string eos_family="data/eos/freeeos300_gs98_z020.dat";
+    std::string opacity_directory="data/opacity";
+    bool explicit_family=false;
+    for(int i=1;i<argc;++i) {
+      const std::string arg=argv[i];
+      if(arg=="--gs98")metal=true;
+      else if(arg=="--eos-family" && i+1<argc) {
+        eos_family=argv[++i];explicit_family=true;
+      } else if(arg=="--opacity-directory" && i+1<argc)opacity_directory=argv[++i];
+      else throw std::invalid_argument("expected --gs98, --eos-family PATH or --opacity-directory PATH");
+    }
+    if(explicit_family && !metal)throw std::invalid_argument("explicit metal EOS family requires --gs98");
     std::unique_ptr<Eos> selected;
-    if(metal)selected=std::make_unique<MetalHelmholtzEos>("data/eos/freeeos300_gs98_z020.dat",HelmholtzTableEos::Mixture::allow_documented_proxy);
+    if(metal)selected=std::make_unique<MetalHelmholtzEos>(eos_family,HelmholtzTableEos::Mixture::allow_documented_proxy);
     else selected=std::make_unique<CompositionHelmholtzEos>("data/eos/freeeos300_hhe_extended.dat",HelmholtzTableEos::Mixture::allow_documented_proxy);
     const auto& eos=*selected;
-    StellarMixtureOpacity rad("data/opacity");
+    StellarMixtureOpacity rad(opacity_directory);
     const std::string suffix=metal?"_metals.dat":".dat";
     TabulatedConduction cond("data/conduction/condtab21wd"+suffix), classic("data/conduction/condtab21_I"+suffix),
         undamped("data/conduction/condtab21nd"+suffix);

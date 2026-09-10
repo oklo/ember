@@ -8,6 +8,13 @@
 #include <cstdio>
 
 using namespace ember;
+class CoolingTestLoss final : public NeutrinoLosses {
+public:
+  LossState eval(double T,double rho,const Composition&) const override {
+    return {.02*std::pow(T/5e6,4)*std::pow(rho/200,.25),4,.25};
+  }
+  const char* name() const override { return "analytic cooling test"; }
+};
 int main() {
   const std::string data=EMBER_DATA_DIR;
   CompositionHelmholtzEos eos(data+"/eos/freeeos300_hhe_composition.dat",HelmholtzTableEos::Mixture::allow_documented_proxy);
@@ -58,6 +65,16 @@ int main() {
   check(coarse>0 && fine/coarse<.8,"halving backward-Euler timestep reduces radius evolution error",fine/coarse);
   check(std::abs(final.back().age/duration-1)<1e-14 && initial.age==0 && initial.comp[0].X[1]==0,
         "accepted steps advance age without mutating the previous model");
+  CoolingTestLoss loss;auto cooling_physics=physics;cooling_physics.neutrino_losses=&loss;
+  const auto cooled=evolve_step(initial,cooling_physics,atmosphere,duration/10,options);
+  check(cooled.converged,"implicit thermal evolution converges with an appreciable independent sink");
+  if(cooled.converged) {
+    const double luminosity=cooled.model.y.back().L;
+    check(cooled.thermal_neutrino_luminosity/luminosity>.01 && std::abs(cooled.luminosity_balance)<1e-8,
+          "cooling luminosity is subtracted from the complete discrete energy balance",cooled.luminosity_balance);
+    check(std::abs(cooled.nuclear_mass_balance)<1e-7,
+          "thermal neutrinos do not enter the nuclear rest-mass accounting",cooled.nuclear_mass_balance);
+  }
   options.max_abundance_change=1e-10;
   const auto rejected=evolve_step(initial,physics,atmosphere,duration,options);
   check(!rejected.converged && rejected.model.age==initial.age && rejected.model.comp[0].X==initial.comp[0].X

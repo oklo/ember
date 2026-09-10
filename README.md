@@ -4,73 +4,78 @@ A stellar evolution code for the lowest-mass stars — the ones that burn
 hydrogen for trillions of years, turn blue instead of red when their fuel runs
 out, and end as helium white dwarfs that outlive everything else in the galaxy.
 
-`ember` is a ground-up C++23 rewrite of the FORTRAN line developed in
-[oklo/Henyey](https://github.com/oklo/Henyey), which reconstructed the code of
-Laughlin, Bodenheimer & Adams (1997). That repository is the historical
-artifact and stays as it is. This one is where the physics moves forward: the
-reconstruction's job was to reproduce 1997, and it did; `ember`'s job is to be
-right by today's standards.
+`ember` is a C++23 development of the FORTRAN stellar-evolution line
+reconstructed in [oklo/Henyey](https://github.com/oklo/Henyey), based on
+Laughlin, Bodenheimer & Adams (1997). It is an active research code: numerical
+checks, comparisons with the earlier model, and physical limitations are
+reported alongside each result.
 
-## Status
+## Status — September 10, 2026
 
-The [September 9 scientific report](docs/reports/2026-09-09/ember_status_and_future.pdf)
-([LaTeX and recovery artifacts](docs/reports/2026-09-09/README.md)) covers the
-completed track, input validation limits and the remaining lifetime/remnant
-physics. [The next-session prompt](docs/NEXT_SESSION_PROMPT.md) and the newest
-entry in [HANDOFF.md](HANDOFF.md) describe where to resume.
+The completed **0.1 solar-mass model reaches 3.40 trillion years** from a
+specified static main-sequence model. It is still fully convective and burning
+hydrogen. **Hydrogen exhaustion and white-dwarf cooling have not been reached.**
+The current goal is to evolve the helium remnant to **100 K effective temperature**
+with supported thermodynamics, transport and atmosphere inputs.
 
-The new opt-in **GS98 metal-bearing EOS and Ledoux transport** are described
-in [docs/FORWARD_EVOLUTION.md](docs/FORWARD_EVOLUTION.md). That 512-point
-model reaches **2.85 trillion years** at R=.148761 Rsun, L=.00185757 Lsun and
-Teff=3106.84 K, with XH=.30289 and fully convective structure. The extended
-72-cell gas atmosphere family supplies the boundary. At two trillion years,
-an independent repeat reproduces the entire stellar output byte for byte;
-doubling the mesh changes luminosity by +.06163%, and fourfold tighter time
-tolerances change it by -.00361%. Semiconvective and thermohaline composition
-transport are implemented. [Native restarts](docs/RESTART.md) reproduce the
-subsequent short test trajectory exactly. The checkpoint-enabled executable
-also repeats the entire 2.5-trillion-year track byte for byte, then successfully
-continues its saved state through 2.75 to 2.85 trillion years. The settled-grain condensate
-radiation experiment remains in progress.
-The earlier validated controls and their numerical refinements follow.
-The remaining requirements for complete lifetimes and a mass–metallicity
-survey are in [docs/LIFETIME_SURVEY.md](docs/LIFETIME_SURVEY.md).
+| Latest completed model | Value |
+|---|---:|
+| Initial composition | XH = 0.7, He3 = 0, Z = 0.02; GS98 metals |
+| Mass mesh | 512 points; fixed baryonic mass of 0.1 Msun |
+| Central hydrogen mass fraction | 0.2033564 |
+| Radius | 0.1458864 Rsun |
+| Luminosity | 0.00201550 Lsun |
+| Effective temperature | 3201.95 K |
+| Central temperature | 8.0314 million K |
+| Convective mass fraction | 1 |
 
-Built for the lowest-mass stars first; the interfaces are shaped so
-that the ultra-cold evolution of *massive* remnants - a solar remnant, or
-something near the Chandrasekhar mass - can be added as further terms rather
-than as a rewrite. See `docs/ROADMAP.md`.
+The [September 10 working paper](docs/reports/2026-09-10/ember_status_and_future.pdf)
+([source, figures and reproduction instructions](docs/reports/2026-09-10/README.md))
+replaces the September 9 edition. It covers the new track, source validation,
+F77 comparison, computation cost and the remaining remnant physics. The
+[current development plan](docs/COLD_REMNANT.md) and latest
+[handoff entry](HANDOFF.md) record subsequent work and job status.
 
-The code now completes a **coupled one-trillion-year evolution experiment
-for a 0.1 Msun star**, including explicit He3 burning, instantaneous convective
-mixing and thermal evolution. The model remains fully convective, with
-hydrogen reduced from .7 to about .533 by baryonic mass. Twenty-four test
-suites pass, including independent source queries and conservation checks.
-At 2048 points the final model has **R=.143515 Rsun, L=.00134953 Lsun,
-Teff=2920.28 K**. Mesh and timestep comparisons accompany the reference.
+The completed run selects a **64-plane GS98 EOS**, refined hydrogen-poor TOPS
+opacity, a **96-node non-grey gas atmosphere**, Ledoux convection with slow
+composition mixing, and plasma-neutrino cooling. A fresh run reached 3.30
+trillion years; its exact native restart reached 3.40 trillion years with the
+same executable and inputs. The previous 2.85-trillion-year reference is retained.
 
-The extended model uses eight FreeEOS composition potentials, broader
-AESOPUS/TOPS X/Z opacity families with helium isotope number-density mapping,
-electron conduction, and a convective composition correction anchored to the
-solar AMES-COND atmosphere. An optional **helium-rich non-grey grid** now
-supplies 48 independently computed radiative/convective gas atmospheres,
-interpolated in hydrogen, helium-3, effective temperature and gravity.
-Its source checks and remaining approximations are documented in
-[docs/NONGREY.md](docs/NONGREY.md). With that grid, a 512-point model reaches
-one trillion years at **R=.143578 Rsun, L=.00133023 Lsun, Teff=2909.13 K**,
-remaining fully convective. The stellar run takes 10.2 minutes on an M4 Max;
-the expensive atmosphere calculation is performed beforehand. Metals, isotope
-cross sections and screening retain documented approximations. Time starts
-from a specified static composition, excluding formation; hydrogen exhaustion,
-the blueward turn and white-dwarf cooling remain future milestones.
+A candidate **108-node atmosphere extends warm coverage to XH = 0.1**. Source,
+depth and runtime support checks are complete, but an independent comparison
+found a 2.13% matching-temperature discrepancy, mainly from hydrogen spacing.
+New composition nodes and fresh heldouts are being calculated. A separately
+identified diagnostic stellar run uses that candidate to explore the next
+structural transition; it is outside the completed reference above.
 
-See [docs/EXTENDED_EVOLUTION.md](docs/EXTENDED_EVOLUTION.md) for reproduction,
-source coverage, numerical comparisons and the remaining physical inputs.
-[docs/EVOLUTION.md](docs/EVOLUTION.md) gives the evolution equations and
-historical 10/20-Gyr results; [docs/NUCLEAR.md](docs/NUCLEAR.md) describes the
-SFII/SVH burning prescription. [docs/FREEEOS.md](docs/FREEEOS.md) documents
-the potential and its source-fit uncertainties. The retained
-[CMS19 experiment](docs/CMS19.md) keeps its static-only energy guard.
+The minimum local diffusive-to-adiabatic gradient ratio falls from 1.588 at
+3.30 trillion years to 1.336 at 3.40 trillion years, with the minimum away from
+the center. This suggests approach to loss of full convection; it does not
+establish a radiative-core onset. The retained F77 model reaches its own central
+transition at a different hydrogen abundance. The [comparison and timing
+notes](docs/COMPUTATIONAL_COST.md) explain why the model ages and runtimes are
+not directly interchangeable.
+
+**Verification:** 32 CTest suites pass with installed local inputs. Earlier
+same-physics convergence checks at two trillion years found luminosity changes
+of +0.06163% when doubling the mesh and −0.00361% with fourfold tighter time
+tolerances. Those checks do not establish convergence at the later structural
+transition or of a complete lifetime. [Native restarts](docs/RESTART.md) enforce
+identical executable bytes, tables and physical selections.
+
+Outstanding work includes zero-hydrogen and condensate-consistent atmospheres,
+microscopic diffusion and settling, shell resolution, near-exhaustion nuclear
+branches, full thermal-neutrino losses, and dense helium liquid/solid
+thermodynamics and cooling boundaries. The [cold-electron and dense-EOS
+audits](docs/DENSE_EOS.md) are preparation for those stages. No extrapolated
+cooling law is counted as an evolved remnant.
+
+Earlier controls and numerical comparisons are documented in
+[FORWARD_EVOLUTION.md](docs/FORWARD_EVOLUTION.md),
+[EXTENDED_EVOLUTION.md](docs/EXTENDED_EVOLUTION.md), and
+[NONGREY.md](docs/NONGREY.md). The wider mass–composition survey is described in
+[LIFETIME_SURVEY.md](docs/LIFETIME_SURVEY.md).
 
 ## Design
 
@@ -123,12 +128,13 @@ returns one. Those should surface, not be optimised away.
 |---|---|
 | Composition | GS98 elemental inventory for forward evolution; legacy AAG21 carrier abundances retained |
 | Low-T opacity | AESOPUS 2.1 gas (Marigo et al. 2024), nine X planes at Z=.01/.02/.03, log R to 6; Ferguson (2005) also available with grains |
-| High-T opacity | LANL TOPS ATOMIC at seven X values from .3 to .75, Z=.01/.02/.03; OPAL GS98 subset also available; strict smooth blends |
-| Equation of state | FreeEOS 3.0 EOS1 represented by one C2 Helmholtz potential; GS98 metal-bearing H/He3 family, isotope corrections; historical H/He proxy and static alternatives retained |
+| High-T opacity | LANL TOPS ATOMIC with refined hydrogen-poor composition planes, Z=.01/.02/.03; source-domain masks and smooth blends |
+| Equation of state | FreeEOS 3.0 EOS1 represented by one C2 Helmholtz potential; 64-plane GS98 H/He3 family through XH=0 within its original thermal domain; isotope corrections and masked invalid states |
 | Conduction | Ioffe pure-ion tables; Cassisi et al. (2007, 2021), Blouin et al. (2020); approximate mixture resistivities |
 | Convection | Böhm–Vitense MLT; Schwarzschild or full-EOS Ledoux buoyancy; semiconvective and thermohaline composition transport |
 | Nuclear rates | Reduced pp network, SFII S-factor quadrature, finite-degeneracy SVH screening, atomic mass-defect heating; legacy prescription retained |
-| Atmosphere | TLUSTY208/SYNSPEC54 composition-dependent non-grey gas grid at tau=100; AMES-COND anchor plus grey convective composition correction remains the default control |
+| Atmosphere | TLUSTY208/SYNSPEC54 non-grey gas grid at tau=100; 96 nodes selected, 108-node candidate under refinement; AMES-COND/grey default control retained |
+| Thermal neutrinos | Optional HRW plasma-decay sink with analytic derivatives; other thermal channels remain to be supplied |
 
 ## Licence
 

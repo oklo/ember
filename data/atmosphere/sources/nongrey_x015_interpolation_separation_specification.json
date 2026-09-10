@@ -1,0 +1,61 @@
+{
+  "scope": "Four canonical controls at the independent XH=.15 heldout Teff3300K/logg5.1. Separate the108-node warm candidate discrepancy (+2.1341% matching temperature, -0.7868% gas pressure) into composition and temperature/gravity interpolation contributions. No automatic table adoption or stellar launch.",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-fine-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "x010-y000-t3300-g510",
+      "XH": 0.1,
+      "X3": 0,
+      "teff_K": 3300,
+      "log_g": 5.1,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-000/fort.63",
+      "initial": "/tmp/ember-nongrey-x010-lower-boundary-v2/x010-y000-t3400-g515-seedtau800/final",
+      "composition_continuation": false,
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x010-y120-t3300-g510",
+      "XH": 0.1,
+      "X3": 0.12,
+      "teff_K": 3300,
+      "log_g": 5.1,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_warm_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-001/fort.63",
+      "initial": "/tmp/ember-nongrey-x010-lower-boundary-v2/x010-y000-t3400-g515-seedtau800/final",
+      "composition_continuation": true,
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x020-y000-t3300-g510",
+      "XH": 0.2,
+      "X3": 0,
+      "teff_K": 3300,
+      "log_g": 5.1,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-v1/plane-002/opacity/fort.63",
+      "initial": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/pilot-x020-y000-t3200-g515-refined/final",
+      "composition_continuation": false,
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x020-y120-t3300-g510",
+      "XH": 0.2,
+      "X3": 0.12,
+      "teff_K": 3300,
+      "log_g": 5.1,
+      "specification": "data/atmosphere/sources/nongrey_hydrogen_poor_specification.json",
+      "opacity": "/tmp/ember-nongrey-hydrogen-poor-v1/plane-003/opacity/fort.63",
+      "initial": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/pilot-x020-y120-t3200-g515-refined/final",
+      "composition_continuation": false,
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    }
+  ]
+}

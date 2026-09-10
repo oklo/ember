@@ -1,0 +1,117 @@
+{
+  "scope": "Check that equilibrium depletion is independent of the previous caller state.\n\nThe native MOLEQ caller overwrites its element array after unperturbed calls.\nThe adapter must always restore the fixed bulk reservoir before calculating a\nnew gas state, including zero-condensate states and the hot vaporized branch.\nThis tests source state management, not condensate enthalpy or grain opacity.\n",
+  "input_files_sha256": {
+    "/private/tmp/ember-condensate-refined-2800/provenance.json": "e46ec9cca863b390f859f40ea99d33db575118b67e0d6a4f254c26a311fdab97",
+    "/private/tmp/ember-condensate-refined-2800/condensate-abundances.dat": "a30988c94d610234252ada8ec7ba1c19ea7ef9e6f1920a834a6eaf6bac03d16d",
+    "/private/tmp/ember-condensate-memory-audit-v1/adapter-before.cpp": "8b59accf0dfe6c9b099e43becf8aa266f64b782323074444e756c6f778c676d9",
+    "/private/tmp/ember-fastchem/verified-build/libfastchem_lib.a": "3bdf5caeabe1140aa0056427cf7c13d8c9ce3a709ee3c01fd85c018d9e863466",
+    "/Users/greglaughlin/Projects/ember/scripts/condensate_adapter_probe.cpp": "67558bf7097f0dc191eb31f2f430158aefcfa54daba63df54189f2d25341209c",
+    "/Users/greglaughlin/Projects/ember/scripts/audit_condensate_memory.py": "79f673999c6ad123a3605f506107780cadda5d6ed589bd2b5ccbd313506c2fd0",
+    "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de/input/logK/logK.dat": "eda9b9d7e62ccf7398036ee84349bd0a721b779acdc9d191cbf9fe1dd01f619c",
+    "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de/input/logK/logK_condensates.dat": "566b029470a9affb361dc4e891aa8c4918baeff0f93cf07e804d57e2ebac8467"
+  },
+  "build_command": [
+    "c++",
+    "-std=c++17",
+    "-O3",
+    "-I/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de/fastchem_src",
+    "/private/tmp/ember-condensate-memory-before-v2/probe.cpp",
+    "/private/tmp/ember-condensate-memory-before-v2/adapter.cpp",
+    "/private/tmp/ember-fastchem/verified-build/libfastchem_lib.a",
+    "-o",
+    "/private/tmp/ember-condensate-memory-before-v2/probe"
+  ],
+  "executable_sha256": "6ac7bb76d37e7ac3488f3ba681a097bb9bef7552b24ebb138d3c0d9a4b04cb85",
+  "sequence": [
+    [
+      7000.0,
+      4000.0
+    ],
+    [
+      1400.0,
+      4000.0
+    ],
+    [
+      7000.0,
+      4000.0
+    ],
+    [
+      2400.0,
+      4000.0
+    ],
+    [
+      1400.0,
+      4000.0
+    ],
+    [
+      2400.0,
+      4000.0
+    ],
+    [
+      1769.41749,
+      4061.8898
+    ],
+    [
+      7000.0,
+      4000.0
+    ],
+    [
+      1400.0,
+      4000.0
+    ],
+    [
+      1769.41749,
+      4061.8898
+    ],
+    [
+      2400.0,
+      4000.0
+    ],
+    [
+      7000.0,
+      4000.0
+    ]
+  ],
+  "maximum_element_change_in_bulk_abundance_units": 0.9999976745274468,
+  "sequence_element_defects": [
+    0.0,
+    0.0,
+    0.9999976745274468,
+    0.9999976745274468,
+    0.0,
+    0.9999976745274468,
+    0.0,
+    0.7146675610120481,
+    0.0,
+    0.0,
+    0.7146675610120481,
+    0.7146675610120481
+  ],
+  "maximum_cold_depletion": 0.9999976745274468,
+  "tolerance": 1e-06,
+  "passed": false,
+  "outputs_sha256": {
+    "mutable-sequence.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+    "probe.cpp": "67558bf7097f0dc191eb31f2f430158aefcfa54daba63df54189f2d25341209c",
+    "reference-3.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+    "reference-2.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+    "reference-0.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+    "adapter.cpp": "8b59accf0dfe6c9b099e43becf8aa266f64b782323074444e756c6f778c676d9",
+    "reference-1.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+    "mutable-sequence.txt": "a624966393f041776aab65a5ca4d5d730f29f6e712d68e8787101647bf21d9d9",
+    "reference-2.input": "f37497361c995cbc759ef49a3990be26ee4f494d715ae6c2ef3068b613fe14ea",
+    "reference-0.input": "8075bb7b146b34877aa002bb988530f6156a89582b68ecead2f7e53bc54f2ea1",
+    "mutable-sequence.input": "998a875bd95d883cd02656fa525bacc7766858300296d0c4c9c39db96ffaf811",
+    "reference-2.txt": "b2a067326724ef5fbf26ac7d52528fd76a4946586e1b9a17137390f278803497",
+    "reference-1.input": "700179ee0f5e8cf0d3d7998e6b18260e039d0261232ff4d41128c357e8061cbf",
+    "ember-condensates.cfg": "8346a99d1972277961c9bf0f029d78311a7fa8bd902ff8efbd93bd85956b990d",
+    "reference-3.txt": "ecb0b11827b73724d0524d9ab43e762568f5afc8f26da4dc2216fe5c388fd398",
+    "probe": "6ac7bb76d37e7ac3488f3ba681a097bb9bef7552b24ebb138d3c0d9a4b04cb85",
+    "reference-1.txt": "562bbfa664357c8e78737ac912b0f0d191a5d6b4897711cc7ef46e23504dc863",
+    "reference-0.txt": "ecb0b11827b73724d0524d9ab43e762568f5afc8f26da4dc2216fe5c388fd398",
+    "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "reference-3.input": "0d12eca0dff0f20c8f50148fa69b6d445536c0a0bc6c7791aea2c8eeb5dfaa36"
+  },
+  "interpretation_correction": "The scope above incorrectly identified the synthetic mutable-bulk probe with MOLEQ. Actual TLUSTY/SYNSPEC keep fixed cbase distinct from mutable ccomp/abndd. These numerical results only test synthetic bulk feedback and do not establish a defect in historical atmosphere calculations.",
+  "superseded_by": "condensate_memory_before_v3_audit.json"
+}

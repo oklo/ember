@@ -1,0 +1,35 @@
+{
+  "scope": "Refine the X=.2 to .3 interval, following the independent X=.25 discrepancy. The X=.25 sources become nodes only in a distinct candidate family; these new .225/.275 requests remain independent heldouts.",
+  "requests": [
+    {
+      "X": 0.225,
+      "Z": 0.02,
+      "role": "heldout"
+    },
+    {
+      "X": 0.275,
+      "Z": 0.02,
+      "role": "heldout"
+    },
+    {
+      "X": 0.225,
+      "Z": 0.01,
+      "role": "heldout"
+    },
+    {
+      "X": 0.275,
+      "Z": 0.01,
+      "role": "heldout"
+    },
+    {
+      "X": 0.225,
+      "Z": 0.03,
+      "role": "heldout"
+    },
+    {
+      "X": 0.275,
+      "Z": 0.03,
+      "role": "heldout"
+    }
+  ]
+}

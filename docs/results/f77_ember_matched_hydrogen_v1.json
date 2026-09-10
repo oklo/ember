@@ -1,0 +1,222 @@
+{
+  "scope": "Compare nearest accepted states at the Ember3.4T central hydrogen fraction. Exact F77 diagnostics supply age, composition, Tc and rhoc; F77 L/R/Teff retain the printed track precision. These are different physical models, not a numerical convergence test or a unique causal attribution.",
+  "ember": {
+    "age_yr": 3400000000000,
+    "step_yr": 439118132.661485,
+    "R_Rsun": 0.14588637343786182,
+    "L_Lsun": 0.00201550057164935,
+    "Teff_K": 3201.952961983437,
+    "central_X": 0.2033563985717181,
+    "central_Y3": 0.0009702646506044816,
+    "step_error_norm": 0.015391851959645209,
+    "discrete_luminosity_balance": -8.881784197001252e-16,
+    "nuclear_rest_mass_balance": -2.977971313988803e-09,
+    "last_halfstep_coupling_iterations": 5,
+    "convective_mass_fraction": 1.0000000000000004,
+    "central_T_K": 8031406.3115153955,
+    "central_rho": 258.2794807518285,
+    "surface_X": 0.2033563985717181,
+    "surface_Y3": 0.0009702646506044816,
+    "nuclear_deposited_Lsun": 0.0020154351308354947,
+    "nuclear_neutrino_Lsun": 4.0886546036330756e-05,
+    "last_halfstep_gravothermal_Lsun": 6.54806783279659e-08,
+    "hydrogen_mass_Msun": 0.020335639857171812,
+    "thermal_neutrino_Lsun": 3.986447404853665e-11
+  },
+  "f77_comparisons": [
+    {
+      "name": "ajr-20000",
+      "state": {
+        "model": 2068,
+        "age_yr": 2507366801550.4536,
+        "step_yr": 510960000.0,
+        "iterations": 1.0,
+        "L_Lsun": 0.003525,
+        "R_Rsun": 0.1452,
+        "Teff_K": 3698.0,
+        "central_T_K": 7999912.9412279315,
+        "central_rho": 265.6132917784044,
+        "central_P": 1.864e+17,
+        "central_X": 0.20335552845577082,
+        "central_Y3": 0.001516355554849566,
+        "central_convective_flag": 1,
+        "connected_nonconvective_core_mass_fraction": 0.0,
+        "central_gradient_ratio": 7.9424391092693725,
+        "mesh_points": 171
+      },
+      "absolute_hydrogen_difference_from_ember": -8.701159472934705e-07,
+      "relative_difference_from_ember": {
+        "age_yr": -0.26253917601457244,
+        "L_Lsun": 0.7489451750020477,
+        "R_Rsun": -0.0047048495461721185,
+        "Teff_K": 0.1549201515156826,
+        "central_T_K": -0.003921277179353866,
+        "central_rho": 0.028394865148512194,
+        "central_Y3": 0.562826754437427
+      },
+      "output_sha256": "08660152d2fa4c8fa972a4b67e746833e680fc133e85ac4ec27b2680b934a202",
+      "deck": "   0.10000   0.70000   0.02000   0.00000\n  15120000 1.000E+04   0.20000 5.000E-0410000   1.36000    0    2    1\n"
+    },
+    {
+      "name": "ferguson-20000",
+      "state": {
+        "model": 2132,
+        "age_yr": 2124413731187.719,
+        "step_yr": 342870000.0,
+        "iterations": 1.0,
+        "L_Lsun": 0.005446,
+        "R_Rsun": 0.1383,
+        "Teff_K": 4224.0,
+        "central_T_K": 8316609.013816633,
+        "central_rho": 306.78759887285185,
+        "central_P": 2.258e+17,
+        "central_X": 0.20339525482929316,
+        "central_Y3": 0.00117466578564198,
+        "central_convective_flag": 1,
+        "connected_nonconvective_core_mass_fraction": 0.0,
+        "central_gradient_ratio": 12.762867910924458,
+        "mesh_points": 171
+      },
+      "absolute_hydrogen_difference_from_ember": 3.88562575750484e-05,
+      "relative_difference_from_ember": {
+        "age_yr": -0.37517243200361206,
+        "L_Lsun": 1.702058276045717,
+        "R_Rsun": -0.05200193314211843,
+        "Teff_K": 0.3191948945381946,
+        "central_T_K": 0.03551092937389,
+        "central_rho": 0.18781251216635786,
+        "central_Y3": 0.21066534260539638
+      },
+      "output_sha256": "9eb1d1d8940518527c695f8241683a5990ccff4946ea44431ade8e29efe10ac6",
+      "deck": "   0.10000   0.70000   0.02000   0.00000\n  15120000 1.000E+04   0.20000 5.000E-0410000   1.36000    0    0    1\n"
+    }
+  ],
+  "f77_opacity_only_comparison": {
+    "age_yr": -0.15273117205106645,
+    "L_Lsun": 0.5449645390070923,
+    "R_Rsun": -0.04752066115702469,
+    "Teff_K": 0.14223904813412647
+  },
+  "matched_central_pp_heating": [
+    {
+      "state_label": "f77-state",
+      "state": {
+        "model": 2068,
+        "age_yr": 2507366801550.4536,
+        "central_X": 0.20335552845577082,
+        "central_Y3": 0.001516355554849566,
+        "central_convective_flag": 1,
+        "connected_nonconvective_core_mass_fraction": 0.0,
+        "central_gradient_ratio": 7.9424391092693725,
+        "central_T_K": 7999912.9412279315,
+        "central_rho": 265.6132917784044,
+        "mesh_points": 171
+      },
+      "f77": [
+        0.19488851791307138,
+        2.174947499682671,
+        0.014769177706590607,
+        440981.9698407269,
+        45913796467.397255,
+        320295.4747827596,
+        9.556692313944939e-08
+      ],
+      "ember": {
+        "T_K": 7999912.9412279315,
+        "rho_g_cm3": 265.6132917784044,
+        "bare_pp_sfii_over_legacy": 0.987302419731703,
+        "bare_33_sfii_over_legacy": 0.9290415512226164,
+        "bare_34_sfii_over_legacy": 1.0606539502795334,
+        "legacy_pp_H": 0.17549551311873998,
+        "legacy_33_H": 0.7019820524749599,
+        "sfii_legacy_eps": 2.8522755532717965,
+        "debye_pp_H": 0.16803739456543973,
+        "debye_33_H": 0.6721495782617589,
+        "sfii_debye_eps": 2.7729261535811167,
+        "svh_pp_H": 0.11706017928137845,
+        "svh_33_H": 0.41030551140084665,
+        "sfii_svh_eps": 2.1707468862700887,
+        "electron_eta": 0.1772585868910122,
+        "electron_susceptibility": 0.7676155199646615,
+        "gamma_e": 0.15432030904991376,
+        "pp_zeta": 0.02739109567364643,
+        "eps_nuclear_neutrinos": 0.008315316252742335,
+        "reduced_ppII_over_pp": 0.026712469443331437
+      },
+      "f77_pp_heat_over_ember_pp_heat": 1.0985183074014258
+    },
+    {
+      "state_label": "ember-state",
+      "state": {
+        "age_yr": 3400000000000,
+        "step_yr": 439118132.661485,
+        "R_Rsun": 0.14588637343786182,
+        "L_Lsun": 0.00201550057164935,
+        "Teff_K": 3201.952961983437,
+        "central_X": 0.2033563985717181,
+        "central_Y3": 0.0009702646506044816,
+        "step_error_norm": 0.015391851959645209,
+        "discrete_luminosity_balance": -8.881784197001252e-16,
+        "nuclear_rest_mass_balance": -2.977971313988803e-09,
+        "last_halfstep_coupling_iterations": 5,
+        "convective_mass_fraction": 1.0000000000000004,
+        "central_T_K": 8031406.3115153955,
+        "central_rho": 258.2794807518285,
+        "surface_X": 0.2033563985717181,
+        "surface_Y3": 0.0009702646506044816,
+        "nuclear_deposited_Lsun": 0.0020154351308354947,
+        "nuclear_neutrino_Lsun": 4.0886546036330756e-05,
+        "last_halfstep_gravothermal_Lsun": 6.54806783279659e-08,
+        "hydrogen_mass_Msun": 0.020335639857171812,
+        "thermal_neutrino_Lsun": 3.986447404853665e-11
+      },
+      "f77": [
+        0.1928547848513819,
+        0.9284426098724895,
+        0.009895828362132212,
+        436376.42714161205,
+        47870852886.36674,
+        335395.69137418416,
+        1.0147425394306757e-07
+      ],
+      "ember": {
+        "T_K": 8031406.3115153955,
+        "rho_g_cm3": 258.2794807518285,
+        "bare_pp_sfii_over_legacy": 0.9872981566209724,
+        "bare_33_sfii_over_legacy": 0.9290037802443177,
+        "bare_34_sfii_over_legacy": 1.0606349877025838,
+        "legacy_pp_H": 0.17202491441178244,
+        "legacy_33_H": 0.6880996576471298,
+        "sfii_legacy_eps": 1.3302474347994102,
+        "debye_pp_H": 0.16490315794650812,
+        "debye_33_H": 0.6596126317860325,
+        "sfii_debye_eps": 1.297122738052818,
+        "svh_pp_H": 0.11520250238775838,
+        "svh_33_H": 0.40404540544805634,
+        "sfii_svh_eps": 1.0400637387211726,
+        "electron_eta": 0.13306393229592783,
+        "electron_susceptibility": 0.7734948486593658,
+        "gamma_e": 0.1522795760965768,
+        "pp_zeta": 0.027064297491334342,
+        "eps_nuclear_neutrinos": 0.008019428671673537,
+        "reduced_ppII_over_pp": 0.01811169157911949
+      },
+      "f77_pp_heat_over_ember_pp_heat": 1.0876191342627526
+    }
+  ],
+  "nuclear_scope": "Both pp routines evaluated at identical T/rho/H/He3 input coordinates, retaining each routine's mass convention and screening. The F77 diagnostic extracts unchanged ENUCV/RATES from the retained source and reports pp channels only. This is a local prescription comparison, not a relaxed model or a bound on CNO/other omitted channels.",
+  "f77_nuclear_driver": "      PROGRAM RATEPROBE\n      IMPLICIT DOUBLE PRECISION (A-H,O-Z)\n   10 READ(5,*,END=20) TT,RHO,X,X3\n      Z=0.02D0\n      QQ=RHO**(1.D0/3.D0)\n      CALL RATES(TT,QQ,X,X3,Z,C11,C33,C34,RC12,RC13,RC14,\n     1 RC16,FB)\n      E1=6.671D0*1.602D-6*C11*X*X\n      E3=12.860D0*1.602D-6*C33*X3*X3\n      E4=(18.982D0*(1.D0-FB)+12.50D0*FB)*1.602D-6*C34*X3\n      WRITE(6,900) E1,E3,E4,C11,C33,C34,FB\n  900 FORMAT(1P7E25.16)\n      GO TO 10\n   20 CONTINUE\n      END\n",
+  "f77_source_extraction": "From SUBROUTINE ENUCV through the end of RATES, immediately before SUBROUTINE BURN. Compile driver plus these unchanged routines with gfortran -O2.",
+  "input_files_sha256": {
+    "out/evolution-cold-remnant-forward-512-3400gyr-v1.json": "c8a94386523b23fee603208c720159bda3bd01a45263f98565494768bc53be9d",
+    "/tmp/ember-f77-baseline-henyey77.f": "489af0517d452db841bfd1117f528f0e51ded78064bed10c6d25d5282ee17e04",
+    "/tmp/ember-f77-rate-comparison-v1/probe.f": "c1245c086c67aefddc217e11ec54d6ba2dadd188df62a877a022012a15b32d36",
+    "/tmp/ember-f77-rate-comparison-v1/probe": "3b477986a921e5c37d1f99554daa3f62214e4807166e0bd6dc381d31e13e1fc2",
+    "/tmp/ember-nuclear-probe-gs98": "80c31d966e66fc4a114f466b55ada8a3705bc62f4392de5fae9fcbbdebd7418e"
+  },
+  "literature_context": {
+    "url": "https://arxiv.org/pdf/astro-ph/9805009",
+    "relevance": "Section2 identifies grey outer-boundary overestimates of Teff and luminosity in cool low-mass models. This supports a candidate mechanism, not the attribution or accuracy of either of these implementations."
+  },
+  "next_discrimination": "Matched-physics relaxed controls of outer boundary, opacity, EOS, nuclear screening and composition/structure coupling. Preserve original F77 and Ember models."
+}

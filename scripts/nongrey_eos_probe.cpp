@@ -10,10 +10,11 @@
 int main(int argc,char** argv) {
   using namespace ember;
   try {
-    const bool metal=argc==2 && std::string(argv[1])=="--gs98";
-    if(argc!=1 && !metal)throw std::invalid_argument("optional --gs98 only");
+    const bool family=argc==3 && std::string(argv[1])=="--family";
+    const bool metal=family || (argc==2 && std::string(argv[1])=="--gs98");
+    if(argc!=1 && !metal)throw std::invalid_argument("optional --gs98 or --family GS98_MANIFEST");
     std::unique_ptr<Eos> selected;
-    if(metal)selected=std::make_unique<MetalHelmholtzEos>("data/eos/freeeos300_gs98_z020.dat",HelmholtzTableEos::Mixture::allow_documented_proxy);
+    if(metal)selected=std::make_unique<MetalHelmholtzEos>(family?argv[2]:"data/eos/freeeos300_gs98_z020.dat",HelmholtzTableEos::Mixture::allow_documented_proxy);
     else selected=std::make_unique<CompositionHelmholtzEos>("data/eos/freeeos300_hhe_extended.dat",HelmholtzTableEos::Mixture::allow_documented_proxy);
     const auto& eos=*selected;
     double x, y, t, pg, source;

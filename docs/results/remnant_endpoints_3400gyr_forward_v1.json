@@ -1,0 +1,80 @@
+{
+  "scope": "Report bracketed exhaustion and cooling milestones without extrapolation.\n\nAll recrossings are retained. A threshold crossing is not a claim of permanent\nextinction, a white-dwarf classification, or a converged endpoint age.\n",
+  "age_range_yr": [
+    3300000000000,
+    3400000000000
+  ],
+  "accepted_states": 39,
+  "run_reached_requested_age": true,
+  "core_hydrogen": [
+    {
+      "threshold": 0.001,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    },
+    {
+      "threshold": 0.0001,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    },
+    {
+      "threshold": 1e-05,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    }
+  ],
+  "nuclear_deposited_over_photon_luminosity": [
+    {
+      "threshold": 0.1,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    },
+    {
+      "threshold": 0.01,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    },
+    {
+      "threshold": 0.001,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    }
+  ],
+  "nuclear_diagnostic_scope": "Deposited luminosity of the selected network; pp-only in the present driver. Missing legacy data are not interpreted as zero burning.",
+  "temperature": [
+    {
+      "threshold": 1000,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    },
+    {
+      "threshold": 500,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    },
+    {
+      "threshold": 100,
+      "already_below_at_segment_start": false,
+      "crossings": [],
+      "below_at_segment_end": false
+    }
+  ],
+  "temperature_scope": "Downward crossings are cooling-temperature milestones only. Establish a degenerate remnant, residual-burning regime and source validity separately.",
+  "final": {
+    "age_yr": 3400000000000,
+    "central_X": 0.2033563985717181,
+    "Teff_K": 3201.952961983437,
+    "L_Lsun": 0.00201550057164935,
+    "hydrogen_mass_Msun": 0.020335639857171812,
+    "nuclear_deposited_Lsun": 0.0020154351308354947
+  },
+  "input_sha256": "c8a94386523b23fee603208c720159bda3bd01a45263f98565494768bc53be9d"
+}

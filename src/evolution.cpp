@@ -167,6 +167,8 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
         const auto nuclear=p.nuclear->eval(current.T(i),current.rho(i),current.comp[i]);
         result.nuclear_luminosity+=weights[i]*nuclear.eps;
         result.neutrino_luminosity+=weights[i]*nuclear.eps_neutrino;
+        result.thermal_neutrino_luminosity+=weights[i]*evaluate_losses(
+            p.neutrino_losses,current.T(i),current.rho(i),current.comp[i]).eps;
         result.gravitational_luminosity+=weights[i]*detail::gravitational_heating(e.E,e.P,current.rho(i),old.E,previous.rho(i),dt);
         // Subtract the conserved baryon rest energy before differencing.
         // This reduces cancellation, while retaining nuclear binding energy.
@@ -174,7 +176,8 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           mass_release-=weights[i]*(nuclides[j].A/mass_numbers[j]-1)
             *(current.comp[i].X[j]-previous.comp[i].X[j])*constants::c*constants::c/dt;
       }
-      result.luminosity_balance=(result.nuclear_luminosity+result.gravitational_luminosity)/current.y.back().L-1;
+      result.luminosity_balance=(result.nuclear_luminosity+result.gravitational_luminosity
+          -result.thermal_neutrino_luminosity)/current.y.back().L-1;
       const double release=result.nuclear_luminosity+result.neutrino_luminosity;
       result.nuclear_mass_balance=release>0 ? mass_release/release-1 : 0;
       for(auto [begin,end]:regions) if(end>begin+1) {

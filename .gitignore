@@ -20,6 +20,8 @@ __pycache__/
 !/data/eos/sources/*parent_*.json
 !/data/atmosphere/sources/synple-elements.json
 !/data/atmosphere/sources/synspec-ap18-ions.dat
+!/data/atmosphere/sources/condensate_free_energy_audit_states.json
+!/data/atmosphere/sources/condensate_free_energy_survey_states.json
 
 # Local restart binaries, raw histories and source-experiment recovery files.
 # The report, its compact history CSV, figures and hash manifest are versioned.

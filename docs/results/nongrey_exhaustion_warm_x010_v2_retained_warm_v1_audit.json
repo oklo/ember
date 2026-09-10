@@ -1,0 +1,19 @@
+{
+  "scope": "Runtime comparison of all96 prior warm nodes and one off-centre point in every prior complete cell. Values must be retained; a newly available incident cell may change one-sided derivatives at a knot. No global extension acceptance is implied.",
+  "runtime_queries": 112,
+  "retained_maximum_relative_difference": {
+    "T": 0.0,
+    "Pgas": 0.0,
+    "P": 0.0,
+    "rho": 0.0
+  },
+  "derivative_changes": [],
+  "table_sha256": {
+    "reference": "4277d9144f7718077b9179a32b6a22a6d1dbded8213207f8b303d76218f087cb",
+    "candidate": "ca92b939ae386e7d2edc69a5053c807ed4a92fca846963d1c4e717d08609b255"
+  },
+  "probe_sha256": "32af7090b63f4c5f2801cf8f45e615f026d0f0909f755c79b39715303145fa65",
+  "eos_family": "data/eos/exhaustion_refined_v2/freeeos300_gs98_z020.dat",
+  "previous_audit": "nongrey_exhaustion_warm_v1_audit.json",
+  "candidate_audit": "nongrey_exhaustion_warm_x010_v2_audit.json"
+}

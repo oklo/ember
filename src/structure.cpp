@@ -77,6 +77,10 @@ Local<N> gather(const Point& point, const Composition& comp, const Physics& phys
   q.grad_ad = material(e.grad_ad, response.dgrad_ad_dlnT, response.dgrad_ad_dlnRho);
   q.kappa = material(k.kappa, k.kappa * k.dlnk_dlnT, k.kappa * k.dlnk_dlnRho);
   q.eps = material(n.eps, n.eps * n.dlneps_dlnT, n.eps * n.dlneps_dlnRho);
+  if(phys.neutrino_losses) {
+    const auto loss=evaluate_losses(phys.neutrino_losses,q.T.value,q.rho.value,comp);
+    q.eps=q.eps-material(loss.eps,loss.eps*loss.dlneps_dlnT,loss.eps*loss.dlneps_dlnRho);
+  }
   return q;
 }
 

@@ -1,0 +1,429 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,array,longtable,graphicx}
+\usepackage{xcolor,enumitem,fancyhdr,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!45!black,
+ citecolor=blue!45!black,pdftitle={Ember: September 10 working paper},
+ pdfauthor={Ember project, prepared for Gregory Laughlin}}
+\definecolor{ember}{HTML}{A4492A}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\setlength{\emergencystretch}{2em}
+\setlist{nosep,leftmargin=*}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small\textcolor{ember}{EMBER}\quad Working paper}
+\fancyhead[R]{\small 10 September 2026}
+\fancyfoot[C]{\small\thepage}\setlength{\headheight}{14pt}
+\newcommand{\Ms}{M_\odot}\newcommand{\Rs}{R_\odot}\newcommand{\Ls}{L_\odot}
+\newcommand{\Tyr}{\mathrm{Tyr}}
+\newcommand{\doc}[2]{\href{https://github.com/oklo/ember/blob/master/#1}{#2}}
+\begin{document}
+\begin{center}
+{\LARGE\bfseries\textcolor{ember}{Ember}}\\[6pt]
+{\Large Low-mass stellar evolution toward\\an ultra-cold helium remnant}\\[8pt]
+{\normalsize Working paper and reproducibility checkpoint}\\[3pt]
+{\small 10 September 2026; completed stellar results through $3.40\Tyr$}
+\end{center}
+
+\textbf{Current result.} The fixed-baryonic-mass $0.1\Ms$ reference has reached
+$3.40\times10^{12}$ yr from its specified static initial model. It remains
+fully convective, with $X_{\rm H}=0.2033564$ and $T_{\rm eff}=3201.95$ K.
+Hydrogen exhaustion, a helium white dwarf, and remnant cooling have not yet
+been obtained. The explicit final objective is a supported, evolved cooling
+sequence through $T_{\rm eff}=1000$, 500, and 100 K. A fitted cooling law or
+an extrapolated atmosphere would not meet that objective. We use
+$1\Tyr=10^{12}$ yr throughout.
+
+Since the September 9 edition, the selected hydrogen-poor EOS and radiative
+opacity families have been refined and independently checked; a larger gas
+atmosphere has enabled the new track; plasma-neutrino losses have entered the
+energy equation; and exact nuclear caches have reduced measured computing
+cost. Independent F77 reproductions now locate their own radiative-core
+transitions. Preparatory cold-electron and dense-ion audits address parts of
+the remnant problem, but do not constitute an installed remnant EOS.
+
+The immediate atmospheric limit is now $X_{\rm H}=0.2$, rather than 0.3.
+A candidate extending to 0.1 has complete source and runtime support checks,
+but an independent comparison exposes composition-interpolation curvature.
+Refinement and a separate stellar diagnostic run are in progress; they are
+not included as completed results in this edition.
+
+\section{Reference model and completed trajectory}
+The initial composition is $X_{\rm H}=0.7$, $X_3=0$, $Z=0.02$, with the GS98
+elemental metal pattern. Age excludes formation and pre-main-sequence
+contraction. Rotation, magnetic fields, external heating, and mass loss are
+absent from this reference. The precision shown below identifies saved
+states; it is not a statement of comparable physical accuracy.
+
+\begin{center}\begin{tabular}{@{}lrr@{}}\toprule
+Quantity & $3.30\Tyr$ & $3.40\Tyr$ \\\midrule
+Radius ($\Rs$) & 0.14695441 & 0.14588637 \\
+Photon luminosity ($\Ls$) & 0.0019776154 & 0.0020155006 \\
+Effective temperature (K) & 3175.197 & 3201.953 \\
+Central temperature (MK) & 7.767698 & 8.031406 \\
+Central density ($\mathrm{g\,cm^{-3}}$) & 252.2519 & 258.2795 \\
+Central hydrogen fraction & 0.22229873 & 0.20335640 \\
+Central $^3$He fraction & 0.001357904 & 0.000970265 \\
+Remaining hydrogen mass ($\Ms$) & 0.02222987 & 0.02033564 \\
+Convective mass fraction & 1 & 1 \\\bottomrule
+\end{tabular}\end{center}
+
+A fresh 512-point calculation reached $3.30\Tyr$ with 1822 accepted steps
+and three rejections. Its exact native restart added 38 accepted steps to
+reach $3.40\Tyr$, with no additional rejection. The joined history contains
+1861 distinct states. The copied executable and physical inputs remained
+fixed; source-tree edits during the calculation did not alter that executable.
+The previous $2.85\Tyr$ gas reference and its recovery inputs are preserved.
+
+\begin{figure}[ht]\centering
+\includegraphics[width=\textwidth]{evolution_history.pdf}
+\caption{Completed 0--$3.40\Tyr$ trajectory using the selected 96-node gas
+atmosphere, refined 64-plane EOS and TOPS v4 opacity. The fresh 0--3.30T
+history is joined to its exact 3.30--3.40T restart after checking identical
+overlapping physical states. Dotted lines mark the selected atmospheric
+hydrogen floor and temperature ceiling. The current $^3$He depletion and
+radius decrease occur during continued hydrogen burning.}
+\end{figure}
+
+\section{Implemented physics and numerical scope}
+Ember is a C++23 development of the stellar-evolution line reconstructed in
+\href{https://github.com/oklo/Henyey}{Henyey/F77}. The evolutionary picture of
+Laughlin, Bodenheimer \& Adams \cite{lba97} is a benchmark to investigate;
+its lifetime is not imposed on the new calculation. The two codes use
+different physical prescriptions and numerical methods. Greater computational
+cost does not by itself establish greater physical accuracy.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.75\textwidth}@{}}
+\toprule Component & Current treatment and limits \\\midrule\endhead
+EOS & FreeEOS 3.0 EOS1 represented by a common Helmholtz potential, with
+consistent caloric and transport responses and explicit H/$^3$He composition
+dependence. The selected GS98 family has 64 planes, including true zero H
+within its original temperature/density domain. This is not cold dense-matter
+coverage. Potassium is absent in the source; its omitted mass fraction is
+$4.56\times10^{-6}$. Helium isotope and partition-function approximations remain. \\[5pt]
+Opacity & AESOPUS 2.1 low-temperature gas opacity and LANL TOPS hot/dense
+opacity, with supported blends, explicit source-family selection, and isotope
+number-density mapping. Refined hydrogen-poor TOPS v4 is selected. Substituted
+source cells and unsupported density/composition stencils are rejected. \\[5pt]
+Burning & Non-equilibrium $^3$He in a reduced ppI/ppII network; Solar Fusion II
+S-factor quadrature and finite-degeneracy Salpeter--Van Horn screening.
+Atomic mass defects determine deposited heat and nuclear-neutrino energy.
+Pep, hep, ppIII and a CNO network remain absent; metals are inert. \\[5pt]
+Transport & MLT with Schwarzschild or full-EOS Ledoux buoyancy; approximate
+mixtures of Ioffe/Cassisi conduction inputs. The reference selects Ledoux,
+semiconvective and thermohaline composition mixing. Microscopic diffusion,
+settling, and a separate semiconvective heat flux are not implemented. \\[5pt]
+Atmosphere & Offline TLUSTY208/SYNSPEC54 LTE plane-parallel gas atmospheres,
+matched at $\tau=100$. Molecular/atomic absorption, CIA and scattering enter
+the source models. Runtime interpolation uses H, $^3$He, $T_{\rm eff}$ and
+gravity, with explicit masks for missing nodes. No accepted condensate family. \\[5pt]
+Thermal losses & The selected HRW plasma-decay prescription \cite{hrw94}
+enters central and shell energy equations with analytic derivatives. Pair,
+photo, bremsstrahlung, recombination and partial-ionization corrections are
+not provided by this selector. \\[5pt]
+Evolution & Analytic structure Jacobians; damped Henyey/Newton solves;
+coupled implicit burning and conservative mixing; step-doubling time control.
+The mass mesh is fixed. Native restarts bind internal state and controller
+state to executable bytes, input tables, tolerances and physical selections. \\
+\bottomrule\end{longtable}
+
+The material EOS, atmosphere chemistry, opacities and conduction do not all
+derive from one thermochemical source. Nuclear screening is not derived from
+the FreeEOS interaction potential. Source agreement and mathematical derivative
+consistency therefore require separate assessment from physical accuracy.
+
+\section{Input refinement and remaining atmospheric limits}
+\subsection{Selected interior inputs}
+The first zero-H EOS extension failed its heat-capacity acceptance with a
+2.367\% discrepancy in cool trace-hydrogen molecular gas. Additional composition
+planes reduced curvature error. The accepted 64-plane family passed 528 fresh
+source comparisons: maximum relative differences in $P$, $E$, $c_V$ and $c_P$
+are respectively 0.05213\%, 0.10875\%, 0.18413\%, and 0.19216\%.
+All 2048 sampled legacy profile queries retain the old results exactly.
+See \doc{docs/results/metal_eos_exhaustion_refined_v2_audit.json}{the EOS audit}.
+
+The coarse TOPS interpolation had an 11.90\% discrepancy at an independent
+source midpoint. Successive separately identified refinements have reduced
+the largest discrepancy in the latest independent, defined active-domain
+source-node audit to 1.7062\%. AESOPUS is held fixed. This number is neither
+a stellar-profile error nor a global opacity uncertainty between source nodes.
+The original failed comparison is retained. The selected family and audit
+definitions are recorded in
+\doc{docs/results/opacity_hydrogen_poor_refined_v4_audit.json}{the TOPS v4 audit}.
+
+\subsection{Selected 96-node grid and candidate 108-node extension}
+The 96-node selected atmosphere adds hydrogen-poor and warmer source states
+to the prior 72-node gas family. Its global axes are
+$X_{\rm H}=.2,.3,.45,.7$, $X_3=0,.12$,
+$T_{\rm eff}=2600,2800,3000,3200,3400$ K, and
+$\log g=4.9,5.15,5.4$. These axes do not imply a filled rectangle:
+missing source states are masked, and runtime evaluation requires complete
+interpolation and derivative stencils.
+
+Twelve completed $X_{\rm H}=.1$ source states at $T_{\rm eff}=3200,3400$ K
+produce a 108-node candidate. All 108 runtime source-node queries and their
+EOS inversions are supported; 112 retained warm-grid queries preserve values
+and derivatives exactly. Source/interior density differences range from
+$-0.01082\%$ to $+1.99104\%$ across candidate nodes.
+
+Independent lower-boundary controls test actual achieved optical depths,
+not nominal requested depths. At the two $X_{\rm H}=.1$, 3200 K,
+$\log g=5.4$ corners, depths approximately 165/339 and 170/350 give maximum
+matching-state fractional changes $7.13\times10^{-6}$ and $1.93\times10^{-5}$.
+TLUSTY's TAULAS does not truncate a supplied mass grid; verified seed-column
+truncation is therefore explicit and independently checked.
+
+\begin{center}\begin{tabular}{@{}lrr@{}}\toprule
+Independent $X_{\rm H}=.15$, $X_3=.005$, 3300 K, $\log g=5.1$
+ & $\Delta T/T$ & $\Delta P_{\rm gas}/P_{\rm gas}$ \\\midrule
+Full 108-node interpolation & $+2.13408\%$ & $-0.78677\%$ \\
+Composition interpolation at fixed $T_{\rm eff},g$ & $+1.65199\%$ & $-0.78424\%$ \\
+Temperature/gravity contribution at composition corners & $+0.47426\%$ & $-0.00254\%$ \\\bottomrule
+\end{tabular}\end{center}
+
+Four newly completed canonical source controls separate these contributions.
+They add in logarithms, with closure below $9\times10^{-16}$; fractional
+differences multiply. This diagnostic identifies hydrogen spacing as the
+dominant matching-temperature discrepancy. New $X_{\rm H}=.15$ node planes
+and fresh $X_{\rm H}=.125,.175$ heldouts are being calculated. The original
+$X_{\rm H}=.15,X_3=.005$ source remains an independent point, not a promoted
+node. At the older independent $X_{\rm H}=.25$ point the differences remain
+$+0.69036\%$ in matching temperature and $-0.93414\%$ in pressure.
+
+The 108-node candidate is used only by a separately identified diagnostic
+stellar run toward 3.60T while this refinement proceeds. Its result is not
+included in the completed 3.40T reference. Warm gas source convergence does
+not validate a condensate boundary or dense cold helium atmosphere.
+
+\subsection{Condensates, line broadening and zero hydrogen}
+The condensate production guard remains active. Previously converged solar
+2800 K, low-gravity source corners failed the grain-enthalpy check; an
+artificial extra heat capacity is a sensitivity test, not complete chemistry.
+A new equilibrium correction uses neutral-atomic chemical potentials to
+evaluate the difference in $g/T$ between gas-only and gas-plus-condensate
+equilibria. Derivatives provide volume, enthalpy, entropy and heat capacity,
+including rearrangement of gas molecules and ions. At one audited state the
+complete $c_P$ correction is $117496\ \mathrm{erg\,g^{-1}\,K^{-1}}$, compared
+with the earlier grain-only estimate of 289000. No correction is installed;
+bulk normalization, a common baseline and phase-boundary responses remain
+necessary. A corrected calling-convention audit found no history dependence
+in either the old or defensive-copy adapter's twelve fixed-bulk calls.
+
+The warmer material-opacity ceiling is about 10103 K. A 15000 K pilot
+encountered nonfinite extrapolation of the native He I 4471 profile. A reduced
+bottom column is useful only when its full profile has source support and
+matching-state depth convergence; it cannot justify extrapolating line data.
+
+Zero H is supported in the interior composition table but not yet in the
+atmosphere generator. Its abundance normalization and the native molecular
+initialization depend on hydrogen. A direct 4017 K opacity-source diagnostic now confirms that relabelling
+all number abundances by a common factor is insufficient: electron densities
+agree to about $1.2\times10^{-6}$ relative, but individual sampled absorption
+coefficients change substantially (up to a factor 27.3 for scale 0.15).
+This single-isotherm result does not measure a stellar-boundary error; it
+rejects an unverified normalization change. Relabelling tiny nonzero H as
+zero would not establish the requested endpoint.
+
+\section{Convection and the F77 comparison}
+At 3.40T the minimum offline nodal ratio of diffusive (radiative plus
+conductive) to adiabatic gradient is 1.33593, at mass fraction 0.211. At 3.30T
+it was 1.58798. The central ratios are 3.08980 and 3.70705 respectively.
+Composition is homogeneous, so unity is the local stability threshold.
+These nodal measurements suggest approach to loss of full convection;
+they do not demonstrate central radiative-core formation or determine an
+onset age. The runtime uses its own face-based mixing criterion.
+
+Separate read-only-source F77 reproductions add a print-only core diagnostic.
+An unmodified source control reproduces the original outputs byte for byte
+for the full AJR run and a 6000-model Ferguson control. The comparison uses
+151 initial mesh points, $\alpha=1.36$, explicit input decks and the retained
+source; it is not a new measurement of the original 1997 paper's model.
+
+\begin{center}\begin{tabular}{@{}lrr@{}}\toprule
+F77 opacity selection & First central nonconvective flag (Tyr) & $X_{\rm H,c}$ \\\midrule
+AJR & 3.22353 & $1.75623\times10^{-2}$ \\
+Ferguson & 2.94629 & $1.06427\times10^{-5}$ \\\bottomrule
+\end{tabular}\end{center}
+F77's convective flag has hysteresis; the AJR gradient crossed unity one
+accepted model earlier, at 3.22314T. The Ferguson evolution later lost
+convergence during cooling at about 2.95471T. Its earlier accepted onset
+bracket remains valid, but its cooling run is incomplete.
+
+At matched hydrogen abundance near 0.203, AJR F77 is about 74.9\% more
+luminous than Ember: $L\simeq0.003525\Ls$ versus $0.0020155\Ls$.
+The surface temperatures are about 3698 and 3202 K, while radii and central
+temperatures agree within 0.5\%. The corresponding ages are approximately
+2.50737T and 3.40T; comparing models at equal age would mix different
+compositional stages. F77's $^3$He abundance is about 56\% higher.
+
+Changing only the F77 opacity selector to Ferguson increases luminosity by
+54.5\% at this H abundance. At fixed central temperature, density and
+H/$^3$He coordinates, the two pp-heating prescriptions differ by roughly
+9\%, rather than the whole 75\% surface-luminosity gap. These are evidence
+for atmosphere/opacity and the resulting composition history as leading
+contributors. They do not uniquely separate EOS, screening, boundary and
+coupling effects. The grey-boundary tendency discussed by Baraffe et al.
+\cite{baraffe98} supports the direction of a possible boundary effect, not
+its magnitude here. F77 already includes CNO, conduction and adaptive-mesh
+capabilities; Ember is not a strict superset of its physics.
+
+\section{Energy accounting and cold-matter preparation}
+The selected discrete energy balance is
+\[
+ L_\gamma=L_{\rm nuc,dep}+L_{\rm grav}-L_{\nu,\rm thermal},\qquad
+ L_{\rm nuc,rest}=L_{\rm nuc,dep}+L_{\nu,\rm nuclear}.
+\]
+At 3.40T these luminosities, in solar units, are
+$L_{\rm nuc,dep}=0.0020154351$,
+$L_{\rm grav}=6.5481\times10^{-8}$,
+$L_{\nu,\rm nuclear}=4.08865\times10^{-5}$ and
+$L_{\nu,\rm plasma}=3.98645\times10^{-11}$.
+Gravothermal luminosity refers to the last accepted implicit half step;
+nuclear and thermal-neutrino diagnostics use the reported state.
+The discrete luminosity-balance residual is below $10^{-15}$ at this endpoint.
+That checks the implemented discrete equations, not an independent exact
+global gravitational-energy integral or the absence of missing physics.
+
+Cold-electron thermal derivatives originally suffered cancellation between
+large degenerate contributions. Paired quadrature on opposite sides of the
+Fermi surface now retains the small response. Pure-He tests at 100--10000 K
+and $\rho=10^3$--$10^6\ \mathrm{g\,cm^{-3}}$ recover the Sommerfeld limit;
+at 100 K the heat capacity agrees to approximately $10^{-10}$ relative.
+The largest tested deviation from the leading limit is $8.20\times10^{-7}$
+at 10000 K, where finite-temperature terms remain resolved. The current
+source also supplies electron occupation entropy and ionic translational
+entropy including mixing, tested against the first law and Maxwell relation.
+These analytic components are separate from the production FreeEOS potential.
+
+An isolated Ioffe EOSFI22 audit compares explicitly forced liquid and solid
+free energies and their derivatives at exact density. It found and locally
+repaired two quantum pressure-derivative defects; original source and patch
+are retained. Across sixteen forced-phase states, the largest density-response
+defect decreases from 6.77 to $1.05\times10^{-6}$ in ideal-ion pressure units
+after finite-difference refinement. This validates internal derivatives of
+the formulae, not the stable phase or their physical accuracy.
+
+Helium quantum melting, mixture corrections, latent heat, caloric reference
+matching and joins to partially ionized matter remain unfinished.
+The source's default classical $\Gamma=175$ switch must not be mistaken for
+a demonstrated helium phase calculation \cite{baiko22}. No dense remnant EOS
+has been installed in the stellar evolution. The detailed scope is in
+\doc{docs/DENSE_EOS.md}{DENSE\_EOS.md} and
+\doc{docs/NEUTRINOS.md}{NEUTRINOS.md}.
+
+\section{Acceptance criteria for the remaining evolution}
+\begin{enumerate}[itemsep=5pt]
+\item \textbf{Composition and atmospheric coverage.} Finish the diagnosed
+warm-grid refinement with independent heldouts, then extend along measured
+stellar profiles toward zero H and higher temperature/gravity. Resolve
+condensate enthalpy and unsupported line broadening without clipping.
+\item \textbf{Stratification and burning.} Add conservative microscopic
+diffusion and settling, including the ambipolar electric field and diffusion
+energetics. Resolve moving convective boundaries and thin fuel layers;
+introduce conservative remeshing where fixed-mesh convergence fails.
+Assess semiconvective heat transport, pep/ppIII/CNO contributions and
+screening/EOS consistency under the newly encountered conditions.
+\item \textbf{Distinct exhaustion endpoints.} Retain brackets and recrossings
+of central $X_{\rm H}=10^{-3},10^{-4},10^{-5}$, and separately of deposited
+burning luminosity below 10\%, 1\% and 0.1\% of the photon luminosity on the
+cooling branch. Record residual hydrogen mass and shell burning. A core
+crossing alone does not establish extinction of all hydrogen burning.
+\item \textbf{Dense matter and cooling boundary.} Couple liquid/solid helium
+thermodynamics and mixture physics to the interior; validate heat capacities,
+coexistence and conductivity in the actual regime. Follow surface H/He from
+transport. Dense cool atmospheres require nonideal chemistry, pressure-dependent
+absorption and CIA, with condensate, refraction and dense-fluid relevance
+checks \cite{blouin18}. Ordinary low-density gas opacity is insufficient.
+\item \textbf{Convergence and uncertainty.} Converge exhaustion and 1000/500/100 K
+cooling endpoints in mesh, timestep and source-grid resolution. Preserve
+fresh-start and exact-restart controls. Separate interpolation error,
+discretization error and uncertainty in the physical prescriptions. Assess
+baryonic versus gravitating mass before quoting precision lifetimes.
+\end{enumerate}
+
+The wider programme includes mass and initial-composition surveys with an
+explicit $Y(Z)$ relation and metal pattern, wind/rotation/magnetic
+sensitivities, and distinct minimum-mass and higher-mass evolutionary branches.
+Helium enrichment by burning at fixed $Z$ is not a survey of stars born at
+high $Z$. No lifetime maximum or historical nominal duration is prescribed.
+Environmental heating, encounters and hypothetical particle-physics effects
+belong to separately stated future scenarios \cite{adams97}.
+
+\section{Computing cost, reproducibility and publication}
+Atmosphere generation is reusable source work: expensive frequency-dependent
+radiative transfer and molecular chemistry are computed offline and tabulated.
+Further work is required when a track leaves validated composition, temperature
+or gravity coverage, or when source physics/resolution changes. The stellar
+integrator interpolates those tables; it does not solve every wavelength at
+every timestep.
+
+The 0--3.30T star used 2350.57 child CPU seconds and 4088.19 elapsed UTC
+seconds with competing source jobs. The exact 3.30--3.40T continuation used
+97.00 CPU seconds. CPU and elapsed clocks are reported separately because
+concurrent jobs and system suspension affect wall time. Two isolated ABBA
+benchmarks of exact nuclear caches reduced CPU by 12.52\% and 10.84\%, with
+byte-identical complete outputs; their product is about 22\% for those
+benchmark conditions, not a whole-lifetime performance claim.
+
+The separate unmodified 151-point F77 AJR reproduction used 27.37 CPU seconds
+through its native cooling stop. Ember's 512-point coupled implicit solves,
+step doubling and different physical prescriptions perform additional work.
+No matched-input full-star profile has uniquely apportioned the performance
+gap. An older atmosphere replay placed about 54\% of its phase time in
+chemistry and just 0.0033 seconds in the dense linear solve; that is one
+source replay, not a general stellar bottleneck measurement. Details and
+receipts are in \doc{docs/COMPUTATIONAL_COST.md}{COMPUTATIONAL\_COST.md}.
+
+GitHub carries source, generators, configurations, small provenance reports,
+the compact history CSV and this paper. Newly generated bulk tables,
+raw histories, native checkpoints and archived executables remain local.
+The adjacent \texttt{recovery\_manifest.json} records the raw/compressed
+hashes of the 3.30T and 3.40T histories and receipts, latest native checkpoint
+and exact copied executable. Its ignored \texttt{artifacts/} directory is
+not bundled in a fresh clone. September 9 recovery artifacts are retained
+locally; the September 10 edition replaces the old paper in the current tree.
+
+The history figure rebuilds from the committed CSV alone. With local archives,
+\texttt{build\_figures.py --from-archives} rechecks the seam and rebuilds the
+CSV. The adjacent \texttt{validation.json} records build, test and document
+checks. Table-dependent tests require the locally installed inputs described
+in \doc{docs/DATA_REPRODUCTION.md}{DATA\_REPRODUCTION.md}.
+
+Native restart requires identical executable and physical-input bytes,
+tolerances and mesh. New physics therefore starts a separately identified
+calculation; old checkpoints are not silently reinterpreted. The 3.40T
+reference executable has SHA-256
+\begin{quote}\small\ttfamily
+24a6ec3de0d06bf1e58e4ff4527fa4b38f4b02774be1703cba4ba371d7f15237.
+\end{quote}
+The latest live-job state is recorded at the beginning of
+\doc{HANDOFF.md}{HANDOFF.md}; dated reports and saved running markers alone
+cannot certify process liveness. Inspect existing processes and completed
+receipts before launching further work.
+
+\clearpage
+\begin{thebibliography}{99}\small
+\bibitem{lba97} Laughlin, G., Bodenheimer, P., \& Adams, F. C. (1997).
+The End of the Main Sequence. \emph{ApJ}, 482, 420.
+\href{https://doi.org/10.1086/304125}{doi:10.1086/304125}.
+\bibitem{adams97} Adams, F. C., \& Laughlin, G. (1997).
+A dying universe: the long-term fate and evolution of astrophysical objects.
+\emph{Rev. Mod. Phys.}, 69, 337.
+\href{https://doi.org/10.1103/RevModPhys.69.337}{doi:10.1103/RevModPhys.69.337}.
+\bibitem{baraffe98} Baraffe, I., Chabrier, G., Allard, F., \& Hauschildt, P. H. (1998).
+Evolutionary models for solar metallicity low-mass stars: mass--magnitude
+relationships and color--magnitude diagrams. \emph{A\&A}, 337, 403.
+\href{https://arxiv.org/abs/astro-ph/9805009}{arXiv:astro-ph/9805009}.
+\bibitem{hrw94} Haft, M., Raffelt, G., \& Weiss, A. (1994).
+Standard and nonstandard plasma neutrino emission revisited.
+\href{https://arxiv.org/abs/astro-ph/9309014}{arXiv:astro-ph/9309014}.
+\bibitem{baiko22} Baiko, D. A., \& Chugunov, A. I. (2022).
+Ab initio thermodynamics of one-component plasma for astrophysics of white
+dwarfs and neutron stars. \emph{MNRAS}, 510, 2628.
+\href{https://doi.org/10.1093/mnras/stab3613}{doi:10.1093/mnras/stab3613}.
+\bibitem{blouin18} Blouin, S., Dufour, P., \& Allard, N. F. (2018).
+A New Generation of Cool White Dwarf Atmosphere Models. I. Theoretical Framework
+and Applications to DZ Stars. \emph{ApJ}, 863, 184.
+\href{https://arxiv.org/abs/1807.06616}{arXiv:1807.06616}.
+\end{thebibliography}
+\end{document}
