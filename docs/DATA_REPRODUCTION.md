@@ -75,6 +75,29 @@ active-domain source comparisons are in
 [the v4 audit](results/opacity_hydrogen_poor_refined_v4_audit.json). Preserve
 the rejected coarse midpoint audit when reproducing the refinements.
 
+The current hot-core extension adds X=0/.025/.05/.075 at each Z=.01/.02/.03.
+Its complete 54-plane source manifest, 12 independent check records and original
+requests are under `data/opacity/sources/hydrogen_exhaustion/`. Raw numeric replies
+remain local. TOPS omits the hydrogen row at exactly zero H; the importer verifies
+that format and every remaining element rather than substituting a small H value.
+
+```sh
+python3 scripts/import_tops_mixtures.py \
+  data/opacity/sources/hydrogen_exhaustion/family_manifest.json \
+  /tmp/ember-tops-source-import
+python3 scripts/assemble_hot_opacity_extension.py \
+  data/opacity/hydrogen_poor_refined_v4 /tmp/ember-tops-source-import \
+  /tmp/ember-hot-opacity-runtime
+```
+
+Only the high-temperature tables are selected from the import. The original cool
+TOPS and AESOPUS files are copied unchanged. Every old hot entry is checked for
+exact agreement before assembly. This reproduces the selected
+`data/opacity/hydrogen_exhaustion_hot_v1` numeric files byte for byte. Low-H
+opacity remains unsupported where the cool TOPS branch is required. The
+[hot-profile checks](results/tops_exhaustion_hot_profile_all_v2.json) and
+[derivative checks](results/hot_opacity_runtime_v1.json) record the tested domain.
+
 AESOPUS is retrieved from the authors' distribution, then archived and imported;
 these scripts do not implement the authors' opacity engine. The source URL, hashes
 and selected composition planes are documented in the opacity README.

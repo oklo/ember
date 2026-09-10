@@ -1,0 +1,87 @@
+{
+  "scope": "Two forward stellar calculations stopped at the 3400 K atmosphere ceiling; neither completed the requested 3.700 trillion years. Original data and checkpoints remain intact.",
+  "runs": [
+    {
+      "points": 512,
+      "input": "out/evolution-cold-remnant-hot-opacity-forward-512-3700gyr-v1.json",
+      "output_sha256": "7b65a2239782676b8d89316815856f6cb1f8b5f560534ec9a5a4807266cba6e6",
+      "receipt_sha256": "8ff933fe1358a1a99debcf8127d705f3a875d28714f512029b44a2b02ade9316",
+      "checkpoint_sha256": {
+        "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-hot-opacity-forward-512-3700gyr-v1.restart": "65f9f095fa386ed56eb8a4c850ca22ea154f8478fd0a57bb58b9a590377c29c5"
+      },
+      "converged": false,
+      "message": "minimum timestep reached: evolve_step: line search failed: residual did not decrease",
+      "last_accepted": {
+        "age_yr": 3684787037364.156,
+        "step_yr": 2102.773323165761,
+        "R_Rsun": 0.1404651728734059,
+        "L_Lsun": 0.0023754542051648,
+        "Teff_K": 3399.999999777088,
+        "central_X": 0.038107038183940546,
+        "central_Y3": 2.6408016061354712e-05,
+        "step_error_norm": 8.881784197001252e-09,
+        "discrete_luminosity_balance": 1.2945200467129325e-13,
+        "nuclear_rest_mass_balance": -2.982037117238434e-08,
+        "last_halfstep_coupling_iterations": 1,
+        "convective_mass_fraction": 0.3250631415422519,
+        "central_T_K": 9289792.196705066,
+        "central_rho": 743.0057078838182,
+        "surface_X": 0.17328600720627715,
+        "surface_Y3": 0.0023790820850291875,
+        "nuclear_deposited_Lsun": 0.002373967058215371,
+        "nuclear_neutrino_Lsun": 5.063897182574538e-05,
+        "last_halfstep_gravothermal_Lsun": 1.487391172986243e-06,
+        "hydrogen_mass_Msun": 0.01456053767744039,
+        "thermal_neutrino_Lsun": 2.4422325036798635e-10
+      },
+      "accepted_steps_in_segment": 745,
+      "rejected_attempts": 273,
+      "awake_seconds": 516.9513822086155,
+      "utc_elapsed_seconds": 919.5750000476837,
+      "cpu_seconds": 838.811482,
+      "first_atmosphere_domain_rejection": "retry dt=6.89324e+07 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
+      "last_atmosphere_domain_rejection": "retry dt=525.693 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)"
+    },
+    {
+      "points": 1024,
+      "input": "out/evolution-cold-remnant-hot-opacity-forward-1024-3700gyr-v1.json",
+      "output_sha256": "b906b60598064f80b10b491ea6b45bee1a9f7b66d924a4df02339d01b45f12fa",
+      "receipt_sha256": "63455b3d4ed4e508980c879568dfab72c24ee2cb4b9004858aa28c7ccf819f07",
+      "checkpoint_sha256": {
+        "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-hot-opacity-forward-1024-3700gyr-v1.restart": "1e4574759cc589ace0aaa7fa5a4a4b25d988e17c09ace002580ccd45daeb8980"
+      },
+      "converged": false,
+      "message": "minimum timestep reached: evolve_step: line search failed: residual did not decrease",
+      "last_accepted": {
+        "age_yr": 3683163991400.004,
+        "step_yr": 2106.5731962401146,
+        "R_Rsun": 0.14046433876802356,
+        "L_Lsun": 0.0023754259927919533,
+        "Teff_K": 3399.999999498602,
+        "central_X": 0.03808628139921184,
+        "central_Y3": 2.6393728899591075e-05,
+        "step_error_norm": 4.440892098500626e-09,
+        "discrete_luminosity_balance": -1.396660564978447e-12,
+        "nuclear_rest_mass_balance": 5.291781353111702e-07,
+        "last_halfstep_coupling_iterations": 1,
+        "convective_mass_fraction": 0.32275694079338274,
+        "central_T_K": 9289698.290114136,
+        "central_rho": 743.2378036284903,
+        "surface_X": 0.1733599679306859,
+        "surface_Y3": 0.0023555996946298162,
+        "nuclear_deposited_Lsun": 0.0023739375193018593,
+        "nuclear_neutrino_Lsun": 5.0636675188542217e-05,
+        "last_halfstep_gravothermal_Lsun": 1.4887178383538353e-06,
+        "hydrogen_mass_Msun": 0.014562869712881,
+        "thermal_neutrino_Lsun": 2.443515779535595e-10
+      },
+      "accepted_steps_in_segment": 407,
+      "rejected_attempts": 418,
+      "awake_seconds": 903.2639996251091,
+      "utc_elapsed_seconds": 1693.6068048477173,
+      "cpu_seconds": 1455.634019,
+      "first_atmosphere_domain_rejection": "retry dt=1.38178e+08 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
+      "last_atmosphere_domain_rejection": "retry dt=263.322 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)"
+    }
+  ]
+}

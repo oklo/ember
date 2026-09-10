@@ -1,3 +1,125 @@
+# Production timing and hot-core progress — 2026-09-10 22:25 UTC
+
+The autonomous 0.1 Msun trajectory through actual 100 K helium-remnant cooling
+remains unfinished. The user clarified that physics-development reruns are fine;
+the concern is production cost with fixed physical inputs. Do not count source
+generation, suspension or scheduling gaps as stellar-solver time. No subagents.
+
+Completed fresh controls to 3.600 trillion years, with two workers:
+- 512 points, fourfold tighter time tolerances (scale 2.5): 39.78 awake minutes,
+  64.06 CPU minutes, 5165 accepted steps.
+- 1024 points, original tolerance scale 10: 59.26 awake minutes, 96.15 CPU
+  minutes, 2782 accepted steps. Both experienced about 40.88 minutes suspension.
+- Report: docs/results/evolution_accuracy_3600gyr_v1.json. These are partial
+  trajectories, not full lifetime benchmarks. Further mesh refinement matters.
+
+The hot TOPS extension is complete through zero atomic hydrogen at Z=.01/.02/.03.
+Twelve independent checks at X=.0125/.0375/.0625/.0825 give at most 0.05257%
+opacity difference on the tested hot profile. Only the high-temperature tables
+are extended; cool TOPS and AESOPUS remain unchanged. Use
+`data/opacity/hydrogen_exhaustion_hot_v1`; low-H support requires T above the
+original low/high blend. Reports: tops_exhaustion_hot_profile_all_v2.json and
+hot_opacity_runtime_v1.json under docs/results. All previous 512-profile opacity
+values and derivatives match exactly; 90 additional derivative states pass.
+Zero-H TOPS replies correctly omit hydrogen from their element list. The importer
+and retriever now accept that format only for an exactly zero-H request, with
+full remaining-mixture validation. New fixture and source tests pass.
+
+A restricted opacity-extension restart is implemented and tested. It preserves
+old checkpoint/executable identity and permits only added lower-H hot planes;
+all old values and cool files must remain identical. It does not permit changing
+EOS, atmospheres, physics or tolerances. Actual late 3.600–3.605 overlap has
+identical histories and profiles. All 32 CTest suites pass (73.24 seconds).
+New production executable SHA256:
+89b00132e65d6674ce5be485eb3bdf780f7c97d60eb851b73f6f239dbb487ede.
+
+Both forward trials using the new hot opacity STOPPED at the old atmosphere's
+3400 K ceiling. Neither completed its requested 3.700 trillion years:
+- 512 points, tighter time control: 3.685 trillion years, central X=.03811,
+  convective mass .3251, R=.1405 Rsun, L=.002375 Lsun, Tc=9.290 MK.
+  out/evolution-cold-remnant-hot-opacity-forward-512-3700gyr-v1.*
+- 1024 points: 3.683 trillion years, central X=.03809. The two temperature
+  crossings agree well, but they are not comparisons at precisely equal age.
+  out/evolution-cold-remnant-hot-opacity-forward-1024-3700gyr-v1.*
+- Report: docs/results/evolution_atmosphere_limit_3685gyr_v1.json. Originals,
+  copied binaries and checkpoints preserved. No stellar calculation remains
+  active at the 22:13 UTC process inspection; start the new supported trial.
+
+All twelve 3600 K atmosphere nodes completed, using existing wavelength opacity
+without regenerating it. Candidate table /tmp/ember-nongrey-exhaustion-t3600-v1.dat
+contains 132 source models. Its assembly specification is in data/atmosphere/sources.
+SHA256 ef07184b98ad3961904c536343eae63c8d800db5c0ebda3668984b36b82ab4cb.
+Independent 3500 K/XH=.175/He3=.005/logg=5.15 source finished. Two lower-boundary
+comparisons pass at maximum T/P differences 1.655e-5 and 1.149e-5 (fractions).
+The first EOS integration audit failed at low-gravity 3600 K corners below the
+EOS density range. Actual near-logg=5.15 states are supported. A revised diagnostic
+reports the atmosphere/EOS intersection explicitly; no production guard is
+changed. Audit COMPLETE: 128 of 132 source nodes have EOS support. The four exceptions
+are all 3600 K/logg=4.9 corners. Independent 3500 K comparison differs 0.4470%
+in T and 1.225% in Pgas. Report docs/results/nongrey_t3600_extension_v1.json.
+All nine near-current surface test states are supported. Fresh trajectory
+ACTIVE session91725, snapshot /tmp/ember-t3600-forward-512-3800gyr-v1, output
+out/evolution-cold-remnant-t3600-forward-512-3800gyr-v1.*; target3.800T.
+All four 3600 K logg=5.15 chemistry profiles have no condensates. Earlier twelve
+3200/3400 K profiles also have none. These fixed gas-profile chemistry checks do
+not establish cold grain coverage; grain coupling is still unfinished.
+
+An isolated same-state electron-screening reuse experiment is NOT installed.
+All four benchmark outputs are byte-identical but the candidate is slower:
+mean 73.31 vs 54.31 seconds wall, 94.82 vs 68.27 seconds CPU. Concurrent work
+and changing machine conditions affect timing; no speedup established. Preserve
+/tmp/ember-screening-reuse-v2 and docs/results/screening_reuse_benchmark_v2.json.
+The isolated nongrey test initially failed only because its docs symlink was
+missing; targeted recheck passes after adding it. Main production code unchanged.
+
+Further input work ACTIVE: 24 prospective 3800/4000 K atmospheres use two
+workers, session4417, /tmp/ember-nongrey-t3800-t4000-v1, plan
+data/atmosphere/sources/nongrey_t4000_plan_specification.json. These are not
+yet accepted coverage. A separate four-worker FreeEOS density extension uses
+the exact original probe and copies every old raw source row, computing only
+the missing logQ=-3..-1.5 strip. Script extend_metal_eos_density.py; session85339,
+/tmp/ember-metal-eos-low-density-v1. Original EOS files are untouched; import
+and independent thermodynamic checks remain necessary. Two 120-state pilots
+returned no source failures. This avoids recomputing the old 64-plane grid.
+
+Next: inspect the active stellar and source jobs before continuing. The user
+accepts fresh reruns; avoid more restart plumbing. Do not extrapolate sources.
+Archive source records, update README/COLD_REMNANT/performance/reproduction notes,
+and publish the authorized changes. The PDF still ends at 3.560 trillion years.
+Unrelated untracked helium coexistence/electron probes and .DS_Store files belong
+to other work and must be preserved. Existing published HEAD is 703cb9e.
+
+---
+
+# Lower-hydrogen opacity checks — 2026-09-10 19:15 UTC
+
+The user asked how the missing hydrogen-composition coverage will be handled.
+Existing source controller 83460 remains active; no duplicate requests launched.
+The nonzero Z=.02 candidate sources X=.025/.05/.075 and independent checks
+X=.0125/.0375/.0625 have returned and were locally revalidated. Other source
+requests, including zero hydrogen, remain in progress or queued.
+
+A separate offline comparison in
+`/tmp/ember-tops-hydrogen-exhaustion-check-v1` combines the previous v4 source
+family with the three new Z=.02 nodes. It excludes X=.0125 because zero H
+is not yet available to bracket it. At X=.0375 and .0625, maximum hot-source
+interpolation differences are 0.3676% and 0.3561%; the broader active source
+coordinates contain differences of 4.367% and 3.698% at cooler temperatures.
+These are source-grid comparisons, not errors measured along the star or
+stellar lifetime errors. Report:
+`docs/results/tops_hydrogen_exhaustion_preliminary_v1.json`.
+No replacement runtime opacity table has been accepted or installed.
+
+Next: complete the independent X=.0825 old/new-boundary check and other
+metallicity planes, test the actual stellar profile and derivatives, and
+refine relevant intervals as needed. A validated range down to X=.025 could
+support advancement before zero H is resolved. Zero H and the X=.0125 check
+are still required for a table covering complete hydrogen exhaustion. Keep
+candidate nodes separate from independent checks. The wavelength-dependent
+atmosphere/grain work is a separate remaining requirement.
+
+---
+
 # Measured duplication savings and CPU parallelism — 2026-09-10 19:08 UTC
 
 The user's active request is to remove duplicated calculation and assess CPU,

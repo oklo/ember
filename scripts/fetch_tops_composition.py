@@ -17,7 +17,7 @@ import urllib.parse
 import urllib.request
 import secrets
 
-from import_tops_composition import read as read_source
+from import_tops_composition import read as read_source, validate_mixture
 
 
 def fraction_label(value, scale):
@@ -127,11 +127,11 @@ def main():
                 html=post('results',form.data)
                 parser=Text();parser.feed(html)
                 text='\n'.join(v.strip() for v in ''.join(parser.parts).replace('\u00a0',' ').splitlines() if v.strip())+'\n'
-                rows=text.split('No. Fraction Mass Fraction  At. No.  Chem. Sym.  Mat ID.\n')[1].split('Temperature grid')[0]
-                elements={r.split()[3]:float(r.split()[1]) for r in rows.splitlines() if r.strip()}
-                if len(elements)==21 and abs(elements['H']-x)<1e-6 and abs(elements['He']-(1-a.metallicity-x))<1e-6:
-                    break
-                print(f'rejecting stale TOPS result for X={x:g}, retry {attempt+1}',flush=True)
+                try:
+                    validate_mixture(text,{'X':x,'Z':a.metallicity,'metals':metal_fractions})
+                except (ValueError,IndexError,KeyError) as error:
+                    print(f'rejecting TOPS result for X={x:g}: {error}, retry {attempt+1}',flush=True)
+                else:break
             except (TimeoutError,urllib.error.HTTPError) as e:
                 if isinstance(e,urllib.error.HTTPError) and e.code!=504:raise
                 print(f'TOPS request timed out for X={x:g}, retry {attempt+1}',flush=True)

@@ -45,7 +45,11 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     for name in ['probe','family_directory','heldout_manifest','profile','work','output']:
         p.add_argument(name,type=Path)
+    p.add_argument('--minimum-temperature',type=float,default=0.,
+                   help='restrict this explicitly reported diagnostic to hotter profile points')
     a=p.parse_args()
+    if not math.isfinite(a.minimum_temperature) or a.minimum_temperature<0:
+        raise ValueError('invalid minimum diagnostic temperature')
     if a.work.exists():raise FileExistsError('use a new diagnostic work directory')
     a.work.mkdir(parents=True)
     track=json.loads(a.profile.read_text())
@@ -76,6 +80,7 @@ def main():
         selected=[]
         for row in profile:
             T,rho=row['temperature_K'],row['density_g_cm3']
+            if T<a.minimum_temperature:continue
             weight=active_top_weight(T/KEV_TO_K,rho,rectangles,[-8,6])
             if weight is not None:selected.append((T,rho,weight))
         if not selected:raise ValueError('no supported profile states')
@@ -92,7 +97,8 @@ def main():
                             'max_abs_difference_dlnk_dlnrho':max(abs(r['delta_dlnk_dlnrho']) for r in rows)})
     report={'scope':__doc__,'probe_sha256':sha(a.probe),'profile_sha256':sha(a.profile),
             'heldout_manifest_sha256':sha(a.heldout_manifest),'runtime_table_sha256':table_hashes,
-            'gas_logR_support':[-8,6],'comparisons':comparisons}
+            'gas_logR_support':[-8,6],'minimum_temperature_K':a.minimum_temperature,
+            'audit_script_sha256':sha(Path(__file__)),'comparisons':comparisons}
     a.output.parent.mkdir(parents=True,exist_ok=True)
     a.output.write_text(json.dumps(report,indent=2,allow_nan=False)+'\n')
     print(json.dumps([{'X':r['X_atomic'],'Z':r['Z_atomic'],'worst_percent':100*r['worst']['blended_relative_difference']} for r in comparisons]))

@@ -8,11 +8,37 @@ import unittest
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 from fetch_tops_composition import fraction_label, cached_result
+from import_tops_composition import validate_mixture
 from run_evolution_snapshot import input_data
 from audit_tops_heldout import active_top_weight, KEV_TO_K
 
 
 class SourceTests(unittest.TestCase):
+    def test_zero_hydrogen_response_omits_h_but_retains_every_metal(self):
+        # Normalized composition from the actual TOPS zero-H response. This
+        # excerpt tests composition identity, not missing opacity cell data.
+        root=Path(__file__).resolve().parents[1]
+        text=(root/'tests/fixtures/tops_zero_hydrogen_composition.txt').read_text()
+        request=json.loads((root/'data/opacity/sources/tops_gs98_x070_z020.request.json').read_text())
+        tokens=request['mixture'].split(' he ',1)[1].split()
+        metals={tokens[i+1].capitalize():float(tokens[i]) for i in range(0,len(tokens),2)}
+        expected={'X':0.,'Z':.02,'metals':metals}
+        elements=validate_mixture(text,expected)
+        self.assertNotIn('H',elements)
+        self.assertEqual(set(elements),set(metals)|{'He'})
+        for x in [1e-8,.025]:
+            with self.assertRaisesRegex(ValueError,'wrong source mixture'):
+                validate_mixture(text,{**expected,'X':x})
+        with self.assertRaisesRegex(ValueError,'wrong source mixture'):
+            validate_mixture(text.replace('9.8000E-01','9.7000E-01'),expected)
+        with self.assertRaisesRegex(ValueError,'wrong source metal abundance'):
+            validate_mixture(text.replace('3.4367E-03','3.0000E-03'),expected)
+        missing='\n'.join(row for row in text.splitlines() if ' Fe ' not in row).replace('materials =  20','materials =  19')
+        with self.assertRaisesRegex(ValueError,'wrong source mixture'):
+            validate_mixture(missing,expected)
+        with self.assertRaisesRegex(ValueError,'wrong source mixture'):
+            validate_mixture(text.replace('materials =  20','materials =  21'),expected)
+
     def test_active_domain_includes_cool_tops_and_respects_both_rectangles(self):
         rectangles={'low':(1e-10,251.19),'high':(1e-10,1e4)}
         self.assertIsNone(active_top_weight(.002,1,rectangles,[-8,6]))

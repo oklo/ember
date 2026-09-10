@@ -1,0 +1,49 @@
+{
+  "scope": "Add original lower-hydrogen TOPS hot planes to an unchanged opacity family.\n\nCool TOPS and AESOPUS files are copied unchanged. The high-temperature source\naxes and every old hydrogen plane must agree exactly. This assembly check\ndoes not replace independent opacity, derivative or stellar-profile checks.\n",
+  "previous_directory": "/Users/greglaughlin/Projects/ember/data/opacity/hydrogen_poor_refined_v4",
+  "imported_directory": "/private/tmp/ember-hot-opacity-reproduction-v1/imported",
+  "extensions": [
+    {
+      "metallicity": 0.01,
+      "added_hydrogen": [
+        0.0,
+        0.025,
+        0.05,
+        0.075
+      ],
+      "previous_sha256": "cd128eda47e3bb07fd4a49cb8325b928f3329e95b6e4743eaeb790f91704ce9a",
+      "extended_sha256": "adbc28d51bf7c1c02879cd203ccb78317e29826abe16d40fd8705d0dd8e60574"
+    },
+    {
+      "metallicity": 0.02,
+      "added_hydrogen": [
+        0.0,
+        0.025,
+        0.05,
+        0.075
+      ],
+      "previous_sha256": "049920b08d1e3d7b05da79f8f52ea180c28e67cb3cae1b180b665e61e770b499",
+      "extended_sha256": "af268141678ac1d18b929e7b084f7ed455e0b3867f6527ff76d8ebc0620a47d3"
+    },
+    {
+      "metallicity": 0.03,
+      "added_hydrogen": [
+        0.0,
+        0.025,
+        0.05,
+        0.075
+      ],
+      "previous_sha256": "6a8779e3e6ee9b6802ba14ba54a2f3d43eaecc6bf430fcdca52c9cf73147b90f",
+      "extended_sha256": "4e5c2a41b2855abd672d46c65da86ae0c79fb8d745d26a5ea8bd20fcb7d3baaf"
+    }
+  ],
+  "copied_unchanged_sha256": {
+    "tops_gs98_mixture_low.dat": "77cf6d94d2dcd0267b6adb4235e156dfe0a4fc25778a5dc223424b562c24cbc4",
+    "tops_gs98_mixture_z030_low.dat": "1b786e3905977dd5a77190351c654d9aeca28c53f81f945f1abdf86360c36f7a",
+    "tops_gs98_mixture_z020_low.dat": "9cbebb2a75e5ef7ccaf48eb07ac28662b374b1304365aa125e6260169916dbfc",
+    "aesopus21_gs98_mixture.dat": "48298d34ae8e405ee697deca4af2e8b7f57a352b2e4f670452881e019de85c62",
+    "tops_gs98_mixture_z010_low.dat": "616a37ae9dc0054d2ff72d3edc0c7fc3fe6c1a782deb87d2790906f0f68d68fc",
+    "tops_gs98_mixture_high.dat": "9cbebed1b31bab5d5c77811508f06a6e5b06c7bde6243506cd3d6e8b1e6dd4ea"
+  },
+  "script_sha256": "907edbcde255610ab6e5b89343156bdc21b52b6ff349b1c8b83233e77c9a0f62"
+}

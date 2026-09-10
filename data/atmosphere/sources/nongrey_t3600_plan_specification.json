@@ -1,0 +1,153 @@
+{
+  "scope": "Prospective 3600 K atmosphere extension at the compositions bracketing the present envelope. Reuse existing validated wavelength opacity tables; calculate new structures. No automatic installation.",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-fine-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "x020-y000-t3600-g490",
+      "XH": 0.2,
+      "X3": 0.0,
+      "teff_K": 3600,
+      "log_g": 4.9,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x020_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-002/fort.63",
+      "initial": "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y000-t3400-g490-seedtau1000/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x020-y000-t3600-g515",
+      "XH": 0.2,
+      "X3": 0.0,
+      "teff_K": 3600,
+      "log_g": 5.15,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x020_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-002/fort.63",
+      "initial": "/private/tmp/ember-nongrey-warm-extension-shallow-v1/x020-y000-t3400-g515/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x020-y000-t3600-g540",
+      "XH": 0.2,
+      "X3": 0.0,
+      "teff_K": 3600,
+      "log_g": 5.4,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x020_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-002/fort.63",
+      "initial": "/private/tmp/ember-nongrey-warm-extension-shallow-v1/x020-y000-t3400-g540/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x020-y120-t3600-g490",
+      "XH": 0.2,
+      "X3": 0.12,
+      "teff_K": 3600,
+      "log_g": 4.9,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x020_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-003/fort.63",
+      "initial": "/private/tmp/ember-nongrey-x020-warm-low-gravity-v1/x020-y120-t3400-g490-seedtau1000/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x020-y120-t3600-g515",
+      "XH": 0.2,
+      "X3": 0.12,
+      "teff_K": 3600,
+      "log_g": 5.15,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x020_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-003/fort.63",
+      "initial": "/private/tmp/ember-nongrey-warm-extension-shallow-v1/x020-y120-t3400-g515/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x020-y120-t3600-g540",
+      "XH": 0.2,
+      "X3": 0.12,
+      "teff_K": 3600,
+      "log_g": 5.4,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x020_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-003/fort.63",
+      "initial": "/private/tmp/ember-nongrey-warm-extension-shallow-v1/x020-y120-t3400-g540/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x015-y000-t3600-g490",
+      "XH": 0.15,
+      "X3": 0.0,
+      "teff_K": 3600,
+      "log_g": 4.9,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x015_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-000/opacity/fort.63",
+      "initial": "/private/tmp/ember-nongrey-x015-refined-warm-v1/x015-y000-t3400-g490/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x015-y000-t3600-g515",
+      "XH": 0.15,
+      "X3": 0.0,
+      "teff_K": 3600,
+      "log_g": 5.15,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x015_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-000/opacity/fort.63",
+      "initial": "/private/tmp/ember-nongrey-x015-refined-warm-v1/x015-y000-t3400-g515/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x015-y000-t3600-g540",
+      "XH": 0.15,
+      "X3": 0.0,
+      "teff_K": 3600,
+      "log_g": 5.4,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x015_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-000/opacity/fort.63",
+      "initial": "/private/tmp/ember-nongrey-x015-refined-warm-v1/x015-y000-t3400-g540/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x015-y120-t3600-g490",
+      "XH": 0.15,
+      "X3": 0.12,
+      "teff_K": 3600,
+      "log_g": 4.9,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x015_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-001/opacity/fort.63",
+      "initial": "/private/tmp/ember-nongrey-x015-refined-warm-v1/x015-y120-t3400-g490/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x015-y120-t3600-g515",
+      "XH": 0.15,
+      "X3": 0.12,
+      "teff_K": 3600,
+      "log_g": 5.15,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x015_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-001/opacity/fort.63",
+      "initial": "/private/tmp/ember-nongrey-x015-refined-warm-v1/x015-y120-t3400-g515/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x015-y120-t3600-g540",
+      "XH": 0.15,
+      "X3": 0.12,
+      "teff_K": 3600,
+      "log_g": 5.4,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x015_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-001/opacity/fort.63",
+      "initial": "/private/tmp/ember-nongrey-x015-refined-warm-v1/x015-y120-t3400-g540/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    }
+  ]
+}

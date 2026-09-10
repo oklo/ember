@@ -51,8 +51,8 @@ location. Invoke it through an explicit file path when using checkpoints.
 The native FNV-1a fingerprints detect accidental changes; they are not
 cryptographic. `scripts/run_evolution_snapshot.py` additionally records
 SHA-256 hashes of restart inputs and checkpoint outputs and checks that the
-restart input did not change during execution. A code or physics update
-requires a new calculation rather than silently reinterpreting an old state.
+restart input did not change during execution. General code or physics changes require a new calculation. The explicit,
+limited hot-opacity extension described below has additional checks.
 
 Restart JSON explicitly identifies its starting age and contains only the
 continued history; the final profile is complete. The summary script labels
@@ -69,3 +69,26 @@ and the final profile, including after relocating the executable. It also
 checks a final checkpoint round trip and rejection of changed tolerances,
 changed table bytes, and truncated input. This validates restart mechanics,
 not a stellar lifetime or any physical approximation.
+
+## Adding lower-hydrogen hot opacity
+
+`--opacity-extension-restart FILE` is an explicit continuation mode for adding
+only lower-hydrogen planes to the hot TOPS family. It requires
+`--restart-source-executable FILE`, `--restart-source-opacity DIR`, and the new
+`--opacity-directory DIR`. The original checkpoint is checked against its
+original executable and data. Every old hot-table entry and temperature/density
+coordinate must remain identical; cool TOPS and AESOPUS files must be unchanged.
+EOS, atmosphere, mass, mesh, tolerances and physical selections must also match.
+No checkpoint is rewritten to make its identity pass.
+
+This mode does not prove compatibility between executables. That requires an
+independent trajectory comparison. The actual 3.600–3.605-trillion-year test has
+identical accepted histories and final profiles with the old executable/opacity
+and with the new executable/extended opacity. Its
+[record](results/opacity_extension_restart_overlap_v1.json) preserves hashes.
+The full test suite also rejects changes to old hot or cool entries and verifies
+that the extended calculation subsequently supports ordinary exact restart.
+
+The output labels the extension explicitly. A new checkpoint is bound to the
+new executable and data. This mode does not permit changing the atmosphere or
+EOS; calculations using those new inputs begin from a consistent fresh model.

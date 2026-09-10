@@ -1,5 +1,6 @@
 #include "../examples/stellar_seed.hpp"
 #include "evolution_checkpoint.hpp"
+#include "opacity_extension.hpp"
 #include "ember/eos_composition.hpp"
 #include "ember/eos_mixture.hpp"
 #include "ember/evolution.hpp"
@@ -77,10 +78,12 @@ template<class T> T number(const char* text) {
 int main(int argc,char** argv) {
   using namespace ember;
   if(argc==2 && std::string(argv[1])=="--help") {
-    std::puts("usage: ember-evolve [points [duration_years [initial_step_years [tolerance_scale [nuclear_model [transport [atmosphere [eos [criterion]]]]]]]]]\nDefaults: 512, 1e8, 1e7, 1, sfii-svh, wd, cond-corrected. Fixed baryonic 0.1 Msun, X=.7 Z=.02 initially.\nNuclear: sfii-svh, sfii-debye, sfii-legacy-screening, legacy.\nTransport: wd (weakly damped 2021 conduction), classic, undamped, none, early (historical bounded physics).\nAtmosphere: cond-corrected, grey-convective, cond-y076, cond-top002, cond-alpha15, nongrey:/path/to/atmosphere.dat.\nEOS: proxy (historical H/He), metal:/path/to/family.dat (GS98 H/He3). Convection criterion: schwarzschild (default), ledoux, ledoux-diffusive (Langer alpha=.1, Kippenhahn alpha=1).\nImplicit pp burning and instantaneous convective mixing, step-doubling control.\nExtended X/Z opacity with elemental isotope mapping; grey convective composition correction anchored to solar COND.\nJSON on stdout, progress on stderr; exit zero only at requested duration.\nTrailing options: --checkpoint FILE writes the latest accepted state atomically; use a new path. --restart FILE restores internal variables and next step; duration is the target age. Physics, tolerances, executable bytes and original tables must match. Invoke with an executable file path.\n--checkpoint-after N writes once after N accepted steps in this invocation while continuing the calculation, for exact restart comparisons. Restart JSON history contains only the continued segment.\n--opacity-directory DIR selects a separately validated AESOPUS/TOPS family for extended transport; default is the original data/opacity. Selection and every source plane are bound to restart identity.\n--thermal-neutrinos none|plasma-hrw selects thermal losses (default none); plasma-hrw is plasma decay only, not all thermal channels.\n--step-workers 1|2 uses one or two CPU workers for the independent full-step and half-step estimates (default 1). Physics, accuracy tests and accepted-state ordering are unchanged.");return 0;
+    std::puts("usage: ember-evolve [points [duration_years [initial_step_years [tolerance_scale [nuclear_model [transport [atmosphere [eos [criterion]]]]]]]]]\nDefaults: 512, 1e8, 1e7, 1, sfii-svh, wd, cond-corrected. Fixed baryonic 0.1 Msun, X=.7 Z=.02 initially.\nNuclear: sfii-svh, sfii-debye, sfii-legacy-screening, legacy.\nTransport: wd (weakly damped 2021 conduction), classic, undamped, none, early (historical bounded physics).\nAtmosphere: cond-corrected, grey-convective, cond-y076, cond-top002, cond-alpha15, nongrey:/path/to/atmosphere.dat.\nEOS: proxy (historical H/He), metal:/path/to/family.dat (GS98 H/He3). Convection criterion: schwarzschild (default), ledoux, ledoux-diffusive (Langer alpha=.1, Kippenhahn alpha=1).\nImplicit pp burning and instantaneous convective mixing, step-doubling control.\nExtended X/Z opacity with elemental isotope mapping; grey convective composition correction anchored to solar COND.\nJSON on stdout, progress on stderr; exit zero only at requested duration.\nTrailing options: --checkpoint FILE writes the latest accepted state atomically; use a new path. --restart FILE restores internal variables and next step; duration is the target age. Physics, tolerances, executable bytes and original tables must match. Invoke with an executable file path.\n--checkpoint-after N writes once after N accepted steps in this invocation while continuing the calculation, for exact restart comparisons. Restart JSON history contains only the continued segment.\n--opacity-directory DIR selects a separately validated AESOPUS/TOPS family for extended transport; default is the original data/opacity. Selection and every source plane are bound to restart identity.\n--thermal-neutrinos none|plasma-hrw selects thermal losses (default none); plasma-hrw is plasma decay only, not all thermal channels.\n--step-workers 1|2 uses one or two CPU workers for the independent full-step and half-step estimates (default 1). Physics, accuracy tests and accepted-state ordering are unchanged.\n--opacity-extension-restart FILE continues a saved state after a verified hot-opacity extension. Requires --restart-source-executable FILE, --restart-source-opacity DIR and --opacity-directory DIR. The original checkpoint and inputs are validated, all original opacity entries must be retained exactly, and only lower-H high-temperature planes may be added. The current executable must be independently checked against the source executable. This explicitly reported extension is separate from an exact --restart.");return 0;
   }
   try {
     std::string restart_path,checkpoint_path,opacity_directory,thermal_neutrinos;
+    std::string restart_source_executable,restart_source_opacity;
+    bool opacity_extension=false;std::size_t added_opacity_planes=0;
     unsigned step_workers=1;
     std::size_t checkpoint_after=0;bool after_requested=false,flags_started=false;
     std::vector<char*> positional{argv[0]};
@@ -90,6 +93,11 @@ int main(int argc,char** argv) {
         flags_started=true;
         if(i+1==argc || std::string(argv[i+1]).empty())throw std::invalid_argument("driver option requires a value");
         if(option=="--restart" && restart_path.empty())restart_path=argv[++i];
+        else if(option=="--opacity-extension-restart" && restart_path.empty()) {
+          restart_path=argv[++i];opacity_extension=true;
+        }
+        else if(option=="--restart-source-executable" && restart_source_executable.empty())restart_source_executable=argv[++i];
+        else if(option=="--restart-source-opacity" && restart_source_opacity.empty())restart_source_opacity=argv[++i];
         else if(option=="--step-workers") {
           step_workers=number<unsigned>(argv[++i]);
           if(step_workers<1 || step_workers>2)throw std::invalid_argument("step-workers must be 1 or 2");
@@ -107,6 +115,11 @@ int main(int argc,char** argv) {
       }
     }
     if(after_requested && checkpoint_path.empty())throw std::invalid_argument("checkpoint-after requires checkpoint output");
+    if(opacity_extension) {
+      if(restart_source_executable.empty() || restart_source_opacity.empty() || opacity_directory.empty())
+        throw std::invalid_argument("opacity-extension-restart requires source executable, source opacity and new opacity directory");
+    } else if(!restart_source_executable.empty() || !restart_source_opacity.empty())
+      throw std::invalid_argument("restart source options require opacity-extension-restart");
     if(thermal_neutrinos.empty())thermal_neutrinos="none";
     if(thermal_neutrinos!="none" && thermal_neutrinos!="plasma-hrw")
       throw std::invalid_argument("unknown thermal-neutrino model");
@@ -208,7 +221,13 @@ int main(int argc,char** argv) {
       if(!initial.converged) throw std::runtime_error("initial equilibrium: "+initial.message);
       model=initial.model;
     } else {
-      auto saved=driver::read_checkpoint(restart_path,points,.1*constants::Msun,composition,selections,tolerance_scale,identities);
+      auto source_identities=identities;
+      if(opacity_extension) {
+        added_opacity_planes=driver::check_opacity_extension(restart_source_opacity,opacity_directory);
+        source_identities=driver::input_identities(restart_source_executable,data,atmosphere_model,eos_model,restart_source_opacity);
+        source_identities["thermal_neutrinos"]=thermal_neutrinos;
+      }
+      auto saved=driver::read_checkpoint(restart_path,points,.1*constants::Msun,composition,selections,tolerance_scale,source_identities);
       model=std::move(saved.model);dt=saved.next_dt;accepted=saved.accepted;rejected=saved.rejected;
       if(model.age>duration)throw std::invalid_argument("requested age precedes checkpoint");
     }
@@ -305,6 +324,12 @@ int main(int argc,char** argv) {
       std::printf(",\n\"restart\":{\"source\":");json_string(restart_path);
       std::printf(",\"history_start_age_yr\":%.17g,\"accepted_steps_before_restart\":%zu,\"rejected_steps_before_restart\":%zu,\"scope\":\"history contains this continuation segment only; saved internal state and next timestep restored\"}",
         starting_age/year,accepted_before,rejected_before);
+    }
+    if(opacity_extension) {
+      std::printf(",\n\"opacity_extension\":{\"scope\":\"explicit continuation with additional lower-hydrogen hot opacity planes; every original opacity entry and all other physical selections retained; executable compatibility requires a separate trajectory comparison\",\"added_planes\":%zu,\"source_executable\":",added_opacity_planes);
+      json_string(restart_source_executable);
+      std::printf(",\"source_opacity_directory\":");json_string(restart_source_opacity);
+      std::printf("}");
     }
     std::printf(",\n\"nuclear_model\":");json_string(nuclear_model);
     std::printf(",\n\"nuclear_physics\":");json_string(nuclear.name());

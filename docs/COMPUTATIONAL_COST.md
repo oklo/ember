@@ -1,5 +1,35 @@
 # What is consuming the computation time?
 
+## Fixed-input production measurements
+
+Fresh calculations with unchanged physical inputs completed the first 3.600
+trillion years of the 0.1 Msun star:
+
+| Calculation | Awake elapsed | Total CPU | Accepted steps |
+|---|---:|---:|---:|
+| 512 points, fourfold tighter time control | 39.78 min | 64.06 min | 5165 |
+| 1024 points, original time control | 59.26 min | 96.15 min | 2782 |
+
+Both use two CPU workers. Their UTC elapsed times include an additional 40.88
+minutes of computer suspension. Source calculations and other jobs are excluded
+from their CPU times. The [receipts and accuracy comparison](results/evolution_accuracy_3600gyr_v1.json)
+record input and executable identities. Different mesh and time controls make
+these useful production measurements, not an isolated mesh-scaling benchmark.
+The full track through helium-remnant cooling has not yet been timed.
+
+The subsequent 512-point calculation reached 3.685 trillion years before the
+atmosphere's 3400 K boundary stopped it. That is an input-coverage limit.
+Generating and validating hotter atmosphere models extends reusable inputs;
+ordinary stellar steps interpolate those tables. The new trajectory uses fixed
+132-model atmosphere and hot-core opacity tables, with the same timing receipt.
+
+A further attempt to share the electron calculation between pp reactions gave
+identical outputs but **did not establish a speedup**. An alternating comparison
+measured 73.31 seconds for the candidate versus 54.31 seconds for the unchanged
+code; CPU times were 94.82 versus 68.27 seconds. Other jobs and changing machine
+conditions contributed timing variation. The candidate remains isolated and is
+not installed. [Measurements](results/screening_reuse_benchmark_v2.json).
+
 ## Changes measured on September 10
 
 Two changes now reduce repeated work and use an additional CPU core:
@@ -46,11 +76,9 @@ in [its compute guidance](https://developer.apple.com/videos/play/wwdc2022/10159
 The existing C++ build targets the M4 CPU, permits fused arithmetic, and links
 Accelerate; its small structure-solver blocks use the portable kernel.
 
-The largest remaining duplication to investigate is electron screening shared
-by different pp reactions at the same state. An earlier cache attempt changed
-a rounding bit and was rejected; this update does not install it. Broader
-reuse between neighboring zones and parallel spatial calculations are further
-candidates, each requiring an actual trajectory comparison.
+The electron-screening experiments above have not justified an additional
+change. Reuse between neighboring zones and parallel spatial calculations
+remain candidates, each requiring an actual trajectory comparison.
 
 ## Earlier stellar measurement — September 10
 

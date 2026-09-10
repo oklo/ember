@@ -10,15 +10,32 @@ publication policy in [DATA_REPRODUCTION.md](DATA_REPRODUCTION.md).
 
 ## Progress on 2026-09-10
 
-The latest completed 512-point continuation reaches **3.600 trillion years**,
-with central hydrogen 0.09839 and Teff 3274 K. The next run stopped near
-**3.609 trillion years** as the interior TOPS composition reached its atomic
-hydrogen floor of 0.09. Additional source coverage is required. A new source
-plan requests lower hydrogen fractions and independent interpolation checks;
-no replacement table has been accepted. Separate calculations with fourfold
-tighter time tolerances and with 1024 mesh points are running to test the
-convection transition. Both use the checked two-worker implementation described in
-[the performance notes](COMPUTATIONAL_COST.md).
+The latest accepted 512-point state reaches **3.685 trillion years**, central
+hydrogen 0.03811 and Teff 3400 K. Both 512- and 1024-point trials stopped at the
+old atmosphere's upper temperature; hydrogen burning continues. The hot TOPS
+composition extension now reaches zero hydrogen. Twelve independent checks on
+hot profile states differ by at most 0.05257%; all old source cells and the cool
+opacity inputs remain unchanged. See
+[the stopped trials](results/evolution_atmosphere_limit_3685gyr_v1.json) and
+[the opacity checks](results/tops_exhaustion_hot_profile_all_v2.json).
+
+A fresh 512-point, two-worker calculation with fourfold tighter time tolerances
+is running toward **3.800 trillion years** using the new 132-model atmosphere
+table. Its independent 3500 K check differs by 0.4470% in matching temperature
+and 1.225% in gas pressure; two depth comparisons pass. Four 3600 K low-gravity
+source nodes are below the EOS density range. They are explicitly reported,
+and the star may use only the intersection of the atmosphere and EOS domains.
+All nine tested states near its current surface composition and gravity are
+supported. The new table does not establish a cold-remnant boundary. Source
+work toward 3800/4000 K is separate and has not been accepted.
+
+Fresh controls through 3.600 trillion years are complete. Tightening the time
+control changes central hydrogen by 0.1849%; doubling the mesh changes it by
+1.683%. Their awake elapsed times are 39.78 and 59.26 minutes, respectively.
+This measures production with fixed physical inputs, excluding source generation
+and suspension. It does not establish the cost of a complete cooling track.
+See [the accuracy record](results/evolution_accuracy_3600gyr_v1.json) and
+[the timing notes](COMPUTATIONAL_COST.md).
 
 The following records describe the preceding completed comparisons.
 

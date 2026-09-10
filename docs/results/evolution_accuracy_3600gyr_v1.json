@@ -1,0 +1,318 @@
+{
+  "scope": "Completed time and spatial resolution controls at exactly 3.600 trillion years. Initial-to-final reruns compared with the preserved segmented reference. Differences include time-step phasing; no converged full-lifetime accuracy bound.",
+  "records": [
+    {
+      "input": "out/evolution-cold-remnant-x015-forward-512-3600gyr-v1.json",
+      "input_sha256": "a4d7947ccd3e8c7078d5958c059d4b4dc9fe460f22f202963784e34e13ab9722",
+      "receipt_sha256": "ef4b2e7dc75e6d4be0d6f96c9176bbef9ce46b91e2c4170658ee4dd4d61eb75d",
+      "points": 512,
+      "accepted_steps": 277,
+      "final": {
+        "age_yr": 3600000000000,
+        "step_yr": 138740677.53125358,
+        "R_Rsun": 0.14193337162709407,
+        "L_Lsun": 0.0020847365578804994,
+        "Teff_K": 3273.762097032785,
+        "central_X": 0.09839120321418272,
+        "central_Y3": 0.0001223974931708117,
+        "step_error_norm": 0.544933582702356,
+        "discrete_luminosity_balance": 8.881784197001252e-16,
+        "nuclear_rest_mass_balance": -3.345456134340452e-10,
+        "last_halfstep_coupling_iterations": 8,
+        "convective_mass_fraction": 0.507332678762387,
+        "central_T_K": 8669613.311696405,
+        "central_rho": 411.5368596556916,
+        "surface_X": 0.1739393541350572,
+        "surface_Y3": 0.001726971014940421,
+        "nuclear_deposited_Lsun": 0.0020838215361690072,
+        "nuclear_neutrino_Lsun": 4.37711353193271e-05,
+        "last_halfstep_gravothermal_Lsun": 9.151067774245493e-07,
+        "hydrogen_mass_Msun": 0.01637719795671379,
+        "thermal_neutrino_Lsun": 8.506593034288363e-11
+      },
+      "timing": {
+        "awake_elapsed_seconds": 375.7640007501468,
+        "utc_elapsed_seconds": 375.76702404022217,
+        "child_user_seconds": 373.987886,
+        "child_system_seconds": 1.017807
+      },
+      "source_changed_during_run": []
+    },
+    {
+      "input": "out/evolution-cold-remnant-time-refinement-512-3600gyr-v1.json",
+      "input_sha256": "a2fb8ee39a5eb290d72640c392b7385d1d63bc2e6b026e2fbd1b314d6f719d02",
+      "receipt_sha256": "2291f659d4cb2408a50a0f8b3b499249cbb24864d9c9581ae9d310ec0f8df178",
+      "points": 512,
+      "accepted_steps": 5165,
+      "final": {
+        "age_yr": 3600000000000,
+        "step_yr": 68092488.47875479,
+        "R_Rsun": 0.14193739861478002,
+        "L_Lsun": 0.0020844068658759985,
+        "Teff_K": 3273.5862171645504,
+        "central_X": 0.09857315507708053,
+        "central_Y3": 0.00012274341407258682,
+        "step_error_norm": 0.5266975833251308,
+        "discrete_luminosity_balance": 4.440892098500626e-16,
+        "nuclear_rest_mass_balance": -2.3660717829443456e-10,
+        "last_halfstep_coupling_iterations": 6,
+        "convective_mass_fraction": 0.507332678762387,
+        "central_T_K": 8668557.473302959,
+        "central_rho": 411.04656040443746,
+        "surface_X": 0.17394149778574444,
+        "surface_Y3": 0.0017249053602308316,
+        "nuclear_deposited_Lsun": 0.002083492403865738,
+        "nuclear_neutrino_Lsun": 4.376490652285446e-05,
+        "last_halfstep_gravothermal_Lsun": 9.145469183688235e-07,
+        "hydrogen_mass_Msun": 0.016380886997578007,
+        "thermal_neutrino_Lsun": 8.490810722512786e-11
+      },
+      "timing": {
+        "awake_elapsed_seconds": 2387.043973750435,
+        "utc_elapsed_seconds": 4839.7553589344025,
+        "child_user_seconds": 3836.151778,
+        "child_system_seconds": 7.20377
+      },
+      "source_changed_during_run": [
+        "apps/evolve.cpp"
+      ]
+    },
+    {
+      "input": "out/evolution-cold-remnant-mesh-refinement-1024-3600gyr-v1.json",
+      "input_sha256": "799c5065d6c6ca0d3e2b9433de0efe05470f6714f17a5b711ad250e64c7ecf01",
+      "receipt_sha256": "c178986678e415395fd834fc58d580fb14b5efdcc27ca4daa3c4a49e2c2c9559",
+      "points": 1024,
+      "accepted_steps": 2782,
+      "final": {
+        "age_yr": 3600000000000,
+        "step_yr": 26668340.985451873,
+        "R_Rsun": 0.1419025072455751,
+        "L_Lsun": 0.0020869690407100006,
+        "Teff_K": 3274.994293391151,
+        "central_X": 0.09673533582682928,
+        "central_Y3": 0.00011945452896169289,
+        "step_error_norm": 0.019703284559469125,
+        "discrete_luminosity_balance": -9.992007221626409e-16,
+        "nuclear_rest_mass_balance": -1.2037358887440064e-09,
+        "last_halfstep_coupling_iterations": 4,
+        "convective_mass_fraction": 0.4990503462207581,
+        "central_T_K": 8677411.937597176,
+        "central_rho": 415.932547746479,
+        "surface_X": 0.17398279281120277,
+        "surface_Y3": 0.0017339255943926634,
+        "nuclear_deposited_Lsun": 0.0020860473769112415,
+        "nuclear_neutrino_Lsun": 4.3804033745191824e-05,
+        "last_halfstep_gravothermal_Lsun": 9.217502286483987e-07,
+        "hydrogen_mass_Msun": 0.01634908079746926,
+        "thermal_neutrino_Lsun": 8.642989145478399e-11
+      },
+      "timing": {
+        "awake_elapsed_seconds": 3555.3238371657208,
+        "utc_elapsed_seconds": 6008.021537065506,
+        "child_user_seconds": 5760.574751,
+        "child_system_seconds": 8.474823
+      },
+      "source_changed_during_run": []
+    }
+  ],
+  "tighter_time_control": {
+    "age_yr": 3600000000000,
+    "unchanged_assumptions": {
+      "mass_basis": "conserved baryonic mass; nuclear rest mass release accounted in energy, Newtonian gravity",
+      "mass_Msun": 0.1,
+      "age_origin": "specified static composition, not age since formation",
+      "points": 512,
+      "metal_inventory": "GS98 elemental number pattern; inert carrier labels; representative metal isotopes",
+      "convection_criterion": "ledoux-diffusive",
+      "transport_model": "wd",
+      "nuclear_model": "sfii-svh"
+    },
+    "final_history": {
+      "R_Rsun": {
+        "reference": 0.14193337162709407,
+        "control": 0.14193739861478002,
+        "difference": 4.026987685951111e-06,
+        "relative_difference": 2.837238092625137e-05
+      },
+      "L_Lsun": {
+        "reference": 0.0020847365578804994,
+        "control": 0.0020844068658759985,
+        "difference": -3.296920045008783e-07,
+        "relative_difference": -0.00015814564351289935
+      },
+      "Teff_K": {
+        "reference": 3273.762097032785,
+        "control": 3273.5862171645504,
+        "difference": -0.17587986823446045,
+        "relative_difference": -5.3724083492160704e-05
+      },
+      "central_X": {
+        "reference": 0.09839120321418272,
+        "control": 0.09857315507708053,
+        "difference": 0.0001819518628978084,
+        "relative_difference": 0.0018492696191724253
+      },
+      "central_Y3": {
+        "reference": 0.0001223974931708117,
+        "control": 0.00012274341407258682,
+        "difference": 3.4592090177512223e-07,
+        "relative_difference": 0.002826209040836912
+      },
+      "central_T_K": {
+        "reference": 8669613.311696405,
+        "control": 8668557.473302959,
+        "difference": -1055.838393446058,
+        "relative_difference": -0.00012178609996614249
+      },
+      "central_rho": {
+        "reference": 411.5368596556916,
+        "control": 411.04656040443746,
+        "difference": -0.4902992512541573,
+        "relative_difference": -0.0011913859955688087
+      },
+      "surface_X": {
+        "reference": 0.1739393541350572,
+        "control": 0.17394149778574444,
+        "difference": 2.1436506872363204e-06,
+        "relative_difference": 1.2324126980325903e-05
+      },
+      "surface_Y3": {
+        "reference": 0.001726971014940421,
+        "control": 0.0017249053602308316,
+        "difference": -2.0656547095893735e-06,
+        "relative_difference": -0.0011961142901177394
+      },
+      "convective_mass_fraction": {
+        "reference": 0.507332678762387,
+        "control": 0.507332678762387,
+        "difference": 0.0,
+        "relative_difference": 0.0
+      }
+    },
+    "profile": {
+      "mass_g": {
+        "max_absolute_difference": 0.0,
+        "absolute_max_point": 0,
+        "max_relative_difference_where_reference_nonzero": 0.0,
+        "relative_max_point": 511
+      },
+      "radius_cm": {
+        "max_absolute_difference": 980433.2912626266,
+        "absolute_max_point": 231,
+        "max_relative_difference_where_reference_nonzero": 0.00039744438011257927,
+        "relative_max_point": 0
+      },
+      "density_g_cm3": {
+        "max_absolute_difference": 0.4902992512541573,
+        "absolute_max_point": 0,
+        "max_relative_difference_where_reference_nonzero": 0.0011913859955688087,
+        "relative_max_point": 0
+      },
+      "temperature_K": {
+        "max_absolute_difference": 1600.0332210958004,
+        "absolute_max_point": 262,
+        "max_relative_difference_where_reference_nonzero": 0.00031507549523287755,
+        "relative_max_point": 262
+      },
+      "luminosity_erg_s": {
+        "max_absolute_difference": 2.610446248683127e+27,
+        "absolute_max_point": 175,
+        "max_relative_difference_where_reference_nonzero": 0.0017740731666390363,
+        "relative_max_point": 0
+      },
+      "X": {
+        "max_absolute_difference": 0.0001819518628978084,
+        "absolute_max_point": 0,
+        "max_relative_difference_where_reference_nonzero": 0.0018492696191724253,
+        "relative_max_point": 0
+      },
+      "Y3": {
+        "max_absolute_difference": 2.280276602357849e-05,
+        "absolute_max_point": 253,
+        "max_relative_difference_where_reference_nonzero": 0.009078003170650705,
+        "relative_max_point": 259
+      },
+      "Y4": {
+        "max_absolute_difference": 0.00018229778379952322,
+        "absolute_max_point": 0,
+        "max_relative_difference_where_reference_nonzero": 0.00020680725640895767,
+        "relative_max_point": 0
+      }
+    },
+    "input_descriptions": [
+      {
+        "eos_model": "metal:data/eos/exhaustion_refined_v2/freeeos300_gs98_z020.dat",
+        "atmosphere_model": "nongrey:/tmp/ember-nongrey-exhaustion-warm-x015-v1.dat",
+        "opacity": "AESOPUS/TOPS X/Z family, number-density isotope mapping; GS98 metal proxy",
+        "opacity_directory": "/Users/greglaughlin/Projects/ember/data/opacity/hydrogen_poor_refined_v4"
+      },
+      {
+        "eos_model": "metal:data/eos/exhaustion_refined_v2/freeeos300_gs98_z020.dat",
+        "atmosphere_model": "nongrey:/tmp/ember-nongrey-exhaustion-warm-x015-v1.dat",
+        "opacity": "AESOPUS/TOPS X/Z family, number-density isotope mapping; GS98 metal proxy",
+        "opacity_directory": "/Users/greglaughlin/Projects/ember/data/opacity/hydrogen_poor_refined_v4"
+      }
+    ],
+    "step_error_tolerances": [
+      {
+        "log_structure": 0.0001,
+        "absolute_abundance": 1e-07,
+        "relative_surface_luminosity": 0.001
+      },
+      {
+        "log_structure": 2.5e-05,
+        "absolute_abundance": 2.5e-08,
+        "relative_surface_luminosity": 0.00025
+      }
+    ],
+    "energy_diagnostics": [
+      {
+        "discrete_luminosity_balance": 8.881784197001252e-16,
+        "nuclear_rest_mass_balance": -3.345456134340452e-10
+      },
+      {
+        "discrete_luminosity_balance": 4.440892098500626e-16,
+        "nuclear_rest_mass_balance": -2.3660717829443456e-10
+      }
+    ]
+  },
+  "mesh_control": {
+    "central_X": {
+      "reference": 0.09839120321418272,
+      "control": 0.09673533582682928,
+      "difference": -0.0016558673873534463,
+      "relative_difference": -0.016829425124000874
+    },
+    "Teff_K": {
+      "reference": 3273.762097032785,
+      "control": 3274.994293391151,
+      "difference": 1.2321963583663091,
+      "relative_difference": 0.0003763854311475967
+    },
+    "L_Lsun": {
+      "reference": 0.0020847365578804994,
+      "control": 0.0020869690407100006,
+      "difference": 2.232482829501222e-06,
+      "relative_difference": 0.0010708704757260712
+    },
+    "R_Rsun": {
+      "reference": 0.14193337162709407,
+      "control": 0.1419025072455751,
+      "difference": -3.086438151897464e-05,
+      "relative_difference": -0.0002174568331968496
+    },
+    "central_rho": {
+      "reference": 411.5368596556916,
+      "control": 415.932547746479,
+      "difference": 4.39568809078736,
+      "relative_difference": 0.010681152824232987
+    },
+    "convective_mass_fraction": {
+      "reference": 0.507332678762387,
+      "control": 0.4990503462207581,
+      "difference": -0.008282332541628856,
+      "relative_difference": -0.0163252494631988
+    }
+  },
+  "comment_only_source_change": "The 512-point control used an immutable executable; a later source comment edit changed apps/evolve.cpp but rebuilding preserved executable bytes."
+}

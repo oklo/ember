@@ -1,0 +1,293 @@
+{
+  "scope": "Preliminary low-hydrogen composition interpolation at Z=0.02 using independently computed X=0.0375 and X=0.0625 source mixtures. No runtime table accepted or installed. This is not an evolutionary error estimate.",
+  "manifest_sha256": {
+    "/private/tmp/ember-tops-hydrogen-exhaustion-check-v1/family.json": "d35db0f0a70ff0425307df2b07b9c54dce8def43d14b7939a8b8affc477fff3f",
+    "/private/tmp/ember-tops-hydrogen-exhaustion-check-v1/checks.json": "3d2754101e0aedf1d2e6281b56a06d1389051a2f3aac81722e53d86f5a4c9e89"
+  },
+  "active_domain_scope": "Source nodes within the original family rectangles and current logT joins 4.4..4.5, 5.6..5.7. Only the TOPS contribution changes; AESOPUS is held fixed. Not a stellar-profile error or a bound between source nodes.",
+  "gas_logR_support": [
+    -8.0,
+    6.0
+  ],
+  "audit_script_sha256": "5077bd1d6fbd054ae63484d107e66418b1ee7fc3cc045389be4b3009c1a284ed",
+  "comparisons": [
+    {
+      "X": 0.0375,
+      "Z": 0.02,
+      "sources": [
+        {
+          "X": 0.025,
+          "Z": 0.02,
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "file": "../ember-tops-hydrogen-exhaustion-v2/tops_gs98_x002p5_z020.txt",
+          "sha256": "eefc7ed76d44aed8c47b368d344651ff04342bb47d8d93af2d7b2b8b6f51e92e",
+          "request": "../ember-tops-hydrogen-exhaustion-v2/tops_gs98_x002p5_z020.request.json",
+          "request_sha256": "368149d54f9fca4f41420c52c5f0adc7f463ff20bd2299aaa2bf9ff725e15eae",
+          "validation_role": "candidate_node",
+          "parent_manifest": "new-candidates.json"
+        },
+        {
+          "X": 0.05,
+          "Z": 0.02,
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "file": "../ember-tops-hydrogen-exhaustion-v2/tops_gs98_x005_z020.txt",
+          "sha256": "0ed214264cd2b4edb21d5a5ef6e894cee02a8f69a6826afb151df57a72173dcf",
+          "request": "../ember-tops-hydrogen-exhaustion-v2/tops_gs98_x005_z020.request.json",
+          "request_sha256": "4ae21dbc1750af2e783657aa01899928d45d317087b248855c9bb3b61d2062fa",
+          "validation_role": "candidate_node",
+          "parent_manifest": "new-candidates.json"
+        },
+        {
+          "X": 0.0375,
+          "Z": 0.02,
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "file": "../ember-tops-hydrogen-exhaustion-v2/tops_gs98_x003p75_z020.txt",
+          "sha256": "78856029d125e1e2fa467770886a878bccb3ae64692d8356f94ce674c204d63a",
+          "request": "../ember-tops-hydrogen-exhaustion-v2/tops_gs98_x003p75_z020.request.json",
+          "request_sha256": "f80ce177494afdc6d78b9d4331fdf03fd0db31eb40db82435f909b3c7337b741",
+          "validation_role": "heldout"
+        }
+      ],
+      "original_cell_count": 3501,
+      "excluded_cell_count": 49,
+      "worst": {
+        "T_keV": 0.002,
+        "density_g_cm3": 1.5849,
+        "heldout": 71634.0,
+        "interpolated": 65975.25081422579,
+        "relative_difference": -0.07899529812343598
+      },
+      "hot_rectangle_worst": {
+        "T_keV": 0.05,
+        "density_g_cm3": 10000.0,
+        "heldout": 333.46,
+        "interpolated": 332.23423032553416,
+        "relative_difference": -0.003675912176770324
+      },
+      "family_density_rectangles": {
+        "low": [
+          1e-10,
+          251.19
+        ],
+        "high": [
+          1e-10,
+          10000.0
+        ]
+      },
+      "active_source_node_count": 3345,
+      "active_source_nodes_worst": {
+        "T_keV": 0.004,
+        "density_g_cm3": 3.9811,
+        "heldout": 161740.0,
+        "interpolated": 168803.02870505617,
+        "relative_difference": 0.04366902871927891,
+        "TOPS_log_opacity_weight": 1.0,
+        "blended_relative_difference": 0.04366902871927892
+      }
+    },
+    {
+      "X": 0.0625,
+      "Z": 0.02,
+      "sources": [
+        {
+          "X": 0.05,
+          "Z": 0.02,
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "file": "../ember-tops-hydrogen-exhaustion-v2/tops_gs98_x005_z020.txt",
+          "sha256": "0ed214264cd2b4edb21d5a5ef6e894cee02a8f69a6826afb151df57a72173dcf",
+          "request": "../ember-tops-hydrogen-exhaustion-v2/tops_gs98_x005_z020.request.json",
+          "request_sha256": "4ae21dbc1750af2e783657aa01899928d45d317087b248855c9bb3b61d2062fa",
+          "validation_role": "candidate_node",
+          "parent_manifest": "new-candidates.json"
+        },
+        {
+          "X": 0.075,
+          "Z": 0.02,
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "file": "../ember-tops-hydrogen-exhaustion-v2/tops_gs98_x007p5_z020.txt",
+          "sha256": "c3769840cecf672afda4e2e6a2e8c1f35279d7179e1248a1d3223354ec166646",
+          "request": "../ember-tops-hydrogen-exhaustion-v2/tops_gs98_x007p5_z020.request.json",
+          "request_sha256": "32f0efa7a6eb9c381c351a245dd12f13a7392661b655d74adca2e512c1f33ac3",
+          "validation_role": "candidate_node",
+          "parent_manifest": "new-candidates.json"
+        },
+        {
+          "X": 0.0625,
+          "Z": 0.02,
+          "metals": {
+            "C": 0.00343672,
+            "N": 0.0010067,
+            "O": 0.00934712,
+            "Ne": 0.00209662,
+            "Na": 4.18e-05,
+            "Mg": 0.00079848,
+            "Al": 7.206e-05,
+            "Si": 0.00088114,
+            "P": 8.46e-06,
+            "S": 0.00047026,
+            "Cl": 5.84e-06,
+            "Ar": 8.67e-05,
+            "K": 4.56e-06,
+            "Ca": 7.792e-05,
+            "Ti": 3.9e-06,
+            "Cr": 2.234e-05,
+            "Mn": 1.558e-05,
+            "Fe": 0.00152866,
+            "Ni": 9.514e-05
+          },
+          "file": "../ember-tops-hydrogen-exhaustion-v2/tops_gs98_x006p25_z020.txt",
+          "sha256": "8537e4cd1e8317086d032063349a3d4416edcea7611270c166409e3101acf38f",
+          "request": "../ember-tops-hydrogen-exhaustion-v2/tops_gs98_x006p25_z020.request.json",
+          "request_sha256": "727ef8fa9175632235e0127a7f31c6cff0e8886d63932af3362dba0183472244",
+          "validation_role": "heldout"
+        }
+      ],
+      "original_cell_count": 3500,
+      "excluded_cell_count": 50,
+      "worst": {
+        "T_keV": 0.005,
+        "density_g_cm3": 6.3096,
+        "heldout": 61620.0,
+        "interpolated": 63898.60993793213,
+        "relative_difference": 0.036978415091400985
+      },
+      "hot_rectangle_worst": {
+        "T_keV": 0.025,
+        "density_g_cm3": 2511.9,
+        "heldout": 1029.4,
+        "interpolated": 1025.734410069195,
+        "relative_difference": -0.003560899485918978
+      },
+      "family_density_rectangles": {
+        "low": [
+          1e-10,
+          251.19
+        ],
+        "high": [
+          1e-10,
+          10000.0
+        ]
+      },
+      "active_source_node_count": 3345,
+      "active_source_nodes_worst": {
+        "T_keV": 0.005,
+        "density_g_cm3": 6.3096,
+        "heldout": 61620.0,
+        "interpolated": 63898.60993793213,
+        "relative_difference": 0.036978415091400985,
+        "TOPS_log_opacity_weight": 1.0,
+        "blended_relative_difference": 0.036978415091400985
+      }
+    }
+  ],
+  "local_work": "/tmp/ember-tops-hydrogen-exhaustion-check-v1",
+  "local_audit_sha256": "2dfa7233f2920a1ae40df20c99d00f7472068217679d7d7a9e222eb12efc9567",
+  "remaining_checks": [
+    "Independent X=0.0825 comparison across the former X=0.09 boundary",
+    "Other metallicity planes and independently computed mixtures",
+    "Zero-hydrogen endpoint and independent X=0.0125 comparison",
+    "Actual stellar profile and runtime derivative checks",
+    "Refinement where interpolation differences affect the star",
+    "Overlapping stellar evolution comparison before accepting extended evolution"
+  ]
+}

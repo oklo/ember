@@ -63,8 +63,8 @@ def closure(result, profile, numbers, masses):
     thresholds={}
     for threshold in [0,.001,.01,.1,1,100]:
         mask=tau>=threshold
-        thresholds[str(threshold)]={'max_condensed_mass_fraction':float(condensed_mass[mask].max()),
-            'max_element_gas_depletion':float(depletion[mask].max())}
+        thresholds[str(threshold)]={'max_condensed_mass_fraction':float(condensed_mass[mask].max()) if mask.any() else None,
+            'max_element_gas_depletion':float(depletion[mask].max()) if mask.any() else None}
     present=[]
     for j,s in enumerate(result['condensates']):
         fraction=cond[:,j]/np.array([r['total_element_density'] for r in rows])

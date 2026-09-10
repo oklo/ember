@@ -1,0 +1,22 @@
+{
+  "scope": "Actual late stellar overlap using separately preserved old/new executables and old/extended hot opacity. All history and profile values agree exactly. Original checkpoint and source inputs retained.",
+  "histories_identical": true,
+  "profiles_identical": true,
+  "states": 60,
+  "start_age_yr": 3600000000000,
+  "end_age_yr": 3605000000000.0005,
+  "extension": {
+    "scope": "explicit continuation with additional lower-hydrogen hot opacity planes; every original opacity entry and all other physical selections retained; executable compatibility requires a separate trajectory comparison",
+    "added_planes": 12,
+    "source_executable": "/tmp/ember-cold-remnant-time-refinement-3600gyr-v1/ember-evolve",
+    "source_opacity_directory": "data/opacity/hydrogen_poor_refined_v4"
+  },
+  "inputs": {
+    "out/evolution-cold-remnant-time-refinement-reference-512-3605gyr-v1.json": "a3e42a00a162b8f5de164f26d620f60a5a431eb3b3338a1dff9f16750e6f3988",
+    "out/evolution-cold-remnant-hot-opacity-overlap-512-3605gyr-v1.json": "29135e7b57477368738f48b564ae5669ed7d7e4d255cdc0c8e67073336231f0b"
+  },
+  "receipts": {
+    "out/evolution-cold-remnant-time-refinement-reference-512-3605gyr-v1.receipt.json": "ff4d2ae9fc0110958cd2fc2550f5b6d4e208fc46d30075b05766cde3e2745287",
+    "out/evolution-cold-remnant-hot-opacity-overlap-512-3605gyr-v1.receipt.json": "a3021066cf60c9a9d9e607e9d253b123558e832fa8504491a402aae51ac7e866"
+  }
+}

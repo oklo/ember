@@ -64,14 +64,19 @@ def main():
     a.work.mkdir(parents=True);a.output.parent.mkdir(parents=True,exist_ok=True)
     executable=a.work.resolve()/'ember-evolve';shutil.copy2(a.executable,executable)
     data=input_data(arguments)
+    if '--opacity-extension-restart' in arguments:
+        previous=arguments.copy()
+        previous[previous.index('--opacity-directory')+1]=arguments[arguments.index('--restart-source-opacity')+1]
+        data=sorted(set(data)|set(input_data(previous)))
     sources=[f for directory in ['src','include','apps','examples'] for f in (ROOT/directory).rglob('*')
              if f.is_file() and f.suffix in ['.cpp','.hpp','.txt']]
     data_hashes={data_label(f):sha(f) for f in data}
     source_hashes={str(f.relative_to(ROOT)):sha(f) for f in sorted(sources)}
     restart_inputs={}
-    if '--restart' in arguments:
-        path=Path(arguments[arguments.index('--restart')+1]).resolve(strict=True)
-        restart_inputs[str(path)]=sha(path)
+    for option in ['--restart','--opacity-extension-restart','--restart-source-executable']:
+        if option in arguments:
+            path=Path(arguments[arguments.index(option)+1]).resolve(strict=True)
+            restart_inputs[str(path)]=sha(path)
     command=[str(executable),*arguments]
     receipt={'command':command,'working_directory':str(ROOT),'executable_sha256':sha(executable),
              'data_sha256':data_hashes,'source_sha256':source_hashes,

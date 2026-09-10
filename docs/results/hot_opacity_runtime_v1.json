@@ -1,0 +1,81 @@
+{
+  "scope": "Runtime opacity and derivative checks. Original current-profile output is identical byte for byte; new hot-domain derivatives compared against two finite-difference spacings. This does not estimate physical source opacity error or stellar lifetime error.",
+  "retained_profile_points": 512,
+  "retained_profile_output_identical": true,
+  "derivative_states": 90,
+  "maximum_absolute_derivative_differences": {
+    "hydrogen": {
+      "absolute_difference": 1.2813551331092299e-09,
+      "state_X_Y3_T_rho": [
+        0.041,
+        0.00015,
+        600000.0,
+        500
+      ],
+      "finite_difference_step": 1e-06,
+      "analytic": -0.7463488893068494
+    },
+    "helium3": {
+      "absolute_difference": 1.2703817720005617e-09,
+      "state_X_Y3_T_rho": [
+        0.041,
+        0.015,
+        600000.0,
+        500
+      ],
+      "finite_difference_step": 1e-06,
+      "analytic": 0.06973638250833616
+    },
+    "log_temperature": {
+      "absolute_difference": 2.1248154347119907e-09,
+      "state_X_Y3_T_rho": [
+        0.006,
+        0.00015,
+        3000000.0,
+        10
+      ],
+      "finite_difference_step": 1e-06,
+      "analytic": -3.1073331213506266
+    },
+    "log_density": {
+      "absolute_difference": 1.23650917283058e-09,
+      "state_X_Y3_T_rho": [
+        0.018,
+        0.015,
+        3000000.0,
+        500
+      ],
+      "finite_difference_step": 1e-06,
+      "analytic": 0.357414318237494
+    }
+  },
+  "tolerance": 2e-05,
+  "zero_hydrogen_hot_state": [
+    0.0,
+    0.00015,
+    9000000.0,
+    500.0,
+    6.775673152736482,
+    -2.9249395858700415,
+    0.6137063428578542,
+    0.4933697932894322,
+    0.4415429258325845,
+    9.992815474981001e-11,
+    9992.815474981
+  ],
+  "low_hydrogen_cool_domain_rejected": "TOPS_ATOMIC_GS98_low: (logT=4.698970, logrho=-1.522489, X=0.025173) outside table",
+  "probe_sha256": "decaf1ef98cf9f0e079d613f73c0354b875d995a2e2996914eeadd32dc1f107d",
+  "profile_sha256": "a2fb8ee39a5eb290d72640c392b7385d1d63bc2e6b026e2fbd1b314d6f719d02",
+  "runtime_sha256": {
+    "data/opacity/hydrogen_exhaustion_hot_v1/tops_gs98_mixture_low.dat": "77cf6d94d2dcd0267b6adb4235e156dfe0a4fc25778a5dc223424b562c24cbc4",
+    "data/opacity/hydrogen_exhaustion_hot_v1/tops_gs98_mixture_z030_low.dat": "1b786e3905977dd5a77190351c654d9aeca28c53f81f945f1abdf86360c36f7a",
+    "data/opacity/hydrogen_exhaustion_hot_v1/tops_gs98_mixture_z020_low.dat": "9cbebb2a75e5ef7ccaf48eb07ac28662b374b1304365aa125e6260169916dbfc",
+    "data/opacity/hydrogen_exhaustion_hot_v1/tops_gs98_mixture_z010_high.dat": "adbc28d51bf7c1c02879cd203ccb78317e29826abe16d40fd8705d0dd8e60574",
+    "data/opacity/hydrogen_exhaustion_hot_v1/aesopus21_gs98_mixture.dat": "48298d34ae8e405ee697deca4af2e8b7f57a352b2e4f670452881e019de85c62",
+    "data/opacity/hydrogen_exhaustion_hot_v1/tops_gs98_mixture_z020_high.dat": "af268141678ac1d18b929e7b084f7ed455e0b3867f6527ff76d8ebc0620a47d3",
+    "data/opacity/hydrogen_exhaustion_hot_v1/tops_gs98_mixture_z010_low.dat": "616a37ae9dc0054d2ff72d3edc0c7fc3fe6c1a782deb87d2790906f0f68d68fc",
+    "data/opacity/hydrogen_exhaustion_hot_v1/tops_gs98_mixture_z030_high.dat": "4e5c2a41b2855abd672d46c65da86ae0c79fb8d745d26a5ea8bd20fcb7d3baaf",
+    "data/opacity/hydrogen_exhaustion_hot_v1/tops_gs98_mixture_high.dat": "9cbebed1b31bab5d5c77811508f06a6e5b06c7bde6243506cd3d6e8b1e6dd4ea"
+  },
+  "work": "/tmp/ember-hot-opacity-derivatives-v1"
+}

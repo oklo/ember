@@ -7,6 +7,31 @@ small specifications and provenance metadata are versioned. See
 data history is retained. References to installed/archived files describe the
 development machine unless explicitly stated otherwise.
 
+## Current hot-core hydrogen extension
+
+`hydrogen_exhaustion_hot_v1/` is selected for the current forward calculation.
+Its hot tables include X=0/.025/.05/.075 alongside all fourteen previous hydrogen
+planes at Z=.01/.02/.03. Source temperature/density axes and old entries are
+unchanged. Cool TOPS and AESOPUS files are copied from
+`hydrogen_poor_refined_v4/`; their hydrogen limits remain in force. The added
+low-H range is usable only above the old low/high temperature blend.
+
+Twelve independent X=.0125/.0375/.0625/.0825 source checks give a largest opacity
+difference of 0.05257% on tested hot-profile states. Ninety additional response
+checks agree with finite differences, and the old actual 512-point profile
+retains identical opacity values and derivatives. These are local source and
+numerical checks, not a lifetime uncertainty. Full records are in
+`docs/results/tops_exhaustion_hot_profile_all_v2.json` and
+`docs/results/hot_opacity_runtime_v1.json`.
+
+Original source requests and small manifests are under
+`sources/hydrogen_exhaustion/`. Raw replies and generated numeric tables stay
+local. Reproduction uses `scripts/import_tops_mixtures.py`, then
+`scripts/assemble_hot_opacity_extension.py`, as shown in the
+[reproduction guide](../../docs/DATA_REPRODUCTION.md).
+
+The following paragraphs preserve earlier stages of the opacity comparison.
+
 ## Hydrogen-poor TOPS extension under validation
 
 The separate `hydrogen_poor/` directory contains 30 TOPS source planes:

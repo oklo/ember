@@ -8,7 +8,8 @@
 int main(int argc, char **argv) {
   using namespace ember;
   try {
-    if (argc != 3)
+    const bool report_domain_errors = argc == 4 && std::string(argv[3]) == "--report-domain-errors";
+    if (argc != 3 && !report_domain_errors)
       throw std::invalid_argument("EOS manifest and atmosphere table required");
     MetalHelmholtzEos eos(argv[1], HelmholtzTableEos::Mixture::allow_documented_proxy);
     CompositionAtmosphereGrid grid(eos, argv[2],
@@ -26,15 +27,21 @@ int main(int argc, char **argv) {
         std::puts("{\"covered\":false}");
         continue;
       }
-      const auto s = grid.eval(t, g, c);
-      const auto r = grid.composition_response(t, g, c);
-      std::printf("{\"covered\":true,\"T\":%.17g,\"Pgas\":%.17g,"
-                  "\"P\":%.17g,\"rho\":%.17g,"
-                  "\"logarithmic_thermal_derivatives\":[%.17g,%.17g,%.17g,%.17g],"
-                  "\"composition_derivatives\":[%.17g,%.17g,%.17g,%.17g]}\n",
-                  s.T, s.Pgas, s.P, s.rho, s.dlnT_dlnTeff, s.dlnT_dlng,
-                  s.dlnP_dlnTeff, s.dlnP_dlng,
-                  r.dlnT_dXH, r.dlnT_dX3, r.dlnP_dXH, r.dlnP_dX3);
+      try {
+        const auto s = grid.eval(t, g, c);
+        const auto r = grid.composition_response(t, g, c);
+        std::printf("{\"covered\":true,\"T\":%.17g,\"Pgas\":%.17g,"
+                    "\"P\":%.17g,\"rho\":%.17g,"
+                    "\"logarithmic_thermal_derivatives\":[%.17g,%.17g,%.17g,%.17g],"
+                    "\"composition_derivatives\":[%.17g,%.17g,%.17g,%.17g]}\n",
+                    s.T, s.Pgas, s.P, s.rho, s.dlnT_dlnTeff, s.dlnT_dlng,
+                    s.dlnP_dlnTeff, s.dlnP_dlng,
+                    r.dlnT_dXH, r.dlnT_dX3, r.dlnP_dXH, r.dlnP_dX3);
+      } catch (const std::domain_error &error) {
+        if (!report_domain_errors) throw;
+        std::fprintf(stderr, "XH=%.17g X3=%.17g Teff=%.17g logg=%.17g: %s\n", x,y,t,lg,error.what());
+        std::puts("{\"covered\":false,\"atmosphere_covered\":true,\"eos_supported\":false}");
+      }
     }
     if (fields != EOF)
       throw std::invalid_argument("expected four finite source coordinates");

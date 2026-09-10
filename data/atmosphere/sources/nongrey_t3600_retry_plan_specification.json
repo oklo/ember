@@ -1,0 +1,59 @@
+{
+  "scope": "Retry atmosphere starting guesses using a verified deeper profile. Earlier attempts stopped before launching the source solver because their requested seed depth exceeded the available profile. Includes a separate shallower solution and independent interpolation check.",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-fine-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "x015-y000-t3600-g540",
+      "XH": 0.15,
+      "X3": 0.0,
+      "teff_K": 3600,
+      "log_g": 5.4,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x015_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-000/opacity/fort.63",
+      "initial": "/tmp/ember-nongrey-x015-refined-warm-v1/x015-y000-t3400-g515/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x015-y120-t3600-g540",
+      "XH": 0.15,
+      "X3": 0.12,
+      "teff_K": 3600,
+      "log_g": 5.4,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x015_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-001/opacity/fort.63",
+      "initial": "/tmp/ember-nongrey-x015-refined-warm-v1/x015-y120-t3400-g515/final",
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x015-y000-t3600-g540-depth300",
+      "XH": 0.15,
+      "X3": 0.0,
+      "teff_K": 3600,
+      "log_g": 5.4,
+      "specification": "data/atmosphere/sources/nongrey_t3600_x015_specification.json",
+      "opacity": "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-000/opacity/fort.63",
+      "initial": "/tmp/ember-nongrey-x015-refined-warm-v1/x015-y000-t3400-g515/final",
+      "initial_bottom_tau": 300,
+      "convective_iterations": 10
+    },
+    {
+      "name": "x0175-y005-t3500-g515",
+      "XH": 0.175,
+      "X3": 0.005,
+      "teff_K": 3500,
+      "log_g": 5.15,
+      "specification": "data/atmosphere/sources/nongrey_x0125_x0175_heldout_specification.json",
+      "opacity": "/tmp/ember-nongrey-x0125-x0175-heldout-opacity-v1/plane-001/opacity/fort.63",
+      "wait_for_opacity": true,
+      "initial": "/tmp/ember-nongrey-x015-refined-warm-v1/x015-y000-t3400-g515/final",
+      "composition_continuation": true,
+      "initial_bottom_tau": 600,
+      "convective_iterations": 10
+    }
+  ]
+}

@@ -19,9 +19,11 @@ from import_nongrey_grid import import_grid
 from prepare_nongrey_sources import digest
 
 
-def runtime(probe, eos, table, points):
+def runtime(probe, eos, table, points, report_domain_errors=False):
     inputs = ''.join(' '.join(format(v, '.17g') for v in p)+'\n' for p in points)
-    result = subprocess.run([str(probe.resolve()), str(eos), str(table)],
+    command = [str(probe.resolve()), str(eos), str(table)]
+    if report_domain_errors: command.append('--report-domain-errors')
+    result = subprocess.run(command,
                             input=inputs, text=True, capture_output=True, check=True)
     rows = [json.loads(line) for line in result.stdout.splitlines()]
     if len(rows) != len(points):
@@ -43,6 +45,8 @@ def main():
     for name in ['table', 'eos_family', 'eos_probe', 'grid_probe', 'output']:
         p.add_argument(name, type=Path)
     p.add_argument('--heldouts', type=Path, nargs='+', default=[])
+    p.add_argument('--allow-eos-holes', action='store_true',
+                   help='report unsupported EOS nodes explicitly; runtime guards remain mandatory')
     a = p.parse_args()
     manifest = a.table.with_suffix('.manifest.json')
     assembled = json.loads(manifest.read_text())
@@ -104,13 +108,16 @@ def main():
                        for k in ['logarithmic_thermal_derivatives', 'composition_derivatives']}
             if max(changes.values()) > 1e-12:
                 derivative_changes.append({'coordinates': point, 'max_abs_changes': changes})
-        covered = runtime(a.grid_probe, a.eos_family, a.table, list(states))
+        covered = runtime(a.grid_probe, a.eos_family, a.table, list(states), a.allow_eos_holes)
+        unsupported = [{'coordinates': key, 'runtime': row}
+                       for key, row in zip(states, covered, strict=True) if not row['covered']]
+        supported_states = {key: state for (key, state), row in zip(states.items(), covered, strict=True) if row['covered']}
         inputs = ''.join(' '.join(format(v, '.17g') for v in [*key[:2], state['T'], state['Pgas'], state['source_density']])+'\n'
-                         for key, state in states.items())
+                         for key, state in supported_states.items())
         result = subprocess.run([str(a.eos_probe.resolve()), '--family', str(a.eos_family)],
                                 input=inputs, capture_output=True, text=True, check=True)
         eos = []
-        for (key, state), line in zip(states.items(), result.stdout.splitlines(), strict=True):
+        for (key, state), line in zip(supported_states.items(), result.stdout.splitlines(), strict=True):
             values = list(map(float, line.split()))
             expected = [*key[:2], state['T'], state['Pgas'], state['source_density']]
             if len(values) != 7 or values[:5] != expected or values[5] <= 0 or not all(math.isfinite(v) for v in values):
@@ -136,6 +143,8 @@ def main():
     report = {'scope': __doc__, 'script_sha256': digest(__file__),
               'retained_models': old_count, 'source_models': len(states),
               'runtime_supported_source_nodes': sum(r['covered'] for r in covered),
+              'unsupported_EOS_nodes': unsupported,
+              'domain_note': 'The usable domain is the intersection of the atmosphere and EOS domains; no unsupported density is extrapolated.',
               'complete_cells': assembled['complete_cells'],
               'retained_runtime_queries': len(reference_points),
               'retained_max_relative_difference': retained,

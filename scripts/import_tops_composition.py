@@ -12,24 +12,47 @@ from pathlib import Path
 import re
 
 
-def read(path, expected):
-    raw=path.read_bytes()
-    if hashlib.sha256(raw).hexdigest()!=expected['sha256']:
-        raise ValueError(f'unexpected checksum: {path}')
-    text=raw.decode()
-    if 'Number of T =  50  Number of rho =  71  Number of materials =  21' not in text:
+def validate_mixture(text, expected):
+    """Check every returned element, allowing omitted H only for exactly zero H.
+
+    TOPS omits zero-abundance hydrogen from its normalized composition and
+    reports 20 materials for our helium/GS98-metal endpoint. Positive-hydrogen
+    mixtures still require all 21 elements; no absent metal is inferred.
+    """
+    dimensions=re.search(r'Number of T\s*=\s*(\d+)\s+Number of rho\s*=\s*(\d+)\s+Number of materials\s*=\s*(\d+)',text)
+    if not dimensions or tuple(map(int,dimensions.groups()[:2]))!=(50,71):
         raise ValueError('unexpected dimensions')
-    warning=text.split('Temp        Den Req     Den Used\n')[1].split('Normalized composition')[0]
-    excluded={tuple(map(float,row.split()[:2])) for row in warning.splitlines() if row.strip()}
     rows=text.split('No. Fraction Mass Fraction  At. No.  Chem. Sym.  Mat ID.\n')[1].split('Temperature grid')[0]
-    elements={r.split()[3]:float(r.split()[1]) for r in rows.splitlines() if r.strip()}
+    elements={}
+    for row in rows.splitlines():
+        if not row.strip():continue
+        values=row.split();element=values[3];fraction=float(values[1])
+        if element in elements or not math.isfinite(fraction) or fraction<0:
+            raise ValueError('invalid source element row')
+        elements[element]=fraction
     x=expected['X']
-    if len(elements)!=21 or abs(elements['H']-x)>1e-6 or abs(elements['He']-(1-expected.get('Z',.02)-x))>1e-6:
+    required=set(expected['metals'])|{'He'}
+    if x!=0 or 'H' in elements:required.add('H')
+    hydrogen=elements.get('H',0.)
+    hydrogen_ok=hydrogen==0 if x==0 else abs(hydrogen-x)<=min(1e-6,5e-5*x)
+    if (len(elements)!=int(dimensions.group(3)) or set(elements)!=required
+            or not hydrogen_ok or abs(elements['He']-(1-expected.get('Z',.02)-x))>1e-6):
         raise ValueError('wrong source mixture')
     # Verify every metal against the original GS98 request, not just sum Z.
     for element,value in expected['metals'].items():
         if abs(elements[element]-value)>max(1e-9,5e-5*value):
             raise ValueError(f'wrong source metal abundance: {element}')
+    return elements
+
+
+def read(path, expected):
+    raw=path.read_bytes()
+    if hashlib.sha256(raw).hexdigest()!=expected['sha256']:
+        raise ValueError(f'unexpected checksum: {path}')
+    text=raw.decode()
+    validate_mixture(text,expected)
+    warning=text.split('Temp        Den Req     Den Used\n')[1].split('Normalized composition')[0]
+    excluded={tuple(map(float,row.split()[:2])) for row in warning.splitlines() if row.strip()}
     cells={}
     for part in text.split('Density     Ross opa    Planck opa  No. Free    Av Sq Free  T=  ')[1:]:
         lines=part.splitlines();t=float(lines[0])

@@ -12,68 +12,61 @@ reported alongside each result.
 
 ## Status — September 10, 2026
 
-The completed **0.1 solar-mass model reaches 3.600 trillion years** from a
-specified static main-sequence model. It now has a central region stable against convection and an outer convective
-envelope. Hydrogen burning continues. **Hydrogen exhaustion and white-dwarf cooling have not been reached.**
-The current goal is to evolve the helium remnant to **100 K effective temperature**
-using thermodynamics, heat transport and atmospheres valid in the conditions
-the star reaches.
+The **0.1 solar-mass model has reached 3.685 trillion years**, with a stable
+central region and an outer convective envelope. Hydrogen burning continues.
+**Hydrogen exhaustion and white-dwarf cooling have not been reached.** The
+latest forward trial stopped at the atmosphere table's 3400 K upper limit.
+A fresh trajectory with the checked 3600 K extension is now running toward
+3.800 trillion years. That target is not yet a completed result.
 
-| Latest completed model | Value |
+| Latest accepted state | Value |
 |---|---:|
 | Initial composition | XH = 0.7, He3 = 0, Z = 0.02; GS98 metals |
 | Mass mesh | 512 points; fixed baryonic mass of 0.1 Msun |
-| Central hydrogen mass fraction | 0.09839 |
-| Radius | 0.1419 Rsun |
-| Luminosity | 0.002085 Lsun |
-| Effective temperature | 3274 K |
-| Central temperature | 8.670 million K |
-| Convective mass fraction | 0.5073 |
+| Central hydrogen mass fraction | 0.03811 |
+| Radius | 0.1405 Rsun |
+| Luminosity | 0.002375 Lsun |
+| Effective temperature | 3400 K |
+| Central temperature | 9.290 million K |
+| Convective mass fraction | 0.3251 |
+
+The goal remains an evolved helium remnant at **100 K effective temperature**,
+using material properties, heat transport and atmospheres valid along its
+trajectory. The [current development plan](docs/COLD_REMNANT.md) describes
+remaining physics; the [handoff](HANDOFF.md) records calculations and inputs.
 
 The [September 10 working paper](docs/reports/2026-09-10/ember_status_and_future.pdf)
-([source, figures and reproduction instructions](docs/reports/2026-09-10/README.md))
-compares Ember with the published Laughlin, Bodenheimer and Adams (1997)
-model, using values stated in the paper and approximate curves read from its
-figures. The current F77 reconstruction is a separate supplementary comparison.
-The paper also describes computing time and the physics still needed for the
-remnant. The
-[current development plan](docs/COLD_REMNANT.md) and latest
-[handoff entry](HANDOFF.md) record subsequent work and job status.
+([source and figures](docs/reports/2026-09-10/README.md)) currently presents the
+completed comparison through **3.560 trillion years**. It compares Ember
+primarily with Laughlin, Bodenheimer and Adams (1997), using stated values and
+approximate curves read from their figures. The reconstructed F77 results are
+a separate, faint supplementary comparison.
 
-The completed run uses **64 composition tables for the equation of state**,
-refined hydrogen-poor TOPS opacity, and **120 atmosphere models** that resolve
-absorption and scattering over frequency. Convection accounts for composition
-gradients; plasma-neutrino losses enter the energy equation. The new 512-point calculation
-contains 2354 states from the initial model through 3.560 trillion years,
-followed by 277 accepted steps to 3.600 trillion years.
+The new hot-core opacity family extends to **zero hydrogen**. Twelve independent
+composition checks differ by at most **0.05257%** on tested hot-profile states;
+this is an opacity interpolation check, not a stellar lifetime error bound.
+All previous hot data and the cool opacity inputs remain unchanged. The selected
+EOS has 64 composition tables. The atmosphere extension contains 132 source
+models; four low-gravity 3600 K points lie below the EOS density range, and
+runtime guards reject those unsupported states. Nearby states at the evolving
+star's gravity are supported. See the [opacity](docs/results/tops_exhaustion_hot_profile_all_v2.json)
+and [atmosphere](docs/results/nongrey_t3600_extension_v1.json) checks.
 
-A refined table of **120 atmospheres extends to hydrogen fraction 0.1** at
-warm surface temperatures, including new points at hydrogen fraction 0.15.
-At an independent atmosphere near that composition, the matching-temperature
-discrepancy falls from 2.134% to 0.6468%. Independent checks at hydrogen
-fractions 0.125 and 0.175 differ by 0.7971% and 1.089%. These are local
-interpolation checks, not a bound on lifetime accuracy.
+Both 512- and 1024-point forward trials reached 3400 K, at 3.685 and 3.683
+trillion years. Earlier fresh accuracy controls completed 3.600 trillion years:
+a fourfold tighter time control changes central hydrogen by 0.1849%; doubling
+the mesh changes it by 1.683%. These checks support continued calculation while
+showing that endpoint ages still need refinement. See the
+[accuracy comparison](docs/results/evolution_accuracy_3600gyr_v1.json) and
+[latest stopped trials](docs/results/evolution_atmosphere_limit_3685gyr_v1.json).
 
-At 3.560 trillion years, both the 512-point and 1024-point calculations have stable central regions,
-containing 37.23% and 37.77% of their mass, respectively, and extending to about
-45% of their radius. At the same age their luminosities differ by 0.07813%,
-but central hydrogen differs by 1.752%. The earlier stable shell has reached
-the center. Further mesh and time-step checks are needed to determine the
-transition age accurately. The earlier checkpoint counter limit was corrected
-without loosening accuracy tolerances. See the
-[completed comparison](docs/results/evolution_transition_3560gyr_v1.json).
-
-The next continuation reached 3.609 trillion years before encountering the
-interior opacity family's lower hydrogen boundary. Additional TOPS source
-calculations are being requested; no table is extrapolated to continue the run.
-Separate calculations with fourfold tighter time tolerances and with 1024 mesh
-points are checking the transition, using the new two-worker mode.
-
-**Performance:** `--step-workers 2` runs independent time-step estimates on two
-CPU workers, and conduction calculations now reuse repeated source lookups.
-A checked 512-point benchmark uses 32.76% less elapsed time, with complete
-output files unchanged byte for byte. The default remains one worker. See
-[the measurements and CPU/GPU assessment](docs/COMPUTATIONAL_COST.md).
+**Production timing:** fresh runs through 3.600 trillion years took **39.78
+minutes at 512 points** with the tighter time control and **59.26 minutes at
+1024 points** with the original time control, excluding computer suspension.
+Atmosphere source generation is separate, reusable work. These are partial
+trajectories; the complete cooling-track cost remains unmeasured. Two CPU
+workers and reuse of conduction lookups reduced a shorter benchmark's elapsed
+time by 32.76%, with identical outputs. See [the timing notes](docs/COMPUTATIONAL_COST.md).
 
 New [grain-opacity calculations](docs/GRAINS.md) provide separate absorption
 and scattering over wavelength, checked against an independent program and

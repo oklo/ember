@@ -119,6 +119,41 @@ def main():
         rejected=run('changed-selected-opacity',
                      ['--restart',str(alternate_checkpoint),'--opacity-directory',str(alternate)],False)
         if 'input tables differ' not in rejected['message']:raise AssertionError(rejected)
+        # Synthetic lower-H planes exercise the extension contract only;
+        # this short star stays inside the unchanged original X range.
+        extended=work/'hot-extension';extended.mkdir()
+        for f in (data/'opacity').glob('*.dat'):shutil.copyfile(f,extended/f.name)
+        for f in extended.glob('tops_gs98_mixture_z*_high.dat'):
+            rows=f.read_text().splitlines();header=rows[0].split();nx,nt,nr=map(int,header[:3])
+            first=rows[3:4+nt];x,z=map(float,first[0].split())
+            if x<=0:raise AssertionError('extension fixture requires a positive source floor')
+            extra=first.copy();extra[0]=f'{x/2:.17g} {z:.17g}'
+            header[0]=str(nx+1);rows[0]=' '.join(header)
+            f.write_text('\n'.join(rows[:3]+extra+rows[3:])+'\n')
+        extension_options=['--opacity-extension-restart',str(checkpoint),
+                           '--restart-source-executable',str(executable),
+                           '--restart-source-opacity',str(data/'opacity'),
+                           '--opacity-directory',str(extended)]
+        extended_checkpoint=work/'extended.restart'
+        extension=run('hot-extension',extension_options+['--step-workers','2','--checkpoint',str(extended_checkpoint)])
+        if extension['profile']!=reference['profile'] or extension['history']!=resumed['history']:
+            raise AssertionError('opacity extension changed the original-domain trajectory')
+        if extension['opacity_extension']['added_planes']!=3 or checkpoint.read_bytes()!=original_checkpoint:
+            raise AssertionError('extension provenance missing or source checkpoint modified')
+        extension_resumed=run('extension-exact-restart',['--restart',str(extended_checkpoint),'--opacity-directory',str(extended)])
+        if extension_resumed['profile']!=reference['profile']:
+            raise AssertionError('extended checkpoint does not resume exactly')
+        f=extended/'tops_gs98_mixture_z020_high.dat';original_high=f.read_bytes()
+        rows=original_high.decode().splitlines();nt=int(rows[0].split()[1]);j=5+nt
+        values=rows[j].split();values[0]=format(float(values[0])+.01,'.17g');rows[j]=' '.join(values)
+        f.write_text('\n'.join(rows)+'\n')
+        rejected=run('changed-original-hot-entry',extension_options,False)
+        if 'original opacity entries changed' not in rejected['message']:raise AssertionError(rejected)
+        f.write_bytes(original_high)
+        f=extended/'tops_gs98_mixture_z020_low.dat'
+        with f.open('ab') as stream:stream.write(b'\n')
+        rejected=run('changed-cool-extension',extension_options,False)
+        if 'cooler opacity changed' not in rejected['message']:raise AssertionError(rejected)
         finished=run('finished',['--restart',str(final)])
         if finished['profile']!=reference['profile']:raise AssertionError('final checkpoint did not round-trip exactly')
         changed=arguments.copy();changed[3]='20'
