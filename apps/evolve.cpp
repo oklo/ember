@@ -1,3 +1,4 @@
+#include <unordered_map>
 #include "../examples/stellar_seed.hpp"
 #include "evolution_checkpoint.hpp"
 #include "opacity_extension.hpp"
@@ -42,22 +43,43 @@ private:
 // lookup, rounded key or reuse across a changed composition is allowed.
 class CachedNuclear final : public ember::Nuclear {
 public:
-  explicit CachedNuclear(const ember::PPChains& source):source_(source) {}
+  explicit CachedNuclear(const ember::PPChains& source):source_(source) { entries_.reserve(8192); }
+  ~CachedNuclear() override {
+    std::fprintf(stderr,"nuclear response cache: %zu hits, %zu misses\n",hits_,misses_);
+  }
   ember::NuclearResponse composition_response(double T,double rho,const ember::Composition& c) const override {
-    for(const auto& e:entries_)if(e.T==T && e.rho==rho && e.c.basis==c.basis
-        && e.c.metal_inventory==c.metal_inventory && e.c.X==c.X)return e.response;
+    const Key key{T,rho,c};
+    if(const auto found=entries_.find(key);found!=entries_.end()) {++hits_;return found->second;}
+    ++misses_;
     const auto response=source_.composition_response(T,rho,c);
-    if(entries_.size()==16)entries_.erase(entries_.begin());
-    entries_.push_back({T,rho,c,response});return response;
+    if(entries_.size()>=8192)entries_.clear();
+    entries_.emplace(key,response);return response;
   }
   ember::NuclearState eval(double T,double rho,const ember::Composition& c) const override {
     return composition_response(T,rho,c).state;
   }
   const char* name() const override { return source_.name(); }
 private:
-  struct Entry {double T,rho;ember::Composition c;ember::NuclearResponse response;};
+  struct Key {
+    double T,rho;ember::Composition c;
+    bool operator==(const Key& other) const {
+      return T==other.T && rho==other.rho && c.basis==other.c.basis
+        && c.metal_inventory==other.c.metal_inventory && c.X==other.c.X;
+    }
+  };
+  struct Hash {
+    std::size_t operator()(const Key& k) const {
+      std::size_t result=0;
+      const auto add=[&](std::size_t value) { result^=value+0x9e3779b97f4a7c15ULL+(result<<6)+(result>>2); };
+      add(std::hash<double>{}(k.T));add(std::hash<double>{}(k.rho));
+      for(double x:k.c.X)add(std::hash<double>{}(x));
+      add(static_cast<std::size_t>(k.c.basis));add(static_cast<std::size_t>(k.c.metal_inventory));
+      return result;
+    }
+  };
   const ember::PPChains& source_;
-  mutable std::vector<Entry> entries_;
+  mutable std::unordered_map<Key,ember::NuclearResponse,Hash> entries_;
+  mutable std::size_t hits_=0,misses_=0;
 };
 void json_string(const std::string& value) {
   std::putchar('"');

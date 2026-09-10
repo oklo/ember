@@ -22,14 +22,30 @@ def main():
     p.add_argument('--helium3',type=float,nargs='+',default=[0,.12])
     p.add_argument('--step',type=float,default=.0125)
     p.add_argument('--jobs',type=int,default=4)
+    p.add_argument('--grid-from',type=Path,
+                   help='reuse exact temperature/density coordinates from a source specification or manifest')
     a=p.parse_args()
     if not 1<=a.jobs<=8 or not .005<=a.step<=.05:raise ValueError('invalid jobs or material step')
     if any(sorted(set(axis))!=axis for axis in [a.hydrogen,a.helium3]):raise ValueError('axes must increase')
     ts=[3.5+i*a.step for i in range(round(3.6/a.step)+1)]
     qs=[-1.5+i*a.step for i in range(round(4/a.step)+1)]
     source_sha=sha(a.probe.read_bytes());a.work.mkdir(parents=True,exist_ok=True)
+    grid_reference={}
+    if a.grid_from:
+        grid=json.loads(a.grid_from.read_text())
+        if (grid['probe_sha256']!=source_sha
+                or grid['source_archive_sha256']!='4ab1c15a51385a3eab3b08c6f3f240739c0105d92ec828d635ac95720edefb09'):
+            raise ValueError('reference grid uses different source physics')
+        ts,qs=grid['logT'],grid['logQ']
+        for axis in [ts,qs]:
+            if (len(axis)<5 or not all(math.isfinite(v) for v in axis)
+                    or any(v>=w for v,w in zip(axis,axis[1:]))
+                    or any(abs((w-v)/a.step-1)>1e-10 for v,w in zip(axis,axis[1:]))):
+                raise ValueError('reference grid does not match the requested uniform material step')
+        grid_reference={'grid_reference':str(a.grid_from.resolve()),
+                        'grid_reference_sha256':sha(a.grid_from.read_bytes())}
     spec={'hydrogen':a.hydrogen,'helium3':a.helium3,'logT':ts,'logQ':qs,'probe_sha256':source_sha,
-          'source_archive_sha256':'4ab1c15a51385a3eab3b08c6f3f240739c0105d92ec828d635ac95720edefb09'}
+          'source_archive_sha256':'4ab1c15a51385a3eab3b08c6f3f240739c0105d92ec828d635ac95720edefb09',**grid_reference}
     manifest=a.work/'specification.json'
     if manifest.exists() and json.loads(manifest.read_text())!=spec:raise ValueError('changed source/settings require a new work directory')
     manifest.write_text(json.dumps(spec,indent=2)+'\n')

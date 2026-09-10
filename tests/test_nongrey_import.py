@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import struct
 import shlex
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -20,6 +21,42 @@ from assemble_nongrey_grid import complete_cells
 
 
 class SourceAcceptance(unittest.TestCase):
+    def test_plan_cancellation_checks_work_and_original_plan(self):
+        from run_nongrey_plan import check_cancellation, PlanCancelled
+        with tempfile.TemporaryDirectory() as temporary:
+            work = Path(temporary)
+            check_cancellation(work, 'original-plan')
+            record = {'work': str(work.resolve()), 'plan_sha256': 'original-plan',
+                      'reason': 'Stop future source launches; preserve running models.'}
+            path = work/'cancellation.json'
+            path.write_text(json.dumps(record))
+            with self.assertRaisesRegex(PlanCancelled, 'Stop future'):
+                check_cancellation(work, 'original-plan')
+            with self.assertRaisesRegex(ValueError, 'does not identify'):
+                check_cancellation(work, 'different-plan')
+            record['work'] = str(work.resolve()/'another-plan')
+            path.write_text(json.dumps(record))
+            with self.assertRaisesRegex(ValueError, 'does not identify'):
+                check_cancellation(work, 'original-plan')
+
+    def test_cancelled_plan_never_launches_a_source_process(self):
+        script = Path(__file__).resolve().parents[1]/'scripts/run_nongrey_plan.py'
+        with tempfile.TemporaryDirectory() as temporary:
+            work = Path(temporary)
+            plan = work/'input.json'
+            plan.write_text(json.dumps({'requests': [{'name': 'unstarted-model'}]}))
+            (work/'cancellation.json').write_text(json.dumps({
+                'work': str(work.resolve()),
+                'plan_sha256': hashlib.sha256(plan.read_bytes()).hexdigest(),
+                'reason': 'Preserve the completed source models.'}))
+            result = subprocess.run([sys.executable, '-B', str(script), str(plan), str(work)],
+                                    capture_output=True, text=True, timeout=20)
+            self.assertNotEqual(result.returncode, 0)
+            manifest = json.loads((work/'manifest.json').read_text())
+            self.assertEqual(manifest['models'][0]['status'], 'cancelled')
+            self.assertEqual((work/'plan.json').read_bytes(), plan.read_bytes())
+            self.assertFalse((work/'unstarted-model.log').exists())
+
     def test_seed_bottom_uses_measured_optical_depth(self):
         n=40
         tau=[10**(-5+9*i/(n-1)) for i in range(n)]

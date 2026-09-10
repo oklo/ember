@@ -1,3 +1,138 @@
+# Source refinement progress — 2026-09-10 23:29 UTC
+
+The 100 K remnant objective remains unfinished. Most evolved accepted state:
+3.685 trillion years. Both original/new-cache 512-point controls continue with
+the same fixed 3600 K atmosphere and old EOS; inspect their receipts on completion.
+
+The eight added EOS composition planes are complete, imported and assembled
+with the 64 lower-density planes into /tmp/ember-metal-eos-low-density-family-v2.
+Independent checks now PASS: 1188 new-domain source queries (maximum cv
+difference 0.2952%) and 792 retained-domain queries. New checks use the new
+midpoints, not the promoted earlier check compositions. Reports:
+docs/results/metal_eos_low_density_{source,retained}_v2.json. The failed v1
+report is retained. Runtime integration with all 132 atmosphere nodes is active
+in session59013, log /tmp/ember-nongrey-t3600-low-density-eos-v2.log. Do not
+install/select this EOS before that check finishes successfully.
+
+The suspended atmosphere controller PID88386 was terminated after verifying
+all its existing children had finished. Its accepted results remain intact.
+All eight high-gravity 3800 K nodes are complete. Independent 3700 K and the
+3800 K depth check are complete; depth comparison passes at 0.007883%.
+Both X=.15, logg=4.9 attempts with seed depth300 still exceed the wavelength
+opacity's material-temperature limit. Several 4000 K deep starting profiles
+also exceed it. The completed models remain usable; failed profiles are not
+accepted. Four shallow retries are active in session52954, work
+/tmp/ember-nongrey-t3800-t4000-shallow-v1 (two X=.2/3800/g4.9 and two
+X=.15/4000/g5.15). Original v2 source controller session66123 still runs.
+
+Extending the wavelength-opacity tables to material temperature 15000 K is
+now active. Only three new isotherms per composition are required; all fourteen
+old isotherms are retained with verified original input/output receipts.
+- X=.15, He3=0/.12: session37463, /tmp/ember-nongrey-x015-hot-opacity-v1,
+  specification nongrey_t4000_x150_hot_opacity_specification.json.
+- X=.2, He3=0/.12: session41427, /tmp/ember-nongrey-x020-hot-opacity-v2,
+  specification nongrey_t4000_x200_hot_opacity_v2_specification.json.
+  Reuse view /tmp/ember-nongrey-x020-opacity-reuse-view-v1 points to the
+  original X=.2 planes in /tmp/ember-nongrey-hydrogen-poor-v1. An initial
+  unused v1 job inherited extra compositions and was stopped; partial outputs
+  and its original specification are preserved in that v1 work directory.
+After source completion, verify retained opacity rows exactly and retry failed
+3800/4000 models with the wider source tables. Independent interpolation and
+depth checks remain necessary before evolution selects a wider atmosphere.
+
+All28 source tests pass after the controller cancellation fix. Saved plan bytes
+now equal original input bytes so parent and child cancellation hashes agree.
+The new nuclear cache, source changes and reports below are ready for publication.
+Unrelated .DS_Store files and helium coexistence probes remain untouched.
+
+---
+
+# Nuclear reuse and wider EOS checks — 2026-09-10 23:05 UTC
+
+The autonomous 0.1 Msun evolution through an actually evolved 100 K helium
+remnant remains unfinished. The latest accepted evolved state is still 3.685
+trillion years; current fresh reruns are numerical controls with wider inputs.
+The user accepts development reruns and specifically wants production cost
+measured and improved. No subagents; preserve all existing run outputs.
+
+A larger exact nuclear-response cache is now installed in apps/evolve.cpp:
+- 8192 results per worker, keyed by exact T, rho, all eight abundances, basis and
+  metal inventory. The nuclear library and physical calculations are unchanged.
+- Short 512-point 0–100-billion-year ABBA test: 42.21% less CPU; all four output
+  files identical. Before/after CPU means 87.57/50.61 seconds; wall means
+  121.9/65.50 seconds. Source concurrency changed, so wall time is not an
+  isolated-machine benchmark. Candidate cache hits repeat exactly in both tests.
+- All 32 isolated suites pass in 380.7 seconds. Main production build reproduces
+  the short output exactly; its native-restart test passes in 254.5 seconds.
+- Current production executable SHA256:
+  c04e10048a008796fd0079c3bf633ef746bea727f46755fedc2e44841badd4ff.
+- Reports: docs/results/nuclear_response_cache_benchmark_v4.json and
+  nuclear_response_cache_validation_v4.json. The separate last-electron-state
+  experiment v3 changed rounding bits and remains uninstalled; its rejection
+  record is screening_last_state_rejected_v3.json. The earlier v2 experiment
+  was slower and remains uninstalled too.
+
+Two fresh 512-point, tolerance-scale 2.5, two-worker trajectories are ACTIVE
+with identical EOS64/hot-opacity/132-atmosphere inputs and target3.800T:
+1. Original cache, executable89b00132..., session91725, PID88285, snapshot
+   /tmp/ember-t3600-forward-512-3800gyr-v1, output
+   out/evolution-cold-remnant-t3600-forward-512-3800gyr-v1.*
+2. New cache, session62459, snapshot /tmp/ember-t3600-cached-512-3800gyr-v1,
+   output out/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.*
+The old calculation's copied executable and data remain unchanged while app
+sources changed for the new cache. Its eventual receipt will correctly record
+that source-tree edit. Compare full outputs and inspect completed jobs promptly.
+
+All 64 lower-density EOS source planes completed and were imported:
+/tmp/ember-metal-eos-low-density-v1 and /tmp/ember-metal-eos-low-density-import-v1.
+Every old raw row was reused: 5.937 million retained, 2.220 million newly
+calculated. No new source failures; old masked cells remain masked. The 696
+checks in the old domain pass. The wider 1044-query test FAILS its heat-capacity
+criterion at higher H (worst cv difference 0.8097% near X=.35, T=4157 K).
+All tested X<=.1875 pass, but the full candidate is not accepted. Do not weaken
+criteria or silently select it. Reports metal_eos_low_density_{source,retained}_v1.json.
+
+Refinement ACTIVE session8155, /tmp/ember-metal-eos-low-density-refinement-v2,
+using generate_metal_eos.py --hydrogen .225 .275 .35 .45 --helium3 0 .12
+--grid-from /tmp/ember-metal-eos-low-density-v1/specification.json --jobs4.
+This computes only eight new composition planes on the exact same material
+coordinates. Next: import, assemble a separate72-plane family with the64-plane
+candidate, and use NEW independent checks .2125/.2375/.2625/.2875/.325/.375/
+.425/.475 in place of the promoted old heldouts. Retain the failed audit.
+The main stellar calculations still select the older accepted EOS64.
+
+Atmosphere source work toward3800/4000K continues, reusing wavelength opacity:
+- v1 controller PID88386 is SUSPENDED (SIGSTOP), session4417. Its four already
+  started cases finish in /tmp/ember-nongrey-t3800-t4000-v1. Two3800K X=.15,
+  He3=0,g5.15/5.4 models passed. Both X=.15,g4.9 starting profiles (He3=0 in
+  v1 and He3=.12 in v2) exceeded the opacity-temperature ceiling; not accepted.
+  The v1 He3=.12,g5.15 child was still active at the last process inspection.
+  Terminate only the suspended controller once its existing children finish;
+  preserve their results. Do not resume its queued jobs.
+- v2 four-worker controller session66123, PID4415, work
+  /tmp/ember-nongrey-t3800-t4000-v2, plan
+  data/atmosphere/sources/nongrey_t4000_parallel_plan_specification.json.
+  It contains only the20 previously unlaunched cases, with updated seed paths.
+  Existing v1 work is not duplicated. X=.2,g4.9 also failed its deep seed.
+- Independent3700K/X=.175/He3=.005/g5.15 and3800K g5.15 depth checks,
+  then shallower g4.9 retries: session24330, /tmp/ember-nongrey-t3800-checks-v1,
+  plan nongrey_t3800_checks_plan_specification.json under data/atmosphere/sources.
+  Source4000K models may also need shallower lower boundaries; check actual
+  final optical depths and independent T/P convergence, not just seed settings.
+- Found and fixed a controller bug: its docstring described cancellation records
+  but the old code never read them. New controllers now check a work/plan-pinned
+  cancellation record before starting and while waiting. Active sources finish.
+  All28 source tests pass, including a cancelled-plan test that launches nothing.
+
+Published GitHub HEAD is d59f971, with the3.685T README and source/timing reports;
+repository description also updated. The nuclear cache and subsequent source
+work above still need publication. The daily PDF remains at the explicitly
+stated3.560T comparison. Unrelated untracked .DS_Store files and helium coexistence/
+electron probes belong to other work: preserve them. The old coexistence attempt
+failed to bracket melting; it is not a completed remnant EOS or active job.
+
+---
+
 # Production timing and hot-core progress — 2026-09-10 22:25 UTC
 
 The autonomous 0.1 Msun trajectory through actual 100 K helium-remnant cooling

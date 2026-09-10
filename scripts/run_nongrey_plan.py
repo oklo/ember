@@ -18,6 +18,22 @@ import time
 from prepare_nongrey_sources import digest
 
 
+class PlanCancelled(RuntimeError):
+    pass
+
+
+def check_cancellation(work, plan_sha256):
+    path = work/'cancellation.json'
+    if not path.exists():
+        return
+    record = json.loads(path.read_text())
+    if (record.get('work') != str(work.resolve())
+            or record.get('plan_sha256') != plan_sha256
+            or not isinstance(record.get('reason'), str) or not record['reason'].strip()):
+        raise ValueError('cancellation record does not identify this plan and work directory')
+    raise PlanCancelled(record['reason'])
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('plan', type=Path)
@@ -29,6 +45,7 @@ def main():
     if not 1 <= a.jobs <= 8 or not 0 < a.dependency_timeout <= 86400:
         raise ValueError('invalid worker count or dependency timeout')
     plan = json.loads(a.plan.read_text())
+    plan_sha256 = digest(a.plan)
     seen = set()
     for job in plan['requests']:
         name = job['name']
@@ -39,18 +56,23 @@ def main():
     saved = a.work/'plan.json'
     if saved.exists() and json.loads(saved.read_text()) != plan:
         raise ValueError('changed plan requires a new work directory')
-    saved.write_text(json.dumps(plan, indent=2)+'\n')
+    # Continuation children verify cancellation against this saved file.
+    # Keep its bytes equal to the original plan whose digest the parent uses.
+    saved.write_bytes(a.plan.read_bytes())
 
     def calculate(job):
+        check_cancellation(a.work, plan_sha256)
         seed = Path(job['initial'])
         deadline = time.monotonic()+a.dependency_timeout
         while not (seed/'validated.json').exists():
+            check_cancellation(a.work, plan_sha256)
             if not job.get('wait_for_seed'):
                 raise FileNotFoundError(f'canonical seed is not ready: {seed}')
             if time.monotonic() > deadline:
                 raise TimeoutError(f'canonical seed did not finish: {seed}')
             time.sleep(10)
         while not Path(job['opacity']).exists():
+            check_cancellation(a.work, plan_sha256)
             if not job.get('wait_for_opacity'):
                 raise FileNotFoundError('source opacity table is not ready: '+job['opacity'])
             if time.monotonic() > deadline:
@@ -68,6 +90,7 @@ def main():
             command += ['--initial-bottom-tau', str(job['initial_bottom_tau'])]
         if 'convective_iterations' in job:
             command += ['--convective-iterations', str(job['convective_iterations'])]
+        check_cancellation(a.work, plan_sha256)
         with (a.work/(job['name']+'.log')).open('a') as log:
             print('command:', json.dumps(command), file=log, flush=True)
             subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, check=True)
@@ -85,6 +108,8 @@ def main():
             job = futures[future]
             try:
                 result = future.result()
+            except PlanCancelled as error:
+                result = {'name': job['name'], 'status': 'cancelled', 'reason': str(error)}
             except Exception as error:
                 result = {'name': job['name'], 'status': 'rejected', 'error': str(error)}
             results[job['name']] = result

@@ -1,0 +1,46 @@
+{
+  "scope": "Bounded per-worker reuse of complete nuclear responses at exactly equal T, rho, all eight abundances, abundance basis and metal inventory. No rounded key or approximate nuclear calculation. The reaction library is unchanged.",
+  "maximum_entries_per_worker": 8192,
+  "isolated_test_suites_passed": 32,
+  "isolated_tests_elapsed_seconds": 380.66,
+  "production_restart_test_passed": true,
+  "production_restart_test_elapsed_seconds": 254.49,
+  "production_short_output_byte_identical": true,
+  "production_executable_sha256": "c04e10048a008796fd0079c3bf633ef746bea727f46755fedc2e44841badd4ff",
+  "production_receipt_sha256": "07e87d3b3948ae259fb0a001b4ccd83439be60e2122feea9f0d19d64a3c32fbe",
+  "production_source_sha256": "1bcbd2ee125795432d6e665731cd2e68b68799622aa8bbd913206cb4e9717fd3",
+  "benchmark_sha256": "cfb7e7f8004ea91732b52b0b27a711d02418731e1ea6d1c64de3b54734b360f8",
+  "cache_counts": [
+    {
+      "run_index": 1,
+      "workers": [
+        {
+          "hits": 1196474,
+          "misses": 396800
+        },
+        {
+          "hits": 1843837,
+          "misses": 603648
+        }
+      ],
+      "hit_fraction": 0.752410871323927
+    },
+    {
+      "run_index": 2,
+      "workers": [
+        {
+          "hits": 1196474,
+          "misses": 396800
+        },
+        {
+          "hits": 1843837,
+          "misses": 603648
+        }
+      ],
+      "hit_fraction": 0.752410871323927
+    }
+  ],
+  "cpu_reduction_fraction": 0.42209864580537104,
+  "elapsed_reduction_fraction": 0.4627089660463223,
+  "timing_limitations": "Independent atmosphere and EOS jobs ran concurrently and their concurrency changed. CPU time was consistent within each pair; elapsed time is not an isolated-machine speed benchmark. The measured trajectory ends at 100 billion years; a longer comparison is running."
+}

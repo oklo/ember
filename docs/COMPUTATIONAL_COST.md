@@ -1,5 +1,26 @@
 # What is consuming the computation time?
 
+## Further reuse of nuclear calculations
+
+The evolution driver now keeps up to **8192 complete nuclear results per
+worker**, compared with 16 previously. It reuses a result only when temperature,
+density, every abundance and both composition labels agree exactly. This avoids
+repeating calculations across the stellar mesh. Reaction formulas and precision
+are unchanged.
+
+In a 512-point calculation through 100 billion years, an alternating comparison
+measured **42.21% less CPU time**: 87.57 seconds before versus 50.61 seconds after.
+All four full output files are byte-identical. Elapsed means were 121.9 and 65.50
+seconds, but concurrent source jobs changed during the comparison; these wall
+times are not an isolated-machine benchmark. Both CPU-time pairs were consistent.
+[Measurements](results/nuclear_response_cache_benchmark_v4.json).
+
+All 32 test suites pass for the candidate. The production build reproduces the
+short output exactly and passes its native-restart test. Separate longer runs
+with the old and new implementation are checking the complete covered trajectory.
+The gain during shell burning and cooling remains unmeasured.
+[Validation](results/nuclear_response_cache_validation_v4.json).
+
 ## Fixed-input production measurements
 
 Fresh calculations with unchanged physical inputs completed the first 3.600

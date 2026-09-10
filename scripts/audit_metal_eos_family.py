@@ -34,6 +34,8 @@ def main():
     for name in ['family', 'ember_probe', 'source_probe', 'output']:
         p.add_argument(name, type=Path)
     p.add_argument('--hydrogen', type=float, nargs='+', required=True)
+    p.add_argument('--states', type=Path,
+                   help='JSON array of explicit [temperature K, density g/cm3] source checks')
     a = p.parse_args()
     lines = a.family.read_text().splitlines()
     if lines[0] != 'EMBER_METAL_HELMHOLTZ 1':
@@ -48,6 +50,15 @@ def main():
         inputs[str(plane.resolve())] = sha(plane)
     states = [(4157., 7.2e-5), (6031., 7.3e-4), (27183., .037),
               (2341000., 13.7), (6783000., 243.1), (9731000., 260.7)]
+    state_inputs = {}
+    if a.states:
+        states = json.loads(a.states.read_text())
+        if (not isinstance(states, list) or not states
+                or any(not isinstance(row, list) or len(row) != 2
+                       or any(not isinstance(v, (int, float)) or not math.isfinite(v) or v <= 0
+                              for v in row) for row in states)):
+            raise ValueError('invalid independent temperature/density states')
+        state_inputs[str(a.states.resolve())] = sha(a.states)
     records, raw_source = [], []
     for x in a.hydrogen:
         for y in [0., .005, .06, .12]:
@@ -117,13 +128,14 @@ def main():
     limits = {'P': .001, 'E': .002, 'cv': .003, 'cp': .003, 'grad_ad': .003}
     passed = (all(errors[k] < limits[k] for k in errors) and inversion < 1e-8
               and first_law < 1e-5 and responses < 1e-5 and bool(selected))
-    if any(sha(path) != digest for path, digest in inputs.items()):
+    if any(sha(path) != digest for path, digest in {**inputs, **state_inputs}.items()):
         raise ValueError('EOS inputs changed during audit')
     report = {'scope': __doc__, 'passed': passed, 'source_queries': len(records),
               'identity_states': len(selected), 'maximum_relative_source_differences': errors,
               'source_comparison_limits': limits, 'maximum_density_inversion_error': inversion,
               'maximum_first_law_error': first_law, 'maximum_response_error': responses,
               'family_files_sha256': inputs, 'ember_probe_sha256': sha(a.ember_probe),
+              'temperature_density_checks': states, 'state_inputs_sha256': state_inputs,
               'source_probe_sha256': sha(a.source_probe), 'raw_source_sha256': sha(raw_path),
               'audit_script_sha256': sha(__file__), 'records': records}
     a.output.write_text(json.dumps(report, indent=2, allow_nan=False)+'\n')

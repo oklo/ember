@@ -64,9 +64,11 @@ showing that endpoint ages still need refinement. See the
 minutes at 512 points** with the tighter time control and **59.26 minutes at
 1024 points** with the original time control, excluding computer suspension.
 Atmosphere source generation is separate, reusable work. These are partial
-trajectories; the complete cooling-track cost remains unmeasured. Two CPU
-workers and reuse of conduction lookups reduced a shorter benchmark's elapsed
-time by 32.76%, with identical outputs. See [the timing notes](docs/COMPUTATIONAL_COST.md).
+trajectories; the complete cooling-track cost remains unmeasured. Further reuse
+of complete nuclear calculations now reduces CPU time by **42.21% in a short
+benchmark**, with identical full outputs; a longer comparison is running. The
+quoted 3.600-trillion-year timings precede that change. See
+[the timing notes](docs/COMPUTATIONAL_COST.md).
 
 New [grain-opacity calculations](docs/GRAINS.md) provide separate absorption
 and scattering over wavelength, checked against an independent program and
