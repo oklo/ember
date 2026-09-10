@@ -1,0 +1,54 @@
+{
+  "scope": "Five-second, one-millisecond-interval sample of the active 512-point run after central convection disappeared. Inclusive stack counts; nested matches counted once within each category. Electron-integral counts are a subset of nuclear work and structure iterations include other categories; columns must not all be added. This is a short sample, not a whole-lifetime benchmark.",
+  "sample_path": "/tmp/ember-stellar-cost-20260910-1819.sample.txt",
+  "sample_sha256": "1057a652aeeccedf3cf90fe68d9ec0bb3f1496afd07426051067f70ed7a43fac",
+  "sample_time_local": "2026-09-10 14:19:58.352 -0400",
+  "total_samples": 4259,
+  "sampling_seconds": 5,
+  "counts": {
+    "nuclear_rates_and_screening": 2079,
+    "electron_integrals_subset_of_nuclear": 1723,
+    "opacity_and_conduction": 1565,
+    "equation_of_state": 411,
+    "structure_iterations_including_material_evaluations": 2191,
+    "checkpoint_and_file_operations": 8
+  },
+  "patterns": {
+    "nuclear_rates_and_screening": "PPChains::|pp_screening|pp_bare_rate",
+    "electron_integrals_subset_of_nuclear": "ember::fermi::",
+    "opacity_and_conduction": "Opacity::|OpacityTable|TabulatedConduction",
+    "equation_of_state": "Helmholtz|MetalHelmholtz",
+    "structure_iterations_including_material_evaluations": "ember::relax\\(",
+    "checkpoint_and_file_operations": "write_checkpoint|rename|fsync"
+  },
+  "run": "out/evolution-cold-remnant-x015-forward-512-3600gyr-v1.json",
+  "executable_sha256": "7a4a808e801f1ce523f5c692d54583420a629c3139a64a36843e85f98c8849e0",
+  "progress_observation": {
+    "elapsed_seconds": 293.73074293136597,
+    "accepted_steps": 216,
+    "rejected_attempts": 8,
+    "last_age_yr": 3590191600000.0,
+    "seconds_per_accepted_including_retries": 1.3598645506081757,
+    "recent_median_step_yr": 156200000.0
+  },
+  "sample_fractions": {
+    "nuclear_rates_and_screening": 0.488142756515614,
+    "electron_integrals_subset_of_nuclear": 0.40455505987320967,
+    "opacity_and_conduction": 0.36745714956562575,
+    "equation_of_state": 0.09650152617985443,
+    "structure_iterations_including_material_evaluations": 0.5144400093918761,
+    "checkpoint_and_file_operations": 0.0018783752054472881
+  },
+  "completed_segment": {
+    "age_range_yr": [
+      3560000000000,
+      3600000000000
+    ],
+    "accepted_steps": 277,
+    "rejected_attempts": 10,
+    "child_cpu_seconds": 375.005693,
+    "awake_elapsed_seconds": 375.7640007501468,
+    "output_sha256": "a4d7947ccd3e8c7078d5958c059d4b4dc9fe460f22f202963784e34e13ab9722",
+    "receipt_sha256": "ef4b2e7dc75e6d4be0d6f96c9176bbef9ce46b91e2c4170658ee4dd4d61eb75d"
+  }
+}

@@ -1,3 +1,150 @@
+# Measured duplication savings and CPU parallelism — 2026-09-10 19:08 UTC
+
+The user's active request is to remove duplicated calculation and assess CPU,
+Metal and parallel resource use. Two changes are implemented and checked:
+- Per-evaluation conduction-source reuse: multiple elements share the same
+  source-ion interpolations at exactly the same T/electron density. A local
+  cache avoids repeats while preserving mixture/derivative sum order. No
+  mutable cache survives the call. Actual3.600T profile replay:2.773x faster
+  for conduction alone; opacity/derivative/sum output bytes identical.
+- `--step-workers 2`: independently compute the full-step estimate while the
+  main worker computes the two dependent half steps. Each worker has its own
+  nuclear/atmosphere cache; physical tables are shared read-only. Default1.
+  No acceptance or precision changes. Serial/parallel JSON and midpoint native
+  checkpoint bytes agree exactly; worker count can change on a native restart
+  with the identical executable. Tests explicitly exercise this.
+- Whole512-point0→100-billion-year ABBA comparison:40.40s before vs27.16s
+  after,32.76% less elapsed time,6.371% less total CPU; all four complete
+  output files byte-identical (48 accepted steps). This is not a lifetime
+  benchmark. All32 CTest suites pass in58.72s. Final comment-only rebuild
+  preserves the measured binary SHA256:
+  `1c457cb6b8ae4aae184af34190f0230b6d58859ce23bcc2dd6221a1c5b2ad6a0`.
+- Baseline library/binary and original source copies:
+  `/tmp/ember-performance-20260910-v1`. Independent comparison work:
+  `/tmp/ember-duplication-parallel-benchmark-v1`.
+- Reports: `performance_resources_20260910_v1.json`,
+  `duplication_parallel_benchmark_v1.json`, `conduction_profile_reuse_v1.json`
+  under docs/results. The small earlier one-billion-year benchmark includes
+  substantial startup cost; retain it but use the longer comparison for claims.
+
+Hardware is M4 Max:10 performance+4 efficiency CPU cores,32 GPU cores,36GB.
+Metal is currently unused. Apple's June4,2026 MSL specification section2.1
+excludes double. CPU optimization retains the arithmetic; GPU use needs a
+separate precision strategy. Source PDF in/tmp, hash and URL recorded in the
+performance report. Independent source/convergence jobs can use spare cores.
+Next duplication targets: electron screening shared between pp reactions,
+adjacent-zone material calculations, and parallel spatial evaluation with
+separate caches. The earlier one-bit-changing electron cache remains rejected.
+
+Science status: the attempt toward3.700 stopped at3.609 trillion years because
+TOPS's minimum atomic H coordinate is.09 (central baryonic H.08942). Temperature
+and density remain within the table. It then exhausted step reductions. No
+stellar job continues past that boundary; never extrapolate the input. Report:
+`docs/results/evolution_opacity_limit_3609gyr_v1.json`. Latest completed age3.600.
+
+Useful controls now ACTIVE using the measured two-worker executable:
+1.512 points, fourfold tighter time tolerances (scale2.5), fresh0→3.600T.
+  PID83459, session8619, snapshot
+  `/tmp/ember-cold-remnant-time-refinement-3600gyr-v1`, output
+  `out/evolution-cold-remnant-time-refinement-512-3600gyr-v1.*`.
+2.1024 points, original tolerance scale10, fresh0→3.600T.
+  PID83654, session21374, snapshot
+  `/tmp/ember-cold-remnant-mesh-refinement-1024-3600gyr-v1`, output
+  `out/evolution-cold-remnant-mesh-refinement-1024-3600gyr-v1.*`.
+Both use EOS64/TOPSv4/120 warm gas atmospheres/plasma neutrinos. Native output
+checkpoints enabled; old research checkpoints untouched. The512 control was
+launched before cosmetic app/CMake comment changes; the executable remained
+byte-identical, and its eventual receipt can report those source-comment edits.
+
+TOPS composition extension is under way, separately from runtime tables:
+- v1 plan started with zero H and failed to return a verified mixture; preserve
+  `/tmp/ember-tops-hydrogen-exhaustion-v1.log`. A one-attempt diagnostic in
+  `/tmp/ember-tops-zeroH-diagnostic-v1` instead timed out; do not claim the
+  zero-H response format is understood.
+- v2 plan starts with nonzero H, then handles zero H last. Candidate coordinates
+  .025/.05/.075/0, heldouts.0125/.0375/.0625/.0825 atZ.01/.02/.03.
+  `data/opacity/sources/hydrogen_exhaustion_tops_v2_specification.json`;
+  work `/tmp/ember-tops-hydrogen-exhaustion-v2`, session12328,
+  log `/tmp/ember-tops-hydrogen-exhaustion-v2.log`. Service calls have timed out;
+  inspect current controller and receipts before resubmitting. By 19:08 UTC,
+  the X=.025/.05/.075 source planes and independent X=.0125 check at Z=.02
+  were verified and archived; X=.0375 was in progress. No replacement runtime
+  table has been accepted or installed. Lower-H opacity and later atmosphere
+  coverage, grain coupling and remnant thermodynamics remain unfinished.
+
+README and computational-cost notes have been updated. The PDF remains the
+published3.560T comparison; no new PDF was requested in this performance turn.
+Do not let completed controls sit idle without inspecting their results.
+At 19:08 UTC, the time-accuracy control had reached 1.303 trillion years and
+the 1024-point control 0.5305 trillion years. These are independent reruns;
+the most evolved accepted star remains at 3.609 trillion years, with central
+hydrogen 0.08942, surface temperature 3283 K and convective mass fraction
+0.4852. Hydrogen burning supplies nearly all its luminosity. The user has
+asked for this evolutionary status during the performance work.
+
+---
+
+# CPU diagnosis and continued evolution — 2026-09-10 18:23 UTC
+
+The user asked why this one-dimensional calculation is slow. A live five-second
+CPU sample found about 48.81% of samples in nuclear work (including 40.46% in
+electron Fermi integrals), 36.75% in opacity/conduction, and 9.650% in EOS.
+Nested categories must not be added. Raw sample:
+`/tmp/ember-stellar-cost-20260910-1819.sample.txt`; report:
+`docs/results/stellar_cpu_profile_20260910_v1.json`. This is a short sample,
+not a whole-lifetime benchmark. No new optimization was installed.
+
+The 3.560→3.600 trillion-year segment COMPLETED with 277 accepted steps,
+ten rejected attempts, 6.250 CPU minutes. Output, unchanged input hashes and
+native checkpoint were verified. Final central X=0.09839, surface X=0.1739,
+Teff=3274 K, convective mass fraction=0.5073. Hydrogen burning continues.
+`out/evolution-cold-remnant-x015-forward-512-3600gyr-v1.*` is preserved.
+
+Next exact continuation ACTIVE, stellar PID 82174, session72014:
+- Snapshot `/tmp/ember-cold-remnant-x015-forward-3700gyr-v1`.
+- Output `out/evolution-cold-remnant-x015-forward-512-3700gyr-v1.*`.
+- Target3.700 trillion years, not yet completed. Same physics and tolerances.
+- Starts from the unmodified 3.600-trillion-year native checkpoint, SHA256
+  `d1f6df05452e20c088f2a634f65d2e13a9f150945b099c66d243a093afd800e2`.
+- Same executable7a4a808e..., EOS64/TOPSv4/120 warm gas atmospheres/plasma
+  neutrinos. New native checkpoint output; all physical-domain guards enforced.
+
+The user was told explicitly that the earlier gap after3.560 included a
+scheduling failure during the PDF update. Keep checking completed segments
+and start supported continuations without awaiting another user reminder.
+Do not attribute this gap to the solver. The published PDF remains at3.560.
+Grain coupling and further mesh/time controls remain necessary; optimizing
+repeated electron screening and conductive interpolation is now supported by
+measurement. The earlier rejected electron cache changed a bit and remains
+uninstalled. Preserve copied running executables and exact restart identities.
+
+---
+
+# Continuation toward 3.600 trillion years — 2026-09-10 18:15 UTC
+
+The user asked whether evolution had passed 3.560 trillion years. Inspection
+found both earlier calculations complete and no surviving stellar job. The
+PDF update had not launched another calculation. This was stated plainly,
+and the authorized autonomous evolution has now resumed.
+
+Active 512-point exact continuation, stellar PID 81972, session 91920:
+- Snapshot: `/tmp/ember-cold-remnant-x015-forward-3600gyr-v1`.
+- Output: `out/evolution-cold-remnant-x015-forward-512-3600gyr-v1.*`.
+- Target age: 3.600 trillion years; this is not yet a completed result.
+- Input checkpoint: `out/evolution-cold-remnant-x015-transition-512-3560gyr-v2.restart`,
+  verified SHA256 `c6b9c52253c452ca1f9f49ca351507294089cfc9d3b3f998dbd5c6bc6577b25b`.
+- Same verified executable SHA256
+  `7a4a808e801f1ce523f5c692d54583420a629c3139a64a36843e85f98c8849e0`,
+  same 120-atmosphere table, EOS64, TOPS v4, plasma neutrinos and accuracy.
+- A new checkpoint output path preserves the earlier native checkpoint.
+  Source-domain guards remain enforced. No grain atmosphere was installed.
+
+The published paper and completed comparison still end at 3.560 trillion
+years. Inspect active processes and new outputs before launching other work.
+The grain coupling and convergence work described below remains unfinished.
+
+---
+
 # Completed central-core models and updated PDF — 2026-09-10 17:06 UTC
 
 The user requested an updated PDF. Today's paper was overwritten in place,

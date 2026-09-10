@@ -1,0 +1,38 @@
+{
+  "scope": "Stopped stellar continuation, not a completed 3.700-trillion-year track. Last accepted model and physical table limit retained without extrapolation.",
+  "input": "out/evolution-cold-remnant-x015-forward-512-3700gyr-v1.json",
+  "input_sha256": "b5061db05f292af8c6025b2d7bfdd397501384255445e1f953949bbff68a595b",
+  "receipt_sha256": "72b9da92ec2ac182068d2da6c2553a76c7f072a034f10b09186f49ef71b09629",
+  "checkpoint_sha256": {
+    "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-forward-512-3700gyr-v1.restart": "e3cf37ffc6ea574af07bd6e23853e33605e83fb52e9d38bcf906f5353759802f"
+  },
+  "converged": false,
+  "stop_message": "minimum timestep reached: evolve_step: line search failed: residual did not decrease",
+  "last_accepted": {
+    "age_yr": 3608846910666.8696,
+    "step_yr": 2727.6977218507295,
+    "R_Rsun": 0.14173889627278813,
+    "L_Lsun": 0.0021025313102922783,
+    "Teff_K": 3282.975752594288,
+    "central_X": 0.08942139752244686,
+    "central_Y3": 0.00010595371855730866,
+    "step_error_norm": 2.220446049250313e-09,
+    "discrete_luminosity_balance": 2.844213753405711e-11,
+    "nuclear_rest_mass_balance": 4.332659120365179e-09,
+    "last_halfstep_coupling_iterations": 1,
+    "convective_mass_fraction": 0.48515578816328436,
+    "central_T_K": 8722099.456951646,
+    "central_rho": 437.29103183384854,
+    "surface_X": 0.173831702248036,
+    "surface_Y3": 0.0018342917632945385,
+    "nuclear_deposited_Lsun": 0.002101573862497407,
+    "nuclear_neutrino_Lsun": 4.4110088194242805e-05,
+    "last_halfstep_gravothermal_Lsun": 9.575413953497611e-07,
+    "hydrogen_mass_Msun": 0.016193693828403095,
+    "thermal_neutrino_Lsun": 9.354067756961014e-11
+  },
+  "atomic_hydrogen_table_floor": 0.09,
+  "first_outside_table_log": "retry dt=8.93812e+07 yr (TOPS_ATOMIC_GS98_high: (logT=6.940601, logrho=2.641157, X=0.089891) outside table; error 2)",
+  "last_outside_table_log": "retry dt=85.2406 yr (TOPS_ATOMIC_GS98_high: (logT=6.940621, logrho=2.641355, X=0.090000) outside table; error 2)",
+  "interpretation": "The required atomic hydrogen coordinate reaches the TOPS composition floor while temperature and density remain inside their tabulated bounds. Subsequent step reductions end in the minimum-time-step stop. Extending source composition coverage is required."
+}

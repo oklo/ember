@@ -1,0 +1,42 @@
+{
+  "scope": "Conduction-only replay of the actual 3.600-trillion-year stellar profile, 10000 repetitions of all nodes above the production conduction join. This is a component benchmark, not a whole-track speedup. Every opacity, derivative and accumulated sum is byte-identical. CPU time excludes concurrent stellar work.",
+  "input": "out/evolution-cold-remnant-x015-forward-512-3600gyr-v1.json",
+  "input_sha256": "a4d7947ccd3e8c7078d5958c059d4b4dc9fe460f22f202963784e34e13ab9722",
+  "binary_sha256": {
+    "before": "3120ab6fe33c9e4b8d2422cac0ff43fd413e6c73b6eca153b4d5005d7c403e86",
+    "after": "5df8010b83feb6ee0f58199f2f46d05a8269a3ce218ac2f9cf0cad17faf011fc"
+  },
+  "runs": [
+    {
+      "binary": "before",
+      "wall_seconds": 14.501293458975852,
+      "cpu_seconds": 14.494346,
+      "output_sha256": "e7b6fc03fee7d5996e16251a37e1022c45ec82f1a7add23a914cc594fc3aa064"
+    },
+    {
+      "binary": "after",
+      "wall_seconds": 5.3022287087515,
+      "cpu_seconds": 5.2973190000000026,
+      "output_sha256": "e7b6fc03fee7d5996e16251a37e1022c45ec82f1a7add23a914cc594fc3aa064"
+    },
+    {
+      "binary": "after",
+      "wall_seconds": 5.308099499903619,
+      "cpu_seconds": 5.303920999999999,
+      "output_sha256": "e7b6fc03fee7d5996e16251a37e1022c45ec82f1a7add23a914cc594fc3aa064"
+    },
+    {
+      "binary": "before",
+      "wall_seconds": 14.909759875386953,
+      "cpu_seconds": 14.901406000000005,
+      "output_sha256": "e7b6fc03fee7d5996e16251a37e1022c45ec82f1a7add23a914cc594fc3aa064"
+    }
+  ],
+  "mean_cpu_seconds": {
+    "before": 14.697876000000003,
+    "after": 5.30062
+  },
+  "speedup": 2.7728597786674016,
+  "outputs_byte_identical": true,
+  "source_sha256": "f7f0ca4fc541ebfe751de4a3b1c80e56e493bc8b329c0fb626bea3080905f28d"
+}

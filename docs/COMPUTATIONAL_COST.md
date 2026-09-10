@@ -1,5 +1,92 @@
 # What is consuming the computation time?
 
+## Changes measured on September 10
+
+Two changes now reduce repeated work and use an additional CPU core:
+
+- A conduction mixture reuses each source-ion interpolation at its fixed
+  temperature and electron density. The mixture sums and their derivatives
+  retain their original order. A replay of the actual 3.600-trillion-year
+  profile runs **2.773 times faster in the conduction calculation alone**,
+  with identical opacity, derivative and accumulated-sum output.
+- `ember-evolve --step-workers 2` computes the independent full-step estimate
+  concurrently with the two sequential half steps. Each worker has its own
+  nuclear and atmosphere caches; immutable physical tables are shared. The
+  default is one worker. Accuracy tests and accepted-state ordering are unchanged.
+
+In an alternating before/after/after/before comparison, a 512-point evolution
+through 100 billion years took **40.40 seconds before and 27.16 seconds after**
+on average: **32.76% less elapsed time**, or **1.487 times faster**. Total CPU
+use fell by **6.371%**. Every complete output file matched byte for byte,
+including all 48 accepted steps, final structure and abundances. Startup and
+initial-model calculation are included; this is not a measured full-lifetime
+speedup. The short earlier one-billion-year benchmark spends much of its time
+starting the calculation and found only a small improvement.
+
+All 32 test suites pass. Added restart checks compare one- and two-worker
+histories and checkpoint bytes exactly, including a change of worker count
+when resuming the same saved model. The physical precision and source-domain
+limits are unchanged. Measurements:
+[whole stellar calculation](results/duplication_parallel_benchmark_v1.json),
+[conduction replay](results/conduction_profile_reuse_v1.json).
+
+This machine is an Apple M4 Max with 10 performance and four efficiency CPU
+cores, a 32-core GPU and 36 GB of memory. The two-worker mode uses additional
+CPU capacity within one star. Independent atmosphere models and convergence
+controls can use other cores. Ages within one trajectory remain sequential;
+using all cores requires additional work on independent spatial calculations
+and their caches. No all-core speedup has yet been measured.
+
+Ember does not currently use Metal. Apple's current
+[Metal language specification](https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf)
+excludes the `double` type used by the stellar solver. A GPU implementation
+would require a validated precision strategy or software arithmetic. Apple
+also explains why small, frequently synchronized workloads can scale poorly
+in [its compute guidance](https://developer.apple.com/videos/play/wwdc2022/10159/).
+The existing C++ build targets the M4 CPU, permits fused arithmetic, and links
+Accelerate; its small structure-solver blocks use the portable kernel.
+
+The largest remaining duplication to investigate is electron screening shared
+by different pp reactions at the same state. An earlier cache attempt changed
+a rounding bit and was rejected; this update does not install it. Broader
+reuse between neighboring zones and parallel spatial calculations are further
+candidates, each requiring an actual trajectory comparison.
+
+## Earlier stellar measurement — September 10
+
+A five-second sample of the running 512-point star after it developed a stable
+central region attributes about 48.81% of sampled time to nuclear calculations,
+including 40.46% in the electron integrals used for reaction screening.
+Opacity and conduction account for about 36.75%, and the equation of state
+for 9.650%. These are inclusive sampled call counts; electron work is already
+included in nuclear work. This short interval does not establish a lifetime
+speedup. The [measurement](results/stellar_cpu_profile_20260910_v1.json)
+records the source sample, executable identity and aggregation definitions.
+
+At the progress check the run had advanced from 3.560 to 3.590 trillion years
+in 4.896 minutes, accepting 216 steps and rejecting eight attempts. It averaged
+1.360 seconds per accepted step including retries; recent steps advanced about
+156.2 million years. The complete 3.560–3.600-trillion-year segment subsequently finished in
+6.250 CPU minutes, with 277 accepted steps and ten rejected attempts.
+The process used essentially one full CPU core. It was
+neither waiting for atmosphere tables nor stuck in repeated failures.
+
+The earlier lack of progress beyond 3.560 trillion years included an avoidable
+scheduling gap: both requested segments had finished and no continuation was
+launched during the PDF update. That elapsed delay must not be attributed to
+the stellar solver. The new continuation was launched after the user asked.
+
+One spatial dimension keeps the structure equations small. The present cost
+comes from repeatedly evaluating material properties across the mesh while
+burning, mixing and structure are iterated together. Every step also computes
+one full step and two half steps to estimate its time error. The recent core
+transition needs much smaller time steps than the long fully convective phase.
+Useful optimization targets are repeated electron screening and conductive
+interpolation. A previously tried electron cache changed one output bit and
+was rejected; no new speedup is claimed or installed from this CPU sample.
+
+The following notes preserve older timings and their different scopes.
+
 Validated atmosphere tables are reusable inputs. Stellar timesteps interpolate
 their matching states; they do not rerun wavelength-dependent radiative transfer.
 The source calculations recur when coverage is extended, the physical prescription
@@ -61,8 +148,9 @@ and the retained `/tmp/ember-f77-baseline-henyey77.f` show these differences:
   and adaptive mesh capabilities, so Ember is not a strict physics superset.
 
 These differences establish additional work, but do not quantitatively explain
-the entire speed gap. No matched-input F77/Ember benchmark or current whole-star
-CPU profile has been obtained. Higher cost is not itself evidence of greater
+the entire speed gap. A matched-input F77/Ember benchmark remains missing. The newer sampled
+stellar profile above locates costs in Ember without isolating the full
+cross-code speed difference. Higher cost is not itself evidence of greater
 physical accuracy.
 
 ## Measured optimization evidence

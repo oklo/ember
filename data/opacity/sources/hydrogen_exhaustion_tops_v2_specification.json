@@ -1,0 +1,125 @@
+{
+  "scope": "Extend the independently checked GS98 TOPS composition family below its current atomic hydrogen floor of 0.09 after the star reached that physical input boundary at 3.609 trillion years. Raw sources only: independent heldouts are not installed as nodes, and no old runtime tables are modified. Nonzero hydrogen requests are performed first while the zero-hydrogen service response is investigated separately.",
+  "requests": [
+    {
+      "X": 0.025,
+      "Z": 0.02,
+      "role": "candidate_node"
+    },
+    {
+      "X": 0.05,
+      "Z": 0.02,
+      "role": "candidate_node"
+    },
+    {
+      "X": 0.075,
+      "Z": 0.02,
+      "role": "candidate_node"
+    },
+    {
+      "X": 0.0125,
+      "Z": 0.02,
+      "role": "heldout"
+    },
+    {
+      "X": 0.0375,
+      "Z": 0.02,
+      "role": "heldout"
+    },
+    {
+      "X": 0.0625,
+      "Z": 0.02,
+      "role": "heldout"
+    },
+    {
+      "X": 0.0825,
+      "Z": 0.02,
+      "role": "heldout"
+    },
+    {
+      "X": 0.025,
+      "Z": 0.01,
+      "role": "candidate_node"
+    },
+    {
+      "X": 0.05,
+      "Z": 0.01,
+      "role": "candidate_node"
+    },
+    {
+      "X": 0.075,
+      "Z": 0.01,
+      "role": "candidate_node"
+    },
+    {
+      "X": 0.0125,
+      "Z": 0.01,
+      "role": "heldout"
+    },
+    {
+      "X": 0.0375,
+      "Z": 0.01,
+      "role": "heldout"
+    },
+    {
+      "X": 0.0625,
+      "Z": 0.01,
+      "role": "heldout"
+    },
+    {
+      "X": 0.0825,
+      "Z": 0.01,
+      "role": "heldout"
+    },
+    {
+      "X": 0.025,
+      "Z": 0.03,
+      "role": "candidate_node"
+    },
+    {
+      "X": 0.05,
+      "Z": 0.03,
+      "role": "candidate_node"
+    },
+    {
+      "X": 0.075,
+      "Z": 0.03,
+      "role": "candidate_node"
+    },
+    {
+      "X": 0.0125,
+      "Z": 0.03,
+      "role": "heldout"
+    },
+    {
+      "X": 0.0375,
+      "Z": 0.03,
+      "role": "heldout"
+    },
+    {
+      "X": 0.0625,
+      "Z": 0.03,
+      "role": "heldout"
+    },
+    {
+      "X": 0.0825,
+      "Z": 0.03,
+      "role": "heldout"
+    },
+    {
+      "X": 0,
+      "Z": 0.02,
+      "role": "candidate_node"
+    },
+    {
+      "X": 0,
+      "Z": 0.01,
+      "role": "candidate_node"
+    },
+    {
+      "X": 0,
+      "Z": 0.03,
+      "role": "candidate_node"
+    }
+  ]
+}

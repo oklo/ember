@@ -1,0 +1,47 @@
+{
+  "scope": "Validated performance changes: within-evaluation conduction-source reuse and optional two-worker step estimates. No numerical precision or physics changes. Whole-star outputs and restart bytes match.",
+  "validated_utc": "2026-09-10T19:02:23.613081+00:00",
+  "hardware": {
+    "chip": "Apple M4 Max",
+    "performance_cpu_cores": 10,
+    "efficiency_cpu_cores": 4,
+    "gpu_cores": 32,
+    "memory_GB": 36,
+    "source": "system_profiler SPHardwareDataType SPDisplaysDataType; identifying serial numbers excluded"
+  },
+  "ctest": {
+    "passed": 32,
+    "failed": 0,
+    "elapsed_seconds": 58.72,
+    "log": "/tmp/ember-performance-20260910-v1/ctest.log",
+    "new_checks": "Exact one/two-worker full histories, exact midpoint checkpoint bytes, exact continuation after changing worker count"
+  },
+  "executable_sha256": "1c457cb6b8ae4aae184af34190f0230b6d58859ce23bcc2dd6221a1c5b2ad6a0",
+  "source_sha256": {
+    "apps/evolve.cpp": "40ff9d6f44acf70f6ba9fe38c956b1fa9236ba7864d52b9270e6bdbea633654a",
+    "src/conduction_table.cpp": "59f4041ae4f146e0f3c9916c9e03c7ac1146da68be0cfdf2813d7d18a9360d58",
+    "include/ember/conduction_table.hpp": "768c1756add4862f6ea888ddaf1f4541098c72d20cf8c5a24e48a4a75e7506a1",
+    "tests/test_evolution_restart.py": "6a51d64064bce5ffd0bc74176fe25b854fa4c7ccb99e287fa656bdee4d4e6f44",
+    "CMakeLists.txt": "485f1cb3fe794e500a7846aaac90f5eb48ca3a0af103786f08e7557e16b2cbba"
+  },
+  "benchmark_reports_sha256": {
+    "duplication_parallel_benchmark_v1.json": "c784cd0fc911803befe23852df21ef84b33c7ae94a02c9d2d808c37af496f64a",
+    "conduction_reuse_benchmark_v1.json": "ea18320799b2fd4535febd1ca8188b0e94e0d8869ffe82410e774417516ac918",
+    "conduction_profile_reuse_v1.json": "19e25eba7da2d616f5f8c288c48be1d9c40dfc6c76018d79fe7772e66a02e593"
+  },
+  "benchmark_scope": "The alternating whole-star comparison includes startup and 48 accepted steps through 100 billion years. Some CTest work ran concurrently; individual timings are reported. The longer conduction replay uses CPU time and excludes other processes. These are not full-lifetime speedups.",
+  "metal": {
+    "used_by_ember": false,
+    "specification_url": "https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf",
+    "specification_sha256": "41538b30d2f1140a5b2a0c84ce0a9f7b67bf0c707e224cfea0bfe5a44aa26cf5",
+    "date": "2026-06-04",
+    "section": "2.1 Scalar Data Types",
+    "finding": "The double type is unsupported; current stellar arithmetic uses double. GPU use requires a separate validated arithmetic strategy."
+  },
+  "remaining_work": [
+    "Repeated electron screening for different pp reactions",
+    "Reuse between adjacent zones and whole-model iterations",
+    "Parallel independent spatial evaluations with separate caches and deterministic reductions",
+    "Batched source-atmosphere and grain calculations"
+  ]
+}

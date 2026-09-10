@@ -13,12 +13,13 @@
 #include <algorithm>
 #include <charconv>
 #include <cstdio>
+#include <future>
 #include <string>
 #include <stdexcept>
 
 namespace {
-// Exact memoization for the single-threaded driver's repeated residual and
-// Jacobian boundary queries. Every composition component is part of the key.
+// Each worker owns its cache for repeated residual and Jacobian boundary
+// queries. Every composition component is part of the key.
 class CachedAtmosphere final : public ember::Atmosphere {
 public:
   explicit CachedAtmosphere(const ember::Atmosphere& source):source_(source) {}
@@ -34,7 +35,7 @@ private:
   const ember::Atmosphere& source_;
   mutable std::vector<Entry> entries_;
 };
-// The driver is single-threaded. Adjacent zones share an identical endpoint,
+// Each worker owns this instance. Adjacent zones share an identical endpoint,
 // and burning residual/Jacobian calls frequently repeat the same state.
 // Retain complete PP responses keyed by every physical input; no approximate
 // lookup, rounded key or reuse across a changed composition is allowed.
@@ -76,10 +77,11 @@ template<class T> T number(const char* text) {
 int main(int argc,char** argv) {
   using namespace ember;
   if(argc==2 && std::string(argv[1])=="--help") {
-    std::puts("usage: ember-evolve [points [duration_years [initial_step_years [tolerance_scale [nuclear_model [transport [atmosphere [eos [criterion]]]]]]]]]\nDefaults: 512, 1e8, 1e7, 1, sfii-svh, wd, cond-corrected. Fixed baryonic 0.1 Msun, X=.7 Z=.02 initially.\nNuclear: sfii-svh, sfii-debye, sfii-legacy-screening, legacy.\nTransport: wd (weakly damped 2021 conduction), classic, undamped, none, early (historical bounded physics).\nAtmosphere: cond-corrected, grey-convective, cond-y076, cond-top002, cond-alpha15, nongrey:/path/to/atmosphere.dat.\nEOS: proxy (historical H/He), metal:/path/to/family.dat (GS98 H/He3). Convection criterion: schwarzschild (default), ledoux, ledoux-diffusive (Langer alpha=.1, Kippenhahn alpha=1).\nImplicit pp burning and instantaneous convective mixing, step-doubling control.\nExtended X/Z opacity with elemental isotope mapping; grey convective composition correction anchored to solar COND.\nJSON on stdout, progress on stderr; exit zero only at requested duration.\nTrailing options: --checkpoint FILE writes the latest accepted state atomically; use a new path. --restart FILE restores internal variables and next step; duration is the target age. Physics, tolerances, executable bytes and original tables must match. Invoke with an executable file path.\n--checkpoint-after N writes once after N accepted steps in this invocation while continuing the calculation, for exact restart comparisons. Restart JSON history contains only the continued segment.\n--opacity-directory DIR selects a separately validated AESOPUS/TOPS family for extended transport; default is the original data/opacity. Selection and every source plane are bound to restart identity.\n--thermal-neutrinos none|plasma-hrw selects thermal losses (default none); plasma-hrw is plasma decay only, not all thermal channels.");return 0;
+    std::puts("usage: ember-evolve [points [duration_years [initial_step_years [tolerance_scale [nuclear_model [transport [atmosphere [eos [criterion]]]]]]]]]\nDefaults: 512, 1e8, 1e7, 1, sfii-svh, wd, cond-corrected. Fixed baryonic 0.1 Msun, X=.7 Z=.02 initially.\nNuclear: sfii-svh, sfii-debye, sfii-legacy-screening, legacy.\nTransport: wd (weakly damped 2021 conduction), classic, undamped, none, early (historical bounded physics).\nAtmosphere: cond-corrected, grey-convective, cond-y076, cond-top002, cond-alpha15, nongrey:/path/to/atmosphere.dat.\nEOS: proxy (historical H/He), metal:/path/to/family.dat (GS98 H/He3). Convection criterion: schwarzschild (default), ledoux, ledoux-diffusive (Langer alpha=.1, Kippenhahn alpha=1).\nImplicit pp burning and instantaneous convective mixing, step-doubling control.\nExtended X/Z opacity with elemental isotope mapping; grey convective composition correction anchored to solar COND.\nJSON on stdout, progress on stderr; exit zero only at requested duration.\nTrailing options: --checkpoint FILE writes the latest accepted state atomically; use a new path. --restart FILE restores internal variables and next step; duration is the target age. Physics, tolerances, executable bytes and original tables must match. Invoke with an executable file path.\n--checkpoint-after N writes once after N accepted steps in this invocation while continuing the calculation, for exact restart comparisons. Restart JSON history contains only the continued segment.\n--opacity-directory DIR selects a separately validated AESOPUS/TOPS family for extended transport; default is the original data/opacity. Selection and every source plane are bound to restart identity.\n--thermal-neutrinos none|plasma-hrw selects thermal losses (default none); plasma-hrw is plasma decay only, not all thermal channels.\n--step-workers 1|2 uses one or two CPU workers for the independent full-step and half-step estimates (default 1). Physics, accuracy tests and accepted-state ordering are unchanged.");return 0;
   }
   try {
     std::string restart_path,checkpoint_path,opacity_directory,thermal_neutrinos;
+    unsigned step_workers=1;
     std::size_t checkpoint_after=0;bool after_requested=false,flags_started=false;
     std::vector<char*> positional{argv[0]};
     for(int i=1;i<argc;++i) {
@@ -88,6 +90,10 @@ int main(int argc,char** argv) {
         flags_started=true;
         if(i+1==argc || std::string(argv[i+1]).empty())throw std::invalid_argument("driver option requires a value");
         if(option=="--restart" && restart_path.empty())restart_path=argv[++i];
+        else if(option=="--step-workers") {
+          step_workers=number<unsigned>(argv[++i]);
+          if(step_workers<1 || step_workers>2)throw std::invalid_argument("step-workers must be 1 or 2");
+        }
         else if(option=="--checkpoint" && checkpoint_path.empty())checkpoint_path=argv[++i];
         else if(option=="--opacity-directory" && opacity_directory.empty())opacity_directory=argv[++i];
         else if(option=="--thermal-neutrinos" && thermal_neutrinos.empty())thermal_neutrinos=argv[++i];
@@ -178,6 +184,11 @@ int main(int argc,char** argv) {
       criterion=="ledoux-diffusive"?.1:0,criterion=="ledoux-diffusive"?1.:0};
     PlasmaNeutrinoLosses plasma_losses;
     if(thermal_neutrinos=="plasma-hrw")physics.neutrino_losses=&plasma_losses;
+    // The full-step estimate is independent of both half steps. Its worker
+    // owns separate caches; immutable EOS, opacity and rate sources are shared.
+    CachedNuclear full_nuclear(nuclear_source);
+    CachedAtmosphere full_atmosphere(raw_atmosphere);
+    Physics full_physics=physics;full_physics.nuclear=&full_nuclear;
     double seed_radius=.15*constants::Rsun, seed_teff=0;
     if(grid) {
       const auto support=grid->support();
@@ -252,10 +263,19 @@ int main(int argc,char** argv) {
         {success=false;last_failure="lifetime step counter overflow";break;}
       if(consecutive_rejected>100) {success=false;last_failure="consecutive rejection limit reached: "+last_failure;break;}
       if(dt<year) {success=false;last_failure="minimum timestep reached: "+last_failure;break;}
-      const auto full=evolve_step(model,physics,atmosphere,dt,options);
-      EvolutionStep first,second;
-      if(full.converged) first=evolve_step(model,physics,atmosphere,.5*dt,options);
-      if(first.converged) second=evolve_step(first.model,physics,atmosphere,.5*dt,options);
+      EvolutionStep full,first,second;
+      if(step_workers==2) {
+        auto pending=std::async(std::launch::async,[&] {
+          return evolve_step(model,full_physics,full_atmosphere,dt,options);
+        });
+        first=evolve_step(model,physics,atmosphere,.5*dt,options);
+        if(first.converged)second=evolve_step(first.model,physics,atmosphere,.5*dt,options);
+        full=pending.get();
+      } else {
+        full=evolve_step(model,physics,atmosphere,dt,options);
+        if(full.converged)first=evolve_step(model,physics,atmosphere,.5*dt,options);
+        if(first.converged)second=evolve_step(first.model,physics,atmosphere,.5*dt,options);
+      }
       double error=0;
       if(full.converged && first.converged && second.converged) {
         for(std::size_t i=0;i<points;++i) {

@@ -10,6 +10,18 @@ publication policy in [DATA_REPRODUCTION.md](DATA_REPRODUCTION.md).
 
 ## Progress on 2026-09-10
 
+The latest completed 512-point continuation reaches **3.600 trillion years**,
+with central hydrogen 0.09839 and Teff 3274 K. The next run stopped near
+**3.609 trillion years** as the interior TOPS composition reached its atomic
+hydrogen floor of 0.09. Additional source coverage is required. A new source
+plan requests lower hydrogen fractions and independent interpolation checks;
+no replacement table has been accepted. Separate calculations with fourfold
+tighter time tolerances and with 1024 mesh points are running to test the
+convection transition. Both use the checked two-worker implementation described in
+[the performance notes](COMPUTATIONAL_COST.md).
+
+The following records describe the preceding completed comparisons.
+
 The latest 512-point and 1024-point calculations both completed **3.560 trillion
 years**. Both now have central regions stable against convection, containing
 37.23% and 37.77% of their mass. Final central hydrogen fractions are 0.1518

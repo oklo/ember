@@ -78,28 +78,39 @@ TabulatedConduction::Conductivity TabulatedConduction::pure(std::size_t z, doubl
   const auto a = interp::hermite(tt, std::span(vals).first(tt.size()), std::span(dR).first(tt.size()), lt);
   return {a.y, a.dydx, a.dydp};
 }
-TabulatedConduction::Conductivity TabulatedConduction::ion(double charge, double lt, double le) const {
+TabulatedConduction::Conductivity TabulatedConduction::ion(
+    double charge, double lt, double le, std::span<std::optional<Conductivity>> pure_cache) const {
   const double z = std::log10(charge);
   if (z < logZ_.front() || z > logZ_.back())
     throw std::domain_error("TabulatedConduction: unsupported ion charge");
+  const auto source = [&](std::size_t i) {
+    auto& value = pure_cache[i];
+    if (!value) value = pure(i, lt, le);
+    return *value;
+  };
   const auto exact = std::lower_bound(logZ_.begin(), logZ_.end(), z);
   if (exact != logZ_.end() && *exact == z)
-    return pure(static_cast<std::size_t>(exact - logZ_.begin()), lt, le);
+    return source(static_cast<std::size_t>(exact - logZ_.begin()));
   const auto i = interp::locate(logZ_, z);
   const double f = (z - logZ_[i]) / (logZ_[i + 1] - logZ_[i]);
-  const auto a = pure(i, lt, le), b = pure(i + 1, lt, le);
+  const auto a = source(i), b = source(i + 1);
   return {(1 - f) * a.logK + f * b.logK, (1 - f) * a.dT + f * b.dT, (1 - f) * a.drho + f * b.drho};
 }
 OpacityState TabulatedConduction::eval(double T, double rho, const Composition& c) const {
   check_state(T, rho, c);
   const double Ye = c.mu_elec_inv(), lt = std::log10(T), le = std::log10(rho * Ye);
+  // Several elements interpolate between the same source ions, and both
+  // helium isotopes use the same charge. All share exactly this T and electron
+  // density. Reuse each source lookup within this call, preserving the order
+  // of mixture sums and derivatives. No mutable state survives the call.
+  std::array<std::optional<Conductivity>, 100> pure_cache{};
   double resistance = 0, dT = 0, drho = 0;
   std::array<double, 2> dc{};
   const std::array<double, 2> de{1 / c.abundance_weight(0) - 2 / c.abundance_weight(2),
                                  2 / c.abundance_weight(1) - 2 / c.abundance_weight(2)};
   auto add_ion=[&](double charge,double ej,std::array<double,2> dej) {
     const double f=ej/Ye;
-    const auto k = ion(charge, lt, le);
+    const auto k = ion(charge, lt, le, std::span(pure_cache).first(logZ_.size()));
     const double ik = std::pow(10., -k.logK), r = f * ik;
     resistance += r;
     dT -= r * k.dT;

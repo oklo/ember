@@ -10,12 +10,11 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 # --- Apple silicon -----------------------------------------------------------
-# The solver is latency-bound on table interpolation, not throughput-bound, so
-# the wins here are (a) the native core's wide OoO window, reached by telling
-# the compiler exactly which core it is, and (b) making Accelerate available
-# for linear algebra. The current small Henyey blocks use a portable pivoted
-# kernel. -ffp-contract=fast lets the FMA units fuse the Hermite
-# polynomials, which is where the interpolators spend their time.
+# Target the native CPU and make Accelerate available for linear algebra.
+# Current profiles are dominated by nuclear screening and opacity/conduction;
+# the small Henyey blocks use a portable pivoted kernel. -ffp-contract=fast
+# permits FMA contraction in interpolation without the broader assumptions
+# licensed by -ffast-math. Independent step estimates can use two CPU workers.
 include(CheckCXXCompilerFlag)
 check_cxx_compiler_flag("-mcpu=apple-m4" EMBER_HAS_M4)
 add_library(ember_flags INTERFACE)

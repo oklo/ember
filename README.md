@@ -12,7 +12,7 @@ reported alongside each result.
 
 ## Status — September 10, 2026
 
-The completed **0.1 solar-mass model reaches 3.560 trillion years** from a
+The completed **0.1 solar-mass model reaches 3.600 trillion years** from a
 specified static main-sequence model. It now has a central region stable against convection and an outer convective
 envelope. Hydrogen burning continues. **Hydrogen exhaustion and white-dwarf cooling have not been reached.**
 The current goal is to evolve the helium remnant to **100 K effective temperature**
@@ -23,12 +23,12 @@ the star reaches.
 |---|---:|
 | Initial composition | XH = 0.7, He3 = 0, Z = 0.02; GS98 metals |
 | Mass mesh | 512 points; fixed baryonic mass of 0.1 Msun |
-| Central hydrogen mass fraction | 0.1518 |
-| Radius | 0.1428 Rsun |
-| Luminosity | 0.002025 Lsun |
-| Effective temperature | 3240 K |
-| Central temperature | 8.469 million K |
-| Convective mass fraction | 0.6277 |
+| Central hydrogen mass fraction | 0.09839 |
+| Radius | 0.1419 Rsun |
+| Luminosity | 0.002085 Lsun |
+| Effective temperature | 3274 K |
+| Central temperature | 8.670 million K |
+| Convective mass fraction | 0.5073 |
 
 The [September 10 working paper](docs/reports/2026-09-10/ember_status_and_future.pdf)
 ([source, figures and reproduction instructions](docs/reports/2026-09-10/README.md))
@@ -44,7 +44,8 @@ The completed run uses **64 composition tables for the equation of state**,
 refined hydrogen-poor TOPS opacity, and **120 atmosphere models** that resolve
 absorption and scattering over frequency. Convection accounts for composition
 gradients; plasma-neutrino losses enter the energy equation. The new 512-point calculation
-contains 2354 states from the initial model through 3.560 trillion years.
+contains 2354 states from the initial model through 3.560 trillion years,
+followed by 277 accepted steps to 3.600 trillion years.
 
 A refined table of **120 atmospheres extends to hydrogen fraction 0.1** at
 warm surface temperatures, including new points at hydrogen fraction 0.15.
@@ -53,7 +54,7 @@ discrepancy falls from 2.134% to 0.6468%. Independent checks at hydrogen
 fractions 0.125 and 0.175 differ by 0.7971% and 1.089%. These are local
 interpolation checks, not a bound on lifetime accuracy.
 
-Both the 512-point and 1024-point calculations now have stable central regions,
+At 3.560 trillion years, both the 512-point and 1024-point calculations have stable central regions,
 containing 37.23% and 37.77% of their mass, respectively, and extending to about
 45% of their radius. At the same age their luminosities differ by 0.07813%,
 but central hydrogen differs by 1.752%. The earlier stable shell has reached
@@ -61,6 +62,18 @@ the center. Further mesh and time-step checks are needed to determine the
 transition age accurately. The earlier checkpoint counter limit was corrected
 without loosening accuracy tolerances. See the
 [completed comparison](docs/results/evolution_transition_3560gyr_v1.json).
+
+The next continuation reached 3.609 trillion years before encountering the
+interior opacity family's lower hydrogen boundary. Additional TOPS source
+calculations are being requested; no table is extrapolated to continue the run.
+Separate calculations with fourfold tighter time tolerances and with 1024 mesh
+points are checking the transition, using the new two-worker mode.
+
+**Performance:** `--step-workers 2` runs independent time-step estimates on two
+CPU workers, and conduction calculations now reuse repeated source lookups.
+A checked 512-point benchmark uses 32.76% less elapsed time, with complete
+output files unchanged byte for byte. The default remains one worker. See
+[the measurements and CPU/GPU assessment](docs/COMPUTATIONAL_COST.md).
 
 New [grain-opacity calculations](docs/GRAINS.md) provide separate absorption
 and scattering over wavelength, checked against an independent program and

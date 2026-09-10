@@ -30,6 +30,11 @@ def main():
             return payload
         checkpoint=work/'midpoint.restart'
         reference=run('reference',['--checkpoint',str(checkpoint),'--checkpoint-after','3'])
+        parallel_checkpoint=work/'parallel-midpoint.restart'
+        parallel=run('parallel',['--step-workers','2','--checkpoint',str(parallel_checkpoint),
+                                 '--checkpoint-after','3'])
+        if parallel!=reference or parallel_checkpoint.read_bytes()!=checkpoint.read_bytes():
+            raise AssertionError('two-worker evolution changed the trajectory or checkpoint bytes')
         columns=reference['columns']
         for values in reference['history']:
             r=dict(zip(columns,values,strict=True))
@@ -48,6 +53,9 @@ def main():
         copied=work/'ember-evolve';shutil.copy2(executable,copied)
         final=work/'final.restart'
         resumed=run('resumed',['--restart',str(checkpoint),'--checkpoint',str(final)],binary=copied)
+        parallel_resumed=run('parallel-resumed',['--restart',str(checkpoint),'--step-workers','2'],binary=copied)
+        if parallel_resumed!=resumed:
+            raise AssertionError('changing worker count across an exact restart changed the output')
         if checkpoint.read_bytes()!=original_checkpoint:raise AssertionError('restart input changed')
         if resumed['profile']!=reference['profile']:raise AssertionError('restart changed final stellar structure or composition')
         if resumed['history'][1:]!=reference['history'][4:]:raise AssertionError('restart changed the subsequent accepted trajectory')

@@ -1,6 +1,7 @@
 #pragma once
 #include "ember/conduction.hpp"
 #include <filesystem>
+#include <span>
 #include <string>
 #include <vector>
 
@@ -21,7 +22,8 @@ private:
     double logK, dT, drho;
   };
   Conductivity pure(std::size_t, double logT, double logElectronMassDensity) const;
-  Conductivity ion(double charge, double logT, double logElectronMassDensity) const;
+  Conductivity ion(double charge, double logT, double logElectronMassDensity,
+                   std::span<std::optional<Conductivity>> pure_cache) const;
   std::vector<double> logT_, logRho_, logZ_, mass_, logK_;
   std::string label_;
 };
