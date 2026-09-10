@@ -1,0 +1,19 @@
+{
+  "canonical_and_offline_archive_revalidated": true,
+  "rejections": {
+    "changed metals": "condensate family physical inputs differ",
+    "changed opacity_frequencies": "condensate family physical inputs differ",
+    "changed alpha": "condensate family physical inputs differ",
+    "wrong composition": "condensate coordinate mismatch",
+    "wrong opacity plane": "condensate model used a different opacity plane",
+    "gas mode relabelled as condensation": "condensate input fingerprint changed",
+    "nonfinite or nonpositive conserved nuclei density": "invalid conserved nuclei density",
+    "gas-control opacity source, composition or spectral grid": "gas opacity source physics differs",
+    "diagnostic omitted-grain-enthalpy atmosphere in production": "condensing convective layers require grain enthalpy physics",
+    "thermal controls for a different model or missing perturbation": "different reference model or both specified heat-capacity controls are required",
+    "hot layer without separate independent join chemistry": "required hot-join source file is missing"
+  },
+  "source_model": "condensation_atmosphere_x700_2600_g515",
+  "reproduction": "/tmp/ember-plot-env/bin/python tests/test_condensate_import.py (numpy environment)",
+  "test_cases": 13
+}

@@ -1,0 +1,29 @@
+{
+  "description": "Nested material-temperature refinement; original source values retained bit for bit",
+  "coordinates": [
+    0.7,
+    0,
+    2600.0,
+    5.15
+  ],
+  "coarse": "/tmp/ember-condensate-capacity-control-2600",
+  "fine": "/tmp/ember-condensate-refined-2600",
+  "temperature_rows": [
+    17,
+    33
+  ],
+  "opacity_sha256": [
+    "07875e83e55e912bd5e527b0df2cf30058292b30c24e904413c825ea0f8f4a05",
+    "4778a22aa790fb751919b8b49b23dbab3784e691f0ecd8d10a419598788312d4"
+  ],
+  "same_equation_executable_sha256": "602676d98b9cc3c7602affa8f26b876792fea210cca14f6e0bee1cab6f0562da",
+  "original_source_values_unchanged": true,
+  "relative_boundary_difference": {
+    "T": 0.0002652232436586299,
+    "Pgas": 0.003605097421661929,
+    "source_density": 0.003323841827284957
+  },
+  "maximum_allowed_relative_boundary_error": 0.005,
+  "passed": true,
+  "note": "This tests temperature interpolation, not density/frequency resolution or a global physical uncertainty."
+}

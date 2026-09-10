@@ -30,8 +30,16 @@ def main():
         raise ValueError('expected FreeEOS 3.0 EOS1 source')
     if not math.isfinite(a.hydrogen) or not 0 <= a.hydrogen <= .98:
         raise ValueError('invalid hydrogen abundance')
+    baryonic = src.get('composition_basis') == 'baryon_mass'
     helium = .3 if a.hydrogen == .7 else 1-a.hydrogen
     expected_eps=[a.hydrogen/1.00782503,helium/4.00260325]+[0.]*18
+    if baryonic:
+        from metal_eos_composition import mixture
+        expected = mixture(src['hydrogen'],src['helium3'])
+        for key,value in expected.items():
+            if src.get(key) != value:
+                raise ValueError(f'metal source metadata mismatch: {key}')
+        expected_eps = expected['eps']
     if len(src['eps'])!=20 or any(abs(x-y)>1e-14 for x,y in zip(src['eps'],expected_eps)):
         raise ValueError('source composition differs from the specified H/He mixture')
     lt, lq, rows = src['logT'], src['logQ'], src['data']
@@ -51,6 +59,11 @@ def main():
         if not all(math.isfinite(v) for v in r):
             raise ValueError('nonfinite source value')
         info, _, rho, T, P, E, S, chir, chit, Er, Et, Sr, St, cp, ad, delta, *_ = r
+        if info != 0 and baryonic:
+            # Never interpolate through a failed source state. Placeholder
+            # jets are written only under a mask expanded by the full stencil.
+            good.append(False)
+            continue
         if info != 0:
             raise ValueError('nonconverged source state')
         expected_t=lt[k//nq]*math.log(10)
@@ -86,6 +99,13 @@ def main():
            'composition '+' '.join(format(v,'.17g') for v in interior_composition(a.hydrogen)),
            f'log_t {nt-4} '+' '.join(format(v,'.17g') for v in lt[2:-2]),
            f'log_q {nq-4} '+' '.join(format(v,'.17g') for v in lq[2:-2]),'data']
+    if baryonic:
+        lines[:4] = ['EMBER_HELMHOLTZ 2',
+            f'source "FreeEOS 3.0.0 EOS1; GS98; baryonic H={src["hydrogen"]:g} He3={src["helium3"]:g}; direct-source SHA256 {hashlib.sha256(original).hexdigest()}"',
+            'composition_proxy '+json.dumps(src['approximation']),
+            'basis baryon_mass',
+            'metal_inventory gs98',
+            'composition '+' '.join(format(v,'.17g') for v in src['composition'])]
     invalid=0
     for i in range(2,nt-2):
         for j in range(2,nq-2):

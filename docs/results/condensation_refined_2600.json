@@ -1,0 +1,157 @@
+{
+  "kind": "material-temperature refinement",
+  "coordinates": [
+    0.7,
+    0,
+    2600.0,
+    5.15
+  ],
+  "diagnostics": {
+    "T": 3864.6941722331694,
+    "Pgas": 20847344.847442247,
+    "source_density": 0.0001361348054510166,
+    "column_mass": 147.5878782534937,
+    "flux_error": 3.5803476309936855e-05,
+    "correction": 3.2e-07,
+    "effective_flux_error": 0.00022622516222570166,
+    "hydrostatic_error": 1.515288985398655e-07,
+    "chemical_density_error": 1.8451906669270102e-13,
+    "iterations": 10,
+    "depths": 300,
+    "tau_bracket": [
+      93.69567062146521,
+      101.05866759744798
+    ],
+    "temperature_range": [
+      1052.5861865608656,
+      4527.399581970267
+    ],
+    "density_range": [
+      1.0518069674923169e-10,
+      0.0004004442791273748
+    ]
+  },
+  "chemistry": {
+    "element_closure": 8.93258889078652e-09,
+    "pressure_closure": 9.627409980339507e-12,
+    "nuclei_closure": 3.552713678800501e-15,
+    "thresholds": {
+      "0": {
+        "max_condensed_mass_fraction": 0.005125897071527185,
+        "max_element_gas_depletion": 0.9999999999893184
+      },
+      "0.001": {
+        "max_condensed_mass_fraction": 0.0002965910647091019,
+        "max_element_gas_depletion": 0.9924523549444744
+      },
+      "0.01": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.865174681370263e-14
+      },
+      "0.1": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.865174681370263e-14
+      },
+      "1": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.6986412276764895e-14
+      },
+      "100": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.354472090042691e-14
+      }
+    },
+    "condensates": [
+      {
+        "species": "MgAl2O4(s,l)",
+        "max_number_per_nucleus": 1.730425219530419e-06,
+        "largest_tau": 0.0008969603012615815
+      },
+      {
+        "species": "Al2O3(s,l)",
+        "max_number_per_nucleus": 1.6133615415448777e-06,
+        "largest_tau": 0.005884444283924713
+      },
+      {
+        "species": "Cr2O3(s,l)",
+        "max_number_per_nucleus": 2.7815128700521486e-07,
+        "largest_tau": 5.007777602403156e-06
+      },
+      {
+        "species": "Fe(s,l)",
+        "max_number_per_nucleus": 3.537725474630155e-05,
+        "largest_tau": 0.0007850001401281202
+      },
+      {
+        "species": "MgSiO3(s,l)",
+        "max_number_per_nucleus": 3.262138786672498e-05,
+        "largest_tau": 1.5808576458421645e-05
+      },
+      {
+        "species": "Mg2SiO4(s,l)",
+        "max_number_per_nucleus": 1.9298504900003937e-05,
+        "largest_tau": 0.0003384986272640634
+      },
+      {
+        "species": "Ni(s,l)",
+        "max_number_per_nucleus": 2.087518738112941e-06,
+        "largest_tau": 0.0002220176355798593
+      },
+      {
+        "species": "TiO2(s,l)",
+        "max_number_per_nucleus": 1.0535998674457169e-07,
+        "largest_tau": 4.34560813237959e-08
+      },
+      {
+        "species": "Ti3O5(s,l)",
+        "max_number_per_nucleus": 3.51199644044748e-08,
+        "largest_tau": 0.0002730129237091393
+      },
+      {
+        "species": "Ti4O7(s,l)",
+        "max_number_per_nucleus": 2.6339996346547544e-08,
+        "largest_tau": 2.4271140217892568e-06
+      },
+      {
+        "species": "CaTiO3(s)",
+        "max_number_per_nucleus": 1.0519994559039204e-07,
+        "largest_tau": 0.0034740859130374456
+      },
+      {
+        "species": "CaSiO3(s)",
+        "max_number_per_nucleus": 2.4159493706939434e-06,
+        "largest_tau": 0.00047669928311968614
+      },
+      {
+        "species": "Ca2SiO4(s)",
+        "max_number_per_nucleus": 1.1987054566409818e-06,
+        "largest_tau": 0.0006080030885657788
+      },
+      {
+        "species": "CaMgSi2O6(s)",
+        "max_number_per_nucleus": 2.526046207561069e-06,
+        "largest_tau": 0.0003384986272640634
+      },
+      {
+        "species": "Ca2Al2SiO7(s)",
+        "max_number_per_nucleus": 1.1853878428422458e-06,
+        "largest_tau": 0.0020961372620421324
+      },
+      {
+        "species": "SiO(s)",
+        "max_number_per_nucleus": 1.3817101288843264e-05,
+        "largest_tau": 0.00020066078176442112
+      }
+    ],
+    "maximum_convective_flux_fraction_in_condensing_layers": 0.0,
+    "grain_enthalpy_supported": true
+  },
+  "relative_difference_from_original_17T": {
+    "T": 0.00026503163905089444,
+    "Pgas": 0.0036062465048443126,
+    "source_density": 0.0033254046972166496
+  },
+  "reference": "/tmp/ember-condensate-atmosphere-cold-v3",
+  "archive": "/Users/greglaughlin/Projects/ember/data/atmosphere/sources/condensation_material_refinement/refined-2600",
+  "prepared_sha256": "c745959c1313b207bb68e43aed3ef4db39478522b768543b40c82bfbc3cb2733"
+}

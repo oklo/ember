@@ -1,0 +1,171 @@
+{
+  "description": "Actual source RYBENE/CONVEC routines, analytic ideal molecular EOS, three pressure scales and three temperature derivatives. Fixed pressure, opacity and divergence density prefactor isolate convection matrix assembly. The source equations and flux law are unchanged.",
+  "temperature_derivative_step": 1e-05,
+  "finite_difference_step": 1e-06,
+  "original": {
+    "columns": [
+      "pressure_case",
+      "temperature_index",
+      "source_matrix",
+      "finite_difference",
+      "relative_error"
+    ],
+    "rows": [
+      [
+        1.0,
+        1.0,
+        0.000329545316742365,
+        0.0003295454749298495,
+        -4.80017164572466e-07
+      ],
+      [
+        1.0,
+        2.0,
+        0.1246631930742836,
+        -0.001131396548118696,
+        -111.1852337110057
+      ],
+      [
+        1.0,
+        3.0,
+        0.05887808544139241,
+        0.0007083633535865639,
+        82.11848028738736
+      ],
+      [
+        2.0,
+        1.0,
+        1.2714655532526,
+        1.271465757667503,
+        -1.607710644613292e-07
+      ],
+      [
+        2.0,
+        2.0,
+        8.734456325715325,
+        -3.352506913671505,
+        -3.605350727271064
+      ],
+      [
+        2.0,
+        3.0,
+        4.094574083913528,
+        1.892762400527077,
+        1.163279491801672
+      ],
+      [
+        3.0,
+        1.0,
+        61.58084218896025,
+        61.58084085155581,
+        2.171786572802148e-08
+      ],
+      [
+        3.0,
+        2.0,
+        148.6849323514255,
+        -130.9580482480518,
+        -2.13536307497342
+      ],
+      [
+        3.0,
+        3.0,
+        70.19454478488326,
+        65.76978548849442,
+        0.06727647450154595
+      ]
+    ],
+    "maximum_relative_error": 111.1852337110057,
+    "source_sha256": "2f17c602ef44c4492d66465c11f0589b5c31b9c496717516117a711585d253d2",
+    "kernel_sha256": "e551b6f1ce9a671953f6ff155d45177d068debfa435f4da5a5df1bb089ed0875",
+    "driver_sha256": "bdac501ce182ecb75952acffbb64910a4e6778ce49bbca32102a654bc459c8df"
+  },
+  "corrected": {
+    "columns": [
+      "pressure_case",
+      "temperature_index",
+      "source_matrix",
+      "finite_difference",
+      "relative_error"
+    ],
+    "rows": [
+      [
+        1.0,
+        1.0,
+        0.000329545316742365,
+        0.0003295454749298495,
+        -4.80017164572466e-07
+      ],
+      [
+        1.0,
+        2.0,
+        -0.001131395661997974,
+        -0.001131396548118696,
+        -7.832096746707151e-07
+      ],
+      [
+        1.0,
+        3.0,
+        0.0007083642698375487,
+        0.0007083633535865639,
+        1.293475982544479e-06
+      ],
+      [
+        2.0,
+        1.0,
+        1.2714655532526,
+        1.271465757667503,
+        -1.607710644613292e-07
+      ],
+      [
+        2.0,
+        2.0,
+        -3.352506533972401,
+        -3.352506913671505,
+        -1.132582613250221e-07
+      ],
+      [
+        2.0,
+        3.0,
+        1.892762909751167,
+        1.892762400527077,
+        2.690375138225676e-07
+      ],
+      [
+        3.0,
+        1.0,
+        61.58084218896025,
+        61.58084085155581,
+        2.171786572802148e-08
+      ],
+      [
+        3.0,
+        2.0,
+        -130.9580506785538,
+        -130.9580482480518,
+        1.855939446571142e-08
+      ],
+      [
+        3.0,
+        3.0,
+        65.7697823963934,
+        65.76978548849442,
+        -4.701400502238329e-08
+      ]
+    ],
+    "maximum_relative_error": 1.293475982544479e-06,
+    "source_sha256": "52259b1efedbb9753a55c1dee5c17c821953d491f20a1efc2c9a3535fe231009",
+    "kernel_sha256": "8d489b131c3b8922fca53a7a51ab3c193edb5372d7979bf84c95913160af4fbf",
+    "driver_sha256": "bdac501ce182ecb75952acffbb64910a4e6778ce49bbca32102a654bc459c8df"
+  },
+  "files": {
+    "convection-jacobian-original-convection.f.gz": "4d63b75059bfdc5cf7ffde96535b2588ede1ab454f4605a7aff9425e22b4ffef",
+    "convection-jacobian-original-output.txt.gz": "164aafce8d0aae47935c8857f43f4260c821ffb3b23e31495f528236459d0036",
+    "convection-jacobian-corrected-convection.f.gz": "1c56a8f295273ede07fed0b2a68822fa14ca0253c991741d4994027352615750",
+    "convection-jacobian-corrected-output.txt.gz": "7488b36b3c8cafe95419a6f4d067ecac3a182a724aecc44c5008b2443ea7c840",
+    "tlusty208-before-convection-jacobian.patch.gz": "7a4ae006d4e5951cc51758bd3af263256cc25ad768c26448b1aea93bbfed6f70",
+    "tlusty208-before-opacity-derivative.patch.gz": "6b6bf00a420b33bfd53fac76b10b90f3155a9def8553f5248eabed5f695a47d7"
+  },
+  "corrected_patch_sha256": "ba44fa283cad260e6c390ebc58f369275ea0f94ee589a3213b518c86ff66c0b1",
+  "corrected_patch_archive": "tlusty208-before-opacity-derivative.patch.gz"
+}

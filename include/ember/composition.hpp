@@ -2,6 +2,7 @@
 #include <array>
 #include <cstddef>
 #include <string_view>
+#include "ember/gs98_mixture.hpp"
 
 namespace ember {
 
@@ -17,6 +18,7 @@ enum class Species : std::size_t {
 inline constexpr std::size_t NSPEC = static_cast<std::size_t>(Species::COUNT);
 inline constexpr std::array<double, NSPEC> mass_numbers{1,3,4,12,13,14,16,20};
 enum class AbundanceBasis { atomic_mass, baryon_mass };
+enum class MetalInventory { carried_isotopes, gs98 };
 
 struct Nuclide { double A; double Z; std::string_view name; };
 
@@ -35,6 +37,10 @@ struct Composition {
   // with integer mass numbers, so sum(X)=1 conserves baryons; nuclear rest
   // mass changes are accounted for separately in the released energy.
   AbundanceBasis basis{AbundanceBasis::atomic_mass};
+  // GS98 selects the fixed elemental distribution used by atmosphere/EOS
+  // sources. The five inert metal slots continue to carry conserved mass;
+  // individual CNO reactions must not interpret those proxy labels literally.
+  MetalInventory metal_inventory{MetalInventory::carried_isotopes};
   constexpr double abundance_weight(std::size_t i) const {
     return basis == AbundanceBasis::baryon_mass ? mass_numbers[i] : nuclides[i].A;
   }
@@ -54,16 +60,21 @@ struct Composition {
     return z;
   }
   constexpr double Y() const { return (*this)[Species::He3] + (*this)[Species::He4]; }
+  constexpr double metal_ion_moment(int power) const {
+    return gs98_ion_moment(power)/(basis==AbundanceBasis::baryon_mass?1.:gs98_atomic_mass_scale());
+  }
 
   // Moles of ions and of electrons per gram, for the fully ionised mixture.
   constexpr double mu_ions_inv() const {
     double s = 0.0;
-    for (std::size_t i = 0; i < NSPEC; ++i) s += X[i] / abundance_weight(i);
+    for (std::size_t i = 0; i < (metal_inventory==MetalInventory::gs98?3:NSPEC); ++i) s += X[i] / abundance_weight(i);
+    if(metal_inventory==MetalInventory::gs98)s+=Z()*metal_ion_moment(0);
     return s;
   }
   constexpr double mu_elec_inv() const {
     double s = 0.0;
-    for (std::size_t i = 0; i < NSPEC; ++i) s += X[i] * nuclides[i].Z / abundance_weight(i);
+    for (std::size_t i = 0; i < (metal_inventory==MetalInventory::gs98?3:NSPEC); ++i) s += X[i] * nuclides[i].Z / abundance_weight(i);
+    if(metal_inventory==MetalInventory::gs98)s+=Z()*metal_ion_moment(1);
     return s;
   }
 };

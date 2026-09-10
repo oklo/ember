@@ -1,0 +1,2636 @@
+{
+  "description": "Corrected molecular-density source pilot and subsequent numerical refinements; not a full stellar-lifetime validation",
+  "provenance": {
+    "format": 1,
+    "tlusty": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54/tlusty/tlusty.exe",
+    "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+    "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+    "opacity_method": "sampling",
+    "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+    "tlusty_source": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54",
+    "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+    "line_lists": [
+      "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+    ],
+    "inputs": {
+      "tl208-s54.tar.gz": {
+        "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+        "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+      },
+      "synple.tar.gz": {
+        "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+        "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+      },
+      "gfATOc.19.gz": {
+        "url": "ftp:gfATOc.19.gz",
+        "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+      },
+      "gfMOLsun.20.gz": {
+        "url": "ftp:gfMOLsun.20.gz",
+        "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+      },
+      "gfTiO.20.gz": {
+        "url": "ftp:gfTiO.20.gz",
+        "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+      },
+      "H2O-8.20.gz": {
+        "url": "ftp:H2O-8.20.gz",
+        "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+      },
+      "optables.tar.gz": {
+        "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+        "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+      }
+    },
+    "patches": {
+      "tlusty208-ember.patch": "2aeccab64025b9a64463b1537c2269f2bee047dd7fa066f8aff9d1b62abdc26b",
+      "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+      "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+    },
+    "line_list_sha256": [
+      "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+      "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+      "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+      "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+    ],
+    "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+    "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+    "executables": {
+      "tlusty": "f62cf15fe6f11a1d01eb3baed5693b7fb1ae9d02425b165b390bc1848da51634",
+      "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+      "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+    }
+  },
+  "records": [
+    {
+      "name": "chemical-pilot-100",
+      "XH": 0.7,
+      "X3": 0.0,
+      "Teff_K": 2800,
+      "log_g": 5.15,
+      "depths": 100,
+      "frequencies": 5000,
+      "diagnostics": {
+        "T": 4031.7664955028854,
+        "Pgas": 16375511.10352084,
+        "source_density": 9.691865923733929e-05,
+        "column_mass": 115.92972558260381,
+        "flux_error": 0.0018631069380652399,
+        "correction": 6.51e-07,
+        "effective_flux_error": 0.00015484832107359736,
+        "hydrostatic_error": 1.459316605334493e-07,
+        "chemical_density_error": 1.2114695469023218e-08,
+        "iterations": 17,
+        "depths": 100,
+        "tau_bracket": [
+          99.19680936102232,
+          124.57205710829145
+        ],
+        "temperature_range": [
+          1663.358442110116,
+          4741.593626977869
+        ],
+        "density_range": [
+          1.0548240731881728e-10,
+          0.00030062612484259396
+        ]
+      },
+      "files": {
+        "chemical-pilot-100-run.log.gz": "086711cbc5393c5be3e373dccf4c47333cc4dc4719bce916e45c6cc878dd5223",
+        "chemical-pilot-100-fort.9.gz": "cd049e7608d03f8efd6afe3ebb3322a9202be90caafab7132bdb1f81b57ae250",
+        "chemical-pilot-100-fort.5.gz": "fc49b1987d8ad2daaa02befeed103d8f24f84042180d56108e06d214d4b174c5",
+        "chemical-pilot-100-tas.gz": "6c71e04fc94a9bc61e6a81bd8cf56e7d6e7eabf27d7d9b94fd279e8fd7091017",
+        "chemical-pilot-100-ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "chemical-pilot-100-opacity.sha256.gz": "608bdee3f5192acc06b0d17cb85f535e04bd7d9841327dd789584e95cb8eba03",
+        "chemical-pilot-100-completed.json.gz": "147e70588cdd468c6b8ae6af5ba397a7177c2a0584f60a57587c8d44b88c6677"
+      }
+    },
+    {
+      "name": "rollback-control",
+      "purpose": "Restore only the original density rollback; independent chemical check must reject it.",
+      "expected_rejection": "molecular density closure error: 0.452529",
+      "files": {
+        "rollback-control-run.log.gz": "f496a7e2db258bc78a68b6db0e2f69395855222f9c78b7e7b35f7186c612a44a",
+        "rollback-control-fort.9.gz": "665635f1a5fa3bae2044699d7369fdf13918773297ac14564d4e6fd5b4adba83",
+        "rollback-control-fort.5.gz": "fc49b1987d8ad2daaa02befeed103d8f24f84042180d56108e06d214d4b174c5",
+        "rollback-control-tas.gz": "6c71e04fc94a9bc61e6a81bd8cf56e7d6e7eabf27d7d9b94fd279e8fd7091017",
+        "rollback-control-ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "rollback-control-opacity.sha256.gz": "608bdee3f5192acc06b0d17cb85f535e04bd7d9841327dd789584e95cb8eba03",
+        "rollback-control-completed.json.gz": "cb33682ccf24cf92c9f4742d30336efc8ae607e623cfb07939e3227a1e0cf27d"
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/tmp/ember-nongrey-rollback-control/source/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "2aeccab64025b9a64463b1537c2269f2bee047dd7fa066f8aff9d1b62abdc26b",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "06869f2889d93103c403be18caa94ff868ce8de1859fe24a514a33c2807dcf23",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        },
+        "control": "Restore only original INPC=0 molecular-density rollback; keep independent diagnostic."
+      }
+    },
+    {
+      "name": "accurate-chemistry-300",
+      "XH": 0.7,
+      "X3": 0.0,
+      "Teff_K": 2800,
+      "log_g": 5.15,
+      "depths": 300,
+      "frequencies": 20000,
+      "diagnostics": {
+        "T": 4030.19276695981,
+        "Pgas": 16402547.914374152,
+        "source_density": 9.716938923805466e-05,
+        "column_mass": 116.12113150626763,
+        "flux_error": 1.1744181738659876e-05,
+        "correction": 5.34e-07,
+        "effective_flux_error": 0.00019860111416047932,
+        "hydrostatic_error": 1.4599045772278885e-07,
+        "chemical_density_error": 2.284838984678572e-13,
+        "iterations": 6,
+        "depths": 300,
+        "tau_bracket": [
+          93.503469995912,
+          100.82169872464944
+        ],
+        "temperature_range": [
+          1590.9928213270873,
+          4738.1087082166205
+        ],
+        "density_range": [
+          1.1139485853178482e-10,
+          0.0003010984372788016
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/tmp/ember-nongrey-accurate-chemistry/source/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "2aeccab64025b9a64463b1537c2269f2bee047dd7fa066f8aff9d1b62abdc26b",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "24763c34f1f8bc4acd3f4d353d86e20f02307c7a04c081e4f65e579066699bfa",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        },
+        "control": "Tighten only molecular equilibrium tolerance from .001 to 1e-8."
+      },
+      "files": {
+        "accurate-chemistry-300-run.log.gz": "3a758335a75e1f78899ebd132932d1aac3c103ecf62c187b3aa2f93395918bbc",
+        "accurate-chemistry-300-fort.9.gz": "d01d4b3f3c7695669c7639571aa47864a29017d2a15daa9ccbdc85bb1748686b",
+        "accurate-chemistry-300-fort.5.gz": "5e917801f2f26573fd9a0698ad609d0e63645f55a3666c7fe09b1dbcc97501e4",
+        "accurate-chemistry-300-fort.8.gz": "4ebf9cbd369e5975230d0ee66cbb3dfd2b38e7e6e2c360d4fda76343dc78f95a",
+        "accurate-chemistry-300-tas.gz": "be2405fe906cfc87ffcf5a1a1ff6531df2cc08b20678b778778c3d0bedcee296",
+        "accurate-chemistry-300-ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "accurate-chemistry-300-opacity.sha256.gz": "608bdee3f5192acc06b0d17cb85f535e04bd7d9841327dd789584e95cb8eba03",
+        "accurate-chemistry-300-completed.json.gz": "5b8a39992e0472bb6ca4e35a6c191ff31c0488a94e76f0b24e11d9ceecb34460"
+      },
+      "source_sha256": "44ccf7fd61a3373fde57d12181d8be11e230b6f8b262e09cc5d9c2d9eb536e76"
+    },
+    {
+      "name": "heldout-300-20000",
+      "XH": 0.55,
+      "X3": 0.1,
+      "Teff_K": 2800,
+      "log_g": 5.15,
+      "depths": 300,
+      "frequencies": 20000,
+      "diagnostics": {
+        "T": 4080.0780050035705,
+        "Pgas": 16700405.142632551,
+        "source_density": 0.0001055694915504603,
+        "column_mass": 118.22979908671117,
+        "flux_error": 1.1533544885367064e-05,
+        "correction": 8.12e-07,
+        "effective_flux_error": 0.00019856505911897138,
+        "hydrostatic_error": 1.4459156427726327e-07,
+        "chemical_density_error": 3.2585045772748344e-13,
+        "iterations": 5,
+        "depths": 300,
+        "tau_bracket": [
+          92.76615892798029,
+          100.05178624201054
+        ],
+        "temperature_range": [
+          1563.6538252495427,
+          4818.551152098117
+        ],
+        "density_range": [
+          1.2064631929317209e-10,
+          0.00031973961407787366
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54/tlusty/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "8f7c1cce2e7c0f38627ac1122f305c2c087f9dd1379ee444d7d4805b82721464",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "0007b2fb333363bd482fb0476f09d32e947a2a1842cc6bf7229bbfeb97ace9a2",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        }
+      },
+      "files": {
+        "heldout-300-20000-run.log.gz": "b76e95a65bcc409f8be337864fe8ccdd17105eac9a5462f55dd0114b1ad9c844",
+        "heldout-300-20000-fort.9.gz": "24cfb7cc533b53bdc6345cc6f4f44cca2b72f0ce796c7ae3b2b737d8d0eafc07",
+        "heldout-300-20000-fort.5.gz": "ec4284d5b9ec569946f1b46c51a259f29bdd00ffe08d33f4832888a8a71578ae",
+        "heldout-300-20000-fort.8.gz": "dca357127f2f1f109548c5470ab258154053680cda40631549774d39eac998d3",
+        "heldout-300-20000-tas.gz": "bf8e4c6596452f98d1201e0f3701f2fc036bb7ee2592806e23415899316f90e0",
+        "heldout-300-20000-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-300-20000-opacity.sha256.gz": "31b870e6a4c9efc5d8174d70ba5d88ea1950c76c4bd34d690745db029ae5ce78",
+        "heldout-300-20000-completed.json.gz": "40dd1516834f3a28cba0b4401c5833a18e564a9c65510b6a38add30fcaf1041f",
+        "heldout-300-20000-specification.json.gz": "7db1a35533a2ffc673efa304f734df474c96e869bd012a5b4ecf937cb0482c22"
+      }
+    },
+    {
+      "name": "solar-300-30000",
+      "XH": 0.7,
+      "X3": 0.0,
+      "Teff_K": 2800,
+      "log_g": 5.15,
+      "depths": 300,
+      "frequencies": 30000,
+      "diagnostics": {
+        "T": 4030.4268112897894,
+        "Pgas": 16396554.58489968,
+        "source_density": 9.711948768223169e-05,
+        "column_mass": 116.07870199099155,
+        "flux_error": 1.2600308426646833e-05,
+        "correction": 3.75e-07,
+        "effective_flux_error": 0.0001986660132355933,
+        "hydrostatic_error": 1.4598246522723457e-07,
+        "chemical_density_error": 2.289279876777073e-13,
+        "iterations": 9,
+        "depths": 300,
+        "tau_bracket": [
+          93.57617976817457,
+          100.89940295373246
+        ],
+        "temperature_range": [
+          1624.699927610276,
+          4738.583488613806
+        ],
+        "density_range": [
+          1.0865981557552902e-10,
+          0.000301034001954629
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54/tlusty/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "8f7c1cce2e7c0f38627ac1122f305c2c087f9dd1379ee444d7d4805b82721464",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "0007b2fb333363bd482fb0476f09d32e947a2a1842cc6bf7229bbfeb97ace9a2",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        }
+      },
+      "files": {
+        "solar-300-30000-run.log.gz": "c6f2e92f22630e1004ac976c57d9610226ef0e8fddd49ea75c5b723d7b16c61e",
+        "solar-300-30000-fort.9.gz": "3c1aae58d96eca88cb8a8a952ad7064e0b1e04b1853b9e6bfb14109949f8c81a",
+        "solar-300-30000-fort.5.gz": "5e917801f2f26573fd9a0698ad609d0e63645f55a3666c7fe09b1dbcc97501e4",
+        "solar-300-30000-fort.8.gz": "34975691b6a9d6719e469fe500455225b055ab7997000d832957d68099558279",
+        "solar-300-30000-tas.gz": "f087cf2ee390e7f70807d80db8db87e84fcb450f8bc97a5158e772f42198f700",
+        "solar-300-30000-ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "solar-300-30000-opacity.sha256.gz": "6f8bf3d2db52875717b71029adbb7199db51af8f3f0db337ee5692fda5b6a579",
+        "solar-300-30000-completed.json.gz": "e36164fb48e8f09632f17b03eddb58c0d6631021b02328804a4d96c88bc6f13a",
+        "solar-300-30000-specification.json.gz": "d6f66a635758bd286db334b28430b8a4e615b2bf407c01a90a927dd476b11e11"
+      }
+    },
+    {
+      "name": "solar-400-20000",
+      "XH": 0.7,
+      "X3": 0.0,
+      "Teff_K": 2800,
+      "log_g": 5.15,
+      "depths": 400,
+      "frequencies": 20000,
+      "diagnostics": {
+        "T": 4030.198948111863,
+        "Pgas": 16402481.933324406,
+        "source_density": 9.716865694498367e-05,
+        "column_mass": 116.12066439630931,
+        "flux_error": 8.061060438713241e-06,
+        "correction": 9.66e-07,
+        "effective_flux_error": 0.0002022823339168367,
+        "hydrostatic_error": 1.459902803091495e-07,
+        "chemical_density_error": 1.7275070263167436e-13,
+        "iterations": 3,
+        "depths": 400,
+        "tau_bracket": [
+          95.51900932730034,
+          101.06953247702646
+        ],
+        "temperature_range": [
+          1590.9629806671578,
+          4738.118955773188
+        ],
+        "density_range": [
+          1.1139727544703175e-10,
+          0.0003010970463738413
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54/tlusty/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "8f7c1cce2e7c0f38627ac1122f305c2c087f9dd1379ee444d7d4805b82721464",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "0007b2fb333363bd482fb0476f09d32e947a2a1842cc6bf7229bbfeb97ace9a2",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        }
+      },
+      "files": {
+        "solar-400-20000-run.log.gz": "e00151c9624e083ba81940a065e996fb624b803563889a034e0a436616f95388",
+        "solar-400-20000-fort.9.gz": "d9671419e1e95b524537ea2cc5266db34ae3b3677356e456c2c37a2a2e40f664",
+        "solar-400-20000-fort.5.gz": "5e917801f2f26573fd9a0698ad609d0e63645f55a3666c7fe09b1dbcc97501e4",
+        "solar-400-20000-fort.8.gz": "275e2b319917a7b67e5af8cf95b77a9a9d0f529ca39be40400e351007c1dbf94",
+        "solar-400-20000-tas.gz": "3465bad20a7d05e079b816a37b0258c136e53f85f30a857e94ae45255c605a95",
+        "solar-400-20000-ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "solar-400-20000-opacity.sha256.gz": "6f8bf3d2db52875717b71029adbb7199db51af8f3f0db337ee5692fda5b6a579",
+        "solar-400-20000-completed.json.gz": "2aaff97e38972c3aa1d778b0496585ea47882981a8eaa7284867ec5cc1bc1e7a",
+        "solar-400-20000-specification.json.gz": "656954109b70243497c204cd5610959798a8facafecb951b3a2fa7d8a5d4f9af"
+      }
+    },
+    {
+      "name": "heldout-refined-material",
+      "XH": 0.55,
+      "X3": 0.1,
+      "Teff_K": 2800,
+      "log_g": 5.15,
+      "depths": 300,
+      "frequencies": 20000,
+      "diagnostics": {
+        "T": 4080.050649754865,
+        "Pgas": 16755813.535065735,
+        "source_density": 0.00010594647833811966,
+        "column_mass": 118.62206040045174,
+        "flux_error": 1.1835191410014545e-05,
+        "correction": 6.69e-07,
+        "effective_flux_error": 0.00019825859126454404,
+        "hydrostatic_error": 1.446263033777484e-07,
+        "chemical_density_error": 3.402833570476105e-13,
+        "iterations": 6,
+        "depths": 300,
+        "tau_bracket": [
+          99.34158470693957,
+          107.14634727811888
+        ],
+        "temperature_range": [
+          1561.9536395236119,
+          4816.589596074866
+        ],
+        "density_range": [
+          1.207919275111161e-10,
+          0.000320004840139183
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54/tlusty/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "8f7c1cce2e7c0f38627ac1122f305c2c087f9dd1379ee444d7d4805b82721464",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "0007b2fb333363bd482fb0476f09d32e947a2a1842cc6bf7229bbfeb97ace9a2",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        }
+      },
+      "files": {
+        "heldout-refined-material-run.log.gz": "8a6e21034b0d70f69eb0483fc661abcbeac16d0c4fbc87053d0bde78654ef504",
+        "heldout-refined-material-fort.9.gz": "d27d510e9bdcc0626667df92bbf2817e3b986ed48a16c80b6a2cfe6384064893",
+        "heldout-refined-material-fort.5.gz": "ec4284d5b9ec569946f1b46c51a259f29bdd00ffe08d33f4832888a8a71578ae",
+        "heldout-refined-material-fort.8.gz": "62be196554d82f0ee37ec645da6de16136cd60e104267c804e92d124eba13d11",
+        "heldout-refined-material-tas.gz": "bf8e4c6596452f98d1201e0f3701f2fc036bb7ee2592806e23415899316f90e0",
+        "heldout-refined-material-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-opacity.sha256.gz": "65620689e8dbd78df86f8c8bdd9f795904865251629d81763ae7a4df6c7da9a1",
+        "heldout-refined-material-completed.json.gz": "424e023ac48feb49ddb0ca4faa0f84625d2d0153261bcaf22658db6f2eaf06c9",
+        "heldout-refined-material-specification.json.gz": "8502cf4f598a9802e7e65c367092190014936994e566dda5c0b10dd1b372d426",
+        "heldout-refined-material-temperature-000-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-000-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-000-fort.2.gz": "976134c4f46ed40516f476b596448b9dfa3fd410efd390dab60da330bba2f152",
+        "heldout-refined-material-temperature-000-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-000-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-000-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-000-fort.29.gz": "781170a756d8e82209d3ea02ad02dbcb7194924efb80b6a9a9cd1653b5518078",
+        "heldout-refined-material-temperature-000-run.log.gz": "ebc4c9c62e1624a556c84336db349ee8756aea0df6e0ff839a541de2e9e57847",
+        "heldout-refined-material-temperature-000-completed.json.gz": "6f45e668dfbdefe535bade30b4530aad1e246f0cd32a2e6818c1dc2403616089",
+        "heldout-refined-material-temperature-001-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-001-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-001-fort.2.gz": "97d0ea9f8405f093fb47402351b1a770eb246993952a2cfedc254ae932c00c7c",
+        "heldout-refined-material-temperature-001-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-001-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-001-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-001-fort.29.gz": "822d9dccf7dafb3f7bd850ca4e2e1b3023daaa3391a4e81cc8566a0b874ff7f6",
+        "heldout-refined-material-temperature-001-run.log.gz": "bc5e6d2cdbc59ad6c1296136a4e60270cbdd3cf0a90107756c2a5d7d36c5a131",
+        "heldout-refined-material-temperature-001-completed.json.gz": "1e25651e7fb5e8c9f90b310e943dc0a5779d597e2fd264c95973c09eba9a7165",
+        "heldout-refined-material-temperature-002-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-002-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-002-fort.2.gz": "5e8631f83b5ee40627cce6b18eb38a2e2b5cc1b2d095d4233c3341f543902679",
+        "heldout-refined-material-temperature-002-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-002-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-002-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-002-fort.29.gz": "9b8325186da904a06bd28df386ab48e10e88b52d673b9f624675c8072c984271",
+        "heldout-refined-material-temperature-002-run.log.gz": "e1c063faee55fe817515851e592fa6f1945636d7a47b9c20c030825ca2374b30",
+        "heldout-refined-material-temperature-002-completed.json.gz": "b7ab3a3bde750576021666a0d909dedb1b9a899987ca661e85fcbfc7b608aef7",
+        "heldout-refined-material-temperature-003-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-003-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-003-fort.2.gz": "641b69bb658e20dfe16d3ef45757a4b2f8fe6c778f1fe25c5a5032dd77a77642",
+        "heldout-refined-material-temperature-003-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-003-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-003-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-003-fort.29.gz": "fc90c3df66ddf02a305922e38d890bc7cd9619282719ed000e80ba6d9178d4e1",
+        "heldout-refined-material-temperature-003-run.log.gz": "e63684cedb31898f795ef0df926baa09865ca663ca72bfb6e0fe252e7dc98027",
+        "heldout-refined-material-temperature-003-completed.json.gz": "5dfc7f00bd531c881e17f3e2ad473406b2233c7857083365fb50b70ac6171a96",
+        "heldout-refined-material-temperature-004-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-004-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-004-fort.2.gz": "69df75c56bbe2d1b3efc76819cb54ef0de329becf12b4c39caf8a849c5b613b2",
+        "heldout-refined-material-temperature-004-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-004-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-004-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-004-fort.29.gz": "f2ef6471bdbe3d26c65cfbd97f5a56c222933570579a3643c042dc24ae0d26a1",
+        "heldout-refined-material-temperature-004-run.log.gz": "5df6ed2ff0cdebdd04fb2d3a0b2b58f75ec228ff500c28e54440cae2570583f3",
+        "heldout-refined-material-temperature-004-completed.json.gz": "e725e0b61ffd0c9d7ab47b05a55cea470c5c1dde27cbc053bab05910691851b9",
+        "heldout-refined-material-temperature-005-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-005-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-005-fort.2.gz": "f6369b5dcafa9d6c6cddb210de98802c20e1680d13250b35aae0f9cab537a0b3",
+        "heldout-refined-material-temperature-005-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-005-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-005-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-005-fort.29.gz": "ff354b47347e4df572e60527e2624a920166fb4614d992b72c1c84fa5a0a85cd",
+        "heldout-refined-material-temperature-005-run.log.gz": "3eee7b2462c8bd86b3d736c83840b981155939ffb0606bfd2a25b65c6fa3afb7",
+        "heldout-refined-material-temperature-005-completed.json.gz": "7b44e56e628d956bac41d89f100a09fe2911c4be411eec8d73726d2ad7ece850",
+        "heldout-refined-material-temperature-006-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-006-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-006-fort.2.gz": "ce492c15c06db4c1bc42552c035432165c633f91ceb58567326d1fb7a289278f",
+        "heldout-refined-material-temperature-006-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-006-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-006-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-006-fort.29.gz": "355b7de4c01cadf8881da20a28ec261b14ee7597a565125a5f27200799a5987d",
+        "heldout-refined-material-temperature-006-run.log.gz": "33f3e7b72c1a26fd956eed45c0b23179aa388ec92912169841851f2253bc5739",
+        "heldout-refined-material-temperature-006-completed.json.gz": "2c64439f1b6c3d557274459f23b38709119edbb86103a8c9c7ce5f7204403285",
+        "heldout-refined-material-temperature-007-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-007-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-007-fort.2.gz": "9d92cb413202bd1bef9dbe7b1441ae5349307432c4e749645d3c2248fbc2d381",
+        "heldout-refined-material-temperature-007-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-007-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-007-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-007-fort.29.gz": "6484884ca21a85057ba184c82fd1d5785171ece39681d52ac83411236a2fdd5c",
+        "heldout-refined-material-temperature-007-run.log.gz": "409adaf2710eb152a832572b1ae73f7e5592354d0771f8e66687c9fdcd63020d",
+        "heldout-refined-material-temperature-007-completed.json.gz": "955e7421f44c47842904d162722f1ff4001dab2d70f3da93db83b1008ee8bceb",
+        "heldout-refined-material-temperature-008-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-008-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-008-fort.2.gz": "a75ba13bb7bf418a193d520c4e10485593539a05cc27d4b5728f589379f54b0c",
+        "heldout-refined-material-temperature-008-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-008-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-008-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-008-fort.29.gz": "768f160b77a44eb0102b4df44395e2d18b623a95a40c5ecc787ac0aad23df5ef",
+        "heldout-refined-material-temperature-008-run.log.gz": "456685a05434b6481cd0476aeba4dc2bd3aee085635c72580832069d270b6933",
+        "heldout-refined-material-temperature-008-completed.json.gz": "96c2d88cbf07d1c96464637fbdd7056069cdbc249b81955d742fdfc91b12b8cd",
+        "heldout-refined-material-temperature-009-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-009-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-009-fort.2.gz": "890814c9ec4b344fbe7921eb942188f074790d7d17e2e55ed63f9c9c8e0f2b56",
+        "heldout-refined-material-temperature-009-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-009-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-009-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-009-fort.29.gz": "687c76fd47eee95527ad67f30d7024091bf94b20e22d2fe450f84b5dc04fae38",
+        "heldout-refined-material-temperature-009-run.log.gz": "960ca2e7d4e0bba89f1aa517a4f5653b4e56fb8142cfce5050fda207c1a4aead",
+        "heldout-refined-material-temperature-009-completed.json.gz": "659c32b4d575b7fbd257f9a43a4feea2846894d4d0ffd1118941de3447267bff",
+        "heldout-refined-material-temperature-010-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-010-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-010-fort.2.gz": "95b36d7577985c0832d4f8e8b743315e86d3c958f28d1b2ff18726238235edab",
+        "heldout-refined-material-temperature-010-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-010-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-010-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-010-fort.29.gz": "cb70c8584d37de04a031d48bb979d1881c03bc7897cd4eb26a39433160958a8f",
+        "heldout-refined-material-temperature-010-run.log.gz": "becb5ca6fd3fb1e55fbf2c5ffe65aeaa03571ae684d0d548ef4a342c78a6d01a",
+        "heldout-refined-material-temperature-010-completed.json.gz": "d698f590a3fca248b876310ddb2f293786f485f4ed36cfab70b90555156a50a3",
+        "heldout-refined-material-temperature-011-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-011-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-011-fort.2.gz": "4c1a465dec7bec1346ad9bcb38abdd0470b0ff5f93f4a7390d0819d4d5756508",
+        "heldout-refined-material-temperature-011-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-011-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-011-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-011-fort.29.gz": "d295802965caf47f4f97c6d56dcd8c80eb33fe2ed3f1ea74b5935243461e0b65",
+        "heldout-refined-material-temperature-011-run.log.gz": "ef56126cb87b766623a422eb163fb17c4879a591ab6dd29824ae4f0938fda60b",
+        "heldout-refined-material-temperature-011-completed.json.gz": "43c680fbbc2849476d5740b6a37e830d3c8d486f90206be6501bf4ec27349add",
+        "heldout-refined-material-temperature-012-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-012-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-012-fort.2.gz": "0b887056a96c1430ba48f399a78e1b53578e21d4f58486e20722724036f786a9",
+        "heldout-refined-material-temperature-012-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-012-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-012-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-012-fort.29.gz": "f38f3af940dad2d2f11e42ea78b6d13b691e0ca7c1d16ea13bb96e6c049b2615",
+        "heldout-refined-material-temperature-012-run.log.gz": "ee5e36a01d74e35eaf79df7490a989ca0402a8df0f60fd8fd1dae729cea04f34",
+        "heldout-refined-material-temperature-012-completed.json.gz": "cfd740e676469dc5d675d9d94726f85fe15210498d25aafa86f33a9c785aae80",
+        "heldout-refined-material-temperature-013-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-013-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-013-fort.2.gz": "35bf058e06f78debea0d451717511a9a2262107b79008526b789667c33c6be89",
+        "heldout-refined-material-temperature-013-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-013-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-013-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-013-fort.29.gz": "a5fa59c4019baf53fb826be77b8107979658413149662910107af67447c84289",
+        "heldout-refined-material-temperature-013-run.log.gz": "7174e03edbe16a29b648a031c9c464ab494d745d78e70d413b618eb2f709a3af",
+        "heldout-refined-material-temperature-013-completed.json.gz": "c7d287c072f9a26241215e1ab2fc7d974874d427b7478e7507b52b3712eb1538",
+        "heldout-refined-material-temperature-014-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-014-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-014-fort.2.gz": "b7e099a14e525114e0b02bf2cabb62164e789022758788fbfedf00745028a277",
+        "heldout-refined-material-temperature-014-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-014-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-014-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-014-fort.29.gz": "456b8d283d8b0ddec9b1891174ee42e58d9ef0f954426db2ca2b7c40fc72fa94",
+        "heldout-refined-material-temperature-014-run.log.gz": "8c2f65d893742ba6ae4f57d68d5ef342d04092b4a6e1527750db765827ba5254",
+        "heldout-refined-material-temperature-014-completed.json.gz": "c78e2a4d9be8b6a77b2b8e2974908390e27b176a46b740ec1f0c7753b3b75b53",
+        "heldout-refined-material-temperature-015-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-015-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-015-fort.2.gz": "f25a44240f9a61b846d2cb45bfe4dd91aa0b5b4cd6712288cdf14b7ee5cd75f8",
+        "heldout-refined-material-temperature-015-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-015-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-015-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-015-fort.29.gz": "673fe79484ad7c6f04345c187b9e35b63589b05a783432f409ee0c2a41c883cd",
+        "heldout-refined-material-temperature-015-run.log.gz": "5049057a040245d352b7478a18e0fa0b847a1bb9ba3dd74e447930508246e80d",
+        "heldout-refined-material-temperature-015-completed.json.gz": "8bcf329f3d92a45b26f1f820f2468cff7c58285e6db3196100eb9ff389559971",
+        "heldout-refined-material-temperature-016-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-016-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-016-fort.2.gz": "d39715a942b50ddb33db12af9f151942cd986b4c6f0c8e93a22093c0612a9834",
+        "heldout-refined-material-temperature-016-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-016-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-016-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-016-fort.29.gz": "9fbf81bc9f8cdbf85d9e653f1cdaebaf9421caaee88fb0bccaf2c695be185e39",
+        "heldout-refined-material-temperature-016-run.log.gz": "4888e19ac48a4030a87207a0ba193a781c9c2d1a15d3a68e6bc74ffe22ee543b",
+        "heldout-refined-material-temperature-016-completed.json.gz": "1dbd1620d4d96adf967861c7055bbe092415ba073a5ee66dee65df30482d9f8b",
+        "heldout-refined-material-temperature-017-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-017-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-017-fort.2.gz": "5af09ca8bc631d76a2762071df6417390180448a51a0bc4c8d6aa02a13e94a28",
+        "heldout-refined-material-temperature-017-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-017-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-017-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-017-fort.29.gz": "27f50c09b4b9ca3cc372b9c65b4e72fecc1075ac9cd5144d6923125eb4eb8e30",
+        "heldout-refined-material-temperature-017-run.log.gz": "72d754b9070f1bb2d767e260894e1604c0c706c13faa475aed8d90a9f07b3bc9",
+        "heldout-refined-material-temperature-017-completed.json.gz": "136f3d19f6b651a993cdfa57084d6934adf2c6d5f229d33052d0cd3ff00cb481",
+        "heldout-refined-material-temperature-018-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-018-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-018-fort.2.gz": "0bb7637e7fd75412ac88378f6792c01a6c64004417c9da6f8c476b75c6e7bc35",
+        "heldout-refined-material-temperature-018-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-018-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-018-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-018-fort.29.gz": "33637b90968066128d2ee31bc3b4c7a4b176909e99b8bc1a8a11d7918ae440e8",
+        "heldout-refined-material-temperature-018-run.log.gz": "e31215452a1fb60873ef2c43533edfc82baca39fd539d9e21e8a8b2fb7788357",
+        "heldout-refined-material-temperature-018-completed.json.gz": "fef2c08f52c4fd9167bfc5e9a42697ac40f612f22316b730728e05254adf7d88",
+        "heldout-refined-material-temperature-019-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-019-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-019-fort.2.gz": "b32b71b86718b0c1ebf1825990ceeab78e774aca230242fbdab663f14a932537",
+        "heldout-refined-material-temperature-019-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-019-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-019-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-019-fort.29.gz": "0f78f1c2e8c20a87bf1d4a603d61a8d097c574f8706c5fec655975cd342d76be",
+        "heldout-refined-material-temperature-019-run.log.gz": "22e1f0c5ddd5bbaa09a23f821c14e6f7b622e61c914ef4f72e517e01c020b7b9",
+        "heldout-refined-material-temperature-019-completed.json.gz": "7328aa3f96b6318be0938e1e267b9a7079b15af5cf2a953fc3f8d347bf364d0c",
+        "heldout-refined-material-temperature-020-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+        "heldout-refined-material-temperature-020-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+        "heldout-refined-material-temperature-020-fort.2.gz": "7dd21b22e723d1a8d084cbe17cb91d9a632509d6d970b525c3741ff54f9c8281",
+        "heldout-refined-material-temperature-020-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+        "heldout-refined-material-temperature-020-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-refined-material-temperature-020-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+        "heldout-refined-material-temperature-020-fort.29.gz": "ba88f9c227db90109980a4b19af77abb7199140b5278094c5aa252f1b01fe0c0",
+        "heldout-refined-material-temperature-020-run.log.gz": "a51035cdc07da1356310b13b2678560fb21a98c76d4ab337d84f484aaa0ac393",
+        "heldout-refined-material-temperature-020-completed.json.gz": "ee39fd187d6028f7343b49e2b52f185dc49d22e726fdbe1efc1418d9e137b019"
+      },
+      "opacity_sha256": "48cd3d5335dc5b96345ef39920e5bdd7659b1d3696efb845f7feff6f8a452185",
+      "log_temperature": [
+        21,
+        3.146128035678238,
+        3.7183298264434845
+      ],
+      "log_density": [
+        19,
+        -10.4,
+        -3.3
+      ]
+    },
+    {
+      "name": "solar-low-gravity-ng",
+      "XH": 0.7,
+      "X3": 0,
+      "Teff_K": 2800,
+      "log_g": 4.9,
+      "depths": 300,
+      "frequencies": 20000,
+      "diagnostics": {
+        "T": 4007.675758523391,
+        "Pgas": 10974945.015119474,
+        "source_density": 6.370155769645841e-05,
+        "column_mass": 138.1663572501416,
+        "flux_error": 1.0469453721628774e-05,
+        "correction": 4.45e-07,
+        "effective_flux_error": 0.0002084477460453371,
+        "hydrostatic_error": 1.3027605860749247e-07,
+        "chemical_density_error": 2.4935609133081016e-13,
+        "iterations": 28,
+        "depths": 300,
+        "tau_bracket": [
+          99.58942983850999,
+          107.4477526761034
+        ],
+        "temperature_range": [
+          1606.023100988311,
+          4707.339185240026
+        ],
+        "density_range": [
+          3.53004029810872e-11,
+          0.00020264125868552584
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54/tlusty/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "8f7c1cce2e7c0f38627ac1122f305c2c087f9dd1379ee444d7d4805b82721464",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "0007b2fb333363bd482fb0476f09d32e947a2a1842cc6bf7229bbfeb97ace9a2",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        }
+      },
+      "files": {
+        "solar-low-gravity-ng-run.log.gz": "e610ef7ce2252b67672a79735503e0a09158df7d2bae428f0ccb1d12dae9eadb",
+        "solar-low-gravity-ng-fort.9.gz": "aae7d9c67905601ec9b2fb000e238353429efe2ab6cb4a553c2587d83571230e",
+        "solar-low-gravity-ng-fort.5.gz": "6dfabd1bea8bf292e033cbea08903058d70b87a033c3c7387ff2289c3afda08f",
+        "solar-low-gravity-ng-fort.8.gz": "09ff757f7d4f4bd25b94ed2ddf4a317ce782d3e0024d528d1d5d9036dba4e149",
+        "solar-low-gravity-ng-tas.gz": "ca885d32d6d598de9564b293ae6535d7bfc2cf4e8df104a5d83a3133b16253a6",
+        "solar-low-gravity-ng-ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "solar-low-gravity-ng-opacity.sha256.gz": "6f8bf3d2db52875717b71029adbb7199db51af8f3f0db337ee5692fda5b6a579",
+        "solar-low-gravity-ng-completed.json.gz": "92fdc243c4bc38e950c04e98cd31906e03b0438a1ac32802fcb1262fe16f8ec9",
+        "solar-low-gravity-ng-specification.json.gz": "f69b126251cf45d43b643b81d82f2de16905f541d54fb273d8e78706d57775e8"
+      }
+    },
+    {
+      "name": "solar-low-gravity-corrected-jacobian",
+      "XH": 0.7,
+      "X3": 0,
+      "Teff_K": 2800,
+      "log_g": 4.9,
+      "depths": 300,
+      "frequencies": 20000,
+      "diagnostics": {
+        "T": 4007.6823596124586,
+        "Pgas": 10974858.790482778,
+        "source_density": 6.370078481947781e-05,
+        "column_mass": 138.165271746492,
+        "flux_error": 1.1442341013356838e-05,
+        "correction": 2.96e-07,
+        "effective_flux_error": 0.00019760960051418142,
+        "hydrostatic_error": 1.3027578393831618e-07,
+        "chemical_density_error": 2.4780177909633494e-13,
+        "iterations": 8,
+        "depths": 300,
+        "tau_bracket": [
+          99.5910432443861,
+          107.44950003519195
+        ],
+        "temperature_range": [
+          1606.0389608180092,
+          4707.351420693611
+        ],
+        "density_range": [
+          3.529994396441213e-11,
+          0.00020264009163797238
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/tmp/ember-nongrey-jacobian-source/tlusty/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/tmp/ember-nongrey-jacobian-source",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "ba44fa283cad260e6c390ebc58f369275ea0f94ee589a3213b518c86ff66c0b1",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "d1f42ce1308f62b5c916f74656e5e7f33ff8f7f4d94756b0f3ceb8cf1c450d08",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        }
+      },
+      "files": {
+        "solar-low-gravity-corrected-jacobian-run.log.gz": "19af7b86ba29ef20215f17b67206860a2374b354ed7c6a8f1860660f417f6dbb",
+        "solar-low-gravity-corrected-jacobian-fort.9.gz": "0d9e9f349f07e776718d7543ea75bd0f7139c3a3e12b33eaa85887e04f247562",
+        "solar-low-gravity-corrected-jacobian-fort.5.gz": "6dfabd1bea8bf292e033cbea08903058d70b87a033c3c7387ff2289c3afda08f",
+        "solar-low-gravity-corrected-jacobian-fort.8.gz": "09ff757f7d4f4bd25b94ed2ddf4a317ce782d3e0024d528d1d5d9036dba4e149",
+        "solar-low-gravity-corrected-jacobian-tas.gz": "7ea1fb5fe89e9d5a42db649cbcbdb880da9d765a44a59a491471657e31248dfc",
+        "solar-low-gravity-corrected-jacobian-ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "solar-low-gravity-corrected-jacobian-opacity.sha256.gz": "6f8bf3d2db52875717b71029adbb7199db51af8f3f0db337ee5692fda5b6a579",
+        "solar-low-gravity-corrected-jacobian-completed.json.gz": "cdf9d685e3b0eacd6d020927d3c47ded32bbbc4795358dde3a20af8dfb3cec1d",
+        "solar-low-gravity-corrected-jacobian-specification.json.gz": "f8fe2b82489e825b5f8d6667a2e7c70c8732a963777499d1d9695962ea746699"
+      }
+    },
+    {
+      "name": "four-axis-heldout-corrected-jacobian",
+      "XH": 0.55,
+      "X3": 0.1,
+      "Teff_K": 2900,
+      "log_g": 5.1,
+      "depths": 300,
+      "frequencies": 20000,
+      "diagnostics": {
+        "T": 4171.068643477986,
+        "Pgas": 13739016.984267497,
+        "source_density": 8.174550817691686e-05,
+        "column_mass": 109.13287860730341,
+        "flux_error": 1.3153977340918388e-05,
+        "correction": 8.16e-08,
+        "effective_flux_error": 0.0001979746660938364,
+        "hydrostatic_error": 1.3747042859613146e-07,
+        "chemical_density_error": 3.4083846855992306e-13,
+        "iterations": 15,
+        "depths": 300,
+        "tau_bracket": [
+          94.61465295377091,
+          102.08197032811006
+        ],
+        "temperature_range": [
+          1751.743723497243,
+          4975.734170430585
+        ],
+        "density_range": [
+          9.259579061818531e-11,
+          0.00026395486218904927
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/tmp/ember-nongrey-jacobian-source/tlusty/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/tmp/ember-nongrey-jacobian-source",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "ba44fa283cad260e6c390ebc58f369275ea0f94ee589a3213b518c86ff66c0b1",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "d1f42ce1308f62b5c916f74656e5e7f33ff8f7f4d94756b0f3ceb8cf1c450d08",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        }
+      },
+      "files": {
+        "four-axis-heldout-corrected-jacobian-run.log.gz": "da2cdc5416ec66c4185cecfbb47801ecd4f2585696199a4f007730fca43c7b3d",
+        "four-axis-heldout-corrected-jacobian-fort.9.gz": "dc66b22180154b8553e3b6d37e34eb016c3f05d74e71fb845550ffb91c289c03",
+        "four-axis-heldout-corrected-jacobian-fort.5.gz": "511a62974da3f80afd07a559003b26a197ee751dd2604cca48f35034958b92dd",
+        "four-axis-heldout-corrected-jacobian-fort.8.gz": "62be196554d82f0ee37ec645da6de16136cd60e104267c804e92d124eba13d11",
+        "four-axis-heldout-corrected-jacobian-tas.gz": "7ea1fb5fe89e9d5a42db649cbcbdb880da9d765a44a59a491471657e31248dfc",
+        "four-axis-heldout-corrected-jacobian-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "four-axis-heldout-corrected-jacobian-opacity.sha256.gz": "31b870e6a4c9efc5d8174d70ba5d88ea1950c76c4bd34d690745db029ae5ce78",
+        "four-axis-heldout-corrected-jacobian-completed.json.gz": "6a0c6c991416aaf4707d1e1e3e1e5bdc4f9ab5dc86dee3ef30e74428c963a554",
+        "four-axis-heldout-corrected-jacobian-specification.json.gz": "7db1a35533a2ffc673efa304f734df474c96e869bd012a5b4ecf937cb0482c22"
+      }
+    },
+    {
+      "name": "solar-2800-opacity-derivative",
+      "XH": 0.7,
+      "X3": 0.0,
+      "Teff_K": 2800,
+      "log_g": 5.15,
+      "depths": 300,
+      "frequencies": 20000,
+      "diagnostics": {
+        "T": 4030.19325786349,
+        "Pgas": 16402534.23219876,
+        "source_density": 9.71692823008433e-05,
+        "column_mass": 116.12103464391119,
+        "flux_error": 6.497553990869598e-05,
+        "correction": 5.95e-07,
+        "effective_flux_error": 0.0001979953894603037,
+        "hydrostatic_error": 1.4600189968128063e-07,
+        "chemical_density_error": 2.304822999121825e-13,
+        "iterations": 1,
+        "depths": 300,
+        "tau_bracket": [
+          93.66806479651437,
+          101.0028989380992
+        ],
+        "temperature_range": [
+          1590.9933648676245,
+          4738.9043258234105
+        ],
+        "density_range": [
+          1.1139473879460913e-10,
+          0.0003014289361224968
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/tmp/ember-nongrey-opactr-source/tlusty/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/tmp/ember-nongrey-opactr-source",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "0b3214a4b18b6a927f2d512475f94c5895b2790e29185e82108db35724218be1",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "646336af37d41900c3fb07199b600667a5a37517ff8dfff48f7d898789c60797",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        }
+      },
+      "files": {
+        "solar-2800-opacity-derivative-run.log.gz": "95824d5d631be776598a0b430d5fb963f8d1ebb708e603dacdc1aa086edb0bd8",
+        "solar-2800-opacity-derivative-fort.9.gz": "2d601f63d1101f55cc02910ed7ccd0e878e921aae7541e1132063365ca160bdb",
+        "solar-2800-opacity-derivative-fort.5.gz": "5e917801f2f26573fd9a0698ad609d0e63645f55a3666c7fe09b1dbcc97501e4",
+        "solar-2800-opacity-derivative-fort.8.gz": "9446c0863c3c46e6850905c8cb8cc4a272fec0add3c4f876ec4af41e363213b1",
+        "solar-2800-opacity-derivative-tas.gz": "7ea1fb5fe89e9d5a42db649cbcbdb880da9d765a44a59a491471657e31248dfc",
+        "solar-2800-opacity-derivative-ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "solar-2800-opacity-derivative-opacity.sha256.gz": "6f8bf3d2db52875717b71029adbb7199db51af8f3f0db337ee5692fda5b6a579",
+        "solar-2800-opacity-derivative-completed.json.gz": "227a3f8033816aea6ad8148028b9207c718c9fb87b4706fdba09de19d2d4b167"
+      },
+      "convection_derivative_step": 0.001
+    },
+    {
+      "name": "solar-3000-small-convection-step",
+      "XH": 0.7,
+      "X3": 0.0,
+      "Teff_K": 3000,
+      "log_g": 5.15,
+      "depths": 300,
+      "frequencies": 20000,
+      "diagnostics": {
+        "T": 4225.796583254713,
+        "Pgas": 12972257.732125388,
+        "source_density": 6.784282114918748e-05,
+        "column_mass": 91.83654157238679,
+        "flux_error": 8.334013797961504e-06,
+        "correction": 4.39e-07,
+        "effective_flux_error": 0.00019980809430286683,
+        "hydrostatic_error": 1.3684623723086986e-07,
+        "chemical_density_error": 2.560174294785611e-13,
+        "iterations": 3,
+        "depths": 300,
+        "tau_bracket": [
+          97.99394599011039,
+          105.97270600145485
+        ],
+        "temperature_range": [
+          1924.9347040404273,
+          5002.492468279977
+        ],
+        "density_range": [
+          1.6354858050400467e-11,
+          0.00021797229764453056
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/tmp/ember-nongrey-opactr-source/tlusty/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/tmp/ember-nongrey-opactr-source",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "0b3214a4b18b6a927f2d512475f94c5895b2790e29185e82108db35724218be1",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "646336af37d41900c3fb07199b600667a5a37517ff8dfff48f7d898789c60797",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        }
+      },
+      "files": {
+        "solar-3000-small-convection-step-run.log.gz": "0ab5e95c5f98ede9cbaf3821ac89d8afcaa2dcd4fd16fc32048cfc89497e795e",
+        "solar-3000-small-convection-step-fort.9.gz": "0e936f532ea615062641d5628198a3fbb9c7bb0f1c5ff6c55f196f65ef40523f",
+        "solar-3000-small-convection-step-fort.5.gz": "ca41cb2f782b290d2f659e628c0b0944f477b13121f0e659f1c94f59f09d37a6",
+        "solar-3000-small-convection-step-fort.8.gz": "66136b336c332c2f5ce3b12c7932258f082bb1b90a24958d64b3337e96bf2a57",
+        "solar-3000-small-convection-step-tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+        "solar-3000-small-convection-step-ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "solar-3000-small-convection-step-opacity.sha256.gz": "6f8bf3d2db52875717b71029adbb7199db51af8f3f0db337ee5692fda5b6a579",
+        "solar-3000-small-convection-step-completed.json.gz": "54e1f43ef8bdd54651f77308abf336d58508dc6e97060028ff8ad3ee88c87ef5"
+      },
+      "convection_derivative_step": 1e-05
+    },
+    {
+      "name": "heldout-composition-final",
+      "XH": 0.55,
+      "X3": 0.1,
+      "Teff_K": 2800,
+      "log_g": 5.15,
+      "depths": 300,
+      "frequencies": 20000,
+      "convection_derivative_step": 1e-05,
+      "diagnostics": {
+        "T": 4080.0783407188737,
+        "Pgas": 16700398.064969193,
+        "source_density": 0.00010556942622644167,
+        "column_mass": 118.22974898070166,
+        "flux_error": 3.5731497735724815e-05,
+        "correction": 7.1e-07,
+        "effective_flux_error": 0.00019804947202284318,
+        "hydrostatic_error": 1.4459155273094382e-07,
+        "chemical_density_error": 3.2585045772748344e-13,
+        "iterations": 1,
+        "depths": 300,
+        "tau_bracket": [
+          92.76624267677244,
+          100.05187700396655
+        ],
+        "temperature_range": [
+          1563.654532573016,
+          4818.551827069351
+        ],
+        "density_range": [
+          1.2064625873319807e-10,
+          0.00031973952285851
+        ]
+      },
+      "opacity": {
+        "temperature_K": [
+          1400,
+          15000
+        ],
+        "density_g_cm3": [
+          1e-13,
+          0.001
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/tmp/ember-nongrey-opactr-source/tlusty/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/tmp/ember-nongrey-opactr-source",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "0b3214a4b18b6a927f2d512475f94c5895b2790e29185e82108db35724218be1",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "646336af37d41900c3fb07199b600667a5a37517ff8dfff48f7d898789c60797",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        }
+      },
+      "files": {
+        "heldout-composition-final-run.log.gz": "27ebd9282a3c28a8d1780d93271674eb441937e849fa364bd66327d633f6aa5d",
+        "heldout-composition-final-fort.9.gz": "1d4b0349874bc3c773a43655c0e258a108931ba4a9979d9538731aec5897446f",
+        "heldout-composition-final-fort.5.gz": "ec4284d5b9ec569946f1b46c51a259f29bdd00ffe08d33f4832888a8a71578ae",
+        "heldout-composition-final-fort.8.gz": "62be196554d82f0ee37ec645da6de16136cd60e104267c804e92d124eba13d11",
+        "heldout-composition-final-tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+        "heldout-composition-final-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-composition-final-opacity.sha256.gz": "31b870e6a4c9efc5d8174d70ba5d88ea1950c76c4bd34d690745db029ae5ce78",
+        "heldout-composition-final-completed.json.gz": "d38116aa1b4652bbb952b1e69c81aba05e291b3387eb39561001f338a12869d8"
+      }
+    },
+    {
+      "name": "heldout-four-axis-final",
+      "XH": 0.55,
+      "X3": 0.1,
+      "Teff_K": 2900,
+      "log_g": 5.1,
+      "depths": 300,
+      "frequencies": 20000,
+      "convection_derivative_step": 1e-05,
+      "diagnostics": {
+        "T": 4171.068084318934,
+        "Pgas": 13739025.864475297,
+        "source_density": 8.174558858953301e-05,
+        "column_mass": 109.1329491452871,
+        "flux_error": 1.228056242164044e-05,
+        "correction": 7.98e-08,
+        "effective_flux_error": 0.00019884886516163824,
+        "hydrostatic_error": 1.3747045168877037e-07,
+        "chemical_density_error": 3.4061642395499803e-13,
+        "iterations": 2,
+        "depths": 300,
+        "tau_bracket": [
+          94.61452216436983,
+          102.08182847672457
+        ],
+        "temperature_range": [
+          1751.7421024264202,
+          4975.733039140488
+        ],
+        "density_range": [
+          9.259593070097098e-11,
+          0.0002639549866111788
+        ]
+      },
+      "opacity": {
+        "temperature_K": [
+          1400,
+          15000
+        ],
+        "density_g_cm3": [
+          1e-13,
+          0.001
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/tmp/ember-nongrey-opactr-source/tlusty/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/tmp/ember-nongrey-opactr-source",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "0b3214a4b18b6a927f2d512475f94c5895b2790e29185e82108db35724218be1",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "646336af37d41900c3fb07199b600667a5a37517ff8dfff48f7d898789c60797",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        }
+      },
+      "files": {
+        "heldout-four-axis-final-run.log.gz": "8a4d4df57e0fd407ed2574c96cd1ed5105127fa5ec477b08d68703ae3527b0a5",
+        "heldout-four-axis-final-fort.9.gz": "9f31ebf14b134a2ae4a7029e6e3bc2b593edddfe08d0dcd2f31e0e9dd5e2605d",
+        "heldout-four-axis-final-fort.5.gz": "511a62974da3f80afd07a559003b26a197ee751dd2604cca48f35034958b92dd",
+        "heldout-four-axis-final-fort.8.gz": "1f168bd33fd861daa0d10a30893f27c00b117e19f8175a4045f4f0b3e08a0c2c",
+        "heldout-four-axis-final-tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+        "heldout-four-axis-final-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+        "heldout-four-axis-final-opacity.sha256.gz": "31b870e6a4c9efc5d8174d70ba5d88ea1950c76c4bd34d690745db029ae5ce78",
+        "heldout-four-axis-final-completed.json.gz": "e61a7bba06c47c129a2b5ce5284fea97a85fcf2f28951e285ffc0678b5b187b8"
+      }
+    },
+    {
+      "name": "solar-he3-hot-convective-initialization",
+      "purpose": "Native CONREF enabled only for the first three iterations to establish an initial convective profile; remaining eight iterations solve unchanged equilibrium equations. This completed target-composition model supplies only the initial guess for a separate canonical final-grid solve.",
+      "XH": 0.7,
+      "X3": 0.12,
+      "Teff_K": 3200,
+      "log_g": 5.4,
+      "depths": 300,
+      "frequencies": 20000,
+      "diagnostics": {
+        "T": 4467.198022069225,
+        "Pgas": 15154451.918489672,
+        "source_density": 6.938934196417327e-05,
+        "column_mass": 60.330952780332524,
+        "flux_error": 6.291141966485725e-06,
+        "correction": 3.3e-07,
+        "effective_flux_error": 0.00020138642422740105,
+        "hydrostatic_error": 1.420067436974648e-07,
+        "chemical_density_error": 1.7408297026122455e-13,
+        "iterations": 11,
+        "depths": 300,
+        "tau_bracket": [
+          96.85639861902965,
+          104.89297571247289
+        ],
+        "temperature_range": [
+          2236.006942155506,
+          5357.999546375563
+        ],
+        "density_range": [
+          1.8563367876487864e-11,
+          0.0002246584111487945
+        ]
+      },
+      "provenance": {
+        "format": 1,
+        "tlusty": "/tmp/ember-nongrey-opactr-source/tlusty/tlusty.exe",
+        "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+        "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+        "opacity_method": "sampling",
+        "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+        "tlusty_source": "/tmp/ember-nongrey-opactr-source",
+        "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+        "line_lists": [
+          "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+          "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+        ],
+        "inputs": {
+          "tl208-s54.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+            "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+          },
+          "synple.tar.gz": {
+            "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+            "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+          },
+          "gfATOc.19.gz": {
+            "url": "ftp:gfATOc.19.gz",
+            "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+          },
+          "gfMOLsun.20.gz": {
+            "url": "ftp:gfMOLsun.20.gz",
+            "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+          },
+          "gfTiO.20.gz": {
+            "url": "ftp:gfTiO.20.gz",
+            "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+          },
+          "H2O-8.20.gz": {
+            "url": "ftp:H2O-8.20.gz",
+            "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+          },
+          "optables.tar.gz": {
+            "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+            "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+          }
+        },
+        "patches": {
+          "tlusty208-ember.patch": "0b3214a4b18b6a927f2d512475f94c5895b2790e29185e82108db35724218be1",
+          "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+          "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        },
+        "line_list_sha256": [
+          "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+          "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+          "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+          "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+        ],
+        "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+        "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+        "executables": {
+          "tlusty": "646336af37d41900c3fb07199b600667a5a37517ff8dfff48f7d898789c60797",
+          "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+          "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+        }
+      },
+      "files": {
+        "solar-he3-hot-convective-initialization-fort.5.gz": "732c3c21ed202c2929cc87b9c2b0fde11756a0c42f452e14e69b9bc54e26854f",
+        "solar-he3-hot-convective-initialization-fort.7.gz": "ed3be381fdab54714b09d62653b491f53fbc09a77c3519054971e7d965c7ac69",
+        "solar-he3-hot-convective-initialization-fort.8.gz": "ae6c334cc193aac617d019c7373dbd1a17fa96a7ad8f9b3e5540e7fd1d7e7196",
+        "solar-he3-hot-convective-initialization-fort.9.gz": "d11b6a71be7f434989048086d06653995d1bafdc6336c00d3ab844524a4f2127",
+        "solar-he3-hot-convective-initialization-run.log.gz": "ca89c63c798b71c3fec1c78cb2a8ef223f986261c871e1ed3bdcde3fd560d094",
+        "solar-he3-hot-convective-initialization-tas.gz": "1e640a49f183c35c062fcfe9393b8d56fb3ebbc13771bd40745c150862f9b616",
+        "solar-he3-hot-convective-initialization-ember-masses.dat.gz": "6d2a18e878c51114fa6df1cdc2c948c77a3df78bf86161c81648cfcbbeacaf41",
+        "solar-he3-hot-convective-initialization-fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+        "solar-he3-hot-convective-initialization-opacity.sha256.gz": "628c63d943051886c31bbfc9d973bcb7e406fa3666880d59110dd6082b6079bc",
+        "solar-he3-hot-convective-initialization-physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+        "solar-he3-hot-convective-initialization-completed.json.gz": "62e06b8a30c9b3e3d9390a65579f30df0e789b1c85315789e08682a205dea2ef",
+        "solar-he3-hot-convective-initialization-validation.json.gz": "b9b49cd6c57afd7bf393114a6b31b47bff8b247ceb7b2851c5b26a54333316e3",
+        "solar-he3-hot-convective-initialization-initialization.json.gz": "5ce7d84e6e55e9cf934d2848385c4692f62cc30d5f56aa5fee06f81b21bae625"
+      },
+      "canonical_final_cell": {
+        "manifest": "data/atmosphere/sources/nongrey_gs98_z020/manifest.json",
+        "coordinates": [
+          0.7,
+          0.12,
+          3200,
+          5.4
+        ],
+        "log_sha256": "652d9bd2caa24a732651fcf047581e538bbdc77e7922d8c2e15f71ddf998c6ee",
+        "diagnostics": {
+          "T": 4467.198032063108,
+          "Pgas": 15154451.800067104,
+          "source_density": 6.938934100326745e-05,
+          "column_mass": 60.33095230888395,
+          "flux_error": 1.268415062583017e-05,
+          "correction": 2.1e-07,
+          "effective_flux_error": 0.00020138853770779175,
+          "hydrostatic_error": 1.4200674303133098e-07,
+          "chemical_density_error": 1.7252865802674933e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            96.85640026000527,
+            104.89297752243273
+          ],
+          "temperature_range": [
+            2236.006779151631,
+            5357.99957842636
+          ],
+          "density_range": [
+            1.856337031184201e-11,
+            0.00022465840830237612
+          ]
+        },
+        "relative_matching_difference": {
+          "T": 2.2371704488932664e-09,
+          "Pgas": -7.814374813897018e-09
+        }
+      }
+    }
+  ],
+  "relative_matching_state_changes": {
+    "solar-300-30000": {
+      "T": 5.807273833102755e-05,
+      "Pgas": -0.00036539015192993407
+    },
+    "solar-400-20000": {
+      "T": 1.5337112666546915e-06,
+      "Pgas": -4.02260978538127e-06
+    }
+  },
+  "composition_interpolation": {
+    "XH": 0.55,
+    "X3": 0.1,
+    "teff_K": 2800,
+    "log_g": 5.15,
+    "direct_record": "heldout-composition-final",
+    "interpolated": {
+      "T": 4086.5773322936743,
+      "Pgas": 16712180.619017318,
+      "source_density": 0.00010587730947553751
+    },
+    "direct": {
+      "T": 4080.0783407188737,
+      "Pgas": 16700398.064969193,
+      "source_density": 0.00010556942622644167
+    },
+    "relative_difference": {
+      "T": 0.0015928595071179608,
+      "Pgas": 0.0007055253415091389,
+      "source_density": 0.0029164054414339002
+    },
+    "note": "Current-source log interpolation of accepted surrounding nodes. Source density is diagnostic only; runtime uses the interior EOS at the actual composition. This is a local check, not a global interpolation-error bound.",
+    "corners": [
+      {
+        "XH": 0.45,
+        "X3": 0,
+        "teff_K": 2800,
+        "log_g": 5.15,
+        "log_sha256": "c055dd812fa10784afac148c05d1f5fdf72b5589ce0c37f8ee3a297606575279",
+        "convergence_sha256": "30a9674c602a1dc2d6c2092c96943e1df29034a90bf64a320ef2bebabcba57b5",
+        "diagnostics": {
+          "T": 4116.280075622461,
+          "Pgas": 16966427.272618044,
+          "source_density": 0.00011659802961216917,
+          "column_mass": 120.11309140876345,
+          "flux_error": 5.168944860578506e-05,
+          "correction": 5.17e-07,
+          "effective_flux_error": 0.00019811797660207464,
+          "hydrostatic_error": 1.436183980629835e-07,
+          "chemical_density_error": 2.2937207688755734e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            99.9199474576718,
+            107.78678579481557
+          ],
+          "temperature_range": [
+            1545.8039859605735,
+            4879.969012869111
+          ],
+          "density_range": [
+            1.3212133785659543e-10,
+            0.0003485890781428479
+          ]
+        },
+        "weight": 0.09999999999999994
+      },
+      {
+        "XH": 0.45,
+        "X3": 0.12,
+        "teff_K": 2800,
+        "log_g": 5.15,
+        "log_sha256": "345d0ff2b2d75c555a34dcfd05b95a676acacf8ac36ea756c11d935c8a9918c1",
+        "convergence_sha256": "0af476d065ce31dfa5b23c0e4c2046af1a08901ae2f72c5a591c8f499d0a402d",
+        "diagnostics": {
+          "T": 4122.78831931437,
+          "Pgas": 16931061.77886157,
+          "source_density": 0.00011314029255079878,
+          "column_mass": 119.86272296020944,
+          "flux_error": 4.322945534940281e-05,
+          "correction": 4.76e-07,
+          "effective_flux_error": 0.0001981504261394651,
+          "hydrostatic_error": 1.4329209108154828e-07,
+          "chemical_density_error": 2.355893258254582e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            99.86641758261177,
+            107.73338306926047
+          ],
+          "temperature_range": [
+            1542.7374169259979,
+            4891.477816402009
+          ],
+          "density_range": [
+            1.2713416148222716e-10,
+            0.00033692414925853045
+          ]
+        },
+        "weight": 0.49999999999999983
+      },
+      {
+        "XH": 0.7,
+        "X3": 0,
+        "teff_K": 2800,
+        "log_g": 5.15,
+        "log_sha256": "5b016ea282bff85eaefc8344238f0b974133d44f555302163bbe4a1850902277",
+        "convergence_sha256": "0305d7a1077768d639c25cb1241d253313326e339a2a1d660056f9993dc1b6ee",
+        "diagnostics": {
+          "T": 4030.1932772216132,
+          "Pgas": 16402533.838441934,
+          "source_density": 9.716927882319269e-05,
+          "column_mass": 116.12103185632701,
+          "flux_error": 4.863056872128624e-05,
+          "correction": 3.11e-07,
+          "effective_flux_error": 0.00019797015093114823,
+          "hydrostatic_error": 1.4600189901514682e-07,
+          "chemical_density_error": 2.298161660974074e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            93.66806952764426,
+            101.0029040575958
+          ],
+          "temperature_range": [
+            1590.9933308817162,
+            4738.904358616797
+          ],
+          "density_range": [
+            1.1139474154726214e-10,
+            0.0003014289316672925
+          ]
+        },
+        "weight": 0.0666666666666667
+      },
+      {
+        "XH": 0.7,
+        "X3": 0.12,
+        "teff_K": 2800,
+        "log_g": 5.15,
+        "log_sha256": "e3f92fc4b0c295a64b57df758c572b66d3468ea4c51f36b17bccf97d43812088",
+        "convergence_sha256": "069192125efbaeefc73fbf30939f138246070f51e672d93483e48eaf75101391",
+        "diagnostics": {
+          "T": 4035.301229913666,
+          "Pgas": 16376223.695661388,
+          "source_density": 9.472608413153476e-05,
+          "column_mass": 115.93477036414713,
+          "flux_error": 5.755090314174538e-05,
+          "correction": 6.05e-07,
+          "effective_flux_error": 0.00019805307752696066,
+          "hydrostatic_error": 1.4577419937822356e-07,
+          "chemical_density_error": 2.2515322939398175e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            93.56774343429585,
+            100.89505176659455
+          ],
+          "temperature_range": [
+            1588.2448449621438,
+            4747.128133653318
+          ],
+          "density_range": [
+            1.0881053102792307e-10,
+            0.0002928101207737579
+          ]
+        },
+        "weight": 0.33333333333333354
+      }
+    ]
+  },
+  "material_grid_refinement": {
+    "reference": "heldout-300-20000",
+    "comparison": "heldout-refined-material",
+    "relative_matching_state_change": {
+      "T": -6.7045896358086665e-06,
+      "Pgas": 0.003317787320724186
+    },
+    "note": "Temperature spacing is halved over the converged profile; density log10 spacing decreases from 0.5556 to 0.3944. The finer rectangle brackets the complete final profile. This is one local refinement test, not a global grid error bound."
+  },
+  "convection_jacobian_control": {
+    "reference": "solar-low-gravity-ng",
+    "comparison": "solar-low-gravity-corrected-jacobian",
+    "relative_matching_state_change": {
+      "T": 1.6471115593663654e-06,
+      "Pgas": -7.85649828560775e-06
+    },
+    "note": "Same original initial structure. Prior source needs Ng acceleration and 28 iterations; corrected source converges without acceleration in 8 iterations. Both final profiles pass the independent flux and chemistry checks."
+  },
+  "opacity_derivative_control": {
+    "reference": "solar-300-20000",
+    "comparison": "solar-2800-opacity-derivative",
+    "note": "Two native opacity derivative/state restoration repairs. Solar matching state remains within 6e-7 relative; this replay uses DERT=.001. At 3000 K/logg5.15, reducing DERT to 1e-5 removes the repeated small correction cycle and converges in three iterations with unchanged flux and correction criteria."
+  },
+  "four_axis_interpolation": {
+    "XH": 0.55,
+    "X3": 0.1,
+    "teff_K": 2900,
+    "log_g": 5.1,
+    "direct_record": "heldout-four-axis-final",
+    "interpolated": {
+      "T": 4184.704767192036,
+      "Pgas": 13704018.43705664,
+      "source_density": 8.130764037485365e-05
+    },
+    "direct": {
+      "T": 4171.068084318934,
+      "Pgas": 13739025.864475297,
+      "source_density": 8.174558858953301e-05
+    },
+    "relative_difference": {
+      "T": 0.0032693503432297266,
+      "Pgas": -0.0025480283510619373,
+      "source_density": -0.0053574538055921606
+    },
+    "note": "Current-source log interpolation of accepted surrounding nodes. Source density is diagnostic only; runtime uses the interior EOS at the actual composition. This is a local check, not a global interpolation-error bound.",
+    "corners": [
+      {
+        "XH": 0.45,
+        "X3": 0,
+        "teff_K": 2800,
+        "log_g": 4.9,
+        "log_sha256": "a62c6ae9a43efe990149e2f56055e9406cc0a471b046556b35353eb73f3b941d",
+        "convergence_sha256": "71322f93170cadc2ec1936be98309f3767dbcb3c24bc9e6ac46cb9e791aaa016",
+        "diagnostics": {
+          "T": 4095.1657775328626,
+          "Pgas": 11356299.255663594,
+          "source_density": 7.659346198170851e-05,
+          "column_mass": 142.96732267782986,
+          "flux_error": 1.254743714884654e-05,
+          "correction": 5.66e-07,
+          "effective_flux_error": 0.00019879220588159274,
+          "hydrostatic_error": 1.267368494595189e-07,
+          "chemical_density_error": 3.134159598516817e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            97.94712671114512,
+            105.77085972187695
+          ],
+          "temperature_range": [
+            1560.9093538963891,
+            4852.562488406533
+          ],
+          "density_range": [
+            4.3870107833519824e-11,
+            0.0002344808009867979
+          ]
+        },
+        "weight": 0.009827552019513491
+      },
+      {
+        "XH": 0.45,
+        "X3": 0,
+        "teff_K": 2800,
+        "log_g": 5.15,
+        "log_sha256": "c055dd812fa10784afac148c05d1f5fdf72b5589ce0c37f8ee3a297606575279",
+        "convergence_sha256": "30a9674c602a1dc2d6c2092c96943e1df29034a90bf64a320ef2bebabcba57b5",
+        "diagnostics": {
+          "T": 4116.280075622461,
+          "Pgas": 16966427.272618044,
+          "source_density": 0.00011659802961216917,
+          "column_mass": 120.11309140876345,
+          "flux_error": 5.168944860578506e-05,
+          "correction": 5.17e-07,
+          "effective_flux_error": 0.00019811797660207464,
+          "hydrostatic_error": 1.436183980629835e-07,
+          "chemical_density_error": 2.2937207688755734e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            99.9199474576718,
+            107.78678579481557
+          ],
+          "temperature_range": [
+            1545.8039859605735,
+            4879.969012869111
+          ],
+          "density_range": [
+            1.3212133785659543e-10,
+            0.0003485890781428479
+          ]
+        },
+        "weight": 0.039310208078053265
+      },
+      {
+        "XH": 0.45,
+        "X3": 0,
+        "teff_K": 3000,
+        "log_g": 4.9,
+        "log_sha256": "61ebe55fabdb08efe34c95f898c46e1fb6a627425192e507a4e4bcca445fa962",
+        "convergence_sha256": "4c83e3f069e7f3cd92dd3fde59e93a04c22a8968d255db3102e76a72c28ab974",
+        "diagnostics": {
+          "T": 4316.559587720091,
+          "Pgas": 9016468.346756175,
+          "source_density": 5.341855399363238e-05,
+          "column_mass": 113.51060316225883,
+          "flux_error": 1.0038998015549083e-05,
+          "correction": 4.11e-07,
+          "effective_flux_error": 0.0002019695194491744,
+          "hydrostatic_error": 1.0954042251043461e-07,
+          "chemical_density_error": 2.993161274389422e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            94.9022621004702,
+            102.88792001114132
+          ],
+          "temperature_range": [
+            1899.1175292761209,
+            5185.71978707144
+          ],
+          "density_range": [
+            1.1813167042985882e-11,
+            0.00016763700161788057
+          ]
+        },
+        "weight": 0.010172447980486781
+      },
+      {
+        "XH": 0.45,
+        "X3": 0,
+        "teff_K": 3000,
+        "log_g": 5.15,
+        "log_sha256": "9b001d404eafa5491df0ddd23ff20aff22d05fedc81111d5cc93adf15b76f932",
+        "convergence_sha256": "a595f0b05bc6036f5ecd9bb184dad1f804c3efcf6aed0fb6fe314bee85ce46e5",
+        "diagnostics": {
+          "T": 4318.857205615961,
+          "Pgas": 13450889.167702809,
+          "source_density": 8.235871588974158e-05,
+          "column_mass": 95.2249926020219,
+          "flux_error": 1.614279687922604e-05,
+          "correction": 3.68e-07,
+          "effective_flux_error": 0.00020097088631199078,
+          "hydrostatic_error": 1.3279549793132617e-07,
+          "chemical_density_error": 3.2795988147427124e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            97.03585121095232,
+            105.01894194481925
+          ],
+          "temperature_range": [
+            1872.7347280109464,
+            5171.015108744155
+          ],
+          "density_range": [
+            2.2013245382770005e-11,
+            0.0002542325104334071
+          ]
+        },
+        "weight": 0.0406897919219464
+      },
+      {
+        "XH": 0.45,
+        "X3": 0.12,
+        "teff_K": 2800,
+        "log_g": 4.9,
+        "log_sha256": "dfd2956b04b9e8799bb9b2e1b65d16674affdbae05027858947320651172c090",
+        "convergence_sha256": "c79bd5cdfb8439b1f8fba76c7b0a37a44d4d955583fb7b7c8560c6340e5f6979",
+        "diagnostics": {
+          "T": 4102.008495739367,
+          "Pgas": 11339477.78864399,
+          "source_density": 7.437855768995488e-05,
+          "column_mass": 142.7555530477104,
+          "flux_error": 2.7205686597753242e-05,
+          "correction": 5.7e-07,
+          "effective_flux_error": 0.0001988426829399037,
+          "hydrostatic_error": 1.2626064993526143e-07,
+          "chemical_density_error": 3.2007729799943263e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            97.7809362064764,
+            105.59779815342966
+          ],
+          "temperature_range": [
+            1557.7873531529128,
+            4864.7625946079215
+          ],
+          "density_range": [
+            4.254081135675289e-11,
+            0.00022673198657649748
+          ]
+        },
+        "weight": 0.049137760097567464
+      },
+      {
+        "XH": 0.45,
+        "X3": 0.12,
+        "teff_K": 2800,
+        "log_g": 5.15,
+        "log_sha256": "345d0ff2b2d75c555a34dcfd05b95a676acacf8ac36ea756c11d935c8a9918c1",
+        "convergence_sha256": "0af476d065ce31dfa5b23c0e4c2046af1a08901ae2f72c5a591c8f499d0a402d",
+        "diagnostics": {
+          "T": 4122.78831931437,
+          "Pgas": 16931061.77886157,
+          "source_density": 0.00011314029255079878,
+          "column_mass": 119.86272296020944,
+          "flux_error": 4.322945534940281e-05,
+          "correction": 4.76e-07,
+          "effective_flux_error": 0.0001981504261394651,
+          "hydrostatic_error": 1.4329209108154828e-07,
+          "chemical_density_error": 2.355893258254582e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            99.86641758261177,
+            107.73338306926047
+          ],
+          "temperature_range": [
+            1542.7374169259979,
+            4891.477816402009
+          ],
+          "density_range": [
+            1.2713416148222716e-10,
+            0.00033692414925853045
+          ]
+        },
+        "weight": 0.19655104039026638
+      },
+      {
+        "XH": 0.45,
+        "X3": 0.12,
+        "teff_K": 3000,
+        "log_g": 4.9,
+        "log_sha256": "751449ef1ab5aca0c28eeaa604d1cb86f8a910522aab7c6c4d6c57936ff5c19e",
+        "convergence_sha256": "790de5908aa62c62188dec93c2dfd09c298eafa6fae05c9c2ab119d0088a4f4d",
+        "diagnostics": {
+          "T": 4324.379017351549,
+          "Pgas": 9005183.06543232,
+          "source_density": 5.194405930318849e-05,
+          "column_mass": 113.36852998996434,
+          "flux_error": 6.953132819731422e-06,
+          "correction": 4.18e-07,
+          "effective_flux_error": 0.00020160563394988618,
+          "hydrostatic_error": 1.0864607236094059e-07,
+          "chemical_density_error": 3.206324095117452e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            94.82176420289977,
+            102.81287516301619
+          ],
+          "temperature_range": [
+            1895.510950243313,
+            5202.77945706155
+          ],
+          "density_range": [
+            1.1665233943640447e-11,
+            0.00016226027481734676
+          ]
+        },
+        "weight": 0.050862239902433916
+      },
+      {
+        "XH": 0.45,
+        "X3": 0.12,
+        "teff_K": 3000,
+        "log_g": 5.15,
+        "log_sha256": "7bfd511c96a0efba118d0788f1a8059ae04b25ae529775bff149fecc087641f2",
+        "convergence_sha256": "80b060b6db78d054ff7af3d5e02cc3f68ce53bf66f958a1a272a95a9c5733fb4",
+        "diagnostics": {
+          "T": 4326.259492690481,
+          "Pgas": 13431767.070002293,
+          "source_density": 8.00358958142511e-05,
+          "column_mass": 95.08961858231399,
+          "flux_error": 1.3905357504118143e-05,
+          "correction": 4.1e-07,
+          "effective_flux_error": 0.00020121986060106511,
+          "hydrostatic_error": 1.3223869865797155e-07,
+          "chemical_density_error": 3.2662761384472105e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            96.89510200832007,
+            104.87960999104419
+          ],
+          "temperature_range": [
+            1869.5441720685749,
+            5185.728056496324
+          ],
+          "density_range": [
+            2.164736709082211e-11,
+            0.00024593033505268156
+          ]
+        },
+        "weight": 0.20344895960973206
+      },
+      {
+        "XH": 0.7,
+        "X3": 0,
+        "teff_K": 2800,
+        "log_g": 4.9,
+        "log_sha256": "44069a1dd964caabd9f632c8f6c20ed087d4ea4b9ccc71273e15277f93a52ee9",
+        "convergence_sha256": "c1b343b3dc1f63477dba2b5cddd3ee45a0fa7fe17d9e488938053c73b44d7181",
+        "diagnostics": {
+          "T": 4007.682843960636,
+          "Pgas": 10974852.49347009,
+          "source_density": 6.370072829814998e-05,
+          "column_mass": 138.16519247181475,
+          "flux_error": 2.0099425368513835e-05,
+          "correction": 7.12e-07,
+          "effective_flux_error": 0.00019689931619304435,
+          "hydrostatic_error": 1.3027576328816792e-07,
+          "chemical_density_error": 2.4780177909633494e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            99.59113042438321,
+            107.4496085200321
+          ],
+          "temperature_range": [
+            1606.039596178842,
+            4707.352334759221
+          ],
+          "density_range": [
+            3.52999255756051e-11,
+            0.00020264000445246305
+          ]
+        },
+        "weight": 0.006551701346342334
+      },
+      {
+        "XH": 0.7,
+        "X3": 0,
+        "teff_K": 2800,
+        "log_g": 5.15,
+        "log_sha256": "5b016ea282bff85eaefc8344238f0b974133d44f555302163bbe4a1850902277",
+        "convergence_sha256": "0305d7a1077768d639c25cb1241d253313326e339a2a1d660056f9993dc1b6ee",
+        "diagnostics": {
+          "T": 4030.1932772216132,
+          "Pgas": 16402533.838441934,
+          "source_density": 9.716927882319269e-05,
+          "column_mass": 116.12103185632701,
+          "flux_error": 4.863056872128624e-05,
+          "correction": 3.11e-07,
+          "effective_flux_error": 0.00019797015093114823,
+          "hydrostatic_error": 1.4600189901514682e-07,
+          "chemical_density_error": 2.298161660974074e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            93.66806952764426,
+            101.0029040575958
+          ],
+          "temperature_range": [
+            1590.9933308817162,
+            4738.904358616797
+          ],
+          "density_range": [
+            1.1139474154726214e-10,
+            0.0003014289316672925
+          ]
+        },
+        "weight": 0.026206805385368872
+      },
+      {
+        "XH": 0.7,
+        "X3": 0,
+        "teff_K": 3000,
+        "log_g": 4.9,
+        "log_sha256": "0575e3c34ff63f7e6f9d423a9aab932025e4665de8f3adad9b89e48702313f3b",
+        "convergence_sha256": "977472966d9b0274738a93b13bccd55d0ca2248c9757e19edc4ccc6b15170d81",
+        "diagnostics": {
+          "T": 4219.037425471653,
+          "Pgas": 8686398.931593962,
+          "source_density": 4.378663255428368e-05,
+          "column_mass": 109.35527510938321,
+          "flux_error": 1.918781668885927e-05,
+          "correction": 7.33e-07,
+          "effective_flux_error": 0.00019971507094207475,
+          "hydrostatic_error": 1.1608047389977116e-07,
+          "chemical_density_error": 2.473576898864849e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            95.94117999912912,
+            103.90550378509924
+          ],
+          "temperature_range": [
+            1960.2454359922754,
+            4999.481864246606
+          ],
+          "density_range": [
+            8.57259280376077e-12,
+            0.00014320354214736477
+          ]
+        },
+        "weight": 0.006781631986991194
+      },
+      {
+        "XH": 0.7,
+        "X3": 0,
+        "teff_K": 3000,
+        "log_g": 5.15,
+        "log_sha256": "1ee43e9b119a1e25730f27f820866c211ea73a77672589b5b14d9cfadec93cb6",
+        "convergence_sha256": "762c854f69f165b7cc8205e05691a1e5e67ffaf1ae24d60e61fea42ea2c4e3b7",
+        "diagnostics": {
+          "T": 4225.79659267573,
+          "Pgas": 12972257.634511692,
+          "source_density": 6.78428202397833e-05,
+          "column_mass": 91.83654088133459,
+          "flux_error": 3.4760297839442345e-05,
+          "correction": 2.51e-07,
+          "effective_flux_error": 0.00019980262234053914,
+          "hydrostatic_error": 1.3684623589860223e-07,
+          "chemical_density_error": 2.5579538487363607e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            97.99394755653094,
+            105.97270773898438
+          ],
+          "temperature_range": [
+            1924.9347005050026,
+            5002.492500315844
+          ],
+          "density_range": [
+            1.635485816843649e-11,
+            0.00021797229453764637
+          ]
+        },
+        "weight": 0.027126527947964295
+      },
+      {
+        "XH": 0.7,
+        "X3": 0.12,
+        "teff_K": 2800,
+        "log_g": 4.9,
+        "log_sha256": "c55ec4f3be61ecff8bd3db6363b6adbd01b07ae45ae88adafc23bd99ce0e07d9",
+        "convergence_sha256": "ef8130631a338377d485acd58a874a7808900a9978e4b675e07e3549a05ae5fc",
+        "diagnostics": {
+          "T": 4012.880004108263,
+          "Pgas": 10962243.00657639,
+          "source_density": 6.213954223253681e-05,
+          "column_mass": 138.00644850431064,
+          "flux_error": 3.3978963602132595e-05,
+          "correction": 6.49e-07,
+          "effective_flux_error": 0.00019696421526793628,
+          "hydrostatic_error": 1.2995771192514383e-07,
+          "chemical_density_error": 2.4713564528155985e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            99.42595670259578,
+            107.27069115519375
+          ],
+          "temperature_range": [
+            1603.10393563994,
+            4715.862479370667
+          ],
+          "density_range": [
+            3.421964792127746e-11,
+            0.00019697533390749988
+          ]
+        },
+        "weight": 0.03275850673171168
+      },
+      {
+        "XH": 0.7,
+        "X3": 0.12,
+        "teff_K": 2800,
+        "log_g": 5.15,
+        "log_sha256": "e3f92fc4b0c295a64b57df758c572b66d3468ea4c51f36b17bccf97d43812088",
+        "convergence_sha256": "069192125efbaeefc73fbf30939f138246070f51e672d93483e48eaf75101391",
+        "diagnostics": {
+          "T": 4035.301229913666,
+          "Pgas": 16376223.695661388,
+          "source_density": 9.472608413153476e-05,
+          "column_mass": 115.93477036414713,
+          "flux_error": 5.755090314174538e-05,
+          "correction": 6.05e-07,
+          "effective_flux_error": 0.00019805307752696066,
+          "hydrostatic_error": 1.4577419937822356e-07,
+          "chemical_density_error": 2.2515322939398175e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            93.56774343429585,
+            100.89505176659455
+          ],
+          "temperature_range": [
+            1588.2448449621438,
+            4747.128133653318
+          ],
+          "density_range": [
+            1.0881053102792307e-10,
+            0.0002928101207737579
+          ]
+        },
+        "weight": 0.13103402692684438
+      },
+      {
+        "XH": 0.7,
+        "X3": 0.12,
+        "teff_K": 3000,
+        "log_g": 4.9,
+        "log_sha256": "6c6c6fab65a482c8b7dccb49cd3645c19220c0e3ec920359d26514bb0885e554",
+        "convergence_sha256": "8048845f16afa4f0438405c3165b0a429c44f5ffc06f24ec4b1e30a5b1efb20b",
+        "diagnostics": {
+          "T": 4224.525132682771,
+          "Pgas": 8680571.027373329,
+          "source_density": 4.278452629872471e-05,
+          "column_mass": 109.28190620590986,
+          "flux_error": 8.871165597446051e-06,
+          "correction": 5.12e-07,
+          "effective_flux_error": 0.00019975884664125143,
+          "hydrostatic_error": 1.1555972845300744e-07,
+          "chemical_density_error": 2.431388423929093e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            95.76051467203274,
+            103.7169309146313
+          ],
+          "temperature_range": [
+            1957.3276617684935,
+            5009.670585640516
+          ],
+          "density_range": [
+            8.523967879719193e-12,
+            0.00013938864774233186
+          ]
+        },
+        "weight": 0.033908159934955974
+      },
+      {
+        "XH": 0.7,
+        "X3": 0.12,
+        "teff_K": 3000,
+        "log_g": 5.15,
+        "log_sha256": "f7b5f820eb5f73c985a3829f57d7f22dda217d3d021cc1931b0b8db53f78ea1b",
+        "convergence_sha256": "017af60c10a72fa08293df58276117677de372d87f575b4a49b6a8cade35a388",
+        "diagnostics": {
+          "T": 4231.191597256546,
+          "Pgas": 12960097.041039547,
+          "source_density": 6.624057394438173e-05,
+          "column_mass": 91.7504505156931,
+          "flux_error": 3.078313699722557e-05,
+          "correction": 6.25e-07,
+          "effective_flux_error": 0.00019987649383290673,
+          "hydrostatic_error": 1.365003923226027e-07,
+          "chemical_density_error": 3.6692870963861424e-13,
+          "iterations": 1,
+          "depths": 300,
+          "tau_bracket": [
+            97.83468477283274,
+            105.80435567470782
+          ],
+          "temperature_range": [
+            1922.3782013554858,
+            5012.100862164722
+          ],
+          "density_range": [
+            1.6193714351877798e-11,
+            0.00021204321719341172
+          ]
+        },
+        "weight": 0.1356326397398215
+      }
+    ]
+  }
+}

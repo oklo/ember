@@ -24,6 +24,8 @@ struct Integrals {
   double In{}, Ip{}, Iu{};
   double dIn_deta{}, dIp_deta{}, dIu_deta{};
   double dIn_dlnb{}, dIp_dlnb{}, dIu_dlnb{};
+  // Susceptibility response, needed for finite-degeneracy nuclear screening.
+  double d2In_deta2{}, d2In_detadlnb{};
 };
 
 Integrals evaluate(double eta, double beta);

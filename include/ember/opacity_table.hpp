@@ -21,6 +21,7 @@ public:
 
   struct Range { double logT_min, logT_max, logD_min, logD_max, X_min, X_max; DensityAxis density_axis; };
   Range range() const;
+  double metallicity() const { return Z_; }
   // Geometric bounds only. eval/density_range also require the table's Z.
   bool covers(double T, double rho, double X) const;
 

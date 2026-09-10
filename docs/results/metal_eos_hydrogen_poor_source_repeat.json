@@ -1,0 +1,25 @@
+{
+  "probe": "/tmp/ember-freeeos-probe",
+  "probe_sha256": "f83fff2498551e7ef02724ede8ea2d594c2487340a6d70c59d456681cdf76114",
+  "checks": [
+    {
+      "source_slice": "/tmp/ember-metal-eos-v1/plane-000/temperature-000.json.gz",
+      "source_sha256": "9ece96f703afc9c77fe81dfefe601506d1bab4d0d2e6a58d4b4eece4f935cb56",
+      "rows": 321,
+      "identical": true
+    },
+    {
+      "source_slice": "/tmp/ember-metal-eos-v1/plane-000/temperature-056.json.gz",
+      "source_sha256": "30b755fbf7802f03778cb84db877c367a77cad8dbced5231b16eb664f977d5af",
+      "rows": 321,
+      "identical": true
+    },
+    {
+      "source_slice": "/tmp/ember-metal-eos-v1/plane-000/temperature-256.json.gz",
+      "source_sha256": "734f7cdb5915797c0e92ba8b8f3196c8f6ffc4dc0795eee3d031a22f34f8d26b",
+      "rows": 321,
+      "identical": true
+    }
+  ],
+  "scope": "Exact source-slice reproduction before hydrogen-poor extension; not an EOS accuracy bound."
+}

@@ -1,0 +1,9 @@
+{
+  "description": "Independent fresh-start repeat with identical snapshot executable, physics and tolerances",
+  "baseline": "out/evolution-metal-512-2tyr-gas.json",
+  "repeat": "out/evolution-metal-512-2tyr-gas-repeat.json",
+  "byte_identical_stellar_output": true,
+  "baseline_sha256": "17e5c5ebdb7d9b8acfc2f7b17e2d467d2445c0db7ca181678298d9cc119d8d47",
+  "repeat_sha256": "17e5c5ebdb7d9b8acfc2f7b17e2d467d2445c0db7ca181678298d9cc119d8d47",
+  "executable_sha256": "b904902f4f86843dc957f3b004f1db78acfa983f93d370a083eecb581f00500c"
+}

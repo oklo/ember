@@ -3,8 +3,14 @@
 `Atmosphere::eval(Teff, gravity, composition)` supplies temperature, gas and
 total pressure, density, matching optical depth, and logarithmic derivatives
 of temperature and total pressure with respect to `Teff` and `gravity`.
-All dimensional quantities use CGS. Both implementations use an EOS that
+All dimensional quantities use CGS. The implementations use an EOS that
 includes LTE radiation pressure, `a_rad*T^4/3`.
+
+The optional `CompositionAtmosphereGrid` now supplies an evolving H/He
+boundary from 48 independently calculated non-grey radiative/convective
+atmospheres. Its composition mapping, source coverage, interpolation and
+physical checks are documented in [NONGREY.md](NONGREY.md). The COND-based
+composition correction remains the default comparison backend.
 
 ## Grey fallback
 
@@ -82,9 +88,9 @@ data
 ```
 
 Both axes need at least two values. Composition must sum to one; queries
-must match each recorded species to absolute tolerance `1e-10`. Supporting
-an evolving surface composition will require appropriately sourced grids and
-composition interpolation. Malformed headers, duplicate axis values, missing
+must match each recorded species to absolute tolerance `1e-10`. Evolving
+surface composition is handled by the separate composition atmosphere
+backends. Malformed headers, duplicate axis values, missing
 nodes, non-finite values, and extra trailing data are errors.
 
 Version 2 adds `composition_proxy "description"` between `tau` and
@@ -147,3 +153,49 @@ Connecting the existing modules exposed two errors worth preserving:
   now propagates parameter derivatives through its active limiter branches.
   A direct opacity regression and the complete atmosphere sensitivity check
   both failed before this correction and pass afterward.
+
+## Composition-dependent convective column
+
+`ConvectiveAtmosphere` extends the grey closure by solving temperature and hydrostatic pressure together, using the evolving EOS and radiative opacity. `CompositionCorrectedAtmosphere` uses its differential composition response to extend the COND boundary. It does not supply a new non-grey composition grid.
+
+The top uses the existing Eddington integration from tau=.001 to .01. Below that point, the independent variable is ln tau and the column solves
+
+```
+dlnP/dln(tau) = tau g / (kappa_rad P)
+dlnT/dln(tau) = grad * dlnP/dln(tau)
+grad_rad = 3 kappa_rad P F / (16 sigma_SB T^4 g)
+F = sigma_SB Teff^4.
+```
+
+Convection uses the Henyey element-cooling prescription in equations 13–18 of [Gustafsson et al. (2008)](https://arxiv.org/abs/0805.0554). Let `ell=alpha Hp`, `v0=alpha sqrt(g Hp delta/8)` and `tau_ell=rho kappa ell`. With `q²=grad−grad_element`, the positive cubic is
+
+```
+grad_rad - grad_ad = q² + B q + C q³
+B = 8 sigma_SB T³ tau_ell / [v0 rho cp (1+y tau_ell²)]
+C = 3 kappa P rho cp alpha v0 / (32 sigma_SB T³ g).
+```
+
+The terms represent the element contrast, element cooling, and convective flux. The adopted alpha=1.9 and y=1/3 recover the interior's Bohm–Vitense coefficients in the optically thick limit. The alternative y=.076 is a sensitivity control. Scaling the cubic bounds its root without subtracting nearly equal gradients. The two Teff/gravity sensitivity equations propagate the EOS, opacity, buoyancy, heat capacity and cubic derivatives analytically.
+
+The default integration tolerance is 2e-8 for both logarithmic states and sensitivities. Sensitivities must also be well resolved: loosening them can allow boundary-value noise that prevents a tight stellar Newton solve from converging. Separate controls permit convergence tests; normal evolution keeps both tight. The EOS inversion now brackets within its declared density interval, so a poor ideal-gas density guess cannot cross the table floor.
+
+For a declared reference mixture c0, with baryonic X=.7, Z=.02 and zero He3, the corrected boundary is
+
+```
+T_match(c)    = T_COND * T_column(c) / T_column(c0)
+Pgas_match(c) = Pgas_COND * Pgas_column(c) / Pgas_column(c0).
+```
+
+Radiation pressure is then added once at the corrected T, and density is inverted using the actual composition. Logarithmic derivatives combine the same three evaluations; the radiation term uses the corrected temperature derivative. Source tau must agree (100 here). At c0, both values and derivatives reproduce COND exactly. Fixed metal abundances, every source composition/density bound, and the original COND Teff/log-g rectangle remain required.
+
+This assumes that the non-grey correction at c0 transfers to other mixtures. Radiative transfer is still represented by a grey closure, and isotope-dependent collision-induced absorption and line broadening are absent. The anchor covers Teff=1800..3300 K and log g=3.5..6; the EOS and column impose additional restrictions, including the temperature of the upper atmosphere. There is no fallback outside their common support.
+
+The independent checks recover the constant-opacity Eddington limit, compare derivatives through convective layers, verify exact reference anchoring and test the top-column truncation. Static comparisons at four homogeneous compositions are in [the boundary sensitivity results](results/extended_boundary_sensitivity.json). Removing the COND anchor changes luminosity by 7–14%; changing y, alpha or the starting optical depth has a smaller effect. These are sensitivity experiments, **not a calibrated physical error bar**. A helium-enriched non-grey atmosphere remains the preferred next replacement.
+
+## Non-grey composition grid
+
+`CompositionAtmosphereGrid` and the pinned source-generation/import pipeline
+are documented in [NONGREY.md](NONGREY.md). Runtime values and derivatives
+come from the same four-dimensional interpolant in H1, He3, Teff and gravity.
+Source support and mixture assumptions are explicit; the reader never
+fills holes, extrapolates or substitutes a grey boundary.

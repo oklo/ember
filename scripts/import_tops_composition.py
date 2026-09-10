@@ -24,7 +24,7 @@ def read(path, expected):
     rows=text.split('No. Fraction Mass Fraction  At. No.  Chem. Sym.  Mat ID.\n')[1].split('Temperature grid')[0]
     elements={r.split()[3]:float(r.split()[1]) for r in rows.splitlines() if r.strip()}
     x=expected['X']
-    if len(elements)!=21 or abs(elements['H']-x)>1e-6 or abs(elements['He']-(.98-x))>1e-6:
+    if len(elements)!=21 or abs(elements['H']-x)>1e-6 or abs(elements['He']-(1-expected.get('Z',.02)-x))>1e-6:
         raise ValueError('wrong source mixture')
     # Verify every metal against the original GS98 request, not just sum Z.
     for element,value in expected['metals'].items():

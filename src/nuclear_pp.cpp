@@ -1,27 +1,22 @@
 #include "ember/nuclear.hpp"
 #include "ember/constants.hpp"
+#include "differential.hpp"
+#include "fermi.hpp"
 #include <algorithm>
 #include <cmath>
+#include <limits>
 
 namespace ember {
 using namespace constants;
-
 namespace {
-
-// Non-resonant thermonuclear reaction rate in the standard Gamow form.
-// N_A <sigma v> = C * T9^{-2/3} exp(-tau) * (1 + corrections), with
-// tau = 3 (E_G/4kT)^{1/3}.  Returning dln(rate)/dlnT alongside costs nothing
-// and spares the solver a numerical derivative.
-struct Rate { double v; double dlnv_dlnT; };
-
-// Reduced mass factor and Gamow energy are folded into the coefficient and
-// the exponent scale; both are taken from the Adelberger et al. (2011)
-// compilation, expressed as fits in T9.
+constexpr double e2 = 4.803204673e-10 * 4.803204673e-10;
+constexpr double mev = 1.602176634e-6;
+struct Rate { double v, dlnv_dlnT; };
 Rate pp(double T9) {                       // p(p,e+ nu)d  - the bottleneck
   const double t913 = std::cbrt(T9);
   const double t923 = t913 * t913;
   const double tau  = 3.381 / t913;
-  // Adelberger+2011 eq. (2.32) form as used in standard compilations.
+  // Historical fit; not a direct implementation of Solar Fusion II.
   const double f = 4.01e-15 / t923 * std::exp(-tau)
                  * (1.0 + 0.123 * t913 + 1.09 * t923 + 0.938 * T9);
   const double poly = 1.0 + 0.123 * t913 + 1.09 * t923 + 0.938 * T9;
@@ -47,142 +42,197 @@ Rate he3he4(double T9) {                   // He3(alpha,gamma)Be7 - ppII/ppIII
   return {f, -2.0 / 3.0 + tau / 3.0};
 }
 
-// Classical Salpeter weak screening. Valid while the Coulomb coupling is
-// small; intermediate coupling/degenerate electrons need further work. A cold dense
-// remnant needs Chugunov et al. (2007) instead, which is why this lives behind
-// the Nuclear interface rather than inside it.
-struct Screening { double factor, dlnf_dlnT, dlnf_dlnRho; };
-Screening screen_weak(double T, double rho, const Composition& comp, double z1, double z2) {
-  // Classical electron + ion charge susceptibility: ne + sum(ni Zi^2).
-  // Multiplying ion-averaged charges by ne instead of ni introduces an
-  // erroneous extra mean ionic charge in mixtures containing helium.
-  double charges=0;
-  for(std::size_t i=0;i<NSPEC;++i) {
-    const double z=nuclides[i].Z;
-    charges+=comp.X[i]*(z*z+z)/comp.abundance_weight(i);
-  }
-  // H12 = z1 z2 e^2 / (kT) * kappa_D ; assembled in CGS below.
-  const double e2 = 4.803204673e-10 * 4.803204673e-10;
-  const double kD = std::sqrt(4.0 * M_PI * e2 * rho * NA * charges / (kB * T));
-  const double H = z1 * z2 * e2 * kD / (kB * T);
-  // Differentiate the implemented cap as well: above it the factor is
-  // constant, while below it H is proportional to rho^(1/2) T^(-3/2).
-  return {std::exp(std::min(H, 2.0)), H < 2.0 ? -1.5 * H : 0.0,
-          H < 2.0 ? 0.5 * H : 0.0};
-}
 
+struct Reaction {
+  double z1,z2,m1,m2,s0,s1,s2; // S derivatives in MeV barn, barn, barn/MeV
+};
+Reaction reaction(PPReaction r) {
+  // Kinematic nuclear masses exclude electrons (electronic binding neglected).
+  const double m1=nuclides[0].A*amu-me, m3=nuclides[1].A*amu-2*me;
+  const double m4=nuclides[2].A*amu-2*me;
+  switch(r) {
+  case PPReaction::pp: return {1,1,m1,m1,4.01e-25,4.01e-25*11.2,0};
+  case PPReaction::he3_he3: return {2,2,m3,m3,5.21,-4.9,22.};
+  case PPReaction::he3_he4: return {2,2,m3,m4,.00056,-.00036,.000151};
+  }
+  throw std::invalid_argument("PPReaction: unknown reaction");
+}
+double gamow_energy(const Reaction& r) {
+  const double hbar=h/(2*M_PI), mu=r.m1*r.m2/(r.m1+r.m2);
+  return 2*mu*std::pow(M_PI*r.z1*r.z2*e2/hbar,2);
+}
+// Gauss--Legendre integration in ln(E/E0), split at the Gamow peak.
+struct Quadrature {
+  static constexpr int n=48;
+  std::array<double,n> x{},w{};
+  Quadrature() {
+    for(int i=0;i<n;++i) {
+      double z=std::cos(M_PI*(i+.75)/(n+.5));
+      for(int it=0;it<30;++it) {
+        double p=1,previous=0;
+        for(int j=1;j<=n;++j) {double old=previous;previous=p;p=((2*j-1)*z*previous-(j-1)*old)/j;}
+        const double dp=n*(z*p-previous)/(z*z-1),dz=p/dp;
+        z-=dz;
+        if(std::abs(dz)<1e-15) break;
+      }
+      double p=1,previous=0;
+      for(int j=1;j<=n;++j) {double old=previous;previous=p;p=((2*j-1)*z*previous-(j-1)*old)/j;}
+      const double dp=n*(z*p-previous)/(z*z-1);
+      x[i]=z;w[i]=2/((1-z*z)*dp*dp);
+    }
+  }
+};
+void validate(double T,double rho,const Composition& comp) {
+  if(!std::isfinite(T) || !std::isfinite(rho) || T<=0 || rho<=0)
+    throw std::domain_error("PPChains: positive finite temperature and density required");
+  for(double x:comp.X) if(!std::isfinite(x) || x<0)
+    throw std::domain_error("PPChains: finite nonnegative abundances required");
+  // No normalization here: composition_response exposes unconstrained partials.
+  if(!(comp.mu_elec_inv()>0)) throw std::domain_error("PPChains: empty charged mixture");
+}
+struct Susceptibility { double eta,theta,dtheta_dlnT,dtheta_dlnne; };
+Susceptibility electrons(double T,double ne) {
+  const double beta=kB*T/(me*c_light*c_light);
+  const double norm=8*M_PI*std::pow(me*c_light/h,3);
+  const double lambda=h/std::sqrt(2*M_PI*me*kB*T);
+  const double nd=std::log(ne*lambda*lambda*lambda/2);
+  const double xf=std::cbrt(3*ne/norm);
+  double eta=nd<0?nd:xf*xf/((std::sqrt(1+xf*xf)+1)*beta);
+  for(int it=0;it<100;++it) {
+    const auto f=fermi::evaluate(eta,beta);
+    if(!(f.In>0 && f.dIn_deta>0)) break;
+    const double residual=std::log(norm*f.In/ne);
+    const double step=residual*f.In/f.dIn_deta;
+    if(std::abs(residual)<2e-13 && std::abs(step)<2e-12*(1+std::abs(eta))) {
+      const double theta=f.dIn_deta/f.In;
+      return {eta,theta,(f.d2In_detadlnb-f.d2In_deta2*f.dIn_dlnb/f.dIn_deta)/f.In,
+        f.d2In_deta2/f.dIn_deta-theta};
+    }
+    eta-=std::clamp(step,-4*(1+std::abs(eta)),4*(1+std::abs(eta)));
+  }
+  throw std::runtime_error("PPChains: electron susceptibility inversion failed");
+}
 } // namespace
 
-NuclearState PPChains::eval(double T, double rho, const Composition& c) const {
-  NuclearState s{};
-  const double T9 = T * 1e-9;
-  if (T9 < 1e-4) return s;                 // nothing happens; keep it exactly zero
-
-  const double X  = c[Species::H1];
-  const double Y3 = c[Species::He3];
-  const double Y4 = c[Species::He4];
-  const double A1 = c.abundance_weight(0);
-  const double A3 = c.abundance_weight(1);
-  const double A4 = c.abundance_weight(2);
-
-  const auto r_pp   = pp(T9);
-  const auto r_33   = he3he3(T9);
-  const auto r_34   = he3he4(T9);
-  const auto f_pp = screen_weak(T, rho, c, 1, 1);
-  const auto f_33 = screen_weak(T, rho, c, 2, 2);
-  const auto f_34 = screen_weak(T, rho, c, 2, 2);
-
-  // Reactions per gram per second.  The 1/2 on identical-particle reactions is
-  // the standard double-counting factor.
-  const double n_pp = 0.5 * (X / A1) * (X / A1) * rho * r_pp.v * f_pp.factor;
-  const double n_33 = 0.5 * (Y3 / A3) * (Y3 / A3) * rho * r_33.v * f_33.factor;
-  const double n_34 =       (Y3 / A3) * (Y4 / A4) * rho * r_34.v * f_34.factor;
-
-  // Composition change first; the energy then follows from it.  Deriving the
-  // release from the mass defect of the very nuclide masses the code carries,
-  // rather than from a separately tabulated set of Q values, makes energy and
-  // composition consistent by construction: they cannot drift apart, and a
-  // mistaken branch ratio shows up as an energy error instead of hiding.
-  auto& d = s.dXdt;
-  const std::size_t iH1  = static_cast<std::size_t>(Species::H1);
-  const std::size_t iHe3 = static_cast<std::size_t>(Species::He3);
-  const std::size_t iHe4 = static_cast<std::size_t>(Species::He4);
-  // Per p+p reaction three protons are consumed, not two: two make the
-  // deuteron, and the fast d(p,gamma)He3 that follows takes a third.
-  // ppI  : He3 + He3 -> He4 + 2p        returns two protons, makes one He4.
-  // ppII : He3 + He4 + p -> 2 He4       consumes a proton, nets one He4.
-  // Baryon number cancels identically; the mass defect does not, and leaves.
-  d[iH1]  = (-3.0 * n_pp + 2.0 * n_33 - n_34) * A1;
-  d[iHe3] = ( n_pp - 2.0 * n_33 - n_34) * A3;
-  d[iHe4] = ( n_33 + n_34) * A4;
-
-  double dm = 0.0;
-  if(c.basis == AbundanceBasis::atomic_mass) {
-    for(double v:d) dm+=v; // retain the legacy static convention exactly
-  } else {
-    for(std::size_t i=0;i<NSPEC;++i) dm+=d[i]*nuclides[i].A/mass_numbers[i];
+ThermonuclearRate pp_bare_rate(double T,PPReaction which,PPRates prescription) {
+  if(!std::isfinite(T) || T<=0) throw std::domain_error("pp_bare_rate: invalid temperature");
+  const auto r=reaction(which);
+  if(prescription==PPRates::solar_fusion_ii && T>2e7)
+    throw std::domain_error("PPChains: Solar Fusion II low-energy expansion limited to T<=2e7 K");
+  if(T<1e5) return {};
+  if(prescription==PPRates::legacy) {
+    const auto v=which==PPReaction::pp?pp(T*1e-9):which==PPReaction::he3_he3?he3he3(T*1e-9):he3he4(T*1e-9);
+    return {v.v,v.dlnv_dlnT};
   }
-  const double eps_total = -dm * c_light * c_light;       // erg/g/s liberated
-
-  // Neutrinos take their share straight out of the star.  pp emits 0.265 MeV
-  // on average; the Be7 electron capture that opens ppII emits 0.861 MeV.
-  constexpr double MeV = 1.602176634e-6;
-  const double eps_nu = (n_pp * 0.265 + n_34 * 0.861) * MeV * NA;
-  s.eps_neutrino = eps_nu;
-  s.eps = eps_total - eps_nu;
-  if (s.eps < 0.0) s.eps = 0.0;
-
-  // Differentiate the same mass-defect heating rate, including the escaping
-  // neutrinos and the density/temperature dependence of screening.
-  const double c2 = c_light * c_light;
-  const double m1=nuclides[0].A,m3=nuclides[1].A,m4=nuclides[2].A;
-  const double w_pp = n_pp * ((3.0 * m1 - m3) * c2 - 0.265 * MeV * NA);
-  const double w_33 = n_33 * ((2.0 * m3 - 2.0 * m1 - m4) * c2);
-  const double w_34 = n_34 * ((m3 + m1 - m4) * c2 - 0.861 * MeV * NA);
-  if (s.eps > 0.0) {
-    s.dlneps_dlnT = (w_pp * (r_pp.dlnv_dlnT + f_pp.dlnf_dlnT)
-                   + w_33 * (r_33.dlnv_dlnT + f_33.dlnf_dlnT)
-                   + w_34 * (r_34.dlnv_dlnT + f_34.dlnf_dlnT)) / s.eps;
-    s.dlneps_dlnRho = (w_pp * (1.0 + f_pp.dlnf_dlnRho)
-                     + w_33 * (1.0 + f_33.dlnf_dlnRho)
-                     + w_34 * (1.0 + f_34.dlnf_dlnRho)) / s.eps;
+  static const Quadrature q;
+  const double kt=kB*T, eg=gamow_energy(r), peak=std::cbrt(eg*kt*kt/4);
+  const double mu=r.m1*r.m2/(r.m1+r.m2);
+  double integral=0,moment=0;
+  for(double mid:{-2.,2.}) for(int i=0;i<q.n;++i) {
+    const double energy=peak*std::exp(mid+2*q.x[i]), E=energy/mev;
+    const double S=(r.s0+E*(r.s1+.5*E*r.s2))*mev*1e-24;
+    const double term=2*q.w[i]*energy*S*std::exp(-energy/kt-std::sqrt(eg/energy));
+    integral+=term;moment+=term*energy/kt;
   }
-  return s;
+  const double rate=NA*std::sqrt(8/(M_PI*mu))/std::pow(kt,1.5)*integral;
+  return {rate,integral>0?-1.5+moment/integral:0};
+}
+
+ScreeningState pp_screening(double T,double rho,const Composition& comp,PPReaction which,PPScreening model) {
+  validate(T,rho,comp);
+  const auto r=reaction(which);
+  using D=detail::Differential<NSPEC+2>;
+  using detail::exp;using detail::log;
+  const auto temp=exp(D::variable(std::log(T),0)),density=exp(D::variable(std::log(rho),1));
+  D ye,ions;
+  for(std::size_t j=0;j<NSPEC;++j) {
+    if(j>=3 && comp.metal_inventory==MetalInventory::gs98) {
+      const D metal=D::variable(comp.X[j],j+2);
+      ye=ye+metal*comp.metal_ion_moment(1);ions=ions+metal*comp.metal_ion_moment(2);
+      continue;
+    }
+    const D y=D::variable(comp.X[j],j+2)/comp.abundance_weight(j);
+    ye=ye+y*nuclides[j].Z;ions=ions+y*nuclides[j].Z*nuclides[j].Z;
+  }
+  ScreeningState out;
+  D theta(1);
+  if(model!=PPScreening::legacy_weak) {
+    const auto f=electrons(T,rho*NA*ye.value);
+    out.electron_eta=f.eta;theta.value=f.theta;
+    theta.d[0]=f.dtheta_dlnT;theta.d[1]=f.dtheta_dlnne;
+    for(std::size_t j=0;j<NSPEC;++j) theta.d[j+2]=f.dtheta_dlnne*ye.d[j+2]/ye.value;
+  } else out.electron_eta=std::numeric_limits<double>::quiet_NaN();
+  out.electron_susceptibility=theta.value;
+  const auto ge=e2/(kB*temp)*exp(log(4*M_PI*NA*density*ye/3)/3);
+  out.gamma_e=ge.value;
+  const double g12=ge.value*2*r.z1*r.z2/(std::cbrt(r.z1)+std::cbrt(r.z2));
+  out.zeta=g12/std::cbrt(gamow_energy(r)/(4*kB*T));
+  // Explicit classical-ion thermonuclear domain, not a cap or an extrapolation.
+  if(model!=PPScreening::legacy_weak && out.zeta>.2)
+    throw std::domain_error("PPChains: classical-ion screening requires zeta<=0.2; quantum burning unavailable");
+  const auto weak=r.z1*r.z2*e2/(kB*temp)*exp(.5*log(4*M_PI*e2*NA*density*(ions+theta*ye)/(kB*temp)));
+  D exponent=weak;
+  if(model==PPScreening::legacy_weak && weak.value>=2) exponent=D(2);
+  if(model==PPScreening::salpeter_van_horn) {
+    const auto strong=.9*ge*(std::pow(r.z1+r.z2,5./3)-std::pow(r.z1,5./3)-std::pow(r.z2,5./3));
+    exponent=weak*strong/exp(.5*log(weak*weak+strong*strong));
+  }
+  out.log_factor=exponent.value;out.dlog_dlnT=exponent.d[0];out.dlog_dlnRho=exponent.d[1];
+  for(std::size_t j=0;j<NSPEC;++j) out.dlog_dX[j]=exponent.d[j+2];
+  return out;
 }
 
 NuclearResponse PPChains::composition_response(double T,double rho,const Composition& comp) const {
-  NuclearResponse result;result.state=eval(T,rho,comp);
-  if(T<1e5) return result;
-  const double w1=comp.abundance_weight(0),w3=comp.abundance_weight(1),w4=comp.abundance_weight(2);
-  const double h1=comp.X[0]/w1,h3=comp.X[1]/w3,h4=comp.X[2]/w4;
-  const auto s1=screen_weak(T,rho,comp,1,1),s2=screen_weak(T,rho,comp,2,2);
-  const double c1=.5*rho*pp(T*1e-9).v*s1.factor;
-  const double c2=.5*rho*he3he3(T*1e-9).v*s2.factor;
-  const double c3=rho*he3he4(T*1e-9).v*s2.factor;
-  double charges=0;
-  for(std::size_t j=0;j<NSPEC;++j) {
-    const double y=comp.X[j]/comp.abundance_weight(j),z=nuclides[j].Z;
-    charges+=(z*z+z)*y;
-  }
+  validate(T,rho,comp);
+  NuclearResponse result;
+  if(T<1e5) return result; // retained explicit negligible-burning cutoff
+  const std::array rates{pp_bare_rate(T,PPReaction::pp,rates_),pp_bare_rate(T,PPReaction::he3_he3,rates_),
+    pp_bare_rate(T,PPReaction::he3_he4,rates_)};
+  // Classical screening depends on charge, so both helium reactions share it.
+  const auto f1=pp_screening(T,rho,comp,PPReaction::pp,screening_);
+  const auto f2=pp_screening(T,rho,comp,PPReaction::he3_he3,screening_);
+  const std::array screens{f1,f2,f2};
+  const std::array w{comp.abundance_weight(0),comp.abundance_weight(1),comp.abundance_weight(2)};
+  const std::array y{comp.X[0]/w[0],comp.X[1]/w[1],comp.X[2]/w[2]};
   const double m1=nuclides[0].A,m3=nuclides[1].A,m4=nuclides[2].A;
-  constexpr double mev=1.602176634e-6;
-  const double q1=(3*m1-m3)*c_light*c_light-.265*mev*NA;
-  const double q2=(2*m3-2*m1-m4)*c_light*c_light;
-  const double q3=(m3+m1-m4)*c_light*c_light-.861*mev*NA;
-  for(std::size_t j=0;j<NSPEC;++j) {
-    const double z=nuclides[j].Z,w=comp.abundance_weight(j);
-    const double derivative=.5*(z*z+z)/(w*charges);
-    const double df1=s1.dlnf_dlnRho>0?std::log(s1.factor)*derivative:0;
-    const double df2=s2.dlnf_dlnRho>0?std::log(s2.factor)*derivative:0;
-    const double n1=c1*h1*h1*df1+(j==0?2*c1*h1/w1:0);
-    const double n2=c2*h3*h3*df2+(j==1?2*c2*h3/w3:0);
-    const double n3=c3*h3*h4*df2+(j==1?c3*h4/w3:0)+(j==2?c3*h3/w4:0);
-    result.d_dXdt_dX[0][j]=(-3*n1+2*n2-n3)*w1;
-    result.d_dXdt_dX[1][j]=(n1-2*n2-n3)*w3;
-    result.d_dXdt_dX[2][j]=(n2+n3)*w4;
-    result.deps_dX[j]=q1*n1+q2*n2+q3*n3;
+  const std::array total_q{(3*m1-m3)*c_light*c_light,(2*m3-2*m1-m4)*c_light*c_light,
+    (m3+m1-m4)*c_light*c_light};
+  // Retained reduced ppII neutrino approximation, qualified in docs/NUCLEAR.md.
+  const std::array nu_q{.265*mev*NA,0.,.861*mev*NA};
+  constexpr std::array<std::array<double,3>,3> stoich{{{-3,1,0},{2,-2,1},{-1,-1,1}}};
+  constexpr std::array a{0,1,1},b{0,1,2};
+  auto& s=result.state;
+  double epsT=0,epsR=0;
+  for(std::size_t k=0;k<3;++k) {
+    const double coefficient=(k<2?.5:1.)*rho*rates[k].molar_rate*std::exp(screens[k].log_factor);
+    // Moles of reactions / g / s, not individual reactions / g / s.
+    const double rate=coefficient*y[a[k]]*y[b[k]], heat=total_q[k]-nu_q[k];
+    s.eps+=rate*heat;s.eps_neutrino+=rate*nu_q[k];
+    epsT+=rate*heat*(rates[k].dlnrate_dlnT+screens[k].dlog_dlnT);
+    epsR+=rate*heat*(1+screens[k].dlog_dlnRho);
+    for(std::size_t i=0;i<3;++i) s.dXdt[i]+=stoich[k][i]*rate*w[i];
+    for(std::size_t j=0;j<NSPEC;++j) {
+      const double derivative=rate*screens[k].dlog_dX[j]
+        +(j==static_cast<std::size_t>(a[k])?coefficient*y[b[k]]/w[a[k]]:0)
+        +(j==static_cast<std::size_t>(b[k])?coefficient*y[a[k]]/w[b[k]]:0);
+      result.deps_dX[j]+=heat*derivative;
+      for(std::size_t i=0;i<3;++i) result.d_dXdt_dX[i][j]+=stoich[k][i]*w[i]*derivative;
+    }
   }
+  if(s.eps>0) {s.dlneps_dlnT=epsT/s.eps;s.dlneps_dlnRho=epsR/s.eps;}
   return result;
 }
-
+NuclearState PPChains::eval(double T,double rho,const Composition& comp) const {
+  return composition_response(T,rho,comp).state;
+}
+const char* PPChains::name() const {
+  if(rates_==PPRates::legacy) {
+    if(screening_==PPScreening::legacy_weak) return "legacy pp fits; capped classical weak screening";
+    if(screening_==PPScreening::debye_fermi) return "legacy pp fits; finite-degeneracy Debye screening";
+    return "legacy pp fits; finite-degeneracy Salpeter--Van Horn screening";
+  }
+  if(screening_==PPScreening::legacy_weak) return "Solar Fusion II quadrature; capped classical weak screening";
+  if(screening_==PPScreening::debye_fermi) return "Solar Fusion II quadrature; finite-degeneracy Debye screening";
+  return "Solar Fusion II quadrature; finite-degeneracy Salpeter--Van Horn screening";
+}
 } // namespace ember

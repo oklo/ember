@@ -1,0 +1,80 @@
+{
+  "source": "TLUSTY208/SYNSPEC54 + FastChem4 equilibrium gas depletion, GS98 baryonic mixture, forward-evolution settled-grain family",
+  "opacity_method": "sampling",
+  "approximation": "Hybrid FastChem elemental removal with original gas partition and line data; zero grain opacity; no grain enthalpy, accepted only when condensing layers carry no convective heat",
+  "hydrogen": [
+    0.3,
+    0.45,
+    0.7
+  ],
+  "helium3": [
+    0,
+    0.12
+  ],
+  "teff_K": [
+    2750,
+    2800,
+    3000,
+    3200
+  ],
+  "log_g": [
+    4.9,
+    5.15,
+    5.4
+  ],
+  "metals": [
+    0.0040277310873548045,
+    4.525540547589668e-05,
+    0.001113471054023328,
+    0.00921354245314597,
+    0.0056
+  ],
+  "log_temperature": [
+    17,
+    3.000434077479319,
+    3.889990363442755
+  ],
+  "log_density": [
+    19,
+    -13,
+    -3
+  ],
+  "wavelength_A": [
+    900,
+    300000
+  ],
+  "line_threshold": 0.0001,
+  "microturbulence_km_s": 1.0,
+  "opacity_frequencies": 30000,
+  "atmosphere_frequencies": 20000,
+  "depths": 300,
+  "alpha": 1.9,
+  "tau_top": 1e-07,
+  "tau_bottom": 1000,
+  "tau": 100,
+  "synthesis_spacing_A": 0.1,
+  "temperature_step_limit": 1.03,
+  "initial_depths": 100,
+  "initial_frequencies": 5000,
+  "temperature_K": [
+    1001.0000000000003,
+    1137.7093974231313,
+    1293.0895834015025,
+    1469.6904802655854,
+    1670.41026044103,
+    1898.5429079478317,
+    2157.8322755077784,
+    2452.5335243837517,
+    2787.4829552314345,
+    3168.177375947656,
+    3600.864309009994,
+    4092.644518687531,
+    4651.588540682389,
+    5286.869126553548,
+    6008.911776449741,
+    6829.565830522868,
+    7762.298926778998
+  ],
+  "convection_derivative_step": 1e-05,
+  "material_domain_note": "Cool-atmosphere rectangle ends at 7762.30 K; must bracket every final profile. Excludes unsupported high-density He I profile extrapolation at 15000 K."
+}

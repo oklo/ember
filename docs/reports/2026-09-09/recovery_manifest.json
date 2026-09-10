@@ -1,0 +1,140 @@
+{
+  "snapshot_utc": "2026-09-09T23:09:02.195477+00:00",
+  "scope": "Immutable completed gas-track segments and native restart evidence. Executable is the original macOS arm64 binary, not the separately rebuilt validation binary.",
+  "files": [
+    {
+      "source_path": "/Users/greglaughlin/Projects/ember/out/evolution-metal-512-2500gyr-gas-checkpoint.json",
+      "archive_file": "evolution-metal-512-2500gyr-gas-checkpoint.json.gz",
+      "bytes": 563840,
+      "sha256": "3051b3801f1592787184b09fab58033a21a25d438306f600422daa1631a75bfb",
+      "archive_sha256": "339df54afa2f0e7b2c4d159b4065b4de433e4c1976e1d51e0a024db76d6a74ab"
+    },
+    {
+      "source_path": "/Users/greglaughlin/Projects/ember/out/evolution-metal-512-2500gyr-gas-checkpoint.receipt.json",
+      "archive_file": "evolution-metal-512-2500gyr-gas-checkpoint.receipt.json.gz",
+      "bytes": 15123,
+      "sha256": "e136a50dda15058d107404bcb672afb0f68c9deb151db67418a357d6f89cac2b",
+      "archive_sha256": "5961c02e597e3ad9a0d0d68b992e635d15c7f56b8d8f64b18a1d947bee6f18fb"
+    },
+    {
+      "source_path": "/Users/greglaughlin/Projects/ember/out/evolution-metal-512-2750gyr-gas-restart.json",
+      "archive_file": "evolution-metal-512-2750gyr-gas-restart.json.gz",
+      "bytes": 117432,
+      "sha256": "018d01593338c99562bb662b6d3285402b7d20e64576796adeac62b8824d19a7",
+      "archive_sha256": "5d689f75d77b49d3cf7a8d72bd4b2683e53ad28ca297e83f2792dc15827a1e7d"
+    },
+    {
+      "source_path": "/Users/greglaughlin/Projects/ember/out/evolution-metal-512-2750gyr-gas-restart.receipt.json",
+      "archive_file": "evolution-metal-512-2750gyr-gas-restart.receipt.json.gz",
+      "bytes": 15406,
+      "sha256": "ca8746361b996492ce3170f4750a9f70540531a4eec4f880c104c95efc616a16",
+      "archive_sha256": "14c8199be6db01008ad756f53595ddd605d512029ac8c2416e03169eea6de941"
+    },
+    {
+      "source_path": "/Users/greglaughlin/Projects/ember/out/evolution-metal-512-2850gyr-gas-restart.json",
+      "archive_file": "evolution-metal-512-2850gyr-gas-restart.json.gz",
+      "bytes": 100752,
+      "sha256": "b2d67c169fb29d6a87b2fb66ea8722427a2ce35c8f6b9dc475a6b2b6f15ed0b4",
+      "archive_sha256": "9718a36865c244ddc191fd3b9ff24ef73e73037514487f35e860caaff74781a5"
+    },
+    {
+      "source_path": "/Users/greglaughlin/Projects/ember/out/evolution-metal-512-2850gyr-gas-restart.receipt.json",
+      "archive_file": "evolution-metal-512-2850gyr-gas-restart.receipt.json.gz",
+      "bytes": 17042,
+      "sha256": "8c9692a49e39acd85bc3389c105d2954b6d017e5cd63a5f5f6b53f52e2420da2",
+      "archive_sha256": "70f6812078590107a323b66ee4f19dbd38dc05e68ab912c3bf2b3de05f31bb4e"
+    },
+    {
+      "source_path": "/Users/greglaughlin/Projects/ember/out/evolution-metal-512-2850gyr-gas.restart",
+      "archive_file": "evolution-metal-512-2850gyr-gas.restart.gz",
+      "bytes": 150078,
+      "sha256": "83b6d348ff7a8cd9de524fc0f8134e7f2e66e87569833864846e914633a9a692",
+      "archive_sha256": "d17b4f01475ee1b69142b2580cfb573db121cfbc0054a8eebdfdc477da12858c"
+    },
+    {
+      "source_path": "/private/tmp/ember-forward-run-2850gyr-gas-restart/ember-evolve",
+      "archive_file": "ember-evolve.gz",
+      "bytes": 389088,
+      "sha256": "d04ae649221f0d35c448e438fea620cb72089c6a983498b34c0b2fad7877f974",
+      "archive_sha256": "474bc871bdf2e6eacd8227dad11e2e58c03c1eca85e978328111aac47c4466b6"
+    },
+    {
+      "source_path": "/tmp/ember-tops-hydrogen-poor-refinement/completed.json",
+      "archive_file": "pending_tops_refinement/completed.json",
+      "sha256": "b02d756b519177a73da3798ad2fa194b7bf811ebd8c8d1e5c7f130559dd8a061",
+      "scope": "Completed raw source fetch; not imported, independently audited, or approved for runtime use"
+    },
+    {
+      "source_path": "/tmp/ember-tops-hydrogen-poor-refinement/tops_gs98_x012_z020.request.json",
+      "archive_file": "pending_tops_refinement/tops_gs98_x012_z020.request.json",
+      "sha256": "c7553d60fb7ca93027349f535293cbe55cb2e5143a57851045b075dfa537d4c5",
+      "scope": "Completed raw source fetch; not imported, independently audited, or approved for runtime use"
+    },
+    {
+      "source_path": "/tmp/ember-tops-hydrogen-poor-refinement/tops_gs98_x012_z020.txt",
+      "archive_file": "pending_tops_refinement/tops_gs98_x012_z020.txt",
+      "sha256": "9a627d8fca1af3f01698fd01595cdc6758441c796a3d6a039f93da53467dd7df",
+      "scope": "Completed raw source fetch; not imported, independently audited, or approved for runtime use"
+    },
+    {
+      "source_path": "/tmp/ember-tops-hydrogen-poor-refinement/tops_gs98_x015_z010.request.json",
+      "archive_file": "pending_tops_refinement/tops_gs98_x015_z010.request.json",
+      "sha256": "146bf83f5e5d409ea941857ea2da60f83cc8eba63b69909b2c499486d9d4b075",
+      "scope": "Completed raw source fetch; not imported, independently audited, or approved for runtime use"
+    },
+    {
+      "source_path": "/tmp/ember-tops-hydrogen-poor-refinement/tops_gs98_x015_z010.txt",
+      "archive_file": "pending_tops_refinement/tops_gs98_x015_z010.txt",
+      "sha256": "a5890ac827aabc9e0721e7959c8d898f7a334e9d1eb1197fdcf651e51128c218",
+      "scope": "Completed raw source fetch; not imported, independently audited, or approved for runtime use"
+    },
+    {
+      "source_path": "/tmp/ember-tops-hydrogen-poor-refinement/tops_gs98_x015_z030.request.json",
+      "archive_file": "pending_tops_refinement/tops_gs98_x015_z030.request.json",
+      "sha256": "e959cd01dda750fb4968b12f5e48178e989da4220f3e6e3b1fd99cabc6c844ef",
+      "scope": "Completed raw source fetch; not imported, independently audited, or approved for runtime use"
+    },
+    {
+      "source_path": "/tmp/ember-tops-hydrogen-poor-refinement/tops_gs98_x015_z030.txt",
+      "archive_file": "pending_tops_refinement/tops_gs98_x015_z030.txt",
+      "sha256": "61ec8837aacd20c2e8a02ac492774371c580be74682531d781c0f030eef5c5fa",
+      "scope": "Completed raw source fetch; not imported, independently audited, or approved for runtime use"
+    },
+    {
+      "source_path": "/tmp/ember-tops-hydrogen-poor-refinement/tops_gs98_x018_z020.request.json",
+      "archive_file": "pending_tops_refinement/tops_gs98_x018_z020.request.json",
+      "sha256": "a8d3962d0b5017ccdefeac429fc56158449734ebefa28fe045cc9c1cf4fce0e3",
+      "scope": "Completed raw source fetch; not imported, independently audited, or approved for runtime use"
+    },
+    {
+      "source_path": "/tmp/ember-tops-hydrogen-poor-refinement/tops_gs98_x018_z020.txt",
+      "archive_file": "pending_tops_refinement/tops_gs98_x018_z020.txt",
+      "sha256": "e6f24687907aef1a87d1d3269fe0ec4f4ebe518306c2b91921a866b03ac7911e",
+      "scope": "Completed raw source fetch; not imported, independently audited, or approved for runtime use"
+    },
+    {
+      "source_path": "/tmp/ember-condensate-g490-fine-controller.log",
+      "archive_file": "ember-condensate-g490-fine-controller.log",
+      "sha256": "b706a0cce2c4bf82bb541a7dd8acad74f7c01b21560ea78a0a246afc007cecee",
+      "scope": "Controller/diagnostic log snapshot; does not certify current process liveness"
+    },
+    {
+      "source_path": "/tmp/ember-condensate-forward-retries/solar-g490-fine/plane-004/final.audit.log",
+      "archive_file": "final.audit.log",
+      "sha256": "61ef4d31bf2ca27a05d8e085a2498c687c4bd571b2e9f3d8cca8c1bbbf667643",
+      "scope": "Controller/diagnostic log snapshot; does not certify current process liveness"
+    },
+    {
+      "source_path": "/tmp/ember-condensate-production-thermal-controls-controller.log",
+      "archive_file": "ember-condensate-production-thermal-controls-controller.log",
+      "sha256": "9de6c74a1fafc7b1c1a2b7a11e50cab7671a3995f1253e889e60e808df41d923",
+      "scope": "Controller/diagnostic log snapshot; does not certify current process liveness"
+    },
+    {
+      "source_path": "/tmp/ember-tops-hydrogen-poor-refinement-controller.log",
+      "archive_file": "ember-tops-hydrogen-poor-refinement-controller.log",
+      "sha256": "e3d97f1d9f4a6edaa37ae80e4a640d63372accd29782d289c96287b67ae1c83c",
+      "scope": "Controller/diagnostic log snapshot; does not certify current process liveness"
+    }
+  ]
+}

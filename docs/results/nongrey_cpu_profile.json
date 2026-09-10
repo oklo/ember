@@ -1,0 +1,181 @@
+{
+  "description": "Isolated replay from an accepted final atmosphere; process CPU seconds, not concurrent wall time",
+  "source_sha256": "52259b1efedbb9753a55c1dee5c17c821953d491f20a1efc2c9a3535fe231009",
+  "instrumented_source_sha256": "924ab8a7a5758e16d65b526409c0515de11a14a83b4426c18802f08fca528d08",
+  "executable_sha256": "79021288ad0e1aeea346cd8103a37aed6357ac9d6ee4fa4897807d571fb68e43",
+  "driver_sha256": "e285bb3c77cf5a97600f6874b25b616f1ad67957e4c9228b724eb12ef9f05654",
+  "compiler_flags": [
+    "-O2",
+    "-g",
+    "-fno-automatic",
+    "-std=legacy",
+    "-fallow-argument-mismatch",
+    "-fcheck=bounds",
+    "-fbacktrace"
+  ],
+  "model": {
+    "XH": 0.7,
+    "X3": 0,
+    "teff_K": 2800,
+    "log_g": 5.15
+  },
+  "depths": 300,
+  "frequencies": 20000,
+  "cpu_seconds_by_call": {
+    "initialization": [
+      1.766036
+    ],
+    "formal_solution": [
+      6.049066,
+      32.644112
+    ],
+    "radiative_matrix": [
+      16.858739
+    ],
+    "energy_convection": [
+      27.638987
+    ],
+    "dense_solve": [
+      0.003337999999999397
+    ],
+    "structure_update": [
+      1.601495
+    ]
+  },
+  "cpu_seconds_by_phase": {
+    "initialization": 1.766036,
+    "formal_solution": 38.693178,
+    "radiative_matrix": 16.858739,
+    "energy_convection": 27.638987,
+    "dense_solve": 0.003337999999999397,
+    "structure_update": 1.601495
+  },
+  "chemical_kernel_cpu_seconds": 46.78757399999907,
+  "chemical_kernel_calls": 8995,
+  "timing_note": "Chemical kernel time is included within the phase times; do not add it again. Final formal-solution time includes validation diagnostics.",
+  "wall_seconds": 86.96148371696472,
+  "diagnostics": {
+    "T": 4030.192871829652,
+    "Pgas": 16402542.432580398,
+    "source_density": 9.716935387148878e-05,
+    "column_mass": 116.12109269815662,
+    "flux_error": 6.520044374025424e-05,
+    "correction": 2.77e-07,
+    "effective_flux_error": 0.00019861193067305383,
+    "hydrostatic_error": 1.460019114496447e-07,
+    "chemical_density_error": 2.304822999121825e-13,
+    "iterations": 1,
+    "depths": 300,
+    "tau_bracket": [
+      93.66796607780189,
+      101.00279235048572
+    ],
+    "temperature_range": [
+      1590.9928552020083,
+      4738.903598055878
+    ],
+    "density_range": [
+      1.1139478007445379e-10,
+      0.0003014290349946953
+    ]
+  },
+  "relative_matching_state_change": {
+    "T": -1.2795098314200004e-10,
+    "Pgas": 7.945004654175136e-10
+  },
+  "files": {
+    "cpu-audit-run.log.gz": "1d29bd43d6169189927302d6a41aea027d7d7c8a2b81038fc76ad9803869f06d",
+    "cpu-audit-fort.9.gz": "f12da0268479bbc47a87440e50da8678cc6b18db61a4972234de1ef1a6302b31",
+    "cpu-audit-fort.5.gz": "5e917801f2f26573fd9a0698ad609d0e63645f55a3666c7fe09b1dbcc97501e4",
+    "cpu-audit-fort.8.gz": "9446c0863c3c46e6850905c8cb8cc4a272fec0add3c4f876ec4af41e363213b1",
+    "cpu-audit-tas.gz": "7ea1fb5fe89e9d5a42db649cbcbdb880da9d765a44a59a491471657e31248dfc",
+    "cpu-audit-ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "cpu-audit-opacity.sha256.gz": "6f8bf3d2db52875717b71029adbb7199db51af8f3f0db337ee5692fda5b6a579",
+    "cpu-audit-completed.json.gz": "8166beee6073d1b6f2ab6397894f61257cd193e4a5d9de267f9dc296dde286f5",
+    "cpu-audit-driver.py.gz": "561093edbf42afe9aaf77e9c98a0c9ae61b42e50317c6cacc983f614fd070fa4"
+  },
+  "source_provenance": {
+    "format": 1,
+    "tlusty": "/tmp/ember-nongrey-jacobian-source/tlusty/tlusty.exe",
+    "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+    "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+    "opacity_method": "sampling",
+    "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+    "tlusty_source": "/tmp/ember-nongrey-jacobian-source",
+    "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+    "line_lists": [
+      "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+    ],
+    "inputs": {
+      "tl208-s54.tar.gz": {
+        "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+        "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+      },
+      "synple.tar.gz": {
+        "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+        "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+      },
+      "gfATOc.19.gz": {
+        "url": "ftp:gfATOc.19.gz",
+        "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+      },
+      "gfMOLsun.20.gz": {
+        "url": "ftp:gfMOLsun.20.gz",
+        "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+      },
+      "gfTiO.20.gz": {
+        "url": "ftp:gfTiO.20.gz",
+        "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+      },
+      "H2O-8.20.gz": {
+        "url": "ftp:H2O-8.20.gz",
+        "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+      },
+      "optables.tar.gz": {
+        "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+        "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+      }
+    },
+    "patches": {
+      "tlusty208-ember.patch": "ba44fa283cad260e6c390ebc58f369275ea0f94ee589a3213b518c86ff66c0b1",
+      "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+      "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+    },
+    "line_list_sha256": [
+      "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+      "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+      "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+      "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+    ],
+    "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+    "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+    "executables": {
+      "tlusty": "d1f42ce1308f62b5c916f74656e5e7f33ff8f7f4d94756b0f3ceb8cf1c450d08",
+      "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+      "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+    }
+  },
+  "ember_build": {
+    "architecture": "arm64",
+    "compiler_target": "-mcpu=apple-m4",
+    "release_flags": [
+      "-O3",
+      "-ffp-contract=fast",
+      "-fno-math-errno"
+    ],
+    "accelerate": "linked; current small Henyey blocks use a portable pivoted kernel",
+    "gpu": false
+  },
+  "atmosphere_build": {
+    "architecture": "arm64",
+    "parallelism": "eight independent serial atmosphere processes; opacity generation capped at four",
+    "gpu": false,
+    "architecture_specific_target_flag": false
+  },
+  "phase_cpu_total_seconds": 86.561773,
+  "chemical_kernel_fraction_of_phase_cpu": 0.5405108095463694,
+  "scope": "One near-converged 2800 K, logg 5.15, XH=.7, X3=0 replay, including initialization and final diagnostic output; not an average over the complete grid or over early nonlinear iterations."
+}

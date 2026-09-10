@@ -1,5 +1,6 @@
 #include "ember/evolution.hpp"
 #include "ember/constants.hpp"
+#include "ember/convection.hpp"
 #include "energy.hpp"
 #include <algorithm>
 #include <cmath>
@@ -27,14 +28,19 @@ std::vector<double> nodal_mass_weights(const Model& m) {
 }
 
 MixingRegions schwarzschild_mixing_regions(const Model& m,const Physics& p) {
+  auto selected=p;selected.criterion=ConvectiveCriterion::schwarzschild;
+  return convective_mixing_regions(m,selected);
+}
+
+MixingRegions convective_mixing_regions(const Model& m,const Physics& p) {
   if(!p.eos || !p.opacity || m.comp.size()!=m.size())
     throw std::invalid_argument("mixing regions: invalid model or physics");
   nodal_mass_weights(m);
-  struct Local {double P,kappa,ad;};
+  struct Local {double P,kappa,ad,delta;};
   std::vector<Local> local;
   for(std::size_t i=0;i<m.size();++i) {
     const auto e=p.eos->eval(m.T(i),m.rho(i),m.comp[i]);
-    local.push_back({e.P,p.opacity->eval(m.T(i),m.rho(i),m.comp[i]).kappa,e.grad_ad});
+    local.push_back({e.P,p.opacity->eval(m.T(i),m.rho(i),m.comp[i]).kappa,e.grad_ad,e.delta});
   }
   MixingRegions regions;std::size_t first=0;
   for(std::size_t i=0;i+1<m.size();++i) {
@@ -43,7 +49,11 @@ MixingRegions schwarzschild_mixing_regions(const Model& m,const Physics& p) {
     const double P=.5*(local[i].P+local[i+1].P),k=.5*(local[i].kappa+local[i+1].kappa);
     const double L=.5*(m.y[i].L+m.y[i+1].L),ad=.5*(local[i].ad+local[i+1].ad);
     const double rad=3*k*L*P/(16*M_PI*constants::a_rad*constants::c*constants::G*mass*std::pow(T,4));
-    if(!(rad>ad)) {regions.emplace_back(first,i+1);first=i+1;}
+    double B=0;
+    if(p.criterion==ConvectiveCriterion::ledoux)
+      B=composition_buoyancy(*p.eos,T,P,.5*(local[i].delta+local[i+1].delta),
+          std::log(local[i+1].P)-std::log(local[i].P),m.comp[i],m.comp[i+1],.5*(m.rho(i)+m.rho(i+1))).B;
+    if(!(rad>ad+B)) {regions.emplace_back(first,i+1);first=i+1;}
   }
   regions.emplace_back(first,m.size());return regions;
 }
@@ -62,8 +72,11 @@ std::vector<Composition> burn_and_mix(const Model& thermal,const Model& previous
     if(begin!=next || end<=begin || end>thermal.size())
       throw std::invalid_argument("burn_and_mix: regions must partition the mesh");
     next=end;
-    Composition old{};old.basis=AbundanceBasis::baryon_mass;double mass=0;
+    Composition old{};old.basis=AbundanceBasis::baryon_mass;
+    old.metal_inventory=previous.comp[begin].metal_inventory;double mass=0;
     for(std::size_t i=begin;i<end;++i) {
+      if(previous.comp[i].metal_inventory!=old.metal_inventory)
+        throw std::invalid_argument("burn_and_mix: region has inconsistent metal inventories");
       mass+=weights[i];for(std::size_t j=0;j<NSPEC;++j) old.X[j]+=weights[i]*previous.comp[i].X[j];
     }
     for(double& v:old.X) v/=mass;
@@ -123,9 +136,15 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
   for(const auto& c:previous.comp) validate_composition(c);
   Model current=previous;
   try {
+    auto burning=[&](const MixingRegions& regions) {
+      if(regions.size()==1 || (p.alpha_semiconvection==0 && p.alpha_thermohaline==0))
+        return burn_and_mix(current,previous,*p.nuclear,regions,dt,options.abundance_tolerance*.1);
+      return burn_and_transport(current,previous,*p.nuclear,regions,secular_mixing_diffusivities(current,p),
+          dt,options.abundance_tolerance*.1);
+    };
     for(std::size_t iteration=0;iteration<options.max_coupling_iterations;++iteration) {
-      const auto regions=schwarzschild_mixing_regions(current,p);
-      current.comp=burn_and_mix(current,previous,*p.nuclear,regions,dt,options.abundance_tolerance*.1);
+      const auto regions=convective_mixing_regions(current,p);
+      current.comp=burning(regions);
       double change=0;
       for(std::size_t i=0;i<current.size();++i) for(std::size_t j=0;j<NSPEC;++j)
         change=std::max(change,std::abs(current.comp[i].X[j]-previous.comp[i].X[j]));
@@ -134,8 +153,8 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       result.coupling_iterations=iteration+1;result.residual=structure.residual;result.correction=structure.correction;
       if(!structure.converged) throw std::runtime_error("evolve_step: "+structure.message);
       current=structure.model;
-      const auto next_regions=schwarzschild_mixing_regions(current,p);
-      const auto next_comp=burn_and_mix(current,previous,*p.nuclear,next_regions,dt,options.abundance_tolerance*.1);
+      const auto next_regions=convective_mixing_regions(current,p);
+      const auto next_comp=burning(next_regions);
       double residual=0;
       for(std::size_t i=0;i<current.size();++i) for(std::size_t j=0;j<NSPEC;++j)
         residual=std::max(residual,std::abs(current.comp[i].X[j]-next_comp[i].X[j]));

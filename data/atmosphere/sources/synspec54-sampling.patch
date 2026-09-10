@@ -1,0 +1,272 @@
+--- a/synspec/PARAMS.FOR
++++ b/synspec/PARAMS.FOR
+@@ -6,7 +6,7 @@
+       PARAMETER (MATEX = 30,   
+      *           MIOEX = 90,
+      *           MLEVEL= 1650,
+-     *           MDEPTH= 2,
++     *           MDEPTH= 1,
+      *           MDEPF = 500,
+      *           MFREQ = 2000,
+ c    *           MFREQ =   120,
+@@ -32,10 +32,10 @@
+      *           MHT   = 7,
+      *           MHE  = 20,
+      *           MHWL  = 55)
+-      PARAMETER (MFGRID  =  100000,
++      PARAMETER (MFGRID  =   64000,
+      *           MTTAB   =      21,
+      *           MRTAB   =      19,
+-     *           MSFTAB  =20000000)
++     *           MSFTAB  =  200000)
+       parameter (mfhtab=1000,
+      *           mtabth=10,
+      *           mtabeh=10)
+--- a/synspec/LINDAT.FOR
++++ b/synspec/LINDAT.FOR
+@@ -1,13 +1,13 @@
+-      PARAMETER (MLIN0   =1200000, 
++      PARAMETER (MLIN0   =2400000, 
+      *           MGRIEM  =     10,
+      *           MNLT    =   2000,
+      *           MSPHE2  =     20,
+      *           MLIN    = 400000,
+      *           MPRF    =  MLIN0)
+ C
+-C      PARAMETER (MLINM0  =5000000,
+-       PARAMETER (MLINM0  =5000000,
+-     *           MLINM    =5000000,
++C      PARAMETER (MLINM0  =10000000,
++       PARAMETER (MLINM0  =10000000,
++     *           MLINM    =1000000,
+      *           MMLIST  =      3)
+ C
+        REAL*4       EXCL0(MLIN0),
+@@ -25,10 +25,10 @@
+      *              GRM(MLINM0,MMLIST),
+      *              GSM(MLINM0,MMLIST),
+      *              GWM(MLINM0,MMLIST),
+-     *              GVDWH2(MLINM0,MMLIST),
+-     *              GEXPH2(MLINM0,MMLIST),
+-     *              GVDWHE(MLINM0,MMLIST),
+-     *              GEXPHE(MLINM0,MMLIST)
++     *              GVDWH2(MLINM0,1),
++     *              GEXPH2(MLINM0,1),
++     *              GVDWHE(MLINM0,1),
++     *              GEXPHE(MLINM0,1)
+ C     
+       COMMON/LINTOT/FREQ0(MLIN0),
+      *              EXCL0,
+--- a/synspec/synspec54.f
++++ b/synspec/synspec54.f
+@@ -2690,7 +2690,11 @@
+ C
+ C     set up the partial line list for the current interval
+ C
+-      CALL INISET
++      IF(IMODE.EQ.-3) THEN
++         CALL EMBER_INISET
++      ELSE
++         CALL INISET
++      END IF
+       if(ifmol.gt.0) then
+          do ilist=1,nmlist
+             call molset(ilist)
+@@ -18094,6 +18098,8 @@
+                end if
+             end if
+          end if
++         if(np.eq.9.and.ilist.ne.3)
++     *      stop 'EMBER: broadening list must be third molecular list'
+          if(np.eq.9) ivdwli(ilist)=1
+        else
+ c
+@@ -18113,7 +18119,11 @@
+                go to 150
+   130          continue
+   150    continue
++         if(np.eq.9.and.ilist.ne.3)
++     *      stop 'EMBER: broadening list must be third molecular list'
+          if(np.eq.9) ivdwli(ilist)=1
++         if(np.eq.9.and.ilist.ne.3)
++     *      stop 'EMBER: broadening list must be third molecular list'
+          if(np.eq.9) ivdwli(ilist)=1
+       end if
+ c     =========================
+@@ -18296,10 +18306,10 @@
+ 
+ 
+       if(ivdwli(ilist).ne.0) then
+-          gvdwh2(il,ilist)=real(gh2)
+-          gexph2(il,ilist)=real(xnh2)
+-          gvdwhe(il,ilist)=real(ghe)
+-          gexphe(il,ilist)=real(xnhe)
++          gvdwh2(il,1)=real(gh2)
++          gexph2(il,1)=real(xnh2)
++          gvdwhe(il,1)=real(ghe)
++          gexphe(il,1)=real(xnhe)
+           gsm(il,ilist)=0.
+           gwm(il,ilist)=0.
+       end if
+@@ -18430,37 +18440,18 @@
+       DFRCON=NFREQ-3
+       DFRCON=-DFRCON/XX
+       IFRCON=INT(DFRCON)
+-      DO 255 IL=1,NLINM
+-         fr0=freqm(inmlin(il,ilist),ILIST)
++      DO IL=1,NLINM
++         FR0=FREQM(INMLIN(IL,ILIST),ILIST)
+          XJC=3.+DFRCON*(FREQ(1)-FR0)
+          IJC=INT(XJC)
++         IF(IJC.GT.3.AND.IJC.LT.NFREQ) THEN
++            IJC=3
++            DO IJ=4,NFREQ
++               IF(ABS(FREQ(IJ)-FR0).LT.ABS(FREQ(IJC)-FR0)) IJC=IJ
++            END DO
++         END IF
+          IJCMTR(IL,ILIST)=IJC
+-         if(ijc.le.3.or.ijc.ge.nfreq) go to 255
+-         if(fr0.lt.freq(ijc)) then
+-            ijc0=ijc
+-            dfr0=freq(ijc0)-fr0
+-  252       ijc0=ijc0+1
+-            dfr=abs(freq(ijc0)-fr0)
+-            if(dfr.lt.dfr0) then
+-               ijc=ijc0
+-               ijc0=ijc0+1
+-               dfr0=dfr
+-               go to 252
+-            end if
+-          else if(fr0.gt.freq(ijc)) then
+-            ijc0=ijc
+-            dfr0=fr0-freq(ijc0)
+-  254       ijc0=ijc0-1
+-            dfr=abs(freq(ijc0)-fr0)
+-            if(dfr.lt.dfr0) then
+-               ijc=ijc0
+-               ijc0=ijc0-1
+-               dfr0=dfr
+-               go to 254
+-            end if
+-         end if
+-         IJCMTR(IL,ILIST)=IJC
+-  255 continue
++      END DO
+ C
+       DO  IL=1,NLINM
+          INMLIP(IL,ILIST)=INMLIN(IL,ILIST)
+@@ -22094,15 +22085,17 @@
+       d1=un/dens(1)
+       if (nfreq.le.3) return 
+ c
++      ijend=nfreq-1
++      if(nblank.eq.iblank.and.imode.eq.-3) ijend=nfreq
+       if(iprin.lt.4) then
+-         do ij=3,nfreq-1
++         do ij=3,ijend
+             abl=log(abso(ij)*d1)
+             ipfreq=ipfreq+1
+             absop(ipfreq)=abl
+             wltab(ipfreq)=2.997925e18/freq(ij)
+          end do
+        else
+-         do ij=3,nfreq-1
++         do ij=3,ijend
+             abl=log(abso(ij)*d1)
+             ipfreq=ipfreq+1
+             write(27,637) ipfreq,c18/freq(ij),abl
+@@ -23646,8 +23639,8 @@
+       con=4.1388e-12
+       t=temp(id)
+       anhe=rrr(id,1,2)
+-      gvdw=con*t*((296./t)**gexph2(il,ilist)*gvdwh2(il,ilist)*anh2(id)+
+-     *            (296./t)**gexphe(il,ilist)*gvdwhe(il,ilist)*anhe)
++      gvdw=con*t*((296./t)**gexph2(il,1)*gvdwh2(il,1)*anh2(id)+
++     *            (296./t)**gexphe(il,1)*gvdwhe(il,1)*anhe)
+       return
+       end
+ C
+@@ -23912,3 +23905,83 @@
+ C
+ C =========================================================================
+ 
++
++C     Ember opacity sampling: source line/continuum kernels, prescribed
++C     wavelengths. Maximum 16 samples per continuum interpolation span.
++C     Requires complete in-memory line lists; no chunked list fallback.
++      SUBROUTINE EMBER_INISET
++      INCLUDE 'PARAMS.FOR'
++      INCLUDE 'MODELP.FOR'
++      INCLUDE 'SYNTHP.FOR'
++      INCLUDE 'LINDAT.FOR'
++      COMMON/LIMPAR/ALAM0,ALAM1,FRMIN,FRLAST,FRLI0,FRLIM
++      COMMON/BLAPAR/RELOP,SPACE0,CUTOF0,TSTD,DSTD,ALAMC
++      COMMON/GRIDF0/WLGRID(MFGRID),NFGRID
++      PARAMETER (CNM=2.997925D17,C18=2.997925D18)
++      SAVE INEXTFR
++      IF(ND.NE.1) STOP 'Ember sampling requires one material state'
++      IF(NXTSET.NE.0) STOP 'Ember sampling: atomic list incomplete'
++      DO ILIST=1,NMLIST
++         IF(NXTSEM(ILIST).NE.0)
++     *      STOP 'Ember sampling: molecular list incomplete'
++      END DO
++      IF(IBLANK.LE.1) INEXTFR=1
++      ISTART=INEXTFR
++      IEND=MIN(ISTART+15,NFGRID)
++      NFREQ=IEND-ISTART+3
++      NFREQS=NFREQ
++      DO IJ=3,NFREQ
++         FREQ(IJ)=C18/WLGRID(ISTART+IJ-3)
++      END DO
++      FREQ(1)=FREQ(3)
++      FREQ(2)=FREQ(NFREQ)
++      XX=FREQ(2)-FREQ(1)
++      IF(XX.GE.0.) STOP 'Ember sampling: invalid frequency span'
++      DO IJ=1,NFREQ
++         WLAM(IJ)=C18/FREQ(IJ)
++         FRX1(IJ)=(FREQ(IJ)-FREQ(1))/XX
++         FRX2(IJ)=(FREQ(2)-FREQ(IJ))/XX
++         W(IJ)=0.
++      END DO
++      W(1)=-XX/2.
++      W(2)=W(1)
++      FRMIN=FREQ(1)
++      FRMAX=FREQ(2)
++      ALA0=CNM/FRMIN
++      ALA1=CNM/FRMAX
++      SPACE=SPACE0*ALA0/ALAMC
++      SPAC=3.E16/ALA0/ALA0*SPACE
++      DFRCON=-(NFREQ-3)/XX
++      NLIN=0
++      IRLIST=0
++      DO IL=1,NLIN0
++         FR0=FREQ0(IL)
++         ALAM=CNM/FR0
++         IF(ALAM.LT.ALA0-CUTOF0) CYCLE
++         IF(ALAM.GT.ALA1+CUTOF0) EXIT
++         EXT=EXTIN(IL)
++         IF(FR0-FRMIN.GT.EXT+SPAC) CYCLE
++         IF(FRMAX-FR0.GT.EXT+SPAC) CYCLE
++         NLIN=NLIN+1
++         IF(NLIN.GT.MLIN) STOP 'Ember sampling: atomic set too big'
++         INDLIN(NLIN)=IL
++         INDLIP(NLIN)=IL
++         XJC=3.+DFRCON*(FREQ(1)-FR0)
++         IJC=INT(XJC)
++         IF(IJC.GT.3.AND.IJC.LT.NFREQ) THEN
++            IJC=3
++            DO IJ=4,NFREQ
++               IF(ABS(FREQ(IJ)-FR0).LT.ABS(FREQ(IJC)-FR0)) IJC=IJ
++            END DO
++         END IF
++         IJCNTR(NLIN)=IJC
++      END DO
++      CALL READPH
++      NBLANK=IBLANK+1
++      IF(IEND.EQ.NFGRID) NBLANK=IBLANK
++      INEXTFR=IEND
++      ALAM0=ALA1
++      ALAM1=ALA1
++      ALM00=ALA1
++      RETURN
++      END

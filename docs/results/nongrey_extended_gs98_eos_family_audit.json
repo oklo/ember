@@ -1,0 +1,1185 @@
+{
+  "description": "Complete-family matching-state audit; local comparisons, not a global physical error bound",
+  "metal_inventory": "gs98",
+  "manifest_sha256": "c6d0c7a5d2bdb5a5689f8692ad2b7e678321baa515b10b2b25bb0f2b0484aa2a",
+  "models": 72,
+  "eos_probe_sha256": "5bf47b9315c23d047f685bce2df0d23715d9eb320a5325f410e5441bdfa6fb58",
+  "eos_probe_source_sha256": "4809e9cfffb0f0aab08226d8c2314be3bd37d4b4568eb4b38221a638968fdd52",
+  "interpolation": {
+    "composition": {
+      "coordinates": [
+        0.55,
+        0.1,
+        2800,
+        5.15
+      ],
+      "direct_record": "heldout-composition-final",
+      "direct": {
+        "T": 4080.0783407188737,
+        "Pgas": 16700398.064969193,
+        "source_density": 0.00010556942622644167
+      },
+      "interpolated": {
+        "T": 4086.5773375209437,
+        "Pgas": 16712180.536284076,
+        "source_density": 0.00010587730863933089
+      },
+      "relative_difference": {
+        "T": 0.0015928607882869095,
+        "Pgas": 0.0007055203875407923,
+        "source_density": 0.002916397520517311
+      },
+      "corners": [
+        {
+          "coordinates": [
+            0.45,
+            0,
+            2800,
+            5.15
+          ],
+          "weight": 0.09999999999999994
+        },
+        {
+          "coordinates": [
+            0.45,
+            0.12,
+            2800,
+            5.15
+          ],
+          "weight": 0.49999999999999983
+        },
+        {
+          "coordinates": [
+            0.7,
+            0,
+            2800,
+            5.15
+          ],
+          "weight": 0.0666666666666667
+        },
+        {
+          "coordinates": [
+            0.7,
+            0.12,
+            2800,
+            5.15
+          ],
+          "weight": 0.33333333333333354
+        }
+      ]
+    },
+    "four_axis": {
+      "coordinates": [
+        0.55,
+        0.1,
+        2900,
+        5.1
+      ],
+      "direct_record": "heldout-four-axis-final",
+      "direct": {
+        "T": 4171.068084318934,
+        "Pgas": 13739025.864475297,
+        "source_density": 8.174558858953301e-05
+      },
+      "interpolated": {
+        "T": 4184.704773528674,
+        "Pgas": 13704018.344537286,
+        "source_density": 8.13076395286371e-05
+      },
+      "relative_difference": {
+        "T": 0.0032693518624180573,
+        "Pgas": -0.0025480350851168065,
+        "source_density": -0.005357464157423442
+      },
+      "corners": [
+        {
+          "coordinates": [
+            0.45,
+            0,
+            2800,
+            4.9
+          ],
+          "weight": 0.009827552019513491
+        },
+        {
+          "coordinates": [
+            0.45,
+            0,
+            2800,
+            5.15
+          ],
+          "weight": 0.039310208078053265
+        },
+        {
+          "coordinates": [
+            0.45,
+            0,
+            3000,
+            4.9
+          ],
+          "weight": 0.010172447980486781
+        },
+        {
+          "coordinates": [
+            0.45,
+            0,
+            3000,
+            5.15
+          ],
+          "weight": 0.0406897919219464
+        },
+        {
+          "coordinates": [
+            0.45,
+            0.12,
+            2800,
+            4.9
+          ],
+          "weight": 0.049137760097567464
+        },
+        {
+          "coordinates": [
+            0.45,
+            0.12,
+            2800,
+            5.15
+          ],
+          "weight": 0.19655104039026638
+        },
+        {
+          "coordinates": [
+            0.45,
+            0.12,
+            3000,
+            4.9
+          ],
+          "weight": 0.050862239902433916
+        },
+        {
+          "coordinates": [
+            0.45,
+            0.12,
+            3000,
+            5.15
+          ],
+          "weight": 0.20344895960973206
+        },
+        {
+          "coordinates": [
+            0.7,
+            0,
+            2800,
+            4.9
+          ],
+          "weight": 0.006551701346342334
+        },
+        {
+          "coordinates": [
+            0.7,
+            0,
+            2800,
+            5.15
+          ],
+          "weight": 0.026206805385368872
+        },
+        {
+          "coordinates": [
+            0.7,
+            0,
+            3000,
+            4.9
+          ],
+          "weight": 0.006781631986991194
+        },
+        {
+          "coordinates": [
+            0.7,
+            0,
+            3000,
+            5.15
+          ],
+          "weight": 0.027126527947964295
+        },
+        {
+          "coordinates": [
+            0.7,
+            0.12,
+            2800,
+            4.9
+          ],
+          "weight": 0.03275850673171168
+        },
+        {
+          "coordinates": [
+            0.7,
+            0.12,
+            2800,
+            5.15
+          ],
+          "weight": 0.13103402692684438
+        },
+        {
+          "coordinates": [
+            0.7,
+            0.12,
+            3000,
+            4.9
+          ],
+          "weight": 0.033908159934955974
+        },
+        {
+          "coordinates": [
+            0.7,
+            0.12,
+            3000,
+            5.15
+          ],
+          "weight": 0.1356326397398215
+        }
+      ]
+    }
+  },
+  "density_comparison": [
+    {
+      "coordinates": [
+        0.3,
+        0,
+        2600,
+        4.9
+      ],
+      "T": 4003.462472831159,
+      "Pgas": 14466955.880858732,
+      "source_density": 0.00011874318382325241,
+      "ember_density": 0.00011972541149351743,
+      "relative_density_difference": 0.008271865707483839
+    },
+    {
+      "coordinates": [
+        0.3,
+        0,
+        2600,
+        5.15
+      ],
+      "T": 4034.4629203792892,
+      "Pgas": 21705862.614991754,
+      "source_density": 0.00017948725631273954,
+      "ember_density": 0.00018084337995506362,
+      "relative_density_difference": 0.007555542773249435
+    },
+    {
+      "coordinates": [
+        0.3,
+        0,
+        2600,
+        5.4
+      ],
+      "T": 4068.2088107027994,
+      "Pgas": 32510317.891337432,
+      "source_density": 0.00027018278742940895,
+      "ember_density": 0.0002720318261249846,
+      "relative_density_difference": 0.006843658373532735
+    },
+    {
+      "coordinates": [
+        0.3,
+        0,
+        2800,
+        4.9
+      ],
+      "T": 4193.386643141616,
+      "Pgas": 11623585.415824527,
+      "source_density": 8.657090384988844e-05,
+      "ember_density": 8.750173540182193e-05,
+      "relative_density_difference": 0.010752244813656109
+    },
+    {
+      "coordinates": [
+        0.3,
+        0,
+        2800,
+        5.15
+      ],
+      "T": 4210.882895812787,
+      "Pgas": 17371207.825860377,
+      "source_density": 0.00013165825263760197,
+      "ember_density": 0.00013298195917349056,
+      "relative_density_difference": 0.010054109859198634
+    },
+    {
+      "coordinates": [
+        0.3,
+        0,
+        2800,
+        5.4
+      ],
+      "T": 4235.475155726204,
+      "Pgas": 25955466.981580783,
+      "source_density": 0.00019930250906497808,
+      "ember_density": 0.0002011518543318104,
+      "relative_density_difference": 0.009279086728553931
+    },
+    {
+      "coordinates": [
+        0.3,
+        0,
+        3000,
+        4.9
+      ],
+      "T": 4434.727243443197,
+      "Pgas": 9244574.491192387,
+      "source_density": 6.103974712643769e-05,
+      "ember_density": 6.17817380607867e-05,
+      "relative_density_difference": 0.012155865141643796
+    },
+    {
+      "coordinates": [
+        0.3,
+        0,
+        3000,
+        5.15
+      ],
+      "T": 4427.865874925847,
+      "Pgas": 13797426.554453984,
+      "source_density": 9.386787139640619e-05,
+      "ember_density": 9.500839430051887e-05,
+      "relative_density_difference": 0.012150301132282104
+    },
+    {
+      "coordinates": [
+        0.3,
+        0,
+        3000,
+        5.4
+      ],
+      "T": 4435.5064613841205,
+      "Pgas": 20610287.741560016,
+      "source_density": 0.00014357578290962096,
+      "ember_density": 0.0001452581889367649,
+      "relative_density_difference": 0.011717895546514256
+    },
+    {
+      "coordinates": [
+        0.3,
+        0,
+        3200,
+        4.9
+      ],
+      "T": 4763.247677598479,
+      "Pgas": 7163133.007212238,
+      "source_density": 4.114807820656422e-05,
+      "ember_density": 4.1559671184883984e-05,
+      "relative_density_difference": 0.010002726646274107
+    },
+    {
+      "coordinates": [
+        0.3,
+        0,
+        3200,
+        5.15
+      ],
+      "T": 4712.03533054083,
+      "Pgas": 10828397.582132947,
+      "source_density": 6.477809397171647e-05,
+      "ember_density": 6.554677411609012e-05,
+      "relative_density_difference": 0.011866359400899862
+    },
+    {
+      "coordinates": [
+        0.3,
+        0,
+        3200,
+        5.4
+      ],
+      "T": 4687.277920467659,
+      "Pgas": 16236197.752880966,
+      "source_density": 0.00010057925846578317,
+      "ember_density": 0.00010186484776953727,
+      "relative_density_difference": 0.012781853071540006
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        2600,
+        4.9
+      ],
+      "T": 4010.8300951884257,
+      "Pgas": 14432104.566304794,
+      "source_density": 0.000114764116826114,
+      "ember_density": 0.00011570365248419214,
+      "relative_density_difference": 0.008186667436318018
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        2600,
+        5.15
+      ],
+      "T": 4041.4720421543816,
+      "Pgas": 21647534.742082365,
+      "source_density": 0.00017342249167180416,
+      "ember_density": 0.00017472064439478366,
+      "relative_density_difference": 0.007485492282259587
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        2600,
+        5.4
+      ],
+      "T": 4074.925578418507,
+      "Pgas": 32417138.894267567,
+      "source_density": 0.0002610057808871492,
+      "ember_density": 0.0002627767088612166,
+      "relative_density_difference": 0.006785014370364273
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        2800,
+        4.9
+      ],
+      "T": 4202.231065938949,
+      "Pgas": 11600146.899711063,
+      "source_density": 8.373652921900617e-05,
+      "ember_density": 8.462239535915132e-05,
+      "relative_density_difference": 0.010579207765206489
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        2800,
+        5.15
+      ],
+      "T": 4219.025262728015,
+      "Pgas": 17327071.62869834,
+      "source_density": 0.00012726996479134025,
+      "ember_density": 0.00012853201735791542,
+      "relative_density_difference": 0.0099163425451112
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        2800,
+        5.4
+      ],
+      "T": 4243.171141492489,
+      "Pgas": 25884543.34704253,
+      "source_density": 0.00019260650548951478,
+      "ember_density": 0.0001943723297402588,
+      "relative_density_difference": 0.009168040540770583
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3000,
+        4.9
+      ],
+      "T": 4445.911689596678,
+      "Pgas": 9225358.835445574,
+      "source_density": 5.909154153836946e-05,
+      "ember_density": 5.9790328234207834e-05,
+      "relative_density_difference": 0.011825494438736817
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3000,
+        5.15
+      ],
+      "T": 4437.893771893401,
+      "Pgas": 13767307.43613874,
+      "source_density": 9.083281618856128e-05,
+      "ember_density": 9.191242793962625e-05,
+      "relative_density_difference": 0.011885701625982792
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3000,
+        5.4
+      ],
+      "T": 4444.674358299101,
+      "Pgas": 20559232.492425602,
+      "source_density": 0.00013886022469586503,
+      "ember_density": 0.0001404580089483337,
+      "relative_density_difference": 0.011506421338206785
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3200,
+        4.9
+      ],
+      "T": 4779.500228394289,
+      "Pgas": 7137365.990244563,
+      "source_density": 3.9826060940338016e-05,
+      "ember_density": 4.020513277300377e-05,
+      "relative_density_difference": 0.009518185422194625
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3200,
+        5.15
+      ],
+      "T": 4725.481397435299,
+      "Pgas": 10799081.7940803,
+      "source_density": 6.27243912536537e-05,
+      "ember_density": 6.344132858072938e-05,
+      "relative_density_difference": 0.01142996070183333
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3200,
+        5.4
+      ],
+      "T": 4698.8485379026,
+      "Pgas": 16195817.10724599,
+      "source_density": 9.737216886695547e-05,
+      "ember_density": 9.85807006599553e-05,
+      "relative_density_difference": 0.01241147041359536
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2600,
+        4.9
+      ],
+      "T": 3916.7735939767026,
+      "Pgas": 14164130.798413198,
+      "source_density": 0.00010574658868947709,
+      "ember_density": 0.00010671075732811398,
+      "relative_density_difference": 0.009117728057102203
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2600,
+        5.15
+      ],
+      "T": 3949.058647656112,
+      "Pgas": 21224964.941334493,
+      "source_density": 0.00015970789323328203,
+      "ember_density": 0.0001610251453461983,
+      "relative_density_difference": 0.008247883597037875
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2600,
+        5.4
+      ],
+      "T": 3984.0504340874168,
+      "Pgas": 31747794.54338675,
+      "source_density": 0.00024012642413471271,
+      "ember_density": 0.00024190957627368665,
+      "relative_density_difference": 0.007425888864165842
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2800,
+        4.9
+      ],
+      "T": 4095.165787492493,
+      "Pgas": 11356299.114773657,
+      "source_density": 7.65934605799505e-05,
+      "ember_density": 7.755101835810734e-05,
+      "relative_density_difference": 0.012501821577278305
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2800,
+        5.15
+      ],
+      "T": 4116.280078873514,
+      "Pgas": 16966427.224137608,
+      "source_density": 0.0001165980290764234,
+      "ember_density": 0.00011793215821568848,
+      "relative_density_difference": 0.011442124278024046
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2800,
+        5.4
+      ],
+      "T": 4143.468070281908,
+      "Pgas": 25338419.24708031,
+      "source_density": 0.00017658058781865095,
+      "ember_density": 0.00017841690251471447,
+      "relative_density_difference": 0.010399301071244649
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3000,
+        4.9
+      ],
+      "T": 4316.559590824188,
+      "Pgas": 9016468.315484699,
+      "source_density": 5.341855371040157e-05,
+      "ember_density": 5.425141964403418e-05,
+      "relative_density_difference": 0.015591323159886317
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3000,
+        5.15
+      ],
+      "T": 4318.857213722333,
+      "Pgas": 13450889.056845827,
+      "source_density": 8.235871483063255e-05,
+      "ember_density": 8.358400141192977e-05,
+      "relative_density_difference": 0.01487743687862264
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3000,
+        5.4
+      ],
+      "T": 4331.948519755133,
+      "Pgas": 20070090.966428254,
+      "source_density": 0.000126150347076356,
+      "ember_density": 0.00012790238751376448,
+      "relative_density_difference": 0.013888510638405238
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3200,
+        4.9
+      ],
+      "T": 4599.714990841953,
+      "Pgas": 7033130.356290053,
+      "source_density": 3.578305027545281e-05,
+      "ember_density": 3.6336452714306085e-05,
+      "relative_density_difference": 0.015465490912408786
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3200,
+        5.15
+      ],
+      "T": 4573.417640756222,
+      "Pgas": 10564703.156448636,
+      "source_density": 5.619902093498185e-05,
+      "ember_density": 5.7130645921528277e-05,
+      "relative_density_difference": 0.016577245849607403
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3200,
+        5.4
+      ],
+      "T": 4563.347744376166,
+      "Pgas": 15789615.930806207,
+      "source_density": 8.734427066785423e-05,
+      "ember_density": 8.880161314904713e-05,
+      "relative_density_difference": 0.016685038068893654
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2600,
+        4.9
+      ],
+      "T": 3922.7712013449254,
+      "Pgas": 14131941.153709758,
+      "source_density": 0.00010255791636885142,
+      "ember_density": 0.00010348640387545992,
+      "relative_density_difference": 0.009053299242831603
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2600,
+        5.15
+      ],
+      "T": 3954.9228293618567,
+      "Pgas": 21171578.580347523,
+      "source_density": 0.00015484525211090098,
+      "ember_density": 0.00015611426187102498,
+      "relative_density_difference": 0.008195341754586805
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2600,
+        5.4
+      ],
+      "T": 3989.8170461139807,
+      "Pgas": 31661691.31093689,
+      "source_density": 0.00023275849864933172,
+      "ember_density": 0.0002344768028601212,
+      "relative_density_difference": 0.007382347887448182
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2800,
+        4.9
+      ],
+      "T": 4102.008499304454,
+      "Pgas": 11339477.728486398,
+      "source_density": 7.437855713519491e-05,
+      "ember_density": 7.529818670464405e-05,
+      "relative_density_difference": 0.012364175978536007
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2800,
+        5.15
+      ],
+      "T": 4122.788322249609,
+      "Pgas": 16931061.737311278,
+      "source_density": 0.00011314029209812824,
+      "ember_density": 0.0001144225537506651,
+      "relative_density_difference": 0.011333377603663264
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2800,
+        5.4
+      ],
+      "T": 4149.785660530929,
+      "Pgas": 25277808.9083165,
+      "source_density": 0.00017126907494075598,
+      "ember_density": 0.0001730352449205642,
+      "relative_density_difference": 0.010312252696052404
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000,
+        4.9
+      ],
+      "T": 4324.37902767151,
+      "Pgas": 9005182.977292405,
+      "source_density": 5.194405849047599e-05,
+      "ember_density": 5.2739331928248346e-05,
+      "relative_density_difference": 0.015310190633605725
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000,
+        5.15
+      ],
+      "T": 4326.259507798562,
+      "Pgas": 13431766.848070879,
+      "source_density": 8.003589380395697e-05,
+      "ember_density": 8.120887233608603e-05,
+      "relative_density_difference": 0.014655656061044242
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000,
+        5.4
+      ],
+      "T": 4338.956959871337,
+      "Pgas": 20032093.194345403,
+      "source_density": 0.00012249680907141608,
+      "ember_density": 0.00012417659904294756,
+      "relative_density_difference": 0.013712928395972712
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3200,
+        4.9
+      ],
+      "T": 4609.712816494683,
+      "Pgas": 7022099.720306296,
+      "source_density": 3.484460837352183e-05,
+      "ember_density": 3.5367328771116805e-05,
+      "relative_density_difference": 0.015001471446933756
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3200,
+        5.15
+      ],
+      "T": 4582.292691295966,
+      "Pgas": 10551048.295490965,
+      "source_density": 5.470194734734786e-05,
+      "ember_density": 5.558704135916731e-05,
+      "relative_density_difference": 0.0161803017029587
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3200,
+        5.4
+      ],
+      "T": 4571.522447879537,
+      "Pgas": 15769022.854714,
+      "source_density": 8.496469858495901e-05,
+      "ember_density": 8.63545579018085e-05,
+      "relative_density_difference": 0.01635807976720738
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2600,
+        4.9
+      ],
+      "T": 3836.64204684677,
+      "Pgas": 13768233.444999283,
+      "source_density": 8.891422080515579e-05,
+      "ember_density": 8.974488680159238e-05,
+      "relative_density_difference": 0.009342330044784353
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2600,
+        5.15
+      ],
+      "T": 3868.634611029103,
+      "Pgas": 20590394.02129472,
+      "source_density": 0.00013411339801453186,
+      "ember_density": 0.0001352404833809069,
+      "relative_density_difference": 0.00840397292933348
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2600,
+        5.4
+      ],
+      "T": 3903.09930641894,
+      "Pgas": 30722575.97205793,
+      "source_density": 0.00020125814858975105,
+      "ember_density": 0.00020277564215459272,
+      "relative_density_difference": 0.007540035399684397
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2800,
+        4.9
+      ],
+      "T": 4007.6828509884517,
+      "Pgas": 10974852.40514606,
+      "source_density": 6.37007274971882e-05,
+      "ember_density": 6.454900095450244e-05,
+      "relative_density_difference": 0.01331654269335747
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2800,
+        5.15
+      ],
+      "T": 4030.1932755099965,
+      "Pgas": 16402533.867355034,
+      "source_density": 9.71692790930442e-05,
+      "ember_density": 9.833871487753855e-05,
+      "relative_density_difference": 0.01203503612880108
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2800,
+        5.4
+      ],
+      "T": 4057.879149527576,
+      "Pgas": 24479776.14204627,
+      "source_density": 0.00014725328435434342,
+      "ember_density": 0.00014884935926204096,
+      "relative_density_difference": 0.010838976629253372
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3000,
+        4.9
+      ],
+      "T": 4219.037427958296,
+      "Pgas": 8686398.915320313,
+      "source_density": 4.378663240177349e-05,
+      "ember_density": 4.45625478282367e-05,
+      "relative_density_difference": 0.017720372266668782
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3000,
+        5.15
+      ],
+      "T": 4225.796592510684,
+      "Pgas": 12972257.636901611,
+      "source_density": 6.784282025961794e-05,
+      "ember_density": 6.896071400611148e-05,
+      "relative_density_difference": 0.01647770157867323
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3000,
+        5.4
+      ],
+      "T": 4240.700371332988,
+      "Pgas": 19340034.551062364,
+      "source_density": 0.00010417541314367751,
+      "ember_density": 0.00010574734287587701,
+      "relative_density_difference": 0.015089258441735254
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3200,
+        4.9
+      ],
+      "T": 4477.909677490665,
+      "Pgas": 6776052.984431382,
+      "source_density": 2.8834087583466784e-05,
+      "ember_density": 2.9398708939409434e-05,
+      "relative_density_difference": 0.0195817313208968
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3200,
+        5.15
+      ],
+      "T": 4463.779389815272,
+      "Pgas": 10149526.201670751,
+      "source_density": 4.544034033532621e-05,
+      "ember_density": 4.634507682034092e-05,
+      "relative_density_difference": 0.01991042492943973
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3200,
+        5.4
+      ],
+      "T": 4461.531037669057,
+      "Pgas": 15164223.702443276,
+      "source_density": 7.098132051459302e-05,
+      "ember_density": 7.235266193658713e-05,
+      "relative_density_difference": 0.01931975077460235
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2600,
+        4.9
+      ],
+      "T": 3841.444372986629,
+      "Pgas": 13740154.920655236,
+      "source_density": 8.661249608778392e-05,
+      "ember_density": 8.741779556854562e-05,
+      "relative_density_difference": 0.00929772858578648
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2600,
+        5.15
+      ],
+      "T": 3873.438815445516,
+      "Pgas": 20543936.542224113,
+      "source_density": 0.00013060194595831823,
+      "ember_density": 0.00013169490022538855,
+      "relative_density_difference": 0.008368590981172153
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2600,
+        5.4
+      ],
+      "T": 3907.9141632802807,
+      "Pgas": 30646359.068189736,
+      "source_density": 0.00019593132322627476,
+      "ember_density": 0.00019740307461320824,
+      "relative_density_difference": 0.007511567638594396
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2800,
+        4.9
+      ],
+      "T": 4012.8800122367784,
+      "Pgas": 10962242.895629328,
+      "source_density": 6.213954127652448e-05,
+      "ember_density": 6.296058927119539e-05,
+      "relative_density_difference": 0.013212971608805413
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2800,
+        5.15
+      ],
+      "T": 4035.3012404759124,
+      "Pgas": 16376223.52099905,
+      "source_density": 9.472608253358275e-05,
+      "ember_density": 9.585848804835881e-05,
+      "relative_density_difference": 0.011954527037203233
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2800,
+        5.4
+      ],
+      "T": 4062.9512092135387,
+      "Pgas": 24432118.74766284,
+      "source_density": 0.00014347954960436442,
+      "ember_density": 0.00014502563174133518,
+      "relative_density_difference": 0.010775627197283422
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3000,
+        4.9
+      ],
+      "T": 4224.525141385317,
+      "Pgas": 8680570.949406143,
+      "source_density": 4.2784525665398074e-05,
+      "ember_density": 4.353305567017199e-05,
+      "relative_density_difference": 0.017495344242633104
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3000,
+        5.15
+      ],
+      "T": 4231.191593469955,
+      "Pgas": 12960097.08919282,
+      "source_density": 6.624057434999423e-05,
+      "ember_density": 6.732040993002928e-05,
+      "relative_density_difference": 0.016301724292569375
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3000,
+        5.4
+      ],
+      "T": 4245.9919272277975,
+      "Pgas": 19314218.58667231,
+      "source_density": 0.00010163939709872124,
+      "ember_density": 0.00010315904375396598,
+      "relative_density_difference": 0.014951354480868595
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3200,
+        4.9
+      ],
+      "T": 4484.208694123801,
+      "Pgas": 6772634.873289365,
+      "source_density": 2.8231190173128982e-05,
+      "ember_density": 2.877293865968221e-05,
+      "relative_density_difference": 0.019189714752758658
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3200,
+        5.15
+      ],
+      "T": 4469.631527271199,
+      "Pgas": 10143821.71862904,
+      "source_density": 4.4454313099423956e-05,
+      "ember_density": 4.5324710134989185e-05,
+      "relative_density_difference": 0.019579585756247075
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3200,
+        5.4
+      ],
+      "T": 4467.198030167237,
+      "Pgas": 15154451.829048976,
+      "source_density": 6.938934121852245e-05,
+      "ember_density": 7.071117707689587e-05,
+      "relative_density_difference": 0.019049551921968222
+    }
+  ],
+  "density_relative_difference_range": [
+    0.006785014370364273,
+    0.01991042492943973
+  ],
+  "note": "Source density interpolation is diagnostic only. Runtime density comes from Ember's EOS at the actual composition."
+}

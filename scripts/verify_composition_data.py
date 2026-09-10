@@ -5,6 +5,7 @@ Run from the repository root. Python standard library only; no network or
 Fortran needed. Independent EOS reference queries have a separate generator.
 """
 import hashlib
+import argparse
 import json
 from pathlib import Path
 import subprocess
@@ -16,8 +17,10 @@ def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def main():
+    parser=argparse.ArgumentParser(description=__doc__);parser.add_argument('--extended',action='store_true')
+    args=parser.parse_args()
     eos=Path('data/eos')
-    spec=json.loads((eos/'sources/freeeos300_composition_manifest.json').read_text())
+    spec=json.loads((eos/('sources/freeeos300_extended_manifest.json' if args.extended else 'sources/freeeos300_composition_manifest.json')).read_text())
     with tempfile.TemporaryDirectory(prefix='ember-composition-') as temporary:
         output=Path(temporary)
         for plane in spec['planes']:
@@ -35,7 +38,17 @@ def main():
             name=f'tops_gs98_composition_z020_{label}.dat'
             if (output/name).read_bytes()!=(opacity/name).read_bytes():
                 raise ValueError(f'non-reproducible opacity: {name}')
-    print('All four EOS planes and both multi-X opacity rectangles reproduce byte for byte.')
+        if args.extended:
+            for script,source,target in [
+                ('import_tops_mixtures.py',opacity/'sources/tops_gs98_mixture_manifest.json',opacity),
+                ('import_aesopus_mixtures.py',opacity/'sources/aesopus21_gs98_mixtures.zip',opacity),
+                ('import_conduction.py',Path('data/conduction/sources'),Path('data/conduction'))]:
+                destination=output/script;destination.mkdir()
+                subprocess.run([sys.executable,'scripts/'+script,str(source),str(destination)],check=True)
+                for table in destination.iterdir():
+                    if table.read_bytes()!=(target/table.name).read_bytes():
+                        raise ValueError(f'non-reproducible extended input: {table.name}')
+    print(f'All {len(spec["planes"])} EOS planes and selected opacity/conductivity inputs reproduce byte for byte.')
 
 
 if __name__=='__main__':main()

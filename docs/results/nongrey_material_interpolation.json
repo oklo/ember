@@ -1,0 +1,242 @@
+{
+  "description": "Independent material states versus bilinear ln-opacity interpolation. Ratios are direct/interpolated minus one; means exclude scattering. Reference stencils copy original source cells without interpolation.",
+  "source_table_sha256": "6864056e33f80e82debeaab0a52b5f1bc1098562a71acfbe97f1d288f0377327",
+  "provenance": {
+    "format": 1,
+    "tlusty": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54/tlusty/tlusty.exe",
+    "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+    "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+    "opacity_method": "sampling",
+    "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+    "tlusty_source": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54",
+    "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+    "line_lists": [
+      "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+    ],
+    "inputs": {
+      "tl208-s54.tar.gz": {
+        "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+        "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+      },
+      "synple.tar.gz": {
+        "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+        "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+      },
+      "gfATOc.19.gz": {
+        "url": "ftp:gfATOc.19.gz",
+        "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+      },
+      "gfMOLsun.20.gz": {
+        "url": "ftp:gfMOLsun.20.gz",
+        "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+      },
+      "gfTiO.20.gz": {
+        "url": "ftp:gfTiO.20.gz",
+        "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+      },
+      "H2O-8.20.gz": {
+        "url": "ftp:H2O-8.20.gz",
+        "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+      },
+      "optables.tar.gz": {
+        "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+        "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+      }
+    },
+    "patches": {
+      "tlusty208-ember.patch": "8f7c1cce2e7c0f38627ac1122f305c2c087f9dd1379ee444d7d4805b82721464",
+      "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+      "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+    },
+    "line_list_sha256": [
+      "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+      "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+      "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+      "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+    ],
+    "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+    "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+    "executables": {
+      "tlusty": "0007b2fb333363bd482fb0476f09d32e947a2a1842cc6bf7229bbfeb97ace9a2",
+      "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+      "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+    }
+  },
+  "files_sha256": {
+    "data/atmosphere/sources/nongrey_validation/material-000-reference-stencil.bin.gz": "d732693a73421945bd09d338a824d99bcd66c09c39d1622292aa6aa0e6034e34",
+    "data/atmosphere/sources/nongrey_validation/material-000-fort.63.gz": "e128a034a6b99c5aad25ab694314a040ea75acc05a02b6f7c27008005697ae8c",
+    "data/atmosphere/sources/nongrey_validation/material-000-fort.29.gz": "a246e5a7cc912f800bf26fca177ab8da9f2bfba942f6fa963f86458092ac6933",
+    "data/atmosphere/sources/nongrey_validation/material-000-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+    "data/atmosphere/sources/nongrey_validation/material-000-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+    "data/atmosphere/sources/nongrey_validation/material-000-fort.2.gz": "4f49f5c977caff67de1994f8b72f82a75c88c246718913ad9a0344661c2617e3",
+    "data/atmosphere/sources/nongrey_validation/material-000-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+    "data/atmosphere/sources/nongrey_validation/material-000-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+    "data/atmosphere/sources/nongrey_validation/material-000-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+    "data/atmosphere/sources/nongrey_validation/material-000-run.log.gz": "a72d214c07d9932940350e4c7da3522c47bdd7f962d8e9980fa96853641d4acf",
+    "data/atmosphere/sources/nongrey_validation/material-000-completed.json.gz": "25c7ed5a1168adb45b7b7274bcb1fa2f7b9021f16fc4a8911cda61da0c63b7ff",
+    "data/atmosphere/sources/nongrey_validation/material-001-reference-stencil.bin.gz": "644a912e891a21973fdf5cea567ea28f58822c99069b80a60a8a7c8b684a69e7",
+    "data/atmosphere/sources/nongrey_validation/material-001-fort.63.gz": "e8f7ffbb9003c1a080df8b144a2ab1784079eed37fb986bfccf9bba0ced0289c",
+    "data/atmosphere/sources/nongrey_validation/material-001-fort.29.gz": "31f880cc3f28725584195d7fadbd1bb0c067bb6960d9c70a5f5c9eb1f0b241c2",
+    "data/atmosphere/sources/nongrey_validation/material-001-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+    "data/atmosphere/sources/nongrey_validation/material-001-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+    "data/atmosphere/sources/nongrey_validation/material-001-fort.2.gz": "df6731df1ee19c20c901724225315ff51873070da88b2d7b04d042f3248077c8",
+    "data/atmosphere/sources/nongrey_validation/material-001-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+    "data/atmosphere/sources/nongrey_validation/material-001-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+    "data/atmosphere/sources/nongrey_validation/material-001-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+    "data/atmosphere/sources/nongrey_validation/material-001-run.log.gz": "87b191df69981b625054eac1bab6abadfaff4e0746d7dd21fd1eeb665bb51404",
+    "data/atmosphere/sources/nongrey_validation/material-001-completed.json.gz": "57844b8b274788ecb5f68f2cac4e3e0a09ae95f4bdf0a359493334d8b07e37a8"
+  },
+  "comparisons": [
+    {
+      "candidate_sha256": "2f1b00025524ee78ff53e779daae079e040bf538a65fec2b899e7675fc7e4eaa",
+      "reference_sha256": "1867920cc080ef190673c4c20856051ef5e1c3c9580d5511bc279f17b7ca8246",
+      "reference_material_interpolation": true,
+      "means_order": [
+        "Planck absorption",
+        "Rosseland absorption"
+      ],
+      "quantiles": [
+        0,
+        0.01,
+        0.5,
+        0.99,
+        1
+      ],
+      "rows": [
+        {
+          "T_K": 2889.608596171097,
+          "rho_baryon_g_cm3": 1.1364636663857264e-05,
+          "candidate_means_cm2_g": [
+            19.35773262523549,
+            0.08818444167003929
+          ],
+          "reference_means_cm2_g": [
+            17.26509825698642,
+            0.09157189197627284
+          ],
+          "means_relative_change": [
+            0.12120605032770504,
+            -0.03699224983918947
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.2697823173218007,
+            -0.09959680120497368,
+            -0.003522243151244775,
+            0.16686398974980252,
+            0.2765210138250094
+          ]
+        },
+        {
+          "T_K": 2889.608596171097,
+          "rho_baryon_g_cm3": 0.00014677992676220703,
+          "candidate_means_cm2_g": [
+            13.156866420098728,
+            0.16333236502644682
+          ],
+          "reference_means_cm2_g": [
+            11.992344716201883,
+            0.17071232494492364
+          ],
+          "means_relative_change": [
+            0.0971054227888859,
+            -0.043230387266167125
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.29059214307642567,
+            -0.09556187582385306,
+            -0.014299141851799979,
+            0.16244596858004848,
+            0.28163052091532714
+          ]
+        }
+      ],
+      "reference_temperature_indices": [
+        5,
+        6
+      ],
+      "reference_density_indices": [
+        14,
+        15,
+        16,
+        17
+      ]
+    },
+    {
+      "candidate_sha256": "f4732937bb7ec367d046d73e6d9c18ae70e196edc79e6bca7b9c32c2a8dd7388",
+      "reference_sha256": "fc565be9e1ef6f343794bdad5514ddf39120f22eed52ff9363d6e31c4a5eb497",
+      "reference_material_interpolation": true,
+      "means_order": [
+        "Planck absorption",
+        "Rosseland absorption"
+      ],
+      "quantiles": [
+        0,
+        0.01,
+        0.5,
+        0.99,
+        1
+      ],
+      "rows": [
+        {
+          "T_K": 4290.417524153592,
+          "rho_baryon_g_cm3": 1.1364636663857264e-05,
+          "candidate_means_cm2_g": [
+            54.38014946383145,
+            0.9975977457988782
+          ],
+          "reference_means_cm2_g": [
+            50.17413047716317,
+            1.0198046662971287
+          ],
+          "means_relative_change": [
+            0.08382843801513729,
+            -0.021775660802654584
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.3555478979326452,
+            -0.15284208058677182,
+            -0.018066937061578858,
+            0.15301239595396882,
+            0.33140780472336373
+          ]
+        },
+        {
+          "T_K": 4290.417524153592,
+          "rho_baryon_g_cm3": 0.00014677992676220703,
+          "candidate_means_cm2_g": [
+            67.64050560009042,
+            3.0159034683978603
+          ],
+          "reference_means_cm2_g": [
+            61.73182045485363,
+            3.035273730432785
+          ],
+          "means_relative_change": [
+            0.09571538797495838,
+            -0.006381718340824238
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.23304358754876864,
+            -0.1006124810429037,
+            -0.015338669648543302,
+            0.18132381921646087,
+            0.33859427671229647
+          ]
+        }
+      ],
+      "reference_temperature_indices": [
+        8,
+        9
+      ],
+      "reference_density_indices": [
+        14,
+        15,
+        16,
+        17
+      ]
+    }
+  ]
+}

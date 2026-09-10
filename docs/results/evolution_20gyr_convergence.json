@@ -1,0 +1,183 @@
+{
+  "1024": {
+    "points": 1024,
+    "converged": true,
+    "steps": 40,
+    "rejected_steps": 0,
+    "nuclear_model": "sfii-svh",
+    "tolerances": {
+      "log_structure": 1e-05,
+      "absolute_abundance": 1e-08,
+      "relative_surface_luminosity": 0.0001
+    },
+    "initial": {
+      "age_yr": 0,
+      "step_yr": 0,
+      "R_Rsun": 0.12491345131899086,
+      "L_Lsun": 0.0008330287608091068,
+      "Teff_K": 2774.51435056925,
+      "central_X": 0.7,
+      "central_Y3": 0,
+      "step_error_norm": 0,
+      "discrete_luminosity_balance": 0,
+      "nuclear_rest_mass_balance": 0,
+      "last_halfstep_coupling_iterations": 0
+    },
+    "final": {
+      "age_yr": 20000000000,
+      "step_yr": 407753805.5701027,
+      "R_Rsun": 0.12508669619372562,
+      "L_Lsun": 0.0008403234866591901,
+      "Teff_K": 2778.6423136055782,
+      "central_X": 0.6952616884951798,
+      "central_Y3": 0.004737915029475208,
+      "step_error_norm": 0.38714726979804936,
+      "discrete_luminosity_balance": 4.073186232744774e-12,
+      "nuclear_rest_mass_balance": -5.5027316037126184e-11,
+      "last_halfstep_coupling_iterations": 3
+    },
+    "max_last_halfstep_luminosity_balance": 4.927142915889249e-09,
+    "max_last_halfstep_nuclear_mass_balance": 1.6192906127088236e-08
+  },
+  "1024-tight": {
+    "points": 1024,
+    "converged": true,
+    "steps": 74,
+    "rejected_steps": 0,
+    "nuclear_model": "sfii-svh",
+    "tolerances": {
+      "log_structure": 2.5e-06,
+      "absolute_abundance": 2.5e-09,
+      "relative_surface_luminosity": 2.5e-05
+    },
+    "initial": {
+      "age_yr": 0,
+      "step_yr": 0,
+      "R_Rsun": 0.12491345131899086,
+      "L_Lsun": 0.0008330287608091068,
+      "Teff_K": 2774.51435056925,
+      "central_X": 0.7,
+      "central_Y3": 0,
+      "step_error_norm": 0,
+      "discrete_luminosity_balance": 0,
+      "nuclear_rest_mass_balance": 0,
+      "last_halfstep_coupling_iterations": 0
+    },
+    "final": {
+      "age_yr": 20000000000,
+      "step_yr": 272404274.5407296,
+      "R_Rsun": 0.12508669078322204,
+      "L_Lsun": 0.0008403232661638262,
+      "Teff_K": 2778.6421914249227,
+      "central_X": 0.6952618242200583,
+      "central_Y3": 0.004737783563820988,
+      "step_error_norm": 0.691673562869255,
+      "discrete_luminosity_balance": 4.440892098500626e-16,
+      "nuclear_rest_mass_balance": -2.673979115908054e-08,
+      "last_halfstep_coupling_iterations": 2
+    },
+    "max_last_halfstep_luminosity_balance": 1.2276694105750607e-08,
+    "max_last_halfstep_nuclear_mass_balance": 2.9634546150347774e-08
+  },
+  "2048": {
+    "points": 2048,
+    "converged": true,
+    "steps": 39,
+    "rejected_steps": 0,
+    "nuclear_model": "sfii-svh",
+    "tolerances": {
+      "log_structure": 1e-05,
+      "absolute_abundance": 1e-08,
+      "relative_surface_luminosity": 0.0001
+    },
+    "initial": {
+      "age_yr": 0,
+      "step_yr": 0,
+      "R_Rsun": 0.1248946298498231,
+      "L_Lsun": 0.0008337098440851356,
+      "Teff_K": 2775.29037945885,
+      "central_X": 0.7,
+      "central_Y3": 0,
+      "step_error_norm": 0,
+      "discrete_luminosity_balance": 0,
+      "nuclear_rest_mass_balance": 0,
+      "last_halfstep_coupling_iterations": 0
+    },
+    "final": {
+      "age_yr": 20000000000,
+      "step_yr": 415054715.614612,
+      "R_Rsun": 0.1250785345591234,
+      "L_Lsun": 0.0008405984792583145,
+      "Teff_K": 2778.960272724793,
+      "central_X": 0.6952587940538507,
+      "central_Y3": 0.0047408081706184595,
+      "step_error_norm": 0.37701075594753775,
+      "discrete_luminosity_balance": 3.955058502924658e-12,
+      "nuclear_rest_mass_balance": -3.804401238483024e-12,
+      "last_halfstep_coupling_iterations": 3
+    },
+    "max_last_halfstep_luminosity_balance": 4.9014945435743584e-09,
+    "max_last_halfstep_nuclear_mass_balance": 1.6315949036282973e-08
+  },
+  "4096": {
+    "points": 4096,
+    "converged": true,
+    "steps": 41,
+    "rejected_steps": 0,
+    "nuclear_model": "sfii-svh",
+    "tolerances": {
+      "log_structure": 1e-05,
+      "absolute_abundance": 1e-08,
+      "relative_surface_luminosity": 0.0001
+    },
+    "initial": {
+      "age_yr": 0,
+      "step_yr": 0,
+      "R_Rsun": 0.12490279565320414,
+      "L_Lsun": 0.0008333745734506993,
+      "Teff_K": 2774.9206086152085,
+      "central_X": 0.7,
+      "central_Y3": 0,
+      "step_error_norm": 0,
+      "discrete_luminosity_balance": 0,
+      "nuclear_rest_mass_balance": 0,
+      "last_halfstep_coupling_iterations": 0
+    },
+    "final": {
+      "age_yr": 20000000000,
+      "step_yr": 13889335.805284051,
+      "R_Rsun": 0.12507282593261376,
+      "L_Lsun": 0.0008408122422477722,
+      "Teff_K": 2779.2003498283616,
+      "central_X": 0.6952591761820683,
+      "central_Y3": 0.004740426352502121,
+      "step_error_norm": 0.00045968784334604607,
+      "discrete_luminosity_balance": 1.3057472880717569e-09,
+      "nuclear_rest_mass_balance": -2.1361621360682648e-09,
+      "last_halfstep_coupling_iterations": 2
+    },
+    "max_last_halfstep_luminosity_balance": 4.964239463944864e-09,
+    "max_last_halfstep_nuclear_mass_balance": 1.651422376625078e-08
+  },
+  "comparisons": {
+    "1024_to_1024-tight": {
+      "R_Rsun": 4.325402891414143e-08,
+      "L_Lsun": 2.623934322043553e-07,
+      "Teff_K": 4.397135067168989e-08,
+      "absolute_Y3": 1.3146565422048062e-07
+    },
+    "1024_to_2048": {
+      "R_Rsun": 6.524782291450482e-05,
+      "L_Lsun": 0.0003272461182985964,
+      "Teff_K": 0.00011442966863994819,
+      "absolute_Y3": 2.8931411432510726e-06
+    },
+    "2048_to_4096": {
+      "R_Rsun": 4.5640337327013114e-05,
+      "L_Lsun": 0.0002542985679041543,
+      "Teff_K": 8.63909808013208e-05,
+      "absolute_Y3": 3.818181163383824e-07
+    }
+  },
+  "interpretation": "Fixed baryonic mass and initial composition; time since specified static state, not formation. Mesh and timestep comparisons are numerical checks, not calibrated physical error bounds. SVH is approximate and not derived from FreeEOS."
+}

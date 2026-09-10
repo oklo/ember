@@ -1,0 +1,231 @@
+--- a/tlusty/BASICS.FOR
++++ b/tlusty/BASICS.FOR
+@@ -3,16 +3,16 @@
+ C
+       PARAMETER (MATOM  =   99, ! max.num. of explicit atoms
+      *           MION   =  170, ! max.num. of explicit ions
+-     *           MLEVEL = 1134, ! max.num. of explicit levels
+-     *           MLVEXP =  233, ! max.num. of explicit linearized levels
+-     *           MTRANS =21000, ! max.num. of all transitions
+-     *           MDEPTH =  100, ! max.num. of depth points
+-     *           MFREQ =135000, ! max.num. of frequency points
+-     *           MFREQP=220000, ! working arrays of frequency
+-     *           MFREQC=125000, ! max.num. of freq.points in continuum
++     *           MLEVEL =   64, ! max.num. of explicit levels
++     *           MLVEXP =   64, ! max.num. of explicit linearized levels
++     *           MTRANS = 1024, ! max.num. of all transitions
++     *           MDEPTH =  400, ! max.num. of depth points
++     *           MFREQ = 32000, ! max.num. of frequency points
++     *           MFREQP= 40000, ! working arrays of frequency
++     *           MFREQC=100005, ! max.num. of freq.points in continuum
+      *           MFREX  =   54, ! max.num. of linearized frequencies
+      *           MFREQL =25798, ! max.num. of frequencies per line
+-     *           MTOT   =  280, ! max.num. of linearized parameters
++     *           MTOT   =   96, ! max.num. of linearized parameters
+      *           MMU    =    6, ! max.num. of angle points
+      *           MFIT   =  357, ! max.num. of fit points (OP b-f c.s)
+      *           MITJ   =  380, ! max.num. of overlapping transitions
+@@ -23,7 +23,7 @@
+      *           NLMX   =   80, ! highest hydrogenic level considered
+      *           MSMX   =    1, ! size of matrix kept in memory in SOLVE
+      *           MFREQ1 =MFREQ, ! =1 for ISPLIN<5; =MFREQ otherwise
+-     *           MFRTAB =125000,! max.num. of freqeuncies in opac.table
++     *           MFRTAB =100005,! max.num. of freqeuncies in opac.table
+ C     *           MFRTAB =    3, ! max.num. of freqeuncies in opac.table
+      *           MTABT  =   21, ! max.number of temps in opac.table
+      *           MTABR  =   19, ! max.number of densities in opac.table
+--- a/tlusty/tlusty208.f
++++ b/tlusty/tlusty208.f
+@@ -2261,7 +2261,7 @@
+       dimension xio2(9,22), xio3(9,13)
+       dimension ffi(matom),pfstu(matom),pfstt(matom),pfstn(matom),
+      *          entot(matom)
+-      dimension idat(30),uu(30,17)
++      dimension idat(99),uu(30,17)
+       dimension u6(6),u7(7),u8(8),u10(10),u11(11)
+       dimension u12(12),u13(13),u14(14),u16(16),u18(18),u20(20)
+       dimension u24(24),u25(25),u26(26),u28(28)
+@@ -2589,7 +2589,7 @@
+ C
+       data idat   / 1, 2, 0, 0, 0, 3, 4, 5, 0, 6,
+      *              7, 8, 9,10, 0,11, 0,12, 0,13,
+-     *              0, 0, 0,14,15,16, 0,17,0,0/ 
++     *              0, 0, 0,14,15,16, 0,17,0,0,69*0/ 
+       data u10/173.93,330.391,511.8,783.3,1018.,1273.8,1671.792,
+      *         1928.462,9645.005,10986.876/
+       data u11/41.449,381.395,577.8,797.8,1116.2,1388.5,1681.5,2130.8,
+@@ -2666,6 +2666,19 @@
+ C                         (-ABN times the solar value)
+ C               if ABN>1.e6, depth-dpendent abundance (additional input)
+ C
++C     Ember: optional baryonic element masses, in units of HMASS.
++C     Cross sections/partition functions retain their source assumptions.
++      inquire(file='ember-masses.dat',exist=lember)
++      if(lember) then
++         open(97,file='ember-masses.dat',status='old')
++         do i=1,matom
++            read(97,*) d(1,i)
++            if(d(1,i).le.0.) stop 'invalid Ember element mass'
++         end do
++         close(97)
++         write(6,*) 'EMBER ELEMENT MASSES: ',d(1,1),d(1,2)
++      end if
++C
+       iabset=0
+       read(ibuff,'(a80)') dum          
+       read(dum,*,iostat=kstat) natoms,iabset
+@@ -2717,6 +2730,7 @@
+          ABND(I)=D(2,I)
+          IF(MA.EQ.0.or.i.gt.natoms) then
+             abnd(i)=d(2,i)*1.e-10
++            if(ma.eq.0.and.abn.gt.0.) abnd(i)=abn
+             enev(i,1)=xio(1,i)
+             enev(i,2)=xio(2,i)
+             amas(i)=d(1,i)
+@@ -13816,7 +13830,7 @@
+ C
+       INCLUDE 'IMPLIC.FOR'
+       INCLUDE 'BASICS.FOR'
+-      DIMENSION A(NR,NR),B(NR),X(NR),D(MLEVEL),IP(MLEVEL)
++      DIMENSION A(NR,NR),B(NR),X(NR),D(NR),IP(NR)
+ c
+       if(n.eq.2) then
+          a11=a(1,1)
+@@ -14189,6 +14203,7 @@
+          END IF
+       END DO
+       WRITE(6,603) TOTF
++      if(ioptab.eq.-1.and.ifmol.gt.0) call ember_eos_check
+ C
+ C ************    For partial opacity table, print electron
+ C      densities - actual, and that from opacity table
+@@ -14395,7 +14410,7 @@
+      * '  ID    MASS',6X,'TAUROSS',5X,'TEMP',7X,'NE',9X,'DENS',
+      *          6X,'P_gas',4X,'LOG(G_rad)',3x,'RAD/TOT',3x,'CON/TOT',
+      *          2x,'(RAD+CON)/TOT'/)
+-  612 FORMAT(1H ,I3,1P2E11.3,0PF10.1,1P6E11.3,3E13.5)
++  612 FORMAT(1X,I4,1P10E24.16)
+   613 FORMAT(/' ---------------------'/
+      *        ' FINAL DISK RING MODEL'/
+      *        ' ---------------------'/
+@@ -45123,9 +45138,9 @@
+         TL=LOG(T)
+         DELTAT=(TL-TTAB1)/(TTAB2-TTAB1)*FLOAT(numtemp-1)
+         JT = 1 + IDINT(DELTAT)
+-        JU = JT + 1
+         IF(JT.LT.1) JT = 1
+         IF(JT.GT.numtemp-1) JT = numtemp-1
++        JU = JT + 1
+         t1i=tempvec(jt)
+         t2i=tempvec(jt+1)
+         dti=(TL-T1i)/(T2i-T1i)
+@@ -45203,14 +45218,14 @@
+          END DO
+          IF(IRSCHE.NE.0) THEN
+             DO IK=1,NFREQ
+-               X=(C18/MIN(FR,FRAYHe))**2
++               X=(C18/MIN(FREQ(IK),FRAYHe))**2
+                RCHE(IK)=5.484E-14/X/X*(1.+(2.44E5+5.94E10/
+      *                  (X-2.90E5))/X)**2
+             END DO
+          END IF
+          IF(IRSCH2.NE.0.AND.IFMOL.GT.0) THEN
+             DO IK=1,NFREQ
+-               X=(C18/MIN(FR,FRAYH2))**2
++               X=(C18/MIN(FREQ(IK),FRAYH2))**2
+                X2=1./X/X   
+                RCH2(IK)=(8.14E-13+1.28E-6/X+1.61*X2)*X2
+             END DO
+@@ -45852,10 +45867,12 @@
+       sahcon=1.87840e20*tt*sqrt(tt)
+       ev2erg=1.6018e-12
+       nimax=3000
+-      eps=0.001
++c     Entropy derivatives for convection require converged chemistry.
++      eps=1.d-8
+       switer=1
+ C
+       if(iread.eq.1) then
++         write(6,*) 'EMBER MOLECULAR EQUILIBRIUM TOLERANCE: ',eps
+ c
+ C---- data for atoms  ----------------
+ C
+@@ -46096,8 +46113,8 @@
+ c
+ c     don't change structure if particle conservation in not solved 
+ c
+-c     IF(INPC.eq.0.and.ifryb.eq.0) THEN
+-      IF(INPC.eq.0) THEN
++c     Rybicki updates density through ELDENS even without INPC.
++      IF(INPC.eq.0.and.ifryb.eq.0) THEN
+          dens(id)=denso(id)
+          elec(id)=eleco(id)
+          wmm(id)=wmmo(id)
+@@ -47384,10 +47401,14 @@
+             DDTPM=-DLP/T
+             CALL CONVEC(ID,T0,P0,p0-pr0,pr0,AB0,DLT,FLXCNV,VCON)
+             DHCDDP=0.
+-            IF(DELMDE.GT.0.) DHCDDP=1.5D0/DELMDE*FLXCNV
+-            T1=1.001D0*T0
++            IF(DELMDE.GT.0.) THEN
++               BB=BCNV*HALF
++               CORD=UN-BB/SQRT(BB*BB+(DLT-GRDADB))
++               DHCDDP=1.5D0/DELMDE*FLXCNV*CORD
++            END IF
++            T1=(UN+DERT)*T0
+             CALL CONVEC(ID,T1,P0,p0-pr0,pr0,AB0,DLT,FLXC1,VCON)
+-            DHCDT0=(FLXC1-FLXCNV)*500.
++            DHCDT0=(FLXC1-FLXCNV)*HALF/DERT
+             DHCDTP=DHCDT0/TP+DHCDDP*DDTP0
+             DHCDTU=DHCDT0/T+DHCDDP*DDTPM
+ C
+@@ -47398,7 +47419,7 @@
+             RDELM=DENS(ID)/DELM*reint(id)
+             IF(ICONV.GT.0) THEN
+                WM(ID,ID-1)=WM(ID,ID-1)-RDELM*DHCDTM
+-               WM(ID,ID)=WM(ID,ID)+RDELM*(DHCDTP-DHCDTU)
++               WM(ID,ID)=WM(ID,ID)+RDELM*(DHCDTU-DHCDT)
+                WM(ID,ID+1)=WM(ID,ID+1)+RDELM*DHCDTP
+             END IF
+             WR(ID)=WR(ID)-RDELM*(FLXCNV-FLXC(ID))
+@@ -47766,8 +47787,12 @@
+                ELEC(ID)=ELEC0(ID)
+                DENS(ID)=DENS0(ID)
+                T=TEMP(ID)
+-               AN=DENS0(ID)/WMM(ID)+ELEC0(ID)
++               AN=AN0(ID)
+                PGS(ID)=AN*BOLK*T
++               CALL ELDENS(ID,T,AN,ANE,ENRG,ENTT,WM,1)
++               DENS(ID)=DENS0(ID)
++               ELEC(ID)=ELEC0(ID)
++               WMM(ID)=DENS0(ID)/(AN0(ID)-ELEC0(ID))
+             END DO
+           ELSE
+             call pgset(1)
+@@ -47795,6 +47820,7 @@
+ C
+       CALL OPACF1(IJ)
+       DO ID=1,ND
++         T=TEMP(ID)
+          ABSO1(ID)=ABSO1(ID)/DENS(ID)
+          SCAT1(ID)=SCAT1(ID)/DENS(ID)
+          EMIS1(ID)=EMIS1(ID)/DENS(ID)
+@@ -50007,3 +50033,18 @@
+       END
+ 
+ 
++
++      subroutine ember_eos_check
++c     Independent chemical density at each reported T and gas pressure.
++      INCLUDE 'IMPLIC.FOR'
++      INCLUDE 'BASICS.FOR'
++      INCLUDE 'MODELQ.FOR'
++      common/terden/rhoter,anta,entrp
++      do id=1,nd
++         an=dens(id)/wmm(id)+elec(id)
++         call eldens(id,temp(id),an,ane,enrg,entt,wm,0)
++         write(6,601) id,temp(id),an*bolk*temp(id),dens(id),rhoter
++      end do
++  601 format(' EMBER CHEMICAL DENSITY: ',i4,1p4e24.16)
++      return
++      end

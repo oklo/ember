@@ -1,0 +1,95 @@
+{
+  "calculation": "composition-dependent pp evolution with instantaneous convective mixing",
+  "converged": true,
+  "message": "requested duration reached",
+  "nuclear_model": "sfii-svh",
+  "nuclear_physics": "Solar Fusion II quadrature; finite-degeneracy Salpeter--Van Horn screening",
+  "transport_model": "wd",
+  "atmosphere_model": "nongrey:/tmp/ember-nongrey-family-v9/pilot-atmosphere.dat",
+  "opacity": "AESOPUS/TOPS X/Z family, number-density isotope mapping; GS98 metal proxy",
+  "atmosphere": "TLUSTY208/SYNSPEC54 helium-rich gas atmospheres; candidate grid",
+  "conduction": "condtab21wd",
+  "atmosphere_grid_approximation": "LTE plane-parallel gas, GS98 metal proxy, source molecular EOS; effective helium mass, isotope cross sections and broadening approximated; no condensates or irradiation",
+  "atmosphere_tau_match": 100,
+  "atmosphere_grid_support": {
+    "hydrogen": [
+      0.45,
+      0.7
+    ],
+    "helium3": [
+      0,
+      0.12
+    ],
+    "teff_K": [
+      2599.9999999999986,
+      2800.0000000000014
+    ],
+    "gravity_cm_s2": [
+      79432.82347242821,
+      251188.6431509582
+    ]
+  },
+  "nuclear_limitations": "reduced pp network: no pep, hep, ppIII or CNO; SFII pp curvature omitted; SVH approximate, not derived from FreeEOS; modern screening requires zeta<=.2",
+  "central_screening": {
+    "pp_log_factor": 0.279215036504327,
+    "electron_susceptibility": 0.43365743162795906,
+    "gamma_e": 0.3393516448056978,
+    "pp_zeta": 0.05014373844513033
+  },
+  "points": 512,
+  "mass_basis": "conserved baryonic mass; nuclear rest mass release accounted in energy, Newtonian gravity",
+  "mass_Msun": 0.1,
+  "age_origin": "specified static composition, not age since formation",
+  "eos": "FreeEOS potential family; He3 number-density mapping; metals as He4",
+  "limitations": "source domains enforced; He isotope cross sections approximated, GS98 metals; atmosphere/EOS/opacity source mixture approximations; Schwarzschild criterion, no Ledoux/diffusion/remeshing; conduction mixture and envelope join approximations",
+  "step_error_tolerances": {
+    "log_structure": 0.0001,
+    "absolute_abundance": 1e-07,
+    "relative_surface_luminosity": 0.001
+  },
+  "rejected_steps": 0,
+  "input": "/tmp/ember-nongrey-pilot-20gyr.json",
+  "input_sha256": "772ecf0b744bf9476908c758f5f54b402086cef5ea53adff903e0922025a4653",
+  "initial": {
+    "age_yr": 0,
+    "step_yr": 0,
+    "R_Rsun": 0.12554419329727434,
+    "L_Lsun": 0.0008092386761679104,
+    "Teff_K": 2747.561504678301,
+    "central_X": 0.7,
+    "central_Y3": 0,
+    "step_error_norm": 0,
+    "discrete_luminosity_balance": 0,
+    "nuclear_rest_mass_balance": 0,
+    "last_halfstep_coupling_iterations": 0,
+    "convective_mass_fraction": 1.0000000000000002,
+    "central_T_K": 4596586.822422968,
+    "central_rho": 386.3969328683756,
+    "surface_X": 0.7,
+    "surface_Y3": 0
+  },
+  "final": {
+    "age_yr": 20000000000,
+    "step_yr": 1673028097.01412,
+    "R_Rsun": 0.12572708391977874,
+    "L_Lsun": 0.0008154461820390345,
+    "Teff_K": 2750.8124735097763,
+    "central_X": 0.6953990628680942,
+    "central_Y3": 0.004600571010773286,
+    "step_error_norm": 0.5755756160574776,
+    "discrete_luminosity_balance": -2.610475169362303e-10,
+    "nuclear_rest_mass_balance": 1.1239897901305085e-11,
+    "last_halfstep_coupling_iterations": 3,
+    "convective_mass_fraction": 1.0000000000000002,
+    "central_T_K": 4615582.86346494,
+    "central_rho": 384.7863055065217,
+    "surface_X": 0.6953990628680942,
+    "surface_Y3": 0.004600571010773286
+  },
+  "accepted_macrosteps": 17,
+  "maximum_last_halfstep_luminosity_imbalance": 4.673706976987546e-09,
+  "maximum_last_halfstep_nuclear_mass_imbalance": 1.4763964939490393e-08,
+  "minimum_convective_mass_fraction": 1.0000000000000002,
+  "note": "First coupled non-grey trial, using the complete 24-cell Teff2600/2800 subset of the corrected-Jacobian family. The final full family includes additional warmer cells.",
+  "atmosphere_grid_sha256": "fdc54d5ced6a85e3918cfd1bf27e97fcd29e02ae9eebccedd18352ce8749b037"
+}

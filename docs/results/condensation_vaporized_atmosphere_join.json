@@ -1,0 +1,54 @@
+{
+  "scope": "Independent actual-state chemistry through6000K plus fully vaporized source continuation above6000K",
+  "coordinates": [
+    0.3,
+    0.0,
+    3200.0,
+    4.9
+  ],
+  "vaporized_continuation": {
+    "layers": 19,
+    "actual_temperature_range_K": [
+      6020.302021308399,
+      7157.2681483526485
+    ],
+    "pressure_range_bar": [
+      23.761471815547157,
+      43.98965975372011
+    ],
+    "independently_queried_temperature_K": 6000.0,
+    "maximum_join_condensate_particles_per_nucleus": 0.0,
+    "join_closure": {
+      "element_closure": 7.562839243746566e-13,
+      "pressure_closure": 2.1938006966593093e-13,
+      "nuclei_closure": 6.195044477408373e-14
+    },
+    "scope": "Actual T/P chemistry is audited through6000K. Hotter layers use the native fully vaporized prescription; independent equilibrium is checked at6000K and each actual pressure, not extrapolated to the hotter temperature."
+  },
+  "archive": "data/atmosphere/sources/condensation_validation/vaporized_x300_3200_g490",
+  "files_sha256": {
+    "provenance.json.gz": "e4cdfc8359b7046cff2c1f18c441f67bd083d578c7e276dd7fabce1d0448db04",
+    "validated.json.gz": "4db625e7dc07f792703fc53c37d35ab92394634b5021c9bcc7216c97d2dcc05e",
+    "completed.json.gz": "d0bd34ab9489dc23c0786f0cf1289774254ae7342075a1ab6de87c51c139cabf",
+    "fort.5.gz": "69bed15c77e27bb80509b98ec8a468c3e52d970d8018ebbad46c1095a9f3117a",
+    "fort.7.gz": "770f2ffe4261e84d37601a9a66b6ece415c73e3c4efabb1cfb91f558e24787ff",
+    "fort.8.gz": "d8fcd22b972dfd97111cc0070e19623b68344e981337ba9141c053f3b0844156",
+    "fort.9.gz": "a619e95484d7eb6df04039206a6d90c513933f514848e564c2b0e454e1c93182",
+    "fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "run.log.gz": "a00cf08d8ea023e495fbeabc2c801d0bb925cd41731e9837c1e78cfeef3a0adf",
+    "tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+    "ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "opacity.sha256.gz": "5f3314d238a5f381447708302a0b620c6746e9e0101275fd1700e78c26487656",
+    "physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "ember-condensates.cfg.gz": "fbebe597cc1712510414a02598fcf3a5557660b7f23cae166b63e4dd66a9fd3b",
+    "condensate-abundances.dat.gz": "8d02c874e229e29dbd3440043f5d7709816f697f2c73d5da06018b730d0feffd",
+    "condensates.sha256.gz": "900df1e6a4ff27a475dd6adb230ba541085996f0448fe52f08a1b76ed0fe7af2",
+    "chemistry-audit.json.gz": "11e4d7c5a1ff3e6d7fe55eddc8a0a4b2deaf02a583d5445644724ca3da526e87",
+    "chemistry-audit-input.dat.gz": "00ccf3748895711d611bd4c9a21746b0defb43106ffeee8bcdf5c5e0c16f8c47",
+    "chemistry-audit-source.json.gz": "f4c311fff4e100670040e280d5813e67ba289f6dfcf59ce322a4c6643a95dd66",
+    "chemistry-audit.log.gz": "507f3c0814639268a9ccbb7feb3d9851271626ed2b601bd00940d8e158201dc0",
+    "chemistry-hot-join-input.dat.gz": "278052ae459d6bc7e450991b2b05b5c499a6bf8351ca30de9a4f7f57bf46648f",
+    "chemistry-hot-join-source.json.gz": "7899627c9858b738011fc1a993d5807587b1fa37a3f086287c7424d8f7282aa8",
+    "chemistry-hot-join.log.gz": "507f3c0814639268a9ccbb7feb3d9851271626ed2b601bd00940d8e158201dc0"
+  }
+}

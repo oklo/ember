@@ -1,0 +1,17 @@
+{
+  "description": "Interrupted atmosphere retained strictly as a new starting guess; it has no accepted final structure or flux result.",
+  "files": {
+    "initial-checkpoint-fort.5.gz": "334cc6cb7d21401b2e14ad3ce0e0d5b99dd89e0c386ad2b278ecc0b1fdebd3e8",
+    "initial-checkpoint-fort.7.gz": "eeecf79ee1ff9d6388ee006a47ad9f7af440629f7743299c0fa79bd6e4e7ca04",
+    "initial-checkpoint-fort.9.gz": "c42351ea9e55255d27350c56caa19c4e88095e57cdaa754b058988e7450782a1",
+    "initial-checkpoint-fort.2.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "initial-checkpoint-fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "initial-checkpoint-tas.gz": "27b96e742a7ab3beeff3220b34c9f2927bd4cea688819d7d1e5d506ea254fc44",
+    "initial-checkpoint-ember-masses.dat.gz": "6d2a18e878c51114fa6df1cdc2c948c77a3df78bf86161c81648cfcbbeacaf41",
+    "initial-checkpoint-run.log.gz": "6c31df9befebac2db6e5c1c76415e1f201b9f9fe1f6d76b39c6db162d34141d6",
+    "initial-checkpoint-physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "initial-checkpoint-opacity.sha256.gz": "628c63d943051886c31bbfc9d973bcb7e406fa3666880d59110dd6082b6079bc",
+    "initial-checkpoint-checkpoint.json.gz": "b1e0a72250fec1e6a39dd668692fcb73dfedeb0f3d115e71b1f365ce70161c05"
+  },
+  "source_executable_sha256": "d1f42ce1308f62b5c916f74656e5e7f33ff8f7f4d94756b0f3ceb8cf1c450d08"
+}

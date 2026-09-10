@@ -1,0 +1,34 @@
+{
+  "scope": "Independent composition heldout, excluded from runtime family",
+  "planes": [
+    {
+      "X": 0.15,
+      "Z": 0.02,
+      "file": "tops_gs98_x015_z020.txt",
+      "sha256": "e7d629ecf93b90b60ee721e81a7320c989a38a5dc214f7d3ba1676f0df11d8ea",
+      "request": "tops_gs98_x015_z020.request.json",
+      "request_sha256": "c57bb888defe62058e15453e67211186d331ab4f40eb554b28090f2dd6917ebc",
+      "metals": {
+        "C": 0.00343672,
+        "N": 0.0010067,
+        "O": 0.00934712,
+        "Ne": 0.00209662,
+        "Na": 4.18e-05,
+        "Mg": 0.00079848,
+        "Al": 7.206e-05,
+        "Si": 0.00088114,
+        "P": 8.46e-06,
+        "S": 0.00047026,
+        "Cl": 5.84e-06,
+        "Ar": 8.67e-05,
+        "K": 4.56e-06,
+        "Ca": 7.792e-05,
+        "Ti": 3.9e-06,
+        "Cr": 2.234e-05,
+        "Mn": 1.558e-05,
+        "Fe": 0.00152866,
+        "Ni": 9.514e-05
+      }
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "description": "Indexed Russell lookup in auxiliary CONREF only; canonical final source unchanged",
+  "coordinates": [
+    0.7,
+    0,
+    2750.0,
+    5.15
+  ],
+  "byte_identical_to_original": {
+    "initializer": {
+      "fort.7": false,
+      "fort.9": false
+    },
+    "final": {
+      "fort.7": false,
+      "fort.9": false
+    }
+  },
+  "canonical_relative_difference": {
+    "T": -2.2082459194550097e-09,
+    "Pgas": 1.2090396461772457e-08,
+    "source_density": 1.7376121874690398e-08
+  },
+  "timings": [
+    {
+      "phase": "initializer",
+      "utc_seconds": 932.289797782898,
+      "child_user_seconds": 637.16665,
+      "child_system_seconds": 0.6621079999999999
+    },
+    {
+      "phase": "final",
+      "utc_seconds": 409.46557903289795,
+      "child_user_seconds": 289.495053,
+      "child_system_seconds": 0.33691400000000005
+    }
+  ],
+  "timing_note": "Concurrent source jobs; elapsed time is not a standalone speed benchmark.",
+  "prepared_sha256": "7a3825784c154d87490642fad3cee2a9b80121877b1d4d609774a6208d7a4752",
+  "archive": "/Users/greglaughlin/Projects/ember/data/atmosphere/sources/condensation_continuation_validation/indexed-2750"
+}

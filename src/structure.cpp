@@ -93,7 +93,17 @@ std::array<Differential<N>, NVAR> equations(const Model& model, std::size_t i,
   const D kb = 0.5 * (a.kappa + b.kappa), Lb = 0.5 * (a.L + b.L);
   const D cp = 0.5 * (a.cp + b.cp), delta = 0.5 * (a.delta + b.delta);
   const D grad_ad = 0.5 * (a.grad_ad + b.grad_ad);
-  const D dlnP = (log(b.P) - log(a.P)) / dm;
+  const D pressure_contrast=log(b.P)-log(a.P);
+  const D dlnP = pressure_contrast / dm;
+  D buoyancy{};
+  if(phys.criterion==ConvectiveCriterion::ledoux) {
+    const auto composition=composition_buoyancy(*phys.eos,Tb.value,Pb.value,delta.value,
+        pressure_contrast.value,model.comp[i],model.comp[i+1],rhob.value);
+    buoyancy.value=composition.B;
+    if constexpr(N>0)for(std::size_t v=0;v<N;++v)
+      buoyancy.d[v]=composition.dB_dlnT*Tb.d[v]/Tb.value+composition.dB_dlnP*Pb.d[v]/Pb.value
+          +composition.dB_ddelta*delta.d[v]+composition.dB_dpressure_contrast*pressure_contrast.d[v];
+  }
 
   std::array<D, NVAR> f{};
   f[0] = (b.lnr - a.lnr) / dm - 1.0 / (4.0 * M_PI * rb * rb * rb * rhob);
@@ -110,7 +120,7 @@ std::array<Differential<N>, NVAR> equations(const Model& model, std::size_t i,
   EosState midpoint{};
   midpoint.P = Pb.value; midpoint.cp = cp.value; midpoint.delta = delta.value;
   const double U = mixing_length_U(Tb.value, rhob.value, kb.value, gravity.value, midpoint, phys.alpha_mlt);
-  const auto convection = mixing_length_gradient(grad_rad.value, grad_ad.value, U);
+  const auto convection = ledoux_mixing_length_gradient(grad_rad.value, grad_ad.value, buoyancy.value, U);
   D grad(convection.grad);
   if constexpr (N > 0) {
     // Constant terms in ln U do not contribute. Carry the state dependence of
@@ -120,7 +130,7 @@ std::array<Differential<N>, NVAR> equations(const Model& model, std::size_t i,
                  - 1.5 * logHp - 0.5 * log(gravity) - 0.5 * log(delta);
     for (std::size_t v = 0; v < N; ++v)
       grad.d[v] = convection.dgrad_dgrad_rad * grad_rad.d[v]
-                + convection.dgrad_dgrad_ad * grad_ad.d[v] + convection.dgrad_dlnU * logU.d[v];
+                + convection.dgrad_dgrad_ad * (grad_ad.d[v]+buoyancy.d[v]) + convection.dgrad_dlnU * logU.d[v];
   }
   // The temperature row is never multiplied by grad/grad_rad.
   f[3] = (b.lnT - a.lnT) / dm - grad * dlnP;

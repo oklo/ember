@@ -1,0 +1,41 @@
+* 
+* 
+* 
+* ../data for ions  
+   1   -1     1      0     0     1    ' H 1' 'data/hm.dat'  
+   0    0     3      0 
+   1    0     9      0     0     0    ' H 1' 'data/h1s.dat'  
+   1    1     1      1     0     0    ' H 2' ' '  
+   2    0     14     0     0     0    'He 1' 'data/he1.dat'  
+   2    1     14     0     0     0    'He 2' 'data/he2.dat '  
+   2    2     1      1     0     0    'He 3' ' '  
+   6    0     104    0     0     0    ' C 1' 'data/c1.t'  
+   6    1     40     0     0     0    ' C 2' 'data/c2.t'  
+   6    2     1      1     0     0    ' C 3' ' '  
+   7    0     89     0     0     0    ' N 1' 'data/n1.t'  
+   7    1     51     0     0     0    ' N 2' 'data/n2.t'  
+   7    2     1      1     0     0    ' N 3' ' '  
+   8    0     54     0      0    0    ' O 1' 'data/o1c.t'  
+   8    1     74     0      0    0    ' O 2' 'data/o2.t'  
+   8    2     1      1      0    0    ' O 3' ' '  
+  11    0     32     0     0     0    'Na 1' 'data/na1.t'  
+  11    1     8      0     0     0    'Na 2' 'data/na2.t'  
+  11    2     1      1     0     0    'Na 3' ' '  
+  12    0     71     0     0     0    'Mg 1' 'data/mg1.t'  
+  12    1     31     0     0     0    'Mg 2' 'data/mg2.t'  
+  12    2     1      1     0     0    'Mg 3' ' '  
+  13    0     33     0     0     0    'Al 1' 'data/al1.t'  
+  13    1     81     0     0     0    'Al 2' 'data/al2.t'  
+  13    2     1      1     0     0    'Al 3' ' '  
+  14    0     57     0     0     0    'Si 1' 'data/si1.t'  
+  14    1     46     0     0     0    'Si 2' 'data/si2.t'  
+  14    2     1      1     0     0    'Si 3' ' '  
+  20    0     79     0     0     0    'Ca 1' 'data/ca1.t'  
+  20    1     32     0     0     0    'Ca 2' 'data/ca2.t'  
+  20    2     1      1     0     0    'Ca 3' ' '  
+  26    0     49     0     0     0    'Fe 1' 'data/tlusty_fe1_topmod.dat'  
+  26    1     41     0     0     0    'Fe 2' 'data/tlusty_fe2_topmod.dat'  
+  26    2     1      1     0     0    'Fe 3' ' '  
+  0     0     0     -1     0     0    '    ' ' '  
+* 
+* end 

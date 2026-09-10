@@ -1,0 +1,410 @@
+{
+  "description": "Independent source atmosphere between the four new low-hydrogen composition corners; temperature and gravity lie on grid nodes. Local interpolation check, not a global error bound.",
+  "coordinates": [
+    0.375,
+    0.06,
+    3000,
+    5.15
+  ],
+  "direct": {
+    "T": 4368.813300009591,
+    "Pgas": 13606146.02814585,
+    "source_density": 8.647222640024769e-05,
+    "column_mass": 96.3241271110477,
+    "flux_error": 6.65605673932923e-06,
+    "correction": 5e-07,
+    "effective_flux_error": 0.00020149072273945023,
+    "hydrostatic_error": 1.3001085341635132e-07,
+    "chemical_density_error": 3.19300141882195e-13,
+    "iterations": 2,
+    "depths": 300,
+    "tau_bracket": [
+      94.56941065882796,
+      102.44278595021409
+    ],
+    "temperature_range": [
+      1849.1274205392563,
+      5274.23181272242
+    ],
+    "density_range": [
+      2.4070038165347792e-11,
+      0.0002621561790876628
+    ]
+  },
+  "interpolated": {
+    "T": 4377.3693540594595,
+    "Pgas": 13610773.574216718,
+    "source_density": 8.65841758191656e-05
+  },
+  "relative_interpolation_error": {
+    "T": 0.0019584389311966266,
+    "Pgas": 0.00034010704142795056,
+    "source_density": 0.0012946286175139488
+  },
+  "corners": [
+    {
+      "coordinates": [
+        0.3,
+        0,
+        3000,
+        5.15
+      ],
+      "state": {
+        "T": 4427.865874925847,
+        "Pgas": 13797426.554453984,
+        "source_density": 9.386787139640619e-05,
+        "column_mass": 97.6782896682403,
+        "flux_error": 9.552500601417435e-06,
+        "correction": 8.87e-07,
+        "effective_flux_error": 0.00020185734422006885,
+        "hydrostatic_error": 1.282784010125937e-07,
+        "chemical_density_error": 2.589040093425865e-13,
+        "iterations": 2,
+        "depths": 300,
+        "tau_bracket": [
+          98.79733964366038,
+          106.97526112197887
+        ],
+        "temperature_range": [
+          1862.7929435286196,
+          5576.422946073906
+        ],
+        "density_range": [
+          1.1385936762527386e-10,
+          0.0003219716118257871
+        ]
+      },
+      "source_receipt_sha256": "0eec1032830f9dc404cbfe8a429f26d9a9a061a0f556b2d8b69ec6127b6e081d",
+      "validation_sha256": "14f0ab9ecd9bf285aba759351e4903e812fc58bef8bdc2127b959728ec30fd72"
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3000,
+        5.15
+      ],
+      "state": {
+        "T": 4437.893771893401,
+        "Pgas": 13767307.43613874,
+        "source_density": 9.083281618856128e-05,
+        "column_mass": 97.46506273715607,
+        "flux_error": 9.403692899478955e-06,
+        "correction": 8.61e-07,
+        "effective_flux_error": 0.0002019284797313281,
+        "hydrostatic_error": 1.2727150111579988e-07,
+        "chemical_density_error": 2.617905892066119e-13,
+        "iterations": 2,
+        "depths": 300,
+        "tau_bracket": [
+          98.87673801102034,
+          107.07547811777141
+        ],
+        "temperature_range": [
+          1858.7521455285562,
+          5605.704684053481
+        ],
+        "density_range": [
+          1.09542216387182e-10,
+          0.0003098807469237083
+        ]
+      },
+      "source_receipt_sha256": "28186912b37f215615456e4f44be2ebb75ebe3a5dba16c92a8baa76964beff62",
+      "validation_sha256": "d3aadacb07ed8058d9aa1a7a7c131052e65d55bb02770884b010ca871cdb292f"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3000,
+        5.15
+      ],
+      "state": {
+        "T": 4318.857213722333,
+        "Pgas": 13450889.056845827,
+        "source_density": 8.235871483063255e-05,
+        "column_mass": 95.22499181721464,
+        "flux_error": 9.681048437126805e-06,
+        "correction": 2.63e-07,
+        "effective_flux_error": 0.0002009626783683327,
+        "hydrostatic_error": 1.3279549748723696e-07,
+        "chemical_density_error": 3.2795988147427124e-13,
+        "iterations": 1,
+        "depths": 300,
+        "tau_bracket": [
+          97.03585295645298,
+          105.01894384630363
+        ],
+        "temperature_range": [
+          1872.7348855974208,
+          5171.015125101414
+        ],
+        "density_range": [
+          2.201323965373544e-11,
+          0.00025423250886586754
+        ]
+      },
+      "source_receipt_sha256": "3977c43a53c0ac53e1ec0f8dadc1eeee74d8b3ed1764d73fdfca0d1494133035",
+      "validation_sha256": "ab302df93dfaa07c5f1f787b20f4b86f7dec6fd38266f0619e0f2738aec80b96"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000,
+        5.15
+      ],
+      "state": {
+        "T": 4326.259507798562,
+        "Pgas": 13431766.848070879,
+        "source_density": 8.003589380395697e-05,
+        "column_mass": 95.08961701115999,
+        "flux_error": 1.7983500131713015e-05,
+        "correction": 2.6e-07,
+        "effective_flux_error": 0.0002012007087325296,
+        "hydrostatic_error": 1.3223869776979313e-07,
+        "chemical_density_error": 3.26183524634871e-13,
+        "iterations": 1,
+        "depths": 300,
+        "tau_bracket": [
+          96.89510552038055,
+          104.87961380126467
+        ],
+        "temperature_range": [
+          1869.5441815130027,
+          5185.728091628673
+        ],
+        "density_range": [
+          2.164736675953634e-11,
+          0.00024593033185027415
+        ]
+      },
+      "source_receipt_sha256": "fe76c241a82ec7fa69df7aa06413b8d8e13c9d0cc39f63b99462e2b3672677ba",
+      "validation_sha256": "33e4da45bc0a39155fce8339657efcdc0d2496dae49bbc8b135dfec760647521"
+    }
+  ],
+  "weights": [
+    {
+      "coordinates": [
+        0.3,
+        0,
+        3000,
+        5.15
+      ],
+      "weight": 0.25
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3000,
+        5.15
+      ],
+      "weight": 0.25
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3000,
+        5.15
+      ],
+      "weight": 0.25
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000,
+        5.15
+      ],
+      "weight": 0.25
+    }
+  ],
+  "provenance": {
+    "prepared": {
+      "format": 1,
+      "tlusty": "/tmp/ember-nongrey-opactr-source/tlusty/tlusty.exe",
+      "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+      "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+      "opacity_method": "sampling",
+      "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+      "tlusty_source": "/tmp/ember-nongrey-opactr-source",
+      "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+      "line_lists": [
+        "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+        "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+        "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+        "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+      ],
+      "inputs": {
+        "tl208-s54.tar.gz": {
+          "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+          "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+        },
+        "synple.tar.gz": {
+          "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+          "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+        },
+        "gfATOc.19.gz": {
+          "url": "ftp:gfATOc.19.gz",
+          "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+        },
+        "gfMOLsun.20.gz": {
+          "url": "ftp:gfMOLsun.20.gz",
+          "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+        },
+        "gfTiO.20.gz": {
+          "url": "ftp:gfTiO.20.gz",
+          "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+        },
+        "H2O-8.20.gz": {
+          "url": "ftp:H2O-8.20.gz",
+          "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+        },
+        "optables.tar.gz": {
+          "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+          "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+        }
+      },
+      "patches": {
+        "tlusty208-ember.patch": "0b3214a4b18b6a927f2d512475f94c5895b2790e29185e82108db35724218be1",
+        "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+        "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+      },
+      "line_list_sha256": [
+        "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+        "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+        "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+        "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+      ],
+      "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+      "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+      "executables": {
+        "tlusty": "646336af37d41900c3fb07199b600667a5a37517ff8dfff48f7d898789c60797",
+        "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+        "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+      }
+    },
+    "specification": {
+      "source": "Independent interior-composition atmosphere point for the extended gas family",
+      "opacity_method": "sampling",
+      "approximation": "LTE plane-parallel gas, GS98 metal proxy, source molecular EOS; effective helium mass, isotope cross sections and broadening approximated; no condensates or irradiation",
+      "hydrogen": [
+        0.375
+      ],
+      "helium3": [
+        0.06
+      ],
+      "teff_K": [
+        3000
+      ],
+      "log_g": [
+        5.15
+      ],
+      "metals": [
+        0.0040277310873548045,
+        4.525540547589668e-05,
+        0.001113471054023328,
+        0.00921354245314597,
+        0.0056
+      ],
+      "log_temperature": [
+        16,
+        3.031687677525189,
+        3.8899903636730584
+      ],
+      "log_density": [
+        19,
+        -13,
+        -3
+      ],
+      "wavelength_A": [
+        900,
+        300000
+      ],
+      "line_threshold": 0.0001,
+      "microturbulence_km_s": 1.0,
+      "opacity_frequencies": 30000,
+      "atmosphere_frequencies": 20000,
+      "depths": 300,
+      "alpha": 1.9,
+      "tau_top": 1e-07,
+      "tau_bottom": 1000,
+      "tau": 100,
+      "synthesis_spacing_A": 0.1,
+      "temperature_step_limit": 1.03,
+      "initial_depths": 100,
+      "initial_frequencies": 5000,
+      "temperature_K": [
+        1075.6913529614428,
+        1227.1788354376154,
+        1400.0000000000005,
+        1597.159226838411,
+        1822.0839970536194,
+        2078.684477120571,
+        2371.4214945134977,
+        2705.384086203687,
+        3086.3779681585856,
+        3521.0264638251933,
+        4016.8856461718733,
+        4582.575694955842,
+        5227.930752774402,
+        5964.169885047075,
+        6804.092115953369,
+        7762.298930895291
+      ],
+      "convection_derivative_step": 1e-05,
+      "material_domain_note": "Cool-atmosphere rectangle ends at 7762.30 K; must bracket every final profile. Excludes unsupported high-density He I profile extrapolation at 15000 K."
+    },
+    "initializer": {
+      "base_source_sha256": "65b3eba1355d9bf0bd4591d878fcc50741ad093661b319da460782b54f6c0840",
+      "patched_source_sha256": "f9481d89fa2c317aed01fc5d67339d12e0c0468b036d3208f0d3edbf86fac7cd",
+      "patch_sha256": "836f9caef9da4353356e32ba4647b80c6890107ada60bdd7279e12ffe7f3b0fa",
+      "executable": "/tmp/ember-nongrey-conref-source/tlusty/tlusty.exe",
+      "executable_sha256": "9b4d4bae4ec6ed157ad9d009977e6edf020219e1a2ab1a77f69371989224d73b"
+    },
+    "convective_iterations": 200,
+    "XH": 0.375,
+    "X3": 0.06,
+    "teff_K": 3000.0,
+    "log_g": 5.15,
+    "initial": "/private/tmp/ember-nongrey-extended-v2/plane-002/model-002-001",
+    "initial_receipt_sha256": "3977c43a53c0ac53e1ec0f8dadc1eeee74d8b3ed1764d73fdfca0d1494133035",
+    "initial_validation_sha256": "ab302df93dfaa07c5f1f787b20f4b86f7dec6fd38266f0619e0f2738aec80b96",
+    "opacity_sha256": "e1e7916f6cfabaaa41acddd45dbab4c7323428a79c8dfac20b6bd2212a8103a8",
+    "initial_composition": {
+      "XH": 0.45,
+      "X3": 0
+    },
+    "composition_continuation": "starting guess only; target composition independently validated"
+  },
+  "archive": "data/atmosphere/sources/nongrey_extended_validation/atmosphere",
+  "archive_files_sha256": {
+    "initializer/fort.5.gz": "caedabf4472c9101ca6ca3943527e43c753cf913f54677fd0503e1180b48c28d",
+    "initializer/fort.7.gz": "778d2191f8197c701e4da790ac58012b3745f08fefc52295d46efea8889960b4",
+    "initializer/fort.8.gz": "119db94a66252557fc70243c218a9c7f9dd421b94ace84b2d218a27fb52fa0e6",
+    "initializer/fort.9.gz": "01341f6c3c31c428efe60ee665b8b3f05b5c836e837a11e0f100837ddc0ae404",
+    "initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "initializer/tas.gz": "4455260ae389dd9ae381fc1d46ab7fbeb306fe9c128f70671d0910219e3f0331",
+    "initializer/ember-masses.dat.gz": "82ed6d767c36e4d66d507e9a98e7875ce3622c25b542a73ae7997704daeb48a8",
+    "initializer/opacity.sha256.gz": "7358ab8366c88caa87db578b63c6b369545fc62b9d59406bf805913f0a560fcc",
+    "initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "initializer/completed.json.gz": "b03fa1f6d98b5e50c5d35013aa3fa5eb564d297a5f8ef5c86fcdda62fc1179c6",
+    "initializer/run.log.gz": "579623826c4cdcb6b1246bd0865cd435860f2f1e4a50f56ce9aec2972449161a",
+    "initializer/initializer.json.gz": "11ab6fa961d7d38d7605ecabf589bcf33bf367204f77a5adcc193edd22b93906",
+    "final/fort.5.gz": "caedabf4472c9101ca6ca3943527e43c753cf913f54677fd0503e1180b48c28d",
+    "final/fort.7.gz": "a65b95debc8576d924a5fe1cb9d8c477939e2663b2c6af415cc15dca8390850f",
+    "final/fort.8.gz": "6d6fe20667cc984e39c3e09e2e44c0db8713419566341aa787110acb6004d87f",
+    "final/fort.9.gz": "fe4ded5fa8543bc30ebe0dd3e410e3afb9b16e04f7ddf4d3730ab3bd5b836ea8",
+    "final/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "final/tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+    "final/ember-masses.dat.gz": "82ed6d767c36e4d66d507e9a98e7875ce3622c25b542a73ae7997704daeb48a8",
+    "final/opacity.sha256.gz": "7358ab8366c88caa87db578b63c6b369545fc62b9d59406bf805913f0a560fcc",
+    "final/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "final/completed.json.gz": "a86f4ea1adccee8003a8c753ca0f287e61631884c31c448f264077402c9f8de5",
+    "final/run.log.gz": "40feff0c7fb0f44f57b2df776b6cda6bd2001aa9e2d5553d45ff3d1dd018c06a",
+    "final/validated.json.gz": "c0c3921ddae0c3da6a4db78a636644ffc8cacad3492f3ce449b0fee435e6f448",
+    "provenance.json.gz": "ac5482fd69409082c26353c305a3353017c0381c5268f4ccdf760390ec304d54"
+  }
+}

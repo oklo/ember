@@ -7,6 +7,34 @@
 
 namespace ember {
 
+CompositionBuoyancy composition_buoyancy(const Eos& eos,double T,double P,double delta,
+    double contrast,const Composition& lo,const Composition& hi,double guess) {
+  if(!std::isfinite(T+P+delta+contrast) || T<=0 || P<=0 || delta<=0 || lo.basis!=hi.basis
+      || lo.metal_inventory!=hi.metal_inventory)
+    throw std::domain_error("composition_buoyancy: invalid state or abundance basis");
+  CompositionBuoyancy out{};
+  if(lo.X==hi.X)return out;
+  if(std::abs(contrast)<32*std::numeric_limits<double>::epsilon())
+    throw std::domain_error("composition_buoyancy: unresolved pressure contrast across a composition gradient");
+  const double rlo=eos.rho_from_PT(T,P,lo,guess),rhi=eos.rho_from_PT(T,P,hi,guess);
+  const auto a=eos.eval(T,rlo,lo),b=eos.eval(T,rhi,hi);
+  const double factor=1/(delta*contrast);
+  out.B=std::log1p((rhi-rlo)/rlo)*factor;
+  out.dB_dlnT=(a.delta-b.delta)*factor;
+  out.dB_dlnP=(1/b.chiRho-1/a.chiRho)*factor;
+  out.dB_ddelta=-out.B/delta;
+  out.dB_dpressure_contrast=-out.B/contrast;
+  return out;
+}
+
+ConvectionState ledoux_mixing_length_gradient(double rad,double ad,double B,double U) {
+  if(!std::isfinite(B))throw std::domain_error("ledoux_mixing_length_gradient: invalid buoyancy");
+  auto result=mixing_length_gradient(rad-B,ad,U);
+  if(!result.unstable)result.grad=result.grad_element=rad;
+  else {result.grad+=B;result.grad_element+=B;result.superadiabaticity+=B;}
+  return result;
+}
+
 ConvectionState mixing_length_gradient(double grad_rad, double grad_ad, double U) {
   if (!std::isfinite(grad_rad) || !std::isfinite(grad_ad) || grad_ad < 0.0
       || !std::isfinite(U) || !(U > 0.0))

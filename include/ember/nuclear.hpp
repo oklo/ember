@@ -39,17 +39,37 @@ public:
 // weight expands the core and drives a good part of the evolution: assuming
 // equilibrium removes the phenomenon rather than approximating it.
 //
-// Rates follow the Adelberger et al. (2011) compilation of S-factors in the
-// standard non-resonant form. Screening is the classical weak-limit Salpeter
-// factor with a retained exp(2) cap, an approximation requiring further
-// qualification in partially degenerate/intermediate-coupling matter. The strong-screening and
-// pycnonuclear regimes a cold dense remnant would need are a separate
-// implementation of this same interface.
+// The legacy default preserves historical static benchmarks. Evolution selects
+// Solar Fusion II S-factor quadrature and finite-degeneracy Salpeter--Van Horn
+// screening explicitly. These remain a reduced pp network, without pep, hep,
+// ppIII or CNO, and are not a prescription for pycnonuclear burning.
+enum class PPRates { legacy, solar_fusion_ii };
+enum class PPScreening { legacy_weak, debye_fermi, salpeter_van_horn };
+enum class PPReaction { pp, he3_he3, he3_he4 };
+struct ThermonuclearRate {
+  double molar_rate{}; // N_A <sigma v>, cm^3 mol^-1 s^-1; no symmetry factor
+  double dlnrate_dlnT{};
+};
+struct ScreeningState {
+  double log_factor{}, dlog_dlnT{}, dlog_dlnRho{};
+  std::array<double,NSPEC> dlog_dX{}; // unconstrained abundance partials
+  double electron_eta{}, electron_susceptibility{}; // kT/ne * dne/dmu
+  double gamma_e{}, zeta{}; // electron-sphere coupling; 3 Gamma_12/tau
+};
+ThermonuclearRate pp_bare_rate(double T, PPReaction, PPRates);
+ScreeningState pp_screening(double T,double rho,const Composition&,PPReaction,PPScreening);
+
 class PPChains final : public Nuclear {
 public:
+  explicit PPChains(PPRates rates=PPRates::legacy,
+                    PPScreening screening=PPScreening::legacy_weak)
+      : rates_(rates), screening_(screening) {}
   NuclearState eval(double T, double rho, const Composition&) const override;
   NuclearResponse composition_response(double T,double rho,const Composition&) const override;
-  const char* name() const override { return "pp chains (Adelberger+2011)"; }
+  const char* name() const override;
+private:
+  PPRates rates_;
+  PPScreening screening_;
 };
 
 } // namespace ember

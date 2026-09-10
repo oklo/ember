@@ -1,0 +1,177 @@
+{
+  "archive": "data/atmosphere/sources/condensation_validation",
+  "files_sha256": {
+    "bridge-audit.json.gz": "081f9558dac2d3acac44bc6176bcf5940a80977f10d66e187fc09197bc3bb613",
+    "bridge-join.json.gz": "0408e85d75506242eeda05445dac492ab016ed4e7d043436b4d82cdba82637ac",
+    "bridge-join.dat.gz": "ae49ef527200399c4a3c688928d0e320ab1c7fd8a1dadc1e917ac147d7f14d57",
+    "bridge-join.log.gz": "507f3c0814639268a9ccbb7feb3d9851271626ed2b601bd00940d8e158201dc0",
+    "bridge-profile.dat.gz": "6787f55bf5188cf72e5a647a10c00acd0b6acd7b9c13c771011a03be1be75e1a",
+    "bridge-profile.log.gz": "507f3c0814639268a9ccbb7feb3d9851271626ed2b601bd00940d8e158201dc0",
+    "bridge-bulk.dat.gz": "ec33cc81ae84bf8a0d138a4c5d86168c1888ed6b5c91f7eaf1ff39389b9aab26",
+    "bridge-ember-condensates.cfg.gz": "7e6a5de85c77c408927ef4c91c11e6d7ac23ba04a9420cc75f86bce0e16b46bf",
+    "bridge-condensate-abundances.dat.gz": "0d427bf028c8d064dc6bfa50022129d6f1450aafc39d2d769e8c324753445239",
+    "gas-atmosphere-validated.json.gz": "2854445ee03407aaa4cb105037241a2ae2d52db01950fae090df6b879ab71e3a",
+    "gas-atmosphere-completed.json.gz": "f47b21693b4e53ed051a1e6e4c3af0558b7131890437c506be9c3e4c629ce40d",
+    "gas-atmosphere-provenance.json.gz": "f9ca584e3b40ba10c0b6309ef426f9fb80a2ba5369d5e776c1f4a9d72a980763",
+    "gas-atmosphere-fort.5.gz": "5e917801f2f26573fd9a0698ad609d0e63645f55a3666c7fe09b1dbcc97501e4",
+    "gas-atmosphere-fort.7.gz": "bd793087443a3f0eb57cda0e438f839b273bdcdfa9fb07c531f0f2ff6d6b6fe4",
+    "gas-atmosphere-fort.8.gz": "79ef679119c803139400071675a28c72eea174620a94b174f49bd6c36c877815",
+    "gas-atmosphere-fort.9.gz": "e7689d5b5b6f9047be10745a207aa84275e3fb3d2ccf0de54c6fc9f2c41218e3",
+    "gas-atmosphere-tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+    "gas-atmosphere-ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "gas-atmosphere-ember-condensates.cfg.gz": "988319ddd3c8b039d11dd5fbdd1cc3cc72e28db33718875fb92ab0e837f5b8b1",
+    "gas-atmosphere-condensate-abundances.dat.gz": "0d427bf028c8d064dc6bfa50022129d6f1450aafc39d2d769e8c324753445239",
+    "gas-atmosphere-condensates.sha256.gz": "900df1e6a4ff27a475dd6adb230ba541085996f0448fe52f08a1b76ed0fe7af2",
+    "gas-atmosphere-opacity.sha256.gz": "f898309c2f91d3bdc8e5549be2c2276c5864512b6c82d3fe2cdb4201ed81a6c7",
+    "gas-atmosphere-run.log.gz": "54c36c85d8125634442ecb198cd78f066a0d589d00fa8fe2dc98b068deecb439",
+    "gas-opacity-fort.63.gz": "a300d61ffc69f0f6c65676e71f50ddc6449584f453ec835ccff46923a1920015",
+    "gas-opacity-fort.29.gz": "f84e565bd784df46053248b50eabe0ac12d876fb1bdb358ff94f0ce7666ee4b7",
+    "gas-opacity-run.log.gz": "cd9bef5cad1688e6a3af2840686e476006bb4d39c211fdddfb11bbafb7f86103",
+    "gas-opacity-fort.5.gz": "a74ab0183f70e2edd094a23506f5771adeb0a3d408adbb55322fd70aa3f0f771",
+    "gas-opacity-fort.2.gz": "c3ad61d4fde2cf0879e4d654d083302ed77fff06dc897eb03c6620024c5c818b",
+    "gas-opacity-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+    "gas-opacity-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+    "gas-opacity-ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "gas-opacity-recovery.json.gz": "edafe43e5bfb0a01882a8bd418821206c3c09a110a1f106ee69f67e4e4b48fc1",
+    "gas-opacity-completed.json.gz": "edafe43e5bfb0a01882a8bd418821206c3c09a110a1f106ee69f67e4e4b48fc1",
+    "gas-opacity-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c",
+    "gas-opacity-ember-condensates.cfg.gz": "847f27c118009aed102bb2d56e1722c6044ab8c8839304ca20deb60e625d0eab",
+    "gas-opacity-condensate-abundances.dat.gz": "0d427bf028c8d064dc6bfa50022129d6f1450aafc39d2d769e8c324753445239",
+    "gas-opacity-condensates.sha256.gz": "900df1e6a4ff27a475dd6adb230ba541085996f0448fe52f08a1b76ed0fe7af2",
+    "source-prepared.json.gz": "3c891cd4ee67bf85ccd4ecee256acf88866bff690f50d74ba93b01d01c253468",
+    "source-tlusty-depletion.patch.gz": "8883430d02667e7253ba942598d4215b6b2a6ea705aef599587aee92662ebd8e",
+    "source-synspec-depletion.patch.gz": "1054c070be5f80772e5972b6f6932c969ca8735496314d43571b737bc7631a0d",
+    "source-tlusty-build.log.gz": "ce60f70ff530faf2ba55a9139b6b0fb0d5649d331541712ed8def4112313f3f3",
+    "source-synspec-build.log.gz": "2229040a7f1f6f7837e0cfbc5258d2647361b889c0296d582e01be12fecc44bc",
+    "source-adapter-build.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "helium-join-join.json.gz": "42ab47195d9e80c8811e9748abfa17e78a5057eb11538a0b45719bf2da99b458",
+    "helium-join-audit.json.gz": "a6685420aeac0c3f35d505dc58451f884f7af6af63c5406050903c093a04b054",
+    "helium-join-join.dat.gz": "1c2cd6d31c89f4878232ae53dff747928b90c0996f85b9e275f5f1e8caa8568a",
+    "helium-join-join.log.gz": "507f3c0814639268a9ccbb7feb3d9851271626ed2b601bd00940d8e158201dc0"
+  },
+  "gas_opacity": "30000 frequencies x19 densities at2371.4215K: byte-for-byte original gas table",
+  "gas_atmosphere_relative_boundary_difference": {
+    "T": 1.9525536743003613e-10,
+    "Pgas": -1.0192630073291298e-09,
+    "source_density": -1.5015969578868749e-09
+  },
+  "gas_atmosphere_diagnostics": {
+    "T": 4030.193276296913,
+    "Pgas": 16402533.850636538,
+    "source_density": 9.71692789471351e-05,
+    "column_mass": 116.12103194265818,
+    "flux_error": 4.86304719198305e-05,
+    "correction": 2.87e-07,
+    "effective_flux_error": 0.0001979665454268087,
+    "hydrostatic_error": 1.4600189901514682e-07,
+    "chemical_density_error": 2.3003821070233244e-13,
+    "iterations": 1,
+    "depths": 300,
+    "tau_bracket": [
+      93.6680693846952,
+      101.00290389845775
+    ],
+    "temperature_range": [
+      1590.9933354017999,
+      4738.904355880559
+    ],
+    "density_range": [
+      1.1139474118116264e-10,
+      0.0003014289320390291
+    ]
+  },
+  "depletion_bridge": {
+    "reference": "data/atmosphere/sources/condensation_gs98/model-025/equilibrium/source.json.gz",
+    "reference_sha256": "cc7d38b2110d6b98e25eb31713d7eee0598ffd0417ed9f48e1e242ae793f59c7",
+    "points": 300,
+    "maximum_absolute_gas_fraction_error_per_initial_element": 2.23801789106976e-11,
+    "join": {
+      "pressure_cgs": [
+        1e-07,
+        1000000000.0
+      ],
+      "log_pressure_spacing": 0.25,
+      "maximum_element_depletion": {
+        "3000": 0.0,
+        "4000": 0.0,
+        "5000": 0.0,
+        "6000": 0.0
+      }
+    }
+  },
+  "limitation": "Coupled equilibrium-depletion atmosphere still pending; gas controls and independent chemistry only.",
+  "helium_rich_vaporized_join": {
+    "XH": 0.3,
+    "X3": 0.12,
+    "source": {
+      "repository": "https://github.com/NewStrangeWorlds/FastChem",
+      "commit": "ae67cbd559bc64a3233a1cee6030b8e6b50520de",
+      "archive_sha256": "6e7c04d8e9d7e8f79b929e6865f5d06d5f5fc4077b5fae7e6ab39675a75706de",
+      "source": "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de",
+      "executable": "/private/tmp/ember-fastchem/verified-probe",
+      "executable_sha256": "b233d7d5e547a76350aa70ce4eafb31a2738463ec384d57c261fb4a211b99d77",
+      "commands": [
+        [
+          "cmake",
+          "-S",
+          "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de",
+          "-B",
+          "/private/tmp/ember-fastchem/verified-build",
+          "-DCMAKE_BUILD_TYPE=Release",
+          "-DCMAKE_CXX_COMPILER=c++",
+          "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG -mcpu=apple-m4"
+        ],
+        [
+          "cmake",
+          "--build",
+          "/private/tmp/ember-fastchem/verified-build",
+          "--target",
+          "fastchem_lib",
+          "-j",
+          "4"
+        ],
+        [
+          "c++",
+          "-std=c++17",
+          "-O3",
+          "-DNDEBUG",
+          "-mcpu=apple-m4",
+          "-I/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de/fastchem_src",
+          "/Users/greglaughlin/Projects/ember/scripts/fastchem_probe.cpp",
+          "/private/tmp/ember-fastchem/verified-build/libfastchem_lib.a",
+          "-o",
+          "/private/tmp/ember-fastchem/verified-probe"
+        ]
+      ],
+      "adapter_sha256": "72e99604e985708a437e684fe934f8c12db936d29309636d708fe4186c003afc",
+      "chemistry_data_sha256": {
+        "logK.dat": "eda9b9d7e62ccf7398036ee84349bd0a721b779acdc9d191cbf9fe1dd01f619c",
+        "logK_condensates.dat": "566b029470a9affb361dc4e891aa8c4918baeff0f93cf07e804d57e2ebac8467"
+      }
+    },
+    "command": [
+      "/private/tmp/ember-fastchem/verified-probe",
+      "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de",
+      "/tmp/ember-condensate-opacity-x300-y120-v1/temperature-000/condensate-abundances.dat",
+      "equilibrium"
+    ],
+    "temperatures_K": [
+      3000,
+      4000,
+      5000,
+      6000
+    ],
+    "pressure_bar": [
+      1e-13,
+      1000.0
+    ],
+    "rows": 260,
+    "maximum_condensate_particles_per_nucleus": 0.0,
+    "source_sha256": "42ab47195d9e80c8811e9748abfa17e78a5057eb11538a0b45719bf2da99b458",
+    "independent_closure": {
+      "element": 6.50886011754892e-11,
+      "pressure": 2.6593227619997606e-10,
+      "nuclei": 4.3228864932132183e-10
+    }
+  }
+}

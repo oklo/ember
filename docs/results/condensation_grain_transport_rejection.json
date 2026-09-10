@@ -1,0 +1,81 @@
+{
+  "scope": "Rejected production corner: convective heat in condensing layers with grain enthalpy omitted. Original source and independent chemistry retained.",
+  "archive": "data/atmosphere/sources/condensation_grain_transport_rejections/solar_he3120_2800_g490",
+  "coordinates": [
+    0.7,
+    0.12,
+    2800.0,
+    4.9
+  ],
+  "diagnostics": {
+    "T": 4012.132317765956,
+    "Pgas": 10959908.718717506,
+    "source_density": 6.215047628112553e-05,
+    "column_mass": 137.97706155988723,
+    "flux_error": 1.6146486943702243e-05,
+    "correction": 3.18e-07,
+    "effective_flux_error": 0.0001981648481561571,
+    "hydrostatic_error": 1.3206225824013984e-07,
+    "chemical_density_error": 2.156053113822054e-13,
+    "iterations": 3,
+    "depths": 300,
+    "tau_bracket": [
+      96.90557099239871,
+      104.43580387293028
+    ],
+    "temperature_range": [
+      1478.677813015401,
+      4819.536669308234
+    ],
+    "density_range": [
+      5.034601205264643e-11,
+      0.00022760526950293855
+    ]
+  },
+  "chemistry": {
+    "element_closure": 3.6120677560091963e-09,
+    "pressure_closure": 4.8765436133635376e-12,
+    "nuclei_closure": 7.771561172376096e-15,
+    "thresholds": {
+      "0": {
+        "max_condensed_mass_fraction": 0.00014592209019333817,
+        "max_element_gas_depletion": 0.9944358828931688
+      },
+      "0.001": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.6986412276764895e-14
+      },
+      "0.01": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.6986412276764895e-14
+      },
+      "0.1": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.6986412276764895e-14
+      },
+      "1": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.6986412276764895e-14
+      },
+      "100": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.3211653993039363e-14
+      }
+    },
+    "condensates": [
+      {
+        "species": "Al2O3(s,l)",
+        "max_number_per_nucleus": 1.698768351376108e-06,
+        "largest_tau": 0.0002242385108788179
+      },
+      {
+        "species": "CaTiO3(s)",
+        "max_number_per_nucleus": 9.965825737430179e-08,
+        "largest_tau": 2.159576504706878e-06
+      }
+    ],
+    "maximum_convective_flux_fraction_in_condensing_layers": 4.1698660767445777e-07,
+    "grain_enthalpy_supported": false
+  },
+  "artifacts": 36
+}

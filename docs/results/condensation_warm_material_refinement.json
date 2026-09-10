@@ -1,0 +1,55 @@
+{
+  "description": "Nested material-temperature refinement; original source values retained bit for bit",
+  "coordinates": [
+    0.7,
+    0,
+    2800.0,
+    5.15
+  ],
+  "coarse": "/tmp/ember-condensate-capacity-control-2800",
+  "fine": "/tmp/ember-condensate-refined-2800",
+  "temperature_rows": [
+    17,
+    33
+  ],
+  "opacity_sha256": [
+    "07875e83e55e912bd5e527b0df2cf30058292b30c24e904413c825ea0f8f4a05",
+    "4778a22aa790fb751919b8b49b23dbab3784e691f0ecd8d10a419598788312d4"
+  ],
+  "same_equation_executable_sha256": "602676d98b9cc3c7602affa8f26b876792fea210cca14f6e0bee1cab6f0562da",
+  "original_source_values_unchanged": true,
+  "relative_boundary_difference": {
+    "T": 0.000327056620517574,
+    "Pgas": 0.002889866537149288,
+    "source_density": 0.002432258486972483
+  },
+  "maximum_allowed_relative_boundary_error": 0.005,
+  "passed": true,
+  "note": "This tests temperature interpolation, not density/frequency resolution or a global physical uncertainty. The fine model is a diagnostic only; production grid cells must separately pass the unchanged grain-enthalpy guard.",
+  "fine_model_production_accepted": false,
+  "fine_model_grain_enthalpy_supported": false,
+  "thermal_sensitivity": {
+    "controls": [
+      {
+        "extra_cp_erg_g_K": 1000000,
+        "relative_boundary_difference": {
+          "T": -1.5842446987601733e-07,
+          "Pgas": 8.388176411244785e-07,
+          "source_density": 1.2309146582012431e-06
+        },
+        "archive_receipt_sha256": "0616835e5c029d497c9bb99fd887d0009599892512d4cf57692bce5049421c81"
+      },
+      {
+        "extra_cp_erg_g_K": 10000000,
+        "relative_boundary_difference": {
+          "T": -8.311540034000586e-07,
+          "Pgas": 4.387997555754808e-06,
+          "source_density": 6.4441168412532335e-06
+        },
+        "archive_receipt_sha256": "4cfc65e88cb4e9591d9bc4c6bebac9a59f69ce4a71c34178c25d9d0b138f2930"
+      }
+    ],
+    "maximum_relative_boundary_difference": 1e-05,
+    "scope": "Thermal sensitivity of this interpolation diagnostic only; not a missing-physics bound or production grain-enthalpy acceptance."
+  }
+}

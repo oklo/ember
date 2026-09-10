@@ -1,9 +1,19 @@
 # Roadmap
 
 The target that defines "working": a 0.1 solar-mass star evolved end to end,
-from the Hayashi track through twelve trillion years of hydrogen burning, the
-blueward turn, and down the helium-white-dwarf cooling track to below
-10^-6 Lsun — in one run, with no hand-holding.
+from the Hayashi track through hydrogen exhaustion, the blueward turn, and
+down the helium-white-dwarf cooling track to below 10^-6 Lsun, with automated
+evolution. The hydrogen-burning duration is an output to measure and converge,
+not a prescribed twelve trillion years.
+
+**Historical design checklist.** This page retains the original architecture
+plan; individual checkboxes below have not all been reconciled with subsequent
+work. For the current 2.85T gas track, implemented GS98 EOS/conduction/Ledoux
+physics, incomplete input grids and remaining lifetime requirements, use
+[FORWARD_EVOLUTION.md](FORWARD_EVOLUTION.md),
+[LIFETIME_SURVEY.md](LIFETIME_SURVEY.md), and the
+[2026-09-09 report](reports/2026-09-09/ember_status_and_future.pdf).
+An interface or proposed component below is not an implemented physical model.
 
 ## Done
 

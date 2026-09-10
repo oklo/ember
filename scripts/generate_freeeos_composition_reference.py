@@ -15,11 +15,16 @@ import subprocess
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('probe',type=Path);ap.add_argument('output',type=Path)
+    ap.add_argument('--extended',action='store_true',help='audit helium-rich extended family')
     a=ap.parse_args()
     points=[(3.371,-6.773),(3.731,-4.881),(4.173,-5.19),(4.461,-3.17),
             (5.173,-1.177),(6.119,.17),(6.713,2.31)]
     rows=[]
-    for x,y3 in [(.625,0),(.675,.001),(.7,.004),(.725,.002)]:
+    mixtures=[(.625,0),(.675,.001),(.7,.004),(.725,.002)]
+    if a.extended:
+        mixtures=[(.375,.005),(.45,.03),(.525,.01),(.575,.03),(.625,.06),(.675,.02),(.7,0),
+                  (.55,.105),(.533,.0935)]  # bracket the measured trillion-year He3 peak and endpoint
+    for x,y3 in mixtures:
         # Metals remain the He4 proxy, so effective He4 is 1-X-Y3.
         eps=[x,y3/3+(1-x-y3)/4]+[0.]*18
         for lt,lr in points:

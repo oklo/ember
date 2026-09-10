@@ -1,0 +1,5790 @@
+{
+  "provenance": {
+    "repository": "https://github.com/NewStrangeWorlds/FastChem",
+    "commit": "ae67cbd559bc64a3233a1cee6030b8e6b50520de",
+    "archive_sha256": "6e7c04d8e9d7e8f79b929e6865f5d06d5f5fc4077b5fae7e6ab39675a75706de",
+    "source": "/tmp/ember-fastchem/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de",
+    "probe_sha256": "0793fd0158c7e4db6646f83b8e05bb14d6f80778783a5270566599b0208a2adb",
+    "adapter_sha256": "72e99604e985708a437e684fe934f8c12db936d29309636d708fe4186c003afc",
+    "manifest_sha256": "284c2e50759a3e955b9b7ed0161dfb46b95c3dc0485d3a2acaed38fc2c41c7a2",
+    "accuracy": 1e-08,
+    "input/logK/logK.dat_sha256": "eda9b9d7e62ccf7398036ee84349bd0a721b779acdc9d191cbf9fe1dd01f619c",
+    "input/logK/logK_condensates.dat_sha256": "566b029470a9affb361dc4e891aa8c4918baeff0f93cf07e804d57e2ebac8467"
+  },
+  "models": 48,
+  "records": [
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2600,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.4066085508044353e-09,
+      "pressure_closure": 5.555556015224283e-12,
+      "nuclei_closure": 5.995204332975845e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0042832359712122806,
+          "max_element_gas_depletion": 0.9999998348850565
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.00029066726809429415,
+          "max_element_gas_depletion": 0.993690475914345
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8318679906315083e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8318679906315083e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6542323066914832e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.454392162258955e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 2.286316064505841e-06,
+          "largest_tau": 0.000580155063229246
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.201888501182814e-06,
+          "largest_tau": 0.008585442737924723
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 3.519684264093575e-05,
+          "largest_tau": 9.663766927644383e-05
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 2.822420335139138e-05,
+          "largest_tau": 5.200468617167491e-07
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 2.414779062037445e-05,
+          "largest_tau": 4.5954280849352964e-05
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 4.871152488614721e-08,
+          "largest_tau": 9.456677833423199e-08
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 4.6399398337594065e-08,
+          "largest_tau": 2.9015656064805193e-05
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 3.4801119032958995e-08,
+          "largest_tau": 4.777786905231462e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.390470481457965e-07,
+          "largest_tau": 0.0046397214888516764
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 3.194155710776266e-06,
+          "largest_tau": 0.00020410681209089403
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 3.3375268272796816e-06,
+          "largest_tau": 6.660880919307665e-05
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.5842159082923474e-06,
+          "largest_tau": 0.0022751433685480244
+        }
+      ],
+      "source": "model-000/equilibrium/source.json.gz",
+      "source_sha256": "81b0336f13a51c11e17e164ce385cc164277a92307cbccf35ff006999a50db2b"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2600,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 2.5547941540082775e-09,
+      "pressure_closure": 5.236699962551938e-12,
+      "nuclei_closure": 5.995204332975845e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00015514197375462942,
+          "max_element_gas_depletion": 0.9999999055955563
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 3.1119531259142016e-05,
+          "max_element_gas_depletion": 0.9955553011903078
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8318679906315083e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8318679906315083e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6542323066914832e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.454392162258955e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 1.502329495717318e-10,
+          "largest_tau": 0.00022439177463311387
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 5.227118243274572e-07,
+          "largest_tau": 0.008585442737924723
+        },
+        {
+          "species": "Al6Si2O13(s)",
+          "max_number_per_nucleus": 9.118844966563561e-14,
+          "largest_tau": 2.660084370958775e-07
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 1.3490984279764444e-06,
+          "largest_tau": 9.663766927644383e-05
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 2.5443052289868933e-07,
+          "largest_tau": 6.175026641359088e-07
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 1.4805973319765407e-06,
+          "largest_tau": 5.531751075603339e-05
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 1.4503330991865988e-08,
+          "largest_tau": 9.456677833423199e-08
+        },
+        {
+          "species": "SiO2(s,l)",
+          "max_number_per_nucleus": 7.210804817714301e-07,
+          "largest_tau": 2.0807229700567356e-07
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 4.081672155612167e-12,
+          "largest_tau": 3.1791773009087385e-05
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 1.283766932248396e-13,
+          "largest_tau": 4.777786905231462e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 5.29500182112906e-08,
+          "largest_tau": 0.0046397214888516764
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 4.999611927373407e-09,
+          "largest_tau": 0.00022439177463311387
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 2.908941303709101e-07,
+          "largest_tau": 0.002056417831254939
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 9.928251068169855e-10,
+          "largest_tau": 6.660880919307665e-05
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 3.0568427920072784e-08,
+          "largest_tau": 0.0022751433685480244
+        }
+      ],
+      "source": "model-000/rainout/source.json.gz",
+      "source_sha256": "0eb3e37bad75b3d176a147fd16d13c574cacd078b66ac199c14a35fac7290669"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2600,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.4681584271112342e-09,
+      "pressure_closure": 5.656808355070098e-12,
+      "nuclei_closure": 7.327471962526033e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.004820831973173274,
+          "max_element_gas_depletion": 0.9999999564872226
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.00031979822837595263,
+          "max_element_gas_depletion": 0.9974012318766924
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 4.5462595926031984e-05,
+          "max_element_gas_depletion": 0.3340054556948048
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.298161660974074e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.298161660974074e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.298161660974074e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 2.2863164207758427e-06,
+          "largest_tau": 0.0013087284801118753
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.1661199377361382e-06,
+          "largest_tau": 0.011308370619265722
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 4.261331370956844e-05,
+          "largest_tau": 0.0007229694715188096
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 3.857737012047315e-05,
+          "largest_tau": 3.215789783367658e-06
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 2.4476757521586915e-05,
+          "largest_tau": 0.0002521186000737461
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 1.8117118761440583e-06,
+          "largest_tau": 8.844682020100323e-06
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 4.6401056628470956e-08,
+          "largest_tau": 0.00013004956430574704
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 3.48014706188653e-08,
+          "largest_tau": 6.173389140876147e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.390179317694167e-07,
+          "largest_tau": 0.006057265596999793
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 3.1924468591079323e-06,
+          "largest_tau": 0.0005945286107886844
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 1.5824779932571247e-06,
+          "largest_tau": 0.0007229694715188096
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 3.337527233130878e-06,
+          "largest_tau": 0.0003045497515242567
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.5736737120936448e-06,
+          "largest_tau": 0.0036000059464290687
+        }
+      ],
+      "source": "model-001/equilibrium/source.json.gz",
+      "source_sha256": "b426ab701f07c2627bba7a3c27244b7782f7a93f77438c201301f9a61f1d0fcf"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2600,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 3.470231879632024e-09,
+      "pressure_closure": 5.656808355070098e-12,
+      "nuclei_closure": 7.327471962526033e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00020397739126736054,
+          "max_element_gas_depletion": 0.9999999753924484
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 3.4311845480351736e-05,
+          "max_element_gas_depletion": 0.9978385360525412
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 3.331424942814226e-05,
+          "max_element_gas_depletion": 0.33400545688651817
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.298161660974074e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.298161660974074e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.298161660974074e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 5.628598203933492e-10,
+          "largest_tau": 0.0007229694715188096
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 5.595783620083328e-07,
+          "largest_tau": 0.011308370619265722
+        },
+        {
+          "species": "Al6Si2O13(s)",
+          "max_number_per_nucleus": 2.459063584065166e-13,
+          "largest_tau": 1.852881113931964e-06
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 3.1728911342973115e-06,
+          "largest_tau": 0.0007229694715188096
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 1.7196665438652338e-07,
+          "largest_tau": 4.238375993381243e-06
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 2.0677075709195096e-06,
+          "largest_tau": 0.0003045497515242567
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 6.055811504611885e-08,
+          "largest_tau": 8.844682020100323e-06
+        },
+        {
+          "species": "SiO2(s,l)",
+          "max_number_per_nucleus": 9.661092650820137e-07,
+          "largest_tau": 1.5417947689281887e-06
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 5.551360407882208e-12,
+          "largest_tau": 0.00014297897201568868
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 5.524340940896035e-14,
+          "largest_tau": 6.173389140876147e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 4.922116573791416e-08,
+          "largest_tau": 0.006057265596999793
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 7.528897008094175e-09,
+          "largest_tau": 0.0005945286107886844
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 3.2199126380228305e-07,
+          "largest_tau": 0.0032468794954258287
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 1.3838341301002282e-09,
+          "largest_tau": 0.0003045497515242567
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 4.348626880508198e-08,
+          "largest_tau": 0.0036000059464290687
+        }
+      ],
+      "source": "model-001/rainout/source.json.gz",
+      "source_sha256": "04441407b982b468ec808d94a308926b7bae7281eac79d9136cced216031b39a"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2600,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 2.8333515533773834e-09,
+      "pressure_closure": 4.616751425601251e-12,
+      "nuclei_closure": 4.440892098500626e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.005009790575493243,
+          "max_element_gas_depletion": 0.9999999869588719
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0011290338063460526,
+          "max_element_gas_depletion": 0.9992850634191068
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 7.877373896295066e-05,
+          "max_element_gas_depletion": 0.5787363885263281
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 2.286316555440595e-06,
+          "largest_tau": 0.0023194308642973263
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.1235692189003564e-06,
+          "largest_tau": 0.01356161022065162
+        },
+        {
+          "species": "Cr2O3(s,l)",
+          "max_number_per_nucleus": 1.8702692618470434e-07,
+          "largest_tau": 1.634897089415454e-07
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 4.5158250399128505e-05,
+          "largest_tau": 0.0017023455640099072
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 4.159429989235368e-05,
+          "largest_tau": 1.4273332578317327e-05
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 2.492422539595292e-05,
+          "largest_tau": 0.0006925491207780308
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 2.4020825831912828e-06,
+          "largest_tau": 0.00019548930803999789
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 4.640168745737269e-08,
+          "largest_tau": 0.0004237025605482209
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 3.480156237629049e-08,
+          "largest_tau": 7.879348638233079e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.3898098867631134e-07,
+          "largest_tau": 0.008949514775027327
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 3.1932017808559e-06,
+          "largest_tau": 0.001136666674896735
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 1.5806237062300071e-06,
+          "largest_tau": 0.0015373217835012902
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 3.33752733482645e-06,
+          "largest_tau": 0.0006276678646816458
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.5560953023689361e-06,
+          "largest_tau": 0.005329235164496094
+        },
+        {
+          "species": "SiO(s)",
+          "max_number_per_nucleus": 6.4095270960297235e-06,
+          "largest_tau": 6.958344935602005e-05
+        }
+      ],
+      "source": "model-002/equilibrium/source.json.gz",
+      "source_sha256": "ed036cf0425f2c9f9abc7814b2934f3ab34743f0d362705cb2a40a3d3155d7a7"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2600,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 2.188456083018764e-09,
+      "pressure_closure": 5.643041589564746e-12,
+      "nuclei_closure": 4.440892098500626e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00034105746612485684,
+          "max_element_gas_depletion": 0.999999992922379
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0001552082654019509,
+          "max_element_gas_depletion": 0.9993063254086618
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 3.060976171103984e-05,
+          "max_element_gas_depletion": 0.5787363900046094
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 1.3655067476730363e-09,
+          "largest_tau": 0.0015373217835012902
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 5.141444126670016e-07,
+          "largest_tau": 0.01356161022065162
+        },
+        {
+          "species": "Al6Si2O13(s)",
+          "max_number_per_nucleus": 2.2851306741908044e-13,
+          "largest_tau": 5.135049678706136e-06
+        },
+        {
+          "species": "Cr2O3(s,l)",
+          "max_number_per_nucleus": 1.779345391649021e-08,
+          "largest_tau": 1.7883894327727722e-07
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 4.70624315613431e-06,
+          "largest_tau": 0.0017023455640099072
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 9.80425744578512e-08,
+          "largest_tau": 1.4273332578317327e-05
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 3.5322799678121025e-06,
+          "largest_tau": 0.0007643867470674538
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 1.395747875260801e-07,
+          "largest_tau": 0.00019548930803999789
+        },
+        {
+          "species": "SiO2(s,l)",
+          "max_number_per_nucleus": 4.3253314911968105e-07,
+          "largest_tau": 3.88825959756193e-06
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 1.0872839061159493e-11,
+          "largest_tau": 0.0004237025605482209
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 2.3974710850472373e-14,
+          "largest_tau": 8.65592281485759e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 5.8806347695309784e-08,
+          "largest_tau": 0.008949514775027327
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 9.804702514052135e-09,
+          "largest_tau": 0.001136666674896735
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 3.3149167668263074e-07,
+          "largest_tau": 0.004801804581741129
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 1.2250604901842253e-09,
+          "largest_tau": 0.0006925491207780308
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 5.816662780079004e-08,
+          "largest_tau": 0.005329235164496094
+        },
+        {
+          "species": "SiO(s)",
+          "max_number_per_nucleus": 5.582361400740756e-07,
+          "largest_tau": 0.00010139990715112566
+        }
+      ],
+      "source": "model-002/rainout/source.json.gz",
+      "source_sha256": "e16f84c7db121881755af643d80e97d47103a0fe80e94116169b985b568a611d"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2800,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.6079921272857973e-09,
+      "pressure_closure": 5.865086194489777e-12,
+      "nuclei_closure": 9.769962616701378e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0001263071677461582,
+          "max_element_gas_depletion": 0.927955878053594
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.454392162258955e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.1216009906731453e-06,
+          "largest_tau": 0.0003751990326863122
+        }
+      ],
+      "source": "model-003/equilibrium/source.json.gz",
+      "source_sha256": "3bec11fd7053ad7dcaf96f2521663b92923ffdefe124461569067aee606d67bb"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2800,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 3.0272215845172923e-09,
+      "pressure_closure": 5.852207607404125e-12,
+      "nuclei_closure": 9.769962616701378e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 9.689769789080793e-06,
+          "max_element_gas_depletion": 0.9279558779480361
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.454392162258955e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.627591704629834e-07,
+          "largest_tau": 0.0003751990326863122
+        }
+      ],
+      "source": "model-003/rainout/source.json.gz",
+      "source_sha256": "ae54aa38987d6f8371725827401df2014aea4b5139b30c08b76f5eece795b7ff"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2800,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.6029479399957154e-09,
+      "pressure_closure": 5.866418462119327e-12,
+      "nuclei_closure": 5.995204332975845e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00013772358520863933,
+          "max_element_gas_depletion": 0.9763825645628926
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.2323197311843744e-06,
+          "largest_tau": 0.0009968552709479553
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 6.417929399308546e-08,
+          "largest_tau": 2.760781048829293e-05
+        }
+      ],
+      "source": "model-004/equilibrium/source.json.gz",
+      "source_sha256": "fd7f5c53d124eb5c35a4fef754c8118774ff113afb9586f21f67f762119b79aa"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2800,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 2.8182260969344952e-09,
+      "pressure_closure": 5.870859354217828e-12,
+      "nuclei_closure": 5.995204332975845e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 1.4810181918983145e-05,
+          "max_element_gas_depletion": 0.9763809175578354
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.4876830146842717e-07,
+          "largest_tau": 0.0009968552709479553
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 3.965496333551302e-09,
+          "largest_tau": 2.760781048829293e-05
+        }
+      ],
+      "source": "model-004/rainout/source.json.gz",
+      "source_sha256": "f91a4eb470d9c96c49a367702312ee14112609c3f56bf999647b0688d447dd2a"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2800,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.2762839108357866e-09,
+      "pressure_closure": 5.339506614632228e-12,
+      "nuclei_closure": 6.8833827526759706e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00014524968825173072,
+          "max_element_gas_depletion": 0.9914010426042853
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 8.267120240346857e-05,
+          "max_element_gas_depletion": 0.6073703463115887
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.2648549702353193e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.2648549702353193e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.2648549702353193e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.2648549702353193e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.266656727849691e-06,
+          "largest_tau": 0.0017837880753828366
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.307976911142677e-07,
+          "largest_tau": 0.0003525308260038776
+        }
+      ],
+      "source": "model-005/equilibrium/source.json.gz",
+      "source_sha256": "61a17e42830bec5c7ee306bfa8349aac081f7fc0fca9dbb3263a8401cfafbc06"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        2800,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 2.05630346084007e-09,
+      "pressure_closure": 5.619726906047617e-12,
+      "nuclei_closure": 6.8833827526759706e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 1.9277658175150847e-05,
+          "max_element_gas_depletion": 0.991400979641417
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 1.9277658175150847e-05,
+          "max_element_gas_depletion": 0.6073703464861835
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.2648549702353193e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.2648549702353193e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.2648549702353193e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.2648549702353193e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 3.23807757040092e-07,
+          "largest_tau": 0.0017837880753828366
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.4353370170697167e-08,
+          "largest_tau": 0.0003525308260038776
+        }
+      ],
+      "source": "model-005/rainout/source.json.gz",
+      "source_sha256": "da9865de943fcea1ee3f8e06e2ac4eabca8608439c7a6a79701cf8da6338e99a"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3000,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.1885605267234496e-13,
+      "pressure_closure": 5.81756864903582e-14,
+      "nuclei_closure": 1.554312234475219e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-006/equilibrium/source.json.gz",
+      "source_sha256": "54afaa2a4dc5f7ef40ac343c1a25c8a495065b25227084321ca5421ef98d6212"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3000,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 2.3880897259687117e-13,
+      "pressure_closure": 5.81756864903582e-14,
+      "nuclei_closure": 1.554312234475219e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-006/rainout/source.json.gz",
+      "source_sha256": "5babff15cfffa867da33b71891555bf68b1f0f8722d77da50a009677638c8a6f"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3000,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 2.609024107869118e-13,
+      "pressure_closure": 5.340172748447003e-14,
+      "nuclei_closure": 1.3100631690576847e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-007/equilibrium/source.json.gz",
+      "source_sha256": "099277d43ef3f4b849f136e1695a856cf7eb783492b9c19c9ea8fed99717b237"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3000,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 1.9462209621678994e-13,
+      "pressure_closure": 5.340172748447003e-14,
+      "nuclei_closure": 1.3100631690576847e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-007/rainout/source.json.gz",
+      "source_sha256": "d1e5fd3db3a71be3608be87c37bfc8c1a6d6dc8922c8ff23b3344ed99b8b0181"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3000,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 1.7630341631047486e-13,
+      "pressure_closure": 3.9190872769268026e-14,
+      "nuclei_closure": 9.547918011776346e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0317081350640365e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0317081350640365e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0317081350640365e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0317081350640365e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0317081350640365e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.099120794378905e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-008/equilibrium/source.json.gz",
+      "source_sha256": "b18e2c2b05e0dc70d1cfda65ea6c7d59d06f3a29de113c9d2a32b3e7e8487c49"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3000,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 8.348877145181177e-14,
+      "pressure_closure": 3.9190872769268026e-14,
+      "nuclei_closure": 9.547918011776346e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0317081350640365e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0317081350640365e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0317081350640365e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0317081350640365e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0317081350640365e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.099120794378905e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-008/rainout/source.json.gz",
+      "source_sha256": "89d12531caa2f14caefa77444ab5358d9761212efa651769a96d06e4d39d4c74"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3200,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 4.594102875898898e-13,
+      "pressure_closure": 1.4011014570769476e-13,
+      "nuclei_closure": 3.6193270602780103e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8540724511240114e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8540724511240114e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8540724511240114e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1435297153639112e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-009/equilibrium/source.json.gz",
+      "source_sha256": "b73c7a8c1a45053f7c5108e51e4a073e2556a812ebfac25aea3134538d10da7d"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3200,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 3.8058445284150366e-13,
+      "pressure_closure": 1.4011014570769476e-13,
+      "nuclei_closure": 3.6193270602780103e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8540724511240114e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8540724511240114e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8540724511240114e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1435297153639112e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-009/rainout/source.json.gz",
+      "source_sha256": "d5f19fa85bf7a36c492043a15b700a4565c07d0f5ffa178d9588d57e9ea30c0d"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3200,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 4.496403249731884e-13,
+      "pressure_closure": 8.859579736508749e-14,
+      "nuclei_closure": 2.2648549702353193e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9539925233402755e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9539925233402755e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9539925233402755e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9539925233402755e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9539925233402755e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1546319456101628e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-010/equilibrium/source.json.gz",
+      "source_sha256": "e0c6abcb0209f980faf24426a3358a25fe251264850a255299632638748358e6"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3200,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 3.476108290101365e-13,
+      "pressure_closure": 8.859579736508749e-14,
+      "nuclei_closure": 2.2648549702353193e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9539925233402755e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9539925233402755e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9539925233402755e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9539925233402755e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9539925233402755e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1546319456101628e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-010/rainout/source.json.gz",
+      "source_sha256": "5ad95fd7193d2b8f505a2267ae7725a6bac335290c0ae714710fe046daca2227"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3200,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 4.001243780749064e-13,
+      "pressure_closure": 8.548717289613705e-14,
+      "nuclei_closure": 1.9761969838327786e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6209256159527285e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6209256159527285e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6209256159527285e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6209256159527285e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6209256159527285e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4765966227514582e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-011/equilibrium/source.json.gz",
+      "source_sha256": "253f9e3e53cb43ff56eacb0c496d0f76b7eaaf56fcdc2379fb281c28cff91dec"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0,
+        3200,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 3.0331293032759277e-13,
+      "pressure_closure": 8.548717289613705e-14,
+      "nuclei_closure": 1.9761969838327786e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6209256159527285e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6209256159527285e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6209256159527285e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6209256159527285e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6209256159527285e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4765966227514582e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-011/rainout/source.json.gz",
+      "source_sha256": "4d2849f4e10012595e1f6ef65cef06123e143412a8c01fc0359238bc250a0ac3"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2600,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.50942896965023e-09,
+      "pressure_closure": 5.567546423890235e-12,
+      "nuclei_closure": 5.329070518200751e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.004322569305505965,
+          "max_element_gas_depletion": 0.9999998491639387
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.00029118715580776956,
+          "max_element_gas_depletion": 0.9938697574315478
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8096635301390052e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5987211554602254e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5987211554602254e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5987211554602254e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 2.247804260999333e-06,
+          "largest_tau": 0.0005773176193695227
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.167113357822699e-06,
+          "largest_tau": 0.00854745560991786
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 3.502788126808975e-05,
+          "largest_tau": 9.608341043362239e-05
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 2.8701037035374006e-05,
+          "largest_tau": 5.608971974351291e-07
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 2.3731839292988634e-05,
+          "largest_tau": 5.010263439521005e-05
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 1.582315872328767e-07,
+          "largest_tau": 1.2735924374275716e-07
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 4.561779702753997e-08,
+          "largest_tau": 2.8833613206732967e-05
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 3.421494876270597e-08,
+          "largest_tau": 5.147985685080553e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.3670409926719423e-07,
+          "largest_tau": 0.004618300617776884
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 3.1405672480184656e-06,
+          "largest_tau": 0.0002231091769826398
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 3.2813079068870086e-06,
+          "largest_tau": 6.620776387281919e-05
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.5563534114786404e-06,
+          "largest_tau": 0.002263612535697175
+        }
+      ],
+      "source": "model-012/equilibrium/source.json.gz",
+      "source_sha256": "51f94b94db62d75325f9ff02cc7e17076b9fa6a0ea5bcaf426e463592a3e5430"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2600,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 3.1351685692015963e-09,
+      "pressure_closure": 5.07127673188279e-12,
+      "nuclei_closure": 5.329070518200751e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00015915984888945013,
+          "max_element_gas_depletion": 0.9999999139720268
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 3.260802522983279e-05,
+          "max_element_gas_depletion": 0.9956866877761041
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8096635301390052e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6542323066914832e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6542323066914832e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5987211554602254e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 1.4291904652328352e-10,
+          "largest_tau": 0.0002231091769826398
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 4.994412014596378e-07,
+          "largest_tau": 0.00854745560991786
+        },
+        {
+          "species": "Al6Si2O13(s)",
+          "max_number_per_nucleus": 9.485306812980409e-14,
+          "largest_tau": 3.1047915789664104e-07
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 1.3251838656063922e-06,
+          "largest_tau": 9.608341043362239e-05
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 2.557721120219181e-07,
+          "largest_tau": 6.663835142923796e-07
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 1.5038567746076701e-06,
+          "largest_tau": 6.03264672962358e-05
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 2.5714325796032173e-08,
+          "largest_tau": 1.2735924374275716e-07
+        },
+        {
+          "species": "SiO2(s,l)",
+          "max_number_per_nucleus": 7.359904609218163e-07,
+          "largest_tau": 2.2319910817386228e-07
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 4.251316410657818e-12,
+          "largest_tau": 3.4627272716021666e-05
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 1.2832337739711108e-13,
+          "largest_tau": 5.147985685080553e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 4.979071578652016e-08,
+          "largest_tau": 0.004618300617776884
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 5.114953910674036e-09,
+          "largest_tau": 0.0002231091769826398
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 3.000107862053047e-07,
+          "largest_tau": 0.0020458705258358657
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 9.352517747792205e-10,
+          "largest_tau": 7.266674256236782e-05
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 3.06398247524791e-08,
+          "largest_tau": 0.002263612535697175
+        }
+      ],
+      "source": "model-012/rainout/source.json.gz",
+      "source_sha256": "2c8960b2a7c24bc42231bd9e74a688ca9f7655e83acc2dbbe85eb7f43bf5ac06"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2600,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.366666057047496e-09,
+      "pressure_closure": 5.332845276484477e-12,
+      "nuclei_closure": 8.215650382226158e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.004832606247206537,
+          "max_element_gas_depletion": 0.9999999598838495
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.00031987334621453537,
+          "max_element_gas_depletion": 0.9974696304716459
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 4.7471711319116924e-05,
+          "max_element_gas_depletion": 0.34876606249169084
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7763568394002505e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7763568394002505e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.199040866595169e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 2.247804583050127e-06,
+          "largest_tau": 0.00130308513784491
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.1323766312741144e-06,
+          "largest_tau": 0.01126316813657389
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 4.202705542733594e-05,
+          "largest_tau": 0.0007196259457514116
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 3.819481059335863e-05,
+          "largest_tau": 3.4990431794058397e-06
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 2.4047935196376592e-05,
+          "largest_tau": 0.00025097421876304566
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 1.814482150703311e-06,
+          "largest_tau": 8.785184802641261e-06
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 4.5619501185746216e-08,
+          "largest_tau": 0.00012938204613085954
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 3.421526629387834e-08,
+          "largest_tau": 6.114258485853184e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.366779567726312e-07,
+          "largest_tau": 0.006030642942169908
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 3.138853010051888e-06,
+          "largest_tau": 0.000591780470393962
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 1.5561966825389013e-06,
+          "largest_tau": 0.0007196259457514116
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 3.281308270187256e-06,
+          "largest_tau": 0.0003032115910475016
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.5476311315729655e-06,
+          "largest_tau": 0.003584485361379032
+        }
+      ],
+      "source": "model-013/equilibrium/source.json.gz",
+      "source_sha256": "bff550a67dc9dc44304207c4705c6807222075218dbf4f704846123266cafd4a"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2600,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 2.897417195057983e-09,
+      "pressure_closure": 5.047295914550887e-12,
+      "nuclei_closure": 8.215650382226158e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00020252256395643427,
+          "max_element_gas_depletion": 0.9999999773853935
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 3.633246848243607e-05,
+          "max_element_gas_depletion": 0.9978889352364315
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 3.255165512727754e-05,
+          "max_element_gas_depletion": 0.3487660633980948
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 5.484170823263673e-10,
+          "largest_tau": 0.0007196259457514116
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 5.375576627736214e-07,
+          "largest_tau": 0.01126316813657389
+        },
+        {
+          "species": "Al6Si2O13(s)",
+          "max_number_per_nucleus": 2.3305744487748974e-13,
+          "largest_tau": 1.837676201914999e-06
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 3.1233552150966883e-06,
+          "largest_tau": 0.0007196259457514116
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 1.766233121441153e-07,
+          "largest_tau": 4.612796089076971e-06
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 2.0162187442521055e-06,
+          "largest_tau": 0.0003032115910475016
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 5.9066616687463863e-08,
+          "largest_tau": 8.785184802641261e-06
+        },
+        {
+          "species": "SiO2(s,l)",
+          "max_number_per_nucleus": 9.290886451188549e-07,
+          "largest_tau": 1.5288068697737526e-06
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 5.378465015223856e-12,
+          "largest_tau": 0.00014225785565020958
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 5.3566947069970574e-14,
+          "largest_tau": 6.114258485853184e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 5.125115450443931e-08,
+          "largest_tau": 0.006030642942169908
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 7.464003220426917e-09,
+          "largest_tau": 0.000591780470393962
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 3.2301294944134846e-07,
+          "largest_tau": 0.003233547914583886
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 1.29987055382967e-09,
+          "largest_tau": 0.0003032115910475016
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 4.3346296412612716e-08,
+          "largest_tau": 0.003584485361379032
+        }
+      ],
+      "source": "model-013/rainout/source.json.gz",
+      "source_sha256": "1e6fa85aa5cf5d187a4de76e9ab787b357da61a4b6c9f9f04fc39406a70db42d"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2600,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 2.698642864729095e-09,
+      "pressure_closure": 4.281908161374304e-12,
+      "nuclei_closure": 4.884981308350689e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.005014602160969077,
+          "max_element_gas_depletion": 0.9999999878932084
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0011292506805148266,
+          "max_element_gas_depletion": 0.9993023366429764
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 7.98829372848274e-05,
+          "max_element_gas_depletion": 0.5868854676412151
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.965094753586527e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.965094753586527e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6542323066914832e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 2.2478047056233924e-06,
+          "largest_tau": 0.002309228445414262
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.090678508101558e-06,
+          "largest_tau": 0.013513426577286462
+        },
+        {
+          "species": "Cr2O3(s,l)",
+          "max_number_per_nucleus": 1.9410862935474517e-07,
+          "largest_tau": 1.7697995888427018e-07
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 4.444452608956005e-05,
+          "largest_tau": 0.001694929819164916
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 4.097540912726741e-05,
+          "largest_tau": 1.4190209283125128e-05
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 2.4519867614632814e-05,
+          "largest_tau": 0.0006896554793630627
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 2.373343186615751e-06,
+          "largest_tau": 0.0002140210993246435
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 4.5620091519137117e-08,
+          "largest_tau": 0.0004217544968996916
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 3.421535006100612e-08,
+          "largest_tau": 7.80997126894881e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.3664159407887036e-07,
+          "largest_tau": 0.008918792788484257
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 3.138234627930477e-06,
+          "largest_tau": 0.0011323225471898974
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 1.5543832749526457e-06,
+          "largest_tau": 0.0015307750872820417
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 3.281308362096215e-06,
+          "largest_tau": 0.0006896554793630627
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.5305633668772795e-06,
+          "largest_tau": 0.005309289130175153
+        },
+        {
+          "species": "SiO(s)",
+          "max_number_per_nucleus": 6.396223055524619e-06,
+          "largest_tau": 6.923870285045532e-05
+        }
+      ],
+      "source": "model-014/equilibrium/source.json.gz",
+      "source_sha256": "3e0f14f6e8e16b0468798cfce6ba421d1a1ba5b39f30a8ded396582e4b029f03"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2600,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 2.373132135247147e-09,
+      "pressure_closure": 5.384359624827084e-12,
+      "nuclei_closure": 4.884981308350689e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00033910809688557397,
+          "max_element_gas_depletion": 0.9999999934501809
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0001559221577993158,
+          "max_element_gas_depletion": 0.9993230836400501
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 3.000541170638421e-05,
+          "max_element_gas_depletion": 0.5868854689911827
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3322676295501878e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 1.3296847122817163e-09,
+          "largest_tau": 0.0015307750872820417
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 4.95502783160923e-07,
+          "largest_tau": 0.013513426577286462
+        },
+        {
+          "species": "Al6Si2O13(s)",
+          "max_number_per_nucleus": 2.251639802795473e-13,
+          "largest_tau": 5.101262789591203e-06
+        },
+        {
+          "species": "Cr2O3(s,l)",
+          "max_number_per_nucleus": 1.8309264067957004e-08,
+          "largest_tau": 1.936879219274061e-07
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 4.649004175636383e-06,
+          "largest_tau": 0.001694929819164916
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 1.0058933428629541e-07,
+          "largest_tau": 1.4190209283125128e-05
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 3.4496173434493314e-06,
+          "largest_tau": 0.0007612566051959025
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 1.4102882471831973e-07,
+          "largest_tau": 0.0002140210993246435
+        },
+        {
+          "species": "SiO2(s,l)",
+          "max_number_per_nucleus": 4.405985843723827e-07,
+          "largest_tau": 4.237684457552906e-06
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 1.1031059424175503e-11,
+          "largest_tau": 0.0004653059580474396
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 2.335685945852139e-14,
+          "largest_tau": 8.580901371865008e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 5.643929295906572e-08,
+          "largest_tau": 0.008918792788484257
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 9.587681228758554e-09,
+          "largest_tau": 0.0011323225471898974
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 3.2307186112441434e-07,
+          "largest_tau": 0.0047833503084286294
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 1.2092907137113408e-09,
+          "largest_tau": 0.0006896554793630627
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 5.747965615158048e-08,
+          "largest_tau": 0.005309289130175153
+        },
+        {
+          "species": "SiO(s)",
+          "max_number_per_nucleus": 5.543301050146347e-07,
+          "largest_tau": 0.00010094274861777644
+        }
+      ],
+      "source": "model-014/rainout/source.json.gz",
+      "source_sha256": "9e9a79ef13c1fcc6af80d676fd8453fc0032578788a32635543dff1854593f3c"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2800,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.6064300434901497e-09,
+      "pressure_closure": 5.7058802127585295e-12,
+      "nuclei_closure": 1.0436096431476471e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00012700378676022708,
+          "max_element_gas_depletion": 0.9330738117420814
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.097367800899455e-06,
+          "largest_tau": 0.0004067079929374215
+        }
+      ],
+      "source": "model-015/equilibrium/source.json.gz",
+      "source_sha256": "c57be3ebc1a2f180880e141ffaf72632181571aa4282c756c17bb4e9bf63da1d"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2800,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 2.5717483698173282e-09,
+      "pressure_closure": 5.74651437545981e-12,
+      "nuclei_closure": 1.0436096431476471e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 1.0428768182857547e-05,
+          "max_element_gas_depletion": 0.9330738117347821
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0650148258027912e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.7222239285634386e-07,
+          "largest_tau": 0.0004067079929374215
+        }
+      ],
+      "source": "model-015/rainout/source.json.gz",
+      "source_sha256": "79cf1cb2282bdae60265ace390b03befbfb33d5833379f6c924396a2166951fb"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2800,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.6131415637186137e-09,
+      "pressure_closure": 5.7265303610165574e-12,
+      "nuclei_closure": 6.8833827526759706e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0001385762118773078,
+          "max_element_gas_depletion": 0.9779695315449042
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7430501486614958e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7430501486614958e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7430501486614958e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7430501486614958e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.63202784619898e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.198284615756766e-06,
+          "largest_tau": 0.0009925476406825568
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 7.076553802972645e-08,
+          "largest_tau": 3.203147010089941e-05
+        }
+      ],
+      "source": "model-016/equilibrium/source.json.gz",
+      "source_sha256": "39f245cd01ac55a2f05b7535056e48020226bb90d5774e37bae8f8944ec0f5db"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2800,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 3.0480614698902286e-09,
+      "pressure_closure": 5.652145418366672e-12,
+      "nuclei_closure": 6.8833827526759706e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 1.4359079246035064e-05,
+          "max_element_gas_depletion": 0.9779682659505378
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.3712746608073166e-07,
+          "largest_tau": 0.0009925476406825568
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 4.579842239627088e-09,
+          "largest_tau": 3.203147010089941e-05
+        }
+      ],
+      "source": "model-016/rainout/source.json.gz",
+      "source_sha256": "19dd92e8d6a42bb1d4e8b523b083c052830a0ffb28e8e196484bcdd1fe4cb76b"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2800,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.3718396963422492e-09,
+      "pressure_closure": 5.3446136405455036e-12,
+      "nuclei_closure": 6.217248937900877e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00014539467620779071,
+          "max_element_gas_depletion": 0.9919339004016053
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 8.405066330107293e-05,
+          "max_element_gas_depletion": 0.6175049956062899
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0761170560490427e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0761170560490427e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0761170560490427e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5987211554602254e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 2.229673791222502e-06,
+          "largest_tau": 0.0017762064372615811
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.2940447322535458e-07,
+          "largest_tau": 0.00035091482905286084
+        }
+      ],
+      "source": "model-017/equilibrium/source.json.gz",
+      "source_sha256": "00dcfa784e22bde0def7eeee8096c14aaf272156fd6806c9eb61568fbf1e0fec"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2800,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 3.025647288268374e-09,
+      "pressure_closure": 5.759615007150387e-12,
+      "nuclei_closure": 6.217248937900877e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 1.8771187210615632e-05,
+          "max_element_gas_depletion": 0.9919338458065985
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 1.8771187210615632e-05,
+          "max_element_gas_depletion": 0.6175049956823138
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0761170560490427e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0761170560490427e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.0761170560490427e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1213252548714081e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 3.099885124981972e-07,
+          "largest_tau": 0.0017762064372615811
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.360512699003126e-08,
+          "largest_tau": 0.00035091482905286084
+        }
+      ],
+      "source": "model-017/rainout/source.json.gz",
+      "source_sha256": "65e424b90ad3ac5b9dee3b564b6ee81300eb2bee284dfd836987edde7a71207a"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 4.150013666048835e-13,
+      "pressure_closure": 8.837375276016246e-14,
+      "nuclei_closure": 1.9761969838327786e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.887379141862766e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.887379141862766e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.887379141862766e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.887379141862766e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.887379141862766e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.887379141862766e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-018/equilibrium/source.json.gz",
+      "source_sha256": "55052cdcb58424327c9685e36af22607aa435559942deac8fd2225662ec3979a"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 4.150013666048835e-13,
+      "pressure_closure": 8.837375276016246e-14,
+      "nuclei_closure": 1.9761969838327786e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.887379141862766e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.887379141862766e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.887379141862766e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.887379141862766e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.887379141862766e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.887379141862766e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-018/rainout/source.json.gz",
+      "source_sha256": "f934f67cf43f26bdc6fa12e0b2388d27abdf394070cfbf8ada1d2e6965ebbc0c"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 2.646771690706373e-13,
+      "pressure_closure": 5.10702591327572e-14,
+      "nuclei_closure": 1.2656542480726785e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1879386363489175e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-019/equilibrium/source.json.gz",
+      "source_sha256": "c6985ce1dc80729e51e4969c1ffe47422da89db11de301a2fd058849f4b3e36b"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 2.0894397323445446e-13,
+      "pressure_closure": 5.10702591327572e-14,
+      "nuclei_closure": 1.2656542480726785e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.2656542480726785e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-019/rainout/source.json.gz",
+      "source_sha256": "d3b35856ffd4b8b7ca909fd8d06b955a93213a202fff2d46222ec918e4938a01"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 1.7896795156957523e-13,
+      "pressure_closure": 3.907985046680551e-14,
+      "nuclei_closure": 9.325873406851315e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.709743457922741e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.709743457922741e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.709743457922741e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.709743457922741e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.709743457922741e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3766765505351941e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-020/equilibrium/source.json.gz",
+      "source_sha256": "1af5e3f26e859ccd33a2ea74af21ea6d624a8904dc57744d2babf8faeb87c12d"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 8.215650382226158e-14,
+      "pressure_closure": 3.907985046680551e-14,
+      "nuclei_closure": 9.325873406851315e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.63202784619898e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.63202784619898e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.63202784619898e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.63202784619898e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4876988529977098e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4765966227514582e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-020/rainout/source.json.gz",
+      "source_sha256": "0829d2f84db4d68171ddab60c969bd22eaac335b351e1fcb969d8265eff65858"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3200,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 4.809486142676178e-13,
+      "pressure_closure": 1.729727472365994e-13,
+      "nuclei_closure": 4.463096558993129e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3211653993039363e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3211653993039363e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3211653993039363e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3211653993039363e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.2434497875801753e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.2434497875801753e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-021/equilibrium/source.json.gz",
+      "source_sha256": "2b6af2f98ad8d2a4330c5662102042e6a2aba1c91cc3916f188987fd4a44d624"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3200,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 4.809486142676178e-13,
+      "pressure_closure": 1.729727472365994e-13,
+      "nuclei_closure": 4.463096558993129e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.787459069646502e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.787459069646502e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.787459069646502e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.787459069646502e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.2545520178264269e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.2434497875801753e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-021/rainout/source.json.gz",
+      "source_sha256": "6ff076634108a0706717e412dcb3065d21a69b1d91d4d87c6162319619f2e679"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3200,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 4.2232883856740955e-13,
+      "pressure_closure": 8.859579736508749e-14,
+      "nuclei_closure": 2.0650148258027912e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.609823385706477e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.609823385706477e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.609823385706477e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.609823385706477e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3100631690576847e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 9.658940314238862e-15
+        }
+      },
+      "condensates": [],
+      "source": "model-022/equilibrium/source.json.gz",
+      "source_sha256": "6aa4f6c31e7909bfd293908ddf4b657488d0d60e887dd04d55ee8b89c9a59fe4"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3200,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 3.207434318142077e-13,
+      "pressure_closure": 8.859579736508749e-14,
+      "nuclei_closure": 2.0650148258027912e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4988010832439613e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4988010832439613e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4988010832439613e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4988010832439613e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4988010832439613e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1546319456101628e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-022/rainout/source.json.gz",
+      "source_sha256": "44e2261ba4e0b5d3d75ab3807f8dec1a5c6d5c2142905f2dd78dadc356b9a251"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3200,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 4.083400284571326e-13,
+      "pressure_closure": 8.79296635503124e-14,
+      "nuclei_closure": 2.020605904817785e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.942890293094024e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5654144647214707e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-023/equilibrium/source.json.gz",
+      "source_sha256": "c2936f0f271f43e7e960eab8aeedeb45e2cebeb0ffa6e1707a552b75c2a8d25e"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3200,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 3.275157922644212e-13,
+      "pressure_closure": 8.79296635503124e-14,
+      "nuclei_closure": 2.020605904817785e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5654144647214707e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5654144647214707e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5654144647214707e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5654144647214707e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5654144647214707e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5654144647214707e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-023/rainout/source.json.gz",
+      "source_sha256": "ca15888f951f3ae2fbe85fd9ed9d8f3db178aa95705ed302bf91fc72bf143148"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2600,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.394654779498296e-09,
+      "pressure_closure": 4.701572464682613e-12,
+      "nuclei_closure": 5.329070518200751e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0025620293604831377,
+          "max_element_gas_depletion": 0.9999986275296723
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.00021073141304119803,
+          "max_element_gas_depletion": 0.9800704376757832
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.709743457922741e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6542323066914832e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4210854715202004e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 1.7304228448209285e-06,
+          "largest_tau": 0.00012139878279460021
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.6712080050008872e-06,
+          "largest_tau": 0.005621581976987043
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 8.589166061824709e-06,
+          "largest_tau": 1.537649975124894e-06
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 1.5026709174467927e-05,
+          "largest_tau": 2.5927418395096314e-06
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 3.5116662481491214e-08,
+          "largest_tau": 3.089667622599803e-06
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 2.6337889449229924e-08,
+          "largest_tau": 9.208487751903035e-08
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.0530333742944019e-07,
+          "largest_tau": 0.0027753859834491307
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 2.418733348513251e-06,
+          "largest_tau": 3.3802649377069315e-05
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 2.5260349287707323e-06,
+          "largest_tau": 6.237328315762438e-06
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.2025105389947212e-06,
+          "largest_tau": 0.0012608794982476173
+        }
+      ],
+      "source": "model-024/equilibrium/source.json.gz",
+      "source_sha256": "e780ff25a73e5785d6b5e10190a03f234bc940ea086a825e61a41a76a70bcb0b"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2600,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 2.3486217415324973e-09,
+      "pressure_closure": 4.384936858059518e-12,
+      "nuclei_closure": 5.329070518200751e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 8.633526049261562e-05,
+          "max_element_gas_depletion": 0.9999984003882343
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 3.115140232291347e-05,
+          "max_element_gas_depletion": 0.9858220182367803
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.709743457922741e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6542323066914832e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4210854715202004e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 4.454737163367551e-11,
+          "largest_tau": 3.3802649377069315e-05
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 3.960285023067411e-07,
+          "largest_tau": 0.005621581976987043
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 5.004691280867098e-07,
+          "largest_tau": 1.537649975124894e-06
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 6.638028654634449e-07,
+          "largest_tau": 3.6830888189331955e-06
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 1.1652726516240486e-12,
+          "largest_tau": 2.5927418395096314e-06
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 5.731130727306237e-14,
+          "largest_tau": 9.208487751903035e-08
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 3.2212388051628884e-08,
+          "largest_tau": 0.0027753859834491307
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 3.251022649636734e-09,
+          "largest_tau": 4.849252171948856e-05
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 1.911599089049905e-07,
+          "largest_tau": 0.0010415137704576556
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 3.103181047738962e-10,
+          "largest_tau": 6.8097541449458284e-06
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.494550830933421e-08,
+          "largest_tau": 0.0012608794982476173
+        }
+      ],
+      "source": "model-024/rainout/source.json.gz",
+      "source_sha256": "e6c79a20cae3076a88ca105b862cfa374b0c5ede0233df8f5684b518c40934c9"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2600,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.317197849739273e-09,
+      "pressure_closure": 4.5996539910220235e-12,
+      "nuclei_closure": 4.218847493575595e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.003891978356962982,
+          "max_element_gas_depletion": 0.9999995854913777
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0002850922621042884,
+          "max_element_gas_depletion": 0.9908101908382156
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5987211554602254e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5987211554602254e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5987211554602254e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.509903313490213e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 1.7304240287636958e-06,
+          "largest_tau": 0.0005521097350806483
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.6501447627719207e-06,
+          "largest_tau": 0.007314295506204401
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 2.5868356092739287e-05,
+          "largest_tau": 0.00028605952955638666
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 8.71865033848463e-06,
+          "largest_tau": 1.8243971507713493e-07
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 1.8188015744116737e-05,
+          "largest_tau": 3.736046151560347e-05
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 3.5118885484921186e-08,
+          "largest_tau": 3.1119368389271404e-05
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 2.633943325461346e-08,
+          "largest_tau": 1.3132488922972067e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.0526217101446202e-07,
+          "largest_tau": 0.003968950911782027
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 2.417841697115855e-06,
+          "largest_tau": 0.000196421286443155
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 2.5260451605189e-06,
+          "largest_tau": 5.388159061737622e-05
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.1993361646391797e-06,
+          "largest_tau": 0.0021684454354417098
+        }
+      ],
+      "source": "model-025/equilibrium/source.json.gz",
+      "source_sha256": "cc7d38b2110d6b98e25eb31713d7eee0598ffd0417ed9f48e1e242ae793f59c7"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2600,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 2.866513915122937e-09,
+      "pressure_closure": 4.922062757373169e-12,
+      "nuclei_closure": 4.218847493575595e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00011822938993808675,
+          "max_element_gas_depletion": 0.999999704888849
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 3.298971309725476e-05,
+          "max_element_gas_depletion": 0.9935135236580179
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5987211554602254e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5987211554602254e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5987211554602254e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.509903313490213e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 1.247872238230065e-10,
+          "largest_tau": 0.0002157896767995433
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 3.8277118051677774e-07,
+          "largest_tau": 0.007314295506204401
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 1.2159699585920283e-06,
+          "largest_tau": 0.00028605952955638666
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 1.3346415091583711e-07,
+          "largest_tau": 2.3428144829221738e-07
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 9.403437268306339e-07,
+          "largest_tau": 4.4869772796674133e-05
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 2.5677389934907093e-12,
+          "largest_tau": 3.4097081047691916e-05
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 3.174980737930699e-14,
+          "largest_tau": 1.425003225493533e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 3.732614633219717e-08,
+          "largest_tau": 0.003968950911782027
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 3.6644992638335346e-09,
+          "largest_tau": 0.0002157896767995433
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 2.3669248302386096e-07,
+          "largest_tau": 0.0019623083188313557
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 5.864169371905752e-10,
+          "largest_tau": 5.9049808972979435e-05
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 2.5528259487948412e-08,
+          "largest_tau": 0.0021684454354417098
+        }
+      ],
+      "source": "model-025/rainout/source.json.gz",
+      "source_sha256": "fd1448b417e65d97bbc58dfa4e6fd134fda651fa6975f35b69856c2d55ee95f5"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2600,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.1959506152645645e-09,
+      "pressure_closure": 4.432010314303625e-12,
+      "nuclei_closure": 3.774758283725532e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0046499571646363294,
+          "max_element_gas_depletion": 0.9999998722779254
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0004358047497545033,
+          "max_element_gas_depletion": 0.996653357072643
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.433608869978343e-11
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.765254609153999e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5654144647214707e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4988010832439613e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 1.7304246735271273e-06,
+          "largest_tau": 0.0012754741746227865
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.609805407152392e-06,
+          "largest_tau": 0.009694494781011967
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 3.17044398265476e-05,
+          "largest_tau": 0.001047134740966619
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 2.4299097840336838e-05,
+          "largest_tau": 1.3099732569282254e-06
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 1.8418805162510112e-05,
+          "largest_tau": 0.00024535375603691707
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 1.2148976723264815e-06,
+          "largest_tau": 2.6623915636070276e-05
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 3.5119559375936656e-08,
+          "largest_tau": 0.00016908684740616362
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 2.633982233436902e-08,
+          "largest_tau": 1.8088028722691888e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.0522294966575368e-07,
+          "largest_tau": 0.005825570071910427
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 2.4162764885699633e-06,
+          "largest_tau": 0.0005818959325437109
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 1.1970633754934619e-06,
+          "largest_tau": 0.0007075859577413406
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 2.5260458849549234e-06,
+          "largest_tau": 0.000295953919458745
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.1904762460535711e-06,
+          "largest_tau": 0.0034896704890559943
+        }
+      ],
+      "source": "model-026/equilibrium/source.json.gz",
+      "source_sha256": "765acb07af08cf686cc2516ee3245329a0e126166adf49dc0ccd224c56ebd530"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2600,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 2.485778471950084e-09,
+      "pressure_closure": 4.263034369955676e-12,
+      "nuclei_closure": 3.774758283725532e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0002219056041994328,
+          "max_element_gas_depletion": 0.9999999263433377
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.00011812646917633217,
+          "max_element_gas_depletion": 0.9973233335215138
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.4343305149443495e-11
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.765254609153999e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4988010832439613e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4988010832439613e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 4.594931540684643e-10,
+          "largest_tau": 0.0007075859577413406
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 4.1485324854989e-07,
+          "largest_tau": 0.009694494781011967
+        },
+        {
+          "species": "Al6Si2O13(s)",
+          "max_number_per_nucleus": 1.4485126873763804e-13,
+          "largest_tau": 6.905500370837123e-07
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 2.869382952974615e-06,
+          "largest_tau": 0.001047134740966619
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 1.412694766995703e-07,
+          "largest_tau": 1.5731538048746991e-06
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 1.7926319201344506e-06,
+          "largest_tau": 0.000295953919458745
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 3.9221606259637554e-08,
+          "largest_tau": 2.6623915636070276e-05
+        },
+        {
+          "species": "SiO2(s,l)",
+          "max_number_per_nucleus": 6.554870634289725e-07,
+          "largest_tau": 5.257916472779138e-07
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 4.414644767086636e-12,
+          "largest_tau": 0.0001855600130483681
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 1.5383540488543606e-14,
+          "largest_tau": 1.8088028722691888e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 3.2139015965504126e-08,
+          "largest_tau": 0.005825570071910427
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 5.830622988642259e-09,
+          "largest_tau": 0.0005818959325437109
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 2.835354438363759e-07,
+          "largest_tau": 0.003150918482553998
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 1.159246976909189e-09,
+          "largest_tau": 0.000295953919458745
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 3.560343596806309e-08,
+          "largest_tau": 0.0034896704890559943
+        },
+        {
+          "species": "SiO(s)",
+          "max_number_per_nucleus": 2.513015952102075e-07,
+          "largest_tau": 6.905500370837123e-07
+        }
+      ],
+      "source": "model-026/rainout/source.json.gz",
+      "source_sha256": "30a5186e023fe3f1fa86035d1e6d347a9b3b1bfa0d88c4d967288d2023457ea5"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2800,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.591998698482257e-09,
+      "pressure_closure": 4.9615866970498246e-12,
+      "nuclei_closure": 7.771561172376096e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 5.0230679607401366e-05,
+          "max_element_gas_depletion": 0.3690357026583787
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9206858326015208e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9206858326015208e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9206858326015208e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9206858326015208e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4210854715202004e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 6.385886868884223e-07,
+          "largest_tau": 2.3718153177840108e-05
+        }
+      ],
+      "source": "model-027/equilibrium/source.json.gz",
+      "source_sha256": "735cb3e3aa4183651d93a4bd79a771c86eaa157cdbce574187712531b34a793e"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2800,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 2.73277733775501e-09,
+      "pressure_closure": 4.985123425171878e-12,
+      "nuclei_closure": 7.771561172376096e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 2.6342460055909546e-06,
+          "max_element_gas_depletion": 0.36903570182216816
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9206858326015208e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9206858326015208e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9206858326015208e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9206858326015208e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1435297153639112e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 3.348943289365545e-08,
+          "largest_tau": 2.3718153177840108e-05
+        }
+      ],
+      "source": "model-027/rainout/source.json.gz",
+      "source_sha256": "dbd520b6f3ffb0bcde32148cd921d9d35eb71ec28e8afd217ab1c83382efaa3b"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2800,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.6526537350312083e-09,
+      "pressure_closure": 5.033529149045535e-12,
+      "nuclei_closure": 4.218847493575595e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00010935649918402586,
+          "max_element_gas_depletion": 0.8034223871198654
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3877787807814457e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.354472090042691e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.3902623608087791e-06,
+          "largest_tau": 0.00020579607812138372
+        }
+      ],
+      "source": "model-028/equilibrium/source.json.gz",
+      "source_sha256": "f7d40eb877e77aecbabb4a7dd6db3e5e3ba6926a031bb922c0ac5c33c1fdee55"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2800,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 3.400207115866749e-09,
+      "pressure_closure": 4.983125023727553e-12,
+      "nuclei_closure": 4.218847493575595e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 7.855831423522228e-06,
+          "max_element_gas_depletion": 0.8034223878156166
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3877787807814457e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.354472090042691e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 9.987168002871194e-08,
+          "largest_tau": 0.00020579607812138372
+        }
+      ],
+      "source": "model-028/rainout/source.json.gz",
+      "source_sha256": "26bc80e952769d4d277918c5e355feb087ea397353f4a69ddd0aebac81dc2c1a"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2800,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.6013714233007477e-09,
+      "pressure_closure": 4.99933427988708e-12,
+      "nuclei_closure": 5.551115123125783e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00012709757041847938,
+          "max_element_gas_depletion": 0.9337628232878975
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9095836023552692e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9095836023552692e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9095836023552692e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9095836023552692e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.554312234475219e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.6158067387102178e-06,
+          "largest_tau": 0.0007041790922718436
+        }
+      ],
+      "source": "model-029/equilibrium/source.json.gz",
+      "source_sha256": "51c3f37f475110e78e8a33cbc561893cc7ca7e1c7e452bb3545c2fd7943b9a7f"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        2800,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 3.5549239107979247e-09,
+      "pressure_closure": 5.0099924209234814e-12,
+      "nuclei_closure": 5.551115123125783e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 1.3145298855317814e-05,
+          "max_element_gas_depletion": 0.9337628232613301
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9095836023552692e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.63202784619898e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.63202784619898e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.63202784619898e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4988010832439613e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.6711747578845914e-07,
+          "largest_tau": 0.0007041790922718436
+        }
+      ],
+      "source": "model-029/rainout/source.json.gz",
+      "source_sha256": "8c6df56e25ee254ee5196528b791bb0d7907e6ca64b53c67e762d5431282e959"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3000,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 2.6645352591003757e-13,
+      "pressure_closure": 4.951594689828198e-14,
+      "nuclei_closure": 1.1102230246251565e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.120525977034049e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.120525977034049e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.120525977034049e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.120525977034049e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.120525977034049e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.120525977034049e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-030/equilibrium/source.json.gz",
+      "source_sha256": "799c89fa6e64d4fc75ff74ecfe21f331395df2dca0f5cc957e6fb7aebc1ac0f6"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3000,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 2.0816681711721685e-13,
+      "pressure_closure": 4.951594689828198e-14,
+      "nuclei_closure": 1.1102230246251565e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7763568394002505e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7763568394002505e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7763568394002505e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7763568394002505e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6431300764452317e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6431300764452317e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-030/rainout/source.json.gz",
+      "source_sha256": "47acc1355855b86192532ad34d8fb73f845c4628e8fd9b978882c9867f81f1c5"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3000,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 2.120525977034049e-13,
+      "pressure_closure": 4.063416270128073e-14,
+      "nuclei_closure": 9.769962616701378e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7319479184152442e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7319479184152442e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7319479184152442e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5765166949677223e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5765166949677223e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 9.103828801926284e-15
+        }
+      },
+      "condensates": [],
+      "source": "model-031/equilibrium/source.json.gz",
+      "source_sha256": "4905ce9584dd89e084596f638945d495e60048936714bce61dfb873d63d3e8ad"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3000,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 1.5587531265737198e-13,
+      "pressure_closure": 4.063416270128073e-14,
+      "nuclei_closure": 9.769962616701378e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3655743202889425e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3655743202889425e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3655743202889425e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3433698597964394e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.2989609388114332e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 9.103828801926284e-15
+        }
+      },
+      "condensates": [],
+      "source": "model-031/rainout/source.json.gz",
+      "source_sha256": "11b5094f3276119807b4cc862358f43890974278c5c92b89571ceff564e5c644"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3000,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 1.325606291402437e-13,
+      "pressure_closure": 3.108624468950438e-14,
+      "nuclei_closure": 6.661338147750939e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9872992140790302e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9872992140790302e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9872992140790302e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9872992140790302e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9872992140790302e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4432899320127035e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-032/equilibrium/source.json.gz",
+      "source_sha256": "2e35515dd30f3366b68c4b415210ab189f9b6df6e4e4d3d535d2336427804ca3"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3000,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 8.970602038971265e-14,
+      "pressure_closure": 3.108624468950438e-14,
+      "nuclei_closure": 6.661338147750939e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4432899320127035e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4432899320127035e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-032/rainout/source.json.gz",
+      "source_sha256": "38ffb2ccc6b5c746dd7582a4c8bd5b28bb2d9cb63efe1e26d1ac35c0d5386f2f"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3200,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.843592111252292e-13,
+      "pressure_closure": 7.438494264988549e-14,
+      "nuclei_closure": 1.687538997430238e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.2101430968414206e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-033/equilibrium/source.json.gz",
+      "source_sha256": "2c4a788412620e77e92979e0b8dd6fb63776b08d8392998722f7ea0e4cecc4e0"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3200,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 2.9831692671677956e-13,
+      "pressure_closure": 7.438494264988549e-14,
+      "nuclei_closure": 1.687538997430238e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6431300764452317e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6431300764452317e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6431300764452317e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6431300764452317e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5987211554602254e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.2101430968414206e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-033/rainout/source.json.gz",
+      "source_sha256": "69848d48ee333a0b9bdbdd3109a4448ad4a96d75f27d9e372e32bb9b406964d6"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3200,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.5349501104064984e-13,
+      "pressure_closure": 7.616129948928574e-14,
+      "nuclei_closure": 1.6431300764452317e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.63202784619898e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.63202784619898e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.63202784619898e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3877787807814457e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3877787807814457e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1879386363489175e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-034/equilibrium/source.json.gz",
+      "source_sha256": "c1af0cfb9952cb19e381cbce9c657953cf0bf13779377398477d8a612b9386a0"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3200,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 2.7133850721838826e-13,
+      "pressure_closure": 6.816769371198461e-14,
+      "nuclei_closure": 1.6209256159527285e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6431300764452317e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6431300764452317e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6431300764452317e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6431300764452317e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6431300764452317e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1102230246251565e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-034/rainout/source.json.gz",
+      "source_sha256": "58c614c8f00239b5abcc33bc1c4705d70b417d8c139ed47aa16bc8466f671421"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3200,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.128608483393691e-13,
+      "pressure_closure": 6.372680161348399e-14,
+      "nuclei_closure": 1.509903313490213e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.1094237467877974e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.1094237467877974e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.1094237467877974e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.1094237467877974e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.1094237467877974e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.1094237467877974e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-035/equilibrium/source.json.gz",
+      "source_sha256": "d2952f7d710969d67f5c192935287e9cb8e02f611acfb329a237dbf078c5a2d0"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0,
+        3200,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 2.3381296898605797e-13,
+      "pressure_closure": 6.372680161348399e-14,
+      "nuclei_closure": 1.509903313490213e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7319479184152442e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7319479184152442e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7319479184152442e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7319479184152442e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7319479184152442e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7319479184152442e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-035/rainout/source.json.gz",
+      "source_sha256": "895e048b2b470f104e0b1a8691749f4fc1b574b8ff5b9f1f578725d5398ff2c0"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2600,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.5516105612032334e-09,
+      "pressure_closure": 4.816591570033779e-12,
+      "nuclei_closure": 4.440892098500626e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0026428396330835735,
+          "max_element_gas_depletion": 0.9999987109943748
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0002138696815486471,
+          "max_element_gas_depletion": 0.9806598504209311
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 1.7082711825662007e-06,
+          "largest_tau": 0.00012072927900967444
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.6516005535990103e-06,
+          "largest_tau": 0.005596405944851348
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 9.433691801667485e-06,
+          "largest_tau": 1.8132152006527659e-06
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 1.5160477229559172e-05,
+          "largest_tau": 3.0649190545142857e-06
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 3.466726569682136e-08,
+          "largest_tau": 3.3465652669900382e-06
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 2.6000884869112193e-08,
+          "largest_tau": 9.810579420207457e-08
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.0395450534789112e-07,
+          "largest_tau": 0.0027615417862109737
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 2.387731394794504e-06,
+          "largest_tau": 3.36016594136429e-05
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 2.493699756911764e-06,
+          "largest_tau": 6.761930894761433e-06
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.187399640444068e-06,
+          "largest_tau": 0.001255266529286285
+        }
+      ],
+      "source": "model-036/equilibrium/source.json.gz",
+      "source_sha256": "855000508a69b920d707d0546ead93adfb6ae853f17fe444f4f834f85f4ee12a"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2600,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 3.550590044198998e-09,
+      "pressure_closure": 4.816591570033779e-12,
+      "nuclei_closure": 4.440892098500626e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 8.555184024127166e-05,
+          "max_element_gas_depletion": 0.9999984972438093
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 3.0196823720667546e-05,
+          "max_element_gas_depletion": 0.9862553897843133
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 4.200888249402975e-11,
+          "largest_tau": 3.36016594136429e-05
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 3.7799704196914416e-07,
+          "largest_tau": 0.005596405944851348
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 4.915908576915805e-07,
+          "largest_tau": 1.8132152006527659e-06
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 6.58766376141365e-07,
+          "largest_tau": 3.989779338584852e-06
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 1.1527293252757976e-12,
+          "largest_tau": 2.807579263407919e-06
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 5.913428096458791e-14,
+          "largest_tau": 9.810579420207457e-08
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 3.024364195861818e-08,
+          "largest_tau": 0.0027615417862109737
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 3.175336063613443e-09,
+          "largest_tau": 5.279582500464475e-05
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 2.1721901910499508e-07,
+          "largest_tau": 0.0011405625423386043
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 3.179723681230438e-10,
+          "largest_tau": 7.383809515767267e-06
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.485675158348927e-08,
+          "largest_tau": 0.001255266529286285
+        }
+      ],
+      "source": "model-036/rainout/source.json.gz",
+      "source_sha256": "d91c79eec61f0d72345a50a3d5e38c9755142048e38f085ec247e064a30e87ec"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2600,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.403905157739473e-09,
+      "pressure_closure": 4.618305737835726e-12,
+      "nuclei_closure": 3.9968028886505635e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.003943087002835628,
+          "max_element_gas_depletion": 0.9999996158501413
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0002857170006659837,
+          "max_element_gas_depletion": 0.9910439141998391
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8096635301390052e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8096635301390052e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8096635301390052e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4876988529977098e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 1.7082722858246077e-06,
+          "largest_tau": 0.0005498687766071243
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.6310362027355534e-06,
+          "largest_tau": 0.0072858318764030235
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 2.584556221654472e-05,
+          "largest_tau": 0.0002847344551238694
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 9.913441210326349e-06,
+          "largest_tau": 1.9597309015082701e-07
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 1.7986883277474725e-05,
+          "largest_tau": 3.715394123860911e-05
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 3.4669339373390476e-08,
+          "largest_tau": 3.390595366297058e-05
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 2.6002290307281305e-08,
+          "largest_tau": 1.4083195592993343e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.0391317709009856e-07,
+          "largest_tau": 0.003953412493400082
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 2.3870300373739754e-06,
+          "largest_tau": 0.00021474300762324325
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 2.4937083657485413e-06,
+          "largest_tau": 5.360096177096967e-05
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.183166390371116e-06,
+          "largest_tau": 0.0021594109385331952
+        }
+      ],
+      "source": "model-037/equilibrium/source.json.gz",
+      "source_sha256": "6f2fd0518404becee5322bb36ce2e57ac5b410b77e60eed87e69a7efb0615f8c"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2600,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 3.350005828295366e-09,
+      "pressure_closure": 4.757527705123721e-12,
+      "nuclei_closure": 3.9968028886505635e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00012368702966275352,
+          "max_element_gas_depletion": 0.9999997412162752
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 3.2204520368928224e-05,
+          "max_element_gas_depletion": 0.993684879549942
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.765254609153999e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.532107773982716e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.532107773982716e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.532107773982716e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 1.195666293394871e-10,
+          "largest_tau": 0.00021474300762324325
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 3.6815585713928593e-07,
+          "largest_tau": 0.0072858318764030235
+        },
+        {
+          "species": "Al6Si2O13(s)",
+          "max_number_per_nucleus": 1.2596923861769883e-14,
+          "largest_tau": 3.6144971926602744e-08
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 1.196848932183579e-06,
+          "largest_tau": 0.0002847344551238694
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 1.3545410692604172e-07,
+          "largest_tau": 2.5199991856267075e-07
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 9.697372036942616e-07,
+          "largest_tau": 4.89067026746063e-05
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 2.4755677134014863e-12,
+          "largest_tau": 3.390595366297058e-05
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 3.157531981458796e-14,
+          "largest_tau": 1.4083195592993343e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 3.9761706638968424e-08,
+          "largest_tau": 0.003953412493400082
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 3.7503241138045745e-09,
+          "largest_tau": 0.00021474300762324325
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 2.2812421044584234e-07,
+          "largest_tau": 0.0019540485052429914
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 6.10466983864499e-10,
+          "largest_tau": 5.8746858170031635e-05
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 2.590370111646418e-08,
+          "largest_tau": 0.0021594109385331952
+        }
+      ],
+      "source": "model-037/rainout/source.json.gz",
+      "source_sha256": "a837b253228d732b5083bc8fa9da4c6fb9a317abebef8bac27970b384a920275"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2600,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.2708016295401876e-09,
+      "pressure_closure": 4.442002321525251e-12,
+      "nuclei_closure": 3.3306690738754696e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.004669636129288455,
+          "max_element_gas_depletion": 0.999999881536323
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.00044156074518714785,
+          "max_element_gas_depletion": 0.996748585288363
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.4362289963164585e-11
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.532107773982716e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.532107773982716e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.532107773982716e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 1.7082728806615818e-06,
+          "largest_tau": 0.0012703324876215773
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.59194647468826e-06,
+          "largest_tau": 0.009660960558207747
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 3.141307899381614e-05,
+          "largest_tau": 0.0010427582178266532
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 2.444568248212023e-05,
+          "largest_tau": 1.4238037305596832e-06
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 1.817551787626626e-05,
+          "largest_tau": 0.00026824376403412664
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 1.2295065507191275e-06,
+          "largest_tau": 2.9013933909844442e-05
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 3.467000363981941e-08,
+          "largest_tau": 0.0001683394587692163
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 2.600264758441592e-08,
+          "largest_tau": 1.7886403978823384e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 1.0387741787196352e-07,
+          "largest_tau": 0.005803789123509373
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 2.3855247824113164e-06,
+          "largest_tau": 0.0005791532764812997
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 1.1820730740781575e-06,
+          "largest_tau": 0.0007043938766941542
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 2.493709028292193e-06,
+          "largest_tau": 0.0002946565974352045
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 1.1756351668343013e-06,
+          "largest_tau": 0.003474975269188675
+        }
+      ],
+      "source": "model-038/equilibrium/source.json.gz",
+      "source_sha256": "c69c92eec14d4755c954efb666dea8383419d15ba8fb6e201737b3f008367108"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2600,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 2.46831644012957e-09,
+      "pressure_closure": 4.827249711070181e-12,
+      "nuclei_closure": 3.3306690738754696e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.00022072224790378525,
+          "max_element_gas_depletion": 0.999999931829939
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.00012374995599607406,
+          "max_element_gas_depletion": 0.997387957075102
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 2.4362289963164585e-11
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8984813721090177e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8984813721090177e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.2989609388114332e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "MgAl2O4(s,l)",
+          "max_number_per_nucleus": 4.5258084651011746e-10,
+          "largest_tau": 0.0007043938766941542
+        },
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 3.994536882401461e-07,
+          "largest_tau": 0.009660960558207747
+        },
+        {
+          "species": "Al6Si2O13(s)",
+          "max_number_per_nucleus": 1.490155425606205e-13,
+          "largest_tau": 7.496472993788265e-07
+        },
+        {
+          "species": "Fe(s,l)",
+          "max_number_per_nucleus": 2.8216934254957406e-06,
+          "largest_tau": 0.0010427582178266532
+        },
+        {
+          "species": "MgSiO3(s,l)",
+          "max_number_per_nucleus": 1.3743667926541676e-07,
+          "largest_tau": 1.7103628726270699e-06
+        },
+        {
+          "species": "Mg2SiO4(s,l)",
+          "max_number_per_nucleus": 1.7585766382374464e-06,
+          "largest_tau": 0.0002946565974352045
+        },
+        {
+          "species": "Ni(s,l)",
+          "max_number_per_nucleus": 4.118651898559801e-08,
+          "largest_tau": 2.9013933909844442e-05
+        },
+        {
+          "species": "SiO2(s,l)",
+          "max_number_per_nucleus": 6.309784309978649e-07,
+          "largest_tau": 5.207083223333801e-07
+        },
+        {
+          "species": "Ti3O5(s,l)",
+          "max_number_per_nucleus": 4.438260789440194e-12,
+          "largest_tau": 0.0002027985917543679
+        },
+        {
+          "species": "Ti4O7(s,l)",
+          "max_number_per_nucleus": 1.5386500920764154e-14,
+          "largest_tau": 1.9521556830056468e-07
+        },
+        {
+          "species": "CaTiO3(s)",
+          "max_number_per_nucleus": 3.067536688807659e-08,
+          "largest_tau": 0.005803789123509373
+        },
+        {
+          "species": "CaSiO3(s)",
+          "max_number_per_nucleus": 5.809696297793124e-09,
+          "largest_tau": 0.0005791532764812997
+        },
+        {
+          "species": "Ca2SiO4(s)",
+          "max_number_per_nucleus": 2.743634111246848e-07,
+          "largest_tau": 0.003137472646968336
+        },
+        {
+          "species": "CaMgSi2O6(s)",
+          "max_number_per_nucleus": 1.0766257313272639e-09,
+          "largest_tau": 0.0002946565974352045
+        },
+        {
+          "species": "Ca2Al2SiO7(s)",
+          "max_number_per_nucleus": 3.244403095282016e-08,
+          "largest_tau": 0.003474975269188675
+        },
+        {
+          "species": "SiO(s)",
+          "max_number_per_nucleus": 2.513809901934898e-07,
+          "largest_tau": 8.213300085531276e-07
+        }
+      ],
+      "source": "model-038/rainout/source.json.gz",
+      "source_sha256": "b5a882c853f48215f01f7a93aff8de2af10ad96764a2c1c557ad0be57902bb49"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2800,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.617109500808624e-09,
+      "pressure_closure": 4.871436587450262e-12,
+      "nuclei_closure": 8.215650382226158e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 5.5590793042220924e-05,
+          "max_element_gas_depletion": 0.4084154849604146
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4099832412739488e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 6.976853028020689e-07,
+          "largest_tau": 2.728121450376169e-05
+        }
+      ],
+      "source": "model-039/equilibrium/source.json.gz",
+      "source_sha256": "a9e95799ccaa84b10158457dffb715fb7310b28b74d2cd7a85b0e140a745c9da"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2800,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 2.6097621841358887e-09,
+      "pressure_closure": 4.853895063661184e-12,
+      "nuclei_closure": 8.215650382226158e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 2.936651984687732e-06,
+          "max_element_gas_depletion": 0.408415482368655
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4099832412739488e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 3.685600744288608e-08,
+          "largest_tau": 2.728121450376169e-05
+        }
+      ],
+      "source": "model-039/rainout/source.json.gz",
+      "source_sha256": "c8602d3c6f431cdd69ce30da498d23ec611f1ffb0f0220770cd1299f980a6799"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2800,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.6514897772121913e-09,
+      "pressure_closure": 4.9180659544845184e-12,
+      "nuclei_closure": 5.329070518200751e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0001109623140876393,
+          "max_element_gas_depletion": 0.8152200182876701
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.587618925213974e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.587618925213974e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.3988810110276972e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.3926186597865066e-06,
+          "largest_tau": 0.00022292504432026717
+        }
+      ],
+      "source": "model-040/equilibrium/source.json.gz",
+      "source_sha256": "a9fcd2f0100029bd83c06d4fbe8a2cc0d79831ba39a6db79348c1e4b7539993b"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2800,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 2.803959286978852e-09,
+      "pressure_closure": 4.866995695351761e-12,
+      "nuclei_closure": 5.329070518200751e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 8.355548285910067e-06,
+          "max_element_gas_depletion": 0.81522001841395
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6986412276764895e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.587618925213974e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.587618925213974e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1657341758564144e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.0486519068120708e-07,
+          "largest_tau": 0.00022292504432026717
+        }
+      ],
+      "source": "model-040/rainout/source.json.gz",
+      "source_sha256": "178a16a340dc04b542d2cd1ffc8e066d5d10f555c79890d2a1a01e9ef1d40e22"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2800,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.612850019152347e-09,
+      "pressure_closure": 4.8974158062264905e-12,
+      "nuclei_closure": 5.773159728050814e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0001276181901207365,
+          "max_element_gas_depletion": 0.9375877219214295
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9872992140790302e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9872992140790302e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9872992140790302e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9872992140790302e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6542323066914832e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.6016561510331513e-06,
+          "largest_tau": 0.0007014339637347128
+        }
+      ],
+      "source": "model-041/equilibrium/source.json.gz",
+      "source_sha256": "5f4979c5e14b80a37145d37bbc7b7624d99d04684d7133fa3634b86d48fdd472"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2800,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 3.3269914601063988e-09,
+      "pressure_closure": 4.903411010559466e-12,
+      "nuclei_closure": 5.773159728050814e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 1.2769256696244853e-05,
+          "max_element_gas_depletion": 0.9375877219996358
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9095836023552692e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9095836023552692e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9095836023552692e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.9095836023552692e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        }
+      },
+      "condensates": [
+        {
+          "species": "Al2O3(s,l)",
+          "max_number_per_nucleus": 1.6025813111263747e-07,
+          "largest_tau": 0.0007014339637347128
+        }
+      ],
+      "source": "model-041/rainout/source.json.gz",
+      "source_sha256": "0c6403c4f90f3d2e996ba65c6ad173a1aead02b41713128463c0feb20d1a220e"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3000,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 2.7133850721838826e-13,
+      "pressure_closure": 4.263256414560601e-14,
+      "nuclei_closure": 1.1324274851176597e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-042/equilibrium/source.json.gz",
+      "source_sha256": "3bf46d1f1135728e67eca3bc87d231e638739e2e2617393cadced460d07aca59"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3000,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 1.9306778398231472e-13,
+      "pressure_closure": 4.263256414560601e-14,
+      "nuclei_closure": 1.1324274851176597e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.8762769116165146e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7541523789077473e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-042/rainout/source.json.gz",
+      "source_sha256": "4273e5c9f2aeadbbecc063ca42151ae02197ca2d56b629cee90db776dd36ea72"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3000,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 2.1116441928370477e-13,
+      "pressure_closure": 4.285460875053104e-14,
+      "nuclei_closure": 1.0436096431476471e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-043/equilibrium/source.json.gz",
+      "source_sha256": "ea4b2e275f3b4dc5814c6b5bac43a52f9d2923a0f1bae2669000aa83c3014890"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3000,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 1.7319479184152442e-13,
+      "pressure_closure": 4.285460875053104e-14,
+      "nuclei_closure": 1.0436096431476471e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4654943925052066e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-043/rainout/source.json.gz",
+      "source_sha256": "d471a843b83ddb1676b7b70a313cd3db4c41a10beb414a58d0eb36c9beb52da0"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3000,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 1.3655743202889425e-13,
+      "pressure_closure": 3.064215547965432e-14,
+      "nuclei_closure": 6.8833827526759706e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4432899320127035e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4432899320127035e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1213252548714081e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-044/equilibrium/source.json.gz",
+      "source_sha256": "86e3b48416a6004608d2c5a8b687fabe98cca213fb1192093b1ac8cbe53b0639"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3000,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 9.525713551283843e-14,
+      "pressure_closure": 3.0531133177191805e-14,
+      "nuclei_closure": 6.8833827526759706e-15,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6653345369377348e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6542323066914832e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.6542323066914832e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1213252548714081e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-044/rainout/source.json.gz",
+      "source_sha256": "6dd5726ab2216e6c2b98f6e2e4d281538dac0ed27760b6c9f31d51b6a76fa207"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3200,
+        4.9
+      ],
+      "mode": "equilibrium",
+      "element_closure": 4.050093593832571e-13,
+      "pressure_closure": 7.716050021144838e-14,
+      "nuclei_closure": 1.7985612998927536e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7208456881689926e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4876988529977098e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-045/equilibrium/source.json.gz",
+      "source_sha256": "8017f7e961d6ddf9da6e26a7889145d42a0a764ec8b7f829a077a41c6d19a640"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3200,
+        4.9
+      ],
+      "mode": "rainout",
+      "element_closure": 3.15636405900932e-13,
+      "pressure_closure": 7.716050021144838e-14,
+      "nuclei_closure": 1.7985612998927536e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4876988529977098e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4876988529977098e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4876988529977098e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4876988529977098e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4876988529977098e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.4876988529977098e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-045/rainout/source.json.gz",
+      "source_sha256": "8871c6b5bc4fc993d5bb0507328e3af8ea938158d3dd91a04982f6e292cb99bf"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3200,
+        5.15
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.630429290524262e-13,
+      "pressure_closure": 7.005507285384738e-14,
+      "nuclei_closure": 1.554312234475219e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.454392162258955e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-046/equilibrium/source.json.gz",
+      "source_sha256": "d8f3370de44f7940593be8b884f4dd1c455f165c6f2a8b61cb9b92ff5adf00d8"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3200,
+        5.15
+      ],
+      "mode": "rainout",
+      "element_closure": 2.794431352981519e-13,
+      "pressure_closure": 6.894484982922222e-14,
+      "nuclei_closure": 1.554312234475219e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.7985612998927536e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.454392162258955e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-046/rainout/source.json.gz",
+      "source_sha256": "f3a63a3db5635eace0578e5fddb998c0cfee747d42005aff629979ba625f5f07"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3200,
+        5.4
+      ],
+      "mode": "equilibrium",
+      "element_closure": 3.1863400806741993e-13,
+      "pressure_closure": 6.161737786669619e-14,
+      "nuclei_closure": 1.4210854715202004e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5210055437364645e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5210055437364645e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5210055437364645e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5210055437364645e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.5210055437364645e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1102230246251565e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-047/equilibrium/source.json.gz",
+      "source_sha256": "b03818f83fcca3c76d5adcf4050738e749d4c117afce392ff8ab34a6d5181434"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3200,
+        5.4
+      ],
+      "mode": "rainout",
+      "element_closure": 2.396971510165713e-13,
+      "pressure_closure": 6.161737786669619e-14,
+      "nuclei_closure": 1.4210854715202004e-14,
+      "thresholds": {
+        "0": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.001": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.01": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "0.1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "1": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.687538997430238e-14
+        },
+        "100": {
+          "max_condensed_mass_fraction": 0.0,
+          "max_element_gas_depletion": 1.1102230246251565e-14
+        }
+      },
+      "condensates": [],
+      "source": "model-047/rainout/source.json.gz",
+      "source_sha256": "c7558aa56d79990933ac028555d28fd107051ce033cf45cea48e7da09314a971"
+    }
+  ],
+  "limitation": "Fixed gas-atmosphere profiles; condensate chemistry and rainout audited without radiative feedback or grain opacity",
+  "archive": "data/atmosphere/sources/condensation_gs98",
+  "summary": {
+    "equilibrium": {
+      "max_element_closure": 3.6526537350312083e-09,
+      "max_pressure_closure": 5.866418462119327e-12,
+      "max_condensation_tau_by_Teff": {
+        "2600": 0.01356161022065162,
+        "2800": 0.0017837880753828366,
+        "3000": 0,
+        "3200": 0
+      }
+    },
+    "rainout": {
+      "max_element_closure": 3.5549239107979247e-09,
+      "max_pressure_closure": 5.870859354217828e-12,
+      "max_condensation_tau_by_Teff": {
+        "2600": 0.01356161022065162,
+        "2800": 0.0017837880753828366,
+        "3000": 0,
+        "3200": 0
+      }
+    }
+  }
+}

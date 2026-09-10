@@ -19,6 +19,9 @@ public:
   virtual ~Conduction() = default;
   virtual OpacityState eval(double T, double rho, const Composition&) const = 0;
   virtual const char* name() const = 0;
+  virtual std::optional<Opacity::DensityRange> density_range(double, const Composition&) const {
+    return std::nullopt;
+  }
 };
 
 // Radiative and conductive opacities combined.  Owns neither; both are shared
@@ -26,8 +29,11 @@ public:
 class CombinedOpacity final : public Opacity {
 public:
   CombinedOpacity(std::shared_ptr<Opacity> rad, std::shared_ptr<Conduction> cond)
-      : rad_(std::move(rad)), cond_(std::move(cond)) {}
+      : rad_(std::move(rad)), cond_(std::move(cond)) {
+    if(!rad_)throw std::invalid_argument("CombinedOpacity: radiative opacity is required");
+  }
   OpacityState eval(double T, double rho, const Composition&) const override;
+  std::optional<DensityRange> density_range(double T,const Composition&) const override;
   const char* name() const override { return "radiative + conductive"; }
 private:
   std::shared_ptr<Opacity> rad_;

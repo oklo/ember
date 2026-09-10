@@ -30,11 +30,15 @@ struct ZoneResidual {
   std::array<std::array<double, NVAR>, NVAR> dfdy_hi{};      // d f / d y_{i+1}
 };
 
+enum class ConvectiveCriterion { schwarzschild, ledoux };
 struct Physics {
   const Eos* eos{};
   const Opacity* opacity{};
   const Nuclear* nuclear{};
   double alpha_mlt{1.9};             // l/H_P, strictly positive; not calibrated
+  ConvectiveCriterion criterion{ConvectiveCriterion::schwarzschild};
+  double alpha_semiconvection{};     // Langer mixing-only closure; zero disables
+  double alpha_thermohaline{};       // Kippenhahn closure; zero disables
 };
 
 // Evaluate one zone.  `dt` <= 0 means a static model: the time-dependent term

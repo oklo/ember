@@ -1,0 +1,17 @@
+{
+  "condtab21wd.dat.gz": {
+    "url": "https://www.ioffe.ru/astro/conduct/condtab21wd.dat",
+    "raw_sha256": "e07643047afdc848ed119a3f8cddeb959dac0f66272e7a40764f178e72b0403e",
+    "gzip_sha256": "1a4c6ed8f545469416659f462d1faf25fc5cfd4d2750792c981c15457707c32d"
+  },
+  "condtab21_I.dat.gz": {
+    "url": "https://www.ioffe.ru/astro/conduct/condtab21_I.dat",
+    "raw_sha256": "926a89a1988f22df4ff4b6756acd5fe2a8d4734cda57992683a730505490d249",
+    "gzip_sha256": "80b8938d64a354454ac17766cd53aaab8f416c7d93586ad907eba50513b388f5"
+  },
+  "condtab21nd.dat.gz": {
+    "url": "https://www.ioffe.ru/astro/conduct/condtab21nd.dat",
+    "raw_sha256": "3696a8ccf9918ab02bb37b054f8e2e8ee3d21e6503e29b68291303caeb15df88",
+    "gzip_sha256": "f8a4e61c0cd003d08eab9a8e9ac340de741648ed031558a9cfa15153e39bb1cf"
+  }
+}

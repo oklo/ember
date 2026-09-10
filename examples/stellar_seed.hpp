@@ -10,11 +10,13 @@ namespace ember::example {
 // energy profile with the EOS, tabulated opacity, pp heating and atmosphere.
 inline Model stellar_seed(std::size_t points, double mass, double radius,
                           const Composition& comp, const Nuclear& nuclear, const Atmosphere& atmosphere,
-                          double index = 3.0) {
+                          double index = 3.0, double seed_Teff = 0.0) {
   if (points < 32 || points > 8192 || !std::isfinite(mass) || !std::isfinite(radius)
       || !(mass > 0.0) || !(radius > 0.0))
     throw std::invalid_argument("stellar_seed: invalid mesh, mass or radius");
   if (index != 3 && index != 1.5) throw std::invalid_argument("stellar_seed: supported indices are 3 and 1.5");
+  if (!std::isfinite(seed_Teff) || seed_Teff < 0)
+    throw std::invalid_argument("stellar_seed: invalid trial effective temperature");
   const double outer_xi = index == 3 ? 6.875 : 3.65;
   std::vector<double> targets(points);
   for (std::size_t i = 0; i < points; ++i) {
@@ -41,6 +43,14 @@ inline Model stellar_seed(std::size_t points, double mass, double radius,
     const double next = nuclear.eval(m.T(i), m.rho(i), comp).eps;
     m.y[i].L = m.y[i - 1].L + 0.5 * (eps + next) * (m.m[i] - m.m[i - 1]);
     eps = next;
+  }
+  // A bounded atmosphere may need a trial luminosity inside its support.
+  // This only sets the initial guess; relaxation still solves nuclear and
+  // thermal balance, with no alteration of the selected atmosphere.
+  if (seed_Teff > 0) {
+    const double target = 4 * M_PI * constants::sigma_SB * radius * radius * std::pow(seed_Teff,4);
+    const double scale_L = target / m.y.back().L;
+    for (auto& state : m.y) state.L *= scale_L;
   }
   const double Ts = m.T(points - 1);
   const double Teff = std::pow(m.y.back().L / (4.0 * M_PI * constants::sigma_SB * radius * radius), 0.25);

@@ -1,0 +1,42 @@
+--- a/tlusty/tlusty208.f
++++ b/tlusty/tlusty208.f
+@@ -28003,6 +28003,9 @@
+       DLTND=DELTA(ND)
+       IFNDM1=0
+ C
++C     The surface is outside the cell-centered convection calculation.
++      idcon(1)=0
++      flxc(1)=0.d0
+       ICBEG=0
+       ICEND=0
+       DO ID=2,ND
+@@ -28060,6 +28063,8 @@
+ C     in this case, the radiation flux is held fixed
+ c
+ c
++C     A wholly stable starting structure has no interval to refine.
++      if(icbeg.eq.0.or.icend.eq.0) return
+       icbeg0=icbeg
+       if(ideepc.gt.0) then
+       if(icend.eq.nd-1.and.ideepc.eq.2) icend=nd
+@@ -28069,7 +28074,7 @@
+             icbegd=id
+           else
+             igap=0
+-            do idd=id-1,id-ndcgap,-1
++            do idd=id-1,max(2,id-ndcgap),-1
+                if(idcon(idd).gt.0) igap=1
+             end do
+             if(igap.gt.0) then
+@@ -28101,9 +28106,11 @@
+ c     convection zone; if there is an oscillation there, re-adjust
+ c     the temperature
+ c
++      if(icbeg0.gt.2) then
+       if(temp(icbeg0-1).lt.temp(icbeg0-2).and.
+      *   temp(icbeg0-1).lt.temp(icbeg0)) then
+          temp(icbeg0-1)=half*(temp(icbeg0)+temp(icbeg0-2))
++      end if
+       end if
+ c
+       do id=icbeg0,icend

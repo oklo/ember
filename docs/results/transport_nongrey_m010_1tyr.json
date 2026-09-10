@@ -1,0 +1,55 @@
+{
+  "description": "Final-profile transport and source-domain audit; plasmon fit only, not total thermal neutrinos",
+  "input_sha256": "87abb8b1f19631242b69739d3464a5892959bf127725cfea79fc79fdbac0c3a6",
+  "points": 512,
+  "age_yr": 1000000000000,
+  "central": {
+    "P": 1.8338131927117462e+17,
+    "E": 1008533534860994.8,
+    "S": 852838002.3573327,
+    "grad_ad": 0.38916195718485797,
+    "radiative_opacity": 31.103856905759187,
+    "conductive_opacity": 61.51622070979732,
+    "combined_opacity": 20.658498412003723,
+    "gradient_if_all_flux_diffusive": 19.18191041180707,
+    "mlt_gradient": 0.3891619571977195,
+    "estimated_conductive_flux_fraction": 0.0068131448965576364,
+    "opacity_rho_min": 9.650804180166765e-11,
+    "opacity_rho_max": 9650.804180166764,
+    "classic_conductive_opacity": 112.8510108091865,
+    "undamped_conductive_opacity": 60.41390585400581
+  },
+  "minimum_midpoint_diffusive_gradient_over_adiabatic": 14.696617107177962,
+  "maximum_estimated_local_conductive_flux_fraction": 0.030666703961064395,
+  "minimum_opacity_density_above_floor_factor": 404763132.3801321,
+  "minimum_opacity_density_below_ceiling_factor": 30.28189034880439,
+  "mapped_source_composition": {
+    "EOS_H_min_max": [
+      0.5192780607486552,
+      0.5192780607486552
+    ],
+    "opacity_H_min_max": [
+      0.5192859229603859,
+      0.5192859229603859
+    ],
+    "opacity_Z_min_max": [
+      0.0192990294299281,
+      0.0192990294299281
+    ]
+  },
+  "final_boundary": {
+    "Teff_K": 2909.133508971607,
+    "log10_g": 5.123889628773991
+  },
+  "max_species_spread": 0.0,
+  "min_accepted_convective_mass_fraction": 1.0000000000000004,
+  "max_recorded_last_halfstep_luminosity_imbalance": 1.1233468821814085e-08,
+  "max_recorded_last_halfstep_nuclear_mass_imbalance": 1.5104225314921393e-08,
+  "plasmon_luminosity_over_surface": 1.494938559115078e-08,
+  "maximum_plasmon_epsilon_erg_g_s": 3.334666237448458e-09,
+  "nuclear_rest_mass_loss_over_baryonic_mass": 0.0007454599276607064,
+  "plasmon_source": "https://arxiv.org/abs/astro-ph/9309014; equations 23--27, fully ionized approximation; does not include bremsstrahlung/photo/pair/recombination",
+  "probe_sha256": "631635ab01df0329ecbba31292821900482acdd9c85d12d44aef5f1ccdeef424",
+  "probe_source_sha256": "a84644a9d9896d4c0be89186d16bdc7f4a9dd31229205ab4701886ace88de457",
+  "library_sha256": "0b79890639552990da58912e9d2774903a4ef9e85c3b1a84d58d9a38295816f9"
+}

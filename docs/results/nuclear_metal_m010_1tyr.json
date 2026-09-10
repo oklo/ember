@@ -1,0 +1,38 @@
+{
+  "profile": "out/evolution-metal-512-1tyr.json",
+  "nuclear_model": "sfii-svh",
+  "points": 512,
+  "age_yr": 1000000000000,
+  "central": {
+    "T_K": 5153914.717945864,
+    "rho_g_cm3": 257.73437723929555,
+    "bare_pp_sfii_over_legacy": 0.9878252609354429,
+    "bare_33_sfii_over_legacy": 0.9326507502787948,
+    "bare_34_sfii_over_legacy": 1.0624133202004764,
+    "legacy_pp_H": 0.35454253328717894,
+    "legacy_33_H": 1.4181701331487158,
+    "sfii_legacy_eps": 1.7179716359570714,
+    "debye_pp_H": 0.32254632146135176,
+    "debye_33_H": 1.290185285845407,
+    "sfii_debye_eps": 1.5248069527219772,
+    "svh_pp_H": 0.20863166327876687,
+    "svh_33_H": 0.7204801532020837,
+    "sfii_svh_eps": 0.9097549109888644,
+    "electron_eta": 1.4979917465938049,
+    "electron_susceptibility": 0.5830756836913437,
+    "gamma_e": 0.2587350406567418,
+    "pp_zeta": 0.039663608769060936,
+    "eps_nuclear_neutrinos": 0.00512190433439919,
+    "reduced_ppII_over_pp": 7.852318723969542e-05
+  },
+  "integrated_power_erg_s": {
+    "sfii_legacy_eps": 8.860550888066151e+30,
+    "sfii_debye_eps": 7.997644646181848e+30,
+    "sfii_svh_eps": 5.239591634626625e+30,
+    "eps_nuclear_neutrinos": 9.133019019200081e+28
+  },
+  "max_pp_zeta_where_T_ge_1e5": 0.07633978103740165,
+  "max_reduced_ppII_over_pp": 7.852318723969542e-05,
+  "metal_inventory": "GS98 elemental number pattern; inert carrier labels; representative metal isotopes",
+  "interpretation": "Prescription comparisons at identical final thermal/composition states; not independently relaxed stars or calibrated uncertainty bounds. Electron gas fully ionized; Z=.02 with the selected metal inventory. ppII is a reduced steady branch."
+}

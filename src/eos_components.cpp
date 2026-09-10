@@ -156,18 +156,34 @@ EosResponse CompositeEos::eval_with_derivatives(double T, double rho, const Comp
   return out;
 }
 
-OpacityState CombinedOpacity::eval(double T, double rho, const Composition& c) const {
-  const OpacityState r = rad_->eval(T, rho, c);
+std::optional<Opacity::DensityRange> CombinedOpacity::density_range(double T, const Composition& comp) const {
+  const auto r = rad_->density_range(T, comp);
   if (!cond_) return r;
-  const OpacityState k = cond_->eval(T, rho, c);
+  const auto k = cond_->density_range(T, comp);
+  if (!r) return k;
+  if (!k) return r;
+  const DensityRange range{std::max(r->min, k->min), std::min(r->max, k->max)};
+  if (range.min >= range.max)
+    throw std::domain_error("CombinedOpacity: no common source density support");
+  return range;
+}
+
+OpacityState CombinedOpacity::eval(double T, double rho, const Composition& comp) const {
+  const OpacityState r = rad_->eval(T, rho, comp);
+  if (!cond_) return r;
+  const OpacityState k = cond_->eval(T, rho, comp);
   // 1/kappa = 1/kappa_rad + 1/kappa_cond; differentiate the reciprocal sum so
   // the combined derivatives stay exact rather than being re-differenced.
   const double ir = 1.0 / r.kappa, ic = 1.0 / k.kappa, it = ir + ic;
   OpacityState s{};
   s.kappa = 1.0 / it;
   const double wr = ir / it, wc = ic / it;   // weights sum to one
+  if(wc==0) return r;
   s.dlnk_dlnT   = wr * r.dlnk_dlnT   + wc * k.dlnk_dlnT;
   s.dlnk_dlnRho = wr * r.dlnk_dlnRho + wc * k.dlnk_dlnRho;
+  s.dlnk_dX = wr*r.dlnk_dX+wc*k.dlnk_dX;
+  s.dlnk_dZ = wr*r.dlnk_dZ+wc*k.dlnk_dZ;
+  s.dlnk_dY3 = wr*r.dlnk_dY3+wc*k.dlnk_dY3;
   return s;
 }
 

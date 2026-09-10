@@ -1,0 +1,155 @@
+{
+  "status": "One matched-grid depletion/gas comparison; not a stellar lifetime or full atmosphere family.",
+  "coordinates": [
+    0.7,
+    0,
+    2800.0,
+    5.15
+  ],
+  "archive": "data/atmosphere/sources/condensation_atmosphere_x700_2800_g515",
+  "diagnostics": {
+    "T": 4029.037784144391,
+    "Pgas": 16416280.095734362,
+    "source_density": 9.731468295926046e-05,
+    "column_mass": 116.21834788382569,
+    "flux_error": 0.000878795733110449,
+    "correction": 5.52e-07,
+    "effective_flux_error": 0.00019954575625269477,
+    "hydrostatic_error": 1.4747065413267535e-07,
+    "chemical_density_error": 2.1316282072803006e-13,
+    "iterations": 28,
+    "depths": 300,
+    "tau_bracket": [
+      99.66929310260046,
+      107.357738550696
+    ],
+    "temperature_range": [
+      1400.8948852487017,
+      4843.878249879827
+    ],
+    "density_range": [
+      7.928605631869929e-11,
+      0.00034853872880296114
+    ]
+  },
+  "chemistry": {
+    "element_closure": 3.455455699352683e-09,
+    "pressure_closure": 4.796163466380676e-12,
+    "nuclei_closure": 4.6629367034256575e-15,
+    "thresholds": {
+      "0": {
+        "max_condensed_mass_fraction": 0.00029728257132300334,
+        "max_element_gas_depletion": 0.9995882654688107
+      },
+      "0.001": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.709743457922741e-14
+      },
+      "0.01": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.709743457922741e-14
+      },
+      "0.1": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.709743457922741e-14
+      },
+      "1": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.709743457922741e-14
+      },
+      "100": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 1.1657341758564144e-14
+      }
+    },
+    "condensates": [
+      {
+        "species": "Al2O3(s,l)",
+        "max_number_per_nucleus": 1.7072476156950263e-06,
+        "largest_tau": 0.0003859637346570762
+      },
+      {
+        "species": "CaTiO3(s)",
+        "max_number_per_nucleus": 1.0513351385432897e-07,
+        "largest_tau": 0.0001474757863666993
+      },
+      {
+        "species": "Ca2Al2SiO7(s)",
+        "max_number_per_nucleus": 1.1324370361007159e-06,
+        "largest_tau": 2.013458809422282e-05
+      }
+    ],
+    "maximum_convective_flux_fraction_in_condensing_layers": 0.0,
+    "grain_enthalpy_supported": true
+  },
+  "same_material_grid_gas_control": {
+    "T": 4029.9836411687265,
+    "Pgas": 16395849.419945866,
+    "source_density": 9.713712102075174e-05,
+    "column_mass": 116.07370980420141,
+    "flux_error": 1.2400326578232423e-05,
+    "correction": 2.5e-07,
+    "effective_flux_error": 0.00019792327937684373,
+    "hydrostatic_error": 1.4600234621298114e-07,
+    "chemical_density_error": 2.311484337269576e-13,
+    "iterations": 4,
+    "depths": 300,
+    "tau_bracket": [
+      93.73180134470968,
+      101.09288411872609
+    ],
+    "temperature_range": [
+      1590.735741269137,
+      4738.877010435635
+    ],
+    "density_range": [
+      1.114156048058504e-10,
+      0.00030143264712719235
+    ]
+  },
+  "isolated_condensation_relative_boundary_change": {
+    "T": -0.00023470492899102524,
+    "Pgas": 0.0012460882791252015,
+    "source_density": 0.0018279514221013482
+  },
+  "comparison_note": "Identical source version, composition, material/spectral grid and atmosphere settings; equilibrium depletion enabled versus disabled. Grain opacity and enthalpy omitted.",
+  "files_sha256": {
+    "provenance.json.gz": "693551f58e4fe90c1773f0a06a516a708cd3d6b4bbc83445ac008e2c054e3af2",
+    "validated.json.gz": "5bf20ce083cfcab842642d5171afe3dde27ed3723ce7f87a1197b42ac2add149",
+    "completed.json.gz": "da193c24bba76600d410896c1abae9e7199e72dc716499f6385bd8ad879f31e6",
+    "fort.5.gz": "5e917801f2f26573fd9a0698ad609d0e63645f55a3666c7fe09b1dbcc97501e4",
+    "fort.7.gz": "d8c4e382f7b74b397cb6663c2bab1eb87fb13ddd09517fd942d8a97e6824f088",
+    "fort.8.gz": "3c4965ea9d80a730ef4ddc682015855367f1d46e9e9755ccf3ad3c896880a82c",
+    "fort.9.gz": "d17d1b940334de9a26f46f441f4b9bde8b0b706e7ebf714f8e749f0a276fb269",
+    "fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "run.log.gz": "fb5d70a9d9423825f5c149abd711d29758f9e6fb590f42d21f63dd51bc9dbfcc",
+    "tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+    "ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "opacity.sha256.gz": "c8b03c6b75bbf7586915d2aeefc4d3f77d985dd69b9ddb9475fd404a5f5f040d",
+    "physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "ember-condensates.cfg.gz": "5ee549344f834a98e3a23ccd5098cccbc8ee55fe8a59f5bd237f8b072f715f74",
+    "condensate-abundances.dat.gz": "0d427bf028c8d064dc6bfa50022129d6f1450aafc39d2d769e8c324753445239",
+    "condensates.sha256.gz": "900df1e6a4ff27a475dd6adb230ba541085996f0448fe52f08a1b76ed0fe7af2",
+    "chemistry-audit.json.gz": "07dbb5159e7b0eb73d8aa255471e68e5d3e1cbea71c1ef0c1a7ab8fcd53beeae",
+    "chemistry-audit-input.dat.gz": "814513b1b3c00378cf5173a10fca6fd80891a912aff79d56bcaa0e9951063cd3",
+    "chemistry-audit-source.json.gz": "b001214ce456af2ece2ba7b3c4563ad7b57a5bb46453c55c5437e64adb5bd375",
+    "chemistry-audit.log.gz": "507f3c0814639268a9ccbb7feb3d9851271626ed2b601bd00940d8e158201dc0",
+    "gas-control/provenance.json.gz": "db243ea70f2c7f5d6c8899ca34965367489fa9c7d3961107e30b84ba4184030e",
+    "gas-control/validated.json.gz": "b2d516e2d5206283cfda8c25d4f4be06af22d8ffc4a30d6c49437a291a51720f",
+    "gas-control/completed.json.gz": "9141b3a7999e71d2ae8a503bd3bbb2f5cb7af80c30d74ba8e16bfa11ae2ef03a",
+    "gas-control/fort.5.gz": "5e917801f2f26573fd9a0698ad609d0e63645f55a3666c7fe09b1dbcc97501e4",
+    "gas-control/fort.7.gz": "2b8fd58d4de61a8ba6708587456ac394c498350c628cc1f43d40dbfea36c3103",
+    "gas-control/fort.8.gz": "31e2a063f11ad964731a1473e9af5acba2fbcbd0df12c7ce52aa0b172dd9d3e2",
+    "gas-control/fort.9.gz": "db308368e7cbc8dcfc90d172f48a20a5c0e10e9153fcd0ddd4c8ea21896c8a94",
+    "gas-control/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "gas-control/run.log.gz": "2020a3e73029e1f5d67580abcd4222e9fbeba8bd8ffe8b2cc5cde116ca6e2c4c",
+    "gas-control/tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+    "gas-control/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "gas-control/opacity.sha256.gz": "080260cfc8e35996df79907c0b8ce05b0f50a316be04cbebc5d9465b888a217f",
+    "gas-control/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "gas-control/ember-condensates.cfg.gz": "61a578799584c25f8fe2e92b5428371b5a4010aef06d7aef1f2e8589d895c49e",
+    "gas-control/condensate-abundances.dat.gz": "0d427bf028c8d064dc6bfa50022129d6f1450aafc39d2d769e8c324753445239",
+    "gas-control/condensates.sha256.gz": "900df1e6a4ff27a475dd6adb230ba541085996f0448fe52f08a1b76ed0fe7af2",
+    "gas-control/opacity-control.json.gz": "9e6c5b60241b58a3d6ae6e972d5fa9100bfb79fa57a39f83b51c2e4ec5b0d20f"
+  }
+}

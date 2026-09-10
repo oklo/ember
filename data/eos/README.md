@@ -1,5 +1,59 @@
 # Equation-of-state data
 
+**Storage policy:** new generated tables and raw source archives described below
+remain local and are not included in a fresh clone. Generator code, source patches,
+small specifications and provenance metadata are versioned. See
+[the reproduction guide](../../docs/DATA_REPRODUCTION.md). Existing published
+data history is retained. References to installed/archived files describe the
+development machine unless explicitly stated otherwise.
+
+## GS98 baryonic H/He3 family
+
+`freeeos300_gs98_z020.dat` selects twelve material-potential planes with
+XH=.3/.4/.5/.6/.7/.75 and X3=0/.12, fixed Z=.02. Source number densities
+match the atmosphere's GS98 representative-isotope inventory except for
+FreeEOS's unsupported trace K (4.56e-6 baryonic mass). Original raw sources
+and `sources/freeeos300_gs98_manifest.json` record inputs, transformations,
+source failures and hashes. Masked derivative stencils are never used.
+
+Use `MetalHelmholtzEos` with explicit documented-approximation selection and
+`MetalInventory::gs98`. Radiation and ideal helium isotope entropy are added
+once. The source and interpolation checks, remaining isotope approximations,
+and evolution selection are in [FORWARD_EVOLUTION.md](../../docs/FORWARD_EVOLUTION.md).
+The H/He proxy families below remain available as controls.
+
+### Hydrogen-poor extension
+
+`freeeos300_gs98_hydrogen_poor_z020.dat` is a separate 24-plane family,
+extending XH to .1 with new .1/.125/.15/.175/.2/.25 planes at both X3 values.
+It retains the original material grid, source options, masks and all original
+table bytes. Existing evolution runs still select the original family.
+
+Coarse .1 composition spacing gave up to 1.22% heat-capacity interpolation
+error, prompting the additional planes. The installed family passes 336
+fresh source comparisons: maximum pressure, energy and heat-capacity
+differences are .04985%, .10866% and .19344%. First-law and response checks
+are below 7.2e-10; 1536 archived stellar-profile queries reproduce the old
+family byte for byte. These are source/interpolation checks, not physical
+uncertainty bounds. Reports are in
+`docs/results/metal_eos_hydrogen_poor_{audit,coarse_audit,overlap}.json`.
+
+The raw evaluations and three disjoint parent manifests are archived in
+`sources/`. Reassemble into a new directory without recomputing the source:
+
+```
+python3 scripts/assemble_metal_eos_family.py /tmp/ember-eos-reassembled/freeeos300_gs98_hydrogen_poor_z020.dat \
+  data/eos/sources/freeeos300_gs98_hydrogen_poor_parent_00.json \
+  data/eos/sources/freeeos300_gs98_hydrogen_poor_parent_01.json \
+  data/eos/sources/freeeos300_gs98_hydrogen_poor_parent_02.json
+```
+
+The family SHA-256 is
+`93cfb5809dd3548b003fe33aa009f1d572b0303eb58e75fd30c2a961d2cd5924`.
+`scripts/audit_metal_eos_family.py` compares a runtime probe built from
+`scripts/metal_eos_probe.cpp` against the original FreeEOS source probe;
+its audit archives the fresh source queries and executable checksums.
+
 ## FreeEOS 3.0 material Helmholtz potential
 
 `freeeos300_hhe_x070_potential.dat` is ember's C2 biquintic representation
@@ -125,3 +179,17 @@ reject this EOS. Density, entropy and their derivatives support an
 **experimental static calculation**, with consistency errors exposed in
 the equilibrium JSON. Do not manufacture internal energy or enforce one
 identity by overwriting an independently derived response.
+
+## Extended evolution family
+
+`freeeos300_hhe_extended.dat` adds source X=.3/.4/.5/.55 to the original .6/.65/.7/.75 family, using the same FreeEOS 3.0 EOS1 options and .0125-dex potential grid. All eight raw source planes are archived; `sources/freeeos300_extended_manifest.json` pins both raw and imported hashes. The old manifest is unchanged for historical reproduction.
+
+```
+python3 scripts/verify_composition_data.py --extended
+python3 scripts/generate_freeeos_composition_reference.py /tmp/freeeos-probe \
+  tests/data/freeeos300_extended_reference.dat --extended
+```
+
+The 63 direct off-composition queries, including He3 mass fractions up to .105, differ by at most 0.083% in P/E and 0.421% in thermal responses. These test the stated elemental/isotope approximation; they are not comparisons with an independent physical EOS. The metals-as-He4 approximation remains explicit. A separate [metal sensitivity audit](../../docs/results/extended_eos_metal_sensitivity.json) compares direct FreeEOS evaluations with GS98 metals at 15 sampled states; differences are below .91% in P/E and .37% in cp/adiabatic gradient. That audit omits unsupported potassium and does not provide a consistent new metal mixture grid.
+
+Pressure inversion now honors the composition family's density support even when the initial ideal-gas guess lies outside it. Immutable mask intervals and integer polynomial scale factors are precomputed for speed; the potential, interpolation order, masks and physical derivatives are unchanged.

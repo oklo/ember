@@ -66,6 +66,9 @@ static void accumulate(Integrals& R, double t0, double t1,
     R.In += kn * f;  R.Ip += kp * f;  R.Iu += ku * f;
     R.dIn_deta += kn * fp;  R.dIp_deta += kp * fp;  R.dIu_deta += ku * fp;
     const double gb = g / beta;
+    const double s = e >= 0.0 ? (1.0-z)/(1.0+z) : (z-1.0)/(1.0+z);
+    R.d2In_deta2 += kn * fp * s;
+    R.d2In_detadlnb += kn * fp * s * gb;
     R.dIn_dlnb += kn * fp * gb;
     R.dIp_dlnb += kp * fp * gb;
     R.dIu_dlnb += ku * fp * gb;

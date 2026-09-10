@@ -14,7 +14,8 @@ int main() {
   AesopusOpacity low(data+"/opacity/aesopus21_gs98_z020.dat");TopsOpacity high(data+"/opacity",TopsOpacity::Grid::composition);
   BlendedOpacity blend(low,high,4.4,4.5);NominalAbundanceOpacity opacity(blend);
   TabulatedAtmosphere cond(eos,data+"/atmosphere/cond_gn93_tau100_solar_proxy.dat",TabulatedAtmosphere::Mixture::allow_documented_proxy);
-  FrozenCompositionAtmosphere atmosphere(eos,cond);PPChains nuclear;
+  FrozenCompositionAtmosphere atmosphere(eos,cond);
+  PPChains nuclear(PPRates::solar_fusion_ii,PPScreening::salpeter_van_horn);
   Physics physics{&eos,&opacity,&nuclear,1.9};
   auto comp=solar_scaled(.7,.02);comp.basis=AbundanceBasis::baryon_mass;
   const auto seed=example::stellar_seed(512,.1*constants::Msun,.15*constants::Rsun,comp,nuclear,atmosphere,1.5);
@@ -61,5 +62,12 @@ int main() {
   const auto rejected=evolve_step(initial,physics,atmosphere,duration,options);
   check(!rejected.converged && rejected.model.age==initial.age && rejected.model.comp[0].X==initial.comp[0].X
     && rejected.model.y[0].lnT==initial.y[0].lnT,"rejected step returns the original composition, structure and age");
+  auto edge=initial;
+  for(auto& c:edge.comp) {c.X[0]=.695001;c.X[1]=.004999;}
+  options.max_abundance_change=.001;
+  const auto limited=evolve_step(edge,physics,atmosphere,duration,options);
+  check(!limited.converged && limited.message.find("FrozenCompositionAtmosphere")!=std::string::npos
+    && limited.model.age==edge.age && limited.model.comp[0].X==edge.comp[0].X
+    && limited.model.y[0].lnT==edge.y[0].lnT,"atmosphere composition coverage failure preserves the last supported model");
   return failures?1:0;
 }

@@ -105,6 +105,15 @@ double Eos::rho_from_PT(double T, double P, const Composition& comp,
     throw std::domain_error("Eos::rho_from_PT: invalid T, P, or density guess");
   double rho = rho_guess > 0.0 ? rho_guess
              : P / (comp.mu_ions_inv() + comp.mu_elec_inv()) / (R_gas * T);
+  double lo=-std::numeric_limits<double>::infinity(),hi=std::numeric_limits<double>::infinity();
+  if(const auto bounds=density_range(T,comp)) {
+    if(!(bounds->min>0) || !std::isfinite(bounds->max) || bounds->min>=bounds->max)
+      throw std::domain_error("Eos::rho_from_PT: invalid density bounds");
+    lo=std::log(bounds->min);hi=std::log(bounds->max);
+    if(eval(T,bounds->min,comp).P>P || eval(T,bounds->max,comp).P<P)
+      throw std::domain_error("Eos::rho_from_PT: pressure outside supported density interval");
+    rho=std::clamp(rho,bounds->min,bounds->max);
+  }
   for (int it = 0; it < 200; ++it) {
     if (!std::isfinite(rho) || !(rho > 0.0))
       throw std::domain_error("Eos::rho_from_PT: density outside representable range");
@@ -121,7 +130,10 @@ double Eos::rho_from_PT(double T, double P, const Composition& comp,
     if (std::abs(f) < 1e-12 && std::abs(step) < 1e-10) return rho;
     if (step >  0.7) step =  0.7;
     if (step < -0.7) step = -0.7;
-    rho *= std::exp(-step);
+    const double r=std::log(rho);
+    if(f<0)lo=r;else hi=r;
+    const double next=r-step;
+    rho=std::exp(next>lo && next<hi?next:.5*(lo+hi));
   }
   throw std::runtime_error("Eos::rho_from_PT: density inversion did not converge");
 }

@@ -1,0 +1,75 @@
+{
+  "description": "Two numerical routes to the same canonical 2750 K depleted atmosphere; original-source and independent chemistry checks retained.",
+  "coordinates": [
+    0.7,
+    0,
+    2750,
+    5.15
+  ],
+  "direct": {
+    "T": 3985.177213013762,
+    "Pgas": 17408657.04060424,
+    "source_density": 0.00010598220513975314,
+    "column_mass": 123.24383731090498,
+    "flux_error": 0.0012695163855769298,
+    "correction": 6.71e-07,
+    "effective_flux_error": 0.0002007726303607793,
+    "hydrostatic_error": 1.4864789665836042e-07,
+    "chemical_density_error": 3.3573144264664734e-13,
+    "iterations": 16,
+    "depths": 300,
+    "tau_bracket": [
+      94.77981588960311,
+      102.12579689197442
+    ],
+    "temperature_range": [
+      1307.771643872934,
+      4758.812917257032
+    ],
+    "density_range": [
+      8.499540443143693e-11,
+      0.0003618550783080327
+    ]
+  },
+  "convective_initializer_then_canonical": {
+    "T": 3985.176456619519,
+    "Pgas": 17408675.172314066,
+    "source_density": 0.00010598236369088676,
+    "column_mass": 123.24396567355622,
+    "flux_error": 2.9377564484844854e-05,
+    "correction": 8.96e-07,
+    "effective_flux_error": 0.00020246986334226946,
+    "hydrostatic_error": 1.4864791664237487e-07,
+    "chemical_density_error": 3.3595348725157237e-13,
+    "iterations": 3,
+    "depths": 300,
+    "tau_bracket": [
+      94.77960541394063,
+      102.12557062812105
+    ],
+    "temperature_range": [
+      1307.7674432085946,
+      4758.811415130906
+    ],
+    "density_range": [
+      8.499567911690612e-11,
+      0.0003618553178607072
+    ]
+  },
+  "relative_difference": {
+    "T": -1.898019090784686e-07,
+    "Pgas": 1.041534093193519e-06,
+    "source_density": 1.4960165568567163e-06
+  },
+  "archives": {
+    "direct-2750": {
+      "directory": "data/atmosphere/sources/condensation_continuation_validation/direct-2750",
+      "receipt_sha256": "5c7e8bac304fe218f6023aa3a5be75a09588b483bbcbf3e678c4e9af41bb6dbc"
+    },
+    "conref-2750": {
+      "directory": "data/atmosphere/sources/condensation_continuation_validation/conref-2750",
+      "receipt_sha256": "aa9cc9bd5255f0daa5cf2153d4f4b17bb4d2b84fcb854c1730c52fcb8581441a"
+    }
+  },
+  "note": "CONREF is a starting-structure calculation. The accepted source executable and physical equations are identical. Iteration counts are not standalone timing benchmarks."
+}

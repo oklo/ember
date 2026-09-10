@@ -1,0 +1,219 @@
+{
+  "description": "Native OPACTR with analytic temperature-dependent molecular weight and opacity; fixed-pressure forward secant and state-restoration checks, two frequencies and three depths.",
+  "original": {
+    "columns": [
+      "frequency_index",
+      "depth_index",
+      "derivative_relative_error",
+      "temperature_relative_change",
+      "density_relative_change",
+      "molecular_weight_relative_change",
+      "gas_pressure_relative_change"
+    ],
+    "rows": [
+      [
+        1.0,
+        1.0,
+        -0.5000000000000033,
+        0.0,
+        0.0,
+        -0.001988087301862618,
+        0.001992047467328284
+      ],
+      [
+        1.0,
+        2.0,
+        -0.2499999999999961,
+        0.0,
+        0.0,
+        -0.00198808730186284,
+        0.001992047467328506
+      ],
+      [
+        1.0,
+        3.0,
+        1.443289932012704e-14,
+        0.0,
+        0.0,
+        -0.00198808730186284,
+        0.001992047467328284
+      ],
+      [
+        2.0,
+        1.0,
+        -0.5000000000000033,
+        0.0,
+        0.0,
+        -0.001988087301862618,
+        0.001992047467328284
+      ],
+      [
+        2.0,
+        2.0,
+        -0.2499999999999961,
+        0.0,
+        0.0,
+        -0.00198808730186284,
+        0.001992047467328506
+      ],
+      [
+        2.0,
+        3.0,
+        1.443289932012704e-14,
+        0.0,
+        0.0,
+        -0.00198808730186284,
+        0.001992047467328284
+      ]
+    ],
+    "maximum_absolute_error": 0.5000000000000033,
+    "source_sha256": "52259b1efedbb9753a55c1dee5c17c821953d491f20a1efc2c9a3535fe231009",
+    "kernel_sha256": "db97d81cdbb48733b8f4cc67855200e2eb87df515e918d203366d3fb211e0d4a",
+    "driver_sha256": "9ef818c64fd13ce48c191eb4174037e66620249a7060619ad559ab4f596ccb45"
+  },
+  "corrected": {
+    "columns": [
+      "frequency_index",
+      "depth_index",
+      "derivative_relative_error",
+      "temperature_relative_change",
+      "density_relative_change",
+      "molecular_weight_relative_change",
+      "gas_pressure_relative_change"
+    ],
+    "rows": [
+      [
+        1.0,
+        1.0,
+        -6.661338147750939e-15,
+        0.0,
+        0.0,
+        0.0,
+        -1.110223024625157e-16
+      ],
+      [
+        1.0,
+        2.0,
+        5.329070518200751e-15,
+        0.0,
+        0.0,
+        0.0,
+        -1.110223024625157e-16
+      ],
+      [
+        1.0,
+        3.0,
+        1.443289932012704e-14,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        2.0,
+        1.0,
+        -6.661338147750939e-15,
+        0.0,
+        0.0,
+        0.0,
+        -1.110223024625157e-16
+      ],
+      [
+        2.0,
+        2.0,
+        5.329070518200751e-15,
+        0.0,
+        0.0,
+        0.0,
+        -1.110223024625157e-16
+      ],
+      [
+        2.0,
+        3.0,
+        1.443289932012704e-14,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ]
+    ],
+    "maximum_absolute_error": 1.443289932012704e-14,
+    "source_sha256": "65b3eba1355d9bf0bd4591d878fcc50741ad093661b319da460782b54f6c0840",
+    "kernel_sha256": "ca6cbf0ec34ed50ab77c18a1626455ecf620f0d587d3338e0dcbacfb475a4d08",
+    "driver_sha256": "9ef818c64fd13ce48c191eb4174037e66620249a7060619ad559ab4f596ccb45"
+  },
+  "files": {
+    "opacity-derivative-original-output.txt.gz": "63210d66bb8618068d10f12fe91195a9ef44840b25395189a8cf31261405df09",
+    "opacity-derivative-original-kernel.f.gz": "07473873b61695f66de0f227b09b03b785637803eb11171c351d08d83ceb3c34",
+    "opacity-derivative-corrected-output.txt.gz": "8daa59a7aaa6f1d6fffde17c9b5452b5762167215defefc9ddc278c6c1be4d03",
+    "opacity-derivative-corrected-kernel.f.gz": "96b7a4cc9071ad5149e9bd5ace82b713bb80ba30e8b049ce0e649d1963d1c9ff",
+    "tlusty208-before-opacity-derivative.patch.gz": "6b6bf00a420b33bfd53fac76b10b90f3155a9def8553f5248eabed5f695a47d7",
+    "opacity-derivative-control.patch.gz": "9d45367a16b8ca3ec1d11801b0607761a453cb19483777ba07334cbd00d3864f"
+  },
+  "baseline_patch_sha256": "ba44fa283cad260e6c390ebc58f369275ea0f94ee589a3213b518c86ff66c0b1",
+  "corrected_patch_sha256": "0b3214a4b18b6a927f2d512475f94c5895b2790e29185e82108db35724218be1",
+  "provenance": {
+    "format": 1,
+    "tlusty": "/tmp/ember-nongrey-opactr-source/tlusty/tlusty.exe",
+    "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+    "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+    "opacity_method": "sampling",
+    "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+    "tlusty_source": "/tmp/ember-nongrey-opactr-source",
+    "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+    "line_lists": [
+      "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+    ],
+    "inputs": {
+      "tl208-s54.tar.gz": {
+        "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+        "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+      },
+      "synple.tar.gz": {
+        "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+        "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+      },
+      "gfATOc.19.gz": {
+        "url": "ftp:gfATOc.19.gz",
+        "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+      },
+      "gfMOLsun.20.gz": {
+        "url": "ftp:gfMOLsun.20.gz",
+        "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+      },
+      "gfTiO.20.gz": {
+        "url": "ftp:gfTiO.20.gz",
+        "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+      },
+      "H2O-8.20.gz": {
+        "url": "ftp:H2O-8.20.gz",
+        "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+      },
+      "optables.tar.gz": {
+        "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+        "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+      }
+    },
+    "patches": {
+      "tlusty208-ember.patch": "0b3214a4b18b6a927f2d512475f94c5895b2790e29185e82108db35724218be1",
+      "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+      "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+    },
+    "line_list_sha256": [
+      "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+      "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+      "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+      "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+    ],
+    "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+    "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+    "executables": {
+      "tlusty": "646336af37d41900c3fb07199b600667a5a37517ff8dfff48f7d898789c60797",
+      "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+      "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+    }
+  }
+}

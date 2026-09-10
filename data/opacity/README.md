@@ -1,5 +1,54 @@
 # Opacity tables
 
+**Storage policy:** new generated tables and raw source archives described below
+remain local and are not included in a fresh clone. Generator code, source patches,
+small specifications and provenance metadata are versioned. See
+[the reproduction guide](../../docs/DATA_REPRODUCTION.md). Existing published
+data history is retained. References to installed/archived files describe the
+development machine unless explicitly stated otherwise.
+
+## Hydrogen-poor TOPS extension under validation
+
+The separate `hydrogen_poor/` directory contains 30 TOPS source planes:
+X=.09/.1/.2/.3/.4/.5/.6/.65/.7/.75 at Z=.01/.02/.03. Nine new source
+requests and their complete element mixtures are archived under
+`sources/hydrogen_poor/`. Original source planes, interpolation axes and
+AESOPUS data are unchanged. X=.09 provides support for the source composition
+mapped from baryonic XH=.1 with He3=.12; source and baryonic X differ.
+Existing stellar runs continue to use the original opacity directory.
+
+Reimport the TOPS tables from archived, verified original cells:
+
+```
+python3 scripts/import_tops_mixtures.py \
+  data/opacity/sources/hydrogen_poor/tops_gs98_hydrogen_poor_manifest.json \
+  /tmp/ember-opacity-reimport
+```
+
+The separate AESOPUS manifest references the original data via `../`.
+To use a relocated directory for runtime comparisons, retain that relative
+layout or construct a manifest pointing to the archived AESOPUS tables.
+Substituted TOPS density cells remain excluded. The two common rectangles
+have 50 temperatures by 63 densities and 36 temperatures by 71 densities.
+
+`docs/results/opacity_hydrogen_poor_audit.json` verifies byte-identical old
+profile output at 1536 states, source support at 120 new states, analytic
+responses against finite differences and rejection of extrapolation.
+These checks do not establish composition-interpolation accuracy. A fresh
+X=.15,Z=.02 heldout gives a maximum 11.90% discrepancy against the .1/.2
+interpolation, at source T=.002 keV and rho=1.5849 g/cm3; the maximum in the
+hot rectangle is .9183%. Additional composition calculations are in progress.
+The extension has not been selected for an evolution run.
+
+Reproduce the heldout comparison, excluding all substituted cells:
+
+```
+python3 scripts/audit_tops_heldout.py \
+  data/opacity/sources/hydrogen_poor/tops_gs98_hydrogen_poor_manifest.json \
+  data/opacity/sources/hydrogen_poor/heldout_x015_z020/manifest.json \
+  /tmp/ember-opacity-heldout.json
+```
+
 ## `ferguson_gs98_z020.dat`
 
 Rosseland mean opacities from **Ferguson et al. (2005), ApJ 623, 585**,
@@ -229,3 +278,22 @@ The evolution driver explicitly selects a nominal-abundance wrapper that
 uses baryonic X/Z in the atomic-mixture tables and treats He3 as He4, limited
 to He3<=.005. This is a declared opacity approximation, not isotope-resolved
 source data or an accuracy bound. See [EVOLUTION.md](../../docs/EVOLUTION.md).
+
+## Extended elemental composition family (2026-09-08)
+
+`StellarMixtureOpacity` uses real source tables in both hydrogen fraction and metallicity, followed by an isotope number-density mapping. AESOPUS has X=0/.1/.2/.35/.5/.7/.8/.9/.95 at Z=.01/.02/.03, all 211 temperatures and 71 native log-R cells. TOPS has X=.3/.4/.5/.6/.65/.7/.75 at the same three Z values: 21 individually requested and verified mixtures. Low/high TOPS rectangles retain respectively 50/36 temperatures and 63/71 original density cells, with every substituted source cell excluded. Temperature joins remain log T=4.4..4.5 and 5.6..5.7.
+
+The manifest format is `EMBER_OPACITY_MIXTURE 1 nZ logR|logRho label`, followed by Z and quoted table filenames. Log opacity is linear in Z and in source X. Evaluations and density bounds use the common support of both interpolation planes. No clipping or extrapolation supplies missing source cells. The reader returns composition derivatives in X and Z; the stellar wrapper adds the isotope transformation and its derivatives.
+
+The original TOPS responses and submitted requests are archived in `sources/` with `tops_gs98_mixture_manifest.json`. The fetcher uses separate three-letter calculation IDs because reused IDs sometimes return a stale result; it checks the returned H/He mixture before archiving, and the importer checks every metal and the full grid. The AESOPUS subset archive preserves the 81 original members used here, extracted from the previously pinned full GS98 source archive. Its SHA-256 is `0bfad00740be06cfa13b44d4375b9a893876d9196ed32e48fe85c928cd3e6255`.
+
+```
+python3 scripts/import_aesopus_mixtures.py data/opacity/sources/aesopus21_gs98_mixtures.zip data/opacity
+python3 scripts/import_tops_mixtures.py data/opacity/sources/tops_gs98_mixture_manifest.json data/opacity
+python3 scripts/verify_composition_data.py --extended
+```
+
+For input mass weights wi, construct unnormalized source weights
+`W_H=A_H X_H/w_H`, `W_He=A_He4 (X_He3/w_He3+X_He4/w_He4)`, and `W_j=A_j X_j/w_j` for metals. With `s=sum(W)`, query the isotope-free atomic mixture `W/s` at density `s*rho`, and return `s*kappa_source`. This preserves elemental number densities and extinction per length; no arbitrary He3 abundance cap is used in this wrapper. It changes source Z as well as X, which is why fixed-Z tables cannot implement the mapping alone.
+
+This remains an **elemental-opacity approximation**: isotope-dependent cross sections, H2–He collision-induced-absorption reduced masses and line-broadening isotope effects are omitted. GS98 opacity metals also differ from the carried AAG21/lumped-Z mixture. The historical `NominalAbundanceOpacity` and its .005 cap remain available only in the explicit `early` evolution mode. See [extended evolution](../../docs/EXTENDED_EVOLUTION.md) for the new atmosphere and remaining physical limitations.

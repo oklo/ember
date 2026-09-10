@@ -1,0 +1,37 @@
+{
+  "profile": "out/evolution-sfii-svh-4096-20gyr.json",
+  "nuclear_model": "sfii-svh",
+  "points": 4096,
+  "age_yr": 20000000000,
+  "central": {
+    "T_K": 4626063.596003138,
+    "rho_g_cm3": 390.66565726663885,
+    "bare_pp_sfii_over_legacy": 0.9879672282265157,
+    "bare_33_sfii_over_legacy": 0.93337283350582,
+    "bare_34_sfii_over_legacy": 1.0627498578465029,
+    "legacy_pp_H": 0.5160116616961353,
+    "legacy_33_H": 2.0,
+    "sfii_legacy_eps": 0.23704246790437605,
+    "debye_pp_H": 0.446104134345872,
+    "debye_33_H": 1.784416537383488,
+    "sfii_debye_eps": 0.2209216268793491,
+    "svh_pp_H": 0.2800604779752219,
+    "svh_33_H": 0.9620531998762213,
+    "sfii_svh_eps": 0.18682181493079503,
+    "electron_eta": 2.8109958294706368,
+    "electron_susceptibility": 0.43105073739183275,
+    "gamma_e": 0.34029233294756406,
+    "pp_zeta": 0.05032076838304447,
+    "eps_nuclear_neutrinos": 0.007408811370143259,
+    "reduced_ppII_over_pp": 3.0295010117255924e-07
+  },
+  "integrated_power_erg_s": {
+    "sfii_legacy_eps": 4.233014503856255e+30,
+    "sfii_debye_eps": 3.912603563426371e+30,
+    "sfii_svh_eps": 3.218941229606141e+30,
+    "eps_nuclear_neutrinos": 1.278292941561894e+29
+  },
+  "max_pp_zeta_where_T_ge_1e5": 0.10036734582770152,
+  "max_reduced_ppII_over_pp": 3.0295010117255924e-07,
+  "interpretation": "Prescription comparisons at identical final thermal/composition states; not independently relaxed stars or calibrated uncertainty bounds. Electron gas fully ionized; Z=.02 AAG21 carried species. ppII is a reduced steady branch."
+}

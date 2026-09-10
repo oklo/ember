@@ -1,5 +1,9 @@
 # A consistent fixed-composition Helmholtz EOS
 
+This document retains the original fixed-composition experiment. The current
+metal-bearing, variable H/He3 family and its independent checks are described
+in [FORWARD_EVOLUTION.md](FORWARD_EVOLUTION.md).
+
 `HelmholtzTableEos` derives pressure, entropy, internal energy, heat capacities
 and transport responses from **one C2 material free-energy interpolant**.
 It replaces the inconsistent pressure/entropy pair in the CMS19 experiment.

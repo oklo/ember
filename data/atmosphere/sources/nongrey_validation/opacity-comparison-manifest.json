@@ -1,0 +1,149 @@
+{
+  "XH": 0.55,
+  "X3": 0.1,
+  "specification": {
+    "source": "TLUSTY208/SYNSPEC54 helium-rich gas atmospheres; candidate grid",
+    "opacity_method": "sampling",
+    "approximation": "LTE plane-parallel gas, GS98 metal proxy, source molecular EOS; effective helium mass, isotope cross sections and broadening approximated; no condensates or irradiation",
+    "hydrogen": [
+      0.45,
+      0.7
+    ],
+    "helium3": [
+      0,
+      0.12
+    ],
+    "teff_K": [
+      2600,
+      2800,
+      3000,
+      3200
+    ],
+    "log_g": [
+      4.9,
+      5.15,
+      5.4
+    ],
+    "metals": [
+      0.0040277310873548045,
+      4.525540547589668e-05,
+      0.001113471054023328,
+      0.00921354245314597,
+      0.0056
+    ],
+    "log_temperature": [
+      2,
+      3.4471580313422194,
+      3.7781512503836434
+    ],
+    "log_density": [
+      2,
+      -8,
+      -5
+    ],
+    "wavelength_A": [
+      900,
+      300000
+    ],
+    "line_threshold": 0.0001,
+    "microturbulence_km_s": 1.0,
+    "opacity_frequencies": 20023,
+    "atmosphere_frequencies": 20000,
+    "depths": 300,
+    "alpha": 1.9,
+    "tau_top": 1e-07,
+    "tau_bottom": 1000,
+    "tau": 100,
+    "synthesis_spacing_A": 0.1
+  },
+  "provenance": {
+    "format": 1,
+    "tlusty": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54/tlusty/tlusty.exe",
+    "synspec": "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54",
+    "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+    "opacity_method": "sampling",
+    "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+    "tlusty_source": "/private/tmp/ember-nongrey-reproduce/tlusty-source/tl208-s54",
+    "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+    "line_lists": [
+      "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+      "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+    ],
+    "inputs": {
+      "tl208-s54.tar.gz": {
+        "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+        "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+      },
+      "synple.tar.gz": {
+        "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+        "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+      },
+      "gfATOc.19.gz": {
+        "url": "ftp:gfATOc.19.gz",
+        "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+      },
+      "gfMOLsun.20.gz": {
+        "url": "ftp:gfMOLsun.20.gz",
+        "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+      },
+      "gfTiO.20.gz": {
+        "url": "ftp:gfTiO.20.gz",
+        "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+      },
+      "H2O-8.20.gz": {
+        "url": "ftp:H2O-8.20.gz",
+        "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+      },
+      "optables.tar.gz": {
+        "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+        "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+      }
+    },
+    "patches": {
+      "tlusty208-ember.patch": "3cbd88be3653cca1f0ad5140e5f6944dbc8084cd042628b6db03582eb02bd313",
+      "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+      "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+    },
+    "line_list_sha256": [
+      "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+      "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+      "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+      "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+    ],
+    "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+    "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+    "executables": {
+      "tlusty": "e0ddafc0d67d0f0c450890c64d947cfee1d1f48be481e01e19785f40afc3fdb6",
+      "synspec": "a6cd4b702d4398ce2bf114cf3e2a201a2f82d167fdf0498b65af8017c2bb1851",
+      "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+    }
+  },
+  "files": {
+    "dense": {
+      "opacity-dense-fort.63.gz": "3a866368bbc45132be97fcdface7166bce48842e12e0dc350b6a177f6597673d",
+      "opacity-dense-fort.29.gz": "f50c5e838ce1fab6f4cff015daeea8db1bc131978bea3cac11f178ea2280c689",
+      "opacity-dense-run.log.gz": "603342ff16c8c79354be6632eb1acc90e73c3748f31d75cc54c7de781a56d0bd",
+      "opacity-dense-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+      "opacity-dense-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+      "opacity-dense-fort.2.gz": "2f8080470e13820842e77f9098b1a110118e78cdf968c00b355c35d96b2b60af",
+      "opacity-dense-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+      "opacity-dense-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+      "opacity-dense-completed.json.gz": "6882f4c478528b97005f623c5cd9e1eb7aa709e68e559709d930603919b81652",
+      "opacity-dense-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c"
+    },
+    "sampled": {
+      "opacity-sampled-fort.63.gz": "4b1206ce25a2f30cc83435e517d546933c0aa6be6fa7205263049f61ec30bc6a",
+      "opacity-sampled-fort.29.gz": "3412e921fa070b592c1f90571e047f48ea52a8826864c9f747d7051699ec30cf",
+      "opacity-sampled-run.log.gz": "1e86b8dbe858bd231ace9b83547ce42cd32d7d444404bb57943c35b7596aba7d",
+      "opacity-sampled-fort.5.gz": "ff39193ac08e48710b2e843523fc5e1fbb7cb77fc7a727d04cf7f51f1c1db123",
+      "opacity-sampled-fort.55.gz": "f4472892b3664c3f64408a391230103be6b52c7e08ea9cd81c72db04671a7fdd",
+      "opacity-sampled-fort.2.gz": "2f8080470e13820842e77f9098b1a110118e78cdf968c00b355c35d96b2b60af",
+      "opacity-sampled-tas.gz": "85981c884644a0bbf35a9faafa0bb9f28f1802504e02da32ec39064572027054",
+      "opacity-sampled-ember-masses.dat.gz": "ffcbcab0894808cc23df0065bb2ff5f3dd03de0fc45c77f9f4111aa1beafa2c1",
+      "opacity-sampled-completed.json.gz": "deafa64abc8a25cedc2be4e954a16ab72723a02d706ac64c0630cbc6b6d0fdb1",
+      "opacity-sampled-physics.json.gz": "03bf6976250007c86293bf126419571d859f4db2d8dceb97c135fb825677ad9c"
+    }
+  }
+}

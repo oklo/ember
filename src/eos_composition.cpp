@@ -33,6 +33,8 @@ CompositionHelmholtzEos::CompositionHelmholtzEos(const std::filesystem::path& pa
 }
 
 CompositionHelmholtzEos::Coordinates CompositionHelmholtzEos::coordinates(const Composition& c) const {
+  if(c.metal_inventory!=MetalInventory::carried_isotopes)
+    throw std::domain_error("CompositionHelmholtzEos: GS98 requires the metal-bearing EOS family");
   if(std::abs(c.sum()-1)>1e-10) throw std::domain_error("CompositionHelmholtzEos: abundances must sum to one");
   for(std::size_t i=0;i<NSPEC;++i)
     if(!std::isfinite(c.X[i]) || c.X[i]<0 || (i>=3 && std::abs(c.X[i]-metals_.X[i])>1e-10))

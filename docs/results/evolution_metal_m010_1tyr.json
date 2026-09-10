@@ -1,0 +1,165 @@
+{
+  "input": "out/evolution-metal-512-1tyr.json",
+  "sha256": "8f44c4da993f027f7b76cc7cbb517f75b5439797b467e692594e731021acf154",
+  "points": 512,
+  "step_error_tolerances": {
+    "log_structure": 0.0001,
+    "absolute_abundance": 1e-07,
+    "relative_surface_luminosity": 0.001
+  },
+  "accepted_macrosteps": 925,
+  "rejected_macrosteps": 1,
+  "final": {
+    "age_yr": 1000000000000,
+    "step_yr": 1525014013.143355,
+    "R_Rsun": 0.14422884460648513,
+    "L_Lsun": 0.0013686915161790307,
+    "Teff_K": 2923.323730450551,
+    "central_X": 0.5331385347948866,
+    "central_Y3": 0.09105648824134456,
+    "step_error_norm": 0.7216902241091727,
+    "discrete_luminosity_balance": -3.6637359812630166e-15,
+    "nuclear_rest_mass_balance": -3.333419096307466e-09,
+    "last_halfstep_coupling_iterations": 3,
+    "convective_mass_fraction": 0.9999999999999998,
+    "central_T_K": 5153914.717945864,
+    "central_rho": 257.73437723929555,
+    "surface_X": 0.5331385347948866,
+    "surface_Y3": 0.09105648824134456
+  },
+  "peak_He3": {
+    "age_yr": 710748836484.5867,
+    "mass_fraction": 0.10021240774101615
+  },
+  "max_last_halfstep_luminosity_imbalance": 1.0499136671171527e-08,
+  "max_last_halfstep_nuclear_mass_imbalance": 1.3766728534925221e-08,
+  "minimum_accepted_convective_mass_fraction": 0.9999999999999998,
+  "physics": {
+    "calculation": "composition-dependent pp evolution with instantaneous convective mixing",
+    "converged": true,
+    "message": "requested duration reached",
+    "nuclear_model": "sfii-svh",
+    "nuclear_physics": "Solar Fusion II quadrature; finite-degeneracy Salpeter--Van Horn screening",
+    "transport_model": "wd",
+    "eos_model": "metal:data/eos/freeeos300_gs98_z020.dat",
+    "metal_inventory": "GS98 elemental number pattern; inert carrier labels; representative metal isotopes",
+    "eos": "FreeEOS GS98 baryonic H/He3 potential; trace K omission and isotope approximation",
+    "convection_criterion": "ledoux",
+    "atmosphere_model": "nongrey:data/atmosphere/nongrey_gs98_z020_tau100.dat",
+    "opacity": "AESOPUS/TOPS X/Z family, number-density isotope mapping; GS98 metal proxy",
+    "atmosphere": "TLUSTY208/SYNSPEC54 helium-rich gas atmospheres; candidate grid",
+    "conduction": "condtab21wd",
+    "atmosphere_grid_approximation": "LTE plane-parallel gas, GS98 metal proxy, source molecular EOS; effective helium mass, isotope cross sections and broadening approximated; no condensates or irradiation",
+    "atmosphere_tau_match": 100,
+    "atmosphere_grid_support": {
+      "hydrogen": [
+        0.45,
+        0.7
+      ],
+      "helium3": [
+        0,
+        0.12
+      ],
+      "teff_K": [
+        2599.9999999999986,
+        3199.999999999999
+      ],
+      "gravity_cm_s2": [
+        79432.82347242821,
+        251188.6431509582
+      ]
+    },
+    "nuclear_limitations": "reduced pp network: no pep, hep, ppIII or CNO; SFII pp curvature omitted; SVH approximate, not derived from FreeEOS; modern screening requires zeta<=.2",
+    "central_screening": {
+      "pp_log_factor": 0.20863166327876687,
+      "electron_susceptibility": 0.5830756836913437,
+      "gamma_e": 0.2587350406567418,
+      "pp_zeta": 0.039663608769060936
+    },
+    "points": 512,
+    "mass_basis": "conserved baryonic mass; nuclear rest mass release accounted in energy, Newtonian gravity",
+    "mass_Msun": 0.1,
+    "age_origin": "specified static composition, not age since formation",
+    "limitations": "source domains enforced; He isotope cross sections approximated, GS98 metals; atmosphere/EOS/opacity source mixture approximations; selected convection criterion; no semiconvection/thermohaline/microscopic diffusion/remeshing; conduction mixture and envelope join approximations",
+    "step_error_tolerances": {
+      "log_structure": 0.0001,
+      "absolute_abundance": 1e-07,
+      "relative_surface_luminosity": 0.001
+    },
+    "rejected_steps": 1,
+    "columns": [
+      "age_yr",
+      "step_yr",
+      "R_Rsun",
+      "L_Lsun",
+      "Teff_K",
+      "central_X",
+      "central_Y3",
+      "step_error_norm",
+      "discrete_luminosity_balance",
+      "nuclear_rest_mass_balance",
+      "last_halfstep_coupling_iterations",
+      "convective_mass_fraction",
+      "central_T_K",
+      "central_rho",
+      "surface_X",
+      "surface_Y3"
+    ],
+    "profile_columns": [
+      "mass_g",
+      "radius_cm",
+      "density_g_cm3",
+      "temperature_K",
+      "luminosity_erg_s",
+      "X",
+      "Y3",
+      "Y4"
+    ]
+  },
+  "comparison_with_previous_nongrey": {
+    "reference": "out/evolution-nongrey-512-1tyr.json",
+    "comparison": "out/evolution-metal-512-1tyr.json",
+    "relative": {
+      "R_Rsun": 0.004530494623191661,
+      "L_Lsun": 0.028914499406470506,
+      "Teff_K": 0.004877817204051338,
+      "central_T_K": 0.006096502422238359,
+      "central_rho": -0.014875327859889431
+    },
+    "absolute": {
+      "central_X": -0.0007589881313703195,
+      "central_Y3": -0.004034602450452063
+    }
+  },
+  "limitations": [
+    "Existing 48-cell gas atmosphere; condensate radiative feedback not in this run",
+    "No actual radiative core yet",
+    "Executable hash and wall time were not captured at launch; subsequent executable has changed"
+  ],
+  "physics_file_sha256": {
+    "data/eos/freeeos300_gs98_z020.dat": "956dcdb198f9d6d3b84335298809f3c08564d77c0282454c13d6199f48901619",
+    "data/eos/freeeos300_gs98_x300_he3000_potential.dat": "c945b1ac62af1becfe4f73a196c995f9e740a6fa6a4d517817880686467657bd",
+    "data/eos/freeeos300_gs98_x300_he3120_potential.dat": "70a7b0f482866f9ef88459d8abfdf23018449dc3ee0fe3c9ce7055c98e3a58fc",
+    "data/eos/freeeos300_gs98_x400_he3000_potential.dat": "938147dbd850e8df9a990f3f6982c04805d32f7f18323fe52a95c29f2c8577b2",
+    "data/eos/freeeos300_gs98_x400_he3120_potential.dat": "a6f84845749692a3f1b2b3cbf23126132a4109145607f5b30bdd3b32cccd5fa9",
+    "data/eos/freeeos300_gs98_x500_he3000_potential.dat": "daf6bfd270cedae04e8b3dfef257e0cabf82c45562b3123e46f15481fcc6e9ce",
+    "data/eos/freeeos300_gs98_x500_he3120_potential.dat": "a508e7ed9e5ad0abd2a0c310228222750c6adf41f06e57f62508d9e4d7c03897",
+    "data/eos/freeeos300_gs98_x600_he3000_potential.dat": "e2b06e8e7bef37a803c6828a3c6970352a887f79deebdabf3a1b984dd947376d",
+    "data/eos/freeeos300_gs98_x600_he3120_potential.dat": "8a95484c580803a7cf0eaed16dfb4eff0161b6a2e4bb211914a6985cf3438700",
+    "data/eos/freeeos300_gs98_x700_he3000_potential.dat": "7dd4e736e974a2d493840b15d5448aa90d3c1275477b2e820481148018a8b6ea",
+    "data/eos/freeeos300_gs98_x700_he3120_potential.dat": "7e98dee13e869b9ded840e611667378b4a49fa53d44d3dba44666e8dacfa04d0",
+    "data/eos/freeeos300_gs98_x750_he3000_potential.dat": "9e505d25ec9c748f85cd2b2972a19a0a547bfdcd90402882d941962bbed3a115",
+    "data/eos/freeeos300_gs98_x750_he3120_potential.dat": "91e8fa60df7331869103402223d443059045a100ddfa78f6ea57d75466fc2f84",
+    "data/atmosphere/nongrey_gs98_z020_tau100.dat": "73c6ef351030508f9a2818e6e57484057ef5bb4d7f22c813b1cf5a5907dec398",
+    "data/conduction/condtab21wd_metals.dat": "6bcab3766cbfe74400aca70da1befe91b6b008ec6f1af4bd2380ac04e9e9e31a"
+  },
+  "figures": [
+    "evolution_metal_m010_1tyr.png",
+    "evolution_metal_m010_1tyr.pdf"
+  ],
+  "audits": [
+    "transport_metal_m010_1tyr.json",
+    "nuclear_metal_m010_1tyr.json",
+    "nongrey_gs98_eos_family_audit.json"
+  ]
+}

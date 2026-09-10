@@ -1,0 +1,131 @@
+{
+  "coordinates": {
+    "XH": 0.3,
+    "X3": 0,
+    "teff_K": 2600,
+    "log_g": 5.15
+  },
+  "method": "Pressure-preserving continuation from a verified 2800 K atmosphere, native convective refinement for the entire initializer, then independent original-source replay",
+  "initialization": {
+    "T": 4034.4596873900405,
+    "Pgas": 21706084.760740392,
+    "source_density": 0.00017948942624469412,
+    "column_mass": 153.66729101285375,
+    "flux_error": 9.848353301089574e-06,
+    "correction": 2.45e-07,
+    "effective_flux_error": 0.00019881044813441218,
+    "hydrostatic_error": 1.465864651883919e-07,
+    "chemical_density_error": 2.652322805829499e-13,
+    "iterations": 14,
+    "depths": 300,
+    "tau_bracket": [
+      99.3906728861055,
+      107.38504935730522
+    ],
+    "temperature_range": [
+      1174.573910760745,
+      4689.570114510793
+    ],
+    "density_range": [
+      1.9514242014362783e-10,
+      0.0004341601021906334
+    ]
+  },
+  "canonical": {
+    "T": 4034.460224485194,
+    "Pgas": 21706068.903595783,
+    "source_density": 0.00017948924859315308,
+    "column_mass": 153.66717875288765,
+    "flux_error": 1.142784221408455e-05,
+    "correction": 2.36e-07,
+    "effective_flux_error": 0.00019722948284273123,
+    "hydrostatic_error": 1.4658644942322496e-07,
+    "chemical_density_error": 2.646771690706373e-13,
+    "iterations": 3,
+    "depths": 300,
+    "tau_bracket": [
+      99.39083484134522,
+      107.3852248744394
+    ],
+    "temperature_range": [
+      1174.579231497859,
+      4689.571180711913
+    ],
+    "density_range": [
+      1.951415358162343e-10,
+      0.00043415993003819423
+    ]
+  },
+  "other_starting_profile_canonical": {
+    "T": 4034.4629203792892,
+    "Pgas": 21705862.614991754,
+    "source_density": 0.00017948725631273954,
+    "column_mass": 153.66571834168278,
+    "flux_error": 6.051696202669099e-05,
+    "correction": 4.2e-07,
+    "effective_flux_error": 0.00019716643821465762,
+    "hydrostatic_error": 1.4777899504103686e-07,
+    "chemical_density_error": 2.76445533131664e-13,
+    "iterations": 1,
+    "depths": 300,
+    "tau_bracket": [
+      98.87487066630499,
+      106.69329837136112
+    ],
+    "temperature_range": [
+      1171.776882601522,
+      4812.117399760443
+    ],
+    "density_range": [
+      1.2905696560812635e-10,
+      0.0005006499571207426
+    ]
+  },
+  "relative_boundary_difference": {
+    "T": -6.682163520288498e-07,
+    "Pgas": 9.503819667910918e-06,
+    "source_density": 1.109984326719271e-05
+  },
+  "interpretation": "Different column meshes and starting profiles converge to closely agreeing tau=100 boundaries; this is a local numerical check, not a family-wide error bound. Original grid cell is retained.",
+  "archive": "data/atmosphere/sources/nongrey_continuation_validation",
+  "files_sha256": {
+    "initializer/provenance.json.gz": "4bd8ebf4c72a405bfb349181c66ff74e52693097723c8a48916311064873a770",
+    "initializer/initializer.json.gz": "eebed18d3f0dddcffb58cf4e01125bac868700ef947a7389d6551fd914abcee0",
+    "initializer/completed.json.gz": "1ee64b57a8f3ad3c6c96cc33448b306bea16fa7f6795070424103805002e78dc",
+    "initializer/fort.5.gz": "4f2f18dd8fbcf8943a434811e4141ac53c31c7fd78a4e83699ac12022f4f23c9",
+    "initializer/fort.7.gz": "160b548fbb26d6a994c10ebc2d8543077ea1f30897b4a8862226e5adb0298344",
+    "initializer/fort.8.gz": "3810f8d9100500609ab2e3c07c0744e39306258034e48acea485554758b4b1f5",
+    "initializer/fort.9.gz": "09aadef9ea37b9d6a550fa30a94254454228f4b793337c9dd0bc07264146f274",
+    "initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "initializer/tas.gz": "4455260ae389dd9ae381fc1d46ab7fbeb306fe9c128f70671d0910219e3f0331",
+    "initializer/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "initializer/opacity.sha256.gz": "59266497ef4dddb60cc96400dbc6d4bdf84e9905069872fd11ba0a06848ddb47",
+    "initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "initializer/run.log.gz": "d1bb1d8fefa7c25d1f0bf5319ea30f7142f4613c2e33dba0057f2831bf28038d",
+    "canonical/provenance.json.gz": "f0cc684c7e89126540fbd9138040ecf78c21e36a796de905c830e8b93a003500",
+    "canonical/validated.json.gz": "ae9fb53db6528d25a27119d133be62f957c0b915c470c5c5b859e413cce49cee",
+    "canonical/completed.json.gz": "599fcfd7e59d752b59e5b07e59487eb8f14a30bddad9d308e82586b16c63c43b",
+    "canonical/fort.5.gz": "4f2f18dd8fbcf8943a434811e4141ac53c31c7fd78a4e83699ac12022f4f23c9",
+    "canonical/fort.7.gz": "956020c265fee603071274270584a577a112b60d93526cac470d2acb49d4113c",
+    "canonical/fort.8.gz": "57b9e017d4a9b14514b94fb589f40b13191ee143cac5829f2d47ec0b18266501",
+    "canonical/fort.9.gz": "61cf2a86b520de3c7f17f98bba8444ff81bcd209748d797e7f0c16912fca1eae",
+    "canonical/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "canonical/tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+    "canonical/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "canonical/opacity.sha256.gz": "59266497ef4dddb60cc96400dbc6d4bdf84e9905069872fd11ba0a06848ddb47",
+    "canonical/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "canonical/run.log.gz": "7740cf519327d641e8d7306ee8f9e288fbfeccccc74d256944583cb16f7dcfbe",
+    "independent_cell/validated.json.gz": "7fefd1007e22e2739fa7d9bff73416ef2e6c4cb28a0560e516b2042fd0a04a19",
+    "independent_cell/completed.json.gz": "429d1b46a38ee9e858d640727a3455848401a12df6b90e70bc694bce1fa0ac6c",
+    "independent_cell/fort.5.gz": "4f2f18dd8fbcf8943a434811e4141ac53c31c7fd78a4e83699ac12022f4f23c9",
+    "independent_cell/fort.7.gz": "e4633701bf83de3d54fc2b28289942bdc5e9071c001023b5a6595e1b72ce80c3",
+    "independent_cell/fort.8.gz": "6dd81e20a7bafef1a5174ac9d3206614fe4c3dd552edd5cea49689cd47a215f6",
+    "independent_cell/fort.9.gz": "327b46bcdea9ee9a1bfeb0be4b71dc3bede2f71eeb4622086d21bf790f3149fa",
+    "independent_cell/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "independent_cell/tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+    "independent_cell/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "independent_cell/opacity.sha256.gz": "59266497ef4dddb60cc96400dbc6d4bdf84e9905069872fd11ba0a06848ddb47",
+    "independent_cell/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "independent_cell/run.log.gz": "379cc11993208ba8b58c51b4ec6ad8d64b75040f0fc5d68f476ab517920c35c4"
+  }
+}

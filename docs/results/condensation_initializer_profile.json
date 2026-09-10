@@ -1,0 +1,13 @@
+{
+  "description": "Two-second sample of one CONREF initialization phase, not a whole-run performance breakdown",
+  "process": 26907,
+  "source_work": "/tmp/ember-condensate-family-warm-recovery-v2/plane-001/teff-2650-gravity-001-initializer",
+  "sampled_stacks": 1536,
+  "leaf_stacks_in_russel": 1341,
+  "inclusive_stacks_in_native_molecular_solver": 1439,
+  "inclusive_stacks_in_fastchem": 96,
+  "phase": "CONREF thermal derivatives",
+  "finding": "Russell molecular element updates repeatedly scan NELEMX. An indexed count preserves arithmetic order and duplicate multiplicity; tested only as an auxiliary initializer before canonical replay.",
+  "archive": "data/atmosphere/sources/condensation_continuation_validation/conref-2650-profile.txt.gz",
+  "archive_sha256": "cdac0a8ff91baaf6f0e6065c2390a0815709533e7e7778faeb0ff96a688933e5"
+}

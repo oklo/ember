@@ -1,0 +1,313 @@
+--- a/synspec/PARAMS.FOR
++++ b/synspec/PARAMS.FOR
+@@ -6,7 +6,7 @@
+       PARAMETER (MATEX = 30,   
+      *           MIOEX = 90,
+      *           MLEVEL= 1650,
+-     *           MDEPTH= 100,
++     *           MDEPTH= 2,
+      *           MDEPF = 500,
+      *           MFREQ = 2000,
+ c    *           MFREQ =   120,
+@@ -33,9 +33,9 @@
+      *           MHE  = 20,
+      *           MHWL  = 55)
+       PARAMETER (MFGRID  =  100000,
+-     *           MTTAB   =     100,
+-     *           MRTAB   =     100,
+-     *           MSFTAB  = 6000000)
++     *           MTTAB   =      21,
++     *           MRTAB   =      19,
++     *           MSFTAB  =20000000)
+       parameter (mfhtab=1000,
+      *           mtabth=10,
+      *           mtabeh=10)
+@@ -96,7 +96,7 @@
+ C
+       COMMON/ATOPAR/AMASS(MATEX),
+      *              ABUND(MATEX,MDEPTH),
+-     *              RELAB(MATEX,MDEPTH),
++     *              RELAB(MATOM,MDEPTH),
+      *              NUMAT(MATEX),
+      *              N0A(MATEX), 
+      *              NKA(MATEX),
+--- a/synspec/synspec54.f
++++ b/synspec/synspec54.f
+@@ -82,7 +82,7 @@
+          CALL INGRID(0,inext,0)
+       END IF
+ C
+-      CALL INIBL0
++      IF(IFEOS.LE.0) CALL INIBL0
+       CALL INIMOD
+       CALL TINT
+ c
+@@ -1652,6 +1652,19 @@
+ C                         (-ABN times the solar value)
+ C     PFS    -  see above
+ C
++C     Ember: optional baryonic element masses, in units of HMASS.
++C     Cross sections/partition functions retain their source assumptions.
++      inquire(file='ember-masses.dat',exist=lember)
++      if(lember) then
++         open(97,file='ember-masses.dat',status='old')
++         do i=1,matom
++            read(97,*) d(1,i)
++            if(d(1,i).le.0.) stop 'invalid Ember element mass'
++         end do
++         close(97)
++         write(6,*) 'EMBER ELEMENT MASSES: ',d(1,1),d(1,2)
++      end if
++C
+       iabset=0
+       read(ibuff,'(a80)') dum
+       read(dum,*,iostat=kstat) natoms,iabset
+@@ -1713,7 +1726,9 @@
+ C
+          DO J=1,9
+             IF(J.LE.8) ENEV(I,J)=xi(J,I)
+-            if(enev(i,j).ge.enhe2) then
++            if(j.eq.9) then
++               inpot(i,j)=3
++            else if(enev(i,j).ge.enhe2) then
+                inpot(i,j)=3
+              else if(enev(i,j).ge.enhe1) then
+                inpot(i,j)=2
+@@ -5431,7 +5446,7 @@
+       common/quasun/nunalp,nunbet,nungam,nunbal
+       common/hhebrd/sthe,nunhhe
+       common/gompar/hglim,ihgom
+-      DIMENSION PJ(40),PRF0(54),OSCH(4,22),
++      DIMENSION PJ(50),PRF0(54),OSCH(4,22),
+      *          ABSO(MFREQ),EMIS(MFREQ),ABSOH(MFREQ),EMISH(MFREQ)
+       dimension wlir(15),irlow(15),irupp(15)
+       DATA FRH    /3.289017E15/
+@@ -5804,7 +5819,7 @@
+       PARAMETER (CID1=0.01497)
+       common/lasers/lasdel
+       common/quasun/nunalp,nunbet,nungam,nunbal
+-      DIMENSION PJ(40),PRF0(54),OSCH(4,22),
++      DIMENSION PJ(50),PRF0(54),OSCH(4,22),
+      *          ABSO(MFREQ),EMIS(MFREQ),ABSOH(MFREQ),EMISH(MFREQ)
+       DATA FRH    /3.289017E15/
+       DATA INIT /0/
+@@ -7417,8 +7432,11 @@
+ C
+       DO JZ=1,NE-1
+          IPZ=JZ
+-         IF(ILINE.EQ.1.AND.ANEL.LE.XNE447(JZ+1)) GO TO 30
+-         IF(ILINE.NE.1.AND.ANEL.LE.XNEHE1(JZ+1)) GO TO 30
++         IF(ILINE.EQ.1) THEN
++            IF(ANEL.LE.XNE447(JZ+1)) GO TO 30
++         ELSE
++            IF(ANEL.LE.XNEHE1(JZ+1)) GO TO 30
++         END IF
+       END DO
+    30 N0Z=IPZ-NZ/2+1
+       IF(N0Z.LT.1) N0Z=1
+@@ -7479,9 +7497,11 @@
+ C
+             DO IY=1,NLST-1
+                IPY=IY
+-               IF(ILINE.EQ.1.AND.DLAM.LE.DLM447(IY+1,JZ)) GO TO 70
+-               IF(ILINE.NE.1.AND.DLAM.LE.DLMHE1(IY+1,JZ,ILNE))
+-     *            GO TO 70
++               IF(ILINE.EQ.1) THEN
++                  IF(DLAM.LE.DLM447(IY+1,JZ)) GO TO 70
++               ELSE
++                  IF(DLAM.LE.DLMHE1(IY+1,JZ,ILNE)) GO TO 70
++               END IF
+             END DO
+    70       N0Y=IPY-NY/2+1
+             IF(N0Y.LT.1) N0Y=1
+@@ -7747,7 +7767,7 @@
+       INCLUDE 'PARAMS.FOR'
+       INCLUDE 'MODELP.FOR'
+       INCLUDE 'SYNTHP.FOR'
+-      DIMENSION ABLIN(1),EMLIN(1),OSCHE2(19),PRF0(40),WLL(40)
++      DIMENSION ABLIN(*),EMLIN(*),OSCHE2(19),PRF0(40),WLL(40)
+       COMMON/HE2PRF/PRFHE2(19,MDEPTH,36),WLHE2(19,36),NWLHE2(19),
+      *              ILHE2(19),IUHE2(19)
+       common/lasers/lasdel
+@@ -8084,6 +8104,7 @@
+ C
+       IL0=0
+       IPRSET=0
++      NLINPRE=NLIN
+       NLIN=0
+       IREADP=1
+       IRLIST=0
+@@ -8129,10 +8150,17 @@
+ C
+       IF(IREADP.EQ.1) THEN
+          IPRSET=IPRSET+1
+-         IL0=INDLIP(IPRSET)
+-         IF(FREQ0(IL0).LT.FRMIN) THEN
++         IF(IPRSET.GT.NLINPRE) THEN
+             IREADP=0
+-            IL0=INDLIP(IPRSET-1)+1
++            IL0=1
++            IF(NLINPRE.GT.0) IL0=INDLIP(NLINPRE)+1
++         ELSE
++            IL0=INDLIP(IPRSET)
++            IF(FREQ0(IL0).LT.FRMIN) THEN
++               IREADP=0
++               IL0=1
++               IF(IPRSET.GT.1) IL0=INDLIP(IPRSET-1)+1
++            END IF
+          END IF
+        ELSE
+          IL0=IL0+1
+@@ -8392,7 +8420,8 @@
+          INDLIP(IL)=INDLIN(IL)
+   260 CONTINUE
+       if(ifwin.le.0) then
+-      ILLAST=INDLIN(NLIN)
++      ILLAST=0
++      IF(NLIN.GT.0) ILLAST=INDLIN(NLIN)
+       else
+       ILLAST=0
+       IF(NLIN.GT.0) ILLAST=INDLIN(NLIN)
+@@ -9383,7 +9412,7 @@
+       IF(ION.GT.IONIZ(IAT)) GO TO 10
+       end if
+ C
+-      if(fr0.lt.freqc(ijcon)) then
++      if(fr0.lt.freqc(ijcon).and.ijcon.lt.nfreqc) then
+          ijcon=ijcon+1
+          absta=0.5*(absoc(ijcon)+scatc(ijcon)+
+      *             absoc(ijcon-1)+scatc(ijcon-1))
+@@ -14922,7 +14951,7 @@
+ C      YY   - interpolated functional values YY=y(XX)
+ C
+       INCLUDE 'PARAMS.FOR'
+-      DIMENSION X(1),Y(1),XX(1),YY(1)
++      DIMENSION X(NX),Y(NX),XX(NXX),YY(NXX)
+       EXP10(X0)=EXP(X0*2.30258509299405D0)
+       IF(NPOL.LE.0.OR.NX.LE.0) THEN
+          N=NX
+@@ -14997,7 +15026,8 @@
+ c     a more efficient interpolation routine - using bisection
+ c
+       INCLUDE 'PARAMS.FOR'
+-      dimension wltab(1),absop(1),wlgrid(1),abgrd(1)
++      dimension wltab(nfr),absop(nfr),wlgrid(nfgrid),
++     *          abgrd(nfgrid)
+       dimension yint(mfgrid),jint(mfgrid)
+ c
+ c      set up interpolation coefficients for an interpolation
+@@ -18352,10 +18382,19 @@
+ C
+       IF(IREADM(ILIST).EQ.1) THEN
+          IPRSEM(ILIST)=IPRSEM(ILIST)+1
+-         IL0=INMLIP(IPRSEM(ILIST),ILIST)
+-         IF(FREQM(IL0,ILIST).LT.FRMINM) THEN
++         IF(IPRSEM(ILIST).GT.NLINML(ILIST)) THEN
+             IREADM(ILIST)=0
+-            IL0=INMLIP(IPRSEM(ILIST)-1,ILIST)+1
++            IL0=1
++            IF(NLINML(ILIST).GT.0)
++     *         IL0=INMLIP(NLINML(ILIST),ILIST)+1
++         ELSE
++            IL0=INMLIP(IPRSEM(ILIST),ILIST)
++            IF(FREQM(IL0,ILIST).LT.FRMINM) THEN
++               IREADM(ILIST)=0
++               IL0=1
++               IF(IPRSEM(ILIST).GT.1)
++     *            IL0=INMLIP(IPRSEM(ILIST)-1,ILIST)+1
++            END IF
+          END IF
+        ELSE
+          IL0=IL0+1
+@@ -18427,7 +18466,9 @@
+          INMLIP(IL,ILIST)=INMLIN(IL,ILIST)
+       END DO
+       NLINML(ILIST)=NLINM
+-      IMLAST=INMLIN(NLINML(ILIST),ILIST)
++      IMLAST=0
++      IF(NLINML(ILIST).GT.0)
++     *   IMLAST=INMLIN(NLINML(ILIST),ILIST)
+ C
+       CALL INIBLM
+ C
+@@ -21644,7 +21685,7 @@
+       INCLUDE 'SYNTHP.FOR'
+       COMMON/GOMOPA/frgtab(mfhtab),wlgtab(mfhtab),hydopg(mfhtab,mdepth),
+      *              nugfreq
+-      dimension absoh(mfreq),emish(mfreq),pj(40)
++      dimension absoh(mfreq),emish(mfreq),pj(50)
+ c
+       frg1=frgtab(1)
+       frg2=frgtab(nugfreq)
+@@ -22017,7 +22058,7 @@
+          if(inlist.lt.0) rewind(19)
+       end if
+ c
+-      elecgr(indext,indexn)=elec(1)
++      if(inext.eq.1) elecgr(indext,indexn)=elec(1)
+ c
+       call abnchn(0)
+       id=1
+@@ -23052,7 +23093,9 @@
+ 
+ c     linearly interpolate in frequency and temperature
+ 
+-      if (j.eq.ntemp) then
++      if (i.eq.0.or.i.eq.nlines) then
++         alp=-50.
++      else if (j.eq.ntemp) then
+ c     hold values constant if off high temperature end of table
+          y1=alpha(i,j)
+          y2=alpha(i+1,j)
+@@ -23183,7 +23226,9 @@
+ 
+ c     linearly interpolate in frequency and temperature
+ 
+-      if (j.eq.ntemp) then
++      if (i.eq.0.or.i.eq.nlines) then
++         alp=-50.
++      else if (j.eq.ntemp) then
+ c     hold values constant if off high temperature end of table
+          y1=alpha(i,j)
+          y2=alpha(i+1,j)
+@@ -23276,7 +23321,9 @@
+ 
+ c     linearly interpolate in frequency and temperature
+ 
+-      if (j.eq.ntemp) then
++      if (i.eq.0.or.i.eq.nlines) then
++         alp=-50.
++      else if (j.eq.ntemp) then
+ c     hold values constant if off high temperature end of table
+          y1=alpha(i,j)
+          y2=alpha(i+1,j)
+@@ -23371,7 +23418,9 @@
+ 
+ c     linearly interpolate in frequency and temperature
+ 
+-      if (j.eq.ntemp) then
++      if (i.eq.0.or.i.eq.nlines) then
++         alp=-50.
++      else if (j.eq.ntemp) then
+ c     hold values constant if off high temperature end of table
+          y1=alpha(i,j)
+          y2=alpha(i+1,j)
+@@ -23486,7 +23535,7 @@
+          y2=FFkapp(i+1,j)
+          tt=(flamb-FFlamb(i))/(FFlamb(i+1)-FFlamb(i))
+          Fkappa=(1.-tt)*y1 + tt*y2
+-      else if (i.eq.0 .or. i.eq.nlines) then
++      else if (i.eq.0 .or. i.eq.nlamb) then
+ c     set values to 0 if off frequency table
+          Fkappa=0.0
+       else
+@@ -23841,6 +23890,9 @@
+ c     molecular species
+ c
+       if(indmol.gt.0) then
++C        No Irwin fit is tabulated for the later molecular entries.
++C        Return zero so MOLEQ retains its equilibrium-constant value.
++         if(indmol.gt.478) return
+          indm=irwind(indmol)
+          if(indm.le.0) return
+          ulog=    am(1,indm)+

@@ -29,6 +29,11 @@ public:
   HelmholtzJet material_jet(double T, double rho) const;
   DensityRange material_density_range(double T) const;
 private:
+  friend class MetalHelmholtzEos;
+  struct WeightedTable {const HelmholtzTableEos* table;double weight;};
+  bool same_material_grid(const HelmholtzTableEos& other) const {return t_==other.t_ && q_==other.q_;}
+  // Caller verifies the common grid once when constructing its family.
+  static HelmholtzJet mixed_material_jet(double T,double rho,const std::array<WeightedTable,4>&);
   struct Node { bool valid{}; std::array<double,9> d{}; };
   void check_composition(const Composition&) const;
   std::pair<std::size_t,std::size_t> supported_q(std::size_t it) const;
@@ -36,5 +41,6 @@ private:
   Composition composition_;
   std::vector<double> t_, q_; // natural logarithms; q=rho/(T/1e6)^1.5
   std::vector<Node> nodes_;
+  std::vector<std::size_t> supported_hi_; // immutable mask support per T interval
 };
 } // namespace ember

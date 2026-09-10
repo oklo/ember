@@ -1,0 +1,117 @@
+{
+  "description": "Independent TLUSTY5500K logg4.5 published-input benchmark; depth convergence, not cool helium atmosphere validation",
+  "source_input": "tl208-s54/tests/tlusty/optab/g55l.5",
+  "opacity_table": "optables/optab11_7f.dat, original 100000 frequencies",
+  "opacity_archive_sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a",
+  "records": [
+    {
+      "name": "benchmark-70",
+      "Teff_K": 5500,
+      "log_g": 4.5,
+      "passes_flux_requirement": false,
+      "diagnostics": {
+        "T": 9901.662386329337,
+        "Pgas": 260095.00438351958,
+        "source_density": 3.858854207931279e-07,
+        "column_mass": 8.22565278155122,
+        "flux_error": 0.017348227730830335,
+        "correction": 6.48e-07,
+        "effective_flux_error": 0.0002246002508099476,
+        "hydrostatic_error": 9.287387627099353e-05,
+        "iterations": 11,
+        "depths": 70,
+        "tau_bracket": [
+          91.80495218993636,
+          119.78712807839429
+        ],
+        "temperature_range": [
+          3479.2835835798837,
+          10188.662520384816
+        ],
+        "density_range": [
+          3.8626997504104136e-11,
+          3.9856453638604403e-07
+        ]
+      },
+      "files": {
+        "benchmark-70-run.log.gz": "9d7c91d7bd5ed6fbe3739c7aef1e8a201719f78cd22c9eb299ca5f0173d487e6",
+        "benchmark-70-fort.9.gz": "e8093ab417ba27ad80e0b971777af700a7e6888db674a40fcce9d9cc0d6e96ad",
+        "benchmark-70-g55l.5.gz": "2c7c826ae483271210bb2cb24371a46a0be32fe1c4293a50f6be91d0ffa976ae",
+        "benchmark-70-g55l.param.gz": "670f383ed6b6ea185f95bd4cf49fafd3e21dbb2f1caaebdb16953b3b11db9665"
+      }
+    },
+    {
+      "name": "benchmark-100",
+      "Teff_K": 5500,
+      "log_g": 4.5,
+      "passes_flux_requirement": false,
+      "diagnostics": {
+        "T": 9894.025014853152,
+        "Pgas": 261904.49773163046,
+        "source_density": 3.890294835636801e-07,
+        "column_mass": 8.282871583352787,
+        "flux_error": 0.007539239337261527,
+        "correction": 7.11e-07,
+        "effective_flux_error": 0.0002192092111172883,
+        "hydrostatic_error": 9.17291932985842e-05,
+        "iterations": 11,
+        "depths": 100,
+        "tau_bracket": [
+          87.4181336148937,
+          105.34878567374928
+        ],
+        "temperature_range": [
+          3478.891702248095,
+          10166.998698556028
+        ],
+        "density_range": [
+          3.8631350335923544e-11,
+          4.0116787082078884e-07
+        ]
+      },
+      "files": {
+        "benchmark-100-run.log.gz": "6800a2387b08725461b02dac1d77322e39a9add3bfe2d4f785c15a5f9404756e",
+        "benchmark-100-fort.9.gz": "755840a28c28be276276266019432ad286a694b8d77ad255c93b27cc1b34ca63",
+        "benchmark-100-g55l.5.gz": "2c7c826ae483271210bb2cb24371a46a0be32fe1c4293a50f6be91d0ffa976ae",
+        "benchmark-100-g55l.param.gz": "4bf465eae9d78fc1586052e3f7d9ab52e6154d613019be6ec601a32f41baaecd"
+      }
+    },
+    {
+      "name": "benchmark-200",
+      "Teff_K": 5500,
+      "log_g": 4.5,
+      "passes_flux_requirement": true,
+      "diagnostics": {
+        "T": 9889.132721137456,
+        "Pgas": 263084.78873140743,
+        "source_density": 3.9107767215489035e-07,
+        "column_mass": 8.320194123804841,
+        "flux_error": 0.001963506835745532,
+        "correction": 4.39e-07,
+        "effective_flux_error": 0.00021516472042248935,
+        "hydrostatic_error": 9.09345832946773e-05,
+        "iterations": 11,
+        "depths": 200,
+        "tau_bracket": [
+          94.31687540178075,
+          103.47648526464164
+        ],
+        "temperature_range": [
+          3478.7752684272173,
+          10148.823618019995
+        ],
+        "density_range": [
+          3.863264349087142e-11,
+          4.026543293797248e-07
+        ]
+      },
+      "files": {
+        "benchmark-200-run.log.gz": "0d5024e045abd0c4ea1fc30f1c77fcbacde0f4874c00ccc0134957afcdb7a8b5",
+        "benchmark-200-fort.9.gz": "ebb864107591122780a30cc3d3fb3f6d17fc411bcc384a44116a31e3c25d4b6c",
+        "benchmark-200-g55l.5.gz": "2c7c826ae483271210bb2cb24371a46a0be32fe1c4293a50f6be91d0ffa976ae",
+        "benchmark-200-g55l.param.gz": "9a6b53140fff799fcc07a4debb7e5fa2e51d1e4dbdff27615b246575d1d78b28"
+      }
+    }
+  ],
+  "source_revision_note": "Historical capacity regression before the TLUSTY He/H2 Rayleigh frequency fix; original gradient diagnostic. Not the final cool-grid source revision."
+}

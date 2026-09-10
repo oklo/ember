@@ -1,0 +1,15 @@
+{
+  "scope": "EOS states, density inversions and composition responses on three archived stellar profiles; existing source planes are reused exactly.",
+  "queries": 1536,
+  "byte_identical_probe_output": true,
+  "output_sha256": [
+    "5d38537b9688eb9eeb3b3d72671dd217a55dc3d32997db29a1cdfba11019bb00",
+    "5d38537b9688eb9eeb3b3d72671dd217a55dc3d32997db29a1cdfba11019bb00"
+  ],
+  "input_tracks_sha256": {
+    "out/evolution-metal-512-2tyr-gas.json": "17e5c5ebdb7d9b8acfc2f7b17e2d467d2445c0db7ca181678298d9cc119d8d47",
+    "out/evolution-metal-512-2500gyr-gas.json": "3051b3801f1592787184b09fab58033a21a25d438306f600422daa1631a75bfb",
+    "out/evolution-metal-512-2750gyr-gas-restart.json": "018d01593338c99562bb662b6d3285402b7d20e64576796adeac62b8824d19a7"
+  },
+  "probe_sha256": "f71f524c87f87129738e3ec9eb4904f8fd81eb2e663482e0d364179dc8281030"
+}

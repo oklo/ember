@@ -1,0 +1,155 @@
+{
+  "description": "Direct FreeEOS GS98 metal sensitivity; K omitted (4.56e-6), integer masses, no assertion of actual EOS consistency with carried AAG21 lumped Zrest",
+  "rows": [
+    {
+      "X": 0.7,
+      "Y3": 0,
+      "T": 4100,
+      "rho": 0.00014,
+      "metal_to_proxy_P": 0.9922913551526121,
+      "metal_to_proxy_E": 0.9972798688831381,
+      "metal_to_proxy_cp": 0.9992795410526152,
+      "metal_to_proxy_ad": 0.9970045344546875
+    },
+    {
+      "X": 0.7,
+      "Y3": 0,
+      "T": 6000,
+      "rho": 0.001,
+      "metal_to_proxy_P": 0.9934606726701691,
+      "metal_to_proxy_E": 0.9978582467728859,
+      "metal_to_proxy_cp": 0.9993523106411771,
+      "metal_to_proxy_ad": 0.9977726186233318
+    },
+    {
+      "X": 0.7,
+      "Y3": 0,
+      "T": 30000.0,
+      "rho": 0.03,
+      "metal_to_proxy_P": 0.9952469383976352,
+      "metal_to_proxy_E": 0.9976169922927827,
+      "metal_to_proxy_cp": 0.9973687309805848,
+      "metal_to_proxy_ad": 0.9997519102522173
+    },
+    {
+      "X": 0.7,
+      "Y3": 0,
+      "T": 1000000.0,
+      "rho": 3,
+      "metal_to_proxy_P": 0.9959990628028781,
+      "metal_to_proxy_E": 0.9946378107367905,
+      "metal_to_proxy_cp": 0.9992104822654052,
+      "metal_to_proxy_ad": 0.9984486979245136
+    },
+    {
+      "X": 0.7,
+      "Y3": 0,
+      "T": 4600000.0,
+      "rho": 390,
+      "metal_to_proxy_P": 0.9947499111824333,
+      "metal_to_proxy_E": 0.9926832364119953,
+      "metal_to_proxy_cp": 0.9987958816772338,
+      "metal_to_proxy_ad": 0.9988080190152459
+    },
+    {
+      "X": 0.6,
+      "Y3": 0.08,
+      "T": 4100,
+      "rho": 0.00014,
+      "metal_to_proxy_P": 0.9918952602849607,
+      "metal_to_proxy_E": 0.9970220899225835,
+      "metal_to_proxy_cp": 0.9991630668684719,
+      "metal_to_proxy_ad": 0.9968102139387237
+    },
+    {
+      "X": 0.6,
+      "Y3": 0.08,
+      "T": 6000,
+      "rho": 0.001,
+      "metal_to_proxy_P": 0.9930619244574868,
+      "metal_to_proxy_E": 0.9976355186893107,
+      "metal_to_proxy_cp": 0.9991838777420079,
+      "metal_to_proxy_ad": 0.9975891459541847
+    },
+    {
+      "X": 0.6,
+      "Y3": 0.08,
+      "T": 30000.0,
+      "rho": 0.03,
+      "metal_to_proxy_P": 0.99482684182619,
+      "metal_to_proxy_E": 0.9973798233265753,
+      "metal_to_proxy_cp": 0.9970658178577583,
+      "metal_to_proxy_ad": 0.9997004985075587
+    },
+    {
+      "X": 0.6,
+      "Y3": 0.08,
+      "T": 1000000.0,
+      "rho": 3,
+      "metal_to_proxy_P": 0.9957079676329184,
+      "metal_to_proxy_E": 0.9943505321617337,
+      "metal_to_proxy_cp": 0.9989626934518432,
+      "metal_to_proxy_ad": 0.998395853227372
+    },
+    {
+      "X": 0.6,
+      "Y3": 0.08,
+      "T": 4600000.0,
+      "rho": 390,
+      "metal_to_proxy_P": 0.9943748525564244,
+      "metal_to_proxy_E": 0.9921867284533737,
+      "metal_to_proxy_cp": 0.9980444694255318,
+      "metal_to_proxy_ad": 0.9989856087708371
+    },
+    {
+      "X": 0.45,
+      "Y3": 0.08,
+      "T": 4100,
+      "rho": 0.00014,
+      "metal_to_proxy_P": 0.990991159371801,
+      "metal_to_proxy_E": 0.9964692168037262,
+      "metal_to_proxy_cp": 0.9989169861074517,
+      "metal_to_proxy_ad": 0.9963855579166945
+    },
+    {
+      "X": 0.45,
+      "Y3": 0.08,
+      "T": 6000,
+      "rho": 0.001,
+      "metal_to_proxy_P": 0.9921703969005148,
+      "metal_to_proxy_E": 0.9971490309180587,
+      "metal_to_proxy_cp": 0.9988069440076476,
+      "metal_to_proxy_ad": 0.9971928470984673
+    },
+    {
+      "X": 0.45,
+      "Y3": 0.08,
+      "T": 30000.0,
+      "rho": 0.03,
+      "metal_to_proxy_P": 0.9939318884905277,
+      "metal_to_proxy_E": 0.9968622962924822,
+      "metal_to_proxy_cp": 0.996435229146547,
+      "metal_to_proxy_ad": 0.9995737729253611
+    },
+    {
+      "X": 0.45,
+      "Y3": 0.08,
+      "T": 1000000.0,
+      "rho": 3,
+      "metal_to_proxy_P": 0.9950558846038287,
+      "metal_to_proxy_E": 0.9937821910777527,
+      "metal_to_proxy_cp": 0.998492024875754,
+      "metal_to_proxy_ad": 0.9983211449344437
+    },
+    {
+      "X": 0.45,
+      "Y3": 0.08,
+      "T": 4600000.0,
+      "rho": 390,
+      "metal_to_proxy_P": 0.9935910723763123,
+      "metal_to_proxy_E": 0.9912001627024115,
+      "metal_to_proxy_cp": 0.9966767731859423,
+      "metal_to_proxy_ad": 0.9992576958783923
+    }
+  ]
+}

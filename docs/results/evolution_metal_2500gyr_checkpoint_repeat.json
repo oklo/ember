@@ -1,0 +1,9 @@
+{
+  "scope": "Checkpoint output is observational only; compare the full trajectory with the prior executable",
+  "reference": "/Users/greglaughlin/Projects/ember/out/evolution-metal-512-2500gyr-gas.json",
+  "repeat": "/Users/greglaughlin/Projects/ember/out/evolution-metal-512-2500gyr-gas-checkpoint.json",
+  "byte_identical_stellar_json": true,
+  "reference_sha256": "3051b3801f1592787184b09fab58033a21a25d438306f600422daa1631a75bfb",
+  "repeat_sha256": "3051b3801f1592787184b09fab58033a21a25d438306f600422daa1631a75bfb",
+  "checkpoint_sha256": "1020ddac4c69cf79bccc7aa0a59c6b6cf51264e8593a21fbd58de01641873d63"
+}

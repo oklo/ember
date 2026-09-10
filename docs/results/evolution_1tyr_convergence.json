@@ -1,0 +1,200 @@
+{
+  "description": "Same physical prescriptions; numerical comparisons, not physical error bars",
+  "runs": [
+    {
+      "input": "out/evolution-extended-512-1tyr.json",
+      "sha256": "202e52048a38c5c1951593921ee9af63e5b41295b30682bc50ffa04f9d7d2eae",
+      "points": 512,
+      "step_error_tolerances": {
+        "log_structure": 0.0001,
+        "absolute_abundance": 1e-07,
+        "relative_surface_luminosity": 0.001
+      },
+      "accepted_macrosteps": 932,
+      "rejected_macrosteps": 6,
+      "final": {
+        "age_yr": 1000000000000,
+        "step_yr": 562088684.096417,
+        "R_Rsun": 0.14354956251456005,
+        "L_Lsun": 0.0013460337881171995,
+        "Teff_K": 2918.029205135876,
+        "central_X": 0.5325947729039134,
+        "central_Y3": 0.0934977327254551,
+        "step_error_norm": 0.09011440052497655,
+        "discrete_luminosity_balance": -1.4477707921400906e-10,
+        "nuclear_rest_mass_balance": 1.4115597579689165e-11,
+        "last_halfstep_coupling_iterations": 3,
+        "convective_mass_fraction": 1.0000000000000009,
+        "central_T_K": 5133495.371632725,
+        "central_rho": 261.8062230732498,
+        "surface_X": 0.5325947729039134,
+        "surface_Y3": 0.0934977327254551
+      },
+      "peak_He3": {
+        "age_yr": 721156955008.1924,
+        "mass_fraction": 0.1019515964770219
+      },
+      "max_last_halfstep_luminosity_imbalance": 1.1352498718864013e-08,
+      "max_last_halfstep_nuclear_mass_imbalance": 1.555986550716426e-08,
+      "minimum_accepted_convective_mass_fraction": 1.0000000000000009
+    },
+    {
+      "input": "out/evolution-extended-1024-1tyr.json",
+      "sha256": "042903358bd718f4466388058020b962c6f081f320bd817c65c9639487045c7c",
+      "points": 1024,
+      "step_error_tolerances": {
+        "log_structure": 0.0001,
+        "absolute_abundance": 1e-07,
+        "relative_surface_luminosity": 0.001
+      },
+      "accepted_macrosteps": 930,
+      "rejected_macrosteps": 7,
+      "final": {
+        "age_yr": 1000000000000,
+        "step_yr": 1411038429.5808594,
+        "R_Rsun": 0.14352437030017287,
+        "L_Lsun": 0.0013485435288642007,
+        "Teff_K": 2919.644656995908,
+        "central_X": 0.5325531691812885,
+        "central_Y3": 0.09344467020240999,
+        "step_error_norm": 0.5836519899327097,
+        "discrete_luminosity_balance": -3.1086244689504383e-15,
+        "nuclear_rest_mass_balance": -1.8934777079593346e-09,
+        "last_halfstep_coupling_iterations": 3,
+        "convective_mass_fraction": 0.9999999999999986,
+        "central_T_K": 5134184.279319305,
+        "central_rho": 261.87772574577053,
+        "surface_X": 0.5325531691812885,
+        "surface_Y3": 0.09344467020240999
+      },
+      "peak_He3": {
+        "age_yr": 720587449527.6261,
+        "mass_fraction": 0.10192837961389836
+      },
+      "max_last_halfstep_luminosity_imbalance": 1.1422479184730605e-08,
+      "max_last_halfstep_nuclear_mass_imbalance": 1.5712598444572734e-08,
+      "minimum_accepted_convective_mass_fraction": 0.9999999999999986
+    },
+    {
+      "input": "out/evolution-extended-2048-1tyr.json",
+      "sha256": "d3d2811a2f651ce8755d0de2f3456e4d5bcdd796ea4a609c2eb11074048e4da1",
+      "points": 2048,
+      "step_error_tolerances": {
+        "log_structure": 0.0001,
+        "absolute_abundance": 1e-07,
+        "relative_surface_luminosity": 0.001
+      },
+      "accepted_macrosteps": 926,
+      "rejected_macrosteps": 3,
+      "final": {
+        "age_yr": 1000000000000,
+        "step_yr": 776801109.8948239,
+        "R_Rsun": 0.14351457397308556,
+        "L_Lsun": 0.0013495293866883668,
+        "Teff_K": 2920.2777792829,
+        "central_X": 0.5325499694425608,
+        "central_Y3": 0.09343622410422113,
+        "step_error_norm": 0.184806786263092,
+        "discrete_luminosity_balance": -4.157765243206768e-10,
+        "nuclear_rest_mass_balance": 4.0123460109953157e-13,
+        "last_halfstep_coupling_iterations": 3,
+        "convective_mass_fraction": 1.0000000000000002,
+        "central_T_K": 5134391.73686328,
+        "central_rho": 261.91506759595507,
+        "surface_X": 0.5325499694425608,
+        "surface_Y3": 0.09343622410422113
+      },
+      "peak_He3": {
+        "age_yr": 720280813411.0685,
+        "mass_fraction": 0.10191431449078305
+      },
+      "max_last_halfstep_luminosity_imbalance": 1.137138605500354e-08,
+      "max_last_halfstep_nuclear_mass_imbalance": 1.5298984079592515e-08,
+      "minimum_accepted_convective_mass_fraction": 1.0000000000000002
+    },
+    {
+      "input": "out/evolution-extended-512-1tyr-tight.json",
+      "sha256": "362de190a2fe6c06fdc8ff45ac19795fe010a38d0f7ecb958028ab3d68dde690",
+      "points": 512,
+      "step_error_tolerances": {
+        "log_structure": 2.5e-05,
+        "absolute_abundance": 2.5e-08,
+        "relative_surface_luminosity": 0.00025
+      },
+      "accepted_macrosteps": 1859,
+      "rejected_macrosteps": 9,
+      "final": {
+        "age_yr": 1000000000000,
+        "step_yr": 487594858.2804634,
+        "R_Rsun": 0.143550879498443,
+        "L_Lsun": 0.0013460593804130291,
+        "Teff_K": 2918.0296896602213,
+        "central_X": 0.5325919235227163,
+        "central_Y3": 0.0935098801540201,
+        "step_error_norm": 0.27103156385877014,
+        "discrete_luminosity_balance": -9.208855900055823e-11,
+        "nuclear_rest_mass_balance": -4.994227253973804e-12,
+        "last_halfstep_coupling_iterations": 3,
+        "convective_mass_fraction": 1.0000000000000009,
+        "central_T_K": 5133465.463638546,
+        "central_rho": 261.79900483015257,
+        "surface_X": 0.5325919235227163,
+        "surface_Y3": 0.0935098801540201
+      },
+      "peak_He3": {
+        "age_yr": 721639385890.8774,
+        "mass_fraction": 0.10196513165690309
+      },
+      "max_last_halfstep_luminosity_imbalance": 1.1352498718864013e-08,
+      "max_last_halfstep_nuclear_mass_imbalance": 3.290531025434973e-08,
+      "minimum_accepted_convective_mass_fraction": 1.0000000000000009
+    }
+  ],
+  "mesh_comparisons": [
+    {
+      "reference": "out/evolution-extended-512-1tyr.json",
+      "comparison": "out/evolution-extended-1024-1tyr.json",
+      "relative": {
+        "R_Rsun": -0.00017549488793899837,
+        "L_Lsun": 0.0018645451318957118,
+        "Teff_K": 0.0005536105866208452,
+        "central_T_K": 0.00013419855998830776,
+        "central_rho": 0.00027311295996490514
+      },
+      "absolute": {
+        "central_X": -4.160372262496104e-05,
+        "central_Y3": -5.306252304511372e-05
+      }
+    },
+    {
+      "reference": "out/evolution-extended-1024-1tyr.json",
+      "comparison": "out/evolution-extended-2048-1tyr.json",
+      "relative": {
+        "R_Rsun": -6.825549603051151e-05,
+        "L_Lsun": 0.0007310537650915272,
+        "Teff_K": 0.0002168490899996378,
+        "central_T_K": 4.040710903385758e-05,
+        "central_rho": 0.00014259269312888456
+      },
+      "absolute": {
+        "central_X": -3.199738727643897e-06,
+        "central_Y3": -8.446098188855111e-06
+      }
+    }
+  ],
+  "timestep_comparison": {
+    "reference": "out/evolution-extended-512-1tyr.json",
+    "comparison": "out/evolution-extended-512-1tyr-tight.json",
+    "relative": {
+      "R_Rsun": 9.174419342450335e-06,
+      "L_Lsun": 1.901311546226303e-05,
+      "Teff_K": 1.66045063698661e-07,
+      "central_T_K": -5.826048727786137e-06,
+      "central_rho": -2.7570937819909602e-05
+    },
+    "absolute": {
+      "central_X": -2.8493811971008753e-06,
+      "central_Y3": 1.2147428565006946e-05
+    }
+  }
+}

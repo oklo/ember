@@ -1,0 +1,61 @@
+{
+  "source": "FreeEOS 3.0.0 EOS1 (3,1,-2), H/He, .0125 dex; original and extended planes generated 2026-09-07/08",
+  "planes": [
+    {
+      "X": 0.3,
+      "source": "freeeos300_hhe_x030_raw.json.gz",
+      "source_sha256": "007da86c2864de1ff44e79d39c0aaaf6b040ef5cc687b0eac750dd5aee0f2547",
+      "table": "freeeos300_hhe_x030_potential.dat",
+      "table_sha256": "52c22272d554ecb661f5e08b60e65f4b32805b1067a2bdd197e41609bc9dc74b"
+    },
+    {
+      "X": 0.4,
+      "source": "freeeos300_hhe_x040_raw.json.gz",
+      "source_sha256": "b3b287603eec43063ae5a1cf7b44da28fb24ce9d05e507e7062d8134f83b6cd7",
+      "table": "freeeos300_hhe_x040_potential.dat",
+      "table_sha256": "d11f8b285f6ef8ab73163bb151605524d8be821bd105ee068d33b1fa65ee6331"
+    },
+    {
+      "X": 0.5,
+      "source": "freeeos300_hhe_x050_raw.json.gz",
+      "source_sha256": "5032ebd436c0b2cc4879c19c1b07fe15a7ef7f78b2f664835d3c10512c2ff82c",
+      "table": "freeeos300_hhe_x050_potential.dat",
+      "table_sha256": "22095b5bcece6fa0eb72363d4b8eb7f08e35c7130aaab37b3f7fb1d33bb87453"
+    },
+    {
+      "X": 0.55,
+      "source": "freeeos300_hhe_x055_raw.json.gz",
+      "source_sha256": "8bc99998088c7f669b9838ecca75bed8bd6b47d4bc903ece3972ce50f06f6d13",
+      "table": "freeeos300_hhe_x055_potential.dat",
+      "table_sha256": "d488b40048cf2af816abbf8dcf5487d2f562eb4ddf4a4473f73a536012745fc2"
+    },
+    {
+      "X": 0.6,
+      "source": "freeeos300_hhe_x060_raw.json.gz",
+      "source_sha256": "22a070e392778143bf989990ed7683a66cfa22b13fdfdad28b46692551a2c8cf",
+      "table": "freeeos300_hhe_x060_potential.dat",
+      "table_sha256": "4efe4d8e38a00ea1213e0c777a3fc19793cf3a14bf65debacfe85d216381ced7"
+    },
+    {
+      "X": 0.65,
+      "source": "freeeos300_hhe_x065_raw.json.gz",
+      "source_sha256": "cc6d7c9b6c3b7cc80d472dfdb603fccb254e4dcbfe0d606ed9371db40b9c8d3b",
+      "table": "freeeos300_hhe_x065_potential.dat",
+      "table_sha256": "2df35f42e160e0abc9c06736c97631866d9ba876520f4d6cc8c3e08e0d34f206"
+    },
+    {
+      "X": 0.7,
+      "source": "freeeos300_hhe_x070_raw.json.gz",
+      "source_sha256": "26165748e1493438f4d62d1e04cb2eb67761a51d57c7abbf99cc0f1a01ff1e62",
+      "table": "freeeos300_hhe_x070_potential.dat",
+      "table_sha256": "34f5e83c898ab74273dd3d907b2ebac77c61976b8e1d7c5e1fda8530c69d823a"
+    },
+    {
+      "X": 0.75,
+      "source": "freeeos300_hhe_x075_raw.json.gz",
+      "source_sha256": "87077c0c68be5b88c5202b9183383613bf6a1188e4a5fbebc2a442bbb313e8ad",
+      "table": "freeeos300_hhe_x075_potential.dat",
+      "table_sha256": "f135073bc75a031155700b7999a839b93d59e4983ce4538e5be64af52aebb4ad"
+    }
+  ]
+}

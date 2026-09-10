@@ -4,18 +4,24 @@ add_library(ember
   interp.cpp
   opacity_table.cpp
   opacity_blend.cpp
+  opacity_mixture.cpp
   eos_components.cpp
   eos_cms19.cpp
   eos_helmholtz.cpp
   eos_composition.cpp
+  eos_mixture.cpp
   nuclear_pp.cpp
   convection.cpp
+  conduction_table.cpp
   atmosphere_grey.cpp
+  atmosphere_composition.cpp
   atmosphere_table.cpp
+  atmosphere_grid.cpp
   boundary.cpp
   henyey.cpp
   relaxation.cpp
   evolution.cpp
+  mixing.cpp
   structure.cpp
   eos_ideal.cpp)
 target_include_directories(ember PUBLIC ${CMAKE_SOURCE_DIR}/include)

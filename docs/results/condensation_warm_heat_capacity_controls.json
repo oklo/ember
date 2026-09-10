@@ -1,0 +1,272 @@
+{
+  "scope": "Sensitivity to artificial positive outer-layer heat capacities; not a rigorous missing-physics bound",
+  "reference": "/tmp/ember-condensate-refined-2800",
+  "reference_source_sha256": "e46ec9cca863b390f859f40ea99d33db575118b67e0d6a4f254c26a311fdab97",
+  "controls": [
+    {
+      "scope": "Diagnostic positive heat-capacity perturbation; not production grain physics",
+      "extra_cp_erg_g_K": 1000000,
+      "temperature_taper_K": [
+        2000,
+        2400
+      ],
+      "diagnostics": {
+        "T": 4030.3544847910807,
+        "Pgas": 16463743.067699067,
+        "source_density": 9.755156971479727e-05,
+        "column_mass": 116.55435994387632,
+        "flux_error": 1.3293470831232668e-05,
+        "correction": 6.66e-07,
+        "effective_flux_error": 0.00019862635268974582,
+        "hydrostatic_error": 1.4747072785148418e-07,
+        "chemical_density_error": 2.1027624086400465e-13,
+        "iterations": 4,
+        "depths": 300,
+        "tau_bracket": [
+          99.05791604374726,
+          106.72917945507486
+        ],
+        "temperature_range": [
+          1431.641033835446,
+          4843.869665842991
+        ],
+        "density_range": [
+          7.754544114061697e-11,
+          0.00034854004684546104
+        ]
+      },
+      "relative_boundary_difference": {
+        "T": -1.5842446987601733e-07,
+        "Pgas": 8.388176411244785e-07,
+        "source_density": 1.2309146582012431e-06
+      },
+      "chemistry_diagnostic": {
+        "element_closure": 3.453086039328923e-09,
+        "pressure_closure": 4.791722574282176e-12,
+        "nuclei_closure": 4.440892098500626e-15,
+        "thresholds": {
+          "0": {
+            "max_condensed_mass_fraction": 0.0002595613589083975,
+            "max_element_gas_depletion": 0.9987712127113965
+          },
+          "0.001": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 2.0539125955565396e-14
+          },
+          "0.01": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 2.0539125955565396e-14
+          },
+          "0.1": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 2.0539125955565396e-14
+          },
+          "1": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 2.0539125955565396e-14
+          },
+          "100": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.687538997430238e-14
+          }
+        },
+        "condensates": [
+          {
+            "species": "Al2O3(s,l)",
+            "max_number_per_nucleus": 1.7275620046032272e-06,
+            "largest_tau": 0.00021598285334535787
+          },
+          {
+            "species": "CaTiO3(s)",
+            "max_number_per_nucleus": 1.0487677334419801e-07,
+            "largest_tau": 4.6620627373029325e-05
+          },
+          {
+            "species": "Ca2Al2SiO7(s)",
+            "max_number_per_nucleus": 8.49240446271493e-07,
+            "largest_tau": 3.819618982169479e-06
+          }
+        ],
+        "maximum_convective_flux_fraction_in_condensing_layers": 1.2403069412556122e-06,
+        "grain_enthalpy_supported": false,
+        "provenance": {
+          "atmosphere_receipt_sha256": "ee57053afa481eee69399f498117f0e65f1c20d2ad90e33e7fb1d7946a39c01c",
+          "chemistry_source_sha256": "41cb37b3d0bf528d8de63f61ea2e6f3884829abb5b2d6b7c27f06247d9e02c10",
+          "probe_sha256": "b233d7d5e547a76350aa70ce4eafb31a2738463ec384d57c261fb4a211b99d77"
+        },
+        "scope": "Diagnostic heat-capacity perturbation; not an accepted atmosphere or a grain EOS."
+      },
+      "source_sha256": "6e7c9a4ae40f1cf255ee6edddb54150927d676c855d7dff478bad708e27c1127",
+      "archive": "/Users/greglaughlin/Projects/ember/data/atmosphere/sources/condensation_material_refinement/thermal-controls/extra-cp-1e6",
+      "files_sha256": {
+        "provenance.json.gz": "df8fc115ef7af47eedcf28556b103c689391947556c7e74ebf85af2586b23ee3",
+        "condensates.sha256.gz": "900df1e6a4ff27a475dd6adb230ba541085996f0448fe52f08a1b76ed0fe7af2",
+        "run.log.gz": "b70a3a484216b2b53ec2aa2441dc47626eeae8ec344b9a7ccd75229c3012711b",
+        "fort.14.gz": "5ebf7db0b0f2e3b5e709d76ba4a6521c2652d973e0442b061d0129117cafabe8",
+        "fort.13.gz": "e95ab8dd56ecaea27c52900cd1d6f01e6a9f17799d8026d90795a44887603f1b",
+        "fort.84.gz": "12adc60a33225b9f642d9cc86dcc1254bb07d19f2d92c779f6838171ebf7cf5f",
+        "chemistry-audit-source.json.gz": "41cb37b3d0bf528d8de63f61ea2e6f3884829abb5b2d6b7c27f06247d9e02c10",
+        "fort.5.gz": "5e917801f2f26573fd9a0698ad609d0e63645f55a3666c7fe09b1dbcc97501e4",
+        "fort.2.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+        "fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+        "opacity.sha256.gz": "286c5a57cf6fe65e6d1ad988e494204ecb63bf764dcf574f8825fdda25d0e057",
+        "ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "chemistry-audit-input.dat.gz": "04c31c8f5dd9057f84b556eb4befc2e3650ff2c96e517396731b1835af87ad05",
+        "condensate-abundances.dat.gz": "0d427bf028c8d064dc6bfa50022129d6f1450aafc39d2d769e8c324753445239",
+        "chemistry-audit.log.gz": "507f3c0814639268a9ccbb7feb3d9851271626ed2b601bd00940d8e158201dc0",
+        "completed.json.gz": "bdc10cc44eacae447a1d562af1113674a77739a62ba827a1d6821fad6df7ec5b",
+        "fort.69.gz": "e4140d7651e171f6f236d963505ab4526857dc58f8b0b2fbe375bf69dbb582f4",
+        "physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+        "fort.95.gz": "ea5b69a0776bd4ca82d146406c274ecb3158be596b65e9389e1218c54bd69706",
+        "fort.9.gz": "d6f5d935bfe04c6dc0789ca23e14db92c2c6aff027af1acd81f86094d9512a82",
+        "fort.7.gz": "ac4d0d6fd46894040162794ff7eb209b53e056e3a35508c244be1c36d0a1d06c",
+        "fort.10.gz": "c9248bda65d6b1ce8419dc147fa4987030621b0d3daacade5ad7f42af92ec92e",
+        "fort.17.gz": "188d3a1ddf3a2661057de6f70c977d2988b4919e1f4bb096c0195a0142c4a435",
+        "fort.1.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+        "fort.11.gz": "4d98e7755551898e0c1dee45645bb4d983ffca54ba5e690e3a5ef4d17d2bc3dd",
+        "fort.18.gz": "92371b23bbab25bfccb64e1b994979639ce234c45452bd92b1f96fb2ce4f85df",
+        "fort.8.gz": "22912bccca10b3a17cb497b3fa541ad4396e7314fe8fba2c7ef5cecf7c9815f6",
+        "initializer.json.gz": "1f1f9182f39108ded4c3790ec21e9504fa47d2ae63181c458e101eec20da6354",
+        "ember-condensates.cfg.gz": "2f7d231a219fd5d704669a54c435dc4bda669dc380560259ee646fd50f99c331",
+        "chemistry-diagnostic.json.gz": "0e7998a923b0558017638c76ac1f3fcaf6272db6c8b4e20f5bdf403a209e015b",
+        "tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+        "source-prepared.json.gz": "8280a089957091d7d61800a80f26e7af35169fcb868e423a30f3cffea2f9f2eb",
+        "source-thermal-control.patch.gz": "8fcedc25f5706c29615d197cf7cc7b764f95b671acd5c53820b2c5df498bc838",
+        "source-build.log.gz": "f8d29d084f3d9288459bbcdf305bce1747aa9e2c114dc5eaeec2e720ad38e59d"
+      }
+    },
+    {
+      "scope": "Diagnostic positive heat-capacity perturbation; not production grain physics",
+      "extra_cp_erg_g_K": 10000000,
+      "temperature_taper_K": [
+        2000,
+        2400
+      ],
+      "diagnostics": {
+        "T": 4030.3517734521583,
+        "Pgas": 16463801.500436267,
+        "source_density": 9.755207827022749e-05,
+        "column_mass": 116.55477361589558,
+        "flux_error": 1.3081561042627143e-05,
+        "correction": 6.29e-07,
+        "effective_flux_error": 0.00019860471966481885,
+        "hydrostatic_error": 1.4747080734345275e-07,
+        "chemical_density_error": 2.107203300738547e-13,
+        "iterations": 6,
+        "depths": 300,
+        "tau_bracket": [
+          99.05716823514425,
+          106.7283741848669
+        ],
+        "temperature_range": [
+          1431.715934953629,
+          4843.864380330685
+        ],
+        "density_range": [
+          7.754124848640047e-11,
+          0.00034854085841613954
+        ]
+      },
+      "relative_boundary_difference": {
+        "T": -8.311540034000586e-07,
+        "Pgas": 4.387997555754808e-06,
+        "source_density": 6.4441168412532335e-06
+      },
+      "chemistry_diagnostic": {
+        "element_closure": 3.4325535747115055e-09,
+        "pressure_closure": 4.764189043271472e-12,
+        "nuclei_closure": 5.10702591327572e-15,
+        "thresholds": {
+          "0": {
+            "max_condensed_mass_fraction": 0.000259408788007432,
+            "max_element_gas_depletion": 0.9987684062962409
+          },
+          "0.001": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.609823385706477e-14
+          },
+          "0.01": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.609823385706477e-14
+          },
+          "0.1": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.609823385706477e-14
+          },
+          "1": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.587618925213974e-14
+          },
+          "100": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.2989609388114332e-14
+          }
+        },
+        "condensates": [
+          {
+            "species": "Al2O3(s,l)",
+            "max_number_per_nucleus": 1.7275541785521679e-06,
+            "largest_tau": 0.00021617950798329924
+          },
+          {
+            "species": "CaTiO3(s)",
+            "max_number_per_nucleus": 1.0487601258938382e-07,
+            "largest_tau": 4.667158039957396e-05
+          },
+          {
+            "species": "Ca2Al2SiO7(s)",
+            "max_number_per_nucleus": 8.480938844792122e-07,
+            "largest_tau": 3.821637194731661e-06
+          }
+        ],
+        "maximum_convective_flux_fraction_in_condensing_layers": 1.329447590947434e-06,
+        "grain_enthalpy_supported": false,
+        "provenance": {
+          "atmosphere_receipt_sha256": "373463683b31ed8c638335c38be57fd31bc1d9bd603883d01f23e29a016ef3e8",
+          "chemistry_source_sha256": "677dd7e8ae1eb9d01304d9b60dd02023717594556f5a4930cfd9160938248227",
+          "probe_sha256": "b233d7d5e547a76350aa70ce4eafb31a2738463ec384d57c261fb4a211b99d77"
+        },
+        "scope": "Diagnostic heat-capacity perturbation; not an accepted atmosphere or a grain EOS."
+      },
+      "source_sha256": "f23a212f915d09ffb25851408f1cb5cf2432255e633c575f75daec28df67db82",
+      "archive": "/Users/greglaughlin/Projects/ember/data/atmosphere/sources/condensation_material_refinement/thermal-controls/extra-cp-1e7",
+      "files_sha256": {
+        "provenance.json.gz": "2a2266213f8eaa1303126d70601fde59e86e928bd3722c0571f0d4da2c361754",
+        "condensates.sha256.gz": "900df1e6a4ff27a475dd6adb230ba541085996f0448fe52f08a1b76ed0fe7af2",
+        "run.log.gz": "3644db9f47d5b6038b35a0e91c3c2ba689b44ed62ca6c89cc1df6195d90772fe",
+        "fort.14.gz": "dcb72826da4cf394c6888cd0bfa1f3a66df739f0708d09fb306a4a40bc035cb9",
+        "fort.13.gz": "814a161177d7ea769702976403ee0515e38477d31fcc9b8c721e0f2943d416ce",
+        "fort.84.gz": "12adc60a33225b9f642d9cc86dcc1254bb07d19f2d92c779f6838171ebf7cf5f",
+        "chemistry-audit-source.json.gz": "677dd7e8ae1eb9d01304d9b60dd02023717594556f5a4930cfd9160938248227",
+        "fort.5.gz": "5e917801f2f26573fd9a0698ad609d0e63645f55a3666c7fe09b1dbcc97501e4",
+        "fort.2.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+        "fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+        "opacity.sha256.gz": "286c5a57cf6fe65e6d1ad988e494204ecb63bf764dcf574f8825fdda25d0e057",
+        "ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "chemistry-audit-input.dat.gz": "f145594df5b76a2b2704acfa9c019cfb73b93daa84fe8669ebed4e2811790fb3",
+        "condensate-abundances.dat.gz": "0d427bf028c8d064dc6bfa50022129d6f1450aafc39d2d769e8c324753445239",
+        "chemistry-audit.log.gz": "507f3c0814639268a9ccbb7feb3d9851271626ed2b601bd00940d8e158201dc0",
+        "completed.json.gz": "e1c74d2d72c203cb9935356baac7c62b926bfb5b3630c3685a6e207dc5b7dd7c",
+        "fort.69.gz": "62b506d042670296f9cc2e92f53895a05477c865c755e6ba166e6767ecdd8cbf",
+        "launch-failure-dyld.log.gz": "06a15a49f2f71f28c54f0ffb9a84313874297a6668af00043c68e3687fd1db30",
+        "physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+        "fort.95.gz": "ea5b69a0776bd4ca82d146406c274ecb3158be596b65e9389e1218c54bd69706",
+        "fort.9.gz": "531f0efe544609de919433dd145a2654f18c57cd23899d796018928787291c15",
+        "fort.7.gz": "a47e963e6af66eaaad400c1af65feb1ec12646c6a02809fb73ead0fca7f50752",
+        "fort.10.gz": "1c281a8ac8e778d77baabf39730a9bfcfcb0d130fa52d84fb379555e49f45c55",
+        "fort.17.gz": "00435bf318dc44af19fb243dcdd5ce381d1cf929b4312074c4883f54838ae072",
+        "fort.1.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+        "fort.11.gz": "d2b5f9fd29b4a5736192e95f826f7b6ed66ff02831c0ed76b51fa9ffe0d703b4",
+        "fort.18.gz": "4b9ea9bfb55159b9a672d0eac098827c34e6f992272c56c2efd6eab89a7cb1b7",
+        "fort.8.gz": "22912bccca10b3a17cb497b3fa541ad4396e7314fe8fba2c7ef5cecf7c9815f6",
+        "initializer.json.gz": "a7b1799279be7a02dc49672ac1a63e95033aee7f0a6651336e78c06cfcb53e0f",
+        "ember-condensates.cfg.gz": "70cf73b5da1844477599681508b62cc54e6a93805d7e8baf05df441d1cfd3fa8",
+        "chemistry-diagnostic.json.gz": "4fc042672fde629ef763142de877a18e9eb9185939455e73f835f3650e13e4e3",
+        "tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+        "source-prepared.json.gz": "31c8bc6916e194f5e76a6a2b728d119ce641583d8471420848df2bbf5cda807b",
+        "source-thermal-control.patch.gz": "629ab8835913dd81cc64ef97569072f526ef00c9edbfd9a6754e0e926eafd51d",
+        "source-build.log.gz": "f8d29d084f3d9288459bbcdf305bce1747aa9e2c114dc5eaeec2e720ad38e59d"
+      }
+    }
+  ]
+}

@@ -1,0 +1,205 @@
+{
+  "description": "Diagnostic latent-enthalpy scale from pinned FastChem equilibrium constants.\n\nThis is not a replacement EOS or a grain-enthalpy acceptance rule. Formation\nenthalpies follow the van't Hoff derivative of log(Kp). The optional ideal\nneutral-atom reference omits atomic excitation; the native gas EOS and its\npartition functions remain a separate approximation. Compare multiple finite\ndifference intervals across phase boundaries before interpreting derivatives.\n",
+  "model": "/tmp/ember-condensate-refined-2800",
+  "temperature_K": 1769.4174920837647,
+  "pressure_bar": 0.004061889788639392,
+  "native_gas_cp_erg_g_K": 154500890.98800424,
+  "values": [
+    {
+      "T_K": 1769.4174920837647,
+      "formation_enthalpy_erg_g": -29148166.779698387,
+      "ideal_atom_referenced_enthalpy_erg_g": -27394370.791199498,
+      "condensed_mass_fraction": 9.727578173743282e-05,
+      "species": [
+        {
+          "symbol": "Al2O3(s,l)",
+          "mass_fraction": 9.727578173743282e-05,
+          "formation_enthalpy_erg_per_particle": -5.0752306657241376e-11
+        }
+      ]
+    },
+    {
+      "T_K": 1760.570404623346,
+      "formation_enthalpy_erg_g": -31567255.434748646,
+      "ideal_atom_referenced_enthalpy_erg_g": -29677472.90136679,
+      "condensed_mass_fraction": 0.0001053451163489689,
+      "species": [
+        {
+          "symbol": "Al2O3(s,l)",
+          "mass_fraction": 0.0001053451163489689,
+          "formation_enthalpy_erg_per_particle": -5.07541649250449e-11
+        }
+      ]
+    },
+    {
+      "T_K": 1778.2645795441833,
+      "formation_enthalpy_erg_g": -26102261.129818093,
+      "ideal_atom_referenced_enthalpy_erg_g": -24523825.109873068,
+      "condensed_mass_fraction": 8.711372375592561e-05,
+      "species": [
+        {
+          "symbol": "Al2O3(s,l)",
+          "mass_fraction": 8.711372375592561e-05,
+          "formation_enthalpy_erg_per_particle": -5.075055790655885e-11
+        }
+      ]
+    },
+    {
+      "T_K": 1765.8786570995971,
+      "formation_enthalpy_erg_g": -30183265.45593325,
+      "ideal_atom_referenced_enthalpy_erg_g": -28370847.55835015,
+      "condensed_mass_fraction": 0.00010072875314299989,
+      "species": [
+        {
+          "symbol": "Al2O3(s,l)",
+          "mass_fraction": 0.00010072875314299989,
+          "formation_enthalpy_erg_per_particle": -5.075303692432422e-11
+        }
+      ]
+    },
+    {
+      "T_K": 1772.9563270679323,
+      "formation_enthalpy_erg_g": -28013122.060800314,
+      "ideal_atom_referenced_enthalpy_erg_g": -26324225.074209094,
+      "condensed_mass_fraction": 9.348912531104359e-05,
+      "species": [
+        {
+          "symbol": "Al2O3(s,l)",
+          "mass_fraction": 9.348912531104359e-05,
+          "formation_enthalpy_erg_per_particle": -5.0751593912897896e-11
+        }
+      ]
+    },
+    {
+      "T_K": 1767.648074591681,
+      "formation_enthalpy_erg_g": -29677650.486667074,
+      "ideal_atom_referenced_enthalpy_erg_g": -27893794.76858121,
+      "condensed_mass_fraction": 9.904211224214732e-05,
+      "species": [
+        {
+          "symbol": "Al2O3(s,l)",
+          "mass_fraction": 9.904211224214732e-05,
+          "formation_enthalpy_erg_per_particle": -5.075266960772724e-11
+        }
+      ]
+    },
+    {
+      "T_K": 1771.1869095758484,
+      "formation_enthalpy_erg_g": -28593708.858485598,
+      "ideal_atom_referenced_enthalpy_erg_g": -26871541.064626753,
+      "condensed_mass_fraction": 9.542607102968926e-05,
+      "species": [
+        {
+          "symbol": "Al2O3(s,l)",
+          "mass_fraction": 9.542607102968926e-05,
+          "formation_enthalpy_erg_per_particle": -5.0751948087440364e-11
+        }
+      ]
+    },
+    {
+      "T_K": 1768.532783337723,
+      "formation_enthalpy_erg_g": -29415960.18808282,
+      "ideal_atom_referenced_enthalpy_erg_g": -27646942.783039596,
+      "condensed_mass_fraction": 9.816913508150813e-05,
+      "species": [
+        {
+          "symbol": "Al2O3(s,l)",
+          "mass_fraction": 9.816913508150813e-05,
+          "formation_enthalpy_erg_per_particle": -5.075248758580957e-11
+        }
+      ]
+    },
+    {
+      "T_K": 1770.3022008298065,
+      "formation_enthalpy_erg_g": -28874130.586147975,
+      "ideal_atom_referenced_enthalpy_erg_g": -27135948.079956442,
+      "condensed_mass_fraction": 9.636158590792295e-05,
+      "species": [
+        {
+          "symbol": "Al2O3(s,l)",
+          "mass_fraction": 9.636158590792295e-05,
+          "formation_enthalpy_erg_per_particle": -5.075212682384441e-11
+        }
+      ]
+    },
+    {
+      "T_K": 1769.063608585348,
+      "formation_enthalpy_erg_g": -29256025.387269516,
+      "ideal_atom_referenced_enthalpy_erg_g": -27496094.29062773,
+      "condensed_mass_fraction": 9.76355978327741e-05,
+      "species": [
+        {
+          "symbol": "Al2O3(s,l)",
+          "mass_fraction": 9.76355978327741e-05,
+          "formation_enthalpy_erg_per_particle": -5.075237889735012e-11
+        }
+      ]
+    },
+    {
+      "T_K": 1769.7713755821815,
+      "formation_enthalpy_erg_g": -29039309.360923268,
+      "ideal_atom_referenced_enthalpy_erg_g": -27291711.208827056,
+      "condensed_mass_fraction": 9.691263095934336e-05,
+      "species": [
+        {
+          "symbol": "Al2O3(s,l)",
+          "mass_fraction": 9.691263095934336e-05,
+          "formation_enthalpy_erg_per_particle": -5.0752234592360034e-11
+        }
+      ]
+    }
+  ],
+  "finite_differences": [
+    {
+      "relative_temperature_step": 0.005,
+      "derivatives_per_K": {
+        "formation_enthalpy_erg_g": 308858.3858462219,
+        "ideal_atom_referenced_enthalpy_erg_g": 291262.3964977626,
+        "condensed_mass_fraction": -1.0303612728261886e-06,
+        "ideal_atom_referenced_cp_over_native_gas_cp": 0.001885182633156315
+      }
+    },
+    {
+      "relative_temperature_step": 0.002,
+      "derivatives_per_K": {
+        "formation_enthalpy_erg_g": 306618.33694449696,
+        "ideal_atom_referenced_enthalpy_erg_g": 289166.1370616962,
+        "condensed_mass_fraction": -1.0228829352520986e-06,
+        "ideal_atom_referenced_cp_over_native_gas_cp": 0.001871614689161551
+      }
+    },
+    {
+      "relative_temperature_step": 0.001,
+      "derivatives_per_K": {
+        "formation_enthalpy_erg_g": 306299.0032117916,
+        "ideal_atom_referenced_enthalpy_erg_g": 288867.2991331872,
+        "condensed_mass_fraction": -1.0218168489449574e-06,
+        "ideal_atom_referenced_cp_over_native_gas_cp": 0.0018696804742415075
+      }
+    },
+    {
+      "relative_temperature_step": 0.0005,
+      "derivatives_per_K": {
+        "formation_enthalpy_erg_g": 306219.1960682239,
+        "ideal_atom_referenced_enthalpy_erg_g": 288792.61416222877,
+        "condensed_mass_fraction": -1.021550415135114e-06,
+        "ideal_atom_referenced_cp_over_native_gas_cp": 0.0018691970791589235
+      }
+    },
+    {
+      "relative_temperature_step": 0.0002,
+      "derivatives_per_K": {
+        "formation_enthalpy_erg_g": 306196.8519524491,
+        "ideal_atom_referenced_enthalpy_erg_g": 288771.70412731497,
+        "condensed_mass_fraction": -1.0214758199594913e-06,
+        "ideal_atom_referenced_cp_over_native_gas_cp": 0.0018690617399076087
+      }
+    }
+  ],
+  "provenance": {
+    "probe_sha256": "b233d7d5e547a76350aa70ce4eafb31a2738463ec384d57c261fb4a211b99d77",
+    "thermochemical_data_sha256": "566b029470a9affb361dc4e891aa8c4918baeff0f93cf07e804d57e2ebac8467",
+    "model_provenance_sha256": "e46ec9cca863b390f859f40ea99d33db575118b67e0d6a4f254c26a311fdab97"
+  },
+  "limitations": "Diagnostic formation-energy estimate. Not a complete gas-plus-grain EOS, pseudoadiabat, flux bound, or permission to relax the grain-enthalpy guard."
+}

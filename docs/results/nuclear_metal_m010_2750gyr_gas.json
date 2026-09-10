@@ -1,0 +1,38 @@
+{
+  "profile": "/Users/greglaughlin/Projects/ember/out/evolution-metal-512-2750gyr-gas-restart.json",
+  "nuclear_model": "sfii-svh",
+  "points": 512,
+  "age_yr": 2750000000000,
+  "central": {
+    "T_K": 6720471.802976825,
+    "rho_g_cm3": 240.35825208978363,
+    "bare_pp_sfii_over_legacy": 0.9874989510067073,
+    "bare_33_sfii_over_legacy": 0.9306126001290015,
+    "bare_34_sfii_over_legacy": 1.0614334708115816,
+    "legacy_pp_H": 0.21954402194091666,
+    "legacy_33_H": 0.8781760877636666,
+    "sfii_legacy_eps": 1.4274659767164983,
+    "debye_pp_H": 0.20744031979700742,
+    "debye_33_H": 0.8297612791880297,
+    "sfii_debye_eps": 1.36682984482436,
+    "svh_pp_H": 0.1416205525270648,
+    "svh_33_H": 0.4942550836207728,
+    "sfii_svh_eps": 1.0196291599237444,
+    "electron_eta": 0.5205828307815596,
+    "electron_susceptibility": 0.7203218797212416,
+    "gamma_e": 0.18330886848552552,
+    "pp_zeta": 0.0307002065873157,
+    "eps_nuclear_neutrinos": 0.007174248091147781,
+    "reduced_ppII_over_pp": 0.0022535550147258963
+  },
+  "integrated_power_erg_s": {
+    "sfii_legacy_eps": 9.085223273537872e+30,
+    "sfii_debye_eps": 8.77269387593982e+30,
+    "sfii_svh_eps": 6.983504688198397e+30,
+    "eps_nuclear_neutrinos": 1.3788302983439736e+29
+  },
+  "max_pp_zeta_where_T_ge_1e5": 0.0559664636444339,
+  "max_reduced_ppII_over_pp": 0.0022535550147258963,
+  "metal_inventory": "GS98 elemental number pattern; inert carrier labels; representative metal isotopes",
+  "interpretation": "Prescription comparisons at identical final thermal/composition states; not independently relaxed stars or calibrated uncertainty bounds. Electron gas fully ionized; Z=.02 with the selected metal inventory. ppII is a reduced steady branch."
+}

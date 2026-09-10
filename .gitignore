@@ -5,5 +5,23 @@ compile_commands.json
 *.dSYM/
 out/
 __pycache__/
-# Physics tables are small and versioned with the code: a result is only
-# reproducible if the numbers that produced it travel with it.
+# New generated physics tables and raw source archives stay local. Keep the
+# code, source patches, generation specifications and small provenance records.
+# Files already present in published history remain tracked.
+/data/**
+!/data/**/
+!/data/**/README.md
+!/data/**/LICENSE*
+!/data/**/SYNPLE-LICENSE
+!/data/**/*.patch
+!/data/**/*specification.json
+!/data/**/*manifest.json
+!/data/**/*.request.json
+!/data/eos/sources/*parent_*.json
+!/data/atmosphere/sources/synple-elements.json
+!/data/atmosphere/sources/synspec-ap18-ions.dat
+
+# Local restart binaries, raw histories and source-experiment recovery files.
+# The report, its compact history CSV, figures and hash manifest are versioned.
+/docs/reports/*/artifacts/
+/docs/results/*.gz

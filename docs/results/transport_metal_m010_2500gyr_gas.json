@@ -1,0 +1,53 @@
+{
+  "description": "Final-profile transport and source-domain audit; plasmon fit only, not total thermal neutrinos",
+  "input_sha256": "3051b3801f1592787184b09fab58033a21a25d438306f600422daa1631a75bfb",
+  "points": 512,
+  "age_yr": 2500000000000,
+  "metal_inventory": "GS98 elemental number pattern; inert carrier labels; representative metal isotopes",
+  "central": {
+    "P": 1.6405161792728554e+17,
+    "E": 994367200210648.4,
+    "S": 753645206.7966746,
+    "grad_ad": 0.390077077478129,
+    "radiative_opacity": 14.210669849210973,
+    "conductive_opacity": 126.04215888822209,
+    "combined_opacity": 12.77081912119941,
+    "gradient_if_all_flux_diffusive": 5.05093776445093,
+    "mlt_gradient": 0.390077077490295,
+    "estimated_conductive_flux_fraction": 0.007824945715132902,
+    "opacity_rho_min": 9.934393831906343e-11,
+    "opacity_rho_max": 9934.393831906342,
+    "classic_conductive_opacity": 201.86950623079218,
+    "undamped_conductive_opacity": 125.10880348731048
+  },
+  "minimum_midpoint_diffusive_gradient_over_adiabatic": 4.974837146090824,
+  "maximum_estimated_local_conductive_flux_fraction": 0.03092685994898477,
+  "minimum_opacity_density_above_floor_factor": 139203798.17990625,
+  "minimum_opacity_density_below_ceiling_factor": 41.41819956765005,
+  "mapped_source_composition": {
+    "EOS_H_min_max": [
+      0.35995867683748073,
+      0.35995867683748073
+    ],
+    "opacity_H_min_max": [
+      0.3603832286156051,
+      0.3603832286156051
+    ],
+    "opacity_Z_min_max": [
+      0.019899055198320692,
+      0.019899055198320692
+    ]
+  },
+  "final_boundary": {
+    "Teff_K": 3062.287264314398,
+    "log10_g": 5.093161205780678
+  },
+  "max_species_spread": 0.0,
+  "min_accepted_convective_mass_fraction": 1.0000000000000007,
+  "max_recorded_last_halfstep_luminosity_imbalance": 1.0499191072099734e-08,
+  "max_recorded_last_halfstep_nuclear_mass_imbalance": 1.3830414924420609e-08,
+  "plasmon_luminosity_over_surface": 1.3498050462475554e-08,
+  "maximum_plasmon_epsilon_erg_g_s": 3.952610172059113e-09,
+  "nuclear_rest_mass_loss_over_baryonic_mass": 0.002391891504056262,
+  "plasmon_source": "https://arxiv.org/abs/astro-ph/9309014; equations 23--27, fully ionized approximation; does not include bremsstrahlung/photo/pair/recombination"
+}

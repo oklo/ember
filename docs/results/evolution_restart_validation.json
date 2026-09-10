@@ -1,0 +1,16 @@
+{
+  "scope": "Exact short-trajectory restart and SHA-256 receipt integration",
+  "history_interval_yr": [
+    10000000,
+    100000000
+  ],
+  "profile_and_subsequent_history_identical": true,
+  "checkpoint_output_sha256": {
+    "/private/tmp/ember-restart-receipt-first.restart": "52dcbb8301991556f5aa2dc2fb11b5ce623ca6c1d59e38d84da7eadda267e5ec"
+  },
+  "restart_input_sha256": {
+    "/private/tmp/ember-restart-receipt-first.restart": "52dcbb8301991556f5aa2dc2fb11b5ce623ca6c1d59e38d84da7eadda267e5ec"
+  },
+  "executable_sha256": "d04ae649221f0d35c448e438fea620cb72089c6a983498b34c0b2fad7877f974",
+  "native_ctest": "evolution_restart passed:70Myr checkpoint to1Gyr, relocated binary, endpoint round trip, changed input and truncation rejections"
+}

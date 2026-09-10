@@ -26,6 +26,20 @@ struct ConvectionState {
 // (inward luminosity); grad_ad must be finite and non-negative.
 ConvectionState mixing_length_gradient(double grad_rad, double grad_ad, double U);
 
+// Finite-face composition buoyancy B. Both compositions are compared at the
+// SAME midpoint T/P; thermal and density gradients do not masquerade as a
+// composition gradient. The ideal gas limit is B=dln(mu)/dln(P).
+struct CompositionBuoyancy {
+  double B{},dB_dlnT{},dB_dlnP{},dB_ddelta{},dB_dpressure_contrast{};
+};
+CompositionBuoyancy composition_buoyancy(const Eos&,double T,double P,double delta,
+    double pressure_contrast,const Composition& lo,const Composition& hi,double rho_guess=0);
+
+// Cox/Giuli Ledoux MLT: replace the buoyancy-neutral gradient by grad_ad+B.
+// The derivative with respect to B equals dgrad_dgrad_ad. Stable layers keep
+// the diffusive gradient; semi-convection/thermohaline transport are separate.
+ConvectionState ledoux_mixing_length_gradient(double grad_rad,double grad_ad,double B,double U);
+
 // CGS inputs. H_P = P/(rho*g), l = alpha*H_P, and
 // U = 3*a_rad*c*T^3/(cp*rho^2*kappa*l^2) * sqrt(8*H_P/(g*delta)).
 // Requires positive finite inputs; evaluate away from the central singularity

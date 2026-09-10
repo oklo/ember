@@ -1,0 +1,399 @@
+{
+  "coordinates": [
+    0.3,
+    0.12,
+    2800.0,
+    5.15
+  ],
+  "diagnostics": {
+    "T": 4214.915390469245,
+    "Pgas": 17410812.26883561,
+    "source_density": 0.00012814593787249606,
+    "column_mass": 123.2590962455286,
+    "flux_error": 2.7662559485275295e-05,
+    "correction": 3.65e-07,
+    "effective_flux_error": 0.00021006301191284216,
+    "hydrostatic_error": 1.399607321150853e-07,
+    "chemical_density_error": 2.1338486533295509e-13,
+    "iterations": 54,
+    "depths": 300,
+    "tau_bracket": [
+      93.84578967966853,
+      101.42099683291374
+    ],
+    "temperature_range": [
+      1287.573957607032,
+      5062.320874259051
+    ],
+    "density_range": [
+      1.7003468508742954e-10,
+      0.0003673890696440686
+    ]
+  },
+  "chemistry": {
+    "element_closure": 3.5555729471781206e-09,
+    "pressure_closure": 6.27653484741586e-12,
+    "nuclei_closure": 8.881784197001252e-15,
+    "thresholds": {
+      "0": {
+        "max_condensed_mass_fraction": 0.002333355552820197,
+        "max_element_gas_depletion": 0.9999983838607738
+      },
+      "0.001": {
+        "max_condensed_mass_fraction": 0.00011832165170914522,
+        "max_element_gas_depletion": 0.8692112477297966
+      },
+      "0.01": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 2.2648549702353193e-14
+      },
+      "0.1": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 2.2648549702353193e-14
+      },
+      "1": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 2.2648549702353193e-14
+      },
+      "100": {
+        "max_condensed_mass_fraction": 0.0,
+        "max_element_gas_depletion": 2.2648549702353193e-14
+      }
+    },
+    "condensates": [
+      {
+        "species": "MgAl2O4(s,l)",
+        "max_number_per_nucleus": 2.7733533343910246e-06,
+        "largest_tau": 4.415097702752128e-05
+      },
+      {
+        "species": "Al2O3(s,l)",
+        "max_number_per_nucleus": 2.6726875526344217e-06,
+        "largest_tau": 0.0025763717225038784
+      },
+      {
+        "species": "MgTi2O5(s,l)",
+        "max_number_per_nucleus": 8.441362583285606e-08,
+        "largest_tau": 8.041152503270859e-09
+      },
+      {
+        "species": "Mg2SiO4(s,l)",
+        "max_number_per_nucleus": 2.54875884204015e-05,
+        "largest_tau": 1.8913217067088164e-06
+      },
+      {
+        "species": "Ti3O5(s,l)",
+        "max_number_per_nucleus": 5.6268268122757465e-08,
+        "largest_tau": 7.019812144949954e-07
+      },
+      {
+        "species": "Ti4O7(s,l)",
+        "max_number_per_nucleus": 4.220706068980086e-08,
+        "largest_tau": 8.281008397347027e-08
+      },
+      {
+        "species": "CaTiO3(s)",
+        "max_number_per_nucleus": 1.686561219104855e-07,
+        "largest_tau": 0.0010829338854663252
+      },
+      {
+        "species": "CaSiO3(s)",
+        "max_number_per_nucleus": 3.875357524630111e-06,
+        "largest_tau": 1.3980059728951184e-05
+      },
+      {
+        "species": "CaMgSi2O6(s)",
+        "max_number_per_nucleus": 4.048482275352235e-06,
+        "largest_tau": 3.3438994904211244e-06
+      },
+      {
+        "species": "Ca2Al2SiO7(s)",
+        "max_number_per_nucleus": 1.9215695852652615e-06,
+        "largest_tau": 0.00043903284711560277
+      }
+    ],
+    "maximum_convective_flux_fraction_in_condensing_layers": 0.0,
+    "grain_enthalpy_supported": true
+  },
+  "provenance": {
+    "prepared": {
+      "format": 1,
+      "tlusty": "/private/tmp/ember-condensate-source-v2/tlusty/tlusty.exe",
+      "synspec": "/private/tmp/ember-condensate-source-v2/synspec/synspec54",
+      "dense_synspec": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560/synspec/synspec54",
+      "opacity_method": "sampling",
+      "synple": "/private/tmp/ember-nongrey-reproduce/synple-source/synple-703549b60031c5f6dd2446ad933b129c070a6560",
+      "tlusty_source": "/tmp/ember-nongrey-opactr-source",
+      "benchmark_tables": "/private/tmp/ember-nongrey-reproduce/benchmark-source/optables",
+      "line_lists": [
+        "/private/tmp/ember-nongrey-reproduce/lines/gfATOc.19/fort.12",
+        "/private/tmp/ember-nongrey-reproduce/lines/gfMOLsun.20/fort.12",
+        "/private/tmp/ember-nongrey-reproduce/lines/gfTiO.20/fort.12",
+        "/private/tmp/ember-nongrey-reproduce/lines/H2O-8.20/fort.12"
+      ],
+      "inputs": {
+        "tl208-s54.tar.gz": {
+          "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+          "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+        },
+        "synple.tar.gz": {
+          "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+          "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+        },
+        "gfATOc.19.gz": {
+          "url": "ftp:gfATOc.19.gz",
+          "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+        },
+        "gfMOLsun.20.gz": {
+          "url": "ftp:gfMOLsun.20.gz",
+          "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+        },
+        "gfTiO.20.gz": {
+          "url": "ftp:gfTiO.20.gz",
+          "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+        },
+        "H2O-8.20.gz": {
+          "url": "ftp:H2O-8.20.gz",
+          "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+        },
+        "optables.tar.gz": {
+          "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+          "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+        }
+      },
+      "patches": {
+        "tlusty208-ember.patch": "0b3214a4b18b6a927f2d512475f94c5895b2790e29185e82108db35724218be1",
+        "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+        "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+      },
+      "line_list_sha256": [
+        "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+        "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+        "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+        "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+      ],
+      "data_sha256": "6f08d719580b724777ab66e8b9517b3de9e66c6f7553a0c5f39483a16835f215",
+      "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+      "executables": {
+        "tlusty": "e152e35da203b9581427ca2c7d27d574cce708b380e289d2ccf2ae1ad1b28f00",
+        "synspec": "7515e79acf8c852d4f51dab7cbb0bce5dc615de0096085083396a8dd948d358c",
+        "dense_synspec": "66987a8ecd9ce2498e96416a377c431be96a4d37df3a550d32f955704f6331fd"
+      },
+      "depletion": {
+        "fastchem": {
+          "repository": "https://github.com/NewStrangeWorlds/FastChem",
+          "commit": "ae67cbd559bc64a3233a1cee6030b8e6b50520de",
+          "archive_sha256": "6e7c04d8e9d7e8f79b929e6865f5d06d5f5fc4077b5fae7e6ab39675a75706de",
+          "source": "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de",
+          "executable": "/private/tmp/ember-fastchem/verified-probe",
+          "executable_sha256": "b233d7d5e547a76350aa70ce4eafb31a2738463ec384d57c261fb4a211b99d77",
+          "commands": [
+            [
+              "cmake",
+              "-S",
+              "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de",
+              "-B",
+              "/private/tmp/ember-fastchem/verified-build",
+              "-DCMAKE_BUILD_TYPE=Release",
+              "-DCMAKE_CXX_COMPILER=c++",
+              "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG -mcpu=apple-m4"
+            ],
+            [
+              "cmake",
+              "--build",
+              "/private/tmp/ember-fastchem/verified-build",
+              "--target",
+              "fastchem_lib",
+              "-j",
+              "4"
+            ],
+            [
+              "c++",
+              "-std=c++17",
+              "-O3",
+              "-DNDEBUG",
+              "-mcpu=apple-m4",
+              "-I/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de/fastchem_src",
+              "/Users/greglaughlin/Projects/ember/scripts/fastchem_probe.cpp",
+              "/private/tmp/ember-fastchem/verified-build/libfastchem_lib.a",
+              "-o",
+              "/private/tmp/ember-fastchem/verified-probe"
+            ]
+          ],
+          "adapter_sha256": "72e99604e985708a437e684fe934f8c12db936d29309636d708fe4186c003afc",
+          "chemistry_data_sha256": {
+            "logK.dat": "eda9b9d7e62ccf7398036ee84349bd0a721b779acdc9d191cbf9fe1dd01f619c",
+            "logK_condensates.dat": "566b029470a9affb361dc4e891aa8c4918baeff0f93cf07e804d57e2ebac8467"
+          }
+        },
+        "adapter_sha256": "8b59accf0dfe6c9b099e43becf8aa266f64b782323074444e756c6f778c676d9",
+        "library_sha256": "3bdf5caeabe1140aa0056427cf7c13d8c9ce3a709ee3c01fd85c018d9e863466",
+        "patches": {
+          "tlusty": "5d05e7a79b10d90bc0d87947da939d92e3021e29adddadf9b9ba87637f357aae",
+          "synspec": "94b17e0a4117cff1a32160a185d8e862a5dc02bd7e988e32e1b4cd7930a67df1"
+        },
+        "source_sha256": {
+          "tlusty": {
+            "base": "65b3eba1355d9bf0bd4591d878fcc50741ad093661b319da460782b54f6c0840",
+            "patched": "3114e571951f81fe8f3ce5483cf7d4d2c545312efec72f3710f4977dd508212d"
+          },
+          "synspec": {
+            "base": "94790598078a69f33a207b889d3d53f5733eb5506516bb02ef2d9037277fa088",
+            "patched": "19cee6bc25b49d006501d54133342ddabbaa37c21064e32cc12c71320c26b56f"
+          }
+        }
+      }
+    },
+    "specification": {
+      "source": "TLUSTY208/SYNSPEC54 helium-rich gas atmospheres; extended XH>=.3",
+      "opacity_method": "sampling",
+      "approximation": "LTE plane-parallel gas, GS98 metal proxy, source molecular EOS; effective helium mass, isotope cross sections and broadening approximated; no condensates or irradiation",
+      "hydrogen": [
+        0.3,
+        0.45,
+        0.7
+      ],
+      "helium3": [
+        0,
+        0.12
+      ],
+      "teff_K": [
+        2600,
+        2800,
+        3000,
+        3200
+      ],
+      "log_g": [
+        4.9,
+        5.15,
+        5.4
+      ],
+      "metals": [
+        0.0040277310873548045,
+        4.525540547589668e-05,
+        0.001113471054023328,
+        0.00921354245314597,
+        0.0056
+      ],
+      "log_temperature": [
+        16,
+        3.031687677525189,
+        3.8899903636730584
+      ],
+      "log_density": [
+        19,
+        -13,
+        -3
+      ],
+      "wavelength_A": [
+        900,
+        300000
+      ],
+      "line_threshold": 0.0001,
+      "microturbulence_km_s": 1.0,
+      "opacity_frequencies": 30000,
+      "atmosphere_frequencies": 20000,
+      "depths": 300,
+      "alpha": 1.9,
+      "tau_top": 1e-07,
+      "tau_bottom": 1000,
+      "tau": 100,
+      "synthesis_spacing_A": 0.1,
+      "temperature_step_limit": 1.003,
+      "initial_depths": 100,
+      "initial_frequencies": 5000,
+      "temperature_K": [
+        1075.6913529614428,
+        1227.1788354376154,
+        1400.0000000000005,
+        1597.159226838411,
+        1822.0839970536194,
+        2078.684477120571,
+        2371.4214945134977,
+        2705.384086203687,
+        3086.3779681585856,
+        3521.0264638251933,
+        4016.8856461718733,
+        4582.575694955842,
+        5227.930752774402,
+        5964.169885047075,
+        6804.092115953369,
+        7762.298930895291
+      ],
+      "convection_derivative_step": 1e-05,
+      "material_domain_note": "Cool-atmosphere rectangle ends at 7762.30 K; must bracket every final profile. Excludes unsupported high-density He I profile extrapolation at 15000 K."
+    },
+    "mode": "equilibrium",
+    "XH": 0.3,
+    "X3": 0.12,
+    "teff_K": 2800.0,
+    "log_g": 5.15,
+    "opacity_sha256": "454f72038e0f3bd38bda4efcea00e5e2bc4e83f4b8fdc26bc5e7fe01af3e215d",
+    "initial": "/private/tmp/ember-nongrey-extended-v2/plane-001/model-001-001"
+  },
+  "relative_to_gas_same_material_grid": {
+    "T": -0.0009741283834154846,
+    "Pgas": 0.0048329366861146195,
+    "source_density": 0.006882795030170419
+  },
+  "gas_control": {
+    "coordinates": [
+      0.3,
+      0.12,
+      2800,
+      5.15
+    ],
+    "source_directory": "/tmp/ember-nongrey-extended-v2/plane-001/model-001-001",
+    "source_run_log_sha256": "ce55cf103057b4d77e309da25293b728ad71250d913e357e6c8efbfd83474d73",
+    "state": {
+      "T": 4219.025262728015,
+      "Pgas": 17327071.62869834,
+      "source_density": 0.00012726996479134025,
+      "column_mass": 122.66625803367336,
+      "flux_error": 1.0750350722510404e-05,
+      "correction": 6.11e-07,
+      "effective_flux_error": 0.00019888594898986867,
+      "hydrostatic_error": 1.3977460988634505e-07,
+      "chemical_density_error": 2.5268676040468563e-13,
+      "iterations": 2,
+      "depths": 300,
+      "tau_bracket": [
+        94.85547519958665,
+        102.51553542021117
+      ],
+      "temperature_range": [
+        1503.6625128371086,
+        5071.344166182
+      ],
+      "density_range": [
+        1.4552131608230113e-10,
+        0.00036625060650738347
+      ]
+    },
+    "archive": "data/atmosphere/sources/condensation_atmosphere_x300_he3120_2800_g515/gas-control",
+    "archive_sha256": "45c5ad0d3a1cfcf1ffdf76a593e3f6d27dd397115f1122199e4ba20291a9f620"
+  },
+  "files_sha256": {
+    "provenance.json.gz": "dd0396928d8717eee387a65196e67b19b25096860dc878cb2fbd25b020d20171",
+    "validated.json.gz": "4dbca66a04701edbc47d01c897874b30d590f85c0fc5889054796f42e9f212d2",
+    "completed.json.gz": "a7cd555b6a09c5eb355edad4beb09dcb5e18477731e026d5113f3a4ba05c6ac0",
+    "fort.5.gz": "7e46812fb61347b103c65f727e2985cf1ab967bd05981d70ac04d8f072400d15",
+    "fort.7.gz": "69192781a77e74d4a44003abe140fb8217d79bba62773cbe72cb98bf35c638c6",
+    "fort.8.gz": "2aa5f6a0a3c2f11ed2a198752174c43c3f2dcbdf3088bd12e94bbad7494e804c",
+    "fort.9.gz": "9141744145c85a4d8ac887e22c58ace13399ecace264e7352c41c1eb2fa8e778",
+    "fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "run.log.gz": "48474592fc2e0dfbc4ab594cf438582fe947a6311690387a7b5ab6bb35bdbbb8",
+    "tas.gz": "39b6c6a9f0b67b82d7e11be279b92a0903a3d91312e9fdaee7eda7c519eac57b",
+    "ember-masses.dat.gz": "d1a201d061bf47c73ddf93e77fa5184bfbedb9d40faab7bfdabe4ab772bc92d5",
+    "opacity.sha256.gz": "1176dd51c4af80e01a4ab1790deaf817c21f284b10d0d71df6a10ed94ea65239",
+    "physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "ember-condensates.cfg.gz": "ba53c679e9e643844ba194a2bd11867e2287e39faf348269a9c136a3d73c316d",
+    "condensate-abundances.dat.gz": "aafed9c940c9f988dda9bc149655f7059c6ed4ca930e61adb4ec9941557c4cfe",
+    "condensates.sha256.gz": "900df1e6a4ff27a475dd6adb230ba541085996f0448fe52f08a1b76ed0fe7af2",
+    "chemistry-audit.json.gz": "163c8607bea26dce1fd87d2b94292f07a76fb1b246d17972360ddb2cf63d8c59",
+    "chemistry-audit-input.dat.gz": "994272e736d8504640dfea4472a0cb371a81d62b2604c3a645f4333f30a21b83",
+    "chemistry-audit-source.json.gz": "288f56b1d8e6b7a7c15e6d81a1ce1b246d01dd1f0e0294b8366d9c7c21d5bf11",
+    "chemistry-audit.log.gz": "507f3c0814639268a9ccbb7feb3d9851271626ed2b601bd00940d8e158201dc0"
+  },
+  "limitation": "Fully coupled settled-grain endmember on the original 16-temperature material grid; not yet installed as a stellar boundary family."
+}

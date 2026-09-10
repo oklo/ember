@@ -10,6 +10,8 @@ struct OpacityState {
   double dlnk_dlnT{};
   double dlnk_dlnRho{};
   double dlnk_dX{std::numeric_limits<double>::quiet_NaN()}; // fixed Z, He4 replaced by H1
+  double dlnk_dZ{std::numeric_limits<double>::quiet_NaN()}; // fixed H1, scaled metals replace He4
+  double dlnk_dY3{std::numeric_limits<double>::quiet_NaN()}; // fixed H1/metals, He3 replaces He4
 };
 
 class Opacity {
