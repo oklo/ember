@@ -9,9 +9,8 @@ development machine unless explicitly stated otherwise.
 
 ## GS98 baryonic H/He3 family
 
-The current stellar controls select the 64-plane family in
-`exhaustion_refined_v2/`. A separate 72-plane family is now installed in
-`low_density_refined_v2/` for a subsequent fresh calculation. It extends the
+The checked stellar trajectory through 3.848 trillion years selects the
+72-plane family in `low_density_refined_v2/`. It extends the
 low-density range and adds four hydrogen fractions at both helium-3 fractions.
 All 5.937 million old source states were reused; 2.220 million additional
 low-density states and eight new composition planes were calculated.
@@ -38,6 +37,32 @@ python3 scripts/assemble_metal_eos_family.py \
 
 The source specifications and installation record are in that same `sources/`
 directory. The older EOS inputs and all running calculations remain intact.
+
+### Numerical electron integration
+
+A new 72-mixture source family uses direct numerical electron integrals
+(FreeEOS options `3 223 -2`). The material source omits radiation; Ember adds
+it once. The temperature range extends through 22.39 MK before trimming
+derivative stencils. Full source, thermodynamic, stellar-profile and atmosphere
+checks are required before selecting this family for a fresh stellar run.
+[Validation plan](sources/numerical_electron_base_validation_v1_specification.json).
+
+A separate hot density addition reuses the completed source isotherms. One
+exchange iteration fails at the nominal electron quadrature accuracy. Tightening
+the relative integration target from 1e-9 to 1e-11 resolves that failure with
+unchanged physical formulas and Newton tolerance. The 100 converged controls
+agree within 6.382e-10 in scaled physical response; a 605-state pilot also
+passes. The generator records the actual executable and input hashes for
+every isotherm requiring this fallback. No unsuccessful source values are
+filled or extrapolated.
+[Precision specification](sources/numerical_electron_precision_fallback_v1_specification.json),
+[controls](../../docs/results/numerical_electron_precision_controls_v1.json),
+[pilot](../../docs/results/numerical_electron_precision_fallback_pilot_v1.json).
+
+The density merger preserves the original source rows and the numerical
+precision record for each added interval. Unrequested cold dense states are
+explicitly absent, and every derivative stencil touching them is masked.
+The added domain still requires complete source and interpolation checks.
 
 The following paragraphs describe the original smaller families.
 

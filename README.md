@@ -79,6 +79,11 @@ differences are below **0.5377%**. All twelve depth comparisons pass; the
 and their missing-state masks remain exact.
 [Acceptance record](docs/results/nongrey_t5000_acceptance_v1.json).
 
+Two atmosphere source pilots at 6000 K also pass their convergence and flux
+checks using the existing wavelength-opacity data. The missing grid models
+and independent intermediate states are being calculated; coverage through
+6000 K is not yet accepted for stellar evolution.
+
 A hotter EOS candidate retains every existing potential value. Its added hot
 test points and all 512 zones of the saved star pass the source comparison,
 but heat-capacity checks fail at some unvisited mixtures in the original
@@ -88,6 +93,22 @@ controls and gives a maximum pilot heat-capacity difference of 0.01014%. A new
 source family is being calculated with this treatment; it requires independent
 validation and a fresh stellar run. Neither EOS candidate is selected yet. [General test](docs/results/metal_eos_hot_source_v1.json),
 [saved-star test](docs/results/metal_eos_hot_profile_v1.json).
+
+The numerical-electron family has completed all 9.811 million source states;
+table assembly and independent checks are in progress. In a separate hot dense
+addition, tighter electron-integration accuracy resolves one source iteration
+failure while preserving the physical formulas. A fresh build reproduces all
+100 precision controls exactly.
+[EOS source details](data/eos/README.md#numerical-electron-integration),
+[build check](docs/results/numerical_electron_precision_builder_v1.json).
+
+Independent spectral integration identifies a normalization issue in the TOPS
+plasma-cutoff means that requires attention before using the dense opacity
+extension. A correction to this normalization alone changes the combined
+radiative and conductive opacity of the saved stellar profile by at most
+0.7555% in a fixed-structure estimate. This is not a stellar-lifetime error
+estimate. No trial opacity correction is selected.
+[Calculation and limitations](docs/PLASMA_OPACITY.md).
 
 Numerical controls through 3.600 trillion years find central-hydrogen changes
 of 0.1849% with a fourfold tighter time control and 1.683% with twice as many

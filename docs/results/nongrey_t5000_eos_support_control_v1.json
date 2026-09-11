@@ -1,0 +1,6236 @@
+{
+  "scope": "Check a new EOS against an already accepted atmosphere table.\n\nThe accepted source and atmosphere convergence checks are reused by checksum.\nOnly the changed EOS support, density inversion and runtime responses are\nre-evaluated; the unchanged source atmospheres are not regenerated.\n",
+  "passed": true,
+  "input_sha256": {
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_t5000_acceptance_v1.json": "37561d476d46946dad5b5d64bd51b516e4c852ed8aec53005f7ee9772ee13656",
+    "/private/tmp/ember-nongrey-exhaustion-t5000-v1.dat": "0bb5064bcccced7d58499186b16f29a37412a4c0052853c410040bbc2c217200",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_z020.dat": "544db28d28b7382eca2646f1ae6d6980d2b1f9eccff3781a69c08626c6a5f321",
+    "/private/tmp/ember-nongrey-grid-domain-probe-v2": "462c7e3dc96943313d4d474f19d17b0620f2cde4f2463f0537ee78b72cca183b",
+    "/Users/greglaughlin/Projects/ember/scripts/audit_atmosphere_eos_support.py": "fcc030083cb00fc5be90553ead93f7957ec2a15d458d90e08ac146304ad38884",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_t5000_interpolation_v1.json": "ab7b57d28ff5df4fede244fc3c94980c6f0442ffd573d542a8d043e657079590",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_t5000_retained_v1.json": "62f183b1b5a982afa51b936401a95b282514a110e5443797354c3696b47cd695",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x150_y000_t4600_g515_depth120_v1.json": "1048f4b09914a30eebd931dd3cea6e48c1b9baaef9989be582e2ba3c4ac2a079",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x150_y000_t4600_g540_depth120_v1.json": "25e9db8259d11e88b0e8b575ed3f6a858b2a472f9e667f17b792d37d0cbf0036",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x200_y000_t4600_g515_depth120_v1.json": "80ddd54499413e989bebd0e944944880adae631db2d5ff66a457b211a4caf9fb",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x200_y000_t4600_g540_depth120_v1.json": "b4281b7d607162ac207054dbd72a1866b6830885c75bb9a1055668d197642abd",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x150_y000_t4800_g515_depth120_v1.json": "f0e5139d0466e6799ccbc528a96eda89da70fce253e4c2e26da007e79d8f0963",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x150_y000_t4800_g540_depth120_v1.json": "85fafcf0d47e73dbba079877026afe825e865036e0d8e9d834e4f21fcafdfb9a",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x200_y000_t4800_g515_depth120_v1.json": "6a7d748e653857dceae28a58acad3e4be48754feb608677d1996e9095dcdd3fe",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x200_y000_t4800_g540_depth120_v1.json": "f6a6f415f48d5ad122df00266358c987d0a9d88b66382cb4b1c7efab76243d79",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x150_y000_t5000_g515_depth120_v1.json": "c5c62a41c681d5db6433a978cb5bdc8eba56d3be668d18ba86e0a75ca3d38cbd",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x150_y000_t5000_g540_depth120_v1.json": "8affade8d9ee0fd11db42d558697435bf142121c007c0dc942f94451993da0c1",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x200_y000_t5000_g515_depth120_v1.json": "105db3fe50edaf72790bbe69872efc4ba8bb38938341fd1e2fc0c7494cc5bf80",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x200_y000_t5000_g540_depth120_v1.json": "1be707ec3d09ba5ebdb7a6831e467f192c23996645e3af56795e010029498f61",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_t5000_condensation_g515_v1.json": "9d1d1a13a9f7419aefd0912ebfea7e6cbc242bc31151191e7485ed8dcffad000",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_t5000_condensation_g540_v1.json": "73a189ed23939de6ae6c87bb914288a557d3b06fbc4f6ceb783f5b7ccde8e9ea",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x000_he3000_potential.dat": "44e73cace7bbfec3845d2142d1ec25511dd6583daa37206f8c90363c2d4fbf46",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x000_he3120_potential.dat": "db7396cc768871fac7b081f24451b1167a2da652f773e36d9b8a1dd5e24074bf",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x001_he3000_potential.dat": "cc2275d948f0063c6cf513cb3288c56384bcefa7da738a27c0a33837911dbd8b",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x001_he3120_potential.dat": "02cd54a392e4dac906ef1b5b70a98b7525c99daeb2df569c8caa98976dc8b6fb",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x002p125_he3000_potential.dat": "dc6896c9afb1cd37b452b2fd82c44fcbe8215b5d7d5b8869b82f20efd546aa78",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x002p125_he3120_potential.dat": "02c55587298aec54e3b43f63e78e8802c70f454f250ecfd9c96107a2cd9f95c3",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x003p25_he3000_potential.dat": "f5cac6027ae148c808eaef80a8f1659c22d5797416f35e84c580267abb0e32a8",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x003p25_he3120_potential.dat": "bab5b3e8e3a63fcd3bdb07e33c5cc66e2a8e4cbfb1e26560544c22b3bb50bcef",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x004p375_he3000_potential.dat": "e01260ef1ad10e52fd5f0b3470abe8d229dc4d2559bf7e5c94dcc9307399be92",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x004p375_he3120_potential.dat": "7431698a044fbb67e0d90d6af1f74202fe6be3e29a71d8f082cd2fd3b15e21d3",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x005p5_he3000_potential.dat": "9031719e52ba4701a46ca5e086d7590fc0b64fb68addc31ae6ecd21231c2a9a4",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x005p5_he3120_potential.dat": "4d685960cb1dce7011eab79cf49ad31f141c124184ded777105241a6563ce5d0",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x007p75_he3000_potential.dat": "35d165e7efcd6cb2d6d7483fbdd0e8eb521e7460adc3dbedad15f9d518b19009",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x007p75_he3120_potential.dat": "d07c6e3c5d409799bd431c49a76eec4e82a64bf15705c6a4f9a04f5143a90c33",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x010_he3000_potential.dat": "c4d96841a41a7388e042d563328ef57f7e2c523443ee932f666a301e14ca857e",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x010_he3120_potential.dat": "0c2c0d276155191186d9b71fc03d1f328c4634850fec6f028c2b99f5af64da5b",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x011p875_he3000_potential.dat": "18f5300f4fd188b090f49fa0222a3ebe62eff0e81f04486a02dedcffaf03472b",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x011p875_he3120_potential.dat": "b439cc27616970ce825f3be3bba345e3bbb6f8ff1dd564db2e1c9b5ce4f6af2f",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x013p75_he3000_potential.dat": "3e56d1b465155dba15b666c4aa39c939d76e9578954b0aff636efabd0e44e8e5",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x013p75_he3120_potential.dat": "5d0f2a0730869068d871d2e1dfadbf91a2cb379529b61a0e5942f4706b67a0ee",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x017p5_he3000_potential.dat": "cd25139a779ca2dae6301182e5e163e6622b01c2ec347614e1f1713c2536cf34",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x017p5_he3120_potential.dat": "ceef8b4ee573e6e365112cc737c3a1984acb34e06422571dee371cfc9be693a9",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x021p25_he3000_potential.dat": "2c43113fd7360b3ab71d5a28ee57f0c2512579859afebb1a13ae60868e1f8fdf",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x021p25_he3120_potential.dat": "14c311c4579a43e34d01f2200f2d33ec78798aa8d7e7c7639d39332124b2ebeb",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x025_he3000_potential.dat": "dc6a4489cee63d533cec09e3c2b615d6e6711a93c4c83937a16f71c280c58013",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x025_he3120_potential.dat": "a7ae4410cc712c0dfd20ba34c970647e288255ab3346e69095542caf66d2317e",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x031p25_he3000_potential.dat": "9d7f0190ad9ae5f8e3fcd880babbe2a8a35a820872debbff7025b4a8b7c8c5ee",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x031p25_he3120_potential.dat": "00757efd7233b9354ce9902d62c214d03b2a0715c729b325a06c4358c06ea6f9",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x037p5_he3000_potential.dat": "5d4a2f28547dd7fdedfd38a7f281ba3dfa14472f584ab1b4f52f35717b6f07dd",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x037p5_he3120_potential.dat": "c4c69bed9eb6c06792b9f3d768e6de8d39ca1072a87a8696442f330ba9b6797d",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x043p75_he3000_potential.dat": "6ce0ef373a12447fa14caa2bb184ded2e1c14dd7f19b3bd72e6b04e7fb162be7",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x043p75_he3120_potential.dat": "e8466035a16b9d7789bafabae050b4552495d7f48dea775abfe1d99b4573522f",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x050_he3000_potential.dat": "c106c4ed0363682e4c22e7f3a360af277e7581846ed9bc3ddf179ac069dd08f3",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x050_he3120_potential.dat": "6746927419ef5ea9bbe5dc180018854abb1ad28d19fe4289fc8462770b69680f",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x062p5_he3000_potential.dat": "e44f5d2d0b2698f35db414125e7e9407d4423ae7fbd08e5edc7dde46bf2f9f5f",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x062p5_he3120_potential.dat": "97e93bb9c8e7b71ff97d653eb56e7c3e084cb20a3b57ba6bc1aa5a9da5a4ca6d",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x075_he3000_potential.dat": "c5df24b62ff271868aca9a2b7a51cb06596b9f8b46fbcea75e984c44ee695d0e",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x075_he3120_potential.dat": "8e2a4091416b75e5ebb55e136e2300c63de56ce2afcb5faf5a0af885238fd186",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x087p5_he3000_potential.dat": "a9ba1867592aa0fb247bec7bb7bf8c63f90e59a2092fab197ed61648ee5c24f8",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x087p5_he3120_potential.dat": "09d7688a8f7d406108a71d49d13aaa3fd89cb592dde4ed9d51b1267bc3de0dd1",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x100_he3000_potential.dat": "36cb288f8dbcab46c4085670bea7f25973fce1cfb8fec25be9762b7ef0513687",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x100_he3120_potential.dat": "5f002d040ba9016eda0f6606a10f080a157589d1e4b64889885c4fe951979f9d",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x125_he3000_potential.dat": "9200d9791a24ff84248ed8902c87ec1ec85e3da071ef73ed89af01ef1bb326c5",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x125_he3120_potential.dat": "e0fb33d82340eb4b6acf30af8e993f9a67db055ba5c2f58b7d62357ccdd8b721",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x150_he3000_potential.dat": "d9f0c535d0d2c61fcd52877170d28db61a333e2aad7a4e64e4e3bdde1c2ec17a",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x150_he3120_potential.dat": "c2ed1f8c725cd64225ad3c2efefdaa558b314d63d0e704fba1d7c1ec3377973e",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x175_he3000_potential.dat": "9c4c911b719dc698d88e6c4448c0159ca421776fe86d489ae0bc435dd35d8dde",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x175_he3120_potential.dat": "2e2352ff5d44031c155fcb178856d3c26e518022a88ae672a8afe59d0267594c",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x200_he3000_potential.dat": "62a70a2d77991d99e7b7e0876561489f041616703f21092e516a11e57597b2b9",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x200_he3120_potential.dat": "4cf92abf638befdb76398d61ee33e7b4cf7d0a84c604c198dca00c68880407bb",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x225_he3000_potential.dat": "ff920bcba0a292464eed2f19149e628c76d5866083635d16d2fbb69ad1ead79f",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x225_he3120_potential.dat": "04549af404e75dc3e0d8d52fefe4bf37d857bee4777807c712efa1e9b816f708",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x250_he3000_potential.dat": "cef8a5bce98f837cb9af14428ba0532d69223a0f8204ccfa24a592584d5db9ca",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x250_he3120_potential.dat": "535ba53359232e491c91c10adeec9b4149a2dffc3d8690331b181b6f01200cc2",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x275_he3000_potential.dat": "700705d7a06c9c29b2a33864c40e78aacf935374fb44165fe91e9d6925e7003b",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x275_he3120_potential.dat": "480155ca1fbc22935661f5d182a7a3a76d04f6837df2265ecbf33ca9046f5d1f",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x300_he3000_potential.dat": "d30451a3d6414033457e4245d19a80be5776adcc41574d264ecfca86998da597",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x300_he3120_potential.dat": "73e6d3276794edb33e2156059b28d20eee62c47dc6c4f9b3fb815417fd85bf87",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x350_he3000_potential.dat": "855626a3ac3f3414f122a8af8ff9acb4753c85be9cf7b9aaa296537644f24a08",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x350_he3120_potential.dat": "f727970e3fde03e6460d4d59816a9d68ec4cd4ba306e82b8b630fd8ee7ad1cd0",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x400_he3000_potential.dat": "adac5549aa3418a21b3e86ad0cf31914fafb4417edb6b558848e353bde21e4f9",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x400_he3120_potential.dat": "3cef8068baeb5a0fc2f302772d704969d547b2ac142777b0d046fccd51c12782",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x450_he3000_potential.dat": "cb48ed2438e0a51a7ba221bcf378206daafae94b7f30b99375dffec97f969e19",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x450_he3120_potential.dat": "8fb0abe41f7cf2d1c9e6334be0546cd83b857674bb3979c795117d61710fe988",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x500_he3000_potential.dat": "4d84aea191e9ca1b5cdc46f9fcba34f0c7c376b832d1eeb1ecfffc7d4c93f399",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x500_he3120_potential.dat": "c6b35df90a2569465adf0e359eacb530aa6a5d0c3ed1d57d99ad379f2744becf",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x600_he3000_potential.dat": "a33972650e0c66228a712467721e6f6a4295ccc562007a6919a50b7ae56c3cee",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x600_he3120_potential.dat": "7cb619628cc92e75abbe149826bf6f2de5fee99d7d753783cf62c6b7f174a2c6",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x700_he3000_potential.dat": "3e3cafeeb73605f4d8ea4651441fd117ec1b67a4449ed421fc5c259e262eeda9",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x700_he3120_potential.dat": "7ed8fe676bf50d2321fb81316bd65e734b6ad036a3e4533ceb4c4d81ed71f957",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x750_he3000_potential.dat": "f19aa84a37bdbbf74053476151e4101d37231c0fed53373c5e8106a5af6acf72",
+    "/Users/greglaughlin/Projects/ember/data/eos/low_density_refined_v2/freeeos300_gs98_x750_he3120_potential.dat": "46e2f9e1ad50097029463c77d55222a3a9ed5c4001b95bb6ee58ffa02384360d"
+  },
+  "source_nodes": 196,
+  "interior_queries": 31,
+  "supported_queries": 227,
+  "unsupported": [],
+  "maximum_matching_log_difference": 0.0,
+  "queries": [
+    {
+      "coordinates": [
+        0.1,
+        0.0,
+        3199.999999999999,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 5796.376323842878,
+        "Pgas": 6510088.899307579,
+        "P": 6510091.746101735,
+        "rho": 4.218714310833695e-05,
+        "logarithmic_thermal_derivatives": [
+          2.184201495211795,
+          -0.07647525312140147,
+          -4.250308629281408,
+          0.7834763474164278
+        ],
+        "composition_derivatives": [
+          -1.8093417174532023,
+          0.06302641590489678,
+          1.0784297014895243,
+          -0.060111598330505146
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.1,
+        0.0,
+        3199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 5546.739380448447,
+        "Pgas": 10220123.059254814,
+        "P": 10220125.446410878,
+        "rho": 6.94982846596761e-05,
+        "logarithmic_thermal_derivatives": [
+          2.1138398673364804,
+          -0.0592996049666592,
+          -4.835528053488387,
+          0.7685463990968575
+        ],
+        "composition_derivatives": [
+          -1.5895973373830772,
+          0.06378059963847219,
+          0.9254688863193727,
+          -0.0682405697862209
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.1,
+        0.0,
+        3199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 5360.593301260861,
+        "Pgas": 15907164.916629257,
+        "P": 15907166.999111023,
+        "rho": 0.00011276117845097371,
+        "logarithmic_thermal_derivatives": [
+          1.9279159412153604,
+          -0.0592996049666592,
+          -4.97726551210212,
+          0.7685465023460026
+        ],
+        "composition_derivatives": [
+          -1.2967835862392707,
+          0.0554636866993392,
+          0.5781031063747083,
+          -0.06553722703355683
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.1,
+        0.0,
+        3399.999999999998,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 6617.047941252675,
+        "Pgas": 5031305.103566494,
+        "P": 5031309.938459802,
+        "rho": 2.8488736729259988e-05,
+        "logarithmic_thermal_derivatives": [
+          2.184201495211795,
+          -0.08388544107633678,
+          -4.250301828293679,
+          0.7218432534055337
+        ],
+        "composition_derivatives": [
+          -1.586258763902626,
+          0.04903788694864786,
+          -0.2690058393901758,
+          0.016092309983107112
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.1,
+        0.0,
+        3399.999999999998,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 6305.1136752301545,
+        "Pgas": 7623277.3678316455,
+        "P": 7623281.353502711,
+        "rho": 4.534719755967858e-05,
+        "logarithmic_thermal_derivatives": [
+          2.1138398673364804,
+          -0.0788803235981046,
+          -4.835524209035063,
+          0.7536190395810182
+        ],
+        "composition_derivatives": [
+          -1.6821424146775226,
+          0.056714004799685344,
+          0.451738924889205,
+          -0.017992300143863812
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.1,
+        0.0,
+        3399.999999999998,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 6025.2190425194985,
+        "Pgas": 11763772.611872828,
+        "P": 11763775.93556757,
+        "rho": 7.339132806957082e-05,
+        "logarithmic_thermal_derivatives": [
+          1.9279159412153604,
+          -0.0788803235981046,
+          -4.9772635881848295,
+          0.7536192964874671
+        ],
+        "composition_derivatives": [
+          -1.6466844418360698,
+          0.05962601837321944,
+          0.7356361988551263,
+          -0.045262497390105724
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.1,
+        0.12,
+        3199.999999999999,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 5840.381502391867,
+        "Pgas": 6463297.934821472,
+        "P": 6463300.869054745,
+        "rho": 4.0296640291257143e-05,
+        "logarithmic_thermal_derivatives": [
+          2.1565126878517447,
+          -0.07631803496116163,
+          -4.099471060519286,
+          0.7817817666265555
+        ],
+        "composition_derivatives": [
+          -1.8100262448659292,
+          0.06302641590489678,
+          1.0422733597194558,
+          -0.060111593118254814
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.1,
+        0.12,
+        3199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 5589.355179737926,
+        "Pgas": 10136773.459719295,
+        "P": 10136775.921087593,
+        "rho": 6.627787476100642e-05,
+        "logarithmic_thermal_derivatives": [
+          2.0998522933896595,
+          -0.061033359876708104,
+          -4.73606695934836,
+          0.7691099383664365
+        ],
+        "composition_derivatives": [
+          -1.6220628793672458,
+          0.06378059963847219,
+          0.9448776602238593,
+          -0.06824056679781332
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.1,
+        0.12,
+        3199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 5396.390487839422,
+        "Pgas": 15782554.108731592,
+        "P": 15782556.24739896,
+        "rho": 0.00010759636964298335,
+        "logarithmic_thermal_derivatives": [
+          1.9361548346863628,
+          -0.061033359876708104,
+          -4.937133865042111,
+          0.7691100470949711
+        ],
+        "composition_derivatives": [
+          -1.3358944848720593,
+          0.0554636866993392,
+          0.6181250775348797,
+          -0.06553722571338876
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.1,
+        0.12,
+        3399.999999999998,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 6656.10105936752,
+        "Pgas": 5041030.2245166,
+        "P": 5041035.174564474,
+        "rho": 2.7517308202393146e-05,
+        "logarithmic_thermal_derivatives": [
+          2.1565126878517447,
+          -0.08228526717626572,
+          -4.099464341861086,
+          0.7147379299718132
+        ],
+        "composition_derivatives": [
+          -1.5522483999829746,
+          0.04903788694864786,
+          -0.3885056453071405,
+          0.016092313762470657
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.1,
+        0.12,
+        3399.999999999998,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 6348.17061459693,
+        "Pgas": 7606835.771229472,
+        "P": 7606839.866891691,
+        "rho": 4.357665945995448e-05,
+        "logarithmic_thermal_derivatives": [
+          2.0998522933896595,
+          -0.07827328131352296,
+          -4.736063076465721,
+          0.7479342550858789
+        ],
+        "composition_derivatives": [
+          -1.6635897271760882,
+          0.056714004799685344,
+          0.3533901215763028,
+          -0.01799229632678587
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.1,
+        0.12,
+        3399.999999999998,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 6068.4848224654625,
+        "Pgas": 11700050.780952457,
+        "P": 11700054.201147323,
+        "rho": 7.025145461039528e-05,
+        "logarithmic_thermal_derivatives": [
+          1.9361548346863628,
+          -0.07827328131352296,
+          -4.937131876356603,
+          0.7479345161999378
+        ],
+        "composition_derivatives": [
+          -1.6489908171702288,
+          0.05962601837321944,
+          0.7034606501288059,
+          -0.04526249461299308
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        3199.999999999999,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 5295.015279400687,
+        "Pgas": 6870760.362806919,
+        "P": 6870762.345240478,
+        "rho": 4.4115868279904234e-05,
+        "logarithmic_thermal_derivatives": [
+          2.3681885840104826,
+          -0.057388498782660946,
+          -5.361602188148949,
+          0.7701903596566722
+        ],
+        "composition_derivatives": [
+          -1.0694162925374056,
+          0.06274119614960207,
+          0.6293411062562193,
+          -0.07517673163882488
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        3199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 5122.949714255123,
+        "Pgas": 10704156.833183052,
+        "P": 10704158.570224343,
+        "rho": 7.199989674578173e-05,
+        "logarithmic_thermal_derivatives": [
+          2.0375135542630005,
+          -0.03386612569723013,
+          -5.226234854318632,
+          0.7383746017044771
+        ],
+        "composition_derivatives": [
+          -0.8354055738487384,
+          0.05025329047839921,
+          0.31350004543475535,
+          -0.06015357065707108
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        3199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 5024.045472494333,
+        "Pgas": 16373674.381938769,
+        "P": 16373675.98867289,
+        "rho": 0.0001142008571565138,
+        "logarithmic_thermal_derivatives": [
+          1.6393361157970219,
+          -0.03386612569723013,
+          -4.847339959884696,
+          0.7383746577596362
+        ],
+        "composition_derivatives": [
+          -0.6748381539936497,
+          0.03916747893568548,
+          0.08567632080971167,
+          -0.04886140104454127
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        3399.999999999998,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 6112.503344589338,
+        "Pgas": 4964087.104152786,
+        "P": 4964090.624667869,
+        "rho": 2.7301458471184843e-05,
+        "logarithmic_thermal_derivatives": [
+          2.504355817698439,
+          -0.09221378916359058,
+          -3.678489829389451,
+          0.7844463653121101
+        ],
+        "composition_derivatives": [
+          -1.2935285333194972,
+          0.06320887191516375,
+          0.4319858979519752,
+          -0.033699297051091745
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        3399.999999999998,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 5796.497627901436,
+        "Pgas": 7797424.69558152,
+        "P": 7797427.54261399,
+        "rho": 4.5406304273579746e-05,
+        "logarithmic_thermal_derivatives": [
+          2.4868519173693926,
+          -0.07580048320920163,
+          -4.60376473186144,
+          0.778278061207976
+        ],
+        "composition_derivatives": [
+          -1.2192150920348512,
+          0.06444429125860549,
+          0.5404454551070963,
+          -0.0589709726235802
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        3399.999999999998,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 5549.010437041779,
+        "Pgas": 12204522.804741463,
+        "P": 12204525.195809517,
+        "rho": 7.486154522801279e-05,
+        "logarithmic_thermal_derivatives": [
+          2.2992803831022854,
+          -0.07580048320920163,
+          -5.082365790796943,
+          0.7782782442031808
+        ],
+        "composition_derivatives": [
+          -1.004331510379469,
+          0.05866502865065857,
+          0.38918320508726434,
+          -0.05866897166897153
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        3600.0,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 7053.1999552247435,
+        "Pgas": 4022776.014572221,
+        "P": 4022782.255864983,
+        "rho": 1.9131532084291707e-05,
+        "logarithmic_thermal_derivatives": [
+          1.7507435830242173,
+          -0.09395182730492202,
+          -3.0619487373080494,
+          0.6925714065169909
+        ],
+        "composition_derivatives": [
+          -0.9814058388257496,
+          0.039145676411256124,
+          -0.6547991034378279,
+          0.025732783353173902
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        3600.0,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 6681.873343996507,
+        "Pgas": 5993342.791552633,
+        "P": 5993347.818712859,
+        "rho": 3.0115643843474475e-05,
+        "logarithmic_thermal_derivatives": [
+          2.195291372595875,
+          -0.09442527395045097,
+          -3.271527390475436,
+          0.7307554022559873
+        ],
+        "composition_derivatives": [
+          -1.1867003322396352,
+          0.054784889109692585,
+          -0.24099027736054351,
+          0.007055932809555708
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        3600.0,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 6328.370840746771,
+        "Pgas": 9127633.656141296,
+        "P": 9127637.70094503,
+        "rho": 4.853063547834161e-05,
+        "logarithmic_thermal_derivatives": [
+          2.446271762313387,
+          -0.09442527395045097,
+          -3.7945242704822557,
+          0.7307558408193121
+        ],
+        "composition_derivatives": [
+          -1.211303721103347,
+          0.06106570968897443,
+          0.19511068395720202,
+          -0.02259368519741898
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        3799.9999999999995,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 7753.460415166841,
+        "Pgas": 3409004.4925600816,
+        "P": 3409013.6066239187,
+        "rho": 1.4736848722413032e-05,
+        "logarithmic_thermal_derivatives": [
+          1.1570189489776794,
+          -0.05219795027841734,
+          -3.0061555156980133,
+          0.6728866782730494
+        ],
+        "composition_derivatives": [
+          -0.5075062688811821,
+          0.013897934739937766,
+          -1.2702390235491188,
+          0.04981838344424753
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        3799.9999999999995,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 7523.953215210199,
+        "Pgas": 5021689.227398717,
+        "P": 5021697.3093106905,
+        "rho": 2.238086054747868e-05,
+        "logarithmic_thermal_derivatives": [
+          1.4797473878226413,
+          -0.07085209560122152,
+          -3.1005528682841095,
+          0.6816330037490557
+        ],
+        "composition_derivatives": [
+          -0.7090577740515996,
+          0.026139492619686327,
+          -0.897315723554921,
+          0.03604340444573615
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        3799.9999999999995,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 7223.256923009387,
+        "Pgas": 7434614.795639194,
+        "P": 7434621.660978721,
+        "rho": 3.45369990811301e-05,
+        "logarithmic_thermal_derivatives": [
+          1.8755922690582452,
+          -0.07085209560122152,
+          -3.211781963688434,
+          0.6816336657397928
+        ],
+        "composition_derivatives": [
+          -0.9508182529368877,
+          0.039670949452550175,
+          -0.581223040754173,
+          0.020171845362831748
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4000.000000000001,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 8227.535877086073,
+        "Pgas": 2921869.479878456,
+        "P": 2921881.035915074,
+        "rho": 1.1894371845821178e-05,
+        "logarithmic_thermal_derivatives": [
+          1.1570189489776794,
+          -0.023441045925519433,
+          -3.006145732559666,
+          0.664475231083562
+        ],
+        "composition_derivatives": [
+          -0.28990678648265733,
+          0.0034669842594494647,
+          -1.7924682247417278,
+          0.066368372026906
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4000.000000000001,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 8117.261241318494,
+        "Pgas": 4283318.505724391,
+        "P": 4283329.454558193,
+        "rho": 1.7681152960433754e-05,
+        "logarithmic_thermal_derivatives": [
+          1.023016140125094,
+          -0.03558010832604808,
+          -3.1980140191402753,
+          0.6717217550107704
+        ],
+        "composition_derivatives": [
+          -0.3940238421732314,
+          0.008231959931196891,
+          -1.5207860458546498,
+          0.05224858565279596
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4000.000000000001,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 7952.69810184509,
+        "Pgas": 6305380.923665121,
+        "P": 6305391.011262847,
+        "rho": 2.6578886581612733e-05,
+        "logarithmic_thermal_derivatives": [
+          1.2612462718012125,
+          -0.03558010832604808,
+          -3.3036272434073606,
+          0.6717225334921335
+        ],
+        "composition_derivatives": [
+          -0.5442102347331699,
+          0.017472800824408587,
+          -1.217552991065879,
+          0.04250270408027673
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 8532.70081777173,
+        "Pgas": 3664513.274273517,
+        "P": 3664526.6425630557,
+        "rho": 1.4378523388183608e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8462559044568252,
+          -0.015388390295822063,
+          -3.1865762656902463,
+          0.6627701600503823
+        ],
+        "composition_derivatives": [
+          -0.25835533243114395,
+          0.001737491490402248,
+          -1.9793471273915308,
+          0.0659341881453858
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 8457.449643814176,
+        "Pgas": 5366726.951688343,
+        "P": 5366739.854591953,
+        "rho": 2.1254901089907524e-05,
+        "logarithmic_thermal_derivatives": [
+          0.9586602371788047,
+          -0.015388390295822063,
+          -3.2986679660036535,
+          0.6627710609612305
+        ],
+        "composition_derivatives": [
+          -0.32185385982908427,
+          0.005031082371167409,
+          -1.7686947236531152,
+          0.055830999419250314
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4400.0,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 8875.314532891107,
+        "Pgas": 3159629.67674157,
+        "P": 3159645.3249557684,
+        "rho": 1.1906788870070285e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7359978539043084,
+          -0.006304597767908149,
+          -3.1985982366295995,
+          0.6537114637973482
+        ],
+        "composition_derivatives": [
+          -0.21872909719801958,
+          -0.0011878418874996849,
+          -2.247174004584286,
+          0.07394712772931315
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4400.0,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 8843.162458511026,
+        "Pgas": 4603253.487183547,
+        "P": 4603268.909875509,
+        "rho": 1.741977097263468e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8070884132146148,
+          -0.006304597767908149,
+          -3.2781069976610073,
+          0.6537125515462305
+        ],
+        "composition_derivatives": [
+          -0.24457759694847792,
+          0.0004111728593233991,
+          -2.1537959110288636,
+          0.06653281270027103
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4599.999999999998,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 9170.485020043518,
+        "Pgas": 2740855.63764626,
+        "P": 2740873.4737090864,
+        "rho": 9.983578059277355e-06,
+        "logarithmic_thermal_derivatives": [
+          0.6575114972519884,
+          -0.0008149406462596431,
+          -3.19932569970456,
+          0.647571540891592
+        ],
+        "composition_derivatives": [
+          -0.2035358532295959,
+          -0.0020821453249714895,
+          -2.380243113004118,
+          0.07801076853500519
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4599.999999999998,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 9166.183993538229,
+        "Pgas": 3979056.497882327,
+        "P": 3979074.300507695,
+        "rho": 1.451047038973671e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7055283217174235,
+          -0.0008149406462596431,
+          -3.2586741591292374,
+          0.6475728642845912
+        ],
+        "composition_derivatives": [
+          -0.2150691727616263,
+          -0.0010844093447944794,
+          -2.3422153525342897,
+          0.07269095441004195
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4799.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 9430.73100484609,
+        "Pgas": 2391944.0982225207,
+        "P": 2391964.0467664045,
+        "rho": 8.459211219802553e-06,
+        "logarithmic_thermal_derivatives": [
+          0.5937413943690331,
+          0.002735117140669985,
+          -3.1083797275017604,
+          0.6431834499191528
+        ],
+        "composition_derivatives": [
+          -0.2051648691699318,
+          -0.0026124335358675703,
+          -2.4507920116741957,
+          0.08014208008182606
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4799.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 9445.59100865051,
+        "Pgas": 3463763.299304612,
+        "P": 3463783.3738776715,
+        "rho": 1.2240794915458468e-05,
+        "logarithmic_thermal_derivatives": [
+          0.6310207408028248,
+          0.002735117140669985,
+          -3.150453193872351,
+          0.64318505852
+        ],
+        "composition_derivatives": [
+          -0.21047395063583826,
+          -0.0021956435117650415,
+          -2.415377138927362,
+          0.07601435629966999
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4999.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 9662.102944595828,
+        "Pgas": 2106892.9748562914,
+        "P": 2106914.9542855923,
+        "rho": 7.259588128247434e-06,
+        "logarithmic_thermal_derivatives": [
+          0.5937413943690331,
+          0.005378784522116931,
+          -3.1083682550068756,
+          0.6401995365958083
+        ],
+        "composition_derivatives": [
+          -0.22000142904162837,
+          -0.0027834747043528098,
+          -2.501104236998038,
+          0.0790794965474113
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4999.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 9692.065857077636,
+        "Pgas": 3045748.035373155,
+        "P": 3045770.2887127884,
+        "rho": 1.0472809673369142e-05,
+        "logarithmic_thermal_derivatives": [
+          0.6310207408028248,
+          0.005378784522116931,
+          -3.150444621035659,
+          0.6402014704592457
+        ],
+        "composition_derivatives": [
+          -0.21335845066807202,
+          -0.002457966551854056,
+          -2.4516638782695246,
+          0.07783912703542746
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        3199.999999999999,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 5335.031601760816,
+        "Pgas": 6809056.468906258,
+        "P": 6809058.511950426,
+        "rho": 4.214242230746214e-05,
+        "logarithmic_thermal_derivatives": [
+          2.369114298517019,
+          -0.05999174447395461,
+          -5.2795020803175134,
+          0.7733221033004408
+        ],
+        "composition_derivatives": [
+          -1.1076449654223535,
+          0.06274119614960207,
+          0.6713960108306632,
+          -0.07517672788292973
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        3199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 5153.936461121796,
+        "Pgas": 10627167.792652154,
+        "P": 10627169.572103063,
+        "rho": 6.892972007879081e-05,
+        "logarithmic_thermal_derivatives": [
+          2.065603133094214,
+          -0.036177088951832914,
+          -5.223894084618668,
+          0.7407285808151797
+        ],
+        "composition_derivatives": [
+          -0.8679911667426278,
+          0.05025329047839921,
+          0.35769695371054494,
+          -0.06015356930780437
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        3199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 5047.714555847023,
+        "Pgas": 16277950.368766574,
+        "P": 16277952.005993664,
+        "rho": 0.00010952448814099902,
+        "logarithmic_thermal_derivatives": [
+          1.6779294446409097,
+          -0.036177088951832914,
+          -4.866753032688381,
+          0.7407286400191458
+        ],
+        "composition_derivatives": [
+          -0.6980963766273359,
+          0.03916747893568548,
+          0.1185964748312379,
+          -0.048861400540922625
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        3399.999999999998,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 6159.043358883384,
+        "Pgas": 4944053.168911875,
+        "P": 4944056.797877181,
+        "rho": 2.624541171200108e-05,
+        "logarithmic_thermal_derivatives": [
+          2.453836860532249,
+          -0.09195625197781787,
+          -3.553716328835131,
+          0.7791781919350336
+        ],
+        "composition_derivatives": [
+          -1.2897339060866946,
+          0.06320887191516375,
+          0.3798099480264552,
+          -0.03369928994238526
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        3399.999999999998,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 5841.497544670526,
+        "Pgas": 7742440.758386067,
+        "P": 7742443.694862802,
+        "rho": 4.3489309901147424e-05,
+        "logarithmic_thermal_derivatives": [
+          2.4665726937170973,
+          -0.07700523610205146,
+          -4.46514597650622,
+          0.778341011714702
+        ],
+        "composition_derivatives": [
+          -1.2369667931634727,
+          0.06444429125860549,
+          0.5416957035583636,
+          -0.058970968143038996
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        3399.999999999998,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 5588.212204262883,
+        "Pgas": 12118901.257895509,
+        "P": 12118903.717251109,
+        "rho": 7.168901932072094e-05,
+        "logarithmic_thermal_derivatives": [
+          2.3043204411662543,
+          -0.07700523610205146,
+          -5.006628346813256,
+          0.7783412032778998
+        ],
+        "composition_derivatives": [
+          -1.037953038079868,
+          0.05866502865065857,
+          0.41259462448738776,
+          -0.058668969610103414
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        3600.0,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 7086.410170309135,
+        "Pgas": 4035217.182125737,
+        "P": 4035223.5418006326,
+        "rho": 1.85815707479314e-05,
+        "logarithmic_thermal_derivatives": [
+          1.6947072466011548,
+          -0.09069165589232675,
+          -3.008491500948346,
+          0.6886780107067236
+        ],
+        "composition_derivatives": [
+          -0.9474085622764191,
+          0.039145676411256124,
+          -0.6886371464124169,
+          0.025732786566027878
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        3600.0,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 6725.945938818789,
+        "Pgas": 5998419.447371324,
+        "P": 5998424.608483034,
+        "rho": 2.9126890458314495e-05,
+        "logarithmic_thermal_derivatives": [
+          2.1317140794034515,
+          -0.09311596560513635,
+          -3.2071907388786323,
+          0.7245746011108535
+        ],
+        "composition_derivatives": [
+          -1.1724785789579306,
+          0.054784889109692585,
+          -0.3065552467810417,
+          0.007055937395061498
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        3600.0,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 6374.914741438612,
+        "Pgas": 9102919.81875867,
+        "P": 9102923.983876517,
+        "rho": 4.672363531439259e-05,
+        "logarithmic_thermal_derivatives": [
+          2.3987869615773434,
+          -0.09311596560513635,
+          -3.6996078695851,
+          0.7245750430564287
+        ],
+        "composition_derivatives": [
+          -1.2148666727522728,
+          0.06106570968897443,
+          0.14353558285954118,
+          -0.022593681349301172
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        3799.9999999999995,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 7766.402054313597,
+        "Pgas": 3429445.2560538026,
+        "P": 3429454.431120889,
+        "rho": 1.4398855118293752e-05,
+        "logarithmic_thermal_derivatives": [
+          1.132615874996901,
+          -0.049646058580620434,
+          -2.9674368597869236,
+          0.6700151411257839
+        ],
+        "composition_derivatives": [
+          -0.49229305949789276,
+          0.013897934739937766,
+          -1.3164149915009244,
+          0.0498183834549448
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        3799.9999999999995,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 7547.59094687249,
+        "Pgas": 5043456.053002834,
+        "P": 5043464.236957027,
+        "rho": 2.179884232035541e-05,
+        "logarithmic_thermal_derivatives": [
+          1.4378529462922813,
+          -0.06803130982460104,
+          -3.062640896163443,
+          0.6783244042738904
+        ],
+        "composition_derivatives": [
+          -0.6878325254071583,
+          0.026139492619686327,
+          -0.9435533225081236,
+          0.03604340535606415
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        3799.9999999999995,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 7257.725316781916,
+        "Pgas": 7452632.868056309,
+        "P": 7452639.865378639,
+        "rho": 3.351870350476943e-05,
+        "logarithmic_thermal_derivatives": [
+          1.8236599869308634,
+          -0.06803130982460104,
+          -3.1595390895622373,
+          0.6783250541732918
+        ],
+        "composition_derivatives": [
+          -0.9236799641073257,
+          0.039670949452550175,
+          -0.6195188013801689,
+          0.020171847506579053
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4000.000000000001,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 8230.959557713088,
+        "Pgas": 2945232.8312147027,
+        "P": 2945244.406498338,
+        "rho": 1.1659558741390344e-05,
+        "logarithmic_thermal_derivatives": [
+          1.132615874996901,
+          -0.022447732658012143,
+          -2.9674274514831604,
+          0.6615318143634108
+        ],
+        "composition_derivatives": [
+          -0.284843519413087,
+          0.0034669842594494647,
+          -1.8260364098946194,
+          0.06636837333093674
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4000.000000000001,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 8125.283719423961,
+        "Pgas": 4310258.577834809,
+        "P": 4310269.57001677,
+        "rho": 1.7292580457878133e-05,
+        "logarithmic_thermal_derivatives": [
+          1.0070429162968537,
+          -0.033653750146175554,
+          -3.1643539981465323,
+          0.6696901255895743
+        ],
+        "composition_derivatives": [
+          -0.38370065201715947,
+          0.008231959931196891,
+          -1.5564032010313171,
+          0.05224858576716624
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4000.000000000001,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 7969.390304495708,
+        "Pgas": 6337622.530604015,
+        "P": 6337632.703161642,
+        "rho": 2.5935040589986387e-05,
+        "logarithmic_thermal_derivatives": [
+          1.230645714500298,
+          -0.033653750146175554,
+          -3.2708460257169882,
+          0.6696908857620465
+        ],
+        "composition_derivatives": [
+          -0.5281580762885841,
+          0.017472800824408587,
+          -1.255476219514787,
+          0.04250270422452413
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 8534.480062657982,
+        "Pgas": 3693622.3794503757,
+        "P": 3693635.7588936635,
+        "rho": 1.4096985089474096e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8387099051583107,
+          -0.014701803890146081,
+          -3.16590651200788,
+          0.660664044929853
+        ],
+        "composition_derivatives": [
+          -0.25551765135248505,
+          0.001737491490402248,
+          -2.0031987408225462,
+          0.06593418966305259
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 8462.557200548312,
+        "Pgas": 5402803.2904174905,
+        "P": 5402816.224518228,
+        "rho": 2.0804901611711793e-05,
+        "logarithmic_thermal_derivatives": [
+          0.9467430197433941,
+          -0.014701803890146081,
+          -3.2710621802313073,
+          0.6606649286891031
+        ],
+        "composition_derivatives": [
+          -0.31578591052259164,
+          0.005031082371167409,
+          -1.79852160845707,
+          0.055830999786302495
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4400.0,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 8874.049526606881,
+        "Pgas": 3187792.056721658,
+        "P": 3187807.69601635,
+        "rho": 1.1689308700575865e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7335836321437057,
+          -0.0059712649930165895,
+          -3.1876281353183096,
+          0.6521658754663034
+        ],
+        "composition_derivatives": [
+          -0.21680867719736907,
+          -0.0011878418874996849,
+          -2.2645327618240763,
+          0.07394713139279147
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4400.0,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 8843.598797482811,
+        "Pgas": 4640152.800903523,
+        "P": 4640168.2266396545,
+        "rho": 1.7082811270360064e-05,
+        "logarithmic_thermal_derivatives": [
+          0.803051006054261,
+          -0.0059712649930165895,
+          -3.2614826869238676,
+          0.6521669447003504
+        ],
+        "composition_derivatives": [
+          -0.2416409168907423,
+          0.0004111728593233991,
+          -2.173946738943944,
+          0.06653281438650259
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4599.999999999998,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 9168.193992369137,
+        "Pgas": 2766634.246162987,
+        "P": 2766652.0644088257,
+        "rho": 9.807355673813087e-06,
+        "logarithmic_thermal_derivatives": [
+          0.6560163101790408,
+          -0.0006069512555804124,
+          -3.1933162303394824,
+          0.6464625761230751
+        ],
+        "composition_derivatives": [
+          -0.20234242895734528,
+          -0.0020821453249714895,
+          -2.396506723231296,
+          0.07801077432614141
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4599.999999999998,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 9164.991283673611,
+        "Pgas": 4013917.4564322145,
+        "P": 4013935.2497934336,
+        "rho": 1.4243258467039018e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7023951142892599,
+          -0.0006069512555804124,
+          -3.2493035136397492,
+          0.6464638787574198
+        ],
+        "composition_derivatives": [
+          -0.21419846608887283,
+          -0.0010844093447944794,
+          -2.355789042413938,
+          0.07269095758094876
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4799.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 9427.77500925744,
+        "Pgas": 2415058.7303150385,
+        "P": 2415078.653859762,
+        "rho": 8.312849713999345e-06,
+        "logarithmic_thermal_derivatives": [
+          0.5932386031541625,
+          0.0028220017523086227,
+          -3.1115032290375595,
+          0.6423229909686272
+        ],
+        "composition_derivatives": [
+          -0.2047150160243316,
+          -0.0026124335358675703,
+          -2.468078159851256,
+          0.08014208825067531
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4799.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 9443.102638405791,
+        "Pgas": 3495503.535755492,
+        "P": 3495523.5891829254,
+        "rho": 1.2022182336982657e-05,
+        "logarithmic_thermal_derivatives": [
+          0.6302496181475021,
+          0.0028220017523086227,
+          -3.1450890559051223,
+          0.6423245766200947
+        ],
+        "composition_derivatives": [
+          -0.20908085551524663,
+          -0.0021956435117650415,
+          -2.4287662754955006,
+          0.07601436127511459
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4999.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 9658.87617722689,
+        "Pgas": 2126981.824429947,
+        "P": 2127003.774512848,
+        "rho": 7.133501164501305e-06,
+        "logarithmic_thermal_derivatives": [
+          0.5932386031541625,
+          0.005446640391451041,
+          -3.1114918757137384,
+          0.6399409797992021
+        ],
+        "composition_derivatives": [
+          -0.2206149877585839,
+          -0.0027834747043528098,
+          -2.517585162373741,
+          0.07907950668065841
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4999.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 9689.207545792964,
+        "Pgas": 3074330.9591462244,
+        "P": 3074353.186246317,
+        "rho": 1.0288721722474807e-05,
+        "logarithmic_thermal_derivatives": [
+          0.6302496181475021,
+          0.005446640391451041,
+          -3.1450805966260402,
+          0.639942889838034
+        ],
+        "composition_derivatives": [
+          -0.2122748496990734,
+          -0.002457966551854056,
+          -2.4655445801292597,
+          0.07783913373908533
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3000.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4598.533554556204,
+        "Pgas": 9366510.447901335,
+        "P": 9366511.575636724,
+        "rho": 6.710795007971173e-05,
+        "logarithmic_thermal_derivatives": [
+          1.3566717725316266,
+          -0.010161589885003153,
+          -4.313681563256447,
+          0.7014807426022817
+        ],
+        "composition_derivatives": [
+          -0.36271347226581896,
+          0.03075152334378705,
+          -0.13103787314335097,
+          -0.028513695603907166
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3000.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4571.713037833903,
+        "Pgas": 14026458.46031785,
+        "P": 14026459.561972875,
+        "rho": 0.0001034598394494553,
+        "logarithmic_thermal_derivatives": [
+          1.116730449169978,
+          -0.0020570281692418035,
+          -3.9455227959253047,
+          0.7006684047576375
+        ],
+        "composition_derivatives": [
+          -0.31970254662407277,
+          0.025852040196460917,
+          -0.16463351581534091,
+          -0.026185263725459245
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3000.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4566.30278208019,
+        "Pgas": 20994964.517195374,
+        "P": 20994965.613644768,
+        "rho": 0.0001583730960433652,
+        "logarithmic_thermal_derivatives": [
+          0.957408275785923,
+          -0.0020570281692418035,
+          -3.7857072013164883,
+          0.7006684234135329
+        ],
+        "composition_derivatives": [
+          -0.29062052514400905,
+          0.02252559073489186,
+          -0.18492273115719682,
+          -0.02579972162800098
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3199.999999999999,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 5019.322929724717,
+        "Pgas": 7090401.052868105,
+        "P": 7090402.653569494,
+        "rho": 4.433316384719139e-05,
+        "logarithmic_thermal_derivatives": [
+          2.1833525932304383,
+          -0.03706258601612333,
+          -5.524369335666608,
+          0.7427567695323842
+        ],
+        "composition_derivatives": [
+          -0.5236532924806144,
+          0.046812582447521345,
+          0.102055015808213,
+          -0.05765384562555138
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4913.370244594844,
+        "Pgas": 10873266.772559555,
+        "P": 10873268.242323996,
+        "rho": 7.097283212375999e-05,
+        "logarithmic_thermal_derivatives": [
+          1.720967647099883,
+          -0.019919416813928947,
+          -5.039061631692907,
+          0.7185860905334055
+        ],
+        "composition_derivatives": [
+          -0.41840166219573294,
+          0.03667596010595074,
+          -0.04135120056817995,
+          -0.04173818907271364
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4857.352675277326,
+        "Pgas": 16443966.867661191,
+        "P": 16443968.271535799,
+        "rho": 0.00011109838225773931,
+        "logarithmic_thermal_derivatives": [
+          1.367587322556318,
+          -0.019919416813928947,
+          -4.597023215318768,
+          0.7185861302861901
+        ],
+        "composition_derivatives": [
+          -0.3564155927175717,
+          0.029476552838324382,
+          -0.12715486456549102,
+          -0.035144669182525574
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3399.999999999998,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 5729.681676287489,
+        "Pgas": 5072475.222570883,
+        "P": 5072477.940585254,
+        "rho": 2.7066984662355065e-05,
+        "logarithmic_thermal_derivatives": [
+          2.77738884426887,
+          -0.08575900566735761,
+          -4.629168209439781,
+          0.7938670779430093
+        ],
+        "composition_derivatives": [
+          -1.2935285333194972,
+          0.06478996659549545,
+          0.43198686983039775,
+          -0.055439273470909996
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3399.999999999998,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 5453.6937058178055,
+        "Pgas": 8011002.294087928,
+        "P": 8011004.525052855,
+        "rho": 4.536988270186136e-05,
+        "logarithmic_thermal_derivatives": [
+          2.5152945888947613,
+          -0.05713593245629234,
+          -5.287334363915377,
+          0.7651396104335318
+        ],
+        "composition_derivatives": [
+          -1.2192150920348512,
+          0.05704774912168807,
+          0.5404459244466288,
+          -0.05845002824751488
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3399.999999999998,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 5277.238960035931,
+        "Pgas": 12444338.843824739,
+        "P": 12444340.799770514,
+        "rho": 7.40405502676354e-05,
+        "logarithmic_thermal_derivatives": [
+          2.1182289885486796,
+          -0.05713593245629234,
+          -5.252132470680312,
+          0.7651397309792934
+        ],
+        "composition_derivatives": [
+          -1.004331510379469,
+          0.04465605877548137,
+          0.3891833757998407,
+          -0.04891420905172739
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3600.0,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 6715.4518426179275,
+        "Pgas": 3893204.1742495783,
+        "P": 3893209.3032262833,
+        "rho": 1.761985910303244e-05,
+        "logarithmic_thermal_derivatives": [
+          2.1889939302869266,
+          -0.11178348043587683,
+          -3.631094134879938,
+          0.7285143807194077
+        ],
+        "composition_derivatives": [
+          -0.9814058388257496,
+          0.05331120830681594,
+          -0.654798337833248,
+          0.011633583314547967
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3600.0,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 6296.93730002437,
+        "Pgas": 5921560.390261758,
+        "P": 5921564.355298774,
+        "rho": 2.86459458884897e-05,
+        "logarithmic_thermal_derivatives": [
+          2.6370031408041825,
+          -0.09656229715437625,
+          -3.878481637527969,
+          0.7686346726544573
+        ],
+        "composition_derivatives": [
+          -1.1867003322396352,
+          0.06071061964373072,
+          -0.24098951498940482,
+          -0.020262809476678113
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3600.0,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 5956.467749141953,
+        "Pgas": 9217115.384117834,
+        "P": 9217118.558688136,
+        "rho": 4.739062456794304e-05,
+        "logarithmic_thermal_derivatives": [
+          2.6871621410369073,
+          -0.09656229715437625,
+          -4.512458157253073,
+          0.7686350481902646
+        ],
+        "composition_derivatives": [
+          -1.211303721103347,
+          0.05958114650190843,
+          0.1951111815229772,
+          -0.04408330847317262
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3799.9999999999995,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 7559.18919763847,
+        "Pgas": 3199224.579052603,
+        "P": 3199232.813427423,
+        "rho": 1.28463059046585e-05,
+        "logarithmic_thermal_derivatives": [
+          1.3691319405458273,
+          -0.06970449158137626,
+          -3.51521906650359,
+          0.705278303409542
+        ],
+        "composition_derivatives": [
+          -0.5075062688811821,
+          0.020236771982980448,
+          -1.2702389478285279,
+          0.030578392281844582
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3799.9999999999995,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 7261.8804078313415,
+        "Pgas": 4801367.371597091,
+        "P": 4801374.384957221,
+        "rho": 2.0082813712539117e-05,
+        "logarithmic_thermal_derivatives": [
+          1.7868381446554054,
+          -0.09185114398565375,
+          -3.7083047522021113,
+          0.7090884334275394
+        ],
+        "composition_derivatives": [
+          -0.7090577740515996,
+          0.034983346221534144,
+          -0.897315435237703,
+          0.01677772990995626
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        3799.9999999999995,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 6887.891644266454,
+        "Pgas": 7221666.660725104,
+        "P": 7221672.337151308,
+        "rho": 3.1887112464987425e-05,
+        "logarithmic_thermal_derivatives": [
+          2.271948189513978,
+          -0.09185114398565375,
+          -3.832068816158337,
+          0.7090891597081843
+        ],
+        "composition_derivatives": [
+          -0.9508182529368877,
+          0.05097856979819559,
+          -0.5812225980386874,
+          0.004215270827521164
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4000.000000000001,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 8109.135155204871,
+        "Pgas": 2671393.129998646,
+        "P": 2671404.0350552914,
+        "rho": 9.990292419774588e-06,
+        "logarithmic_thermal_derivatives": [
+          1.3691319405458273,
+          -0.032484538477206115,
+          -3.5152055043513166,
+          0.6880731345810849
+        ],
+        "composition_derivatives": [
+          -0.28990678648265733,
+          0.005576678871743185,
+          -1.7924681442786756,
+          0.05238163149585429
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4000.000000000001,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 7958.906528427158,
+        "Pgas": 3969693.0159208695,
+        "P": 3969703.1350558097,
+        "rho": 1.513404222192127e-05,
+        "logarithmic_thermal_derivatives": [
+          1.1620487833346544,
+          -0.04862513263519652,
+          -3.667947026607531,
+          0.698060170113894
+        ],
+        "composition_derivatives": [
+          -0.3940238421732314,
+          0.012533289162893526,
+          -1.5207860454642104,
+          0.037408104292617005
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4000.000000000001,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 7739.218730010424,
+        "Pgas": 5932975.2216008715,
+        "P": 5932984.268885526,
+        "rho": 2.3275457748079584e-05,
+        "logarithmic_thermal_derivatives": [
+          1.4891163545210873,
+          -0.04862513263519652,
+          -3.8684366137190116,
+          0.6980610842573768
+        ],
+        "composition_derivatives": [
+          -0.5442102347331699,
+          0.024161200176300263,
+          -1.2175529191920607,
+          0.02670135553376219
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 8423.186244679871,
+        "Pgas": 3319213.953379509,
+        "P": 3319226.648457818,
+        "rho": 1.1945126444682751e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8888464267215852,
+          -0.020903802307405073,
+          -3.4744389287180155,
+          0.6810671122466665
+        ],
+        "composition_derivatives": [
+          -0.25835533243114395,
+          0.0029198586065019337,
+          -1.9793469602615417,
+          0.05599601857097476
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 8322.435785246,
+        "Pgas": 4912502.1873376295,
+        "P": 4912514.285839107,
+        "rho": 1.790319010037972e-05,
+        "logarithmic_thermal_derivatives": [
+          1.0417172415950233,
+          -0.020903802307405073,
+          -3.71257783363321,
+          0.6810681536849343
+        ],
+        "composition_derivatives": [
+          -0.32185385982908427,
+          0.007559394582203292,
+          -1.768694695470702,
+          0.043403132273137725
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4400.0,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 8778.778897131358,
+        "Pgas": 2823834.716563649,
+        "P": 2823849.694990895,
+        "rho": 9.739710832173721e-06,
+        "logarithmic_thermal_derivatives": [
+          0.7530874394345233,
+          -0.008549769929327766,
+          -3.3482768397708584,
+          0.6618221007146555
+        ],
+        "composition_derivatives": [
+          -0.21872909719801958,
+          -0.0003876668872177361,
+          -2.2471735219100615,
+          0.06671431530361581
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4400.0,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 8735.679027783253,
+        "Pgas": 4133288.5154380025,
+        "P": 4133303.2018749253,
+        "rho": 1.4335576717952532e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8402799251820738,
+          -0.008549769929327766,
+          -3.490044455810033,
+          0.661823319497251
+        ],
+        "composition_derivatives": [
+          -0.24457759694847792,
+          0.001634789550060217,
+          -2.15379567261857,
+          0.05813663701068843
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4599.999999999998,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 9077.632168870268,
+        "Pgas": 2433322.197112691,
+        "P": 2433339.3216992025,
+        "rho": 8.105287643019305e-06,
+        "logarithmic_thermal_derivatives": [
+          0.6555976923895912,
+          -0.0018167120524168467,
+          -3.2822085249783464,
+          0.6508745030862174
+        ],
+        "composition_derivatives": [
+          -0.2035358532295959,
+          -0.00158488521153918,
+          -2.380242282893072,
+          0.07123426751227373
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4599.999999999998,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 9068.143892930457,
+        "Pgas": 3539316.506404229,
+        "P": 3539333.5595059185,
+        "rho": 1.1810543065679139e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7109268928611527,
+          -0.0018167120524168467,
+          -3.344626598066621,
+          0.6508759637204927
+        ],
+        "composition_derivatives": [
+          -0.2150691727616263,
+          -0.0007216148978329541,
+          -2.3422148425889553,
+          0.06703525194407106
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4799.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 9334.482783080164,
+        "Pgas": 2116081.829780376,
+        "P": 2116100.9763425495,
+        "rho": 6.843357059211894e-06,
+        "logarithmic_thermal_derivatives": [
+          0.5755691320309779,
+          0.0022739761837478056,
+          -3.1700039247611027,
+          0.6462594431526006
+        ],
+        "composition_derivatives": [
+          -0.2051648691699318,
+          -0.0024249947251980867,
+          -2.4507908571713717,
+          0.07293952177777428
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4799.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 9346.709677054941,
+        "Pgas": 3069719.9742712677,
+        "P": 3069739.221348213,
+        "rho": 9.923478717646822e-06,
+        "logarithmic_thermal_derivatives": [
+          0.6274877188790526,
+          0.0022739761837478056,
+          -3.1948985288036713,
+          0.6462612132721931
+        ],
+        "composition_derivatives": [
+          -0.21047395063583826,
+          -0.0016151872115212594,
+          -2.4153763925008485,
+          0.07043555185004281
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4999.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 9556.401549113445,
+        "Pgas": 1859222.298247861,
+        "P": 1859243.3315437022,
+        "rho": 5.862007951505089e-06,
+        "logarithmic_thermal_derivatives": [
+          0.5755691320309779,
+          0.005955786292325627,
+          -3.1699915310955475,
+          0.6444937588292521
+        ],
+        "composition_derivatives": [
+          -0.22000142904162837,
+          -0.003039124169731863,
+          -2.5011028091489873,
+          0.07221244652351767
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4999.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 9589.221194121921,
+        "Pgas": 2694365.534456943,
+        "P": 2694386.858184086,
+        "rho": 8.475141645458071e-06,
+        "logarithmic_thermal_derivatives": [
+          0.6274877188790526,
+          0.005955786292325627,
+          -3.1948891488830085,
+          0.6444958683238613
+        ],
+        "composition_derivatives": [
+          -0.21335845066807202,
+          -0.0020064661481046277,
+          -2.4516629068254523,
+          0.07205550408487671
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3000.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4615.534332687487,
+        "Pgas": 9334516.335535113,
+        "P": 9334517.480040163,
+        "rho": 6.463570523617238e-05,
+        "logarithmic_thermal_derivatives": [
+          1.3865349776140476,
+          -0.011182942762632209,
+          -4.367863463053223,
+          0.7019661301393492
+        ],
+        "composition_derivatives": [
+          -0.37442690527396183,
+          0.03075152334378705,
+          -0.11762893310654966,
+          -0.02851369526917028
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3000.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4585.917632613718,
+        "Pgas": 13982453.23505586,
+        "P": 13982454.35046647,
+        "rho": 9.967670274521968e-05,
+        "logarithmic_thermal_derivatives": [
+          1.1368559550886914,
+          -0.0027504643190781053,
+          -3.974441209492304,
+          0.7007487751439727
+        ],
+        "composition_derivatives": [
+          -0.32810335465432755,
+          0.025852040196460917,
+          -0.15506457192951673,
+          -0.02618526356593524
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3000.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4578.662519294371,
+        "Pgas": 20930065.307883628,
+        "P": 20930066.416252464,
+        "rho": 0.00015258567859813513,
+        "logarithmic_thermal_derivatives": [
+          0.9703325795615569,
+          -0.0027504643190781053,
+          -3.8030827769084095,
+          0.7007487942305222
+        ],
+        "composition_derivatives": [
+          -0.2970032306612102,
+          0.02252559073489186,
+          -0.17876552342577548,
+          -0.02579972154322734
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3199.999999999999,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 5047.598370369996,
+        "Pgas": 7041515.640374888,
+        "P": 7041517.277451244,
+        "rho": 4.256497645262653e-05,
+        "logarithmic_thermal_derivatives": [
+          2.2189369157898113,
+          -0.039175680007204505,
+          -5.519985921457961,
+          0.7460745662843461
+        ],
+        "composition_derivatives": [
+          -0.5457657363621022,
+          0.046812582447521345,
+          0.13520308636936804,
+          -0.0576538439765903
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4935.042208547327,
+        "Pgas": 10818943.239197178,
+        "P": 10818944.735065125,
+        "rho": 6.827930991099476e-05,
+        "logarithmic_thermal_derivatives": [
+          1.7612914397874704,
+          -0.021420214981592522,
+          -5.072140986243461,
+          0.719960583697851
+        ],
+        "composition_derivatives": [
+          -0.4339178693492729,
+          0.03667596010595074,
+          -0.018375135863390932,
+          -0.04173818849014903
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4874.564459510134,
+        "Pgas": 16374762.740799759,
+        "P": 16374764.164678615,
+        "rho": 0.00010697156787427643,
+        "logarithmic_thermal_derivatives": [
+          1.3976335423574824,
+          -0.021420214981592522,
+          -4.62427857321397,
+          0.719960625033765
+        ],
+        "composition_derivatives": [
+          -0.3671327205469271,
+          0.029476552838324382,
+          -0.10988298477381918,
+          -0.0351446689403285
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3399.999999999998,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 5774.40240441457,
+        "Pgas": 5038841.40150194,
+        "P": 5038844.205372447,
+        "rho": 2.599999282282877e-05,
+        "logarithmic_thermal_derivatives": [
+          2.753290012581573,
+          -0.08737295878411189,
+          -4.488353557131064,
+          0.7932394437532883
+        ],
+        "composition_derivatives": [
+          -1.2897339060866946,
+          0.06478996659549545,
+          0.3798109314561816,
+          -0.055439266985288095
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3399.999999999998,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 5491.156302962458,
+        "Pgas": 7955009.616340783,
+        "P": 7955011.909240147,
+        "rho": 4.35602731623864e-05,
+        "logarithmic_thermal_derivatives": [
+          2.522984523466363,
+          -0.05971912097092158,
+          -5.207163097450488,
+          0.7671274561388786
+        ],
+        "composition_derivatives": [
+          -1.2369667931634727,
+          0.05704774912168807,
+          0.5416962033103023,
+          -0.058450025453977844
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3399.999999999998,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 5305.594149222389,
+        "Pgas": 12371508.148027219,
+        "P": 12371510.146351073,
+        "rho": 7.11896660062326e-05,
+        "logarithmic_thermal_derivatives": [
+          2.1495631422952783,
+          -0.05971912097092158,
+          -5.241990391382856,
+          0.7671275836066931
+        ],
+        "composition_derivatives": [
+          -1.037953038079868,
+          0.04465605877548137,
+          0.4125948134959385,
+          -0.04891420806176568
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3600.0,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 6758.550616739821,
+        "Pgas": 3898642.8753020396,
+        "P": 3898648.1372197634,
+        "rho": 1.7097999005086923e-05,
+        "logarithmic_thermal_derivatives": [
+          2.115586563205426,
+          -0.11024098914965919,
+          -3.5890466530698317,
+          0.7218652135929546
+        ],
+        "composition_derivatives": [
+          -0.9474085622764191,
+          0.05331120830681594,
+          -0.6886364444609852,
+          0.01163358981881586
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3600.0,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 6342.97972808318,
+        "Pgas": 5907179.262436868,
+        "P": 5907183.34471945,
+        "rho": 2.7659732106408842e-05,
+        "logarithmic_thermal_derivatives": [
+          2.5799025031510894,
+          -0.09679774865179169,
+          -3.7962715789623864,
+          0.7636690136696309
+        ],
+        "composition_derivatives": [
+          -1.1724785789579306,
+          0.06071061964373072,
+          -0.3065545045011196,
+          -0.020262803825676547
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3600.0,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 5999.207537522115,
+        "Pgas": 9168485.503301317,
+        "P": 9168488.769971702,
+        "rho": 4.560749159189622e-05,
+        "logarithmic_thermal_derivatives": [
+          2.6680690717022344,
+          -0.09679774865179169,
+          -4.405261440361217,
+          0.7636693989521548
+        ],
+        "composition_derivatives": [
+          -1.2148666727522728,
+          0.05958114650190843,
+          0.1435360894888826,
+          -0.04408330512039687
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3799.9999999999995,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 7577.568335251642,
+        "Pgas": 3210985.350825234,
+        "P": 3210993.6655756314,
+        "rho": 1.25451913442284e-05,
+        "logarithmic_thermal_derivatives": [
+          1.3348348419805802,
+          -0.06663040078835891,
+          -3.4642104263567703,
+          0.7024014121416595
+        ],
+        "composition_derivatives": [
+          -0.49229305949789276,
+          0.020236771982980448,
+          -1.316414935423139,
+          0.030578393067806874
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3799.9999999999995,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 7292.429871497412,
+        "Pgas": 4811043.730811522,
+        "P": 4811050.862934382,
+        "rho": 1.9544148924218553e-05,
+        "logarithmic_thermal_derivatives": [
+          1.7343165260071203,
+          -0.0885167580642996,
+          -3.660040059617808,
+          0.7064696512536313
+        ],
+        "composition_derivatives": [
+          -0.6878325254071583,
+          0.034983346221534144,
+          -0.9435530689866582,
+          0.01677773258828735
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        3799.9999999999995,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 6930.15697381594,
+        "Pgas": 7225320.40237034,
+        "P": 7225326.219410441,
+        "rho": 3.0921961109600324e-05,
+        "logarithmic_thermal_derivatives": [
+          2.209209299507961,
+          -0.0885167580642996,
+          -3.779462791684919,
+          0.7064703696152023
+        ],
+        "composition_derivatives": [
+          -0.9236799641073257,
+          0.05097856979819559,
+          -0.6195183898720789,
+          0.004215274634537135
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4000.000000000001,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 8114.563616491998,
+        "Pgas": 2688237.887028915,
+        "P": 2688248.8213153835,
+        "rho": 9.79923278822595e-06,
+        "logarithmic_thermal_derivatives": [
+          1.3348348419805802,
+          -0.03103435409535571,
+          -3.4641974148961374,
+          0.6849517488314861
+        ],
+        "composition_derivatives": [
+          -0.284843519413087,
+          0.005576678871743185,
+          -1.8260363156307844,
+          0.05238163193813375
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4000.000000000001,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 7970.88568769805,
+        "Pgas": 3987552.8995484374,
+        "P": 3987563.079743363,
+        "rho": 1.4805278712606593e-05,
+        "logarithmic_thermal_derivatives": [
+          1.1384044343884057,
+          -0.046201162592385714,
+          -3.622229655308842,
+          0.6958282383020323
+        ],
+        "composition_derivatives": [
+          -0.38370065201715947,
+          0.012533289162893526,
+          -1.5564032009717899,
+          0.03740810434218695
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4000.000000000001,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 7761.689947717603,
+        "Pgas": 5952015.851582691,
+        "P": 5952025.004402893,
+        "rho": 2.2708164403942727e-05,
+        "logarithmic_thermal_derivatives": [
+          1.4482840124864538,
+          -0.046201162592385714,
+          -3.8273582374214,
+          0.695829132341143
+        ],
+        "composition_derivatives": [
+          -0.5281580762885841,
+          0.024161200176300263,
+          -1.255476161795572,
+          0.026701356432731454
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 8426.138103332352,
+        "Pgas": 3341592.655951016,
+        "P": 3341605.36883436,
+        "rho": 1.1725623924044622e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8803145495536739,
+          -0.019936638368443838,
+          -3.4467905899363083,
+          0.6784419937947841
+        ],
+        "composition_derivatives": [
+          -0.25551765135248505,
+          0.0029198586065019337,
+          -2.003198562131421,
+          0.055996019469974706
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 8329.988719583007,
+        "Pgas": 4938155.111413441,
+        "P": 4938167.253894186,
+        "rho": 1.7537536905869785e-05,
+        "logarithmic_thermal_derivatives": [
+          1.0264345166399096,
+          -0.019936638368443838,
+          -3.674572130309732,
+          0.6784430139562115
+        ],
+        "composition_derivatives": [
+          -0.31578591052259164,
+          0.007559394582203292,
+          -1.7985215736847378,
+          0.04340313232432303
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4400.0,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 8778.370517603717,
+        "Pgas": 2846532.3981029363,
+        "P": 2846547.373743254,
+        "rho": 9.577120725831265e-06,
+        "logarithmic_thermal_derivatives": [
+          0.7498554821259802,
+          -0.0081281659274417,
+          -3.3360748891371674,
+          0.6600339974413214
+        ],
+        "composition_derivatives": [
+          -0.21680867719736907,
+          -0.0003876668872177361,
+          -2.2645322657637372,
+          0.06671431825772509
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4400.0,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 8737.392915502976,
+        "Pgas": 4162224.8844089424,
+        "P": 4162239.58237482,
+        "rho": 1.4078075950074671e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8339186806015846,
+          -0.0081281659274417,
+          -3.4660220613545474,
+          0.6600351953596189
+        ],
+        "composition_derivatives": [
+          -0.2416409168907423,
+          0.001634789550060217,
+          -2.173946489169109,
+          0.05813663814234622
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4599.999999999998,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 9075.90589243485,
+        "Pgas": 2454211.8243623367,
+        "P": 2454228.93592636,
+        "rho": 7.9756995245053e-06,
+        "logarithmic_thermal_derivatives": [
+          0.6532289410976375,
+          -0.0016367535562729074,
+          -3.277400349289779,
+          0.6499991810895074
+        ],
+        "composition_derivatives": [
+          -0.20234242895734528,
+          -0.00158488521153918,
+          -2.3965058790067157,
+          0.07123427257066173
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4599.999999999998,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 9067.358682000686,
+        "Pgas": 3567902.5491176625,
+        "P": 3567919.596313604,
+        "rho": 1.1614433139863058e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7084073992259903,
+          -0.0016367535562729074,
+          -3.335039133015749,
+          0.6500006218033847
+        ],
+        "composition_derivatives": [
+          -0.21419846608887283,
+          -0.0007216148978329541,
+          -2.3557885252398734,
+          0.06703525475900764
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4799.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 9331.766849685408,
+        "Pgas": 2134684.8349817093,
+        "P": 2134703.9592702985,
+        "rho": 6.736250040553572e-06,
+        "logarithmic_thermal_derivatives": [
+          0.57376384215695,
+          0.002442789752352681,
+          -3.172141155648758,
+          0.6457374744467476
+        ],
+        "composition_derivatives": [
+          -0.2047150160243316,
+          -0.0024249947251980867,
+          -2.4680769903676487,
+          0.07293952915619424
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4799.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 9344.89825029539,
+        "Pgas": 3095776.2050526044,
+        "P": 3095795.437213269,
+        "rho": 9.76404893910438e-06,
+        "logarithmic_thermal_derivatives": [
+          0.6263375185289135,
+          0.002442789752352681,
+          -3.1901364714610603,
+          0.6457392210839588
+        ],
+        "composition_derivatives": [
+          -0.20908085551524663,
+          -0.0016151872115212594,
+          -2.428765518347258,
+          0.07043555627853595
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4999.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 9552.917013637392,
+        "Pgas": 1875403.5992377205,
+        "P": 1875424.6018729876,
+        "rho": 5.770422108620526e-06,
+        "logarithmic_thermal_derivatives": [
+          0.57376384215695,
+          0.006171055578958473,
+          -3.172128908390119,
+          0.6444610562868452
+        ],
+        "composition_derivatives": [
+          -0.2206149877585839,
+          -0.003039124169731863,
+          -2.5175837248391097,
+          0.0722124561379998
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4999.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 9586.912618332295,
+        "Pgas": 2717764.01786243,
+        "P": 2717785.3210624973,
+        "rho": 8.341291619377132e-06,
+        "logarithmic_thermal_derivatives": [
+          0.6263375185289135,
+          0.006171055578958473,
+          -3.190127210016161,
+          0.6444631390258303
+        ],
+        "composition_derivatives": [
+          -0.2122748496990734,
+          -0.0020064661481046277,
+          -2.4655435963615893,
+          0.07205551014617669
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        2599.9999999999986,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4003.462472831161,
+        "Pgas": 14466955.880858717,
+        "P": 14466956.528706264,
+        "rho": 0.00011972541149351721,
+        "logarithmic_thermal_derivatives": [
+          0.6254262432357223,
+          0.013399865664753818,
+          -2.95286539534723,
+          0.7047995422056019
+        ],
+        "composition_derivatives": [
+          -0.14594235171400113,
+          0.015321844006131714,
+          -0.1410291880156798,
+          -0.020099456862702602
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        2599.9999999999986,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4034.462920379288,
+        "Pgas": 21705862.614991754,
+        "P": 21705863.283139773,
+        "rho": 0.00018084337995506362,
+        "logarithmic_thermal_derivatives": [
+          0.5775242636533875,
+          0.014470030802630873,
+          -3.0059959683592896,
+          0.7017766452208689
+        ],
+        "composition_derivatives": [
+          -0.1426396944421506,
+          0.0144650404101787,
+          -0.14936208106011556,
+          -0.022423425932866628
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        2599.9999999999986,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4068.2088107028003,
+        "Pgas": 32510317.89133742,
+        "P": 32510318.58212213,
+        "rho": 0.0002720318261249841,
+        "logarithmic_thermal_derivatives": [
+          0.5437028034063758,
+          0.014470030802630873,
+          -3.0384753042180805,
+          0.701776651359615
+        ],
+        "composition_derivatives": [
+          -0.13935872088572987,
+          0.013747305230830996,
+          -0.15822836051990605,
+          -0.023918759777270916
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        2800.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4193.386643141617,
+        "Pgas": 11623585.415824521,
+        "P": 11623586.1956356,
+        "rho": 8.750173540182177e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8110611463957014,
+          0.0072330254818702144,
+          -3.3191746646422198,
+          0.6979595741832656
+        ],
+        "composition_derivatives": [
+          -0.15800982455031717,
+          0.017557624258215946,
+          -0.1550912409626145,
+          -0.016820807565310972
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        2800.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4210.882895812785,
+        "Pgas": 17371207.82586037,
+        "P": 17371208.618767686,
+        "rho": 0.00013298195917349056,
+        "logarithmic_thermal_derivatives": [
+          0.7282692169796405,
+          0.010115898845796778,
+          -3.3384898343794243,
+          0.6975952932896007
+        ],
+        "composition_derivatives": [
+          -0.1514831843124769,
+          0.016098177453855885,
+          -0.1571839587537185,
+          -0.021200000656146207
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        2800.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4235.475155726205,
+        "Pgas": 25955466.9815808,
+        "P": 25955467.79317386,
+        "rho": 0.00020115185433181075,
+        "logarithmic_thermal_derivatives": [
+          0.6688558626086376,
+          0.010115898845796778,
+          -3.342256773359555,
+          0.697595302736684
+        ],
+        "composition_derivatives": [
+          -0.1464158923241418,
+          0.015128177325496055,
+          -0.16040314573378367,
+          -0.02280210151596686
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        3000.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4434.727243443196,
+        "Pgas": 9244574.491192395,
+        "P": 9244575.466625353,
+        "rho": 6.178173806078681e-05,
+        "logarithmic_thermal_derivatives": [
+          1.107301602007027,
+          -0.0026898268179014195,
+          -3.952512705115652,
+          0.6956445841249096
+        ],
+        "composition_derivatives": [
+          -0.18004946000166583,
+          0.020990329170326477,
+          -0.16656085741056992,
+          -0.017339577873905228
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        3000.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4427.865874925846,
+        "Pgas": 13797426.554453975,
+        "P": 13797427.523864206,
+        "rho": 9.500839430051869e-05,
+        "logarithmic_thermal_derivatives": [
+          0.9637998988072525,
+          0.0029950364113116024,
+          -3.754501426298255,
+          0.6971438082563141
+        ],
+        "composition_derivatives": [
+          -0.16617927181304284,
+          0.018851366837926174,
+          -0.16957929124177376,
+          -0.01821114340864874
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        3000.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4435.506461384119,
+        "Pgas": 20610287.741560023,
+        "P": 20610288.71767873,
+        "rho": 0.0001452581889367649,
+        "logarithmic_thermal_derivatives": [
+          0.8554613045603219,
+          0.0029950364113116024,
+          -3.6961980426396406,
+          0.6971438239461974
+        ],
+        "composition_derivatives": [
+          -0.15749573576978776,
+          0.01720666947055211,
+          -0.17706442684194865,
+          -0.020668715005245083
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        3199.999999999999,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4763.247677598478,
+        "Pgas": 7163133.007212233,
+        "P": 7163134.305414693,
+        "rho": 4.155967118488391e-05,
+        "logarithmic_thermal_derivatives": [
+          1.679223076025778,
+          -0.018778505118502764,
+          -5.143507341321742,
+          0.7178445677743005
+        ],
+        "composition_derivatives": [
+          -0.5236532924806144,
+          0.02838554587960938,
+          0.10205511360874844,
+          -0.03003044687584377
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        3199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4712.03533054083,
+        "Pgas": 10828397.58213294,
+        "P": 10828398.825398555,
+        "rho": 6.554677411609012e-05,
+        "logarithmic_thermal_derivatives": [
+          1.343514011933081,
+          -0.00915133364223486,
+          -4.61080778987811,
+          0.7036804712495953
+        ],
+        "composition_derivatives": [
+          -0.41840166219573294,
+          0.02374578747798171,
+          -0.041351167340349916,
+          -0.022591466454701396
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        3199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4687.277920467657,
+        "Pgas": 16236197.752880959,
+        "P": 16236198.97022291,
+        "rho": 0.00010186484776953727,
+        "logarithmic_thermal_derivatives": [
+          1.1325409312001398,
+          -0.00915133364223486,
+          -4.290760989114556,
+          0.7036805007412891
+        ],
+        "composition_derivatives": [
+          -0.3564155927175717,
+          0.02054561298052829,
+          -0.1271548510659502,
+          -0.020751435301241683
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        3399.999999999998,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 5273.698846325685,
+        "Pgas": 5244207.522368943,
+        "P": 5244209.473071592,
+        "rho": 2.603294008174379e-05,
+        "logarithmic_thermal_derivatives": [
+          1.679223076025778,
+          -0.05413395862664139,
+          -5.143505079082675,
+          0.7739461040837616
+        ],
+        "composition_derivatives": [
+          -0.8292799057509382,
+          0.046706038244154965,
+          0.3329509459502485,
+          -0.05073943739953665
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        3399.999999999998,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 5111.893958369973,
+        "Pgas": 8187786.076671165,
+        "P": 8187787.798766202,
+        "rho": 4.2927427559784585e-05,
+        "logarithmic_thermal_derivatives": [
+          1.343514011933081,
+          -0.03137012290096486,
+          -4.610806836228172,
+          0.7373863962689363
+        ],
+        "composition_derivatives": [
+          -0.6472315010479789,
+          0.034986581936663715,
+          0.21827598370472698,
+          -0.04001185521863017
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.0,
+        3399.999999999998,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 5020.411381504661,
+        "Pgas": 12517371.210823024,
+        "P": 12517372.812913328,
+        "rho": 6.874702687474239e-05,
+        "logarithmic_thermal_derivatives": [
+          1.1325409312001398,
+          -0.03137012290096486,
+          -4.290760521496899,
+          0.7373864673135136
+        ],
+        "composition_derivatives": [
+          -0.49891157857043145,
+          0.027768404845682968,
+          0.05851541989224958,
+          -0.028540985182508194
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        2599.9999999999986,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4010.8300951884244,
+        "Pgas": 14432104.566304801,
+        "P": 14432105.218934495,
+        "rho": 0.00011570365248419234,
+        "logarithmic_thermal_derivatives": [
+          0.6290465505043414,
+          0.013221255229330708,
+          -2.947556413746766,
+          0.704315084420815
+        ],
+        "composition_derivatives": [
+          -0.1479992201321032,
+          0.015321844006131714,
+          -0.14011764242887517,
+          -0.02009945682693353
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        2599.9999999999986,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4041.4720421543834,
+        "Pgas": 21647534.742082376,
+        "P": 21647535.414885633,
+        "rho": 0.00017472064439478366,
+        "logarithmic_thermal_derivatives": [
+          0.5801687354901759,
+          0.014320410757258983,
+          -3.004014926456982,
+          0.7014649258718654
+        ],
+        "composition_derivatives": [
+          -0.14431935746454563,
+          0.0144650404101787,
+          -0.14821288010788167,
+          -0.022423425908943164
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        2599.9999999999986,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4074.9255784185057,
+        "Pgas": 32417138.894267585,
+        "P": 32417139.58962565,
+        "rho": 0.0002627767088612166,
+        "logarithmic_thermal_derivatives": [
+          0.545938792957088,
+          0.014320410757258983,
+          -3.0366671455883303,
+          0.7014649320750797
+        ],
+        "composition_derivatives": [
+          -0.14071404543367616,
+          0.013747305230830996,
+          -0.1571985891358171,
+          -0.023918759761319387
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        2800.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4202.2310659389495,
+        "Pgas": 11600146.899711058,
+        "P": 11600147.686121888,
+        "rho": 8.462239535915132e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8170316848089527,
+          0.006928787228863698,
+          -3.3200769692219994,
+          0.6970466815849644
+        ],
+        "composition_derivatives": [
+          -0.16092572524536805,
+          0.017557624258215946,
+          -0.1515168350358466,
+          -0.016820807503984014
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        2800.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4219.025262728013,
+        "Pgas": 17327071.628698334,
+        "P": 17327072.42775628,
+        "rho": 0.00012853201735791542,
+        "logarithmic_thermal_derivatives": [
+          0.733057867154173,
+          0.00991369130826314,
+          -3.3332912857591235,
+          0.6972613171192179
+        ],
+        "composition_derivatives": [
+          -0.1538293951706221,
+          0.016098177453855885,
+          -0.15413472066418188,
+          -0.021200000615811444
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        2800.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4243.17114149249,
+        "Pgas": 25884543.347042553,
+        "P": 25884544.164550465,
+        "rho": 0.0001943723297402588,
+        "logarithmic_thermal_derivatives": [
+          0.6724710050433913,
+          0.00991369130826314,
+          -3.3385461532096237,
+          0.6972613266764084
+        ],
+        "composition_derivatives": [
+          -0.14836143722273223,
+          0.015128177325496055,
+          -0.15812745375501427,
+          -0.022802101489790585
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3000.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4445.911689596678,
+        "Pgas": 9225358.835445566,
+        "P": 9225359.820756037,
+        "rho": 5.9790328234207726e-05,
+        "logarithmic_thermal_derivatives": [
+          1.1210519326540975,
+          -0.0031357177961233162,
+          -3.976109540824453,
+          0.6954628961701121
+        ],
+        "composition_derivatives": [
+          -0.18477599864914654,
+          0.020990329170326477,
+          -0.1610386575949067,
+          -0.017339577743179627
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3000.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4437.893771893403,
+        "Pgas": 13767307.436138738,
+        "P": 13767308.414360635,
+        "rho": 9.191242793962625e-05,
+        "logarithmic_thermal_derivatives": [
+          0.9729003626303552,
+          0.002652180575609009,
+          -3.7626460040291696,
+          0.6966314994430235
+        ],
+        "composition_derivatives": [
+          -0.16984383018629784,
+          0.018851366837926174,
+          -0.16449466015072656,
+          -0.018211143334340277
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3000.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4444.674358299102,
+        "Pgas": 20559232.492425594,
+        "P": 20559233.476639647,
+        "rho": 0.0001404580089483337,
+        "logarithmic_thermal_derivatives": [
+          0.8616695847336757,
+          0.002652180575609009,
+          -3.6963518506402,
+          0.696631515346302
+        ],
+        "composition_derivatives": [
+          -0.1604841243728158,
+          0.01720666947055211,
+          -0.17316310627275067,
+          -0.02066871495947989
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3199.999999999999,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4779.500228394288,
+        "Pgas": 7137365.990244563,
+        "P": 7137367.306256162,
+        "rho": 4.020513277300377e-05,
+        "logarithmic_thermal_derivatives": [
+          1.7154865448586918,
+          -0.019745715424674515,
+          -5.184498640331946,
+          0.719395306798713
+        ],
+        "composition_derivatives": [
+          -0.5457657363621022,
+          0.02838554587960938,
+          0.13520319789146354,
+          -0.030030446423664644
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4725.481397435299,
+        "Pgas": 10799081.794080298,
+        "P": 10799083.051597694,
+        "rho": 6.344132858072938e-05,
+        "logarithmic_thermal_derivatives": [
+          1.3657639706895282,
+          -0.009818446342412912,
+          -4.645289616763204,
+          0.7040640462724586
+        ],
+        "composition_derivatives": [
+          -0.4339178693492729,
+          0.02374578747798171,
+          -0.01837509839700356,
+          -0.022591466262889548
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4698.848537902601,
+        "Pgas": 16195817.107245993,
+        "P": 16195818.336652635,
+        "rho": 9.85807006599553e-05,
+        "logarithmic_thermal_derivatives": [
+          1.1468376805710818,
+          -0.009818446342412912,
+          -4.306179582146044,
+          0.7040640764057344
+        ],
+        "composition_derivatives": [
+          -0.3671327205469271,
+          0.02054561298052829,
+          -0.10988296976511543,
+          -0.020751435205321227
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3399.999999999998,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 5303.339462078692,
+        "Pgas": 5212373.901759559,
+        "P": 5212375.896688715,
+        "rho": 2.513578254975449e-05,
+        "logarithmic_thermal_derivatives": [
+          1.7154865448586918,
+          -0.0565770123251621,
+          -5.184496250967395,
+          0.7761823856421867
+        ],
+        "composition_derivatives": [
+          -0.8509806197725566,
+          0.046706038244154965,
+          0.3385907708403538,
+          -0.0507394348441462
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3399.999999999998,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 5133.40079744554,
+        "Pgas": 8148567.246678084,
+        "P": 8148568.997937427,
+        "rho": 4.1504480745604615e-05,
+        "logarithmic_thermal_derivatives": [
+          1.3657639706895282,
+          -0.0328748338513698,
+          -4.64528862139936,
+          0.7397776277333739
+        ],
+        "composition_derivatives": [
+          -0.6737049016700114,
+          0.034986581936663715,
+          0.24040180130863037,
+          -0.04001185439237764
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.3,
+        0.12,
+        3399.999999999998,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 5037.1683427324515,
+        "Pgas": 12474573.542369902,
+        "P": 12474575.16595715,
+        "rho": 6.654066479046672e-05,
+        "logarithmic_thermal_derivatives": [
+          1.1468376805710818,
+          -0.0328748338513698,
+          -4.306179099735902,
+          0.739777701586725
+        ],
+        "composition_derivatives": [
+          -0.5191767632861732,
+          0.027768404845682968,
+          0.08296329183451777,
+          -0.028540984880610416
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        2599.9999999999986,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 3916.773593976702,
+        "Pgas": 14164130.798413197,
+        "P": 14164131.39194452,
+        "rho": 0.00010668758602037099,
+        "logarithmic_thermal_derivatives": [
+          0.601000788418375,
+          0.014260461162024285,
+          -2.9813280213395075,
+          0.7026281848462189
+        ],
+        "composition_derivatives": [
+          -0.0826829403033424,
+          0.012750758483504121,
+          -0.11339502665638175,
+          -0.018960024832225173
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        2599.9999999999986,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 3949.058647656113,
+        "Pgas": 21224964.94133449,
+        "P": 21224965.554678466,
+        "rho": 0.00016099462576830178,
+        "logarithmic_thermal_derivatives": [
+          0.5596243880799676,
+          0.015324976029125637,
+          -3.021828021971979,
+          0.6994662996851922
+        ],
+        "composition_derivatives": [
+          -0.08230240944478705,
+          0.012365461632189005,
+          -0.12141369816373741,
+          -0.020986924715515946
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        2599.9999999999986,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 3984.050434087417,
+        "Pgas": 31747794.54338678,
+        "P": 31747795.178760257,
+        "rho": 0.0002418694593234267,
+        "logarithmic_thermal_derivatives": [
+          0.5294185680535861,
+          0.015324976029125637,
+          -3.0428772275971165,
+          0.6994663053547501
+        ],
+        "composition_derivatives": [
+          -0.08211226925433979,
+          0.012053149545894029,
+          -0.13130201076363793,
+          -0.02263154553211012
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        2800.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4095.1657874924917,
+        "Pgas": 11356299.114773659,
+        "P": 11356299.824050408,
+        "rho": 7.752647423786743e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7631439450029518,
+          0.008933715786264784,
+          -3.3441111730564956,
+          0.6974142612673581
+        ],
+        "composition_derivatives": [
+          -0.08637588069949305,
+          0.013912748389388028,
+          -0.13666428293029848,
+          -0.012352800038434846
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        2800.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4116.280078873516,
+        "Pgas": 16966427.224137615,
+        "P": 16966427.948155742,
+        "rho": 0.0001178998491614094,
+        "logarithmic_thermal_derivatives": [
+          0.6963178997264947,
+          0.011436317015032671,
+          -3.3654389852966555,
+          0.6967564485459072
+        ],
+        "composition_derivatives": [
+          -0.08454211215236604,
+          0.01316541388118458,
+          -0.13520278970077892,
+          -0.01738845298073255
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        2800.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4143.46807028191,
+        "Pgas": 25338419.247080315,
+        "P": 25338419.990417324,
+        "rho": 0.00017837447164957562,
+        "logarithmic_thermal_derivatives": [
+          0.6447667577340752,
+          0.011436317015032671,
+          -3.3784806877051454,
+          0.6967564572285835
+        ],
+        "composition_derivatives": [
+          -0.08349070054432663,
+          0.012696246202266172,
+          -0.13789791832698473,
+          -0.0199574865082386
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        3000.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4316.559590824189,
+        "Pgas": 9016468.315484691,
+        "P": 9016469.19103425,
+        "rho": 5.4227067204976855e-05,
+        "logarithmic_thermal_derivatives": [
+          0.9844608768177636,
+          0.0009244208980661028,
+          -3.849186080144032,
+          0.6948580518939006
+        ],
+        "composition_derivatives": [
+          -0.09140675826330523,
+          0.015082155860977624,
+          -0.14917705622546865,
+          -0.010436827766880548
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        3000.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4318.857213722331,
+        "Pgas": 13450889.05684583,
+        "P": 13450889.934261031,
+        "rho": 8.355123245262628e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8873759983611933,
+          0.005257763483507816,
+          -3.742363723195457,
+          0.6951933570917449
+        ],
+        "composition_derivatives": [
+          -0.08713219102760514,
+          0.01427066887135539,
+          -0.14492863526274877,
+          -0.011855354380674709
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        3000.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4331.948519755132,
+        "Pgas": 20070090.96642827,
+        "P": 20070091.854530413,
+        "rho": 0.0001278588550679787,
+        "logarithmic_thermal_derivatives": [
+          0.8063256232531728,
+          0.005257763483507816,
+          -3.716821625315636,
+          0.6951933712363356
+        ],
+        "composition_derivatives": [
+          -0.08515603133641565,
+          0.013471183716773163,
+          -0.14821368341159402,
+          -0.015792064210851345
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        3199.999999999999,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4599.714990841953,
+        "Pgas": 7033130.35629006,
+        "P": 7033131.48518483,
+        "rho": 3.631638057844512e-05,
+        "logarithmic_thermal_derivatives": [
+          0.9844608768177636,
+          -0.009960239998019205,
+          -3.8491855864043982,
+          0.7068344078779359
+        ],
+        "composition_derivatives": [
+          -0.10735198147510713,
+          0.0180934686162769,
+          -0.1489485064445063,
+          -0.013080097374391853
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        3199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4573.417640756223,
+        "Pgas": 10564703.156448627,
+        "P": 10564704.259747617,
+        "rho": 5.7100954416233354e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8873759983611933,
+          -0.003829190762889567,
+          -3.7423634373430397,
+          0.6980569950628023
+        ],
+        "composition_derivatives": [
+          -0.0970598560553682,
+          0.016155770547607466,
+          -0.16036613992553278,
+          -0.010777777998112609
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        3199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4563.347744376168,
+        "Pgas": 15789615.930806203,
+        "P": 15789617.024420124,
+        "rho": 8.876004799700516e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8063256232531728,
+          -0.003829190762889567,
+          -3.716821451682293,
+          0.6980570201528465
+        ],
+        "composition_derivatives": [
+          -0.09025807808966883,
+          0.014914836433544241,
+          -0.16165423240734367,
+          -0.010875558725504214
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2599.9999999999986,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 3922.7712013449263,
+        "Pgas": 14131941.153709745,
+        "P": 14131941.750884835,
+        "rho": 0.00010346400120232537,
+        "logarithmic_thermal_derivatives": [
+          0.6028823510175698,
+          0.014180141659741352,
+          -2.970629213567455,
+          0.7022056545205443
+        ],
+        "composition_derivatives": [
+          -0.08379963392579261,
+          0.012750758483504121,
+          -0.11246002363342299,
+          -0.01896002480750811
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2599.9999999999986,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 3954.9228293618553,
+        "Pgas": 21171578.580347534,
+        "P": 21171579.19734279,
+        "rho": 0.00015608476154869332,
+        "logarithmic_thermal_derivatives": [
+          0.5609197179492185,
+          0.015259871029584815,
+          -3.0160011645442473,
+          0.6991234597820273
+        ],
+        "composition_derivatives": [
+          -0.0832735742784921,
+          0.012365461632189005,
+          -0.12037524856638178,
+          -0.020986924698232823
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2599.9999999999986,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 3989.8170461139794,
+        "Pgas": 31661691.31093692,
+        "P": 31661691.94999701,
+        "rho": 0.0002344380347876933,
+        "logarithmic_thermal_derivatives": [
+          0.5304599080946417,
+          0.015259871029584815,
+          -3.038547233674241,
+          0.6991234654983683
+        ],
+        "composition_derivatives": [
+          -0.0829664286684759,
+          0.012053149545894029,
+          -0.13037444151871005,
+          -0.022631545520005476
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2800.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4102.008499304455,
+        "Pgas": 11339477.728486389,
+        "P": 11339478.442515625,
+        "rho": 7.527446714598497e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7651779072597265,
+          0.00877792542480016,
+          -3.340778704072073,
+          0.6963645222007465
+        ],
+        "composition_derivatives": [
+          -0.08787016226877253,
+          0.013912748389388028,
+          -0.1353333624304126,
+          -0.01235280000363321
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2800.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4122.78832224961,
+        "Pgas": 16931061.73731127,
+        "P": 16931062.46591924,
+        "rho": 0.00011439133643957239,
+        "logarithmic_thermal_derivatives": [
+          0.6982402809227466,
+          0.011338513686693474,
+          -3.3558152113631703,
+          0.6962209043074196
+        ],
+        "composition_derivatives": [
+          -0.08579502355784481,
+          0.01316541388118458,
+          -0.1332776489387999,
+          -0.017388452955498644
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        2800.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4149.785660530931,
+        "Pgas": 25277808.908316493,
+        "P": 25277809.656197377,
+        "rho": 0.0001729942522035734,
+        "logarithmic_thermal_derivatives": [
+          0.6461146144001049,
+          0.011338513686693474,
+          -3.37123572684207,
+          0.6962209130598489
+        ],
+        "composition_derivatives": [
+          -0.08458830588897755,
+          0.012696246202266172,
+          -0.13611314115985754,
+          -0.01995748649054596
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4324.379027671509,
+        "Pgas": 9005182.977292407,
+        "P": 9005183.859203449,
+        "rho": 5.2715866587002616e-05,
+        "logarithmic_thermal_derivatives": [
+          0.9900599752208166,
+          0.0007552572236360078,
+          -3.8541008594085633,
+          0.6945623438045015
+        ],
+        "composition_derivatives": [
+          -0.09344676295012266,
+          0.015082155860977624,
+          -0.14685199763564738,
+          -0.010436827708278425
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4326.259507798563,
+        "Pgas": 13431766.848070865,
+        "P": 13431767.731516924,
+        "rho": 8.117725613903725e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8908810709467616,
+          0.005091101727829894,
+          -3.74036012806567,
+          0.6943727051803401
+        ],
+        "composition_derivatives": [
+          -0.08887863877126248,
+          0.01427066887135539,
+          -0.14298953130867065,
+          -0.011855354343319536
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3000.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4338.956959871336,
+        "Pgas": 20032093.19434541,
+        "P": 20032094.08820878,
+        "rho": 0.00012413458151438927,
+        "logarithmic_thermal_derivatives": [
+          0.8090098856589236,
+          0.005091101727829894,
+          -3.7076800986329395,
+          0.6943727194365039
+        ],
+        "composition_derivatives": [
+          -0.08663410154837028,
+          0.013471183716773163,
+          -0.14597644164970935,
+          -0.015792064184963966
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3199.999999999999,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4609.712816494682,
+        "Pgas": 7022099.720306291,
+        "P": 7022100.859048057,
+        "rho": 3.534815465823265e-05,
+        "logarithmic_thermal_derivatives": [
+          0.9900599752208166,
+          -0.01036417515585164,
+          -3.854100357480212,
+          0.707314352128938
+        ],
+        "composition_derivatives": [
+          -0.11041405286218,
+          0.0180934686162769,
+          -0.1446883247470661,
+          -0.01308009723301472
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4582.292691295965,
+        "Pgas": 10551048.295490969,
+        "P": 10551049.40737905,
+        "rho": 5.55585384253187e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8908810709467616,
+          -0.004087877565199349,
+          -3.7403598387670276,
+          0.6980366113992854
+        ],
+        "composition_derivatives": [
+          -0.09957395057272315,
+          0.016155770547607466,
+          -0.15744161339413204,
+          -0.010777777926541783
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4571.522447879539,
+        "Pgas": 15769022.854714014,
+        "P": 15769023.956185343,
+        "rho": 8.631454923449443e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8090098856589236,
+          -0.004087877565199349,
+          -3.7076799234515407,
+          0.6980366367825235
+        ],
+        "composition_derivatives": [
+          -0.09233966326452821,
+          0.014914836433544241,
+          -0.15901240619195747,
+          -0.010875558683978116
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        2599.9999999999986,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 3836.64204684677,
+        "Pgas": 13768233.444999274,
+        "P": 13768233.991429731,
+        "rho": 8.974488680159222e-05,
+        "logarithmic_thermal_derivatives": [
+          0.588542815649646,
+          0.014425723614088781,
+          -3.0598258362909094,
+          0.6991457203060857
+        ],
+        "composition_derivatives": [
+          -0.0826829403033424,
+          0.010424313436736627,
+          -0.11339502617475025,
+          -0.017012101833900468
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        2599.9999999999986,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 3868.6346110291024,
+        "Pgas": 20590394.021294706,
+        "P": 20590394.58618046,
+        "rho": 0.00013524048338090669,
+        "logarithmic_thermal_derivatives": [
+          0.5520688490384771,
+          0.015407552864624918,
+          -3.068344916944038,
+          0.6951718602538444
+        ],
+        "composition_derivatives": [
+          -0.08230240944478705,
+          0.010342201561970512,
+          -0.12141369785976126,
+          -0.018823488033679812
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        2599.9999999999986,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 3903.0993064189397,
+        "Pgas": 30722575.972057957,
+        "P": 30722576.55734401,
+        "rho": 0.0002027756421545931,
+        "logarithmic_thermal_derivatives": [
+          0.5247684904373386,
+          0.015407552864624918,
+          -3.0651282318315207,
+          0.6951718655652983
+        ],
+        "composition_derivatives": [
+          -0.08211226925433979,
+          0.01027365076644245,
+          -0.13130201057388977,
+          -0.020699109592948354
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        2800.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4007.68285098845,
+        "Pgas": 10974852.405146062,
+        "P": 10974853.055729728,
+        "rho": 6.454900095450256e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7449142443998937,
+          0.009730111347369785,
+          -3.3894519854848704,
+          0.6980489800626349
+        ],
+        "composition_derivatives": [
+          -0.08637588069949305,
+          0.010799661786724797,
+          -0.13666428226677665,
+          -0.009580048934253639
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        2800.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4030.193275509995,
+        "Pgas": 16402533.867355047,
+        "P": 16402534.532679165,
+        "rho": 9.833871487753872e-05,
+        "logarithmic_thermal_derivatives": [
+          0.6869325863621754,
+          0.011892939274613212,
+          -3.4006811934483445,
+          0.6955859692880162
+        ],
+        "composition_derivatives": [
+          -0.08454211215236604,
+          0.010555181786428268,
+          -0.13520278927225765,
+          -0.013377743019792462
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        2800.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4057.879149527576,
+        "Pgas": 24479776.142046276,
+        "P": 24479776.825841725,
+        "rho": 0.00014884935926204096,
+        "logarithmic_thermal_derivatives": [
+          0.6387323270885759,
+          0.011892939274613212,
+          -3.415860507913451,
+          0.6955859774719174
+        ],
+        "composition_derivatives": [
+          -0.08349070054432663,
+          0.010409568400908396,
+          -0.13789791805184987,
+          -0.016239200719222725
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        3000.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4219.037427958296,
+        "Pgas": 8686398.915320313,
+        "P": 8686399.714387473,
+        "rho": 4.45625478282367e-05,
+        "logarithmic_thermal_derivatives": [
+          0.9226945745739386,
+          0.0027808418610550945,
+          -3.848300726697088,
+          0.6967031183631156
+        ],
+        "composition_derivatives": [
+          -0.09140675826330523,
+          0.010832146096772252,
+          -0.1491770551183301,
+          -0.005592955563463854
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        3000.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4225.796592510683,
+        "Pgas": 12972257.636901617,
+        "P": 12972258.44110172,
+        "rho": 6.89607140061116e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8489196437191708,
+          0.006115998732751038,
+          -3.802163287366039,
+          0.6937666792213355
+        ],
+        "composition_derivatives": [
+          -0.08713219102760514,
+          0.010632236072069255,
+          -0.14492863460365932,
+          -0.007815554399394969
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        3000.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4240.70037133299,
+        "Pgas": 19340034.55106235,
+        "P": 19340035.366667807,
+        "rho": 0.00010574734287587684,
+        "logarithmic_thermal_derivatives": [
+          0.7865620515779881,
+          0.006115998732751038,
+          -3.768885677458222,
+          0.6937666924882334
+        ],
+        "composition_derivatives": [
+          -0.08515603133641565,
+          0.010391870775207163,
+          -0.1482136830117346,
+          -0.011131143827870017
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        3199.999999999999,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4477.909677490663,
+        "Pgas": 6776052.984431379,
+        "P": 6776053.998415344,
+        "rho": 2.9398708939409434e-05,
+        "logarithmic_thermal_derivatives": [
+          0.9226945745739386,
+          -0.005490426721170394,
+          -3.8483002920567366,
+          0.7018757949781702
+        ],
+        "composition_derivatives": [
+          -0.10735198147510713,
+          0.01171415322655198,
+          -0.1489485033962704,
+          -0.004204718369464541
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        3199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4463.779389815272,
+        "Pgas": 10149526.20167075,
+        "P": 10149527.202916441,
+        "rho": 4.634507682034092e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8489196437191708,
+          -0.0008752161252552071,
+          -3.8021630235244377,
+          0.6974975846142739
+        ],
+        "composition_derivatives": [
+          -0.0970598560553682,
+          0.010918073636457108,
+          -0.16036613860772833,
+          -0.004685014194379347
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        3199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4461.531037669058,
+        "Pgas": 15164223.702443276,
+        "P": 15164224.70167323,
+        "rho": 7.235266193658713e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7865620515779881,
+          -0.0008752161252552071,
+          -3.7688855134171804,
+          0.6974976075758924
+        ],
+        "composition_derivatives": [
+          -0.09025807808966883,
+          0.01057820065259096,
+          -0.16165423173590143,
+          -0.00537175401269259
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2599.9999999999986,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 3841.44437298663,
+        "Pgas": 13740154.920655245,
+        "P": 13740155.469826711,
+        "rho": 8.741779556854562e-05,
+        "logarithmic_thermal_derivatives": [
+          0.5891506018390373,
+          0.014408606461715934,
+          -3.047791417990996,
+          0.6987681162649833
+        ],
+        "composition_derivatives": [
+          -0.08379963392579261,
+          0.010424313436736627,
+          -0.11246002312362885,
+          -0.01701210181742707
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2599.9999999999986,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 3873.438815445516,
+        "Pgas": 20543936.542224113,
+        "P": 20543937.109921075,
+        "rho": 0.00013169490022538855,
+        "logarithmic_thermal_derivatives": [
+          0.5524137191812173,
+          0.015393262673155661,
+          -3.0595268455173232,
+          0.6947808656311155
+        ],
+        "composition_derivatives": [
+          -0.0832735742784921,
+          0.010342201561970512,
+          -0.1203752482453229,
+          -0.018823488021708867
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2599.9999999999986,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 3907.914163280281,
+        "Pgas": 30646359.06818976,
+        "P": 30646359.65636919,
+        "rho": 0.00019740307461320824,
+        "logarithmic_thermal_derivatives": [
+          0.5249885762885924,
+          0.015393262673155661,
+          -3.0579064844027326,
+          0.6947808709759189
+        ],
+        "composition_derivatives": [
+          -0.0829664286684759,
+          0.01027365076644245,
+          -0.13037444131892284,
+          -0.020699109584186588
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2800.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4012.8800122367784,
+        "Pgas": 10962242.895629322,
+        "P": 10962243.549594264,
+        "rho": 6.296058927119539e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7449707446892972,
+          0.009679146716139897,
+          -3.3825171939987895,
+          0.6972573075905913
+        ],
+        "composition_derivatives": [
+          -0.08787016226877253,
+          0.010799661786724797,
+          -0.13533336171446472,
+          -0.009580048914375347
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2800.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4035.3012404759115,
+        "Pgas": 16376223.520999039,
+        "P": 16376224.189702565,
+        "rho": 9.585848804835881e-05,
+        "logarithmic_thermal_derivatives": [
+          0.6870666076614356,
+          0.011862584511497687,
+          -3.391006822667738,
+          0.6949894659258152
+        ],
+        "composition_derivatives": [
+          -0.08579502355784481,
+          0.010555181786428268,
+          -0.13327764847701512,
+          -0.013377743004695873
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        2800.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4062.9512092135406,
+        "Pgas": 24432118.747662824,
+        "P": 24432119.43488347,
+        "rho": 0.00014502563174133466,
+        "logarithmic_thermal_derivatives": [
+          0.6387015454289724,
+          0.011862584511497687,
+          -3.406976012982545,
+          0.69498947415348
+        ],
+        "composition_derivatives": [
+          -0.08458830588897755,
+          0.010409568400908396,
+          -0.13611314086484885,
+          -0.01623920070795521
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3000.0000000000014,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4224.525141385316,
+        "Pgas": 8680570.949406145,
+        "P": 8680571.752638819,
+        "rho": 4.353305567017199e-05,
+        "logarithmic_thermal_derivatives": [
+          0.924334538640494,
+          0.0027391683471638117,
+          -3.8457195027898754,
+          0.6962397923499908
+        ],
+        "composition_derivatives": [
+          -0.09344676295012266,
+          0.010832146096772252,
+          -0.146851996409863,
+          -0.005592955536966628
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3000.0000000000014,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4231.1915934699555,
+        "Pgas": 12960097.089192826,
+        "P": 12960097.897507634,
+        "rho": 6.732040993002939e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8494511171263639,
+          0.006065891858158423,
+          -3.7963425034421117,
+          0.693075506935186
+        ],
+        "composition_derivatives": [
+          -0.08887863877126248,
+          0.010632236072069255,
+          -0.14298953058536673,
+          -0.007815554380482582
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3000.0000000000014,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4245.991927227797,
+        "Pgas": 19314218.58667231,
+        "P": 19314219.406356253,
+        "rho": 0.00010315904375396615,
+        "logarithmic_thermal_derivatives": [
+          0.786908504903721,
+          0.006065891858158423,
+          -3.758176929424757,
+          0.6930755202646727
+        ],
+        "composition_derivatives": [
+          -0.08663410154837028,
+          0.010391870775207163,
+          -0.14597644121205522,
+          -0.011131143813771395
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3199.999999999999,
+        4.9
+      ],
+      "response": {
+        "covered": true,
+        "T": 4484.208694123803,
+        "Pgas": 6772634.873289361,
+        "P": 6772635.892990808,
+        "rho": 2.877293865968216e-05,
+        "logarithmic_thermal_derivatives": [
+          0.924334538640494,
+          -0.005656378548273722,
+          -3.8457190650681206,
+          0.7017756717092668
+        ],
+        "composition_derivatives": [
+          -0.11041405286218,
+          0.01171415322655198,
+          -0.14468832130122267,
+          -0.00420471832250206
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3199.999999999999,
+        5.15
+      ],
+      "response": {
+        "covered": true,
+        "T": 4469.6315272712,
+        "Pgas": 10143821.718629034,
+        "P": 10143822.725135705,
+        "rho": 4.5324710134989104e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8494511171263639,
+          -0.000946066506747556,
+          -3.7963422383082297,
+          0.6973544258268164
+        ],
+        "composition_derivatives": [
+          -0.09957395057272315,
+          0.010918073636457108,
+          -0.15744161191091646,
+          -0.004685014166616686
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3199.999999999999,
+        5.4
+      ],
+      "response": {
+        "covered": true,
+        "T": 4467.198030167236,
+        "Pgas": 15154451.829048986,
+        "P": 15154452.833365468,
+        "rho": 7.071117707689599e-05,
+        "logarithmic_thermal_derivatives": [
+          0.786908504903721,
+          -0.000946066506747556,
+          -3.758176764841074,
+          0.6973544489304376
+        ],
+        "composition_derivatives": [
+          -0.09233966326452821,
+          0.01057820065259096,
+          -0.15901240543927994,
+          -0.005371753994661369
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.11909830056250525,
+        0.04583592135001261,
+        3274.96556583947,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 5817.63318121673,
+        "Pgas": 7042714.97412193,
+        "P": 7042717.8629061775,
+        "rho": 4.3085425431564846e-05,
+        "logarithmic_thermal_derivatives": [
+          2.1859711947006266,
+          -0.07606816822477325,
+          -4.75467675311418,
+          0.7650329329939801
+        ],
+        "composition_derivatives": [
+          -1.68517290511204,
+          0.059428463735462594,
+          0.6130208009826632,
+          -0.04613830743075315
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.11909830056250525,
+        0.04583592135001261,
+        3274.96556583947,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 5587.111715117242,
+        "Pgas": 10925275.340556175,
+        "P": 10925277.797975058,
+        "rho": 6.994572990004799e-05,
+        "logarithmic_thermal_derivatives": [
+          1.986087528685668,
+          -0.060799133758844826,
+          -4.9456847491192,
+          0.7591052431492205
+        ],
+        "composition_derivatives": [
+          -1.5573681342567045,
+          0.056743350260481426,
+          0.6997180351059452,
+          -0.0541465680214202
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        3274.96556583947,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 5407.825122215475,
+        "Pgas": 7246364.789855355,
+        "P": 7246366.94670726,
+        "rho": 4.3356128667538974e-05,
+        "logarithmic_thermal_derivatives": [
+          2.1601883778994972,
+          -0.06558760510710882,
+          -5.310270293733513,
+          0.7707801524549163
+        ],
+        "composition_derivatives": [
+          -1.0980977655416257,
+          0.05633423453142243,
+          0.5007086188981924,
+          -0.05718856901239812
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        3274.96556583947,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 5231.551727033181,
+        "Pgas": 11235772.25212216,
+        "P": 11235774.141208751,
+        "rho": 7.042149888865782e-05,
+        "logarithmic_thermal_derivatives": [
+          1.7839379247956666,
+          -0.044593212899757484,
+          -5.006713754270702,
+          0.747611954086463
+        ],
+        "composition_derivatives": [
+          -0.9230775464561053,
+          0.04791120729275308,
+          0.33516901504575536,
+          -0.05247789274091297
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        3475.046996041213,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 6200.156527263356,
+        "Pgas": 5405813.181833265,
+        "P": 5405816.908670151,
+        "rho": 2.790703237101877e-05,
+        "logarithmic_thermal_derivatives": [
+          2.5553303690262794,
+          -0.09368352243162448,
+          -4.308198698726175,
+          0.7552746705364227
+        ],
+        "composition_derivatives": [
+          -1.1839062694060334,
+          0.05776219011380724,
+          0.08864448379403253,
+          -0.02560760228403762
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        3475.046996041213,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 5893.4837080276475,
+        "Pgas": 8362055.521963518,
+        "P": 8362058.564376177,
+        "rho": 4.560465132218677e-05,
+        "logarithmic_thermal_derivatives": [
+          2.3954406844730016,
+          -0.07912396301902647,
+          -4.937862685715609,
+          0.7619055057050479
+        ],
+        "composition_derivatives": [
+          -1.1641957838172685,
+          0.05841605042434863,
+          0.26338931885419903,
+          -0.04071078974643938
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        3675.119636593583,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 7081.490260394032,
+        "Pgas": 4332937.371120231,
+        "P": 4332943.713152085,
+        "rho": 1.9538679405102197e-05,
+        "logarithmic_thermal_derivatives": [
+          2.0647378807114265,
+          -0.08375076159632522,
+          -3.342934330079889,
+          0.6966769373871098
+        ],
+        "composition_derivatives": [
+          -0.8694646072207989,
+          0.03864530347473593,
+          -0.7553700407522063,
+          0.021185064903589516
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        3675.119636593583,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 6741.32057542594,
+        "Pgas": 6508480.1815145295,
+        "P": 6508485.389978811,
+        "rho": 3.086251898857772e-05,
+        "logarithmic_thermal_derivatives": [
+          2.410806501871404,
+          -0.0883793597410395,
+          -3.687987764411674,
+          0.7231465709093573
+        ],
+        "composition_derivatives": [
+          -1.0401576610726277,
+          0.049458526149112704,
+          -0.3631371479337285,
+          0.00026333578621251644
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        3875.184837987222,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 7792.481474246525,
+        "Pgas": 3637018.142395124,
+        "P": 3637027.441323105,
+        "rho": 1.4890942890786009e-05,
+        "logarithmic_thermal_derivatives": [
+          1.3618097891190946,
+          -0.04584606222462628,
+          -3.2346955545412097,
+          0.6796460601803022
+        ],
+        "composition_derivatives": [
+          -0.4819956894427251,
+          0.01565091616174623,
+          -1.3579582277498696,
+          0.04419559531885544
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        3875.184837987222,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 7560.5834148681315,
+        "Pgas": 5387329.861753032,
+        "P": 5387338.102204527,
+        "rho": 2.274561648903959e-05,
+        "logarithmic_thermal_derivatives": [
+          1.7422412840056403,
+          -0.06321885027249163,
+          -3.359479570745676,
+          0.6871452315028552
+        ],
+        "composition_derivatives": [
+          -0.6603401487174532,
+          0.026912478628711968,
+          -1.0321241879142748,
+          0.030596216411723345
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        4075.243687490171,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 8166.123563177984,
+        "Pgas": 4544249.451835439,
+        "P": 4544260.666687742,
+        "rho": 1.7748047442335945e-05,
+        "logarithmic_thermal_derivatives": [
+          1.1705816746632411,
+          -0.0311363298328986,
+          -3.4174143991942807,
+          0.6763562242667687
+        ],
+        "composition_derivatives": [
+          -0.38337400674969035,
+          0.009891448836759902,
+          -1.6060527571760916,
+          0.04852261051318353
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        4275.297070306937,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 8597.045707013938,
+        "Pgas": 3862554.9498054585,
+        "P": 3862568.7259189878,
+        "rho": 1.4316332734325045e-05,
+        "logarithmic_thermal_derivatives": [
+          0.9075661339168875,
+          -0.013307336151464288,
+          -3.3476167280175253,
+          0.6640301566510395
+        ],
+        "composition_derivatives": [
+          -0.2606826931728942,
+          0.00217174237699694,
+          -2.0271538165431484,
+          0.06183744154214939
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        4475.345714440606,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 8940.55089952549,
+        "Pgas": 3317543.982509661,
+        "P": 3317560.0958986105,
+        "rho": 1.1810785573251534e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7706667031036218,
+          -0.0047684733232269405,
+          -3.2896821590292373,
+          0.6532278194385867
+        ],
+        "composition_derivatives": [
+          -0.22000936650428382,
+          -0.0007142583439467109,
+          -2.2769827929771806,
+          0.07023433274300953
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        4675.390224109473,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 9232.666906659439,
+        "Pgas": 2874822.317499046,
+        "P": 2874840.642265161,
+        "rho": 9.897482714043925e-06,
+        "logarithmic_thermal_derivatives": [
+          0.6753334823072947,
+          0.0003011091865614546,
+          -3.251408467679282,
+          0.6467772039804752
+        ],
+        "composition_derivatives": [
+          -0.20728448632371432,
+          -0.0018338435421282452,
+          -2.398947906358201,
+          0.07450780971107517
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.16909830056250524,
+        0.04583592135001261,
+        4875.4311049863445,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 9486.889132888664,
+        "Pgas": 2512860.533398228,
+        "P": 2512880.961361647,
+        "rho": 8.405998287487036e-06,
+        "logarithmic_thermal_derivatives": [
+          0.6028057177686463,
+          0.003766244346223191,
+          -3.1453785024412744,
+          0.6431994064880726
+        ],
+        "composition_derivatives": [
+          -0.2109197269504744,
+          -0.002450087648216124,
+          -2.460424843681043,
+          0.0760854479333068
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2381966011250105,
+        0.04583592135001261,
+        3074.873647465121,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4668.446096681181,
+        "Pgas": 9819663.199486826,
+        "P": 9819664.397382963,
+        "rho": 6.45116778624132e-05,
+        "logarithmic_thermal_derivatives": [
+          1.1917604805579005,
+          -0.016439058318697408,
+          -4.073021417285146,
+          0.7126744567712211
+        ],
+        "composition_derivatives": [
+          -0.4040025389519244,
+          0.02981324964555662,
+          -0.06376926352356024,
+          -0.03086539598803423
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2381966011250105,
+        0.04583592135001261,
+        3074.873647465121,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4634.674574894146,
+        "Pgas": 14773920.475980703,
+        "P": 14773921.639588846,
+        "rho": 0.00010044241403803693,
+        "logarithmic_thermal_derivatives": [
+          1.0101671451216152,
+          -0.006420770746678461,
+          -3.8328542002205936,
+          0.7046164653125525
+        ],
+        "composition_derivatives": [
+          -0.3452908046251614,
+          0.024986153681338975,
+          -0.12986649897057134,
+          -0.026918320642469063
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2381966011250105,
+        0.04583592135001261,
+        3274.96556583947,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 5109.537637122068,
+        "Pgas": 7401168.273537915,
+        "P": 7401169.992459957,
+        "rho": 4.209540939382683e-05,
+        "logarithmic_thermal_derivatives": [
+          1.8459961804287142,
+          -0.04740983134948884,
+          -5.194567990921414,
+          0.754183780167936
+        ],
+        "composition_derivatives": [
+          -0.5970425489250205,
+          0.04344239106782852,
+          0.14831458315780582,
+          -0.04628208664181296
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.2381966011250105,
+        0.04583592135001261,
+        3274.96556583947,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4992.770432042613,
+        "Pgas": 11362519.395220896,
+        "P": 11362520.962318912,
+        "rho": 6.774945445747062e-05,
+        "logarithmic_thermal_derivatives": [
+          1.4739862875679597,
+          -0.02842957792516676,
+          -4.735689940810284,
+          0.7293477385262448
+        ],
+        "composition_derivatives": [
+          -0.47628096389794317,
+          0.035327658319799234,
+          0.022520423988329742,
+          -0.03828453639207537
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.35729490168751576,
+        0.04583592135001261,
+        2674.6490394980506,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4052.926177334383,
+        "Pgas": 15383283.250674436,
+        "P": 15383283.93113748,
+        "rho": 0.00011729457784645987,
+        "logarithmic_thermal_derivatives": [
+          0.5997601850369962,
+          0.011426212366213218,
+          -2.9799457877510505,
+          0.7013451677529404
+        ],
+        "composition_derivatives": [
+          -0.14966506520856634,
+          0.014704110972861468,
+          -0.14794401709030064,
+          -0.01912359436029663
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.35729490168751576,
+        0.04583592135001261,
+        2674.6490394980506,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4081.21855408081,
+        "Pgas": 23024872.64926075,
+        "P": 23024873.348924186,
+        "rho": 0.00017726385551850848,
+        "logarithmic_thermal_derivatives": [
+          0.559058260118765,
+          0.013149988772190202,
+          -3.02156284256899,
+          0.6993753774306388
+        ],
+        "composition_derivatives": [
+          -0.14519101453711047,
+          0.013918827507821113,
+          -0.15425019907317225,
+          -0.02171500021298171
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.35729490168751576,
+        0.04583592135001261,
+        2874.7690744926053,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4250.643592979853,
+        "Pgas": 12291450.5896441,
+        "P": 12291451.412925944,
+        "rho": 8.457736424706045e-05,
+        "logarithmic_thermal_derivatives": [
+          0.7650575071961336,
+          0.004263554820526538,
+          -3.3351969722472488,
+          0.6965711450590001
+        ],
+        "composition_derivatives": [
+          -0.16413124468972773,
+          0.016627961254935805,
+          -0.1588289069179467,
+          -0.01620773034049612
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.35729490168751576,
+        0.04583592135001261,
+        2874.7690744926053,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4264.552755178322,
+        "Pgas": 18355369.869649567,
+        "P": 18355370.70376035,
+        "rho": 0.0001289724851937025,
+        "logarithmic_thermal_derivatives": [
+          0.6957911854338379,
+          0.007959283666957417,
+          -3.349210902251531,
+          0.6967513110230078
+        ],
+        "composition_derivatives": [
+          -0.15564816146670052,
+          0.015412473845058984,
+          -0.16244459531850713,
+          -0.0191376548620713
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.35729490168751576,
+        0.04583592135001261,
+        3074.873647465121,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4502.960529287604,
+        "Pgas": 9695425.309588939,
+        "P": 9695426.346454216,
+        "rho": 5.862707435758864e-05,
+        "logarithmic_thermal_derivatives": [
+          1.0158669063759591,
+          -0.006885411333737768,
+          -3.8552246590470807,
+          0.7024456103796743
+        ],
+        "composition_derivatives": [
+          -0.19412667542573708,
+          0.020007133138093703,
+          -0.15344342535106256,
+          -0.01754051056621916
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.35729490168751576,
+        0.04583592135001261,
+        3074.873647465121,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4491.475928680825,
+        "Pgas": 14513665.385030672,
+        "P": 14513666.411358433,
+        "rho": 9.089640368585992e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8995613842645049,
+          -0.000473436033680219,
+          -3.7328871002374684,
+          0.6982444166752666
+        ],
+        "composition_derivatives": [
+          -0.17531190707341915,
+          0.017862382430559143,
+          -0.1701140477675809,
+          -0.017213347630596263
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.5454915028125262,
+        0.04583592135001261,
+        2674.6490394980506,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 3965.0754126698234,
+        "Pgas": 14995835.54030273,
+        "P": 14995836.163657915,
+        "rho": 0.00010197665137800419,
+        "logarithmic_thermal_derivatives": [
+          0.5816184822018036,
+          0.012350881517362966,
+          -3.0184522617064893,
+          0.6996726857874325
+        ],
+        "composition_derivatives": [
+          -0.08419119856756926,
+          0.012046577151615544,
+          -0.12350546823992437,
+          -0.016696664513123807
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.5454915028125262,
+        0.04583592135001261,
+        2674.6490394980506,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 3994.730866441669,
+        "Pgas": 22420291.49571247,
+        "P": 22420292.137926623,
+        "rho": 0.00015401668320130812,
+        "logarithmic_thermal_derivatives": [
+          0.5459509790259132,
+          0.013904456722020453,
+          -3.041657470287024,
+          0.6970798740115057
+        ],
+        "composition_derivatives": [
+          -0.08335246780430931,
+          0.011710395039185209,
+          -0.12889999136611266,
+          -0.01931674287214356
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.5454915028125262,
+        0.04583592135001261,
+        2874.7690744926053,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4151.481945678404,
+        "Pgas": 11951187.18102167,
+        "P": 11951187.930126132,
+        "rho": 7.299218814348644e-05,
+        "logarithmic_thermal_derivatives": [
+          0.732428575200557,
+          0.006288388172922987,
+          -3.3655844818518785,
+          0.6965798884456119
+        ],
+        "composition_derivatives": [
+          -0.08785322094736475,
+          0.012789062447514885,
+          -0.13979340661380624,
+          -0.011588594108167021
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.5454915028125262,
+        0.04583592135001261,
+        2874.7690744926053,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4169.273631970251,
+        "Pgas": 17842112.504403,
+        "P": 17842113.266431767,
+        "rho": 0.00011142397963177218,
+        "logarithmic_thermal_derivatives": [
+          0.6739435092204875,
+          0.009274501653827039,
+          -3.380768816409637,
+          0.6954305064228588
+        ],
+        "composition_derivatives": [
+          -0.08551652727132823,
+          0.012273486095477541,
+          -0.13929191360693527,
+          -0.01491137719491086
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.5454915028125262,
+        0.04583592135001261,
+        3074.873647465121,
+        4.995491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4382.349193065691,
+        "Pgas": 9423724.628452037,
+        "P": 9423725.558612103,
+        "rho": 5.0131929355742914e-05,
+        "logarithmic_thermal_derivatives": [
+          0.928496443576333,
+          -0.0022168804324794733,
+          -3.816878357276863,
+          0.6990975126587581
+        ],
+        "composition_derivatives": [
+          -0.09585792452585834,
+          0.013942847848536255,
+          -0.14869146041199027,
+          -0.009234621737653484
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.5454915028125262,
+        0.04583592135001261,
+        3074.873647465121,
+        5.245491502812527
+      ],
+      "response": {
+        "covered": true,
+        "T": 4381.171222676119,
+        "Pgas": 14082194.576351924,
+        "P": 14082195.505512288,
+        "rho": 7.780143216216377e-05,
+        "logarithmic_thermal_derivatives": [
+          0.8452763828590877,
+          0.002364328879120192,
+          -3.7520819982517764,
+          0.6956768983520888
+        ],
+        "composition_derivatives": [
+          -0.09019612691346629,
+          0.013098474017659224,
+          -0.15089308923588776,
+          -0.0105215796854019
+        ]
+      }
+    }
+  ],
+  "physical_source_checks_reused": true
+}

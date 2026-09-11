@@ -57,7 +57,8 @@ with the plasma-cutoff option. Two full spectra are identical with that option
 on and off, while their reported mean opacities differ. Their averaging
 normalization and its effect on radiative transport are under investigation.
 The diagnostic does not justify removing plasma physics or smoothing the
-source values. [Source scan](../../docs/results/tops_density_structure_v1.json).
+source values. The [spectral normalization checks](../../docs/PLASMA_OPACITY.md)
+quantify the difference and its fixed-profile transport effect. [Source scan](../../docs/results/tops_density_structure_v1.json).
 
 The source plans are `sources/tops_density_*_specification.json`.
 `fetch_tops_density_plan.py` runs their sequential, resumable requests;

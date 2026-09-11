@@ -6,6 +6,7 @@ the supplied working directory; ember does not link to it at runtime.
 """
 import argparse
 import hashlib
+import json
 from pathlib import Path
 import shutil
 import subprocess
@@ -19,6 +20,9 @@ def main():
     ap.add_argument('archive',type=Path)
     ap.add_argument('work',type=Path)
     ap.add_argument('--compiler',default='gfortran')
+    ap.add_argument('--jobs',type=int,choices=range(1,9),default=4)
+    ap.add_argument('--electron-quadrature-error',type=float,choices=[1e-9,1e-11],default=1e-9,
+                    help='numerical electron integration target; does not change EOS formulas')
     a=ap.parse_args()
     if hashlib.sha256(a.archive.read_bytes()).hexdigest()!=SHA256:
         raise ValueError('unexpected FreeEOS source checksum')
@@ -42,15 +46,31 @@ def main():
             if s.count(old)!=1: raise ValueError('unexpected source diagnostic interface')
             s=s.replace(old,f'     ! ep and qp coincide: qp overload handles both ({n}d).')
         f.write_text(s)
+    precision_patch={}
+    if a.electron_quadrature_error!=1e-9:
+        f=src/'src/fermi_dirac_direct.f90';s=f.read_text()
+        original=hashlib.sha256(f.read_bytes()).hexdigest()
+        old='real(fp_kind), parameter :: fderr = 1.e-09_fp_kind'
+        if s.count(old)!=1:raise ValueError('unexpected numerical electron integration target')
+        f.write_text(s.replace(old,'real(fp_kind), parameter :: fderr = 1.e-11_fp_kind'))
+        precision_patch={'file':'src/fermi_dirac_direct.f90','original_sha256':original,
+                         'modified_sha256':hashlib.sha256(f.read_bytes()).hexdigest()}
     subprocess.run(['cmake','-S',str(src),'-B',str(build),'-G','Ninja',
                     '-DCMAKE_Fortran_COMPILER='+compiler,'-DCMAKE_Fortran_FLAGS=-O3',
                     '-DBUILD_TEST=ON','-DBUILD_DOX_DOC=OFF',
                     '-DCMAKE_INSTALL_PREFIX='+str(work/'install')],check=True)
-    subprocess.run(['cmake','--build',str(build),'--target','free_eos','-j','8'],check=True)
+    subprocess.run(['cmake','--build',str(build),'--target','free_eos','-j',str(a.jobs)],check=True)
     probe=Path(__file__).resolve().with_name('freeeos_probe.f90')
     subprocess.run([compiler,'-O3','-I'+str(build/'src'),str(probe),
                     '-L'+str(build/'src'),'-lfree_eos','-Wl,-rpath,'+str(build/'src'),
                     '-o',str(work/'probe')],check=True)
+    library=build/'src/libfree_eos.1.0.0.dylib'
+    if not library.exists():library=next((build/'src').glob('libfree_eos.so.*'))
+    record={'source_archive_sha256':SHA256,'electron_quadrature_error':a.electron_quadrature_error,
+            'precision_patch':precision_patch,'probe_sha256':hashlib.sha256((work/'probe').read_bytes()).hexdigest(),
+            'library':str(library),'library_sha256':hashlib.sha256(library.read_bytes()).hexdigest(),
+            'builder_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()}
+    (work/'build_receipt.json').write_text(json.dumps(record,indent=2)+'\n')
     print(work/'probe')
 
 

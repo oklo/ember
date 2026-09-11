@@ -1,0 +1,38 @@
+{
+  "scope": "Real numerical-electron pilot tables retain byte-identical potential files after adding support for explicitly absent cold dense source cells. This is importer compatibility, not acceptance of the unfinished full source family.",
+  "planes": [
+    {
+      "original": "/tmp/ember-numerical-electron-pipeline-family-v1/freeeos300_gs98_x031p25_he3000_potential.dat",
+      "source": "/tmp/ember-numerical-electron-pipeline-family-v1/sources/freeeos300_gs98_x031p25_he3000_raw.json.gz",
+      "regenerated": "/tmp/ember-null-coverage-compatibility-v1/freeeos300_gs98_x031p25_he3000_potential.dat",
+      "sha256": "0ce0cd4d19e212096a7a8c05befe197721ae9424003680c99f5727aec416daf7",
+      "byte_identical": true
+    },
+    {
+      "original": "/tmp/ember-numerical-electron-pipeline-family-v1/freeeos300_gs98_x031p25_he3120_potential.dat",
+      "source": "/tmp/ember-numerical-electron-pipeline-family-v1/sources/freeeos300_gs98_x031p25_he3120_raw.json.gz",
+      "regenerated": "/tmp/ember-null-coverage-compatibility-v1/freeeos300_gs98_x031p25_he3120_potential.dat",
+      "sha256": "99761f479772a9c6386a1d6497f2da555b2a61c43d2d0bab60d2e2a70569afb5",
+      "byte_identical": true
+    },
+    {
+      "original": "/tmp/ember-numerical-electron-pipeline-family-v1/freeeos300_gs98_x037p5_he3000_potential.dat",
+      "source": "/tmp/ember-numerical-electron-pipeline-family-v1/sources/freeeos300_gs98_x037p5_he3000_raw.json.gz",
+      "regenerated": "/tmp/ember-null-coverage-compatibility-v1/freeeos300_gs98_x037p5_he3000_potential.dat",
+      "sha256": "afc1564620d3324e5ef1389ff9e9d287a7e3f90434b30eef088c2b16ac7ae700",
+      "byte_identical": true
+    },
+    {
+      "original": "/tmp/ember-numerical-electron-pipeline-family-v1/freeeos300_gs98_x037p5_he3120_potential.dat",
+      "source": "/tmp/ember-numerical-electron-pipeline-family-v1/sources/freeeos300_gs98_x037p5_he3120_raw.json.gz",
+      "regenerated": "/tmp/ember-null-coverage-compatibility-v1/freeeos300_gs98_x037p5_he3120_potential.dat",
+      "sha256": "14ac48baf1bd5def57313b8a0f43d531ef90beb0cacc6f6f8bfebad8c74f604d",
+      "byte_identical": true
+    }
+  ],
+  "scripts_sha256": {
+    "scripts/import_freeeos_potential.py": "69265ac7e00cbae6c49027b3822e2e8138bb8e131e37fb1b1e147c84d736afaa",
+    "scripts/eos_source_coverage.py": "31ada11365f43e88c54c95ed80eb390892f2bf5e6b8119e84faf8e7c1badf6c1"
+  },
+  "all_byte_identical": true
+}

@@ -1,3 +1,145 @@
+# Numerical EOS recovery and 6000 K atmospheres — 2026-09-11 07:56 UTC
+
+Goal ACTIVE; continue autonomously, no subagents. Stellar endpoint remains
+3.848 T (Teff 4400 K); no production stellar job currently running.
+Review branch codex/atmosphere5000-density-checks at6faa364, draft PR1.
+Default-master push was rejected by automatic approval review; do not bypass.
+
+ACTIVE JOBS: inspect processes before any launches.
+- Base EOS session26558, /tmp/ember-numerical-electron-eos72-v1, 8 workers;
+  All22248 source isotherms COMPLETE, 9.811 million states, no source failures.
+  Final72 cubes are assembling serially (10 finished at07:53).
+- Base validation watcher session95797, launcher
+  /tmp/ember-numerical-electron-base-validation-launch-v1.py. After72 final cubes,
+  imports to /tmp/ember-numerical-electron-base-family-v1, then4736 general
+  source/identity queries and512 actual profile zones. Status in
+  /tmp/ember-numerical-electron-base-validation-v1/status.json.
+  NO stellar job automatically launched. After PASS, run
+  scripts/audit_atmosphere_eos_support.py against accepted5000K atmosphere
+  with new EOS, then fresh512-point stellar run. Fitted-to-numerical EOS is
+  a physics change, not an allowed checkpoint continuation.
+- Hot dense v2 session61288, /tmp/ember-numerical-electron-hot-dense-addition-v2,
+  4 workers, 4774/7848 cached at07:48, no failure. Retained3364 completed
+  nominal/pilot isotherms exactly. New optional tighter-quadrature fallback
+  resolves isolated exchange-iteration failure (see below).
+- Atmosphere6000K pilots session46503 COMPLETE, both canonical source checks
+  PASS. /tmp/ember-nongrey-t6000-pilot-v1/manifest.json. Maximum material
+  temperature1.249e4 K remains within existing wavelength-opacity support.
+- Full6000K plan ACTIVE session34081,4 atmosphere workers;
+  work /tmp/ember-nongrey-t5200-t6000-v1. Idle watcher session67230/PID65609
+  was deliberately stopped before it launched any source work: the8 EOS
+  workers had finished, so atmosphere work can overlap serial source assembly.
+  Explicit plan
+  data/atmosphere/sources/nongrey_t6000_full_plan_specification.json:
+  38 missing grid atmospheres +3 independent5100/5500/5900K states; reuses
+  both6000K pilots and all accepted cooler states. Full acceptance still
+  requires source/interpolation/depth/condensation/newEOS checks.
+
+PRECISION RECOVERY: densev1 source failed at X=.15,X3=.12,logT6.575,q2.938.
+Increasing Newton iterations20->200 with unchanged tolerance still oscillates;
+retained diagnostic trace proves this. Tightening ONLY numerical electron
+quadrature fderr1e-9->1e-11 succeeds with original Newton limit and physics.
+Strict probe /tmp/ember-freeeos-integral-precision-v1/probe, immutable library
+under same work/build/src. Receipt and all hashes:
+data/eos/sources/numerical_electron_precision_fallback_v1_specification.json.
+100 converged source controls agree within6.382e-10 scaled physical response.
+Repository builder independently rebuilt tighter source in
+/tmp/ember-freeeos-precision-builder-check-v1;100 controls reproduce EXACTLY
+and the nominal-failure state converges. Report numerical_electron_precision_builder_v1.
+605-state pilot passes; one complete isotherm uses fallback. First-law error
+9.495e-10, nominal35-state prefix agrees within4.143e-9. Failed evidence kept.
+Optional generator fallback records source/probe/input/failure hashes per
+isotherm; no missing values filled or tolerances relaxed.
+
+NEW CHECKS: accepted5000K atmosphere support-only script reuses prior source
+checks by hash and tests only changed EOS/runtime. Old-EOS control227/227PASS,
+matching temperature/gas pressure exact. Use it after newEOS validation.
+Density merger retains fallback provenance with source and retained q ranges,
+remaps hot-subset isotherm indices, and rejects mismatched source precision.
+Six EOS merge/import tests PASS; four actual pilot potential files unchanged.
+All new work since6faa364 is UNCOMMITTED, including plasma-opacity diagnostics
+listed below. No C++ changes after33 CTest suites and byte-exact stellar control.
+Preserve unrelated DS_Store and two helium scripts identified below.
+
+---
+
+# Spectral normalization checks and publication — 2026-09-11 07:17 UTC
+
+Goal remains ACTIVE. No new stellar evolution; checked endpoint 3.848 T,
+Xc=.002467, Teff4400 K. Continue autonomously. No subagents.
+
+PUBLICATION: direct commit/push to master was REJECTED by automatic approval
+review because of the breadth of the 63-file change and default-branch effect.
+Do not bypass that rejection or merge without approval. Safer branch publication
+succeeded: codex/atmosphere5000-density-checks at6faa364, draft PR
+https://github.com/oklo/ember/pull/1. Master remains8834be0.
+The branch contains the accepted5000K atmosphere, updated12-page PDF,
+33-suite-checked density-opacity support, source diagnostics and helium checks.
+The user was told about the rejection and safer branch publication.
+
+ACTIVE SOURCE JOBS (inspect before launch): base session26558 with8workers,
+/tmp/ember-numerical-electron-eos72-v1 (16163/22248cached at07:13);
+hot dense addition session94732 with4workers,
+/tmp/ember-numerical-electron-hot-dense-addition-v1 (2511/7848cached at07:13).
+Hot addition is logT6..7.35, q2.5..4, 949608 source queries.
+UPDATE07:20: this controller has STOPPED after3361cached isotherms. FreeEOS
+master_exchange fails its first iteration at X=.15,X3=.12,logT6.575,q2.9375.
+Fresh isolated retry reproduces the failure (/tmp/ember-hot-dense-exchange-retry-v1).
+Investigate before any resumption; do not treat this as completed coverage.
+It deliberately excludes the cold dense region where the previous broad job
+failed. The failed directory and639cached isotherms remain intact.
+New hot plans are data/eos/sources/numerical_electron_hot_dense_*specification.json.
+
+NEW UNCOMMITTED importer support allows a contiguous upper-T density addition.
+Unrequested cold dense source rows are null under an explicit source_coverage
+declaration, never fabricated FreeEOS flags. Complete derivative stencils are
+masked; every retained supported potential jet is exact in the ideal-gas test.
+New scripts/eos_source_coverage.py, modified source merger and importers.
+Five EOS-merge/importer tests PASS. The merger now correctly excludes source
+iteration counts from physical-response comparisons;106 actual cached overlap
+controls agree within3.135e-14 despite all having different iteration counts.
+REAL COMPLETE SOURCE MERGE/IMPORT/AUDIT HAS NOT RUN. Base is still active;
+the dense addition needs its isolated source failure resolved or explicitly
+represented as absent coverage. Four real numerical pilot potential files are
+byte-identical after importer change (eos_absent_coverage_compatibility_v1).
+2226 partial overlap states now pass at4.952e-14; receipt pins every cache.
+
+New ACTIVE atmosphere pilot session46503: /tmp/ember-nongrey-t6000-pilot-v1,
+two X=.15,X3=0 models at6000K,g5.15/5.4 reusing existing opacity. Both initial
+structures pass; final300depth20000frequency solves still running at07:22.
+No full6000K source plan launched; accepted table remains5000K.
+
+PLASMA OPACITY: independent integration confirms conditional normalization of
+reported TOPS cutoff means. scripts/audit_tops_spectral_means.py and two reports
+(dense/core) are complete. Full14900frequency spectra exact between on/off.
+Rosseland uses total opacity; Planck uses absorption (confirmed independently).
+Uncut means reproduce within0.003386%, inferred Rosseland cutoff predicts
+independent Planck within0.02867%. Quadrature8/16 agrees; analytic grey and
+power-law tests PASS. No correction installed. Details docs/PLASMA_OPACITY.md.
+Core controls X0,Z.02,T1keV,rho3981.1/4000 at
+/tmp/ember-tops-core-spectrum-v1. ReportedR10.472/10.497, full-normalization
+step-cutR10.7414/10.7690. DensecontrolsT.225keV,rho187380/187480
+reportedR29.068/28.846 but full-normalizationR5.718e13/6.211e13.
+Collisionless n^3 integration also available as a DIAGNOSTIC ONLY:
+coreR11.5022/11.5359, denseR3.374e15/3.680e15.
+
+Actual512profile normalization bound COMPLETE (session44549):
+docs/results/plasma_normalization_profile_3848gyr_v1.json.
+Hash-pinned input tables/probe/profile. Complete-ionization electron bound gives
+maxu1.275, removedRosselandweight2.455%, radiativeopacityincrease2.517%,
+combinedopacityincrease0.7555% atmassfraction.02203. This holds the structure
+and spectral/conduction inputs fixed, excludes frequency-bin rounding and
+continuous refractive-index effects, and is NOT a lifetime uncertainty.
+Primary Colgan2016 equation1 andsection2.8 read. Armstrong2014 DOI located:
+10.1016/j.hedp.2013.10.005 (free-free Gaunt factors, not fulltext retrieved).
+
+New diagnostics/importer fixes/hotplans/docs are UNCOMMITTED after6faa364.
+Keep work on review branch. Preserve unrelatedDS_Store and the two helium
+coexistence/electron scripts listed below. Do not overwrite the current PDF
+with unverified evolutionary results.
+
+---
+
 # Accepted 5000 K atmosphere and plasma-opacity investigation — 2026-09-11 06:52 UTC
 
 The full 0.1-Msun to evolved 100 K remnant goal is ACTIVE. User authorizes

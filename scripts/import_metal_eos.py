@@ -10,6 +10,7 @@ import shutil
 import subprocess
 import sys
 from fetch_tops_composition import fraction_label
+from eos_source_coverage import absent_source_rows
 
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
@@ -29,6 +30,11 @@ def main():
             raise ValueError('inconsistent source identity')
         if raw['options']!=spec.get('source_options',[3,1,-2]):
             raise ValueError('source physics differs from family specification')
+        if raw.get('source_coverage')!=spec.get('source_coverage'):
+            raise ValueError('source coverage differs from family specification')
+        if raw.get('precision_fallback')!=spec.get('precision_fallback'):
+            raise ValueError('source numerical precision differs from family specification')
+        absent=absent_source_rows(raw)
         # Refinement may require sub-per-mille abundances. Rounded labels
         # alias distinct physical planes; preserve the exact request value.
         name=f'freeeos300_gs98_x{fraction_label(x,1000)}_he3{fraction_label(y,1000)}'
@@ -38,7 +44,8 @@ def main():
         subprocess.run([sys.executable,str(Path(__file__).with_name('import_freeeos_potential.py')),str(saved),str(target)],check=True)
         return {'hydrogen':x,'helium3':y,'potential':target.name,'potential_sha256':digest(target),
                 'source':str(saved.relative_to(a.output)),'source_sha256':digest(saved),
-                'failed_source_states':sum(r[0]!=0 for r in raw['data'])}
+                'failed_source_states':sum(r is not None and r[0]!=0 for r in raw['data']),
+                'absent_source_states':sum(absent)}
     jobs=[(i,x,y) for i,(x,y) in enumerate((x,y) for x in spec['hydrogen'] for y in spec['helium3'])]
     with ThreadPoolExecutor(a.jobs) as pool:planes=list(pool.map(run,jobs))
     lines=['EMBER_METAL_HELMHOLTZ 1','hydrogen '+str(len(spec['hydrogen']))+' '+' '.join(map(str,spec['hydrogen'])),
@@ -47,7 +54,7 @@ def main():
     family=a.output/'freeeos300_gs98_z020.dat';family.write_text('\n'.join(lines)+'\n')
     provenance={**spec,'planes':planes,'family_sha256':digest(family),
         'scripts':{name:digest(Path(__file__).with_name(name)) for name in
-                   ['generate_metal_eos.py','metal_eos_composition.py','import_freeeos_potential.py','import_metal_eos.py']}}
+                   ['generate_metal_eos.py','metal_eos_composition.py','import_freeeos_potential.py','import_metal_eos.py','eos_source_coverage.py']}}
     (archive/'freeeos300_gs98_manifest.json').write_text(json.dumps(provenance,indent=2)+'\n')
 
 if __name__=='__main__':main()

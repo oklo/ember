@@ -16,6 +16,7 @@ import json
 import math
 from pathlib import Path
 from stellar_composition import interior_composition
+from eos_source_coverage import absent_source_rows
 
 
 def main():
@@ -55,10 +56,17 @@ def main():
             raise ValueError('requires a uniform source grid')
     phi = [[0.]*9 for _ in rows]
     good = []
+    absent = absent_source_rows(src)
     # FreeEOS derives radiation constants from CODATA inputs, rather than a
     # rounded sigma_SB. Remove its radiation here; ember adds its own once.
     arad = 8*math.pi**5*1.380649e-16**4/(15*6.62607015e-27**3*2.99792458e10**3)
     for k,r in enumerate(rows):
+        if absent[k]:
+            # This coordinate was not requested from the source. Its absence
+            # is distinct from a returned nonconvergence flag, and masks the
+            # entire derivative stencil in exactly the same way.
+            good.append(False)
+            continue
         if not all(math.isfinite(v) for v in r):
             raise ValueError('nonfinite source value')
         info, _, rho, T, P, E, S, chir, chit, Er, Et, Sr, St, cp, ad, delta, *_ = r
