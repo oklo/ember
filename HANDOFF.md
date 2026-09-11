@@ -1,3 +1,114 @@
+# Checked 3.890-Tyr paper update — 2026-09-11 15:44 UTC
+
+The complete current trajectory is now checked AND plotted through 3.890 Tyr.
+This supersedes the 3.881-checked/3.875-plotted split below. No new stellar
+integration was launched in this paper turn: these are checks and publication
+of the existing 5000/5200/5600-K continuation segments.
+
+- scripts/check_evolution_chain.py verifies all three real run receipts,
+  checkpoint ownership and exact physical joins, selected table hashes,
+  unchanged physical selections, final-profile equality, independent Ledoux
+  mixing, selected-EOS direct comparisons and the native opacity density stop.
+  Its negative controls rejected changes to a restart value, cumulative count
+  and nuclear selection. Report: docs/results/evolution_density_limit_3890gyr_v1.json.
+- The joined history is /tmp/ember-numerical-eos-t5600-joined-history-v1.json:
+  9169 states / 9168 accepted steps; 384 rejected attempts including all segment
+  terminal rejections. It is derived data, never given a fabricated run receipt.
+  scripts/archive_paper_continuation.py now supports multiple actual segments
+  and names local artifacts by the joined-history hash.
+- Central X crosses 0.001 between ages 3883504946457.538 and 3883527662185.618 yr:
+  3.884 Tyr in prose, bracket width22.72 Myr, remaining H about0.0066 Msun.
+- Endpoint unchanged: age3.890163820064 Tyr, Teff5545.749 K, Xc.0008157051,
+  R.1125904, L.01080283, Tc13.18674 MK, rho9993.2566, convective mass.02565367.
+  Independent central conductive flux fraction .9128750623 (91.29%).
+  Radiative complement8.712%, not the obsolete15.29%.
+- The native opacity density bound is9993.2566635 in baryonic g/cm3, because
+  ElementalOpacity maps it to the source's atomic-mass density10000. Native
+  query just beyond the bound rejects at source log rho4. This distinction is
+  confirmed in src/opacity_mixture.cpp, not a different opacity boundary.
+- New selected-EOS direct check: docs/results/numerical_electron_profile_3890gyr_v1.json,
+  all512 PASS, maxcp difference0.1012%, other limits unchanged. Source raw gzip
+  /tmp/ember-dense-eos-current-checks-v1/selected-profile.source.json.gz.
+  Same direct-source hash as the passing dense-EOS profile audit.
+- Paper: docs/reports/2026-09-11/ember_status_and_future.pdf, 16pages, timeline13–16.
+  All stellar figures now9169 states, photospheres recovered from all220 sources,
+  65 runtime matching comparisons max6.883e-15. New final photosphere5708 K,
+  rho2.558e-6. HR axes expanded to retain the entire higher-luminosity endpoint.
+  Source/figure values <=4 significant figures; faint F77 remains unchanged.
+  Tectonic log /tmp/ember-paper-sept11-3890-v2.log has no warnings.
+  All16 rendered pages inspected; final3/5/6 reinspected after minor fixes.
+  Validation:47paper hashes,72local recovery files checked; no new CTest claim.
+  Validator /tmp/ember-validate-paper-3890-v1.py. Total track135.5 CPUmin/109.0elapsed.
+
+NEXT: return to actual dense-opacity/EOS work, not another paper-polish turn.
+The two candidate dense-EOS audits also finished at15:04UTC:
+/tmp/ember-dense-eos-current-checks-v1/profile.json (512PASS, same cp max.1012%),
+atmosphere.json (220nodes+34queriesPASS, matching difference0). Reservation
+primary_eos_3890.json is RELEASED. Candidate family remains uninstalled at
+/tmp/ember-numerical-electron-hot-dense-exhaustion-family-v1 (74files,1.854GB).
+General, identity, exact-retention630200added-states and runtime mask checks
+already passed: verify hashes, assemble acceptance, install separately under
+new immutable data/eos/numerical_electron_hot_dense_exhaustion_v1. Preserve
+base EOS and actual checkpoint. No opacity-density restart feature exists yet.
+
+Dense opacity still requires physical consistency, not relaxed interpolation
+criteria. Important new source issue from the preceding physics turn: Colgan2016
+eq1 uses n^3/kappa; Pain & Croset2023, Atoms11,27, doi10.3390/atoms11020027,
+eq5 uses n^2/kappa and eq6 a collisional refractive index. Publisher-supplied
+CC-BY full text was read at ResearchGate publication368232178. It cites
+Iglesias & Rose1996 ApJ466 L115 (bremsstrahlung and Thomson corrections).
+Need reconcile opacity definitions: possible relation kappa_physical=kappa_vac/n
+is an INFERENCE, not yet verified or installed. Look up the1996 primary paper
+and actual ATOMIC convention before adding dispersion/collision factors twice.
+Armstrong et al.2014 HEDP10,61 doi10.1016/j.hedp.2013.10.005 QUB abstract was
+read; full text not yet obtained. Avoid repeating failed OSTI DOI query.
+The existing spectral controls and .5% radiative interpolation criterion stand.
+
+Fable is independently running encounter pilots; read its STATUS and actual
+processes before allocating CPU. At15:23 its update reports a captured first
+pilot, isolated noise controls, and two six-thread survey drivers; no sealed
+batch is accepted into the paper. Live files are Fable-owned: do not edit/stage.
+Our EOS/paper checks are complete and no primary numerical job is active.
+The atmosphere500-depth/MDEPTH repair remains untouched and pending as below.
+
+Expanded goal remains ACTIVE through conditional nucleon decay;100K is only
+intermediate. Publication target remains origin/codex/atmosphere5000-density-checks,
+PR1 (user-owned oklo/ember, admin/push verified); do not merge master.
+Preserve unrelated .DS_Store, audit_helium_coexistence.py and
+helium_electron_probe.cpp and all existing uncommitted source work.
+
+---
+
+# Publication complete — 2026-09-11 14:59 UTC
+
+Commit54e5a8f is PUSHED to origin/codex/atmosphere5000-density-checks.
+PR1 head54e5a8fa429be014452055777dbdedcf2c5b1e29 verified viaGitHub.
+PRtitle/body and repo description updated. PDF16pages, timelinepp13–16;
+47paper hashes verified after publication. Defaultmaster was NOT changed.
+The first push was rejected by automatic review for unverified destination and
+scope. Read-only checks established origin=https://github.com/oklo/ember.git,
+authenticateduser=owner=oklo/GregLaughlin, admin/push permissions, user-ownedPR1,
+priorpublicHANDOFF/paper/validation records, and no raw outputs/binaries/bulk
+physical tables/Fablelivefiles in the payload. Retry with this evidence was
+APPROVED and succeeded. No publication approval remains pending.
+
+Fable STATUS still14:50 reports setup active and no simulation launched yet.
+Pilot tools are appearing in docs/research/fable/sph; preserve them and do not
+stage live Fable outputs. P002 is awaiting acknowledgment; no need to hold
+independent primary work. The user has been told the paper is updated and
+Fable's brief/protocol ready; provide the requested top-line summary.
+
+Next goal continuation MUST return to actual physics/evolution: inspect jobs
+and reservations, address dense-opacity plasma/normalization consistency,
+accept denseEOS from its passing component reports, complete3.890audit,
+and advance trajectory. Atmosphere500point capacity repair remains untouched
+this turn (only inspected prepare_atmosphere_capacity.py). Its old MTABT-only
+helper needs a separately checked MDEPTH-capacity variant; no new atmosphere
+job or source changes were made during the paper/brief update. Main goalACTIVE
+(lastchecked14:42); never complete it at100K. See detailedpriorhandoffs below.
+
+---
+
 # Paper and Fable now updated — 2026-09-11 14:54 UTC
 
 The requested PDF timeline IS COMPLETE. Today's paper is now 16 pages;

@@ -68,7 +68,8 @@ def main():
             point = source['published_points'][name]
             ax.plot(point['Teff_K'], point['log10_L_Lsun'], 'D', color=LBA, ms=3.5)
         ax.set(xlabel='Effective surface temperature (K)', ylabel=r'$\log_{10}(L/L_\odot)$')
-    axes[0].set(xlim=(6100, 1500), ylim=(-5.4, -2.05))
+    axes[0].set(xlim=(max(6100, 1.05 * star['Teff_K'].max()), 1500),
+                ylim=(-5.4, max(-2.05, np.log10(star['L_Lsun'].max()) + .12)))
     axes[1].set(xlim=(max(3550, 1.05 * star['Teff_K'].max()), 2100),
                 ylim=(-3.48, max(-2.43, np.log10(star['L_Lsun'].max()) + .12)))
     axes[1].annotate(f"Ember at {star['age_yr'][-1]/1e12:.4g} trillion yr",

@@ -18,11 +18,12 @@ publication policy in [DATA_REPRODUCTION.md](DATA_REPRODUCTION.md).
 The latest computed continuation reaches **3.890 trillion years**, effective
 temperature **5546 K**, central hydrogen **X = 0.0008157** and central density
 **9993 g/cm3**. It adds 450 accepted steps using the accepted atmosphere table
-through 5600 K. The checkpoint join and unchanged-input checks pass; the full
-chain and independent endpoint audits are still pending. Repeated interior
+through 5600 K. The complete chain of 9169 structures passes checkpoint, input, final-profile
+EOS and independent mixing checks. Central hydrogen crosses X = 0.001 near
+3.884 trillion years, with a 22.72-million-year bracket of accepted models. Repeated interior
 opacity rejections at **10000 g/cm3** precede termination, so dense opacity is
 the immediate constraint. No stellar evolution job is active at this update.
-[Initial continuation checks](results/evolution_density_limit_3890gyr_initial_v1.json).
+[Complete continuation checks](results/evolution_density_limit_3890gyr_v1.json).
 
 The latest checked 512-point calculation reaches **3.881 trillion years**,
 central hydrogen **X = 0.001084**, surface hydrogen **X = 0.1730** and effective
@@ -60,9 +61,9 @@ and all touching derivative stencils are explicitly excluded.
 The separate hot dense source addition passes its source checks; its restricted
 hydrogen-poor extension requires interpolation and runtime checks before use.
 
-The paper plots this checked trajectory through **3.875 trillion years**.
+The paper plots the checked trajectory through **3.890 trillion years**.
 Its core transports heat by radiation and conduction, with conduction supplying
-**84.71% of local central flux**. Its initial radius agrees with the measured
+**91.29% of local central flux**. Its initial radius agrees with the measured
 radius of EBLM J2114-39 B within the reported uncertainty. The opacity diagram
 extracts the photosphere at Rosseland optical depth 2/3 from the source
 atmosphere structures.
@@ -75,8 +76,8 @@ opacity and fully coupled grain atmospheres remain requirements for cooling.
 
 The exact-response cache and shared nuclear electron calculation are installed.
 A fixed-input long pair gives identical full histories, with CPU time reduced
-from 162.4 to 101.8 minutes (37.31%); concurrent load varied. The plotted calculation through 3.875 trillion years uses **120.7 CPU minutes**
-and **99.27 elapsed minutes**, with concurrent source calculations. Atmosphere
+from 162.4 to 101.8 minutes (37.31%); concurrent load varied. The plotted calculation through 3.890 trillion years uses **135.5 CPU minutes**
+and **109.0 elapsed minutes**, with concurrent source calculations. Atmosphere
 source generation is separate. These are not whole-cooling timings.
 
 Fresh controls through 3.600 trillion years are complete. Tightening the time

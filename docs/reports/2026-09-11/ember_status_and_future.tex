@@ -14,7 +14,7 @@
 \fancyfoot[C]{\small\thepage}\setlength{\headheight}{14pt}
 \newcommand{\Ms}{M_\odot}\newcommand{\Rs}{R_\odot}\newcommand{\Ls}{L_\odot}
 \newcommand{\Tyr}{\mathrm{Tyr}}
-\newcommand{\doc}[2]{\href{https://github.com/oklo/ember/blob/master/#1}{#2}}
+\newcommand{\doc}[2]{\href{https://github.com/oklo/ember/blob/codex/atmosphere5000-density-checks/#1}{#2}}
 \begin{document}
 \begin{center}
 {\Large\bfseries Ember: the long life of a $0.1\Ms$ star}\\[8pt]
@@ -24,18 +24,20 @@
 Ember is a one-dimensional stellar evolution code that calculates a star's
 structure, composition and energy transport as it ages.
 We use it to follow a star of $0.1\Ms$ through
-$3.875\times10^{12}$ yr from a static model at the beginning of hydrogen
-burning. Its central hydrogen mass fraction has fallen to $X=0.001294$, while the
+$3.890\times10^{12}$ yr from a static model at the beginning of hydrogen
+burning. Its central hydrogen mass fraction has fallen to $X=0.0008157$, while the
 surface remains hydrogen-rich at $X=0.1730$. A core that transports heat by
-radiation and conduction contains 95.44\% of its mass, surrounded by a convective envelope. Hydrogen
+radiation and conduction contains 97.43\% of its mass, surrounded by a convective envelope. Hydrogen
 burning still supplies almost all the luminosity. The aim is to calculate the
 transition to a helium white dwarf, cooling through 1000, 500 and 100 K,
 and subsequent evolution through disappearance under explicit nucleon-decay
 scenarios. Section~\ref{sec:lifetime} gives the lifetime timeline and its
 conditional alternatives.
 
-The figures show the evolutionary track through the model at the atmosphere
-table's 5000 K surface temperature limit.
+The figures show the evolutionary track through a model with surface
+temperature 5546 K. Its central density reaches the interior opacity
+table's limit near $10^4\,\mathrm{g\,cm^{-3}}$; extending the calculation
+requires opacity coverage at higher densities.
 We compare this trajectory with the published $0.1\Ms$ model of Laughlin,
 Bodenheimer and Adams (1997; LBA97), using their stated values and approximate
 curves read from their figures. To make a direct numerical comparison, we have
@@ -51,24 +53,24 @@ magnetism, mass loss and external heating. Its age excludes formation and
 pre-main-sequence contraction.
 
 \begin{center}\begin{tabular}{@{}lr@{}}\toprule
-Model at $3.875\Tyr$ & 512 points \\\midrule
-Radius ($\Rs$) & 0.1241 \\
-Photon luminosity ($\Ls$) & 0.008674 \\
-Effective surface temperature (K) & 5000 \\
-Central temperature (MK) & 12.61 \\
-Central density ($\mathrm{g\,cm^{-3}}$) & 6757 \\
-Central hydrogen mass fraction & 0.001294 \\
+Model at $3.890\Tyr$ & 512 points \\\midrule
+Radius ($\Rs$) & 0.1126 \\
+Photon luminosity ($\Ls$) & 0.01080 \\
+Effective surface temperature (K) & 5546 \\
+Central temperature (MK) & 13.19 \\
+Central density ($\mathrm{g\,cm^{-3}}$) & 9993 \\
+Central hydrogen mass fraction & 0.0008157 \\
 Surface hydrogen mass fraction & 0.1730 \\
-Central $^3$He mass fraction & $1.862\times10^{-9}$ \\
-Remaining hydrogen mass ($\Ms$) & 0.007414 \\
-Convective mass fraction & 0.04563 \\\bottomrule
+Central $^3$He mass fraction & $3.872\times10^{-10}$ \\
+Remaining hydrogen mass ($\Ms$) & 0.005952 \\
+Convective mass fraction & 0.02565 \\\bottomrule
 \end{tabular}\end{center}
 
-The plotted sequence contains the initial stellar model and 8455 successive
+The plotted sequence contains the initial stellar model and 9168 successive
 models after accepted time steps, each resolved into 512 mass points. Each time
 step evolves the abundance profile and solves the stellar structure and energy
 balance, including energy released or absorbed as the structure changes.
-The calculation uses 196 gas atmospheres, 72 equation-of-state composition
+The calculation uses 220 gas atmospheres, 72 equation-of-state composition
 tables, and Los Alamos ATOMIC radiative opacities for the
 high-temperature interior \cite{colgan16,tops}. The latter include additional
 hydrogen-poor mixtures through $X=0$, used above $T=5.012\times10^5$ K;
@@ -122,7 +124,7 @@ was read from Figure~1 of LBA97; diamonds mark values stated in their text.
 The left panel shows the full published path from the start of hydrogen
 burning through cooling. The right panel enlarges the region reached by
 Ember. The orange curve contains the complete 512-point Ember calculation through
-$3.875\Tyr$.
+$3.890\Tyr$.
 The original pre-main-sequence contraction and the
 dotted diagonal guide in LBA97 are excluded. The pale line connects 42
 selected positions on the printed track; it is an approximate reconstruction,
@@ -138,7 +140,7 @@ Initial luminosity ($\Ls$) & $\simeq0.000417$ & 0.0008362 \\
 Initial central density ($\mathrm{g\,cm^{-3}}$) & 309 & 381.7 \\
 Maximum $^3$He mass fraction & 0.0995 & 0.1003 \\
 Age at maximum $^3$He ($\Tyr$) & 1.38 & 0.7103 \\
-Central radiative core & Forms at $5.742\Tyr$ & Present at $3.875\Tyr$ \\
+Nonconvective central core & Forms at $5.742\Tyr$ & Present at $3.890\Tyr$ \\
 Hydrogen mass fraction at core onset & $\simeq0.16$ & Not yet measured \\
 Highest surface temperature (K) & 5807 & Not yet reached \\\bottomrule
 \end{tabular}\end{center}
@@ -158,7 +160,7 @@ measurement of the error in one isolated physical ingredient.
 The pale curves are read from the inset of LBA97 Figure~1, with 20 hydrogen
 and 15 helium-3 samples. Diamonds show their stated $^3$He maximum and the
 hydrogen abundance at central radiative-core formation. Orange curves are
-the 512-point Ember track through $3.875\Tyr$.
+the 512-point Ember track through $3.890\Tyr$.
 Ages are shown as reported, without shifting or
 stretching either calculation. The representative crosses correspond to
 four image pixels: about $0.05\Tyr$ in age and 0.01 in mass fraction. They
@@ -172,7 +174,7 @@ The maximum $^3$He abundance agrees to within about 1\%, but Ember reaches it
 in about half the time. Ember also consumes hydrogen faster over the interval
 calculated so far. Reading the published hydrogen curve gives an age of
 roughly $5.6\Tyr$ at hydrogen fraction 0.2034, reached by Ember near
-$3.40\Tyr$. The model at $3.875\Tyr$ has central hydrogen below 0.16,
+$3.40\Tyr$. The model at $3.890\Tyr$ has central hydrogen below 0.16,
 the approximate abundance stated by LBA97 at its central-core transition. The figure does not justify a more precise age comparison.
 The luminosity--temperature track alone can conceal this difference because
 it does not show how long the star spends at each position.
@@ -194,13 +196,13 @@ has fallen to 0.6277 and central hydrogen to $X=0.1518$, while surface
 hydrogen remains at $X=0.1747$. This separation of central and surface
 composition shows that convection no longer mixes the whole star.
 
-At $3.875\Tyr$, the model has a core containing 95.44\% of the mass that
+At $3.890\Tyr$, the model has a core containing 97.43\% of the mass that
 transports heat by radiation and conduction, surrounded by a convective envelope.
-Central hydrogen has fallen to $X=0.001294$, while the envelope remains
+Central hydrogen has fallen to $X=0.0008157$, while the envelope remains
 near $X=0.1730$. Radiation and conduction can carry the required energy
 through this core without convection; the composition gradient also suppresses
-convection. Conduction supplies 84.71\% of the local heat flux at the center,
-with radiation carrying the remaining 15.29\%. Conduction is therefore already
+convection. Conduction supplies 91.29\% of the local heat flux at the center,
+with radiation carrying the remaining 8.712\%. Conduction is therefore already
 significant in the central region. Figure~\ref{fig:transition} shows
 the declining convective mass and the final abundance profile on this track.
 The first loss of full convection does not by itself establish a central
@@ -212,8 +214,8 @@ radiative-core formation at $5.742\Tyr$.
 \includegraphics[width=\textwidth]{convection_current.pdf}
 \caption{Convection and chemical separation along the Ember track.
 Left: the fraction of mass in convective regions declines from unity near
-$3.546\Tyr$ to 0.04563 at $3.875\Tyr$. Right: the hydrogen profile in the
-$3.875\Tyr$ model. The shaded core carries heat by radiation and conduction;
+$3.546\Tyr$ to 0.02565 at $3.890\Tyr$. Right: the hydrogen profile in the
+$3.890\Tyr$ model. The shaded core carries heat by radiation and conduction;
 the outer convective envelope has an almost uniform hydrogen abundance.
 Both panels use the same calculation and its final saved structure.}
 \label{fig:transition}
@@ -253,9 +255,9 @@ photospheric density and temperature over an opacity map, with circle diameter
 proportional to stellar radius. For Ember, we recover the photospheric state
 at Rosseland optical depth $2/3$ from the accepted atmosphere structures.
 The local temperature there differs from the effective temperature of a
-frequency-dependent atmosphere. It rises from 3019 to 5166 K over the plotted
+frequency-dependent atmosphere. It rises from 3019 to 5708 K over the plotted
 history, while density falls overall from $1.432\times10^{-5}$ to
-$3.203\times10^{-6}\,\mathrm{g\,cm^{-3}}$.
+$2.558\times10^{-6}\,\mathrm{g\,cm^{-3}}$.
 The two opacity maps use the same axes and color scale. The LBA97 map is
 inferred from the published shading, calibrated against the tabulated
 opacities of Alexander, Johnson and Rypma \cite{ajr83}. Nineteen cells excluded
@@ -272,7 +274,7 @@ axes and grayscale normalization. The right map excludes scattering and
 grains; the low-temperature grain-opacity band in the left map is therefore
 absent. Hatching marks missing wavelength-table coverage. Both panels show
 the LBA97 track recovered from 897 figure markers and Ember's calculated
-track through $3.875\Tyr$. The LBA97 curve includes contraction and cooling;
+track through $3.890\Tyr$. The LBA97 curve includes contraction and cooling;
 the plotted Ember models are burning hydrogen. Open-circle diameters scale
 with radius, with 48 LBA97 and 22 Ember samples. LBA97 radii are normalized
 using its stated main-sequence luminosity and temperature. Ember's local
@@ -350,8 +352,9 @@ calculations are needed when the star reaches a composition, surface
 temperature or gravity not adequately covered, or when the physical treatment
 changes.
 
-The plotted track uses 196 gas atmospheres, spanning the combinations of
-surface temperature, gravity and composition that it visits through 5000 K.
+The plotted track uses 220 gas atmospheres, spanning the combinations of
+surface temperature, gravity and composition that it visits, with source
+models extending through 5600 K.
 The tabulated source states include hydrogen fractions from 0.1 to 0.7 and
 $^3$He fractions from zero to 0.12. These outer ranges do not imply that every
 combination has been calculated: interpolation requires a complete set of
@@ -362,12 +365,12 @@ models with compositions between the tabulated values, matching temperatures
 differ by $-0.4837\%$ and $-0.7399\%$, and gas pressures by $+0.5707\%$
 and $+0.5137\%$. Changing the lower boundary of the source atmospheres
 changes matching values by at most $0.007883\%$ in the specified comparisons.
-All 196 source models have support in the selected 72-table equation of state.
+All 220 source models have support in the selected 72-table equation of state.
 Independent comparisons with numerical-electron FreeEOS at 4736 states give
 a maximum heat-capacity difference of $0.2952\%$; 2240 states also pass
 thermodynamic identity checks. At the final stellar model, independent
 FreeEOS evaluations at all 512 actual compositions, temperatures and densities
-differ by at most 0.06584\% in heat capacity. Interpolation uses thermodynamically
+differ by at most 0.1012\% in heat capacity. Interpolation uses thermodynamically
 consistent source states and excludes unsupported derivative stencils.
 These are sampled comparisons, not error bounds across the full table.
 
@@ -381,7 +384,9 @@ At 4500, 4700 and 4900 K, independent matching temperatures differ by at most
 0.05225\% and gas pressures by 0.5376\%. Twelve lower-boundary comparisons
 at 4600--5000 K change matching values by at most 0.007810\%.
 Equilibrium chemistry finds no condensates in the tested structures from
-3800 through 5000~K.
+3800 through 5600~K. At 5100, 5300 and 5500 K, independent matching-state
+comparisons differ by at most 0.4449\%. Eight lower-boundary comparisons
+at 5400--5600 K change matching values by at most 0.008695\%.
 
 The high-temperature ATOMIC opacity tables include additional mixtures with
 $X=0$, 0.025, 0.05 and 0.075 at three metal fractions. Twelve independent
@@ -394,7 +399,7 @@ The current evolving atmosphere uses gas-only opacity. Independent chemistry
 checks found no condensates in the tested 3000--3200 K atmospheres, but found
 them in the cool upper layers of 2600--2800 K models. Effective temperature
 alone is therefore insufficient to decide whether grains form. Checks on the
-warm hydrogen-poor structures through 5000 K find no condensates;
+warm hydrogen-poor structures through 5600 K find no condensates;
 colder structures still require atmosphere calculations with grain formation
 and opacity included.
 
@@ -450,16 +455,16 @@ The discrete energy equation used for stellar evolution is
 Here $L_\gamma$ is the photon luminosity, $L_{\rm nuc,dep}$ is nuclear heat
 left in the star, and $L_{\rm grav}$ is the contribution from changing internal
 and gravitational energy. Nuclear and thermal neutrinos are counted separately.
-At $3.875\Tyr$ in the 512-point model, in solar luminosity units,
+At $3.890\Tyr$ in the 512-point model, in solar luminosity units,
 \[
- L_{\rm nuc,dep}=0.008653,\quad
- L_{\rm grav}=2.072\times10^{-5},\quad
- L_{\nu,\rm nuclear}=2.566\times10^{-4},\quad
- L_{\nu,\rm plasma}=4.861\times10^{-8}.
+ L_{\rm nuc,dep}=0.01077,\quad
+ L_{\rm grav}=3.201\times10^{-5},\quad
+ L_{\nu,\rm nuclear}=3.362\times10^{-4},\quad
+ L_{\nu,\rm plasma}=1.260\times10^{-7}.
 \]
 The changing-energy term refers to the last implicit half step; the other
 reported diagnostics use the saved state. Before rounding, the discrete
-fractional luminosity residual at this saved endpoint is below $4\times10^{-11}$. This checks the equations implemented
+fractional luminosity residual at this saved endpoint is below $8\times10^{-11}$. This checks the equations implemented
 in the code, not an independent exact energy integral or the absence of
 missing physical processes.
 
@@ -499,9 +504,10 @@ fixed mesh does not converge. The importance of omitted nuclear reactions,
 thermal-neutrino processes and semiconvective heat transport must be assessed
 in the conditions actually reached.
 
-Hydrogen exhaustion and cooling require distinct measurements. We will record
-central hydrogen fractions crossing $10^{-3}$, $10^{-4}$ and $10^{-5}$, retaining
-the accepted models on either side. We will also record when nuclear heat
+Hydrogen exhaustion and cooling require distinct measurements. Central hydrogen crosses $X=10^{-3}$ near $3.884\Tyr$; the bracketing
+accepted models are separated by 22.72 million years. At that crossing,
+the star retains about $0.0066\Ms$ of hydrogen. We will also record
+$X=10^{-4}$ and $10^{-5}$, retaining the accepted models on either side. We will also record when nuclear heat
 falls below 10\%, 1\% and 0.1\% of photon luminosity during cooling, including
 any later recovery. Remaining hydrogen mass and shell burning must be followed;
 a depleted center alone does not establish that burning has ended everywhere.
@@ -520,9 +526,9 @@ in Section~\ref{sec:lifetime} includes these alternatives, cooling past 100 K,
 loss of degeneracy during mass depletion, and the end of the bound remnant.
 
 \section{Computing time and reproducibility}
-The plotted 512-point calculation, from the initial model to the atmosphere
-limit at $3.875\Tyr$, used 120.7 CPU minutes and 99.27 elapsed minutes,
-with 8455 accepted steps and 319 rejected attempts. These timings were measured
+The plotted 512-point calculation, from the initial model to the interior opacity
+density limit at $3.890\Tyr$, used 135.5 CPU minutes and 109.0 elapsed minutes,
+with 9168 accepted steps and 384 rejected attempts. These timings were measured
 while other calculations shared the processor. Atmosphere generation
 is excluded from the stellar CPU time. The calculation reuses exactly matching nuclear responses and shares
 electron calculations within each response. This is a measured partial trajectory; the cost of hydrogen

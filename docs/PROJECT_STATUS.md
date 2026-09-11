@@ -9,8 +9,8 @@ are alternatives, not uncertainties hidden inside a single predicted track.
 
 - **Evolution:** computed through **3.890 trillion years**, with surface
   temperature **5546 K**, central hydrogen **X = 0.0008157** and central density
-  **9993 g/cm³**. Initial checkpoint/input checks pass; full endpoint audit is
-  pending. The separately checked continuation reaches **3.881 trillion years**.
+  **9993 g/cm³**. All 9169 structures pass the complete-chain and endpoint checks. Central
+  hydrogen crosses **X = 0.001** near **3.884 trillion years**.
 - **Immediate constraint:** dense interior radiative opacity. The new source
   requires a consistent treatment of the plasma cutoff and spectral averaging;
   more density points alone do not fix its discontinuities. The dense EOS
@@ -19,19 +19,19 @@ are alternatives, not uncertainties hidden inside a single predicted track.
   Source models through **6400 K** exist; one depth comparison and the remaining
   grid checks still prevent selecting the full extension.
 - **Paper:** the [16-page PDF](reports/2026-09-11/ember_status_and_future.pdf)
-  now ends with a four-page lifetime timeline. Stellar plots remain at the
-  checked **3.875-trillion-year** track. Later events and decay curves are
+  now ends with a four-page lifetime timeline. Stellar plots show the
+  checked **3.890-trillion-year** track. Later events and decay curves are
   explicitly conditional, with reproducible reference calculations.
 - **Parallel research:** Fable has acknowledged the
-  [SPH and literature brief](research/fable/ASSIGNMENT.md) and is preparing a
-  degenerate-fluid WD pilot with the existing SWIFT code. No encounter result
+  [SPH and literature brief](research/fable/ASSIGNMENT.md) and is running
+  degenerate-fluid WD encounter pilots with the existing SWIFT code. No encounter result
   is claimed yet. The [coordination protocol](research/fable/COORDINATION.md)
   handles asynchronous reviews, resource allocation and token-limit pauses.
 
 ## Priorities
 
-1. Resolve the dense-opacity prescription, accept the dense EOS, audit the
-   current endpoint and continue hydrogen exhaustion and the cooling turn.
+1. Resolve the dense-opacity prescription, accept the dense EOS and continue
+   hydrogen exhaustion and the cooling turn.
 2. Complete forward atmosphere checks; introduce diffusion and coupled grain
    physics before they control the cooling structure.
 3. Follow residual burning, crystallization and thermal evolution through

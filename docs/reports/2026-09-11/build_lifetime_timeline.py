@@ -20,6 +20,8 @@ def main():
     peak = max(rows, key=lambda r: float(r['central_Y3']))
     first = next(r for r in rows if float(r['convective_mass_fraction']) < 1 - 1e-6)
     last = rows[-1]
+    crossing = next((a, b) for a, b in zip(rows, rows[1:])
+                    if float(a['central_X']) > .001 >= float(b['central_X']))
     # A common independent lifetime for ALL baryons is an illustrative model,
     # not an assumption about bound neutrons or a prediction of proton decay.
     solar_mass_g = 1.98847e33
@@ -37,6 +39,9 @@ def main():
         'timelineLastAge': float(last['age_yr']) / 1e12,
         'timelineLastX': float(last['central_X']),
         'timelineLastTeff': float(last['Teff_K']),
+        'timelineLastConvectivePercent': 100 * float(last['convective_mass_fraction']),
+        'timelineHydrogenCrossAge': float(crossing[1]['age_yr']) / 1e12,
+        'timelineHydrogenCrossWidthMyr': (float(crossing[1]['age_yr']) - float(crossing[0]['age_yr'])) / 1e6,
         'timelineLastMean': mean_last,
         'timelineLastLow': percentiles['0.05'],
         'timelineLastHigh': percentiles['0.95'],
@@ -51,6 +56,7 @@ def main():
         'helium3_peak': peak,
         'first_saved_nonconvective': first,
         'plotted_endpoint': last,
+        'central_hydrogen_1e_minus_3_bracket': list(crossing),
         'benchmark': {
             'assumptions': ['initial baryonic mass 0.1 solar masses',
                             'all baryons independently decay with one constant lifetime',

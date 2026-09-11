@@ -1,56 +1,79 @@
 {
-  "scope": "Complete accepted history from one fresh calculation with fixed physical inputs; no history splicing.",
-  "input": "out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.json",
-  "raw_sha256": "7d7d0014eca968857284abdc31267451bc8c748799bffb8a00adcde6e2ec89f6",
-  "raw_archive": "artifacts/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.json.gz",
-  "raw_archive_sha256": "1d0af0e7446b0cc000ac16f0de80ccf0487f6bba784fa7fdfd5ce62b1f2f75a4",
+  "scope": "Export a checked checkpoint continuation for a daily working paper.\n\nThe plotted history is an assembly of actual accepted states, with each duplicate\nrestart state removed. Original run receipts remain attached to their separate\nsegments. The derived history is never assigned a fabricated run receipt.\n",
+  "input": "/tmp/ember-numerical-eos-t5600-joined-history-v1.json",
+  "history_is_assembled": true,
+  "raw_sha256": "53752909cad953b3153473af6b42891f4383672d46df763f2674f3de3d2b3376",
+  "raw_archive": "artifacts/continuation-53752909cad9-023-ember-numerical-eos-t5600-joined-history-v1.json.gz",
+  "raw_archive_sha256": "79d6a1a3e17f5e0954496a640079b789b1cfd9786136ca6cffed3d5d2e761116",
+  "serialized_history_note": "The archived JSON is the explicitly derived joined history. Original segment outputs and receipts are archived separately.",
   "history_csv": "evolution_latest.csv",
-  "history_csv_sha256": "f64a4b0578f5420937bdd858c09cffee00f514f72f2660ad5631f0834c476169",
+  "history_csv_sha256": "fcf2cd4251ea3f9e839e7f0c84e3ffd5a412d48373fa140175307c9f541bfd6e",
   "profile_csv": "evolution_latest_profile.csv",
-  "profile_csv_sha256": "1a5e934c277f6b1ad237e9908fe6a0639e95f3d9d6b2cb28fb7c8197f9a5f973",
-  "states": 8456,
+  "profile_csv_sha256": "28ab0b571dbc495ff2f48a6c6e7cd79f09e5711f3b725a2f478d4b0390d7ef2f",
+  "states": 9169,
   "endpoint": {
-    "age_yr": 3874509630439.291,
-    "step_yr": 842.4219486777611,
-    "R_Rsun": 0.12411352155364568,
-    "L_Lsun": 0.00867384967553073,
-    "Teff_K": 4999.999997124762,
-    "central_X": 0.0012941192198377691,
-    "central_Y3": 1.8622872022123267e-09,
-    "step_error_norm": 1.3322676295501878e-08,
-    "discrete_luminosity_balance": 3.035127704720253e-11,
-    "nuclear_rest_mass_balance": -6.078625225391932e-08,
+    "age_yr": 3890163820064.033,
+    "step_yr": 1211.269401287158,
+    "R_Rsun": 0.11259041182790923,
+    "L_Lsun": 0.01080282767341297,
+    "Teff_K": 5545.749371632476,
+    "central_X": 0.0008157051212789522,
+    "central_Y3": 3.872418981313578e-10,
+    "step_error_norm": 3.108624468950438e-08,
+    "discrete_luminosity_balance": 7.763301113072885e-11,
+    "nuclear_rest_mass_balance": -1.0811432349377981e-07,
     "last_halfstep_coupling_iterations": 1,
-    "convective_mass_fraction": 0.045627658375802044,
-    "central_T_K": 12613960.975377211,
-    "central_rho": 6757.048642883112,
-    "surface_X": 0.17304030258976486,
-    "surface_Y3": 0.0026488879130924688,
-    "nuclear_deposited_Lsun": 0.008653179940126305,
-    "nuclear_neutrino_Lsun": 0.00025657552436558946,
-    "last_halfstep_gravothermal_Lsun": 2.071834202854171e-05,
-    "hydrogen_mass_Msun": 0.007414380138944069,
-    "thermal_neutrino_Lsun": 4.8606360856263715e-08
+    "convective_mass_fraction": 0.02565367086275697,
+    "central_T_K": 13186744.202361828,
+    "central_rho": 9993.256621756178,
+    "surface_X": 0.17303686256381393,
+    "surface_Y3": 0.002652327874502492,
+    "nuclear_deposited_Lsun": 0.010770939561910426,
+    "nuclear_neutrino_Lsun": 0.00033622161445890644,
+    "last_halfstep_gravothermal_Lsun": 3.201410310411928e-05,
+    "hydrogen_mass_Msun": 0.005951589541167443,
+    "thermal_neutrino_Lsun": 1.2599076291812502e-07
   },
   "requested_age_reached": false,
-  "stop": "Accepted history ends at the atmosphere upper temperature; subsequent source-domain rejections and minimum-step failure are retained. Requested age was not reached.",
-  "first_atmosphere_domain_rejection": "retry dt=1.38022e+07 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
-  "last_atmosphere_domain_rejection": "retry dt=105.303 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
-  "rejected_attempts": 319,
+  "stop": "Repeated interior opacity density-domain rejections followed by decreasing-step line-search failure.",
+  "central_conduction_flux_fraction": 0.9128750623334559,
+  "first_atmosphere_domain_rejection": null,
+  "last_atmosphere_domain_rejection": null,
+  "rejected_attempts": 384,
   "milestones": {
     "scope": "Report bracketed exhaustion and cooling milestones without extrapolation.\n\nAll recrossings are retained. A threshold crossing is not a claim of permanent\nextinction, a white-dwarf classification, or a converged endpoint age.\n",
     "age_range_yr": [
       0,
-      3874509630439.291
+      3890163820064.033
     ],
-    "accepted_states": 8456,
+    "accepted_states": 9169,
     "run_reached_requested_age": false,
     "core_hydrogen": [
       {
         "threshold": 0.001,
         "already_below_at_segment_start": false,
-        "crossings": [],
-        "below_at_segment_end": false
+        "crossings": [
+          {
+            "direction": "down",
+            "age_bracket_yr": [
+              3883504946457.538,
+              3883527662185.618
+            ],
+            "value_bracket": [
+              0.0010005913785540578,
+              0.0009999141006044343
+            ],
+            "hydrogen_mass_bracket_Msun": [
+              0.006614178568063363,
+              0.006612019034564843
+            ],
+            "central_X_bracket": [
+              0.0010005913785540578,
+              0.0009999141006044343
+            ]
+          }
+        ],
+        "below_at_segment_end": true
       },
       {
         "threshold": 0.0001,
@@ -108,54 +131,60 @@
     ],
     "temperature_scope": "Downward crossings are cooling-temperature milestones only. Establish a degenerate remnant, residual-burning regime and source validity separately.",
     "final": {
-      "age_yr": 3874509630439.291,
-      "central_X": 0.0012941192198377691,
-      "Teff_K": 4999.999997124762,
-      "L_Lsun": 0.00867384967553073,
-      "hydrogen_mass_Msun": 0.007414380138944069,
-      "nuclear_deposited_Lsun": 0.008653179940126305
+      "age_yr": 3890163820064.033,
+      "central_X": 0.0008157051212789522,
+      "Teff_K": 5545.749371632476,
+      "L_Lsun": 0.01080282767341297,
+      "hydrogen_mass_Msun": 0.005951589541167443,
+      "nuclear_deposited_Lsun": 0.010770939561910426
     }
   },
   "mixing_regions": [
     {
       "begin": 0,
-      "end_exclusive": 381,
+      "end_exclusive": 397,
       "convective": false,
-      "mass_fraction": 0.9543723416241985,
+      "mass_fraction": 0.9743463291372436,
       "inner_enclosed_fraction": 1.2286486893304287e-10,
-      "outer_enclosed_fraction": 0.9536156050649064
+      "outer_enclosed_fraction": 0.9738451997894784
     },
     {
-      "begin": 381,
+      "begin": 397,
       "end_exclusive": 512,
       "convective": true,
-      "mass_fraction": 0.04562765837580204,
-      "inner_enclosed_fraction": 0.9551290781834895,
+      "mass_fraction": 0.025653670862756973,
+      "inner_enclosed_fraction": 0.9748474584850078,
       "outer_enclosed_fraction": 1
     }
   ],
-  "mixing_probe_sha256": "4e0541eb003a4352a7bec9538e02dde45e8a655571570eea4f88cfb1b0713455",
-  "receipt_sha256": "540394a9bede99334aeb48dd51400550af36847398cefaa0a4bb156184749292",
-  "executable_sha256": "a4e48b67505fa26ebf443108df5cfd27348f1a89cf79d7bc56f1f52dcfa19f1c",
   "EOS": "metal:data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
-  "atmosphere": "nongrey:data/atmosphere/nongrey_gs98_z020_exhaustion_t5000_v1.dat",
+  "atmosphere": "nongrey:data/atmosphere/nongrey_gs98_z020_exhaustion_t5600_v1.dat",
   "opacity_directory": "/Users/greglaughlin/Projects/ember/data/opacity/hydrogen_exhaustion_hot_v1",
   "step_error_tolerances": {
     "log_structure": 2.5e-05,
     "absolute_abundance": 2.5e-08,
     "relative_surface_luminosity": 0.00025
   },
-  "data_changed_during_run": [],
-  "source_changed_during_run": [
-    "apps/evolve.cpp",
-    "include/ember/eos_mixture.hpp",
-    "include/ember/nuclear.hpp",
-    "src/eos_mixture.cpp",
-    "src/nuclear_pp.cpp"
+  "executable_sha256": "7d8f95f327799371539563a0328d5962fb08a459302c5642f04f7a3880083ab3",
+  "segment_receipts": [
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.receipt.json",
+      "sha256": "540394a9bede99334aeb48dd51400550af36847398cefaa0a4bb156184749292"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5200-512-4000gyr-v1.receipt.json",
+      "sha256": "9687bdbf39605de557ba19ddfe514785fc27065aef07241306e15392eaedf4d8"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5600-512-4000gyr-v1.receipt.json",
+      "sha256": "411551e98117f4e1897222c9dfc5c8fe2e916737a07d323a6d49173c492e49f3"
+    }
   ],
-  "source_note": "Changes to the source tree do not alter the copied executable used for this calculation.",
-  "cpu_seconds": 7240.055622000001,
-  "awake_seconds": 5956.380562624894,
-  "utc_seconds": 5956.366942882538,
-  "export_script_sha256": "0de8512783beb1224a01e3c6ef64a77d6574a64e3c0e0d58ef10548bb0785253"
+  "continuation_check": "docs/results/evolution_density_limit_3890gyr_v1.json",
+  "continuation_check_sha256": "2a5fafebc413e33de651df42a364d6ebdc9022c88209973ead20e6e903faf4d9",
+  "cpu_seconds": 8131.793704000001,
+  "awake_seconds": 6542.848291080445,
+  "utc_seconds": 6542.839940071106,
+  "timing_note": "Sums of the actual segment runs; no atmosphere or source-generation time included.",
+  "export_script_sha256": "7dc30f568387e524eddecd8e8be4d91b3ece6038697270ec698da1d7d81bad49"
 }

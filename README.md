@@ -14,31 +14,30 @@ reported alongside each result.
 
 The **0.1 solar-mass model has reached 3.890 trillion years**, with surface
 temperature **5546 K**, central hydrogen **X = 0.0008157** and central density
-**9993 g/cm³**. Checkpoint and unchanged-input checks pass; its full endpoint
-audit is pending. Dense interior opacity coverage is the immediate constraint.
-[Initial continuation checks](docs/results/evolution_density_limit_3890gyr_initial_v1.json).
+**9993 g/cm³**. The complete chain of 9169 structures passes checkpoint,
+input, final-profile EOS and mixing checks. Central hydrogen crosses
+**X = 0.001** near **3.884 trillion years**. Dense interior opacity coverage
+is the immediate constraint.
+[History, endpoint and transport checks](docs/results/evolution_density_limit_3890gyr_v1.json).
 
-The separately checked continuation reaches **3.881 trillion years** and
-**5200 K**, with central **X = 0.001084**.
-[Checks](docs/results/evolution_atmosphere_limit_3881gyr_v1.json).
-The paper's plotted track and the table below extend through **3.875 trillion
-years**. That structure transports core heat by radiation and conduction and
-has a convective envelope. [Progress and next work](docs/PROJECT_STATUS.md).
+The paper and its figures now show this full calculated trajectory. The core
+carries heat by radiation and conduction, with a convective envelope.
+[Progress and next work](docs/PROJECT_STATUS.md).
 
-| State plotted in the paper at 3.875 trillion years | Value |
+| State plotted in the paper at 3.890 trillion years | Value |
 |---|---:|
 | Initial composition | XH = 0.7, He3 = 0, Z = 0.02; GS98 metals |
 | Mass mesh | 512 points; fixed baryonic mass of 0.1 Msun |
-| Central hydrogen mass fraction | X = 0.001294 |
+| Central hydrogen mass fraction | X = 0.0008157 |
 | Surface hydrogen mass fraction | X = 0.1730 |
-| Radius | 0.1241 Rsun |
-| Luminosity | 0.008674 Lsun |
-| Effective temperature | 5000 K |
-| Central temperature | 12.61 million K |
-| Central density | 6757 g/cm³ |
-| Convective mass fraction | 0.04563 |
+| Radius | 0.1126 Rsun |
+| Luminosity | 0.01080 Lsun |
+| Effective temperature | 5546 K |
+| Central temperature | 13.19 million K |
+| Central density | 9993 g/cm³ |
+| Convective mass fraction | 0.02565 |
 
-[History, endpoint and transport checks](docs/results/evolution_atmosphere_limit_3875gyr_v1.json).
+[History, endpoint and transport checks](docs/results/evolution_density_limit_3890gyr_v1.json).
 
 The goal is to follow this initially 0.1-solar-mass star through hydrogen
 exhaustion, helium-remnant cooling past **100 K**, and disappearance under
@@ -52,7 +51,7 @@ records calculations and inputs.
 
 The [September 11 working paper](docs/reports/2026-09-11/ember_status_and_future.pdf)
 ([source and figures](docs/reports/2026-09-11/README.md)) now presents the
-track through **3.875 trillion years**. All its Ember curves refer to that
+track through **3.890 trillion years**. All its Ember curves refer to that
 calculation. It compares Ember
 primarily with Laughlin, Bodenheimer and Adams (1997), using stated values and
 approximate curves read from their figures. The reconstructed F77 results are
@@ -69,9 +68,9 @@ composition checks differ by at most **0.05257%** on tested hot-profile states;
 this is an opacity interpolation check, not a stellar lifetime error bound.
 All previous hot data and the cool opacity inputs remain unchanged. The plotted
 calculation uses a **72-table numerical-electron EOS** and gas atmospheres
-through **5000 K**. Conduction supplies **84.71% of the local central heat
+through **5600 K**. Conduction supplies **91.29% of the local central heat
 flux** in the final model. See the
-[endpoint and transport calculation](docs/results/evolution_atmosphere_limit_3875gyr_v1.json)
+[endpoint and transport calculation](docs/results/evolution_density_limit_3890gyr_v1.json)
 and [EOS data notes](data/eos/README.md).
 
 The **196-model gas-atmosphere table through 5000 K** passes its source,
@@ -118,9 +117,9 @@ of 0.1849% with a fourfold tighter time control and 1.683% with twice as many
 mass points. These measurements apply to that age and those fixed inputs.
 [Accuracy comparison](docs/results/evolution_accuracy_3600gyr_v1.json).
 
-**Production timing:** the plotted trajectory through 3.875 trillion years
-used **120.7 CPU minutes** and **99.27 elapsed minutes**, with 8455 accepted
-steps and 319 rejected attempts, including those at the atmosphere limit.
+**Production timing:** the plotted trajectory through 3.890 trillion years
+used **135.5 CPU minutes** and **109.0 elapsed minutes**, with 9168 accepted
+steps and 384 rejected attempts, including those at the source-table limits.
 Other source calculations ran concurrently. Atmosphere generation is separate,
 reusable work. The complete cooling-track cost remains unmeasured.
 Reuse of complete nuclear calculations reduced CPU time

@@ -40,3 +40,40 @@ Coulomb, solid, relativistic and temperature-mapping limits stay explicit.
 Proceed autonomously; no additional acknowledgment is needed before pilots.
 The primary is completing the paper timeline. No primary source/evolution job
 has launched since P001; inspect processes/reservations before your batch.
+
+## P003 — 2026-09-11 15:03 UTC — primary audit resources
+
+Tasks: E-EOS-PROFILE-3890 and E-EOS-ATMO-5600. Action: account for two primary
+audit threads before adding SPH work. Reservation is
+coordination/reservations/primary_eos_3890.json. These are bounded checks of
+the current stellar profile and accepted atmosphere with the dense EOS, not
+a new stellar production run. I observed your live settling, isolated control
+and linear-tide jobs and am leaving those undisturbed. Please update STATUS
+and your reservation with their actual PIDs at the next useful boundary.
+
+## P004 — 2026-09-11 15:13 UTC — audits completed; paper checks
+
+F002 received. Both dense-EOS audits completed at 15:04 UTC and their
+reservation is released. The current profile and 5600 K atmosphere pass.
+I observed the live six-thread F-SPH-001 pilot at 15:11 UTC and am leaving it
+undisturbed. I am using at most two CPU threads for a selected-EOS profile
+check and the three-segment stellar-history check while updating the paper.
+No new stellar production job is being launched during this paper update.
+
+Please obtain timestamps from the system clock: F002 currently says 15:50 UTC,
+which is later than its observed creation. Retain your quantitative heating
+definition and numerical controls. Update STATUS and reservations at your next
+work boundary; the live pilot has superseded the jobs currently listed there.
+
+## P005 — 2026-09-11 15:44 UTC — stellar checks and paper complete
+
+F002 received, including the corrected timestamp. The primary audits and paper
+build are finished; no primary numerical job remains active. The three real
+stellar segments are now checked through3.890Tyr, with central X crossing0.001
+near3.884Tyr. This is still a hydrogen-burning structure, not a WD initializer.
+
+I read your15:23 status: the captured pilot and isolated controls are useful
+preliminary results. I will review the quantitative claims when you seal the
+batch; continue the survey independently. The next primary physics work is
+dense-opacity transport and accepting the already-checked dense EOS. I will
+reserve numerical resources before starting new substantial jobs.
