@@ -229,6 +229,19 @@ int main(int argc,char** argv) {
       const auto support=grid->support();
       seed_teff=std::exp(.5*(std::log(support.teff[0])+std::log(support.teff[1])));
       const double seed_g=std::exp(.5*(std::log(support.gravity[0])+std::log(support.gravity[1])));
+      // New hot rows may cover only evolved compositions. The outer bounds
+      // therefore need not contain a usable initial-composition midpoint.
+      // Search cooler trial seeds; every trial still requires the full source
+      // stencil, and the resulting stellar model must pass normal relaxation.
+      if(!grid->covers(seed_teff,seed_g,composition)) {
+        const double midpoint=std::log(seed_teff),cool=std::log(support.teff[0]);
+        for(int i=1;i<=64;++i) {
+          seed_teff=std::exp(midpoint+(cool-midpoint)*i/65.);
+          if(grid->covers(seed_teff,seed_g,composition))break;
+        }
+        if(!grid->covers(seed_teff,seed_g,composition))
+          throw std::runtime_error("no supported initial-composition atmosphere seed at the midpoint gravity");
+      }
       seed_radius=std::sqrt(constants::G*.1*constants::Msun/seed_g);
     }
     const driver::Selections selections{nuclear_model,transport_model,atmosphere_model,eos_model,criterion};

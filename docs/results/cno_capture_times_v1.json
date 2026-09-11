@@ -1,0 +1,199 @@
+{
+  "scope": "Estimate central C/N proton-capture times without changing stellar evolution.\n\nSolar Fusion II Table XII supplies the low-energy S-factor expansions. These\ninstantaneous times do not integrate the changing stellar state, establish a\nglobal CNO luminosity bound, or evolve the metal mixture. SciPy is required.\n",
+  "source": "https://arxiv.org/pdf/1004.2318",
+  "source_locations": "Table XII; N14 energy expansion and range in equation 50.",
+  "rate_parameters": {
+    "C12_p_gamma": [
+      6,
+      12.0,
+      1.34,
+      0.0026,
+      8.3e-05
+    ],
+    "C13_p_gamma": [
+      6,
+      13.00335484,
+      7.6,
+      -0.00783,
+      0.000729
+    ],
+    "N14_p_gamma": [
+      7,
+      14.003074,
+      1.66,
+      -0.0033,
+      4.4e-05
+    ]
+  },
+  "screening_scope": "Same finite-degeneracy susceptibility and Salpeter--Van Horn interpolation as Ember, applied to proton/carbon and proton/nitrogen charges. This is a screening approximation, not an uncertainty bound.",
+  "range_note": "All integrated energies are below 130 keV. The omitted polynomial tail to 130 keV is checked; this is not a bound on unmodeled higher-energy cross sections.",
+  "interpretation": "A capture time comparable to the time spent at a stellar state calls for a changing-composition calculation. Dividing by the total stellar age does not determine depletion. No CNO energy or abundance change is installed.",
+  "records": [
+    {
+      "track": "out/evolution-cold-remnant-x015-transition-512-3560gyr-v2.json",
+      "age_yr": 3560000000000,
+      "T_K": 8469423.14909276,
+      "rho_g_cm3": 311.9662280968268,
+      "XH": 0.1517586981435822,
+      "X3": 0.00022777843742789408,
+      "pp_network_heat_erg_g_s": 0.3336742565653592,
+      "reactions": {
+        "C12_p_gamma": {
+          "bare_molar_rate_cm3_mol_s": 3.351670173653578e-21,
+          "bare_capture_time_yr": 199701736465.07056,
+          "SVH_log_screening_factor": 0.5472609349093942,
+          "SVH_capture_time_yr": 115533900860.98474,
+          "screening_zeta": 0.028835219441908377,
+          "quadrature": {
+            "Gamow_peak_keV": 16.338929217957514,
+            "upper_energy_keV": 81.69464608978757,
+            "quadrature_relative_error_estimate": 8.77869891219733e-14,
+            "log_energy_gauss_relative_difference": 3.3306690738754696e-16,
+            "polynomial_tail_to_130keV_fraction": 1.0695210826825227e-29
+          }
+        },
+        "C13_p_gamma": {
+          "bare_molar_rate_cm3_mol_s": 1.5864817474870114e-20,
+          "bare_capture_time_yr": 42189855307.00434,
+          "SVH_log_screening_factor": 0.5472609349093942,
+          "SVH_capture_time_yr": 24408193171.776928,
+          "screening_zeta": 0.02877764220994004,
+          "quadrature": {
+            "Gamow_peak_keV": 16.37161953743656,
+            "upper_energy_keV": 81.8580976871828,
+            "quadrature_relative_error_estimate": 9.373206319721924e-14,
+            "log_energy_gauss_relative_difference": 2.220446049250313e-15,
+            "polynomial_tail_to_130keV_fraction": 8.893814639347591e-30
+          }
+        },
+        "N14_p_gamma": {
+          "bare_molar_rate_cm3_mol_s": 2.1342755786007014e-24,
+          "bare_capture_time_yr": 313611962976046.9,
+          "SVH_log_screening_factor": 0.6207264775197991,
+          "SVH_capture_time_yr": 168583294575046.3,
+          "screening_zeta": 0.02924833182111451,
+          "quadrature": {
+            "Gamow_peak_keV": 18.174721066328708,
+            "upper_energy_keV": 90.87360533164355,
+            "quadrature_relative_error_estimate": 9.204314491597795e-14,
+            "log_energy_gauss_relative_difference": 5.551115123125783e-16,
+            "polynomial_tail_to_130keV_fraction": 5.103610420269914e-33
+          }
+        }
+      }
+    },
+    {
+      "track": "out/evolution-cold-remnant-time-refinement-512-3600gyr-v1.json",
+      "age_yr": 3600000000000,
+      "T_K": 8668557.473302959,
+      "rho_g_cm3": 411.04656040443746,
+      "XH": 0.09857315507708053,
+      "X3": 0.00012274341407258682,
+      "pp_network_heat_erg_g_s": 0.21310372847365608,
+      "reactions": {
+        "C12_p_gamma": {
+          "bare_molar_rate_cm3_mol_s": 5.54592223509728e-21,
+          "bare_capture_time_yr": 141020041677.3643,
+          "SVH_log_screening_factor": 0.5832910383990284,
+          "SVH_capture_time_yr": 78697467947.77446,
+          "screening_zeta": 0.03063890797846775,
+          "quadrature": {
+            "Gamow_peak_keV": 16.594044825455107,
+            "upper_energy_keV": 82.97022412727554,
+            "quadrature_relative_error_estimate": 9.129599371597649e-14,
+            "log_energy_gauss_relative_difference": 9.992007221626409e-16,
+            "polynomial_tail_to_130keV_fraction": 1.7805826277217293e-29
+          }
+        },
+        "C13_p_gamma": {
+          "bare_molar_rate_cm3_mol_s": 2.626248921446248e-20,
+          "bare_capture_time_yr": 29779590896.59152,
+          "SVH_log_screening_factor": 0.5832910383990284,
+          "SVH_capture_time_yr": 16618761221.501785,
+          "screening_zeta": 0.03057772919966613,
+          "quadrature": {
+            "Gamow_peak_keV": 16.627245570715544,
+            "upper_energy_keV": 83.13622785357772,
+            "quadrature_relative_error_estimate": 9.733020250487719e-14,
+            "log_energy_gauss_relative_difference": 2.55351295663786e-15,
+            "polynomial_tail_to_130keV_fraction": 1.4838966143661136e-29
+          }
+        },
+        "N14_p_gamma": {
+          "bare_molar_rate_cm3_mol_s": 3.7386304187394534e-24,
+          "bare_capture_time_yr": 209190558342628.12,
+          "SVH_log_screening_factor": 0.6611965332830265,
+          "SVH_capture_time_yr": 107991126928956.38,
+          "screening_zeta": 0.03107786118972254,
+          "quadrature": {
+            "Gamow_peak_keV": 18.45850067906121,
+            "upper_energy_keV": 92.29250339530606,
+            "quadrature_relative_error_estimate": 5.611258884742834e-14,
+            "log_energy_gauss_relative_difference": 2.220446049250313e-16,
+            "polynomial_tail_to_130keV_fraction": 8.945438386987935e-33
+          }
+        }
+      }
+    },
+    {
+      "track": "out/evolution-cold-remnant-hot-opacity-forward-512-3700gyr-v1.json",
+      "age_yr": 3684787037364.156,
+      "T_K": 9289792.196705066,
+      "rho_g_cm3": 743.0057078838182,
+      "XH": 0.038107038183940546,
+      "X3": 2.6408016061354712e-05,
+      "pp_network_heat_erg_g_s": 0.09157012103194728,
+      "reactions": {
+        "C12_p_gamma": {
+          "bare_molar_rate_cm3_mol_s": 2.427475061047013e-20,
+          "bare_capture_time_yr": 46105439692.03116,
+          "SVH_log_screening_factor": 0.6612982570433058,
+          "SVH_capture_time_yr": 23798741084.188248,
+          "screening_zeta": 0.03497304349991377,
+          "quadrature": {
+            "Gamow_peak_keV": 17.377676299747513,
+            "upper_energy_keV": 86.88838149873756,
+            "quadrature_relative_error_estimate": 9.505374682440255e-14,
+            "log_energy_gauss_relative_difference": 4.440892098500626e-16,
+            "polynomial_tail_to_130keV_fraction": 7.948613359218908e-29
+          }
+        },
+        "C13_p_gamma": {
+          "bare_molar_rate_cm3_mol_s": 1.1509101184020046e-19,
+          "bare_capture_time_yr": 9724460949.77505,
+          "SVH_log_screening_factor": 0.6612982570433058,
+          "SVH_capture_time_yr": 5019579682.416432,
+          "screening_zeta": 0.03490321045972173,
+          "quadrature": {
+            "Gamow_peak_keV": 17.41244490560069,
+            "upper_energy_keV": 87.06222452800344,
+            "quadrature_relative_error_estimate": 1.0099518390137063e-13,
+            "log_energy_gauss_relative_difference": 1.887379141862766e-15,
+            "polynomial_tail_to_130keV_fraction": 6.669317733456052e-29
+          }
+        },
+        "N14_p_gamma": {
+          "bare_molar_rate_cm3_mol_s": 1.9337349578921274e-23,
+          "bare_capture_time_yr": 57877531030938.78,
+          "SVH_log_screening_factor": 0.748929387557403,
+          "SVH_capture_time_yr": 27368695400525.29,
+          "screening_zeta": 0.035474090396311955,
+          "quadrature": {
+            "Gamow_peak_keV": 19.330178576313326,
+            "upper_energy_keV": 96.65089288156663,
+            "quadrature_relative_error_estimate": 1.2349091578878027e-14,
+            "log_energy_gauss_relative_difference": 3.219646771412954e-15,
+            "polynomial_tail_to_130keV_fraction": 4.6417076493013355e-32
+          }
+        }
+      }
+    }
+  ],
+  "input_sha256": {
+    "/tmp/ember-cno-screening-probe-v1": "6c9ad37af3f3f0d0e1b72f14f9629ed0c10f9819430f34c40e16283657a4dfbe",
+    "/Users/greglaughlin/Projects/ember/scripts/audit_cno_capture_times.py": "980ff1b56705e8f4a2aa16cf8c0f09e73661cd4e390c600f7231c2b03db33233",
+    "out/evolution-cold-remnant-x015-transition-512-3560gyr-v2.json": "405d954a48066e2bc80e9807ba31437106349e003cf16687d0970fb55cb28acb",
+    "out/evolution-cold-remnant-time-refinement-512-3600gyr-v1.json": "a2fb8ee39a5eb290d72640c392b7385d1d63bc2e6b026e2fbd1b314d6f719d02",
+    "out/evolution-cold-remnant-hot-opacity-forward-512-3700gyr-v1.json": "7b65a2239782676b8d89316815856f6cb1f8b5f560534ec9a5a4807266cba6e6"
+  }
+}

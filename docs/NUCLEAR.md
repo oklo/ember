@@ -9,6 +9,26 @@ records the selected prescription. This update supplies a reproducible nuclear
 model for continued initial evolution, not a complete hydrogen-burning network
 or precision screening tied to the FreeEOS potential.
 
+## Carbon and nitrogen capture times
+
+A new diagnostic evaluates proton capture by carbon-12, carbon-13 and nitrogen-14
+at three saved central states using the low-energy expansions in Solar Fusion II
+Table XII and the same approximate screening as Ember. At 3.685 trillion years,
+the instantaneous capture times are 23.80 billion years for carbon-12,
+5.020 billion years for carbon-13 and 27.37 trillion years for nitrogen-14.
+The central temperature is 9.290 million K. Independent energy-space and
+log-energy quadratures agree within the recorded numerical criterion.
+[Calculated times and inputs](results/cno_capture_times_v1.json),
+[diagnostic script](../scripts/audit_cno_capture_times.py).
+
+These times do not establish a negligible CNO contribution. They describe
+fixed conditions, not the star's changing temperature, mixing or depletion.
+Carbon conversion to nitrogen needs a changing-composition calculation before
+its heat and composition effects can be bounded. The GS98 elemental pattern
+used by the current EOS and opacity must also be reconsidered if carbon and
+nitrogen change. No CNO reactions have yet been installed, and this diagnostic
+does not claim a total CNO luminosity or a lifetime correction.
+
 ## Bare rates and units
 
 The new rates integrate the Maxwell–Gamow kernel using the S-factor expansion

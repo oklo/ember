@@ -1,0 +1,43 @@
+{
+  "scope": "Long fresh 512-point comparison of the original and enlarged nuclear response cache with identical physical inputs, two step workers and time tolerances. Both stop at the same 3600 K atmosphere limit before the requested 3.800 trillion years.",
+  "runs": [
+    {
+      "input": "out/evolution-cold-remnant-t3600-forward-512-3800gyr-v1.json",
+      "output_sha256": "5685154d5194dbed469e129a331223a9ca7558315c097b57b5ea0b9d9c693702",
+      "receipt_sha256": "9067324ddaf2750e7ad379d033896832023ec91acec5865f3ceb560fae45a295",
+      "executable_sha256": "89b00132e65d6674ce5be485eb3bdf780f7c97d60eb851b73f6f239dbb487ede",
+      "cpu_seconds": 9744.337839,
+      "awake_seconds": 8779.834077707492,
+      "utc_seconds": 11788.724618434906,
+      "accepted_steps": 6473,
+      "rejected_attempts": 275,
+      "converged": false,
+      "endpoint_age_yr": 3756503377291.9277,
+      "source_changed_during_run": [
+        "apps/evolve.cpp",
+        "src/nuclear_pp.cpp"
+      ]
+    },
+    {
+      "input": "out/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.json",
+      "output_sha256": "5685154d5194dbed469e129a331223a9ca7558315c097b57b5ea0b9d9c693702",
+      "receipt_sha256": "7921873448e036c7217d23884f2c5db0858b6591614549dbf4a194236539ea88",
+      "executable_sha256": "c04e10048a008796fd0079c3bf633ef746bea727f46755fedc2e44841badd4ff",
+      "cpu_seconds": 6109.1557139999995,
+      "awake_seconds": 6013.792473291978,
+      "utc_seconds": 7464.371260881424,
+      "accepted_steps": 6473,
+      "rejected_attempts": 275,
+      "converged": false,
+      "endpoint_age_yr": 3756503377291.9277,
+      "source_changed_during_run": [
+        "src/nuclear_pp.cpp"
+      ]
+    }
+  ],
+  "entire_output_bytes_identical": true,
+  "data_hashes_identical": true,
+  "CPU_fraction_reduction": 0.37305583868929737,
+  "timing_limitations": "One concurrent long pair, not an isolated-machine or alternating benchmark. Background source work and processor scheduling changed during execution. CPU seconds exclude other processes; awake and UTC elapsed times are reported separately. No complete shell-burning or cooling trajectory was timed.",
+  "additional_shared_electron_change_included": false
+}

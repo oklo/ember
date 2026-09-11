@@ -2,7 +2,6 @@
 """Rebuild figures from the published CSV, or recheck local raw histories."""
 import argparse
 import csv
-import gzip
 import hashlib
 import json
 from pathlib import Path
@@ -14,8 +13,9 @@ from matplotlib.lines import Line2D
 from matplotlib.ticker import FuncFormatter
 import numpy as np
 
+from current_evolution import current_history
+
 HERE = Path(__file__).resolve().parent
-FILES = ["evolution-cold-remnant-x015-transition-512-3560gyr-v2.json.gz"]
 
 
 def f77_history(work):
@@ -74,60 +74,16 @@ def f77_history(work):
     (HERE / "f77_history_provenance.json").write_text(json.dumps(provenance, indent=2) + "\n")
 
 
-def archived_history():
-    rows = []
-    columns = None
-    manifest = json.loads((HERE / 'recovery_manifest.json').read_text())
-    for name in FILES:
-        entry = next(e for e in manifest['entries'] if e['archive'] == 'artifacts/' + name)
-        raw = (HERE / 'artifacts' / name).read_bytes()
-        assert hashlib.sha256(raw).hexdigest() == entry['gzip_sha256']
-        assert hashlib.sha256(gzip.decompress(raw)).hexdigest() == entry['sha256']
-        with gzip.open(HERE / "artifacts" / name, "rt") as stream:
-            data = json.load(stream)
-        assert data["converged"] and data["mass_Msun"] == 0.1
-        assert columns is None or columns == data["columns"]
-        columns = data["columns"]
-        segment = data["history"]
-        if rows:
-            assert rows[-1][0] == segment[0][0]
-            # Initial restart rows reset step diagnostics, but retain the state.
-            assert rows[-1][2:7] == segment[0][2:7]
-            segment = segment[1:]
-        rows.extend(segment)
-    assert all(a[0] < b[0] for a, b in zip(rows, rows[1:]))
-    assert rows[0][0] == 0 and rows[-1][0] == 3.56e12
-    assert len(rows) == 2354
-    return columns, rows
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--from-archives", action="store_true",
-                        help="recheck local raw-history joins and regenerate the CSV")
+                        help="verify the plotted CSV against its recorded local raw archive")
     parser.add_argument("--f77-work", type=Path,
                         help="re-extract and verify F77 data from the recorded local run directory")
     args = parser.parse_args()
     if args.f77_work:
         f77_history(args.f77_work)
-    if args.from_archives:
-        columns, rows = archived_history()
-        with (HERE / "evolution_history.csv").open("w", newline="") as stream:
-            writer = csv.writer(stream, lineterminator="\n")
-            writer.writerow(columns)
-            writer.writerows(rows)
-    else:
-        with (HERE / "evolution_history.csv").open(newline="") as stream:
-            reader = csv.reader(stream)
-            columns = next(reader)
-            # The initial/restored state has no preceding implicit half step.
-            # Its gravothermal diagnostic is null in JSON and empty in CSV;
-            # retain that missing value rather than manufacturing zero heat.
-            rows = [[float('nan') if not value and name == 'last_halfstep_gravothermal_Lsun'
-                     else float(value) for name, value in zip(columns,row,strict=True)]
-                    for row in reader]
-        assert all(a[0] < b[0] for a, b in zip(rows, rows[1:]))
-        assert rows[0][0] == 0 and rows[-1][0] == 3.56e12
+    columns, rows = current_history(args.from_archives)
     values = dict(zip(columns, np.asarray(rows).T))
     with (HERE / "f77_history.csv").open(newline="") as stream:
         f77_rows = list(csv.DictReader(stream))
@@ -198,7 +154,7 @@ def main():
             ax.xaxis.set_major_formatter(FuncFormatter(lambda x, _: f"{x:.4g}"))
             ax.yaxis.set_major_formatter(FuncFormatter(lambda x, _: f"{x:.4g}"))
             if mode == "age":
-                ax.set(xlabel="Reported age (trillion yr)", xlim=(0, 3.65))
+                ax.set(xlabel="Reported age (trillion yr)", xlim=(0, max(3.65, 1.04 * values["age_yr"][-1] / 1e12)))
                 if key in ["L_Lsun", "R_Rsun"]:
                     ax.set_yscale("log")
             else:
@@ -222,7 +178,7 @@ def main():
         fig.savefig(HERE / (stem + ".pdf"), metadata={"CreationDate": None})
         fig.savefig(HERE / (stem + ".png"), dpi=180)
         plt.close(fig)
-    source = "local archives with verified joins" if args.from_archives else "published CSV"
+    source = "verified local raw archive" if args.from_archives else "published CSV"
     print(f"Ember from {source}: {len(rows)} states, {values['age_yr'][-1]/1e12:.4g} trillion yr; F77: {len(f77_rows)} accepted states")
 
 

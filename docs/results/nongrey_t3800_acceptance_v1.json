@@ -1,0 +1,20 @@
+{
+  "scope": "Accept the 3800 K gas-atmosphere extension for a fresh calculation with the checked lower-density EOS. All 132 earlier nodes retained exactly; 144 source nodes have EOS support. Local interpolation differences remain numerical uncertainties, and this table does not cover remnant cooling.",
+  "checked_utc": "2026-09-11T00:46:30.606558+00:00",
+  "table": "/tmp/ember-nongrey-exhaustion-t3800-v1.dat",
+  "table_sha256": "781fee2d04baccfe10eb5c66406773e9ea92fb5d8ab8286d15898d34c83c00ad",
+  "EOS": "data/eos/low_density_refined_v2/freeeos300_gs98_z020.dat",
+  "EOS_sha256": "544db28d28b7382eca2646f1ae6d6980d2b1f9eccff3781a69c08626c6a5f321",
+  "reports_sha256": {
+    "docs/results/nongrey_t3800_extension_v1.json": "d916aac5de3c1902a0217d90a7f38c8312ba5ba5d3eff438416234a5a279d2c9",
+    "docs/results/nongrey_t3800_retained_v1.json": "f346777d5362cb479556143b16ec2dd9379ab1500ed32044f7ed241dd0644457",
+    "docs/results/nongrey_t3800_depth_v1.json": "b561a10a18e948d2abea29aebc41e3f7112617f3742e489e6e09b918d9fe37fd",
+    "docs/results/nongrey_t3800_low_gravity_depth_x150_v1.json": "4307ed8a7dce1c84a05d7bb72fe1436ea557300e0ec3d745873d0eda78cc572d",
+    "docs/results/nongrey_t3800_low_gravity_depth_x200_v1.json": "4c3d9a282697d502c5395c36791cf33cb35ef1ace91edc9ec4f20fa9eb57b5da",
+    "docs/results/nongrey_t3800_condensation_g490_v1.json": "fb6a80da096dadc04629f20c9f7576ec2de7a39297338300f185f4acff8d0ea7",
+    "docs/results/nongrey_t3800_condensation_g515_v1.json": "24a61cf74a67487c7d1b8eaa946d06a9982f7fbabca7aa920c5dff0d5af088ce",
+    "docs/results/nongrey_t3800_condensation_g540_v1.json": "18eeec6563b9eee44f2cd74893fdecc3d8120869539552b1b5fc1db62565841a"
+  },
+  "source_models": 144,
+  "accepted_for_gas_trajectory": true
+}

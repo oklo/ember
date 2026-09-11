@@ -36,8 +36,7 @@ def main():
     axes[0].set(xlim=(3.54, 3.56), ylim=(.59, 1.015),
                 xlabel='Age (trillion yr)', ylabel='Convective mass fraction')
     axes[1].set(xlim=(0, 1), ylim=(.145, .18),
-                xlabel='Enclosed fraction of stellar mass', ylabel='Hydrogen mass fraction',
-                title='Interior at 3.560 trillion yr')
+                xlabel='Enclosed fraction of stellar mass', ylabel='Hydrogen mass fraction')
     for ax in axes:
         ax.grid(alpha=.15)
         for axis in [ax.xaxis, ax.yaxis]:

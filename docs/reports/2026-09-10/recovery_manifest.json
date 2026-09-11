@@ -1,5 +1,5 @@
 {
-  "scope": "Local recovery files for the completed 512-point evolution through 3.560 trillion years, the 1024-point continuation, and the earlier 3.40-trillion-year calculation. Raw files remain local and ignored. Physical input tables require separate restoration with their recorded hashes.",
+  "scope": "Local recovery files for the plotted fresh trajectory and earlier matched-mesh comparisons. Raw files remain local; physical tables require separate restoration with their recorded hashes.",
   "entries": [
     {
       "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3300gyr-v1.json",
@@ -98,6 +98,83 @@
       "sha256": "1be30afccbde7c8d9fec3e085b811c2bcab8df2a51289da060a1e10bb9e6a5a2",
       "gzip_sha256": "9625a98732975c97bcf377c68ce07aec0e119b53928d30d64810b53cff4c2ab8",
       "bytes": 427456
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.json",
+      "archive": "artifacts/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.json.gz",
+      "sha256": "5685154d5194dbed469e129a331223a9ca7558315c097b57b5ea0b9d9c693702",
+      "gzip_sha256": "be1ca94367e1c951a7ffc5ebc80d56edae2c7f03f06c341a02834d29b16df097",
+      "bytes": 2828474
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.receipt.json.gz",
+      "sha256": "7921873448e036c7217d23884f2c5db0858b6591614549dbf4a194236539ea88",
+      "gzip_sha256": "b77a93320edc38fb419db6fcf60a8ea191f5aab553f54859e8e6958b0317cddd",
+      "bytes": 28381
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.log",
+      "archive": "artifacts/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.log.gz",
+      "sha256": "6c53e2cd6bd38c22b51c440b08b43ab7a49ade2a3bfe7a34257dcfda186891d5",
+      "gzip_sha256": "707f65c70374e7aa7aa77fa7d95e624607338e03c81350d771c9712f3f25a930",
+      "bytes": 798388
+    },
+    {
+      "source": "/private/tmp/ember-t3600-cached-512-3800gyr-v1/ember-evolve",
+      "archive": "artifacts/ember-evolve-latest-512.gz",
+      "sha256": "c04e10048a008796fd0079c3bf633ef746bea727f46755fedc2e44841badd4ff",
+      "gzip_sha256": "1e849188a9baa6c7a51d4404d177882f3dc90463379a8226ebbfee623a992c4e",
+      "bytes": 470448
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.restart",
+      "archive": "artifacts/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.restart.gz",
+      "sha256": "911817f6ea0e49d3b545f1a5ff3e1bf3a095938a92d1ea89fd6987c254496e5a",
+      "gzip_sha256": "704832b1584a71c64ad93552a216df90fc9709d26e2acbc4493e3661f204dabb",
+      "bytes": 160174
+    },
+    {
+      "source": "/private/tmp/ember-t3600-cached-512-3800gyr-v1/ember-evolve",
+      "archive": "artifacts/ember-evolve-c04e10048a00.gz",
+      "sha256": "c04e10048a008796fd0079c3bf633ef746bea727f46755fedc2e44841badd4ff",
+      "gzip_sha256": "1e849188a9baa6c7a51d4404d177882f3dc90463379a8226ebbfee623a992c4e",
+      "bytes": 470448
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.json",
+      "archive": "artifacts/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.json.gz",
+      "sha256": "a80ef11faab9c6fa4daaedc80f3fbc36f1d390792d61f54bb4340c7be44da517",
+      "gzip_sha256": "0ecb78ad14f350c0aca082109fb5498280ac95453c8b816d5fdabb57075c897c",
+      "bytes": 2914582
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.receipt.json.gz",
+      "sha256": "8da7ee5995a8f369f96cc24ca51b9f96df6b1a4559469a0db912dea153538e84",
+      "gzip_sha256": "d1f8ea4fc536ea321e28aafa4ca2edd96b3f99e3e88aaa94e1b5e86412f31d89",
+      "bytes": 29604
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.log",
+      "archive": "artifacts/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.log.gz",
+      "sha256": "96af777b20f8af4ceed51de0cb70fc798d5b25fee5ecfc6fc5aaafe33e17ea35",
+      "gzip_sha256": "7ec899047ba016c1bea2821a6f5d3f7a417bc880ae0dbf7fbb8383bbc721183c",
+      "bytes": 845219
+    },
+    {
+      "source": "/private/tmp/ember-t3800-eos72-512-4000gyr-v1/ember-evolve",
+      "archive": "artifacts/ember-evolve-294044ffa4e9.gz",
+      "sha256": "294044ffa4e9b13e2af2e5aae8a24348772257909dfa3a98055bdfff5e924fd3",
+      "gzip_sha256": "679c67c25252c9791407df2e344c8b7e240d5e9caffa1aa6367e71ddee11df35",
+      "bytes": 470800
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.restart",
+      "archive": "artifacts/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.restart.gz",
+      "sha256": "1cbda94ed169b50826fe9ac8833b188ff7d55ed6eb1aa842a3d53400c20b742f",
+      "gzip_sha256": "86057ceb1a8684a802a76d272b724b5851ac8d4e4095081d0fb30d03f90bd0e6",
+      "bytes": 161303
     }
   ],
   "older_recovery": "September 9 local artifacts remain intact in docs/reports/2026-09-09/artifacts; the earlier paper remains in Git history."

@@ -1,0 +1,22 @@
+{
+  "scope": "Accept the 4000 K gas-atmosphere extension for a fresh calculation with the checked lower-density EOS. All 144 earlier source rows retained exactly; 156 source nodes have EOS support. These local checks do not establish global atmosphere accuracy or cover remnant cooling.",
+  "checked_utc": "2026-09-11T01:39:05.473354+00:00",
+  "table": "/tmp/ember-nongrey-exhaustion-t4000-v1.dat",
+  "table_sha256": "ff985319a060744c88385a62f321c791ff03c4ff14abdc831dc076d8ea8a2fef",
+  "EOS": "data/eos/low_density_refined_v2/freeeos300_gs98_z020.dat",
+  "EOS_sha256": "544db28d28b7382eca2646f1ae6d6980d2b1f9eccff3781a69c08626c6a5f321",
+  "reports_sha256": {
+    "docs/results/nongrey_t4000_extension_v1.json": "0081a3ad85fe2dd57e87efb342774d216a41cbab29ef201794559a403dac3bf9",
+    "docs/results/nongrey_t4000_retained_v1.json": "df2bc268dc95b39fe426c12fd6f5588b94d7c5aa8029a6274461472faaf1ddc9",
+    "docs/results/nongrey_t4000_depth_x150_g490_v1.json": "7f0bb1b2caf5528910486679fa5e05f2180259928d826a034e3ed9b5b0c7bbf2",
+    "docs/results/nongrey_t4000_depth_x150_g515_matched_v1.json": "04c228bd1a482dc5f6662bea65b68a94a510cdea87c1f91a0eb40cad389afe46",
+    "docs/results/nongrey_t4000_depth_x200_g490_v1.json": "c025d15e9e25631763f68a204d71fbcc415ac5f91d97562641ff0b001889f993",
+    "docs/results/nongrey_t4000_depth_x200_g515_v1.json": "1284dd54a20d0aa6a1cb50553e1bd96719e291a3bb14a41ec881d43bff62d716",
+    "docs/results/nongrey_t4000_condensation_g490_v1.json": "ead1350d56ffd964a13302441775f58db80275eccabd1eb6f70fa8d49369550d",
+    "docs/results/nongrey_t4000_condensation_g515_v1.json": "97bee9a3be6c6110cb099fba2cc424c20e80c4becde6db2e3e6fcc85a9e22c1d",
+    "docs/results/nongrey_t4000_condensation_g540_v1.json": "afdebf3e8250b2dbd52c73325db44564a39387d6568e5eed2c73c009c7561125"
+  },
+  "source_models": 156,
+  "accepted_for_gas_trajectory": true,
+  "replaced_comparison": "The first XH=.15, log g=5.15 shallow model used wider wavelength opacity than its deeper reference. It is retained but excluded from the depth-only comparison. The accepted replacement uses identical opacity to its reference."
+}

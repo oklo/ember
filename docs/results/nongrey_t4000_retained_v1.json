@@ -1,0 +1,10 @@
+{
+  "scope": "Verify all 144 prior source-node rows remain exactly unchanged in the 156-model atmosphere table. This compares table data, not interpolation derivatives at former outer knots.",
+  "retained_source_nodes": 144,
+  "added_source_nodes": 12,
+  "all_retained_rows_exact": true,
+  "input_sha256": {
+    "/tmp/ember-nongrey-exhaustion-t3800-v1.dat": "781fee2d04baccfe10eb5c66406773e9ea92fb5d8ab8286d15898d34c83c00ad",
+    "/tmp/ember-nongrey-exhaustion-t4000-v1.dat": "ff985319a060744c88385a62f321c791ff03c4ff14abdc831dc076d8ea8a2fef"
+  }
+}

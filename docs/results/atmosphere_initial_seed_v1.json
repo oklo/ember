@@ -1,0 +1,19 @@
+{
+  "checked_utc": "2026-09-11T02:00:09.734815+00:00",
+  "change": "When the outer temperature midpoint has no initial-composition source coverage, search cooler trial temperatures with the complete source stencil. Normal equilibrium relaxation and domain rejection remain enforced. Existing supported midpoint selection is unchanged.",
+  "source_sha256": "07b6bee5233f3bb087af5dd4b0b4bfebc4fdd8d98f7f09889756bf1215b55337",
+  "executable_sha256": "a4ff20664d7350f1942cb9d9a00196a7d838f6992fd15e40c51e44b4098bbc5d",
+  "failed_original_output_sha256": "ee087231fda65cecbb6d40091a73af1cb348d2040fa47987bc671d1d58434fdb",
+  "failed_original_message": "CompositionAtmosphereGrid: Teff, gravity or composition outside source grid",
+  "ctest": {
+    "passed": 32,
+    "failed": 0,
+    "seconds": 74.78,
+    "log_path": "/tmp/ember-atmosphere-seed-ctest-v1.log",
+    "log_sha256": "e4bc2dabd88b4729330c3ff89c61544c48391a35b17fa0f65c8d55d35b314e18"
+  },
+  "new_run_receipt": "/tmp/ember-t4000-eos72-512-4000gyr-v2/receipt.json",
+  "first_accepted_progress": "age=1e+08 yr, X=0.6999763231 Y3=2.367689995e-05, R=0.125946269 L=0.000836090528, convective=1, step error=0.0717",
+  "latest_accepted_progress_at_check": "age=1.4146842e+12 yr, X=0.4950136647 Y3=0.06208213464, R=0.14665258 L=0.00149551606, convective=1, step error=0.816",
+  "scope": "Actual 4000 K table now initializes and evolves. This progress record does not assert completion of the requested age. No source values, source guards or stellar accuracy tolerances changed."
+}

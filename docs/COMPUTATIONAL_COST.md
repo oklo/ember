@@ -1,5 +1,47 @@
 # What is consuming the computation time?
 
+## Latest completed attempt
+
+The fresh 512-point calculation with 156 fixed atmosphere models and 72 EOS
+composition tables reaches **3.818 trillion years**, ending at the **4000 K**
+atmosphere limit. It uses **41.19 CPU minutes** and **25.09 awake elapsed minutes**,
+with 7147 accepted steps and 269 rejected attempts. Both nuclear optimizations
+are installed. The UTC interval is 30.17 minutes, including suspension.
+[History, checks and timing](results/evolution_atmosphere_limit_3818gyr_v1.json).
+
+The track plotted in the working paper uses the 144-model atmosphere through
+3800 K and reaches **3.795 trillion years**, using **47.27 CPU minutes** and
+**29.23 awake elapsed minutes**. It has 6835 accepted steps and 284 rejected
+attempts. Differences in physical tables, numerical step selection and
+concurrent load prevent assigning the timing difference to one cause.
+[Plotted history](reports/2026-09-10/evolution_latest_provenance.json).
+
+Atmosphere generation is excluded from stellar CPU time. These measurements
+cover partial hydrogen-burning trajectories; the cost of shell burning and
+remnant cooling remains unmeasured.
+
+## Completed comparison with identical physical inputs
+
+The fresh 512-point run with 132 fixed atmosphere models reached **3.757 trillion
+years**, then stopped at the table's **3600 K** surface-temperature limit. It used
+**101.8 CPU minutes** and **100.2 awake elapsed minutes**, with 6473 accepted
+steps and 275 rejected attempts. The UTC interval includes an additional
+24.18 minutes of suspension. It used two step workers while other calculations
+were active. Its CPU time excludes atmosphere generation. This run contains the
+larger nuclear cache but predates the additional electron reuse described below.
+[History identity and timing receipts](results/nuclear_response_cache_long_benchmark_v4.json).
+
+This longer measurement is the relevant production result for those fixed
+inputs. The short improvements below must not be treated as a measured whole
+cooling-track speedup. The original-cache comparison has also finished at the identical state. Its
+entire output file matches byte for byte, with 6473 accepted steps and 275
+rejected attempts. CPU time fell from **162.4 to 101.8 minutes**, a **37.31%
+reduction** for this long pair. Background load and CPU scheduling varied;
+this is not an isolated-machine timing guarantee.
+[Long comparison](results/nuclear_response_cache_long_benchmark_v4.json).
+The subsequent trajectories use the checked warmer atmospheres and wider EOS,
+with both optimizations installed.
+
 ## Further reuse of nuclear calculations
 
 The production build also shares the electron calculation used by the two
@@ -14,8 +56,8 @@ the short output. [Benchmark](results/screening_shared_cache_benchmark_v5.json),
 [profile comparison](results/screening_shared_cache_profiles_v5.json),
 [validation](results/screening_shared_cache_validation_v5.json).
 
-This additional change is installed for subsequent runs. The longer active
-comparison still measures the preceding response-cache change alone. Neither
+This additional change is installed for subsequent runs. The completed longer
+comparison above measures the preceding response-cache change alone. Neither
 short benchmark establishes the cost of shell burning or remnant cooling.
 
 The evolution driver now keeps up to **8192 complete nuclear results per
@@ -32,8 +74,8 @@ times are not an isolated-machine benchmark. Both CPU-time pairs were consistent
 [Measurements](results/nuclear_response_cache_benchmark_v4.json).
 
 All 32 test suites pass for the candidate. The production build reproduces the
-short output exactly and passes its native-restart test. Separate longer runs
-with the old and new implementation are checking the complete covered trajectory.
+short output exactly and passes its native-restart test. The completed longer pair above also reproduces the complete covered trajectory
+exactly, through its atmosphere boundary.
 The gain during shell burning and cooling remains unmeasured.
 [Validation](results/nuclear_response_cache_validation_v4.json).
 
@@ -114,9 +156,9 @@ in [its compute guidance](https://developer.apple.com/videos/play/wwdc2022/10159
 The existing C++ build targets the M4 CPU, permits fused arithmetic, and links
 Accelerate; its small structure-solver blocks use the portable kernel.
 
-The electron-screening experiments above have not justified an additional
-change. Reuse between neighboring zones and parallel spatial calculations
-remain candidates, each requiring an actual trajectory comparison.
+The larger nuclear cache and shared electron response described above are
+installed. Parallel calculations across the spatial mesh remain a candidate
+for further improvement, requiring an actual trajectory comparison.
 
 ## Earlier stellar measurement — September 10
 

@@ -10,30 +10,39 @@ publication policy in [DATA_REPRODUCTION.md](DATA_REPRODUCTION.md).
 
 ## Progress on 2026-09-10
 
-The latest accepted 512-point state reaches **3.685 trillion years**, central
-hydrogen 0.03811 and Teff 3400 K. Both 512- and 1024-point trials stopped at the
-old atmosphere's upper temperature; hydrogen burning continues. The hot TOPS
-composition extension now reaches zero hydrogen. Twelve independent checks on
-hot profile states differ by at most 0.05257%; all old source cells and the cool
-opacity inputs remain unchanged. See
-[the stopped trials](results/evolution_atmosphere_limit_3685gyr_v1.json) and
-[the opacity checks](results/tops_exhaustion_hot_profile_all_v2.json).
+The latest checked 512-point state reaches **3.818 trillion years**, central
+hydrogen **X = 0.004580**, surface hydrogen **X = 0.1731** and effective temperature
+**4000 K**. Its nonconvective core contains **88.30%** of the mass. The sequence
+contains the initial structure and 7147 accepted time steps; the atmosphere
+upper temperature prevents further evolution with these inputs.
+[Endpoint, stopping evidence and checks](results/evolution_atmosphere_limit_3818gyr_v1.json).
 
-A fresh 512-point, two-worker calculation with fourfold tighter time tolerances
-is running toward **3.800 trillion years** using the new 132-model atmosphere
-table. Its independent 3500 K check differs by 0.4470% in matching temperature
-and 1.225% in gas pressure; two depth comparisons pass. Four 3600 K low-gravity
-source nodes are below the EOS density range. They are explicitly reported,
-and the star may use only the intersection of the atmosphere and EOS domains.
-All nine tested states near its current surface composition and gravity are
-supported. The new table does not establish a cold-remnant boundary. Source
-work toward 3800/4000 K is separate and has not been accepted.
+This calculation uses the checked 156-model atmosphere table and 72-table EOS.
+All atmosphere nodes have EOS support. Its 3900 K independent check differs by
+−0.4427% in matching temperature and +0.4107% in gas pressure. Four lower-boundary
+checks pass, with a maximum matching-state change of 0.005127%; the twelve added
+structures contain no condensates in the equilibrium diagnostic.
+[Atmosphere acceptance](results/nongrey_t4000_acceptance_v1.json).
+Source calculations for 4200–4400 K are active; see HANDOFF.md for exact jobs.
 
-A separately installed 72-plane EOS family now supports all 132 atmosphere
-nodes. Its refined composition grid passes 1188 independent source comparisons
-in the added low-density range and 792 in the original range. The current
-production comparison keeps its original 64-plane EOS; the new inputs belong
-in a fresh calculation. See the [EOS data notes](../data/eos/README.md).
+The paper plots the checked 3800 K track through **3.795 trillion years**.
+All its Ember curves use that single calculation. Its core transports heat by
+radiation and conduction, with conduction supplying **40.83% of local central
+flux**. Its initial radius agrees with that measured for EBLM J2114-39 B,
+within the reported uncertainty. The opacity diagram extracts the photosphere
+at Rosseland optical depth 2/3 from the source atmosphere structures.
+
+The hot ATOMIC opacity family reaches zero hydrogen. Twelve independent
+composition checks on hot profile states differ by at most 0.05257%.
+The evolving surface remains hydrogen rich; lower-temperature hydrogen-poor
+opacity and fully coupled grain atmospheres remain requirements for cooling.
+The selected EOS passes 1188 independent low-density and 792 original-density
+source comparisons.
+
+The exact-response cache and shared nuclear electron calculation are installed.
+A fixed-input long pair gives identical full histories, with CPU time reduced
+from 162.4 to 101.8 minutes (37.31%); concurrent load varied. The latest partial
+stellar trajectory uses 41.19 CPU minutes. These are not whole-cooling timings.
 
 Fresh controls through 3.600 trillion years are complete. Tightening the time
 control changes central hydrogen by 0.1849%; doubling the mesh changes it by

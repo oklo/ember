@@ -1,0 +1,480 @@
+{
+  "scope": "Check condensates on verified warm gas-atmosphere profiles.\n\nThis is a fixed-structure equilibrium diagnostic, not an atmosphere with\ngrain feedback. The independent chemistry query stops at 6000 K and uses\nthe existing explicit vaporized-join check for hotter atmosphere layers.\n",
+  "chemistry_source": {
+    "repository": "https://github.com/NewStrangeWorlds/FastChem",
+    "commit": "ae67cbd559bc64a3233a1cee6030b8e6b50520de",
+    "archive_sha256": "6e7c04d8e9d7e8f79b929e6865f5d06d5f5fc4077b5fae7e6ab39675a75706de",
+    "source": "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de",
+    "executable": "/private/tmp/ember-fastchem/verified-probe",
+    "executable_sha256": "b233d7d5e547a76350aa70ce4eafb31a2738463ec384d57c261fb4a211b99d77",
+    "commands": [
+      [
+        "cmake",
+        "-S",
+        "/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de",
+        "-B",
+        "/private/tmp/ember-fastchem/verified-build",
+        "-DCMAKE_BUILD_TYPE=Release",
+        "-DCMAKE_CXX_COMPILER=c++",
+        "-DCMAKE_CXX_FLAGS_RELEASE=-O3 -DNDEBUG -mcpu=apple-m4"
+      ],
+      [
+        "cmake",
+        "--build",
+        "/private/tmp/ember-fastchem/verified-build",
+        "--target",
+        "fastchem_lib",
+        "-j",
+        "4"
+      ],
+      [
+        "c++",
+        "-std=c++17",
+        "-O3",
+        "-DNDEBUG",
+        "-mcpu=apple-m4",
+        "-I/private/tmp/ember-fastchem/verified-source/FastChem-ae67cbd559bc64a3233a1cee6030b8e6b50520de/fastchem_src",
+        "/Users/greglaughlin/Projects/ember/scripts/fastchem_probe.cpp",
+        "/private/tmp/ember-fastchem/verified-build/libfastchem_lib.a",
+        "-o",
+        "/private/tmp/ember-fastchem/verified-probe"
+      ]
+    ],
+    "adapter_sha256": "72e99604e985708a437e684fe934f8c12db936d29309636d708fe4186c003afc",
+    "chemistry_data_sha256": {
+      "logK.dat": "eda9b9d7e62ccf7398036ee84349bd0a721b779acdc9d191cbf9fe1dd01f619c",
+      "logK_condensates.dat": "566b029470a9affb361dc4e891aa8c4918baeff0f93cf07e804d57e2ebac8467"
+    }
+  },
+  "input_sha256": {
+    "/tmp/ember-nongrey-exhaustion-t4000-v1.manifest.json": "9f0edf668935fb8c75efd738ff21863da8c0ed68700506ddc5c2b5763d3cfa25",
+    "/tmp/ember-fastchem/prepared.json": "0ac41f58be64514c06134cdcd14582c378193cba9aa819938d9efafe0bcbf03c",
+    "/Users/greglaughlin/Projects/ember/scripts/audit_warm_condensation.py": "dc02fd4094b8aab775ed4d3fae3d6988f33bcfbe756b2c80be9f2af0cdd7fce6"
+  },
+  "helper_sha256": {
+    "audit_condensates.py": "1456e60d9a04629f6a45fb0b6d91d6b99d1f3384c925a9a88ae4a919f75544e0",
+    "condensate_chemistry_profile.py": "f8ab77d52d8b778314cb5482cd92b298130c25c23b016d465c4b9f8daa216630"
+  },
+  "records": [
+    {
+      "coordinates": [
+        0.15,
+        0.0,
+        4000.0,
+        5.4
+      ],
+      "atmosphere": "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540",
+      "profile_layers": 300,
+      "layers_with_condensates": 0,
+      "chemistry": {
+        "element_closure": 4.902744876744691e-13,
+        "pressure_closure": 3.985700658404312e-13,
+        "nuclei_closure": 1.7119639039719914e-13,
+        "thresholds": {
+          "0": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.7208456881689926e-14
+          },
+          "0.001": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.7208456881689926e-14
+          },
+          "0.01": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.7208456881689926e-14
+          },
+          "0.1": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.7208456881689926e-14
+          },
+          "1": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.7208456881689926e-14
+          },
+          "100": {
+            "max_condensed_mass_fraction": null,
+            "max_element_gas_depletion": null
+          }
+        },
+        "condensates": [],
+        "vaporized_continuation": {
+          "layers": 34,
+          "actual_temperature_range_K": [
+            6063.062906690076,
+            8910.175575941965
+          ],
+          "pressure_range_bar": [
+            3.228128243576119,
+            8.45803501708915
+          ],
+          "independently_queried_temperature_K": 6000.0,
+          "maximum_join_condensate_particles_per_nucleus": 0.0,
+          "join_closure": {
+            "element_closure": 5.724309914967307e-13,
+            "pressure_closure": 4.871658632055187e-13,
+            "nuclei_closure": 2.1271873151818e-13
+          },
+          "scope": "Actual T/P chemistry is audited through6000K. Hotter layers use the native fully vaporized prescription; independent equilibrium is checked at6000K and each actual pressure, not extrapolated to the hotter temperature."
+        }
+      },
+      "atmosphere_input_sha256": {
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/provenance.json": "81017fb123081bd67a8013fb868f6b73a1cfa057a9e3216709f9f7826da10e5a",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/final/validated.json": "27b4577f5f767aae646ef97f34fa2e0ade2669af9bdd3aaad049911971c30fb1",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/final/completed.json": "d3e433a1623988d158cbb632994010f71bf3f0047ca4c5104a32b98d1c581476",
+        "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-000/opacity/fort.63": "c314bf80a6a9d42556a6af060e7e9981d44cb034f584d499f5c4183c3a815acb",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/final/run.log.gz": "31c91d6ffee66c408548109c95b84ffb53ee728b7398063c7323fbd47f68f2a0",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/final/fort.9.gz": "2429cc3b9dbed394e0d594bf214236d92f77b99c5f0c3ffd8810c113133ad31a",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/final/fort.5.gz": "dcfb9663e2b234e4fe8b53a0b3d272782474ea2d6ef5a49a44086727e948945e",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/final/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/final/tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/final/fort.8.gz": "2262b2d22a3fbaced991e812dafe53191f8703e972f86022bbba3185aacadf86",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/initializer/fort.5.gz": "dcfb9663e2b234e4fe8b53a0b3d272782474ea2d6ef5a49a44086727e948945e",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/initializer/fort.7.gz": "bb1bf9efe2dc914edcf432d750a34578932e430a2be2056249fe363a5ac05486",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/initializer/fort.8.gz": "f7d48655be26d61065a9610304d517428e7de87bbe693b9a3e51b2fdc9750dba",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/initializer/fort.9.gz": "e1d9d9c1b84324929ddf3654d91385def18d86c1f166f41382dbbcd9ec0e5a3f",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/initializer/tas.gz": "89bca72243e96230e6f3caf831f1284d8669283faddb8dff028a41839c18189e",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/initializer/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/initializer/opacity.sha256.gz": "24666d119635982ec7024b2a2b71330cf1ef1fdcfb93ab1117d954e4a64ae79c",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/initializer/completed.json.gz": "ec9c091df883d7a73a61ae9ec5d620d50d87ebead7258fe68bde0be6c6d8e470",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/initializer/run.log.gz": "91dbbae6424e0d48b08c4dcc61c4499a17750379aeee95288bddc90eac397d49",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/refined_initializer/fort.5.gz": "dcfb9663e2b234e4fe8b53a0b3d272782474ea2d6ef5a49a44086727e948945e",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/refined_initializer/fort.7.gz": "56a751294c47bc303bc79c78177bcf35fb3432c63c3031a181c609708a93c634",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/refined_initializer/fort.8.gz": "fc3daae44d7af7a2bbfa66c764432826c05f75c5147a0dd7d76391726599812d",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/refined_initializer/fort.9.gz": "82fc024f6f46c3213d40e1109eac3b5a2178c32e4fad22b9c195256521bb3d21",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/refined_initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/refined_initializer/tas.gz": "3e71e8fb9dd58d76fe61cb33c71126ebf4a74cb9503d8a7b80d24e3cb8e9791e",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/refined_initializer/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/refined_initializer/opacity.sha256.gz": "24666d119635982ec7024b2a2b71330cf1ef1fdcfb93ab1117d954e4a64ae79c",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/refined_initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/refined_initializer/completed.json.gz": "f788b13ef7259d7774c41c3838bb49de852b21f220bae5ca482e0e13a140fcdc",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y000-t4000-g540/refined_initializer/run.log.gz": "f9a97840a8b60741e7a90853403156f9fb814d36db65f35873f7606268f060cc"
+      },
+      "diagnostic_files_sha256": {
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0-t4000-g5.4/cool.input": "2cdbcb2057b21688dfd9b7aac371ed9b6baf4552c995d7995d6b8e0178050221",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0-t4000-g5.4/hot-join.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0-t4000-g5.4/hot-join.json.gz": "7bd345e7e3c91f2ecff9fe1eb55e7279896bc81bd063d4b3cf7a3a23a1a7ff9b",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0-t4000-g5.4/cool.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0-t4000-g5.4/abundances.dat": "2095cd18e6199c43b0819831b96ae98fdd44abd40d0aa490a0b1c9144fd399ca",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0-t4000-g5.4/cool.json.gz": "53b5b5428be713d35abed8ffbfb75174c4ddf56322ea164f3cf3ad50871290d5",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0-t4000-g5.4/hot-join.input": "026fa008d31b95afa9de861a4267990335912fcd9ffb6a3faa1e58cfbc3ee4bb"
+      }
+    },
+    {
+      "coordinates": [
+        0.15,
+        0.12,
+        4000.0,
+        5.4
+      ],
+      "atmosphere": "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540",
+      "profile_layers": 300,
+      "layers_with_condensates": 0,
+      "chemistry": {
+        "element_closure": 5.051514762044462e-13,
+        "pressure_closure": 4.1455727739503345e-13,
+        "nuclei_closure": 1.8030021919912542e-13,
+        "thresholds": {
+          "0": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.5765166949677223e-14
+          },
+          "0.001": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.5765166949677223e-14
+          },
+          "0.01": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.5765166949677223e-14
+          },
+          "0.1": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.4432899320127035e-14
+          },
+          "1": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.4432899320127035e-14
+          },
+          "100": {
+            "max_condensed_mass_fraction": null,
+            "max_element_gas_depletion": null
+          }
+        },
+        "condensates": [],
+        "vaporized_continuation": {
+          "layers": 34,
+          "actual_temperature_range_K": [
+            6063.526478183377,
+            8916.26188596854
+          ],
+          "pressure_range_bar": [
+            3.2302934891952786,
+            8.470147292147985
+          ],
+          "independently_queried_temperature_K": 6000.0,
+          "maximum_join_condensate_particles_per_nucleus": 0.0,
+          "join_closure": {
+            "element_closure": 5.666578317686799e-13,
+            "pressure_closure": 4.64628335805628e-13,
+            "nuclei_closure": 2.0405899192610377e-13
+          },
+          "scope": "Actual T/P chemistry is audited through6000K. Hotter layers use the native fully vaporized prescription; independent equilibrium is checked at6000K and each actual pressure, not extrapolated to the hotter temperature."
+        }
+      },
+      "atmosphere_input_sha256": {
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/provenance.json": "16bc126cc7a93b33c05d4a93d21019a02dc94aceec7e2928ef2b4d7ec8139892",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/final/validated.json": "c43d98ec2ff0f8c4c243bcf5eb44e3345bb9097adde039694d5733179fad0cc3",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/final/completed.json": "64cf8ce9363fd3196cac390c40d087eb25b993718b78597c7d67801d1c84b5a9",
+        "/private/tmp/ember-nongrey-x015-refined-opacity-v1/plane-001/opacity/fort.63": "f3e6fc8841fc0c845c90c29b230cc025150e10dc3695186b378fcb32b50e5b8f",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/final/run.log.gz": "12f8c689e11af2320cb85e9bcbedc5a42cc7c48d22de730340665cf89e89e12a",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/final/fort.9.gz": "7651bc23f4b4c065a4a376f8f46d460dac405504163dbbc18eec9a9d5efcb5b3",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/final/fort.5.gz": "dda90750c7d24ea1a8fbf0928f179c2216ebc3a7834a314e4d6f2bdf5a21d5ea",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/final/ember-masses.dat.gz": "0dcbca28c798220f55c205f3c0be296661c8ef3ee83e0dd56ea405466db9d0a5",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/final/tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/final/fort.8.gz": "308212f203de81aa31e8b4370d320ce38954c775d6bbe8390ebf250cdf9806be",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/initializer/fort.5.gz": "dda90750c7d24ea1a8fbf0928f179c2216ebc3a7834a314e4d6f2bdf5a21d5ea",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/initializer/fort.7.gz": "a59f3cf1ab8ff5d9653ee4dbbbfb0db9968d0a575c062f2a89b8dc759e01e90b",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/initializer/fort.8.gz": "3ccbac5a051c035956a5eebde86e7ded07b97160b533fb66a17ba8753642384f",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/initializer/fort.9.gz": "dcf436e93d605e1e6085701f6558ab3ff11e7acbde4d69f6b25ca93fa95e40fa",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/initializer/tas.gz": "89bca72243e96230e6f3caf831f1284d8669283faddb8dff028a41839c18189e",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/initializer/ember-masses.dat.gz": "0dcbca28c798220f55c205f3c0be296661c8ef3ee83e0dd56ea405466db9d0a5",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/initializer/opacity.sha256.gz": "b41d9a05a8ee7130893b1203702d81287d548170dbd98a40c78b66648ac21aff",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/initializer/completed.json.gz": "cde6758259eac319db2ee8058ddc77e96b50ff3c25afe9c871f6b688a3aef4e2",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/initializer/run.log.gz": "36fa0ef86f12b790f8452f9424081159e041482d4afa7747544989f9176acb8b",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/refined_initializer/fort.5.gz": "dda90750c7d24ea1a8fbf0928f179c2216ebc3a7834a314e4d6f2bdf5a21d5ea",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/refined_initializer/fort.7.gz": "25f33facd701a86c181a1a1b7a7aca6ae3256c402a200123648306a20c206787",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/refined_initializer/fort.8.gz": "b8344f546792aa9babf6fddf5e2681444e1b07ea6c07cc0c8d7939c0fb471771",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/refined_initializer/fort.9.gz": "0cd9863bf94398ff1bf449d647499e8410ed47d67bf2c314c806815e7deddb73",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/refined_initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/refined_initializer/tas.gz": "3e71e8fb9dd58d76fe61cb33c71126ebf4a74cb9503d8a7b80d24e3cb8e9791e",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/refined_initializer/ember-masses.dat.gz": "0dcbca28c798220f55c205f3c0be296661c8ef3ee83e0dd56ea405466db9d0a5",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/refined_initializer/opacity.sha256.gz": "b41d9a05a8ee7130893b1203702d81287d548170dbd98a40c78b66648ac21aff",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/refined_initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/refined_initializer/completed.json.gz": "21bf36a8da574c15881d3db75d0e0c0efbf9582d1bfbd99800ecb78a5d0da40f",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x150-y120-t4000-g540/refined_initializer/run.log.gz": "c397617a00f093a37335d0988a2d920d16e6ec792fe6e3782de2089bb0a847a4"
+      },
+      "diagnostic_files_sha256": {
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0.12-t4000-g5.4/cool.input": "180c84fbd78b7d754f34a3dcee5f6b55f675efacedf4faab237fe542b6515f17",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0.12-t4000-g5.4/hot-join.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0.12-t4000-g5.4/hot-join.json.gz": "1fe123bd5ce44818282b95a64a6afd52a2fa9d1681d80b85b725dfbf4bb23323",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0.12-t4000-g5.4/cool.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0.12-t4000-g5.4/abundances.dat": "e20b485882c84fa69056922cd7fd277eefcc3a81c60483f47dc481d723a601d6",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0.12-t4000-g5.4/cool.json.gz": "f0159d37c12b427524913de93f91557ec8c77e0987edcadd68d7b32df96af704",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.15-y0.12-t4000-g5.4/hot-join.input": "38240ff5f10aded5bf71e0a371fc4ceec28d8fab295037418ba2165204bc484f"
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.0,
+        4000.0,
+        5.4
+      ],
+      "atmosphere": "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540",
+      "profile_layers": 300,
+      "layers_with_condensates": 0,
+      "chemistry": {
+        "element_closure": 5.535572000781031e-13,
+        "pressure_closure": 4.5130565951012613e-13,
+        "nuclei_closure": 2.0472512574087887e-13,
+        "thresholds": {
+          "0": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.4432899320127035e-14
+          },
+          "0.001": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.4432899320127035e-14
+          },
+          "0.01": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.4432899320127035e-14
+          },
+          "0.1": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 7.993605777301127e-15
+          },
+          "1": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 7.216449660063518e-15
+          },
+          "100": {
+            "max_condensed_mass_fraction": null,
+            "max_element_gas_depletion": null
+          }
+        },
+        "condensates": [],
+        "vaporized_continuation": {
+          "layers": 32,
+          "actual_temperature_range_K": [
+            6068.310232169966,
+            8754.813966386304
+          ],
+          "pressure_range_bar": [
+            3.236296886351931,
+            8.15271122405032
+          ],
+          "independently_queried_temperature_K": 6000.0,
+          "maximum_join_condensate_particles_per_nucleus": 0.0,
+          "join_closure": {
+            "element_closure": 5.788702850395566e-13,
+            "pressure_closure": 4.5086157030027607e-13,
+            "nuclei_closure": 2.05613304160579e-13
+          },
+          "scope": "Actual T/P chemistry is audited through6000K. Hotter layers use the native fully vaporized prescription; independent equilibrium is checked at6000K and each actual pressure, not extrapolated to the hotter temperature."
+        }
+      },
+      "atmosphere_input_sha256": {
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/provenance.json": "fa895442a313ddfbeaad36f68f33cd20228fd3e5a8b891616665c528602c9e35",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/final/validated.json": "aacf6d75f77f4fbb10755bdcd7a95393144f84141b04669fe295cce9fb8bf05d",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/final/completed.json": "b6e36d796e2cf760652ee6b35c16840ad6fdb1094c9372a81d77f85c1c5d80c1",
+        "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-002/fort.63": "64f66d2e884da93c061ff239504c1b4570757da2223099aeef206736a8992359",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/final/run.log.gz": "e9ff34b84c8c1bdea27368700b1985efcc76bd15a9d506b585de14841ce4fdef",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/final/fort.9.gz": "3507e130d23f45311aaaab235ee105652897070d55e64711f1c8849275ee9546",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/final/fort.5.gz": "617c403b5c1081b4e21b3351ad4e718a8fb9fefc1707e032282132363ac39723",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/final/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/final/tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/final/fort.8.gz": "d7174ba826b76014e351ba35d6cf2a938066297c1015e9aa6589f7fc0433b79c",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/initializer/fort.5.gz": "617c403b5c1081b4e21b3351ad4e718a8fb9fefc1707e032282132363ac39723",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/initializer/fort.7.gz": "40a7d7f896444accf9c00d631753e8f8c8fd5fe435f1f5666b4db51b7f13eeb3",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/initializer/fort.8.gz": "387e7d2d36f17b20a4645797100c6b9703b06ffd5c5c7a4bfa528d302e21d30f",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/initializer/fort.9.gz": "776d688264dfba979fe5d1c0de09e4d1f54255eac217b0bda02cd934d248a9f2",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/initializer/tas.gz": "89bca72243e96230e6f3caf831f1284d8669283faddb8dff028a41839c18189e",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/initializer/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/initializer/opacity.sha256.gz": "d5164c4ef24ad964bf167ee68179b3ecb280c8031faf1a7f3683c139d5f526b7",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/initializer/completed.json.gz": "19785e8957daf71914af0465d6eede9e1b884ae66cbc33f1cb05269156c421f3",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/initializer/run.log.gz": "f25fe2f989c88c3827a251bf703a5ab7a40d37aaea673122a6043faa6cd47268",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/refined_initializer/fort.5.gz": "617c403b5c1081b4e21b3351ad4e718a8fb9fefc1707e032282132363ac39723",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/refined_initializer/fort.7.gz": "556f64386ed52f3c4d2de706f32787e1f170c6625a7005776fde1bf16f6f07a1",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/refined_initializer/fort.8.gz": "1bdfdf03a74a2fd1c202078c6a75f29a30c13bf9f0731999d7a4e5205def3882",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/refined_initializer/fort.9.gz": "33f93a4dba4e2a2560f6f427d60a2a925666b3942cde02740f7834bbcb4b2834",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/refined_initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/refined_initializer/tas.gz": "3e71e8fb9dd58d76fe61cb33c71126ebf4a74cb9503d8a7b80d24e3cb8e9791e",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/refined_initializer/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/refined_initializer/opacity.sha256.gz": "d5164c4ef24ad964bf167ee68179b3ecb280c8031faf1a7f3683c139d5f526b7",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/refined_initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/refined_initializer/completed.json.gz": "615d66ed88025f261d30d9809c513dedd05dc1ed21aefec89a25ddf963ecdb29",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y000-t4000-g540/refined_initializer/run.log.gz": "123ceec66d0cef380ee37ba9e2abf4e45ea457c8e71f9a8f748f2869ba04d8f3"
+      },
+      "diagnostic_files_sha256": {
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0-t4000-g5.4/cool.input": "586af529195952fb83d45a0ee8f6b35f3e4eb9c3081bc7854a0d1d5a5d8d335f",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0-t4000-g5.4/hot-join.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0-t4000-g5.4/hot-join.json.gz": "776917e013792023c47bdbc3ee05b0e8bc4f279c202814ff60cb724100321d17",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0-t4000-g5.4/cool.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0-t4000-g5.4/abundances.dat": "fcc6ef14ee100ae766343ea0eb5031d7c895db17e69446941e220ce3f8a0bac5",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0-t4000-g5.4/cool.json.gz": "acf5af79b21a1f8e1ae4879fbc9641acdb39dca15679aaaa9de769c3ca60b298",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0-t4000-g5.4/hot-join.input": "be0a7e93e012f248d880a554f1be3d661164b9ab422307fe8c5e8ccd94da825b"
+      }
+    },
+    {
+      "coordinates": [
+        0.2,
+        0.12,
+        4000.0,
+        5.4
+      ],
+      "atmosphere": "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540",
+      "profile_layers": 300,
+      "layers_with_condensates": 0,
+      "chemistry": {
+        "element_closure": 5.46451772720502e-13,
+        "pressure_closure": 3.2507330161024584e-13,
+        "nuclei_closure": 1.4033219031261979e-13,
+        "thresholds": {
+          "0": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.6653345369377348e-14
+          },
+          "0.001": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.6653345369377348e-14
+          },
+          "0.01": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.6653345369377348e-14
+          },
+          "0.1": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.554312234475219e-14
+          },
+          "1": {
+            "max_condensed_mass_fraction": 0.0,
+            "max_element_gas_depletion": 1.4988010832439613e-14
+          },
+          "100": {
+            "max_condensed_mass_fraction": null,
+            "max_element_gas_depletion": null
+          }
+        },
+        "condensates": [],
+        "vaporized_continuation": {
+          "layers": 33,
+          "actual_temperature_range_K": [
+            6008.072691676476,
+            8764.057860193163
+          ],
+          "pressure_range_bar": [
+            3.1444649488213385,
+            8.140465712999369
+          ],
+          "independently_queried_temperature_K": 6000.0,
+          "maximum_join_condensate_particles_per_nucleus": 0.0,
+          "join_closure": {
+            "element_closure": 5.899725152858082e-13,
+            "pressure_closure": 4.57744953052952e-13,
+            "nuclei_closure": 2.036149027162537e-13
+          },
+          "scope": "Actual T/P chemistry is audited through6000K. Hotter layers use the native fully vaporized prescription; independent equilibrium is checked at6000K and each actual pressure, not extrapolated to the hotter temperature."
+        }
+      },
+      "atmosphere_input_sha256": {
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/provenance.json": "3924c1eb497595d15603c0f32be441149474e55a529cc94e4a29b50a3d00e791",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/final/validated.json": "411e8398ac34a068d3ae745931ba06e5e04a9ed93b14f453fc16c8326c83d848",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/final/completed.json": "cd6c905390a3158862aae370871c91e3e542ccf78f60bdaee21952b37c58d203",
+        "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/plane-003/fort.63": "d252fd78b9ebcc04f940781bb419b58d562073dd1199dcf2fe8623ea79729c39",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/final/run.log.gz": "2c5c17642dcb222b0c474f70b2b607bb7836abdf33a08521b7de981181c221ac",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/final/fort.9.gz": "e04209c52fa2b372cbb28fe8b7f6bfffab16463a3ed24f7007dfe5fe9f223687",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/final/fort.5.gz": "63eaad6adc4ca9324e95ad5912b2300ca9c64a8f8d8b38c89bae9879152abd4a",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/final/ember-masses.dat.gz": "d42aefa1813a67c9226e158e2517f4eea6650ef00f6697f2b617bdf4c6e51eda",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/final/tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/final/fort.8.gz": "38c042edbde8cade33f0b4a5d61fd9d797bb9e150b52b0c05afc06416696962c",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/initializer/fort.5.gz": "63eaad6adc4ca9324e95ad5912b2300ca9c64a8f8d8b38c89bae9879152abd4a",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/initializer/fort.7.gz": "8d30f5480dec7782de29ed59e7034702dd29d02457a6b1aa528be8fea1df488b",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/initializer/fort.8.gz": "ee80d77524531c0646caf28e09497588adb9b33026702c87690ec64d026e7146",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/initializer/fort.9.gz": "44d10370d09713fa6551b22b50d0f111717af73fedcb72099fb2c46f835e46b7",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/initializer/tas.gz": "89bca72243e96230e6f3caf831f1284d8669283faddb8dff028a41839c18189e",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/initializer/ember-masses.dat.gz": "d42aefa1813a67c9226e158e2517f4eea6650ef00f6697f2b617bdf4c6e51eda",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/initializer/opacity.sha256.gz": "031db2078507d7c92535b217a22c06a4f8a5d3ac2fde165b765eb1428b458ebf",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/initializer/completed.json.gz": "d5289749075884c88ea37c1dc3e12b54fb12715e8a5b540134f9999e699ae0fd",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/initializer/run.log.gz": "2b2c56dcd2517756e3970c4c00903f073f59838bab5a00f60d1cb3061840f3de",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/refined_initializer/fort.5.gz": "63eaad6adc4ca9324e95ad5912b2300ca9c64a8f8d8b38c89bae9879152abd4a",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/refined_initializer/fort.7.gz": "22b7b480b7756c0fc122bbc7248c5d448128148355c33dc0403e654e4d04fc67",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/refined_initializer/fort.8.gz": "eaa26ad5fcc33520c82d878f187490c4a0b3a5c3d297afe75aaaa0bd08e408df",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/refined_initializer/fort.9.gz": "9a5bb0267c98d2e5b69750150a70ef17a7706ec4aadcf26a6f7d335e337f6ced",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/refined_initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/refined_initializer/tas.gz": "3e71e8fb9dd58d76fe61cb33c71126ebf4a74cb9503d8a7b80d24e3cb8e9791e",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/refined_initializer/ember-masses.dat.gz": "d42aefa1813a67c9226e158e2517f4eea6650ef00f6697f2b617bdf4c6e51eda",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/refined_initializer/opacity.sha256.gz": "031db2078507d7c92535b217a22c06a4f8a5d3ac2fde165b765eb1428b458ebf",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/refined_initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/refined_initializer/completed.json.gz": "a33eadecb631b74dc7bed68a3944525c74395a90b64ef1156fda55c6426822d7",
+        "/private/tmp/ember-nongrey-t3800-t4000-v2/x200-y120-t4000-g540/refined_initializer/run.log.gz": "873b2fdb118b5b9d240f9c3ec8d2da8e77725ae251865de93f1d8a56d4b49dd1"
+      },
+      "diagnostic_files_sha256": {
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0.12-t4000-g5.4/cool.input": "d67ce6acc0759f878d38b592687e4b954990e86ac2225bdd841e34cafbc1963a",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0.12-t4000-g5.4/hot-join.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0.12-t4000-g5.4/hot-join.json.gz": "be2377248c8468cd487e772466db1f52c8e910550b78f66f84ad493a408f50bc",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0.12-t4000-g5.4/cool.log": "d726b101c196b3f3d725a4441b27d790ba70a6b83a82bc400ae31714f233a7d1",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0.12-t4000-g5.4/abundances.dat": "02a4fdaffc7447c1d55f46f5fdf91ac99db41656d7f19f8438dfc68f4eff392d",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0.12-t4000-g5.4/cool.json.gz": "58fb134cca32d08ead5009d20d675a584c01b8163d0ab3282be62abb49cb885f",
+        "/tmp/ember-t4000-condensation-g540-v1/x0.2-y0.12-t4000-g5.4/hot-join.input": "48354243ae9797dc57480b9c5fd6e54762f8451a2715b3b89f3de309f8fdb8d0"
+      }
+    }
+  ]
+}

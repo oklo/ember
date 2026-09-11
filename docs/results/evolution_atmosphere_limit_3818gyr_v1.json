@@ -1,0 +1,156 @@
+{
+  "scope": "Checked 512-point fresh 0.1 Msun gas trajectory through the 4000 K atmosphere limit; hydrogen burning continues. This result is separate from the 3800 K track plotted in the September 10 paper.",
+  "input": "out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.json",
+  "raw_sha256": "667c09eae93ba744c8139bcd76b120fdf49973c5c15f4b1cb28be337a419783d",
+  "raw_archive": "artifacts/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.json.gz",
+  "raw_archive_sha256": "57d0fd789da6c27be153d2b025e53825ef9f20beaf8e0065dbf163bd3ac08205",
+  "history_csv": "evolution_latest.csv",
+  "history_csv_sha256": "e92c098a4184bcc269ac31ebd24de58634f1c5165506e7b4deb1484b26a8d621",
+  "profile_csv": "evolution_latest_profile.csv",
+  "profile_csv_sha256": "ae7b4db64c89e876be39b509354ab0a6792bf152c165b7ed77ae506beb581aa8",
+  "states": 7148,
+  "endpoint": {
+    "age_yr": 3818394476534.1704,
+    "step_yr": 33875.2398099328,
+    "R_Rsun": 0.13791784633558168,
+    "L_Lsun": 0.004387070120292039,
+    "Teff_K": 3999.999997305189,
+    "central_X": 0.00457992294498345,
+    "central_Y3": 1.5584781789346563e-07,
+    "step_error_norm": 1.9895196601282805e-06,
+    "discrete_luminosity_balance": 4.0258019140537726e-10,
+    "nuclear_rest_mass_balance": -1.0115949077293962e-06,
+    "last_halfstep_coupling_iterations": 1,
+    "convective_mass_fraction": 0.11704099748439488,
+    "central_T_K": 11054560.373617059,
+    "central_rho": 2557.72843969619,
+    "surface_X": 0.17306233336915014,
+    "surface_Y3": 0.0026250351085578823,
+    "nuclear_deposited_Lsun": 0.004381151785261139,
+    "nuclear_neutrino_Lsun": 0.00011128651152548305,
+    "last_halfstep_gravothermal_Lsun": 5.922465573412044e-06,
+    "hydrogen_mass_Msun": 0.010670299407903929,
+    "thermal_neutrino_Lsun": 4.128776364298023e-09
+  },
+  "requested_age_reached": false,
+  "stop": "Accepted history ends at the atmosphere upper temperature; subsequent source-domain rejections and minimum-step failure are retained. Requested age was not reached.",
+  "first_atmosphere_domain_rejection": "retry dt=3.46882e+07 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
+  "last_atmosphere_domain_rejection": "retry dt=529.301 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
+  "rejected_attempts": 269,
+  "milestones": {
+    "scope": "Report bracketed exhaustion and cooling milestones without extrapolation.\n\nAll recrossings are retained. A threshold crossing is not a claim of permanent\nextinction, a white-dwarf classification, or a converged endpoint age.\n",
+    "age_range_yr": [
+      0,
+      3818394476534.1704
+    ],
+    "accepted_states": 7148,
+    "run_reached_requested_age": false,
+    "core_hydrogen": [
+      {
+        "threshold": 0.001,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 0.0001,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 1e-05,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      }
+    ],
+    "nuclear_deposited_over_photon_luminosity": [
+      {
+        "threshold": 0.1,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 0.01,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 0.001,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      }
+    ],
+    "nuclear_diagnostic_scope": "Deposited luminosity of the selected network; pp-only in the present driver. Missing legacy data are not interpreted as zero burning.",
+    "temperature": [
+      {
+        "threshold": 1000,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 500,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 100,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      }
+    ],
+    "temperature_scope": "Downward crossings are cooling-temperature milestones only. Establish a degenerate remnant, residual-burning regime and source validity separately.",
+    "final": {
+      "age_yr": 3818394476534.1704,
+      "central_X": 0.00457992294498345,
+      "Teff_K": 3999.999997305189,
+      "L_Lsun": 0.004387070120292039,
+      "hydrogen_mass_Msun": 0.010670299407903929,
+      "nuclear_deposited_Lsun": 0.004381151785261139
+    }
+  },
+  "mixing_regions": [
+    {
+      "begin": 0,
+      "end_exclusive": 348,
+      "convective": false,
+      "mass_fraction": 0.8829590025156051,
+      "inner_enclosed_fraction": 1.22864837681125e-10,
+      "outer_enclosed_fraction": 0.8815252255667194
+    },
+    {
+      "begin": 348,
+      "end_exclusive": 512,
+      "convective": true,
+      "mass_fraction": 0.11704099748439484,
+      "inner_enclosed_fraction": 0.8843927794644909,
+      "outer_enclosed_fraction": 1
+    }
+  ],
+  "mixing_probe_sha256": "4e0541eb003a4352a7bec9538e02dde45e8a655571570eea4f88cfb1b0713455",
+  "receipt_sha256": "f09b50f3de877637838e4cbaee032d779d55ff4ae8989dafe92b31757a20cdb5",
+  "executable_sha256": "a4ff20664d7350f1942cb9d9a00196a7d838f6992fd15e40c51e44b4098bbc5d",
+  "EOS": "metal:data/eos/low_density_refined_v2/freeeos300_gs98_z020.dat",
+  "atmosphere": "nongrey:/tmp/ember-nongrey-exhaustion-t4000-v1.dat",
+  "opacity_directory": "/Users/greglaughlin/Projects/ember/data/opacity/hydrogen_exhaustion_hot_v1",
+  "step_error_tolerances": {
+    "log_structure": 2.5e-05,
+    "absolute_abundance": 2.5e-08,
+    "relative_surface_luminosity": 0.00025
+  },
+  "data_changed_during_run": [],
+  "source_changed_during_run": [],
+  "source_note": "Changes to the source tree do not alter the copied executable used for this calculation.",
+  "cpu_seconds": 2471.367604,
+  "awake_seconds": 1505.363663249649,
+  "utc_seconds": 1809.9632649421692,
+  "export_script_sha256": "0de8512783beb1224a01e3c6ef64a77d6574a64e3c0e0d58ef10548bb0785253",
+  "archive_directory": "/tmp/ember-t4000-report-v1"
+}

@@ -1,3 +1,133 @@
+# Published-paper checkpoint preparation — 2026-09-11 02:44 UTC
+
+User explicitly requests autonomous overnight work toward the full track.
+An ACTIVE goal now exists (no token budget); do not mark complete before the
+actual 100 K evolved remnant objective and publication tasks are achieved.
+User requested immediate PDF and GitHub update. The 12-page PDF has been
+rebuilt and its local link delivered; build log /tmp/ember-paper-sept10-v9.log.
+Use TECTONIC_CACHE_DIR=/tmp/ember-handoff-tectonic-cache-20260909 (writable,
+contains the title math font); ordinary default cache writes are sandboxed.
+All seven figure pairs (six current, one separate resolution control) and two
+LBA CSVs reproduce exactly in /tmp/ember-paper-reproduce-latest-v4. All25
+recovery hashes and prose decimal sigfig limits pass. Validation.json and
+both READMEs now updated. Latest checked endpoint3.818T report is
+results/evolution_atmosphere_limit_3818gyr_v1.json; paper remains explicitly
+one checked3.795T track. Commit/push is the IMMEDIATE next action.
+
+New user figure request: use identical LBA97 axes AND absolute opacity scale,
+two maps side by side, with sampled0.1Msun tracks. Current PDF temporarily has
+gas-only full-range map plus zoom; the requested dual-map revision is pending.
+AJR83 primary PDF downloaded to /tmp/ember-ajr83.pdf (text alongside). Local
+F77 BLOCK DATA AJRDAT has its transcribed Table2 but is ragged; many high-density
+low-temperature values are absent. F77 extrapolates them. LBA97 also uses
+Pollack, McKay & Christofferson1985 grains (Icarus64,471). Do NOT call the
+F77 substitution LBA97's exact map or invent absolute opacity from uncalibrated
+figure gray levels. Need acquire/verify appropriate source data or explicitly
+label a quantitatively controlled reconstruction. OriginalFigure6
+/tmp/ember-lba97-figure6.gif; wholepapertext/tmp/ember-lba97-comparison.txt.
+
+Atmosphere source jobs inspected before launch; all preceding jobs were done.
+- /tmp/ember-nongrey-t4200-t4400-v1, session33720, jobs4. Cancellation written
+  after two X=.15/g5.4 seeds were too shallow for requested trimming tau300.
+  Active4200K solves finish; queued work is cancelled. X=.15/y0,y.12/g5.15,
+  X=.2/y0/g5.15 and X=.2/y0/g5.4 are active/finishing. The last high-g model
+  is a valid deep boundary control; keep it for comparison with v2 tau150.
+- /tmp/ember-nongrey-t4200-t4400-v2, session15955, jobs4. Four4200K/g5.4 jobs
+  with seed tau150, then eight4400K/g5.15/5.4 jobs. Preserve source limits.
+  Its X=.2/y.12/g5.15/4400 dependency points at cancelled v1 work: once other
+  queued jobs finish/start, cancel remaining dependency; use v3 instead.
+- /tmp/ember-nongrey-t4200-t4400-v3, session84966,jobs1. The omitted
+  X=.2/y.12/g5.15/4200 and then4400 pair, with correct dependency.
+All reuse verified13.15k material-temperature wavelength tables; no new opacity
+synthesis. Independent4100/4300 source checks, lower-boundary comparisons,
+condensation, runtime/EOS support and exact retained-cell checks are still needed
+before assembly/selection. Current logg increases through5.15, so only5.15/5.4
+nodes are requested at4200/4400. Existing low-g source models remain retained.
+No stellar evolution run active. Inspect manifests/logs rather than duplicating
+work. All new source plan/spec files are in data/atmosphere/sources/.
+
+---
+
+# Paper revision and 4000 K endpoint — 2026-09-11 02:30 UTC
+
+The autonomous 0.1 Msun evolution through a genuinely evolved 100 K helium
+remnant remains unfinished. No subagents. Inspect jobs before starting work;
+all stellar and atmosphere source runs described below have finished.
+Preserve unrelated .DS_Store files and the helium coexistence probes.
+
+The fresh 4000 K/EOS72 calculation v2 has finished at 3.818 trillion years,
+Teff=4000 K and central X=0.004580, at the atmosphere upper boundary.
+Its log contains explicit source-domain rejections before the final minimum-
+step/line-search failure. It has NOT reached the requested 4.000 trillion years.
+Raw result: out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.json.
+Receipt and copied executable: /tmp/ember-t4000-eos72-512-4000gyr-v2/.
+Output SHA667c09eae93ba744c8139bcd76b120fdf49973c5c15f4b1cb28be337a419783d.
+Executable SHAa4ff20664d7350f1942cb9d9a00196a7d838f6992fd15e40c51e44b4098bbc5d.
+This includes the initializer coverage check; all 32 tests pass (74.78 s),
+record docs/results/atmosphere_initial_seed_v1.json. No physical guards relaxed.
+Awake time 25.09 min, CPU 41.19 min. Detailed endpoint checks are being exported
+separately to /tmp/ember-t4000-report-v1; do not confuse the target with success.
+
+The September 10 working paper currently plots the independently checked
+3800 K/EOS72 history through 3.795 trillion years, central X=0.007220,
+surface X=0.1731. It has initial structure +6835 accepted time steps.
+Raw: out/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.*; copied executable
+and receipt: /tmp/ember-t3800-eos72-512-4000gyr-v1/.
+Paper files: evolution_latest.csv, final profile CSV and provenance JSON.
+Central nonconvective mass is 85.20%; conduction carries 40.83% of the local
+central flux, radiation 59.17% (current_core_transport_v1.json). Do not describe
+this central region as purely radiative. All paper graphs now use this one
+Ember track; previous mesh controls remain separate recovery records.
+
+The user requests scientific-paper prose, with no research/development-history
+narrative, no unexplained jargon and at most four significant figures. All
+requested first-attempt/failure stories, old-model references, redundant
+caveats and definitions have been removed from the LaTeX. New title is one
+black line: Ember: the long life of a 0.1 solar-mass star; no helium subtitle.
+A short code description opens the paper. All figure titles are being removed.
+Do not call atmosphere calculations expensive: report measured time instead.
+
+The paper now compares the initial model with EBLM J2114-39 B, TRAPPIST-1,
+and Proxima, with observational/model-dependence caveats and primary citations.
+Report: docs/results/initial_model_observations_v1.json.
+The LBA97 Figure 6 adaptation uses photospheres at Rosseland tau=2/3 extracted
+from all 144 source atmospheres, NOT the stellar tau=100 mesh endpoint.
+Scripts/export_photospheric_evolution.py verifies source hashes/deep-boundary
+agreement and 65 runtime interpolation checks. Photospheric T=3020 to4111K.
+Its fixed solar SYNSPEC background is GAS ABSORPTION ONLY: no scattering or
+grains, unlike LBA97's grain-inclusive map. This is now explicit in caption.
+The plot has matching LBA97 full axes with unsupported areas hatched, plus a
+zoom; circle diameters scale with stellar radius. New plot files/data/provenance
+are in docs/reports/2026-09-10/. Grain optical controls exist but coupled grain
+atmospheres remain unfinished; see docs/GRAINS.md.
+
+All 3800 K/144 and 4000 K/156 atmosphere source nodes and independent/depth/
+condensation checks are complete and accepted. Tables under /tmp/ember-nongrey-
+exhaustion-t{3800,4000}-v1.dat, manifests alongside them. EOS72 already installed
+at data/eos/low_density_refined_v2/. 4000K acceptance at3900K gives matching
+T -0.4427%, P +0.4107%; four depth checks maximum0.005127%. All12 new structures
+have no condensates in the equilibrium diagnostic. Source material-opacity
+limit is13.15kK; 15kK He I4471A absorption remains nonfinite and rejected.
+To continue beyond4000K, extend and independently check atmosphere source
+coverage. Do not extrapolate or duplicate completed source jobs.
+
+Production timing: the completed original/large-cache pair has identical whole
+JSON outputs through3.757T, CPU162.4 vs101.8min (37.31% savings). New report
+nuclear_response_cache_long_benchmark_v4.json. Electron-sharing v5 additionally
+saves14.97% in short ABBA comparisons and all2048 late-state responses match.
+
+UNPUBLISHED WORK remains in the tree (origin/master7c97dcf). C++ initializer
+fix, source specs/reports, CNO capture diagnostic, exporters, updated paper and
+all figures/docs need final verification, explicit staging, commit and push.
+Validation.json and paper README still require updating to the current files.
+Reproduce six paper figure pairs plus two LBA CSVs in an isolated directory,
+verify recovery hashes, rebuild PDF and inspect it; keep September10 overwritten
+in place. GitHub description still says3.685T and needs updating. Do not stage
+unrelated .DS_Store or helium probes. The CNO diagnostic is not a production
+network and does not establish negligible CNO; Tc now exceeds its1–10MK domain.
+
+---
+
 # Checked EOS and further production savings — 2026-09-10 23:58 UTC
 
 The autonomous 0.1 Msun trajectory to an actually evolved 100 K helium remnant
