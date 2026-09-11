@@ -48,9 +48,9 @@ HelmholtzTableEos::HelmholtzTableEos(const std::filesystem::path& file, Mixture 
   if (!in || (version!=1 && version!=2)) throw std::runtime_error("HelmholtzTableEos: unsupported version");
   label("source"); in>>std::quoted(source_);
   if (!in || source_.empty()) throw std::runtime_error("HelmholtzTableEos: missing provenance");
-  label("composition_proxy"); std::string proxy; in>>std::quoted(proxy);
-  if (!in || proxy.empty()) throw std::runtime_error("HelmholtzTableEos: missing mixture declaration");
-  if (proxy!="none" && mixture!=Mixture::allow_documented_proxy)
+  label("composition_proxy"); in>>std::quoted(proxy_);
+  if (!in || proxy_.empty()) throw std::runtime_error("HelmholtzTableEos: missing mixture declaration");
+  if (proxy_!="none" && mixture!=Mixture::allow_documented_proxy)
     throw std::invalid_argument("HelmholtzTableEos: explicit composition proxy selection required");
   if(version==2) {
     label("basis");std::string abundance_basis;in>>abundance_basis;

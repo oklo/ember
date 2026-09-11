@@ -62,6 +62,37 @@ MetalHelmholtzEos::Coordinates MetalHelmholtzEos::coordinates(const Composition&
   return {i,j,u,v};
 }
 
+std::size_t MetalHelmholtzEos::check_temperature_extension(const MetalHelmholtzEos& old) const {
+  if(x_!=old.x_ || y_!=old.y_)
+    throw std::runtime_error("EOS extension: composition axes changed");
+  auto physical_source=[](const std::string& source) {
+    const std::string label="; direct-source SHA256 ";
+    const auto at=source.rfind(label);
+    if(at==std::string::npos)return source;
+    const auto hash=source.substr(at+label.size());
+    if(hash.size()!=64 || hash.find_first_not_of("0123456789abcdef")!=std::string::npos)
+      throw std::runtime_error("EOS extension: malformed raw source identity");
+    return source.substr(0,at);
+  };
+  std::size_t added=0;
+  for(std::size_t k=0;k<tables_.size();++k) {
+    const auto& a=*tables_[k];const auto& b=*old.tables_[k];
+    if(a.proxy_!=b.proxy_ || physical_source(a.source_)!=physical_source(b.source_)
+        || a.composition_.X!=b.composition_.X || a.composition_.basis!=b.composition_.basis
+        || a.composition_.metal_inventory!=b.composition_.metal_inventory)
+      throw std::runtime_error("EOS extension: source physics or composition changed");
+    if(a.q_!=b.q_ || a.t_.size()<=b.t_.size()
+        || !std::equal(b.t_.begin(),b.t_.end(),a.t_.begin()))
+      throw std::runtime_error("EOS extension: original material axes changed");
+    for(std::size_t i=0;i<b.nodes_.size();++i)
+      if(a.nodes_[i].valid!=b.nodes_[i].valid || a.nodes_[i].d!=b.nodes_[i].d)
+        throw std::runtime_error("EOS extension: original potential values or masks changed");
+    for(std::size_t i=b.nodes_.size();i<a.nodes_.size();++i)added+=a.nodes_[i].valid;
+  }
+  if(!added)throw std::runtime_error("EOS extension: no valid hotter states added");
+  return added;
+}
+
 std::optional<Eos::DensityRange> MetalHelmholtzEos::density_range(double T,const Composition& c) const {
   const auto q=coordinates(c);DensityRange r{0,std::numeric_limits<double>::infinity()};
   for(std::size_t i=0;i<2;++i)for(std::size_t j=0;j<2;++j) {

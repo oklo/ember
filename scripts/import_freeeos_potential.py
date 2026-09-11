@@ -26,11 +26,14 @@ def main():
     a = ap.parse_args()
     original = a.source.read_bytes()
     src = json.loads(gzip.decompress(original))
-    if src['version'] != 'FreeEOS 3.0.0' or src['options'] != [3, 1, -2]:
-        raise ValueError('expected FreeEOS 3.0 EOS1 source')
+    if src['version'] != 'FreeEOS 3.0.0' or src['options'] not in ([3, 1, -2], [3, 223, -2]):
+        raise ValueError('expected FreeEOS 3.0 EOS1 or numerical-electron source')
+    numerical_electrons = src['options'] == [3, 223, -2]
     if not math.isfinite(a.hydrogen) or not 0 <= a.hydrogen <= .98:
         raise ValueError('invalid hydrogen abundance')
     baryonic = src.get('composition_basis') == 'baryon_mass'
+    if numerical_electrons and not baryonic:
+        raise ValueError('numerical-electron source requires the explicit baryonic mixture')
     helium = .3 if a.hydrogen == .7 else 1-a.hydrogen
     expected_eps=[a.hydrogen/1.00782503,helium/4.00260325]+[0.]*18
     if baryonic:
@@ -73,7 +76,10 @@ def main():
         defects = [rho*Er/P+chit-1, T*St/Et-1, rho*T*Sr/P+chit]
         if max(abs(v) for v in defects) > 1e-7:
             raise ValueError(f'inconsistent source state {k}: {defects}')
-        pr = arad*T**4/3
+        # Option 223 retains the EOS1 material choices but computes the
+        # electron integrals numerically and omits radiation. Ember adds
+        # radiation once at runtime for either source treatment.
+        pr = 0. if numerical_electrons else arad*T**4/3
         em, sm = E-3*pr/rho, S-4*pr/(rho*T)
         qt = -em/T
         qr = (P-pr)/(rho*T)
@@ -100,8 +106,10 @@ def main():
            f'log_t {nt-4} '+' '.join(format(v,'.17g') for v in lt[2:-2]),
            f'log_q {nq-4} '+' '.join(format(v,'.17g') for v in lq[2:-2]),'data']
     if baryonic:
+        source_method = ('option 223; numerical electron integrals; radiation omitted'
+                         if numerical_electrons else 'EOS1')
         lines[:4] = ['EMBER_HELMHOLTZ 2',
-            f'source "FreeEOS 3.0.0 EOS1; GS98; baryonic H={src["hydrogen"]:g} He3={src["helium3"]:g}; direct-source SHA256 {hashlib.sha256(original).hexdigest()}"',
+            f'source "FreeEOS 3.0.0 {source_method}; GS98; baryonic H={src["hydrogen"]:g} He3={src["helium3"]:g}; direct-source SHA256 {hashlib.sha256(original).hexdigest()}"',
             'composition_proxy '+json.dumps(src['approximation']),
             'basis baryon_mass',
             'metal_inventory gs98',

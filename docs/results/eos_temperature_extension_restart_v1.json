@@ -1,0 +1,41 @@
+{
+  "scope": "EOS temperature-extension restart mechanics, retained-data rejection and fixed-input executable compatibility. New EOS source accuracy is assessed separately; this record does not accept a physical table.",
+  "checked_utc": "2026-09-11T04:39:27.294024+00:00",
+  "ctest_suites_passed": 32,
+  "ctest_total_seconds": 445.58,
+  "identical_complete_512_point_10Gyr_JSON": true,
+  "comparison_output_sha256": "229f1a16dfcdacaa6f0e53811354ae9c9382c3c2f0e6d3667dff5b07be46ab6e",
+  "source_executable_sha256": "656f48eb437f1332b455d6c1bc074e6151a1ad0b606f31a47c41c1dfa8901b9e",
+  "new_executable_sha256": "cdb780e701b0f6072d8bbdded3b52a753ef84426a7a2aa33b8a5d4f5bb54747e",
+  "checks": [
+    "Exact resumed history and final profile after synthetic unvisited hotter rows",
+    "Exact native restart round trip with the extended EOS",
+    "Original checkpoint unchanged",
+    "Reject ordinary restart with a changed EOS",
+    "Reject wrong original EOS",
+    "Reject changed retained potential coefficient",
+    "Reject changed retained validity mask",
+    "Reject changed source physics label"
+  ],
+  "evidence_sha256": {
+    "/tmp/ember-atmosphere-extension-compatibility-v1/old.json": "229f1a16dfcdacaa6f0e53811354ae9c9382c3c2f0e6d3667dff5b07be46ab6e",
+    "/tmp/ember-atmosphere-extension-compatibility-v1/new.json": "229f1a16dfcdacaa6f0e53811354ae9c9382c3c2f0e6d3667dff5b07be46ab6e",
+    "/tmp/ember-eos-extension-compatibility-v1.json": "229f1a16dfcdacaa6f0e53811354ae9c9382c3c2f0e6d3667dff5b07be46ab6e",
+    "/tmp/ember-atmosphere-extension-compatibility-v1/old.receipt.json": "429aeb211099f225de8f70e6ad338f778e8f55a2692ef6fcf26db84cfa158ffd",
+    "/tmp/ember-atmosphere-extension-compatibility-v1/new.receipt.json": "9f84b04ed57b544a03e647a356ae114789c8cc3f7eb2e642df578e9f876edaaf",
+    "/tmp/ember-eos-extension-compatibility-v1.receipt.json": "6c924bf7a4db6809979663b76ad5b2102cdf746b38d1b3ef0eea927382e2d395",
+    "/tmp/ember-eos-temperature-extension-tests-v1.log": "95fccc417e8ac47f7362ad2749107ba9647e19bef31ea2ad2829bdfcdb59b17a",
+    "/private/tmp/ember-atmosphere-extension-compatibility-v1/old/ember-evolve": "a4ff20664d7350f1942cb9d9a00196a7d838f6992fd15e40c51e44b4098bbc5d",
+    "/private/tmp/ember-atmosphere-extension-compatibility-v1/new/ember-evolve": "656f48eb437f1332b455d6c1bc074e6151a1ad0b606f31a47c41c1dfa8901b9e",
+    "/private/tmp/ember-eos-extension-compatibility-v1/ember-evolve": "cdb780e701b0f6072d8bbdded3b52a753ef84426a7a2aa33b8a5d4f5bb54747e"
+  },
+  "source_sha256": {
+    "apps/evolve.cpp": "84beb131901864411d9ad2b57309d6b2c508eea434373531da7058e6908abbea",
+    "include/ember/eos_helmholtz.hpp": "466515a62213fe802e4b8cf31e5bff248b9bf5abdae1b25e7c993b609204bf77",
+    "include/ember/eos_mixture.hpp": "074d60eb0d1d31cd65973cdcadae1c45705218281835aedde0b75c719f2e9005",
+    "src/eos_helmholtz.cpp": "5bd3a3999a29754abd79cce893108393dbf3ac3d96f6ddcda727de663712a7c7",
+    "src/eos_mixture.cpp": "4a709571af564da2f73c801926b161aab7b77a7528914030645af7ef8eb6fc6e",
+    "tests/test_evolution_restart.py": "e9d6e381f923417cc8db07b34250f3f43ed5bd26fc30d1f4bd10e28945a1b5f1",
+    "scripts/run_evolution_snapshot.py": "4e5dd88c3684a833fa86d4cdf817587c57c0d0d90b9b7cac4bb638354bccb44e"
+  }
+}

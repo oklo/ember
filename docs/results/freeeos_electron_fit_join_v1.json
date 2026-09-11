@@ -1,0 +1,249 @@
+{
+  "scope": "Compare FreeEOS free-energy changes with integrated source derivatives.\n\nThe density interval crosses the electron-fit switch near degeneracy parameter\n4 at two mixtures; a third mixture is a control. Option 1 uses the fitted\nelectrons and includes radiation. Option 223 integrates the electrons and\nomits radiation. Each is tested against its own thermodynamic derivative;\ntheir raw energies must not be compared without accounting for radiation.\n",
+  "source_queries": 1161,
+  "input_sha256": {
+    "/private/tmp/ember-freeeos-probe": "f83fff2498551e7ef02724ede8ea2d594c2487340a6d70c59d456681cdf76114",
+    "/Users/greglaughlin/Projects/ember/scripts/audit_freeeos_electron_join.py": "ef0c7d90e16d49ce7fcb741b56b6e325d264783600f19fef747f8cadc6cae75f",
+    "/private/tmp/free_eos-3.0.0/src/mod_free_eos.f90": "a687e129ceee0cfa6103f5f66cfaea5cf6aed4ffe579f910b5c72777b3182c9a",
+    "/private/tmp/free_eos-3.0.0/src/fermi_dirac.f90": "3c0b60223e5bd7300dbdb1cdf79646987b8035042d96da8344c1bfd3fe6014ab",
+    "/private/tmp/free_eos-3.0.0/src/fermi_dirac_ct.f90": "43fdbb59a3f8e082011a2fc501010f19a8f345f9ae736db0201d022e33914b83",
+    "/private/tmp/ember-freeeos-build/src/libfree_eos.1.0.0.dylib": "8d8110853bfdea0c739991c0424c98484693dd4ae9d0785a6f7a136ef0342a28"
+  },
+  "raw_source_sha256": "f69fa564194ace0d5d5c9096beb65f905a917d6f8323a5ef6200c7fd0b9f6244",
+  "results": [
+    {
+      "mixture": [
+        0.0375,
+        0.12
+      ],
+      "direction": "temperature",
+      "source_options": [
+        3,
+        1,
+        -2
+      ],
+      "quadrature": {
+        "64": {
+          "potential_change": 234430.32990032434,
+          "integrated_derivative": 234430.32990010042,
+          "defect": 2.2392487153410912e-07,
+          "relative_defect": 9.551872900982221e-13
+        },
+        "128": {
+          "potential_change": 234430.32990032434,
+          "integrated_derivative": 234430.32990010004,
+          "defect": 2.2430322133004665e-07,
+          "relative_defect": 9.568012015579684e-13
+        }
+      }
+    },
+    {
+      "mixture": [
+        0.0375,
+        0.12
+      ],
+      "direction": "density",
+      "source_options": [
+        3,
+        1,
+        -2
+      ],
+      "quadrature": {
+        "64": {
+          "potential_change": 3129944.7211975455,
+          "integrated_derivative": 3129965.847944777,
+          "defect": -21.126747231464833,
+          "relative_defect": -6.749833147648318e-06
+        },
+        "128": {
+          "potential_change": 3129944.7211975455,
+          "integrated_derivative": 3129965.8842534507,
+          "defect": -21.163055905140936,
+          "relative_defect": -6.761433411019009e-06
+        }
+      }
+    },
+    {
+      "mixture": [
+        0.0375,
+        0.12
+      ],
+      "direction": "density",
+      "source_options": [
+        3,
+        223,
+        -2
+      ],
+      "quadrature": {
+        "64": {
+          "potential_change": 3129892.2975810766,
+          "integrated_derivative": 3129892.297296704,
+          "defect": 0.00028437282890081406,
+          "relative_defect": 9.085706532024365e-11
+        },
+        "128": {
+          "potential_change": 3129892.2975810766,
+          "integrated_derivative": 3129892.2972967047,
+          "defect": 0.00028437189757823944,
+          "relative_defect": 9.085676776285628e-11
+        }
+      }
+    },
+    {
+      "mixture": [
+        0.0375,
+        0
+      ],
+      "direction": "temperature",
+      "source_options": [
+        3,
+        1,
+        -2
+      ],
+      "quadrature": {
+        "64": {
+          "potential_change": 222655.57722449303,
+          "integrated_derivative": 222655.57722437684,
+          "defect": 1.1618249118328094e-07,
+          "relative_defect": 5.218036423412843e-13
+        },
+        "128": {
+          "potential_change": 222655.57722449303,
+          "integrated_derivative": 222655.57722437615,
+          "defect": 1.1688098311424255e-07,
+          "relative_defect": 5.24940738387426e-13
+        }
+      }
+    },
+    {
+      "mixture": [
+        0.0375,
+        0
+      ],
+      "direction": "density",
+      "source_options": [
+        3,
+        1,
+        -2
+      ],
+      "quadrature": {
+        "64": {
+          "potential_change": 2973351.964655757,
+          "integrated_derivative": 2973351.9646555823,
+          "defect": 1.7462298274040222e-07,
+          "relative_defect": 5.872933470916203e-14
+        },
+        "128": {
+          "potential_change": 2973351.964655757,
+          "integrated_derivative": 2973351.9646555823,
+          "defect": 1.7462298274040222e-07,
+          "relative_defect": 5.872933470916203e-14
+        }
+      }
+    },
+    {
+      "mixture": [
+        0.0375,
+        0
+      ],
+      "direction": "density",
+      "source_options": [
+        3,
+        223,
+        -2
+      ],
+      "quadrature": {
+        "64": {
+          "potential_change": 2973273.942942679,
+          "integrated_derivative": 2973273.942754541,
+          "defect": 0.00018813787028193474,
+          "relative_defect": 6.327633238787189e-11
+        },
+        "128": {
+          "potential_change": 2973273.942942679,
+          "integrated_derivative": 2973273.942754727,
+          "defect": 0.00018795207142829895,
+          "relative_defect": 6.321384273598486e-11
+        }
+      }
+    },
+    {
+      "mixture": [
+        0.075,
+        0
+      ],
+      "direction": "temperature",
+      "source_options": [
+        3,
+        1,
+        -2
+      ],
+      "quadrature": {
+        "64": {
+          "potential_change": 227869.9094378054,
+          "integrated_derivative": 227869.9094378083,
+          "defect": -2.8812792152166367e-09,
+          "relative_defect": -1.2644404091462606e-14
+        },
+        "128": {
+          "potential_change": 227869.9094378054,
+          "integrated_derivative": 227869.90943780696,
+          "defect": -1.5425030142068863e-09,
+          "relative_defect": -6.769226432803253e-15
+        }
+      }
+    },
+    {
+      "mixture": [
+        0.075,
+        0
+      ],
+      "direction": "density",
+      "source_options": [
+        3,
+        1,
+        -2
+      ],
+      "quadrature": {
+        "64": {
+          "potential_change": 3169290.003762603,
+          "integrated_derivative": 3169310.513170719,
+          "defect": -20.509408116340637,
+          "relative_defect": -6.471252353188364e-06
+        },
+        "128": {
+          "potential_change": 3169290.003762603,
+          "integrated_derivative": 3169310.6190885114,
+          "defect": -20.615325908642262,
+          "relative_defect": -6.504671957515858e-06
+        }
+      }
+    },
+    {
+      "mixture": [
+        0.075,
+        0
+      ],
+      "direction": "density",
+      "source_options": [
+        3,
+        223,
+        -2
+      ],
+      "quadrature": {
+        "64": {
+          "potential_change": 3169236.2463454604,
+          "integrated_derivative": 3169236.246062433,
+          "defect": 0.000283027533441782,
+          "relative_defect": 8.930464991160727e-11
+        },
+        "128": {
+          "potential_change": 3169236.2463454604,
+          "integrated_derivative": 3169236.246062433,
+          "defect": 0.000283027533441782,
+          "relative_defect": 8.930464991160727e-11
+        }
+      }
+    }
+  ]
+}

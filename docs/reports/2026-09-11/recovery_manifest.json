@@ -1,0 +1,293 @@
+{
+  "scope": "Local recovery of the plotted accepted history, its original run segments, their receipts and checkpoints, the explicit assembly checks, and separate controls. The joined JSON is derived data; physical tables require separate restoration.",
+  "entries": [
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3300gyr-v1.json",
+      "archive": "artifacts/evolution-cold-remnant-forward-512-3300gyr-v1.json.gz",
+      "sha256": "37483d9f9c151d604f97f0f52192c12e7e3496113d6fc4c113ab7eecded711d8",
+      "gzip_sha256": "6116a5dc100553a0e3f427fecdab7f607ea78aa27df56cd3dc1da4695394df1f",
+      "bytes": 857434
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3300gyr-v1.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-forward-512-3300gyr-v1.receipt.json.gz",
+      "sha256": "c99fcb0145dac40381559621a6161c9d77400035208fae94a2d185b6adea0e06",
+      "gzip_sha256": "7c55a66e539977147828f9c951dd81fc2ad99dcaa29da1d7abdbc44929ccde32",
+      "bytes": 28218
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3400gyr-v1.json",
+      "archive": "artifacts/evolution-cold-remnant-forward-512-3400gyr-v1.json.gz",
+      "sha256": "c8a94386523b23fee603208c720159bda3bd01a45263f98565494768bc53be9d",
+      "gzip_sha256": "8d28357b5eb194b253b43a55f8508773147b2fdc2ce5803c133d8d82b39b03d7",
+      "bytes": 107129
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3400gyr-v1.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-forward-512-3400gyr-v1.receipt.json.gz",
+      "sha256": "390d978bb0dd01ddb1f10fd22d0483777c0cda6031233786bec1d6f9a6e7131e",
+      "gzip_sha256": "1a865937b1487c7372eae06115159a6ba0af275129fcca92a0d41a0daaa6a909",
+      "bytes": 28358
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3400gyr-v1.restart",
+      "archive": "artifacts/evolution-cold-remnant-forward-512-3400gyr-v1.restart.gz",
+      "sha256": "c2bfd9db83ab1efc837d8e0e220c6d7414b94ad8ce51240c2e1b895fe139f8ae",
+      "gzip_sha256": "0e2eb37f32e965a54248a86366dc181ab11f301bd5be8da8b78d1082f36704c6",
+      "bytes": 159436
+    },
+    {
+      "source": "/private/tmp/ember-cold-remnant-forward-3400gyr-v1/ember-evolve",
+      "archive": "artifacts/ember-evolve.gz",
+      "sha256": "24a6ec3de0d06bf1e58e4ff4527fa4b38f4b02774be1703cba4ba371d7f15237",
+      "gzip_sha256": "d3b2077e2c15753da5b383f80a2bbaa1cc176cdd4f704701dd7fe46b74ee827b",
+      "bytes": 427296
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-transition-512-3560gyr-v2.json",
+      "archive": "artifacts/evolution-cold-remnant-x015-transition-512-3560gyr-v2.json.gz",
+      "sha256": "405d954a48066e2bc80e9807ba31437106349e003cf16687d0970fb55cb28acb",
+      "gzip_sha256": "2f3550ada1a17af46d269f71c2e3a04374c07dce4a6fea15e6590b461014e373",
+      "bytes": 1083373
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-transition-512-3560gyr-v2.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-x015-transition-512-3560gyr-v2.receipt.json.gz",
+      "sha256": "ce6d3a5f2efcb73f972e6065445f05a65dca28e39244b3b9692bcf67456046a9",
+      "gzip_sha256": "c122dfb3090e43abe175ceabc4516a9de1ab162d02ebef07430e7ce59d3e03f5",
+      "bytes": 28224
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-transition-1024-3560gyr-continuation-v1.json",
+      "archive": "artifacts/evolution-cold-remnant-x015-transition-1024-3560gyr-continuation-v1.json.gz",
+      "sha256": "f779bce36987861dd8837819399d51245518be72a219cb167e11ae4a1fcbd7e5",
+      "gzip_sha256": "11791924a1a61d60abbfad77710434766c4d22d69022b26699f53a254d514662",
+      "bytes": 402635
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-transition-1024-3560gyr-continuation-v1.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-x015-transition-1024-3560gyr-continuation-v1.receipt.json.gz",
+      "sha256": "65615074b01500a0fdd889dcae105220e3c716c3fcfafc6d387d6bad85d5d657",
+      "gzip_sha256": "6bbca2a2ceadc46a763b5e4baf6ba32c792a857b9bca42c75efefb6bee0c93ea",
+      "bytes": 28249
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-transition-512-3560gyr-v2.restart",
+      "archive": "artifacts/evolution-cold-remnant-x015-transition-512-3560gyr-v2.restart.gz",
+      "sha256": "c6b9c52253c452ca1f9f49ca351507294089cfc9d3b3f998dbd5c6bc6577b25b",
+      "gzip_sha256": "a8e613d574f50f3f93d39b8e4f17035b7d48c9dad71e3bb9af120d581c4e4865",
+      "bytes": 159926
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-x015-transition-1024-3560gyr-v1.restart",
+      "archive": "artifacts/evolution-cold-remnant-x015-transition-1024-3560gyr-v1.restart.gz",
+      "sha256": "0df422f48a29391c402cd332b2fe1333d80c85a0afae4dc7fbf5d9e322b59c8f",
+      "gzip_sha256": "52de13cbe872d533fb13d23e627ff2e4a7b5ab44056557101c4792922e4e9014",
+      "bytes": 303327
+    },
+    {
+      "source": "/private/tmp/ember-cold-remnant-x015-transition-3560gyr-v2/ember-evolve",
+      "archive": "artifacts/ember-evolve-transition-512-v2.gz",
+      "sha256": "7a4a808e801f1ce523f5c692d54583420a629c3139a64a36843e85f98c8849e0",
+      "gzip_sha256": "3409424a131d6366375acb3251fc0e4aec7070d0d1f260cc91b1a07d0eab2504",
+      "bytes": 428304
+    },
+    {
+      "source": "/private/tmp/ember-cold-remnant-x015-transition-1024-3560gyr-v1/ember-evolve",
+      "archive": "artifacts/ember-evolve-transition-1024-v1.gz",
+      "sha256": "1be30afccbde7c8d9fec3e085b811c2bcab8df2a51289da060a1e10bb9e6a5a2",
+      "gzip_sha256": "9625a98732975c97bcf377c68ce07aec0e119b53928d30d64810b53cff4c2ab8",
+      "bytes": 427456
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.json",
+      "archive": "artifacts/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.json.gz",
+      "sha256": "5685154d5194dbed469e129a331223a9ca7558315c097b57b5ea0b9d9c693702",
+      "gzip_sha256": "be1ca94367e1c951a7ffc5ebc80d56edae2c7f03f06c341a02834d29b16df097",
+      "bytes": 2828474
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.receipt.json.gz",
+      "sha256": "7921873448e036c7217d23884f2c5db0858b6591614549dbf4a194236539ea88",
+      "gzip_sha256": "b77a93320edc38fb419db6fcf60a8ea191f5aab553f54859e8e6958b0317cddd",
+      "bytes": 28381
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.log",
+      "archive": "artifacts/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.log.gz",
+      "sha256": "6c53e2cd6bd38c22b51c440b08b43ab7a49ade2a3bfe7a34257dcfda186891d5",
+      "gzip_sha256": "707f65c70374e7aa7aa77fa7d95e624607338e03c81350d771c9712f3f25a930",
+      "bytes": 798388
+    },
+    {
+      "source": "/private/tmp/ember-t3600-cached-512-3800gyr-v1/ember-evolve",
+      "archive": "artifacts/ember-evolve-latest-512.gz",
+      "sha256": "c04e10048a008796fd0079c3bf633ef746bea727f46755fedc2e44841badd4ff",
+      "gzip_sha256": "1e849188a9baa6c7a51d4404d177882f3dc90463379a8226ebbfee623a992c4e",
+      "bytes": 470448
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.restart",
+      "archive": "artifacts/evolution-cold-remnant-t3600-cached-512-3800gyr-v1.restart.gz",
+      "sha256": "911817f6ea0e49d3b545f1a5ff3e1bf3a095938a92d1ea89fd6987c254496e5a",
+      "gzip_sha256": "704832b1584a71c64ad93552a216df90fc9709d26e2acbc4493e3661f204dabb",
+      "bytes": 160174
+    },
+    {
+      "source": "/private/tmp/ember-t3600-cached-512-3800gyr-v1/ember-evolve",
+      "archive": "artifacts/ember-evolve-c04e10048a00.gz",
+      "sha256": "c04e10048a008796fd0079c3bf633ef746bea727f46755fedc2e44841badd4ff",
+      "gzip_sha256": "1e849188a9baa6c7a51d4404d177882f3dc90463379a8226ebbfee623a992c4e",
+      "bytes": 470448
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.json",
+      "archive": "artifacts/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.json.gz",
+      "sha256": "a80ef11faab9c6fa4daaedc80f3fbc36f1d390792d61f54bb4340c7be44da517",
+      "gzip_sha256": "0ecb78ad14f350c0aca082109fb5498280ac95453c8b816d5fdabb57075c897c",
+      "bytes": 2914582
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.receipt.json.gz",
+      "sha256": "8da7ee5995a8f369f96cc24ca51b9f96df6b1a4559469a0db912dea153538e84",
+      "gzip_sha256": "d1f8ea4fc536ea321e28aafa4ca2edd96b3f99e3e88aaa94e1b5e86412f31d89",
+      "bytes": 29604
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.log",
+      "archive": "artifacts/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.log.gz",
+      "sha256": "96af777b20f8af4ceed51de0cb70fc798d5b25fee5ecfc6fc5aaafe33e17ea35",
+      "gzip_sha256": "7ec899047ba016c1bea2821a6f5d3f7a417bc880ae0dbf7fbb8383bbc721183c",
+      "bytes": 845219
+    },
+    {
+      "source": "/private/tmp/ember-t3800-eos72-512-4000gyr-v1/ember-evolve",
+      "archive": "artifacts/ember-evolve-294044ffa4e9.gz",
+      "sha256": "294044ffa4e9b13e2af2e5aae8a24348772257909dfa3a98055bdfff5e924fd3",
+      "gzip_sha256": "679c67c25252c9791407df2e344c8b7e240d5e9caffa1aa6367e71ddee11df35",
+      "bytes": 470800
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.restart",
+      "archive": "artifacts/evolution-cold-remnant-t3800-eos72-512-4000gyr-v1.restart.gz",
+      "sha256": "1cbda94ed169b50826fe9ac8833b188ff7d55ed6eb1aa842a3d53400c20b742f",
+      "gzip_sha256": "86057ceb1a8684a802a76d272b724b5851ac8d4e4095081d0fb30d03f90bd0e6",
+      "bytes": 161303
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/scripts/check_evolution_continuation.py",
+      "archive": "artifacts/continuation-000-check_evolution_continuation.py.gz",
+      "sha256": "bcb398734c465b94962a527ac49f9eeacca698bd89e4c98f411ab42eb569e058",
+      "gzip_sha256": "e23194e79f7701a679e84937aacca9c18be39f955ef8d6cb4865e47816ca7845",
+      "bytes": 9412
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.json",
+      "archive": "artifacts/continuation-001-evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.json.gz",
+      "sha256": "667c09eae93ba744c8139bcd76b120fdf49973c5c15f4b1cb28be337a419783d",
+      "gzip_sha256": "57d0fd789da6c27be153d2b025e53825ef9f20beaf8e0065dbf163bd3ac08205",
+      "bytes": 3114226
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.receipt.json",
+      "archive": "artifacts/continuation-002-evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.receipt.json.gz",
+      "sha256": "f09b50f3de877637838e4cbaee032d779d55ff4ae8989dafe92b31757a20cdb5",
+      "gzip_sha256": "f5172448b57250e8c0fbe8d19179b66b5396f1a20f644e018f03e2871b3a0799",
+      "bytes": 29605
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.log",
+      "archive": "artifacts/continuation-003-evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.log.gz",
+      "sha256": "418568e6977b7bab9e48aed9ad76653446e6318ffc13e60d7b173bdc9fe62800",
+      "gzip_sha256": "564947a504535b561c4752338c23f130e75cfd9adbb2d5aeee2510a50eb48c6e",
+      "bytes": 884986
+    },
+    {
+      "source": "/private/tmp/ember-t4000-eos72-512-4000gyr-v2/ember-evolve",
+      "archive": "artifacts/continuation-004-ember-evolve.gz",
+      "sha256": "a4ff20664d7350f1942cb9d9a00196a7d838f6992fd15e40c51e44b4098bbc5d",
+      "gzip_sha256": "082b0bba4de19ff41f1a3db2478b93dff98499d6f947689e0b3cdd9530a99f7a",
+      "bytes": 470800
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.restart",
+      "archive": "artifacts/continuation-005-evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.restart.gz",
+      "sha256": "3253c74df2c27371fb8acd440e1b0b25a1fcc8ed0bca776069df257a34c3b5e8",
+      "gzip_sha256": "62f89681e3d4cc91689e779dbd193a69f186b2478d4f5130bc74f7eb1612e439",
+      "bytes": 161419
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.json",
+      "archive": "artifacts/continuation-006-evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.json.gz",
+      "sha256": "c8182df3de2fb6dffea458e4cf53e68f56a347c012c05469e3ed0a78b818fb1f",
+      "gzip_sha256": "747486ff84285cb031b66a472dc01649f598f5c8fbfcd3a10e4cecf57dd198a9",
+      "bytes": 325232
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.receipt.json",
+      "archive": "artifacts/continuation-007-evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.receipt.json.gz",
+      "sha256": "22cca86d5139ef04a9a70bba48844cde085f548dd95788ba53f991f388e97c2a",
+      "gzip_sha256": "db59b562128e9dfc5cd46b8553d2d0d9af6c162f324c71813ed2ac4eae5fc009",
+      "bytes": 30361
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.log",
+      "archive": "artifacts/continuation-008-evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.log.gz",
+      "sha256": "7745ca71098efe38f0e5e2e829e63748e96d1e57cfbac7296451346dc8707041",
+      "gzip_sha256": "379957d387176f42860b82ad753d6954a6c525e200349bec88c399dd85f47cc7",
+      "bytes": 75555
+    },
+    {
+      "source": "/private/tmp/ember-t4400-eos72-512-4000gyr-v1/ember-evolve",
+      "archive": "artifacts/continuation-009-ember-evolve.gz",
+      "sha256": "656f48eb437f1332b455d6c1bc074e6151a1ad0b606f31a47c41c1dfa8901b9e",
+      "gzip_sha256": "5c7e7fe4258cd4379709af9f2ceaa7fa7e9a0499d700c2355fff237d855e3bd1",
+      "bytes": 471600
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.restart",
+      "archive": "artifacts/continuation-010-evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.restart.gz",
+      "sha256": "082103b4ce11a415359e02bbb7a7a50be097335bb9abfb8fe7a760d950878685",
+      "gzip_sha256": "4c450f74faaba5af68e4fbcc29e5a7c5112c6c3d0f782efec216ef2df977f23f",
+      "bytes": 161370
+    },
+    {
+      "source": "/private/tmp/ember-evolution-mixing-probe-v1",
+      "archive": "artifacts/continuation-011-ember-evolution-mixing-probe-v1.gz",
+      "sha256": "4e0541eb003a4352a7bec9538e02dde45e8a655571570eea4f88cfb1b0713455",
+      "gzip_sha256": "618af1a56af8dccb810b15c40d43a9c530e32a7304967d1ef625eb3d1ded9798",
+      "bytes": 238896
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_t4400_acceptance_v1.json",
+      "archive": "artifacts/continuation-012-nongrey_t4400_acceptance_v1.json.gz",
+      "sha256": "abc355e8be1bc35c97ec003db6e6424fd7e690138b1271fa115c1db01386b352",
+      "gzip_sha256": "e08b9253c5fe1a0667e24fc72cceb6f33d3f7003e4ac00e36c084b6ba683f65f",
+      "bytes": 2776
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/docs/results/atmosphere_extension_restart_v1.json",
+      "archive": "artifacts/continuation-013-atmosphere_extension_restart_v1.json.gz",
+      "sha256": "8947b2a028fdb926ab277ad09540e076ce1cc43905a4c7b6291f87e74f997770",
+      "gzip_sha256": "242128df5e7e9d55a882ce6b5ecf28e42a0c5cb24dc38adc78d8bc2d9351acfd",
+      "bytes": 61601
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-joined-v1.json",
+      "archive": "artifacts/continuation-014-evolution-cold-remnant-t4400-eos72-joined-v1.json.gz",
+      "sha256": "d786254a374771238de1f7bf00cff37802e16372ed3d63b0d5ce3600c0255df2",
+      "gzip_sha256": "33b362395abb75b955064c32b3c96d08f80acf3148ca2c4c9d12ad30a0eebc0f",
+      "bytes": 3256353
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/docs/results/evolution_atmosphere_limit_3848gyr_v1.json",
+      "archive": "artifacts/continuation-015-evolution_atmosphere_limit_3848gyr_v1.json.gz",
+      "sha256": "b93eb700abe0a06fff3f8d60570abe14186b6dba45bdf0c969dc0396652479fa",
+      "gzip_sha256": "09121eca726bc2ea78c07f06083ec2880c6aaa3b67014a50447ae4de725e1066",
+      "bytes": 100825
+    }
+  ],
+  "older_recovery": "September 9 local artifacts remain intact in docs/reports/2026-09-09/artifacts; the earlier paper remains in Git history."
+}

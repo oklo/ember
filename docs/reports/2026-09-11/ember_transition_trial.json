@@ -1,0 +1,17 @@
+{
+  "scope": "Last saved accepted trial state; requested endpoint not reached. Converted only for plotting, not restart.",
+  "input": "out/evolution-cold-remnant-x015-transition-512-3560gyr-v1.restart",
+  "input_sha256": "e036cc2c52ecab532e45d0a3d8cc1dc0bd286be698ca001cc788a366a56531f9",
+  "script_sha256": "841c0a13c4977ab2916fa788e55d1e8180d6189e048502336a680e5559784788",
+  "points": 512,
+  "accepted_steps": 2061,
+  "rejected_steps": 101,
+  "age_yr": 3548069649381.413,
+  "R_Rsun": 0.14191422442384344,
+  "L_Lsun": 0.0019716728074704944,
+  "Teff_K": 3228.66011053453,
+  "central_X": 0.17321878556996,
+  "central_Y3": 0.00033892462219833896,
+  "surface_X": 0.17503997292241952,
+  "surface_Y3": 0.0006312161599371449
+}

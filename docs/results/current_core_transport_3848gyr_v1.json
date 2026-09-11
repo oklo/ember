@@ -1,0 +1,28 @@
+{
+  "source": "out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.json",
+  "source_sha256": "c8182df3de2fb6dffea458e4cf53e68f56a347c012c05469e3ed0a78b818fb1f",
+  "probe_sha256": "4bef0aee1bdbaa878856d0579a1e6a721e444b49510d3e7420036bc8d28f481f",
+  "probe_source_sha256": "360a75c7584206be319b7df59508a9b739c4cfef187ba84f5bc1fbf116e23c20",
+  "command": [
+    "/tmp/ember-current-transport-probe-v1",
+    "--gs98",
+    "--eos-family",
+    "data/eos/low_density_refined_v2/freeeos300_gs98_z020.dat",
+    "--opacity-directory",
+    "/Users/greglaughlin/Projects/ember/data/opacity/hydrogen_exhaustion_hot_v1"
+  ],
+  "age_yr": 3848256087435.5327,
+  "stable_region": {
+    "begin": 0,
+    "end_exclusive": 363,
+    "convective": false,
+    "mass_fraction": 0.921006817528749,
+    "inner_enclosed_fraction": 1.22864837681125e-10,
+    "outer_enclosed_fraction": 0.9199002624229847
+  },
+  "fraction_definition": "kappa_combined / kappa_conduction: conductive share of radiation plus conduction at a common gradient. Applies to total flux in nonconvective regions; excludes convection elsewhere. Nodal diagnostic, not an independent face-based energy integral.",
+  "central_conductive_fraction": 0.6982473755923638,
+  "maximum_stable_region_conductive_fraction": 0.6982473755923638,
+  "maximum_at_enclosed_mass_fraction": 1.22864837681125e-10,
+  "row_of_maximum": 0
+}

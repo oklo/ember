@@ -7,6 +7,7 @@ the metal EOS and non-grey boundary. No external Python packages are needed.
 import json
 from pathlib import Path
 import shutil
+import shlex
 import subprocess
 import sys
 import tempfile
@@ -99,6 +100,51 @@ def main():
         rejected=run('warm-changed-depth',atmosphere_options,False,warmer_arguments)
         if 'matching depth' not in rejected['message']:raise AssertionError(rejected)
         warmer.write_text('\n'.join(rows[:start]+expanded)+'\n')
+        # Extra EOS rows are synthetic and unvisited. Every original potential
+        # coefficient is retained, including masked nodes and mixed derivatives.
+        original_eos=data/'eos/freeeos300_gs98_z020.dat'
+        hotter_eos=work/'hotter-eos';hotter_eos.mkdir()
+        family_rows=original_eos.read_text().splitlines()
+        hotter_family=hotter_eos/original_eos.name
+        hotter_family.write_text('\n'.join(family_rows)+'\n')
+        added_eos=0
+        for name in family_rows[3:]:
+            name=shlex.split(name)[0]
+            contents=(original_eos.parent/name).read_text().splitlines()
+            it=next(i for i,line in enumerate(contents) if line.startswith('log_t '))
+            iq=next(i for i,line in enumerate(contents) if line.startswith('log_q '))
+            axis=contents[it].split();nq=int(contents[iq].split()[1])
+            contents[it]='log_t '+str(int(axis[1])+1)+' '+' '.join(axis[2:])+f' {float(axis[-1])+.025:.17g}'
+            extra=contents[-nq:];added_eos+=sum(int(line.split()[0]) for line in extra)
+            (hotter_eos/name).write_text('\n'.join(contents+extra)+'\n')
+        hotter_arguments=arguments.copy();hotter_arguments[7]=f'metal:{hotter_family}'
+        eos_options=['--eos-temperature-extension-restart',str(checkpoint),
+                     '--restart-source-executable',str(executable),'--restart-source-eos',str(original_eos)]
+        hotter_checkpoint=work/'hotter-eos.restart'
+        hotter=run('eos-extension',eos_options+['--checkpoint',str(hotter_checkpoint)],selection=hotter_arguments)
+        if hotter['history']!=resumed['history'] or hotter['profile']!=resumed['profile']:
+            raise AssertionError('appending unvisited EOS rows changed the resumed trajectory')
+        if hotter['eos_temperature_extension']['added_states']!=added_eos:
+            raise AssertionError('incorrect added EOS state count')
+        roundtrip=run('hotter-eos-exact',['--restart',str(hotter_checkpoint)],selection=hotter_arguments)
+        if roundtrip['profile']!=reference['profile'] or checkpoint.read_bytes()!=original_checkpoint:
+            raise AssertionError('EOS continuation did not preserve restart state')
+        run('hotter-eos-without-extension',['--restart',str(checkpoint)],False,hotter_arguments)
+        run('hotter-eos-wrong-source',eos_options[:-1]+[str(hotter_family)],False,hotter_arguments)
+        changed_plane=hotter_eos/shlex.split(family_rows[3])[0]
+        saved_plane=changed_plane.read_text();contents=saved_plane.splitlines();first=contents.index('data')+1
+        fields=contents[first].split();fields[1]=format(float(fields[1])+1,'.17g');contents[first]=' '.join(fields)
+        changed_plane.write_text('\n'.join(contents)+'\n')
+        rejected=run('hotter-eos-changed-potential',eos_options,False,hotter_arguments)
+        if 'potential values or masks changed' not in rejected['message']:raise AssertionError(rejected)
+        contents=saved_plane.splitlines();fields=contents[first].split();fields[0]=str(1-int(fields[0]));contents[first]=' '.join(fields)
+        changed_plane.write_text('\n'.join(contents)+'\n')
+        rejected=run('hotter-eos-changed-mask',eos_options,False,hotter_arguments)
+        if 'potential values or masks changed' not in rejected['message']:raise AssertionError(rejected)
+        changed_plane.write_text(saved_plane.replace('composition_proxy "','composition_proxy "changed '))
+        rejected=run('hotter-eos-changed-physics',eos_options,False,hotter_arguments)
+        if 'source physics or composition changed' not in rejected['message']:raise AssertionError(rejected)
+        changed_plane.write_text(saved_plane)
         # A long history must neither invalidate a checkpoint nor consume the
         # next invocation's step budget. Change counters in a test fixture only;
         # keep every physical variable and input identity exactly as written.

@@ -16,6 +16,8 @@ public:
   EosResponse eval_with_derivatives(double,double,const Composition&) const override;
   EosCompositionResponse composition_response(double,double,const Composition&) const override;
   std::optional<DensityRange> density_range(double,const Composition&) const override;
+  // Require identical original potentials and masks; only hotter rows may be added.
+  std::size_t check_temperature_extension(const MetalHelmholtzEos& original) const;
   const char* name() const override {return "FreeEOS GS98 baryonic H/He3 potential; trace K omission and isotope approximation";}
 private:
   struct Coordinates {std::size_t x,y;double u,v;};

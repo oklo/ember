@@ -8,16 +8,17 @@ inputs intact; develop in a separate build and use separate output paths.
 Generated bulk tables and raw source calculations remain local under the
 publication policy in [DATA_REPRODUCTION.md](DATA_REPRODUCTION.md).
 
-## Progress on 2026-09-10
+## Progress on 2026-09-11
 
-The latest checked 512-point state reaches **3.818 trillion years**, central
-hydrogen **X = 0.004580**, surface hydrogen **X = 0.1731** and effective temperature
-**4000 K**. Its nonconvective core contains **88.30%** of the mass. The sequence
-contains the initial structure and 7147 accepted time steps; the atmosphere
+The latest checked 512-point state reaches **3.848 trillion years**, central
+hydrogen **X = 0.002467**, surface hydrogen **X = 0.1730** and effective temperature
+**4400 K**. Its nonconvective core contains **92.10%** of the mass. The sequence
+contains the initial structure and 7695 accepted time steps; the atmosphere
 upper temperature prevents further evolution with these inputs.
-[Endpoint, stopping evidence and checks](results/evolution_atmosphere_limit_3818gyr_v1.json).
+[Endpoint, stopping evidence and checks](results/evolution_atmosphere_limit_3848gyr_v1.json).
 
-This calculation uses the checked 156-model atmosphere table and 72-table EOS.
+The calculation through 3.818 trillion years uses the checked 156-model
+atmosphere table and 72-table EOS.
 All atmosphere nodes have EOS support. Its 3900 K independent check differs by
 −0.4427% in matching temperature and +0.4107% in gas pressure. Four lower-boundary
 checks pass, with a maximum matching-state change of 0.005127%; the twelve added
@@ -27,13 +28,24 @@ The 172-model extension through 4400 K has also passed source, independent
 interpolation, depth, condensation and EOS/runtime checks. All 156 existing
 source states remain unchanged; independent matching-state differences are
 below 0.5987%. [Acceptance](results/nongrey_t4400_acceptance_v1.json).
-The saved 3.818-trillion-year star is continuing with this table through a
-checked atmosphere-extension restart. No initial evolution is repeated;
-see HANDOFF.md for its exact job and input files.
+The saved 3.818-trillion-year star continued to 3.848 trillion years with this
+table through a checked atmosphere-extension restart. The physical state at
+the join is exact. Atmospheres through 5000 K and independent source/depth
+controls are running; see HANDOFF.md for jobs and input files.
 
-The paper plots the checked 3800 K track through **3.795 trillion years**.
+A hotter EOS candidate preserves all existing potentials and extends material
+temperature coverage to 21.13 MK. Added hot source comparisons and all 512
+actual profile zones pass, but some unvisited mixtures in the original
+temperature range fail the heat-capacity criterion. The discrepancy is associated with the source electron approximation at
+degeneracy parameter 4. Numerical electron integration removes the jump in
+controls; a new source family is being generated and will require independent
+checks and a fresh stellar calculation.
+[General test](results/metal_eos_hot_source_v1.json),
+[actual profile test](results/metal_eos_hot_profile_v1.json).
+
+The paper plots the checked track through **3.848 trillion years**.
 All its Ember curves use that single calculation. Its core transports heat by
-radiation and conduction, with conduction supplying **40.83% of local central
+radiation and conduction, with conduction supplying **69.82% of local central
 flux**. Its initial radius agrees with that measured for EBLM J2114-39 B,
 within the reported uncertainty. The opacity diagram extracts the photosphere
 at Rosseland optical depth 2/3 from the source atmosphere structures.
@@ -48,7 +60,9 @@ source comparisons.
 The exact-response cache and shared nuclear electron calculation are installed.
 A fixed-input long pair gives identical full histories, with CPU time reduced
 from 162.4 to 101.8 minutes (37.31%); concurrent load varied. The latest partial
-stellar trajectory uses 41.19 CPU minutes. These are not whole-cooling timings.
+stellar trajectory through 3.818 trillion years uses 41.19 CPU minutes; its
+continuation to 3.848 trillion years adds 4.990 CPU minutes and 3.111 awake
+minutes. These are not whole-cooling timings.
 
 Fresh controls through 3.600 trillion years are complete. Tightening the time
 control changes central hydrogen by 0.1849%; doubling the mesh changes it by
@@ -87,7 +101,7 @@ optical calculation and checked against independent Mie and small-particle
 results. A fixed 2800 K profile control includes its calculated alumina mass.
 Atmospheric coupling, complete material coverage, grain phase/size/settling
 and condensate thermodynamics remain unfinished. The evolving star still uses
-gas-only atmospheres. The [working paper](reports/2026-09-10/ember_status_and_future.pdf)
+gas-only atmospheres. The [working paper](reports/2026-09-11/ember_status_and_future.pdf)
 now compares Ember primarily with values and figure curves from LBA97, while
 keeping the reconstructed F77 results as a separate supplementary comparison.
 

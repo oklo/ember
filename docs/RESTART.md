@@ -117,3 +117,25 @@ The output identifies the extension and its source files. Subsequent native
 restarts use the new executable and table. This limited procedure does not
 permit an EOS change, filling old missing cells, changing existing atmosphere
 values, or relaxing source-domain checks.
+
+## Adding hotter EOS rows
+
+`--eos-temperature-extension-restart FILE` continues with a metal EOS family
+whose temperature axis has been extended upwards. Supply the original family
+with `--restart-source-eos FILE` and its executable with
+`--restart-source-executable FILE`; the ordinary EOS argument selects the new
+family. Every original potential coefficient, validity mask, temperature node,
+density coordinate and composition must remain identical. Physical source
+labels must match; the raw-source checksum may change because new evaluations
+have been appended. All other physical inputs and numerical settings remain
+bound to the saved checkpoint.
+
+The new source rows require independent thermodynamic checks. The restart
+implementation itself passes all 32 CTest suites, including rejection of
+modified old potentials and masks. Its fixed-input 512-point, 10-billion-year
+output is byte-identical to both preceding checked executables.
+[Implementation validation](results/eos_temperature_extension_restart_v1.json).
+
+Each extension invocation permits only one physical table change. A new
+checkpoint is bound to the new data and executable and supports ordinary
+exact restart. Original checkpoints remain intact.

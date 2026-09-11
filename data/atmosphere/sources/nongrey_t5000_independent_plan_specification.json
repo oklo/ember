@@ -1,0 +1,48 @@
+{
+  "scope": "Independent source checks at intermediate surface composition and gravity for the 4600--5000 K extension. All material limits remain active.",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-fine-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "x175-y005-t4500-g5275",
+      "XH": 0.175,
+      "X3": 0.005,
+      "teff_K": 4500,
+      "log_g": 5.275,
+      "specification": "data/atmosphere/sources/nongrey_t5000_heldout_specification.json",
+      "opacity": "/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/fort.63",
+      "initial": "/tmp/ember-nongrey-t4400-independent-v2/x175-y005-t4300-g5275/final",
+      "initial_bottom_tau": 150,
+      "convective_iterations": 10,
+      "wait_for_seed": false
+    },
+    {
+      "name": "x175-y005-t4700-g5275",
+      "XH": 0.175,
+      "X3": 0.005,
+      "teff_K": 4700,
+      "log_g": 5.275,
+      "specification": "data/atmosphere/sources/nongrey_t5000_heldout_specification.json",
+      "opacity": "/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/fort.63",
+      "initial": "/tmp/ember-nongrey-t5000-independent-v1/x175-y005-t4500-g5275/final",
+      "initial_bottom_tau": 150,
+      "convective_iterations": 10,
+      "wait_for_seed": true
+    },
+    {
+      "name": "x175-y005-t4900-g5275",
+      "XH": 0.175,
+      "X3": 0.005,
+      "teff_K": 4900,
+      "log_g": 5.275,
+      "specification": "data/atmosphere/sources/nongrey_t5000_heldout_specification.json",
+      "opacity": "/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/fort.63",
+      "initial": "/tmp/ember-nongrey-t5000-independent-v1/x175-y005-t4700-g5275/final",
+      "initial_bottom_tau": 150,
+      "convective_iterations": 10,
+      "wait_for_seed": true
+    }
+  ]
+}

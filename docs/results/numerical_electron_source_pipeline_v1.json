@@ -1,0 +1,89 @@
+{
+  "scope": "Candidate numerical-electron source pipeline. A source-fit join is present near electron degeneracy parameter 4. Independent numerical integrals eliminate the resolved jump. The pilot source and interpolation pass the unchanged comparison limits. Full-table source generation is active; neither a new complete family nor an evolved trajectory is accepted by this pilot.",
+  "checked_utc": "2026-09-11T05:00:22.402889+00:00",
+  "source_options": [
+    3,
+    223,
+    -2
+  ],
+  "source_radiation_included": false,
+  "fitted_import_unchanged": true,
+  "pilot_material_potentials_match_independent_import": true,
+  "pilot_queries": 36,
+  "pilot_maximum_relative_source_differences": {
+    "P": 0.0001283276549839396,
+    "E": 0.00013201919297189946,
+    "cv": 6.165672062374838e-05,
+    "cp": 0.00010136648175440577,
+    "grad_ad": 7.795917253528017e-06
+  },
+  "source_switch_diagnostics": [
+    {
+      "query": [
+        0.0375,
+        0.12,
+        1.98974609375,
+        7.0700730901464794
+      ],
+      "eta": 3.9999030584982167,
+      "fl": 1.5963129811378687,
+      "psi": 3.999903058498217,
+      "first_22_fields_exact": true
+    },
+    {
+      "query": [
+        0.0375,
+        0.12,
+        1.9898437500000001,
+        7.0700730901464794
+      ],
+      "eta": 4.000570035232086,
+      "fl": 1.596586749194801,
+      "psi": 4.000570035232086,
+      "first_22_fields_exact": true
+    },
+    {
+      "query": [
+        0.075,
+        0,
+        1.99072265625,
+        7.0700730901464794
+      ],
+      "eta": 3.999681734438658,
+      "fl": 1.5962221293172942,
+      "psi": 3.9996817344386586,
+      "first_22_fields_exact": true
+    },
+    {
+      "query": [
+        0.075,
+        0,
+        1.9908203125000001,
+        7.0700730901464794
+      ],
+      "eta": 4.000348684337627,
+      "fl": 1.596495896700219,
+      "psi": 4.000348684337627,
+      "first_22_fields_exact": true
+    }
+  ],
+  "stored_grid_vs_fresh_process_maximum_relative_difference": {
+    "4": 3.622732584116186e-15,
+    "5": 1.9992226968459796e-15,
+    "6": 6.538609917403592e-16,
+    "12": 2.4003208700724933e-14,
+    "13": 2.4481802809733026e-14
+  },
+  "input_sha256": {
+    "scripts/generate_metal_eos.py": "56d2a74da56197b87a6d6ea65014aea30031ffbc59e5f8c2321d202268dfc7fe",
+    "scripts/import_freeeos_potential.py": "23e7c8535248e7b282db55b898f04914b7d0c082e31b337821d43e737b45a541",
+    "scripts/import_metal_eos.py": "177e86520fd152044d12ab884ee204e843eaee2d4ac8f68913c6d54f1abf6256",
+    "scripts/audit_metal_eos_family.py": "26141669207d2f2d53a7d6027946a0e8d49ff82c917d56578b6ac05044ec91ec",
+    "docs/results/freeeos_electron_fit_join_v1.json": "7eb6c027d37f7edabe71b481af1e7f77deb25e62afac03756342b86e19dedb5a",
+    "docs/results/freeeos_radiation_restoration_v1.json": "4aff33935240a7fece4488d5d2b30d167b1610a3334c1c1a3ec8d6f0f3ebce66",
+    "docs/results/numerical_electron_pilot_v1.json": "2d617d98c948403d9809179d96c2d23449513dcaea0394ce09d477786522c751",
+    "/tmp/ember-numerical-electron-pipeline-family-v1/sources/freeeos300_gs98_manifest.json": "f3dff6dc2c7e794681a901347a70581cdde91d71d1181488997e6659b60d5094",
+    "/tmp/ember-fitted-import-compatibility-v1.dat": "c4c69bed9eb6c06792b9f3d768e6de8d39ca1072a87a8696442f330ba9b6797d",
+    "data/eos/low_density_refined_v2/freeeos300_gs98_x037p5_he3120_potential.dat": "c4c69bed9eb6c06792b9f3d768e6de8d39ca1072a87a8696442f330ba9b6797d"
+  }
+}

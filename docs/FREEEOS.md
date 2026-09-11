@@ -72,6 +72,43 @@ every state in the rectangle.
 
 ## What consistency does and does not establish
 
+The hot, helium-rich tables expose another source-fit join. At material
+temperature 11.75 MK, changing density across electron degeneracy parameter 4
+produces a small jump in the source free energy. The stored source nodes agree
+with fresh-process calculations; the discrepancy is present in FreeEOS itself.
+Integrating the density derivative across the tested interval leaves a
+free-energy-over-temperature mismatch of about 21 erg/g/K. A control mixture
+whose interval does not cross the join has no comparable mismatch.
+[Source integral checks](results/freeeos_electron_fit_join_v1.json).
+
+The smooth potential interpolant spreads this jump across a material cell.
+Heat capacities at some tested mixtures consequently differ from direct source
+responses by more than the 0.30% comparison criterion. The broad
+[hot-table audit](results/metal_eos_hot_source_v1.json) retains its failed
+result. All 512 zones of the saved 3.848-trillion-year star pass their separate
+comparison, with a maximum heat-capacity difference of 0.2081%; this is a
+profile check, not a bound across the table.
+[Saved-profile comparison](results/metal_eos_hot_profile_v1.json).
+
+FreeEOS option 223 retains the EOS1 material choices while using numerical
+electron integrals and omitting radiation. The importer supports this explicit
+source selection and lets Ember add radiation once. The source integral
+control no longer resolves the jump. An independent check using options 1 and
+220 isolates radiation restoration from the electron treatment and agrees
+within 5.202e-11 fractionally.
+[Radiation check](results/freeeos_radiation_restoration_v1.json).
+The numerical-electron pilot passes the unchanged source and thermodynamic
+criteria. [Pilot](results/numerical_electron_pilot_v1.json),
+[generation and import checks](results/numerical_electron_source_pipeline_v1.json).
+
+The full 72-mixture numerical-electron source family is being calculated with
+`scripts/generate_metal_eos.py --electron-integrals numerical`; the exact
+[request](../data/eos/sources/numerical_electron_eos72_plan_specification.json)
+specifies the source grid and compositions. This changes existing physical
+table values, so it requires independent validation and a fresh stellar run.
+It cannot use the temperature-only extension restart. Other source-fit joins,
+including molecular partition functions, are unaffected by this electron change.
+
 All 129 initial direct FreeEOS samples along the old star converged;
 their local thermodynamic identities agreed to approximately 1e-12.
 However, a finer audit exposed **small discontinuities in the source fits**.

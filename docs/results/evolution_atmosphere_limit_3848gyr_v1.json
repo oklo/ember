@@ -1,0 +1,3149 @@
+{
+  "scope": "Check an actual checkpoint continuation and its join to the preceding track.\n\nThe joined history retains all accepted rows without interpolation. The duplicate\nrestart row is removed only after its physical fields match the preceding endpoint\nexactly; step diagnostics are absent at a restart. Source acceptance and executable\ncompatibility remain separate checks identified by the caller.\n",
+  "checked_utc": "2026-09-11T04:10:25.831538+00:00",
+  "endpoint": {
+    "age_yr": 3848256087435.5327,
+    "step_yr": 2774.0709795979383,
+    "R_Rsun": 0.13335022013021292,
+    "L_Lsun": 0.006004707507597356,
+    "Teff_K": 4399.999998613677,
+    "central_X": 0.0024672122543675725,
+    "central_Y3": 1.881978543089584e-08,
+    "step_error_norm": 3.552713678800501e-08,
+    "discrete_luminosity_balance": 5.952172088541374e-11,
+    "nuclear_rest_mass_balance": -1.3735988801943932e-07,
+    "last_halfstep_coupling_iterations": 1,
+    "convective_mass_fraction": 0.07899318247125091,
+    "central_T_K": 11750953.02469058,
+    "central_rho": 4004.2197096372915,
+    "surface_X": 0.1730474057601698,
+    "surface_Y3": 0.0026399621470580867,
+    "nuclear_deposited_Lsun": 0.0059940757028824326,
+    "nuclear_neutrino_Lsun": 0.00016387741190842416,
+    "last_halfstep_gravothermal_Lsun": 1.0644738200901914e-05,
+    "hydrogen_mass_Msun": 0.00922169800191084,
+    "thermal_neutrino_Lsun": 1.293312856770819e-08
+  },
+  "continued_states": 549,
+  "joined_states": 7696,
+  "physical_join_exact": true,
+  "duplicate_initial_diagnostics_excluded": [
+    "discrete_luminosity_balance",
+    "last_halfstep_coupling_iterations",
+    "last_halfstep_gravothermal_Lsun",
+    "nuclear_rest_mass_balance",
+    "step_error_norm",
+    "step_yr"
+  ],
+  "checkpoint_sha256": "3253c74df2c27371fb8acd440e1b0b25a1fcc8ed0bca776069df257a34c3b5e8",
+  "mixing_regions": [
+    {
+      "begin": 0,
+      "end_exclusive": 1,
+      "convective": false,
+      "mass_fraction": 1.309086439349332e-10,
+      "inner_enclosed_fraction": 1.22864837681125e-10,
+      "outer_enclosed_fraction": 1.22864837681125e-10
+    },
+    {
+      "begin": 1,
+      "end_exclusive": 2,
+      "convective": false,
+      "mass_fraction": 3.626765612167228e-11,
+      "inner_enclosed_fraction": 1.3895245018874142e-10,
+      "outer_enclosed_fraction": 1.3895245018874142e-10
+    },
+    {
+      "begin": 2,
+      "end_exclusive": 3,
+      "convective": false,
+      "mass_fraction": 9.05144388877644e-11,
+      "inner_enclosed_fraction": 1.9540014992446956e-10,
+      "outer_enclosed_fraction": 1.9540014992446956e-10
+    },
+    {
+      "begin": 3,
+      "end_exclusive": 4,
+      "convective": false,
+      "mass_fraction": 1.8702044835368316e-10,
+      "inner_enclosed_fraction": 3.199813279642702e-10,
+      "outer_enclosed_fraction": 3.199813279642702e-10
+    },
+    {
+      "begin": 4,
+      "end_exclusive": 5,
+      "convective": false,
+      "mass_fraction": 3.625094464205407e-10,
+      "inner_enclosed_fraction": 5.694410466318358e-10,
+      "outer_enclosed_fraction": 5.694410466318358e-10
+    },
+    {
+      "begin": 5,
+      "end_exclusive": 6,
+      "convective": false,
+      "mass_fraction": 6.722052263138649e-10,
+      "inner_enclosed_fraction": 1.0450002208053517e-09,
+      "outer_enclosed_fraction": 1.0450002208053517e-09
+    },
+    {
+      "begin": 6,
+      "end_exclusive": 7,
+      "convective": false,
+      "mass_fraction": 1.1957375308430724e-09,
+      "inner_enclosed_fraction": 1.9138514992595654e-09,
+      "outer_enclosed_fraction": 1.9138514992595654e-09
+    },
+    {
+      "begin": 7,
+      "end_exclusive": 8,
+      "convective": false,
+      "mass_fraction": 2.042876919778932e-09,
+      "inner_enclosed_fraction": 3.4364752824914967e-09,
+      "outer_enclosed_fraction": 3.4364752824914967e-09
+    },
+    {
+      "begin": 8,
+      "end_exclusive": 9,
+      "convective": false,
+      "mass_fraction": 3.35909988409873e-09,
+      "inner_enclosed_fraction": 5.999605338817429e-09,
+      "outer_enclosed_fraction": 5.999605338817429e-09
+    },
+    {
+      "begin": 9,
+      "end_exclusive": 10,
+      "convective": false,
+      "mass_fraction": 5.3309858856317515e-09,
+      "inner_enclosed_fraction": 1.0154675050688956e-08,
+      "outer_enclosed_fraction": 1.0154675050688956e-08
+    },
+    {
+      "begin": 10,
+      "end_exclusive": 11,
+      "convective": false,
+      "mass_fraction": 8.191448075316523e-09,
+      "inner_enclosed_fraction": 1.6661577110080933e-08,
+      "outer_enclosed_fraction": 1.6661577110080933e-08
+    },
+    {
+      "begin": 11,
+      "end_exclusive": 12,
+      "convective": false,
+      "mass_fraction": 1.2224799354362299e-08,
+      "inner_enclosed_fraction": 2.6537571201322e-08,
+      "outer_enclosed_fraction": 2.6537571201322e-08
+    },
+    {
+      "begin": 12,
+      "end_exclusive": 13,
+      "convective": false,
+      "mass_fraction": 1.777165534263859e-08,
+      "inner_enclosed_fraction": 4.111117581880553e-08,
+      "outer_enclosed_fraction": 4.111117581880553e-08
+    },
+    {
+      "begin": 13,
+      "end_exclusive": 14,
+      "convective": false,
+      "mass_fraction": 2.5233675736854894e-08,
+      "inner_enclosed_fraction": 6.208088188659918e-08,
+      "outer_enclosed_fraction": 6.208088188659918e-08
+    },
+    {
+      "begin": 14,
+      "end_exclusive": 15,
+      "convective": false,
+      "mass_fraction": 3.507814546944434e-08,
+      "inner_enclosed_fraction": 9.157852729251532e-08,
+      "outer_enclosed_fraction": 9.157852729251532e-08
+    },
+    {
+      "begin": 15,
+      "end_exclusive": 16,
+      "convective": false,
+      "mass_fraction": 4.7842397009614066e-08,
+      "inner_enclosed_fraction": 1.3223717282548785e-07,
+      "outer_enclosed_fraction": 1.3223717282548785e-07
+    },
+    {
+      "begin": 16,
+      "end_exclusive": 17,
+      "convective": false,
+      "mass_fraction": 6.41380750773592e-08,
+      "inner_enclosed_fraction": 1.8726332131174344e-07,
+      "outer_enclosed_fraction": 1.8726332131174344e-07
+    },
+    {
+      "begin": 17,
+      "end_exclusive": 18,
+      "convective": false,
+      "mass_fraction": 8.465524496848357e-08,
+      "inner_enclosed_fraction": 2.6051332298020625e-07,
+      "outer_enclosed_fraction": 2.6051332298020625e-07
+    },
+    {
+      "begin": 18,
+      "end_exclusive": 19,
+      "convective": false,
+      "mass_fraction": 1.1016634561386622e-07,
+      "inner_enclosed_fraction": 3.565738112487106e-07,
+      "outer_enclosed_fraction": 3.565738112487106e-07
+    },
+    {
+      "begin": 19,
+      "end_exclusive": 20,
+      "convective": false,
+      "mass_fraction": 1.415299884197368e-07,
+      "inner_enclosed_fraction": 4.808460142079387e-07,
+      "outer_enclosed_fraction": 4.808460142079387e-07
+    },
+    {
+      "begin": 20,
+      "end_exclusive": 21,
+      "convective": false,
+      "mass_fraction": 1.7969460285798014e-07,
+      "inner_enclosed_fraction": 6.396337880881842e-07,
+      "outer_enclosed_fraction": 6.396337880881842e-07
+    },
+    {
+      "begin": 21,
+      "end_exclusive": 22,
+      "convective": false,
+      "mass_fraction": 2.257019296968622e-07,
+      "inner_enclosed_fraction": 8.40235219923899e-07,
+      "outer_enclosed_fraction": 8.40235219923899e-07
+    },
+    {
+      "begin": 22,
+      "end_exclusive": 23,
+      "convective": false,
+      "mass_fraction": 2.806903626835024e-07,
+      "inner_enclosed_fraction": 1.0910376474819087e-06,
+      "outer_enclosed_fraction": 1.0910376474819087e-06
+    },
+    {
+      "begin": 23,
+      "end_exclusive": 24,
+      "convective": false,
+      "mass_fraction": 3.458981394102652e-07,
+      "inner_enclosed_fraction": 1.4016159452909037e-06,
+      "outer_enclosed_fraction": 1.4016159452909037e-06
+    },
+    {
+      "begin": 24,
+      "end_exclusive": 25,
+      "convective": false,
+      "mass_fraction": 4.2266638201808745e-07,
+      "inner_enclosed_fraction": 1.7828339263024392e-06,
+      "outer_enclosed_fraction": 1.7828339263024392e-06
+    },
+    {
+      "begin": 25,
+      "end_exclusive": 26,
+      "convective": false,
+      "mass_fraction": 5.12441988311573e-07,
+      "inner_enclosed_fraction": 2.246948709327079e-06,
+      "outer_enclosed_fraction": 2.246948709327079e-06
+    },
+    {
+      "begin": 26,
+      "end_exclusive": 27,
+      "convective": false,
+      "mass_fraction": 6.167803737828249e-07,
+      "inner_enclosed_fraction": 2.8077179029255853e-06,
+      "outer_enclosed_fraction": 2.8077179029255853e-06
+    },
+    {
+      "begin": 27,
+      "end_exclusive": 28,
+      "convective": false,
+      "mass_fraction": 7.373480649647402e-07,
+      "inner_enclosed_fraction": 3.4805094568927282e-06,
+      "outer_enclosed_fraction": 3.4805094568927282e-06
+    },
+    {
+      "begin": 28,
+      "end_exclusive": 29,
+      "convective": false,
+      "mass_fraction": 8.759251444593086e-07,
+      "inner_enclosed_fraction": 4.282414032855065e-06,
+      "outer_enclosed_fraction": 4.282414032855065e-06
+    },
+    {
+      "begin": 29,
+      "end_exclusive": 30,
+      "convective": false,
+      "mass_fraction": 1.034407547913177e-06,
+      "inner_enclosed_fraction": 5.232359745811346e-06,
+      "outer_enclosed_fraction": 5.232359745811346e-06
+    },
+    {
+      "begin": 30,
+      "end_exclusive": 31,
+      "convective": false,
+      "mass_fraction": 1.2148092131416136e-06,
+      "inner_enclosed_fraction": 6.35122912868142e-06,
+      "outer_enclosed_fraction": 6.35122912868142e-06
+    },
+    {
+      "begin": 31,
+      "end_exclusive": 32,
+      "convective": false,
+      "mass_fraction": 1.4192640815320948e-06,
+      "inner_enclosed_fraction": 7.661978172094573e-06,
+      "outer_enclosed_fraction": 7.661978172094573e-06
+    },
+    {
+      "begin": 32,
+      "end_exclusive": 33,
+      "convective": false,
+      "mass_fraction": 1.650027951793043e-06,
+      "inner_enclosed_fraction": 9.18975729174561e-06,
+      "outer_enclosed_fraction": 9.18975729174561e-06
+    },
+    {
+      "begin": 33,
+      "end_exclusive": 34,
+      "convective": false,
+      "mass_fraction": 1.9094801860483694e-06,
+      "inner_enclosed_fraction": 1.0962034075680658e-05,
+      "outer_enclosed_fraction": 1.0962034075680658e-05
+    },
+    {
+      "begin": 34,
+      "end_exclusive": 35,
+      "convective": false,
+      "mass_fraction": 2.200125268217856e-06,
+      "inner_enclosed_fraction": 1.3008717663842348e-05,
+      "outer_enclosed_fraction": 1.3008717663842348e-05
+    },
+    {
+      "begin": 35,
+      "end_exclusive": 36,
+      "convective": false,
+      "mass_fraction": 2.524594214565241e-06,
+      "inner_enclosed_fraction": 1.5362284612116372e-05,
+      "outer_enclosed_fraction": 1.5362284612116372e-05
+    },
+    {
+      "begin": 36,
+      "end_exclusive": 37,
+      "convective": false,
+      "mass_fraction": 2.8856458362402094e-06,
+      "inner_enclosed_fraction": 1.8057906092972832e-05,
+      "outer_enclosed_fraction": 1.8057906092972832e-05
+    },
+    {
+      "begin": 37,
+      "end_exclusive": 38,
+      "convective": false,
+      "mass_fraction": 3.286167853592129e-06,
+      "inner_enclosed_fraction": 2.113357628459679e-05,
+      "outer_enclosed_fraction": 2.113357628459679e-05
+    },
+    {
+      "begin": 38,
+      "end_exclusive": 39,
+      "convective": false,
+      "mass_fraction": 3.7291778619818453e-06,
+      "inner_enclosed_fraction": 2.463024180015709e-05,
+      "outer_enclosed_fraction": 2.463024180015709e-05
+    },
+    {
+      "begin": 39,
+      "end_exclusive": 40,
+      "convective": false,
+      "mass_fraction": 4.217824148778191e-06,
+      "inner_enclosed_fraction": 2.859193200856048e-05,
+      "outer_enclosed_fraction": 2.859193200856048e-05
+    },
+    {
+      "begin": 40,
+      "end_exclusive": 41,
+      "convective": false,
+      "mass_fraction": 4.755386361182772e-06,
+      "inner_enclosed_fraction": 3.306589009771347e-05,
+      "outer_enclosed_fraction": 3.306589009771347e-05
+    },
+    {
+      "begin": 41,
+      "end_exclusive": 42,
+      "convective": false,
+      "mass_fraction": 5.3452760244950354e-06,
+      "inner_enclosed_fraction": 3.810270473092602e-05,
+      "outer_enclosed_fraction": 3.810270473092602e-05
+    },
+    {
+      "begin": 42,
+      "end_exclusive": 43,
+      "convective": false,
+      "mass_fraction": 5.991036910394841e-06,
+      "inner_enclosed_fraction": 4.375644214670354e-05,
+      "outer_enclosed_fraction": 4.375644214670354e-05
+    },
+    {
+      "begin": 43,
+      "end_exclusive": 44,
+      "convective": false,
+      "mass_fraction": 6.696345254794942e-06,
+      "inner_enclosed_fraction": 5.008477855171571e-05,
+      "outer_enclosed_fraction": 5.008477855171571e-05
+    },
+    {
+      "begin": 44,
+      "end_exclusive": 45,
+      "convective": false,
+      "mass_fraction": 7.4650098247974965e-06,
+      "inner_enclosed_fraction": 5.7149132656293425e-05,
+      "outer_enclosed_fraction": 5.7149132656293425e-05
+    },
+    {
+      "begin": 45,
+      "end_exclusive": 46,
+      "convective": false,
+      "mass_fraction": 8.30097183426344e-06,
+      "inner_enclosed_fraction": 6.50147982013107e-05,
+      "outer_enclosed_fraction": 6.50147982013107e-05
+    },
+    {
+      "begin": 46,
+      "end_exclusive": 47,
+      "convective": false,
+      "mass_fraction": 9.208304707499233e-06,
+      "inner_enclosed_fraction": 7.37510763248203e-05,
+      "outer_enclosed_fraction": 7.37510763248203e-05
+    },
+    {
+      "begin": 47,
+      "end_exclusive": 48,
+      "convective": false,
+      "mass_fraction": 1.0191213690553441e-05,
+      "inner_enclosed_fraction": 8.343140761630916e-05,
+      "outer_enclosed_fraction": 8.343140761630916e-05
+    },
+    {
+      "begin": 48,
+      "end_exclusive": 49,
+      "convective": false,
+      "mass_fraction": 1.1254035309621517e-05,
+      "inner_enclosed_fraction": 9.413350370592719e-05,
+      "outer_enclosed_fraction": 9.413350370592719e-05
+    },
+    {
+      "begin": 49,
+      "end_exclusive": 50,
+      "convective": false,
+      "mass_fraction": 1.2401236676044967e-05,
+      "inner_enclosed_fraction": 0.0001059394782355522,
+      "outer_enclosed_fraction": 0.0001059394782355522
+    },
+    {
+      "begin": 50,
+      "end_exclusive": 51,
+      "convective": false,
+      "mass_fraction": 1.3637414637414921e-05,
+      "inner_enclosed_fraction": 0.00011893597705801712,
+      "outer_enclosed_fraction": 0.00011893597705801712
+    },
+    {
+      "begin": 51,
+      "end_exclusive": 52,
+      "convective": false,
+      "mass_fraction": 1.4967294774300192e-05,
+      "inner_enclosed_fraction": 0.00013321430751038206,
+      "outer_enclosed_fraction": 0.00013321430751038206
+    },
+    {
+      "begin": 52,
+      "end_exclusive": 53,
+      "convective": false,
+      "mass_fraction": 1.6395730242127158e-05,
+      "inner_enclosed_fraction": 0.0001488705666066175,
+      "outer_enclosed_fraction": 0.0001488705666066175
+    },
+    {
+      "begin": 53,
+      "end_exclusive": 54,
+      "convective": false,
+      "mass_fraction": 1.7927700457792005e-05,
+      "inner_enclosed_fraction": 0.00016600576799463636,
+      "outer_enclosed_fraction": 0.00016600576799463636
+    },
+    {
+      "begin": 54,
+      "end_exclusive": 55,
+      "convective": false,
+      "mass_fraction": 1.9568309630574547e-05,
+      "inner_enclosed_fraction": 0.00018472596752220152,
+      "outer_enclosed_fraction": 0.00018472596752220152
+    },
+    {
+      "begin": 55,
+      "end_exclusive": 56,
+      "convective": false,
+      "mass_fraction": 2.1322785136996775e-05,
+      "inner_enclosed_fraction": 0.00020514238725578544,
+      "outer_enclosed_fraction": 0.00020514238725578544
+    },
+    {
+      "begin": 56,
+      "end_exclusive": 57,
+      "convective": false,
+      "mass_fraction": 2.3196475739303074e-05,
+      "inner_enclosed_fraction": 0.00022737153779619506,
+      "outer_enclosed_fraction": 0.00022737153779619506
+    },
+    {
+      "begin": 57,
+      "end_exclusive": 58,
+      "convective": false,
+      "mass_fraction": 2.519484964725645e-05,
+      "inner_enclosed_fraction": 0.0002515353387343916,
+      "outer_enclosed_fraction": 0.0002515353387343916
+    },
+    {
+      "begin": 58,
+      "end_exclusive": 59,
+      "convective": false,
+      "mass_fraction": 2.7323492423039084e-05,
+      "inner_enclosed_fraction": 0.000277761237090708,
+      "outer_enclosed_fraction": 0.000277761237090708
+    },
+    {
+      "begin": 59,
+      "end_exclusive": 60,
+      "convective": false,
+      "mass_fraction": 2.958810472909052e-05,
+      "inner_enclosed_fraction": 0.00030618232358046977,
+      "outer_enclosed_fraction": 0.00030618232358046977
+    },
+    {
+      "begin": 60,
+      "end_exclusive": 61,
+      "convective": false,
+      "mass_fraction": 3.199449991875322e-05,
+      "inner_enclosed_fraction": 0.000336937446548889,
+      "outer_enclosed_fraction": 0.000336937446548889
+    },
+    {
+      "begin": 61,
+      "end_exclusive": 62,
+      "convective": false,
+      "mass_fraction": 3.4548601469717255e-05,
+      "inner_enclosed_fraction": 0.00037017132341797624,
+      "outer_enclosed_fraction": 0.00037017132341797624
+    },
+    {
+      "begin": 62,
+      "end_exclusive": 63,
+      "convective": false,
+      "mass_fraction": 3.725644026028759e-05,
+      "inner_enclosed_fraction": 0.0004060346494883235,
+      "outer_enclosed_fraction": 0.0004060346494883235
+    },
+    {
+      "begin": 63,
+      "end_exclusive": 64,
+      "convective": false,
+      "mass_fraction": 4.0124151688585504e-05,
+      "inner_enclosed_fraction": 0.0004446842039385514,
+      "outer_enclosed_fraction": 0.0004446842039385514
+    },
+    {
+      "begin": 64,
+      "end_exclusive": 65,
+      "convective": false,
+      "mass_fraction": 4.315797263491941e-05,
+      "inner_enclosed_fraction": 0.0004862829528654945,
+      "outer_enclosed_fraction": 0.0004862829528654945
+    },
+    {
+      "begin": 65,
+      "end_exclusive": 66,
+      "convective": false,
+      "mass_fraction": 4.636423826760149e-05,
+      "inner_enclosed_fraction": 0.0005310001492083902,
+      "outer_enclosed_fraction": 0.0005310001492083902
+    },
+    {
+      "begin": 66,
+      "end_exclusive": 67,
+      "convective": false,
+      "mass_fraction": 4.97493786926274e-05,
+      "inner_enclosed_fraction": 0.0005790114294006976,
+      "outer_enclosed_fraction": 0.0005790114294006976
+    },
+    {
+      "begin": 67,
+      "end_exclusive": 68,
+      "convective": false,
+      "mass_fraction": 5.331991544768054e-05,
+      "inner_enclosed_fraction": 0.000630498906593645,
+      "outer_enclosed_fraction": 0.000630498906593645
+    },
+    {
+      "begin": 68,
+      "end_exclusive": 69,
+      "convective": false,
+      "mass_fraction": 5.708245784112527e-05,
+      "inner_enclosed_fraction": 0.0006856512602960586,
+      "outer_enclosed_fraction": 0.0006856512602960586
+    },
+    {
+      "begin": 69,
+      "end_exclusive": 70,
+      "convective": false,
+      "mass_fraction": 6.104369913668559e-05,
+      "inner_enclosed_fraction": 0.0007446638222758956,
+      "outer_enclosed_fraction": 0.0007446638222758956
+    },
+    {
+      "begin": 70,
+      "end_exclusive": 71,
+      "convective": false,
+      "mass_fraction": 6.52104125846411e-05,
+      "inner_enclosed_fraction": 0.0008077386585694298,
+      "outer_enclosed_fraction": 0.0008077386585694298
+    },
+    {
+      "begin": 71,
+      "end_exclusive": 72,
+      "convective": false,
+      "mass_fraction": 6.958944730055081e-05,
+      "inner_enclosed_fraction": 0.0008750846474451778,
+      "outer_enclosed_fraction": 0.0008750846474451778
+    },
+    {
+      "begin": 72,
+      "end_exclusive": 73,
+      "convective": false,
+      "mass_fraction": 7.418772399252203e-05,
+      "inner_enclosed_fraction": 0.0009469175531705314,
+      "outer_enclosed_fraction": 0.0009469175531705314
+    },
+    {
+      "begin": 73,
+      "end_exclusive": 74,
+      "convective": false,
+      "mass_fraction": 7.901223053833516e-05,
+      "inner_enclosed_fraction": 0.0010234600954302218,
+      "outer_enclosed_fraction": 0.0010234600954302218
+    },
+    {
+      "begin": 74,
+      "end_exclusive": 75,
+      "convective": false,
+      "mass_fraction": 8.407001741379661e-05,
+      "inner_enclosed_fraction": 0.0011049420142472018,
+      "outer_enclosed_fraction": 0.0011049420142472018
+    },
+    {
+      "begin": 75,
+      "end_exclusive": 76,
+      "convective": false,
+      "mass_fraction": 8.936819297373748e-05,
+      "inner_enclosed_fraction": 0.001191600130257815,
+      "outer_enclosed_fraction": 0.001191600130257815
+    },
+    {
+      "begin": 76,
+      "end_exclusive": 77,
+      "convective": false,
+      "mass_fraction": 9.491391858738581e-05,
+      "inner_enclosed_fraction": 0.0012836784001946768,
+      "outer_enclosed_fraction": 0.0012836784001946768
+    },
+    {
+      "begin": 77,
+      "end_exclusive": 78,
+      "convective": false,
+      "mass_fraction": 0.00010071440362998452,
+      "inner_enclosed_fraction": 0.0013814279674325867,
+      "outer_enclosed_fraction": 0.0013814279674325867
+    },
+    {
+      "begin": 78,
+      "end_exclusive": 79,
+      "convective": false,
+      "mass_fraction": 0.00010677690033248207,
+      "inner_enclosed_fraction": 0.0014851072074546457,
+      "outer_enclosed_fraction": 0.0014851072074546457
+    },
+    {
+      "begin": 79,
+      "end_exclusive": 80,
+      "convective": false,
+      "mass_fraction": 0.00011310869849150442,
+      "inner_enclosed_fraction": 0.0015949817680975507,
+      "outer_enclosed_fraction": 0.0015949817680975507
+    },
+    {
+      "begin": 80,
+      "end_exclusive": 81,
+      "convective": false,
+      "mass_fraction": 0.0001197171200418968,
+      "inner_enclosed_fraction": 0.0017113246044376546,
+      "outer_enclosed_fraction": 0.0017113246044376546
+    },
+    {
+      "begin": 81,
+      "end_exclusive": 82,
+      "convective": false,
+      "mass_fraction": 0.00012660951349430984,
+      "inner_enclosed_fraction": 0.0018344160081813444,
+      "outer_enclosed_fraction": 0.0018344160081813444
+    },
+    {
+      "begin": 82,
+      "end_exclusive": 83,
+      "convective": false,
+      "mass_fraction": 0.00013379324824039452,
+      "inner_enclosed_fraction": 0.001964543631426274,
+      "outer_enclosed_fraction": 0.001964543631426274
+    },
+    {
+      "begin": 83,
+      "end_exclusive": 84,
+      "convective": false,
+      "mass_fraction": 0.00014127570872840531,
+      "inner_enclosed_fraction": 0.0021020025046621336,
+      "outer_enclosed_fraction": 0.0021020025046621336
+    },
+    {
+      "begin": 84,
+      "end_exclusive": 85,
+      "convective": false,
+      "mass_fraction": 0.00014906428851226805,
+      "inner_enclosed_fraction": 0.002247095048883085,
+      "outer_enclosed_fraction": 0.002247095048883085
+    },
+    {
+      "begin": 85,
+      "end_exclusive": 86,
+      "convective": false,
+      "mass_fraction": 0.00015716638417717443,
+      "inner_enclosed_fraction": 0.0024001310816866694,
+      "outer_enclosed_fraction": 0.0024001310816866694
+    },
+    {
+      "begin": 86,
+      "end_exclusive": 87,
+      "convective": false,
+      "mass_fraction": 0.00016558938914503749,
+      "inner_enclosed_fraction": 0.0025614278172374338,
+      "outer_enclosed_fraction": 0.0025614278172374338
+    },
+    {
+      "begin": 87,
+      "end_exclusive": 88,
+      "convective": false,
+      "mass_fraction": 0.00017434068736344116,
+      "inner_enclosed_fraction": 0.0027313098599767447,
+      "outer_enclosed_fraction": 0.0027313098599767447
+    },
+    {
+      "begin": 88,
+      "end_exclusive": 89,
+      "convective": false,
+      "mass_fraction": 0.0001834276468815525,
+      "inner_enclosed_fraction": 0.002910109191964316,
+      "outer_enclosed_fraction": 0.002910109191964316
+    },
+    {
+      "begin": 89,
+      "end_exclusive": 90,
+      "convective": false,
+      "mass_fraction": 0.00019285761331708587,
+      "inner_enclosed_fraction": 0.0030981651537398494,
+      "outer_enclosed_fraction": 0.0030981651537398494
+    },
+    {
+      "begin": 90,
+      "end_exclusive": 91,
+      "convective": false,
+      "mass_fraction": 0.00020263790321829175,
+      "inner_enclosed_fraction": 0.0032958244185984876,
+      "outer_enclosed_fraction": 0.0032958244185984876
+    },
+    {
+      "begin": 91,
+      "end_exclusive": 92,
+      "convective": false,
+      "mass_fraction": 0.00021277579732515824,
+      "inner_enclosed_fraction": 0.003503440960176433,
+      "outer_enclosed_fraction": 0.003503440960176433
+    },
+    {
+      "begin": 92,
+      "end_exclusive": 93,
+      "convective": false,
+      "mass_fraction": 0.00022327853373446107,
+      "inner_enclosed_fraction": 0.003721376013248804,
+      "outer_enclosed_fraction": 0.003721376013248804
+    },
+    {
+      "begin": 93,
+      "end_exclusive": 94,
+      "convective": false,
+      "mass_fraction": 0.00023415330097300576,
+      "inner_enclosed_fraction": 0.003949998027645355,
+      "outer_enclosed_fraction": 0.003949998027645355
+    },
+    {
+      "begin": 94,
+      "end_exclusive": 95,
+      "convective": false,
+      "mass_fraction": 0.00024540723098408256,
+      "inner_enclosed_fraction": 0.004189682615194816,
+      "outer_enclosed_fraction": 0.004189682615194816
+    },
+    {
+      "begin": 95,
+      "end_exclusive": 96,
+      "convective": false,
+      "mass_fraction": 0.000257047392032144,
+      "inner_enclosed_fraction": 0.0044408124896135204,
+      "outer_enclosed_fraction": 0.0044408124896135204
+    },
+    {
+      "begin": 96,
+      "end_exclusive": 97,
+      "convective": false,
+      "mass_fraction": 0.0002690807815306406,
+      "inner_enclosed_fraction": 0.004703777399259104,
+      "outer_enclosed_fraction": 0.004703777399259104
+    },
+    {
+      "begin": 97,
+      "end_exclusive": 98,
+      "convective": false,
+      "mass_fraction": 0.0002815143187985538,
+      "inner_enclosed_fraction": 0.004978974052674802,
+      "outer_enclosed_fraction": 0.004978974052674802
+    },
+    {
+      "begin": 98,
+      "end_exclusive": 99,
+      "convective": false,
+      "mass_fraction": 0.0002943548377514724,
+      "inner_enclosed_fraction": 0.005266806036856211,
+      "outer_enclosed_fraction": 0.005266806036856211
+    },
+    {
+      "begin": 99,
+      "end_exclusive": 100,
+      "convective": false,
+      "mass_fraction": 0.00030760907953209914,
+      "inner_enclosed_fraction": 0.005567683728177747,
+      "outer_enclosed_fraction": 0.005567683728177747
+    },
+    {
+      "begin": 100,
+      "end_exclusive": 101,
+      "convective": false,
+      "mass_fraction": 0.0003212836850869819,
+      "inner_enclosed_fraction": 0.00588202419592041,
+      "outer_enclosed_fraction": 0.00588202419592041
+    },
+    {
+      "begin": 101,
+      "end_exclusive": 102,
+      "convective": false,
+      "mass_fraction": 0.0003353851876950455,
+      "inner_enclosed_fraction": 0.00621025109835171,
+      "outer_enclosed_fraction": 0.00621025109835171
+    },
+    {
+      "begin": 102,
+      "end_exclusive": 103,
+      "convective": false,
+      "mass_fraction": 0.00034992000545439403,
+      "inner_enclosed_fraction": 0.0065527945713105005,
+      "outer_enclosed_fraction": 0.0065527945713105005
+    },
+    {
+      "begin": 103,
+      "end_exclusive": 104,
+      "convective": false,
+      "mass_fraction": 0.0003648944337335493,
+      "inner_enclosed_fraction": 0.006910091109260498,
+      "outer_enclosed_fraction": 0.006910091109260498
+    },
+    {
+      "begin": 104,
+      "end_exclusive": 105,
+      "convective": false,
+      "mass_fraction": 0.00038031463759377837,
+      "inner_enclosed_fraction": 0.007282583438777599,
+      "outer_enclosed_fraction": 0.007282583438777599
+    },
+    {
+      "begin": 105,
+      "end_exclusive": 106,
+      "convective": false,
+      "mass_fraction": 0.00039618664418985026,
+      "inner_enclosed_fraction": 0.007670720384448055,
+      "outer_enclosed_fraction": 0.007670720384448055
+    },
+    {
+      "begin": 106,
+      "end_exclusive": 107,
+      "convective": false,
+      "mass_fraction": 0.0004125163351548522,
+      "inner_enclosed_fraction": 0.008074956727157299,
+      "outer_enclosed_fraction": 0.008074956727157299
+    },
+    {
+      "begin": 107,
+      "end_exclusive": 108,
+      "convective": false,
+      "mass_fraction": 0.00042930943897740966,
+      "inner_enclosed_fraction": 0.008495753054757759,
+      "outer_enclosed_fraction": 0.008495753054757759
+    },
+    {
+      "begin": 108,
+      "end_exclusive": 109,
+      "convective": false,
+      "mass_fraction": 0.00044657152337776804,
+      "inner_enclosed_fraction": 0.00893357560511212,
+      "outer_enclosed_fraction": 0.00893357560511212
+    },
+    {
+      "begin": 109,
+      "end_exclusive": 110,
+      "convective": false,
+      "mass_fraction": 0.000464307987690032,
+      "inner_enclosed_fraction": 0.009388896101513295,
+      "outer_enclosed_fraction": 0.009388896101513295
+    },
+    {
+      "begin": 110,
+      "end_exclusive": 111,
+      "convective": false,
+      "mass_fraction": 0.0004825240552586833,
+      "inner_enclosed_fraction": 0.009862191580492183,
+      "outer_enclosed_fraction": 0.009862191580492183
+    },
+    {
+      "begin": 111,
+      "end_exclusive": 112,
+      "convective": false,
+      "mass_fraction": 0.0005012247658559459,
+      "inner_enclosed_fraction": 0.010353944212030662,
+      "outer_enclosed_fraction": 0.010353944212030662
+    },
+    {
+      "begin": 112,
+      "end_exclusive": 113,
+      "convective": false,
+      "mass_fraction": 0.0005204149681289353,
+      "inner_enclosed_fraction": 0.010864641112204075,
+      "outer_enclosed_fraction": 0.010864641112204075
+    },
+    {
+      "begin": 113,
+      "end_exclusive": 114,
+      "convective": false,
+      "mass_fraction": 0.0005400993120832427,
+      "inner_enclosed_fraction": 0.011394774148288532,
+      "outer_enclosed_fraction": 0.011394774148288532
+    },
+    {
+      "begin": 114,
+      "end_exclusive": 115,
+      "convective": false,
+      "mass_fraction": 0.000560282241611271,
+      "inner_enclosed_fraction": 0.01194483973637056,
+      "outer_enclosed_fraction": 0.01194483973637056
+    },
+    {
+      "begin": 115,
+      "end_exclusive": 116,
+      "convective": false,
+      "mass_fraction": 0.0005809679870742279,
+      "inner_enclosed_fraction": 0.012515338631511075,
+      "outer_enclosed_fraction": 0.012515338631511075
+    },
+    {
+      "begin": 116,
+      "end_exclusive": 117,
+      "convective": false,
+      "mass_fraction": 0.0006021605579443642,
+      "inner_enclosed_fraction": 0.013106775710519016,
+      "outer_enclosed_fraction": 0.013106775710519016
+    },
+    {
+      "begin": 117,
+      "end_exclusive": 118,
+      "convective": false,
+      "mass_fraction": 0.0006238637355166095,
+      "inner_enclosed_fraction": 0.013719659747399802,
+      "outer_enclosed_fraction": 0.013719659747399802
+    },
+    {
+      "begin": 118,
+      "end_exclusive": 119,
+      "convective": false,
+      "mass_fraction": 0.0006460810656981187,
+      "inner_enclosed_fraction": 0.014354503181552234,
+      "outer_enclosed_fraction": 0.014354503181552234
+    },
+    {
+      "begin": 119,
+      "end_exclusive": 120,
+      "convective": false,
+      "mass_fraction": 0.0006688158518829982,
+      "inner_enclosed_fraction": 0.015011821878796041,
+      "outer_enclosed_fraction": 0.015011821878796041
+    },
+    {
+      "begin": 120,
+      "end_exclusive": 121,
+      "convective": false,
+      "mass_fraction": 0.0006920711479211569,
+      "inner_enclosed_fraction": 0.015692134885318232,
+      "outer_enclosed_fraction": 0.015692134885318232
+    },
+    {
+      "begin": 121,
+      "end_exclusive": 122,
+      "convective": false,
+      "mass_fraction": 0.0007158497511906084,
+      "inner_enclosed_fraction": 0.016395964174638355,
+      "outer_enclosed_fraction": 0.016395964174638355
+    },
+    {
+      "begin": 122,
+      "end_exclusive": 123,
+      "convective": false,
+      "mass_fraction": 0.000740154195780101,
+      "inner_enclosed_fraction": 0.017123834387699446,
+      "outer_enclosed_fraction": 0.017123834387699446
+    },
+    {
+      "begin": 123,
+      "end_exclusive": 124,
+      "convective": false,
+      "mass_fraction": 0.0007649867457914201,
+      "inner_enclosed_fraction": 0.017876272566198555,
+      "outer_enclosed_fraction": 0.017876272566198555
+    },
+    {
+      "begin": 124,
+      "end_exclusive": 125,
+      "convective": false,
+      "mass_fraction": 0.0007903493887692814,
+      "inner_enclosed_fraction": 0.018653807879282287,
+      "outer_enclosed_fraction": 0.018653807879282287
+    },
+    {
+      "begin": 125,
+      "end_exclusive": 126,
+      "convective": false,
+      "mass_fraction": 0.0008162438292689904,
+      "inner_enclosed_fraction": 0.01945697134373712,
+      "outer_enclosed_fraction": 0.01945697134373712
+    },
+    {
+      "begin": 126,
+      "end_exclusive": 127,
+      "convective": false,
+      "mass_fraction": 0.0008426714825677993,
+      "inner_enclosed_fraction": 0.02028629553782027,
+      "outer_enclosed_fraction": 0.02028629553782027
+    },
+    {
+      "begin": 127,
+      "end_exclusive": 128,
+      "convective": false,
+      "mass_fraction": 0.000869633468529933,
+      "inner_enclosed_fraction": 0.021142314308872718,
+      "outer_enclosed_fraction": 0.021142314308872718
+    },
+    {
+      "begin": 128,
+      "end_exclusive": 129,
+      "convective": false,
+      "mass_fraction": 0.0008971306056344707,
+      "inner_enclosed_fraction": 0.022025562474880134,
+      "outer_enclosed_fraction": 0.022025562474880134
+    },
+    {
+      "begin": 129,
+      "end_exclusive": 130,
+      "convective": false,
+      "mass_fraction": 0.0009251634051721972,
+      "inner_enclosed_fraction": 0.02293657552014166,
+      "outer_enclosed_fraction": 0.02293657552014166
+    },
+    {
+      "begin": 130,
+      "end_exclusive": 131,
+      "convective": false,
+      "mass_fraction": 0.0009537320656217947,
+      "inner_enclosed_fraction": 0.02387588928522453,
+      "outer_enclosed_fraction": 0.02387588928522453
+    },
+    {
+      "begin": 131,
+      "end_exclusive": 132,
+      "convective": false,
+      "mass_fraction": 0.0009828364672124941,
+      "inner_enclosed_fraction": 0.02484403965138525,
+      "outer_enclosed_fraction": 0.02484403965138525
+    },
+    {
+      "begin": 132,
+      "end_exclusive": 133,
+      "convective": false,
+      "mass_fraction": 0.0010124761666820466,
+      "inner_enclosed_fraction": 0.02584156221964952,
+      "outer_enclosed_fraction": 0.02584156221964952
+    },
+    {
+      "begin": 133,
+      "end_exclusive": 134,
+      "convective": false,
+      "mass_fraction": 0.0010426503922380044,
+      "inner_enclosed_fraction": 0.026868991984749343,
+      "outer_enclosed_fraction": 0.026868991984749343
+    },
+    {
+      "begin": 134,
+      "end_exclusive": 135,
+      "convective": false,
+      "mass_fraction": 0.001073358038729104,
+      "inner_enclosed_fraction": 0.027926863004125526,
+      "outer_enclosed_fraction": 0.027926863004125526
+    },
+    {
+      "begin": 135,
+      "end_exclusive": 136,
+      "convective": false,
+      "mass_fraction": 0.0011045976630363202,
+      "inner_enclosed_fraction": 0.02901570806220755,
+      "outer_enclosed_fraction": 0.02901570806220755
+    },
+    {
+      "begin": 136,
+      "end_exclusive": 137,
+      "convective": false,
+      "mass_fraction": 0.001136367479691272,
+      "inner_enclosed_fraction": 0.030136058330198168,
+      "outer_enclosed_fraction": 0.030136058330198168
+    },
+    {
+      "begin": 137,
+      "end_exclusive": 138,
+      "convective": false,
+      "mass_fraction": 0.001168665356726982,
+      "inner_enclosed_fraction": 0.0312884430215901,
+      "outer_enclosed_fraction": 0.0312884430215901
+    },
+    {
+      "begin": 138,
+      "end_exclusive": 139,
+      "convective": false,
+      "mass_fraction": 0.0012014888117717064,
+      "inner_enclosed_fraction": 0.03247338904365213,
+      "outer_enclosed_fraction": 0.03247338904365213
+    },
+    {
+      "begin": 139,
+      "end_exclusive": 140,
+      "convective": false,
+      "mass_fraction": 0.0012348350083921315,
+      "inner_enclosed_fraction": 0.03369142064513351,
+      "outer_enclosed_fraction": 0.03369142064513351
+    },
+    {
+      "begin": 140,
+      "end_exclusive": 141,
+      "convective": false,
+      "mass_fraction": 0.0012687007526912331,
+      "inner_enclosed_fraction": 0.0349430590604364,
+      "outer_enclosed_fraction": 0.0349430590604364
+    },
+    {
+      "begin": 141,
+      "end_exclusive": 142,
+      "convective": false,
+      "mass_fraction": 0.0013030824901699863,
+      "inner_enclosed_fraction": 0.036228822150515975,
+      "outer_enclosed_fraction": 0.036228822150515975
+    },
+    {
+      "begin": 142,
+      "end_exclusive": 143,
+      "convective": false,
+      "mass_fraction": 0.0013379763028584762,
+      "inner_enclosed_fraction": 0.03754922404077637,
+      "outer_enclosed_fraction": 0.03754922404077637
+    },
+    {
+      "begin": 143,
+      "end_exclusive": 144,
+      "convective": false,
+      "mass_fraction": 0.0013733779067230994,
+      "inner_enclosed_fraction": 0.03890477475623293,
+      "outer_enclosed_fraction": 0.03890477475623293
+    },
+    {
+      "begin": 144,
+      "end_exclusive": 145,
+      "convective": false,
+      "mass_fraction": 0.0014092826493557506,
+      "inner_enclosed_fraction": 0.04029597985422256,
+      "outer_enclosed_fraction": 0.04029597985422256
+    },
+    {
+      "begin": 145,
+      "end_exclusive": 146,
+      "convective": false,
+      "mass_fraction": 0.0014456855079522477,
+      "inner_enclosed_fraction": 0.04172334005494443,
+      "outer_enclosed_fraction": 0.04172334005494443
+    },
+    {
+      "begin": 146,
+      "end_exclusive": 147,
+      "convective": false,
+      "mass_fraction": 0.0014825810875847764,
+      "inner_enclosed_fraction": 0.04318735087012706,
+      "outer_enclosed_fraction": 0.04318735087012706
+    },
+    {
+      "begin": 147,
+      "end_exclusive": 148,
+      "convective": false,
+      "mass_fraction": 0.0015199636197723912,
+      "inner_enclosed_fraction": 0.04468850223011398,
+      "outer_enclosed_fraction": 0.04468850223011398
+    },
+    {
+      "begin": 148,
+      "end_exclusive": 149,
+      "convective": false,
+      "mass_fraction": 0.00155782696135849,
+      "inner_enclosed_fraction": 0.046227278109671845,
+      "outer_enclosed_fraction": 0.046227278109671845
+    },
+    {
+      "begin": 149,
+      "end_exclusive": 150,
+      "convective": false,
+      "mass_fraction": 0.001596164593696597,
+      "inner_enclosed_fraction": 0.04780415615283096,
+      "outer_enclosed_fraction": 0.04780415615283096
+    },
+    {
+      "begin": 150,
+      "end_exclusive": 151,
+      "convective": false,
+      "mass_fraction": 0.0016349696221508324,
+      "inner_enclosed_fraction": 0.04941960729706504,
+      "outer_enclosed_fraction": 0.04941960729706504
+    },
+    {
+      "begin": 151,
+      "end_exclusive": 152,
+      "convective": false,
+      "mass_fraction": 0.001674234775916115,
+      "inner_enclosed_fraction": 0.051074095397132625,
+      "outer_enclosed_fraction": 0.051074095397132625
+    },
+    {
+      "begin": 152,
+      "end_exclusive": 153,
+      "convective": false,
+      "mass_fraction": 0.0017139524081593903,
+      "inner_enclosed_fraction": 0.05276807684889727,
+      "outer_enclosed_fraction": 0.05276807684889727
+    },
+    {
+      "begin": 153,
+      "end_exclusive": 154,
+      "convective": false,
+      "mass_fraction": 0.0017541144964888233,
+      "inner_enclosed_fraction": 0.054502000213451404,
+      "outer_enclosed_fraction": 0.054502000213451404
+    },
+    {
+      "begin": 154,
+      "end_exclusive": 155,
+      "convective": false,
+      "mass_fraction": 0.001794712643752692,
+      "inner_enclosed_fraction": 0.056276305841874916,
+      "outer_enclosed_fraction": 0.056276305841874916
+    },
+    {
+      "begin": 155,
+      "end_exclusive": 156,
+      "convective": false,
+      "mass_fraction": 0.0018357380791697389,
+      "inner_enclosed_fraction": 0.05809142550095679,
+      "outer_enclosed_fraction": 0.05809142550095679
+    },
+    {
+      "begin": 156,
+      "end_exclusive": 157,
+      "convective": false,
+      "mass_fraction": 0.0018771816597964747,
+      "inner_enclosed_fraction": 0.05994778200021439,
+      "outer_enclosed_fraction": 0.05994778200021439
+    },
+    {
+      "begin": 157,
+      "end_exclusive": 158,
+      "convective": false,
+      "mass_fraction": 0.0019190338723309478,
+      "inner_enclosed_fraction": 0.06184578882054974,
+      "outer_enclosed_fraction": 0.06184578882054974
+    },
+    {
+      "begin": 158,
+      "end_exclusive": 159,
+      "convective": false,
+      "mass_fraction": 0.001961284835258743,
+      "inner_enclosed_fraction": 0.06378584974487629,
+      "outer_enclosed_fraction": 0.06378584974487629
+    },
+    {
+      "begin": 159,
+      "end_exclusive": 160,
+      "convective": false,
+      "mass_fraction": 0.002003924301338302,
+      "inner_enclosed_fraction": 0.06576835849106723,
+      "outer_enclosed_fraction": 0.06576835849106723
+    },
+    {
+      "begin": 160,
+      "end_exclusive": 161,
+      "convective": false,
+      "mass_fraction": 0.002046941660427635,
+      "inner_enclosed_fraction": 0.06779369834755289,
+      "outer_enclosed_fraction": 0.06779369834755289
+    },
+    {
+      "begin": 161,
+      "end_exclusive": 162,
+      "convective": false,
+      "mass_fraction": 0.002090325942656612,
+      "inner_enclosed_fraction": 0.06986224181192249,
+      "outer_enclosed_fraction": 0.06986224181192249
+    },
+    {
+      "begin": 162,
+      "end_exclusive": 163,
+      "convective": false,
+      "mass_fraction": 0.002134065821942761,
+      "inner_enclosed_fraction": 0.07197435023286612,
+      "outer_enclosed_fraction": 0.07197435023286612
+    },
+    {
+      "begin": 163,
+      "end_exclusive": 164,
+      "convective": false,
+      "mass_fraction": 0.0021781496198504213,
+      "inner_enclosed_fraction": 0.07413037345580802,
+      "outer_enclosed_fraction": 0.07413037345580802
+    },
+    {
+      "begin": 164,
+      "end_exclusive": 165,
+      "convective": false,
+      "mass_fraction": 0.0022225653097915177,
+      "inner_enclosed_fraction": 0.07633064947256696,
+      "outer_enclosed_fraction": 0.07633064947256696
+    },
+    {
+      "begin": 165,
+      "end_exclusive": 166,
+      "convective": false,
+      "mass_fraction": 0.002267300521572078,
+      "inner_enclosed_fraction": 0.07857550407539104,
+      "outer_enclosed_fraction": 0.07857550407539104
+    },
+    {
+      "begin": 166,
+      "end_exclusive": 167,
+      "convective": false,
+      "mass_fraction": 0.0023123425462765893,
+      "inner_enclosed_fraction": 0.08086525051571111,
+      "outer_enclosed_fraction": 0.08086525051571111
+    },
+    {
+      "begin": 167,
+      "end_exclusive": 168,
+      "convective": false,
+      "mass_fraction": 0.002357678341495583,
+      "inner_enclosed_fraction": 0.08320018916794424,
+      "outer_enclosed_fraction": 0.08320018916794424
+    },
+    {
+      "begin": 168,
+      "end_exclusive": 169,
+      "convective": false,
+      "mass_fraction": 0.00240329453688911,
+      "inner_enclosed_fraction": 0.08558060719870228,
+      "outer_enclosed_fraction": 0.08558060719870228
+    },
+    {
+      "begin": 169,
+      "end_exclusive": 170,
+      "convective": false,
+      "mass_fraction": 0.002449177440082835,
+      "inner_enclosed_fraction": 0.08800677824172246,
+      "outer_enclosed_fraction": 0.08800677824172246
+    },
+    {
+      "begin": 170,
+      "end_exclusive": 171,
+      "convective": false,
+      "mass_fraction": 0.00249531304290354,
+      "inner_enclosed_fraction": 0.09047896207886795,
+      "outer_enclosed_fraction": 0.09047896207886795
+    },
+    {
+      "begin": 171,
+      "end_exclusive": 172,
+      "convective": false,
+      "mass_fraction": 0.0025416870279365627,
+      "inner_enclosed_fraction": 0.09299740432752952,
+      "outer_enclosed_fraction": 0.09299740432752952
+    },
+    {
+      "begin": 172,
+      "end_exclusive": 173,
+      "convective": false,
+      "mass_fraction": 0.002588284775412512,
+      "inner_enclosed_fraction": 0.09556233613474108,
+      "outer_enclosed_fraction": 0.09556233613474108
+    },
+    {
+      "begin": 173,
+      "end_exclusive": 174,
+      "convective": false,
+      "mass_fraction": 0.002635091370414159,
+      "inner_enclosed_fraction": 0.09817397387835455,
+      "outer_enclosed_fraction": 0.09817397387835455
+    },
+    {
+      "begin": 174,
+      "end_exclusive": 175,
+      "convective": false,
+      "mass_fraction": 0.002682091610400895,
+      "inner_enclosed_fraction": 0.10083251887556939,
+      "outer_enclosed_fraction": 0.10083251887556939
+    },
+    {
+      "begin": 175,
+      "end_exclusive": 176,
+      "convective": false,
+      "mass_fraction": 0.0027292700130442716,
+      "inner_enclosed_fraction": 0.10353815709915634,
+      "outer_enclosed_fraction": 0.10353815709915634
+    },
+    {
+      "begin": 176,
+      "end_exclusive": 177,
+      "convective": false,
+      "mass_fraction": 0.0027766108243705363,
+      "inner_enclosed_fraction": 0.10629105890165794,
+      "outer_enclosed_fraction": 0.10629105890165794
+    },
+    {
+      "begin": 177,
+      "end_exclusive": 178,
+      "convective": false,
+      "mass_fraction": 0.0028240980272051667,
+      "inner_enclosed_fraction": 0.10909137874789741,
+      "outer_enclosed_fraction": 0.10909137874789741
+    },
+    {
+      "begin": 178,
+      "end_exclusive": 179,
+      "convective": false,
+      "mass_fraction": 0.0028717153499094985,
+      "inner_enclosed_fraction": 0.11193925495606827,
+      "outer_enclosed_fraction": 0.11193925495606827
+    },
+    {
+      "begin": 179,
+      "end_exclusive": 180,
+      "convective": false,
+      "mass_fraction": 0.002919446275407566,
+      "inner_enclosed_fraction": 0.11483480944771642,
+      "outer_enclosed_fraction": 0.11483480944771642
+    },
+    {
+      "begin": 180,
+      "end_exclusive": 181,
+      "convective": false,
+      "mass_fraction": 0.002967274050494705,
+      "inner_enclosed_fraction": 0.1177781475068834,
+      "outer_enclosed_fraction": 0.1177781475068834
+    },
+    {
+      "begin": 181,
+      "end_exclusive": 182,
+      "convective": false,
+      "mass_fraction": 0.0030151816954199595,
+      "inner_enclosed_fraction": 0.12076935754870582,
+      "outer_enclosed_fraction": 0.12076935754870582
+    },
+    {
+      "begin": 182,
+      "end_exclusive": 183,
+      "convective": false,
+      "mass_fraction": 0.0030631520137311937,
+      "inner_enclosed_fraction": 0.12380851089772332,
+      "outer_enclosed_fraction": 0.12380851089772332
+    },
+    {
+      "begin": 183,
+      "end_exclusive": 184,
+      "convective": false,
+      "mass_fraction": 0.003111167602386782,
+      "inner_enclosed_fraction": 0.12689566157616822,
+      "outer_enclosed_fraction": 0.12689566157616822
+    },
+    {
+      "begin": 184,
+      "end_exclusive": 185,
+      "convective": false,
+      "mass_fraction": 0.0031592108621094424,
+      "inner_enclosed_fraction": 0.13003084610249688,
+      "outer_enclosed_fraction": 0.13003084610249688
+    },
+    {
+      "begin": 185,
+      "end_exclusive": 186,
+      "convective": false,
+      "mass_fraction": 0.00320726400798295,
+      "inner_enclosed_fraction": 0.1332140833003871,
+      "outer_enclosed_fraction": 0.1332140833003871
+    },
+    {
+      "begin": 186,
+      "end_exclusive": 187,
+      "convective": false,
+      "mass_fraction": 0.003255309080286847,
+      "inner_enclosed_fraction": 0.13644537411846278,
+      "outer_enclosed_fraction": 0.13644537411846278
+    },
+    {
+      "begin": 187,
+      "end_exclusive": 188,
+      "convective": false,
+      "mass_fraction": 0.003303327955546042,
+      "inner_enclosed_fraction": 0.13972470146096078,
+      "outer_enclosed_fraction": 0.13972470146096078
+    },
+    {
+      "begin": 188,
+      "end_exclusive": 189,
+      "convective": false,
+      "mass_fraction": 0.0033513023578004173,
+      "inner_enclosed_fraction": 0.14305203002955486,
+      "outer_enclosed_fraction": 0.14305203002955486
+    },
+    {
+      "begin": 189,
+      "end_exclusive": 190,
+      "convective": false,
+      "mass_fraction": 0.003399213870072906,
+      "inner_enclosed_fraction": 0.14642730617656163,
+      "outer_enclosed_fraction": 0.14642730617656163
+    },
+    {
+      "begin": 190,
+      "end_exclusive": 191,
+      "convective": false,
+      "mass_fraction": 0.0034470439460331085,
+      "inner_enclosed_fraction": 0.14985045776970068,
+      "outer_enclosed_fraction": 0.14985045776970068
+    },
+    {
+      "begin": 191,
+      "end_exclusive": 192,
+      "convective": false,
+      "mass_fraction": 0.003494773921841607,
+      "inner_enclosed_fraction": 0.15332139406862785,
+      "outer_enclosed_fraction": 0.15332139406862785
+    },
+    {
+      "begin": 192,
+      "end_exclusive": 193,
+      "convective": false,
+      "mass_fraction": 0.003542385028165981,
+      "inner_enclosed_fraction": 0.1568400056133839,
+      "outer_enclosed_fraction": 0.1568400056133839
+    },
+    {
+      "begin": 193,
+      "end_exclusive": 194,
+      "convective": false,
+      "mass_fraction": 0.0035898584023634555,
+      "inner_enclosed_fraction": 0.1604061641249598,
+      "outer_enclosed_fraction": 0.1604061641249598
+    },
+    {
+      "begin": 194,
+      "end_exclusive": 195,
+      "convective": false,
+      "mass_fraction": 0.0036371751007999876,
+      "inner_enclosed_fraction": 0.1640197224181108,
+      "outer_enclosed_fraction": 0.1640197224181108
+    },
+    {
+      "begin": 195,
+      "end_exclusive": 196,
+      "convective": false,
+      "mass_fraction": 0.003684316111317208,
+      "inner_enclosed_fraction": 0.16768051432655978,
+      "outer_enclosed_fraction": 0.16768051432655978
+    },
+    {
+      "begin": 196,
+      "end_exclusive": 197,
+      "convective": false,
+      "mass_fraction": 0.003731262365822936,
+      "inner_enclosed_fraction": 0.17138835464074523,
+      "outer_enclosed_fraction": 0.17138835464074523
+    },
+    {
+      "begin": 197,
+      "end_exclusive": 198,
+      "convective": false,
+      "mass_fraction": 0.0037779947529936043,
+      "inner_enclosed_fraction": 0.17514303905820566,
+      "outer_enclosed_fraction": 0.17514303905820566
+    },
+    {
+      "begin": 198,
+      "end_exclusive": 199,
+      "convective": false,
+      "mass_fraction": 0.003824494131081031,
+      "inner_enclosed_fraction": 0.17894434414673244,
+      "outer_enclosed_fraction": 0.17894434414673244
+    },
+    {
+      "begin": 199,
+      "end_exclusive": 200,
+      "convective": false,
+      "mass_fraction": 0.003870741340804258,
+      "inner_enclosed_fraction": 0.1827920273203677,
+      "outer_enclosed_fraction": 0.1827920273203677
+    },
+    {
+      "begin": 200,
+      "end_exclusive": 201,
+      "convective": false,
+      "mass_fraction": 0.003916717218320985,
+      "inner_enclosed_fraction": 0.18668582682834095,
+      "outer_enclosed_fraction": 0.18668582682834095
+    },
+    {
+      "begin": 201,
+      "end_exclusive": 202,
+      "convective": false,
+      "mass_fraction": 0.003962402608268075,
+      "inner_enclosed_fraction": 0.19062546175700967,
+      "outer_enclosed_fraction": 0.19062546175700967
+    },
+    {
+      "begin": 202,
+      "end_exclusive": 203,
+      "convective": false,
+      "mass_fraction": 0.004007778376843906,
+      "inner_enclosed_fraction": 0.1946106320448771,
+      "outer_enclosed_fraction": 0.1946106320448771
+    },
+    {
+      "begin": 203,
+      "end_exclusive": 204,
+      "convective": false,
+      "mass_fraction": 0.004052825424935315,
+      "inner_enclosed_fraction": 0.1986410185106975,
+      "outer_enclosed_fraction": 0.1986410185106975
+    },
+    {
+      "begin": 204,
+      "end_exclusive": 205,
+      "convective": false,
+      "mass_fraction": 0.004097524701274685,
+      "inner_enclosed_fraction": 0.20271628289474772,
+      "outer_enclosed_fraction": 0.20271628289474772
+    },
+    {
+      "begin": 205,
+      "end_exclusive": 206,
+      "convective": false,
+      "mass_fraction": 0.004141857215596768,
+      "inner_enclosed_fraction": 0.20683606791324685,
+      "outer_enclosed_fraction": 0.20683606791324685
+    },
+    {
+      "begin": 206,
+      "end_exclusive": 207,
+      "convective": false,
+      "mass_fraction": 0.004185804051812385,
+      "inner_enclosed_fraction": 0.21099999732594127,
+      "outer_enclosed_fraction": 0.21099999732594127
+    },
+    {
+      "begin": 207,
+      "end_exclusive": 208,
+      "convective": false,
+      "mass_fraction": 0.004229346381155179,
+      "inner_enclosed_fraction": 0.21520767601687163,
+      "outer_enclosed_fraction": 0.21520767601687163
+    },
+    {
+      "begin": 208,
+      "end_exclusive": 209,
+      "convective": false,
+      "mass_fraction": 0.00427246547530783,
+      "inner_enclosed_fraction": 0.2194586900882516,
+      "outer_enclosed_fraction": 0.2194586900882516
+    },
+    {
+      "begin": 209,
+      "end_exclusive": 210,
+      "convective": false,
+      "mass_fraction": 0.004315142719494522,
+      "inner_enclosed_fraction": 0.2237526069674873,
+      "outer_enclosed_fraction": 0.2237526069674873
+    },
+    {
+      "begin": 210,
+      "end_exclusive": 211,
+      "convective": false,
+      "mass_fraction": 0.004357359625507515,
+      "inner_enclosed_fraction": 0.22808897552724067,
+      "outer_enclosed_fraction": 0.22808897552724067
+    },
+    {
+      "begin": 211,
+      "end_exclusive": 212,
+      "convective": false,
+      "mass_fraction": 0.004399097844683756,
+      "inner_enclosed_fraction": 0.23246732621850233,
+      "outer_enclosed_fraction": 0.23246732621850233
+    },
+    {
+      "begin": 212,
+      "end_exclusive": 213,
+      "convective": false,
+      "mass_fraction": 0.0044403391807967315,
+      "inner_enclosed_fraction": 0.23688717121660818,
+      "outer_enclosed_fraction": 0.23688717121660818
+    },
+    {
+      "begin": 213,
+      "end_exclusive": 214,
+      "convective": false,
+      "mass_fraction": 0.0044810656028533725,
+      "inner_enclosed_fraction": 0.24134800458009578,
+      "outer_enclosed_fraction": 0.24134800458009578
+    },
+    {
+      "begin": 214,
+      "end_exclusive": 215,
+      "convective": false,
+      "mass_fraction": 0.004521259257793409,
+      "inner_enclosed_fraction": 0.24584930242231492,
+      "outer_enclosed_fraction": 0.24584930242231492
+    },
+    {
+      "begin": 215,
+      "end_exclusive": 216,
+      "convective": false,
+      "mass_fraction": 0.004560902483072225,
+      "inner_enclosed_fraction": 0.2503905230956826,
+      "outer_enclosed_fraction": 0.2503905230956826
+    },
+    {
+      "begin": 216,
+      "end_exclusive": 217,
+      "convective": false,
+      "mass_fraction": 0.004599977819114055,
+      "inner_enclosed_fraction": 0.25497110738845935,
+      "outer_enclosed_fraction": 0.25497110738845935
+    },
+    {
+      "begin": 217,
+      "end_exclusive": 218,
+      "convective": false,
+      "mass_fraction": 0.004638468021621055,
+      "inner_enclosed_fraction": 0.2595904787339107,
+      "outer_enclosed_fraction": 0.2595904787339107
+    },
+    {
+      "begin": 218,
+      "end_exclusive": 219,
+      "convective": false,
+      "mass_fraction": 0.004676356073736,
+      "inner_enclosed_fraction": 0.2642480434317015,
+      "outer_enclosed_fraction": 0.2642480434317015
+    },
+    {
+      "begin": 219,
+      "end_exclusive": 220,
+      "convective": false,
+      "mass_fraction": 0.00471362519803169,
+      "inner_enclosed_fraction": 0.2689431908813827,
+      "outer_enclosed_fraction": 0.2689431908813827
+    },
+    {
+      "begin": 220,
+      "end_exclusive": 221,
+      "convective": false,
+      "mass_fraction": 0.004750258868330045,
+      "inner_enclosed_fraction": 0.27367529382776484,
+      "outer_enclosed_fraction": 0.27367529382776484
+    },
+    {
+      "begin": 221,
+      "end_exclusive": 222,
+      "convective": false,
+      "mass_fraction": 0.004786240821328455,
+      "inner_enclosed_fraction": 0.2784437086180428,
+      "outer_enclosed_fraction": 0.2784437086180428
+    },
+    {
+      "begin": 222,
+      "end_exclusive": 223,
+      "convective": false,
+      "mass_fraction": 0.004821555068030007,
+      "inner_enclosed_fraction": 0.2832477754704218,
+      "outer_enclosed_fraction": 0.2832477754704218
+    },
+    {
+      "begin": 223,
+      "end_exclusive": 224,
+      "convective": false,
+      "mass_fraction": 0.004856185904959994,
+      "inner_enclosed_fraction": 0.2880868187541028,
+      "outer_enclosed_fraction": 0.2880868187541028
+    },
+    {
+      "begin": 224,
+      "end_exclusive": 225,
+      "convective": false,
+      "mass_fraction": 0.004890117925153287,
+      "inner_enclosed_fraction": 0.29296014728034175,
+      "outer_enclosed_fraction": 0.29296014728034175
+    },
+    {
+      "begin": 225,
+      "end_exclusive": 226,
+      "convective": false,
+      "mass_fraction": 0.0049233360289265456,
+      "inner_enclosed_fraction": 0.2978670546044094,
+      "outer_enclosed_fraction": 0.2978670546044094
+    },
+    {
+      "begin": 226,
+      "end_exclusive": 227,
+      "convective": false,
+      "mass_fraction": 0.004955825434394474,
+      "inner_enclosed_fraction": 0.30280681933819487,
+      "outer_enclosed_fraction": 0.30280681933819487
+    },
+    {
+      "begin": 227,
+      "end_exclusive": 228,
+      "convective": false,
+      "mass_fraction": 0.004987571687728684,
+      "inner_enclosed_fraction": 0.30777870547319836,
+      "outer_enclosed_fraction": 0.30777870547319836
+    },
+    {
+      "begin": 228,
+      "end_exclusive": 229,
+      "convective": false,
+      "mass_fraction": 0.005018560673168051,
+      "inner_enclosed_fraction": 0.3127819627136522,
+      "outer_enclosed_fraction": 0.3127819627136522
+    },
+    {
+      "begin": 229,
+      "end_exclusive": 230,
+      "convective": false,
+      "mass_fraction": 0.0050487786227501495,
+      "inner_enclosed_fraction": 0.31781582681953446,
+      "outer_enclosed_fraction": 0.31781582681953446
+    },
+    {
+      "begin": 230,
+      "end_exclusive": 231,
+      "convective": false,
+      "mass_fraction": 0.005078212125751257,
+      "inner_enclosed_fraction": 0.32287951995915254,
+      "outer_enclosed_fraction": 0.32287951995915254
+    },
+    {
+      "begin": 231,
+      "end_exclusive": 232,
+      "convective": false,
+      "mass_fraction": 0.005106848137854224,
+      "inner_enclosed_fraction": 0.32797225107103695,
+      "outer_enclosed_fraction": 0.32797225107103695
+    },
+    {
+      "begin": 232,
+      "end_exclusive": 233,
+      "convective": false,
+      "mass_fraction": 0.005134673990008935,
+      "inner_enclosed_fraction": 0.333093216234861,
+      "outer_enclosed_fraction": 0.333093216234861
+    },
+    {
+      "begin": 233,
+      "end_exclusive": 234,
+      "convective": false,
+      "mass_fraction": 0.00516167739698396,
+      "inner_enclosed_fraction": 0.33824159905105483,
+      "outer_enclosed_fraction": 0.33824159905105483
+    },
+    {
+      "begin": 234,
+      "end_exclusive": 235,
+      "convective": false,
+      "mass_fraction": 0.005187846465602684,
+      "inner_enclosed_fraction": 0.3434165710288289,
+      "outer_enclosed_fraction": 0.3434165710288289
+    },
+    {
+      "begin": 235,
+      "end_exclusive": 236,
+      "convective": false,
+      "mass_fraction": 0.005213169702669164,
+      "inner_enclosed_fraction": 0.3486172919822602,
+      "outer_enclosed_fraction": 0.3486172919822602
+    },
+    {
+      "begin": 236,
+      "end_exclusive": 237,
+      "convective": false,
+      "mass_fraction": 0.0052376360225564675,
+      "inner_enclosed_fraction": 0.3538429104341672,
+      "outer_enclosed_fraction": 0.3538429104341672
+    },
+    {
+      "begin": 237,
+      "end_exclusive": 238,
+      "convective": false,
+      "mass_fraction": 0.005261234754456354,
+      "inner_enclosed_fraction": 0.3590925640273731,
+      "outer_enclosed_fraction": 0.3590925640273731
+    },
+    {
+      "begin": 238,
+      "end_exclusive": 239,
+      "convective": false,
+      "mass_fraction": 0.0052839556492957065,
+      "inner_enclosed_fraction": 0.36436537994307994,
+      "outer_enclosed_fraction": 0.36436537994307994
+    },
+    {
+      "begin": 239,
+      "end_exclusive": 240,
+      "convective": false,
+      "mass_fraction": 0.005305788886311717,
+      "inner_enclosed_fraction": 0.3696604753259645,
+      "outer_enclosed_fraction": 0.3696604753259645
+    },
+    {
+      "begin": 240,
+      "end_exclusive": 241,
+      "convective": false,
+      "mass_fraction": 0.00532672507925894,
+      "inner_enclosed_fraction": 0.37497695771570333,
+      "outer_enclosed_fraction": 0.37497695771570333
+    },
+    {
+      "begin": 241,
+      "end_exclusive": 242,
+      "convective": false,
+      "mass_fraction": 0.0053467552822677,
+      "inner_enclosed_fraction": 0.3803139254844824,
+      "outer_enclosed_fraction": 0.3803139254844824
+    },
+    {
+      "begin": 242,
+      "end_exclusive": 243,
+      "convective": false,
+      "mass_fraction": 0.005365870995348336,
+      "inner_enclosed_fraction": 0.38567046828023877,
+      "outer_enclosed_fraction": 0.38567046828023877
+    },
+    {
+      "begin": 243,
+      "end_exclusive": 244,
+      "convective": false,
+      "mass_fraction": 0.005384064169515123,
+      "inner_enclosed_fraction": 0.3910456674751791,
+      "outer_enclosed_fraction": 0.3910456674751791
+    },
+    {
+      "begin": 244,
+      "end_exclusive": 245,
+      "convective": false,
+      "mass_fraction": 0.00540132721155774,
+      "inner_enclosed_fraction": 0.396438596619269,
+      "outer_enclosed_fraction": 0.396438596619269
+    },
+    {
+      "begin": 245,
+      "end_exclusive": 246,
+      "convective": false,
+      "mass_fraction": 0.0054176529884265735,
+      "inner_enclosed_fraction": 0.40184832189829456,
+      "outer_enclosed_fraction": 0.40184832189829456
+    },
+    {
+      "begin": 246,
+      "end_exclusive": 247,
+      "convective": false,
+      "mass_fraction": 0.005433034831254207,
+      "inner_enclosed_fraction": 0.4072739025961222,
+      "outer_enclosed_fraction": 0.4072739025961222
+    },
+    {
+      "begin": 247,
+      "end_exclusive": 248,
+      "convective": false,
+      "mass_fraction": 0.005447466538992686,
+      "inner_enclosed_fraction": 0.412714391560803,
+      "outer_enclosed_fraction": 0.412714391560803
+    },
+    {
+      "begin": 248,
+      "end_exclusive": 249,
+      "convective": false,
+      "mass_fraction": 0.00546094238167542,
+      "inner_enclosed_fraction": 0.4181688356741075,
+      "outer_enclosed_fraction": 0.4181688356741075
+    },
+    {
+      "begin": 249,
+      "end_exclusive": 250,
+      "convective": false,
+      "mass_fraction": 0.005473457103297348,
+      "inner_enclosed_fraction": 0.42363627632415385,
+      "outer_enclosed_fraction": 0.42363627632415385
+    },
+    {
+      "begin": 250,
+      "end_exclusive": 251,
+      "convective": false,
+      "mass_fraction": 0.005485005924313903,
+      "inner_enclosed_fraction": 0.4291157498807022,
+      "outer_enclosed_fraction": 0.4291157498807022
+    },
+    {
+      "begin": 251,
+      "end_exclusive": 252,
+      "convective": false,
+      "mass_fraction": 0.005495584543764715,
+      "inner_enclosed_fraction": 0.43460628817278163,
+      "outer_enclosed_fraction": 0.43460628817278163
+    },
+    {
+      "begin": 252,
+      "end_exclusive": 253,
+      "convective": false,
+      "mass_fraction": 0.005505189141002182,
+      "inner_enclosed_fraction": 0.4401069189682317,
+      "outer_enclosed_fraction": 0.4401069189682317
+    },
+    {
+      "begin": 253,
+      "end_exclusive": 254,
+      "convective": false,
+      "mass_fraction": 0.005513816377052598,
+      "inner_enclosed_fraction": 0.445616666454786,
+      "outer_enclosed_fraction": 0.445616666454786
+    },
+    {
+      "begin": 254,
+      "end_exclusive": 255,
+      "convective": false,
+      "mass_fraction": 0.0055214633955855885,
+      "inner_enclosed_fraction": 0.45113455172233685,
+      "outer_enclosed_fraction": 0.45113455172233685
+    },
+    {
+      "begin": 255,
+      "end_exclusive": 256,
+      "convective": false,
+      "mass_fraction": 0.005528127823511866,
+      "inner_enclosed_fraction": 0.4566595932459572,
+      "outer_enclosed_fraction": 0.4566595932459572
+    },
+    {
+      "begin": 256,
+      "end_exclusive": 257,
+      "convective": false,
+      "mass_fraction": 0.00553380777119899,
+      "inner_enclosed_fraction": 0.4621908073693606,
+      "outer_enclosed_fraction": 0.4621908073693606
+    },
+    {
+      "begin": 257,
+      "end_exclusive": 258,
+      "convective": false,
+      "mass_fraction": 0.005538501832308698,
+      "inner_enclosed_fraction": 0.46772720878835516,
+      "outer_enclosed_fraction": 0.46772720878835516
+    },
+    {
+      "begin": 258,
+      "end_exclusive": 259,
+      "convective": false,
+      "mass_fraction": 0.005542209083269451,
+      "inner_enclosed_fraction": 0.47326781103397797,
+      "outer_enclosed_fraction": 0.47326781103397797
+    },
+    {
+      "begin": 259,
+      "end_exclusive": 260,
+      "convective": false,
+      "mass_fraction": 0.005544929082363034,
+      "inner_enclosed_fraction": 0.47881162695489404,
+      "outer_enclosed_fraction": 0.47881162695489404
+    },
+    {
+      "begin": 260,
+      "end_exclusive": 261,
+      "convective": false,
+      "mass_fraction": 0.005546661868460455,
+      "inner_enclosed_fraction": 0.48435766919870404,
+      "outer_enclosed_fraction": 0.48435766919870404
+    },
+    {
+      "begin": 261,
+      "end_exclusive": 262,
+      "convective": false,
+      "mass_fraction": 0.005547407959389615,
+      "inner_enclosed_fraction": 0.48990495069181494,
+      "outer_enclosed_fraction": 0.48990495069181494
+    },
+    {
+      "begin": 262,
+      "end_exclusive": 263,
+      "convective": false,
+      "mass_fraction": 0.005547168349921201,
+      "inner_enclosed_fraction": 0.49545248511748324,
+      "outer_enclosed_fraction": 0.49545248511748324
+    },
+    {
+      "begin": 263,
+      "end_exclusive": 264,
+      "convective": false,
+      "mass_fraction": 0.005545944509426298,
+      "inner_enclosed_fraction": 0.5009992873916573,
+      "outer_enclosed_fraction": 0.5009992873916573
+    },
+    {
+      "begin": 264,
+      "end_exclusive": 265,
+      "convective": false,
+      "mass_fraction": 0.005543738379183258,
+      "inner_enclosed_fraction": 0.5065443741363359,
+      "outer_enclosed_fraction": 0.5065443741363359
+    },
+    {
+      "begin": 265,
+      "end_exclusive": 266,
+      "convective": false,
+      "mass_fraction": 0.005540552369303971,
+      "inner_enclosed_fraction": 0.5120867641500239,
+      "outer_enclosed_fraction": 0.5120867641500239
+    },
+    {
+      "begin": 266,
+      "end_exclusive": 267,
+      "convective": false,
+      "mass_fraction": 0.005536389355357268,
+      "inner_enclosed_fraction": 0.5176254788749438,
+      "outer_enclosed_fraction": 0.5176254788749438
+    },
+    {
+      "begin": 267,
+      "end_exclusive": 268,
+      "convective": false,
+      "mass_fraction": 0.005531252674637323,
+      "inner_enclosed_fraction": 0.5231595428607384,
+      "outer_enclosed_fraction": 0.5231595428607384
+    },
+    {
+      "begin": 268,
+      "end_exclusive": 269,
+      "convective": false,
+      "mass_fraction": 0.005525146122099106,
+      "inner_enclosed_fraction": 0.5286879842242185,
+      "outer_enclosed_fraction": 0.5286879842242185
+    },
+    {
+      "begin": 269,
+      "end_exclusive": 270,
+      "convective": false,
+      "mass_fraction": 0.005518073945995096,
+      "inner_enclosed_fraction": 0.5342098351049366,
+      "outer_enclosed_fraction": 0.5342098351049366
+    },
+    {
+      "begin": 270,
+      "end_exclusive": 271,
+      "convective": false,
+      "mass_fraction": 0.005510040843158529,
+      "inner_enclosed_fraction": 0.5397241321162086,
+      "outer_enclosed_fraction": 0.5397241321162086
+    },
+    {
+      "begin": 271,
+      "end_exclusive": 272,
+      "convective": false,
+      "mass_fraction": 0.0055010519539975085,
+      "inner_enclosed_fraction": 0.5452299167912537,
+      "outer_enclosed_fraction": 0.5452299167912537
+    },
+    {
+      "begin": 272,
+      "end_exclusive": 273,
+      "convective": false,
+      "mass_fraction": 0.005491112857199741,
+      "inner_enclosed_fraction": 0.5507262360242037,
+      "outer_enclosed_fraction": 0.5507262360242037
+    },
+    {
+      "begin": 273,
+      "end_exclusive": 274,
+      "convective": false,
+      "mass_fraction": 0.005480229564111314,
+      "inner_enclosed_fraction": 0.5562121425056532,
+      "outer_enclosed_fraction": 0.5562121425056532
+    },
+    {
+      "begin": 274,
+      "end_exclusive": 275,
+      "convective": false,
+      "mass_fraction": 0.005468408512840546,
+      "inner_enclosed_fraction": 0.5616866951524263,
+      "outer_enclosed_fraction": 0.5616866951524263
+    },
+    {
+      "begin": 275,
+      "end_exclusive": 276,
+      "convective": false,
+      "mass_fraction": 0.005455656562090558,
+      "inner_enclosed_fraction": 0.5671489595313343,
+      "outer_enclosed_fraction": 0.5671489595313343
+    },
+    {
+      "begin": 276,
+      "end_exclusive": 277,
+      "convective": false,
+      "mass_fraction": 0.005441980984706947,
+      "inner_enclosed_fraction": 0.5725980082766075,
+      "outer_enclosed_fraction": 0.5725980082766075
+    },
+    {
+      "begin": 277,
+      "end_exclusive": 278,
+      "convective": false,
+      "mass_fraction": 0.005427389460968084,
+      "inner_enclosed_fraction": 0.5780329215007481,
+      "outer_enclosed_fraction": 0.5780329215007481
+    },
+    {
+      "begin": 278,
+      "end_exclusive": 279,
+      "convective": false,
+      "mass_fraction": 0.005411890071619113,
+      "inner_enclosed_fraction": 0.5834527871985435,
+      "outer_enclosed_fraction": 0.5834527871985435
+    },
+    {
+      "begin": 279,
+      "end_exclusive": 280,
+      "convective": false,
+      "mass_fraction": 0.005395491290648465,
+      "inner_enclosed_fraction": 0.5888567016439864,
+      "outer_enclosed_fraction": 0.5888567016439864
+    },
+    {
+      "begin": 280,
+      "end_exclusive": 281,
+      "convective": false,
+      "mass_fraction": 0.0053782019778419185,
+      "inner_enclosed_fraction": 0.5942437697798405,
+      "outer_enclosed_fraction": 0.5942437697798405
+    },
+    {
+      "begin": 281,
+      "end_exclusive": 282,
+      "convective": false,
+      "mass_fraction": 0.0053600313711072685,
+      "inner_enclosed_fraction": 0.5996131055996702,
+      "outer_enclosed_fraction": 0.5996131055996702
+    },
+    {
+      "begin": 282,
+      "end_exclusive": 283,
+      "convective": false,
+      "mass_fraction": 0.005340989078555511,
+      "inner_enclosed_fraction": 0.604963832522055,
+      "outer_enclosed_fraction": 0.604963832522055
+    },
+    {
+      "begin": 283,
+      "end_exclusive": 284,
+      "convective": false,
+      "mass_fraction": 0.005321085070395854,
+      "inner_enclosed_fraction": 0.6102950837567812,
+      "outer_enclosed_fraction": 0.6102950837567812
+    },
+    {
+      "begin": 284,
+      "end_exclusive": 285,
+      "convective": false,
+      "mass_fraction": 0.005300329670623896,
+      "inner_enclosed_fraction": 0.6156060026628467,
+      "outer_enclosed_fraction": 0.6156060026628467
+    },
+    {
+      "begin": 285,
+      "end_exclusive": 286,
+      "convective": false,
+      "mass_fraction": 0.005278733548504375,
+      "inner_enclosed_fraction": 0.6208957430980291,
+      "outer_enclosed_fraction": 0.6208957430980291
+    },
+    {
+      "begin": 286,
+      "end_exclusive": 287,
+      "convective": false,
+      "mass_fraction": 0.005256307709883638,
+      "inner_enclosed_fraction": 0.6261634697598555,
+      "outer_enclosed_fraction": 0.6261634697598555
+    },
+    {
+      "begin": 287,
+      "end_exclusive": 288,
+      "convective": false,
+      "mass_fraction": 0.005233063488327761,
+      "inner_enclosed_fraction": 0.6314083585177963,
+      "outer_enclosed_fraction": 0.6314083585177963
+    },
+    {
+      "begin": 288,
+      "end_exclusive": 289,
+      "convective": false,
+      "mass_fraction": 0.0052090125360930144,
+      "inner_enclosed_fraction": 0.636629596736511,
+      "outer_enclosed_fraction": 0.636629596736511
+    },
+    {
+      "begin": 289,
+      "end_exclusive": 290,
+      "convective": false,
+      "mass_fraction": 0.005184166814940193,
+      "inner_enclosed_fraction": 0.6418263835899823,
+      "outer_enclosed_fraction": 0.6418263835899823
+    },
+    {
+      "begin": 290,
+      "end_exclusive": 291,
+      "convective": false,
+      "mass_fraction": 0.005158538586810001,
+      "inner_enclosed_fraction": 0.6469979303663914,
+      "outer_enclosed_fraction": 0.6469979303663914
+    },
+    {
+      "begin": 291,
+      "end_exclusive": 292,
+      "convective": false,
+      "mass_fraction": 0.005132140404356758,
+      "inner_enclosed_fraction": 0.6521434607636023,
+      "outer_enclosed_fraction": 0.6521434607636023
+    },
+    {
+      "begin": 292,
+      "end_exclusive": 293,
+      "convective": false,
+      "mass_fraction": 0.005104985101372656,
+      "inner_enclosed_fraction": 0.657262211175105,
+      "outer_enclosed_fraction": 0.657262211175105
+    },
+    {
+      "begin": 293,
+      "end_exclusive": 294,
+      "convective": false,
+      "mass_fraction": 0.005077085783078704,
+      "inner_enclosed_fraction": 0.6623534309663477,
+      "outer_enclosed_fraction": 0.6623534309663477
+    },
+    {
+      "begin": 294,
+      "end_exclusive": 295,
+      "convective": false,
+      "mass_fraction": 0.005048455816309449,
+      "inner_enclosed_fraction": 0.6674163827412624,
+      "outer_enclosed_fraction": 0.6674163827412624
+    },
+    {
+      "begin": 295,
+      "end_exclusive": 296,
+      "convective": false,
+      "mass_fraction": 0.005019108819621865,
+      "inner_enclosed_fraction": 0.6724503425989665,
+      "outer_enclosed_fraction": 0.6724503425989665
+    },
+    {
+      "begin": 296,
+      "end_exclusive": 297,
+      "convective": false,
+      "mass_fraction": 0.004989058653308121,
+      "inner_enclosed_fraction": 0.6774546003805061,
+      "outer_enclosed_fraction": 0.6774546003805061
+    },
+    {
+      "begin": 297,
+      "end_exclusive": 298,
+      "convective": false,
+      "mass_fraction": 0.0049583194093183874,
+      "inner_enclosed_fraction": 0.6824284599055828,
+      "outer_enclosed_fraction": 0.6824284599055828
+    },
+    {
+      "begin": 298,
+      "end_exclusive": 299,
+      "convective": false,
+      "mass_fraction": 0.004926905401127375,
+      "inner_enclosed_fraction": 0.6873712391991428,
+      "outer_enclosed_fraction": 0.6873712391991428
+    },
+    {
+      "begin": 299,
+      "end_exclusive": 300,
+      "convective": false,
+      "mass_fraction": 0.004894831153561742,
+      "inner_enclosed_fraction": 0.6922822707078375,
+      "outer_enclosed_fraction": 0.6922822707078375
+    },
+    {
+      "begin": 300,
+      "end_exclusive": 301,
+      "convective": false,
+      "mass_fraction": 0.004862111392542613,
+      "inner_enclosed_fraction": 0.6971609015062663,
+      "outer_enclosed_fraction": 0.6971609015062663
+    },
+    {
+      "begin": 301,
+      "end_exclusive": 302,
+      "convective": false,
+      "mass_fraction": 0.004828761034812374,
+      "inner_enclosed_fraction": 0.7020064934929228,
+      "outer_enclosed_fraction": 0.7020064934929228
+    },
+    {
+      "begin": 302,
+      "end_exclusive": 303,
+      "convective": false,
+      "mass_fraction": 0.004794795177641312,
+      "inner_enclosed_fraction": 0.7068184235758911,
+      "outer_enclosed_fraction": 0.7068184235758911
+    },
+    {
+      "begin": 303,
+      "end_exclusive": 304,
+      "convective": false,
+      "mass_fraction": 0.004760229088482979,
+      "inner_enclosed_fraction": 0.7115960838482054,
+      "outer_enclosed_fraction": 0.7115960838482054
+    },
+    {
+      "begin": 304,
+      "end_exclusive": 305,
+      "convective": false,
+      "mass_fraction": 0.00472507819464255,
+      "inner_enclosed_fraction": 0.716338881752857,
+      "outer_enclosed_fraction": 0.716338881752857
+    },
+    {
+      "begin": 305,
+      "end_exclusive": 306,
+      "convective": false,
+      "mass_fraction": 0.004689358072941568,
+      "inner_enclosed_fraction": 0.7210462402374905,
+      "outer_enclosed_fraction": 0.7210462402374905
+    },
+    {
+      "begin": 306,
+      "end_exclusive": 307,
+      "convective": false,
+      "mass_fraction": 0.004653084439370943,
+      "inner_enclosed_fraction": 0.7257175978987401,
+      "outer_enclosed_fraction": 0.7257175978987401
+    },
+    {
+      "begin": 307,
+      "end_exclusive": 308,
+      "convective": false,
+      "mass_fraction": 0.0046162731387794365,
+      "inner_enclosed_fraction": 0.7303524091162323,
+      "outer_enclosed_fraction": 0.7303524091162323
+    },
+    {
+      "begin": 308,
+      "end_exclusive": 309,
+      "convective": false,
+      "mass_fraction": 0.004578940134580515,
+      "inner_enclosed_fraction": 0.734950144176299,
+      "outer_enclosed_fraction": 0.734950144176299
+    },
+    {
+      "begin": 309,
+      "end_exclusive": 310,
+      "convective": false,
+      "mass_fraction": 0.004541101498472322,
+      "inner_enclosed_fraction": 0.7395102893853934,
+      "outer_enclosed_fraction": 0.7395102893853934
+    },
+    {
+      "begin": 310,
+      "end_exclusive": 311,
+      "convective": false,
+      "mass_fraction": 0.0045027734002193185,
+      "inner_enclosed_fraction": 0.7440323471732436,
+      "outer_enclosed_fraction": 0.7440323471732436
+    },
+    {
+      "begin": 311,
+      "end_exclusive": 312,
+      "convective": false,
+      "mass_fraction": 0.004463972097481057,
+      "inner_enclosed_fraction": 0.7485158361858321,
+      "outer_enclosed_fraction": 0.7485158361858321
+    },
+    {
+      "begin": 312,
+      "end_exclusive": 313,
+      "convective": false,
+      "mass_fraction": 0.0044247139256763665,
+      "inner_enclosed_fraction": 0.7529602913682057,
+      "outer_enclosed_fraction": 0.7529602913682057
+    },
+    {
+      "begin": 313,
+      "end_exclusive": 314,
+      "convective": false,
+      "mass_fraction": 0.004385015287925452,
+      "inner_enclosed_fraction": 0.7573652640371847,
+      "outer_enclosed_fraction": 0.7573652640371847
+    },
+    {
+      "begin": 314,
+      "end_exclusive": 315,
+      "convective": false,
+      "mass_fraction": 0.004344892645068098,
+      "inner_enclosed_fraction": 0.7617303219440567,
+      "outer_enclosed_fraction": 0.7617303219440567
+    },
+    {
+      "begin": 315,
+      "end_exclusive": 316,
+      "convective": false,
+      "mass_fraction": 0.004304362505737276,
+      "inner_enclosed_fraction": 0.7660550493273209,
+      "outer_enclosed_fraction": 0.7660550493273209
+    },
+    {
+      "begin": 316,
+      "end_exclusive": 317,
+      "convective": false,
+      "mass_fraction": 0.004263441416540413,
+      "inner_enclosed_fraction": 0.7703390469555312,
+      "outer_enclosed_fraction": 0.7703390469555312
+    },
+    {
+      "begin": 317,
+      "end_exclusive": 318,
+      "convective": false,
+      "mass_fraction": 0.004222145952321219,
+      "inner_enclosed_fraction": 0.7745819321604018,
+      "outer_enclosed_fraction": 0.7745819321604018
+    },
+    {
+      "begin": 318,
+      "end_exclusive": 319,
+      "convective": false,
+      "mass_fraction": 0.004180492706507023,
+      "inner_enclosed_fraction": 0.7787833388601737,
+      "outer_enclosed_fraction": 0.7787833388601737
+    },
+    {
+      "begin": 319,
+      "end_exclusive": 320,
+      "convective": false,
+      "mass_fraction": 0.0041384982815894766,
+      "inner_enclosed_fraction": 0.7829429175734158,
+      "outer_enclosed_fraction": 0.7829429175734158
+    },
+    {
+      "begin": 320,
+      "end_exclusive": 321,
+      "convective": false,
+      "mass_fraction": 0.0040961792796897325,
+      "inner_enclosed_fraction": 0.7870603354233526,
+      "outer_enclosed_fraction": 0.7870603354233526
+    },
+    {
+      "begin": 321,
+      "end_exclusive": 322,
+      "convective": false,
+      "mass_fraction": 0.004053552293249108,
+      "inner_enclosed_fraction": 0.7911352761327953,
+      "outer_enclosed_fraction": 0.7911352761327953
+    },
+    {
+      "begin": 322,
+      "end_exclusive": 323,
+      "convective": false,
+      "mass_fraction": 0.004010633895842728,
+      "inner_enclosed_fraction": 0.7951674400098508,
+      "outer_enclosed_fraction": 0.7951674400098508
+    },
+    {
+      "begin": 323,
+      "end_exclusive": 324,
+      "convective": false,
+      "mass_fraction": 0.003967440633115971,
+      "inner_enclosed_fraction": 0.7991565439244808,
+      "outer_enclosed_fraction": 0.7991565439244808
+    },
+    {
+      "begin": 324,
+      "end_exclusive": 325,
+      "convective": false,
+      "mass_fraction": 0.003923989013862888,
+      "inner_enclosed_fraction": 0.8031023212760828,
+      "outer_enclosed_fraction": 0.8031023212760828
+    },
+    {
+      "begin": 325,
+      "end_exclusive": 326,
+      "convective": false,
+      "mass_fraction": 0.003880295501228598,
+      "inner_enclosed_fraction": 0.8070045219522065,
+      "outer_enclosed_fraction": 0.8070045219522065
+    },
+    {
+      "begin": 326,
+      "end_exclusive": 327,
+      "convective": false,
+      "mass_fraction": 0.0038363765040614357,
+      "inner_enclosed_fraction": 0.81086291227854,
+      "outer_enclosed_fraction": 0.81086291227854
+    },
+    {
+      "begin": 327,
+      "end_exclusive": 328,
+      "convective": false,
+      "mass_fraction": 0.0037922483684159113,
+      "inner_enclosed_fraction": 0.8146772749603294,
+      "outer_enclosed_fraction": 0.8146772749603294
+    },
+    {
+      "begin": 328,
+      "end_exclusive": 329,
+      "convective": false,
+      "mass_fraction": 0.003747927369199616,
+      "inner_enclosed_fraction": 0.8184474090153718,
+      "outer_enclosed_fraction": 0.8184474090153718
+    },
+    {
+      "begin": 329,
+      "end_exclusive": 330,
+      "convective": false,
+      "mass_fraction": 0.0037034297019822126,
+      "inner_enclosed_fraction": 0.8221731296987287,
+      "outer_enclosed_fraction": 0.8221731296987287
+    },
+    {
+      "begin": 330,
+      "end_exclusive": 331,
+      "convective": false,
+      "mass_fraction": 0.0036587714749574864,
+      "inner_enclosed_fraction": 0.8258542684193363,
+      "outer_enclosed_fraction": 0.8258542684193363
+    },
+    {
+      "begin": 331,
+      "end_exclusive": 332,
+      "convective": false,
+      "mass_fraction": 0.003613968701063581,
+      "inner_enclosed_fraction": 0.8294906726486436,
+      "outer_enclosed_fraction": 0.8294906726486436
+    },
+    {
+      "begin": 332,
+      "end_exclusive": 333,
+      "convective": false,
+      "mass_fraction": 0.0035690372902940294,
+      "inner_enclosed_fraction": 0.8330822058214634,
+      "outer_enclosed_fraction": 0.8330822058214634
+    },
+    {
+      "begin": 333,
+      "end_exclusive": 334,
+      "convective": false,
+      "mass_fraction": 0.003523993042149168,
+      "inner_enclosed_fraction": 0.8366287472292316,
+      "outer_enclosed_fraction": 0.8366287472292316
+    },
+    {
+      "begin": 334,
+      "end_exclusive": 335,
+      "convective": false,
+      "mass_fraction": 0.00347885163827277,
+      "inner_enclosed_fraction": 0.8401301919057618,
+      "outer_enclosed_fraction": 0.8401301919057618
+    },
+    {
+      "begin": 335,
+      "end_exclusive": 336,
+      "convective": false,
+      "mass_fraction": 0.0034336286352689756,
+      "inner_enclosed_fraction": 0.8435864505057772,
+      "outer_enclosed_fraction": 0.8435864505057772
+    },
+    {
+      "begin": 336,
+      "end_exclusive": 337,
+      "convective": false,
+      "mass_fraction": 0.003388339457684192,
+      "inner_enclosed_fraction": 0.8469974491762997,
+      "outer_enclosed_fraction": 0.8469974491762997
+    },
+    {
+      "begin": 337,
+      "end_exclusive": 338,
+      "convective": false,
+      "mass_fraction": 0.0033429993911913,
+      "inner_enclosed_fraction": 0.8503631294211456,
+      "outer_enclosed_fraction": 0.8503631294211456
+    },
+    {
+      "begin": 338,
+      "end_exclusive": 339,
+      "convective": false,
+      "mass_fraction": 0.003297623575923889,
+      "inner_enclosed_fraction": 0.8536834479586823,
+      "outer_enclosed_fraction": 0.8536834479586823
+    },
+    {
+      "begin": 339,
+      "end_exclusive": 340,
+      "convective": false,
+      "mass_fraction": 0.0032522270000220344,
+      "inner_enclosed_fraction": 0.8569583765729933,
+      "outer_enclosed_fraction": 0.8569583765729933
+    },
+    {
+      "begin": 340,
+      "end_exclusive": 341,
+      "convective": false,
+      "mass_fraction": 0.0032068244933611744,
+      "inner_enclosed_fraction": 0.8601879019587264,
+      "outer_enclosed_fraction": 0.8601879019587264
+    },
+    {
+      "begin": 341,
+      "end_exclusive": 342,
+      "convective": false,
+      "mass_fraction": 0.0031614307214435145,
+      "inner_enclosed_fraction": 0.8633720255597157,
+      "outer_enclosed_fraction": 0.8633720255597157
+    },
+    {
+      "begin": 342,
+      "end_exclusive": 343,
+      "convective": false,
+      "mass_fraction": 0.003116060179513662,
+      "inner_enclosed_fraction": 0.8665107634016134,
+      "outer_enclosed_fraction": 0.8665107634016134
+    },
+    {
+      "begin": 343,
+      "end_exclusive": 344,
+      "convective": false,
+      "mass_fraction": 0.00307072718684277,
+      "inner_enclosed_fraction": 0.869604145918743,
+      "outer_enclosed_fraction": 0.869604145918743
+    },
+    {
+      "begin": 344,
+      "end_exclusive": 345,
+      "convective": false,
+      "mass_fraction": 0.0030254458811969564,
+      "inner_enclosed_fraction": 0.8726522177752989,
+      "outer_enclosed_fraction": 0.8726522177752989
+    },
+    {
+      "begin": 345,
+      "end_exclusive": 346,
+      "convective": false,
+      "mass_fraction": 0.0029802302135196203,
+      "inner_enclosed_fraction": 0.875655037681137,
+      "outer_enclosed_fraction": 0.875655037681137
+    },
+    {
+      "begin": 346,
+      "end_exclusive": 347,
+      "convective": false,
+      "mass_fraction": 0.002935093942791243,
+      "inner_enclosed_fraction": 0.8786126782023381,
+      "outer_enclosed_fraction": 0.8786126782023381
+    },
+    {
+      "begin": 347,
+      "end_exclusive": 348,
+      "convective": false,
+      "mass_fraction": 0.0028900506310763534,
+      "inner_enclosed_fraction": 0.8815252255667194,
+      "outer_enclosed_fraction": 0.8815252255667194
+    },
+    {
+      "begin": 348,
+      "end_exclusive": 349,
+      "convective": false,
+      "mass_fraction": 0.0028451136387745296,
+      "inner_enclosed_fraction": 0.8843927794644909,
+      "outer_enclosed_fraction": 0.8843927794644909
+    },
+    {
+      "begin": 349,
+      "end_exclusive": 350,
+      "convective": false,
+      "mass_fraction": 0.0028002961200635466,
+      "inner_enclosed_fraction": 0.8872154528442685,
+      "outer_enclosed_fraction": 0.8872154528442685
+    },
+    {
+      "begin": 350,
+      "end_exclusive": 351,
+      "convective": false,
+      "mass_fraction": 0.0027556110185202798,
+      "inner_enclosed_fraction": 0.889993371704618,
+      "outer_enclosed_fraction": 0.889993371704618
+    },
+    {
+      "begin": 351,
+      "end_exclusive": 352,
+      "convective": false,
+      "mass_fraction": 0.0027110710629467214,
+      "inner_enclosed_fraction": 0.8927266748813091,
+      "outer_enclosed_fraction": 0.8927266748813091
+    },
+    {
+      "begin": 352,
+      "end_exclusive": 353,
+      "convective": false,
+      "mass_fraction": 0.002666688763385613,
+      "inner_enclosed_fraction": 0.8954155138305114,
+      "outer_enclosed_fraction": 0.8954155138305114
+    },
+    {
+      "begin": 353,
+      "end_exclusive": 354,
+      "convective": false,
+      "mass_fraction": 0.002622476407320173,
+      "inner_enclosed_fraction": 0.8980600524080803,
+      "outer_enclosed_fraction": 0.8980600524080803
+    },
+    {
+      "begin": 354,
+      "end_exclusive": 355,
+      "convective": false,
+      "mass_fraction": 0.0025784460560676114,
+      "inner_enclosed_fraction": 0.9006604666451518,
+      "outer_enclosed_fraction": 0.9006604666451518
+    },
+    {
+      "begin": 355,
+      "end_exclusive": 356,
+      "convective": false,
+      "mass_fraction": 0.002534609541362717,
+      "inner_enclosed_fraction": 0.9032169445202155,
+      "outer_enclosed_fraction": 0.9032169445202155
+    },
+    {
+      "begin": 356,
+      "end_exclusive": 357,
+      "convective": false,
+      "mass_fraction": 0.0024909784621239962,
+      "inner_enclosed_fraction": 0.9057296857278772,
+      "outer_enclosed_fraction": 0.9057296857278772
+    },
+    {
+      "begin": 357,
+      "end_exclusive": 358,
+      "convective": false,
+      "mass_fraction": 0.002447564181405537,
+      "inner_enclosed_fraction": 0.9081989014444635,
+      "outer_enclosed_fraction": 0.9081989014444635
+    },
+    {
+      "begin": 358,
+      "end_exclusive": 359,
+      "convective": false,
+      "mass_fraction": 0.002404377823545378,
+      "inner_enclosed_fraction": 0.9106248140906883,
+      "outer_enclosed_fraction": 0.9106248140906883
+    },
+    {
+      "begin": 359,
+      "end_exclusive": 360,
+      "convective": false,
+      "mass_fraction": 0.002361430271477495,
+      "inner_enclosed_fraction": 0.9130076570915543,
+      "outer_enclosed_fraction": 0.9130076570915543
+    },
+    {
+      "begin": 360,
+      "end_exclusive": 361,
+      "convective": false,
+      "mass_fraction": 0.0023187321642431005,
+      "inner_enclosed_fraction": 0.9153476746336433,
+      "outer_enclosed_fraction": 0.9153476746336433
+    },
+    {
+      "begin": 361,
+      "end_exclusive": 362,
+      "convective": false,
+      "mass_fraction": 0.0022762938946707272,
+      "inner_enclosed_fraction": 0.9176451214200405,
+      "outer_enclosed_fraction": 0.9176451214200405
+    },
+    {
+      "begin": 362,
+      "end_exclusive": 363,
+      "convective": false,
+      "mass_fraction": 0.0022341256072365076,
+      "inner_enclosed_fraction": 0.9199002624229847,
+      "outer_enclosed_fraction": 0.9199002624229847
+    },
+    {
+      "begin": 363,
+      "end_exclusive": 512,
+      "convective": true,
+      "mass_fraction": 0.0789931824712509,
+      "inner_enclosed_fraction": 0.9221133726345135,
+      "outer_enclosed_fraction": 1
+    }
+  ],
+  "milestones": {
+    "scope": "Report bracketed exhaustion and cooling milestones without extrapolation.\n\nAll recrossings are retained. A threshold crossing is not a claim of permanent\nextinction, a white-dwarf classification, or a converged endpoint age.\n",
+    "age_range_yr": [
+      0,
+      3848256087435.5327
+    ],
+    "accepted_states": 7696,
+    "run_reached_requested_age": false,
+    "core_hydrogen": [
+      {
+        "threshold": 0.001,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 0.0001,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 1e-05,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      }
+    ],
+    "nuclear_deposited_over_photon_luminosity": [
+      {
+        "threshold": 0.1,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 0.01,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 0.001,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      }
+    ],
+    "nuclear_diagnostic_scope": "Deposited luminosity of the selected network; pp-only in the present driver. Missing legacy data are not interpreted as zero burning.",
+    "temperature": [
+      {
+        "threshold": 1000,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 500,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 100,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      }
+    ],
+    "temperature_scope": "Downward crossings are cooling-temperature milestones only. Establish a degenerate remnant, residual-burning regime and source validity separately.",
+    "final": {
+      "age_yr": 3848256087435.5327,
+      "central_X": 0.0024672122543675725,
+      "Teff_K": 4399.999998613677,
+      "L_Lsun": 0.006004707507597356,
+      "hydrogen_mass_Msun": 0.00922169800191084,
+      "nuclear_deposited_Lsun": 0.0059940757028824326
+    }
+  },
+  "requested_age_reached": false,
+  "first_atmosphere_domain_rejection": "retry dt=2.27252e+07 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
+  "last_atmosphere_domain_rejection": "retry dt=346.759 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
+  "segment_cpu_seconds": 299.38547900000003,
+  "segment_awake_seconds": 186.63853308465332,
+  "segment_utc_seconds": 186.6348259449005,
+  "segment_rejected_attempts": 36,
+  "all_attempts_including_preceding_terminal_rejections": 305,
+  "input_sha256": {
+    "/Users/greglaughlin/Projects/ember/scripts/check_evolution_continuation.py": "bcb398734c465b94962a527ac49f9eeacca698bd89e4c98f411ab42eb569e058",
+    "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.json": "667c09eae93ba744c8139bcd76b120fdf49973c5c15f4b1cb28be337a419783d",
+    "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.receipt.json": "f09b50f3de877637838e4cbaee032d779d55ff4ae8989dafe92b31757a20cdb5",
+    "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.log": "418568e6977b7bab9e48aed9ad76653446e6318ffc13e60d7b173bdc9fe62800",
+    "/private/tmp/ember-t4000-eos72-512-4000gyr-v2/ember-evolve": "a4ff20664d7350f1942cb9d9a00196a7d838f6992fd15e40c51e44b4098bbc5d",
+    "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.restart": "3253c74df2c27371fb8acd440e1b0b25a1fcc8ed0bca776069df257a34c3b5e8",
+    "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.json": "c8182df3de2fb6dffea458e4cf53e68f56a347c012c05469e3ed0a78b818fb1f",
+    "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.receipt.json": "22cca86d5139ef04a9a70bba48844cde085f548dd95788ba53f991f388e97c2a",
+    "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.log": "7745ca71098efe38f0e5e2e829e63748e96d1e57cfbac7296451346dc8707041",
+    "/private/tmp/ember-t4400-eos72-512-4000gyr-v1/ember-evolve": "656f48eb437f1332b455d6c1bc074e6151a1ad0b606f31a47c41c1dfa8901b9e",
+    "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.restart": "082103b4ce11a415359e02bbb7a7a50be097335bb9abfb8fe7a760d950878685",
+    "/private/tmp/ember-evolution-mixing-probe-v1": "4e0541eb003a4352a7bec9538e02dde45e8a655571570eea4f88cfb1b0713455",
+    "/Users/greglaughlin/Projects/ember/docs/results/nongrey_t4400_acceptance_v1.json": "abc355e8be1bc35c97ec003db6e6424fd7e690138b1271fa115c1db01386b352",
+    "/Users/greglaughlin/Projects/ember/docs/results/atmosphere_extension_restart_v1.json": "8947b2a028fdb926ab277ad09540e076ce1cc43905a4c7b6291f87e74f997770",
+    "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-joined-v1.json": "d786254a374771238de1f7bf00cff37802e16372ed3d63b0d5ce3600c0255df2"
+  },
+  "recovery_archives": [
+    {
+      "source": "/Users/greglaughlin/Projects/ember/scripts/check_evolution_continuation.py",
+      "archive": "/tmp/ember-t4400-recovery-v1/000-check_evolution_continuation.py.gz",
+      "sha256": "bcb398734c465b94962a527ac49f9eeacca698bd89e4c98f411ab42eb569e058",
+      "gzip_sha256": "e23194e79f7701a679e84937aacca9c18be39f955ef8d6cb4865e47816ca7845"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.json",
+      "archive": "/tmp/ember-t4400-recovery-v1/001-evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.json.gz",
+      "sha256": "667c09eae93ba744c8139bcd76b120fdf49973c5c15f4b1cb28be337a419783d",
+      "gzip_sha256": "57d0fd789da6c27be153d2b025e53825ef9f20beaf8e0065dbf163bd3ac08205"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.receipt.json",
+      "archive": "/tmp/ember-t4400-recovery-v1/002-evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.receipt.json.gz",
+      "sha256": "f09b50f3de877637838e4cbaee032d779d55ff4ae8989dafe92b31757a20cdb5",
+      "gzip_sha256": "f5172448b57250e8c0fbe8d19179b66b5396f1a20f644e018f03e2871b3a0799"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.log",
+      "archive": "/tmp/ember-t4400-recovery-v1/003-evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.log.gz",
+      "sha256": "418568e6977b7bab9e48aed9ad76653446e6318ffc13e60d7b173bdc9fe62800",
+      "gzip_sha256": "564947a504535b561c4752338c23f130e75cfd9adbb2d5aeee2510a50eb48c6e"
+    },
+    {
+      "source": "/private/tmp/ember-t4000-eos72-512-4000gyr-v2/ember-evolve",
+      "archive": "/tmp/ember-t4400-recovery-v1/004-ember-evolve.gz",
+      "sha256": "a4ff20664d7350f1942cb9d9a00196a7d838f6992fd15e40c51e44b4098bbc5d",
+      "gzip_sha256": "082b0bba4de19ff41f1a3db2478b93dff98499d6f947689e0b3cdd9530a99f7a"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.restart",
+      "archive": "/tmp/ember-t4400-recovery-v1/005-evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.restart.gz",
+      "sha256": "3253c74df2c27371fb8acd440e1b0b25a1fcc8ed0bca776069df257a34c3b5e8",
+      "gzip_sha256": "62f89681e3d4cc91689e779dbd193a69f186b2478d4f5130bc74f7eb1612e439"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.json",
+      "archive": "/tmp/ember-t4400-recovery-v1/006-evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.json.gz",
+      "sha256": "c8182df3de2fb6dffea458e4cf53e68f56a347c012c05469e3ed0a78b818fb1f",
+      "gzip_sha256": "747486ff84285cb031b66a472dc01649f598f5c8fbfcd3a10e4cecf57dd198a9"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.receipt.json",
+      "archive": "/tmp/ember-t4400-recovery-v1/007-evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.receipt.json.gz",
+      "sha256": "22cca86d5139ef04a9a70bba48844cde085f548dd95788ba53f991f388e97c2a",
+      "gzip_sha256": "db59b562128e9dfc5cd46b8553d2d0d9af6c162f324c71813ed2ac4eae5fc009"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.log",
+      "archive": "/tmp/ember-t4400-recovery-v1/008-evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.log.gz",
+      "sha256": "7745ca71098efe38f0e5e2e829e63748e96d1e57cfbac7296451346dc8707041",
+      "gzip_sha256": "379957d387176f42860b82ad753d6954a6c525e200349bec88c399dd85f47cc7"
+    },
+    {
+      "source": "/private/tmp/ember-t4400-eos72-512-4000gyr-v1/ember-evolve",
+      "archive": "/tmp/ember-t4400-recovery-v1/009-ember-evolve.gz",
+      "sha256": "656f48eb437f1332b455d6c1bc074e6151a1ad0b606f31a47c41c1dfa8901b9e",
+      "gzip_sha256": "5c7e7fe4258cd4379709af9f2ceaa7fa7e9a0499d700c2355fff237d855e3bd1"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.restart",
+      "archive": "/tmp/ember-t4400-recovery-v1/010-evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.restart.gz",
+      "sha256": "082103b4ce11a415359e02bbb7a7a50be097335bb9abfb8fe7a760d950878685",
+      "gzip_sha256": "4c450f74faaba5af68e4fbcc29e5a7c5112c6c3d0f782efec216ef2df977f23f"
+    },
+    {
+      "source": "/private/tmp/ember-evolution-mixing-probe-v1",
+      "archive": "/tmp/ember-t4400-recovery-v1/011-ember-evolution-mixing-probe-v1.gz",
+      "sha256": "4e0541eb003a4352a7bec9538e02dde45e8a655571570eea4f88cfb1b0713455",
+      "gzip_sha256": "618af1a56af8dccb810b15c40d43a9c530e32a7304967d1ef625eb3d1ded9798"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_t4400_acceptance_v1.json",
+      "archive": "/tmp/ember-t4400-recovery-v1/012-nongrey_t4400_acceptance_v1.json.gz",
+      "sha256": "abc355e8be1bc35c97ec003db6e6424fd7e690138b1271fa115c1db01386b352",
+      "gzip_sha256": "e08b9253c5fe1a0667e24fc72cceb6f33d3f7003e4ac00e36c084b6ba683f65f"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/docs/results/atmosphere_extension_restart_v1.json",
+      "archive": "/tmp/ember-t4400-recovery-v1/013-atmosphere_extension_restart_v1.json.gz",
+      "sha256": "8947b2a028fdb926ab277ad09540e076ce1cc43905a4c7b6291f87e74f997770",
+      "gzip_sha256": "242128df5e7e9d55a882ce6b5ecf28e42a0c5cb24dc38adc78d8bc2d9351acfd"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-t4400-eos72-joined-v1.json",
+      "archive": "/tmp/ember-t4400-recovery-v1/014-evolution-cold-remnant-t4400-eos72-joined-v1.json.gz",
+      "sha256": "d786254a374771238de1f7bf00cff37802e16372ed3d63b0d5ce3600c0255df2",
+      "gzip_sha256": "33b362395abb75b955064c32b3c96d08f80acf3148ca2c4c9d12ad30a0eebc0f"
+    }
+  ]
+}

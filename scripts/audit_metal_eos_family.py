@@ -29,14 +29,35 @@ def query(command, request, width):
     return rows, result
 
 
+def total_source_state(row, scale, T, rho, radiation_omitted=False):
+    state = {'P': row[4], 'E': row[5]*scale, 'cv': row[12]*scale,
+             'cp': row[13]*scale, 'grad_ad': row[14]}
+    if radiation_omitted:
+        # Use the same radiation constant as the independently implemented
+        # Ember response, restoring radiation omitted by source option 223.
+        arad = 4*5.670374419e-5/2.99792458e10
+        pr = arad*T**4/3
+        P = row[4]+pr
+        cv = state['cv']+12*pr/(rho*T)
+        chiT = (row[4]*row[8]+4*pr)/P
+        chiR = row[4]*row[7]/P
+        cp = cv+P/(rho*T)*chiT*chiT/chiR
+        state = {'P': P, 'E': state['E']+3*pr/rho, 'cv': cv, 'cp': cp,
+                 'grad_ad': P/(rho*T)*chiT/(chiR*cp)}
+    return state
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     for name in ['family', 'ember_probe', 'source_probe', 'output']:
         p.add_argument(name, type=Path)
     p.add_argument('--hydrogen', type=float, nargs='+', required=True)
+    p.add_argument('--electron-integrals', choices=['fitted','numerical'], default='fitted')
     p.add_argument('--states', type=Path,
                    help='JSON array of explicit [temperature K, density g/cm3] source checks')
     a = p.parse_args()
+    numerical = a.electron_integrals=='numerical'
+    options = [3,223,-2] if numerical else [3,1,-2]
     lines = a.family.read_text().splitlines()
     if lines[0] != 'EMBER_METAL_HELMHOLTZ 1':
         raise ValueError('expected metal EOS family')
@@ -48,6 +69,11 @@ def main():
     for line in lines[3:]:
         plane = a.family.parent / shlex.split(line)[0]
         inputs[str(plane.resolve())] = sha(plane)
+        with plane.open() as stream:
+            stream.readline()
+            source_label = stream.readline()
+        if ('numerical electron integrals' in source_label)!=numerical:
+            raise ValueError('requested direct source treatment differs from EOS family')
     states = [(4157., 7.2e-5), (6031., 7.3e-4), (27183., .037),
               (2341000., 13.7), (6783000., 243.1), (9731000., 260.7)]
     state_inputs = {}
@@ -64,7 +90,7 @@ def main():
         for y in [0., .005, .06, .12]:
             m = mixture(x, y)
             scale = m['source_mass_scale']
-            request = ' '.join(map(str, m['eps'])) + '\n3 1 -2\n' + ''.join(
+            request = ' '.join(map(str, m['eps'])) + '\n'+' '.join(map(str,options))+'\n' + ''.join(
                 f'{math.log(scale * rho):.17g} {math.log(T):.17g}\n' for T, rho in states)
             source, result = query([str(a.source_probe.resolve())], request, 22)
             raw_source.append({'XH': x, 'X3': y, 'input': request,
@@ -74,9 +100,8 @@ def main():
             for (T, rho), r in zip(states, source, strict=True):
                 if r[0] != 0 or abs(r[2] / (scale * rho) - 1) > 1e-9 or abs(r[3] / T - 1) > 1e-10:
                     raise ValueError('source did not reach requested state')
-                records.append({'query': [x, y, T, rho], 'source': {
-                    'P': r[4], 'E': r[5] * scale, 'cv': r[12] * scale,
-                    'cp': r[13] * scale, 'grad_ad': r[14]}})
+                records.append({'query': [x, y, T, rho],
+                                'source': total_source_state(r,scale,T,rho,numerical)})
     a.output.parent.mkdir(parents=True, exist_ok=True)
     raw_path = a.output.with_suffix('.source.json.gz')
     raw_path.write_bytes(gzip.compress(json.dumps(raw_source, allow_nan=False).encode(), mtime=0))
@@ -138,6 +163,9 @@ def main():
               'temperature_density_checks': states, 'state_inputs_sha256': state_inputs,
               'source_probe_sha256': sha(a.source_probe), 'raw_source_sha256': sha(raw_path),
               'audit_script_sha256': sha(__file__), 'records': records}
+    if numerical:
+        report['source_options'] = options
+        report['radiation_note'] = 'Option 223 returns material thermodynamics. Radiation is restored analytically using the Ember constant for the total-state comparison.'
     a.output.write_text(json.dumps(report, indent=2, allow_nan=False)+'\n')
     print(json.dumps({k: v for k, v in report.items() if k not in ['records', 'family_files_sha256']}, indent=2))
     if not passed:

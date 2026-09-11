@@ -27,6 +27,8 @@ def main():
             raise ValueError('plane metadata does not match family specification')
         if raw['probe_sha256']!=spec['probe_sha256'] or raw['source_archive_sha256']!=spec['source_archive_sha256']:
             raise ValueError('inconsistent source identity')
+        if raw['options']!=spec.get('source_options',[3,1,-2]):
+            raise ValueError('source physics differs from family specification')
         # Refinement may require sub-per-mille abundances. Rounded labels
         # alias distinct physical planes; preserve the exact request value.
         name=f'freeeos300_gs98_x{fraction_label(x,1000)}_he3{fraction_label(y,1000)}'

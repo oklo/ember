@@ -22,6 +22,8 @@ def main():
     p.add_argument('--helium3',type=float,nargs='+',default=[0,.12])
     p.add_argument('--step',type=float,default=.0125)
     p.add_argument('--jobs',type=int,default=4)
+    p.add_argument('--electron-integrals',choices=['fitted','numerical'],default='fitted',
+                   help='numerical uses FreeEOS option 223: integrated electrons, with radiation added by Ember')
     p.add_argument('--grid-from',type=Path,
                    help='reuse exact temperature/density coordinates from a source specification or manifest')
     a=p.parse_args()
@@ -46,6 +48,10 @@ def main():
                         'grid_reference_sha256':sha(a.grid_from.read_bytes())}
     spec={'hydrogen':a.hydrogen,'helium3':a.helium3,'logT':ts,'logQ':qs,'probe_sha256':source_sha,
           'source_archive_sha256':'4ab1c15a51385a3eab3b08c6f3f240739c0105d92ec828d635ac95720edefb09',**grid_reference}
+    options=[3,223,-2] if a.electron_integrals=='numerical' else [3,1,-2]
+    if options!=[3,1,-2]:
+        spec['source_options']=options
+        spec['source_radiation_included']=False
     manifest=a.work/'specification.json'
     if manifest.exists() and json.loads(manifest.read_text())!=spec:raise ValueError('changed source/settings require a new work directory')
     manifest.write_text(json.dumps(spec,indent=2)+'\n')
@@ -57,7 +63,7 @@ def main():
     def run(job):
         d,m,it,t=job;path=d/f'temperature-{it:03d}.json.gz'
         scale=m['source_mass_scale']
-        request=' '.join(map(str,m['eps']))+'\n3 1 -2\n'+''.join(
+        request=' '.join(map(str,m['eps']))+'\n'+' '.join(map(str,options))+'\n'+''.join(
             f'{math.log(scale)+math.log(10)*(q+1.5*(t-6)):.17g} {math.log(10)*t:.17g}\n' for q in qs)
         fingerprint=sha((source_sha+request).encode())
         if path.exists():
@@ -87,7 +93,7 @@ def main():
     for d,m in planes:
         data=[]
         for it in range(len(ts)):data.extend(json.loads(gzip.decompress((d/f'temperature-{it:03d}.json.gz').read_bytes()))['data'])
-        raw={**m,'version':'FreeEOS 3.0.0','options':[3,1,-2],'logT':ts,'logQ':qs,
+        raw={**m,'version':'FreeEOS 3.0.0','options':options,'logT':ts,'logQ':qs,
              'source_archive_sha256':spec['source_archive_sha256'],'probe_sha256':source_sha,'data':data}
         (d/'source.json.gz').write_bytes(gzip.compress((json.dumps(raw,separators=(',',':'),allow_nan=False)+'\n').encode(),mtime=0))
         print('assembled',d,flush=True)

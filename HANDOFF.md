@@ -1,3 +1,128 @@
+# September 11 paper and numerical-electron EOS source — 2026-09-11 05:02 UTC
+
+The full evolved 100 K remnant goal remains ACTIVE and unfinished. User explicitly
+authorizes autonomous overnight calculations and GitHub pushes. No subagents.
+Preserve unrelated .DS_Store and helium coexistence probes.
+
+The new September 11 paper now plots the CHECKED 3.848 T track (7696 states),
+with every requested LBA97/F77 and opacity comparison retained. The September 10
+directory is preserved as its daily archive. PDF has twelve pages, no build
+warnings; all pages inspected, six figure pairs and both LBA CSVs reproduce
+exactly in /tmp/ember-paper-sept11-reproduce-v1. All 41 local recovery archives
+pass raw/compressed hashes. New archive_paper_continuation.py explicitly labels
+the joined history as derived and retains separate raw segment receipts.
+Paper validation.json is rewritten around the actual new checks, without
+relabeling old tests as current. Publication is pending immediately below.
+
+Latest stellar state remains 3.848 T / 4400 K / central X=0.002467. No stellar
+production job is active. New core transport audit finds 69.82% of local central
+flux carried by conduction, 30.18% by radiation. The paper uses these values.
+The complete two-segment trajectory took 46.18 CPU minutes, 28.20 summed awake
+minutes, 7695 accepted steps and 305 attempted rejections (including terminal
+rejections before each continuation). Raw endpoint details follow below.
+
+EOS DISCREPANCY IDENTIFIED: FreeEOS EOS1 uses electron fits switching at
+degeneracy parameter 4. Direct density integration across this switch leaves
+about 21 erg/g/K mismatch in F/T. The source nodes agree with fresh processes;
+this is not cached-source corruption or solely composition interpolation.
+Exact-composition diagnostics reach 0.5663% cp error after potential smoothing.
+The existing 2516-query audit remains FAILED; all 512 actual stellar zones pass
+separately with max cp error 0.2081%. Neither fact is a uniform table bound.
+New reproducible diagnostic: scripts/audit_freeeos_electron_join.py,
+docs/results/freeeos_electron_fit_join_v1.json; raw source responses are in its
+ignored .source.json.gz. Two explicit eta/fl probes straddle 4 (recorded in
+numerical_electron_source_pipeline_v1.json); temporary probe source/binary
+/tmp/ember-hot-electron-probe-v1{.f90,}. Original FreeEOS library remains fixed.
+
+FreeEOS option [3,223,-2] supplies numerical electron integrals with the same
+EOS1 material choices but NO radiation. Generator supports
+--electron-integrals numerical, importer handles the omitted radiation, and
+Ember adds radiation once as usual. Independent options1/220 check verifies
+restoration within 5.202e-11 relative. The numerical-electron pilot passes
+36 source comparisons and identities, max cp error 0.01014%. Coarse/fine pilot
+material grids agree closely. Original fitted-EOS import is byte-identical;
+new production importer reproduces all independently built pilot coefficients.
+These source modes are explicit in manifest/options/physical labels; never
+present option223 as unchanged EOS1 data or use temperature-extension restart
+to switch the material treatment. A fresh stellar calculation is required.
+
+ACTIVE full new source calculation: session46589, four CPU workers,
+/tmp/ember-numerical-electron-eos72-v1, launcher/log of the same prefix.
+Plan data/eos/sources/numerical_electron_eos72_plan_specification.json.
+Regenerates all 72 mixtures, 9.811 million material states, logT3.5..7.35 and
+logQ-3..2.5 at step0.0125. At05:01UTC it had reached logT3.625. Individual
+isotherms are reusable, hash-checked and safely resumable. Inspect before
+launching; DO NOT duplicate. Original fitted source files/executable untouched.
+New family still requires import, broad independent source checks, every actual
+profile zone, atmosphere support, and a fresh trajectory. It is not selected.
+Pipeline checks: docs/results/numerical_electron_source_pipeline_v1.json.
+
+Atmosphere controllers remain ACTIVE: main session44060 (11/24 source nodes
+accepted at last check; all eight4600 and three4800), independent67190 (4500
+accepted;4700/4900 pending), depth5967 (two4600 accepted;ten pending). Original
+plans, opacity13.15k source and work paths follow below. Seven atmosphere
+workers plus four EOS workers use the available CPU without duplicate jobs.
+No changes to opacity limits, convergence criteria or accepted stellar states.
+
+Next: finish publication, monitor these jobs, accept a 196-node5000K atmosphere
+only after retained/source/independent/depth/condensation/EOS/runtime checks.
+Current EOS alone allows Tc to11.89MK; the new numerical-electron source is a
+new physical table, not an identity-preserving extension. Continue source
+verification and fresh evolution, then address CNO, atmosphere gravity/range,
+grains and actual cold-remnant thermodynamics. Goal is not yet achieved.
+
+---
+
+# Checked 3.848 trillion-year endpoint — 2026-09-11 04:20 UTC
+
+Publication a5f877e is on master and origin/master. The September 10 PDF contains
+the paired LBA97/Ember opacity maps. The paper still plots its pinned 3.795 T
+track; do not silently call it the latest trajectory.
+
+The 4400 K atmosphere continuation is FINISHED. No stellar production job is
+active. It reached 3.848 T, Teff 4400 K, central X=0.002467, surface X=0.1730,
+Tc=11.75 MK and central density 4004 g/cm3. Its convective envelope contains
+7.899% of the mass. The target 4 T was not reached: the atmosphere upper limit
+is explicit in the rejected-step log. The 548 accepted continuation steps took
+4.990 CPU minutes and 3.111 awake minutes. All physical fields at the restart
+join are exact. The checked full history has 7696 states.
+Result: docs/results/evolution_atmosphere_limit_3848gyr_v1.json.
+Raw: out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.*.
+Work: /tmp/ember-t4400-eos72-512-4000gyr-v1.
+Derived joined JSON: out/evolution-cold-remnant-t4400-eos72-joined-v1.json;
+it is explicitly an assembly, not raw output with a fabricated run receipt.
+Recovery archive: /tmp/ember-t4400-recovery-v1.
+
+ACTIVE atmosphere controllers (inspect before launching):
+/tmp/ember-nongrey-t4600-t5000-v1, session 44060, four workers, 24 source nodes;
+/tmp/ember-nongrey-t5000-independent-v1, session 67190, one worker, three checks;
+/tmp/ember-nongrey-t5000-depth-v1, session 5967, two workers, twelve controls.
+All reuse checked 13.15 kK wavelength opacity; source material limits remain.
+The apparent long initializer is doing full 300-depth/20000-frequency transfer,
+chiefly the Rybicki/tridiagonal solver, not stalled opacity synthesis.
+
+The UNCOMMITTED EOS temperature-extension restart code builds at
+/tmp/ember-eos-temperature-extension-build-v1. All 32 CTests pass; fixed-input
+512-point 10 Gyr JSON is byte-identical to the source executable control.
+New executable SHA cdb780e701b0f6072d8bbdded3b52a753ef84426a7a2aa33b8a5d4f5bb54747e.
+Added FreeEOS source rows are complete at /tmp/ember-eos-hot-extension-v1;
+imported candidate /tmp/ember-eos-hot-family-v1 supports material T to 21.13 MK.
+All 8.967 million retained potential nodes, masks and nine coefficients are
+exact; docs/results/metal_eos_hot_retained_v1.json. This is NOT yet selected.
+
+The general hot EOS source audit FAILED its 0.30% heat-capacity criterion at
+some unvisited mixtures evaluated at the saved central T/rho. Keep the failed
+docs/results/metal_eos_hot_source_v1.json. All added hot test coordinates pass;
+all 512 actual profile zones also pass (maximum cp difference 0.2081%), in
+metal_eos_hot_profile_v1.json. Extra diagnostics show discrepancies at exact
+composition entries (up to 0.5663%); investigate material interpolation/source
+fit behavior. Do not loosen the criterion or claim global EOS accuracy.
+
+The full 100 K evolved-remnant objective remains ACTIVE and unfinished.
+No subagents. Preserve unrelated .DS_Store and helium coexistence probes.
+
+---
+
 # Accepted 4400 K atmosphere and active continuation — 2026-09-11 03:34 UTC
 
 The 172-source atmosphere has passed all checks: 156 old source rows and masks

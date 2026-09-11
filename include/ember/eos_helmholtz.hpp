@@ -37,7 +37,7 @@ private:
   struct Node { bool valid{}; std::array<double,9> d{}; };
   void check_composition(const Composition&) const;
   std::pair<std::size_t,std::size_t> supported_q(std::size_t it) const;
-  std::string source_;
+  std::string source_, proxy_;
   Composition composition_;
   std::vector<double> t_, q_; // natural logarithms; q=rho/(T/1e6)^1.5
   std::vector<Node> nodes_;

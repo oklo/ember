@@ -1,0 +1,164 @@
+{
+  "scope": "Export a checked checkpoint continuation for a daily working paper.\n\nThe plotted history is an assembly of actual accepted states, with one duplicate\nrestart state removed. Original run receipts remain attached to their separate\nsegments. The derived history is never assigned a fabricated run receipt.\n",
+  "input": "out/evolution-cold-remnant-t4400-eos72-joined-v1.json",
+  "history_is_assembled": true,
+  "raw_sha256": "d786254a374771238de1f7bf00cff37802e16372ed3d63b0d5ce3600c0255df2",
+  "raw_archive": "artifacts/continuation-014-evolution-cold-remnant-t4400-eos72-joined-v1.json.gz",
+  "raw_archive_sha256": "33b362395abb75b955064c32b3c96d08f80acf3148ca2c4c9d12ad30a0eebc0f",
+  "serialized_history_note": "The archived JSON is the explicitly derived joined history. Original segment outputs and receipts are archived separately.",
+  "history_csv": "evolution_latest.csv",
+  "history_csv_sha256": "322097c3becc0edf9f4bbe6b54d18ace74bcdad892955e9a8ceac93b14c133e0",
+  "profile_csv": "evolution_latest_profile.csv",
+  "profile_csv_sha256": "7d417d74ac04475a409d0d4f93f9d5f4435e5dc3cdaeaf5e4406c6855ada3acd",
+  "states": 7696,
+  "endpoint": {
+    "age_yr": 3848256087435.5327,
+    "step_yr": 2774.0709795979383,
+    "R_Rsun": 0.13335022013021292,
+    "L_Lsun": 0.006004707507597356,
+    "Teff_K": 4399.999998613677,
+    "central_X": 0.0024672122543675725,
+    "central_Y3": 1.881978543089584e-08,
+    "step_error_norm": 3.552713678800501e-08,
+    "discrete_luminosity_balance": 5.952172088541374e-11,
+    "nuclear_rest_mass_balance": -1.3735988801943932e-07,
+    "last_halfstep_coupling_iterations": 1,
+    "convective_mass_fraction": 0.07899318247125091,
+    "central_T_K": 11750953.02469058,
+    "central_rho": 4004.2197096372915,
+    "surface_X": 0.1730474057601698,
+    "surface_Y3": 0.0026399621470580867,
+    "nuclear_deposited_Lsun": 0.0059940757028824326,
+    "nuclear_neutrino_Lsun": 0.00016387741190842416,
+    "last_halfstep_gravothermal_Lsun": 1.0644738200901914e-05,
+    "hydrogen_mass_Msun": 0.00922169800191084,
+    "thermal_neutrino_Lsun": 1.293312856770819e-08
+  },
+  "requested_age_reached": false,
+  "first_atmosphere_domain_rejection": "retry dt=2.27252e+07 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
+  "last_atmosphere_domain_rejection": "retry dt=346.759 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
+  "rejected_attempts": 305,
+  "milestones": {
+    "scope": "Report bracketed exhaustion and cooling milestones without extrapolation.\n\nAll recrossings are retained. A threshold crossing is not a claim of permanent\nextinction, a white-dwarf classification, or a converged endpoint age.\n",
+    "age_range_yr": [
+      0,
+      3848256087435.5327
+    ],
+    "accepted_states": 7696,
+    "run_reached_requested_age": false,
+    "core_hydrogen": [
+      {
+        "threshold": 0.001,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 0.0001,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 1e-05,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      }
+    ],
+    "nuclear_deposited_over_photon_luminosity": [
+      {
+        "threshold": 0.1,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 0.01,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 0.001,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      }
+    ],
+    "nuclear_diagnostic_scope": "Deposited luminosity of the selected network; pp-only in the present driver. Missing legacy data are not interpreted as zero burning.",
+    "temperature": [
+      {
+        "threshold": 1000,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 500,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 100,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      }
+    ],
+    "temperature_scope": "Downward crossings are cooling-temperature milestones only. Establish a degenerate remnant, residual-burning regime and source validity separately.",
+    "final": {
+      "age_yr": 3848256087435.5327,
+      "central_X": 0.0024672122543675725,
+      "Teff_K": 4399.999998613677,
+      "L_Lsun": 0.006004707507597356,
+      "hydrogen_mass_Msun": 0.00922169800191084,
+      "nuclear_deposited_Lsun": 0.0059940757028824326
+    }
+  },
+  "mixing_regions": [
+    {
+      "begin": 0,
+      "end_exclusive": 363,
+      "convective": false,
+      "mass_fraction": 0.921006817528749,
+      "inner_enclosed_fraction": 1.22864837681125e-10,
+      "outer_enclosed_fraction": 0.9199002624229847
+    },
+    {
+      "begin": 363,
+      "end_exclusive": 512,
+      "convective": true,
+      "mass_fraction": 0.0789931824712509,
+      "inner_enclosed_fraction": 0.9221133726345135,
+      "outer_enclosed_fraction": 1
+    }
+  ],
+  "EOS": "metal:data/eos/low_density_refined_v2/freeeos300_gs98_z020.dat",
+  "atmosphere": "nongrey:/tmp/ember-nongrey-exhaustion-t4400-v1.dat",
+  "opacity_directory": "/Users/greglaughlin/Projects/ember/data/opacity/hydrogen_exhaustion_hot_v1",
+  "step_error_tolerances": {
+    "log_structure": 2.5e-05,
+    "absolute_abundance": 2.5e-08,
+    "relative_surface_luminosity": 0.00025
+  },
+  "executable_sha256": "656f48eb437f1332b455d6c1bc074e6151a1ad0b606f31a47c41c1dfa8901b9e",
+  "segment_receipts": [
+    {
+      "source": "out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.receipt.json",
+      "sha256": "f09b50f3de877637838e4cbaee032d779d55ff4ae8989dafe92b31757a20cdb5"
+    },
+    {
+      "source": "out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.receipt.json",
+      "sha256": "22cca86d5139ef04a9a70bba48844cde085f548dd95788ba53f991f388e97c2a"
+    }
+  ],
+  "continuation_check": "docs/results/evolution_atmosphere_limit_3848gyr_v1.json",
+  "continuation_check_sha256": "b93eb700abe0a06fff3f8d60570abe14186b6dba45bdf0c969dc0396652479fa",
+  "cpu_seconds": 2770.753083,
+  "awake_seconds": 1692.0021963343024,
+  "utc_seconds": 1996.5980908870697,
+  "timing_note": "Sums of the actual segment runs; no atmosphere or source-generation time included.",
+  "export_script_sha256": "efa14656c034b2f09ec32524ff39c0c4bd363f007ebc1040aca708874011a004"
+}
