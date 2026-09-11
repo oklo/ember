@@ -48,10 +48,19 @@ Rate he3he4(double T9) {                   // He3(alpha,gamma)Be7 - ppII/ppIII
 struct Reaction {
   double z1,z2,m1,m2,s0,s1,s2; // S derivatives in MeV barn, barn, barn/MeV
 };
-Reaction reaction(PPReaction r) {
+Reaction reaction(PPReaction r,PPRates prescription=PPRates::solar_fusion_ii) {
   // Kinematic nuclear masses exclude electrons (electronic binding neglected).
   const double m1=nuclides[0].A*amu-me, m3=nuclides[1].A*amu-2*me;
   const double m4=nuclides[2].A*amu-2*me;
+  if(prescription==PPRates::solar_fusion_iii) {
+    // Acharya et al. (2025), equations 8--9 and section V.C.
+    // The 34 reaction uses the full equation 14 below, not a Taylor fit.
+    switch(r) {
+    case PPReaction::pp: return {1,1,m1,m1,4.09e-25,4.09e-25*11.0,4.09e-25*242.};
+    case PPReaction::he3_he3: return {2,2,m3,m3,5.21,-4.9,22.42};
+    case PPReaction::he3_he4: return {2,2,m3,m4,.0005610,0,0};
+    }
+  }
   switch(r) {
   case PPReaction::pp: return {1,1,m1,m1,4.01e-25,4.01e-25*11.2,0};
   case PPReaction::he3_he3: return {2,2,m3,m3,5.21,-4.9,22.};
@@ -118,21 +127,24 @@ Susceptibility electrons(double T,double ne) {
 
 ThermonuclearRate pp_bare_rate(double T,PPReaction which,PPRates prescription) {
   if(!std::isfinite(T) || T<=0) throw std::domain_error("pp_bare_rate: invalid temperature");
-  const auto r=reaction(which);
-  if(prescription==PPRates::solar_fusion_ii && T>2e7)
-    throw std::domain_error("PPChains: Solar Fusion II low-energy expansion limited to T<=2e7 K");
+  if(prescription!=PPRates::legacy && prescription!=PPRates::solar_fusion_ii
+      && prescription!=PPRates::solar_fusion_iii)
+    throw std::invalid_argument("PPRates: unknown prescription");
+  const auto r=reaction(which,prescription);
+  if(prescription!=PPRates::legacy && T>2e7)
+    throw std::domain_error("PPChains: Solar Fusion low-energy rates limited to T<=2e7 K");
   if(T<1e5) return {};
   if(prescription==PPRates::legacy) {
     const auto v=which==PPReaction::pp?pp(T*1e-9):which==PPReaction::he3_he3?he3he3(T*1e-9):he3he4(T*1e-9);
     return {v.v,v.dlnv_dlnT};
   }
-  // Bare SFII quadrature depends only on temperature and reaction, whereas
+  // Bare quadrature depends on temperature, reaction and rate prescription;
   // burning Newton iterations change abundances at fixed thermal states.
   // Exact, bounded, thread-local memoization leaves screening and every
   // composition response fully state-dependent and preserves result bits.
-  using CachedRates=std::array<std::optional<ThermonuclearRate>,3>;
+  using CachedRates=std::array<std::optional<ThermonuclearRate>,6>;
   thread_local std::unordered_map<double,CachedRates> cache;
-  const auto index=static_cast<std::size_t>(which); // reaction() validated it above
+  const auto index=static_cast<std::size_t>(which)+(prescription==PPRates::solar_fusion_iii?3:0);
   const auto found=cache.find(T);
   if(found!=cache.end() && found->second[index])return *found->second[index];
   static const Quadrature q;
@@ -141,7 +153,12 @@ ThermonuclearRate pp_bare_rate(double T,PPReaction which,PPRates prescription) {
   double integral=0,moment=0;
   for(double mid:{-2.,2.}) for(int i=0;i<q.n;++i) {
     const double energy=peak*std::exp(mid+2*q.x[i]), E=energy/mev;
-    const double S=(r.s0+E*(r.s1+.5*E*r.s2))*mev*1e-24;
+    double S;
+    if(prescription==PPRates::solar_fusion_iii && which==PPReaction::he3_he4) {
+      // Equation 14 is specified only through 1.6 MeV. At T<=20 MK the
+      // omitted Maxwell tail starts beyond 928 kT; do not extrapolate it.
+      S=E>1.6?0:r.s0*std::exp(-.5374*E)*(1+E*E*(-.4829+E*(.6310-.1527*E)))*mev*1e-24;
+    } else S=(r.s0+E*(r.s1+.5*E*r.s2))*mev*1e-24;
     const double term=2*q.w[i]*energy*S*std::exp(-energy/kt-std::sqrt(eg/energy));
     integral+=term;moment+=term*energy/kt;
   }
@@ -253,6 +270,11 @@ const char* PPChains::name() const {
     if(screening_==PPScreening::legacy_weak) return "legacy pp fits; capped classical weak screening";
     if(screening_==PPScreening::debye_fermi) return "legacy pp fits; finite-degeneracy Debye screening";
     return "legacy pp fits; finite-degeneracy Salpeter--Van Horn screening";
+  }
+  if(rates_==PPRates::solar_fusion_iii) {
+    if(screening_==PPScreening::legacy_weak) return "Solar Fusion III rates; capped classical weak screening";
+    if(screening_==PPScreening::debye_fermi) return "Solar Fusion III rates; finite-degeneracy Debye screening";
+    return "Solar Fusion III rates; finite-degeneracy Salpeter--Van Horn screening";
   }
   if(screening_==PPScreening::legacy_weak) return "Solar Fusion II quadrature; capped classical weak screening";
   if(screening_==PPScreening::debye_fermi) return "Solar Fusion II quadrature; finite-degeneracy Debye screening";

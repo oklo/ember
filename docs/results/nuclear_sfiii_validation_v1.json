@@ -1,0 +1,25 @@
+{
+  "scope": "Optional Solar Fusion III pp-chain rates with unchanged screening and reduced reaction inventory. Checks cover independent rate/thermal integrals, composition and energy responses, cache separation, all repository test suites and two short stellar controls. The ongoing long stellar track retains Solar Fusion II.",
+  "passed": true,
+  "ctest_suites": 34,
+  "ctest_seconds": 475.64,
+  "ctest_log": "/tmp/ember-sfiii-ctest-v1.log",
+  "ctest_log_sha256": "72aa2b0025f3989a7c494e3245494f03cce66d1139bca2f31d7a1d31ad4dde8e",
+  "ctest_detail_log_sha256": "1614cc2403f6bc394132cfa5308bca86c3ee3630c7860c5610732a146c9bacb7",
+  "independent_rate_queries": 18,
+  "maximum_rate_or_thermal_response_relative_difference": 1.226918567e-11,
+  "fixed_sfii_512_10gyr_entire_json_exact": true,
+  "inputs_sha256": {
+    "include/ember/nuclear.hpp": "308c1e81154d7ae80701b25247054fdd190984a6fc06f7e886104da0d9d5796b",
+    "src/nuclear_pp.cpp": "bf5e9f8eca506e30719eae6a49e5d5300239bc998e3be7047771d85f014bcc2e",
+    "apps/evolve.cpp": "481aa80ca856007f232f377b1f3ee5c9fa9d6ef8fd258cadb2ccc4e85267b1d8",
+    "tests/test_nuclear_prescriptions.cpp": "cb9e1bb0f64aa516cb4e165f15eee0c816868deeb81c008b7f81d588637c723f",
+    "scripts/generate_sfiii_reference.py": "c6a6c9ffe807a3e1dd677e3c7ae23464df464303a30c165abc28ff4e595062e9",
+    "tests/data/sfiii_reference.dat": "f8503e62df787a77a2116ef282056cde4a9e5dcfaf17fe03bb0ef50cb23cb676",
+    "docs/results/nuclear_sfiii_evolution_control_v1.json": "ac972d61e20f5b9d5d51851af4860c854d50789e254019259760be3e3b750988",
+    "docs/results/nuclear_sfiii_bare_rate_comparison_v1.json": "a3c072e2e7854a1f0ddb1c563ead17ed9a41bb8e9e1f589280f7daf3a71c775e"
+  },
+  "candidate_executable": "/tmp/ember-sfiii-build-v1/apps/ember-evolve",
+  "candidate_executable_sha256": "7d8f95f327799371539563a0328d5962fb08a459302c5642f04f7a3880083ab3",
+  "selected_for_long_evolution": false
+}

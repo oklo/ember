@@ -216,7 +216,7 @@ returns one. Those should surface, not be optimised away.
 | Equation of state | FreeEOS 3.0 EOS1 represented by one C2 Helmholtz potential; 64-plane GS98 H/He3 family through XH=0 within its original thermal domain; isotope corrections and masked invalid states |
 | Conduction | Ioffe pure-ion tables; Cassisi et al. (2007, 2021), Blouin et al. (2020); approximate mixture resistivities |
 | Convection | Böhm–Vitense MLT; Schwarzschild or full-EOS Ledoux buoyancy; semiconvective and thermohaline composition transport |
-| Nuclear rates | Reduced pp network, SFII S-factor quadrature, finite-degeneracy SVH screening, atomic mass-defect heating; legacy prescription retained |
+| Nuclear rates | Reduced pp network with SFII or optional SFIII rates, finite-degeneracy SVH screening and atomic mass-defect heating; the plotted track uses SFII |
 | Atmosphere | TLUSTY208/SYNSPEC54 non-grey gas grid at tau=100; 96 nodes selected, 108-node candidate under refinement; AMES-COND/grey default control retained |
 | Thermal neutrinos | Optional HRW plasma-decay sink with analytic derivatives; other thermal channels remain to be supplied |
 

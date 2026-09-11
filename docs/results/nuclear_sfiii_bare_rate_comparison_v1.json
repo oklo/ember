@@ -1,0 +1,186 @@
+{
+  "scope": "Bare-rate comparison using independently integrated Solar Fusion II and III prescriptions. Screening is unchanged. This does not measure an evolutionary lifetime change or supply missing pp/CNO branches.",
+  "source_url": "https://arxiv.org/abs/2405.06470v3",
+  "source_doi": "https://doi.org/10.1103/8lm7-gs18",
+  "source_pdf_sha256": "2c15331e566da5d8861b506f416e263e440dcfc7512149ad49bd2484b827ca4f",
+  "source_locations": [
+    "equations 8 and 9: pp",
+    "section V.C: helium3 + helium3",
+    "equation 14: helium3 + helium4"
+  ],
+  "input_sha256": {
+    "scripts/generate_sfiii_reference.py": "c6a6c9ffe807a3e1dd677e3c7ae23464df464303a30c165abc28ff4e595062e9",
+    "scripts/generate_nuclear_reference.py": "d5af046c8990cc0d1ae5658bc10a5272614a4a01dd8a36fcc59d9bd804745cbe",
+    "tests/data/sfiii_reference.dat": "f8503e62df787a77a2116ef282056cde4a9e5dcfaf17fe03bb0ef50cb23cb676",
+    "tests/data/nuclear_reference.dat": "537bf3e6c142842c6e9797aae44bf6d639714023b72dba04be9b23b2f9c6c5c9"
+  },
+  "operational_temperature_range_K": [
+    100000.0,
+    20000000.0
+  ],
+  "helium34_s_factor_upper_energy_MeV": 1.6,
+  "records": [
+    {
+      "temperature_K": 100000.0,
+      "reaction": "pp",
+      "sfii_molar_rate": 4.343364360553723e-44,
+      "sfiii_molar_rate": 4.4298494765153965e-44,
+      "relative_rate_change": 0.01991201031788359,
+      "sfii_temperature_response": 23.612758485013053,
+      "sfiii_temperature_response": 23.612737201912612
+    },
+    {
+      "temperature_K": 100000.0,
+      "reaction": "helium3_helium3",
+      "sfii_molar_rate": 3.633365643109025e-102,
+      "sfiii_molar_rate": 3.633365729944989e-102,
+      "relative_rate_change": 2.389959408155562e-08,
+      "sfii_temperature_response": 87.49069536521054,
+      "sfiii_temperature_response": 87.49069539729682
+    },
+    {
+      "temperature_K": 100000.0,
+      "reaction": "helium3_helium4",
+      "sfii_molar_rate": 2.651976714315714e-111,
+      "sfiii_molar_rate": 2.6569360849201713e-111,
+      "relative_rate_change": 0.001870065667502363,
+      "sfii_temperature_response": 91.44289328783795,
+      "sfiii_temperature_response": 91.44294949309845
+    },
+    {
+      "temperature_K": 1000000.0,
+      "reaction": "pp",
+      "sfii_molar_rate": 8.431505564046044e-28,
+      "sfiii_molar_rate": 8.599124717942902e-28,
+      "relative_rate_change": 0.019880097643726335,
+      "sfii_temperature_response": 10.613167457066323,
+      "sfiii_temperature_response": 10.613217918706626
+    },
+    {
+      "temperature_K": 1000000.0,
+      "reaction": "helium3_helium3",
+      "sfii_molar_rate": 2.749804299314856e-41,
+      "sfiii_molar_rate": 2.7498057622391644e-41,
+      "relative_rate_change": 5.320103357853156e-07,
+      "sfii_temperature_response": 40.25121055751574,
+      "sfiii_temperature_response": 40.251211277941955
+    },
+    {
+      "temperature_K": 1000000.0,
+      "reaction": "helium3_helium4",
+      "sfii_molar_rate": 1.1533265803124597e-47,
+      "sfiii_molar_rate": 1.1558370588126298e-47,
+      "relative_rate_change": 0.002176728207798684,
+      "sfii_temperature_response": 42.08617942901096,
+      "sfiii_temperature_response": 42.08643812410832
+    },
+    {
+      "temperature_K": 4500000.0,
+      "reaction": "pp",
+      "sfii_molar_rate": 1.9564656291047116e-22,
+      "sfiii_molar_rate": 1.996603196236959e-22,
+      "relative_rate_change": 0.02051534488270801,
+      "sfii_temperature_response": 6.187494791933871,
+      "sfiii_temperature_response": 6.18869558004358
+    },
+    {
+      "temperature_K": 4500000.0,
+      "reaction": "helium3_helium3",
+      "sfii_molar_rate": 1.0545846781532856e-20,
+      "sfiii_molar_rate": 1.0545890244053626e-20,
+      "relative_rate_change": 4.1212926442657505e-06,
+      "sfii_temperature_response": 24.114002822457937,
+      "sfiii_temperature_response": 24.114008467162165
+    },
+    {
+      "temperature_K": 4500000.0,
+      "reaction": "helium3_helium4",
+      "sfii_molar_rate": 3.879076393563778e-26,
+      "sfiii_molar_rate": 3.89007975507297e-26,
+      "relative_rate_change": 0.002836593145587374,
+      "sfii_temperature_response": 25.22660324406145,
+      "sfiii_temperature_response": 25.22728301242329
+    },
+    {
+      "temperature_K": 8000000.0,
+      "reaction": "pp",
+      "sfii_molar_rate": 4.847068356584474e-21,
+      "sfiii_molar_rate": 4.952161707271522e-21,
+      "relative_rate_change": 0.021681837959698802,
+      "sfii_temperature_response": 5.008853247713606,
+      "sfiii_temperature_response": 5.011884283015254
+    },
+    {
+      "temperature_K": 8000000.0,
+      "reaction": "helium3_helium3",
+      "sfii_molar_rate": 3.095087239437295e-15,
+      "sfiii_molar_rate": 3.095115359497075e-15,
+      "relative_rate_change": 9.085385194174123e-06,
+      "sfii_temperature_response": 19.786200841088615,
+      "sfiii_temperature_response": 19.78621336534945
+    },
+    {
+      "temperature_K": 8000000.0,
+      "reaction": "helium3_helium4",
+      "sfii_molar_rate": 2.0389248511175742e-20,
+      "sfiii_molar_rate": 2.0456678798408904e-20,
+      "relative_rate_change": 0.0033071492162255467,
+      "sfii_temperature_response": 20.705457293347653,
+      "sfiii_temperature_response": 20.706422686834717
+    },
+    {
+      "temperature_K": 15500000.0,
+      "reaction": "pp",
+      "sfii_molar_rate": 9.143535091751265e-20,
+      "sfiii_molar_rate": 9.374360152759204e-20,
+      "relative_rate_change": 0.02524461914256504,
+      "sfii_temperature_response": 3.91554759704597,
+      "sfiii_temperature_response": 3.923884623236116
+    },
+    {
+      "temperature_K": 15500000.0,
+      "reaction": "helium3_helium3",
+      "sfii_molar_rate": 3.7224146855217795e-10,
+      "sfiii_molar_rate": 3.722499200057116e-10,
+      "relative_rate_change": 2.270422359584856e-05,
+      "sfii_temperature_response": 15.73411435332876,
+      "sfiii_temperature_response": 15.73414594753919
+    },
+    {
+      "temperature_K": 15500000.0,
+      "reaction": "helium3_helium4",
+      "sfii_molar_rate": 4.233352140833044e-15,
+      "sfiii_molar_rate": 4.250657671722534e-15,
+      "relative_rate_change": 0.004087902521164866,
+      "sfii_temperature_response": 16.472603653185857,
+      "sfiii_temperature_response": 16.474011256014414
+    },
+    {
+      "temperature_K": 20000000.0,
+      "reaction": "pp",
+      "sfii_molar_rate": 2.3685723363940254e-19,
+      "sfiii_molar_rate": 2.434651094878896e-19,
+      "relative_rate_change": 0.027898138245366244,
+      "sfii_temperature_response": 3.5584110295247475,
+      "sfiii_temperature_response": 3.5705879317233595
+    },
+    {
+      "temperature_K": 20000000.0,
+      "reaction": "helium3_helium3",
+      "sfii_molar_rate": 1.7274939155834026e-08,
+      "sfiii_molar_rate": 1.7275498780270003e-08,
+      "relative_rate_change": 3.239516104391882e-05,
+      "sfii_temperature_response": 14.395289106184071,
+      "sfiii_temperature_response": 14.395334379978994
+    },
+    {
+      "temperature_K": 20000000.0,
+      "reaction": "helium3_helium4",
+      "sfii_molar_rate": 2.353283611973063e-13,
+      "sfiii_molar_rate": 2.363811610840053e-13,
+      "relative_rate_change": 0.0044737484310966025,
+      "sfii_temperature_response": 15.074064614751475,
+      "sfiii_temperature_response": 15.075674192331785
+    }
+  ]
+}
