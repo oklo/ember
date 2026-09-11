@@ -1,0 +1,51 @@
+{
+  "scope": "Accept the 172-source-node 4400 K gas atmosphere for continuation after a strictly retained-table extension. Independent matching-state, depth, condensation and runtime/EOS checks pass. This does not validate grain feedback or cold-remnant atmospheres.",
+  "checked_utc": "2026-09-11T03:31:04.914575+00:00",
+  "table": "/tmp/ember-nongrey-exhaustion-t4400-v1.dat",
+  "table_sha256": "c8a92d329c9e360d254ce37a70d39c7774d0081bc37926ae7d3ab80554cd23f9",
+  "EOS": "data/eos/low_density_refined_v2/freeeos300_gs98_z020.dat",
+  "EOS_sha256": "544db28d28b7382eca2646f1ae6d6980d2b1f9eccff3781a69c08626c6a5f321",
+  "reports_sha256": {
+    "docs/results/nongrey_t4400_extension_v1.json": "bddba25df53df2f33bcaa1f23b5183ba4e40d3362d0eeef1019150baafb4f5bf",
+    "docs/results/nongrey_t4400_retained_v1.json": "80280f6e0cc7c7120ab1bfd2576eaee8fdf97b370db818c6c0e81f53ddf124e5",
+    "docs/results/nongrey_x150_y000_t4200_g515_depth120_v1.json": "d74ac787322a74ead9c9590a1677ba9cf697f9eb3c6f9fde900f82dc79b9f30d",
+    "docs/results/nongrey_x150_y000_t4200_g540_depth120_v1.json": "25e30006ee965ecc8e44641f1647c6fb302d6078dd189ca6b87efea7472e1dc9",
+    "docs/results/nongrey_x200_y000_t4200_g515_depth120_v1.json": "93d6998e01d7595fb557c286a061c89ffc3dc97959467536d9722e3bf893f841",
+    "docs/results/nongrey_x150_y000_t4400_g515_depth120_v1.json": "d7c38c668d9ccfb27e0cac06d57d7e5abe9c0add80b129298b355d542a34a2f6",
+    "docs/results/nongrey_x150_y000_t4400_g540_depth120_v1.json": "dcf863e7e464a832c38b3cf87ee4d31a09737f32df6e111725c571e506fa4f35",
+    "docs/results/nongrey_x200_y000_t4400_g515_depth120_v1.json": "2edac729fbe6856db94708b45f7167fc7cf3f242285aeec501c07de95b817abb",
+    "docs/results/nongrey_x200_y000_t4400_g540_depth120_v1.json": "d1f392b54af8050ea1551048586c889734211a2e88745d089e453481fbd0131a",
+    "docs/results/nongrey_x200_y000_t4200_g540_depth_v1.json": "d9fb451e644f149826bbb38f877fdb06e530c988abe5207e0bcfd7c6338bc1cb",
+    "docs/results/nongrey_t4400_condensation_g515_v1.json": "34186116b50d5b9b5883cbbacdde9b1aaabf127a83d5103d50c87c0f63faf170",
+    "docs/results/nongrey_t4400_condensation_g540_v1.json": "6dba3bbec7944ee82f6c060e33d42a72bf17979b8267bf6f1db5d9a3a7772b84"
+  },
+  "source_models": 172,
+  "retained_source_models": 156,
+  "independent_comparisons": [
+    {
+      "coordinates": [
+        0.175,
+        0.005,
+        4100.0,
+        5.275
+      ],
+      "relative_difference": {
+        "T": -0.0033801963763397946,
+        "Pgas": 0.005145227959582721
+      }
+    },
+    {
+      "coordinates": [
+        0.175,
+        0.005,
+        4300.0,
+        5.275
+      ],
+      "relative_difference": {
+        "T": -0.0010882487164771693,
+        "Pgas": 0.005986221391193647
+      }
+    }
+  ],
+  "accepted_for_gas_trajectory": true
+}

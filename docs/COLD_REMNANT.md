@@ -23,7 +23,13 @@ All atmosphere nodes have EOS support. Its 3900 K independent check differs by
 checks pass, with a maximum matching-state change of 0.005127%; the twelve added
 structures contain no condensates in the equilibrium diagnostic.
 [Atmosphere acceptance](results/nongrey_t4000_acceptance_v1.json).
-Source calculations for 4200–4400 K are active; see HANDOFF.md for exact jobs.
+The 172-model extension through 4400 K has also passed source, independent
+interpolation, depth, condensation and EOS/runtime checks. All 156 existing
+source states remain unchanged; independent matching-state differences are
+below 0.5987%. [Acceptance](results/nongrey_t4400_acceptance_v1.json).
+The saved 3.818-trillion-year star is continuing with this table through a
+checked atmosphere-extension restart. No initial evolution is repeated;
+see HANDOFF.md for its exact job and input files.
 
 The paper plots the checked 3800 K track through **3.795 trillion years**.
 All its Ember curves use that single calculation. Its core transports heat by

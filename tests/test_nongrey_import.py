@@ -268,7 +268,24 @@ class SourceAcceptance(unittest.TestCase):
             self.assertEqual(list(table["log_opacity"]),[.5,1.5,1.5,2.5]*2)
             with self.assertRaisesRegex(ValueError,"composition mismatch"):
                 validate_table(p,[v*2 for v in a],[2000,6000],[math.exp(-20),math.exp(-10)])
+            from assemble_nongrey_grid import validate_shared_table
+            from unittest.mock import patch
+            checksum=hashlib.sha256(blob).hexdigest()
+            arguments=[p,checksum,a,[2000,6000],[math.exp(-20),math.exp(-10)]]
+            with patch('assemble_nongrey_grid.validate_table',wraps=validate_table) as reader:
+                validate_shared_table(*arguments)
+                alias=Path(d)/'same-opacity';alias.symlink_to(p)
+                validate_shared_table(alias,*arguments[1:])
+                self.assertEqual(reader.call_count,1)
+                with self.assertRaisesRegex(ValueError,'composition mismatch'):
+                    validate_shared_table(p,checksum,[v*2 for v in a],*arguments[3:])
+                with self.assertRaisesRegex(ValueError,'support mismatch'):
+                    validate_shared_table(p,checksum,a,[2000,7000],arguments[-1])
             p.write_bytes(blob[:-1])
+            with self.assertRaisesRegex(ValueError,'checksum mismatch'):
+                validate_shared_table(*arguments)
+            with self.assertRaisesRegex(ValueError,'truncated'):
+                validate_shared_table(p,hashlib.sha256(p.read_bytes()).hexdigest(),*arguments[2:])
             with self.assertRaisesRegex(ValueError,"truncated"):read_table(p)
             p.write_bytes(blob+b"x")
             with self.assertRaisesRegex(ValueError,"trailing"):read_table(p)

@@ -1,0 +1,35 @@
+{
+  "scope": "Independent 4100/4300 K atmosphere checks at intermediate XH=.175, He3=.005 and logg=5.275, with fixed verified wavelength opacity.",
+  "prepared": "/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-fine-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "requests": [
+    {
+      "name": "x175-y005-t4100-g5275",
+      "XH": 0.175,
+      "X3": 0.005,
+      "teff_K": 4100,
+      "log_g": 5.275,
+      "specification": "data/atmosphere/sources/nongrey_t4400_heldout_specification.json",
+      "opacity": "/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/fort.63",
+      "initial": "/tmp/ember-nongrey-13k-independent-checks-v1/x175-y005-t3900-g515/final",
+      "initial_bottom_tau": 300,
+      "convective_iterations": 10,
+      "wait_for_seed": false
+    },
+    {
+      "name": "x175-y005-t4300-g5275",
+      "XH": 0.175,
+      "X3": 0.005,
+      "teff_K": 4300,
+      "log_g": 5.275,
+      "specification": "data/atmosphere/sources/nongrey_t4400_heldout_specification.json",
+      "opacity": "/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/fort.63",
+      "initial": "/tmp/ember-nongrey-t4400-independent-v1/x175-y005-t4100-g5275/final",
+      "initial_bottom_tau": 300,
+      "convective_iterations": 10,
+      "wait_for_seed": true
+    }
+  ]
+}

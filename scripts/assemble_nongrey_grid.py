@@ -7,6 +7,7 @@ This does not accept unfinished models, interpolate missing nodes, or
 replace an independent source-grid refinement study.
 """
 import argparse
+from functools import lru_cache
 import gzip
 import itertools
 import json
@@ -21,6 +22,23 @@ from prepare_nongrey_sources import digest
 
 KEYS = ['XH', 'X3', 'teff_K', 'log_g']
 PHYSICS = ['metals', 'alpha', 'tau', 'wavelength_A', 'microturbulence_km_s', 'line_threshold']
+
+
+@lru_cache(maxsize=64)
+def _validate_shared_table(path, checksum, abundance, temperature, density):
+    # Retain only successful validation, not the large arrays. The caller
+    # checks the current bytes on every use, including a cache hit.
+    validate_table(path, abundance, temperature, density)
+    if digest(path) != checksum:
+        raise ValueError('opacity changed during source validation')
+
+
+def validate_shared_table(path, checksum, abundance, temperature, density):
+    path = Path(path).resolve(strict=True)
+    if digest(path) != checksum:
+        raise ValueError('source opacity checksum mismatch')
+    _validate_shared_table(str(path), checksum, tuple(abundance),
+                           tuple(temperature), tuple(density))
 
 
 def physical_identity(spec, prepared):
@@ -73,10 +91,11 @@ def load_continuation(work, identity=None):
         if hashlib.sha256(data).hexdigest() != expected:
             raise ValueError('final source output changed')
     opacity = final/'opacity.bin'
-    if digest(opacity) != source['opacity_sha256'] or (final/'opacity.sha256').read_text().strip() != source['opacity_sha256']:
+    if (final/'opacity.sha256').read_text().strip() != source['opacity_sha256']:
         raise ValueError('final atmosphere opacity identity changed')
     abundance, _ = composition(*key[:2], spec['metals'])
-    validate_table(opacity, abundance, temperatures(spec), sequence(spec['log_density']))
+    validate_shared_table(opacity, source['opacity_sha256'], abundance,
+                          temperatures(spec), sequence(spec['log_density']))
     own_spec = {**spec, 'opacity': {'temperature_K': temperatures(spec),
                                   'density_g_cm3': sequence(spec['log_density'])}}
     state = gas_model_state(work, own_spec, record)

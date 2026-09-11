@@ -61,6 +61,44 @@ def main():
         if resumed['history'][1:]!=reference['history'][4:]:raise AssertionError('restart changed the subsequent accepted trajectory')
         if resumed['restart']['history_start_age_yr']!=reference['history'][3][0]:raise AssertionError('restart age differs')
         if resumed['rejected_steps']!=reference['rejected_steps']:raise AssertionError('restart lost rejected-step count')
+        # Synthetic extra rows are deliberately outside this short test track.
+        # They test restart integrity, not the physical accuracy of new atmospheres.
+        rows=original_table.decode().splitlines()
+        ti=next(i for i,r in enumerate(rows) if r.startswith('log_teff '))
+        gi=next(i for i,r in enumerate(rows) if r.startswith('log_g '))
+        nt=int(rows[ti].split()[1]);ng=int(rows[gi].split()[1])
+        top=float(rows[ti].split()[-1])
+        rows[ti]='log_teff '+str(nt+1)+' '+' '.join(rows[ti].split()[2:])+f' {top+.05:.17g}'
+        start=rows.index('data')+1
+        expanded=[]
+        for i in range(start,len(rows),nt*ng):
+            plane=rows[i:i+nt*ng]
+            if len(plane)!=nt*ng:raise AssertionError('unexpected fixture dimensions')
+            expanded.extend(plane+plane[-ng:])
+        warmer=work/'warmer-atmosphere.dat'
+        warmer.write_text('\n'.join(rows[:start]+expanded)+'\n')
+        warmer_arguments=arguments.copy();warmer_arguments[6]=f'nongrey:{warmer}'
+        atmosphere_options=['--atmosphere-extension-restart',str(checkpoint),
+                            '--restart-source-executable',str(executable),
+                            '--restart-source-atmosphere',str(atmosphere)]
+        warmer_checkpoint=work/'warmer.restart'
+        warm=run('atmosphere-extension',atmosphere_options+['--checkpoint',str(warmer_checkpoint)],selection=warmer_arguments)
+        if warm['history']!=resumed['history'] or warm['profile']!=resumed['profile']:
+            raise AssertionError('appending unvisited atmosphere rows changed the resumed trajectory')
+        if warm['atmosphere_extension']['added_states']!=len(expanded)//(nt+1):
+            raise AssertionError('incorrect atmosphere extension state count')
+        if checkpoint.read_bytes()!=original_checkpoint:
+            raise AssertionError('atmosphere extension overwrote its source checkpoint')
+        warm_roundtrip=run('warm-exact-restart',['--restart',str(warmer_checkpoint)],selection=warmer_arguments)
+        if warm_roundtrip['profile']!=reference['profile']:
+            raise AssertionError('new atmosphere identity did not survive exact restart')
+        run('warm-without-extension',['--restart',str(checkpoint)],False,warmer_arguments)
+        run('warm-wrong-source',atmosphere_options[:-1]+[str(warmer)],False,warmer_arguments)
+        corrupt=warmer.read_text().replace('tau 100','tau 101')
+        warmer.write_text(corrupt)
+        rejected=run('warm-changed-depth',atmosphere_options,False,warmer_arguments)
+        if 'matching depth' not in rejected['message']:raise AssertionError(rejected)
+        warmer.write_text('\n'.join(rows[:start]+expanded)+'\n')
         # A long history must neither invalidate a checkpoint nor consume the
         # next invocation's step budget. Change counters in a test fixture only;
         # keep every physical variable and input identity exactly as written.

@@ -1,0 +1,11 @@
+{
+  "scope": "Check every retained atmosphere data row, including missing-state masks, and unchanged composition/gravity axes and physical labels. Only hotter temperature coordinates are appended.",
+  "retained_source_nodes": 156,
+  "added_source_nodes": 16,
+  "retained_missing_nodes": 132,
+  "all_retained_rows_exact": true,
+  "input_sha256": {
+    "/tmp/ember-nongrey-exhaustion-t4000-v1.dat": "ff985319a060744c88385a62f321c791ff03c4ff14abdc831dc076d8ea8a2fef",
+    "/tmp/ember-nongrey-exhaustion-t4400-v1.dat": "c8a92d329c9e360d254ce37a70d39c7774d0081bc37926ae7d3ab80554cd23f9"
+  }
+}

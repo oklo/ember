@@ -47,7 +47,7 @@ double temperature(double x, double y, double t, double g) {
 double pressure(double x, double y, double t, double g) {
   return 5. + .2 * t + .3 * g - .4 * x + .15 * y - .03 * x * y * t * g;
 }
-std::string fixture(int version = 1, int missing = -1) {
+std::string fixture(int version = 1, int missing = -1, bool extended = false) {
   const auto c = solar_scaled(.7, .02);
   std::ostringstream s;
   s << std::setprecision(17);
@@ -56,12 +56,15 @@ std::string fixture(int version = 1, int missing = -1) {
        "approximation \"test source\"\nbasis baryon_mass\ntau 100\nmetals";
   for (std::size_t j = 3; j < NSPEC; ++j)
     s << ' ' << c.X[j];
-  s << "\nhydrogen 3 .4 .55 .7\nhelium3 2 0 .12\nlog_teff 2 3.4 3.6\nlog_g 2 "
-       "4.5 5.5\ndata\n";
+  s << "\nhydrogen 3 .4 .55 .7\nhelium3 2 0 .12\nlog_teff "
+    << (extended ? "3 3.4 3.6 3.8" : "2 3.4 3.6")
+    << "\nlog_g 2 4.5 5.5\ndata\n";
+  const auto temperatures = extended ? std::vector<double>{3.4, 3.6, 3.8}
+                                     : std::vector<double>{3.4, 3.6};
   int index = 0;
   for (double x : {.4, .55, .7})
     for (double y : {0., .12})
-      for (double t : {3.4, 3.6})
+      for (double t : temperatures)
         for (double g : {4.5, 5.5}) {
           if (version == 2) {
             if (index++ == missing) {
@@ -92,6 +95,34 @@ int main() {
   c.X[2] -= .08;
   const double t = std::pow(10., 3.47), g = std::pow(10., 5.14);
   const auto s = grid.eval(t, g, c);
+  std::istringstream hot_input(fixture(2, -1, true)), hot_missing_input(fixture(2, 0, true));
+  CompositionAtmosphereGrid hot(eos, hot_input, proxy), hot_missing(eos, hot_missing_input, proxy);
+  check(hot.check_temperature_extension(grid) == 12,
+        "a hotter extension retains all original source states");
+  const auto unchanged = hot.eval(t, g, c);
+  check(unchanged.T == s.T && unchanged.Pgas == s.Pgas && unchanged.rho == s.rho &&
+            hot.composition_response(t, g, c).dlnT_dXH ==
+                grid.composition_response(t, g, c).dlnT_dXH,
+        "appended temperature rows preserve values and derivatives in the old cells");
+  check(throws([&] { grid.check_temperature_extension(hot); }) &&
+            throws([&] { grid.check_temperature_extension(grid); }) &&
+            throws([&] { hot_missing.check_temperature_extension(grid); }),
+        "truncation, unchanged tables and removal of an old source state are rejected");
+  auto changed_text = fixture(2, -1, true);
+  const auto old_pressure = changed_text.find("\ndata\n") + 6;
+  changed_text.insert(old_pressure + 2, "1");
+  std::istringstream changed_input(changed_text);
+  check(throws([&] {
+          CompositionAtmosphereGrid changed(eos, changed_input, proxy);
+          changed.check_temperature_extension(grid);
+        }), "altered original boundary data cannot be called an extension");
+  changed_text = fixture(2, -1, true);
+  changed_text.replace(changed_text.find("tau 100"), 7, "tau 101");
+  std::istringstream depth_input(changed_text);
+  CompositionAtmosphereGrid depth(eos, depth_input, proxy);
+  check(throws([&] { depth.check_temperature_extension(grid); }),
+        "changed matching depth cannot be called an extension");
+
   std::istringstream complete_input(fixture(2)), partial_input(fixture(2, 0));
   CompositionAtmosphereGrid complete(eos, complete_input, proxy);
   CompositionAtmosphereGrid partial(eos, partial_input, proxy);
@@ -124,6 +155,9 @@ int main() {
   auto supported = c;
   supported.X[2] -= .09;
   supported.X[0] += .09;
+  check(hot_missing.check_temperature_extension(partial) == 12 &&
+            throws([&] { hot.check_temperature_extension(partial); }),
+        "extension retains missing old states instead of filling unverified cells");
   const auto intact = partial.eval(t, g, supported), old = grid.eval(t, g, supported);
   check(partial.covers(t, g, supported) && intact.T == old.T &&
             intact.P == old.P && intact.dlnT_dlnTeff == old.dlnT_dlnTeff &&

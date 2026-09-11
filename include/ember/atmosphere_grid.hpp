@@ -34,6 +34,10 @@ public:
   // covers() also checks the complete interpolation/derivative stencil.
   Support support() const;
   bool has_missing_states() const { return has_missing_states_; }
+  // Require identical physics labels, composition/gravity axes and every old
+  // source value/mask. Only higher-temperature rows may be appended. Returns
+  // the number of added source states; throws for any other table change.
+  std::size_t check_temperature_extension(const CompositionAtmosphereGrid &) const;
   // Derivatives with H1 or He3 replacing He4; same interpolant as eval().
   struct CompositionResponse {
     double dlnT_dXH, dlnT_dX3, dlnP_dXH, dlnP_dX3;

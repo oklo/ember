@@ -254,24 +254,29 @@ The local temperature there differs from the effective temperature of a
 frequency-dependent atmosphere. It rises from 3020 to 4111 K over the plotted
 history, while density falls overall from $1.430\times10^{-5}$ to
 $6.413\times10^{-6}\,\mathrm{g\,cm^{-3}}$.
+The two opacity maps use the same axes and color scale. The LBA97 map is
+inferred from the published shading, calibrated against the tabulated
+opacities of Alexander, Johnson and Rypma \cite{ajr83}. Nineteen cells excluded
+from the calibration differ by at most 0.12 in $\log_{10}\kappa$; this checks
+the approximate scale of the diagram, not the accuracy of its grain physics.
 
 \begin{figure}[H]\centering
 \includegraphics[width=\textwidth]{photospheric_evolution.pdf}
-\caption{Photospheric progression of the $0.1\Ms$ Ember model through
-$3.795\Tyr$, following the layout of LBA97 Figure~6. The line contains all
-6836 accepted stellar models; 22 selected models are shown as open circles,
-with diameters proportional to radius. Labels give the actual saved ages.
-The right panel enlarges the region visited by Ember. Density and local
-temperature are interpolated from the gas atmospheres at Rosseland optical
-depth $2/3$, using the evolving surface composition. The grayscale background
-is a fixed hydrogen-rich reference: the Rosseland absorption mean of the
-SYNSPEC wavelength table at $X=0.7$, $Z=0.02$ and zero $^3$He. It excludes
-scattering and grains and does not represent the changing total opacity along
-the track. LBA97's background includes grain opacity, producing a band of
-high opacity at low temperature that is absent from this gas-only map.
-Their figure also spans several stellar masses and includes contraction
-and cooling; here only the calculated hydrogen-burning track is shown.
-Hatching marks conditions outside the plotted opacity table.}
+\caption{Photospheric evolution of a $0.1\Ms$ star over hydrogen-rich
+opacity maps: (a) the grain-inclusive LBA97 Figure~6 map on an approximate
+calibrated opacity scale; (b) the Rosseland absorption mean of Ember's SYNSPEC
+wavelength table at $X=0.7$, $Z=0.02$ and zero $^3$He. Both panels use identical
+axes and grayscale normalization. The right map excludes scattering and
+grains; the low-temperature grain-opacity band in the left map is therefore
+absent. Hatching marks missing wavelength-table coverage. Both panels show
+the LBA97 track recovered from 897 figure markers and Ember's calculated
+track through $3.795\Tyr$. The LBA97 curve includes contraction and cooling;
+the plotted Ember models are burning hydrogen. Open-circle diameters scale
+with radius, with 48 LBA97 and 22 Ember samples. LBA97 radii are normalized
+using its stated main-sequence luminosity and temperature. Ember's local
+photospheric temperature and density are interpolated at Rosseland optical
+depth $2/3$ using the evolving surface composition. The fixed backgrounds
+do not represent the changing opacity of either star.}
 \label{fig:photospheric}
 \end{figure}
 
@@ -561,6 +566,9 @@ The full spectral radiative properties of Proxima Centauri.
 \bibitem{lba97} Laughlin, G., Bodenheimer, P., \& Adams, F. C. (1997).
 The End of the Main Sequence. \emph{ApJ}, 482, 420.
 \href{https://doi.org/10.1086/304125}{doi:10.1086/304125}.
+\bibitem{ajr83} Alexander, D. R., Johnson, H. R., \& Rypma, R. L. (1983).
+\emph{ApJ}, 272, 773, Table 2.
+\href{https://adsabs.harvard.edu/pdf/1983ApJ...272..773A}{Published opacity table}.
 \bibitem{adams97} Adams, F. C., \& Laughlin, G. (1997).
 A dying universe: the long-term fate and evolution of astrophysical objects.
 \emph{Rev. Mod. Phys.}, 69, 337.

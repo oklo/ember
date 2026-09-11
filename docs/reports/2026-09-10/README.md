@@ -4,7 +4,8 @@
 - [Ember and LBA97 in the HR diagram](lba97_hr.pdf)
 - [Hydrogen and helium-3 comparison](lba97_composition.pdf)
 - [Convective mass and hydrogen profile](convection_current.pdf)
-- [Photospheric evolution over gas opacity](photospheric_evolution.pdf), [PNG](photospheric_evolution.png), [data](photospheric_evolution.csv), and [source checks](photospheric_evolution_provenance.json)
+- [Photospheric evolution over LBA97 and Ember opacity](photospheric_evolution.pdf), [PNG](photospheric_evolution.png), [data](photospheric_evolution.csv), and [source checks](photospheric_evolution_provenance.json)
+- [LBA97 Figure 6 geometry and approximate opacity calibration](lba97_figure6_extraction.json)
 - [Plotted stellar history](evolution_latest.csv), [final structure](evolution_latest_profile.csv), and [input and validation record](evolution_latest_provenance.json)
 - [LBA97 figure coordinates and stated values](lba97_figure1_digitization.json)
 - [Digitized HR curve](lba97_digitized_hr.csv) and [composition curves](lba97_digitized_composition.csv)
@@ -51,12 +52,17 @@ Thin F77 lines have opacity 0.30; individual segments changing a surface
 quantity by more than 5%, or an abundance by more than 0.01, have opacity 0.08.
 No data are deleted or smoothed. Abrupt changes are not assumed to be errors.
 
-The photospheric diagram follows LBA97 Figure 6, with circle diameter
-proportional to stellar radius. Its background uses the Rosseland absorption
-mean of a fixed solar-hydrogen SYNSPEC table. **Grains and scattering are absent
-from this background**; it is not LBA97's grain-inclusive opacity table.
-The full panel uses LBA97's density and temperature ranges and hatches regions
-outside the source table. A second panel enlarges the Ember track.
+The photospheric diagram compares LBA97's grain-inclusive map with Ember's
+gas absorption map on identical axes and one opacity color scale. LBA97's
+156 shaded rectangles and 897 markers for its 0.1-solar-mass track are recovered
+from the original vector figure. Its shading has no colorbar: the numerical
+scale is approximate, calibrated against Alexander et al. (1983), Table 2.
+Nineteen withheld cells differ by at most 0.12 in log opacity. This is a check
+on the diagram calibration, not an error bound for the grain physics.
+Both panels show the two tracks, with circle diameters proportional to radius.
+LBA97 radii are normalized using its stated main-sequence luminosity and
+temperature. **Grains and scattering are absent from the Ember background.**
+Hatching marks conditions outside its wavelength table.
 The photosphere is extracted at Rosseland optical depth 2/3 from all 144
 accepted atmosphere structures, using their molecular equation of state.
 This is distinct from the interior's matching boundary at optical depth 100.
@@ -68,6 +74,12 @@ With local source files restored, regenerate those data from the repository root
 
 ```sh
 python3 scripts/export_photospheric_evolution.py docs/reports/2026-09-10 /tmp/ember-nongrey-exhaustion-t3800-v1.manifest.json /tmp/ember-nongrey-extended-v2/plane-004/opacity/fort.63 --probe /tmp/ember-nongrey-grid-domain-probe-v2
+```
+
+The independent figure extraction uses NumPy, SciPy and PyMuPDF:
+
+```sh
+python3 scripts/extract_lba97_photospheric_figure.py /path/to/lba97.pdf /path/to/ajr83.pdf docs/reports/2026-09-10/lba97_figure6_extraction.json
 ```
 
 With local recovery files present, `python3 build_figures.py --from-archives`

@@ -91,4 +91,29 @@ that the extended calculation subsequently supports ordinary exact restart.
 
 The output labels the extension explicitly. A new checkpoint is bound to the
 new executable and data. This mode does not permit changing the atmosphere or
-EOS; calculations using those new inputs begin from a consistent fresh model.
+EOS.
+
+## Adding hotter atmosphere models
+
+`--atmosphere-extension-restart FILE` continues a saved star after adding
+higher-temperature rows to a nongrey atmosphere table. It requires
+`--restart-source-executable FILE` and `--restart-source-atmosphere FILE`.
+The ordinary atmosphere argument selects the extended table. Every original
+temperature coordinate, composition/gravity axis, source value, missing-state
+mask, physical label and matching depth must remain identical. All other
+physical inputs and accuracy settings must match the checkpoint.
+
+The extension restores the actual internal structure, abundances, time step
+and counters. It does not construct a replacement star. The new atmosphere
+models require independent source validation before scientific use. A separate
+comparison establishes unchanged executable physics: the 512-point,
+10-billion-year control against the executable that produced the 3.818-trillion-
+year checkpoint gives identical complete JSON output. All 32 CTest suites pass,
+including exact continuation with unvisited added atmosphere rows and rejection
+of changes to retained values or matching depth.
+[Validation record](results/atmosphere_extension_restart_v1.json).
+
+The output identifies the extension and its source files. Subsequent native
+restarts use the new executable and table. This limited procedure does not
+permit an EOS change, filling old missing cells, changing existing atmosphere
+values, or relaxing source-domain checks.

@@ -1,6 +1,7 @@
 #include "ember/atmosphere_grid.hpp"
 #include "ember/constants.hpp"
 #include "ember/interp.hpp"
+#include <algorithm>
 #include <cmath>
 #include <fstream>
 #include <iomanip>
@@ -121,6 +122,37 @@ CompositionAtmosphereGrid::Support CompositionAtmosphereGrid::support() const {
           {axes_[1].front(), axes_[1].back()},
           {std::pow(10., axes_[2].front()), std::pow(10., axes_[2].back())},
           {std::pow(10., axes_[3].front()), std::pow(10., axes_[3].back())}};
+}
+
+std::size_t CompositionAtmosphereGrid::check_temperature_extension(
+    const CompositionAtmosphereGrid &old) const {
+  if (source_ != old.source_ || approximation_ != old.approximation_ ||
+      tau_ != old.tau_ || metals_ != old.metals_)
+    throw std::runtime_error("atmosphere extension: physics or matching depth changed");
+  for (std::size_t k : {0u, 1u, 3u})
+    if (axes_[k] != old.axes_[k])
+      throw std::runtime_error("atmosphere extension: composition or gravity axis changed");
+  if (axes_[2].size() <= old.axes_[2].size() ||
+      !std::equal(old.axes_[2].begin(), old.axes_[2].end(), axes_[2].begin()))
+    throw std::runtime_error("atmosphere extension: original temperature axis changed");
+  std::size_t added = 0;
+  for (std::size_t h = 0; h < axes_[0].size(); ++h)
+    for (std::size_t he = 0; he < axes_[1].size(); ++he)
+      for (std::size_t t = 0; t < axes_[2].size(); ++t)
+        for (std::size_t g = 0; g < axes_[3].size(); ++g) {
+          const auto i = ((h * axes_[1].size() + he) * axes_[2].size() + t) * axes_[3].size() + g;
+          if (t >= old.axes_[2].size()) {
+            added += valid_[i];
+            continue;
+          }
+          const auto j = ((h * axes_[1].size() + he) * old.axes_[2].size() + t) * axes_[3].size() + g;
+          if (valid_[i] != old.valid_[j] ||
+              (valid_[i] && (logT_[i] != old.logT_[j] || logPg_[i] != old.logPg_[j])))
+            throw std::runtime_error("atmosphere extension: original source values or mask changed");
+        }
+  if (!added)
+    throw std::runtime_error("atmosphere extension: no source states added");
+  return added;
 }
 
 bool CompositionAtmosphereGrid::covers(double Teff, double g,

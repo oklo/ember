@@ -44,6 +44,9 @@ calculation. It compares Ember
 primarily with Laughlin, Bodenheimer and Adams (1997), using stated values and
 approximate curves read from their figures. The reconstructed F77 results are
 a separate, faint supplementary comparison.
+The photospheric figure compares the LBA97 and Ember opacity maps on identical
+axes and a shared approximate opacity scale, with both 0.1-solar-mass tracks.
+It marks the grains missing from Ember's gas-only background.
 
 The ATOMIC opacity family for the hot interior extends to **zero hydrogen**. Twelve independent
 composition checks differ by at most **0.05257%** on tested hot-profile states;
@@ -61,6 +64,14 @@ in the twelve added structures. See the
 The **156-model extension through 4000 K** also passes its runtime/EOS,
 intermediate-temperature, depth and condensation checks and supplies the
 latest 3.818-trillion-year calculation. [Acceptance record](docs/results/nongrey_t4000_acceptance_v1.json).
+
+The **172-model extension through 4400 K** is now checked. Its independent
+matching-state differences are below **0.5987%**, eight depth comparisons pass,
+and no condensates occur in the sixteen new structures. All 156 existing states
+remain unchanged. The saved star is continuing with this table, using a tested
+restart procedure that preserves its structure and composition.
+[Atmosphere acceptance](docs/results/nongrey_t4400_acceptance_v1.json),
+[restart comparison](docs/results/atmosphere_extension_restart_v1.json).
 
 Numerical controls through 3.600 trillion years find central-hydrogen changes
 of 0.1849% with a fourfold tighter time control and 1.683% with twice as many

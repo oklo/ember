@@ -1,3 +1,96 @@
+# Accepted 4400 K atmosphere and active continuation — 2026-09-11 03:34 UTC
+
+The 172-source atmosphere has passed all checks: 156 old source rows and masks
+are exact, all172 nodes have EOS support; 4100/4300 heldout maximum matching
+error0.5986%, eight depth checks pass (maximum0.006377%), and all16 new
+structures have no condensates in the equilibrium diagnostic. Acceptance:
+docs/results/nongrey_t4400_acceptance_v1.json. Candidate table SHA
+c8a92d329c9e360d254ce37a70d39c7774d0081bc37926ae7d3ab80554cd23f9.
+All source/validation controllers are done. The source assembler now caches
+successful wavelength validation by exact content identity, axes and composition;
+it still hashes each use and rejects mutations. All28 importer tests pass.
+
+ACTIVE stellar continuation, session15107:
+  /tmp/ember-t4400-eos72-512-4000gyr-v1
+  out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.*
+uses /tmp/ember-atmosphere-extension-build-v1/apps/ember-evolve (copied to work),
+172-model4400K table, unchanged EOS72 and hot TOPS, Ledoux-diffusive,
+plasma neutrinos, tolerance2.5, two step workers. It successfully resumed the
+actual3.818T saved state using --atmosphere-extension-restart and has advanced
+beyond3.821T. Target4T is NOT yet a completed result. Do not launch duplicates.
+Old4000K checkpoint/executable remain unchanged. New output checkpoint is separate.
+The next possible source constraint is EOS upper material T (~11.89MK runtime);
+current center was11.05MK at restart. Inspect actual progress before extending.
+
+The paired opacity map is now completed in the 12-page September10 PDF:
+LBA97 Fig6 vector geometry (156 rectangles and8970.1Msun markers), calibrated
+approximately against AJR83 Table2; 15fitcells and19withheld cells (maximum
+0.1147 in log opacity). Both maps share axes and normalization, both tracks
+shown, grains explicitly absent from Ember's absorption-only background.
+897 original LBA marker diameters are normalized using its stated2228K,
+logL=-3.38 main-sequence point, which agrees with Figure6's temperature minimum.
+Do not treat inferred opacity values as a recovered numerical source table.
+Extraction script scripts/extract_lba97_photospheric_figure.py; committed
+lba97_figure6_extraction.json lets figures rebuild without source PDFs.
+Changed figure PDF/PNG and extracted JSON reproduce byte for byte in
+/tmp/ember-paper-opacity-comparison-v1. Paper build log
+/tmp/ember-paper-sept10-v10.log; page6 inspected; no warnings; four-significant-
+figure prose check passes (bibliography identifiers exempt). Validation and
+READMEs updated. Publication commit/push is pending immediately below.
+
+All-night full evolved100K objective remains ACTIVE and incomplete. No subagents.
+Preserve unrelated .DS_Store and helium coexistence probes. Next work includes
+verified joining of continuation histories for publication, upcoming EOS source
+coverage, CNO/metal-evolution assessment and coupled grain/cold-remnant physics.
+
+---
+
+# Autonomous work — 2026-09-11 03:22 UTC
+
+Publication completed: commit 0816bf1 on master and origin/master. The rebuilt
+September 10 PDF has 12 pages and all requested prose/title/significant-figure
+changes. GitHub description now states the checked 3.818 trillion-year endpoint.
+The paper still explicitly plots its pinned 3.795 trillion-year history.
+The requested paired opacity maps are being prepared from LBA97 Figure 6 vector
+rectangles. Its published grayscale has no colorbar: use an explicitly approximate
+calibration against AJR83 Table 2, with withheld-cell residuals recorded. Never
+present inferred values as exact original opacity. PMC85 local file is an XML
+error placeholder, not a recovered PDF. PyMuPDF is installed in /tmp/ember-plot-env;
+use UV_CACHE_DIR=/tmp/ember-uv-cache for package operations.
+
+All 16 added 4200/4400 K atmosphere nodes have converged in the three v1/v2/v3
+source directories below. Assembly is active, session45294, output
+/tmp/ember-nongrey-exhaustion-t4400-v1.dat; explicit 100-continuation plan is
+sources/nongrey_t4400_assembly_specification.json (72 base +100 =172 states).
+Seven depth controls are nearly complete in /tmp/ember-nongrey-t4400-depth-v1,
+session65024; compare eighth X=.2/y0/4200/g5.4 v1-deep against v2-shallow.
+Independent4100 accepted. Its actual bottom tau297.2 is below the requested300
+for the 4300 initializer; preserve failed receipt. Only4300 retried from that
+accepted4100 seed with tau150 in /tmp/ember-nongrey-t4400-independent-v2,
+session55371, retry plan in sources/. Audit interpolation, depths, condensation,
+all EOS/runtime nodes and all156 retained source values before selection.
+
+Uncommitted atmosphere-extension restart implementation is built in
+/tmp/ember-atmosphere-extension-build-v1. All32 CTests passed in91.78s;
+log /tmp/ember-atmosphere-extension-ctest-v1.log. Identical-input512-point
+10Gyr comparison against the actual4000K source executable also passed:
+/tmp/ember-atmosphere-extension-compatibility-v1/{old,new}.json are byteidentical,
+SHA229f1a16dfcdacaa6f0e53811354ae9c9382c3c2f0e6d3667dff5b07be46ab6e.
+The new option strictly retains old composition/gravity/temperature axes, labels,
+all source values and missing masks, and validates original checkpoint inputs.
+It restores the unmodified structure, composition, next step and counters.
+After atmosphere acceptance, use --atmosphere-extension-restart on the preserved
+3.818T checkpoint, --restart-source-atmosphere with the original4000table path,
+and --restart-source-executable with its copied a4ff... binary. All other inputs
+remain fixed. Use a new snapshot/work/checkpoint path; target4T. No production
+stellar run currently active. Report continuation as a segment, with verified
+joining needed for full-track publication. Do not overwrite the old checkpoint.
+
+The full100K evolved-remnant goal remains ACTIVE and unfinished. No subagents.
+Preserve unrelated .DS_Store and helium coexistence probes. Continue autonomously.
+
+---
+
 # Published-paper checkpoint preparation — 2026-09-11 02:44 UTC
 
 User explicitly requests autonomous overnight work toward the full track.
