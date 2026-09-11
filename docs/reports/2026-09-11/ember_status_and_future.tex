@@ -342,6 +342,7 @@ changes.
 
 The plotted track uses 172 gas atmospheres, spanning the combinations of
 surface temperature, gravity and composition that it visits through 4400 K.
+The 196-model gas table extends matching-state coverage to 5000 K.
 The tabulated source states include hydrogen fractions from 0.1 to 0.7 and
 $^3$He fractions from zero to 0.12. These outer ranges do not imply that every
 combination has been calculated: interpolation requires a complete set of
@@ -352,7 +353,7 @@ models with compositions between the tabulated values, matching temperatures
 differ by $-0.4837\%$ and $-0.7399\%$, and gas pressures by $+0.5707\%$
 and $+0.5137\%$. Changing the lower boundary of the source atmospheres
 changes matching values by at most $0.007883\%$ in the specified comparisons.
-All 144 source models have support in the selected 72-table equation of state.
+All 196 source models have support in the selected 72-table equation of state.
 Independent comparisons with FreeEOS at 1188 low-density points give a maximum
 heat-capacity difference of $0.2952\%$; 792 comparisons at higher densities
 also pass the stated criteria. At the final stellar model, independent
@@ -361,16 +362,17 @@ differ by at most 0.2081\% in heat capacity. This is a sampled comparison,
 not a bound across the EOS table: at some other mixtures, interpolation
 across a join in the source electron fits produces larger differences.
 
-A 156-model atmosphere table extends to
-4000 K. At an independently calculated 3900 K atmosphere, interpolated matching
+At an independently calculated 3900 K atmosphere, interpolated matching
 temperature differs by $-0.4427\%$ and gas pressure by $+0.4107\%$.
 The largest change in four lower-boundary comparisons is $0.005127\%$.
-Chemistry checks find no condensates in the twelve added 3800 K structures
-or the twelve added 4000 K structures. The sixteen source structures at
-4200 and 4400 K also contain no condensates. Independent atmospheres at
+Independent atmospheres at
 4100 and 4300 K differ from the table by at most 0.5986\% in the matching
 state; eight lower-boundary comparisons change it by at most 0.006377\%.
-All 172 atmosphere models have support in the selected equation of state.
+At 4500, 4700 and 4900 K, independent matching temperatures differ by at most
+0.05225\% and gas pressures by 0.5376\%. Twelve lower-boundary comparisons
+at 4600--5000 K change matching values by at most 0.007810\%.
+Equilibrium chemistry finds no condensates in the tested structures from
+3800 through 5000~K.
 
 The high-temperature ATOMIC opacity tables include additional mixtures with
 $X=0$, 0.025, 0.05 and 0.075 at three metal fractions. Twelve independent
@@ -383,7 +385,7 @@ The current evolving atmosphere uses gas-only opacity. Independent chemistry
 checks found no condensates in the tested 3000--3200 K atmospheres, but found
 them in the cool upper layers of 2600--2800 K models. Effective temperature
 alone is therefore insufficient to decide whether grains form. Checks on the
-added warm hydrogen-poor structures through 4400 K find no condensates;
+warm hydrogen-poor structures through 5000 K find no condensates;
 colder structures still require atmosphere calculations with grain formation
 and opacity included.
 

@@ -12,15 +12,18 @@ from pathlib import Path
 import re
 
 
-def validate_mixture(text, expected):
+def validate_mixture(text, expected, *, dimensions=(50,71)):
     """Check every returned element, allowing omitted H only for exactly zero H.
 
     TOPS omits zero-abundance hydrogen from its normalized composition and
     reports 20 materials for our helium/GS98-metal endpoint. Positive-hydrogen
     mixtures still require all 21 elements; no absent metal is inferred.
     """
-    dimensions=re.search(r'Number of T\s*=\s*(\d+)\s+Number of rho\s*=\s*(\d+)\s+Number of materials\s*=\s*(\d+)',text)
-    if not dimensions or tuple(map(int,dimensions.groups()[:2]))!=(50,71):
+    if (len(dimensions)!=2 or any(type(n) is not int or n<1 for n in dimensions)
+            or dimensions[1]>100):
+        raise ValueError('invalid requested dimensions')
+    header=re.search(r'Number of T\s*=\s*(\d+)\s+Number of rho\s*=\s*(\d+)\s+Number of materials\s*=\s*(\d+)',text)
+    if not header or tuple(map(int,header.groups()[:2]))!=tuple(dimensions):
         raise ValueError('unexpected dimensions')
     rows=text.split('No. Fraction Mass Fraction  At. No.  Chem. Sym.  Mat ID.\n')[1].split('Temperature grid')[0]
     elements={}
@@ -35,7 +38,7 @@ def validate_mixture(text, expected):
     if x!=0 or 'H' in elements:required.add('H')
     hydrogen=elements.get('H',0.)
     hydrogen_ok=hydrogen==0 if x==0 else abs(hydrogen-x)<=min(1e-6,5e-5*x)
-    if (len(elements)!=int(dimensions.group(3)) or set(elements)!=required
+    if (len(elements)!=int(header.group(3)) or set(elements)!=required
             or not hydrogen_ok or abs(elements['He']-(1-expected.get('Z',.02)-x))>1e-6):
         raise ValueError('wrong source mixture')
     # Verify every metal against the original GS98 request, not just sum Z.
@@ -45,14 +48,22 @@ def validate_mixture(text, expected):
     return elements
 
 
-def read(path, expected):
+def read(path, expected, *, dimensions=(50,71)):
     raw=path.read_bytes()
     if hashlib.sha256(raw).hexdigest()!=expected['sha256']:
         raise ValueError(f'unexpected checksum: {path}')
     text=raw.decode()
-    validate_mixture(text,expected)
-    warning=text.split('Temp        Den Req     Den Used\n')[1].split('Normalized composition')[0]
-    excluded={tuple(map(float,row.split()[:2])) for row in warning.splitlines() if row.strip()}
+    validate_mixture(text,expected,dimensions=dimensions)
+    prefix=text.split('Normalized composition')[0]
+    marker='Temp        Den Req     Den Used\n'
+    if marker in prefix:
+        warning=prefix.split(marker)[1]
+        excluded={tuple(map(float,row.split()[:2])) for row in warning.splitlines() if row.strip()}
+    elif re.search(r'warning|den req|den used|substitut',prefix,re.IGNORECASE):
+        raise ValueError('unrecognized source density warning')
+    else:
+        # A supported single-temperature request can have no warning block.
+        excluded=set()
     cells={}
     for part in text.split('Density     Ross opa    Planck opa  No. Free    Av Sq Free  T=  ')[1:]:
         lines=part.splitlines();t=float(lines[0])
@@ -64,7 +75,7 @@ def read(path, expected):
                 raise ValueError('bad source cell')
             cells[t,rho]=kappa
     tt=sorted({t for t,r in cells});rr=sorted({r for t,r in cells})
-    if len(tt)!=50 or len(rr)!=71 or set(cells)!={(t,r) for t in tt for r in rr}:
+    if len(tt)!=dimensions[0] or len(rr)!=dimensions[1] or set(cells)!={(t,r) for t in tt for r in rr}:
         raise ValueError('missing source cells')
     return tt,rr,cells,excluded
 

@@ -30,8 +30,12 @@ source states remain unchanged; independent matching-state differences are
 below 0.5987%. [Acceptance](results/nongrey_t4400_acceptance_v1.json).
 The saved 3.818-trillion-year star continued to 3.848 trillion years with this
 table through a checked atmosphere-extension restart. The physical state at
-the join is exact. Atmospheres through 5000 K and independent source/depth
-controls are running; see HANDOFF.md for jobs and input files.
+the join is exact. The 196-model extension through 5000 K now passes all source,
+interpolation, depth, condensation and EOS/runtime checks. It retains every
+existing source state and missing-state mask. Three independent matching-state
+comparisons differ by at most 0.5376%; twelve lower-boundary comparisons pass.
+[Acceptance](results/nongrey_t5000_acceptance_v1.json). The next stellar
+calculation awaits the numerical-electron EOS checks; see HANDOFF.md for jobs.
 
 A hotter EOS candidate preserves all existing potentials and extends material
 temperature coverage to 21.13 MK. Added hot source comparisons and all 512

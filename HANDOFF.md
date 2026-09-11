@@ -1,3 +1,224 @@
+# Accepted 5000 K atmosphere and plasma-opacity investigation — 2026-09-11 06:52 UTC
+
+The full 0.1-Msun to evolved 100 K remnant goal is ACTIVE. User authorizes
+continued autonomous work and pushes. No subagents. Preserve unrelated
+DS_Store files and scripts/audit_helium_coexistence.py and
+scripts/helium_electron_probe.cpp. No stellar production job is running.
+The verified trajectory remains at 3.848 T, central X=0.002467, Teff=4400 K.
+Master/origin were last published at 8834be0; a new publication is pending.
+
+The 196-model gas atmosphere through 5000 K is ACCEPTED. All source,
+interpolation, retained-state/mask, EOS/runtime, 12 depth and 24 condensation
+checks pass. All atmosphere controllers are finished. Table:
+/tmp/ember-nongrey-exhaustion-t5000-v1.dat, SHA
+0bb5064bcccced7d58499186b16f29a37412a4c0052853c410040bbc2c217200.
+Acceptance: docs/results/nongrey_t5000_acceptance_v1.json.
+The September 11 paper now reports these checks while retaining the actual
+3.848 T track. Twelve pages; build v4 has no warnings, changed page 8 inspected,
+all other figure/data hashes unchanged. Updated PDF/TeX/validation and README
+are UNCOMMITTED. Build log /tmp/ember-paper-sept11-v4.log.
+
+ACTIVE EOS jobs (inspect before launching):
+- session26558, base 72-mixture numerical-electron source, eight workers;
+  /tmp/ember-numerical-electron-eos72-v1, log ...eos72-v2.log;
+  13127 / 22248 cached isotherms at this note. The previous four-worker
+  controller was deliberately stopped; all 7368 completed caches passed
+  fingerprints before resumption. No corrupt/lost completed source.
+- STOPPED with source failure: session35222, separate high-density addition;
+  /tmp/ember-numerical-electron-dense-addition-v1, log same prefix.log;
+  639 / 22248 cached isotherms. Same 309 temperatures and 72 compositions,
+  logQ=2.5..4 at spacing0.0125. Only one overlapping density per temperature;
+  2.692 million source queries, including overlap. Pilot24 queries has two
+  finite nonconverged states at logT=5; these must remain masked.
+The dense addition stopped at X=.35, X3=0, logT=3.6: the FreeEOS
+numerical electron integral exceeded its maximum subdivision count while
+crossing pressure ionization. All 639 completed isotherms and the failure log
+are preserved. Do not relaunch the full cold dense rectangle. Added coverage
+should first target the hot dense states needed for evolution, with uncomputed
+cold states explicitly absent; no fabricated source flags or values.
+The base eight-worker calculation remains active and needs completion and
+source/thermodynamic/profile checks. No new EOS is selected.
+New scripts/merge_metal_eos_density_sources.py retains base source rows exactly,
+compares the shared converged density responses, and joins the independent
+raw cubes. Three tests pass (row retention, changed overlap, wrong physics),
+but REAL SOURCE MERGE HAS NOT RUN. Import after completed merge only;
+new family requires fresh stellar evolution, not an EOS-identity restart.
+
+DENSE OPACITY: source calculations are finished, but NO CANDIDATE ACCEPTED.
+Coarse54/12-source audit fails at4.738%; 81-density refinement fails at0.7202%.
+Composition-only maximum0.5060%. Both failed reports remain in docs/results/.
+Current fine candidate /tmp/ember-dense-opacity-fine-family-v1; original
+138024 cells retained exactly, adds123231. Coarse v2 directory fixes relocated
+AESOPUS paths; all512 actual-profile opacity values/four derivatives EXACT.
+C++ density-prefix format passes33 suites and fixed512-point10Gyr byte-exact
+stellar control. New Python EOS-merge and TOPS warning tests also pass.
+Assembler now copies external AESOPUS dependencies into each candidate.
+
+IMPORTANT NEW FINDING: further density refinement alone is not the remedy.
+91-point narrow TOPS query at X=.0375, Z=.02, T=.225 keV, rho1.829e5..1.919e5
+shows sawtooth jumps up0.7637% for density changes of100 g/cm3. Turning OFF the
+source plasma-cutoff option removes the sawtooth. Both are diagnostics ONLY.
+/tmp/ember-tops-density-structure-v2 (v1 rejected zero-density service reply),
+docs/results/tops_density_structure_v1.json. The corrected diagnostic uses a
+linear range; the service rejected the long specific-density list. Importer
+now accepts an absent warning block only when there is no warning text, and
+rejects unrecognized warning formats; all7 TOPS source tests pass.
+
+Two full spectral comparisons are COMPLETE:
+/tmp/ember-tops-density-spectrum-v1/cutoff-{on,off}/source.txt,
+T=.225 keV, densities187380 and187480. All14900 spectral rows at each density
+are EXACTLY identical with cutoff on/off. Only the reported means change.
+Off Rosseland values1721.5/1722 reproduce independent spectral integration;
+on means29.068/28.846 match CONDITIONAL averages above u about39.9/40.0.
+On Planck means29.347/29.122; off7098.4/7099.5. Small density change moves the
+cutoff to the next frequency node. The inferred Rosseland weight above the
+cutoff is about5e-13: full-normalization transport opacity would be about
+6e13, not29. This normalization finding is a STRONG DIAGNOSTIC, not yet a
+production correction. Do NOT simply turn off plasma physics or smooth/fill
+source jumps. Investigate the averaging definition and proper physical flux.
+Need a reproducible spectral-normalization audit and actual-profile impact.
+
+Primary Colgan OPLIB paper downloaded /tmp/ember-colgan-oplib-2016.pdf and.txt
+from https://www.osti.gov/servlets/purl/1335616. Eq1 visually inspected on PDF
+page4: inverse Rosseland = integral(n_nu^3 / kappa_nu * dB/dT) / integral(dB/dT).
+Section2.8 says web means use n=1 above plasma cutoff and0 below. The current
+observed conditional normalization differs from that equation. Bibliography:
+Armstrong, Colgan, Kilcrease, Magee2014, High Energy Density Physics10,61.
+FAQ/help https://aphysics2.lanl.gov/static/opacdocs/opac-help.html.
+The site says material library last updated Aug19,2015; individual result
+headers do not identify a unique material release.
+
+Additional density pilots in /tmp/ember-tops-density-x003p75-z020-{fine,100,
+half1,half2}-v1: even161 combined densities show about0.8% discrepancies against
+independent samples, consistent with the resolved cutoff sawtooth. Do NOT
+launch another broad source refinement until this is understood.
+
+All work after8834be0 remains UNCOMMITTED, including completed helium line
+source/sensitivity checks summarized in the next sections. Publication of the
+5000 K atmosphere/paper and verified code is next; then continue EOS/source
+physics and the fresh trajectory. Nothing establishes a completed remnant.
+
+---
+
+# Atmosphere completion and dense-opacity checks — 2026-09-11 06:10 UTC
+
+Goal ACTIVE: continue the initially 0.1-Msun star to an evolved 100 K helium
+remnant. No stellar production job is running. Checked endpoint remains
+3.848 T / Teff 4400 K / central X=0.002467. September 11 PDF and GitHub are
+published at 8834be0. Current uncommitted work below must be reviewed/pushed.
+Do not spawn subagents; preserve unrelated DS_Store and helium coexistence probes.
+
+Atmosphere main session44060 and independent67190 COMPLETE. Assembled196-node
+candidate /tmp/ember-nongrey-exhaustion-t5000-v1.dat, SHA
+0bb5064bcccced7d58499186b16f29a37412a4c0052853c410040bbc2c217200.
+All172 old states and188 old missing masks exact (new reusable
+scripts/audit_atmosphere_retention.py). All196 runtime/EOS nodes supported.
+Independent4500/4700/4900 matching-temperature errors -0.05225/-0.01188/
+-0.005461%; gas-pressure errors +0.5376/+0.5013/+0.5011%.
+All24 added profiles have no condensates in the FastChem diagnostic.
+Depth controller5967 still active at /tmp/ember-nongrey-t5000-depth-v1;
+10/12 accepted and audited, all pass. Last two X=.2/T5000/g5.15,5.4 pending.
+DO NOT accept table until all12 depth checks pass and acceptance report written.
+New reports docs/results/nongrey_t5000_* and nongrey_x*_depth120_v1.json.
+
+EOS controller46589 STOPPED deliberately to raise workers4->8. All7368 completed
+isotherms decompressed, input fingerprints checked; no source lost/corrupt.
+New ACTIVE session26558, launcher /tmp/ember-numerical-electron-eos72-launch-v2.py,
+log /tmp/ember-numerical-electron-eos72-v2.log, same work directory and physics.
+Plan data/eos/sources/numerical_electron_eos72_resume_v1_specification.json.
+Scheduling report docs/results/numerical_electron_eos72_scheduling_v1.json.
+Full72-mixture numerical-electron source still needs completion, import,
+broad source/identity/profile/atmosphere audits and a FRESH stellar trajectory.
+Do not change physical inputs on an existing checkpoint to switch EOS modes.
+
+NEW dense-opacity runtime supports valid density prefixes per isotherm, format
+EMBER_OPACITY_TABLE 2. Missing suffixes remain unqueryable, including all four
+thermal rows and both composition planes needed for derivatives. Existing
+complete tables retain their fast path. Build /tmp/ember-density-opacity-build-v1
+passes all33 CTests; same512-point10Gyr stellar input output byte-identical to
+prior executable (SHA229f1a16...). NewexeSHA
+a4e48b67505fa26ebf443108df5cfd27348f1a89cf79d7bc56f1f52dcfa19f1c.
+Report docs/results/opacity_density_support_code_v1.json.
+
+54 raw density requests COMPLETE at /tmp/ember-tops-density-family-v1;
+12 independent mixtures COMPLETE at /tmp/ember-tops-density-heldout-v1.
+Source uses original50 temperatures, rho1e4..1e6,11 and21 densities; substituted
+source cells excluded. Candidate /tmp/ember-dense-opacity-family-v1 retains all
+138024 old source cells exactly, adds14958. NOT SELECTED: independent check
+FAILED at4.738% (criterion0.5%). Source nodes agree to roundoff and derivatives
+pass. Preserve failed docs/results/tops_density_extension_source_v1.json.
+Error chiefly density interpolation, with composition alone up0.5060%.
+An81-density exact-mixture diagnostic X=.0375/Z=.02 shows coarse spacing0.2,
+0.1,0.05 dex errors4.280%,1.894%,1.016% against finer source points.
+
+ACTIVE refined54-mixture source: session15888,
+/tmp/ember-tops-density-fine-v1, log same prefix.log,81 densities0.025 dex.
+Plan data/opacity/sources/tops_density_fine_v1_specification.json.
+Independent91-density/12-mixture plan is PREPARED but NOT STARTED:
+data/opacity/sources/tops_density_fine_heldout_v1_specification.json.
+Fetch requests remain sequential/resumable. Assembly and audit now read
+explicit receipt dimensions, not assumed11/21 counts. Independent density
+points are recognized by actual source-axis membership. Do not loosen criteria.
+No dense-opacity extension checkpoint guard exists; use a fresh stellar run
+if the dense candidate is later accepted. Original stellar opacity unchanged.
+
+Helium4471 and profile-EOS audit work follows in the next section. All new
+scripts/reports/docs/runtime changes remain UNCOMMITTED as of this note.
+
+---
+
+# Published paper and helium opacity checks — 2026-09-11 05:34 UTC
+
+Publication is COMPLETE: master and origin/master were verified at
+8834be0f6f7211adb0c914c0781bc60b1c692210. The September 11 PDF plots the
+checked 3.848 T track; the September 10 daily archive is preserved. GitHub's
+description is current. The full evolved 100 K remnant goal remains ACTIVE.
+
+No stellar job is running. Main 5000 K atmosphere session44060 has
+18/24 accepted nodes, depth session5967 has 5/12. Independent session67190
+is COMPLETE: all three4500/4700/4900 source models accepted. Inspect before
+launching. Numerical-electron EOS session46589 remains active with four workers,
+3970/22248 reusable isotherms present at this check. Source inputs unchanged.
+
+Helium4471 failure is traced to negative polynomial extrapolation in electron
+density outside the old Barnard/Cooper/Smith table. The actual canonical
+SYNSPEC PHE1 has the same algorithm as the separate source probe. New source
+comparison scripts and reports are UNCOMMITTED:
+  scripts/audit_helium_stark_tables.py
+  docs/results/helium_stark_tables_v1.json
+  scripts/audit_helium_line_opacity.py
+  scripts/compare_helium_line_opacity.py
+  docs/results/helium4471_opacity_sensitivity_v1.json
+  docs/NONGREY.md (also corrected its stale172-model/EOS description).
+
+Published Tremblay26/Beauchamp25 files are downloaded in /tmp/ember-helium-
+stark-2026-*.txt, all published MD5s verified. Three1188-profile files parse;
+342simulation entries,846nonsimulation entries EXACTLY match NLD as documented.
+Gigosos2009 CDS and original tar tables (/tmp/ember-helium-stark-2009-*) match
+exactly;33temperature/density controls quantify ion-mass differences.
+2026profiles already include thermal Doppler broadening, use HeII perturbers,
+omit dissolution in simulations, maxNe6e17. Do not claim coverage above it.
+4471finite-range areas miss wings: PCHIP+asymptotic2.5-power tail estimates
+are within0.1884% forNe>=1e16, but this is NOT an accepted tail prescription
+or a global normalization bound. Low-density core sampling is another issue.
+
+Separate omission diagnostic session49222 is COMPLETE. All four isotherms
+(10.10/11.53/13.15/15.00kK) finite, X=.175,Y3=.005; original source unchanged.
+Work /tmp/ember-helium4471-omission-v1. Prepared initialization_only prevents
+atmosphere-continuation/assembly adoption. Three original finite-isotherm
+comparisons (57states) give maxRosseland change0.06470%, small in these
+controls; some old finite cells contain negative line contributions. This
+is a sensitivity diagnostic, not a bound on atmospheric structure and NOT
+permission to omit the line. A physically supported replacement is unfinished.
+
+Next: finish196-node5000K atmosphere checks; finish full numerical-electron
+EOS, import and audit, then FRESH stellar evolution (source treatment changes).
+Keep canonical stellar inputs fixed until checks pass. No subagents. Preserve
+unrelated DS_Store and helium coexistence scripts. See following sections for
+source plans, executable/checkpoint identities and unfinished physical work.
+
+---
+
 # September 11 paper and numerical-electron EOS source — 2026-09-11 05:02 UTC
 
 The full evolved 100 K remnant goal remains ACTIVE and unfinished. User explicitly

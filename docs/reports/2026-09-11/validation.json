@@ -18,10 +18,10 @@
   "paper": {
     "pages": 12,
     "compiler": "Tectonic",
-    "build_log": "/tmp/ember-paper-sept11-v2.log",
-    "build_log_sha256": "89511fafbba59d257aceeb21347e7b748a213669692758b21c3edbbb7a4cf887",
+    "build_log": "/tmp/ember-paper-sept11-v4.log",
+    "build_log_sha256": "32dd45f7c7cb57b2c58d46b6fc6c9763c82f42e5cfc123239818a307d56ef57c",
     "warnings": [],
-    "visual_inspection": "All twelve pages rendered as a contact sheet and inspected; updated HR, convection and paired opacity figures fit without clipping. The final build changes only computing-time values and has no warnings.",
+    "visual_inspection": "All twelve pages were inspected for the plotted-track revision. The subsequent atmosphere-only update preserves twelve pages; its changed page 8 was rendered and inspected, and all figure/data files retain their verified hashes.",
     "regeneration_directory": "/tmp/ember-paper-sept11-reproduce-v1",
     "figure_pairs_byte_identical": [
       "lba97_hr",
@@ -48,8 +48,8 @@
       "convection_transition.pdf": "d56be608666ed707f2e1526c02b8a98a34d3cdd3af7c5b535b83032c41205566",
       "convection_transition.png": "f58effc65b9cf1247efd19b6305a1d81519ec0eeeff183826a1ef9c9537478c9",
       "current_evolution.py": "efaa60c048116ca1aa5f04d4b62ed8402ffda8ae87120e3a54ab57bd300bf9d4",
-      "ember_status_and_future.pdf": "da228fb0a2cc8bcad609c64937a4da11534d3244006b61fb3312e6244e9150a5",
-      "ember_status_and_future.tex": "7250b75ba4afbdf1c28688a92e8ca8fe50329525989321ea0d296766c8ab0677",
+      "ember_status_and_future.pdf": "12fe6fc623c4a8b6515e75306ea3b989b3062cebc6215fde48ce4eb45e995911",
+      "ember_status_and_future.tex": "d4058f0515bb8046b2ffe9aa0d56e7f572cb293c2672db5e0c34521ddcd7f464",
       "ember_transition_trial.json": "069df004afe7ba9b2865eace6629dd358e5c364cb37b9a9601b20aac6aed9d3a",
       "evolution_1024_continuation.csv": "14eda0e3354c40935b31100a02f62cf275871d7935f6fb11f216735d2207826f",
       "evolution_history.csv": "d883dd4c0fc12ad82a3a21a72bb670bcdd9701179c15bdd2090d4874dde1584e",
@@ -108,5 +108,13 @@
     "unvisited_mixture_failed_comparison": "../../results/metal_eos_hot_source_v1.json",
     "source_fit_join": "../../results/freeeos_electron_fit_join_v1.json",
     "note": "Profile passes the comparison; this does not establish a uniform table bound. Numerical-electron source generation is separate and not selected."
+  },
+  "atmosphere_update": {
+    "checked_utc": "2026-09-11T06:49:29.726670+00:00",
+    "acceptance": "results/nongrey_t5000_acceptance_v1.json",
+    "acceptance_sha256": "37561d476d46946dad5b5d64bd51b516e4c852ed8aec53005f7ee9772ee13656",
+    "source_models": 196,
+    "trajectory_unchanged": true,
+    "scope": "Only atmosphere coverage and its completed checks changed in the paper; the plotted stellar history remains at 3.848 trillion years."
   }
 }

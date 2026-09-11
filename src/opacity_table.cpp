@@ -4,6 +4,7 @@
 #include <cmath>
 #include <fstream>
 #include <limits>
+#include <sstream>
 #include <stdexcept>
 #include <string>
 
@@ -23,7 +24,20 @@ TabulatedOpacity::TabulatedOpacity(const std::filesystem::path& file, std::strin
   std::ifstream in(file);
   if (!in) throw std::runtime_error("TabulatedOpacity: cannot open " + file.string());
   std::size_t nx = 0, nt = 0, nr = 0;
-  in >> nx >> nt >> nr;
+  std::string first; in >> first;
+  bool prefixes = false;
+  if (first == "EMBER_OPACITY_TABLE") {
+    int version = 0; in >> version;
+    if (version != 2) throw std::runtime_error("TabulatedOpacity: unsupported table version");
+    prefixes = true;
+    in >> nx >> nt >> nr;
+  } else {
+    std::istringstream count(first);
+    char extra{};
+    if (!(count >> nx) || (count >> extra))
+      throw std::runtime_error("TabulatedOpacity: bad table header");
+    in >> nt >> nr;
+  }
   if (!in || nx < 1 || nt < 4 || nr < 4 || nx > 1000 || nt > 10000 || nr > 10000
       || nx * nt * nr > 10000000)
     throw std::runtime_error("TabulatedOpacity: bad header in " + file.string());
@@ -32,15 +46,29 @@ TabulatedOpacity::TabulatedOpacity(const std::filesystem::path& file, std::strin
   logD_.resize(nr); for (auto& v : logD_) in >> v;
   logT_.resize(nt); for (auto& v : logT_) in >> v;
   X_.resize(nx);
-  k_.resize(nx * nt * nr);
+  k_.resize(nx * nt * nr, std::numeric_limits<double>::quiet_NaN());
+  if (prefixes) row_sizes_.resize(nx * nt);
   for (std::size_t ix = 0; ix < nx; ++ix) {
     double z{}; in >> X_[ix] >> z;
     if (ix == 0) Z_ = z;
     if (!in || !std::isfinite(z) || z < 0.0 || z > 1.0 || z != Z_)
       throw std::runtime_error("TabulatedOpacity: inconsistent or invalid metallicity");
-    for (std::size_t it = 0; it < nt; ++it)
-      for (std::size_t ir = 0; ir < nr; ++ir)
-        in >> k_[(ix * nt + it) * nr + ir];
+    for (std::size_t it = 0; it < nt; ++it) {
+      std::size_t count = nr;
+      if (prefixes) {
+        in >> count;
+        if (!in || count < 4 || count > nr)
+          throw std::runtime_error("TabulatedOpacity: invalid density support prefix");
+        row_sizes_[ix * nt + it] = count;
+      }
+      for (std::size_t ir = 0; ir < count; ++ir) {
+        double& value = k_[(ix * nt + it) * nr + ir];
+        in >> value;
+        if (!in || !std::isfinite(value) || value == 9.999
+            || !std::isfinite(std::pow(10.0, value)) || !(std::pow(10.0, value) > 0.0))
+          throw std::runtime_error("TabulatedOpacity: invalid opacity or missing cell");
+      }
+    }
   }
   if (!in) throw std::runtime_error("TabulatedOpacity: truncated table " + file.string());
   auto valid_axis = [](const auto& axis) {
@@ -49,12 +77,8 @@ TabulatedOpacity::TabulatedOpacity(const std::filesystem::path& file, std::strin
   };
   if (!valid_axis(X_) || !valid_axis(logT_) || !valid_axis(logD_))
     throw std::runtime_error("TabulatedOpacity: axes not monotone in " + file.string());
-  if (X_.front() < 0.0 || X_.back() + Z_ > 1.0 + 1e-12
-      || !std::all_of(k_.begin(), k_.end(), [](double v) {
-           return std::isfinite(v) && v != 9.999 && std::isfinite(std::pow(10.0, v))
-               && std::pow(10.0, v) > 0.0;
-         }))
-    throw std::runtime_error("TabulatedOpacity: invalid composition, opacity, or missing cell");
+  if (X_.front() < 0.0 || X_.back() + Z_ > 1.0 + 1e-12)
+    throw std::runtime_error("TabulatedOpacity: invalid composition");
   std::string extra;
   if (in >> extra) throw std::runtime_error("TabulatedOpacity: unexpected trailing data");
 }
@@ -66,9 +90,24 @@ TabulatedOpacity::Range TabulatedOpacity::range() const {
 bool TabulatedOpacity::covers(double T, double rho, double X) const {
   const double lt = std::log10(T);
   const double lr = std::log10(rho) - (axis_ == DensityAxis::logR ? 3.0 * (lt - 6.0) : 0.0);
-  return inside(lt, logT_.front(), logT_.back())
-      && inside(lr, logD_.front(), logD_.back())
-      && X  >= X_.front()    && X  <= X_.back();
+  if (!inside(lt, logT_.front(), logT_.back())
+      || !(X >= X_.front() && X <= X_.back())) return false;
+  const auto count = active_density_size(std::clamp(lt, logT_.front(), logT_.back()), X);
+  return inside(lr, logD_.front(), logD_[count - 1]);
+}
+
+std::size_t TabulatedOpacity::active_density_size(double lt, double X) const {
+  if (row_sizes_.empty()) return logD_.size();
+  const auto ix = X_.size() == 1 ? 0 : interp::locate(X_, X);
+  const auto it = interp::locate(logT_, lt);
+  const auto t0 = std::min(it > 0 ? it - 1 : 0, logT_.size() - 4);
+  std::size_t count = logD_.size();
+  // Both composition planes and all four isotherms contribute to value
+  // or derivatives, including at exact knots and closed table boundaries.
+  for (std::size_t m = 0; m < 2; ++m)
+    for (std::size_t j = 0; j < 4; ++j)
+      count = std::min(count, row_sizes_[std::min(ix + m, X_.size() - 1) * logT_.size() + t0 + j]);
+  return count;
 }
 
 std::optional<Opacity::DensityRange> TabulatedOpacity::density_range(double T, const Composition& comp) const {
@@ -79,7 +118,8 @@ std::optional<Opacity::DensityRange> TabulatedOpacity::density_range(double T, c
     throw std::domain_error("TabulatedOpacity: temperature or composition outside table");
   const double lt = std::clamp(raw_lt, logT_.front(), logT_.back());
   const double shift = axis_ == DensityAxis::logR ? 3.0 * (lt - 6.0) : 0.0;
-  return DensityRange{std::pow(10.0, logD_.front() + shift), std::pow(10.0, logD_.back() + shift)};
+  const auto count = active_density_size(lt, X);
+  return DensityRange{std::pow(10.0, logD_.front() + shift), std::pow(10.0, logD_[count - 1] + shift)};
 }
 
 OpacityState TabulatedOpacity::eval(double T, double rho, const Composition& comp) const {
@@ -93,7 +133,7 @@ OpacityState TabulatedOpacity::eval(double T, double rho, const Composition& com
                             (axis_ == DensityAxis::logR ? ", logR=" : ", logrho=") + std::to_string(lr) + ", X=" + std::to_string(X) +
                             ") outside table");
   lt = std::clamp(lt, logT_.front(), logT_.back());
-  lr = std::clamp(lr, logD_.front(), logD_.back());
+  lr = std::clamp(lr, logD_.front(), logD_[active_density_size(lt, X) - 1]);
 
   // Interpolate in the density coordinate along four bracketing isotherms, then across them in
   // log T, then linearly in X. X is frozen through each thermal Newton solve;
@@ -110,9 +150,9 @@ OpacityState TabulatedOpacity::eval(double T, double rho, const Composition& com
       const std::size_t ti = t0 + j;
       tt[j] = logT_[ti];
       // one isotherm, interpolated in the density coordinate
-      const auto row = std::span<const double>(&k_[(xi * logT_.size() + ti) * logD_.size()],
-                                               logD_.size());
-      const auto r = interp::hermite(logD_, row, lr);
+      const auto count = row_sizes_.empty() ? logD_.size() : row_sizes_[xi * logT_.size() + ti];
+      const auto row = std::span<const double>(&k_[(xi * logT_.size() + ti) * logD_.size()], count);
+      const auto r = interp::hermite(std::span<const double>(logD_.data(), count), row, lr);
       col[j] = r.y; dcol[j] = r.dydx;
     }
     const auto a = interp::hermite(std::span<const double>(tt, 4),

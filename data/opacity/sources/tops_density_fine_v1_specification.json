@@ -1,0 +1,331 @@
+{
+  "scope": "Refined density sampling after the coarse candidate failed independent checks. Source opacity only; excludes substitutions and changes no stellar input.",
+  "maximum_density_g_cm3": 1000000.0,
+  "density_points": 81,
+  "requests": [
+    {
+      "X": 0.0,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x000-z010"
+    },
+    {
+      "X": 0.025,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x002p5-z010"
+    },
+    {
+      "X": 0.05,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x005-z010"
+    },
+    {
+      "X": 0.075,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x007p5-z010"
+    },
+    {
+      "X": 0.09,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x009-z010"
+    },
+    {
+      "X": 0.1,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x010-z010"
+    },
+    {
+      "X": 0.125,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x012p5-z010"
+    },
+    {
+      "X": 0.15,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x015-z010"
+    },
+    {
+      "X": 0.175,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x017p5-z010"
+    },
+    {
+      "X": 0.2,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x020-z010"
+    },
+    {
+      "X": 0.25,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x025-z010"
+    },
+    {
+      "X": 0.3,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x030-z010"
+    },
+    {
+      "X": 0.4,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x040-z010"
+    },
+    {
+      "X": 0.5,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x050-z010"
+    },
+    {
+      "X": 0.6,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x060-z010"
+    },
+    {
+      "X": 0.65,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x065-z010"
+    },
+    {
+      "X": 0.7,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x070-z010"
+    },
+    {
+      "X": 0.75,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x075-z010"
+    },
+    {
+      "X": 0.0,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/nodes_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/ember-tops-density-x000-z020-v1"
+    },
+    {
+      "X": 0.025,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x002p5-z020"
+    },
+    {
+      "X": 0.05,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x005-z020"
+    },
+    {
+      "X": 0.075,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x007p5-z020"
+    },
+    {
+      "X": 0.09,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x009-z020"
+    },
+    {
+      "X": 0.1,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x010-z020"
+    },
+    {
+      "X": 0.125,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x012p5-z020"
+    },
+    {
+      "X": 0.15,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x015-z020"
+    },
+    {
+      "X": 0.175,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x017p5-z020"
+    },
+    {
+      "X": 0.2,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x020-z020"
+    },
+    {
+      "X": 0.25,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x025-z020"
+    },
+    {
+      "X": 0.3,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x030-z020"
+    },
+    {
+      "X": 0.4,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x040-z020"
+    },
+    {
+      "X": 0.5,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x050-z020"
+    },
+    {
+      "X": 0.6,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x060-z020"
+    },
+    {
+      "X": 0.65,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x065-z020"
+    },
+    {
+      "X": 0.7,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x070-z020"
+    },
+    {
+      "X": 0.75,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x075-z020"
+    },
+    {
+      "X": 0.0,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x000-z030"
+    },
+    {
+      "X": 0.025,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x002p5-z030"
+    },
+    {
+      "X": 0.05,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x005-z030"
+    },
+    {
+      "X": 0.075,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x007p5-z030"
+    },
+    {
+      "X": 0.09,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x009-z030"
+    },
+    {
+      "X": 0.1,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x010-z030"
+    },
+    {
+      "X": 0.125,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x012p5-z030"
+    },
+    {
+      "X": 0.15,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x015-z030"
+    },
+    {
+      "X": 0.175,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x017p5-z030"
+    },
+    {
+      "X": 0.2,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x020-z030"
+    },
+    {
+      "X": 0.25,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x025-z030"
+    },
+    {
+      "X": 0.3,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x030-z030"
+    },
+    {
+      "X": 0.4,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x040-z030"
+    },
+    {
+      "X": 0.5,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x050-z030"
+    },
+    {
+      "X": 0.6,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x060-z030"
+    },
+    {
+      "X": 0.65,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x065-z030"
+    },
+    {
+      "X": 0.7,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x070-z030"
+    },
+    {
+      "X": 0.75,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/family_manifest.json",
+      "work": "/tmp/ember-tops-density-fine-v1/x075-z030"
+    }
+  ]
+}

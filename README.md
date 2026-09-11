@@ -71,7 +71,14 @@ the assembled history contains the initial model and 7695 accepted time steps.
 [Atmosphere acceptance](docs/results/nongrey_t4400_acceptance_v1.json),
 [restart comparison](docs/results/atmosphere_extension_restart_v1.json).
 
-Atmospheres through 5000 K and their independent controls are being calculated.
+The **196-model gas-atmosphere table through 5000 K** passes its source,
+interpolation, depth, condensation and EOS/runtime checks. Its three independent
+matching-temperature differences are below **0.05226%**, and gas-pressure
+differences are below **0.5377%**. All twelve depth comparisons pass; the
+24 added structures contain no condensates. All 172 existing source states
+and their missing-state masks remain exact.
+[Acceptance record](docs/results/nongrey_t5000_acceptance_v1.json).
+
 A hotter EOS candidate retains every existing potential value. Its added hot
 test points and all 512 zones of the saved star pass the source comparison,
 but heat-capacity checks fail at some unvisited mixtures in the original
@@ -79,7 +86,7 @@ temperature range. The discrepancy coincides with a join in the source electron
 approximation. Numerical electron integration removes the discontinuity in
 controls and gives a maximum pilot heat-capacity difference of 0.01014%. A new
 source family is being calculated with this treatment; it requires independent
-validation and a fresh stellar run. Neither candidate is selected yet. [General test](docs/results/metal_eos_hot_source_v1.json),
+validation and a fresh stellar run. Neither EOS candidate is selected yet. [General test](docs/results/metal_eos_hot_source_v1.json),
 [saved-star test](docs/results/metal_eos_hot_profile_v1.json).
 
 Numerical controls through 3.600 trillion years find central-hydrogen changes

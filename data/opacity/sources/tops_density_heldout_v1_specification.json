@@ -1,0 +1,79 @@
+{
+  "scope": "Independent composition and intermediate-density checks for the dense TOPS candidate; all points remain subject to source substitution masks. No runtime installation.",
+  "maximum_density_g_cm3": 1000000.0,
+  "density_points": 21,
+  "requests": [
+    {
+      "X": 0.0125,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/checks_manifest.json",
+      "work": "/tmp/ember-tops-density-heldout-v1/x001p25-z010"
+    },
+    {
+      "X": 0.0375,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/checks_manifest.json",
+      "work": "/tmp/ember-tops-density-heldout-v1/x003p75-z010"
+    },
+    {
+      "X": 0.0625,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/checks_manifest.json",
+      "work": "/tmp/ember-tops-density-heldout-v1/x006p25-z010"
+    },
+    {
+      "X": 0.0825,
+      "Z": 0.01,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/checks_manifest.json",
+      "work": "/tmp/ember-tops-density-heldout-v1/x008p25-z010"
+    },
+    {
+      "X": 0.0125,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/checks_manifest.json",
+      "work": "/tmp/ember-tops-density-heldout-v1/x001p25-z020"
+    },
+    {
+      "X": 0.0375,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/checks_manifest.json",
+      "work": "/tmp/ember-tops-density-heldout-v1/x003p75-z020"
+    },
+    {
+      "X": 0.0625,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/checks_manifest.json",
+      "work": "/tmp/ember-tops-density-heldout-v1/x006p25-z020"
+    },
+    {
+      "X": 0.0825,
+      "Z": 0.02,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/checks_manifest.json",
+      "work": "/tmp/ember-tops-density-heldout-v1/x008p25-z020"
+    },
+    {
+      "X": 0.0125,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/checks_manifest.json",
+      "work": "/tmp/ember-tops-density-heldout-v1/x001p25-z030"
+    },
+    {
+      "X": 0.0375,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/checks_manifest.json",
+      "work": "/tmp/ember-tops-density-heldout-v1/x003p75-z030"
+    },
+    {
+      "X": 0.0625,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/checks_manifest.json",
+      "work": "/tmp/ember-tops-density-heldout-v1/x006p25-z030"
+    },
+    {
+      "X": 0.0825,
+      "Z": 0.03,
+      "baseline_manifest": "data/opacity/sources/hydrogen_exhaustion/checks_manifest.json",
+      "work": "/tmp/ember-tops-density-heldout-v1/x008p25-z030"
+    }
+  ]
+}

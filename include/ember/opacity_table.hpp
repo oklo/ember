@@ -6,9 +6,10 @@
 
 namespace ember {
 
-// Rectangular, fixed-Z Rosseland table in (X, log T, log density coordinate).
+// Fixed-Z Rosseland table in (X, log T, log density coordinate).
 // Monotone Hermite in the density coordinate and log T; linear in X.
 // A single X plane requires that exact composition. No extrapolation.
+// Version 2 supplies each isotherm's valid density prefix explicitly.
 class TabulatedOpacity : public Opacity {
 public:
   enum class DensityAxis { logR, logRho };
@@ -22,15 +23,18 @@ public:
   struct Range { double logT_min, logT_max, logD_min, logD_max, X_min, X_max; DensityAxis density_axis; };
   Range range() const;
   double metallicity() const { return Z_; }
-  // Geometric bounds only. eval/density_range also require the table's Z.
+  // Includes every interpolation/derivative stencil. eval/density_range
+  // additionally require the table's Z and abundance basis.
   bool covers(double T, double rho, double X) const;
 
 private:
   std::string label_;
   std::vector<double> X_, logT_, logD_;
   std::vector<double> k_;   // [ix][it][ir] flattened, log10 kappa
+  std::vector<std::size_t> row_sizes_; // empty for a complete rectangle
   double Z_{};
   DensityAxis axis_;
+  std::size_t active_density_size(double logT, double X) const;
 };
 
 } // namespace ember
