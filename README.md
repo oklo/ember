@@ -84,23 +84,22 @@ checks using the existing wavelength-opacity data. The missing grid models
 and independent intermediate states are being calculated; coverage through
 6000 K is not yet accepted for stellar evolution.
 
-A hotter EOS candidate retains every existing potential value. Its added hot
-test points and all 512 zones of the saved star pass the source comparison,
-but heat-capacity checks fail at some unvisited mixtures in the original
-temperature range. The discrepancy coincides with a join in the source electron
-approximation. Numerical electron integration removes the discontinuity in
-controls and gives a maximum pilot heat-capacity difference of 0.01014%. A new
-source family is being calculated with this treatment; it requires independent
-validation and a fresh stellar run. Neither EOS candidate is selected yet. [General test](docs/results/metal_eos_hot_source_v1.json),
-[saved-star test](docs/results/metal_eos_hot_profile_v1.json).
+The **numerical-electron EOS is now checked and selected for a fresh stellar
+calculation**, with the accepted atmosphere table through 5000 K. It uses
+numerical electron integrals in place of the source's fitted approximation.
+All 4736 independent source comparisons, 512 zones of the saved star and 227
+atmosphere queries pass. The maximum heat-capacity difference is **0.2952%**.
+One inconsistent source state and every interpolation stencil touching it are
+explicitly excluded. The new stellar calculation is running; the table and
+figures above continue to report the completed, checked trajectory.
+[EOS acceptance](docs/results/numerical_electron_base_acceptance_v1.json),
+[source comparisons](docs/results/numerical_electron_base_general_v4.json),
+[EOS data notes](data/eos/README.md#numerical-electron-integration).
 
-The numerical-electron family has completed all 9.811 million source states;
-table assembly and independent checks are in progress. In a separate hot dense
-addition, tighter electron-integration accuracy resolves one source iteration
-failure while preserving the physical formulas. A fresh build reproduces all
-100 precision controls exactly.
-[EOS source details](data/eos/README.md#numerical-electron-integration),
-[build check](docs/results/numerical_electron_precision_builder_v1.json).
+A separate hot dense EOS addition remains under source-precision checks.
+Tighter electron integration resolves source iteration and thermodynamic
+consistency failures, but some dense heat-capacity responses require a further
+accuracy comparison. It has not been selected for stellar evolution.
 
 Independent spectral integration identifies a normalization issue in the TOPS
 plasma-cutoff means that requires attention before using the dense opacity

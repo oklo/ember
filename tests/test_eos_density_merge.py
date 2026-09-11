@@ -11,7 +11,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'scripts'))
 from metal_eos_composition import mixture
-from eos_source_coverage import absent_source_rows
+from eos_source_coverage import absent_source_rows, inconsistent_source_rows
 
 
 class DensityMergeTests(unittest.TestCase):
@@ -114,6 +114,34 @@ class DensityMergeTests(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertIn('precision differs', result.stderr)
 
+    def test_density_and_temperature_offsets_preserve_exclusions(self):
+        with tempfile.TemporaryDirectory() as work:
+            root = Path(work); roots = self.sources(root, hot_subset=True)
+            for directory, index in zip(roots, [12, 17]):
+                path = directory/'specification.json'
+                spec = json.loads(path.read_text()); spec['source_consistency_exclusion_limit'] = 1e-7
+                path.write_text(json.dumps(spec))
+                path = directory/'plane-000/source.json.gz'
+                source = json.loads(gzip.decompress(path.read_bytes()))
+                row = source['data'][index]
+                rho, temperature, pressure = row[2:5]; chit, er, et, sr, st = row[8:13]
+                defect = max(abs(rho*er/pressure+chit-1), abs(temperature*st/et-1),
+                             abs(rho*temperature*sr/pressure+chit))
+                source['source_consistency_exclusions'] = [dict(
+                    index=index, reason='first_law_defect', criterion=1e-7,
+                    maximum_absolute_defect=defect)]
+                path.write_bytes(gzip.compress(json.dumps(source).encode()))
+            result = self.run_merge(roots, root/'merged')
+            self.assertEqual(result.returncode, 0, result.stderr)
+            merged = json.loads(gzip.decompress((root/'merged/plane-000/source.json.gz').read_bytes()))
+            self.assertEqual(inconsistent_source_rows(merged), {20, 69})
+            spec = json.loads((root/'merged/specification.json').read_text())
+            self.assertEqual(spec['source_consistency_exclusion_limit'], 1e-7)
+            # An exclusion may not hide a coordinate whose actual response differs.
+            merged['data'][20][11] *= 2
+            with self.assertRaisesRegex(ValueError, 'does not match'):
+                inconsistent_source_rows(merged)
+
     def test_hot_addition_has_declared_absence_and_retains_source(self):
         with tempfile.TemporaryDirectory() as work:
             root = Path(work); roots = self.sources(root, hot_subset=True)
@@ -158,6 +186,31 @@ class DensityMergeTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 return output.read_text().split('data\n')[1].splitlines()
             complete = run_import()
+            # A returned but inconsistent state is distinct from an absent
+            # source. Its actual values and source flag must remain intact.
+            k = 5*11+5
+            raw['data'][k][11] *= 1.001
+            r = raw['data'][k]
+            defect = abs(r[2]*r[3]*r[11]/r[4]+r[8])
+            raw['source_consistency_exclusions'] = [dict(
+                index=k, reason='first_law_defect', criterion=1e-7,
+                maximum_absolute_defect=defect)]
+            self.assertEqual(inconsistent_source_rows(raw), {k})
+            excluded = run_import()
+            for i in range(2, 9):
+                for j in range(2, 9):
+                    index = (i-2)*7+j-2
+                    valid = not ((i == 5 and abs(j-5) <= 2) or (j == 5 and abs(i-5) <= 2))
+                    self.assertEqual(excluded[index].startswith('1 '), valid)
+                    if valid:
+                        self.assertEqual(excluded[index], complete[index])
+            self.assertEqual(raw['data'][k][0], 0.)
+            raw['source_consistency_exclusions'][0]['index'] = k+1
+            with self.assertRaisesRegex(ValueError, 'does not match its defect'):
+                inconsistent_source_rows(raw)
+            del raw['source_consistency_exclusions']
+            # Restore the analytic value exactly before testing absent cells.
+            raw['data'][k][11] = -1.e8
             raw['source_coverage'] = dict(kind='hot_density_extension', original_logQ_max=qs[6],
                                           minimum_added_logT=ts[4])
             for i, t in enumerate(ts):

@@ -76,6 +76,44 @@ gives an opacity of 11.50–11.54 cm²/g, showing that the choice of refractive
 index also deserves attention. Neither estimate measures a change in stellar
 lifetime or replaces a complete dielectric treatment.
 
+## Comparison with the source electron density
+
+The reported mean free-electron count and normalized composition also give an
+independent estimate of the classical plasma frequency. Using the standard
+helium atomic weight, the inferred cutoff agrees with this estimate within
+0.04185% near the core. Across the two dense states, the classical cutoff
+changes smoothly from 39.90 to 39.91 in units of photon energy divided by kT,
+whereas the cutoff inferred from the reported mean changes from 39.90 to 40.00.
+Direct integration at the continuous classical cutoff removes that discrete
+frequency jump. This comparison uses rounded source composition and electron
+counts; it does not include relativistic or collisional dispersion.
+
+Conduction strongly limits the importance of this ambiguity in the dense
+controls. With the selected conduction prescription, removing radiative heat
+transport entirely increases their combined opacity by at most 0.0002651%.
+Near the core, the step-cutoff normalization changes the combined opacity by
+about 0.7421%; the collisionless refractive-index diagnostic changes it by
+about 2.700%. These four fixed-state comparisons do not replace the actual
+profile calculation or establish a bound for the whole added table domain.
+[Core comparison](results/tops_core_classical_cutoff_v1.json),
+[dense comparison](results/tops_dense_classical_cutoff_v1.json).
+
+## Interpolation with conduction included
+
+Across the dense opacity source nodes and independent composition/density
+queries, the largest combined-opacity interpolation difference is 0.07885%.
+For material temperatures from 1 MK to 20 MK it is 0.03639%, compared with a
+radiative-only difference of 0.7176%. These comparisons include the selected
+conduction prescription at helium-3 fractions 0 and 0.12. Conduction therefore
+reduces the effect of the radiative interpolation errors substantially in these
+tested states. Further density refinement alone would have limited benefit.
+
+This does not remove the plasma-normalization question. In some of the tested
+states, radiative transport still contributes enough that removing it entirely
+would change the combined opacity by much more than the interpolation error.
+The diagnostic leaves all stellar inputs unchanged.
+[Combined transport comparison](results/tops_density_fine_transport_v1.json).
+
 ## Reproduction and remaining work
 
 `scripts/audit_tops_spectral_means.py` checks the source receipts, integrates

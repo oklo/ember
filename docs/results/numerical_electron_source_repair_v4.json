@@ -1,0 +1,932 @@
+{
+  "scope": "Completed source repair with all unaffected states retained exactly, one explicit first-law exclusion, and unchanged source acceptance criteria. General/profile/atmosphere checks are recorded separately.",
+  "source_work": "/tmp/ember-numerical-electron-eos72-precision-v4",
+  "repair_manifest_sha256": "e638848f8248f6aa49a7fed68e33f78dd0016ed2fde40ab92eb5723e51bf41bd",
+  "input_sha256": {
+    "/Users/greglaughlin/Projects/ember/docs/results/numerical_electron_base_source_validation_v2.json": "22f090dce475af9da9d463c8a442d431a6b7192d5d4baafc1a713f06407f6b8a",
+    "/Users/greglaughlin/Projects/ember/data/eos/sources/numerical_electron_precision_fallback_v1_specification.json": "c17ee3fa1d8465f43533b6263a1e7bd4d186e864757ff6470b1b5c11d4e46694",
+    "/private/tmp/ember-numerical-electron-eos72-v1/specification.json": "ba212308f5c3eb99cb7e506a7612670a1469c9cfbd97d0db03513829fbec42e9",
+    "/private/tmp/ember-freeeos-integral-precision-v1/probe": "f9fd14b9715f40a314d53eb45d3908a24f01e16113a31e7ef506ed884a410d7b",
+    "/private/tmp/ember-freeeos-integral-precision-v1/build/src/libfree_eos.1.0.0.dylib": "2c1a4d6c7f3fc44a80f2648de596204f2fb730ad63684af8bba95bb74d6c7952",
+    "/Users/greglaughlin/Projects/ember/scripts/repair_eos_source_precision.py": "85f75fbb6cc9899c3c9ead788abc0120b55eb74e23a02d925bba2502c1519c72",
+    "/Users/greglaughlin/Projects/ember/docs/results/numerical_electron_base_source_identities_v1.json": "e8ae4c979463862834249620ddd4a7614cfbf2cb7bc72629bcecde77b9ad64db",
+    "/private/tmp/ember-numerical-electron-eos72-precision-v3/reuse_manifest.json": "1d50d01ab76941b05a39486aaa8aa8d713e36ce504cede0c89358d4f22f1cb5f",
+    "/private/tmp/ember-numerical-electron-eos72-precision-v3/specification.json": "294284da56353ce7cc94bc1d3e7eff72b00ea415d517b5c494566e241ce4a583"
+  },
+  "records": [
+    {
+      "plane": 0,
+      "hydrogen": 0.0,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "26195142654074461de7a08030e0a6ea7aac9e25e29628bb1ae67f0794ef8d35"
+    },
+    {
+      "plane": 1,
+      "hydrogen": 0.0,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "380e052400eb9098329a80edaf9b7f78839166155664269bfa510ee13d2f5986"
+    },
+    {
+      "plane": 2,
+      "hydrogen": 0.001,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        176,
+        230
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 2.0614177032030057e-11,
+      "maximum_scaled_physical_change": 2.955507695087108e-07,
+      "source_sha256": "04dd7dfcf5fc7be3c7e586243f08f217d96ba50487251525abfa6de869bda9f8"
+    },
+    {
+      "plane": 3,
+      "hydrogen": 0.001,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "a20322131d1e69ceeffee913d762bdc03d4c9a8681d0d9a747dee8d6fd5b30a1"
+    },
+    {
+      "plane": 4,
+      "hydrogen": 0.002125,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        170
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 2.4777957463584244e-12,
+      "maximum_scaled_physical_change": 2.9567911667754894e-07,
+      "source_sha256": "7e46e1a3de73ab1e2628e97fe8784439589ef6c69e29783fa4e610febe943716"
+    },
+    {
+      "plane": 5,
+      "hydrogen": 0.002125,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "3e9c87a7eaf74b00e3eb61ee984738567d7d3d143d70216ba468bb5731c68595"
+    },
+    {
+      "plane": 6,
+      "hydrogen": 0.00325,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        188
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 2.286115741156891e-12,
+      "maximum_scaled_physical_change": 1.0981111913923338e-06,
+      "source_sha256": "38c15cc18f66503da9fd9873b169e86555f535af9380445021173a59dab07ca0"
+    },
+    {
+      "plane": 7,
+      "hydrogen": 0.00325,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "46eb304ea99941d185c62700ab16daf899b64868fbfc3734c102a21a6ab40805"
+    },
+    {
+      "plane": 8,
+      "hydrogen": 0.004375,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "c6bf3ac571d429375fd7c1cc62f9dd36dd247e663f271da392b07af7a041862f"
+    },
+    {
+      "plane": 9,
+      "hydrogen": 0.004375,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "a0d141fd46c82256f98e2593c4f419ab0cc70a30dff07a30225f8912655f5672"
+    },
+    {
+      "plane": 10,
+      "hydrogen": 0.0055,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "071ab8a792b663c982e7185adc1a3b14e59543cedc7d2d1b14a09e49e17bfab2"
+    },
+    {
+      "plane": 11,
+      "hydrogen": 0.0055,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        168,
+        169,
+        170
+      ],
+      "recomputed_states": 1323,
+      "original_states_retained_exactly": 134946,
+      "maximum_recomputed_first_law_defect": 1.1119416498672763e-10,
+      "maximum_scaled_physical_change": 2.2908084944652556e-06,
+      "source_sha256": "57db349b5f832e5a41088b6d8fe001cfe127e55d87468ee70d848b785fe1f2a5"
+    },
+    {
+      "plane": 12,
+      "hydrogen": 0.00775,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "a8240f68427e908a084c69a67d985e1163f870864e9fe50dfb50d00a8ee43b16"
+    },
+    {
+      "plane": 13,
+      "hydrogen": 0.00775,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        143,
+        273
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 3.5545455467911324e-12,
+      "maximum_scaled_physical_change": 3.9061439185215535e-07,
+      "source_sha256": "4a3f6fcef151168f4df236c7024647b72dd6e02074aa5ebbe0c0ecc386b7a215"
+    },
+    {
+      "plane": 14,
+      "hydrogen": 0.01,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "a48b8edcdc0ab1ba8f6f7e1b683cd99b71493a3bdcb152bc3d36a17d21257549"
+    },
+    {
+      "plane": 15,
+      "hydrogen": 0.01,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "69b6a622159a24215c5a607d4282527a8e119dcb241abba5bc6f320e4efab67e"
+    },
+    {
+      "plane": 16,
+      "hydrogen": 0.011875,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "62d0500fb6e7698c81ecfaf902a459167903e24e726818c3e6ff388be81cd679"
+    },
+    {
+      "plane": 17,
+      "hydrogen": 0.011875,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        290
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 3.661182468306379e-12,
+      "maximum_scaled_physical_change": 1.1434054229660423e-06,
+      "source_sha256": "e08d467c741d1f1c03127968d7747763ced799a1a203cc506cc58a7c5d57627a"
+    },
+    {
+      "plane": 18,
+      "hydrogen": 0.01375,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "9844334db019027c89d4b2107cd6f2a7837b1bf953d19fe2eb0dee3772eb9b15"
+    },
+    {
+      "plane": 19,
+      "hydrogen": 0.01375,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "3d10ae5c371fcbdb3ec2e7eb65c8ebc7d46e7c342692f92c3b661b3885997309"
+    },
+    {
+      "plane": 20,
+      "hydrogen": 0.0175,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "bf23453e5bff5ca7f87fd9d68db01c482655ee3a63c6babcff1ec18a2d8b5231"
+    },
+    {
+      "plane": 21,
+      "hydrogen": 0.0175,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        161,
+        204
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 5.281886039654182e-12,
+      "maximum_scaled_physical_change": 1.1164287376093324e-06,
+      "source_sha256": "4a9a42276a31f3fae61ea5e8738b8c8a35f14e6651f00727daa4ca2518df8c19"
+    },
+    {
+      "plane": 22,
+      "hydrogen": 0.02125,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        249
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 1.4182099938864212e-11,
+      "maximum_scaled_physical_change": 1.2021985267447915e-06,
+      "source_sha256": "fdae23cc3f8f1f79b9c2f4b8d3622039c2681695e89f6828ff15a2c34d11b211"
+    },
+    {
+      "plane": 23,
+      "hydrogen": 0.02125,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        240,
+        246
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 4.918621065996831e-12,
+      "maximum_scaled_physical_change": 1.1852765896046231e-06,
+      "source_sha256": "b423802aa61b83f8ec23501df1034ae41fab222d2d3bc68867534d2be4182b1e"
+    },
+    {
+      "plane": 24,
+      "hydrogen": 0.025,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        149,
+        286
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 4.0176750815135165e-12,
+      "maximum_scaled_physical_change": 6.619702763677113e-06,
+      "source_sha256": "2dd0c309cb1b766be38a4a438bc30bcd079150a46f2074650ef5a5b22b3ffe3d"
+    },
+    {
+      "plane": 25,
+      "hydrogen": 0.025,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        237
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 2.493616424459333e-12,
+      "maximum_scaled_physical_change": 1.1758404674842896e-06,
+      "source_sha256": "5b169b8664bf682efc321b82123f215e7491da5dd0e2f86f44f1b20f747785dc"
+    },
+    {
+      "plane": 26,
+      "hydrogen": 0.03125,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        248
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 4.830913447051444e-12,
+      "maximum_scaled_physical_change": 4.591776462500709e-07,
+      "source_sha256": "b78af7926cdf828be81e66b178c123cfbdd1ebfabca09862be407c60493979f3"
+    },
+    {
+      "plane": 27,
+      "hydrogen": 0.03125,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "4c7c0b3050c58d9ad024a5c09caeb33bea80d2a8d9a0616e3f263d6b95883999"
+    },
+    {
+      "plane": 28,
+      "hydrogen": 0.0375,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "f065c61272e24e9cab09fc49d4b26b960c145af3d4f4e74efc62891a96ea5c9f"
+    },
+    {
+      "plane": 29,
+      "hydrogen": 0.0375,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        141,
+        222
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 3.9004355301131e-12,
+      "maximum_scaled_physical_change": 2.1589274930956252e-06,
+      "source_sha256": "afc8092ee691c96127a99f1ef99f116b7701ca0d845a5dabb0162f2ee4c39836"
+    },
+    {
+      "plane": 30,
+      "hydrogen": 0.04375,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "76135fe024e79fcab5dece447407c7863dafe42321caf6eca4e2a5263f7425ea"
+    },
+    {
+      "plane": 31,
+      "hydrogen": 0.04375,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "21ddeaa8b3088723cea8e45e053dbeaa72243290e6902c58c1b6ce37f5ba2ad9"
+    },
+    {
+      "plane": 32,
+      "hydrogen": 0.05,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "1e7b0db147859b0a9abdea6ff2e3c61f0bb107aaafb7b98ec1374d0c59cc7bf0"
+    },
+    {
+      "plane": 33,
+      "hydrogen": 0.05,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "04d818f865b8d9cc7c1edfac38b36b8c794bc18111a80817b2c49a812086f2d6"
+    },
+    {
+      "plane": 34,
+      "hydrogen": 0.0625,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        157
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 3.5961233990633446e-12,
+      "maximum_scaled_physical_change": 2.116421683087959e-06,
+      "source_sha256": "5abe7bc3979c74221127ed51636d334a644ac6b6112f27ff4dde461e2abcf21e"
+    },
+    {
+      "plane": 35,
+      "hydrogen": 0.0625,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "1dcf7d1fe87430d03b8d4fde69bae62d46668ae9187c1c6951de6ffe33892d22"
+    },
+    {
+      "plane": 36,
+      "hydrogen": 0.075,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "18d247374089c032a24a07be13967220664126165396977cb834d0da7b9f7856"
+    },
+    {
+      "plane": 37,
+      "hydrogen": 0.075,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        266
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 2.9365954112847703e-12,
+      "maximum_scaled_physical_change": 2.117131301716838e-06,
+      "source_sha256": "b6fd784fee9de8f309ec16a6a7e1e4b1cdb19298b784eaf81fc073d3c48bb123"
+    },
+    {
+      "plane": 38,
+      "hydrogen": 0.0875,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        280
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 3.501310352760356e-12,
+      "maximum_scaled_physical_change": 2.1035086196270825e-06,
+      "source_sha256": "3ea2dfd9bdf06226bf8afd9881c1a6cc5b0d9564a4167bfe326862f5a9c10bec"
+    },
+    {
+      "plane": 39,
+      "hydrogen": 0.0875,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        292,
+        293
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 2.5493496202955157e-12,
+      "maximum_scaled_physical_change": 4.855383292781137e-07,
+      "source_sha256": "f6895c046d191df1e563076b2b76d84726f0a1e74ea9ba627e8134427618291e"
+    },
+    {
+      "plane": 40,
+      "hydrogen": 0.1,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "4fd8dbe67a7e20eb111d962ce41ed2aaeb6d19ff3fd3d035a29936dd61493898"
+    },
+    {
+      "plane": 41,
+      "hydrogen": 0.1,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        172,
+        179,
+        183,
+        188,
+        189
+      ],
+      "recomputed_states": 2205,
+      "original_states_retained_exactly": 134064,
+      "maximum_recomputed_first_law_defect": 3.329785780437078e-09,
+      "maximum_scaled_physical_change": 2.0576311165552007e-06,
+      "source_sha256": "552c4c9808878024b0e00e3d913098fce874b2f6a73a0dbea94f842b71917f46"
+    },
+    {
+      "plane": 42,
+      "hydrogen": 0.125,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        159,
+        249
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 4.806821607417078e-12,
+      "maximum_scaled_physical_change": 3.332219290219651e-07,
+      "source_sha256": "aa9abac327a066769f9092efb778d3e5e139568b00a092ef941688ae059defb7"
+    },
+    {
+      "plane": 43,
+      "hydrogen": 0.125,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "56e34aedbdc84fe9a003d3445ce4ce7587e6ac3b3d2fd6615dc8984741ffb803"
+    },
+    {
+      "plane": 44,
+      "hydrogen": 0.15,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        191
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 2.2446489111871415e-12,
+      "maximum_scaled_physical_change": 6.766404754382781e-07,
+      "source_sha256": "df54c7ae61a045dbc85e6b59daf9af442c07e0554d55e1f783ac26eb56582e2c"
+    },
+    {
+      "plane": 45,
+      "hydrogen": 0.15,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        219
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 4.722888746755416e-12,
+      "maximum_scaled_physical_change": 1.047668523561829e-06,
+      "source_sha256": "31b46d561e8e05638916a0d8cbab385f056128d2e404d79e26404b08dbc01107"
+    },
+    {
+      "plane": 46,
+      "hydrogen": 0.175,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "6e6994ef454c42a59bfb2cf95afa1bb77c534391345c51ce840e2342be124861"
+    },
+    {
+      "plane": 47,
+      "hydrogen": 0.175,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        264
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 2.8712032751343486e-12,
+      "maximum_scaled_physical_change": 1.9730368971902583e-06,
+      "source_sha256": "1364bc8071009e6373e82418a87a1b749b6751af4a24086195ebfa61e44beb53"
+    },
+    {
+      "plane": 48,
+      "hydrogen": 0.2,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "b9c4b1e47167b85affed82ba7060ab1aa1cde679104aabbd353a2e793a7991d7"
+    },
+    {
+      "plane": 49,
+      "hydrogen": 0.2,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "f4d8a29dc9a5676d27718bf91abb9fc74c81f7181b0c385147d374e4b4f89210"
+    },
+    {
+      "plane": 50,
+      "hydrogen": 0.225,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        172
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 2.708056001665682e-12,
+      "maximum_scaled_physical_change": 2.5228391134461094e-07,
+      "source_sha256": "86fe0f9e22ebd558f404cf526fea2933389980e9b081f1f0cd3385ecf4511e26"
+    },
+    {
+      "plane": 51,
+      "hydrogen": 0.225,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        160
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 2.3844259899874487e-12,
+      "maximum_scaled_physical_change": 8.140959315591517e-07,
+      "source_sha256": "536b1bc13cbe5201187d654c35e9c362a5128968950b2358e62242b8bc0a2355"
+    },
+    {
+      "plane": 52,
+      "hydrogen": 0.25,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        262
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 2.4062141168457174e-12,
+      "maximum_scaled_physical_change": 1.881874882600894e-06,
+      "source_sha256": "30444be75c5d444e586e5e393aa2086de801fae5c57c0a983e8878f2f7ec6db0"
+    },
+    {
+      "plane": 53,
+      "hydrogen": 0.25,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "270e4cc2b03801e3935226ee759d20603c64c6e6f35f41e63b2022d42dfd5839"
+    },
+    {
+      "plane": 54,
+      "hydrogen": 0.275,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        212,
+        258
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 1.411182282140544e-11,
+      "maximum_scaled_physical_change": 9.704611220028165e-07,
+      "source_sha256": "fcdec9497dbc7f9aec6d1902cefdab645bb7bb460eebbcfbfcbb06278c35ea12"
+    },
+    {
+      "plane": 55,
+      "hydrogen": 0.275,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        112
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 2.1873614031164834e-12,
+      "maximum_scaled_physical_change": 5.006747768630517e-07,
+      "source_sha256": "bb027fc3f3964e0e24f31d380e783b83edeb69c26a4c7dc99360b8fef744f8f2"
+    },
+    {
+      "plane": 56,
+      "hydrogen": 0.3,
+      "helium3": 0.0,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "ef481d088b1abf86199bb76645335d27d5f9f03d08217b0902c38e95dbf95a3d"
+    },
+    {
+      "plane": 57,
+      "hydrogen": 0.3,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        190,
+        292
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 2.437661184018225e-12,
+      "maximum_scaled_physical_change": 5.127424778037702e-07,
+      "source_sha256": "2535f936b8c5190e1fbae09e56e1be51f2cbd892c186ac1508cf340022743688"
+    },
+    {
+      "plane": 58,
+      "hydrogen": 0.35,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        263
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 3.691658090332339e-12,
+      "maximum_scaled_physical_change": 4.873794894932729e-07,
+      "source_sha256": "49afef52dfa39e4930f4a8ce67ec158b76346b8ca4eb57dc11c4efa47b46a621"
+    },
+    {
+      "plane": 59,
+      "hydrogen": 0.35,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "255662ce5f6580c758dd07e256d40783f656c1656a65f6101e85941cee2717b7"
+    },
+    {
+      "plane": 60,
+      "hydrogen": 0.4,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        182,
+        219,
+        251
+      ],
+      "recomputed_states": 1323,
+      "original_states_retained_exactly": 134946,
+      "maximum_recomputed_first_law_defect": 4.336087044976011e-12,
+      "maximum_scaled_physical_change": 1.7547075015201385e-06,
+      "source_sha256": "e54fe76f20ac8a43166270caa475ec9af70eff26f97a78b2d460e1f87b9b0d05"
+    },
+    {
+      "plane": 61,
+      "hydrogen": 0.4,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        185
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 2.227495965456683e-12,
+      "maximum_scaled_physical_change": 2.9716218979167685e-06,
+      "source_sha256": "1fd485c844750ba5849bb41ac438f50c1a726397f4b17fd6e078a3fcd144e66d"
+    },
+    {
+      "plane": 62,
+      "hydrogen": 0.45,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        285
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 3.618605415312004e-12,
+      "maximum_scaled_physical_change": 1.4237332927625608e-06,
+      "source_sha256": "fd012e7337d9b86d7e747415bf760750a272d03020b378fbd0cbec8623ee0881"
+    },
+    {
+      "plane": 63,
+      "hydrogen": 0.45,
+      "helium3": 0.12,
+      "recomputed_isotherms": [],
+      "recomputed_states": 0,
+      "original_states_retained_exactly": 136269,
+      "maximum_recomputed_first_law_defect": 0.0,
+      "maximum_scaled_physical_change": 0.0,
+      "source_sha256": "ee95733e49bb16b834e1be3ae0ed1178011839a722483c69d3f31a1ac6957153"
+    },
+    {
+      "plane": 64,
+      "hydrogen": 0.5,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        101,
+        158
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 6.651401651680544e-12,
+      "maximum_scaled_physical_change": 1.2929418303348603e-06,
+      "source_sha256": "0bf69b11745fec5bf14dc6aaf120733125bdf32a01a73a56582c0d4351575d55"
+    },
+    {
+      "plane": 65,
+      "hydrogen": 0.5,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        91,
+        147,
+        287
+      ],
+      "recomputed_states": 1323,
+      "original_states_retained_exactly": 134946,
+      "maximum_recomputed_first_law_defect": 9.383716026434286e-12,
+      "maximum_scaled_physical_change": 1.5414789841948004e-06,
+      "source_sha256": "746b1e4ed1d92b248ab749e13f093488d607067e84214e3ec0da3cc80070240d"
+    },
+    {
+      "plane": 66,
+      "hydrogen": 0.6,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        290
+      ],
+      "recomputed_states": 441,
+      "original_states_retained_exactly": 135828,
+      "maximum_recomputed_first_law_defect": 1.4458212405088489e-11,
+      "maximum_scaled_physical_change": 1.004864884166044e-06,
+      "source_sha256": "a2b7b753902a5727842c82e146aab11b36de34b598ed7de55b0e9037cba9f308"
+    },
+    {
+      "plane": 67,
+      "hydrogen": 0.6,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        104,
+        175
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 4.0829556513521936e-07,
+      "maximum_scaled_physical_change": 5.05244022612178e-07,
+      "source_sha256": "3a22969d755df2c465d77cba3b8a87c812584ef7bbed9dc00a180d5b584c2e8e",
+      "inconsistent_source_exclusions": [
+        {
+          "index": 46282,
+          "reason": "first_law_defect",
+          "criterion": 1e-07,
+          "maximum_absolute_defect": 4.0829556513521936e-07
+        }
+      ]
+    },
+    {
+      "plane": 68,
+      "hydrogen": 0.7,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        148,
+        244
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 1.2558509787652383e-11,
+      "maximum_scaled_physical_change": 1.751784394014836e-07,
+      "source_sha256": "97235e21e1c84b1882d003db094199478709f698120cf49bd3448c6768beeb25"
+    },
+    {
+      "plane": 69,
+      "hydrogen": 0.7,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        175,
+        301
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 1.4333645381725546e-11,
+      "maximum_scaled_physical_change": 1.4445314409852368e-06,
+      "source_sha256": "97f28151e3f30886faefd6addcd5f41adc87aec54393ecc952d087bcb0c55310"
+    },
+    {
+      "plane": 70,
+      "hydrogen": 0.75,
+      "helium3": 0.0,
+      "recomputed_isotherms": [
+        147,
+        262
+      ],
+      "recomputed_states": 882,
+      "original_states_retained_exactly": 135387,
+      "maximum_recomputed_first_law_defect": 1.2463141629837082e-11,
+      "maximum_scaled_physical_change": 6.240284610524212e-07,
+      "source_sha256": "9014c24e297d40cc5647c2236897deb601692e623efe412475d116c2463c5991"
+    },
+    {
+      "plane": 71,
+      "hydrogen": 0.75,
+      "helium3": 0.12,
+      "recomputed_isotherms": [
+        105,
+        189,
+        207
+      ],
+      "recomputed_states": 1323,
+      "original_states_retained_exactly": 134946,
+      "maximum_recomputed_first_law_defect": 4.0232817077878735e-12,
+      "maximum_scaled_physical_change": 5.343234035998887e-07,
+      "source_sha256": "09480b56ed1d494ba8866f40ecd24ff12ea0e1394d64094d3327918df06edf5e"
+    }
+  ],
+  "total_recomputed_states": 29547,
+  "total_original_states_retained_exactly": 9781821,
+  "source_states": 9811368,
+  "excluded_first_law_states": 1,
+  "maximum_scaled_source_change": 6.619702763677113e-06,
+  "source_specification_sha256": "9cdde987e6f558dc8304c0244054caa5e343a0491df09d5bd8ad206b0a788241",
+  "accepted_for_stellar_evolution": false
+}

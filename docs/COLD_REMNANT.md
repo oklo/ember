@@ -34,18 +34,20 @@ the join is exact. The 196-model extension through 5000 K now passes all source,
 interpolation, depth, condensation and EOS/runtime checks. It retains every
 existing source state and missing-state mask. Three independent matching-state
 comparisons differ by at most 0.5376%; twelve lower-boundary comparisons pass.
-[Acceptance](results/nongrey_t5000_acceptance_v1.json). The next stellar
-calculation awaits the numerical-electron EOS checks; see HANDOFF.md for jobs.
+[Acceptance](results/nongrey_t5000_acceptance_v1.json). A fresh stellar
+calculation now uses this atmosphere with the checked numerical-electron EOS;
+see HANDOFF.md for jobs.
 
-A hotter EOS candidate preserves all existing potentials and extends material
-temperature coverage to 21.13 MK. Added hot source comparisons and all 512
-actual profile zones pass, but some unvisited mixtures in the original
-temperature range fail the heat-capacity criterion. The discrepancy is associated with the source electron approximation at
-degeneracy parameter 4. Numerical electron integration removes the jump in
-controls; a new source family is being generated and will require independent
-checks and a fresh stellar calculation.
-[General test](results/metal_eos_hot_source_v1.json),
-[actual profile test](results/metal_eos_hot_profile_v1.json).
+The numerical-electron EOS passes 4736 independent source comparisons,
+2240 thermodynamic identities, all 512 zones of the saved star and all 227
+atmosphere queries. The maximum heat-capacity difference is 0.2952%. One
+inconsistent source state and all touching derivative stencils are explicitly
+excluded. The accepted family is preserved locally and selected for the fresh
+stellar calculation. The separate hot dense EOS addition remains under
+source-precision checks.
+[EOS acceptance](results/numerical_electron_base_acceptance_v1.json),
+[general comparisons](results/numerical_electron_base_general_v4.json),
+[profile comparisons](results/numerical_electron_base_profile_v4.json).
 
 The paper plots the checked track through **3.848 trillion years**.
 All its Ember curves use that single calculation. Its core transports heat by

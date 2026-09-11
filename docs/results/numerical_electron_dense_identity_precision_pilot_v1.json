@@ -1,0 +1,60 @@
+{
+  "scope": "Tighter electron quadrature at five dense isotherms with the largest nominal first-law defects. No table acceptance or source masking.",
+  "passed": true,
+  "records": [
+    {
+      "plane": 47,
+      "temperature_index": 88,
+      "hydrogen": 0.175,
+      "helium3": 0.12,
+      "maximum_first_law_defect": 2.820021993699129e-12,
+      "maximum_scaled_physical_change": 0.0021905542458113903,
+      "original_cache": "/tmp/ember-numerical-electron-hot-dense-addition-v2/plane-047/temperature-088.json.gz",
+      "original_cache_sha256": "e90afea33c43c355a758e4eddd00c8b3e98505a024af50c783b08375c3fc5482"
+    },
+    {
+      "plane": 42,
+      "temperature_index": 100,
+      "hydrogen": 0.125,
+      "helium3": 0.0,
+      "maximum_first_law_defect": 2.449040970020633e-12,
+      "maximum_scaled_physical_change": 9.257151746690732e-06,
+      "original_cache": "/tmp/ember-numerical-electron-hot-dense-addition-v2/plane-042/temperature-100.json.gz",
+      "original_cache_sha256": "5b038e423daa7d55b7f43044b6f491278e3ccc17bf5880d524816cb8d110b9e8"
+    },
+    {
+      "plane": 64,
+      "temperature_index": 20,
+      "hydrogen": 0.5,
+      "helium3": 0.0,
+      "maximum_first_law_defect": 6.2672263212437684e-12,
+      "maximum_scaled_physical_change": 8.344230260371151e-06,
+      "original_cache": "/tmp/ember-numerical-electron-hot-dense-addition-v2/plane-064/temperature-020.json.gz",
+      "original_cache_sha256": "3b0d2e0869cf112f90ba07840d1c6244258b83354272ad09d7db7b60a1cf500d"
+    },
+    {
+      "plane": 60,
+      "temperature_index": 70,
+      "hydrogen": 0.4,
+      "helium3": 0.0,
+      "maximum_first_law_defect": 5.827411470038513e-12,
+      "maximum_scaled_physical_change": 9.121079026694007e-06,
+      "original_cache": "/tmp/ember-numerical-electron-hot-dense-addition-v2/plane-060/temperature-070.json.gz",
+      "original_cache_sha256": "a0f65cd487b00d7519dd4511705fff95b67e627f89e713f15e0098f7e76db8ef"
+    },
+    {
+      "plane": 37,
+      "temperature_index": 82,
+      "hydrogen": 0.075,
+      "helium3": 0.12,
+      "maximum_first_law_defect": 6.328056134652371e-12,
+      "maximum_scaled_physical_change": 1.1301679708499058e-05,
+      "original_cache": "/tmp/ember-numerical-electron-hot-dense-addition-v2/plane-037/temperature-082.json.gz",
+      "original_cache_sha256": "f22756c5adc22abebf2476d31c5721b21529c8bb983383ffea0512f6b58c432c"
+    }
+  ],
+  "probe_sha256": "f9fd14b9715f40a314d53eb45d3908a24f01e16113a31e7ef506ed884a410d7b",
+  "source_audit_sha256": "95ea32207f57edd7c5d8e5d954d24a19d5878f1b8fe5b2352a41559224929a35",
+  "raw_source": "/tmp/ember-dense-identity-precision-pilot-v1/source.json.gz",
+  "raw_source_sha256": "7c262511c0d172e68669a94fd667cf077c4f5765108fa86f809113e64489836b"
+}

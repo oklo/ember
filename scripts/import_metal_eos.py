@@ -10,7 +10,7 @@ import shutil
 import subprocess
 import sys
 from fetch_tops_composition import fraction_label
-from eos_source_coverage import absent_source_rows
+from eos_source_coverage import absent_source_rows, inconsistent_source_rows
 
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
@@ -35,6 +35,9 @@ def main():
         if raw.get('precision_fallback')!=spec.get('precision_fallback'):
             raise ValueError('source numerical precision differs from family specification')
         absent=absent_source_rows(raw)
+        excluded=inconsistent_source_rows(raw)
+        if excluded and spec.get('source_consistency_exclusion_limit')!=1e-7:
+            raise ValueError('source consistency exclusions are not declared by the family')
         # Refinement may require sub-per-mille abundances. Rounded labels
         # alias distinct physical planes; preserve the exact request value.
         name=f'freeeos300_gs98_x{fraction_label(x,1000)}_he3{fraction_label(y,1000)}'
@@ -45,7 +48,7 @@ def main():
         return {'hydrogen':x,'helium3':y,'potential':target.name,'potential_sha256':digest(target),
                 'source':str(saved.relative_to(a.output)),'source_sha256':digest(saved),
                 'failed_source_states':sum(r is not None and r[0]!=0 for r in raw['data']),
-                'absent_source_states':sum(absent)}
+                'absent_source_states':sum(absent),'inconsistent_source_states':len(excluded)}
     jobs=[(i,x,y) for i,(x,y) in enumerate((x,y) for x in spec['hydrogen'] for y in spec['helium3'])]
     with ThreadPoolExecutor(a.jobs) as pool:planes=list(pool.map(run,jobs))
     lines=['EMBER_METAL_HELMHOLTZ 1','hydrogen '+str(len(spec['hydrogen']))+' '+' '.join(map(str,spec['hydrogen'])),

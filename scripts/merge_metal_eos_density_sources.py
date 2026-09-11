@@ -17,6 +17,7 @@ import math
 from pathlib import Path
 
 from metal_eos_composition import mixture
+from eos_source_coverage import inconsistent_source_rows
 
 
 def digest(path):
@@ -64,6 +65,9 @@ def main():
     if all(precisions) and precisions[0] != precisions[1]:
         raise ValueError('source precision fallbacks differ')
     precision = next((value for value in precisions if value), None)
+    exclusion_limits = [s.get('source_consistency_exclusion_limit') for s in [old_spec, extra_spec]]
+    if any(limit not in [None, 1e-7] for limit in exclusion_limits):
+        raise ValueError('unsupported source consistency exclusion criterion')
     old_q, extra_q = old_spec['logQ'], extra_spec['logQ']
     if len(old_q) < 5 or len(extra_q) < 5:
         raise ValueError('source density axes are too short')
@@ -90,6 +94,8 @@ def main():
         spec.update(source_options=options, source_radiation_included=False)
     if precision:
         spec['precision_fallback'] = precision
+    if any(exclusion_limits):
+        spec['source_consistency_exclusion_limit'] = 1e-7
     spec['density_merge_sources'] = {str(path.resolve()): digest(path) for path in specs}
     a.output.mkdir(parents=True)
     (a.output/'specification.json').write_text(json.dumps(spec, indent=2)+'\n')
@@ -111,6 +117,8 @@ def main():
                 raise ValueError('source plane identity, dimensions or responses differ')
             if raw.get('precision_fallback') != source_spec.get('precision_fallback'):
                 raise ValueError('source plane precision differs from its specification')
+            if inconsistent_source_rows(raw) and source_spec.get('source_consistency_exclusion_limit') != 1e-7:
+                raise ValueError('source consistency exclusions lack a family declaration')
         rows, overlap = [], []
         for it, t in enumerate(spec['logT']):
             retained = old['data'][it*len(old_q):(it+1)*len(old_q)]
@@ -133,6 +141,19 @@ def main():
             raise ValueError('no converged source overlap connects the density ranges')
         raw = {**old, 'logQ': q, 'data': rows,
                'density_merge_source_sha256': [inputs[str(path.resolve())] for path in paths]}
+        exclusions = []
+        for source, axis, thermal in [(old, old_q, old_t), (extra, extra_q, extra_t)]:
+            for record in source.get('source_consistency_exclusions', []):
+                it, iq = divmod(record['index'], len(axis))
+                if source is extra and iq == 0:
+                    continue  # The shared row comes from the retained source.
+                index = old_t.index(thermal[it])*len(q)+q.index(axis[iq])
+                exclusions.append({**record, 'index': index})
+        if exclusions:
+            raw['source_consistency_exclusions'] = exclusions
+        else:
+            raw.pop('source_consistency_exclusions', None)
+        inconsistent_source_rows(raw)
         if 'source_coverage' in spec:
             raw['source_coverage'] = spec['source_coverage']
         if precision:
@@ -160,6 +181,7 @@ def main():
                   'added_rows': len(extra_t)*(len(extra_q)-1),
                   'absent_source_rows': sum(row is None for row in rows),
                   'source_failures_for_masking': sum(row is not None and row[0] != 0 for row in rows),
+                  'inconsistent_source_states': len(exclusions),
                   'overlap': overlap, 'source_sha256': digest(output)}
         (folder/'merge_receipt.json').write_text(json.dumps(record, indent=2)+'\n')
         print(f'merged X={x:.4g}, X3={y:.4g}', flush=True)

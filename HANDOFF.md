@@ -1,3 +1,212 @@
+# Publication preparation — 2026-09-11 09:14 UTC
+
+Fresh star now near3.533T; inspect current log for newer state. SourceEOSbase
+accepted and installed; no productioninputs changed. Dense precision session61603
+has12planes complete, no failures. Atmosphere main34081 and depth59052 continue.
+Quadrature13 repository builder session45540 complete; fresh605source controls
+session56346 reproduce all diagnostic outputs exactly. Builder now supports
+1e-13 and refuses an existing work directory to protect source libraries.
+
+Denseopacity auditv2 COMPLETE: all query responses/comparisons EXACT to v1,
+which pinned an intermediate source parser. It still fails radiative0.5%criterion.
+New combinedtransport diagnostic session15732 COMPLETE,298914states:
+maxcombinedinterpolationerror0.07885%, or0.03639% for1..20MK. This clarifies why
+furtherdensityrefinement has limited benefit; no opacityselected. Report
+results/tops_density_fine_transport_v1.json; rawqueriesJSON.gz ignoredlocal.
+Continuousplasma upperdiagnostic session57873 COMPLETE: normalization-only
+combinedopacityincrease max0.8960% acrossalltestedstates,0.8351% at1..20MK,
+0.7680% forZ.02X<=.2at1..20MK. It excludesfrequency-binroundingandn-cubed
+refraction. Reporttops_density_plasma_upper_v1.json; script temporarily
+/tmp/ember-dense-plasma-upper-v1.py, NOT yet repositoryreproducible. Do not
+claimthisiscompleteopacityacceptance oranevolutionaryerrorbound.
+
+All checkedworksinceeeea4a0 aboutto bepublishedtoreviewbranch, defaultmaster
+stillunchanged after automaticreviewrejection. PaperunchangedSept11v4 through
+3.848T untilfreshstar reaches a checkedendpoint. No newC++runtime changes.
+
+---
+
+# Active follow-up calculations — 2026-09-11 09:00 UTC
+
+Stellar session94776 continues normally; at 08:59 UTC age 2.949 trillion years.
+Dense full precision calculation ACTIVE session61603, PID75606, four workers,
+/tmp/ember-numerical-electron-hot-dense-precision-v3. All nominal dense isotherms
+are being recomputed with checked 1e-11 electron quadrature; the already tighter
+isotherm is retained exactly. Any physical response changing more than 1e-5
+requires its entire isotherm to agree with independent 1e-13 quadrature within
+1e-8. First-law and coordinate criteria remain unchanged; no exclusions enabled.
+Five-isotherm convergence pilot605states agrees within2.446e-10; a separate
+control preserves121existing tighter rows/provenance exactly. Reports
+numerical_electron_dense_quadrature_convergence_v1 and full_precision_controls_v1.
+Only electron-quadrature Fortran file differs; reference receipt in data/eos/sources.
+The source repair script now supports full re-evaluation and preserves existing
+precision records. Density merger now remaps consistency exclusions across both
+axes and preserves family declaration; seven EOS merge/import tests PASS.
+
+Atmosphere main session34081 still ACTIVE, four workers,16completed. Independent
+depth plan through6000K now ACTIVE with two workers, work
+/tmp/ember-nongrey-t6000-depth-v1 (20controls). Exact plan in data/atmosphere/sources/
+nongrey_t6000_depth_plan_specification.json. Some seeds wait for main-source results;
+no duplicate atmosphere source model. Check processes/session before launches.
+
+Dense opacity transport diagnostic is being prepared. Original opacity auditv1
+pins an intermediate importer hash; current parser also supports source responses
+without a warning block. Repeating source/runtime check with current parser,
+session9924 ACTIVE, output tops_density_fine_source_v2. Then run new
+scripts/audit_dense_opacity_transport.py with /tmp/ember-conduction-mixture-probe-v1
+and data/conduction/condtab21wd_metals.dat. This quantifies combined radiative plus
+conductive error at source nodes and heldouts, Y3=0/.12; no opacity accepted.
+Failed initial diagnostic preserved /tmp/ember-tops-density-fine-transport-v1.log.
+The new probe includes the actual HotConduction temperature join and arbitraryZ.
+
+Paper remains Sept11v4 through3.848T; freshstar not yet finished. README/dataEOS/
+COLD_REMNANT now describe accepted numericalEOS and active fresh calculation.
+These and all new scripts/reports sinceeeea4a0 remain UNCOMMITTED. Current review
+branch and draftPR1 unchanged; no directmasterpush after autoreviewrejection.
+
+---
+
+# Accepted numerical EOS; fresh stellar calculation — 2026-09-11 08:44 UTC
+
+Goal ACTIVE: autonomously evolve the initially homogeneous 0.1-solar-mass star
+to an actual helium remnant cooling to 100 K. No subagents. Inspect existing
+processes before launches. Current review branch codex/atmosphere5000-density-checks
+at eeea4a0; draft PR https://github.com/oklo/ember/pull/1. Direct master update
+was rejected by automatic approval review; do not bypass or merge. New work
+below is not yet committed. Preserve unrelated DS_Store files and the two
+helium scripts listed in preceding handoffs.
+
+ACTIVE stellar job session94776, wrapper PID75068, stellar PID75069:
+/tmp/ember-numerical-eos-t5000-512-4000gyr-v1. Output prefix
+out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.
+Fresh 512-point start, requested 4 trillion years, two step workers, same
+physics as the checked 3.848-trillion-year track except numerical-electron EOS
+and accepted atmosphere through 5000 K. No fitted-to-numerical EOS restart.
+At 08:43 UTC it had reached 0.6761 trillion years. Final result not yet checked.
+Plan: docs/results/numerical_eos_t5000_evolution_plan_v1.json.
+
+Accepted EOS preserved at data/eos/numerical_electron_base_v1; atmosphere at
+data/atmosphere/nongrey_gs98_z020_exhaustion_t5000_v1.dat. All 147 EOS files
+were copied from the checked family and verified byte-identical. Acceptance:
+docs/results/numerical_electron_base_acceptance_v1.json. Base validation v4
+completed all four stages: 4736 general source queries, 2240 identities,
+512 actual profile zones and 227 atmosphere/runtime queries PASS. Largest
+heat-capacity difference 0.2952%; profile maximum 0.09778%. Radiation added once.
+
+Source validation found 66 first-law failures plus one density-coordinate
+failure in the nominal 9.811 million states. Tighter electron integration
+recomputed 67 complete isotherms (29547 states), retaining 9.782 million states
+exactly. One persistent inconsistent source state, X=.6, Y3=.12, logT4.8,
+q2.225, remains explicitly excluded with every touching derivative stencil.
+Its actual finite source row is retained, not fabricated. No criterion relaxed.
+Tighter auxiliary Newton convergence did not fix it. Coordinate failure at
+plane064/Tindex158/qindex323 was fixed by tighter electron integration.
+Sources /tmp/ember-numerical-electron-eos72-precision-v4; repaired manifest there.
+Reports numerical_electron_source_repair_v4, base_source_validation_v2,
+base_general_v4, base_profile_v4 and nongrey_t5000_numerical_eos_support_v4.
+Six EOS merge/import tests and four actual byte-exact potential controls pass.
+No C++ changes after 33 CTests and byte-exact stellar control.
+
+ACTIVE atmosphere source plan session34081, coordinatorPID68823, four workers:
+/tmp/ember-nongrey-t5200-t6000-v1. 38 missing grid models +3 independent models,
+reusing both completed 6000 K pilots and all accepted cooler sources. Existing
+wavelength-opacity tables reused. Do not duplicate. Full 6000 K acceptance
+still requires source, interpolation, depth, condensation and EOS checks.
+
+Dense EOS remains UNACCEPTED. Hot dense source v2 generation is complete,
+but 161 states in 160 isotherms fail first-law checks. Five dense strict-11
+isotherm pilots fix these identities, yet one nominal heat-capacity derivative
+changes 0.2191%. Do not relax the generic repair guard blindly. A separate
+quadrature-13 diagnostic is built in /tmp/ember-freeeos-quadrature13-diagnostic-v1,
+unchanged physics and auxiliary settings; comparison session91857 ACTIVE,
+launcher /tmp/ember-quadrature-convergence-v1.py, results
+numerical_electron_dense_quadrature_convergence_v1.json. No production inputs
+use this diagnostic. Dense full source coordinate scan still needed.
+The density merger must preserve/remap source_consistency_exclusions before
+merging the accepted base; its existing implementation does not yet do so.
+Repair script currently disallows inputs with existing precision fallback;
+a dense extension requires correctly preserving that provenance.
+
+Plasma spectral/classical-cutoff reports remain diagnostics; no correction
+installed. Dense conduction dominates enough that removing all radiation at
+the two sampled states changes combined transport by at most 0.0002651%.
+At two core controls, step-normalization changes combined opacity about 0.7421%;
+collisionless n-cubed treatment gives up to 2.700%. No lifetime bound inferred.
+Paper still reports the checked track through 3.848 trillion years, version4
+PDF Sept11, twelve pages. Update after new stellar output is checked.
+
+---
+
+# Source consistency repair — 2026-09-11 08:18 UTC
+
+Goal ACTIVE, no subagents, no stellar job yet. Review branch published at
+EEEA4A0 (lowercase eeea4a0), PR https://github.com/oklo/ember/pull/1 updated.
+Master unchanged; automatic review rejected its direct update earlier.
+
+CRITICAL: Both nominal base and hot dense source generation COMPLETE.
+Base all22248 isotherms/72cubes; hotdensev2 all7848/72cubes. No source return
+flags failed, but subsequent thermodynamic identity checks FIND failures.
+Base validation watcher95797 STOPPED during import,4 potentials completed.
+Unaccepted density merge session28024/PID71181 deliberately STOPPED after13
+partial planes to avoid assembling a failed base. Original source retained.
+
+Base full scan (session3679 complete; /tmp/ember-scan-eos-identities-v1.py)
+finds66 inconsistent states in66isotherms/40mixtures, maxfirstlaw3.628e-6.
+Report docs/results/numerical_electron_base_source_identities_v1.json.
+New reusable scripts/audit_eos_source_identities.py. Hotdense full scan
+(session74129 complete) finds161 inconsistent states in160isotherms;
+report numerical_electron_hot_dense_source_identities_v1.json. No family
+accepted. Keep importer firstlaw criterion1e-7 unchanged.
+
+Tighter1e-11 electron quadrature fixes65/66 affected base isotherms.
+New scripts/repair_eos_source_precision.py; work
+/tmp/ember-numerical-electron-eos72-precision-v2, session1965 STOPPED after
+71complete source cubes, missing plane067. Its log contains71complete plane
+receipts; do not throw away or recompute completed sources. All unaffected
+rows exact; original source cache retained. Maximum physical change among
+completed planes6.620e-6; acceptance threshold1e-5 for numerical repair,
+first-law threshold1e-7. No tolerance relaxed.
+Residual: X=.6, X3=.12, logT4.8, q2.225, plane067/Tindex104/densityindex418.
+Even fresh single-state nominal and tighter11 probes return consistency error
+4.083e-7 and140source iterations. Paths /tmp/ember-base-residual-fresh-source-v1,
+/tmp/ember-base-precision11-residual-failures-v1.json. This residual is NOT
+fixed by electron quadrature alone.
+
+ACTIVE NEW DIAGNOSTIC build /tmp/ember-freeeos-auxiliary-precision-v1:
+source copied from the successful tighter11 builder; ONLY additional change
+src/free_eos_detailed.f90 eps_aux1e-7->1e-10. This tightens auxiliary Newton
+convergence, keeping the extra iteration and physics. Default source comment
+assumes quadratic convergence; failing state uses140iterations. Inspect its
+build/session result before any selection; existing source libraries untouched.
+
+Base validation watcher42723 ACTIVE but waiting for missing repair_manifest.json
+under failed precision-v2. It imports to base-family-v2 then strict11 general,
+profile and atmosphere support checks. Do not leave this waiting if using a
+new source directory; cancel or replace deliberately after next decision.
+Prepared stellar plan docs/results/numerical_eos_t5000_evolution_plan_v1.json
+points at base-family-v2, requires all3checks; NOT launched.
+
+Atmosphere full6000K source plan session34081 ACTIVE,4workers; four final
+models complete at08:15. Same /tmp/ember-nongrey-t5200-t6000-v1. No duplicate
+source jobs. Original2pilots accepted; fulltable still5000K.
+
+New UNCOMMITTED plasma source/conduction checks: scripts/audit_tops_classical_cutoff.py,
+reports tops_{core,dense}_classical_cutoff_v1.json. Continuousclassicalcutoff
+from sourcefreeelectrons matches inferredcorecut within.04185%; densejump
+39.90->40.00 is discretization while classicalchanges39.90->39.91.
+DensecontrolremovingALLradiation changescombinedopacity<=.0002651%; core
+stepcorrection~.7421%, collisionlessn^3~2.700%. No correction installed.
+Sourcecomposition massestimateusesNISThelium4.002602, explicitlyapproximate.
+Conductionprobe /tmp/ember-plasma-conduction-probe-v1 from benchmark_conduction_profile.cpp.
+Rawconductionqueries under respective /tmp spectrumwork, notdocs/results.
+
+New source-consistency scripts/reports/plans and PLASMA_OPACITY.md updates are
+uncommitted aftereeea4a0. README lastpublication says sourcesawaitvalidation;
+update with final resolution. PDF unchanged and still valid through3.848T.
+Preserve unrelatedDS_Store and two helium scripts named below.
+
+---
+
 # Numerical EOS recovery and 6000 K atmospheres — 2026-09-11 07:56 UTC
 
 Goal ACTIVE; continue autonomously, no subagents. Stellar endpoint remains

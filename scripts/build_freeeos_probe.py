@@ -21,14 +21,14 @@ def main():
     ap.add_argument('work',type=Path)
     ap.add_argument('--compiler',default='gfortran')
     ap.add_argument('--jobs',type=int,choices=range(1,9),default=4)
-    ap.add_argument('--electron-quadrature-error',type=float,choices=[1e-9,1e-11],default=1e-9,
+    ap.add_argument('--electron-quadrature-error',type=float,choices=[1e-9,1e-11,1e-13],default=1e-9,
                     help='numerical electron integration target; does not change EOS formulas')
     a=ap.parse_args()
     if hashlib.sha256(a.archive.read_bytes()).hexdigest()!=SHA256:
         raise ValueError('unexpected FreeEOS source checksum')
     compiler=shutil.which(a.compiler)
     if compiler is None: raise ValueError('Fortran compiler unavailable')
-    work=a.work.resolve();work.mkdir(parents=True,exist_ok=True)
+    work=a.work.resolve();work.mkdir(parents=True,exist_ok=False)
     with tarfile.open(a.archive,'r:gz') as tar:
         tar.extractall(work,filter='data')
     src=work/'free_eos-3.0.0';build=work/'build'
@@ -52,7 +52,8 @@ def main():
         original=hashlib.sha256(f.read_bytes()).hexdigest()
         old='real(fp_kind), parameter :: fderr = 1.e-09_fp_kind'
         if s.count(old)!=1:raise ValueError('unexpected numerical electron integration target')
-        f.write_text(s.replace(old,'real(fp_kind), parameter :: fderr = 1.e-11_fp_kind'))
+        target={1e-11:'1.e-11_fp_kind',1e-13:'1.e-13_fp_kind'}[a.electron_quadrature_error]
+        f.write_text(s.replace(old,'real(fp_kind), parameter :: fderr = '+target))
         precision_patch={'file':'src/fermi_dirac_direct.f90','original_sha256':original,
                          'modified_sha256':hashlib.sha256(f.read_bytes()).hexdigest()}
     subprocess.run(['cmake','-S',str(src),'-B',str(build),'-G','Ninja',
