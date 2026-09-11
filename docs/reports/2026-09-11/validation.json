@@ -1,120 +1,102 @@
 {
-  "validated_utc": "2026-09-11T05:01:20.985458+00:00",
-  "scope": "The paper plots the checked 512-point trajectory through 3.848 trillion years. Its history contains actual accepted models from the original calculation and one checked atmosphere extension; original receipts describe the individual segments. Source generation in progress is not an evolved result.",
+  "validated_utc": "2026-09-11T10:58:09.774468+00:00",
+  "scope": "The paper plots one checked fresh 512-point calculation using the numerical-electron EOS through the 5000 K atmosphere limit. Source calculations in progress are not plotted stellar states.",
   "history": {
-    "states": 7696,
-    "accepted_steps": 7695,
-    "rejected_attempts": 305,
-    "physical_join_exact": true,
+    "states": 8456,
+    "accepted_steps": 8455,
+    "rejected_attempts": 319,
     "record": "evolution_latest_provenance.json",
-    "record_sha256": "e7165c8c61aae1791ac8f3747a764fc123cc5f7cc4f22d5dc877b2030cef1751",
-    "check": "../../results/evolution_atmosphere_limit_3848gyr_v1.json",
-    "check_sha256": "b93eb700abe0a06fff3f8d60570abe14186b6dba45bdf0c969dc0396652479fa"
+    "record_sha256": "9d027ca218510aa9662c2e1d60cf12d0871a81bf721672026533255d2d82dfb9",
+    "check": "../../results/evolution_atmosphere_limit_3875gyr_v1.json",
+    "check_sha256": "aa2c10982e965bf731c8ac75c796cd34d27861affef70f18240fe8badc1dc65e",
+    "csv_verified_against_raw_archive": true
   },
   "recovery": {
-    "checked": 41,
+    "checked": 46,
     "raw_and_compressed_sha256_pass": true
   },
   "paper": {
     "pages": 12,
     "compiler": "Tectonic",
-    "build_log": "/tmp/ember-paper-sept11-v4.log",
-    "build_log_sha256": "32dd45f7c7cb57b2c58d46b6fc6c9763c82f42e5cfc123239818a307d56ef57c",
+    "build_log": "/tmp/ember-paper-sept11-v5.log",
+    "build_log_sha256": "b4996141aa3acc03e3e7434bb9c241a8c86f3eea85ab4382b12742f0d0bf7ac6",
     "warnings": [],
-    "visual_inspection": "All twelve pages were inspected for the plotted-track revision. The subsequent atmosphere-only update preserves twelve pages; its changed page 8 was rendered and inspected, and all figure/data files retain their verified hashes.",
-    "regeneration_directory": "/tmp/ember-paper-sept11-reproduce-v1",
-    "figure_pairs_byte_identical": [
-      "lba97_hr",
-      "lba97_composition",
-      "evolution_history",
-      "f77_matched_hydrogen",
-      "convection_current",
-      "photospheric_evolution"
-    ],
-    "digitized_LBA_CSVs_byte_identical": true,
+    "visual_inspection": "All twelve pages rendered and inspected. After the final text and annotation corrections, changed pages 3, 6 and 10 were rendered and inspected again.",
     "four_significant_figure_prose_check": true,
     "figure_titles": false,
     "f77_opacity": 0.3,
     "f77_abrupt_segment_opacity": 0.08,
     "files_sha256": {
-      "README.md": "8433bb5dfac57893c7a3f67d1c979d88a763b4bd3b799919b0734c9e53f5563e",
+      "README.md": "6349f965f67e24c5c15619bbce3fd911c76b5cb82968aa3178f086e6d02b1150",
       "build_current_convection.py": "a9f48fc7de2a3a1b3d7c7a58012c2c83eda9777b9bca6ad87aff928be8237c15",
       "build_figures.py": "238f6207ac550cc19c96296cd85a001e10c7e262601055a700b64e61bbd7b8b8",
-      "build_lba97_figures.py": "4cd27cb78096cddf6d13488a09eba1077f939a41b166485f9f29d0866c9bbc61",
+      "build_lba97_figures.py": "483e83ff34a0f3ee34a49b753cdd6ac33d3c826e032a0075b0dc2bd7513090ee",
       "build_photospheric_figure.py": "dbd8e99bb329928a85390c7336357ba4f20d76a7d0f753fd628df010e75097c4",
       "build_transition_figures.py": "6a9b20a6dd70a93a29c39bbc776785fb409c976e25c2671443158684a94cdec3",
-      "convection_current.pdf": "10763b34800f9f121b94567f459a8c9465d5bd82892fa1759f06c0bc11b48b6f",
-      "convection_current.png": "cba080dd1fc5bc3646e5f4cd30963d3f213c1a11df5f47c9c3795d5f9e8424ed",
+      "convection_current.pdf": "206f104c87cdc6cab791aa4ca7697d6cf365597b66cd47edeecd76dc50931ff5",
+      "convection_current.png": "f822910607717ec5b81b144c106e35c3a324f7e888adb8d2f187860194ce1615",
       "convection_transition.pdf": "d56be608666ed707f2e1526c02b8a98a34d3cdd3af7c5b535b83032c41205566",
       "convection_transition.png": "f58effc65b9cf1247efd19b6305a1d81519ec0eeeff183826a1ef9c9537478c9",
       "current_evolution.py": "efaa60c048116ca1aa5f04d4b62ed8402ffda8ae87120e3a54ab57bd300bf9d4",
-      "ember_status_and_future.pdf": "12fe6fc623c4a8b6515e75306ea3b989b3062cebc6215fde48ce4eb45e995911",
-      "ember_status_and_future.tex": "d4058f0515bb8046b2ffe9aa0d56e7f572cb293c2672db5e0c34521ddcd7f464",
+      "ember_status_and_future.pdf": "28cd5250291b1e1a748e62ade36b1c88c6a99df51ca214a503a475d4080ae1a6",
+      "ember_status_and_future.tex": "73b662862642d77b6834071bb84977fada141bdc343b0a3f1ba3003957639d23",
       "ember_transition_trial.json": "069df004afe7ba9b2865eace6629dd358e5c364cb37b9a9601b20aac6aed9d3a",
       "evolution_1024_continuation.csv": "14eda0e3354c40935b31100a02f62cf275871d7935f6fb11f216735d2207826f",
       "evolution_history.csv": "d883dd4c0fc12ad82a3a21a72bb670bcdd9701179c15bdd2090d4874dde1584e",
-      "evolution_history.pdf": "17b9e68e1a2e18eabd93581e5312e8231a82b90f2fc1f3e4e86ac9c37c6e7bba",
-      "evolution_history.png": "56e6e8f20c4697e425cebd7555b1d2b9925cc62a6d78944b9f7e917614403eef",
-      "evolution_latest.csv": "322097c3becc0edf9f4bbe6b54d18ace74bcdad892955e9a8ceac93b14c133e0",
-      "evolution_latest_profile.csv": "7d417d74ac04475a409d0d4f93f9d5f4435e5dc3cdaeaf5e4406c6855ada3acd",
-      "evolution_latest_provenance.json": "e7165c8c61aae1791ac8f3747a764fc123cc5f7cc4f22d5dc877b2030cef1751",
+      "evolution_history.pdf": "d5a1d241d6bc440b588c2e0ff8e81d7c3a8ee4536d487e3e454da3c73de0cc0b",
+      "evolution_history.png": "aad3337fc18c132e640c9263cbf42f1174177e2799981f1cf183286b08dec8c7",
+      "evolution_latest.csv": "f64a4b0578f5420937bdd858c09cffee00f514f72f2660ad5631f0834c476169",
+      "evolution_latest_profile.csv": "1a5e934c277f6b1ad237e9908fe6a0639e95f3d9d6b2cb28fb7c8197f9a5f973",
+      "evolution_latest_provenance.json": "9d027ca218510aa9662c2e1d60cf12d0871a81bf721672026533255d2d82dfb9",
       "evolution_profile_1024.csv": "a879c80b564de1acd91575099c861eae5c0dab70994976521ce9ee5671e7c220",
       "evolution_profile_512.csv": "741d53e8a13385eadd0409baa399882810d4c0e1c90d9181abcfbd6b9af30142",
       "f77_history.csv": "d1bba9ec7f73a286a1daa0eb4c102c6c56cce3ac2991a818cb44e8f84c3e6ad5",
       "f77_history_provenance.json": "034ac1e7b867b732a303e290da9f2e206cd882a53292110a37782902162c2dd0",
-      "f77_matched_hydrogen.pdf": "b54819ca51ef617dcecf302929b1817678d220429daf533a7df0d0c67276dc32",
-      "f77_matched_hydrogen.png": "1c30ff45c4c779813fe8386da8690d1df4752ee05ef52f10ef4fdb0dc0d93aff",
-      "lba97_composition.pdf": "88023471b41fbaf327265513485b148f05abc0b7c702fdc26416b7dfa0223384",
-      "lba97_composition.png": "2d2d1959b521952232a433ed30368a86cf3f52a603087f986d1aa1f431ce1db5",
+      "f77_matched_hydrogen.pdf": "3269039e20cd139b63269e134b530be5b6831ca2a880654b0dd9edbf996ea4fd",
+      "f77_matched_hydrogen.png": "a8ec6481da33d75cae5a7d358f8ebb49794777dcbcef31ab8d8bb705d6f9e6e4",
+      "lba97_composition.pdf": "927a174fcaa626e9b845c87e97b22748df7988ab2bdb6099c98e035fce23d030",
+      "lba97_composition.png": "96ce059ae8221b38ae57c5e09a55e98cf9c5fe1f9192393ba55c1a9e3dbcfdbc",
       "lba97_digitized_composition.csv": "74889482c284d5385bb4e64e259d96b4b34f5c6cfb54457da02f4be71b49c745",
       "lba97_digitized_hr.csv": "54e99d9068af6448c146fe10b7a3b71bb14a83aa5ed7a849189d49fe1ad9cac7",
       "lba97_figure1_digitization.json": "633d39bc97c549ec59a6561bc602088b75f7ae6d52fc621b9361ae94ebaeeaf1",
       "lba97_figure6_extraction.json": "b2978bed9a1798d8378afa165e24ef43964416237e056a57523bfaf0327bb4bd",
-      "lba97_hr.pdf": "f40930b663c1b98bf3a3f545e72778580d0a095e2940b9baaab754ada28d9a6c",
-      "lba97_hr.png": "66a2e6a384cf6c32f5a1bad6b7b8402dfa49386354a69ca6505aca8e69a6a0a3",
-      "photospheric_evolution.csv": "08a0c0061e031eecb532462475304bf59041c0b7376b81c2357fd0ccbe5e6dda",
-      "photospheric_evolution.pdf": "d2a476bd42bc529b2dbab6aa1edcd7d5cc49fcc0eb6389e3800c89ce7fe4529b",
-      "photospheric_evolution.png": "a240a1f1e8389599b8734e970da8d382a73a8c2a05db7a711866d863ac939795",
-      "photospheric_evolution_provenance.json": "85c58ad0109deb767bb21ddbde0a85a8c99b0c3bf3c00b9c736adab3bee0f9f9",
+      "lba97_hr.pdf": "eacd1da6b345e24933d62e4333deaca1cbf6c1199a70f294f80760d424ff0313",
+      "lba97_hr.png": "6a1b60504941c5b8b82f2e0217762c8ebdaceba03579c42ae28e08ad42bcbcf7",
+      "photospheric_evolution.csv": "e175b117c8ce9fe4d2f0a12905f2e98ff3543856a69e66443ba4da7b6b524352",
+      "photospheric_evolution.pdf": "4f10c3d20b7bc43f1de886ef813de08f21898595a9764127a3e114466dee4e92",
+      "photospheric_evolution.png": "2b769a8f9e9324343440f740997e550c4b8c0d8d5de6e0e6d15dce37501ad00f",
+      "photospheric_evolution_provenance.json": "f403e3e5adf2b239338d6af305ae54cc12914d3e95bd2e4c7e494168ed980ffc",
       "photospheric_opacity_map.json": "44ee8d9d1cf37d1d94336daa6b6c9801b34d438d39eb549ef52da177d78204eb",
-      "recovery_manifest.json": "b169e2a0e8f419c9c25dd56a9ccef70ee86f61992efc3db828cfa71c58b87613"
+      "recovery_manifest.json": "48dcf2417baf63a99a954805fc5acb323253213455ac73d9e5df1dbba74a3e19"
     }
   },
   "code_validation": [
     {
-      "record": "../../results/atmosphere_extension_restart_v1.json",
-      "sha256": "8947b2a028fdb926ab277ad09540e076ce1cc43905a4c7b6291f87e74f997770",
-      "scope": "Executable used for the plotted continuation; 32 tests and fixed-input trajectory comparison."
+      "record": "../../results/nuclear_sfiii_validation_v1.json",
+      "sha256": "19db8387866c14691795b2f8ca90b84b64d062f7ee4e7a4ac50e7d5a74ac8e8e",
+      "scope": "Current executable passes 34 tests; Solar Fusion III is optional, while the plotted trajectory retains Solar Fusion II."
     },
     {
-      "record": "../../results/eos_temperature_extension_restart_v1.json",
-      "sha256": "8ee37e761563e4f592ee87bae6184893bb3be6644b9ef1112d4fbecd2fc1d9cb",
-      "scope": "New temperature-extension mechanics; not used in the plotted stellar history."
+      "record": "../../results/nuclear_sfiii_evolution_control_v1.json",
+      "sha256": "ac972d61e20f5b9d5d51851af4860c854d50789e254019259760be3e3b750988",
+      "scope": "Independent 10 Gyr controls; Solar Fusion II output remains byte identical to the executable used for the plotted track."
     }
   ],
   "core_transport": {
-    "record": "../../results/current_core_transport_3848gyr_v1.json",
-    "sha256": "78d338b363b46e360ecc0794832605872af02155f865f5ec0a7c008dc4dea773",
-    "central_conductive_fraction": 0.6982473755923638
+    "record": "../../results/evolution_atmosphere_limit_3875gyr_v1.json",
+    "sha256": "aa2c10982e965bf731c8ac75c796cd34d27861affef70f18240fe8badc1dc65e",
+    "central_conductive_fraction": 0.8471063553277064
   },
   "photospheric_validation": {
     "record": "photospheric_evolution_provenance.json",
-    "sha256": "85c58ad0109deb767bb21ddbde0a85a8c99b0c3bf3c00b9c736adab3bee0f9f9",
-    "source_nodes": 172,
+    "sha256": "f403e3e5adf2b239338d6af305ae54cc12914d3e95bd2e4c7e494168ed980ffc",
+    "source_nodes": 196,
     "runtime_comparisons": 65
   },
-  "EOS_limitations": {
-    "profile_comparison": "../../results/metal_eos_hot_profile_v1.json",
-    "unvisited_mixture_failed_comparison": "../../results/metal_eos_hot_source_v1.json",
-    "source_fit_join": "../../results/freeeos_electron_fit_join_v1.json",
-    "note": "Profile passes the comparison; this does not establish a uniform table bound. Numerical-electron source generation is separate and not selected."
-  },
-  "atmosphere_update": {
-    "checked_utc": "2026-09-11T06:49:29.726670+00:00",
-    "acceptance": "results/nongrey_t5000_acceptance_v1.json",
-    "acceptance_sha256": "37561d476d46946dad5b5d64bd51b516e4c852ed8aec53005f7ee9772ee13656",
-    "source_models": 196,
-    "trajectory_unchanged": true,
-    "scope": "Only atmosphere coverage and its completed checks changed in the paper; the plotted stellar history remains at 3.848 trillion years."
+  "EOS": {
+    "acceptance": "../../results/numerical_electron_base_acceptance_v1.json",
+    "profile_comparison": "../../results/numerical_electron_profile_3875gyr_v1.json",
+    "profile_comparison_sha256": "335420b26f43f71f6c316a8886485cb29695069024abe96a260a4755dcb0796f",
+    "note": "Numerical electron integration is selected. One source consistency exclusion and its touching derivative stencils remain explicit. Independent profile and general comparisons are sampled checks, not global accuracy bounds."
   }
 }

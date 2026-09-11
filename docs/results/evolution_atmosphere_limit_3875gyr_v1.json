@@ -1,14 +1,4 @@
 {
-  "scope": "Complete accepted history from one fresh calculation with fixed physical inputs; no history splicing.",
-  "input": "out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.json",
-  "raw_sha256": "7d7d0014eca968857284abdc31267451bc8c748799bffb8a00adcde6e2ec89f6",
-  "raw_archive": "artifacts/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.json.gz",
-  "raw_archive_sha256": "1d0af0e7446b0cc000ac16f0de80ccf0487f6bba784fa7fdfd5ce62b1f2f75a4",
-  "history_csv": "evolution_latest.csv",
-  "history_csv_sha256": "f64a4b0578f5420937bdd858c09cffee00f514f72f2660ad5631f0834c476169",
-  "profile_csv": "evolution_latest_profile.csv",
-  "profile_csv_sha256": "1a5e934c277f6b1ad237e9908fe6a0639e95f3d9d6b2cb28fb7c8197f9a5f973",
-  "states": 8456,
   "endpoint": {
     "age_yr": 3874509630439.291,
     "step_yr": 842.4219486777611,
@@ -32,6 +22,7 @@
     "hydrogen_mass_Msun": 0.007414380138944069,
     "thermal_neutrino_Lsun": 4.8606360856263715e-08
   },
+  "states": 8456,
   "requested_age_reached": false,
   "stop": "Accepted history ends at the atmosphere upper temperature; subsequent source-domain rejections and minimum-step failure are retained. Requested age was not reached.",
   "first_atmosphere_domain_rejection": "retry dt=1.38022e+07 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
@@ -134,28 +125,20 @@
       "outer_enclosed_fraction": 1
     }
   ],
-  "mixing_probe_sha256": "4e0541eb003a4352a7bec9538e02dde45e8a655571570eea4f88cfb1b0713455",
-  "receipt_sha256": "540394a9bede99334aeb48dd51400550af36847398cefaa0a4bb156184749292",
-  "executable_sha256": "a4e48b67505fa26ebf443108df5cfd27348f1a89cf79d7bc56f1f52dcfa19f1c",
   "EOS": "metal:data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
   "atmosphere": "nongrey:data/atmosphere/nongrey_gs98_z020_exhaustion_t5000_v1.dat",
   "opacity_directory": "/Users/greglaughlin/Projects/ember/data/opacity/hydrogen_exhaustion_hot_v1",
-  "step_error_tolerances": {
-    "log_structure": 2.5e-05,
-    "absolute_abundance": 2.5e-08,
-    "relative_surface_luminosity": 0.00025
-  },
-  "data_changed_during_run": [],
-  "source_changed_during_run": [
-    "apps/evolve.cpp",
-    "include/ember/eos_mixture.hpp",
-    "include/ember/nuclear.hpp",
-    "src/eos_mixture.cpp",
-    "src/nuclear_pp.cpp"
-  ],
-  "source_note": "Changes to the source tree do not alter the copied executable used for this calculation.",
   "cpu_seconds": 7240.055622000001,
   "awake_seconds": 5956.380562624894,
   "utc_seconds": 5956.366942882538,
-  "export_script_sha256": "0de8512783beb1224a01e3c6ef64a77d6574a64e3c0e0d58ef10548bb0785253"
+  "scope": "Checked fresh 512-point numerical-electron EOS calculation to the 5000 K atmosphere limit. No extrapolated stellar states.",
+  "checked_utc": "2026-09-11T10:25:45.722295+00:00",
+  "central_conduction_flux_fraction": 0.8471063553277064,
+  "central_conductive_opacity": 1.9507272813308167,
+  "central_radiative_opacity": 10.807993236529365,
+  "input_sha256": {
+    "docs/reports/2026-09-11/evolution_latest_provenance.json": "9d027ca218510aa9662c2e1d60cf12d0871a81bf721672026533255d2d82dfb9",
+    "/tmp/ember-numerical-eos-t5000-profile-physics-v1.json": "071e7a73c713c8bb6d51acb307fd0c0cf0b97e3c553c16031ddb6a923da6f9e6",
+    "/tmp/ember-evolution-physics-exhaustion-probe-v1": "e8e9dbcefd4a2a81709cee6584275217b01b98331a9bcd8dce4e5d39f1cb38b9"
+  }
 }

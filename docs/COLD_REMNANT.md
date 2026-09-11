@@ -10,65 +10,50 @@ publication policy in [DATA_REPRODUCTION.md](DATA_REPRODUCTION.md).
 
 ## Progress on 2026-09-11
 
-The latest checked 512-point state reaches **3.848 trillion years**, central
-hydrogen **X = 0.002467**, surface hydrogen **X = 0.1730** and effective temperature
-**4400 K**. Its nonconvective core contains **92.10%** of the mass. The sequence
-contains the initial structure and 7695 accepted time steps; the atmosphere
-upper temperature prevents further evolution with these inputs.
-[Endpoint, stopping evidence and checks](results/evolution_atmosphere_limit_3848gyr_v1.json).
+The latest checked 512-point calculation reaches **3.875 trillion years**,
+central hydrogen **X = 0.001294**, surface hydrogen **X = 0.1730** and effective
+temperature **5000 K**. Its nonconvective core contains **95.44%** of the mass.
+The sequence contains the initial structure and 8455 accepted time steps,
+each updating composition and structure. Further evolution requires hotter
+atmosphere coverage.
+[Endpoint, stopping evidence and checks](results/evolution_atmosphere_limit_3875gyr_v1.json).
 
-The calculation through 3.818 trillion years uses the checked 156-model
-atmosphere table and 72-table EOS.
-All atmosphere nodes have EOS support. Its 3900 K independent check differs by
-−0.4427% in matching temperature and +0.4107% in gas pressure. Four lower-boundary
-checks pass, with a maximum matching-state change of 0.005127%; the twelve added
-structures contain no condensates in the equilibrium diagnostic.
-[Atmosphere acceptance](results/nongrey_t4000_acceptance_v1.json).
-The 172-model extension through 4400 K has also passed source, independent
-interpolation, depth, condensation and EOS/runtime checks. All 156 existing
-source states remain unchanged; independent matching-state differences are
-below 0.5987%. [Acceptance](results/nongrey_t4400_acceptance_v1.json).
-The saved 3.818-trillion-year star continued to 3.848 trillion years with this
-table through a checked atmosphere-extension restart. The physical state at
-the join is exact. The 196-model extension through 5000 K now passes all source,
-interpolation, depth, condensation and EOS/runtime checks. It retains every
-existing source state and missing-state mask. Three independent matching-state
-comparisons differ by at most 0.5376%; twelve lower-boundary comparisons pass.
-[Acceptance](results/nongrey_t5000_acceptance_v1.json). A fresh stellar
-calculation now uses this atmosphere with the checked numerical-electron EOS;
-see HANDOFF.md for jobs.
+The selected 196-model gas-atmosphere table through 5000 K passes source,
+interpolation, depth, condensation and EOS/runtime checks. Three independent
+matching-state comparisons differ by at most 0.5376%; twelve lower-boundary
+comparisons pass. All previously accepted states and masks remain exact.
+[Atmosphere acceptance](results/nongrey_t5000_acceptance_v1.json).
+Atmosphere source calculations through 6000 K and their independent controls
+continue; consult HANDOFF.md for current jobs and acceptance status.
 
-The numerical-electron EOS passes 4736 independent source comparisons,
-2240 thermodynamic identities, all 512 zones of the saved star and all 227
-atmosphere queries. The maximum heat-capacity difference is 0.2952%. One
-inconsistent source state and all touching derivative stencils are explicitly
-excluded. The accepted family is preserved locally and selected for the fresh
-stellar calculation. The separate hot dense EOS addition remains under
-source-precision checks.
+The selected numerical-electron EOS passes 4736 independent source comparisons,
+2240 thermodynamic identities and 227 atmosphere queries. The largest general
+heat-capacity difference is 0.2952%. All 512 zones of the final star pass, with
+a maximum heat-capacity difference of 0.06584%. One inconsistent source state
+and all touching derivative stencils are explicitly excluded.
 [EOS acceptance](results/numerical_electron_base_acceptance_v1.json),
-[general comparisons](results/numerical_electron_base_general_v4.json),
-[profile comparisons](results/numerical_electron_base_profile_v4.json).
+[final profile comparison](results/numerical_electron_profile_3875gyr_v1.json).
+The separate hot dense source addition passes its source checks; its restricted
+hydrogen-poor extension requires interpolation and runtime checks before use.
 
-The paper plots the checked track through **3.848 trillion years**.
-All its Ember curves use that single calculation. Its core transports heat by
-radiation and conduction, with conduction supplying **69.82% of local central
-flux**. Its initial radius agrees with that measured for EBLM J2114-39 B,
-within the reported uncertainty. The opacity diagram extracts the photosphere
-at Rosseland optical depth 2/3 from the source atmosphere structures.
+The paper plots this checked trajectory through **3.875 trillion years**.
+Its core transports heat by radiation and conduction, with conduction supplying
+**84.71% of local central flux**. Its initial radius agrees with the measured
+radius of EBLM J2114-39 B within the reported uncertainty. The opacity diagram
+extracts the photosphere at Rosseland optical depth 2/3 from the source
+atmosphere structures.
 
 The hot ATOMIC opacity family reaches zero hydrogen. Twelve independent
 composition checks on hot profile states differ by at most 0.05257%.
 The evolving surface remains hydrogen rich; lower-temperature hydrogen-poor
 opacity and fully coupled grain atmospheres remain requirements for cooling.
-The selected EOS passes 1188 independent low-density and 792 original-density
-source comparisons.
+
 
 The exact-response cache and shared nuclear electron calculation are installed.
 A fixed-input long pair gives identical full histories, with CPU time reduced
-from 162.4 to 101.8 minutes (37.31%); concurrent load varied. The latest partial
-stellar trajectory through 3.818 trillion years uses 41.19 CPU minutes; its
-continuation to 3.848 trillion years adds 4.990 CPU minutes and 3.111 awake
-minutes. These are not whole-cooling timings.
+from 162.4 to 101.8 minutes (37.31%); concurrent load varied. The plotted calculation through 3.875 trillion years uses **120.7 CPU minutes**
+and **99.27 elapsed minutes**, with concurrent source calculations. Atmosphere
+source generation is separate. These are not whole-cooling timings.
 
 Fresh controls through 3.600 trillion years are complete. Tightening the time
 control changes central hydrogen by 0.1849%; doubling the mesh changes it by

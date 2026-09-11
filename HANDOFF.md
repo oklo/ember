@@ -1,3 +1,158 @@
+# Checked star and paper update — 2026-09-11 10:59 UTC
+
+The fresh numerical-electron EOS calculation finished at its accepted 5000 K
+atmosphere limit: age 3.875 Tyr, central X = 0.001294, 8455 accepted steps.
+Conduction supplies 84.71% of central flux. CPU 120.7 minutes, elapsed 99.27.
+Source executable and all physical data stayed unchanged. Session 94776 is
+complete; no active stellar production job. Endpoint/profile reports are
+results/evolution_atmosphere_limit_3875gyr_v1.json and
+results/numerical_electron_profile_3875gyr_v1.json. Prefix:
+out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.
+The September 11 paper now plots this entire fresh calculation, including
+photospheric data from 196 atmospheres. Twelve-page PDF rebuilt and inspected;
+46 local recovery archives and the plotted CSVs verified. README updated.
+
+The 5200 K candidate v1 failed its X=.2, Y3=0, log g=5.4 lower-boundary checks
+at 300 depth points (both shallow depths 120 and 150). A separate 400-point
+pair PASSES the unchanged 0.01% criterion: maximum difference 0.001184%.
+New candidate /tmp/ember-nongrey-exhaustion-t5200-v2.dat replaces only this
+new source node with the 400-point deep model. All 196 original states and
+272 masks are exact. Interpolation/EOS audit session 53379 active; condensation
+session 99815 has printed four zero-condensate profiles. NOT accepted yet.
+400-point source work /tmp/ember-nongrey-t5200-depth400-v1; completed.
+Atmosphere main session 34081 and depth 59052 continue toward 6000 K.
+The deeper log g=5.7 pilot at 6000 K completed, but final bottom optical depth
+is only 113.4; do not use it blindly as a seed for higher gravity.
+
+Dense numerical-electron source v4 COMPLETE: all 72 cubes / 949.6 thousand
+states pass coordinate, convergence and first-law checks. Full composition
+merge failed two overlap comparisons in X=.275, Y3=0; no tolerance relaxed.
+An explicit addition restricted to X<=.2 has now merged, preserving the full
+original family and withholding newly dense higher-H states. New importer
+session 49552 is active, output
+/tmp/ember-numerical-electron-hot-dense-exhaustion-family-v1.
+Raw merge /tmp/ember-numerical-electron-hot-dense-exhaustion-merged-v1.
+Next: exact old potential/mask retention, independent dense source and
+thermodynamic comparisons, current profile and atmosphere support. The new
+family is NOT accepted or selected. Exact X=.2 interpolation chooses the
+right-hand cell, so test and describe the actual supported dense composition
+domain carefully; the star's surface X=.1730 lies below this edge.
+
+Solar Fusion III is optional and checked; default and plotted track stay
+Solar Fusion II. Current build /tmp/ember-sfiii-build-v1: all 34 CTests pass;
+512-point 10 Gyr SII output is byte-identical to the plotted run's executable.
+SIII initial luminosity increases 0.7454%, radius 0.2164%; no full-lifetime
+claim. Published as 4b7d386 on codex/atmosphere5000-density-checks. Draft PR1.
+Default master remains unchanged after automatic approval review rejected
+its earlier direct push. Publish updates to the existing review branch.
+
+Active goal remains the full physical track to 100 K; no remnant/cooling
+milestone achieved yet. No subagents. Inspect jobs before launch. Science
+Python is /tmp/ember-plot-env/bin/python (system Python lacks NumPy).
+Preserve unrelated DS_Store files, scripts/audit_helium_coexistence.py and
+scripts/helium_electron_probe.cpp. See older records below for prior inputs.
+
+---
+
+# Live evolution and remaining table checks — 2026-09-11 10:01 UTC
+
+Published the seven checked EOS density-restart files as 4d507f8 on
+codex/atmosphere5000-density-checks; push succeeded. Default master unchanged.
+Draft PR remains https://github.com/oklo/ember/pull/1.
+
+Fresh numerical-electron star session 94776 remains active, near 3.827 Tyr,
+central X = 0.003831 at the latest inspection. Original executable and all
+physical inputs remain fixed. Paper remains the checked 3.848 Tyr fitted-electron
+track until this fresh calculation finishes and is archived.
+
+5200 K atmosphere NOT ACCEPTED: three lower-depth comparisons pass; the
+X = 0.2, Y3 = 0, log g = 5.4 comparison at optical depths 120 and 239 fails
+its unchanged 0.01% criterion (pressure difference 0.01076%). The attempted
+acceptance script stopped on this assertion and installed no table. A separate
+150-depth control is active, session 14052, work
+/tmp/ember-nongrey-t5200-g540-depth150-v1, same-prefix log. Compare against the
+239-depth main source after completion; preserve the failed 120-depth report.
+All 204 source nodes have EOS support, 5100 K heldout pressure differs 0.4421%,
+and all eight condensation profiles have zero condensates.
+
+High-gravity pilot v1 first source FAILED during coarse initialization because
+its matching optical depth was not bracketed; it was NOT a completed atmosphere.
+Its dependent requests were cancelled using the plan's cooperative cancellation
+record. New single deeper pilot session 31276 is active at
+/tmp/ember-nongrey-t6000-high-gravity-deep-pilot-v1, same-prefix log, with a
+verified 600-depth seed for Teff = 6000 K, X = 0.15, Y3 = 0, log g = 5.7.
+Plan data/atmosphere/sources/nongrey_t6000_high_gravity_deep_pilot_plan_specification.json.
+No new wavelength opacity generated; same checked 13.15 kK table reused.
+
+Dense full-precision source v4 session 16815 remains active with four workers;
+65/72 complete at the latest inspection. A sample of seven completed source
+cubes agrees with the accepted base at every overlapping temperature within
+5.517e-9, below the unchanged 1e-8 overlap criterion. This does not replace the
+full scan, merge, import and independent EOS validation after completion.
+New explicit 56-state dense audit request is prepared at
+ data/eos/sources/numerical_electron_hot_dense_audit_states_v1.json.
+Do not modify repair_eos_source_precision.py while its source job is active.
+
+Atmosphere main session 34081 and depth session 59052 continue; 27 main and
+five depth sources completed at inspection. Inspect existing jobs before new
+launches; no duplicated stellar run. No subagents. Preserve unrelated DS_Store
+files and the two helium scripts listed below.
+
+---
+
+# Dense precision resumed; EOS restart checked — 2026-09-11 09:25 UTC
+
+Published reviewbranch dbccb27 (46files4.368MB) and updated draft PR1 title/body.
+Defaultmaster remains unchanged after earlier automaticreview rejection.
+All work below AFTERdbccb27 is UNCOMMITTED.
+
+Fresh star session94776 remains ACTIVE, now3.644T, Xc.06069. Actual source
+binary remains /tmp/ember-density-opacity-build-v1/apps/ember-evolve, copied
+inside /tmp/ember-numerical-eos-t5000-512-4000gyr-v1. No physics inputs changed.
+
+DENSE SOURCEv3 session61603 STOPPED: one residual at plane019 X.01375 Y3.12,
+Tindex092(logT7.15),qindex42(q3.025), rho_source58527.86897.
+Nominal and strict11firstlaw defects about5.483e-7. Strict13 fixesit to5.524e-14,
+physicalchange7.005e-6. Actual121-state fallbackcontrolPASS and records actual
+selected13probe and precision perisotherm. 28COMPLETEplanes retained, plus93
+partialprimaryisotherms from019; allsha pinned in v3/partial_repair_manifest.json.
+
+NEW ACTIVE dense repair session16815, /tmp/ember-numerical-electron-hot-dense-precision-v4,
+fourworkers. Reuses28completev3cubes exactly and93partialsource responses;
+usesstrict13whenstrict11failscoordinate/firstlawvalidation. A fallbackchanging
+nominalphysicalresponse>1e-5 is REJECTED unlessa separatehigherprecisionreference
+is added; no self-comparison accepted. Ordinarylarge11correctionsstillrequire
+independent13agreement1e-8. No sourceexclusionsenabled. No tolerancesrelaxed.
+Updatedrepairscript acceptscompleteandpartialreuse; do NOT modifywhileactive.
+Sourceprecisionreference nowpreserved/checked throughmerger/importer and actual
+perisothermprovenance; eightPythonEOSmerge/importtestsPASS. This latestPython
+check ran after the compiledsuite's priorseven-testversion; C++ unchanged.
+
+NEW C++ EOS densityextensionrestart: --eos-density-extension-restart withsame
+sourceexecutable/EOScontrols as temperatureextension. Originalpotentialjets,
+masks,Taxis,qprefix,composition/sourcephysics mustbeEXACT. Correct2Drowstrides.
+Build /tmp/ember-eos-density-restart-build-v1, executableSHA
+fe36561e6b440ec3c86a1d284f295d7bfad8b75c7f4fa596c44fa3a4da2582f4.
+All34CTestsPASS485.58s, session39016complete. Fixed51210GyrnewnumericalEOS/5000K
+control session9090complete: entireJSON byteEXACT vsoldexe, outputSHA
+cfcd5864bc903000a8f8ba511ceaf8cbbf633d31da58d52dc0f50e8be67e1797.
+Reports eos_density_extension_restart_v1 and eos_density_restart_executable_control_v1.
+NO actualdensityextensionselected. No opacitydensityrestartfeatureadded.
+
+Atmosphere main34081ACTIVE23modelscomplete; depth59052ACTIVE2complete.
+Partial5200K table assembled /tmp/ember-nongrey-exhaustion-t5200-v1.dat,
+SHA995c15169f8276c83f7260b3b0ebff0746c13a32b4ee62c7e7cc32218b962720,
+204nodes300missing. All196oldnodes+272oldmasksexact. Interpolation/sourceEOS
+session56856complete204/204supported; inspect5100Kheldoutvalues beforeacceptance.
+Condensation session32027complete8profiles,no condensates. Four5200Kdepth
+comparisonsstillneedallsourcecontrols and actualaudit. TableNOTaccepted yet.
+Assemblyspec and newreports under data/atmosphere/sources and docs/results.
+
+Paper remainsSept11v4 throughchecked3.848T. Do not replacecurveswithunchecked
+livehistory. Allactivejobs independent; inspectprocessesbeforelaunches.
+
+---
+
 # Publication preparation — 2026-09-11 09:14 UTC
 
 Fresh star now near3.533T; inspect current log for newer state. SourceEOSbase

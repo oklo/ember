@@ -14,12 +14,12 @@
 
 The paper compares the 0.1-solar-mass Ember calculation with Laughlin,
 Bodenheimer and Adams (1997), abbreviated LBA97. All Ember curves in the main
-paper use one 512-point track through **3.848 trillion years**. The sequence
-contains the initial stellar structure and 7695 accepted time steps, each
+paper use one 512-point track through **3.875 trillion years**. The sequence
+contains the initial stellar structure and 8455 accepted time steps, each
 updating both composition and structure. Central hydrogen reaches
-**X = 0.002467** and surface hydrogen **X = 0.1730** at the atmosphere table's
-**4400 K** limit. The core carries heat by radiation and conduction; conduction
-supplies **69.82% of the local central flux**. The paper also compares the
+**X = 0.001294** and surface hydrogen **X = 0.1730** at the atmosphere table's
+**5000 K** limit. The core carries heat by radiation and conduction; conduction
+supplies **84.71% of the local central flux**. The paper also compares the
 initial model with observed stars near 0.1 solar masses.
 
 LBA97 is represented by 42 selected HR positions, 20 hydrogen positions and
@@ -63,7 +63,7 @@ Both panels show the two tracks, with circle diameters proportional to radius.
 LBA97 radii are normalized using its stated main-sequence luminosity and
 temperature. **Grains and scattering are absent from the Ember background.**
 Hatching marks conditions outside its wavelength table.
-The photosphere is extracted at Rosseland optical depth 2/3 from all 172
+The photosphere is extracted at Rosseland optical depth 2/3 from all 196
 accepted atmosphere structures, using their molecular equation of state.
 This is distinct from the interior's matching boundary at optical depth 100.
 The exporter verifies original source hashes, all matching states and 65
@@ -73,7 +73,7 @@ an independent photospheric interpolation error bound.
 With local source files restored, regenerate those data from the repository root:
 
 ```sh
-python3 scripts/export_photospheric_evolution.py docs/reports/2026-09-11 /tmp/ember-nongrey-exhaustion-t4400-v1.manifest.json /tmp/ember-nongrey-extended-v2/plane-004/opacity/fort.63 --probe /tmp/ember-nongrey-grid-domain-probe-v2
+python3 scripts/export_photospheric_evolution.py docs/reports/2026-09-11 /tmp/ember-nongrey-exhaustion-t5000-v1.manifest.json /tmp/ember-nongrey-extended-v2/plane-004/opacity/fort.63 --probe /tmp/ember-nongrey-grid-domain-probe-v2
 ```
 
 The independent figure extraction uses NumPy, SciPy and PyMuPDF:
@@ -86,13 +86,6 @@ With local recovery files present, `python3 build_figures.py --from-archives`
 verifies the plotted CSV against the exact archived raw history. The source
 result's `converged: false`, source-domain errors and temperature ceiling are
 retained in the validation record.
-
-To archive this checked continuation, use
-`scripts/archive_paper_continuation.py JOINED_HISTORY CHECK PAPER_DIRECTORY`.
-The joined history contains the original accepted states and one actual
-checkpoint continuation. Physical values at the join match exactly; one
-duplicate state is removed. Each segment retains its own receipt. The joined
-JSON is explicitly derived data and is not assigned a run receipt.
 
 To archive and check a fresh 512-point run, use
 `scripts/archive_paper_evolution.py TRACK PAPER_DIRECTORY --mixing-probe PROBE`
@@ -132,7 +125,7 @@ Separate resolution-control data through 3.560 trillion years are retained in
 `evolution_history.csv`, `evolution_1024_continuation.csv` and the corresponding
 profile CSVs. `build_transition_figures.py` rebuilds their comparison. These
 controls are not curves in the current paper and do not test resolution at its
-3.848-trillion-year endpoint.
+3.875-trillion-year endpoint.
 
 Recover into a fresh scratch directory and verify all hashes.
 [Native restart](../../RESTART.md) requires identical executable bytes, tables,

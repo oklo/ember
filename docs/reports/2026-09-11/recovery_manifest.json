@@ -1,5 +1,5 @@
 {
-  "scope": "Local recovery of the plotted accepted history, its original run segments, their receipts and checkpoints, the explicit assembly checks, and separate controls. The joined JSON is derived data; physical tables require separate restoration.",
+  "scope": "Local recovery files for the plotted fresh trajectory and earlier matched-mesh comparisons. Raw files remain local; physical tables require separate restoration with their recorded hashes.",
   "entries": [
     {
       "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-forward-512-3300gyr-v1.json",
@@ -287,6 +287,41 @@
       "sha256": "b93eb700abe0a06fff3f8d60570abe14186b6dba45bdf0c969dc0396652479fa",
       "gzip_sha256": "09121eca726bc2ea78c07f06083ec2880c6aaa3b67014a50447ae4de725e1066",
       "bytes": 100825
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.json",
+      "archive": "artifacts/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.json.gz",
+      "sha256": "7d7d0014eca968857284abdc31267451bc8c748799bffb8a00adcde6e2ec89f6",
+      "gzip_sha256": "1d0af0e7446b0cc000ac16f0de80ccf0487f6bba784fa7fdfd5ce62b1f2f75a4",
+      "bytes": 3668804
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.receipt.json.gz",
+      "sha256": "540394a9bede99334aeb48dd51400550af36847398cefaa0a4bb156184749292",
+      "gzip_sha256": "266a804a4c357def7029a0e2eec1673af89d2894a261329ea4c407592a0ca251",
+      "bytes": 30095
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.log",
+      "archive": "artifacts/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.log.gz",
+      "sha256": "984a08cef3aa0a24cf4fed21b22bfb9a578a2ec25d1edfb62fdf66ae882990a1",
+      "gzip_sha256": "9eeb71bec258113e9256e177810b2a0516d485797de24ab918326bd038d94f41",
+      "bytes": 1057440
+    },
+    {
+      "source": "/private/tmp/ember-numerical-eos-t5000-512-4000gyr-v1/ember-evolve",
+      "archive": "artifacts/ember-evolve-a4e48b67505f.gz",
+      "sha256": "a4e48b67505fa26ebf443108df5cfd27348f1a89cf79d7bc56f1f52dcfa19f1c",
+      "gzip_sha256": "3ddef289ad46a6c867190b12bed94615ab01e51132819f359e3c705b350f542e",
+      "bytes": 489216
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.restart",
+      "archive": "artifacts/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.restart.gz",
+      "sha256": "5ca6ac78965ed2f8b9977c4c2bfbb3347cbbec088444f564ca716fe6e8167361",
+      "gzip_sha256": "a6c3cafbb29dea1167d8d61be715eb1f2fe979f3cc7b8e10b2f4f6660ccdcc3a",
+      "bytes": 161987
     }
   ],
   "older_recovery": "September 9 local artifacts remain intact in docs/reports/2026-09-09/artifacts; the earlier paper remains in Git history."

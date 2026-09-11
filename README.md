@@ -12,25 +12,25 @@ reported alongside each result.
 
 ## Status — September 11, 2026
 
-The **0.1 solar-mass model has reached 3.848 trillion years**. Its core
-transports heat without convection and is surrounded by a convective envelope.
-Hydrogen burning continues. The calculation stops at its atmosphere table's
-**4400 K** limit. Its complete history, final structure, input receipts and
-transport classification pass the recorded checks.
+The **0.1 solar-mass model has reached 3.875 trillion years**, with central
+hydrogen **X = 0.001294**. Its core transports heat by radiation and conduction,
+surrounded by a convective envelope. The calculation reaches its accepted
+atmosphere table's **5000 K** limit after 8455 accepted time steps.
 
 | Latest accepted state | Value |
 |---|---:|
 | Initial composition | XH = 0.7, He3 = 0, Z = 0.02; GS98 metals |
 | Mass mesh | 512 points; fixed baryonic mass of 0.1 Msun |
-| Central hydrogen mass fraction | X = 0.002467 |
+| Central hydrogen mass fraction | X = 0.001294 |
 | Surface hydrogen mass fraction | X = 0.1730 |
-| Radius | 0.1334 Rsun |
-| Luminosity | 0.006005 Lsun |
-| Effective temperature | 4400 K |
-| Central temperature | 11.75 million K |
-| Convective mass fraction | 0.07899 |
+| Radius | 0.1241 Rsun |
+| Luminosity | 0.008674 Lsun |
+| Effective temperature | 5000 K |
+| Central temperature | 12.61 million K |
+| Central density | 6757 g/cm³ |
+| Convective mass fraction | 0.04563 |
 
-[History, checkpoint join and endpoint checks](docs/results/evolution_atmosphere_limit_3848gyr_v1.json).
+[History, endpoint and transport checks](docs/results/evolution_atmosphere_limit_3875gyr_v1.json).
 
 The goal remains an evolved helium remnant at **100 K effective temperature**,
 using material properties, heat transport and atmospheres valid along its
@@ -39,7 +39,7 @@ remaining physics; the [handoff](HANDOFF.md) records calculations and inputs.
 
 The [September 11 working paper](docs/reports/2026-09-11/ember_status_and_future.pdf)
 ([source and figures](docs/reports/2026-09-11/README.md)) now presents the
-track through **3.848 trillion years**. All its Ember curves refer to that
+track through **3.875 trillion years**. All its Ember curves refer to that
 calculation. It compares Ember
 primarily with Laughlin, Bodenheimer and Adams (1997), using stated values and
 approximate curves read from their figures. The reconstructed F77 results are
@@ -52,24 +52,11 @@ The ATOMIC opacity family for the hot interior extends to **zero hydrogen**. Twe
 composition checks differ by at most **0.05257%** on tested hot-profile states;
 this is an opacity interpolation check, not a stellar lifetime error bound.
 All previous hot data and the cool opacity inputs remain unchanged. The plotted
-calculation uses a separately checked **72-table EOS** and gas atmospheres
-through **4400 K**. Conduction supplies **69.82% of the local central heat
-flux** in its final model. See the
-[transport calculation](docs/results/current_core_transport_3848gyr_v1.json)
+calculation uses a **72-table numerical-electron EOS** and gas atmospheres
+through **5000 K**. Conduction supplies **84.71% of the local central heat
+flux** in the final model. See the
+[endpoint and transport calculation](docs/results/evolution_atmosphere_limit_3875gyr_v1.json)
 and [EOS data notes](data/eos/README.md).
-
-The **156-model extension through 4000 K** also passes its runtime/EOS,
-intermediate-temperature, depth and condensation checks and supplies the
-track through 3.818 trillion years. [Acceptance record](docs/results/nongrey_t4000_acceptance_v1.json).
-
-The **172-model extension through 4400 K** is now checked. Its independent
-matching-state differences are below **0.5987%**, eight depth comparisons pass,
-and no condensates occur in the sixteen new structures. All 156 existing states
-remain unchanged. The star continued from its saved state through 3.848 trillion
-years with this table. Its structure and composition are identical at the join;
-the assembled history contains the initial model and 7695 accepted time steps.
-[Atmosphere acceptance](docs/results/nongrey_t4400_acceptance_v1.json),
-[restart comparison](docs/results/atmosphere_extension_restart_v1.json).
 
 The **196-model gas-atmosphere table through 5000 K** passes its source,
 interpolation, depth, condensation and EOS/runtime checks. Its three independent
@@ -79,32 +66,29 @@ differences are below **0.5377%**. All twelve depth comparisons pass; the
 and their missing-state masks remain exact.
 [Acceptance record](docs/results/nongrey_t5000_acceptance_v1.json).
 
-Two atmosphere source pilots at 6000 K also pass their convergence and flux
-checks using the existing wavelength-opacity data. The missing grid models
-and independent intermediate states are being calculated; coverage through
-6000 K is not yet accepted for stellar evolution.
+Atmosphere models through 6000 K are being calculated with the existing
+wavelength-opacity data. Further temperature coverage requires independent
+interpolation, lower-boundary, condensation and EOS checks before use in evolution.
 
-The **numerical-electron EOS is now checked and selected for a fresh stellar
-calculation**, with the accepted atmosphere table through 5000 K. It uses
-numerical electron integrals in place of the source's fitted approximation.
-All 4736 independent source comparisons, 512 zones of the saved star and 227
-atmosphere queries pass. The maximum heat-capacity difference is **0.2952%**.
-One inconsistent source state and every interpolation stencil touching it are
-explicitly excluded. The new stellar calculation is running; the table and
-figures above continue to report the completed, checked trajectory.
+The **numerical-electron EOS** evaluates electron integrals directly.
+All 4736 independent source comparisons, 2240 thermodynamic identities and
+227 atmosphere queries pass. The largest heat-capacity difference in the
+general comparison is **0.2952%**; all 512 zones of the final star pass, with
+a maximum heat-capacity difference of **0.06584%**. One inconsistent source
+state and every interpolation stencil touching it are explicitly excluded.
 [EOS acceptance](docs/results/numerical_electron_base_acceptance_v1.json),
-[source comparisons](docs/results/numerical_electron_base_general_v4.json),
+[final profile comparison](docs/results/numerical_electron_profile_3875gyr_v1.json),
 [EOS data notes](data/eos/README.md#numerical-electron-integration).
 
-A separate hot dense EOS addition remains under source-precision checks.
-Tighter electron integration resolves source iteration and thermodynamic
-consistency failures, but some dense heat-capacity responses require a further
-accuracy comparison. It has not been selected for stellar evolution.
+A separate hot dense EOS source calculation passes checks on 949.6 thousand states.
+Its hydrogen-poor addition is undergoing interpolation and runtime validation;
+it has not been selected for stellar evolution.
+[Source validation](docs/results/numerical_electron_hot_dense_source_validation_v4.json).
 
 Independent spectral integration identifies a normalization issue in the TOPS
 plasma-cutoff means that requires attention before using the dense opacity
 extension. A correction to this normalization alone changes the combined
-radiative and conductive opacity of the saved stellar profile by at most
+radiative and conductive opacity of the model at 3.848 trillion years by at most
 0.7555% in a fixed-structure estimate. This is not a stellar-lifetime error
 estimate. No trial opacity correction is selected.
 [Calculation and limitations](docs/PLASMA_OPACITY.md).
@@ -114,18 +98,18 @@ of 0.1849% with a fourfold tighter time control and 1.683% with twice as many
 mass points. These measurements apply to that age and those fixed inputs.
 [Accuracy comparison](docs/results/evolution_accuracy_3600gyr_v1.json).
 
-**Production timing:** the partial trajectory through 3.818 trillion years
-used **41.19 CPU minutes** and **25.09 awake elapsed minutes**, with 7147 accepted
-steps and 269 rejected attempts. The continuation to 3.848 trillion years adds
-**4.990 CPU minutes** and **3.111 awake elapsed minutes**, for 548 accepted
-steps and 36 rejected attempts. Atmosphere generation is separate, reusable
-work. The complete cooling-track cost remains unmeasured. Reuse of complete nuclear calculations reduced CPU time
+**Production timing:** the plotted trajectory through 3.875 trillion years
+used **120.7 CPU minutes** and **99.27 elapsed minutes**, with 8455 accepted
+steps and 319 rejected attempts, including those at the atmosphere limit.
+Other source calculations ran concurrently. Atmosphere generation is separate,
+reusable work. The complete cooling-track cost remains unmeasured.
+Reuse of complete nuclear calculations reduced CPU time
 by **42.21% in a short benchmark**. The completed longer comparison through
 3.757 trillion years used **37.31% less CPU time**, with identical entire output
 files: **162.4 versus 101.8 CPU minutes**. Background load varied; this is one
 long pair, not a timing guarantee. Sharing the electron calculation within each nuclear response
 saves a further **14.97%** in a short comparison. Both changes are installed;
-both reported stellar calculations include them. See
+the plotted stellar calculation includes them. See
 [the timing notes](docs/COMPUTATIONAL_COST.md) and
 [the latest history and checks](docs/reports/2026-09-11/evolution_latest_provenance.json).
 
@@ -141,7 +125,7 @@ published model from the current F77 reconstruction. The latter reaches its
 central transition at a substantially different hydrogen abundance. The
 [timing notes](docs/COMPUTATIONAL_COST.md) explain the computational costs.
 
-**Verification:** 32 CTest suites pass with installed local inputs. Earlier
+**Verification:** 34 CTest suites pass with installed local inputs. Earlier
 same-physics convergence checks at two trillion years found luminosity changes
 of +0.06163% when doubling the mesh and −0.00361% with fourfold tighter time
 tolerances. Those checks do not establish convergence at the later structural

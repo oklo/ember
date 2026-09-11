@@ -75,8 +75,9 @@ def main():
                      (star['Teff_K'][-1], np.log10(star['L_Lsun'][-1])),
                      xytext=(12, -22), textcoords='offset points', fontsize=8,
                      arrowprops={'arrowstyle': '-', 'color': EMBER, 'lw': .7})
-    axes[1].annotate('LBA97: central radiative core', (3450, -2.54),
-                     xytext=(18, 12), textcoords='offset points', fontsize=7.5)
+    axes[1].annotate('LBA97: central\nradiative core', (3450, -2.54),
+                     xytext=(.60, .97), textcoords='axes fraction', fontsize=7.5,
+                     ha='left', va='top')
     for ax in axes:
         ax.grid(alpha=.15)
         for axis in [ax.xaxis, ax.yaxis]:
