@@ -11,16 +11,25 @@
 - [Digitized HR curve](lba97_digitized_hr.csv) and [composition curves](lba97_digitized_composition.csv)
 - [Supplementary F77 comparison](f77_matched_hydrogen.pdf), [data](f77_history.csv), and [extraction checks](f77_history_provenance.json)
 - [Validation receipt](validation.json) and [local recovery manifest](recovery_manifest.json)
+- [Lifetime timeline source](lifetime_timeline.tex), [derived milestones and decay benchmark](lifetime_benchmarks.json), and [conditional decay figure](lifetime_decay_reference.pdf)
 
 The paper compares the 0.1-solar-mass Ember calculation with Laughlin,
 Bodenheimer and Adams (1997), abbreviated LBA97. All Ember curves in the main
-paper use one 512-point track through **3.848 trillion years**. The sequence
-contains the initial stellar structure and 7695 accepted time steps, each
+paper use one 512-point track through **3.890 trillion years**. The sequence
+contains the initial stellar structure and 9168 accepted time steps, each
 updating both composition and structure. Central hydrogen reaches
-**X = 0.002467** and surface hydrogen **X = 0.1730** at the atmosphere table's
-**4400 K** limit. The core carries heat by radiation and conduction; conduction
-supplies **69.82% of the local central flux**. The paper also compares the
+**X = 0.0008157** and surface hydrogen **X = 0.1730** at an effective temperature of **5546 K**. The interior opacity
+table's density limit near **10000 g/cm³** stops further evolution. The core carries heat by radiation and conduction; conduction
+supplies **91.29% of the local central flux**. The paper also compares the
 initial model with observed stars near 0.1 solar masses.
+
+The final four pages give the lifetime timeline: formation, hydrogen burning,
+helium-remnant cooling, diffusion and crystallization, environmental and nuclear
+heating, and conditional nucleon decay through disappearance. Computed ages,
+literature comparisons and future conditions are identified separately. The
+decay example assumes independent equal lifetimes for all baryons; its final
+particle distribution is not a computed Ember cooling trajectory. The text
+describes how physical detail is matched to the uncertainty and the question.
 
 LBA97 is represented by 42 selected HR positions, 20 hydrogen positions and
 15 helium-3 positions read from Figure 1, together with stated values.
@@ -39,6 +48,7 @@ python3 build_lba97_figures.py
 python3 build_figures.py
 python3 build_current_convection.py
 python3 build_photospheric_figure.py
+python3 build_lifetime_timeline.py
 tectonic ember_status_and_future.tex
 ```
 
@@ -47,6 +57,12 @@ paper image nor the raw stellar archives. Diamonds distinguish values stated
 by LBA97 from points read from its figure. Ages and physical quantities have
 not been adjusted to improve agreement. Figure descriptions are in captions;
 the plots have no titles.
+
+`build_lifetime_timeline.py` reads the plotted track, derives the helium-3 peak,
+first departure from full convection and endpoint, and checks the analytic
+decay identities. It writes the timeline values, benchmark record and figure.
+Raw data retain precision; generated manuscript values use at most four
+significant figures. No new stellar integration is performed by this script.
 
 Thin F77 lines have opacity 0.30; individual segments changing a surface
 quantity by more than 5%, or an abundance by more than 0.01, have opacity 0.08.
@@ -63,7 +79,7 @@ Both panels show the two tracks, with circle diameters proportional to radius.
 LBA97 radii are normalized using its stated main-sequence luminosity and
 temperature. **Grains and scattering are absent from the Ember background.**
 Hatching marks conditions outside its wavelength table.
-The photosphere is extracted at Rosseland optical depth 2/3 from all 172
+The photosphere is extracted at Rosseland optical depth 2/3 from all 220
 accepted atmosphere structures, using their molecular equation of state.
 This is distinct from the interior's matching boundary at optical depth 100.
 The exporter verifies original source hashes, all matching states and 65
@@ -73,7 +89,7 @@ an independent photospheric interpolation error bound.
 With local source files restored, regenerate those data from the repository root:
 
 ```sh
-python3 scripts/export_photospheric_evolution.py docs/reports/2026-09-11 /tmp/ember-nongrey-exhaustion-t4400-v1.manifest.json /tmp/ember-nongrey-extended-v2/plane-004/opacity/fort.63 --probe /tmp/ember-nongrey-grid-domain-probe-v2
+python3 scripts/export_photospheric_evolution.py docs/reports/2026-09-11 /tmp/ember-nongrey-exhaustion-t5600-v1.manifest.json /tmp/ember-nongrey-extended-v2/plane-004/opacity/fort.63 --probe /tmp/ember-nongrey-grid-domain-probe-v2
 ```
 
 The independent figure extraction uses NumPy, SciPy and PyMuPDF:
@@ -84,22 +100,19 @@ python3 scripts/extract_lba97_photospheric_figure.py /path/to/lba97.pdf /path/to
 
 With local recovery files present, `python3 build_figures.py --from-archives`
 verifies the plotted CSV against the exact archived raw history. The source
-result's `converged: false`, source-domain errors and temperature ceiling are
+result's `converged: false` and interior opacity density-domain errors are
 retained in the validation record.
 
-To archive this checked continuation, use
-`scripts/archive_paper_continuation.py JOINED_HISTORY CHECK PAPER_DIRECTORY`.
-The joined history contains the original accepted states and one actual
-checkpoint continuation. Physical values at the join match exactly; one
-duplicate state is removed. Each segment retains its own receipt. The joined
-JSON is explicitly derived data and is not assigned a run receipt.
+The current data combine three actual run segments, with their exact checkpoint
+joins checked by `scripts/check_evolution_chain.py`. Original receipts remain
+attached to their individual segments. The independent endpoint check verifies
+all 512 EOS queries, Ledoux mixing, and the native opacity density rejection.
+Central hydrogen first crosses X = 0.001 near 3.884 trillion years, bracketed
+by accepted models separated by 22.72 million years.
 
-To archive and check a fresh 512-point run, use
-`scripts/archive_paper_evolution.py TRACK PAPER_DIRECTORY --mixing-probe PROBE`
-from the repository root. It checks the receipt and executable, finite and
-normalized profiles, profile/history equality, actual Ledoux mixing regions,
-and exhaustion/cooling milestones. An atmosphere-limited result additionally
-requires logged domain errors and an endpoint at the recorded temperature limit.
+`scripts/archive_paper_continuation.py` exports this checked chain and preserves
+its original raw segments, receipts, checkpoint files and checks locally. No
+run receipt is invented for the derived joined history.
 
 With the recorded F77 outputs present, re-extract their accepted models with:
 
@@ -132,7 +145,7 @@ Separate resolution-control data through 3.560 trillion years are retained in
 `evolution_history.csv`, `evolution_1024_continuation.csv` and the corresponding
 profile CSVs. `build_transition_figures.py` rebuilds their comparison. These
 controls are not curves in the current paper and do not test resolution at its
-3.848-trillion-year endpoint.
+3.890-trillion-year endpoint.
 
 Recover into a fresh scratch directory and verify all hashes.
 [Native restart](../../RESTART.md) requires identical executable bytes, tables,

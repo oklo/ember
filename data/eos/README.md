@@ -9,9 +9,8 @@ development machine unless explicitly stated otherwise.
 
 ## GS98 baryonic H/He3 family
 
-The current stellar controls select the 64-plane family in
-`exhaustion_refined_v2/`. A separate 72-plane family is now installed in
-`low_density_refined_v2/` for a subsequent fresh calculation. It extends the
+The checked stellar trajectory through 3.848 trillion years selects the
+72-plane family in `low_density_refined_v2/`. It extends the
 low-density range and adds four hydrogen fractions at both helium-3 fractions.
 All 5.937 million old source states were reused; 2.220 million additional
 low-density states and eight new composition planes were calculated.
@@ -38,6 +37,61 @@ python3 scripts/assemble_metal_eos_family.py \
 
 The source specifications and installation record are in that same `sources/`
 directory. The older EOS inputs and all running calculations remain intact.
+
+### Numerical electron integration
+
+The accepted 72-mixture family in `numerical_electron_base_v1/` uses direct
+numerical electron integrals (FreeEOS options `3 223 -2`). The material source
+omits radiation; Ember adds it once. Its source temperature range extends
+through 22.39 MK before trimming derivative stencils. All 4736 independent
+source comparisons, 2240 thermodynamic identities, 512 stellar-profile zones
+and 227 atmosphere queries pass. Maximum heat-capacity differences are
+0.2952% across the general tests and 0.09778% on the saved stellar profile.
+A fresh stellar calculation selects this EOS with the checked 5000 K atmosphere.
+[Acceptance](../../docs/results/numerical_electron_base_acceptance_v1.json),
+[general comparisons](../../docs/results/numerical_electron_base_general_v4.json),
+[profile comparisons](../../docs/results/numerical_electron_base_profile_v4.json).
+
+The nominal source contains 66 states failing thermodynamic identities and one
+failing its density-coordinate criterion. Recomputing their complete isotherms
+with tighter electron quadrature retains 9.782 million unaffected states
+exactly. One state remains inconsistent; its actual source values are retained
+and every potential derivative stencil touching it is excluded. The runtime
+rejects queries requiring an unsupported stencil. No acceptance criterion is
+relaxed. All preserved source and runtime files match the independently checked
+family byte for byte.
+[Source repair](../../docs/results/numerical_electron_source_repair_v4.json),
+[installation](numerical_electron_base_v1/sources/installation_specification.json).
+
+A separate hot density addition reuses the completed source isotherms. One
+exchange iteration fails at the nominal electron quadrature accuracy. Tightening
+the relative integration target from 1e-9 to 1e-11 resolves that failure with
+unchanged physical formulas and Newton tolerance. The 100 converged controls
+agree within 6.382e-10 in scaled physical response; a 605-state pilot also
+passes. The generator records the actual executable and input hashes for
+every isotherm requiring this fallback. No unsuccessful source values are
+filled or extrapolated.
+[Precision specification](sources/numerical_electron_precision_fallback_v1_specification.json),
+[controls](../../docs/results/numerical_electron_precision_controls_v1.json),
+[pilot](../../docs/results/numerical_electron_precision_fallback_pilot_v1.json).
+
+At five dense isotherms, independent quadrature targets of 1e-11 and 1e-13
+agree within 2.446e-10 across 605 states. A fresh build reproduces all 605
+reference responses exactly. The dense family is therefore being recalculated
+at 1e-11, retaining any source isotherm already calculated at that accuracy.
+Changes larger than 1e-5 require an independent 1e-13 calculation of the entire
+isotherm, agreeing within 1e-8; thermodynamic and coordinate criteria remain
+unchanged. This source calculation is not yet an accepted dense EOS.
+[Convergence comparison](../../docs/results/numerical_electron_dense_quadrature_convergence_v1.json),
+[build reproduction](../../docs/results/numerical_electron_quadrature13_builder_v1.json).
+
+The offline builder requires a fresh working directory and accepts
+`--electron-quadrature-error 1e-9`, `1e-11` or `1e-13`.
+
+The density merger preserves the original source rows and the numerical
+precision record for each added interval. Unrequested cold dense states are
+explicitly absent, and every derivative stencil touching them is masked.
+The added domain still requires complete source and interpolation checks.
 
 The following paragraphs describe the original smaller families.
 

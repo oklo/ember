@@ -1,0 +1,14 @@
+{
+  "scope": "Scheduling change only: resume the same EOS source coordinates/options with eight workers as atmosphere jobs finish. Completed sources are preserved and revalidated by the generator. In-flight requests may need to be repeated.",
+  "utc": "2026-09-11T06:10:19.549093+00:00",
+  "previous_controller_pid": 27539,
+  "previous_launcher_pid": 27537,
+  "source_isotherms_before": 7353,
+  "source_specification_sha256": "ba212308f5c3eb99cb7e506a7612670a1469c9cfbd97d0db03513829fbec42e9",
+  "probe_sha256": "f83fff2498551e7ef02724ede8ea2d594c2487340a6d70c59d456681cdf76114",
+  "checked_completed_source_isotherms": 7368,
+  "all_completed_fingerprints_valid": true,
+  "finished_cache_check_utc": "2026-09-11T06:11:11.207969+00:00",
+  "resumed_plan": "data/eos/sources/numerical_electron_eos72_resume_v1_specification.json",
+  "worker_count": 8
+}

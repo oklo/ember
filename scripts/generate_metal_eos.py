@@ -26,6 +26,8 @@ def main():
                    help='numerical uses FreeEOS option 223: integrated electrons, with radiation added by Ember')
     p.add_argument('--grid-from',type=Path,
                    help='reuse exact temperature/density coordinates from a source specification or manifest')
+    p.add_argument('--precision-fallback',type=Path,
+                   help='pinned tighter-quadrature probe, used only if the nominal source process fails')
     a=p.parse_args()
     if not 1<=a.jobs<=8 or not .005<=a.step<=.05:raise ValueError('invalid jobs or material step')
     if any(sorted(set(axis))!=axis for axis in [a.hydrogen,a.helium3]):raise ValueError('axes must increase')
@@ -52,6 +54,22 @@ def main():
     if options!=[3,1,-2]:
         spec['source_options']=options
         spec['source_radiation_included']=False
+    fallback=None
+    if a.precision_fallback:
+        fallback=json.loads(a.precision_fallback.read_text())
+        if (options!=[3,223,-2] or fallback['nominal_probe_sha256']!=source_sha
+                or fallback['source_archive_sha256']!=spec['source_archive_sha256']
+                or fallback['nominal_relative_integral_error']!=1e-9
+                or fallback['fallback_relative_integral_error']!=1e-11
+                or fallback['changed_Fortran_files']!=['src/fermi_dirac_direct.f90']
+                or sha(Path(fallback['probe']).read_bytes())!=fallback['probe_sha256']
+                or sha(Path(fallback['library']).read_bytes())!=fallback['library_sha256']
+                or sha(Path(fallback['source_control_report']).read_bytes())!=fallback['source_control_sha256']):
+            raise ValueError('unverified source precision fallback')
+        control=json.loads(Path(fallback['source_control_report']).read_text())
+        if control['queries']<100 or control['maximum_scaled_physical_difference']>=1e-8:
+            raise ValueError('precision fallback lacks matching source controls')
+        spec['precision_fallback']={**fallback,'receipt_sha256':sha(a.precision_fallback.read_bytes())}
     manifest=a.work/'specification.json'
     if manifest.exists() and json.loads(manifest.read_text())!=spec:raise ValueError('changed source/settings require a new work directory')
     manifest.write_text(json.dumps(spec,indent=2)+'\n')
@@ -69,10 +87,27 @@ def main():
         if path.exists():
             saved=json.loads(gzip.decompress(path.read_bytes()))
             if saved['input_sha256']!=fingerprint:raise ValueError('cached source input mismatch')
+            if saved.get('precision_fallback') and saved['precision_fallback']!=spec.get('precision_fallback'):
+                raise ValueError('cached source precision differs')
+            if len(saved['data'])!=len(qs) or any(len(r)!=22 or not all(math.isfinite(v) for v in r) for r in saved['data']):
+                raise ValueError('invalid cached source responses')
             return
         result=subprocess.run([str(a.probe.resolve())],input=request,text=True,capture_output=True,timeout=600)
-        rows=[list(map(float,line.split())) for line in result.stdout.splitlines()]
-        if result.returncode or len(rows)!=len(qs) or any(len(r)!=22 or not all(math.isfinite(v) for v in r) for r in rows):
+        def responses(result):
+            try:rows=[list(map(float,line.split())) for line in result.stdout.splitlines()]
+            except ValueError:return None
+            if result.returncode or len(rows)!=len(qs) or any(len(r)!=22 or not all(math.isfinite(v) for v in r) for r in rows):return None
+            return rows
+        rows=responses(result);override={}
+        if rows is None and fallback:
+            nominal=d/f'temperature-{it:03d}.nominal-failure.log'
+            nominal.write_text(result.stdout+'\n'+result.stderr)
+            result=subprocess.run([fallback['probe']],input=request,text=True,capture_output=True,timeout=600)
+            rows=responses(result)
+            override={'precision_fallback':spec['precision_fallback'],
+                      'actual_probe_input_sha256':sha((fallback['probe_sha256']+request).encode()),
+                      'nominal_failure_sha256':sha(nominal.read_bytes())}
+        if rows is None:
             (d/f'temperature-{it:03d}.failure.log').write_text(result.stdout+'\n'+result.stderr)
             raise ValueError(f'{d.name} logT={t}: failed source state')
         # Nonconverged states remain explicitly flagged in the raw source.
@@ -84,19 +119,30 @@ def main():
         for r in rows:
             r[2]/=scale
             for k in [5,6,9,10,11,12,13,16,17]:r[k]*=scale
-        record={'input_sha256':fingerprint,'input':request,'stderr':result.stderr,'data':rows}
+        record={'input_sha256':fingerprint,'input':request,'stderr':result.stderr,'data':rows,**override}
         path.write_bytes(gzip.compress((json.dumps(record,separators=(',',':'),allow_nan=False)+'\n').encode(),mtime=0))
         print(f"XH={m['hydrogen']:g} X3={m['helium3']:g} logT={t:g} complete; {failed} source failures retained for masking",flush=True)
 
     jobs=[(d,m,it,t) for it,t in enumerate(ts) for d,m in planes]
     with ThreadPoolExecutor(a.jobs) as pool:list(pool.map(run,jobs))
     for d,m in planes:
-        data=[]
-        for it in range(len(ts)):data.extend(json.loads(gzip.decompress((d/f'temperature-{it:03d}.json.gz').read_bytes()))['data'])
+        data=[];overrides=[]
+        for it in range(len(ts)):
+            cache=json.loads(gzip.decompress((d/f'temperature-{it:03d}.json.gz').read_bytes()))
+            data.extend(cache['data'])
+            if cache.get('precision_fallback'):
+                overrides.append({'temperature_index':it,'logT':ts[it],
+                                  **{key:cache[key] for key in ['actual_probe_input_sha256','nominal_failure_sha256']}})
         raw={**m,'version':'FreeEOS 3.0.0','options':options,'logT':ts,'logQ':qs,
              'source_archive_sha256':spec['source_archive_sha256'],'probe_sha256':source_sha,'data':data}
+        if fallback:
+            raw['precision_fallback']=spec['precision_fallback']
+            raw['precision_fallback_isotherms']=overrides
         (d/'source.json.gz').write_bytes(gzip.compress((json.dumps(raw,separators=(',',':'),allow_nan=False)+'\n').encode(),mtime=0))
         print('assembled',d,flush=True)
+    if fallback and (sha(Path(fallback['probe']).read_bytes())!=fallback['probe_sha256']
+                     or sha(Path(fallback['library']).read_bytes())!=fallback['library_sha256']):
+        raise ValueError('precision fallback source changed during calculation')
 
 
 if __name__=='__main__':main()

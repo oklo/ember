@@ -1,0 +1,115 @@
+{
+  "scope": "Compare TOPS grey means with direct integration of the returned spectra.\n\nThis is an averaging diagnostic, not a replacement opacity table. The cutoff\nis inferred from the reported Rosseland mean; the Planck mean is then an\nindependent check of that inference. Rosseland integrals use total opacity;\nPlanck integrals use absorption. Both use log-linear interpolation between\npositive spectral samples.\n",
+  "input_sha256": {
+    "/private/tmp/ember-tops-core-spectrum-v1/cutoff-on/receipt.json": "cfd9d622973c2de39d69b28f0aace6304df92e0537146ca54aa00c2c700d0fcc",
+    "/private/tmp/ember-tops-core-spectrum-v1/cutoff-on/request.json": "aba04c138af5cc9a61230131ece7d3dccd99dc4494af785b357f2d299ac70770",
+    "/private/tmp/ember-tops-core-spectrum-v1/cutoff-on/source.txt": "4386fa47fb46256bf16089debb9d31910484ca8ed28def68e0b3e1246a96dd2b",
+    "/private/tmp/ember-tops-core-spectrum-v1/cutoff-off/receipt.json": "3998d10e439a1e351f15474499065e18f39e9a95a29967ada77f3994ae84c096",
+    "/private/tmp/ember-tops-core-spectrum-v1/cutoff-off/request.json": "72e59caf9cb4dddb3565e3f132a9dda96ace65479713980b12629f62232c0360",
+    "/private/tmp/ember-tops-core-spectrum-v1/cutoff-off/source.txt": "4bbf4dd2fcc1af0fd1e9668e71ccf499207696b149d29a5fc3087513e0d75d8b",
+    "/Users/greglaughlin/Projects/ember/scripts/audit_tops_spectral_means.py": "72fe12c1aca5f76ffdf97ab8968dad3c4b93d7d6bdbef27f8d2a146c68e05860"
+  },
+  "states": [
+    {
+      "temperature_keV": 1.0,
+      "density": 3981.1,
+      "spectral_points": 14900,
+      "spectra_identical": true,
+      "reported_on": {
+        "rosseland": 10.472,
+        "planck": 59.65,
+        "free_electrons_per_ion": 2.0278
+      },
+      "reported_off": {
+        "rosseland": 10.737,
+        "planck": 137.36,
+        "free_electrons_per_ion": 2.0278
+      },
+      "calculations": [
+        {
+          "quadrature_order": 8,
+          "inferred_cutoff_u": 1.2845832106715955,
+          "uncut_rosseland": 10.737123405004967,
+          "uncut_planck": 137.35601737996262,
+          "conditional_rosseland": 10.471999999999829,
+          "conditional_planck": 59.66710128425693,
+          "rosseland_weight_fraction_above_cutoff": 0.9749167437658344,
+          "planck_weight_fraction_above_cutoff": 0.9348010362540444,
+          "full_normalization_step_cutoff_rosseland": 10.741430042066344,
+          "diagnostic_collisionless_refractive_rosseland": 11.502172928200535
+        },
+        {
+          "quadrature_order": 16,
+          "inferred_cutoff_u": 1.2845832106715858,
+          "uncut_rosseland": 10.737123405004963,
+          "uncut_planck": 137.35601737996268,
+          "conditional_rosseland": 10.47199999999983,
+          "conditional_planck": 59.66710128425734,
+          "rosseland_weight_fraction_above_cutoff": 0.9749167437658349,
+          "planck_weight_fraction_above_cutoff": 0.9348010362540458,
+          "full_normalization_step_cutoff_rosseland": 10.741430042066341,
+          "diagnostic_collisionless_refractive_rosseland": 11.502172928200517
+        }
+      ],
+      "relative_differences": {
+        "uncut_rosseland": 1.1493434382447987e-05,
+        "uncut_planck": -2.8994030557227823e-05,
+        "independently_predicted_cutoff_planck": 0.00028669378469969864
+      },
+      "quadrature_relative_difference": 7.66053886991358e-15
+    },
+    {
+      "temperature_keV": 1.0,
+      "density": 4000.0,
+      "spectral_points": 14900,
+      "spectra_identical": true,
+      "reported_on": {
+        "rosseland": 10.497,
+        "planck": 59.64,
+        "free_electrons_per_ion": 2.0278
+      },
+      "reported_off": {
+        "rosseland": 10.765,
+        "planck": 137.55,
+        "free_electrons_per_ion": 2.0278
+      },
+      "calculations": [
+        {
+          "quadrature_order": 8,
+          "inferred_cutoff_u": 1.2877406077780178,
+          "uncut_rosseland": 10.764635572352379,
+          "uncut_planck": 137.54668337479683,
+          "conditional_rosseland": 10.496999999999842,
+          "conditional_planck": 59.62969514854921,
+          "rosseland_weight_fraction_above_cutoff": 0.9747412390975287,
+          "planck_weight_fraction_above_cutoff": 0.9344060392119229,
+          "full_normalization_step_cutoff_rosseland": 10.769011896653275,
+          "diagnostic_collisionless_refractive_rosseland": 11.535913338801286
+        },
+        {
+          "quadrature_order": 16,
+          "inferred_cutoff_u": 1.2877406077780125,
+          "uncut_rosseland": 10.764635572352375,
+          "uncut_planck": 137.54668337479688,
+          "conditional_rosseland": 10.496999999999844,
+          "conditional_planck": 59.62969514854942,
+          "rosseland_weight_fraction_above_cutoff": 0.9747412390975292,
+          "planck_weight_fraction_above_cutoff": 0.9344060392119237,
+          "full_normalization_step_cutoff_rosseland": 10.769011896653272,
+          "diagnostic_collisionless_refractive_rosseland": 11.535913338801274
+        }
+      ],
+      "relative_differences": {
+        "uncut_rosseland": -3.3853009533180156e-05,
+        "uncut_planck": -2.411214251640814e-05,
+        "independently_predicted_cutoff_planck": -0.00017278422955357975
+      },
+      "quadrature_relative_difference": 4.107825191113079e-15
+    }
+  ],
+  "accepted_for_stellar_opacity": false,
+  "interpretation": "A full-normalization step cutoff is a diagnostic of the averaging convention, not a complete refractive-index transport prescription.",
+  "refractive_diagnostic": "Also integrates n(u)^3=[1-(u_cut/u)^2]^(3/2) above the inferred cutoff. This collisionless free-electron expression is a separate sensitivity diagnostic, not a selected dielectric model.",
+  "frequency_limits": "Integrals use the provided spectrum from its first frequency through the first node above u=700. No missing spectral opacity is invented.",
+  "reference": "Colgan et al. 2016, equation 1 and section 2.8; https://www.osti.gov/servlets/purl/1335616"
+}

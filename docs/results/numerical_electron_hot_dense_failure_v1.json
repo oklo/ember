@@ -1,0 +1,25 @@
+{
+  "scope": "Reproducible isolated FreeEOS failure in the hot dense addition; no failed coordinate is installed in an EOS table.",
+  "hydrogen": 0.15,
+  "helium3": 0.12,
+  "logT": 6.575,
+  "logQ": 2.9375,
+  "completed_isotherms_preserved": 3361,
+  "failed_source_prefix_rows": 35,
+  "fresh_independent_retry_failed": true,
+  "increasing_Newton_iteration_limit_20_to_200_failed": true,
+  "Newton_two_cycle_log_f": [
+    4.480324367661295,
+    4.480324583611028
+  ],
+  "step_amplitude": 2.1594973360937346e-07,
+  "failure": "master_exchange: first iteration failed to converge",
+  "file_sha256": {
+    "/tmp/ember-numerical-electron-hot-dense-addition-v1/plane-045/temperature-046.failure.log": "34c5437f14881cce8ccdb76e2796904eb54965680d3bb8e31c9bb39c8087559a",
+    "/tmp/ember-hot-dense-exchange-retry-v1/request.txt": "904d2ce1b859b236dcace2717beba4e22f2ffb650a85443f580d8f2d2e4b81bc",
+    "/tmp/ember-hot-dense-exchange-retry-v1/stderr.txt": "072cd064e5f8e8919c81f5317e6dd75fdb398f09738bf308ba98ea86bf9fa21f",
+    "/tmp/ember-freeeos-exchange-diagnostic-v2/stderr-v2.txt": "ca0dff9fd374091ab5f798f39ed0a7485fec4865e749fb73e0f9fc6669525c72",
+    "/tmp/ember-freeeos-exchange-diagnostic-v2/patch_record.json": "38f35c4ba6f0e7ac57442edc24f1bcaa791cd4af9447de6d379b21ddb9a94fda"
+  },
+  "accepted": false
+}

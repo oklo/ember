@@ -1,0 +1,64 @@
+{
+  "scope": "Independent electron quadrature 1e-11 versus 1e-13 at five dense source isotherms, unchanged physical formulas and auxiliary convergence. Diagnostic only; no dense EOS acceptance.",
+  "records": [
+    {
+      "plane": 47,
+      "temperature_index": 88,
+      "returncode": 0,
+      "valid": true,
+      "rows": 121,
+      "maximum_scaled_physical_difference": 9.760660864369213e-11,
+      "worst_density_index": 91,
+      "worst_column": 13,
+      "maximum_first_law_defect": 6.768544058566306e-14
+    },
+    {
+      "plane": 42,
+      "temperature_index": 100,
+      "returncode": 0,
+      "valid": true,
+      "rows": 121,
+      "maximum_scaled_physical_difference": 9.793617649887207e-11,
+      "worst_density_index": 95,
+      "worst_column": 13,
+      "maximum_first_law_defect": 1.642574964932919e-13
+    },
+    {
+      "plane": 64,
+      "temperature_index": 20,
+      "returncode": 0,
+      "valid": true,
+      "rows": 121,
+      "maximum_scaled_physical_difference": 2.3429637665175394e-10,
+      "worst_density_index": 114,
+      "worst_column": 11,
+      "maximum_first_law_defect": 1.22291066162461e-13
+    },
+    {
+      "plane": 60,
+      "temperature_index": 70,
+      "returncode": 0,
+      "valid": true,
+      "rows": 121,
+      "maximum_scaled_physical_difference": 2.445865036586817e-10,
+      "worst_density_index": 119,
+      "worst_column": 10,
+      "maximum_first_law_defect": 9.66726698692355e-14
+    },
+    {
+      "plane": 37,
+      "temperature_index": 82,
+      "returncode": 0,
+      "valid": true,
+      "rows": 121,
+      "maximum_scaled_physical_difference": 1.8821732721424672e-10,
+      "worst_density_index": 64,
+      "worst_column": 10,
+      "maximum_first_law_defect": 5.2562121322097255e-14
+    }
+  ],
+  "probe_sha256": "12cd42cec5721730b7d107e1cf0e65b8f283f0ae4ba9bd440c098dad955975ff",
+  "previous_source_sha256": "7c262511c0d172e68669a94fd667cf077c4f5765108fa86f809113e64489836b",
+  "raw_source": "/tmp/ember-quadrature-convergence-v1/source.json.gz",
+  "raw_source_sha256": "7e4c117164ce77b02d165e6788f28c4223a46a9ed3ad77d7b03c603de2253d11"
+}

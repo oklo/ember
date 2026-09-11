@@ -1,0 +1,144 @@
+{
+  "endpoint": {
+    "age_yr": 3874509630439.291,
+    "step_yr": 842.4219486777611,
+    "R_Rsun": 0.12411352155364568,
+    "L_Lsun": 0.00867384967553073,
+    "Teff_K": 4999.999997124762,
+    "central_X": 0.0012941192198377691,
+    "central_Y3": 1.8622872022123267e-09,
+    "step_error_norm": 1.3322676295501878e-08,
+    "discrete_luminosity_balance": 3.035127704720253e-11,
+    "nuclear_rest_mass_balance": -6.078625225391932e-08,
+    "last_halfstep_coupling_iterations": 1,
+    "convective_mass_fraction": 0.045627658375802044,
+    "central_T_K": 12613960.975377211,
+    "central_rho": 6757.048642883112,
+    "surface_X": 0.17304030258976486,
+    "surface_Y3": 0.0026488879130924688,
+    "nuclear_deposited_Lsun": 0.008653179940126305,
+    "nuclear_neutrino_Lsun": 0.00025657552436558946,
+    "last_halfstep_gravothermal_Lsun": 2.071834202854171e-05,
+    "hydrogen_mass_Msun": 0.007414380138944069,
+    "thermal_neutrino_Lsun": 4.8606360856263715e-08
+  },
+  "states": 8456,
+  "requested_age_reached": false,
+  "stop": "Accepted history ends at the atmosphere upper temperature; subsequent source-domain rejections and minimum-step failure are retained. Requested age was not reached.",
+  "first_atmosphere_domain_rejection": "retry dt=1.38022e+07 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
+  "last_atmosphere_domain_rejection": "retry dt=105.303 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
+  "rejected_attempts": 319,
+  "milestones": {
+    "scope": "Report bracketed exhaustion and cooling milestones without extrapolation.\n\nAll recrossings are retained. A threshold crossing is not a claim of permanent\nextinction, a white-dwarf classification, or a converged endpoint age.\n",
+    "age_range_yr": [
+      0,
+      3874509630439.291
+    ],
+    "accepted_states": 8456,
+    "run_reached_requested_age": false,
+    "core_hydrogen": [
+      {
+        "threshold": 0.001,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 0.0001,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 1e-05,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      }
+    ],
+    "nuclear_deposited_over_photon_luminosity": [
+      {
+        "threshold": 0.1,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 0.01,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 0.001,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      }
+    ],
+    "nuclear_diagnostic_scope": "Deposited luminosity of the selected network; pp-only in the present driver. Missing legacy data are not interpreted as zero burning.",
+    "temperature": [
+      {
+        "threshold": 1000,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 500,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      },
+      {
+        "threshold": 100,
+        "already_below_at_segment_start": false,
+        "crossings": [],
+        "below_at_segment_end": false
+      }
+    ],
+    "temperature_scope": "Downward crossings are cooling-temperature milestones only. Establish a degenerate remnant, residual-burning regime and source validity separately.",
+    "final": {
+      "age_yr": 3874509630439.291,
+      "central_X": 0.0012941192198377691,
+      "Teff_K": 4999.999997124762,
+      "L_Lsun": 0.00867384967553073,
+      "hydrogen_mass_Msun": 0.007414380138944069,
+      "nuclear_deposited_Lsun": 0.008653179940126305
+    }
+  },
+  "mixing_regions": [
+    {
+      "begin": 0,
+      "end_exclusive": 381,
+      "convective": false,
+      "mass_fraction": 0.9543723416241985,
+      "inner_enclosed_fraction": 1.2286486893304287e-10,
+      "outer_enclosed_fraction": 0.9536156050649064
+    },
+    {
+      "begin": 381,
+      "end_exclusive": 512,
+      "convective": true,
+      "mass_fraction": 0.04562765837580204,
+      "inner_enclosed_fraction": 0.9551290781834895,
+      "outer_enclosed_fraction": 1
+    }
+  ],
+  "EOS": "metal:data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
+  "atmosphere": "nongrey:data/atmosphere/nongrey_gs98_z020_exhaustion_t5000_v1.dat",
+  "opacity_directory": "/Users/greglaughlin/Projects/ember/data/opacity/hydrogen_exhaustion_hot_v1",
+  "cpu_seconds": 7240.055622000001,
+  "awake_seconds": 5956.380562624894,
+  "utc_seconds": 5956.366942882538,
+  "scope": "Checked fresh 512-point numerical-electron EOS calculation to the 5000 K atmosphere limit. No extrapolated stellar states.",
+  "checked_utc": "2026-09-11T10:25:45.722295+00:00",
+  "central_conduction_flux_fraction": 0.8471063553277064,
+  "central_conductive_opacity": 1.9507272813308167,
+  "central_radiative_opacity": 10.807993236529365,
+  "input_sha256": {
+    "docs/reports/2026-09-11/evolution_latest_provenance.json": "9d027ca218510aa9662c2e1d60cf12d0871a81bf721672026533255d2d82dfb9",
+    "/tmp/ember-numerical-eos-t5000-profile-physics-v1.json": "071e7a73c713c8bb6d51acb307fd0c0cf0b97e3c553c16031ddb6a923da6f9e6",
+    "/tmp/ember-evolution-physics-exhaustion-probe-v1": "e8e9dbcefd4a2a81709cee6584275217b01b98331a9bcd8dce4e5d39f1cb38b9"
+  }
+}

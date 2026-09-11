@@ -1,0 +1,13 @@
+{
+  "scope": "Failed source calculation; no accepted EOS table or new stellar input.",
+  "work_directory": "/tmp/ember-numerical-electron-dense-addition-v1",
+  "completed_isotherms": 639,
+  "failure_log": "/tmp/ember-numerical-electron-dense-addition-v1/plane-058/temperature-008.failure.log",
+  "failure_sha256": "658ccbf89b251dc927d84580de0d2597d57dd64da557b3ccd15345ac8b6209b4",
+  "hydrogen": 0.35,
+  "helium3": 0.0,
+  "log_temperature": 3.6,
+  "reason": "FreeEOS fermi_dirac_integrator exceeded maxnint=200000 during the cold dense isotherm. Process terminated; partial stdout is not an accepted source row set.",
+  "accepted": false,
+  "preserved_completed_source": true
+}

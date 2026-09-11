@@ -33,8 +33,8 @@ def sha(path):
 
 
 def rate(T, parameters):
-    if not 1e6 <= T <= 1e7:
-        raise ValueError('central diagnostic restricted to 1--10 million K')
+    if not 1e6 <= T <= 1.4e7:
+        raise ValueError('central diagnostic restricted to 1--14 million K')
     z, mass, s0, s1, s2 = parameters
     proton, target = 1.00782503 * MU - ME, mass * MU - z * ME
     mu = proton * target / (proton + target)

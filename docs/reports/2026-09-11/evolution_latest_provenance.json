@@ -1,57 +1,79 @@
 {
-  "scope": "Export a checked checkpoint continuation for a daily working paper.\n\nThe plotted history is an assembly of actual accepted states, with one duplicate\nrestart state removed. Original run receipts remain attached to their separate\nsegments. The derived history is never assigned a fabricated run receipt.\n",
-  "input": "out/evolution-cold-remnant-t4400-eos72-joined-v1.json",
+  "scope": "Export a checked checkpoint continuation for a daily working paper.\n\nThe plotted history is an assembly of actual accepted states, with each duplicate\nrestart state removed. Original run receipts remain attached to their separate\nsegments. The derived history is never assigned a fabricated run receipt.\n",
+  "input": "/tmp/ember-numerical-eos-t5600-joined-history-v1.json",
   "history_is_assembled": true,
-  "raw_sha256": "d786254a374771238de1f7bf00cff37802e16372ed3d63b0d5ce3600c0255df2",
-  "raw_archive": "artifacts/continuation-014-evolution-cold-remnant-t4400-eos72-joined-v1.json.gz",
-  "raw_archive_sha256": "33b362395abb75b955064c32b3c96d08f80acf3148ca2c4c9d12ad30a0eebc0f",
+  "raw_sha256": "53752909cad953b3153473af6b42891f4383672d46df763f2674f3de3d2b3376",
+  "raw_archive": "artifacts/continuation-53752909cad9-023-ember-numerical-eos-t5600-joined-history-v1.json.gz",
+  "raw_archive_sha256": "79d6a1a3e17f5e0954496a640079b789b1cfd9786136ca6cffed3d5d2e761116",
   "serialized_history_note": "The archived JSON is the explicitly derived joined history. Original segment outputs and receipts are archived separately.",
   "history_csv": "evolution_latest.csv",
-  "history_csv_sha256": "322097c3becc0edf9f4bbe6b54d18ace74bcdad892955e9a8ceac93b14c133e0",
+  "history_csv_sha256": "fcf2cd4251ea3f9e839e7f0c84e3ffd5a412d48373fa140175307c9f541bfd6e",
   "profile_csv": "evolution_latest_profile.csv",
-  "profile_csv_sha256": "7d417d74ac04475a409d0d4f93f9d5f4435e5dc3cdaeaf5e4406c6855ada3acd",
-  "states": 7696,
+  "profile_csv_sha256": "28ab0b571dbc495ff2f48a6c6e7cd79f09e5711f3b725a2f478d4b0390d7ef2f",
+  "states": 9169,
   "endpoint": {
-    "age_yr": 3848256087435.5327,
-    "step_yr": 2774.0709795979383,
-    "R_Rsun": 0.13335022013021292,
-    "L_Lsun": 0.006004707507597356,
-    "Teff_K": 4399.999998613677,
-    "central_X": 0.0024672122543675725,
-    "central_Y3": 1.881978543089584e-08,
-    "step_error_norm": 3.552713678800501e-08,
-    "discrete_luminosity_balance": 5.952172088541374e-11,
-    "nuclear_rest_mass_balance": -1.3735988801943932e-07,
+    "age_yr": 3890163820064.033,
+    "step_yr": 1211.269401287158,
+    "R_Rsun": 0.11259041182790923,
+    "L_Lsun": 0.01080282767341297,
+    "Teff_K": 5545.749371632476,
+    "central_X": 0.0008157051212789522,
+    "central_Y3": 3.872418981313578e-10,
+    "step_error_norm": 3.108624468950438e-08,
+    "discrete_luminosity_balance": 7.763301113072885e-11,
+    "nuclear_rest_mass_balance": -1.0811432349377981e-07,
     "last_halfstep_coupling_iterations": 1,
-    "convective_mass_fraction": 0.07899318247125091,
-    "central_T_K": 11750953.02469058,
-    "central_rho": 4004.2197096372915,
-    "surface_X": 0.1730474057601698,
-    "surface_Y3": 0.0026399621470580867,
-    "nuclear_deposited_Lsun": 0.0059940757028824326,
-    "nuclear_neutrino_Lsun": 0.00016387741190842416,
-    "last_halfstep_gravothermal_Lsun": 1.0644738200901914e-05,
-    "hydrogen_mass_Msun": 0.00922169800191084,
-    "thermal_neutrino_Lsun": 1.293312856770819e-08
+    "convective_mass_fraction": 0.02565367086275697,
+    "central_T_K": 13186744.202361828,
+    "central_rho": 9993.256621756178,
+    "surface_X": 0.17303686256381393,
+    "surface_Y3": 0.002652327874502492,
+    "nuclear_deposited_Lsun": 0.010770939561910426,
+    "nuclear_neutrino_Lsun": 0.00033622161445890644,
+    "last_halfstep_gravothermal_Lsun": 3.201410310411928e-05,
+    "hydrogen_mass_Msun": 0.005951589541167443,
+    "thermal_neutrino_Lsun": 1.2599076291812502e-07
   },
   "requested_age_reached": false,
-  "first_atmosphere_domain_rejection": "retry dt=2.27252e+07 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
-  "last_atmosphere_domain_rejection": "retry dt=346.759 yr (evolve_step: line search failed: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid; error 2)",
-  "rejected_attempts": 305,
+  "stop": "Repeated interior opacity density-domain rejections followed by decreasing-step line-search failure.",
+  "central_conduction_flux_fraction": 0.9128750623334559,
+  "first_atmosphere_domain_rejection": null,
+  "last_atmosphere_domain_rejection": null,
+  "rejected_attempts": 384,
   "milestones": {
     "scope": "Report bracketed exhaustion and cooling milestones without extrapolation.\n\nAll recrossings are retained. A threshold crossing is not a claim of permanent\nextinction, a white-dwarf classification, or a converged endpoint age.\n",
     "age_range_yr": [
       0,
-      3848256087435.5327
+      3890163820064.033
     ],
-    "accepted_states": 7696,
+    "accepted_states": 9169,
     "run_reached_requested_age": false,
     "core_hydrogen": [
       {
         "threshold": 0.001,
         "already_below_at_segment_start": false,
-        "crossings": [],
-        "below_at_segment_end": false
+        "crossings": [
+          {
+            "direction": "down",
+            "age_bracket_yr": [
+              3883504946457.538,
+              3883527662185.618
+            ],
+            "value_bracket": [
+              0.0010005913785540578,
+              0.0009999141006044343
+            ],
+            "hydrogen_mass_bracket_Msun": [
+              0.006614178568063363,
+              0.006612019034564843
+            ],
+            "central_X_bracket": [
+              0.0010005913785540578,
+              0.0009999141006044343
+            ]
+          }
+        ],
+        "below_at_segment_end": true
       },
       {
         "threshold": 0.0001,
@@ -109,56 +131,60 @@
     ],
     "temperature_scope": "Downward crossings are cooling-temperature milestones only. Establish a degenerate remnant, residual-burning regime and source validity separately.",
     "final": {
-      "age_yr": 3848256087435.5327,
-      "central_X": 0.0024672122543675725,
-      "Teff_K": 4399.999998613677,
-      "L_Lsun": 0.006004707507597356,
-      "hydrogen_mass_Msun": 0.00922169800191084,
-      "nuclear_deposited_Lsun": 0.0059940757028824326
+      "age_yr": 3890163820064.033,
+      "central_X": 0.0008157051212789522,
+      "Teff_K": 5545.749371632476,
+      "L_Lsun": 0.01080282767341297,
+      "hydrogen_mass_Msun": 0.005951589541167443,
+      "nuclear_deposited_Lsun": 0.010770939561910426
     }
   },
   "mixing_regions": [
     {
       "begin": 0,
-      "end_exclusive": 363,
+      "end_exclusive": 397,
       "convective": false,
-      "mass_fraction": 0.921006817528749,
-      "inner_enclosed_fraction": 1.22864837681125e-10,
-      "outer_enclosed_fraction": 0.9199002624229847
+      "mass_fraction": 0.9743463291372436,
+      "inner_enclosed_fraction": 1.2286486893304287e-10,
+      "outer_enclosed_fraction": 0.9738451997894784
     },
     {
-      "begin": 363,
+      "begin": 397,
       "end_exclusive": 512,
       "convective": true,
-      "mass_fraction": 0.0789931824712509,
-      "inner_enclosed_fraction": 0.9221133726345135,
+      "mass_fraction": 0.025653670862756973,
+      "inner_enclosed_fraction": 0.9748474584850078,
       "outer_enclosed_fraction": 1
     }
   ],
-  "EOS": "metal:data/eos/low_density_refined_v2/freeeos300_gs98_z020.dat",
-  "atmosphere": "nongrey:/tmp/ember-nongrey-exhaustion-t4400-v1.dat",
+  "EOS": "metal:data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
+  "atmosphere": "nongrey:data/atmosphere/nongrey_gs98_z020_exhaustion_t5600_v1.dat",
   "opacity_directory": "/Users/greglaughlin/Projects/ember/data/opacity/hydrogen_exhaustion_hot_v1",
   "step_error_tolerances": {
     "log_structure": 2.5e-05,
     "absolute_abundance": 2.5e-08,
     "relative_surface_luminosity": 0.00025
   },
-  "executable_sha256": "656f48eb437f1332b455d6c1bc074e6151a1ad0b606f31a47c41c1dfa8901b9e",
+  "executable_sha256": "7d8f95f327799371539563a0328d5962fb08a459302c5642f04f7a3880083ab3",
   "segment_receipts": [
     {
-      "source": "out/evolution-cold-remnant-t4000-eos72-512-4000gyr-v2.receipt.json",
-      "sha256": "f09b50f3de877637838e4cbaee032d779d55ff4ae8989dafe92b31757a20cdb5"
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.receipt.json",
+      "sha256": "540394a9bede99334aeb48dd51400550af36847398cefaa0a4bb156184749292"
     },
     {
-      "source": "out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.receipt.json",
-      "sha256": "22cca86d5139ef04a9a70bba48844cde085f548dd95788ba53f991f388e97c2a"
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5200-512-4000gyr-v1.receipt.json",
+      "sha256": "9687bdbf39605de557ba19ddfe514785fc27065aef07241306e15392eaedf4d8"
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5600-512-4000gyr-v1.receipt.json",
+      "sha256": "411551e98117f4e1897222c9dfc5c8fe2e916737a07d323a6d49173c492e49f3"
     }
   ],
-  "continuation_check": "docs/results/evolution_atmosphere_limit_3848gyr_v1.json",
-  "continuation_check_sha256": "b93eb700abe0a06fff3f8d60570abe14186b6dba45bdf0c969dc0396652479fa",
-  "cpu_seconds": 2770.753083,
-  "awake_seconds": 1692.0021963343024,
-  "utc_seconds": 1996.5980908870697,
+  "continuation_check": "docs/results/evolution_density_limit_3890gyr_v1.json",
+  "continuation_check_sha256": "2a5fafebc413e33de651df42a364d6ebdc9022c88209973ead20e6e903faf4d9",
+  "cpu_seconds": 8131.793704000001,
+  "awake_seconds": 6542.848291080445,
+  "utc_seconds": 6542.839940071106,
   "timing_note": "Sums of the actual segment runs; no atmosphere or source-generation time included.",
-  "export_script_sha256": "efa14656c034b2f09ec32524ff39c0c4bd363f007ebc1040aca708874011a004"
+  "export_script_sha256": "7dc30f568387e524eddecd8e8be4d91b3ece6038697270ec698da1d7d81bad49"
 }

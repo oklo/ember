@@ -1,0 +1,29 @@
+{
+  "scope": "Integration controls for the profile EOS audit source-mode selection. The numerical control uses 36 synthetic material queries, not a stellar structure. No new full EOS family or evolved track is accepted by these checks.",
+  "fitted_profile_records_exact": true,
+  "fitted_raw_source_exact": true,
+  "fitted_profile_zones": 512,
+  "fitted_extra_queries": 12,
+  "numerical_synthetic_queries": 36,
+  "numerical_maximum_differences_match_independent_audit": true,
+  "incorrect_source_modes_rejected": [
+    {
+      "family": "/tmp/ember-numerical-electron-pipeline-family-v1/freeeos300_gs98_z020.dat",
+      "requested_mode": "fitted",
+      "rejected": true
+    },
+    {
+      "family": "/tmp/ember-eos-hot-family-v1/freeeos300_gs98_z020.dat",
+      "requested_mode": "numerical",
+      "rejected": true
+    }
+  ],
+  "input_sha256": {
+    "docs/results/metal_eos_hot_profile_v1.json": "8d2f4c7b672e5e0d197a319ab2c46dbe5653964a0df13a815914ed679d3bbcb9",
+    "/tmp/ember-fitted-profile-audit-compatibility-v1.json": "2172f870cc342982d86fa78607c554cf23b37a1965e713b43935e7c8397dbf14",
+    "/tmp/ember-numerical-electron-profile-audit-v1.json": "8b84f1135a0df28014c0121f3037384f516dc3a3b4a320b65dd012dd5d05538b",
+    "docs/results/numerical_electron_pilot_v1.json": "2d617d98c948403d9809179d96c2d23449513dcaea0394ce09d477786522c751",
+    "scripts/audit_profile_eos.py": "5982c249d872fc6c1430d0b30708e0a31fe7f8af7b993e9ee9864d0d43ec33e6",
+    "scripts/audit_metal_eos_family.py": "26141669207d2f2d53a7d6027946a0e8d49ff82c917d56578b6ac05044ec91ec"
+  }
+}

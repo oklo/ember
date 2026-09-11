@@ -1,0 +1,73 @@
+{
+  "scope": "Accept the 196-source-node gas-atmosphere table through 5000 K. Original source states and masks, independent matching-state interpolation, depth convergence, equilibrium condensation and selected EOS/runtime support have been checked. This does not validate cold-remnant or grain atmospheres. A different EOS family requires its own support check.",
+  "checked_utc": "2026-09-11T06:34:53.651196+00:00",
+  "table": "/tmp/ember-nongrey-exhaustion-t5000-v1.dat",
+  "table_sha256": "0bb5064bcccced7d58499186b16f29a37412a4c0052853c410040bbc2c217200",
+  "EOS": "data/eos/low_density_refined_v2/freeeos300_gs98_z020.dat",
+  "EOS_sha256": "544db28d28b7382eca2646f1ae6d6980d2b1f9eccff3781a69c08626c6a5f321",
+  "reports_sha256": {
+    "docs/results/nongrey_t5000_interpolation_v1.json": "ab7b57d28ff5df4fede244fc3c94980c6f0442ffd573d542a8d043e657079590",
+    "docs/results/nongrey_t5000_retained_v1.json": "62f183b1b5a982afa51b936401a95b282514a110e5443797354c3696b47cd695",
+    "docs/results/nongrey_x150_y000_t4600_g515_depth120_v1.json": "1048f4b09914a30eebd931dd3cea6e48c1b9baaef9989be582e2ba3c4ac2a079",
+    "docs/results/nongrey_x150_y000_t4600_g540_depth120_v1.json": "25e9db8259d11e88b0e8b575ed3f6a858b2a472f9e667f17b792d37d0cbf0036",
+    "docs/results/nongrey_x200_y000_t4600_g515_depth120_v1.json": "80ddd54499413e989bebd0e944944880adae631db2d5ff66a457b211a4caf9fb",
+    "docs/results/nongrey_x200_y000_t4600_g540_depth120_v1.json": "b4281b7d607162ac207054dbd72a1866b6830885c75bb9a1055668d197642abd",
+    "docs/results/nongrey_x150_y000_t4800_g515_depth120_v1.json": "f0e5139d0466e6799ccbc528a96eda89da70fce253e4c2e26da007e79d8f0963",
+    "docs/results/nongrey_x150_y000_t4800_g540_depth120_v1.json": "85fafcf0d47e73dbba079877026afe825e865036e0d8e9d834e4f21fcafdfb9a",
+    "docs/results/nongrey_x200_y000_t4800_g515_depth120_v1.json": "6a7d748e653857dceae28a58acad3e4be48754feb608677d1996e9095dcdd3fe",
+    "docs/results/nongrey_x200_y000_t4800_g540_depth120_v1.json": "f6a6f415f48d5ad122df00266358c987d0a9d88b66382cb4b1c7efab76243d79",
+    "docs/results/nongrey_x150_y000_t5000_g515_depth120_v1.json": "c5c62a41c681d5db6433a978cb5bdc8eba56d3be668d18ba86e0a75ca3d38cbd",
+    "docs/results/nongrey_x150_y000_t5000_g540_depth120_v1.json": "8affade8d9ee0fd11db42d558697435bf142121c007c0dc942f94451993da0c1",
+    "docs/results/nongrey_x200_y000_t5000_g515_depth120_v1.json": "105db3fe50edaf72790bbe69872efc4ba8bb38938341fd1e2fc0c7494cc5bf80",
+    "docs/results/nongrey_x200_y000_t5000_g540_depth120_v1.json": "1be707ec3d09ba5ebdb7a6831e467f192c23996645e3af56795e010029498f61",
+    "docs/results/nongrey_t5000_condensation_g515_v1.json": "9d1d1a13a9f7419aefd0912ebfea7e6cbc242bc31151191e7485ed8dcffad000",
+    "docs/results/nongrey_t5000_condensation_g540_v1.json": "73a189ed23939de6ae6c87bb914288a557d3b06fbc4f6ceb783f5b7ccde8e9ea"
+  },
+  "source_models": 196,
+  "retained_source_models": 172,
+  "retained_missing_masks": 188,
+  "independent_matching_state_relative_criterion": 0.01,
+  "independent_comparisons": [
+    {
+      "coordinates": [
+        0.175,
+        0.005,
+        4500.0,
+        5.275
+      ],
+      "relative_difference": {
+        "T": -0.0005225372824083641,
+        "Pgas": 0.005376242898833317
+      }
+    },
+    {
+      "coordinates": [
+        0.175,
+        0.005,
+        4700.0,
+        5.275
+      ],
+      "relative_difference": {
+        "T": -0.0001188027986896989,
+        "Pgas": 0.0050125591454524
+      }
+    },
+    {
+      "coordinates": [
+        0.175,
+        0.005,
+        4900.0,
+        5.275
+      ],
+      "relative_difference": {
+        "T": -5.461076861690284e-05,
+        "Pgas": 0.005011253886383571
+      }
+    }
+  ],
+  "depth_comparisons": 12,
+  "maximum_depth_matching_state_relative_difference": 7.810330289603762e-05,
+  "condensation_profiles": 24,
+  "profiles_with_condensates": 0,
+  "accepted_for_gas_trajectory": true
+}

@@ -9,6 +9,35 @@ records the selected prescription. This update supplies a reproducible nuclear
 model for continued initial evolution, not a complete hydrogen-burning network
 or precision screening tied to the FreeEOS potential.
 
+## Solar Fusion III option
+
+`sfiii-svh` selects the pp-chain rates recommended by
+[Acharya et al. (2025), Solar Fusion III](https://arxiv.org/abs/2405.06470v3),
+with the same Salpeter–Van Horn screening and reduced reaction network.
+Equations 8–9 supply the pp normalization, slope and curvature. Section V.C
+supplies the helium-3 pair polynomial, and equation 14 supplies the full
+helium-3/helium-4 energy dependence. The latter is restricted to its stated
+range through 1.6 MeV; its negligible high-energy tail is not extrapolated.
+The operational temperature range remains 0.1–20 MK, with zero burning below
+the existing low-temperature cutoff and rejection above the upper limit.
+
+The 18 rate and temperature-response comparisons use independently adaptive
+integration in energy, including a tail check. Both prescriptions also undergo
+the same abundance, thermal-response and nuclear-energy conservation tests.
+The exact-response cache distinguishes the rate prescriptions. Changing this
+selection changes the nuclear physics and requires a consistent new trajectory;
+the currently running star retains `sfii-svh`.
+[Bare-rate comparison](results/nuclear_sfiii_bare_rate_comparison_v1.json),
+[reference calculation](../scripts/generate_sfiii_reference.py).
+All 34 test suites pass. Two 512-point controls complete 10 billion years;
+the SFII control retains the preceding executable's entire output exactly.
+With SFIII, the initial luminosity increases by 0.7454% and radius by 0.2164%.
+This is a short stellar comparison, not a measurement of the full lifetime.
+[Validation](results/nuclear_sfiii_validation_v1.json),
+[stellar controls](results/nuclear_sfiii_evolution_control_v1.json).
+
+This option does not add pep, hep, ppIII or CNO reactions, or update screening.
+
 ## Carbon and nitrogen capture times
 
 A new diagnostic evaluates proton capture by carbon-12, carbon-13 and nitrogen-14
@@ -20,6 +49,15 @@ The central temperature is 9.290 million K. Independent energy-space and
 log-energy quadratures agree within the recorded numerical criterion.
 [Calculated times and inputs](results/cno_capture_times_v1.json),
 [diagnostic script](../scripts/audit_cno_capture_times.py).
+
+At the plotted 3.848-trillion-year endpoint, the corresponding central times
+are 445.6 million years, 93.69 million years and 289.6 billion years. The
+central temperature is 11.75 MK. The diagnostic now supports 1–14 MK while
+retaining its original quadrature and tail criteria; all sampled integration
+energies remain below the 130 keV range stated for the nitrogen polynomial in
+Solar Fusion II, equation 50.
+[Endpoint comparison](results/cno_capture_times_3848gyr_v1.json),
+[rate-range checks](results/cno_rate_range_14mk_v1.json).
 
 These times do not establish a negligible CNO contribution. They describe
 fixed conditions, not the star's changing temperature, mixing or depletion.

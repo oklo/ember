@@ -1,0 +1,16 @@
+{
+  "scope": "Independent electron quadrature accuracy reference. Only the numerical relative integration target changes from 1e-11 to 1e-13; physical source and auxiliary iteration settings are unchanged.",
+  "source_archive_sha256": "4ab1c15a51385a3eab3b08c6f3f240739c0105d92ec828d635ac95720edefb09",
+  "previous_probe_sha256": "f9fd14b9715f40a314d53eb45d3908a24f01e16113a31e7ef506ed884a410d7b",
+  "probe": "/tmp/ember-freeeos-quadrature13-diagnostic-v1/probe",
+  "probe_sha256": "12cd42cec5721730b7d107e1cf0e65b8f283f0ae4ba9bd440c098dad955975ff",
+  "library": "/tmp/ember-freeeos-quadrature13-diagnostic-v1/build/src/libfree_eos.1.0.0.dylib",
+  "library_sha256": "e5b1fb1c123fd3294fae4138864c0cf38b4214f48b82fe4fb9aadfc2394bb5e6",
+  "relative_integral_error": 1e-13,
+  "changed_Fortran_files": [
+    "src/fermi_dirac_direct.f90"
+  ],
+  "convergence_report": "docs/results/numerical_electron_dense_quadrature_convergence_v1.json",
+  "convergence_report_sha256": "0ce5f349a1430a564e3fbde9b046f764e52ac6a5c51a9de1856ced3e114d6c63",
+  "changed_source_sha256": "d259a700a0019cca30b351e2089ecbb94c181b2ad4e42cf687abcb9f18effae9"
+}

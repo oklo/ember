@@ -1,7 +1,12 @@
 # The 0.1-solar-mass calculation through remnant cooling
 
-The user has authorized autonomous implementation and calculation through a
-very cold white-dwarf phase. This is the objective, not the current result.
+The user has authorized autonomous implementation and calculation through
+hydrogen exhaustion, helium-remnant cooling past 100 K, and disappearance
+under explicit proton/nucleon-decay scenarios. The 100 K crossing is an
+intermediate milestone. The full lifetime account includes formation, future
+environments, conditional dark-matter heating and gravitational decay channels.
+Unmeasured particle lifetimes are model assumptions; stable baryons remain an
+alternative. This is the objective, not the current result.
 The preserved reference remains the 2.85-trillion-year, fully convective gas
 track described in `HANDOFF.md`. Keep its executable, checkpoint and physical
 inputs intact; develop in a separate build and use separate output paths.
@@ -10,59 +15,70 @@ publication policy in [DATA_REPRODUCTION.md](DATA_REPRODUCTION.md).
 
 ## Progress on 2026-09-11
 
-The latest checked 512-point state reaches **3.848 trillion years**, central
-hydrogen **X = 0.002467**, surface hydrogen **X = 0.1730** and effective temperature
-**4400 K**. Its nonconvective core contains **92.10%** of the mass. The sequence
-contains the initial structure and 7695 accepted time steps; the atmosphere
-upper temperature prevents further evolution with these inputs.
-[Endpoint, stopping evidence and checks](results/evolution_atmosphere_limit_3848gyr_v1.json).
+The latest computed continuation reaches **3.890 trillion years**, effective
+temperature **5546 K**, central hydrogen **X = 0.0008157** and central density
+**9993 g/cm3**. It adds 450 accepted steps using the accepted atmosphere table
+through 5600 K. The complete chain of 9169 structures passes checkpoint, input, final-profile
+EOS and independent mixing checks. Central hydrogen crosses X = 0.001 near
+3.884 trillion years, with a 22.72-million-year bracket of accepted models. Repeated interior
+opacity rejections at **10000 g/cm3** precede termination, so dense opacity is
+the immediate constraint. No stellar evolution job is active at this update.
+[Complete continuation checks](results/evolution_density_limit_3890gyr_v1.json).
 
-The calculation through 3.818 trillion years uses the checked 156-model
-atmosphere table and 72-table EOS.
-All atmosphere nodes have EOS support. Its 3900 K independent check differs by
-−0.4427% in matching temperature and +0.4107% in gas pressure. Four lower-boundary
-checks pass, with a maximum matching-state change of 0.005127%; the twelve added
-structures contain no condensates in the equilibrium diagnostic.
-[Atmosphere acceptance](results/nongrey_t4000_acceptance_v1.json).
-The 172-model extension through 4400 K has also passed source, independent
-interpolation, depth, condensation and EOS/runtime checks. All 156 existing
-source states remain unchanged; independent matching-state differences are
-below 0.5987%. [Acceptance](results/nongrey_t4400_acceptance_v1.json).
-The saved 3.818-trillion-year star continued to 3.848 trillion years with this
-table through a checked atmosphere-extension restart. The physical state at
-the join is exact. Atmospheres through 5000 K and independent source/depth
-controls are running; see HANDOFF.md for jobs and input files.
+The latest checked 512-point calculation reaches **3.881 trillion years**,
+central hydrogen **X = 0.001084**, surface hydrogen **X = 0.1730** and effective
+temperature **5200 K**. Its nonconvective mass fraction is **96.28%**.
+The sequence contains the initial structure and 8718 accepted time steps,
+each updating composition and structure.
+[Endpoint, stopping evidence and checks](results/evolution_atmosphere_limit_3881gyr_v1.json).
 
-A hotter EOS candidate preserves all existing potentials and extends material
-temperature coverage to 21.13 MK. Added hot source comparisons and all 512
-actual profile zones pass, but some unvisited mixtures in the original
-temperature range fail the heat-capacity criterion. The discrepancy is associated with the source electron approximation at
-degeneracy parameter 4. Numerical electron integration removes the jump in
-controls; a new source family is being generated and will require independent
-checks and a fresh stellar calculation.
-[General test](results/metal_eos_hot_source_v1.json),
-[actual profile test](results/metal_eos_hot_profile_v1.json).
+The 204-model gas-atmosphere table through 5200 K passes source,
+interpolation, depth, condensation and EOS/runtime checks. Its independent
+5100 K matching-state comparison differs by at most 0.4449%; four additional
+lower-boundary comparisons pass. All 196 previously accepted states and their
+missing-state masks remain exact.
+[Atmosphere acceptance](results/nongrey_t5200_acceptance_v2.json).
+The selected 220-model extension through 5600 K also passes these checks;
+its independent matching-state comparisons differ by at most 0.4169%.
+[5600 K acceptance](results/nongrey_t5600_acceptance_v1.json).
+Atmosphere source calculations through 6400 K, independent controls and
+higher-gravity trials are prepared along the region inferred from LBA97.
+The [atmosphere and cooling plan](WHITE_DWARF_ATMOSPHERES.md) describes the
+required composition, density and low-temperature physics; consult HANDOFF.md
+for current jobs and acceptance status. The
+[very cold remnant physics plan](ULTRACOLD_PHYSICS.md) records diffusion,
+crystallization, nuclear reactions, accretion, unbound tidal encounters and
+conditional dark-matter heating, with primary references.
 
-The paper plots the checked track through **3.848 trillion years**.
-All its Ember curves use that single calculation. Its core transports heat by
-radiation and conduction, with conduction supplying **69.82% of local central
-flux**. Its initial radius agrees with that measured for EBLM J2114-39 B,
-within the reported uncertainty. The opacity diagram extracts the photosphere
-at Rosseland optical depth 2/3 from the source atmosphere structures.
+The selected numerical-electron EOS passes 4736 independent source comparisons,
+2240 thermodynamic identities and 227 atmosphere queries. The largest general
+heat-capacity difference is 0.2952%. All 512 zones of the 3.875-trillion-year
+model pass, with
+a maximum heat-capacity difference of 0.06584%. One inconsistent source state
+and all touching derivative stencils are explicitly excluded.
+[EOS acceptance](results/numerical_electron_base_acceptance_v1.json),
+[final profile comparison](results/numerical_electron_profile_3875gyr_v1.json).
+The separate hot dense source addition passes its source checks; its restricted
+hydrogen-poor extension requires interpolation and runtime checks before use.
+
+The paper plots the checked trajectory through **3.890 trillion years**.
+Its core transports heat by radiation and conduction, with conduction supplying
+**91.29% of local central flux**. Its initial radius agrees with the measured
+radius of EBLM J2114-39 B within the reported uncertainty. The opacity diagram
+extracts the photosphere at Rosseland optical depth 2/3 from the source
+atmosphere structures.
 
 The hot ATOMIC opacity family reaches zero hydrogen. Twelve independent
 composition checks on hot profile states differ by at most 0.05257%.
 The evolving surface remains hydrogen rich; lower-temperature hydrogen-poor
 opacity and fully coupled grain atmospheres remain requirements for cooling.
-The selected EOS passes 1188 independent low-density and 792 original-density
-source comparisons.
+
 
 The exact-response cache and shared nuclear electron calculation are installed.
 A fixed-input long pair gives identical full histories, with CPU time reduced
-from 162.4 to 101.8 minutes (37.31%); concurrent load varied. The latest partial
-stellar trajectory through 3.818 trillion years uses 41.19 CPU minutes; its
-continuation to 3.848 trillion years adds 4.990 CPU minutes and 3.111 awake
-minutes. These are not whole-cooling timings.
+from 162.4 to 101.8 minutes (37.31%); concurrent load varied. The plotted calculation through 3.890 trillion years uses **135.5 CPU minutes**
+and **109.0 elapsed minutes**, with concurrent source calculations. Atmosphere
+source generation is separate. These are not whole-cooling timings.
 
 Fresh controls through 3.600 trillion years are complete. Tightening the time
 control changes central hydrogen by 0.1849%; doubling the mesh changes it by
@@ -169,10 +185,15 @@ later recrossings, residual fuel, shell luminosity and integrated energy.
 Do not relabel the first core threshold as the end of all hydrogen burning.
 
 Cold-remnant temperature milestones are Teff=1000, 500 and 100 K, on the
-descending-temperature cooling branch. The final target is 100 K, conditional
-on a supported material EOS and atmospheric boundary. Zero temperature is
-not an attainable finite-age endpoint. Neither a Mestel-law continuation nor
-an extrapolated atmosphere counts as the requested evolved model.
+descending-temperature cooling branch, with all later crossings retained if
+heating reverses the cooling. Continue below 100 K with supported material
+physics and radiation transport. Under specified nucleon-decay scenarios,
+follow changing mass, nuclear composition, decay-product deposition, loss of
+degeneracy, optical thinning and dispersal. Distinguish disappearance of a
+bound remnant from decay of its last surviving baryons. Replace continuum
+stellar equations when their assumptions fail, and describe the final
+few-particle stage statistically. An exponential mean mass never becomes
+exactly zero at finite time and is not by itself a disappearance calculation.
 
 ## Work and acceptance order
 
@@ -217,6 +238,19 @@ an extrapolated atmosphere counts as the requested evolved model.
    endpoint thresholds; test reproducible fresh starts and exact restarts.
    Separate numerical errors, source interpolation errors and uncertainty in
    physical prescriptions. Archive receipts at every completed milestone.
+8. **Very-long-term surroundings and reactions.** Quantify diffusion, grains,
+   solid/neutral material, pycnuclear reactions, gas/solid accretion, heating
+   from encounters that remain unbound, and conditional WIMP heating. Follow
+   evolving environments and ejection, with event probabilities when smooth
+   mean rates are inadequate. Their relevance is not restricted to Teff=100 K.
+9. **Nucleon decay and disappearance.** Implement explicit lifetimes and
+   channels consistent with their experimental bounds; include virtual-black-
+   hole decay as a separate speculative model. Evolve daughter nuclei, prompt
+   nuclear reactions, escaping energy, retained heat and changing gravitating
+   mass. Follow the transition from a degenerate star to neutral matter and
+   dispersed particles. State the domain and uncertainty of every continuation.
+   The detailed investigations and primary sources are in
+   [ULTRACOLD_PHYSICS.md](ULTRACOLD_PHYSICS.md).
 
 ## Source work under this authorization
 

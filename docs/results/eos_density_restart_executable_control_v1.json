@@ -1,0 +1,36 @@
+{
+  "scope": "Fixed-input 512-point stellar evolution through 10 billion years, using the accepted numerical-electron EOS and 5000 K atmosphere. Old and density-extension-capable executables must give identical complete JSON. No density extension or physics change is selected.",
+  "passed": true,
+  "complete_json_exact": true,
+  "arguments": [
+    "512",
+    "1e10",
+    "1e8",
+    "2.5",
+    "sfii-svh",
+    "wd",
+    "nongrey:data/atmosphere/nongrey_gs98_z020_exhaustion_t5000_v1.dat",
+    "metal:data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
+    "ledoux-diffusive",
+    "--opacity-directory",
+    "data/opacity/hydrogen_exhaustion_hot_v1",
+    "--thermal-neutrinos",
+    "plasma-hrw",
+    "--step-workers",
+    "2"
+  ],
+  "records": [
+    {
+      "executable": "/tmp/ember-density-opacity-build-v1/apps/ember-evolve",
+      "executable_sha256": "a4e48b67505fa26ebf443108df5cfd27348f1a89cf79d7bc56f1f52dcfa19f1c",
+      "output_sha256": "cfcd5864bc903000a8f8ba511ceaf8cbbf633d31da58d52dc0f50e8be67e1797",
+      "elapsed_seconds": 80.1475499579683
+    },
+    {
+      "executable": "/tmp/ember-eos-density-restart-build-v1/apps/ember-evolve",
+      "executable_sha256": "fe36561e6b440ec3c86a1d284f295d7bfad8b75c7f4fa596c44fa3a4da2582f4",
+      "output_sha256": "cfcd5864bc903000a8f8ba511ceaf8cbbf633d31da58d52dc0f50e8be67e1797",
+      "elapsed_seconds": 66.72631070762873
+    }
+  ]
+}

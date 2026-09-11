@@ -139,3 +139,21 @@ output is byte-identical to both preceding checked executables.
 Each extension invocation permits only one physical table change. A new
 checkpoint is bound to the new data and executable and supports ordinary
 exact restart. Original checkpoints remain intact.
+## Adding denser EOS columns
+
+`--eos-density-extension-restart FILE` continues after appending higher-density
+columns to a metal EOS family. Supply `--restart-source-eos FILE` and
+`--restart-source-executable FILE`, and select the new family with the ordinary
+EOS argument. Temperatures, compositions, physical source labels and every
+original density coordinate, potential coefficient and validity mask must be
+identical. Added cold states may remain masked; at least one valid new state
+is required. Each original row is compared using its own density stride.
+
+The implementation passes all 34 test suites. Tests preserve the complete
+continued trajectory with an unvisited density addition, reject changed original
+columns, verify masks and check an exact restart from the new checkpoint.
+A separate 512-point, 10-billion-year control reproduces the preceding
+executable's entire JSON output exactly with fixed physical inputs. These
+checks establish restart behavior; an actual density addition still requires
+independent source and interpolation validation.
+[Validation](results/eos_density_extension_restart_v1.json).

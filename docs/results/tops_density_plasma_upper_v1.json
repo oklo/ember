@@ -1,0 +1,72 @@
+{
+  "scope": "Continuous classical plasma-normalization diagnostic at dense opacity source/interpolation states. Fully ionized H/He and Z/A <= 1/2 give an electron-density upper bound. This excludes source-bin rounding and frequency-dependent refractive index and is not an evolutionary error bound.",
+  "input_sha256": {
+    "docs/results/tops_density_fine_transport_v1.json": "18d1ee92b980fdf5f79d7cb0ddf5eae08fa5914b58b030b5e4d4f4b99f8ba941",
+    "docs/results/tops_density_fine_transport_v1.queries.json.gz": "a5214d7cb8b99c6558eb9321bc7007477cbb0a7a784374973344178dd50fa236",
+    "/Users/greglaughlin/Projects/ember/scripts/audit_dense_plasma_normalization.py": "a58d008cba39181ae8617b5b0c03a8b65bdfa88c58583d7802504313239e963c"
+  },
+  "states": 298914,
+  "quadrature_64_128_maximum_absolute_difference": 1.176836406102666e-14,
+  "groups": {
+    "all": {
+      "states": 298914,
+      "maximum_combined_opacity_relative_increase": 0.008959990083177383,
+      "classical_cutoff_u": 1.4028904451902537,
+      "removed_rosseland_weight": 0.03217526944642987,
+      "state": {
+        "kind": "nodes",
+        "X": 0.75,
+        "Z": 0.01,
+        "Y3": 0.12,
+        "temperature_K": 23209036.243100166,
+        "density": 10593,
+        "radiative_source": 2.9066,
+        "radiative_interpolated": 2.9066,
+        "conductive_opacity": 1.1080490230150188,
+        "radiative_relative_difference": 0.0,
+        "combined_relative_difference": 0.0,
+        "remove_all_radiation_relative_increase": 0.38121826980493334
+      }
+    },
+    "one_to_twenty_MK": {
+      "states": 250188,
+      "maximum_combined_opacity_relative_increase": 0.008350642129528296,
+      "classical_cutoff_u": 1.6776095956072068,
+      "removed_rosseland_weight": 0.05284981553023572,
+      "state": {
+        "kind": "nodes",
+        "X": 0.75,
+        "Z": 0.01,
+        "Y3": 0.12,
+        "temperature_K": 18857341.94751888,
+        "density": 10000,
+        "radiative_source": 4.511,
+        "radiative_interpolated": 4.511,
+        "conductive_opacity": 0.8382137244327353,
+        "radiative_relative_difference": 0.0,
+        "combined_relative_difference": 0.0,
+        "remove_all_radiation_relative_increase": 0.18581550087180987
+      }
+    },
+    "hydrogen_poor_z020": {
+      "states": 54508,
+      "maximum_combined_opacity_relative_increase": 0.0076795983765050035,
+      "classical_cutoff_u": 1.2787364821468723,
+      "removed_rosseland_weight": 0.024760232677862568,
+      "state": {
+        "kind": "nodes",
+        "X": 0.0,
+        "Z": 0.02,
+        "Y3": 0.12,
+        "temperature_K": 18857341.94751888,
+        "density": 10000,
+        "radiative_source": 4.4022,
+        "radiative_interpolated": 4.4022,
+        "conductive_opacity": 1.9574751233111591,
+        "radiative_relative_difference": 0.0,
+        "combined_relative_difference": 0.0,
+        "remove_all_radiation_relative_increase": 0.4446583806531188
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "scope": "EOS density-extension restart requires identical original potential coefficients, masks, temperatures, density-prefix coordinates and composition. The actual saved internal model is restored; only additional higher-density columns are admitted. Source thermodynamics require separate acceptance.",
+  "passed": true,
+  "ctest_suites": 34,
+  "ctest_seconds": 485.58,
+  "ctest_log": "/tmp/ember-eos-density-restart-ctest-v1.log",
+  "ctest_log_sha256": "9f4fb15c80c6b8867ce059217c033c706a90d24682f87a38b446eafd176312c1",
+  "complete_json_control": "docs/results/eos_density_restart_executable_control_v1.json",
+  "complete_json_control_sha256": "fcb1f3acbc104adba63af189d10d4b43b0cd0258f700ce6c2331f368b68309e1",
+  "source_sha256": {
+    "include/ember/eos_mixture.hpp": "21d7b5b1cf84f3fde41039cb8251ecc7269615983c0ded046ca76adfd88ddf12",
+    "src/eos_mixture.cpp": "93b5428dde6b6e6e8cea288775b9ed1b73cd2381aff01805d708b9da69b67330",
+    "apps/evolve.cpp": "b5c34a54df43ac0c9500632358b74a71c5f1fc21f2bc4d5dda37c0848ed237b6",
+    "tests/test_evolution_restart.py": "4d36331f7935287e49d75a61826b700a04e32d9b3f64e92f7e013a41e7266300"
+  },
+  "candidate_executable": "/tmp/ember-eos-density-restart-build-v1/apps/ember-evolve",
+  "candidate_executable_sha256": "fe36561e6b440ec3c86a1d284f295d7bfad8b75c7f4fa596c44fa3a4da2582f4",
+  "actual_density_addition_selected": false
+}
