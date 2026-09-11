@@ -1,3 +1,430 @@
+# Paper and Fable now updated — 2026-09-11 14:54 UTC
+
+The requested PDF timeline IS COMPLETE. Today's paper is now 16 pages;
+pp13–16 cover formation through conditional nucleon decay/disappearance,
+including a reproducible equal-lifetime mass/last-baryon reference. Builder
+build_lifetime_timeline.py reads the unchanged plotted 3.875-Tyr CSV, writes
+lifetime_values.tex, lifetime_benchmarks.json and lifetime_decay_reference.pdf/png.
+All16 pages rendered/inspected, no compiler warnings; log
+/tmp/ember-paper-sept11-timeline-v4.log. validation.json records new paper hashes,
+checks and scope without claiming a new stellar integration or CTest run.
+The four-page timeline is lifetime_timeline.tex, included after the bibliography.
+Current plotted stellar data are still3.875Tyr, not the unverified3.890endpoint.
+
+README now distinguishes computed3.890, separately checked3.881 and plotted3.875;
+docs/PROJECT_STATUS.md gives requested top-line progress and next work.
+APPROXIMATION_REMIT and ULTRACOLD include the user's progression of approximation.
+
+Fable is ACTIVE and has acknowledged P001 in QUESTIONS.md F001. It is preparing
+pilot tools under docs/research/fable/sph. It discovered planetary materialID0
+uses ideal gamma5/3 in the existing energy-evolving SWIFT executable, avoiding
+rebuilding. Primary replied P002: proceed, but A=P/rho^(5/3) is an adiabat
+function, not physical WD entropy; define same-density thermal excess or
+integrated dissipation, with numerical controls. Read STATUS/QUESTIONS before
+allocating new jobs. No primary stellar/atmosphere job has launched during
+this paper/brief task. Fable's files are independently owned; do NOT stage its
+live outputs or edit them. Publish primary brief/protocol/notes only.
+
+Expanded goal and all production blockers below still apply. Do not let the
+environmental survey replace resolving dense opacity and continuing the track.
+Review-branch publication of this documentation update is the next action.
+
+---
+
+# Expanded objective, Fable collaboration and paper — 2026-09-11 14:42 UTC
+
+THIS UPDATE SUPERSEDES older statements that 100 K completes the objective,
+that the goal is paused, or that Fable is limited to literature work.
+get_goal at 14:42 UTC reports ACTIVE. Its objective string still says 100 K;
+the tools cannot edit an active objective. Do not mark complete or recreate
+it merely to change that string. The user's expanded goal governs the work:
+follow an initially 0.1-solar-mass star through hydrogen exhaustion, helium
+remnant cooling past 100 K, and disappearance under explicit proton/nucleon
+DECAY scenarios, with stable-baryon and environmental alternatives.
+
+Latest user priorities:
+- A full event timeline at the END of today's PDF, formation through decay.
+  NOT YET ADDED at this timestamp. Finish this concrete deliverable.
+- Match modeling detail to uncertainty: resolved atmosphere/stellar physics
+  where it controls the track, reduced cooling/environment models when adequate,
+  conditional mass/energy and survival models in the decay era. Do not spend
+  on detail that cannot change the conclusion; maintain numerical accuracy
+  sufficient to resolve small physical signals. New docs/APPROXIMATION_REMIT.md.
+- User is starting Fable externally and authorizes independent literature,
+  analytic AND SPH work. Brief ready in docs/research/fable/ASSIGNMENT.md;
+  docs/research/fable/COORDINATION.md defines asynchronous work and pause recovery;
+  PRIMARY_NOTES.md contains P001 awaiting acknowledgment. Check those files at
+  work boundaries. Do not infer Fable is running just because the brief exists.
+- User does NOT want artificially low particle counts or idle compute. Let
+  benchmark and signal determine resolution (roughly 50000–100000 first survey,
+  larger selected controls if useful). Use available cores adaptively while
+  main Ember work retains priority. Bound batches, compact diagnostics, sparse
+  snapshots, 2 GB generated data/4 GB private footprint and 100 MB retained
+  artifacts are initial resource discipline. No movie series or heroic merger.
+- User requests a top-line progress and planned-work summary after this setup.
+
+SPH inspection complete, read-only:
+../mars-earth-collision: curated SWIFT/WoMa setup, src/body/analysis helpers.
+../earth-mars-swift/swift-impact/swift: energy-evolving planetary SPH;
+../earth-mars-swift/swift/swift: FIXED ENTROPY (not for measuring heating).
+Both CPU-threaded, MPI/vectorization disabled in recorded builds; no GPU path
+identified. Planetary EOS has ten custom SESAME-format slots near line 2680.
+Need actual degenerate WD structures/EOS and energy/noise controls, not scaled
+iron/rock planets. Current Ember structure is NOT a cold WD initializer.
+Existing planetary raw series about 116 GB, do not copy or delete it.
+No stellar, atmosphere or SWIFT process was active at 14:34 UTC inspection.
+
+Protocol: each agent writes only own files; numbered P/F messages with explicit
+acknowledgments, atomic status/handoffs, task IDs, process-identity checks,
+resource reservations under docs/research/fable/coordination/reservations/,
+and sealed versioned result batches (READY.json). No automatic lock expiry
+based on silence. A token-paused agent may have a live bounded job. Inspect
+before relaunch. Files coordinate work but do not resume an app/token limit.
+Primary owns ASSIGNMENT, COORDINATION, PRIMARY_NOTES and shared stellar/paper
+files; Fable owns STATUS, HANDOFF_FABLE, QUESTIONS, FINDINGS and survey outputs.
+
+Science checked: virtual-BH proton decay estimate in Adams et al. 2001
+hep-ph/0009154 eq.2 is tau ~ mp^-1(Mpl/mp)^4 ~ 1e45 yr (natural units).
+Conditional quantum-gravity scenario, not an established lifetime. Distinct
+from collective WD tunneling; Adams/Laughlin/Mbonye/Perry 1998 astro-ph/9808250
+finds much greater suppression for aggregate tunneling. Baryogenesis does not
+force ordinary proton decay: Fukugita/Yanagida 1986 leptogenesis counterexample.
+SK p->e+pi0 partial lifetime >2.4e34 yr at 90%, not a measured universal time.
+README, ROADMAP, COLD_REMNANT and ULTRACOLD_PHYSICS already carry expanded goal.
+
+Actual stellar result remains 3.890 Tyr, Teff 5546 K, Xc .0008157, rho_c9993.
+No new stellar/source job launched during SPH/brief work. Full 3.890 audit pending;
+3.881 separately checked; paper uses 3.875. Dense opacity remains next production
+constraint. All atmosphere depth-control status and EOS details below remain
+current. Existing source changes/unrelated files must be preserved.
+
+---
+
+# Context continuity and next work — 2026-09-11 13:11 UTC
+
+The user is leaving the computer and asks how to keep work going, including
+whether to clear context after saving a handoff. Recommend retaining this
+conversation: automatic context summarization preserves continuity, with this
+file and the repository documents providing durable detail. Do not clear the
+goal or recreate it. At 13:05 UTC get_goal still reports PAUSED. The user must
+use Resume in the progress row above the composer; agent goal tools cannot
+resume it. Official instructions: https://learn.chatgpt.com/docs/long-running-work.
+Enable Prevent sleep while running and keep the local app/project available.
+OpenAI Docs skill already read. Do not claim that background calculations keep
+the assistant itself working after a paused-goal turn ends.
+
+Main objective unchanged: a physically supported trajectory for an initially
+0.1-solar-mass star through exhaustion and helium-remnant cooling to 100 K.
+The user's further physics questions guide this work, not a replacement task.
+New docs/ULTRACOLD_PHYSICS.md preserves the scientific priorities and primary
+references from the morning discussion: diffusion and separation, coupled
+grains, solid/neutral H–He matter, pycnuclear reactions, gas and solid-object
+accretion, evolving galactic environments, unbound tidal encounters and WIMPs.
+These are planned calculations, not installed physics or predictions of a
+cooling age. Keep the surface/core-temperature distinction explicit.
+
+The user specifically suspects that WD–WD SPH work concentrates on bound
+systems and misses heating from pairs which REMAIN HYPERBOLIC after close
+passage, with separation just above contact. A checked primary example,
+Loren-Aguilar et al. 2010 (MNRAS 406, 2749), explicitly starts every system
+bound after capture. Do not generalize that into an established absence of
+an unbound survey. Search remains open. Define r_peri/(R1+R2), distinguish
+impact parameter at infinity and inverse beta, check positive final orbital
+energy, and separate heat from mode energy, spin and ejecta. Bound-binary
+heating calculations and WD–black-hole encounters are comparisons, not this
+specific population. Check artificial viscosity/isolated-star relaxation
+before interpreting small retained heat in SPH.
+
+WIMP update is now documented with current primary sources. LZ's published
+standard SI bound is 2.2e-48 cm2 at 40 GeV/c2 (90%; arxiv:2410.17036v3),
+not the initially recalled numbers. The September 2026 extended-recoil paper
+arxiv:2609.02823 reports one event, global 2.6 sigma; NOT a DM discovery.
+Bell 2021 arxiv:2104.14367 and Bell 2024 arxiv:2404.16272 improve capture and
+thermalization, including crystal phonons in the latter. Compute conditional
+capture/annihilation/evaporation and evolving halo exposure; never assume
+geometric capture, annihilation equilibrium or observed WIMPs. The user is
+Greg Laughlin, coauthor with Fred Adams of the 1997 RMP article.
+
+ACTUAL evolution remains the new 3.890 Tyr / 5546 K endpoint described below.
+Latest computed central X=.0008157 and density9993 g/cm3. No stellar job active.
+450 new accepted steps; checkpoint and input checks pass, full chain and
+independent endpoint/stop audits still pending. COLD_REMNANT and the atmosphere
+plan now distinguish this computed result from the fully checked 3.881 Tyr
+endpoint. Published paper/README remain at3.875 Tyr and need updating after
+the checks. Accepted atmosphere through5600 K WAS used in this continuation.
+
+Atmosphere jobs and comparisons since the preceding handoff:
+
+- Original forward batch, gravity pilots, depth-v2 session47323 and depth-v3
+  session70995 all COMPLETE. No source jobs at the 13:06 UTC process check.
+- v2 completed six refined6000 K sources; its other six preparations failed
+  because fort.7 mass values use native E15.6 serialization whereas run.log
+  now has full precision. generate_nongrey_grid.py now accepts an EXACT
+  float(format(source_mass, '.6e')) match in addition to the preexisting
+  comparison. This does not relax physical source criteria. Rounded-checkpoint
+  acceptance and deliberately perturbed rejection tests added; all29 Python
+  tests PASS, /tmp/ember-nongrey-seed-precision-tests-v1.log.
+- v3 repeats only the six preparation failures. All six source models completed
+  and all six lower-boundary comparisons PASS with the required actual depth
+  separation. Paths /tmp/ember-nongrey-forward-depth-controls-v3 and same.log.
+- Nine-comparison audit session12171 COMPLETE, summary
+  docs/results/nongrey_forward_depth_repairs_v2.json. Eight PASS; the refined
+  6000 K / X=.15 / Y3=0 / log g=5.15 pair still FAILS at0.01098% versus the
+  unchanged0.01% criterion. Reports have suffix_depth400_v2.json. The two
+  refined6000 X=.2 cases and all six6200/6400 cases PASS. Preserve failed
+  lower-resolution reports; no complete6000/6400 grid is accepted yet.
+- A two-source500-point refinement plus automatic subsequent audit was
+  attempted in /tmp/ember-nongrey-t6000-depth500-v1, but STOPPED before source
+  evolution. One initializer tried to trim at240 when its final source bottom
+  is slightly below240; preserve the completed deep column instead. The other
+  reached the executable and reports nd.gt.mdepth 500 400. A separately
+  prepared executable with sufficient array bounds is needed before500 points
+  can run. Do not modify the shared prepared executable or any old results.
+  Plans/specification nongrey_t6000_x150_depth500_* in data/atmosphere/sources;
+  log /tmp/ember-nongrey-t6000-depth500-queue-v1.log; failed queue receipt
+  docs/results/nongrey_t6000_depth500_queue_v1.json. No500-point jobs active,
+  and no automatic follow-up remains running. Do not report this queue active.
+
+Next concrete work, in order of the actual stellar constraint:
+
+1. Resolve dense-opacity accuracy and accept/install the restricted dense EOS
+   after its combined acceptance record. Dense opacity candidate fails the
+   original0.5% radiative interpolation criterion (0.7202%); the much smaller
+   combined radiative/conductive difference is a diagnostic, not permission to
+   silently change the criterion. See PLASMA_OPACITY.md and earlier handoffs.
+2. Audit all continuation joins using real receipts, the final EOS profile and
+   the actual opacity stopping boundary. Do not fabricate a receipt for a
+   derived combined history. Continue with separately validated input changes.
+3. Fix the500-point source preparation above and run the isolated pair with
+   its audit queued after successful completion. Finish5800–6400 assembly,
+   held-out5700/5900/6100/6300 comparisons, retained-node/mask checks, EOS/runtime
+   and condensation checks. Gravity pilots are not complete interpolation cells.
+4. Archive checked results, update today's paper and README, then publish the
+   existing review branch/PR. Diffusion/grain/solid-matter work follows the
+   physics plan; environmental investigations must not displace the next
+   stellar continuation.
+
+Branch codex/atmosphere5000-density-checks; published4247f32; PR1.
+Preserve the existing working tree. Do not edit or stage unrelated .DS_Store
+files, scripts/audit_helium_coexistence.py or scripts/helium_electron_probe.cpp.
+No subagents authorized. Python science environment /tmp/ember-plot-env/bin/python.
+Inspect existing processes and receipts before every new source/evolution job.
+Use at most four significant figures in prose/plots; raw numerical data retain
+precision. Plain writing, no figure titles, faint F77 comparisons, monochrome
+Ember title. Do not add research-history narration to the scientific paper.
+
+---
+
+# Daytime continuation and goal control — 2026-09-11 12:50 UTC
+
+User found machine quiet, then asked how to keep work going unattended today.
+At 12:45 UTC no calculations were active: all 34 forward atmospheres and all
+four contraction pilots had completed after the preceding reply. Reported
+this plainly. Goal tool still reports PAUSED. Official OpenAI docs now verified:
+https://learn.chatgpt.com/docs/long-running-work — Resume in the progress row
+above the composer, and Prevent sleep while running. Agent tools cannot
+resume the paused goal. User needs that app control for continued goal turns.
+Do not claim that background source jobs alone keep the assistant working.
+OpenAI Docs skill was read for this narrow product question; no extra routes.
+
+ACTUAL stellar continuation session19967 completed at a NEW interior opacity
+density limit. Prefix out/evolution-cold-remnant-numerical-eos-t5600-512-4000gyr-v1;
+snapshot /tmp/ember-numerical-eos-t5600-512-4000gyr-v1; launcher log
+/tmp/ember-numerical-eos-t5600-launch-v1.log. Same copied executable as 5200 K
+(7d8f95f3...), same EOS/nuclear/mixing/opacity, only accepted atmosphere
+extended to 5600 K. 450 new accepted states. Exact physical checkpoint join
+and unchanged data/checkpoint/executable checks PASS; initial report
+results/evolution_density_limit_3890gyr_initial_v1.json. Full chain archive,
+endpoint EOS and stopping-boundary audits still needed. Never create a fake
+receipt for an assembled history.
+
+Endpoint age 3.890 Tyr, Teff 5546 K, central X=.0008157, central temperature
+13.19 MK, central density 9993 g/cm3, radius .1126 solar radii, luminosity
+.01080 solar, convective mass fraction .02565, surface X=.1730, total hydrogen
+.005952 solar masses. Repeated TOPS_ATOMIC_GS98_high outside-table rejections
+at log rho=4 and log T=7.120 precede the terminal line-search failure. The
+star is NOT currently running. Dense opacity is now the immediate constraint;
+the dense EOS candidate also still needs its final acceptance/installation.
+
+Completed atmosphere depth screening: 5800 K all four comparisons PASS
+(one refined 400-point source); 6000 K X=.15/g5.15, X=.2/g5.15 and X=.2/g5.4
+FAIL the original 300-point criterion; X=.15/g5.4 PASS. New g5.7 pairs both
+PASS. At 6200 K X=.15 both gravities PASS; X=.2 pairs and all four 6400 K
+pairs have final bottom-depth ratios less than 1.5 and cannot establish
+independent lower-boundary convergence. No tolerance relaxed. Both contraction
+pilot comparisons PASS, at 4800 K/g6.3 and 3800 K/g6.6; not full grids.
+
+NEW ACTIVE session47323, eight workers, twelve sources in
+/tmp/ember-nongrey-forward-depth-controls-v2, same-prefix log. Plan:
+data/atmosphere/sources/nongrey_forward_depth_controls_v2_plan_specification.json.
+Six sources refine the three failed 6000 K pairs to 400 depth points; six
+sources repeat insufficient 6200/6400 K comparisons from the completed main
+structures with starting bottom optical depth 120. All seeds verified before
+launch. Physical equations/criteria unchanged. No other new source runs.
+
+Next work: resolve/validate dense opacity; accept dense EOS; finish atmosphere
+checks and automatic follow-up so completed batches do not sit awaiting
+manual assembly. Audit the new evolution segment and chain, then update the
+paper and review branch from checked results. Existing uncommitted changes
+and unrelated files remain as described below. No subagents.
+
+---
+
+# Advance atmospheres and white-dwarf physics — 2026-09-11 11:50 UTC
+
+The user asked for broader parallel atmosphere calculations guided by LBA97,
+then asked which physics is needed at the HR turn and for WD atmospheres,
+including present-day binary helium WDs. No subagents. The goal remains paused
+after the morning interruption; do not mark it complete. Stellar endpoint is
+unchanged at 3.881 Tyr / 5200 K; no stellar production job is active.
+
+New docs/WHITE_DWARF_ATMOSPHERES.md records the advance temperature/gravity
+plan, surface-composition requirements, dense H/He physics and primary
+observational/model references. Current gas source already contains CIA;
+dense corrections, nonideal chemistry, diffusion/settling, coupled grains and
+cold far-infrared coverage are unfinished. Helium core does not imply helium
+atmosphere. Current remaining hydrogen mass is 0.006867 solar masses.
+Public Montreal color grids log g = 7–9 and their CO-core cooling sequences
+do not supply a 0.1-solar-mass He-core boundary or track. Tremblay 2015 ELM
+3D atmospheres cover 6000–11500 K, log g = 5–6.5; their spectroscopic
+corrections are not deep atmosphere boundary data. COLD_REMNANT.md now gives
+the checked 3.881 Tyr endpoint; paper and published README stay at 3.875 Tyr.
+
+Existing source jobs inspected before additions: 14 CPU cores (10 performance,
+4 efficiency), with only two atmosphere workers then busy. New source work:
+
+- Session78887 RUNNING, /tmp/ember-nongrey-forward-parallel-v1, eight workers,
+  34 sources: refine failed 5800 K source, complete composition at 6000 K /
+  log g = 5.7, main 6200/6400 K cells at log g = 5.15/5.4, their lower-boundary
+  controls and independent 6100/6300 K models. Fourteen sources complete at
+  inspection. Plan nongrey_forward_parallel_plan_specification.json. Source
+  controls still require comparison; source completion is not grid acceptance.
+- Session52865 COMPLETE, /tmp/ember-nongrey-intermediate-5300-5700-v1,
+  independent 5300 and 5700 K models at X=.175, Y3=.005, log g=5.275.
+- Session25897 source pair COMPLETE, /tmp/ember-nongrey-high-gravity-column-pilot-v1,
+  6000 K / log g = 6 / X=.15 / Y3=0, two starting columns. Their lower-boundary
+  comparison now PASSES, maximum matching-state difference 0.004288%:
+  results/nongrey_x150_y000_t6000_g600_column_v1.json. This one composition
+  and temperature pair does not establish complete atmosphere coverage.
+- Session79958 RUNNING, /tmp/ember-nongrey-contraction-column-pilots-v1,
+  two workers, paired columns at 4800 K / log g = 6.3 then 3800 K /
+  log g = 6.6. Dependent initial structures are explicitly awaited. No
+  completed sources at inspection. Pilots are not full interpolation coverage.
+- Original depth session59052 COMPLETE, all 20 sources through 6000 K.
+  Original main session34081 and 400-point refinement sessions91791/62360
+  also COMPLETE. Audit all remaining 5800/6000 pairs before assembly.
+
+All new work reuses compatible 13.15 kK wavelength tables. log g = 6 trials
+needed deeper column guesses: existing continuation preserves pressure and
+shrinks column at higher gravity, losing the tau=100 match. New optional
+--initial-column-factor rescales starting column, number/mass densities and
+preserves temperature, composition and hydrostatic nT/(g*m). It changes only
+the initial guess, not source equations. Default input bytes/provenance stay
+unchanged. Files generate_nongrey_grid.py, run_nongrey_continuation.py,
+run_nongrey_plan.py, tests/test_nongrey_import.py. All 29 Python tests PASS.
+Do not edit active source plans. Their hashes and physical inputs stay pinned.
+
+5600 K table assembled (session3608 COMPLETE), 220 sources:
+/tmp/ember-nongrey-exhaustion-t5600-v1.dat; SHA
+12f03d3a6eb28024538417465622f09e508f5fe3c13ea43acd3de3a8a20bbf14.
+All 204 old sources and 300 masks exact. Five new 400-point depth comparisons
+PASS at unchanged 0.01% criterion; other three new 300-point comparisons PASS
+(the missing X=.2 / 5600 / log g=5.4 audit now complete). Full condensation
+sessions23016/72126 COMPLETE: sixteen profiles, zero condensate layers.
+Runtime/EOS/interpolation session53113 COMPLETE: all 220 source nodes
+supported, independent 5300/5500 K maximum pressure differences 0.3709% and
+0.4169%. Acceptance session9753 COMPLETE after checking report criteria and
+all interpolation/assembly input fingerprints. Accepted and installed:
+data/atmosphere/nongrey_gs98_z020_exhaustion_t5600_v1.dat,
+results/nongrey_t5600_acceptance_v1.json. The stellar calculation has NOT
+resumed on this table yet. Further continuation must preserve the exact
+checkpoint join and record both atmosphere extensions honestly; the current
+check_evolution_continuation.py expects an original run plus one extension.
+Extend that audit for a chain or audit each physical join separately; do not
+fabricate a run receipt for the derived joined history.
+
+Dense EOS final five runtime/domain controls now PASS:
+results/numerical_electron_hot_dense_exhaustion_retained_v1.json.
+General, profile, atmosphere, native retention and domain checks all pass;
+family is still NOT installed/selected. See the preceding record for paths
+and the restricted X<.2 dense support. Dense opacity remains NOT accepted.
+
+Interpolation optimization build now has all 34 CTests PASS (LastTest.log).
+The ABBA timings remain inconclusive owing to variable load; do not claim a
+speedup. src/interp.cpp and tests/test_opacity.cpp remain uncommitted and
+unselected for stellar production. New atmosphere and EOS work also remains
+uncommitted. Preserve unrelated DS_Store and the two helium scripts below.
+Published branch remains codex/atmosphere5000-density-checks at 4247f32.
+
+---
+
+# Morning status — 2026-09-11 11:13 UTC
+
+User asked for morning status. Goal tool now reports paused after the user's
+interruption; running tool processes survived. Do not mark goal complete.
+
+Checked star: 3.881 Tyr (exact 3880790932489.1973 yr), Xc=.0010838139990537229,
+Teff=5199.999983416569 K, Tc=12850425.821668323 K, rhoc=7846.833311615802,
+R=.12027649860752729, L=.009529466788534433, convective fraction=.03716949948.
+Continuation session49580 COMPLETE at accepted 5200 K atmosphere limit, 263
+accepted steps, 10.70 CPU minutes / 7.130 elapsed. No stellar production job.
+Endpoint and exact join to fresh numerical EOS history PASS:
+docs/results/evolution_atmosphere_limit_3881gyr_v1.json (8719 joined states),
+/tmp/ember-numerical-eos-t5200-joined-history-v1.json, archive
+/tmp/ember-numerical-eos-t5200-continuation-audit-v1. Check session25085 complete.
+Output prefix out/evolution-cold-remnant-numerical-eos-t5200-512-4000gyr-v1.
+Executable copied from /tmp/ember-sfiii-build-v1/apps/ember-evolve, SII selected.
+
+5200 K atmosphere v2 ACCEPTED and installed locally. Acceptance
+results/nongrey_t5200_acceptance_v2.json, table SHA
+ba8053239b1b08c2218f446c2937c4710ed21434d11321a3fcbf33024519514f.
+204 source states, 196 old states and 272 old masks exact. 5100 K independent
+pressure difference .4449%; all depth controls pass and eight profiles have
+zero condensates. One new source uses 400 rather than 300 depth points.
+
+All 41 main atmosphere requests through 6000 K COMPLETE, session34081.
+Lower-boundary plan59052 remains active, 12 controls completed. Its X=.2,
+5600 K, log g=5.4 control has NOT finished; attempted audit44846 failed only
+because validated.json was not yet present. Retry when source finishes.
+5400 K lower-gravity controls both failed at 300 points. Four 400-point sources
+now run in session91791, /tmp/ember-nongrey-t5400-depth400-v1 (4 workers).
+5600 K three completed controls all failed at 300 points. Six 400-point sources
+now run in session62360, /tmp/ember-nongrey-t5600-depth400-v1 (2 workers).
+Plans in data/atmosphere/sources. No 5400/5600 extension accepted yet.
+
+Dense EOS restricted addition imported successfully. Native exact retention
+check passes 630200 added valid states, all old potentials/masks exact.
+2688 source comparisons + 672 identities PASS, max heat-capacity difference
+.2612%. All 512 final zones PASS with same errors as base; 236 atmosphere
+queries PASS with exactly identical matching states. Reports prefix
+results/numerical_electron_hot_dense_exhaustion_*. Final five domain rejection
+controls session19155 pending at last inspection; output retained_v1 not yet
+present. NO density family installed/accepted/selected yet. Import path
+/tmp/ember-numerical-electron-hot-dense-exhaustion-family-v1.
+New scripts/check_eos_extension.cpp invokes the actual native restart check.
+run_evolution_snapshot.py now includes density-extension source/checkpoint
+inputs in its receipt (previously temperature extensions only).
+
+Interpolation optimization is UNCOMMITTED and NOT selected for production:
+src/interp.cpp specializes out unused parameter derivatives in the value
+interface; tests/test_opacity.cpp adds monotonicity/linear/interface controls.
+Build /tmp/ember-hermite-value-build-v1 complete. CTest session30423 ACTIVE,
+33/34 passed; evolution_restart remains. ABBA benchmark35937 COMPLETE, entire
+512-point 10 Gyr JSON identical in all four runs. Before CPU42.57/23.97 sec,
+after26.78/24.35 sec: large changing load means the average speedup is NOT
+reliable evidence of a performance gain. Need longer/warmed comparison before
+claiming improvement or deciding to retain optimization. Report
+results/hermite_value_evolution_benchmark_v1.json. Actual code arithmetic and
+physics unchanged only if the completed checks establish that.
+
+PDF/README updated and pushed as4247f32 on codex/atmosphere5000-density-checks.
+The paper plots the fully checked fresh history through3.875 Tyr, not the new
+3.881 Tyr continuation. PR1 body/title updated to3.875. Defaultmaster unchanged
+after prior automatic review rejection. Unrelated DS_Store and two helium
+scripts remain untouched. No subagents. Inspect jobs before any launches.
+
+---
+
 # Checked star and paper update — 2026-09-11 10:59 UTC
 
 The fresh numerical-electron EOS calculation finished at its accepted 5000 K

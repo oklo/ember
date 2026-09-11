@@ -1,0 +1,101 @@
+{
+  "scope": "Existing plotted Ember milestones and conditional analytic decay benchmark; no new stellar evolution.",
+  "track_sha256": "f64a4b0578f5420937bdd858c09cffee00f514f72f2660ad5631f0834c476169",
+  "helium3_peak": {
+    "age_yr": "710323561038.216",
+    "step_yr": "538097672.7172759",
+    "R_Rsun": "0.140650864707973",
+    "L_Lsun": "0.0012444113799414036",
+    "Teff_K": "2890.6557255983107",
+    "central_X": "0.5635453640055675",
+    "central_Y3": "0.10025462174765855",
+    "step_error_norm": "0.8089884168116512",
+    "discrete_luminosity_balance": "-3.374678314571611e-11",
+    "nuclear_rest_mass_balance": "2.4489743566391553e-11",
+    "last_halfstep_coupling_iterations": "3",
+    "convective_mass_fraction": "1.0000000000000007",
+    "central_T_K": "5037622.821163507",
+    "central_rho": "276.85088705410686",
+    "surface_X": "0.5635453640055675",
+    "surface_Y3": "0.10025462174765855",
+    "nuclear_deposited_Lsun": "0.0012445302080834981",
+    "nuclear_neutrino_Lsun": "2.5174264329187197e-05",
+    "last_halfstep_gravothermal_Lsun": "-1.1880618150090951e-07",
+    "hydrogen_mass_Msun": "0.056354536400556786",
+    "thermal_neutrino_Lsun": "2.2002588661620726e-11"
+  },
+  "first_saved_nonconvective": {
+    "age_yr": "3546444741551.1665",
+    "step_yr": "530058.4393695638",
+    "R_Rsun": "0.14409973587110883",
+    "L_Lsun": "0.0020330475878974816",
+    "Teff_K": "3228.7310790265274",
+    "central_X": "0.17512273207336657",
+    "central_Y3": "0.0005716790060440677",
+    "step_error_norm": "0.011193534348308274",
+    "discrete_luminosity_balance": "1.3011813848606835e-13",
+    "nuclear_rest_mass_balance": "-1.1792687049094752e-08",
+    "last_halfstep_coupling_iterations": "2",
+    "convective_mass_fraction": "0.995902474256479",
+    "central_T_K": "8459313.249190131",
+    "central_rho": "268.68721382047306",
+    "surface_X": "0.17512353005926248",
+    "surface_Y3": "0.0005721514038056725",
+    "nuclear_deposited_Lsun": "0.0020316798053288954",
+    "nuclear_neutrino_Lsun": "4.161510126425191e-05",
+    "last_halfstep_gravothermal_Lsun": "1.3678298540709245e-06",
+    "hydrogen_mass_Msun": "0.017512336713096033",
+    "thermal_neutrino_Lsun": "4.7285220599664655e-11"
+  },
+  "plotted_endpoint": {
+    "age_yr": "3874509630439.291",
+    "step_yr": "842.4219486777611",
+    "R_Rsun": "0.12411352155364568",
+    "L_Lsun": "0.00867384967553073",
+    "Teff_K": "4999.999997124762",
+    "central_X": "0.0012941192198377691",
+    "central_Y3": "1.8622872022123267e-09",
+    "step_error_norm": "1.3322676295501878e-08",
+    "discrete_luminosity_balance": "3.035127704720253e-11",
+    "nuclear_rest_mass_balance": "-6.078625225391932e-08",
+    "last_halfstep_coupling_iterations": "1",
+    "convective_mass_fraction": "0.045627658375802044",
+    "central_T_K": "12613960.975377211",
+    "central_rho": "6757.048642883112",
+    "surface_X": "0.17304030258976486",
+    "surface_Y3": "0.0026488879130924688",
+    "nuclear_deposited_Lsun": "0.008653179940126305",
+    "nuclear_neutrino_Lsun": "0.00025657552436558946",
+    "last_halfstep_gravothermal_Lsun": "2.071834202854171e-05",
+    "hydrogen_mass_Msun": "0.007414380138944069",
+    "thermal_neutrino_Lsun": "4.8606360856263715e-08"
+  },
+  "benchmark": {
+    "assumptions": [
+      "initial baryonic mass 0.1 solar masses",
+      "all baryons independently decay with one constant lifetime",
+      "no accretion, baryon creation, stable daughter baryons or correlated decay",
+      "last event refers to all initially tagged baryons, even after dispersal"
+    ],
+    "solar_mass_g": 1.98847e+33,
+    "atomic_mass_g": 1.66053906892e-24,
+    "initial_baryon_count_approx": 1.1974846224444952e+56,
+    "mass_loss_fraction_to_time_over_lifetime": {
+      "0.5": 0.6931471805599453,
+      "0.9": 2.302585092994046,
+      "0.99": 4.605170185988091,
+      "0.9999": 9.210340371976294
+    },
+    "mean_last_time_over_lifetime": 129.7022040814061,
+    "last_time_quantiles_over_lifetime": {
+      "0.05": 128.02779971613964,
+      "0.5": 129.49150133708625,
+      "0.95": 132.09518366554676
+    },
+    "quantile_method": "large-N limit of (1-exp(-t/tau))^N; correction O(1/N)"
+  },
+  "checks": {
+    "fractional_loss_identity": true,
+    "quantile_cdf_identity": true
+  }
+}

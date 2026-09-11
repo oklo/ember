@@ -12,12 +12,20 @@ reported alongside each result.
 
 ## Status — September 11, 2026
 
-The **0.1 solar-mass model has reached 3.875 trillion years**, with central
-hydrogen **X = 0.001294**. Its core transports heat by radiation and conduction,
-surrounded by a convective envelope. The calculation reaches its accepted
-atmosphere table's **5000 K** limit after 8455 accepted time steps.
+The **0.1 solar-mass model has reached 3.890 trillion years**, with surface
+temperature **5546 K**, central hydrogen **X = 0.0008157** and central density
+**9993 g/cm³**. Checkpoint and unchanged-input checks pass; its full endpoint
+audit is pending. Dense interior opacity coverage is the immediate constraint.
+[Initial continuation checks](docs/results/evolution_density_limit_3890gyr_initial_v1.json).
 
-| Latest accepted state | Value |
+The separately checked continuation reaches **3.881 trillion years** and
+**5200 K**, with central **X = 0.001084**.
+[Checks](docs/results/evolution_atmosphere_limit_3881gyr_v1.json).
+The paper's plotted track and the table below extend through **3.875 trillion
+years**. That structure transports core heat by radiation and conduction and
+has a convective envelope. [Progress and next work](docs/PROJECT_STATUS.md).
+
+| State plotted in the paper at 3.875 trillion years | Value |
 |---|---:|
 | Initial composition | XH = 0.7, He3 = 0, Z = 0.02; GS98 metals |
 | Mass mesh | 512 points; fixed baryonic mass of 0.1 Msun |
@@ -32,10 +40,15 @@ atmosphere table's **5000 K** limit after 8455 accepted time steps.
 
 [History, endpoint and transport checks](docs/results/evolution_atmosphere_limit_3875gyr_v1.json).
 
-The goal remains an evolved helium remnant at **100 K effective temperature**,
-using material properties, heat transport and atmospheres valid along its
-trajectory. The [current development plan](docs/COLD_REMNANT.md) describes
-remaining physics; the [handoff](HANDOFF.md) records calculations and inputs.
+The goal is to follow this initially 0.1-solar-mass star through hydrogen
+exhaustion, helium-remnant cooling past **100 K**, and disappearance under
+explicit proton/nucleon-decay scenarios. Decay lifetimes, channels and future
+environments are assumptions to vary; stable baryons provide an alternative
+case. The [development plan](docs/COLD_REMNANT.md) and
+[very-long-term physics investigations](docs/ULTRACOLD_PHYSICS.md) describe the
+required physics. The [approximation remit](docs/APPROXIMATION_REMIT.md) matches
+model detail to the physical question and uncertainty; the [handoff](HANDOFF.md)
+records calculations and inputs.
 
 The [September 11 working paper](docs/reports/2026-09-11/ember_status_and_future.pdf)
 ([source and figures](docs/reports/2026-09-11/README.md)) now presents the
@@ -47,6 +60,9 @@ a separate, faint supplementary comparison.
 The photospheric figure compares the LBA97 and Ember opacity maps on identical
 axes and a shared approximate opacity scale, with both 0.1-solar-mass tracks.
 It marks the grains missing from Ember's gas-only background.
+The final four pages give a timeline from formation through conditional
+nucleon decay and disappearance, including environmental alternatives and a
+reproducible analytic reference for the last surviving baryons.
 
 The ATOMIC opacity family for the hot interior extends to **zero hydrogen**. Twelve independent
 composition checks differ by at most **0.05257%** on tested hot-profile states;
@@ -66,9 +82,12 @@ differences are below **0.5377%**. All twelve depth comparisons pass; the
 and their missing-state masks remain exact.
 [Acceptance record](docs/results/nongrey_t5000_acceptance_v1.json).
 
-Atmosphere models through 6000 K are being calculated with the existing
-wavelength-opacity data. Further temperature coverage requires independent
-interpolation, lower-boundary, condensation and EOS checks before use in evolution.
+The accepted atmosphere extension through **5600 K** contains 220 source
+models and was used for the 3.890-trillion-year continuation.
+[Acceptance record](docs/results/nongrey_t5600_acceptance_v1.json).
+Forward source calculations through **6400 K** have completed, but the full
+extension is not accepted: one refined 6000 K lower-boundary comparison remains
+outside its criterion, and further interpolation and runtime checks are required.
 
 The **numerical-electron EOS** evaluates electron integrals directly.
 All 4736 independent source comparisons, 2240 thermodynamic identities and
@@ -81,8 +100,9 @@ state and every interpolation stencil touching it are explicitly excluded.
 [EOS data notes](data/eos/README.md#numerical-electron-integration).
 
 A separate hot dense EOS source calculation passes checks on 949.6 thousand states.
-Its hydrogen-poor addition is undergoing interpolation and runtime validation;
-it has not been selected for stellar evolution.
+Its restricted hydrogen-poor addition also passes the general, profile,
+atmosphere and retained-data checks; combined acceptance and installation are
+pending. It has not been selected for stellar evolution.
 [Source validation](docs/results/numerical_electron_hot_dense_source_validation_v4.json).
 
 Independent spectral integration identifies a normalization issue in the TOPS

@@ -11,6 +11,7 @@
 - [Digitized HR curve](lba97_digitized_hr.csv) and [composition curves](lba97_digitized_composition.csv)
 - [Supplementary F77 comparison](f77_matched_hydrogen.pdf), [data](f77_history.csv), and [extraction checks](f77_history_provenance.json)
 - [Validation receipt](validation.json) and [local recovery manifest](recovery_manifest.json)
+- [Lifetime timeline source](lifetime_timeline.tex), [derived milestones and decay benchmark](lifetime_benchmarks.json), and [conditional decay figure](lifetime_decay_reference.pdf)
 
 The paper compares the 0.1-solar-mass Ember calculation with Laughlin,
 Bodenheimer and Adams (1997), abbreviated LBA97. All Ember curves in the main
@@ -21,6 +22,14 @@ updating both composition and structure. Central hydrogen reaches
 **5000 K** limit. The core carries heat by radiation and conduction; conduction
 supplies **84.71% of the local central flux**. The paper also compares the
 initial model with observed stars near 0.1 solar masses.
+
+The final four pages give the lifetime timeline: formation, hydrogen burning,
+helium-remnant cooling, diffusion and crystallization, environmental and nuclear
+heating, and conditional nucleon decay through disappearance. Computed ages,
+literature comparisons and future conditions are identified separately. The
+decay example assumes independent equal lifetimes for all baryons; its final
+particle distribution is not a computed Ember cooling trajectory. The text
+describes how physical detail is matched to the uncertainty and the question.
 
 LBA97 is represented by 42 selected HR positions, 20 hydrogen positions and
 15 helium-3 positions read from Figure 1, together with stated values.
@@ -39,6 +48,7 @@ python3 build_lba97_figures.py
 python3 build_figures.py
 python3 build_current_convection.py
 python3 build_photospheric_figure.py
+python3 build_lifetime_timeline.py
 tectonic ember_status_and_future.tex
 ```
 
@@ -47,6 +57,12 @@ paper image nor the raw stellar archives. Diamonds distinguish values stated
 by LBA97 from points read from its figure. Ages and physical quantities have
 not been adjusted to improve agreement. Figure descriptions are in captions;
 the plots have no titles.
+
+`build_lifetime_timeline.py` reads the plotted track, derives the helium-3 peak,
+first departure from full convection and endpoint, and checks the analytic
+decay identities. It writes the timeline values, benchmark record and figure.
+Raw data retain precision; generated manuscript values use at most four
+significant figures. No new stellar integration is performed by this script.
 
 Thin F77 lines have opacity 0.30; individual segments changing a surface
 quantity by more than 5%, or an abundance by more than 0.01, have opacity 0.08.

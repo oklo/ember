@@ -1,17 +1,20 @@
 # Roadmap
 
-The active objective is a supported evolution of the 0.1 solar-mass reference
-from its specified static main-sequence state through hydrogen exhaustion
-and helium-remnant cooling to **Teff=100 K**. Formation/pre-main-sequence
-sensitivity and wider mass–composition surveys are additional studies.
-Hydrogen-burning duration is an output to converge, not an imposed lifetime.
+The active objective is physically supported evolution of an initially
+0.1-solar-mass star through hydrogen exhaustion, helium-remnant cooling past
+**Teff=100 K**, and disappearance under explicit proton/nucleon-decay scenarios.
+Formation belongs in the full lifetime account; the current numerical clock
+starts from a static main-sequence model. Nuclear and cooling ages are outputs,
+while unmeasured particle lifetimes and future environments are assumptions.
+Compare those assumptions and retain a stable-baryon alternative.
 
-**September 10 status:** the completed model reaches **3.40 trillion years**,
-still fully convective with XH=.2034. The immediate work is hydrogen-poor
-atmosphere refinement and the approaching structural transition. See
+**September 11 status:** the latest computed model reaches **3.890 trillion
+years**, with central **X=0.0008157**, at an interior opacity density limit.
+Its full endpoint audit is pending; the checked continuation reaches
+**3.881 trillion years**. Dense opacity is the immediate constraint. See
 [COLD_REMNANT.md](COLD_REMNANT.md) for the current acceptance order,
 [LIFETIME_SURVEY.md](LIFETIME_SURVEY.md) for the wider programme, and the
-[September 10 working paper](reports/2026-09-10/ember_status_and_future.pdf).
+[September 11 working paper](reports/2026-09-11/ember_status_and_future.pdf).
 The checklist below retains architecture history with current qualifications.
 
 ## Done
@@ -117,7 +120,28 @@ but not designed.
 - [x] Time stepping with error control from one full versus two half steps
 - [x] Ledoux buoyancy and semiconvective/thermohaline composition transport
 - [ ] Microscopic diffusion/settling, its energetics, and converged moving boundaries
-- [ ] 0.1 Msun end to end
+- [ ] Hydrogen exhaustion and helium-remnant cooling through 100 K
+- [ ] Quantum solid and partially ionized/neutral envelope physics
+- [ ] Coupled grains, element depletion and settling in cold atmospheres
+- [ ] Residual and pycnuclear burning with process-specific rate bounds
+- [ ] Gas, interstellar-object and planetary-debris accretion and retained heat
+- [ ] Heating from WD encounters that remain unbound, including crystallized stars
+- [ ] Evolving galactic environments, ejection and stochastic heating histories
+- [ ] Conditional dark-matter capture, thermalization, annihilation and evaporation
+- [ ] Proton/nucleon-decay channels, nuclear daughter products and energy deposition
+- [ ] Gravitational decay through virtual black holes; distinguish collective tunneling
+- [ ] Decay-driven mass loss, loss of degeneracy, neutral matter and optical thinning
+- [ ] Dispersal and the final discrete-particle regime with an explicit end criterion
+- [ ] Full formation-to-disappearance timeline in the working paper
+
+These investigations are specified in [ULTRACOLD_PHYSICS.md](ULTRACOLD_PHYSICS.md).
+The [approximation remit](APPROXIMATION_REMIT.md) determines when detailed
+structure, reduced models or conditional estimates are appropriate. The
+[Fable assignment](research/fable/ASSIGNMENT.md) covers the independent
+encounter survey and literature work.
+Their importance is set by the calculated structure and luminosity, not a
+universal 100 K switch. Environmental and particle assumptions may alter or
+prevent a particular temperature crossing.
 
 ## Lessons carried over from the Fortran line
 
