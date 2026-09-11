@@ -145,6 +145,49 @@ def main():
         rejected=run('hotter-eos-changed-physics',eos_options,False,hotter_arguments)
         if 'source physics or composition changed' not in rejected['message']:raise AssertionError(rejected)
         changed_plane.write_text(saved_plane)
+        # Density additions change row strides. Preserve every original node,
+        # including the final column, and allow explicitly masked cold additions.
+        denser_eos=work/'denser-eos';denser_eos.mkdir()
+        denser_family=denser_eos/original_eos.name
+        denser_family.write_text('\n'.join(family_rows)+'\n')
+        added_density_states=0
+        for name in family_rows[3:]:
+            name=shlex.split(name)[0]
+            contents=(original_eos.parent/name).read_text().splitlines()
+            iq=next(i for i,line in enumerate(contents) if line.startswith('log_q '))
+            axis=contents[iq].split();nq=int(axis[1]);start=contents.index('data')+1
+            contents[iq]='log_q '+str(nq+1)+' '+' '.join(axis[2:])+f' {float(axis[-1])+.025:.17g}'
+            expanded=[];nt=(len(contents)-start)//nq
+            for it in range(nt):
+                row=contents[start+it*nq:start+(it+1)*nq]
+                extra=row[-1].split()
+                if it<nt//2:extra[0]='0'
+                added_density_states+=int(extra[0])
+                expanded.extend(row+[' '.join(extra)])
+            (denser_eos/name).write_text('\n'.join(contents[:start]+expanded)+'\n')
+        denser_arguments=arguments.copy();denser_arguments[7]=f'metal:{denser_family}'
+        density_options=['--eos-density-extension-restart',str(checkpoint),
+                         '--restart-source-executable',str(executable),'--restart-source-eos',str(original_eos)]
+        denser_checkpoint=work/'denser-eos.restart'
+        denser=run('eos-density-extension',density_options+['--checkpoint',str(denser_checkpoint)],selection=denser_arguments)
+        if denser['history']!=resumed['history'] or denser['profile']!=resumed['profile']:
+            raise AssertionError('appending unvisited EOS columns changed the resumed trajectory')
+        if denser['eos_density_extension']['added_states']!=added_density_states:
+            raise AssertionError('incorrect valid density-extension state count')
+        roundtrip=run('denser-eos-exact',['--restart',str(denser_checkpoint)],selection=denser_arguments)
+        if roundtrip['profile']!=reference['profile'] or checkpoint.read_bytes()!=original_checkpoint:
+            raise AssertionError('density continuation did not preserve restart state')
+        run('denser-eos-without-extension',['--restart',str(checkpoint)],False,denser_arguments)
+        run('denser-eos-temperature-option',eos_options,False,denser_arguments)
+        changed_plane=denser_eos/shlex.split(family_rows[3])[0]
+        saved_plane=changed_plane.read_text();contents=saved_plane.splitlines();start=contents.index('data')+1
+        nq=int(next(line for line in contents if line.startswith('log_q ')).split()[1])
+        index=start+2*nq-2  # Last original column of the second temperature row.
+        fields=contents[index].split();fields[1]=format(float(fields[1])+1,'.17g');contents[index]=' '.join(fields)
+        changed_plane.write_text('\n'.join(contents)+'\n')
+        rejected=run('denser-eos-changed-original-column',density_options,False,denser_arguments)
+        if 'potential values or masks changed' not in rejected['message']:raise AssertionError(rejected)
+        changed_plane.write_text(saved_plane)
         # A long history must neither invalidate a checkpoint nor consume the
         # next invocation's step budget. Change counters in a test fixture only;
         # keep every physical variable and input identity exactly as written.

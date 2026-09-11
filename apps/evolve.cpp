@@ -100,12 +100,12 @@ template<class T> T number(const char* text) {
 int main(int argc,char** argv) {
   using namespace ember;
   if(argc==2 && std::string(argv[1])=="--help") {
-    std::puts("usage: ember-evolve [points [duration_years [initial_step_years [tolerance_scale [nuclear_model [transport [atmosphere [eos [criterion]]]]]]]]]\nDefaults: 512, 1e8, 1e7, 1, sfii-svh, wd, cond-corrected. Fixed baryonic 0.1 Msun, X=.7 Z=.02 initially.\nNuclear: sfii-svh, sfii-debye, sfii-legacy-screening, legacy.\nTransport: wd (weakly damped 2021 conduction), classic, undamped, none, early (historical bounded physics).\nAtmosphere: cond-corrected, grey-convective, cond-y076, cond-top002, cond-alpha15, nongrey:/path/to/atmosphere.dat.\nEOS: proxy (historical H/He), metal:/path/to/family.dat (GS98 H/He3). Convection criterion: schwarzschild (default), ledoux, ledoux-diffusive (Langer alpha=.1, Kippenhahn alpha=1).\nImplicit pp burning and instantaneous convective mixing, step-doubling control.\nExtended X/Z opacity with elemental isotope mapping; grey convective composition correction anchored to solar COND.\nJSON on stdout, progress on stderr; exit zero only at requested duration.\nTrailing options: --checkpoint FILE writes the latest accepted state atomically; use a new path. --restart FILE restores internal variables and next step; duration is the target age. Physics, tolerances, executable bytes and original tables must match. Invoke with an executable file path.\n--checkpoint-after N writes once after N accepted steps in this invocation while continuing the calculation, for exact restart comparisons. Restart JSON history contains only the continued segment.\n--opacity-directory DIR selects a separately validated AESOPUS/TOPS family for extended transport; default is the original data/opacity. Selection and every source plane are bound to restart identity.\n--thermal-neutrinos none|plasma-hrw selects thermal losses (default none); plasma-hrw is plasma decay only, not all thermal channels.\n--step-workers 1|2 uses one or two CPU workers for the independent full-step and half-step estimates (default 1). Physics, accuracy tests and accepted-state ordering are unchanged.\n--opacity-extension-restart FILE continues a saved state after a verified hot-opacity extension. Requires --restart-source-executable FILE, --restart-source-opacity DIR and --opacity-directory DIR. The original checkpoint and inputs are validated, all original opacity entries must be retained exactly, and only lower-H high-temperature planes may be added. The current executable must be independently checked against the source executable. This explicitly reported extension is separate from an exact --restart.\n--atmosphere-extension-restart FILE continues after appending hotter rows to a nongrey atmosphere. Requires --restart-source-executable FILE and --restart-source-atmosphere FILE. Every original coordinate, source value, missing-state mask and physical label must be retained exactly; all other inputs stay fixed. The supplied atmosphere is the new table. Executable compatibility must be checked separately.\n--eos-temperature-extension-restart FILE continues after appending hotter material rows to a metal EOS family. Requires --restart-source-executable FILE and --restart-source-eos FILE. All original potentials, masks, composition and density axes must be identical. Other physical inputs remain fixed. New source thermodynamics and executable compatibility require independent checks.");return 0;
+    std::puts("usage: ember-evolve [points [duration_years [initial_step_years [tolerance_scale [nuclear_model [transport [atmosphere [eos [criterion]]]]]]]]]\nDefaults: 512, 1e8, 1e7, 1, sfii-svh, wd, cond-corrected. Fixed baryonic 0.1 Msun, X=.7 Z=.02 initially.\nNuclear: sfii-svh, sfii-debye, sfii-legacy-screening, legacy.\nTransport: wd (weakly damped 2021 conduction), classic, undamped, none, early (historical bounded physics).\nAtmosphere: cond-corrected, grey-convective, cond-y076, cond-top002, cond-alpha15, nongrey:/path/to/atmosphere.dat.\nEOS: proxy (historical H/He), metal:/path/to/family.dat (GS98 H/He3). Convection criterion: schwarzschild (default), ledoux, ledoux-diffusive (Langer alpha=.1, Kippenhahn alpha=1).\nImplicit pp burning and instantaneous convective mixing, step-doubling control.\nExtended X/Z opacity with elemental isotope mapping; grey convective composition correction anchored to solar COND.\nJSON on stdout, progress on stderr; exit zero only at requested duration.\nTrailing options: --checkpoint FILE writes the latest accepted state atomically; use a new path. --restart FILE restores internal variables and next step; duration is the target age. Physics, tolerances, executable bytes and original tables must match. Invoke with an executable file path.\n--checkpoint-after N writes once after N accepted steps in this invocation while continuing the calculation, for exact restart comparisons. Restart JSON history contains only the continued segment.\n--opacity-directory DIR selects a separately validated AESOPUS/TOPS family for extended transport; default is the original data/opacity. Selection and every source plane are bound to restart identity.\n--thermal-neutrinos none|plasma-hrw selects thermal losses (default none); plasma-hrw is plasma decay only, not all thermal channels.\n--step-workers 1|2 uses one or two CPU workers for the independent full-step and half-step estimates (default 1). Physics, accuracy tests and accepted-state ordering are unchanged.\n--opacity-extension-restart FILE continues a saved state after a verified hot-opacity extension. Requires --restart-source-executable FILE, --restart-source-opacity DIR and --opacity-directory DIR. The original checkpoint and inputs are validated, all original opacity entries must be retained exactly, and only lower-H high-temperature planes may be added. The current executable must be independently checked against the source executable. This explicitly reported extension is separate from an exact --restart.\n--atmosphere-extension-restart FILE continues after appending hotter rows to a nongrey atmosphere. Requires --restart-source-executable FILE and --restart-source-atmosphere FILE. Every original coordinate, source value, missing-state mask and physical label must be retained exactly; all other inputs stay fixed. The supplied atmosphere is the new table. Executable compatibility must be checked separately.\n--eos-temperature-extension-restart FILE continues after appending hotter material rows to a metal EOS family. Requires --restart-source-executable FILE and --restart-source-eos FILE. All original potentials, masks, composition and density axes must be identical. Other physical inputs remain fixed. New source thermodynamics and executable compatibility require independent checks.\n--eos-density-extension-restart FILE applies the same checks while appending only higher-density potential columns; temperatures, original potentials and masks must be identical.");return 0;
   }
   try {
     std::string restart_path,checkpoint_path,opacity_directory,thermal_neutrinos;
     std::string restart_source_executable,restart_source_opacity,restart_source_atmosphere,restart_source_eos;
-    bool opacity_extension=false,atmosphere_extension=false,eos_extension=false;
+    bool opacity_extension=false,atmosphere_extension=false,eos_extension=false,eos_density_extension=false;
     std::size_t added_opacity_planes=0,added_atmosphere_states=0,added_eos_states=0;
     unsigned step_workers=1;
     std::size_t checkpoint_after=0;bool after_requested=false,flags_started=false;
@@ -124,6 +124,9 @@ int main(int argc,char** argv) {
         }
         else if(option=="--eos-temperature-extension-restart" && restart_path.empty()) {
           restart_path=argv[++i];eos_extension=true;
+        }
+        else if(option=="--eos-density-extension-restart" && restart_path.empty()) {
+          restart_path=argv[++i];eos_extension=true;eos_density_extension=true;
         }
         else if(option=="--restart-source-eos" && restart_source_eos.empty())restart_source_eos=argv[++i];
         else if(option=="--restart-source-atmosphere" && restart_source_atmosphere.empty())restart_source_atmosphere=argv[++i];
@@ -156,7 +159,7 @@ int main(int argc,char** argv) {
     } else if(eos_extension) {
       if(restart_source_executable.empty() || restart_source_eos.empty()
           || !restart_source_opacity.empty() || !restart_source_atmosphere.empty())
-        throw std::invalid_argument("eos-temperature-extension-restart requires source executable and source EOS");
+        throw std::invalid_argument("EOS extension restart requires source executable and source EOS");
     } else if(!restart_source_executable.empty() || !restart_source_opacity.empty() || !restart_source_atmosphere.empty() || !restart_source_eos.empty())
       throw std::invalid_argument("restart source options require an explicit extension restart");
     if(thermal_neutrinos.empty())thermal_neutrinos="none";
@@ -204,7 +207,7 @@ int main(int argc,char** argv) {
     else selected_eos=std::make_unique<CompositionHelmholtzEos>(data+(early?"/eos/freeeos300_hhe_composition.dat":"/eos/freeeos300_hhe_extended.dat"),HelmholtzTableEos::Mixture::allow_documented_proxy);
     const Eos& eos=*selected_eos;
     if(eos_extension && !eos_model.starts_with("metal:"))
-      throw std::invalid_argument("EOS temperature extension requires a metal EOS family");
+      throw std::invalid_argument("EOS extension requires a metal EOS family");
     AesopusOpacity low(data+"/opacity/aesopus21_gs98_z020.dat");
     TopsOpacity high(data+"/opacity",TopsOpacity::Grid::composition);
     BlendedOpacity old_radiative(low,high,4.4,4.5);
@@ -293,7 +296,8 @@ int main(int argc,char** argv) {
       }
       if(eos_extension) {
         MetalHelmholtzEos original(restart_source_eos,HelmholtzTableEos::Mixture::allow_documented_proxy);
-        added_eos_states=dynamic_cast<const MetalHelmholtzEos&>(eos).check_temperature_extension(original);
+        const auto& next=dynamic_cast<const MetalHelmholtzEos&>(eos);
+        added_eos_states=eos_density_extension?next.check_density_extension(original):next.check_temperature_extension(original);
         source_selections[3]="metal:"+restart_source_eos;
         source_identities=driver::input_identities(restart_source_executable,data,atmosphere_model,source_selections[3],opacity_directory);
         source_identities["thermal_neutrinos"]=thermal_neutrinos;
@@ -409,7 +413,10 @@ int main(int argc,char** argv) {
       std::printf("}");
     }
     if(eos_extension) {
-      std::printf(",\n\"eos_temperature_extension\":{\"scope\":\"explicit continuation with hotter EOS rows; all original material potentials, masks, axes and compositions retained; source and executable compatibility require independent checks\",\"added_states\":%zu,\"source_executable\":",added_eos_states);
+      if(eos_density_extension)
+        std::printf(",\n\"eos_density_extension\":{\"scope\":\"explicit continuation with denser EOS columns; all original material potentials, masks, axes and compositions retained; source and executable compatibility require independent checks\",\"added_states\":%zu,\"source_executable\":",added_eos_states);
+      else
+        std::printf(",\n\"eos_temperature_extension\":{\"scope\":\"explicit continuation with hotter EOS rows; all original material potentials, masks, axes and compositions retained; source and executable compatibility require independent checks\",\"added_states\":%zu,\"source_executable\":",added_eos_states);
       json_string(restart_source_executable);
       std::printf(",\"source_eos\":");json_string(restart_source_eos);
       std::printf("}");
