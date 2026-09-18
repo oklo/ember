@@ -18,10 +18,10 @@ temperature have passed local maxima.
 A continuation using a white-dwarf atmosphere develops a helium-3 burning pulse.
 Finite-rate mixing and consistent mass volumes retain ignition on three spatial
 grids, but the pulse's strength and timing depend on resolution. The finest
-diagnostic calculation reaches **8143 years** from the model before shell
+diagnostic calculation reaches **9313 years** from the model before shell
 convection. Its surface is helium enriched, with hydrogen mass fraction
-**X = 0.8159** and effective temperature **4728 K**. Nuclear power is
-**1.669e34 erg/s**; the shell remains active. The flash maximum, shutdown
+**X = 0.8159** and effective temperature **4732 K**. Nuclear power is
+**4.826e34 erg/s**; the shell remains active. The flash maximum, shutdown
 and subsequent cooling remain unresolved.
 
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
@@ -35,7 +35,9 @@ from the pulse starting model; its merger timing and energy remain uncertain.
 A fixed-duration timestep comparison supports retained steps of at most
 **25 years** during the more gradual pulse evolution, with **0.5%** nuclear-energy
 refinement and the existing structure, composition and conservation checks.
-The paper states the comparison and its limits. Current work follows the active
+A short interior mixing readjustment also passes a two-step/four-step
+comparison: deposited nuclear energy agrees to **0.006375%**. The paper states
+the comparisons and their limits. Current work follows the active
 burning shell toward white-dwarf cooling and tests the remaining physical
 approximations. Comparisons with the published LBA97 result and MESA distinguish
 the physical assumptions of each track.
