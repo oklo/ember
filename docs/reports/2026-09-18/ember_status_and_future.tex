@@ -726,18 +726,80 @@ a rising power-weighted temperature instead reflects the shift in the
 location of the strongest burning. The onset of the connection and its
 resolution dependence remain to be established.
 
-At 6803 yr, further evolution requires an atmosphere with appreciable helium.
-A trial connection of envelope regions raises the requested surface helium
-mass fraction to 0.09283, exceeding the hydrogen-atmosphere approximation's
-limit of 0.005. This trial is not an accepted prediction of enrichment: the
-converged surface still has $X=0.9984$. The required effective temperature and
-gravity lie within the existing table; composition is the missing coordinate.
+The envelope becomes helium enriched when shell convection connects to
+surface convection. With finite convective transport throughout the connected
+envelope, the 1695-point calculation reaches 8143 yr, with
+$T_{\rm eff}=4728$ K, surface $X=0.8159$, $X_3=0.007283$ and
+$Z=5.562\times10^{-16}$. The envelope readjustment passes a one-year
+comparison of two half-year steps with four quarter-year steps: integrated
+nuclear energy agrees to 0.003514\%, and the settled structure, composition
+and remaining hydrogen pass the stated checks. This comparison constrains
+the completed readjustment; it does not resolve its earliest transient.
+The following 1338 yr pass the full-step/two-half-step checks at every
+accepted interval. Nuclear power at this endpoint is
+$1.669\times10^{34}$ erg s$^{-1}$; the shell remains active.
+Below 1.8 MK, species exchange inside these convective layers is represented
+by the convective flux, with microscopic separation neglected there.
+Material conduction and composition enthalpy are retained; cold radiative
+exchange still requires a supported microscopic transport calculation.
+
+During the more gradual evolution, time refinement permits a 0.5\% difference
+in deposited nuclear energy and 0.1\% in structure and endpoint nuclear power,
+with retained timesteps at most 25 yr. Over a fixed 100 yr interval, four
+25 yr steps differ from a small-step reference by at most 0.03119\% in
+structure, 0.02177\% in nuclear power and 0.2881\% in deposited energy.
+The original nonlinear conservation checks remain unchanged. This comparison
+supports local time accuracy; it does not establish convergence of the complete
+pulse. The deposited heat is integrated consistently with the implicit stellar
+equations, rather than changing only the reported luminosity integral.
+
+The enriched envelope requires a hydrogen--helium atmosphere.
 A mixed atmosphere at $X=0.9072$, $X_3=0.004$, $T_{\rm eff}=4600$ K and
 $\log g=5.65$ satisfies independent flux, hydrostatic and chemical checks.
-At optical depth 100 it gives $T=5793$ K and
-$P_{\rm gas}=4.757\times10^7$ dyn cm$^{-2}$. The surrounding composition grid
-and its interpolation require validation before this boundary can support
-further stellar evolution.
+At the stellar matching depth $\tau_{\rm Ross}=25.12$ it gives $T=5440$ K and
+$P_{\rm gas}=3.136\times10^7$ dyn cm$^{-2}$. A surrounding hydrogen--helium-4
+grid contains thirty solved columns covering $0.78\leq X\leq0.9955$,
+$4500\leq T_{\rm eff}\leq5500$ K and $5.55\leq\log g\leq5.80$.
+At $X=0.8215$ and $X_3=0.007105$, an independent atmosphere with the actual
+isotopes agrees with the grid interpolation to 0.08784\% in matching temperature
+and 0.03686\% in pressure. A separately solved helium-4 mixture that preserves
+element number ratios, with the corresponding gravity adjustment, differs from
+the actual-isotope calculation by only 0.0003135\% and 0.0007755\%, respectively.
+Thus interpolation contributes more than the isotope approximation at this
+point. Five independent columns give largest differences of 0.08784\% in
+temperature and 1.094\% in pressure; these local comparisons do not bound the
+whole grid. At $X_3=0.0075$, $T_{\rm eff}=4500$ K and $\log g=5.80$,
+a second isotope comparison gives differences of 0.00009978\% in temperature
+and 0.0009838\% in pressure. Lower-boundary comparisons at 5000 and 5500 K
+change the matching temperature by at most 0.02452\% and gas pressure by
+at most 0.03430\% at the stellar matching depth. These are local measurements.
+These stellar results use the differential helium response of this grid on
+the published hydrogen boundary. The difference between the absolute
+atmosphere prescriptions, and the pulse's spatial convergence, remain
+uncertainties; this extension is not selected for the main evolutionary track.
+
+The surface abundances describe an isolated, nonrotating model without
+external accretion or magnetic fields. Accretion can maintain atmospheric
+metals against settling; the result depends on the supply rate, mixed-envelope
+mass and settling time \cite{bauer19}. The finite-convection pulse calculation
+sets semiconvective and thermohaline mixing coefficients to zero. The reaction
+$^3$He+$^3$He$\rightarrow{}^4$He+$2p$ can lower the mean molecular weight and
+produce an inversion that drives thermohaline mixing, as found in red-giant
+models \cite{charbonnel07}. Whether this occurs strongly enough to alter the
+present shell requires an assessment of its composition gradient and transport
+times, rather than assuming that the highly stratified envelope persists.
+
+There is also a difference between the atmosphere prescriptions themselves.
+Near $T_{\rm eff}=4559$ K and $\log g=5.686$, at a helium mass fraction of
+0.0045 and the same matching depth, the TLUSTY boundary gives a temperature
+3.023\% lower and a gas pressure 90.99\% higher than the hydrogen boundary
+from Rohrmann et al.\ \cite{rohrmann12}.
+Joining their absolute values over a narrow composition interval would impose
+a substantial change of boundary prescription. A comparison instead applies
+the calculated mixed-to-hydrogen-rich temperature and pressure ratios to the
+hydrogen boundary. This retains its normalization, but requires testing whether
+the composition response transfers between prescriptions. The atmosphere
+dependence of the pulse therefore remains unresolved.
 
 A related physical example occurs in slowly accreting white dwarfs: helium-3
 can accumulate through incomplete proton--proton burning and ignite a convective
@@ -2445,6 +2507,10 @@ Convection, Energy Conservation, Automatic Differentiation, and Infrastructure.
 \emph{ApJS}, 265, 15. \url{https://arxiv.org/abs/2208.03651}.
 \bibitem{mesa_atm} MESA documentation. Table atmospheres.
 \url{https://docs.mesastar.org/en/latest/atm/table.html}.
+\bibitem{rohrmann12} Rohrmann, R. D., Althaus, L. G., Garc\'ia-Berro, E.,
+C\'orsico, A. H., \& Miller Bertolami, M. M. (2012).
+Outer boundary conditions for evolving cool white dwarfs.
+\href{https://arxiv.org/abs/1209.2452}{arXiv:1209.2452}.
 
 \bibitem{seaton05} Seaton, M. J. (2005).
 OP data on CD for mean opacities and radiative accelerations.
@@ -2524,6 +2590,13 @@ Element diffusion in the solar interior. ApJ, 421, 828.
 \& Paxton, B. (2013). MESA Models of Classical Nova Outbursts: The Multicycle
 Evolution and Effects of Convective Boundary Mixing. \emph{ApJ}, 762, 8.
 \href{https://doi.org/10.1088/0004-637X/762/1/8}{Published article}.
+\bibitem{bauer19} Bauer, E. B., \& Bildsten, L. (2019).
+Polluted White Dwarfs: Mixing Regions and Diffusion Timescales.
+\emph{ApJ}, 872, 96. \href{https://arxiv.org/abs/1812.09602}{arXiv:1812.09602}.
+\bibitem{charbonnel07} Charbonnel, C., \& Zahn, J.-P. (2007).
+Thermohaline mixing: A physical mechanism governing the photospheric
+composition of low-mass giants. \emph{A\&A}, 467, L15.
+\href{https://arxiv.org/abs/astro-ph/0703302}{arXiv:astro-ph/0703302}.
 \bibitem{paxton11} Paxton, B., et al. (2011).
 Modules for Experiments in Stellar Astrophysics (MESA).
 \emph{ApJS}, 192, 3.

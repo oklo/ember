@@ -18,20 +18,27 @@ temperature have passed local maxima.
 A continuation using a white-dwarf atmosphere develops a helium-3 burning pulse.
 Finite-rate mixing and consistent mass volumes retain ignition on three spatial
 grids, but the pulse's strength and timing depend on resolution. The finest
-diagnostic calculation reaches **6803 years** from the model before shell
-convection and stops when a trial surface composition exceeds the available
-atmosphere coverage. The flash maximum, shutdown and subsequent cooling remain
-unresolved.
+diagnostic calculation reaches **8143 years** from the model before shell
+convection. Its surface is helium enriched, with hydrogen mass fraction
+**X = 0.8159** and effective temperature **4728 K**. Nuclear power is
+**1.669e34 erg/s**; the shell remains active. The flash maximum, shutdown
+and subsequent cooling remain unresolved.
 
-A mixed hydrogen–helium atmosphere now passes independent physical checks.
-The enclosing composition grid and its interpolation are being validated.
-A separate gradual-mixing sensitivity reaches **3004 years** from the pulse
-starting model; its merger timing and energy remain uncertain.
+Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
+**X = 0.78–0.9955** and **log g = 5.55–5.80**. Independent calculations check
+interpolation, the helium-isotope approximation and lower-boundary sensitivity.
+The pulse continuation uses the calculated composition response on a published
+hydrogen boundary; its atmosphere dependence and spatial convergence remain
+uncertainties. A separate gradual-mixing sensitivity reaches **3004 years**
+from the pulse starting model; its merger timing and energy remain uncertain.
 
-Current work addresses hydrogen–helium atmosphere coverage, mixing across
-composition gradients, nuclear burning and energy conservation during the pulse.
-The paper compares Ember with the published LBA97 result and MESA calculations,
-and distinguishes the physical assumptions of each track.
+A fixed-duration timestep comparison supports retained steps of at most
+**25 years** during the more gradual pulse evolution, with **0.5%** nuclear-energy
+refinement and the existing structure, composition and conservation checks.
+The paper states the comparison and its limits. Current work follows the active
+burning shell toward white-dwarf cooling and tests the remaining physical
+approximations. Comparisons with the published LBA97 result and MESA distinguish
+the physical assumptions of each track.
 
 This publication updates the paper and its figures. The checked-in source is
 an earlier development state; source and numerical input updates for the new

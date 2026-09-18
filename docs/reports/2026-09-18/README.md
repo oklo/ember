@@ -1,13 +1,16 @@
-# Ember working paper
+# Ember working paper — September 18, 2026
 
-[Read the draft](ember_status_and_future.pdf).
+[Read the PDF](ember_status_and_future.pdf).
 
-The paper compares the 0.1-solar-mass Ember track with LBA97 and MESA,
-including the LBA97 opacity-map comparison and a conditional lifetime timeline.
-It describes the helium-3 pulse, the mixed-atmosphere coverage requirement and
-mixing sensitivity tests. The full pulse and subsequent cooling remain unresolved.
+The diagnostic helium-3 pulse calculation reaches **8143 yr**, **4728 K** and
+surface **X = 0.8159** after helium mixes through the convective envelope.
+The paper describes its checked readjustment, thirty-column hydrogen–helium
+atmosphere grid, and the fixed-duration comparison supporting the stated
+timestep accuracy. The shell remains active; atmosphere dependence and spatial
+convergence remain unresolved. The selected main track reaches **4.002 Tyr**.
 
-The supplied LaTeX and figure PDFs reproduce the document layout. Build with
-`tectonic ember_status_and_future.tex` (tested with cached packages). Numerical
-input files and executable changes for all development calculations are not
-included in this paper update.
+This directory contains the PDF, LaTeX inputs and included figure PDFs.
+The existing figures, including the LBA97 opacity comparison, are retained.
+Standalone pulse diagrams are separate from this draft.
+
+Rebuild from this directory with `tectonic --keep-logs ember_status_and_future.tex`.
