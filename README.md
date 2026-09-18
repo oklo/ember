@@ -18,10 +18,10 @@ temperature have passed local maxima.
 A continuation using a white-dwarf atmosphere develops a helium-3 burning pulse.
 Finite-rate mixing and consistent mass volumes retain ignition on three spatial
 grids, but the pulse's strength and timing depend on resolution. The finest
-diagnostic calculation reaches **9313 years** from the model before shell
+diagnostic calculation reaches **9891 years** from the model before shell
 convection. Its surface is helium enriched, with hydrogen mass fraction
-**X = 0.8159** and effective temperature **4732 K**. Nuclear power is
-**4.826e34 erg/s**; the shell remains active. The flash maximum, shutdown
+**X = 0.8159** and effective temperature **4738 K**. Nuclear power is
+**1.652e35 erg/s**; the shell remains active. The flash maximum, shutdown
 and subsequent cooling remain unresolved.
 
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
