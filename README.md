@@ -4,8 +4,8 @@ Ember is a one-dimensional stellar evolution code written in C++23. It follows
 the structure, composition and energy transport of very low-mass stars over
 trillions of years.
 
-[Read the current working paper](docs/reports/2026-09-17/ember_status_and_future.pdf)
-([LaTeX and figure files](docs/reports/2026-09-17/README.md)).
+[Read the current working paper](docs/reports/2026-09-18/ember_status_and_future.pdf)
+([LaTeX and figure files](docs/reports/2026-09-18/README.md)).
 
 ## Research status
 
@@ -22,6 +22,11 @@ diagnostic calculation reaches **6803 years** from the model before shell
 convection and stops when a trial surface composition exceeds the available
 atmosphere coverage. The flash maximum, shutdown and subsequent cooling remain
 unresolved.
+
+A mixed hydrogen–helium atmosphere now passes independent physical checks.
+The enclosing composition grid and its interpolation are being validated.
+A separate gradual-mixing sensitivity reaches **3004 years** from the pulse
+starting model; its merger timing and energy remain uncertain.
 
 Current work addresses hydrogen–helium atmosphere coverage, mixing across
 composition gradients, nuclear burning and energy conservation during the pulse.
