@@ -36,14 +36,17 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2010-point** sequence reaches **116.7 thousand years**, **5753 K** and
-nuclear power **3.238e32 erg/s**. Power declines by **4.729%** during the
-latest **4400 years**. All **11** intervals in this segment pass independent
+The **2010-point** sequence reaches **122.7 thousand years**, **5818 K** and
+nuclear power **3.043e32 erg/s**. Power declines by **2.794%** during the
+latest **2800 years**. All **seven** intervals in this segment pass independent
 timestep, composition and energy checks. Shell burning continues. This portion
-uses **11.27 CPU minutes**, including timestep comparisons.
+uses **11.58 CPU minutes**, including timestep comparisons.
 
 A separate onset calculation with finite mixing throughout the convective
-envelope reaches **1619 years**, **4624 K** and nuclear power **2.706e35 erg/s**.
+envelope reaches **1713 years**, **4621 K** and nuclear power **6.828e34 erg/s**.
+Power reaches a sampled maximum of **3.719e35 erg/s** near **1642 years**,
+then declines **81.64%**. This is a rise and decline on one mass grid,
+not an established converged peak.
 A **3.573-year** comparison of **8** and **16** steps passes the original physical
 checks, with nuclear energy differing by **0.1222%** and the same final convection.
 The pulse maximum and a complete, spatially converged pulse remain unresolved.
