@@ -4,8 +4,8 @@ Ember is a one-dimensional stellar evolution code written in C++23. It follows
 the structure, composition and energy transport of very low-mass stars over
 trillions of years.
 
-[Read the current working paper](docs/reports/2026-09-18/ember_status_and_future.pdf)
-([LaTeX and figure files](docs/reports/2026-09-18/README.md)).
+[Read the current working paper](docs/reports/2026-09-19/ember_status_and_future.pdf)
+([LaTeX and figure files](docs/reports/2026-09-19/README.md)).
 
 ## Research status
 
@@ -17,12 +17,19 @@ temperature have passed local maxima.
 
 A continuation using a white-dwarf atmosphere develops a helium-3 burning pulse.
 Finite-rate mixing and consistent mass volumes retain ignition on three spatial
-grids, but the pulse's strength and timing depend on resolution. The finest
-diagnostic calculation reaches **12.76 thousand years** from the model before shell
+grids, but the pulse's strength and timing depend on resolution. The 1695-point
+diagnostic calculation reaches **13.45 thousand years** from the model before shell
 convection. Its surface is helium enriched, with hydrogen mass fraction
-**X = 0.8159** and effective temperature **4841 K**. Nuclear power is
-**1.970e34 erg/s**; the shell remains active. The flash maximum, shutdown
+**X = 0.8159** and effective temperature **4848 K**. Nuclear power is
+**2.539e34 erg/s**; the shell remains active. The flash maximum, shutdown
 and subsequent cooling remain unresolved.
+
+A local refinement to **1923** mass points distributes half the burning power
+over **15** cells instead of **two** in a matched **101-year** comparison.
+Deposited nuclear energy is **21.06%** lower and endpoint nuclear power is
+**37.53%** lower, while surface temperatures differ by only **0.07072 K**.
+An initial structural readjustment means this measures both resolution and
+restart effects; it does not establish spatial convergence.
 
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
 **X = 0.78–0.9955** and **log g = 5.55–5.80**. Independent calculations check
