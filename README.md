@@ -31,6 +31,12 @@ Deposited nuclear energy is **55.17%** lower and endpoint nuclear power is
 An initial structural readjustment means this measures both resolution and
 restart effects; it does not establish spatial convergence.
 
+The **1923-point** sequence reaches **14.60 thousand years**, **4858 K** and
+nuclear power **7.712e33 erg/s**. Power declines by **25.75%** during the
+additional **1155 years**, with all timestep and conservation checks passing.
+The computed segment ends near the lower-gravity limit of the atmosphere
+tables, at **log g = 5.425**. Shell burning continues.
+
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
 **X = 0.78–0.9955** and **log g = 5.55–5.80**. Independent calculations check
 interpolation, the helium-isotope approximation and lower-boundary sensitivity.
