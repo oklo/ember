@@ -31,22 +31,27 @@ Deposited nuclear energy is **55.17%** lower and endpoint nuclear power is
 An initial structural readjustment means this measures both resolution and
 restart effects; it does not establish spatial convergence.
 
-The **1923-point** sequence reaches **14.60 thousand years**, **4858 K** and
-nuclear power **7.712e33 erg/s**. Power declines by **25.75%** during the
-additional **1155 years**, with all timestep and conservation checks passing.
-The computed segment ends near the lower-gravity limit of the atmosphere
-tables, at **log g = 5.425**. Shell burning continues.
+A further refinement to **2010** mass points changes released nuclear energy
+by **1.468%** and endpoint nuclear power by **1.980%** over a matched
+**978.3-year** interval. This supports the late burning segment; the earlier
+onset and peak remain uncertain.
+
+The **2010-point** sequence reaches **17.01 thousand years**, **4870 K** and
+nuclear power **5.397e33 erg/s**. Power declines by **30.95%** during the
+additional **2584 years**. All **56** intervals pass independent timestep,
+composition and energy checks. Shell burning continues.
 
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
 **X = 0.78–0.9955** and **log g = 5.55–5.80**. Independent calculations check
 interpolation, the helium-isotope approximation and lower-boundary sensitivity.
-Nine additional columns provide lower-gravity coverage at **4700–5500 K**,
-extending the local mixed-atmosphere grid to **log g = 5.40**. The expanding
-star crosses the published hydrogen reference limit at **log g = 5.5** using
-an explicitly inferred local continuation. A matched **500-year** comparison
-with a calculated gravity response changes surface temperature by **5.697 K**
-and deposited nuclear energy by **0.00001530%**; it tests the gravity interval
-visited, ending near **log g = 5.461**. Independent **4800 K** sources
+The local mixed-atmosphere grid now contains **36** solved columns covering
+**4700–5500 K** and **log g = 5.25–5.80**. The absolute hydrogen reference
+below **log g = 5.5** remains an explicitly inferred continuation. A matched
+**10-year** comparison of two reference prescriptions changes surface
+temperature by **5.707 K** and luminosity by **0.4691%**, with negligible
+change in nuclear burning. This is a local sensitivity test, not a bound
+on uncertainty across the whole atmosphere grid.
+Independent **4800 K** sources
 check the helium correction to **0.09612%** in temperature and **0.02421%** in
 pressure at that test point.
 The pulse continuation uses the calculated composition response on a published
@@ -54,12 +59,13 @@ hydrogen boundary; its atmosphere dependence and spatial convergence remain
 uncertainties. A separate gradual-mixing sensitivity reaches **3004 years**
 from the pulse starting model; its merger timing and energy remain uncertain.
 
-A fixed-duration timestep comparison supports retained steps of at most
-**25 years** during the more gradual pulse evolution, with **0.5%** nuclear-energy
-refinement and the existing structure, composition and conservation checks.
-A separate **500-year** test of a larger energy allowance uses **87** intervals
-instead of **156**, but narrowly exceeds the predeclared local structure-error
-limit, so the **0.5%** rule is retained.
+A timestep criterion that accounts for steep spatial gradients reduces the
+required stellar solves from **111** to **81** over **556.2 years** on the
+2010-point grid. Released nuclear energy differs by **0.05228%** and endpoint
+nuclear power by **0.02480%**. Separate checks constrain the burning-layer
+temperature, energy profile, composition and conservation. Retained steps
+remain at most **25 years**; the nuclear-energy refinement allowance is
+**0.5%**. This criterion is selected for the late pulse continuation.
 A short interior mixing readjustment also passes a two-step/four-step
 comparison: deposited nuclear energy agrees to **0.006375%**. The paper states
 the comparisons and their limits. Current work follows the active
@@ -67,7 +73,7 @@ burning shell toward white-dwarf cooling and tests the remaining physical
 approximations. Comparisons with the published LBA97 result and MESA distinguish
 the physical assumptions of each track.
 
-This publication updates the paper and its figures. The checked-in source is
+This publication updates the paper and README; the figures are unchanged. The checked-in source is
 an earlier development state; source and numerical input updates for the new
 calculations are still being prepared.
 

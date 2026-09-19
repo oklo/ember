@@ -2,16 +2,15 @@
 
 [Read the PDF](ember_status_and_future.pdf).
 
-The diagnostic helium-3 pulse calculation with **1923** mass points reaches
-**14.60 thousand years**, **4858 K** and surface **X = 0.8159** after helium mixes
-through the convective envelope. Its nuclear power falls by **25.75%** during
-the latest **1155 yr**, to **7.712e33 erg/s**. The burning shell remains active.
-The paper includes a comparison of local mass
-resolution: over **688.5 years**, refinement reduces deposited nuclear energy by
-**55.17%** and endpoint nuclear power by **59.09%**, with nearly identical surface
-temperatures. An initial structural readjustment prevents treating this as a
-clean convergence measurement. Pulse strength, shutdown and subsequent cooling
-remain unresolved. The selected main track reaches **4.002 Tyr**.
+The diagnostic helium-3 pulse calculation with **2010** mass points reaches
+**17.01 thousand years**, **4870 K** and surface **X = 0.8158**. Its nuclear
+power falls by **30.95%** during the latest **2584 yr**, to **5.397e33 erg/s**;
+shell burning continues. All **56** intervals pass independent checks.
+A matched local refinement changes deposited nuclear energy by **1.468%**
+and endpoint nuclear power by **1.980%** over **978.3 yr**. This supports
+the later shell-burning evolution; the pulse onset and peak remain uncertain.
+The draft also describes the tested timestep method: **81** versus **111**
+structure solves over **556.2 yr**, with nuclear energy differing by **0.05228%**.
 
 This directory contains the PDF, LaTeX inputs and included figure PDFs.
 The existing figures, including the LBA97 opacity comparison, are retained.

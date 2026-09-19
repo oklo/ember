@@ -750,7 +750,7 @@ on subsequent transport and thermal evolution.
 Below the published hydrogen reference atmosphere's lower boundary,
 $\log g=5.5$, a bounded continuation uses the slope of its lowest two
 gravity rows in logarithmic matching temperature and pressure.
-The inferred reference extends to $\log g=5.4$ over 4700--5500 K.
+The inferred reference extends to $\log g=5.25$ over 4700--5500 K.
 A matched 500 yr comparison with the gravity response from calculated
 atmospheres reaches $\log g=5.461$. The alternative is 5.697 K cooler and
 0.4703\% less luminous, while deposited nuclear energy differs by
@@ -758,6 +758,13 @@ atmospheres reaches $\log g=5.461$. The alternative is 5.697 K cooler and
 Every retained response in both histories passes independent time and
 conservation checks. These small measured interior differences support a
 bounded continuation, but do not establish accuracy throughout the extension.
+A 10 yr comparison near $\log g=5.427$ with the complete lower-gravity
+source grid gives a surface-temperature difference of $-5.707$ K and a
+luminosity difference of $-0.4691\%$, with negligible change in nuclear
+burning. The two inferred absolute references differ by up to 2.189\%
+in matching temperature and 15.04\% in pressure at the tabulated points;
+the short stellar comparison does not bound their effect over the full
+gravity range.
 Below 1.8 MK, species exchange inside these convective layers is represented
 by the convective flux, with microscopic separation neglected there.
 Material conduction and composition enthalpy are retained; cold radiative
@@ -813,6 +820,35 @@ $X=0.8159$, with $X_3=0.007279$ and $Z=5.570\times10^{-16}$.
 The computed segment ends near the lower-gravity limit of the atmosphere
 tables, at $\log g=5.425$.
 
+Doubling the mass resolution again over $0.936<m/M<0.950$ gives
+2010 points. A matched 978.3 yr comparison beginning at
+$1.345\times10^4$ yr changes deposited nuclear energy by $-1.468\%$
+and endpoint nuclear power by $-1.980\%$, with a surface-temperature
+difference of 0.01021 K. Half the burning power occupies 35 volumes
+on the 2010-point grid and 17 on the 1923-point grid. This closer agreement
+supports the later shell-burning evolution; it does not establish the
+accuracy of the pulse onset or peak. The initial response to remapping
+is included in the energy comparison and recorded separately.
+
+A steep temperature front below the burning shell constrains the timestep
+at late times. Allowing temperature errors to scale with the local spatial
+gradient, while separately checking the burning temperature and stored-energy
+distribution, reduces a 556.2 yr calculation on the 2010-point grid from
+111 to 81 structure solves. Deposited nuclear energy differs by 0.05228\%
+and endpoint nuclear power by 0.02480\%; the largest fixed-mass logarithmic
+structure difference is 0.003286. Species conservation, the cell energy
+balance, and the existing local nuclear-energy and luminosity checks remain
+unchanged. This timestep prescription is used for the subsequent late-pulse
+continuation; the comparison does not determine the accuracy of the earlier
+flash peak.
+
+The 2010-point sequence reaches $1.701\times10^4$ yr and
+$T_{\rm eff}=4870$ K. During its final 2584 yr, nuclear power falls by
+30.95\% to $5.397\times10^{33}$ erg s$^{-1}$. All 56 accepted intervals
+pass the stated timestep and conservation checks. The surface composition
+is $X=0.8158$, $X_3=0.007278$ and $Z=5.573\times10^{-16}$.
+Shell burning remains active.
+
 The enriched envelope requires a hydrogen--helium atmosphere.
 A mixed atmosphere at $X=0.9072$, $X_3=0.004$, $T_{\rm eff}=4600$ K and
 $\log g=5.65$ satisfies independent flux, hydrostatic and chemical checks.
@@ -820,8 +856,9 @@ At the stellar matching depth $\tau_{\rm Ross}=25.12$ it gives $T=5440$ K and
 $P_{\rm gas}=3.136\times10^7$ dyn cm$^{-2}$. A surrounding hydrogen--helium-4
 grid contains thirty solved columns covering $0.78\leq X\leq0.9955$,
 $4500\leq T_{\rm eff}\leq5500$ K and $5.55\leq\log g\leq5.80$.
-Nine further columns at $\log g=5.40$ and 4700, 5000 and 5500 K
-provide a local 27-column grid spanning $5.40\leq\log g\leq5.80$.
+Eighteen further columns at $\log g=5.40$ and 5.25, with temperatures
+4700, 5000 and 5500 K, provide a local 36-column grid spanning
+$5.25\leq\log g\leq5.80$.
 At 5500 K, $X=0.87$ and $\log g=5.40$, increasing the achieved bottom
 optical depth from 876.3 to 1846 changes matching temperature by
 $-0.002093\%$ and gas pressure by $-0.009951\%$.
@@ -843,6 +880,9 @@ a second isotope comparison gives differences of 0.00009978\% in temperature
 and 0.0009838\% in pressure. Lower-boundary comparisons at 5000 and 5500 K
 change the matching temperature by at most 0.02452\% and gas pressure by
 at most 0.03430\% at the stellar matching depth. These are local measurements.
+At $\log g=5.25$, independent lower-boundary comparisons at 4700, 5000
+and 5500 K change matching temperature by at most 0.004790\% and gas
+pressure by 0.03703\%.
 These stellar results use the differential helium response of this grid on
 the published hydrogen boundary. The difference between the absolute
 atmosphere prescriptions, and the pulse's spatial convergence, remain
