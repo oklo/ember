@@ -36,10 +36,16 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2010-point** sequence reaches **75.87 thousand years**, **5262 K** and
-nuclear power **5.740e32 erg/s**. Power declines by **83.08%** during the
-additional **5.356e4 years**. All **242** intervals pass independent timestep,
-composition and energy checks. Shell burning continues.
+The **2010-point** sequence reaches **92.27 thousand years**, **5453 K** and
+nuclear power **4.396e32 erg/s**. Power declines by **23.4%** during the
+additional **1.640e4 years**. All **41** intervals in this segment pass independent
+timestep, composition and energy checks. Shell burning continues. A checked
+**10,000-year** portion uses **14.93 CPU minutes**, including timestep comparisons.
+
+A separate onset calculation with finite mixing throughout the convective
+envelope reaches **1431 years**, **4629 K** and nuclear power **8.593e34 erg/s**.
+It retains the original pointwise timestep and conservation checks; the pulse
+maximum and a complete, spatially converged pulse remain unresolved.
 
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
 **X = 0.78–0.9955** and **log g = 5.55–5.80**. Independent calculations check
@@ -58,6 +64,12 @@ occupied by the model without providing an uncertainty bound over the full grid.
 Independent **4800 K** sources
 check the helium correction to **0.09612%** in temperature and **0.02421%** in
 pressure at that test point.
+A matched **10,000-year** comparison below **log g = 5.10** reaches
+**log g = 5.055**. The two reference prescriptions differ by **0.2991 K** and
+**0.02206%** in surface luminosity, with the same convective regions. This is
+sensitivity to the two prescriptions, not a bound on their shared uncertainty.
+Nine additional **6000 K** mixture columns and a source at the published
+hydrogen grid's gravity floor pass independent source and depth checks.
 The pulse continuation uses the calculated composition response on a published
 hydrogen boundary; its atmosphere dependence and spatial convergence remain
 uncertainties. A separate gradual-mixing sensitivity reaches **3004 years**
