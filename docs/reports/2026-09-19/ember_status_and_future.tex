@@ -45,9 +45,9 @@ a helium-3 burning pulse and a convective shell near the hydrogen--helium
 transition. Locally refined calculations retain the pulse, but its peak
 strength and timing depend on spatial resolution. A diagnostic late-phase
 calculation with 2010 mass points follows shell burning through
-$1.003\times10^5$ yr from the model before shell convection, reaching
-$T_{\rm eff}=5553$ K and declining nuclear power of
-$3.935\times10^{32}$ erg s$^{-1}$. The onset, peak and complete pulse history
+$1.167\times10^5$ yr from the model before shell convection, reaching
+$T_{\rm eff}=5753$ K and declining nuclear power of
+$3.238\times10^{32}$ erg s$^{-1}$. The onset, peak and complete pulse history
 remain uncertain.
 
 
@@ -732,14 +732,18 @@ location of the strongest burning. The onset of the connection and its
 resolution dependence remain to be established.
 
 An onset calculation on the 1695-point grid, with finite composition
-transport throughout all convective layers, reaches 1569 yr,
-$T_{\rm eff}=4626$ K and nuclear power $1.907\times10^{35}$ erg s$^{-1}$.
+transport throughout all convective layers, reaches 1619 yr,
+$T_{\rm eff}=4624$ K and nuclear power $2.706\times10^{35}$ erg s$^{-1}$.
 It retains the original pointwise timestep criteria and independent energy
 and species-conservation checks. Surface abundances are $X=0.9984$ and
 $X_3=0.001368$. Across a 2.548 yr convective adjustment, 16 and 32 time steps
 agree within the same physical criteria and give the same final convective
-regions; deposited nuclear energy differs by 0.01692\%. These local checks
-do not establish the pulse maximum or its spatial convergence.
+regions; deposited nuclear energy differs by 0.01692\%. A subsequent
+3.573 yr adjustment passes an eight-step/sixteen-step comparison with
+nuclear energy differing by 0.1222\% and the same final convection.
+These checks support the endpoint structures and integrated burning,
+without resolving the internal timing of each rapid adjustment or
+establishing the pulse maximum and its spatial convergence.
 
 The envelope becomes helium enriched when shell convection connects to
 surface convection. With finite convective transport throughout the connected
@@ -872,11 +876,11 @@ and finest paths differ by 0.3543\% in deposited nuclear energy and
 The full-step ceiling is then 400 yr, with retained half steps at most 200 yr;
 each subsequent interval is still checked by time refinement.
 
-The 2010-point sequence reaches $1.003\times10^5$ yr and
-$T_{\rm eff}=5553$ K. During its final 8000 yr, nuclear power falls by
-10.49\% to $3.935\times10^{32}$ erg s$^{-1}$. All 20 intervals in this segment
+The 2010-point sequence reaches $1.167\times10^5$ yr and
+$T_{\rm eff}=5753$ K. During its final 4400 yr, nuclear power falls by
+4.729\% to $3.238\times10^{32}$ erg s$^{-1}$. All 11 intervals in this segment
 pass the stated timestep and conservation checks. This portion uses
-60 structure solutions and 10.89 CPU minutes on an Apple M4 Max, including
+33 structure solutions and 11.27 CPU minutes on an Apple M4 Max, including
 the timestep comparisons. The surface composition is $X=0.8158$,
 $X_3=0.007276$ and $Z=5.575\times10^{-16}$. Shell burning remains active.
 
@@ -959,6 +963,11 @@ in surface temperature, 0.3070\% in surface luminosity and
 $5.576\times10^{-5}\%$ in deposited nuclear energy, with identical convective
 regions. This tests the part of the temperature interval occupied by the
 model, not the whole interval or the shared absolute uncertainty.
+A matched 12,000 yr comparison tests two hydrogen-reference continuations
+below $\log g=4.95$, reaching 5701 K and $\log g=4.882$.
+The effective temperatures differ by 0.2296 K and surface luminosities by
+0.01569\%; deposited nuclear energies differ by $9.917\times10^{-6}\%$,
+with the same final convective regions.
 
 A second matched $10^4$ yr calculation tests the inferred reference below
 $\log g=5.10$ and reaches $\log g=5.055$. The two prescriptions differ by

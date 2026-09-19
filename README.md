@@ -36,17 +36,23 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2010-point** sequence reaches **100.3 thousand years**, **5553 K** and
-nuclear power **3.935e32 erg/s**. Power declines by **10.49%** during the
-latest **8000 years**. All **20** intervals in this segment pass independent
-timestep, composition and energy checks. Shell burning continues. A checked
-**8000-year** portion uses **10.89 CPU minutes**, including timestep comparisons.
+The **2010-point** sequence reaches **116.7 thousand years**, **5753 K** and
+nuclear power **3.238e32 erg/s**. Power declines by **4.729%** during the
+latest **4400 years**. All **11** intervals in this segment pass independent
+timestep, composition and energy checks. Shell burning continues. This portion
+uses **11.27 CPU minutes**, including timestep comparisons.
 
 A separate onset calculation with finite mixing throughout the convective
-envelope reaches **1569 years**, **4626 K** and nuclear power **1.907e35 erg/s**.
-A **2.548-year** comparison of **16** and **32** steps passes the original physical
-checks, with nuclear energy differing by **0.01692%** and the same final convection. The pulse
-maximum and a complete, spatially converged pulse remain unresolved.
+envelope reaches **1619 years**, **4624 K** and nuclear power **2.706e35 erg/s**.
+A **3.573-year** comparison of **8** and **16** steps passes the original physical
+checks, with nuclear energy differing by **0.1222%** and the same final convection.
+The pulse maximum and a complete, spatially converged pulse remain unresolved.
+
+A matched **12,000-year** comparison of two atmosphere references reaches
+**5701 K**. Effective temperatures differ by **0.2296 K** and surface luminosities
+by **0.01569%**; deposited nuclear energies differ by **9.917e-6%**, with the
+same final convective regions. This tests the visited interval without
+bounding the shared atmosphere uncertainty.
 
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
 **X = 0.78–0.9955** and **log g = 5.55–5.80**. Independent calculations check
