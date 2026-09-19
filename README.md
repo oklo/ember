@@ -36,9 +36,9 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2010-point** sequence reaches **57.47 thousand years**, **5059 K** and
-nuclear power **8.376e32 erg/s**. Power declines by **75.31%** during the
-additional **3.516e4 years**. All **196** intervals pass independent timestep,
+The **2010-point** sequence reaches **69.07 thousand years**, **5185 K** and
+nuclear power **6.527e32 erg/s**. Power declines by **80.76%** during the
+additional **4.676e4 years**. All **225** intervals pass independent timestep,
 composition and energy checks. Shell burning continues.
 
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
@@ -67,8 +67,12 @@ A tested timestep method reduces the stellar solves from **120** to **81**
 over **2000 years**, including one rejected larger step and its smaller retry.
 Released nuclear energy differs by **0.1353%** and endpoint nuclear power by
 **0.08057%**. Physical convective regions agree at all three comparison ages.
-The full-step ceiling is **200 years**; the existing local error checks still
-require shorter steps where needed. This supports the declining pulse phase.
+A **400-year** comparison using one, two and four steps also passes the
+unchanged checks: the coarsest and finest paths differ by **0.3543%** in
+released nuclear energy and **0.005697%** in endpoint nuclear power.
+The full-step ceiling is **400 years**, with retained halves at most **200 years**;
+the existing local error checks still require shorter steps where needed.
+This supports the declining pulse phase.
 A short interior mixing readjustment also passes a two-step/four-step
 comparison: deposited nuclear energy agrees to **0.006375%**. The paper states
 the comparisons and their limits. Current work follows the active

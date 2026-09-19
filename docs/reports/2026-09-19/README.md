@@ -3,9 +3,9 @@
 [Read the PDF](ember_status_and_future.pdf).
 
 The diagnostic helium-3 pulse calculation with **2010** mass points reaches
-**57.47 thousand years**, **5059 K** and surface **X = 0.8158**. Nuclear
-power falls **75.31%** during the latest **3.516e4 yr**, to **8.376e32 erg/s**;
-shell burning continues. All **196** intervals pass independent checks.
+**69.07 thousand years**, **5185 K** and surface **X = 0.8158**. Nuclear
+power falls **80.76%** during the latest **4.676e4 yr**, to **6.527e32 erg/s**;
+shell burning continues. All **225** intervals pass independent checks.
 A matched local refinement changes deposited nuclear energy by **1.468%**
 and endpoint nuclear power by **1.980%** over **978.3 yr**. This supports
 the late shell burning; onset and peak remain uncertain.
