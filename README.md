@@ -36,9 +36,9 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2010-point** sequence reaches **17.01 thousand years**, **4870 K** and
-nuclear power **5.397e33 erg/s**. Power declines by **30.95%** during the
-additional **2584 years**. All **56** intervals pass independent timestep,
+The **2010-point** sequence reaches **22.31 thousand years**, **4888 K** and
+nuclear power **3.392e33 erg/s**. Power declines by **37.15%** during the
+additional **5300 years**. All **106** intervals pass independent timestep,
 composition and energy checks. Shell burning continues.
 
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
@@ -47,10 +47,10 @@ interpolation, the helium-isotope approximation and lower-boundary sensitivity.
 The local mixed-atmosphere grid now contains **36** solved columns covering
 **4700–5500 K** and **log g = 5.25–5.80**. The absolute hydrogen reference
 below **log g = 5.5** remains an explicitly inferred continuation. A matched
-**10-year** comparison of two reference prescriptions changes surface
-temperature by **5.707 K** and luminosity by **0.4691%**, with negligible
-change in nuclear burning. This is a local sensitivity test, not a bound
-on uncertainty across the whole atmosphere grid.
+**500-year** comparison of two reference prescriptions changes surface
+temperature by **2.639 K** and luminosity by **0.2165%**; released nuclear
+energy differs by **0.00001563%**. Its endpoint is **log g = 5.401**, so this
+is a local sensitivity test, not an uncertainty bound across the full extension.
 Independent **4800 K** sources
 check the helium correction to **0.09612%** in temperature and **0.02421%** in
 pressure at that test point.
@@ -59,13 +59,12 @@ hydrogen boundary; its atmosphere dependence and spatial convergence remain
 uncertainties. A separate gradual-mixing sensitivity reaches **3004 years**
 from the pulse starting model; its merger timing and energy remain uncertain.
 
-A timestep criterion that accounts for steep spatial gradients reduces the
-required stellar solves from **111** to **81** over **556.2 years** on the
-2010-point grid. Released nuclear energy differs by **0.05228%** and endpoint
-nuclear power by **0.02480%**. Separate checks constrain the burning-layer
-temperature, energy profile, composition and conservation. Retained steps
-remain at most **25 years**; the nuclear-energy refinement allowance is
-**0.5%**. This criterion is selected for the late pulse continuation.
+A tested timestep method reduces the stellar solves from **120** to **81**
+over **2000 years**, including one rejected larger step and its smaller retry.
+Released nuclear energy differs by **0.1353%** and endpoint nuclear power by
+**0.08057%**. Physical convective regions agree at all three comparison ages.
+The full-step ceiling is **200 years**; the existing local error checks still
+require shorter steps where needed. This supports the declining pulse phase.
 A short interior mixing readjustment also passes a two-step/four-step
 comparison: deposited nuclear energy agrees to **0.006375%**. The paper states
 the comparisons and their limits. Current work follows the active
