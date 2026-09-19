@@ -18,10 +18,10 @@ temperature have passed local maxima.
 A continuation using a white-dwarf atmosphere develops a helium-3 burning pulse.
 Finite-rate mixing and consistent mass volumes retain ignition on three spatial
 grids, but the pulse's strength and timing depend on resolution. The finest
-diagnostic calculation reaches **10.88 thousand years** from the model before shell
+diagnostic calculation reaches **11.77 thousand years** from the model before shell
 convection. Its surface is helium enriched, with hydrogen mass fraction
-**X = 0.8159** and effective temperature **4810 K**. Nuclear power is
-**3.874e34 erg/s**; the shell remains active. The flash maximum, shutdown
+**X = 0.8159** and effective temperature **4829 K**. Nuclear power is
+**2.550e34 erg/s**; the shell remains active. The flash maximum, shutdown
 and subsequent cooling remain unresolved.
 
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
@@ -29,8 +29,12 @@ Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
 interpolation, the helium-isotope approximation and lower-boundary sensitivity.
 Nine additional columns provide lower-gravity coverage at **4700–5500 K**,
 extending the local mixed-atmosphere grid to **log g = 5.40**. The expanding
-star reaches the published hydrogen reference limit at **log g = 5.5**;
-continuation below that limit requires an explicit reference approximation.
+star crosses the published hydrogen reference limit at **log g = 5.5** using
+an explicitly inferred local continuation. A matched **100-year** comparison
+with a calculated gravity response changes surface temperature by **0.9429 K**;
+it tests only the small gravity interval visited. Independent **4800 K** sources
+check the helium correction to **0.09612%** in temperature and **0.02421%** in
+pressure at that test point.
 The pulse continuation uses the calculated composition response on a published
 hydrogen boundary; its atmosphere dependence and spatial convergence remain
 uncertainties. A separate gradual-mixing sensitivity reaches **3004 years**
