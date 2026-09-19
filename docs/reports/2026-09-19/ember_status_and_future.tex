@@ -45,9 +45,9 @@ a helium-3 burning pulse and a convective shell near the hydrogen--helium
 transition. Locally refined calculations retain the pulse, but its peak
 strength and timing depend on spatial resolution. A diagnostic late-phase
 calculation with 2010 mass points follows shell burning through
-$9.227\times10^4$ yr from the model before shell convection, reaching
-$T_{\rm eff}=5453$ K and declining nuclear power of
-$4.396\times10^{32}$ erg s$^{-1}$. The onset, peak and complete pulse history
+$1.003\times10^5$ yr from the model before shell convection, reaching
+$T_{\rm eff}=5553$ K and declining nuclear power of
+$3.935\times10^{32}$ erg s$^{-1}$. The onset, peak and complete pulse history
 remain uncertain.
 
 
@@ -732,12 +732,14 @@ location of the strongest burning. The onset of the connection and its
 resolution dependence remain to be established.
 
 An onset calculation on the 1695-point grid, with finite composition
-transport throughout all convective layers, reaches 1431 yr,
-$T_{\rm eff}=4629$ K and nuclear power $8.593\times10^{34}$ erg s$^{-1}$.
+transport throughout all convective layers, reaches 1569 yr,
+$T_{\rm eff}=4626$ K and nuclear power $1.907\times10^{35}$ erg s$^{-1}$.
 It retains the original pointwise timestep criteria and independent energy
 and species-conservation checks. Surface abundances are $X=0.9984$ and
-$X_3=0.001368$. These local checks do not establish the pulse maximum
-or its spatial convergence.
+$X_3=0.001368$. Across a 2.548 yr convective adjustment, 16 and 32 time steps
+agree within the same physical criteria and give the same final convective
+regions; deposited nuclear energy differs by 0.01692\%. These local checks
+do not establish the pulse maximum or its spatial convergence.
 
 The envelope becomes helium enriched when shell convection connects to
 surface convection. With finite convective transport throughout the connected
@@ -870,11 +872,11 @@ and finest paths differ by 0.3543\% in deposited nuclear energy and
 The full-step ceiling is then 400 yr, with retained half steps at most 200 yr;
 each subsequent interval is still checked by time refinement.
 
-The 2010-point sequence reaches $9.227\times10^4$ yr and
-$T_{\rm eff}=5453$ K. During its final $1.640\times10^4$ yr, nuclear power falls by
-23.4\% to $4.396\times10^{32}$ erg s$^{-1}$. All 41 intervals in this segment
-pass the stated timestep and conservation checks. A $10^4$ yr portion uses
-75 structure solutions and 14.93 CPU minutes on an Apple M4 Max, including
+The 2010-point sequence reaches $1.003\times10^5$ yr and
+$T_{\rm eff}=5553$ K. During its final 8000 yr, nuclear power falls by
+10.49\% to $3.935\times10^{32}$ erg s$^{-1}$. All 20 intervals in this segment
+pass the stated timestep and conservation checks. This portion uses
+60 structure solutions and 10.89 CPU minutes on an Apple M4 Max, including
 the timestep comparisons. The surface composition is $X=0.8158$,
 $X_3=0.007276$ and $Z=5.575\times10^{-16}$. Shell burning remains active.
 
@@ -933,6 +935,11 @@ lower boundary, $\log g=5.50$, gives matching temperature 8341 K;
 a deeper calculation changes it by 0.003191\% and gas pressure by
 $-0.04062\%$. These source checks do not determine the absolute error
 of a hydrogen atmosphere inferred below the published gravity range.
+Nine additional sources at $\log g=4.80$, with 5000, 5500 and 6000 K
+and the same three hydrogen fractions, provide a local 36-column grid over
+$5000\leq T_{\rm eff}\leq6000$ K and $4.80\leq\log g\leq5.25$.
+Independent depth comparisons at all three temperatures pass the same
+matching-temperature and pressure criteria.
 The absolute hydrogen reference below $\log g=5.50$ remains inferred.
 From $\log g=5.25$ to 5.10, its gravity dependence follows the calculated
 $X=0.9955$ source response, anchored at the matching state at 5.25.
@@ -943,6 +950,16 @@ lower-gravity interval. The prescriptions differ by 1.476 K in effective
 temperature and 0.1171\% in surface luminosity; deposited nuclear energy
 differs by $7.675\times10^{-6}\%$, and the convective regions agree.
 This measures sensitivity along that interval, not an absolute atmosphere error.
+Above 5500 K, two continuations of the hydrogen reference preserve the
+matching values at 5500 K. One uses the calculated gravity response at 6000 K,
+anchored to the published hydrogen grid at $\log g=5.50$; the other retains
+the 5500 K normalization and applies the calculated temperature response.
+Over a matched 8000 yr interval ending at 5553 K, they differ by 4.301 K
+in surface temperature, 0.3070\% in surface luminosity and
+$5.576\times10^{-5}\%$ in deposited nuclear energy, with identical convective
+regions. This tests the part of the temperature interval occupied by the
+model, not the whole interval or the shared absolute uncertainty.
+
 A second matched $10^4$ yr calculation tests the inferred reference below
 $\log g=5.10$ and reaches $\log g=5.055$. The two prescriptions differ by
 0.2991 K in effective temperature, 0.02206\% in surface luminosity and

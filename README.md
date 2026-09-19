@@ -36,15 +36,16 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2010-point** sequence reaches **92.27 thousand years**, **5453 K** and
-nuclear power **4.396e32 erg/s**. Power declines by **23.4%** during the
-additional **1.640e4 years**. All **41** intervals in this segment pass independent
+The **2010-point** sequence reaches **100.3 thousand years**, **5553 K** and
+nuclear power **3.935e32 erg/s**. Power declines by **10.49%** during the
+latest **8000 years**. All **20** intervals in this segment pass independent
 timestep, composition and energy checks. Shell burning continues. A checked
-**10,000-year** portion uses **14.93 CPU minutes**, including timestep comparisons.
+**8000-year** portion uses **10.89 CPU minutes**, including timestep comparisons.
 
 A separate onset calculation with finite mixing throughout the convective
-envelope reaches **1431 years**, **4629 K** and nuclear power **8.593e34 erg/s**.
-It retains the original pointwise timestep and conservation checks; the pulse
+envelope reaches **1569 years**, **4626 K** and nuclear power **1.907e35 erg/s**.
+A **2.548-year** comparison of **16** and **32** steps passes the original physical
+checks, with nuclear energy differing by **0.01692%** and the same final convection. The pulse
 maximum and a complete, spatially converged pulse remain unresolved.
 
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
@@ -70,6 +71,12 @@ A matched **10,000-year** comparison below **log g = 5.10** reaches
 sensitivity to the two prescriptions, not a bound on their shared uncertainty.
 Nine additional **6000 K** mixture columns and a source at the published
 hydrogen grid's gravity floor pass independent source and depth checks.
+Nine lower-gravity sources and three depth controls complete a local **36-column**
+mixture grid over **5000–6000 K** and **log g = 4.80–5.25**.
+A matched **8000-year** comparison of two temperature extensions of the hydrogen
+reference reaches **5553 K**. Their effective temperatures differ by **4.301 K**,
+surface luminosities by **0.3070%**, and deposited nuclear energy by **5.576e-5%**,
+with the same convective regions. This measures sensitivity over the visited interval.
 The pulse continuation uses the calculated composition response on a published
 hydrogen boundary; its atmosphere dependence and spatial convergence remain
 uncertainties. A separate gradual-mixing sensitivity reaches **3004 years**
