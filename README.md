@@ -36,9 +36,9 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2010-point** sequence reaches **22.31 thousand years**, **4888 K** and
-nuclear power **3.392e33 erg/s**. Power declines by **37.15%** during the
-additional **5300 years**. All **106** intervals pass independent timestep,
+The **2010-point** sequence reaches **29.43 thousand years**, **4916 K** and
+nuclear power **2.200e33 erg/s**. Power declines by **35.15%** during the
+additional **7116 years**. All **51** intervals pass independent timestep,
 composition and energy checks. Shell burning continues.
 
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
