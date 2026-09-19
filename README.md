@@ -25,9 +25,9 @@ convection. Its surface is helium enriched, with hydrogen mass fraction
 and subsequent cooling remain unresolved.
 
 A local refinement to **1923** mass points distributes half the burning power
-over **15** cells instead of **two** in a matched **101-year** comparison.
-Deposited nuclear energy is **21.06%** lower and endpoint nuclear power is
-**37.53%** lower, while surface temperatures differ by only **0.07072 K**.
+over **18** cells instead of **one** in a matched **688.5-year** comparison.
+Deposited nuclear energy is **55.17%** lower and endpoint nuclear power is
+**59.09%** lower, while surface temperatures differ by only **0.6349 K**.
 An initial structural readjustment means this measures both resolution and
 restart effects; it does not establish spatial convergence.
 
