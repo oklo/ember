@@ -1,0 +1,9 @@
+{
+  "scope": "Actual dense source controls for full precision calculation: preserve an existing tighter isotherm and its provenance exactly; independently verify a large nominal derivative correction.",
+  "passed": true,
+  "existing_tighter_rows_exact": 121,
+  "control_manifests": {
+    "/tmp/ember-dense-existing-precision-control-v1/repair_manifest.json": "639e8d46f9413672adc53b813d86e375ca56cd80d3b3048a2d24c4a16b6e9408",
+    "/tmp/ember-dense-full-precision-control-v1/repair_manifest.json": "63e84bf5d196cdd58ef9818c28708de2507b81c7c648b1d71ddf32355205294a"
+  }
+}

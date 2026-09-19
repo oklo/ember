@@ -1,161 +1,130 @@
-# ember
+# Ember
 
-A stellar evolution code for the lowest-mass stars — the ones that burn
-hydrogen for trillions of years, turn blue instead of red when their fuel runs
-out, and end as helium white dwarfs that outlive everything else in the galaxy.
+Ember is a one-dimensional stellar evolution code written in C++23. It follows
+the structure, composition and energy transport of very low-mass stars over
+trillions of years.
 
-`ember` is a C++23 development of the FORTRAN stellar-evolution line
-reconstructed in [oklo/Henyey](https://github.com/oklo/Henyey), based on
-Laughlin, Bodenheimer & Adams (1997). It is an active research code: numerical
-checks, comparisons with the earlier model, and physical limitations are
-reported alongside each result.
+[Read the current working paper](docs/reports/2026-09-19/ember_status_and_future.pdf)
+([LaTeX and figure files](docs/reports/2026-09-19/README.md)).
 
-## Status — September 11, 2026
+## Research status
 
-The **0.1 solar-mass model has reached 3.848 trillion years**. Its core
-transports heat without convection and is surrounded by a convective envelope.
-Hydrogen burning continues. The calculation stops at its atmosphere table's
-**4400 K** limit. Its complete history, final structure, input receipts and
-transport classification pass the recorded checks.
+The calculation with microscopic diffusion and metal settling reaches
+**4.002 trillion years**, with effective temperature **4612 K** and central
+hydrogen **X = 3.528e-8**. Hydrogen burning continues outside the depleted core,
+and supplies **97.28%** of the surface luminosity. Both luminosity and effective
+temperature have passed local maxima.
 
-| Latest accepted state | Value |
-|---|---:|
-| Initial composition | XH = 0.7, He3 = 0, Z = 0.02; GS98 metals |
-| Mass mesh | 512 points; fixed baryonic mass of 0.1 Msun |
-| Central hydrogen mass fraction | X = 0.002467 |
-| Surface hydrogen mass fraction | X = 0.1730 |
-| Radius | 0.1334 Rsun |
-| Luminosity | 0.006005 Lsun |
-| Effective temperature | 4400 K |
-| Central temperature | 11.75 million K |
-| Convective mass fraction | 0.07899 |
+A continuation using a white-dwarf atmosphere develops a helium-3 burning pulse.
+Finite-rate mixing and consistent mass volumes retain ignition on three spatial
+grids, but the pulse's strength and timing depend on resolution. The 1695-point
+diagnostic calculation reaches **13.45 thousand years** from the model before shell
+convection. Its surface is helium enriched, with hydrogen mass fraction
+**X = 0.8159** and effective temperature **4848 K**. Nuclear power is
+**2.539e34 erg/s**; the shell remains active. The flash maximum, shutdown
+and subsequent cooling remain unresolved.
 
-[History, checkpoint join and endpoint checks](docs/results/evolution_atmosphere_limit_3848gyr_v1.json).
+A local refinement to **1923** mass points distributes half the burning power
+over **18** cells instead of **one** in a matched **688.5-year** comparison.
+Deposited nuclear energy is **55.17%** lower and endpoint nuclear power is
+**59.09%** lower, while surface temperatures differ by only **0.6349 K**.
+An initial structural readjustment means this measures both resolution and
+restart effects; it does not establish spatial convergence.
 
-The goal remains an evolved helium remnant at **100 K effective temperature**,
-using material properties, heat transport and atmospheres valid along its
-trajectory. The [current development plan](docs/COLD_REMNANT.md) describes
-remaining physics; the [handoff](HANDOFF.md) records calculations and inputs.
+A further refinement to **2010** mass points changes released nuclear energy
+by **1.468%** and endpoint nuclear power by **1.980%** over a matched
+**978.3-year** interval. This supports the late burning segment; the earlier
+onset and peak remain uncertain.
 
-The [September 11 working paper](docs/reports/2026-09-11/ember_status_and_future.pdf)
-([source and figures](docs/reports/2026-09-11/README.md)) now presents the
-track through **3.848 trillion years**. All its Ember curves refer to that
-calculation. It compares Ember
-primarily with Laughlin, Bodenheimer and Adams (1997), using stated values and
-approximate curves read from their figures. The reconstructed F77 results are
-a separate, faint supplementary comparison.
-The photospheric figure compares the LBA97 and Ember opacity maps on identical
-axes and a shared approximate opacity scale, with both 0.1-solar-mass tracks.
-It marks the grains missing from Ember's gas-only background.
+The **2010-point** sequence reaches **122.7 thousand years**, **5818 K** and
+nuclear power **3.043e32 erg/s**. Power declines by **2.794%** during the
+latest **2800 years**. All **seven** intervals in this segment pass independent
+timestep, composition and energy checks. Shell burning continues. This portion
+uses **11.58 CPU minutes**, including timestep comparisons.
 
-The ATOMIC opacity family for the hot interior extends to **zero hydrogen**. Twelve independent
-composition checks differ by at most **0.05257%** on tested hot-profile states;
-this is an opacity interpolation check, not a stellar lifetime error bound.
-All previous hot data and the cool opacity inputs remain unchanged. The plotted
-calculation uses a separately checked **72-table EOS** and gas atmospheres
-through **4400 K**. Conduction supplies **69.82% of the local central heat
-flux** in its final model. See the
-[transport calculation](docs/results/current_core_transport_3848gyr_v1.json)
-and [EOS data notes](data/eos/README.md).
+A separate onset calculation with finite mixing throughout the convective
+envelope reaches **1713 years**, **4621 K** and nuclear power **6.828e34 erg/s**.
+Power reaches a sampled maximum of **3.719e35 erg/s** near **1642 years**,
+then declines **81.64%**. This is a rise and decline on one mass grid,
+not an established converged peak.
+A **3.573-year** comparison of **8** and **16** steps passes the original physical
+checks, with nuclear energy differing by **0.1222%** and the same final convection.
+The pulse maximum and a complete, spatially converged pulse remain unresolved.
 
-The **156-model extension through 4000 K** also passes its runtime/EOS,
-intermediate-temperature, depth and condensation checks and supplies the
-track through 3.818 trillion years. [Acceptance record](docs/results/nongrey_t4000_acceptance_v1.json).
+A matched **12,000-year** comparison of two atmosphere references reaches
+**5701 K**. Effective temperatures differ by **0.2296 K** and surface luminosities
+by **0.01569%**; deposited nuclear energies differ by **9.917e-6%**, with the
+same final convective regions. This tests the visited interval without
+bounding the shared atmosphere uncertainty.
 
-The **172-model extension through 4400 K** is now checked. Its independent
-matching-state differences are below **0.5987%**, eight depth comparisons pass,
-and no condensates occur in the sixteen new structures. All 156 existing states
-remain unchanged. The star continued from its saved state through 3.848 trillion
-years with this table. Its structure and composition are identical at the join;
-the assembled history contains the initial model and 7695 accepted time steps.
-[Atmosphere acceptance](docs/results/nongrey_t4400_acceptance_v1.json),
-[restart comparison](docs/results/atmosphere_extension_restart_v1.json).
+Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
+**X = 0.78–0.9955** and **log g = 5.55–5.80**. Independent calculations check
+interpolation, the helium-isotope approximation and lower-boundary sensitivity.
+The local mixed-atmosphere grid now contains **54** solved columns covering
+**4700–5500 K** and **log g = 4.95–5.80**. The absolute hydrogen reference
+below **log g = 5.5** remains an explicitly inferred continuation. A matched
+**10,000-year** calculation testing the extension below **log g = 5.25**
+reaches **log g = 5.231**. The two references change surface temperature
+by **1.476 K** and luminosity by **0.1171%**, with released nuclear energy
+differing by **7.675e-6%** and the same convective regions. A separate matched
+**1000-year** comparison at **log g = 5.335–5.331** changes surface temperature
+by **11.27 K** and luminosity by **0.9186%**; released nuclear energy differs
+by **0.02255%**, with the same convective regions. This tests the region
+occupied by the model without providing an uncertainty bound over the full grid.
+Independent **4800 K** sources
+check the helium correction to **0.09612%** in temperature and **0.02421%** in
+pressure at that test point.
+A matched **10,000-year** comparison below **log g = 5.10** reaches
+**log g = 5.055**. The two reference prescriptions differ by **0.2991 K** and
+**0.02206%** in surface luminosity, with the same convective regions. This is
+sensitivity to the two prescriptions, not a bound on their shared uncertainty.
+Nine additional **6000 K** mixture columns and a source at the published
+hydrogen grid's gravity floor pass independent source and depth checks.
+Nine lower-gravity sources and three depth controls complete a local **36-column**
+mixture grid over **5000–6000 K** and **log g = 4.80–5.25**.
+A matched **8000-year** comparison of two temperature extensions of the hydrogen
+reference reaches **5553 K**. Their effective temperatures differ by **4.301 K**,
+surface luminosities by **0.3070%**, and deposited nuclear energy by **5.576e-5%**,
+with the same convective regions. This measures sensitivity over the visited interval.
+The pulse continuation uses the calculated composition response on a published
+hydrogen boundary; its atmosphere dependence and spatial convergence remain
+uncertainties. A separate gradual-mixing sensitivity reaches **3004 years**
+from the pulse starting model; its merger timing and energy remain uncertain.
 
-Atmospheres through 5000 K and their independent controls are being calculated.
-A hotter EOS candidate retains every existing potential value. Its added hot
-test points and all 512 zones of the saved star pass the source comparison,
-but heat-capacity checks fail at some unvisited mixtures in the original
-temperature range. The discrepancy coincides with a join in the source electron
-approximation. Numerical electron integration removes the discontinuity in
-controls and gives a maximum pilot heat-capacity difference of 0.01014%. A new
-source family is being calculated with this treatment; it requires independent
-validation and a fresh stellar run. Neither candidate is selected yet. [General test](docs/results/metal_eos_hot_source_v1.json),
-[saved-star test](docs/results/metal_eos_hot_profile_v1.json).
+A tested timestep method reduces the stellar solves from **120** to **81**
+over **2000 years**, including one rejected larger step and its smaller retry.
+Released nuclear energy differs by **0.1353%** and endpoint nuclear power by
+**0.08057%**. Physical convective regions agree at all three comparison ages.
+A **400-year** comparison using one, two and four steps also passes the
+unchanged checks: the coarsest and finest paths differ by **0.3543%** in
+released nuclear energy and **0.005697%** in endpoint nuclear power.
+The full-step ceiling is **400 years**, with retained halves at most **200 years**;
+the existing local error checks still require shorter steps where needed.
+This supports the declining pulse phase.
+A short interior mixing readjustment also passes a two-step/four-step
+comparison: deposited nuclear energy agrees to **0.006375%**. The paper states
+the comparisons and their limits. Current work follows the active
+burning shell toward white-dwarf cooling and tests the remaining physical
+approximations. Comparisons with the published LBA97 result and MESA distinguish
+the physical assumptions of each track.
 
-Numerical controls through 3.600 trillion years find central-hydrogen changes
-of 0.1849% with a fourfold tighter time control and 1.683% with twice as many
-mass points. These measurements apply to that age and those fixed inputs.
-[Accuracy comparison](docs/results/evolution_accuracy_3600gyr_v1.json).
+This publication updates the paper and README; the figures are unchanged. The checked-in source is
+an earlier development state; source and numerical input updates for the new
+calculations are still being prepared.
 
-**Production timing:** the partial trajectory through 3.818 trillion years
-used **41.19 CPU minutes** and **25.09 awake elapsed minutes**, with 7147 accepted
-steps and 269 rejected attempts. The continuation to 3.848 trillion years adds
-**4.990 CPU minutes** and **3.111 awake elapsed minutes**, for 548 accepted
-steps and 36 rejected attempts. Atmosphere generation is separate, reusable
-work. The complete cooling-track cost remains unmeasured. Reuse of complete nuclear calculations reduced CPU time
-by **42.21% in a short benchmark**. The completed longer comparison through
-3.757 trillion years used **37.31% less CPU time**, with identical entire output
-files: **162.4 versus 101.8 CPU minutes**. Background load varied; this is one
-long pair, not a timing guarantee. Sharing the electron calculation within each nuclear response
-saves a further **14.97%** in a short comparison. Both changes are installed;
-both reported stellar calculations include them. See
-[the timing notes](docs/COMPUTATIONAL_COST.md) and
-[the latest history and checks](docs/reports/2026-09-11/evolution_latest_provenance.json).
+## Aim
 
-New [grain-opacity calculations](docs/GRAINS.md) provide separate absorption
-and scattering over wavelength, checked against an independent program and
-small-particle analytic limits. A first fixed-atmosphere control combines them
-with the computed alumina abundance. Coupling to the atmosphere, material
-coverage, grain phase and size, settling and condensate heat transport remain
-under development; the evolving star still uses gas-only atmospheres.
+Follow an initially **0.1-solar-mass** star through hydrogen exhaustion and helium
+white-dwarf cooling below **100 K**, then explore its later evolution under
+explicit environmental and nucleon-decay assumptions. The complete cooling
+trajectory has not yet been calculated.
 
-The [LBA97 comparison notes](docs/F77_LBA97_COMPARISON.md) distinguish the
-published model from the current F77 reconstruction. The latter reaches its
-central transition at a substantially different hydrogen abundance. The
-[timing notes](docs/COMPUTATIONAL_COST.md) explain the computational costs.
+## Background
 
-**Verification:** 32 CTest suites pass with installed local inputs. Earlier
-same-physics convergence checks at two trillion years found luminosity changes
-of +0.06163% when doubling the mesh and −0.00361% with fourfold tighter time
-tolerances. Those checks do not establish convergence at the later structural
-transition or of a complete lifetime. [Native restarts](docs/RESTART.md) enforce
-identical executable bytes, tables and physical selections.
-
-Outstanding work includes zero-hydrogen and condensate-consistent atmospheres,
-microscopic diffusion and settling, shell resolution, near-exhaustion nuclear
-branches, full thermal-neutrino losses, and dense helium liquid/solid
-thermodynamics and cooling boundaries. The [cold-electron and dense-EOS
-audits](docs/DENSE_EOS.md) are preparation for those stages. No extrapolated
-cooling law is counted as an evolved remnant.
-
-Earlier controls and numerical comparisons are documented in
-[FORWARD_EVOLUTION.md](docs/FORWARD_EVOLUTION.md),
-[EXTENDED_EVOLUTION.md](docs/EXTENDED_EVOLUTION.md), and
-[NONGREY.md](docs/NONGREY.md). The wider mass–composition survey is described in
-[LIFETIME_SURVEY.md](docs/LIFETIME_SURVEY.md).
-
-## Design
-
-**Analytic derivatives throughout zone assembly.** Physics modules provide
-their own partials, and the structure equations propagate them by the chain
-rule. Assembly uses one EOS response per endpoint; finite differences remain
-an independent check. An EOS without the required response derivatives must
-report that explicitly.
-
-**Logarithmic variables.** The solver works in `(ln r, ln rho, ln T, L)`.
-Density spans eighteen decades between a giant's photosphere and a white
-dwarf's core; linear variables cannot be conditioned across that.
-
-**Physics behind interfaces.** `Eos`, `Opacity`, `Nuclear`, `Atmosphere` are
-abstract. Swapping a table is a constructor argument, and two implementations
-can be run against each other on the same track — which is how you find out
-whether a result is physics or an artifact of one table.
-
-**Tests that are physics statements.** Each equation-of-state test names a
-limit where the answer is known independently of this code: the ideal gas, the
-radiation-dominated limit, the Chandrasekhar constant, the Maxwell relation
-behind `grad_ad`. A regression then reads as a broken law, not a changed
-number.
+The comparison with Laughlin, Bodenheimer and Adams (1997) uses their stated
+results and approximate curves read from the published figures. The separate
+[Fortran reconstruction](https://github.com/oklo/Henyey) seeks to reproduce
+that calculation's assumptions and methods.
 
 ## Building
 
@@ -179,19 +148,6 @@ full-suite checks use the development machine's installed inputs.
 NaN or infinity, and a stellar model legitimately probes states where a table
 returns one. Those should surface, not be optimised away.
 
-## Physics sources
-
-| Ingredient | Source |
-|---|---|
-| Composition | GS98 elemental inventory for forward evolution; legacy AAG21 carrier abundances retained |
-| Low-T opacity | AESOPUS 2.1 gas (Marigo et al. 2024), nine X planes at Z=.01/.02/.03, log R to 6; Ferguson (2005) also available with grains |
-| High-T opacity | LANL TOPS ATOMIC with refined hydrogen-poor composition planes, Z=.01/.02/.03; source-domain masks and smooth blends |
-| Equation of state | FreeEOS 3.0 EOS1 represented by one C2 Helmholtz potential; 64-plane GS98 H/He3 family through XH=0 within its original thermal domain; isotope corrections and masked invalid states |
-| Conduction | Ioffe pure-ion tables; Cassisi et al. (2007, 2021), Blouin et al. (2020); approximate mixture resistivities |
-| Convection | Böhm–Vitense MLT; Schwarzschild or full-EOS Ledoux buoyancy; semiconvective and thermohaline composition transport |
-| Nuclear rates | Reduced pp network, SFII S-factor quadrature, finite-degeneracy SVH screening, atomic mass-defect heating; legacy prescription retained |
-| Atmosphere | TLUSTY208/SYNSPEC54 non-grey gas grid at tau=100; 96 nodes selected, 108-node candidate under refinement; AMES-COND/grey default control retained |
-| Thermal neutrinos | Optional HRW plasma-decay sink with analytic derivatives; other thermal channels remain to be supplied |
 
 ## Licence
 

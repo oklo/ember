@@ -1,0 +1,73 @@
+{
+  "scope": "Two fresh 512-point calculations through 10 billion years with identical physical inputs except SFII versus SFIII nuclear rates. The SFII output also checks executable compatibility against the preceding executable. This short comparison does not establish a change in total hydrogen-burning lifetime.",
+  "passed": true,
+  "sfii_entire_json_exact_to_previous_executable": true,
+  "inputs": {
+    "out/evolution-sfii-svh-numerical-eos-512-10gyr-control-v1.json": "cfcd5864bc903000a8f8ba511ceaf8cbbf633d31da58d52dc0f50e8be67e1797",
+    "out/evolution-sfiii-svh-numerical-eos-512-10gyr-control-v1.json": "c88a174e5694b11fdc1e915decc0851d767e6d28eafc4957ade64dd693699a36",
+    "out/evolution-sfii-svh-numerical-eos-512-10gyr-control-v1.receipt.json": "ed86bf5926f9e346628e07735029b8d782545cee30025171fcf6c487f3b03b9e",
+    "out/evolution-sfiii-svh-numerical-eos-512-10gyr-control-v1.receipt.json": "60be9d30f3e422b52e251b6cb8b008500a57bb067dc2351789ef2acfa1b3d677"
+  },
+  "executable_sha256": "7d8f95f327799371539563a0328d5962fb08a459302c5642f04f7a3880083ab3",
+  "comparisons": [
+    {
+      "state": "initial",
+      "sfii": {
+        "R_Rsun": 0.12594462902252823,
+        "L_Lsun": 0.0008361605073278669,
+        "Teff_K": 2765.726096457834,
+        "central_T_K": 4629323.730141283,
+        "central_rho": 381.7396485840878,
+        "central_X": 0.7,
+        "central_Y3": 0
+      },
+      "sfiii": {
+        "R_Rsun": 0.1262172173839181,
+        "L_Lsun": 0.000842393580113004,
+        "Teff_K": 2767.8722518347463,
+        "central_T_K": 4625088.197854919,
+        "central_rho": 379.2985353986068,
+        "central_X": 0.7,
+        "central_Y3": 0
+      },
+      "relative_change": {
+        "R_Rsun": 0.002164350822305483,
+        "L_Lsun": 0.007454397487697939,
+        "Teff_K": 0.000775982617968074,
+        "central_T_K": -0.0009149354275628241,
+        "central_rho": -0.006394706954164442,
+        "central_X": 0.0
+      }
+    },
+    {
+      "state": "10 Gyr",
+      "sfii": {
+        "R_Rsun": 0.12603483122347817,
+        "L_Lsun": 0.0008392703333925999,
+        "Teff_K": 2767.303270399273,
+        "central_T_K": 4639022.693637873,
+        "central_rho": 380.9572951720968,
+        "central_X": 0.6976274618416789,
+        "central_Y3": 0.0023724833512437098
+      },
+      "sfiii": {
+        "R_Rsun": 0.12631084716169236,
+        "L_Lsun": 0.0008454055003780824,
+        "Teff_K": 2769.316056543276,
+        "central_T_K": 4634774.4268711135,
+        "central_rho": 378.48985384920445,
+        "central_X": 0.6976099678366514,
+        "central_Y3": 0.002389978179882663
+      },
+      "relative_change": {
+        "R_Rsun": 0.0021899972851535665,
+        "L_Lsun": 0.007310120161977185,
+        "Teff_K": 0.0007273457034986386,
+        "central_T_K": -0.0009157676190257868,
+        "central_rho": -0.006476949921060515,
+        "central_X": -2.507642830074097e-05,
+        "central_Y3": 0.0073740574954013205
+      }
+    }
+  ]
+}

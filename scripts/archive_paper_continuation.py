@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Export a checked checkpoint continuation for a daily working paper.
 
-The plotted history is an assembly of actual accepted states, with one duplicate
+The plotted history is an assembly of actual accepted states, with each duplicate
 restart state removed. Original run receipts remain attached to their separate
 segments. The derived history is never assigned a fabricated run receipt.
 """
@@ -32,13 +32,14 @@ def main():
             raise ValueError('checked input changed: '+path)
     assembly = joined['history_assembly']
     sources = [Path(p) for p in assembly['sources']]
-    if len(sources) != 2 or not assembly['physical_join_exact']:
-        raise ValueError('requires the checked original track and one continuation')
+    if len(sources) < 2 or not assembly['physical_join_exact']:
+        raise ValueError('requires the checked original track and its continuations')
     if [digest(p) for p in sources] != assembly['source_sha256']:
         raise ValueError('assembly source checksum differs')
     tracks = [json.loads(p.read_text()) for p in sources]
-    if (joined['history'] != tracks[0]['history']+tracks[1]['history'][1:]
-            or joined['profile'] != tracks[1]['profile']
+    expected_history = tracks[0]['history'] + [row for track in tracks[1:] for row in track['history'][1:]]
+    if (joined['history'] != expected_history
+            or joined['profile'] != tracks[-1]['profile']
             or len(joined['history']) != check['joined_states']):
         raise ValueError('assembled values differ from accepted source states')
     receipts = [json.loads(p.with_suffix('.receipt.json').read_text()) for p in sources]
@@ -55,7 +56,7 @@ def main():
         path = Path(path)
         raw = path.read_bytes()
         packed = gzip.compress(raw, mtime=0)
-        target = artifacts/(f'continuation-{i:03d}-'+path.name+'.gz')
+        target = artifacts/(f'continuation-{digest(a.joined)[:12]}-{i:03d}-'+path.name+'.gz')
         if target.exists() and target.read_bytes() != packed:
             raise ValueError('archive path already contains different data')
         target.write_bytes(packed)
@@ -99,6 +100,8 @@ def main():
               'profile_csv': 'evolution_latest_profile.csv', 'profile_csv_sha256': digest(a.paper/'evolution_latest_profile.csv'),
               'states': check['joined_states'], 'endpoint': check['endpoint'],
               'requested_age_reached': check['requested_age_reached'],
+              'stop': check.get('stop', 'Atmosphere source temperature limit.'),
+              'central_conduction_flux_fraction': check.get('central_conduction_flux_fraction'),
               'first_atmosphere_domain_rejection': check['first_atmosphere_domain_rejection'],
               'last_atmosphere_domain_rejection': check['last_atmosphere_domain_rejection'],
               'rejected_attempts': check['all_attempts_including_preceding_terminal_rejections'],

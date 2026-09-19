@@ -1,0 +1,186 @@
+{
+  "scope": "Compare independently validated atmosphere solutions at different columns.\n\nThe final optical depths, not TAULAS or the seed trimming parameter, define\nthe tested lower boundaries. This local comparison does not bound all grid\ncells, spectral errors or the physical uncertainty of the source model.\n",
+  "coordinates": [
+    0.2,
+    0.0,
+    5600.0,
+    5.4
+  ],
+  "models": [
+    {
+      "work": "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120",
+      "state": {
+        "T": 10180.545753094862,
+        "Pgas": 1928990.8515302213,
+        "source_density": 5.6778372160316405e-06,
+        "column_mass": 7.679552157709192,
+        "flux_error": 1.4726932678676974e-05,
+        "correction": 2e-07,
+        "effective_flux_error": 0.00020746930235149286,
+        "hydrostatic_error": 1.335591253770474e-05,
+        "chemical_density_error": 2.220446049250313e-14,
+        "iterations": 1,
+        "depths": 300,
+        "tau_bracket": [
+          94.69672337191811,
+          106.66894062021589
+        ],
+        "optical_depth_range": [
+          1.3344691336065212e-09,
+          120.03428725818394
+        ],
+        "column_mass_range": [
+          2.436510999999999e-05,
+          8.025628999999999
+        ],
+        "temperature_range": [
+          3418.9294536363363,
+          10319.131856125396
+        ],
+        "density_range": [
+          5.435052467818152e-11,
+          5.846299394268257e-06
+        ]
+      },
+      "seed_bottom_tau": 120.0,
+      "initializer": {
+        "base_source_sha256": "65b3eba1355d9bf0bd4591d878fcc50741ad093661b319da460782b54f6c0840",
+        "patched_source_sha256": "478fc2d8498322a1595d347901b6d931706662bde622bd858709b11317c1537d",
+        "patch_sha256": "7b9c13a7b8bc5af262486328432643c0a63768b884e4054e1a68550383d9b3eb",
+        "indexed_russel_lookup": true,
+        "opacity_derivative_relative_step": 0.0001,
+        "executable": "/private/tmp/ember-nongrey-conref-indexed-fine-v1/tlusty/tlusty.exe",
+        "executable_sha256": "effc447c81e25cb50464f8c18c2ccc53afd94fde52b5425d9660cbc1c8fa4a53",
+        "preparation_receipt_sha256": "ca43336bf463f315e10a0af2d04e90d27adf86dd0a1fcb243f5d2fb234ad407b"
+      },
+      "validation_sha256": "9e11794aabe07e5a76b95dac4a91b64d5987b5ebaf7ff18c3e278bd6f7803847",
+      "relative_difference_from_deepest": {
+        "T": 1.5235054865003761e-05,
+        "Pgas": -5.7859602382914765e-05,
+        "source_density": -7.459981395741e-05
+      }
+    },
+    {
+      "work": "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540",
+      "state": {
+        "T": 10180.390654284698,
+        "Pgas": 1929102.4686320121,
+        "source_density": 5.6782608132319095e-06,
+        "column_mass": 7.679996506752357,
+        "flux_error": 1.5676837189726456e-05,
+        "correction": 4.97e-07,
+        "effective_flux_error": 0.00020746930235149286,
+        "hydrostatic_error": 1.3784246746473272e-05,
+        "chemical_density_error": 2.3092638912203256e-14,
+        "iterations": 1,
+        "depths": 300,
+        "tau_bracket": [
+          94.61448670126273,
+          107.29821332587318
+        ],
+        "optical_depth_range": [
+          1.3344769785762608e-09,
+          228.22210836748783
+        ],
+        "column_mass_range": [
+          2.436510999999999e-05,
+          9.428714000000001
+        ],
+        "temperature_range": [
+          3418.932592157521,
+          10805.802275634078
+        ],
+        "density_range": [
+          5.435047477994177e-11,
+          6.524432550735246e-06
+        ]
+      },
+      "seed_bottom_tau": 150.0,
+      "initializer": {
+        "base_source_sha256": "65b3eba1355d9bf0bd4591d878fcc50741ad093661b319da460782b54f6c0840",
+        "patched_source_sha256": "478fc2d8498322a1595d347901b6d931706662bde622bd858709b11317c1537d",
+        "patch_sha256": "7b9c13a7b8bc5af262486328432643c0a63768b884e4054e1a68550383d9b3eb",
+        "indexed_russel_lookup": true,
+        "opacity_derivative_relative_step": 0.0001,
+        "executable": "/private/tmp/ember-nongrey-conref-indexed-fine-v1/tlusty/tlusty.exe",
+        "executable_sha256": "effc447c81e25cb50464f8c18c2ccc53afd94fde52b5425d9660cbc1c8fa4a53",
+        "preparation_receipt_sha256": "ca43336bf463f315e10a0af2d04e90d27adf86dd0a1fcb243f5d2fb234ad407b"
+      },
+      "validation_sha256": "1127cee06ad28b89a2bc8fbc957af3bb223be9794cd7894fe9c1e42c15b99cfe",
+      "relative_difference_from_deepest": {
+        "T": 0.0,
+        "Pgas": 0.0,
+        "source_density": 0.0
+      }
+    }
+  ],
+  "relative_matching_state_tolerance": 0.0001,
+  "maximum_matching_state_relative_difference": 5.7859602382914765e-05,
+  "passed": true,
+  "input_files_sha256": {
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/provenance.json": "6d51641bd226045fa13c8e34d81ef1d779f98e39275553e0b887f22d7f2cd5f0",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/final/validated.json": "9e11794aabe07e5a76b95dac4a91b64d5987b5ebaf7ff18c3e278bd6f7803847",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/final/completed.json": "2b52d4cfcd4344fe43f84ce652ad1c73b10538e48fed57f325e7b2cf15659163",
+    "/private/tmp/ember-nongrey-x020-opacity-13k-v1/plane-000/opacity/fort.63": "5951a1674667f936bf8832d41a3ba396a20fee24a592fb5821b3b833d6490952",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/final/run.log.gz": "a6c99d9baba17131fa66061fed5b6384328c86a10961876ec6bc6bc009b29adb",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/final/fort.9.gz": "35cc2f117791d862ee5116c8f8eeb181232080270ffb2d42db36cd5fcec6d1f5",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/final/fort.5.gz": "a2b7a689c55c9fadbb8995f2c4184380f291574841d75707ca6ed7aa6672100a",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/final/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/final/tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/final/fort.8.gz": "1b1a8151cd46e0829986eff07be3419635e865dfb921b4b6976e4be38b59d9fe",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/initializer/fort.5.gz": "a2b7a689c55c9fadbb8995f2c4184380f291574841d75707ca6ed7aa6672100a",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/initializer/fort.7.gz": "168fdd815947830bc5921a8598d7cf5d23f29a776add433e4d988faedfa9d77d",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/initializer/fort.8.gz": "c5258fd10551cb7e26368cd45004f1cc66ba58237d9e955c267f7c3a23b87394",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/initializer/fort.9.gz": "85eb038da63f852ad24b222df0618e92e1f7839e03dd603b5d2f15f2bbe0fb16",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/initializer/tas.gz": "89bca72243e96230e6f3caf831f1284d8669283faddb8dff028a41839c18189e",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/initializer/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/initializer/opacity.sha256.gz": "f96b0c785b2d81c6dcf591c6a3c7492f26c128726b31e2e07aa6fca922055cfe",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/initializer/completed.json.gz": "a4e3abdcc7a34d8f67ebe2b82a0c53c83afb1fa2c976d64617f984633201e5b7",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/initializer/run.log.gz": "e7d1cc12486c483381c982d3365d047f92b54faa3617964fb4b9f89bd6f87cea",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/refined_initializer/fort.5.gz": "a2b7a689c55c9fadbb8995f2c4184380f291574841d75707ca6ed7aa6672100a",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/refined_initializer/fort.7.gz": "f3b7084b6887f6e88e96e5e0c83501921955c6abfd80de550fefe1ab6969ee83",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/refined_initializer/fort.8.gz": "20203bde6c5b2217543ae61e3820e5e13e1f972f4306cab958af544342f10632",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/refined_initializer/fort.9.gz": "325171a61771bf7a41b988bc6d0472b3891092be087237f5d51897efcfd26fe5",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/refined_initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/refined_initializer/tas.gz": "3e71e8fb9dd58d76fe61cb33c71126ebf4a74cb9503d8a7b80d24e3cb8e9791e",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/refined_initializer/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/refined_initializer/opacity.sha256.gz": "f96b0c785b2d81c6dcf591c6a3c7492f26c128726b31e2e07aa6fca922055cfe",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/refined_initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/refined_initializer/completed.json.gz": "0c273329c3e0f0ab0e9dbbeed88fe4f6fa7cff61299ec982250f01d7ac39d4ee",
+    "/private/tmp/ember-nongrey-t6000-depth-v1/x200-y000-t5600-g540-depth120/refined_initializer/run.log.gz": "920b2bf6745fa86c9aa8c50a683b7023cb68cfdc6990b039058149a7071c6e9d",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/provenance.json": "6f110a424c0b038613e1eda93292cc9438b097916ee4c7fe043df63d9b1c2128",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/final/validated.json": "1127cee06ad28b89a2bc8fbc957af3bb223be9794cd7894fe9c1e42c15b99cfe",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/final/completed.json": "59cdf45da1cac4a154ca5704d1b2221b79f96f4a5d7b9f33941dd50b6a6c7f65",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/final/run.log.gz": "d28ce2c0a751c5fb93212b5f88fcb51db1dc1457df66a9f4e3687741941e962f",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/final/fort.9.gz": "78e685a139ebe9aa1fdcfdc75e30064047bc669f7cec536551d521f0ce6f7db4",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/final/fort.5.gz": "a2b7a689c55c9fadbb8995f2c4184380f291574841d75707ca6ed7aa6672100a",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/final/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/final/tas.gz": "a7dc0e0d026c86ba5e6d3249d1240f43d18b49e617d0d531f99d1ab02fbb50ea",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/final/fort.8.gz": "9fafb124236505af444560fa078f196598278621fe32dcceb541dfe87ae1cc33",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/initializer/fort.5.gz": "a2b7a689c55c9fadbb8995f2c4184380f291574841d75707ca6ed7aa6672100a",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/initializer/fort.7.gz": "88c9d0b1b1a402a0a3853d4cc07daa28c507efb9a474473886e98814bdb9e11f",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/initializer/fort.8.gz": "5c55ae0f00e90c9d7e5d09175902e7a994771f5eedfe4969d11ba86ef9d18910",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/initializer/fort.9.gz": "5fb2b7acf4642edf9c42daa331680c0fe8bc8e6c3d4d17cb24d000a4a73928e7",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/initializer/tas.gz": "89bca72243e96230e6f3caf831f1284d8669283faddb8dff028a41839c18189e",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/initializer/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/initializer/opacity.sha256.gz": "f96b0c785b2d81c6dcf591c6a3c7492f26c128726b31e2e07aa6fca922055cfe",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/initializer/completed.json.gz": "96ed3e42bddf64a95b778c7fa3784cac7538ee103c203d1daabb9edb1515942f",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/initializer/run.log.gz": "93930f791f35135a96f7c9d943b43ce32d39b01bc7d47f8df048af27b5a09a44",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/refined_initializer/fort.5.gz": "a2b7a689c55c9fadbb8995f2c4184380f291574841d75707ca6ed7aa6672100a",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/refined_initializer/fort.7.gz": "ae7ec903a69d83d612c5ed45791ae88ad216cfa7f68544f0e031d673b28f23ff",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/refined_initializer/fort.8.gz": "ea495c8c0ab8a7ef7a41e4bb6dafef01559f9eab4c7fe61cbf8088ee9b293d3b",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/refined_initializer/fort.9.gz": "05c7f9b803f0dc97d1edfb3f29c039a88ba382c339f4d7a2f7e1468cc92b9664",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/refined_initializer/fort.15.gz": "3b5b7c9726f30e1192f8787d8882699df34861e25945b04e79025a2568932fe1",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/refined_initializer/tas.gz": "3e71e8fb9dd58d76fe61cb33c71126ebf4a74cb9503d8a7b80d24e3cb8e9791e",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/refined_initializer/ember-masses.dat.gz": "18e654b11ff4e6a55c5ecc6cbcb222793ee55879307cf4499935d8f09db69179",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/refined_initializer/opacity.sha256.gz": "f96b0c785b2d81c6dcf591c6a3c7492f26c128726b31e2e07aa6fca922055cfe",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/refined_initializer/physics.json.gz": "5cc725d97279c028688e3ecca7a2ee1cc396a3bf7f3d4dc42c86d0e734cb6837",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/refined_initializer/completed.json.gz": "7c396f7c6d01a13dfeaeff3dc63261dd71da67ad77eb5d57442b8aee08ffc7a2",
+    "/private/tmp/ember-nongrey-t5200-t6000-v1/x200-y000-t5600-g540/refined_initializer/run.log.gz": "e8b026945d7114f30b7630bacdca78311ace99e7eb91dc4df99b5241147c4a6c"
+  },
+  "script_sha256": "21d03327582104aeb75173f535f59fcb2d6d9475e144f26d7feadf89e5bce061"
+}

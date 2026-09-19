@@ -78,7 +78,7 @@ def main():
                 va='top', bbox={'facecolor':'white', 'edgecolor':'none', 'alpha':.75, 'pad':2})
         ax.text(-7.8, 3.065, 'Grains included' if i == 0 else 'Grains not yet included',
                 fontsize=9, bbox={'facecolor':'white', 'edgecolor':'none', 'alpha':.8, 'pad':3})
-        ax.annotate(f'{age[-1]:.4g} trillion yr', (x[-1], y[-1]), xytext=(-4.15, 3.69),
+        ax.annotate(f'{age[-1]:.4g} Tyr', (x[-1], y[-1]), xytext=(-4.15, 3.69),
                     fontsize=8, color=EMBER, arrowprops={'arrowstyle':'-', 'lw':.7, 'color':EMBER})
         for axis in [ax.xaxis, ax.yaxis]:
             axis.set_major_formatter(FuncFormatter(lambda v, _: f'{v:.4g}'))

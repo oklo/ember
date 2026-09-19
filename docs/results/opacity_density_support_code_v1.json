@@ -1,0 +1,14 @@
+{
+  "scope": "Opacity parser/coverage code verification with the original physical tables. No dense-opacity candidate is selected by this stellar control.",
+  "ctest_suites_passed": 33,
+  "ctest_log_sha256": "719fc28a49c988cb7c115d16259d53e769d4b8991276b92f118e9ff34ce0353e",
+  "executable_sha256": "a4e48b67505fa26ebf443108df5cfd27348f1a89cf79d7bc56f1f52dcfa19f1c",
+  "fixed_input_stellar_points": 512,
+  "duration_yr": 10000000000.0,
+  "full_output_byte_identical": true,
+  "output_sha256": "229f1a16dfcdacaa6f0e53811354ae9c9382c3c2f0e6d3667dff5b07be46ab6e",
+  "source_and_data_unchanged": true,
+  "receipt_sha256": "7c878e6a8f0f5980940d9574306148c3e329d810dc3ef3dce44783da93c1f206",
+  "reference_output": "/tmp/ember-eos-extension-compatibility-v1.json",
+  "result_output": "/tmp/ember-density-opacity-compatibility-v1.json"
+}

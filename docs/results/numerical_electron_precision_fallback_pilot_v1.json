@@ -1,0 +1,23 @@
+{
+  "scope": "Five hot dense source isotherms surrounding the reproducible exchange failure. Tighter quadrature recovers only the failed isotherm; convergence criteria and EOS formulas unchanged. This does not accept a complete EOS family.",
+  "queries": 605,
+  "fallback_isotherms": [
+    {
+      "temperature_index": 2,
+      "logT": 6.575,
+      "actual_probe_input_sha256": "d82767a612d77f319cf6034c9703a4e4c78193097c6f4f83e222ce4232d82e5e",
+      "nominal_failure_sha256": "416e3bc3a8b4221e483776f4ac4d8ea1c7717d440db31bc62197bdab4860f7e7"
+    }
+  ],
+  "maximum_local_first_law_defect": 9.494547162369749e-10,
+  "positive_thermodynamic_responses": true,
+  "nominal_converged_prefix_states": 35,
+  "maximum_prefix_physical_difference": 4.143467863077359e-09,
+  "file_sha256": {
+    "/tmp/ember-eos-precision-fallback-pilot-v1/specification.json": "9c52d58d0ac60a509f94d2c657b325be4c0e13e9a47450d1b7496b6f41a68232",
+    "/tmp/ember-eos-precision-fallback-pilot-v1/plane-000/source.json.gz": "4470933530d230e1d7b79cc8f30a7946e2fee091be1b0e6b8239a5b188d1fca9",
+    "/tmp/ember-numerical-electron-hot-dense-addition-v1/plane-045/temperature-046.failure.log": "34c5437f14881cce8ccdb76e2796904eb54965680d3bb8e31c9bb39c8087559a",
+    "scripts/generate_metal_eos.py": "06a285bd1d016c029895ee0136de91f49038b773e834c9b1c2a994e1d9e453c0"
+  },
+  "passed": true
+}

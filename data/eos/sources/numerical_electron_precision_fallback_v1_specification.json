@@ -1,0 +1,21 @@
+{
+  "scope": "Optional source-process fallback with identical EOS formulas and a tighter numerical electron quadrature target. Only src/fermi_dirac_direct.f90 changes: fderr 1e-9 to 1e-11. Nominal completed source values are retained. A fallback is used only after the nominal process fails, and its actual source identity must be recorded per isotherm.",
+  "source_archive_sha256": "4ab1c15a51385a3eab3b08c6f3f240739c0105d92ec828d635ac95720edefb09",
+  "nominal_probe_sha256": "f83fff2498551e7ef02724ede8ea2d594c2487340a6d70c59d456681cdf76114",
+  "probe": "/tmp/ember-freeeos-integral-precision-v1/probe",
+  "probe_sha256": "f9fd14b9715f40a314d53eb45d3908a24f01e16113a31e7ef506ed884a410d7b",
+  "library": "/tmp/ember-freeeos-integral-precision-v1/build/src/libfree_eos.1.0.0.dylib",
+  "library_sha256": "2c1a4d6c7f3fc44a80f2648de596204f2fb730ad63684af8bba95bb74d6c7952",
+  "nominal_relative_integral_error": 1e-09,
+  "fallback_relative_integral_error": 1e-11,
+  "patch": {
+    "scope": "Isolated precision diagnostic: tighten only the numerical Fermi-Dirac quadrature target from 1e-9 to 1e-11. Original Newton limit and all physical formulas retained. No active source or stellar input changed.",
+    "original_source_sha256": "287bab261c2343e0a1ad6ea547cc94296b4d256174d5067b43b4bb7cfbcd5d17",
+    "modified_source_sha256": "c6b74ef48629638b66bbfd92c3c88f1c0dfd1e87eb24638bb979ce1f1bff9991"
+  },
+  "changed_Fortran_files": [
+    "src/fermi_dirac_direct.f90"
+  ],
+  "source_control_report": "docs/results/numerical_electron_precision_controls_v1.json",
+  "source_control_sha256": "8a9d35ee0e4ee27d6279124e6f5bc89ea82c3a94c767a3465fce964f18a913de"
+}

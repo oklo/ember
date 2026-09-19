@@ -1,0 +1,9 @@
+{
+  "scope": "Repeat the same dense-opacity source and runtime queries with the current parser, which additionally accepts valid source responses without a density-warning block. Every saved runtime response and comparison is identical. The independent radiative-opacity criterion still fails.",
+  "same_runtime_responses": true,
+  "same_comparisons": true,
+  "source_audits_sha256": {
+    "docs/results/tops_density_fine_source_v2.json": "dbb9f2496db2911767d6d76a60c4434df9c294472d86236905b43ba8277d7dd1",
+    "docs/results/tops_density_fine_source_v1.json": "769a1db116cfd39b9243289ef699a25caa786092e6da0ed679abb167d75fc6e2"
+  }
+}

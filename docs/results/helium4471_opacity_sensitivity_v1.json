@@ -1,0 +1,1474 @@
+{
+  "scope": "Compare the He I 4471-A omission control with unchanged source isotherms.\n\nThis measures sensitivity of sampled absorption means. It does not accept\nthe omitted-line opacity or establish a bound on an atmosphere solution.\nReference files correspond, in order, to the first diagnostic temperatures.\n",
+  "accepted_for_stellar_opacity": false,
+  "XH": 0.175,
+  "X3": 0.005,
+  "source_recipe": {
+    "scope": "Measure opacity sensitivity to omitting He I 4471 A in a separate source.\n\nOmission is a diagnostic only. It is not a proposed physical prescription.\nOriginal source code, opacity and atmosphere files remain unchanged. The\nprepared diagnostic carries initialization_only so atmosphere continuation\nand assembly reject it. Completed source isotherms remain reusable.\n",
+    "accepted_for_stellar_opacity": false,
+    "recipe": {
+      "scope": "Measure opacity sensitivity to omitting He I 4471 A in a separate source.\n\nOmission is a diagnostic only. It is not a proposed physical prescription.\nOriginal source code, opacity and atmosphere files remain unchanged. The\nprepared diagnostic carries initialization_only so atmosphere continuation\nand assembly reject it. Completed source isotherms remain reusable.\n",
+      "input_sha256": {
+        "/private/tmp/ember-nongrey-hydrogen-poor-warm-v1/prepared.json": "e05ec1dadcf08a179d62c486f08369a177ce00e7a30387ac33c219cdaa04aff5",
+        "/Users/greglaughlin/Projects/ember/data/atmosphere/sources/nongrey_t5000_heldout_specification.json": "4f9f7e96c3157d96847676d77eea3f2d8447dc1411fd0d7caf5f06f4dfb37728",
+        "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/synspec54.f": "94790598078a69f33a207b889d3d53f5733eb5506516bb02ef2d9037277fa088",
+        "/Users/greglaughlin/Projects/ember/scripts/audit_helium_line_opacity.py": "2cf617c422c921045bb1f1d58f07b2e31dae30b359d0e61563f3f31139beba03",
+        "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/LINDAT.FOR": "0e2e04d28c831ff7d32abc778963c622300c251801c8230edf52818e413579a2",
+        "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/MODELP.FOR": "e021861cfb4576a7a719cd03593370f1c723d640b2948d180f4a566e9394b09e",
+        "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/OPTPAR.FOR": "60643f027f9c0914dea0225ed630d101d1abbfab143265b345501cd34fab25a2",
+        "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/PARAMS.FOR": "90bd77cfa1dd3190f83079838dc40c4783c2f57dc4b0dd401b99a67d6b5da0a4",
+        "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/SYNTHP.FOR": "bbdeb479e0bc01e77100eabd0e30ce0406c878a578effe20a9d9708af3fd884e",
+        "/private/tmp/ember-nongrey-reproduce/sampling-source/synspec/WINCOM.FOR": "2515f96a6d4b475789425d4af7e36d637fa0dba54d06a488be85e9a68243f7da"
+      },
+      "insertion": "C     Diagnostic omission only; never an atmosphere source.\n      IF(ILINE.EQ.1) THEN\n         PHE1=0.D0\n         RETURN\n      END IF\n",
+      "temperature_K": [
+        10102.54333023623,
+        11525.264496015445,
+        13148.344665403021,
+        15000.0
+      ],
+      "XH": 0.175,
+      "X3": 0.005
+    },
+    "prepared_sha256": "eb9d3ec6040023d8615e44839edb7a1c0f34943150783a706c89b3bf595a17e5",
+    "models": [
+      {
+        "temperature_K": 10102.54333023623,
+        "table": "/private/tmp/ember-helium4471-omission-v1/temperature-000/fort.63",
+        "table_sha256": "91ab7159885bb94da8518cc10e1c0b8cbae3fdd8546b7123c2f2a7387d6db19b",
+        "receipt_sha256": "391d56e4061f7420d173794604d3b585e5af861e8b36b678d9d12acd7f0e246f"
+      },
+      {
+        "temperature_K": 11525.264496015445,
+        "table": "/private/tmp/ember-helium4471-omission-v1/temperature-001/fort.63",
+        "table_sha256": "2ed2728d583721d5d3fffdbabf350ee598a3aa03c66e1d9665f503670d4b7089",
+        "receipt_sha256": "11a170e35bbf603835a830d802b2fdcbbfb76a876b9507004e6de5075b302b6a"
+      },
+      {
+        "temperature_K": 13148.344665403021,
+        "table": "/private/tmp/ember-helium4471-omission-v1/temperature-002/fort.63",
+        "table_sha256": "d1979204051303641481a8972a087cfd91a7fa82eb55647c0fe6b97fed4de648",
+        "receipt_sha256": "7422928af40c808c0d8583e2d90bbcce1bab1928393afb5493e73f72377716b7"
+      },
+      {
+        "temperature_K": 15000.0,
+        "table": "/private/tmp/ember-helium4471-omission-v1/temperature-003/fort.63",
+        "table_sha256": "0422163b4a3549dc7e03e4b7da1aa77ebf3ff256ea4f172d596bb284dfe83ec6",
+        "receipt_sha256": "754b349d0874cdffe7998057917570ac3ca585fd1ad1109ea27d9a83e105ab50"
+      }
+    ]
+  },
+  "input_sha256": {
+    "/private/tmp/ember-helium4471-omission-v1/completed.json": "30ec7fda9a9563a751845cf07ddd4fe20739b55dc2fcdfe06e451daac936e9c9",
+    "/private/tmp/ember-helium4471-omission-v1/prepared.json": "eb9d3ec6040023d8615e44839edb7a1c0f34943150783a706c89b3bf595a17e5",
+    "/Users/greglaughlin/Projects/ember/scripts/compare_helium_line_opacity.py": "e3815b775e2157b2653383d102bdbfe2a27a40d463e03ffabddf2e46649a8fb8",
+    "/Users/greglaughlin/Projects/ember/scripts/compare_nongrey_opacity.py": "8a335b7a4bb3a5a138af661e1a98a153ec09aed9bf5164f6e4ea70018f833645",
+    "/private/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/temperature-013/fort.63": "a09371842572728867272a6072a2bed6c7f0d2b79ec088780b21661b82482e07",
+    "/private/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/temperature-014/fort.63": "204f02deab11104a383f54d423c0e57be0dbe227281a9c0941caf5f3a2ee4580",
+    "/private/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/temperature-015/fort.63": "f374537d164d06e8445c7494c6ff0964ad5791f3337b7b33ee8ebe74fd8abc8d",
+    "/private/tmp/ember-helium4471-omission-v1/temperature-000/fort.63": "91ab7159885bb94da8518cc10e1c0b8cbae3fdd8546b7123c2f2a7387d6db19b",
+    "/private/tmp/ember-helium4471-omission-v1/temperature-001/fort.63": "2ed2728d583721d5d3fffdbabf350ee598a3aa03c66e1d9665f503670d4b7089",
+    "/private/tmp/ember-helium4471-omission-v1/temperature-002/fort.63": "d1979204051303641481a8972a087cfd91a7fa82eb55647c0fe6b97fed4de648",
+    "/private/tmp/ember-helium4471-omission-v1/temperature-003/fort.63": "0422163b4a3549dc7e03e4b7da1aa77ebf3ff256ea4f172d596bb284dfe83ec6"
+  },
+  "controls": [
+    {
+      "candidate_sha256": "91ab7159885bb94da8518cc10e1c0b8cbae3fdd8546b7123c2f2a7387d6db19b",
+      "reference_sha256": "a09371842572728867272a6072a2bed6c7f0d2b79ec088780b21661b82482e07",
+      "reference_material_interpolation": false,
+      "means_order": [
+        "Planck absorption",
+        "Rosseland absorption"
+      ],
+      "quantiles": [
+        0,
+        0.01,
+        0.5,
+        0.99,
+        1
+      ],
+      "rows": [
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 9.999999999999999e-14,
+          "candidate_means_cm2_g": [
+            8.757430616602752,
+            0.0007020523794428093
+          ],
+          "reference_means_cm2_g": [
+            8.75743065743817,
+            0.0007021839536386302
+          ],
+          "means_relative_change": [
+            -4.662945141120645e-09,
+            -0.00018737852828887291
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.5635904063932649,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 3.593813663804622e-13,
+          "candidate_means_cm2_g": [
+            8.740392338603169,
+            0.0017832747263061266
+          ],
+          "reference_means_cm2_g": [
+            8.740392391721139,
+            0.0017834994582617157
+          ],
+          "means_relative_change": [
+            -6.0772981091972156e-09,
+            -0.00012600618102132088
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.3831827130337213,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 1.2915496650148848e-12,
+          "candidate_means_cm2_g": [
+            10.199065469410803,
+            0.005289702910931468
+          ],
+          "reference_means_cm2_g": [
+            10.199065537764525,
+            0.005290054367001691
+          ],
+          "means_relative_change": [
+            -6.701959320842832e-09,
+            -6.643713766263382e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.19332406555371906,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 4.641588833612776e-12,
+          "candidate_means_cm2_g": [
+            15.388434483513008,
+            0.017525567147419166
+          ],
+          "reference_means_cm2_g": [
+            15.3884345931094,
+            0.017526180444970525
+          ],
+          "means_relative_change": [
+            -7.121997436243532e-09,
+            -3.499322361100177e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.08638746575154332,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 1.6681005372000553e-11,
+          "candidate_means_cm2_g": [
+            31.276804481711302,
+            0.06081514867049461
+          ],
+          "reference_means_cm2_g": [
+            31.276804735766174,
+            0.06081660105692981
+          ],
+          "means_relative_change": [
+            -8.122788552888949e-09,
+            -2.3881414119797384e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.04729115866317757,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 5.99484250318941e-11,
+          "candidate_means_cm2_g": [
+            75.15130260301191,
+            0.2112760627462285
+          ],
+          "reference_means_cm2_g": [
+            75.15130336045306,
+            0.21128043794443319
+          ],
+          "means_relative_change": [
+            -1.007888228432563e-08,
+            -2.0708013705572625e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.035732458179720594,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 2.1544346900318812e-10,
+          "candidate_means_cm2_g": [
+            168.7648530235538,
+            0.6977992598538906
+          ],
+          "reference_means_cm2_g": [
+            168.764856363494,
+            0.6978180881933336
+          ],
+          "means_relative_change": [
+            -1.9790495908722505e-08,
+            -2.6981730284147964e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.052835210144550726,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 7.742636826811278e-10,
+          "candidate_means_cm2_g": [
+            357.45557607822514,
+            2.015838982131901
+          ],
+          "reference_means_cm2_g": [
+            357.4555848821824,
+            2.0158880486701705
+          ],
+          "means_relative_change": [
+            -2.4629513761809108e-08,
+            -2.4339912279236486e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.04286469845316365,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 2.7825594022071236e-09,
+          "candidate_means_cm2_g": [
+            653.5632513479367,
+            4.608176386324175
+          ],
+          "reference_means_cm2_g": [
+            653.5632765704167,
+            4.6083162294114
+          ],
+          "means_relative_change": [
+            -3.8592254170133344e-08,
+            -3.034580967620215e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.0604650316850982,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 9.999999999999982e-09,
+          "candidate_means_cm2_g": [
+            1352.0084400604214,
+            8.135941961392769
+          ],
+          "reference_means_cm2_g": [
+            1352.0085079707997,
+            8.136320795992507
+          ],
+          "means_relative_change": [
+            -5.022925364528419e-08,
+            -4.656092221988484e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.10293938978432149,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 3.593813663804629e-08,
+          "candidate_means_cm2_g": [
+            2242.453643965117,
+            11.996498164977954
+          ],
+          "reference_means_cm2_g": [
+            2242.4537462949875,
+            11.997092604754938
+          ],
+          "means_relative_change": [
+            -4.5632990497423975e-08,
+            -4.954865287520871e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.09572548380748658,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 1.2915496650148827e-07,
+          "candidate_means_cm2_g": [
+            2960.0231759888925,
+            16.22559524176394
+          ],
+          "reference_means_cm2_g": [
+            2960.0232935260246,
+            16.22628899458322
+          ],
+          "means_relative_change": [
+            -3.970817807896765e-08,
+            -4.275486647087323e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.06015725772464564,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 4.641588833612777e-07,
+          "candidate_means_cm2_g": [
+            4386.956556655341,
+            21.655525885513445
+          ],
+          "reference_means_cm2_g": [
+            4386.956679730834,
+            21.6562083343352
+          ],
+          "means_relative_change": [
+            -2.8054868650428944e-08,
+            -3.151284893554429e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.033012138102990196,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 1.6681005372000587e-06,
+          "candidate_means_cm2_g": [
+            5288.147958745085,
+            29.883238034628196
+          ],
+          "reference_means_cm2_g": [
+            5288.148078932415,
+            29.88381163933997
+          ],
+          "means_relative_change": [
+            -2.2727678627987302e-08,
+            -1.9194496294394625e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.013145305323014944,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 5.994842503189402e-06,
+          "candidate_means_cm2_g": [
+            6773.510412852805,
+            43.96715475600307
+          ],
+          "reference_means_cm2_g": [
+            6773.510522055379,
+            43.967579107707266
+          ],
+          "means_relative_change": [
+            -1.6122005508378834e-08,
+            -9.651468486748804e-06
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.004200195994734979,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 2.1544346900318816e-05,
+          "candidate_means_cm2_g": [
+            7424.580588431273,
+            70.15934498314262
+          ],
+          "reference_means_cm2_g": [
+            7424.5806788439695,
+            70.1596238786914
+          ],
+          "means_relative_change": [
+            -1.2177481800712542e-08,
+            -3.975157410684993e-06
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.0028188954086039164,
+            0.0,
+            0.0,
+            0.0,
+            0.003667148038823953
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 7.742636826811266e-05,
+          "candidate_means_cm2_g": [
+            8545.422444350013,
+            120.51732898165976
+          ],
+          "reference_means_cm2_g": [
+            8545.422509969952,
+            120.51747566513876
+          ],
+          "means_relative_change": [
+            -7.678957802959019e-09,
+            -1.2171137686589617e-06
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.0018265235364407495,
+            0.0,
+            0.0,
+            0.0,
+            0.004753886408965791
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 0.0002782559402207124,
+          "candidate_means_cm2_g": [
+            9551.346174428494,
+            217.35684205178214
+          ],
+          "reference_means_cm2_g": [
+            9551.346207522365,
+            217.3568592021705
+          ],
+          "means_relative_change": [
+            -3.464838416178395e-09,
+            -7.890428876944355e-08
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.0010761188715809888,
+            0.0,
+            0.0,
+            0.0,
+            0.004238981603347458
+          ]
+        },
+        {
+          "T_K": 10102.543330236229,
+          "rho_baryon_g_cm3": 0.0009999999999999994,
+          "candidate_means_cm2_g": [
+            10905.216902315966,
+            394.08070629129406
+          ],
+          "reference_means_cm2_g": [
+            10905.216893625387,
+            394.0806233898986
+          ],
+          "means_relative_change": [
+            7.969194193435669e-10,
+            2.1036658615081194e-07
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.0008083888978084319,
+            0.0,
+            0.0,
+            0.0,
+            0.003227663238796863
+          ]
+        }
+      ],
+      "negative_original_line_contribution_samples": 18,
+      "changed_samples": 893,
+      "affected_wavelength_range_A": [
+        4434.001082525806,
+        4511.080577374426
+      ],
+      "tables": {
+        "candidate": "/private/tmp/ember-helium4471-omission-v1/temperature-000/fort.63",
+        "reference": "/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/temperature-013/fort.63"
+      }
+    },
+    {
+      "candidate_sha256": "2ed2728d583721d5d3fffdbabf350ee598a3aa03c66e1d9665f503670d4b7089",
+      "reference_sha256": "204f02deab11104a383f54d423c0e57be0dbe227281a9c0941caf5f3a2ee4580",
+      "reference_material_interpolation": false,
+      "means_order": [
+        "Planck absorption",
+        "Rosseland absorption"
+      ],
+      "quantiles": [
+        0,
+        0.01,
+        0.5,
+        0.99,
+        1
+      ],
+      "rows": [
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 9.999999999999999e-14,
+          "candidate_means_cm2_g": [
+            52.916304866566,
+            0.001206607626429738
+          ],
+          "reference_means_cm2_g": [
+            52.91630506611013,
+            0.001206875310175945
+          ],
+          "means_relative_change": [
+            -3.7709383393647045e-09,
+            -0.00022179900769381256
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.808937140490327,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 3.593813663804622e-13,
+          "candidate_means_cm2_g": [
+            36.52985739800574,
+            0.0033653825207385114
+          ],
+          "reference_means_cm2_g": [
+            36.52985796196481,
+            0.0033660998686585652
+          ],
+          "means_relative_change": [
+            -1.5438304523662794e-08,
+            -0.00021310951785269427
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.7971506339463953,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 1.2915496650148848e-12,
+          "candidate_means_cm2_g": [
+            28.015948583826884,
+            0.008165440422972252
+          ],
+          "reference_means_cm2_g": [
+            28.01594985890495,
+            0.008167223391327099
+          ],
+          "means_relative_change": [
+            -4.551257670737385e-08,
+            -0.00021830777357456643
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.7659064537984674,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 4.641588833612776e-12,
+          "candidate_means_cm2_g": [
+            25.593304194447658,
+            0.018767605784352503
+          ],
+          "reference_means_cm2_g": [
+            25.59330670220043,
+            0.018771984087375577
+          ],
+          "means_relative_change": [
+            -9.798471145572307e-08,
+            -0.00023323602889790962
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.7011175781544539,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 1.6681005372000553e-11,
+          "candidate_means_cm2_g": [
+            27.735931432212023,
+            0.04770484090705875
+          ],
+          "reference_means_cm2_g": [
+            27.735936806044293,
+            0.047716322123879364
+          ],
+          "means_relative_change": [
+            -1.9374980220199234e-07,
+            -0.00024061403539865633
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.6051412266060853,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 5.99484250318941e-11,
+          "candidate_means_cm2_g": [
+            40.21146940073052,
+            0.1425773381055663
+          ],
+          "reference_means_cm2_g": [
+            40.21148387534982,
+            0.14261094172946556
+          ],
+          "means_relative_change": [
+            -3.599623267236396e-07,
+            -0.00023563145640681515
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.5236165049851415,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 2.1544346900318812e-10,
+          "candidate_means_cm2_g": [
+            84.62656507146198,
+            0.47166935499963786
+          ],
+          "reference_means_cm2_g": [
+            84.62662767424649,
+            0.4718013463602168
+          ],
+          "means_relative_change": [
+            -7.397527967967221e-07,
+            -0.0002797604576528778
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.6082898594196666,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 7.742636826811278e-10,
+          "candidate_means_cm2_g": [
+            229.77573274416642,
+            1.5878893059739185
+          ],
+          "reference_means_cm2_g": [
+            229.7759111676588,
+            1.5883017251632277
+          ],
+          "means_relative_change": [
+            -7.765108686053068e-07,
+            -0.0002596604806097691
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.5326979630019393,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 2.7825594022071236e-09,
+          "candidate_means_cm2_g": [
+            644.2139316804632,
+            5.018605968642626
+          ],
+          "reference_means_cm2_g": [
+            644.2145331299274,
+            5.019873987775042
+          ],
+          "means_relative_change": [
+            -9.33616727372133e-07,
+            -0.00025259979344183225
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.5751051361592829,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 9.999999999999982e-09,
+          "candidate_means_cm2_g": [
+            1643.3861484803563,
+            13.510569226352784
+          ],
+          "reference_means_cm2_g": [
+            1643.3877830689491,
+            13.513891029191797
+          ],
+          "means_relative_change": [
+            -9.946457005804987e-07,
+            -0.00024580654319594775
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.5893080138291816,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 3.593813663804629e-08,
+          "candidate_means_cm2_g": [
+            4158.090396194038,
+            28.41589472143997
+          ],
+          "reference_means_cm2_g": [
+            4158.092426468419,
+            28.421698877415388
+          ],
+          "means_relative_change": [
+            -4.882706234887735e-07,
+            -0.0002042156593260458
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.36016175633381053,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 1.2915496650148827e-07,
+          "candidate_means_cm2_g": [
+            8415.984450861139,
+            47.39725333574016
+          ],
+          "reference_means_cm2_g": [
+            8415.986579058934,
+            47.404407301072894
+          ],
+          "means_relative_change": [
+            -2.5287561655762403e-07,
+            -0.00015091350657114866
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.18236362938316464,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 4.641588833612777e-07,
+          "candidate_means_cm2_g": [
+            12660.184493661327,
+            68.61052141741591
+          ],
+          "reference_means_cm2_g": [
+            12660.186545698116,
+            68.61775856631472
+          ],
+          "means_relative_change": [
+            -1.6208582565013785e-07,
+            -0.00010547049408227149
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.06231375184950483,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 1.6681005372000587e-06,
+          "candidate_means_cm2_g": [
+            16457.265723679116,
+            93.72206668579881
+          ],
+          "reference_means_cm2_g": [
+            16457.267567552786,
+            93.72794926138837
+          ],
+          "means_relative_change": [
+            -1.1204008576459756e-07,
+            -6.276223512757806e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.037608218939839455,
+            0.0,
+            0.0,
+            0.0,
+            0.02527610638051181
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 5.994842503189402e-06,
+          "candidate_means_cm2_g": [
+            19642.367189011464,
+            128.56699995638047
+          ],
+          "reference_means_cm2_g": [
+            19642.36870943341,
+            128.57070738362606
+          ],
+          "means_relative_change": [
+            -7.740522378618664e-08,
+            -2.8835706989860377e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.03160431116154527,
+            0.0,
+            0.0,
+            0.0,
+            0.07217957795536334
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 2.1544346900318816e-05,
+          "candidate_means_cm2_g": [
+            21693.969009865716,
+            184.35417114365515
+          ],
+          "reference_means_cm2_g": [
+            21693.970091718686,
+            184.35576841206273
+          ],
+          "means_relative_change": [
+            -4.9868832951993625e-08,
+            -8.6640544060268e-06
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.024204068039961002,
+            0.0,
+            0.0,
+            0.0,
+            0.0831402943370585
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 7.742636826811266e-05,
+          "candidate_means_cm2_g": [
+            25194.063731578353,
+            280.8720056637391
+          ],
+          "reference_means_cm2_g": [
+            25194.06426034733,
+            280.8718891999121
+          ],
+          "means_relative_change": [
+            -2.098783957737993e-08,
+            4.146510614866372e-07
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.017426873681778643,
+            0.0,
+            0.0,
+            0.0,
+            0.07407801297239969
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 0.0002782559402207124,
+          "candidate_means_cm2_g": [
+            28096.248006637925,
+            449.9450683320854
+          ],
+          "reference_means_cm2_g": [
+            28096.247871605414,
+            449.94365494385636
+          ],
+          "means_relative_change": [
+            4.806069098250987e-09,
+            3.1412560517196653e-06
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.013469238894378233,
+            0.0,
+            0.0,
+            0.0,
+            0.05860348143527605
+          ]
+        },
+        {
+          "T_K": 11525.264496015443,
+          "rho_baryon_g_cm3": 0.0009999999999999994,
+          "candidate_means_cm2_g": [
+            30566.591678910685,
+            733.7042613966789
+          ],
+          "reference_means_cm2_g": [
+            30566.590766273872,
+            733.7022157308492
+          ],
+          "means_relative_change": [
+            2.985733082994102e-08,
+            2.7881418180886186e-06
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.00998013423229338,
+            0.0,
+            0.0,
+            0.0,
+            0.04203780771752963
+          ]
+        }
+      ],
+      "negative_original_line_contribution_samples": 27,
+      "changed_samples": 2536,
+      "affected_wavelength_range_A": [
+        4344.756332266523,
+        4603.741759898626
+      ],
+      "tables": {
+        "candidate": "/private/tmp/ember-helium4471-omission-v1/temperature-001/fort.63",
+        "reference": "/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/temperature-014/fort.63"
+      }
+    },
+    {
+      "candidate_sha256": "d1979204051303641481a8972a087cfd91a7fa82eb55647c0fe6b97fed4de648",
+      "reference_sha256": "f374537d164d06e8445c7494c6ff0964ad5791f3337b7b33ee8ebe74fd8abc8d",
+      "reference_material_interpolation": false,
+      "means_order": [
+        "Planck absorption",
+        "Rosseland absorption"
+      ],
+      "quantiles": [
+        0,
+        0.01,
+        0.5,
+        0.99,
+        1
+      ],
+      "rows": [
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 9.999999999999999e-14,
+          "candidate_means_cm2_g": [
+            220.9723105094208,
+            0.0010615122988382368
+          ],
+          "reference_means_cm2_g": [
+            220.972310707288,
+            0.0010617278645244383
+          ],
+          "means_relative_change": [
+            -8.954388341919639e-10,
+            -0.00020303289892276144
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.8616872189163353,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 3.593813663804622e-13,
+          "candidate_means_cm2_g": [
+            206.8614369778328,
+            0.0032778667862089065
+          ],
+          "reference_means_cm2_g": [
+            206.8614376961098,
+            0.003278463860909539
+          ],
+          "means_relative_change": [
+            -3.4722614783433414e-09,
+            -0.0001821202630145624
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.8628694176746232,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 1.2915496650148848e-12,
+          "candidate_means_cm2_g": [
+            169.5421551361635,
+            0.009957121159523236
+          ],
+          "reference_means_cm2_g": [
+            169.54215780265812,
+            0.00995891429088494
+          ],
+          "means_relative_change": [
+            -1.5727619984140517e-08,
+            -0.00018005289626255028
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.8662389649776568,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 4.641588833612776e-12,
+          "candidate_means_cm2_g": [
+            116.9730475483407,
+            0.028680193047538313
+          ],
+          "reference_means_cm2_g": [
+            116.97305793531913,
+            0.028686941110533333
+          ],
+          "means_relative_change": [
+            -8.879804136441294e-08,
+            -0.00023523117954682427
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.8753735499942865,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 1.6681005372000553e-11,
+          "candidate_means_cm2_g": [
+            81.04325505867118,
+            0.07354748501307015
+          ],
+          "reference_means_cm2_g": [
+            81.04329660614691,
+            0.07357344731714252
+          ],
+          "means_relative_change": [
+            -5.126577702352364e-07,
+            -0.000352876003763436
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.8930268358720185,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 5.99484250318941e-11,
+          "candidate_means_cm2_g": [
+            69.98918138661587,
+            0.16846771261996493
+          ],
+          "reference_means_cm2_g": [
+            69.98933761224177,
+            0.1685482777078634
+          ],
+          "means_relative_change": [
+            -2.2321346541120946e-06,
+            -0.0004779941331592985
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.9140299025728175,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 2.1544346900318812e-10,
+          "candidate_means_cm2_g": [
+            78.4541099407538,
+            0.39282204165698437
+          ],
+          "reference_means_cm2_g": [
+            78.45487532297173,
+            0.3930725631092212
+          ],
+          "means_relative_change": [
+            -9.755699882041391e-06,
+            -0.0006373414879308203
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.9571190307598991,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 7.742636826811278e-10,
+          "candidate_means_cm2_g": [
+            134.7163146392318,
+            1.0627820033293307
+          ],
+          "reference_means_cm2_g": [
+            134.7184539291728,
+            1.0634699207026685
+          ],
+          "means_relative_change": [
+            -1.5879709710175938e-05,
+            -0.0006468611475943797
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.950634630320546,
+            -5.334612810268337e-08,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 2.7825594022071236e-09,
+          "candidate_means_cm2_g": [
+            371.13694137649765,
+            3.3014997976759117
+          ],
+          "reference_means_cm2_g": [
+            371.14430044020975,
+            3.3036374004795577
+          ],
+          "means_relative_change": [
+            -1.9828039130254105e-05,
+            -0.0006470452245562752
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.9582650809103569,
+            -4.296448901574874e-05,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 9.999999999999982e-09,
+          "candidate_means_cm2_g": [
+            1147.576383210122,
+            10.585975633801455
+          ],
+          "reference_means_cm2_g": [
+            1147.5962454586606,
+            10.592739525449046
+          ],
+          "means_relative_change": [
+            -1.7307697386836907e-05,
+            -0.0006385403541114831
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.9499863205570982,
+            -2.9332207586734155e-05,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 3.593813663804629e-08,
+          "candidate_means_cm2_g": [
+            3773.463914439436,
+            31.15547568015607
+          ],
+          "reference_means_cm2_g": [
+            3773.487652494073,
+            31.173767620087332
+          ],
+          "means_relative_change": [
+            -6.290746604409314e-06,
+            -0.0005867734742295294
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.8113421487241909,
+            -4.10119229639605e-05,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 1.2915496650148827e-07,
+          "candidate_means_cm2_g": [
+            11068.95967719112,
+            74.95559905487171
+          ],
+          "reference_means_cm2_g": [
+            11068.983396200974,
+            74.98661222651972
+          ],
+          "means_relative_change": [
+            -2.142835435314794e-06,
+            -0.0004135827813414039
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.426045609657818,
+            -6.20107496500921e-05,
+            0.0,
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 4.641588833612777e-07,
+          "candidate_means_cm2_g": [
+            21868.20803956002,
+            140.7885995952539
+          ],
+          "reference_means_cm2_g": [
+            21868.22912717402,
+            140.81801479992774
+          ],
+          "means_relative_change": [
+            -9.64303688122392e-07,
+            -0.0002088880795232395
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.20680116168561458,
+            -6.533409304772085e-05,
+            0.0,
+            0.0,
+            0.22701291481211405
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 1.6681005372000587e-06,
+          "candidate_means_cm2_g": [
+            33215.03202337298,
+            219.86386447984265
+          ],
+          "reference_means_cm2_g": [
+            33215.04884090975,
+            219.8710662032475
+          ],
+          "means_relative_change": [
+            -5.063228072366144e-07,
+            -3.275430246096889e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.17036425154387969,
+            -6.008444516151456e-05,
+            0.0,
+            0.0,
+            0.8884880205365684
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 5.994842503189402e-06,
+          "candidate_means_cm2_g": [
+            42380.68043127691,
+            312.7509013414213
+          ],
+          "reference_means_cm2_g": [
+            42380.691743027535,
+            312.73199736598764
+          ],
+          "means_relative_change": [
+            -2.6690811694152217e-07,
+            6.044784541670012e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.15112727530621595,
+            -5.484430592813449e-05,
+            0.0,
+            0.0,
+            1.1716462393837
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 2.1544346900318816e-05,
+          "candidate_means_cm2_g": [
+            51567.289561387144,
+            433.83630403502843
+          ],
+          "reference_means_cm2_g": [
+            51567.29424314677,
+            433.8029254582933
+          ],
+          "means_relative_change": [
+            -9.078932083905755e-08,
+            7.694410243974659e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.1276634610685694,
+            -4.9122557481149346e-05,
+            0.0,
+            0.0,
+            1.048328974432558
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 7.742636826811266e-05,
+          "candidate_means_cm2_g": [
+            58971.457700378196,
+            612.4780801290574
+          ],
+          "reference_means_cm2_g": [
+            58971.45463586833,
+            612.4384125278023
+          ],
+          "means_relative_change": [
+            5.196598729106938e-08,
+            6.476994330162356e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.10576173856914506,
+            -4.291919155391954e-05,
+            0.0,
+            0.0,
+            0.8053311156863789
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 0.0002782559402207124,
+          "candidate_means_cm2_g": [
+            63598.99395880365,
+            891.3628815932619
+          ],
+          "reference_means_cm2_g": [
+            63598.982019030474,
+            891.3193608345005
+          ],
+          "means_relative_change": [
+            1.8773528753790458e-07,
+            4.882734592537297e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.08855266256627836,
+            -3.9581469134397636e-05,
+            0.0,
+            0.0,
+            0.5958237497225078
+          ]
+        },
+        {
+          "T_K": 13148.344665403018,
+          "rho_baryon_g_cm3": 0.0009999999999999994,
+          "candidate_means_cm2_g": [
+            3446.652584908346,
+            1199.037983566889
+          ],
+          "reference_means_cm2_g": [
+            3446.63069504184,
+            1198.9685353435327
+          ],
+          "means_relative_change": [
+            6.351091382361673e-06,
+            5.792330766740683e-05
+          ],
+          "monochromatic_relative_change_quantiles": [
+            -0.08704505203498492,
+            -4.530804032774504e-05,
+            0.0,
+            0.0,
+            0.5879347806145947
+          ]
+        }
+      ],
+      "negative_original_line_contribution_samples": 32,
+      "changed_samples": 5665,
+      "affected_wavelength_range_A": [
+        4269.691887784255,
+        4684.679056272464
+      ],
+      "tables": {
+        "candidate": "/private/tmp/ember-helium4471-omission-v1/temperature-002/fort.63",
+        "reference": "/tmp/ember-nongrey-x0175-opacity-13k-v1/plane-000/opacity/temperature-015/fort.63"
+      }
+    }
+  ],
+  "finite_diagnostic_temperatures_without_reference_K": [
+    15000.0
+  ]
+}

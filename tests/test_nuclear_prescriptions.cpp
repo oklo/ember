@@ -36,12 +36,29 @@ int main() {
   }
   check(nr==18 && rate_error<2e-9,"SFII rates and slopes match independent adaptive energy integration",rate_error);
   check(ns==10 && screen_error<2e-9,"screening and Fermi susceptibility match independent bracketed quadrature",screen_error);
+  std::ifstream latest(std::string(EMBER_TEST_DATA_DIR)+"/sfiii_reference.dat");
+  double latest_error=0;int latest_count=0;
+  for(std::string line;std::getline(latest,line);) {
+    if(line.empty() || line[0]=='#')continue;
+    std::istringstream row(line);double T,value,slope;int r;row>>T>>r>>value>>slope;
+    if(!row) {check(false,"SFIII reference file parses");return 1;}
+    const auto reaction=static_cast<PPReaction>(r);
+    const auto previous=pp_bare_rate(T,reaction,PPRates::solar_fusion_ii);
+    const auto result=pp_bare_rate(T,reaction,PPRates::solar_fusion_iii);
+    const auto repeated=pp_bare_rate(T,reaction,PPRates::solar_fusion_ii);
+    check(previous.molar_rate==repeated.molar_rate && previous.dlnrate_dlnT==repeated.dlnrate_dlnT,
+          "rate cache separates SFII and SFIII");
+    latest_error=std::max({latest_error,std::abs(result.molar_rate/value-1),
+                          std::abs(result.dlnrate_dlnT/slope-1)});++latest_count;
+  }
+  check(latest_count==18 && latest_error<2e-9,"SFIII rates and slopes match independent energy integration",latest_error);
   double thermal=0,composition=0,baryons=0,mass=0;
+  for(auto rates:{PPRates::solar_fusion_ii,PPRates::solar_fusion_iii})
   for(auto basis:{AbundanceBasis::baryon_mass,AbundanceBasis::atomic_mass})
   for(auto screening:{PPScreening::salpeter_van_horn,PPScreening::debye_fermi})
   for(auto [T,rho]:{std::pair{4.5e6,360.},std::pair{1.55e7,150.},std::pair{1e6,1000.}})
   for(double X3:{0.,.004,.05}) {
-    PPChains nuc(PPRates::solar_fusion_ii,screening);
+    PPChains nuc(rates,screening);
     auto comp=solar_scaled(.5,.02);comp.basis=basis;comp.X[1]=X3;comp.X[2]-=X3;
     const auto response=nuc.composition_response(T,rho,comp);const auto& s=response.state;
     const double step=1e-5;
@@ -80,6 +97,9 @@ int main() {
   PPChains modern(PPRates::solar_fusion_ii,PPScreening::salpeter_van_horn);
   check(rejects([&]{modern.eval(2.001e7,100,comp);}) && rejects([&]{modern.eval(1e6,1e6,comp);}),
     "unsupported rate temperatures and quantum-ion conditions are rejected");
+  PPChains latest_network(PPRates::solar_fusion_iii,PPScreening::salpeter_van_horn);
+  check(rejects([&]{latest_network.eval(2.001e7,100,comp);})
+      && rejects([&]{latest_network.eval(1e6,1e6,comp);}),"SFIII retains temperature and quantum-ion limits");
   check(rejects([&]{modern.eval(0,1,comp);}) && rejects([&]{modern.eval(1e6,-1,comp);})
     && rejects([&]{modern.eval(std::numeric_limits<double>::quiet_NaN(),1,comp);}),"invalid thermal states are rejected");
   check(modern.eval(1e4,100,comp).eps==0,"retained cold cutoff has no burning");

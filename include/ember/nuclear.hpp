@@ -30,8 +30,8 @@ public:
   }
 };
 
-// The proton-proton chains, which are the whole of the energy budget for a
-// star of a tenth of a solar mass.
+// The reduced proton-proton network. Missing branches and CNO burning must
+// be assessed separately before interpreting a complete stellar trajectory.
 //
 // He3 is followed explicitly rather than assumed to be in equilibrium.  In a
 // fully convective star of this mass the He3 abundance rises for a trillion
@@ -43,7 +43,7 @@ public:
 // Solar Fusion II S-factor quadrature and finite-degeneracy Salpeter--Van Horn
 // screening explicitly. These remain a reduced pp network, without pep, hep,
 // ppIII or CNO, and are not a prescription for pycnonuclear burning.
-enum class PPRates { legacy, solar_fusion_ii };
+enum class PPRates { legacy, solar_fusion_ii, solar_fusion_iii };
 enum class PPScreening { legacy_weak, debye_fermi, salpeter_van_horn };
 enum class PPReaction { pp, he3_he3, he3_he4 };
 struct ThermonuclearRate {
