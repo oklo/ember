@@ -2,25 +2,24 @@
 
 [Read the PDF](ember_status_and_future.pdf).
 
-The diagnostic helium-3 pulse calculation with **2010** mass points reaches
-**122.7 thousand years**, **5818 K** and surface **X = 0.8158**. Nuclear
-power falls **2.794%** during the latest **2800 yr**, to **3.043e32 erg/s**;
-shell burning continues. All **seven** intervals in this segment pass independent checks.
-A matched local refinement changes deposited nuclear energy by **1.468%**
-and endpoint nuclear power by **1.980%** over **978.3 yr**. This supports
-the late shell burning; onset and peak remain uncertain.
-A tested larger timestep ceiling uses **81** versus **120** structure solves
-over **2000 yr**, with released nuclear energy differing by **0.1353%**.
-A matched **12,000 yr** atmosphere comparison reaches **5701 K** and changes
-surface temperature by **0.2296 K** and luminosity by **0.01569%**, with the same
-convective regions. The final **2800 yr** segment uses **11.58 CPU minutes**.
-The draft also describes a checked **1713 yr** onset calculation. Nuclear power rises to a sampled
-maximum of **3.719e35 erg/s** near **1642 yr**, then declines **81.64%**.
-This is one mass grid; the peak is not established as spatially converged. A **3.573 yr**
-convective adjustment passes an eight-step/sixteen-step comparison, with nuclear
-energy differing by **0.1222%** and the same final convection.
-Atmosphere source coverage reaches **6000 K** and **log g = 4.80**, with independent
-depth comparisons. A continuous, converged passage through the whole pulse remains unresolved.
+The diagnostic late helium-3 calculation reaches **143.4 thousand years**,
+**5986 K** and nuclear power **2.508e32 erg/s** on **2115** mass points.
+Nuclear burning supplies **93.31%** of photon luminosity. A matched
+**2000 yr** comparison of two mass grids changes deposited nuclear energy by
+**0.5220%**. A checked **800 yr** trial-step limit speeds the smooth later
+sequence; the **17,200 yr** segment uses **31.21 CPU minutes**, including
+its timestep comparisons and rejected trials.
+
+The calculation resolving the onset reaches **2374 yr** and **4606 K**.
+It shows a rise, decline and renewed burning. Its latest **5.756 yr**
+convective adjustment passes an **8/16-step** comparison, with deposited
+energy differing by **0.2976%**. The full pulse's peak and spatial
+convergence remain uncertain.
+
+The draft includes the checked diffusion extension at the newly radiative
+envelope layer and a **45-column** mixed-atmosphere grid covering
+**5000–6000 K** and **log g = 4.65–5.25**. A complete white-dwarf cooling
+sequence is not yet established.
 
 This directory contains the PDF, LaTeX inputs and included figure PDFs.
 The existing figures, including the LBA97 opacity comparison, are retained.

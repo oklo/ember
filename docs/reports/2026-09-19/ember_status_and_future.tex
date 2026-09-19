@@ -44,12 +44,12 @@ Figure~\ref{fig:wd_response} shows this atmosphere comparison, which develops
 a helium-3 burning pulse and a convective shell near the hydrogen--helium
 transition. Locally refined calculations retain the pulse, but its peak
 strength and timing depend on spatial resolution. A diagnostic late-phase
-calculation with 2010 mass points follows shell burning through
-$1.227\times10^5$ yr from the model before shell convection, reaching
-$T_{\rm eff}=5818$ K and declining nuclear power of
-$3.043\times10^{32}$ erg s$^{-1}$. A separate calculation with finite
-convective transport from the onset follows a rise and decline in nuclear
-power through 1713 yr. The peak strength and complete pulse history
+calculation with 2115 mass points follows shell burning through
+$1.434\times10^5$ yr from the model before shell convection, reaching
+$T_{\rm eff}=5986$ K and declining nuclear power of
+$2.508\times10^{32}$ erg s$^{-1}$. A separate calculation with finite
+convective transport from the onset follows a rise, decline and renewed
+burning through 2374 yr. The peak strength and complete pulse history
 remain uncertain.
 
 
@@ -734,12 +734,13 @@ location of the strongest burning. The onset of the connection and its
 resolution dependence remain to be established.
 
 An onset calculation on the 1695-point grid, with finite composition
-transport throughout all convective layers, reaches 1713 yr,
-$T_{\rm eff}=4621$ K and nuclear power $6.828\times10^{34}$ erg s$^{-1}$.
-Nuclear power rises to a sampled maximum of $3.719\times10^{35}$ erg s$^{-1}$
+transport throughout all convective layers, reaches 2374 yr,
+$T_{\rm eff}=4606$ K and nuclear power $2.610\times10^{34}$ erg s$^{-1}$.
+Nuclear power rises to a local maximum of $3.719\times10^{35}$ erg s$^{-1}$
 near 1642 yr and then declines by 81.64\%; the highest interior temperature
-falls from 15.09 to 13.27 MK. This is a continuous rise and decline on one
-mass grid, not a spatially converged peak measurement.
+falls from 15.09 to 13.27 MK. Nuclear power subsequently rises again.
+The first local maximum therefore does not mark the completion of the pulse,
+and its amplitude has not been established as spatially converged.
 The calculation retains the original pointwise timestep criteria and independent
 energy and species-conservation checks. Surface abundances are $X=0.9984$ and
 $X_3=0.001368$. Across a 2.548 yr convective adjustment, 16 and 32 time steps
@@ -747,7 +748,9 @@ agree within the same physical criteria and give the same final convective
 regions; deposited nuclear energy differs by 0.01692\%. A subsequent
 3.573 yr adjustment passes an eight-step/sixteen-step comparison with
 nuclear energy differing by 0.1222\% and the same final convection.
-These checks support the endpoint structures and integrated burning,
+A 5.756 yr adjustment near 2368 yr also passes an eight-step/sixteen-step
+comparison, with nuclear energy differing by 0.2976\% and identical final
+convective regions. These checks support the endpoint structures and integrated burning,
 without resolving the internal timing of each rapid adjustment or
 establishing the pulse maximum and its spatial convergence.
 
@@ -855,6 +858,18 @@ supports the later shell-burning evolution; it does not establish the
 accuracy of the pulse onset or peak. The initial response to remapping
 is included in the energy comparison and recorded separately.
 
+As the burning layer moves inward, the grid is refined over
+$0.9100<m/M<0.9350$, giving 2115 mass points. The remapping preserves
+composition inventories and the discrete initial energy integrals.
+Over a matched 2000 yr interval, the refined grid changes deposited nuclear
+energy by $-0.5220\%$ and endpoint nuclear power by $-0.5687\%$;
+the effective temperatures differ by 0.008188 K. Half the nuclear power
+occupies 39 cells instead of 12. Both calculations pass the same local
+time and conservation checks. Including the initial 100 yr of mechanical
+readjustment gives a deposited-energy difference of $-0.5195\%$.
+This agreement supports the later shell-burning calculation; it does not
+determine the accuracy of the onset or peak.
+
 A steep temperature front below the burning shell constrains the timestep
 at late times. Allowing temperature errors to scale with the local spatial
 gradient, while separately checking the burning temperature and stored-energy
@@ -879,16 +894,32 @@ At $5.747\times10^4$ yr, a 400 yr step, two 200 yr steps and four 100 yr
 steps pass the same physical accuracy and conservation checks. The coarsest
 and finest paths differ by 0.3543\% in deposited nuclear energy and
 0.005697\% in endpoint nuclear power, with the same convective regions.
-The full-step ceiling is then 400 yr, with retained half steps at most 200 yr;
-each subsequent interval is still checked by time refinement.
+On the 2115-point grid at $1.235\times10^5$ yr, an 800 yr step,
+two 400 yr steps and four 200 yr steps also pass the same checks.
+The coarsest and finest calculations differ by 0.3082\% in deposited nuclear
+energy, with identical final convective regions. The full-step limit is
+800 yr, with retained half steps at most 400 yr; each subsequent interval
+is checked by time refinement, which can require shorter steps.
 
-The 2010-point sequence reaches $1.227\times10^5$ yr and
-$T_{\rm eff}=5818$ K. During its final 2800 yr, nuclear power falls by
-2.794\% to $3.043\times10^{32}$ erg s$^{-1}$. All seven intervals in this segment
-pass the stated timestep and conservation checks. This portion uses
-21 structure solutions and 11.58 CPU minutes on an Apple M4 Max, including
-the timestep comparisons. The surface composition is $X=0.8158$,
+The 2115-point sequence reaches $1.420\times10^5$ yr and
+$T_{\rm eff}=5977$ K. During its final 17,200 yr, nuclear power falls by
+14.44\% to $2.536\times10^{32}$ erg s$^{-1}$. All 22 accepted intervals
+pass the stated timestep and conservation checks. This segment uses
+31.21 CPU minutes on an Apple M4 Max, including timestep comparisons
+and rejected trials. The surface composition is $X=0.8158$,
 $X_3=0.007276$ and $Z=5.575\times10^{-16}$. Shell burning remains active.
+Near this age, a layer at $m/M=0.9948$ becomes radiative at 1.765 MK.
+The microscopic species calculation includes this layer with a lower limit
+of 1.500 MK, keeping the existing heat-transport prescription.
+FreeEOS source calculations over the local temperature, density and composition
+range give a hydrogen neutral fraction below 0.003252\% and a deficit in
+mean helium charge below 0.3549\% relative to full ionization. Fully ionized
+Coulomb transport remains an approximation here. A 400 yr comparison with
+400, 200 and 100 yr steps passes the same accuracy and conservation checks;
+the coarsest and finest deposited nuclear energies differ by 0.1203\%.
+The continued sequence reaches $1.434\times10^5$ yr, 5986 K and nuclear
+power $2.508\times10^{32}$ erg s$^{-1}$, supplying 93.31\% of the photon
+luminosity. A white-dwarf cooling sequence is not yet established.
 
 Across the interval from $1.443\times10^4$ to $1.701\times10^4$ yr,
 $^3$He+$^3$He supplies approximately 97\% of the deposited nuclear power.
@@ -948,8 +979,12 @@ of a hydrogen atmosphere inferred below the published gravity range.
 Nine additional sources at $\log g=4.80$, with 5000, 5500 and 6000 K
 and the same three hydrogen fractions, provide a local 36-column grid over
 $5000\leq T_{\rm eff}\leq6000$ K and $4.80\leq\log g\leq5.25$.
+Nine sources at $\log g=4.65$ give a 45-column grid over
+$5000\leq T_{\rm eff}\leq6000$ K and $4.65\leq\log g\leq5.25$.
 Independent depth comparisons at all three temperatures pass the same
-matching-temperature and pressure criteria.
+matching-temperature and pressure criteria. All overlapping matching states
+are unchanged, and the stellar boundary derivatives pass finite-difference
+checks throughout the added cells.
 The absolute hydrogen reference below $\log g=5.50$ remains inferred.
 From $\log g=5.25$ to 5.10, its gravity dependence follows the calculated
 $X=0.9955$ source response, anchored at the matching state at 5.25.

@@ -36,20 +36,27 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2010-point** sequence reaches **122.7 thousand years**, **5818 K** and
-nuclear power **3.043e32 erg/s**. Power declines by **2.794%** during the
-latest **2800 years**. All **seven** intervals in this segment pass independent
-timestep, composition and energy checks. Shell burning continues. This portion
-uses **11.58 CPU minutes**, including timestep comparisons.
+The **2115-point** late sequence reaches **143.4 thousand years**, **5986 K**
+and nuclear power **2.508e32 erg/s**, supplying **93.31%** of photon luminosity.
+A matched **2000-year** mass-grid comparison changes deposited nuclear energy
+by **0.5220%** and endpoint power by **0.5687%**. Half the burning power
+occupies **39** cells instead of **12**. This supports the later shell burning;
+the full pulse's onset and peak remain uncertain.
 
-A separate onset calculation with finite mixing throughout the convective
-envelope reaches **1713 years**, **4621 K** and nuclear power **6.828e34 erg/s**.
-Power reaches a sampled maximum of **3.719e35 erg/s** near **1642 years**,
-then declines **81.64%**. This is a rise and decline on one mass grid,
-not an established converged peak.
-A **3.573-year** comparison of **8** and **16** steps passes the original physical
-checks, with nuclear energy differing by **0.1222%** and the same final convection.
-The pulse maximum and a complete, spatially converged pulse remain unresolved.
+An **800/400/200-year** comparison supports larger time steps with unchanged
+accuracy and conservation checks. The **17,200-year** segment takes
+**31.21 CPU minutes**, including timestep comparisons and rejected trials.
+A newly radiative envelope layer is included by extending microscopic species
+transport to **1.500 MK**, supported by source ionization, actual exchange and
+finite-step checks. This local approximation does not describe neutral-fluid
+transport in a cold remnant.
+
+The separate onset calculation reaches **2374 years**, **4606 K** and nuclear
+power **2.610e34 erg/s**. Power reaches a local maximum of **3.719e35 erg/s**
+near **1642 years**, then declines and rises again. The most recent **5.756-year**
+convective adjustment passes an **8/16-step** comparison, with nuclear energy
+differing by **0.2976%** and the same final convection. A complete, spatially
+converged pulse and white-dwarf cooling sequence remain unresolved.
 
 A matched **12,000-year** comparison of two atmosphere references reaches
 **5701 K**. Effective temperatures differ by **0.2296 K** and surface luminosities
@@ -80,8 +87,9 @@ A matched **10,000-year** comparison below **log g = 5.10** reaches
 sensitivity to the two prescriptions, not a bound on their shared uncertainty.
 Nine additional **6000 K** mixture columns and a source at the published
 hydrogen grid's gravity floor pass independent source and depth checks.
-Nine lower-gravity sources and three depth controls complete a local **36-column**
-mixture grid over **5000–6000 K** and **log g = 4.80–5.25**.
+The local mixed-atmosphere grid contains **45** solved columns over
+**5000–6000 K** and **log g = 4.65–5.25**, with independent depth checks
+and unchanged matching states in every overlapping cell.
 A matched **8000-year** comparison of two temperature extensions of the hydrogen
 reference reaches **5553 K**. Their effective temperatures differ by **4.301 K**,
 surface luminosities by **0.3070%**, and deposited nuclear energy by **5.576e-5%**,
