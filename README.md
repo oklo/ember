@@ -36,16 +36,16 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2010-point** sequence reaches **69.07 thousand years**, **5185 K** and
-nuclear power **6.527e32 erg/s**. Power declines by **80.76%** during the
-additional **4.676e4 years**. All **225** intervals pass independent timestep,
+The **2010-point** sequence reaches **75.87 thousand years**, **5262 K** and
+nuclear power **5.740e32 erg/s**. Power declines by **83.08%** during the
+additional **5.356e4 years**. All **242** intervals pass independent timestep,
 composition and energy checks. Shell burning continues.
 
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
 **X = 0.78–0.9955** and **log g = 5.55–5.80**. Independent calculations check
 interpolation, the helium-isotope approximation and lower-boundary sensitivity.
-The local mixed-atmosphere grid now contains **45** solved columns covering
-**4700–5500 K** and **log g = 5.10–5.80**. The absolute hydrogen reference
+The local mixed-atmosphere grid now contains **54** solved columns covering
+**4700–5500 K** and **log g = 4.95–5.80**. The absolute hydrogen reference
 below **log g = 5.5** remains an explicitly inferred continuation. A matched
 **10,000-year** calculation testing the extension below **log g = 5.25**
 reaches **log g = 5.231**. The two references change surface temperature
