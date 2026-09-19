@@ -751,12 +751,13 @@ Below the published hydrogen reference atmosphere's lower boundary,
 $\log g=5.5$, a bounded continuation uses the slope of its lowest two
 gravity rows in logarithmic matching temperature and pressure.
 The inferred reference extends to $\log g=5.4$ over 4700--5500 K.
-A matched 100 yr comparison with the gravity response from calculated
-atmospheres differs by 0.9429 K in surface temperature and 0.07831\% in
-luminosity, with relative nuclear-power and deposited-energy differences
-below $10^{-8}$. This tests only the small gravity interval traversed,
-ending near $\log g=5.496$; it does not establish the accuracy of the
-entire extension.
+A matched 500 yr comparison with the gravity response from calculated
+atmospheres reaches $\log g=5.461$. The alternative is 5.697 K cooler and
+0.4703\% less luminous, while deposited nuclear energy differs by
+0.00001530\% and endpoint nuclear power by 0.00004955\%.
+Every retained response in both histories passes independent time and
+conservation checks. These small measured interior differences support a
+bounded continuation, but do not establish accuracy throughout the extension.
 Below 1.8 MK, species exchange inside these convective layers is represented
 by the convective flux, with microscopic separation neglected there.
 Material conduction and composition enthalpy are retained; cold radiative
@@ -777,6 +778,15 @@ The original nonlinear conservation checks remain unchanged. This comparison
 supports local time accuracy; it does not establish convergence of the complete
 pulse. The deposited heat is integrated consistently with the implicit stellar
 equations, rather than changing only the reported luminosity integral.
+
+A separate 500 yr comparison tests a 1\% local deposited-energy allowance
+with all other local checks retained. It uses 87 accepted intervals rather
+than 156, with deposited energy differing by 0.03618\% and endpoint nuclear
+power by 0.1500\%. The largest local temperature difference is
+$|\Delta\ln T|=0.001091$, near $m/M=0.9420$, exceeding the predeclared
+0.001 limit. The 0.5\% allowance is therefore retained. Both histories are
+compared at the same final age; their differing computer loads do not support
+a measured runtime speedup.
 
 The enriched envelope requires a hydrogen--helium atmosphere.
 A mixed atmosphere at $X=0.9072$, $X_3=0.004$, $T_{\rm eff}=4600$ K and

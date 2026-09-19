@@ -7,7 +7,7 @@ surface **X = 0.8159** after helium mixes through the convective envelope.
 The paper describes its checked readjustment, thirty-column hydrogen–helium
 atmosphere grid, and the fixed-duration comparison supporting the stated
 timestep accuracy. A short interior mixing event passes a two-step/four-step comparison over
-**0.2279 yr**. Below **log g = 5.5**, the hydrogen reference uses an explicitly inferred local continuation. A matched **100-year** atmosphere comparison differs by **0.9429 K** at its endpoint.
+**0.2279 yr**. Below **log g = 5.5**, the hydrogen reference uses an explicitly inferred local continuation. A matched **500-year** atmosphere comparison differs by **5.697 K** in effective temperature and **0.00001530%** in deposited nuclear energy.
 The shell remains active; atmosphere dependence and spatial
 convergence remain unresolved. The selected main track reaches **4.002 Tyr**.
 

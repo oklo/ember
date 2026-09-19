@@ -30,9 +30,10 @@ interpolation, the helium-isotope approximation and lower-boundary sensitivity.
 Nine additional columns provide lower-gravity coverage at **4700–5500 K**,
 extending the local mixed-atmosphere grid to **log g = 5.40**. The expanding
 star crosses the published hydrogen reference limit at **log g = 5.5** using
-an explicitly inferred local continuation. A matched **100-year** comparison
-with a calculated gravity response changes surface temperature by **0.9429 K**;
-it tests only the small gravity interval visited. Independent **4800 K** sources
+an explicitly inferred local continuation. A matched **500-year** comparison
+with a calculated gravity response changes surface temperature by **5.697 K**
+and deposited nuclear energy by **0.00001530%**; it tests the gravity interval
+visited, ending near **log g = 5.461**. Independent **4800 K** sources
 check the helium correction to **0.09612%** in temperature and **0.02421%** in
 pressure at that test point.
 The pulse continuation uses the calculated composition response on a published
@@ -43,6 +44,9 @@ from the pulse starting model; its merger timing and energy remain uncertain.
 A fixed-duration timestep comparison supports retained steps of at most
 **25 years** during the more gradual pulse evolution, with **0.5%** nuclear-energy
 refinement and the existing structure, composition and conservation checks.
+A separate **500-year** test of a larger energy allowance uses **87** intervals
+instead of **156**, but narrowly exceeds the predeclared local structure-error
+limit, so the **0.5%** rule is retained.
 A short interior mixing readjustment also passes a two-step/four-step
 comparison: deposited nuclear energy agrees to **0.006375%**. The paper states
 the comparisons and their limits. Current work follows the active
