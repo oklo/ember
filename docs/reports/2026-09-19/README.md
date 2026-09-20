@@ -2,32 +2,33 @@
 
 [Read the PDF](ember_status_and_future.pdf).
 
-The diagnostic late helium-3 calculation reaches **171.2 thousand years**,
-**6079 K** and nuclear power **2.085e32 erg/s** on **2115** mass points.
-Nuclear burning supplies **51.93%** of photon luminosity. A matched
-**2000 yr** comparison of two mass grids changes deposited nuclear energy by
-**0.5220%**. A checked **800 yr** trial-step limit speeds the smooth later
-sequence; the **17,200 yr** segment uses **31.21 CPU minutes**, including
-its timestep comparisons and rejected trials. The final **16,800 yr**
-use **22.69 CPU minutes**, with unchanged accuracy checks.
+The diagnostic late helium-3 calculation reaches **201.2 thousand years**,
+**6115 K** and nuclear power **1.811e32 erg/s** on **2115** mass points.
+Nuclear burning supplies **36.84%** of photon luminosity. The star is still
+expanding. The final **20,000 yr** use **15.40 CPU minutes**, including
+timestep comparisons; all original accuracy and conservation checks pass.
+A matched **2000 yr** mass-grid comparison changes deposited energy by
+**0.5220%**. The complete pulse remains uncertain.
 
-The calculation resolving the onset reaches **6736 yr** and **4594 K**.
-It shows a rise, decline and renewed burning. Its latest **1.147 yr**
-convective adjustment passes a **2/4-step** comparison, with deposited
-energy differing by **0.1756%**. The full pulse's peak and spatial
-convergence remain uncertain.
+The calculation resolving the onset reaches **9736 yr**, **4583 K** and
+nuclear power **1.149e34 erg/s**. It shows a rise, decline and renewed burning.
+The later sequence and this onset calculation have not yet established one
+continuous, spatially converged flash followed by cooling.
 
-The draft includes the checked diffusion extension at the newly radiative
-envelope layer and a **27-column** local mixed-atmosphere grid covering
-**5500–6500 K** and **log g = 4.50–4.80**. A complete white-dwarf cooling
-sequence is not yet established.
+The draft describes microscopic species transport down to **1 MK** in a
+newly radiative envelope layer, supported by source ionization, actual flux
+and **400/200/100 yr** comparisons. The local mixed-atmosphere grid has
+**18 columns** over **6000–6500 K** and **log g = 4.35–4.65**. A matched
+**9600 yr** comparison of two inferred hydrogen references changes endpoint
+temperature by **0.04684 K**, with the same convection. This does not establish
+absolute atmosphere accuracy.
 
-A matched **3000 yr** atmosphere comparison changes the endpoint temperature by
-**0.1460 K**, with the same convection. The nominal segment takes
-**8.605 CPU minutes**, including time-step checks.
+The pre-flash main trajectory accounts for **15.13 elapsed hours** and
+**36.31 CPU-hours**, excluding source construction and inter-run pauses.
+The runtime of a complete full-physics cooling track is not yet measured.
 
 This directory contains the PDF, LaTeX inputs and included figure PDFs.
-The existing figures, including the LBA97 opacity comparison, are retained.
+Existing figures, including the LBA97 opacity comparison, are retained.
 Standalone pulse diagrams are separate from this draft.
 
 Rebuild from this directory with `tectonic --keep-logs ember_status_and_future.tex`.
