@@ -36,8 +36,8 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2115-point** late sequence reaches **1.043 million years**, **6398 K**
-and nuclear power **7.148e31 erg/s**, supplying **38.05%** of photon luminosity.
+The **2115-point** late sequence reaches **1.171 million years**, **6398 K**
+and nuclear power **6.418e31 erg/s**, supplying **38.39%** of photon luminosity.
 A matched **2000-year** mass-grid comparison changes deposited nuclear energy
 by **0.5220%** and endpoint power by **0.5687%**. Half the burning power
 occupies **39** cells instead of **12**. This supports the later shell burning;
@@ -54,17 +54,23 @@ changes effective temperature by **0.01540 K**, surface luminosity by
 final convection. The preceding **38,400 years** are reused because both
 references have identical table values there. This tests local sensitivity,
 while the absolute hydrogen reference remains inferred.
+A **76,800-year** comparison in the next gravity interval changes temperature
+by **0.1187 K**, surface luminosity by **0.002568%**, and nuclear heat by
+**3.438e-5%**, with identical convection. Its **51,200-year** common prefix
+is reused; both prescriptions retain the temperature decline.
 
 Radius and surface luminosity have passed maxima near **244.4 thousand years**
 and **254.4 thousand years**, respectively. They have since declined by
-**45.29%** and **64.9%**, while effective temperature still rises.
-This establishes contraction in the diagnostic history, without yet establishing
-white-dwarf cooling or its connection to the resolved onset.
+**48.37%** and **68.75%**, while effective temperature passes a shallow maximum of **6399 K**
+near **1.088 million years**, then falls **1.151 K** over **83,200 years**.
+Both atmosphere references preserve this local turn toward cooling. The
+connection through the resolved flash and a long white-dwarf cooling sequence
+remain unverified.
 
 A **3200/1600/800-year** comparison tests time resolution. The final
-**229,500-year** continuation uses trial steps up to **12,800 years**, with
+**128,000-year** continuation uses trial steps up to **12,800 years**, with
 every interval passing the same accuracy and conservation checks. It uses
-**38.08 CPU minutes**, including timestep comparisons. A separate **3200-year** comparison near **log g = 4.5** passes the same criteria, with integrated nuclear
+**21.56 CPU minutes**, including timestep comparisons. A separate **3200-year** comparison near **log g = 4.5** passes the same criteria, with integrated nuclear
 energies differing by **0.08760%**.
 A newly radiative envelope layer is included by extending microscopic species
 transport to **1 MK**, supported by source ionization, actual exchange and
@@ -108,7 +114,7 @@ Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
 **X = 0.78–0.9955** and **log g = 5.55–5.80**. Independent calculations check
 interpolation, the helium-isotope approximation and lower-boundary sensitivity.
 The later sequence uses a local grid of **36** solved columns covering
-**6000–6500 K** and **log g = 4.20–4.95**, with independently checked
+**6000–6500 K** and **log g = 4.20–5.10**, with independently checked
 lower-density EOS coverage. The absolute hydrogen reference
 below **log g = 5.5** remains an explicitly inferred continuation. A matched
 **10,000-year** calculation testing the extension below **log g = 5.25**
