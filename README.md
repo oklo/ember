@@ -36,8 +36,8 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2115-point** late sequence reaches **201.2 thousand years**, **6115 K**
-and nuclear power **1.811e32 erg/s**, supplying **36.84%** of photon luminosity.
+The **2115-point** late sequence reaches **251.2 thousand years**, **6150 K**
+and nuclear power **1.552e32 erg/s**, supplying **29.01%** of photon luminosity.
 A matched **2000-year** mass-grid comparison changes deposited nuclear energy
 by **0.5220%** and endpoint power by **0.5687%**. Half the burning power
 occupies **39** cells instead of **12**. This supports the later shell burning;
@@ -49,21 +49,24 @@ by **0.002487%** and nuclear heat by **4.206e-6%**, with the same convection.
 These small differences do not establish absolute atmosphere accuracy.
 
 An **800/400/200-year** comparison supports larger time steps with unchanged
-accuracy and conservation checks. The final **20,000-year** segment uses
-**15.40 CPU minutes**. A **17,200-year** segment takes
+accuracy and conservation checks. The final **50,000-year** segment uses
+**33.63 CPU minutes**. A **17,200-year** segment takes
 **31.21 CPU minutes**, including timestep comparisons and rejected trials.
 A newly radiative envelope layer is included by extending microscopic species
 transport to **1 MK**, supported by source ionization, actual exchange and
 finite-step checks. This local approximation does not describe neutral-fluid
 transport in a cold remnant.
 
-The separate onset calculation reaches **9736 years**, **4583 K** and nuclear
-power **1.149e34 erg/s**. Power reaches a local maximum of **3.719e35 erg/s**
+The separate onset calculation reaches **12.50 thousand years**, **4557 K** and nuclear
+power **1.213e35 erg/s**. Power reaches a local maximum of **3.719e35 erg/s**
 near **1642 years**, followed by further rises and declines. Burning is
-increasing at the current endpoint.
-A **1.147-year** convective adjustment passes a **2/4-step** comparison, with
-nuclear energy differing by **0.1756%** and the same final convection. A complete, spatially
-converged pulse and white-dwarf cooling sequence remain unresolved.
+increasing again at the current endpoint; the first local maximum does not
+mark completion of the flash.
+A **12.26-year** convection merger passes a **16/32-step** comparison, with
+integrated nuclear energies differing by **0.02667%**. A subsequent **2.587-year**
+adjustment passes **4/8 steps**, differing by **0.02665%**. These support
+endpoint structures; a complete, spatially converged pulse and white-dwarf
+cooling sequence remain unresolved.
 
 A matched **12,000-year** comparison of two atmosphere references reaches
 **5701 K**. Effective temperatures differ by **0.2296 K** and surface luminosities
@@ -75,7 +78,8 @@ Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
 **X = 0.78–0.9955** and **log g = 5.55–5.80**. Independent calculations check
 interpolation, the helium-isotope approximation and lower-boundary sensitivity.
 The later sequence uses a local grid of **18** solved columns covering
-**6000–6500 K** and **log g = 4.35–4.65**. The absolute hydrogen reference
+**6000–6500 K** and **log g = 4.20–4.50**, with independently checked
+lower-density EOS coverage. The absolute hydrogen reference
 below **log g = 5.5** remains an explicitly inferred continuation. A matched
 **10,000-year** calculation testing the extension below **log g = 5.25**
 reaches **log g = 5.231**. The two references change surface temperature
