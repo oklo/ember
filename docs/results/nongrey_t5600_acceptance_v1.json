@@ -1,0 +1,61 @@
+{
+  "scope": "Accept the 220-source-node gas atmosphere through 5600 K with numerical-electron EOS support. All 204 preceding source states and 300 missing-state masks remain exact. Five new coordinates use independently depth-checked 400-point structures; the other new coordinates use validated 300-point structures. This is local source/interpolation/depth validation, not a global physical accuracy bound or dense cold white-dwarf atmosphere.",
+  "checked_utc": "2026-09-11T11:52:47.219097+00:00",
+  "table": "data/atmosphere/nongrey_gs98_z020_exhaustion_t5600_v1.dat",
+  "table_sha256": "12f03d3a6eb28024538417465622f09e508f5fe3c13ea43acd3de3a8a20bbf14",
+  "assembly_manifest": "/tmp/ember-nongrey-exhaustion-t5600-v1.manifest.json",
+  "assembly_manifest_sha256": "fe0775ea31b4a9adda8357087448fe984f803979e99a099ad1c4719efb5dbcb0",
+  "EOS": "data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
+  "previous_acceptance": "docs/results/nongrey_t5200_acceptance_v2.json",
+  "reports_sha256": {
+    "docs/results/nongrey_t5200_acceptance_v2.json": "432746f58b58ea0d77b55e475dd428ecf793c2b3c5b59159a0afd4e5e20bc5f8",
+    "docs/results/nongrey_t5600_interpolation_v1.json": "57c1e383be28a5e9ca94a6e925cc800e06657d1292f999316712a4376cf0c23a",
+    "docs/results/nongrey_t5600_retained_v1.json": "fa2a7a39c45fe5289d823bf9c45447d4260f6d48d5e8d69092458df123656315",
+    "docs/results/nongrey_x150_y000_t5400_g515_depth400_v1.json": "fc4a127329e9af6b87254918ab0584a176c43b5c2f34f6410cf0bf3c456154f5",
+    "docs/results/nongrey_x200_y000_t5400_g515_depth400_v1.json": "587bfd9440163e74db228dd507c968082b9ce384e1168473b65cca60d337155c",
+    "docs/results/nongrey_x150_y000_t5400_g540_depth120_v1.json": "ca618d073573d6771ef77055098a403cfde802e8f2a6bb574fb9b4dca8dc91d6",
+    "docs/results/nongrey_x200_y000_t5400_g540_depth120_v1.json": "3211a2276910b963f7431d6a24eb621aee55e4eb3b44b690a23666aba09e3dd1",
+    "docs/results/nongrey_x150_y000_t5600_g515_depth400_v1.json": "dd84a8b0b271ead9b5d204560eb1c06ab8419490d932a1b752b92f1308bfa9ec",
+    "docs/results/nongrey_x150_y000_t5600_g540_depth400_v1.json": "1184e95d7e50db7bee50ac23af8e5819f0c9aba4bc226ba84b6df0a99435c96b",
+    "docs/results/nongrey_x200_y000_t5600_g515_depth400_v1.json": "4470d20452d239075aafcd0e60458f8d23bff6021658c079c58aef6a8209c4f3",
+    "docs/results/nongrey_x200_y000_t5600_g540_depth120_v1.json": "af4065eb1882dc0909a15ddc54cf13e31add10ea7bf8eb29ec2fdd580960ba4e",
+    "docs/results/nongrey_t5600_condensation_g515_v1.json": "26b4501b6a5262e27fef598708d8a7f2524701fa31b5837c3c62e04e6b4d506c",
+    "docs/results/nongrey_t5600_condensation_g540_v1.json": "e448f4ef3e19cbd772b4eacd87149730c7833bc6b931e74657ab7194b983e5e8"
+  },
+  "source_models": 220,
+  "retained_source_models": 204,
+  "retained_missing_masks": 300,
+  "independent_matching_state_relative_criterion": 0.01,
+  "independent_comparisons": [
+    {
+      "coordinates": [
+        0.175,
+        0.005,
+        5300.0,
+        5.275
+      ],
+      "relative_difference": {
+        "T": 8.886383734862946e-05,
+        "Pgas": 0.003709461680810433
+      }
+    },
+    {
+      "coordinates": [
+        0.175,
+        0.005,
+        5500.0,
+        5.275
+      ],
+      "relative_difference": {
+        "T": 0.0003198554271883758,
+        "Pgas": 0.0041694465047643625
+      }
+    }
+  ],
+  "depth_comparisons": 8,
+  "maximum_depth_matching_state_relative_difference": 8.694599928116276e-05,
+  "condensation_profiles": 16,
+  "profiles_with_condensates": 0,
+  "accepted_for_gas_trajectory": true,
+  "EOS_sha256": "544db28d28b7382eca2646f1ae6d6980d2b1f9eccff3781a69c08626c6a5f321"
+}

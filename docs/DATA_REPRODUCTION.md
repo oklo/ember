@@ -45,10 +45,10 @@ python3 scripts/generate_metal_eos.py /tmp/ember-freeeos-source-build/probe \
   /tmp/ember-gs98-source --hydrogen .3 .4 .5 .6 .7 .75 --helium3 0 .12 --jobs 4
 ```
 
-The selected zero-hydrogen composition extension is the 64-plane family
-`data/eos/exhaustion_refined_v2/freeeos300_gs98_z020.dat`. Its explicit source
-plane manifests and [528-point audit](results/metal_eos_exhaustion_refined_v2_audit.json)
-record the refined composition axis and thermal limits. The earlier 24-plane
+The checked trajectory through 3.848 trillion years selects the 72-plane family
+`data/eos/low_density_refined_v2/freeeos300_gs98_z020.dat`. Its explicit source
+plane manifests and [low-density audit](results/metal_eos_low_density_source_v2.json)
+record the refined composition axis and thermal limits. The 24-plane
 family uses `.1 .125 .15 .175 .2 .25 .3 .4 .5 .6 .7 .75` at He3=0/.12.
 Generate each identified family in a separate directory. Import and assemble the completed
 source planes using the commands/formats in the EOS README and each script's
@@ -56,6 +56,16 @@ source planes using the commands/formats in the EOS README and each script's
 files they reference**; manifests alone cannot reconstruct the EOS. Recheck
 potential masks, source responses, heldout compositions and the thermodynamic
 identities before selecting a newly built family.
+
+The numerical-electron source uses `--electron-integrals numerical`. Its
+[validation plan](../data/eos/sources/numerical_electron_base_validation_v1_specification.json)
+lists the full family and independent checks. For the separate hot dense
+addition, `build_freeeos_probe.py --electron-quadrature-error 1e-11 --jobs 2`
+builds a tighter-accuracy source in a separate working directory. The optional
+generator `--precision-fallback` requires the pinned probe, library and control
+receipt; merely changing the source executable is insufficient. A density merge
+retains the actual source identity and density interval for each affected
+isotherm. Complete thermodynamic and runtime validation is still required.
 
 ## Opacity example
 

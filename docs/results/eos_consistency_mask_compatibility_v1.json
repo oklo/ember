@@ -1,0 +1,42 @@
+{
+  "scope": "Existing numerical-electron pilot potential files are byte-identical after explicit consistency-exclusion support. Separate analytic tests verify full stencil masking and refusal to exclude consistent states. This is compatibility, not acceptance of a new family.",
+  "all_byte_identical": true,
+  "planes": [
+    {
+      "source": "/tmp/ember-numerical-electron-pipeline-family-v1/sources/freeeos300_gs98_x031p25_he3000_raw.json.gz",
+      "source_sha256": "f69fac3661a567b5b46d23e4d41faed3cbc189dd9a87342645d20ffcbabc791d",
+      "original": "/tmp/ember-numerical-electron-pipeline-family-v1/freeeos300_gs98_x031p25_he3000_potential.dat",
+      "regenerated": "/tmp/ember-consistency-mask-compatibility-v1/freeeos300_gs98_x031p25_he3000_potential.dat",
+      "sha256": "0ce0cd4d19e212096a7a8c05befe197721ae9424003680c99f5727aec416daf7",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/ember-numerical-electron-pipeline-family-v1/sources/freeeos300_gs98_x031p25_he3120_raw.json.gz",
+      "source_sha256": "6301aec0d678e3602929fd1fe21efb64623058be7d5fe6ea0b6f387dc9910c01",
+      "original": "/tmp/ember-numerical-electron-pipeline-family-v1/freeeos300_gs98_x031p25_he3120_potential.dat",
+      "regenerated": "/tmp/ember-consistency-mask-compatibility-v1/freeeos300_gs98_x031p25_he3120_potential.dat",
+      "sha256": "99761f479772a9c6386a1d6497f2da555b2a61c43d2d0bab60d2e2a70569afb5",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/ember-numerical-electron-pipeline-family-v1/sources/freeeos300_gs98_x037p5_he3000_raw.json.gz",
+      "source_sha256": "9c75c874e5012a813b4096c46c44fb255e2308832c49f6461fa80bb5f90be131",
+      "original": "/tmp/ember-numerical-electron-pipeline-family-v1/freeeos300_gs98_x037p5_he3000_potential.dat",
+      "regenerated": "/tmp/ember-consistency-mask-compatibility-v1/freeeos300_gs98_x037p5_he3000_potential.dat",
+      "sha256": "afc1564620d3324e5ef1389ff9e9d287a7e3f90434b30eef088c2b16ac7ae700",
+      "byte_identical": true
+    },
+    {
+      "source": "/tmp/ember-numerical-electron-pipeline-family-v1/sources/freeeos300_gs98_x037p5_he3120_raw.json.gz",
+      "source_sha256": "cc8f2bd4b803aae28d39065d6e973ab06c294b9d8c67383271dfb6fc5c63e031",
+      "original": "/tmp/ember-numerical-electron-pipeline-family-v1/freeeos300_gs98_x037p5_he3120_potential.dat",
+      "regenerated": "/tmp/ember-consistency-mask-compatibility-v1/freeeos300_gs98_x037p5_he3120_potential.dat",
+      "sha256": "14ac48baf1bd5def57313b8a0f43d531ef90beb0cacc6f6f8bfebad8c74f604d",
+      "byte_identical": true
+    }
+  ],
+  "scripts_sha256": {
+    "scripts/import_freeeos_potential.py": "5fbdff1db39d1c72840885be86da1c64c8ee0cb0b61dd549f1d8e63cb4e2123d",
+    "scripts/eos_source_coverage.py": "f1d8085a252dcc17e8463ea1bea7747e3a4bf0c4b48970c536b86fc8b84139f6"
+  }
+}

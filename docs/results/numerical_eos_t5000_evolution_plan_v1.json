@@ -1,0 +1,41 @@
+{
+  "scope": "Fresh 512-point 0.1-solar-mass evolution with independently validated numerical-electron EOS and the accepted 5000 K atmosphere. Launch only after general EOS, saved-profile EOS and atmosphere runtime checks pass. All other physical choices remain those of the checked 3.848-trillion-year track. Stop normally at any unsupported domain; no extrapolation.",
+  "required_checks": {
+    "docs/results/numerical_electron_base_general_v4.json": "passed",
+    "docs/results/numerical_electron_base_profile_v4.json": "profile_passed",
+    "docs/results/nongrey_t5000_numerical_eos_support_v4.json": "passed"
+  },
+  "command": [
+    "python3",
+    "-B",
+    "scripts/run_evolution_snapshot.py",
+    "/tmp/ember-density-opacity-build-v1/apps/ember-evolve",
+    "/tmp/ember-numerical-eos-t5000-512-4000gyr-v1",
+    "out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.json",
+    "--",
+    "512",
+    "4e12",
+    "1e8",
+    "2.5",
+    "sfii-svh",
+    "wd",
+    "nongrey:data/atmosphere/nongrey_gs98_z020_exhaustion_t5000_v1.dat",
+    "metal:data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
+    "ledoux-diffusive",
+    "--opacity-directory",
+    "data/opacity/hydrogen_exhaustion_hot_v1",
+    "--thermal-neutrinos",
+    "plasma-hrw",
+    "--step-workers",
+    "2",
+    "--checkpoint",
+    "out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.restart"
+  ],
+  "restart": false,
+  "prepared_only": false,
+  "accepted_inputs": "docs/results/numerical_electron_base_acceptance_v1.json",
+  "accepted_inputs_sha256": "07301dee95f6d29f31dec5778723ea66a7e18c7cb86c75395b638bfed7e4e2c8",
+  "launch_status": "running",
+  "stellar_pid_at_inspection": 75069,
+  "launch_session": 94776
+}

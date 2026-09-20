@@ -1,0 +1,2249 @@
+{
+  "scope": "Check dense-opacity source nodes, independent mixtures/densities and derivatives.\n\nOnly un-substituted source cells and complete runtime stencils enter source\ncomparisons. The independent checks start where the stellar opacity uses the\nhot TOPS table alone. Results are local interpolation checks, not a physical\nopacity uncertainty or a stellar-trajectory validation.\n",
+  "passed": false,
+  "input_sha256": {
+    "/private/tmp/ember-tops-density-family-v1/manifest.json": "c8d1ebea2ccff812108d1820660b113956f1cb7c4489198edd7dc76d597b6d82",
+    "/private/tmp/ember-tops-density-heldout-v1/manifest.json": "05ed36658670ce831d95b8a7cdc86244d77ad627b7f1ab08e5498cfce610b54d",
+    "/private/tmp/ember-opacity-support-probe-v1": "209fe051b72cbb761b55dfb36cc1efab647b143765e3241b73308fbe5ba1ed0d",
+    "/Users/greglaughlin/Projects/ember/scripts/audit_tops_density_extension.py": "cf34da3b4a5f51574e1f61a2e34d541c10aa8116267e9dc06c0a8acfeac81bdd",
+    "/Users/greglaughlin/Projects/ember/scripts/import_tops_composition.py": "d798b57ee619b15cf99defef2e34addb85b531d2fe0738e28852a18b6e2060fb",
+    "/private/tmp/ember-dense-opacity-family-v1/tops_gs98_mixture_low.dat": "77cf6d94d2dcd0267b6adb4235e156dfe0a4fc25778a5dc223424b562c24cbc4",
+    "/private/tmp/ember-dense-opacity-family-v1/tops_gs98_mixture_z030_low.dat": "1b786e3905977dd5a77190351c654d9aeca28c53f81f945f1abdf86360c36f7a",
+    "/private/tmp/ember-dense-opacity-family-v1/tops_gs98_mixture_z020_low.dat": "9cbebb2a75e5ef7ccaf48eb07ac28662b374b1304365aa125e6260169916dbfc",
+    "/private/tmp/ember-dense-opacity-family-v1/tops_gs98_mixture_z010_high.dat": "b6d500ba02b094eccc399fa32ecafe75a957c441347a7427688d5ab43d3e3817",
+    "/private/tmp/ember-dense-opacity-family-v1/aesopus21_gs98_mixture.dat": "48298d34ae8e405ee697deca4af2e8b7f57a352b2e4f670452881e019de85c62",
+    "/private/tmp/ember-dense-opacity-family-v1/tops_gs98_mixture_z020_high.dat": "dec01682e051645ad897f4708e393956ec40987fc6abc1d568bec95a554480bf",
+    "/private/tmp/ember-dense-opacity-family-v1/tops_gs98_mixture_z010_low.dat": "616a37ae9dc0054d2ff72d3edc0c7fc3fe6c1a782deb87d2790906f0f68d68fc",
+    "/private/tmp/ember-dense-opacity-family-v1/tops_gs98_mixture_z030_high.dat": "bdd37999389067b7122eb2543ab750eb830ebfca919d755e46c3184a312e9c24",
+    "/private/tmp/ember-dense-opacity-family-v1/tops_gs98_mixture_high.dat": "9cbebed1b31bab5d5c77811508f06a6e5b06c7bde6243506cd3d6e8b1e6dd4ea",
+    "/private/tmp/ember-tops-density-family-v1/x000-z010/receipt.json": "99d6bf2f7e209b945b06071290de82f58005bc12b5b622a7ecae78d897210922",
+    "/private/tmp/ember-tops-density-family-v1/x000-z010/request.json": "086aa802baa499688eaed720cb2b14aeee5543f5faad361a7aaf598008ed6966",
+    "/private/tmp/ember-tops-density-family-v1/x000-z010/coverage.json": "c99b9db4d3a9b7fcb0c99718d4ae1235b6d0c0e9d8f6e07caae5670097cf3240",
+    "/private/tmp/ember-tops-density-family-v1/x000-z010/source.txt": "5271f0504b3f954d7afab68549581d71144145af50a8f8cfa4dbc2c15b6595de",
+    "/private/tmp/ember-tops-density-family-v1/x002p5-z010/receipt.json": "e1cd7d13cdf90ade09c2a40e4e83a055d7b6eaad74b5331cb2059daa979cd373",
+    "/private/tmp/ember-tops-density-family-v1/x002p5-z010/request.json": "0b9cc1b6c194fb801c884f35217d8d36c2604e078a80aeff21544ad3b2170c76",
+    "/private/tmp/ember-tops-density-family-v1/x002p5-z010/coverage.json": "91c211204edb071ede2ba5011bdc4af95871727915188f4a9bce15c43468607d",
+    "/private/tmp/ember-tops-density-family-v1/x002p5-z010/source.txt": "c72d0090df400458e243c0a60be138a020b5901c015866801cc10365e67976b9",
+    "/private/tmp/ember-tops-density-family-v1/x005-z010/receipt.json": "e2d1d3b42452573b8d39121652eb0a5f419dd95975ac97d5036e4cd11bdc3c3f",
+    "/private/tmp/ember-tops-density-family-v1/x005-z010/request.json": "2ebb92aa6d0b6df7f29d9dd3042fb21a01b4a1f4c5d2fd5e1a481ad6e9d55abc",
+    "/private/tmp/ember-tops-density-family-v1/x005-z010/coverage.json": "06b04a105ff2cec3bd4f06b82558dac9631ce2d9bbf39ae80f6b4243a918a8c0",
+    "/private/tmp/ember-tops-density-family-v1/x005-z010/source.txt": "d9db44329a3da9f4f224f174c808c1b248ff06b29efbba33fddd1e949f86d8f6",
+    "/private/tmp/ember-tops-density-family-v1/x007p5-z010/receipt.json": "8bc52c4daf3b09cc22ddc3a198d8dd30f83144056945da0aea0c6a36fd885721",
+    "/private/tmp/ember-tops-density-family-v1/x007p5-z010/request.json": "b8261096a26be00c203f94b8861849bfc15bd1d48edbc0c016e02bd8ce8c2ceb",
+    "/private/tmp/ember-tops-density-family-v1/x007p5-z010/coverage.json": "1a5e42d9c3894852899ec506d8ffacb84a88433cf13be965f50ec230452dce0e",
+    "/private/tmp/ember-tops-density-family-v1/x007p5-z010/source.txt": "06b83df40926852069ba106678e5ec67b39e0a5c6d406408f64a106d51572be0",
+    "/private/tmp/ember-tops-density-family-v1/x009-z010/receipt.json": "dab3d4235bbec7fb3d15f3fa39daf3c98d45d47dc9fd3ee5c17578f210aac1ee",
+    "/private/tmp/ember-tops-density-family-v1/x009-z010/request.json": "acddb4b3adc5a4b05906f1d85f1b0489edb795ac27106fde2f121fc79692c0ec",
+    "/private/tmp/ember-tops-density-family-v1/x009-z010/coverage.json": "fd3e9532d149fae13650885fbb8f99530b3392dcf4b1b78122799c022c01c745",
+    "/private/tmp/ember-tops-density-family-v1/x009-z010/source.txt": "9d17f4388f34e2db4abd623e000e615fd8b0585216dd99969b0f1f0b84357354",
+    "/private/tmp/ember-tops-density-family-v1/x010-z010/receipt.json": "0be9d54ce2d1bcbb3e7740d5b89c51e7a177e47d150a35c3ef6e62e9c3759986",
+    "/private/tmp/ember-tops-density-family-v1/x010-z010/request.json": "bf185f1a8899df0c61bc68f682408a3a9c92a5bb9886b3e50f897d195e934d03",
+    "/private/tmp/ember-tops-density-family-v1/x010-z010/coverage.json": "bb9f058374438c84e8dc8c01b749b73d139751c522ed9c9275acb3c305789f55",
+    "/private/tmp/ember-tops-density-family-v1/x010-z010/source.txt": "d79709e27fb47c5a9857dc47b549746565b4a5d21c27638ebf8e85bc02da5876",
+    "/private/tmp/ember-tops-density-family-v1/x012p5-z010/receipt.json": "3f5bde3a631005590db0ec1f6566de90ff5bd41693c60196309f07442ac9145a",
+    "/private/tmp/ember-tops-density-family-v1/x012p5-z010/request.json": "3efd91f187f9f35c6bb7ca09e03c4362a93051aff243406c3825d87396e916e9",
+    "/private/tmp/ember-tops-density-family-v1/x012p5-z010/coverage.json": "0315edae1d52bad7a74ff51fcd5184d761a71ee79c7198dc83e5e7f7df99ce27",
+    "/private/tmp/ember-tops-density-family-v1/x012p5-z010/source.txt": "9e5db5f87e59bb80137bcc3064eeb4a94adf9f3b137187be33ca68aef9c08342",
+    "/private/tmp/ember-tops-density-family-v1/x015-z010/receipt.json": "035bd0a15c43b152cb3b5ad1b58b4eb4e3bae04e5f271b26e82c727d0797d948",
+    "/private/tmp/ember-tops-density-family-v1/x015-z010/request.json": "1621b3d283a08226af7ddee8982be5263e64bc993de2669573a462b34e2f28ee",
+    "/private/tmp/ember-tops-density-family-v1/x015-z010/coverage.json": "01284c1a96d304080015d44bc45c733284778dd499646a261a679660cb5144cb",
+    "/private/tmp/ember-tops-density-family-v1/x015-z010/source.txt": "36ccc3e2c6d5353f4c456708cbb6fd633a4362a99d0da02e3d26dfb0843a6095",
+    "/private/tmp/ember-tops-density-family-v1/x017p5-z010/receipt.json": "67c99916582d82a9dfb05b6ff2ef0723b9f8f74e93337509688a53f05521a82d",
+    "/private/tmp/ember-tops-density-family-v1/x017p5-z010/request.json": "ffa17412adbb5dcba8f2dfafbef98b65d9b48f5959be65075529a3893b98a587",
+    "/private/tmp/ember-tops-density-family-v1/x017p5-z010/coverage.json": "59d2a0534a5d15279cd331e70cad1e8f1b9ecda57a95e593630c2396cb005132",
+    "/private/tmp/ember-tops-density-family-v1/x017p5-z010/source.txt": "a3ab242ef19f3d117c1a4e5cec1a8d5ff9b5475641427010e018a70df4685201",
+    "/private/tmp/ember-tops-density-family-v1/x020-z010/receipt.json": "fd74dd96fc842bb081ba114a35bfcd19de6d7899b921d957985b1cfd0af4d996",
+    "/private/tmp/ember-tops-density-family-v1/x020-z010/request.json": "eb0999d7e47731436ce15d4bc15555a5555220da2f2b1f3c6ad673974476f1a2",
+    "/private/tmp/ember-tops-density-family-v1/x020-z010/coverage.json": "07202c6d81ab2912de9df7c51edba6f0a7342dafe88547e704e87d7a41a977a6",
+    "/private/tmp/ember-tops-density-family-v1/x020-z010/source.txt": "aff05c35de1f13339087a248cda74f0ddb3035600f896bb81c4fbcc110b0be19",
+    "/private/tmp/ember-tops-density-family-v1/x025-z010/receipt.json": "06b5b073e193642053ffdaf9f89e26d0e14b5cdda7a006429153d1713ce18963",
+    "/private/tmp/ember-tops-density-family-v1/x025-z010/request.json": "2ef11328017e6730ba345e39ff0cd80f471f3f509a341c98425f2d661c7313d7",
+    "/private/tmp/ember-tops-density-family-v1/x025-z010/coverage.json": "2988fd5a415a8766ca98be71443360b002514eed2410cef98c162a7061faffdd",
+    "/private/tmp/ember-tops-density-family-v1/x025-z010/source.txt": "56fc1b5fd2e1246b3dbb94872ed8251e67023c2cc47c99385d484a2004025ac0",
+    "/private/tmp/ember-tops-density-family-v1/x030-z010/receipt.json": "0bd6dd846e3e04c2d0c41a8382085aa60fb7aa86b43902a42df587f951a0f0ca",
+    "/private/tmp/ember-tops-density-family-v1/x030-z010/request.json": "629fd035d12e9f1e9bbc2a2348d26f0a7e529d886ceb38d5cabaa69c36a1e22e",
+    "/private/tmp/ember-tops-density-family-v1/x030-z010/coverage.json": "128cc133f2510e59a2a693d7df82bac5347261a6341b87c2576221d55f3d6cf3",
+    "/private/tmp/ember-tops-density-family-v1/x030-z010/source.txt": "d6a7ef0bef98204ba8ac4b0383b265bf933cc2411d6155f0d8ea01ee1305368f",
+    "/private/tmp/ember-tops-density-family-v1/x040-z010/receipt.json": "fe41408f9afd63b356bda05a733018de1885c302f1e1165830ea87cdd450d5c7",
+    "/private/tmp/ember-tops-density-family-v1/x040-z010/request.json": "76b34770981c2313188988a1f9f9e7a9acc17dcca52680899350b6354b4db74f",
+    "/private/tmp/ember-tops-density-family-v1/x040-z010/coverage.json": "06071668be023072ea8f34c04721f30c8a9b13bf7eed5c7279a1c65364c54a1b",
+    "/private/tmp/ember-tops-density-family-v1/x040-z010/source.txt": "dd23dda6ccff20aa82c5d6228a38c57519c20a465893a724af7e7dc792dbf7a0",
+    "/private/tmp/ember-tops-density-family-v1/x050-z010/receipt.json": "03c47ebc1f0913239b6388909d863750e1c9d0480d5eba86a1ca13c73b6b246e",
+    "/private/tmp/ember-tops-density-family-v1/x050-z010/request.json": "4d5386a0d1db38780cedb499ca96d19b7d0e207b3de999702cc9e7b300db542d",
+    "/private/tmp/ember-tops-density-family-v1/x050-z010/coverage.json": "2dbe71fdb3340579d0089068b920473a71d22a1760255cfa83d022263a56e135",
+    "/private/tmp/ember-tops-density-family-v1/x050-z010/source.txt": "9ef5bc6c2799a822492c2b51a3f64a21cfc325c6660b2f39b87b0e8823efc5a2",
+    "/private/tmp/ember-tops-density-family-v1/x060-z010/receipt.json": "ba673f577641b00e0775cf43b497c23c7b4bf313a11cdf7727215eea582d4400",
+    "/private/tmp/ember-tops-density-family-v1/x060-z010/request.json": "baa2c99439ec3476fdb22fbf1c33da50a97a86ec5a1c5c55613f00ac5dad33b8",
+    "/private/tmp/ember-tops-density-family-v1/x060-z010/coverage.json": "b4113269816dec0c5cff9b5d6f8d7b645ef5f26098f108deb50e010a59bb1518",
+    "/private/tmp/ember-tops-density-family-v1/x060-z010/source.txt": "bba59e090260d2c7872e1f6f339129fdc0b7aeb8069c975032250f53de8eaea6",
+    "/private/tmp/ember-tops-density-family-v1/x065-z010/receipt.json": "8a1fdf2e70b5b68a68e9ba6ddb45679eeddd9199450427aa9506c3d6716d4bb5",
+    "/private/tmp/ember-tops-density-family-v1/x065-z010/request.json": "86340bb4de682904cdcce2451a43e7c63cd1c9166ed9f8c341d2b4941e377ee3",
+    "/private/tmp/ember-tops-density-family-v1/x065-z010/coverage.json": "054eb4783e011058566285078c787467b789b1f97a13d79bff6c7678100f4874",
+    "/private/tmp/ember-tops-density-family-v1/x065-z010/source.txt": "39fee95c1f18995d9a9dd80875fec6d4365d9ab0836bc5006fd17a10b54bcf9d",
+    "/private/tmp/ember-tops-density-family-v1/x070-z010/receipt.json": "be48ec467a6f2e94a4517772947b0cf0daf8f0c17a10a9094a98d18e31d7da39",
+    "/private/tmp/ember-tops-density-family-v1/x070-z010/request.json": "a5b79dc8d78aef0ba4ae01e25d096f1780492685a7cccfae941aaf670f890ac7",
+    "/private/tmp/ember-tops-density-family-v1/x070-z010/coverage.json": "c1d50135e72fff8b1b5afeadb3dda9c242e82b8c9b71e07a6c5c35fa3e233a3b",
+    "/private/tmp/ember-tops-density-family-v1/x070-z010/source.txt": "6134822ccadb2b2a55cb04d23a20cf0c414c6c66bb6d6ebee79852c168840271",
+    "/private/tmp/ember-tops-density-family-v1/x075-z010/receipt.json": "89c07e2996edd8b3c7da6472da4a7698eaceaef9d8bc9f7017966d2a1d79907d",
+    "/private/tmp/ember-tops-density-family-v1/x075-z010/request.json": "8afcc0666eb5ba2ffdf28598e7579356f0799f038a13240f3c869d7d39980654",
+    "/private/tmp/ember-tops-density-family-v1/x075-z010/coverage.json": "ba415f3e16a1ca07b77f6e225f8ff60c21ac90d507cd2f9cc70e265607999d0c",
+    "/private/tmp/ember-tops-density-family-v1/x075-z010/source.txt": "d42ac40d0121f921b1ec774b03cd361a6d443a6bdecfcda809927bcf254465fe",
+    "/private/tmp/ember-tops-density-x000-z020-v1/receipt.json": "8c7d7a5e2a59f37cc423bdf8219423a2b1a16f2003bcb907ae12cbe11c4b6506",
+    "/private/tmp/ember-tops-density-x000-z020-v1/request.json": "b0abdcef63517f9416cd00bf40eafcfd048e202b41e16a3944174083ae47c4a0",
+    "/private/tmp/ember-tops-density-x000-z020-v1/coverage.json": "7a83077e109942d8ec1a0904ce77f955f8271d04192e28ba4a971329264ec56f",
+    "/private/tmp/ember-tops-density-x000-z020-v1/source.txt": "f46d688844f04ab04dceb405b3c3c035530c5b5876d352c09b77a090f02b4f52",
+    "/private/tmp/ember-tops-density-family-v1/x002p5-z020/receipt.json": "435fddf9e412552b89c3edf602b0094195657d32e94c7d481a87a52c4eb77b73",
+    "/private/tmp/ember-tops-density-family-v1/x002p5-z020/request.json": "1576068b7320cc003f369c3da6611e6805aa475469ffd97cccc0b13d5f3f74ee",
+    "/private/tmp/ember-tops-density-family-v1/x002p5-z020/coverage.json": "1fb3ed00ba5c9a29e997034d82f7d2dd8bcacd862e026b2f2f8adc367168b448",
+    "/private/tmp/ember-tops-density-family-v1/x002p5-z020/source.txt": "895bfe6410d1cbe167ec651c4635d744cc9262c10a268578c8c00a198e8be98c",
+    "/private/tmp/ember-tops-density-family-v1/x005-z020/receipt.json": "29f0ffb572eec32ab88fc137c5274554216578e0621d5241b705a6db200a8e5f",
+    "/private/tmp/ember-tops-density-family-v1/x005-z020/request.json": "9c8fa07e8b47ff5d2eeaa2531d167490cb95a602d2d77e2f79f4c6da7f29bbb8",
+    "/private/tmp/ember-tops-density-family-v1/x005-z020/coverage.json": "248510c850300dda1f40782a840b3c5ac5d09aff355b5bd614529cdb26f9afec",
+    "/private/tmp/ember-tops-density-family-v1/x005-z020/source.txt": "0e0767b97038811076e3a9f88e24a9c5f3752c838d405702e04c56ce5f8f9934",
+    "/private/tmp/ember-tops-density-family-v1/x007p5-z020/receipt.json": "acb6830eb4d0d9c082cdfb975467ad94274a0cb663a71af3173fd2178c62665b",
+    "/private/tmp/ember-tops-density-family-v1/x007p5-z020/request.json": "5b430923b424764c1da46f3d07ac131ad27aac6e11a889f38ed207823dd83cc1",
+    "/private/tmp/ember-tops-density-family-v1/x007p5-z020/coverage.json": "d4b7bd325a2cb3a204ad4c7cc5bf0ec80a1c1174791d15b1133b93b0ea88c21d",
+    "/private/tmp/ember-tops-density-family-v1/x007p5-z020/source.txt": "db993301fa91c83e02e8eb1d033f7bde7d5983dcbd44ec281142014013688697",
+    "/private/tmp/ember-tops-density-family-v1/x009-z020/receipt.json": "4877cbe5396c20ad95f805052e01d28927ecba920d438a37fcbdff0368ffe0b4",
+    "/private/tmp/ember-tops-density-family-v1/x009-z020/request.json": "d4bf40a198c3e60331ae56b1c338ac4ce841c87f520f4d00c5888956a933640a",
+    "/private/tmp/ember-tops-density-family-v1/x009-z020/coverage.json": "04fa7481c0b263d7e1530f33cec1fa464504db46fd82514663d58a4ea2747d18",
+    "/private/tmp/ember-tops-density-family-v1/x009-z020/source.txt": "186f9c702b9f72de1a86283e2b20c0eafc6f6182ceeb169a10323d2ccf158ea4",
+    "/private/tmp/ember-tops-density-family-v1/x010-z020/receipt.json": "bdb2e9890c852d9d2a16c264c01b42ab3a6a8c64d26214867f9302d3ade01850",
+    "/private/tmp/ember-tops-density-family-v1/x010-z020/request.json": "c23539c853346bca66ce64a6d9bd767bfc4a90d3c220d3962791510597fce0d2",
+    "/private/tmp/ember-tops-density-family-v1/x010-z020/coverage.json": "8b9b425bbbe62619a581992f291ba0acf9fd8b972f0c6a93dcc0b1d63ada0655",
+    "/private/tmp/ember-tops-density-family-v1/x010-z020/source.txt": "816918ac4192a09167da383d4cfe596d0eab5deb8b7f6624b347cba487e09796",
+    "/private/tmp/ember-tops-density-family-v1/x012p5-z020/receipt.json": "62c9e182bbcbc8ae5a2ca6996b3cefc03139e9ad908c6afb942a724543725328",
+    "/private/tmp/ember-tops-density-family-v1/x012p5-z020/request.json": "6fa2910b3f7e3fdbb9239f704a223e4112f246a2bf9557b4ee67bc5ee83bd765",
+    "/private/tmp/ember-tops-density-family-v1/x012p5-z020/coverage.json": "459c6ae41227649cccb30d50819b3e849fc4b1b2cc71b63f305abe7de4e84d17",
+    "/private/tmp/ember-tops-density-family-v1/x012p5-z020/source.txt": "83dcb343131e181f55ee83a99ee6f2f581440d5d882eb49639026c6b991295a8",
+    "/private/tmp/ember-tops-density-family-v1/x015-z020/receipt.json": "075fd2565b2177981a618c5c4e827a6b40b9ac8bd2c13ac2d3776092368a2de0",
+    "/private/tmp/ember-tops-density-family-v1/x015-z020/request.json": "f8ebee3f47db520d262c2a5cb13201ac5f40aad6202ce5432aa6a1f6f2fcf325",
+    "/private/tmp/ember-tops-density-family-v1/x015-z020/coverage.json": "bdef72775152ecdd99a3f65ad1bc85c770dee16c0566fa93c71dbae04b2c626c",
+    "/private/tmp/ember-tops-density-family-v1/x015-z020/source.txt": "b48d4adeb0ded2189cfab96f39cdaf18f24e59791af9913f3777c9a3447c674b",
+    "/private/tmp/ember-tops-density-family-v1/x017p5-z020/receipt.json": "9426537598a2476a1f3b654e17e76df9573b1369f7e94e4a687aa9f4381e4ddb",
+    "/private/tmp/ember-tops-density-family-v1/x017p5-z020/request.json": "b17c623be69895d6f5cfc9fea05550df6499c2ef3dbdd6e661601aad0ad1b56d",
+    "/private/tmp/ember-tops-density-family-v1/x017p5-z020/coverage.json": "ca05a364f886e9a43771254a2569633d7a5562d37f5f8ea4567f2fe53d56de66",
+    "/private/tmp/ember-tops-density-family-v1/x017p5-z020/source.txt": "d41076db84c07b9c00220d52c890ac07435c3164fe36e0a394850c6cc8f6d470",
+    "/private/tmp/ember-tops-density-family-v1/x020-z020/receipt.json": "0a45bcfa3791bb71dd07b5ec55bafbd2a3c78b2da280c3c526d21e53e88d7075",
+    "/private/tmp/ember-tops-density-family-v1/x020-z020/request.json": "156236810e130658c3a524880591bb24255807905bbc060fc0875399c58c26e8",
+    "/private/tmp/ember-tops-density-family-v1/x020-z020/coverage.json": "2a316f0ee9a12f2abb2950f48f3d70335e6ba43cf868afff95e8e9e831f04514",
+    "/private/tmp/ember-tops-density-family-v1/x020-z020/source.txt": "192e92d3e62325bb857c9c1160a30cc27ed99edd9462ad66b2a42cb6acf2be1b",
+    "/private/tmp/ember-tops-density-family-v1/x025-z020/receipt.json": "e63dcd305005d708d5fbeee0ba4cb2ac4c4e2f72e7b7dd9094acf3ba3ff9c86e",
+    "/private/tmp/ember-tops-density-family-v1/x025-z020/request.json": "f90d719708d79f2d8d9bc49ab5124b317854ce30403f100d0cc4220c0e27b6a6",
+    "/private/tmp/ember-tops-density-family-v1/x025-z020/coverage.json": "5f752307c207d00c87bd4abad527a0f68b8beb18fa9f4ae3492bdf53eee0d6f7",
+    "/private/tmp/ember-tops-density-family-v1/x025-z020/source.txt": "1374990588b9db4ff5f36d1980200fa671aed1d5bcf949c82623bcebd5280e97",
+    "/private/tmp/ember-tops-density-family-v1/x030-z020/receipt.json": "8f3581118c73dbe26d582b0ea34727fff845b28d22ce7256ad53217a3aa1795e",
+    "/private/tmp/ember-tops-density-family-v1/x030-z020/request.json": "d3e69b4cf7b001a32882ba1da40cdcb8594821291633554b96c51ec11f9d6964",
+    "/private/tmp/ember-tops-density-family-v1/x030-z020/coverage.json": "a436b5ba8850d5f3fff38c776df8497f26a04b06bd35a85b3e36cfd888673fca",
+    "/private/tmp/ember-tops-density-family-v1/x030-z020/source.txt": "f6db8e860843f4648250e6984ae79aa21719328432381f4f3b1ebe3df8a4e2d6",
+    "/private/tmp/ember-tops-density-family-v1/x040-z020/receipt.json": "73c1e247c7ef2eaef480b0fe4874b77df9e54ed416dc892372c0a8df4671829e",
+    "/private/tmp/ember-tops-density-family-v1/x040-z020/request.json": "298e770f25c51c645156716121d799259788e0645cbd8a31719a6927286d7308",
+    "/private/tmp/ember-tops-density-family-v1/x040-z020/coverage.json": "342f38f07ccfa2a3bf89cac3cc7d0b05304436591a3f903fb9228feda6fda72a",
+    "/private/tmp/ember-tops-density-family-v1/x040-z020/source.txt": "dbb21206501847f80d69b6301720e551c7a69128ee2b946131aaef459307ff5c",
+    "/private/tmp/ember-tops-density-family-v1/x050-z020/receipt.json": "efb16a94a3e0917e8c9744e8cb8af1eb4eefba7df238d6ec99676d87d1af59a6",
+    "/private/tmp/ember-tops-density-family-v1/x050-z020/request.json": "ff418963397b41c186af96c89e55c2782099611f6c20d963c1a73c52b0cfb4df",
+    "/private/tmp/ember-tops-density-family-v1/x050-z020/coverage.json": "727349d544d7596c2e4fcd3a1313bfdb3f26d9646c9e9be2b3092c99619351c2",
+    "/private/tmp/ember-tops-density-family-v1/x050-z020/source.txt": "e351fde58887bf400fe3f712bb54b5719de8d859aedcb21fc179515adaa0442a",
+    "/private/tmp/ember-tops-density-family-v1/x060-z020/receipt.json": "ea164622b1630a42d3dc0159e2f0dff181e6fa8b316f5da493ad9fc6f963ef3c",
+    "/private/tmp/ember-tops-density-family-v1/x060-z020/request.json": "3a56a21bc0baa876b16b311e69727ba1fcc6c5519355e91bfbe05c78606f8f27",
+    "/private/tmp/ember-tops-density-family-v1/x060-z020/coverage.json": "81dc2a2e5d99b3c228244da97793009bc5f787967c56868fe8ff71ad6086e2f7",
+    "/private/tmp/ember-tops-density-family-v1/x060-z020/source.txt": "981dba993363a06e3b2d5143630163a08cef8d965ad6c5f332940bb3cdb1e516",
+    "/private/tmp/ember-tops-density-family-v1/x065-z020/receipt.json": "901d0c8f3c0cc7d612f22ed73dad43af346f3f1c6bcbb65cdd7a7e1f415f3e22",
+    "/private/tmp/ember-tops-density-family-v1/x065-z020/request.json": "8a33db5b3f34f351deb5d833c6f45cfaa5cfb17f26ed09cca12868e54dfeb1f2",
+    "/private/tmp/ember-tops-density-family-v1/x065-z020/coverage.json": "e8b30f906b68770d0e13e4042d630d7754dca291f764fd282003dd0c7f19ace8",
+    "/private/tmp/ember-tops-density-family-v1/x065-z020/source.txt": "ba90c68bf900d7a7f84913ef132dda3668feeda6913e08fb3ddbc0a14cfde0ae",
+    "/private/tmp/ember-tops-density-family-v1/x070-z020/receipt.json": "7375baa5c41232a87b89de3f9d3cffeb77a6fac797730f82f22b9ba8d08986fa",
+    "/private/tmp/ember-tops-density-family-v1/x070-z020/request.json": "353252d99171734cbbd5673184477a3df0bf24e216a09d9245ef22accc9b061d",
+    "/private/tmp/ember-tops-density-family-v1/x070-z020/coverage.json": "359eb8a0d0c200f597b9901e749310f822063523c2fcb662bf95c3e40bc8aefe",
+    "/private/tmp/ember-tops-density-family-v1/x070-z020/source.txt": "7ca327b0ff188e25dde13fefe7b0ab86d4ceb2865b613ce4d5212ffefa19c851",
+    "/private/tmp/ember-tops-density-family-v1/x075-z020/receipt.json": "134605ff8f616018790ac25d07e00af454e20a8d95b07bb7c771fc265c9d3761",
+    "/private/tmp/ember-tops-density-family-v1/x075-z020/request.json": "7f7774fd38d3eb948ad09388591def83dd4012f22850c8ed8175624989ebea1e",
+    "/private/tmp/ember-tops-density-family-v1/x075-z020/coverage.json": "8ca42f3e34df898df5cdbe4546981bd6a938d03e4ea8d754dccea58b7aa8f9c9",
+    "/private/tmp/ember-tops-density-family-v1/x075-z020/source.txt": "350a28aabdf2c592b7d28666b1f0682e66a0dc7ffc7d194b6cda474ca17f2906",
+    "/private/tmp/ember-tops-density-family-v1/x000-z030/receipt.json": "ded328e23eedc5af908be0162fdd982542743b6eaac4dd7c8cfd9aec71119b1f",
+    "/private/tmp/ember-tops-density-family-v1/x000-z030/request.json": "e732459c54458a87a8cd659134b57c04b1a0535d24b9d9e9a6fa5f99d080a80e",
+    "/private/tmp/ember-tops-density-family-v1/x000-z030/coverage.json": "42129662a36261de14b38514680fe41d7600816b3525d9fd8712a8d3a9fe4c0a",
+    "/private/tmp/ember-tops-density-family-v1/x000-z030/source.txt": "16f0357443ecba01d502ba82020e8ce7223feea8ecd55292b77d4792d8a1c9cc",
+    "/private/tmp/ember-tops-density-family-v1/x002p5-z030/receipt.json": "acea28556b510375975405f14f8bdd3935d31a80536d575c96ffdaec1860e78b",
+    "/private/tmp/ember-tops-density-family-v1/x002p5-z030/request.json": "270fdc941f406f2b24f43a17a1bdd3365a2aad4a211518c126a34b8dd4def00a",
+    "/private/tmp/ember-tops-density-family-v1/x002p5-z030/coverage.json": "16b3c8ab0bae5aac9feda5f7c9a1ba30758cc95e6d3921b07db8b40b260ad8bc",
+    "/private/tmp/ember-tops-density-family-v1/x002p5-z030/source.txt": "1af57f458223c7d96def9df5605c364952fb638a868209f43f9ee58a7ea03c5c",
+    "/private/tmp/ember-tops-density-family-v1/x005-z030/receipt.json": "6fdb4e8dcba30a5c001674c603ede1d15fc7f50eb3918b211a9c6056b7bb5367",
+    "/private/tmp/ember-tops-density-family-v1/x005-z030/request.json": "66bd1e0365637f6db26bfc5922387bd4f923e191fe608141e5cc71f975b49f71",
+    "/private/tmp/ember-tops-density-family-v1/x005-z030/coverage.json": "769d6da265882674a0a033183f6f41a23f99f3fd52230ad24d3080fa2ed80e32",
+    "/private/tmp/ember-tops-density-family-v1/x005-z030/source.txt": "07465a5c5d91d11cd6405f60abb0e6273f28edd576e2a2a8f6a9b7af8daf201f",
+    "/private/tmp/ember-tops-density-family-v1/x007p5-z030/receipt.json": "f7b63c1852078650dc527ef2c3982d75348efa57ba2f7f7c8af55c473bdba152",
+    "/private/tmp/ember-tops-density-family-v1/x007p5-z030/request.json": "49980391e90f1060142f844aaaf50f2feaf80f34a39e302f800040e2a9cb24c1",
+    "/private/tmp/ember-tops-density-family-v1/x007p5-z030/coverage.json": "cc9ad81dd538f2439a7115ea2a1e41d89c8880bac367e2db1c16204d21c9e58a",
+    "/private/tmp/ember-tops-density-family-v1/x007p5-z030/source.txt": "a34d16185a6996f8ac4f804bd713e74fda40c113cca0e2471a1591e65ddd937e",
+    "/private/tmp/ember-tops-density-family-v1/x009-z030/receipt.json": "4f84cb844ccc34122e5ab8886d77d6d9271fb001e5824269267ed08c3d3fc7d4",
+    "/private/tmp/ember-tops-density-family-v1/x009-z030/request.json": "6e1ae181108437a6ebb4ac00b81b4f1abb3c6097f6000198827824e32f3603af",
+    "/private/tmp/ember-tops-density-family-v1/x009-z030/coverage.json": "eb51fd4f4bdca907bd7798d2ead2cc55c61c8bde305671b1fe9a5cb3665e5672",
+    "/private/tmp/ember-tops-density-family-v1/x009-z030/source.txt": "47cb4ae7f1b81baa9528b78a07cd4252c2c0660e148e159a133b0336ffef3e2b",
+    "/private/tmp/ember-tops-density-family-v1/x010-z030/receipt.json": "d3cc37699ece4f5c0e3098813bfc8d62d14f3a0c407b89d3c3151d8d84fcfd9d",
+    "/private/tmp/ember-tops-density-family-v1/x010-z030/request.json": "5aec96e8dfa9a4c34b1869e55b0aafc5292e29483c3f188de6cdc86c79d67d4d",
+    "/private/tmp/ember-tops-density-family-v1/x010-z030/coverage.json": "9d268c003ffb9882b2a2de2610024f91893950a45a882102d26fcf1d255572e5",
+    "/private/tmp/ember-tops-density-family-v1/x010-z030/source.txt": "fbb99c8259418c41894fa14612b788829ea4f4b4efa09467bdd486b778f8bbcf",
+    "/private/tmp/ember-tops-density-family-v1/x012p5-z030/receipt.json": "c3a4cbd8862ea8fb0d44c170d7a89dac0ff34697138b261f2b911d9b3b4da29b",
+    "/private/tmp/ember-tops-density-family-v1/x012p5-z030/request.json": "9cc5c0c196cb1f60bc92eef14954d2dc03331d4c91ff5d5ac06b8a5bb0be4970",
+    "/private/tmp/ember-tops-density-family-v1/x012p5-z030/coverage.json": "cf57277b162606868b464929ee96f8ce09e86d35018806037f9002bc1edc29d5",
+    "/private/tmp/ember-tops-density-family-v1/x012p5-z030/source.txt": "e6e50a0ad5ed1f09555f608d1518a46bb60a779bbb97a04676760b24b0685967",
+    "/private/tmp/ember-tops-density-family-v1/x015-z030/receipt.json": "a8415ede87fc832e4886470e9bf7f2d5807cf422786402705080b35c35b0982e",
+    "/private/tmp/ember-tops-density-family-v1/x015-z030/request.json": "69c935ddd778b5f01f984ea0c1e48e1c0c75915eb3ca06f05e8750c3cf9882ab",
+    "/private/tmp/ember-tops-density-family-v1/x015-z030/coverage.json": "6250b47f988b37e286a2298f7a3bd5f4ae38c86d02f3710b96f2ae8c403ff7aa",
+    "/private/tmp/ember-tops-density-family-v1/x015-z030/source.txt": "f36d1403384b7b6f6fe71164fc001389f6784bab8e699d743979c8bac4326231",
+    "/private/tmp/ember-tops-density-family-v1/x017p5-z030/receipt.json": "cbc20667d1300a7e603d656664ed6510470920706df42abb143a148477ca8ab5",
+    "/private/tmp/ember-tops-density-family-v1/x017p5-z030/request.json": "18b19db3faece4c86be8341b3e22ba8db8e4c25d99d87661732e004cf2a8682a",
+    "/private/tmp/ember-tops-density-family-v1/x017p5-z030/coverage.json": "304dabca72555fe251171e9cccc42f88334238ad2dd8c2d3d332684922b7739b",
+    "/private/tmp/ember-tops-density-family-v1/x017p5-z030/source.txt": "cbb60619e52e083b229ffdb69fb6e823863330d16ebe4616db13b5a9226a7587",
+    "/private/tmp/ember-tops-density-family-v1/x020-z030/receipt.json": "679f9f86480c5ebb6442536ed9cd752b6d5089c6f7ccf819022445db08966e40",
+    "/private/tmp/ember-tops-density-family-v1/x020-z030/request.json": "fbecab01e413bd663b6bcb28f5aa5135c16edef736b31b3e1d51b4cccdddaa36",
+    "/private/tmp/ember-tops-density-family-v1/x020-z030/coverage.json": "6af76e51f5fcf71561164c351051683d22d7f21c0aa02f419f9453db64035cf1",
+    "/private/tmp/ember-tops-density-family-v1/x020-z030/source.txt": "f9af2e1fad7e4b77dbc5a86c5f1e38127e895def538964f3ca4495772899c04f",
+    "/private/tmp/ember-tops-density-family-v1/x025-z030/receipt.json": "d10c4829167b88b01e54f92c1fefd6e8f6217f38e3d83398f3aa4b683b441a62",
+    "/private/tmp/ember-tops-density-family-v1/x025-z030/request.json": "38e80df3da73d388956d12b5954b7c9208fb49b1999fe5c136bfb524a0a2a11a",
+    "/private/tmp/ember-tops-density-family-v1/x025-z030/coverage.json": "40c3a45a42594e71e6f7153215d36414972c796108d5b81b77d85ccebb4c6424",
+    "/private/tmp/ember-tops-density-family-v1/x025-z030/source.txt": "234c61fcbf31f05489c3fea107f60b88b84fb0708517db7df28abd4ebe22821f",
+    "/private/tmp/ember-tops-density-family-v1/x030-z030/receipt.json": "9735d23418c38a7068f8e96294294dbc4695052463655db36f3f0bacdadbac96",
+    "/private/tmp/ember-tops-density-family-v1/x030-z030/request.json": "0ff63160bafe61485e7a45c684ae8b28151302c07f4658d1e9a658d2738d5751",
+    "/private/tmp/ember-tops-density-family-v1/x030-z030/coverage.json": "12a9a95777cc734c4d87eda3f92c1c58ac3abf45bf2cae71e3f686d18eae39b4",
+    "/private/tmp/ember-tops-density-family-v1/x030-z030/source.txt": "1a7ee689a99c12e5552203827b1b9d08308de9e48cc6d9eed054dfbd54b9b2ee",
+    "/private/tmp/ember-tops-density-family-v1/x040-z030/receipt.json": "892233988b86564f11ba571047d253f1f24b13318f914fc3b0cb7e02bcfae044",
+    "/private/tmp/ember-tops-density-family-v1/x040-z030/request.json": "8652c7c4df595311b1c775724168579e1679003709e97c0ee54f4471cc363c4f",
+    "/private/tmp/ember-tops-density-family-v1/x040-z030/coverage.json": "2174eb44a1e6d5d97f03ac2a2c7dd1aaa309881d8427b549cd8d0b58402e3341",
+    "/private/tmp/ember-tops-density-family-v1/x040-z030/source.txt": "ece4236435db97b3c4efa9e9259e7fcd800d0316541a3f430ce55113c83267b1",
+    "/private/tmp/ember-tops-density-family-v1/x050-z030/receipt.json": "0b25a7092a5182cf1829026d409e38227d5ae7150d7d7b6990b00d147caeb87d",
+    "/private/tmp/ember-tops-density-family-v1/x050-z030/request.json": "9609bbb225bcda40f329d8fb0a309f160b6a699934b5b05040ab2f2de3fa9b76",
+    "/private/tmp/ember-tops-density-family-v1/x050-z030/coverage.json": "866e69ce5636473c1e6df0e99f6363e42063f8f35382db1bd837a527f1368606",
+    "/private/tmp/ember-tops-density-family-v1/x050-z030/source.txt": "824deda6453df7494113ac7a3868d790cdbfe3a273ace99b561891a14c23c73b",
+    "/private/tmp/ember-tops-density-family-v1/x060-z030/receipt.json": "0a2d0c2e87d491800958ce2a7931a4b9c84ea3eed0b8521fbeea2afd3f34e0b0",
+    "/private/tmp/ember-tops-density-family-v1/x060-z030/request.json": "bf6f4624665eebdad9d4580253e55b98e0566dde41eff996b77c9d4347c87c5b",
+    "/private/tmp/ember-tops-density-family-v1/x060-z030/coverage.json": "fca89c45c32179fec8236530505a8ea70eef33e8262200d9f826aade9b4c43de",
+    "/private/tmp/ember-tops-density-family-v1/x060-z030/source.txt": "e013d7ef7ce541b2e2530100fb1d6058429aca1704b6b4ca4a3f3daa14d07847",
+    "/private/tmp/ember-tops-density-family-v1/x065-z030/receipt.json": "b0993a5d9243dc97cfb9209ac80c32ded49e4d36b29647c746d5fc2e34b3c9e8",
+    "/private/tmp/ember-tops-density-family-v1/x065-z030/request.json": "95560f77da6a00165ae7a4b712e1707a8e2095d50089664489cce491f3c5134c",
+    "/private/tmp/ember-tops-density-family-v1/x065-z030/coverage.json": "c340774e1b6679f5dcc736b5e3b6bea4aa43dd776b9f1877f568b285a256e02f",
+    "/private/tmp/ember-tops-density-family-v1/x065-z030/source.txt": "4657ee96513aca1d121cabe65816cb59fb9c79ca08da19a29a671ca73341d4ad",
+    "/private/tmp/ember-tops-density-family-v1/x070-z030/receipt.json": "ca7267d6186623b28361210afdeda22f778a1ebef552a8ee61e33210cdb3f43b",
+    "/private/tmp/ember-tops-density-family-v1/x070-z030/request.json": "779698c15c91c5e011ccfb82cefeff760cddadd91484a2419622494ea01a5959",
+    "/private/tmp/ember-tops-density-family-v1/x070-z030/coverage.json": "ba6644f384a074ccdbb9fec1c347d5af6f6ef078ee9494075c215f76af44d317",
+    "/private/tmp/ember-tops-density-family-v1/x070-z030/source.txt": "87b8e123ddb051bd171b245f3fe135e4461668d4e693d00748b4683c875155c1",
+    "/private/tmp/ember-tops-density-family-v1/x075-z030/receipt.json": "babb09eb14aef5263375a9d04424c1c1fed71c6ddf1093b4441b102c7681fea8",
+    "/private/tmp/ember-tops-density-family-v1/x075-z030/request.json": "11d835b5b3a772d98a125d7cc3716925916e7fdf70abeafd0027a0de77ec57f7",
+    "/private/tmp/ember-tops-density-family-v1/x075-z030/coverage.json": "cad8d19caff4752f0b56097f272cdc7ec5d0d888ff1edc97b3bf2ff41014d428",
+    "/private/tmp/ember-tops-density-family-v1/x075-z030/source.txt": "c2e1c1f47d80291546de3f3b1a7422d5e8fb0634f5f5ed2f91249d30814d8f7c",
+    "/private/tmp/ember-tops-density-heldout-v1/x001p25-z010/receipt.json": "9230332a4e01289a3d2675ee06f009e81c26b776e28a5ec95b6ce1128cff2a36",
+    "/private/tmp/ember-tops-density-heldout-v1/x001p25-z010/request.json": "a01a89c0b2c49bbb601499c73033d96732b5eafceba5fdf164ee559d7d15e15e",
+    "/private/tmp/ember-tops-density-heldout-v1/x001p25-z010/coverage.json": "612ca152aca7b46c234f97c2c6b9255cbc348ed7dbc90c9816ac3c6422576445",
+    "/private/tmp/ember-tops-density-heldout-v1/x001p25-z010/source.txt": "7c4793b0cae4aaebd122b3fa62ff05b0fedf3ad6f7b0dff8d6524fd15e2abeb9",
+    "/private/tmp/ember-tops-density-heldout-v1/x003p75-z010/receipt.json": "de82504a48f432a85507deb2b4d08c9a4a883d3e980397e0a6cb224326a2cecd",
+    "/private/tmp/ember-tops-density-heldout-v1/x003p75-z010/request.json": "f3d6049213231c940547c1244cda347d15eef3fc843d80358774384f496befb1",
+    "/private/tmp/ember-tops-density-heldout-v1/x003p75-z010/coverage.json": "1e7ad23f771fd5270dadb6e577d1631ca3382c5f3e79bc2e86764f198d0d088a",
+    "/private/tmp/ember-tops-density-heldout-v1/x003p75-z010/source.txt": "5e0d33759fa8e6e6f66036feba1b53b82b76f7be2cb6de0aec2b7c7b00c8cd94",
+    "/private/tmp/ember-tops-density-heldout-v1/x006p25-z010/receipt.json": "88e1a6efc329fd0ac1584e224f5ad5558fdbf65518edd454c714422d6bf72932",
+    "/private/tmp/ember-tops-density-heldout-v1/x006p25-z010/request.json": "a918499664a6a3c0d578b9c61a524fe9af33daddeb5ceab943f68f84e1ad1a3d",
+    "/private/tmp/ember-tops-density-heldout-v1/x006p25-z010/coverage.json": "4e2e88b6fa697a3ec591d4181c1426a76b010b95dd7792f5ddf0681b519162dd",
+    "/private/tmp/ember-tops-density-heldout-v1/x006p25-z010/source.txt": "466dcb648d9dd0fa3636eeb537327010d6fb781a08fd80c3921f085e6cf540a1",
+    "/private/tmp/ember-tops-density-heldout-v1/x008p25-z010/receipt.json": "e15e7faf0fd02938f3d0c978a928a659ef7828bfc7cc07dcf926bdbb04578682",
+    "/private/tmp/ember-tops-density-heldout-v1/x008p25-z010/request.json": "29004af964352c63020145c4d9330e26dab5a9bb123f2f9f72553c8405e801cc",
+    "/private/tmp/ember-tops-density-heldout-v1/x008p25-z010/coverage.json": "0e5a25b7b85922472ec05ca7430fe40bec51870c4130f5dd6c680e9a976d1d93",
+    "/private/tmp/ember-tops-density-heldout-v1/x008p25-z010/source.txt": "d63f0ab19d54522c2b5e9cc4dc5b1308902eeb365019b645ef3e26c730ff4bb9",
+    "/private/tmp/ember-tops-density-heldout-v1/x001p25-z020/receipt.json": "e556537fd56f2a19bc7dc26ca299ab477ef1ff49746d7ae7a8e277d2bd3c5f59",
+    "/private/tmp/ember-tops-density-heldout-v1/x001p25-z020/request.json": "d3e5afb20a9faf8d21b60266d572e1c054da242ad4c0d8592464bc498cda1a91",
+    "/private/tmp/ember-tops-density-heldout-v1/x001p25-z020/coverage.json": "c6e0ae76b65cf4f5719007a9d54386c97f4876a2eb2d590007ceaf59142a39c0",
+    "/private/tmp/ember-tops-density-heldout-v1/x001p25-z020/source.txt": "15edb603db98415e505e6159ee0a66827774e8f4dba60a5587df8165dd3684f6",
+    "/private/tmp/ember-tops-density-heldout-v1/x003p75-z020/receipt.json": "34dc5006026be8b0361e3fcea678f647765818a584680fc4a265e8d14fb175e5",
+    "/private/tmp/ember-tops-density-heldout-v1/x003p75-z020/request.json": "8709499290cd066db7e032d2e45b260b63bda643c9e3907ef024c907d15042b9",
+    "/private/tmp/ember-tops-density-heldout-v1/x003p75-z020/coverage.json": "1148797b0fb9c72640e66bdfca71ea57b8253bfa1ee24cc4a03edde14877e5f3",
+    "/private/tmp/ember-tops-density-heldout-v1/x003p75-z020/source.txt": "2a3afea437571aadcc59de30a4d72ef7a6dd78779030a8aed849e7a0325b88d6",
+    "/private/tmp/ember-tops-density-heldout-v1/x006p25-z020/receipt.json": "b31b4cc30170548f76e70b360487ba9e9f745a005eedd34f128be2417e6ab8dd",
+    "/private/tmp/ember-tops-density-heldout-v1/x006p25-z020/request.json": "0cf263fff0e48a6e387e1215af0bc94e8a02d1cc5c2776135f82456fe58531c1",
+    "/private/tmp/ember-tops-density-heldout-v1/x006p25-z020/coverage.json": "86b03b0e231b82f061f15f6d85ae126baf7b43a933c9aee6cb0cd817f6f3e01c",
+    "/private/tmp/ember-tops-density-heldout-v1/x006p25-z020/source.txt": "cb65d50472227e66e347018e00320191adebf3d1cd1272b02b296c0ab6ece647",
+    "/private/tmp/ember-tops-density-heldout-v1/x008p25-z020/receipt.json": "d1a3cdbbac1cb8a7d53068d13a2165a3d4ad358fa8bf0f050b170571eba79658",
+    "/private/tmp/ember-tops-density-heldout-v1/x008p25-z020/request.json": "b2b0fd0a81db0ebab3f387f383341672db265cf9bc8b04a0f269fe04a3d95f17",
+    "/private/tmp/ember-tops-density-heldout-v1/x008p25-z020/coverage.json": "a768a0d68347051fab7bc045b45ee95acba4d8bd75d3391ec8afe249aed7993b",
+    "/private/tmp/ember-tops-density-heldout-v1/x008p25-z020/source.txt": "fe180405bcdfe3754ca777229e0732e26b4e8968377337f9581a3ef116df9b45",
+    "/private/tmp/ember-tops-density-heldout-v1/x001p25-z030/receipt.json": "02c569929107d2e781f1075a675f04bead6915c66d2df658b9405b52f5b47143",
+    "/private/tmp/ember-tops-density-heldout-v1/x001p25-z030/request.json": "e7d3b796051c518603355f55c82b2c812a9d25a8c1cf2b17ec4197e9cb01d688",
+    "/private/tmp/ember-tops-density-heldout-v1/x001p25-z030/coverage.json": "aa4e99cd0c3c2606554fdbb0332f237e137c3c2549518191ddc98c83b7cc118f",
+    "/private/tmp/ember-tops-density-heldout-v1/x001p25-z030/source.txt": "ede7e1e43230ffe15fe04ed4697f54524ae9e7ea51e2545020cf6e69f8fd7012",
+    "/private/tmp/ember-tops-density-heldout-v1/x003p75-z030/receipt.json": "a89f2aa36287ae709b483b86af3c3afa3af4d78e82940783c5898ff33c238626",
+    "/private/tmp/ember-tops-density-heldout-v1/x003p75-z030/request.json": "ac5475755f73306c9713b218b5349c121f4ed41d685700caa040cb6076db35b8",
+    "/private/tmp/ember-tops-density-heldout-v1/x003p75-z030/coverage.json": "6984a0456840936873a3e581adfc0ce9f703cc292d7c156e33de66169b88518f",
+    "/private/tmp/ember-tops-density-heldout-v1/x003p75-z030/source.txt": "763be081bd7999e414e098348fe13aec4f6e233b7db1a1a2f7f9f694e21e9e0b",
+    "/private/tmp/ember-tops-density-heldout-v1/x006p25-z030/receipt.json": "d5993327757e9793eedf09985ccf95f91149c561032060b2f4e480f8ac1d179b",
+    "/private/tmp/ember-tops-density-heldout-v1/x006p25-z030/request.json": "6f791734ab97a7fc6f3e77013eac085b5540cd23d57cc3ae54e78bb708844e25",
+    "/private/tmp/ember-tops-density-heldout-v1/x006p25-z030/coverage.json": "ea28fc636d8832a966eec10bcd12da0dc3c4f35a2f015705cb7a1a43af291c44",
+    "/private/tmp/ember-tops-density-heldout-v1/x006p25-z030/source.txt": "0147ed2ba6f1ff765954b9c2dfc94f214134146fe4b0f41372a11359e6abb46e",
+    "/private/tmp/ember-tops-density-heldout-v1/x008p25-z030/receipt.json": "230e5116299988f15794f8df7e069b37e541ba6e625665a062ba1942d49f548b",
+    "/private/tmp/ember-tops-density-heldout-v1/x008p25-z030/request.json": "e62f96218d2f0b0526a97822abd56258d40c21426770ab03e918176a87ea9fa1",
+    "/private/tmp/ember-tops-density-heldout-v1/x008p25-z030/coverage.json": "79e77a649ee600e0e3346b389dff00c7d4c795a8445b874e900b323353089b3d",
+    "/private/tmp/ember-tops-density-heldout-v1/x008p25-z030/source.txt": "121b42365450a735323b53089228dc4567f869a36d67088b7e7c597cc7a5b423"
+  },
+  "comparisons": [
+    {
+      "kind": "nodes",
+      "X": 0.0,
+      "Z": 0.01,
+      "compared_states": 306,
+      "unsupported_runtime_states": 57,
+      "worst": {
+        "query": [
+          0.0,
+          1044406.6309395074,
+          15849.0
+        ],
+        "source": 166.21,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0,
+          1044406.6309395074,
+          15849.0
+        ],
+        "source": 166.21,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.025,
+      "Z": 0.01,
+      "compared_states": 306,
+      "unsupported_runtime_states": 57,
+      "worst": {
+        "query": [
+          0.025,
+          580225.9060775042,
+          25119.0
+        ],
+        "source": 142.39,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.025,
+          580225.9060775042,
+          25119.0
+        ],
+        "source": 142.39,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.05,
+      "Z": 0.01,
+      "compared_states": 303,
+      "unsupported_runtime_states": 60,
+      "worst": {
+        "query": [
+          0.05,
+          1044406.6309395074,
+          15849.0
+        ],
+        "source": 164.44,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.05,
+          1044406.6309395074,
+          15849.0
+        ],
+        "source": 164.44,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.075,
+      "Z": 0.01,
+      "compared_states": 303,
+      "unsupported_runtime_states": 60,
+      "worst": {
+        "query": [
+          0.075,
+          580225.9060775042,
+          15849.0
+        ],
+        "source": 206.29,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.075,
+          580225.9060775042,
+          15849.0
+        ],
+        "source": 206.29,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.09,
+      "Z": 0.01,
+      "compared_states": 303,
+      "unsupported_runtime_states": 60,
+      "worst": {
+        "query": [
+          0.09,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 307.66,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.09,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 307.66,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.1,
+      "Z": 0.01,
+      "compared_states": 302,
+      "unsupported_runtime_states": 61,
+      "worst": {
+        "query": [
+          0.1,
+          1160451.8121550083,
+          10000.0
+        ],
+        "source": 167.06,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.1,
+          1160451.8121550083,
+          10000.0
+        ],
+        "source": 167.06,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.125,
+      "Z": 0.01,
+      "compared_states": 302,
+      "unsupported_runtime_states": 61,
+      "worst": {
+        "query": [
+          0.125,
+          580225.9060775042,
+          15849.0
+        ],
+        "source": 197.04,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.125,
+          580225.9060775042,
+          15849.0
+        ],
+        "source": 197.04,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.15,
+      "Z": 0.01,
+      "compared_states": 302,
+      "unsupported_runtime_states": 61,
+      "worst": {
+        "query": [
+          0.15,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 291.36,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.15,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 291.36,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.175,
+      "Z": 0.01,
+      "compared_states": 302,
+      "unsupported_runtime_states": 61,
+      "worst": {
+        "query": [
+          0.175,
+          696271.0872930048,
+          25119.0
+        ],
+        "source": 126.72,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.175,
+          696271.0872930048,
+          25119.0
+        ],
+        "source": 126.72,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.2,
+      "Z": 0.01,
+      "compared_states": 297,
+      "unsupported_runtime_states": 66,
+      "worst": {
+        "query": [
+          0.2,
+          696271.0872930048,
+          10000.0
+        ],
+        "source": 270.86,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.2,
+          696271.0872930048,
+          10000.0
+        ],
+        "source": 270.86,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.25,
+      "Z": 0.01,
+      "compared_states": 297,
+      "unsupported_runtime_states": 66,
+      "worst": {
+        "query": [
+          0.25,
+          812316.2685085058,
+          25119.0
+        ],
+        "source": 122.05,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.25,
+          812316.2685085058,
+          25119.0
+        ],
+        "source": 122.05,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.3,
+      "Z": 0.01,
+      "compared_states": 295,
+      "unsupported_runtime_states": 68,
+      "worst": {
+        "query": [
+          0.3,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 259.94,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.3,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 259.94,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.4,
+      "Z": 0.01,
+      "compared_states": 292,
+      "unsupported_runtime_states": 71,
+      "worst": {
+        "query": [
+          0.4,
+          1450564.7651937604,
+          15849.0
+        ],
+        "source": 107.2,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.4,
+          1450564.7651937604,
+          15849.0
+        ],
+        "source": 107.2,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.5,
+      "Z": 0.01,
+      "compared_states": 289,
+      "unsupported_runtime_states": 74,
+      "worst": {
+        "query": [
+          0.5,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 226.68,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.5,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 226.68,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.6,
+      "Z": 0.01,
+      "compared_states": 288,
+      "unsupported_runtime_states": 75,
+      "worst": {
+        "query": [
+          0.6,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 211.81,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.6,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 211.81,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.65,
+      "Z": 0.01,
+      "compared_states": 286,
+      "unsupported_runtime_states": 77,
+      "worst": {
+        "query": [
+          0.65,
+          1450564.7651937604,
+          10000.0
+        ],
+        "source": 118.77,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.65,
+          1450564.7651937604,
+          10000.0
+        ],
+        "source": 118.77,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.7,
+      "Z": 0.01,
+      "compared_states": 285,
+      "unsupported_runtime_states": 78,
+      "worst": {
+        "query": [
+          0.7,
+          580225.9060775042,
+          15849.0
+        ],
+        "source": 129.45,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.7,
+          580225.9060775042,
+          15849.0
+        ],
+        "source": 129.45,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.75,
+      "Z": 0.01,
+      "compared_states": 285,
+      "unsupported_runtime_states": 78,
+      "worst": {
+        "query": [
+          0.75,
+          696271.0872930048,
+          15849.0
+        ],
+        "source": 128.66,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.75,
+          696271.0872930048,
+          15849.0
+        ],
+        "source": 128.66,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.0,
+      "Z": 0.02,
+      "compared_states": 306,
+      "unsupported_runtime_states": 57,
+      "worst": {
+        "query": [
+          0.0,
+          696271.0872930048,
+          10000.0
+        ],
+        "source": 302.99,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0,
+          696271.0872930048,
+          10000.0
+        ],
+        "source": 302.99,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.025,
+      "Z": 0.02,
+      "compared_states": 306,
+      "unsupported_runtime_states": 57,
+      "worst": {
+        "query": [
+          0.025,
+          812316.2685085058,
+          15849.0
+        ],
+        "source": 220.16,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.025,
+          812316.2685085058,
+          15849.0
+        ],
+        "source": 220.16,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.05,
+      "Z": 0.02,
+      "compared_states": 303,
+      "unsupported_runtime_states": 60,
+      "worst": {
+        "query": [
+          0.05,
+          928361.4497240067,
+          25119.0
+        ],
+        "source": 153.27,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.05,
+          928361.4497240067,
+          25119.0
+        ],
+        "source": 153.27,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.075,
+      "Z": 0.02,
+      "compared_states": 303,
+      "unsupported_runtime_states": 60,
+      "worst": {
+        "query": [
+          0.075,
+          928361.4497240067,
+          10000.0
+        ],
+        "source": 217.09,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.075,
+          928361.4497240067,
+          10000.0
+        ],
+        "source": 217.09,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.09,
+      "Z": 0.02,
+      "compared_states": 303,
+      "unsupported_runtime_states": 60,
+      "worst": {
+        "query": [
+          0.09,
+          696271.0872930048,
+          25119.0
+        ],
+        "source": 142.6,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.09,
+          696271.0872930048,
+          25119.0
+        ],
+        "source": 142.6,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.1,
+      "Z": 0.02,
+      "compared_states": 302,
+      "unsupported_runtime_states": 61,
+      "worst": {
+        "query": [
+          0.1,
+          696271.0872930048,
+          10000.0
+        ],
+        "source": 292.43,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.1,
+          696271.0872930048,
+          10000.0
+        ],
+        "source": 292.43,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.125,
+      "Z": 0.02,
+      "compared_states": 302,
+      "unsupported_runtime_states": 61,
+      "worst": {
+        "query": [
+          0.125,
+          928361.4497240067,
+          25119.0
+        ],
+        "source": 144.47,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.125,
+          928361.4497240067,
+          25119.0
+        ],
+        "source": 144.47,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.15,
+      "Z": 0.02,
+      "compared_states": 302,
+      "unsupported_runtime_states": 61,
+      "worst": {
+        "query": [
+          0.15,
+          1160451.8121550083,
+          15849.0
+        ],
+        "source": 148.01,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.15,
+          1160451.8121550083,
+          15849.0
+        ],
+        "source": 148.01,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.175,
+      "Z": 0.02,
+      "compared_states": 302,
+      "unsupported_runtime_states": 61,
+      "worst": {
+        "query": [
+          0.175,
+          812316.2685085058,
+          25119.0
+        ],
+        "source": 135.44,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.175,
+          812316.2685085058,
+          25119.0
+        ],
+        "source": 135.44,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.2,
+      "Z": 0.02,
+      "compared_states": 297,
+      "unsupported_runtime_states": 66,
+      "worst": {
+        "query": [
+          0.2,
+          2901129.530387521,
+          10000.0
+        ],
+        "source": 101.14,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.2,
+          2901129.530387521,
+          10000.0
+        ],
+        "source": 101.14,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.25,
+      "Z": 0.02,
+      "compared_states": 297,
+      "unsupported_runtime_states": 66,
+      "worst": {
+        "query": [
+          0.25,
+          580225.9060775042,
+          15849.0
+        ],
+        "source": 185.21,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.25,
+          580225.9060775042,
+          15849.0
+        ],
+        "source": 185.21,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.3,
+      "Z": 0.02,
+      "compared_states": 295,
+      "unsupported_runtime_states": 68,
+      "worst": {
+        "query": [
+          0.3,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 270.52,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.3,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 270.52,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.4,
+      "Z": 0.02,
+      "compared_states": 292,
+      "unsupported_runtime_states": 71,
+      "worst": {
+        "query": [
+          0.4,
+          1160451.8121550083,
+          10000.0
+        ],
+        "source": 160.43,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.4,
+          1160451.8121550083,
+          10000.0
+        ],
+        "source": 160.43,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.5,
+      "Z": 0.02,
+      "compared_states": 289,
+      "unsupported_runtime_states": 74,
+      "worst": {
+        "query": [
+          0.5,
+          696271.0872930048,
+          25119.0
+        ],
+        "source": 104.24,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.5,
+          696271.0872930048,
+          25119.0
+        ],
+        "source": 104.24,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.6,
+      "Z": 0.02,
+      "compared_states": 288,
+      "unsupported_runtime_states": 75,
+      "worst": {
+        "query": [
+          0.6,
+          928361.4497240067,
+          10000.0
+        ],
+        "source": 191.84,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.6,
+          928361.4497240067,
+          10000.0
+        ],
+        "source": 191.84,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.65,
+      "Z": 0.02,
+      "compared_states": 286,
+      "unsupported_runtime_states": 77,
+      "worst": {
+        "query": [
+          0.65,
+          696271.0872930048,
+          15849.0
+        ],
+        "source": 143.34,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.65,
+          696271.0872930048,
+          15849.0
+        ],
+        "source": 143.34,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.7,
+      "Z": 0.02,
+      "compared_states": 285,
+      "unsupported_runtime_states": 78,
+      "worst": {
+        "query": [
+          0.7,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 206.87,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.7,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 206.87,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.75,
+      "Z": 0.02,
+      "compared_states": 285,
+      "unsupported_runtime_states": 78,
+      "worst": {
+        "query": [
+          0.75,
+          812316.2685085058,
+          10000.0
+        ],
+        "source": 205.77,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.75,
+          812316.2685085058,
+          10000.0
+        ],
+        "source": 205.77,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.0,
+      "Z": 0.03,
+      "compared_states": 306,
+      "unsupported_runtime_states": 57,
+      "worst": {
+        "query": [
+          0.0,
+          696271.0872930048,
+          25119.0
+        ],
+        "source": 162.35,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0,
+          696271.0872930048,
+          25119.0
+        ],
+        "source": 162.35,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.025,
+      "Z": 0.03,
+      "compared_states": 306,
+      "unsupported_runtime_states": 57,
+      "worst": {
+        "query": [
+          0.025,
+          812316.2685085058,
+          25119.0
+        ],
+        "source": 162.25,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.025,
+          812316.2685085058,
+          25119.0
+        ],
+        "source": 162.25,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.05,
+      "Z": 0.03,
+      "compared_states": 303,
+      "unsupported_runtime_states": 60,
+      "worst": {
+        "query": [
+          0.05,
+          580225.9060775042,
+          25119.0
+        ],
+        "source": 152.39,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.05,
+          580225.9060775042,
+          25119.0
+        ],
+        "source": 152.39,
+        "relative_difference": 6.661338147750939e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.075,
+      "Z": 0.03,
+      "compared_states": 303,
+      "unsupported_runtime_states": 60,
+      "worst": {
+        "query": [
+          0.075,
+          1160451.8121550083,
+          39811.0
+        ],
+        "source": 106.94,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.075,
+          1160451.8121550083,
+          39811.0
+        ],
+        "source": 106.94,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.09,
+      "Z": 0.03,
+      "compared_states": 303,
+      "unsupported_runtime_states": 60,
+      "worst": {
+        "query": [
+          0.09,
+          1044406.6309395074,
+          39811.0
+        ],
+        "source": 104.22,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.09,
+          1044406.6309395074,
+          39811.0
+        ],
+        "source": 104.22,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.1,
+      "Z": 0.03,
+      "compared_states": 302,
+      "unsupported_runtime_states": 61,
+      "worst": {
+        "query": [
+          0.1,
+          580225.9060775042,
+          25119.0
+        ],
+        "source": 146.23,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.1,
+          580225.9060775042,
+          25119.0
+        ],
+        "source": 146.23,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.125,
+      "Z": 0.03,
+      "compared_states": 302,
+      "unsupported_runtime_states": 61,
+      "worst": {
+        "query": [
+          0.125,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 320.9,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.125,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 320.9,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.15,
+      "Z": 0.03,
+      "compared_states": 302,
+      "unsupported_runtime_states": 61,
+      "worst": {
+        "query": [
+          0.15,
+          696271.0872930048,
+          25119.0
+        ],
+        "source": 141.55,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.15,
+          696271.0872930048,
+          25119.0
+        ],
+        "source": 141.55,
+        "relative_difference": -4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.175,
+      "Z": 0.03,
+      "compared_states": 302,
+      "unsupported_runtime_states": 61,
+      "worst": {
+        "query": [
+          0.175,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 309.25,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.175,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 309.25,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.2,
+      "Z": 0.03,
+      "compared_states": 297,
+      "unsupported_runtime_states": 66,
+      "worst": {
+        "query": [
+          0.2,
+          1044406.6309395074,
+          15849.0
+        ],
+        "source": 169.08,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.2,
+          1044406.6309395074,
+          15849.0
+        ],
+        "source": 169.08,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.25,
+      "Z": 0.03,
+      "compared_states": 297,
+      "unsupported_runtime_states": 66,
+      "worst": {
+        "query": [
+          0.25,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 291.6,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.25,
+          580225.9060775042,
+          10000.0
+        ],
+        "source": 291.6,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.3,
+      "Z": 0.03,
+      "compared_states": 295,
+      "unsupported_runtime_states": 68,
+      "worst": {
+        "query": [
+          0.3,
+          928361.4497240067,
+          10000.0
+        ],
+        "source": 214.64,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.3,
+          928361.4497240067,
+          10000.0
+        ],
+        "source": 214.64,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.4,
+      "Z": 0.03,
+      "compared_states": 292,
+      "unsupported_runtime_states": 71,
+      "worst": {
+        "query": [
+          0.4,
+          580225.9060775042,
+          25119.0
+        ],
+        "source": 112.78,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.4,
+          580225.9060775042,
+          25119.0
+        ],
+        "source": 112.78,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.5,
+      "Z": 0.03,
+      "compared_states": 289,
+      "unsupported_runtime_states": 74,
+      "worst": {
+        "query": [
+          0.5,
+          696271.0872930048,
+          25119.0
+        ],
+        "source": 109.34,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.5,
+          696271.0872930048,
+          25119.0
+        ],
+        "source": 109.34,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.6,
+      "Z": 0.03,
+      "compared_states": 288,
+      "unsupported_runtime_states": 75,
+      "worst": {
+        "query": [
+          0.6,
+          928361.4497240067,
+          15849.0
+        ],
+        "source": 160.68,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.6,
+          928361.4497240067,
+          15849.0
+        ],
+        "source": 160.68,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.65,
+      "Z": 0.03,
+      "compared_states": 286,
+      "unsupported_runtime_states": 77,
+      "worst": {
+        "query": [
+          0.65,
+          696271.0872930048,
+          15849.0
+        ],
+        "source": 149.91,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.65,
+          696271.0872930048,
+          15849.0
+        ],
+        "source": 149.91,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.7,
+      "Z": 0.03,
+      "compared_states": 285,
+      "unsupported_runtime_states": 78,
+      "worst": {
+        "query": [
+          0.7,
+          1450564.7651937604,
+          15849.0
+        ],
+        "source": 109.35,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.7,
+          1450564.7651937604,
+          15849.0
+        ],
+        "source": 109.35,
+        "relative_difference": -5.551115123125783e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "nodes",
+      "X": 0.75,
+      "Z": 0.03,
+      "compared_states": 285,
+      "unsupported_runtime_states": 78,
+      "worst": {
+        "query": [
+          0.75,
+          696271.0872930048,
+          10000.0
+        ],
+        "source": 214.44,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.75,
+          696271.0872930048,
+          10000.0
+        ],
+        "source": 214.44,
+        "relative_difference": 4.440892098500626e-16,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": null
+    },
+    {
+      "kind": "heldouts",
+      "X": 0.0125,
+      "Z": 0.01,
+      "compared_states": 579,
+      "unsupported_runtime_states": 114,
+      "worst": {
+        "query": [
+          0.0125,
+          1740677.7182325122,
+          79433.0
+        ],
+        "source": 57.912,
+        "relative_difference": -0.041696539799194854,
+        "intermediate_density": true
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0125,
+          5802259.060775042,
+          1000000.0
+        ],
+        "source": 6.9872,
+        "relative_difference": -0.00392011439490636,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": {
+        "query": [
+          0.0125,
+          1740677.7182325122,
+          79433.0
+        ],
+        "source": 57.912,
+        "relative_difference": -0.041696539799194854,
+        "intermediate_density": true
+      }
+    },
+    {
+      "kind": "heldouts",
+      "X": 0.0375,
+      "Z": 0.01,
+      "compared_states": 579,
+      "unsupported_runtime_states": 114,
+      "worst": {
+        "query": [
+          0.0375,
+          1740677.7182325122,
+          79433.0
+        ],
+        "source": 57.183,
+        "relative_difference": -0.04320216865986293,
+        "intermediate_density": true
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0375,
+          2320903.6243100166,
+          158490.0
+        ],
+        "source": 31.746,
+        "relative_difference": -0.003881540928501459,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": {
+        "query": [
+          0.0375,
+          1740677.7182325122,
+          79433.0
+        ],
+        "source": 57.183,
+        "relative_difference": -0.04320216865986293,
+        "intermediate_density": true
+      }
+    },
+    {
+      "kind": "heldouts",
+      "X": 0.0625,
+      "Z": 0.01,
+      "compared_states": 573,
+      "unsupported_runtime_states": 120,
+      "worst": {
+        "query": [
+          0.0625,
+          5802259.060775042,
+          794330.0
+        ],
+        "source": 8.0122,
+        "relative_difference": -0.04081998869921388,
+        "intermediate_density": true
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0625,
+          2030790.6712712643,
+          63096.0
+        ],
+        "source": 52.948,
+        "relative_difference": 0.004922122974315268,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": {
+        "query": [
+          0.0625,
+          5802259.060775042,
+          794330.0
+        ],
+        "source": 8.0122,
+        "relative_difference": -0.04081998869921388,
+        "intermediate_density": true
+      }
+    },
+    {
+      "kind": "heldouts",
+      "X": 0.0825,
+      "Z": 0.01,
+      "compared_states": 573,
+      "unsupported_runtime_states": 120,
+      "worst": {
+        "query": [
+          0.0825,
+          5802259.060775042,
+          794330.0
+        ],
+        "source": 7.9652,
+        "relative_difference": -0.04719013424961693,
+        "intermediate_density": true
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0825,
+          2901129.530387521,
+          251190.0
+        ],
+        "source": 20.719,
+        "relative_difference": -0.0038115456705667405,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": {
+        "query": [
+          0.0825,
+          5802259.060775042,
+          794330.0
+        ],
+        "source": 7.9652,
+        "relative_difference": -0.04719013424961693,
+        "intermediate_density": true
+      }
+    },
+    {
+      "kind": "heldouts",
+      "X": 0.0125,
+      "Z": 0.02,
+      "compared_states": 579,
+      "unsupported_runtime_states": 114,
+      "worst": {
+        "query": [
+          0.0125,
+          1740677.7182325122,
+          79433.0
+        ],
+        "source": 60.888,
+        "relative_difference": -0.04735214819110434,
+        "intermediate_density": true
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0125,
+          4641807.248620033,
+          630960.0
+        ],
+        "source": 10.805,
+        "relative_difference": -0.003968971211311678,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": {
+        "query": [
+          0.0125,
+          1740677.7182325122,
+          79433.0
+        ],
+        "source": 60.888,
+        "relative_difference": -0.04735214819110434,
+        "intermediate_density": true
+      }
+    },
+    {
+      "kind": "heldouts",
+      "X": 0.0375,
+      "Z": 0.02,
+      "compared_states": 579,
+      "unsupported_runtime_states": 114,
+      "worst": {
+        "query": [
+          0.0375,
+          1740677.7182325122,
+          79433.0
+        ],
+        "source": 59.751,
+        "relative_difference": -0.04276616725530202,
+        "intermediate_density": true
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0375,
+          3191242.483426273,
+          158490.0
+        ],
+        "source": 26.377,
+        "relative_difference": 0.004942264450908285,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": {
+        "query": [
+          0.0375,
+          1740677.7182325122,
+          79433.0
+        ],
+        "source": 59.751,
+        "relative_difference": -0.04276616725530202,
+        "intermediate_density": true
+      }
+    },
+    {
+      "kind": "heldouts",
+      "X": 0.0625,
+      "Z": 0.02,
+      "compared_states": 573,
+      "unsupported_runtime_states": 120,
+      "worst": {
+        "query": [
+          0.0625,
+          5802259.060775042,
+          794330.0
+        ],
+        "source": 8.3685,
+        "relative_difference": -0.04104917330495439,
+        "intermediate_density": true
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0625,
+          2030790.6712712643,
+          63096.0
+        ],
+        "source": 55.139,
+        "relative_difference": 0.004835563152130629,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": {
+        "query": [
+          0.0625,
+          5802259.060775042,
+          794330.0
+        ],
+        "source": 8.3685,
+        "relative_difference": -0.04104917330495439,
+        "intermediate_density": true
+      }
+    },
+    {
+      "kind": "heldouts",
+      "X": 0.0825,
+      "Z": 0.02,
+      "compared_states": 573,
+      "unsupported_runtime_states": 120,
+      "worst": {
+        "query": [
+          0.0825,
+          5802259.060775042,
+          794330.0
+        ],
+        "source": 8.3209,
+        "relative_difference": -0.04738036420497915,
+        "intermediate_density": true
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0825,
+          5802259.060775042,
+          1000000.0
+        ],
+        "source": 6.8255,
+        "relative_difference": -0.003798748674859964,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": {
+        "query": [
+          0.0825,
+          5802259.060775042,
+          794330.0
+        ],
+        "source": 8.3209,
+        "relative_difference": -0.04738036420497915,
+        "intermediate_density": true
+      }
+    },
+    {
+      "kind": "heldouts",
+      "X": 0.0125,
+      "Z": 0.03,
+      "compared_states": 579,
+      "unsupported_runtime_states": 114,
+      "worst": {
+        "query": [
+          0.0125,
+          1740677.7182325122,
+          79433.0
+        ],
+        "source": 63.487,
+        "relative_difference": -0.04527183712697813,
+        "intermediate_density": true
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0125,
+          4641807.248620033,
+          630960.0
+        ],
+        "source": 11.268,
+        "relative_difference": -0.003940769148433332,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": {
+        "query": [
+          0.0125,
+          1740677.7182325122,
+          79433.0
+        ],
+        "source": 63.487,
+        "relative_difference": -0.04527183712697813,
+        "intermediate_density": true
+      }
+    },
+    {
+      "kind": "heldouts",
+      "X": 0.0375,
+      "Z": 0.03,
+      "compared_states": 579,
+      "unsupported_runtime_states": 114,
+      "worst": {
+        "query": [
+          0.0375,
+          1740677.7182325122,
+          79433.0
+        ],
+        "source": 62.318,
+        "relative_difference": -0.042330981990904015,
+        "intermediate_density": true
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0375,
+          3191242.483426273,
+          158490.0
+        ],
+        "source": 27.398,
+        "relative_difference": 0.004867772761365297,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": {
+        "query": [
+          0.0375,
+          1740677.7182325122,
+          79433.0
+        ],
+        "source": 62.318,
+        "relative_difference": -0.042330981990904015,
+        "intermediate_density": true
+      }
+    },
+    {
+      "kind": "heldouts",
+      "X": 0.0625,
+      "Z": 0.03,
+      "compared_states": 573,
+      "unsupported_runtime_states": 120,
+      "worst": {
+        "query": [
+          0.0625,
+          5802259.060775042,
+          794330.0
+        ],
+        "source": 8.7247,
+        "relative_difference": -0.041244237003233875,
+        "intermediate_density": true
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0625,
+          2030790.6712712643,
+          63096.0
+        ],
+        "source": 57.33,
+        "relative_difference": 0.005059661774585722,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": {
+        "query": [
+          0.0625,
+          5802259.060775042,
+          794330.0
+        ],
+        "source": 8.7247,
+        "relative_difference": -0.041244237003233875,
+        "intermediate_density": true
+      }
+    },
+    {
+      "kind": "heldouts",
+      "X": 0.0825,
+      "Z": 0.03,
+      "compared_states": 573,
+      "unsupported_runtime_states": 120,
+      "worst": {
+        "query": [
+          0.0825,
+          5802259.060775042,
+          794330.0
+        ],
+        "source": 8.6766,
+        "relative_difference": -0.045983217922059616,
+        "intermediate_density": true
+      },
+      "worst_at_existing_density": {
+        "query": [
+          0.0825,
+          928361.4497240067,
+          25119.0
+        ],
+        "source": 155.59,
+        "relative_difference": 0.0037378391680131795,
+        "intermediate_density": false
+      },
+      "worst_at_intermediate_density": {
+        "query": [
+          0.0825,
+          5802259.060775042,
+          794330.0
+        ],
+        "source": 8.6766,
+        "relative_difference": -0.045983217922059616,
+        "intermediate_density": true
+      }
+    }
+  ],
+  "maximum_source_node_relative_difference": 6.661338147750939e-16,
+  "maximum_independent_relative_difference": 0.04738036420497915,
+  "independent_relative_tolerance": 0.005,
+  "derivative_states": 48,
+  "derivative_boundary_states_skipped": 0,
+  "maximum_derivative_difference": 3.0068170176013523e-06,
+  "raw_probe_sha256": "aa11563eba26e4afe3a0de998e168a91f88d267a4bd4dab5a2a513f0f2589eb3"
+}

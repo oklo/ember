@@ -1,0 +1,15 @@
+{
+  "scope": "Rerun the entire first inconsistent nominal base-source isotherm with the checked tighter-quadrature source. Same physical formulas and acceptance criterion.",
+  "queries": 441,
+  "returncode": 0,
+  "maximum_first_law_defect": 2.0614177032030057e-11,
+  "failed_indices": [],
+  "passed": true,
+  "file_sha256": {
+    "/tmp/ember-numerical-electron-eos72-v1/plane-002/temperature-176.json.gz": "dceffa76d1eb90e599bf1b429863544d52f684e1ff21795c66c0e921476fe734",
+    "/tmp/ember-freeeos-integral-precision-v1/probe": "f9fd14b9715f40a314d53eb45d3908a24f01e16113a31e7ef506ed884a410d7b",
+    "/tmp/ember-base-eos-identity-precision-pilot-v1/request.txt": "ef02bb71b5f5f53ecc970b093027e28f666d9c0654209ebf4fadf8146afe1c78",
+    "/tmp/ember-base-eos-identity-precision-pilot-v1/stdout.txt": "50a014df63d44ad508e5a8f0df19941527e4a71313521eb27bcde4e298168128",
+    "/tmp/ember-base-eos-identity-precision-pilot-v1/stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

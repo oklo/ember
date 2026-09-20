@@ -1,0 +1,58 @@
+{
+  "scope": "Accept the 204-source-node gas atmosphere through 5200 K with numerical-electron EOS support. All 196 original sources and 272 missing-state masks are exact. The new X=.2, Y3=0, log g=5.4 source uses 400 depth points and passes an independent lower-column comparison; its failed 300-point candidates remain recorded. This is local interpolation and depth validation, not a global physical accuracy bound or cold-remnant atmosphere.",
+  "checked_utc": "2026-09-11T11:02:17.264454+00:00",
+  "table": "data/atmosphere/nongrey_gs98_z020_exhaustion_t5200_v2.dat",
+  "table_sha256": "ba8053239b1b08c2218f446c2937c4710ed21434d11321a3fcbf33024519514f",
+  "assembly_manifest": "/tmp/ember-nongrey-exhaustion-t5200-v2.manifest.json",
+  "assembly_manifest_sha256": "0e1bad95af64b22003d40ed290a99121d7a1b5a0b06b10306c55ae32a974436c",
+  "EOS": "data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
+  "EOS_sha256": "544db28d28b7382eca2646f1ae6d6980d2b1f9eccff3781a69c08626c6a5f321",
+  "reports_sha256": {
+    "docs/results/nongrey_t5200_interpolation_v2.json": "6dba4eb5cf60272784f69a86539515297f815cbe2c51e26deeb0adc03aeea186",
+    "docs/results/nongrey_t5200_retained_v2.json": "431e825fae84501ea0f6656afb8d67178174ddc5e19c2ef8fee428d553c61904",
+    "docs/results/nongrey_x150_y000_t5200_g515_depth120_v1.json": "bbb8ff9b53b1027074812607a43bfebabd909f499f47eb471df91638cf8ca729",
+    "docs/results/nongrey_x150_y000_t5200_g540_depth120_v1.json": "62ea572da7b045a1a5018bf63e555eb81f12a332082f6ff7bb7b094b7a5543ce",
+    "docs/results/nongrey_x200_y000_t5200_g515_depth120_v1.json": "cfaf0f94e40231b0143985a1fcfc84af7ec186b551e158423015f0b5fa51859e",
+    "docs/results/nongrey_x200_y000_t5200_g540_depth400_v1.json": "09734d3cc37b7d4485281e9d24b9421be9691c5fa3bf3d53bd2612bf82e8926f",
+    "docs/results/nongrey_t5200_condensation_g515_v1.json": "e30d24b7fd0521ac66229710b872eb28f5c651d24477e26928923052511b05c3",
+    "docs/results/nongrey_t5200_condensation_g540_v2.json": "84ae3202b596c6a3a8c0e6357b57c10119f15e30110f4d522b6066ed20e6c4cf"
+  },
+  "source_models": 204,
+  "retained_source_models": 196,
+  "retained_missing_masks": 272,
+  "independent_matching_state_relative_criterion": 0.01,
+  "independent_comparisons": [
+    {
+      "coordinates": [
+        0.175,
+        0.005,
+        5100.0,
+        5.275
+      ],
+      "relative_difference": {
+        "T": -4.3432918591990166e-05,
+        "Pgas": 0.004449479539330614
+      }
+    }
+  ],
+  "depth_comparisons": 4,
+  "maximum_depth_matching_state_relative_difference": 6.272575280097392e-05,
+  "source_resolution_control": {
+    "coordinates": [
+      0.2,
+      0,
+      5200.0,
+      5.4
+    ],
+    "original_depth_points": 300,
+    "selected_depth_points": 400,
+    "relative_change": {
+      "T": -1.4634509645450322e-05,
+      "Pgas": 0.0002338202064453565
+    },
+    "scope": "The new source is refined to resolve its lower-boundary comparison. This isolated refinement does not establish a global spatial-resolution bound."
+  },
+  "condensation_profiles": 8,
+  "profiles_with_condensates": 0,
+  "accepted_for_gas_trajectory": true
+}

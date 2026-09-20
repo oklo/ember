@@ -1,0 +1,2194 @@
+{
+  "scope": "Scan completed EOS source planes against the importer's first-law criterion.\n\nConvergence flags, response positivity and thermodynamic consistency are\nreported separately. Passing this scan does not accept an interpolated family.\n",
+  "passed": false,
+  "criterion": 1e-07,
+  "source_specification_sha256": "ba212308f5c3eb99cb7e506a7612670a1469c9cfbd97d0db03513829fbec42e9",
+  "audit_script_sha256": "785e372aa65acd29344be0eabcb22df9d04dac7aedaee094ea356acbd107c1b9",
+  "coordinate_criteria": {
+    "log_temperature": 1e-10,
+    "log_density": 1e-09
+  },
+  "coordinate_failures": 1,
+  "first_law_failures": 66,
+  "failed_states": 67,
+  "failed_isotherms": 67,
+  "records": [
+    {
+      "plane": 0,
+      "hydrogen": 0.0,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-000/source.json.gz",
+      "source_sha256": "17da812c1c838c0100134cd8339edc30097ceeb997023837f5662ce336b15c30",
+      "maximum_first_law_defect": 3.7868098545779105e-08,
+      "nonpositive_states": 268,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 1,
+      "hydrogen": 0.0,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-001/source.json.gz",
+      "source_sha256": "544f5d7eea6236a5a64639ac9191312d728809e8cfccfb7a5827242559d86e29",
+      "maximum_first_law_defect": 7.853290506787403e-08,
+      "nonpositive_states": 284,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 2,
+      "hydrogen": 0.001,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-002/source.json.gz",
+      "source_sha256": "952e6bf81705ff2fae3510fbe2f21064cd309aaa3210df1b22d16d63c27e71a8",
+      "maximum_first_law_defect": 1.2087433098884048e-07,
+      "nonpositive_states": 260,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 78021,
+          "temperature_index": 176,
+          "density_index": 405,
+          "logT": 5.7,
+          "logQ": 2.0625,
+          "defects": [
+            0.0,
+            6.218957726566998e-08,
+            1.2087433098884048e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 101835,
+          "temperature_index": 230,
+          "density_index": 405,
+          "logT": 6.375,
+          "logQ": 2.0625,
+          "defects": [
+            0.0,
+            5.121587576262243e-08,
+            1.0387272580958395e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            8.881784197001252e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 3,
+      "hydrogen": 0.001,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-003/source.json.gz",
+      "source_sha256": "42013d03326315775521d385ef824940b65a9bbd38998ea24e488feeeb37368a",
+      "maximum_first_law_defect": 9.1344214636635e-08,
+      "nonpositive_states": 274,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 4,
+      "hydrogen": 0.002125,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-004/source.json.gz",
+      "source_sha256": "ea149b72c876e936e28e5802fd4a38a909fc44e974915306e3972ac10901da4a",
+      "maximum_first_law_defect": 1.2282134365104724e-07,
+      "nonpositive_states": 248,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 75375,
+          "temperature_index": 170,
+          "density_index": 405,
+          "logT": 5.625,
+          "logQ": 2.0625,
+          "defects": [
+            0.0,
+            6.298516530556242e-08,
+            1.2282134365104724e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 5,
+      "hydrogen": 0.002125,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-005/source.json.gz",
+      "source_sha256": "886f74c487caa31fca6e4cec19f6e386c87b2029ba38a86d03195be67149e698",
+      "maximum_first_law_defect": 5.0551011376853694e-08,
+      "nonpositive_states": 267,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 6,
+      "hydrogen": 0.00325,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-006/source.json.gz",
+      "source_sha256": "2cc8e31bafbcd673adf5b1e3f414a872b5de32a3fb4042b82126df90061a6b22",
+      "maximum_first_law_defect": 2.3923557368465964e-07,
+      "nonpositive_states": 236,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 83319,
+          "temperature_index": 188,
+          "density_index": 411,
+          "logT": 5.85,
+          "logQ": 2.1375,
+          "defects": [
+            0.0,
+            -1.1799164145731567e-07,
+            -2.3923557368465964e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 7,
+      "hydrogen": 0.00325,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-007/source.json.gz",
+      "source_sha256": "8e8c5f09f56b85de6b69e64a891dee35a551781143a2fea2e42a781b76a12068",
+      "maximum_first_law_defect": 9.929617761361698e-08,
+      "nonpositive_states": 249,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 8,
+      "hydrogen": 0.004375,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-008/source.json.gz",
+      "source_sha256": "afe984e61a9c78dddabd389f38b8af4f391e3d06dc6e753e31c0ba817de9d94a",
+      "maximum_first_law_defect": 4.312972212705546e-08,
+      "nonpositive_states": 228,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 9,
+      "hydrogen": 0.004375,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-009/source.json.gz",
+      "source_sha256": "439c13e29c65791b22856b2d1fb7c28649c7f92b9b4e3fdcb2e551b30d53e0c4",
+      "maximum_first_law_defect": 3.623920563633476e-08,
+      "nonpositive_states": 241,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 10,
+      "hydrogen": 0.0055,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-010/source.json.gz",
+      "source_sha256": "ebb5f434c9c05b355184f5b6a938641921b7f32c22c6b7e70afc5697f4b6c141",
+      "maximum_first_law_defect": 4.0680053547959005e-08,
+      "nonpositive_states": 218,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 11,
+      "hydrogen": 0.0055,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-011/source.json.gz",
+      "source_sha256": "8603813ea2549128856519c9d684c2bba69d9755e620a88e42db717ea544df48",
+      "maximum_first_law_defect": 5.304555616980622e-07,
+      "nonpositive_states": 237,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 74528,
+          "temperature_index": 168,
+          "density_index": 440,
+          "logT": 5.6,
+          "logQ": 2.5,
+          "defects": [
+            0.0,
+            -2.3688250216924445e-07,
+            -5.304555616980622e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 74969,
+          "temperature_index": 169,
+          "density_index": 440,
+          "logT": 5.612500000000001,
+          "logQ": 2.5,
+          "defects": [
+            -2.220446049250313e-16,
+            -2.3677378413466954e-07,
+            -5.277996452668354e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 75410,
+          "temperature_index": 170,
+          "density_index": 440,
+          "logT": 5.625,
+          "logQ": 2.5,
+          "defects": [
+            0.0,
+            -2.3550349548262517e-07,
+            -5.252323564408634e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 12,
+      "hydrogen": 0.00775,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-012/source.json.gz",
+      "source_sha256": "b5ff1891b9e6744f25ef8999217d98941a33948cf493d059a6794f897380b5a5",
+      "maximum_first_law_defect": 4.2975690228708174e-08,
+      "nonpositive_states": 210,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 13,
+      "hydrogen": 0.00775,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-013/source.json.gz",
+      "source_sha256": "fc33cd6f554c827413f38fcc482c2709eb874c5472c8dd390ddff0d49a603577",
+      "maximum_first_law_defect": 4.064601778486221e-07,
+      "nonpositive_states": 221,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 63489,
+          "temperature_index": 143,
+          "density_index": 426,
+          "logT": 5.2875,
+          "logQ": 2.325,
+          "defects": [
+            0.0,
+            1.0552369511529491e-07,
+            6.468937296943977e-08
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            -2.220446049250313e-15
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 120830,
+          "temperature_index": 273,
+          "density_index": 437,
+          "logT": 6.9125,
+          "logQ": 2.4625000000000004,
+          "defects": [
+            0.0,
+            1.7987948064401849e-07,
+            4.064601778486221e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 14,
+      "hydrogen": 0.01,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-014/source.json.gz",
+      "source_sha256": "29afcf74e1554a0c264e090f45b665f9045bf7519e6ebff7c20f98f475b468fe",
+      "maximum_first_law_defect": 4.29003771396097e-08,
+      "nonpositive_states": 192,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 15,
+      "hydrogen": 0.01,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-015/source.json.gz",
+      "source_sha256": "85e1b1935108f709db584d6d97802491c89827b1e95633d66e22fc9c173ed5c7",
+      "maximum_first_law_defect": 4.351787441514432e-08,
+      "nonpositive_states": 207,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 16,
+      "hydrogen": 0.011875,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-016/source.json.gz",
+      "source_sha256": "52e5f2550dbcf4190ddfbba368841f0286c2d3f1a744becbac17ab75929287df",
+      "maximum_first_law_defect": 4.7778956124844285e-08,
+      "nonpositive_states": 180,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 17,
+      "hydrogen": 0.011875,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-017/source.json.gz",
+      "source_sha256": "c5d9c10b070facdc84dc504afe9377d381c37062b2fbdbb7ec57ab8a598b1df9",
+      "maximum_first_law_defect": 2.3813614091761082e-07,
+      "nonpositive_states": 198,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 128295,
+          "temperature_index": 290,
+          "density_index": 405,
+          "logT": 7.125,
+          "logQ": 2.0625,
+          "defects": [
+            2.220446049250313e-16,
+            -1.1143102729427312e-07,
+            -2.3813614091761082e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 18,
+      "hydrogen": 0.01375,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-018/source.json.gz",
+      "source_sha256": "44d9f3dc9eda5a12a827abe40f7195defd15c6fe019edef03306bacd4f52bcbd",
+      "maximum_first_law_defect": 4.56240062396418e-08,
+      "nonpositive_states": 173,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 19,
+      "hydrogen": 0.01375,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-019/source.json.gz",
+      "source_sha256": "6c0e47e14cfff61a9528fa16a783fad8b9b5ade52efee1ac0d4e109efa714c24",
+      "maximum_first_law_defect": 3.008371340929017e-08,
+      "nonpositive_states": 187,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 20,
+      "hydrogen": 0.0175,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-020/source.json.gz",
+      "source_sha256": "0cecc4e614128be6cd42dbedc3be2e25c0bde178acd447a799a3d3938e868c22",
+      "maximum_first_law_defect": 3.0803506412269144e-08,
+      "nonpositive_states": 148,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 21,
+      "hydrogen": 0.0175,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-021/source.json.gz",
+      "source_sha256": "464f0ad21d2ab17254f6ffde6a1f320d7a528f7fe2ec993200e41700a82a9d37",
+      "maximum_first_law_defect": 2.498404865769466e-07,
+      "nonpositive_states": 168,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 71413,
+          "temperature_index": 161,
+          "density_index": 412,
+          "logT": 5.5125,
+          "logQ": 2.1500000000000004,
+          "defects": [
+            0.0,
+            -1.1323905590998606e-07,
+            -2.498404865769466e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 90372,
+          "temperature_index": 204,
+          "density_index": 408,
+          "logT": 6.050000000000001,
+          "logQ": 2.1,
+          "defects": [
+            0.0,
+            -1.155977424893706e-07,
+            -2.361690496499591e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            -8.881784197001252e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 22,
+      "hydrogen": 0.02125,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-022/source.json.gz",
+      "source_sha256": "ba19adae4d34fe69fa086e59ce52b45b3d220f1e2233a8f3c54133f98367722c",
+      "maximum_first_law_defect": 2.362258905708181e-07,
+      "nonpositive_states": 130,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 110216,
+          "temperature_index": 249,
+          "density_index": 407,
+          "logT": 6.612500000000001,
+          "logQ": 2.0875000000000004,
+          "defects": [
+            0.0,
+            -1.1521533527236727e-07,
+            -2.362258905708181e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 23,
+      "hydrogen": 0.02125,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-023/source.json.gz",
+      "source_sha256": "23b0955e368e8f5009ec44fe838aa41366a29645104dd92fcc5be38425e42a9b",
+      "maximum_first_law_defect": 2.3588442898958561e-07,
+      "nonpositive_states": 151,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 106246,
+          "temperature_index": 240,
+          "density_index": 406,
+          "logT": 6.5,
+          "logQ": 2.075,
+          "defects": [
+            2.220446049250313e-16,
+            -1.1498561747202984e-07,
+            -2.3588442898958561e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 108889,
+          "temperature_index": 246,
+          "density_index": 403,
+          "logT": 6.575,
+          "logQ": 2.0375,
+          "defects": [
+            -1.1102230246251565e-16,
+            4.9586354355923845e-08,
+            1.0067113059841759e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 24,
+      "hydrogen": 0.025,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-024/source.json.gz",
+      "source_sha256": "41c5560e39afaabaab4e8452946260145cb33172e04a7042f0ce75fb6a0e7fa3",
+      "maximum_first_law_defect": 3.6276769196375014e-06,
+      "nonpositive_states": 115,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 66145,
+          "temperature_index": 149,
+          "density_index": 436,
+          "logT": 5.3625,
+          "logQ": 2.45,
+          "defects": [
+            0.0,
+            -2.1279922302053222e-07,
+            -8.799212758425767e-08
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            -8.881784197001252e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 126489,
+          "temperature_index": 286,
+          "density_index": 363,
+          "logT": 7.075,
+          "logQ": 1.5375,
+          "defects": [
+            0.0,
+            1.992991455423976e-06,
+            3.6276769196375014e-06
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 25,
+      "hydrogen": 0.025,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-025/source.json.gz",
+      "source_sha256": "5f06dd02e194a926dbf9ff430ebaf680a4137ac5075f51a32ca438f6599681d1",
+      "maximum_first_law_defect": 2.3542511690122225e-07,
+      "nonpositive_states": 129,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 104923,
+          "temperature_index": 237,
+          "density_index": 406,
+          "logT": 6.4625,
+          "logQ": 2.075,
+          "defects": [
+            -2.220446049250313e-16,
+            -1.1478586003921265e-07,
+            -2.3542511690122225e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 26,
+      "hydrogen": 0.03125,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-026/source.json.gz",
+      "source_sha256": "222e88bf5d737557ca21ee602e37bdd21b45edb73b49c853a1bb9dd06849dda1",
+      "maximum_first_law_defect": 1.0004257888773793e-07,
+      "nonpositive_states": 91,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 109772,
+          "temperature_index": 248,
+          "density_index": 404,
+          "logT": 6.6,
+          "logQ": 2.0500000000000003,
+          "defects": [
+            0.0,
+            4.934365338549185e-08,
+            1.0004257888773793e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            -8.881784197001252e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 27,
+      "hydrogen": 0.03125,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-027/source.json.gz",
+      "source_sha256": "bd4db51edf188a3047a5bb2183c506f116ed8a6d1fec4a115b41a76b94d23010",
+      "maximum_first_law_defect": 4.22960497736824e-08,
+      "nonpositive_states": 100,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 28,
+      "hydrogen": 0.0375,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-028/source.json.gz",
+      "source_sha256": "843e666eec26d484516703fa1817b889b890e93926749da5774757f946cf3061",
+      "maximum_first_law_defect": 5.5050746294860176e-08,
+      "nonpositive_states": 100,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 29,
+      "hydrogen": 0.0375,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-029/source.json.gz",
+      "source_sha256": "3c0310fd40913c8a8ed5819737e9d53183e4dae7c5574648b46c89d0829f4c0e",
+      "maximum_first_law_defect": 5.347710800851502e-07,
+      "nonpositive_states": 82,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 62610,
+          "temperature_index": 141,
+          "density_index": 429,
+          "logT": 5.2625,
+          "logQ": 2.3625000000000003,
+          "defects": [
+            0.0,
+            5.347710800851502e-07,
+            3.756238068364226e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            -1.3322676295501878e-15
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 98341,
+          "temperature_index": 222,
+          "density_index": 439,
+          "logT": 6.275,
+          "logQ": 2.4875000000000003,
+          "defects": [
+            0.0,
+            -1.935845280742754e-07,
+            -4.4177035338210935e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            8.881784197001252e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 30,
+      "hydrogen": 0.04375,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-030/source.json.gz",
+      "source_sha256": "88b5aad526133bc717b7a082e235ee22faa96beb785a560415e2b99b86b770a4",
+      "maximum_first_law_defect": 4.460035996078915e-08,
+      "nonpositive_states": 53,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 31,
+      "hydrogen": 0.04375,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-031/source.json.gz",
+      "source_sha256": "4eeab1070943d216134e17db06491728bf0c0d053fc00d297f2cbcafbc9924ba",
+      "maximum_first_law_defect": 2.9513491317523233e-08,
+      "nonpositive_states": 68,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 32,
+      "hydrogen": 0.05,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-032/source.json.gz",
+      "source_sha256": "924f73abceba4a4086195ff41a801dc431dc93dcaf591688df64f2803e9c486b",
+      "maximum_first_law_defect": 3.932371250847666e-08,
+      "nonpositive_states": 37,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 33,
+      "hydrogen": 0.05,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-033/source.json.gz",
+      "source_sha256": "41a2666276ddfef987da091f422bdda2724007953ce4420fc0db589c3dd25d05",
+      "maximum_first_law_defect": 4.198452341341863e-08,
+      "nonpositive_states": 50,
+      "nonconverged_states": 1,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 34,
+      "hydrogen": 0.0625,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-034/source.json.gz",
+      "source_sha256": "7109e6a88e86afa1a320198161b5bcb5b7cb5a628c2922d3a5d082906caa7b08",
+      "maximum_first_law_defect": 2.75017660034127e-07,
+      "nonpositive_states": 13,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 69650,
+          "temperature_index": 157,
+          "density_index": 413,
+          "logT": 5.4625,
+          "logQ": 2.1625,
+          "defects": [
+            0.0,
+            -4.533703845677195e-08,
+            -2.75017660034127e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            4.440892098500626e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 35,
+      "hydrogen": 0.0625,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-035/source.json.gz",
+      "source_sha256": "a4f578dc6db81bba5cb98fa9cc650daf46da95fb21137f927905e48a0c0bcdd8",
+      "maximum_first_law_defect": 4.14801570869372e-08,
+      "nonpositive_states": 23,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 36,
+      "hydrogen": 0.075,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-036/source.json.gz",
+      "source_sha256": "1ec391a343f4605265e1d1c719578c90b7da6e29428761a3e8fffe849e798d03",
+      "maximum_first_law_defect": 3.4714112695510835e-08,
+      "nonpositive_states": 6,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 37,
+      "hydrogen": 0.075,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-037/source.json.gz",
+      "source_sha256": "fcfac4b3f9ccf99c292f5c98cc662b23f45fb707ea90f7fd607b636669e475c0",
+      "maximum_first_law_defect": 4.1061216921045585e-07,
+      "nonpositive_states": 8,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 117744,
+          "temperature_index": 266,
+          "density_index": 438,
+          "logT": 6.825,
+          "logQ": 2.475,
+          "defects": [
+            0.0,
+            -1.812538321654955e-07,
+            -4.1061216921045585e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 38,
+      "hydrogen": 0.0875,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-038/source.json.gz",
+      "source_sha256": "2ce22459b53f5ff9e394f293b8a5adf3e33f642878e711ad2e72694ae511e485",
+      "maximum_first_law_defect": 4.031361917344878e-07,
+      "nonpositive_states": 5,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 123919,
+          "temperature_index": 280,
+          "density_index": 439,
+          "logT": 7.0,
+          "logQ": 2.4875000000000003,
+          "defects": [
+            -1.1102230246251565e-16,
+            -1.78728382649318e-07,
+            -4.031361917344878e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 39,
+      "hydrogen": 0.0875,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-039/source.json.gz",
+      "source_sha256": "d0fe8cf5347ed90c98d7138c23d9233db1da4629eb97e92ae983f59fcc8fe15a",
+      "maximum_first_law_defect": 3.825284911329607e-07,
+      "nonpositive_states": 5,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 129211,
+          "temperature_index": 292,
+          "density_index": 439,
+          "logT": 7.15,
+          "logQ": 2.4875000000000003,
+          "defects": [
+            0.0,
+            1.6599302510300618e-07,
+            3.825284911329607e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 129652,
+          "temperature_index": 293,
+          "density_index": 439,
+          "logT": 7.1625000000000005,
+          "logQ": 2.4875000000000003,
+          "defects": [
+            2.220446049250313e-16,
+            1.6558791027243558e-07,
+            3.8233043514468434e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 40,
+      "hydrogen": 0.1,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-040/source.json.gz",
+      "source_sha256": "0d0d6bde241c4a079e6da62cc32383cfa8dc3156681709fd52a32d203b641299",
+      "maximum_first_law_defect": 7.854182726418912e-08,
+      "nonpositive_states": 8,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 41,
+      "hydrogen": 0.1,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-041/source.json.gz",
+      "source_sha256": "d8a5a6987a203fc368543eb5c4c1171e20dab22c1c3472b3e83d4f48389f5622",
+      "maximum_first_law_defect": 4.808815681212053e-07,
+      "nonpositive_states": 9,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 76260,
+          "temperature_index": 172,
+          "density_index": 408,
+          "logT": 5.65,
+          "logQ": 2.1,
+          "defects": [
+            0.0,
+            -1.1496551388656684e-07,
+            -2.296839719528876e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 79345,
+          "temperature_index": 179,
+          "density_index": 406,
+          "logT": 5.737500000000001,
+          "logQ": 2.075,
+          "defects": [
+            0.0,
+            5.434295902162489e-08,
+            1.1224136142740093e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 81140,
+          "temperature_index": 183,
+          "density_index": 437,
+          "logT": 5.7875,
+          "logQ": 2.4625000000000004,
+          "defects": [
+            0.0,
+            -2.117208265373094e-07,
+            -4.808815681212053e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 83345,
+          "temperature_index": 188,
+          "density_index": 437,
+          "logT": 5.85,
+          "logQ": 2.4625000000000004,
+          "defects": [
+            0.0,
+            -2.094493583015833e-07,
+            -4.727354972478004e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 83786,
+          "temperature_index": 189,
+          "density_index": 437,
+          "logT": 5.862500000000001,
+          "logQ": 2.4625000000000004,
+          "defects": [
+            0.0,
+            -2.0878656936673679e-07,
+            -4.7136075259635035e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            1.7763568394002505e-15
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 42,
+      "hydrogen": 0.125,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-042/source.json.gz",
+      "source_sha256": "249805a9c465d3aa636dd248709467b53c0b9311d28f94bc67cecfd902acdaa5",
+      "maximum_first_law_defect": 4.173400555140816e-07,
+      "nonpositive_states": 10,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 70559,
+          "temperature_index": 159,
+          "density_index": 440,
+          "logT": 5.4875,
+          "logQ": 2.5,
+          "defects": [
+            0.0,
+            1.8632046883126918e-07,
+            4.173400555140816e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            8.881784197001252e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 110244,
+          "temperature_index": 249,
+          "density_index": 435,
+          "logT": 6.612500000000001,
+          "logQ": 2.4375,
+          "defects": [
+            -2.220446049250313e-16,
+            1.7681282171722046e-07,
+            3.9702750120884645e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            8.881784197001252e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 43,
+      "hydrogen": 0.125,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-043/source.json.gz",
+      "source_sha256": "fd1bcdffeefe26d1c139ead07f36140f0d907a9dbc8ae0dcf82cb7158a33b3da",
+      "maximum_first_law_defect": 2.9716748728425557e-08,
+      "nonpositive_states": 5,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 44,
+      "hydrogen": 0.15,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-044/source.json.gz",
+      "source_sha256": "b24c6d8a43b606ad2ebbab01d2f24f3bfa8effd62f8dbdcb772229356596a3be",
+      "maximum_first_law_defect": 1.658000746140864e-07,
+      "nonpositive_states": 8,
+      "nonconverged_states": 1,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 84663,
+          "temperature_index": 191,
+          "density_index": 432,
+          "logT": 5.8875,
+          "logQ": 2.4000000000000004,
+          "defects": [
+            0.0,
+            -7.458566031459668e-08,
+            -1.658000746140864e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 45,
+      "hydrogen": 0.15,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-045/source.json.gz",
+      "source_sha256": "f7a820ce0a8101061d1527f014da10757b26afe813aa151069b7da6beeb56c52",
+      "maximum_first_law_defect": 2.2415275857667893e-07,
+      "nonpositive_states": 6,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 96982,
+          "temperature_index": 219,
+          "density_index": 403,
+          "logT": 6.237500000000001,
+          "logQ": 2.0375,
+          "defects": [
+            0.0,
+            -1.1051852466525958e-07,
+            -2.2415275857667893e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 46,
+      "hydrogen": 0.175,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-046/source.json.gz",
+      "source_sha256": "756434a53b7b3dcdc2db350ee553a7ae7d70e6251b6fe202e6071178d7b0acd0",
+      "maximum_first_law_defect": 8.364259207471747e-08,
+      "nonpositive_states": 8,
+      "nonconverged_states": 1,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 47,
+      "hydrogen": 0.175,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-047/source.json.gz",
+      "source_sha256": "227ad370059f8c847afebfc3772b5103f2b4eccba3f19e52c6c177fe510613a1",
+      "maximum_first_law_defect": 4.0321990957270515e-07,
+      "nonpositive_states": 6,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 116859,
+          "temperature_index": 264,
+          "density_index": 435,
+          "logT": 6.800000000000001,
+          "logQ": 2.4375,
+          "defects": [
+            0.0,
+            -1.7939271546030255e-07,
+            -4.0321990957270515e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 48,
+      "hydrogen": 0.2,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-048/source.json.gz",
+      "source_sha256": "30d1b2d3194cf533d515f2777b564d4a1d16b5c380cd781f8bc4daf71798ddd6",
+      "maximum_first_law_defect": 3.857105046467524e-08,
+      "nonpositive_states": 7,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 49,
+      "hydrogen": 0.2,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-049/source.json.gz",
+      "source_sha256": "2ca2a62d4d8756fd8bebe40bb5d1894df4828217e7a50cafe5d6adf123e66ffc",
+      "maximum_first_law_defect": 3.658001879180972e-08,
+      "nonpositive_states": 7,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 50,
+      "hydrogen": 0.225,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-050/source.json.gz",
+      "source_sha256": "9b3ed5eaa458ebcfe01069b7f507257f79de112557a1ea9bf648d992d8097ba9",
+      "maximum_first_law_defect": 1.0875055134196288e-07,
+      "nonpositive_states": 7,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 76250,
+          "temperature_index": 172,
+          "density_index": 398,
+          "logT": 5.65,
+          "logQ": 1.975,
+          "defects": [
+            0.0,
+            5.629579069577062e-08,
+            1.0875055134196288e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            4.440892098500626e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 51,
+      "hydrogen": 0.225,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-051/source.json.gz",
+      "source_sha256": "d97254f491431f9216baf545e46ba4de6110bf98ef03f9da41a3171272d62394",
+      "maximum_first_law_defect": 2.2727596737937006e-07,
+      "nonpositive_states": 12,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 70966,
+          "temperature_index": 160,
+          "density_index": 406,
+          "logT": 5.5,
+          "logQ": 2.075,
+          "defects": [
+            0.0,
+            -1.0142610451513434e-07,
+            -2.2727596737937006e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            -4.440892098500626e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 52,
+      "hydrogen": 0.25,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-052/source.json.gz",
+      "source_sha256": "80aeff4b6a2a7dc8c6c1b4a905c30676b2ad1378cb0e4f0ae2259a1c190d4516",
+      "maximum_first_law_defect": 3.9808705484811746e-07,
+      "nonpositive_states": 11,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 115976,
+          "temperature_index": 262,
+          "density_index": 434,
+          "logT": 6.775,
+          "logQ": 2.4250000000000003,
+          "defects": [
+            0.0,
+            -1.781873718575966e-07,
+            -3.9808705484811746e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 53,
+      "hydrogen": 0.25,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-053/source.json.gz",
+      "source_sha256": "c7119e54825b91c69c739dbf3656fbf8a2dda59a5e235edf1312ff2a9d225aad",
+      "maximum_first_law_defect": 1.1871896465898146e-08,
+      "nonpositive_states": 13,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 54,
+      "hydrogen": 0.275,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-054/source.json.gz",
+      "source_sha256": "6d995e04b636072f55987b3c2880d76a1dabbf569325c1fccc57f14841342b58",
+      "maximum_first_law_defect": 2.1786874737639295e-07,
+      "nonpositive_states": 13,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 93893,
+          "temperature_index": 212,
+          "density_index": 401,
+          "logT": 6.15,
+          "logQ": 2.0125,
+          "defects": [
+            0.0,
+            -1.0613695156092007e-07,
+            -2.1471951433538194e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 114177,
+          "temperature_index": 258,
+          "density_index": 399,
+          "logT": 6.725,
+          "logQ": 1.9875000000000003,
+          "defects": [
+            -1.1102230246251565e-16,
+            -1.050768352328646e-07,
+            -2.1786874737639295e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 55,
+      "hydrogen": 0.275,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-055/source.json.gz",
+      "source_sha256": "3c01f4cd6ab795db5533d30a0fea0ddb876996056d8c91567594386e6fee023a",
+      "maximum_first_law_defect": 1.5170689626753386e-07,
+      "nonpositive_states": 12,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 49817,
+          "temperature_index": 112,
+          "density_index": 425,
+          "logT": 4.9,
+          "logQ": 2.3125,
+          "defects": [
+            0.0,
+            -8.754224611884354e-08,
+            -1.5170689626753386e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 56,
+      "hydrogen": 0.3,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-056/source.json.gz",
+      "source_sha256": "be440ad49260b80829652a79e797087b5aa7628a515120c75bd358587abba53e",
+      "maximum_first_law_defect": 9.047057430988659e-08,
+      "nonpositive_states": 13,
+      "nonconverged_states": 1,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 57,
+      "hydrogen": 0.3,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-057/source.json.gz",
+      "source_sha256": "1f98ab2d60279fcb197381212fb234d7e95fa7aec4423db66d3d5db51e7745e1",
+      "maximum_first_law_defect": 3.756662554921242e-07,
+      "nonpositive_states": 14,
+      "nonconverged_states": 1,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 84226,
+          "temperature_index": 190,
+          "density_index": 436,
+          "logT": 5.875,
+          "logQ": 2.45,
+          "defects": [
+            0.0,
+            1.6510670719505072e-07,
+            3.756662554921242e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            8.881784197001252e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 129205,
+          "temperature_index": 292,
+          "density_index": 433,
+          "logT": 7.15,
+          "logQ": 2.4125,
+          "defects": [
+            0.0,
+            1.581510962189725e-07,
+            3.682207360689027e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            1.7763568394002505e-15
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 58,
+      "hydrogen": 0.35,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-058/source.json.gz",
+      "source_sha256": "ea1c8d282a0da95ad686667f24a07eb4b8dd1cc9cbc30e4cd7077862f32aef71",
+      "maximum_first_law_defect": 3.6851633308798704e-07,
+      "nonpositive_states": 15,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 116416,
+          "temperature_index": 263,
+          "density_index": 433,
+          "logT": 6.7875,
+          "logQ": 2.4125,
+          "defects": [
+            0.0,
+            1.6405915226336276e-07,
+            3.6851633308798704e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 59,
+      "hydrogen": 0.35,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-059/source.json.gz",
+      "source_sha256": "bc82410784ab3e56478219cb375ceafa079318cca80a4bcd57a89c5437cd3048",
+      "maximum_first_law_defect": 4.203499104349362e-08,
+      "nonpositive_states": 17,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 60,
+      "hydrogen": 0.4,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-060/source.json.gz",
+      "source_sha256": "a60c01d7342c6f5c7125f601dd4a98623f7ec5b6025f09f7f690a04a7204d1d9",
+      "maximum_first_law_defect": 3.933393260546758e-07,
+      "nonpositive_states": 11,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 80697,
+          "temperature_index": 182,
+          "density_index": 435,
+          "logT": 5.775,
+          "logQ": 2.4375,
+          "defects": [
+            -2.220446049250313e-16,
+            1.6069924657635681e-07,
+            3.6807844261410594e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 97012,
+          "temperature_index": 219,
+          "density_index": 433,
+          "logT": 6.237500000000001,
+          "logQ": 2.4125,
+          "defects": [
+            0.0,
+            1.6282906734055302e-07,
+            3.6615617698965153e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            -8.881784197001252e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 111121,
+          "temperature_index": 251,
+          "density_index": 430,
+          "logT": 6.6375,
+          "logQ": 2.375,
+          "defects": [
+            -1.1102230246251565e-16,
+            -1.775356248678861e-07,
+            -3.933393260546758e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 61,
+      "hydrogen": 0.4,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-061/source.json.gz",
+      "source_sha256": "3442006ec6096633cc40803aa7de0f2312e7fda835b865de5a3ee497b56167db",
+      "maximum_first_law_defect": 9.322457452665134e-07,
+      "nonpositive_states": 14,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 81885,
+          "temperature_index": 185,
+          "density_index": 300,
+          "logT": 5.8125,
+          "logQ": 0.75,
+          "defects": [
+            -1.1102230246251565e-16,
+            5.86523418721896e-07,
+            9.322457452665134e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            -1.7763568394002505e-15
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 62,
+      "hydrogen": 0.45,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-062/source.json.gz",
+      "source_sha256": "c091f73809953883d49a1a1a0cd3069684a7d27767189b1303c3ca5505cf6c6e",
+      "maximum_first_law_defect": 5.483324342359097e-07,
+      "nonpositive_states": 8,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 126083,
+          "temperature_index": 285,
+          "density_index": 398,
+          "logT": 7.0625,
+          "logQ": 1.975,
+          "defects": [
+            0.0,
+            2.596238712904153e-07,
+            5.483324342359097e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 63,
+      "hydrogen": 0.45,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-063/source.json.gz",
+      "source_sha256": "fdddb9e18b2601eca84ab792e2ec3c0a42b82bce1b06e0daabd32284bdd18068",
+      "maximum_first_law_defect": 1.978168195915231e-08,
+      "nonpositive_states": 11,
+      "nonconverged_states": 1,
+      "absent_states": 0,
+      "failures": []
+    },
+    {
+      "plane": 64,
+      "hydrogen": 0.5,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-064/source.json.gz",
+      "source_sha256": "045b2701accc6cb75e2305566cbbd7734a58ad46b12122242ffb8df502b04b28",
+      "maximum_first_law_defect": 5.35669663848104e-07,
+      "nonpositive_states": 11,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 44977,
+          "temperature_index": 101,
+          "density_index": 436,
+          "logT": 4.7625,
+          "logQ": 2.45,
+          "defects": [
+            0.0,
+            -2.396222645861812e-07,
+            -5.35669663848104e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            1.7763568394002505e-15
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 70001,
+          "temperature_index": 158,
+          "density_index": 323,
+          "logT": 5.475,
+          "logQ": 1.0375,
+          "defects": [
+            0.0,
+            -5.306303507701671e-09,
+            -8.677570439985516e-09
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            2.566946866178199e-08
+          ],
+          "first_law_failed": false,
+          "coordinate_failed": true
+        }
+      ]
+    },
+    {
+      "plane": 65,
+      "hydrogen": 0.5,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-065/source.json.gz",
+      "source_sha256": "464940a396b0972a74f2f2f5004bf5c3b52caca8488edada3ef4ce14ab17dd24",
+      "maximum_first_law_defect": 3.7486103826589456e-07,
+      "nonpositive_states": 8,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 40563,
+          "temperature_index": 91,
+          "density_index": 432,
+          "logT": 4.6375,
+          "logQ": 2.4000000000000004,
+          "defects": [
+            0.0,
+            -4.0836153680778864e-08,
+            -2.265963282566119e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            3.885780586188048e-15
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 65262,
+          "temperature_index": 147,
+          "density_index": 435,
+          "logT": 5.3375,
+          "logQ": 2.4375,
+          "defects": [
+            0.0,
+            1.246290841638853e-07,
+            3.7469529695632886e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            4.440892098500626e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 126994,
+          "temperature_index": 287,
+          "density_index": 427,
+          "logT": 7.0875,
+          "logQ": 2.3375000000000004,
+          "defects": [
+            0.0,
+            -1.6222147247724195e-07,
+            -3.7486103826589456e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 66,
+      "hydrogen": 0.6,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-066/source.json.gz",
+      "source_sha256": "b8283a39c970dc12f4aeb5008c7f94341d77f15a501808dc48d1668432730a8a",
+      "maximum_first_law_defect": 2.442160453308695e-07,
+      "nonpositive_states": 27,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 128318,
+          "temperature_index": 290,
+          "density_index": 428,
+          "logT": 7.125,
+          "logQ": 2.35,
+          "defects": [
+            -1.1102230246251565e-16,
+            1.0549518458802254e-07,
+            2.442160453308695e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 67,
+      "hydrogen": 0.6,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-067/source.json.gz",
+      "source_sha256": "67f7bec0efcfe61ec72e82c166db82b304b8a196bb293964b03f11f72e7169d5",
+      "maximum_first_law_defect": 4.082741780209176e-07,
+      "nonpositive_states": 29,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 46282,
+          "temperature_index": 104,
+          "density_index": 418,
+          "logT": 4.8,
+          "logQ": 2.225,
+          "defects": [
+            0.0,
+            -1.6694152416008023e-07,
+            -4.082741780209176e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            -1.5543122344752192e-15
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 77605,
+          "temperature_index": 175,
+          "density_index": 430,
+          "logT": 5.6875,
+          "logQ": 2.375,
+          "defects": [
+            0.0,
+            1.585975673012996e-07,
+            3.564951679968509e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            -8.881784197001252e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 68,
+      "hydrogen": 0.7,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-068/source.json.gz",
+      "source_sha256": "8c2f83382230c7316d4f4cfe26ac642289fdc9712696bfb3d37e90fe1ebb073a",
+      "maximum_first_law_defect": 1.3038798427067455e-07,
+      "nonpositive_states": 41,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 65575,
+          "temperature_index": 148,
+          "density_index": 307,
+          "logT": 5.35,
+          "logQ": 0.8374999999999999,
+          "defects": [
+            0.0,
+            -7.259768419753954e-08,
+            -1.1368852659288109e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            1.1102230246251565e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 108040,
+          "temperature_index": 244,
+          "density_index": 436,
+          "logT": 6.550000000000001,
+          "logQ": 2.45,
+          "defects": [
+            -1.1102230246251565e-16,
+            -5.785973711258663e-08,
+            -1.3038798427067455e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 69,
+      "hydrogen": 0.7,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-069/source.json.gz",
+      "source_sha256": "a45c2eb84aef5ffa7d9ae54a57673a597f88fe61b6c6dcc5da12ee77632dac2a",
+      "maximum_first_law_defect": 3.6155586674579965e-07,
+      "nonpositive_states": 41,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 77568,
+          "temperature_index": 175,
+          "density_index": 393,
+          "logT": 5.6875,
+          "logQ": 1.9125,
+          "defects": [
+            0.0,
+            -9.742446449578779e-08,
+            -1.9074560009268993e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 133164,
+          "temperature_index": 301,
+          "density_index": 423,
+          "logT": 7.262500000000002,
+          "logQ": 2.2875,
+          "defects": [
+            0.0,
+            -1.5765595851036096e-07,
+            -3.6155586674579965e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            1.7763568394002505e-15
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 70,
+      "hydrogen": 0.75,
+      "helium3": 0.0,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-070/source.json.gz",
+      "source_sha256": "447859a1d8db49a01a136b4af745788a62437e978713718c86058affc87cd4fe",
+      "maximum_first_law_defect": 3.519564127363317e-07,
+      "nonpositive_states": 49,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 65224,
+          "temperature_index": 147,
+          "density_index": 397,
+          "logT": 5.3375,
+          "logQ": 1.9625000000000004,
+          "defects": [
+            -1.1102230246251565e-16,
+            -8.919244787186642e-08,
+            -1.8339631346897534e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            -8.881784197001252e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 115966,
+          "temperature_index": 262,
+          "density_index": 424,
+          "logT": 6.775,
+          "logQ": 2.3000000000000003,
+          "defects": [
+            0.0,
+            1.538106002563211e-07,
+            3.519564127363317e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            8.881784197001252e-16
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    },
+    {
+      "plane": 71,
+      "hydrogen": 0.75,
+      "helium3": 0.12,
+      "source": "/tmp/ember-numerical-electron-eos72-v1/plane-071/source.json.gz",
+      "source_sha256": "e6c58b7c6595006d55eea318a2104c15de25874846afeb2046dedecb1cd2109d",
+      "maximum_first_law_defect": 3.5043052987182577e-07,
+      "nonpositive_states": 51,
+      "nonconverged_states": 0,
+      "absent_states": 0,
+      "failures": [
+        {
+          "index": 46744,
+          "temperature_index": 105,
+          "density_index": 439,
+          "logT": 4.8125,
+          "logQ": 2.4875000000000003,
+          "defects": [
+            -1.1102230246251565e-16,
+            1.4127382841344627e-07,
+            3.1762334745666365e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            -3.1086244689504383e-15
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 83775,
+          "temperature_index": 189,
+          "density_index": 426,
+          "logT": 5.862500000000001,
+          "logQ": 2.325,
+          "defects": [
+            -1.1102230246251565e-16,
+            1.5663673158528013e-07,
+            3.491665090948892e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        },
+        {
+          "index": 91712,
+          "temperature_index": 207,
+          "density_index": 425,
+          "logT": 6.0875,
+          "logQ": 2.3125,
+          "defects": [
+            -1.1102230246251565e-16,
+            1.5780932804965175e-07,
+            3.5043052987182577e-07
+          ],
+          "positive_responses": true,
+          "coordinate_errors": [
+            0.0,
+            0.0
+          ],
+          "first_law_failed": true,
+          "coordinate_failed": false
+        }
+      ]
+    }
+  ]
+}

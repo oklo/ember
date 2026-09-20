@@ -1,0 +1,69 @@
+{
+  "scope": "Nine lower-boundary comparisons after source depth refinement or corrected native checkpoint parsing; does not establish whole-grid acceptance.",
+  "comparisons": [
+    {
+      "name": "x150-y000-t6000-g515",
+      "returncode": 1,
+      "stdout": "{\"coordinates\": [0.15, 0.0, 6000.0, 5.15], \"maximum_matching_state_relative_difference\": 0.00010975465891238656, \"passed\": false}",
+      "stderr": "lower-boundary comparison failed its matching-state criterion",
+      "report": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x150_y000_t6000_g515_depth400_v2.json"
+    },
+    {
+      "name": "x200-y000-t6000-g515",
+      "returncode": 0,
+      "stdout": "{\"coordinates\": [0.2, 0.0, 6000.0, 5.15], \"maximum_matching_state_relative_difference\": 2.5749415770937034e-05, \"passed\": true}",
+      "stderr": "",
+      "report": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x200_y000_t6000_g515_depth400_v2.json"
+    },
+    {
+      "name": "x200-y000-t6000-g540",
+      "returncode": 0,
+      "stdout": "{\"coordinates\": [0.2, 0.0, 6000.0, 5.4], \"maximum_matching_state_relative_difference\": 2.417488527284295e-05, \"passed\": true}",
+      "stderr": "",
+      "report": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x200_y000_t6000_g540_depth400_v2.json"
+    },
+    {
+      "name": "x200-y000-t6200-g515",
+      "returncode": 0,
+      "stdout": "{\"coordinates\": [0.2, 0.0, 6200.0, 5.15], \"maximum_matching_state_relative_difference\": 7.255866010669187e-05, \"passed\": true}",
+      "stderr": "",
+      "report": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x200_y000_t6200_g515_depth400_v2.json"
+    },
+    {
+      "name": "x200-y000-t6200-g540",
+      "returncode": 0,
+      "stdout": "{\"coordinates\": [0.2, 0.0, 6200.0, 5.4], \"maximum_matching_state_relative_difference\": 3.153138166633873e-05, \"passed\": true}",
+      "stderr": "",
+      "report": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x200_y000_t6200_g540_depth400_v2.json"
+    },
+    {
+      "name": "x150-y000-t6400-g515",
+      "returncode": 0,
+      "stdout": "{\"coordinates\": [0.15, 0.0, 6400.0, 5.15], \"maximum_matching_state_relative_difference\": 3.0448898110879696e-05, \"passed\": true}",
+      "stderr": "",
+      "report": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x150_y000_t6400_g515_depth400_v2.json"
+    },
+    {
+      "name": "x150-y000-t6400-g540",
+      "returncode": 0,
+      "stdout": "{\"coordinates\": [0.15, 0.0, 6400.0, 5.4], \"maximum_matching_state_relative_difference\": 3.199023627220576e-05, \"passed\": true}",
+      "stderr": "",
+      "report": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x150_y000_t6400_g540_depth400_v2.json"
+    },
+    {
+      "name": "x200-y000-t6400-g515",
+      "returncode": 0,
+      "stdout": "{\"coordinates\": [0.2, 0.0, 6400.0, 5.15], \"maximum_matching_state_relative_difference\": 2.8992273999772777e-05, \"passed\": true}",
+      "stderr": "",
+      "report": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x200_y000_t6400_g515_depth400_v2.json"
+    },
+    {
+      "name": "x200-y000-t6400-g540",
+      "returncode": 0,
+      "stdout": "{\"coordinates\": [0.2, 0.0, 6400.0, 5.4], \"maximum_matching_state_relative_difference\": 7.330044547115833e-06, \"passed\": true}",
+      "stderr": "",
+      "report": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_x200_y000_t6400_g540_depth400_v2.json"
+    }
+  ],
+  "passed": false
+}

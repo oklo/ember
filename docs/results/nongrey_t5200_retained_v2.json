@@ -1,0 +1,13 @@
+{
+  "scope": "Check that an atmosphere temperature extension retains every source and mask.\n\nThis compares the stored matching states, including missing-state flags. It\ndoes not compare derivatives at the old upper temperature boundary, where\nthe adjacent interpolation interval changes when the grid is extended.\n",
+  "passed": true,
+  "input_sha256": {
+    "/private/tmp/ember-nongrey-exhaustion-t5000-v1.dat": "0bb5064bcccced7d58499186b16f29a37412a4c0052853c410040bbc2c217200",
+    "/private/tmp/ember-nongrey-exhaustion-t5200-v2.dat": "ba8053239b1b08c2218f446c2937c4710ed21434d11321a3fcbf33024519514f",
+    "/Users/greglaughlin/Projects/ember/scripts/audit_atmosphere_retention.py": "0a733e9525a85ae0647af6cfd4ce0caac9fc41c5ba62932418460746cbacd298"
+  },
+  "retained_source_states": 196,
+  "retained_missing_states": 272,
+  "candidate_source_states": 204,
+  "source_values_and_masks_exact": true
+}

@@ -1,0 +1,9 @@
+{
+  "scope": "Fresh repository builder with electron quadrature 1e-13 reproduces every response from the independently built diagnostic at five dense isotherms.",
+  "passed": true,
+  "source_states": 605,
+  "all_source_stdout_exact": true,
+  "build_receipt": "/tmp/ember-freeeos-quadrature13-builder-check-v1/build_receipt.json",
+  "build_receipt_sha256": "2b2ff4185d519b419b42a083c44e45f3e68c7ccfac96d79ac85be7618f596a1c",
+  "controls_sha256": "7e4c117164ce77b02d165e6788f28c4223a46a9ed3ad77d7b03c603de2253d11"
+}

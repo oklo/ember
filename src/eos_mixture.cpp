@@ -63,6 +63,14 @@ MetalHelmholtzEos::Coordinates MetalHelmholtzEos::coordinates(const Composition&
 }
 
 std::size_t MetalHelmholtzEos::check_temperature_extension(const MetalHelmholtzEos& old) const {
+  return check_extension(old,false);
+}
+
+std::size_t MetalHelmholtzEos::check_density_extension(const MetalHelmholtzEos& old) const {
+  return check_extension(old,true);
+}
+
+std::size_t MetalHelmholtzEos::check_extension(const MetalHelmholtzEos& old,bool density) const {
   if(x_!=old.x_ || y_!=old.y_)
     throw std::runtime_error("EOS extension: composition axes changed");
   auto physical_source=[](const std::string& source) {
@@ -81,15 +89,21 @@ std::size_t MetalHelmholtzEos::check_temperature_extension(const MetalHelmholtzE
         || a.composition_.X!=b.composition_.X || a.composition_.basis!=b.composition_.basis
         || a.composition_.metal_inventory!=b.composition_.metal_inventory)
       throw std::runtime_error("EOS extension: source physics or composition changed");
-    if(a.q_!=b.q_ || a.t_.size()<=b.t_.size()
-        || !std::equal(b.t_.begin(),b.t_.end(),a.t_.begin()))
+    const bool axes_match=density?
+      a.t_==b.t_ && a.q_.size()>b.q_.size() && std::equal(b.q_.begin(),b.q_.end(),a.q_.begin()):
+      a.q_==b.q_ && a.t_.size()>b.t_.size() && std::equal(b.t_.begin(),b.t_.end(),a.t_.begin());
+    if(!axes_match)
       throw std::runtime_error("EOS extension: original material axes changed");
-    for(std::size_t i=0;i<b.nodes_.size();++i)
-      if(a.nodes_[i].valid!=b.nodes_[i].valid || a.nodes_[i].d!=b.nodes_[i].d)
-        throw std::runtime_error("EOS extension: original potential values or masks changed");
-    for(std::size_t i=b.nodes_.size();i<a.nodes_.size();++i)added+=a.nodes_[i].valid;
+    for(std::size_t it=0;it<a.t_.size();++it)for(std::size_t iq=0;iq<a.q_.size();++iq) {
+      const auto& node=a.nodes_[it*a.q_.size()+iq];
+      if(it<b.t_.size() && iq<b.q_.size()) {
+        const auto& previous=b.nodes_[it*b.q_.size()+iq];
+        if(node.valid!=previous.valid || node.d!=previous.d)
+          throw std::runtime_error("EOS extension: original potential values or masks changed");
+      } else added+=node.valid;
+    }
   }
-  if(!added)throw std::runtime_error("EOS extension: no valid hotter states added");
+  if(!added)throw std::runtime_error("EOS extension: no valid states added");
   return added;
 }
 

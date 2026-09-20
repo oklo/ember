@@ -1,20 +1,50 @@
 # Helium-rich non-grey atmospheres
 
-The source specification below records the original gas family. Current stellar
-controls use 132 atmosphere models through 3600 K. A separately checked wider
-EOS supports all these models; the controls retain their original EOS inputs.
+The plotted stellar track uses 172 gas atmospheres through 4400 K and reaches
+3.848 trillion years. An accepted 196-model gas table extends the temperature
+coverage to 5000 K. All 172 existing source states and missing-state masks
+are retained exactly, and the selected interior EOS supports all 196 matching
+states. Independent models at 4500, 4700 and 4900 K differ by at most 0.05225%
+in matching temperature and 0.5376% in gas pressure. Twelve lower-boundary
+comparisons pass, with a maximum matching-state difference of 0.007810%.
+The 24 added structures contain no condensates in the equilibrium diagnostic.
+[Atmosphere acceptance](results/nongrey_t5000_acceptance_v1.json).
 See [the current trajectory](COLD_REMNANT.md) and [EOS data](../data/eos/README.md).
 
-Source calculations toward effective temperatures of 3800 and 4000 K are in
-progress. Their wavelength-opacity tables now extend to a material temperature
-of about 13,150 K. All 31.92 million earlier absorption values in the four
-H/He3 tables are retained exactly. Only two additional source temperatures per
-composition were calculated. A separate 15,000 K attempt produced nonfinite
+The wavelength-opacity tables extend to a material temperature of about
+13,150 K. All 31.92 million retained absorption values in the four
+H/He3 tables are exact. Two additional source temperatures per composition
+provide this coverage. A separate 15,000 K calculation produced nonfinite
 absorption near He I 4471 Angstrom and was rejected. No missing absorption was
-filled or clipped. The finite extension remains subject to atmosphere,
-interpolation and lower-boundary checks before selection by stellar evolution.
+filled or clipped. The 4400 K atmosphere extension has passed source,
+interpolation, lower-boundary, condensation and EOS checks.
 See the [retained-cell check](results/nongrey_opacity_13k_extension_v1.json)
-and [rejected source rows](results/nongrey_opacity_15000_rejected_v1.json).
+and [atmosphere acceptance](results/nongrey_t4400_acceptance_v1.json).
+
+The He I failure arises when the source extrapolates its 4471-A profile
+beyond the tabulated electron-density range. Some finite opacity cells also
+contain a small negative contribution from this extrapolation. A separate
+control omits this line at three material temperatures from 10,100 to
+13,150 K, with X = 0.1750 and He3 mass fraction 0.005000. Across all 57 sampled
+states, the Rosseland absorption mean changes by at most 0.06470%.
+This measures sensitivity of the sampled mean; it is not an atmosphere
+accuracy bound or a justification for omitting the line in production.
+The omitted-line 15,000 K table is finite.
+[Sensitivity calculation](results/helium4471_opacity_sensitivity_v1.json),
+[rejected original source rows](results/nongrey_opacity_15000_rejected_v1.json).
+
+Published replacement profiles are being evaluated. The
+[Tremblay et al. (2026) dataset](https://doi.org/10.5281/zenodo.18722143)
+contains 342 simulated profiles and 846 profiles from the accompanying
+semi-analytical calculation. Its simulations use He II perturbers and omit
+line dissolution. The tables include thermal Doppler broadening and extend
+to an electron density of 6.000e17 cm^-3. Their finite wavelength intervals
+must be considered when checking integrated line strengths; the missing
+4471-A area at high density is consistent with its asymptotic far wings.
+The [Gigosos and Gonzalez (2009) tables](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A%2BA/503/293)
+provide a separate comparison of proton and helium-ion motion. Their original
+tables and CDS export agree exactly. Neither dataset has yet been installed
+in the atmosphere calculation. [Source-table audit](results/helium_stark_tables_v1.json).
 
 `CompositionAtmosphereGrid` supplies an atmosphere boundary from independent
 LTE radiative-transfer calculations on a rectangular grid in baryonic H1,
@@ -59,9 +89,10 @@ implementations do not establish identical convective efficiency.
 
 Metal opacity uses the same declared GS98 proxy as the extended interior
 opacity family. It does not resolve Ember's five-species metal inventory
-element by element. The source atmosphere EOS includes molecular metal
-chemistry; the interior FreeEOS wrapper represents metals as helium. Their
-thermodynamic mismatch remains an uncertainty at the matching point.
+element by element. The atmosphere EOS includes molecular metal chemistry;
+the selected interior FreeEOS family uses the same GS98 element pattern,
+with a documented trace potassium omission. Differences between the two
+thermodynamic treatments are measured at the atmosphere matching states.
 
 Helium-3 is important in this star. A source calculation using He4 masses
 throughout would give the wrong number of helium atoms per gram. Both source

@@ -287,6 +287,223 @@
       "sha256": "b93eb700abe0a06fff3f8d60570abe14186b6dba45bdf0c969dc0396652479fa",
       "gzip_sha256": "09121eca726bc2ea78c07f06083ec2880c6aaa3b67014a50447ae4de725e1066",
       "bytes": 100825
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.json",
+      "archive": "artifacts/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.json.gz",
+      "sha256": "7d7d0014eca968857284abdc31267451bc8c748799bffb8a00adcde6e2ec89f6",
+      "gzip_sha256": "1d0af0e7446b0cc000ac16f0de80ccf0487f6bba784fa7fdfd5ce62b1f2f75a4",
+      "bytes": 3668804
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.receipt.json",
+      "archive": "artifacts/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.receipt.json.gz",
+      "sha256": "540394a9bede99334aeb48dd51400550af36847398cefaa0a4bb156184749292",
+      "gzip_sha256": "266a804a4c357def7029a0e2eec1673af89d2894a261329ea4c407592a0ca251",
+      "bytes": 30095
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.log",
+      "archive": "artifacts/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.log.gz",
+      "sha256": "984a08cef3aa0a24cf4fed21b22bfb9a578a2ec25d1edfb62fdf66ae882990a1",
+      "gzip_sha256": "9eeb71bec258113e9256e177810b2a0516d485797de24ab918326bd038d94f41",
+      "bytes": 1057440
+    },
+    {
+      "source": "/private/tmp/ember-numerical-eos-t5000-512-4000gyr-v1/ember-evolve",
+      "archive": "artifacts/ember-evolve-a4e48b67505f.gz",
+      "sha256": "a4e48b67505fa26ebf443108df5cfd27348f1a89cf79d7bc56f1f52dcfa19f1c",
+      "gzip_sha256": "3ddef289ad46a6c867190b12bed94615ab01e51132819f359e3c705b350f542e",
+      "bytes": 489216
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.restart",
+      "archive": "artifacts/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.restart.gz",
+      "sha256": "5ca6ac78965ed2f8b9977c4c2bfbb3347cbbec088444f564ca716fe6e8167361",
+      "gzip_sha256": "a6c3cafbb29dea1167d8d61be715eb1f2fe979f3cc7b8e10b2f4f6660ccdcc3a",
+      "bytes": 161987
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/scripts/check_evolution_chain.py",
+      "archive": "artifacts/continuation-53752909cad9-000-check_evolution_chain.py.gz",
+      "sha256": "67ddc8e0d9de0ed75b3d191ec84a99778b3326ebdde67dcaf82d42fdd34d555b",
+      "gzip_sha256": "22dbc0256ff934b569993fe9084e281e4d49a0d7cd61fcf088a944da2d847ca5",
+      "bytes": 14036
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/scripts/summarize_remnant_endpoints.py",
+      "archive": "artifacts/continuation-53752909cad9-001-summarize_remnant_endpoints.py.gz",
+      "sha256": "0a26854920130fa388a640793566dd9d8aa15bf5fe4d6f5a7a7ff33a9063a20e",
+      "gzip_sha256": "815ec51c95e1ca07660bce24fe4927a4f66e50e6be02a6d49a167cbd6b158327",
+      "bytes": 3614
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.json",
+      "archive": "artifacts/continuation-53752909cad9-002-evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.json.gz",
+      "sha256": "7d7d0014eca968857284abdc31267451bc8c748799bffb8a00adcde6e2ec89f6",
+      "gzip_sha256": "1d0af0e7446b0cc000ac16f0de80ccf0487f6bba784fa7fdfd5ce62b1f2f75a4",
+      "bytes": 3668804
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.receipt.json",
+      "archive": "artifacts/continuation-53752909cad9-003-evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.receipt.json.gz",
+      "sha256": "540394a9bede99334aeb48dd51400550af36847398cefaa0a4bb156184749292",
+      "gzip_sha256": "266a804a4c357def7029a0e2eec1673af89d2894a261329ea4c407592a0ca251",
+      "bytes": 30095
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.log",
+      "archive": "artifacts/continuation-53752909cad9-004-evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.log.gz",
+      "sha256": "984a08cef3aa0a24cf4fed21b22bfb9a578a2ec25d1edfb62fdf66ae882990a1",
+      "gzip_sha256": "9eeb71bec258113e9256e177810b2a0516d485797de24ab918326bd038d94f41",
+      "bytes": 1057440
+    },
+    {
+      "source": "/private/tmp/ember-numerical-eos-t5000-512-4000gyr-v1/ember-evolve",
+      "archive": "artifacts/continuation-53752909cad9-005-ember-evolve.gz",
+      "sha256": "a4e48b67505fa26ebf443108df5cfd27348f1a89cf79d7bc56f1f52dcfa19f1c",
+      "gzip_sha256": "3ddef289ad46a6c867190b12bed94615ab01e51132819f359e3c705b350f542e",
+      "bytes": 489216
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.restart",
+      "archive": "artifacts/continuation-53752909cad9-006-evolution-cold-remnant-numerical-eos-t5000-512-4000gyr-v1.restart.gz",
+      "sha256": "5ca6ac78965ed2f8b9977c4c2bfbb3347cbbec088444f564ca716fe6e8167361",
+      "gzip_sha256": "a6c3cafbb29dea1167d8d61be715eb1f2fe979f3cc7b8e10b2f4f6660ccdcc3a",
+      "bytes": 161987
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5200-512-4000gyr-v1.json",
+      "archive": "artifacts/continuation-53752909cad9-007-evolution-cold-remnant-numerical-eos-t5200-512-4000gyr-v1.json.gz",
+      "sha256": "e2292ad6dfa9859fa9ba95166351f3d12231c5bfb5e0185ab87031cab00dc85e",
+      "gzip_sha256": "34dcad174b8fe1210c26876e8ccbe335e7a72f5e87fc8ba20a78cf12e8f34a37",
+      "bytes": 204202
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5200-512-4000gyr-v1.receipt.json",
+      "archive": "artifacts/continuation-53752909cad9-008-evolution-cold-remnant-numerical-eos-t5200-512-4000gyr-v1.receipt.json.gz",
+      "sha256": "9687bdbf39605de557ba19ddfe514785fc27065aef07241306e15392eaedf4d8",
+      "gzip_sha256": "9188d80928ecf310df55f8c19e49101bf1bc7ac64b52b37d4d86ba926e514b3d",
+      "bytes": 30774
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5200-512-4000gyr-v1.log",
+      "archive": "artifacts/continuation-53752909cad9-009-evolution-cold-remnant-numerical-eos-t5200-512-4000gyr-v1.log.gz",
+      "sha256": "6cb3c676eaf4afc6e7fc6f51efd8c887ff5934e1fc615826781267215526ab75",
+      "gzip_sha256": "1a41db41291b4949a3cd85b49049d5e628a39d1383933d187960a618c9b63257",
+      "bytes": 38445
+    },
+    {
+      "source": "/private/tmp/ember-numerical-eos-t5200-512-4000gyr-v1/ember-evolve",
+      "archive": "artifacts/continuation-53752909cad9-010-ember-evolve.gz",
+      "sha256": "7d8f95f327799371539563a0328d5962fb08a459302c5642f04f7a3880083ab3",
+      "gzip_sha256": "ae7fce69ab6aeab914f1f096a9a1fb23d2fe7b6ee548358f1b944ded22c8af30",
+      "bytes": 489456
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5200-512-4000gyr-v1.restart",
+      "archive": "artifacts/continuation-53752909cad9-011-evolution-cold-remnant-numerical-eos-t5200-512-4000gyr-v1.restart.gz",
+      "sha256": "5bf67e8b356cb0c480f49232a30a86511903ce6ac4b7a5796a22d8ad5e497a11",
+      "gzip_sha256": "ba088e00f14ca1bf1db5b730ecdbaa399c80dd279acc3331ce9edcce124f0e11",
+      "bytes": 162026
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5600-512-4000gyr-v1.json",
+      "archive": "artifacts/continuation-53752909cad9-012-evolution-cold-remnant-numerical-eos-t5600-512-4000gyr-v1.json.gz",
+      "sha256": "781e79e71e5965ab53d549a1c261bc51dd982da80f6ff3fbc58d464b89829bdd",
+      "gzip_sha256": "46eca45f1e8efc5e3407c713c11807e59ee3c23b8e72480bdb917229a6f4be1c",
+      "bytes": 283737
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5600-512-4000gyr-v1.receipt.json",
+      "archive": "artifacts/continuation-53752909cad9-013-evolution-cold-remnant-numerical-eos-t5600-512-4000gyr-v1.receipt.json.gz",
+      "sha256": "411551e98117f4e1897222c9dfc5c8fe2e916737a07d323a6d49173c492e49f3",
+      "gzip_sha256": "3cc19b4cc27d4c694e6e57681c48cefdb4ea1b74ae318c15b505458ebe80294c",
+      "bytes": 30890
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5600-512-4000gyr-v1.log",
+      "archive": "artifacts/continuation-53752909cad9-014-evolution-cold-remnant-numerical-eos-t5600-512-4000gyr-v1.log.gz",
+      "sha256": "c80ba739ae3e28c29397ae6da2c9a47a12ca0867f915353d7590da0dc00f78fc",
+      "gzip_sha256": "3fe53f52ae58e7245e9e530ad297f140696a54659feaf0ae2e5b832328042455",
+      "bytes": 63219
+    },
+    {
+      "source": "/private/tmp/ember-numerical-eos-t5600-512-4000gyr-v1/ember-evolve",
+      "archive": "artifacts/continuation-53752909cad9-015-ember-evolve.gz",
+      "sha256": "7d8f95f327799371539563a0328d5962fb08a459302c5642f04f7a3880083ab3",
+      "gzip_sha256": "ae7fce69ab6aeab914f1f096a9a1fb23d2fe7b6ee548358f1b944ded22c8af30",
+      "bytes": 489456
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/out/evolution-cold-remnant-numerical-eos-t5600-512-4000gyr-v1.restart",
+      "archive": "artifacts/continuation-53752909cad9-016-evolution-cold-remnant-numerical-eos-t5600-512-4000gyr-v1.restart.gz",
+      "sha256": "e5cfec297b1fed30f6f6def1b1e3591e1473204505db960707fddbf1ab822edb",
+      "gzip_sha256": "2c3aa5dfee079be9fc039381dbce3ddc887b5d3af106e98fb119de73f3325283",
+      "bytes": 162287
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_t5200_acceptance_v2.json",
+      "archive": "artifacts/continuation-53752909cad9-017-nongrey_t5200_acceptance_v2.json.gz",
+      "sha256": "432746f58b58ea0d77b55e475dd428ecf793c2b3c5b59159a0afd4e5e20bc5f8",
+      "gzip_sha256": "889a98b91346050af61a99a977185676e337ff006b0c524c761d9869a23d5abd",
+      "bytes": 3106
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/docs/results/nongrey_t5600_acceptance_v1.json",
+      "archive": "artifacts/continuation-53752909cad9-018-nongrey_t5600_acceptance_v1.json.gz",
+      "sha256": "c37f6b242b2cd5fdb2af28cd3d7a950aa1110d2428fdcc45797a73710b0e46d3",
+      "gzip_sha256": "6231b91a1bb2cbb48805d04aaddf55fb0f40f7f2d19a61da41877589d28d6102",
+      "bytes": 3611
+    },
+    {
+      "source": "/private/tmp/ember-evolution-mixing-probe-v1",
+      "archive": "artifacts/continuation-53752909cad9-019-ember-evolution-mixing-probe-v1.gz",
+      "sha256": "4e0541eb003a4352a7bec9538e02dde45e8a655571570eea4f88cfb1b0713455",
+      "gzip_sha256": "618af1a56af8dccb810b15c40d43a9c530e32a7304967d1ef625eb3d1ded9798",
+      "bytes": 238896
+    },
+    {
+      "source": "/private/tmp/ember-evolution-physics-exhaustion-probe-v1",
+      "archive": "artifacts/continuation-53752909cad9-020-ember-evolution-physics-exhaustion-probe-v1.gz",
+      "sha256": "e8e9dbcefd4a2a81709cee6584275217b01b98331a9bcd8dce4e5d39f1cb38b9",
+      "gzip_sha256": "1e5206a9166c018d044ac76c5898f4cc87fa896d7b92d21076e0d1bd071471fa",
+      "bytes": 174456
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/docs/results/numerical_electron_profile_3890gyr_v1.json",
+      "archive": "artifacts/continuation-53752909cad9-021-numerical_electron_profile_3890gyr_v1.json.gz",
+      "sha256": "33d76d05f8e00cc1db7f618be74705aa4a5b1c32af27b2677a17207a9cc454bd",
+      "gzip_sha256": "63fe8a8106489c6ee127e30a9bf243119605c594416b96cc880cd0bfc044643e",
+      "bytes": 602866
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/docs/results/nuclear_sfiii_evolution_control_v1.json",
+      "archive": "artifacts/continuation-53752909cad9-022-nuclear_sfiii_evolution_control_v1.json.gz",
+      "sha256": "ac972d61e20f5b9d5d51851af4860c854d50789e254019259760be3e3b750988",
+      "gzip_sha256": "3599377ec93ccd8f51401b2f8c1024ac7ea86200c4f883fd4287f9cd8b1e7e93",
+      "bytes": 2961
+    },
+    {
+      "source": "/private/tmp/ember-numerical-eos-t5600-joined-history-v1.json",
+      "archive": "artifacts/continuation-53752909cad9-023-ember-numerical-eos-t5600-joined-history-v1.json.gz",
+      "sha256": "53752909cad953b3153473af6b42891f4383672d46df763f2674f3de3d2b3376",
+      "gzip_sha256": "79d6a1a3e17f5e0954496a640079b789b1cfd9786136ca6cffed3d5d2e761116",
+      "bytes": 3867508
+    },
+    {
+      "source": "/Users/greglaughlin/Projects/ember/docs/results/evolution_density_limit_3890gyr_v1.json",
+      "archive": "artifacts/continuation-53752909cad9-024-evolution_density_limit_3890gyr_v1.json.gz",
+      "sha256": "2a5fafebc413e33de651df42a364d6ebdc9022c88209973ead20e6e903faf4d9",
+      "gzip_sha256": "24535c4d31e907c783a1dea5fa351dd2fffdfddb5d857d4d99e6560f1a8e64e8",
+      "bytes": 122825
+    },
+    {
+      "source": "/tmp/ember-dense-eos-current-checks-v1/selected-profile.source.json.gz",
+      "archive": "artifacts/numerical-electron-profile-3890-direct-source.json.gz.gz",
+      "sha256": "9f8fe728728c5e43d36914b418bc1a69e0783f5bf243c0155e4920d055d4e7a0",
+      "gzip_sha256": "c0d557b51b6dc6c9082850501eaa797fcc25b89e7c87b83ad5c28ee0fd182893",
+      "bytes": 169256
     }
   ],
   "older_recovery": "September 9 local artifacts remain intact in docs/reports/2026-09-09/artifacts; the earlier paper remains in Git history."

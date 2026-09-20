@@ -1,0 +1,91 @@
+{
+  "scope": "Estimate central C/N proton-capture times without changing stellar evolution.\n\nSolar Fusion II Table XII supplies the low-energy S-factor expansions. These\ninstantaneous times do not integrate the changing stellar state, establish a\nglobal CNO luminosity bound, or evolve the metal mixture. SciPy is required.\n",
+  "source": "https://arxiv.org/pdf/1004.2318",
+  "source_locations": "Table XII; N14 energy expansion and range in equation 50.",
+  "rate_parameters": {
+    "C12_p_gamma": [
+      6,
+      12.0,
+      1.34,
+      0.0026,
+      8.3e-05
+    ],
+    "C13_p_gamma": [
+      6,
+      13.00335484,
+      7.6,
+      -0.00783,
+      0.000729
+    ],
+    "N14_p_gamma": [
+      7,
+      14.003074,
+      1.66,
+      -0.0033,
+      4.4e-05
+    ]
+  },
+  "screening_scope": "Same finite-degeneracy susceptibility and Salpeter--Van Horn interpolation as Ember, applied to proton/carbon and proton/nitrogen charges. This is a screening approximation, not an uncertainty bound.",
+  "range_note": "All integrated energies are below 130 keV. The omitted polynomial tail to 130 keV is checked; this is not a bound on unmodeled higher-energy cross sections.",
+  "interpretation": "A capture time comparable to the time spent at a stellar state calls for a changing-composition calculation. Dividing by the total stellar age does not determine depletion. No CNO energy or abundance change is installed.",
+  "records": [
+    {
+      "track": "out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.json",
+      "age_yr": 3848256087435.5327,
+      "T_K": 11750953.02469058,
+      "rho_g_cm3": 4004.2197096372915,
+      "XH": 0.0024672122543675725,
+      "X3": 1.881978543089584e-08,
+      "pp_network_heat_erg_g_s": 0.010750908426347256,
+      "reactions": {
+        "C12_p_gamma": {
+          "bare_molar_rate_cm3_mol_s": 2.834938443956476e-18,
+          "bare_capture_time_yr": 1131452286.3749645,
+          "SVH_log_screening_factor": 0.9317533331161256,
+          "SVH_capture_time_yr": 445636662.7955314,
+          "screening_zeta": 0.051816899172475755,
+          "quadrature": {
+            "Gamow_peak_keV": 20.32527500446883,
+            "upper_energy_keV": 101.62637502234413,
+            "quadrature_relative_error_estimate": 6.697243595971967e-14,
+            "log_energy_gauss_relative_difference": 2.886579864025407e-15,
+            "polynomial_tail_to_130keV_fraction": 1.0086178039653197e-26
+          }
+        },
+        "C13_p_gamma": {
+          "bare_molar_rate_cm3_mol_s": 1.3483998423611708e-17,
+          "bare_capture_time_yr": 237881782.79003978,
+          "SVH_log_screening_factor": 0.9317533331161256,
+          "SVH_capture_time_yr": 93692721.38027512,
+          "screening_zeta": 0.05171343286698973,
+          "quadrature": {
+            "Gamow_peak_keV": 20.36594105574624,
+            "upper_energy_keV": 101.82970527873121,
+            "quadrature_relative_error_estimate": 7.016472781518889e-14,
+            "log_energy_gauss_relative_difference": 1.3322676295501878e-15,
+            "polynomial_tail_to_130keV_fraction": 8.694464176358394e-27
+          }
+        },
+        "N14_p_gamma": {
+          "bare_molar_rate_cm3_mol_s": 3.862766487421301e-21,
+          "bare_capture_time_yr": 830388685050.481,
+          "SVH_log_screening_factor": 1.0534705784433647,
+          "SVH_capture_time_yr": 289577599571.15845,
+          "screening_zeta": 0.052559262258817116,
+          "quadrature": {
+            "Gamow_peak_keV": 22.608960408289374,
+            "upper_energy_keV": 113.04480204144687,
+            "quadrature_relative_error_estimate": 1.0294449115454601e-13,
+            "log_energy_gauss_relative_difference": 1.5543122344752192e-15,
+            "polynomial_tail_to_130keV_fraction": 9.527844958024085e-30
+          }
+        }
+      }
+    }
+  ],
+  "input_sha256": {
+    "/tmp/ember-cno-screening-probe-v1": "6c9ad37af3f3f0d0e1b72f14f9629ed0c10f9819430f34c40e16283657a4dfbe",
+    "/Users/greglaughlin/Projects/ember/scripts/audit_cno_capture_times.py": "9bfd9c990ef2d78dab775cb9cf933088712292a358a28ba6de1d07f72839a086",
+    "out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.json": "c8182df3de2fb6dffea458e4cf53e68f56a347c012c05469e3ed0a78b818fb1f"
+  }
+}

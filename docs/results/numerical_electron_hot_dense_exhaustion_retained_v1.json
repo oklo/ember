@@ -1,0 +1,134 @@
+{
+  "scope": "Runtime checks for the selected hydrogen-poor dense source addition. The original material potentials and masks are exact. New high-density support is withheld above X=.2, and the exact X=.2 runtime knot chooses the higher-H interval and is therefore unsupported in the added density range. Original higher-H and cooler coverage is retained. This does not establish cold-remnant coverage.",
+  "passed": true,
+  "source_retention": {
+    "retained_source_values_and_masks_exact": true,
+    "added_states": 630200
+  },
+  "input_sha256": {
+    "/tmp/ember-metal-eos-exhaustion-probe-v1": "551bac3bd3a54182d181e6a3396ccb5121be77d88ad5aed32dc24dd4c0524c62",
+    "scripts/check_eos_extension.cpp": "07c1f2395079e030f7b6cddd458fc3608a1392ad25e92f60dfc8538a54f85336",
+    "/tmp/ember-check-eos-extension-v1": "f1480792c1b45cfbe43438e4032fb9ff27af0d622de61f4efb2c2ea0ea482e29"
+  },
+  "family_manifest_sha256": {
+    "/tmp/ember-numerical-electron-hot-dense-exhaustion-family-v1/freeeos300_gs98_z020.dat": "544db28d28b7382eca2646f1ae6d6980d2b1f9eccff3781a69c08626c6a5f321",
+    "data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat": "544db28d28b7382eca2646f1ae6d6980d2b1f9eccff3781a69c08626c6a5f321"
+  },
+  "queries": [
+    {
+      "scope": "new dense hydrogen-poor support",
+      "query": [
+        0.1875,
+        0.005,
+        7321000.0,
+        100000.0
+      ],
+      "results": [
+        {
+          "family": "data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
+          "supported": false,
+          "response": "",
+          "error": "HelmholtzTableEos: state outside table"
+        },
+        {
+          "family": "/tmp/ember-numerical-electron-hot-dense-exhaustion-family-v1/freeeos300_gs98_z020.dat",
+          "supported": true,
+          "response": "0.1875 0.0050000000000000001 7321000 100000 8.6528371367427087e+20 12967417655610558 300004056.25580478 1.6233160349384193 0.031072712639227729 57954379.801909685 57251399.134859085 0.39037136223822971 0.019141505394176972 100000.00000000001 1.2170903793447134e+21 3.9574211592960724e+20 18628145122133916 6015579549189820",
+          "error": ""
+        }
+      ]
+    },
+    {
+      "scope": "withheld higher-hydrogen dense state",
+      "query": [
+        0.225,
+        0.005,
+        7321000.0,
+        100000.0
+      ],
+      "results": [
+        {
+          "family": "data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
+          "supported": false,
+          "response": "",
+          "error": "HelmholtzTableEos: state outside table"
+        },
+        {
+          "family": "/tmp/ember-numerical-electron-hot-dense-exhaustion-family-v1/freeeos300_gs98_z020.dat",
+          "supported": false,
+          "response": "",
+          "error": "HelmholtzTableEos: masked density region"
+        }
+      ]
+    },
+    {
+      "scope": "exact upper added hydrogen knot uses right-hand interval",
+      "query": [
+        0.2,
+        0.005,
+        7321000.0,
+        100000.0
+      ],
+      "results": [
+        {
+          "family": "data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
+          "supported": false,
+          "response": "",
+          "error": "HelmholtzTableEos: state outside table"
+        },
+        {
+          "family": "/tmp/ember-numerical-electron-hot-dense-exhaustion-family-v1/freeeos300_gs98_z020.dat",
+          "supported": false,
+          "response": "",
+          "error": "HelmholtzTableEos: masked density region"
+        }
+      ]
+    },
+    {
+      "scope": "uncomputed cooler dense source",
+      "query": [
+        0.15,
+        0.005,
+        732100.0,
+        1000.0
+      ],
+      "results": [
+        {
+          "family": "data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
+          "supported": false,
+          "response": "",
+          "error": "HelmholtzTableEos: state outside table"
+        },
+        {
+          "family": "/tmp/ember-numerical-electron-hot-dense-exhaustion-family-v1/freeeos300_gs98_z020.dat",
+          "supported": false,
+          "response": "",
+          "error": "HelmholtzTableEos: masked density region"
+        }
+      ]
+    },
+    {
+      "scope": "retained high-hydrogen original state",
+      "query": [
+        0.275,
+        0.005,
+        7321000.0,
+        100
+      ],
+      "results": [
+        {
+          "family": "data/eos/numerical_electron_base_v1/freeeos300_gs98_z020.dat",
+          "supported": true,
+          "response": "0.27500000000000002 0.0050000000000000001 7321000 100 66868911518982848 991666619621631.5 777482202.56637323 1.0254456615595435 0.98518839647404943 223750010.43585545 137297069.58008295 0.39219081541663797 0.96074168861929843 100.0000000000052 79312362102593024 15702599313291608 1171906821238415.2 227925762698178.66",
+          "error": ""
+        },
+        {
+          "family": "/tmp/ember-numerical-electron-hot-dense-exhaustion-family-v1/freeeos300_gs98_z020.dat",
+          "supported": true,
+          "response": "0.27500000000000002 0.0050000000000000001 7321000 100 66868911518982848 991666619621631.5 777482202.56637323 1.0254456615595435 0.98518839647404943 223750010.43585545 137297069.58008295 0.39219081541663797 0.96074168861929843 100.0000000000052 79312362102593024 15702599313291608 1171906821238415.2 227925762698178.66",
+          "error": ""
+        }
+      ]
+    }
+  ]
+}

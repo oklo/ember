@@ -30,6 +30,43 @@ local. Reproduction uses `scripts/import_tops_mixtures.py`, then
 `scripts/assemble_hot_opacity_extension.py`, as shown in the
 [reproduction guide](../../docs/DATA_REPRODUCTION.md).
 
+## Density coverage under validation
+
+The selected hot tables end at a density of 1.000e4 g/cm3. Additional
+[TOPS source calculations](https://aphysics2.lanl.gov/) sample densities through
+1.000e6 g/cm3 on the same temperature grid. The available upper density depends
+on temperature and composition. Source replies identify substituted densities;
+those cells are excluded from the candidate tables.
+
+`TabulatedOpacity` accepts an optional version-2 format in which each
+temperature row declares the number of valid density entries. Evaluation
+requires all neighboring rows needed for both the opacity and its derivatives.
+It rejects queries involving absent entries. All 33 test suites pass, and a
+512-point stellar control with the original tables reproduces its full output
+exactly. [Code checks](../../docs/results/opacity_density_support_code_v1.json).
+
+The first density extension preserves every original source value, but its
+coarse density spacing gives independent opacity discrepancies up to 4.738%,
+above the 0.5% criterion. Refining to 81 density points reduces the maximum
+to 0.7202%, which still fails. Neither table is selected for stellar evolution.
+[Coarse comparison](../../docs/results/tops_density_extension_source_v1.json),
+[finer comparison](../../docs/results/tops_density_fine_source_v1.json).
+
+A separate narrow density scan finds source jumps up to 0.7637% associated
+with the plasma-cutoff option. Two full spectra are identical with that option
+on and off, while their reported mean opacities differ. Their averaging
+normalization and its effect on radiative transport are under investigation.
+The diagnostic does not justify removing plasma physics or smoothing the
+source values. The [spectral normalization checks](../../docs/PLASMA_OPACITY.md)
+quantify the difference and its fixed-profile transport effect. [Source scan](../../docs/results/tops_density_structure_v1.json).
+
+The source plans are `sources/tops_density_*_specification.json`.
+`fetch_tops_density_plan.py` runs their sequential, resumable requests;
+`assemble_tops_density_extension.py` assembles only original source values;
+`audit_tops_density_extension.py` checks source nodes, independent mixtures
+and densities, and numerical derivatives. Assembly alone does not accept a
+table for stellar evolution.
+
 The following paragraphs preserve earlier stages of the opacity comparison.
 
 ## Hydrogen-poor TOPS extension under validation

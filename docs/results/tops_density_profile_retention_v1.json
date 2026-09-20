@@ -1,0 +1,36 @@
+{
+  "scope": "Compare the actual 3.848-trillion-year stellar profile using the original and candidate dense-opacity families. Values and four derivatives remain exact in these 512 states. The candidate still fails its independent dense-source audit and is not selected for a star. External AESOPUS source files are copied without changing numeric data.",
+  "profile": "out/evolution-cold-remnant-t4400-eos72-512-4000gyr-v1.json",
+  "profile_sha256": "c8182df3de2fb6dffea458e4cf53e68f56a347c012c05469e3ed0a78b818fb1f",
+  "probe_sha256": "0597f23edc7cc2ddb53a9c921fa6783e2eacddf6c22bf7d4236d20f8a0b6e3f9",
+  "candidate": "/tmp/ember-dense-opacity-family-v2",
+  "profile_zones": 512,
+  "values_and_derivatives_exact": true,
+  "lower_density_bounds_exact": true,
+  "upper_density_bound_changes": 451,
+  "previous_sha256": {
+    "tops_gs98_mixture_low.dat": "77cf6d94d2dcd0267b6adb4235e156dfe0a4fc25778a5dc223424b562c24cbc4",
+    "tops_gs98_mixture_z030_low.dat": "1b786e3905977dd5a77190351c654d9aeca28c53f81f945f1abdf86360c36f7a",
+    "tops_gs98_mixture_z020_low.dat": "9cbebb2a75e5ef7ccaf48eb07ac28662b374b1304365aa125e6260169916dbfc",
+    "tops_gs98_mixture_z010_high.dat": "adbc28d51bf7c1c02879cd203ccb78317e29826abe16d40fd8705d0dd8e60574",
+    "aesopus21_gs98_mixture.dat": "48298d34ae8e405ee697deca4af2e8b7f57a352b2e4f670452881e019de85c62",
+    "tops_gs98_mixture_z020_high.dat": "af268141678ac1d18b929e7b084f7ed455e0b3867f6527ff76d8ebc0620a47d3",
+    "tops_gs98_mixture_z010_low.dat": "616a37ae9dc0054d2ff72d3edc0c7fc3fe6c1a782deb87d2790906f0f68d68fc",
+    "tops_gs98_mixture_z030_high.dat": "4e5c2a41b2855abd672d46c65da86ae0c79fb8d745d26a5ea8bd20fcb7d3baaf",
+    "tops_gs98_mixture_high.dat": "9cbebed1b31bab5d5c77811508f06a6e5b06c7bde6243506cd3d6e8b1e6dd4ea"
+  },
+  "candidate_sha256": {
+    "tops_gs98_mixture_low.dat": "77cf6d94d2dcd0267b6adb4235e156dfe0a4fc25778a5dc223424b562c24cbc4",
+    "tops_gs98_mixture_z030_low.dat": "1b786e3905977dd5a77190351c654d9aeca28c53f81f945f1abdf86360c36f7a",
+    "tops_gs98_mixture_z020_low.dat": "9cbebb2a75e5ef7ccaf48eb07ac28662b374b1304365aa125e6260169916dbfc",
+    "tops_gs98_mixture_z010_high.dat": "b6d500ba02b094eccc399fa32ecafe75a957c441347a7427688d5ab43d3e3817",
+    "aesopus21_gs98_mixture.dat": "fce8afc79dd2de30c88edfb7a2389eb6421828ece2e617d32fd8fdc9b31186d6",
+    "aesopus21_gs98_mixture_z010.dat": "f3495576432d09822e74f31517b49351bc79d55cec8128422c4f2a4bb60ca624",
+    "tops_gs98_mixture_z020_high.dat": "dec01682e051645ad897f4708e393956ec40987fc6abc1d568bec95a554480bf",
+    "tops_gs98_mixture_z010_low.dat": "616a37ae9dc0054d2ff72d3edc0c7fc3fe6c1a782deb87d2790906f0f68d68fc",
+    "aesopus21_gs98_mixture_z020.dat": "8182d698ed6fb36cf7919d1d2a0d01e870905699c30175c8bd68ad2c7fc65617",
+    "aesopus21_gs98_mixture_z030.dat": "b8b3d872ed7650b91f348aa82418a8ae5e88e98fa43d32e0fb7fc0ab9deb3141",
+    "tops_gs98_mixture_z030_high.dat": "bdd37999389067b7122eb2543ab750eb830ebfca919d755e46c3184a312e9c24",
+    "tops_gs98_mixture_high.dat": "9cbebed1b31bab5d5c77811508f06a6e5b06c7bde6243506cd3d6e8b1e6dd4ea"
+  }
+}
