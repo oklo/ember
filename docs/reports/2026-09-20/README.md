@@ -3,9 +3,9 @@
 [Read the PDF](ember_status_and_future.pdf).
 
 The calculation with finite convective transport from the helium-3 flash onset
-reaches **28.36 thousand years**, **4858 K** and nuclear power **3.361e33 erg/s**
-on **1983** mass points. Nuclear power declines through the final **1000 years**,
-which release **1.105e44 erg** through **13** checked intervals. A matched
+reaches **38.79 thousand years**, **4887 K** and nuclear power **1.693e33 erg/s**
+on **1983** mass points. Nuclear power declines through the final **2433 years**,
+which release **1.387e44 erg** through **16** checked intervals. A matched
 **100-year** comparison on **1927/1983** points differs by **8.261%** in nuclear
 heat and **15.24%** in final nuclear power. The first year after refinement has
 an integrated energy residual of **1.844e43 erg**, associated with a mechanical
@@ -14,13 +14,13 @@ heat and final power unchanged within **1e-12** relative, but retains the
 explicit initial energy change. The complete flash and its spatial accuracy
 remain unresolved.
 
-An alternative flash history reaches **3.454 million years**, **6157 K** and
-nuclear power **1.948e31 erg/s** on **2115** mass points. Nuclear burning supplies
-**33.40%** of photon luminosity. Radius and surface luminosity have declined
-**67.08%** and **89.10%** from their maxima. Effective temperature passes a
-maximum of **6399 K** near **1.088 million years**, then falls **242.0 K** over
-**2.366 million years**. The final **400,000 years** use **15.30 CPU minutes**
-and **5.511 minutes of active elapsed time**, including timestep comparisons.
+An alternative flash history reaches **4.624 million years**, **6021 K** and
+nuclear power **1.428e31 erg/s** on **2115** mass points. Nuclear burning supplies
+**32.66%** of photon luminosity. Radius and surface luminosity have declined
+**70.19%** and **91.83%** from their maxima. Effective temperature passes a
+maximum of **6399 K** near **1.088 million years**, then falls **377.6 K** over
+**3.536 million years**. The final **369,800 years** use **11.32 CPU minutes**
+and **3.971 minutes of active elapsed time**, including timestep comparisons.
 
 A matched **1000-year** test near **log g = 5.42** changes surface temperature by **5.918 K** and deposited nuclear energy by **0.00005299%** between the two inferred hydrogen gravity responses, with identical final convective regions. This local comparison does not validate the absolute atmosphere or establish that ignition is independent of it.
 
@@ -51,7 +51,7 @@ This directory contains the PDF, LaTeX inputs and included figure PDFs.
 The [late cooling figure](late_cooling.pdf), its [data](late_cooling.csv) and
 plotting script are included. The LBA97 opacity comparison is retained.
 The [standalone HR diagram of both histories](../../figures/2026-09-20/ember_two_sequences_hr.png)
-shows the alternatives through 28.36 thousand years and 3.454 million years;
+shows the alternatives through 38.79 thousand years and 4.624 million years;
 standalone flash diagrams remain separate from this draft.
 
 Rebuild here with `tectonic --keep-logs ember_status_and_future.tex`.

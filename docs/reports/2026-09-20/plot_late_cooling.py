@@ -34,7 +34,8 @@ def plot(data, output):
     hr.plot(temperature[-1], np.log10(light[-1]), 'o', ms=4, color=orange)
     hr.annotate(f'{t[-1]:.4g} Myr\n{temperature[-1]:.4g} K',
                 xy=(temperature[-1], np.log10(light[-1])),
-                xytext=(temperature[-1]+110, min(-1.58, np.log10(light[-1])+.025)),
+                xytext=(temperature[-1]+.45*(temperature[peak]-temperature[-1]),
+                        min(-1.58, np.log10(light[-1])+.025)),
                 fontsize=9, ha='left', va='center',
                 arrowprops=dict(arrowstyle='-|>', lw=.8, color='black', mutation_scale=10))
     i, j = len(rows)*2//3, len(rows)*2//3+4
