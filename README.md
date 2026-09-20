@@ -4,8 +4,8 @@ Ember is a one-dimensional stellar evolution code written in C++23. It follows
 the structure, composition and energy transport of very low-mass stars over
 trillions of years.
 
-[Read the current working paper](docs/reports/2026-09-19/ember_status_and_future.pdf)
-([LaTeX and figure files](docs/reports/2026-09-19/README.md)).
+[Read the current working paper](docs/reports/2026-09-20/ember_status_and_future.pdf)
+([LaTeX and figure files](docs/reports/2026-09-20/README.md)).
 
 ## Research status
 
@@ -36,8 +36,8 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2115-point** late sequence reaches **251.2 thousand years**, **6150 K**
-and nuclear power **1.552e32 erg/s**, supplying **29.01%** of photon luminosity.
+The **2115-point** late sequence reaches **395.2 thousand years**, **6241 K**
+and nuclear power **1.243e+32 erg/s**, supplying **27.5%** of photon luminosity.
 A matched **2000-year** mass-grid comparison changes deposited nuclear energy
 by **0.5220%** and endpoint power by **0.5687%**. Half the burning power
 occupies **39** cells instead of **12**. This supports the later shell burning;
@@ -48,17 +48,24 @@ references changes endpoint temperature by **0.04684 K**, surface luminosity
 by **0.002487%** and nuclear heat by **4.206e-6%**, with the same convection.
 These small differences do not establish absolute atmosphere accuracy.
 
-An **800/400/200-year** comparison supports larger time steps with unchanged
-accuracy and conservation checks. The final **50,000-year** segment uses
-**33.63 CPU minutes**. A **17,200-year** segment takes
-**31.21 CPU minutes**, including timestep comparisons and rejected trials.
+Radius and surface luminosity have passed maxima near **244.4 thousand years**
+and **254.4 thousand years**, respectively. They have since declined by
+**10.79%** and **15.5%**, while effective temperature still rises.
+This establishes contraction in the diagnostic history, without yet establishing
+white-dwarf cooling or its connection to the resolved onset.
+
+A **3200/1600/800-year** comparison supports larger late time steps with unchanged
+accuracy and conservation checks. The final **60,800-year** continuation segment
+uses **16.15 CPU minutes**. A further **3200-year** interval through restored
+higher-gravity coverage passes the same criteria, with integrated nuclear
+energies differing by **0.08760%**.
 A newly radiative envelope layer is included by extending microscopic species
 transport to **1 MK**, supported by source ionization, actual exchange and
 finite-step checks. This local approximation does not describe neutral-fluid
 transport in a cold remnant.
 
-The separate onset calculation reaches **12.50 thousand years**, **4557 K** and nuclear
-power **1.213e35 erg/s**. Power reaches a local maximum of **3.719e35 erg/s**
+The separate onset calculation reaches **12.64 thousand years**, **4551 K** and nuclear
+power **1.578e35 erg/s**. Power reaches a local maximum of **3.719e35 erg/s**
 near **1642 years**, followed by further rises and declines. Burning is
 increasing again at the current endpoint; the first local maximum does not
 mark completion of the flash.
@@ -77,8 +84,8 @@ bounding the shared atmosphere uncertainty.
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
 **X = 0.78–0.9955** and **log g = 5.55–5.80**. Independent calculations check
 interpolation, the helium-isotope approximation and lower-boundary sensitivity.
-The later sequence uses a local grid of **18** solved columns covering
-**6000–6500 K** and **log g = 4.20–4.50**, with independently checked
+The later sequence uses a local grid of **24** solved columns covering
+**6000–6500 K** and **log g = 4.20–4.65**, with independently checked
 lower-density EOS coverage. The absolute hydrogen reference
 below **log g = 5.5** remains an explicitly inferred continuation. A matched
 **10,000-year** calculation testing the extension below **log g = 5.25**
