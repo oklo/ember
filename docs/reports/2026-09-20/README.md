@@ -2,26 +2,26 @@
 
 [Read the PDF](ember_status_and_future.pdf).
 
-The diagnostic late helium-3 calculation reaches **1.171 million years**,
-**6398 K** and nuclear power **6.418e31 erg/s** on **2115** mass points.
-Nuclear burning supplies **38.39%** of photon luminosity. Radius and
-surface luminosity have passed maxima and declined by **48.37%** and
-**68.75%**; effective temperature passes a shallow maximum of **6399 K** near
-**1.088 million years**, then falls **1.151 K** over **83,200 years**.
-Both atmosphere references retain this local turn toward cooling. The full
+The diagnostic late helium-3 calculation reaches **1.548 million years**,
+**6375 K** and nuclear power **4.803e31 erg/s** on **2115** mass points.
+Nuclear burning supplies **37.89%** of photon luminosity. Radius and
+surface luminosity have passed maxima and declined by **54.72%** and
+**76.31%**; effective temperature passes a shallow maximum of **6399 K** near
+**1.088 million years**, then falls **23.99 K** over **460,000 years**.
+Both atmosphere references retain the initial turn toward cooling; the nominal calculation continues through the full decline quoted here. The full
 connection through the flash and a long white-dwarf cooling sequence remain
 unverified.
 
-The calculation resolving the onset reaches **13.13 thousand years**,
-**4741 K** and nuclear power **5.285e34 erg/s** on **1899** mass points. The 1695-point calculation shows a local maximum
+The calculation resolving the onset reaches **14.06 thousand years**,
+**4756 K** and nuclear power **3.584e34 erg/s** on **1899** mass points. The 1695-point calculation shows a local maximum
 of **3.719e35 erg/s**, an **81.64%** decline and renewed burning. The overall
 maximum, complete pulse and connection to the later calculation remain unresolved.
 A checked **0.6656-year** mixing adjustment changes surface hydrogen from
 **X = 0.9984** to **X = 0.8085** and helium-3 from **X3 = 0.001368** to
 **X3 = 0.007264**. Two-step/four-step paths pass the original physical checks.
 
-Over the final **296.7 years** of the onset calculation, nuclear power falls
-**42.09%** and deposited nuclear energy is **6.334e44 erg**. All **80** retained
+Over the final **931.1 years** of the onset calculation, nuclear power falls overall
+**32.18%** and deposited nuclear energy is **1.172e45 erg**. All **142** retained
 intervals pass the unchanged timestep and conservation checks.
 
 A matched **100-year** comparison on **1763/1899 points** changes deposited
@@ -31,13 +31,14 @@ the burning over **31 cells** and is used for continued calculation with
 explicit spatial uncertainty; this does not establish convergence of the full pulse.
 
 A **3200/1600/800 yr** comparison tests time resolution. The final
-**128,000 years** use trial steps up to **12,800 years**, with every interval
+**376,800 years** use trial steps up to **12,800 years**, with every interval
 passing the same accuracy and conservation criteria. This segment uses
-**21.56 CPU minutes**, including timestep comparisons. The higher-gravity
+**62.67 CPU minutes**, including timestep comparisons. The higher-gravity
 atmosphere interval passes a separate **3200/1600 yr** comparison.
 
 The mixed-atmosphere grid has **42 columns** over **6000–6500 K** and
 **log g = 4.20–5.10**, with corresponding lower-density EOS coverage.
+The candidate extension through **log g = 5.25** passes source, depth and native checks; its finite stellar comparison is still running.
 The absolute hydrogen atmosphere below the published gravity range remains
 inferred. Microscopic species transport extends locally to **1 MK**, supported
 by ionization and finite-step checks; this is not neutral-fluid transport.
