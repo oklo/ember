@@ -45,11 +45,11 @@ a helium-3 burning pulse and a convective shell near the hydrogen--helium
 transition. Locally refined calculations retain the pulse, but its peak
 strength and timing depend on spatial resolution. A diagnostic late-phase
 calculation with 2115 mass points follows shell burning through
-$7.496\times10^5$ yr from the model before shell convection, reaching
-$T_{\rm eff}=6372$ K and declining nuclear power of
-$9.184\times10^{31}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature continues to rise. A separate calculation with finite
+$8.136\times10^5$ yr from the model before shell convection, reaching
+$T_{\rm eff}=6382$ K and declining nuclear power of
+$8.704\times10^{31}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature continues to rise. A separate calculation with finite
 convective transport from the onset follows a rise, decline and renewed
-burning through $1.265\times10^4$ yr. The peak strength and complete pulse history
+burning through $1.313\times10^4$ yr. The peak strength and complete pulse history
 remain uncertain.
 
 
@@ -736,8 +736,10 @@ resolution dependence remain to be established.
 
 The onset calculation includes finite composition transport throughout all
 convective layers. On a locally refined 1899-point grid it reaches
-$1.283\times10^4$ yr, $T_{\rm eff}=4729$ K and nuclear power
-$9.126\times10^{34}$ erg s$^{-1}$.
+$1.313\times10^4$ yr, $T_{\rm eff}=4741$ K and nuclear power
+$5.285\times10^{34}$ erg s$^{-1}$. Over the final 296.7 yr, nuclear power
+declines by 42.09\%, with deposited nuclear energy $6.334\times10^{44}$ erg.
+All 80 retained intervals pass the timestep and conservation checks.
 On the 1695-point grid, nuclear power rises to a local maximum of $3.719\times10^{35}$ erg s$^{-1}$
 near 1642 yr. By 1713 yr, nuclear power has declined by 81.64\%, and the
 highest interior temperature has fallen from 15.09 to 13.27 MK. Nuclear power
@@ -953,22 +955,22 @@ mean helium charge below 0.3549\% relative to full ionization. Fully ionized
 Coulomb transport remains an approximation here. A 400 yr comparison with
 400, 200 and 100 yr steps passes the same accuracy and conservation checks;
 the coarsest and finest deposited nuclear energies differ by 0.1203\%.
-The continued sequence reaches $7.496\times10^5$ yr, 6372 K and nuclear
-power $9.184\times10^{31}$ erg s$^{-1}$, supplying 35.16\% of the photon
-luminosity. Its radius is $1.491\times10^{10}$ cm and surface gravity
-$\log g=4.776$. The radius reaches a maximum near $2.444\times10^5$ yr,
+The continued sequence reaches $8.136\times10^5$ yr, 6382 K and nuclear
+power $8.704\times10^{31}$ erg s$^{-1}$, supplying 36.14\% of the photon
+luminosity. Its radius is $1.427\times10^{10}$ cm and surface gravity
+$\log g=4.814$. The radius reaches a maximum near $2.444\times10^5$ yr,
 and the surface luminosity near $2.544\times10^5$ yr. They subsequently decline
-by 34.95\% and 51.19\%, respectively, while effective temperature continues
+by 37.74\% and 54.99\%, respectively, while effective temperature continues
 to rise. The star is contracting, but a white-dwarf cooling sequence is not yet
 established. These extrema refer to saved models; their exact times are not
 interpolated.
 
 A 3200 yr calculation with 3200, 1600 and 800 yr steps passes the same
 accuracy and conservation checks; the coarsest and finest deposited energies
-differ by 0.2883\%. The trial-step limit is therefore 3200 yr for this slowly
-changing phase, with retained half steps at most 1600 yr. Each interval
-continues to undergo time refinement. The 170,400 yr segment ending at
-$7.496\times10^5$ yr uses 60.49 CPU minutes, including all timestep comparisons.
+differ by 0.2883\%. Over the reported late sequence, trial steps are at most
+3200 yr and retained half steps at most 1600 yr. Each interval undergoes
+time refinement. The 64,000 yr segment ending at $8.136\times10^5$ yr
+uses 30.08 CPU minutes, including all timestep comparisons.
 A separate 3200 yr comparison near $\log g=4.5$ passes the same checks,
 with deposited nuclear energies differing by 0.08760\%.
 
@@ -1001,6 +1003,12 @@ A matched 11,200 yr comparison through $\log g=4.65$ into the next
 higher-gravity cell changes effective temperature by 0.04879 K,
 surface luminosity by 0.002052\% and integrated nuclear heat by
 $4.254\times10^{-6}\%$, with identical final convective regions.
+A 25,600 yr comparison through $\log g=4.80$ changes effective temperature
+by 0.01540 K, surface luminosity by 0.0004895\%, and integrated nuclear
+heat by $2.359\times10^{-6}\%$, again with identical final convective regions.
+The preceding 38,400 yr use identical table values and are calculated once.
+These comparisons measure sensitivity to the reference construction in the
+visited cells; they do not establish the absolute atmosphere accuracy.
 
 Across the interval from $1.443\times10^4$ to $1.701\times10^4$ yr,
 $^3$He+$^3$He supplies approximately 97\% of the deposited nuclear power.
@@ -1057,12 +1065,13 @@ lower boundary, $\log g=5.50$, gives matching temperature 8341 K;
 a deeper calculation changes it by 0.003191\% and gas pressure by
 $-0.04062\%$. These source checks do not determine the absolute error
 of a hydrogen atmosphere inferred below the published gravity range.
-The late sequence uses a local grid of 30 solved atmosphere columns over
-$6000\leq T_{\rm eff}\leq6500$ K and $4.20\leq\log g\leq4.80$,
+The late sequence uses a local grid of 36 solved atmosphere columns over
+$6000\leq T_{\rm eff}\leq6500$ K and $4.20\leq\log g\leq4.95$,
 with the same three hydrogen fractions. Independent depth comparisons at
 $\log g=4.20$ change matching temperature by at most 0.01095\% and gas
-pressure by 0.09369\%. The FreeEOS tables cover the corresponding lower
-densities. Source states, thermodynamic
+pressure by 0.09369\%. At $\log g=4.95$ and 6500 K, deeper source
+calculations change matching temperature by at most 0.01373\% and gas pressure
+by 0.09599\%. The FreeEOS tables cover the corresponding lower densities. Source states, thermodynamic
 derivatives, pressure inversion and finite stellar steps are checked;
 existing overlapping table values are retained exactly. Sampled atmosphere derivatives and EOS pressure inversions
 pass their stated checks, including the higher-gravity cell entered during
