@@ -19,8 +19,8 @@ are measured from their common model preceding shell convection.
 
 | Calculation | Time | Effective temperature | Nuclear power |
 | --- | ---: | ---: | ---: |
-| Finite convective transport from flash onset, 1983 mass points | 69.76 thousand yr | 5024 K | 5.733e32 erg/s |
-| Later shell burning, alternative history, 2115 mass points | 8.086 million yr | 5699 K | 8.327e30 erg/s |
+| Finite convective transport from flash onset, 1983 mass points | 79.76 thousand yr | 5060 K | 4.634e32 erg/s |
+| Later shell burning, alternative history, 2115 mass points | 10.55 million yr | 5524 K | 6.655e30 erg/s |
 
 **These are alternative histories, not consecutive pieces of one track.**
 The later calculation includes different mixing treatments during its flash;
@@ -32,7 +32,7 @@ that delay does not establish independence from the envelope and fuel history.
 
 The onset calculation passes a local nuclear-power maximum of **3.719e35 erg/s**,
 followed by an **81.64%** decline and renewed burning. Nuclear power continues to decline through independently checked intervals. The largest single-cell power contribution
-is **2.918%**. A matched **100-year** comparison on **1927/1983 mass points**
+is **2.895%**. A matched **100-year** comparison on **1927/1983 mass points**
 changes nuclear heat by **8.261%** and final power by **15.24%**. Inserting
 mass points produces an initial mechanical readjustment with an integrated
 energy residual of **1.844e43 erg** in its first year. A controlled correction
@@ -42,40 +42,37 @@ budget. The full pulse's spatial accuracy, integrated energy and final
 shutdown remain unresolved.
 
 In the later calculation, radius and surface luminosity have declined
-**74.86%** and **95.34%** from their saved maxima. Temperature falls from
-**6399 K** by **699.8 K** over **6.999 million years**, while nuclear burning
-supplies **33.37%** of the current surface luminosity. This supports a turn
+**76.58%** and **96.43%** from their saved maxima. Temperature falls from
+**6399 K** by **875.0 K** over **9.462 million years**, while nuclear burning
+supplies **34.82%** of the current surface luminosity. This supports a turn
 toward cooling within that calculation.
 
-Completed native calls over the final **2.1 million years** account for **89.89 CPU minutes**;
-active elapsed time is **33.70 minutes**, including timestep comparisons. Trial intervals are
+Completed native calls over the final **2.464 million years** account for **83.39 CPU minutes**;
+active elapsed time is **29.56 minutes**, including timestep comparisons. Trial intervals are
 at most **51,200 years**; the accepted solution retains the two shorter steps,
 with unchanged accuracy and conservation criteria. The main track through
 **4.002 Tyr** accounts for **15.13 elapsed hours** and **36.31 CPU-hours**,
 excluding source construction and pauses between jobs. A complete full-physics
 cooling runtime is unmeasured.
 
-The cooler atmosphere table contains **18** solved mixture columns over
-**5500–6500 K** and **log g = 5.40–5.55**. A matched **800,000-year** comparison
-of two inferred hydrogen temperature responses changes the final temperature
-by **2.084 K** and nuclear heat by **0.002024%**, with identical final convection.
-Independent 5750 K source columns check interpolation of the composition
-response. These tests do not validate the absolute hydrogen atmosphere.
+The cooler atmosphere table contains **27** source columns over **5000–6000 K**
+and **log g = 5.40–5.80**. Independent **5250 K** and **5750 K** columns test
+interpolation between temperature and gravity nodes. At **5250 K**, the
+composition response agrees to **0.000007587%** in temperature and **0.1582%**
+in pressure.
 
-The gravity extension uses **18** mixture columns over **5500–6000 K** and
-**log g = 5.40–5.80**. A matched **2.1-million-year** comparison of two hydrogen
-references changes endpoint temperature by **2.292 K**, surface luminosity by
-**0.02832%** and nuclear heat by **0.002680%**, with identical final convection.
-Independent **5750 K**, **log g = 5.675** columns check the interpolated
-composition response to **0.001026%** in temperature and **0.03026%** in pressure.
-These local checks do not establish the absolute atmosphere prescription.
-
+A matched **2.1-million-year** cooling comparison over **5500–6000 K** changes
+endpoint temperature by **2.292 K** and nuclear heat by **0.002680%** between
+two hydrogen reference prescriptions. The detailed-onset comparison over
+**10,000 years** changes the endpoint by **4.187 K** and nuclear heat by
+**0.009269%**. Both comparisons retain identical final convective regions.
+These local tests do not establish the absolute hydrogen boundary condition.
 
 The paper compares Ember with MESA and with Laughlin, Bodenheimer and Adams
 (1997), including the requested opacity-map comparison. The separate
 [Fortran reconstruction](https://github.com/oklo/Henyey) seeks to reproduce
 LBA97's assumptions and methods. A new [late cooling figure](docs/reports/2026-09-20/late_cooling.pdf) shows the checked temperature turn and luminosity decline, with its small data table and plotting script included.
-The [standalone HR diagram of both flash histories](docs/figures/2026-09-20/ember_two_sequences_hr.png) shows the alternatives through 69.76 thousand years and 8.086 million years.
+The [standalone HR diagram of both flash histories](docs/figures/2026-09-20/ember_two_sequences_hr.png) shows the alternatives through 79.76 thousand years and 10.55 million years.
 Standalone flash diagrams remain separate from the draft.
 
 The public source does not yet contain all physics and numerical updates used
@@ -112,7 +109,6 @@ full-suite checks use the development machine's installed inputs.
 `-ffast-math` is deliberately *not* used: it licenses the compiler to assume no
 NaN or infinity, and a stellar model legitimately probes states where a table
 returns one. Those should surface, not be optimised away.
-
 
 ## Licence
 
