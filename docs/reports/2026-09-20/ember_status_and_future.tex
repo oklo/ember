@@ -45,11 +45,11 @@ a helium-3 burning pulse and a convective shell near the hydrogen--helium
 transition. Locally refined calculations retain the pulse, but its peak
 strength and timing depend on spatial resolution. A diagnostic late-phase
 calculation with 2115 mass points follows shell burning through
-$1.548\times10^6$ yr from the model before shell convection, reaching
-$T_{\rm eff}=6375$ K and declining nuclear power of
-$4.803\times10^{31}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 23.99 K. A separate calculation with finite
+$2.254\times10^6$ yr from the model before shell convection, reaching
+$T_{\rm eff}=6301$ K and declining nuclear power of
+$3.143\times10^{31}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 97.80 K. A separate calculation with finite
 convective transport from the onset follows a rise, decline and renewed
-burning through $1.406\times10^4$ yr. The peak strength and complete pulse history
+burning through $1.477\times10^4$ yr. The peak strength and complete pulse history
 remain uncertain.
 
 
@@ -736,12 +736,12 @@ resolution dependence remain to be established.
 
 The onset calculation includes finite composition transport throughout all
 convective layers. On a locally refined 1899-point grid it reaches
-$1.406\times10^4$ yr, $T_{\rm eff}=4756$ K and nuclear power
-$3.584\times10^{34}$ erg s$^{-1}$. Over the final 931.1 yr, nuclear power
-declines overall by 32.18\%, with deposited nuclear energy $1.172\times10^{45}$ erg.
-All 142 retained intervals pass the timestep and conservation checks.
-The power reaches a local minimum of $3.573\times10^{34}$ erg s$^{-1}$
-within this interval and is beginning to rise again at its endpoint.
+$1.477\times10^4$ yr, $T_{\rm eff}=4765$ K and nuclear power
+$4.177\times10^{34}$ erg s$^{-1}$. Over the final 707.6 yr, nuclear power
+increases by 16.54\%, with deposited nuclear energy $8.515\times10^{44}$ erg.
+All 99 retained intervals pass the timestep and conservation checks.
+This is renewed burning following a substantial decline, rather than the
+first rise of the instability.
 On the 1695-point grid, nuclear power rises to a local maximum of $3.719\times10^{35}$ erg s$^{-1}$
 near 1642 yr. By 1713 yr, nuclear power has declined by 81.64\%, and the
 highest interior temperature has fallen from 15.09 to 13.27 MK. Nuclear power
@@ -957,14 +957,15 @@ mean helium charge below 0.3549\% relative to full ionization. Fully ionized
 Coulomb transport remains an approximation here. A 400 yr comparison with
 400, 200 and 100 yr steps passes the same accuracy and conservation checks;
 the coarsest and finest deposited nuclear energies differ by 0.1203\%.
-The continued sequence reaches $1.548\times10^6$ yr, 6375 K and nuclear
-power $4.803\times10^{31}$ erg s$^{-1}$, supplying 37.89\% of the photon
-luminosity. Its radius is $1.038\times10^{10}$ cm and surface gravity
-$\log g=5.091$. The radius reaches a maximum near $2.444\times10^5$ yr,
+The continued sequence reaches $2.254\times10^6$ yr, 6301 K and nuclear
+power $3.143\times10^{31}$ erg s$^{-1}$, supplying 35.66\% of the photon
+luminosity. Its radius is $8.858\times10^9$ cm and surface gravity
+$\log g=5.228$. The radius reaches a maximum near $2.444\times10^5$ yr,
 and the surface luminosity near $2.544\times10^5$ yr. They subsequently decline
-by 54.72\% and 76.31\%, respectively. Effective temperature reaches a saved maximum of
-6399 K near $1.088\times10^6$ yr, then declines by 23.99 K over 460,000 yr.
-Seventy-three consecutive retained half steps have decreasing temperature.
+by 61.36\% and 83.53\%, respectively. Effective temperature reaches a saved maximum of
+6399 K near $1.088\times10^6$ yr, then declines by 97.80 K over $1.166\times10^6$ yr.
+One hundred seventy-three consecutive retained half steps have decreasing temperature.
+Figure~\ref{fig:late_cooling} shows the temperature turn and luminosity decline.
 During the first 83,200 yr of this decline, the nominal and alternative
 atmosphere references give decreases of 1.151 K and 1.032 K, respectively.
 The maximum lies below $\log g=4.95$, within the unchanged atmosphere interval.
@@ -973,13 +974,26 @@ model. The connection through the resolved flash and a long white-dwarf
 cooling sequence remain unverified. These extrema refer to saved models; their exact times are not
 interpolated.
 
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{late_cooling.pdf}
+\caption{The late shell-burning calculation on 2115 mass points.
+Left: an enlarged HR diagram around the effective-temperature maximum.
+The arrow follows increasing time. Right: photon luminosity and deposited
+nuclear power over the same interval. Time is measured from the model before
+shell convection. Temperature declines from 6399 K to 6301 K over
+$1.166\times10^6$ yr; nuclear burning supplies 35.66\% of the final surface luminosity.
+The contracting model has turned toward cooling. Its physical connection
+to the calculation resolving the flash from its onset remains unverified.}
+\label{fig:late_cooling}
+\end{figure}
+
 A 3200 yr calculation with 3200, 1600 and 800 yr steps passes the same
 accuracy and conservation checks; the coarsest and finest deposited energies
-differ by 0.2883\%. The final 376,800 yr use trial steps up to
-12,800 yr and retained half steps up to 6400 yr. Every interval passes the
-same timestep and conservation criteria. These intervals use 62.67 CPU minutes,
-including all timestep comparisons. The atmosphere grid extends through
-$\log g=5.10$.
+differ by 0.2883\%. The final 178,100 yr permit trial steps up to
+25,600 yr and retained half steps up to 12,800 yr. Every interval passes the
+same timestep and conservation criteria. This segment uses 18.40 CPU minutes
+and 8.567 minutes of active elapsed time, including all timestep comparisons.
+The atmosphere grid extends through $\log g=5.25$.
 A separate 3200 yr comparison near $\log g=4.5$ passes the same checks,
 with deposited nuclear energies differing by 0.08760\%.
 
@@ -1082,10 +1096,13 @@ of a hydrogen atmosphere inferred below the published gravity range.
 Three 6500 K sources at $\log g=5.25$, with independent deeper
 calculations, change matching temperature by at most 0.002704\% and gas
 pressure by 0.03352\%. The achieved bottom optical depths are 100.2--101.0
-for the sources and 223.4--225.6 for the deeper calculations. These extend
-the candidate boundary; the finite stellar comparison is still in progress.
-The late sequence uses a local grid of 42 solved atmosphere columns over
-$6000\leq T_{\rm eff}\leq6500$ K and $4.20\leq\log g\leq5.10$,
+for the sources and 223.4--225.6 for the deeper calculations.
+A matched 102,400 yr stellar comparison of two inferred hydrogen references
+changes final temperature by 0.07474 K, surface luminosity by 0.001740\%,
+and deposited nuclear energy by $2.291\times10^{-5}\%$, with identical final
+convective regions. Both temperature histories decline.
+The late sequence uses a local grid of 48 solved atmosphere columns over
+$6000\leq T_{\rm eff}\leq6500$ K and $4.20\leq\log g\leq5.25$,
 with the same three hydrogen fractions. Independent depth comparisons at
 $\log g=4.20$ change matching temperature by at most 0.01095\% and gas
 pressure by 0.09369\%. At $\log g=4.95$ and 6500 K, deeper source
