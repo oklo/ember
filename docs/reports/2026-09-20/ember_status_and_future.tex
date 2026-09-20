@@ -49,7 +49,7 @@ $3.454\times10^6$ yr from the model before shell convection, reaching
 $T_{\rm eff}=6157$ K and declining nuclear power of
 $1.948\times10^{31}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 242.0 K. A separate calculation with finite
 convective transport from the onset follows a rise, decline and renewed
-burning through $1.936\times10^4$ yr. These are alternative histories from a
+burning through $2.836\times10^4$ yr. These are alternative histories from a
 common model near the onset of shell convection, with different preceding
 mixing treatments; their endpoints cannot be joined into one verified track.
 Both use the supplied hydrogen atmosphere normalization. Whether the flash
@@ -644,6 +644,12 @@ near-pure-hydrogen source at 4600 K and $\log g=5.925$ gives a matching
 temperature 2.497\% lower and gas pressure 97.87\% higher than the
 supplied boundary at the same optical depth. Trace helium and the choice
 of matching depth therefore do not remove the measured discrepancy.
+At 4600 K and $\log g=5.9$, atmosphere calculations with the ML2
+convection prescription and mixing-length coefficients $\alpha=0.6$ and
+1.0 change the matching temperature by at most 0.04571\% and gas pressure
+by 0.2736\% relative to the adopted atmosphere convection prescription.
+This sampled variation is small compared with the discrepancy in the
+absolute hydrogen boundary; it does not exclude all convection prescriptions.
 An exploratory 1 Myr stellar comparison changes surface temperature by
 about 241 K. The supplied-boundary calculation exceeds the declared
 step-refinement error limit, so this comparison is not a converged measure
@@ -747,11 +753,11 @@ resolution dependence remain to be established.
 
 The onset calculation includes finite composition transport throughout all
 convective layers. On a locally refined 1983-point grid it reaches
-$1.936\times10^4$ yr, $T_{\rm eff}=4818$ K and nuclear power
-$1.069\times10^{34}$ erg s$^{-1}$. Nuclear power declines through the
-final 2000 yr, which deposit $9.335\times10^{44}$ erg in 173 intervals
+$2.836\times10^4$ yr, $T_{\rm eff}=4858$ K and nuclear power
+$3.361\times10^{33}$ erg s$^{-1}$. Nuclear power declines through the
+final 1000 yr, which deposit $1.105\times10^{44}$ erg in 13 intervals
 that pass the timestep, species and cell-energy checks. The largest
-single-cell contribution to nuclear power is 5.696\%.
+single-cell contribution to nuclear power is 3.676\%.
 This decline follows renewed burning, rather than the first rise of the
 instability. A matched 100 yr calculation on 1927 and 1983 mass points
 differs by 8.261\% in deposited nuclear energy and 15.24\% in final
@@ -1153,6 +1159,19 @@ stellar comparison in the new gravity interval changes final temperature
 by 0.09741 K, surface luminosity by 0.004235\%, and integrated nuclear heat
 by 0.01126\%, with identical final convective regions. The preceding
 126,800 yr are reused because both prescriptions are identical there.
+Six additional source columns at $\log g=5.55$, spanning the same
+6000--6500 K temperatures and hydrogen fractions, have independent deeper
+controls. At the matching depth their temperatures differ by at most
+0.002772\% and gas pressures by 0.01957\%.
+
+For the calculation with finite convective transport from flash onset,
+a matched 1000 yr comparison near $\log g=5.42$ changes the final surface
+temperature by $-5.918$ K and luminosity by $-0.4863\%$ when the alternative
+inferred hydrogen gravity response is used. Deposited nuclear energy differs
+by $-5.299\times10^{-5}\%$, with identical final convective regions.
+Both calculations pass the same timestep and conservation criteria.
+This local sensitivity test does not establish the absolute atmosphere
+or whether the initial atmosphere prescription affects ignition.
 The absolute hydrogen reference below $\log g=5.50$ remains inferred.
 From $\log g=5.25$ to 5.10, its gravity dependence follows the calculated
 $X=0.9955$ source response, anchored at the matching state at 5.25.

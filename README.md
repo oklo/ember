@@ -19,7 +19,7 @@ are measured from their common model preceding shell convection.
 
 | Calculation | Time | Effective temperature | Nuclear power |
 | --- | ---: | ---: | ---: |
-| Finite convective transport from flash onset, 1983 mass points | 19.36 thousand yr | 4818 K | 1.069e34 erg/s |
+| Finite convective transport from flash onset, 1983 mass points | 28.36 thousand yr | 4858 K | 3.361e33 erg/s |
 | Later shell burning, alternative history, 2115 mass points | 3.454 million yr | 6157 K | 1.948e31 erg/s |
 
 **These are alternative histories, not consecutive pieces of one track.**
@@ -32,9 +32,9 @@ that delay does not establish independence from the envelope and fuel history.
 
 The onset calculation passes a local nuclear-power maximum of **3.719e35 erg/s**,
 followed by an **81.64%** decline and renewed burning. Nuclear power declines
-through the final **2000 years**, which release **9.335e44 erg** through **173**
+through the final **1000 years**, which release **1.105e44 erg** through **13**
 independently checked intervals. The largest single-cell power contribution
-is **5.696%**. A matched **100-year** comparison on **1927/1983 mass points**
+is **3.676%**. A matched **100-year** comparison on **1927/1983 mass points**
 changes nuclear heat by **8.261%** and final power by **15.24%**. Inserting
 mass points produces an initial mechanical readjustment with an integrated
 energy residual of **1.844e43 erg** in its first year. A controlled correction
@@ -70,7 +70,7 @@ The paper compares Ember with MESA and with Laughlin, Bodenheimer and Adams
 (1997), including the requested opacity-map comparison. The separate
 [Fortran reconstruction](https://github.com/oklo/Henyey) seeks to reproduce
 LBA97's assumptions and methods. A new [late cooling figure](docs/reports/2026-09-20/late_cooling.pdf) shows the checked temperature turn and luminosity decline, with its small data table and plotting script included.
-The [standalone HR diagram of both flash histories](docs/figures/2026-09-20/ember_two_sequences_hr.png) shows the alternatives through 19.36 thousand years and 3.454 million years.
+The [standalone HR diagram of both flash histories](docs/figures/2026-09-20/ember_two_sequences_hr.png) shows the alternatives through 28.36 thousand years and 3.454 million years.
 Standalone flash diagrams remain separate from the draft.
 
 The public source does not yet contain all physics and numerical updates used
@@ -83,6 +83,8 @@ Follow an initially **0.1-solar-mass** star through hydrogen exhaustion and heli
 white-dwarf cooling to **100 K**, then examine later evolution under explicit
 environmental and nucleon-decay assumptions. The complete cooling trajectory
 has not yet been calculated.
+
+A matched **1000-year** atmosphere comparison near **log g = 5.42** changes the final effective temperature by **5.918 K** and integrated nuclear heat by **0.00005299%**, with identical final convective regions. Both hydrogen references remain inferred; ignition with a different absolute atmosphere is untested.
 
 ## Building
 
