@@ -36,8 +36,8 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2115-point** late sequence reaches **539.2 thousand years**, **6312 K**
-and nuclear power **1.091e+32 erg/s**, supplying **30.69%** of photon luminosity.
+The **2115-point** late sequence reaches **749.6 thousand years**, **6372 K**
+and nuclear power **9.184e31 erg/s**, supplying **35.16%** of photon luminosity.
 A matched **2000-year** mass-grid comparison changes deposited nuclear energy
 by **0.5220%** and endpoint power by **0.5687%**. Half the burning power
 occupies **39** cells instead of **12**. This supports the later shell burning;
@@ -50,24 +50,27 @@ These small differences do not establish absolute atmosphere accuracy.
 
 Radius and surface luminosity have passed maxima near **244.4 thousand years**
 and **254.4 thousand years**, respectively. They have since declined by
-**22.66%** and **33.55%**, while effective temperature still rises.
+**34.95%** and **51.19%**, while effective temperature still rises.
 This establishes contraction in the diagnostic history, without yet establishing
 white-dwarf cooling or its connection to the resolved onset.
 
 A **3200/1600/800-year** comparison supports larger late time steps with unchanged
-accuracy and conservation checks. The final **144,000-year** continuation segment
-uses **56.36 CPU minutes**. A separate **3200-year** comparison near **log g = 4.5** passes the same criteria, with integrated nuclear
+accuracy and conservation checks. The final **170,400-year** continuation segment
+uses **60.49 CPU minutes**. A separate **3200-year** comparison near **log g = 4.5** passes the same criteria, with integrated nuclear
 energies differing by **0.08760%**.
 A newly radiative envelope layer is included by extending microscopic species
 transport to **1 MK**, supported by source ionization, actual exchange and
 finite-step checks. This local approximation does not describe neutral-fluid
 transport in a cold remnant.
 
-The separate onset calculation reaches **12.64 thousand years**, **4551 K** and nuclear
-power **1.578e35 erg/s**. Power reaches a local maximum of **3.719e35 erg/s**
-near **1642 years**, followed by further rises and declines. Burning is
-increasing again at the current endpoint; the first local maximum does not
-mark completion of the flash.
+The separate onset calculation reaches **12.65 thousand years**, **4721 K** and nuclear
+power **1.571e35 erg/s**. Power reaches a local maximum of **3.719e35 erg/s**
+near **1642 years**, followed by further rises and declines. Burning remains active; the first local maximum does not mark completion of
+the flash. A checked **0.6656-year** convective adjustment connects two envelope
+regions, changing surface hydrogen from **X = 0.9984** to **X = 0.8085** and
+helium-3 from **X3 = 0.001368** to **X3 = 0.007264**. Two-step/four-step paths
+pass the original checks; their nuclear heat differs by **0.01172%**. The
+internal timing of the rapid adjustment is unresolved.
 A **12.26-year** convection merger passes a **16/32-step** comparison, with
 integrated nuclear energies differing by **0.02667%**. A subsequent **2.587-year**
 adjustment passes **4/8 steps**, differing by **0.02665%**. These support
@@ -83,8 +86,8 @@ bounding the shared atmosphere uncertainty.
 Thirty solved hydrogen–helium atmosphere columns cover **4500–5500 K**,
 **X = 0.78–0.9955** and **log g = 5.55–5.80**. Independent calculations check
 interpolation, the helium-isotope approximation and lower-boundary sensitivity.
-The later sequence uses a local grid of **24** solved columns covering
-**6000–6500 K** and **log g = 4.20–4.65**, with independently checked
+The later sequence uses a local grid of **30** solved columns covering
+**6000–6500 K** and **log g = 4.20–4.80**, with independently checked
 lower-density EOS coverage. The absolute hydrogen reference
 below **log g = 5.5** remains an explicitly inferred continuation. A matched
 **10,000-year** calculation testing the extension below **log g = 5.25**
