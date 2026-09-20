@@ -33,14 +33,16 @@ def plot(data, output):
                 arrowprops=dict(arrowstyle='-|>', lw=.8, color='black', mutation_scale=10))
     hr.plot(temperature[-1], np.log10(light[-1]), 'o', ms=4, color=orange)
     hr.annotate(f'{t[-1]:.4g} Myr\n{temperature[-1]:.4g} K',
-                xy=(temperature[-1], np.log10(light[-1])), xytext=(6382, -1.58),
+                xy=(temperature[-1], np.log10(light[-1])),
+                xytext=(6382, min(-1.58, np.log10(light[-1])+.025)),
                 fontsize=9, ha='left', va='center',
                 arrowprops=dict(arrowstyle='-|>', lw=.8, color='black', mutation_scale=10))
     i, j = len(rows)*2//3, len(rows)*2//3+4
     hr.annotate('', xy=(temperature[j], np.log10(light[j])),
                 xytext=(temperature[i], np.log10(light[i])),
                 arrowprops=dict(arrowstyle='-|>', color=orange, lw=1.2, mutation_scale=12))
-    hr.set(xlim=(6410, min(6305, temperature[-1]-16)), ylim=(-1.69, -1.28),
+    hr.set(xlim=(6410, min(6305, temperature[-1]-16)),
+           ylim=(min(-1.69, np.log10(light[-1])-.045), -1.28),
            xlabel='Effective surface temperature (K)', ylabel=r'$\log_{10}(L/L_\odot)$')
     time.plot(t, light, color=orange, lw=1.8, label='Surface luminosity')
     time.plot(t, nuclear, color='0.3', lw=1.5, ls='--', label='Nuclear power')

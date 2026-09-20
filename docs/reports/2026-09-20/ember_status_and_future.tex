@@ -45,11 +45,16 @@ a helium-3 burning pulse and a convective shell near the hydrogen--helium
 transition. Locally refined calculations retain the pulse, but its peak
 strength and timing depend on spatial resolution. A diagnostic late-phase
 calculation with 2115 mass points follows shell burning through
-$2.254\times10^6$ yr from the model before shell convection, reaching
-$T_{\rm eff}=6301$ K and declining nuclear power of
-$3.143\times10^{31}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 97.80 K. A separate calculation with finite
+$3.054\times10^6$ yr from the model before shell convection, reaching
+$T_{\rm eff}=6205$ K and declining nuclear power of
+$2.231\times10^{31}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 193.7 K. A separate calculation with finite
 convective transport from the onset follows a rise, decline and renewed
-burning through $1.477\times10^4$ yr. The peak strength and complete pulse history
+burning through $1.685\times10^4$ yr. These are alternative histories from a
+common model near the onset of shell convection, with different preceding
+mixing treatments; their endpoints cannot be joined into one verified track.
+Both use the supplied hydrogen atmosphere normalization. Whether the flash
+occurs under an alternative absolute atmosphere prescription remains untested.
+The peak strength and complete pulse history
 remain uncertain.
 
 
@@ -635,8 +640,10 @@ $\log g=5.9$ and the same optical depth, this table gives $2.594\%$
 higher matching temperature and $48.69\%$ lower gas pressure than the
 independently converged atmosphere. These are differences between
 prescriptions; their detailed cause has not been isolated.
-A matched 1 Myr stellar comparison changes surface temperature by about
-241 K. Figure~\ref{fig:wd_response} follows the response for 0.7546 Gyr.
+An exploratory 1 Myr stellar comparison changes surface temperature by
+about 241 K. The supplied-boundary calculation exceeds the declared
+step-refinement error limit, so this comparison is not a converged measure
+of the long-term response. Figure~\ref{fig:wd_response} follows the response for 0.7546 Gyr.
 Effective temperature first falls to 4362 K and is 4632 K at the latest
 model; the radius grows by 36.02\%. A helium-3 burning pulse increases
 the nuclear-to-photon luminosity ratio to 2366 and produces a convective
@@ -736,10 +743,12 @@ resolution dependence remain to be established.
 
 The onset calculation includes finite composition transport throughout all
 convective layers. On a locally refined 1899-point grid it reaches
-$1.477\times10^4$ yr, $T_{\rm eff}=4765$ K and nuclear power
-$4.177\times10^{34}$ erg s$^{-1}$. Over the final 707.6 yr, nuclear power
-increases by 16.54\%, with deposited nuclear energy $8.515\times10^{44}$ erg.
-All 99 retained intervals pass the timestep and conservation checks.
+$1.685\times10^4$ yr, $T_{\rm eff}=4794$ K and nuclear power
+$4.061\times10^{34}$ erg s$^{-1}$. The final 535.7 yr deposit
+$5.878\times10^{44}$ erg through 91 intervals that pass the timestep and
+conservation checks. At this endpoint, one mass cell supplies 20.03\% of
+nuclear power at $m/M=0.9383$, requiring further local refinement before
+continuation.
 This is renewed burning following a substantial decline, rather than the
 first rise of the instability.
 On the 1695-point grid, nuclear power rises to a local maximum of $3.719\times10^{35}$ erg s$^{-1}$
@@ -794,6 +803,12 @@ calculation on the finer mesh while retaining several-percent uncertainty
 in the burning history. It does not establish spatial convergence of the
 pulse maximum or its duration.
 
+A second history starts from the same model near shell-convection onset.
+It initially mixes the cooler convective layers instantaneously, then uses
+finite transport throughout the connected envelope. Its accumulated thermal
+and composition history therefore differs from the calculation that applies
+finite transport from the onset. Local checks of its later evolution do not
+establish that it is the outcome of the latter calculation.
 The envelope becomes helium enriched when shell convection connects to
 surface convection. With finite convective transport throughout the connected
 envelope, the 1695-point calculation reaches $1.345\times10^4$ yr, with
@@ -957,14 +972,14 @@ mean helium charge below 0.3549\% relative to full ionization. Fully ionized
 Coulomb transport remains an approximation here. A 400 yr comparison with
 400, 200 and 100 yr steps passes the same accuracy and conservation checks;
 the coarsest and finest deposited nuclear energies differ by 0.1203\%.
-The continued sequence reaches $2.254\times10^6$ yr, 6301 K and nuclear
-power $3.143\times10^{31}$ erg s$^{-1}$, supplying 35.66\% of the photon
-luminosity. Its radius is $8.858\times10^9$ cm and surface gravity
-$\log g=5.228$. The radius reaches a maximum near $2.444\times10^5$ yr,
+The continued sequence reaches $3.054\times10^6$ yr, 6205 K and nuclear
+power $2.231\times10^{31}$ erg s$^{-1}$, supplying 33.92\% of the photon
+luminosity. Its radius is $7.890\times10^9$ cm and surface gravity
+$\log g=5.329$. The radius reaches a maximum near $2.444\times10^5$ yr,
 and the surface luminosity near $2.544\times10^5$ yr. They subsequently decline
-by 61.36\% and 83.53\%, respectively. Effective temperature reaches a saved maximum of
-6399 K near $1.088\times10^6$ yr, then declines by 97.80 K over $1.166\times10^6$ yr.
-One hundred seventy-three consecutive retained half steps have decreasing temperature.
+by 65.58\% and 87.71\%, respectively. Effective temperature reaches a saved maximum of
+6399 K near $1.088\times10^6$ yr, then declines by 193.7 K over $1.966\times10^6$ yr.
+Two hundred forty-five consecutive retained half steps have decreasing temperature.
 Figure~\ref{fig:late_cooling} shows the temperature turn and luminosity decline.
 During the first 83,200 yr of this decline, the nominal and alternative
 atmosphere references give decreases of 1.151 K and 1.032 K, respectively.
@@ -980,8 +995,8 @@ interpolated.
 Left: an enlarged HR diagram around the effective-temperature maximum.
 The arrow follows increasing time. Right: photon luminosity and deposited
 nuclear power over the same interval. Time is measured from the model before
-shell convection. Temperature declines from 6399 K to 6301 K over
-$1.166\times10^6$ yr; nuclear burning supplies 35.66\% of the final surface luminosity.
+shell convection. Temperature declines from 6399 K to 6205 K over
+$1.966\times10^6$ yr; nuclear burning supplies 33.92\% of the final surface luminosity.
 The contracting model has turned toward cooling. Its physical connection
 to the calculation resolving the flash from its onset remains unverified.}
 \label{fig:late_cooling}
@@ -989,11 +1004,11 @@ to the calculation resolving the flash from its onset remains unverified.}
 
 A 3200 yr calculation with 3200, 1600 and 800 yr steps passes the same
 accuracy and conservation checks; the coarsest and finest deposited energies
-differ by 0.2883\%. The final 178,100 yr permit trial steps up to
+differ by 0.2883\%. The final 400,000 yr permit trial steps up to
 25,600 yr and retained half steps up to 12,800 yr. Every interval passes the
-same timestep and conservation criteria. This segment uses 18.40 CPU minutes
-and 8.567 minutes of active elapsed time, including all timestep comparisons.
-The atmosphere grid extends through $\log g=5.25$.
+same timestep and conservation criteria. This segment uses 17.69 CPU minutes
+and 6.257 minutes of active elapsed time, including all timestep comparisons.
+The atmosphere grid extends through $\log g=5.40$.
 A separate 3200 yr comparison near $\log g=4.5$ passes the same checks,
 with deposited nuclear energies differing by 0.08760\%.
 
@@ -1101,8 +1116,8 @@ A matched 102,400 yr stellar comparison of two inferred hydrogen references
 changes final temperature by 0.07474 K, surface luminosity by 0.001740\%,
 and deposited nuclear energy by $2.291\times10^{-5}\%$, with identical final
 convective regions. Both temperature histories decline.
-The late sequence uses a local grid of 48 solved atmosphere columns over
-$6000\leq T_{\rm eff}\leq6500$ K and $4.20\leq\log g\leq5.25$,
+The late sequence uses a local grid of 54 solved atmosphere columns over
+$6000\leq T_{\rm eff}\leq6500$ K and $4.20\leq\log g\leq5.40$,
 with the same three hydrogen fractions. Independent depth comparisons at
 $\log g=4.20$ change matching temperature by at most 0.01095\% and gas
 pressure by 0.09369\%. At $\log g=4.95$ and 6500 K, deeper source
@@ -1113,6 +1128,12 @@ existing overlapping table values are retained exactly. Sampled atmosphere deriv
 pass their stated checks, including the higher-gravity cell entered during
 contraction. These establish local numerical consistency,
 not absolute atmosphere accuracy throughout the source rectangle.
+Six source/depth pairs at $\log g=5.40$ change matching temperature by at
+most 0.004738\% and gas pressure by 0.03638\%. A matched 273,200 yr
+stellar comparison in the new gravity interval changes final temperature
+by 0.09741 K, surface luminosity by 0.004235\%, and integrated nuclear heat
+by 0.01126\%, with identical final convective regions. The preceding
+126,800 yr are reused because both prescriptions are identical there.
 The absolute hydrogen reference below $\log g=5.50$ remains inferred.
 From $\log g=5.25$ to 5.10, its gravity dependence follows the calculated
 $X=0.9955$ source response, anchored at the matching state at 5.25.
@@ -1177,7 +1198,14 @@ a substantial change of boundary prescription. A comparison instead applies
 the calculated mixed-to-hydrogen-rich temperature and pressure ratios to the
 hydrogen boundary. This retains its normalization, but requires testing whether
 the composition response transfers between prescriptions. The atmosphere
-dependence of the pulse therefore remains unresolved.
+dependence of the pulse therefore remains unresolved. Both flash histories
+inherit this hydrogen normalization. The pulse develops about 0.7546 Gyr
+after the boundary change; it is distinct from the initial surface
+readjustment, but that delay does not establish independence from the
+subsequent envelope and fuel history. A comparison beginning before those
+histories diverge is required to test whether ignition survives the
+alternative atmosphere prescription. Comparisons after ignition do not
+answer that question.
 
 A related physical example occurs in slowly accreting white dwarfs: helium-3
 can accumulate through incomplete proton--proton burning and ignite a convective

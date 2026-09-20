@@ -15,48 +15,59 @@ Hydrogen burning continues outside the depleted core. A continuation with a
 white-dwarf atmosphere develops a helium-3 shell flash.
 
 Two calculations examine the flash and subsequent evolution. Times below
-are measured from the model preceding shell convection.
+are measured from their common model preceding shell convection.
 
 | Calculation | Time | Effective temperature | Nuclear power |
 | --- | ---: | ---: | ---: |
-| Flash resolved from its onset, 1899 mass points | 14.77 thousand yr | 4765 K | 4.177e34 erg/s |
-| Later shell burning, separate history, 2115 mass points | 2.254 million yr | 6301 K | 3.143e31 erg/s |
+| Finite convective transport from flash onset, 1899 mass points | 16.85 thousand yr | 4794 K | 4.061e34 erg/s |
+| Later shell burning, alternative history, 2115 mass points | 3.054 million yr | 6205 K | 2.231e31 erg/s |
 
-**These calculations do not yet form one verified continuous history.**
+**These are alternative histories, not consecutive pieces of one track.**
+The later calculation includes different mixing treatments during its flash;
+its subsequent accuracy checks do not validate that entire earlier evolution.
+Both calculations use the supplied hydrogen atmosphere as their reference.
+Whether the flash occurs under a different atmosphere prescription remains
+untested. The flash appears about **0.7546 Gyr** after the atmosphere change;
+that delay does not establish independence from the envelope and fuel history.
+
 The onset calculation passes a local nuclear-power maximum of **3.719e35 erg/s**,
-followed by an **81.64%** decline and renewed burning. Over its final
-**707.6 years**, power rises by **16.54%**, releasing **8.515e44 erg**. A matched **100-year** comparison
+followed by an **81.64%** decline and renewed burning. Its final **535.7 years**
+release **5.878e44 erg** through **91** independently checked intervals.
+At the endpoint, one mass cell supplies **20.03%** of nuclear power; continued
+evolution requires local grid refinement. A matched **100-year** comparison
 on **1763/1899 mass points** changes nuclear heat by **4.026%** and endpoint
 power by **5.589%**. The full pulse's spatial accuracy, largest peak and final
 shutdown remain unresolved.
 
 In the later calculation, radius and surface luminosity have declined
-**61.36%** and **83.53%** from their saved maxima. Temperature falls from
-**6399 K** by **97.80 K** over **1.166 million years**, while nuclear burning supplies
-**35.66%** of the current surface luminosity. This supports a turn toward
-cooling in that calculation; its connection through the flash remains unverified.
+**65.58%** and **87.71%** from their saved maxima. Temperature falls from
+**6399 K** by **193.7 K** over **1.966 million years**, while nuclear burning
+supplies **33.92%** of the current surface luminosity. This supports a turn
+toward cooling within that calculation.
 
-The final **178,100 years** of the later calculation use **18.40 CPU minutes**,
-and **8.567 minutes of active elapsed time**, including timestep comparisons.
-Trial intervals in that completed segment are at most **25,600 years**;
-the accepted solution retains the two shorter steps, with unchanged accuracy
-and conservation criteria. The main track through **4.002 Tyr** accounts for
-**15.13 elapsed hours** and **36.31 CPU-hours**, excluding source construction
-and pauses between jobs. A complete full-physics cooling runtime is unmeasured.
+The final **400,000 years** use **17.69 CPU minutes** and **6.257 minutes of
+active elapsed time**, including timestep comparisons. Trial intervals are
+at most **25,600 years**; the accepted solution retains the two shorter steps,
+with unchanged accuracy and conservation criteria. The main track through
+**4.002 Tyr** accounts for **15.13 elapsed hours** and **36.31 CPU-hours**,
+excluding source construction and pauses between jobs. A complete full-physics
+cooling runtime is unmeasured.
 
-The selected late atmosphere grid contains **48** solved mixture columns over
-**6000–6500 K** and **log g = 4.20–5.25**. It passes source, independent depth,
-native and matched stellar checks. A **102,400-year** comparison of two inferred
-hydrogen references changes temperature by **0.07474 K**, surface luminosity
-by **0.001740%**, and nuclear heat by **2.291e-5%**, with identical final convection.
-Both histories decline in temperature. This tests local sensitivity; the absolute
-hydrogen reference below the published gravity range remains inferred.
+The selected late atmosphere grid contains **54** solved mixture columns over
+**6000–6500 K** and **log g = 4.20–5.40**. It passes source, independent depth,
+native and matched stellar checks. A **273,200-year** comparison of two inferred
+hydrogen references changes temperature by **0.09741 K**, surface luminosity
+by **0.004235%**, and nuclear heat by **0.01126%**, with identical final convection.
+A shared **126,800-year** prefix is reused. This tests local sensitivity after
+the flash, not whether the atmosphere permits ignition in the first place.
+The absolute hydrogen reference below the published gravity range remains inferred.
 
 The paper compares Ember with MESA and with Laughlin, Bodenheimer and Adams
 (1997), including the requested opacity-map comparison. The separate
 [Fortran reconstruction](https://github.com/oklo/Henyey) seeks to reproduce
 LBA97's assumptions and methods. A new [late cooling figure](docs/reports/2026-09-20/late_cooling.pdf) shows the checked temperature turn and luminosity decline, with its small data table and plotting script included.
-The standalone flash diagrams remain separate from the draft.
+The [standalone HR diagram of both flash histories](docs/figures/2026-09-20/ember_two_sequences_hr.png) shows the alternatives through 16.31 thousand years and 2.654 million years.
+Standalone flash diagrams remain separate from the draft.
 
 The public source does not yet contain all physics and numerical updates used
 for these continuations. The paper and README describe the calculations ahead
