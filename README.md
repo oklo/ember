@@ -36,8 +36,8 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2115-point** late sequence reaches **395.2 thousand years**, **6241 K**
-and nuclear power **1.243e+32 erg/s**, supplying **27.5%** of photon luminosity.
+The **2115-point** late sequence reaches **539.2 thousand years**, **6312 K**
+and nuclear power **1.091e+32 erg/s**, supplying **30.69%** of photon luminosity.
 A matched **2000-year** mass-grid comparison changes deposited nuclear energy
 by **0.5220%** and endpoint power by **0.5687%**. Half the burning power
 occupies **39** cells instead of **12**. This supports the later shell burning;
@@ -50,14 +50,13 @@ These small differences do not establish absolute atmosphere accuracy.
 
 Radius and surface luminosity have passed maxima near **244.4 thousand years**
 and **254.4 thousand years**, respectively. They have since declined by
-**10.79%** and **15.5%**, while effective temperature still rises.
+**22.66%** and **33.55%**, while effective temperature still rises.
 This establishes contraction in the diagnostic history, without yet establishing
 white-dwarf cooling or its connection to the resolved onset.
 
 A **3200/1600/800-year** comparison supports larger late time steps with unchanged
-accuracy and conservation checks. The final **60,800-year** continuation segment
-uses **16.15 CPU minutes**. A further **3200-year** interval through restored
-higher-gravity coverage passes the same criteria, with integrated nuclear
+accuracy and conservation checks. The final **144,000-year** continuation segment
+uses **56.36 CPU minutes**. A separate **3200-year** comparison near **log g = 4.5** passes the same criteria, with integrated nuclear
 energies differing by **0.08760%**.
 A newly radiative envelope layer is included by extending microscopic species
 transport to **1 MK**, supported by source ionization, actual exchange and
