@@ -36,8 +36,8 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2115-point** late sequence reaches **146.4 thousand years**, **6002 K**
-and nuclear power **2.451e32 erg/s**, supplying **86.22%** of photon luminosity.
+The **2115-point** late sequence reaches **171.2 thousand years**, **6079 K**
+and nuclear power **2.085e32 erg/s**, supplying **51.93%** of photon luminosity.
 A matched **2000-year** mass-grid comparison changes deposited nuclear energy
 by **0.5220%** and endpoint power by **0.5687%**. Half the burning power
 occupies **39** cells instead of **12**. This supports the later shell burning;
@@ -49,16 +49,18 @@ by **0.009460%** and nuclear heat by **2.197e-6%**, with the same convection.
 The nominal segment takes **8.605 CPU minutes**, including time-step checks.
 
 An **800/400/200-year** comparison supports larger time steps with unchanged
-accuracy and conservation checks. The **17,200-year** segment takes
+accuracy and conservation checks. The final **16,800-year** segment uses
+**22.69 CPU minutes**. A **17,200-year** segment takes
 **31.21 CPU minutes**, including timestep comparisons and rejected trials.
 A newly radiative envelope layer is included by extending microscopic species
 transport to **1.500 MK**, supported by source ionization, actual exchange and
 finite-step checks. This local approximation does not describe neutral-fluid
 transport in a cold remnant.
 
-The separate onset calculation reaches **2736 years**, **4604 K** and nuclear
-power **8.150e33 erg/s**. Power reaches a local maximum of **3.719e35 erg/s**
-near **1642 years**, followed by decline, renewed burning and another decline.
+The separate onset calculation reaches **6736 years**, **4594 K** and nuclear
+power **8.855e33 erg/s**. Power reaches a local maximum of **3.719e35 erg/s**
+near **1642 years**, followed by further rises and declines. Burning is
+increasing at the current endpoint.
 A **1.147-year** convective adjustment passes a **2/4-step** comparison, with
 nuclear energy differing by **0.1756%** and the same final convection. A complete, spatially
 converged pulse and white-dwarf cooling sequence remain unresolved.

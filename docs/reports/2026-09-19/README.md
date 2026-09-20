@@ -2,17 +2,18 @@
 
 [Read the PDF](ember_status_and_future.pdf).
 
-The diagnostic late helium-3 calculation reaches **146.4 thousand years**,
-**6002 K** and nuclear power **2.451e32 erg/s** on **2115** mass points.
-Nuclear burning supplies **86.22%** of photon luminosity. A matched
+The diagnostic late helium-3 calculation reaches **171.2 thousand years**,
+**6079 K** and nuclear power **2.085e32 erg/s** on **2115** mass points.
+Nuclear burning supplies **51.93%** of photon luminosity. A matched
 **2000 yr** comparison of two mass grids changes deposited nuclear energy by
 **0.5220%**. A checked **800 yr** trial-step limit speeds the smooth later
 sequence; the **17,200 yr** segment uses **31.21 CPU minutes**, including
-its timestep comparisons and rejected trials.
+its timestep comparisons and rejected trials. The final **16,800 yr**
+use **22.69 CPU minutes**, with unchanged accuracy checks.
 
-The calculation resolving the onset reaches **2736 yr** and **4604 K**.
+The calculation resolving the onset reaches **6736 yr** and **4594 K**.
 It shows a rise, decline and renewed burning. Its latest **1.147 yr**
-convective adjustment passes an **2/4-step** comparison, with deposited
+convective adjustment passes a **2/4-step** comparison, with deposited
 energy differing by **0.1756%**. The full pulse's peak and spatial
 convergence remain uncertain.
 

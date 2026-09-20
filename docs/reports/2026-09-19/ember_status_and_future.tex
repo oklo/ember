@@ -45,11 +45,11 @@ a helium-3 burning pulse and a convective shell near the hydrogen--helium
 transition. Locally refined calculations retain the pulse, but its peak
 strength and timing depend on spatial resolution. A diagnostic late-phase
 calculation with 2115 mass points follows shell burning through
-$1.464\times10^5$ yr from the model before shell convection, reaching
-$T_{\rm eff}=6002$ K and declining nuclear power of
-$2.451\times10^{32}$ erg s$^{-1}$. A separate calculation with finite
+$1.712\times10^5$ yr from the model before shell convection, reaching
+$T_{\rm eff}=6079$ K and declining nuclear power of
+$2.085\times10^{32}$ erg s$^{-1}$. A separate calculation with finite
 convective transport from the onset follows a rise, decline and renewed
-burning through 2736 yr. The peak strength and complete pulse history
+burning through 6736 yr. The peak strength and complete pulse history
 remain uncertain.
 
 
@@ -560,11 +560,12 @@ extension without establishing an uncertainty for the full evolution.
 The shallowest cold atmosphere ends at Rosseland optical depth 168.3;
 its sensitivity to a deeper lower boundary is not yet directly bounded.
 
-The electron-pair collision integrals cover degeneracy parameter
-$\eta=-2$--64 and screening parameter $b=0.1$--150. Independent source
-interpolation checks have a maximum relative difference of $0.01195\%$;
-finer numerical integration changes the source response by at most
-$0.08845\%$. The ion-scattering domain and conservation checks remain enforced.
+For the late shell-burning calculation, electron-pair collision integrals
+cover degeneracy parameter $\eta=-6$--64 and screening parameter
+$b=0.1$--2400. Independent interpolation and numerical-integration checks
+limit the tested response differences to $0.3466\%$; changing from eight
+to ten energy modes changes the response by at most $0.1294\%$.
+The ion-scattering domain and conservation checks remain enforced.
 
 For hydrogen-dominated envelopes, the atmospheric boundary uses 72
 solutions at $Z=0$, $10^{-8}$ and $10^{-6}$, with helium mass fraction
@@ -734,12 +735,13 @@ location of the strongest burning. The onset of the connection and its
 resolution dependence remain to be established.
 
 An onset calculation on the 1695-point grid, with finite composition
-transport throughout all convective layers, reaches 2736 yr,
-$T_{\rm eff}=4604$ K and nuclear power $8.150\times10^{33}$ erg s$^{-1}$.
+transport throughout all convective layers, reaches 6736 yr,
+$T_{\rm eff}=4594$ K and nuclear power $8.855\times10^{33}$ erg s$^{-1}$.
 Nuclear power rises to a local maximum of $3.719\times10^{35}$ erg s$^{-1}$
 near 1642 yr. By 1713 yr, nuclear power has declined by 81.64\%, and the
 highest interior temperature has fallen from 15.09 to 13.27 MK. Nuclear power
-subsequently rises again and then declines to the current endpoint.
+subsequently passes through further rises and declines; burning is increasing
+at the current endpoint.
 The first local maximum therefore does not mark the completion of the pulse,
 and its amplitude has not been established as spatially converged.
 The calculation retains the original pointwise timestep criteria and independent
@@ -920,9 +922,13 @@ mean helium charge below 0.3549\% relative to full ionization. Fully ionized
 Coulomb transport remains an approximation here. A 400 yr comparison with
 400, 200 and 100 yr steps passes the same accuracy and conservation checks;
 the coarsest and finest deposited nuclear energies differ by 0.1203\%.
-The continued sequence reaches $1.464\times10^5$ yr, 6002 K and nuclear
-power $2.451\times10^{32}$ erg s$^{-1}$, supplying 86.22\% of the photon
-luminosity. A matched 3000 yr comparison of two inferred hydrogen references
+The continued sequence reaches $1.712\times10^5$ yr, 6079 K and nuclear
+power $2.085\times10^{32}$ erg s$^{-1}$, supplying 51.93\% of the photon
+luminosity. Its radius is $2.031\times10^{10}$ cm and surface gravity
+$\log g=4.507$. The final 16,800 yr use 22.69 CPU minutes, including
+all timestep comparisons, with the original conservation and accuracy checks.
+A matched 3000 yr comparison of two inferred hydrogen references, ending
+at $1.464\times10^5$ yr and 6002 K,
 changes the endpoint temperature by 0.1460 K, surface luminosity by
 0.009460\% and deposited nuclear energy by $2.197\times10^{-6}\%$,
 with the same convective regions. The nominal sequence uses 8.605 CPU minutes,
@@ -1051,7 +1057,7 @@ There is also a difference between the atmosphere prescriptions themselves.
 Near $T_{\rm eff}=4559$ K and $\log g=5.686$, at a helium mass fraction of
 0.0045 and the same matching depth, the TLUSTY boundary gives a temperature
 3.023\% lower and a gas pressure 90.99\% higher than the hydrogen boundary
-from Rohrmann et al.\ \cite{rohrmann12}.
+tabulated in MESA using the treatment of Rohrmann et al.\ \cite{rohrmann11,mesa_atm}.
 Joining their absolute values over a narrow composition interval would impose
 a substantial change of boundary prescription. A comparison instead applies
 the calculated mixed-to-hydrogen-rich temperature and pressure ratios to the
@@ -2765,6 +2771,10 @@ Convection, Energy Conservation, Automatic Differentiation, and Infrastructure.
 \emph{ApJS}, 265, 15. \url{https://arxiv.org/abs/2208.03651}.
 \bibitem{mesa_atm} MESA documentation. Table atmospheres.
 \url{https://docs.mesastar.org/en/latest/atm/table.html}.
+\bibitem{rohrmann11} Rohrmann, R. D., Althaus, L. G., \& Kepler, S. O. (2011).
+Lyman $\alpha$ wing absorption in cool white dwarf stars.
+\emph{MNRAS}, 411, 781--791.
+\href{https://doi.org/10.1111/j.1365-2966.2010.17716.x}{doi:10.1111/j.1365-2966.2010.17716.x}.
 \bibitem{rohrmann12} Rohrmann, R. D., Althaus, L. G., Garc\'ia-Berro, E.,
 C\'orsico, A. H., \& Miller Bertolami, M. M. (2012).
 Outer boundary conditions for evolving cool white dwarfs.
