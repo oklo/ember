@@ -45,11 +45,11 @@ a helium-3 burning pulse and a convective shell near the hydrogen--helium
 transition. Locally refined calculations retain the pulse, but its peak
 strength and timing depend on spatial resolution. A diagnostic late-phase
 calculation with 2115 mass points follows shell burning through
-$3.054\times10^6$ yr from the model before shell convection, reaching
-$T_{\rm eff}=6205$ K and declining nuclear power of
-$2.231\times10^{31}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 193.7 K. A separate calculation with finite
+$3.454\times10^6$ yr from the model before shell convection, reaching
+$T_{\rm eff}=6157$ K and declining nuclear power of
+$1.948\times10^{31}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 242.0 K. A separate calculation with finite
 convective transport from the onset follows a rise, decline and renewed
-burning through $1.685\times10^4$ yr. These are alternative histories from a
+burning through $1.936\times10^4$ yr. These are alternative histories from a
 common model near the onset of shell convection, with different preceding
 mixing treatments; their endpoints cannot be joined into one verified track.
 Both use the supplied hydrogen atmosphere normalization. Whether the flash
@@ -639,7 +639,11 @@ interpolates them without the MESA wrapper's gray blend. At 4600 K,
 $\log g=5.9$ and the same optical depth, this table gives $2.594\%$
 higher matching temperature and $48.69\%$ lower gas pressure than the
 independently converged atmosphere. These are differences between
-prescriptions; their detailed cause has not been isolated.
+prescriptions; their detailed cause has not been isolated. An additional
+near-pure-hydrogen source at 4600 K and $\log g=5.925$ gives a matching
+temperature 2.497\% lower and gas pressure 97.87\% higher than the
+supplied boundary at the same optical depth. Trace helium and the choice
+of matching depth therefore do not remove the measured discrepancy.
 An exploratory 1 Myr stellar comparison changes surface temperature by
 about 241 K. The supplied-boundary calculation exceeds the declared
 step-refinement error limit, so this comparison is not a converged measure
@@ -742,15 +746,30 @@ location of the strongest burning. The onset of the connection and its
 resolution dependence remain to be established.
 
 The onset calculation includes finite composition transport throughout all
-convective layers. On a locally refined 1899-point grid it reaches
-$1.685\times10^4$ yr, $T_{\rm eff}=4794$ K and nuclear power
-$4.061\times10^{34}$ erg s$^{-1}$. The final 535.7 yr deposit
-$5.878\times10^{44}$ erg through 91 intervals that pass the timestep and
-conservation checks. At this endpoint, one mass cell supplies 20.03\% of
-nuclear power at $m/M=0.9383$, requiring further local refinement before
-continuation.
-This is renewed burning following a substantial decline, rather than the
-first rise of the instability.
+convective layers. On a locally refined 1983-point grid it reaches
+$1.936\times10^4$ yr, $T_{\rm eff}=4818$ K and nuclear power
+$1.069\times10^{34}$ erg s$^{-1}$. Nuclear power declines through the
+final 2000 yr, which deposit $9.335\times10^{44}$ erg in 173 intervals
+that pass the timestep, species and cell-energy checks. The largest
+single-cell contribution to nuclear power is 5.696\%.
+This decline follows renewed burning, rather than the first rise of the
+instability. A matched 100 yr calculation on 1927 and 1983 mass points
+differs by 8.261\% in deposited nuclear energy and 15.24\% in final
+nuclear power; the pulse is not spatially converged. In the first year
+after inserting mass points, the integrated internal-plus-gravitational
+energy budget has a residual of $1.844\times10^{43}$ erg. The inserted
+radii and densities do not satisfy the discrete mass equation to the
+same accuracy as the evolved structure, indicating an initial mechanical
+readjustment. Over the following 99 yr, the residual is 0.2739\% of the
+deposited nuclear energy. A controlled one-year comparison reconstructs
+only the initial radii to satisfy the mass equation, preserving density,
+temperature and composition. The deposited nuclear energy and final
+nuclear power agree within a relative difference of $10^{-12}$ with the
+uncorrected calculation. The reconstruction transfers
+$1.839\times10^{43}$ erg into an explicit initial gravitational-energy
+change; it does not remove that change from the total budget.
+The test separates this geometric accounting offset from the burning
+response over the checked interval.
 On the 1695-point grid, nuclear power rises to a local maximum of $3.719\times10^{35}$ erg s$^{-1}$
 near 1642 yr. By 1713 yr, nuclear power has declined by 81.64\%, and the
 highest interior temperature has fallen from 15.09 to 13.27 MK. Nuclear power
@@ -972,14 +991,14 @@ mean helium charge below 0.3549\% relative to full ionization. Fully ionized
 Coulomb transport remains an approximation here. A 400 yr comparison with
 400, 200 and 100 yr steps passes the same accuracy and conservation checks;
 the coarsest and finest deposited nuclear energies differ by 0.1203\%.
-The continued sequence reaches $3.054\times10^6$ yr, 6205 K and nuclear
-power $2.231\times10^{31}$ erg s$^{-1}$, supplying 33.92\% of the photon
-luminosity. Its radius is $7.890\times10^9$ cm and surface gravity
-$\log g=5.329$. The radius reaches a maximum near $2.444\times10^5$ yr,
+The continued sequence reaches $3.454\times10^6$ yr, 6157 K and nuclear
+power $1.948\times10^{31}$ erg s$^{-1}$, supplying 33.40\% of the photon
+luminosity. Its radius is $7.547\times10^9$ cm and surface gravity
+$\log g=5.367$. The radius reaches a maximum near $2.444\times10^5$ yr,
 and the surface luminosity near $2.544\times10^5$ yr. They subsequently decline
-by 65.58\% and 87.71\%, respectively. Effective temperature reaches a saved maximum of
-6399 K near $1.088\times10^6$ yr, then declines by 193.7 K over $1.966\times10^6$ yr.
-Two hundred forty-five consecutive retained half steps have decreasing temperature.
+by 67.08\% and 89.10\%, respectively. Effective temperature reaches a saved maximum of
+6399 K near $1.088\times10^6$ yr, then declines by 242.0 K over $2.366\times10^6$ yr.
+Two hundred eighty-one consecutive retained half steps have decreasing temperature.
 Figure~\ref{fig:late_cooling} shows the temperature turn and luminosity decline.
 During the first 83,200 yr of this decline, the nominal and alternative
 atmosphere references give decreases of 1.151 K and 1.032 K, respectively.
@@ -995,8 +1014,8 @@ interpolated.
 Left: an enlarged HR diagram around the effective-temperature maximum.
 The arrow follows increasing time. Right: photon luminosity and deposited
 nuclear power over the same interval. Time is measured from the model before
-shell convection. Temperature declines from 6399 K to 6205 K over
-$1.966\times10^6$ yr; nuclear burning supplies 33.92\% of the final surface luminosity.
+shell convection. Temperature declines from 6399 K to 6157 K over
+$2.366\times10^6$ yr; nuclear burning supplies 33.40\% of the final surface luminosity.
 The contracting model has turned toward cooling. Its physical connection
 to the calculation resolving the flash from its onset remains unverified.}
 \label{fig:late_cooling}
@@ -1006,8 +1025,8 @@ A 3200 yr calculation with 3200, 1600 and 800 yr steps passes the same
 accuracy and conservation checks; the coarsest and finest deposited energies
 differ by 0.2883\%. The final 400,000 yr permit trial steps up to
 25,600 yr and retained half steps up to 12,800 yr. Every interval passes the
-same timestep and conservation criteria. This segment uses 17.69 CPU minutes
-and 6.257 minutes of active elapsed time, including all timestep comparisons.
+same timestep and conservation criteria. This segment uses 15.30 CPU minutes
+and 5.511 minutes of active elapsed time, including all timestep comparisons.
 The atmosphere grid extends through $\log g=5.40$.
 A separate 3200 yr comparison near $\log g=4.5$ passes the same checks,
 with deposited nuclear energies differing by 0.08760\%.

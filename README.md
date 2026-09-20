@@ -19,8 +19,8 @@ are measured from their common model preceding shell convection.
 
 | Calculation | Time | Effective temperature | Nuclear power |
 | --- | ---: | ---: | ---: |
-| Finite convective transport from flash onset, 1899 mass points | 16.85 thousand yr | 4794 K | 4.061e34 erg/s |
-| Later shell burning, alternative history, 2115 mass points | 3.054 million yr | 6205 K | 2.231e31 erg/s |
+| Finite convective transport from flash onset, 1983 mass points | 19.36 thousand yr | 4818 K | 1.069e34 erg/s |
+| Later shell burning, alternative history, 2115 mass points | 3.454 million yr | 6157 K | 1.948e31 erg/s |
 
 **These are alternative histories, not consecutive pieces of one track.**
 The later calculation includes different mixing treatments during its flash;
@@ -31,21 +31,25 @@ untested. The flash appears about **0.7546 Gyr** after the atmosphere change;
 that delay does not establish independence from the envelope and fuel history.
 
 The onset calculation passes a local nuclear-power maximum of **3.719e35 erg/s**,
-followed by an **81.64%** decline and renewed burning. Its final **535.7 years**
-release **5.878e44 erg** through **91** independently checked intervals.
-At the endpoint, one mass cell supplies **20.03%** of nuclear power; continued
-evolution requires local grid refinement. A matched **100-year** comparison
-on **1763/1899 mass points** changes nuclear heat by **4.026%** and endpoint
-power by **5.589%**. The full pulse's spatial accuracy, largest peak and final
+followed by an **81.64%** decline and renewed burning. Nuclear power declines
+through the final **2000 years**, which release **9.335e44 erg** through **173**
+independently checked intervals. The largest single-cell power contribution
+is **5.696%**. A matched **100-year** comparison on **1927/1983 mass points**
+changes nuclear heat by **8.261%** and final power by **15.24%**. Inserting
+mass points produces an initial mechanical readjustment with an integrated
+energy residual of **1.844e43 erg** in its first year. A controlled correction
+of the initial radii leaves one-year nuclear heat and final power unchanged
+within **1e-12** relative; the initial energy change remains explicit in the
+budget. The full pulse's spatial accuracy, integrated energy and final
 shutdown remain unresolved.
 
 In the later calculation, radius and surface luminosity have declined
-**65.58%** and **87.71%** from their saved maxima. Temperature falls from
-**6399 K** by **193.7 K** over **1.966 million years**, while nuclear burning
-supplies **33.92%** of the current surface luminosity. This supports a turn
+**67.08%** and **89.10%** from their saved maxima. Temperature falls from
+**6399 K** by **242.0 K** over **2.366 million years**, while nuclear burning
+supplies **33.40%** of the current surface luminosity. This supports a turn
 toward cooling within that calculation.
 
-The final **400,000 years** use **17.69 CPU minutes** and **6.257 minutes of
+The final **400,000 years** use **15.30 CPU minutes** and **5.511 minutes of
 active elapsed time**, including timestep comparisons. Trial intervals are
 at most **25,600 years**; the accepted solution retains the two shorter steps,
 with unchanged accuracy and conservation criteria. The main track through
@@ -66,7 +70,7 @@ The paper compares Ember with MESA and with Laughlin, Bodenheimer and Adams
 (1997), including the requested opacity-map comparison. The separate
 [Fortran reconstruction](https://github.com/oklo/Henyey) seeks to reproduce
 LBA97's assumptions and methods. A new [late cooling figure](docs/reports/2026-09-20/late_cooling.pdf) shows the checked temperature turn and luminosity decline, with its small data table and plotting script included.
-The [standalone HR diagram of both flash histories](docs/figures/2026-09-20/ember_two_sequences_hr.png) shows the alternatives through 16.31 thousand years and 2.654 million years.
+The [standalone HR diagram of both flash histories](docs/figures/2026-09-20/ember_two_sequences_hr.png) shows the alternatives through 19.36 thousand years and 3.454 million years.
 Standalone flash diagrams remain separate from the draft.
 
 The public source does not yet contain all physics and numerical updates used

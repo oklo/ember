@@ -3,21 +3,24 @@
 [Read the PDF](ember_status_and_future.pdf).
 
 The calculation with finite convective transport from the helium-3 flash onset
-reaches **16.85 thousand years**, **4794 K** and nuclear power **4.061e34 erg/s**
-on **1899** mass points. Its final **535.7 years** release **5.878e44 erg**;
-all **91** accepted intervals pass independent timestep and conservation checks.
-One mass cell supplies **20.03%** of nuclear power at the endpoint, requiring
-further local refinement before continuation. The calculation has passed a
-local nuclear-power maximum, a decline and renewed burning; its largest peak
-and complete pulse remain unresolved.
+reaches **19.36 thousand years**, **4818 K** and nuclear power **1.069e34 erg/s**
+on **1983** mass points. Nuclear power declines through the final **2000 years**,
+which release **9.335e44 erg** through **173** checked intervals. A matched
+**100-year** comparison on **1927/1983** points differs by **8.261%** in nuclear
+heat and **15.24%** in final nuclear power. The first year after refinement has
+an integrated energy residual of **1.844e43 erg**, associated with a mechanical
+readjustment. Correcting only the initial radii leaves the one-year nuclear
+heat and final power unchanged within **1e-12** relative, but retains the
+explicit initial energy change. The complete flash and its spatial accuracy
+remain unresolved.
 
-An alternative flash history reaches **3.054 million years**, **6205 K** and
-nuclear power **2.231e31 erg/s** on **2115** mass points. Nuclear burning supplies
-**33.92%** of photon luminosity. Radius and surface luminosity have declined
-**65.58%** and **87.71%** from their maxima. Effective temperature passes a
-maximum of **6399 K** near **1.088 million years**, then falls **193.7 K** over
-**1.966 million years**. The final **400,000 years** use **17.69 CPU minutes**
-and **6.257 minutes of active elapsed time**, including timestep comparisons.
+An alternative flash history reaches **3.454 million years**, **6157 K** and
+nuclear power **1.948e31 erg/s** on **2115** mass points. Nuclear burning supplies
+**33.40%** of photon luminosity. Radius and surface luminosity have declined
+**67.08%** and **89.10%** from their maxima. Effective temperature passes a
+maximum of **6399 K** near **1.088 million years**, then falls **242.0 K** over
+**2.366 million years**. The final **400,000 years** use **15.30 CPU minutes**
+and **5.511 minutes of active elapsed time**, including timestep comparisons.
 
 **These are alternative histories from a common model, not consecutive pieces
 of one verified track.** Their mixing treatments during the flash differ.
@@ -46,7 +49,7 @@ This directory contains the PDF, LaTeX inputs and included figure PDFs.
 The [late cooling figure](late_cooling.pdf), its [data](late_cooling.csv) and
 plotting script are included. The LBA97 opacity comparison is retained.
 The [standalone HR diagram of both histories](../../figures/2026-09-20/ember_two_sequences_hr.png)
-shows the alternatives through 16.31 thousand years and 2.654 million years;
+shows the alternatives through 19.36 thousand years and 3.454 million years;
 standalone flash diagrams remain separate from this draft.
 
 Rebuild here with `tectonic --keep-logs ember_status_and_future.tex`.

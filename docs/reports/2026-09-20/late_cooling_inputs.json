@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-20T16:52:02.825164+00:00",
+  "created_utc": "2026-09-20T18:15:42.198461+00:00",
   "first": {
     "pulse_years": 1043056.4364848862,
     "Teff_K": 6398.352704157825,
@@ -10,13 +10,13 @@
     "run": 33
   },
   "last": {
-    "run": 40,
-    "pulse_years": 3053921.0404936955,
-    "Teff_K": 6205.045881557071,
-    "radius_cm": 7889603510.435187,
-    "photon_luminosity_erg_s": 6.575245095130061e+31,
-    "nuclear_power_erg_s": 2.230524120301677e+31,
-    "logg": 5.3288012771703945
+    "run": 41,
+    "pulse_years": 3453921.0404936955,
+    "Teff_K": 6156.724554299648,
+    "radius_cm": 7547210068.640015,
+    "photon_luminosity_erg_s": 5.831675819485071e+31,
+    "nuclear_power_erg_s": 1.9477393359496634e+31,
+    "logg": 5.367338757440566
   },
   "temperature_maximum": {
     "pulse_years": 1087856.4364848863,
@@ -27,15 +27,15 @@
     "logg": 4.9447114785795305,
     "run": 33
   },
-  "retained_points": 253,
-  "consecutive_declining_half_steps": 245,
-  "temperature_drop_K": 193.68672890310427,
-  "decline_years": 1966064.6040088092,
-  "radius_decline": 0.6558270238947383,
-  "luminosity_decline": 0.8771220508551963,
-  "nuclear_fraction": 0.3392305667744172,
-  "appended_segment_years": 1882864.6040088092,
-  "appended_segment_cpu_minutes": 229.5257784666667,
+  "retained_points": 289,
+  "consecutive_declining_half_steps": 281,
+  "temperature_drop_K": 242.0080561605273,
+  "decline_years": 2366064.604008809,
+  "radius_decline": 0.6707634614109841,
+  "luminosity_decline": 0.8910178473337208,
+  "nuclear_fraction": 0.33399307441641124,
+  "appended_segment_years": 2282864.604008809,
+  "appended_segment_cpu_minutes": 244.82158385000002,
   "scope": "Checked retained late models. No interpolated evolution, connection to the distinct onset history, or claim of a completed white-dwarf cooling track.",
-  "csv_sha256": "a5529bdd353c03bad7b8a06f10554264ab13457556632980b7be71d897a0696a"
+  "csv_sha256": "e21a9e6557aa9bafa98bfbd196a88582ef64b5a744287e53cba53c873a5d4e59"
 }
