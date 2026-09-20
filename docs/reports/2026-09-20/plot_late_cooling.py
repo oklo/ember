@@ -15,7 +15,8 @@ def plot(data, output):
     meta = json.loads((data/'late_cooling_inputs.json').read_text())
     assert hashlib.sha256((data/'late_cooling.csv').read_bytes()).hexdigest() == meta['csv_sha256']
     with (data/'late_cooling.csv').open() as stream:
-        rows = [{k: float(v) for k,v in row.items()} for row in csv.DictReader(stream)]
+        rows = [{k: (v if k == 'run' else float(v)) for k,v in row.items()}
+                for row in csv.DictReader(stream)]
     t = np.array([r['pulse_years']/1e6 for r in rows])
     temperature = np.array([r['Teff_K'] for r in rows])
     light = np.array([r['photon_luminosity_erg_s']/3.828e33 for r in rows])

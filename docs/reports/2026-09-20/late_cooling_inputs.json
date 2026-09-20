@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-20T20:05:38.901694+00:00",
+  "created_utc": "2026-09-20T21:20:16.576026+00:00",
   "first": {
     "pulse_years": 1043056.4364848862,
     "Teff_K": 6398.352704157825,
@@ -7,16 +7,16 @@
     "photon_luminosity_erg_s": 1.878275771834841e+32,
     "nuclear_power_erg_s": 7.14766206135027e+31,
     "logg": 4.926246584352607,
-    "run": 33
+    "run": "33"
   },
   "last": {
-    "run": 43,
-    "pulse_years": 4623693.39816847,
-    "Teff_K": 6021.146452609675,
-    "radius_cm": 6832912763.04478,
-    "photon_luminosity_erg_s": 4.372704359948514e+31,
-    "nuclear_power_erg_s": 1.4280634160825954e+31,
-    "logg": 5.45369988192477
+    "run": "v44",
+    "pulse_years": 5986443.39816847,
+    "Teff_K": 5882.613629507898,
+    "radius_cm": 6292086130.98391,
+    "photon_luminosity_erg_s": 3.378253363827206e+31,
+    "nuclear_power_erg_s": 1.1017409707344803e+31,
+    "logg": 5.525322316111164
   },
   "temperature_maximum": {
     "pulse_years": 1087856.4364848863,
@@ -25,17 +25,17 @@
     "photon_luminosity_erg_s": 1.8005185715148023e+32,
     "nuclear_power_erg_s": 6.880868504360965e+31,
     "logg": 4.9447114785795305,
-    "run": 33
+    "run": "33"
   },
-  "retained_points": 379,
-  "consecutive_declining_half_steps": 371,
-  "temperature_drop_K": 377.58615785050006,
-  "decline_years": 3535836.9616835834,
-  "radius_decline": 0.7019236875447206,
-  "luminosity_decline": 0.9182830546704683,
-  "nuclear_fraction": 0.3265858604946734,
-  "appended_segment_years": 3452636.961683584,
-  "appended_segment_cpu_minutes": 286.33482245,
+  "retained_points": 465,
+  "consecutive_declining_half_steps": 457,
+  "temperature_drop_K": 516.1189809522775,
+  "decline_years": 4898586.961683583,
+  "radius_decline": 0.7255164969003718,
+  "luminosity_decline": 0.9368673199199717,
+  "nuclear_fraction": 0.3261273954557167,
+  "appended_segment_years": 4815386.961683584,
+  "appended_segment_cpu_minutes": 335.57058276666663,
   "scope": "Checked retained late models. No interpolated evolution, connection to the distinct onset history, or claim of a completed white-dwarf cooling track.",
-  "csv_sha256": "9c42352de4f7f19991685fdcc22c971a1edfaf184ec7ad74258ea2b3a2e16a7b"
+  "csv_sha256": "8eb7b1e248193b087e884567123665fae755ba326c8d81198bb187d875265935"
 }
