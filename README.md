@@ -63,14 +63,23 @@ transport to **1 MK**, supported by source ionization, actual exchange and
 finite-step checks. This local approximation does not describe neutral-fluid
 transport in a cold remnant.
 
-The separate onset calculation reaches **12.65 thousand years**, **4721 K** and nuclear
-power **1.571e35 erg/s**. Power reaches a local maximum of **3.719e35 erg/s**
+The separate onset calculation reaches **12.83 thousand years**, **4729 K** and nuclear
+power **9.126e34 erg/s** on a locally refined **1899-point** grid. On the 1695-point grid, nuclear power reaches a local maximum of **3.719e35 erg/s**
 near **1642 years**, followed by further rises and declines. Burning remains active; the first local maximum does not mark completion of
 the flash. A checked **0.6656-year** convective adjustment connects two envelope
 regions, changing surface hydrogen from **X = 0.9984** to **X = 0.8085** and
 helium-3 from **X3 = 0.001368** to **X3 = 0.007264**. Two-step/four-step paths
 pass the original checks; their nuclear heat differs by **0.01172%**. The
 internal timing of the rapid adjustment is unresolved.
+
+A matched **100-year** comparison on **1763/1899 points** gives **4.026%**
+less released nuclear energy and **5.589%** less endpoint nuclear power on
+the finer mesh. Surface temperatures differ by **0.03544 K**. Half the burning
+power occupies **31 cells** on the finer mesh, which is used for continued
+calculation with explicit spatial uncertainty. Both runs pass the unchanged
+timestep and cell energy checks; this does not establish convergence of the
+whole pulse.
+
 A **12.26-year** convection merger passes a **16/32-step** comparison, with
 integrated nuclear energies differing by **0.02667%**. A subsequent **2.587-year**
 adjustment passes **4/8 steps**, differing by **0.02665%**. These support

@@ -9,13 +9,19 @@ surface luminosity have passed maxima and declined by **34.95%** and
 **51.19%**; effective temperature still rises. The star is contracting,
 without an established white-dwarf cooling sequence.
 
-The calculation resolving the onset reaches **12.65 thousand years**,
-**4721 K** and nuclear power **1.571e35 erg/s**. It has passed a local maximum
+The calculation resolving the onset reaches **12.83 thousand years**,
+**4729 K** and nuclear power **9.126e34 erg/s** on **1899** mass points. The 1695-point calculation shows a local maximum
 of **3.719e35 erg/s**, an **81.64%** decline and renewed burning. The overall
 maximum, complete pulse and connection to the later calculation remain unresolved.
 A checked **0.6656-year** mixing adjustment changes surface hydrogen from
 **X = 0.9984** to **X = 0.8085** and helium-3 from **X3 = 0.001368** to
 **X3 = 0.007264**. Two-step/four-step paths pass the original physical checks.
+
+A matched **100-year** comparison on **1763/1899 points** changes deposited
+nuclear energy by **4.026%** and endpoint nuclear power by **5.589%**.
+Surface temperatures differ by **0.03544 K**. The finer mesh spreads half
+the burning over **31 cells** and is used for continued calculation with
+explicit spatial uncertainty; this does not establish convergence of the full pulse.
 
 A **3200/1600/800 yr** comparison supports the late timestep ceiling with all
 original physical and conservation criteria. A **170,400 yr** segment uses

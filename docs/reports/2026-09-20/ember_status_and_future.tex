@@ -734,10 +734,11 @@ a rising power-weighted temperature instead reflects the shift in the
 location of the strongest burning. The onset of the connection and its
 resolution dependence remain to be established.
 
-An onset calculation on the 1695-point grid, with finite composition
-transport throughout all convective layers, reaches $1.265\times10^4$ yr,
-$T_{\rm eff}=4721$ K and nuclear power $1.571\times10^{35}$ erg s$^{-1}$.
-Nuclear power rises to a local maximum of $3.719\times10^{35}$ erg s$^{-1}$
+The onset calculation includes finite composition transport throughout all
+convective layers. On a locally refined 1899-point grid it reaches
+$1.283\times10^4$ yr, $T_{\rm eff}=4729$ K and nuclear power
+$9.126\times10^{34}$ erg s$^{-1}$.
+On the 1695-point grid, nuclear power rises to a local maximum of $3.719\times10^{35}$ erg s$^{-1}$
 near 1642 yr. By 1713 yr, nuclear power has declined by 81.64\%, and the
 highest interior temperature has fallen from 15.09 to 13.27 MK. Nuclear power
 subsequently passes through further rises and declines, and remains active
@@ -773,6 +774,21 @@ $X_3=0.001368$ to $X_3=0.007264$. Effective temperature increases from
 regions and satisfy the stated structure, composition and energy checks;
 integrated nuclear heat differs by 0.01172\%. This comparison supports
 the completed adjustment, without resolving its internal timing.
+
+Local refinement over $0.938<m/M<0.955$ preserves the composition
+inventories and discrete stored energy before evolution resumes. A matched
+100 yr comparison on 1763 and 1899 points, including the initial structural
+adjustment, gives 4.026\% less deposited nuclear energy and 5.589\% less
+endpoint nuclear power on the finer grid. Surface temperatures differ by
+0.03544 K. At the finer endpoint, 31 cells supply half the burning power,
+and the largest cell contributes 3.070\%. Both calculations satisfy the
+same timestep and cell energy-conservation criteria. The separate
+whole-star internal-plus-gravitational energy estimate has a residual of
+1.327\% of the integrated nuclear heat on the finer grid; this residual
+is not inserted as an energy source. The comparison supports continued
+calculation on the finer mesh while retaining several-percent uncertainty
+in the burning history. It does not establish spatial convergence of the
+pulse maximum or its duration.
 
 The envelope becomes helium enriched when shell convection connects to
 surface convection. With finite convective transport throughout the connected
