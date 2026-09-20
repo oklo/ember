@@ -2,11 +2,11 @@
 
 [Read the PDF](ember_status_and_future.pdf).
 
-The diagnostic late helium-3 calculation reaches **813.6 thousand years**,
-**6382 K** and nuclear power **8.704e31 erg/s** on **2115** mass points.
-Nuclear burning supplies **36.14%** of photon luminosity. Radius and
-surface luminosity have passed maxima and declined by **37.74%** and
-**54.99%**; effective temperature still rises. The star is contracting,
+The diagnostic late helium-3 calculation reaches **1.043 million years**,
+**6398 K** and nuclear power **7.148e31 erg/s** on **2115** mass points.
+Nuclear burning supplies **38.05%** of photon luminosity. Radius and
+surface luminosity have passed maxima and declined by **45.29%** and
+**64.9%**; effective temperature still rises. The star is contracting,
 without an established white-dwarf cooling sequence.
 
 The calculation resolving the onset reaches **13.13 thousand years**,
@@ -27,9 +27,10 @@ Surface temperatures differ by **0.03544 K**. The finer mesh spreads half
 the burning over **31 cells** and is used for continued calculation with
 explicit spatial uncertainty; this does not establish convergence of the full pulse.
 
-A **3200/1600/800 yr** comparison supports the late timestep ceiling with all
-original physical and conservation criteria. A **64,000 yr** segment uses
-**30.08 CPU minutes**, including timestep comparisons. The higher-gravity
+A **3200/1600/800 yr** comparison tests time resolution. The final
+**229,500 years** use trial steps up to **12,800 years**, with every interval
+passing the same accuracy and conservation criteria. This segment uses
+**38.08 CPU minutes**, including timestep comparisons. The higher-gravity
 atmosphere interval passes a separate **3200/1600 yr** comparison.
 
 The mixed-atmosphere grid has **36 columns** over **6000–6500 K** and

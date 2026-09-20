@@ -36,8 +36,8 @@ by **1.468%** and endpoint nuclear power by **1.980%** over a matched
 **978.3-year** interval. This supports the late burning segment; the earlier
 onset and peak remain uncertain.
 
-The **2115-point** late sequence reaches **813.6 thousand years**, **6382 K**
-and nuclear power **8.704e31 erg/s**, supplying **36.14%** of photon luminosity.
+The **2115-point** late sequence reaches **1.043 million years**, **6398 K**
+and nuclear power **7.148e31 erg/s**, supplying **38.05%** of photon luminosity.
 A matched **2000-year** mass-grid comparison changes deposited nuclear energy
 by **0.5220%** and endpoint power by **0.5687%**. Half the burning power
 occupies **39** cells instead of **12**. This supports the later shell burning;
@@ -57,13 +57,14 @@ while the absolute hydrogen reference remains inferred.
 
 Radius and surface luminosity have passed maxima near **244.4 thousand years**
 and **254.4 thousand years**, respectively. They have since declined by
-**37.74%** and **54.99%**, while effective temperature still rises.
+**45.29%** and **64.9%**, while effective temperature still rises.
 This establishes contraction in the diagnostic history, without yet establishing
 white-dwarf cooling or its connection to the resolved onset.
 
-A **3200/1600/800-year** comparison supports larger late time steps with unchanged
-accuracy and conservation checks. The final **64,000-year** continuation segment
-uses **30.08 CPU minutes**. A separate **3200-year** comparison near **log g = 4.5** passes the same criteria, with integrated nuclear
+A **3200/1600/800-year** comparison tests time resolution. The final
+**229,500-year** continuation uses trial steps up to **12,800 years**, with
+every interval passing the same accuracy and conservation checks. It uses
+**38.08 CPU minutes**, including timestep comparisons. A separate **3200-year** comparison near **log g = 4.5** passes the same criteria, with integrated nuclear
 energies differing by **0.08760%**.
 A newly radiative envelope layer is included by extending microscopic species
 transport to **1 MK**, supported by source ionization, actual exchange and
