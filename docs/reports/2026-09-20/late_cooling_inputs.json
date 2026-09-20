@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-20T21:20:16.576026+00:00",
+  "created_utc": "2026-09-20T22:22:29.454941+00:00",
   "first": {
     "pulse_years": 1043056.4364848862,
     "Teff_K": 6398.352704157825,
@@ -10,13 +10,13 @@
     "run": "33"
   },
   "last": {
-    "run": "v44",
-    "pulse_years": 5986443.39816847,
-    "Teff_K": 5882.613629507898,
-    "radius_cm": 6292086130.98391,
-    "photon_luminosity_erg_s": 3.378253363827206e+31,
-    "nuclear_power_erg_s": 1.1017409707344803e+31,
-    "logg": 5.525322316111164
+    "run": "coolg580_nominal_v2",
+    "pulse_years": 8086443.39816847,
+    "Teff_K": 5698.89692213968,
+    "radius_cm": 5762241471.525686,
+    "photon_luminosity_erg_s": 2.495558273609004e+31,
+    "nuclear_power_erg_s": 8.326769019129501e+30,
+    "logg": 5.601728726423367
   },
   "temperature_maximum": {
     "pulse_years": 1087856.4364848863,
@@ -27,15 +27,15 @@
     "logg": 4.9447114785795305,
     "run": "33"
   },
-  "retained_points": 465,
-  "consecutive_declining_half_steps": 457,
-  "temperature_drop_K": 516.1189809522775,
-  "decline_years": 4898586.961683583,
-  "radius_decline": 0.7255164969003718,
-  "luminosity_decline": 0.9368673199199717,
-  "nuclear_fraction": 0.3261273954557167,
-  "appended_segment_years": 4815386.961683584,
-  "appended_segment_cpu_minutes": 335.57058276666663,
+  "retained_points": 605,
+  "consecutive_declining_half_steps": 597,
+  "temperature_drop_K": 699.8356883204951,
+  "decline_years": 6998586.961683583,
+  "radius_decline": 0.7486302329807744,
+  "luminosity_decline": 0.9533630947294208,
+  "nuclear_fraction": 0.33366357769268074,
+  "appended_segment_years": 6915386.961683584,
+  "appended_segment_cpu_minutes": 425.45957159999995,
   "scope": "Checked retained late models. No interpolated evolution, connection to the distinct onset history, or claim of a completed white-dwarf cooling track.",
-  "csv_sha256": "8eb7b1e248193b087e884567123665fae755ba326c8d81198bb187d875265935"
+  "csv_sha256": "a4c9ae2b215fe217abf8bf08a9b3b3d5febdcadb216cd7b895c31eccea6e5de8"
 }
