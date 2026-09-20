@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-20T22:54:01.307375+00:00",
+  "created_utc": "2026-09-20T23:46:27.651806+00:00",
   "first": {
     "pulse_years": 1043056.4364848862,
     "Teff_K": 6398.352704157825,
@@ -10,13 +10,13 @@
     "run": "33"
   },
   "last": {
-    "run": "v45",
-    "pulse_years": 10550093.39816847,
-    "Teff_K": 5523.765604106668,
-    "radius_cm": 5367831452.683459,
-    "photon_luminosity_erg_s": 1.9114384053512056e+31,
-    "nuclear_power_erg_s": 6.654783984162371e+30,
-    "logg": 5.663313892542579
+    "run": "cool5000_nominal_v1",
+    "pulse_years": 12550093.39816847,
+    "Teff_K": 5410.274756048552,
+    "radius_cm": 5136297900.390871,
+    "photon_luminosity_erg_s": 1.6106430142158536e+31,
+    "nuclear_power_erg_s": 5.828592304433881e+30,
+    "logg": 5.701611225102453
   },
   "temperature_maximum": {
     "pulse_years": 1087856.4364848863,
@@ -27,15 +27,15 @@
     "logg": 4.9447114785795305,
     "run": "33"
   },
-  "retained_points": 763,
-  "consecutive_declining_half_steps": 755,
-  "temperature_drop_K": 874.9670063535068,
-  "decline_years": 9462236.961683584,
-  "radius_decline": 0.7658358212985039,
-  "luminosity_decline": 0.9642791062891133,
-  "nuclear_fraction": 0.34815581634918696,
-  "appended_segment_years": 9379036.961683584,
-  "appended_segment_cpu_minutes": 508.85361533333327,
+  "retained_points": 893,
+  "consecutive_declining_half_steps": 885,
+  "temperature_drop_K": 988.457854411623,
+  "decline_years": 11462236.961683584,
+  "radius_decline": 0.775936150377825,
+  "luminosity_decline": 0.9699003599823477,
+  "nuclear_fraction": 0.36187983637525967,
+  "appended_segment_years": 11379036.961683584,
+  "appended_segment_cpu_minutes": 583.9655329999999,
   "scope": "Checked retained late models. No interpolated evolution, connection to the distinct onset history, or claim of a completed white-dwarf cooling track.",
-  "csv_sha256": "d8e93400ab82f63caa43f473d184cbf89a44e7de626aae2146873502621e53cf"
+  "csv_sha256": "a5ed014770b76593947ce4f11ad4d2aa2df100fbac2eb50f5746189dc5d7184e"
 }
