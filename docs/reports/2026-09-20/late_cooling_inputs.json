@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-20T23:46:27.651806+00:00",
+  "created_utc": "2026-09-21T01:16:51.595347+00:00",
   "first": {
     "pulse_years": 1043056.4364848862,
     "Teff_K": 6398.352704157825,
@@ -10,13 +10,13 @@
     "run": "33"
   },
   "last": {
-    "run": "cool5000_nominal_v1",
-    "pulse_years": 12550093.39816847,
-    "Teff_K": 5410.274756048552,
-    "radius_cm": 5136297900.390871,
-    "photon_luminosity_erg_s": 1.6106430142158536e+31,
-    "nuclear_power_erg_s": 5.828592304433881e+30,
-    "logg": 5.701611225102453
+    "run": "v47",
+    "pulse_years": 17906769.595160868,
+    "Teff_K": 5183.043232947329,
+    "radius_cm": 4718377867.290372,
+    "photon_luminosity_erg_s": 1.1448441317150424e+31,
+    "nuclear_power_erg_s": 4.608093762363874e+30,
+    "logg": 5.7753261979231825
   },
   "temperature_maximum": {
     "pulse_years": 1087856.4364848863,
@@ -27,15 +27,15 @@
     "logg": 4.9447114785795305,
     "run": "33"
   },
-  "retained_points": 893,
-  "consecutive_declining_half_steps": 885,
-  "temperature_drop_K": 988.457854411623,
-  "decline_years": 11462236.961683584,
-  "radius_decline": 0.775936150377825,
-  "luminosity_decline": 0.9699003599823477,
-  "nuclear_fraction": 0.36187983637525967,
-  "appended_segment_years": 11379036.961683584,
-  "appended_segment_cpu_minutes": 583.9655329999999,
+  "retained_points": 1288,
+  "temperature_drop_K": 1215.6893775128465,
+  "decline_years": 16818913.158675984,
+  "radius_decline": 0.7941673303573973,
+  "luminosity_decline": 0.9786051931205121,
+  "nuclear_fraction": 0.4025083969693485,
+  "appended_segment_years": 16735713.158675982,
   "scope": "Checked retained late models. No interpolated evolution, connection to the distinct onset history, or claim of a completed white-dwarf cooling track.",
-  "csv_sha256": "a5ed014770b76593947ce4f11ad4d2aa2df100fbac2eb50f5746189dc5d7184e"
+  "csv_sha256": "03ba3364d5ab733348fe96dd2ca8e3e47bcc76787e2ad1c13c4169c348c1482f",
+  "declining_saved_intervals_after_maximum": 1280,
+  "interval_plot_policy": "Ordinary retained half steps and accepted compound-event endpoints; internal event timing is unresolved."
 }
