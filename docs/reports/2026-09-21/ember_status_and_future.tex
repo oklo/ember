@@ -2968,23 +2968,31 @@ A continuous calculation from pre-main-sequence contraction is being prepared
 to test helium-3 ignition with a consistent atmosphere and composition history.
 It will carry the initial deuterium and helium-3 inventories through contraction
 and sustained hydrogen burning without resetting abundances at the main sequence.
-A provisional contraction calculation follows the first $10^5$ yr from a
-fully convective model with $T_{\rm eff}=2857$ K, radius
-$1.599\,R_\odot$, and central temperature $0.5381$ MK. Its radius decreases
-to $1.389\,R_\odot$ while the effective temperature rises to 2876 K;
-nuclear burning supplies $0.9015\%$ of the final surface luminosity.
-The calculation retains its initial isotope inventory without a reset,
-passes independent deuterium fuel and heat checks, and takes 74.79 CPU s
-for 178 accepted intervals. This timing excludes atmosphere preparation.
-An independent atmosphere at 2850 K and $\log g=3.125$ differs from
-four-corner interpolation by $-1.304\%$ in matching temperature and
-$+2.156\%$ in gas pressure. Applying these two offsets uniformly in a
-local stellar comparison changes the initial effective temperature by
-10.89 K and radius by $0.5213\%$. This measures sensitivity, rather than
-correcting the boundary along the track. The tested trace-isotope response
-changes the radius by $0.0008919\%$. Local atmosphere refinement remains
-in progress; the provisional segment is not included in the physical
-reference track.
+A provisional contraction calculation follows $1.798\times10^5$ yr from a
+fully convective model with $T_{\rm eff}=2864$ K, radius
+$1.594\,R_\odot$, and central temperature $0.5398$ MK. Its radius decreases
+to $1.275\,R_\odot$ while the effective temperature rises to 2900 K and
+central temperature reaches $0.6618$ MK. Nuclear burning, dominated by
+initial deuterium capture, supplies $3.976\%$ of the final surface luminosity.
+The initial isotope abundances evolve continuously without a reset. All
+280 accepted intervals pass independent deuterium fuel and heat checks;
+the calculation takes 119.4 CPU s, excluding atmosphere preparation.
+The endpoint lies at the 2900 K edge of the local atmosphere table.
+
+The boundary uses a shape-preserving cubic interpolation of nine local
+atmosphere solutions, tabulated finely enough that doubling the tabulation
+density changes the initial stellar radius by $0.0003697\%$. Derived
+interpolation nodes do not represent additional atmosphere calculations.
+Two independent interior points differ from the interpolant by at most
+$0.01907\%$ in matching temperature and $0.3171\%$ in gas pressure.
+A simultaneous perturbation representing the measured interpolation and
+source-sampling differences changes the initial stellar radius by
+$0.08144\%$, effective temperature by $0.05913\%$, and luminosity by
+$0.07375\%$. These are local sensitivity measurements, not error bounds on
+the complete evolution. The tested trace-isotope response is smaller.
+Equilibrium and rainout chemistry on the sampled local profiles find no
+condensates. The atmosphere assessment remains incomplete, so this
+provisional contraction is not included in the physical reference track.
 Additional envelope transport for the later evolution remains in development.
 
 Extending the track through hydrogen exhaustion requires atmosphere and
