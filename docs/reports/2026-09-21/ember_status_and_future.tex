@@ -2964,36 +2964,41 @@ The lowest-hydrogen tested envelope has surface $X=0.1974$, near the
 composition boundary of this atmosphere family.
 
 \section{Hydrogen exhaustion and remnant cooling}
-A continuous calculation from pre-main-sequence contraction is being prepared
-to test helium-3 ignition with a consistent atmosphere and composition history.
-It will carry the initial deuterium and helium-3 inventories through contraction
-and sustained hydrogen burning without resetting abundances at the main sequence.
-A provisional contraction calculation follows $1.798\times10^5$ yr from a
-fully convective model with $T_{\rm eff}=2864$ K, radius
-$1.594\,R_\odot$, and central temperature $0.5398$ MK. Its radius decreases
-to $1.275\,R_\odot$ while the effective temperature rises to 2900 K and
-central temperature reaches $0.6618$ MK. Nuclear burning, dominated by
-initial deuterium capture, supplies $3.976\%$ of the final surface luminosity.
-The initial isotope abundances evolve continuously without a reset. All
-280 accepted intervals pass independent deuterium fuel and heat checks;
-the calculation takes 119.4 CPU s, excluding atmosphere preparation.
-The endpoint lies at the 2900 K edge of the local atmosphere table.
+A calculation beginning with pre-main-sequence contraction will test helium-3
+ignition with a consistent atmosphere and composition history. The initial
+deuterium and helium-3 inventories evolve continuously without a reset at the
+main sequence. A provisional sequence follows $2.314$ Myr from a fully
+convective model with $T_{\rm eff}=2864$ K, radius $1.594\,R_\odot$, and
+central temperature $0.5398$ MK. Its endpoint has $T_{\rm eff}=2940$ K,
+radius $0.9469\,R_\odot$, and central temperature $0.8710$ MK.
+Initial deuterium capture supplies $91.76\%$ of the surface luminosity at
+1 Myr. By 2.314 Myr, $88.98\%$ of the initial deuterium has burned and the
+nuclear contribution has declined to $68.28\%$, with contraction supplying
+the remainder. All 837 accepted intervals pass independent isotope and energy
+checks. The retained sequence takes 404.1 CPU s, excluding atmosphere
+preparation, and ends at its planned atmosphere gravity limit,
+$\log g=3.485$.
 
-The boundary uses a shape-preserving cubic interpolation of nine local
-atmosphere solutions, tabulated finely enough that doubling the tabulation
-density changes the initial stellar radius by $0.0003697\%$. Derived
+The boundary uses shape-preserving cubic interpolation of 16 atmosphere
+solutions over $2800$--$3000$ K and $\log g=3.000$--$3.500$. Derived
 interpolation nodes do not represent additional atmosphere calculations.
-Two independent interior points differ from the interpolant by at most
-$0.01907\%$ in matching temperature and $0.3171\%$ in gas pressure.
-A simultaneous perturbation representing the measured interpolation and
-source-sampling differences changes the initial stellar radius by
-$0.08144\%$, effective temperature by $0.05913\%$, and luminosity by
-$0.07375\%$. These are local sensitivity measurements, not error bounds on
-the complete evolution. The tested trace-isotope response is smaller.
-Equilibrium and rainout chemistry on the sampled local profiles find no
-condensates. The atmosphere assessment remains incomplete, so this
-provisional contraction is not included in the physical reference track.
-Additional envelope transport for the later evolution remains in development.
+Two independent points in the initial region differ from the interpolant
+by at most $0.01907\%$ in matching temperature and $0.3171\%$ in gas pressure.
+A warmer check at 2950 K and $\log g=3.375$ gives maximum differences of
+$0.04344\%$ and $0.2667\%$, respectively, across two independent depth
+solutions. Applying this warmer offset in a 5000 yr comparison beginning at
+1 Myr changes effective temperature by $0.0006377\%$ and luminosity by
+$0.001755\%$. A larger perturbation including the estimated source-sampling
+uncertainty changes effective temperature by $0.08209\%$, radius by
+$0.0008806\%$, and luminosity by $0.3262\%$. These are local sensitivity
+measurements, not error bounds on the complete evolution. The tested
+trace-isotope response is smaller. Equilibrium and rainout chemistry on the
+sampled profiles find no condensates.
+
+The current calculation covers homogeneous, deuterium-dominated contraction.
+Atmosphere coverage at higher gravity, the later nuclear regimes, and
+additional envelope transport remain under development. The provisional
+sequence is not included in the plotted main-sequence and remnant tracks.
 
 Extending the track through hydrogen exhaustion requires atmosphere and
 interior inputs covering the changing composition, temperature and density,
