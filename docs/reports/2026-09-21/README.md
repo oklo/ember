@@ -3,7 +3,7 @@
 [Read the PDF](ember_status_and_future.pdf).
 
 The calculation with finite convective transport from the helium-3 flash onset
-reaches **315.3 thousand years**, **6201 K** and nuclear power **1.017e32 erg/s**
+reaches **415.3 thousand years**, **6260 K** and nuclear power **8.714e31 erg/s**
 on **1983** mass points. Nuclear power continues to decline through independently checked intervals. A matched
 **100-year** comparison on **1927/1983** points differs by **8.261%** in nuclear
 heat and **15.24%** in final nuclear power. The first year after refinement has
@@ -78,7 +78,7 @@ This directory contains the PDF, LaTeX inputs and included figure PDFs.
 The [late cooling figure](late_cooling.pdf), its [data](late_cooling.csv) and
 plotting script are included. The LBA97 opacity comparison is retained.
 The [standalone HR diagram of both histories](../../figures/2026-09-21/ember_two_sequences_hr.png)
-shows the alternatives through 315.3 thousand years and 23.48 million years;
+shows the alternatives through 415.3 thousand years and 23.48 million years;
 standalone flash diagrams remain separate from this draft.
 
 Rebuild here with `tectonic --keep-logs ember_status_and_future.tex`.
