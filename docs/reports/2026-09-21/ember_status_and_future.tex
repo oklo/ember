@@ -52,7 +52,7 @@ $4.248\times10^7$ yr from the model before shell convection, reaching
 $T_{\rm eff}=4771$ K and declining nuclear power of
 $3.166\times10^{30}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 1628 K. A separate calculation with finite
 convective transport from the onset follows a rise, decline and renewed
-burning through $4.619\times10^6$ yr. These are alternative histories from a
+burning through $5.219\times10^6$ yr. These are alternative histories from a
 common model near the onset of shell convection, with different preceding
 mixing treatments; their endpoints cannot be joined into one verified track.
 Both use the supplied hydrogen atmosphere normalization. Whether the flash
@@ -763,12 +763,12 @@ resolution dependence remain to be established.
 
 The onset calculation includes finite composition transport throughout all
 convective layers. On a locally refined 1983-point grid it reaches
-$4.619\times10^6$ yr, $T_{\rm eff}=6025$ K and nuclear power
-$1.371\times10^{31}$ erg s$^{-1}$. Nuclear power continues to decline;
+$5.219\times10^6$ yr, $T_{\rm eff}=5958$ K and nuclear power
+$1.227\times10^{31}$ erg s$^{-1}$. Nuclear power continues to decline;
 each retained interval passes the timestep, species and cell-energy checks.
-The largest single-cell contribution to nuclear power is 1.501\%.
-At this endpoint, nuclear burning supplies 32.26\% of the surface luminosity,
-and the radius is $0.09672\,R_\odot$. Effective temperature reaches a saved maximum of
+The largest single-cell contribution to nuclear power is 1.33\%.
+At this endpoint, nuclear burning supplies 32.56\% of the surface luminosity,
+and the radius is $0.09312\,R_\odot$. Effective temperature reaches a saved maximum of
 $6422$ K near $1.139\times10^6$ yr and subsequently declines. The two
 histories therefore both turn toward lower temperature; their continuing
 contraction and nuclear burning distinguish this from passive white-dwarf cooling.
@@ -778,7 +778,7 @@ contraction and nuclear burning distinguish this from passive white-dwarf coolin
 \caption{The two computed histories through helium-3 burning and subsequent
 contraction. Orange follows finite convective mixing from the onset of shell
 convection; purple follows the alternative mixing history. Their endpoints
-are 4.619 Myr at 6025 K and 42.48 Myr at 4771 K, respectively. Times are
+are 5.219 Myr at 5958 K and 42.48 Myr at 4771 K, respectively. Times are
 measured from their common model before shell convection. The right panel
 enlarges the flash region. Gray shows the preceding evolution; dotted
 connections indicate atmosphere or starting-model adjustments rather than
@@ -1082,6 +1082,19 @@ The calculation follows declining effective temperature and luminosity while
 the remnant contracts and continues nuclear burning. The connection through
 the resolved flash and a long white-dwarf cooling sequence remain unverified.
 These extrema refer to saved models; their exact times are not interpolated.
+
+At 42.48 Myr, the central temperature is 6.192 MK and density is
+$3.932\times10^4$ g cm$^{-3}$. The central hydrogen fraction is
+$3.474\times10^{-8}$; helium-4 and settled metals have mass fractions
+0.8685 and 0.1315. An ideal, fully ionized electron estimate gives a central
+Fermi energy of $34.86\,kT$. Nuclear heating peaks at $m/M=0.9620$,
+$r/R=0.4831$, temperature 6.125 MK and density 305.9 g cm$^{-3}$.
+The interval $m/M=0.9045$--0.9775 supplies 90\% of nuclear power.
+The remnant retains $0.003792\,M_\odot$ of hydrogen. Its outer convective
+layers contain $0.2661\%$ of the mass; the surface fractions are
+$X=0.8200$, $X_3=0.007167$, $X_4=0.1729$, and
+$Z=5.428\times10^{-16}$. This composition remains conditional on the
+adopted settling and atmosphere treatments.
 
 The radius maximum precedes the temperature maximum: expansion is followed
 by contraction, during which the surface becomes hotter even as luminosity
@@ -2967,38 +2980,38 @@ composition boundary of this atmosphere family.
 A calculation beginning with pre-main-sequence contraction will test helium-3
 ignition with a consistent atmosphere and composition history. The initial
 deuterium and helium-3 inventories evolve continuously without a reset at the
-main sequence. A provisional sequence follows $2.314$ Myr from a fully
+main sequence. A provisional sequence follows $3.000$ Myr from a fully
 convective model with $T_{\rm eff}=2864$ K, radius $1.594\,R_\odot$, and
-central temperature $0.5398$ MK. Its endpoint has $T_{\rm eff}=2940$ K,
-radius $0.9469\,R_\odot$, and central temperature $0.8710$ MK.
-Initial deuterium capture supplies $91.76\%$ of the surface luminosity at
-1 Myr. By 2.314 Myr, $88.98\%$ of the initial deuterium has burned and the
-nuclear contribution has declined to $68.28\%$, with contraction supplying
-the remainder. All 837 accepted intervals pass independent isotope and energy
-checks. The retained sequence takes 404.1 CPU s, excluding atmosphere
-preparation, and ends at its planned atmosphere gravity limit,
-$\log g=3.485$.
+central temperature $0.5398$ MK. Its endpoint has $T_{\rm eff}=2953$ K,
+radius $0.8214\,R_\odot$, luminosity $0.04624\,L_\odot$, and central temperature
+$0.9935$ MK. By this age, $99.97\%$ of the initial deuterium has burned.
+Nuclear reactions supply $1.946\%$ of the surface luminosity, almost entirely
+from the remaining deuterium; contraction supplies nearly all the light.
+Sustained hydrogen burning has not yet developed. All 1145 accepted intervals
+pass independent isotope and energy checks. The sequence calculations take
+507.3 CPU s, excluding atmosphere preparation.
 
-The boundary uses shape-preserving cubic interpolation of 16 atmosphere
-solutions over $2800$--$3000$ K and $\log g=3.000$--$3.500$. Derived
-interpolation nodes do not represent additional atmosphere calculations.
-Two independent points in the initial region differ from the interpolant
-by at most $0.01907\%$ in matching temperature and $0.3171\%$ in gas pressure.
-A warmer check at 2950 K and $\log g=3.375$ gives maximum differences of
-$0.04344\%$ and $0.2667\%$, respectively, across two independent depth
-solutions. Applying this warmer offset in a 5000 yr comparison beginning at
-1 Myr changes effective temperature by $0.0006377\%$ and luminosity by
-$0.001755\%$. A larger perturbation including the estimated source-sampling
-uncertainty changes effective temperature by $0.08209\%$, radius by
-$0.0008806\%$, and luminosity by $0.3262\%$. These are local sensitivity
-measurements, not error bounds on the complete evolution. The tested
-trace-isotope response is smaller. Equilibrium and rainout chemistry on the
-sampled profiles find no condensates.
+The boundary uses 20 atmosphere solutions in a restricted temperature--gravity
+region. Lower-gravity values are retained exactly while interpolation extends
+to higher gravity with a continuous generating slope at $\log g=3.500$.
+Unsupported cells remain unavailable. Derived interpolation nodes do not
+represent additional atmosphere calculations. Two independent points in the
+initial region differ from the interpolant by at most $0.01907\%$ in matching
+temperature and $0.3171\%$ in gas pressure. A warmer check at 2950 K and
+$\log g=3.375$ gives differences below $0.04344\%$ and $0.2667\%$.
+A further check at 2950 K and $\log g=3.625$ differs by $-0.2053\%$ in
+matching temperature and $+0.2361\%$ in gas pressure. Applying the latter
+offset over 5000 yr from a saved 2.314 Myr structure changes effective
+temperature by 2.573 K and luminosity by $0.3497\%$. A conservative
+perturbation including source-sampling uncertainty gives 3.509 K and
+$0.4767\%$, respectively. These are local sensitivities, not error bounds
+on the complete evolution. Equilibrium and rainout chemistry on the sampled
+profiles find no condensates.
 
 The current calculation covers homogeneous, deuterium-dominated contraction.
-Atmosphere coverage at higher gravity, the later nuclear regimes, and
-additional envelope transport remain under development. The provisional
-sequence is not included in the plotted main-sequence and remnant tracks.
+The later nuclear regimes and additional envelope transport remain under
+development. The provisional sequence is not included in the plotted
+main-sequence and remnant tracks.
 
 Extending the track through hydrogen exhaustion requires atmosphere and
 interior inputs covering the changing composition, temperature and density,
