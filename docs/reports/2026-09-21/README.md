@@ -3,7 +3,7 @@
 [Read the PDF](ember_status_and_future.pdf).
 
 The calculation with finite convective transport from the helium-3 flash onset
-reaches **415.3 thousand years**, **6260 K** and nuclear power **8.714e31 erg/s**
+reaches **574.8 thousand years**, **6334 K** and nuclear power **7.372e31 erg/s**
 on **1983** mass points. Nuclear power continues to decline through independently checked intervals. A matched
 **100-year** comparison on **1927/1983** points differs by **8.261%** in nuclear
 heat and **15.24%** in final nuclear power. The first year after refinement has
@@ -13,12 +13,12 @@ heat and final power unchanged within **1e-12** relative, but retains the
 explicit initial energy change. The complete flash and its spatial accuracy
 remain unresolved.
 
-An alternative flash history reaches **24.48 million years**, **5000 K** and
-nuclear power **3.901e30 erg/s** on **2115** mass points. Nuclear burning supplies
-**45.15%** of photon luminosity. Radius and surface luminosity have declined
-**80.78%** and **98.39%** from their maxima. Effective temperature passes a
-maximum of **6399 K** near **1.088 million years**, then falls **1399 K** over
-**23.39 million years**. The latest **million years** use **17.99 CPU minutes** and **11.31 wall minutes**, including timestep comparisons and rejected trials. Nuclear power falls **1.996%**, while the whole-star helium-3 inventory grows **0.03831%**. Hydrogen burning continues to produce helium-3 as helium-3 fusion consumes it; this net balance does not establish another flash or permanent extinction of burning. The full cooling-track runtime remains unmeasured.
+An alternative flash history reaches **29.48 million years**, **4911 K** and
+nuclear power **3.594e30 erg/s** on **2115** mass points. Nuclear burning supplies
+**48.46%** of photon luminosity. Radius and surface luminosity have declined
+**81.54%** and **98.61%** from their maxima. Effective temperature passes a
+maximum of **6399 K** near **1.088 million years**, then falls **1488 K** over
+**28.39 million years**. The latest **5 million years** use **74.91 CPU minutes** and **40.23 wall minutes**, including timestep comparisons and rejected trials. Nuclear power falls **7.869%**, while the whole-star helium-3 inventory grows **0.2052%**. At the endpoint, helium-3 production is **1.263e12 g/s** and destruction is **4.106e11 g/s**. Helium-3 fusion supplies **23.12%** of nuclear power, down from **26.97%** five million years before. The discrete source sum reproduces the inventory change to better than **1e-10** relative. This establishes the balance of production and destruction; it does not establish stability against a later flash. The full cooling-track runtime remains unmeasured.
 
 A matched **1000-year** test near **log g = 5.42** changes surface temperature by **5.918 K** and deposited nuclear energy by **0.00005299%** between the two inferred hydrogen gravity responses, with identical final convective regions. This local comparison does not validate the absolute atmosphere or establish that ignition is independent of it.
 
@@ -33,7 +33,7 @@ subsequent envelope and fuel history. The short atmosphere comparison is now
 explicitly described as exploratory because one calculation exceeds its
 timestep accuracy limit.
 
-The selected cooling atmosphere window has **18** columns over **4750–5500 K** and **log g = 5.80–6.00** at three hydrogen fractions. Twelve occupied rows are preserved exactly; six new columns pass independent source and depth checks. The combined table passes interpolation, EOS and full stellar-response comparisons, followed by a reviewed **million-year** cooling interval. Higher-gravity and **4500 K** columns are being calculated. A matched **million-year** reference comparison gives **0.2632 K** and **0.0002222%** in nuclear heat, with the same final convection. Independent **5250 K** and **5750 K** columns test interpolation within the broader source collection; at **5250 K**, the composition response agrees to **0.000007587%** in temperature and **0.1582%** in pressure.
+The selected cooling atmosphere window has **18** columns over **4750–5500 K** and **log g = 5.80–6.00** at three hydrogen fractions. Twelve occupied rows are preserved exactly; six new columns pass independent source and depth checks. The combined table passes interpolation, EOS and full stellar-response comparisons, followed by **6 million years** of reviewed cooling. Higher-gravity and **4500 K** columns are being calculated. A matched **million-year** reference comparison gives **0.2632 K** and **0.0002222%** in nuclear heat, with the same final convection. Independent **5250 K** and **5750 K** columns test interpolation within the broader source collection; at **5250 K**, the composition response agrees to **0.000007587%** in temperature and **0.1582%** in pressure.
 
 A matched **2.1-million-year** cooling comparison over **5500–6000 K** changes
 endpoint temperature by **2.292 K** and nuclear heat by **0.002680%** between
@@ -78,7 +78,7 @@ This directory contains the PDF, LaTeX inputs and included figure PDFs.
 The [late cooling figure](late_cooling.pdf), its [data](late_cooling.csv) and
 plotting script are included. The LBA97 opacity comparison is retained.
 The [standalone HR diagram of both histories](../../figures/2026-09-21/ember_two_sequences_hr.png)
-shows the alternatives through 415.3 thousand years and 24.48 million years;
+shows the alternatives through 574.8 thousand years and 29.48 million years;
 standalone flash diagrams remain separate from this draft.
 
 Rebuild here with `tectonic --keep-logs ember_status_and_future.tex`.

@@ -38,7 +38,7 @@ continues outside the depleted center. The computed luminosity reaches a
 local maximum of $0.006513\Ls$ near $3.673\Tyr$, at $T_{\rm eff}=4128$ K,
 and then declines. Surface temperature passes a shallow local maximum of 4754 K
 near $3.838\Tyr$, then declines by 141.5 K
-over 164.3 Gyr. The present model remains powered mainly by
+over 164.3 Gyr. At this pre-flash point, the model remains powered mainly by
 hydrogen burning, which supplies 97.28\% of its photon luminosity; a long cooling sequence is not yet established.
 
 A continuation with the supplied white-dwarf atmosphere covers an additional
@@ -48,11 +48,11 @@ a helium-3 burning pulse and a convective shell near the hydrogen--helium
 transition. Locally refined calculations retain the pulse, but its peak
 strength and timing depend on spatial resolution. A diagnostic late-phase
 calculation with 2115 mass points follows shell burning through
-$2.448\times10^7$ yr from the model before shell convection, reaching
-$T_{\rm eff}=5000$ K and declining nuclear power of
-$3.901\times10^{30}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 1399 K. A separate calculation with finite
+$2.948\times10^7$ yr from the model before shell convection, reaching
+$T_{\rm eff}=4911$ K and declining nuclear power of
+$3.594\times10^{30}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 1488 K. A separate calculation with finite
 convective transport from the onset follows a rise, decline and renewed
-burning through $4.153\times10^5$ yr. These are alternative histories from a
+burning through $5.748\times10^5$ yr. These are alternative histories from a
 common model near the onset of shell convection, with different preceding
 mixing treatments; their endpoints cannot be joined into one verified track.
 Both use the supplied hydrogen atmosphere normalization. Whether the flash
@@ -763,12 +763,12 @@ resolution dependence remain to be established.
 
 The onset calculation includes finite composition transport throughout all
 convective layers. On a locally refined 1983-point grid it reaches
-$4.153\times10^5$ yr, $T_{\rm eff}=6260$ K and nuclear power
-$8.714\times10^{31}$ erg s$^{-1}$. Nuclear power continues to decline;
+$5.748\times10^5$ yr, $T_{\rm eff}=6334$ K and nuclear power
+$7.372\times10^{31}$ erg s$^{-1}$. Nuclear power continues to decline;
 each retained interval passes the timestep, species and cell-energy checks.
-The largest single-cell contribution to nuclear power is 7.328\%.
-At this endpoint, nuclear burning supplies 20\% of the surface luminosity,
-and the radius is $0.2868\,R_\odot$.
+The largest single-cell contribution to nuclear power is 6.341\%.
+At this endpoint, nuclear burning supplies 21.61\% of the surface luminosity,
+and the radius is $0.2479\,R_\odot$.
 A matched $10^4$ yr comparison of two hydrogen atmosphere references
 through $\log g=5.25$ gives a 4.187 K difference in endpoint temperature
 and a 0.009269\% difference in deposited nuclear energy, with identical
@@ -786,7 +786,7 @@ native CPU time from 46.28 to 27.65 minutes over a matched $10^4$ yr interval.
 Endpoint temperature differs by 0.07287 K and integrated nuclear heat by
 0.03629\%, with unchanged accuracy criteria and convective regions.
 A separate 640 yr full-step/two-half-step comparison gives a nuclear-heat
-difference of 0.1409\%. Adaptive full intervals have a ceiling of 2560 yr;
+difference of 0.1409\%. Adaptive full intervals have a ceiling of 5120 yr;
 each accepted interval must pass the same timestep and conservation checks.
 A 7500 yr comparison entering the 6000--6500 K atmosphere interval gives
 endpoint differences of 1.008 K and 0.06316\% in surface luminosity, with
@@ -1049,13 +1049,13 @@ mean helium charge below 0.3549\% relative to full ionization. Fully ionized
 Coulomb transport remains an approximation here. A 400 yr comparison with
 400, 200 and 100 yr steps passes the same accuracy and conservation checks;
 the coarsest and finest deposited nuclear energies differ by 0.1203\%.
-The continued sequence reaches $2.448\times10^7$ yr, 5000 K and nuclear
-power $3.901\times10^{30}$ erg s$^{-1}$, supplying 45.15\% of the photon
-luminosity. Its radius is $4.405\times10^9$ cm and surface gravity
-$\log g=5.835$. The radius reaches a maximum near $2.444\times10^5$ yr,
+The continued sequence reaches $2.948\times10^7$ yr, 4911 K and nuclear
+power $3.594\times10^{30}$ erg s$^{-1}$, supplying 48.46\% of the photon
+luminosity. Its radius is $4.231\times10^9$ cm and surface gravity
+$\log g=5.870$. The radius reaches a maximum near $2.444\times10^5$ yr,
 and the surface luminosity near $2.544\times10^5$ yr. They subsequently decline
-by 80.78\% and 98.39\%, respectively. Effective temperature reaches a saved maximum of
-6399 K near $1.088\times10^6$ yr, then declines by 1399 K over $2.339\times10^7$ yr.
+by 81.54\% and 98.61\%, respectively. Effective temperature reaches a saved maximum of
+6399 K near $1.088\times10^6$ yr, then declines by 1488 K over $2.839\times10^7$ yr.
 Figure~\ref{fig:late_cooling} shows the temperature turn and luminosity decline.
 During the first 83,200 yr of this decline, the nominal and alternative
 atmosphere references give decreases of 1.151 K and 1.032 K, respectively.
@@ -1084,8 +1084,8 @@ fuel depletion alone does not exclude another episode of unstable burning.
 Left: an enlarged HR diagram around the effective-temperature maximum.
 The arrow follows increasing time. Right: photon luminosity and deposited
 nuclear power over the same interval. Time is measured from the model before
-shell convection. Temperature declines from 6399 K to 5000 K over
-$2.339\times10^7$ yr; nuclear burning supplies 45.15\% of the final surface luminosity.
+shell convection. Temperature declines from 6399 K to 4911 K over
+$2.839\times10^7$ yr; nuclear burning supplies 48.46\% of the final surface luminosity.
 The contracting model has turned toward cooling. Its physical connection
 to the calculation resolving the flash from its onset remains unverified.}
 \label{fig:late_cooling}
@@ -1093,8 +1093,8 @@ to the calculation resolving the flash from its onset remains unverified.}
 
 A 3200 yr calculation with 3200, 1600 and 800 yr steps passes the same
 accuracy and conservation checks; the coarsest and finest deposited energies
-differ by 0.2883\%. Adaptive trial steps may reach 204,800 yr, with retained
-half steps at most 102,400 yr. Every accepted interval passes the same timestep and conservation
+differ by 0.2883\%. Adaptive trial steps may reach 819,200 yr, with retained
+half steps at most 409,600 yr. Every accepted interval passes the same timestep and conservation
 criteria. Over an $8.174\times10^5$ yr segment ending near 18.83 Myr,
 completed native calls use 75.61 CPU minutes, including rejected trials;
 the cost of an interrupted call is unavailable.
@@ -1126,11 +1126,24 @@ For cooler models, an 18-column grid spans 4750--5500 K and
 $\log g=5.8$--6.0 at three hydrogen fractions. Twelve occupied rows are
 preserved exactly; six new columns pass independent source and depth checks.
 The combined boundary passes interpolation-derivative, EOS pressure-inversion
-and complete stellar-response comparisons. Its first million years of
-cooling pass the same timestep and conservation criteria, using 17.99 CPU
-minutes and 11.31 wall minutes. Nuclear power decreases by 1.996\%, while
-the helium-3 inventory increases by 0.03831\%. This is the net result of
-continued production and destruction, not evidence for or against a later flash.
+and complete stellar-response comparisons. Cooling through this interval
+passes the same timestep and conservation criteria. The final five million
+years use 74.91 CPU minutes and 40.23 wall minutes, including rejected
+trials and timestep comparisons. Nuclear power decreases by 7.869\%, while
+the helium-3 inventory increases by 0.2052\%.
+
+At $2.948\times10^7$ yr, the reduced pp network produces helium-3 at
+$1.263\times10^{12}$ g s$^{-1}$ and destroys it at
+$4.106\times10^{11}$ g s$^{-1}$. Helium-3 fusion supplies 23.12\% of
+nuclear power, compared with 26.97\% five million years before.
+Temperature at the maximum helium-3 abundance falls from 5.927 to
+5.895 MK, while density increases from 192.6 to 205.8 g cm$^{-3}$.
+These reaction diagnostics group the trace metals for screening; the
+resulting net source agrees with the saved network source to better than
+$10^{-8}$ relative. Summing the saved nuclear sources over the retained
+steps reproduces the total helium-3 inventory change to better than
+$10^{-10}$ relative. This establishes the production--destruction balance,
+not stability against a later flash.
 A separate 3200 yr comparison near $\log g=4.5$ passes the same checks,
 with deposited nuclear energies differing by 0.08760\%.
 
