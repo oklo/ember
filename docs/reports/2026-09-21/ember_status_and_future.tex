@@ -48,11 +48,11 @@ a helium-3 burning pulse and a convective shell near the hydrogen--helium
 transition. Locally refined calculations retain the pulse, but its peak
 strength and timing depend on spatial resolution. A diagnostic late-phase
 calculation with 2115 mass points follows shell burning through
-$2.948\times10^7$ yr from the model before shell convection, reaching
-$T_{\rm eff}=4911$ K and declining nuclear power of
-$3.594\times10^{30}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 1488 K. A separate calculation with finite
+$4.248\times10^7$ yr from the model before shell convection, reaching
+$T_{\rm eff}=4771$ K and declining nuclear power of
+$3.166\times10^{30}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 1628 K. A separate calculation with finite
 convective transport from the onset follows a rise, decline and renewed
-burning through $5.748\times10^5$ yr. These are alternative histories from a
+burning through $1.775\times10^6$ yr. These are alternative histories from a
 common model near the onset of shell convection, with different preceding
 mixing treatments; their endpoints cannot be joined into one verified track.
 Both use the supplied hydrogen atmosphere normalization. Whether the flash
@@ -763,12 +763,15 @@ resolution dependence remain to be established.
 
 The onset calculation includes finite composition transport throughout all
 convective layers. On a locally refined 1983-point grid it reaches
-$5.748\times10^5$ yr, $T_{\rm eff}=6334$ K and nuclear power
-$7.372\times10^{31}$ erg s$^{-1}$. Nuclear power continues to decline;
+$1.775\times10^6$ yr, $T_{\rm eff}=6379$ K and nuclear power
+$3.323\times10^{31}$ erg s$^{-1}$. Nuclear power continues to decline;
 each retained interval passes the timestep, species and cell-energy checks.
-The largest single-cell contribution to nuclear power is 6.341\%.
-At this endpoint, nuclear burning supplies 21.61\% of the surface luminosity,
-and the radius is $0.2479\,R_\odot$.
+The largest single-cell contribution to nuclear power is 3.348\%.
+At this endpoint, nuclear burning supplies 30.05\% of the surface luminosity,
+and the radius is $0.1392\,R_\odot$. Effective temperature reaches a saved maximum of
+$6422$ K near $1.139\times10^6$ yr and subsequently declines. The two
+histories therefore both turn toward lower temperature; their continuing
+contraction and nuclear burning distinguish this from passive white-dwarf cooling.
 A matched $10^4$ yr comparison of two hydrogen atmosphere references
 through $\log g=5.25$ gives a 4.187 K difference in endpoint temperature
 and a 0.009269\% difference in deposited nuclear energy, with identical
@@ -1049,13 +1052,13 @@ mean helium charge below 0.3549\% relative to full ionization. Fully ionized
 Coulomb transport remains an approximation here. A 400 yr comparison with
 400, 200 and 100 yr steps passes the same accuracy and conservation checks;
 the coarsest and finest deposited nuclear energies differ by 0.1203\%.
-The continued sequence reaches $2.948\times10^7$ yr, 4911 K and nuclear
-power $3.594\times10^{30}$ erg s$^{-1}$, supplying 48.46\% of the photon
-luminosity. Its radius is $4.231\times10^9$ cm and surface gravity
-$\log g=5.870$. The radius reaches a maximum near $2.444\times10^5$ yr,
+The continued sequence reaches $4.248\times10^7$ yr, 4771 K and nuclear
+power $3.166\times10^{30}$ erg s$^{-1}$, supplying 55.85\% of the photon
+luminosity. Its radius is $3.919\times10^9$ cm and surface gravity
+$\log g=5.937$. The radius reaches a maximum near $2.444\times10^5$ yr,
 and the surface luminosity near $2.544\times10^5$ yr. They subsequently decline
-by 81.54\% and 98.61\%, respectively. Effective temperature reaches a saved maximum of
-6399 K near $1.088\times10^6$ yr, then declines by 1488 K over $2.839\times10^7$ yr.
+by 82.91\% and 98.94\%, respectively. Effective temperature reaches a saved maximum of
+6399 K near $1.088\times10^6$ yr, then declines by 1628 K over $4.139\times10^7$ yr.
 Figure~\ref{fig:late_cooling} shows the temperature turn and luminosity decline.
 During the first 83,200 yr of this decline, the nominal and alternative
 atmosphere references give decreases of 1.151 K and 1.032 K, respectively.
@@ -1084,8 +1087,8 @@ fuel depletion alone does not exclude another episode of unstable burning.
 Left: an enlarged HR diagram around the effective-temperature maximum.
 The arrow follows increasing time. Right: photon luminosity and deposited
 nuclear power over the same interval. Time is measured from the model before
-shell convection. Temperature declines from 6399 K to 4911 K over
-$2.839\times10^7$ yr; nuclear burning supplies 48.46\% of the final surface luminosity.
+shell convection. Temperature declines from 6399 K to 4771 K over
+$4.139\times10^7$ yr; nuclear burning supplies 55.85\% of the final surface luminosity.
 The contracting model has turned toward cooling. Its physical connection
 to the calculation resolving the flash from its onset remains unverified.}
 \label{fig:late_cooling}
@@ -1127,8 +1130,7 @@ $\log g=5.8$--6.0 at three hydrogen fractions. Twelve occupied rows are
 preserved exactly; six new columns pass independent source and depth checks.
 The combined boundary passes interpolation-derivative, EOS pressure-inversion
 and complete stellar-response comparisons. Cooling through this interval
-passes the same timestep and conservation criteria. The final five million
-years use 74.91 CPU minutes and 40.23 wall minutes, including rejected
+passes the same timestep and conservation criteria. The interval from $2.448\times10^7$ to $2.948\times10^7$ yr uses 74.91 CPU minutes and 40.23 wall minutes, including rejected
 trials and timestep comparisons. Nuclear power decreases by 7.869\%, while
 the helium-3 inventory increases by 0.2052\%.
 

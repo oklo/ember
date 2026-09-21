@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-21T11:25:45.466590+00:00",
+  "created_utc": "2026-09-21T14:20:50.329676+00:00",
   "first": {
     "pulse_years": 1043056.4364848862,
     "Teff_K": 6398.352704157825,
@@ -10,13 +10,13 @@
     "run": "33"
   },
   "last": {
-    "run": 54,
-    "pulse_years": 29475475.17328023,
-    "Teff_K": 4910.617651269356,
-    "radius_cm": 4230699271.076464,
-    "photon_luminosity_erg_s": 7.416353021934144e+30,
-    "nuclear_power_erg_s": 3.594240838586827e+30,
-    "logg": 5.870087322686402
+    "run": 56,
+    "pulse_years": 42475475.17328023,
+    "Teff_K": 4770.847873171576,
+    "radius_cm": 3918638934.4854503,
+    "photon_luminosity_erg_s": 5.668581214282588e+30,
+    "nuclear_power_erg_s": 3.1661092847119887e+30,
+    "logg": 5.936641135633074
   },
   "temperature_maximum": {
     "pulse_years": 1087856.4364848863,
@@ -27,15 +27,14 @@
     "logg": 4.9447114785795305,
     "run": "33"
   },
-  "retained_points": 1615,
-  "temperature_drop_K": 1488.1149591908188,
-  "decline_years": 28387618.736795343,
-  "radius_decline": 0.8154416305956507,
-  "luminosity_decline": 0.9861403455493379,
-  "nuclear_fraction": 0.48463723719147733,
-  "appended_segment_years": 28304418.73679535,
+  "retained_points": 1723,
+  "temperature_drop_K": 1627.8847372885994,
+  "decline_years": 41387618.73679534,
+  "radius_decline": 0.8290548286007067,
+  "luminosity_decline": 0.9894065753581156,
+  "nuclear_fraction": 0.5585364600113063,
   "scope": "Checked retained late models. No interpolated evolution, connection to the distinct onset history, or claim of a completed white-dwarf cooling track.",
-  "csv_sha256": "c4cf8d23b34c82d1cb4fc3d553669e6ca589bc4b30e775e8914fd4c501cae762",
+  "csv_sha256": "6184d3f6e2407a91a9e31092db9ba0dd821effe758e862b697187b92ac986f22",
   "declining_saved_intervals_after_maximum": 1607,
   "interval_plot_policy": "Ordinary retained half steps and accepted compound-event endpoints; internal event timing is unresolved."
 }
