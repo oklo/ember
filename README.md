@@ -19,7 +19,7 @@ are measured from their common model preceding shell convection.
 
 | Calculation | Time | Effective temperature | Nuclear power |
 | --- | ---: | ---: | ---: |
-| Finite convective transport from flash onset, 1983 mass points | 238.7 thousand yr | 6151 K | 1.236e32 erg/s |
+| Finite convective transport from flash onset, 1983 mass points | 315.3 thousand yr | 6201 K | 1.017e32 erg/s |
 | Later shell burning, alternative history, 2115 mass points | 23.48 million yr | 5023 K | 3.981e30 erg/s |
 
 **These are alternative histories, not consecutive pieces of one track.**
@@ -32,7 +32,7 @@ that delay does not establish independence from the envelope and fuel history.
 
 The onset calculation passes a local nuclear-power maximum of **3.719e35 erg/s**,
 followed by an **81.64%** decline and renewed burning. Nuclear power continues to decline through independently checked intervals. The largest single-cell power contribution
-is **8.909%**. A matched **100-year** comparison on **1927/1983 mass points**
+is **8.213%**. A matched **100-year** comparison on **1927/1983 mass points**
 changes nuclear heat by **8.261%** and final power by **15.24%**. Inserting
 mass points produces an initial mechanical readjustment with an integrated
 energy residual of **1.844e43 erg** in its first year. A controlled correction
@@ -95,7 +95,7 @@ The paper compares Ember with MESA and with Laughlin, Bodenheimer and Adams
 (1997), including the requested opacity-map comparison. The separate
 [Fortran reconstruction](https://github.com/oklo/Henyey) seeks to reproduce
 LBA97's assumptions and methods. A new [late cooling figure](docs/reports/2026-09-21/late_cooling.pdf) shows the checked temperature turn and luminosity decline, with its small data table and plotting script included.
-The [standalone HR diagram of both flash histories](docs/figures/2026-09-21/ember_two_sequences_hr.png) shows the alternatives through 238.7 thousand years and 23.48 million years.
+The [standalone HR diagram of both flash histories](docs/figures/2026-09-21/ember_two_sequences_hr.png) shows the alternatives through 315.3 thousand years and 23.48 million years.
 Standalone flash diagrams remain separate from the draft.
 
 The public source does not yet contain all physics and numerical updates used
