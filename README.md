@@ -19,7 +19,7 @@ are measured from their common model preceding shell convection.
 
 | Calculation | Time | Effective temperature | Nuclear power |
 | --- | ---: | ---: | ---: |
-| Finite convective transport from flash onset, 1983 mass points | 3.775 million yr | 6125 K | 1.653e31 erg/s |
+| Finite convective transport from flash onset, 1983 mass points | 4.275 million yr | 6065 K | 1.473e31 erg/s |
 | Later shell burning, alternative history, 2115 mass points | 42.48 million yr | 4771 K | 3.166e30 erg/s |
 
 **These are alternative histories, not consecutive pieces of one track.**
@@ -32,7 +32,7 @@ that delay does not establish independence from the envelope and fuel history.
 
 The onset calculation passes a local nuclear-power maximum of **3.719e35 erg/s**,
 followed by an **81.64%** decline and renewed burning. Nuclear power continues to decline through independently checked intervals. The largest single-cell power contribution
-is **1.813%**. A matched **100-year** comparison on **1927/1983 mass points**
+is **1.614%**. A matched **100-year** comparison on **1927/1983 mass points**
 changes nuclear heat by **8.261%** and final power by **15.24%**. Inserting
 mass points produces an initial mechanical readjustment with an integrated
 energy residual of **1.844e43 erg** in its first year. A controlled correction
@@ -47,7 +47,10 @@ In the later calculation, radius and surface luminosity have declined
 supplies **55.85%** of the current surface luminosity. This supports a turn
 toward cooling within that calculation.
 
-The **24.48–29.48 million year** interval uses **74.91 CPU minutes** and **40.23 wall minutes**, including timestep comparisons and rejected trials. Nuclear power falls **7.869%**, while the whole-star helium-3 inventory grows **0.2052%**. At **29.48 million years**, helium-3 production is **1.263e12 g/s** and destruction is **4.106e11 g/s**. Helium-3 fusion supplies **23.12%** of nuclear power, down from **26.97%** five million years before. The discrete source sum reproduces the inventory change to better than **1e-10** relative. This establishes the balance of production and destruction; it does not establish stability against a later flash. The full cooling-track runtime remains unmeasured. Both histories now turn toward lower effective temperature. The finite-mixing calculation reaches **6422 K** near **1.139 million years** before declining. A separate continuous calculation from pre-main-sequence contraction is being prepared with explicit initial deuterium, consistent atmospheres and additional envelope transport; it has not yet produced an evolutionary track. Trial intervals are
+The **24.48–29.48 million year** interval uses **74.91 CPU minutes** and **40.23 wall minutes**, including timestep comparisons and rejected trials. Nuclear power falls **7.869%**, while the whole-star helium-3 inventory grows **0.2052%**. At **29.48 million years**, helium-3 production is **1.263e12 g/s** and destruction is **4.106e11 g/s**. Helium-3 fusion supplies **23.12%** of nuclear power, down from **26.97%** five million years before. The discrete source sum reproduces the inventory change to better than **1e-10** relative. This establishes the balance of production and destruction; it does not establish stability against a later flash. The full cooling-track runtime remains unmeasured. Both histories now turn toward lower effective temperature. The finite-mixing calculation reaches **6422 K** near **1.139 million years** before declining.
+
+A provisional pre-main-sequence calculation now follows **100,000 years** of contraction with its initial deuterium and helium-3 inventories intact. It uses **74.79 CPU seconds**, excluding atmosphere preparation, and ends at **2876 K** with radius **1.389 solar radii**. The starting atmosphere grid is complete at full resolution; interpolation and trace-isotope checks remain under assessment before accepting this as the physical reference track.
+ Trial intervals are
 at most **819,200 years**; the accepted solution retains the refined substeps,
 with unchanged accuracy and conservation criteria. The main track through
 **4.002 Tyr** accounts for **15.13 elapsed hours** and **36.31 CPU-hours**,
@@ -95,7 +98,7 @@ The paper compares Ember with MESA and with Laughlin, Bodenheimer and Adams
 (1997), including the requested opacity-map comparison. The separate
 [Fortran reconstruction](https://github.com/oklo/Henyey) seeks to reproduce
 LBA97's assumptions and methods. A new [late cooling figure](docs/reports/2026-09-21/late_cooling.pdf) shows the checked temperature turn and luminosity decline, with its small data table and plotting script included.
-The [standalone HR diagram of both flash histories](docs/figures/2026-09-21/ember_two_sequences_hr.png) shows the alternatives through 3.775 million years and 42.48 million years.
+The [standalone HR diagram of both flash histories](docs/figures/2026-09-21/ember_two_sequences_hr.png) shows the alternatives through 4.275 million years and 42.48 million years.
 Standalone flash diagrams remain separate from the draft.
 
 The public source does not yet contain all physics and numerical updates used
