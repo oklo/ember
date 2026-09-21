@@ -3,7 +3,7 @@
 [Read the PDF](ember_status_and_future.pdf).
 
 The calculation with finite convective transport from the helium-3 flash onset
-reaches **176.1 thousand years**, **6034 K** and nuclear power **1.643e32 erg/s**
+reaches **201.1 thousand years**, **6108 K** and nuclear power **1.436e32 erg/s**
 on **1983** mass points. Nuclear power continues to decline through independently checked intervals. A matched
 **100-year** comparison on **1927/1983** points differs by **8.261%** in nuclear
 heat and **15.24%** in final nuclear power. The first year after refinement has
@@ -13,12 +13,12 @@ heat and final power unchanged within **1e-12** relative, but retains the
 explicit initial energy change. The complete flash and its spatial accuracy
 remain unresolved.
 
-An alternative flash history reaches **20.30 million years**, **5107 K** and
-nuclear power **4.291e30 erg/s** on **2115** mass points. Nuclear burning supplies
-**42.07%** of photon luminosity. Radius and surface luminosity have declined
-**79.99%** and **98.09%** from their maxima. Effective temperature passes a
-maximum of **6399 K** near **1.088 million years**, then falls **1292 K** over
-**19.22 million years**. The final **358.4 thousand years** use **5.678 CPU minutes** in 21 completed native calls, including timestep comparisons. A preceding **32,400-year** check of stable microscopic arithmetic and solved species-flux conservation differs by **0.02234%** in nuclear heat, with unchanged physical tolerances and convection. These are local timings; the full cooling-track runtime remains unmeasured.
+An alternative flash history reaches **23.48 million years**, **5023 K** and
+nuclear power **3.981e30 erg/s** on **2115** mass points. Nuclear burning supplies
+**44.44%** of photon luminosity. Radius and surface luminosity have declined
+**80.61%** and **98.33%** from their maxima. Effective temperature passes a
+maximum of **6399 K** near **1.088 million years**, then falls **1376 K** over
+**22.39 million years**. The final **2.171 million years** use **31.46 CPU minutes** in 66 completed native calls, including timestep comparisons and rejected trials. A preceding **32,400-year** check of stable microscopic arithmetic and solved species-flux conservation differs by **0.02234%** in nuclear heat, with unchanged physical tolerances and convection. These are local timings; the full cooling-track runtime remains unmeasured.
 
 A matched **1000-year** test near **log g = 5.42** changes surface temperature by **5.918 K** and deposited nuclear energy by **0.00005299%** between the two inferred hydrogen gravity responses, with identical final convective regions. This local comparison does not validate the absolute atmosphere or establish that ignition is independent of it.
 
@@ -33,11 +33,7 @@ subsequent envelope and fuel history. The short atmosphere comparison is now
 explicitly described as exploratory because one calculation exceeds its
 timestep accuracy limit.
 
-The cooler atmosphere table contains **27** source columns over **5000–6000 K**
-and **log g = 5.40–5.80**. Independent **5250 K** and **5750 K** columns test
-interpolation between temperature and gravity nodes. At **5250 K**, the
-composition response agrees to **0.000007587%** in temperature and **0.1582%**
-in pressure.
+The selected cooler atmosphere grid has **24** source columns over **5000–5500 K** and **log g = 5.40–6.00**, with six new depth-checked columns and 18 preserved rows. A matched **million-year** reference comparison gives **0.2632 K** and **0.0002222%** in nuclear heat, with the same final convection. Atmosphere coverage below **5000 K** is the next cooling requirement. Independent **5250 K** and **5750 K** columns test interpolation within the broader source collection. At **5250 K**, the composition response agrees to **0.000007587%** in temperature and **0.1582%** in pressure.
 
 A matched **2.1-million-year** cooling comparison over **5500–6000 K** changes
 endpoint temperature by **2.292 K** and nuclear heat by **0.002680%** between
@@ -53,7 +49,9 @@ and the convective regions agree. A separate **640-year** timestep comparison
 passes. These measurements support the selected detailed continuation;
 they do not establish the runtime or accuracy of a complete cooling track.
 
-A matched **7500-year** comparison entering the **6000–6500 K** atmosphere interval gives differences of **1.008 K**, **0.06316%** in surface luminosity and **0.00002583%** in nuclear heat, with identical final convection. Full timesteps up to **1280 years** pass the original full-step/two-half-step checks.
+A matched **7500-year** comparison entering the **6000–6500 K** atmosphere interval gives differences of **1.008 K**, **0.06316%** in surface luminosity and **0.00002583%** in nuclear heat, with identical final convection. Each accepted interval passes the original full-step/two-half-step checks.
+
+A matched **25,000-year** comparison of the corrected hot reference tables gives **1.366 K**, **0.06345%** in surface luminosity and **0.01279%** in nuclear heat, with identical final convection. Adaptive full intervals may reach **2560 years**; every accepted interval retains the original checks.
 
 A further **10,000-year** comparison entering the **5500–6000 K** atmosphere
 interval changes the detailed history's endpoint by **9.515 K**, surface
@@ -76,7 +74,7 @@ This directory contains the PDF, LaTeX inputs and included figure PDFs.
 The [late cooling figure](late_cooling.pdf), its [data](late_cooling.csv) and
 plotting script are included. The LBA97 opacity comparison is retained.
 The [standalone HR diagram of both histories](../../figures/2026-09-21/ember_two_sequences_hr.png)
-shows the alternatives through 176.1 thousand years and 20.30 million years;
+shows the alternatives through 201.1 thousand years and 23.48 million years;
 standalone flash diagrams remain separate from this draft.
 
 Rebuild here with `tectonic --keep-logs ember_status_and_future.tex`.

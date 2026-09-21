@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-21T04:39:13.834310+00:00",
+  "created_utc": "2026-09-21T06:46:18.996301+00:00",
   "first": {
     "pulse_years": 1043056.4364848862,
     "Teff_K": 6398.352704157825,
@@ -10,13 +10,13 @@
     "run": "33"
   },
   "last": {
-    "run": "v51",
-    "pulse_years": 20304275.17328023,
-    "Teff_K": 5107.07460010566,
-    "radius_cm": 4587023596.671061,
-    "photon_luminosity_erg_s": 1.0199346731236189e+31,
-    "nuclear_power_erg_s": 4.290780512121678e+30,
-    "logg": 5.7998496855278825
+    "run": "v52",
+    "pulse_years": 23475475.17328023,
+    "Teff_K": 5022.574344085072,
+    "radius_cm": 4444599051.705409,
+    "photon_luminosity_erg_s": 8.957612572200832e+30,
+    "nuclear_power_erg_s": 3.9806833039820124e+30,
+    "logg": 5.827246455480555
   },
   "temperature_maximum": {
     "pulse_years": 1087856.4364848863,
@@ -27,15 +27,15 @@
     "logg": 4.9447114785795305,
     "run": "33"
   },
-  "retained_points": 1471,
-  "temperature_drop_K": 1291.6580103545157,
-  "decline_years": 19216418.736795343,
-  "radius_decline": 0.7998974776561036,
-  "luminosity_decline": 0.980939496690712,
-  "nuclear_fraction": 0.4206916996929688,
-  "appended_segment_years": 19133218.736795347,
+  "retained_points": 1547,
+  "temperature_drop_K": 1376.1582663751033,
+  "decline_years": 22387618.736795343,
+  "radius_decline": 0.8061105502707706,
+  "luminosity_decline": 0.9832600451210408,
+  "nuclear_fraction": 0.44439109996068765,
+  "appended_segment_years": 22304418.736795347,
   "scope": "Checked retained late models. No interpolated evolution, connection to the distinct onset history, or claim of a completed white-dwarf cooling track.",
-  "csv_sha256": "f221d2d879d8e7120fb22664449f91094f3b5e3ce2da8637e0e21e1b7ddba6c2",
-  "declining_saved_intervals_after_maximum": 1463,
+  "csv_sha256": "c58326d95667996540740fe1483a9cb5e42244d5c1311dc622f30caef82c69e4",
+  "declining_saved_intervals_after_maximum": 1539,
   "interval_plot_policy": "Ordinary retained half steps and accepted compound-event endpoints; internal event timing is unresolved."
 }
