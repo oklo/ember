@@ -3,7 +3,7 @@
 [Read the PDF](ember_status_and_future.pdf).
 
 The calculation with finite convective transport from the helium-3 flash onset
-reaches **201.1 thousand years**, **6108 K** and nuclear power **1.436e32 erg/s**
+reaches **238.7 thousand years**, **6151 K** and nuclear power **1.236e32 erg/s**
 on **1983** mass points. Nuclear power continues to decline through independently checked intervals. A matched
 **100-year** comparison on **1927/1983** points differs by **8.261%** in nuclear
 heat and **15.24%** in final nuclear power. The first year after refinement has
@@ -51,6 +51,10 @@ they do not establish the runtime or accuracy of a complete cooling track.
 
 A matched **7500-year** comparison entering the **6000–6500 K** atmosphere interval gives differences of **1.008 K**, **0.06316%** in surface luminosity and **0.00002583%** in nuclear heat, with identical final convection. Each accepted interval passes the original full-step/two-half-step checks.
 
+A further **25,000-year** comparison below **log g = 4.50** gives **0.4703 K** difference in endpoint temperature and **0.006257%** in nuclear heat. The final convective regions agree. The selected extension uses the measured gravity response of solved near-hydrogen atmospheres, preserving the occupied reference values. This checks local sensitivity, not the absolute atmosphere.
+
+Microscopic species transport extends to **1.000 MK** under a locally checked ionization approximation. A **1600/800/400-year** comparison gives **0.2686%** difference in nuclear heat with unchanged accuracy and conservation criteria. The heat-transport blend remains at **2–3 MK**.
+
 A matched **25,000-year** comparison of the corrected hot reference tables gives **1.366 K**, **0.06345%** in surface luminosity and **0.01279%** in nuclear heat, with identical final convection. Adaptive full intervals may reach **2560 years**; every accepted interval retains the original checks.
 
 A further **10,000-year** comparison entering the **5500–6000 K** atmosphere
@@ -74,7 +78,7 @@ This directory contains the PDF, LaTeX inputs and included figure PDFs.
 The [late cooling figure](late_cooling.pdf), its [data](late_cooling.csv) and
 plotting script are included. The LBA97 opacity comparison is retained.
 The [standalone HR diagram of both histories](../../figures/2026-09-21/ember_two_sequences_hr.png)
-shows the alternatives through 201.1 thousand years and 23.48 million years;
+shows the alternatives through 238.7 thousand years and 23.48 million years;
 standalone flash diagrams remain separate from this draft.
 
 Rebuild here with `tectonic --keep-logs ember_status_and_future.tex`.
