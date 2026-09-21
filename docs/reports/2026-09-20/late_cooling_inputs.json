@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-21T01:16:51.595347+00:00",
+  "created_utc": "2026-09-21T02:46:56.432015+00:00",
   "first": {
     "pulse_years": 1043056.4364848862,
     "Teff_K": 6398.352704157825,
@@ -10,13 +10,13 @@
     "run": "33"
   },
   "last": {
-    "run": "v47",
-    "pulse_years": 17906769.595160868,
-    "Teff_K": 5183.043232947329,
-    "radius_cm": 4718377867.290372,
-    "photon_luminosity_erg_s": 1.1448441317150424e+31,
-    "nuclear_power_erg_s": 4.608093762363874e+30,
-    "logg": 5.7753261979231825
+    "run": "event1883",
+    "pulse_years": 18855994.99377965,
+    "Teff_K": 5151.89160571569,
+    "radius_cm": 4663645607.024136,
+    "photon_luminosity_erg_s": 1.0917911011506148e+31,
+    "nuclear_power_erg_s": 4.471638994729731e+30,
+    "logg": 5.785460552558362
   },
   "temperature_maximum": {
     "pulse_years": 1087856.4364848863,
@@ -27,15 +27,15 @@
     "logg": 4.9447114785795305,
     "run": "33"
   },
-  "retained_points": 1288,
-  "temperature_drop_K": 1215.6893775128465,
-  "decline_years": 16818913.158675984,
-  "radius_decline": 0.7941673303573973,
-  "luminosity_decline": 0.9786051931205121,
-  "nuclear_fraction": 0.4025083969693485,
-  "appended_segment_years": 16735713.158675982,
+  "retained_points": 1366,
+  "temperature_drop_K": 1246.841004744485,
+  "decline_years": 17768138.557294764,
+  "radius_decline": 0.7965549490609078,
+  "luminosity_decline": 0.9795966462902961,
+  "nuclear_fraction": 0.40956910072056535,
+  "appended_segment_years": 17684938.557294767,
   "scope": "Checked retained late models. No interpolated evolution, connection to the distinct onset history, or claim of a completed white-dwarf cooling track.",
-  "csv_sha256": "03ba3364d5ab733348fe96dd2ca8e3e47bcc76787e2ad1c13c4169c348c1482f",
-  "declining_saved_intervals_after_maximum": 1280,
+  "csv_sha256": "f34e05a5b4fad119069b610b923cfcc2ed6b038d1818c3c10fa86c2dc1fa56bd",
+  "declining_saved_intervals_after_maximum": 1358,
   "interval_plot_policy": "Ordinary retained half steps and accepted compound-event endpoints; internal event timing is unresolved."
 }
