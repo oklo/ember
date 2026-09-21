@@ -52,7 +52,7 @@ $4.248\times10^7$ yr from the model before shell convection, reaching
 $T_{\rm eff}=4771$ K and declining nuclear power of
 $3.166\times10^{30}$ erg s$^{-1}$. Its radius and surface luminosity have passed maxima; effective temperature has passed a local maximum and declined by 1628 K. A separate calculation with finite
 convective transport from the onset follows a rise, decline and renewed
-burning through $4.275\times10^6$ yr. These are alternative histories from a
+burning through $4.619\times10^6$ yr. These are alternative histories from a
 common model near the onset of shell convection, with different preceding
 mixing treatments; their endpoints cannot be joined into one verified track.
 Both use the supplied hydrogen atmosphere normalization. Whether the flash
@@ -763,15 +763,30 @@ resolution dependence remain to be established.
 
 The onset calculation includes finite composition transport throughout all
 convective layers. On a locally refined 1983-point grid it reaches
-$4.275\times10^6$ yr, $T_{\rm eff}=6065$ K and nuclear power
-$1.473\times10^{31}$ erg s$^{-1}$. Nuclear power continues to decline;
+$4.619\times10^6$ yr, $T_{\rm eff}=6025$ K and nuclear power
+$1.371\times10^{31}$ erg s$^{-1}$. Nuclear power continues to decline;
 each retained interval passes the timestep, species and cell-energy checks.
-The largest single-cell contribution to nuclear power is 1.614\%.
-At this endpoint, nuclear burning supplies 32.1\% of the surface luminosity,
-and the radius is $0.09917\,R_\odot$. Effective temperature reaches a saved maximum of
+The largest single-cell contribution to nuclear power is 1.501\%.
+At this endpoint, nuclear burning supplies 32.26\% of the surface luminosity,
+and the radius is $0.09672\,R_\odot$. Effective temperature reaches a saved maximum of
 $6422$ K near $1.139\times10^6$ yr and subsequently declines. The two
 histories therefore both turn toward lower temperature; their continuing
 contraction and nuclear burning distinguish this from passive white-dwarf cooling.
+
+\begin{figure}[H]\centering
+\includegraphics[width=\textwidth]{flash_histories_hr.pdf}
+\caption{The two computed histories through helium-3 burning and subsequent
+contraction. Orange follows finite convective mixing from the onset of shell
+convection; purple follows the alternative mixing history. Their endpoints
+are 4.619 Myr at 6025 K and 42.48 Myr at 4771 K, respectively. Times are
+measured from their common model before shell convection. The right panel
+enlarges the flash region. Gray shows the preceding evolution; dotted
+connections indicate atmosphere or starting-model adjustments rather than
+resolved evolution. Agreement in the HR diagram does not establish
+convergence of the flash's peak power or internal mixing.}
+\label{fig:flash_histories_hr}
+\end{figure}
+
 A matched $10^4$ yr comparison of two hydrogen atmosphere references
 through $\log g=5.25$ gives a 4.187 K difference in endpoint temperature
 and a 0.009269\% difference in deposited nuclear energy, with identical
@@ -2961,9 +2976,15 @@ nuclear burning supplies $0.9015\%$ of the final surface luminosity.
 The calculation retains its initial isotope inventory without a reset,
 passes independent deuterium fuel and heat checks, and takes 74.79 CPU s
 for 178 accepted intervals. This timing excludes atmosphere preparation.
-Full-resolution atmosphere sources cover the starting model, while
-interpolation and the trace-isotope approximation remain under assessment;
-the provisional segment is not included in the physical reference track.
+An independent atmosphere at 2850 K and $\log g=3.125$ differs from
+four-corner interpolation by $-1.304\%$ in matching temperature and
+$+2.156\%$ in gas pressure. Applying these two offsets uniformly in a
+local stellar comparison changes the initial effective temperature by
+10.89 K and radius by $0.5213\%$. This measures sensitivity, rather than
+correcting the boundary along the track. The tested trace-isotope response
+changes the radius by $0.0008919\%$. Local atmosphere refinement remains
+in progress; the provisional segment is not included in the physical
+reference track.
 Additional envelope transport for the later evolution remains in development.
 
 Extending the track through hydrogen exhaustion requires atmosphere and
