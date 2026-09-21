@@ -47,7 +47,7 @@ In the later calculation, radius and surface luminosity have declined
 supplies **44.44%** of the current surface luminosity. This supports a turn
 toward cooling within that calculation.
 
-The final **2.171 million years** use **31.46 CPU minutes** in 66 completed native calls, including timestep comparisons and rejected trials. A preceding **32,400-year** check of stable microscopic arithmetic and solved species-flux conservation differs by **0.02234%** in nuclear heat, with unchanged physical tolerances and convection. These are local timings; the full cooling-track runtime remains unmeasured. Trial intervals are
+The final **2.171 million years** use **31.46 CPU minutes** in 63 completed native calls, including timestep comparisons and rejected trials. A preceding **32,400-year** check of stable microscopic arithmetic and solved species-flux conservation differs by **0.02234%** in nuclear heat, with unchanged physical tolerances and convection. These are local timings; the full cooling-track runtime remains unmeasured. Trial intervals are
 at most **204,800 years**; the accepted solution retains the refined substeps,
 with unchanged accuracy and conservation criteria. The main track through
 **4.002 Tyr** accounts for **15.13 elapsed hours** and **36.31 CPU-hours**,

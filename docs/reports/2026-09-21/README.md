@@ -18,7 +18,7 @@ nuclear power **3.981e30 erg/s** on **2115** mass points. Nuclear burning suppli
 **44.44%** of photon luminosity. Radius and surface luminosity have declined
 **80.61%** and **98.33%** from their maxima. Effective temperature passes a
 maximum of **6399 K** near **1.088 million years**, then falls **1376 K** over
-**22.39 million years**. The final **2.171 million years** use **31.46 CPU minutes** in 66 completed native calls, including timestep comparisons and rejected trials. A preceding **32,400-year** check of stable microscopic arithmetic and solved species-flux conservation differs by **0.02234%** in nuclear heat, with unchanged physical tolerances and convection. These are local timings; the full cooling-track runtime remains unmeasured.
+**22.39 million years**. The final **2.171 million years** use **31.46 CPU minutes** in 63 completed native calls, including timestep comparisons and rejected trials. A preceding **32,400-year** check of stable microscopic arithmetic and solved species-flux conservation differs by **0.02234%** in nuclear heat, with unchanged physical tolerances and convection. These are local timings; the full cooling-track runtime remains unmeasured.
 
 A matched **1000-year** test near **log g = 5.42** changes surface temperature by **5.918 K** and deposited nuclear energy by **0.00005299%** between the two inferred hydrogen gravity responses, with identical final convective regions. This local comparison does not validate the absolute atmosphere or establish that ignition is independent of it.
 
