@@ -13,12 +13,12 @@ heat and final power unchanged within **1e-12** relative, but retains the
 explicit initial energy change. The complete flash and its spatial accuracy
 remain unresolved.
 
-An alternative flash history reaches **23.48 million years**, **5023 K** and
-nuclear power **3.981e30 erg/s** on **2115** mass points. Nuclear burning supplies
-**44.44%** of photon luminosity. Radius and surface luminosity have declined
-**80.61%** and **98.33%** from their maxima. Effective temperature passes a
-maximum of **6399 K** near **1.088 million years**, then falls **1376 K** over
-**22.39 million years**. The final **2.171 million years** use **31.46 CPU minutes** in 63 completed native calls, including timestep comparisons and rejected trials. A preceding **32,400-year** check of stable microscopic arithmetic and solved species-flux conservation differs by **0.02234%** in nuclear heat, with unchanged physical tolerances and convection. These are local timings; the full cooling-track runtime remains unmeasured.
+An alternative flash history reaches **24.48 million years**, **5000 K** and
+nuclear power **3.901e30 erg/s** on **2115** mass points. Nuclear burning supplies
+**45.15%** of photon luminosity. Radius and surface luminosity have declined
+**80.78%** and **98.39%** from their maxima. Effective temperature passes a
+maximum of **6399 K** near **1.088 million years**, then falls **1399 K** over
+**23.39 million years**. The latest **million years** use **17.99 CPU minutes** and **11.31 wall minutes**, including timestep comparisons and rejected trials. Nuclear power falls **1.996%**, while the whole-star helium-3 inventory grows **0.03831%**. Hydrogen burning continues to produce helium-3 as helium-3 fusion consumes it; this net balance does not establish another flash or permanent extinction of burning. The full cooling-track runtime remains unmeasured.
 
 A matched **1000-year** test near **log g = 5.42** changes surface temperature by **5.918 K** and deposited nuclear energy by **0.00005299%** between the two inferred hydrogen gravity responses, with identical final convective regions. This local comparison does not validate the absolute atmosphere or establish that ignition is independent of it.
 
@@ -33,7 +33,7 @@ subsequent envelope and fuel history. The short atmosphere comparison is now
 explicitly described as exploratory because one calculation exceeds its
 timestep accuracy limit.
 
-The selected cooler atmosphere grid has **24** source columns over **5000–5500 K** and **log g = 5.40–6.00**, with six new depth-checked columns and 18 preserved rows. A matched **million-year** reference comparison gives **0.2632 K** and **0.0002222%** in nuclear heat, with the same final convection. Atmosphere coverage below **5000 K** is the next cooling requirement. Independent **5250 K** and **5750 K** columns test interpolation within the broader source collection. At **5250 K**, the composition response agrees to **0.000007587%** in temperature and **0.1582%** in pressure.
+The selected cooling atmosphere window has **18** columns over **4750–5500 K** and **log g = 5.80–6.00** at three hydrogen fractions. Twelve occupied rows are preserved exactly; six new columns pass independent source and depth checks. The combined table passes interpolation, EOS and full stellar-response comparisons, followed by a reviewed **million-year** cooling interval. Higher-gravity and **4500 K** columns are being calculated. A matched **million-year** reference comparison gives **0.2632 K** and **0.0002222%** in nuclear heat, with the same final convection. Independent **5250 K** and **5750 K** columns test interpolation within the broader source collection; at **5250 K**, the composition response agrees to **0.000007587%** in temperature and **0.1582%** in pressure.
 
 A matched **2.1-million-year** cooling comparison over **5500–6000 K** changes
 endpoint temperature by **2.292 K** and nuclear heat by **0.002680%** between
@@ -78,7 +78,7 @@ This directory contains the PDF, LaTeX inputs and included figure PDFs.
 The [late cooling figure](late_cooling.pdf), its [data](late_cooling.csv) and
 plotting script are included. The LBA97 opacity comparison is retained.
 The [standalone HR diagram of both histories](../../figures/2026-09-21/ember_two_sequences_hr.png)
-shows the alternatives through 415.3 thousand years and 23.48 million years;
+shows the alternatives through 415.3 thousand years and 24.48 million years;
 standalone flash diagrams remain separate from this draft.
 
 Rebuild here with `tectonic --keep-logs ember_status_and_future.tex`.

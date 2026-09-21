@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-21T06:46:18.996301+00:00",
+  "created_utc": "2026-09-21T10:54:25.613535+00:00",
   "first": {
     "pulse_years": 1043056.4364848862,
     "Teff_K": 6398.352704157825,
@@ -10,13 +10,13 @@
     "run": "33"
   },
   "last": {
-    "run": "v52",
-    "pulse_years": 23475475.17328023,
-    "Teff_K": 5022.574344085072,
-    "radius_cm": 4444599051.705409,
-    "photon_luminosity_erg_s": 8.957612572200832e+30,
-    "nuclear_power_erg_s": 3.9806833039820124e+30,
-    "logg": 5.827246455480555
+    "run": 53,
+    "pulse_years": 24475475.17328023,
+    "Teff_K": 4999.606683725294,
+    "radius_cm": 4405480314.661853,
+    "photon_luminosity_erg_s": 8.640751005012433e+30,
+    "nuclear_power_erg_s": 3.901230518120562e+30,
+    "logg": 5.834925104034019
   },
   "temperature_maximum": {
     "pulse_years": 1087856.4364848863,
@@ -27,15 +27,15 @@
     "logg": 4.9447114785795305,
     "run": "33"
   },
-  "retained_points": 1547,
-  "temperature_drop_K": 1376.1582663751033,
-  "decline_years": 22387618.736795343,
-  "radius_decline": 0.8061105502707706,
-  "luminosity_decline": 0.9832600451210408,
-  "nuclear_fraction": 0.44439109996068765,
-  "appended_segment_years": 22304418.736795347,
+  "retained_points": 1565,
+  "temperature_drop_K": 1399.1259267348814,
+  "decline_years": 23387618.736795343,
+  "radius_decline": 0.8078170507472461,
+  "luminosity_decline": 0.9838521949036817,
+  "nuclear_fraction": 0.4514920654301331,
+  "appended_segment_years": 23304418.736795347,
   "scope": "Checked retained late models. No interpolated evolution, connection to the distinct onset history, or claim of a completed white-dwarf cooling track.",
-  "csv_sha256": "c58326d95667996540740fe1483a9cb5e42244d5c1311dc622f30caef82c69e4",
-  "declining_saved_intervals_after_maximum": 1539,
+  "csv_sha256": "d0bd0b1fd83e03d03c0e8a64004f28ce19e63620f3ab1672692f18fe236b2fe4",
+  "declining_saved_intervals_after_maximum": 1557,
   "interval_plot_policy": "Ordinary retained half steps and accepted compound-event endpoints; internal event timing is unresolved."
 }
