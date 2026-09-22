@@ -3,7 +3,7 @@
 [Read the PDF](ember_status_and_future.pdf).
 
 The calculation with finite convective transport from the helium-3 flash onset
-reaches **5.309 million years**, **5948 K** and nuclear power **1.208e31 erg/s**
+reaches **5.609 million years**, **5917 K** and nuclear power **1.150e31 erg/s**
 on **1983** mass points. Nuclear power continues to decline through independently checked intervals. A matched
 **100-year** comparison on **1927/1983** points differs by **8.261%** in nuclear
 heat and **15.24%** in final nuclear power. The first year after refinement has
@@ -20,7 +20,7 @@ nuclear power **3.166e30 erg/s** on **2115** mass points. Nuclear burning suppli
 maximum of **6399 K** near **1.088 million years**, then falls **1628 K** over
 **41.39 million years**. The **24.48–29.48 million year** interval uses **74.91 CPU minutes** and **40.23 wall minutes**, including timestep comparisons and rejected trials. Nuclear power falls **7.869%**, while the whole-star helium-3 inventory grows **0.2052%**. At **29.48 million years**, helium-3 production is **1.263e12 g/s** and destruction is **4.106e11 g/s**. Helium-3 fusion supplies **23.12%** of nuclear power, down from **26.97%** five million years before. The discrete source sum reproduces the inventory change to better than **1e-10** relative. This establishes the balance of production and destruction; it does not establish stability against a later flash. The full cooling-track runtime remains unmeasured. Both histories now turn toward lower effective temperature. The finite-mixing calculation reaches **6422 K** near **1.139 million years** before declining.
 
-A provisional pre-main-sequence calculation follows **3.689 million years** of continuous contraction. All **1205 accepted intervals** pass independent isotope and energy checks; retained sequence calculations take **553.9 CPU seconds**, excluding atmosphere preparation and separate controls. Its endpoint is **2968 K**, radius **0.7090 solar radii**, central temperature **1.138 MK**, and central density **2.391 g/cm³**. The star remains fully convective with nearly uniform composition. Initial deuterium is essentially exhausted; nuclear power supplies only **1.158e-9** of surface luminosity. Sustained hydrogen burning has not yet developed. A timestep-refinement comparison changes radius by **0.005908%** and integrated surface emission by **0.04668%** over the tested interval. The local conservative atmosphere sensitivity remains **3.509 K** and **0.4767%** in luminosity. Later nuclear and envelope-transport integration remains unfinished.
+A provisional pre-main-sequence calculation follows **12.16 million years** of continuous contraction. All **1456 accepted intervals** pass independent isotope and energy checks; retained sequence calculations take **680.7 CPU seconds**, excluding atmosphere preparation and separate controls. Its endpoint is **3005 K**, radius **0.3989 solar radii**, central temperature **1.932 MK**, and central density **12.68 g/cm³**. The star remains fully convective with nearly uniform composition. Initial deuterium is exhausted; nuclear power supplies only **3.026e-6** of surface luminosity. Sustained hydrogen burning has not yet developed. The latest **5.911 million years** take **44.59 CPU seconds**, with no rejected steps. A timestep-refinement comparison changes radius by **0.005908%** and integrated surface emission by **0.04668%** over the tested interval. The atmosphere now uses **29** source points, with checked extensions that preserve the previous table and its stellar response. The previously measured **3.509 K** sensitivity remains local to its tested state. Later nuclear and envelope-transport integration remains unfinished.
 
 
 A matched **1000-year** test near **log g = 5.42** changes surface temperature by **5.918 K** and deposited nuclear energy by **0.00005299%** between the two inferred hydrogen gravity responses, with identical final convective regions. This local comparison does not validate the absolute atmosphere or establish that ignition is independent of it.
@@ -81,7 +81,7 @@ This directory contains the PDF, LaTeX inputs and included figure PDFs.
 The [late cooling figure](late_cooling.pdf), its [data](late_cooling.csv) and
 plotting script are included. The LBA97 opacity comparison is retained.
 The [standalone HR diagram of both histories](../../figures/2026-09-21/ember_two_sequences_hr.png)
-shows the alternatives through 5.309 million years and 42.48 million years;
+shows the alternatives through 5.609 million years and 42.48 million years;
 standalone flash diagrams remain separate from this draft.
 
 Rebuild here with `tectonic --keep-logs ember_status_and_future.tex`.
