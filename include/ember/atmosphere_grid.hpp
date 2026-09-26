@@ -12,6 +12,8 @@ namespace ember {
 // Non-grey source states on (XH, XHe3, log10 Teff, log10 g), at fixed
 // baryonic metal abundances and Rosseland matching depth. Interpolate log T
 // and log Pgas, then invert the caller's EOS at the actual composition.
+// Version 3 uses XHe3/(XHe3+XHe4) as its second table coordinate so a
+// rectangular grid can include both hydrogen-rich and helium-rich mixtures.
 // A source grid's declared mixture/EOS/isotope approximations require an
 // explicit opt-in. No extrapolation, abundance clipping or grey fallback.
 class CompositionAtmosphereGrid final : public Atmosphere {
@@ -27,6 +29,9 @@ public:
   const char *name() const override { return source_.c_str(); }
   const std::string &approximation() const { return approximation_; }
   double tau_match() const { return tau_; }
+  double reference_metallicity() const {
+    double z=0; for (double x : metals_) z+=x; return z;
+  }
   struct Support {
     std::array<double, 2> hydrogen, helium3, teff, gravity;
   };
@@ -56,11 +61,13 @@ private:
   const Eos &eos_;
   std::string source_, approximation_;
   double tau_{};
-  std::array<double, NSPEC - 3> metals_{};
+  std::array<double, NMETALS> metals_{};
   std::array<std::vector<double>, 4> axes_;
   std::vector<double> logT_, logPg_;
   std::vector<bool> valid_;
   bool has_missing_states_{};
+  bool helium_fraction_coordinates_{};
+  double metal_tolerance_{1e-12};
 };
 
 } // namespace ember

@@ -11,6 +11,9 @@ __pycache__/
 /data/**
 !/data/**/
 !/data/**/README.md
+!/data/MANIFEST.json
+!/data/production/provenance.json
+!/data/production/configuration.txt
 !/data/**/LICENSE*
 !/data/**/SYNPLE-LICENSE
 !/data/**/*.patch

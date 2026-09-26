@@ -1,0 +1,37 @@
+{
+  "prepared": "/tmp/ember-fable-nongrey-source/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-fine-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "scope": "Two direct X=.575 control atmospheres; held outside runtime grid, combined temperature/gravity/composition interpolation check.",
+  "requests": [
+    {
+      "name": "x575-y000-t3500-g510",
+      "XH": 0.575,
+      "X3": 0,
+      "teff_K": 3500,
+      "log_g": 5.1,
+      "specification": "/Users/greglaughlin/Projects/ember/data/atmosphere/sources/nongrey_x0575_control_v1_specification.json",
+      "opacity": "/tmp/ember-primary-nongrey-x0575-opacity-v1/plane-000/opacity/fort.63",
+      "initial": "/tmp/ember-fable-nongrey-x0375-atmos-v1/x375-y000-t3500-g510/final",
+      "convective_iterations": 10,
+      "composition_continuation": true,
+      "wait_for_opacity": false,
+      "wait_for_seed": false
+    },
+    {
+      "name": "x575-y000-t3700-g510",
+      "XH": 0.575,
+      "X3": 0,
+      "teff_K": 3700,
+      "log_g": 5.1,
+      "specification": "/Users/greglaughlin/Projects/ember/data/atmosphere/sources/nongrey_x0575_control_v1_specification.json",
+      "opacity": "/tmp/ember-primary-nongrey-x0575-opacity-v1/plane-000/opacity/fort.63",
+      "initial": "/tmp/ember-primary-nongrey-x0575-atmos-v1/x575-y000-t3500-g510/final",
+      "convective_iterations": 10,
+      "composition_continuation": false,
+      "wait_for_opacity": false,
+      "wait_for_seed": true
+    }
+  ]
+}

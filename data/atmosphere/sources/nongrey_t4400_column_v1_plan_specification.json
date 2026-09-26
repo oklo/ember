@@ -1,0 +1,39 @@
+{
+  "prepared": "/tmp/ember-fable-nongrey-source/prepared.json",
+  "initializer": "/tmp/ember-nongrey-conref-indexed-fine-v1/source.json",
+  "initializer_depths": 100,
+  "initializer_frequencies": 5000,
+  "scope": "4200K matching-state comparison with its retained full column, and4400K pilot after actualfullcolumnmaterialdomainfailure. Truncate seed at measuredtau1000; record actual final optical depths. No material opacity extrapolation.",
+  "requests": [
+    {
+      "name": "x450-y000-t4200-g515-tau1000",
+      "XH": 0.45,
+      "X3": 0,
+      "teff_K": 4200,
+      "log_g": 5.15,
+      "specification": "/Users/greglaughlin/Projects/ember/data/atmosphere/sources/nongrey_x045_x070_t4400_v1_specification.json",
+      "opacity": "/tmp/ember-primary-nongrey-x045-opacity-v1/plane-000/opacity/fort.63",
+      "initial": "/tmp/ember-primary-nongrey-x070-t4400-v1/x450-y000-t4200-g515/final",
+      "convective_iterations": 10,
+      "composition_continuation": false,
+      "initial_bottom_tau": 1000,
+      "wait_for_seed": false,
+      "wait_for_opacity": false
+    },
+    {
+      "name": "x450-y000-t4400-g515-tau1000",
+      "XH": 0.45,
+      "X3": 0,
+      "teff_K": 4400,
+      "log_g": 5.15,
+      "specification": "/Users/greglaughlin/Projects/ember/data/atmosphere/sources/nongrey_x045_x070_t4400_v1_specification.json",
+      "opacity": "/tmp/ember-primary-nongrey-x045-opacity-v1/plane-000/opacity/fort.63",
+      "initial": "/tmp/ember-primary-nongrey-x070-t4400-v1/x450-y000-t4200-g515/final",
+      "convective_iterations": 10,
+      "composition_continuation": false,
+      "initial_bottom_tau": 1000,
+      "wait_for_seed": false,
+      "wait_for_opacity": false
+    }
+  ]
+}

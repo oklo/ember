@@ -61,6 +61,9 @@ int main() {
     StellarMixtureOpacity stellar(data + "/opacity");
     constexpr double h = 1e-6;
     double derivatives = 0, invariance = 0;
+    const auto isotope_reference=c;
+    for(double D:{0.,2e-5}) {
+    c=isotope_reference;c.X[0]-=D;c[Species::H2]=D;
     for (auto [t, r] : {std::pair{3800., 1e-5}, std::pair{6200., 3e-4}, std::pair{24000., .01}}) {
       const auto k = mapped.eval(t, r, c);
       for (int j = 0; j < 2; ++j) {
@@ -86,11 +89,15 @@ int main() {
         src.X[j] = nuclides[j].A * c.X[j] / mass_numbers[j];
       src.X[2] += nuclides[2].A * c.X[1] / 3;
       src.X[1] = 0;
+      src.X[0] += nuclides[0].A*c[Species::H2]/2;
+      src[Species::H2]=0;
       const double scale = src.sum();
       for (double& x : src.X)
         x /= scale;
       invariance = std::max(invariance, std::abs(k.kappa / (scale * low.eval(t, r * scale, src).kappa) - 1));
     }
+    }
+    c=isotope_reference;
     check(derivatives < 2e-6, "opacity thermal/H/He3 derivatives include density and metallicity mapping",
           derivatives);
     check(invariance < 1e-13, "elemental mapping preserves extinction at equal atom densities", invariance);

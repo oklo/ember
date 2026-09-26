@@ -88,6 +88,8 @@ def main():
             command.append('--composition-continuation')
         if 'initial_bottom_tau' in job:
             command += ['--initial-bottom-tau', str(job['initial_bottom_tau'])]
+        if 'initial_column_factor' in job:
+            command += ['--initial-column-factor', str(job['initial_column_factor'])]
         if 'convective_iterations' in job:
             command += ['--convective-iterations', str(job['convective_iterations'])]
         check_cancellation(a.work, plan_sha256)

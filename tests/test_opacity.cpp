@@ -5,6 +5,8 @@
 #include "ember/opacity_ferguson.hpp"
 #include "ember/opacity_opal.hpp"
 #include "ember/opacity_blend.hpp"
+#include "ember/interp.hpp"
+#include <array>
 #include <fstream>
 #include <filesystem>
 #include <chrono>
@@ -26,6 +28,43 @@ static void near(double got, double want, double tol, const std::string& what) {
 }
 
 int main() {
+  // Exercise both interpolation interfaces across constant, monotone, sharply
+  // changing and turning data, including knots and the one-point limit.
+  {
+    const std::array<double, 5> x{0., .13, .8, 1.7, 4.};
+    const std::array<double, 5> response{.1, -.2, .3, .5, -.7};
+    const std::array<std::array<double, 5>, 4> cases{{
+      {2., 2., 2., 2., 2.}, {-3., -2.8, -.1, 4., 9.},
+      {-8., -7.99, -7.98, 2., 2.01}, {1., 5., -2., -3., 4.}}};
+    bool identical = true, bounded = true;
+    double worst_linear = 0.;
+    for (const auto& y : cases) {
+      for (std::size_t k = 0; k + 1 < x.size(); ++k) {
+        for (int j = 0; j <= 32; ++j) {
+          const double q = x[k] + (x[k+1]-x[k])*j/32.;
+          const auto a = interp::hermite(x,y,q);
+          const auto b = interp::hermite(x,y,response,q);
+          identical &= a.y == b.y && a.dydx == b.dydx;
+          bounded &= a.y >= std::min(y[k],y[k+1])-1e-12
+                  && a.y <= std::max(y[k],y[k+1])+1e-12;
+        }
+      }
+    }
+    std::array<double, 5> linear{};
+    for (std::size_t i=0; i<x.size(); ++i) linear[i]=2*x[i]-3;
+    for (double q : {-.2, 0., .07, .13, .8, 1.3, 1.7, 3.1, 4., 4.2}) {
+      const auto a=interp::hermite(x,linear,q);
+      worst_linear=std::max({worst_linear,std::abs(a.y-(2*q-3)),std::abs(a.dydx-2)});
+    }
+    const std::array<double,1> one_x{1.}, one_y{3.}, one_p{2.};
+    const auto one=interp::hermite(one_x,one_y,5.);
+    const auto one_parameter=interp::hermite(one_x,one_y,one_p,5.);
+    check(identical, "value and parameter paths give identical values/slopes", identical, 1.);
+    check(bounded, "limited interpolation stays between adjacent ordinates", bounded, 1.);
+    check(worst_linear<1e-12, "nonuniform interpolation reproduces a linear function", worst_linear, 0.);
+    check(one.y==3. && one.dydx==0. && one_parameter.dydp==2.,
+          "one-point interpolation retains constant and parameter response", one.y, 3.);
+  }
   const std::string data = std::string(EMBER_DATA_DIR) + "/opacity/ferguson_gs98_z020.dat";
   FergusonOpacity op(data);
   const auto r = op.range();

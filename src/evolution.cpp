@@ -1,9 +1,17 @@
 #include "ember/evolution.hpp"
 #include "ember/constants.hpp"
 #include "ember/convection.hpp"
+#include "ember/energy_grid.hpp"
 #include "energy.hpp"
+#include "thermal_transport.hpp"
+#include "ember/species_transport.hpp"
+#include "ember/cn_burning.hpp"
+#include "ember/deuterium_burning.hpp"
+#include "ember/cn_transport.hpp"
+#include "ember/metal_microscopic_transport.hpp"
 #include <algorithm>
 #include <cmath>
+#include <optional>
 #include <stdexcept>
 
 namespace ember {
@@ -13,7 +21,51 @@ void validate_composition(const Composition& c) {
     throw std::invalid_argument("evolution requires normalized baryonic abundances");
   for(double x:c.X) if(!std::isfinite(x) || x<0)
     throw std::invalid_argument("evolution requires finite nonnegative abundances");
+  if(c.cn_molality)(void)cn_physical_ledger(c,*c.cn_molality);
 }
+double composition_difference(const Composition& a,const Composition& b) {
+  if(a.cn_mass_convention!=b.cn_mass_convention)
+    throw std::logic_error("evolution changed the metal-mass convention");
+  if(a.cn_molality.has_value()!=b.cn_molality.has_value())
+    throw std::logic_error("evolution changed the active CN inventory");
+  double difference=0;
+  for(std::size_t j=0;j<NSPEC;++j)difference=std::max(difference,std::abs(a.X[j]-b.X[j]));
+  if(a.cn_molality)for(std::size_t j=0;j<3;++j)
+    difference=std::max(difference,mass_numbers[j+3]*std::abs((*a.cn_molality)[j]-(*b.cn_molality)[j]));
+  return difference;
+}
+// The total species rates depend on sources across a mixed region. Hold them
+// fixed for a local thermal Newton solve and converge them in the outer loop.
+class FrozenSpeciesHeat final:public MicroscopicTransport {
+ public:
+  explicit FrozenSpeciesHeat(const MicroscopicTransport& source):source_(source) {}
+  std::span<const SpeciesVector> rates;
+  std::span<const MetalSpeciesVector> metal_rates;
+  MicroscopicFaceResponse eval(std::size_t face,double mlo,double mhi,const Point& lo,
+      const Composition& a,const Point& hi,const Composition& b,bool derivatives)const override {
+    return source_.eval(face,mlo,mhi,lo,a,hi,b,derivatives);
+  }
+  MicroscopicHeatResponse heat(std::size_t face,double mlo,double mhi,const Point& lo,
+      const Composition& a,const Point& hi,const Composition& b,bool derivatives)const override {
+    if(!metal_rates.empty()) {
+      const auto* metal=dynamic_cast<const MetalMicroscopicTransport*>(&source_);
+      if(!metal || face>=metal_rates.size())throw std::logic_error("evolve_step: missing metal heat provider or rate");
+      return microscopic_heat_with_total_metal_rate(*metal,face,mlo,mhi,lo,a,hi,b,metal_rates[face],derivatives);
+    }
+    if(rates.empty())return source_.heat(face,mlo,mhi,lo,a,hi,b,derivatives);
+    if(face>=rates.size())throw std::out_of_range("evolve_step: missing total species rate");
+    return microscopic_heat_with_total_species_rate(source_,face,mlo,mhi,lo,a,hi,b,rates[face],derivatives);
+  }
+  bool requires_positive_species_guess()const override {return source_.requires_positive_species_guess();}
+  const char* name()const override {return "material heat at prescribed total species rates";}
+ private:
+  const MicroscopicTransport& source_;
+};
+struct CompositionUpdate {
+  std::vector<Composition> composition;
+  std::vector<SpeciesVector> total_rates;
+  std::vector<MetalSpeciesVector> total_metal_rates;
+};
 }
 std::vector<double> nodal_mass_weights(const Model& m) {
   if(m.size()<2 || m.m.size()!=m.size() || !(m.m[0]>0) || m.m.back()!=m.M)
@@ -35,6 +87,7 @@ MixingRegions schwarzschild_mixing_regions(const Model& m,const Physics& p) {
 MixingRegions convective_mixing_regions(const Model& m,const Physics& p) {
   if(!p.eos || !p.opacity || m.comp.size()!=m.size())
     throw std::invalid_argument("mixing regions: invalid model or physics");
+  detail::check_thermal_transport(p);
   nodal_mass_weights(m);
   struct Local {double P,kappa,ad,delta;};
   std::vector<Local> local;
@@ -47,8 +100,14 @@ MixingRegions convective_mixing_regions(const Model& m,const Physics& p) {
     // Same arithmetic midpoint transport quantities as zone assembly.
     const double T=.5*(m.T(i)+m.T(i+1)),mass=.5*(m.m[i]+m.m[i+1]);
     const double P=.5*(local[i].P+local[i+1].P),k=.5*(local[i].kappa+local[i+1].kappa);
-    const double L=.5*(m.y[i].L+m.y[i+1].L),ad=.5*(local[i].ad+local[i+1].ad);
-    const double rad=3*k*L*P/(16*M_PI*constants::a_rad*constants::c*constants::G*mass*std::pow(T,4));
+    const double L=thermal_face_luminosity(m,i),ad=.5*(local[i].ad+local[i+1].ad);
+    MicroscopicHeatResponse heat;
+    if(p.microscopic) {
+      heat=microscopic_heat(*p.microscopic,i,m.m[i],m.m[i+1],m.y[i],m.comp[i],m.y[i+1],m.comp[i+1],false);
+    }
+    const double rad=detail::thermal_transport<0>(T,.5*(m.rho(i)+m.rho(i+1)),P,mass,k,L,
+        p.microscopic!=nullptr || face_luminosities(m),heat.carried_luminosity,heat.conductivity,
+        m.y[i].lnT,m.y[i+1].lnT).gradient.value;
     double B=0;
     if(p.criterion==ConvectiveCriterion::ledoux)
       B=composition_buoyancy(*p.eos,T,P,.5*(local[i].delta+local[i+1].delta),
@@ -66,6 +125,23 @@ std::vector<Composition> burn_and_mix(const Model& thermal,const Model& previous
     throw std::invalid_argument("burn_and_mix: invalid step, tolerance or previous model");
   const auto weights=nodal_mass_weights(thermal);
   for(const auto& c:previous.comp) validate_composition(c);
+  if(const auto* network=dynamic_cast<const PPDeuterium*>(&nuclear))
+    return burn_deuterium_and_mix(thermal,previous,*network,regions,dt,tolerance);
+  if(const auto* network=dynamic_cast<const PPCNNetwork*>(&nuclear);
+      network && previous.comp.front().cn_mass_convention==CNMassConvention::explicit_metal_mass)
+    return burn_metal_cn_and_transport(thermal,previous,*network,regions,{},dt,tolerance);
+  for(const auto& c:previous.comp)if(c[Species::H2]!=0)
+    throw std::invalid_argument("burn_and_mix: explicit D requires its coupled network");
+  if(const auto* network=dynamic_cast<const PPCNNetwork*>(&nuclear)) {
+    std::vector<CNAbundances> old_cn;old_cn.reserve(previous.size());
+    for(const auto& c:previous.comp) {
+      if(!c.cn_molality)throw std::invalid_argument("burn_and_mix: CN inventory missing");
+      old_cn.push_back(*c.cn_molality);
+    }
+    return burn_cn_and_mix(thermal,previous,old_cn,network->pp(),network->cn(),regions,dt,tolerance).lookup;
+  }
+  for(const auto& c:previous.comp)if(c.cn_molality)
+    throw std::invalid_argument("burn_and_mix: explicit CN requires its coupled network");
   std::vector<Composition> output=previous.comp;
   std::size_t next=0;
   for(auto [begin,end]:regions) {
@@ -130,36 +206,202 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       || previous.comp.size()!=previous.size()
       || !std::isfinite(previous.age+dt) || previous.age<0 || !(previous.age+dt>previous.age)
       || !std::isfinite(options.abundance_tolerance) || options.abundance_tolerance<=0
+      || !std::isfinite(options.material_heat_tolerance) || options.material_heat_tolerance<=0
       || !std::isfinite(options.max_abundance_change) || options.max_abundance_change<=0)
     throw std::invalid_argument("evolve_step: invalid physics, age or options");
   const auto weights=nodal_mass_weights(previous);
+  detail::check_thermal_transport(p);
   for(const auto& c:previous.comp) validate_composition(c);
   Model current=previous;
   try {
-    auto burning=[&](const MixingRegions& regions) {
-      if(regions.size()==1 || (p.alpha_semiconvection==0 && p.alpha_thermohaline==0))
-        return burn_and_mix(current,previous,*p.nuclear,regions,dt,options.abundance_tolerance*.1);
-      return burn_and_transport(current,previous,*p.nuclear,regions,secular_mixing_diffusivities(current,p),
-          dt,options.abundance_tolerance*.1);
+    for(const auto& c:previous.comp)if(c[Species::H2]!=0 && p.microscopic)
+      throw std::invalid_argument("evolve_step: microscopic transport with D needs an isotope-aware provider");
+    const auto* metal=dynamic_cast<const MetalMicroscopicTransport*>(p.microscopic);
+    const auto* cn_network=dynamic_cast<const PPCNNetwork*>(p.nuclear);
+    for(const auto& c:previous.comp) {
+      const bool explicit_metals=c.cn_mass_convention==CNMassConvention::explicit_metal_mass;
+      if((metal && !explicit_metals) || (explicit_metals && (!cn_network || (p.microscopic && !metal)
+          || (!p.microscopic && !p.explicit_metal_mixing_only))))
+        throw std::invalid_argument("evolve_step: physical metal abundances require their CN network and compatible transport provider");
+    }
+    if(metal && !cn_network)
+      throw std::invalid_argument("evolve_step: physical metal transport requires the explicit CN network");
+    Physics coupled=p;
+    std::optional<FrozenSpeciesHeat> frozen;
+    if(p.microscopic && p.microscopic->uses_total_species_heat()) {
+      frozen.emplace(*p.microscopic);coupled.microscopic=&*frozen;
+    }
+    const bool finite=options.convective_mixing!=ConvectiveMixing::instantaneous;
+    if(options.convective_mixing!=ConvectiveMixing::instantaneous
+        && options.convective_mixing!=ConvectiveMixing::finite_implicit
+        && options.convective_mixing!=ConvectiveMixing::finite_lagged)
+      throw std::invalid_argument("evolve_step: unknown convective mixing choice");
+    if(finite && (!metal || !cn_network || !frozen || !face_luminosities(previous)))
+      throw std::invalid_argument("evolve_step: finite convection requires physical metal CN transport, total-species heat and volume-face luminosities");
+    auto check_rates=[&](auto rates) {
+      if(!rates.empty() && rates.size()+1!=previous.size())
+        throw std::invalid_argument("evolve_step: previous species heat rates have wrong dimensions");
+      for(const auto& face:rates)for(double rate:face)if(!std::isfinite(rate))
+        throw std::invalid_argument("evolve_step: nonfinite previous species heat rate");
     };
+    check_rates(options.previous_species_heat_rates);check_rates(options.previous_metal_heat_rates);
+    if((!options.previous_species_heat_rates.empty() && (!frozen || metal))
+        || (!options.previous_metal_heat_rates.empty() && (!frozen || !metal)))
+      throw std::invalid_argument("evolve_step: previous heat rates do not match the material provider");
+    if(frozen) {
+      frozen->rates=options.previous_species_heat_rates;
+      frozen->metal_rates=options.previous_metal_heat_rates;
+    }
+    std::vector<double> lagged_mixing;
+    if(options.convective_mixing==ConvectiveMixing::finite_lagged) {
+      const bool supplied=metal?!options.previous_metal_heat_rates.empty():!options.previous_species_heat_rates.empty();
+      if(!supplied)for(const auto& c:previous.comp)
+        if(composition_difference(c,previous.comp.front())!=0)
+          throw std::invalid_argument("evolve_step: lagged convection needs the previous total species heat rates for a stratified model");
+      // Freeze the whole mass conductance, including radius and density.
+      // Freezing D alone changes the coefficient during the thermal iteration.
+      lagged_mixing=finite_mixing_conductances(previous,coupled);
+    }
+    auto mixing_regions=[&]() {
+      if(!finite)return convective_mixing_regions(current,coupled);
+      MixingRegions regions;regions.reserve(current.size());
+      for(std::size_t i=0;i<current.size();++i)regions.emplace_back(i,i+1);
+      return regions;
+    };
+    auto burning=[&](const MixingRegions& regions)->CompositionUpdate {
+      if(p.microscopic) {
+        std::vector<double> mixing;
+        if(!lagged_mixing.empty())mixing=lagged_mixing;
+        else if(finite)mixing=finite_mixing_conductances(current,coupled);
+        else {
+          mixing=secular_mixing_diffusivities(current,coupled);
+          for(std::size_t i=0;i<mixing.size();++i) {
+            const double r=.5*(current.r(i)+current.r(i+1)),rho=.5*(current.rho(i)+current.rho(i+1));
+            const double area_mass=4*M_PI*r*r*rho;
+            mixing[i]*=area_mass*area_mass/(current.m[i+1]-current.m[i]);
+          }
+        }
+        auto base_flux=[&](std::size_t i,const Composition& left,const Composition& right,bool derivatives) {
+          return microscopic_face(*p.microscopic,i,current.m[i],current.m[i+1],
+              current.y[i],left,current.y[i+1],right,derivatives).species;
+        };
+        SpeciesTransportOptions transport_options;transport_options.abundance_tolerance=options.abundance_tolerance*.1;
+        transport_options.seed_present_species=p.microscopic->requires_positive_species_guess();
+        if(metal) {
+          transport_options.evaluation_threads=options.relaxation.zone_threads;
+          MetalCNFlux flux=[&](std::size_t i,const Composition& left,const Composition& right,bool derivatives) {
+            const auto face=metal_microscopic_face(*metal,i,current.m[i],current.m[i+1],
+                current.y[i],left,current.y[i+1],right,derivatives);
+            return common_metal_cn_flux(face.species,left,right,derivatives);
+          };
+          auto full=burn_metal_cn_and_diffuse(current,previous,*cn_network,regions,flux,dt,transport_options,mixing);
+          Model updated=current;updated.comp=std::move(full.composition);
+          auto redistribution=reconstruct_metal_fluxes(updated,previous,*cn_network,regions,full.boundary_fluxes,dt);
+          for(const auto& cell:redistribution.cell_balances)for(double balance:cell)
+            if(std::abs(balance)>transport_options.abundance_tolerance)
+              throw std::runtime_error("evolve_step: reconstructed metal species continuity exceeds tolerance");
+          return {std::move(updated.comp),{},std::move(redistribution.face_rates)};
+        }
+        SpeciesTransportResult species;
+        if(const auto* network=dynamic_cast<const PPCNNetwork*>(p.nuclear)) {
+          transport_options.evaluation_threads=options.relaxation.zone_threads;
+          if(p.cn_microscopic==CNMicroscopicApproximation::unselected)
+            throw std::invalid_argument("evolve_step: explicit CN microscopic approximation required");
+          CNSpeciesFlux flux=[&](std::size_t i,const Composition& left,const Composition& right,bool derivatives) {
+            return trace_cn_flux(base_flux(i,left,right,derivatives),left,right,p.cn_microscopic,derivatives);
+          };
+          auto full=burn_cn_and_diffuse(current,previous,*network,regions,flux,dt,transport_options,mixing);
+          species.composition=std::move(full.composition);
+          for(const auto& face:full.boundary_fluxes)
+            species.boundary_fluxes.push_back({face.face,{face.rate[0],face.rate[1]}});
+          // Fixed-GS98 material thermodynamics depends on the H/He lookup
+          // coordinates. Its carried heat uses their conservative rates;
+          // CN-dependent material enthalpy/collision feedback is not included
+          // in this explicitly selected trace approximation.
+        } else {
+          SpeciesFlux flux=[&](std::size_t i,const Composition& left,const Composition& right,bool derivatives) {
+            auto f=base_flux(i,left,right,derivatives);const double g=mixing[i];
+            for(std::size_t k=0;k<2;++k) {
+              f.rate[k]+=g*(left.X[k]-right.X[k]);
+              if(derivatives){f.dleft[k][k]+=g;f.dright[k][k]-=g;}
+            }
+            return f;
+          };
+          species=burn_and_diffuse(current,previous,*p.nuclear,regions,flux,dt,transport_options);
+        }
+        if(!frozen)return {std::move(species.composition),{},{}};
+        Model updated=current;updated.comp=std::move(species.composition);
+        auto redistribution=reconstruct_species_fluxes(updated,previous,*p.nuclear,regions,species.boundary_fluxes,dt);
+        for(const auto& cell:redistribution.cell_balances)for(double balance:cell)
+          if(std::abs(balance)>transport_options.abundance_tolerance)
+            throw std::runtime_error("evolve_step: reconstructed species continuity exceeds tolerance");
+        return {std::move(updated.comp),std::move(redistribution.face_rates),{}};
+      }
+      if(regions.size()==1 || (p.alpha_semiconvection==0 && p.alpha_thermohaline==0))
+        return {burn_and_mix(current,previous,*p.nuclear,regions,dt,options.abundance_tolerance*.1),{},{}};
+      return {burn_and_transport(current,previous,*p.nuclear,regions,secular_mixing_diffusivities(current,coupled),
+          dt,options.abundance_tolerance*.1),{},{}};
+    };
+    MixingRegions pending_regions;
+    CompositionUpdate pending;
+    bool have_pending=false;
     for(std::size_t iteration=0;iteration<options.max_coupling_iterations;++iteration) {
-      const auto regions=convective_mixing_regions(current,p);
-      current.comp=burning(regions);
+      // The convergence check below already evaluates the next composition
+      // on this exact thermal state. Retain it when another coupling pass is
+      // needed; no state or convection boundary changes between these calls.
+      const auto regions=have_pending?std::move(pending_regions):mixing_regions();
+      auto update=have_pending?std::move(pending):burning(regions);
+      current.comp=std::move(update.composition);
+      if(frozen) {frozen->rates=update.total_rates;frozen->metal_rates=update.total_metal_rates;}
+      have_pending=false;
       double change=0;
-      for(std::size_t i=0;i<current.size();++i) for(std::size_t j=0;j<NSPEC;++j)
-        change=std::max(change,std::abs(current.comp[i].X[j]-previous.comp[i].X[j]));
+      for(std::size_t i=0;i<current.size();++i)
+        change=std::max(change,composition_difference(current.comp[i],previous.comp[i]));
       if(change>options.max_abundance_change) throw std::runtime_error("evolve_step: abundance change exceeds step limit");
-      const auto structure=relax(current,p,atmosphere,options.relaxation,dt,&previous);
+      const auto structure=relax(current,coupled,atmosphere,options.relaxation,dt,&previous);
       result.coupling_iterations=iteration+1;result.residual=structure.residual;result.correction=structure.correction;
       if(!structure.converged) throw std::runtime_error("evolve_step: "+structure.message);
       current=structure.model;
-      const auto next_regions=convective_mixing_regions(current,p);
-      const auto next_comp=burning(next_regions);
+      auto next_regions=mixing_regions();
+      auto next=burning(next_regions);
       double residual=0;
-      for(std::size_t i=0;i<current.size();++i) for(std::size_t j=0;j<NSPEC;++j)
-        residual=std::max(residual,std::abs(current.comp[i].X[j]-next_comp[i].X[j]));
+      for(std::size_t i=0;i<current.size();++i)
+        residual=std::max(residual,composition_difference(current.comp[i],next.composition[i]));
       result.abundance_residual=residual;
-      if(regions!=next_regions || residual>options.abundance_tolerance) continue;
+      result.material_heat_residual=0;
+      if(frozen) {
+        double luminosity_floor=0;
+        for(const auto& point:current.y)luminosity_floor=std::max(luminosity_floor,1e-12*std::abs(point.L));
+        for(std::size_t i=0;i+1<current.size();++i) {
+          const auto old_heat=microscopic_heat(*frozen,i,current.m[i],current.m[i+1],
+              current.y[i],current.comp[i],current.y[i+1],current.comp[i+1],false);
+          // The supplied rate enters linearly. Reuse its exact enthalpy
+          // derivative instead of repeating the entire kinetic evaluation.
+          double heat_change=0;
+          for(std::size_t k=0;k<2;++k)
+            heat_change+=old_heat.total_rate_enthalpy[k]*(metal?
+                next.total_metal_rates[i][k]-update.total_metal_rates[i][k]:
+                next.total_rates[i][k]-update.total_rates[i][k]);
+          if(metal)heat_change+=old_heat.total_metal_rate_enthalpy*
+              (next.total_metal_rates[i][2]-update.total_metal_rates[i][2]);
+          const double scale=std::max({std::abs(current.y[i].L),std::abs(current.y[i+1].L),
+              luminosity_floor,std::numeric_limits<double>::min()});
+          result.material_heat_residual=std::max(result.material_heat_residual,
+              std::abs(heat_change)/scale);
+        }
+      }
+      bool deuterium_coupled=true;
+      if(dynamic_cast<const PPDeuterium*>(p.nuclear) || cn_network) {
+        for(std::size_t i=0;i<current.size();++i) {
+          const double a=current.comp[i][Species::H2],b=next.composition[i][Species::H2];
+          deuterium_coupled &= std::abs(a-b)<=1e-8*std::max(a,b)+2*std::numeric_limits<double>::denorm_min();
+        }
+      }
+      if(!deuterium_coupled || regions!=next_regions || residual>options.abundance_tolerance
+          || result.material_heat_residual>options.material_heat_tolerance) {
+        pending_regions=std::move(next_regions);pending=std::move(next);
+        have_pending=true;continue;
+      }
       double mass_release=0;
       for(std::size_t i=0;i<current.size();++i) {
         const auto e=p.eos->eval(current.T(i),current.rho(i),current.comp[i]);
@@ -175,16 +417,30 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
         for(std::size_t j=0;j<NSPEC;++j)
           mass_release-=weights[i]*(nuclides[j].A/mass_numbers[j]-1)
             *(current.comp[i].X[j]-previous.comp[i].X[j])*constants::c*constants::c/dt;
+        mass_release-=weights[i]*(p.nuclear->rest_energy_correction(current.comp[i])
+          -p.nuclear->rest_energy_correction(previous.comp[i]))/dt;
       }
       result.luminosity_balance=(result.nuclear_luminosity+result.gravitational_luminosity
           -result.thermal_neutrino_luminosity)/current.y.back().L-1;
       const double release=result.nuclear_luminosity+result.neutrino_luminosity;
       result.nuclear_mass_balance=release>0 ? mass_release/release-1 : 0;
-      for(auto [begin,end]:regions) if(end>begin+1) {
+      const auto physical_regions=finite?convective_mixing_regions(current,coupled):regions;
+      for(auto [begin,end]:physical_regions) if(end>begin+1) {
         ++result.mixed_regions;
         for(std::size_t i=begin;i<end;++i) result.convective_mass_fraction+=weights[i]/current.M;
       }
+      if(finite) {
+        const auto faces=convective_mixing_faces(current,coupled);
+        for(std::size_t i=0;i<faces.size();++i)if(faces[i].buoyancy_contrast>0) {
+          const double ratio=std::abs(faces[i].composition_term)/faces[i].buoyancy_contrast;
+          if(ratio>result.convection_composition_ratio) {
+            result.convection_composition_ratio=ratio;result.convection_composition_face=i;
+          }
+        }
+      }
       current.age=previous.age+dt;
+      result.total_species_rates=std::move(update.total_rates);
+      result.total_metal_species_rates=std::move(update.total_metal_rates);
       result.model=std::move(current);result.converged=true;result.message="converged";return result;
     }
     result.message="evolve_step: coupling iteration limit";

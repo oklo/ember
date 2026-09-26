@@ -19,7 +19,7 @@ MixtureOpacity::MixtureOpacity(const std::filesystem::path& path) {
     double z;
     std::string file;
     in >> z >> std::quoted(file);
-    if (!in || !std::isfinite(z) || z <= 0 || z >= 1 || (i && z <= z_.back()) || file.empty())
+    if (!in || !std::isfinite(z) || z < 0 || z >= 1 || (i && z <= z_.back()) || file.empty())
       throw std::runtime_error("MixtureOpacity: invalid metallicity axis");
     auto table = std::make_unique<TabulatedOpacity>(path.parent_path() / file, name_.c_str(),
                                                     axis == "logR" ? TabulatedOpacity::DensityAxis::logR
@@ -34,6 +34,7 @@ MixtureOpacity::MixtureOpacity(const std::filesystem::path& path) {
     throw std::runtime_error("MixtureOpacity: trailing manifest data");
 }
 std::pair<std::size_t, double> MixtureOpacity::interval(const Composition& c) const {
+  if(c[Species::H2]!=0)throw std::domain_error("MixtureOpacity: explicit deuterium mapping required");
   double z = c.Z();
   if (std::abs(c.sum() - 1) > 1e-10 || c.X[1] != 0)
     throw std::domain_error("MixtureOpacity: normalized elemental abundances required");
@@ -51,7 +52,17 @@ std::pair<std::size_t, double> MixtureOpacity::interval(const Composition& c) co
 Composition MixtureOpacity::source(const Composition& c, std::size_t i) const {
   auto out = c;
   const double z = c.Z();
-  for (std::size_t j = 3; j < NSPEC; ++j)
+  if (z == 0) {
+    // A table depends only on X and its recorded Z. At the zero-metal
+    // endpoint the adjacent source supplies the one-sided Z derivative;
+    // construct its table coordinates without dividing by the query's Z.
+    // This does not add metals to the caller's physical composition.
+    out = solar_scaled(c.X[0], z_[i]);
+    out.basis = c.basis;
+    out.metal_inventory = c.metal_inventory;
+    return out;
+  }
+  for (std::size_t j = 3; j < METAL_END; ++j)
     out.X[j] *= z_[i] / z;
   out.X[2] += z - z_[i];
   return out;
@@ -91,10 +102,16 @@ ElementalOpacity::Mapping ElementalOpacity::map(const Composition& c) {
     // Convert the aggregate GS98 baryonic metal mass to source grams.
     // The source retains its fixed atomic-weight GS98 pattern; individual
     // representative-isotope number ratios are therefore approximate.
-    for(std::size_t j=3;j<NSPEC;++j)m.c.X[j]=c.X[j]*scale;
+    for(std::size_t j=3;j<METAL_END;++j)m.c.X[j]=c.X[j]*scale;
   }
   m.c.X[2] += nuclides[2].A * c.X[1] / c.abundance_weight(1);
   m.c.X[1] = 0;
+  // The opacity source has element H, not separately resolved D lines.
+  // Preserve hydrogen nuclei and extinction when folding the isotope, just
+  // as the He3 mapping above preserves helium nuclei.
+  constexpr auto d=static_cast<std::size_t>(Species::H2);
+  m.c.X[0] += nuclides[0].A*c.X[d]/c.abundance_weight(d);
+  m.c.X[d] = 0;
   m.scale = m.c.sum();
   for (double& x : m.c.X)
     x /= m.scale;

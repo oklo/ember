@@ -17,6 +17,7 @@ import tempfile
 from assemble_nongrey_grid import load_continuation, physical_identity
 from import_nongrey_grid import import_grid
 from prepare_nongrey_sources import digest
+from atmosphere_capacity_identity import CapacityEquivalence
 
 
 def runtime(probe, eos, table, points, report_domain_errors=False):
@@ -65,22 +66,33 @@ def main():
     base_manifest = Path(assembled['base_manifest'])
     base = json.loads(base_manifest.read_text())
     identity = physical_identity(base, base['provenance'])
+    capacity_equivalence = CapacityEquivalence(assembled.get('capacity_replays', []))
+    dependencies.update(capacity_equivalence.inputs)
     with tempfile.TemporaryDirectory() as temporary:
         root = Path(temporary)
         old_table = root/'base.dat'
         states = import_grid(base_manifest, old_table)
         old_points = list(states)
         old_count = len(states)
+        capacity_arguments = (['--capacity-replays', *capacity_equivalence.paths]
+                              if capacity_equivalence.paths else [])
         subprocess.run([sys.executable, '-B', str(Path(__file__).with_name('assemble_nongrey_grid.py')),
                         str(base_manifest), str(root/'reassembled.dat'), '--continuations',
-                        *[r['work'] for r in assembled['extension']]],
+                        *[r['work'] for r in assembled['extension']], *capacity_arguments],
                        capture_output=True, text=True, check=True)
         if digest(root/'reassembled.dat') != digest(a.table):
             raise ValueError('source reassembly does not reproduce the candidate')
         for record in assembled['extension']:
-            key, state, _, _, files = load_continuation(record['work'], identity)
+            key, state, _, _, files = load_continuation(record['work'], identity, capacity_equivalence)
             dependencies.update(files)
             states[key] = state
+        independent = []
+        for work in a.heldouts:
+            key, state, _, record, files = load_continuation(work, identity, capacity_equivalence)
+            if key in states:
+                raise ValueError('heldout coordinate is already a source node')
+            dependencies.update(files)
+            independent.append((work, key, state, record))
         axes = [base[k] for k in ['hydrogen', 'helium3', 'teff_K', 'log_g']]
         # One off-centre point in every original cell, in addition to all
         # original knots and closed edges. The latter test masked-edge logic.
@@ -95,7 +107,15 @@ def main():
             interior.append(tuple(point))
         reference_points = old_points+interior
         before = runtime(a.grid_probe, a.eos_family, old_table, reference_points)
-        after = runtime(a.grid_probe, a.eos_family, a.table, reference_points)
+        # Load each boundary table once. The candidate's reference points,
+        # source nodes and independent controls share one ordered query batch.
+        candidate_points = reference_points+list(states)+[row[1] for row in independent]
+        candidate_rows = runtime(a.grid_probe, a.eos_family, a.table,
+                                 candidate_points, a.allow_eos_holes)
+        nr, ns = len(reference_points), len(states)
+        after = candidate_rows[:nr]
+        covered = candidate_rows[nr:nr+ns]
+        independent_rows = candidate_rows[nr+ns:]
         if any(not row['covered'] for row in before+after):
             raise ValueError('candidate lost original supported boundary states')
         retained = {k: max(abs(new[k]/old[k]-1) for old, new in zip(before, after))
@@ -108,7 +128,6 @@ def main():
                        for k in ['logarithmic_thermal_derivatives', 'composition_derivatives']}
             if max(changes.values()) > 1e-12:
                 derivative_changes.append({'coordinates': point, 'max_abs_changes': changes})
-        covered = runtime(a.grid_probe, a.eos_family, a.table, list(states), a.allow_eos_holes)
         unsupported = [{'coordinates': key, 'runtime': row}
                        for key, row in zip(states, covered, strict=True) if not row['covered']]
         supported_states = {key: state for (key, state), row in zip(states.items(), covered, strict=True) if row['covered']}
@@ -125,12 +144,7 @@ def main():
             eos.append({'coordinates': key, 'source_density': values[4],
                         'ember_density': values[5], 'relative_difference': values[6]})
         comparisons = []
-        for work in a.heldouts:
-            key, state, _, record, files = load_continuation(work, identity)
-            if key in states:
-                raise ValueError('heldout coordinate is already a source node')
-            dependencies.update(files)
-            estimate = runtime(a.grid_probe, a.eos_family, a.table, [key])[0]
+        for (work, key, state, record), estimate in zip(independent, independent_rows, strict=True):
             if not estimate['covered']:
                 raise ValueError('heldout is outside a complete runtime stencil')
             comparisons.append({'coordinates': key, 'work': str(work.resolve()),
@@ -141,6 +155,7 @@ def main():
     if any(digest(path) != expected for path, expected in dependencies.items()):
         raise ValueError('source inputs changed during the audit')
     report = {'scope': __doc__, 'script_sha256': digest(__file__),
+              'boundary_probe_processes': 2, 'pressure_probe_processes': 1,
               'retained_models': old_count, 'source_models': len(states),
               'runtime_supported_source_nodes': sum(r['covered'] for r in covered),
               'unsupported_EOS_nodes': unsupported,

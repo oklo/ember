@@ -142,6 +142,34 @@ class DensityMergeTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'does not match'):
                 inconsistent_source_rows(merged)
 
+    def test_density_addition_keeps_a_still_tighter_selected_source(self):
+        with tempfile.TemporaryDirectory() as work:
+            root = Path(work); roots = self.sources(root, hot_subset=True)
+            primary = dict(probe_sha256='quadrature11', fallback_relative_integral_error=1e-11)
+            reference = dict(probe_sha256='quadrature13', relative_integral_error=1e-13)
+            path = roots[1]/'specification.json'; spec = json.loads(path.read_text())
+            spec.update(precision_fallback=primary, precision_reference=reference)
+            path.write_text(json.dumps(spec))
+            path = roots[1]/'plane-000/source.json.gz'
+            source = json.loads(gzip.decompress(path.read_bytes()))
+            source.update(precision_fallback=primary, precision_reference=reference,
+                          precision_fallback_isotherms=[dict(temperature_index=0, logT=spec['logT'][0],
+                              actual_probe_sha256='quadrature13', relative_integral_error=1e-13,
+                              actual_probe_input_sha256='selected-reference-request')])
+            path.write_bytes(gzip.compress(json.dumps(source).encode()))
+            result = self.run_merge(roots, root/'merged')
+            self.assertEqual(result.returncode, 0, result.stderr)
+            merged = json.loads(gzip.decompress((root/'merged/plane-000/source.json.gz').read_bytes()))
+            self.assertEqual(merged['precision_reference'], reference)
+            selected, = merged['precision_fallback_isotherms']
+            self.assertEqual(selected['actual_probe_sha256'], 'quadrature13')
+            self.assertEqual(selected['temperature_index'], 4)
+            source['precision_fallback_isotherms'][0]['actual_probe_sha256'] = 'unrecorded-source'
+            path.write_bytes(gzip.compress(json.dumps(source).encode()))
+            result = self.run_merge(roots, root/'rejected')
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn('undeclared precision executable', result.stderr)
+
     def test_hot_addition_has_declared_absence_and_retains_source(self):
         with tempfile.TemporaryDirectory() as work:
             root = Path(work); roots = self.sources(root, hot_subset=True)
@@ -226,6 +254,41 @@ class DensityMergeTests(unittest.TestCase):
                     self.assertEqual(masked[index].startswith('1 '), expected)
                     if expected:
                         self.assertEqual(masked[index], complete[index])
+
+    def test_hydrogen_limit_withholds_only_new_columns(self):
+        with tempfile.TemporaryDirectory() as work:
+            root = Path(work); roots = self.sources(root, hot_subset=True)
+            for directory in roots:
+                path = directory/'specification.json'
+                spec = json.loads(path.read_text()); spec['hydrogen'] = [.1, .2]
+                path.write_text(json.dumps(spec))
+                original = json.loads(gzip.decompress((directory/'plane-000/source.json.gz').read_bytes()))
+                raw = {**original, **mixture(.2, 0.)}
+                if directory == roots[1]:
+                    raw['data'][0][13] *= 1.01  # This addition must remain unused.
+                plane = directory/'plane-001'; plane.mkdir()
+                (plane/'source.json.gz').write_bytes(gzip.compress(json.dumps(raw).encode()))
+            result = subprocess.run([sys.executable, '-B',
+                str(ROOT/'scripts/merge_metal_eos_density_sources.py'),
+                *map(str, roots), str(root/'merged'), '--maximum-added-hydrogen', '.1'],
+                capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+            for i, x in enumerate([.1, .2]):
+                path = root/'merged'/f'plane-{i:03d}'
+                raw = json.loads(gzip.decompress((path/'source.json.gz').read_bytes()))
+                old = json.loads(gzip.decompress((roots[0]/f'plane-{i:03d}'/'source.json.gz').read_bytes()))
+                self.assertEqual(raw['source_coverage']['maximum_added_hydrogen'], .1)
+                self.assertEqual(sum(absent_source_rows(raw)), 16 if x == .1 else 36)
+                for j in range(9):
+                    self.assertEqual(raw['data'][9*j:9*j+5], old['data'][5*j:5*j+5])
+                if x == .2:
+                    receipt = json.loads((path/'merge_receipt.json').read_text())
+                    self.assertEqual(receipt['added_rows'], 0)
+                    self.assertEqual(receipt['overlap'], [])
+                    self.assertFalse(receipt['added_composition_selected'])
+                    raw['data'][8*9+8] = old['data'][-1]
+                    with self.assertRaisesRegex(ValueError, 'do not match'):
+                        absent_source_rows(raw)
 
 
 if __name__ == '__main__':

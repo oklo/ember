@@ -11,6 +11,7 @@ namespace ember {
 class NominalAbundanceOpacity final : public Opacity {
 public:
   explicit NominalAbundanceOpacity(const Opacity& opacity) : opacity_(opacity) {}
+  bool includes_conduction() const override {return opacity_.includes_conduction();}
   OpacityState eval(double T,double rho,const Composition& c) const override {
     return opacity_.eval(T,rho,nominal(c));
   }

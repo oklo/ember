@@ -32,8 +32,9 @@ EosTerm IonGas::eval(double T, double rho, const Composition& c) const {
     t.S+=R_gas*number_per_baryon_mass*
       (2.5-std::log(number_per_baryon_mass*NA*rho)-3*log_lambda);
   };
-  for(std::size_t i=0;i<(c.metal_inventory==MetalInventory::gs98?3:NSPEC);++i)
-    add_species(c.X[i]/c.abundance_weight(i),c.abundance_weight(i));
+  for(std::size_t i=0;i<NSPEC;++i)
+    if(c.metal_inventory!=MetalInventory::gs98 || !is_metal_species(i))
+      add_species(c.X[i]/c.abundance_weight(i),c.abundance_weight(i));
   if(c.metal_inventory==MetalInventory::gs98) {
     const double scale=c.basis==AbundanceBasis::baryon_mass?1.:gs98_atomic_mass_scale();
     for(const auto& element:gs98_metals)

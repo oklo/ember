@@ -20,6 +20,9 @@ public:
   virtual ~Opacity() = default;
   virtual OpacityState eval(double T, double rho, const Composition&) const = 0;
   virtual const char* name() const = 0;
+  // Wrappers must propagate this property. Microscopic heat transport supplies
+  // its own conductivity and cannot be added to an already combined opacity.
+  virtual bool includes_conduction() const {return false;}
   // Optional domain information for constrained solves (e.g. an atmosphere's
   // top pressure). Absence means no declared bounds, not permission to ignore
   // errors from eval(). A table implementation should expose its actual range.

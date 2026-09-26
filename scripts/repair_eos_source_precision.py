@@ -14,6 +14,7 @@ import math
 from pathlib import Path
 import subprocess
 import shutil
+from types import SimpleNamespace
 
 from metal_eos_composition import mixture
 
@@ -29,7 +30,7 @@ def defects(row):
 
 
 def repair(job):
-    previous, output, record, precision, allow_exclusion, reuse, all_isotherms, reference = job
+    previous, output, record, precision, allow_exclusion, reuse, all_isotherms, reference, cached_sources = job
     i = record['plane']; folder = output/f'plane-{i:03d}'; folder.mkdir()
     source = previous/f'plane-{i:03d}'/'source.json.gz'
     if sha(source) != record['source_sha256']:
@@ -76,8 +77,18 @@ def repair(job):
         if (cached['input'] != request or cached['data'] != original[it*nq:(it+1)*nq]
                 or cached['input_sha256'] != hashlib.sha256((raw['probe_sha256']+request).encode()).hexdigest()):
             raise ValueError('cached isotherm differs from the source request or rows')
-        result = subprocess.run([precision['probe']], input=request, text=True,
-                                capture_output=True, timeout=600)
+        cache = cached_sources.get(it)
+        if cache:
+            path, checksum = cache
+            if sha(path) != checksum:
+                raise ValueError('preserved partial isotherm changed')
+            response = json.loads(gzip.decompress(path.read_bytes()))
+            if response['input'] != request:
+                raise ValueError('preserved partial isotherm has a different source request')
+            result = SimpleNamespace(**{k: response[k] for k in ['stdout', 'stderr', 'returncode']})
+        else:
+            result = subprocess.run([precision['probe']], input=request, text=True,
+                                    capture_output=True, timeout=600)
         failure_record = {'original_cache': str(cache_path), 'original_cache_sha256': sha(cache_path),
                           'source_validation_failures': [r for r in record['failures'] if r['temperature_index'] == it]}
         failure = folder/f'temperature-{it:03d}.nominal-identity-failure.json'
@@ -89,6 +100,22 @@ def repair(job):
         if (result.returncode or len(replacement) != nq
                 or any(len(r) != 22 or r[0] != 0 or not all(map(math.isfinite, r)) for r in replacement)):
             raise ValueError('tighter source failed; evidence retained')
+        selected_probe = precision['probe_sha256']; selected_error = precision['fallback_relative_integral_error']
+        selected_source = saved
+        invalid = any(max(map(abs, defects(r))) > 1e-7
+                      or abs(math.log(r[2])-math.log(scale)-math.log(10)*(raw['logQ'][j]+1.5*(t-6))) > 1e-9
+                      or abs(math.log(r[3])-math.log(10)*t) > 1e-10 for j, r in enumerate(replacement))
+        if invalid and reference:
+            fallback = subprocess.run([reference['probe']], input=request, text=True,
+                                      capture_output=True, timeout=600)
+            selected_source = folder/f'temperature-{it:03d}.validation-fallback.json.gz'
+            selected_source.write_bytes(gzip.compress(json.dumps(dict(input=request, stdout=fallback.stdout,
+                                        stderr=fallback.stderr, returncode=fallback.returncode)).encode(), mtime=0))
+            replacement = [list(map(float, line.split())) for line in fallback.stdout.splitlines()]
+            if (fallback.returncode or len(replacement) != nq
+                    or any(len(r) != 22 or r[0] != 0 or not all(map(math.isfinite, r)) for r in replacement)):
+                raise ValueError('still tighter source failed; evidence retained')
+            selected_probe = reference['probe_sha256']; selected_error = reference['relative_integral_error']
         unscaled = [r.copy() for r in replacement]
         local_change = 0.
         for j, r in enumerate(replacement):
@@ -111,6 +138,8 @@ def repair(job):
         if local_change > 1e-5:
             if not reference:
                 raise ValueError('precision change requires an independent accuracy reference')
+            if selected_probe == reference['probe_sha256']:
+                raise ValueError('large fallback change needs a separate accuracy reference')
             check = subprocess.run([reference['probe']], input=request, text=True,
                                    capture_output=True, timeout=600)
             checked = folder/f'temperature-{it:03d}.reference-source.json.gz'
@@ -128,14 +157,18 @@ def repair(job):
                                          reference_source_sha256=sha(checked)))
         rows[it*nq:(it+1)*nq] = replacement
         overrides.append(dict(temperature_index=it, logT=t,
-                              actual_probe_input_sha256=hashlib.sha256((precision['probe_sha256']+request).encode()).hexdigest(),
+                              actual_probe_input_sha256=hashlib.sha256((selected_probe+request).encode()).hexdigest(),
+                              actual_probe_sha256=selected_probe, relative_integral_error=selected_error,
                               nominal_failure_sha256=sha(failure),
                               reason='full electron precision calculation' if all_isotherms else 'nominal source validation failure',
-                              precision_source_sha256=sha(saved)))
+                              precision_source_sha256=sha(selected_source),
+                              primary_precision_source_sha256=sha(saved)))
     if any(rows[k] != r for k, r in enumerate(original) if k//nq not in changed):
         raise ValueError('an unaffected source row changed')
     raw.update(data=rows, precision_fallback=precision, precision_fallback_isotherms=overrides,
                precision_repair_original_source_sha256=record['source_sha256'])
+    if reference:
+        raw['precision_reference'] = reference
     if exclusions:
         raw['source_consistency_exclusions'] = exclusions
     target = folder/'source.json.gz'
@@ -214,9 +247,7 @@ def main():
             raise ValueError('independent accuracy reference lacks matching convergence checks')
         for path in [a.accuracy_reference, controls_path, Path(reference['probe']), Path(reference['library'])]:
             inputs[str(path.resolve())] = sha(path)
-    if a.all_isotherms and a.reuse_repair:
-        raise ValueError('partial repair reuse is supported only for failed-isotherm repairs')
-    reused = {}
+    reused = {}; cached_sources = {}
     if a.reuse_repair:
         saved = json.loads(a.reuse_repair.read_text())
         parent = Path(saved['work'])
@@ -225,6 +256,13 @@ def main():
                 or any(parent_spec[k] != spec[k] for k in
                        ['hydrogen', 'helium3', 'logT', 'logQ', 'probe_sha256', 'source_archive_sha256'])):
             raise ValueError('partial repair has different source or precision')
+        policy = parent_spec['source_identity_repair']
+        if bool(policy.get('all_isotherms')) != a.all_isotherms:
+            raise ValueError('partial repair has a different source selection policy')
+        parent_reference = policy.get('large_changes_require_independent_accuracy')
+        if bool(parent_reference) != bool(reference) or (reference and
+                parent_reference['reference_receipt_sha256'] != sha(a.accuracy_reference)):
+            raise ValueError('partial repair has different independent precision checks')
         if saved['original_audit_sha256'] != sha(a.audit):
             old_audit_path = Path(saved['original_audit'])
             if sha(old_audit_path) != saved['original_audit_sha256']:
@@ -243,10 +281,27 @@ def main():
             # A stricter scan can identify additional failed isotherms. Reuse
             # a plane only if its completed repair covers all of those rows.
             required = {f['temperature_index'] for f in audit['records'][r['plane']]['failures']}
+            if a.all_isotherms:
+                # Every source isotherm must already have the requested accuracy;
+                # completed source overrides include any original tighter rows.
+                path = parent/f"plane-{r['plane']:03d}"/'source.json.gz'
+                completed = json.loads(gzip.decompress(path.read_bytes()))
+                if {s['temperature_index'] for s in completed['precision_fallback_isotherms']} != set(range(len(spec['logT']))):
+                    raise ValueError('completed full precision plane omits an isotherm')
             if required.issubset(r['recomputed_isotherms']):
                 if r.get('inconsistent_source_exclusions') and not a.exclude_inconsistent_source:
                     raise ValueError('reused plane has undeclared source consistency exclusions')
                 reused[r['plane']] = (parent, r)
+        for name, checksum in saved.get('isotherm_files_sha256', {}).items():
+            path = Path(name)
+            if path.parent.parent.resolve() != parent.resolve() or not path.name.endswith('.precision-source.json.gz'):
+                raise ValueError('partial isotherm is outside the preserved source work')
+            plane = int(path.parent.name.removeprefix('plane-'))
+            it = int(path.name.split('.')[0].removeprefix('temperature-'))
+            if not 0 <= plane < len(mixtures) or not 0 <= it < len(spec['logT']) or sha(path) != checksum:
+                raise ValueError('invalid preserved partial isotherm')
+            cached_sources.setdefault(plane, {})[it] = (path, checksum)
+            inputs[str(path.resolve())] = checksum
     a.output.mkdir()
     spec.update(precision_fallback=precision, source_identity_repair=dict(
         audit_sha256=sha(a.audit), original_source=str(a.previous.resolve()),
@@ -254,8 +309,12 @@ def main():
     if a.all_isotherms:
         spec['source_identity_repair']['all_isotherms'] = True
     if reference:
+        spec['precision_reference'] = reference
         spec['source_identity_repair']['large_changes_require_independent_accuracy'] = dict(
             reference_receipt_sha256=sha(a.accuracy_reference), maximum_scaled_difference=1e-8)
+        spec['source_identity_repair']['validation_fallback'] = dict(
+            probe_sha256=reference['probe_sha256'], relative_integral_error=reference['relative_integral_error'],
+            maximum_scaled_physical_change_without_further_reference=1e-5)
     if a.exclude_inconsistent_source:
         spec['source_consistency_exclusion_limit'] = 1e-7
     if a.reuse_repair:
@@ -264,11 +323,13 @@ def main():
     with ProcessPoolExecutor(a.jobs) as pool:
         records = list(pool.map(repair, [(a.previous, a.output, r, precision,
                          a.exclude_inconsistent_source, reused.get(r['plane']), a.all_isotherms,
-                         reference) for r in audit['records']]))
+                         reference, cached_sources.get(r['plane'], {})) for r in audit['records']]))
     if any(sha(Path(name)) != value for name, value in inputs.items()):
         raise ValueError('a repair input changed')
     report = dict(scope=__doc__, input_sha256=inputs, records=records,
                   accepted_for_evolution=False,
+                  complete_source_tables_reused=len(reused),
+                  partial_precision_isotherms_available=sum(len(v) for v in cached_sources.values()),
                   total_recomputed_states=sum(r['recomputed_states'] for r in records),
                   total_original_states_retained_exactly=sum(r['original_states_retained_exactly'] for r in records))
     (a.output/'repair_manifest.json').write_text(json.dumps(report, indent=2)+'\n')

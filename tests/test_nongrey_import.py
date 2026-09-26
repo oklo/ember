@@ -11,16 +11,153 @@ import shlex
 import subprocess
 import sys
 import tempfile
+import threading
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/"scripts"))
-from generate_nongrey_grid import composition, resample_initial_structure, input_fingerprint, continuation_structure, truncate_initial_structure
+from generate_nongrey_grid import composition, resample_initial_structure, input_fingerprint, continuation_structure, truncate_initial_structure, scale_initial_column, run_opacity_jobs, atmosphere_inputs, validate_source_capacity
 from import_nongrey_grid import source_state, source_inputs, import_grid, source_diagnostics_match
 from nongrey_opacity import read_table, validate_table, merge_isotherms
 from assemble_nongrey_grid import complete_cells
 
 
 class SourceAcceptance(unittest.TestCase):
+    def test_depth_control_requires_verified_donor_and_deeper_boundary(self):
+        from generate_nongrey_grid import main
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            prepared, spec = root/'prepared.json', root/'spec.json'
+            prepared.write_text('{}')
+            spec.write_text(json.dumps({'tau':100., 'depths':100}))
+            base = ['generate_nongrey_grid.py', str(prepared), str(spec), str(root/'work')]
+            invalid = [
+                ['--initial-bottom-tau','300'],
+                ['--initial-bottom-tau','100','--composition-donor',str(root/'donor')],
+                ['--initial-bottom-tau','nan','--continuation-models',str(root/'donor')],
+                ['--initial-bottom-tau','300','--composition-donor',str(root/'donor'),
+                 '--initial-models',str(root/'other')],
+            ]
+            for arguments in invalid:
+                with self.subTest(arguments=arguments), patch.object(sys,'argv',base+arguments):
+                    with self.assertRaisesRegex(ValueError,'initial bottom depth'):
+                        main()
+            self.assertFalse((root/'work').exists())
+
+    def test_capacity_requires_matching_build_and_enforces_all_dimensions(self):
+        spec = dict(log_temperature=[31, 3.2, 4.2], log_density=[19, -13, -3],
+                    depths=100, atmosphere_frequencies=20000, opacity_frequencies=30000)
+        with self.assertRaisesRegex(ValueError, "compiled source capacity"):
+            validate_source_capacity({}, spec)
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            binary, header, receipt = [root/p for p in ["tlusty", "BASICS.FOR", "build.json"]]
+            binary.write_bytes(b"synthetic executable")
+            header.write_text("C     PARAMETER (MTABT=21)\n"
+                              "      PARAMETER (MTABT=35, MTABR=37,\n"
+                              "     * MDEPTH=400, MFREQ=32000, MFRTAB=30005) ! selected build\n")
+            sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+            receipt.write_text(json.dumps(dict(executable_sha256=sha(binary),
+                                               input_sha256={str(header): sha(header)})))
+            prepared = dict(tlusty=str(binary), executables={"tlusty": sha(binary)},
+                            tlusty_build=str(receipt), tlusty_build_sha256=sha(receipt))
+            self.assertEqual(validate_source_capacity(prepared, spec)["MTABT"], 35)
+            for key, value in [("log_temperature", [36, 3.2, 4.2]),
+                               ("log_density", [20, -13, -3]), ("depths", 401),
+                               ("atmosphere_frequencies", 32001), ("opacity_frequencies", 30006)]:
+                with self.subTest(key=key), self.assertRaises(ValueError):
+                    validate_source_capacity(prepared, dict(spec, **{key: value}))
+            binary.write_bytes(b"different executable")
+            with self.assertRaisesRegex(ValueError, "selected executable"):
+                validate_source_capacity(prepared, spec)
+            binary.write_bytes(b"synthetic executable")
+            header.write_text(header.read_text()+"C changed\n")
+            with self.assertRaisesRegex(ValueError, "header missing or changed"):
+                validate_source_capacity(prepared, spec)
+            receipt.write_text(receipt.read_text()+"\n")
+            with self.assertRaisesRegex(ValueError, "build record changed"):
+                validate_source_capacity(prepared, spec)
+
+    def test_explicit_relaxation_changes_only_numerical_input_and_fingerprint(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root/"data").mkdir()
+            table = root/"table.bin"
+            table.write_bytes(b"synthetic table")
+            spec = dict(alpha=1.9, atmosphere_frequencies=5000, depths=100,
+                        tau_top=1e-7, tau_bottom=1000.)
+            prepared = dict(data_sha256="synthetic", synple=str(root))
+            abundance, masses = composition(.999, 0, [0]*5)
+            plain, damped = root/"plain", root/"damped"
+            atmosphere_inputs(plain, prepared, spec, table, abundance, masses, 4600, 5.65)
+            atmosphere_inputs(damped, prepared, dict(spec, newton_relaxation=.3),
+                              table, abundance, masses, 4600, 5.65)
+            self.assertNotIn("ORELAX", (plain/"tas").read_text())
+            self.assertEqual((damped/"tas").read_text(),
+                             (plain/"tas").read_text()+"ORELAX=0.3\n")
+            for name in ["fort.5", "ember-masses.dat", "opacity.sha256"]:
+                self.assertEqual((plain/name).read_bytes(), (damped/name).read_bytes())
+            self.assertNotEqual(input_fingerprint("same-binary", plain),
+                                input_fingerprint("same-binary", damped))
+
+    def test_single_composition_uses_four_independent_opacity_workers(self):
+        barrier = threading.Barrier(4, timeout=5)
+        lock = threading.Lock()
+        active = 0
+        peak = 0
+        seen = []
+
+        def source(job):
+            nonlocal active, peak
+            with lock:
+                active += 1
+                peak = max(peak, active)
+                seen.append(job)
+            barrier.wait()
+            with lock:
+                active -= 1
+            return job
+
+        for planes in [["one"], ["one", "two"]]:
+            seen.clear()
+            expected = [(p, i, 1000 + 100*i) for p in planes
+                        for i in reversed(range(8))]
+            result = run_opacity_jobs(planes, list(range(1000, 1800, 100)), source, 8)
+            self.assertEqual(result, expected)
+            self.assertCountEqual(seen, expected)
+            self.assertEqual(peak, 4)
+            self.assertEqual(active, 0)
+
+    def test_failed_isotherm_cannot_be_returned_as_a_complete_opacity_family(self):
+        def source(job):
+            if job[1] == 1:
+                raise RuntimeError("source row failed validation")
+            return job
+
+        with self.assertRaisesRegex(RuntimeError, "failed validation"):
+            run_opacity_jobs(["one"], [1000, 2000, 3000], source, 4)
+
+    def test_trial_column_scaling_retains_temperature_and_hydrostatic_relation(self):
+        n=24
+        mass=[10**(-5+6*i/(n-1)) for i in range(n)]
+        rows=[[3000+100*i,1e10*(i+1),1e-7*(i+1),1e13*(i+1)] for i in range(n)]
+        seed=f'{n} -4\n'+'\n'.join(map(str,mass))+'\n'+'\n'.join(' '.join(map(str,r)) for r in rows)+'\n'
+        self.assertEqual(scale_initial_column(seed,1),seed)
+        trial=continuation_structure(seed,3000,5.4,3200,5.7)
+        scaled=scale_initial_column(trial,2).split();original=trial.split()
+        for i in range(n):
+            self.assertEqual(float(scaled[2+i]),2*float(original[2+i]))
+            for j in range(4):
+                k=2+n+4*i+j
+                self.assertEqual(float(scaled[k]),float(original[k])*(1 if j==0 else 2))
+            # n*T and g*m increase by the same factor at the target gravity.
+            k=2+n+4*i
+            pressure_ratio=float(scaled[k])*float(scaled[k+3])/(float(original[k])*float(original[k+3]))
+            self.assertAlmostEqual(pressure_ratio,float(scaled[2+i])/float(original[2+i]))
+        for factor in [0,-1,math.inf,math.nan]:
+            with self.assertRaisesRegex(ValueError,'finite and positive'):
+                scale_initial_column(seed,factor)
+
     def test_plan_cancellation_checks_work_and_original_plan(self):
         from run_nongrey_plan import check_cancellation, PlanCancelled
         with tempfile.TemporaryDirectory() as temporary:
@@ -74,6 +211,17 @@ class SourceAcceptance(unittest.TestCase):
             truncate_initial_structure(seed,log,1e5)
         with self.assertRaisesRegex(ValueError,'mass grid'):
             truncate_initial_structure(seed,log.replace(f'1 {mass[0]} ', '1 99 '),1000)
+
+        # The native fort.7 checkpoint rounds mass to E15.6; run.log keeps
+        # the full source value. This is serialization, not a new mass grid.
+        printed=[format(m,'.6e') for m in mass]
+        rounded=f'{n} -4\n'+'\n'.join(printed)+'\n'+'\n'.join(' '.join(map(str,r)) for r in rows)+'\n'
+        truncated=truncate_initial_structure(rounded,log,1000).split()
+        self.assertEqual(int(truncated[0]),count)
+        self.assertAlmostEqual(float(truncated[1+count]),2000,delta=.001)
+        damaged=rounded.replace(printed[1],format(float(printed[1])*1.000002,'.6e'),1)
+        with self.assertRaisesRegex(ValueError,'mass grid'):
+            truncate_initial_structure(damaged,log,1000)
 
     def test_warm_composition_extension_preserves_complete_old_cells(self):
         old_axes = [[.3, .7], [0, .12], [2600, 2800, 3000, 3200], [4.9, 5.15, 5.4]]
@@ -239,6 +387,13 @@ class SourceAcceptance(unittest.TestCase):
                              "HMIX0=1.9,IFRSET=20000,ND=200,TAUFIR=1e-7,TAULAS=1000,TAUDIV=.01,CHMAX=1e-6,ILGDER=1,NITER=200,DPSILT=1.03,DERT=.001"}
         marker=f"EMBER ELEMENT MASSES: {w[0]} {w[1]}\nEMBER MOLECULAR EQUILIBRIUM TOLERANCE: 1e-8\n"
         source_inputs(inputs,spec,.55,.1,2800,5,marker)
+        with self.assertRaisesRegex(ValueError,"settings mismatch"):
+            source_inputs(inputs,dict(spec,newton_relaxation=.3),.55,.1,2800,5,marker)
+        source_inputs({**inputs,"parameters":inputs["parameters"]+",ORELAX=.3"},
+                      dict(spec,newton_relaxation=.3),.55,.1,2800,5,marker)
+        with self.assertRaisesRegex(ValueError,"settings mismatch"):
+            source_inputs({**inputs,"parameters":inputs["parameters"]+",ORELAX=1"},
+                          dict(spec,newton_relaxation=.3),.55,.1,2800,5,marker)
         with self.assertRaisesRegex(ValueError,"abundance mismatch"):
             source_inputs(inputs,spec,.55,0,2800,5,marker)
         with self.assertRaisesRegex(ValueError,"did not load"):

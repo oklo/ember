@@ -19,6 +19,7 @@ from generate_nongrey_grid import composition, temperatures, sequence, input_fin
 from import_nongrey_grid import GAS_CALCULATION, gas_model_state, import_grid
 from nongrey_opacity import validate_table
 from prepare_nongrey_sources import digest
+from atmosphere_capacity_identity import CapacityEquivalence
 
 KEYS = ['XH', 'X3', 'teff_K', 'log_g']
 PHYSICS = ['metals', 'alpha', 'tau', 'wavelength_A', 'microturbulence_km_s', 'line_threshold']
@@ -60,7 +61,7 @@ def complete_cells(axes, states):
     return result
 
 
-def load_continuation(work, identity=None):
+def load_continuation(work, identity=None, capacity_equivalence=None):
     """Revalidate archived canonical outputs without rerunning or rewriting them."""
     work = Path(work)
     inputs = {}
@@ -72,7 +73,12 @@ def load_continuation(work, identity=None):
     spec, prepared = source['specification'], source['prepared']
     actual_identity = physical_identity(spec, prepared)
     if identity is not None and actual_identity != identity:
-        raise ValueError('source physics differs; do not silently mix atmosphere prescriptions')
+        if capacity_equivalence is None:
+            raise ValueError('source physics differs; do not silently mix atmosphere prescriptions')
+        original = capacity_equivalence.canonical_preparation(spec, prepared)
+        if physical_identity(spec, original) != identity:
+            raise ValueError('source physics differs beyond the verified capacity change')
+        inputs.update(capacity_equivalence.inputs)
     key = tuple(record[k] for k in KEYS)
     if any(record[k] != source[k] for k in KEYS):
         raise ValueError('continuation label mismatch')
@@ -121,6 +127,8 @@ def main():
                    help='completed run_nongrey_continuation work directories')
     group.add_argument('--continuation-plan', type=Path,
                        help='JSON with an explicit continuations list; no source selection or automatic adoption')
+    p.add_argument('--capacity-replays', type=Path, nargs='+', default=[],
+                   help='explicit completed capacity replay reports; original hashes remain in source records')
     a = p.parse_args()
     if a.continuation_plan:
         plan=json.loads(a.continuation_plan.read_text())
@@ -134,7 +142,9 @@ def main():
     if base.get('calculation') != GAS_CALCULATION:
         raise ValueError('base must be a canonical gas family')
     identity = physical_identity(base, base['provenance'])
+    capacity_equivalence = CapacityEquivalence(a.capacity_replays)
     inputs = {str(a.base_manifest.resolve()): digest(a.base_manifest)}
+    inputs.update(capacity_equivalence.inputs)
     if a.continuation_plan:inputs[str(a.continuation_plan.resolve())]=digest(a.continuation_plan)
     with tempfile.TemporaryDirectory() as temporary:
         states = import_grid(a.base_manifest, Path(temporary)/'base.dat')
@@ -146,7 +156,7 @@ def main():
                 inputs[str(path.resolve())] = model[kind+"_sha256"]
     accepted = []
     for work in a.continuations:
-        key, state, spec, record, dependencies = load_continuation(work, identity)
+        key, state, spec, record, dependencies = load_continuation(work, identity, capacity_equivalence)
         if key in states:
             raise ValueError("duplicate source coordinate")
         states[key] = state
@@ -154,6 +164,7 @@ def main():
         validation = work/"final/validated.json"
         accepted.append({'coordinates': key, 'work': str(work.resolve()),
                          'state': states[key], 'source_specification': spec,
+                         'physical_identity': physical_identity(spec, record['continuation_provenance']['prepared']),
                          'validation_sha256': digest(validation)})
     axes = [sorted({k[i] for k in states}) for i in range(4)]
     if any(len(axis) < 2 for axis in axes) or axes[0][-1]+axes[1][-1]+sum(base['metals']) > 1+1e-12:
@@ -185,6 +196,7 @@ def main():
               'missing_states': math.prod(map(len, axes))-len(states),
               'axis_order': KEYS, 'axes': axes, 'complete_cells': cells,
               'physics': identity, 'extension': accepted, 'input_files_sha256': inputs,
+              'capacity_replays': capacity_equivalence.paths,
               'table_sha256': digest(a.output), 'script_sha256': digest(__file__)}
     with report_path.open('x') as f:
         f.write(json.dumps(report, indent=2, allow_nan=False)+'\n')

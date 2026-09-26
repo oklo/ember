@@ -119,7 +119,8 @@ OpacityState TabulatedConduction::eval(double T, double rho, const Composition& 
       dc[v] += ik * ((dej[v] - f * de[v]) / Ye - f * k.drho * de[v] / Ye);
     }
   };
-  for (std::size_t j = 0; j < (c.metal_inventory==MetalInventory::gs98?3:NSPEC); ++j) {
+  for (std::size_t j = 0; j < NSPEC; ++j) {
+    if(c.metal_inventory==MetalInventory::gs98 && is_metal_species(j))continue;
     if(c.X[j]==0 && j>=3)continue;
     const double charge=nuclides[j].Z;
     std::array<double,2> dej{};
@@ -163,8 +164,9 @@ std::optional<Opacity::DensityRange> TabulatedConduction::density_range(double T
       include(i + 1);
     }
   };
-  for(std::size_t j=0;j<(c.metal_inventory==MetalInventory::gs98?3:NSPEC);++j)
-    if(c.X[j]!=0 || j<3)include_charge(nuclides[j].Z);
+  for(std::size_t j=0;j<NSPEC;++j)
+    if((c.metal_inventory!=MetalInventory::gs98 || !is_metal_species(j)) &&
+       (c.X[j]!=0 || j<3))include_charge(nuclides[j].Z);
   if(c.metal_inventory==MetalInventory::gs98 && c.Z()>0)
     for(const auto& e:gs98_metals)include_charge(e.charge);
   if (range.min >= range.max)

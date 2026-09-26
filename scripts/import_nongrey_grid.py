@@ -65,6 +65,8 @@ def source_inputs(inputs, spec, x, y, teff, logg, log):
                 "TAUFIR":spec["tau_top"],"TAULAS":spec["tau_bottom"],"TAUDIV":.01,
                 "ILGDER":1,"NITER":200,"DPSILT":spec.get("temperature_step_limit",1.03),
                 "DERT":spec.get("convection_derivative_step",.001)}
+    if "newton_relaxation" in spec:
+        required["ORELAX"] = spec["newton_relaxation"]
     if any(settings.get(k) != v for k,v in required.items()) or not 0 < settings.get("CHMAX",1) <= 1e-6:
         raise ValueError("source atmosphere physical/numerical settings mismatch")
 

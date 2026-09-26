@@ -40,6 +40,10 @@ template<std::size_t N> struct Differential {
     for (std::size_t i = 0; i < N; ++i) out.d[i] = (a.d[i] - out.value * b.d[i]) / b.value;
     return out;
   }
+  Differential& operator+=(const Differential& b) { return *this=*this+b; }
+  Differential& operator-=(const Differential& b) { return *this=*this-b; }
+  Differential& operator*=(const Differential& b) { return *this=*this*b; }
+  Differential& operator/=(const Differential& b) { return *this=*this/b; }
 };
 template<std::size_t N> Differential<N> log(const Differential<N>& x) {
   Differential<N> out(std::log(x.value));
@@ -49,6 +53,26 @@ template<std::size_t N> Differential<N> log(const Differential<N>& x) {
 template<std::size_t N> Differential<N> exp(const Differential<N>& x) {
   Differential<N> out(std::exp(x.value));
   for (std::size_t i = 0; i < N; ++i) out.d[i] = out.value * x.d[i];
+  return out;
+}
+template<std::size_t N> Differential<N> sqrt(const Differential<N>& x) {
+  Differential<N> out(std::sqrt(x.value));
+  for(std::size_t i=0;i<N;++i) out.d[i]=x.d[i]/(2*out.value);
+  return out;
+}
+template<std::size_t N> Differential<N> cbrt(const Differential<N>& x) {
+  Differential<N> out(std::cbrt(x.value));
+  for(std::size_t i=0;i<N;++i) out.d[i]=x.d[i]/(3*out.value*out.value);
+  return out;
+}
+template<std::size_t N> Differential<N> pow(const Differential<N>& x,double exponent) {
+  Differential<N> out(std::pow(x.value,exponent));
+  for(std::size_t i=0;i<N;++i) out.d[i]=exponent*std::pow(x.value,exponent-1)*x.d[i];
+  return out;
+}
+template<std::size_t N> Differential<N> log1p(const Differential<N>& x) {
+  Differential<N> out(std::log1p(x.value));
+  for(std::size_t i=0;i<N;++i) out.d[i]=x.d[i]/(1+x.value);
   return out;
 }
 

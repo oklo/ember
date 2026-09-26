@@ -22,7 +22,7 @@ struct EosState {
   double Gamma1{};   // dlnP/dlnrho at constant S
   double delta{};    // -dlnrho/dlnT at constant P
   double mu{};       // mean molecular weight
-  double free_e{};   // free electrons per nucleon
+  double free_e{};   // free electrons per nucleus (NaN if unavailable)
 
   // Derived, so callers never re-derive them inconsistently.
   double dPdT_rho(double T)     const { return P * chiT / T; }

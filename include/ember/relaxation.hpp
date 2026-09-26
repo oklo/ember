@@ -14,6 +14,9 @@ struct RelaxationOptions {
   double correction_tolerance{1e-8};
   double max_log_step{0.2};
   double max_luminosity_step{0.5};  // fraction of each point's fixed luminosity unit
+  // Opt-in parallel zone evaluation. All supplied physics providers must
+  // permit concurrent const evaluation. Boundaries and reductions stay serial.
+  std::size_t zone_threads{1};
 };
 
 struct RelaxationIteration {

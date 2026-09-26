@@ -2,6 +2,7 @@
 #include "ember/constants.hpp"
 #include "ember/interp.hpp"
 #include "differential.hpp"
+#include "numeric_table_data.hpp"
 #include <algorithm>
 #include <cmath>
 #include <fstream>
@@ -61,7 +62,8 @@ HelmholtzTableEos::HelmholtzTableEos(const std::filesystem::path& file, Mixture 
     composition_.metal_inventory=MetalInventory::gs98;
   }
   label("composition");
-  for (double& v:composition_.X) {
+  for (std::size_t i=0;i<TABLE_NSPEC;++i) {
+    auto& v=composition_.X[i];
     in>>v;
     if (!in || !std::isfinite(v) || v<0 || v>1) throw std::runtime_error("HelmholtzTableEos: bad composition");
   }
@@ -79,17 +81,16 @@ HelmholtzTableEos::HelmholtzTableEos(const std::filesystem::path& file, Mixture 
   axis("log_t",t_); axis("log_q",q_);
   if (t_.size()*q_.size()>1000000) throw std::runtime_error("HelmholtzTableEos: too many nodes");
   label("data"); nodes_.resize(t_.size()*q_.size());
+  detail::NumericTableData data(in);
   for (auto& n:nodes_) {
-    int valid=-1; in>>valid;
-    if (!in || (valid!=0 && valid!=1)) throw std::runtime_error("HelmholtzTableEos: invalid mask");
+    const int valid=data.read<int>();
+    if (valid!=0 && valid!=1) throw std::runtime_error("HelmholtzTableEos: invalid mask");
     n.valid=valid==1;
     for (double& v:n.d) {
-      in>>v;
-      if (!in || !std::isfinite(v)) throw std::runtime_error("HelmholtzTableEos: invalid potential data");
+      v=data.read<double>();
     }
   }
-  std::string extra;
-  if (in>>extra) throw std::runtime_error("HelmholtzTableEos: trailing data");
+  data.finish();
   supported_hi_.resize(t_.size()-1);
   for(std::size_t it=0;it+1<t_.size();++it) {
     std::size_t hi=0;
@@ -164,7 +165,8 @@ HelmholtzJet HelmholtzTableEos::material_jet(double T, double rho) const {
   return j;
 }
 
-HelmholtzJet HelmholtzTableEos::mixed_material_jet(double T,double rho,const std::array<WeightedTable,4>& planes) {
+HelmholtzJet HelmholtzTableEos::mixed_material_jet(double T,double rho,std::span<const WeightedTable> planes) {
+  if(planes.empty())throw std::invalid_argument("HelmholtzTableEos: empty material mixture");
   if(!positive(T) || !positive(rho))throw std::domain_error("HelmholtzTableEos: invalid state");
   const auto& reference=*planes[0].table;
   const double t=std::log(T),q=std::log(rho)-1.5*(t-6*ln10);
@@ -199,6 +201,58 @@ HelmholtzJet HelmholtzTableEos::mixed_material_jet(double T,double rho,const std
   for(int i=0;i<4;++i)for(int k=0;k<4-i;++k)for(int n=0;n<=i;++n)
     jet[i][k]+=choose[i][n]*std::pow(-1.5,n)*f[i-n][k+n];
   return jet;
+}
+
+std::array<HelmholtzJet,10> HelmholtzTableEos::mixed_composition_jets(
+    double T,double rho,std::span<const WeightedCompositionTable> planes,std::size_t channels) {
+  if(planes.empty() || (channels!=1 && channels!=4 && channels!=10))
+    throw std::invalid_argument("HelmholtzTableEos: invalid composition mixture");
+  if(!positive(T) || !positive(rho))throw std::domain_error("HelmholtzTableEos: invalid state");
+  const auto& reference=*planes[0].table;
+  const double t=std::log(T),q=std::log(rho)-1.5*(t-6*ln10);
+  if(t<reference.t_.front() || t>reference.t_.back() || q<reference.q_.front() || q>reference.q_.back())
+    throw std::domain_error("HelmholtzTableEos: state outside table");
+  const auto it=interp::locate(reference.t_,t),iq=interp::locate(reference.q_,q);
+  for(const auto& p:planes) {
+    const auto [lo,hi]=p.table->supported_q(it);
+    if(iq<lo || iq>=hi)throw std::domain_error("HelmholtzTableEos: masked composition support");
+  }
+  const double ht=reference.t_[it+1]-reference.t_[it],hq=reference.q_[iq+1]-reference.q_[iq];
+  const auto bt=evaluate_basis((t-reference.t_[it])/ht,ht),bq=evaluate_basis((q-reference.q_[iq])/hq,hq);
+  // Fixed channel counts expose independent sums to the compiler.
+  // Source nodes, accumulation order, derivatives and domain checks are unchanged.
+  const auto calculate = [&]<std::size_t Channels>() {
+  std::array<HelmholtzJet,10> f{},result{};
+  std::array<double,10> offset{};
+  for(const auto& p:planes)for(std::size_t c=0;c<Channels;++c)
+    offset[c]+=p.weight[c]*p.table->nodes_[it*reference.q_.size()+iq].d[0];
+  for(std::size_t si=0;si<2;++si)for(std::size_t sj=0;sj<2;++sj) {
+    std::array<std::array<double,9>,10> node{};
+    for(const auto& p:planes) {
+      const auto& input=p.table->nodes_[(it+si)*reference.q_.size()+iq+sj];
+      const double plane_offset=p.table->nodes_[it*reference.q_.size()+iq].d[0];
+      for(std::size_t k=0;k<9;++k) {
+        const double value=input.d[k]-(k==0?plane_offset:0.);
+        for(std::size_t c=0;c<Channels;++c)node[c][k]+=p.weight[c]*value;
+      }
+    }
+    for(std::size_t i=0;i<3;++i)for(std::size_t j=0;j<3;++j)
+      for(std::size_t a=0;a<4;++a)for(std::size_t b=0;b<4-a;++b) {
+        const double factor=bt[3*si+i][a]*bq[3*sj+j][b];
+        for(std::size_t c=0;c<Channels;++c)f[c][a][b]+=node[c][3*i+j]*factor;
+      }
+  }
+  constexpr int choose[4][4]={{1,0,0,0},{1,1,0,0},{1,2,1,0},{1,3,3,1}};
+  for(std::size_t c=0;c<Channels;++c) {
+    f[c][0][0]+=offset[c];
+    for(int i=0;i<4;++i)for(int k=0;k<4-i;++k)for(int n=0;n<=i;++n)
+      result[c][i][k]+=choose[i][n]*std::pow(-1.5,n)*f[c][i-n][k+n];
+  }
+  return result;
+  };
+  if(channels==1)return calculate.template operator()<1>();
+  if(channels==4)return calculate.template operator()<4>();
+  return calculate.template operator()<10>();
 }
 
 EosResponse helmholtz_response(double T,double rho,HelmholtzJet f) {

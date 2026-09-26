@@ -4,6 +4,7 @@
 #include "ember/nuclear.hpp"
 #include "ember/losses.hpp"
 #include "ember/opacity.hpp"
+#include "ember/microscopic_transport.hpp"
 #include <array>
 
 namespace ember {
@@ -18,8 +19,9 @@ namespace ember {
 //
 // Nuclear neutrinos are already removed from eps_deposited. Internal energy
 // includes its composition dependence but excludes nuclear rest mass.
-// Time differences are backward Euler; nodal sources use trapezoidal mass
-// weights, including both endpoints of the zone between points i and i+1. The
+// Time differences are backward Euler. With volume-face luminosities, each
+// energy row encloses one node and uses that node's composition mass weight.
+// The older nodal-luminosity convention averages the two endpoint sources. The
 // gradient in (4) is radiative in Schwarzschild-stable zones, and the
 // Bohm-Vitense mixing-length result in unstable zones. The choice of form
 // matters as much as the value: scaling the radiative equation by a convective
@@ -41,6 +43,14 @@ struct Physics {
   double alpha_semiconvection{};     // Langer mixing-only closure; zero disables
   double alpha_thermohaline{};       // Kippenhahn closure; zero disables
   const NeutrinoLosses* neutrino_losses{}; // nullptr preserves the zero-loss control
+  // When present, opacity must contain radiation only. This evaluator supplies
+  // both microscopic species flux and its matching heat/conductivity split.
+  const MicroscopicTransport* microscopic{};
+  CNMicroscopicApproximation cn_microscopic{CNMicroscopicApproximation::unselected};
+  // Explicitly select macroscopic mixing without microscopic settling for
+  // physical metal inventories. This is an approximation/control choice;
+  // a missing transport provider must not silently select it.
+  bool explicit_metal_mixing_only{false};
 };
 
 // Evaluate one zone.  `dt` <= 0 means a static model: the time-dependent term

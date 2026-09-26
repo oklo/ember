@@ -1,0 +1,139 @@
+#include "ember/eos_variable_metal.hpp"
+#include "ember/constants.hpp"
+#include <algorithm>
+#include <chrono>
+#include <cmath>
+#include <cstdio>
+#include <fstream>
+#include <iomanip>
+
+using namespace ember;
+namespace {
+int failures=0;
+void check(bool ok,const char* name,double value=0) {
+  failures+=!ok;std::printf("[%s] %s (%.10g)\n",ok?"PASS":"FAIL",name,value);
+}
+template<class F>bool throws(F f){try{f();}catch(const std::exception&){return true;}return false;}
+Composition composition(double H,double Y3,double Z) {
+  auto c=solar_scaled(H,Z);c.basis=AbundanceBasis::baryon_mass;
+  c.metal_inventory=MetalInventory::gs98;c.X[1]=Y3;c.X[2]-=Y3;return c;
+}
+double coefficient(double u,double v,double Z,bool cubic) {
+  return constants::R_gas*(1+u+.3*v+(cubic?.7*Z+.4*Z*Z+.2*Z*Z*Z:std::exp(2*Z)));
+}
+// A thermodynamically regular manufactured potential with known pressure
+// and energy. Non-polynomial Z dependence exercises joins independently of
+// the cubic-reproduction check. The final source plane can be fully masked.
+void fixture(const std::filesystem::path& dir,bool cubic,bool masked) {
+  std::filesystem::create_directories(dir);
+  const std::array<double,6> zs{0,.005,.02,.04,.16,.3};
+  const std::array<double,4> us{0,.25,.7,1};
+  const std::array<double,3> vs{0,.2,1};
+  for(std::size_t iz=0;iz<zs.size();++iz)for(std::size_t iu=0;iu<us.size();++iu)
+    for(std::size_t iv=0;iv<vs.size();++iv) {
+      std::ofstream f(dir/(std::to_string(iz)+"-"+std::to_string(iu)+"-"+std::to_string(iv)+".dat"));
+      f<<std::setprecision(17)<<"EMBER_HELMHOLTZ 2\nsource \"analytic test\"\n"
+       <<"composition_proxy \"none\"\nbasis baryon_mass\nmetal_inventory gs98\ncomposition";
+      auto c=composition((1-zs[iz])*us[iu],(1-zs[iz])*(1-us[iu])*vs[iv],zs[iz]);
+      c.X[2]=(1-zs[iz])*(1-us[iu])*(1-vs[iv]);
+      for(std::size_t k=0;k<TABLE_NSPEC;++k)f<<' '<<c.X[k];
+      f<<"\nlog_t 4 4 5 6 7\nlog_q 4 -6 -2 2 6\ndata\n";
+      const double a=coefficient(us[iu],vs[iv],zs[iz],cubic);
+      for(int it=0;it<4;++it)for(double lq:{-6.,-2.,2.,6.}) {
+        const bool valid=!(masked && iz>=4);
+        f<<(valid?1:0)<<' '<<a*lq*std::log(10.)<<' '<<a<<" 0 0 0 0 0 0 0\n";
+      }
+    }
+  for(int n:{4,5,6}) {
+    std::ofstream f(dir/("family"+std::to_string(n)+".dat"));
+    f<<std::setprecision(17)<<"EMBER_VARIABLE_METAL_HELMHOLTZ "<<(n==4?1:2)<<"\nmetals "<<n;
+    for(int i=0;i<n;++i)f<<' '<<zs[i];
+    f<<"\nhydrogen_share 4 0 0.25 0.7 1\nhelium3_share 3 0 0.2 1\n";
+    for(int iz=0;iz<n;++iz)for(int iu=0;iu<4;++iu)for(int iv=0;iv<3;++iv)
+      f<<'"'<<iz<<'-'<<iu<<'-'<<iv<<".dat\"\n";
+  }
+}
+double response_difference(const VariableMetalHelmholtzEos& a,const VariableMetalHelmholtzEos& b,
+                           double T,double rho,const Composition& c) {
+  const auto x=a.eval(T,rho,c),y=b.eval(T,rho,c);
+  const auto p=a.composition_potential(T,rho,c),q=b.composition_potential(T,rho,c);
+  const auto h=a.composition_heat(T,rho,c),j=b.composition_heat(T,rho,c);
+  double error=0;
+  auto add=[&](double r,double s){error=std::max(error,std::abs(r-s)/std::max(1.,std::abs(r)));};
+  add(x.P,y.P);add(x.E,y.E);add(x.S,y.S);add(x.cp,y.cp);add(x.grad_ad,y.grad_ad);
+  add(p.phi,q.phi);
+  for(std::size_t k=0;k<3;++k) {
+    add(p.gradient[k],q.gradient[k]);add(h.exchange_enthalpy[k],j.exchange_enthalpy[k]);
+    for(std::size_t l=0;l<3;++l)add(p.hessian[k][l],q.hessian[k][l]);
+    for(std::size_t l=0;l<5;++l)add(h.enthalpy_partials[k][l],j.enthalpy_partials[k][l]);
+  }
+  return error;
+}
+}
+int main() {
+  const auto dir=std::filesystem::temp_directory_path()/
+    ("ember-metal-extension-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count()));
+  try {
+    fixture(dir/"cubic",true,false);fixture(dir/"smooth",false,false);fixture(dir/"masked",false,true);
+    using M=HelmholtzTableEos::Mixture;
+    VariableMetalHelmholtzEos cubic(dir/"cubic/family6.dat",M::allow_documented_proxy);
+    VariableMetalHelmholtzEos old(dir/"smooth/family4.dat",M::allow_documented_proxy);
+    VariableMetalHelmholtzEos one(dir/"smooth/family5.dat",M::allow_documented_proxy);
+    VariableMetalHelmholtzEos two(dir/"smooth/family6.dat",M::allow_documented_proxy);
+    VariableMetalHelmholtzEos masked(dir/"masked/family6.dat",M::allow_documented_proxy);
+    const double T=3e5,rho=.3;
+    double exact=0,preserved=0,extended_preserved=0;
+    for(double z:{1e-6,.004,.015,.02,std::nextafter(.02,1.),.03,.04,.040001,.07,.12,.16,.18,.24,.3})
+      for(double u:{.53,.73})for(double v:{.07,.15}) {
+        const auto c=composition((1-z)*u,(1-z)*(1-u)*v,z);
+        const auto s=cubic.eval(T,rho,c);const double a=coefficient(u,v,z,true);
+        const double pr=constants::a_rad*std::pow(T,4)/3;
+        exact=std::max({exact,std::abs(s.P/(rho*T*a+pr)-1),std::abs(s.E/(1.5*T*a+3*pr/rho)-1)});
+        if(z<=.04) {
+          preserved=std::max(preserved,response_difference(old,two,T,rho,c));
+          preserved=std::max(preserved,response_difference(old,masked,T,rho,c));
+        }
+        if(z<=.16)extended_preserved=std::max(extended_preserved,response_difference(one,two,T,rho,c));
+      }
+    check(exact<2e-11,"arbitrary cubic source pressure/energy reproduced across both extensions",exact);
+    check(preserved==0,"all low-Z responses unchanged, including ULP perturbation and masked distant planes",preserved);
+    check(extended_preserved==0,"a further source plane preserves every previously covered response",extended_preserved);
+    check(throws([&]{masked.eval(T,rho,composition(.3,.03,.1));}),"needed masked high-Z source is still rejected");
+    check(throws([&]{two.eval(T,rho,composition(.3,.03,.301));}),"metal extrapolation remains rejected");
+    double continuity=0,derivative=0,firstlaw=0;
+    for(double z:{.04,.16}) {
+      const auto a=two.composition_potential(T,rho,composition(.3,.03,z-1e-10));
+      const auto b=two.composition_potential(T,rho,composition(.3,.03,z+1e-10));
+      for(std::size_t k=0;k<3;++k) {
+        continuity=std::max(continuity,std::abs(a.gradient[k]-b.gradient[k])/constants::R_gas);
+        for(std::size_t l=0;l<3;++l)
+          continuity=std::max(continuity,std::abs(a.hessian[k][l]-b.hessian[k][l])/constants::R_gas);
+      }
+    }
+    check(continuity<2e-6,"potential gradient and Hessian continuous at both new joins",continuity);
+    for(double z:{.039,.041,.1,.159,.161,.23}) {
+      const auto c=composition(.3,.03,z);const auto s=two.eval(T,rho,c);
+      const auto p=two.composition_potential(T,rho,c);const auto heat=two.composition_heat(T,rho,c);
+      const double step=2e-6;
+      for(std::size_t k=0;k<3;++k) {
+        std::array<double,3> coords{.3,.03,z};coords[k]+=step;
+        const auto plus=composition(coords[0],coords[1],coords[2]);coords[k]-=2*step;
+        const auto minus=composition(coords[0],coords[1],coords[2]);
+        const auto a=two.composition_potential(T,rho,plus),b=two.composition_potential(T,rho,minus);
+        derivative=std::max(derivative,std::abs((a.phi-b.phi)/(2*step)-p.gradient[k])/constants::R_gas);
+        for(std::size_t l=0;l<3;++l)
+          derivative=std::max(derivative,std::abs((a.gradient[l]-b.gradient[l])/(2*step)-p.hessian[l][k])/constants::R_gas);
+        const auto ha=two.composition_heat(T,rho,plus),hb=two.composition_heat(T,rho,minus);
+        for(std::size_t l=0;l<3;++l)
+          derivative=std::max(derivative,std::abs((ha.exchange_enthalpy[l]-hb.exchange_enthalpy[l])/(2*step)
+                                                -heat.enthalpy_partials[l][2+k])/(T*constants::R_gas));
+      }
+      const auto a=two.eval(T,rho*std::exp(step),c),b=two.eval(T,rho*std::exp(-step),c);
+      firstlaw=std::max(firstlaw,std::abs((a.E-b.E)/(2*step)-s.P/rho*(1-s.chiT))/(T*s.cv));
+    }
+    check(derivative<5e-6,"composition forces, Hessian and material-heat derivatives match finite differences",derivative);
+    check(firstlaw<2e-7,"enriched states retain thermodynamic first-law identity",firstlaw);
+  }catch(const std::exception& e){std::fprintf(stderr,"%s\n",e.what());++failures;}
+  std::filesystem::remove_all(dir);
+  return failures?1:0;
+}

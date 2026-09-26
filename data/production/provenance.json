@@ -1,0 +1,90 @@
+{
+  "eos": {
+    "generator": [
+      "scripts/generate_variable_metal_eos.py",
+      "scripts/import_freeeos_potential.py"
+    ],
+    "source_description": "FreeEOS 3.0.0 option 223; numerical electron integrals; GS98; material potential with analytic isotope contribution.",
+    "licence": "Scientific table; external source terms apply. Redistribution permission is not established by this package; see the cited data README.",
+    "notes": "data/eos/README.md; source descriptions are retained in each plane."
+  },
+  "opacity_low": {
+    "generator": [
+      "scripts/import_aesopus_mixtures.py"
+    ],
+    "source_description": "AESOPUS 2.1 GS98 gas Rosseland means",
+    "licence": "Scientific table; external source terms apply. Redistribution permission is not established by this package; see the cited data README.",
+    "notes": "data/opacity/README.md; no new grain contribution in these retained tables."
+  },
+  "opacity_warm": {
+    "generator": [
+      "scripts/import_tops_mixtures.py"
+    ],
+    "source_description": "Los Alamos ATOMIC/TOPS GS98 opacity",
+    "licence": "Scientific table; external source terms apply. Redistribution permission is not established by this package; see the cited data README.",
+    "notes": "data/opacity/README.md"
+  },
+  "opacity_bridge": {
+    "generator": [
+      "scripts/assemble_tops_refractive_family_v2.py"
+    ],
+    "source_description": "ATOMIC uncut means with refractive-ratio correction",
+    "licence": "Scientific table; external source terms apply. Redistribution permission is not established by this package; see the cited data README.",
+    "notes": "data/opacity/README.md; packaging preserves the selected numerical tables."
+  },
+  "opacity_hot": {
+    "generator": [
+      "scripts/import_tops_mixtures.py"
+    ],
+    "source_description": "Los Alamos ATOMIC declared cool/dense nominal family",
+    "licence": "Scientific table; external source terms apply. Redistribution permission is not established by this package; see the cited data README.",
+    "notes": "data/opacity/README.md"
+  },
+  "conduction": {
+    "generator": [
+      "scripts/import_conduction.py"
+    ],
+    "source_description": "condtab21wd electron conductivity",
+    "licence": "Scientific table; external source terms apply. Redistribution permission is not established by this package; see the cited data README.",
+    "notes": "data/conduction/README.md"
+  },
+  "atmosphere": {
+    "generator": [
+      "scripts/generate_nongrey_grid.py",
+      "scripts/assemble_nongrey_grid.py"
+    ],
+    "source_description": "TLUSTY/SYNSPEC atmosphere with replicated trace-composition blocks",
+    "licence": "Scientific table; external source terms apply. Redistribution permission is not established by this package; see the cited data README.",
+    "notes": "data/atmosphere/README.md; retained diagnostic table only, composition response remains to be supplied."
+  },
+  "collisions": {
+    "generator": [
+      "scripts/export_collision_transport.py"
+    ],
+    "source_description": "Ember screened collision quadrature",
+    "licence": "Ember-generated numerical quadrature; see repository LICENSE for generator code.",
+    "notes": "Exported quadrature; see docs/STELLAR_DIFFUSION_FLUX.md."
+  },
+  "composition": {
+    "generator": [
+      "apps/contracting_seed.hpp"
+    ],
+    "source_description": "Normalized initial baryon abundances with primordial deuterium",
+    "licence": "Ember model input; repository LICENSE applies.",
+    "notes": "Copied exactly from the retained configuration."
+  },
+  "configuration": {
+    "generator": [
+      "scripts/package_runtime_data.py"
+    ],
+    "source_description": "Retained Hayashi-start configuration with relative table paths",
+    "licence": "Repository LICENSE applies.",
+    "notes": "Only input filenames changed."
+  },
+  "limitations": [
+    "Packaging does not validate the selected physics or extend its supported domain.",
+    "The retained atmosphere has identical composition blocks and stops supporting the star near 4.34 Gyr.",
+    "This manifest covers the retained lifetime configuration; other experiment configurations require their own complete input sets.",
+    "Binary/text payloads are local until an approved distribution or reproducible source recipe is available."
+  ]
+}

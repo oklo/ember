@@ -101,11 +101,26 @@ int main() {
   };
   luminosity(.5);auto coefficients=secular_mixing_diffusivities(m,physics);
   check(coefficients[0]>0 && convective_mixing_regions(m,physics).size()==2,"semiconvection acts between Schwarzschild and Ledoux thresholds");
+  m.luminosity_grid=LuminosityGrid::volume_faces;
+  auto face_coefficients=secular_mixing_diffusivities(m,physics);
+  check(std::abs(face_coefficients[0]/coefficients[0]-1)<2e-14,
+        "isothermal face and nodal semiconvection agree to arithmetic precision");
+  m.y[1].L=-3*m.y[0].L;
+  check(secular_mixing_diffusivities(m,physics)==face_coefficients,
+        "semiconvection uses face luminosity, independent of the next volume flux");
+  m.luminosity_grid=LuminosityGrid::mass_nodes;
   luminosity(2);check(secular_mixing_diffusivities(m,physics)[0]==0,"MLT-unstable face excludes secular transport");
   std::swap(m.comp[0],m.comp[1]);
   m.y[0].lnrho=std::log(eos.rho_from_PT(T,P,m.comp[0]));m.y[1].lnrho=std::log(eos.rho_from_PT(T,P*std::exp(contrast),m.comp[1]));
   luminosity(-.1);coefficients=secular_mixing_diffusivities(m,physics);
   check(coefficients[0]>0,"thermohaline mixing acts for thermally stable inverted composition");
+  m.luminosity_grid=LuminosityGrid::volume_faces;
+  face_coefficients=secular_mixing_diffusivities(m,physics);
+  check(std::abs(face_coefficients[0]/coefficients[0]-1)<2e-14,
+        "isothermal face and nodal thermohaline coefficients agree to arithmetic precision");
+  m.y[1].L=-3*m.y[0].L;
+  check(secular_mixing_diffusivities(m,physics)==face_coefficients,
+        "thermohaline mixing uses face luminosity, independent of the next volume flux");
   physics.alpha_semiconvection=physics.alpha_thermohaline=0;
   check(secular_mixing_diffusivities(m,physics)[0]==0,"zero efficiencies retain explicit no-secular-mixing control");
   return failures?1:0;

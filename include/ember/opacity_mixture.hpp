@@ -28,10 +28,11 @@ private:
 class ElementalOpacity final : public Opacity {
 public:
   explicit ElementalOpacity(const Opacity& table) : table_(table) {}
+  bool includes_conduction() const override {return table_.includes_conduction();}
   OpacityState eval(double T, double rho, const Composition&) const override;
   std::optional<DensityRange> density_range(double T, const Composition&) const override;
   const char* name() const override {
-    return "number-density mapped elemental opacity; He isotope cross sections approximated";
+    return "number-density mapped elemental opacity; H/He isotope cross sections approximated";
   }
 
 private:

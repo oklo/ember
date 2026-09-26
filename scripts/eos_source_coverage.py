@@ -2,6 +2,27 @@
 import math
 
 
+def validate_source_precision(source, specification):
+    primary = specification.get('precision_fallback')
+    reference = specification.get('precision_reference')
+    if source.get('precision_fallback') != primary:
+        raise ValueError('source plane precision differs from its specification')
+    if source.get('precision_reference') not in [None, reference]:
+        raise ValueError('source plane accuracy reference differs from its specification')
+    for record in source.get('precision_fallback_isotherms', []):
+        if not primary:
+            raise ValueError('source precision isotherm lacks a family declaration')
+        actual = record.get('actual_probe_sha256', primary['probe_sha256'])
+        if actual == primary['probe_sha256']:
+            expected = primary['fallback_relative_integral_error']
+        elif reference and actual == reference['probe_sha256']:
+            expected = reference['relative_integral_error']
+        else:
+            raise ValueError('source isotherm uses an undeclared precision executable')
+        if record.get('relative_integral_error', expected) != expected:
+            raise ValueError('source isotherm precision target differs')
+
+
 def inconsistent_source_rows(source):
     """Validate explicit exclusions without changing a returned source flag.
 
@@ -34,15 +55,21 @@ def absent_source_rows(raw):
         if any(row is None for row in data):
             raise ValueError('absent source row without a coverage declaration')
         return [False]*len(data)
+    required = {'kind', 'original_logQ_max', 'minimum_added_logT'}
     if (raw.get('composition_basis') != 'baryon_mass'
-            or set(declaration) != {'kind', 'original_logQ_max', 'minimum_added_logT'}
+            or set(declaration) not in [required, required | {'maximum_added_hydrogen'}]
             or declaration['kind'] != 'hot_density_extension'):
         raise ValueError('unknown source coverage declaration')
     boundary, minimum = declaration['original_logQ_max'], declaration['minimum_added_logT']
     if (not all(math.isfinite(v) for v in [boundary, minimum])
             or boundary not in qs[:-1] or minimum not in ts[1:]):
         raise ValueError('source coverage boundary must be an interior grid coordinate')
-    missing = [t < minimum and q > boundary for t in ts for q in qs]
+    maximum = declaration.get('maximum_added_hydrogen')
+    if maximum is not None and (not math.isfinite(maximum) or not 0 <= maximum <= .98
+                                or not math.isfinite(raw['hydrogen'])):
+        raise ValueError('invalid added hydrogen coverage')
+    composition_absent = maximum is not None and raw['hydrogen'] > maximum
+    missing = [(t < minimum or composition_absent) and q > boundary for t in ts for q in qs]
     if any(expected != (row is None) for expected, row in zip(missing, data, strict=True)):
         raise ValueError('source rows do not match declared absent coverage')
     return missing

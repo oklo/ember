@@ -2,6 +2,7 @@
 #include "ember/eos.hpp"
 #include <array>
 #include <filesystem>
+#include <span>
 #include <string>
 #include <vector>
 
@@ -30,10 +31,19 @@ public:
   DensityRange material_density_range(double T) const;
 private:
   friend class MetalHelmholtzEos;
+  friend class SmoothMetalHelmholtzEos;
+  friend class VariableMetalHelmholtzEos;
   struct WeightedTable {const HelmholtzTableEos* table;double weight;};
   bool same_material_grid(const HelmholtzTableEos& other) const {return t_==other.t_ && q_==other.q_;}
   // Caller verifies the common grid once when constructing its family.
-  static HelmholtzJet mixed_material_jet(double T,double rho,const std::array<WeightedTable,4>&);
+  static HelmholtzJet mixed_material_jet(double T,double rho,std::span<const WeightedTable>);
+  struct WeightedCompositionTable {
+    const HelmholtzTableEos* table;
+    // Value, three first derivatives, six symmetric second derivatives.
+    std::array<double,10> weight{};
+  };
+  static std::array<HelmholtzJet,10> mixed_composition_jets(double,double,
+      std::span<const WeightedCompositionTable>,std::size_t channels);
   struct Node { bool valid{}; std::array<double,9> d{}; };
   void check_composition(const Composition&) const;
   std::pair<std::size_t,std::size_t> supported_q(std::size_t it) const;

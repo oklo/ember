@@ -11,6 +11,7 @@ public:
   OpacityState eval(double T, double rho, const Composition&) const override;
   std::optional<DensityRange> density_range(double T, const Composition&) const override;
   const char* name() const override { return "temperature-blended radiative opacity"; }
+  bool includes_conduction() const override {return low_.includes_conduction() || high_.includes_conduction();}
 private:
   const Opacity& low_;
   const Opacity& high_;

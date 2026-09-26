@@ -16,6 +16,11 @@ namespace ember {
 enum class Var : std::size_t { lnr = 0, lnrho, lnT, L, COUNT };
 inline constexpr std::size_t NVAR = static_cast<std::size_t>(Var::COUNT);
 
+// Temperature, density, radius and composition are stored at mass nodes.
+// Total luminosity can instead be stored at each nodal volume's outer face,
+// where the conservative composition update also carries material heat.
+enum class LuminosityGrid { mass_nodes, volume_faces };
+
 struct Point {
   double lnr{}, lnrho{}, lnT{}, L{};
   double& operator[](Var v) {
@@ -42,6 +47,7 @@ struct Model {
   std::vector<Point>  y;            // state at point i
   std::vector<Composition> comp;    // composition at point i
   std::vector<double> Lsurf_hist;   // diagnostics
+  LuminosityGrid luminosity_grid{LuminosityGrid::mass_nodes};
 
   std::size_t size() const { return y.size(); }
   double r(std::size_t i)   const { return std::exp(y[i].lnr); }

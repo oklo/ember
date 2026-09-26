@@ -1,8 +1,10 @@
 #include "ember/structure.hpp"
 #include "ember/convection.hpp"
 #include "ember/constants.hpp"
+#include "ember/energy_grid.hpp"
 #include "differential.hpp"
 #include "energy.hpp"
+#include "thermal_transport.hpp"
 #include <algorithm>
 #include <cmath>
 #include <optional>
@@ -20,15 +22,18 @@ std::optional<Previous> prepare(const Model& m, std::size_t i, const Physics& ph
                                 double dt, const Model* prev) {
   if (!phys.eos || !phys.opacity || !phys.nuclear)
     throw std::invalid_argument("zone_residual: missing physics module");
+  detail::check_thermal_transport(phys);
   if (m.size() < 2 || i >= m.size() - 1 || m.m.size() != m.size() || m.comp.size() != m.size())
     throw std::invalid_argument("zone_residual: invalid zone index or model arrays");
   if (!std::isfinite(m.m[i]) || !std::isfinite(m.m[i + 1]) || m.m[i] < 0.0
       || !(m.m[i + 1] > m.m[i]) || !std::isfinite(dt))
     throw std::domain_error("zone_residual: invalid mass interval or time step");
+  (void)face_luminosities(m);
   if (dt <= 0.0) return std::nullopt;
   if (!phys.eos->has_internal_energy())
     throw std::logic_error("zone_residual: EOS has no validated internal energy for time dependence");
-  if (!prev || prev->size() != m.size() || prev->comp.size() != m.size() || prev->m != m.m)
+  if (!prev || prev->size() != m.size() || prev->comp.size() != m.size() || prev->m != m.m
+      || prev->luminosity_grid != m.luminosity_grid)
     throw std::invalid_argument("zone_residual: time dependence requires a previous model on the same mesh");
   const double rho = prev->rho(i);
   return Previous{phys.eos->eval(prev->T(i), rho, prev->comp[i]).E, rho,
@@ -94,7 +99,8 @@ std::array<Differential<N>, NVAR> equations(const Model& model, std::size_t i,
   const double mb = 0.5 * (model.m[i] + model.m[i + 1]);
   const D rb = 0.5 * (a.r + b.r), rhob = 0.5 * (a.rho + b.rho);
   const D Tb = 0.5 * (a.T + b.T), Pb = 0.5 * (a.P + b.P);
-  const D kb = 0.5 * (a.kappa + b.kappa), Lb = 0.5 * (a.L + b.L);
+  const bool faces=face_luminosities(model);
+  const D kinput = 0.5 * (a.kappa + b.kappa), Lb = faces ? a.L : 0.5 * (a.L + b.L);
   const D cp = 0.5 * (a.cp + b.cp), delta = 0.5 * (a.delta + b.delta);
   const D grad_ad = 0.5 * (a.grad_ad + b.grad_ad);
   const D pressure_contrast=log(b.P)-log(a.P);
@@ -113,14 +119,30 @@ std::array<Differential<N>, NVAR> equations(const Model& model, std::size_t i,
   f[0] = (b.lnr - a.lnr) / dm - 1.0 / (4.0 * M_PI * rb * rb * rb * rhob);
   f[1] = dlnP + G * mb / (4.0 * M_PI * rb * rb * rb * rb * Pb);
   D eps_grav{};
-  if (prev) eps_grav = 0.5*(detail::gravitational_heating(a.E,a.P,a.rho,prev->E,prev->rho,dt)
-    +detail::gravitational_heating(b.E,b.P,b.rho,prev->E_hi,prev->rho_hi,dt));
-  // Match the same trapezoidal nodal mass weights used for burning/mixing.
-  f[2] = (b.L - a.L) / dm - (0.5 * (a.eps + b.eps) + eps_grav);
+  if (prev) {
+    const D high=detail::gravitational_heating(b.E,b.P,b.rho,prev->E_hi,prev->rho_hi,dt);
+    eps_grav=faces ? high : 0.5*(high+
+        detail::gravitational_heating(a.E,a.P,a.rho,prev->E,prev->rho,dt));
+  }
+  // Faces enclose exactly the composition/storage volume of node i+1.
+  // The nodal convention is retained for reading and testing older models.
+  f[2] = (b.L-a.L)/energy_interval_mass(model,i)
+      - ((faces ? b.eps : 0.5*(a.eps+b.eps))+eps_grav);
 
+  D carried{},conductivity{};
+  if(phys.microscopic) {
+    const auto response=microscopic_heat(*phys.microscopic,i,model.m[i],model.m[i+1],
+        lo,model.comp[i],hi,model.comp[i+1],N>0);
+    carried.value=response.carried_luminosity;conductivity.value=response.conductivity;
+    if constexpr(N>0)for(std::size_t v=0;v<NVAR;++v) {
+      carried.d[v]=response.dcarried_lo[v];carried.d[NVAR+v]=response.dcarried_hi[v];
+      conductivity.d[v]=response.dconductivity_lo[v];conductivity.d[NVAR+v]=response.dconductivity_hi[v];
+    }
+  }
+  const auto transport=detail::thermal_transport(Tb,rhob,Pb,mb,kinput,Lb,
+      phys.microscopic!=nullptr || faces,carried,conductivity,a.lnT,b.lnT);
+  const D kb=transport.opacity,grad_rad=transport.gradient;
   const D gravity = G * mb / (rb * rb);
-  const D grad_rad = 3.0 * kb * Lb * Pb
-      / (16.0 * M_PI * constants::a_rad * constants::c * G * mb * Tb * Tb * Tb * Tb);
   EosState midpoint{};
   midpoint.P = Pb.value; midpoint.cp = cp.value; midpoint.delta = delta.value;
   const double U = mixing_length_U(Tb.value, rhob.value, kb.value, gravity.value, midpoint, phys.alpha_mlt);
@@ -178,7 +200,7 @@ ZoneResidual zone_residual_numerical(const Model& model, std::size_t i,
   const auto values = equations<0>(model, i, model.y[i], model.y[i + 1], phys, dt, old);
   ZoneResidual out{};
   for (std::size_t k = 0; k < NVAR; ++k) out.f[k] = values[k].value;
-  const double dm = model.m[i + 1] - model.m[i];
+  const double dm = energy_interval_mass(model,i);
   // Scale luminosity from this zone's flux and heating, with a 1 erg/s floor;
   // a fixed fraction of solar luminosity is inappropriate for a cold remnant.
   const double Lscale = std::max({std::abs(model.y[i].L), std::abs(model.y[i + 1].L),

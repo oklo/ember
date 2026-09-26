@@ -1,12 +1,72 @@
 #include "ember/evolution.hpp"
 #include "ember/convection.hpp"
 #include "ember/constants.hpp"
+#include "ember/energy_grid.hpp"
+#include "ember/cn_burning.hpp"
+#include "ember/deuterium_burning.hpp"
+#include "ember/metal_cn_transport.hpp"
+#include "thermal_transport.hpp"
 #include <algorithm>
 #include <cmath>
 #include <stdexcept>
 
 namespace ember {
+std::vector<ConvectiveMixingFace> convective_mixing_faces(const Model& m,const Physics& p) {
+  if(!p.eos || !p.opacity || m.comp.size()!=m.size())
+    throw std::invalid_argument("finite convection: invalid model or physics");
+  detail::check_thermal_transport(p);nodal_mass_weights(m);
+  std::vector<EosState> state;std::vector<double> opacity;
+  state.reserve(m.size());opacity.reserve(m.size());
+  for(std::size_t i=0;i<m.size();++i) {
+    state.push_back(p.eos->eval(m.T(i),m.rho(i),m.comp[i]));
+    opacity.push_back(p.opacity->eval(m.T(i),m.rho(i),m.comp[i]).kappa);
+  }
+  std::vector<ConvectiveMixingFace> result(m.size()-1);
+  for(std::size_t i=0;i+1<m.size();++i) {
+    const double T=.5*(m.T(i)+m.T(i+1)),rho=.5*(m.rho(i)+m.rho(i+1));
+    const double r=.5*(m.r(i)+m.r(i+1)),mass=.5*(m.m[i]+m.m[i+1]);
+    const double P=.5*(state[i].P+state[i+1].P),cp=.5*(state[i].cp+state[i+1].cp);
+    const double delta=.5*(state[i].delta+state[i+1].delta),ad=.5*(state[i].grad_ad+state[i+1].grad_ad);
+    double k=.5*(opacity[i]+opacity[i+1]),rad;
+    const double L=thermal_face_luminosity(m,i);
+    MicroscopicHeatResponse heat;
+    if(p.microscopic)
+      heat=microscopic_heat(*p.microscopic,i,m.m[i],m.m[i+1],m.y[i],m.comp[i],m.y[i+1],m.comp[i+1],false);
+    const auto tr=detail::thermal_transport<0>(T,rho,P,mass,k,L,
+        p.microscopic!=nullptr || face_luminosities(m),heat.carried_luminosity,
+        heat.conductivity,m.y[i].lnT,m.y[i+1].lnT);
+    rad=tr.gradient.value;k=tr.opacity.value;
+    double B=0;
+    if(p.criterion==ConvectiveCriterion::ledoux)
+      B=composition_buoyancy(*p.eos,T,P,delta,std::log(state[i+1].P)-std::log(state[i].P),m.comp[i],m.comp[i+1],rho).B;
+    EosState e{};e.P=P;e.cp=cp;e.delta=delta;
+    const double gravity=constants::G*mass/(r*r),Hp=P/(rho*gravity),length=p.alpha_mlt*Hp;
+    const double U=mixing_length_U(T,rho,k,gravity,e,p.alpha_mlt);
+    const auto c=ledoux_mixing_length_gradient(rad,ad,B,U);
+    const double velocity=std::sqrt(gravity*delta*length*length*c.element_contrast/(8*Hp));
+    const double D=length*velocity/3;
+    if(!std::isfinite(D+velocity+length) || D<0)
+      throw std::domain_error("finite convection: invalid mixing coefficient");
+    result[i]={D,velocity,length,c.element_contrast,B};
+  }
+  return result;
+}
+
+std::vector<double> finite_mixing_conductances(const Model& m,const Physics& p) {
+  const auto convective=convective_mixing_faces(m,p);
+  auto result=secular_mixing_diffusivities(m,p);
+  for(std::size_t i=0;i<result.size();++i) {
+    const double r=.5*(m.r(i)+m.r(i+1)),rho=.5*(m.rho(i)+m.rho(i+1));
+    const double area_mass=4*M_PI*r*r*rho;
+    result[i]=area_mass*area_mass*(result[i]+convective[i].diffusivity)/(m.m[i+1]-m.m[i]);
+    if(!std::isfinite(result[i]) || result[i]<0)
+      throw std::domain_error("finite convection: invalid mass conductance");
+  }
+  return result;
+}
+
 std::vector<double> secular_mixing_diffusivities(const Model& m,const Physics& p) {
+  detail::check_thermal_transport(p);
   nodal_mass_weights(m);
   if(!std::isfinite(p.alpha_semiconvection+p.alpha_thermohaline) || p.alpha_semiconvection<0 || p.alpha_thermohaline<0)
     throw std::invalid_argument("secular mixing: invalid efficiency");
@@ -23,8 +83,15 @@ std::vector<double> secular_mixing_diffusivities(const Model& m,const Physics& p
     const double T=.5*(m.T(i)+m.T(i+1)),rho=.5*(m.rho(i)+m.rho(i+1));
     const double P=.5*(state[i].P+state[i+1].P),cp=.5*(state[i].cp+state[i+1].cp);
     const double delta=.5*(state[i].delta+state[i+1].delta),ad=.5*(state[i].grad_ad+state[i+1].grad_ad);
-    const double k=.5*(opacity[i]+opacity[i+1]),mass=.5*(m.m[i]+m.m[i+1]),L=.5*(m.y[i].L+m.y[i+1].L);
-    const double rad=3*k*L*P/(16*M_PI*constants::a_rad*constants::c*constants::G*mass*std::pow(T,4));
+    double k=.5*(opacity[i]+opacity[i+1]);
+    const double mass=.5*(m.m[i]+m.m[i+1]),L=thermal_face_luminosity(m,i);
+    MicroscopicHeatResponse heat;
+    if(p.microscopic)
+      heat=microscopic_heat(*p.microscopic,i,m.m[i],m.m[i+1],m.y[i],m.comp[i],m.y[i+1],m.comp[i+1],false);
+    const auto transport=detail::thermal_transport<0>(T,rho,P,mass,k,L,
+        p.microscopic!=nullptr || face_luminosities(m),heat.carried_luminosity,
+        heat.conductivity,m.y[i].lnT,m.y[i+1].lnT);
+    k=transport.opacity.value;const double rad=transport.gradient.value;
     const double B=composition_buoyancy(*p.eos,T,P,delta,std::log(state[i+1].P)-std::log(state[i].P),m.comp[i],m.comp[i+1],rho).B;
     const double thermal=4*constants::a_rad*constants::c*std::pow(T,3)/(3*k*rho*rho*cp);
     // MLT handles Ledoux-unstable faces. These prescriptions apply only
@@ -75,6 +142,17 @@ std::vector<Composition> burn_and_transport(const Model& thermal,const Model& pr
   for(double d:D)if(!std::isfinite(d) || d<0)throw std::invalid_argument("burn_and_transport: invalid diffusivity");
   if(std::all_of(D.begin(),D.end(),[](double d){return d==0;}))
     return burn_and_mix(thermal,previous,nuclear,regions,dt,tolerance);
+  if(const auto* network=dynamic_cast<const PPDeuterium*>(&nuclear))
+    return burn_deuterium_and_transport(thermal,previous,*network,regions,D,dt,tolerance);
+  if(const auto* network=dynamic_cast<const PPCNNetwork*>(&nuclear);
+      network && previous.comp.front().cn_mass_convention==CNMassConvention::explicit_metal_mass)
+    return burn_metal_cn_and_transport(thermal,previous,*network,regions,D,dt,tolerance);
+  for(const auto& c:previous.comp)if(c[Species::H2]!=0)
+    throw std::invalid_argument("burn_and_transport: D diffusion requires an isotope-aware solve");
+  if(const auto* network=dynamic_cast<const PPCNNetwork*>(&nuclear))
+    return burn_cn_and_transport(thermal,previous,*network,regions,D,dt,tolerance);
+  for(const auto& c:previous.comp)if(c.cn_molality)
+    throw std::invalid_argument("burn_and_transport: active CN requires its explicit network");
   std::vector<Composition> old;std::vector<double> mass,g;std::size_t next=0;
   for(auto [begin,end]:regions) {
     if(begin!=next || end<=begin || end>thermal.size())throw std::invalid_argument("burn_and_transport: invalid partition");

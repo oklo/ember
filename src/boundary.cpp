@@ -1,5 +1,6 @@
 #include "ember/boundary.hpp"
 #include "ember/constants.hpp"
+#include "ember/energy_grid.hpp"
 #include "differential.hpp"
 #include "energy.hpp"
 #include <cmath>
@@ -35,7 +36,8 @@ CentralResidual central_residual(const Model& model, const Physics& phys, double
   if (dt > 0.0) {
     if (!phys.eos->has_internal_energy())
       throw std::logic_error("central_residual: EOS has no validated internal energy for time dependence");
-    if (!prev || prev->size() != model.size() || prev->comp.size() != model.size() || prev->m != model.m)
+    if (!prev || prev->size() != model.size() || prev->comp.size() != model.size() || prev->m != model.m
+        || prev->luminosity_grid != model.luminosity_grid)
       throw std::invalid_argument("central_residual: time dependence requires previous model on the same mesh");
     const auto e = phys.eos->eval_with_derivatives(T, rho.value, model.comp.front());
     const double old_rho = prev->rho(0);
@@ -48,7 +50,7 @@ CentralResidual central_residual(const Model& model, const Physics& phys, double
   const std::array<D, 2> f{
       D::variable(point.lnr, 0) - (std::log(3.0 / (4.0 * M_PI)) + std::log(mass)
                                   - D::variable(point.lnrho, 1)) / 3.0,
-      D::variable(point.L, 3) - mass * heating};
+      D::variable(point.L, 3) - luminosity_mass(model,0) * heating};
   CentralResidual out{};
   for (std::size_t k = 0; k < 2; ++k) {
     out.f[k] = f[k].value; out.dfdy[k] = f[k].d;

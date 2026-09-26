@@ -41,7 +41,8 @@ void TabulatedAtmosphere::read(std::istream& in) {
       throw std::invalid_argument("TabulatedAtmosphere: explicit solar-mixture proxy selection required");
   }
   label("composition");
-  for (double& x : composition_.X) {
+  for (std::size_t i=0;i<TABLE_NSPEC;++i) {
+    auto& x=composition_.X[i];
     in >> x;
     if (!in || !std::isfinite(x) || x < 0.0 || x > 1.0)
       throw std::runtime_error("TabulatedAtmosphere: invalid composition");

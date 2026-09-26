@@ -35,6 +35,7 @@ public:
   OpacityState eval(double T, double rho, const Composition&) const override;
   std::optional<DensityRange> density_range(double T,const Composition&) const override;
   const char* name() const override { return "radiative + conductive"; }
+  bool includes_conduction() const override {return bool(cond_) || rad_->includes_conduction();}
 private:
   std::shared_ptr<Opacity> rad_;
   std::shared_ptr<Conduction> cond_;

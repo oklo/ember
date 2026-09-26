@@ -1,4 +1,5 @@
 #include "ember/nuclear.hpp"
+#include "ember/deuterium.hpp"
 #include "ember/constants.hpp"
 #include "differential.hpp"
 #include "fermi.hpp"
@@ -52,6 +53,8 @@ Reaction reaction(PPReaction r,PPRates prescription=PPRates::solar_fusion_ii) {
   // Kinematic nuclear masses exclude electrons (electronic binding neglected).
   const double m1=nuclides[0].A*amu-me, m3=nuclides[1].A*amu-2*me;
   const double m4=nuclides[2].A*amu-2*me;
+  if(r==PPReaction::deuterium_p)
+    return {1,1,m1,deuterium_atomic_mass*amu-me,0,0,0};
   if(prescription==PPRates::solar_fusion_iii) {
     // Acharya et al. (2025), equations 8--9 and section V.C.
     // The 34 reaction uses the full equation 14 below, not a Taylor fit.
@@ -59,18 +62,41 @@ Reaction reaction(PPReaction r,PPRates prescription=PPRates::solar_fusion_ii) {
     case PPReaction::pp: return {1,1,m1,m1,4.09e-25,4.09e-25*11.0,4.09e-25*242.};
     case PPReaction::he3_he3: return {2,2,m3,m3,5.21,-4.9,22.42};
     case PPReaction::he3_he4: return {2,2,m3,m4,.0005610,0,0};
+    case PPReaction::deuterium_p: break; // handled above
     }
   }
   switch(r) {
   case PPReaction::pp: return {1,1,m1,m1,4.01e-25,4.01e-25*11.2,0};
   case PPReaction::he3_he3: return {2,2,m3,m3,5.21,-4.9,22.};
   case PPReaction::he3_he4: return {2,2,m3,m4,.00056,-.00036,.000151};
+  case PPReaction::deuterium_p: break; // handled above
   }
   throw std::invalid_argument("PPReaction: unknown reaction");
 }
 double gamow_energy(const Reaction& r) {
   const double hbar=h/(2*M_PI), mu=r.m1*r.m2/(r.m1+r.m2);
   return 2*mu*std::pow(M_PI*r.z1*r.z2*e2/hbar,2);
+}
+Reaction cn_reaction(PPRates rates,CNReaction which=CNReaction::n14_p) {
+  if(rates!=PPRates::solar_fusion_ii && rates!=PPRates::solar_fusion_iii)
+    throw std::invalid_argument("CNCycle: Solar Fusion II or III required");
+  const double mp=nuclides[0].A*amu-me;
+  // SFIII Table I; SFII Table XII. s2 is the second derivative, not
+  // the coefficient of E^2. N14 retains SFII's derivatives with SFIII S(0).
+  switch(which) {
+  case CNReaction::c12_p:
+    return rates==PPRates::solar_fusion_iii
+      ?Reaction{1,6,mp,nuclides[3].A*amu-6*me,1.44e-3,2.71e-3,3.74e-2}
+      :Reaction{1,6,mp,nuclides[3].A*amu-6*me,1.34e-3,2.6e-3,8.3e-2};
+  case CNReaction::c13_p:
+    return rates==PPRates::solar_fusion_iii
+      ?Reaction{1,6,mp,nuclides[4].A*amu-6*me,6.1e-3,1.04e-2,9.20e-2}
+      :Reaction{1,6,mp,nuclides[4].A*amu-6*me,7.6e-3,-7.83e-3,7.29e-1};
+  case CNReaction::n14_p:
+    return {1,7,mp,nuclides[5].A*amu-7*me,
+      rates==PPRates::solar_fusion_iii?1.68e-3:1.66e-3,-3.3e-3,4.4e-2};
+  }
+  throw std::invalid_argument("CNReaction: unknown reaction");
 }
 // Gauss--Legendre integration in ln(E/E0), split at the Gamow peak.
 struct Quadrature {
@@ -103,6 +129,22 @@ void validate(double T,double rho,const Composition& comp) {
 }
 struct Susceptibility { double eta,theta,dtheta_dlnT,dtheta_dlnne; };
 Susceptibility electrons(double T,double ne) {
+  // pp and CN captures at one state need the same electron inversion.
+  // Reuse its result only for identical temperature and electron density;
+  // reaction charges and composition chain-rule factors remain independent.
+  struct Key {
+    double temperature,density;
+    bool operator==(const Key&) const = default;
+  };
+  struct Hash {
+    std::size_t operator()(const Key& key) const {
+      const auto a=std::hash<double>{}(key.temperature),b=std::hash<double>{}(key.density);
+      return a^(b+0x9e3779b9+(a<<6)+(a>>2));
+    }
+  };
+  thread_local std::unordered_map<Key,Susceptibility,Hash> cache;
+  const Key key{T,ne};
+  if(const auto found=cache.find(key);found!=cache.end())return found->second;
   const double beta=kB*T/(me*c_light*c_light);
   const double norm=8*M_PI*std::pow(me*c_light/h,3);
   const double lambda=h/std::sqrt(2*M_PI*me*kB*T);
@@ -116,8 +158,10 @@ Susceptibility electrons(double T,double ne) {
     const double step=residual*f.In/f.dIn_deta;
     if(std::abs(residual)<2e-13 && std::abs(step)<2e-12*(1+std::abs(eta))) {
       const double theta=f.dIn_deta/f.In;
-      return {eta,theta,(f.d2In_detadlnb-f.d2In_deta2*f.dIn_dlnb/f.dIn_deta)/f.In,
+      const Susceptibility result{eta,theta,(f.d2In_detadlnb-f.d2In_deta2*f.dIn_dlnb/f.dIn_deta)/f.In,
         f.d2In_deta2/f.dIn_deta-theta};
+      if(cache.size()>=8192)cache.clear();
+      cache.emplace(key,result);return result;
     }
     eta-=std::clamp(step,-4*(1+std::abs(eta)),4*(1+std::abs(eta)));
   }
@@ -126,6 +170,11 @@ Susceptibility electrons(double T,double ne) {
 } // namespace
 
 ThermonuclearRate pp_bare_rate(double T,PPReaction which,PPRates prescription) {
+  if(which==PPReaction::deuterium_p) {
+    if(prescription!=PPRates::solar_fusion_iii)
+      throw std::invalid_argument("deuterium capture requires Solar Fusion III");
+    return deuterium_bare_rate(T);
+  }
   if(!std::isfinite(T) || T<=0) throw std::domain_error("pp_bare_rate: invalid temperature");
   if(prescription!=PPRates::legacy && prescription!=PPRates::solar_fusion_ii
       && prescription!=PPRates::solar_fusion_iii)
@@ -169,16 +218,15 @@ ThermonuclearRate pp_bare_rate(double T,PPReaction which,PPRates prescription) {
   return result;
 }
 
-static ScreeningState screening_response(double T,double rho,const Composition& comp,PPReaction which,PPScreening model,
+static ScreeningState screening_response(double T,double rho,const Composition& comp,const Reaction& r,PPScreening model,
                                          std::optional<Susceptibility>* shared_electrons) {
   validate(T,rho,comp);
-  const auto r=reaction(which);
   using D=detail::Differential<NSPEC+2>;
   using detail::exp;using detail::log;
   const auto temp=exp(D::variable(std::log(T),0)),density=exp(D::variable(std::log(rho),1));
   D ye,ions;
   for(std::size_t j=0;j<NSPEC;++j) {
-    if(j>=3 && comp.metal_inventory==MetalInventory::gs98) {
+    if(is_metal_species(j) && comp.metal_inventory==MetalInventory::gs98) {
       const D metal=D::variable(comp.X[j],j+2);
       ye=ye+metal*comp.metal_ion_moment(1);ions=ions+metal*comp.metal_ion_moment(2);
       continue;
@@ -216,7 +264,7 @@ static ScreeningState screening_response(double T,double rho,const Composition& 
 }
 
 ScreeningState pp_screening(double T,double rho,const Composition& comp,PPReaction which,PPScreening model) {
-  return screening_response(T,rho,comp,which,model,nullptr);
+  return screening_response(T,rho,comp,reaction(which),model,nullptr);
 }
 
 NuclearResponse PPChains::composition_response(double T,double rho,const Composition& comp) const {
@@ -229,8 +277,8 @@ NuclearResponse PPChains::composition_response(double T,double rho,const Composi
   // The two reactions see exactly the same T, density and composition.
   // Share their electron inversion only within this evaluation.
   std::optional<Susceptibility> shared_electrons;
-  const auto f1=screening_response(T,rho,comp,PPReaction::pp,screening_,&shared_electrons);
-  const auto f2=screening_response(T,rho,comp,PPReaction::he3_he3,screening_,&shared_electrons);
+  const auto f1=screening_response(T,rho,comp,reaction(PPReaction::pp),screening_,&shared_electrons);
+  const auto f2=screening_response(T,rho,comp,reaction(PPReaction::he3_he3),screening_,&shared_electrons);
   const std::array screens{f1,f2,f2};
   const std::array w{comp.abundance_weight(0),comp.abundance_weight(1),comp.abundance_weight(2)};
   const std::array y{comp.X[0]/w[0],comp.X[1]/w[1],comp.X[2]/w[2]};
@@ -279,5 +327,104 @@ const char* PPChains::name() const {
   if(screening_==PPScreening::legacy_weak) return "Solar Fusion II quadrature; capped classical weak screening";
   if(screening_==PPScreening::debye_fermi) return "Solar Fusion II quadrature; finite-degeneracy Debye screening";
   return "Solar Fusion II quadrature; finite-degeneracy Salpeter--Van Horn screening";
+}
+ThermonuclearRate cn_bare_rate(double T,PPRates prescription) {
+  return cn_bare_rate(T,CNReaction::n14_p,prescription);
+}
+ThermonuclearRate cn_bare_rate(double T,CNReaction which,PPRates prescription) {
+  const auto r=cn_reaction(prescription,which);
+  if(!std::isfinite(T) || T<=0 || T>2e7)
+    throw std::domain_error("CNCycle: positive finite T<=2e7 K required for low-energy rates");
+  if(T<1e5)return {};
+  using Entry=std::array<std::optional<ThermonuclearRate>,6>;
+  thread_local std::unordered_map<double,Entry> cache;
+  const auto index=2*static_cast<std::size_t>(which)+(prescription==PPRates::solar_fusion_iii?1:0);
+  const auto found=cache.find(T);
+  if(found!=cache.end() && found->second[index])return *found->second[index];
+  static const Quadrature q;
+  const double kt=kB*T,eg=gamow_energy(r),peak=std::cbrt(eg*kt*kt/4);
+  const double mu=r.m1*r.m2/(r.m1+r.m2);
+  double integral=0,moment=0;
+  for(double mid:{-2.,2.})for(int i=0;i<q.n;++i) {
+    const double energy=peak*std::exp(mid+2*q.x[i]),E=energy/mev;
+    const double S=(r.s0+E*(r.s1+.5*E*r.s2))*mev*1e-24;
+    const double term=2*q.w[i]*energy*S*std::exp(-energy/kt-std::sqrt(eg/energy));
+    integral+=term;moment+=term*energy/kt;
+  }
+  const ThermonuclearRate result{NA*std::sqrt(8/(M_PI*mu))/std::pow(kt,1.5)*integral,
+    integral>0?-1.5+moment/integral:0};
+  if(found==cache.end() && cache.size()>=8192)cache.clear();
+  cache[T][index]=result;
+  return result;
+}
+
+ScreeningState cn_screening(double T,double rho,const Composition& c,PPScreening model) {
+  return cn_screening(T,rho,c,CNReaction::n14_p,model);
+}
+ScreeningState cn_screening(double T,double rho,const Composition& c,CNReaction which,PPScreening model) {
+  return screening_response(T,rho,c,cn_reaction(PPRates::solar_fusion_iii,which),model,nullptr);
+}
+
+CNCycle::CNCycle(PPRates rates,PPScreening screening,double converted_carbon)
+    :rates_(rates),screening_(screening),converted_carbon_(converted_carbon) {
+  (void)cn_reaction(rates);
+  if(screening!=PPScreening::debye_fermi && screening!=PPScreening::salpeter_van_horn)
+    throw std::invalid_argument("CNCycle: finite-degeneracy screening required");
+  if(!std::isfinite(converted_carbon) || converted_carbon<0 || converted_carbon>1)
+    throw std::invalid_argument("CNCycle: converted carbon fraction must be in [0,1]");
+}
+
+NuclearResponse CNCycle::composition_response(double T,double rho,const Composition& c) const {
+  validate(T,rho,c);
+  if(c.metal_inventory!=MetalInventory::gs98)
+    throw std::domain_error("CNCycle: fixed GS98 catalyst approximation requires GS98 inventory");
+  const auto bare=cn_bare_rate(T,rates_);
+  NuclearResponse out;
+  if(T<1e5)return out;
+  const auto scr=cn_screening(T,rho,c,screening_);
+  const double catalyst_per_Z=(converted_carbon_*gs98_metals[0].fraction/12
+    +gs98_metals[1].fraction/14)/(c.basis==AbundanceBasis::baryon_mass?1.:gs98_atomic_mass_scale());
+  const double wH=c.abundance_weight(0),wHe=c.abundance_weight(2);
+  const double hydrogen=c.X[0]/wH,catalyst=c.Z()*catalyst_per_Z;
+  const double coefficient=rho*bare.molar_rate*std::exp(scr.log_factor);
+  const double rate=coefficient*hydrogen*catalyst; // mol of cycles / g / s
+  const double q=(4*nuclides[0].A-nuclides[2].A)*c_light*c_light;
+  const double nu=(.706+.996)*mev*NA,heat=q-nu;
+  auto& s=out.state;
+  s.eps=rate*heat;s.eps_neutrino=rate*nu;
+  s.dXdt[0]=-4*wH*rate;s.dXdt[2]=wHe*rate;
+  if(s.eps>0) {
+    s.dlneps_dlnT=bare.dlnrate_dlnT+scr.dlog_dlnT;
+    s.dlneps_dlnRho=1+scr.dlog_dlnRho;
+  }
+  for(std::size_t j=0;j<NSPEC;++j) {
+    const double dr=rate*scr.dlog_dX[j]+(j==0?coefficient*catalyst/wH:0)
+      +(is_metal_species(j)?coefficient*hydrogen*catalyst_per_Z:0);
+    out.deps_dX[j]=heat*dr;
+    out.d_dXdt_dX[0][j]=-4*wH*dr;out.d_dXdt_dX[2][j]=wHe*dr;
+  }
+  return out;
+}
+NuclearState CNCycle::eval(double T,double rho,const Composition& c) const {
+  return composition_response(T,rho,c).state;
+}
+NuclearResponse PPCNO::composition_response(double T,double rho,const Composition& c) const {
+  auto out=pp_.composition_response(T,rho,c);
+  const auto cn=cn_.composition_response(T,rho,c);
+  auto& s=out.state;
+  const double eps=s.eps+cn.state.eps;
+  if(eps>0) {
+    s.dlneps_dlnT=(s.eps*s.dlneps_dlnT+cn.state.eps*cn.state.dlneps_dlnT)/eps;
+    s.dlneps_dlnRho=(s.eps*s.dlneps_dlnRho+cn.state.eps*cn.state.dlneps_dlnRho)/eps;
+  }
+  s.eps=eps;s.eps_neutrino+=cn.state.eps_neutrino;
+  for(std::size_t i=0;i<NSPEC;++i) {
+    s.dXdt[i]+=cn.state.dXdt[i];out.deps_dX[i]+=cn.deps_dX[i];
+    for(std::size_t j=0;j<NSPEC;++j)out.d_dXdt_dX[i][j]+=cn.d_dXdt_dX[i][j];
+  }
+  return out;
+}
+NuclearState PPCNO::eval(double T,double rho,const Composition& c) const {
+  return composition_response(T,rho,c).state;
 }
 } // namespace ember

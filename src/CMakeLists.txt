@@ -6,24 +6,50 @@ add_library(ember
   opacity_blend.cpp
   opacity_mixture.cpp
   eos_components.cpp
+  eos_deuterium.cpp
   eos_cms19.cpp
   eos_helmholtz.cpp
   eos_composition.cpp
   eos_mixture.cpp
+  eos_smooth_mixture.cpp
+  eos_variable_metal.cpp
   nuclear_pp.cpp
+  deuterium.cpp
+  deuterium_burning.cpp
+  nuclear_cn.cpp
+  cn_burning.cpp
+  cn_transport.cpp
+  cn_diffusion.cpp
+  metal_cn_transport.cpp
   losses.cpp
   convection.cpp
+  fingering.cpp
   conduction_table.cpp
   atmosphere_grey.cpp
   atmosphere_composition.cpp
   atmosphere_table.cpp
   atmosphere_grid.cpp
+  atmosphere_trace_helium.cpp
+  atmosphere_metal_response.cpp
   boundary.cpp
   henyey.cpp
   relaxation.cpp
   evolution.cpp
   mixing.cpp
+  material_transport.cpp
+  material_thermodynamics.cpp
+  material_flux.cpp
+  species_transport.cpp
+  microscopic_transport.cpp
+  metal_microscopic_transport.cpp
+  convective_envelope_transport.cpp
+  collision_transport.cpp
+  screened_microscopic_transport.cpp
+  screened_metal_microscopic_transport.cpp
   structure.cpp
   eos_ideal.cpp)
 target_include_directories(ember PUBLIC ${CMAKE_SOURCE_DIR}/include)
 target_link_libraries(ember PUBLIC ember_flags)
+if(EMBER_TWO_METAL_COLLISIONS)
+  target_compile_definitions(ember PRIVATE EMBER_TWO_METAL_COLLISIONS=1)
+endif()

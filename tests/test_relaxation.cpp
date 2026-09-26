@@ -96,6 +96,13 @@ int main() {
     check(r.converged && r.residual < 1e-9 && r.correction < 1e-8,
           "complete model satisfies residual and correction tolerances", r.residual);
     check(distance(initial, untouched) == 0.0, "relaxation leaves its input unchanged");
+    if(points==128)for(std::size_t threads:{2UL,4UL}) {
+      RelaxationOptions options;options.zone_threads=threads;
+      const auto parallel=relax(initial,p,benchmark.atmosphere,options);
+      check(parallel.converged && distance(parallel.model,r.model)==0
+            && parallel.iterations==r.iterations && parallel.residual==r.residual,
+            "parallel zones preserve the analytic stellar benchmark exactly");
+    }
     if (!r.converged) continue;
     const double error = std::abs(r.model.r(points - 1) / benchmark.reference.r(points - 1) - 1.0);
     check(error < 0.04, "radius approaches the independent Lane-Emden value", error);
@@ -157,6 +164,10 @@ int main() {
     Model invalid = initial; invalid.m.back() *= 0.99;
     rejects([&] { (void)relax(invalid, p, b.atmosphere); }, "surface mass must equal the model total mass");
     rejects([&] { (void)relax(initial, p, b.atmosphere, {}, 1.0); }, "thermal solve requires a previous model");
+    for(std::size_t threads:{0UL,65UL}) {
+      options={};options.zone_threads=threads;
+      rejects([&]{(void)relax(initial,p,b.atmosphere,options);},"invalid zone thread count rejected");
+    }
   }
   std::printf("%s (%d failures)\n", failures ? "FAILED" : "ALL PASS", failures);
   return failures ? 1 : 0;

@@ -7,7 +7,7 @@
 namespace ember {
 
 struct CentralResidual {
-  std::array<double, 2> f{};  // ln r - ln(3m/(4pi*rho))/3, L - m*eps_total
+  std::array<double, 2> f{};  // central sphere radius, L - enclosed luminosity mass * eps_total
   std::array<std::array<double, NVAR>, 2> dfdy{};
 };
 
@@ -16,6 +16,8 @@ struct CentralResidual {
 // Density and heating are approximated by their values at that point; check
 // convergence as the central sphere shrinks. Positive dt requires prev on
 // the same mesh, with exactly the energy convention used by the zone rows.
+// With face luminosities, the energy volume extends to (m[0]+m[1])/2;
+// the radius condition still describes the sphere inside m[0].
 CentralResidual central_residual(const Model&, const Physics&, double dt = 0.0,
                                  const Model* prev = nullptr);
 

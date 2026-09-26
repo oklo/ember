@@ -54,19 +54,23 @@ std::string fixture(int version = 1, int missing = -1, bool extended = false) {
   s << "EMBER_COMPOSITION_ATMOSPHERE " << version << "\nsource \"synthetic multiaffine "
        "fixture, not physical data\"\n"
        "approximation \"test source\"\nbasis baryon_mass\ntau 100\nmetals";
-  for (std::size_t j = 3; j < NSPEC; ++j)
+  for (std::size_t j = METAL_BEGIN; j < METAL_END; ++j)
     s << ' ' << c.X[j];
-  s << "\nhydrogen 3 .4 .55 .7\nhelium3 2 0 .12\nlog_teff "
+  if (version == 3)
+    s << "\nmetal_tolerance 1e-16";
+  s << "\nhydrogen 3 .4 .55 .7\n"
+    << (version == 3 ? "helium3_fraction 2 0 .95" : "helium3 2 0 .12")
+    << "\nlog_teff "
     << (extended ? "3 3.4 3.6 3.8" : "2 3.4 3.6")
     << "\nlog_g 2 4.5 5.5\ndata\n";
   const auto temperatures = extended ? std::vector<double>{3.4, 3.6, 3.8}
                                      : std::vector<double>{3.4, 3.6};
   int index = 0;
   for (double x : {.4, .55, .7})
-    for (double y : {0., .12})
+    for (double y : {0., version == 3 ? .95 : .12})
       for (double t : temperatures)
         for (double g : {4.5, 5.5}) {
-          if (version == 2) {
+          if (version >= 2) {
             if (index++ == missing) {
               s << "0\n";
               continue;
@@ -246,5 +250,70 @@ int main() {
             CompositionAtmosphereGrid rejected(eos, f, proxy);
           }),
           "truncated or trailing source states rejected");
+
+  std::istringstream fraction_input(fixture(3)), fraction_missing_input(fixture(3, 0));
+  CompositionAtmosphereGrid fraction(eos, fraction_input, proxy);
+  CompositionAtmosphereGrid fraction_missing(eos, fraction_missing_input, proxy);
+  auto fc = solar_scaled(.51, .02);
+  fc.basis = AbundanceBasis::baryon_mass;
+  fc.X[1] = .47 * .4;
+  fc.X[2] -= fc.X[1];
+  const auto fs = fraction.eval(t, g, fc);
+  check(near(std::log10(fs.T), temperature(.51, .4, 3.47, 5.14)) &&
+            near(std::log10(fs.Pgas), pressure(.51, .4, 3.47, 5.14)) &&
+            near(eos.eval(fs.T, fs.rho, fc).P, fs.P),
+        "helium-fraction grid interpolates physical composition and inverts actual EOS");
+  check(near(fraction.support().helium3[1], .95 * .58) &&
+            !fraction_missing.covers(t, g, fc) &&
+            throws([&] { fraction_missing.composition_response(t, g, fc); }),
+        "fraction support reports mass-fraction bounds and preserves missing-stencil rejection");
+  const auto fr = fraction.composition_response(t, g, fc);
+  for (std::size_t k = 0; k < 2; ++k) {
+    constexpr double dh = 1e-6;
+    auto plus = fc, minus = fc;
+    plus.X[k] += dh; plus.X[2] -= dh;
+    minus.X[k] -= dh; minus.X[2] += dh;
+    const auto sp = fraction.eval(t, g, plus), sm = fraction.eval(t, g, minus);
+    check(near(k == 0 ? fr.dlnT_dXH : fr.dlnT_dX3,
+               std::log(sp.T / sm.T) / (2 * dh), 2e-8) &&
+              near(k == 0 ? fr.dlnP_dXH : fr.dlnP_dX3,
+                   std::log(sp.P / sm.P) / (2 * dh), 2e-8),
+          "fraction-coordinate chain rule matches conserved physical substitutions");
+  }
+  const auto ftp = fraction.eval(t * std::exp(h), g, fc);
+  const auto ftm = fraction.eval(t * std::exp(-h), g, fc);
+  check(near(fs.dlnT_dlnTeff, std::log(ftp.T / ftm.T) / (2 * h), 1e-8) &&
+            near(fs.dlnP_dlnTeff, std::log(ftp.P / ftm.P) / (2 * h), 1e-8),
+        "fraction coordinates preserve thermal derivatives including radiation");
+  for (double x : {.4, .55, .7})
+    for (double f3 : {0., .95}) {
+      auto a = solar_scaled(x, .02);
+      a.basis = AbundanceBasis::baryon_mass;
+      a.X[1] = a.X[2] * f3;
+      a.X[2] -= a.X[1];
+      check(fraction.covers(t, g, a) &&
+                near(std::log10(fraction.eval(t, g, a).T),
+                     temperature(x, f3, 3.47, 5.14)),
+            "fraction-grid composition corners remain physical and reproducible");
+    }
+  auto high_f3 = fc;
+  high_f3.X[1] = .47 * .96;
+  high_f3.X[2] = .47 - high_f3.X[1];
+  check(!fraction.covers(t, g, high_f3), "no helium-fraction extrapolation");
+  auto wrong_metal = fc;
+  wrong_metal.X[3] += 1e-14;
+  wrong_metal.X[2] -= 1e-14;
+  check(!fraction.covers(t, g, wrong_metal), "explicit tighter metal tolerance enforced");
+  std::istringstream fraction_hot_input(fixture(3, -1, true));
+  CompositionAtmosphereGrid fraction_hot(eos, fraction_hot_input, proxy);
+  check(fraction_hot.check_temperature_extension(fraction) == 12 &&
+            throws([&] { fraction_hot.check_temperature_extension(grid); }),
+        "temperature extension preserves composition-coordinate convention");
+  auto zero_helium_text = fixture(3);
+  zero_helium_text.replace(zero_helium_text.find(".4 .55 .7"), 9, ".4 .55 .98");
+  check(throws([&] {
+          std::istringstream f(zero_helium_text);
+          CompositionAtmosphereGrid rejected(eos, f, proxy);
+        }), "fraction coordinates reject undefined zero-helium corners");
   return failures ? 1 : 0;
 }

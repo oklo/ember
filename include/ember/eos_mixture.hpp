@@ -22,6 +22,7 @@ public:
   std::size_t check_density_extension(const MetalHelmholtzEos& original) const;
   const char* name() const override {return "FreeEOS GS98 baryonic H/He3 potential; trace K omission and isotope approximation";}
 private:
+  friend class SmoothMetalHelmholtzEos;
   std::size_t check_extension(const MetalHelmholtzEos& original, bool density) const;
   struct Coordinates {std::size_t x,y;double u,v;};
   Coordinates coordinates(const Composition&) const;

@@ -169,9 +169,10 @@ CompositionCorrectedAtmosphere::CompositionCorrectedAtmosphere(const Eos& e, con
 }
 AtmosphereState CompositionCorrectedAtmosphere::eval(double Teff, double gravity,
                                                      const Composition& c) const {
+  if(c[Species::H2]!=0)throw std::domain_error("corrected atmosphere: explicit deuterium mapping required");
   if (c.basis != reference_.basis)
     throw std::domain_error("CompositionCorrectedAtmosphere: changed abundance basis");
-  for (std::size_t j = 3; j < NSPEC; ++j)
+  for (std::size_t j = 3; j < METAL_END; ++j)
     if (std::abs(c.X[j] - reference_.X[j]) > 1e-10)
       throw std::domain_error("CompositionCorrectedAtmosphere: correction requires fixed metal pattern");
   const auto anchor = table_.eval(Teff, gravity, table_.composition());

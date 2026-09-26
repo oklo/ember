@@ -39,7 +39,7 @@ def main():
     expected_eps=[a.hydrogen/1.00782503,helium/4.00260325]+[0.]*18
     if baryonic:
         from metal_eos_composition import mixture
-        expected = mixture(src['hydrogen'],src['helium3'])
+        expected = mixture(src['hydrogen'],src['helium3'],metallicity=src.get('metallicity'))
         for key,value in expected.items():
             if src.get(key) != value:
                 raise ValueError(f'metal source metadata mismatch: {key}')

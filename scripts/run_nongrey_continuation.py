@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 from generate_nongrey_grid import (atmosphere_inputs,composition,execute,temperatures,
     sequence,completed_initial_structure,continuation_structure,resample_initial_structure,archive,
-    truncate_initial_structure)
+    truncate_initial_structure,scale_initial_column)
 from import_nongrey_grid import source_inputs,source_state,read_text
 from nongrey_opacity import validate_table
 from prepare_nongrey_sources import digest
@@ -32,6 +32,8 @@ def main():
                    help='truncate the verified seed at this measured optical depth; requires independent lower-boundary convergence checks')
     p.add_argument('--composition-continuation',action='store_true',
                    help='allow a verified starting guess at another H/He composition; target chemistry and opacity are solved anew')
+    p.add_argument('--initial-column-factor',type=float,
+                   help='scale only the trial column and pressure; the final source must converge independently')
     a=p.parse_args()
     cancellation=a.work.parent/'cancellation.json'
     if cancellation.exists():
@@ -68,6 +70,8 @@ def main():
                     if (a.initial/'run.log.gz').exists() else (a.initial/'run.log').read_text(),a.initial_bottom_tau)
         original=resample_initial_structure(original,spec['depths'])
     text=continuation_structure(original,initial_record['teff_K'],initial_record['log_g'],a.teff,a.logg)
+    if a.initial_column_factor is not None:
+        text=scale_initial_column(text,a.initial_column_factor)
     if coarse:text=resample_initial_structure(text,trial_spec['depths'],allow_coarsen=True)
     abundance,masses=composition(a.hydrogen,a.helium3,spec['metals'])
     validate_table(a.opacity,abundance,temperatures(spec),sequence(spec['log_density']))
@@ -81,6 +85,9 @@ def main():
     if a.initial_bottom_tau is not None:
         provenance['initial_bottom_tau']=a.initial_bottom_tau
         provenance['lower_boundary_note']='seed truncated at measured Rosseland depth; final optical depth changes during convergence and must be recorded'
+    if a.initial_column_factor is not None:
+        provenance['initial_column_factor']=a.initial_column_factor
+        provenance['initial_column_note']='trial column and hydrostatic pressure scaled together; chemistry, optical depths and flux solved anew'
     if changed_composition:
         provenance['initial_composition']={k:initial_record[k] for k in ['XH','X3']}
         provenance['composition_continuation']='starting guess only; target composition independently validated'

@@ -15,7 +15,9 @@ ROOT=Path(__file__).resolve().parents[1]
 ELEMENTS=['H','He','C','N','O','Ne','Na','Mg','Al','Si','P','S','Cl','Ar','Ca','Ti','Cr','Mn','Fe','Ni']
 
 
-def mixture(hydrogen,helium3):
+def mixture(hydrogen,helium3,*,metallicity=None):
+    if metallicity is not None:
+        return variable_mixture(hydrogen,helium3,metallicity)
     if not math.isfinite(hydrogen+helium3) or hydrogen<0 or helium3<0:
         raise ValueError('invalid baryonic composition')
     carried=interior_composition(hydrogen)
@@ -49,3 +51,43 @@ def mixture(hydrogen,helium3):
             'element_metadata_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
             'metal_request_sha256':hashlib.sha256((ROOT/'data/opacity/sources/tops_gs98_x070_z020.request.json').read_bytes()).hexdigest(),
             'approximation':'Shared atmosphere GS98 element inventory; FreeEOS omits potassium; representative metal isotopes; source He4 electronic physics and analytic helium isotope entropy; inert carried metal slots retain their existing labels'}
+
+
+def variable_mixture(hydrogen,helium3,metallicity):
+    """Absolute element counts for a GS98 mixture with variable metal mass.
+
+    No division by hydrogen or atmospheric abundance floors. This supports
+    true zero-H, zero-metal and zero-He source compositions. It does not
+    supply interpolation or authorize a changed stellar material lookup.
+    """
+    if (not all(math.isfinite(v) and v>=0 for v in (hydrogen,helium3,metallicity))
+            or math.fsum((hydrogen,helium3,metallicity))>1):
+        raise ValueError('invalid baryonic composition')
+    helium4=1-math.fsum((hydrogen,helium3,metallicity))
+    if helium4<0:raise ValueError('negative helium-4 fraction')
+    carried=interior_composition(hydrogen)
+    carried[1]=helium3;carried[2]=helium4
+    original=sum(carried[3:])
+    carried[3:]=[v*metallicity/original for v in carried[3:]]
+    path=ROOT/'data/atmosphere/sources/synple-elements.json'
+    elements=json.loads(path.read_text());index={s.lower():i for i,s in enumerate(elements['symbol'])}
+    request=ROOT/'data/opacity/sources/tops_gs98_x070_z020.request.json'
+    tokens=json.loads(request.read_text())['mixture'].split()[4:]
+    pattern={tokens[i+1].lower():float(tokens[i]) for i in range(0,len(tokens),2)}
+    total=sum(pattern.values())
+    number=[hydrogen,helium3/3+helium4/4]
+    number.extend(metallicity*pattern.get(s.lower(),0.)/total/round(elements['mass'][index[s.lower()]])
+                  for s in ELEMENTS[2:])
+    weights=[elements['mass'][index[s.lower()]] for s in ELEMENTS]
+    weights[0]=1.00782503;weights[1]=4.00260325
+    scale=sum(n*w for n,w in zip(number,weights,strict=True))
+    if scale<=0:raise ValueError('empty source composition')
+    potassium=metallicity*pattern.get('k',0.)/total
+    return {'composition_basis':'baryon_mass','metal_mixture':'GS98',
+            'hydrogen':hydrogen,'helium3':helium3,'metallicity':metallicity,'composition':carried,
+            'elements':ELEMENTS,'eps':[n/scale for n in number],'source_mass_scale':scale,
+            'potassium_number_per_baryon_mass':potassium/round(elements['mass'][index['k']]),
+            'potassium_baryonic_mass_fraction':potassium,
+            'element_metadata_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
+            'metal_request_sha256':hashlib.sha256(request.read_bytes()).hexdigest(),
+            'approximation':'Variable GS98 metal mass; FreeEOS omits potassium; representative metal isotopes; source He4 electronic physics and analytic helium isotope entropy; inert carried metal slots are material labels'}

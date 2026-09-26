@@ -1,0 +1,42 @@
+{
+  "created_utc": "2026-09-26T22:40:45.479472+00:00",
+  "scope": "Copy every retained runtime input and reproduce contraction from a fresh checkout; no physics or acceptance changes.",
+  "original_inputs": 248,
+  "original_bytes": 1723789658,
+  "manifest": "data/MANIFEST.json",
+  "manifest_sha256": "383936ac72a23ad56aa84c3d554a27583f8965306c0d75a55afe5ea58882ec98",
+  "fresh_checkout": "/private/tmp/ember-review-integration-20260926",
+  "fresh_build_log_sha256": "0e9363c7f66e5dab63b907a34f115908347c0b2929323f8c841af538a0281ef8",
+  "executable_sha256": "5ee7d3411a0a5c433d295faf1964b7b529f1678778b6d78e32c01ab4e3e3c993",
+  "history": {
+    "saved_models": 1020,
+    "accepted": 1019,
+    "rejected": 0,
+    "endpoint_years": 1000000000,
+    "all_fields_equal_except": [
+      "cpu_seconds"
+    ],
+    "original_sha256": "ac9a34330379e28565d6d74d3ae8756ae3ae3a4e70bcfa28fd12e8c8c125edf9",
+    "reproduced_sha256": "27376796c5bcf51353a25930cbd9b3f6cfea2084b6a873468893d0df2fc81320"
+  },
+  "checkpoints": [
+    {
+      "file": "seed.checkpoint",
+      "physical_payload_identical": true,
+      "physical_payload_sha256": "7c8e8061e6eee04e435459b91b1125a4ca0ba314e84964e2005f660d175d31a2",
+      "ignored": "Input identity map changes because configuration and table filenames were relocated."
+    },
+    {
+      "file": "final.checkpoint",
+      "physical_payload_identical": true,
+      "physical_payload_sha256": "00843ef56a2db35eb532cfeb933345c8b35257245c573773678387c16574a027",
+      "ignored": "Input identity map changes because configuration and table filenames were relocated."
+    }
+  ],
+  "limitations": [
+    "Packaging does not validate the selected physics or extend its supported domain.",
+    "The retained atmosphere has identical composition blocks and stops supporting the star near 4.34 Gyr.",
+    "This manifest covers the retained lifetime configuration; other experiment configurations require their own complete input sets.",
+    "Binary/text payloads are local until an approved distribution or reproducible source recipe is available."
+  ]
+}

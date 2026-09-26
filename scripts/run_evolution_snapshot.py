@@ -72,7 +72,8 @@ def main():
         original=Path(arguments[arguments.index('--restart-source-atmosphere')+1])
         if not original.is_absolute():original=ROOT/original
         data=sorted(set(data)|{original.resolve(strict=True)})
-    if '--eos-temperature-extension-restart' in arguments:
+    if any(option in arguments for option in
+           ['--eos-temperature-extension-restart', '--eos-density-extension-restart']):
         previous=arguments.copy()
         previous[7]='metal:'+arguments[arguments.index('--restart-source-eos')+1]
         data=sorted(set(data)|set(input_data(previous)))
@@ -81,7 +82,7 @@ def main():
     data_hashes={data_label(f):sha(f) for f in data}
     source_hashes={str(f.relative_to(ROOT)):sha(f) for f in sorted(sources)}
     restart_inputs={}
-    for option in ['--restart','--opacity-extension-restart','--atmosphere-extension-restart','--eos-temperature-extension-restart','--restart-source-executable']:
+    for option in ['--restart','--opacity-extension-restart','--atmosphere-extension-restart','--eos-temperature-extension-restart','--eos-density-extension-restart','--restart-source-executable']:
         if option in arguments:
             path=Path(arguments[arguments.index(option)+1]).resolve(strict=True)
             restart_inputs[str(path)]=sha(path)

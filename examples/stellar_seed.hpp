@@ -4,13 +4,15 @@
 #include "ember/constants.hpp"
 #include "ember/model.hpp"
 #include "ember/nuclear.hpp"
+#include "ember/energy_grid.hpp"
 
 namespace ember::example {
 // An n=3 or n=1.5 initial guess only. The solve replaces its transport and
 // energy profile with the EOS, tabulated opacity, pp heating and atmosphere.
 inline Model stellar_seed(std::size_t points, double mass, double radius,
                           const Composition& comp, const Nuclear& nuclear, const Atmosphere& atmosphere,
-                          double index = 3.0, double seed_Teff = 0.0) {
+                          double index = 3.0, double seed_Teff = 0.0,
+                          LuminosityGrid luminosity_grid = LuminosityGrid::mass_nodes) {
   if (points < 32 || points > 8192 || !std::isfinite(mass) || !std::isfinite(radius)
       || !(mass > 0.0) || !(radius > 0.0))
     throw std::invalid_argument("stellar_seed: invalid mesh, mass or radius");
@@ -30,6 +32,7 @@ inline Model stellar_seed(std::size_t points, double mass, double radius,
   // Ideal-gas seed only; relaxation includes the actual degeneracy pressure.
   const double Tc = Pc / (constants::R_gas * rhoc * (comp.mu_ions_inv() + comp.mu_elec_inv()));
   Model m; m.M = mass;
+  m.luminosity_grid=luminosity_grid;
   for (const auto& s : le) {
     m.m.push_back(mass * s.mass / le.back().mass);
     m.y.push_back({std::log(a * s.xi), std::log(rhoc * std::pow(s.theta, index)),
@@ -38,10 +41,12 @@ inline Model stellar_seed(std::size_t points, double mass, double radius,
   }
   m.m.back() = mass;
   double eps = nuclear.eval(m.T(0), m.rho(0), comp).eps;
-  m.y.front().L = m.m.front() * eps;
+  const bool faces=face_luminosities(m);
+  m.y.front().L = luminosity_mass(m,0) * eps;
   for (std::size_t i = 1; i < points; ++i) {
     const double next = nuclear.eval(m.T(i), m.rho(i), comp).eps;
-    m.y[i].L = m.y[i - 1].L + 0.5 * (eps + next) * (m.m[i] - m.m[i - 1]);
+    m.y[i].L = m.y[i - 1].L + (faces ? nodal_volume_mass(m,i)*next
+        : 0.5*(eps+next)*(m.m[i]-m.m[i-1]));
     eps = next;
   }
   // A bounded atmosphere may need a trial luminosity inside its support.

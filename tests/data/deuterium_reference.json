@@ -1,0 +1,111 @@
+{
+  "source": "https://arxiv.org/html/2405.06470v3#S4.T4",
+  "source_table": "Solar Fusion III, Table IV",
+  "method": "scipy QUADPACK, E/kT, splits at Gamow peak and S-table joins",
+  "energy_MeV": [
+    0.0,
+    0.01,
+    0.02,
+    0.04,
+    0.08,
+    0.091,
+    0.1,
+    0.12
+  ],
+  "S_in_1e_minus_7_MeV_barn": [
+    2.028,
+    2.644,
+    3.276,
+    4.579,
+    7.31,
+    8.11,
+    8.77,
+    10.24
+  ],
+  "rows": [
+    {
+      "T_K": 10000.0,
+      "molar_rate": 3.961992461317846e-69,
+      "dlnrate_dlnT": 56.89651898861747,
+      "cubic_over_linear_minus_one": -1.971816113799374e-05
+    },
+    {
+      "T_K": 30000.0,
+      "molar_rate": 1.8950321427458633e-46,
+      "dlnrate_dlnT": 39.247450536932554,
+      "cubic_over_linear_minus_one": -4.097052013340985e-05
+    },
+    {
+      "T_K": 100000.0,
+      "molar_rate": 1.3204041898744816e-29,
+      "dlnrate_dlnT": 26.05750794107829,
+      "cubic_over_linear_minus_one": -9.069991418630963e-05
+    },
+    {
+      "T_K": 200000.0,
+      "molar_rate": 1.2697932991583018e-22,
+      "dlnrate_dlnT": 20.54901867805376,
+      "cubic_over_linear_minus_one": -0.0001422699406912198
+    },
+    {
+      "T_K": 300000.0,
+      "molar_rate": 3.0277328178183297e-19,
+      "dlnrate_dlnT": 17.870949049588372,
+      "cubic_over_linear_minus_one": -0.000184285765116865
+    },
+    {
+      "T_K": 500000.0,
+      "molar_rate": 1.3043766025522842e-15,
+      "dlnrate_dlnT": 14.975209265980276,
+      "cubic_over_linear_minus_one": -0.0002534083501455342
+    },
+    {
+      "T_K": 700000.0,
+      "molar_rate": 1.5156596745014234e-13,
+      "dlnrate_dlnT": 13.321521978893461,
+      "cubic_over_linear_minus_one": -0.0003105379907649697
+    },
+    {
+      "T_K": 1000000.0,
+      "molar_rate": 1.3208910143542886e-11,
+      "dlnrate_dlnT": 11.761223926143481,
+      "cubic_over_linear_minus_one": -0.00038216041865668515
+    },
+    {
+      "T_K": 1500000.0,
+      "molar_rate": 1.1257064516613744e-09,
+      "dlnrate_dlnT": 10.201205429561432,
+      "cubic_over_linear_minus_one": -0.0004771365485304324
+    },
+    {
+      "T_K": 2000000.0,
+      "molar_rate": 1.8343968023464323e-08,
+      "dlnrate_dlnT": 9.217431000193555,
+      "cubic_over_linear_minus_one": -0.0005515260120112497
+    },
+    {
+      "T_K": 3000000.0,
+      "molar_rate": 5.964701214399219e-07,
+      "dlnrate_dlnT": 7.985091970422586,
+      "cubic_over_linear_minus_one": -0.0006591050472471993
+    },
+    {
+      "T_K": 5000000.0,
+      "molar_rate": 2.4866392832025795e-05,
+      "dlnrate_dlnT": 6.658887752530729,
+      "cubic_over_linear_minus_one": -0.0007688958463804019
+    },
+    {
+      "T_K": 10000000.0,
+      "molar_rate": 0.001485080383969648,
+      "dlnrate_dlnT": 5.201696615053382,
+      "cubic_over_linear_minus_one": -0.0007229640038559637
+    },
+    {
+      "T_K": 20000000.0,
+      "molar_rate": 0.03632478797332452,
+      "dlnrate_dlnT": 4.072382887515343,
+      "cubic_over_linear_minus_one": -0.0005036000442354416
+    }
+  ]
+}

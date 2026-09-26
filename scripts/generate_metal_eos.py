@@ -10,6 +10,7 @@ import math
 from pathlib import Path
 import subprocess
 from metal_eos_composition import mixture
+from eos_source_coverage import absent_source_rows
 
 
 def sha(data):return hashlib.sha256(data).hexdigest()
@@ -20,6 +21,8 @@ def main():
     p.add_argument('probe',type=Path);p.add_argument('work',type=Path)
     p.add_argument('--hydrogen',type=float,nargs='+',default=[.3,.4,.5,.6,.7,.75])
     p.add_argument('--helium3',type=float,nargs='+',default=[0,.12])
+    p.add_argument('--metallicity',type=float,
+                   help='explicit GS98 metal mass fraction; omit to reproduce the retained fixed-Z source inputs')
     p.add_argument('--step',type=float,default=.0125)
     p.add_argument('--jobs',type=int,default=4)
     p.add_argument('--electron-integrals',choices=['fitted','numerical'],default='fitted',
@@ -50,6 +53,9 @@ def main():
                         'grid_reference_sha256':sha(a.grid_from.read_bytes())}
     spec={'hydrogen':a.hydrogen,'helium3':a.helium3,'logT':ts,'logQ':qs,'probe_sha256':source_sha,
           'source_archive_sha256':'4ab1c15a51385a3eab3b08c6f3f240739c0105d92ec828d635ac95720edefb09',**grid_reference}
+    if a.metallicity is not None:spec['metallicity']=a.metallicity
+    if a.grid_from and grid.get('source_coverage') is not None:
+        spec['source_coverage']=grid['source_coverage']
     options=[3,223,-2] if a.electron_integrals=='numerical' else [3,1,-2]
     if options!=[3,1,-2]:
         spec['source_options']=options
@@ -76,27 +82,37 @@ def main():
     planes=[]
     for i,(x,y) in enumerate(itertools.product(a.hydrogen,a.helium3)):
         d=a.work/f'plane-{i:03d}';d.mkdir(exist_ok=True)
-        m=mixture(x,y);(d/'mixture.json').write_text(json.dumps(m,indent=2)+'\n');planes.append((d,m))
+        m=mixture(x,y,metallicity=a.metallicity);(d/'mixture.json').write_text(json.dumps(m,indent=2)+'\n');planes.append((d,m))
 
     def run(job):
         d,m,it,t=job;path=d/f'temperature-{it:03d}.json.gz'
+        coverage=spec.get('source_coverage')
+        selected_q=qs
+        if coverage:
+            if (coverage['kind']!='hot_density_extension'
+                    or coverage['original_logQ_max'] not in qs[:-1]
+                    or coverage['minimum_added_logT'] not in ts[1:]):
+                raise ValueError('invalid source coverage declaration')
+            if (t<coverage['minimum_added_logT']
+                    or m['hydrogen']>coverage.get('maximum_added_hydrogen',1.)):
+                selected_q=[q for q in qs if q<=coverage['original_logQ_max']]
         scale=m['source_mass_scale']
         request=' '.join(map(str,m['eps']))+'\n'+' '.join(map(str,options))+'\n'+''.join(
-            f'{math.log(scale)+math.log(10)*(q+1.5*(t-6)):.17g} {math.log(10)*t:.17g}\n' for q in qs)
+            f'{math.log(scale)+math.log(10)*(q+1.5*(t-6)):.17g} {math.log(10)*t:.17g}\n' for q in selected_q)
         fingerprint=sha((source_sha+request).encode())
         if path.exists():
             saved=json.loads(gzip.decompress(path.read_bytes()))
             if saved['input_sha256']!=fingerprint:raise ValueError('cached source input mismatch')
             if saved.get('precision_fallback') and saved['precision_fallback']!=spec.get('precision_fallback'):
                 raise ValueError('cached source precision differs')
-            if len(saved['data'])!=len(qs) or any(len(r)!=22 or not all(math.isfinite(v) for v in r) for r in saved['data']):
+            if len(saved['data'])!=len(selected_q) or any(len(r)!=22 or not all(math.isfinite(v) for v in r) for r in saved['data']):
                 raise ValueError('invalid cached source responses')
             return
         result=subprocess.run([str(a.probe.resolve())],input=request,text=True,capture_output=True,timeout=600)
         def responses(result):
             try:rows=[list(map(float,line.split())) for line in result.stdout.splitlines()]
             except ValueError:return None
-            if result.returncode or len(rows)!=len(qs) or any(len(r)!=22 or not all(math.isfinite(v) for v in r) for r in rows):return None
+            if result.returncode or len(rows)!=len(selected_q) or any(len(r)!=22 or not all(math.isfinite(v) for v in r) for r in rows):return None
             return rows
         rows=responses(result);override={}
         if rows is None and fallback:
@@ -130,11 +146,15 @@ def main():
         for it in range(len(ts)):
             cache=json.loads(gzip.decompress((d/f'temperature-{it:03d}.json.gz').read_bytes()))
             data.extend(cache['data'])
+            data.extend([None]*(len(qs)-len(cache['data'])))
             if cache.get('precision_fallback'):
                 overrides.append({'temperature_index':it,'logT':ts[it],
                                   **{key:cache[key] for key in ['actual_probe_input_sha256','nominal_failure_sha256']}})
         raw={**m,'version':'FreeEOS 3.0.0','options':options,'logT':ts,'logQ':qs,
              'source_archive_sha256':spec['source_archive_sha256'],'probe_sha256':source_sha,'data':data}
+        if spec.get('source_coverage'):
+            raw['source_coverage']=spec['source_coverage']
+            absent_source_rows(raw)
         if fallback:
             raw['precision_fallback']=spec['precision_fallback']
             raw['precision_fallback_isotherms']=overrides

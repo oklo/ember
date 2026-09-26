@@ -2,8 +2,8 @@
 """Calculate a helium-rich non-grey atmosphere family with pinned sources.
 
 Run prepare_nongrey_sources.py first. A JSON specification controls the
-physical composition, opacity sampling and atmosphere mesh. Expensive source
-runs are restartable only when their complete input fingerprints agree.
+physical composition, opacity sampling and atmosphere mesh. Source runs are
+restartable only when their complete input fingerprints agree.
 """
 import argparse
 from concurrent.futures import ThreadPoolExecutor
@@ -25,6 +25,51 @@ MU = 1.66053906660e-24
 SOURCE_HMASS = 1.67333e-24
 EXPLICIT = {1, 2, 6, 7, 8, 11, 12, 13, 14, 20, 26}
 CALCULATION = "TLUSTY208/SYNSPEC54 non-grey LTE convection"
+
+
+def validate_source_capacity(prepared, spec):
+    """Use conservative defaults or the selected executable's saved build limits."""
+    limits = dict(MTABT=21, MTABR=19, MDEPTH=400, MFREQ=32000, MFRTAB=64000)
+    if "tlusty_build" in prepared:
+        build_path = Path(prepared["tlusty_build"])
+        if digest(build_path) != prepared.get("tlusty_build_sha256"):
+            raise ValueError("TLUSTY build record changed")
+        build = json.loads(build_path.read_text())
+        if (digest(prepared["tlusty"]) != build["executable_sha256"] or
+                build["executable_sha256"] != prepared["executables"]["tlusty"]):
+            raise ValueError("TLUSTY build does not describe selected executable")
+        headers = [(Path(p), h) for p, h in build["input_sha256"].items()
+                   if Path(p).name == "BASICS.FOR"]
+        if len(headers) != 1 or digest(headers[0][0]) != headers[0][1]:
+            raise ValueError("TLUSTY capacity header missing or changed")
+        # Ignore fixed-form comment lines and trailing Fortran comments.
+        source = "\n".join(line.split("!")[0] for line in headers[0][0].read_text().splitlines()
+                           if line and line[0] not in "Cc*!")
+        for key in limits:
+            matches = re.findall(r"\b"+key+r"\s*=\s*(\d+)\b", source)
+            if len(matches) != 1 or int(matches[0]) < 2:
+                raise ValueError("ambiguous TLUSTY capacity: "+key)
+            # Isotherm synthesis retains its existing density and spectral caps.
+            limits[key] = int(matches[0]) if key == "MTABT" else min(limits[key], int(matches[0]))
+    if not 2 <= spec["log_temperature"][0] <= limits["MTABT"] or not 2 <= spec["log_density"][0] <= limits["MTABR"]:
+        raise ValueError("opacity axes exceed compiled source capacity")
+    if not 20 <= spec["depths"] <= limits["MDEPTH"] or not 2 <= spec["atmosphere_frequencies"] <= limits["MFREQ"]:
+        raise ValueError("atmosphere exceeds compiled source capacity")
+    if not spec["atmosphere_frequencies"] <= spec["opacity_frequencies"] <= limits["MFRTAB"]:
+        raise ValueError("invalid spectral resolution or compiled opacity capacity")
+    return limits
+
+
+def run_opacity_jobs(planes, temperature_values, calculate, jobs):
+    """Share one bounded pool across independent composition/temperature jobs."""
+    if not 1 <= jobs <= 8:
+        raise ValueError("jobs must be 1..8")
+    tasks = [(plane, i, temperature_values[i]) for plane in planes
+             for i in reversed(range(len(temperature_values)))]
+    # Each SYNSPEC process retains molecular line lists. This is a total cap,
+    # including when the family contains only one composition.
+    with ThreadPoolExecutor(max_workers=min(jobs, 4)) as pool:
+        return list(pool.map(calculate, tasks))
 
 
 def sequence(triad):
@@ -217,6 +262,14 @@ def atmosphere_inputs(directory, prepared, spec, table, abundance, masses, teff,
         f"ND={spec['depths']},NITER=200,CHMAX=1.e-6,ILGDER=1,IPRIND=2\n"
         f"DPSILT={spec.get('temperature_step_limit', 1.03)},DERT={spec.get('convection_derivative_step',.001)}\n"
         f"TAUFIR={spec['tau_top']},TAULAS={spec['tau_bottom']},TAUDIV=0.01\n")
+    # Explicit numerical control for source comparisons. Omit it by default
+    # so existing input bytes and completed-run fingerprints remain unchanged.
+    if "newton_relaxation" in spec:
+        value = spec["newton_relaxation"]
+        if not 0 < value <= 1:
+            raise ValueError("invalid Newton relaxation factor")
+        with (directory/"tas").open("a") as stream:
+            stream.write(f"ORELAX={value:.6g}\n")
     # The table is a dependency, not merely its path.
     (directory/"fort.15").write_text("'opacity.bin' 1\n")
     link(directory/"opacity.bin",table)
@@ -247,7 +300,14 @@ def truncate_initial_structure(text, log, bottom_tau):
         row = line.replace('D', 'E').split()
         if len(row) == 11 and row[0].isdigit():
             profile.append(list(map(float, row)))
-    if len(profile) != n or any(r[0] != i+1 or not math.isclose(r[1], m, rel_tol=1e-7)
+    # TLUSTY writes fort.7 column masses with E15.6 (seven significant
+    # digits), while the final diagnostic profile retains full precision.
+    # Accept that exact printed representation, without allowing additional
+    # disagreement between the checkpoint and its optical-depth profile.
+    def same_mass(source, checkpoint):
+        return (math.isclose(source, checkpoint, rel_tol=1e-7)
+                or float(format(source, '.6e')) == checkpoint)
+    if len(profile) != n or any(r[0] != i+1 or not same_mass(r[1], m)
                                for i, (r, m) in enumerate(zip(profile, mass))):
         raise ValueError('seed optical depths do not match its mass grid')
     tau = [r[2] for r in profile]
@@ -269,6 +329,17 @@ def truncate_initial_structure(text, log, bottom_tau):
     result += '\n'.join(' '.join(format(v, '.17g') for v in row) for row in cut_structure)+'\n'
     resample_initial_structure(result, len(cut_mass))
     return result
+
+
+def initial_depth_control(text, directory, bottom_tau):
+    """Optionally change a verified donor's computational lower boundary."""
+    if bottom_tau is None:
+        return text
+    from import_nongrey_grid import read_text
+    path = Path(directory)/'run.log'
+    if not path.exists():
+        path = path.with_name('run.log.gz')
+    return truncate_initial_structure(text, read_text(path), bottom_tau)
 
 
 def convective_tail(initial, depths):
@@ -306,6 +377,29 @@ def continuation_structure(initial, source_teff, source_logg, teff, logg):
     for row in rows:
         row[0]*=ratio
         for j in range(1,4):row[j]/=ratio
+    result=f'{n} -4\n'+'\n'.join(format(v,'.17g') for v in mass)+'\n'+'\n'.join(
+        ' '.join(format(v,'.17g') for v in row) for row in rows)+'\n'
+    resample_initial_structure(result,n)
+    return result
+
+
+def scale_initial_column(initial, factor):
+    """Scale a trial column and its hydrostatic pressure at fixed temperature.
+
+    This is a starting guess only. Number and mass densities scale together,
+    preserving the initial composition. The source must solve chemistry,
+    hydrostatic balance and energy transport again. A deeper trial column is
+    useful when gravity continuation would otherwise lose the matching depth.
+    """
+    if not math.isfinite(factor) or factor <= 0:
+        raise ValueError('initial column factor must be finite and positive')
+    words=initial.replace('D','E').split();n=int(words[0])
+    resample_initial_structure(initial,n)
+    if factor==1:return initial
+    mass=[float(v)*factor for v in words[2:2+n]]
+    rows=[list(map(float,words[2+n+4*i:2+n+4*i+4])) for i in range(n)]
+    for row in rows:
+        for j in range(1,4):row[j]*=factor
     result=f'{n} -4\n'+'\n'.join(format(v,'.17g') for v in mass)+'\n'+'\n'.join(
         ' '.join(format(v,'.17g') for v in row) for row in rows)+'\n'
     resample_initial_structure(result,n)
@@ -387,6 +481,10 @@ def main():
     p.add_argument("--initial-models",type=Path,help="use completed structures or attested interrupted checkpoints as initial guesses; every final model is solved again")
     p.add_argument("--continuation-models",type=Path,
                    help="prefer nearby accepted atmospheres at the same composition, preserving trial gas pressure while changing Teff/gravity")
+    p.add_argument("--composition-donor",type=Path,
+                   help="use independently accepted nearby-composition columns as INITIAL GUESSES only; target composition/opacity and final checks unchanged")
+    p.add_argument("--initial-bottom-tau",type=float,
+                   help="truncate a verified continuation/donor at its measured Rosseland depth; requires independent lower-boundary checks")
     p.add_argument("--plane",type=int,help="compute only this zero-based composition plane")
     p.add_argument("--convective-initialization",type=int,nargs='+',default=[],
                    help="composition planes to precondition with native CONREF before a separate canonical solve")
@@ -407,6 +505,23 @@ def main():
         raise ValueError("invalid convective tail size")
     if not 1<=a.convective_iterations<=200:
         raise ValueError("invalid convective refinement iteration count")
+    if a.initial_bottom_tau is not None:
+        if (not math.isfinite(a.initial_bottom_tau) or a.initial_bottom_tau <= spec['tau']
+                or not (a.continuation_models or a.composition_donor) or a.initial_models):
+            raise ValueError('initial bottom depth requires a verified donor and must exceed matching depth')
+    composition_donor = None
+    if a.composition_donor:
+        if a.continuation_models or a.initial_models:
+            raise ValueError('choose one initialization mechanism')
+        from assemble_helium_fraction_atmospheres import load_plane
+        donor_spec=json.loads((a.composition_donor/'specification.json').read_text())
+        if len(donor_spec['hydrogen'])!=1 or len(donor_spec['helium3'])!=1:
+            raise ValueError('one donor composition plane required')
+        dx,dy=donor_spec['hydrogen'][0],donor_spec['helium3'][0]
+        _,donor_rows,donor_identity,donor_pins,donor_spec=load_plane(
+            a.composition_donor,dx,dy/(1-dx-sum(donor_spec['metals'])))
+        if not donor_rows:raise ValueError('no independently accepted composition donor')
+        composition_donor=(donor_spec,donor_rows,donor_pins)
     initial_spec = None
     continuation_spec = None
     if a.continuation_models:
@@ -428,19 +543,16 @@ def main():
     if data_digest(Path(prepared["synple"])/"data") != prepared["data_sha256"]:
         raise ValueError("source continuum/chemistry data changed")
     if not 1 <= a.jobs <= 8: raise ValueError("jobs must be 1..8")
-    if not 2 <= spec["log_temperature"][0] <= 21 or not 2 <= spec["log_density"][0] <= 19:
-        raise ValueError("opacity axes exceed compiled source capacity")
-    if not 20 <= spec["depths"] <= 400 or not 2 <= spec["atmosphere_frequencies"] <= 32000:
-        raise ValueError("atmosphere exceeds compiled source capacity")
+    validate_source_capacity(prepared, spec)
     if not 1 < spec.get("temperature_step_limit", 1.03) <= 1.25:
         raise ValueError("invalid temperature correction limiter")
     if not 0 < spec.get("convection_derivative_step",.001) <= .01:
         raise ValueError("invalid convection derivative step")
+    if not 0 < spec.get("newton_relaxation",1.) <= 1:
+        raise ValueError("invalid Newton relaxation factor")
     if "initial_depths" in spec and not (20 <= spec["initial_depths"] <= spec["depths"]
             and 2 <= spec["initial_frequencies"] <= spec["atmosphere_frequencies"]):
         raise ValueError("invalid initial atmosphere resolution")
-    if not spec["atmosphere_frequencies"] <= spec["opacity_frequencies"] <= 64000:
-        raise ValueError("invalid spectral resolution")
     if not 0 < spec["tau_top"] < .01 < spec["tau"] < spec["tau_bottom"]:
         raise ValueError("invalid atmosphere matching depths")
     if not 0 < spec["alpha"] < 10 or spec["wavelength_A"][0] <= 0 or spec["wavelength_A"][1] <= spec["wavelength_A"][0]:
@@ -457,37 +569,41 @@ def main():
     if any(not 0 <= n < len(planes) for n in a.convective_initialization):
         raise ValueError("invalid convective initialization plane")
 
-    def calculate_opacity(item):
+    def prepare_opacity(item):
         n,(x,y)=item; directory=root/f"plane-{n:03d}"
         tabledir=directory/"opacity"
         abundance,masses=composition(x,y,spec["metals"])
         print(f"computing opacity XH={x:g} X3={y:g}",flush=True)
+        return n,x,y,directory,tabledir,abundance,masses
+
+    def calculate_isotherm(job):
+        plane,i,t=job
+        n,x,y,directory,tabledir,abundance,masses=plane
         # SYNSPEC's binary output is unit 63, regardless of the text-table
         # filename in fort.2. Retain the original sequential record format.
         # Independent isotherms retain completed work if another source
         # state fails. They also avoid hidden cross-temperature source caches.
-        isotherms=[]
-        for i,t in enumerate(opacity["temperature_K"]):
-            isotherms.append(tabledir/f"temperature-{i:03d}")
-        # Exercise hot line-profile branches before the long molecular rows.
-        for i in reversed(range(len(isotherms))):
-            d=isotherms[i]; t=opacity["temperature_K"][i]
-            opacity_inputs(d,prepared,spec,x,y,t)
-            if a.reuse_opacity and not (d/"completed.json").exists():
-                candidates=(a.reuse_opacity/f"plane-{n:03d}"/"opacity").glob("temperature-*")
-                old=next((v for v in candidates if (v/"completed.json").exists() and
-                          (v/"fort.2").read_bytes()==(d/"fort.2").read_bytes()),None)
-                if old is not None:
-                    for filename in ["fort.63","fort.29","run.log","completed.json"]:
-                        shutil.copy2(old/filename,d/filename)
-            # execute rechecks both the new input fingerprint and every
-            # copied output hash; a mismatched isotherm is recomputed.
-            execute(prepared["synspec"],d,["fort.63","fort.29"])
-            validate_table(d/"fort.63",abundance,[t],opacity["density_g_cm3"])
-            print(f"opacity XH={x:g} X3={y:g}: T={t:g} complete",flush=True)
+        d=tabledir/f"temperature-{i:03d}"
+        opacity_inputs(d,prepared,spec,x,y,t)
+        if a.reuse_opacity and not (d/"completed.json").exists():
+            candidates=(a.reuse_opacity/f"plane-{n:03d}"/"opacity").glob("temperature-*")
+            old=next((v for v in candidates if (v/"completed.json").exists() and
+                      (v/"fort.2").read_bytes()==(d/"fort.2").read_bytes()),None)
+            if old is not None:
+                for filename in ["fort.63","fort.29","run.log","completed.json"]:
+                    shutil.copy2(old/filename,d/filename)
+        # execute rechecks both the new input fingerprint and every
+        # copied output hash; a mismatched isotherm is recomputed.
+        execute(prepared["synspec"],d,["fort.63","fort.29"])
+        validate_table(d/"fort.63",abundance,[t],opacity["density_g_cm3"])
+        print(f"opacity XH={x:g} X3={y:g}: T={t:g} complete",flush=True)
+
+    def finish_opacity(plane):
+        n,x,y,directory,tabledir,abundance,masses=plane
+        isotherms=[tabledir/f"temperature-{i:03d}"
+                   for i in range(len(opacity["temperature_K"]))]
         merge_isotherms([d/"fort.63" for d in isotherms],tabledir/"fort.63")
         validate_table(tabledir/"fort.63", abundance, opacity["temperature_K"], opacity["density_g_cm3"])
-        return n,x,y,directory,tabledir,abundance,masses
 
     def calculate_model(job):
         plane,it,teff,ig,logg=job
@@ -533,10 +649,31 @@ def main():
                 old=Path(file).parent
                 text=completed_initial_structure(old,continuation_spec,candidate['teff_K'],candidate['log_g'],spec['depths'])
                 if text is not None:
+                    text=initial_depth_control(text,old,a.initial_bottom_tau)
                     initial=continuation_structure(text,candidate['teff_K'],candidate['log_g'],teff,logg)
                     continuation={'source':str(old.resolve()),'source_receipt_sha256':digest(old/'completed.json'),
                                   'teff_K':candidate['teff_K'],'log_g':candidate['log_g'],
                                   'method':'pressure-preserving temperature/gravity continuation; starting guess only'}
+        if initial is None and composition_donor is not None:
+            donor_spec,donor_rows,donor_pins=composition_donor
+            # Only Teff/gravity choose between columns: all share one donor composition.
+            candidate=min(donor_rows,key=lambda r: abs(math.log(teff/r['coordinates'][2]))
+                          +.15*abs(logg-r['coordinates'][3])*math.log(10))
+            record=candidate['source_record'];old=Path(candidate['validation']).parent
+            text=completed_initial_structure(old,donor_spec,record['teff_K'],record['log_g'],spec['depths'])
+            if text is None:raise ValueError('donor depth grid cannot initialize target')
+            if any(digest(p)!=h for p,h in donor_pins.items()):
+                raise ValueError('composition donor changed after independent validation')
+            text=initial_depth_control(text,old,a.initial_bottom_tau)
+            initial=continuation_structure(text,record['teff_K'],record['log_g'],teff,logg)
+            continuation={'source':str(old.resolve()),'source_receipt_sha256':digest(old/'completed.json'),
+                          'teff_K':record['teff_K'],'log_g':record['log_g'],
+                          'donor_XH':record['XH'],'donor_XHe3':record['X3'],
+                          'donor_inputs_sha256':donor_pins,
+                          'method':'nearby-composition INITIAL GUESS with pressure-preserving Teff/gravity rescaling; target chemistry, opacity, transfer and hydrostatic balance solved anew'}
+        if continuation is not None and a.initial_bottom_tau is not None:
+            continuation['initial_bottom_tau']=a.initial_bottom_tau
+            continuation['lower_boundary_note']='Computational lower boundary changed at measured donor optical depth; final depth is solved and lower-boundary sensitivity must be checked.'
         if initial is None and a.initial_models:
             old=a.initial_models/f"plane-{n:03d}"/d.name
             if (old/"completed.json").exists() or (old/"completed.json.gz").exists():
@@ -608,9 +745,11 @@ def main():
             return False
 
     selected=list(enumerate(planes)) if a.plane is None else [(a.plane,planes[a.plane])]
-    # Opacity jobs retain large molecular line lists; limit those to four.
-    with ThreadPoolExecutor(max_workers=min(a.jobs,4)) as pool:
-        ready=list(pool.map(calculate_opacity,selected))
+    ready=[prepare_opacity(item) for item in selected]
+    # Hot isotherms are submitted first; final tables retain ascending order.
+    run_opacity_jobs(ready,opacity["temperature_K"],calculate_isotherm,a.jobs)
+    for plane in ready:
+        finish_opacity(plane)
     if a.opacity_only: return
     jobs=[(plane,it,teff,ig,logg) for it,teff in enumerate(spec["teff_K"])
           for ig,logg in enumerate(spec["log_g"]) for plane in ready]

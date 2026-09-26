@@ -1,0 +1,8 @@
+{
+  "cases": 99,
+  "method": "Independent BGS reference: eigenvalues of the linearized fluid equations.\n\nThe native implementation solves the published cubic and its stationarity\ncondition. This reference instead diagonalizes the velocity/temperature/\ncomposition matrix and maximizes its largest real eigenvalue over log(l^2).\nNo MESA source is used. Equations: Brown et al. 2013, arXiv:1212.1688.\n",
+  "source": "/Users/greglaughlin/Projects/ember/scripts/generate_fingering_reference.py",
+  "source_sha256": "e60426c90f39b22780c4add9f8a61e6e5ca5f2d493220b1c42f46ab6f92c076b",
+  "output_sha256": "74b8071752e16af1fe512a9f7da3a31482826fa6272358be5b2f7f29c46bf8bf",
+  "published_example_nu_mu": 1297.174311116594
+}

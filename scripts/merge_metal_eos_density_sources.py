@@ -7,6 +7,9 @@ converged responses must agree before its merged source is written. This
 prepares raw material data, not an accepted thermodynamic table or a stellar restart.
 The addition may cover a contiguous upper-temperature subset. Unrequested
 cold dense states are then explicitly null under a checked coverage declaration.
+An explicit upper hydrogen fraction can withhold the added density range at
+other compositions. Their original source rows remain unchanged; the complete
+unused addition remains preserved separately and is not claimed as accepted.
 """
 import argparse
 from concurrent.futures import ThreadPoolExecutor
@@ -17,7 +20,7 @@ import math
 from pathlib import Path
 
 from metal_eos_composition import mixture
-from eos_source_coverage import inconsistent_source_rows
+from eos_source_coverage import absent_source_rows, inconsistent_source_rows, validate_source_precision
 
 
 def digest(path):
@@ -41,6 +44,8 @@ def main():
     for name in ['previous', 'addition', 'output']:
         p.add_argument(name, type=Path)
     p.add_argument('--jobs', type=int, default=2)
+    p.add_argument('--maximum-added-hydrogen', type=float,
+                   help='limit only the new hot density range to this tabulated hydrogen fraction')
     a = p.parse_args()
     if not 1 <= a.jobs <= 4 or a.output.exists():
         raise ValueError('use a fresh output directory and one to four workers')
@@ -53,6 +58,9 @@ def main():
         if old_spec[key] != extra_spec[key]:
             raise ValueError('source composition, temperature or executable differs')
     old_t, extra_t = old_spec['logT'], extra_spec['logT']
+    if a.maximum_added_hydrogen is not None and (
+            old_t == extra_t or a.maximum_added_hydrogen not in old_spec['hydrogen'][:-1]):
+        raise ValueError('added hydrogen limit requires a hot subset and an interior composition coordinate')
     if (len(extra_t) < 5 or extra_t[0] not in old_t
             or old_t[old_t.index(extra_t[0]):] != extra_t
             or old_spec.get('source_coverage') or extra_spec.get('source_coverage')):
@@ -65,6 +73,10 @@ def main():
     if all(precisions) and precisions[0] != precisions[1]:
         raise ValueError('source precision fallbacks differ')
     precision = next((value for value in precisions if value), None)
+    references = [s.get('precision_reference') for s in [old_spec, extra_spec]]
+    if all(references) and references[0] != references[1]:
+        raise ValueError('source precision references differ')
+    reference = next((value for value in references if value), None)
     exclusion_limits = [s.get('source_consistency_exclusion_limit') for s in [old_spec, extra_spec]]
     if any(limit not in [None, 1e-7] for limit in exclusion_limits):
         raise ValueError('unsupported source consistency exclusion criterion')
@@ -90,10 +102,14 @@ def main():
     if old_t != extra_t:
         spec['source_coverage'] = dict(kind='hot_density_extension',
                                       original_logQ_max=old_q[-1], minimum_added_logT=extra_t[0])
+        if a.maximum_added_hydrogen is not None:
+            spec['source_coverage']['maximum_added_hydrogen'] = a.maximum_added_hydrogen
     if options != [3, 1, -2]:
         spec.update(source_options=options, source_radiation_included=False)
     if precision:
         spec['precision_fallback'] = precision
+    if reference:
+        spec['precision_reference'] = reference
     if any(exclusion_limits):
         spec['source_consistency_exclusion_limit'] = 1e-7
     spec['density_merge_sources'] = {str(path.resolve()): digest(path) for path in specs}
@@ -115,14 +131,14 @@ def main():
                     or len(raw['data']) != len(thermal)*len(axis)
                     or any(len(row) != 22 or not all(map(math.isfinite, row)) for row in raw['data'])):
                 raise ValueError('source plane identity, dimensions or responses differ')
-            if raw.get('precision_fallback') != source_spec.get('precision_fallback'):
-                raise ValueError('source plane precision differs from its specification')
+            validate_source_precision(raw, source_spec)
             if inconsistent_source_rows(raw) and source_spec.get('source_consistency_exclusion_limit') != 1e-7:
                 raise ValueError('source consistency exclusions lack a family declaration')
         rows, overlap = [], []
+        include_added = a.maximum_added_hydrogen is None or x <= a.maximum_added_hydrogen
         for it, t in enumerate(spec['logT']):
             retained = old['data'][it*len(old_q):(it+1)*len(old_q)]
-            if t not in extra_t:
+            if t not in extra_t or not include_added:
                 rows.extend(retained)
                 rows.extend([None]*(len(extra_q)-1))
                 continue
@@ -137,12 +153,14 @@ def main():
                             'maximum_scaled_difference': difference})
             rows.extend(retained)
             rows.extend(added[1:])
-        if not any(r['maximum_scaled_difference'] is not None for r in overlap):
+        if include_added and not any(r['maximum_scaled_difference'] is not None for r in overlap):
             raise ValueError('no converged source overlap connects the density ranges')
         raw = {**old, 'logQ': q, 'data': rows,
                'density_merge_source_sha256': [inputs[str(path.resolve())] for path in paths]}
         exclusions = []
         for source, axis, thermal in [(old, old_q, old_t), (extra, extra_q, extra_t)]:
+            if source is extra and not include_added:
+                continue
             for record in source.get('source_consistency_exclusions', []):
                 it, iq = divmod(record['index'], len(axis))
                 if source is extra and iq == 0:
@@ -158,8 +176,12 @@ def main():
             raw['source_coverage'] = spec['source_coverage']
         if precision:
             raw['precision_fallback'] = precision
+            if reference:
+                raw['precision_reference'] = reference
             overrides = []
             for source, axis, thermal in [(old, old_q, old_t), (extra, extra_q, extra_t)]:
+                if source is extra and not include_added:
+                    continue
                 for override in source.get('precision_fallback_isotherms', []):
                     it = override['temperature_index']
                     if (not 0 <= it < len(thermal) or override['logT'] != thermal[it]
@@ -172,13 +194,16 @@ def main():
                                       'source_logQ_range': [axis[0], axis[-1]],
                                       'retained_logQ_range': [axis[1] if source is extra else axis[0], axis[-1]]})
             raw['precision_fallback_isotherms'] = overrides
+        validate_source_precision(raw, spec)
+        absent_source_rows(raw)
         folder = a.output/f'plane-{i:03d}'
         folder.mkdir()
         (folder/'mixture.json').write_text(json.dumps(m, indent=2)+'\n')
         output = folder/'source.json.gz'
         output.write_bytes(gzip.compress(encode(raw), mtime=0))
         record = {'hydrogen': x, 'helium3': y, 'retained_rows': len(old['data']),
-                  'added_rows': len(extra_t)*(len(extra_q)-1),
+                  'added_rows': len(extra_t)*(len(extra_q)-1) if include_added else 0,
+                  'added_composition_selected': include_added,
                   'absent_source_rows': sum(row is None for row in rows),
                   'source_failures_for_masking': sum(row is not None and row[0] != 0 for row in rows),
                   'inconsistent_source_states': len(exclusions),

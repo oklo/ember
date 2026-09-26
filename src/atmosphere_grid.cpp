@@ -39,8 +39,9 @@ void CompositionAtmosphereGrid::read(std::istream &in, Mixture mixture) {
   };
   label("EMBER_COMPOSITION_ATMOSPHERE");
   int version{};
-  if (!(in >> version) || (version != 1 && version != 2))
+  if (!(in >> version) || (version != 1 && version != 2 && version != 3))
     throw std::runtime_error("CompositionAtmosphereGrid: version");
+  helium_fraction_coordinates_ = version == 3;
   label("source");
   in >> std::quoted(source_);
   label("approximation");
@@ -66,7 +67,15 @@ void CompositionAtmosphereGrid::read(std::istream &in, Mixture mixture) {
   if (z >= 1)
     throw std::runtime_error(
         "CompositionAtmosphereGrid: invalid total metallicity");
-  const std::array labels{"hydrogen", "helium3", "log_teff", "log_g"};
+  if (helium_fraction_coordinates_) {
+    label("metal_tolerance");
+    if (!(in >> metal_tolerance_) || !std::isfinite(metal_tolerance_) ||
+        metal_tolerance_ < 0 || metal_tolerance_ > 1e-12)
+      throw std::runtime_error("CompositionAtmosphereGrid: invalid metal tolerance");
+  }
+  const std::array labels{"hydrogen",
+                         helium_fraction_coordinates_ ? "helium3_fraction" : "helium3",
+                         "log_teff", "log_g"};
   std::size_t cells = 1;
   for (std::size_t k = 0; k < axes_.size(); ++k) {
     label(labels[k]);
@@ -84,16 +93,17 @@ void CompositionAtmosphereGrid::read(std::istream &in, Mixture mixture) {
         throw std::runtime_error("CompositionAtmosphereGrid: invalid axis");
     }
   }
-  if (axes_[0].back() + axes_[1].back() + z > 1 + 1e-12)
+  if (helium_fraction_coordinates_ ? axes_[0].back() + z >= 1
+                                   : axes_[0].back() + axes_[1].back() + z > 1 + 1e-12)
     throw std::runtime_error(
-        "CompositionAtmosphereGrid: grid includes negative He4");
+        "CompositionAtmosphereGrid: invalid helium support");
   label("data");
   logT_.resize(cells);
   logPg_.resize(cells);
   valid_.assign(cells, true);
   std::size_t accepted = 0;
   for (std::size_t i = 0; i < cells; ++i) {
-    if (version == 2) {
+    if (version >= 2) {
       int present{};
       if (!(in >> present) || (present != 0 && present != 1))
         throw std::runtime_error("CompositionAtmosphereGrid: invalid source mask");
@@ -118,8 +128,12 @@ void CompositionAtmosphereGrid::read(std::istream &in, Mixture mixture) {
 }
 
 CompositionAtmosphereGrid::Support CompositionAtmosphereGrid::support() const {
+  const auto helium3 = helium_fraction_coordinates_
+      ? std::array{axes_[1].front() * (1 - axes_[0].back() - reference_metallicity()),
+                   axes_[1].back() * (1 - axes_[0].front() - reference_metallicity())}
+      : std::array{axes_[1].front(), axes_[1].back()};
   return {{axes_[0].front(), axes_[0].back()},
-          {axes_[1].front(), axes_[1].back()},
+          helium3,
           {std::pow(10., axes_[2].front()), std::pow(10., axes_[2].back())},
           {std::pow(10., axes_[3].front()), std::pow(10., axes_[3].back())}};
 }
@@ -127,7 +141,9 @@ CompositionAtmosphereGrid::Support CompositionAtmosphereGrid::support() const {
 std::size_t CompositionAtmosphereGrid::check_temperature_extension(
     const CompositionAtmosphereGrid &old) const {
   if (source_ != old.source_ || approximation_ != old.approximation_ ||
-      tau_ != old.tau_ || metals_ != old.metals_)
+      tau_ != old.tau_ || metals_ != old.metals_ ||
+      helium_fraction_coordinates_ != old.helium_fraction_coordinates_ ||
+      metal_tolerance_ != old.metal_tolerance_)
     throw std::runtime_error("atmosphere extension: physics or matching depth changed");
   for (std::size_t k : {0u, 1u, 3u})
     if (axes_[k] != old.axes_[k])
@@ -159,15 +175,20 @@ bool CompositionAtmosphereGrid::covers(double Teff, double g,
                                        const Composition &c) const {
   if (!positive(Teff) || !positive(g) || c.basis != AbundanceBasis::baryon_mass)
     return false;
+  if(c[Species::H2]!=0)return false; // Requires an explicitly selected isotope mapping.
   for (double x : c.X)
     if (!std::isfinite(x) || x < 0 || x > 1)
       return false;
   if (std::abs(c.sum() - 1) > 1e-10)
     return false;
   for (std::size_t i = 0; i < metals_.size(); ++i)
-    if (std::abs(c.X[i + 3] - metals_[i]) > 1e-12)
+    if (std::abs(c.X[i + 3] - metals_[i]) > metal_tolerance_)
       return false;
-  const std::array q{c.X[0], c.X[1], std::log10(Teff), std::log10(g)};
+  const double helium = c.X[1] + c.X[2];
+  if (helium_fraction_coordinates_ && !(helium > 0))
+    return false;
+  const std::array q{c.X[0], helium_fraction_coordinates_ ? c.X[1] / helium : c.X[1],
+                     std::log10(Teff), std::log10(g)};
   for (std::size_t i = 0; i < q.size(); ++i)
     if (q[i] < axes_[i].front() || q[i] > axes_[i].back())
       return false;
@@ -220,7 +241,8 @@ CompositionAtmosphereGrid::coordinates(double Teff, double g,
   if (!covers(Teff, g, c))
     throw std::domain_error("CompositionAtmosphereGrid: Teff, gravity or "
                             "composition outside source grid");
-  return {c.X[0], c.X[1], std::log10(Teff), std::log10(g)};
+  return {c.X[0], helium_fraction_coordinates_ ? c.X[1] / (c.X[1] + c.X[2]) : c.X[1],
+          std::log10(Teff), std::log10(g)};
 }
 std::array<double, 5>
 CompositionAtmosphereGrid::interpolate(const std::vector<double> &f,
@@ -281,11 +303,20 @@ CompositionAtmosphereGrid::CompositionResponse
 CompositionAtmosphereGrid::composition_response(double Teff, double g,
                                                 const Composition &c) const {
   const auto q = coordinates(Teff, g, c);
-  const auto t = interpolate(logT_, q), pg = interpolate(logPg_, q);
+  auto t = interpolate(logT_, q), pg = interpolate(logPg_, q);
   const double pr = constants::a_rad * std::pow(t[0], 4) / 3;
   const double p = pg[0] + pr;
   if (!positive(p) || p == pr)
     throw std::domain_error("CompositionAtmosphereGrid: pressure overflow");
+  if (helium_fraction_coordinates_) {
+    // H replaces He4 at fixed He3: df3/dXH=f3/Y. He3 replaces He4 at
+    // fixed H: df3/dX3=1/Y. Return derivatives in physical mass fractions.
+    const double helium = c.X[1] + c.X[2];
+    t[1] += t[2] * q[1] / helium;
+    pg[1] += pg[2] * q[1] / helium;
+    t[2] /= helium;
+    pg[2] /= helium;
+  }
   return {t[1], t[2], (pg[0] * pg[1] + 4 * pr * t[1]) / p,
           (pg[0] * pg[2] + 4 * pr * t[2]) / p};
 }

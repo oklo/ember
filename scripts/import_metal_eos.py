@@ -10,7 +10,7 @@ import shutil
 import subprocess
 import sys
 from fetch_tops_composition import fraction_label
-from eos_source_coverage import absent_source_rows, inconsistent_source_rows
+from eos_source_coverage import absent_source_rows, inconsistent_source_rows, validate_source_precision
 
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
@@ -30,10 +30,11 @@ def main():
             raise ValueError('inconsistent source identity')
         if raw['options']!=spec.get('source_options',[3,1,-2]):
             raise ValueError('source physics differs from family specification')
+        if raw.get('metallicity')!=spec.get('metallicity'):
+            raise ValueError('source metal mass differs from family specification')
         if raw.get('source_coverage')!=spec.get('source_coverage'):
             raise ValueError('source coverage differs from family specification')
-        if raw.get('precision_fallback')!=spec.get('precision_fallback'):
-            raise ValueError('source numerical precision differs from family specification')
+        validate_source_precision(raw,spec)
         absent=absent_source_rows(raw)
         excluded=inconsistent_source_rows(raw)
         if excluded and spec.get('source_consistency_exclusion_limit')!=1e-7:
@@ -54,7 +55,8 @@ def main():
     lines=['EMBER_METAL_HELMHOLTZ 1','hydrogen '+str(len(spec['hydrogen']))+' '+' '.join(map(str,spec['hydrogen'])),
            'helium3 '+str(len(spec['helium3']))+' '+' '.join(map(str,spec['helium3']))]
     lines += [json.dumps(r['potential']) for r in planes]
-    family=a.output/'freeeos300_gs98_z020.dat';family.write_text('\n'.join(lines)+'\n')
+    zlabel=fraction_label(spec['metallicity'],1000) if 'metallicity' in spec else '020'
+    family=a.output/f'freeeos300_gs98_z{zlabel}.dat';family.write_text('\n'.join(lines)+'\n')
     provenance={**spec,'planes':planes,'family_sha256':digest(family),
         'scripts':{name:digest(Path(__file__).with_name(name)) for name in
                    ['generate_metal_eos.py','metal_eos_composition.py','import_freeeos_potential.py','import_metal_eos.py','eos_source_coverage.py']}}

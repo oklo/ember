@@ -1,6 +1,8 @@
 #include "ember/relaxation.hpp"
 #include "ember/boundary.hpp"
 #include "ember/henyey.hpp"
+#include "ember/energy_grid.hpp"
+#include "parallel_evaluate.hpp"
 #include <algorithm>
 #include <cmath>
 #include <stdexcept>
@@ -28,15 +30,20 @@ void validate(const Model& m, const Physics& p, const RelaxationOptions& o, doub
   }
   if (!(m.y.back().L > 0.0) || !std::isfinite(dt))
     throw std::invalid_argument("relax: positive surface luminosity and finite dt required");
-  if (dt > 0.0 && (!prev || prev->m != m.m || prev->size() != m.size() || prev->comp.size() != m.size()))
+  (void)face_luminosities(m);
+  if (dt > 0.0 && (!prev || prev->m != m.m || prev->size() != m.size() || prev->comp.size() != m.size()
+      || prev->luminosity_grid != m.luminosity_grid))
     throw std::invalid_argument("relax: positive dt requires previous model on the same mesh");
   for (double v : {o.residual_tolerance, o.correction_tolerance, o.max_log_step, o.max_luminosity_step})
     if (!(v > 0.0) || !std::isfinite(v)) throw std::invalid_argument("relax: invalid tolerances or step limits");
   if (o.max_backtracks == 0) throw std::invalid_argument("relax: at least one line-search trial is required");
+  if (o.zone_threads == 0 || o.zone_threads > 64)
+    throw std::invalid_argument("relax: zone thread count must be between 1 and 64");
 }
 
 System assemble(const Model& m, const Physics& p, const Atmosphere& atmosphere,
-                const std::vector<double>& Lunit, double dt, const Model* prev, bool jacobian) {
+                const std::vector<double>& Lunit, double dt, const Model* prev, bool jacobian,
+                std::size_t zone_threads) {
   System s{};
   const auto inner = central_residual(m, p, dt, prev);
   const auto outer = surface_residual(m.y.back(), m.M, m.comp.back(), *p.eos, atmosphere);
@@ -47,14 +54,35 @@ System assemble(const Model& m, const Physics& p, const Atmosphere& atmosphere,
     s.inner.dfdy[k][3] *= Lunit.front(); s.outer.dfdy[k][3] *= Lunit.back();
     s.norm = std::max({s.norm, std::abs(s.inner.f[k]), std::abs(s.outer.f[k])});
   }
+  std::vector<ZoneResidual> evaluated;
+  std::vector<std::exception_ptr> failures;
+  const std::size_t count=m.size()-1;
+  const auto workers=std::min(zone_threads,(count+31)/32);
+  if(workers>1) {
+    // Each zone depends on the same immutable model. Store independently,
+    // then scale/reduce in the original order. Capture errors per zone so
+    // the first failing mass cell is also independent of thread scheduling.
+    evaluated.resize(count);
+    failures.resize(count);
+    detail::independent_evaluations(count,zone_threads,[&](std::size_t i) {
+      // Delay rethrow until the serial assembly reaches this zone, retaining
+      // its original ordering relative to scaled-residual checks.
+      try {
+        if(jacobian)evaluated[i]=zone_residual(m,i,p,dt,prev);
+        else evaluated[i].f=zone_equations(m,i,p,dt,prev);
+      }catch(...) {failures[i]=std::current_exception();}
+    });
+  }
   if (jacobian) s.zones.reserve(m.size() - 1);
   for (std::size_t i = 0; i + 1 < m.size(); ++i) {
+    if(!failures.empty() && failures[i])std::rethrow_exception(failures[i]);
     ZoneResidual z{};
-    if (jacobian) z = zone_residual(m, i, p, dt, prev);
+    if (!evaluated.empty()) z = evaluated[i];
+    else if (jacobian) z = zone_residual(m, i, p, dt, prev);
     else z.f = zone_equations(m, i, p, dt, prev);
     const double dm = m.m[i + 1] - m.m[i];
     for (std::size_t k = 0; k < NVAR; ++k) {
-      const double scale = k == 2 ? dm / std::max(Lunit[i], Lunit[i + 1]) : dm;
+      const double scale = k == 2 ? energy_interval_mass(m,i) / std::max(Lunit[i], Lunit[i + 1]) : dm;
       z.f[k] *= scale;
       if (!std::isfinite(z.f[k])) throw std::domain_error("relax: non-finite scaled zone residual");
       s.norm = std::max(s.norm, std::abs(z.f[k]));
@@ -82,14 +110,14 @@ RelaxationResult relax(const Model& initial, const Physics& p, const Atmosphere&
   for (const auto& point : initial.y) reference_L = std::max(reference_L, std::abs(point.L));
   std::vector<double> Lunit(initial.size());
   for (std::size_t i = 0; i < initial.size(); ++i) {
-    Lunit[i] = std::max(std::abs(initial.y[i].L), reference_L * (initial.m[i] / initial.M));
+    Lunit[i] = std::max(std::abs(initial.y[i].L), reference_L * (luminosity_mass(initial,i) / initial.M));
     if (!(Lunit[i] > 0.0) || !std::isfinite(Lunit[i]))
       throw std::domain_error("relax: luminosity units are not representable");
   }
   RelaxationResult result{};
   result.model = initial;
   for (;;) {
-    const auto system = assemble(result.model, p, atmosphere, Lunit, dt, prev, true);
+    const auto system = assemble(result.model, p, atmosphere, Lunit, dt, prev, true,options.zone_threads);
     result.residual = system.norm;
     result.correction = std::numeric_limits<double>::infinity();
     HenyeyCorrection correction;
@@ -127,7 +155,7 @@ RelaxationResult relax(const Model& initial, const Physics& p, const Atmosphere&
         for (std::size_t v = 0; v < NVAR; ++v)
           candidate.y[i][static_cast<Var>(v)] += damping * correction.dy[i][v] * (v == 3 ? Lunit[i] : 1.0);
       try {
-        const double norm = assemble(candidate, p, atmosphere, Lunit, dt, prev, false).norm;
+        const double norm = assemble(candidate, p, atmosphere, Lunit, dt, prev, false,options.zone_threads).norm;
         if (norm < system.norm && norm <= (1.0 - 1e-4 * damping) * system.norm) {
           result.model = std::move(candidate); accepted = true; break;
         }
