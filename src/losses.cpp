@@ -1,5 +1,5 @@
 #include "ember/losses.hpp"
-#include "differential.hpp"
+#include "ember/detail/differential.hpp"
 
 namespace ember {
 LossState PlasmaNeutrinoLosses::eval(double T,double rho,const Composition& comp) const {

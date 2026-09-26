@@ -1,7 +1,7 @@
 #include "ember/nuclear.hpp"
 #include "ember/deuterium.hpp"
 #include "ember/constants.hpp"
-#include "differential.hpp"
+#include "ember/detail/differential.hpp"
 #include "fermi.hpp"
 #include <algorithm>
 #include <cmath>

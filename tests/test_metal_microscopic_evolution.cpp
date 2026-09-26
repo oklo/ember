@@ -1,8 +1,8 @@
 #include "ember/metal_microscopic_transport.hpp"
 #include "ember/eos_composite.hpp"
-#include "../examples/stellar_seed.hpp"
-#include "../src/differential.hpp"
-#include "../apps/evolution_checkpoint.hpp"
+#include "ember/stellar_seed.hpp"
+#include "ember/detail/differential.hpp"
+#include "ember/evolution_checkpoint.hpp"
 #include <algorithm>
 #include <cmath>
 #include <iomanip>

@@ -1,6 +1,6 @@
 #include "ember/deuterium_burning.hpp"
 #include "ember/constants.hpp"
-#include "../apps/evolution_checkpoint.hpp"
+#include "ember/evolution_checkpoint.hpp"
 #include <algorithm>
 #include <chrono>
 #include <cstdio>

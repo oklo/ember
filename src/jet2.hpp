@@ -1,5 +1,5 @@
 #pragma once
-#include "differential.hpp"
+#include "ember/detail/differential.hpp"
 
 namespace ember::detail {
 // Two independent coordinates and their symmetric Hessian. Used to

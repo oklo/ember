@@ -1,8 +1,8 @@
 #include "lifetime_driver.hpp"
-#include "contracting_seed.hpp"
-#include "lifetime_checks.hpp"
-#include "convective_material_heat.hpp"
-#include "evolution_checkpoint.hpp"
+#include "ember/contracting_seed.hpp"
+#include "ember/convective_evolution_checks.hpp"
+#include "ember/convective_material_heat.hpp"
+#include "ember/evolution_checkpoint.hpp"
 #include "ember/atmosphere_deuterium.hpp"
 #include "ember/atmosphere_grid.hpp"
 #include "ember/conduction_table.hpp"
@@ -173,72 +173,52 @@ int lifetime_main(int argc,char** argv) {
         <<",\"kinetic_heat_proxy\":"<<guard.kinetic_heat_proxy
         <<",\"convective_travel_years\":"<<guard.travel_years<<",\"cpu_seconds\":"<<double(std::clock()-cpu_start)/CLOCKS_PER_SEC<<"}\n";history.flush();
     };
-    std::size_t accepted_here=0,failed=0;std::string stop;bool reached=false;double error=0;
-    try {
-      const auto assess=[&](const Model& m,std::span<const MetalSpeciesVector> rates) {
-        const bool initial_D=has_D(m);convective_heat.diagnostic_rates=rates;
-        try {
-          const auto result=check_initial_convection(m,initial_D?early:later,table_eos,nuclear,initial_D);
-          convective_heat.diagnostic_rates={};return result;
-        }catch(...) {convective_heat.diagnostic_rates={};throw;}
-      };
-      HomogeneousCheck guard=assess(state.model,state.metal_heat_rates);
-      record(0,0,guard);
-      for(;;) {
-        if(state.model.age>=target || target-state.model.age<=8*(std::nextafter(target,INFINITY)-target)){stop="requested age";reached=true;break;}
-        if(accepted_here>=maximum_steps){stop="accepted-step budget";break;}
-        if(double(std::clock()-cpu_start)/CLOCKS_PER_SEC>=maximum_cpu){stop="CPU budget";break;}
-        const double ds=std::min({state.next_dt,maximum_dt,target-state.model.age});
-        if(state.model.age+ds==state.model.age || ds<=0)throw std::runtime_error("timestep is below clock resolution");
-        const bool initial_D=has_D(state.model);auto selected=options;
-        selected.previous_metal_heat_rates=state.metal_heat_rates;
-        selected.convective_mixing=ConvectiveMixing::instantaneous;
-        const auto& physics=initial_D?early:later;
-        const auto full=evolve_step(state.model,physics,atmosphere,ds,selected);
-        const auto h1=full.converged?evolve_step(state.model,physics,atmosphere,ds/2,selected):full;
-        auto second_options=selected;second_options.previous_metal_heat_rates=h1.total_metal_species_rates;
-        const auto h2=h1.converged?evolve_step(h1.model,physics,atmosphere,ds/2,second_options):h1;
-        const bool converged=full.converged && h1.converged && h2.converged;
-        const auto af=check_interval(state.model,full,ds,nuclear,inventory_tolerance);
-        const auto a1=check_interval(state.model,h1,ds/2,nuclear,inventory_tolerance);
-        const auto a2=check_interval(h1.model,h2,ds/2,nuclear,inventory_tolerance);
-        const bool audited=af.pass && a1.pass && a2.pass;error=1e30;
-        HomogeneousCheck end_guard;
-        if(converged) {
-          error=0;
-          for(std::size_t i=0;i<points;++i) {
-            for(const auto v:{Var::lnr,Var::lnrho,Var::lnT})error=std::max(error,std::abs(full.model.y[i][v]-h2.model.y[i][v])/structure_tolerance);
-            const auto a=metal_cn_abundances(full.model.comp[i]),b=metal_cn_abundances(h2.model.comp[i]);
-            for(std::size_t k=0;k<METAL_CN_SIZE;++k)error=std::max(error,std::abs(a[k]-b[k])/species_tolerance);
-          }
-          const double half_power=.5*(h1.nuclear_luminosity+h2.nuclear_luminosity),power_scale=std::max(std::abs(half_power),.5*(std::abs(h1.model.y.back().L)+std::abs(h2.model.y.back().L)));
-          error=std::max(error,std::abs(full.nuclear_luminosity-half_power)/(energy_tolerance*power_scale));
-          error=std::max(error,std::abs(full.model.y.back().L/h2.model.y.back().L-1)/(4*structure_tolerance));
-          (void)assess(full.model,full.total_metal_species_rates);
-          (void)assess(h1.model,h1.total_metal_species_rates);
-          end_guard=assess(h2.model,h2.total_metal_species_rates);
-        }
-        const bool take=converged && audited && error<=1;
-        const auto reason=!full.converged?full.message:!h1.converged?h1.message:h2.message;
-        attempts<<"{\"start_years\":"<<state.model.age/year<<",\"step_years\":"<<ds/year<<",\"converged\":"<<converged<<",\"audit_pass\":"<<audited
-          <<",\"accepted\":"<<take<<",\"error_norm\":"<<error<<",\"message\":"<<std::quoted(reason)
-          <<",\"species_error\":["<<af.maximum_species_error<<','<<a1.maximum_species_error<<','<<a2.maximum_species_error
-          <<"],\"mass_error_surface\":["<<af.mass_error_surface<<','<<a1.mass_error_surface<<','<<a2.mass_error_surface
-          <<"],\"first_law\":["<<af.first_law<<','<<a1.first_law<<','<<a2.first_law<<"]}\n";attempts.flush();
-        if(take) {
-          state.model=h2.model;state.metal_heat_rates=h2.total_metal_species_rates;++state.accepted;++accepted_here;failed=0;
-          state.next_dt=std::min(maximum_dt,ds*std::clamp(.8/std::sqrt(std::max(error,1e-8)),.5,1.5));
-          record(ds,error,end_guard);write_checkpoint(work/"latest.checkpoint",state,selections,abundance_tolerance,identities);
-          std::cerr<<std::setprecision(4)<<"age="<<state.model.age/year<<" yr; step error="<<error<<"; accepted="<<state.accepted<<'\n';
-        }else {
-          ++state.rejected;state.next_dt=ds*.5;
-          if(converged && !audited)throw std::runtime_error("physical inventory/energy audit failed");
-          if(reason.find("radiative species boundary")!=std::string::npos)
-            throw std::runtime_error(reason);
-          if(++failed>=8)throw std::runtime_error("repeated step rejection: "+reason);
-        }
+    EvolutionControlOptions control;
+    control.step=options;control.step.convective_mixing=ConvectiveMixing::instantaneous;
+    control.target_age=target;control.maximum_dt=maximum_dt;
+    control.structure_tolerance=structure_tolerance;control.species_tolerance=species_tolerance;
+    control.energy_tolerance=energy_tolerance;control.maximum_steps=maximum_steps;
+    control.maximum_cpu_seconds=maximum_cpu;
+    HomogeneousCheck guard;
+    EvolutionControlHooks hooks;
+    hooks.physics=[&](const Model& m)->const Physics& {return has_D(m)?early:later;};
+    hooks.species_difference=[](const Composition& x,const Composition& y) {
+      const auto a=metal_cn_abundances(x),b=metal_cn_abundances(y);double difference=0;
+      for(std::size_t k=0;k<METAL_CN_SIZE;++k)difference=std::max(difference,std::abs(a[k]-b[k]));
+      return difference;
+    };
+    hooks.audit=[&](const Model& old,const EvolutionStep& step,double duration) {
+      return check_interval(old,step,duration,nuclear,inventory_tolerance);
+    };
+    hooks.assess=[&](const Model& m,std::span<const std::array<double,3>> rates) {
+      const bool initial_D=has_D(m);convective_heat.diagnostic_rates=rates;
+      try {
+        guard=check_initial_convection(m,initial_D?early:later,table_eos,nuclear,initial_D);
+        convective_heat.diagnostic_rates={};
+      }catch(...) {convective_heat.diagnostic_rates={};throw;}
+    };
+    hooks.cpu_seconds=[&]{return double(std::clock()-cpu_start)/CLOCKS_PER_SEC;};
+    hooks.terminal_failure=[](std::string_view reason) {
+      return reason.find("radiative species boundary")!=std::string_view::npos;
+    };
+    hooks.attempted=[&](const EvolutionAttempt& attempt) {
+      const auto& af=attempt.audits[0];const auto& a1=attempt.audits[1];const auto& a2=attempt.audits[2];
+      attempts<<"{\"start_years\":"<<attempt.start_age/year<<",\"step_years\":"<<attempt.dt/year<<",\"converged\":"<<attempt.converged<<",\"audit_pass\":"<<attempt.audit_pass
+        <<",\"accepted\":"<<attempt.accepted<<",\"error_norm\":"<<attempt.error_norm<<",\"message\":"<<std::quoted(attempt.message)
+        <<",\"species_error\":["<<af.maximum_species_error<<','<<a1.maximum_species_error<<','<<a2.maximum_species_error
+        <<"],\"mass_error_surface\":["<<af.mass_error_surface<<','<<a1.mass_error_surface<<','<<a2.mass_error_surface
+        <<"],\"first_law\":["<<af.first_law<<','<<a1.first_law<<','<<a2.first_law<<"]}\n";attempts.flush();
+    };
+    hooks.accepted=[&](const EvolutionState&,double duration,double error) {
+      record(duration,error,guard);
+      if(duration>0) {
+        write_checkpoint(work/"latest.checkpoint",state,selections,abundance_tolerance,identities);
+        std::cerr<<std::setprecision(4)<<"age="<<state.model.age/year<<" yr; step error="<<error<<"; accepted="<<state.accepted<<'\n';
       }
-    }catch(const std::exception& e){stop=e.what();}
+    };
+    const auto outcome=ember::evolve(state,atmosphere,control,hooks);
+    const auto& stop=outcome.stop_reason;const bool reached=outcome.requested_age_reached;
+    const auto accepted_here=outcome.accepted_this_invocation;
     write_checkpoint(work/"final.checkpoint",state,selections,abundance_tolerance,identities);
     std::ofstream report(work/"report.json");report<<std::setprecision(17)
       <<"{\"requested_age_reached\":"<<reached<<",\"age_years\":"<<state.model.age/year<<",\"accepted_this_invocation\":"<<accepted_here

@@ -1,7 +1,7 @@
 #include "ember/screened_microscopic_transport.hpp"
 #include "ember/constants.hpp"
 #include "ember/eos_component.hpp"
-#include "differential.hpp"
+#include "ember/detail/differential.hpp"
 #include <cmath>
 #include <stdexcept>
 #include <utility>

@@ -1,7 +1,7 @@
 // Numerical thermal coupling check using a relaxed late-PMS structure.
 // A declared small D inventory is injected for this test only. This is NOT
 // the initial condition or trajectory of the continuous physical PMS model.
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/eos_variable_metal.hpp"
 #include "ember/opacity_mixture.hpp"
 #include "ember/atmosphere_grid.hpp"

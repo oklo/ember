@@ -2,7 +2,7 @@
 #include "ember/convection.hpp"
 #include "ember/constants.hpp"
 #include "ember/energy_grid.hpp"
-#include "differential.hpp"
+#include "ember/detail/differential.hpp"
 #include "energy.hpp"
 #include "thermal_transport.hpp"
 #include <algorithm>

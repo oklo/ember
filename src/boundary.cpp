@@ -1,7 +1,7 @@
 #include "ember/boundary.hpp"
 #include "ember/constants.hpp"
 #include "ember/energy_grid.hpp"
-#include "differential.hpp"
+#include "ember/detail/differential.hpp"
 #include "energy.hpp"
 #include <cmath>
 #include <stdexcept>

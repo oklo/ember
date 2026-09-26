@@ -1,5 +1,5 @@
 #include "ember/atmosphere_composition.hpp"
-#include "differential.hpp"
+#include "ember/detail/differential.hpp"
 #include "ember/constants.hpp"
 #include <algorithm>
 #include <array>

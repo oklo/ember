@@ -176,7 +176,7 @@ def main():
         new_EOS_queries=0,new_pair_collision_integrals=0,
         normalization='Component difference divided by the mobility diagonal scale or scalar value scale plus derivative magnitude. Fraction partials use relative composition increments.',
         input_sha256={str(p):sha(p) for p in [args.probe,table,prior_path,snapshot_path,Path(__file__),
-            root/'src/collision_transport.cpp',root/'include/ember/collision_transport.hpp',root/'src/differential.hpp',
+            root/'src/collision_transport.cpp',root/'include/ember/collision_transport.hpp',root/'include/ember/detail/differential.hpp',
             root/'scripts/collision_transport_probe.cpp',root/'include/ember/gs98_mixture.hpp',
             root/'scripts/electron_ion_born.py',table.with_suffix('.json')]},
         artifacts_sha256={str(p):sha(p) for p in args.scratch.iterdir()},

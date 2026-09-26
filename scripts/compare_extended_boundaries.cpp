@@ -1,5 +1,5 @@
 // Static sensitivity experiments at fixed homogeneous compositions.
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/atmosphere_composition.hpp"
 #include "ember/conduction_table.hpp"
 #include "ember/eos_composition.hpp"

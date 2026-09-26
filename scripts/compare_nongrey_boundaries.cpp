@@ -1,6 +1,6 @@
 // Static and coupled-step checks at compositions on the existing 0.1 Msun
 // track.
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/atmosphere_composition.hpp"
 #include "ember/atmosphere_grid.hpp"
 #include "ember/conduction_table.hpp"

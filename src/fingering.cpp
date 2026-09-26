@@ -1,5 +1,5 @@
 #include "ember/fingering.hpp"
-#include "differential.hpp"
+#include "ember/detail/differential.hpp"
 #include <algorithm>
 #include <cmath>
 #include <limits>

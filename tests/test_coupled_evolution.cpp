@@ -1,4 +1,4 @@
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/eos_composition.hpp"
 #include "ember/evolution.hpp"
 #include "ember/evolution_proxies.hpp"

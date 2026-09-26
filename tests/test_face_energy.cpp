@@ -2,7 +2,7 @@
 #include "ember/evolution.hpp"
 #include "ember/boundary.hpp"
 #include "ember/constants.hpp"
-#include "../apps/evolution_checkpoint.hpp"
+#include "ember/evolution_checkpoint.hpp"
 #include <algorithm>
 #include <chrono>
 #include <iomanip>

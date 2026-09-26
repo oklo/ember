@@ -1,6 +1,6 @@
 #include <unordered_map>
-#include "../examples/stellar_seed.hpp"
-#include "evolution_checkpoint.hpp"
+#include "ember/stellar_seed.hpp"
+#include "ember/evolution_checkpoint.hpp"
 #include "lifetime_driver.hpp"
 #include "opacity_extension.hpp"
 #include "ember/eos_composition.hpp"

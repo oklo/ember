@@ -16,7 +16,7 @@
 // time discretization to max(nuclear power, photon power), retaining separate
 // isotope accuracy and unchanged per-interval conservation checks.
 // --upgrade-audit-from reads a pinned 1e-15 predecessor without altering its state.
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/eos_variable_metal.hpp"
 #include "ember/boundary.hpp"
 #include "ember/opacity_mixture.hpp"
@@ -26,7 +26,7 @@
 #include "ember/deuterium.hpp"
 #include "ember/eos_deuterium.hpp"
 #include "ember/atmosphere_deuterium.hpp"
-#include "../apps/evolution_checkpoint.hpp"
+#include "ember/evolution_checkpoint.hpp"
 #include <ctime>
 #include <fstream>
 #include <sstream>

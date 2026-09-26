@@ -1,5 +1,6 @@
 #pragma once
 #include "ember/model.hpp"
+#include "ember/evolution_state.hpp"
 #include "ember/energy_grid.hpp"
 #include "ember/nuclear_cn.hpp"
 #include <algorithm>
@@ -85,14 +86,7 @@ inline Identities input_identities(const fs::path& executable,const fs::path& da
   return identities;
 }
 
-struct Checkpoint {
-  Model model;
-  double next_dt{};
-  std::size_t accepted{},rejected{};
-  // Accepted total H1, He3 and metal face rates (g/s), used to recover the
-  // previous material heat when lagging finite convection coefficients.
-  std::vector<std::array<double,3>> metal_heat_rates{};
-};
+using Checkpoint = EvolutionState;
 
 inline void check_state(const Checkpoint& state,std::size_t points,const Composition& composition) {
   const auto& model=state.model;

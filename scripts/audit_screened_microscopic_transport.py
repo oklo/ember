@@ -191,7 +191,7 @@ def main():
         checks.append(dict(**s,normalized_error=error,column_normalized_error=column_error))
     for p in rejects:
         if 'error' not in replies[p['index']]:failures.append(dict(check='missing_rejection',**p))
-    sources=[Path(__file__),a.probe,family,table,profile,old_input,old_output]+[root/p for p in ['src/screened_microscopic_transport.cpp','include/ember/screened_microscopic_transport.hpp','src/eos_smooth_mixture.cpp','include/ember/eos_smooth_mixture.hpp','src/collision_transport.cpp','src/differential.hpp','src/material_flux.cpp','scripts/screened_microscopic_probe.cpp','src/eos_components.cpp']]
+    sources=[Path(__file__),a.probe,family,table,profile,old_input,old_output]+[root/p for p in ['src/screened_microscopic_transport.cpp','include/ember/screened_microscopic_transport.hpp','src/eos_smooth_mixture.cpp','include/ember/eos_smooth_mixture.hpp','src/collision_transport.cpp','include/ember/detail/differential.hpp','src/material_flux.cpp','scripts/screened_microscopic_probe.cpp','src/eos_components.cpp']]
     report=dict(created_utc=datetime.now(timezone.utc).isoformat(),outcome='passed_hot_physical_faces_and_regular_chemical_parts' if not failures else 'failed',accepted_for_stellar_evolution=False,
         saved_faces=842,altered_faces=12,queries=len(queries),new_native_queries=len(missing),reused_queries=len(queries)-len(missing),derivative_checks=len(checks),regular_saved_states=512,regular_zero_states=12,rejections=rejects,
         maxima=maximum,failures=failures,unresolved_trace_columns=unresolved_trace_columns,checks=checks,faces=[dict(**f,response=replies[f['index']]) for f in faces],

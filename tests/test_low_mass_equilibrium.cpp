@@ -1,4 +1,4 @@
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/eos_cms19.hpp"
 #include "ember/opacity_aesopus.hpp"
 #include "ember/opacity_tops.hpp"

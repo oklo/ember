@@ -6,7 +6,7 @@
 #include "ember/atmosphere.hpp"
 #include "ember/boundary.hpp"
 #include "ember/constants.hpp"
-#include "../examples/lane_emden.hpp"
+#include "ember/lane_emden.hpp"
 #include <algorithm>
 #include <cmath>
 #include <cstdio>

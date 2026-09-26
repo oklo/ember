@@ -2,7 +2,7 @@
 #include "ember/deuterium_burning.hpp"
 #include "ember/constants.hpp"
 #include "../src/metal_cn_source.hpp"
-#include "../apps/evolution_checkpoint.hpp"
+#include "ember/evolution_checkpoint.hpp"
 #include <algorithm>
 #include <chrono>
 #include <cmath>

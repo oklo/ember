@@ -2,6 +2,7 @@
 #include "ember/eos_variable_metal.hpp"
 #include "ember/constants.hpp"
 #include "ember/metal_cn_transport.hpp"
+#include "ember/controller.hpp"
 #include <algorithm>
 #include <cmath>
 #include <limits>
@@ -91,12 +92,11 @@ inline HomogeneousCheck check_initial_convection(const Model& m,const Physics& p
   return out;
 }
 
-struct InventoryCheck {bool pass{};double maximum_species_error{},mass_error_surface{},source_error{},first_law{};};
 // Global baryonic species budgets are independent of internal redistribution.
 // Evaluate physical CN isotope sources, not the material table's GS98 slots.
-inline InventoryCheck check_interval(const Model& old,const EvolutionStep& step,double dt,
+inline EvolutionAudit check_interval(const Model& old,const EvolutionStep& step,double dt,
     const PPCNNetwork& nuclear,double abundance_tolerance) {
-  InventoryCheck out;if(!step.converged || old.m!=step.model.m)return out;
+  EvolutionAudit out;if(!step.converged || old.m!=step.model.m)return out;
   const auto& next=step.model;const auto w=nodal_mass_weights(next);
   std::array<long double,METAL_CN_SIZE> change{},source{},roundoff{};
   long double mass_power=0,mass_roundoff=0,heat=0,neutrinos=0;

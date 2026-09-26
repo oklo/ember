@@ -7,7 +7,7 @@
 #include "ember/opacity_opal.hpp"
 #include "ember/opacity_tops.hpp"
 #include "ember/opacity_blend.hpp"
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include <charconv>
 #include <cstdio>
 #include <cstring>

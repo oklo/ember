@@ -1,7 +1,7 @@
 // Isolated late pre-main-sequence control. The prescribed entropy loss is
 // used ONLY to construct the initial model; actual evolution uses the pp
 // network and the ordinary thermal first law. No initial deuterium reservoir.
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/eos_variable_metal.hpp"
 #include "ember/opacity_mixture.hpp"
 #include "ember/atmosphere_grid.hpp"

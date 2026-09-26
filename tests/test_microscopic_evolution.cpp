@@ -1,5 +1,5 @@
 #include "microscopic_test_transport.hpp"
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/eos_composite.hpp"
 #include "ember/evolution.hpp"
 #include <algorithm>

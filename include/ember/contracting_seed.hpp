@@ -1,5 +1,5 @@
 #pragma once
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/boundary.hpp"
 #include "ember/structure.hpp"
 #include "ember/relaxation.hpp"

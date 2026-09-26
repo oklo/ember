@@ -1,7 +1,7 @@
 #include "ember/metal_cn_transport.hpp"
 #include "ember/constants.hpp"
 #include "../src/metal_cn_source.hpp"
-#include "../apps/evolution_checkpoint.hpp"
+#include "ember/evolution_checkpoint.hpp"
 #include <algorithm>
 #include <cmath>
 #include <cstdio>

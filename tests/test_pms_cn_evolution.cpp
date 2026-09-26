@@ -1,6 +1,6 @@
 // Coupled 0.5-Msun regression with analytic EOS/opacity and a grey
 // boundary. This tests the integration, not a physical atmosphere or track.
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/eos_composite.hpp"
 #include "ember/metal_cn_transport.hpp"
 #include "ember/deuterium_burning.hpp"

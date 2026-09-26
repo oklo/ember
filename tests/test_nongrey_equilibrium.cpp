@@ -1,4 +1,4 @@
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/eos_helmholtz.hpp"
 #include "ember/atmosphere_table.hpp"
 #include "ember/opacity_aesopus.hpp"

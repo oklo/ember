@@ -214,6 +214,10 @@ if(Python3_Interpreter_FOUND)
   add_test(NAME nongrey_import COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test_nongrey_import.py)
   add_test(NAME evolution_restart COMMAND ${Python3_EXECUTABLE}
     ${CMAKE_CURRENT_SOURCE_DIR}/test_evolution_restart.py $<TARGET_FILE:ember-evolve> ${CMAKE_SOURCE_DIR}/data)
+  add_test(NAME lifetime_restart COMMAND ${Python3_EXECUTABLE}
+    ${CMAKE_CURRENT_SOURCE_DIR}/test_lifetime_restart.py $<TARGET_FILE:ember-evolve>
+    ${CMAKE_SOURCE_DIR}/data/production/configuration.txt)
+  set_tests_properties(lifetime_restart PROPERTIES TIMEOUT 240 LABELS "material-data;integration")
 endif()
 
 add_executable(physical_heat_probe ../scripts/physical_heat_probe.cpp)

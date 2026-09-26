@@ -131,7 +131,7 @@ def main():
     if max(maximum[k] for k in ['old_state','old_potential','enthalpy_identity','material_delta'])>1e-10:
         failures.append(dict(reason='retained value tolerance',maximum=maximum))
     sources=[args.probe,family,cached_input,cached_output,profile,Path(__file__),
-             root/'src/eos_smooth_mixture.cpp',root/'include/ember/eos_smooth_mixture.hpp',root/'src/differential.hpp',
+             root/'src/eos_smooth_mixture.cpp',root/'include/ember/eos_smooth_mixture.hpp',root/'include/ember/detail/differential.hpp',
              root/'scripts/native_heat_probe.cpp',Path('/tmp/ember-native-heat-base-sources-v1/manifest.json')]
     report=dict(created_utc=datetime.now(timezone.utc).isoformat(),outcome='passed_native_heat_derivatives' if not failures else 'failed_native_heat_controls',
         accepted_for_stellar_evolution=False,maximum_errors=maximum,failures=failures,checks=checks,composition_join_checks=join_checks,

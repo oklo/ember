@@ -1,6 +1,6 @@
 #pragma once
 #include "ember/microscopic_transport.hpp"
-#include "../src/differential.hpp"
+#include "ember/detail/differential.hpp"
 #include <cmath>
 #include <stdexcept>
 

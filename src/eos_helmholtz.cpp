@@ -1,7 +1,7 @@
 #include "ember/eos_helmholtz.hpp"
 #include "ember/constants.hpp"
 #include "ember/interp.hpp"
-#include "differential.hpp"
+#include "ember/detail/differential.hpp"
 #include "numeric_table_data.hpp"
 #include <algorithm>
 #include <cmath>

@@ -1,7 +1,7 @@
 #pragma once
 #include "ember/constants.hpp"
 #include "ember/structure.hpp"
-#include "differential.hpp"
+#include "ember/detail/differential.hpp"
 #include <stdexcept>
 
 namespace ember::detail {

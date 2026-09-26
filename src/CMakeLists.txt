@@ -35,6 +35,7 @@ add_library(ember
   henyey.cpp
   relaxation.cpp
   evolution.cpp
+  controller.cpp
   mixing.cpp
   material_transport.cpp
   material_thermodynamics.cpp

@@ -1,6 +1,6 @@
 #include "ember/collision_transport.hpp"
 #include "ember/gs98_mixture.hpp"
-#include "differential.hpp"
+#include "ember/detail/differential.hpp"
 #include <type_traits>
 #include <algorithm>
 #include <bit>

@@ -1,4 +1,4 @@
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/atmosphere_grid.hpp"
 #include "ember/constants.hpp"
 #include <algorithm>

@@ -3,7 +3,7 @@
 // ideal gas, constant opacity/heating, and an explicitly artificial atmosphere
 // admit an independent n=3 Lane-Emden solution with grad_rad=1/4 everywhere.
 #include "ember/atmosphere.hpp"
-#include "lane_emden.hpp"
+#include "ember/lane_emden.hpp"
 #include "ember/constants.hpp"
 #include "ember/model.hpp"
 #include "ember/nuclear.hpp"

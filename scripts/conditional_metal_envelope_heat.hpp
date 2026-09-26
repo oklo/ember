@@ -9,7 +9,7 @@
 #include "ember/opacity.hpp"
 #include "ember/conduction.hpp"
 #include "ember/constants.hpp"
-#include "../src/differential.hpp"
+#include "ember/detail/differential.hpp"
 #include <span>
 #include <atomic>
 #include <stdexcept>

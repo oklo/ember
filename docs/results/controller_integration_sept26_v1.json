@@ -1,0 +1,40 @@
+{
+  "created_utc": "2026-09-26T23:12:04.055435+00:00",
+  "scope": "Extract the accepted-step controller, state and checkpoint support into the reusable library without changing numerical or physics selections.",
+  "original": "out/convective-transport-sept26-v1/v4/contraction",
+  "replay": "out/controller-integration-sept26-v1/contraction",
+  "executable_sha256": "ba9771f279578816c59492c5b3f2fcc43445b468f67998d61f010ab2bf76fb5a",
+  "saved_models": 1020,
+  "accepted": 1019,
+  "rejected": 0,
+  "endpoint_years": 1000000000.0,
+  "history_equal_except": [
+    "cpu_seconds"
+  ],
+  "original_history_sha256": "ac9a34330379e28565d6d74d3ae8756ae3ae3a4e70bcfa28fd12e8c8c125edf9",
+  "replay_history_sha256": "d1b852b5bed2274f4f744737f11b61f21127378c69d21e08db8697d726fe2806",
+  "checkpoints": [
+    {
+      "file": "seed.checkpoint",
+      "physical_payload_identical": true,
+      "physical_payload_sha256": "fb7d5b0d2e84b4385f3d0b259c802dc3690c4c5197e80d90bab1f64d8fb97681"
+    },
+    {
+      "file": "final.checkpoint",
+      "physical_payload_identical": true,
+      "physical_payload_sha256": "53f86a35c0360a5695f04aeb11633d4cb035dfec2d5d8e9bc08562c472df39e0"
+    }
+  ],
+  "ctest": {
+    "passed": 71,
+    "total": 71,
+    "log": "out/unified-evolution-sept25-v1/controller-tests.log",
+    "log_sha256": "13674b5d400950693db85b0b90778babea357152ebe7c763dafb3622632e4b49",
+    "new_test": "lifetime_restart: exact split/full replay and corrupt checkpoint rejection"
+  },
+  "limitations": [
+    "Contraction regression test, not an extension of the 4-Gyr retained track.",
+    "The atmosphere composition proxy and radiative transport selection still block the full continuous lifetime.",
+    "No tolerance, audit, rejection or timestep rule was changed."
+  ]
+}

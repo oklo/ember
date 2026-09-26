@@ -1,5 +1,5 @@
 #pragma once
-#include "lane_emden.hpp"
+#include "ember/lane_emden.hpp"
 #include "ember/atmosphere.hpp"
 #include "ember/constants.hpp"
 #include "ember/model.hpp"

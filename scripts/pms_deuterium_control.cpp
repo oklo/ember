@@ -1,6 +1,6 @@
 // Numerical coupling control: explicit D, analytic fully ionized EOS and
 // constant opacity. This is NOT a physical low-mass PMS boundary or track.
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/eos_composite.hpp"
 #include "ember/deuterium_burning.hpp"
 #include <ctime>

@@ -4,7 +4,7 @@
 // CLI: six material inputs, atmosphere, entropy-loss rate, years,
 //      nine-species composition file, radius/Rsun, trial Teff, threads, work,
 //      optional --seed-only (no evolutionary interval is attempted).
-#include "../examples/stellar_seed.hpp"
+#include "ember/stellar_seed.hpp"
 #include "ember/eos_variable_metal.hpp"
 #include "ember/opacity_mixture.hpp"
 #include "ember/atmosphere_grid.hpp"
@@ -13,7 +13,7 @@
 #include "ember/deuterium.hpp"
 #include "ember/eos_deuterium.hpp"
 #include "ember/atmosphere_deuterium.hpp"
-#include "../apps/evolution_checkpoint.hpp"
+#include "ember/evolution_checkpoint.hpp"
 #include <ctime>
 #include <fstream>
 #include <sstream>
