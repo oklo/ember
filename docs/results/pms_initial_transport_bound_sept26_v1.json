@@ -1,0 +1,127 @@
+{
+  "created_utc": "2026-09-26T15:41:59.835354+00:00",
+  "scope": "Initial-D homogeneous-convection/material-heat approximation on saved PMS structures. Does not validate microscopic kinetic heat or partially ionized drift.",
+  "selected_for_common_driver_early_phase": true,
+  "conditions": {
+    "entire_star_convective": true,
+    "composition_exactly_homogeneous": true,
+    "initial_D_maximum": 0.0001,
+    "gross_species_heat_over_local_L_maximum": 0.0001,
+    "estimated_D_nonuniformity_maximum": 1e-08,
+    "stop_on_violation": true,
+    "no_species_reset": true
+  },
+  "sampled_profiles": 12,
+  "profiles_with_nonzero_D": 9,
+  "maximum_net_heat_over_local_L": 3.462578934258963e-05,
+  "maximum_gross_heat_over_local_L": 7.880710609338808e-05,
+  "maximum_heat_over_surface_L": 2.0023642194010797e-05,
+  "convective_travel_years": [
+    0.9535003843084581,
+    1.4145912807953256
+  ],
+  "minimum_D_burn_years": [
+    1948.7744662076238,
+    36869805.761626594
+  ],
+  "maximum_D_enthalpy_finite_difference_error_over_cpT": 6.245243388812195e-08,
+  "maximum_exterior_flux_balance_error": 1.5408028663361406e-15,
+  "fixed_composition_thermal_controls": [
+    {
+      "model": "model-183",
+      "age_years": 1005857.4998910311,
+      "step_years": 10000,
+      "coupled_first_law": 3.9968028886505635e-15,
+      "coupled_nuclear_mass": -3.1304031589129977e-09,
+      "material_heat_fraction": 3.2270207321982364e-05,
+      "arms": [
+        {
+          "heat_multiplier": 0,
+          "maximum_log_structure_change": 0,
+          "Teff_change_K": 0,
+          "surface_luminosity_fractional_change": 0,
+          "iterations": 1,
+          "residual": 2.397726461822458e-11
+        },
+        {
+          "heat_multiplier": 1,
+          "maximum_log_structure_change": 8.355982572538778e-12,
+          "Teff_change_K": -1.025910023599863e-09,
+          "surface_luminosity_fractional_change": -3.745892485085278e-12,
+          "iterations": 1,
+          "residual": 2.3984370045582182e-11
+        },
+        {
+          "heat_multiplier": 10,
+          "maximum_log_structure_change": 8.355804936854838e-11,
+          "Teff_change_K": -1.0286839824402705e-08,
+          "surface_luminosity_fractional_change": -3.745892485085278e-11,
+          "iterations": 1,
+          "residual": 2.398081733190338e-11
+        }
+      ],
+      "cpu_seconds": 4.429782
+    },
+    {
+      "model": "model-218",
+      "age_years": 2504877.9575604326,
+      "step_years": 10000,
+      "coupled_first_law": 1.3100631690576847e-14,
+      "coupled_nuclear_mass": -3.6699605354684195e-08,
+      "material_heat_fraction": 3.461138577162842e-05,
+      "arms": [
+        {
+          "heat_multiplier": 0,
+          "maximum_log_structure_change": 0,
+          "Teff_change_K": 0,
+          "surface_luminosity_fractional_change": 0,
+          "iterations": 1,
+          "residual": 1.8214763031210168e-11
+        },
+        {
+          "heat_multiplier": 1,
+          "maximum_log_structure_change": 4.119371510569181e-12,
+          "Teff_change_K": -5.406946002040058e-10,
+          "surface_luminosity_fractional_change": -1.928901482983747e-12,
+          "iterations": 1,
+          "residual": 1.821653938804957e-11
+        },
+        {
+          "heat_multiplier": 10,
+          "maximum_log_structure_change": 4.118838603517361e-11,
+          "Teff_change_K": -5.435140337795019e-09,
+          "surface_luminosity_fractional_change": -1.9289680963652245e-11,
+          "iterations": 1,
+          "residual": 1.822009210172837e-11
+        }
+      ],
+      "cpu_seconds": 4.481483
+    }
+  ],
+  "thermal_control_limitations": "All arms use the same thermal stencil. Prescribed Q is fixed to the burning profile, not a self-consistent transport evolution. Net effect remains below the nonlinear structure tolerances even at 10x Q; tiny reported differences are not an absolute stellar-accuracy claim.",
+  "one_Gyr_pp_heat_over_local_L": 0.0004776527759940848,
+  "sha256": {
+    "out/pms-material-heat-sept26-v1/plan.json": "b1317da49bb2d9d0e9433323384bd1ede36522c7f14961cb58785d20b01f8e69",
+    "out/pms-material-heat-sept26-v1/probe.cpp": "fa234523be7e3d5ed2ae492a5fa350dcd802198c02d80492e51b697f8a88bb96",
+    "out/pms-material-heat-sept26-v1/probe": "b6f107f89f9ccdadadabdd636bc506a7b38cc75fb1b1f60034610a34fe470f62",
+    "out/pms-material-heat-sept26-v1/completion.json": "5e7e779cf4f2cfefdad824450170596367564d3fe37b81a7bad4f444034f0651",
+    "out/pms-material-heat-sept26-v1/thermal_control.cpp": "0f26d181e30c89c7775f0c53a5cf1612ac8e65d3ec82c1b6c9a006e9a5d574bd",
+    "out/pms-material-heat-sept26-v1/thermal_control": "42fa73796c91b73ae7cec965c70ec0d35f4a1511959bd30c409f06e8f9734c7b",
+    "out/pms-material-heat-sept26-v1/thermal-plan.json": "97d6bd4ff85b8ccaab383687b42ec675447f16f0f3095e7f87412cfe64740099",
+    "out/pms-material-heat-sept26-v1/thermal-completion.json": "d2f57710a8d4b64f3b2b09416b88c4267f626246be1e1e0908b883c9ff2a661f",
+    "out/pms-material-heat-sept26-v1/model-0.json": "6d6d75cb4dd276483e0c162bb1fa1fa72766dd8b43114d57ba56795321cffa29",
+    "out/pms-material-heat-sept26-v1/model-49.json": "0346eed21f4b32c0fa5c715197abd4411b9e3a4d8e1e380263f0db75b7e789ab",
+    "out/pms-material-heat-sept26-v1/model-112.json": "fe97f816073c0e72ee0618a739ae7178edf0e69326e883fa6e29cdc88e1e7fe0",
+    "out/pms-material-heat-sept26-v1/model-164.json": "33dc751fcafe7a6640ffb689c8d90423e1b4b220debac4e673bf7deea60cb973",
+    "out/pms-material-heat-sept26-v1/model-183.json": "d09aabf70acdbd1d52038dc08e137cf5ceb4784c19d96f26a8f98a511d5b8671",
+    "out/pms-material-heat-sept26-v1/model-188.json": "0f70088c2fa37673d36b00bf1c54b8f0202f520803bbb43e05f6c7e0d90ebb23",
+    "out/pms-material-heat-sept26-v1/model-196.json": "4a4d1bb73309329e1e76fd1b8da13d1c1d89a7dd5baadfef4f1bc5bbc0d005cd",
+    "out/pms-material-heat-sept26-v1/model-218.json": "dec50326ad939d2fbbb3c8f4e3bb4d03115660884aa1539b5aa8b7ea93fddfa3",
+    "out/pms-material-heat-sept26-v1/model-263.json": "6c9f0381d245a24c931e489ba88a6915487656ffaa89380fbbf24546da791329",
+    "out/pms-material-heat-sept26-v1/model-492.json": "21da0641b7ca4b0b26eab5c53d04ea22049c520db0921872731d482fb5bf8eab",
+    "out/pms-material-heat-sept26-v1/model-881.json": "212bc2fd1511cadb157d12c09f0567a34a53fcfe2f7944386f91f2d235cb413b",
+    "out/pms-material-heat-sept26-v1/model-3881.json": "6d13212dd8c482437bc51cdb7bab5d6ebcb5c1e37955c44baeb6fd97ff37f8a7",
+    "out/pms-material-heat-sept26-v1/model-183-thermal.json": "d1df023ad95c4a75160e585ffcf0a662562c1db9a26a6e056cabc8aefc49db4f",
+    "out/pms-material-heat-sept26-v1/model-218-thermal.json": "cca7b5bd9847d9f9e6a03880c4cbaffc0a3892b55720c44369de5ec77184042d"
+  }
+}

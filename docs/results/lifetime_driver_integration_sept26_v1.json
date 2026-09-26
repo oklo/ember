@@ -1,0 +1,95 @@
+{
+  "created_utc": "2026-09-26T15:52:25.381812+00:00",
+  "scope": "Actual 0.1 solar-mass Hayashi-seeded common-driver D/pp/CN contraction test through exhaustion of initial D at 6.707 Myr; cool screened-transport support prevents further advance. Full production track incomplete.",
+  "entry_point": "ember-evolve --lifetime",
+  "endpoint": {
+    "years": 6706556.630840601,
+    "step_years": 39999.67656084811,
+    "accepted": 433,
+    "rejected": 0,
+    "radius_Rsun": 0.5145833951813836,
+    "Teff_K": 2994.2269577946954,
+    "luminosity_Lsun": 0.019175384402011563,
+    "nuclear_fraction": 1.0417760554698156e-07,
+    "central_T_K": 1530792.5843315446,
+    "H_mass_g": 1.391799224295017e+32,
+    "He3_mass_g": 1.5699253295048326e+28,
+    "D_mass_g": 0,
+    "surface_X": 0.6999559018515692,
+    "surface_Z": 0.02,
+    "error_norm": 0.6295349895246716,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 1.4159380117964708e-10,
+    "gross_mixing_heat_fraction": 2.0492664266665673e-10,
+    "convective_travel_years": 1.357597896149525,
+    "cpu_seconds": 72.023223
+  },
+  "number_of_retained_history_rows": 434,
+  "accepted_intervals": 433,
+  "rejected_intervals": 8,
+  "initial_D_burned_fraction": 1.0,
+  "maximum_first_law_error": 8.734828416123719e-10,
+  "maximum_inventory_error": 1.0104702837676225e-15,
+  "maximum_mass_error_over_surface_luminosity": 1.5966713350329622e-08,
+  "maximum_omitted_mixing_heat_fraction": 3.465888970632305e-05,
+  "maximum_gross_mixing_heat_fraction": 7.89608356759014e-05,
+  "retained_calculation_wall_seconds": 175.029693458,
+  "restart": {
+    "checkpoint_bytes_identical": true,
+    "history_fields_identical_except_cpu": true,
+    "full_history_rows": 8,
+    "split_history_rows": 8
+  },
+  "seed": {
+    "compared": "Independent contracting-seed construction in common driver versus original PMS seed. CN inventories differ by explicit initialization; luminosity storage conventions differ.",
+    "maximum_mass_coordinate_relative_difference": 6.217248937900877e-15,
+    "maximum_log_structure_difference": 6.217799608521091e-10,
+    "surface_radius_fractional_difference": 8.058620437623176e-11,
+    "surface_luminosity_fractional_difference": -8.148437480315351e-11
+  },
+  "tests": {
+    "passed": 11,
+    "logs": [
+      "regression-tests.log",
+      "finite-checkpoint-tests.log",
+      "inventory-checkpoint-tests.log"
+    ]
+  },
+  "numerical_correction": {
+    "old_solve_tolerance": 1e-14,
+    "new_solve_tolerance": 1e-15,
+    "unchanged_inventory_tolerance": 1e-14,
+    "unchanged_first_law_and_mass_over_surface_tolerance": 2e-07,
+    "old_failure_record": "out/lifetime-driver-sept26-v1/v2/deuterium-finish/attempts.jsonl",
+    "reason": "An independent global inventory discrepancy slightly exceeded the nonlinear-solve tolerance. Separate the two controls and tighten the solve; do not relax the physical acceptance limits."
+  },
+  "limitations": [
+    "Initial homogeneous convection and omitted mixing heat are checked; cool microscopic kinetic heat is not established.",
+    "Post-D screened finite transport still rejects unsupported cool envelopes.",
+    "Existing atmosphere is a bounded composition-dependent gas family, not complete continuous-lifetime coverage.",
+    "Known cooler enriched and hotter EOS gaps remain.",
+    "No long-term frontier or He3-flash verdict follows."
+  ],
+  "source_sha256": {
+    "apps/CMakeLists.txt": "a8799e6e0fb4cb59e931b7b055f0a74763ff7555925dbd45e896d066aa4ae6b9",
+    "apps/evolve.cpp": "d55bf2f592d7bf5187f2103c35c08dc0811c958f006fd2980c3b08b750df5b65",
+    "apps/contracting_seed.hpp": "c86c7c00030231956bf7c5574911f189f170ae63018884e068a9d0398c71f912",
+    "apps/lifetime_driver.hpp": "69c9b9fd8af8df73587e506c6d9255131f67e67e172618bd124ac35d32b23ff1",
+    "apps/lifetime_driver.cpp": "ed8ecf6fa75f2a6dab922227493ece39e6352341217cccf8b5c9fd2a60a7e384",
+    "apps/lifetime_checks.hpp": "66a5c4e367b3a83ffe550c199c56d9f8713c2378e0609592287285ec50e8ac08"
+  },
+  "evidence_sha256": {
+    "out/lifetime-driver-sept26-v1/v3/ember-evolve": "ae60182dec822fd146c1241ad02b831fb4f38d0803fd2171abf12f99b42fb96a",
+    "out/lifetime-driver-sept26-v1/v3/configuration.txt": "b9bc30d115b33c5fe8911e04eab2bc8df2d9e1f58af18efc43a97b837a12b31f",
+    "out/lifetime-driver-sept26-v1/v3/full/final.checkpoint": "d43e5af300b070f57be92d7569d9a163947e21235c0f2f12b1a57f5abb87a841",
+    "out/lifetime-driver-sept26-v1/v3/contraction/final.checkpoint": "52e7265d8b1df153640fe27cacc7fea697bb72c9e5166c2380c9366a90dbd750",
+    "out/lifetime-driver-sept26-v1/v3/restart-comparison.json": "ee2caaee465a8d6e5c0c7203c33b9a2064ac8330a20c166b04e0a0deb0ded9f9",
+    "out/lifetime-driver-sept26-v1/changes.patch": "aed3101ab9d0b29d201d24924bca7297004e40b9f3d7eb460f95146452914b94",
+    "out/lifetime-driver-sept26-v1/v3/after-deuterium/final.checkpoint": "147ec1b752e7667395779f281aa75384c1150600eb5a3d45e295552ef52d62db",
+    "out/lifetime-driver-sept26-v1/v3/after-deuterium/report.json": "a0258ef2f50b1f21b5bdb23ace25db64e653d41e30249c3bbbe520a459270183",
+    "out/lifetime-driver-sept26-v1/v3/after-deuterium/attempts.jsonl": "bad2888582f825b961f2c5457134939366bf784a91d6782974985fe05c5c0653"
+  },
+  "retained_calculation_cpu_seconds_including_three_setups": 254.48344,
+  "stop_reason": "repeated step rejection: screened microscopic transport: temperature below the declared hot domain",
+  "transition_failure": "D becomes exactly zero through underflow of the solved trace abundance, without manually removing fuel. Next finite screened-transport attempt rejects existing cool temperatures. Eight immediate retries consume 0.0114 CPU s and leave the accepted star unchanged; the next driver should preflight permanent coverage errors once."
+}
