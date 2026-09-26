@@ -8,11 +8,30 @@ Ember is a one-dimensional stellar evolution code written in C++23. It calculate
 
 The target is one continuous calculation from a Hayashi starting model through hydrogen burning and helium-white-dwarf cooling to **100 K**. Later environmental heating and nucleon decay are conditional extensions. The same code should determine which lower-mass objects sustain hydrogen burning and which cool as brown dwarfs. The complete calculation is not yet available.
 
-The contraction calculation reaches **1 Gyr**, **2765 K**, **0.1264 solar radii** and **8.414e-4 solar luminosities**. Nuclear burning supplies **99.23%** of its light. The sequence has **3881 accepted intervals**, with **23.31 CPU minutes** of recorded model calculation, excluding atmosphere preparation and separate controls. It includes homogeneous convective mixing and initial-deuterium/pp burning. The [new PMS figure](docs/reports/2026-09-26/pms_main_sequence.pdf) shows its trajectory and the transition to sustained hydrogen burning.
+The common evolution program now follows the same star from a Hayashi start
+to **4 Gyr**, with initial D/pp/CN burning, plasma losses and checked
+whole-star convective mixing. Composition heat is included after initial D
+exhaustion. At 1 Gyr it has **2765 K**, **0.1264 solar radii** and **99.17%**
+nuclear support; by 4 Gyr it sustains hydrogen burning. The retained sequence
+has **1034 accepted steps**, no rejected steps, and **9.785 CPU minutes**
+including material loading, excluding atmosphere preparation and controls.
+The [PMS figure](docs/reports/2026-09-26/pms_main_sequence.pdf) shows contraction
+through main-sequence arrival. [Transport and conservation assessment](docs/results/convective_transport_integration_sept26_v1.json).
 
-The common evolution engine now combines initial deuterium and explicit hydrogen/helium/carbon/nitrogen inventories, finite convective mixing, and material heat transport. A smooth metal-composition EOS extension supports all **512** main-sequence reference zones while preserving the checked lower-metallicity results. A bounded **1-million-year** integration with finite mixing and material heat converges on the actual 0.1-solar-mass structure; one full step and two half steps differ by **3.856e-8** in logarithmic structure variables. This control omits microscopic drift and does not extend the production trajectory. Some EOS coverage, cool transport and consistent atmospheres remain unfinished.
+On the quiet main sequence, a matched timestep-ceiling increase reduces
+1–4-Gyr evolution from **301** to **15** accepted steps and uses **4.534 times
+less CPU**. The surface-temperature difference is **6.936e-5 K**, with all
+local accuracy and independent conservation checks unchanged.
+[Matched comparison](docs/results/lifetime_step_ceiling_sept26_v1.json).
 
-The common driver carries a new Hayashi model through **6.707 Myr**, to **2994 K** and **0.5146 solar radii**, exhausting initial deuterium. Its **433** accepted intervals pass isotope and energy checks, and exact restart replay passes. The retained calculation uses **4.241 CPU minutes**, including three material-loading stages. Homogeneous early mixing is bounded by its travel time and estimated carried heat. The next step stops because the screened transport prescription does not cover the cool envelope; the full continuous production track remains incomplete. [Driver result](docs/results/lifetime_driver_integration_sept26_v1.json), [early approximation](docs/results/pms_initial_transport_bound_sept26_v1.json).
+The well-mixed approximation is checked against convective times, estimated
+microscopic separation and stellar sensitivity to uncertain heat transport.
+It rejects a radiative species boundary rather than silently suppressing its
+flux. Radiative microscopic transport, extended atmosphere composition
+coverage and the full continuous lifetime remain unfinished. New gas-opacity
+sources at **X = 0.69** and **X = 0.65** are in preparation; they are not yet
+accepted atmosphere boundaries. Deuterium exhaustion no longer forces an
+unsupported cool diffusion calculation.
 
 Separate long-term calculations include microscopic diffusion and metal settling. The pre-flash calculation reaches **4.002 Tyr**, **4612 K**, and central hydrogen **X = 3.528e-8**. Hydrogen burning continues outside the depleted core. A continuation with a white-dwarf atmosphere develops a helium-3 shell pulse.
 

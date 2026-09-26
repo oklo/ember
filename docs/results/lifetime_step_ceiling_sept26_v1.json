@@ -1,0 +1,38 @@
+{
+  "scope": "Matched 1 to 4 Gyr comparison; only the maximum timestep changes from 10 Myr to 1 Gyr, retaining all local error tolerances, physical inputs, executable and independent conservation budgets.",
+  "configuration_migration": "Every old input identity verified; every configuration item except maximum_step_years identical; complete numerical checkpoint state text identical. This is an explicitly reviewed numerical-configuration change, not an exact-configuration restart.",
+  "larger_steps": {
+    "requested_age_reached": 1,
+    "age_years": 4000000000,
+    "accepted_this_invocation": 15,
+    "accepted_total": 1034,
+    "rejected_total": 0,
+    "stop_reason": "requested age",
+    "cpu_seconds": 97.151612,
+    "wall_seconds": 80.155975292,
+    "full_production_track_validated": false,
+    "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+  },
+  "reference_CPU_seconds": 440.517362,
+  "reference_wall_seconds": 354.010871791,
+  "CPU_speedup": 4.534328900275994,
+  "wall_speedup": 4.416525037607923,
+  "endpoint_differences": {
+    "Teff_K": 6.93552437951439e-05,
+    "radius_Rsun": 9.066810219282573e-09,
+    "luminosity_Lsun": 2.049247182535352e-10,
+    "surface_X": -2.796200615495792e-08
+  },
+  "maximum_log_structure_difference": 3.048667327476551e-07,
+  "maximum_abundance_difference": 2.796200615495792e-08,
+  "all_intervals_pass": true,
+  "maximum_step_years_reached": 495533705.5714602,
+  "maximum_error_norm": 0.6348535364075758,
+  "source_sha256": {
+    "out/convective-transport-sept26-v1/v4/larger-steps/final.checkpoint": "637ab768d0d57c1e28543a5211aa07c2e9834c3db9db487756a4c6c42058f876",
+    "out/convective-transport-sept26-v1/v4/configuration-larger-steps.txt": "18f56f2d87cef0fe0c05860bad6c63e9938ea94594b2d4abf3f19cf8e2e1e541",
+    "out/convective-transport-sept26-v1/v4/larger-steps-start.checkpoint": "1170c3647865e4724831af6b7eedc3f0d1a708ce8f9badee9078935819189832",
+    "out/convective-transport-sept26-v1/change_step_ceiling.cpp": "1f7a6cd64f064fcfdd65eab89ff406b50016843d64637495c316ec7deca6f992"
+  },
+  "interpretation": "The contraction ceiling wastes steps on the quiet main sequence. This comparison does not set a safe flash timestep or a whole-lifetime runtime."
+}

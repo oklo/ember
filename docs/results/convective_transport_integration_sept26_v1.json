@@ -1,0 +1,343 @@
+{
+  "created_utc": "2026-09-26T16:26:22.438404+00:00",
+  "scope": "Common Hayashi-started D/pp/CN with plasma losses and checked whole-star instantaneous convection, including composition heat after D. This does not establish radiative settling or the complete track.",
+  "endpoint": {
+    "years": 1000000000,
+    "step_years": 5695085.561208583,
+    "accepted": 1019,
+    "rejected": 0,
+    "radius_Rsun": 0.12642801152308475,
+    "Teff_K": 2764.875872738984,
+    "luminosity_Lsun": 0.0008415556649946677,
+    "nuclear_fraction": 0.9917175183071084,
+    "central_T_K": 4622699.509071963,
+    "H_mass_g": 1.3914785103926062e+32,
+    "He3_mass_g": 4.777063472306287e+28,
+    "D_mass_g": 0,
+    "surface_X": 0.6997946102048447,
+    "surface_Z": 0.02000000000011757,
+    "error_norm": 0.013172621731172285,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0.0007418833491541686,
+    "burn_gradient_estimate": 4.846738767780546e-13,
+    "drift_gradient_proxy": 8.462697766457852e-07,
+    "kinetic_heat_proxy": 0.016063649184773595,
+    "convective_travel_years": 1.123440328873474,
+    "cpu_seconds": 489.943492
+  },
+  "start": {
+    "years": 0,
+    "step_years": 0,
+    "accepted": 0,
+    "rejected": 0,
+    "radius_Rsun": 1.593984009986116,
+    "Teff_K": 2864.092496089132,
+    "luminosity_Lsun": 0.15403157526853067,
+    "nuclear_fraction": 0.0007557826079359517,
+    "central_T_K": 539751.0878665983,
+    "H_mass_g": 1.3918284526936216e+32,
+    "He3_mass_g": 6.930733932878761e+27,
+    "D_mass_g": 5.845679501313214e+27,
+    "surface_X": 0.6999706012347481,
+    "surface_Z": 0.02,
+    "error_norm": 0,
+    "initial_D_approximation": 1,
+    "omitted_mixing_heat_fraction": 2.4948058007270615e-07,
+    "gross_mixing_heat_fraction": 6.220848508587373e-07,
+    "burn_gradient_estimate": 1.2248673866200292e-13,
+    "drift_gradient_proxy": 5.405660346595465e-08,
+    "kinetic_heat_proxy": 2.3393286437467117e-06,
+    "convective_travel_years": 1.414586347872014,
+    "cpu_seconds": 6.352492
+  },
+  "run": {
+    "requested_age_reached": 1,
+    "age_years": 1000000000,
+    "accepted_this_invocation": 1019,
+    "accepted_total": 1019,
+    "rejected_total": 0,
+    "stop_reason": "requested age",
+    "cpu_seconds": 489.950107,
+    "wall_seconds": 331.4750875,
+    "full_production_track_validated": false,
+    "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+  },
+  "all_accepted_intervals_pass": true,
+  "maximum_accepted": {
+    "species_error": 1.052389534045654e-15,
+    "mass_error_surface": 1.741436370013197e-08,
+    "first_law": 9.710432458120977e-10
+  },
+  "maximum_guards": {
+    "burn_gradient_estimate": 4.827337955718876e-11,
+    "drift_gradient_proxy": 8.462697766457852e-07,
+    "kinetic_heat_proxy": 0.017869246420088365
+  },
+  "restart_replay": {
+    "checkpoint_bytes_identical": true,
+    "history_identical_excluding_measured_CPU": true,
+    "records": 3
+  },
+  "transport_controls": {
+    "after-D": {
+      "profile": "after-D",
+      "mixing_travel_years": 1.3575956485300051,
+      "maximum_microscopic_over_convective_D_proxy": 2.460216936363219e-09,
+      "integrated_drift_gradient_proxy": 1.919880090157769e-07,
+      "gross_kinetic_heat_proxy_over_L": 0.0002490178650537587,
+      "arms": [
+        {
+          "arm": 0,
+          "added_conductivity_scale": 0,
+          "prescribed_kinetic_heat_fraction": 0,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 0,
+          "full_two_half_difference": 3.996875020284563e-06,
+          "Teff_change_K": 0,
+          "surface_L_fractional_change": 0,
+          "maximum_abundance_difference": 0,
+          "first_law": -5.995204332975845e-14,
+          "convective_mass": 0.9999999999999997
+        },
+        {
+          "arm": 1,
+          "added_conductivity_scale": 1,
+          "prescribed_kinetic_heat_fraction": 0,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 2.616840077962479e-10,
+          "full_two_half_difference": 3.996875023837276e-06,
+          "Teff_change_K": 1.1809970601461828e-07,
+          "surface_L_fractional_change": 1.598574606020975e-10,
+          "maximum_abundance_difference": 0,
+          "first_law": -2.1760371282653068e-14,
+          "convective_mass": 0.9999999999999997
+        },
+        {
+          "arm": 2,
+          "added_conductivity_scale": 10,
+          "prescribed_kinetic_heat_fraction": 0,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 2.616960870227558e-09,
+          "full_two_half_difference": 3.996875052258986e-06,
+          "Teff_change_K": 1.1811575859610457e-06,
+          "surface_L_fractional_change": 1.598760679399902e-09,
+          "maximum_abundance_difference": 0,
+          "first_law": -1.0191847366058937e-13,
+          "convective_mass": 0.9999999999999997
+        },
+        {
+          "arm": 3,
+          "added_conductivity_scale": 0,
+          "prescribed_kinetic_heat_fraction": 0.05,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 0.000693125495228486,
+          "full_two_half_difference": 4.0000901719849935e-06,
+          "Teff_change_K": 0.3144811483416561,
+          "surface_L_fractional_change": 0.0004214619449769419,
+          "maximum_abundance_difference": 0,
+          "first_law": 3.426148253993233e-13,
+          "convective_mass": 0.9999999999999997
+        },
+        {
+          "arm": 4,
+          "added_conductivity_scale": 0,
+          "prescribed_kinetic_heat_fraction": -0.05,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 0.0006813218319745573,
+          "full_two_half_difference": 3.993711125360733e-06,
+          "Teff_change_K": -0.3090360551077538,
+          "surface_L_fractional_change": -0.0004140355535124929,
+          "maximum_abundance_difference": 0,
+          "first_law": 9.658940314238862e-14,
+          "convective_mass": 0.9999999999999997
+        }
+      ],
+      "cpu_seconds": 6.083358
+    },
+    "main-sequence": {
+      "profile": "main-sequence",
+      "mixing_travel_years": 1.1234475568953348,
+      "maximum_microscopic_over_convective_D_proxy": 6.5802869825942866e-09,
+      "integrated_drift_gradient_proxy": 8.463176646560309e-07,
+      "gross_kinetic_heat_proxy_over_L": 0.01606234755995755,
+      "arms": [
+        {
+          "arm": 0,
+          "added_conductivity_scale": 0,
+          "prescribed_kinetic_heat_fraction": 0,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 0,
+          "full_two_half_difference": 3.830610051380745e-08,
+          "Teff_change_K": 0,
+          "surface_L_fractional_change": 0,
+          "maximum_abundance_difference": 0,
+          "first_law": 3.5559761801806644e-09,
+          "convective_mass": 0.999999999999999
+        },
+        {
+          "arm": 1,
+          "added_conductivity_scale": 1,
+          "prescribed_kinetic_heat_fraction": 0,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 1.578472463847902e-09,
+          "full_two_half_difference": 3.830610584287797e-08,
+          "Teff_change_K": 9.664427125244401e-07,
+          "surface_L_fractional_change": 1.4001737547175708e-09,
+          "maximum_abundance_difference": 3.2526065174565133e-19,
+          "first_law": 3.5565153044814224e-09,
+          "convective_mass": 0.999999999999999
+        },
+        {
+          "arm": 2,
+          "added_conductivity_scale": 10,
+          "prescribed_kinetic_heat_fraction": 0,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 1.578523090017825e-08,
+          "full_two_half_difference": 3.8306176897151545e-08,
+          "Teff_change_K": 9.664683602750301e-06,
+          "surface_L_fractional_change": 1.4002257797685047e-08,
+          "maximum_abundance_difference": 3.3881317890172014e-18,
+          "first_law": 3.5559484246050488e-09,
+          "convective_mass": 0.999999999999999
+        },
+        {
+          "arm": 3,
+          "added_conductivity_scale": 0,
+          "prescribed_kinetic_heat_fraction": 0.05,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 0.00018836908095387628,
+          "full_two_half_difference": 3.914412083361185e-08,
+          "Teff_change_K": 0.1155172241406035,
+          "surface_L_fractional_change": 0.00016695154834267534,
+          "maximum_abundance_difference": 1.325398937736949e-13,
+          "first_law": 3.629700762175503e-09,
+          "convective_mass": 0.999999999999999
+        },
+        {
+          "arm": 4,
+          "added_conductivity_scale": 0,
+          "prescribed_kinetic_heat_fraction": -0.05,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 0.00018525518257561657,
+          "full_two_half_difference": 3.748226973243618e-08,
+          "Teff_change_K": -0.11360580813516208,
+          "surface_L_fractional_change": -0.0001641687308793216,
+          "maximum_abundance_difference": 1.304512053934559e-13,
+          "first_law": 3.4827631889555732e-09,
+          "convective_mass": 0.999999999999999
+        }
+      ],
+      "cpu_seconds": 6.70784
+    }
+  },
+  "local_kinetic_heat_controls": {
+    "after-D": {
+      "profile": "after-D",
+      "mixing_travel_years": 1.3575956485300051,
+      "maximum_microscopic_over_convective_D_proxy": 2.460216936363219e-09,
+      "integrated_drift_gradient_proxy": 1.919880090157769e-07,
+      "gross_kinetic_heat_proxy_over_L": 0.0002490178650537587,
+      "arms": [
+        {
+          "arm": 6,
+          "added_conductivity_scale": 0,
+          "prescribed_kinetic_heat_fraction": 0,
+          "local_kinetic_proxy_multiplier": 10,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 0,
+          "full_two_half_difference": 3.996875496348196e-06,
+          "Teff_change_K": 0,
+          "surface_L_fractional_change": 0,
+          "maximum_abundance_difference": 0,
+          "first_law": -1.2745360322696797e-13,
+          "convective_mass": 0.9999999999999997
+        },
+        {
+          "arm": 7,
+          "added_conductivity_scale": 0,
+          "prescribed_kinetic_heat_fraction": 0,
+          "local_kinetic_proxy_multiplier": -10,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 1.987455426899487e-07,
+          "full_two_half_difference": 3.996874572642639e-06,
+          "Teff_change_K": -9.01020234778116e-05,
+          "surface_L_fractional_change": -1.208902556948388e-07,
+          "maximum_abundance_difference": 0,
+          "first_law": 2.9243274468626623e-13,
+          "convective_mass": 0.9999999999999997
+        }
+      ],
+      "cpu_seconds": 6.343855
+    },
+    "main-sequence": {
+      "profile": "main-sequence",
+      "mixing_travel_years": 1.1234475568953348,
+      "maximum_microscopic_over_convective_D_proxy": 6.5802869825942866e-09,
+      "integrated_drift_gradient_proxy": 8.463176646560309e-07,
+      "gross_kinetic_heat_proxy_over_L": 0.01606234755995755,
+      "arms": [
+        {
+          "arm": 6,
+          "added_conductivity_scale": 0,
+          "prescribed_kinetic_heat_fraction": 0,
+          "local_kinetic_proxy_multiplier": 10,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 0,
+          "full_two_half_difference": 3.830959904860265e-08,
+          "Teff_change_K": 0,
+          "surface_L_fractional_change": 0,
+          "maximum_abundance_difference": 0,
+          "first_law": 3.5554670319015713e-09,
+          "convective_mass": 0.999999999999999
+        },
+        {
+          "arm": 7,
+          "added_conductivity_scale": 0,
+          "prescribed_kinetic_heat_fraction": 0,
+          "local_kinetic_proxy_multiplier": -10,
+          "finite_no_drift_control": 0,
+          "maximum_log_structure_change": 1.5781912310330881e-06,
+          "full_two_half_difference": 3.830259931447699e-08,
+          "Teff_change_K": -0.0009677396974439034,
+          "surface_L_fractional_change": -1.3987152635008826e-06,
+          "maximum_abundance_difference": 1.1102230246251565e-15,
+          "first_law": 3.5567726541785305e-09,
+          "convective_mass": 0.999999999999999
+        }
+      ],
+      "cpu_seconds": 6.762975
+    }
+  },
+  "finite_control_not_accepted": {
+    "reason": "At nonlinear tolerance 1e-15 the finite no-drift control stalls at roundoff; at 1e-12 it fails the unchanged independent budget. The instantaneous controls and production calculation pass their original budgets.",
+    "main_sequence_max_species_residual": 1.40146e-14,
+    "main_sequence_max_mass_error_over_surface_L": 3.53433e-07,
+    "interpretation": "A finite-solver roundoff/conservation issue remains; the failed control is not evidence validating instantaneous mixing."
+  },
+  "checks": "Ten relevant CTests pass, including independent zero-material-heat invariance and Jacobian checks.",
+  "input_sha256": {
+    "out/convective-transport-sept26-v1/sources/convective_material_heat.hpp": "b120ef781e3fa3f1c6c0b02fdcc5402d616ce14c75e13858b0edcda1e25f0ca9",
+    "out/convective-transport-sept26-v1/sources/mixing.cpp": "8ebd4b2ae9b717f05bff25833bb98986fea25ff6798174f22709d6228fdf5fc2",
+    "out/convective-transport-sept26-v1/sources/test_secular_mixing.cpp": "4b7b764ffeeaf1aa25ad50e75e785fa6acb7f655fcf128f0fc64a0351098932f",
+    "out/convective-transport-sept26-v1/sources/structure.cpp": "5b6492d9535c8e81377c70a691cf022ac0fd2c7839f4f2e5baf653bcf77a6d83",
+    "out/convective-transport-sept26-v1/sources/lifetime_checks.hpp": "b43b7ed205f78e05bc35588ebbff0aaf19eba9699ff4883700e196d0e38f8350",
+    "out/convective-transport-sept26-v1/sources/lifetime_driver.cpp": "9e465656a8956373485380d8108a29f3a230ad49932c44fae948117dce79c258",
+    "out/convective-transport-sept26-v1/sources/test_face_energy.cpp": "886280e9f7d8390acc9d6aaa72910eef70e1bea22974182acbf061b8814e6d37",
+    "out/convective-transport-sept26-v1/sources/thermal_transport.hpp": "11eed3d6e3e7f4b330ca76723767d44215be908435433d2f0f94a628353332b2",
+    "out/convective-transport-sept26-v1/sources/evolution.cpp": "51a690fe78a86a59cd3abc058044c2a992b9d2d176b52a9b2520add2749b7ab2",
+    "out/convective-transport-sept26-v1/v4/ember-evolve": "c320881c6c44c7d13a8e596d2adb49e72dd4a0471ca01aec3623fce0410f0556",
+    "out/convective-transport-sept26-v1/v4/configuration.txt": "b9bc30d115b33c5fe8911e04eab2bc8df2d9e1f58af18efc43a97b837a12b31f",
+    "out/convective-transport-sept26-v1/v4/contraction/final.checkpoint": "db56904dd90ff00029ca8aaf9d98b416c42b68b00047ea756abf705d42201a32",
+    "out/convective-transport-sept26-v1/v4/contraction/history.jsonl": "ac9a34330379e28565d6d74d3ae8756ae3ae3a4e70bcfa28fd12e8c8c125edf9",
+    "out/convective-transport-sept26-v1/v4/contraction/attempts.jsonl": "d6620aee07b4d48b2320ff6464b9ddc235d9324d32f2c421796efdb76395e64f",
+    "out/convective-transport-sept26-v1/control.cpp": "8d0bdc7a9263a4b01892326953cf5c857b74579dfe537f1ab79a009303de3e95",
+    "out/convective-transport-sept26-v1/control": "86ee2979efead4026b41d3009627fd705e33b5d4669af904c63e25dd42e6412d"
+  },
+  "remaining": [
+    "Radiative regions need microscopic transport; this provider rejects required exchange across any such boundary.",
+    "Microscopic mobility and residual-heat proxies are order-of-magnitude estimates, not rigorous error bounds for a partially ionized collision law.",
+    "The current atmosphere has limited composition dependence and covers XH=.699 to .700 only. New source work must be validated and joined consistently.",
+    "No new helium-3 flash or remnant evolution is established."
+  ]
+}

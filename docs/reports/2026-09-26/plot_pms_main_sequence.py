@@ -8,23 +8,17 @@ import matplotlib.pyplot as plt
 HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[2]
 columns=['accepted','years','Teff_K','luminosity_Lsun','radius_Rsun','nuclear_fraction']
 csvfile=HERE/'pms_main_sequence.csv'
-if not csvfile.exists():
- inputs=sorted((ROOT/'out/pms-mainsequence-v4').glob('seg-*/history.jsonl'));rows={}
- assert len(inputs)==9
- for p in inputs:
-  for line in p.read_text().splitlines():
-   r=json.loads(line);key=r['accepted'];item={c:r[c]for c in columns}
-   if key in rows:assert rows[key]==item,(p,key)
-   rows[key]=item
- data=[rows[i]for i in sorted(rows)]
- assert [r['accepted']for r in data]==list(range(3882))
+inputs=[ROOT/'out/convective-transport-sept26-v1/v4/contraction/history.jsonl']
+if inputs[0].exists():
+ data=[{c:json.loads(line)[c] for c in columns} for line in inputs[0].read_text().splitlines()]
+ assert [r['accepted'] for r in data]==list(range(1020))
  assert data[0]['years']==0 and data[-1]['years']==1e9
- assert all(b['years']>a['years']for a,b in zip(data,data[1:]))
- with csvfile.open('w')as f:
+ assert all(b['years']>a['years'] for a,b in zip(data,data[1:]))
+ with csvfile.open('w') as f:
   writer=csv.DictWriter(f,fieldnames=columns,lineterminator='\n');writer.writeheader();writer.writerows(data)
- (HERE/'pms_figure_inputs.json').write_text(json.dumps({'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest()for p in inputs},'count':len(data),'scope':'PMS/pp+D homogeneous comparison; not the full-physics long-term trajectory.'},indent=2)+'\n')
+ (HERE/'pms_figure_inputs.json').write_text(json.dumps({'source_sha256':{str(p.relative_to(ROOT)):hashlib.sha256(p.read_bytes()).hexdigest() for p in inputs},'count':len(data),'scope':'Common Hayashi-started D/pp/CN calculation with plasma losses, checked whole-star convection and composition heat after initial D; no radiative settling regime yet.'},indent=2)+'\n')
 else:
- with csvfile.open()as f:data=[{k:float(v)for k,v in r.items()}for r in csv.DictReader(f)]
+ with csvfile.open() as f:data=[{k:float(v) for k,v in r.items()} for r in csv.DictReader(f)]
 a={k:np.array([r[k]for r in data])for k in columns}
 plt.rcParams.update({'font.size':11,'axes.labelsize':12,'xtick.labelsize':10,'ytick.labelsize':10,'pdf.fonttype':42})
 fig,(hr,power)=plt.subplots(1,2,figsize=(9.6,3.8),constrained_layout=True)

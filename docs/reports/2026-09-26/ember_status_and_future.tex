@@ -25,10 +25,11 @@ Ember is a one-dimensional stellar evolution code that calculates a star's
 structure, composition and energy transport as it ages.
 A contraction calculation follows a $0.1\Ms$ model from the Hayashi track
 into sustained hydrogen burning. At 1 Gyr it has $T_{\rm eff}=2765$ K,
-$R=0.1264\Rs$ and $L=8.414\times10^{-4}\Ls$; nuclear burning supplies
-99.23\% of its light. This calculation includes initial deuterium and
-proton--proton burning. The long-term calculations described below include
-additional nuclear and transport physics and start from separately constructed
+$R=0.1264\Rs$ and $L=8.416\times10^{-4}\Ls$; nuclear burning supplies
+99.17\% of its light. This calculation includes initial deuterium,
+proton--proton and CN burning, plasma losses and checked whole-star
+convective mixing. The long-term calculations described below include
+microscopic element separation and start from separately constructed
 main-sequence models. A continuous calculation combining these treatments
 from contraction through remnant cooling remains to be completed.
 
@@ -2989,9 +2990,9 @@ The contraction calculation starts with a fully convective model at
 $T_{\rm eff}=2864$ K, $R=1.594\Rs$ and central temperature $0.5398$ MK.
 Initial deuterium and helium-3 evolve without a reset at the main sequence.
 At 1 Gyr the model has $T_{\rm eff}=2765$ K, $R=0.1264\Rs$,
-$L=8.414\times10^{-4}\Ls$, central temperature $4.623$ MK and
-$\log g=5.234$. Nuclear burning supplies 99.23\% of the surface luminosity.
-Its nearly uniform abundances are $X=0.6998$, $X_3=2.405\times10^{-4}$
+$L=8.416\times10^{-4}\Ls$, central temperature $4.623$ MK and
+$\log g=5.234$. Nuclear burning supplies 99.17\% of the surface luminosity.
+Its nearly uniform abundances are $X=0.6998$, $X_3=2.402\times10^{-4}$
 and $Z=0.02000$; initial deuterium is exhausted. The surface-temperature
 and contraction rates fall through successive 100-Myr intervals,
 consistent with approach to sustained hydrogen burning.
@@ -3004,24 +3005,38 @@ long-term tracks.
 Left: the HR trajectory, with arrows indicating increasing age.
 Right: the fraction of the surface luminosity supplied by nuclear burning.
 The early maximum is initial-deuterium burning; the later increase is
-sustained proton--proton burning. At 1 Gyr nuclear power supplies 99.23\%
+sustained proton--proton burning. At 1 Gyr nuclear power supplies 99.17\%
 of the surface luminosity. Age is measured from the contracting seed.
-This calculation includes homogeneous convective mixing and initial
-D/pp burning; it does not include the microscopic element separation or
-explicit carbon/nitrogen network of the long-term calculations.
-The curves therefore are not joined to the remnant tracks.}
+This calculation includes initial D/pp/CN burning, plasma losses and
+homogeneous convective mixing, with composition heat included after initial
+D exhaustion. Microscopic separation is neglected under the assessed whole-star
+convective approximation. The plotted sequence is not joined
+to the separately initialized remnant tracks.}
 \label{fig:pms_arrival}
 \end{figure}
 
-The sequence contains 3881 accepted intervals and no rejected intervals,
-with 23.31 CPU minutes of recorded model calculation, excluding atmosphere
-construction and separate controls. The timestep estimate compares one
-full interval with two half intervals, using structure, isotope and energy
-errors. An independent high-precision reconstruction of 342 saved substeps
-supports the allowance for rounding in the energy audit; this does not
-validate all physical approximations. The atmosphere treatment has restricted
+The sequence contains 1019 accepted intervals and no rejected intervals,
+with 8.166 CPU minutes and 5.525 elapsed minutes, including material loading
+and excluding atmosphere construction and separate controls. One full interval
+is compared with two half intervals using structure, isotope and energy
+errors. Independent global isotope, mass-defect and first-law checks pass
+every accepted interval. Exact restart replay preserves the saved state and
+all physical history values. The atmosphere treatment has restricted
 composition dependence and omits condensates from its coupled solution.
 The complete calculation must include their effects where required.
+
+Continuation of the same star reaches 4 Gyr with sustained hydrogen burning
+and no rejected intervals. On the quiet main sequence, a maximum allowed
+step of 1 Gyr permits 15 accepted intervals between 1 and 4 Gyr, compared
+with 301 intervals under a 10-Myr ceiling. All local accuracy and independent
+conservation requirements are unchanged. Actual steps remain below
+495.6 Myr. Including material loading, CPU time falls by a factor of 4.534;
+endpoint temperatures differ by $6.936\times10^{-5}$ K and the largest
+absolute abundance difference is $2.796\times10^{-8}$.
+The retained contraction and continuation contain 1034 accepted intervals
+and use 9.785 CPU minutes. The atmosphere and isotope histories are preserved
+through the main-sequence transition. This runtime does not estimate the
+cost of a future shell flash or the complete lifetime.
 
 The common evolution engine carries initial deuterium and explicit
 hydrogen, helium, carbon and nitrogen inventories. It also provides finite convective
@@ -3048,7 +3063,10 @@ uses an assigned initial CN mixture. The largest logarithmic structure
 difference between one step and two half steps is $3.856\times10^{-8}$.
 Instantaneous and finite convection give effectively identical endpoints
 in this fully convective control. That agreement does not establish their
-equivalence during a shell flash.
+equivalence during a shell flash. A finite-mixing control leaves global
+isotope residuals up to $1.402\times10^{-14}$ and does not pass
+the tighter conservation budget used for the continuous calculation;
+its convergence alone is insufficient to select it for that calculation.
 
 During initial-deuterium burning, homogeneous mixing is restricted to a
 wholly convective star. In sampled deuterium-burning structures, convective
@@ -3059,14 +3077,26 @@ summing the absolute contributions of individual species gives 0.007881\%.
 Two fixed-composition thermal comparisons, near the deuterium luminosity
 maximum and during its decline, show no resolved structural change at the
 solver tolerance when this heat is included, even at ten times its estimated
-value. A contraction calculation with the combined D/pp/CN network,
-plasma losses and these mixing checks reaches 6.707 Myr at 2994 K,
-with $R=0.5146\Rs$. Initial deuterium is exhausted after
-433 accepted intervals, using 4.241 CPU minutes including material setup.
-This assessment bounds the early convective approximation;
-it does not supply a partially ionized microscopic transport law.
-Cool-envelope transport, continuous atmosphere coverage and the complete
-production calculation remain unfinished.
+value. These checks support the early convective approximation;
+they do not supply a partially ionized microscopic transport law.
+
+After initial D exhaustion, instantaneous mixing is retained while the whole
+star remains convective. Composition enthalpy is included in the thermal
+balance. At 1 Gyr the convective travel time is 1.123 yr. Generous neutral
+and Coulomb mobility estimates give a microscopic-to-convective diffusion
+ratio below $6.581\times10^{-9}$ in the two checked post-D structures.
+They imply a composition variation below $8.464\times10^{-7}$ even when the
+entire mixture is assigned the settling force of iron. These are estimates
+of neglected terms, not a validated collision law for partially ionized gas.
+The corresponding kinetic heat estimate, multiplied by ten with either
+sign, changes the two main-sequence control endpoints by only
+$9.677\times10^{-4}$ K between the signs. Adding ten times generous
+conductivity estimates changes the endpoint temperature by less than
+$9.665\times10^{-6}$ K. A broader imposed heat perturbation of
+$\pm5\%$ of local luminosity changes it by at most 0.1156 K.
+A radiative region or failure of the mixing/transport estimates ends this
+approximation; microscopic separation must then be included explicitly.
+Continuous atmosphere coverage and that transition remain unfinished.
 
 Extending the track through hydrogen exhaustion requires atmosphere and
 interior inputs covering the changing composition, temperature and density,
