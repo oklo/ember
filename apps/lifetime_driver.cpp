@@ -3,6 +3,7 @@
 #include "ember/convective_evolution_checks.hpp"
 #include "ember/convective_material_heat.hpp"
 #include "ember/evolution_checkpoint.hpp"
+#include "ember/runtime_identity.hpp"
 #include "ember/atmosphere_deuterium.hpp"
 #include "ember/atmosphere_grid.hpp"
 #include "ember/conduction_table.hpp"
@@ -41,27 +42,6 @@ struct Settings {
     return x;
   }
 };
-void add_identity(Identities& ids,const fs::path& path) {
-  const auto p=fs::canonical(path);ids[p.string()]=file_identity(p);
-}
-void add_family_identities(Identities& ids,const fs::path& path,bool eos) {
-  add_identity(ids,path);std::ifstream in(path);std::string label,file;std::size_t count{};
-  if(eos) {
-    std::getline(in,label);count=1;
-    for(int k=0;k<3;++k) {
-      std::size_t n{};in>>label>>n;if(n<2 || n>100)throw std::runtime_error("invalid EOS identity axis");
-      count*=n;double coordinate{};for(std::size_t i=0;i<n;++i)in>>coordinate;
-    }
-  }else {
-    int version{};in>>label>>version>>count>>label>>label;
-    if(version!=1 || count<2 || count>100)throw std::runtime_error("invalid opacity identity family");
-  }
-  for(std::size_t i=0;i<count;++i) {
-    if(!eos){double Z{};in>>Z;}
-    in>>std::quoted(file);if(!in)throw std::runtime_error("missing family identity source");
-    add_identity(ids,path.parent_path()/file);
-  }
-}
 double positive(const char* text) {
   std::string s(text);double x{};auto r=std::from_chars(s.data(),s.data()+s.size(),x);
   if(r.ec!=std::errc{} || r.ptr!=s.data()+s.size() || !std::isfinite(x) || x<=0)
@@ -120,13 +100,33 @@ int lifetime_main(int argc,char** argv) {
     for(double x:initial.X)if(x<0)throw std::invalid_argument("negative initial abundance");
     initial.cn_molality=initial_gs98_cn(initial);initial=explicit_cn_material(initial);
 
-    Identities identities{{"executable",file_identity(argv[0])}};add_identity(identities,config);
-    add_family_identities(identities,eos_path,true);
-    for(const auto& p:{low_path,warm_path,bridge_path,hot_path})add_family_identities(identities,p,false);
-    for(const auto& p:{conduction_path,atmosphere_path,collision_path,composition_path})add_identity(identities,p);
-    const Selections selections{"continuous Hayashi start; face energy","initial D + SFIII/SVH pp/CN; physical metal masses",
-      "plasma neutrino losses","assessed whole-star instantaneous convection; total composition heat after initial D",
-      "whole-convective transport limit; radiative species boundary requires microscopic transport"};
+    RuntimeIdentity identity;identity.file("executable",argv[0]);
+    for(const auto& [key,value]:std::map<std::string,double>{{"mass_g",mass},{"initial_radius_cm",radius},
+        {"initial_Teff_K",teff},{"initial_entropy_loss",entropy_loss},{"points",count},
+        {"screened_minimum_T_K",minimum_temperature},{"structure_tolerance",structure_tolerance},
+        {"species_tolerance",species_tolerance},{"energy_tolerance",energy_tolerance},
+        {"coupling_abundance_tolerance",abundance_tolerance},{"inventory_abundance_tolerance",inventory_tolerance}})
+      identity.number("configuration."+key,value);
+    identity.family("eos",eos_path,true);
+    for(const auto& [role,p]:std::map<std::string,fs::path>{{"opacity_low",low_path},{"opacity_warm",warm_path},
+        {"opacity_bridge",bridge_path},{"opacity_hot",hot_path}})identity.family(role,p,false);
+    for(const auto& [role,p]:std::map<std::string,fs::path>{{"conduction",conduction_path},{"atmosphere",atmosphere_path},
+        {"collisions",collision_path},{"composition",composition_path}})identity.file(role,p);
+    const auto& identities=identity.values;
+    const Selections selections{"lifetime.volume_faces.v1","ppcn.sfiii.svh.physical_metals.v1",
+      "losses.plasma_neutrino.v1","convection.instantaneous.material_heat_after_D.v1",
+      "transport.whole_convective_limit.v1"};
+    Checkpoint state;
+    // Reject incompatible or damaged restarts before allocating/parsing EOS
+    // and opacity objects. The configuration's execution controls may change.
+    if(!restart.empty()) {
+      std::ifstream checkpoint_header(restart);std::string magic;int version{};
+      if(!(checkpoint_header>>magic>>version) || magic!="EMBER_EVOLUTION_CHECKPOINT" || (version!=5 && version!=6))
+        throw std::invalid_argument("lifetime restart requires a volume-face checkpoint");
+      state=read_checkpoint(restart,points,mass,initial,selections,abundance_tolerance,identities,
+                            LuminosityGrid::volume_faces,version==6);
+      if(state.model.age>=target)throw std::invalid_argument("target must exceed the saved age");
+    }
     VariableMetalHelmholtzEos table_eos(eos_path,HelmholtzTableEos::Mixture::allow_documented_proxy);DeuteriumApproxEos eos(table_eos);
     MixtureOpacity low(low_path),warm(warm_path),bridge(bridge_path),hot(hot_path);
     BlendedOpacity mid(warm,bridge,5.05,5.10),upper(mid,hot,5.6,5.7),raw(low,upper,4.4,4.47);
@@ -141,7 +141,6 @@ int lifetime_main(int argc,char** argv) {
     Physics early{&eos,&combined,&nuclear,1.9,ConvectiveCriterion::ledoux};early.neutrino_losses=&losses;early.explicit_metal_mixing_only=true;
     auto later=early;later.opacity=radiation.get();later.microscopic=&convective_heat;later.explicit_metal_mixing_only=false;
     EvolutionOptions options;options.relaxation.zone_threads=static_cast<std::size_t>(threads);options.abundance_tolerance=abundance_tolerance;
-    Checkpoint state;
     if(restart.empty()) {
       ContractingSource seed_source(nuclear,entropy_loss);auto seed_physics=early;seed_physics.nuclear=&seed_source;
       const auto guess=contracting_guess(points,mass,radius,teff,initial,seed_physics,atmosphere);
@@ -149,15 +148,14 @@ int lifetime_main(int argc,char** argv) {
       if(!solved.converged)throw std::runtime_error("Hayashi initial model: "+solved.message);
       for(const auto& c:solved.model.comp)if(c!=initial)throw std::runtime_error("initial relaxation changed isotope inventory");
       state={std::move(solved.model),dt,0,0};
-    }else {
-      std::ifstream checkpoint_header(restart);std::string magic;int version{};
-      if(!(checkpoint_header>>magic>>version) || magic!="EMBER_EVOLUTION_CHECKPOINT" || (version!=5 && version!=6))
-        throw std::invalid_argument("lifetime restart requires a volume-face checkpoint");
-      state=read_checkpoint(restart,points,mass,initial,selections,abundance_tolerance,identities,
-                            LuminosityGrid::volume_faces,version==6);
     }
     if(state.model.age>=target)throw std::invalid_argument("target must exceed the saved age");
     fs::create_directories(work);write_checkpoint(work/"seed.checkpoint",state,selections,abundance_tolerance,identities);
+    std::ofstream execution(work/"execution.json");execution<<std::setprecision(17)
+      <<"{\"configuration_path\":"<<std::quoted(config.string())<<",\"configuration_fnv1a\":"<<std::quoted(file_identity(config))
+      <<",\"restart_path\":"<<std::quoted(restart)<<",\"zone_threads\":"<<threads
+      <<",\"initial_step_years\":"<<dt/year<<",\"maximum_step_years\":"<<maximum_dt/year
+      <<",\"maximum_steps\":"<<maximum_steps<<",\"maximum_cpu_seconds\":"<<maximum_cpu<<"}\n";
     std::ofstream history(work/"history.jsonl"),attempts(work/"attempts.jsonl");history<<std::setprecision(17);attempts<<std::setprecision(17);
     const auto record=[&](double step,double error,const HomogeneousCheck& guard) {
       const auto& m=state.model;const auto w=nodal_mass_weights(m);double H=0,Y3=0,D=0,Lnuc=0;

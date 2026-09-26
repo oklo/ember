@@ -203,10 +203,13 @@ inline Checkpoint read_checkpoint(const fs::path& path,std::size_t expected_poin
     if(!recorded.emplace(name,value).second)throw std::runtime_error("duplicate checkpoint input identity");
   }
   if(!recorded.contains("executable"))throw std::runtime_error("checkpoint executable identity missing");
+  if((recorded.contains("identity_schema") || identities.contains("identity_schema"))
+      && recorded.size()!=identities.size())
+    throw std::runtime_error("checkpoint input selection differs");
   for(const auto& [name,value]:recorded) {
     const auto found=identities.find(name);
     if(found==identities.end() || found->second!=value)
-      throw std::runtime_error("checkpoint executable or input tables differ");
+      throw std::runtime_error("checkpoint executable or input tables differ: "+name);
   }
   Checkpoint state;auto& model=state.model;std::size_t points{};
   model.luminosity_grid=grid;

@@ -79,8 +79,15 @@ inventory or energy acceptance criteria.
 `attempts.jsonl` retains acceptance and conservation checks. Only the initial,
 latest and final full checkpoints are retained by default. Checkpoints include
 CN/D abundances, the luminosity convention and, when applicable, material-heat
-rates. Exact restarts require the same configuration, executable and all
-referenced EOS/opacity source files. Run duration and compute/step budgets may
-change. `report.json` distinguishes the requested age from a planned stop or a
+rates. Restart checks bind the executable, physical settings, family coordinates
+and every selected table's contents. Configuration and table paths, comments,
+thread counts, run duration, timestep ceilings and execution budgets may change.
+Changed accuracy settings or table contents are rejected before material tables
+are loaded. `execution.json` records the controls for each invocation. An exact
+replay requires retaining the same effective timestep limits; changing them is
+a new numerical control, not a promise of identical saved steps.
+Older checkpoints remain readable with their frozen executable; the new driver
+does not silently reinterpret a checkpoint from a different executable or
+physics selection. `report.json` distinguishes the requested age from a planned stop or a
 physical/source-domain failure. A bounded run finishing is not a claim that the
 full evolutionary track has been completed.

@@ -1,0 +1,42 @@
+{
+  "created_utc": "2026-09-26T23:37:50.874171+00:00",
+  "scope": "Permit physically identical lifetime restarts after relocation or execution-control changes; reject incompatibility before material loading.",
+  "identity_schema": "ember-lifetime-inputs-v1",
+  "content_hash": "FNV-1a for accidental-change detection; SHA-256 retained in the separate source-data manifest.",
+  "physical_identity": [
+    "executable bytes",
+    "physical and accuracy settings, numerically normalized",
+    "EOS family coordinates and format",
+    "opacity family coordinates, density axis, format and source name",
+    "every selected numeric payload by logical role"
+  ],
+  "allowed_changes": [
+    "configuration path, order, comments and equivalent numeric spelling",
+    "family and numeric-payload filenames",
+    "zone_threads",
+    "initial timestep (only used when constructing a new star)",
+    "maximum timestep",
+    "target age and execution budgets"
+  ],
+  "ctest": {
+    "passed": 71,
+    "total": 71,
+    "log": "out/unified-evolution-sept25-v1/restart-identity-tests.log",
+    "log_sha256": "8d70990f396c50e581a7b79e10bab8117fdb80ea7e66f1d4ca27066a3602446c"
+  },
+  "restart_test": {
+    "exact_continuous_vs_split": true,
+    "exact_after_input_relocation": true,
+    "exact_after_threads_changed_from_2_to_1": true,
+    "rejected_changed_accuracy": true,
+    "rejected_changed_table_before_loading": true,
+    "rejected_changed_family_coordinate": true,
+    "rejected_corrupt_checkpoint": true
+  },
+  "limits": [
+    "The existing retained 4-Gyr track is not advanced by this operational change.",
+    "Changing an effective timestep ceiling may change saved timesteps and is not an exact-replay guarantee.",
+    "Old frozen executables remain required for their older checkpoint selections; binary compatibility is not silently assumed.",
+    "No physics, audit budgets or acceptance tolerances were changed."
+  ]
+}
