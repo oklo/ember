@@ -1,0 +1,40 @@
+{
+  "created_utc": "2026-09-21T14:20:50.329676+00:00",
+  "first": {
+    "pulse_years": 1043056.4364848862,
+    "Teff_K": 6398.352704157825,
+    "radius_cm": 12541010308.566597,
+    "photon_luminosity_erg_s": 1.878275771834841e+32,
+    "nuclear_power_erg_s": 7.14766206135027e+31,
+    "logg": 4.926246584352607,
+    "run": "33"
+  },
+  "last": {
+    "run": 56,
+    "pulse_years": 42475475.17328023,
+    "Teff_K": 4770.847873171576,
+    "radius_cm": 3918638934.4854503,
+    "photon_luminosity_erg_s": 5.668581214282588e+30,
+    "nuclear_power_erg_s": 3.1661092847119887e+30,
+    "logg": 5.936641135633074
+  },
+  "temperature_maximum": {
+    "pulse_years": 1087856.4364848863,
+    "Teff_K": 6398.732610460175,
+    "radius_cm": 12277221117.351036,
+    "photon_luminosity_erg_s": 1.8005185715148023e+32,
+    "nuclear_power_erg_s": 6.880868504360965e+31,
+    "logg": 4.9447114785795305,
+    "run": "33"
+  },
+  "retained_points": 1723,
+  "temperature_drop_K": 1627.8847372885994,
+  "decline_years": 41387618.73679534,
+  "radius_decline": 0.8290548286007067,
+  "luminosity_decline": 0.9894065753581156,
+  "nuclear_fraction": 0.5585364600113063,
+  "scope": "Checked retained late models. No interpolated evolution, connection to the distinct onset history, or claim of a completed white-dwarf cooling track.",
+  "csv_sha256": "6184d3f6e2407a91a9e31092db9ba0dd821effe758e862b697187b92ac986f22",
+  "declining_saved_intervals_after_maximum": 1607,
+  "interval_plot_policy": "Ordinary retained half steps and accepted compound-event endpoints; internal event timing is unresolved."
+}

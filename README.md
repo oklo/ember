@@ -1,112 +1,29 @@
 # Ember
 
-Ember is a one-dimensional stellar evolution code written in C++23. It follows
-the structure, composition and energy transport of very low-mass stars over
-trillions of years.
+Ember is a one-dimensional stellar evolution code written in C++23. It calculates the structure, composition and energy transport of very low-mass stars.
 
-[Read the working paper](docs/reports/2026-09-21/ember_status_and_future.pdf)
-([LaTeX and figure files](docs/reports/2026-09-21/README.md)).
+[Read the working paper](docs/reports/2026-09-26/ember_status_and_future.pdf) ([LaTeX, figures and plotting data](docs/reports/2026-09-26/README.md)).
 
-## Research status
+## Research status — September 26, 2026
 
-The **0.1-solar-mass** calculation with microscopic diffusion and metal settling
-reaches **4.002 trillion years**, **4612 K**, and central hydrogen **X = 3.528e-8**.
-Hydrogen burning continues outside the depleted core. A continuation with a
-white-dwarf atmosphere develops a helium-3 shell flash.
+The target is one continuous calculation from a Hayashi starting model through hydrogen burning and helium-white-dwarf cooling to **100 K**. Later environmental heating and nucleon decay are conditional extensions. The same code should determine which lower-mass objects sustain hydrogen burning and which cool as brown dwarfs. The complete calculation is not yet available.
 
-Two calculations examine the flash and subsequent evolution. Times below
-are measured from their common model preceding shell convection.
+The contraction calculation reaches **1 Gyr**, **2765 K**, **0.1264 solar radii** and **8.414e-4 solar luminosities**. Nuclear burning supplies **99.23%** of its light. The sequence has **3881 accepted intervals**, with **23.31 CPU minutes** of recorded model calculation, excluding atmosphere preparation and separate controls. It includes homogeneous convective mixing and initial-deuterium/pp burning. The [new PMS figure](docs/reports/2026-09-26/pms_main_sequence.pdf) shows its trajectory and the transition to sustained hydrogen burning.
 
-| Calculation | Time | Effective temperature | Nuclear power |
+The common evolution engine now combines initial deuterium and explicit hydrogen/helium/carbon/nitrogen inventories, finite convective mixing, and material heat transport. A smooth metal-composition EOS extension supports all **512** main-sequence reference zones while preserving the checked lower-metallicity results. A bounded **1-million-year** integration with finite mixing and material heat converges on the actual 0.1-solar-mass structure; one full step and two half steps differ by **3.856e-8** in logarithmic structure variables. This control omits microscopic drift and does not extend the production trajectory. Initial-deuterium transport, some EOS coverage, the production driver and consistent atmospheres remain unfinished.
+
+Separate long-term calculations include microscopic diffusion and metal settling. The pre-flash calculation reaches **4.002 Tyr**, **4612 K**, and central hydrogen **X = 3.528e-8**. Hydrogen burning continues outside the depleted core. A continuation with a white-dwarf atmosphere develops a helium-3 shell pulse.
+
+| Flash and cooling calculation | Time from common pre-flash model | Effective temperature | Nuclear power |
 | --- | ---: | ---: | ---: |
-| Finite convective transport from flash onset, 1983 mass points | 5.744 million yr | 5903 K | 1.126e31 erg/s |
-| Later shell burning, alternative history, 2115 mass points | 42.48 million yr | 4771 K | 3.166e30 erg/s |
+| Finite mixing from onset, 1983 mass points | 5.744 Myr | 5903 K | 1.126e31 erg/s |
+| Alternative mixing history, 2115 mass points | 42.48 Myr | 4771 K | 3.166e30 erg/s |
 
-**These are alternative histories, not consecutive pieces of one track.**
-The later calculation includes different mixing treatments during its flash;
-its subsequent accuracy checks do not validate that entire earlier evolution.
-Both calculations use the supplied hydrogen atmosphere as their reference.
-Whether the flash occurs under a different atmosphere prescription remains
-untested. The flash appears about **0.7546 Gyr** after the atmosphere change;
-that delay does not establish independence from the envelope and fuel history.
+These are alternative histories, not consecutive parts of one trajectory. Both turn toward cooling, but nuclear burning still supplies **55.85%** of the alternative model's light. The pulse's full strength, spatial accuracy and independence from the atmosphere adjustment remain unresolved. The continuous PMS-started calculation will test whether the pulse survives a consistent composition and atmosphere history.
 
-The onset calculation passes a local nuclear-power maximum of **3.719e35 erg/s**,
-followed by an **81.64%** decline and renewed burning. Nuclear power continues to decline through independently checked intervals. The largest single-cell power contribution
-is **1.501%**. A matched **100-year** comparison on **1927/1983 mass points**
-changes nuclear heat by **8.261%** and final power by **15.24%**. Inserting
-mass points produces an initial mechanical readjustment with an integrated
-energy residual of **1.844e43 erg** in its first year. A controlled correction
-of the initial radii leaves one-year nuclear heat and final power unchanged
-within **1e-12** relative; the initial energy change remains explicit in the
-budget. The full pulse's spatial accuracy, integrated energy and final
-shutdown remain unresolved.
+The paper retains the Ember–MESA comparisons, the LBA97 opacity-map comparison, and the lifetime timeline. The [late cooling figure](docs/reports/2026-09-26/late_cooling.pdf) and [standalone HR comparison](docs/figures/2026-09-21/ember_two_sequences_hr.png) show the unchanged late-evolution endpoints. The separate [Fortran reconstruction](https://github.com/oklo/Henyey) seeks to reproduce LBA97's assumptions and methods.
 
-In the later calculation, radius and surface luminosity have declined
-**82.91%** and **98.94%** from their saved maxima. Temperature falls from
-**6399 K** by **1628 K** over **41.39 million years**, while nuclear burning
-supplies **55.85%** of the current surface luminosity. This supports a turn
-toward cooling within that calculation.
-
-The **24.48–29.48 million year** interval uses **74.91 CPU minutes** and **40.23 wall minutes**, including timestep comparisons and rejected trials. Nuclear power falls **7.869%**, while the whole-star helium-3 inventory grows **0.2052%**. At **29.48 million years**, helium-3 production is **1.263e12 g/s** and destruction is **4.106e11 g/s**. Helium-3 fusion supplies **23.12%** of nuclear power, down from **26.97%** five million years before. The discrete source sum reproduces the inventory change to better than **1e-10** relative. This establishes the balance of production and destruction; it does not establish stability against a later flash. The full cooling-track runtime remains unmeasured. Both histories now turn toward lower effective temperature. The finite-mixing calculation reaches **6422 K** near **1.139 million years** before declining.
-
-A provisional pre-main-sequence calculation follows **26.17 million years** of continuous contraction. All **1563 accepted intervals** pass independent isotope and energy checks; retained sequence calculations take **727.6 CPU seconds**, excluding atmosphere preparation and separate controls. Its endpoint is **3003 K**, radius **0.2988 solar radii**, central temperature **2.498 MK**, and central density **29.59 g/cm³**. The star remains fully convective with nearly uniform composition. Initial deuterium is exhausted; nuclear power supplies only **0.01097%** of surface luminosity. Sustained hydrogen burning has not yet developed. The **12.16–26.15 million year** interval takes **42.63 CPU seconds**, with no rejected steps. A timestep-refinement comparison changes radius by **0.005908%** and integrated surface emission by **0.04668%** over the tested interval. The atmosphere now uses **29** source points, with checked extensions that preserve the previous table and its stellar response. The previously measured **3.509 K** sensitivity remains local to its tested state. Later nuclear and envelope-transport integration remains unfinished.
-
-The selected cooling atmosphere window has **18** columns over **4750–5500 K** and **log g = 5.80–6.00** at three hydrogen fractions. Twelve occupied rows are preserved exactly; six new columns pass independent source and depth checks. The combined table passes interpolation, EOS and full stellar-response comparisons, followed by **6 million years** of reviewed cooling. Higher-gravity columns through **log g = 6.20** pass source and response checks; the missing **4500 K** coverage currently limits further cooling. A matched **million-year** reference comparison gives **0.2632 K** and **0.0002222%** in nuclear heat, with the same final convection. Independent **5250 K** and **5750 K** columns test interpolation within the broader source collection; at **5250 K**, the composition response agrees to **0.000007587%** in temperature and **0.1582%** in pressure.
-
-A matched **2.1-million-year** cooling comparison over **5500–6000 K** changes
-endpoint temperature by **2.292 K** and nuclear heat by **0.002680%** between
-two hydrogen reference prescriptions. The detailed-onset comparison over
-**10,000 years** changes the endpoint by **4.187 K** and nuclear heat by
-**0.009269%**. Both comparisons retain identical final convective regions.
-These local tests do not establish the absolute hydrogen boundary condition.
-
-A matched **10,000-year** numerical comparison reduces native CPU time from
-**46.28 to 27.65 minutes**, a **40.25%** saving, with unchanged accuracy
-criteria. Temperature differs by **0.07287 K**, nuclear heat by **0.03629%**,
-and the convective regions agree. A separate **640-year** timestep comparison
-passes. These measurements support the selected detailed continuation;
-they do not establish the runtime or accuracy of a complete cooling track.
-
-A matched **7500-year** comparison entering the **6000–6500 K** atmosphere interval gives differences of **1.008 K**, **0.06316%** in surface luminosity and **0.00002583%** in nuclear heat, with identical final convection. Each accepted interval passes the original full-step/two-half-step checks.
-
-A further **25,000-year** comparison below **log g = 4.50** gives **0.4703 K** difference in endpoint temperature and **0.006257%** in nuclear heat. The final convective regions agree. The selected extension uses the measured gravity response of solved near-hydrogen atmospheres, preserving the occupied reference values. This checks local sensitivity, not the absolute atmosphere.
-
-Microscopic species transport extends to **1.000 MK** under a locally checked ionization approximation. A **1600/800/400-year** comparison gives **0.2686%** difference in nuclear heat with unchanged accuracy and conservation criteria. The heat-transport blend remains at **2–3 MK**.
-
-A matched **25,000-year** comparison of the corrected hot reference tables gives **1.366 K**, **0.06345%** in surface luminosity and **0.01279%** in nuclear heat, with identical final convection. Adaptive full intervals may reach **2560 years**; every accepted interval retains the original checks.
-
-A further **10,000-year** comparison entering the **5500–6000 K** atmosphere
-interval changes the detailed history's endpoint by **9.515 K**, surface
-luminosity by **0.6680%**, and nuclear heat by **0.001667%**, with identical
-final convective regions. This measures local sensitivity to the inferred
-hydrogen reference; it does not validate its absolute normalization.
-
-
-A further matched **2.000-million-year** comparison in the **5000–6000 K**
-grid changes the endpoint by **6.020 K**, surface luminosity by **0.1435%**
-and integrated nuclear heat by **0.009124%**. The surface convective boundary
-differs by one mass interface. This tests local atmosphere sensitivity.
-
-
-The paper compares Ember with MESA and with Laughlin, Bodenheimer and Adams
-(1997), including the requested opacity-map comparison. The separate
-[Fortran reconstruction](https://github.com/oklo/Henyey) seeks to reproduce
-LBA97's assumptions and methods. A new [late cooling figure](docs/reports/2026-09-21/late_cooling.pdf) shows the checked temperature turn and luminosity decline, with its small data table and plotting script included.
-The [standalone HR diagram of both flash histories](docs/figures/2026-09-21/ember_two_sequences_hr.png) shows the alternatives through 5.744 million years and 42.48 million years.
-Standalone flash diagrams remain separate from the draft.
-
-The public source does not yet contain all physics and numerical updates used
-for these continuations. The paper and README describe the calculations ahead
-of that source snapshot.
-
-## Aim
-
-Follow an initially **0.1-solar-mass** star through hydrogen exhaustion and helium
-white-dwarf cooling to **100 K**, then examine later evolution under explicit
-environmental and nucleon-decay assumptions. The complete cooling trajectory
-has not yet been calculated.
-
-A matched **1000-year** atmosphere comparison near **log g = 5.42** changes the final effective temperature by **5.918 K** and integrated nuclear heat by **0.00005299%**, with identical final convective regions. Both hydrogen references remain inferred; ignition with a different absolute atmosphere is untested.
+The public source does not yet contain all physics and numerical updates used for these calculations. The paper and README describe results ahead of that source snapshot.
 
 ## Building
 

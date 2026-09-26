@@ -1,0 +1,15 @@
+{
+  "source_sha256": {
+    "out/pms-mainsequence-v4/seg-000/history.jsonl": "4b785be74c83e82c271122a1171d2c4f18ff60653620d58491f6089c7d8d473e",
+    "out/pms-mainsequence-v4/seg-001/history.jsonl": "d9d3b76d946b9379f3d3f3c1b92b7eb1ae547f23b07aee25a3aa8b6279dacdd1",
+    "out/pms-mainsequence-v4/seg-002/history.jsonl": "fbca6c387106d3a433b6062196eacbd344cec0e80a3d196fc732ac29d7186311",
+    "out/pms-mainsequence-v4/seg-003/history.jsonl": "19d476dda507c6d2b998738c9e2a0eb30d183817ca104b53ca24d083fc6b7caa",
+    "out/pms-mainsequence-v4/seg-004/history.jsonl": "037f543c47c082f95d1e4904cae88f3cb9471ef1814cd99f80f515e62f6b96ad",
+    "out/pms-mainsequence-v4/seg-005/history.jsonl": "eedb967dd9b3d68b3d0ca802bf3e7065d6c9c3fe53a5a8ed0b96c25d4d165cc1",
+    "out/pms-mainsequence-v4/seg-006/history.jsonl": "509ac99475b69602fae52a6b685b124b2040a8ddfbdb6c0a179254e2ed961923",
+    "out/pms-mainsequence-v4/seg-007/history.jsonl": "20881c78b0785fb8ee05609b58a4a6de06f760998aa40262f720b88856b7b33f",
+    "out/pms-mainsequence-v4/seg-008/history.jsonl": "6d00592e59bd775602a73c1d870f158299a34d6a5d9e65aa32b9b5d9630b1100"
+  },
+  "count": 3882,
+  "scope": "PMS/pp+D homogeneous comparison; not the full-physics long-term trajectory."
+}

@@ -1,0 +1,63 @@
+{
+  "created_utc": "2026-09-26T14:35:10.464633+00:00",
+  "selected_for_evolution": false,
+  "outcome": "nearer-metal source addition complete; all 512 reference-profile composition/heat queries supported; accuracy assessed separately",
+  "source_work": "out/eos-near-metal-sept26-v1",
+  "unique_planes": 45,
+  "source_queries": 1951605,
+  "nonconverged_source_rows_excluded": 3,
+  "first_law_rows_excluded": 5,
+  "child_cpu_seconds": 10832.976074,
+  "recorded_monotonic_seconds": 1697.8152768341824,
+  "comparison": {
+    "complete_queries": 512,
+    "queries": 512,
+    "failed_zones": [],
+    "maximum_absolute_relative_state_errors": [
+      0.000258906212984078,
+      0.00024668563377683306,
+      5.42474038258689e-05,
+      0.024412099529270925,
+      0.025665328469943738,
+      0.0068604476960058,
+      0.01916861538659731,
+      0.02301914656382209,
+      0.015325936454716915
+    ],
+    "maximum_absolute_relative_dP_errors": [
+      0.006972385019650362,
+      0.008225841405319345,
+      0.034977281749019706
+    ],
+    "maximum_absolute_relative_dE_errors": [
+      0.006732112395010592,
+      0.01102627450325766,
+      3.5727285567909233
+    ],
+    "maximum_absolute_relative_gradient_errors": [
+      0.00013241657302320853,
+      1.655327462335432e-05,
+      0.0006281427898513492
+    ],
+    "maximum_absolute_relative_h_errors": [
+      0.007826132577047673,
+      0.009844378257023223,
+      0.13140989685676696
+    ]
+  },
+  "maximum_initial_Z_weighted_enthalpy_error_over_cpT": 0.0002695558077593209,
+  "limitations": [
+    "The four-metal diagnostic is limited to Z<=.04. Smooth support for enriched interiors must be prepared before selecting the continuous production setup.",
+    "The largest relative metal exchange-enthalpy error is 13.14% in an outer layer. Weighting by initial Z and local cp*T gives at most 0.02696%; this is an energy-scale comparison, not a measured luminosity or track error.",
+    "Assess actual material flux and thermal response before launching a broad further source refinement solely on that relative coefficient error.",
+    "Retained free-energy gradient errors are below 0.063% for the metal direction in this profile; diagonal Hessian finite-difference accuracy remains unresolved.",
+    "All physical source screens remain unchanged. No extrapolation or sign-only mask relaxation was selected."
+  ],
+  "input_sha256": {
+    "out/eos-near-metal-sept26-v1/result.json": "9b39471789b2a74a47587fccb957e8896ab4121fdd2ee92efb567b170eb3b111",
+    "out/eos-near-metal-sept26-v1/comparison.json": "2af8c0c2d2bf7daf0d5d7c316e71cbec6098e014c33a6d2e751caee72a62517a",
+    "out/eos-near-metal-sept26-v1/near_metal_four.dat": "fbfae71e0b3c9c706d04f3094743d6696bbdf4f9f25d5a554f837eefa4cb01b8",
+    "out/eos-near-metal-sept26-v1/evaluate_family.py": "9c4952ac3bb9f9127eb4b2ee94e043765aa1f1eeda3f23b1283a28d5bfca8b53",
+    "out/eos-near-metal-sept26-v1/heat_error_scale.json": "d0997afa12c19788db9f47b253f6472d0cc2e6a5d72a7605fabba99287c760e1"
+  }
+}

@@ -1,0 +1,421 @@
+{
+  "created_utc": "2026-09-26T15:05:01.580529+00:00",
+  "selected_for_production": false,
+  "physical_frontier_advanced": false,
+  "outcome": "Shared C2 enriched-metal extension preserves all checked low-Z responses and passes a bounded real-table 0.1-solar-mass main-sequence mixing/heat integration control.",
+  "interpolation": {
+    "manifest_version": 2,
+    "metal_axis": [
+      0,
+      0.005,
+      0.02,
+      0.04,
+      0.16
+    ],
+    "algorithm": "Initial four planes retain global cubic; each appended interval is quintic Hermite with value, first and second derivatives matched. Endpoint derivatives use the preceding four source planes. All thermal and composition responses differentiate the same potential. Masks unchanged.",
+    "future_extension_preserves_prior_domain": true,
+    "maximum_active_planes": 5,
+    "old_manifest_behavior_preserved": true
+  },
+  "profile": {
+    "count": 512,
+    "successful_queries": 512,
+    "exactly_equal_to_four_plane_results": true,
+    "failed": []
+  },
+  "enriched_source_summary": {
+    "queries": 72,
+    "successful": 49,
+    "source_queries": 936,
+    "state_relative": [
+      0.0005838952282426479,
+      0.0003044697464070767,
+      6.182553153399883e-05,
+      0.005928768913813776,
+      0.011980933842297592,
+      0.018529504603724378,
+      0.011572543736485752,
+      0.022709985984564085,
+      0.011463846681848633
+    ],
+    "gradient_relative": [
+      7.731921880282933e-05,
+      4.609106482833525e-05,
+      0.0012004183629089615
+    ],
+    "h_relative": [
+      0.007451041222986232,
+      0.006997894206951516,
+      0.010666267230947768
+    ],
+    "gradient_finite_difference_relative": [
+      3.317027430504993e-09,
+      2.2443936604776837e-06,
+      8.16138268078248e-09
+    ],
+    "h_finite_difference_relative": [
+      1.1160843360613626e-09,
+      4.926260732673882e-09,
+      1.7635328752874102e-09
+    ],
+    "heat_composition_weighted_over_cpT": [
+      0.005935260688317597,
+      1.832678891592064e-05,
+      0.0007966402326249053
+    ],
+    "failed": [
+      {
+        "composition": [
+          0.65,
+          0.001,
+          0.039
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.65,
+          0.001,
+          0.041
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.65,
+          0.001,
+          0.06
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.65,
+          0.001,
+          0.1
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.65,
+          0.001,
+          0.14
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.65,
+          0.001,
+          0.16
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.3,
+          0.03,
+          0.039
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.3,
+          0.03,
+          0.041
+        ],
+        "T": 200000.0,
+        "rho": 3.0,
+        "error": "HelmholtzTableEos: masked composition support"
+      },
+      {
+        "composition": [
+          0.3,
+          0.03,
+          0.041
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.3,
+          0.03,
+          0.06
+        ],
+        "T": 200000.0,
+        "rho": 3.0,
+        "error": "HelmholtzTableEos: masked composition support"
+      },
+      {
+        "composition": [
+          0.3,
+          0.03,
+          0.06
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.3,
+          0.03,
+          0.1
+        ],
+        "T": 200000.0,
+        "rho": 3.0,
+        "error": "HelmholtzTableEos: masked composition support"
+      },
+      {
+        "composition": [
+          0.3,
+          0.03,
+          0.1
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.3,
+          0.03,
+          0.14
+        ],
+        "T": 200000.0,
+        "rho": 3.0,
+        "error": "HelmholtzTableEos: masked composition support"
+      },
+      {
+        "composition": [
+          0.3,
+          0.03,
+          0.14
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.3,
+          0.03,
+          0.16
+        ],
+        "T": 200000.0,
+        "rho": 3.0,
+        "error": "HelmholtzTableEos: masked composition support"
+      },
+      {
+        "composition": [
+          0.3,
+          0.03,
+          0.16
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.05,
+          0.03,
+          0.039
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.05,
+          0.03,
+          0.041
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.05,
+          0.03,
+          0.06
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.05,
+          0.03,
+          0.1
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.05,
+          0.03,
+          0.14
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      },
+      {
+        "composition": [
+          0.05,
+          0.03,
+          0.16
+        ],
+        "T": 20000000.0,
+        "rho": 10000.0,
+        "error": "HelmholtzTableEos: state outside table"
+      }
+    ],
+    "child_cpu_seconds": 120.648444,
+    "wall_seconds": 25.788310708478093
+  },
+  "checks": {
+    "cubic_pressure_energy_scaled_error": 5.684341886080802e-14,
+    "C2_gradient_hessian_join_difference_at_1e_10_offset": 6.586075679e-08,
+    "maximum_finite_difference_derivative_error": 3.378951961e-06,
+    "tests_passed": [
+      "variable_metal_eos",
+      "helmholtz",
+      "metal_eos",
+      "deuterium_material"
+    ]
+  },
+  "stellar_control": {
+    "mass_solar": 0.1,
+    "initial_age_years": 1000000000.0,
+    "nominal_interval_years": 1000000.0,
+    "controls": {
+      "instantaneous": {
+        "mode": "instantaneous",
+        "full_two_half_log_difference": 3.8563794824142406e-08,
+        "steps": [
+          {
+            "converged": 1,
+            "message": "converged",
+            "coupling": 2,
+            "first_law": 2.9531932455029164e-14,
+            "nuclear_mass": -5.76450776001991e-10,
+            "heat_residual": 2.5547732156075815e-14,
+            "convective_mass": 0.999999999999999,
+            "Teff": 2764.825101892436
+          },
+          {
+            "converged": 1,
+            "message": "converged",
+            "coupling": 2,
+            "first_law": 3.591145603110135e-09,
+            "nuclear_mass": 9.482150620243601e-10,
+            "heat_residual": 0,
+            "convective_mass": 0.999999999999999,
+            "Teff": 2764.8269743790343
+          },
+          {
+            "converged": 1,
+            "message": "converged",
+            "coupling": 2,
+            "first_law": 3.579385232654886e-09,
+            "nuclear_mass": -5.000444502911705e-11,
+            "heat_residual": 0,
+            "convective_mass": 0.999999999999999,
+            "Teff": 2764.825095230601
+          }
+        ],
+        "cpu_seconds": 0.3650929999999999
+      },
+      "finite": {
+        "mode": "finite",
+        "full_two_half_log_difference": 3.856384189759865e-08,
+        "steps": [
+          {
+            "converged": 1,
+            "message": "converged",
+            "coupling": 2,
+            "first_law": -5.051514762044462e-14,
+            "nuclear_mass": -1.341147152222888e-07,
+            "heat_residual": 2.9910971179579633e-13,
+            "convective_mass": 0.999999999999999,
+            "Teff": 2764.825101892264
+          },
+          {
+            "converged": 1,
+            "message": "converged",
+            "coupling": 2,
+            "first_law": 3.591809072389651e-09,
+            "nuclear_mass": -2.4915970564531875e-07,
+            "heat_residual": 0,
+            "convective_mass": 0.999999999999999,
+            "Teff": 2764.8269743788264
+          },
+          {
+            "converged": 1,
+            "message": "converged",
+            "coupling": 2,
+            "first_law": 3.5805090004004114e-09,
+            "nuclear_mass": -2.3669122162228717e-07,
+            "heat_residual": 0,
+            "convective_mass": 0.999999999999999,
+            "Teff": 2764.82509523043
+          }
+        ],
+        "cpu_seconds": 0.7971550000000001
+      }
+    },
+    "final_effective_temperature_difference_K": -1.709850039333105e-10,
+    "scope": "Imported PMS reference with explicit initial CN and face luminosities; D absent; SFIII/SVH pp/CN, plasma losses, convection/material heat/conduction. Microscopic drift explicitly omitted. Diagnostic control, not production restart."
+  },
+  "limitations": [
+    "The enriched diagnostic covers 49 of 72 sampled states. Eighteen 20-MK points exceed the thermal/density rectangle; five 0.2-MK intermediate-H enriched points remain masked. These omissions are not extrapolated or admitted.",
+    "Pressure/energy agreement does not establish every thermodynamic derivative or full future-state coverage. Largest existing reference-profile hZ relative error remains 13.14%.",
+    "Main-sequence control has no microscopic drift and imports an initial CN pattern; it cannot be joined to the scientific trajectory. Its finite/instantaneous agreement applies to this fully convective state, not flash convection.",
+    "Initial-D microscopic/material-heat support, production driver and a consistent atmosphere remain unfinished."
+  ],
+  "hashes": {
+    "src/eos_variable_metal.cpp": "df39c92931890be79b79255fd061ec2f675b35c5a5a69b842b18b46e0432750e",
+    "include/ember/eos_variable_metal.hpp": "1a0f13bd160ab3453bffbbef2ebddc650825084504d9280366c2ad18f4741e13",
+    "tests/CMakeLists.txt": "600f061c32f3574373fee5ea9db4af5342d65c78ea46d8410befc534c42de969",
+    "tests/test_variable_metal_eos.cpp": "8ca4604541d096eef821e43c2f6477cb93c51b8ab6ad5deb423a78f76167c920",
+    "out/eos-local-metal-sept26-v1/changes.patch": "3339536d8239327b8e7206ba81305c0409eee23714d698defcb8141e2346bad3",
+    "out/eos-local-metal-sept26-v1/variable_metal.dat": "8f46f9c7cc55ea29d23b5b4e597a4bc7aeeeb6aec04663f35dc5d5786eb6178b",
+    "out/eos-local-metal-sept26-v1/verified-tests.log": "385d461470e4dd59f332219fce46afd9abcd40d95a31917eff5a2556b299c07e",
+    "out/eos-local-metal-sept26-v1/interpolation-test.log": "aa6c211738c0d969d53983d9360ccb26854f9f0e1ab34a20fbcc45402b60d86c",
+    "out/eos-local-metal-sept26-v1/profile.jsonl": "20bfe61cd00116a30063a6f913673c6554d4087289849871fa19adb8109d8c8d",
+    "out/eos-local-metal-sept26-v1/profile-summary.json": "ea0f6d68d4c4e0a62c27eb35cfa5b2f814dbd62ae9b416834f38fc54af541e59",
+    "out/eos-local-metal-sept26-v1/enriched-comparison.json": "992972d24f14d79261647be43c3e6fb67f82e4a4db43b6ebc41e809fd2870777",
+    "out/eos-local-metal-sept26-v1/enriched-source.json": "a003dafd3fc11be82143ce352207bc65627529fb0f8d11cfffae27df341cfb4a",
+    "out/eos-local-metal-sept26-v1/stellar_control.cpp": "32e8dcb1d14c147ef5995c145bf65dab17ffe945b7ff8294a4d8f870bb8ed82a",
+    "out/eos-local-metal-sept26-v1/stellar_control": "de3bb7c7a0f8ec92a809198f0571da66da3d0b00807ffe110e09e6b398c3fff5",
+    "out/eos-local-metal-sept26-v1/stellar-plan.json": "9a4fa97ccc7dd64dcaf8fa6418842afae9155fd3c0875f2ec501b8e4268c1e9f",
+    "out/eos-local-metal-sept26-v1/stellar-completion.json": "efaf91485f97ff1d63424f58bc699eb534bc5701380ca6c67fbe1549c8adb137",
+    "out/eos-local-metal-sept26-v1/instantaneous.checkpoint": "d7dd2fe4c329d9f8ef07712c43883d846aa674f634c63aa4d37de94093a32637",
+    "out/eos-local-metal-sept26-v1/finite.checkpoint": "bfb0414795cf64aa0768e250f545c5153b9ee357abc802862e8198cc7ba11a23"
+  }
+}
