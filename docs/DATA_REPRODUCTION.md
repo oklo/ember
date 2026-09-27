@@ -138,6 +138,30 @@ accepted runtime atmosphere. Large generated outputs stay ignored/local.
 
 ## What a fresh checkout can reproduce immediately
 
+The full test suite also needs the exact local inputs listed in
+`data/TEST_DATA_MANIFEST.json`: two EOS families, opacity and conduction tables, atmosphere boundary tables,
+and the archived source outputs used by the import checks. They total
+**454.1 MB** before compression. A checkout with an installed dataset can
+prepare a portable bundle without recomputing any physics:
+
+```sh
+python3 scripts/package_test_data.py --verify
+python3 scripts/package_test_data.py --pack /tmp/ember-test-data.tar.gz
+```
+
+In another checkout, install that separately supplied bundle and verify it:
+
+```sh
+python3 scripts/package_test_data.py --install /tmp/ember-test-data.tar.gz
+python3 scripts/package_test_data.py --verify
+```
+
+Installation checks every path, size and SHA-256 before writing. It refuses
+changed existing inputs. The bundle is prepared locally; no public download
+has been published. The `lifetime_restart` test additionally needs the
+continuous-star inputs described in [LIFETIME_DRIVER.md](LIFETIME_DRIVER.md).
+These datasets serve different purposes and have separate manifests.
+
 The report PDF can be rebuilt from its LaTeX source and committed vector figure.
 The figures can be regenerated from the committed Ember and F77 history CSV
 files and F77 extraction record using

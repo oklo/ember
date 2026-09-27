@@ -1,0 +1,31 @@
+{
+  "created_utc": "2026-09-27T01:22:08.780234+00:00",
+  "scope": "Clean prepared source checkout builds every target and passes the complete registered suite after installing the hash-pinned test and production inputs.",
+  "checkout": "/private/tmp/ember-reviewed-source-sept26-v1",
+  "test_inputs": {
+    "files": 1369,
+    "bytes": 454087231,
+    "manifest_sha256": "c2b37b543271cc558fba87a31c7b61a02f4747b77796659e88f0c798a3e4d9cd",
+    "bundle": "out/test-fixture-release-sept26-v1/ember-test-data-complete.tar.gz",
+    "bundle_bytes": 228377179,
+    "bundle_sha256": "6a49ceba1f5a8c83e0afdc10524aa25e4f6c6b27dfb17246576c1c13d8516d06"
+  },
+  "tests": {
+    "passed": 71,
+    "total": 71,
+    "log": "out/test-fixture-release-sept26-v1/ctest-complete.log",
+    "log_sha256": "98111cde5cbf276f80394e9732e404a899f65cc7823d29d30b0b4523283c4177"
+  },
+  "installer_controls": [
+    "Exact bundle/install round trip",
+    "Different installed bytes rejected without overwrite",
+    "Corrupt archive rejected before writing",
+    "Undeclared archive path rejected before writing"
+  ],
+  "review_correction": "All four headers described as unused are included and used by scripts/metal_stellar_control.cpp. The prepared source checkout now contains them, with no physics change.",
+  "limitations": [
+    "No public source or data release has been pushed.",
+    "The lifetime restart test also needs the separately manifested continuous-star runtime package.",
+    "The compressed test data are kept outside Git; upstream terms remain applicable to source-code excerpts."
+  ]
+}
