@@ -17,6 +17,14 @@ INPUT_KEYS = ("eos", "opacity_low", "opacity_warm", "opacity_bridge",
               "opacity_hot", "conduction", "atmosphere", "collisions", "composition")
 
 
+def is_family(path, role):
+    if role == "eos":
+        with path.open("rb") as stream:
+            header = stream.readline(128)
+        return not header.startswith(b"EMBER_VARIABLE_METAL_HELMHOLTZ_BINARY ")
+    return role.startswith("opacity_")
+
+
 def digest(path):
     with path.open("rb") as stream:
         return hashlib.file_digest(stream, "sha256").hexdigest()
@@ -85,7 +93,7 @@ def verify(manifest):
     for role in INPUT_KEYS:
         path = (config.parent / settings(config)[role]).resolve(strict=True)
         discovered.add(path)
-        if role == "eos" or role.startswith("opacity_"):
+        if is_family(path, role):
             _, children = family(path, role)
             discovered.update(child for _, child in children)
     declared = {(root / entry["path"]).resolve() for entry in record["files"]}
@@ -136,7 +144,7 @@ def package(config, destination, metadata, manifest, source_root):
 
     for role in INPUT_KEYS:
         source = (config.parent / cfg[role]).resolve(strict=True)
-        if role == "eos" or role.startswith("opacity_"):
+        if is_family(source, role):
             header, children = family(source, role)
             target = destination / f"{role}.dat"
             rows = header[:]

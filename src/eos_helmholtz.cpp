@@ -3,6 +3,7 @@
 #include "ember/interp.hpp"
 #include "ember/detail/differential.hpp"
 #include "numeric_table_data.hpp"
+#include "binary_table_io.hpp"
 #include <algorithm>
 #include <cmath>
 #include <fstream>
@@ -91,6 +92,55 @@ HelmholtzTableEos::HelmholtzTableEos(const std::filesystem::path& file, Mixture 
     }
   }
   data.finish();
+  initialize_support();
+}
+
+HelmholtzTableEos::HelmholtzTableEos(std::istream& in,Mixture mixture) {
+  using namespace detail::binary;
+  if(read_u64(in)!=1)throw std::runtime_error("binary EOS: unsupported plane format");
+  source_=read_text(in);proxy_=read_text(in);
+  if(proxy_!="none" && mixture!=Mixture::allow_documented_proxy)
+    throw std::invalid_argument("HelmholtzTableEos: explicit composition proxy selection required");
+  const auto basis_id=read_u64(in),inventory=read_u64(in);
+  if(basis_id>1 || inventory>1)throw std::runtime_error("binary EOS: invalid composition convention");
+  composition_.basis=static_cast<AbundanceBasis>(basis_id);
+  composition_.metal_inventory=static_cast<MetalInventory>(inventory);
+  const auto fractions=read_values(in,NSPEC);
+  std::copy(fractions.begin(),fractions.end(),composition_.X.begin());
+  for(double x:fractions)if(x<0 || x>1)throw std::runtime_error("binary EOS: invalid composition");
+  if(std::abs(composition_.sum()-1)>1e-10)throw std::runtime_error("binary EOS: composition sum");
+  const auto nt=read_u64(in),nq=read_u64(in);
+  if(nt<2 || nq<2 || nt>2000 || nq>2000 || nt*nq>1000000)
+    throw std::runtime_error("binary EOS: invalid grid dimensions");
+  t_=read_values(in,static_cast<std::size_t>(nt));q_=read_values(in,static_cast<std::size_t>(nq));
+  for(const auto* axis:{&t_,&q_})for(std::size_t i=1;i<axis->size();++i)
+    if((*axis)[i]<=(*axis)[i-1])throw std::runtime_error("binary EOS: unordered axis");
+  nodes_.resize(static_cast<std::size_t>(nt*nq));
+  const auto values=read_values(in,10*nodes_.size());
+  for(std::size_t i=0;i<nodes_.size();++i) {
+    if(values[10*i]!=0 && values[10*i]!=1)throw std::runtime_error("binary EOS: invalid mask");
+    nodes_[i].valid=values[10*i]==1;
+    std::copy_n(values.begin()+static_cast<std::ptrdiff_t>(10*i+1),9,nodes_[i].d.begin());
+  }
+  initialize_support();
+}
+
+void HelmholtzTableEos::write_binary(std::ostream& out) const {
+  using namespace detail::binary;
+  write_u64(out,1);write_text(out,source_);write_text(out,proxy_);
+  write_u64(out,static_cast<std::uint64_t>(composition_.basis));
+  write_u64(out,static_cast<std::uint64_t>(composition_.metal_inventory));
+  write_values(out,composition_.X);write_u64(out,t_.size());write_u64(out,q_.size());
+  write_values(out,t_);write_values(out,q_);
+  std::vector<double> values(10*nodes_.size());
+  for(std::size_t i=0;i<nodes_.size();++i) {
+    values[10*i]=nodes_[i].valid?1:0;
+    std::copy(nodes_[i].d.begin(),nodes_[i].d.end(),values.begin()+static_cast<std::ptrdiff_t>(10*i+1));
+  }
+  write_values(out,values);
+}
+
+void HelmholtzTableEos::initialize_support() {
   supported_hi_.resize(t_.size()-1);
   for(std::size_t it=0;it+1<t_.size();++it) {
     std::size_t hi=0;

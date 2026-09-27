@@ -1,0 +1,54 @@
+{
+  "created_utc": "2026-09-27T00:14:38.644529+00:00",
+  "scope": "Single binary EOS bundle preserves all parsed source values, masks and logarithmic coordinates; unchanged mixing, splines and thermodynamic evaluation.",
+  "bundle": "out/binary-eos-sept26-v1/eos.bin",
+  "bundle_sha256": "3f57206bacfb67154634621415a459b570b576707ab512aca68f299368564250",
+  "bundle_bytes": 960684614,
+  "text_eos_bytes": 1701465082,
+  "executable_sha256": "2a016ca3af48a3b9f27b11da1c2d5b3c5be77b0c3ca9d2425bdd2a8867ec594c",
+  "tests": {
+    "passed": 71,
+    "total": 71,
+    "log": "out/unified-evolution-sept25-v1/binary-eos-tests.log"
+  },
+  "replay": {
+    "saved_models": 1020,
+    "accepted": 1019,
+    "rejected": 0,
+    "endpoint_years": 1000000000.0,
+    "history_equal_except": [
+      "cpu_seconds"
+    ],
+    "checkpoints": [
+      {
+        "file": "seed.checkpoint",
+        "physical_payload_identical": true,
+        "physical_payload_sha256": "7c8e8061e6eee04e435459b91b1125a4ca0ba314e84964e2005f660d175d31a2"
+      },
+      {
+        "file": "final.checkpoint",
+        "physical_payload_identical": true,
+        "physical_payload_sha256": "00843ef56a2db35eb532cfeb933345c8b35257245c573773678387c16574a027"
+      }
+    ]
+  },
+  "startup": {
+    "scope": "CPU through construction of the first relaxed model, including identity checks and table loading; one matched text/binary pair, source workers active.",
+    "text_CPU_seconds": 6.747791,
+    "binary_CPU_seconds": 2.590533,
+    "ratio": 2.604788667042651
+  },
+  "limitations": [
+    "Operational and storage improvement, not a new atmosphere or transport selection.",
+    "The continuous physical frontier remains 4 Gyr.",
+    "The binary format is an explicit input selection, not an unchecked mtime cache.",
+    "The original text family and source provenance are retained."
+  ],
+  "portable_package": {
+    "files": 24,
+    "manifest_sha256": "d45af78861f8a27a49636a8a397f61bb562e753efc0d7fe4364394d416527a06",
+    "exact_initial_checkpoint": true,
+    "exact_first_accepted_model": true,
+    "external_runtime_paths": false
+  }
+}

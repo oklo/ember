@@ -32,6 +32,9 @@ class VariableMetalHelmholtzEos final : public Eos {
  public:
   explicit VariableMetalHelmholtzEos(const std::filesystem::path&,
       HelmholtzTableEos::Mixture=HelmholtzTableEos::Mixture::exact);
+  // Convert a text family and its planes to one relocatable binary input.
+  // Stored doubles, masks and logarithmic coordinates remain bit-identical.
+  static void pack_binary(const std::filesystem::path& source,const std::filesystem::path& destination);
   EosState eval(double T,double rho,const Composition& c) const override {
     return eval_with_derivatives(T,rho,c).state;
   }

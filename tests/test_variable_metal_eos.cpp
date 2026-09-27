@@ -1,6 +1,7 @@
 #include "ember/eos_variable_metal.hpp"
 #include "ember/constants.hpp"
 #include <algorithm>
+#include <bit>
 #include <chrono>
 #include <cmath>
 #include <cstdio>
@@ -55,12 +56,17 @@ void fixture(const std::filesystem::path& dir,bool cubic,bool masked) {
 }
 double response_difference(const VariableMetalHelmholtzEos& a,const VariableMetalHelmholtzEos& b,
                            double T,double rho,const Composition& c) {
-  const auto x=a.eval(T,rho,c),y=b.eval(T,rho,c);
+  const auto ex=a.eval_with_derivatives(T,rho,c),ey=b.eval_with_derivatives(T,rho,c);
+  const auto& x=ex.state;const auto& y=ey.state;
   const auto p=a.composition_potential(T,rho,c),q=b.composition_potential(T,rho,c);
   const auto h=a.composition_heat(T,rho,c),j=b.composition_heat(T,rho,c);
   double error=0;
   auto add=[&](double r,double s){error=std::max(error,std::abs(r-s)/std::max(1.,std::abs(r)));};
   add(x.P,y.P);add(x.E,y.E);add(x.S,y.S);add(x.cp,y.cp);add(x.grad_ad,y.grad_ad);
+  add(x.cv,y.cv);add(x.chiT,y.chiT);add(x.chiRho,y.chiRho);add(x.delta,y.delta);add(x.Gamma1,y.Gamma1);
+  add(ex.dE_dlnRho,ey.dE_dlnRho);add(ex.dcp_dlnT,ey.dcp_dlnT);add(ex.dcp_dlnRho,ey.dcp_dlnRho);
+  add(ex.ddelta_dlnT,ey.ddelta_dlnT);add(ex.ddelta_dlnRho,ey.ddelta_dlnRho);
+  add(ex.dgrad_ad_dlnT,ey.dgrad_ad_dlnT);add(ex.dgrad_ad_dlnRho,ey.dgrad_ad_dlnRho);
   add(p.phi,q.phi);
   for(std::size_t k=0;k<3;++k) {
     add(p.gradient[k],q.gradient[k]);add(h.exchange_enthalpy[k],j.exchange_enthalpy[k]);
@@ -81,8 +87,14 @@ int main() {
     VariableMetalHelmholtzEos one(dir/"smooth/family5.dat",M::allow_documented_proxy);
     VariableMetalHelmholtzEos two(dir/"smooth/family6.dat",M::allow_documented_proxy);
     VariableMetalHelmholtzEos masked(dir/"masked/family6.dat",M::allow_documented_proxy);
+    VariableMetalHelmholtzEos::pack_binary(dir/"smooth/family6.dat",dir/"smooth.bin");
+    VariableMetalHelmholtzEos::pack_binary(dir/"smooth/family4.dat",dir/"old.bin");
+    VariableMetalHelmholtzEos::pack_binary(dir/"masked/family6.dat",dir/"masked.bin");
+    VariableMetalHelmholtzEos cached(dir/"smooth.bin",M::allow_documented_proxy);
+    VariableMetalHelmholtzEos cached_old(dir/"old.bin",M::allow_documented_proxy);
+    VariableMetalHelmholtzEos cached_masked(dir/"masked.bin",M::allow_documented_proxy);
     const double T=3e5,rho=.3;
-    double exact=0,preserved=0,extended_preserved=0;
+    double exact=0,preserved=0,extended_preserved=0,cache_error=0;
     for(double z:{1e-6,.004,.015,.02,std::nextafter(.02,1.),.03,.04,.040001,.07,.12,.16,.18,.24,.3})
       for(double u:{.53,.73})for(double v:{.07,.15}) {
         const auto c=composition((1-z)*u,(1-z)*(1-u)*v,z);
@@ -92,12 +104,33 @@ int main() {
         if(z<=.04) {
           preserved=std::max(preserved,response_difference(old,two,T,rho,c));
           preserved=std::max(preserved,response_difference(old,masked,T,rho,c));
+          cache_error=std::max({cache_error,response_difference(old,cached_old,T,rho,c),
+                               response_difference(masked,cached_masked,T,rho,c)});
         }
+        cache_error=std::max(cache_error,response_difference(two,cached,T,rho,c));
         if(z<=.16)extended_preserved=std::max(extended_preserved,response_difference(one,two,T,rho,c));
       }
     check(exact<2e-11,"arbitrary cubic source pressure/energy reproduced across both extensions",exact);
     check(preserved==0,"all low-Z responses unchanged, including ULP perturbation and masked distant planes",preserved);
     check(extended_preserved==0,"a further source plane preserves every previously covered response",extended_preserved);
+    check(cache_error==0,"binary families preserve thermal and composition responses exactly",cache_error);
+    check(throws([&]{cached_masked.eval(T,rho,composition(.3,.03,.1));}),"binary family preserves source masks");
+    check(throws([&]{cached.eval(T,rho,composition(.3,.03,.301));}),"binary family still rejects extrapolation");
+    check(throws([&]{VariableMetalHelmholtzEos::pack_binary(dir/"smooth/family6.dat",dir/"smooth.bin");}),
+          "packing refuses to overwrite an existing input");
+    std::filesystem::copy_file(dir/"smooth.bin",dir/"truncated.bin");
+    std::filesystem::resize_file(dir/"truncated.bin",std::filesystem::file_size(dir/"truncated.bin")-1);
+    check(throws([&]{VariableMetalHelmholtzEos bad(dir/"truncated.bin",M::allow_documented_proxy);}),
+          "truncated binary input is rejected");
+    std::filesystem::copy_file(dir/"smooth.bin",dir/"corrupt.bin");
+    {
+      std::fstream file(dir/"corrupt.bin",std::ios::in|std::ios::out|std::ios::binary);
+      file.seekp(-80,std::ios::end);auto value=std::bit_cast<std::uint64_t>(2.);
+      if constexpr(std::endian::native!=std::endian::little)value=std::byteswap(value);
+      file.write(reinterpret_cast<const char*>(&value),8);
+    }
+    check(throws([&]{VariableMetalHelmholtzEos bad(dir/"corrupt.bin",M::allow_documented_proxy);}),
+          "invalid binary mask is rejected");
     check(throws([&]{masked.eval(T,rho,composition(.3,.03,.1));}),"needed masked high-Z source is still rejected");
     check(throws([&]{two.eval(T,rho,composition(.3,.03,.301));}),"metal extrapolation remains rejected");
     double continuity=0,derivative=0,firstlaw=0;

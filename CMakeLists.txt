@@ -13,11 +13,10 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 # --- Apple silicon -----------------------------------------------------------
-# Target the native CPU and make Accelerate available for linear algebra.
-# Current profiles are dominated by nuclear screening and opacity/conduction;
-# the small Henyey blocks use a portable pivoted kernel. -ffp-contract=fast
+# Target the native CPU.
+# The small Henyey blocks use a pivoted kernel. -ffp-contract=fast
 # permits FMA contraction in interpolation without the broader assumptions
-# licensed by -ffast-math. Independent step estimates can use two CPU workers.
+# licensed by -ffast-math.
 include(CheckCXXCompilerFlag)
 check_cxx_compiler_flag("-mcpu=apple-m4" EMBER_HAS_M4)
 add_library(ember_flags INTERFACE)
@@ -34,12 +33,6 @@ endif()
 # Deliberately NOT -ffast-math: it licenses the compiler to assume no NaN/Inf,
 # and a stellar model legitimately probes states where a table lookup returns
 # one.  We want those to surface, not to be optimised away.
-
-find_library(ACCELERATE Accelerate)
-if(ACCELERATE)
-  target_compile_definitions(ember_flags INTERFACE EMBER_HAVE_ACCELERATE=1)
-  target_link_libraries(ember_flags INTERFACE ${ACCELERATE})
-endif()
 
 find_package(Threads REQUIRED)
 target_link_libraries(ember_flags INTERFACE Threads::Threads)

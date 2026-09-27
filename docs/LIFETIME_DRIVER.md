@@ -91,3 +91,23 @@ does not silently reinterpret a checkpoint from a different executable or
 physics selection. `report.json` distinguishes the requested age from a planned stop or a
 physical/source-domain failure. A bounded run finishing is not a claim that the
 full evolutionary track has been completed.
+
+To avoid repeatedly parsing the EOS text planes, pack the selected family once:
+
+```sh
+build/apps/ember-pack-eos data/production/eos.dat data/production/eos.bin
+```
+
+Set `eos` in a copied configuration to the binary file, using a path relative to
+that configuration. The bundle contains the same source values, masks and
+logarithmic coordinates as the text input, in little-endian IEEE binary64.
+Interpolation and the construction of composition derivatives are unchanged.
+It is a self-contained input, checked by content; the loader does not trust
+modification times or silently substitute a cache. Keep the original source
+manifest and provenance for regeneration. An existing output is never overwritten.
+
+The retained 1-Gyr contraction reproduces all 1020 physical history rows and
+both complete physical checkpoints exactly with binary loading. In one matched
+M4 check, CPU time through construction of the initial relaxed model fell from
+6.748 to 2.591 s, including input checks and loading. This is a startup improvement;
+it does not imply the same speedup for a long evolutionary calculation.

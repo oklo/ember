@@ -1,5 +1,7 @@
 add_executable(ember-info info.cpp)
 target_link_libraries(ember-info PRIVATE ember)
+add_executable(ember-pack-eos pack_eos.cpp)
+target_link_libraries(ember-pack-eos PRIVATE ember)
 add_executable(ember-polytrope polytrope.cpp)
 target_link_libraries(ember-polytrope PRIVATE ember)
 add_executable(ember-equilibrium equilibrium.cpp)

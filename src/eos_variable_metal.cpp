@@ -78,8 +78,9 @@ VariableMetalHelmholtzEos::VariableMetalHelmholtzEos(const std::filesystem::path
     HelmholtzTableEos::Mixture mixture) {
   if(mixture!=HelmholtzTableEos::Mixture::allow_documented_proxy)
     throw std::invalid_argument("variable EOS: source approximations require explicit selection");
-  std::ifstream in(path);std::string key;int version{};in>>key>>version;
-  if(!in || key!="EMBER_VARIABLE_METAL_HELMHOLTZ" || (version!=1 && version!=2))
+  std::ifstream in(path,std::ios::binary);std::string key;int version{};in>>key>>version;
+  const bool binary=key=="EMBER_VARIABLE_METAL_HELMHOLTZ_BINARY";
+  if(!in || (!binary && key!="EMBER_VARIABLE_METAL_HELMHOLTZ") || (version!=1 && version!=2))
     throw std::runtime_error("variable EOS: invalid manifest");
   extend_metals_=version==2;
   auto axis=[&](const char* label,std::vector<double>& values,std::size_t minimum,std::size_t maximum) {
@@ -91,6 +92,10 @@ VariableMetalHelmholtzEos::VariableMetalHelmholtzEos(const std::filesystem::path
   };
   axis("metals",z_,extend_metals_?4:3,extend_metals_?32:4);
   axis("hydrogen_share",u_,4,100);axis("helium3_share",v_,3,4);
+  if(binary) {
+    in>>key;
+    if(key!="planes_binary_v1" || in.get()!='\n')throw std::runtime_error("variable EOS: invalid binary plane marker");
+  }
   if(z_.back()>=1)throw std::runtime_error("variable EOS: material needs H or helium");
   // Preserve the original cubic on the first four planes. Each subsequent
   // interval matches value, first derivative and second derivative at both
@@ -115,9 +120,13 @@ VariableMetalHelmholtzEos::VariableMetalHelmholtzEos(const std::filesystem::path
   bool have_pattern=false;
   for(std::size_t iz=0;iz<z_.size();++iz)for(std::size_t iu=0;iu<u_.size();++iu)
     for(std::size_t iv=0;iv<v_.size();++iv) {
-      std::string filename;in>>std::quoted(filename);
-      if(!in || filename.empty())throw std::runtime_error("variable EOS: missing source plane");
-      auto table=std::make_unique<HelmholtzTableEos>(path.parent_path()/filename,mixture);
+      std::unique_ptr<HelmholtzTableEos> table;
+      if(binary)table.reset(new HelmholtzTableEos(in,mixture));
+      else {
+        std::string filename;in>>std::quoted(filename);
+        if(!in || filename.empty())throw std::runtime_error("variable EOS: missing source plane");
+        table=std::make_unique<HelmholtzTableEos>(path.parent_path()/filename,mixture);
+      }
       if(!tables_.empty() && !table->same_material_grid(*tables_.front()))
         throw std::runtime_error("variable EOS: source material grids differ");
       const auto& c=table->composition();

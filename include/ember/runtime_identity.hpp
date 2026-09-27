@@ -29,6 +29,9 @@ public:
     in>>magic>>version;
     if(!in)throw std::runtime_error("missing runtime family: "+role);
     values[role+".format"]=magic+" "+std::to_string(version);
+    if(eos && magic=="EMBER_VARIABLE_METAL_HELMHOLTZ_BINARY" && (version==1 || version==2)) {
+      file(role+".archive",path);return;
+    }
     if(eos) {
       if(magic!="EMBER_VARIABLE_METAL_HELMHOLTZ" || (version!=1 && version!=2))
         throw std::runtime_error("invalid EOS identity format");

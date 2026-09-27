@@ -2,6 +2,7 @@
 #include "ember/eos.hpp"
 #include <array>
 #include <filesystem>
+#include <iosfwd>
 #include <span>
 #include <string>
 #include <vector>
@@ -33,6 +34,9 @@ private:
   friend class MetalHelmholtzEos;
   friend class SmoothMetalHelmholtzEos;
   friend class VariableMetalHelmholtzEos;
+  HelmholtzTableEos(std::istream&, Mixture);
+  void write_binary(std::ostream&) const;
+  void initialize_support();
   struct WeightedTable {const HelmholtzTableEos* table;double weight;};
   bool same_material_grid(const HelmholtzTableEos& other) const {return t_==other.t_ && q_==other.q_;}
   // Caller verifies the common grid once when constructing its family.
