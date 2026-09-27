@@ -6,6 +6,7 @@
 #include "ember/runtime_identity.hpp"
 #include "ember/atmosphere_deuterium.hpp"
 #include "ember/atmosphere_fixed_metal.hpp"
+#include "ember/atmosphere_overlap.hpp"
 #include "ember/atmosphere_grid.hpp"
 #include "ember/conduction_table.hpp"
 #include "ember/eos_deuterium.hpp"
@@ -79,6 +80,13 @@ int lifetime_main(int argc,char** argv) {
     const auto path=[&](const char* key){return fs::canonical(config.parent_path()/cfg.get(key));};
     const auto eos_path=path("eos"),low_path=path("opacity_low"),warm_path=path("opacity_warm"),bridge_path=path("opacity_bridge"),hot_path=path("opacity_hot");
     const auto conduction_path=path("conduction"),atmosphere_path=path("atmosphere"),collision_path=path("collisions"),composition_path=path("composition");
+    fs::path main_atmosphere_path;
+    AtmosphereOverlap::Options atmosphere_join;
+    if(cfg.values.contains("atmosphere_main_sequence")) {
+      main_atmosphere_path=path("atmosphere_main_sequence");
+      atmosphere_join={cfg.number("atmosphere_join_log_g_low"),cfg.number("atmosphere_join_log_g_high"),
+        cfg.number("atmosphere_join_hydrogen_low"),cfg.number("atmosphere_join_hydrogen_high")};
+    }
     const double mass=cfg.number("mass_Msun")*constants::Msun,radius=cfg.number("initial_radius_Rsun")*constants::Rsun;
     const double teff=cfg.number("initial_Teff_K"),entropy_loss=cfg.number("initial_entropy_loss");
     const double count=cfg.number("points"),threads=cfg.number("zone_threads"),minimum_temperature=cfg.number("screened_minimum_T_K");
@@ -110,6 +118,14 @@ int lifetime_main(int argc,char** argv) {
     RuntimeIdentity identity;identity.file("executable",argv[0]);
     identity.values["atmosphere.metals"]=atmosphere_metals;
     identity.number("atmosphere.maximum_delta_Z",atmosphere_delta_Z);
+    identity.values["atmosphere.overlap"]=main_atmosphere_path.empty()?"none":"gravity_hydrogen.v1";
+    if(!main_atmosphere_path.empty()) {
+      identity.file("atmosphere_main_sequence",main_atmosphere_path);
+      identity.number("atmosphere.join.log_g_low",atmosphere_join.log_g_low);
+      identity.number("atmosphere.join.log_g_high",atmosphere_join.log_g_high);
+      identity.number("atmosphere.join.hydrogen_low",atmosphere_join.hydrogen_low);
+      identity.number("atmosphere.join.hydrogen_high",atmosphere_join.hydrogen_high);
+    }
     for(const auto& [key,value]:std::map<std::string,double>{{"mass_g",mass},{"initial_radius_cm",radius},
         {"initial_Teff_K",teff},{"initial_entropy_loss",entropy_loss},{"points",count},
         {"screened_minimum_T_K",minimum_temperature},{"structure_tolerance",structure_tolerance},
@@ -145,8 +161,21 @@ int lifetime_main(int argc,char** argv) {
     std::unique_ptr<FixedMetalAtmosphere> fixed_metal_atmosphere;
     if(atmosphere_metals=="bounded_fixed_Z")fixed_metal_atmosphere=std::make_unique<FixedMetalAtmosphere>(
         eos,table_atmosphere,atmosphere_delta_Z);
-    TraceDeuteriumAtmosphere atmosphere(eos,fixed_metal_atmosphere
-        ?static_cast<const Atmosphere&>(*fixed_metal_atmosphere):table_atmosphere);
+    const Atmosphere& contraction_atmosphere=fixed_metal_atmosphere
+        ?static_cast<const Atmosphere&>(*fixed_metal_atmosphere):table_atmosphere;
+    std::unique_ptr<CompositionAtmosphereGrid> main_atmosphere;
+    std::unique_ptr<FixedMetalAtmosphere> fixed_main_atmosphere;
+    std::unique_ptr<AtmosphereOverlap> atmosphere_overlap;
+    if(!main_atmosphere_path.empty()) {
+      main_atmosphere=std::make_unique<CompositionAtmosphereGrid>(eos,main_atmosphere_path,
+          CompositionAtmosphereGrid::Mixture::allow_documented_proxy);
+      if(atmosphere_metals=="bounded_fixed_Z")fixed_main_atmosphere=std::make_unique<FixedMetalAtmosphere>(
+          eos,*main_atmosphere,atmosphere_delta_Z);
+      const Atmosphere& main=fixed_main_atmosphere?static_cast<const Atmosphere&>(*fixed_main_atmosphere):*main_atmosphere;
+      atmosphere_overlap=std::make_unique<AtmosphereOverlap>(eos,contraction_atmosphere,main,atmosphere_join);
+    }
+    TraceDeuteriumAtmosphere atmosphere(eos,atmosphere_overlap
+        ?static_cast<const Atmosphere&>(*atmosphere_overlap):contraction_atmosphere);
     PPCNNetwork nuclear(PPRates::solar_fusion_iii,PPScreening::salpeter_van_horn,PPRates::solar_fusion_iii);
     PlasmaNeutrinoLosses losses;ScreenedCollisionTransport collisions(collision_path.string());
     ScreenedMetalMicroscopicTransport microscopic(table_eos,collisions,true,minimum_temperature,{true,true,true},true);

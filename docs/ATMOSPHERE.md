@@ -39,6 +39,33 @@ silently add this approximation. During initial deuterium burning the separate
 trace-D mapping is applied first, with density again evaluated for the actual
 isotope mixture.
 
+## Overlapping contraction and main-sequence tables
+
+`AtmosphereOverlap` joins two already calculated atmosphere families at the same
+optical depth. The continuous driver can select the following overlap explicitly:
+
+```text
+atmosphere_main_sequence "path/to/main_sequence_table.dat"
+atmosphere_join_log_g_low "4.95"
+atmosphere_join_log_g_high "5.1"
+atmosphere_join_hydrogen_low ".6985"
+atmosphere_join_hydrogen_high ".6995"
+```
+
+Within the declared interval, temperature and gas pressure are blended
+logarithmically with a quintic weight. The returned derivatives include the
+change of that weight. Increasing gravity selects the main-sequence table;
+decreasing hydrogen also selects it, so later expansion does not return an
+evolved star to the initial-composition contraction table. This is one boundary
+prescription throughout the calculation, determined by physical coordinates.
+
+Outside the overlap each source is returned exactly. Both sources must support
+every query inside the overlap; the code neither fills a missing entry nor
+changes the matching depth. Source contents and all four joining coordinates
+enter restart identity. The runtime-data packager includes both tables.
+Agreement in the overlap must be checked before selecting a pair; mathematical
+smoothness alone does not establish physical accuracy.
+
 ## Grey fallback
 
 `GreyAtmosphere` implements the plane-parallel radiative Eddington relation

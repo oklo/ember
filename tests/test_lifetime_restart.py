@@ -103,6 +103,14 @@ def main():
                        expected=1, configuration=changed)
         assert "checkpoint" in rejected.stderr and "atmosphere." in rejected.stderr
 
+        changed = configuration_file("changed-atmosphere-overlap.txt", {
+            "atmosphere_main_sequence": settings["atmosphere"],
+            "atmosphere_join_log_g_low": "4.95", "atmosphere_join_log_g_high": "5.1",
+            "atmosphere_join_hydrogen_low": ".6985", "atmosphere_join_hydrogen_high": ".6995"})
+        rejected = run("atmosphere-overlap-change", ("--restart", str(work / "prefix/final.checkpoint")),
+                       expected=1, configuration=changed)
+        assert "checkpoint" in rejected.stderr
+
         # A corrupted table must be rejected by identity, before its parser is
         # constructed. Do not edit a hard link to the retained source dataset.
         (relocated / "broken-conduction.dat").write_text("not a conduction table\n")

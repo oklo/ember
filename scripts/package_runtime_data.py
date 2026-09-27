@@ -15,6 +15,11 @@ import shutil
 
 INPUT_KEYS = ("eos", "opacity_low", "opacity_warm", "opacity_bridge",
               "opacity_hot", "conduction", "atmosphere", "collisions", "composition")
+OPTIONAL_INPUT_KEYS = ("atmosphere_main_sequence",)
+
+
+def input_keys(configuration):
+    return INPUT_KEYS + tuple(key for key in OPTIONAL_INPUT_KEYS if key in configuration)
 
 
 def is_family(path, role):
@@ -89,9 +94,10 @@ def verify(manifest):
         if path.stat().st_size != entry["size"] or digest(path) != entry["sha256"]:
             raise ValueError(f"packaged input differs: {path}")
     config = (root / record["configuration"]).resolve(strict=True)
+    cfg = settings(config)
     discovered = {config}
-    for role in INPUT_KEYS:
-        path = (config.parent / settings(config)[role]).resolve(strict=True)
+    for role in input_keys(cfg):
+        path = (config.parent / cfg[role]).resolve(strict=True)
         discovered.add(path)
         if is_family(path, role):
             _, children = family(path, role)
@@ -142,7 +148,7 @@ def package(config, destination, metadata, manifest, source_root):
         record(source, target, role, checksum)
         return target
 
-    for role in INPUT_KEYS:
+    for role in input_keys(cfg):
         source = (config.parent / cfg[role]).resolve(strict=True)
         if is_family(source, role):
             header, children = family(source, role)
