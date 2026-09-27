@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-27T11:08:16.585259+00:00",
+  "created_utc": "2026-09-27T12:55:39.038403+00:00",
   "sources": [
     {
       "path": "out/continuous-lifetime-sept27-v2/initial-check/history.jsonl",
@@ -84,10 +84,28 @@
       "retained_through": 8564,
       "source_bytes_sha256": "1dd734296090db6219a0fb05bd6c2d7dc38cb804a7c690b891cc7c720f42dce1",
       "CPU_seconds": 6595.41975
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v13/evolution/history.jsonl",
+      "retained_through": 9000,
+      "source_bytes_sha256": "2c8e84c4b5881e4b1b3926279f440d8de6124a6b60f9889005ce101e79634dbd",
+      "CPU_seconds": 8105.41436
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v14/evolution/history.jsonl",
+      "retained_through": 9462,
+      "source_bytes_sha256": "351bad800818a2712c2e1217f4baa8a593bf09161682ea8c73202072b70e0484",
+      "CPU_seconds": 4598.095519
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v15/evolution/history.jsonl",
+      "retained_through": 9593,
+      "source_bytes_sha256": "27c668b869397d1ee934daf9408b56c35e858a403f762647a4d532e896538ba0",
+      "CPU_seconds": 1301.943575
     }
   ],
-  "models": 8565,
-  "CPU_seconds": 48523.814001,
+  "models": 9594,
+  "CPU_seconds": 62529.267455,
   "contraction_model": {
     "years": 990131259.1322539,
     "step_years": 35442295.89326342,
@@ -117,32 +135,32 @@
     "cpu_seconds": 944.506238
   },
   "latest": {
-    "years": 3585155270962.023,
-    "step_years": 3379625.5508103753,
-    "accepted": 8564,
-    "rejected": 723,
-    "radius_Rsun": 0.14116687201876474,
-    "Teff_K": 3338.7578963307624,
-    "luminosity_Lsun": 0.0022309969384116616,
-    "nuclear_fraction": 0.9981316707414091,
-    "central_T_K": 9340630.027662998,
-    "H_mass_g": 3.3063525935059486e+31,
-    "He3_mass_g": 2.528338352385142e+29,
+    "years": 3615125248250.1606,
+    "step_years": 65155505.92191429,
+    "accepted": 9593,
+    "rejected": 956,
+    "radius_Rsun": 0.14195023704866427,
+    "Teff_K": 3497.129260192604,
+    "luminosity_Lsun": 0.002715267754469893,
+    "nuclear_fraction": 0.9971267823915827,
+    "central_T_K": 10909806.951166073,
+    "H_mass_g": 3.1651696942693696e+31,
+    "He3_mass_g": 2.7154699458800336e+29,
     "D_mass_g": 0,
-    "surface_X": 0.20471827661386685,
-    "surface_Z": 0.017586831969192432,
-    "error_norm": 0.0007001241248445206,
+    "surface_X": 0.27771042975129706,
+    "surface_Z": 0.013302284403673042,
+    "error_norm": 0.5044003952736631,
     "initial_D_approximation": 0,
     "omitted_mixing_heat_fraction": 0,
     "gross_mixing_heat_fraction": 0,
-    "burn_gradient_estimate": 1.8034685157939939e-12,
-    "drift_gradient_proxy": 7.848133636651034e-07,
-    "kinetic_heat_proxy": 0.01118519399322422,
-    "convective_mass_fraction": 0.4576737373725594,
-    "radiative_boundaries": 271,
-    "relative_mixing_gradient": 1.618156459938018e-11,
-    "convective_travel_years": 0.47101754878018953,
-    "cpu_seconds": 6595.41975
+    "burn_gradient_estimate": 1.7907838273006774e-12,
+    "drift_gradient_proxy": 7.245129969902516e-07,
+    "kinetic_heat_proxy": 0.008666687276126355,
+    "convective_mass_fraction": 0.27681911871654064,
+    "radiative_boundaries": 306,
+    "relative_mixing_gradient": 6.448385207946312e-12,
+    "convective_travel_years": 0.29010798912215935,
+    "cpu_seconds": 1301.943575
   },
   "first_radiative_region": {
     "years": 3558470608835.955,
@@ -172,6 +190,6 @@
     "convective_travel_years": 0.8592243358117583,
     "cpu_seconds": 54.993664
   },
-  "csv_sha256": "6c197c6a831f7b05245dae8b125125e3b035e6bf3225e06d717094e4c876523b",
+  "csv_sha256": "e4ba37e8f5fadb9697005a72fd4ec3fc75450c2a11f36389e9f6ef0a395fc445",
   "scope": "One continuous Hayashi-origin trajectory. Duplicate restart rows removed; exact retained prefixes listed. CPU includes retained invocation startup and retries; separate accuracy, EOS and atmosphere work excluded."
 }

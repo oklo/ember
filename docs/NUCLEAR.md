@@ -1,13 +1,17 @@
-# Nuclear rates and screening for bounded pp evolution
+# Nuclear reactions and screening
 
-`ember-evolve` now selects `sfii-svh`: direct Solar Fusion II rate integrals
-and finite-degeneracy Salpeter–Van Horn screening. The library's default
-`PPChains()` retains the old fits and capped classical screening for existing
-static benchmarks. Its name now identifies that choice; the earlier attribution
-of those fits to Adelberger et al. was insufficient. Every evolution output
-records the selected prescription. This update supplies a reproducible nuclear
-model for continued initial evolution, not a complete hydrogen-burning network
-or precision screening tied to the FreeEOS potential.
+The continuous `ember-evolve --lifetime` calculation selects initial deuterium,
+Solar Fusion III pp rates, explicit C12/C13/N14 conversion and closed CN
+burning, with finite-degeneracy Salpeter–Van Horn screening. Its checkpoints
+record these choices. Oxygen branches, pep, hep, ppIII and pycnonuclear burning
+remain outside this network. Screening is not derived from the tabulated EOS
+potential. See [CN burning](CN_BURNING.md) for the catalyst inventory and
+physical mass accounting.
+
+The separate pp-only command retains `sfii-svh` as its default. The library's
+default `PPChains()` retains historical fits and capped classical screening
+for static benchmarks. Neither default specifies the physics of the common
+lifetime calculation.
 
 ## Solar Fusion III option
 
@@ -25,18 +29,19 @@ The 18 rate and temperature-response comparisons use independently adaptive
 integration in energy, including a tail check. Both prescriptions also undergo
 the same abundance, thermal-response and nuclear-energy conservation tests.
 The exact-response cache distinguishes the rate prescriptions. Changing this
-selection changes the nuclear physics and requires a consistent new trajectory;
-the currently running star retains `sfii-svh`.
+selection changes the nuclear physics and requires a consistent trajectory.
+Solar Fusion II remains available for comparisons.
 [Bare-rate comparison](results/nuclear_sfiii_bare_rate_comparison_v1.json),
 [reference calculation](../scripts/generate_sfiii_reference.py).
-All 34 test suites pass. Two 512-point controls complete 10 billion years;
+Two 512-point controls complete 10 billion years;
 the SFII control retains the preceding executable's entire output exactly.
 With SFIII, the initial luminosity increases by 0.7454% and radius by 0.2164%.
 This is a short stellar comparison, not a measurement of the full lifetime.
 [Validation](results/nuclear_sfiii_validation_v1.json),
 [stellar controls](results/nuclear_sfiii_evolution_control_v1.json).
 
-This option does not add pep, hep, ppIII or CNO reactions, or update screening.
+This pp-rate option alone does not add pep, hep, ppIII or CNO reactions, or
+update screening; the common lifetime program selects its CN network separately.
 
 ## Carbon and nitrogen capture times
 
@@ -64,8 +69,10 @@ fixed conditions, not the star's changing temperature, mixing or depletion.
 Carbon conversion to nitrogen needs a changing-composition calculation before
 its heat and composition effects can be bounded. The GS98 elemental pattern
 used by the current EOS and opacity must also be reconsidered if carbon and
-nitrogen change. No CNO reactions have yet been installed, and this diagnostic
-does not claim a total CNO luminosity or a lifetime correction.
+nitrogen change. The diagnostic alone does not establish a total CNO luminosity or a
+lifetime correction. Closed CN burning is included in the conditional
+continuation, and an explicit C12/C13/N14 source and coupled burning/mixing
+solver now pass prescribed-structure controls; see [CN burning](CN_BURNING.md).
 
 ## Bare rates and units
 

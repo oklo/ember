@@ -5,14 +5,53 @@ Ember evolves the structure, composition and thermal energy of an initially
 deep matching layer. Cooling requires this physical boundary as well as an
 emergent spectrum; a table of colors alone cannot supply it.
 
+The continuous Hayashi-origin calculation uses composition-dependent
+atmospheres matched at optical depth **100** throughout. Its nearly pure-H
+extension covers **4600–6000 K** and **log g = 5.9–6.2**, with a declared
+trace-helium approximation. The extension preserves the retained stellar
+trajectory exactly; coverage at still higher gravity is being prepared.
+[Current trajectory](reports/2026-09-27/pms_figure_inputs.json),
+[boundary checks](results/highg_atmosphere_extension_sept27_v2.json).
+
+## Supplied white-dwarf boundary comparison
+
+The separate flash and cooling comparisons use a supplied MESA hydrogen
+white-dwarf table. Its gas pressure and temperature refer to optical depth **25.12**,
+cover **2000–40,000 K** and **log g = 5.5–9.5**, and preserve the original
+source values. Ember interpolates these values directly; it does not apply
+MESA's transition to a gray boundary below **log g = 6**. The interior retains
+its actual species abundances, while the atmosphere uses a pure-hydrogen
+approximation limited to helium fraction **0.005** and **Z ≤ 1e-20**.
+[Importer](../scripts/import_mesa_wd_atmosphere.py),
+[source and runtime checks](results/published_wd_boundary_runtime_v1.json).
+
+All source-node comparisons, finite-difference derivatives and sampled
+domain-rejection tests pass. The stellar EOS supports **24 of 25** sampled
+boundary states; **2500 K** at **log g = 6.75** needs additional EOS coverage.
+This is a finite coverage test, not validation of the entire atmosphere grid.
+At **4600 K**, **log g = 5.9** and the same optical depth, the supplied
+table gives **2.594%** higher matching temperature and **48.69%** lower gas
+pressure than the independently converged Ember atmosphere. These are
+differences between atmosphere prescriptions; their detailed cause has not
+been isolated.
+
+A matched **1 Myr** stellar test changes effective temperature by about
+**241 K** when this boundary replaces the selected optical-depth-100
+atmosphere. All native stellar solves and conservation checks pass, but the
+step exceeds the original time-error allowance. The comparison histories
+therefore resolve an initial thermal adjustment with shorter intervals.
+Their helium-3 pulse follows this atmosphere change and does not establish
+ignition with a consistent boundary history. This table is not selected for
+the continuous Hayashi-origin trajectory.
+[Finite stellar comparison](results/published_wd_stellar_control_v1.json).
+
 ## Conditions to calculate in advance
 
-The checked model reaches 3.881 trillion years, effective temperature 5200 K,
-surface hydrogen X = 0.1730 and central hydrogen X = 0.001084. It retains
-0.006867 solar masses of hydrogen. These are different measures: central
-exhaustion does not determine the composition of the atmosphere or remove
-the remaining nuclear fuel.
-[Checked endpoint](results/evolution_atmosphere_limit_3881gyr_v1.json).
+Source planning follows the calculated surface composition, temperature and
+gravity together. The nearly pure-hydrogen surface changes the relevant
+opacity and chemistry requirements. The existing composition-dependent
+atmosphere families support the hotter and more metal-rich portions of the
+track; they are not a substitute for dense, cool hydrogen atmospheres.
 
 LBA97 provides a useful estimate of the region that future atmospheres must
 cover. The values below are approximate readings from our
@@ -30,31 +69,24 @@ Ember's trajectory remains an independent result.
 | Cooler remnant | 2590 | 6.49 |
 | Cool end of the digitized curve | 1760 | 6.54 |
 
-The immediate calculation plan extends the temperature grid to 6400 K and
-starts higher-gravity trials before the star requires them. The warm grid
-brackets its measured surface composition with X = 0.15 and X = 0.2, and
-helium-3 mass fractions 0 and 0.12. Complete interpolation cells and independent
-temperature and lower-boundary comparisons are needed before a table is used.
-Each calculation reuses compatible wavelength opacities and a converged
-starting structure. Independent source models and their controls run in parallel.
-The 220-source table through 5600 K has passed its source, interpolation,
-lower-boundary, condensation and interior-EOS checks. Its two independent
-matching-state comparisons differ by at most 0.4169%. The stellar continuation
-using it reaches 3.890 trillion years and 5546 K before an interior opacity
-density limit. Its checkpoint and input checks pass; the full endpoint audit
-is pending. [Continuation checks](results/evolution_density_limit_3890gyr_initial_v1.json).
-[5600 K atmosphere acceptance](results/nongrey_t5600_acceptance_v1.json).
+The checked warm sources include the X = 0.15–0.20 region through 6400 K
+and log g = 5.4, and its extension to log g = 5.7/6 at 5400–6400 K.
+The first region has 252 source structures and a largest independent
+matching-state difference of 0.4336%; the higher-gravity extension adds 48
+structures, with six independent comparisons within 0.4860% and 17 passing
+depth controls. Those results apply to their stated compositions and domains.
+[6400 K checks](results/nongrey_t6400_acceptance_v1.json),
+[higher-gravity checks](results/nongrey_warm_gravity_acceptance_v1.json).
 
-The [warm plan](../data/atmosphere/sources/nongrey_forward_parallel_plan_specification.json)
-contains 34 source calculations, including controls and a complete composition
-slice at 6000 K and log g = 5.7. Two additional independent models at 5300 K
-and 5700 K test the intermediate temperature intervals. Separate
-[6000 K, log g = 6 trials](../data/atmosphere/sources/nongrey_high_gravity_column_pilot_plan_specification.json)
-and [contraction trials](../data/atmosphere/sources/nongrey_contraction_column_pilots_plan_specification.json)
-at 4800 K, log g = 6.3 and 3800 K, log g = 6.6 test numerical and material
-coverage ahead of the trajectory. These trials are not complete atmosphere
-grids. A longer-term gravity range through about 6.9 would provide margin
-around the inferred curve, subject to the actual stellar radius.
+Separate trials at 6000 K and log g = 6, 4800 K and log g = 6.3, and 3800 K
+and log g = 6.6 pass their local lower-boundary comparisons. They test the
+contraction and cooling region inferred from LBA97 but do not constitute a
+complete cooling grid or establish the validity of the gas prescription at
+every future atmosphere density. A gravity range through about 6.9 would
+provide margin around the inferred curve, subject to the calculated radius.
+[6000 K trial](results/nongrey_x150_y000_t6000_g600_column_v1.json),
+[4800 K trial](results/nongrey_x150_y000_t4800_g630_column_v1.json),
+[3800 K trial](results/nongrey_x150_y000_t3800_g660_column_v1.json).
 
 ## Physics at the turn and during cooling
 
@@ -62,19 +94,22 @@ The HR-diagram turn is not a change of evolution equations. Ember must follow
 the balance of nuclear heating, contraction and heat loss while the electron
 gas becomes more degenerate. Degenerate electrons and conductive transport
 are already present; their density coverage and accuracy need to extend with
-the star. The current hydrogen-burning network is incomplete. Carbon and
-nitrogen conversion, the other relevant hydrogen reactions, and thermal
-neutrino channels need quantitative checks and implementation where required.
+the star. The selected network evolves hydrogen, helium-3, carbon-12, carbon-13 and
+nitrogen-14, with helium-4 closing the physical mass fractions. Oxygen
+branches, individual catalyst settling and dense-plasma reaction corrections
+remain separate questions. Thermal neutrino losses are present; their source
+domains still need to be checked as the remnant evolves.
 The remaining hydrogen distribution must be resolved as burning moves away
 from the center. See [nuclear physics](NUCLEAR.md) and
-[the remnant work order](COLD_REMNANT.md#work-and-acceptance-order).
+[the remnant calculation](COLD_REMNANT.md#objective-and-next-milestones).
 
-Microscopic diffusion and gravitational separation must be coupled to the
-existing mixing and burning. Hydrogen can accumulate at the surface of a
+Conservative microscopic H/He transport and material enthalpy are coupled
+to burning and mixing. Carbon, nitrogen and the remaining metals share the metal-group drift velocity.
+Hydrogen can accumulate at the surface of a
 helium-core white dwarf; deeper convection can mix hydrogen and helium again.
 The atmosphere must use the resulting surface composition, including metal
-depletion. The current fixed GS98 metal pattern and X = 0.15–0.2 atmosphere
-interval cannot describe all of these possibilities.
+depletion. The common metal-group velocity does not resolve differential separation
+of individual heavy elements; atmosphere composition coverage remains finite.
 [Diffusion in helium white dwarfs](https://academic.oup.com/mnras/article/317/4/952/1039201),
 [observed atmospheric composition changes](https://arxiv.org/abs/1905.02174).
 

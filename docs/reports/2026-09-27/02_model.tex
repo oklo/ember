@@ -76,7 +76,8 @@ continuous metal-dependent selection joins measured families through
 nearly pure hydrogen, including trace helium, at the same optical depth.
 The 4600 K gravity row and its high-gravity corner have solved source
 columns; intermediate knots interpolate the sources. Trace helium remains
-approximated. Coverage ends at 4600 K and $\log g=6.1$. \\[4pt]
+approximated. The nearly pure-hydrogen high-gravity family covers
+4600--6000 K and $\log g=5.9$--6.2. \\[4pt]
 Mesh and time integration & 512 mass points, fixed for Tracks S, F and P;
 flash grids refined locally to 578--2115 points. Structure, burning and
 mixing are solved together implicitly. Every accepted step is compared with
@@ -96,9 +97,10 @@ by 0.002872\% and surface temperature by 0.01705 K, while loosening the
 structure tolerance to 0.001 over 2 Gyr changes luminosity by 1.078\% and
 temperature by 3.114 K; the tracks therefore keep the original settings.
 The continuous calculation uses a structure tolerance of $10^{-4}$ and an
-energy tolerance of 0.005. Local composition solves converge to $10^{-15}$
-in a single instantaneously mixed region and $10^{-12}$ in a stratified
-star; the separate global abundance-balance tolerance remains $10^{-14}$.
+energy tolerance of 0.005. Outer composition coupling uses $10^{-15}$
+in a single instantaneously mixed region and $10^{-13}$ in a stratified
+star. Local Newton corrections use $10^{-12}$ in the latter case, while
+integrated species balance and the global inventory check retain $10^{-14}$.
 
 Throughout the paper a \emph{paired comparison} means two calculations
 started from the same model, differing in one setting, and compared at the

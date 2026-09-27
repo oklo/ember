@@ -1,0 +1,38 @@
+{
+  "created_utc": "2026-09-27T12:55:39.039587+00:00",
+  "scope": "Exact plotted continuous-star endpoint, selected EnvelopeTransport and saved heat rates; no physics change.",
+  "age_years": 3615125248250.1606,
+  "accepted": 9593,
+  "central_temperature_K": 10909806.951166073,
+  "central_density_g_cm3": 1060.9907290034212,
+  "central_H": 0.02459321861002903,
+  "central_He3": 3.981891855405275e-06,
+  "surface_He3": 0.001744493380141365,
+  "radiative_cells": [
+    0,
+    305
+  ],
+  "radiative_mass_fraction": 0.7231808812834596,
+  "radiative_outer_radius_fraction": 0.5450068713781709,
+  "convective_cells": [
+    306,
+    511
+  ],
+  "convective_base_temperature_K": 4337304.024311119,
+  "nuclear_fraction": 0.9971267823915834,
+  "nuclear_radiative_contribution": 0.9945127636109391,
+  "nuclear_convective_contribution": 0.002614018780644294,
+  "He3_maximum": 0.0037610256847107025,
+  "He3_maximum_mass_fraction_coordinate": 0.577872278201635,
+  "semiconvective_faces": 0,
+  "thermohaline_faces": 0,
+  "CPU_seconds": 1.663099,
+  "qualification": "No semiconvective/thermohaline faces under the implemented criteria in this snapshot; not a statement about later evolution. Microphysical interfaces remain above their2MK temperature limit.",
+  "hashes": {
+    "snapshot.checkpoint": "dd4d62fbe900d7735352bfe4fc44c27feeef0e09429267ed69315153b4d0b5c8",
+    "structure.cpp": "2bc71ae523c5bc2ca10bc0b9674e7f820a6d6b697090648c1963e05f9d9444a3",
+    "structure": "b30b57590c3f1a6df3c204720bdda78c825d5bfeed86e9851a5e8659e6a61126",
+    "structure.txt": "7a766b96a2a7eb2b73994486126b305480d98657453adf5ada98c7cc7866ecfc",
+    "faces.csv": "354674dc61988d01b89cd659b168f0a1cff292b59e193936ef3954394046247d"
+  }
+}

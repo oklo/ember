@@ -4,14 +4,14 @@
 
 Continue the same Hayashi-started star through hydrogen exhaustion and onto
 white-dwarf cooling, testing whether the helium-3 pulse occurs with a consistent
-atmosphere history. The published trajectory reaches **3.585 Tyr**. Its centre
-is radiative, beneath a convective envelope; **54.23%** of the mass is radiative
+atmosphere history. The published trajectory reaches **3.615 Tyr**. Its centre
+is radiative, beneath a convective envelope; **72.32%** of the mass is radiative
 at the plotted endpoint. The first radiative region formed as a shell at
 **3.558 Tyr**. The live calculation has continued farther; read the
 [current handoff](../HANDOFF.md) before starting or changing jobs.
 [Trajectory and inputs](reports/2026-09-27/pms_figure_inputs.json),
 [first radiative region](results/continuous_radiative_core_sept27_v1.json),
-[structure at the plotted endpoint](results/radiative_interior_sept27_v1.json).
+[structure at the plotted endpoint](results/radiative_interior_sept27_v2.json).
 
 The common lifetime program includes initial deuterium, pp and explicit CN
 burning, plasma neutrino losses, composition-dependent EOS and opacity,
