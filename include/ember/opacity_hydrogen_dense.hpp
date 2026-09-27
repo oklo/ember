@@ -12,14 +12,19 @@ namespace ember {
 // log-opacity hydrogen slope before the ratio source reaches log R = 1.5.
 class DenseHydrogenOpacity final: public Opacity {
  const Opacity &ratio_, &slope_;
- static constexpr double start=1.25,end=1.45,maximum=1.8;
+ static constexpr double start=1.25,end=1.45;
+ double maximum_;
  static double logR(double T,double rho){return std::log10(rho)-3*(std::log10(T)-6);}
- static void domain(double T,double r){
-   if(!(T>=std::pow(10.,5.6) && T<=std::pow(10.,6.1) && r<=maximum))
-     throw std::domain_error("DenseHydrogenOpacity: bounded approximation requires logT=5.6..6.1, logR<=1.8");
+ void domain(double T,double r)const {
+   if(!(T>=std::pow(10.,5.6) && T<=std::pow(10.,6.1) && r<=maximum_))
+     throw std::domain_error("DenseHydrogenOpacity: bounded approximation outside selected logT/logR bounds");
  }
  public:
- DenseHydrogenOpacity(const Opacity& ratio,const Opacity& slope):ratio_(ratio),slope_(slope){}
+ DenseHydrogenOpacity(const Opacity& ratio,const Opacity& slope,double maximum_logR=1.8)
+     :ratio_(ratio),slope_(slope),maximum_(maximum_logR) {
+   if(!std::isfinite(maximum_) || maximum_<1.8 || maximum_>2.2)
+     throw std::invalid_argument("DenseHydrogenOpacity: maximum logR must lie in [1.8,2.2]");
+ }
  OpacityState eval(double T,double rho,const Composition& c)const override {
    const double r=logR(T,rho);
    if(c.h1()<=.75 || r<=start)return ratio_.eval(T,rho,c);
@@ -49,7 +54,7 @@ class DenseHydrogenOpacity final: public Opacity {
    const double lo=std::pow(10.,start)*std::pow(T/1e6,3),hi=std::pow(10.,end)*std::pow(T/1e6,3);
    if(a->max<hi || b->min>lo || b->max<hi)
      throw std::domain_error("DenseHydrogenOpacity: missing source overlap");
-   return DensityRange{a->min,std::min(b->max,std::pow(10.,maximum)*std::pow(T/1e6,3))};
+   return DensityRange{a->min,std::min(b->max,std::pow(10.,maximum_)*std::pow(T/1e6,3))};
  }
  const char* name()const override{return "bounded dense hydrogen source-slope approximation";}
 };

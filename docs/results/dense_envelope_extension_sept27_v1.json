@@ -1,0 +1,122 @@
+{
+  "scope": "20Myr from the continuous16946 model; nominal and half/double dense-hydrogen opacity, unchanged full/two-half and conservation checks. Not a lifetime uncertainty estimate.",
+  "selected_maximum_logR": 2.2,
+  "default_maximum_logR": 1.8,
+  "unchanged_temperature_domain_log10_K": [
+    5.6,
+    6.1
+  ],
+  "approximation": "Continue log opacity in hydrogen from retained X=.70/.75 source planes; actual T/rho stay inside source support. Existing smooth density join remains.",
+  "global_response": {
+    "half": {
+      "Teff_K": 1.1073364447611311e-12,
+      "luminosity_Lsun": 4.4928505360530835e-12,
+      "radius_Rsun": 3.197442310920451e-14,
+      "He3_mass_g": -5.329070518200751e-15,
+      "H_mass_g": 0.0,
+      "He3_peak": 7.438494264988549e-14,
+      "central_T_K": -2.325917236589703e-13,
+      "central_density_g_cm3": 3.284039706841213e-13
+    },
+    "double": {
+      "Teff_K": -5.808686864838819e-13,
+      "luminosity_Lsun": -2.3596680165383077e-12,
+      "radius_Rsun": -1.765254609153999e-14,
+      "He3_mass_g": 3.552713678800501e-15,
+      "H_mass_g": 0.0,
+      "He3_peak": 2.4868995751603507e-14,
+      "central_T_K": 1.5987211554602254e-13,
+      "central_density_g_cm3": 7.407408020299044e-13
+    }
+  },
+  "runs": {
+    "nominal": {
+      "requested_age_reached": 1,
+      "age_years": 4005226718393.578,
+      "accepted_this_invocation": 6,
+      "accepted_total": 16952,
+      "rejected_total": 5028,
+      "stop_reason": "requested age",
+      "cpu_seconds": 8.609572,
+      "wall_seconds": 6.073021292,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    },
+    "half": {
+      "requested_age_reached": 1,
+      "age_years": 4005226718393.578,
+      "accepted_this_invocation": 6,
+      "accepted_total": 16952,
+      "rejected_total": 5028,
+      "stop_reason": "requested age",
+      "cpu_seconds": 8.715892,
+      "wall_seconds": 6.215470041,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    },
+    "double": {
+      "requested_age_reached": 1,
+      "age_years": 4005226718393.578,
+      "accepted_this_invocation": 6,
+      "accepted_total": 16952,
+      "rejected_total": 5028,
+      "stop_reason": "requested age",
+      "cpu_seconds": 8.861669,
+      "wall_seconds": 6.314060166,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "latest": {
+    "years": 4005226718393.578,
+    "step_years": 500000.000811215,
+    "accepted": 16952,
+    "rejected": 5028,
+    "radius_Rsun": 0.04435859239475293,
+    "Teff_K": 4556.304660466498,
+    "luminosity_Lsun": 0.0007640120605850608,
+    "nuclear_fraction": 0.8967565001241572,
+    "central_T_K": 6393913.045038724,
+    "central_density_g_cm3": 40066.28423537456,
+    "central_X": 3.4702617983365656e-08,
+    "central_He3": 8.89292688267775e-15,
+    "eps_nuc_peak_erg_g_s": 0.49009890957817615,
+    "eps_nuc_peak_q": 0.9669468040771528,
+    "burning_half_max_inner_q": 0.9541068657373265,
+    "burning_half_max_outer_q": 0.9760233249972516,
+    "burning_half_max_cells": 18,
+    "He3_peak": 0.018634276701163834,
+    "He3_peak_q": 0.971484245216312,
+    "H_mass_g": 7.443638232539933e+30,
+    "He3_mass_g": 7.789447289611539e+28,
+    "D_mass_g": 0,
+    "surface_X": 0.9975691240038966,
+    "surface_Z": 6.755755789061512e-37,
+    "error_norm": 0.02914007386876347,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 3.404842588178144e-13,
+    "drift_gradient_proxy": 5.46595497265716e-07,
+    "kinetic_heat_proxy": 0.015782238312433645,
+    "convective_mass_fraction": 0.017996690610771266,
+    "radiative_boundaries": 406,
+    "relative_mixing_gradient": 8.644623542683368e-11,
+    "convective_travel_years": 0.06012544821256249,
+    "cpu_seconds": 8.602269
+  },
+  "all_accepted_checks_pass": true,
+  "local_convection": {
+    "face": 473,
+    "q": 0.9998906,
+    "T_K": 398660.0,
+    "rho": 4.148,
+    "convective_fraction_nominal": 0.9997393,
+    "superadiabaticity": 5.186e-08
+  },
+  "limitations": [
+    "A hydrogen-composition approximation, not new opacity data.",
+    "The response is small because these layers are almost adiabatic; reassess if they become radiative.",
+    "Microscopic transport, EOS and atmosphere source limits are unchanged."
+  ]
+}

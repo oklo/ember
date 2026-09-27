@@ -15,6 +15,7 @@ public:
   struct Extension {
     std::filesystem::path hydrogen_response;
     double minimum_Z{},maximum_Z{.16},maximum_X{1};
+    double dense_hydrogen_maximum_logR{1.8};
   };
   explicit RadiativeOpacity(const Tables& tables) { build(tables,nullptr); }
   RadiativeOpacity(const Tables& tables,const Extension& extension) { build(tables,&extension); }
@@ -54,7 +55,7 @@ private:
     const auto& bridge_x=add<HydrogenOpacityContinuation>(bridge,.75,.05,e.maximum_X);
     const auto& hot_ratio=add<HydrogenOpacityExtension>(hot,dependence,.75,e.maximum_X);
     const auto& hot_slope=add<HydrogenOpacityContinuation>(hot,.75,.05,e.maximum_X);
-    const auto& hot_x=add<DenseHydrogenOpacity>(hot_ratio,hot_slope);
+    const auto& hot_x=add<DenseHydrogenOpacity>(hot_ratio,hot_slope,e.dense_hydrogen_maximum_logR);
     const auto& mid=add<BlendedOpacity>(warm_x,bridge_x,5.05,5.10);
     const auto& upper=add<BlendedOpacity>(mid,hot_x,5.6,5.7);
     const auto& lower=add<LowerMetalHydrogenShareOpacity>(upper,.01,e.minimum_Z,

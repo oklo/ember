@@ -45,6 +45,19 @@ int main(int argc,char**argv) {
     require(std::abs(std::log(a.kappa/b.kappa))<1e-7,"density join is not continuous");
     require(std::abs(a.dlnk_dlnRho-b.dlnk_dlnRho)<1e-5,"density join derivative is not continuous");
   }
+  RadiativeOpacity expanded(files,{data/"opacity/lifetime/hydrogen_response.dat",0,.16,1,2.2});
+  const double newT=4.15e5,newrho=6.17,e=1e-6;
+  const auto more=expanded.eval(newT,newrho,hrich);
+  require(more.kappa>0,"expanded approximation must query retained source support");
+  const auto lk=[&](double t,double r){return std::log(expanded.eval(t,r,hrich).kappa);};
+  require(std::abs((lk(newT*std::exp(e),newrho)-lk(newT*std::exp(-e),newrho))/(2*e)-more.dlnk_dlnT)<2e-5,
+      "expanded temperature derivative mismatch");
+  require(std::abs((lk(newT,newrho*std::exp(e))-lk(newT,newrho*std::exp(-e)))/(2*e)-more.dlnk_dlnRho)<2e-5,
+      "expanded density derivative mismatch");
+  const auto newrange=expanded.density_range(newT,hrich);
+  require(newrange && newrange->min<newrho && newrange->max>newrho,"expanded density range missing");
+  bool old_rejected=false;try{opacity.eval(newT,newrho,hrich);}catch(const std::domain_error&){old_rejected=true;}
+  require(old_rejected,"default approximation domain must remain unchanged");
   bool rejected=false;try{opacity.eval(T,100.,hrich);}catch(const std::domain_error&){rejected=true;}
   require(rejected,"dense hydrogen approximation must reject outside its declared density range");
   rejected=false;try{opacity.eval(6e6,4e4,composition(.1,0,.17));}catch(const std::domain_error&){rejected=true;}

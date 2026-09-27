@@ -389,3 +389,21 @@ finite and lagged mixing. This single comparison measures gradual shell
 burning under shared machine load; it does not establish flash convergence
 or a whole-lifetime speed-up.
 [Comparison](results/linearized_burning_sept27_v1.json).
+
+## Dense hydrogen opacity in a convective envelope
+
+`opacity_dense_hydrogen_maximum_logR` selects the upper density coordinate for
+an existing hydrogen-composition approximation; its default is 1.8 and its
+permitted interval is 1.8--2.2. Here R is rho/(T/1e6)^3 in CGS units. A
+nondefault selection is stored in restart identity. The original temperature
+bounds, source-table checks and smooth join are retained. This option does
+not extrapolate temperature or density beyond the underlying source tables.
+
+The calculation uses the opacity slope between the retained X=0.70 and
+X=0.75 planes to continue to the actual hydrogen abundance. At the current
+limit, convection carries 99.97% of the heat. A matched 20 Myr comparison with
+half and twice the approximated opacity changes luminosity by less than
+1e-8 fractionally, with all accepted time and conservation checks passing.
+This supports extending the selected density bound to 2.2 during this phase;
+the approximation needs reassessment if these layers become radiative.
+[Measured response](results/dense_envelope_extension_sept27_v1.json).

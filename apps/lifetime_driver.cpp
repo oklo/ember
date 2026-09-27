@@ -90,6 +90,8 @@ int lifetime_main(int argc,char** argv) {
     if(cfg.values.contains("opacity_hydrogen_response")) {
       opacity_extension=RadiativeOpacity::Extension{path("opacity_hydrogen_response"),
         cfg.number("opacity_minimum_Z"),cfg.number("opacity_maximum_Z"),cfg.number("opacity_maximum_X")};
+      if(cfg.values.contains("opacity_dense_hydrogen_maximum_logR"))
+        opacity_extension->dense_hydrogen_maximum_logR=cfg.number("opacity_dense_hydrogen_maximum_logR");
     }
     fs::path main_atmosphere_path;
     AtmosphereOverlap::Options atmosphere_join;
@@ -196,6 +198,8 @@ int lifetime_main(int argc,char** argv) {
       identity.number("opacity.minimum_Z",opacity_extension->minimum_Z);
       identity.number("opacity.maximum_Z",opacity_extension->maximum_Z);
       identity.number("opacity.maximum_X",opacity_extension->maximum_X);
+      if(opacity_extension->dense_hydrogen_maximum_logR!=1.8)
+        identity.number("opacity.dense_hydrogen_maximum_logR",opacity_extension->dense_hydrogen_maximum_logR);
     }
     identity.values["transport.selection"]=transport_selection;
     if(mixing_mode!=ConvectiveMixing::instantaneous)
