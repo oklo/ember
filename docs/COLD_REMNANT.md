@@ -2,16 +2,21 @@
 
 ## Current priority — September 27, 2026
 
-The continuous Hayashi-started sequence with composition-dependent atmospheres
-reaches **3.213 Tyr**, **3154 K**, **X=.2385**, with **6099 accepted intervals and
-no rejections**. It remains fully convective. The fixed-metal atmosphere
-comparison is complete at **3.078 Tyr**. Both use the common lifetime program.
+The continuous Hayashi-started sequence forms its first radiative core at
+**3.558 Tyr**, **3250 K**, with surface hydrogen **X=.1722**. The checked
+continuation reaches **8.312% radiative mass**, with H/He and metal
+diffusion active across radiative boundaries. All accepted intervals pass the
+unchanged isotope and energy audits. The fixed-metal-atmosphere comparison
+is complete at **3.078 Tyr**. Both use the common lifetime program.
+[First radiative-core calculation](results/continuous_radiative_core_sept27_v1.json).
 Read the [current handoff](../HANDOFF.md) for the live process and next work.
 
-All **77 tests pass** in the isolated checkout, including actual radiative-core
-evolution, conservation and exact restart. The local composition solve uses
-1e-15 for one instantaneously mixed region and 1e-12 for stratified diffusion;
-the independent global abundance-balance criterion remains 1e-14.
+Failed trial audits now trigger a smaller timestep, with a bounded number of
+retries. Every full and half interval still has to pass the same checks before
+acceptance. Controller recovery, physical diffusion and exact restart pass
+their tests in the isolated checkout. Local composition tolerances remain
+1e-15 for one instantaneously mixed region and 1e-12 otherwise; the global
+inventory budget remains 1e-14.
 
 The continuous trajectory passes all isotope and energy checks. A checked continuation adds the later trace-He/pure-H atmosphere inputs without changing
 its accepted physical state. All 5932 tested early boundary values remain exact,

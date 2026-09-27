@@ -303,6 +303,9 @@ int lifetime_main(int argc,char** argv) {
     control.structure_tolerance=structure_tolerance;control.species_tolerance=species_tolerance;
     control.energy_tolerance=energy_tolerance;control.maximum_steps=maximum_steps;
     control.maximum_cpu_seconds=maximum_cpu;
+    // A failed trial must not replace the accepted model. Retry with a shorter
+    // interval under the same audits; the controller bounds repeated rejection.
+    control.audit_failure_is_fatal=false;
     HomogeneousCheck guard;
     EvolutionControlHooks hooks;
     hooks.physics=[&](const Model& m)->const Physics& {return has_D(m)?early:later;};

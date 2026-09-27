@@ -12,12 +12,13 @@ conditional disappearance through nucleon decay. The same program should
 resolve the stellar/brown-dwarf boundary as initial mass and composition vary.
 The full calculation is not yet established.
 
-The common `ember-evolve --lifetime` program has reached **3.213 Tyr** from a
-Hayashi start with composition-dependent atmospheres: **6099 accepted intervals,
-none rejected**, at **3154 K** and hydrogen **X = 0.2385**. It remains fully
-convective. The retained sequence has used **5.182 CPU hours**, including
-contraction, step-doubling comparisons and startup, with separate controls excluded.
-[Current calculation](docs/results/continuous_lifetime_sept27_v4.json).
+The common `ember-evolve --lifetime` program carries the Hayashi-started star
+through the formation of its first radiative core at **3.558 Tyr**, **3250 K**
+and surface hydrogen **X = 0.1722**. It retains the same optical-depth-100
+atmosphere treatment throughout. The checked continuation passes
+all conservation checks and reaches a radiative mass fraction of **8.312%**.
+The calculation continues with H/He and metal diffusion across radiative boundaries.
+[Continuous radiative-core calculation](docs/results/continuous_radiative_core_sept27_v1.json).
 A fixed-metal-atmosphere comparison reaches **3.078 Tyr**, also without rejected
 intervals. [Comparison](docs/results/continuous_lifetime_sept26_v3.json).
 
@@ -26,8 +27,8 @@ mixing heat, metal-dependent atmospheres and the existing composition-dependent
 interior opacities. A saved radiative-core model evolves with nonzero settling,
 passes the physical conservation checks, and restarts exactly. Initial
 fully mixed deuterium burning uses tighter composition convergence than the
-stratified diffusion solve; the physical audits stay unchanged. **All 77 tests
-pass** in the isolated build with the required datasets.
+stratified diffusion solve; the physical audits stay unchanged. Controller recovery, physical diffusion and exact-restart tests pass in the
+isolated build with the required datasets.
 [Common driver](docs/LIFETIME_DRIVER.md),
 [diffusion and restart test](docs/results/screened_radiative_core_sept27_v1.json),
 [atmosphere coverage](docs/results/atmosphere_lifetime_atlas_sept27_v1.json),
@@ -40,7 +41,7 @@ surface values remain unchanged. The combined inputs cover all 67 saved
 settling comparison states at the original optical depth of 100. Cool,
 high-gravity rows include bounded estimates, which still need source checks;
 continuous WD cooling is not yet established.
-[Current calculation](docs/results/continuous_lifetime_sept27_v4.json),
+[Current calculation](docs/results/continuous_radiative_core_sept27_v1.json),
 [atmosphere coverage and restart evidence](docs/results/hydrogen_envelope_integration_sept27_v1.json).
 Independent atmosphere columns now pass at 4800 K/log g = 6.2 and
 4700 K/log g = 6.0, 6.1 and 6.2 with unchanged acceptance criteria. A density-inversion

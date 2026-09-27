@@ -115,6 +115,11 @@ nuclear energy control the timestep. Separate global isotope and mass-defect
 budgets and the first law check every interval. The nuclear-error scale is the
 larger of nuclear and surface power, so vanishing nuclear power does not impose
 an inappropriate relative-precision requirement.
+If any full or half interval fails a conservation check, the driver rejects
+that trial and halves the timestep. It preserves the accepted model and heat
+rates and stops after eight consecutive rejections. This retry policy changes
+neither the budgets nor which intervals must pass them. The independent
+controller can still request an immediate stop on audit failure.
 The nonlinear composition tolerance and global inventory budget are independent.
 The former limits a local correction; the latter checks mass-weighted global
 conservation. A stratified radiative-core control converges with a **1e-12**

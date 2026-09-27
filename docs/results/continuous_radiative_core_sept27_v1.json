@@ -1,0 +1,114 @@
+{
+  "created_utc": "2026-09-27T07:48:43.102665+00:00",
+  "scope": "Continuous Hayashi-origin0.1-solar-mass star develops a radiative core under the same tau100 atmosphere family. Accepted states only; failed trials never retained.",
+  "first_radiative_model": {
+    "years": 3558470608835.955,
+    "step_years": 629709.9256394553,
+    "accepted": 6239,
+    "rejected": 15,
+    "radius_Rsun": 0.14386106440207486,
+    "Teff_K": 3250.121491922385,
+    "luminosity_Lsun": 0.00208055211550283,
+    "nuclear_fraction": 0.9996338839225668,
+    "central_T_K": 8508644.759666605,
+    "H_mass_g": 3.4240518107992256e+31,
+    "He3_mass_g": 1.083925838369073e+29,
+    "D_mass_g": 0,
+    "surface_X": 0.1722009682548938,
+    "surface_Z": 0.02000823434328683,
+    "error_norm": 0.05062523900090099,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.8681173199497938e-12,
+    "drift_gradient_proxy": 8.037699648801017e-07,
+    "kinetic_heat_proxy": 0.012222314872384276,
+    "convective_mass_fraction": 0.995859293863489,
+    "radiative_boundaries": 2,
+    "relative_mixing_gradient": 3.389443078692099e-10,
+    "convective_travel_years": 0.8592243358117583,
+    "cpu_seconds": 54.993664
+  },
+  "last_bounded_control_model": {
+    "years": 3558517760080.4683,
+    "step_years": 318078.52342099906,
+    "accepted": 6314,
+    "rejected": 54,
+    "radius_Rsun": 0.14374906139484792,
+    "Teff_K": 3250.0624922120005,
+    "luminosity_Lsun": 0.0020771629151663446,
+    "nuclear_fraction": 0.9842629173040488,
+    "central_T_K": 8514483.094011774,
+    "H_mass_g": 3.423862921443137e+31,
+    "He3_mass_g": 1.0844075643267412e+29,
+    "D_mass_g": 0,
+    "surface_X": 0.17223054498461465,
+    "surface_Z": 0.020006199351389954,
+    "error_norm": 0.026794359508919285,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.664722838306177e-12,
+    "drift_gradient_proxy": 8.042368144812763e-07,
+    "kinetic_heat_proxy": 0.012271479388978329,
+    "convective_mass_fraction": 0.9168767267643836,
+    "radiative_boundaries": 21,
+    "relative_mixing_gradient": 2.8391871319144037e-10,
+    "convective_travel_years": 0.6751332789910387,
+    "cpu_seconds": 353.413761
+  },
+  "report": {
+    "requested_age_reached": 0,
+    "age_years": 3558517760080.4683,
+    "accepted_this_invocation": 80,
+    "accepted_total": 6314,
+    "rejected_total": 54,
+    "stop_reason": "accepted-step budget",
+    "cpu_seconds": 353.422111,
+    "wall_seconds": 170.145487083,
+    "full_production_track_validated": false,
+    "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+  },
+  "controller_change": "A failed full/half audit rejects the trial and halves the timestep. All isotope/energy thresholds and all three audits unchanged; at most eight consecutive rejections before stopping.",
+  "attempts": {
+    "total": 127,
+    "accepted": 80,
+    "rejected_audit": 27,
+    "rejected_time": 20,
+    "maximum_accepted_species_error": 9.786000085821013e-15,
+    "maximum_accepted_first_law": 4.711343537522339e-10
+  },
+  "checkpoint_migration": {
+    "changes": {
+      "executable": [
+        "c1e9b6ddb9addb82",
+        "397a56a0858b64c3"
+      ]
+    },
+    "physical_payload_sha256": "80e5670fde5fbc48e5eda3ef8faebc5cfa5d3c354a31be0e2d9e171bcc40c947",
+    "physical_state_and_next_timestep_unchanged": true
+  },
+  "validation": {
+    "tests": [
+      "evolution_controller",
+      "screened_envelope_evolution",
+      "lifetime_restart"
+    ],
+    "all_pass": true,
+    "isolated_checkout": "/private/tmp/ember-reviewed-source-sept26-v1",
+    "test_wall_seconds": 132.45,
+    "regression": "Injected single audit failure recovers from the retained state at half timestep. Persistent failure stops at the rejection bound without changing the accepted model. Explicit fatal-audit policy still stops immediately."
+  },
+  "sha256": {
+    "out/radiative-onset-retry-sept27-v1/ember-evolve": "5ce506b828b4151fba370182938a6695e64564628e8342477d00e3deca9dafe2",
+    "out/radiative-onset-retry-sept27-v1/evolution/final.checkpoint": "69d285cae51ec0d3879d5261c689d542d8dfc2c93d5ffcdac07669271385bd00",
+    "out/radiative-onset-retry-sept27-v1/evolution/history.jsonl": "53daf833b7d48b89ffff3a44a46ccb7645c007ba81ae0c80b3c510d5f16c1b7e",
+    "out/radiative-onset-retry-sept27-v1/evolution/attempts.jsonl": "1ddd4dbc12cf28e8506044c99b800bedba9b38064d71e378b7e1830d5ce44789"
+  },
+  "successor": "out/continuous-lifetime-sept27-v5",
+  "limitations": [
+    "Finite convection remains under assessment.",
+    "No claim of flash-independent ignition or completed white-dwarf cooling.",
+    "Cool radiative microscopic transport and colder atmosphere coverage remain incomplete."
+  ]
+}

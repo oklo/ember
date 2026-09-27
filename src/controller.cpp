@@ -84,6 +84,8 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
       }
       attempt.accepted = attempt.converged && attempt.audit_pass && attempt.error_norm <= 1;
       attempt.message = !full.converged ? full.message : !h1.converged ? h1.message : h2.message;
+      if (attempt.converged && !attempt.audit_pass)
+        attempt.message = "physical inventory/energy audit failed";
       if (hooks.attempted) hooks.attempted(attempt);
       if (attempt.accepted) {
         state.model = h2.model;

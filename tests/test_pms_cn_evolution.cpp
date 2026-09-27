@@ -4,6 +4,7 @@
 #include "ember/eos_composite.hpp"
 #include "ember/metal_cn_transport.hpp"
 #include "ember/deuterium_burning.hpp"
+#include "ember/controller.hpp"
 #include <algorithm>
 #include <ctime>
 #include <iomanip>
@@ -38,6 +39,7 @@ int main(int argc,char**) {
     RelaxationOptions ro;ro.max_iterations=200;
     const auto relaxed=relax(initial,seed_physics,atmosphere,ro);
     require(relaxed.converged,"seed: "+relaxed.message);initial=relaxed.model;
+    const auto controller_initial=initial;
     // Declared numerical coupling test: inject trace D into the relaxed
     // thermal control. This is not a formation model or a production restart.
     for(auto& q:initial.comp){q.X[0]-=2e-8;q[Species::H2]=2e-8;}
@@ -69,6 +71,56 @@ int main(int argc,char**) {
     require(first_law<2e-7 && mass_error<2e-5,"coupled energy accounting");
     require(full.model.age==initial.age+dt && end.model.age==initial.age+dt,"clock mismatch");
     require(full.model.luminosity_grid==grid && end.model.luminosity_grid==grid,"luminosity grid changed");
+    if(argc>2) {
+      // Fault injection tests recovery policy independently of stellar accuracy.
+      // Every accepted trial still passes the normal energy checks above.
+      EvolutionControlOptions control;control.step=options;
+      control.target_age=controller_initial.age+dt;control.maximum_dt=dt;
+      control.audit_failure_is_fatal=false;control.maximum_consecutive_rejections=3;
+      EvolutionControlHooks hooks;
+      hooks.physics=[&](const Model&)->const Physics& {return physics;};
+      hooks.species_difference=[](const Composition& a,const Composition& b) {
+        double error=0;
+        for(std::size_t k=0;k<a.X.size();++k)error=std::max(error,std::abs(a.X[k]-b.X[k]));
+        return error;
+      };
+      hooks.assess=[](const Model&,std::span<const std::array<double,3>>) {};
+      hooks.cpu_seconds=[] {return 0.;};
+      std::size_t calls=0;bool fail_all=false;
+      hooks.audit=[&](const Model&,const EvolutionStep& step,double) {
+        const bool injected=fail_all || calls==0;++calls;
+        EvolutionAudit audit; audit.pass=step.converged && !injected
+          && std::abs(step.luminosity_balance)<2e-7 && std::abs(step.nuclear_mass_balance)<2e-5;
+        return audit;
+      };
+      std::vector<EvolutionAttempt> attempts;
+      hooks.attempted=[&](const EvolutionAttempt& attempt) {attempts.push_back(attempt);};
+      EvolutionState state{controller_initial,dt,0,0};
+      const auto recovered=evolve(state,atmosphere,control,hooks);
+      require(recovered.requested_age_reached && state.rejected==1,
+              "controller must recover from one failed audit: "+recovered.stop_reason
+              +", rejected="+std::to_string(state.rejected)+", last error="
+              +std::to_string(attempts.back().error_norm));
+      require(attempts.size()>=2 && !attempts[0].accepted && !attempts[0].audit_pass,
+              "failed full-step audit must reject the entire trial");
+      require(attempts[1].start_age==controller_initial.age && attempts[1].dt==dt/2,
+              "retry must start from the retained state at half the duration");
+      for(const auto& attempt:attempts)if(attempt.accepted)
+        require(attempt.audit_pass && attempt.error_norm<=1,"failed trial was accepted");
+      fail_all=true;attempts.clear();state={controller_initial,dt,0,0};
+      const auto exhausted=evolve(state,atmosphere,control,hooks);
+      require(!exhausted.requested_age_reached && state.accepted==0 && state.rejected==3,
+              "persistent audit failure must stop at the rejection bound");
+      require(state.model.age==controller_initial.age && state.model.comp==controller_initial.comp
+          && state.metal_heat_rates.empty(),"failed trials changed the retained state");
+      for(std::size_t i=0;i<controller_initial.size();++i)for(std::size_t k=0;k<NVAR;++k)
+        require(state.model.y[i][static_cast<Var>(k)]==controller_initial.y[i][static_cast<Var>(k)],
+                "failed trials changed retained structure");
+      control.audit_failure_is_fatal=true;state={controller_initial,dt,0,0};
+      const auto fatal=evolve(state,atmosphere,control,hooks);
+      require(!fatal.requested_age_reached && state.rejected==1 && state.accepted==0,
+              "explicit fatal-audit policy must still stop immediately");
+    }
     std::cout<<std::setprecision(17)<<"{\"outcome\":\"passed\",\"scope\":\"analytic EOS/grey coupled 0.5 solar mass test with trace-D injection; not a physical track\""
       <<",\"face_luminosities\":"<<face_luminosities(initial)
       <<",\"full_half_structure_error\":"<<time_error<<",\"maximum_first_law_error\":"<<first_law
