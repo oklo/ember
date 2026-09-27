@@ -37,7 +37,10 @@ isotope and energy audits. Matched-age controls support the timestep settings
 used in the fully convective and radiative-core phases. Separating local
 Newton correction accuracy from integrated species conservation removes a
 verified solver stall without weakening the conservation requirement.
-[Time accuracy](docs/results/radiative_core_time_accuracy_sept27_v2.json),
+A **1 Gyr** comparison in the growing radiative interior supports a larger
+species time allowance, using **18.03%** less CPU with a **0.000184%**
+helium-3 inventory difference. No cell is excluded from the time-error check.
+[Time accuracy](docs/results/envelope_time_accuracy_sept27_v1.json),
 [diffusion convergence](docs/results/local_correction_comparison_sept27_v2.json).
 
 The atmosphere and EOS inputs cover all 67 saved settling comparison

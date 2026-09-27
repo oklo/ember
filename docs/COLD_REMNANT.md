@@ -25,14 +25,16 @@ Unsupported cool radiative transport remains a limitation;
 there is no silent replacement for the missing microscopic law.
 
 All accepted full and half intervals must pass isotope and energy audits.
-For the present radiative-interior phase, a matched **500 Myr** comparison
-supports species time accuracy **1e-5**: the total helium-3 inventory differs
-by **0.002766%** from the tighter calculation. A separate **1 Gyr** comparison
+For the present radiative-interior phase, a matched **1 Gyr** comparison
+supports absolute species time accuracy **1e-4**. Compared with 1e-5 it uses
+**18.03%** less CPU, changes total helium-3 by **0.000184%** and surface
+temperature by less than **0.001 K**. No cell is excluded from the time-error
+estimate. A separate **1 Gyr** comparison
 supports local Newton corrections of **1e-12**, while retaining **1e-13** outer
 composition coupling and **1e-14** integrated species balance. It uses
 **27.12%** less CPU and changes total helium-3 by **0.0002092%**. These controls
 do not establish time convergence through a flash.
-[Time accuracy](results/radiative_core_time_accuracy_sept27_v2.json),
+[Time accuracy](results/envelope_time_accuracy_sept27_v1.json),
 [local solve](results/local_correction_comparison_sept27_v2.json).
 
 The atmosphere match remains at optical depth **100** throughout. The selected

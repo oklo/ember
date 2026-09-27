@@ -4,8 +4,9 @@
 Hayashi starting model, explicit initial D and pp/CN burning, plasma neutrino
 losses, face luminosities and the finite metal-transport interface. It supports
 the wholly convective limit and an explicitly selected hot diffusion law with a
-mixed cool envelope. Continuous late-life atmosphere selection remains under
-integration; the complete Hayashi-to-white-dwarf calculation is not yet established.
+mixed cool envelope. The atmosphere selection keeps the same matching depth
+through the supplied composition and gravity coverage. The complete Hayashi-to-white-dwarf
+calculation is not yet established.
 
 ```
 ember-evolve --lifetime CONFIG TARGET_YEARS NEW_OUTPUT_DIRECTORY \
@@ -153,14 +154,18 @@ local tolerance while passing the unchanged **1e-14** inventory budget and
 energy checks; forcing the local correction to **1e-15** stalls its line search.
 The global budget need not be larger than the local correction tolerance.
 Neither setting replaces the full-step/two-half-step accuracy check.
-The configured absolute species time-error allowance may be at most **1e-5**.
-A matched **500 Myr** comparison after the centre becomes radiative uses
-**17** accepted intervals at 1e-5 versus **45** at 1e-6, with maximum relative
-temperature difference **2.475e-6** and total helium-3 difference **2.766e-5**.
-The radiative-core continuation selects 1e-5; the structure allowance remains
-1e-4, nuclear-power allowance .005 and global inventory budget 1e-14.
-This comparison does not establish accuracy during a flash.
-[Matched-age control](results/radiative_core_time_accuracy_sept27_v2.json).
+The configured absolute species time-error allowance may be at most **1e-4**.
+During gradual radiative-interior evolution, a **1 Gyr** comparison near
+**3.626 Tyr** supports that setting: it uses **20** accepted intervals instead
+of **39** at 1e-5 and **18.03%** less CPU. Surface temperature changes by less
+than **0.001 K** and the helium-3 inventory by **0.000184%**. The largest local
+helium-3 difference is **4.027e-7** in mass fraction at the envelope boundary.
+No cell is omitted from the time-error estimate. Structure accuracy remains
+1e-4, nuclear-power accuracy .005 and the global inventory budget 1e-14.
+This comparison supports the gradual phase, not time resolution during a flash.
+[Matched-age comparison](results/envelope_time_accuracy_sept27_v1.json).
+The preceding 1e-5 setting has an independent
+[500 Myr comparison](results/radiative_core_time_accuracy_sept27_v2.json).
 The continuous star now uses a tighter **1e-13** stratified solve after a matched
 **11.76-Myr** comparison at radiative-core onset. This reduces audit retries
 without changing the global budget; luminosities differ by **0.00004235%**.

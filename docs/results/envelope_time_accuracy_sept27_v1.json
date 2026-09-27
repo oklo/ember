@@ -1,0 +1,67 @@
+{
+  "created_utc": "2026-09-27T13:25:49.854035+00:00",
+  "scope": "One matched1Gyr interval in the growing radiative-interior phase. Same snapshot, actual current physical providers, mesh and numerical settings except species time tolerance1e-5 versus1e-4. No cell omitted from error norm. All conservation and structure/power checks retained. Private driver changes only permitted species-tolerance maximum; live run untouched. Not a flash-convergence test.",
+  "source_base": "5bed2ab",
+  "change": "Permit configured absolute species time tolerance up to1e-4. No change to the time-error norm or excluded cells. Select1e-4 for subsequent gradual radiative-interior evolution.",
+  "initial_age_years": 3625959933870.35,
+  "final_age_years": 3626959933870.3506,
+  "physical_interval_years": 1000000000.0004883,
+  "comparison": {
+    "radius": 1.1462608192999685e-06,
+    "density": 5.571958406897122e-05,
+    "temperature": 2.0734945899478666e-06,
+    "maximum_stored_composition_absolute_difference": 5.024840225975602e-05,
+    "surface_and_inventory_relative_difference": {
+      "radius_Rsun": 3.9922747929743707e-07,
+      "Teff_K": -2.3454938080647025e-07,
+      "luminosity_Lsun": -1.3974282420115003e-07,
+      "central_T_K": 3.473361436245881e-07,
+      "H_mass_g": -6.595351165206154e-08,
+      "He3_mass_g": -1.8393969625218887e-06,
+      "surface_X": 3.2899618866988334e-06,
+      "surface_Z": -6.059886520359825e-07
+    },
+    "maximum_He3_difference_location": {
+      "index": 319,
+      "mass_fraction": 0.7827253269680758,
+      "absolute_difference": 4.026848791718624e-07,
+      "baseline_He3": 0.0018379062333317266,
+      "coarser_He3": 0.0018383089182108985
+    }
+  },
+  "surface_temperature_difference_K": -0.0008412252773268847,
+  "CPU_fraction_saved": 0.18027497635949818,
+  "cases": {
+    "baseline": {
+      "species_time_tolerance": 1e-05,
+      "accepted_intervals": 39,
+      "rejected_intervals": 10,
+      "CPU_seconds": 479.573154,
+      "maximum_interval_isotope_error": 8.894552054010808e-15,
+      "maximum_interval_first_law_error": 6.11704020769821e-11,
+      "final_convective_mass_fraction": 0.2152165362504815
+    },
+    "coarser": {
+      "species_time_tolerance": 0.0001,
+      "accepted_intervals": 20,
+      "rejected_intervals": 10,
+      "CPU_seconds": 393.118115,
+      "maximum_interval_isotope_error": 9.58716221289294e-15,
+      "maximum_interval_first_law_error": 4.4512393770901326e-11,
+      "final_convective_mass_fraction": 0.2152165362504815
+    }
+  },
+  "unchanged": {
+    "structure_tolerance": 0.0001,
+    "nuclear_power_tolerance": 0.005,
+    "outer_composition_tolerance": 1e-13,
+    "integrated_species_and_global_inventory_tolerance": 1e-14,
+    "mass_zones": 512
+  },
+  "limitations": [
+    "One1Gyr comparison near3.626Tyr including moving convective-envelope boundaries; does not establish convergence through a flash.",
+    "CPU timings are from simultaneous two-thread controls beside the live star; not a hardware benchmark."
+  ],
+  "snapshot_sha256": "5d95a6f8f426ba879a83fcad18e3fb54d4fbbcc1a9666e5d0dd36844770e2416",
+  "private_executable_sha256": "547605791534d50dfee635e6edcb5e6f7ca4196f653b01b7f147f4e5c3744e5c"
+}
