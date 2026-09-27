@@ -459,3 +459,12 @@ preceding abundance jump larger than the cap, because instantaneous mixing
 is not proportional to elapsed time. This only changes the initial guess.
 A resolved envelope-boundary comparison and finite-mixing regression checks
 are recorded in [the numerical comparison](results/instantaneous_mixing_step_cap_sept27_v1.json).
+
+The optional `opacity_dense_hydrogen_maximum_logT` extends the declared
+source-slope hydrogen-opacity approximation from its default upper log T of
+6.1 to at most 6.3. It preserves the source temperature/density checks and
+the selected log R limit. It is recorded in restart identity. A 20 Myr
+half/double-opacity comparison supports this choice in the efficiently
+convective envelope of the current remnant; it does not establish accurate
+radiative opacity for arbitrary pure-hydrogen layers. See the
+[temperature-domain comparison](results/dense_envelope_temperature_extension_sept27_v1.json).

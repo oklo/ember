@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <cmath>
 #include <stdexcept>
+#include <string>
 
 namespace ember {
 
@@ -13,17 +14,20 @@ namespace ember {
 class DenseHydrogenOpacity final: public Opacity {
  const Opacity &ratio_, &slope_;
  static constexpr double start=1.25,end=1.45;
- double maximum_;
+ double maximum_, maximum_logT_;
  static double logR(double T,double rho){return std::log10(rho)-3*(std::log10(T)-6);}
  void domain(double T,double r)const {
-   if(!(T>=std::pow(10.,5.6) && T<=std::pow(10.,6.1) && r<=maximum_))
-     throw std::domain_error("DenseHydrogenOpacity: bounded approximation outside selected logT/logR bounds");
+   if(!(T>=std::pow(10.,5.6) && T<=std::pow(10.,maximum_logT_) && r<=maximum_))
+     throw std::domain_error("DenseHydrogenOpacity: outside selected bounds at logT="
+         +std::to_string(std::log10(T))+", logR="+std::to_string(r));
  }
  public:
- DenseHydrogenOpacity(const Opacity& ratio,const Opacity& slope,double maximum_logR=1.8)
-     :ratio_(ratio),slope_(slope),maximum_(maximum_logR) {
+ DenseHydrogenOpacity(const Opacity& ratio,const Opacity& slope,double maximum_logR=1.8, double maximum_logT=6.1)
+     :ratio_(ratio),slope_(slope),maximum_(maximum_logR),maximum_logT_(maximum_logT) {
    if(!std::isfinite(maximum_) || maximum_<1.8 || maximum_>2.2)
      throw std::invalid_argument("DenseHydrogenOpacity: maximum logR must lie in [1.8,2.2]");
+   if(!std::isfinite(maximum_logT_) || maximum_logT_<6.1 || maximum_logT_>6.3)
+     throw std::invalid_argument("DenseHydrogenOpacity: maximum logT must lie in [6.1,6.3]");
  }
  OpacityState eval(double T,double rho,const Composition& c)const override {
    const double r=logR(T,rho);
@@ -43,7 +47,7 @@ class DenseHydrogenOpacity final: public Opacity {
  }
  std::optional<DensityRange> density_range(double T,const Composition& c)const override {
    if(c.h1()<=.75)return ratio_.density_range(T,c);
-   if(T<std::pow(10.,5.6) || T>std::pow(10.,6.1)) {
+   if(T<std::pow(10.,5.6) || T>std::pow(10.,maximum_logT_)) {
      auto a=ratio_.density_range(T,c);
      if(a)a->max=std::min(a->max,std::pow(10.,start)*std::pow(T/1e6,3));
      if(a && !(a->min<a->max))throw std::domain_error("DenseHydrogenOpacity: no bounded density interval");

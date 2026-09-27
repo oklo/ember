@@ -1,0 +1,76 @@
+{
+  "created_utc": "2026-09-27T21:45:40.299289+00:00",
+  "scope": "20Myr from v28 endpoint, same star, source-slope hydrogen opacity and isotope mapping; optional logT maximum6.3 rather than6.1, density limit2.2 unchanged. Halved/doubled slope opacities compared with nominal. No source T/rho extrapolation.",
+  "source": "out/dense-envelope-extension-sept27-v2",
+  "runs": {
+    "nominal": {
+      "requested_age_reached": 1,
+      "age_years": 4005426157259.1196,
+      "accepted_this_invocation": 25,
+      "accepted_total": 17084,
+      "rejected_total": 5110,
+      "stop_reason": "requested age",
+      "cpu_seconds": 45.484684,
+      "wall_seconds": 26.5645165,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    },
+    "half": {
+      "requested_age_reached": 1,
+      "age_years": 4005426157259.118,
+      "accepted_this_invocation": 25,
+      "accepted_total": 17084,
+      "rejected_total": 5110,
+      "stop_reason": "requested age",
+      "cpu_seconds": 45.505556,
+      "wall_seconds": 26.714054041,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    },
+    "double": {
+      "requested_age_reached": 1,
+      "age_years": 4005426157259.118,
+      "accepted_this_invocation": 25,
+      "accepted_total": 17084,
+      "rejected_total": 5110,
+      "stop_reason": "requested age",
+      "cpu_seconds": 44.642325,
+      "wall_seconds": 26.287321875,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "global_response": {
+    "half": {
+      "Teff_K": 6.064038160502605e-13,
+      "luminosity_Lsun": 2.063460513568316e-12,
+      "radius_Rsun": -1.8118839761882555e-13,
+      "He3_mass_g": 8.526512829121202e-14,
+      "H_mass_g": -1.3322676295501878e-15,
+      "He3_peak": 3.752553823233029e-14,
+      "central_T_K": -9.958700530887654e-14,
+      "central_density_g_cm3": 7.425171588693047e-13
+    },
+    "double": {
+      "Teff_K": -3.254063685176334e-13,
+      "luminosity_Lsun": -1.0096368185941174e-12,
+      "radius_Rsun": 1.4566126083082054e-13,
+      "He3_mass_g": -7.993605777301127e-14,
+      "H_mass_g": 1.5543122344752192e-15,
+      "He3_peak": -2.6423307986078726e-14,
+      "central_T_K": -1.0835776720341528e-13,
+      "central_density_g_cm3": 8.01136934569513e-13
+    }
+  },
+  "approximation_note": "Hydrogen-abundance continuation from X=.70/.75 source planes; not an exact pure-H opacity. Temperature and density remain inside source support.",
+  "physical_response": "Affected envelope is efficiently convective. Near1.282MK its actual gradient0.3913 agrees with its adiabatic gradient to3.89e-9, while its purely diffusive gradient is13.89. Factor-two opacity changes do not alter that near-adiabatic structure.",
+  "tests": [
+    "Native joined radiative opacity test with packaged data: source support, temperature/density derivatives, density ranges, default upper-T rejection.",
+    "All25 accepted intervals in each stellar arm pass full/two-half checks and unchanged conservation audits."
+  ],
+  "limitations": [
+    "No assertion of accurate radiative opacity for nearly pure H.",
+    "Bounds and source validity remain explicit; do not extend into a new radiative layer without an independent sensitivity check.",
+    "4 semiconvective faces found in the current structure, separate from this deep-convective opacity extension; physical sensitivity remains to assess."
+  ]
+}

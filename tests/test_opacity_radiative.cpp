@@ -56,6 +56,20 @@ int main(int argc,char**argv) {
       "expanded density derivative mismatch");
   const auto newrange=expanded.density_range(newT,hrich);
   require(newrange && newrange->min<newrho && newrange->max>newrho,"expanded density range missing");
+  RadiativeOpacity warmer(files,{data/"opacity/lifetime/hydrogen_response.dat",0,.16,1,2.2,6.3});
+  const double hotT=1.4e6,hotrho=60.;
+  const auto warm=warmer.eval(hotT,hotrho,hrich);
+  const auto hotlog=[&](double t,double r){return std::log(warmer.eval(t,r,hrich).kappa);};
+  require(std::abs((hotlog(hotT*std::exp(e),hotrho)-hotlog(hotT*std::exp(-e),hotrho))/(2*e)-warm.dlnk_dlnT)<2e-5,
+      "warmer source-slope temperature derivative mismatch");
+  require(std::abs((hotlog(hotT,hotrho*std::exp(e))-hotlog(hotT,hotrho*std::exp(-e)))/(2*e)-warm.dlnk_dlnRho)<2e-5,
+      "warmer source-slope density derivative mismatch");
+  const auto hotrange=warmer.density_range(hotT,hrich);
+  require(hotrange && hotrange->min<hotrho && hotrange->max>hotrho,
+      "warmer source-slope density range missing");
+  bool temperature_rejected=false;
+  try{expanded.eval(hotT,hotrho,hrich);}catch(const std::domain_error&){temperature_rejected=true;}
+  require(temperature_rejected,"default temperature limit must remain unchanged");
   bool old_rejected=false;try{opacity.eval(newT,newrho,hrich);}catch(const std::domain_error&){old_rejected=true;}
   require(old_rejected,"default approximation domain must remain unchanged");
   bool rejected=false;try{opacity.eval(T,100.,hrich);}catch(const std::domain_error&){rejected=true;}
