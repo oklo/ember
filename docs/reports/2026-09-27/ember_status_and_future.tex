@@ -1,0 +1,37 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=0.85in]{geometry}
+\usepackage{amsmath,amssymb,booktabs,array,longtable,graphicx}
+\usepackage{xcolor,enumitem,fancyhdr,float,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!45!black,
+ citecolor=blue!45!black,pdftitle={Ember: the long life of a 0.1 solar-mass star},
+ pdfauthor={Ember project, prepared for Gregory Laughlin}}
+\graphicspath{{./}}
+\setlength{\parindent}{0pt}\setlength{\parskip}{6pt}
+\setlength{\emergencystretch}{2em}\setlist{nosep,leftmargin=*}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Ember\quad Working paper}
+\fancyhead[R]{\small 27 September 2026}
+\fancyfoot[C]{\small\thepage}\setlength{\headheight}{14pt}
+\newcommand{\Ms}{M_\odot}\newcommand{\Rs}{R_\odot}\newcommand{\Ls}{L_\odot}
+\newcommand{\Tyr}{\mathrm{Tyr}}
+\newcommand{\Teff}{T_{\rm eff}}
+\begin{document}
+\begin{center}
+{\Large\bfseries Ember: the long life of a $0.1\Ms$ star}\\[8pt]
+{\small Working paper, 27 September 2026}
+\end{center}
+
+\input{00_summary}
+\input{01_intro}
+\input{02_model}
+\input{03_contraction}
+\input{04_hydrogen}
+\input{05_flash}
+\input{06_comparisons}
+\input{07_limits}
+\input{08_timeline}
+\input{09_computing}
+\appendix
+\input{10_technical}
+\input{bib}
+\end{document}

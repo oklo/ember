@@ -34,12 +34,12 @@ unsupported. Do not duplicate exhausted attempts without diagnosing them.
 has been corrected and visually checked at **30 pages** (from63). All paper
 figures are still unchanged. Peak luminosity values now match the actual
 pulse figure: 666/848/1695 grids give5.537e36/4.835e36/3.281e35erg/s,
-not a converged peak. Publication of the shorter September27 paper remains
-pending. Code through d67b4b6 is public; H-interval/recovery work is copied
-into the isolated publication checkout and **all76 isolated tests pass**.
-Next: commit/publish those reviewed changes, publish the shorter paper, then
-finish trace-He and hydrogen-dominated atmosphere integration while the star
-runs. Do not stop active jobs simply because this handoff is being updated.
+not a converged peak. The corrected September27 paper is ready at
+`docs/reports/2026-09-27/ember_status_and_future.pdf`; 30 pages,13621 words,
+12 included figure PDFs. Its artifact manifest and README identify shared
+plot inputs. Source through **935dcd1** is published and **all76 isolated
+tests pass**. Next: publish the shorter paper, then finish trace-He and
+hydrogen-dominated atmosphere integration while the star runs. Do not stop active jobs simply because this handoff is being updated.
 
 ## Objective and protected work
 

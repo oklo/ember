@@ -1,0 +1,121 @@
+\section{Technical reference}\label{app:tech}
+
+\subsection*{Opacity and equation-of-state continuations}
+Settling raises the core metal fraction above the $Z=0.03$ limit of the
+tabulated ATOMIC opacities. Through $Z=0.08$ the radiative opacity is
+continued linearly from the $Z=0.02$ and 0.03 sources at fixed temperature,
+density and hydrogen abundance,
+\begin{equation}
+ \kappa(T,\rho,X,Z)=\kappa(T,\rho,X,0.03)
+ +\frac{Z-0.03}{0.01}\,[\kappa(T,\rho,X,0.03)-\kappa(T,\rho,X,0.02)],
+\end{equation}
+with all source temperature and density bounds enforced. Transferring the
+OPLIB composition ratio from $Z=0.02$ to a withheld $Z=0.03$ source differs
+from the ATOMIC value by at most 0.1867\% at 34 core states, and the linear
+and ratio forms differ by 0.001212\% in luminosity over a matched 5 Gyr.
+Independent OPLIB data through $Z=0.2$ support linear scaling within
+3.302\% at 6--10 MK; in the region with $Z>0.06$ radiation carries at most
+0.04154\% of the gradient-driven heat. As the envelope falls below
+$Z=0.01$ the molecular opacity interpolates the actual AESOPUS values,
+including $Z=0$ and 0.004; at higher temperatures $\kappa$ is continued
+linearly in $Z$ from the 0.01 and 0.02 sources with a floor at
+$Z=10^{-4}$. Hydrogen dependence is continued in $\log\kappa$ from the
+$X=0.70$ and 0.75 sources through pure hydrogen; the molecular source ends
+at $1-X=10^{-7}$. In the dense hydrogen envelope, where the OPLIB table
+ends at $\log R=1.5$ ($R=\rho/T_6^3$), the TOPS hydrogen slope is blended
+in over $\log R=1.25$--1.45 and used to $\log R\leq1.8$ for
+$\log T=5.6$--6.1; convection carries 99.96\% of the heat at the affected
+layer. In dense core cells without spectral coverage (0.125--0.45 keV,
+$10^4$--$10^5$ g cm$^{-3}$, $X\leq0.2$) the tabulated uncut opacity is
+multiplied by an inferred plasma correction; radiation carries at most
+0.2535\% of the local transport there.
+
+The variable-metal equation-of-state family covers $Z=0$--0.08 (0.16 for
+the core) and all 23 sampled Track S structures. Against direct FreeEOS
+evaluations the maximum differences are 0.03028\% in pressure, 0.09056\% in
+adiabatic gradient, 0.7642\% in heat capacity and 1.037\% in $\Gamma_1$;
+36 low-density and 28 high-metal comparisons agree within 0.009197\% and
+0.02530\% in the material responses. The Track F family (152 tables, 38
+hydrogen and four $^3$He fractions) has a maximum second-composition-derivative
+difference of 0.1499\% at 102 compositions and a heat-capacity difference of
+0.1062\% on the saved 512-point structure. Composition derivatives are
+evaluated without an abundance floor, including when a species is exactly
+absent; 128 analytic comparisons and five FreeEOS curvature checks at zero
+$^3$He (within 0.007181\%) pass. The continuous driver's potential matches
+direct FreeEOS to 0.02589\% in pressure and 0.02467\% in internal energy on
+the 512-zone reference profile.
+
+\subsection*{Atmosphere families}
+Table~\ref{tab:atm} lists the atmosphere tables entered by Track S and the
+flash continuations. ``Depth'' is the largest change in joining temperature
+and pressure when the source column is computed to a deeper lower boundary;
+``interpolation'' is the largest difference between an independently solved
+column and the interpolated value. Missing cells remain inaccessible to the
+evolution rather than being filled.
+
+{\small\renewcommand{\arraystretch}{1.1}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.30\textwidth}>{\raggedright\arraybackslash}p{0.22\textwidth}rp{0.12\textwidth}p{0.16\textwidth}@{}}
+\caption{Atmosphere tables along Track S and the flash continuations.}\label{tab:atm}\\
+\toprule Composition & $\Teff$ (K), $\log g$ & Columns & Depth ($T$; $P$) & Interpolation ($T$; $P$) \\\midrule\endfirsthead
+\toprule Composition & $\Teff$ (K), $\log g$ & Columns & Depth ($T$; $P$) & Interpolation ($T$; $P$) \\\midrule\endhead
+Track P reference: $X=0.1$--0.7, $X_3=0$--0.12, $Z=0.02$ & to 5600; 4.9--5.4 & 220 & 0.007883\% & 0.7399\%; 0.5707\% \\
+Warm extension, $X=0.15$, 0.2 & 5400--6400; 5.7, 6.0 & 300 & 0.009372\% & 0.4860\% \\
+Late Track F grid, $X=0.70$--0.90, $X_3=0$--0.03 & 3400--4000; 4.9--5.15 & 48 & --- & 1.837\% in $T$ \\
+Metal response $Z=0.01$--0.02 (paired) & to 4400; 5.025 & pairs & 0.0002576\% & 0.6093\%; 3.064\% \\
+$Z=0.005$--0.01 & to 4400; 5.1 & pairs & --- & 1.671\%; 1.980\% \\
+$Z=0.0025$--0.005 & to 4400; 5.1 & 12 pairs & 0.001301\%; 0.002243\% & 0.03091\%; 0.2311\% \\
+$Z=0.001$--0.0025 & 4000--4400; 5.1 & 8 pairs & --- & 0.2539\%; 3.111\% \\
+$Z=0.0005$--0.001 & 4000--4400; 5.1 & 8 pairs & --- & 2.031\%; 2.755\% \\
+$X=0.9$--0.98, $Z=0.001$, $X_3=0$, 0.003 & 4000--4800; 4.9--5.4 & 70 & --- & 0.004095\%; 0.01689\% \\
+$X=0.995$--0.9995, $Z=10^{-6}$--$10^{-4}$ & 4600--5200; 5.15--5.65 & 94 & --- & 0.09719\%; 4.656\% \\
+$1-X=10^{-5}$--$10^{-3}$, $Z=10^{-8}$--$10^{-6}$ & 4600--5200; 5.4--5.65 & 81 & (shallowest ends at $\tau=168.3$) & 0.4624\%; 0.3930\% \\
+$Z\leq10^{-6}$, He $10^{-10}$ & 4700--6000; 5.5--5.95 & 72 & $4.327\times10^{-6}$\%; $4.770\times10^{-5}$\% & 0.1751\%; 0.5986\% \\
+Zero metal, cold & 4650--4800; 5.9--5.95 & 6 & below $10^{-6}$ & 0.1154\%; 1.108\% \\
+Gravity continuation & 4650--4800; 5.95--6.1 & inferred & --- & 0.1878\%; 2.391\% (9 solved) \\
+Temperature continuation & 4600; 5.9 & 1 solved & --- & within 0.05\% \\
+H--He mixtures (flash), $X=0.78$--0.9955 & 4500--5500; 4.95--5.80 & 54 & 0.02452\%; 0.03703\% & 0.08784\%; 1.094\% \\
+H--He mixtures, three $X$ & 4700--6000; 4.95--5.25 & 36 & 0.01078\%; 0.06911\% & --- \\
+H--He mixtures, three $X$ & 6000--6500; 4.20--5.55 & 60 & 0.01373\%; 0.09599\% & --- \\
+H--He mixtures, three $X$ & 5000--6000; 5.4--5.8 & 27 & --- & $7.587\times10^{-6}$\%; 0.1582\% \\
+MESA hydrogen white-dwarf table \cite{mesa_atm} & 2000--40,000; 5.5--9.5 & table & joined at $\tau=25.12$ & extrapolated below $\log g=5.5$ \\
+\bottomrule
+\end{longtable}}
+
+Within $0.90<X<0.94$ the logarithms of the joining values are interpolated
+in hydrogen between the $X=0.90$ and 0.94 families; the metal response is
+calibrated at $X_3=0$ and applied separately from the small isotope
+response, and helium below a mass fraction 0.005 is neglected in the
+4600--4800 K, $\log g=5.9$--6.1 domain (solved helium-bearing columns change
+the joining values by less than 0.1\% in $T$ and 2.5\% in $P$). In the flash
+continuations the hydrogen table is extrapolated below $\log g=5.5$ using
+either its lowest two rows or the gravity response of solved near-hydrogen
+atmospheres at $\log g=4.35$ and 4.50; the two inferred references differ by
+up to 2.189\% in temperature and 15.04\% in pressure at tabulated points,
+and paired stellar comparisons between them are those quoted in
+Section~\ref{sec:flash}.
+
+\subsection*{Time-step and conservation checks}
+Every accepted interval compares one full step with two half steps in
+structure, species, total hydrogen and energy. Species balances are checked
+independently in each composition region together with the inert-metal
+mass, nuclear rest-mass release and the first law. For Tracks S, F and P, the relative time-error
+budgets are 0.0003 for radius, density and temperature, 0.003 for local
+$^3$He and 0.001 for the other species; the abundance solver tolerance is
+$10^{-10}$ with a stricter fallback (a $10^{-12}$ control changes mass
+fractions by at most $1.360\times10^{-10}$). During the flash, deposited
+nuclear energy is integrated consistently with the implicit equations, time
+refinement permits 0.5\% in deposited energy and 0.1\% in structure and
+endpoint nuclear power (a 1\% allowance was tested and rejected because a
+local temperature difference of $|\Delta\ln T|=0.001091$ exceeded the
+declared 0.001 limit), and the first-law residual is measured against the
+larger of nuclear and photon luminosity with a limit of $2\times10^{-8}$.
+Mesh insertions preserve species inventories, internal energy and the nodal
+gravitational-energy sum. Increasing the separate abundance-change limit per
+step from 0.001 to 0.005 saves 24.99\% of CPU over a matched 1 Gyr with a
+luminosity change of 0.0005727\%; a larger structure tolerance was rejected
+(Section~\ref{sec:model}). Electron-pair collision integrals for the late
+shell-burning calculation cover degeneracy parameter $\eta=-6$--64 and
+screening parameter $b=0.1$--2400, with interpolation and integration checks
+within 0.3466\%. Collision integrals use 96 Jacobi and 128 Legendre points;
+against 384/512 points the maximum scaled coefficient difference is
+$4.851\times10^{-9}$.

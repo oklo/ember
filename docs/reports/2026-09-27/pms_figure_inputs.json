@@ -1,0 +1,7 @@
+{
+  "source_sha256": {
+    "out/convective-transport-sept26-v1/v4/contraction/history.jsonl": "ac9a34330379e28565d6d74d3ae8756ae3ae3a4e70bcfa28fd12e8c8c125edf9"
+  },
+  "count": 1020,
+  "scope": "Common Hayashi-started D/pp/CN calculation with plasma losses, checked whole-star convection and composition heat after initial D; no radiative settling regime yet."
+}

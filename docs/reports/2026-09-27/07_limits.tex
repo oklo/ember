@@ -1,0 +1,132 @@
+\section{What the model still lacks, and what it would change}\label{sec:limits}
+The following omissions are the ones that can change an interpretation in
+this paper. For each, the measured size of the effect is given where one
+exists.
+
+\paragraph{Atmospheres below 4600 K, above $\log g=6.1$, and without hydrogen.}
+Track S stops where its TLUSTY families stop, and the flash continuations
+rely on a hydrogen table whose normalization differs from TLUSTY by 49\% in
+joining pressure (Section~\ref{sec:flash}). Cooling through 1000, 500 and
+100 K requires dense, cool atmospheres with nonideal chemistry,
+pressure-dependent and collision-induced absorption, and refraction
+\cite{blouin18}. A hydrogen-free atmosphere is not yet possible: the source
+programs normalize abundances to hydrogen, and a test at 4017 K shows that
+rescaling all number abundances by one factor preserves composition but can
+change individual absorption coefficients by a factor of 27.3. These gaps
+decide whether a computed cooling age exists at all; nothing in
+Sections~\ref{sec:hydrogen}--\ref{sec:flash} is a cooling age.
+
+\paragraph{Grains.}
+Equilibrium chemistry finds no condensates in the 3000--3200 K atmospheres
+tested nor in the hydrogen-poor structures through 6400 K, but finds them in
+the cool upper layers of 2600--2800 K models; dusty models become relevant
+near 2800 K and below \cite{chabrier00}. Removing the condensed species from
+the gas at 2800 K changes the joining pressure by 0.1246\% and temperature by
+$-0.02347\%$. A grain-opacity calculation on one fixed 2800 K profile, with
+a condensed mass fraction of $1.094\times10^{-4}$ in $0.1\,\mu$m compact
+grains, gives integrated optical depths near $1\,\mu$m of 0.002610
+(absorption) and 0.002829 (scattering); coupling grains to the atmospheric
+structure and thermodynamics has not been done. Grains are a possible
+correction during contraction, the cool initial main sequence and the
+eventual cold-remnant phase. The continuous model reaches the main sequence
+near 2765 K, so the grain-free assumption also needs assessment there.
+
+\paragraph{Carbon conversion and molecular opacity.}
+A fixed metal mixture misrepresents the cool opacity once carbon has been
+converted to nitrogen, because CO formation couples the available carbon and
+oxygen \cite{lederer09}. Complete conversion of the GS98 carbon captures a
+hydrogen mass fraction of $5.728\times10^{-4}$. At $X=0.20$ and
+$\rho=5.995\times10^{-6}$ g cm$^{-3}$ the Rosseland absorption mean changes
+by the ratios in Table~\ref{tab:cn}; across densities of
+$10^{-8}$--$10^{-4}$ g cm$^{-3}$, half conversion raises the 2705 K mean by
+18.67--30.22\%. In a coupled 3200 K atmosphere at $\log g=5.15$, half
+conversion raises the joining temperature by 1.601\% and lowers the pressure
+by 5.681\%; applied to the $3.400\Tyr$ structure for 10 Myr this changes
+the luminosity by $-5.162\%$ and the effective temperature by $-1.361\%$. At
+5400 K the response is negligible. The effect is material for the cool
+part of the track and must be included in a track that carries converted
+catalysts to the surface.
+
+\begin{table}[H]\centering\small
+\caption{Rosseland absorption mean relative to the fixed GS98 mixture at
+$X=0.20$ and $\rho=5.995\times10^{-6}$ g cm$^{-3}$ (gas only).}\label{tab:cn}
+\begin{tabular}{@{}rrr@{}}\toprule
+$T$ (K) & Half the carbon converted & All the carbon converted \\\midrule
+2705 & 1.225 & 1.407 \\
+3521 & 1.151 & 1.263 \\
+4583 & 0.9971 & 0.9912 \\
+5964 & 0.9901 & 0.9744 \\\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Microscopic transport in degenerate and partially ionized matter.}
+At the centre of the $3.890\Tyr$ Track P model the temperature is 0.1506
+of the electron Fermi temperature, so degeneracy enters the transport
+coefficients, and the thermal-diffusion and heat-flow coefficients must use
+one consistent definition \cite{beznogov16,paxton18}. A coupled ion/electron
+calculation on the saved gradients, including electron--electron collisions
+and the leading ion recoil term, gives provisional outward hydrogen
+velocities of $(1.101$--$1.303)\times10^{-9}$ cm s$^{-1}$ at enclosed mass
+0.6972, with local drift times $H_P/|w_{\rm H}|$ of 12.78--15.13 Gyr there
+and 3.694--4.244 Gyr near mass fraction 0.9738; the thermal force
+contributes 23.63--24.48\% of the drift. The range spans two screening
+choices and is not an uncertainty. Including electron--electron collisions
+gives 0.5277--0.8780 of the elastic-only conductivity across the hot
+nonconvective region. These are the coefficients Tracks S and F use above
+about 2 MK; below that the tracks represent species exchange by convection
+alone, and cold radiative layers still lack a supported transport law.
+Heat carried by species motion is at most 0.09557\% of the local luminosity
+on hot nonconvective faces; its omission below 2 MK changes surface
+luminosity by at most 0.01320\% over 5 Myr.
+
+\paragraph{Interior opacity sources.}
+The hot interior opacity comes from one archive, and independent archives
+disagree at the few-percent level. On 1940 states with $X=0$ or 0.05 and
+$Z=0.01$ or 0.03, the Los Alamos OPLIB means distributed with MESA
+\cite{farag24} differ from the TOPS means used here by a median of 2.364\%
+and by up to 7.279\%; on 15 warm-envelope layers the Opacity Project
+\cite{seaton05} differs from OPLIB by $-9.730$ to $+4.619\%$, and from TOPS
+by 2.165\% at a sampled state. The archives use different element sets and
+atomic physics, and no track has been run with the alternatives. Where the
+sampled layers are convective or conductive the stellar response to opacity
+changes of this size is unresolved (Table~\ref{tab:sensitivity}); in the
+radiative envelope of the depleted star a $\pm10\%$ change moves the
+effective temperature by 3.216 K, so a few-percent archive difference is
+below the other uncertainties but is not zero.
+
+\paragraph{The cold helium interior.}
+The energy equation used throughout is
+$L_\gamma=L_{\rm nuc,dep}+L_{\rm grav}-L_{\nu,\rm thermal}$ with nuclear
+neutrinos removed from $L_{\rm nuc,dep}$; at $3.890\Tyr$ in Track P the
+terms are 0.01077, $3.201\times10^{-5}$ and (nuclear neutrinos)
+$3.362\times10^{-4}\Ls$, with plasma losses of $1.260\times10^{-7}\Ls$ and
+a discrete residual below $8\times10^{-11}$. Beyond the computed tracks the
+remnant needs a consistent liquid and solid helium free energy with quantum
+and mixture effects \cite{baiko22}: specifying melting at $\Gamma=175$ does
+not fix the latent heat or the liquid heat capacity. The cold-electron
+thermal response, electron and ionic entropies and liquid/solid free
+energies have been implemented and checked against thermodynamic identities
+and against Ioffe EOSFI22 (largest density-response discrepancy
+$1.05\times10^{-6}$ in ideal-ion pressure units), but they are not yet
+combined into the production equation of state. Crystallization and its
+latent heat, the depth at which convection couples to the isothermal core,
+and pycnuclear rates in the actual helium-rich composition \cite{gasques05}
+all remain to be evaluated.
+
+\paragraph{Omitted reactions, neutrinos and mixing.}
+Pep, hep, ppIII and the oxygen branches are absent in every track; adding a
+closed CN cycle to a Track P state adds 2.381\% to the deposited pp energy
+and lowers the surface luminosity by 0.1239\% after 5 Myr. Only plasma
+neutrino losses are included. Semiconvective heat flux, thermohaline mixing
+during the flash, rotation, magnetism, mass loss and accretion are absent.
+The tracks describe an isolated, nonrotating star; accretion in particular
+would change the surface composition on which the atmosphere depends
+\cite{bauer19}.
+
+\paragraph{External heating and encounters.}
+Encounters, accretion and particle decay are treated in
+Section~\ref{sec:lifetime} as conditional extensions of the isolated track
+\cite{adams97}. For close encounters, energy transferred into stellar
+oscillations is distinct from retained heat; gravitational radiation can
+remove mode energy \cite{rathore05}, and the thermalized fraction must be
+determined before it enters a heating history.

@@ -2,7 +2,7 @@
 
 Ember is a one-dimensional stellar evolution code written in C++23. It calculates the structure, composition and energy transport of very low-mass stars.
 
-[Read the working paper](docs/reports/2026-09-26/ember_status_and_future.pdf) ([LaTeX, figures and plotting data](docs/reports/2026-09-26/README.md)).
+[Read the working paper](docs/reports/2026-09-27/ember_status_and_future.pdf) ([LaTeX, figures and plotting data](docs/reports/2026-09-27/README.md)).
 
 ## Research status — September 27, 2026
 
@@ -12,8 +12,9 @@ conditional disappearance through nucleon decay. The same program should
 resolve the stellar/brown-dwarf boundary as initial mass and composition vary.
 The full calculation is not yet established.
 
-The common `ember-evolve --lifetime` program follows the same initially
-0.1-solar-mass star to **2.102 Tyr**, with **5931 accepted intervals** in
+The common `ember-evolve --lifetime` program has passed **3.02 Tyr** from a
+Hayashi start with hot transport selected and no rejected intervals. A completed
+comparison with a stricter fixed-metal allowance reaches **2.102 Tyr**, with **5931 accepted intervals** in
 **66.16 CPU minutes / 35.41 elapsed minutes**, including loading but excluding
 source-table preparation. It remains fully convective at **3020 K**, with
 hydrogen **X = 0.4170**. All accepted isotope and energy checks pass.
@@ -48,11 +49,13 @@ Separate late-evolution calculations develop a helium-3 shell pulse after an
 atmosphere adjustment and then turn toward cooling. They establish a possible
 instability under that boundary treatment, not atmosphere-independent ignition.
 The continuous calculation tests whether the pulse survives a consistent history.
-[Working paper](docs/reports/2026-09-26/ember_status_and_future.pdf),
+[Working paper](docs/reports/2026-09-27/ember_status_and_future.pdf),
 [Fortran comparison](docs/F77_LBA97_COMPARISON.md).
 
-Public runtime/test-data availability and the shorter paper are still being
-completed. The large local datasets are required for the full test suite.
+The working paper is now 30 pages, reduced from 63 while retaining the
+physical qualifications and lifetime timeline. The large local datasets are
+required for the full test suite; public runtime/test-data availability remains
+incomplete.
 
 ## Building
 

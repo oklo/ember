@@ -1,0 +1,61 @@
+\section{The question and the calculations}
+A star of $0.1\Ms$ burns hydrogen for several trillion years. Laughlin,
+Bodenheimer and Adams \cite{lba97} (LBA97) followed its evolution into
+white-dwarf cooling with a grey atmosphere and the opacities and reaction
+rates of the 1990s. The aim of Ember is to follow such
+a star from formation through hydrogen exhaustion, the transition to a helium
+white dwarf, cooling through 1000, 500 and 100 K, and the conditional stages
+that follow: encounters, accretion, dark-matter heating, and disappearance if
+nucleons decay. The remit is to use the simplest model that resolves each
+question and to keep numerical uncertainty below about a tenth of the
+physical variation that matters.
+
+The paper reports five calculations. Their clocks differ and they have not
+been joined into one track.
+\begin{itemize}
+\item The \textbf{continuous calculation} starts from a Hayashi-track model
+and runs deuterium, proton--proton and CN burning, plasma neutrino losses and
+whole-star convective mixing in one program. The run with hot microscopic
+transport selected has passed $3.02\Tyr$. The version with
+metal-dependent atmospheres is also in progress.
+Age is measured from the contracting starting model (Section~\ref{sec:contraction}).
+\item \textbf{Track S} (settling) starts from a static hydrogen-burning model
+at age zero and follows hydrogen, helium-3, carbon, nitrogen and a moving
+metal group with microscopic diffusion and settling. It reaches
+$4.002\Tyr$ and is the reference long-term calculation.
+\item \textbf{Track F} (fixed metals) uses the same network and diffusion
+with the metal abundance held fixed; it reaches $3.704\Tyr$.
+\item \textbf{Track P} (proton--proton only) omits carbon--nitrogen burning
+and microscopic diffusion; it reaches $3.890\Tyr$ and is the basis of the
+LBA97 comparison.
+\item The \textbf{flash continuations} F1 and F2 start from Track S after
+its outer boundary is replaced by a pure-hydrogen white-dwarf table. They are
+provisional (Section~\ref{sec:flash}).
+\end{itemize}
+
+Sections~\ref{sec:model}--\ref{sec:hydrogen} give the model, the
+contraction results and the hydrogen-burning results. Section~\ref{sec:flash}
+separates what is established about the helium-3 flash from what is not.
+Section~\ref{sec:comparisons} compares with LBA97, with MESA and with
+observed stars. Section~\ref{sec:limits} lists the missing physics that can
+change the interpretation, Section~\ref{sec:lifetime} gives the conditional
+lifetime timeline, and Section~\ref{sec:computing} records cost and
+reproducibility. The appendix holds reusable implementation detail.
+Every number in the text is a calculated value unless labelled as a
+literature value or a conditional estimate. Table~\ref{tab:status}
+summarizes the status of each calculation.
+
+\begin{table}[H]\centering\small
+\caption{Status of the calculations reported here.}\label{tab:status}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.18\textwidth}>{\raggedright\arraybackslash}p{0.26\textwidth}>{\raggedright\arraybackslash}p{0.28\textwidth}@{}}\toprule
+Calculation & Clock & Last computed state & Status \\\midrule
+Contraction run & from Hayashi model & 4 Gyr, 2765 K & complete; fixed atmosphere \\
+Continuous run & from Hayashi model & $2.102\Tyr$, 3020 K, $X=0.4170$ & complete; stopped at table limit \\
+Continuous hot-transport run & from Hayashi model & beyond $3.02\Tyr$ & in progress \\
+Track S & static H-burning model & $4.002\Tyr$, 4612 K & complete to atmosphere limit \\
+Track F & static H-burning model & $3.704\Tyr$, 3702 K & complete (comparison) \\
+Track P & static H-burning model & $3.890\Tyr$, 5546 K & complete (comparison) \\
+Flash continuations F1, F2 & from post-switch model & 5.744 Myr; 42.48 Myr & provisional; control pending \\
+Continuous settling calculation below 4600 K & --- & not computed & requires new atmospheres and cold EOS \\\bottomrule
+\end{tabular}
+\end{table}

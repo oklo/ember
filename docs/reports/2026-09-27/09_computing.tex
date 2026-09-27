@@ -1,0 +1,35 @@
+\section{Computing cost and reproducibility}\label{sec:computing}
+The model sequences in Figure~\ref{fig:hr} used 47.49 CPU-hours on an
+Apple M4 Max: 36.31 for Track S, 10.98 for Track F and 2.259 for Track P,
+with 861 shared states (2.052 CPU-hours) counted once. These totals include
+table loading, step-doubling comparisons and adaptive retries within the runs
+that supply the plotted curves, and exclude independent controls and
+discarded tracks. Track S occupied 15.13 hours of elapsed time excluding
+pauses between continuations. Building the atmosphere, opacity and
+equation-of-state tables that the tracks interpolate cost about 2.6 times
+more, roughly 122 CPU-hours for the documented jobs; a rough conversion at
+$2\times10^9$ operations per CPU-second, uncertain by a factor of three,
+puts the sequences near $3\times10^{14}$ floating-point operations and the
+tables near $10^{15}$. The contraction sequence to 1 Gyr took 8.166 CPU
+minutes; the continuous run to $2.102\Tyr$ took 66.16 CPU minutes on four
+threads. The flash continuations were computed in segments; a complete
+cooling-track runtime has not been measured, and none of these numbers
+predicts it.
+
+Implicit transport is required: the explicit stability limit of the initial
+diffusion coefficients is 672.7--936.1 yr, while accepted steps late on
+Track S have a median length of 59.44 Myr among those longer than 1 Myr.
+Reusing exactly matching nuclear evaluations reduced the CPU time of a
+matched run through $3.757\Tyr$ from 162.4 to 101.8 minutes with identical
+output; the other performance changes recorded during development were each
+measured in isolation and are not additive.
+
+The repository at \url{https://github.com/oklo/ember} contains the code,
+table-generation instructions, the records of input choices and checks,
+this paper and the numerical data behind its figures. The LBA97 comparison
+records the selected image coordinates, axis calibration and the checksum of
+the original PDF, so its curves can be rebuilt without the image. Full raw
+outputs, generated physical tables, saved stellar states and executable
+archives remain local; regenerating the bulk tables is required before a
+stellar calculation can be run from a fresh checkout. Instructions and input manifests for recreating the figures accompany the
+paper in the repository.

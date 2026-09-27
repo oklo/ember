@@ -1,0 +1,149 @@
+{
+  "created_utc": "2026-09-27T04:26:49.007809+00:00",
+  "pages": 30,
+  "previous_pages": 63,
+  "words": 13621,
+  "scope": "Shortened paper with scientific corrections; retained figures unchanged.",
+  "checks": [
+    "Tectonic build succeeds",
+    "No overfull boxes or undefined references",
+    "All 30 pages visually inspected before final text corrections",
+    "Source flash figure hash matches pulse_face_comparison_v7.json; table and caption now use its maxima",
+    "Continuous-run snapshot explicitly distinguished from static-start comparison tracks"
+  ],
+  "files": {
+    "06_comparisons.tex": {
+      "bytes": 11189,
+      "sha256": "7f6c3f830af52f59333834221ae19f8e4beb947f221726d5a9401a9688a38a00"
+    },
+    "metal_peak_structure.pdf": {
+      "bytes": 25291,
+      "sha256": "adb5e107672af2d8a46cb6c5a31f39b4b179a83629f05ff2e10245c3f411dc2d"
+    },
+    "flash_histories_hr.pdf": {
+      "bytes": 33216,
+      "sha256": "70903a456e37b8427b603271205b9a87488bc66eeb0207da8e145e5fbe8e2669"
+    },
+    "bib.tex": {
+      "bytes": 8369,
+      "sha256": "1e9fe7d7217718fa072b09ba245220ed5662d1a65f42d875862b3ad18863bcb1"
+    },
+    "convection_current.pdf": {
+      "bytes": 16625,
+      "sha256": "3244c51940648125582e5d5d317014e9f034b7cca3aa0734f9442a2354be0a22"
+    },
+    "pms_main_sequence.pdf": {
+      "bytes": 24673,
+      "sha256": "e664fd17b0f46457a5c4ba987bfff37d68141a0fc07de589e901e082565c828f"
+    },
+    "03_contraction.tex": {
+      "bytes": 5295,
+      "sha256": "0ed1313edf97007806224bb9b712d44a995fd77e04149a615f1aabc6f6528b2b"
+    },
+    "hydrogen_evolution.pdf": {
+      "bytes": 15197,
+      "sha256": "b2432af4e3fd8f14975f8641ba6f6f2cf1c714c3ec77eb602906be395319fd6d"
+    },
+    "late_cooling.csv": {
+      "bytes": 213620,
+      "sha256": "6184d3f6e2407a91a9e31092db9ba0dd821effe758e862b697187b92ac986f22"
+    },
+    "grey_mesa_comparison.pdf": {
+      "bytes": 26939,
+      "sha256": "cdb01377aa0e7060abca9a3469601aafb160dd3e84d09f688e4eaf54c36be460"
+    },
+    "04_hydrogen.tex": {
+      "bytes": 13935,
+      "sha256": "83758e5f9fd7d52288d4063e86c0b41886184c31cd4310d30c0fd0992bb58fc3"
+    },
+    "09_computing.tex": {
+      "bytes": 2330,
+      "sha256": "f052e52dd9be96e9983578890d7489481f41a148b9fd9db6f7a35df27d328b18"
+    },
+    "01_intro.tex": {
+      "bytes": 3974,
+      "sha256": "df4b7380fe32d60adc32cc47b8204d3aeb420b58f87b5cea04d9516b861a8e24"
+    },
+    "plot_late_cooling.py": {
+      "bytes": 3567,
+      "sha256": "52288194f167e6f4c15fed10711571d51f83b1968989c1bc250f0c8d2736d6a5"
+    },
+    "lba97_composition.pdf": {
+      "bytes": 16579,
+      "sha256": "170228270e560c7e3c8bf2cdc6a4c2e73c297c7e9b5c58ba66bbc66b5739cbc4"
+    },
+    "00_summary.tex": {
+      "bytes": 2255,
+      "sha256": "87c13763eb42177d4e56fa988d2e6e939bbb6a0785c7d6bd2003f36dc3574f28"
+    },
+    "late_cooling.pdf": {
+      "bytes": 24309,
+      "sha256": "e925b99b3b6a89d4ed41702fd81567e5f7796354f47892400a188979fbfb8ee5"
+    },
+    "ember_status_and_future.tex": {
+      "bytes": 1269,
+      "sha256": "4d384a80035faf60cd9a539d9cc25de16355b1dd6c6a76ba5e9a8df26247d9c2"
+    },
+    "wd_atmosphere_response.pdf": {
+      "bytes": 29228,
+      "sha256": "c76eef9ea83dd0894632ca14a2839177d0556d9b92ec4d06e5a1e499f83d36b9"
+    },
+    "08_timeline.tex": {
+      "bytes": 6858,
+      "sha256": "857dcc892f94773ba30f8e1c739477fc65236379d1dd804ad303b915e62e402b"
+    },
+    "mesa_comparison.pdf": {
+      "bytes": 26559,
+      "sha256": "d1460f4fca60a15001e20df44a0afe1c6ba3af714f850e1608804a6572a10d2b"
+    },
+    "02_model.tex": {
+      "bytes": 7713,
+      "sha256": "f790ad222db3d58e7c9717b112b1a13d1db7a83fd339e2824f8aca93014d06c8"
+    },
+    "05_flash.tex": {
+      "bytes": 13682,
+      "sha256": "0a55ff0a447a68dc504d46e69b67ae0a212f0f838caa223836050e33654596ec"
+    },
+    "plot_pms_main_sequence.py": {
+      "bytes": 3726,
+      "sha256": "64990ac0e95a94b816681423397b32ccc69b96d9c89825a0c44788423f1ee24a"
+    },
+    "lba97_hr.pdf": {
+      "bytes": 26077,
+      "sha256": "33a48e61db41a88cf42e98a5935e93ae9a2e49e44b87e4c63deb80a1a85052bf"
+    },
+    "pulse_face_comparison.pdf": {
+      "bytes": 29693,
+      "sha256": "490b69ca834d27dc39e9b161ecfa669e46df9e5e812daee7cbda2260c1482953"
+    },
+    "pms_main_sequence.csv": {
+      "bytes": 103765,
+      "sha256": "bbdd5cd6e694995adc7b52bcc1eb790f6cccbcdad79c00572c37d12738db42b3"
+    },
+    "ember_status_and_future.pdf": {
+      "bytes": 449932,
+      "sha256": "a0613b3721ae3abae6fac6041db9e5c4779f0cd14d3091448585e9e0023d694a"
+    },
+    "10_technical.tex": {
+      "bytes": 8502,
+      "sha256": "9aab35e2c22f267d96437ac2c3f86fbba8e29a4ad48bef84f3321cee2b623b02"
+    },
+    "07_limits.tex": {
+      "bytes": 8072,
+      "sha256": "2dd40b321ed9595ed6d1a56742e88a292647f8558a1cdb6a3d8157e4ab78009b"
+    },
+    "late_cooling_inputs.json": {
+      "bytes": 1570,
+      "sha256": "a809dfc5285c9ff3c3711960a74a5c777dfd303cc17bb6667a483a02f561e35c"
+    },
+    "pms_figure_inputs.json": {
+      "bytes": 363,
+      "sha256": "b2eaa48f3cd3dcc1fa6104d2df62ee7f00e1a4df89ece148b971360952d779fe"
+    }
+  },
+  "shared_figure_inputs": "../2026-09-26/figure_inputs/manifest.json",
+  "limitations": [
+    "Some retained plot scripts still require protected local pulse query files.",
+    "Hydrogen-rich restored-atmosphere run has not reached the late pulse; flash remains conditional on the changed boundary."
+  ]
+}

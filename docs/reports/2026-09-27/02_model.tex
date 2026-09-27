@@ -1,0 +1,112 @@
+\section{The model}\label{sec:model}
+All calculations hold the baryonic mass fixed at $0.1\Ms$ and omit rotation,
+magnetism, mass loss, accretion and external heating. The initial hydrogen
+mass fraction is $X=0.7$ and the metal fraction $Z=0.02$, with the relative
+metal abundances of the Grevesse--Sauval (GS98) mixture and the remainder in
+$^4$He. Tracks S, F and P start with no $^3$He; the continuous calculation
+starts with initial deuterium. Table~\ref{tab:ingredients} distinguishes
+the physical assumptions of the comparison tracks from those selected for
+the continuous calculation.
+
+{\small\renewcommand{\arraystretch}{1.12}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.13\textwidth}>{\raggedright\arraybackslash}p{0.44\textwidth}>{\raggedright\arraybackslash}p{0.37\textwidth}@{}}
+\caption{Physical ingredients by calculation.}\label{tab:ingredients}\\
+\toprule Component & Tracks S, F, P and flash continuations & Continuous calculation \\\midrule\endfirsthead
+\toprule Component & Tracks S, F, P and flash continuations & Continuous calculation \\\midrule\endhead
+Starting model & Static, fully convective hydrogen-burning model at age zero:
+$R=0.1259\Rs$, $\Teff=2766$ K, $L=0.0008362\Ls$, central density
+381.7 g cm$^{-3}$. & Fully convective Hayashi-track model: $\Teff=2864$ K,
+$R=1.594\Rs$, central temperature 0.5398 MK, with initial deuterium. \\[4pt]
+Nuclear reactions & Reduced ppI/ppII network with $^3$He out of equilibrium,
+Solar Fusion II rates \cite{adelberger11} and finite-degeneracy Salpeter--Van
+Horn screening. Tracks F and S add a time-dependent CN cycle ($^{12}$C,
+$^{13}$C, $^{14}$N) with the $^{14}$N capture rate of Solar Fusion III
+\cite{acharya25}; in Track S nuclear captures change the metal mass. Track P
+has no CN burning. Pep, hep, ppIII and the oxygen branches are absent in all.
+& Initial deuterium, pp and closed CN burning with Solar Fusion III rates
+for both networks and the same screening prescription.
+Pep, hep, ppIII and oxygen branches absent. \\[4pt]
+Heat transport & Mixing-length convection with the Ledoux criterion;
+radiative opacity plus electron conduction from Ioffe/Cassisi mixtures;
+plasma-neutrino losses \cite{hrw94}. Other thermal-neutrino processes are
+omitted. & Ledoux mixing-length convection, radiation, plasma-neutrino
+losses and conductive heat transport. In hot layers the screened kinetic
+calculation supplies the conductive coefficient; it joins the cool-envelope
+Ioffe/Cassisi coefficient smoothly between 2 and 3 MK. \\[4pt]
+Composition transport & Track P: instantaneous mixing within each convective
+region, slow mixing in marginally stable layers, no microscopic diffusion.
+Track F: microscopic diffusion of H, $^3$He, C and N with the metal
+inventory fixed; chemical forces from the equation-of-state free energy;
+electron collisions averaged over the finite-temperature Fermi distribution.
+Track S: as F, with all heavy elements moving as one group with distinct
+charges, and the equation of state and opacity depending on the total metal
+abundance. Flash continuations: finite mixing $D=v\ell/3$ in hot convective
+regions; semiconvective and thermohaline coefficients set to zero.
+& Instantaneous whole-star mixing while the star is fully convective, with
+the heat carried by changing composition included after deuterium
+exhaustion. Screened H/He/metal species fluxes act across radiative
+boundaries at temperatures of at least 2 MK; the metal law assumes full
+ionization. Cooler radiative species transport is unsupported.
+The heat law, rather than the species flux, uses the smooth 2--3 MK join. \\[4pt]
+Equation of state & FreeEOS 3.0 free-energy tables with numerical electron
+integrals, interpolated through a shared Helmholtz potential so that
+pressure, energy and composition responses stay consistent. Track P: 72
+composition tables. Track F: 152 tables at 38 hydrogen and four $^3$He
+fractions. Track S: a variable-metal family from $Z=0$ to 0.08, extended to
+0.16 for the metal-enriched core. None describes the cold, dense remnant.
+& One interpolated potential with planes at $Z=0$, 0.005, 0.02, 0.04 and
+0.16, twelve hydrogen-share coordinates and four $^3$He-share coordinates;
+all 512 zones support the required composition derivatives. \\[4pt]
+Opacity & AESOPUS 2.1 gas opacity at low temperature (no grains) and Los
+Alamos ATOMIC/TOPS opacity at high temperature \cite{colgan16,tops},
+including hydrogen-free mixtures above $5.012\times10^5$ K. Composition
+continuations in $X$ and $Z$ are given in Appendix~\ref{app:tech}.
+& Same tables and continuations. \\[4pt]
+Atmosphere & TLUSTY/SYNSPEC plane-parallel LTE atmospheres with
+frequency-resolved absorption, scattering and collision-induced absorption,
+no condensates, joined to the interior at Rosseland optical depth 100.
+Track P: 220 atmospheres over $X=0.1$--0.7, $^3$He 0--0.12, through
+5600 K. Track S: additional families down to $Z=10^{-8}$ and $1-X=10^{-5}$,
+4600--6000 K, $\log g$ to 5.95, with a local continuation to 6.1. Flash
+continuations: the pure-hydrogen white-dwarf table distributed with MESA
+\cite{rohrmann11,mesa_atm}, joined at optical depth 25.12 and extrapolated
+below $\log g=5.5$. & A composition-dependent family at $X\geq0.65$,
+$^3$He $\leq0.0075$, fixed $Z=0.02$, joined at optical depth 100. The
+continuous metal-dependent selection joins measured families through
+$X=0.9995$ and $Z=10^{-6}$. The more evolved continuous run still uses the
+fixed-metal approximation; Table~\ref{tab:status} distinguishes it. \\[4pt]
+Mesh and time integration & 512 mass points, fixed for Tracks S, F and P;
+flash grids refined locally to 578--2115 points. Structure, burning and
+mixing are solved together implicitly. Every accepted step is compared with
+two half steps; species inventories, inert-metal mass, nuclear rest-mass
+release and the first law are checked independently. Saved models restart
+exactly. & 512 zones; the same step-doubling check; independent isotope,
+mass-defect and first-law audits on every interval; exact restart replay.
+Radiative-core evolution and restart are registered tests. \\
+\bottomrule
+\end{longtable}}
+
+For Tracks S, F and P the relative time-error tolerances are 0.0003 for radius, density and
+temperature, 0.003 for local $^3$He and 0.001 for the other species; the
+abundance solver converges to $10^{-10}$. Tightening the structure and
+$^3$He tolerances threefold over a matched 5 Gyr interval changes luminosity
+by 0.002872\% and surface temperature by 0.01705 K, while loosening the
+structure tolerance to 0.001 over 2 Gyr changes luminosity by 1.078\% and
+temperature by 3.114 K; the tracks therefore keep the original settings.
+The continuous calculation uses a structure tolerance of $10^{-4}$ and an
+energy tolerance of 0.005. Local composition solves converge to $10^{-15}$
+in a single instantaneously mixed region and $10^{-12}$ in a stratified
+star; the separate global abundance-balance tolerance remains $10^{-14}$.
+
+Throughout the paper a \emph{paired comparison} means two calculations
+started from the same model, differing in one setting, and compared at the
+same age. Such comparisons measure sensitivity to that setting over the
+stated interval; they are not error bounds for a complete lifetime, and the
+text says so wherever the distinction matters.
+
+Replacing the Solar Fusion II rates by Solar Fusion III with everything else
+fixed raises the initial luminosity by 0.7454\% and the radius by 0.2164\%.
+FreeEOS omits potassium (mass fraction $4.56\times10^{-6}$). The interior
+equation of state, atmosphere chemistry, opacity and conduction come from
+different sources; their mutual consistency is checked at sampled states
+(Appendix~\ref{app:tech}) rather than guaranteed.
