@@ -1,0 +1,60 @@
+{
+  "snapshot_utc": "2026-09-27T06:41:29.250657+00:00",
+  "run": "out/continuous-lifetime-sept27-v4",
+  "status": "running",
+  "snapshot": {
+    "years": 1951716526948.4102,
+    "step_years": 1959585800.5811923,
+    "accepted": 5566,
+    "rejected": 0,
+    "radius_Rsun": 0.14821036517198752,
+    "Teff_K": 3008.9406272101924,
+    "luminosity_Lsun": 0.001622203395085807,
+    "nuclear_fraction": 1.0000104726624752,
+    "central_T_K": 5780606.876571723,
+    "H_mass_g": 8.675430467193058e+31,
+    "He3_mass_g": 5.696964692280612e+30,
+    "D_mass_g": 0,
+    "surface_X": 0.43629990954266706,
+    "surface_Z": 0.020000006370670315,
+    "error_norm": 0.6361433791193805,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.6294740645026788e-12,
+    "drift_gradient_proxy": 7.552377513274912e-07,
+    "kinetic_heat_proxy": 0.009460336774737324,
+    "convective_mass_fraction": 0.9999999999999997,
+    "radiative_boundaries": 0,
+    "relative_mixing_gradient": 6.801701613695307e-12,
+    "convective_travel_years": 0.9217604253393981,
+    "cpu_seconds": 368.503981
+  },
+  "same_Hayashi_origin": true,
+  "physics": "Common driver: initial D, pp+closed CN with SFIII rates, neutrino losses, hot screened radiative species flux and heat; instantaneous whole-region convection; measured metal and H-dependent tau100 gas atmospheres; restored H/metal interior opacity response.",
+  "time_accuracy": {
+    "species_tolerance": 1e-07,
+    "maximum_step_years": 5000000000.0,
+    "structure_tolerance": 0.0001,
+    "energy_tolerance": 0.005
+  },
+  "history_accepted_limits": {
+    "continuous-lifetime-sept27-v2": 3472,
+    "continuous-lifetime-sept27-v3": 5509
+  },
+  "history_files": [
+    "out/continuous-lifetime-sept27-v2/initial-check/history.jsonl",
+    "out/continuous-lifetime-sept27-v2/evolution/history.jsonl",
+    "out/continuous-lifetime-sept27-v3/evolution/history.jsonl",
+    "out/continuous-lifetime-sept27-v4/evolution/history.jsonl"
+  ],
+  "selection_evidence": "docs/results/lifetime_time_accuracy_sept27_v1.json",
+  "new_atmosphere_columns_selected": false,
+  "new_local_inversion_selected": false,
+  "finite_mixing_selected": false,
+  "qualifications": [
+    "High-gravity/cool atmosphere includes bounded inferred rows, not independently solved everywhere.",
+    "Atmosphere support ends at 4600 K / log g 6.1; this is preparation toward a continuous flash test, not proof of it.",
+    "Hot fully stripped radiative species transport; instantaneous convection, no selected grains or finite mixing."
+  ]
+}

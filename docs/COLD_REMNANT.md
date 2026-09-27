@@ -14,7 +14,7 @@ evolution, conservation and exact restart. The local composition solve uses
 1e-15 for one instantaneously mixed region and 1e-12 for stratified diffusion;
 the independent global abundance-balance criterion remains 1e-14.
 
-The restored-material Hayashi trajectory has passed **1.642 Tyr**, with no
+The restored-material Hayashi trajectory has passed **1.952 Tyr**, with no
 rejected intervals. A checked continuation adds the later trace-He/pure-H atmosphere inputs without changing
 its accepted physical state. All 5932 tested early boundary values remain exact,
 and the combined selection covers all 67 saved settling structures. The
@@ -36,6 +36,12 @@ lifetime timeline retained.
 [real diffusion/restart check](results/screened_radiative_core_sept27_v1.json),
 [opacity support](results/opacity_lifetime_extension_sept27_v1.json),
 [completed review](research/fable/ADVERSARIAL_REVIEW_20260926.md).
+
+A 50-Gyr comparison supports a species time-error tolerance of 1e-7 in the
+smooth fully convective phase. It required 25 intervals instead of 73;
+structure accuracy and conservation checks are unchanged. The same star
+continues with this setting from 1.846 Tyr.
+[Timestep comparison](results/lifetime_time_accuracy_sept27_v1.json).
 
 ## Objective and next milestones
 

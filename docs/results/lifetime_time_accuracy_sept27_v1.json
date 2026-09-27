@@ -1,0 +1,156 @@
+{
+  "created_utc": "2026-09-27T06:41:29.250657+00:00",
+  "purpose": "Compare a practical time-discretization setting on the same accepted continuous Hayashi-origin star",
+  "interval_years": 50000000000.0,
+  "start_years": 1586601472061.5454,
+  "target_years": 1636601472061.5454,
+  "physical_start_sha256": "f06eedd5dbda6eae43af3520170e88476fbaa71a84b7d016a771edba36dd003d",
+  "executable_sha256": "4f71714f4ace904dd667fb879541beda12f9f177beea4ecf2290c26188bf7357",
+  "controls": {
+    "retained": {
+      "species_time_error": 1e-08,
+      "maximum_step_years": 1000000000.0
+    },
+    "selected": {
+      "species_time_error": 1e-07,
+      "maximum_step_years": 5000000000.0
+    },
+    "unchanged": {
+      "global_inventory": 1e-14,
+      "structure_time_error": 0.0001,
+      "energy_time_error": 0.005,
+      "homogeneous_local_correction": 1e-15,
+      "stratified_local_correction": 1e-12
+    }
+  },
+  "comparison": {
+    "finished_utc": "2026-09-27T06:31:34.519348+00:00",
+    "cases": [
+      {
+        "name": "retained_accuracy",
+        "returncode": 0,
+        "wall_seconds": 251.35872249957174,
+        "CPU_seconds": 355.655557,
+        "execution": {
+          "configuration_path": "/Users/greglaughlin/Projects/ember/out/lifetime-step-accuracy-sept27-v1/retained_accuracy.txt",
+          "configuration_fnv1a": "7a8c477b75b2c52e",
+          "restart_path": "/Users/greglaughlin/Projects/ember/out/lifetime-step-accuracy-sept27-v1/retained_accuracy.checkpoint",
+          "zone_threads": 2,
+          "initial_step_years": 1000,
+          "maximum_step_years": 1000000000,
+          "maximum_steps": 500,
+          "maximum_cpu_seconds": 600
+        },
+        "last_history": {
+          "years": 1636601472061.5454,
+          "step_years": 416741907.27914214,
+          "accepted": 5182,
+          "rejected": 0,
+          "radius_Rsun": 0.14768161025695298,
+          "Teff_K": 2980.662954575207,
+          "luminosity_Lsun": 0.0015509507108726211,
+          "nuclear_fraction": 1.0000107882883797,
+          "central_T_K": 5520346.28468973,
+          "H_mass_g": 9.38823923048023e+31,
+          "He3_mass_g": 9.392311865043918e+30,
+          "D_mass_g": 0,
+          "surface_X": 0.4721480902317394,
+          "surface_Z": 0.02000000278554632,
+          "error_norm": 0.24302355128291708,
+          "initial_D_approximation": 0,
+          "omitted_mixing_heat_fraction": 0,
+          "gross_mixing_heat_fraction": 0,
+          "burn_gradient_estimate": 1.434316056755317e-12,
+          "drift_gradient_proxy": 7.562778932899832e-07,
+          "kinetic_heat_proxy": 0.009049130919030009,
+          "convective_mass_fraction": 0.9999999999999997,
+          "radiative_boundaries": 0,
+          "relative_mixing_gradient": 4.798731395583e-12,
+          "convective_travel_years": 0.9253638894392843,
+          "cpu_seconds": 355.618923
+        },
+        "accepted_intervals": 73,
+        "target_reached": true
+      },
+      {
+        "name": "practical_accuracy",
+        "returncode": 0,
+        "wall_seconds": 63.82226745877415,
+        "CPU_seconds": 98.87777499999999,
+        "execution": {
+          "configuration_path": "/Users/greglaughlin/Projects/ember/out/lifetime-step-accuracy-sept27-v1/practical_accuracy.txt",
+          "configuration_fnv1a": "bb58aad00713a168",
+          "restart_path": "/Users/greglaughlin/Projects/ember/out/lifetime-step-accuracy-sept27-v1/practical_accuracy.checkpoint",
+          "zone_threads": 2,
+          "initial_step_years": 1000,
+          "maximum_step_years": 5000000000,
+          "maximum_steps": 500,
+          "maximum_cpu_seconds": 600
+        },
+        "last_history": {
+          "years": 1636601472061.5454,
+          "step_years": 781246638.8341055,
+          "accepted": 5134,
+          "rejected": 0,
+          "radius_Rsun": 0.14768185597040753,
+          "Teff_K": 2980.663906463604,
+          "luminosity_Lsun": 0.0015509578530575792,
+          "nuclear_fraction": 1.0000107915663283,
+          "central_T_K": 5520344.431304938,
+          "H_mass_g": 9.388221943315902e+31,
+          "He3_mass_g": 9.39245294111099e+30,
+          "D_mass_g": 0,
+          "surface_X": 0.4721472208353136,
+          "surface_Z": 0.02000000278586439,
+          "error_norm": 0.08526086892057805,
+          "initial_D_approximation": 0,
+          "omitted_mixing_heat_fraction": 0,
+          "gross_mixing_heat_fraction": 0,
+          "burn_gradient_estimate": 1.4343069059102196e-12,
+          "drift_gradient_proxy": 7.562767157650299e-07,
+          "kinetic_heat_proxy": 0.009049094214642063,
+          "convective_mass_fraction": 0.9999999999999997,
+          "radiative_boundaries": 0,
+          "relative_mixing_gradient": 4.798721481242867e-12,
+          "convective_travel_years": 0.9253627605380028,
+          "cpu_seconds": 98.840435
+        },
+        "accepted_intervals": 25,
+        "target_reached": true
+      }
+    ],
+    "selected_for_evolution": false,
+    "maximum_profile_relative_difference": {
+      "radius": 1.6638345620718316e-06,
+      "density": 7.451186510253795e-06,
+      "temperature": 1.3491685961426939e-06
+    },
+    "maximum_abundance_difference": 8.693964258510434e-07,
+    "surface_and_reservoir_relative_difference": {
+      "radius_Rsun": 1.6638053588202695e-06,
+      "Teff_K": 3.193545903279471e-07,
+      "luminosity_Lsun": 4.605036709293131e-06,
+      "central_T_K": -3.3573705271461307e-07,
+      "H_mass_g": -1.8413638493974815e-06,
+      "He3_mass_g": 1.5020377208241342e-05
+    },
+    "CPU_ratio_practical_to_retained": 0.27801554918485355
+  },
+  "all_comparison_attempts_passed_conservation_checks": true,
+  "selection": {
+    "run": "out/continuous-lifetime-sept27-v4",
+    "age_years": 1845649062246.1582,
+    "accepted": 5509,
+    "same_executable_and_physical_inputs": true,
+    "physical_start_unchanged": true,
+    "physical_payload_sha256": "c7502a1c7c9fa8ae97b27d5a3d112102dc89aab89dbe8d05ab6e5c96cd3da543",
+    "changed_identity": [
+      "configuration.species_tolerance"
+    ]
+  },
+  "interpretation": "The50-Gyr control supports larger timesteps in this smooth fully convective phase. CPU figures are measurements of these runs; step-count reduction is less sensitive to machine load. Conservation, structure and energy accuracy are unchanged.",
+  "limitations": [
+    "This does not establish time convergence through a shell flash.",
+    "Adaptive step rejection and source-domain checks remain active in subsequent phases."
+  ]
+}
