@@ -60,6 +60,16 @@ flash-convergence benchmark. Optional `collision_verify_reuse "1"` enables
 that diagnostic; `collision_reuse.json` records counts and measured errors.
 [Collision comparison](results/collision_reuse_sept27_v1.json).
 
+The recovered high-hydrogen atmosphere families overlap over **X = 0.99–0.995**.
+The lower family remains valid through X = 0.995; the next reference requires
+Z no greater than **0.0001**. This overlap supports the current track as metals
+settle, while preserving the measured columns and optical depth 100. A local
+comparison found matching-temperature differences below **0.5354%** and
+gas-pressure differences below **0.6945%** between the overlapping descriptions.
+The accepted stellar continuation preserves its starting physical state and
+passes the existing timestep and conservation checks.
+[Atmosphere overlap](results/hydrogen_atmosphere_join_sept27_v1.json).
+
 The initial composition file contains the nine baryonic mass fractions in
 `Composition` order. The CN inventory starts with the declared GS98 isotope
 mixture and evolves thereafter. Mass and starting-state parameters are inputs;

@@ -1,0 +1,38 @@
+{
+  "queries": 274,
+  "supported_forward_queries": 256,
+  "inherited_unsupported_queries": 18,
+  "unsupported_description": "H=.9799 and Z below.0001 lies outside the pre-existing lower source coverage; both old and new reject.",
+  "no_new_rejections": true,
+  "maximum_changes_in_common_domain": {
+    "T": 0.0053533164406183165,
+    "Pgas": 0.006944508108979952,
+    "rho": 0.012515384957971554
+  },
+  "maximum_derivative_error": 4.06908284844576e-09,
+  "physical_sources_unchanged": true,
+  "matching_tau": 100,
+  "hydrogen_join_before": [
+    0.98,
+    0.995
+  ],
+  "hydrogen_join_after": [
+    0.99,
+    0.995
+  ],
+  "retained_domain_unchanged": true,
+  "scope": "Later overlap between existing supported source grids; no new columns, metal bound relaxation or extrapolation.",
+  "old_manifest_sha256": "1bc9828045b8dfbbc12aa3b8fec96b20c40c377d7c07baf044dfdb0beaa8f805",
+  "new_manifest_sha256": "22786a1b3e665c3b0b1ff271514f3cc5f4cd7017c8877c696370ac77e466feeb",
+  "reason": "At X=.98 the retained star still has Z=.0001058, above the next reference table metallicity. The preceding measured source remains supported through X=.995.",
+  "no_claim_of_global_grid_coverage": true,
+  "stellar_continuation": {
+    "start_years": 3718466369297.8345,
+    "checked_endpoint_years": 3720210882156.285,
+    "accepted_intervals": 49,
+    "physical_start_preserved": true,
+    "all_accepted_audits_pass": true,
+    "surface_hydrogen": 0.9826772844556916,
+    "surface_Z": 8.857270733874005e-05
+  }
+}

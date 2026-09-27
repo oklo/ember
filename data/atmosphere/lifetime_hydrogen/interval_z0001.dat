@@ -5,4 +5,4 @@ lower_reference_Z .0001
 reference "reference_z0001.dat"
 chain "chain_z0001.dat"
 reference_Z .0001
-hydrogen .98 .995
+hydrogen .99 .995

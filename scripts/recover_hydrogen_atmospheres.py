@@ -201,7 +201,7 @@ def main():
     chain("chain_z0001.dat", [(.0001,"near_response_z0001_z00001.dat"), (.00001,"near_response_z00001_z000001.dat")])
     (OUT / "interval_z020.dat").write_text('EMBER_HYDROGEN_ATMOSPHERE_INTERVAL 1\nreference "reference_z020.dat"\nchain "chain_z020.dat"\nreference_Z .02\nhydrogen .85 .9\n')
     (OUT / "interval_z001.dat").write_text('EMBER_HYDROGEN_ATMOSPHERE_INTERVAL 2\nlower_interval "interval_z020.dat"\nlower_metal_chain "lower_z0005.dat"\nlower_reference_Z .0005\nreference "reference_z001.dat"\nchain "chain_z001.dat"\nreference_Z .001\nhydrogen .9 .94\n')
-    (OUT / "interval_z0001.dat").write_text('EMBER_HYDROGEN_ATMOSPHERE_INTERVAL 2\nlower_interval "interval_z001.dat"\nlower_metal_chain "lower_z0001.dat"\nlower_reference_Z .0001\nreference "reference_z0001.dat"\nchain "chain_z0001.dat"\nreference_Z .0001\nhydrogen .98 .995\n')
+    (OUT / "interval_z0001.dat").write_text('EMBER_HYDROGEN_ATMOSPHERE_INTERVAL 2\nlower_interval "interval_z001.dat"\nlower_metal_chain "lower_z0001.dat"\nlower_reference_Z .0001\nreference "reference_z0001.dat"\nchain "chain_z0001.dat"\nreference_Z .0001\nhydrogen .99 .995\n')
     result = dict(input_sha256=PROVENANCE, tables=COUNTS,
                   limitations=["Recovery of existing accepted sources, not new physical validation.",
                     "No selected stellar trajectory yet; native corridor and derivative checks required.",

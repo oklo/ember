@@ -222,11 +222,12 @@
     "response_z001_z0005.dat": "e989bc11adf275820c3539f98d2bede3687ac90bf2f0d36e70d24b0ecc489dac",
     "metal_z001_z0005.dat": "50fea3a9b4df3d565bb885c68017fd0c3671ea8f1b37d6a5ff56ecffda9a1f18",
     "near_response_z0001_z00001.dat": "98fd271a90878910ad2f98c5bc42d40401668523618197b8a7841205c31b34f0",
-    "interval_z0001.dat": "1bc9828045b8dfbbc12aa3b8fec96b20c40c377d7c07baf044dfdb0beaa8f805",
+    "interval_z0001.dat": "22786a1b3e665c3b0b1ff271514f3cc5f4cd7017c8877c696370ac77e466feeb",
     "metal_z010_z005.dat": "0885cf8e405227c4a7612190b03c295f916d12c076b79869c26bc428049137b1",
     "response_z0005_z0001.dat": "13bd2c9a441c77c3408b8347ee24f881f541f35e69c1bcb07ac3d99fac76e849",
     "lower_z0001.dat": "bda31c117c108ddfc787357979e923fa576c146e265e5cf3003814ad9ed3e515",
     "metal_z005_z0025.dat": "62e64cf93a7ac53be60a5d4a6cf0b431dcddb79eed3f44300df6d6c10aabd4b6",
     "lower_z0005.dat": "3c86a218d578a79719a9775305401cce3ebcca65819ca4eafdcccab539ae114d"
-  }
+  },
+  "hydrogen_join_selection": "docs/results/hydrogen_atmosphere_join_sept27_v1.json"
 }
