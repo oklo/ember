@@ -5,6 +5,7 @@
 #include "ember/evolution_checkpoint.hpp"
 #include "ember/runtime_identity.hpp"
 #include "ember/atmosphere_deuterium.hpp"
+#include "ember/atmosphere_fixed_metal.hpp"
 #include "ember/atmosphere_grid.hpp"
 #include "ember/conduction_table.hpp"
 #include "ember/eos_deuterium.hpp"
@@ -85,6 +86,12 @@ int lifetime_main(int argc,char** argv) {
     const double structure_tolerance=cfg.number("structure_tolerance"),species_tolerance=cfg.number("species_tolerance"),energy_tolerance=cfg.number("energy_tolerance");
     const double abundance_tolerance=cfg.number("coupling_abundance_tolerance");
     const double inventory_tolerance=cfg.number("inventory_abundance_tolerance");
+    const auto atmosphere_metals=cfg.values.contains("atmosphere_metals")?cfg.get("atmosphere_metals"):"strict";
+    const double atmosphere_delta_Z=cfg.values.contains("atmosphere_maximum_delta_Z")
+        ?cfg.number("atmosphere_maximum_delta_Z"):0;
+    if((atmosphere_metals!="strict" && atmosphere_metals!="bounded_fixed_Z") ||
+        (atmosphere_metals=="strict"?atmosphere_delta_Z!=0:atmosphere_delta_Z<=0))
+      throw std::invalid_argument("invalid atmosphere metal approximation selection");
     if(!cfg.values.empty())throw std::invalid_argument("unknown lifetime setting: "+cfg.values.begin()->first);
     if(!(mass>0 && radius>0 && teff>0 && entropy_loss>0 && dt>0 && maximum_dt>=dt && minimum_temperature>0
         && count>=128 && count<=8192 && std::floor(count)==count && threads>=1 && threads<=4 && std::floor(threads)==threads
@@ -101,6 +108,8 @@ int lifetime_main(int argc,char** argv) {
     initial.cn_molality=initial_gs98_cn(initial);initial=explicit_cn_material(initial);
 
     RuntimeIdentity identity;identity.file("executable",argv[0]);
+    identity.values["atmosphere.metals"]=atmosphere_metals;
+    identity.number("atmosphere.maximum_delta_Z",atmosphere_delta_Z);
     for(const auto& [key,value]:std::map<std::string,double>{{"mass_g",mass},{"initial_radius_cm",radius},
         {"initial_Teff_K",teff},{"initial_entropy_loss",entropy_loss},{"points",count},
         {"screened_minimum_T_K",minimum_temperature},{"structure_tolerance",structure_tolerance},
@@ -133,7 +142,11 @@ int lifetime_main(int argc,char** argv) {
     auto radiation=std::make_shared<ElementalOpacity>(raw);TabulatedConduction table_conduction(conduction_path);
     auto conduction=std::make_shared<HotConduction>(table_conduction);CombinedOpacity combined(radiation,conduction);
     CompositionAtmosphereGrid table_atmosphere(eos,atmosphere_path,CompositionAtmosphereGrid::Mixture::allow_documented_proxy);
-    TraceDeuteriumAtmosphere atmosphere(eos,table_atmosphere);
+    std::unique_ptr<FixedMetalAtmosphere> fixed_metal_atmosphere;
+    if(atmosphere_metals=="bounded_fixed_Z")fixed_metal_atmosphere=std::make_unique<FixedMetalAtmosphere>(
+        eos,table_atmosphere,atmosphere_delta_Z);
+    TraceDeuteriumAtmosphere atmosphere(eos,fixed_metal_atmosphere
+        ?static_cast<const Atmosphere&>(*fixed_metal_atmosphere):table_atmosphere);
     PPCNNetwork nuclear(PPRates::solar_fusion_iii,PPScreening::salpeter_van_horn,PPRates::solar_fusion_iii);
     PlasmaNeutrinoLosses losses;ScreenedCollisionTransport collisions(collision_path.string());
     ScreenedMetalMicroscopicTransport microscopic(table_eos,collisions,true,minimum_temperature,{true,true,true},true);

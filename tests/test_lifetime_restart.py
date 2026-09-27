@@ -97,6 +97,12 @@ def main():
                        expected=1, configuration=changed)
         assert "checkpoint" in rejected.stderr and "configuration.energy_tolerance" in rejected.stderr
 
+        changed = configuration_file("changed-atmosphere-approximation.txt", {
+            "atmosphere_metals": "bounded_fixed_Z", "atmosphere_maximum_delta_Z": "1e-8"})
+        rejected = run("atmosphere-approximation-change", ("--restart", str(work / "prefix/final.checkpoint")),
+                       expected=1, configuration=changed)
+        assert "checkpoint" in rejected.stderr and "atmosphere." in rejected.stderr
+
         # A corrupted table must be rejected by identity, before its parser is
         # constructed. Do not edit a hard link to the retained source dataset.
         (relocated / "broken-conduction.dat").write_text("not a conduction table\n")

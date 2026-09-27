@@ -6,11 +6,38 @@ of temperature and total pressure with respect to `Teff` and `gravity`.
 All dimensional quantities use CGS. The implementations use an EOS that
 includes LTE radiation pressure, `a_rad*T^4/3`.
 
-The optional `CompositionAtmosphereGrid` now supplies an evolving H/He
-boundary from 48 independently calculated non-grey radiative/convective
-atmospheres. Its composition mapping, source coverage, interpolation and
-physical checks are documented in [NONGREY.md](NONGREY.md). The COND-based
-composition correction remains the default comparison backend.
+`CompositionAtmosphereGrid` supplies a boundary from calculated non-grey
+radiative/convective atmospheres. Each selected file declares its composition,
+temperature and gravity coverage. Its composition mapping, interpolation and
+physical checks are documented in [NONGREY.md](NONGREY.md). The continuous
+evolution driver selects its atmosphere file explicitly.
+
+## Minute metal changes
+
+The default `--lifetime` selection requires the atmosphere's recorded metal
+composition. Nuclear proton capture can change total Z by a physically negligible
+amount while exceeding that file's component tolerance. An explicit approximation
+can keep the boundary temperature and pressure at the source Z:
+
+```text
+atmosphere_metals "bounded_fixed_Z"
+atmosphere_maximum_delta_Z "1e-8"
+```
+
+`FixedMetalAtmosphere` checks the selected absolute limit on the change in Z.
+Its hard scope limit is one part per million of the source Z; that is not an
+error guarantee and needs a physical sensitivity check before selecting a run.
+Hydrogen and helium-3 retain their actual values in the lookup. Only that lookup
+transfers the metal difference to helium-4. The returned density uses the actual
+composition and EOS. The star's composition, nuclear reactions, interior opacity
+and energy accounting are untouched.
+
+The source reader retains its original mixture tolerance, source masks and axis
+limits. The option cannot represent appreciable settling or a different elemental
+pattern. The selection and its bound enter restart identity; a restart cannot
+silently add this approximation. During initial deuterium burning the separate
+trace-D mapping is applied first, with density again evaluated for the actual
+isotope mixture.
 
 ## Grey fallback
 
