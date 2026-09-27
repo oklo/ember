@@ -1,6 +1,6 @@
 {
   "created_utc": "2026-09-27T21:47:36.997281+00:00",
-  "selected_for_evolution": false,
+  "selected_for_evolution": true,
   "unchanged_old_queries": 166,
   "supported_new_queries": 24,
   "missing_queries_rejected": 3,
@@ -166,5 +166,7 @@
   "limitations": [
     "No mixed-helium coverage added by this pure-H table.",
     "Initial guesses changed at six optically thin layers; this establishes converged source solutions, not uniqueness or dynamical stability."
-  ]
+  ],
+  "selected_continuation": "out/continuous-lifetime-sept27-v29",
+  "continuation_evidence": "continuous_cooling_4465_sept27_v1.json"
 }

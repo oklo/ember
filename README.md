@@ -13,15 +13,17 @@ resolve the stellar/brown-dwarf boundary as initial mass and composition vary.
 The full calculation is not yet established.
 
 The common `ember-evolve --lifetime` program carries the Hayashi-started star
-through **4.005 Tyr**, at **4560 K** and surface hydrogen **X = 0.9976**.
+through **4.005 Tyr**, at **4465 K** and surface hydrogen **X = 0.9950**.
 A radiative shell first forms at **3.558 Tyr**; the centre subsequently becomes
-radiative. At the plotted endpoint the convective envelope contains **1.800%**
-of the mass. Shell burning supplies **90.76%** of the luminosity and is declining;
-no helium-3 runaway has occurred in this continuous calculation. The atmosphere matching depth
-remains at optical depth 100 throughout. The retained sequence has used
-**31.30 CPU-hours**, including rejected timestep trials.
-[Current trajectory and inputs](docs/reports/2026-09-27/pms_figure_inputs.json),
-[current model](docs/reports/2026-09-27/pms_figure_inputs.json).
+radiative. The convective envelope now contains **2.126%** of the mass.
+Shell burning supplies **60.95%** of the luminosity and is declining;
+no helium-3 runaway has occurred in this continuous calculation. The atmosphere
+matching depth remains at optical depth 100. This continuation stopped at the
+selected atmosphere's **0.5% helium** limit; mixed hydrogen–helium coverage is
+being extended. The paper currently shows the track through **4560 K** and
+accounts for **31.30 CPU-hours** in that plotted sequence.
+[Current model](docs/results/continuous_cooling_4465_sept27_v1.json),
+[plotted trajectory](docs/reports/2026-09-27/pms_figure_inputs.json).
 
 The selected physics includes initial deuterium burning, pp reactions and
 explicit C12/C13/N14 conversion with Solar Fusion III rates, plasma neutrino
@@ -33,25 +35,23 @@ mixing and cool radiative microscopic transport are not selected.
 [Physics and remaining work](docs/COLD_REMNANT.md),
 [driver configuration](docs/LIFETIME_DRIVER.md).
 
-Every accepted interval passes full-step/two-half-step accuracy checks and
-isotope and energy audits. Solves reuse the latest composition and can predict
-the next structure. Optional local Taylor reuse of collision responses retains
-the table limits and conservative exchange. Together, these changes reduced
-a matched **1 Gyr** calculation from **297.8 to 81.76 CPU seconds** (**3.642×**),
-with very small structural and fuel differences. Full/two-half timestep checks
-remain selected. The physics and accuracy checks were unchanged; this timing
-comparison does not establish the speed of a complete track.
-[Solver comparison](docs/results/solver_starting_guesses_sept27_v1.json),
-[collision reuse](docs/results/collision_reuse_sept27_v1.json),
-[time accuracy](docs/results/envelope_time_accuracy_sept27_v1.json).
+Every accepted interval retains full-step/two-half-step accuracy checks and
+isotope and energy audits. The eight-thread solver reuses nearby EOS and
+collision responses, predicts structure and includes local burning feedback
+in its structure matrix. Richardson extrapolation is selected in the current
+cooling phase, with a fallback to the half-step solution when its physical
+checks fail. Over the same **20 Myr**, the selected settings reduced wall time
+from **26.56 to 19.25 seconds**, with all measured state differences below
+**0.1%** against a smaller-step reference. The comparison uses two threads;
+it does not measure a complete track or validate flash onset.
+[Cooling comparison](docs/results/richardson_cooling_sept27_v1.json),
+[solver settings and earlier measurements](docs/LIFETIME_DRIVER.md).
 
-The atmosphere and EOS inputs cover all 67 saved settling comparison
-structures. The selected high-gravity atmosphere table covers **4600–6000 K**
-and **log g = 5.9–6.2**, using checked source solutions and explicit
-interpolation. Its extension preserves all 5999 saved atmosphere queries,
-three stellar intervals and the actual continuation's starting state exactly.
-The boundary remains gas-only, with declared trace-helium and composition limits.
-[Atmosphere checks](docs/results/highg_atmosphere_extension_sept27_v2.json),
+The EOS supports the current structure. Completed hydrogen-atmosphere cells
+extend to **4400 K** at **log g = 6.1–6.3**; temperature coverage alone does
+not supply the missing helium compositions. Interpolation uses only supported
+cells, and the boundary remains gas-only with explicit composition limits.
+[Cold atmosphere checks](docs/results/cold_atmosphere_4400_sept27_v1.json),
 [EOS coverage](docs/results/eos_lifetime_coverage_sept27_v1.json).
 
 Separate late-evolution calculations develop a helium-3 shell pulse after an
@@ -93,11 +93,3 @@ returns one. Those should surface, not be optimised away.
 
 MIT. The opacity, equation-of-state and conductivity data are redistributed under their
 own terms; see `data/*/README.md`.
-
-
-The lifetime solver reuses nearby EOS and nuclear-screening responses and
-parallelizes independent zone and face calculations. A matched 5-Gyr
-shell-burning segment on the M4 Max took 31.53 wall seconds with eight threads
-versus 54.95 with the preceding code at four threads. All full/two-half
-timestep checks were retained, with matching stellar results.
-[Settings, measurements, and limits](docs/LIFETIME_DRIVER.md).

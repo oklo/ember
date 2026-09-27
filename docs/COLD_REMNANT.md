@@ -3,69 +3,60 @@
 ## Current priority — September 27, 2026
 
 Continue the same Hayashi-started star through hydrogen exhaustion and onto
-white-dwarf cooling, testing whether the helium-3 pulse occurs with a consistent
-atmosphere history. The current paper follows the trajectory through **4.005 Tyr**, at
-**4560 K**. Convection occupies **1.800%** of the mass in an outer envelope;
-hydrogen burning peaks at **m/M = 0.9669** and supplies **90.76%** of the
-surface luminosity. Its power is declining and no helium-3 runaway has
-occurred in this continuous calculation. The first radiative region formed
-at **3.558 Tyr**. The live calculation can be farther along; read the
+white-dwarf cooling, testing whether a helium-3 pulse occurs with a consistent
+atmosphere history. The current model has reached **4.005 Tyr** and **4465 K**.
+Convection occupies **2.126%** of the mass in an outer envelope; hydrogen
+burning peaks at **m/M = 0.9693** and supplies **60.95%** of the surface
+luminosity. Its power is declining and no helium-3 runaway has occurred.
+The first radiative region formed at **3.558 Tyr**. Read the
 [current handoff](../HANDOFF.md) before starting or changing jobs.
-[Trajectory and current state](reports/2026-09-27/pms_figure_inputs.json).
+[Current state and inputs](results/continuous_cooling_4465_sept27_v1.json).
 
 The common lifetime program includes initial deuterium, pp and explicit CN
 burning, plasma neutrino losses, composition-dependent EOS and opacity,
 wavelength-dependent atmospheres, hot H/He/metal diffusion, and conservative
 heat transport during composition changes. Each connected convective region
 is mixed instantaneously, with a check on the gradient needed to carry its
-species flux. Finite mixing is available in the engine but is not selected
-in this trajectory. It is now selectable in the same lifetime program, with
-[conservation and restart checks](results/finite_mixing_driver_sept27_v1.json).
-Unsupported cool radiative transport remains a limitation;
-there is no silent replacement for the missing microscopic law.
+species flux. Finite mixing is available in the same program but is not
+selected in this trajectory. Unsupported cool radiative transport remains a
+limitation; no missing microscopic law is silently replaced.
+[Finite-mixing checks](results/finite_mixing_driver_sept27_v1.json).
 
-All accepted full and half intervals must pass isotope and energy audits.
-For the present radiative-interior phase, a matched **1 Gyr** comparison
-supports absolute species time accuracy **1e-4**. Compared with 1e-5 it uses
-**18.03%** less CPU, changes total helium-3 by **0.000184%** and surface
-temperature by less than **0.001 K**. No cell is excluded from the time-error
-estimate. A separate **1 Gyr** comparison
-supports local Newton corrections of **1e-12**, while retaining **1e-13** outer
-composition coupling and **1e-14** integrated species balance. It uses
-**27.12%** less CPU and changes total helium-3 by **0.0002092%**. These controls
-do not establish time convergence through a flash.
-[Time accuracy](results/envelope_time_accuracy_sept27_v1.json),
-[local solve](results/local_correction_comparison_sept27_v2.json).
+All accepted full and half intervals pass isotope and energy audits. The
+current cooling calculation also uses checked Richardson extrapolation.
+Across a **20 Myr** comparison, its selected settings reduce wall time from
+**26.56 to 19.25 seconds**, with differences below **0.1%** against a
+smaller-step reference. A mixing-step limit compares new composition against
+the previous composition averaged over the current instantaneous mixed regions,
+so prescribed homogenization does not force arbitrarily small steps. Burning
+and transport changes still count; finite mixing retains its pointwise limit.
+These controls do not establish convergence through a flash.
+[Time accuracy](results/richardson_cooling_sept27_v1.json),
+[mixing limit](results/instantaneous_mixing_step_cap_sept27_v1.json).
 
 The atmosphere match remains at optical depth **100** throughout. Solved
-hydrogen-dominated columns extend to **4550 K** through **log g = 6.2**;
-only cells with complete source support are interpolated. The cold extension
-preserves previously supported stellar boundaries. A cooler starting guess
-for one oscillating, optically thin layer resolves the 4550 K source without
-changing its equations or convergence requirements. The same-state control
-changes joining pressure by **0.008824%**. Gas-only and trace-helium
-assumptions remain explicit. The separate flash histories retain their
-atmosphere adjustment and cannot establish atmosphere-independent ignition.
-[Cold source checks](results/cold_atmosphere_initialization_sept27_v1.json).
+hydrogen-dominated columns extend to **4400 K** at **log g = 6.1–6.3**;
+only cells with complete source support are interpolated. The continuation
+currently stops at the selected atmosphere's **0.5% helium** limit.
+Mixed hydrogen–helium opacity and atmosphere coverage is being extended.
+The EOS supports the accepted state. Gas-only and trace-helium assumptions
+remain explicit. The separate flash histories retain their atmosphere
+adjustment and cannot establish atmosphere-independent ignition.
+[Cold source checks](results/cold_atmosphere_4400_sept27_v1.json).
 
 In the dense hydrogen envelope, the opacity approximation uses the measured
 hydrogen slope of the retained source while remaining within its temperature
-and density domain. At the current limit convection carries more than
-**99.9%** of the heat. Half/double-opacity controls over **20 Myr** show no
-meaningful structural response and support extending the declared density
-coordinate to **log R = 2.2**. This does not establish opacity accuracy in
-radiative layers.
-[Opacity response](results/dense_envelope_extension_sept27_v1.json).
+and density coverage. The selected domain extends through **log R = 2.2**
+and **log T = 6.3**. Affected layers are efficiently convective: matched
+half/double-opacity controls over **20 Myr** produce negligible structural
+changes. This supports the local approximation without establishing opacity
+accuracy in radiative layers.
+[Opacity response](results/dense_envelope_temperature_extension_sept27_v1.json).
 
-Exact reuse of repeated EOS evaluations preserves six stellar intervals and
-the final physical checkpoint, using about **5%** less CPU in one timing pair.
-Six EOS, transport and restart tests pass. No interpolation or source-domain
-checks change.
-[EOS comparison](results/exact_eos_reuse_sept27_v1.json).
-
-The [working paper](reports/2026-09-27/ember_status_and_future.pdf) is **30 pages**,
-with the physical qualifications, model comparisons and lifetime timeline retained.
-The [completed review](research/fable/ADVERSARIAL_REVIEW_20260926.md) records
+The [working paper](reports/2026-09-27/ember_status_and_future.pdf) is **30 pages**
+and currently plots the trajectory through **4560 K**. It retains the
+physical qualifications, model comparisons and lifetime timeline. The
+[completed review](research/fable/ADVERSARIAL_REVIEW_20260926.md) records
 remaining code, reproduction and physics limitations.
 
 ## Objective and next milestones

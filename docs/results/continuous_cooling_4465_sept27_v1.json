@@ -1,0 +1,110 @@
+{
+  "created_utc": "2026-09-27T22:09:41.426530+00:00",
+  "state": {
+    "years": 4005437568905.364,
+    "step_years": 9662.03534496328,
+    "accepted": 17084,
+    "rejected": 5118,
+    "radius_Rsun": 0.04075185687344168,
+    "Teff_K": 4465.202347747126,
+    "luminosity_Lsun": 0.0005947754860265471,
+    "nuclear_fraction": 0.6094793146094792,
+    "central_T_K": 6346036.904715331,
+    "central_density_g_cm3": 40465.533820370554,
+    "central_X": 3.4557903085195854e-08,
+    "central_He3": 8.969589153043468e-15,
+    "eps_nuc_peak_erg_g_s": 0.2544234771107299,
+    "eps_nuc_peak_q": 0.969276301246281,
+    "burning_half_max_inner_q": 0.9556023011504496,
+    "burning_half_max_outer_q": 0.9769560298913097,
+    "burning_half_max_cells": 18,
+    "He3_peak": 0.0188162436308392,
+    "He3_peak_q": 0.971484245216312,
+    "H_mass_g": 7.440042318075634e+30,
+    "He3_mass_g": 8.003541321489186e+28,
+    "D_mass_g": 0,
+    "surface_X": 0.9950000640522069,
+    "surface_Z": 9.571963723388099e-32,
+    "error_norm": 0.0014049737881473231,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.3399571631984485e-12,
+    "drift_gradient_proxy": 5.1810591706574e-07,
+    "kinetic_heat_proxy": 0.019253710387386064,
+    "convective_mass_fraction": 0.021258848077554546,
+    "radiative_boundaries": 402,
+    "relative_mixing_gradient": 1.1813542406574265e-10,
+    "convective_travel_years": 0.06083868926799871,
+    "cpu_seconds": 14.317138
+  },
+  "report": {
+    "requested_age_reached": 0,
+    "age_years": 4005437568905.364,
+    "accepted_this_invocation": 8,
+    "accepted_total": 17084,
+    "rejected_total": 5126,
+    "stop_reason": "repeated step rejection: evolve_step: Newton iteration limit reached",
+    "cpu_seconds": 68.096429,
+    "wall_seconds": 13.068876875,
+    "full_production_track_validated": false,
+    "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+  },
+  "earliest_atmosphere_rejection": {
+    "start_years": 4005434487416.562,
+    "step_years": 3922101.1093626926,
+    "converged": 0,
+    "audit_pass": 0,
+    "accepted": 0,
+    "error_norm": 1e+30,
+    "message": "HydrogenDominatedAtmosphereGrid: outside explicit composition or source domain",
+    "species_error": [
+      0,
+      0,
+      0
+    ],
+    "mass_error_surface": [
+      0,
+      0,
+      0
+    ],
+    "first_law": [
+      0,
+      0,
+      0
+    ]
+  },
+  "interpretation": "Continuation stopped at the selected atmosphere total-helium limit 0.005. The EOS supports the accepted state. Later repeated Newton failures occur after reducing the step at the atmosphere edge. Nuclear power is declining; this state does not establish final nuclear-free cooling.",
+  "selected_code_commit": "bb728dd",
+  "threads": 8,
+  "selected_method": "Full step and two half-steps with checked Richardson extrapolation; otherwise accept half-steps.",
+  "retained_continuations": [
+    [
+      "continuous-lifetime-sept27-v28",
+      17035,
+      17059
+    ],
+    [
+      "richardson-cooling-sept27-v1/richardson_longer",
+      17060,
+      17076
+    ],
+    [
+      "continuous-lifetime-sept27-v29",
+      17077,
+      17084
+    ]
+  ],
+  "references": [
+    "richardson_cooling_sept27_v1.json",
+    "instantaneous_mixing_step_cap_sept27_v1.json",
+    "dense_envelope_temperature_extension_sept27_v1.json",
+    "cold_atmosphere_4400_sept27_v1.json"
+  ],
+  "sha256": {
+    "out/continuous-lifetime-sept27-v29/ember-evolve": "bbe57f36e88b694833e2aab03fb7758aaa683c0046d75f153b97ace7f0d0cc79",
+    "out/continuous-lifetime-sept27-v29/evolution/final.checkpoint": "989614276a375f4bf2fcbadd706d912e26e290f1facf48759f6484e882e82a78",
+    "out/continuous-lifetime-sept27-v29/data/configuration.txt": "827e14c2929393f939483cdb55343efc0053c7e6877ae4ca3f0816d3ec2b5d3b",
+    "out/continuous-lifetime-sept27-v29/data/MANIFEST.json": "580363e0cbe1408e7bb05334df85a2a86a83d94842113056447226eb83b73503"
+  }
+}
