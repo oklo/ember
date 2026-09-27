@@ -48,6 +48,20 @@ int main(int argc,char**argv) {
   transport.diagnostic_rates=rates;material.diagnostic_rates=rates;
   const auto regions=convective_mixing_regions(m,physics);
   require(regions.size()>1 && regions.size()<count,"fixture must contain radiative and mixed regions");
+  // Finite abundance gradients require pressure inversions even inside the
+  // cool convective envelope. Check actual nearby states without requiring
+  // thermodynamic stability at an unrelated high-density table endpoint.
+  std::size_t pressure_inversions=0;
+  for(std::size_t i=0;i+1<count;++i)if(std::max(m.T(i),m.T(i+1))<2e6) {
+    const double T=.5*(m.T(i)+m.T(i+1));
+    const double P=.5*(eos.eval(m.T(i),m.rho(i),m.comp[i]).P+
+        eos.eval(m.T(i+1),m.rho(i+1),m.comp[i+1]).P);
+    const double density=eos.rho_from_PT(T,P,m.comp[i],.5*(m.rho(i)+m.rho(i+1)));
+    require(std::abs(eos.eval(T,density,m.comp[i]).P/P-1)<2e-12,
+            "cool-envelope density inversion must satisfy the pressure constraint");
+    ++pressure_inversions;
+  }
+  require(pressure_inversions>0,"fixture must test cool-envelope pressure inversion");
   double maximum_flux=0;
   for(auto [a,b]:regions)if(b<count) {
     const auto f=transport.metal_eval(b-1,m.m[b-1],m.m[b],m.y[b-1],m.comp[b-1],m.y[b],m.comp[b],false);

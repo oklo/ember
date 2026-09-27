@@ -1,14 +1,12 @@
 # Helium-rich non-grey atmospheres
 
-The plotted stellar track uses 172 gas atmospheres through 4400 K and reaches
-3.848 trillion years. An accepted 196-model gas table extends the temperature
-coverage to 5000 K. All 172 existing source states and missing-state masks
-are retained exactly, and the selected interior EOS supports all 196 matching
-states. Independent models at 4500, 4700 and 4900 K differ by at most 0.05225%
-in matching temperature and 0.5376% in gas pressure. Twelve lower-boundary
-comparisons pass, with a maximum matching-state difference of 0.007810%.
-The 24 added structures contain no condensates in the equilibrium diagnostic.
-[Atmosphere acceptance](results/nongrey_t5000_acceptance_v1.json).
+The continuous lifetime calculation combines composition-dependent gas grids
+at an interior matching optical depth of 100. Its selected files and physical
+limits are described in [the common driver](LIFETIME_DRIVER.md) and
+[the hydrogen-rich atmosphere inputs](../data/atmosphere/lifetime_hydrogen_envelope/README.md).
+This document describes the helium-rich source calculations and the common
+source-generation and acceptance checks. Gas-opacity coverage does not by
+itself supply the full atmosphere physics needed for white-dwarf cooling.
 See [the current trajectory](COLD_REMNANT.md) and [EOS data](../data/eos/README.md).
 
 The wavelength-opacity tables extend to a material temperature of about
@@ -114,6 +112,23 @@ helium data; an effective helium mass in Doppler widths is not an
 isotope-resolved line profile. Source physical constants are retained for
 reproducibility; their Stefan–Boltzmann constant differs from Ember's by
 about 0.022%.
+
+## Numerical balance depth
+
+The optional specification field `energy_balance_tau_division` sets TLUSTY's
+`TAUDIV`: the depth below which differential flux balance supplements local
+radiative equilibrium. It defaults to 0.01, preserving existing input files.
+The value must lie between the top and matching optical depths. The importer
+checks it against the saved input, and changing it changes the run identity.
+The correction, flux, chemistry and matching-depth acceptance checks are unchanged.
+
+At 4800 K and log g = 6.2, and at 4700 K and log g = 6.0, setting this depth to
+0.0001 allowed previously oscillating pure-hydrogen columns to converge.
+The independent 4800 K, log g = 6.0 control changed matching temperature by
+0.0001852% and gas pressure by 0.001634%.
+[Source checks and assumptions](results/highg_energy_balance_sept27_v1.json).
+This is a numerical control for source calculations, not an automatic change
+to a running star's atmosphere.
 
 ## Reproduction
 

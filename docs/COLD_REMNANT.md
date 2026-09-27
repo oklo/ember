@@ -14,13 +14,16 @@ evolution, conservation and exact restart. The local composition solve uses
 1e-15 for one instantaneously mixed region and 1e-12 for stratified diffusion;
 the independent global abundance-balance criterion remains 1e-14.
 
-The restored-material Hayashi trajectory has passed **700.5 Gyr**. A checked
-continuation adds the later trace-He/pure-H atmosphere inputs without changing
+The restored-material Hayashi trajectory has passed **1.642 Tyr**, with no
+rejected intervals. A checked continuation adds the later trace-He/pure-H atmosphere inputs without changing
 its accepted physical state. All 5932 tested early boundary values remain exact,
 and the combined selection covers all 67 saved settling structures. The
 matching depth remains tau = 100. Cool, high-gravity rows include bounded
 inferred values; cooler source columns still need numerical work. The accepted
 4800 K / log g 6.0 and 6.1 columns provide useful independent checks.
+The 4800 K/log g = 6.2 and 4700 K/log g = 6.0 columns now also pass all source
+checks. These additional rows are not yet selected in the running star.
+[Source calculation results](results/highg_energy_balance_sept27_v1.json).
 The separate flash histories inherit a forced atmosphere change;
 atmosphere-independent ignition is not established.
 [Coverage and continuation evidence](results/hydrogen_envelope_integration_sept27_v1.json).

@@ -1,0 +1,50 @@
+{
+  "snapshot_utc": "2026-09-27T06:12:23.084106+00:00",
+  "run": "out/continuous-lifetime-sept27-v3",
+  "status": "running",
+  "selected_physics": "Same Hayashi-origin star, pp+CN SFIII, plasma neutrinos, composition-dependent opacity and tau100 atmosphere, screened hot H/He/metal transport and assessed instantaneous convection",
+  "snapshot": {
+    "years": 1642266903879.5254,
+    "step_years": 674614618.4095782,
+    "accepted": 5190,
+    "rejected": 0,
+    "radius_Rsun": 0.14769282870780626,
+    "Teff_K": 2981.185292231661,
+    "luminosity_Lsun": 0.0015522739704388955,
+    "nuclear_fraction": 1.00001064503483,
+    "central_T_K": 5524553.895539028,
+    "H_mass_g": 9.376510461305783e+31,
+    "He3_mass_g": 9.315490200683595e+30,
+    "D_mass_g": 0,
+    "surface_X": 0.47155823351520965,
+    "surface_Z": 0.020000002823023187,
+    "error_norm": 0.640624187031591,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.4364297718458455e-12,
+    "drift_gradient_proxy": 7.562667748515764e-07,
+    "kinetic_heat_proxy": 0.009066070732810981,
+    "convective_mass_fraction": 0.9999999999999997,
+    "radiative_boundaries": 0,
+    "relative_mixing_gradient": 4.799355735974548e-12,
+    "convective_travel_years": 0.925266144598314,
+    "cpu_seconds": 6917.618098
+  },
+  "accepted_history_origin": "Includes the same-star history before the 700.5-Gyr continuation; v3 history begins at accepted count3472.",
+  "history": {
+    "prefix": "out/continuous-lifetime-sept27-v2/initial-check/history.jsonl",
+    "preceding": "out/continuous-lifetime-sept27-v2/evolution/history.jsonl",
+    "preceding_accepted_limit": 3472,
+    "current": "out/continuous-lifetime-sept27-v3/evolution/history.jsonl"
+  },
+  "plan_sha256": "2707537bb6fd8e6091faf52937f29a021790a5c5db48deda626d1481fb50bb36",
+  "new_atmosphere_columns_selected": false,
+  "new_local_inversion_selected": false,
+  "finite_mixing_selected": false,
+  "qualifications": [
+    "Snapshot remains fully convective; no continuous WD cooling result yet.",
+    "Later atmospheric rows still include bounded estimates. New independent high-gravity columns are available but have not replaced the running inputs.",
+    "Separate pulse calculations inherit the earlier forced atmosphere adjustment."
+  ]
+}

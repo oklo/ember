@@ -1,0 +1,33 @@
+{
+  "created_utc": "2026-09-27T06:01:19.621121+00:00",
+  "problem": "Generic pressure inversion evaluated both remote density bounds before using a valid nearby stellar guess. A negative heat capacity at the remote high-density interpolation edge rejected the local inversion.",
+  "change": "Use the density range as bounds on Newton iteration; evaluate stability at every actual iterate, retain pressure and density convergence checks, reject a stalled or unsupported root. No EOS interpolation, masks or physical audits change.",
+  "old_actual_fixture_failure": {
+    "old_source_sha256": "cf9f4918994238d93f1758035ad6e477884d9171180adf2d221b15596ea6665f",
+    "returncode": 1,
+    "wall_seconds": 8.140685957856476,
+    "stdout": "",
+    "stderr": "HelmholtzTableEos: unstable potential interpolant\n"
+  },
+  "registered_checks": [
+    "eos: analytic bounded-pressure root with unstable remote edge, unsupported roots rejected",
+    "screened_envelope_evolution: actual cool-envelope inversions, real radiative diffusion and exact restart"
+  ],
+  "private_finite_readiness_control": {
+    "returncode": 0,
+    "wall_seconds": 11.339536041021347,
+    "stdout": "initial_drift_proxy=8.7027815326384876e-07 initial_heat_proxy=0.012726520734379368\nPASS finite_lagged private cool-convection approximation; global_species_residual=1.6486416351297207e-16 CPU_seconds=12.603324000000001\n",
+    "stderr": ""
+  },
+  "private_control_limitations": [
+    "Cool microscopic drift was omitted only at convective faces identified in the retained initial model; initial drift and heat proxies passed and final cool faces remained convective.",
+    "That private approximation is not integrated or selected in the lifetime driver.",
+    "The selected live star still uses instantaneous convection and its frozen executable."
+  ],
+  "full_suite": {
+    "unique_registered_tests_passed": 77,
+    "parallel_suite": "76 passed; lifetime_restart reached its240-second wall limit",
+    "lifetime_restart_separate_rerun": "passed in225.9 seconds, unchanged test and240-second limit",
+    "working_focused_checks": "eos and actual screened-envelope evolution passed; source importer35 checks passed"
+  }
+}

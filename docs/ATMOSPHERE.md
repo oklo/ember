@@ -272,7 +272,7 @@ C = 3 kappa P rho cp alpha v0 / (32 sigma_SB T³ g).
 
 The terms represent the element contrast, element cooling, and convective flux. The adopted alpha=1.9 and y=1/3 recover the interior's Bohm–Vitense coefficients in the optically thick limit. The alternative y=.076 is a sensitivity control. Scaling the cubic bounds its root without subtracting nearly equal gradients. The two Teff/gravity sensitivity equations propagate the EOS, opacity, buoyancy, heat capacity and cubic derivatives analytically.
 
-The default integration tolerance is 2e-8 for both logarithmic states and sensitivities. Sensitivities must also be well resolved: loosening them can allow boundary-value noise that prevents a tight stellar Newton solve from converging. Separate controls permit convergence tests; normal evolution keeps both tight. The EOS inversion now brackets within its declared density interval, so a poor ideal-gas density guess cannot cross the table floor.
+The default integration tolerance is 2e-8 for both logarithmic states and sensitivities. Sensitivities must also be well resolved: loosening them can allow boundary-value noise that prevents a tight stellar Newton solve from converging. Separate controls permit convergence tests; normal evolution keeps both tight. The EOS inversion stays within its declared density interval and checks every sampled state. A valid local pressure root does not require a stable interpolant at a remote density endpoint. [Density-inversion checks](results/local_density_inversion_sept27_v1.json).
 
 For a declared reference mixture c0, with baryonic X=.7, Z=.02 and zero He3, the corrected boundary is
 

@@ -32,7 +32,7 @@ def read_text(path):
 
 def source_inputs(inputs, spec, x, y, teff, logg, log):
     """Check archived input physics independently of the model's grid label."""
-    from generate_nongrey_grid import composition
+    from generate_nongrey_grid import composition, energy_balance_tau_division
     abundance, masses = composition(x, y, spec["metals"])
     rows = inputs["atmosphere_input"].splitlines()
     if len(rows) != 98 or [float(v) for v in rows[0].split()] != [teff, logg]:
@@ -62,7 +62,7 @@ def source_inputs(inputs, spec, x, y, teff, logg, log):
         r"([A-Z][A-Z0-9]*)\s*=\s*([0-9.eEdD+-]+)",inputs["parameters"].upper())}
     required = {"IOPTAB":-1,"IFRYB":1,"IFMOL":1,"TMOLIM":10000,"IDLST":0,"IFRAYL":1,
                 "HMIX0":spec["alpha"],"IFRSET":spec["atmosphere_frequencies"],"ND":spec["depths"],
-                "TAUFIR":spec["tau_top"],"TAULAS":spec["tau_bottom"],"TAUDIV":.01,
+                "TAUFIR":spec["tau_top"],"TAULAS":spec["tau_bottom"],"TAUDIV":energy_balance_tau_division(spec),
                 "ILGDER":1,"NITER":200,"DPSILT":spec.get("temperature_step_limit",1.03),
                 "DERT":spec.get("convection_derivative_step",.001)}
     if "newton_relaxation" in spec:

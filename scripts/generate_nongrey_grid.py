@@ -235,7 +235,16 @@ def resample_initial_structure(text, depths, *, allow_coarsen=False):
     return "\n".join(rows)+"\n"
 
 
+def energy_balance_tau_division(spec):
+    """Depth where TLUSTY adds differential flux balance to local equilibrium."""
+    value = spec.get("energy_balance_tau_division", .01)
+    if not math.isfinite(value) or not spec["tau_top"] < value < spec.get("tau", spec["tau_bottom"]):
+        raise ValueError("invalid energy-balance transition depth")
+    return value
+
+
 def atmosphere_inputs(directory, prepared, spec, table, abundance, masses, teff, logg, initial=None):
+    balance_tau = energy_balance_tau_division(spec)
     directory.mkdir(parents=True,exist_ok=True)
     text=f"{teff:.17g} {logg:.17g}\nT T\n 'tas'\n0\n92\n"
     # TLUSTY's atomic partition functions support elements through Zn.
@@ -261,7 +270,7 @@ def atmosphere_inputs(directory, prepared, spec, table, abundance, masses, teff,
         # Only the final independent diagnostics can validate a grid cell.
         f"ND={spec['depths']},NITER=200,CHMAX=1.e-6,ILGDER=1,IPRIND=2\n"
         f"DPSILT={spec.get('temperature_step_limit', 1.03)},DERT={spec.get('convection_derivative_step',.001)}\n"
-        f"TAUFIR={spec['tau_top']},TAULAS={spec['tau_bottom']},TAUDIV=0.01\n")
+        f"TAUFIR={spec['tau_top']},TAULAS={spec['tau_bottom']},TAUDIV={balance_tau}\n")
     # Explicit numerical control for source comparisons. Omit it by default
     # so existing input bytes and completed-run fingerprints remain unchanged.
     if "newton_relaxation" in spec:
@@ -553,8 +562,9 @@ def main():
     if "initial_depths" in spec and not (20 <= spec["initial_depths"] <= spec["depths"]
             and 2 <= spec["initial_frequencies"] <= spec["atmosphere_frequencies"]):
         raise ValueError("invalid initial atmosphere resolution")
-    if not 0 < spec["tau_top"] < .01 < spec["tau"] < spec["tau_bottom"]:
+    if not 0 < spec["tau_top"] < spec["tau"] < spec["tau_bottom"]:
         raise ValueError("invalid atmosphere matching depths")
+    energy_balance_tau_division(spec)
     if not 0 < spec["alpha"] < 10 or spec["wavelength_A"][0] <= 0 or spec["wavelength_A"][1] <= spec["wavelength_A"][0]:
         raise ValueError("invalid convection or wavelength parameters")
     root=a.work.resolve(); root.mkdir(parents=True,exist_ok=True)

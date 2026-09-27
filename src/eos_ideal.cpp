@@ -116,8 +116,10 @@ double Eos::rho_from_PT(double T, double P, const Composition& comp,
     if(!(bounds->min>0) || !std::isfinite(bounds->max) || bounds->min>=bounds->max)
       throw std::domain_error("Eos::rho_from_PT: invalid density bounds");
     lo=std::log(bounds->min);hi=std::log(bounds->max);
-    if(eval(T,bounds->min,comp).P>P || eval(T,bounds->max,comp).P<P)
-      throw std::domain_error("Eos::rho_from_PT: pressure outside supported density interval");
+    // The tabulated range bounds possible queries, not thermodynamic stability
+    // throughout that range. Start near the requested state: a remote unstable
+    // interpolant must not veto an otherwise valid local pressure inversion.
+    // Every density used below still passes the EOS's own stability checks.
     rho=std::clamp(rho,bounds->min,bounds->max);
   }
   for (int it = 0; it < 200; ++it) {
@@ -139,7 +141,10 @@ double Eos::rho_from_PT(double T, double P, const Composition& comp,
     const double r=std::log(rho);
     if(f<0)lo=r;else hi=r;
     const double next=r-step;
-    rho=std::exp(next>lo && next<hi?next:.5*(lo+hi));
+    const double candidate=std::exp(next>lo && next<hi?next:.5*(lo+hi));
+    if(candidate==rho)
+      throw std::domain_error("Eos::rho_from_PT: no supported density resolves the requested pressure");
+    rho=candidate;
   }
   throw std::runtime_error("Eos::rho_from_PT: density inversion did not converge");
 }

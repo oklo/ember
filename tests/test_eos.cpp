@@ -217,6 +217,33 @@ int main() {
     check(rejected, "unreachable or invalid pressures throw", rejected, 1.0, 0.0);
   }
 
+  // A valid local root does not require a stable remote table endpoint.
+  // Invalid sampled states and pressures outside the range still reject.
+  {
+    class BoundedGas final:public Eos {
+     public:
+      EosState eval(double T,double rho,const Composition&) const override {
+        if(rho<.1 || rho>=50.)throw std::domain_error("unstable or unsupported test state");
+        EosState s;s.P=T*rho;s.chiRho=1;return s;
+      }
+      std::optional<DensityRange> density_range(double,const Composition&) const override {
+        return DensityRange{.1,100.};
+      }
+      const char* name() const override {return "bounded gas pressure test";}
+    } bounded;
+    near(bounded.rho_from_PT(100.,200.,solar,3.),2.,1e-12,
+         "local pressure root avoids unstable distant edge");
+    near(bounded.rho_from_PT(100.,200.,solar),2.,1e-12,
+         "bounded pressure root also works without a guess");
+    bool rejected=true;
+    for(double target:{5.,6000.,20000.}) {
+      bool threw=false;
+      try{bounded.rho_from_PT(100.,target,solar,3.);}catch(const std::exception&){threw=true;}
+      rejected &= threw;
+    }
+    check(rejected,"unsupported or unstable pressure roots reject",rejected,1.,0.);
+  }
+
   // 7. Composition bookkeeping.
   {
     const auto cs = solar_scaled(0.70, 0.014);

@@ -100,6 +100,31 @@ class SourceAcceptance(unittest.TestCase):
             self.assertNotEqual(input_fingerprint("same-binary", plain),
                                 input_fingerprint("same-binary", damped))
 
+    def test_energy_balance_depth_is_explicit_and_inside_the_atmosphere(self):
+        from generate_nongrey_grid import energy_balance_tau_division
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root/"data").mkdir()
+            table = root/"table.bin"
+            table.write_bytes(b"synthetic table")
+            spec = dict(alpha=1.9, atmosphere_frequencies=5000, depths=100,
+                        tau_top=1e-7, tau=100., tau_bottom=1000.)
+            prepared = dict(data_sha256="synthetic", synple=str(root))
+            abundance, masses = composition(.999, 0, [0]*5)
+            plain, changed = root/"plain", root/"changed"
+            atmosphere_inputs(plain, prepared, spec, table, abundance, masses, 4800, 6.)
+            atmosphere_inputs(changed, prepared, dict(spec, energy_balance_tau_division=.0001),
+                              table, abundance, masses, 4800, 6.)
+            self.assertEqual((changed/"tas").read_text(),
+                             (plain/"tas").read_text().replace("TAUDIV=0.01", "TAUDIV=0.0001"))
+            for name in ["fort.5", "ember-masses.dat", "opacity.sha256"]:
+                self.assertEqual((plain/name).read_bytes(), (changed/name).read_bytes())
+            self.assertNotEqual(input_fingerprint("same-binary", plain),
+                                input_fingerprint("same-binary", changed))
+            for value in [0., spec["tau_top"], spec["tau"], math.inf, math.nan]:
+                with self.subTest(value=value), self.assertRaisesRegex(ValueError, "transition depth"):
+                    energy_balance_tau_division(dict(spec, energy_balance_tau_division=value))
+
     def test_single_composition_uses_four_independent_opacity_workers(self):
         barrier = threading.Barrier(4, timeout=5)
         lock = threading.Lock()
@@ -387,6 +412,12 @@ class SourceAcceptance(unittest.TestCase):
                              "HMIX0=1.9,IFRSET=20000,ND=200,TAUFIR=1e-7,TAULAS=1000,TAUDIV=.01,CHMAX=1e-6,ILGDER=1,NITER=200,DPSILT=1.03,DERT=.001"}
         marker=f"EMBER ELEMENT MASSES: {w[0]} {w[1]}\nEMBER MOLECULAR EQUILIBRIUM TOLERANCE: 1e-8\n"
         source_inputs(inputs,spec,.55,.1,2800,5,marker)
+        balanced = {**inputs, "parameters":inputs["parameters"].replace("TAUDIV=.01", "TAUDIV=.0001")}
+        with self.assertRaisesRegex(ValueError,"settings mismatch"):
+            source_inputs(balanced,spec,.55,.1,2800,5,marker)
+        source_inputs(balanced,dict(spec,energy_balance_tau_division=.0001),.55,.1,2800,5,marker)
+        with self.assertRaisesRegex(ValueError,"settings mismatch"):
+            source_inputs(inputs,dict(spec,energy_balance_tau_division=.0001),.55,.1,2800,5,marker)
         with self.assertRaisesRegex(ValueError,"settings mismatch"):
             source_inputs(inputs,dict(spec,newton_relaxation=.3),.55,.1,2800,5,marker)
         source_inputs({**inputs,"parameters":inputs["parameters"]+",ORELAX=.3"},

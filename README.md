@@ -32,14 +32,21 @@ pass** in the isolated build with the required datasets.
 [opacity coverage](docs/results/opacity_lifetime_extension_sept27_v1.json).
 
 The continuous Hayashi calculation with restored hydrogen- and
-metal-dependent atmospheres has passed **700.5 Gyr**. Its later atmosphere
-coverage was extended at that accepted state with no change to the physical
+metal-dependent atmospheres has passed **1.642 Tyr**, with no rejected intervals.
+Its later atmosphere coverage was extended at 700.5 Gyr with no change to the physical
 checkpoint; an independent ten-interval replay is exact. All 5932 tested early
 surface values remain unchanged. The combined inputs cover all 67 saved
 settling comparison states at the original optical depth of 100. Cool,
 high-gravity rows include bounded estimates, which still need source checks;
 continuous WD cooling is not yet established.
-[Atmosphere coverage and restart evidence](docs/results/hydrogen_envelope_integration_sept27_v1.json).
+[Current calculation](docs/results/continuous_lifetime_sept27_v3.json),
+[atmosphere coverage and restart evidence](docs/results/hydrogen_envelope_integration_sept27_v1.json).
+Independent tau100 atmosphere columns now pass at 4800 K/log g = 6.2 and
+4700 K/log g = 6.0 with unchanged acceptance criteria. A density-inversion
+correction also removes rejection caused solely by a remote unstable EOS
+endpoint; the finite-mixing treatment of the cool envelope remains under test.
+[Atmosphere checks](docs/results/highg_energy_balance_sept27_v1.json),
+[density-inversion checks](docs/results/local_density_inversion_sept27_v1.json).
 The microscopic metal law assumes complete ionization; unsupported cool
 radiative layers are rejected. Initial deuterium uses a checked whole-star
 mixing approximation. Nuclear burning includes the pp chain and explicit

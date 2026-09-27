@@ -1,0 +1,235 @@
+{
+  "created_utc": "2026-09-27T06:01:19.621121+00:00",
+  "scope": "Numerical atmosphere-source correction, not a selected stellar boundary change",
+  "numerical_change": {
+    "parameter": "TAUDIV",
+    "previous": 0.01,
+    "tested": 0.0001,
+    "meaning": "Depth below which differential flux balance supplements local radiative equilibrium in TLUSTY ROSSTD/RYBENE"
+  },
+  "unchanged_acceptance": {
+    "maximum_relative_temperature_correction": 1e-05,
+    "maximum_total_flux_error": 0.002,
+    "maximum_emergent_flux_error": 0.002,
+    "requires_matching_depth": 100,
+    "other_checks": [
+      "hydrostatic equilibrium",
+      "independent chemical density closure",
+      "opacity support",
+      "source input identity"
+    ]
+  },
+  "control_pass": true,
+  "new_accepted_coordinates": [
+    [
+      4800,
+      6.2
+    ],
+    [
+      4700,
+      6.0
+    ]
+  ],
+  "executable_sha256": "74663fb1529dd57c95a435c9cf2385777d80eab836745ccd39f39cb81138161a",
+  "opacity_sha256": "1837c2ae92a39519b04fea53c152fe43f30e6694690597937b2c8638e8e7113b",
+  "source_archive_sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a",
+  "source_archive_url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+  "rows": [
+    {
+      "name": "t4800_g600_seedB_nd150",
+      "accepted": true,
+      "returncode": 0,
+      "CPU_seconds": 872.543929,
+      "wall_seconds": 923.5013286666945,
+      "teff_K": 4800.0,
+      "log_g": 6.0,
+      "source_directory": "out/highg-source-diagnosis-sept27-v1/t4800_g600_seedB_nd150",
+      "input_sha256": {
+        "fort.5": "e6f4f1f72acf097954cd2938bab99a54981b891ef4a7be135574c8a5e13db594",
+        "fort.8": "84ccad67c597e1e87ee88170bd406fa9479706a44bc70e793b2873f3ac5972d1",
+        "fort.15": "a6d635880938f9d6b95a24a09d15b8a712ba5286655740bb257c9b16b641e558",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "tas": "218951c37e07b9fcc9618732e3753e5b5c02ead549ae10a0df45c1afcdca2c1a",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "physics.json": "73ceb5078c22f2a05d78a8ecde968e1fdb26d75e180a6edb0dffa7a691c13a37"
+      },
+      "diagnostics": {
+        "T": 6147.3587862610175,
+        "Pgas": 45446245.137408175,
+        "source_density": 9.671929468228121e-05,
+        "column_mass": 45.44623933280788,
+        "flux_error": 3.5395131599003093e-05,
+        "correction": 9.08e-07,
+        "effective_flux_error": 0.00020706406739967598,
+        "hydrostatic_error": 1.9119128280564723e-07,
+        "chemical_density_error": 2.365463380726851e-11,
+        "iterations": 42,
+        "depths": 150,
+        "tau_bracket": [
+          89.04358170977595,
+          114.07811774669045
+        ],
+        "optical_depth_range": [
+          9.686111881718611e-08,
+          269.01859603950294
+        ],
+        "column_mass_range": [
+          0.0010448156719034113,
+          60.766348254878
+        ],
+        "temperature_range": [
+          3882.1117272003576,
+          6488.944740189341
+        ],
+        "density_range": [
+          3.138042747537706e-09,
+          0.00012095358063634478
+        ]
+      },
+      "control_response": {
+        "T": -1.852247515143901e-06,
+        "Pgas": 1.634377922332675e-05
+      },
+      "control_pass": true,
+      "comparison_to_current_inferred_row": {
+        "T": 0.0014858185110679933,
+        "Pgas": -0.025958082706712293
+      }
+    },
+    {
+      "name": "t4800_g620_chain_x17_nd150",
+      "accepted": true,
+      "returncode": 0,
+      "CPU_seconds": 1085.725968,
+      "wall_seconds": 1140.1717604156584,
+      "teff_K": 4800.0,
+      "log_g": 6.2,
+      "source_directory": "out/highg-source-diagnosis-sept27-v1/t4800_g620_chain_x17_nd150",
+      "input_sha256": {
+        "fort.5": "8f02aa3fd5eb6e829055e27bacb121473781ed2e3c935832872f1b3a7d7a32c8",
+        "fort.8": "f45752bde183dc45c38cbc59d6b898a83bac6975893b5a428104909faa890dde",
+        "fort.15": "a6d635880938f9d6b95a24a09d15b8a712ba5286655740bb257c9b16b641e558",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "tas": "218951c37e07b9fcc9618732e3753e5b5c02ead549ae10a0df45c1afcdca2c1a",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "physics.json": "73ceb5078c22f2a05d78a8ecde968e1fdb26d75e180a6edb0dffa7a691c13a37"
+      },
+      "diagnostics": {
+        "T": 6101.324130272913,
+        "Pgas": 69719151.99422969,
+        "source_density": 0.00015544295512025138,
+        "column_mass": 43.989804052622205,
+        "flux_error": 1.4103680466170943e-05,
+        "correction": 9.52e-07,
+        "effective_flux_error": 0.00020706406739967598,
+        "hydrostatic_error": 1.977886960879971e-07,
+        "chemical_density_error": 2.152522604603746e-11,
+        "iterations": 60,
+        "depths": 150,
+        "tau_bracket": [
+          98.36031294156481,
+          125.22052985839953
+        ],
+        "optical_depth_range": [
+          1.316989001703028e-07,
+          364.47427754594503
+        ],
+        "column_mass_range": [
+          0.0011206982929904306,
+          65.17966055118129
+        ],
+        "temperature_range": [
+          3752.826478243131,
+          6528.777126516047
+        ],
+        "density_range": [
+          5.331726056137647e-09,
+          0.0002112205791304921
+        ]
+      }
+    },
+    {
+      "name": "t4700_g600_chain_x15_r015_nd150",
+      "accepted": false,
+      "returncode": -24,
+      "CPU_seconds": 1200.431023,
+      "wall_seconds": 1254.5872125830501,
+      "teff_K": 4700.0,
+      "log_g": 6.0,
+      "source_directory": "out/highg-source-diagnosis-sept27-v1/t4700_g600_chain_x15_r015_nd150",
+      "input_sha256": {
+        "fort.5": "e741c8a2916e7b4138b936ebd9c290edc68361db9d098fc9bd3df0430ad74e9e",
+        "fort.8": "05d949ae37f52a6347f66f6ec10b6e26079ad78dee66ce7c66762a830ffe360b",
+        "fort.15": "a6d635880938f9d6b95a24a09d15b8a712ba5286655740bb257c9b16b641e558",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "tas": "be325c5170d5af307ea2def86d28f352ae619fd6feeed82fb27edfed4e7f888f",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "physics.json": "73ceb5078c22f2a05d78a8ecde968e1fdb26d75e180a6edb0dffa7a691c13a37"
+      },
+      "failure": "source process exit -24"
+    },
+    {
+      "name": "t4700_g600_balance_continuation",
+      "accepted": true,
+      "returncode": 0,
+      "CPU_seconds": 403.188597,
+      "wall_seconds": 406.14210854191333,
+      "teff_K": 4700.0,
+      "log_g": 6.0,
+      "source_directory": "out/highg-source-continuation-sept27-v1/t4700_g600_balance_continuation",
+      "input_sha256": {
+        "fort.5": "e741c8a2916e7b4138b936ebd9c290edc68361db9d098fc9bd3df0430ad74e9e",
+        "fort.15": "a6d635880938f9d6b95a24a09d15b8a712ba5286655740bb257c9b16b641e558",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "physics.json": "73ceb5078c22f2a05d78a8ecde968e1fdb26d75e180a6edb0dffa7a691c13a37",
+        "fort.8": "f90b78179c0c83dc38765e190752e2c6372719cb1fcc4cddaddb4eb870d2e73b",
+        "tas": "be325c5170d5af307ea2def86d28f352ae619fd6feeed82fb27edfed4e7f888f"
+      },
+      "diagnostics": {
+        "T": 5934.370250824164,
+        "Pgas": 64117172.644288324,
+        "source_density": 0.00014946347515444532,
+        "column_mass": 64.11716283984805,
+        "flux_error": 1.0470751580893278e-05,
+        "correction": 9.05e-07,
+        "effective_flux_error": 0.0002070614796795267,
+        "hydrostatic_error": 1.9130125616939608e-07,
+        "chemical_density_error": 2.4426349831685457e-11,
+        "iterations": 41,
+        "depths": 150,
+        "tau_bracket": [
+          85.75125951516446,
+          109.3563588910733
+        ],
+        "optical_depth_range": [
+          1.2612207173400187e-07,
+          316.67549891527267
+        ],
+        "column_mass_range": [
+          0.001567224,
+          91.14952
+        ],
+        "temperature_range": [
+          3578.6724424175068,
+          6284.828825038393
+        ],
+        "density_range": [
+          4.794123154663798e-09,
+          0.00019716682664820348
+        ]
+      },
+      "comparison_to_current_inferred_row": {
+        "T": -0.0004355762734281621,
+        "Pgas": -0.0268234234754966
+      }
+    }
+  ],
+  "aggregate_CPU_seconds": 3561.889517,
+  "selected_for_evolution": false,
+  "limitations": [
+    "Pure-hydrogen gas with source helium mass fraction 1e-10; no grain opacity.",
+    "The independent control supports this numerical treatment near these coordinates, not universal source accuracy.",
+    "More adjacent source cells and composition checks are needed before claiming cooling coverage."
+  ]
+}
