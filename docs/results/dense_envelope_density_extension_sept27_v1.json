@@ -1,0 +1,187 @@
+{
+  "created_utc": "2026-09-27T23:17:57.127179+00:00",
+  "scope": "Bounded optional dense-hydrogen opacity approximation: maximum logR2.5 instead of2.2, maximum logT6.3 unchanged. Same retained source T/rho interpolation and same atomic composition continuation. Three1Myr continuations fromv30; half/double scale only the hot source-slope opacity. Atmosphere coverage limits the test duration.",
+  "selected_for_evolution": true,
+  "source_directory": "out/dense-envelope-extension-sept27-v3",
+  "reports": {
+    "nominal": {
+      "requested_age_reached": 1,
+      "age_years": 4005515011220.6167,
+      "accepted_this_invocation": 4,
+      "accepted_total": 17119,
+      "rejected_total": 5134,
+      "stop_reason": "requested age",
+      "cpu_seconds": 7.673129,
+      "wall_seconds": 7.827156375,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    },
+    "half": {
+      "requested_age_reached": 1,
+      "age_years": 4005515011220.6167,
+      "accepted_this_invocation": 4,
+      "accepted_total": 17119,
+      "rejected_total": 5134,
+      "stop_reason": "requested age",
+      "cpu_seconds": 7.356274,
+      "wall_seconds": 7.374740583,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    },
+    "double": {
+      "requested_age_reached": 1,
+      "age_years": 4005515011220.6167,
+      "accepted_this_invocation": 4,
+      "accepted_total": 17119,
+      "rejected_total": 5134,
+      "stop_reason": "requested age",
+      "cpu_seconds": 7.62368,
+      "wall_seconds": 7.69504375,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "audits": {
+    "nominal": {
+      "accepted": 4,
+      "maximum_error_norm": 0.05715183455604683,
+      "maximum_first_law": 8.274549312403678e-08
+    },
+    "half": {
+      "accepted": 4,
+      "maximum_error_norm": 0.05715183455596244,
+      "maximum_first_law": 8.274531237972838e-08
+    },
+    "double": {
+      "accepted": 4,
+      "maximum_error_norm": 0.05715183455611592,
+      "maximum_first_law": 8.274826890364295e-08
+    }
+  },
+  "global_relative_response": {
+    "half": {
+      "Teff_K": 8.626432901337466e-13,
+      "luminosity_Lsun": 4.259925745486726e-12,
+      "radius_Rsun": 4.050093593832571e-13,
+      "central_T_K": 5.861977570020827e-14,
+      "central_density_g_cm3": 6.927791673660977e-13,
+      "He3_mass_g": -4.440892098500626e-16,
+      "H_mass_g": -1.1102230246251565e-16,
+      "He3_peak": -4.9960036108132044e-15,
+      "eps_nuc_peak_erg_g_s": -4.3853809472693683e-14,
+      "convective_mass_fraction": 0.0
+    },
+    "double": {
+      "Teff_K": -4.4508841057222526e-13,
+      "luminosity_Lsun": -2.213562666497637e-12,
+      "radius_Rsun": -2.1671553440683056e-13,
+      "central_T_K": 4.636291350834654e-13,
+      "central_density_g_cm3": 1.687538997430238e-13,
+      "He3_mass_g": 0.0,
+      "H_mass_g": -1.1102230246251565e-16,
+      "He3_peak": -1.0103029524088925e-14,
+      "eps_nuc_peak_erg_g_s": -7.083222897108499e-14,
+      "convective_mass_fraction": 0.0
+    }
+  },
+  "maximum_global_relative_response": 4.259925745486726e-12,
+  "affected_face": [
+    {
+      "q": 0.9997916921981643,
+      "T_K": 415368.57957613666,
+      "rho_g_cm3": 10.801894076356225,
+      "factor": 0.5,
+      "kappa_cm2_g": 4730.312861454473,
+      "gradient_diffusive": 714.245648015927,
+      "gradient_adiabatic": 0.4057510214812637,
+      "gradient_mixing_length": 0.40575104871883416,
+      "convective_fraction_of_thermal_luminosity": 0.9994319166664214,
+      "conductive_fraction_of_diffusive_flux": 0.8713478430618979,
+      "material_luminosity_fraction": -9.275106675604945e-07
+    },
+    {
+      "q": 0.9997916921981643,
+      "T_K": 415368.57957613666,
+      "rho_g_cm3": 10.801894076356225,
+      "factor": 1.0,
+      "kappa_cm2_g": 9460.625722908946,
+      "gradient_diffusive": 763.3488885179988,
+      "gradient_adiabatic": 0.4057510214812637,
+      "gradient_mixing_length": 0.4057510487194981,
+      "convective_fraction_of_thermal_luminosity": 0.9994684592395136,
+      "conductive_fraction_of_diffusive_flux": 0.9312516070087743,
+      "material_luminosity_fraction": -9.275106675604945e-07
+    },
+    {
+      "q": 0.9997916921981643,
+      "T_K": 415368.57957613666,
+      "rho_g_cm3": 10.801894076356225,
+      "factor": 2.0,
+      "kappa_cm2_g": 18921.251445817892,
+      "gradient_diffusive": 790.5224629951913,
+      "gradient_adiabatic": 0.4057510214812637,
+      "gradient_mixing_length": 0.40575104871983003,
+      "convective_fraction_of_thermal_luminosity": 0.9994867305260593,
+      "conductive_fraction_of_diffusive_flux": 0.9644021562277393,
+      "material_luminosity_fraction": -9.275106675604945e-07
+    }
+  ],
+  "nominal_endpoint": {
+    "years": 4005515011220.6167,
+    "step_years": 49999.999302355056,
+    "accepted": 17119,
+    "rejected": 5134,
+    "radius_Rsun": 0.03905274299561953,
+    "Teff_K": 4401.214332886735,
+    "luminosity_Lsun": 0.0005155690511289872,
+    "nuclear_fraction": 0.4623560052591305,
+    "central_T_K": 6305689.34781344,
+    "central_density_g_cm3": 40736.0401537621,
+    "central_X": 3.450471487468204e-08,
+    "central_He3": 9.049387989893879e-15,
+    "eps_nuc_peak_erg_g_s": 0.17275195547156819,
+    "eps_nuc_peak_q": 0.9703952386387595,
+    "burning_half_max_inner_q": 0.9570627137583326,
+    "burning_half_max_outer_q": 0.9769560298913097,
+    "burning_half_max_cells": 17,
+    "He3_peak": 0.018865861762422678,
+    "He3_peak_q": 0.971484245216312,
+    "H_mass_g": 7.439006875278474e+30,
+    "He3_mass_g": 8.093447729633857e+28,
+    "D_mass_g": 0,
+    "surface_X": 0.9934221860910422,
+    "surface_Z": 1.4346788233878297e-30,
+    "error_norm": 0.006352162698613565,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.546600453402684e-12,
+    "drift_gradient_proxy": 4.937572273454659e-07,
+    "kinetic_heat_proxy": 0.02015771616831603,
+    "convective_mass_fraction": 0.022138183304963307,
+    "radiative_boundaries": 401,
+    "relative_mixing_gradient": 9.646225452578652e-11,
+    "convective_travel_years": 0.06043854700111709,
+    "cpu_seconds": 7.664965
+  },
+  "tests": [
+    "Native joined-opacity test passes against packaged v30 source data, including logR2.21/2.35/2.49, temperature/density derivatives, supported density ranges, unchanged older limit and explicit upper-domain rejection.",
+    "Four accepted full/two-half intervals per stellar arm; all original energy and isotope checks retained."
+  ],
+  "test_environment": "CTest in the source checkout lacks the complete opacity fixture and reports invalid manifest. The same built test passes using native_data/production and hydrogen_response links to the verified packaged v30 tables.",
+  "limitations": [
+    "One-Myr local response, not a full cooling-sequence validation.",
+    "Approximate hydrogen-abundance continuation fromX.70/.75; no claim of accurate radiative opacity for pure H.",
+    "The layer is strongly convective; convection carries99.95percent of thermal luminosity. Conduction dominates its very small remaining diffusive component.",
+    "No atmosphere or EOS domain extension is included."
+  ],
+  "sha256": {
+    "out/dense-envelope-extension-sept27-v3/structure.cpp": "1394f5df51d7838f930a4c7ac66e150a5366598d9e92c735203c8bed97b5a5c9",
+    "out/dense-envelope-extension-sept27-v3/structure.txt": "256555b36164cbf41c6d3ecf728f46099309be8784f4555c6c3d29270ceb8c14",
+    "out/dense-envelope-extension-sept27-v3/run_controls.py": "5b9a021898d45725d3049063ea7872c381a1ea48f5223080026138b83ef14b86",
+    "out/dense-envelope-extension-sept27-v3/nominal-ember-evolve": "f9d408df8074fe0bd4e6ba5e15f7d804d0dd4583c496b21fcfdfefafb4ef6877",
+    "out/dense-envelope-extension-sept27-v3/half-ember-evolve": "8a732cdca745847483b1ee5a5e6b9a57cd222619def62cb6f4e996beea42c623",
+    "out/dense-envelope-extension-sept27-v3/double-ember-evolve": "bf2fc9ecaefc36634c03af5c019be089467451a05bbb23bfa55f144eec796422",
+    "out/continuous-lifetime-sept27-v30/evolution/final.checkpoint": "4532d4275e3d0f44f29c6ecd94abd31620de30629a338fb181f03e942637ecad"
+  }
+}

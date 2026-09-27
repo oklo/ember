@@ -70,6 +70,26 @@ int main(int argc,char**argv) {
   bool temperature_rejected=false;
   try{expanded.eval(hotT,hotrho,hrich);}catch(const std::domain_error&){temperature_rejected=true;}
   require(temperature_rejected,"default temperature limit must remain unchanged");
+  RadiativeOpacity denser(files,{data/"opacity/lifetime/hydrogen_response.dat",0,.16,1,2.5,6.3});
+  for(double logr:{2.21,2.35,2.49}) {
+    const double t=4.15e5,r=std::pow(10.,logr)*std::pow(t/1e6,3);
+    const auto state=denser.eval(t,r,hrich);
+    const auto logk=[&](double tt,double rr){return std::log(denser.eval(tt,rr,hrich).kappa);};
+    require(std::isfinite(state.kappa) && state.kappa>0,"denser approximation must remain in source support");
+    require(std::abs((logk(t*std::exp(e),r)-logk(t*std::exp(-e),r))/(2*e)-state.dlnk_dlnT)<2e-5,
+        "denser temperature derivative mismatch");
+    require(std::abs((logk(t,r*std::exp(e))-logk(t,r*std::exp(-e)))/(2*e)-state.dlnk_dlnRho)<2e-5,
+        "denser density derivative mismatch");
+    const auto range=denser.density_range(t,hrich);
+    require(range && range->min<r && range->max>r,"denser source density range missing");
+    bool previous_rejected=false;
+    try{warmer.eval(t,r,hrich);}catch(const std::domain_error&){previous_rejected=true;}
+    require(previous_rejected,"existing selected density limit must remain unchanged");
+  }
+  bool denser_rejected=false;
+  try{denser.eval(4.15e5, std::pow(10.,2.51)*std::pow(.415,3),hrich);}
+  catch(const std::domain_error&){denser_rejected=true;}
+  require(denser_rejected,"expanded approximation must retain its declared density limit");
   bool old_rejected=false;try{opacity.eval(newT,newrho,hrich);}catch(const std::domain_error&){old_rejected=true;}
   require(old_rejected,"default approximation domain must remain unchanged");
   bool rejected=false;try{opacity.eval(T,100.,hrich);}catch(const std::domain_error&){rejected=true;}

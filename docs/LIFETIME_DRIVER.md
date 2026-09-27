@@ -394,19 +394,21 @@ or a whole-lifetime speed-up.
 
 `opacity_dense_hydrogen_maximum_logR` selects the upper density coordinate for
 an existing hydrogen-composition approximation; its default is 1.8 and its
-permitted interval is 1.8--2.2. Here R is rho/(T/1e6)^3 in CGS units. A
+permitted interval is 1.8--2.5. Here R is rho/(T/1e6)^3 in CGS units. A
 nondefault selection is stored in restart identity. The original temperature
 bounds, source-table checks and smooth join are retained. This option does
 not extrapolate temperature or density beyond the underlying source tables.
 
 The calculation uses the opacity slope between the retained X=0.70 and
-X=0.75 planes to continue to the actual hydrogen abundance. At the current
-limit, convection carries 99.97% of the heat. A matched 20 Myr comparison with
-half and twice the approximated opacity changes luminosity by less than
-1e-8 fractionally, with all accepted time and conservation checks passing.
-This supports extending the selected density bound to 2.2 during this phase;
-the approximation needs reassessment if these layers become radiative.
-[Measured response](results/dense_envelope_extension_sept27_v1.json).
+X=0.75 planes to continue to the actual hydrogen abundance. Near the cooling
+model's density limit, at 415400 K, convection carries 99.95% of the thermal
+luminosity. The selected upper bound is 2.5. A matched 1 Myr comparison with
+half and twice the approximated opacity changes global quantities by at most
+4.260e-12 fractionally; all time and conservation checks pass. Completed
+atmosphere coverage limits the duration of this comparison. The source data
+support the larger density interval, but the composition continuation remains
+an approximation and needs reassessment if these layers become radiative.
+[Measured response](results/dense_envelope_density_extension_sept27_v1.json).
 
 
 ## Second-order accepted states
