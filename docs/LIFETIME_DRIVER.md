@@ -127,6 +127,14 @@ local tolerance while passing the unchanged **1e-14** inventory budget and
 energy checks; forcing the local correction to **1e-15** stalls its line search.
 The global budget need not be larger than the local correction tolerance.
 Neither setting replaces the full-step/two-half-step accuracy check.
+The configured absolute species time-error allowance may be at most **1e-5**.
+A matched **500 Myr** comparison after the centre becomes radiative uses
+**17** accepted intervals at 1e-5 versus **45** at 1e-6, with maximum relative
+temperature difference **2.475e-6** and total helium-3 difference **2.766e-5**.
+The radiative-core continuation selects 1e-5; the structure allowance remains
+1e-4, nuclear-power allowance .005 and global inventory budget 1e-14.
+This comparison does not establish accuracy during a flash.
+[Matched-age control](results/radiative_core_time_accuracy_sept27_v2.json).
 The continuous star now uses a tighter **1e-13** stratified solve after a matched
 **11.76-Myr** comparison at radiative-core onset. This reduces audit retries
 without changing the global budget; luminosities differ by **0.00004235%**.
