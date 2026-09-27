@@ -4,15 +4,15 @@
 
 The continuous Hayashi-started sequence forms its first radiative region at
 **3.558 Tyr**, **3250 K**, with surface hydrogen **X=.1722**. The checked
-continuation passes **3.562 Tyr**, with H/He and metal
+continuation passes **3.585 Tyr**, with H/He and metal
 diffusion active across radiative boundaries. A radiative shell first surrounds
-the convective centre; the centre then becomes radiative. About **36%** of the
+the convective centre; the centre then becomes radiative. About **54.23%** of the
 mass is now radiative. All accepted intervals pass the
 unchanged isotope and energy audits. The fixed-metal-atmosphere comparison
 is complete at **3.078 Tyr**. Both use the common lifetime program.
 [First radiative region](results/continuous_radiative_core_sept27_v1.json),
 [internal structure](results/radiative_shell_geometry_sept27_v1.json).
-The updated paper and Figure 1 use the continuous history through **3.562 Tyr**.
+The updated paper and Figure 1 use the continuous history through **3.585 Tyr**.
 Read the [current handoff](../HANDOFF.md) for the live process and next work.
 
 Failed trial audits now trigger a smaller timestep, with a bounded number of
@@ -43,17 +43,23 @@ evolution, not for time convergence through a flash.
 [Local-solve accuracy](results/local_correction_comparison_sept27_v2.json).
 
 The continuous trajectory passes all isotope and energy checks and is beyond
-**3.573 Tyr**. The atmosphere match remains at optical depth 100. Seven newly
-validated high-gravity gas columns now replace part of the inferred table;
-all 5932 checked early evaluations remain exact, and all 67 saved late structures
-are supported. On the late structures, matching pressure changes by less than
-0.9396%. A three-step replay and the actual continuation preserve the starting
-physical state exactly. Inferred cool, high-gravity rows remain, including the
-4600 K, log g = 6.1 corner. Source coverage is not yet complete enough to establish
-atmosphere-independent helium-3 ignition. The separate flash histories also
-inherit a forced atmosphere change.
-[Atmosphere replacement checks](results/highg_atmosphere_integration_sept27_v1.json),
+**3.585 Tyr**. The atmosphere match remains at optical depth 100. The 4600 K
+gravity row and 4625 K, log g = 6.1 corner now have checked source solutions.
+All 5932 checked early evaluations remain exact, and all 67 saved late
+structures are supported. Matching pressure changes by at most 1.101% on
+those late structures; three stellar intervals and the final physical
+checkpoint match exactly. The actual continuation also preserves its physical
+starting state. Gas-only and trace-helium qualifications remain, and the
+high-gravity source domain has not yet been extended. Separate flash histories
+still inherit a forced atmosphere change.
+[Atmosphere replacement checks](results/highg_atmosphere_integration_sept27_v2.json),
 [hydrogen-rich boundary](results/hydrogen_envelope_integration_sept27_v1.json).
+
+Exact reuse of repeated EOS evaluations preserves six complete stellar
+intervals and the final physical checkpoint. Six EOS, transport and restart
+tests pass. The matched timing pair uses about **5%** less CPU, with scheduling
+variation included. The continuous calculation now uses this implementation.
+[EOS comparison](results/exact_eos_reuse_sept27_v1.json).
 
 The [September 27 paper](reports/2026-09-27/ember_status_and_future.pdf) is
 **30 pages**, reduced from 63 with physical qualifications, comparisons and the

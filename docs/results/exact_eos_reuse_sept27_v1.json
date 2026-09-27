@@ -43,5 +43,8 @@
   ],
   "selected_for_production": true,
   "selection_run": "out/continuous-lifetime-sept27-v13",
-  "selection_note": "Prepared for the next immutable continuation; actual startup check follows."
+  "selection_note": "Actual continuation preserves all startup physical history fields exactly.",
+  "production_start_physical_history_exact": true,
+  "selection_age_years": 3585155270962.023,
+  "physical_payload_sha256": "d088c6c2f91f62f89a2c4e0799ef47c740c87c4b0952f397cffa3e85b440050c"
 }

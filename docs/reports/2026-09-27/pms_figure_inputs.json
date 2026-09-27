@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-27T09:12:56.712490+00:00",
+  "created_utc": "2026-09-27T11:08:16.585259+00:00",
   "sources": [
     {
       "path": "out/continuous-lifetime-sept27-v2/initial-check/history.jsonl",
@@ -63,13 +63,31 @@
     },
     {
       "path": "out/continuous-lifetime-sept27-v9/evolution/history.jsonl",
-      "source_bytes_sha256": "d52e4fd332497aeca49fb7a30406dbbac9a84bfb2fcf28ce5cb9a74130ac056b",
-      "retained_through": 7678,
-      "CPU_seconds": 2148.291641
+      "source_bytes_sha256": "c5e1b602985b637060ea8899bab10cd32d8f1e8fd4f70dbc4fe55538156845f9",
+      "retained_through": 7854,
+      "CPU_seconds": 4504.43099
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v10/evolution/history.jsonl",
+      "retained_through": 8055,
+      "source_bytes_sha256": "c3c724d86469a24104cf6f86c8d2210f1c56c514671da52e196a35c3e012fa80",
+      "CPU_seconds": 4655.413865
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v11/evolution/history.jsonl",
+      "retained_through": 8178,
+      "source_bytes_sha256": "dde1242c0cbaa0e00550e97b099fdf2f8982321b5a8cf3e89b89e388482ee4a6",
+      "CPU_seconds": 3280.736723
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v12/evolution/history.jsonl",
+      "retained_through": 8564,
+      "source_bytes_sha256": "1dd734296090db6219a0fb05bd6c2d7dc38cb804a7c690b891cc7c720f42dce1",
+      "CPU_seconds": 6595.41975
     }
   ],
-  "models": 7679,
-  "CPU_seconds": 31636.104314,
+  "models": 8565,
+  "CPU_seconds": 48523.814001,
   "contraction_model": {
     "years": 990131259.1322539,
     "step_years": 35442295.89326342,
@@ -99,32 +117,32 @@
     "cpu_seconds": 944.506238
   },
   "latest": {
-    "years": 3562419215414.2,
-    "step_years": 16270541.5662191,
-    "accepted": 7678,
-    "rejected": 453,
-    "radius_Rsun": 0.14233463584488698,
-    "Teff_K": 3259.1728650072814,
-    "luminosity_Lsun": 0.0020594177463781603,
-    "nuclear_fraction": 0.9990415153902176,
-    "central_T_K": 8592936.037985306,
-    "H_mass_g": 3.405232700761577e+31,
-    "He3_mass_g": 1.609499709263991e+29,
+    "years": 3585155270962.023,
+    "step_years": 3379625.5508103753,
+    "accepted": 8564,
+    "rejected": 723,
+    "radius_Rsun": 0.14116687201876474,
+    "Teff_K": 3338.7578963307624,
+    "luminosity_Lsun": 0.0022309969384116616,
+    "nuclear_fraction": 0.9981316707414091,
+    "central_T_K": 9340630.027662998,
+    "H_mass_g": 3.3063525935059486e+31,
+    "He3_mass_g": 2.528338352385142e+29,
     "D_mass_g": 0,
-    "surface_X": 0.1757353644106588,
-    "surface_Z": 0.019749418255280808,
-    "error_norm": 0.0851748163943622,
+    "surface_X": 0.20471827661386685,
+    "surface_Z": 0.017586831969192432,
+    "error_norm": 0.0007001241248445206,
     "initial_D_approximation": 0,
     "omitted_mixing_heat_fraction": 0,
     "gross_mixing_heat_fraction": 0,
-    "burn_gradient_estimate": 1.6527592040109823e-12,
-    "drift_gradient_proxy": 8.073641582298732e-07,
-    "kinetic_heat_proxy": 0.012524469188225851,
-    "convective_mass_fraction": 0.6436313300562375,
-    "radiative_boundaries": 237,
-    "relative_mixing_gradient": 5.7260272325555e-11,
-    "convective_travel_years": 0.605579683555869,
-    "cpu_seconds": 2148.291641
+    "burn_gradient_estimate": 1.8034685157939939e-12,
+    "drift_gradient_proxy": 7.848133636651034e-07,
+    "kinetic_heat_proxy": 0.01118519399322422,
+    "convective_mass_fraction": 0.4576737373725594,
+    "radiative_boundaries": 271,
+    "relative_mixing_gradient": 1.618156459938018e-11,
+    "convective_travel_years": 0.47101754878018953,
+    "cpu_seconds": 6595.41975
   },
   "first_radiative_region": {
     "years": 3558470608835.955,
@@ -154,6 +172,6 @@
     "convective_travel_years": 0.8592243358117583,
     "cpu_seconds": 54.993664
   },
-  "csv_sha256": "cdb41ef527b5d8f23f30d2f105c648bffbe16fcbf384fa3fd677d1895ebc4e9a",
-  "scope": "One continuous Hayashi-origin trajectory. Duplicate restart records removed and the v8 prefix ends at7521, followed by the retained correction-control pilot7522..7538 and v9. CPU accounting includes retained process startup and retries; separate accuracy and atmosphere jobs excluded."
+  "csv_sha256": "6c197c6a831f7b05245dae8b125125e3b035e6bf3225e06d717094e4c876523b",
+  "scope": "One continuous Hayashi-origin trajectory. Duplicate restart rows removed; exact retained prefixes listed. CPU includes retained invocation startup and retries; separate accuracy, EOS and atmosphere work excluded."
 }

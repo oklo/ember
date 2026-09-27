@@ -16,7 +16,7 @@ plt.rcParams.update({'font.size':11,'axes.labelsize':12,'xtick.labelsize':10,'yt
 fig,(hr,power)=plt.subplots(1,2,figsize=(9.6,3.8),constrained_layout=True)
 orange='#cb651f'
 x=a['Teff_K'];y=np.log10(a['luminosity_Lsun']);age=a['years']/1e6
-hr.plot(x,y,color=orange,lw=1.8);hr.set(xlabel=r'$T_{\rm eff}$ (K)',ylabel=r'$\log_{10}(L/L_\odot)$',xlim=(3340,2680),ylim=(-3.3,-.65))
+hr.plot(x,y,color=orange,lw=1.8);hr.set(xlabel=r'$T_{\rm eff}$ (K)',ylabel=r'$\log_{10}(L/L_\odot)$',xlim=(max(3450,50*np.ceil((x.max()+110)/50)),2680),ylim=(-3.3,-.65))
 hr.scatter([x[0],x[-1]],[y[0],y[-1]],c=orange,s=19,zorder=3)
 for t,offset in [(0,(12,5)),(10,(14,7)),(1000,(-48,-17))]:
  i=int(np.argmin(abs(age-t)))

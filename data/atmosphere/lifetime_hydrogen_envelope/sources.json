@@ -17,12 +17,12 @@
     },
     {
       "file": "high.dat",
-      "source": "Seven source columns listed in source_replacements; other rows inherited as recorded.",
-      "sha256": "98e45b3e3f0c6f131c32f29173bdd1c2cc460e606a666284f06b54a16f7a6a61"
+      "source": "Source columns in source_replacements and cool_source_replacements, with declared interpolated knots.",
+      "sha256": "cb61da0e6dbee4e4a390eae9e028ddc8462d1e8bb8ffef760a0089c4d454c2ae"
     }
   ],
-  "qualification": "Gas-only table. Explicit inferred cells remain, especially the4600K/logg6.1 corner; replacements improve source validation without claiming the whole grid is independently solved.",
-  "previous_high_table_sha256": "8670bdc23840b996bfae1ca75e92c0e06c3ea21e1af705e2d2db5619314b6b1d",
+  "qualification": "Gas-only, trace-He approximation. The cool high-gravity corner is now independently solved; other interior rows interpolate source anchors. Older warm anchors retain their recorded provenance. This is not validation at arbitrary trace-He abundance or of future models outside the table.",
+  "previous_high_table_sha256": "98e45b3e3f0c6f131c32f29173bdd1c2cc460e606a666284f06b54a16f7a6a61",
   "source_replacements": [
     {
       "teff_K": 4600,
@@ -74,7 +74,8 @@
       "fractional_difference_from_previous": {
         "T": 0.0016431375678114257,
         "Pgas": 0.0003472127388384205
-      }
+      },
+      "comparison_parent_high_sha256": "8670bdc23840b996bfae1ca75e92c0e06c3ea21e1af705e2d2db5619314b6b1d"
     },
     {
       "teff_K": 4650,
@@ -126,7 +127,8 @@
       "fractional_difference_from_previous": {
         "T": 0.0002082785544514909,
         "Pgas": 0.0006698273954564016
-      }
+      },
+      "comparison_parent_high_sha256": "8670bdc23840b996bfae1ca75e92c0e06c3ea21e1af705e2d2db5619314b6b1d"
     },
     {
       "teff_K": 4650,
@@ -178,7 +180,8 @@
       "fractional_difference_from_previous": {
         "T": 0.001093020597736416,
         "Pgas": 0.0024384283796865525
-      }
+      },
+      "comparison_parent_high_sha256": "8670bdc23840b996bfae1ca75e92c0e06c3ea21e1af705e2d2db5619314b6b1d"
     },
     {
       "teff_K": 4700,
@@ -230,7 +233,8 @@
       "fractional_difference_from_previous": {
         "T": -0.0004355762734281621,
         "Pgas": -0.0268234234754966
-      }
+      },
+      "comparison_parent_high_sha256": "8670bdc23840b996bfae1ca75e92c0e06c3ea21e1af705e2d2db5619314b6b1d"
     },
     {
       "teff_K": 4700,
@@ -282,7 +286,8 @@
       "fractional_difference_from_previous": {
         "T": 0.00020072712231766765,
         "Pgas": -0.026349570754880425
-      }
+      },
+      "comparison_parent_high_sha256": "8670bdc23840b996bfae1ca75e92c0e06c3ea21e1af705e2d2db5619314b6b1d"
     },
     {
       "teff_K": 4800,
@@ -334,7 +339,8 @@
       "fractional_difference_from_previous": {
         "T": 0.0014858185110679933,
         "Pgas": -0.025958082706712293
-      }
+      },
+      "comparison_parent_high_sha256": "8670bdc23840b996bfae1ca75e92c0e06c3ea21e1af705e2d2db5619314b6b1d"
     },
     {
       "teff_K": 4800,
@@ -386,14 +392,15 @@
       "fractional_difference_from_previous": {
         "T": 0.002553271193332929,
         "Pgas": -0.021565812768531645
-      }
+      },
+      "comparison_parent_high_sha256": "8670bdc23840b996bfae1ca75e92c0e06c3ea21e1af705e2d2db5619314b6b1d"
     }
   ],
   "interpolated_knots": [
     {
       "i": 1,
       "j": 2,
-      "from": [
+      "source_knots": [
         [
           0,
           2
@@ -402,58 +409,54 @@
           2,
           2
         ]
-      ],
-      "contains_inferred_source": false
+      ]
     },
     {
       "i": 1,
-      "j": 4,
-      "from": [
+      "j": 1,
+      "source_knots": [
         [
-          0,
+          1,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    {
+      "i": 1,
+      "j": 3,
+      "source_knots": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
           4
+        ]
+      ]
+    },
+    {
+      "i": 2,
+      "j": 1,
+      "source_knots": [
+        [
+          2,
+          0
         ],
         [
           2,
-          4
-        ]
-      ],
-      "contains_inferred_source": true
-    },
-    {
-      "i": 0,
-      "j": 3,
-      "from": [
-        [
-          0,
           2
-        ],
-        [
-          0,
-          4
         ]
-      ],
-      "contains_inferred_source": true
-    },
-    {
-      "i": 1,
-      "j": 3,
-      "from": [
-        [
-          1,
-          2
-        ],
-        [
-          1,
-          4
-        ]
-      ],
-      "contains_inferred_source": true
+      ]
     },
     {
       "i": 2,
       "j": 3,
-      "from": [
+      "source_knots": [
         [
           2,
           2
@@ -462,13 +465,26 @@
           2,
           4
         ]
-      ],
-      "contains_inferred_source": false
+      ]
+    },
+    {
+      "i": 3,
+      "j": 1,
+      "source_knots": [
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          2
+        ]
+      ]
     },
     {
       "i": 3,
       "j": 3,
-      "from": [
+      "source_knots": [
         [
           3,
           2
@@ -477,13 +493,26 @@
           3,
           4
         ]
-      ],
-      "contains_inferred_source": false
+      ]
+    },
+    {
+      "i": 4,
+      "j": 1,
+      "source_knots": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          2
+        ]
+      ]
     },
     {
       "i": 4,
       "j": 3,
-      "from": [
+      "source_knots": [
         [
           4,
           2
@@ -492,17 +521,405 @@
           4,
           4
         ]
-      ],
-      "contains_inferred_source": false
+      ]
     }
   ],
-  "created_utc": "2026-09-27T09:39:33.237669+00:00",
+  "created_utc": "2026-09-27T10:34:11.535854+00:00",
   "selected_for_evolution": true,
-  "changed_coordinate_rows": 14,
+  "changed_coordinate_rows": 10,
   "same_axes_and_domain": true,
   "matching_optical_depth": 100,
-  "unchanged_g59_column": true,
-  "assembly_script_sha256": "8b0ee5ab5f685f7b1e39a1844df7f5a8924774b0b7cf5f5f3a9f550822f465e2",
-  "selection_run": "out/continuous-lifetime-sept27-v11",
-  "selection_receipt": "docs/results/highg_atmosphere_integration_sept27_v1.json"
+  "unchanged_g59_column": false,
+  "assembly_script_sha256": "a270ef1f05559c6c5f7d98f8d8f4cac334778c3a279f0926dee8c39cecb75312",
+  "previous_sources_sha256": "03d869f7dd84877f76c689d893d05ea0fd631d1e28fe23d280c1ae70ad966f18",
+  "cool_source_replacements": [
+    {
+      "teff_K": 4600.0,
+      "log_g": 5.9,
+      "source": "out/cool-atmosphere-energy-form-sept27-v1/t4600_g590",
+      "source_plan": "out/cool-atmosphere-energy-form-sept27-v1/balance_plan.json",
+      "source_plan_sha256": "3662cac401844caf4d4c47c4651016832a91d5e43d770acf41ff9843d9a7dbb9",
+      "diagnostics": {
+        "T": 5766.717939660439,
+        "Pgas": 73862443.83736388,
+        "source_density": 0.00018516817542027473,
+        "column_mass": 92.98729276374928,
+        "flux_error": 3.6813195817941846e-05,
+        "correction": 6.98e-07,
+        "effective_flux_error": 0.00017084641845543924,
+        "hydrostatic_error": 1.881348403731664e-07,
+        "chemical_density_error": 6.10910211307214e-11,
+        "iterations": 27,
+        "depths": 112,
+        "tau_bracket": [
+          96.18086570245218,
+          129.24140914053947
+        ],
+        "optical_depth_range": [
+          6.571744630072092e-08,
+          1846.8394483691827
+        ],
+        "column_mass_range": [
+          0.0013153444780151,
+          229.50090849644099
+        ],
+        "temperature_range": [
+          3380.8323721369143,
+          6665.591726933935
+        ],
+        "density_range": [
+          3.2549282931298414e-09,
+          0.0003776872486497844
+        ]
+      },
+      "input_sha256": {
+        "run.log": "ff94c2391cbaf021ed9907fc8e1047f88cdea655f6840af7b8a763e86b132950",
+        "fort.5": "699eef75199911ebccc6bdffe366018c6412616f2a48a589e64b701633b49c8d",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "fort.9.gz": "b4aacedffb30ebb09ff64664c9728186df9d8c934c9eb969794f7809700dc2e0",
+        "fort.8": "98bbdd8d0466d1072dabe346748c194486b335ce69d6e8211f8378fd87881f5a",
+        "tas": "4cb2c286015ec70e1b73e08cdebcd2c0b16ddd671ab4b84a37435b781467d238"
+      },
+      "fractional_difference_from_previous": {
+        "T": 0.0004750964956210524,
+        "Pgas": -0.0005354073244139279
+      },
+      "comparison_parent_high_sha256": "98e45b3e3f0c6f131c32f29173bdd1c2cc460e606a666284f06b54a16f7a6a61"
+    },
+    {
+      "teff_K": 4600.0,
+      "log_g": 6.05,
+      "source": "out/cool-corner-steps-sept27-v1/t4600_g605",
+      "source_plan": "out/cool-corner-steps-sept27-v1/balance_plan.json",
+      "source_plan_sha256": "dd6c6342b64d6821a48df8d8f9d44b57b4f3c22e6e4e7fb72199e5b96dea7421",
+      "diagnostics": {
+        "T": 5764.7469542141,
+        "Pgas": 101894436.5795223,
+        "source_density": 0.0002653494759242268,
+        "column_mass": 90.81349659024322,
+        "flux_error": 4.4331891922988476e-05,
+        "correction": 8.01e-07,
+        "effective_flux_error": 0.00016333793234946103,
+        "hydrostatic_error": 1.9307602627804954e-07,
+        "chemical_density_error": 4.844880052701228e-11,
+        "iterations": 30,
+        "depths": 112,
+        "tau_bracket": [
+          82.69095068450747,
+          110.97455819029189
+        ],
+        "optical_depth_range": [
+          4.745010332355494e-08,
+          644.3199508171182
+        ],
+        "column_mass_range": [
+          0.0009311923489262097,
+          162.47424389593755
+        ],
+        "temperature_range": [
+          3214.913915794028,
+          6296.900036038747
+        ],
+        "density_range": [
+          3.251054429922555e-09,
+          0.00042161973036801545
+        ]
+      },
+      "input_sha256": {
+        "run.log": "ecdce269873b084056821d59d11cfa3c7bd1453935525dbb7c98c10bc8eee046",
+        "fort.5": "d1d19f3fdfc21a0c02bb1e6da979225fce0c3fcc8aeb315428dbe52d6d9d58fb",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "fort.9.gz": "372ec44a9cf2f94e4c5d7b7a8ad7aa310caeddc236d7b878ecb2606edc457d4d",
+        "fort.8": "3696b5444f9e1d986121f689a8ff500920ccb26add9674b8e984a38f79fca238",
+        "tas": "4cb2c286015ec70e1b73e08cdebcd2c0b16ddd671ab4b84a37435b781467d238"
+      },
+      "fractional_difference_from_previous": {
+        "T": 0.0015919037332476904,
+        "Pgas": 0.0001140259051157777
+      },
+      "comparison_parent_high_sha256": "98e45b3e3f0c6f131c32f29173bdd1c2cc460e606a666284f06b54a16f7a6a61"
+    },
+    {
+      "teff_K": 4625.0,
+      "log_g": 6.1,
+      "source": "out/cool-corner-steps-sept27-v1/t4625_g610",
+      "source_plan": "out/cool-corner-steps-sept27-v1/balance_plan.json",
+      "source_plan_sha256": "dd6c6342b64d6821a48df8d8f9d44b57b4f3c22e6e4e7fb72199e5b96dea7421",
+      "diagnostics": {
+        "T": 5801.516174272002,
+        "Pgas": 103940412.00512074,
+        "source_density": 0.0002675781579894213,
+        "column_mass": 82.5627896799265,
+        "flux_error": 9.048314317805506e-07,
+        "correction": 7.75e-07,
+        "effective_flux_error": 0.00020703465754101646,
+        "hydrostatic_error": 1.9469547551942412e-07,
+        "chemical_density_error": 4.4812042965247656e-11,
+        "iterations": 75,
+        "depths": 112,
+        "tau_bracket": [
+          77.56855339423755,
+          104.10781508877946
+        ],
+        "optical_depth_range": [
+          4.575581756308605e-08,
+          605.0478155512949
+        ],
+        "column_mass_range": [
+          0.0008299260999999997,
+          144.80530000000005
+        ],
+        "temperature_range": [
+          3255.81840388259,
+          6321.801525615443
+        ],
+        "density_range": [
+          3.2356841829916953e-09,
+          0.0004182562470514222
+        ]
+      },
+      "input_sha256": {
+        "run.log": "2684b88566dbfdeb62d469ef469f982dff5641cdecdafef75ff4a2bd72126b26",
+        "fort.5": "5da5ac48e3068fd1a25890fff7baba0daeeab18dfaea263361e783ff495082e2",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "fort.9.gz": "07637ab3d4d318801860de78642ccdc2302aa2d66fb6144e71685b5255a26742",
+        "fort.8": "e783da9017b563eaa57dd77aea77bea8345c0b74d0186a0cff30280d0f6c07d8",
+        "tas": "6eb32ab19cbccb5617e7035ba3c765939883dd30aa114b23beeb812eb9533a47"
+      },
+      "fractional_difference_from_previous": {
+        "T": 0.0014551456978391109,
+        "Pgas": 0.000578145813676656
+      },
+      "comparison_parent_high_sha256": "98e45b3e3f0c6f131c32f29173bdd1c2cc460e606a666284f06b54a16f7a6a61"
+    },
+    {
+      "teff_K": 4600.0,
+      "log_g": 6.1,
+      "source": "out/cool-corner-final-step-sept27-v1/t4600_g610",
+      "source_plan": "out/cool-corner-final-step-sept27-v1/balance_plan.json",
+      "source_plan_sha256": "b5840bfe19ea8451f6c28f043ebc6a6e98957f6b0a21b5c384def7ad60b2852f",
+      "diagnostics": {
+        "T": 5765.345784903308,
+        "Pgas": 113417671.15634666,
+        "source_density": 0.0002991317362739082,
+        "column_mass": 90.09084269714715,
+        "flux_error": 5.367254356358764e-05,
+        "correction": 9.09e-07,
+        "effective_flux_error": 0.00015378527698739486,
+        "hydrostatic_error": 1.947132926005679e-07,
+        "chemical_density_error": 4.45817827099404e-11,
+        "iterations": 26,
+        "depths": 112,
+        "tau_bracket": [
+          78.69691221019511,
+          105.53877927802591
+        ],
+        "optical_depth_range": [
+          4.2581229550669896e-08,
+          455.79245019203427
+        ],
+        "column_mass_range": [
+          0.0008299260109579203,
+          144.80528317252978
+        ],
+        "temperature_range": [
+          3180.625440827291,
+          6189.726614607161
+        ],
+        "density_range": [
+          3.2497076568020766e-09,
+          0.00043682696160118753
+        ]
+      },
+      "input_sha256": {
+        "run.log": "51e81189bd4b19126972dbe30acb0dcd5462d7958451eeec335d34c129c356a8",
+        "fort.5": "9345716a95c34068fd8540050865c7ba2902d535f8681667f7ef91c25b6b048f",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "fort.9.gz": "1b012592aff99999c38e0d1d326ccb1542d5731960af076a465d2ffb8f38e001",
+        "fort.8": "2978d21fb76f5e83d25308eb88070c9fb79eaa6a063b5739fa2b3868b7531351",
+        "tas": "4cb2c286015ec70e1b73e08cdebcd2c0b16ddd671ab4b84a37435b781467d238"
+      },
+      "fractional_difference_from_previous": {
+        "T": 0.003280237993404489,
+        "Pgas": 0.00045766818181736113
+      },
+      "comparison_parent_high_sha256": "98e45b3e3f0c6f131c32f29173bdd1c2cc460e606a666284f06b54a16f7a6a61"
+    },
+    {
+      "teff_K": 4600.0,
+      "log_g": 5.95,
+      "source": "out/cool4600-gravity-ladder-v1/g5.95/final",
+      "source_plan": "out/cool4600-gravity-ladder-v1/g5.95/provenance.json",
+      "source_plan_sha256": "29b2395fb5f728c9dca7dd2c8c14d2eadd429aa71a80e4d2d1172142fa97eedb",
+      "diagnostics": {
+        "T": 5765.486543771357,
+        "Pgas": 82221230.84346549,
+        "source_density": 0.0002087358703668621,
+        "column_mass": 92.25372326705808,
+        "flux_error": 3.112391726212138e-05,
+        "correction": 8.35e-07,
+        "effective_flux_error": 0.00017647407086296418,
+        "hydrostatic_error": 1.897874233325325e-07,
+        "chemical_density_error": 5.674083425333265e-11,
+        "iterations": 27,
+        "depths": 112,
+        "tau_bracket": [
+          91.46497298216103,
+          122.80062601568417
+        ],
+        "optical_depth_range": [
+          5.893079130626069e-08,
+          1297.680374329628
+        ],
+        "column_mass_range": [
+          0.0011723017540411888,
+          204.5428728265616
+        ],
+        "temperature_range": [
+          3348.532227099592,
+          6533.597249573462
+        ],
+        "density_range": [
+          3.2537215527349014e-09,
+          0.0003920454774331086
+        ]
+      },
+      "input_sha256": {
+        "run.log": "d8cb6aac9c0e3d9c154cbd225b100e71675ed1dbdf7b7d37aac68091dab09fdd",
+        "run.log.gz": "1a83e95bd0cf026cafee4ae3b8445ee0fdb2d47f1ce87a806c4b7ad5dfd11ca1",
+        "fort.5": "cf41e9a6070bf7d35c67572ac245c4d126481a27cf7699466cb2d6df0812e408",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "fort.9.gz": "bc3458c8348871ab94d2720df108eadc5e90635e33d0b8326eaa95e9b0f75a21",
+        "fort.9": "eddb9e43d0c1edd0bcc459f66dde7189937084f710852a6b7881aaa9c6d29e0e",
+        "fort.8": "530748fa564d16a5921e446b5076dbee489a3999d631810807989956243975ec",
+        "tas": "4cb2c286015ec70e1b73e08cdebcd2c0b16ddd671ab4b84a37435b781467d238"
+      },
+      "fractional_difference_from_previous": {
+        "T": 0.0010214117427076452,
+        "Pgas": -0.0002963513499633086
+      },
+      "comparison_parent_high_sha256": "98e45b3e3f0c6f131c32f29173bdd1c2cc460e606a666284f06b54a16f7a6a61"
+    }
+  ],
+  "interpolated_gravity_knots": [
+    {
+      "i": 1,
+      "j": 1,
+      "source_knots": [
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    {
+      "i": 1,
+      "j": 3,
+      "source_knots": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ]
+      ]
+    },
+    {
+      "i": 2,
+      "j": 1,
+      "source_knots": [
+        [
+          2,
+          0
+        ],
+        [
+          2,
+          2
+        ]
+      ]
+    },
+    {
+      "i": 2,
+      "j": 3,
+      "source_knots": [
+        [
+          2,
+          2
+        ],
+        [
+          2,
+          4
+        ]
+      ]
+    },
+    {
+      "i": 3,
+      "j": 1,
+      "source_knots": [
+        [
+          3,
+          0
+        ],
+        [
+          3,
+          2
+        ]
+      ]
+    },
+    {
+      "i": 3,
+      "j": 3,
+      "source_knots": [
+        [
+          3,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ]
+    },
+    {
+      "i": 4,
+      "j": 1,
+      "source_knots": [
+        [
+          4,
+          0
+        ],
+        [
+          4,
+          2
+        ]
+      ]
+    },
+    {
+      "i": 4,
+      "j": 3,
+      "source_knots": [
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          4
+        ]
+      ]
+    }
+  ],
+  "selection_run": "out/continuous-lifetime-sept27-v13",
+  "selection_receipt": "docs/results/highg_atmosphere_integration_sept27_v2.json"
 }

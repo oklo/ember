@@ -1,0 +1,38 @@
+{
+  "created_utc": "2026-09-27T10:36:54.825145+00:00",
+  "scope": "Five revalidated atmosphere sources replace inferred cool high-gravity entries at optical depth100. No domain or matching-law changes.",
+  "actual_early_queries_exact": 5932,
+  "actual_late_queries_supported": 67,
+  "late_maximum_temperature_fractional_change": 0.002367154685551709,
+  "late_maximum_pressure_fractional_change": 0.01100534058203484,
+  "late_maximum_derivative_error": 8.57648529972721e-09,
+  "selected_for_evolution": true,
+  "current_checkpoint_query_exact": true,
+  "exact_driver_replay_intervals": 3,
+  "exact_final_physical_checkpoint": true,
+  "only_restart_identity_changed": "atmosphere.hydrogen_envelope.high_gravity",
+  "new_high_gravity_identity": "bd67f50e6b835750",
+  "hashes": {
+    "high.dat": "cb61da0e6dbee4e4a390eae9e028ddc8462d1e8bb8ffef760a0089c4d454c2ae",
+    "sources.json": "caeb91e8f03573822bc3aae9be6ee14eb90cd103c8a994d5adea342a670f1362",
+    "queries.txt": "9f2aeaf97e90100e72cd050271b9cf2ab41332844a238eaa87fba071d2bb342f",
+    "baseline_queries.jsonl": "7588b113b541ee859f1adbe299baecdda602f0c72cba14762c8531655b3770d2",
+    "candidate_queries.jsonl": "d31d5a8fe375aac3873b84f4133bd9f5422208089eaaaf4daa5fb2245b0c303f",
+    "current_query.txt": "07baf13f85eca13438b4d88ec169768656ffc6e1e838c615a067c97f8325671c"
+  },
+  "accepted_sources": 5,
+  "selection_utc": "2026-09-27T11:07:07.555543+00:00",
+  "production_run": "out/continuous-lifetime-sept27-v13",
+  "previous_retained_accepted": 8564,
+  "selection_age_years": 3585155270962.023,
+  "production_start_physical_history_exact": true,
+  "physical_payload_sha256": "d088c6c2f91f62f89a2c4e0799ef47c740c87c4b0952f397cffa3e85b440050c",
+  "executable_sha256": "8e41373a113b9f72e5d27231a702663ffa83b99c016e28115414f90a372b2846",
+  "portable_input_files": 55,
+  "portable_input_manifest_sha256": "efaa5ae4b525ce93eb069aab8748482068783537d9939e053f15aeb59013cdc1",
+  "remaining_limitations": [
+    "Gas opacity only; trace atmospheric helium remains approximated.",
+    "Warm anchors and interpolated knots retain the source qualifications in sources.json.",
+    "No extension beyond the4600\u20134800 K/logg5.9\u20136.1 high-gravity family."
+  ]
+}

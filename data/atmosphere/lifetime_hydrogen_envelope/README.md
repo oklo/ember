@@ -10,21 +10,22 @@ atmospheric isotope correction below a declared helium-3 limit. The nearly
 pure-hydrogen sources neglect trace atmospheric helium in the matching
 pressure and temperature. Density always uses the actual stellar composition.
 
-`high.dat` combines solved gas atmospheres with **inferred** temperature/gravity
-rows. Seven revalidated source columns replace part of the inferred grid;
-`sources.json` lists their inputs and checks. Intermediate knots interpolate
-these columns. The 4600 K, log g = 6.1 corner and some other rows remain inferred.
-Coverage ends at 4600 K and log g = 6.1. These remaining approximations must be
-checked before attributing a late instability to the star independently of its
-atmosphere treatment. Helium mass fractions above the declared limits are rejected.
+`high.dat` contains solved gas atmospheres and explicit interpolated knots.
+The complete 4600 K gravity row and the 4625 K, log g = 6.1 column now have
+independently checked source solutions. Older warm anchors retain their
+recorded provenance. The grid covers 4600–4800 K and log g = 5.9–6.1;
+`sources.json` identifies the source calculations and remaining interpolation.
+Trace atmospheric helium is still approximated, and helium mass fractions
+above the declared limits are rejected.
 
-The replacement preserves all 5932 checked early boundary evaluations exactly
-and supports all 67 saved late structures. Matching temperature changes by at
-most 0.07160% and pressure by 0.9396% on those late structures. A three-step
-stellar replay and its final physical checkpoint are identical before and after
-the update. These checks establish compatibility and measured source agreement,
-not complete coverage of future models. See
-[the integration checks](../../../docs/results/highg_atmosphere_integration_sept27_v1.json).
+The latest source replacement preserves all 5932 checked early boundary
+queries exactly and supports all 67 saved late structures. On the late
+structures, matching temperature changes by at most 0.2367% and pressure by
+1.101%. A three-step stellar replay and its final physical checkpoint are
+identical before and after the update. The actual continuation also preserves
+its initial physical state. These checks establish compatibility over the
+sampled structures; future models still require coverage checks. See
+[the integration checks](../../../docs/results/highg_atmosphere_integration_sept27_v2.json).
 
 The manifest selects composition and gravity intervals. Each interval queries
 covered source endpoints, preserving the original full-composition boundary
