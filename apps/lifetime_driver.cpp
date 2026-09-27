@@ -121,6 +121,9 @@ int lifetime_main(int argc,char** argv) {
     const double linearized_burning=optional_number("linearized_burning");
     if(linearized_burning!=0 && linearized_burning!=1)
       throw std::invalid_argument("linearized_burning must be zero or one");
+    const double abundance_cap=cfg.values.contains("abundance_cap")?cfg.number("abundance_cap"):.001;
+    if(!std::isfinite(abundance_cap) || abundance_cap<=0 || abundance_cap>.01)
+      throw std::invalid_argument("abundance cap must lie in (0,0.01]");
     const double coupling_stop=optional_number("coupling_stop_tolerance");
     const double material_heat=optional_number("material_heat_tolerance");
     const double verification_residual=optional_number("verification_residual_tolerance");
@@ -229,6 +232,7 @@ int lifetime_main(int argc,char** argv) {
     identity.number("solver.homogeneous_abundance_tolerance",std::min(1e-15,abundance_tolerance));
     if(structure_prediction=="linear")identity.number("solver.structure_prediction",1);
     if(linearized_burning==1)identity.number("solver.linearized_burning",1);
+    if(abundance_cap!=.001)identity.number("solver.abundance_cap",abundance_cap);
     if(collision_radius>0)identity.number("solver.collision_taylor_radius",collision_radius);
     if(eos_radius>0)identity.number("solver.eos_taylor_radius",eos_radius);
     if(buoyancy_spacing>0)identity.number("solver.buoyancy_reuse_spacing",buoyancy_spacing);
@@ -323,6 +327,7 @@ int lifetime_main(int argc,char** argv) {
     if(screened_core)later.microscopic=&envelope_heat;
     EvolutionOptions options;options.relaxation.zone_threads=static_cast<std::size_t>(threads);options.abundance_tolerance=abundance_tolerance;
     options.linearized_burning=linearized_burning==1;
+    options.max_abundance_change=abundance_cap;
     options.homogeneous_abundance_tolerance=std::min(1e-15,abundance_tolerance);
     options.coupling_stop_tolerance=coupling_stop;
     if(material_heat>0)options.material_heat_tolerance=material_heat;

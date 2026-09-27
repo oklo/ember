@@ -5,7 +5,7 @@ conservative burning/diffusion solver are documented in
 [FORWARD_EVOLUTION.md](FORWARD_EVOLUTION.md). The historical experiments
 below retain their original physical selections.
 
-**Current status:** the shared GS98 metal mixture, Ledoux transport and
+**Historical status:** the shared GS98 metal mixture, Ledoux transport and
 extended 72-cell non-grey gas atmosphere family have reached 2.85 trillion years.
 Mesh and timestep refinements are complete through two trillion years:
 doubling the mesh changes luminosity by +.06163%, fourfold tighter timestep
@@ -21,6 +21,30 @@ apply. The four-plane sources and frozen
 boundary described here belong to the retained `early` transport option.
 The optional helium-rich non-grey atmosphere grid and its independent source
 checks are described in [NONGREY.md](NONGREY.md).
+
+## Lifetime driver: abundance change per interval
+
+The common `--lifetime` driver accepts `abundance_cap`, the maximum absolute
+mass-fraction change allowed within an interval. Its default is 0.001; values
+must be finite and in (0, 0.01]. A nondefault value enters restart identity.
+The cap supplements the full-step/two-half-step error estimate and the independent
+conservation checks; it does not replace either.
+
+A convective envelope can incorporate a cell whose composition differs from
+its own. Instantaneous mixing then produces a finite abundance change even
+as the trial interval shrinks. At the current envelope boundary, m/M = 0.9838,
+that change is 0.001316 in hydrogen. The default cap repeatedly rejected it;
+continued halving eventually reached the numerical limit of the thermal solve.
+
+A 20 Myr comparison supports a cap of 0.003 for this event. Caps 0.002 and
+0.003 give identical endpoints. Against a control limited to 1 Myr intervals,
+luminosity differs by 0.001955% and the largest helium-3 profile difference
+is 0.02269% of its peak abundance. Convective mass and boundary counts agree,
+and all accepted time and conservation checks pass. The control stopped
+0.009277 yr short of its requested endpoint at clock resolution; that age
+difference is retained in the comparison. This tests the current boundary
+crossing, not rapid helium-3 ignition.
+[Comparison and configuration checks](results/convective_boundary_step_limit_sept27_v1.json).
 
 ## Historical 20-Gyr checkpoint
 
