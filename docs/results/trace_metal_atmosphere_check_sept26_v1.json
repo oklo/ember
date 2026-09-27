@@ -1,0 +1,93 @@
+{
+  "created_utc": "2026-09-27T02:26:35.612194+00:00",
+  "groups": [
+    {
+      "location": "t2800_g300",
+      "comparisons": [
+        {
+          "delta_Z": 2e-05,
+          "relative_response": {
+            "T": 0.00015689690953313296,
+            "Pgas": -0.0008141089911266608
+          },
+          "linear_response_at_delta_Z_1e8": {
+            "T": 7.844845476656648e-08,
+            "Pgas": -4.0705449556333036e-07
+          }
+        },
+        {
+          "delta_Z": 0.0002,
+          "relative_response": {
+            "T": 0.0015658561327926979,
+            "Pgas": -0.00813563126058825
+          },
+          "linear_response_at_delta_Z_1e8": {
+            "T": 7.829280663963489e-08,
+            "Pgas": -4.067815630294125e-07
+          }
+        }
+      ]
+    },
+    {
+      "location": "t3000_g350",
+      "comparisons": [
+        {
+          "delta_Z": 2e-05,
+          "relative_response": {
+            "T": 0.00011893686354724764,
+            "Pgas": -0.0007568821787481417
+          },
+          "linear_response_at_delta_Z_1e8": {
+            "T": 5.946843177362381e-08,
+            "Pgas": -3.7844108937407084e-07
+          }
+        },
+        {
+          "delta_Z": 0.0002,
+          "relative_response": {
+            "T": 0.0011826345916567949,
+            "Pgas": -0.007510417459936747
+          },
+          "linear_response_at_delta_Z_1e8": {
+            "T": 5.9131729582839744e-08,
+            "Pgas": -3.7552087299683735e-07
+          }
+        }
+      ]
+    },
+    {
+      "location": "t3100_g450",
+      "comparison": "missing accepted matched Z=.02 control; excluded"
+    },
+    {
+      "location": "t2800_g525",
+      "comparisons": [
+        {
+          "delta_Z": 2e-05,
+          "relative_response": {
+            "T": -8.593864395667339e-07,
+            "Pgas": -0.0005589653850900378
+          },
+          "linear_response_at_delta_Z_1e8": {
+            "T": -4.296932197833669e-10,
+            "Pgas": -2.794826925450189e-07
+          }
+        },
+        {
+          "delta_Z": 0.0002,
+          "relative_response": {
+            "T": -7.870012512123381e-06,
+            "Pgas": -0.005559394528436901
+          },
+          "linear_response_at_delta_Z_1e8": {
+            "T": -3.9350062560616905e-10,
+            "Pgas": -2.77969726421845e-07
+          }
+        }
+      ]
+    }
+  ],
+  "accepted_columns": 11,
+  "rejected_columns": 1,
+  "interpretation": "Paired non-grey source responses support a negligible atmosphere effect of the selected 1e-8 absolute metal change. Scaled values assume local linear response; they are estimates, not certified error bounds. The failed 3100 K/log g 4.5 control is excluded. No source acceptance threshold changed."
+}

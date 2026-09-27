@@ -78,7 +78,12 @@ int main() {
     std::istringstream incomplete(fixture(0));CompositionAtmosphereGrid masked(eos,incomplete,proxy);
     FixedMetalAtmosphere missing(eos,masked,1e-8);
     check(rejects([&]{missing.eval(t,g,ref);}),"incomplete source stencil rejected");
-    check(rejects([&]{FixedMetalAtmosphere invalid(eos,source,1e-7);}),"large fixed-metal approximation rejected");
+    FixedMetalAtmosphere measured(eos,source,2e-5);
+    c=composition(.020019);const auto measured_state=measured.eval(t,g,c);
+    check(eos.last==c && measured_state.T==a.T && measured_state.P==a.P,
+        "explicit measured small-metal allowance preserves actual composition");
+    check(rejects([&]{measured.eval(t,g,composition(.020021));}),"measured allowance remains bounded");
+    check(rejects([&]{FixedMetalAtmosphere invalid(eos,source,2.1e-4);}),"large fixed-metal approximation rejected");
   }catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}
   return failed?1:0;
 }

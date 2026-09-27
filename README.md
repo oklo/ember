@@ -6,45 +6,48 @@ Ember is a one-dimensional stellar evolution code written in C++23. It calculate
 
 ## Research status — September 26, 2026
 
-The target is one continuous calculation from a Hayashi starting model through hydrogen burning and helium-white-dwarf cooling to **100 K**. Later environmental heating and nucleon decay are conditional extensions. The same code should determine which lower-mass objects sustain hydrogen burning and which cool as brown dwarfs. The complete calculation is not yet available.
+The objective is one continuous calculation from a Hayashi starting model,
+through hydrogen burning and helium-white-dwarf cooling, to extreme cold and
+conditional disappearance through nucleon decay. The same program should
+resolve the stellar/brown-dwarf boundary as initial mass and composition vary.
+The full calculation is not yet established.
 
-The common evolution program now follows the same star from a Hayashi start
-to **4 Gyr**, with initial D/pp/CN burning, plasma losses and checked
-whole-star convective mixing. Composition heat is included after initial D
-exhaustion. At 1 Gyr it has **2765 K**, **0.1264 solar radii** and **99.17%**
-nuclear support; by 4 Gyr it sustains hydrogen burning. The retained sequence
-has **1034 accepted steps**, no rejected steps, and **9.785 CPU minutes**
-including material loading, excluding atmosphere preparation and controls.
-The [PMS figure](docs/reports/2026-09-26/pms_main_sequence.pdf) shows contraction
-through main-sequence arrival. [Transport and conservation assessment](docs/results/convective_transport_integration_sept26_v1.json).
+The common `ember-evolve --lifetime` program follows the same initially
+0.1-solar-mass star to **2.102 Tyr**, with **5931 accepted intervals** in
+**66.16 CPU minutes / 35.41 elapsed minutes**, including loading but excluding
+source-table preparation. It remains fully convective at **3020 K**, with
+hydrogen **X = 0.4170**. All accepted isotope and energy checks pass.
+An overly restrictive atmosphere metal allowance caused **28 rejected trials**
+and a final rounding-sensitive audit failure after repeated timestep reductions.
+[Retained calculation](docs/results/continuous_lifetime_sept26_v2.json).
 
-On the quiet main sequence, a matched timestep-ceiling increase reduces
-1–4-Gyr evolution from **301** to **15** accepted steps and uses **4.534 times
-less CPU**. The surface-temperature difference is **6.936e-5 K**, with all
-local accuracy and independent conservation checks unchanged.
-[Matched comparison](docs/results/lifetime_step_ceiling_sept26_v1.json).
+The driver now selects the existing hot microscopic H/He/metal transport with
+conservative mixing heat in the cool convective envelope. A fresh Hayashi run
+uses this prescription and a broader, measured atmosphere metal allowance.
+Both changes are explicit configuration choices. Existing broad main-sequence
+atmosphere tables join smoothly to the contraction boundary. Source masks and
+conservation acceptance criteria remain unchanged. **All 74 tests pass** in an
+isolated build with the required datasets.
+[Common driver](docs/LIFETIME_DRIVER.md),
+[transport checks](docs/results/envelope_transport_integration_sept26_v1.json),
+[atmosphere comparisons](docs/results/archived_ms_atmosphere_check_sept26_v1.json).
 
-The well-mixed approximation is checked against convective times, estimated
-microscopic separation and stellar sensitivity to uncertain heat transport.
-It rejects a radiative species boundary rather than silently suppressing its
-flux. Radiative microscopic transport, extended atmosphere composition
-coverage and the full continuous lifetime remain unfinished. New gas-opacity
-sources at **X = 0.69** and **X = 0.65** are in preparation; they are not yet
-accepted atmosphere boundaries. Deuterium exhaustion no longer forces an
-unsupported cool diffusion calculation.
+Continuous boundary selection for substantial settling and WD cooling remains
+unfinished. The microscopic metal law assumes complete ionization; unsupported
+cool radiative layers are rejected. Initial deuterium is handled in a checked
+whole-star mixing approximation. Nuclear burning includes the pp chain and
+explicit C12/C13/N14 conversion, with Solar Fusion III rates in the common driver;
+this is not a full CNO network.
 
-Separate long-term calculations include microscopic diffusion and metal settling. The pre-flash calculation reaches **4.002 Tyr**, **4612 K**, and central hydrogen **X = 3.528e-8**. Hydrogen burning continues outside the depleted core. A continuation with a white-dwarf atmosphere develops a helium-3 shell pulse.
+Separate late-evolution calculations develop a helium-3 shell pulse after an
+atmosphere adjustment and then turn toward cooling. They establish a possible
+instability under that boundary treatment, not atmosphere-independent ignition.
+The continuous calculation tests whether the pulse survives a consistent history.
+[Working paper](docs/reports/2026-09-26/ember_status_and_future.pdf),
+[Fortran comparison](docs/F77_LBA97_COMPARISON.md).
 
-| Flash and cooling calculation | Time from common pre-flash model | Effective temperature | Nuclear power |
-| --- | ---: | ---: | ---: |
-| Finite mixing from onset, 1983 mass points | 5.744 Myr | 5903 K | 1.126e31 erg/s |
-| Alternative mixing history, 2115 mass points | 42.48 Myr | 4771 K | 3.166e30 erg/s |
-
-These are alternative histories, not consecutive parts of one trajectory. Both turn toward cooling, but nuclear burning still supplies **55.85%** of the alternative model's light. The pulse's full strength, spatial accuracy and independence from the atmosphere adjustment remain unresolved. The continuous PMS-started calculation will test whether the pulse survives a consistent composition and atmosphere history.
-
-The paper retains the Ember–MESA comparisons, the LBA97 opacity-map comparison, and the lifetime timeline. The [late cooling figure](docs/reports/2026-09-26/late_cooling.pdf) and [standalone HR comparison](docs/figures/2026-09-21/ember_two_sequences_hr.png) show the unchanged late-evolution endpoints. The separate [Fortran reconstruction](https://github.com/oklo/Henyey) seeks to reproduce LBA97's assumptions and methods.
-
-The public source does not yet contain all physics and numerical updates used for these calculations. The paper and README describe results ahead of that source snapshot.
+The coherent source update is prepared locally. Public runtime/test-data
+availability and the shorter paper are still being completed.
 
 ## Building
 

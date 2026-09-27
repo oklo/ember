@@ -2,6 +2,7 @@
 #include "ember/eos_variable_metal.hpp"
 #include "ember/constants.hpp"
 #include "ember/metal_cn_transport.hpp"
+#include "ember/metal_microscopic_transport.hpp"
 #include "ember/controller.hpp"
 #include <algorithm>
 #include <cmath>
@@ -33,6 +34,8 @@ inline MetalCNVector physical_source(const PPCNNetwork& nuclear,double T,double 
 struct HomogeneousCheck {
   double maximum_heat_fraction{},maximum_gross_heat_fraction{},travel_years{},D_gradient_estimate{};
   double burn_gradient_estimate{},drift_gradient_proxy{},kinetic_heat_proxy{};
+  double convective_mass_fraction{1},maximum_relative_mixing_gradient{};
+  std::size_t radiative_boundaries{};
 };
 // Instantaneous mixing is selected only during initial-D contraction. A
 // completely mixed star has no boundary through which microscopic settling
@@ -89,6 +92,70 @@ inline HomogeneousCheck check_initial_convection(const Model& m,const Physics& p
   if(!omit_material_heat && (out.burn_gradient_estimate>1e-8
         || out.drift_gradient_proxy>1e-6 || out.kinetic_heat_proxy>.05))
     throw std::domain_error("whole-star convective approximation exceeds assessed transport range");
+  return out;
+}
+
+// Assess the instantaneous-mixing approximation region by region. Species
+// crossing a radiative boundary use the actual microscopic provider. Within
+// a mixed region, flux/(rho D) estimates the gradient needed for convection
+// to carry the reconstructed total rate. The omitted cool drift/heat retain
+// the same order-of-magnitude estimates used for the wholly convective star.
+inline HomogeneousCheck check_envelope_transport(const Model& m,const Physics& physics,
+    const MetalMicroscopicTransport& transport,std::span<const MetalSpeciesVector> rates,
+    double minimum_microscopic_T,double maximum_relative_gradient) {
+  if(rates.size()+1!=m.size() || !(maximum_relative_gradient>0))
+    throw std::domain_error("envelope transport assessment: missing rates or invalid mixing allowance");
+  for(const auto& c:m.comp)if(c[Species::H2]!=0)
+    throw std::domain_error("envelope transport assessment requires initial D exhaustion");
+  const auto regions=convective_mixing_regions(m,physics);
+  const auto mixing=convective_mixing_faces(m,physics);const auto weights=nodal_mass_weights(m);
+  HomogeneousCheck out;out.convective_mass_fraction=0;
+  for(const auto [begin,end]:regions) {
+    if(end-begin>1) {
+      std::array<double,3> gradient{};double travel=0;
+      for(std::size_t i=begin;i<end;++i) {
+        if(m.comp[i]!=m.comp[begin])throw std::domain_error("instantaneous convective region is not homogeneous");
+        out.convective_mass_fraction+=weights[i]/m.M;
+      }
+      for(std::size_t i=begin;i+1<end;++i) {
+        const double T=std::sqrt(m.T(i)*m.T(i+1)),rho=.5*(m.rho(i)+m.rho(i+1));
+        const double r=.5*(m.r(i)+m.r(i+1)),mass=.5*(m.m[i]+m.m[i+1]),dr=m.r(i+1)-m.r(i);
+        if(!(mixing[i].velocity>0 && mixing[i].diffusivity>0))
+          throw std::domain_error("convective region lacks finite mixing");
+        travel+=dr/mixing[i].velocity/31557600.;
+        auto convection_rate=rates[i];
+        if(std::min(m.T(i),m.T(i+1))>=minimum_microscopic_T) {
+          const auto micro=transport.metal_eval(i,m.m[i],m.m[i+1],m.y[i],m.comp[i],m.y[i+1],m.comp[i+1],false);
+          for(std::size_t k=0;k<3;++k)convection_rate[k]-=micro.species.rate[k];
+        }else {
+          const auto e=physics.eos->eval(T,rho,m.comp[i]);const double Hp=e.P/(rho*constants::G*mass/(r*r));
+          const double v=std::sqrt(constants::kB*T/constants::amu),number=rho/constants::amu,e2=2.307077552e-19;
+          const double mobility=std::max(v/(number*1e-16),v*std::pow(constants::kB*T,2)/(number*e2*e2));
+          out.drift_gradient_proxy+=56*mobility/mixing[i].diffusivity*dr/Hp;
+          out.kinetic_heat_proxy=std::max(out.kinetic_heat_proxy,
+              4*M_PI*r*r*rho*mobility/Hp*(20*constants::kB*T/constants::amu)/std::max(std::abs(m.y[i].L),1.));
+        }
+        for(std::size_t k=0;k<3;++k)
+          gradient[k]+=std::abs(convection_rate[k])*dr/(4*M_PI*r*r*rho*mixing[i].diffusivity);
+      }
+      out.travel_years=std::max(out.travel_years,travel);
+      for(std::size_t k=0;k<3;++k) {
+        out.burn_gradient_estimate=std::max(out.burn_gradient_estimate,gradient[k]);
+        const double abundance=k==2?m.comp[begin].Z():m.comp[begin].X[k];
+        out.maximum_relative_mixing_gradient=std::max(out.maximum_relative_mixing_gradient,
+            gradient[k]/std::max(abundance,1e-12));
+      }
+    }
+    if(end<m.size()) {
+      const auto i=end-1;++out.radiative_boundaries;
+      // No cool fallback for species: this verifies the actual law's domain.
+      (void)transport.metal_eval(i,m.m[i],m.m[i+1],m.y[i],m.comp[i],m.y[i+1],m.comp[i+1],false);
+    }
+  }
+  if(out.maximum_relative_mixing_gradient>maximum_relative_gradient)
+    throw std::domain_error("instantaneous convection requires finite mixing at this abundance gradient");
+  if(out.drift_gradient_proxy>1e-6 || out.kinetic_heat_proxy>.05)
+    throw std::domain_error("cool convective envelope exceeds assessed drift/heat range");
   return out;
 }
 

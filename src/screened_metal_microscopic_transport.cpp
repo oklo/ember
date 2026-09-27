@@ -60,7 +60,7 @@ template<std::size_t N,bool abundances=true> MetalMicroscopicFaceResponse evalua
   const D ltb=.5*(lt[0]+lt[1]),Tb=exp(ltb);
   const D xb=.5*(fraction[0][0]+fraction[1][0]),yb=.5*(fraction[0][1]+fraction[1][1]);
   const D zb=.5*(fraction[0][2]+fraction[1][2]);
-  Composition c=a;for(std::size_t k=0;k<NSPEC;++k)c.X[k]=.5*(a.X[k]+b.X[k]);
+  const auto c=mean_composition(a,b);
   const double ne=c.mu_elec_inv()*constants::NA*rhob.value;
   const ElectronGas electrons;
   const auto electron=N>0?electrons.eval_with_derivatives(Tb.value,rhob.value,c):electrons.eval(Tb.value,rhob.value,c);

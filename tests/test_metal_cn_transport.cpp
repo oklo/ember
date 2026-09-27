@@ -36,6 +36,17 @@ int main() {
   check(before.molality==after.molality && std::abs(before.metal_fraction-after.metal_fraction)<1e-16,"material conversion preserves actual CN and total metals");
   check(explicit_cn_material(converted)==converted,"explicit composition conversion is idempotent");
   auto left=composition(.2,.1,.7,.6),right=composition(.55,.8,1.3,1.4);
+  const auto midpoint=mean_composition(left,right);
+  const auto physical_left=metal_cn_abundances(left),physical_right=metal_cn_abundances(right);
+  const auto physical_midpoint=metal_cn_abundances(midpoint);
+  for(std::size_t k=0;k<METAL_CN_SIZE;++k)
+    check(std::abs(physical_midpoint[k]-.5*(physical_left[k]+physical_right[k]))<2e-16,
+        "face average preserves the actual isotope and inert-metal inventories");
+  check(midpoint==mean_composition(right,left),"face composition is independent of endpoint order");
+  auto incompatible=right;incompatible.cn_molality.reset();
+  check(rejects([&]{mean_composition(left,incompatible);}),"face average rejects inconsistent CN inventory");
+  incompatible=right;incompatible.cn_mass_convention=CNMassConvention::fixed_metal_proxy;
+  check(rejects([&]{mean_composition(left,incompatible);}),"face average rejects mixed metal conventions");
   for(double sign:{-1.,1.}) {
     const auto base=material_flux(left,right,sign);const auto f=common_metal_cn_flux(base,left,right,true);
     double metals=0;for(std::size_t row=2;row<6;++row)metals+=f.rate[row];

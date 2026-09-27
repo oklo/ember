@@ -97,6 +97,13 @@ def main():
                        expected=1, configuration=changed)
         assert "checkpoint" in rejected.stderr and "configuration.energy_tolerance" in rejected.stderr
 
+        changed = configuration_file("changed-transport.txt", {
+            "transport": "screened_core", "screened_heat_upper_T_K": "3000000",
+            "maximum_relative_mixing_gradient": ".01"})
+        rejected = run("transport-change", ("--restart", str(work / "prefix/final.checkpoint")),
+                       expected=1, configuration=changed)
+        assert "checkpoint" in rejected.stderr
+
         changed = configuration_file("changed-atmosphere-approximation.txt", {
             "atmosphere_metals": "bounded_fixed_Z", "atmosphere_maximum_delta_Z": "1e-8"})
         rejected = run("atmosphere-approximation-change", ("--restart", str(work / "prefix/final.checkpoint")),

@@ -1,0 +1,59 @@
+{
+  "created_utc": "2026-09-27T02:26:35.611465+00:00",
+  "table": "data/atmosphere/nongrey_gs98_z020_x085_t4000_v1.dat",
+  "table_sha256": "ebb45869759deaa3ca2a0fa40e1c3db2828bf1998a696cf93990fba0e6dbc914",
+  "rows": [
+    {
+      "name": "x6500_y0400",
+      "XH": 0.65,
+      "X3": 0.04,
+      "Teff_K": 2800,
+      "log_g": 5.25,
+      "independent_T": 4056.6410222125332,
+      "independent_Pgas": 19342408.38146122,
+      "table_T": 4060.0633858761385,
+      "table_Pgas": 19371490.436377548,
+      "independent_over_table_minus_one": {
+        "T": -0.0008429335550550476,
+        "Pgas": -0.0015012812262350517
+      },
+      "CPU_seconds": 714.314171,
+      "validation_sha256": "4b7eeacdfcb4432c0523dad8277432cf4dde2cdce003348d462b87c4637caf44"
+    },
+    {
+      "name": "x7000_y0400",
+      "XH": 0.7,
+      "X3": 0.04,
+      "Teff_K": 2800,
+      "log_g": 5.25,
+      "independent_T": 4043.2209231726674,
+      "independent_Pgas": 19220734.638090666,
+      "table_T": 4042.9420693168895,
+      "table_Pgas": 19240540.325878184,
+      "independent_over_table_minus_one": {
+        "T": 6.897300307473486e-05,
+        "Pgas": -0.0010293727438038802
+      },
+      "CPU_seconds": 557.044523,
+      "validation_sha256": "1cfd8d31950758c8f061ce3290c983d265b2f6115d1205cda3a1155d23145c02"
+    },
+    {
+      "name": "x6750_y0200",
+      "XH": 0.675,
+      "X3": 0.02,
+      "Teff_K": 2800,
+      "log_g": 5.25,
+      "independent_T": 4048.887769980073,
+      "independent_Pgas": 19286662.79678388,
+      "table_T": 4050.6231095658663,
+      "table_Pgas": 19311662.89025927,
+      "independent_over_table_minus_one": {
+        "T": -0.0004284129969276407,
+        "Pgas": -0.0012945593353330676
+      },
+      "CPU_seconds": 687.725602,
+      "validation_sha256": "348093f2281c42199ebdc9f8c3d4ff3f81f649ba137ebf8f1677245ee509cb60"
+    }
+  ],
+  "interpretation": "Independent columns compared with native multilinear log T/P interpolation in selected MS table. Comparisons quantify interpolation/source differences, not total atmosphere uncertainty. No live table edited."
+}

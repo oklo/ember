@@ -83,7 +83,7 @@ class ConditionalMetalEnvelopeHeat final:public ember::MetalMicroscopicTransport
     }
     const D lt=.5*(ltlo+lthi),T=exp(lt);
     const D rho=.5*(exp(D::variable(lo.lnrho,1))+exp(D::variable(hi.lnrho,5))),lrho=log(rho);
-    auto c=a;for(std::size_t k=0;k<ember::NSPEC;++k)c.X[k]=.5*(a.X[k]+b.X[k]);
+    const auto c=ember::mean_composition(a,b);
     const auto material=conduction_.eval(T.value,rho.value,c);
     if(!(material.kappa>0))throw std::domain_error("conditional heat: invalid material opacity");
     D cold_K(4*ember::constants::a_rad*ember::constants::c*T.value*T.value*T.value/(3*rho.value*material.kappa));

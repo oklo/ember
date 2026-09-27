@@ -2,6 +2,7 @@
 #include "ember/contracting_seed.hpp"
 #include "ember/convective_evolution_checks.hpp"
 #include "ember/convective_material_heat.hpp"
+#include "ember/envelope_transport.hpp"
 #include "ember/evolution_checkpoint.hpp"
 #include "ember/runtime_identity.hpp"
 #include "ember/atmosphere_deuterium.hpp"
@@ -94,6 +95,14 @@ int lifetime_main(int argc,char** argv) {
     const double structure_tolerance=cfg.number("structure_tolerance"),species_tolerance=cfg.number("species_tolerance"),energy_tolerance=cfg.number("energy_tolerance");
     const double abundance_tolerance=cfg.number("coupling_abundance_tolerance");
     const double inventory_tolerance=cfg.number("inventory_abundance_tolerance");
+    const auto transport_selection=cfg.values.contains("transport")?cfg.get("transport"):"whole_convective";
+    if(transport_selection!="whole_convective" && transport_selection!="screened_core")
+      throw std::invalid_argument("unknown lifetime transport selection");
+    const bool screened_core=transport_selection=="screened_core";
+    const double heat_upper=screened_core?cfg.number("screened_heat_upper_T_K"):minimum_temperature;
+    const double mixing_gradient=screened_core?cfg.number("maximum_relative_mixing_gradient"):0;
+    if(screened_core && (!(heat_upper>minimum_temperature) || !(mixing_gradient>0 && mixing_gradient<=.01)))
+      throw std::invalid_argument("invalid screened-core heat overlap or mixing approximation");
     const auto atmosphere_metals=cfg.values.contains("atmosphere_metals")?cfg.get("atmosphere_metals"):"strict";
     const double atmosphere_delta_Z=cfg.values.contains("atmosphere_maximum_delta_Z")
         ?cfg.number("atmosphere_maximum_delta_Z"):0;
@@ -116,6 +125,11 @@ int lifetime_main(int argc,char** argv) {
     initial.cn_molality=initial_gs98_cn(initial);initial=explicit_cn_material(initial);
 
     RuntimeIdentity identity;identity.file("executable",argv[0]);
+    identity.values["transport.selection"]=transport_selection;
+    if(screened_core) {
+      identity.number("transport.screened_heat_upper_T_K",heat_upper);
+      identity.number("transport.maximum_relative_mixing_gradient",mixing_gradient);
+    }
     identity.values["atmosphere.metals"]=atmosphere_metals;
     identity.number("atmosphere.maximum_delta_Z",atmosphere_delta_Z);
     identity.values["atmosphere.overlap"]=main_atmosphere_path.empty()?"none":"gravity_hydrogen.v1";
@@ -140,7 +154,7 @@ int lifetime_main(int argc,char** argv) {
     const auto& identities=identity.values;
     const Selections selections{"lifetime.volume_faces.v1","ppcn.sfiii.svh.physical_metals.v1",
       "losses.plasma_neutrino.v1","convection.instantaneous.material_heat_after_D.v1",
-      "transport.whole_convective_limit.v1"};
+      screened_core?"transport.screened_core.material_envelope.v1":"transport.whole_convective_limit.v1"};
     Checkpoint state;
     // Reject incompatible or damaged restarts before allocating/parsing EOS
     // and opacity objects. The configuration's execution controls may change.
@@ -180,8 +194,11 @@ int lifetime_main(int argc,char** argv) {
     PlasmaNeutrinoLosses losses;ScreenedCollisionTransport collisions(collision_path.string());
     ScreenedMetalMicroscopicTransport microscopic(table_eos,collisions,true,minimum_temperature,{true,true,true},true);
     ConvectiveMaterialHeat convective_heat(table_eos,*conduction);
+    EnvelopeTransport envelope_heat(convective_heat,microscopic,minimum_temperature,
+        screened_core?heat_upper:1.5*minimum_temperature);
     Physics early{&eos,&combined,&nuclear,1.9,ConvectiveCriterion::ledoux};early.neutrino_losses=&losses;early.explicit_metal_mixing_only=true;
     auto later=early;later.opacity=radiation.get();later.microscopic=&convective_heat;later.explicit_metal_mixing_only=false;
+    if(screened_core)later.microscopic=&envelope_heat;
     EvolutionOptions options;options.relaxation.zone_threads=static_cast<std::size_t>(threads);options.abundance_tolerance=abundance_tolerance;
     if(restart.empty()) {
       ContractingSource seed_source(nuclear,entropy_loss);auto seed_physics=early;seed_physics.nuclear=&seed_source;
@@ -211,6 +228,9 @@ int lifetime_main(int argc,char** argv) {
         <<",\"omitted_mixing_heat_fraction\":"<<(has_D(m)?guard.maximum_heat_fraction:0)<<",\"gross_mixing_heat_fraction\":"<<guard.maximum_gross_heat_fraction
         <<",\"burn_gradient_estimate\":"<<guard.burn_gradient_estimate<<",\"drift_gradient_proxy\":"<<guard.drift_gradient_proxy
         <<",\"kinetic_heat_proxy\":"<<guard.kinetic_heat_proxy
+        <<",\"convective_mass_fraction\":"<<guard.convective_mass_fraction
+        <<",\"radiative_boundaries\":"<<guard.radiative_boundaries
+        <<",\"relative_mixing_gradient\":"<<guard.maximum_relative_mixing_gradient
         <<",\"convective_travel_years\":"<<guard.travel_years<<",\"cpu_seconds\":"<<double(std::clock()-cpu_start)/CLOCKS_PER_SEC<<"}\n";history.flush();
     };
     EvolutionControlOptions control;
@@ -231,11 +251,13 @@ int lifetime_main(int argc,char** argv) {
       return check_interval(old,step,duration,nuclear,inventory_tolerance);
     };
     hooks.assess=[&](const Model& m,std::span<const std::array<double,3>> rates) {
-      const bool initial_D=has_D(m);convective_heat.diagnostic_rates=rates;
+      const bool initial_D=has_D(m);convective_heat.diagnostic_rates=rates;envelope_heat.diagnostic_rates=rates;
       try {
-        guard=check_initial_convection(m,initial_D?early:later,table_eos,nuclear,initial_D);
-        convective_heat.diagnostic_rates={};
-      }catch(...) {convective_heat.diagnostic_rates={};throw;}
+        guard=screened_core && !initial_D && !rates.empty()
+          ?check_envelope_transport(m,later,envelope_heat,rates,minimum_temperature,mixing_gradient)
+          :check_initial_convection(m,initial_D?early:later,table_eos,nuclear,initial_D);
+        convective_heat.diagnostic_rates={};envelope_heat.diagnostic_rates={};
+      }catch(...) {convective_heat.diagnostic_rates={};envelope_heat.diagnostic_rates={};throw;}
     };
     hooks.cpu_seconds=[&]{return double(std::clock()-cpu_start)/CLOCKS_PER_SEC;};
     hooks.terminal_failure=[](std::string_view reason) {

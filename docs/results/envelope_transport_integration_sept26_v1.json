@@ -1,0 +1,61 @@
+{
+  "created_utc": "2026-09-27T02:37:11.374670+00:00",
+  "source_sha256": {
+    "apps/lifetime_driver.cpp": "407794b40d7049ae75221dfde66426ed0ea718273801e39a361e1d01cd8b35d1",
+    "include/ember/envelope_transport.hpp": "d93eaac16c199f9f858d56813edec085238f6430f1fed7256d606ac0e8c43ed5",
+    "include/ember/convective_evolution_checks.hpp": "14d846fc9299909c655cfdf7995528ca20861e9215279b66c25d54faa0395182",
+    "include/ember/convective_material_heat.hpp": "b885cc7d2df1872039ffafa74bbf90a8ff8bb75360c0b14e9d0e4877f92e43e4",
+    "include/ember/composition.hpp": "d5af9b0a3ba16c120bcaa8d77864a8f2b8416b6168bce0201873efac35607bff",
+    "include/ember/atmosphere_fixed_metal.hpp": "5802b1ba24e5a09eb7a33d330d01d73407ee1340518b4c6948a430f80cbde68f",
+    "src/screened_metal_microscopic_transport.cpp": "36a7eb4461ff0712677a00342b12a763f4698543bb6fb0f497fea203ba3e9766",
+    "scripts/conditional_metal_envelope_heat.hpp": "f7a1150388552859f3eddff3314127974f2d337009a88798bc4d959b3771b98b",
+    "tests/CMakeLists.txt": "bf015dae204696a825eb12298b8fc81f86b260f3e06da46f541c1560fea2f55b",
+    "tests/test_envelope_transport.cpp": "f0f8944e57b29d80023227e4362beb7639fad6669271516f9cac38ba85c38a77",
+    "tests/test_metal_cn_transport.cpp": "58c176f4ee5182f1d1dfef40b72b6e83c1046c84481ffd77c2f4e8c86fb686f7",
+    "tests/test_atmosphere_fixed_metal.cpp": "07c4061419b80c8a66f10e52fd3f6155f8b3f2e4ceb22f238fe295fa99ddc6d4",
+    "tests/test_lifetime_restart.py": "d81787628f9ac600217174450ea565dd98702c8bbaa294cb9e3e17d8a275a1d0",
+    "docs/ATMOSPHERE.md": "dc86ad0c3cd54e654f88ac50c3c564bc001118e3e920d6f7558651e8d321266d"
+  },
+  "stellar_comparison": {
+    "years": 1370464667948.463,
+    "hot_faces": 307,
+    "max_heat_change_over_L": 0.00016901631534508546,
+    "max_K_relative_change": 0.027130595472708796,
+    "existing_experiment_scaled_difference": 2.537902046817361e-15,
+    "existing_experiment_jacobian_scaled_difference": 4.0007060390235386e-13,
+    "arms": [
+      {
+        "envelope": 0,
+        "initial_regions": 1,
+        "converged": 1,
+        "message": "converged",
+        "audit_pass": 1,
+        "species_error": 8.780780282601505e-18,
+        "mass_error_surface": -6.113714521419147e-11,
+        "first_law": 1.4101941836486276e-11,
+        "maximum_log_structure_difference": 0,
+        "surface_L_relative_difference": 0
+      },
+      {
+        "envelope": 1,
+        "initial_regions": 1,
+        "converged": 1,
+        "message": "converged",
+        "audit_pass": 1,
+        "species_error": 8.796595975913519e-18,
+        "mass_error_surface": -6.079803252432867e-11,
+        "first_law": 1.4112377932917752e-11,
+        "maximum_log_structure_difference": 5.03597163969971e-13,
+        "surface_L_relative_difference": 3.6060043839825084e-13
+      }
+    ],
+    "CPU_seconds": 1.88584
+  },
+  "assessment_log": "mixing gradient 4.51598e-12 cool drift 7.57441e-07 cool kinetic heat 0.00900263\n",
+  "full_suite": "74/74 pass in both original worktree and isolated prepared checkout; all targets build",
+  "tests_log": "out/continuous-lifetime-sept26-v3/ember-envelope-full-tests.log",
+  "selected_run": "out/continuous-lifetime-sept26-v3",
+  "limitation": "Hot fully stripped species law remains conditional; cool radiative boundaries still reject. One 1-Myr comparison does not validate the full radiative or WD phase.",
+  "clean_tests_log": "out/envelope-transport-sept26-v1/clean-tests.log",
+  "mixed_region_control": "test_envelope_transport verifies hot radiative core plus cool mixed envelope, composition inventory, heat Jacobian and rate derivatives; negative controls reject a cool radiative boundary, missing rates and inhomogeneous instantaneous region"
+}

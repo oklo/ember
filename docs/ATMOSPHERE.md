@@ -12,7 +12,7 @@ temperature and gravity coverage. Its composition mapping, interpolation and
 physical checks are documented in [NONGREY.md](NONGREY.md). The continuous
 evolution driver selects its atmosphere file explicitly.
 
-## Minute metal changes
+## Small metal changes
 
 The default `--lifetime` selection requires the atmosphere's recorded metal
 composition. Nuclear proton capture can change total Z by a physically negligible
@@ -21,12 +21,19 @@ can keep the boundary temperature and pressure at the source Z:
 
 ```text
 atmosphere_metals "bounded_fixed_Z"
-atmosphere_maximum_delta_Z "1e-8"
+atmosphere_maximum_delta_Z "2e-5"
 ```
 
 `FixedMetalAtmosphere` checks the selected absolute limit on the change in Z.
-Its hard scope limit is one part per million of the source Z; that is not an
-error guarantee and needs a physical sensitivity check before selecting a run.
+Its hard scope limit is one percent of the source Z; that is not an error
+guarantee. The selected bound needs a physical sensitivity assessment.
+Paired non-grey columns at Z=.02, .02002 and .0202 show nearly linear responses
+at three sampled temperature/gravity locations. A change of **2e-5** in Z
+changes matching-layer temperature by at most **0.01569%** and gas pressure
+by **0.08141%** in those comparisons. These are sampled source differences,
+not a bound at every composition. The smaller **1e-8** allowance in the first
+continuous run was unnecessarily restrictive for these measured responses.
+[Sensitivity results](results/trace_metal_atmosphere_check_sept26_v1.json).
 Hydrogen and helium-3 retain their actual values in the lookup. Only that lookup
 transfers the metal difference to helium-4. The returned density uses the actual
 composition and EOS. The star's composition, nuclear reactions, interior opacity

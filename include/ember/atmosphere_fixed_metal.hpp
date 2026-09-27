@@ -5,7 +5,7 @@
 #include <limits>
 
 namespace ember {
-// Explicit boundary approximation for minute changes of a fixed metal pattern.
+// Explicit boundary approximation for small changes of a fixed metal pattern.
 // T and P use the source metal abundance, with He4 absorbing the difference in
 // the lookup alone. H and He3 keep their actual values. The returned density is
 // inverted with the actual composition. No stellar or nuclear inventory changes.
@@ -19,7 +19,7 @@ public:
       :eos_(eos),source_(source),maximum_delta_Z_(maximum_delta_Z),
        reference_Z_(source.reference_metallicity()) {
     if(!std::isfinite(maximum_delta_Z_) || maximum_delta_Z_<=0 || reference_Z_<=0 ||
-        maximum_delta_Z_>1e-6*reference_Z_)
+        maximum_delta_Z_>.01*reference_Z_)
       throw std::invalid_argument("fixed-metal atmosphere: invalid or excessive approximation bound");
   }
   AtmosphereState eval(double Teff,double gravity,const Composition& c) const override {

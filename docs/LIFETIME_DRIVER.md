@@ -2,10 +2,10 @@
 
 `ember-evolve --lifetime` connects the common stellar solver to a contracting
 Hayashi starting model, explicit initial D and pp/CN burning, plasma neutrino
-losses, face luminosities and the finite metal-transport interface. It is under
-integration. The wholly convective limit is assessed through main-sequence arrival.
-Radiative microscopic transport and complete atmosphere coverage must still
-be supplied before this is the continuous production calculation.
+losses, face luminosities and the finite metal-transport interface. It supports
+the wholly convective limit and an explicitly selected hot diffusion law with a
+mixed cool envelope. Continuous late-life atmosphere selection remains under
+integration; the complete Hayashi-to-white-dwarf calculation is not yet established.
 
 ```
 ember-evolve --lifetime CONFIG TARGET_YEARS NEW_OUTPUT_DIRECTORY \
@@ -41,10 +41,10 @@ The controls supporting these choices are in
 These limits bound this particular mixing approximation; they do not validate
 a microscopic kinetic-heat or partially ionized collision prescription.
 
-After initial D reaches zero through the burn solver, the same instantaneous
-convective mixing remains selected. Total H/He3/metal composition enthalpy
-then enters the heat equation explicitly. No abundance is manually reset.
-The star must remain wholly convective and homogeneous. A mixing-gradient
+After initial D reaches zero through the burn solver, total H/He3/metal
+composition enthalpy enters the heat equation explicitly. No abundance is
+manually reset. The default `transport "whole_convective"` requires the star
+to remain wholly convective and homogeneous. A mixing-gradient
 estimate must remain below **1e-8** in absolute mass fraction; a generous
 microscopic-drift estimate below **1e-6**, and its kinetic-heat estimate below
 **5%** of local luminosity. The latter two are order-of-magnitude proxies,
@@ -52,12 +52,43 @@ not validated partially ionized collision coefficients. Bounded stellar
 controls vary conduction and residual heat to assess their structural effect.
 [Transport assessment](results/convective_transport_integration_sept26_v1.json).
 
-Any region boundary needing microscopic species exchange rejects explicitly;
-there is no silent zero-flux substitution in a radiative layer. The source
-contains the hot screened transport but does not yet select it for such a
-boundary. Initial D exhaustion is not a criterion for losing convection or
-requiring finite mixing. Finite convection remains available in the shared
-engine for phases where burning and mixing times become comparable.
+To permit hot radiative regions, select:
+
+```text
+transport "screened_core"
+screened_minimum_T_K "2000000"
+screened_heat_upper_T_K "3000000"
+maximum_relative_mixing_gradient ".01"
+```
+
+Microscopic H/He/metal fluxes then act between mixed regions and through the
+radiative core. All metals share a mass velocity with separate collision charge
+contributions. Both endpoints of a species boundary must meet the microscopic
+law's domain. Its fully stripped metal approximation remains conditional;
+the temperature threshold alone does not demonstrate complete ionization.
+There is no zero-flux replacement in an unsupported cool radiative layer.
+
+The heat response joins material conduction and total composition enthalpy in
+the cool envelope to the full screened heat law over the stated temperature
+interval. Analytic derivatives include the changing join weight. This does not
+attenuate microscopic species exchange. Each convective region is checked for
+homogeneity and the gradient needed to carry its composition flux; the configured
+allowance is a fraction of its H, He3 or total-metal abundance. The same cool
+drift and kinetic-heat estimates described above remain in force. A model that
+needs greater abundance gradients requires finite mixing. These checks assess
+the instantaneous-convection approximation, not every uncertainty in diffusion.
+
+The join agrees with the existing stellar transport implementation at saved
+faces. A short stellar comparison and an independent radiative-core/mixed-envelope
+control pass, including explicit rejection of an unsupported cool boundary.
+[Integration evidence](results/envelope_transport_integration_sept26_v1.json).
+Finite convection remains available in the common engine for phases where
+burning and mixing times become comparable. Initial D exhaustion is not a
+criterion for losing convection or requiring finite mixing.
+
+Atmosphere table overlaps and the explicitly bounded approximation for small
+metal changes are described in [ATMOSPHERE.md](ATMOSPHERE.md). Those selections,
+the transport choice, join temperatures and mixing allowance enter restart identity.
 
 The volume-face thermal gradient now uses the same logarithmic-temperature
 mean with and without a material-heat provider. A zero heat/conduction

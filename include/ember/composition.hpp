@@ -2,6 +2,7 @@
 #include <array>
 #include <cstddef>
 #include <optional>
+#include <stdexcept>
 #include <string_view>
 #include "ember/gs98_mixture.hpp"
 
@@ -100,5 +101,19 @@ struct Composition {
 // consensus solar composition, scaled to a requested (X, Z).  The metal
 // pattern within Z is AAG21; only the four CNO isotopes are resolved.
 Composition solar_scaled(double X, double Z);
+
+// A face composition must average both the material lookup and actual CN
+// inventory. Mixing conventions here would give a different physical state.
+inline Composition mean_composition(const Composition& a,const Composition& b) {
+  if(a.basis!=b.basis || a.metal_inventory!=b.metal_inventory ||
+      a.cn_mass_convention!=b.cn_mass_convention ||
+      a.cn_molality.has_value()!=b.cn_molality.has_value())
+    throw std::domain_error("face composition: incompatible abundance conventions");
+  auto c=a;
+  for(std::size_t k=0;k<NSPEC;++k)c.X[k]=.5*(a.X[k]+b.X[k]);
+  if(c.cn_molality)for(std::size_t k=0;k<3;++k)
+    (*c.cn_molality)[k]=.5*((*a.cn_molality)[k]+(*b.cn_molality)[k]);
+  return c;
+}
 
 } // namespace ember

@@ -36,11 +36,7 @@ class ConvectiveMaterialHeat final:public MetalMicroscopicTransport {
       throw std::domain_error("convective material heat: initial D needs its fourth heat rate");
     const D lt=.5*(D::variable(p.lnT,2)+D::variable(q.lnT,6)),T=exp(lt);
     const D rho=.5*(exp(D::variable(p.lnrho,1))+exp(D::variable(q.lnrho,5))),lr=log(rho);
-    auto c=x;for(std::size_t k=0;k<NSPEC;++k)c.X[k]=.5*(x.X[k]+y.X[k]);
-    if(x.cn_molality.has_value()!=y.cn_molality.has_value())
-      throw std::domain_error("convective material heat: inconsistent CN inventory");
-    if(c.cn_molality)for(std::size_t k=0;k<3;++k)
-      (*c.cn_molality)[k]=.5*((*x.cn_molality)[k]+(*y.cn_molality)[k]);
+    const auto c=mean_composition(x,y);
     const auto k=conduction_.eval(T.value,rho.value,c);
     D K(4*constants::a_rad*constants::c*std::pow(T.value,3)/(3*rho.value*k.kappa));
     if(derivatives)for(std::size_t v=0;v<8;++v)
