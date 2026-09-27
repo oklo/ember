@@ -1,6 +1,8 @@
 #pragma once
 #include "ember/material_transport.hpp"
+#include <atomic>
 #include <memory>
+#include <mutex>
 #include <string>
 
 namespace ember {
@@ -66,7 +68,44 @@ class ScreenedCollisionTransport {
   static CollisionScreeningDerivatives screening_derivatives(double temperature,double density,
       double X,double Y3,double Z,double electron_stiffness_erg,bool include_ions);
  private:
+  friend class CollisionTaylorCache;
+  void check_domain(double temperature,double density,double X,double Y3,double Z,double length) const;
   struct Data;
   std::shared_ptr<const Data> data_;
+};
+
+// Per-face first-order reuse of the bulk-metal collision response within a
+// radius of its last exact evaluation. Coordinates as in the partials:
+// ln T, ln rho, X, Y3, Z and ln screening_length; the radius bounds every
+// coordinate change (absolute for mass fractions). The returned value is
+// v0 + sum_k dv/dx_k (x_k - x0_k); returned partials are those at x0. The
+// truncation error is second order in the radius. A request outside the
+// radius, or along an undefined direction, re-anchors with an exact solve.
+// Fractional changes of each population (including reference helium) are
+// also limited to 1%. Every query retains the original table-domain checks;
+// a changed table or active species set always requires a new exact response.
+// Each face is guarded separately; concurrent faces do not contend.
+class CollisionTaylorCache {
+ public:
+  explicit CollisionTaylorCache(double radius,std::size_t faces=8192,bool verify=false);
+  ~CollisionTaylorCache();
+  BulkMetalCollisionDerivatives derivatives(const ScreenedCollisionTransport&,std::size_t face,
+      double temperature,double density,double X,double Y3,double Z,double screening_length_cm) const;
+  BulkMetalCollisionResponse value(const ScreenedCollisionTransport&,std::size_t face,
+      double temperature,double density,double X,double Y3,double Z,double screening_length_cm) const;
+  double radius() const {return radius_;}
+  struct Statistics {std::size_t hits{},misses{},verified{};double worst_relative_error{};};
+  Statistics statistics() const;
+ private:
+  struct Slot;
+  BulkMetalCollisionDerivatives lookup(const ScreenedCollisionTransport&,std::size_t,
+      const std::array<double,6>&,double,double,double,double,double,double) const;
+  double radius_;
+  std::size_t faces_;
+  bool verify_;
+  std::unique_ptr<Slot[]> slots_;
+  mutable std::atomic<std::size_t> hits_{0},misses_{0},verified_{0};
+  mutable std::mutex worst_mutex_;
+  mutable double worst_{0};
 };
 } // namespace ember

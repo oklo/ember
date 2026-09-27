@@ -34,11 +34,14 @@ mixing and cool radiative microscopic transport are not selected.
 
 Every accepted interval passes full-step/two-half-step accuracy checks and
 isotope and energy audits. Solves reuse the latest composition and can predict
-the next structure. In a matched **1 Gyr** test these starting guesses reduced
-CPU time from **297.8 to 143.5 seconds**, with negligible structural and fuel
-differences. The physics and accuracy checks were unchanged; this timing
+the next structure. Optional local Taylor reuse of collision responses retains
+the table limits and conservative exchange. Together, these changes reduced
+a matched **1 Gyr** calculation from **297.8 to 81.76 CPU seconds** (**3.642×**),
+with very small structural and fuel differences. Full/two-half timestep checks
+remain selected. The physics and accuracy checks were unchanged; this timing
 comparison does not establish the speed of a complete track.
 [Solver comparison](docs/results/solver_starting_guesses_sept27_v1.json),
+[collision reuse](docs/results/collision_reuse_sept27_v1.json),
 [time accuracy](docs/results/envelope_time_accuracy_sept27_v1.json).
 
 The atmosphere and EOS inputs cover all 67 saved settling comparison

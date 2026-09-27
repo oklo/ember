@@ -40,6 +40,26 @@ seconds**, with negligible structural and fuel differences. This is one timing
 comparison in a gradual phase, not a benchmark for the complete track.
 [Comparison](results/solver_starting_guesses_sept27_v1.json).
 
+Optional `collision_taylor_radius "1e-4"` reuses collision responses with a
+first-order Taylor expansion around the last exact evaluation at each face.
+The radius bounds changes in ln T, ln density, H, helium-3, total metals and
+ln screening length; population changes also stay within 1% of their previous
+values. A changed active species set, source table, or nonpositive response
+requires an exact evaluation. Source-table bounds are checked on every query.
+The approximation changes transport coefficients, not their conservative
+exchange between neighboring cells. Its radius is recorded in the checkpoint;
+the default is zero (exact evaluation), and the supported maximum is 1e-4.
+
+With both starting-guess improvements, this reduced the same 1 Gyr comparison
+from **143.5 to 81.76 CPU seconds**: **3.642 times** faster than the original
+**297.8 seconds**, retaining full-step/two-half-step checks. Relative global
+changes were at most **1.022e-9**. A separate four-interval check recomputed
+every reuse exactly, measuring a maximum coefficient-group error of
+**1.195e-8**. These are gradual-phase measurements, not a complete-track or
+flash-convergence benchmark. Optional `collision_verify_reuse "1"` enables
+that diagnostic; `collision_reuse.json` records counts and measured errors.
+[Collision comparison](results/collision_reuse_sept27_v1.json).
+
 The initial composition file contains the nine baryonic mass fractions in
 `Composition` order. The CN inventory starts with the declared GS98 isotope
 mixture and evolves thereafter. Mass and starting-state parameters are inputs;

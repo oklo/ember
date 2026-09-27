@@ -46,6 +46,9 @@ class ScreenedMetalMicroscopicTransport final : public MetalMicroscopicTransport
       const Composition&,const Point&,const Composition&,const MetalSpeciesVector&,bool) const override;
   const char* name() const override {return "conditional fully stripped H/He/metal species and heat transport";}
   bool requires_positive_species_guess() const override {return true;}
+  // Optional per-face first-order reuse of collision responses (see
+  // CollisionTaylorCache). Null restores exact evaluation at every call.
+  void use_collision_taylor(std::shared_ptr<const CollisionTaylorCache> cache) {taylor_=std::move(cache);}
  private:
   const VariableMetalHelmholtzEos& eos_;
   ScreenedCollisionTransport collisions_;
@@ -53,5 +56,6 @@ class ScreenedMetalMicroscopicTransport final : public MetalMicroscopicTransport
   double minimum_temperature_;
   std::array<bool,3> active_;
   bool radiation_with_redistribution_;
+  std::shared_ptr<const CollisionTaylorCache> taylor_;
 };
 } // namespace ember

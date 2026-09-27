@@ -13,7 +13,7 @@ void require(bool ok,const char* why) {
 }
 template<std::size_t N,bool abundances=true> MetalMicroscopicFaceResponse evaluate(
     const VariableMetalHelmholtzEos& eos,const ScreenedCollisionTransport& collision,
-    bool ions,double minimum_T,std::array<bool,3> active,double mlo,double mhi,const Point& lo,const Composition& a,
+    const CollisionTaylorCache* cache,std::size_t face,bool ions,double minimum_T,std::array<bool,3> active,double mlo,double mhi,const Point& lo,const Composition& a,
     const Point& hi,const Composition& b,const MetalSpeciesVector* total_rate=nullptr,
     bool radiation_with_redistribution=false) {
   using D=detail::Differential<N>;using detail::exp;using detail::log;
@@ -82,8 +82,10 @@ template<std::size_t N,bool abundances=true> MetalMicroscopicFaceResponse evalua
     }
   }else length=ScreenedCollisionTransport::screening_length(Tb.value,rhob.value,xb.value,yb.value,c.Z(),stiffness.value,ions);
   BulkMetalCollisionDerivatives kinetic;
-  if constexpr(N>0)kinetic=collision.bulk_metal_derivatives(Tb.value,rhob.value,xb.value,yb.value,c.Z(),length.value);
-  else kinetic.value=collision.bulk_metal_eval(Tb.value,rhob.value,xb.value,yb.value,c.Z(),length.value);
+  if constexpr(N>0)kinetic=cache?cache->derivatives(collision,face,Tb.value,rhob.value,xb.value,yb.value,c.Z(),length.value)
+      :collision.bulk_metal_derivatives(Tb.value,rhob.value,xb.value,yb.value,c.Z(),length.value);
+  else kinetic.value=cache?cache->value(collision,face,Tb.value,rhob.value,xb.value,yb.value,c.Z(),length.value)
+      :collision.bulk_metal_eval(Tb.value,rhob.value,xb.value,yb.value,c.Z(),length.value);
   auto coefficient=[&](double value,auto partial) {
     D result(value);
     if constexpr(N>0)for(std::size_t j=0;j<N;++j) {
@@ -146,29 +148,29 @@ ScreenedMetalMicroscopicTransport::ScreenedMetalMicroscopicTransport(const Varia
     radiation_with_redistribution_(radiation_with_redistribution) {
   require(std::isfinite(minimum_T) && minimum_T>0,"positive temperature bound required");
 }
-MetalMicroscopicFaceResponse ScreenedMetalMicroscopicTransport::metal_eval(std::size_t,double mlo,double mhi,
+MetalMicroscopicFaceResponse ScreenedMetalMicroscopicTransport::metal_eval(std::size_t face,double mlo,double mhi,
     const Point& lo,const Composition& a,const Point& hi,const Composition& b,bool derivatives) const {
-  if(derivatives)return evaluate<14>(eos_,collisions_,include_ions_,minimum_temperature_,active_,mlo,mhi,lo,a,hi,b);
-  return evaluate<0>(eos_,collisions_,include_ions_,minimum_temperature_,active_,mlo,mhi,lo,a,hi,b);
+  if(derivatives)return evaluate<14>(eos_,collisions_,taylor_.get(),face,include_ions_,minimum_temperature_,active_,mlo,mhi,lo,a,hi,b);
+  return evaluate<0>(eos_,collisions_,taylor_.get(),face,include_ions_,minimum_temperature_,active_,mlo,mhi,lo,a,hi,b);
 }
-MicroscopicHeatResponse ScreenedMetalMicroscopicTransport::heat(std::size_t,double mlo,double mhi,
+MicroscopicHeatResponse ScreenedMetalMicroscopicTransport::heat(std::size_t face,double mlo,double mhi,
     const Point& lo,const Composition& a,const Point& hi,const Composition& b,bool derivatives) const {
   auto present=active_;
   for(std::size_t k=0;k<3;++k)if((k==2?a.Z():a.X[k])==0 && (k==2?b.Z():b.X[k])==0)present[k]=false;
   // A species missing at only one endpoint is still rejected. Removing it
   // there would change the physical face rather than restrict thermal
   // derivatives to a fixed-composition subspace.
-  if(derivatives)return evaluate<2*NVAR,false>(eos_,collisions_,include_ions_,minimum_temperature_,present,mlo,mhi,lo,a,hi,b);
-  return evaluate<0,false>(eos_,collisions_,include_ions_,minimum_temperature_,present,mlo,mhi,lo,a,hi,b);
+  if(derivatives)return evaluate<2*NVAR,false>(eos_,collisions_,taylor_.get(),face,include_ions_,minimum_temperature_,present,mlo,mhi,lo,a,hi,b);
+  return evaluate<0,false>(eos_,collisions_,taylor_.get(),face,include_ions_,minimum_temperature_,present,mlo,mhi,lo,a,hi,b);
 }
-MicroscopicHeatResponse ScreenedMetalMicroscopicTransport::heat_with_total_metal_rate(std::size_t,
+MicroscopicHeatResponse ScreenedMetalMicroscopicTransport::heat_with_total_metal_rate(std::size_t face,
     double mlo,double mhi,const Point& lo,const Composition& a,const Point& hi,const Composition& b,
     const MetalSpeciesVector& total_rate,bool derivatives) const {
   auto present=active_;
   for(std::size_t k=0;k<3;++k)if((k==2?a.Z():a.X[k])==0 && (k==2?b.Z():b.X[k])==0)present[k]=false;
-  if(derivatives)return evaluate<2*NVAR,false>(eos_,collisions_,include_ions_,minimum_temperature_,
+  if(derivatives)return evaluate<2*NVAR,false>(eos_,collisions_,taylor_.get(),face,include_ions_,minimum_temperature_,
       present,mlo,mhi,lo,a,hi,b,&total_rate,radiation_with_redistribution_);
-  return evaluate<0,false>(eos_,collisions_,include_ions_,minimum_temperature_,
+  return evaluate<0,false>(eos_,collisions_,taylor_.get(),face,include_ions_,minimum_temperature_,
       present,mlo,mhi,lo,a,hi,b,&total_rate,radiation_with_redistribution_);
 }
 } // namespace ember

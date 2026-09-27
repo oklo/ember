@@ -523,6 +523,19 @@ template<class Result> struct CollisionCache {
 };
 }
 ScreenedCollisionTransport::ScreenedCollisionTransport(const std::string& path):data_(std::make_shared<Data>(path)) {}
+void ScreenedCollisionTransport::check_domain(double T,double rho,double X,double Y3,double Z,double length) const {
+  positive(T);positive(length);const Mixture<double> mix(rho,X,Y3,Z);
+  const double target=mix.ne/(std::pow(2*me*kb*T,1.5)/(2*pi*pi*hbar*hbar*hbar));
+  require(target>=data_->density_min && target<=data_->density_max,
+      "electron density outside pair-table degeneracy range");
+  const double log_b=std::log(8*me*kb*T*length*length/(hbar*hbar));
+  require(log_b>=data_->ty.front() && log_b<=data_->ty.back(),"electron pair query outside table");
+  const double minimum_charge=X>0?1.:2.,maximum_charge=Z>0?28.:2.;
+  const double low=std::log(minimum_charge*minimum_charge*e2/(kb*T*length))/std::log(10.);
+  const double high=std::log(maximum_charge*maximum_charge*e2/(kb*T*length))/std::log(10.);
+  require(low>=data_->base.x.front() && high<=data_->extension.x.back(),
+      "full GS98 ion collision query outside table");
+}
 CollisionTransportResponse ScreenedCollisionTransport::eval(double T,double rho,double X,double Y3,double Z,double length) const {
   // Exact-state reuse only: no rounding, interpolation, or reuse across
   // tables. Keep scalar and differentiated evaluations separate so their
@@ -583,4 +596,108 @@ CollisionScreeningDerivatives ScreenedCollisionTransport::screening_derivatives(
   return {in.value,in.d,{true,true,X>0,Y3>0,Z>0,true}};
 }
 
+struct CollisionTaylorCache::Slot {
+  std::mutex mutex;
+  bool valid{};
+  std::shared_ptr<const ScreenedCollisionTransport::Data> owner;
+  std::array<double,6> anchor{};
+  BulkMetalCollisionDerivatives exact;
+};
+CollisionTaylorCache::CollisionTaylorCache(double radius,std::size_t faces,bool verify)
+    :radius_(radius),faces_(faces),verify_(verify),slots_(std::make_unique<Slot[]>(faces)) {
+  require(std::isfinite(radius) && radius>0 && radius<=.01,"collision Taylor radius must lie in (0,0.01]");
+  require(faces>0,"collision reuse requires at least one face");
+}
+CollisionTaylorCache::~CollisionTaylorCache()=default;
+CollisionTaylorCache::Statistics CollisionTaylorCache::statistics() const {
+  std::lock_guard lock(worst_mutex_);
+  return {hits_.load(),misses_.load(),verified_.load(),worst_};
+}
+namespace {
+bool positive_response(const BulkMetalCollisionResponse& v) {
+  for(double x:{v.conductivity,v.energy_scale,v.electron_density,v.b_thermal})
+    if(!(std::isfinite(x) && x>0))return false;
+  if(!std::isfinite(v.eta))return false;
+  for(double x:v.transport_enthalpy)if(!std::isfinite(x))return false;
+  // Positive definiteness on the active mass/heat subspace preserves
+  // nonnegative dissipation. Normalize to avoid mixing coefficient scales.
+  std::array<std::size_t,4> index{};std::size_t n=0;
+  for(std::size_t i=0;i<3;++i)if(v.active_species[i])index[n++]=i;
+  index[n++]=3;
+  std::array<double,4> scale{};std::array<std::array<double,4>,4> lower{};
+  for(std::size_t i=0;i<n;++i) {
+    const double diagonal=v.mobility[index[i]][index[i]];
+    if(!(std::isfinite(diagonal) && diagonal>0))return false;
+    scale[i]=std::sqrt(diagonal);
+    for(std::size_t j=0;j<=i;++j) {
+      double x=v.mobility[index[i]][index[j]]/scale[i]/scale[j];
+      for(std::size_t k=0;k<j;++k)x-=lower[i][k]*lower[j][k];
+      if(!std::isfinite(x) || (i==j && x<=0))return false;
+      lower[i][j]=i==j?std::sqrt(x):x/lower[j][j];
+    }
+  }
+  return true;
+}
+template<std::size_t S> void shift(BasicCollisionTransportResponse<S>& v,const BasicCollisionTransportPartial<S>& p,double d) {
+  for(std::size_t i=0;i<=S;++i)for(std::size_t j=0;j<=S;++j)v.mobility[i][j]+=p.mobility[i][j]*d;
+  for(std::size_t i=0;i<S;++i)v.transport_enthalpy[i]+=p.transport_enthalpy[i]*d;
+  v.conductivity+=p.conductivity*d;v.energy_scale+=p.energy_scale*d;v.eta+=p.eta*d;
+  v.electron_density+=p.electron_density*d;v.b_thermal+=p.b_thermal*d;
+}
+// Largest error relative to the scale of each coefficient group.
+double relative_difference(const BulkMetalCollisionResponse& a,const BulkMetalCollisionResponse& b) {
+  double m=0,dm=0;
+  for(std::size_t i=0;i<4;++i)for(std::size_t j=0;j<4;++j){m=std::max(m,std::abs(b.mobility[i][j]));dm=std::max(dm,std::abs(a.mobility[i][j]-b.mobility[i][j]));}
+  double e=m>0?dm/m:0,h=0,dh=0;
+  for(std::size_t i=0;i<3;++i){h=std::max(h,std::abs(b.transport_enthalpy[i]));dh=std::max(dh,std::abs(a.transport_enthalpy[i]-b.transport_enthalpy[i]));}
+  if(h>0)e=std::max(e,dh/h);
+  if(b.conductivity!=0)e=std::max(e,std::abs(a.conductivity/b.conductivity-1));
+  return e;
+}
+} // namespace
+BulkMetalCollisionDerivatives CollisionTaylorCache::lookup(const ScreenedCollisionTransport& collision,
+    std::size_t face,const std::array<double,6>& x,double T,double rho,double X,double Y3,double Z,double length) const {
+  collision.check_domain(T,rho,X,Y3,Z,length);
+  if(face>=faces_) {misses_.fetch_add(1,std::memory_order_relaxed);return collision.bulk_metal_derivatives(T,rho,X,Y3,Z,length);}
+  auto& slot=slots_[face];
+  std::unique_lock lock(slot.mutex);
+  if(slot.valid && slot.owner==collision.data_) {
+    bool inside=true;std::array<double,6> d{};
+    for(std::size_t k=0;k<6 && inside;++k) {
+      d[k]=x[k]-slot.anchor[k];
+      inside=std::abs(d[k])<=radius_ && (d[k]==0 || slot.exact.defined[k]);
+      if(k>=2 && k<=4)
+        inside=inside && (x[k]>0)==(slot.anchor[k]>0) && std::abs(d[k])<=.01*slot.anchor[k];
+    }
+    const double helium=1-slot.anchor[2]-slot.anchor[3]-slot.anchor[4];
+    inside=inside && std::abs(d[2]+d[3]+d[4])<=.01*helium;
+    if(inside) {
+      auto out=slot.exact;
+      for(std::size_t k=0;k<6;++k)if(d[k]!=0)shift(out.value,slot.exact.partials[k],d[k]);
+      if(positive_response(out.value)) {
+        lock.unlock();
+        hits_.fetch_add(1,std::memory_order_relaxed);
+        if(verify_) {
+          const auto exact=collision.bulk_metal_derivatives(T,rho,X,Y3,Z,length);
+          const double e=relative_difference(out.value,exact.value);
+          verified_.fetch_add(1,std::memory_order_relaxed);
+          std::lock_guard w(worst_mutex_);worst_=std::max(worst_,e);
+        }
+        return out;
+      }
+    }
+  }
+  slot.exact=collision.bulk_metal_derivatives(T,rho,X,Y3,Z,length);
+  slot.anchor=x;slot.owner=collision.data_;slot.valid=true;
+  misses_.fetch_add(1,std::memory_order_relaxed);
+  return slot.exact;
+}
+BulkMetalCollisionDerivatives CollisionTaylorCache::derivatives(const ScreenedCollisionTransport& collision,
+    std::size_t face,double T,double rho,double X,double Y3,double Z,double length) const {
+  return lookup(collision,face,{std::log(T),std::log(rho),X,Y3,Z,std::log(length)},T,rho,X,Y3,Z,length);
+}
+BulkMetalCollisionResponse CollisionTaylorCache::value(const ScreenedCollisionTransport& collision,
+    std::size_t face,double T,double rho,double X,double Y3,double Z,double length) const {
+  return lookup(collision,face,{std::log(T),std::log(rho),X,Y3,Z,std::log(length)},T,rho,X,Y3,Z,length).value;
+}
 } // namespace ember

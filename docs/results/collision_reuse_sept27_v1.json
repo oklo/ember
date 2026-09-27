@@ -1,0 +1,100 @@
+{
+  "created_utc": "2026-09-27T15:44:40.650234+00:00",
+  "outcome": "collision Taylor reuse with unchanged full/two-half time control",
+  "interval_years": 1000000000.0,
+  "endpoint_years": 3676093384416.2417,
+  "comparison_pass": true,
+  "baseline_CPU_seconds": 143.491872,
+  "candidate_CPU_seconds": 81.758574,
+  "CPU_reduction_fraction": 0.43022156683550694,
+  "speed_ratio": 1.7550681840414684,
+  "accepted_intervals": 24,
+  "relative_global_changes": {
+    "luminosity_Lsun": 5.603775221629803e-10,
+    "radius_Rsun": 1.454054654459469e-10,
+    "Teff_K": 6.739164781777163e-11,
+    "central_T_K": -6.060218993297894e-11,
+    "central_density_g_cm3": 7.263540879876018e-10,
+    "H_mass_g": -7.496225862269057e-13,
+    "He3_mass_g": 1.594380183433941e-10,
+    "He3_peak": -1.0212355405769813e-09,
+    "surface_X": 7.787770428535623e-12
+  },
+  "maximum_local_absolute_changes": {
+    "lnr": 3.979820917265897e-10,
+    "lnrho": 1.4926033742312939e-09,
+    "lnT": 3.6120617608048633e-10,
+    "H": 6.228845217393086e-10,
+    "He3": 1.1887604876165137e-10
+  },
+  "convective_mass_fraction_change": 0.0,
+  "radiative_boundary_count_change": 0,
+  "accepted_audits_pass": true,
+  "maximum_accepted_species_audit": 9.021578514616102e-17,
+  "maximum_accepted_first_law": 1.601883659052561e-08,
+  "unchanged": [
+    "full-step/two-half-step time control",
+    "isotope and energy audits",
+    "nonlinear tolerances",
+    "composition and thermal history",
+    "physics and atmosphere"
+  ],
+  "tests": [
+    "collision_reuse",
+    "evolution_controller",
+    "metal_microscopic_evolution",
+    "metal_microscopic_face_evolution",
+    "finite_metal_evolution"
+  ],
+  "limitations": [
+    "One gradual-phase interval with two zone threads; CPU timings vary with concurrent jobs.",
+    "First-order coefficient approximation; partial derivatives are held at the last exact state. This gradual-phase comparison does not establish flash convergence.",
+    "Sampled timestep control is not selected. Matching boundary counts alone does not establish matching region sets."
+  ],
+  "provenance": {
+    "plan": {
+      "target_years": 3676093384416.242,
+      "source_checkpoint": "out/current-performance-sept27-v1/snapshot.checkpoint",
+      "baseline": "out/solver-starting-guesses-sept27-v1/evolution",
+      "old_executable_fnv": "431838e43192ccb7",
+      "new_executable_fnv": "8a6d80b05f07d3c8",
+      "executable_sha256": "c5b4543b908e6ea18494097ce1780423c55195d2e02d2be4bdf59ccb036c08d8",
+      "changed_identity": [
+        "executable",
+        "solver.collision_taylor_radius"
+      ],
+      "physical_starting_state_unchanged": true,
+      "maximum_cpu_seconds": 1500,
+      "added_change": "Per-face first-order collision response reuse with original table limits, active-species and positive-response checks",
+      "selected_radius": 0.0001,
+      "controller": "unchanged full/two-half",
+      "status": "comparison_complete"
+    },
+    "baseline": "out/solver-starting-guesses-sept27-v1/evolution",
+    "candidate": "out/collision-reuse-sept27-v1/evolution"
+  },
+  "input_sha256": {
+    "out/solver-starting-guesses-sept27-v1/evolution/report.json": "2be2dd8d034be3f09b4511dfc62b505056663671ca7a32a3fffcb8b558ee3c0f",
+    "out/solver-starting-guesses-sept27-v1/evolution/final.checkpoint": "b27adea5ed2ed9fe9902f6e3dd4fd547659cfda1414950769b36d8da32e35de4",
+    "out/collision-reuse-sept27-v1/evolution/report.json": "aced1dd9425f9f87b4c5719cfa2e69dc87d7c1617dea3b37104f59c684dac060",
+    "out/collision-reuse-sept27-v1/evolution/final.checkpoint": "b539cca1f508ea98f04db13405d21f1ebc960ea454c152b3fb229cbc10b8e46c",
+    "out/collision-reuse-sept27-v1/restart.checkpoint": "95921bc40607b2d7ef7ae927685cfa5e55220ee265f5139b4932f0b16aba3e9f"
+  },
+  "verification": {
+    "radius": 0.0001,
+    "hits": 308209,
+    "exact": 11770,
+    "verified": 308209,
+    "maximum_coefficient_group_relative_error": 1.1951735731590428e-08
+  },
+  "tests_pass": true,
+  "collision_reuse": {
+    "radius": 0.0001,
+    "hits": 1892098,
+    "exact": 72617,
+    "verified": 0,
+    "maximum_coefficient_group_relative_error": 0
+  },
+  "original_baseline_CPU_seconds": 297.802469,
+  "combined_CPU_speed_ratio": 3.6424616334428728
+}

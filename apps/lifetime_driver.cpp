@@ -107,6 +107,11 @@ int lifetime_main(int argc,char** argv) {
     const auto structure_prediction=cfg.values.contains("structure_prediction")?cfg.get("structure_prediction"):"none";
     if(structure_prediction!="none" && structure_prediction!="linear")
       throw std::invalid_argument("unknown structure prediction method");
+    const double collision_radius=cfg.values.contains("collision_taylor_radius")?cfg.number("collision_taylor_radius"):0;
+    const double collision_verify=cfg.values.contains("collision_verify_reuse")?cfg.number("collision_verify_reuse"):0;
+    if(!(collision_radius>=0 && collision_radius<=1e-4 && (collision_verify==0 || collision_verify==1))
+        || (collision_verify!=0 && collision_radius==0))
+      throw std::invalid_argument("invalid collision reuse settings");
     const auto transport_selection=cfg.values.contains("transport")?cfg.get("transport"):"whole_convective";
     if(transport_selection!="whole_convective" && transport_selection!="screened_core")
       throw std::invalid_argument("unknown lifetime transport selection");
@@ -202,6 +207,7 @@ int lifetime_main(int argc,char** argv) {
       identity.number("configuration."+key,value);
     identity.number("solver.homogeneous_abundance_tolerance",std::min(1e-15,abundance_tolerance));
     if(structure_prediction=="linear")identity.number("solver.structure_prediction",1);
+    if(collision_radius>0)identity.number("solver.collision_taylor_radius",collision_radius);
     identity.family("eos",eos_path,true);
     for(const auto& [role,p]:std::map<std::string,fs::path>{{"opacity_low",low_path},{"opacity_warm",warm_path},
         {"opacity_bridge",bridge_path},{"opacity_hot",hot_path}})identity.family(role,p,false);
@@ -272,6 +278,11 @@ int lifetime_main(int argc,char** argv) {
     PPCNNetwork nuclear(PPRates::solar_fusion_iii,PPScreening::salpeter_van_horn,PPRates::solar_fusion_iii);
     PlasmaNeutrinoLosses losses;ScreenedCollisionTransport collisions(collision_path.string());
     ScreenedMetalMicroscopicTransport microscopic(table_eos,collisions,true,minimum_temperature,{true,true,true},true);
+    std::shared_ptr<CollisionTaylorCache> collision_reuse;
+    if(collision_radius>0) {
+      collision_reuse=std::make_shared<CollisionTaylorCache>(collision_radius,points,collision_verify==1);
+      microscopic.use_collision_taylor(collision_reuse);
+    }
     ConvectiveMaterialHeat convective_heat(table_eos,*conduction);
     EnvelopeTransport envelope_heat(convective_heat,microscopic,minimum_temperature,
         screened_core?heat_upper:1.5*minimum_temperature);
@@ -394,6 +405,12 @@ int lifetime_main(int argc,char** argv) {
       }
     };
     const auto outcome=ember::evolve(state,atmosphere,control,hooks);
+    if(collision_reuse) {
+      const auto stats=collision_reuse->statistics();
+      std::ofstream reuse_report(work/"collision_reuse.json");reuse_report<<std::setprecision(17)
+        <<"{\"radius\":"<<collision_radius<<",\"hits\":"<<stats.hits<<",\"exact\":"<<stats.misses
+        <<",\"verified\":"<<stats.verified<<",\"maximum_coefficient_group_relative_error\":"<<stats.worst_relative_error<<"}\n";
+    }
     const auto& stop=outcome.stop_reason;const bool reached=outcome.requested_age_reached;
     const auto accepted_here=outcome.accepted_this_invocation;
     write_checkpoint(work/"final.checkpoint",state,selections,abundance_tolerance,identities);
