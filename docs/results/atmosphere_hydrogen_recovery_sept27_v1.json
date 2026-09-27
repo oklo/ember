@@ -1,0 +1,62 @@
+{
+  "created_utc": "2026-09-27T04:15:53.652034+00:00",
+  "outcome": "recovered_measured_H_rich_atmosphere_corridor",
+  "generator": "scripts/recover_hydrogen_atmospheres.py",
+  "sources": "data/atmosphere/lifetime_hydrogen/recovery.json",
+  "unchanged_early_queries": 5932,
+  "supported_saved_metal_models": 45,
+  "latest_supported_saved_age_years": 3749238963846.6045,
+  "late_derivative_maximum_absolute_error": 5.561521021490989e-09,
+  "preserved_grid_knot_derivative_crossings": [
+    {
+      "id": "pms293",
+      "absolute_centered_difference": 0.0009505911866574124
+    },
+    {
+      "id": "pms449",
+      "absolute_centered_difference": 0.0019779506909634037
+    },
+    {
+      "id": "pms712",
+      "absolute_centered_difference": 0.0032753985781561745
+    }
+  ],
+  "packaging": "50 declared runtime inputs verified; exact physical history across packaged/relocated restart for three states",
+  "native_restart_test": "lifetime_restart passes, including changed nested interval rejection before table construction",
+  "selected_run": "out/continuous-lifetime-sept27-v2",
+  "remaining_unsupported_saved_models": [
+    "old46",
+    "old47",
+    "old48",
+    "old49",
+    "old50",
+    "old51",
+    "old52",
+    "old53",
+    "old54",
+    "old55",
+    "old56",
+    "old57",
+    "old58",
+    "old59",
+    "old60",
+    "old61",
+    "old62",
+    "old63",
+    "old64",
+    "old65",
+    "old66",
+    "old67"
+  ],
+  "limitations": [
+    "No new atmosphere solutions or independent physical validation implied by recovery.",
+    "Three centered derivative comparisons straddle preserved early interpolation knots; boundary values and native derivatives remain exactly those of the prior reference.",
+    "Above X=.9995 or below Z=1e-6 the trace-He and pure-H families still require integration. No artificial fallback selected."
+  ],
+  "sha256": {
+    "out/lifetime-hydrogen-sept27-v1/queries.txt": "bd2249a44d6f2bcaab9d05eac4844185d48169604e38678ea08c70beb75397f8",
+    "out/lifetime-hydrogen-sept27-v1/queries.jsonl": "e8552d68279c162ba8a25e20d6c920955c2878e3ddc75a6a474c244bb700fce9",
+    "out/lifetime-hydrogen-sept27-v1/portable/data/MANIFEST.json": "45c81006d1a9380c3e3182f2b60bb4be78ffcc32f9b33791ef8c43b7479c9491",
+    "out/continuous-lifetime-sept27-v2/ember-evolve": "fe32448710991bd1884a302e0feb77f4ecda040b60f2e2141412116f0748acde"
+  }
+}

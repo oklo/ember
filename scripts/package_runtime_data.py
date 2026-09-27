@@ -15,7 +15,51 @@ import shutil
 
 INPUT_KEYS = ("eos", "opacity_low", "opacity_warm", "opacity_bridge",
               "opacity_hot", "conduction", "atmosphere", "collisions", "composition")
-OPTIONAL_INPUT_KEYS = ("atmosphere_main_sequence", "atmosphere_metal_chain", "opacity_hydrogen_response")
+OPTIONAL_INPUT_KEYS = ("atmosphere_main_sequence", "atmosphere_metal_chain", "opacity_hydrogen_response",
+                       "atmosphere_hydrogen_interval")
+
+
+def atmosphere_children(path):
+    """Return child line numbers for the two supported atmosphere manifests."""
+    lines = path.read_text().splitlines()
+    rows = [shlex.split(line) for line in lines]
+    if not rows:
+        raise ValueError(f"empty atmosphere input: {path}")
+    if rows[0][:2] == ["EMBER_METAL_ATMOSPHERE_CHAIN", "1"]:
+        if len(rows[0]) != 3 or len(rows) != int(rows[0][2]) + 1 or not 1 <= int(rows[0][2]) <= 16:
+            raise ValueError(f"invalid atmosphere chain: {path}")
+        indices = range(1, len(rows))
+    elif rows[0][0] == "EMBER_HYDROGEN_ATMOSPHERE_INTERVAL":
+        if rows[0] == ["EMBER_HYDROGEN_ATMOSPHERE_INTERVAL", "1"]:
+            fields = ["reference", "chain", "reference_Z", "hydrogen"]
+        elif rows[0] == ["EMBER_HYDROGEN_ATMOSPHERE_INTERVAL", "2"]:
+            fields = ["lower_interval", "lower_metal_chain", "lower_reference_Z",
+                      "reference", "chain", "reference_Z", "hydrogen"]
+        else:
+            raise ValueError(f"invalid atmosphere interval version: {path}")
+        if len(rows) != len(fields) + 1 or any(not row or row[0] != field for row, field in zip(rows[1:], fields)):
+            raise ValueError(f"invalid atmosphere interval fields: {path}")
+        indices = [i for i, row in enumerate(rows[1:], 1)
+                   if row[0] in ("lower_interval", "lower_metal_chain", "reference", "chain")]
+    else:
+        return None
+    children = []
+    for i in indices:
+        if len(rows[i]) != 2:
+            raise ValueError(f"invalid atmosphere manifest child: {path}")
+        children.append((i, rows[i][0], (path.parent / rows[i][1]).resolve(strict=True)))
+    return lines, children
+
+
+def atmosphere_closure(path, depth=0):
+    if depth > 24:
+        raise ValueError("excessive atmosphere manifest nesting")
+    found = {path}
+    manifest = atmosphere_children(path)
+    if manifest:
+        for _, _, child in manifest[1]:
+            found.update(atmosphere_closure(child, depth + 1))
+    return found
 
 
 def input_keys(configuration):
@@ -111,7 +155,9 @@ def verify(manifest):
     for role in input_keys(cfg):
         path = (config.parent / cfg[role]).resolve(strict=True)
         discovered.add(path)
-        if is_family(path, role):
+        if role == "atmosphere_hydrogen_interval":
+            discovered.update(atmosphere_closure(path))
+        elif is_family(path, role):
             _, children = family(path, role)
             discovered.update(child for _, child in children)
     declared = {(root / entry["path"]).resolve() for entry in record["files"]}
@@ -160,9 +206,30 @@ def package(config, destination, metadata, manifest, source_root):
         record(source, target, role, checksum)
         return target
 
+    def atmosphere(source, role, depth=0):
+        if depth > 24:
+            raise ValueError("excessive atmosphere manifest nesting")
+        if source in copied:
+            return copied[source]
+        parsed = atmosphere_children(source)
+        if parsed is None:
+            return leaf(source, role)
+        rows, children = parsed
+        checksum = digest(source)
+        target = destination / "atmosphere" / f"{checksum}.dat"
+        for i, label, child in children:
+            local = os.path.relpath(atmosphere(child, role, depth + 1), target.parent)
+            rows[i] = label + " " + json.dumps(local)
+        write_checked(target, ("\n".join(rows) + "\n").encode())
+        copied[source] = target
+        record(source, target, role, checksum)
+        return target
+
     for role in input_keys(cfg):
         source = (config.parent / cfg[role]).resolve(strict=True)
-        if is_family(source, role):
+        if role == "atmosphere_hydrogen_interval":
+            target = atmosphere(source, role)
+        elif is_family(source, role):
             header, children = family(source, role)
             target = destination / f"{role}.dat"
             rows = header[:]

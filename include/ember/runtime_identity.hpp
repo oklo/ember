@@ -42,6 +42,33 @@ public:
     if(in>>name)throw std::runtime_error("trailing metal-atmosphere identity data");
   }
 
+  void hydrogen_atmosphere_interval(const std::string& role,const fs::path& path,unsigned depth=0) {
+    if(depth>8)throw std::runtime_error("excessive atmosphere identity nesting");
+    std::ifstream in(path);std::string label,name;unsigned version{};
+    const auto expect=[&](const char* wanted) {
+      if(!(in>>label) || label!=wanted)throw std::runtime_error("invalid hydrogen-atmosphere identity field");
+    };
+    const auto filename=[&](const char* field) {
+      expect(field);if(!(in>>std::quoted(name)) || name.empty())throw std::runtime_error("missing atmosphere identity file");
+      return path.parent_path()/name;
+    };
+    expect("EMBER_HYDROGEN_ATMOSPHERE_INTERVAL");
+    if(!(in>>version) || (version!=1 && version!=2))throw std::runtime_error("invalid hydrogen-atmosphere identity version");
+    number(role+".version",version);
+    if(version==2) {
+      const auto lower=filename("lower_interval"),chain=filename("lower_metal_chain");
+      expect("lower_reference_Z");number(role+".lower_reference_Z",read_representable_double(in));
+      hydrogen_atmosphere_interval(role+".lower",lower,depth+1);
+      metal_atmosphere_chain(role+".lower_chain",chain);
+    }
+    const auto reference=filename("reference"),chain=filename("chain");
+    file(role+".reference",reference);metal_atmosphere_chain(role+".chain",chain);
+    expect("reference_Z");number(role+".reference_Z",read_representable_double(in));
+    expect("hydrogen");number(role+".hydrogen_low",read_representable_double(in));
+    number(role+".hydrogen_high",read_representable_double(in));
+    if(in>>label)throw std::runtime_error("trailing hydrogen-atmosphere identity data");
+  }
+
   void family(const std::string& role,const fs::path& path,bool eos) {
     std::ifstream in(path);std::string magic,label,name;int version{};std::size_t count=1;
     in>>magic>>version;

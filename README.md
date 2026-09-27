@@ -33,9 +33,11 @@ pass** in the working and isolated builds with the required datasets.
 [atmosphere coverage](docs/results/atmosphere_lifetime_atlas_sept27_v1.json),
 [opacity coverage](docs/results/opacity_lifetime_extension_sept27_v1.json).
 
-A fresh Hayashi calculation with hot transport is running. The additional
-composition tables are being prepared ahead of it; complete continuous coverage
-of the hydrogen-rich and WD atmospheres remains unfinished. New high-gravity
+A fresh Hayashi calculation now selects the restored hydrogen- and
+metal-dependent atmospheres from the start. All 5932 saved early surface
+queries are unchanged; the late-source tests cover the settling comparison
+through 3.749 Tyr. Trace-helium and WD atmosphere coverage remains unfinished.
+[Hydrogen-rich atmosphere recovery](docs/results/atmosphere_hydrogen_recovery_sept27_v1.json). New high-gravity
 hydrogen columns use the same joining depth as the main-sequence atmospheres.
 The microscopic metal law assumes complete ionization; unsupported cool
 radiative layers are rejected. Initial deuterium uses a checked whole-star
@@ -60,8 +62,9 @@ cmake --build build
 ctest --test-dir build --output-on-failure
 ```
 
-Requires a C++23 compiler. On Apple silicon the build tunes for the host core
-and links Accelerate for LAPACK; it is not otherwise platform-specific.
+Requires a C++23 compiler. The release build targets Apple M4 when supported,
+uses CPU threads for independent zone work, and solves its small matrix blocks
+with a pivoted kernel. The current stellar solver does not use Metal or the GPU.
 
 New bulk physics tables and raw archives are generated locally and excluded from
 Git. The repository includes their generators, source patches, configurations and

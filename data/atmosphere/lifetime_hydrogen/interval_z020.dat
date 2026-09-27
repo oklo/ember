@@ -1,0 +1,5 @@
+EMBER_HYDROGEN_ATMOSPHERE_INTERVAL 1
+reference "reference_z020.dat"
+chain "chain_z020.dat"
+reference_Z .02
+hydrogen .85 .9

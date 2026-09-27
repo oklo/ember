@@ -1,63 +1,45 @@
 # Current handoff — September 27, 2026
 
-## September 27 update — 2026-09-27T03:46:28.379892+00:00
+## Active work at 2026-09-27T04:22:51.937480+00:00
 
-The live job is still `out/continuous-lifetime-sept26-v3` (PID 92428):
-**1.755 Tyr**, **2993 K**, **5363** accepted intervals,
-**0** rejected; still fully convective. Its frozen executable/configuration
-are unchanged. The separately prepared `out/continuous-lifetime-sept27-v1`
-failed its FIRST 1000-year interval; it accepted no evolved model and is terminal.
-Do not report it as a new trajectory or restart it unchanged.
+**Primary run:** `out/continuous-lifetime-sept27-v2`, PID **6843**, caffeinate
+**6844**, fresh Hayashi origin and exact five-interval restart prefix. It is
+at **52.16 Gyr**, **1097** accepted / **0** rejected. Target
+4.5 Tyr, 25000 steps, 21600 CPU seconds, four threads. Frozen binary/input
+hashes and the exact command are in its `PLAN.json`. Its self-contained
+`data/MANIFEST.json` verifies **50** files. Do not edit these inputs.
 
-The common driver now selects the restored metal-dependent atmosphere chain
-from Z=.02 to .0005, with a smooth overlap onto the PMS/MS boundary. All **5932**
-saved early surface queries are exactly unchanged; all **5942** atmosphere
-checks pass. The first reference still ends at H=.85. Fable is recovering the
-remaining H-rich reference/interval files from retained numerical reports,
-privately under `out/fable-atmosphere-recovery-sept27-v1` (P886). Primary owns
-selection. Existing high-metal, low-metal and hydrogen-rich interior opacity
-approximations are consolidated in `RadiativeOpacity`, including the dense-H
-source-slope join and pure-H endpoint. All **34304** layers in the **67** saved
-metal-settling checkpoints have numerical support; derivative checks pass.
-These source approximations retain their stated physical limits.
+The selected common code has initial D, pp+closed CN with SFIII rates,
+plasma losses, hot screened H/He/metal transport, partition-dependent local
+composition convergence and unchanged physical audits. Restored interior
+opacity and metal/H-dependent atmosphere sources are selected from the start.
+The atmosphere queries cover all 5932 earlier PMS states exactly and old
+metal models v1–v45 through 3.749 Tyr; v46–v67 remain unsupported pending
+trace-He/pure-H integration. Receipt:
+`docs/results/atmosphere_hydrogen_recovery_sept27_v1.json`.
 
-An actual radiative-core integration (3.551-Tyr saved star) and exact restart
-pass unchanged inventory/energy audits. The useful local composition tolerance
-is **1e-12** for stratified diffusion; **1e-15** fails a line search there. The
-fresh PMS negative control shows that **1e-12** throughout is too loose during
-initial D burning. The driver now uses **1e-15** when the actual instantaneous
-mixing partition has one region and the configured tolerance otherwise. It
-checks the partition inside every coupling iteration; no phase-dependent
-program or relaxed physical audit is introduced. **All 76 tests pass in both
-the working and isolated checkout** after this change and opacity integration.
+**Parallel fixed-Z run:** `out/continuous-lifetime-sept26-v3`, PID92428,
+now **2.967 Tyr**, **3114 K**, **7099** accepted / **0** rejected.
+Its 14400-CPU-second cap will stop it normally soon; preserve the completed
+history. It uses the old local1e-15 setting and fixed-Z atmosphere allowance.
+Do not mistake its larger age for a result with the restored metal atlas.
 
-Prepared input set: `out/lifetime-materials-sept27-v1/portable/data/`, **35**
-verified files, no external runtime table paths. Its fresh PMS control accepts
-five intervals through **7647 yr** with unchanged audits. It is a short control,
-not the replacement production sequence. The reference/response sources are
-tracked under `data/atmosphere/lifetime` and `data/opacity/lifetime`.
+**Fable:** session limit until 03:50 America/New_York (07:50 UTC). Primary
+owns atmosphere recovery and shorter-paper corrections (P890/P891). Source
+stages3/4 ended unaccepted; no active source column remains. The 4800K
+logg6.0/6.1 source columns pass; cooler cases oscillate and 6.2 remains
+unsupported. Do not duplicate exhausted attempts without diagnosing them.
 
-Fable has directly solved pure-H tau=100 columns at log g **6.0** and **6.1**;
-independent seeds/depths agree within **0.013% T / 0.054% Pgas**. New temperature
-and gravity points are running in `out/fable-highg-pureh-sept27-v1` with at most
-four one-thread workers, four aggregate CPU hours, 1 GB output and an 8 GiB
-free-disk floor. Check its reservation/receipts before launching. Fable is also
-preparing a private **31–32-page** draft candidate under
-`docs/research/fable/short_draft_20260927`; the current paper remains 63 pages.
-Its corrected conservation report is reviewed but NOT adopted.
-
-Source work is copied into `/private/tmp/ember-reviewed-source-sept26-v1`,
-branch `review/end-to-end-sept26`; the new changes are not committed/pushed yet.
-Its `origin` is a LOCAL publication checkout, not GitHub. Public target remains
-`github.com/oklo/ember`, branch `codex/atmosphere5000-density-checks`; the user
-authorizes publication. Next: finish H-rich atmosphere joins, freeze a better
-prepared fresh Hayashi sequence, then retire v3 only after its successor passes
-initial checks. Preserve all accepted histories and terminal checkpoints.
-
-Detailed evidence: `docs/results/atmosphere_lifetime_atlas_sept27_v1.json`,
-`screened_radiative_core_sept27_v1.json`, and
-`opacity_lifetime_extension_sept27_v1.json`. The original detailed progress notes are archived locally under
-`out/document-history-sept27-v1`; older source history is also retained in Git.
+**Paper:** private candidate under `docs/research/fable/short_draft_20260927`
+has been corrected and visually checked at **30 pages** (from63). All paper
+figures are still unchanged. Peak luminosity values now match the actual
+pulse figure: 666/848/1695 grids give5.537e36/4.835e36/3.281e35erg/s,
+not a converged peak. Publication of the shorter September27 paper remains
+pending. Code through d67b4b6 is public; H-interval/recovery work is copied
+into the isolated publication checkout and **all76 isolated tests pass**.
+Next: commit/publish those reviewed changes, publish the shorter paper, then
+finish trace-He and hydrogen-dominated atmosphere integration while the star
+runs. Do not stop active jobs simply because this handoff is being updated.
 
 ## Objective and protected work
 

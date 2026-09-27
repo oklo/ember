@@ -1,0 +1,232 @@
+{
+  "input_sha256": {
+    "data/atmosphere/nongrey_gs98_z020_x090_late_v1.dat": "06f5e4b226728a0d479e0d534604aafe8127814711a04bf8b0521389b8cd5119",
+    "data/atmosphere/lifetime/main_sequence_reference.dat": "bfafea3f3f2920c209d4a43fdd6ff34dd51746d08acc4a589c11b0e72afac6ab",
+    "docs/results/x090_warm_atmosphere_reference_v1.json": "abae9d27374508992e46c4dd3c95c90602d7f8b83ddf834235dfd292ea8ba0d7",
+    "docs/results/x090_warm_atmosphere_reference_v2.json": "fcb2a26c974874ae74a5c062fd6e9872491096b15e1a8e69bc472ea9d1121797",
+    "docs/results/h094_warm_atmosphere_reference_v1.json": "a1b2a6889ce51dc283c7a3d5023e526af748b91e6004838789e5dfdb8a474795",
+    "docs/results/highg_material_assembly_v1.json": "7cf6e5c36ecde39be1835fe705a353e1c371d8f55c2c8645c88e30647ee2a28c",
+    "data/atmosphere/lifetime/metal_z020_z010.dat": "7cffa901b19a837a0427818d9a10c0e6ad3c3b2c52d20fc484c4878cbb9b666a",
+    "data/atmosphere/lifetime/metal_z010_z005.dat": "0885cf8e405227c4a7612190b03c295f916d12c076b79869c26bc428049137b1",
+    "data/atmosphere/lifetime/metal_z005_z0025.dat": "e067da028e4e27deb40460751464c06e359f8d55c1385463af71373498ef15f7",
+    "docs/results/h094_metal_atmosphere_assembly_v1.json": "5adb69a6402a4db03b0143d60a3a7a9374f2976e9ec13398c5c028c5d81fea09",
+    "data/atmosphere/lifetime/metal_z0025_z001.dat": "5d02ce514922663bb01615729a904881120ff64790982396b8e7a1736ab7bd3d",
+    "data/atmosphere/lifetime/metal_z001_z0005.dat": "18c3570f9857ab9f19f009f30d02dc6083f34b6eed2136088ac16c97099aeff5",
+    "docs/results/low_z_material_assembly_v1.json": "1e9b97a0b8c73b1810b59c68b7ee8576173c15aac97fabc8982702463e1c1a83",
+    "docs/results/z0001_material_assembly_v1.json": "0a6304a6b592914caf9dcc2b443ff5930330cb2669159601f1b845221874afef",
+    "docs/results/low_z_warmer_material_assembly_v1.json": "16f805b017b3aeb1ddecc9d4005a8671f7627c287f4a3dc790c551bf793cdfed",
+    "docs/results/h0995_material_assembly_v1.json": "2a42c4681d337800b77daf44cc8bf5894b04c810b808bbf92d552e00889a704b",
+    "out/material-input-recovery-v1/closed/21/2164f572768684c8197f5d624efd2bb5fa07ae7aa2d0af74a6637809579e287c.dat": "2164f572768684c8197f5d624efd2bb5fa07ae7aa2d0af74a6637809579e287c",
+    "out/material-input-recovery-v1/closed/98/98fd271a90878910ad2f98c5bc42d40401668523618197b8a7841205c31b34f0.dat": "98fd271a90878910ad2f98c5bc42d40401668523618197b8a7841205c31b34f0",
+    "out/material-input-recovery-v1/closed/78/781f56be194ab1f89b43b5ec89d2c2b6b341336822d60f93f695c60369c69057.dat": "781f56be194ab1f89b43b5ec89d2c2b6b341336822d60f93f695c60369c69057"
+  },
+  "tables": {
+    "reference_z020.dat": {
+      "measured": 72,
+      "missing": 0,
+      "axes": [
+        [
+          0.7,
+          0.85,
+          0.9,
+          0.94
+        ],
+        [
+          0.0,
+          0.03
+        ],
+        [
+          4000.0,
+          4200.0,
+          4400.0
+        ],
+        [
+          4.9,
+          5.15,
+          5.4
+        ]
+      ]
+    },
+    "metal_z005_z0025.dat": {
+      "measured": 22,
+      "missing": 5,
+      "axes": [
+        [
+          0.3,
+          0.9,
+          0.94
+        ],
+        [
+          3600.0,
+          4000.0,
+          4400.0
+        ],
+        [
+          4.9,
+          5.15,
+          5.4
+        ]
+      ]
+    },
+    "metal_z0025_z001.dat": {
+      "measured": 18,
+      "missing": 0,
+      "axes": [
+        [
+          0.3,
+          0.9,
+          0.94
+        ],
+        [
+          4000.0,
+          4400.0
+        ],
+        [
+          4.9,
+          5.15,
+          5.4
+        ]
+      ]
+    },
+    "metal_z001_z0005.dat": {
+      "measured": 18,
+      "missing": 0,
+      "axes": [
+        [
+          0.3,
+          0.9,
+          0.94
+        ],
+        [
+          4000.0,
+          4400.0
+        ],
+        [
+          4.9,
+          5.15,
+          5.4
+        ]
+      ]
+    },
+    "reference_z001.dat": {
+      "measured": 82,
+      "missing": 38,
+      "axes": [
+        [
+          0.9,
+          0.94,
+          0.98,
+          0.995
+        ],
+        [
+          0.0,
+          0.003
+        ],
+        [
+          4000.0,
+          4200.0,
+          4400.0,
+          4600.0,
+          4800.0
+        ],
+        [
+          4.9,
+          5.15,
+          5.4
+        ]
+      ]
+    },
+    "response_z001_z0005.dat": {
+      "measured": 32,
+      "missing": 16,
+      "axes": [
+        [
+          0.9,
+          0.94,
+          0.98,
+          0.995
+        ],
+        [
+          4000.0,
+          4400.0,
+          4600.0,
+          4800.0
+        ],
+        [
+          4.9,
+          5.15,
+          5.4
+        ]
+      ]
+    },
+    "response_z0005_z0001.dat": {
+      "measured": 26,
+      "missing": 6,
+      "axes": [
+        [
+          0.9,
+          0.94,
+          0.98,
+          0.995
+        ],
+        [
+          4000.0,
+          4400.0,
+          4600.0,
+          4800.0
+        ],
+        [
+          5.15,
+          5.4
+        ]
+      ]
+    },
+    "response_z0001_z00001.dat": {
+      "measured": 8,
+      "missing": 0,
+      "axes": [
+        [
+          0.98,
+          0.995
+        ],
+        [
+          4400.0,
+          4800.0
+        ],
+        [
+          5.15,
+          5.4
+        ]
+      ]
+    }
+  },
+  "limitations": [
+    "Recovery of existing accepted sources, not new physical validation.",
+    "No selected stellar trajectory yet; native corridor and derivative checks required.",
+    "Gas only at tau 100, fixed GS98 ratios, bounded separable He3 response.",
+    "Highest hydrogen fraction .9995; later trace-He and pure-H families are separate."
+  ],
+  "output_sha256": {
+    "metal_z0025_z001.dat": "bb869a6fd3589e62f72d5c2056820951103a5af8e186f15ee961cac976f24a6d",
+    "chain_z0001.dat": "c49a60c3ef91e0da479827857f2138f593162454d9e6a94b69778ae71c9c1b13",
+    "reference_z020.dat": "b2d743a5c8e277830d379dc3ecd873597e55dfc707f805ccdfe6f7fd220fef99",
+    "response_z0001_z00001.dat": "fc8665333a059ece32ce57e7fc8724b6404280e80dd05fffc3ceafe4634da7f0",
+    "chain_z001.dat": "890181a93a1ad1cfaec15a64706e9eae36a6c63ef807a24b72d881199ca357ad",
+    "interval_z020.dat": "3dd3650dbb7402db8cd0cf3747d45d49c576f4f07b767a0d1999b19b75e70616",
+    "near_response_z00001_z000001.dat": "781f56be194ab1f89b43b5ec89d2c2b6b341336822d60f93f695c60369c69057",
+    "metal_z020_z010.dat": "7cffa901b19a837a0427818d9a10c0e6ad3c3b2c52d20fc484c4878cbb9b666a",
+    "reference_z001.dat": "6838997a141c6660420abd5315d181f7bc24d2e560b09656b13092f5afdf1636",
+    "reference_z0001.dat": "2164f572768684c8197f5d624efd2bb5fa07ae7aa2d0af74a6637809579e287c",
+    "chain_z020.dat": "c364f9957eb3847665695e7b86eba3be651c729b95d8c84a3426685f9c3c0bd9",
+    "interval_z001.dat": "f7efbefb62092cb43c72363b0e690573562c29fb7846e740a2babf615197bc36",
+    "response_z001_z0005.dat": "e989bc11adf275820c3539f98d2bede3687ac90bf2f0d36e70d24b0ecc489dac",
+    "metal_z001_z0005.dat": "50fea3a9b4df3d565bb885c68017fd0c3671ea8f1b37d6a5ff56ecffda9a1f18",
+    "near_response_z0001_z00001.dat": "98fd271a90878910ad2f98c5bc42d40401668523618197b8a7841205c31b34f0",
+    "interval_z0001.dat": "1bc9828045b8dfbbc12aa3b8fec96b20c40c377d7c07baf044dfdb0beaa8f805",
+    "metal_z010_z005.dat": "0885cf8e405227c4a7612190b03c295f916d12c076b79869c26bc428049137b1",
+    "response_z0005_z0001.dat": "13bd2c9a441c77c3408b8347ee24f881f541f35e69c1bcb07ac3d99fac76e849",
+    "lower_z0001.dat": "bda31c117c108ddfc787357979e923fa576c146e265e5cf3003814ad9ed3e515",
+    "metal_z005_z0025.dat": "62e64cf93a7ac53be60a5d4a6cf0b431dcddb79eed3f44300df6d6c10aabd4b6",
+    "lower_z0005.dat": "3c86a218d578a79719a9775305401cce3ebcca65819ca4eafdcccab539ae114d"
+  }
+}

@@ -1,0 +1,8 @@
+EMBER_HYDROGEN_ATMOSPHERE_INTERVAL 2
+lower_interval "interval_z020.dat"
+lower_metal_chain "lower_z0005.dat"
+lower_reference_Z .0005
+reference "reference_z001.dat"
+chain "chain_z001.dat"
+reference_Z .001
+hydrogen .9 .94

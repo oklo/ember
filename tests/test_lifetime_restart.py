@@ -158,6 +158,32 @@ def main():
         rejected = run("chain-axis-change", restart_chain, expected=1, configuration=bad_chain)
         assert "checkpoint" in rejected.stderr and "atmosphere.metal_chain" in rejected.stderr
 
+        # Recursive hydrogen intervals must leave the early branch untouched
+        # and bind every nested table and coordinate, independent of filenames.
+        reference = payload(response_dir / "main_sequence_reference.dat")
+        inner = relocated / "hydrogen-inner.dat"
+        inner.write_text('EMBER_HYDROGEN_ATMOSPHERE_INTERVAL 1\nreference ' + json.dumps(reference) +
+                         '\nchain "metal-chain.dat"\nreference_Z .02\nhydrogen .75 .8\n')
+        outer = relocated / "hydrogen-outer.dat"
+        outer.write_text('EMBER_HYDROGEN_ATMOSPHERE_INTERVAL 2\nlower_interval "hydrogen-inner.dat"\n'
+                         'lower_metal_chain "metal-chain.dat"\nlower_reference_Z .02\nreference ' +
+                         json.dumps(reference) + '\nchain "metal-chain.dat"\nreference_Z .02\nhydrogen .82 .85\n')
+        interval_settings = dict(chain_settings, atmosphere_hydrogen_interval=outer.name)
+        interval_config = configuration_file("hydrogen-interval.txt", interval_settings)
+        run("hydrogen-interval", maximum_steps=3, configuration=interval_config)
+        assert history(work / "hydrogen-interval") == history(work / "prefix")
+        interval_restart = ("--restart", str(work / "hydrogen-interval/final.checkpoint"))
+        renamed_outer = relocated / "renamed-interval.dat"
+        renamed_outer.write_bytes(outer.read_bytes())
+        moved_interval = configuration_file("moved-interval.txt", dict(interval_settings,
+                                            atmosphere_hydrogen_interval=renamed_outer.name))
+        run("moved-interval", interval_restart, configuration=moved_interval)
+        assert history(work / "moved-interval") == history(work / "resumed")
+        inner.write_text(inner.read_text().replace("hydrogen .75 .8", "hydrogen .751 .8"))
+        rejected = run("changed-inner-interval", interval_restart, expected=1, configuration=moved_interval)
+        assert "checkpoint" in rejected.stderr and "hydrogen_interval.lower.hydrogen_low" in rejected.stderr
+        inner.write_text(inner.read_text().replace("hydrogen .751 .8", "hydrogen .75 .8"))
+
         # A local nonlinear correction tolerance and a global inventory budget
         # measure different quantities; neither must be ordered against the other.
         independent = configuration_file("independent-tolerances.txt", {
