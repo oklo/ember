@@ -1,0 +1,69 @@
+{
+  "created_utc": "2026-09-27T08:05:09.344689+00:00",
+  "scope": "Test whether continuation from the accepted cooler branch avoids the thin-layer temperature oscillation. Independent same-state control verifies the energy-balance change at4600/logg5.95. No opacity, equilibrium equation or acceptance change.",
+  "selected_for_evolution": false,
+  "completion": {
+    "finished_utc": "2026-09-27T07:56:00.044838+00:00",
+    "CPU_seconds": 1667.4803230000002,
+    "accepted": 1,
+    "cases": 2,
+    "selected_for_evolution": false
+  },
+  "results": [
+    {
+      "name": "t4650_g600_cool_seed",
+      "pid": 12731,
+      "returncode": 0,
+      "CPU_seconds": 767.3953660000001,
+      "wall_seconds": 770.127329332754,
+      "accepted": true,
+      "selected_for_evolution": false,
+      "diagnostics": {
+        "T": 5843.508451305174,
+        "Pgas": 76755522.59851003,
+        "source_density": 0.0001879776952754861,
+        "column_mass": 76.75551020861776,
+        "flux_error": 2.4372648717019274e-06,
+        "correction": 8.96e-07,
+        "effective_flux_error": 0.00020704463917542437,
+        "hydrostatic_error": 1.9138706019994345e-07,
+        "chemical_density_error": 5.199074504247392e-11,
+        "iterations": 80,
+        "depths": 112,
+        "tau_bracket": [
+          84.92223019173868,
+          114.21720261376069
+        ],
+        "optical_depth_range": [
+          6.123704013426026e-08,
+          1639.0014701462349
+        ],
+        "column_mass_range": [
+          0.001044815257276067,
+          182.299051513597
+        ],
+        "temperature_range": [
+          3431.5480217417717,
+          6730.034824312047
+        ],
+        "density_range": [
+          3.2238671099628105e-09,
+          0.00037116973889722354
+        ]
+      }
+    },
+    {
+      "name": "t4600_g595_balance_control",
+      "pid": 12730,
+      "returncode": -24,
+      "CPU_seconds": 900.084957,
+      "wall_seconds": 902.8388189589605,
+      "accepted": false,
+      "selected_for_evolution": false,
+      "failure": "source process exit -24"
+    }
+  ],
+  "interpretation": "4650K/logg6.0 converges from a cooler donor under unchanged source acceptance, after warmer-donor attempts oscillated. The same-state4600K/logg5.95 balance-depth control remains unaccepted; late corrections alternate0.0987 and0.818 atdepth59, so its small surface corrections do not demonstrate convergence. Do not generalize the balance-depth setting to every source point.",
+  "reference_plan": "out/highg-cool-seed-control-sept27-v1/balance_plan.json",
+  "source_result_sha256": "233cdf307800580e20e8a3f5a33aa5ef097236bc0a17f771b57b7ce5d4b06073"
+}

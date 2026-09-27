@@ -15,8 +15,10 @@ Failed trial audits now trigger a smaller timestep, with a bounded number of
 retries. Every full and half interval still has to pass the same checks before
 acceptance. Controller recovery, physical diffusion and exact restart pass
 their tests in the isolated checkout. Local composition tolerances remain
-1e-15 for one instantaneously mixed region and 1e-12 otherwise; the global
-inventory budget remains 1e-14.
+1e-15 for one instantaneously mixed region and a checked 1e-13 setting otherwise;
+the global inventory budget remains 1e-14. A matched 11.76-Myr comparison reduces
+accepted intervals from 19 to 10, with a 0.00004235% luminosity difference.
+[Composition-solve comparison](results/radiative_core_solve_accuracy_sept27_v1.json).
 
 The continuous trajectory passes all isotope and energy checks. A checked continuation adds the later trace-He/pure-H atmosphere inputs without changing
 its accepted physical state. All 5932 tested early boundary values remain exact,

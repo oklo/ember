@@ -1,0 +1,120 @@
+{
+  "created_utc": "2026-09-27T08:00:00.982333+00:00",
+  "scope": "Matched-age local composition solve comparison across first radiative-core growth; global audits and adaptive time-error settings unchanged.",
+  "initial_age_years": 3558517760080.4683,
+  "final_age_years": 3558529524901.437,
+  "cases": [
+    {
+      "local_tolerance": 1e-12,
+      "accepted": 19,
+      "rejected": 10,
+      "final": {
+        "years": 3558529524901.437,
+        "step_years": 231552.65700387262,
+        "accepted": 6333,
+        "rejected": 64,
+        "radius_Rsun": 0.14369733702901147,
+        "Teff_K": 3250.0093308458463,
+        "luminosity_Lsun": 0.0020755325541255134,
+        "nuclear_fraction": 0.9826168565456741,
+        "central_T_K": 8517047.684643151,
+        "H_mass_g": 3.423814892083512e+31,
+        "He3_mass_g": 1.0847247465973512e+29,
+        "D_mass_g": 0,
+        "surface_X": 0.17223864092061708,
+        "surface_Z": 0.020005648037324297,
+        "error_norm": 0.014437693818258879,
+        "initial_D_approximation": 0,
+        "omitted_mixing_heat_fraction": 0,
+        "gross_mixing_heat_fraction": 0,
+        "burn_gradient_estimate": 1.6498987040855138e-12,
+        "drift_gradient_proxy": 8.044455785979615e-07,
+        "kinetic_heat_proxy": 0.012292565010440498,
+        "convective_mass_fraction": 0.908594735153178,
+        "radiative_boundaries": 23,
+        "relative_mixing_gradient": 2.787570109209933e-10,
+        "convective_travel_years": 0.6671430050579387,
+        "cpu_seconds": 202.721382
+      }
+    },
+    {
+      "local_tolerance": 1e-13,
+      "accepted": 10,
+      "rejected": 2,
+      "final": {
+        "years": 3558529524901.437,
+        "step_years": 890328.0809511497,
+        "accepted": 6324,
+        "rejected": 56,
+        "radius_Rsun": 0.14369731284995463,
+        "Teff_K": 3250.0092601627293,
+        "luminosity_Lsun": 0.002075531675092123,
+        "nuclear_fraction": 0.9826166265385866,
+        "central_T_K": 8517049.08494689,
+        "H_mass_g": 3.4238148899991356e+31,
+        "He3_mass_g": 1.0847251443444399e+29,
+        "D_mass_g": 0,
+        "surface_X": 0.172238648026666,
+        "surface_Z": 0.02000564765550012,
+        "error_norm": 0.19808782475427833,
+        "initial_D_approximation": 0,
+        "omitted_mixing_heat_fraction": 0,
+        "gross_mixing_heat_fraction": 0,
+        "burn_gradient_estimate": 1.6501335787484433e-12,
+        "drift_gradient_proxy": 8.044456570716401e-07,
+        "kinetic_heat_proxy": 0.012292573815225003,
+        "convective_mass_fraction": 0.908594735153178,
+        "radiative_boundaries": 23,
+        "relative_mixing_gradient": 2.787675815873951e-10,
+        "convective_travel_years": 0.6671444786770527,
+        "cpu_seconds": 55.792583
+      }
+    }
+  ],
+  "maximum_profile_relative_difference": {
+    "radius": 1.686236004222431e-07,
+    "density": 1.975377474306755e-06,
+    "temperature": 1.8225425195757635e-07
+  },
+  "maximum_absolute_stored_abundance_difference": 1.1304377657006537e-06,
+  "surface_and_inventory_relative_difference": {
+    "radius_Rsun": -1.6826377813305982e-07,
+    "Teff_K": -2.174858892978193e-08,
+    "luminosity_Lsun": -4.235218515891148e-07,
+    "central_T_K": 1.6441187011828617e-07,
+    "H_mass_g": -6.087876869287356e-10,
+    "He3_mass_g": 3.6668020153562964e-07,
+    "surface_X": 4.12569960417386e-08,
+    "surface_Z": -1.908581892529071e-08
+  },
+  "audits": "Every retained full/half interval in both cases passes the existing1e-14 inventory, mass-power and first-law checks.",
+  "timing_caveat": {
+    "exact_accepted_replay_steps": 9,
+    "median_old_over_replay_cpu": 3.628996227371501,
+    "cause": "Unresolved scheduling/cache/hardware variability. Do not interpret the raw timing ratio as solely a tolerance effect.",
+    "production_parallelism": "Existing workers block on condition variables rather than spin. No parallel implementation change selected."
+  },
+  "original_target": "Tighter case also reaches the original20Myr target; the retained-tolerance allocation stopped early. The comparison above uses its EXACT final age, with an independent tighter restart to that age.",
+  "selected_change": "Tighten coupled abundance tolerance from1e-12 to1e-13. No conservation or time-error tolerance relaxed.",
+  "sha256": {
+    "out/radiative-core-solve-accuracy-sept27-v1/retained/continuation/final.checkpoint": "fbc19f0526c3da88fc8568d9807c56e4774e978b101f067c079d75c65d52ea39",
+    "out/radiative-core-solve-accuracy-sept27-v1/tighter/matched/final.checkpoint": "06fff7dab3fccdb095649bb1883bffc7f4456b4907a8d312dff385fbdebac8fa",
+    "out/radiative-core-solve-accuracy-sept27-v1/plan.json": "c4e18ed3f38bf173e91f1c29031e4323060b95c0a735af599f54c4c6c1008924",
+    "out/radiative-core-solve-accuracy-sept27-v1/matched_plan.json": "c66f42443b8e2542983a48be440e8d46e44d54e3f40a962afa19227a9d96c93c"
+  },
+  "selected_continuation": {
+    "previous_run": "out/continuous-lifetime-sept27-v5",
+    "previous_accepted_limit": 6496,
+    "initial_age_years": 3558732167954.5903,
+    "local_abundance_tolerance": 1e-13,
+    "physical_payload_sha256": "29f846aa3c31ef71ef71080450c388cfde11f77dc57fa699f607d700b1d98818",
+    "changed_identity": {
+      "configuration.coupling_abundance_tolerance": [
+        "9.9999999999999998e-13",
+        "1e-13"
+      ]
+    },
+    "run": "out/continuous-lifetime-sept27-v6",
+    "initial_history_physical_values_identical": true
+  }
+}

@@ -127,6 +127,10 @@ local tolerance while passing the unchanged **1e-14** inventory budget and
 energy checks; forcing the local correction to **1e-15** stalls its line search.
 The global budget need not be larger than the local correction tolerance.
 Neither setting replaces the full-step/two-half-step accuracy check.
+The continuous star now uses a tighter **1e-13** stratified solve after a matched
+**11.76-Myr** comparison at radiative-core onset. This reduces audit retries
+without changing the global budget; luminosities differ by **0.00004235%**.
+[Comparison and exact continuation](results/radiative_core_solve_accuracy_sept27_v1.json).
 When instantaneous convection mixes the whole star, the driver tightens the
 composition correction to the smaller of the selected tolerance and **1e-15**.
 This inexpensive one-region solve needs that precision during initial

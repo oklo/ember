@@ -58,6 +58,11 @@ A 50-Gyr timestep comparison used 25 intervals instead of 73, with a
 The continuous star now uses that tested time-error setting; structure accuracy
 and all conservation checks are unchanged.
 [Timestep comparison](docs/results/lifetime_time_accuracy_sept27_v1.json).
+At radiative-core onset, a matched **11.76 Myr** comparison supports a tighter
+local composition solve, **1e-13**. It uses **10** accepted intervals and **2**
+retries instead of **19** and **10**, with a **0.00004235%** luminosity difference.
+This setting is now selected; global conservation checks are unchanged.
+[Composition-solve comparison](docs/results/radiative_core_solve_accuracy_sept27_v1.json).
 The microscopic metal law assumes complete ionization; unsupported cool
 radiative layers are rejected. Initial deuterium uses a checked whole-star
 mixing approximation. Nuclear burning includes the pp chain and explicit
