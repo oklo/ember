@@ -118,6 +118,9 @@ int lifetime_main(int argc,char** argv) {
     const double buoyancy_spacing=optional_number("buoyancy_reuse_spacing");
     const double screening_spacing=optional_number("screening_reuse_spacing");
     const double verify_responses=optional_number("verify_response_reuse");
+    const double linearized_burning=optional_number("linearized_burning");
+    if(linearized_burning!=0 && linearized_burning!=1)
+      throw std::invalid_argument("linearized_burning must be zero or one");
     const double coupling_stop=optional_number("coupling_stop_tolerance");
     const double material_heat=optional_number("material_heat_tolerance");
     const double verification_residual=optional_number("verification_residual_tolerance");
@@ -225,6 +228,7 @@ int lifetime_main(int argc,char** argv) {
       identity.number("configuration."+key,value);
     identity.number("solver.homogeneous_abundance_tolerance",std::min(1e-15,abundance_tolerance));
     if(structure_prediction=="linear")identity.number("solver.structure_prediction",1);
+    if(linearized_burning==1)identity.number("solver.linearized_burning",1);
     if(collision_radius>0)identity.number("solver.collision_taylor_radius",collision_radius);
     if(eos_radius>0)identity.number("solver.eos_taylor_radius",eos_radius);
     if(buoyancy_spacing>0)identity.number("solver.buoyancy_reuse_spacing",buoyancy_spacing);
@@ -318,6 +322,7 @@ int lifetime_main(int argc,char** argv) {
     auto later=early;later.opacity=radiation.get();later.microscopic=&convective_heat;later.explicit_metal_mixing_only=false;
     if(screened_core)later.microscopic=&envelope_heat;
     EvolutionOptions options;options.relaxation.zone_threads=static_cast<std::size_t>(threads);options.abundance_tolerance=abundance_tolerance;
+    options.linearized_burning=linearized_burning==1;
     options.homogeneous_abundance_tolerance=std::min(1e-15,abundance_tolerance);
     options.coupling_stop_tolerance=coupling_stop;
     if(material_heat>0)options.material_heat_tolerance=material_heat;

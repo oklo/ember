@@ -354,3 +354,38 @@ they do not independently establish identical boundary positions. This
 comparison covers gradual shell burning; sampled timestep control and flash
 convergence remain separate work.
 [Measurements](results/parallel_coupling_sept27_v1.json).
+
+
+### Composition response in the structure iteration
+
+The optional `linearized_burning "1"` includes the change in nuclear heating
+caused by the local end-of-step composition responding to temperature and
+density. Three auxiliary implicit burns estimate that response once per solve.
+The structure iteration includes the resulting linear terms, which vanish as
+the coupled solution converges. Direct temperature and density derivatives
+already supplied by the nuclear network are not counted twice.
+
+This is an approximate Jacobian. It omits transport feedback and applies no
+response to instantaneously mixed regions. With finite mixing, its local
+response likewise omits mixing during the auxiliary burns. Every returned
+assisted solution passes the original structure equations, physical convection
+test, species conservation and energy checks. An unsuccessful auxiliary burn
+falls back to the existing iteration. The option is off by default and enters
+the restart identity when enabled. It works with `structure_prediction "linear"`.
+
+For the same Hayashi-origin star near **3.997 Tyr**, a **1 Gyr** comparison
+with two threads per run used **15.47 CPU seconds** versus **149.5 seconds**
+with the current production solver. Measured elapsed times were **10.14** and
+**79.28 seconds**: **7.815 times** faster in this phase, with **9.663 times**
+less CPU. Both runs retained every full-step/two-half-step check and the same
+acceptance thresholds. The improved iteration accepted eight longer intervals,
+versus 49; rejections fell from 30 to one.
+
+The maximum relative global difference was **0.01382%**. The largest local
+ln-density difference was **2.994e-4**, and the helium-3 profile difference
+normalized by its peak was **1.102e-4**. Convective mass and boundary counts
+agreed. Five tests cover the differentiated structure equations and ordinary,
+finite and lagged mixing. This single comparison measures gradual shell
+burning under shared machine load; it does not establish flash convergence
+or a whole-lifetime speed-up.
+[Comparison](results/linearized_burning_sept27_v1.json).

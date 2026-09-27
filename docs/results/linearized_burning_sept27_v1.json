@@ -1,0 +1,189 @@
+{
+  "scope": "Same current Hayashi-origin star over 1 Gyr near 3.997 Tyr; full/two-half time checking unchanged. Concurrent-start timing pair, both two threads, with atmosphere jobs sharing the machine; the main stellar run was stopped at its atmosphere boundary. Only candidate burning-response code differs from the production settings. Not flash convergence.",
+  "start_years": 3996814886056.015,
+  "runs": {
+    "control": {
+      "endpoint": {
+        "years": 3997814886056.0146,
+        "step_years": 1785969.4283712322,
+        "accepted": 16632,
+        "rejected": 4812,
+        "radius_Rsun": 0.04773888368025275,
+        "Teff_K": 4614.472649387704,
+        "luminosity_Lsun": 0.0009309503117377628,
+        "nuclear_fraction": 0.9986172233330226,
+        "central_T_K": 6458768.1649336135,
+        "central_density_g_cm3": 39720.69528125721,
+        "central_X": 4.019806835370043e-08,
+        "central_He3": 1.0582636332985472e-14,
+        "eps_nuc_peak_erg_g_s": 0.6972419437664592,
+        "eps_nuc_peak_q": 0.9657353348735038,
+        "burning_half_max_inner_q": 0.9541068657373265,
+        "burning_half_max_outer_q": 0.9740752971253469,
+        "burning_half_max_cells": 16,
+        "He3_peak": 0.018489340011938058,
+        "He3_peak_q": 0.971484245216312,
+        "H_mass_g": 7.573162026916599e+30,
+        "He3_mass_g": 7.512360347215845e+28,
+        "D_mass_g": 0,
+        "surface_X": 0.9987832192032811,
+        "surface_Z": 6.572233169162103e-42,
+        "error_norm": 0.00034866756005708853,
+        "initial_D_approximation": 0,
+        "omitted_mixing_heat_fraction": 0,
+        "gross_mixing_heat_fraction": 0,
+        "burn_gradient_estimate": 2.998207479541522e-14,
+        "drift_gradient_proxy": 5.610413971855518e-07,
+        "kinetic_heat_proxy": 0.013955309739851785,
+        "convective_mass_fraction": 0.013817837544875394,
+        "radiative_boundaries": 412,
+        "relative_mixing_gradient": 2.2778055036447022e-11,
+        "convective_travel_years": 0.05614667485556514,
+        "cpu_seconds": 149.468163
+      },
+      "accepted": 49,
+      "rejected": 30,
+      "CPU_seconds": 149.4756,
+      "max_accepted_species_error": 4.4161145532381045e-18,
+      "max_accepted_first_law": 1.991919142962928e-07,
+      "max_error_norm": 0.246056255353011,
+      "report": {
+        "requested_age_reached": 1,
+        "age_years": 3997814886056.0146,
+        "accepted_this_invocation": 49,
+        "accepted_total": 16632,
+        "rejected_total": 4812,
+        "stop_reason": "requested age",
+        "cpu_seconds": 149.4756,
+        "wall_seconds": 79.016608625,
+        "full_production_track_validated": false,
+        "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+      },
+      "sha256": "958800d35b3b0d6f0ab0737fdede12e4cfd3282f4251a64966e0c7d1421d83ef",
+      "wall_seconds": 79.27606841735542,
+      "rejection_reasons": {
+        "evolve_step: Newton iteration limit reached": 2,
+        "physical inventory/energy audit failed": 28
+      },
+      "accepted_step_years_range": [
+        1785969.4283712322,
+        70477625.67698905
+      ]
+    },
+    "candidate": {
+      "endpoint": {
+        "years": 3997814886056.0146,
+        "step_years": 22155897.906022765,
+        "accepted": 16591,
+        "rejected": 4783,
+        "radius_Rsun": 0.04774128885786627,
+        "Teff_K": 4614.515772969395,
+        "luminosity_Lsun": 0.0009310789242622473,
+        "nuclear_fraction": 0.9985303203695193,
+        "central_T_K": 6458802.73308202,
+        "central_density_g_cm3": 39720.48467233634,
+        "central_X": 4.019855815478693e-08,
+        "central_He3": 1.0583109015874561e-14,
+        "eps_nuc_peak_erg_g_s": 0.6972657858379521,
+        "eps_nuc_peak_q": 0.9657353348735038,
+        "burning_half_max_inner_q": 0.9541068657373265,
+        "burning_half_max_outer_q": 0.9740752971253469,
+        "burning_half_max_cells": 16,
+        "He3_peak": 0.018488646379398743,
+        "He3_peak_q": 0.971484245216312,
+        "H_mass_g": 7.573165936908186e+30,
+        "He3_mass_g": 7.512171240408003e+28,
+        "D_mass_g": 0,
+        "surface_X": 0.9987837358411031,
+        "surface_Z": 6.603126729390153e-42,
+        "error_norm": 0.009107123499774161,
+        "initial_D_approximation": 0,
+        "omitted_mixing_heat_fraction": 0,
+        "gross_mixing_heat_fraction": 0,
+        "burn_gradient_estimate": 3.004687236467419e-14,
+        "drift_gradient_proxy": 5.610539183541891e-07,
+        "kinetic_heat_proxy": 0.013955692681254756,
+        "convective_mass_fraction": 0.013817837544875394,
+        "radiative_boundaries": 412,
+        "relative_mixing_gradient": 2.2836339314583936e-11,
+        "convective_travel_years": 0.05618262400878005,
+        "cpu_seconds": 15.462375
+      },
+      "accepted": 8,
+      "rejected": 1,
+      "CPU_seconds": 15.469618,
+      "max_accepted_species_error": 4.310982125984642e-17,
+      "max_accepted_first_law": 1.1714748349156423e-07,
+      "max_error_norm": 0.7577139844272551,
+      "report": {
+        "requested_age_reached": 1,
+        "age_years": 3997814886056.0146,
+        "accepted_this_invocation": 8,
+        "accepted_total": 16591,
+        "rejected_total": 4783,
+        "stop_reason": "requested age",
+        "cpu_seconds": 15.469618,
+        "wall_seconds": 9.7936305,
+        "full_production_track_validated": false,
+        "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+      },
+      "sha256": "4cc9b49fa4f92941054078671abb8f12e680d5703d27846383b94ae1da6cad68",
+      "wall_seconds": 10.144347500056028,
+      "rejection_reasons": {
+        "evolve_step: abundance change exceeds step limit": 1
+      },
+      "accepted_step_years_range": [
+        22155897.906022765,
+        174094609.49834925
+      ]
+    }
+  },
+  "global_relative_differences": {
+    "luminosity_Lsun": 0.000138151867895564,
+    "radius_Rsun": 5.038194084350245e-05,
+    "Teff_K": 9.345289259998779e-06,
+    "central_T_K": 5.352127143032348e-06,
+    "central_density_g_cm3": -5.302246584126813e-06,
+    "H_mass_g": 5.162957787963052e-07,
+    "He3_mass_g": -2.517275517965878e-05,
+    "He3_peak": -3.7515267655163775e-05,
+    "convective_mass_fraction": 0.0
+  },
+  "profile_max_differences": {
+    "lnr": 5.038067171625471e-05,
+    "lnrho": 0.00029938382207639336,
+    "lnT": 7.336194185114664e-05,
+    "H1": 2.702258909526023e-06,
+    "He3": 2.037849056882833e-06,
+    "He3_over_peak": 0.0001102175121214197
+  },
+  "wall_speedup": 7.814802126693468,
+  "CPU_speedup": 9.662526896268544,
+  "settings": {
+    "linearized_burning": "1"
+  },
+  "zone_threads": {
+    "control": 2,
+    "candidate": 2
+  },
+  "same_boundary_counts": true,
+  "boundary_positions_scope": "Endpoint convective mass fractions and boundary counts compared; complete region sets are not stored in these histories.",
+  "tests": [
+    "Matched one-Gyr evolution with unchanged stopping tolerances, inner solve, isotope/energy audits and full/two-half time checking; structure Jacobian and four microscopic-evolution test variants pass"
+  ],
+  "all_checks_pass": true,
+  "implementation": {
+    "default_on": false,
+    "key": "linearized_burning",
+    "scope": "Local implicit-burning composition response; no transport response or fully coupled Newton solve. Original structure equations verified before returning every assisted solve.",
+    "nuclear_difference_step": 1e-05,
+    "selected_in_main_star": false,
+    "next_continuation_recommended": true
+  },
+  "limitations": [
+    "Single timing pair under shared-machine load; gain is phase dependent.",
+    "Adaptive steps differ, so endpoint offsets include time discretization.",
+    "Flash onset is not tested by this comparison.",
+    "Boundary counts and convective mass agree; histories do not save every boundary position."
+  ]
+}

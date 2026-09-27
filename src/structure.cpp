@@ -45,14 +45,16 @@ template<std::size_t N> struct Local {
 };
 
 template<std::size_t N>
-Local<N> gather(const Point& point, const Composition& comp, const Physics& phys, std::size_t offset) {
+Local<N> gather(const Point& point, const Composition& comp, const Physics& phys,
+                std::size_t offset, std::size_t index) {
   using D = Differential<N>;
   for (double x : {point.lnr, point.lnrho, point.lnT, point.L})
     if (!std::isfinite(x)) throw std::domain_error("zone_residual: non-finite mesh point");
   Local<N> q{};
   q.lnr = D::variable(point.lnr, offset);
   q.r = exp(q.lnr);
-  q.rho = exp(D::variable(point.lnrho, offset + 1));
+  const D lnrho = D::variable(point.lnrho, offset + 1);
+  q.rho = exp(lnrho);
   q.lnT = D::variable(point.lnT, offset + 2);
   q.T = exp(q.lnT);
   q.L = D::variable(point.L, offset + 3);
@@ -82,6 +84,15 @@ Local<N> gather(const Point& point, const Composition& comp, const Physics& phys
   q.grad_ad = material(e.grad_ad, response.dgrad_ad_dlnT, response.dgrad_ad_dlnRho);
   q.kappa = material(k.kappa, k.kappa * k.dlnk_dlnT, k.kappa * k.dlnk_dlnRho);
   q.eps = material(n.eps, n.eps * n.dlneps_dlnT, n.eps * n.dlneps_dlnRho);
+  if (!phys.burning_response.empty()) {
+    if (index >= phys.burning_response.size())
+      throw std::invalid_argument("zone_residual: incomplete burning response");
+    const auto& b = phys.burning_response[index];
+    for (double v : {b.dEps_dlnT,b.dEps_dlnRho,b.lnT_ref,b.lnRho_ref})
+      if (!std::isfinite(v)) throw std::domain_error("zone_residual: nonfinite burning response");
+    q.eps = q.eps + b.dEps_dlnT * (q.lnT-b.lnT_ref)
+                  + b.dEps_dlnRho * (lnrho-b.lnRho_ref);
+  }
   if(phys.neutrino_losses) {
     const auto loss=evaluate_losses(phys.neutrino_losses,q.T.value,q.rho.value,comp);
     q.eps=q.eps-material(loss.eps,loss.eps*loss.dlneps_dlnT,loss.eps*loss.dlneps_dlnRho);
@@ -93,8 +104,8 @@ template<std::size_t N>
 std::array<Differential<N>, NVAR> equations(const Model& model, std::size_t i,
     const Point& lo, const Point& hi, const Physics& phys, double dt, const std::optional<Previous>& prev) {
   using D = Differential<N>;
-  const auto a = gather<N>(lo, model.comp[i], phys, 0);
-  const auto b = gather<N>(hi, model.comp[i + 1], phys, NVAR);
+  const auto a = gather<N>(lo, model.comp[i], phys, 0, i);
+  const auto b = gather<N>(hi, model.comp[i + 1], phys, NVAR, i + 1);
   const double dm = model.m[i + 1] - model.m[i];
   const double mb = 0.5 * (model.m[i] + model.m[i + 1]);
   const D rb = 0.5 * (a.r + b.r), rhob = 0.5 * (a.rho + b.rho);

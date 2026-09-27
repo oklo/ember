@@ -68,6 +68,40 @@ struct CompositionUpdate {
   std::vector<SpeciesVector> total_rates;
   std::vector<MetalSpeciesVector> total_metal_rates;
 };
+std::vector<BurningResponse> local_burning_response(const Model& thermal,
+    const Model& previous,const Nuclear& nuclear,const MixingRegions& regions,
+    double dt,double tolerance) {
+  // Transport is deliberately absent from this approximate Jacobian. Each
+  // singleton has an independent local burn; mixed regions receive no slope.
+  if(std::none_of(regions.begin(),regions.end(),[](auto r){return r.second==r.first+1;}))return {};
+  constexpr double h=1e-5;
+  try {
+    const auto base=burn_and_mix(thermal,previous,nuclear,regions,dt,tolerance);
+    auto hot=thermal,dense=thermal;
+    for(auto& y:hot.y)y.lnT+=h;
+    for(auto& y:dense.y)y.lnrho+=h;
+    const auto warm=burn_and_mix(hot,previous,nuclear,regions,dt,tolerance);
+    const auto packed=burn_and_mix(dense,previous,nuclear,regions,dt,tolerance);
+    std::vector<BurningResponse> response(thermal.size());
+    for(const auto [begin,end]:regions)if(end==begin+1) {
+      const double T=thermal.T(begin),rho=thermal.rho(begin);
+      const double e0=nuclear.eval(T,rho,base[begin]).eps;
+      auto& r=response[begin];
+      r.dEps_dlnT=(nuclear.eval(T,rho,warm[begin]).eps-e0)/h;
+      r.dEps_dlnRho=(nuclear.eval(T,rho,packed[begin]).eps-e0)/h;
+      if(!std::isfinite(r.dEps_dlnT) || !std::isfinite(r.dEps_dlnRho))return {};
+    }
+    return response;
+  } catch(const std::domain_error&) {
+    // A derivative probe may leave the nuclear source domain. The original
+    // solver remains available and still enforces the physical domain.
+    return {};
+  } catch(const std::runtime_error&) {
+    // Failure of an auxiliary local burn need not reject the full coupled
+    // solve. No composition or heating from these probes is retained.
+    return {};
+  }
+}
 }
 std::vector<double> nodal_mass_weights(const Model& m) {
   if(m.size()<2 || m.m.size()!=m.size() || !(m.m[0]>0) || m.m.back()!=m.M)
@@ -233,7 +267,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
     double dt,const EvolutionOptions& options) {
   EvolutionStep result;result.model=previous;
   if(!p.eos || !p.nuclear || !p.opacity || !p.eos->has_internal_energy() || !(dt>0) || !std::isfinite(dt)
-      || previous.comp.size()!=previous.size()
+      || previous.comp.size()!=previous.size() || !p.burning_response.empty()
       || !std::isfinite(previous.age+dt) || previous.age<0 || !(previous.age+dt>previous.age)
       || !std::isfinite(options.abundance_tolerance) || options.abundance_tolerance<=0
       || !std::isfinite(options.homogeneous_abundance_tolerance) || options.homogeneous_abundance_tolerance<0
@@ -402,6 +436,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
     CompositionUpdate pending;
     bool have_pending=false;
     std::string coupling_reason;
+    std::vector<BurningResponse> burning_response;
     for(std::size_t iteration=0;iteration<options.max_coupling_iterations;++iteration) {
       // The convergence check below already evaluates the next composition
       // on this exact thermal state. Retain it when another coupling pass is
@@ -415,7 +450,19 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       for(std::size_t i=0;i<current.size();++i)
         change=std::max(change,composition_difference(current.comp[i],previous.comp[i]));
       if(change>options.max_abundance_change) throw std::runtime_error("evolve_step: abundance change exceeds step limit");
-      const auto structure=relax(current,coupled,atmosphere,options.relaxation,dt,&previous);
+      if(options.linearized_burning && iteration==0)
+        burning_response=local_burning_response(current,previous,*p.nuclear,regions,
+            dt,.1*abundance_tolerance(regions));
+      auto responsive=coupled;
+      if(!burning_response.empty()) {
+        for(const auto [begin,end]:regions)for(std::size_t i=begin;i<end;++i) {
+          auto& r=burning_response[i];
+          if(end!=begin+1)r.dEps_dlnT=r.dEps_dlnRho=0;
+          r.lnT_ref=current.y[i].lnT;r.lnRho_ref=current.y[i].lnrho;
+        }
+        responsive.burning_response=burning_response;
+      }
+      const auto structure=relax(current,responsive,atmosphere,options.relaxation,dt,&previous);
       result.coupling_iterations=iteration+1;result.residual=structure.residual;result.correction=structure.correction;
       if(!structure.converged) throw std::runtime_error("evolve_step: "+structure.message);
       current=structure.model;
@@ -470,7 +517,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       // structure and convective partition still satisfy convergence.
       const auto final_regions=finite?convective_mixing_regions(current,coupled,options.relaxation.zone_threads):next_regions;
       if(current.comp!=next.composition || update.total_rates!=next.total_rates
-          || update.total_metal_rates!=next.total_metal_rates) {
+          || update.total_metal_rates!=next.total_metal_rates || !burning_response.empty()) {
         current.comp=std::move(next.composition);
         if(frozen) {frozen->rates=next.total_rates;frozen->metal_rates=next.total_metal_rates;}
         for(std::size_t i=0;i<current.size();++i)

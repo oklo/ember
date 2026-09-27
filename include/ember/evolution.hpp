@@ -41,6 +41,9 @@ struct EvolutionOptions {
   // Optional starting structure on the same mass mesh. Composition, age and
   // thermal history still come from the accepted previous model.
   const Model* initial_structure_guess{};
+  // Include the local implicit-burning response in the structure iteration.
+  // Final structure, mixing and conservation checks use the original physics.
+  bool linearized_burning{false};
   std::size_t max_coupling_iterations{30};
   double abundance_tolerance{1e-12};
   // Optional tighter correction bound when instantaneous convection joins

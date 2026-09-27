@@ -119,6 +119,21 @@ int main(int argc,char** argv) {
         "outer stopping rule changed integrated conservation");
     require(convective_mixing_regions(parallel.model,physics)==convective_mixing_regions(step.model,physics),
         "parallel coupling changed convection boundaries");
+    auto response_options=fast;response_options.linearized_burning=true;
+    const auto responsive=evolve_step(initial,physics,atmosphere,dt,response_options);
+    if(!responsive.converged)throw std::runtime_error("linearized burning: "+responsive.message);
+    require(driver::check_interval(initial,responsive,dt,nuclear,1e-14).pass,
+        "linearized burning changed isotope or energy conservation");
+    require(convective_mixing_regions(responsive.model,physics)==convective_mixing_regions(step.model,physics),
+        "linearized burning changed convection boundaries");
+    for(std::size_t i=0;i<initial.size();++i) {
+      for(auto v:{Var::lnr,Var::lnrho,Var::lnT})
+        require(std::abs(responsive.model.y[i][v]-parallel.model.y[i][v])<1e-6,
+            "linearized burning changed the thermal solution");
+      for(std::size_t k=0;k<NSPEC;++k)
+        require(std::abs(responsive.model.comp[i].X[k]-parallel.model.comp[i].X[k])<1e-8,
+            "linearized burning changed the species solution");
+    }
     for(std::size_t i=0;i<initial.size();++i) {
       for(auto v:{Var::lnr,Var::lnrho,Var::lnT})
         require(std::abs(parallel.model.y[i][v]-step.model.y[i][v])<1e-6,

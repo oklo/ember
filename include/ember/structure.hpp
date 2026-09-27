@@ -6,6 +6,7 @@
 #include "ember/opacity.hpp"
 #include "ember/microscopic_transport.hpp"
 #include <array>
+#include <span>
 
 namespace ember {
 
@@ -34,6 +35,12 @@ struct ZoneResidual {
 };
 
 enum class ConvectiveCriterion { schwarzschild, ledoux };
+// Composition-mediated change in nuclear heating during a structure solve.
+// This local approximation accelerates the iteration; the evolution solver
+// verifies the returned model against the equations without this response.
+struct BurningResponse {
+  double dEps_dlnT{},dEps_dlnRho{},lnT_ref{},lnRho_ref{};
+};
 struct Physics {
   const Eos* eos{};
   const Opacity* opacity{};
@@ -51,6 +58,7 @@ struct Physics {
   // physical metal inventories. This is an approximation/control choice;
   // a missing transport provider must not silently select it.
   bool explicit_metal_mixing_only{false};
+  std::span<const BurningResponse> burning_response{};
 };
 
 // Evaluate one zone.  `dt` <= 0 means a static model: the time-dependent term

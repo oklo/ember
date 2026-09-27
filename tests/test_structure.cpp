@@ -129,6 +129,21 @@ int main() {
   // 2. The production Jacobian must differentiate the value-only equations.
   check_jacobian(m, phys, -1.0, nullptr, "low-mass interior");
   {
+    std::vector<BurningResponse> response(m.size());
+    for(std::size_t i=0;i<m.size();++i)
+      response[i]={7.,-3.,m.y[i].lnT,m.y[i].lnrho};
+    auto assisted=phys;assisted.burning_response=response;
+    const auto original=zone_equations(m,0,phys,1e10,&m);
+    const auto anchored=zone_equations(m,0,assisted,1e10,&m);
+    check(original==anchored,"burning response vanishes at reference",original[2],anchored[2]);
+    auto shifted=m;shifted.y[1].lnT+=.001;shifted.y[0].lnrho-=.002;
+    check_jacobian(shifted,assisted,1e10,&m,"implicit burning response");
+    assisted.burning_response=std::span<const BurningResponse>(response.data(),1);
+    rejects([&]{(void)zone_equations(m,0,assisted,1e10,&m);},"short burning response rejected");
+    assisted.burning_response=response;response[0].dEps_dlnT=std::numeric_limits<double>::quiet_NaN();
+    rejects([&]{(void)zone_equations(m,0,assisted,1e10,&m);},"nonfinite burning response rejected");
+  }
+  {
     FergusonOpacity low(std::string(EMBER_DATA_DIR) + "/opacity/ferguson_gs98_z020.dat");
     OpalOpacity high(std::string(EMBER_DATA_DIR) + "/opacity/opal_gs98_z020.dat");
     BlendedOpacity tables(low, high);
