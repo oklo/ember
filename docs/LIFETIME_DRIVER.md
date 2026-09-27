@@ -33,10 +33,12 @@ and time-accuracy checks. If the predicted solve fails, the program retries
 from the previous structure. The default is `"none"`; after a restart, the
 prediction history is rebuilt from newly accepted states.
 
-A matched 1 Gyr interval used **197.6 CPU seconds** with prediction and
-**297.8 CPU seconds** without it. Structural and fuel differences were
-negligible. This is one timing comparison in a gradual phase, not a benchmark
-for the complete track. [Comparison](results/structure_prediction_sept27_v1.json).
+The physical-metal burning/diffusion solve also reuses the latest composition
+from the coupled iteration as its starting guess. Together with structure
+prediction, this reduced a matched 1 Gyr interval from **297.8 to 143.5 CPU
+seconds**, with negligible structural and fuel differences. This is one timing
+comparison in a gradual phase, not a benchmark for the complete track.
+[Comparison](results/solver_starting_guesses_sept27_v1.json).
 
 The initial composition file contains the nine baryonic mass fractions in
 `Composition` order. The CN inventory starts with the declared GS98 isotope

@@ -1,0 +1,81 @@
+{
+  "created_utc": "2026-09-27T15:28:19.338106+00:00",
+  "outcome": "structure and species starting guesses retain checked implicit evolution",
+  "interval_years": 1000000000.0,
+  "endpoint_years": 3676093384416.2417,
+  "comparison_pass": true,
+  "baseline_CPU_seconds": 297.802469,
+  "predicted_CPU_seconds": 143.491872,
+  "CPU_reduction_fraction": 0.5181642634400052,
+  "speed_ratio": 2.0753960823648603,
+  "accepted_intervals": 24,
+  "relative_global_changes": {
+    "luminosity_Lsun": -3.8682712588666845e-10,
+    "radius_Rsun": -2.643858465489757e-10,
+    "Teff_K": 3.548605853609388e-11,
+    "central_T_K": 1.349075517964593e-09,
+    "central_density_g_cm3": -5.279332526697544e-10,
+    "H_mass_g": 5.035749595094785e-12,
+    "He3_mass_g": 6.463898305497651e-10,
+    "He3_peak": 1.6422596615939256e-10,
+    "surface_X": 7.6225692424714e-12
+  },
+  "maximum_local_absolute_changes": {
+    "lnr": 4.395737107643072e-10,
+    "lnrho": 1.5750734050357096e-09,
+    "lnT": 1.4972023620885011e-09,
+    "H": 3.275035798111503e-11,
+    "He3": 9.827337728307572e-12
+  },
+  "convective_mass_fraction_change": 0.0,
+  "radiative_boundary_count_change": 0,
+  "accepted_audits_pass": true,
+  "maximum_accepted_species_audit": 6.829457247121973e-17,
+  "maximum_accepted_first_law": 1.601909593862416e-08,
+  "unchanged": [
+    "full-step/two-half-step time control",
+    "isotope and energy audits",
+    "nonlinear tolerances",
+    "composition and thermal history",
+    "physics and atmosphere"
+  ],
+  "tests": [
+    "pms_cn_evolution",
+    "pms_cn_face_evolution",
+    "evolution_controller",
+    "metal_microscopic_evolution",
+    "metal_microscopic_face_evolution",
+    "finite_metal_evolution"
+  ],
+  "limitations": [
+    "One gradual-phase interval with two zone threads; CPU timings vary with concurrent jobs.",
+    "Prediction is only an initial nonlinear guess and falls back if it fails; this comparison does not establish flash convergence.",
+    "Other methods in the Opus study are not selected by this change."
+  ],
+  "provenance": {
+    "plan": {
+      "target_years": 3676093384416.242,
+      "source_checkpoint": "out/current-performance-sept27-v1/snapshot.checkpoint",
+      "baseline": "out/opus-speedup-sept27-v1/runs/base",
+      "old_executable_fnv": "0715eac76fb856ce",
+      "new_executable_fnv": "431838e43192ccb7",
+      "executable_sha256": "5209646962e3a33ab8704378acf2f8ddef6f48aa69cec57bc660d335b405a880",
+      "changed_identity": [
+        "executable",
+        "solver.structure_prediction"
+      ],
+      "physical_starting_state_unchanged": true,
+      "maximum_cpu_seconds": 1500,
+      "added_change": "Reuse the latest physical-metal species iterate as the Newton starting guess"
+    },
+    "baseline": "out/opus-speedup-sept27-v1/runs/base/evolution",
+    "candidate": "out/solver-starting-guesses-sept27-v1/evolution"
+  },
+  "input_sha256": {
+    "out/opus-speedup-sept27-v1/runs/base/evolution/report.json": "383865cf80dc3522f3b594f3ee5fd297599088b7c965b38139074349c8b02aa8",
+    "out/opus-speedup-sept27-v1/runs/base/evolution/final.checkpoint": "123c3f54aa0c114f8d1ab11f8d8703889b727f1cae13815adae9663e493dfce8",
+    "out/solver-starting-guesses-sept27-v1/evolution/report.json": "2be2dd8d034be3f09b4511dfc62b505056663671ca7a32a3fffcb8b558ee3c0f",
+    "out/solver-starting-guesses-sept27-v1/evolution/final.checkpoint": "b27adea5ed2ed9fe9902f6e3dd4fd547659cfda1414950769b36d8da32e35de4",
+    "out/solver-starting-guesses-sept27-v1/restart.checkpoint": "c5f8c00f48e7973f1e747b586be757a12b7cb70618a060185f3b5821a02a2790"
+  }
+}

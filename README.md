@@ -33,15 +33,13 @@ mixing and cool radiative microscopic transport are not selected.
 [driver configuration](docs/LIFETIME_DRIVER.md).
 
 Every accepted interval passes full-step/two-half-step accuracy checks and
-isotope and energy audits. Matched-age controls support the timestep settings
-used in the fully convective and radiative-core phases. Separating local
-Newton correction accuracy from integrated species conservation removes a
-verified solver stall without weakening the conservation requirement.
-A **1 Gyr** comparison in the growing radiative interior supports a larger
-species time allowance, using **18.03%** less CPU with a **0.000184%**
-helium-3 inventory difference. No cell is excluded from the time-error check.
-[Time accuracy](docs/results/envelope_time_accuracy_sept27_v1.json),
-[diffusion convergence](docs/results/local_correction_comparison_sept27_v2.json).
+isotope and energy audits. Solves reuse the latest composition and can predict
+the next structure. In a matched **1 Gyr** test these starting guesses reduced
+CPU time from **297.8 to 143.5 seconds**, with negligible structural and fuel
+differences. The physics and accuracy checks were unchanged; this timing
+comparison does not establish the speed of a complete track.
+[Solver comparison](docs/results/solver_starting_guesses_sept27_v1.json),
+[time accuracy](docs/results/envelope_time_accuracy_sept27_v1.json).
 
 The atmosphere and EOS inputs cover all 67 saved settling comparison
 structures. The selected high-gravity atmosphere table covers **4600–6000 K**

@@ -334,6 +334,9 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
         transport_options.integrated_balance_tolerance=tolerance*.1;
         transport_options.seed_present_species=p.microscopic->requires_positive_species_guess();
         if(metal) {
+          // Reuse the last coupling iterate; previous still supplies every
+          // storage term and conservation reference in the implicit solve.
+          transport_options.initial_guess=current.comp;
           transport_options.evaluation_threads=options.relaxation.zone_threads;
           MetalCNFlux flux=[&](std::size_t i,const Composition& left,const Composition& right,bool derivatives) {
             const auto face=metal_microscopic_face(*metal,i,current.m[i],current.m[i+1],
