@@ -1,7 +1,89 @@
 {
-  "source_sha256": {
-    "out/convective-transport-sept26-v1/v4/contraction/history.jsonl": "ac9a34330379e28565d6d74d3ae8756ae3ae3a4e70bcfa28fd12e8c8c125edf9"
+  "created_utc": "2026-09-27T07:16:37.479132+00:00",
+  "sources": [
+    {
+      "path": "out/continuous-lifetime-sept27-v2/initial-check/history.jsonl",
+      "source_bytes_sha256": "7b76ef32d9a2f95355d39f23d8e444cba7716f0d9db1068ade41c2961bbeb8af",
+      "retained_through": 5,
+      "CPU_seconds": 5.05078
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v2/evolution/history.jsonl",
+      "source_bytes_sha256": "6a235271636e3aaa90d92076011287a608457f571600e9bd4c3de9295246bb69",
+      "retained_through": 3472,
+      "CPU_seconds": 5195.921808
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v3/evolution/history.jsonl",
+      "source_bytes_sha256": "dce18bf3ffd13faa493d82c6e4e72122240dd2ecaca03a03a7669a9bd193bfa6",
+      "retained_through": 5509,
+      "CPU_seconds": 8315.960805
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v4/evolution/history.jsonl",
+      "source_bytes_sha256": "136da22f9f6c4d91a034230e96ebd0543ec212128efe99cf9419289b1709e637",
+      "retained_through": 6099,
+      "CPU_seconds": 5138.969893
+    }
+  ],
+  "models": 6100,
+  "CPU_seconds": 18655.903286,
+  "contraction_model": {
+    "years": 990131259.1322539,
+    "step_years": 35442295.89326342,
+    "accepted": 1000,
+    "rejected": 0,
+    "radius_Rsun": 0.12648223204298803,
+    "Teff_K": 2763.068430976732,
+    "luminosity_Lsun": 0.0008400773663778128,
+    "nuclear_fraction": 0.9909244760097279,
+    "central_T_K": 4621837.423986881,
+    "H_mass_g": 1.391483678918906e+32,
+    "He3_mass_g": 4.725378237480916e+28,
+    "D_mass_g": 0,
+    "surface_X": 0.6997972095312577,
+    "surface_Z": 0.02000000000011498,
+    "error_norm": 0.49839852969135734,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.2399573315269932e-12,
+    "drift_gradient_proxy": 8.458835652996426e-07,
+    "kinetic_heat_proxy": 0.010528933340239691,
+    "convective_mass_fraction": 0.9999999999999997,
+    "radiative_boundaries": 0,
+    "relative_mixing_gradient": 2.037027023612283e-09,
+    "convective_travel_years": 1.1241376124412903,
+    "cpu_seconds": 944.506238
   },
-  "count": 1020,
-  "scope": "Common Hayashi-started D/pp/CN calculation with plasma losses, checked whole-star convection and composition heat after initial D; no radiative settling regime yet."
+  "latest": {
+    "years": 3212734519206.5645,
+    "step_years": 2659935651.8877234,
+    "accepted": 6099,
+    "rejected": 0,
+    "radius_Rsun": 0.14801845171068528,
+    "Teff_K": 3153.7847319416087,
+    "luminosity_Lsun": 0.0019527811664344127,
+    "nuclear_fraction": 0.9999813853184655,
+    "central_T_K": 7546093.269266063,
+    "H_mass_g": 4.742710424762992e+31,
+    "He3_mass_g": 3.636139331927839e+29,
+    "D_mass_g": 0,
+    "surface_X": 0.23851774700243336,
+    "surface_Z": 0.020000944421361792,
+    "error_norm": 0.6397529231372268,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 2.633435751023071e-12,
+    "drift_gradient_proxy": 7.462965591178653e-07,
+    "kinetic_heat_proxy": 0.011454624326758058,
+    "convective_mass_fraction": 0.9999999999999997,
+    "radiative_boundaries": 0,
+    "relative_mixing_gradient": 9.964343969803035e-11,
+    "convective_travel_years": 0.9708906417477807,
+    "cpu_seconds": 5138.969893
+  },
+  "csv_sha256": "23e43a5684ee54988ec1ff693ee0a843e01d607d22c16e00221b134f4ea96d2d",
+  "scope": "One continuous Hayashi-origin trajectory; duplicate restart records removed. HR panel uses all retained models; nuclear-power panel shows the firstGyr. Finite-mixing and atmosphere-source controls excluded from track CPU accounting."
 }

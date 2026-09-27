@@ -2,27 +2,25 @@
 
 ## Current priority — September 27, 2026
 
-The completed continuous Hayashi-started fixed-metal sequence reaches
-**3.078 Tyr**, **3130 K**, **X=.2629**, with **7230 accepted intervals and
-no rejections**. It ended at its allocated CPU time and remains fully convective.
-A fresh sequence now selects the restored composition-dependent atmospheres
-and interior opacity response from the same Hayashi starting prescription.
-Read the [current handoff](../HANDOFF.md) for its live state.
+The continuous Hayashi-started sequence with composition-dependent atmospheres
+reaches **3.213 Tyr**, **3154 K**, **X=.2385**, with **6099 accepted intervals and
+no rejections**. It remains fully convective. The fixed-metal atmosphere
+comparison is complete at **3.078 Tyr**. Both use the common lifetime program.
+Read the [current handoff](../HANDOFF.md) for the live process and next work.
 
 All **77 tests pass** in the isolated checkout, including actual radiative-core
 evolution, conservation and exact restart. The local composition solve uses
 1e-15 for one instantaneously mixed region and 1e-12 for stratified diffusion;
 the independent global abundance-balance criterion remains 1e-14.
 
-The restored-material Hayashi trajectory has passed **1.952 Tyr**, with no
-rejected intervals. A checked continuation adds the later trace-He/pure-H atmosphere inputs without changing
+The continuous trajectory passes all isotope and energy checks. A checked continuation adds the later trace-He/pure-H atmosphere inputs without changing
 its accepted physical state. All 5932 tested early boundary values remain exact,
 and the combined selection covers all 67 saved settling structures. The
 matching depth remains tau = 100. Cool, high-gravity rows include bounded
 inferred values; cooler source columns still need numerical work. The accepted
 4800 K / log g 6.0 and 6.1 columns provide useful independent checks.
-The 4800 K/log g = 6.2 and 4700 K/log g = 6.0 columns now also pass all source
-checks. These additional rows are not yet selected in the running star.
+The 4800 K/log g = 6.2 and 4700 K/log g = 6.0, 6.1 and 6.2 columns now also
+pass all source checks. These additional rows are not yet selected in the running star.
 [Source calculation results](results/highg_energy_balance_sept27_v1.json).
 The separate flash histories inherit a forced atmosphere change;
 atmosphere-independent ignition is not established.

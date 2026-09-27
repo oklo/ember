@@ -10,9 +10,11 @@ equation-of-state tables that the tracks interpolate cost about 2.6 times
 more, roughly 122 CPU-hours for the documented jobs; a rough conversion at
 $2\times10^9$ operations per CPU-second, uncertain by a factor of three,
 puts the sequences near $3\times10^{14}$ floating-point operations and the
-tables near $10^{15}$. The contraction sequence to 1 Gyr took 8.166 CPU
-minutes; the continuous run to $2.102\Tyr$ took 66.16 CPU minutes on four
-threads. The flash continuations were computed in segments; a complete
+tables near $10^{15}$. The continuous
+Hayashi-started sequence through $\continuousAge\Tyr$ uses
+\continuousCPUHours\ CPU-hours on four threads, including its retained
+contraction and main-sequence intervals and process startup; separate
+atmosphere and accuracy controls are excluded. The flash continuations were computed in segments; a complete
 cooling-track runtime has not been measured, and none of these numbers
 predicts it.
 

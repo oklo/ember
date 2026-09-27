@@ -1,0 +1,426 @@
+{
+  "created_utc": "2026-09-27T07:03:25.900225+00:00",
+  "scope": "Read-only state, composition-potential and transported-enthalpy support at nodes and faces of67 retained settling profiles. Tests selected common-driver EOS coverage; not a new stellar evolution or proof of flash reality.",
+  "source_profiles": 67,
+  "nodal_queries": 34304,
+  "face_queries": 34237,
+  "passed": 68541,
+  "failures": 0,
+  "wall_seconds": 8.711414916440845,
+  "eos_sha256": "3f57206bacfb67154634621415a459b570b576707ab512aca68f299368564250",
+  "channels_tested": [
+    "thermodynamic state and thermal derivatives",
+    "composition potential including Hessian",
+    "composition enthalpy including derivatives"
+  ],
+  "source_checkpoints": [
+    {
+      "version": 1,
+      "path": "out/completed-metal-segments/v1/checkpoint.json",
+      "sha256": "abed7c4c46392bbb4aefc6895deb97a655113ffc3d5f81af9b23d6e6901d65f6",
+      "age_years": 3551013115301.9224
+    },
+    {
+      "version": 2,
+      "path": "out/completed-metal-segments/v2/checkpoint.json",
+      "sha256": "4ab811048ca2f97899c49f308c06a5170439005fb807f91e5f71e5e7c4822f55",
+      "age_years": 3551014115301.922
+    },
+    {
+      "version": 3,
+      "path": "out/completed-metal-segments/v3/checkpoint.json",
+      "sha256": "22b10399af1233e9b073141f4e0749754691bbb6b60471b277bdf3d332175ec4",
+      "age_years": 3589863649492.189
+    },
+    {
+      "version": 4,
+      "path": "out/completed-metal-segments/v4/checkpoint.json",
+      "sha256": "5985e720be9ec1f957c9975ffa720e72ae57a0024f64415124a63527eddd51ec",
+      "age_years": 3593250891569.7993
+    },
+    {
+      "version": 5,
+      "path": "out/completed-metal-segments/v5/checkpoint.json",
+      "sha256": "657e0cd12685ef769f3c3278f0555dd2c1a36a464848fc3cb2c7502ae103f5ca",
+      "age_years": 3618250891569.8037
+    },
+    {
+      "version": 6,
+      "path": "out/completed-metal-segments/v6/checkpoint.json",
+      "sha256": "4bef1a108dc8eb337b033add54a440e376aab643a4233c63d211ae205518e7c4",
+      "age_years": 3648250891569.801
+    },
+    {
+      "version": 7,
+      "path": "out/completed-metal-segments/v7/checkpoint.json",
+      "sha256": "433fa908111d42d47cc7f75d658746ef78f6a196cca7bf38590b01656ca9b62c",
+      "age_years": 3653250891569.8047
+    },
+    {
+      "version": 8,
+      "path": "out/completed-metal-segments/v8/checkpoint.json",
+      "sha256": "c600e08fa5a5d658be98d7523daeb7b1273e214f9f9763e06f3db07f6694f82c",
+      "age_years": 3653650891569.8047
+    },
+    {
+      "version": 9,
+      "path": "out/completed-metal-segments/v9/checkpoint.json",
+      "sha256": "05d4c74d223bd96887e82fbaf29034a7aeddf471fddd19c55d405b599f642c43",
+      "age_years": 3660650891569.808
+    },
+    {
+      "version": 10,
+      "path": "out/completed-metal-segments/v10/checkpoint.json",
+      "sha256": "39d16eff2af7389ac3ed3886013a03c66a382199a7890253a43c68fd283a96f3",
+      "age_years": 3663981532954.775
+    },
+    {
+      "version": 11,
+      "path": "out/completed-metal-segments/v11/checkpoint.json",
+      "sha256": "0b82c9205520d74280667e3b9af84646bba0812fbf95cbfa86836d79c9826d09",
+      "age_years": 3668981532954.7773
+    },
+    {
+      "version": 12,
+      "path": "out/completed-metal-segments/v12/checkpoint.json",
+      "sha256": "8264a05843097728ef26bce037e2806e2c352313e5518c6a1265f0e74a5d421f",
+      "age_years": 3676981532954.7773
+    },
+    {
+      "version": 13,
+      "path": "out/completed-metal-segments/v13/checkpoint.json",
+      "sha256": "c73f1648de07781d109c5959d8a8fa61924e149ece1bf407227eef8a6f0debc7",
+      "age_years": 3678481532954.776
+    },
+    {
+      "version": 14,
+      "path": "out/completed-metal-segments/v14/checkpoint.json",
+      "sha256": "db66f6ba64d082105a40c23a26cc79181d37f405eab823f71a7ef0419375311b",
+      "age_years": 3679181532954.776
+    },
+    {
+      "version": 15,
+      "path": "out/completed-metal-segments/v15/checkpoint.json",
+      "sha256": "37967da5128b9c9e9e395170107253281dbab55a386d19e7a2526b4473d1c64c",
+      "age_years": 3680181532954.7754
+    },
+    {
+      "version": 16,
+      "path": "out/completed-metal-segments/v16/checkpoint.json",
+      "sha256": "c63107850e9c4382d47a0da017a8434cb90579223498d6dd150d137a0d3b04a2",
+      "age_years": 3680702324553.9775
+    },
+    {
+      "version": 17,
+      "path": "out/completed-metal-segments/v17/checkpoint.json",
+      "sha256": "2e7442058466da991b020d7ef5aedfc76663a80e5d9cce21ef007df35305ad44",
+      "age_years": 3683202324553.9766
+    },
+    {
+      "version": 18,
+      "path": "out/completed-metal-segments/v18/checkpoint.json",
+      "sha256": "00ea90b2553920830554bb5f41c617d122f1fea046248675fb2fde84f9e0a09e",
+      "age_years": 3684202324553.976
+    },
+    {
+      "version": 19,
+      "path": "out/completed-metal-segments/v19/checkpoint.json",
+      "sha256": "8d1548f3a3abe572fb25d55b35b6c99134e7446c92a708e82936de8eb7efdea6",
+      "age_years": 3684902324553.9746
+    },
+    {
+      "version": 20,
+      "path": "out/completed-metal-segments/v20/checkpoint.json",
+      "sha256": "6c578bc8a7d087c22c89fd73f73dd2ca69b15c4217ab2284cc12aaa60061561a",
+      "age_years": 3685402324553.974
+    },
+    {
+      "version": 21,
+      "path": "out/completed-metal-segments/v21/checkpoint.json",
+      "sha256": "08d0d289080d58b4408b11db205daf95e9e57bf35f3707a3e3901ab0c56277ca",
+      "age_years": 3685752324553.9736
+    },
+    {
+      "version": 22,
+      "path": "out/completed-metal-segments/v22/checkpoint.json",
+      "sha256": "bb35dd0c89ef27c5da717fdacedc67a73aba6697f8a6c5eab5bd919844478c5f",
+      "age_years": 3687002324553.974
+    },
+    {
+      "version": 23,
+      "path": "out/completed-metal-segments/v23/checkpoint.json",
+      "sha256": "48ecb14f6ee8ce482e015a3ae00c3a8e352d82a39bd46716f6fa7efdc17d86c8",
+      "age_years": 3687559774277.864
+    },
+    {
+      "version": 24,
+      "path": "out/completed-metal-segments/v24/checkpoint.json",
+      "sha256": "de8017fcf73e5664dc945bc98e9e12387853c7fd74eb162f591b26cbbbce3471",
+      "age_years": 3687959774277.8647
+    },
+    {
+      "version": 25,
+      "path": "out/completed-metal-segments/v25/checkpoint.json",
+      "sha256": "f52bd9bfc17c593f3c31bea88f8b06f2e9f2dffa86d9e3566e15148cc6ede781",
+      "age_years": 3688289587214.565
+    },
+    {
+      "version": 26,
+      "path": "out/completed-metal-segments/v26/checkpoint.json",
+      "sha256": "1bf10d3dd9d107bd6a1576baffb43faac131079e9abef97593db3bd67d71899f",
+      "age_years": 3689539587214.563
+    },
+    {
+      "version": 27,
+      "path": "out/completed-metal-segments/v27/checkpoint.json",
+      "sha256": "138c511c56a2e6618a8bec7f927f13ab8b46bcd3c043ad1d806aa7a895243d54",
+      "age_years": 3690789587214.563
+    },
+    {
+      "version": 28,
+      "path": "out/completed-metal-segments/v28/checkpoint.json",
+      "sha256": "40b6fa05ababfa60fcc111190011be75a0554de4d39c0499b39b44021f432df4",
+      "age_years": 3693169102874.2505
+    },
+    {
+      "version": 29,
+      "path": "out/completed-metal-segments/v29/checkpoint.json",
+      "sha256": "9c7404a5851f0db340233dae48c2b142635d3a6a866085313b99f3db01cd986e",
+      "age_years": 3694669102874.2524
+    },
+    {
+      "version": 30,
+      "path": "out/completed-metal-segments/v30/checkpoint.json",
+      "sha256": "51178e22a8dd58c3e30bffedacda47f8d2037ef7beb9e7d5dfdd89b6ff8db9e2",
+      "age_years": 3694679102874.252
+    },
+    {
+      "version": 31,
+      "path": "out/completed-metal-segments/v31/checkpoint.json",
+      "sha256": "9f757570619c0205faa5a1849ba0f42aba86948f2a3167b0fd4ad320aa91561c",
+      "age_years": 3694689102874.2515
+    },
+    {
+      "version": 32,
+      "path": "out/completed-metal-segments/v32/checkpoint.json",
+      "sha256": "ed10d7c75491de3719a93780d228ce7f47691b34892e1773f7fb223b441868ac",
+      "age_years": 3698300727484.9683
+    },
+    {
+      "version": 33,
+      "path": "out/completed-metal-segments/v33/checkpoint.json",
+      "sha256": "e74caf5d524c100985e57b93788e7fa0d8dfa277a3adec647961cea2fa51b619",
+      "age_years": 3705995080611.2686
+    },
+    {
+      "version": 34,
+      "path": "out/completed-metal-segments/v34/checkpoint.json",
+      "sha256": "e78dbf0493999ee274e1feeed1689ae0be3f0fcd77c5ad45d21df40c3afbb630",
+      "age_years": 3705995080611.2705
+    },
+    {
+      "version": 35,
+      "path": "out/completed-metal-segments/v35/checkpoint.json",
+      "sha256": "677a3d1b60165d82031325a033cb37159638a71e77da04c0d2a4be153ebba986",
+      "age_years": 3706943260654.885
+    },
+    {
+      "version": 36,
+      "path": "out/completed-metal-segments/v36/checkpoint.json",
+      "sha256": "804b7f16726b1712c19587a24f694c82b2b8755677e64a5a2cdb9dd173687413",
+      "age_years": 3707330679365.1104
+    },
+    {
+      "version": 37,
+      "path": "out/completed-metal-segments/v37/checkpoint.json",
+      "sha256": "c71abc92e5942cf13ec5300e37b086462bbc7cc2dd18fcb1ac1e3bdb53addc63",
+      "age_years": 3710142172156.323
+    },
+    {
+      "version": 38,
+      "path": "out/completed-metal-segments/v38/checkpoint.json",
+      "sha256": "3e8214a3c8976e1d3b29128d9c97e443bdbb02ecf092954b833ad0e18c15116f",
+      "age_years": 3720336762018.2
+    },
+    {
+      "version": 39,
+      "path": "out/completed-metal-segments/v39/checkpoint.json",
+      "sha256": "669767ecebb654861ff439a424c68af32c0a0fcbe2b409ee29c4473d0106a10a",
+      "age_years": 3724340027989.714
+    },
+    {
+      "version": 40,
+      "path": "out/completed-metal-segments/v40/checkpoint.json",
+      "sha256": "1fc0695ebab984a31b155068dd4c1aaeff2406a3364938169a0708eea0f9ba62",
+      "age_years": 3726895437681.368
+    },
+    {
+      "version": 41,
+      "path": "out/completed-metal-segments/v41/checkpoint.json",
+      "sha256": "25b0a0c4283fde7c4be339e264780a63694e1436cfec8c7174596bb3fd6201fe",
+      "age_years": 3735390030827.21
+    },
+    {
+      "version": 42,
+      "path": "out/completed-metal-segments/v42/checkpoint.json",
+      "sha256": "01b2a1ae464290ae592aec3cf8d53149a55daeb8d14e772cb624808d911865dc",
+      "age_years": 3739951292025.0903
+    },
+    {
+      "version": 43,
+      "path": "out/completed-metal-segments/v43/checkpoint.json",
+      "sha256": "4d43063a0538903f4191cb45ea49fb457b1c9464ff8335486274111f8cd7c30d",
+      "age_years": 3741811755457.6597
+    },
+    {
+      "version": 44,
+      "path": "out/completed-metal-segments/v44/checkpoint.json",
+      "sha256": "e122c61dfe19d53100614e8e45d878d1296dab5307bb33257261406a5ba54be9",
+      "age_years": 3747802912551.4873
+    },
+    {
+      "version": 45,
+      "path": "out/completed-metal-segments/v45/checkpoint.json",
+      "sha256": "65dedec041c9403896c577331ba989c6a9b275a85f51a47c183f6cbab7a91873",
+      "age_years": 3749238963846.6045
+    },
+    {
+      "version": 46,
+      "path": "out/completed-metal-segments/v46/checkpoint.json",
+      "sha256": "3a125ed49aaa8e6e71b5bf114e2a5d5b44950880f339986c4542af9e0e59f513",
+      "age_years": 3754738415314.827
+    },
+    {
+      "version": 47,
+      "path": "out/completed-metal-segments/v47/checkpoint.json",
+      "sha256": "28c9f57b0b143a099f9545163cb66eecb889ff38d2250b672f4ab5da31923b48",
+      "age_years": 3773692567625.0347
+    },
+    {
+      "version": 48,
+      "path": "out/metal-main-sequence-v48/checkpoint.json",
+      "sha256": "6d657e579256edd78a741afeb86bd8d3ddee492105e0b86e7e8f5fdc65a2945f",
+      "age_years": 3807932543130.4688
+    },
+    {
+      "version": 49,
+      "path": "out/metal-main-sequence-v49/checkpoint.json",
+      "sha256": "5a77eb561c319eccdde4a890cc36245e71e1e92889c43d7c7fa594d80ff3ba9c",
+      "age_years": 3832084898042.767
+    },
+    {
+      "version": 50,
+      "path": "out/metal-main-sequence-v50/checkpoint.json",
+      "sha256": "a937b78b12276da1eb01e69f0918c85b3bcf70b88d8d7585993db4dc332a5a5f",
+      "age_years": 3858196571473.2617
+    },
+    {
+      "version": 51,
+      "path": "out/metal-main-sequence-v51/checkpoint.json",
+      "sha256": "bca5a8d30fe86aaee452b4fc95a58d2a9676e096eed0d27dd053c5a235b00955",
+      "age_years": 3861237982460.8467
+    },
+    {
+      "version": 52,
+      "path": "out/metal-main-sequence-v52/checkpoint.json",
+      "sha256": "62367fc40fb07bd5467666a96748bc76d4c60a2781fab8d61e962b6065ac3465",
+      "age_years": 3877114985541.3735
+    },
+    {
+      "version": 53,
+      "path": "out/metal-main-sequence-v53/checkpoint.json",
+      "sha256": "617f28a7bd5cc3b21af314695b3a028b7914ab6f7d05ed117dab834ba0138265",
+      "age_years": 3884292975681.976
+    },
+    {
+      "version": 54,
+      "path": "out/metal-main-sequence-v54/checkpoint.json",
+      "sha256": "526de4950e8b2c0f66e2b9f9f75e2075d6cde72824849a5e24ca3f9fb32843db",
+      "age_years": 3921445294103.817
+    },
+    {
+      "version": 55,
+      "path": "out/metal-main-sequence-v55/checkpoint.json",
+      "sha256": "0170146231f4584764ab33b2a877532e25f686c93ecb273a98f78e9f942ca189",
+      "age_years": 3931445294103.816
+    },
+    {
+      "version": 56,
+      "path": "out/metal-main-sequence-v56/checkpoint.json",
+      "sha256": "4d2c69b0faa63dbc97006abcc4123c7223c56f7c54fb43bc2b3859da7e5af099",
+      "age_years": 3932361414787.3145
+    },
+    {
+      "version": 57,
+      "path": "out/metal-main-sequence-v57/checkpoint.json",
+      "sha256": "ecc1075da4949c28d416c1725f580a0ee376172e97c7aa0d65b680417f9ed83e",
+      "age_years": 3941263537394.8184
+    },
+    {
+      "version": 58,
+      "path": "out/metal-main-sequence-v58/checkpoint.json",
+      "sha256": "1f3f5e761af0b0fa44f6499bcddda39a2f2d38e1941a6e082e9b1bfac7c5dbf4",
+      "age_years": 3946263537394.818
+    },
+    {
+      "version": 59,
+      "path": "out/metal-main-sequence-v59/checkpoint.json",
+      "sha256": "25c4363a096ca77377604a789ab5f5154b3ccf9ece5546d58ebb26c15f36c92a",
+      "age_years": 3962091126147.6533
+    },
+    {
+      "version": 60,
+      "path": "out/metal-main-sequence-v60/checkpoint.json",
+      "sha256": "c84ea0621079727264c054ed9bda6ac30e8707414909bddade9ae093c0c11b61",
+      "age_years": 3965662633703.3823
+    },
+    {
+      "version": 61,
+      "path": "out/metal-main-sequence-v61/checkpoint.json",
+      "sha256": "50430e1bd05a4a6aa48584ec31a524003cbc5c05548aa5a189100e613cf8fac4",
+      "age_years": 3967675840454.3027
+    },
+    {
+      "version": 62,
+      "path": "out/metal-main-sequence-v62/checkpoint.json",
+      "sha256": "4e87b653885dde735d74dea824669392b3b32b97f86723addb8cb18ca93a50e1",
+      "age_years": 3975675840454.3027
+    },
+    {
+      "version": 63,
+      "path": "out/metal-main-sequence-v63/checkpoint.json",
+      "sha256": "aabbfb3d8c448ab6820c4df66a007fc5fe90713c3a325468d01ec0a988a8a440",
+      "age_years": 3990452934572.695
+    },
+    {
+      "version": 64,
+      "path": "out/metal-main-sequence-v64/checkpoint.json",
+      "sha256": "3778e5e9c2b49f8966febb40a2474198fefd35dd2b0cb172b9036e729f786995",
+      "age_years": 3995008691225.3174
+    },
+    {
+      "version": 65,
+      "path": "out/metal-main-sequence-v65/checkpoint.json",
+      "sha256": "4aed7926eda22d46c795d810b3d846d97efaeeda94923c8d0801a817b2051e56",
+      "age_years": 4000008691225.318
+    },
+    {
+      "version": 66,
+      "path": "out/metal-main-sequence-v66/checkpoint.json",
+      "sha256": "1c6f2dbd360d183816218b8279243300a06c5931c8702140e9ec330ac7ac4430",
+      "age_years": 4002008691225.318
+    },
+    {
+      "version": 67,
+      "path": "out/metal-main-sequence-v67/checkpoint.json",
+      "sha256": "b82ae8dc7772c57f8289fc385b428809d2ba6af5511020c9a5cd854982c29f73",
+      "age_years": 4002218292552.7173
+    }
+  ],
+  "probe_sha256": "3210da72553b809599f093f584c38bccdee1d9bf89709bdfc3ccb179a840189e",
+  "limitations": [
+    "These are retained physical structures, not a new evolutionary integration.",
+    "Passing the sampled nodes and faces does not establish support for every Newton iterate or every future composition.",
+    "The test does not validate the atmosphere-independent occurrence or amplitude of the helium-3 flash."
+  ]
+}
