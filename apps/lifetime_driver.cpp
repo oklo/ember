@@ -294,11 +294,37 @@ int lifetime_main(int argc,char** argv) {
     std::ofstream history(work/"history.jsonl"),attempts(work/"attempts.jsonl");history<<std::setprecision(17);attempts<<std::setprecision(17);
     const auto record=[&](double step,double error,const HomogeneousCheck& guard) {
       const auto& m=state.model;const auto w=nodal_mass_weights(m);double H=0,Y3=0,D=0,Lnuc=0;
-      for(std::size_t i=0;i<m.size();++i){H+=w[i]*m.comp[i].X[0];Y3+=w[i]*m.comp[i].X[1];D+=w[i]*m.comp[i][Species::H2];Lnuc+=w[i]*nuclear.eval(m.T(i),m.rho(i),m.comp[i]).eps;}
+      std::vector<double> eps(m.size());std::size_t burning_peak=0,he3_peak=0;
+      for(std::size_t i=0;i<m.size();++i) {
+        H+=w[i]*m.comp[i][Species::H1];Y3+=w[i]*m.comp[i][Species::He3];D+=w[i]*m.comp[i][Species::H2];
+        eps[i]=nuclear.eval(m.T(i),m.rho(i),m.comp[i]).eps;Lnuc+=w[i]*eps[i];
+        if(eps[i]>eps[burning_peak])burning_peak=i;
+        if(m.comp[i][Species::He3]>m.comp[he3_peak][Species::He3])he3_peak=i;
+      }
+      // Contiguous cells above half the peak specific nuclear power. This
+      // describes the resolved burning region; it is not a convergence test.
+      std::size_t left=burning_peak,right=burning_peak;
+      double inner_q=0,outer_q=0;std::size_t burning_cells=0;
+      if(eps[burning_peak]>0) {
+        const double half=.5*eps[burning_peak];
+        while(left>0 && eps[left-1]>=half)--left;
+        while(right+1<m.size() && eps[right+1]>=half)++right;
+        inner_q=left==0?0:.5*(m.m[left-1]+m.m[left])/m.M;
+        outer_q=right+1==m.size()?1:.5*(m.m[right]+m.m[right+1])/m.M;
+        burning_cells=right-left+1;
+      }
       const double R=m.r(m.size()-1),L=m.y.back().L;
       history<<"{\"years\":"<<m.age/year<<",\"step_years\":"<<step/year<<",\"accepted\":"<<state.accepted<<",\"rejected\":"<<state.rejected
         <<",\"radius_Rsun\":"<<R/constants::Rsun<<",\"Teff_K\":"<<std::pow(L/(4*M_PI*constants::sigma_SB*R*R),.25)
         <<",\"luminosity_Lsun\":"<<L/constants::Lsun<<",\"nuclear_fraction\":"<<Lnuc/L<<",\"central_T_K\":"<<m.T(0)
+        <<",\"central_density_g_cm3\":"<<m.rho(0)<<",\"central_X\":"<<m.comp.front()[Species::H1]
+        <<",\"central_He3\":"<<m.comp.front()[Species::He3]
+        <<",\"eps_nuc_peak_erg_g_s\":"<<eps[burning_peak]
+        <<",\"eps_nuc_peak_q\":"<<(eps[burning_peak]>0?m.m[burning_peak]/m.M:0)
+        <<",\"burning_half_max_inner_q\":"<<inner_q<<",\"burning_half_max_outer_q\":"<<outer_q
+        <<",\"burning_half_max_cells\":"<<burning_cells
+        <<",\"He3_peak\":"<<m.comp[he3_peak][Species::He3]
+        <<",\"He3_peak_q\":"<<(m.comp[he3_peak][Species::He3]>0?m.m[he3_peak]/m.M:0)
         <<",\"H_mass_g\":"<<H<<",\"He3_mass_g\":"<<Y3<<",\"D_mass_g\":"<<D<<",\"surface_X\":"<<m.comp.back().X[0]
         <<",\"surface_Z\":"<<m.comp.back().Z()<<",\"error_norm\":"<<error<<",\"initial_D_approximation\":"<<has_D(m)
         <<",\"omitted_mixing_heat_fraction\":"<<(has_D(m)?guard.maximum_heat_fraction:0)<<",\"gross_mixing_heat_fraction\":"<<guard.maximum_gross_heat_fraction

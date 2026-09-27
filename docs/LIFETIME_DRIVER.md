@@ -199,7 +199,17 @@ into restart identity. See `docs/results/opacity_lifetime_extension_sept27_v1.js
 for saved-profile checks and the earlier physical sensitivity tests.
 
 `history.jsonl` retains every accepted model's scalar diagnostics;
-`attempts.jsonl` retains acceptance and conservation checks. Only the initial,
+`attempts.jsonl` retains acceptance and conservation checks. The history includes
+central density, hydrogen and helium-3, and the locations of maximum helium-3
+abundance and specific nuclear power. Here `q` means enclosed mass divided by
+stellar mass. `burning_half_max_*` describes the contiguous cells surrounding
+the strongest specific nuclear power, above half its maximum: cell count and
+inner/outer mass faces. Separate burning peaks are not combined. These fields
+help identify a narrowing shell; they do not establish mass convergence. If
+nuclear power is zero throughout, the peak location, width and cell count are
+zero. The helium-3 peak location is zero when helium-3 is absent. The diagnostics
+reuse the nuclear rates already evaluated for the luminosity integral.
+Only the initial,
 latest and final full checkpoints are retained by default. Checkpoints include
 CN/D abundances, the luminosity convention and, when applicable, material-heat
 rates. Restart checks bind the executable, physical settings, family coordinates
