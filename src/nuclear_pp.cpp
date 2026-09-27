@@ -4,6 +4,7 @@
 #include "ember/detail/differential.hpp"
 #include "fermi.hpp"
 #include <algorithm>
+#include <atomic>
 #include <cmath>
 #include <limits>
 #include <optional>
@@ -128,7 +129,7 @@ void validate(double T,double rho,const Composition& comp) {
   if(!(comp.mu_elec_inv()>0)) throw std::domain_error("PPChains: empty charged mixture");
 }
 struct Susceptibility { double eta,theta,dtheta_dlnT,dtheta_dlnne; };
-Susceptibility electrons(double T,double ne) {
+Susceptibility electrons_exact(double T,double ne) {
   // pp and CN captures at one state need the same electron inversion.
   // Reuse its result only for identical temperature and electron density;
   // reaction charges and composition chain-rule factors remain independent.
@@ -167,7 +168,26 @@ Susceptibility electrons(double T,double ne) {
   }
   throw std::runtime_error("PPChains: electron susceptibility inversion failed");
 }
+std::atomic<double> screening_reuse_spacing{0};
+// Optional first-order reuse: exact at the nearest point of a grid of spacing
+// h in (ln T, ln ne), extended with its exact derivatives. The anchor depends
+// only on the state, so results do not depend on thread or call order. eta is
+// the anchor's (diagnostic only).
+Susceptibility electrons(double T,double ne) {
+  const double h=screening_reuse_spacing.load(std::memory_order_relaxed);
+  if(!(h>0))return electrons_exact(T,ne);
+  const double lt=std::log(T),ln=std::log(ne);
+  const double at=std::nearbyint(lt/h)*h,an=std::nearbyint(ln/h)*h;
+  auto s=electrons_exact(std::exp(at),std::exp(an));
+  s.theta+=s.dtheta_dlnT*(lt-at)+s.dtheta_dlnne*(ln-an);
+  return s;
+}
 } // namespace
+
+void set_screening_reuse(double h) {
+  if(!std::isfinite(h) || h<0 || h>.01)throw std::invalid_argument("screening reuse spacing must lie in [0,0.01]");
+  screening_reuse_spacing=h;
+}
 
 ThermonuclearRate pp_bare_rate(double T,PPReaction which,PPRates prescription) {
   if(which==PPReaction::deuterium_p) {

@@ -2,7 +2,10 @@
 #include "ember/constants.hpp"
 #include "ember/eos_component.hpp"
 #include "ember/detail/differential.hpp"
+#include <atomic>
 #include <cmath>
+#include <memory>
+#include <mutex>
 #include <stdexcept>
 #include <utility>
 
@@ -11,9 +14,107 @@ namespace {
 void require(bool ok,const char* why) {
   if(!ok)throw std::domain_error(std::string("screened microscopic transport: ")+why);
 }
+} // namespace
+struct ScreenedMetalMicroscopicTransport::EosCache {
+  static constexpr std::size_t capacity=8192;
+  struct Coordinates {std::array<double,5> x{};std::array<bool,3> active{};bool valid{};};
+  struct PotentialSlot {std::mutex mutex;Coordinates at;MetalCompositionPotentialResponse exact;};
+  struct HeatSlot {std::mutex mutex;Coordinates at;bool radiation{};MetalCompositionHeatResponse exact;};
+  double radius;bool verify;
+  std::unique_ptr<PotentialSlot[]> points=std::make_unique<PotentialSlot[]>(capacity);
+  std::unique_ptr<HeatSlot[]> faces=std::make_unique<HeatSlot[]>(capacity);
+  std::atomic<std::size_t> hits{0},exact{0},verified{0};
+  std::mutex worst_mutex;double worst_potential{},worst_enthalpy{};
+  EosCache(double r,bool v):radius(r),verify(v) {}
+  static std::array<double,5> coordinates(double T,double rho,const Composition& c) {
+    return {std::log(T),std::log(rho),c.X[0],c.X[1],c.Z()};
+  }
+  bool inside(const Coordinates& a,const std::array<double,5>& x,std::array<bool,3> active,std::array<double,5>& d) const {
+    if(!a.valid || a.active!=active)return false;
+    const double he=1-a.x[2]-a.x[3]-a.x[4],now_he=1-x[2]-x[3]-x[4];
+    if(!(he>0 && now_he>0) || std::abs(now_he-he)>radius*he)return false;
+    // Absolute in ln T and ln rho; relative in each mass fraction, because the
+    // composition potential varies like ln X for a trace species.
+    for(std::size_t k=0;k<5;++k) {
+      d[k]=x[k]-a.x[k];
+      if(k>=2 && !active[k-2] && d[k]!=0)return false;
+      if(std::abs(d[k])>(k<2?radius:radius*std::abs(a.x[k])))return false;
+    }
+    return true;
+  }
+  MetalCompositionPotentialResponse potential(const VariableMetalHelmholtzEos& eos,std::size_t point,
+      double T,double rho,const Composition& c,std::array<bool,3> active) {
+    if(point>=capacity)return eos.composition_potential(T,rho,c,active,true);
+    const auto x=coordinates(T,rho,c);std::array<double,5> d{};
+    auto& slot=points[point];std::unique_lock lock(slot.mutex);
+    if(inside(slot.at,x,active,d)) {
+      eos.validate_composition_domain(T,rho,c);
+      auto out=slot.exact;lock.unlock();
+      for(std::size_t k=0;k<3;++k)if(active[k]) {
+        out.gradient[k]+=out.dgradient_dlnT[k]*d[0]+out.dgradient_dlnRho[k]*d[1];
+        for(std::size_t j=0;j<3;++j)if(active[j])out.gradient[k]+=out.hessian[k][j]*d[2+j];
+      }
+      hits.fetch_add(1,std::memory_order_relaxed);
+      if(verify) {
+        const auto e=eos.composition_potential(T,rho,c,active,true);double scale=0,err=0;
+        for(std::size_t k=0;k<3;++k)if(active[k]){scale=std::max(scale,std::abs(e.gradient[k]));err=std::max(err,std::abs(out.gradient[k]-e.gradient[k]));}
+        verified.fetch_add(1,std::memory_order_relaxed);
+        std::lock_guard w(worst_mutex);worst_potential=std::max(worst_potential,scale>0?err/scale:0);
+      }
+      return out;
+    }
+    slot.exact=eos.composition_potential(T,rho,c,active,true);slot.at={x,active,true};
+    exact.fetch_add(1,std::memory_order_relaxed);
+    return slot.exact;
+  }
+  MetalCompositionHeatResponse heat(const VariableMetalHelmholtzEos& eos,std::size_t face,
+      double T,double rho,const Composition& c,std::array<bool,3> active,bool radiation) {
+    if(face>=capacity)return eos.composition_heat(T,rho,c,active,true,true);
+    const auto x=coordinates(T,rho,c);std::array<double,5> d{};
+    auto& slot=faces[face];std::unique_lock lock(slot.mutex);
+    if(inside(slot.at,x,active,d)) {
+      eos.validate_composition_domain(T,rho,c);
+      auto out=slot.exact;lock.unlock();
+      for(std::size_t v=0;v<5;++v)if(d[v]!=0) {
+        out.material_delta+=out.delta_partials[v]*d[v];
+        for(std::size_t k=0;k<3;++k)if(active[k]) {
+          out.exchange_enthalpy[k]+=out.enthalpy_partials[k][v]*d[v];
+          out.radiation_enthalpy[k]+=out.radiation_enthalpy_partials[k][v]*d[v];
+        }
+      }
+      hits.fetch_add(1,std::memory_order_relaxed);
+      if(verify) {
+        const auto e=eos.composition_heat(T,rho,c,active,true,true);double scale=0,err=0;
+        for(std::size_t k=0;k<3;++k)if(active[k]) {
+          scale=std::max({scale,std::abs(e.exchange_enthalpy[k]),radiation?std::abs(e.radiation_enthalpy[k]):0.});
+          err=std::max({err,std::abs(out.exchange_enthalpy[k]-e.exchange_enthalpy[k]),
+              radiation?std::abs(out.radiation_enthalpy[k]-e.radiation_enthalpy[k]):0.});
+        }
+        verified.fetch_add(1,std::memory_order_relaxed);
+        std::lock_guard w(worst_mutex);worst_enthalpy=std::max(worst_enthalpy,scale>0?err/scale:0);
+      }
+      return out;
+    }
+    slot.exact=eos.composition_heat(T,rho,c,active,true,true);slot.at={x,active,true};slot.radiation=radiation;
+    exact.fetch_add(1,std::memory_order_relaxed);
+    return slot.exact;
+  }
+};
+void ScreenedMetalMicroscopicTransport::use_eos_taylor(double radius,bool verify) {
+  require(std::isfinite(radius) && radius>=0 && radius<=.01,"EOS reuse radius must lie in [0,0.01]");
+  eos_cache_=radius>0?std::make_shared<EosCache>(radius,verify):nullptr;
+}
+ScreenedMetalMicroscopicTransport::EosReuse ScreenedMetalMicroscopicTransport::eos_reuse_statistics() const {
+  if(!eos_cache_)return {};
+  std::lock_guard w(eos_cache_->worst_mutex);
+  return {eos_cache_->hits.load(),eos_cache_->exact.load(),eos_cache_->verified.load(),
+          eos_cache_->worst_potential,eos_cache_->worst_enthalpy};
+}
+namespace {
 template<std::size_t N,bool abundances=true> MetalMicroscopicFaceResponse evaluate(
     const VariableMetalHelmholtzEos& eos,const ScreenedCollisionTransport& collision,
-    const CollisionTaylorCache* cache,std::size_t face,bool ions,double minimum_T,std::array<bool,3> active,double mlo,double mhi,const Point& lo,const Composition& a,
+    const CollisionTaylorCache* cache,ScreenedMetalMicroscopicTransport::EosCache* eos_cache,
+    std::size_t face,bool ions,double minimum_T,std::array<bool,3> active,double mlo,double mhi,const Point& lo,const Composition& a,
     const Point& hi,const Composition& b,const MetalSpeciesVector* total_rate=nullptr,
     bool radiation_with_redistribution=false) {
   using D=detail::Differential<N>;using detail::exp;using detail::log;
@@ -41,7 +142,8 @@ template<std::size_t N,bool abundances=true> MetalMicroscopicFaceResponse evalua
     radius[e]=exp(D::variable(p.lnr,o));rho[e]=exp(D::variable(p.lnrho,o+1));
     lt[e]=D::variable(p.lnT,o+2);T[e]=exp(lt[e]);
     require(T[e].value>=minimum_T,"temperature below the declared hot domain");
-    const auto chemical=eos.composition_potential(T[e].value,rho[e].value,c,active,N>0 && abundances);
+    const auto chemical=eos_cache?eos_cache->potential(eos,face+e,T[e].value,rho[e].value,c,active)
+        :eos.composition_potential(T[e].value,rho[e].value,c,active,N>0 && abundances);
     for(std::size_t k=0;k<3;++k) {
       if(!active[k])continue;
       if constexpr(abundances)fraction[e][k]=D::variable(k==2?c.Z():c.X[k],o+4+k);
@@ -94,7 +196,8 @@ template<std::size_t N,bool abundances=true> MetalMicroscopicFaceResponse evalua
     }
     return result;
   };
-  const auto heat=eos.composition_heat(Tb.value,rhob.value,c,active,N>0,abundances);
+  const auto heat=eos_cache?eos_cache->heat(eos,face,Tb.value,rhob.value,c,active,radiation_with_redistribution)
+      :eos.composition_heat(Tb.value,rhob.value,c,active,N>0,abundances);
   std::array<D,3> enthalpy,eos_enthalpy,kinetic_enthalpy,radiation_enthalpy,force,rate;
   for(std::size_t k=0;k<3;++k) {
     if(!active[k])continue;
@@ -150,8 +253,8 @@ ScreenedMetalMicroscopicTransport::ScreenedMetalMicroscopicTransport(const Varia
 }
 MetalMicroscopicFaceResponse ScreenedMetalMicroscopicTransport::metal_eval(std::size_t face,double mlo,double mhi,
     const Point& lo,const Composition& a,const Point& hi,const Composition& b,bool derivatives) const {
-  if(derivatives)return evaluate<14>(eos_,collisions_,taylor_.get(),face,include_ions_,minimum_temperature_,active_,mlo,mhi,lo,a,hi,b);
-  return evaluate<0>(eos_,collisions_,taylor_.get(),face,include_ions_,minimum_temperature_,active_,mlo,mhi,lo,a,hi,b);
+  if(derivatives)return evaluate<14>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,active_,mlo,mhi,lo,a,hi,b);
+  return evaluate<0>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,active_,mlo,mhi,lo,a,hi,b);
 }
 MicroscopicHeatResponse ScreenedMetalMicroscopicTransport::heat(std::size_t face,double mlo,double mhi,
     const Point& lo,const Composition& a,const Point& hi,const Composition& b,bool derivatives) const {
@@ -160,17 +263,17 @@ MicroscopicHeatResponse ScreenedMetalMicroscopicTransport::heat(std::size_t face
   // A species missing at only one endpoint is still rejected. Removing it
   // there would change the physical face rather than restrict thermal
   // derivatives to a fixed-composition subspace.
-  if(derivatives)return evaluate<2*NVAR,false>(eos_,collisions_,taylor_.get(),face,include_ions_,minimum_temperature_,present,mlo,mhi,lo,a,hi,b);
-  return evaluate<0,false>(eos_,collisions_,taylor_.get(),face,include_ions_,minimum_temperature_,present,mlo,mhi,lo,a,hi,b);
+  if(derivatives)return evaluate<2*NVAR,false>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,present,mlo,mhi,lo,a,hi,b);
+  return evaluate<0,false>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,present,mlo,mhi,lo,a,hi,b);
 }
 MicroscopicHeatResponse ScreenedMetalMicroscopicTransport::heat_with_total_metal_rate(std::size_t face,
     double mlo,double mhi,const Point& lo,const Composition& a,const Point& hi,const Composition& b,
     const MetalSpeciesVector& total_rate,bool derivatives) const {
   auto present=active_;
   for(std::size_t k=0;k<3;++k)if((k==2?a.Z():a.X[k])==0 && (k==2?b.Z():b.X[k])==0)present[k]=false;
-  if(derivatives)return evaluate<2*NVAR,false>(eos_,collisions_,taylor_.get(),face,include_ions_,minimum_temperature_,
+  if(derivatives)return evaluate<2*NVAR,false>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,
       present,mlo,mhi,lo,a,hi,b,&total_rate,radiation_with_redistribution_);
-  return evaluate<0,false>(eos_,collisions_,taylor_.get(),face,include_ions_,minimum_temperature_,
+  return evaluate<0,false>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,
       present,mlo,mhi,lo,a,hi,b,&total_rate,radiation_with_redistribution_);
 }
 } // namespace ember

@@ -62,6 +62,9 @@ struct ScreeningState {
 };
 ThermonuclearRate pp_bare_rate(double T, PPReaction, PPRates);
 ScreeningState pp_screening(double T,double rho,const Composition&,PPReaction,PPScreening);
+// Optional process-wide first-order reuse of the electron screening
+// susceptibility on a grid of spacing h in (ln T, ln n_e); h=0 is exact.
+void set_screening_reuse(double h);
 
 // N14(p,gamma) bottleneck of a closed CN cycle. The Solar Fusion III choice
 // uses its S(0) with Solar Fusion II's first and second derivatives.

@@ -34,6 +34,16 @@ struct CompositionBuoyancy {
 };
 CompositionBuoyancy composition_buoyancy(const Eos&,double T,double P,double delta,
     double pressure_contrast,const Composition& lo,const Composition& hi,double rho_guess=0);
+// Optional process-wide reuse of the composition contrast L=ln(rho_hi/rho_lo)
+// at fixed T and P. For an unchanged pair of face compositions, L is
+// evaluated exactly at the nearest point of a grid of spacing h in (ln T,
+// ln P) and extended to first order with its exact derivatives there
+// (delta_lo-delta_hi and 1/chiRho_hi-1/chiRho_lo). Returned value and
+// derivatives are those of that linear model; the anchor depends only on the
+// inputs, so results do not depend on evaluation order. h=0 disables.
+void set_composition_buoyancy_reuse(double h,bool verify=false);
+struct CompositionBuoyancyReuse {std::size_t hits{},exact{},verified{};double worst_absolute_B_error{};};
+CompositionBuoyancyReuse composition_buoyancy_reuse_statistics();
 
 // Cox/Giuli Ledoux MLT: replace the buoyancy-neutral gradient by grad_ad+B.
 // The derivative with respect to B equals dgrad_dgrad_ad. Stable layers keep

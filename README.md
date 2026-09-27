@@ -92,3 +92,10 @@ returns one. Those should surface, not be optimised away.
 
 MIT. The opacity, equation-of-state and conductivity data are redistributed under their
 own terms; see `data/*/README.md`.
+
+
+The lifetime solver also reuses nearby EOS and nuclear-screening responses and
+parallelizes convection-region tests. A matched 1-Gyr shell-burning segment on
+the M4 Max took 20.34 wall seconds versus 41.37 for the preceding code, with
+all full/two-half timestep checks retained and matching stellar results.
+[Settings, measurements, and limits](docs/LIFETIME_DRIVER.md).

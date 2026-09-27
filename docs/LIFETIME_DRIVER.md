@@ -289,3 +289,38 @@ both complete physical checkpoints exactly with binary loading. In one matched
 M4 check, CPU time through construction of the initial relaxed model fell from
 6.748 to 2.591 s, including input checks and loading. This is a startup improvement;
 it does not imply the same speedup for a long evolutionary calculation.
+
+
+### Optional reuse of nearby transport states
+
+`eos_taylor_radius "1e-4"`, `buoyancy_reuse_spacing "1e-4"`, and
+`screening_reuse_spacing "1e-4"` select first-order response reuse. Each defaults
+to zero (exact evaluation), and the driver limits each to 1e-4. The selected
+values enter the restart identity. `verify_response_reuse "1"` recomputes every
+EOS and buoyancy reuse exactly and writes its measured errors to
+`response_reuse.json`; it is intended for short comparisons.
+
+Transport EOS reuse retains the source masks for every requested derivative
+plane. The composition radius is relative to each species, including reference
+helium-4. Active-species changes force exact evaluation. Buoyancy and nuclear
+screening use fixed logarithmic grid anchors. Buoyancy uses exact inversion
+near a source boundary. Configure these process-wide options before starting
+workers; configuring buoyancy reuse clears the previous calculation's anchors.
+Per-point transport EOS anchors may depend on thread scheduling within the
+measured approximation error.
+
+Convection-region tests now share the configured zone threads; the connected
+regions are assembled in mesh order. The driver permits up to 16 threads;
+four are selected on the M4 Max. This does not change the mixing prescription.
+
+A matched 1-Gyr segment starting at 3.718 Tyr, with four threads and every
+full/two-half timestep check retained, used **48.97 CPU seconds** and
+**20.34 wall seconds**, versus **78.08** and **41.37** for the preceding code.
+Both accepted 28 intervals. Relative changes in global stellar quantities were
+below **2e-12**; all isotope and energy audits passed. The concurrent timing
+pair is an estimate of the gain, not a hardware-independent benchmark.
+Over four further checked intervals, more than 460,000 exact comparisons bounded EOS
+potential/enthalpy group errors by **2.782e-8**; the maximum absolute error in
+the buoyancy term was **1.634e-6**. These checks concern gradual shell burning,
+not convergence through a flash. Sampled timestep checking remains unselected.
+[Comparison and verification](results/response_reuse_sept27_v1.json).

@@ -7,7 +7,7 @@ namespace ember {
 using MixingRegions = std::vector<std::pair<std::size_t,std::size_t>>; // [first,last), includes isolated points
 std::vector<double> nodal_mass_weights(const Model&);
 MixingRegions schwarzschild_mixing_regions(const Model&,const Physics&);
-MixingRegions convective_mixing_regions(const Model&,const Physics&);
+MixingRegions convective_mixing_regions(const Model&,const Physics&,std::size_t threads=1);
 // Implicit pp burning with instantaneous homogeneous mixing within each
 // supplied connected region. Isolated points burn locally. Metals are inert.
 std::vector<Composition> burn_and_mix(const Model& thermal,const Model& previous,

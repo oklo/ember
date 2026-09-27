@@ -2,10 +2,75 @@
 #include "ember/constants.hpp"
 #include <algorithm>
 #include <cmath>
+#include <atomic>
+#include <bit>
+#include <cstdint>
+#include <cstring>
 #include <limits>
+#include <mutex>
 #include <stdexcept>
+#include <unordered_map>
 
 namespace ember {
+
+namespace {
+// L=ln(rho_hi/rho_lo) at (T,P) and its exact first derivatives.
+struct Contrast {double L{},dlnT{},dlnP{},rho_lo{},rho_hi{},delta_lo{},delta_hi{},chi_lo{},chi_hi{};};
+Contrast exact_contrast(const Eos& eos,double T,double P,const Composition& lo,const Composition& hi,double guess) {
+  const double rlo=eos.rho_from_PT(T,P,lo,guess),rhi=eos.rho_from_PT(T,P,hi,guess);
+  const auto a=eos.eval(T,rlo,lo),b=eos.eval(T,rhi,hi);
+  return {std::log1p((rhi-rlo)/rlo),a.delta-b.delta,1/b.chiRho-1/a.chiRho,rlo,rhi,a.delta,b.delta,a.chiRho,b.chiRho};
+}
+struct Key {
+  std::array<std::uint64_t,2*NSPEC+12> bits{};
+  bool operator==(const Key&) const=default;
+};
+struct KeyHash {
+  std::size_t operator()(const Key& k) const {
+    std::uint64_t h=1469598103934665603ull;
+    for(auto b:k.bits){h^=b;h*=1099511628211ull;h^=h>>29;}
+    return static_cast<std::size_t>(h);
+  }
+};
+struct Shard {std::mutex mutex;std::unordered_map<Key,Contrast,KeyHash> anchors;};
+constexpr std::size_t shard_count=64,shard_capacity=4096;
+std::atomic<double> reuse_spacing{0};
+std::atomic<bool> reuse_verify{false};
+std::atomic<std::size_t> reuse_hits{0},reuse_exact{0},reuse_verified{0};
+std::mutex worst_mutex;double worst_error=0;
+Shard& shard(std::size_t i) {static Shard shards[shard_count];return shards[i%shard_count];}
+std::uint64_t bits(double x) {return std::bit_cast<std::uint64_t>(x);}
+Key make_key(const Eos& eos,const Composition& lo,const Composition& hi,std::int64_t iT,std::int64_t iP) {
+  Key k;std::size_t n=0;
+  for(double x:lo.X)k.bits[n++]=bits(x);
+  for(double x:hi.X)k.bits[n++]=bits(x);
+  std::uint64_t cn=0;
+  for(const auto* c:{&lo,&hi})if(c->cn_molality)for(double x:*c->cn_molality)cn=(cn^bits(x))*1099511628211ull;
+  k.bits[n++]=cn;
+  k.bits[n++]=static_cast<std::uint64_t>(reinterpret_cast<std::uintptr_t>(&eos));
+  k.bits[n++]=static_cast<std::uint64_t>(iT);k.bits[n++]=static_cast<std::uint64_t>(iP);
+  k.bits[n++]=static_cast<std::uint64_t>(lo.basis)|static_cast<std::uint64_t>(lo.metal_inventory)<<8
+      |static_cast<std::uint64_t>(lo.cn_mass_convention)<<16;
+  k.bits[n++]=bits(reuse_spacing.load(std::memory_order_relaxed));
+  k.bits[n++]=static_cast<std::uint64_t>(hi.basis)|static_cast<std::uint64_t>(hi.metal_inventory)<<8
+      |static_cast<std::uint64_t>(hi.cn_mass_convention)<<16;
+  return k;
+}
+} // namespace
+
+void set_composition_buoyancy_reuse(double h,bool verify) {
+  if(!std::isfinite(h) || h<0 || h>.01)throw std::invalid_argument("composition buoyancy reuse spacing must lie in [0,0.01]");
+  // Configure before starting evaluations; also clears EOS pointer identities
+  // from a previous calculation in this process.
+  for(std::size_t i=0;i<shard_count;++i) {auto& s=shard(i);std::lock_guard lock(s.mutex);s.anchors.clear();}
+  reuse_hits=0;reuse_exact=0;reuse_verified=0;
+  {std::lock_guard lock(worst_mutex);worst_error=0;}
+  reuse_spacing=h;reuse_verify=verify;
+}
+CompositionBuoyancyReuse composition_buoyancy_reuse_statistics() {
+  std::lock_guard lock(worst_mutex);
+  return {reuse_hits.load(),reuse_exact.load(),reuse_verified.load(),worst_error};
+}
 
 CompositionBuoyancy composition_buoyancy(const Eos& eos,double T,double P,double delta,
     double contrast,const Composition& lo,const Composition& hi,double guess) {
@@ -16,12 +81,56 @@ CompositionBuoyancy composition_buoyancy(const Eos& eos,double T,double P,double
   if(lo.X==hi.X)return out;
   if(std::abs(contrast)<32*std::numeric_limits<double>::epsilon())
     throw std::domain_error("composition_buoyancy: unresolved pressure contrast across a composition gradient");
-  const double rlo=eos.rho_from_PT(T,P,lo,guess),rhi=eos.rho_from_PT(T,P,hi,guess);
-  const auto a=eos.eval(T,rlo,lo),b=eos.eval(T,rhi,hi);
+  const double h=reuse_spacing.load(std::memory_order_relaxed);
+  Contrast c;
+  if(h>0) {
+    const double lnT=std::log(T),lnP=std::log(P);
+    const auto iT=static_cast<std::int64_t>(std::llround(lnT/h)),iP=static_cast<std::int64_t>(std::llround(lnP/h));
+    const double lnTa=double(iT)*h,lnPa=double(iP)*h;
+    const auto key=make_key(eos,lo,hi,iT,iP);
+    auto& s=shard(KeyHash{}(key));
+    Contrast anchor;bool found=false;
+    {
+      std::lock_guard lock(s.mutex);
+      if(auto it=s.anchors.find(key);it!=s.anchors.end()){anchor=it->second;found=true;}
+    }
+    if(!found) {
+      try {anchor=exact_contrast(eos,std::exp(lnTa),std::exp(lnPa),lo,hi,guess);}
+      catch(const std::domain_error&) {
+        const auto e=exact_contrast(eos,T,P,lo,hi,guess);
+        const double f=1/(delta*contrast);
+        return {e.L*f,e.dlnT*f,e.dlnP*f,-e.L*f/delta,-e.L*f/contrast};
+      }
+      std::lock_guard lock(s.mutex);
+      if(s.anchors.size()>=shard_capacity)s.anchors.clear();
+      s.anchors.emplace(key,anchor);
+      reuse_exact.fetch_add(1,std::memory_order_relaxed);
+    } else reuse_hits.fetch_add(1,std::memory_order_relaxed);
+    // Preserve actual-temperature source bounds on reuse. Near a density
+    // edge use the exact inversion, with a generous one-percent margin
+    // relative to the <=1e-4 logarithmic response step.
+    const auto interior=[&](const Composition& composition,double rho,double expansion,double chi) {
+      const auto range=eos.density_range(T,composition);
+      if(!range)return true;
+      const double predicted=std::log(rho)-expansion*(lnT-lnTa)+(lnP-lnPa)/chi;
+      return predicted>std::log(range->min)+.01 && predicted<std::log(range->max)-.01;
+    };
+    if(interior(lo,anchor.rho_lo,anchor.delta_lo,anchor.chi_lo)
+        && interior(hi,anchor.rho_hi,anchor.delta_hi,anchor.chi_hi))
+      c={anchor.L+anchor.dlnT*(lnT-lnTa)+anchor.dlnP*(lnP-lnPa),anchor.dlnT,anchor.dlnP};
+    else c=exact_contrast(eos,T,P,lo,hi,guess);
+    if(reuse_verify.load(std::memory_order_relaxed)) {
+      const auto e=exact_contrast(eos,T,P,lo,hi,guess);
+      // Absolute error in B itself; B enters as grad_ad+B, with grad_ad ~ 0.4.
+      const double err=std::abs(c.L-e.L)/std::abs(delta*contrast);
+      reuse_verified.fetch_add(1,std::memory_order_relaxed);
+      std::lock_guard lock(worst_mutex);worst_error=std::max(worst_error,err);
+    }
+  } else c=exact_contrast(eos,T,P,lo,hi,guess);
   const double factor=1/(delta*contrast);
-  out.B=std::log1p((rhi-rlo)/rlo)*factor;
-  out.dB_dlnT=(a.delta-b.delta)*factor;
-  out.dB_dlnP=(1/b.chiRho-1/a.chiRho)*factor;
+  out.B=c.L*factor;
+  out.dB_dlnT=c.dlnT*factor;
+  out.dB_dlnP=c.dlnP*factor;
   out.dB_ddelta=-out.B/delta;
   out.dB_dpressure_contrast=-out.B/contrast;
   return out;

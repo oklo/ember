@@ -270,6 +270,20 @@ std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::jets(double T,double rho,
   entry={true,channels,T,rho,c,result};
   return result;
 }
+void VariableMetalHelmholtzEos::validate_composition_domain(double T,double rho,const Composition& c) const {
+  if(!(std::isfinite(T) && T>0 && std::isfinite(rho) && rho>0))
+    throw std::domain_error("variable EOS: invalid reuse state");
+  const auto w=weights(c,10);
+  const double t=std::log(T),q=std::log(rho)-1.5*(t-6*std::log(10.));
+  for(std::size_t i=0;i<w.count;++i) {
+    const auto& p=*w.tables[i].table;
+    if(t<p.t_.front() || t>p.t_.back() || q<p.q_.front() || q>p.q_.back())
+      throw std::domain_error("variable EOS: reuse state outside table");
+    const auto [lo,hi]=p.supported_q(interp::locate(p.t_,t));
+    const auto iq=interp::locate(p.q_,q);
+    if(iq<lo || iq>=hi)throw std::domain_error("variable EOS: masked composition support");
+  }
+}
 std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range(double T,const Composition& c) const {
   const auto w=weights(c,1);DensityRange result{0,std::numeric_limits<double>::infinity()};
   for(std::size_t i=0;i<w.count;++i){const auto r=w.tables[i].table->material_density_range(T);result.min=std::max(result.min,r.min);result.max=std::min(result.max,r.max);}

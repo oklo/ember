@@ -1,4 +1,5 @@
 #include "lifetime_driver.hpp"
+#include "ember/convection.hpp"
 #include "ember/contracting_seed.hpp"
 #include "ember/convective_evolution_checks.hpp"
 #include "ember/convective_material_heat.hpp"
@@ -112,6 +113,14 @@ int lifetime_main(int argc,char** argv) {
     if(!(collision_radius>=0 && collision_radius<=1e-4 && (collision_verify==0 || collision_verify==1))
         || (collision_verify!=0 && collision_radius==0))
       throw std::invalid_argument("invalid collision reuse settings");
+    const auto optional_number=[&](const char* key) {return cfg.values.contains(key)?cfg.number(key):0.;};
+    const double eos_radius=optional_number("eos_taylor_radius");
+    const double buoyancy_spacing=optional_number("buoyancy_reuse_spacing");
+    const double screening_spacing=optional_number("screening_reuse_spacing");
+    const double verify_responses=optional_number("verify_response_reuse");
+    for(double r:{eos_radius,buoyancy_spacing,screening_spacing})
+      if(!std::isfinite(r) || r<0 || r>1e-4)throw std::invalid_argument("response reuse radius must lie in [0,1e-4]");
+    if(verify_responses!=0 && verify_responses!=1)throw std::invalid_argument("verify_response_reuse must be zero or one");
     const auto transport_selection=cfg.values.contains("transport")?cfg.get("transport"):"whole_convective";
     if(transport_selection!="whole_convective" && transport_selection!="screened_core")
       throw std::invalid_argument("unknown lifetime transport selection");
@@ -152,7 +161,7 @@ int lifetime_main(int argc,char** argv) {
       throw std::invalid_argument("invalid atmosphere metal approximation selection");
     if(!cfg.values.empty())throw std::invalid_argument("unknown lifetime setting: "+cfg.values.begin()->first);
     if(!(mass>0 && radius>0 && teff>0 && entropy_loss>0 && dt>0 && maximum_dt>=dt && minimum_temperature>0
-        && count>=128 && count<=8192 && std::floor(count)==count && threads>=1 && threads<=4 && std::floor(threads)==threads
+        && count>=128 && count<=8192 && std::floor(count)==count && threads>=1 && threads<=16 && std::floor(threads)==threads
         && structure_tolerance>0 && structure_tolerance<=1e-3 && species_tolerance>0 && species_tolerance<=1e-4
         && energy_tolerance>0 && energy_tolerance<=.01 && abundance_tolerance>0 && abundance_tolerance<=1e-12
         && inventory_tolerance>0 && inventory_tolerance<=std::min(1e-12,.01*species_tolerance)))
@@ -208,6 +217,9 @@ int lifetime_main(int argc,char** argv) {
     identity.number("solver.homogeneous_abundance_tolerance",std::min(1e-15,abundance_tolerance));
     if(structure_prediction=="linear")identity.number("solver.structure_prediction",1);
     if(collision_radius>0)identity.number("solver.collision_taylor_radius",collision_radius);
+    if(eos_radius>0)identity.number("solver.eos_taylor_radius",eos_radius);
+    if(buoyancy_spacing>0)identity.number("solver.buoyancy_reuse_spacing",buoyancy_spacing);
+    if(screening_spacing>0)identity.number("solver.screening_reuse_spacing",screening_spacing);
     identity.family("eos",eos_path,true);
     for(const auto& [role,p]:std::map<std::string,fs::path>{{"opacity_low",low_path},{"opacity_warm",warm_path},
         {"opacity_bridge",bridge_path},{"opacity_hot",hot_path}})identity.family(role,p,false);
@@ -278,6 +290,9 @@ int lifetime_main(int argc,char** argv) {
     PPCNNetwork nuclear(PPRates::solar_fusion_iii,PPScreening::salpeter_van_horn,PPRates::solar_fusion_iii);
     PlasmaNeutrinoLosses losses;ScreenedCollisionTransport collisions(collision_path.string());
     ScreenedMetalMicroscopicTransport microscopic(table_eos,collisions,true,minimum_temperature,{true,true,true},true);
+    set_composition_buoyancy_reuse(buoyancy_spacing,verify_responses==1);
+    set_screening_reuse(screening_spacing);
+    if(eos_radius>0)microscopic.use_eos_taylor(eos_radius,verify_responses==1);
     std::shared_ptr<CollisionTaylorCache> collision_reuse;
     if(collision_radius>0) {
       collision_reuse=std::make_shared<CollisionTaylorCache>(collision_radius,points,collision_verify==1);
@@ -405,6 +420,15 @@ int lifetime_main(int argc,char** argv) {
       }
     };
     const auto outcome=ember::evolve(state,atmosphere,control,hooks);
+    if(eos_radius>0 || buoyancy_spacing>0 || screening_spacing>0) {
+      const auto e=microscopic.eos_reuse_statistics();const auto b=composition_buoyancy_reuse_statistics();
+      std::ofstream out(work/"response_reuse.json");out<<std::setprecision(17)
+        <<"{\"eos_radius\":"<<eos_radius<<",\"eos_hits\":"<<e.hits<<",\"eos_exact\":"<<e.exact
+        <<",\"eos_verified\":"<<e.verified<<",\"worst_potential\":"<<e.worst_potential<<",\"worst_enthalpy\":"<<e.worst_enthalpy
+        <<",\"buoyancy_spacing\":"<<buoyancy_spacing<<",\"buoyancy_hits\":"<<b.hits<<",\"buoyancy_exact\":"<<b.exact
+        <<",\"buoyancy_verified\":"<<b.verified<<",\"worst_absolute_B_error\":"<<b.worst_absolute_B_error
+        <<",\"screening_spacing\":"<<screening_spacing<<"}\n";
+    }
     if(collision_reuse) {
       const auto stats=collision_reuse->statistics();
       std::ofstream reuse_report(work/"collision_reuse.json");reuse_report<<std::setprecision(17)

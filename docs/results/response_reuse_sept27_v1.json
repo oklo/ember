@@ -1,0 +1,125 @@
+{
+  "outcome": "Matched same-star 1Gyr comparison; full/two-half checks unchanged",
+  "zone_threads": 4,
+  "control": {
+    "requested_age_reached": 1,
+    "age_years": 3719466369297.834,
+    "accepted_this_invocation": 28,
+    "accepted_total": 12336,
+    "rejected_total": 2298,
+    "stop_reason": "requested age",
+    "cpu_seconds": 78.081568,
+    "wall_seconds": 41.371584,
+    "full_production_track_validated": false,
+    "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+  },
+  "candidate": {
+    "requested_age_reached": 1,
+    "age_years": 3719466369297.834,
+    "accepted_this_invocation": 28,
+    "accepted_total": 12336,
+    "rejected_total": 2298,
+    "stop_reason": "requested age",
+    "cpu_seconds": 48.971615,
+    "wall_seconds": 20.341064917,
+    "full_production_track_validated": false,
+    "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+  },
+  "CPU_speed_ratio": 1.5944250153890167,
+  "wall_speed_ratio": 2.033894693754396,
+  "relative_changes": {
+    "luminosity_Lsun": 1.8474111129762605e-13,
+    "radius_Rsun": 1.7763568394002505e-14,
+    "Teff_K": 3.730349362740526e-14,
+    "central_T_K": 7.815970093361102e-14,
+    "central_density_g_cm3": -9.781064846947629e-14,
+    "H_mass_g": -1.4432899320127035e-15,
+    "He3_mass_g": -4.426459199180499e-13,
+    "He3_peak": -1.9984014443252818e-12,
+    "surface_X": 1.5543122344752192e-15,
+    "surface_Z": -9.805489753489383e-13,
+    "convective_mass_fraction": 0.0
+  },
+  "maximum_absolute_profile_changes": {
+    "lnr": 5.684341886080802e-14,
+    "lnrho": 3.0375701953744283e-13,
+    "lnT": 1.1368683772161603e-13,
+    "X": 2.5618396293225487e-13,
+    "Y3": 2.8168439802911394e-14
+  },
+  "all_accepted_audits_pass": true,
+  "maximum_species_audit": 1.7978697821946152e-17,
+  "maximum_first_law": 9.3410889023815e-09,
+  "radiative_boundary_count_change": 0,
+  "created_utc": "2026-09-27T16:22:00.647563+00:00",
+  "verification": {
+    "eos_radius": 0.0001,
+    "eos_hits": 462832,
+    "eos_exact": 25712,
+    "eos_verified": 462832,
+    "worst_potential": 1.4291291223791277e-08,
+    "worst_enthalpy": 2.7819629649231492e-08,
+    "buoyancy_spacing": 0.0001,
+    "buoyancy_hits": 56369,
+    "buoyancy_exact": 21619,
+    "buoyancy_verified": 77988,
+    "worst_absolute_B_error": 1.6344059937934297e-06,
+    "screening_spacing": 0.0001
+  },
+  "initial_current_continuation": {
+    "requested_age_reached": 0,
+    "age_years": 3734082504677.769,
+    "accepted_this_invocation": 3,
+    "accepted_total": 12702,
+    "rejected_total": 2519,
+    "stop_reason": "accepted-step budget",
+    "cpu_seconds": 5.07854,
+    "wall_seconds": 3.715505041,
+    "full_production_track_validated": false,
+    "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+  },
+  "tests": [
+    "variable_metal_eos",
+    "evolution_controller",
+    "nuclear_prescriptions",
+    "convection",
+    "metal_microscopic_evolution",
+    "metal_microscopic_face_evolution",
+    "finite_metal_evolution"
+  ],
+  "selected": {
+    "eos_taylor_radius": 0.0001,
+    "buoyancy_reuse_spacing": 0.0001,
+    "screening_reuse_spacing": 0.0001,
+    "collision_taylor_radius": 0.0001,
+    "structure_prediction": "linear",
+    "zone_threads": 4
+  },
+  "limitations": [
+    "Gradual shell-burning phase; not a flash convergence result.",
+    "Sampled timestep control is not selected.",
+    "Timing pair ran concurrently on the same M4 Max, so wall-time ratios include resource contention.",
+    "Buoyancy is an approximation of the composition-dependent stability term, also used in mixing-length transport; unchanged boundary counts alone do not prove identical region sets.",
+    "Per-point EOS cache can depend on thread scheduling at the measured small approximation level.",
+    "Process-wide screening/buoyancy options are configured before workers start; buoyancy anchors are cleared between calculations."
+  ],
+  "unchanged": [
+    "physics",
+    "matching optical depth and atmosphere inputs",
+    "full/two-half step control",
+    "nonlinear tolerances",
+    "mass mesh",
+    "species and energy audits"
+  ],
+  "sources": {
+    "worker_report": "docs/research/fable/results/OPUS_SPEEDUP_20260927.md",
+    "worker_patch_sha256": "91d06e0b9201b8c7053953714042c91dbe85af924a944ffde8fe602535307069",
+    "comparison": "out/opus-integration-sept27-v1",
+    "control_executable_sha256": "c5b4543b908e6ea18494097ce1780423c55195d2e02d2be4bdf59ccb036c08d8",
+    "candidate_executable_sha256": "eb4863c4a31d075a04b19fce50431e34b9bcb958de82edc5038e884683924f01",
+    "continuation_executable_sha256": "87b55ad49eece1723de722b35e889ad5d24fe7bf04ff854c604b7ee08676497a"
+  },
+  "tests_pass": true,
+  "screening_rate_relative_error_over_dense_core_probe": 2.079092454e-11,
+  "test_note": "Seven tests pass. New screening grid deliberately includes two unsupported quantum-ion states; exact and reuse paths both reject them. Earlier uncaught test exception was corrected to check this intended rejection."
+}

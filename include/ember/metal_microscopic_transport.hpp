@@ -49,6 +49,14 @@ class ScreenedMetalMicroscopicTransport final : public MetalMicroscopicTransport
   // Optional per-face first-order reuse of collision responses (see
   // CollisionTaylorCache). Null restores exact evaluation at every call.
   void use_collision_taylor(std::shared_ptr<const CollisionTaylorCache> cache) {taylor_=std::move(cache);}
+  // Optional first-order reuse of the EOS composition potential (per mesh
+  // point) and exchange/radiation enthalpies (per face) within radius r of an
+  // exact anchor in ln T and ln rho (absolute) and XH, X3, Z (relative to
+  // the anchor's fraction), using the EOS's own first
+  // derivatives. Returned derivative arrays are the anchor's. r=0 disables.
+  void use_eos_taylor(double radius,bool verify=false);
+  struct EosReuse {std::size_t hits{},exact{},verified{};double worst_potential{},worst_enthalpy{};};
+  EosReuse eos_reuse_statistics() const;
  private:
   const VariableMetalHelmholtzEos& eos_;
   ScreenedCollisionTransport collisions_;
@@ -57,5 +65,9 @@ class ScreenedMetalMicroscopicTransport final : public MetalMicroscopicTransport
   std::array<bool,3> active_;
   bool radiation_with_redistribution_;
   std::shared_ptr<const CollisionTaylorCache> taylor_;
+ public:
+  struct EosCache;
+ private:
+  std::shared_ptr<EosCache> eos_cache_;
 };
 } // namespace ember

@@ -9,9 +9,11 @@
 #include "ember/deuterium_burning.hpp"
 #include "ember/cn_transport.hpp"
 #include "ember/metal_microscopic_transport.hpp"
+#include "parallel_evaluate.hpp"
 #include <algorithm>
 #include <cmath>
 #include <optional>
+#include <sstream>
 #include <stdexcept>
 
 namespace ember {
@@ -84,19 +86,19 @@ MixingRegions schwarzschild_mixing_regions(const Model& m,const Physics& p) {
   return convective_mixing_regions(m,selected);
 }
 
-MixingRegions convective_mixing_regions(const Model& m,const Physics& p) {
+MixingRegions convective_mixing_regions(const Model& m,const Physics& p,std::size_t threads) {
   if(!p.eos || !p.opacity || m.comp.size()!=m.size())
     throw std::invalid_argument("mixing regions: invalid model or physics");
   detail::check_thermal_transport(p);
   nodal_mass_weights(m);
   struct Local {double P,kappa,ad,delta;};
-  std::vector<Local> local;
-  for(std::size_t i=0;i<m.size();++i) {
+  std::vector<Local> local(m.size());
+  detail::independent_evaluations(m.size(),threads,[&](std::size_t i) {
     const auto e=p.eos->eval(m.T(i),m.rho(i),m.comp[i]);
-    local.push_back({e.P,p.opacity->eval(m.T(i),m.rho(i),m.comp[i]).kappa,e.grad_ad,e.delta});
-  }
-  MixingRegions regions;std::size_t first=0;
-  for(std::size_t i=0;i+1<m.size();++i) {
+    local[i]={e.P,p.opacity->eval(m.T(i),m.rho(i),m.comp[i]).kappa,e.grad_ad,e.delta};
+  });
+  std::vector<char> boundary(m.size()-1);
+  detail::independent_evaluations(m.size()-1,threads,[&](std::size_t i) {
     // Same arithmetic midpoint transport quantities as zone assembly.
     const double T=.5*(m.T(i)+m.T(i+1)),mass=.5*(m.m[i]+m.m[i+1]);
     const double P=.5*(local[i].P+local[i+1].P),k=.5*(local[i].kappa+local[i+1].kappa);
@@ -112,8 +114,10 @@ MixingRegions convective_mixing_regions(const Model& m,const Physics& p) {
     if(p.criterion==ConvectiveCriterion::ledoux)
       B=composition_buoyancy(*p.eos,T,P,.5*(local[i].delta+local[i+1].delta),
           std::log(local[i+1].P)-std::log(local[i].P),m.comp[i],m.comp[i+1],.5*(m.rho(i)+m.rho(i+1))).B;
-    if(!(rad>ad+B)) {regions.emplace_back(first,i+1);first=i+1;}
-  }
+    boundary[i]=!(rad>ad+B);
+  });
+  MixingRegions regions;std::size_t first=0;
+  for(std::size_t i=0;i+1<m.size();++i)if(boundary[i]) {regions.emplace_back(first,i+1);first=i+1;}
   regions.emplace_back(first,m.size());return regions;
 }
 
@@ -208,13 +212,13 @@ MixingRegions instantaneous_mixing_regions(const Model& model,const Physics& phy
       && options.convective_mixing!=ConvectiveMixing::finite_lagged)
     throw std::invalid_argument("unknown convective mixing choice");
   if(options.convective_mixing==ConvectiveMixing::instantaneous)
-    return convective_mixing_regions(model,physics);
+    return convective_mixing_regions(model,physics,options.relaxation.zone_threads);
   MixingRegions regions;regions.reserve(model.size());
   if(options.instantaneous_mixing_below_T==0) {
     for(std::size_t i=0;i<model.size();++i)regions.emplace_back(i,i+1);
     return regions;
   }
-  for(const auto [begin,end]:convective_mixing_regions(model,physics)) {
+  for(const auto [begin,end]:convective_mixing_regions(model,physics,options.relaxation.zone_threads)) {
     auto first=begin;
     for(std::size_t i=begin;i+1<end;++i)
       if(std::min(model.T(i),model.T(i+1))>=options.instantaneous_mixing_below_T) {
@@ -394,6 +398,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
     MixingRegions pending_regions;
     CompositionUpdate pending;
     bool have_pending=false;
+    std::string coupling_reason;
     for(std::size_t iteration=0;iteration<options.max_coupling_iterations;++iteration) {
       // The convergence check below already evaluates the next composition
       // on this exact thermal state. Retain it when another coupling pass is
@@ -448,6 +453,8 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       }
       if(!deuterium_coupled || regions!=next_regions || residual>abundance_tolerance(next_regions)
           || result.material_heat_residual>options.material_heat_tolerance) {
+        coupling_reason=regions!=next_regions?"convective boundary changes":
+          (!deuterium_coupled?"deuterium coupling":(residual>abundance_tolerance(next_regions)?"composition coupling":"transported heat coupling"));
         pending_regions=std::move(next_regions);pending=std::move(next);
         have_pending=true;continue;
       }
@@ -456,7 +463,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       // when the outer iteration's abundance change is small. Retain this
       // solution and its matching heat fluxes only if the actual returned
       // structure and convective partition still satisfy convergence.
-      const auto final_regions=finite?convective_mixing_regions(current,coupled):next_regions;
+      const auto final_regions=finite?convective_mixing_regions(current,coupled,options.relaxation.zone_threads):next_regions;
       if(current.comp!=next.composition || update.total_rates!=next.total_rates
           || update.total_metal_rates!=next.total_metal_rates) {
         current.comp=std::move(next.composition);
@@ -467,9 +474,11 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
         auto verification=options.relaxation;verification.max_iterations=0;
         const auto checked=relax(current,coupled,atmosphere,verification,dt,&previous);
         result.residual=checked.residual;result.correction=checked.correction;
-        if(!checked.converged || convective_mixing_regions(current,coupled)!=final_regions
-            || (finite && mixing_regions()!=next_regions))
+        if(!checked.converged || convective_mixing_regions(current,coupled,options.relaxation.zone_threads)!=final_regions
+            || (finite && mixing_regions()!=next_regions)) {
+          coupling_reason=checked.converged?"final convective boundary changes":"final structure verification";
           continue;
+        }
         update.total_rates=std::move(next.total_rates);
         update.total_metal_rates=std::move(next.total_metal_rates);
       }
@@ -495,7 +504,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           -result.thermal_neutrino_luminosity)/current.y.back().L-1;
       const double release=result.nuclear_luminosity+result.neutrino_luminosity;
       result.nuclear_mass_balance=release>0 ? mass_release/release-1 : 0;
-      const auto physical_regions=finite?convective_mixing_regions(current,coupled):regions;
+      const auto physical_regions=finite?convective_mixing_regions(current,coupled,options.relaxation.zone_threads):regions;
       for(auto [begin,end]:physical_regions) if(end>begin+1) {
         ++result.mixed_regions;
         for(std::size_t i=begin;i<end;++i) result.convective_mass_fraction+=weights[i]/current.M;
@@ -514,7 +523,11 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       result.total_metal_species_rates=std::move(update.total_metal_rates);
       result.model=std::move(current);result.converged=true;result.message="converged";return result;
     }
-    result.message="evolve_step: coupling iteration limit";
+    std::ostringstream reason;reason.precision(4);
+    reason<<"evolve_step: coupling iteration limit ("<<coupling_reason
+      <<"; abundance="<<result.abundance_residual<<", transported heat="<<result.material_heat_residual
+      <<", structure="<<result.residual<<", correction="<<result.correction<<")";
+    result.message=reason.str();
   } catch(const std::exception& e) {result.message=e.what();}
   return result;
 }

@@ -171,6 +171,13 @@ int main() {
       check(after.P==expected.P && after.E==expected.E && after.P!=before.P,
             "replacement EOS uses the new material at the same composition");
     }
+    check(!throws([&]{cached.validate_composition_domain(T,rho,composition(.3,.03,.1));}),
+          "response reuse allows a supported composition state");
+    check(throws([&]{cached_masked.validate_composition_domain(T,rho,composition(.3,.03,.1));}),
+          "response reuse rejects masked composition derivative planes");
+    check(throws([&]{cached.validate_composition_domain(T,rho,composition(.3,.03,.301));})
+        && throws([&]{cached.validate_composition_domain(1.,rho,composition(.3,.03,.1));}),
+          "response reuse retains composition and temperature source limits");
     check(throws([&]{cached_masked.eval(T,rho,composition(.3,.03,.1));}),"binary family preserves source masks");
     check(throws([&]{cached.eval(T,rho,composition(.3,.03,.301));}),"binary family still rejects extrapolation");
     check(throws([&]{VariableMetalHelmholtzEos::pack_binary(dir/"smooth/family6.dat",dir/"smooth.bin");}),

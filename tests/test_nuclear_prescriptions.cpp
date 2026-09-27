@@ -109,5 +109,23 @@ int main() {
   for(double& x:atomic.X)x/=scale;
   const auto b=modern.eval(4.5e6,360,comp),a=modern.eval(4.5e6,360*scale,atomic);
   check(std::abs(a.eps*scale/b.eps-1)<1e-12,"changing mass convention preserves heat per physical volume",a.eps*scale/b.eps);
+  double reuse_error=0;
+  for(double temperature:{3e6,8.751e6,1.5e7})for(double density:{1.,1e3,3e4,1e5}) {
+    set_screening_reuse(0);
+    ScreeningState exact;
+    try {exact=pp_screening(temperature,density,comp,PPReaction::he3_he3,PPScreening::salpeter_van_horn);}
+    catch(const std::domain_error&) {
+      set_screening_reuse(1e-4);
+      check(rejects([&]{pp_screening(temperature,density,comp,PPReaction::he3_he3,PPScreening::salpeter_van_horn);}),
+            "screening reuse retains the quantum-ion boundary");
+      continue;
+    }
+    set_screening_reuse(1e-4);
+    const auto reused=pp_screening(temperature,density,comp,PPReaction::he3_he3,PPScreening::salpeter_van_horn);
+    reuse_error=std::max(reuse_error,std::abs(std::expm1(reused.log_factor-exact.log_factor)));
+  }
+  check(reuse_error<1e-7,"screening reuse preserves He3 rates through current dense-core conditions",reuse_error);
+  check(rejects([&]{latest_network.eval(2.001e7,100,comp);}),"screening reuse retains nuclear temperature bounds");
+  set_screening_reuse(0);
   return failures?1:0;
 }
