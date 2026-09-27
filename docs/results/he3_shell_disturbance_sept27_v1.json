@@ -1,0 +1,168 @@
+{
+  "created_utc": "2026-09-27T20:34:54.881733+00:00",
+  "scope": "Smooth positive and negative shell-temperature disturbances in the same continuous star at about 4.005 Tyr and 4600 K, followed for 200 Myr. Local response only; not all-mode stability or a causal test of the old atmosphere switch.",
+  "main_trajectory": false,
+  "executable_sha256": "0a67592dd3d97e6dad2ba3f29000f61ae54644b8ff193bc3b32e1cc7bd9dc2cf",
+  "control_sha256": "d2612cf25eb7ba1658d8af4f3bde3f0d41ac37d7bf3febf9a5307a7b6bfeeba5",
+  "mass_window": [
+    0.954,
+    0.976
+  ],
+  "lnT_amplitude": 0.003,
+  "initial_checks": {
+    "plus": {
+      "only_lnT_changed": true,
+      "changed_points": 18,
+      "sha256": "de0b4f046fbb5c1f29b1e668e2064b63d13421bb2138c96a18d7cf32cc8f9199"
+    },
+    "minus": {
+      "only_lnT_changed": true,
+      "changed_points": 18,
+      "sha256": "58afc14b13c98052d897c2b58d57af014031eb2ac978f5070062badc8b61820b"
+    }
+  },
+  "measured_injected_energy_erg": {
+    "plus": 5.480421e+42,
+    "minus": -5.466173e+42
+  },
+  "energy_probe_qualification": "Measured EOS energy difference at fixed density/composition, using the same EOS source/table in the worker private build. Thermal edit is initially nonhydrostatic.",
+  "runs": {
+    "control": {
+      "report": {
+        "requested_age_reached": 1,
+        "age_years": 4005057598930.122,
+        "accepted_this_invocation": 106,
+        "accepted_total": 16990,
+        "rejected_total": 4957,
+        "stop_reason": "requested age",
+        "cpu_seconds": 85.827176,
+        "wall_seconds": 50.74329125,
+        "full_production_track_validated": false,
+        "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+      },
+      "initial_He3_mass_g": 7.644089608196884e+28,
+      "final_He3_mass_g": 7.697199854119752e+28,
+      "He3_increases": true,
+      "maximum_error_norm": 0.38620169092062895,
+      "maximum_species_audit": 1.5467569543233637e-15,
+      "maximum_first_law": 3.585143248940881e-08,
+      "history_sha256": "75b32e9410837937c9922b73cc36bd0b95ea351f8038972337e700f2949be33d",
+      "attempts_sha256": "e655589704161c4a5b05164ebdc0cee61c218c80272e9b31368f2354b9923078"
+    },
+    "plus": {
+      "report": {
+        "requested_age_reached": 1,
+        "age_years": 4005057598930.122,
+        "accepted_this_invocation": 106,
+        "accepted_total": 16990,
+        "rejected_total": 4957,
+        "stop_reason": "requested age",
+        "cpu_seconds": 90.053664,
+        "wall_seconds": 52.918064208,
+        "full_production_track_validated": false,
+        "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+      },
+      "initial_He3_mass_g": 7.644089608196884e+28,
+      "final_He3_mass_g": 7.694823917163483e+28,
+      "He3_increases": true,
+      "maximum_error_norm": 0.5743624220144739,
+      "maximum_species_audit": 6.367687640631185e-18,
+      "maximum_first_law": 3.534138470762116e-08,
+      "history_sha256": "540e4f52e34517212b307f1a8dfde986d182f13d8fc15fbe874c06f2c0794f4e",
+      "attempts_sha256": "62904c82309d761909a94d0d05a9191c3c3f4ed2ad68eadb8b63d31b481150a8"
+    },
+    "minus": {
+      "report": {
+        "requested_age_reached": 1,
+        "age_years": 4005057598930.122,
+        "accepted_this_invocation": 106,
+        "accepted_total": 16990,
+        "rejected_total": 4957,
+        "stop_reason": "requested age",
+        "cpu_seconds": 87.97936,
+        "wall_seconds": 51.811321333,
+        "full_production_track_validated": false,
+        "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+      },
+      "initial_He3_mass_g": 7.644089608196884e+28,
+      "final_He3_mass_g": 7.699547626220968e+28,
+      "He3_increases": true,
+      "maximum_error_norm": 0.5872675246898496,
+      "maximum_species_audit": 4.3027802287711914e-18,
+      "maximum_first_law": 3.646762491982258e-08,
+      "history_sha256": "468671bd19bb69c978b033923b6f7f41259d9506b894877b53d9c2c4a76ac9f4",
+      "attempts_sha256": "68dc03f0ec036a8b76a39938adecb2f87cece38d61999ddb7b50cac6a5c083de"
+    }
+  },
+  "identical_step_sequences": true,
+  "selected_temperature_response_rows": [
+    [
+      "plus",
+      0.0,
+      "init",
+      0.001505863614741935,
+      0.0,
+      0.0029842477611943252,
+      0.9644921164812109
+    ],
+    [
+      "minus",
+      0.0,
+      "init",
+      -0.001505863614741935,
+      0.0,
+      0.0029842477611943252,
+      0.9644921164812109
+    ],
+    [
+      "plus",
+      0.1,
+      16885,
+      0.0009356801886879461,
+      -0.0008623592609821331,
+      0.0017595373455190355,
+      0.9657353348735038
+    ],
+    [
+      "minus",
+      0.1,
+      16885,
+      -0.0009348675413958914,
+      0.0008600748998219941,
+      0.0017600769426397989,
+      0.9657353348735038
+    ],
+    [
+      "plus",
+      18.925781251464844,
+      16899,
+      0.000350895467030422,
+      -0.0007576562270624983,
+      0.0007130722863717409,
+      0.9852161449577693
+    ],
+    [
+      "minus",
+      18.925781251464844,
+      16899,
+      -0.000345326834494914,
+      0.0007455090389385209,
+      0.0007039310709799906,
+      0.9852161449577693
+    ]
+  ],
+  "response_columns": [
+    "arm",
+    "elapsed_Myr",
+    "accepted",
+    "mean_dlnT_in_window",
+    "mean_dlnrho_in_window",
+    "maximum_absolute_dlnT",
+    "q_of_maximum"
+  ],
+  "interpretation": "No runaway for either tested disturbance. Initial temperature excess decays; later residual resembles an 8\u20139 Myr shift along evolution, not a demonstrated neutral eigenmode. Total He3 increases. A later flash remains possible.",
+  "first_step_check": "Worker repeated the positive disturbance with a ten-times-smaller initial step through 60 Myr; subsequent excess agrees to about 1% of that excess.",
+  "worker_report": "docs/research/fable/results/HE3_SHELL_STABILITY_20260927.md",
+  "worker_report_sha256": "6b665d8f1b9b9d5465081b9071023b8fab8513bfca306b6b12726cba827071fe",
+  "evidence_directory": "out/he3-shell-stability-sept27-v1"
+}

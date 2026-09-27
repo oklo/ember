@@ -1,0 +1,26 @@
+{
+  "created_utc": "2026-09-27T20:27:03.043306+00:00",
+  "selected_for_evolution": false,
+  "unchanged_old_queries": 142,
+  "supported_new_queries": 32,
+  "missing_queries_rejected": 3,
+  "maximum_derivative_error": 7.096986109900172e-09,
+  "old_rows_preserved": 144,
+  "high_table_sha256": "9056dfe1eb60a5c8997713d808379d9d84b089e8f895f1c44a406daf0448eedc",
+  "scope": "Completed cold cells using accepted source columns and interpolation. No missing-corner extrapolation. Matching optical depth remains100; gas-only and trace-He qualifications unchanged.",
+  "source_manifest": "out/highg-table-extension-sept27-v10/sources.json",
+  "selected_table": "v27 still uses v9; v10 is prepared for the next continuation.",
+  "source_density_limit_g_cm3": 0.001,
+  "matching_optical_depth": 100,
+  "complete_cold_cells": {
+    "Teff_K": [
+      4450,
+      4550
+    ],
+    "log_g": [
+      6.1,
+      6.3
+    ]
+  },
+  "qualification": "Gas-only trace-He approximation; original source checks unchanged. Cooling initial guesses affect convergence only; source equilibrium uniqueness and deeper-column convergence not established."
+}
