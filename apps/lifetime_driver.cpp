@@ -1,4 +1,5 @@
 #include "lifetime_driver.hpp"
+#include "lifetime_extrapolation.hpp"
 #include "ember/convection.hpp"
 #include "ember/contracting_seed.hpp"
 #include "ember/convective_evolution_checks.hpp"
@@ -127,6 +128,8 @@ int lifetime_main(int argc,char** argv) {
     if(!std::isfinite(abundance_cap) || abundance_cap<=0 || abundance_cap>.01)
       throw std::invalid_argument("abundance cap must lie in (0,0.01]");
     const double coupling_stop=optional_number("coupling_stop_tolerance");
+    const double richardson=optional_number("richardson_extrapolation");
+    if(richardson!=0 && richardson!=1)throw std::invalid_argument("richardson_extrapolation must be 0 or 1");
     const double material_heat=optional_number("material_heat_tolerance");
     const double verification_residual=optional_number("verification_residual_tolerance");
     const double verification_correction=optional_number("verification_correction_tolerance");
@@ -250,6 +253,11 @@ int lifetime_main(int argc,char** argv) {
         {"opacity_bridge",bridge_path},{"opacity_hot",hot_path}})identity.family(role,p,false);
     for(const auto& [role,p]:std::map<std::string,fs::path>{{"conduction",conduction_path},{"atmosphere",atmosphere_path},
         {"collisions",collision_path},{"composition",composition_path}})identity.file(role,p);
+    if(richardson==1) {
+      identity.values["integrator"]="richardson.full_two_half.assessed.v3";
+      identity.number("integrator.residual_limit",1e-5);
+      identity.number("integrator.energy_tolerance",.001);
+    }
     const auto& identities=identity.values;
     const Selections selections{"lifetime.volume_faces.v1","ppcn.sfiii.svh.physical_metals.v1",
       "losses.plasma_neutrino.v1","convection."+mixing_selection+".material_heat_after_D.v1",
@@ -402,6 +410,7 @@ int lifetime_main(int argc,char** argv) {
     control.structure_tolerance=structure_tolerance;control.species_tolerance=species_tolerance;
     control.energy_tolerance=energy_tolerance;control.maximum_steps=maximum_steps;
     control.predict_structure=structure_prediction=="linear";
+    control.richardson_extrapolation=richardson==1;
     control.maximum_cpu_seconds=maximum_cpu;
     // A failed trial must not replace the accepted model. Retry with a shorter
     // interval under the same audits; the controller bounds repeated rejection.
@@ -431,6 +440,11 @@ int lifetime_main(int argc,char** argv) {
         convective_heat.diagnostic_rates={};envelope_heat.diagnostic_rates={};
       }catch(...) {convective_heat.diagnostic_rates={};envelope_heat.diagnostic_rates={};throw;}
     };
+    std::ofstream extrapolation_log;
+    if(richardson==1)extrapolation_log.open(work/"richardson.jsonl");
+    const LifetimeExtrapolation assessment{hooks,options,atmosphere,nuclear,convective_heat,envelope_heat,
+        static_cast<std::size_t>(threads),1e-5,.001,species_tolerance,extrapolation_log};
+    if(richardson==1)hooks.assess_extrapolated=assessment;
     hooks.cpu_seconds=[&]{return double(std::clock()-cpu_start)/CLOCKS_PER_SEC;};
     hooks.terminal_failure=[](std::string_view reason) {
       return reason.find("radiative species boundary")!=std::string_view::npos;
@@ -451,6 +465,8 @@ int lifetime_main(int argc,char** argv) {
       }
     };
     const auto outcome=ember::evolve(state,atmosphere,control,hooks);
+    if(richardson==1)std::cerr<<"Richardson accepted "<<outcome.richardson_accepted
+      <<", declined "<<outcome.richardson_declined<<'\n';
     if(eos_radius>0 || buoyancy_spacing>0 || screening_spacing>0) {
       const auto e=microscopic.eos_reuse_statistics();const auto b=composition_buoyancy_reuse_statistics();
       std::ofstream out(work/"response_reuse.json");out<<std::setprecision(17)

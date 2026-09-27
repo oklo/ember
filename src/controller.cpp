@@ -10,6 +10,8 @@ void check_options(const EvolutionControlOptions& options, const EvolutionContro
   if (!hooks.physics || !hooks.species_difference || !hooks.audit || !hooks.assess
       || !hooks.cpu_seconds)
     throw std::invalid_argument("evolution controller requires physics, error, audit, assessment and clock callbacks");
+  if (options.richardson_extrapolation && !hooks.assess_extrapolated)
+    throw std::invalid_argument("Richardson extrapolation requires a physical assessment callback");
   if (!(std::isfinite(options.target_age) && options.target_age > 0
         && std::isfinite(options.maximum_dt) && options.maximum_dt > 0
         && options.structure_tolerance > 0 && options.species_tolerance > 0
@@ -19,6 +21,36 @@ void check_options(const EvolutionControlOptions& options, const EvolutionContro
         && options.maximum_consecutive_rejections > 0 && options.maximum_steps > 0
         && options.maximum_cpu_seconds > 0))
     throw std::invalid_argument("invalid evolution controller options");
+}
+// 2*h2 - full, or nothing when the combination is not admissible. The cheap
+// count/mass prefilter is only a shortcut; the physical partition comparison
+// is made by the assessment callback.
+std::optional<Model> richardson(const EvolutionStep& full, const EvolutionStep& h1, const EvolutionStep& h2) {
+  if (full.mixed_regions != h2.mixed_regions || h1.mixed_regions != h2.mixed_regions
+      || full.convective_mass_fraction != h2.convective_mass_fraction
+      || h1.convective_mass_fraction != h2.convective_mass_fraction)
+    return std::nullopt;
+  if (full.model.m != h2.model.m || full.model.M != h2.model.M
+      || full.model.comp.size() != h2.model.comp.size()) return std::nullopt;
+  Model out = h2.model;
+  for (std::size_t i = 0; i < out.size(); ++i) {
+    for (const auto v : {Var::lnr, Var::lnrho, Var::lnT, Var::L})
+      out.y[i][v] = h2.model.y[i][v] + (h2.model.y[i][v] - full.model.y[i][v]);
+    for (const auto v : {Var::lnr, Var::lnrho, Var::lnT, Var::L})
+      if (!std::isfinite(out.y[i][v])) return std::nullopt;
+    auto& c = out.comp[i];const auto& a = h2.model.comp[i];const auto& b = full.model.comp[i];
+    if (a.cn_molality.has_value() != b.cn_molality.has_value()) return std::nullopt;
+    for (std::size_t j = 0; j < NSPEC; ++j) {
+      c.X[j] = 2 * a.X[j] - b.X[j];
+      if (!(c.X[j] >= 0 && c.X[j] <= 1) || (a.X[j] > 0) != (c.X[j] > 0)) return std::nullopt;
+    }
+    if (c.cn_molality)
+      for (std::size_t j = 0; j < 3; ++j) {
+        (*c.cn_molality)[j] = 2 * (*a.cn_molality)[j] - (*b.cn_molality)[j];
+        if (!std::isfinite((*c.cn_molality)[j]) || !((*c.cn_molality)[j] >= 0)) return std::nullopt;
+      }
+  }
+  return out;
 }
 } // namespace
 
@@ -115,6 +147,27 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
         hooks.assess(h1.model, h1.total_metal_species_rates);
         hooks.assess(h2.model, h2.total_metal_species_rates);
       }
+      std::optional<Model> candidate;
+      std::vector<std::array<double,3>> rates;
+      // Assess only intervals already accepted by the unchanged time error.
+      // Failure of this optional improvement must preserve the valid h2 path.
+      if (options.richardson_extrapolation && attempt.converged && attempt.audit_pass && attempt.error_norm <= 1) {
+        candidate = richardson(full,h1,h2);
+        if (candidate && full.total_metal_species_rates.size() != h2.total_metal_species_rates.size()) candidate.reset();
+        if (candidate) {
+          rates = h2.total_metal_species_rates;
+          for (std::size_t i=0;i<rates.size();++i) for(std::size_t k=0;k<3;++k) {
+            rates[i][k] += h2.total_metal_species_rates[i][k]-full.total_metal_species_rates[i][k];
+            if (!std::isfinite(rates[i][k])) candidate.reset();
+          }
+        }
+        if (candidate) {
+          try {
+            if (!hooks.assess_extrapolated(state,full,h1,h2,*candidate,rates,ds).empty()) candidate.reset();
+          } catch (const std::exception&) { candidate.reset(); }
+        }
+        if (!candidate) hooks.assess(h2.model,h2.total_metal_species_rates);
+      }
       attempt.accepted = attempt.converged && attempt.audit_pass && attempt.error_norm <= 1;
       attempt.message = !full.converged ? full.message : !h1.converged ? h1.message : h2.message;
       if (attempt.converged && !attempt.audit_pass)
@@ -127,6 +180,13 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
         }
         state.model = h2.model;
         state.metal_heat_rates = h2.total_metal_species_rates;
+        if (options.richardson_extrapolation) {
+          if (candidate) {
+            state.model = std::move(*candidate);
+            state.metal_heat_rates = std::move(rates);
+            ++result.richardson_accepted;
+          } else ++result.richardson_declined;
+        }
         ++state.accepted;
         ++result.accepted_this_invocation;
         failed = 0;

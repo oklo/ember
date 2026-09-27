@@ -407,3 +407,38 @@ half and twice the approximated opacity changes luminosity by less than
 This supports extending the selected density bound to 2.2 during this phase;
 the approximation needs reassessment if these layers become radiative.
 [Measured response](results/dense_envelope_extension_sept27_v1.json).
+
+
+## Second-order accepted states
+
+`richardson_extrapolation "1"` enables an optional second-order estimate from
+`2 * (two half-steps) - (full step)`. The default is off. Every interval retains
+the full/two-half time-error check and the three original conservation audits;
+there is no increase in the allowed time error. Structure variables, abundances
+and stored species heat rates use the same combination.
+
+The candidate must retain nonnegative abundances and the same convective and
+instantaneously mixed regions as the starting model, full step and both half
+steps. Each assessment uses that model's stored species heat rates. Atmosphere,
+EOS and opacity support, hydrostatic balance, mass continuity, temperature
+transport and boundary conditions are checked directly. The dimensionless
+algebraic allowance is 1e-5; the global energy-measure allowance is 0.001 of the
+larger radiated or nuclear energy over the interval. Species accounting must
+meet the configured species time accuracy. This global energy measure differs
+slightly from the local discrete first law and does not replace its audits.
+The backward-Euler thermal equation is not imposed on a second-order estimate.
+Any failed assessment uses the ordinary two-half-step result. Initial-deuterium
+evolution also uses that fallback. Integrator selection and assessment limits
+are recorded in checkpoint identity.
+
+A matched 1 Gyr comparison near 3.997 Tyr, using the current physics and two
+threads, compared both methods with a 5 Myr-step reference. The reference ends
+0.03955 yr short because of accumulated absolute-age rounding; this negligible
+offset is included in the receipt. Richardson reduces the helium-3 peak error
+from 0.005233% to 0.0004588%, while the largest local structure difference is
+0.04542%. It costs 20.61 retained CPU seconds versus 14.64 for the ordinary
+method. It remains off in the production trajectory: this comparison supports
+its accuracy but does not show a speed gain or validate rapid burning. The
+controller tests cover missing assessment, declined and throwing assessments,
+and acceptance; a real initial-deuterium step confirms the application fallback.
+[Comparison](results/richardson_current_physics_sept27_v1.json).

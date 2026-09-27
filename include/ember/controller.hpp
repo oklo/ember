@@ -24,6 +24,7 @@ struct EvolutionControlOptions {
   double maximum_cpu_seconds{std::numeric_limits<double>::infinity()};
   bool audit_failure_is_fatal{true};
   bool predict_structure{false};
+  bool richardson_extrapolation{false};
 };
 
 struct EvolutionAttempt {
@@ -46,6 +47,10 @@ struct EvolutionControlHooks {
   std::function<double(const Composition&, const Composition&)> species_difference;
   std::function<EvolutionAudit(const Model&, const EvolutionStep&, double)> audit;
   std::function<void(const Model&, std::span<const std::array<double, 3>>)> assess;
+  // Empty means the candidate passes; any reason declines it in favor of h2.
+  // Required when Richardson is enabled. The controller retains every time check.
+  std::function<std::string(const EvolutionState&, const EvolutionStep&, const EvolutionStep&,
+      const EvolutionStep&, const Model&, const std::vector<std::array<double, 3>>&, double)> assess_extrapolated;
   std::function<double()> cpu_seconds;
   std::function<bool(std::string_view)> terminal_failure;
   std::function<void(const EvolutionAttempt&)> attempted;
@@ -57,6 +62,7 @@ struct EvolutionControlResult {
   bool requested_age_reached{};
   std::size_t accepted_this_invocation{};
   std::string stop_reason;
+  std::size_t richardson_accepted{}, richardson_declined{};
 };
 
 EvolutionControlResult evolve(EvolutionState&, const Atmosphere&,

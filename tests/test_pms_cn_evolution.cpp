@@ -151,6 +151,42 @@ int main(int argc,char**) {
       const auto fatal=evolve(state,atmosphere,control,hooks);
       require(!fatal.requested_age_reached && state.rejected==1 && state.accepted==0,
               "explicit fatal-audit policy must still stop immediately");
+      // An optional extrapolation must never turn a valid half-step result
+      // into a failed evolution. Exercise actual controller fallbacks.
+      fail_all=false;calls=1;control.audit_failure_is_fatal=false;
+      state={controller_initial,dt,0,0};
+      const auto ordinary=evolve(state,atmosphere,control,hooks);
+      require(ordinary.requested_age_reached,"extrapolation control did not finish");
+      const auto reference=state;
+      control.richardson_extrapolation=true;
+      bool missing_assessment=false;
+      try {(void)evolve(state,atmosphere,control,hooks);}
+      catch(const std::invalid_argument&) {missing_assessment=true;}
+      require(missing_assessment,"extrapolation ran without a physical assessment");
+      for(bool throws:{false,true}) {
+        std::size_t assessed=0;
+        hooks.assess_extrapolated=[&](const EvolutionState&,const EvolutionStep&,const EvolutionStep&,
+            const EvolutionStep&,const Model&,const std::vector<std::array<double,3>>&,double)->std::string {
+          ++assessed;if(throws)throw std::domain_error("injected unsupported candidate");
+          return "injected decline";
+        };
+        calls=1;state={controller_initial,dt,0,0};
+        const auto fallback=evolve(state,atmosphere,control,hooks);
+        require(fallback.requested_age_reached && assessed>0 && fallback.richardson_accepted==0
+          && fallback.richardson_declined>0,"extrapolation assessment did not fall back");
+        require(state.model.comp==reference.model.comp && state.metal_heat_rates==reference.metal_heat_rates,
+                "declining extrapolation changed abundances or heat history");
+        for(std::size_t i=0;i<state.model.size();++i)for(std::size_t k=0;k<NVAR;++k)
+          require(state.model.y[i][static_cast<Var>(k)]==reference.model.y[i][static_cast<Var>(k)],
+                  "declining extrapolation changed the retained half-step result");
+      }
+      hooks.assess_extrapolated=[](const EvolutionState&,const EvolutionStep&,const EvolutionStep&,
+          const EvolutionStep&,const Model&,const std::vector<std::array<double,3>>&,double){return std::string{};};
+      calls=1;state={controller_initial,dt,0,0};
+      const auto extrapolated=evolve(state,atmosphere,control,hooks);
+      require(extrapolated.requested_age_reached && extrapolated.richardson_accepted>0,
+              "controller did not accept an assessed admissible extrapolation");
+
     }
     std::cout<<std::setprecision(17)<<"{\"outcome\":\"passed\",\"scope\":\"analytic EOS/grey coupled 0.5 solar mass test with trace-D injection; not a physical track\""
       <<",\"face_luminosities\":"<<face_luminosities(initial)
