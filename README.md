@@ -12,34 +12,34 @@ conditional disappearance through nucleon decay. The same program should
 resolve the stellar/brown-dwarf boundary as initial mass and composition vary.
 The full calculation is not yet established.
 
-The common `ember-evolve --lifetime` program has passed **3.02 Tyr** from a
-Hayashi start with hot transport selected and no rejected intervals. A completed
-comparison with a stricter fixed-metal allowance reaches **2.102 Tyr**, with **5931 accepted intervals** in
-**66.16 CPU minutes / 35.41 elapsed minutes**, including loading but excluding
-source-table preparation. It remains fully convective at **3020 K**, with
-hydrogen **X = 0.4170**. All accepted isotope and energy checks pass.
-An overly restrictive atmosphere metal allowance caused **28 rejected trials**
-and a final rounding-sensitive audit failure after repeated timestep reductions.
-[Retained calculation](docs/results/continuous_lifetime_sept26_v2.json).
+The common `ember-evolve --lifetime` program has reached **3.078 Tyr** from a
+Hayashi start in a completed fixed-metal-atmosphere comparison: **7230 accepted
+intervals, none rejected**, in **4.000 CPU hours / 1.871 elapsed hours**. It
+remains fully convective at **3130 K**, with hydrogen **X = 0.2629**.
+All accepted isotope and energy checks pass.
+[Retained calculation](docs/results/continuous_lifetime_sept26_v3.json).
 
 The common driver selects hot microscopic H/He/metal transport, conservative
 mixing heat, metal-dependent atmospheres and the existing composition-dependent
 interior opacities. A saved radiative-core model evolves with nonzero settling,
 passes the physical conservation checks, and restarts exactly. Initial
 fully mixed deuterium burning uses tighter composition convergence than the
-stratified diffusion solve; the physical audits stay unchanged. **All 76 tests
-pass** in the working and isolated builds with the required datasets.
+stratified diffusion solve; the physical audits stay unchanged. **All 77 tests
+pass** in the isolated build with the required datasets.
 [Common driver](docs/LIFETIME_DRIVER.md),
 [diffusion and restart test](docs/results/screened_radiative_core_sept27_v1.json),
 [atmosphere coverage](docs/results/atmosphere_lifetime_atlas_sept27_v1.json),
 [opacity coverage](docs/results/opacity_lifetime_extension_sept27_v1.json).
 
-A fresh Hayashi calculation now selects the restored hydrogen- and
-metal-dependent atmospheres from the start. All 5932 saved early surface
-queries are unchanged; the late-source tests cover the settling comparison
-through 3.749 Tyr. Trace-helium and WD atmosphere coverage remains unfinished.
-[Hydrogen-rich atmosphere recovery](docs/results/atmosphere_hydrogen_recovery_sept27_v1.json). New high-gravity
-hydrogen columns use the same joining depth as the main-sequence atmospheres.
+The continuous Hayashi calculation with restored hydrogen- and
+metal-dependent atmospheres has passed **700.5 Gyr**. Its later atmosphere
+coverage was extended at that accepted state with no change to the physical
+checkpoint; an independent ten-interval replay is exact. All 5932 tested early
+surface values remain unchanged. The combined inputs cover all 67 saved
+settling comparison states at the original optical depth of 100. Cool,
+high-gravity rows include bounded estimates, which still need source checks;
+continuous WD cooling is not yet established.
+[Atmosphere coverage and restart evidence](docs/results/hydrogen_envelope_integration_sept27_v1.json).
 The microscopic metal law assumes complete ionization; unsupported cool
 radiative layers are rejected. Initial deuterium uses a checked whole-star
 mixing approximation. Nuclear burning includes the pp chain and explicit

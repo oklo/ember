@@ -184,6 +184,36 @@ def main():
         assert "checkpoint" in rejected.stderr and "hydrogen_interval.lower.hydrogen_low" in rejected.stderr
         inner.write_text(inner.read_text().replace("hydrogen .751 .8", "hydrogen .75 .8"))
 
+        # Very hydrogen-rich sources must also be selectable before they are
+        # needed, with all coordinates and leaf bytes bound into the restart.
+        envelope_dir = response_dir.parent / "lifetime_hydrogen_envelope"
+        envelope_rows = (envelope_dir / "envelope.dat").read_text().splitlines()
+        for i in range(1, 5):
+            field, filename = shlex.split(envelope_rows[i])
+            envelope_rows[i] = field + " " + json.dumps(payload(envelope_dir / filename))
+        envelope = relocated / "envelope.dat"
+        envelope.write_text("\n".join(envelope_rows) + "\n")
+        envelope_settings = dict(interval_settings, atmosphere_hydrogen_envelope=envelope.name)
+        envelope_config = configuration_file("envelope.txt", envelope_settings)
+        run("envelope", maximum_steps=3, configuration=envelope_config)
+        assert history(work / "envelope") == history(work / "prefix")
+        envelope_restart = ("--restart", str(work / "envelope/final.checkpoint"))
+        renamed_envelope = relocated / "renamed-envelope.dat"
+        renamed_envelope.write_bytes(envelope.read_bytes())
+        moved_envelope = configuration_file("moved-envelope.txt", dict(envelope_settings,
+                                            atmosphere_hydrogen_envelope=renamed_envelope.name))
+        run("moved-envelope", envelope_restart, configuration=moved_envelope)
+        assert history(work / "moved-envelope") == history(work / "resumed")
+        renamed_envelope.write_text(envelope.read_text().replace("gravity_high 5.8 5.9", "gravity_high 5.81 5.9"))
+        rejected = run("changed-envelope-axis", envelope_restart, expected=1, configuration=moved_envelope)
+        assert "checkpoint" in rejected.stderr and "hydrogen_envelope.gravity_high.low" in rejected.stderr
+        changed_rows = envelope_rows[:]
+        (relocated / "invalid-envelope-table.dat").write_text("not a physical atmosphere table\n")
+        changed_rows[4] = 'high_gravity "invalid-envelope-table.dat"'
+        renamed_envelope.write_text("\n".join(changed_rows) + "\n")
+        rejected = run("changed-envelope-table", envelope_restart, expected=1, configuration=moved_envelope)
+        assert "checkpoint" in rejected.stderr and "hydrogen_envelope.high_gravity" in rejected.stderr
+
         # A local nonlinear correction tolerance and a global inventory budget
         # measure different quantities; neither must be ordered against the other.
         independent = configuration_file("independent-tolerances.txt", {

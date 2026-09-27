@@ -16,11 +16,11 @@ import shutil
 INPUT_KEYS = ("eos", "opacity_low", "opacity_warm", "opacity_bridge",
               "opacity_hot", "conduction", "atmosphere", "collisions", "composition")
 OPTIONAL_INPUT_KEYS = ("atmosphere_main_sequence", "atmosphere_metal_chain", "opacity_hydrogen_response",
-                       "atmosphere_hydrogen_interval")
+                       "atmosphere_hydrogen_interval", "atmosphere_hydrogen_envelope")
 
 
 def atmosphere_children(path):
-    """Return child line numbers for the two supported atmosphere manifests."""
+    """Return child line numbers for supported atmosphere manifests."""
     lines = path.read_text().splitlines()
     rows = [shlex.split(line) for line in lines]
     if not rows:
@@ -41,6 +41,13 @@ def atmosphere_children(path):
             raise ValueError(f"invalid atmosphere interval fields: {path}")
         indices = [i for i, row in enumerate(rows[1:], 1)
                    if row[0] in ("lower_interval", "lower_metal_chain", "reference", "chain")]
+    elif rows[0] == ["EMBER_HYDROGEN_ENVELOPE_ATMOSPHERE", "1"]:
+        fields = ["trace_helium", "low_gravity", "middle_gravity", "high_gravity",
+                  "maximum_helium3", "maximum_helium", "gravity_low", "gravity_high",
+                  "trace_helium_join", "composition_helium_join", "metal_join", "pure_metal_join"]
+        if len(rows) != len(fields) + 1 or any(not row or row[0] != field for row, field in zip(rows[1:], fields)):
+            raise ValueError(f"invalid hydrogen envelope fields: {path}")
+        indices = range(1, 5)
     else:
         return None
     children = []
@@ -155,7 +162,7 @@ def verify(manifest):
     for role in input_keys(cfg):
         path = (config.parent / cfg[role]).resolve(strict=True)
         discovered.add(path)
-        if role == "atmosphere_hydrogen_interval":
+        if role in ("atmosphere_hydrogen_interval", "atmosphere_hydrogen_envelope"):
             discovered.update(atmosphere_closure(path))
         elif is_family(path, role):
             _, children = family(path, role)
@@ -227,7 +234,7 @@ def package(config, destination, metadata, manifest, source_root):
 
     for role in input_keys(cfg):
         source = (config.parent / cfg[role]).resolve(strict=True)
-        if role == "atmosphere_hydrogen_interval":
+        if role in ("atmosphere_hydrogen_interval", "atmosphere_hydrogen_envelope"):
             target = atmosphere(source, role)
         elif is_family(source, role):
             header, children = family(source, role)

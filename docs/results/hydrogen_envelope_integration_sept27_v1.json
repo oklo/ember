@@ -1,0 +1,107 @@
+{
+  "created_utc": "2026-09-27T05:17:14.885122+00:00",
+  "outcome": "common_driver_trace_helium_and_hydrogen_envelope_integrated",
+  "source_manifest": "data/atmosphere/lifetime_hydrogen_envelope/sources.json",
+  "selection_manifest": "data/atmosphere/lifetime_hydrogen_envelope/envelope.dat",
+  "matching_optical_depth": 100,
+  "saved_queries_passed": 5999,
+  "early_queries_exact": 5932,
+  "saved_settling_models_supported": 67,
+  "centered_difference_grid_crossings": [
+    {
+      "id": "pms293",
+      "centered_error": 0.0009505911866574124
+    },
+    {
+      "id": "pms449",
+      "centered_error": 0.0019779506909634037
+    },
+    {
+      "id": "pms712",
+      "centered_error": 0.0032753985781561745
+    },
+    {
+      "id": "old49",
+      "centered_error": 0.0030092692937478925
+    },
+    {
+      "id": "old53",
+      "centered_error": 0.006843861364175141
+    },
+    {
+      "id": "old54",
+      "centered_error": 0.0019902986902110564
+    },
+    {
+      "id": "old56",
+      "centered_error": 0.9388798824147369
+    }
+  ],
+  "late_offset_derivative_checks": 67,
+  "late_offset_maximum_derivative_error": 6.38772235106444e-09,
+  "native_unit_checks": 110,
+  "isolated_test_count": 77,
+  "isolated_tests_pass": true,
+  "packaged_input_count": 55,
+  "exact_prefix_intervals": 5,
+  "exact_snapshot_continuation_intervals": 10,
+  "migration_age_years": 700493415567.2157,
+  "migration_payload_sha256": "bff82151a6df81a2f5116df47230bc28928b1add9dc80e9175fce4663362828b",
+  "selected_run": "out/continuous-lifetime-sept27-v3",
+  "previous_run": "out/continuous-lifetime-sept27-v2",
+  "migration": "Only the executable identity and 19 new atmosphere-coverage identities change; physical checkpoint and next-step decision retained. Added branch inactive throughout accepted prefix; five early and ten main-sequence intervals independently replay exactly. Strict driver restart checks remain unchanged.",
+  "limitations": [
+    "High-gravity/cool rows include explicitly inferred continuations; physical source validation remains incomplete.",
+    "Existing piecewise interpolation has derivative corners at source nodes. Centered comparisons crossing those nodes are not a test of the one-sided analytic derivative; all offset controls pass.",
+    "The helium approximation has local actual-composition controls at4650/4800 K, logg5.9; they are not a global accuracy bound.",
+    "No forced white-dwarf atmosphere switch selected. Continuous evolution has not yet reached the pulse regime or WD cooling."
+  ],
+  "sha256": {
+    "out/hydrogen-envelope-sept27-v1/queries.jsonl": "a319e793273ba5eff0781faf9a7e5af17491fb980e5bafe79b2bcfbf98f0a1c5",
+    "out/hydrogen-envelope-sept27-v1/offset_queries.jsonl": "584111b9e8877410b34d7ece8eafb33ca9aa45d9a64ba618e05628f78b6363ad",
+    "out/hydrogen-envelope-sept27-v1/snapshot_validation.json": "03e04c7a0ff1abe1767940ff005d5354a8df30f9d07e0b0bfc758d1c2429f63d",
+    "out/hydrogen-envelope-sept27-v1/extend_run.py": "dbce79d7333c78c34f876b499f8149324aafa2e65b8b315b463e6991c85a9524",
+    "out/hydrogen-envelope-sept27-v1/complete_prepared_extension.py": "4a79b28393b0098f4da22014a56122449061561617547a008f2399503e3a3bcc",
+    "out/continuous-lifetime-sept27-v3/restart.checkpoint": "ec2f48767f8d61cad5bed1f20965e31e1c34770a0d5311e4eb8f55bf8b0e204a"
+  },
+  "helium_source_controls": {
+    "receipt": "docs/results/late_helium_boundary_selection_v1.json",
+    "sha256": "d3d434a703136f78a8f882a87480fb6f36ad3e835d84adc0fb0598b4971a309b",
+    "sources": [
+      {
+        "coordinates": [
+          0.995,
+          0.005,
+          4800.0,
+          5.9
+        ],
+        "matching_T_K": 6174.8043608336475,
+        "matching_Pgas": 37074953.600154914,
+        "temperature_fractional_change": 0.0007858313326578603,
+        "pressure_fractional_change": -0.02048902433548816,
+        "correction": 4.64e-07,
+        "tau_bracket": [
+          94.28665128956692,
+          138.9051580516743
+        ]
+      },
+      {
+        "coordinates": [
+          0.995,
+          0.005,
+          4650.0,
+          5.9
+        ],
+        "matching_T_K": 5851.436281251765,
+        "matching_Pgas": 62172094.26255152,
+        "temperature_fractional_change": 4.509939914587591e-05,
+        "pressure_fractional_change": 0.0038978939652130062,
+        "correction": 8.39e-07,
+        "tau_bracket": [
+          74.702888388354,
+          107.07175051453554
+        ]
+      }
+    ]
+  }
+}

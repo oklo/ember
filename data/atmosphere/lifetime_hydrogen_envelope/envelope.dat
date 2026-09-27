@@ -1,0 +1,13 @@
+EMBER_HYDROGEN_ENVELOPE_ATMOSPHERE 1
+trace_helium "trace.dat"
+low_gravity "low.dat"
+middle_gravity "middle.dat"
+high_gravity "high.dat"
+maximum_helium3 .0003
+maximum_helium .005
+gravity_low 5.5 5.65
+gravity_high 5.8 5.9
+trace_helium_join .0004 .0009
+composition_helium_join .0006 .0009
+metal_join 1e-6 1e-5
+pure_metal_join 1e-8 1e-6

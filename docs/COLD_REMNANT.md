@@ -2,27 +2,34 @@
 
 ## Current priority — September 27, 2026
 
-The furthest completed continuous Hayashi-started sequence reaches **2.102 Tyr**.
-The successor with hot microscopic transport is running; consult the
-[current handoff](../HANDOFF.md) and live history for its age. It remains fully
-convective in the latest check. The common program now also supports recovered
-metal-dependent atmospheres and the existing hydrogen/metal opacity extensions.
-All **76 tests pass** in working and isolated checkouts, including an actual
-radiative-core evolution, conservation checks and an exact restart.
+The completed continuous Hayashi-started fixed-metal sequence reaches
+**3.078 Tyr**, **3130 K**, **X=.2629**, with **7230 accepted intervals and
+no rejections**. It ended at its allocated CPU time and remains fully convective.
+A fresh sequence now selects the restored composition-dependent atmospheres
+and interior opacity response from the same Hayashi starting prescription.
+Read the [current handoff](../HANDOFF.md) for its live state.
 
-Local composition solve precision follows the actual mixing partition: tighter
-for the single fully mixed region, practical precision for stratified diffusion.
-Physical inventory/energy checks are unchanged. A fresh-start negative control
-with a uniformly loose tolerance accepted no evolved model; it is not progress
-along the track. The replacement input set passes its initial PMS checks.
+All **77 tests pass** in the isolated checkout, including actual radiative-core
+evolution, conservation and exact restart. The local composition solve uses
+1e-15 for one instantaneously mixed region and 1e-12 for stratified diffusion;
+the independent global abundance-balance criterion remains 1e-14.
 
-Remaining preparation is the continuous H-rich atmosphere interpolation and
-smooth WD boundary. Fable is recovering old source inputs, computing tau=100
-high-gravity hydrogen atmospheres, and preparing the shorter paper. The separate
-flash histories inherit a forced atmosphere change; atmosphere-independent
-ignition is still unestablished.
+The restored-material Hayashi trajectory has passed **700.5 Gyr**. A checked
+continuation adds the later trace-He/pure-H atmosphere inputs without changing
+its accepted physical state. All 5932 tested early boundary values remain exact,
+and the combined selection covers all 67 saved settling structures. The
+matching depth remains tau = 100. Cool, high-gravity rows include bounded
+inferred values; cooler source columns still need numerical work. The accepted
+4800 K / log g 6.0 and 6.1 columns provide useful independent checks.
+The separate flash histories inherit a forced atmosphere change;
+atmosphere-independent ignition is not established.
+[Coverage and continuation evidence](results/hydrogen_envelope_integration_sept27_v1.json).
 
-[Atmosphere integration](results/atmosphere_lifetime_atlas_sept27_v1.json),
+The [September 27 paper](reports/2026-09-27/ember_status_and_future.pdf) is
+**30 pages**, reduced from 63 with physical qualifications, comparisons and the
+lifetime timeline retained.
+
+[Hydrogen-rich atmosphere recovery](results/atmosphere_hydrogen_recovery_sept27_v1.json),
 [real diffusion/restart check](results/screened_radiative_core_sept27_v1.json),
 [opacity support](results/opacity_lifetime_extension_sept27_v1.json),
 [completed review](research/fable/ADVERSARIAL_REVIEW_20260926.md).

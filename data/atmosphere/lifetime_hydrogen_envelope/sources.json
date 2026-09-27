@@ -1,0 +1,25 @@
+{
+  "files": [
+    {
+      "file": "trace.dat",
+      "source": "out/material-input-recovery-v1/closed/84/842bb006b1172a9302f8ded4d283dfe125a7733b9594cfdeed0399fc8f253429.dat",
+      "sha256": "842bb006b1172a9302f8ded4d283dfe125a7733b9594cfdeed0399fc8f253429"
+    },
+    {
+      "file": "low.dat",
+      "source": "out/hydrogen-dominated-atmosphere-v1/grid.dat",
+      "sha256": "d687887c6789155672f5f7482616e4ffdd048d9c62027adc05e3ee7ddf7968e3"
+    },
+    {
+      "file": "middle.dat",
+      "source": "out/g595-atmosphere-v1/grid.dat",
+      "sha256": "5d798d7b3a9459002ff0a5d4f45d25cd3c49fcac571800af96141946fa1a1848"
+    },
+    {
+      "file": "high.dat",
+      "source": "out/late-helium-boundary-v1/grid.dat",
+      "sha256": "8670bdc23840b996bfae1ca75e92c0e06c3ea21e1af705e2d2db5619314b6b1d"
+    }
+  ],
+  "qualification": "high.dat includes inferred temperature/gravity rows; coverage is not independent source validation."
+}

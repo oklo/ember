@@ -93,6 +93,17 @@ the contraction boundary remains exactly selected at the initial Z. These
 selections, all response files, the transport choice, join temperatures and
 mixing allowance enter restart identity.
 
+`atmosphere_hydrogen_interval` adds the retained hydrogen-rich reference
+families. `atmosphere_hydrogen_envelope` adds explicit trace-helium and nearly
+pure-hydrogen gas sources, joined over declared composition and gravity
+intervals at the same optical depth of 100. The initial boundary remains
+unchanged. All source bytes and interval coordinates enter restart identity,
+and the runtime packager includes their complete input set.
+The cool, high-gravity source contains bounded inferred rows; using that family
+does not establish independently solved coverage throughout the late track.
+[Source limits](../data/atmosphere/lifetime_hydrogen_envelope/README.md),
+[coverage and exact continuation checks](results/hydrogen_envelope_integration_sept27_v1.json).
+
 The volume-face thermal gradient now uses the same logarithmic-temperature
 mean with and without a material-heat provider. A zero heat/conduction
 provider leaves structure equations and convective mixing unchanged. Older

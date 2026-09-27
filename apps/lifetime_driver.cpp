@@ -11,6 +11,7 @@
 #include "ember/atmosphere_metal_chain.hpp"
 #include "ember/atmosphere_metal_interval.hpp"
 #include "ember/atmosphere_hydrogen_interval.hpp"
+#include "ember/atmosphere_hydrogen_envelope.hpp"
 #include "ember/atmosphere_grid.hpp"
 #include "ember/conduction_table.hpp"
 #include "ember/eos_deuterium.hpp"
@@ -126,6 +127,8 @@ int lifetime_main(int argc,char** argv) {
     }
     fs::path hydrogen_atmosphere_path;
     if(cfg.values.contains("atmosphere_hydrogen_interval"))hydrogen_atmosphere_path=path("atmosphere_hydrogen_interval");
+    fs::path hydrogen_envelope_path;
+    if(cfg.values.contains("atmosphere_hydrogen_envelope"))hydrogen_envelope_path=path("atmosphere_hydrogen_envelope");
     if((atmosphere_metals!="strict" && atmosphere_metals!="bounded_fixed_Z") ||
         (atmosphere_metals=="strict"?atmosphere_delta_Z!=0:atmosphere_delta_Z<=0))
       throw std::invalid_argument("invalid atmosphere metal approximation selection");
@@ -166,6 +169,8 @@ int lifetime_main(int argc,char** argv) {
     }
     if(!hydrogen_atmosphere_path.empty())
       identity.hydrogen_atmosphere_interval("atmosphere.hydrogen_interval",hydrogen_atmosphere_path);
+    if(!hydrogen_envelope_path.empty())
+      identity.hydrogen_envelope("atmosphere.hydrogen_envelope",hydrogen_envelope_path);
     identity.values["atmosphere.overlap"]=main_atmosphere_path.empty()?"none":"gravity_hydrogen.v1";
     if(!main_atmosphere_path.empty()) {
       identity.file("atmosphere_main_sequence",main_atmosphere_path);
@@ -241,8 +246,13 @@ int lifetime_main(int argc,char** argv) {
     std::unique_ptr<HydrogenIntervalAtmosphere> hydrogen_atmosphere;
     if(!hydrogen_atmosphere_path.empty())hydrogen_atmosphere=std::make_unique<HydrogenIntervalAtmosphere>(
         eos,metal_boundary,hydrogen_atmosphere_path);
-    TraceDeuteriumAtmosphere atmosphere(eos,hydrogen_atmosphere
-        ?static_cast<const Atmosphere&>(*hydrogen_atmosphere):metal_boundary);
+    const Atmosphere& hydrogen_boundary=hydrogen_atmosphere
+        ?static_cast<const Atmosphere&>(*hydrogen_atmosphere):metal_boundary;
+    std::unique_ptr<HydrogenEnvelopeAtmosphere> hydrogen_envelope;
+    if(!hydrogen_envelope_path.empty())hydrogen_envelope=std::make_unique<HydrogenEnvelopeAtmosphere>(
+        eos,hydrogen_boundary,hydrogen_envelope_path);
+    TraceDeuteriumAtmosphere atmosphere(eos,hydrogen_envelope
+        ?static_cast<const Atmosphere&>(*hydrogen_envelope):hydrogen_boundary);
     PPCNNetwork nuclear(PPRates::solar_fusion_iii,PPScreening::salpeter_van_horn,PPRates::solar_fusion_iii);
     PlasmaNeutrinoLosses losses;ScreenedCollisionTransport collisions(collision_path.string());
     ScreenedMetalMicroscopicTransport microscopic(table_eos,collisions,true,minimum_temperature,{true,true,true},true);

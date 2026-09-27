@@ -1,5 +1,6 @@
 #pragma once
 #include "ember/evolution_checkpoint.hpp"
+#include "ember/atmosphere_hydrogen_envelope.hpp"
 
 namespace ember::driver {
 
@@ -67,6 +68,21 @@ public:
     expect("hydrogen");number(role+".hydrogen_low",read_representable_double(in));
     number(role+".hydrogen_high",read_representable_double(in));
     if(in>>label)throw std::runtime_error("trailing hydrogen-atmosphere identity data");
+  }
+
+  void hydrogen_envelope(const std::string& role,const fs::path& path) {
+    const auto s=HydrogenEnvelopeAtmosphere::read(path);
+    number(role+".version",1);
+    file(role+".trace",s.trace);file(role+".low_gravity",s.low_gravity);
+    file(role+".middle_gravity",s.middle_gravity);file(role+".high_gravity",s.high_gravity);
+    number(role+".maximum_helium3",s.maximum_helium3);
+    number(role+".maximum_helium",s.maximum_helium);
+    for(const auto& [name,bounds]:std::map<std::string,std::array<double,2>>{
+        {"gravity_low",s.gravity_low},{"gravity_high",s.gravity_high},
+        {"trace_helium_join",s.trace_helium_join},{"composition_helium_join",s.composition_helium_join},
+        {"metal_join",s.metal_join},{"pure_metal_join",s.pure_metal_join}}) {
+      number(role+"."+name+".low",bounds[0]);number(role+"."+name+".high",bounds[1]);
+    }
   }
 
   void family(const std::string& role,const fs::path& path,bool eos) {
