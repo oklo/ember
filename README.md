@@ -41,12 +41,12 @@ verified solver stall without weakening the conservation requirement.
 [diffusion convergence](docs/results/local_correction_comparison_sept27_v2.json).
 
 The atmosphere and EOS inputs cover all 67 saved settling comparison
-structures. The selected high-gravity atmosphere table covers **4600–5400 K**
+structures. The selected high-gravity atmosphere table covers **4600–6000 K**
 and **log g = 5.9–6.2**, using checked source solutions and explicit
 interpolation. Its extension preserves all 5999 saved atmosphere queries,
 three stellar intervals and the actual continuation's starting state exactly.
 The boundary remains gas-only, with declared trace-helium and composition limits.
-[Atmosphere checks](docs/results/highg_atmosphere_extension_sept27_v1.json),
+[Atmosphere checks](docs/results/highg_atmosphere_extension_sept27_v2.json),
 [EOS coverage](docs/results/eos_lifetime_coverage_sept27_v1.json).
 
 Separate late-evolution calculations develop a helium-3 shell pulse after an

@@ -19,7 +19,9 @@ wavelength-dependent atmospheres, hot H/He/metal diffusion, and conservative
 heat transport during composition changes. Each connected convective region
 is mixed instantaneously, with a check on the gradient needed to carry its
 species flux. Finite mixing is available in the engine but is not selected
-in this trajectory. Unsupported cool radiative transport remains a limitation;
+in this trajectory. It is now selectable in the same lifetime program, with
+[conservation and restart checks](results/finite_mixing_driver_sept27_v1.json).
+Unsupported cool radiative transport remains a limitation;
 there is no silent replacement for the missing microscopic law.
 
 All accepted full and half intervals must pass isotope and energy audits.
@@ -34,7 +36,7 @@ do not establish time convergence through a flash.
 [local solve](results/local_correction_comparison_sept27_v2.json).
 
 The atmosphere match remains at optical depth **100** throughout. The selected
-high-gravity grid covers **4600–5400 K**, **log g = 5.9–6.2**, using checked
+high-gravity grid covers **4600–6000 K**, **log g = 5.9–6.2**, using checked
 source columns and declared interpolation. The extension preserves all 5999
 saved atmosphere queries and three stellar intervals exactly, including the
 final physical checkpoint. Its actual continuation preserves the starting
@@ -42,7 +44,7 @@ physical state. All 67 saved late comparison structures remain supported.
 Those separate histories inherit an atmosphere adjustment and cannot establish
 atmosphere-independent ignition. Gas-only and trace-helium assumptions remain
 explicit, and additional coverage is being prepared in advance.
-[Atmosphere checks](results/highg_atmosphere_extension_sept27_v1.json),
+[Atmosphere checks](results/highg_atmosphere_extension_sept27_v2.json),
 [EOS coverage](results/eos_lifetime_coverage_sept27_v1.json).
 
 Exact reuse of repeated EOS evaluations preserves six stellar intervals and

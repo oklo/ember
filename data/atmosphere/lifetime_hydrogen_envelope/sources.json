@@ -18,7 +18,7 @@
     {
       "file": "high.dat",
       "source": "Inherited sources and forward_source_extension, with declared interpolation only.",
-      "sha256": "f344e5a9220b4259bf239050ca3b31d5011e8ca1d071b37926705ca81f8a2020"
+      "sha256": "76d67bd4a01a8a6709d51ef5df69096168dfcdfcdbad4478a6aee285716dbd4d"
     }
   ],
   "qualification": "Gas-only, trace-He approximation. Existing values retained exactly. At former upper boundaries of 4800 K and log g = 6.1 values are continuous but the new cell supplies the one-sided derivative. All source acceptance unchanged; unchanged metallicity bounds. Earlier source records remain inherited.",
@@ -524,11 +524,11 @@
       ]
     }
   ],
-  "created_utc": "2026-09-27T12:02:10.786492+00:00",
+  "created_utc": "2026-09-27T12:30:46.918839+00:00",
   "selected_for_evolution": true,
   "matching_optical_depth": 100,
   "unchanged_g59_column": false,
-  "assembly_script_sha256": "9cccf93e604ec7900f8cadf49e8f77f1a6acb652ef648eaf81a0766c2126305a",
+  "assembly_script_sha256": "d300b626d89d70b350c7c7f4e0c6f7f786f49982df662c586a6fea913dc19401",
   "previous_sources_sha256": "caeb91e8f03573822bc3aae9be6ee14eb90cd103c8a994d5adea342a670f1362",
   "cool_source_replacements": [
     {
@@ -1530,6 +1530,210 @@
         "tas": "218951c37e07b9fcc9618732e3753e5b5c02ead549ae10a0df45c1afcdca2c1a"
       },
       "CPU_seconds": 417.91380699999996
+    },
+    {
+      "teff_K": 6000.0,
+      "log_g": 5.9,
+      "source": "out/warm-atmosphere-bottom-control-sept27-v1/t6000_g590_bottom10000",
+      "source_plan": "out/warm-atmosphere-bottom-control-sept27-v1/balance_plan.json",
+      "source_plan_sha256": "adddb2e2cddebd3d35f157084f82f566fd268231d8b5a254dd4e9afb2f701d1d",
+      "result_sha256": "c6f7b3c615a35ab9fff8f0ee5ac753e1f377f97dea2f1cf2fdfb56ec9f487c2c",
+      "diagnostics": {
+        "T": 9227.688691506568,
+        "Pgas": 3582208.258745471,
+        "source_density": 4.646195769781155e-06,
+        "column_mass": 4.509753015588103,
+        "flux_error": 0.00020884828226841456,
+        "correction": 7.89e-07,
+        "effective_flux_error": 0.00020663231540574145,
+        "hydrostatic_error": 5.204363211497309e-06,
+        "chemical_density_error": 1.163114049518299e-11,
+        "iterations": 18,
+        "depths": 240,
+        "tau_bracket": [
+          81.4426653341403,
+          100.00899842197455
+        ],
+        "optical_depth_range": [
+          2.40796294434036e-06,
+          9994.4343442201
+        ],
+        "column_mass_range": [
+          0.0013153450000000003,
+          17.088694864122527
+        ],
+        "temperature_range": [
+          4847.352553712844,
+          12881.661861075483
+        ],
+        "density_range": [
+          2.587922353635655e-09,
+          1.2107083622306961e-05
+        ]
+      },
+      "input_sha256": {
+        "fort.5": "9bd165ce46fa1c8fc6db6cc50e3c2c7dfeb20f3f383724f38c499a1488b88f98",
+        "fort.15": "a6d635880938f9d6b95a24a09d15b8a712ba5286655740bb257c9b16b641e558",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "physics.json": "73ceb5078c22f2a05d78a8ecde968e1fdb26d75e180a6edb0dffa7a691c13a37",
+        "fort.8": "5559044b4b6268df9561f6d5c2d0ca6a0a67e1e6d926dbf49d092a71f0875a56",
+        "tas": "433b84f60b54c7e46a731619dfe628b789fa8a10a0ea74fc6213f179eb7cf5eb"
+      },
+      "CPU_seconds": 165.700398
+    },
+    {
+      "teff_K": 6000.0,
+      "log_g": 6.0,
+      "source": "out/warm-atmosphere-depth-control-sept27-v1/t6000_g600",
+      "source_plan": "out/warm-atmosphere-depth-control-sept27-v1/balance_plan.json",
+      "source_plan_sha256": "8f4529f6103bbce73e02fe62f8d151edcbdfb609e2cce6b6f805562158926058",
+      "result_sha256": "7f47c7840873e57b3d90a5bb73dad22d66201fbd80dac0e0635417e9f6eddf4f",
+      "diagnostics": {
+        "T": 9229.4491901812,
+        "Pgas": 4214833.876939117,
+        "source_density": 5.468181986191435e-06,
+        "column_mass": 4.214849652342255,
+        "flux_error": 7.366109811890453e-05,
+        "correction": 8.97e-07,
+        "effective_flux_error": 0.0002070563924914115,
+        "hydrostatic_error": 4.439370588360525e-06,
+        "chemical_density_error": 1.704569818627988e-11,
+        "iterations": 29,
+        "depths": 240,
+        "tau_bracket": [
+          88.7666279592928,
+          111.98372617944308
+        ],
+        "optical_depth_range": [
+          1.922477659129421e-06,
+          191758.67647617473
+        ],
+        "column_mass_range": [
+          0.0010448160000000003,
+          60.76634999999999
+        ],
+        "temperature_range": [
+          4848.80263825814,
+          16452.25698393061
+        ],
+        "density_range": [
+          2.58698102094146e-09,
+          3.990848919471859e-05
+        ]
+      },
+      "input_sha256": {
+        "fort.5": "174a71d79a420a1709c4b92bf5c17e16caa0de91d193d87a674e6145ded56537",
+        "fort.15": "a6d635880938f9d6b95a24a09d15b8a712ba5286655740bb257c9b16b641e558",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "physics.json": "73ceb5078c22f2a05d78a8ecde968e1fdb26d75e180a6edb0dffa7a691c13a37",
+        "fort.8": "cc216dbc9572e2e858c1954e67bcc89067e09c73efcd4a2511ffe2995f86a843",
+        "tas": "433b84f60b54c7e46a731619dfe628b789fa8a10a0ea74fc6213f179eb7cf5eb"
+      },
+      "CPU_seconds": 313.599862
+    },
+    {
+      "teff_K": 6000.0,
+      "log_g": 6.1,
+      "source": "out/forward-6000-atmosphere-sept27-v1/t6000_g610",
+      "source_plan": "out/forward-6000-atmosphere-sept27-v1/balance_plan.json",
+      "source_plan_sha256": "1099f621ec0c578df1a5fb9816ce8a3ab0654572914793c14fb97a73eff960fb",
+      "result_sha256": "1c0429aa7753bc4133870925de804443d2de592e9b724790e27df19d5431a24b",
+      "diagnostics": {
+        "T": 9231.18748037461,
+        "Pgas": 4952063.397624602,
+        "source_density": 6.426244049428255e-06,
+        "column_mass": 3.9335761947164842,
+        "flux_error": 1.2278491843042971e-05,
+        "correction": 9.53e-07,
+        "effective_flux_error": 0.00020759503878986507,
+        "hydrostatic_error": 3.7889737568574944e-06,
+        "chemical_density_error": 1.7466472712612813e-11,
+        "iterations": 53,
+        "depths": 150,
+        "tau_bracket": [
+          74.72655068932336,
+          108.33930987757915
+        ],
+        "optical_depth_range": [
+          1.5353301735565756e-06,
+          140441.98856365113
+        ],
+        "column_mass_range": [
+          0.0008299267999999998,
+          48.26843000000001
+        ],
+        "temperature_range": [
+          4850.3714072381,
+          16138.011576708897
+        ],
+        "density_range": [
+          2.5859838934863222e-09,
+          4.114413739011793e-05
+        ]
+      },
+      "input_sha256": {
+        "fort.5": "ae84a7a6238ac4075a95eee7f8ffbfc2df524ffbee8566d71c4bd69101814473",
+        "fort.15": "a6d635880938f9d6b95a24a09d15b8a712ba5286655740bb257c9b16b641e558",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "physics.json": "73ceb5078c22f2a05d78a8ecde968e1fdb26d75e180a6edb0dffa7a691c13a37",
+        "fort.8": "2dc6a2cb01d58f525749d5a1c7a1321318624ff070fefe8a1c0ed5f2c4dc953c",
+        "tas": "218951c37e07b9fcc9618732e3753e5b5c02ead549ae10a0df45c1afcdca2c1a"
+      },
+      "CPU_seconds": 578.139014
+    },
+    {
+      "teff_K": 6000.0,
+      "log_g": 6.2,
+      "source": "out/forward-6000-atmosphere-sept27-v1/t6000_g620",
+      "source_plan": "out/forward-6000-atmosphere-sept27-v1/balance_plan.json",
+      "source_plan_sha256": "1099f621ec0c578df1a5fb9816ce8a3ab0654572914793c14fb97a73eff960fb",
+      "result_sha256": "b5fc096f00d0735dc65be34f80a028300206b73bd38afc73270cce8d51671a5d",
+      "diagnostics": {
+        "T": 9231.548359452208,
+        "Pgas": 5826761.478794839,
+        "source_density": 7.5643865807897565e-06,
+        "column_mass": 3.676447696312747,
+        "flux_error": 1.3725519441010192e-05,
+        "correction": 7.85e-07,
+        "effective_flux_error": 0.00020751466934199048,
+        "hydrostatic_error": 3.224689087089061e-06,
+        "chemical_density_error": 2.2869706128858525e-11,
+        "iterations": 54,
+        "depths": 150,
+        "tau_bracket": [
+          74.26133570645652,
+          107.20210736047552
+        ],
+        "optical_depth_range": [
+          1.2261903386911608e-06,
+          100644.14060299772
+        ],
+        "column_mass_range": [
+          0.0006592342999999999,
+          38.34098000000001
+        ],
+        "temperature_range": [
+          4851.912976653415,
+          15795.762579694347
+        ],
+        "density_range": [
+          2.5849805653606576e-09,
+          4.2551504897558935e-05
+        ]
+      },
+      "input_sha256": {
+        "fort.5": "66d0006e4e19379172d19342d9ceba51cc7be7b6c03d19e9976222466d1c7d32",
+        "fort.15": "a6d635880938f9d6b95a24a09d15b8a712ba5286655740bb257c9b16b641e558",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "physics.json": "73ceb5078c22f2a05d78a8ecde968e1fdb26d75e180a6edb0dffa7a691c13a37",
+        "fort.8": "d5e2b64c2fe64276737ad2d71de9943451362eb8f332d4633fae57706724a2a3",
+        "tas": "218951c37e07b9fcc9618732e3753e5b5c02ead549ae10a0df45c1afcdca2c1a"
+      },
+      "CPU_seconds": 597.030532
     }
   ],
   "forward_interpolants": [
@@ -1570,6 +1774,24 @@
       "method": "linear in log gravity and logarithms of matching temperature and pressure"
     },
     {
+      "teff_K": 6000,
+      "log_g": 5.95,
+      "source_log_g": [
+        5.9,
+        6.0
+      ],
+      "method": "linear in log gravity and logarithms of matching temperature and pressure"
+    },
+    {
+      "teff_K": 6000,
+      "log_g": 6.05,
+      "source_log_g": [
+        6.0,
+        6.1
+      ],
+      "method": "linear in log gravity and logarithms of matching temperature and pressure"
+    },
+    {
       "teff_K": 4800,
       "log_g": 6.2,
       "source_Teff_K": [
@@ -1583,12 +1805,28 @@
   "existing_numeric_rows_exact": true,
   "domain_Teff_K": [
     4600,
-    5400
+    6000
   ],
   "domain_log_g": [
     5.9,
     6.2
   ],
-  "selection_run": "out/continuous-lifetime-sept27-v14",
-  "selection_receipt": "docs/results/highg_atmosphere_extension_sept27_v1.json"
+  "selection_run": "out/continuous-lifetime-sept27-v15",
+  "selection_receipt": "docs/results/highg_atmosphere_extension_sept27_v2.json",
+  "lower_boundary_check": {
+    "created_utc": "2026-09-27T12:30:46.598748+00:00",
+    "scope": "6000K/logg5.9 same-opacity lower-boundary comparison; matching depth remains100",
+    "selected_for_evolution": false,
+    "source_candidates": [
+      "t6000_g590_bottom10000",
+      "t6000_g590_bottom3000"
+    ],
+    "relative_deeper_vs_shallower": {
+      "T": 2.2176685982477906e-05,
+      "Pgas": -0.0002016988621059701
+    },
+    "preferred_source": "t6000_g590_bottom10000",
+    "qualification": "Both independent re-solves satisfy the unchanged flux, correction, chemical closure, hydrostatic and opacity-support checks. This controls lower-boundary sensitivity only; it does not establish depth or opacity-grid convergence for the entire atmosphere family.",
+    "plan_sha256": "adddb2e2cddebd3d35f157084f82f566fd268231d8b5a254dd4e9afb2f701d1d"
+  }
 }

@@ -11,20 +11,26 @@ pure-hydrogen sources neglect trace atmospheric helium in the matching
 pressure and temperature. Density always uses the actual stellar composition.
 
 `high.dat` contains solved gas atmospheres and explicit interpolated knots.
-It covers 4600–5400 K and log g = 5.9–6.2. The forward extension uses 12
+It covers 4600–6000 K and log g = 5.9–6.2. The forward extension uses 16
 independently checked columns on the same fine opacity grid. The 4800 K,
 log g = 6.2 entry interpolates the solved 4700 K and 5000 K columns; a separate
 attempt to calculate it directly reached its CPU limit and was not used.
 `sources.json` records the source columns and each interpolated entry.
 
-The extension preserves all 50 original numerical rows and all 5999 saved
-atmosphere queries exactly. Another 100 queries test the added domain and its
+At 6000 K and log g = 5.9, two independent lower-boundary calculations
+reach optical depths of about 3000 and 10000. Both pass the unchanged source
+checks. At the matching depth of 100 their temperatures differ by **0.002218%**
+and gas pressures by **0.02017%**. The deeper solution supplies the table.
+This checks lower-boundary sensitivity, not every source discretization error.
+
+The extension preserves all 84 preceding numerical rows and all 5999 saved
+atmosphere queries exactly. Another 136 queries test the added domain and its
 derivatives. Three actual stellar intervals and their final physical checkpoint
 are identical before and after the extension; the production continuation also
 preserves its starting physical state. Values are continuous at the former
 4800 K and log g = 6.1 boundaries, while the new cells supply different
 one-sided slopes. This is the existing piecewise logarithmic interpolation.
-[Validation](../../../docs/results/highg_atmosphere_extension_sept27_v1.json).
+[Validation](../../../docs/results/highg_atmosphere_extension_sept27_v2.json).
 
 Trace atmospheric helium remains approximated. The high-gravity metallicity
 range is still 0 to 1e-20; separate small-metal source controls have not changed

@@ -1,0 +1,199 @@
+{
+  "created_utc": "2026-09-27T12:30:50.235783+00:00",
+  "selected_for_evolution": true,
+  "saved_queries_exact": 5999,
+  "new_supported_queries": 136,
+  "maximum_derivative_error": 7.049003158954292e-09,
+  "unchanged_prior_numeric_rows": 50,
+  "edge_values_exact": true,
+  "edge_one_sided_slopes": [
+    {
+      "edge": "4800K",
+      "log_g": 5.9,
+      "old_logarithmic_T_Pgas_slopes": [
+        1.7170915581767747,
+        -16.10349141378736
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        2.372352506922461,
+        -15.881746226661681
+      ]
+    },
+    {
+      "edge": "4800K",
+      "log_g": 5.95,
+      "old_logarithmic_T_Pgas_slopes": [
+        1.695978065134922,
+        -16.225766997401408
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        2.29609709724445,
+        -15.628132687512863
+      ]
+    },
+    {
+      "edge": "4800K",
+      "log_g": 6.0,
+      "old_logarithmic_T_Pgas_slopes": [
+        1.6748645720931181,
+        -16.34804258101555
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        2.2198416875664138,
+        -15.374519148364046
+      ]
+    },
+    {
+      "edge": "4800K",
+      "log_g": 6.05,
+      "old_logarithmic_T_Pgas_slopes": [
+        1.6183301239568844,
+        -16.396135522416646
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        2.158324949075024,
+        -15.471159354737813
+      ]
+    },
+    {
+      "edge": "4800K",
+      "log_g": 6.1,
+      "old_logarithmic_T_Pgas_slopes": [
+        1.5617956758206504,
+        -16.444228463817645
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        2.0968082105836334,
+        -15.56779956111163
+      ]
+    },
+    {
+      "edge": "logg6.1",
+      "Teff_K": 4599.999999999998,
+      "old_logarithmic_T_Pgas_slopes": [
+        0.0009022264435731874,
+        0.9306050656575271
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        0.002996076319123892,
+        0.9370305215185176
+      ]
+    },
+    {
+      "edge": "logg6.1",
+      "Teff_K": 4624.999999999998,
+      "old_logarithmic_T_Pgas_slopes": [
+        -0.0019119326450756158,
+        0.9347319524514253
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        0.0011559530119153944,
+        0.9370926243497685
+      ]
+    },
+    {
+      "edge": "logg6.1",
+      "Teff_K": 4650.000000000001,
+      "old_logarithmic_T_Pgas_slopes": [
+        -0.0027567375308734754,
+        0.9367977635813529
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        -0.0008355059867115555,
+        0.9360345947302967
+      ]
+    },
+    {
+      "edge": "logg6.1",
+      "Teff_K": 4700.000000000001,
+      "old_logarithmic_T_Pgas_slopes": [
+        -0.007418104043797084,
+        0.9368248643723509
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        -0.004357245540691478,
+        0.9423312112832999
+      ]
+    },
+    {
+      "edge": "logg6.1",
+      "Teff_K": 4799.999999999999,
+      "old_logarithmic_T_Pgas_slopes": [
+        -0.017756422258461475,
+        0.9280302241401761
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        0.01695621402944427,
+        0.9804951365360496
+      ]
+    }
+  ],
+  "high_sha256": "76d67bd4a01a8a6709d51ef5df69096168dfcdfcdbad4478a6aee285716dbd4d",
+  "limitations": [
+    "Gas-only and trace-atmospheric-helium approximation retained.",
+    "Metallicity domain remains0..1e-20.",
+    "Piecewise logarithmic interpolation is continuous in value; slopes change at knots. This extension has no forced matching-depth change."
+  ],
+  "exact_driver_replay_intervals": 3,
+  "exact_final_physical_checkpoint": true,
+  "only_restart_identity_changed": "atmosphere.hydrogen_envelope.high_gravity",
+  "replay_accepted_end": 9427,
+  "replay_age_end_years": 3610439183766.06,
+  "portable_input_files": 55,
+  "hashes": {
+    "high.dat": "76d67bd4a01a8a6709d51ef5df69096168dfcdfcdbad4478a6aee285716dbd4d",
+    "sources.json": "f08a9aa3b93be2e2a3a929c7c3418d568c268372295e2f08a82e3cb442cfbbe6",
+    "snapshot.checkpoint": "2adf72d6a2db1a96c371b82e7a2b8b2e1684b0508768bfc7087444dff16ce1ab",
+    "candidate/data/MANIFEST.json": "10ab29e24eee361cfaaca7a326293037f683b5f1eb882841f40785ab004d9926",
+    "candidate/evolution/final.checkpoint": "4bd00f917832f8310901d07eb2276564e36f9c63f3507418f5b92d3d12e2f2ee",
+    "baseline/evolution/final.checkpoint": "7250ad47bf6c72055d9eb107bba9136fd60d00131934641107eeb3c720a60ce2"
+  },
+  "selection_run": "out/continuous-lifetime-sept27-v15",
+  "preserved_preceding_table_rows": 84,
+  "actual_startup": {
+    "created_utc": "2026-09-27T12:47:03.701138+00:00",
+    "physical_history_fields_exact": true,
+    "accepted": 9462,
+    "age_years": 3611426676149.646,
+    "reset_invocation_diagnostics": [
+      "cpu_seconds",
+      "error_norm",
+      "step_years"
+    ],
+    "changed_identities": {
+      "executable": [
+        "0f78bcc66c70e593",
+        "8a37ef1037c64a33"
+      ],
+      "atmosphere.hydrogen_envelope.high_gravity": [
+        "d4f3c9fd5434b95d",
+        "4e36f26494c62dbf"
+      ]
+    }
+  },
+  "domain_Teff_K": [
+    4600,
+    6000
+  ],
+  "domain_log_g": [
+    5.9,
+    6.2
+  ],
+  "lower_boundary_check": {
+    "created_utc": "2026-09-27T12:30:46.598748+00:00",
+    "scope": "6000K/logg5.9 same-opacity lower-boundary comparison; matching depth remains100",
+    "selected_for_evolution": false,
+    "source_candidates": [
+      "t6000_g590_bottom10000",
+      "t6000_g590_bottom3000"
+    ],
+    "relative_deeper_vs_shallower": {
+      "T": 2.2176685982477906e-05,
+      "Pgas": -0.0002016988621059701
+    },
+    "preferred_source": "t6000_g590_bottom10000",
+    "qualification": "Both independent re-solves satisfy the unchanged flux, correction, chemical closure, hydrostatic and opacity-support checks. This controls lower-boundary sensitivity only; it does not establish depth or opacity-grid convergence for the entire atmosphere family.",
+    "plan_sha256": "adddb2e2cddebd3d35f157084f82f566fd268231d8b5a254dd4e9afb2f701d1d"
+  },
+  "selected_sources_sha256": "9958602e345f40f1b758cf14076aafdbded9596023da7872d047a41912f6bdde"
+}
