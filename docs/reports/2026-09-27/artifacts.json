@@ -1,41 +1,41 @@
 {
-  "created_utc": "2026-09-27T13:01:57.481303+00:00",
+  "created_utc": "2026-09-27T20:02:21.525197+00:00",
   "pages": 30,
   "previous_pages": 63,
-  "words": 13772,
-  "scope": "Continuous Hayashi-origin track through3.615 Tyr. Figure1, summary, internal structure and compute accounting share accepted9593. Other comparison figures unchanged.",
+  "words": 13927,
+  "scope": "Continuous Hayashi-origin track through4.005Tyr,4560K, accepted16946. Figure1, summary and retained compute accounting share this snapshot. Other model comparisons are separate histories.",
   "checks": [
     "Tectonic build succeeds;30pages",
     "No overfull boxes or undefined references; existing underfull table warnings remain",
     "Updated Figure1 visually inspected; endpoint arrow and label clear of axes",
-    "Text, Figure1, compact CSV and native structure diagnostic share accepted9593",
-    "All intermediate retained history rows are present; duplicate restarts removed; CPU accounting includes only retained intervals and their retries",
-    "The continuous track remains distinct from static-start and atmosphere-switch comparisons"
+    "Text, Figure1 and compact CSV share accepted16946",
+    "Retained history is contiguous from0through16946, duplicate restart rows removed; CPU accounting includes only retained intervals and their retries",
+    "Continuous trajectory remains distinct from static-start and atmosphere-switch comparisons"
   ],
   "files": {
     "00_summary.tex": {
-      "bytes": 2344,
-      "sha256": "fccfd8d66f8cbe8760861450f5bbca53d7b7c61f4419d372743ed27899879a08"
+      "bytes": 2508,
+      "sha256": "099b5253ade4bd7fd8f56950699e0c780454edecd3f600db0a7604d236081cb5"
     },
     "01_intro.tex": {
-      "bytes": 3936,
-      "sha256": "43550aba9b74e4dca2991b5864cfea5ab1a913c5d6e4adf83fe8dd2022b0913a"
+      "bytes": 3971,
+      "sha256": "ab701146653bd7218424dafc67f2e6f41d23d7ad360c75633feb0db19762af2c"
     },
     "02_model.tex": {
-      "bytes": 7959,
-      "sha256": "273731f0833cb4a6a4b5868ba27d5e468c8d8280c269ce8e1401bf223b04fbde"
+      "bytes": 8066,
+      "sha256": "848034edcf6dfdaadb03f601d8847fdd32e82b26c814d4e223b8de835c905634"
     },
     "03_contraction.tex": {
-      "bytes": 6386,
-      "sha256": "e73a8601182c1c9712326826f7d69b5f399baf27510a2aad3e44e54d2db04057"
+      "bytes": 6798,
+      "sha256": "bcafd1e658e43300fd668e8c28b7933dbbe695f01a1f7aba85e29b5101a2451d"
     },
     "04_hydrogen.tex": {
       "bytes": 13935,
       "sha256": "83758e5f9fd7d52288d4063e86c0b41886184c31cd4310d30c0fd0992bb58fc3"
     },
     "05_flash.tex": {
-      "bytes": 13682,
-      "sha256": "0a55ff0a447a68dc504d46e69b67ae0a212f0f838caa223836050e33654596ec"
+      "bytes": 13829,
+      "sha256": "59d8f680cacdd2d336e615ee7de49fefac9c20a37c5889fe44d7d12a60d2907b"
     },
     "06_comparisons.tex": {
       "bytes": 11189,
@@ -50,8 +50,8 @@
       "sha256": "58f646af6b2a2962ae0baf8284a19d787a14471211b576dc6640e8e6f0f9c90a"
     },
     "09_computing.tex": {
-      "bytes": 2460,
-      "sha256": "00504b247d1c4a3005879b4885414c7a35dcfb8a8147948a5a2d34fa900ba142"
+      "bytes": 2835,
+      "sha256": "a333b5b8d8c3d23a77f0a2585d1172ef9ec0117e173598fd8b6c7689a4b00a91"
     },
     "10_technical.tex": {
       "bytes": 8502,
@@ -62,16 +62,16 @@
       "sha256": "1e9fe7d7217718fa072b09ba245220ed5662d1a65f42d875862b3ad18863bcb1"
     },
     "continuous_values.tex": {
-      "bytes": 810,
-      "sha256": "b9f63288f143ec24f992bcbbec30cf9f13b61bbb3d1e25f5c707ea6a9d36c2f0"
+      "bytes": 825,
+      "sha256": "1c598771c8cb16c71f2480591ace82d506227513d6e1669fe8784d908a9a3fe5"
     },
     "convection_current.pdf": {
       "bytes": 16625,
       "sha256": "3244c51940648125582e5d5d317014e9f034b7cca3aa0734f9442a2354be0a22"
     },
     "ember_status_and_future.pdf": {
-      "bytes": 450770,
-      "sha256": "2e28be7c970f17635b21829873c138b637890e38c471bd5f2c32f34f052cdea2"
+      "bytes": 452875,
+      "sha256": "e0df353b26ab4b8b7b0ff8532fc07f2374b237e0c0300a572576c251c89c0f81"
     },
     "ember_status_and_future.tex": {
       "bytes": 1295,
@@ -126,16 +126,16 @@
       "sha256": "22248f604fc357b4f1cc128aeb8673d7d82aedccf498117d012f18b9423cd9aa"
     },
     "pms_figure_inputs.json": {
-      "bytes": 7795,
-      "sha256": "8c52d9a9a1bfe80a4fe73e5319e1063118260226ffe5cbcb541218da1f6851a4"
+      "bytes": 11269,
+      "sha256": "ca8e43691b316a65760cf3180be72b667282edef26a0eb193f3079e32c7f364c"
     },
     "pms_main_sequence.csv": {
-      "bytes": 986665,
-      "sha256": "fabecb79418da4f5ed8ea996951909e3c702147fd4f1b1212887c8889f546c07"
+      "bytes": 1733190,
+      "sha256": "7489784b235582a105c93075582ec638eaa3a6f1cbaa08f98dc14d25bb8a2e97"
     },
     "pms_main_sequence.pdf": {
-      "bytes": 25021,
-      "sha256": "17703a6e0117addf3a1fe7da0a7d0d000424fcf22ff1923fa2a7d97151d3c825"
+      "bytes": 25700,
+      "sha256": "f1a1898ab510bde450bc4885d630528ddf0ccecc8230f33bbea1ea532e175f53"
     },
     "pulse_face_comparison.pdf": {
       "bytes": 29693,

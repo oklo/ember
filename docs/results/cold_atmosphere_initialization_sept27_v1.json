@@ -1,0 +1,98 @@
+{
+  "initialization": {
+    "source_plan_sha256": "639c00e0c6c1932043ac11664cb755e4094755cb875bb7f5253b0a990508ef90",
+    "unchanged_equations_and_checks": true,
+    "changed_initial_layer": 57,
+    "results": [
+      {
+        "name": "t4575_g620",
+        "diagnostics": {
+          "T": 5736.9377498899585,
+          "Pgas": 153527864.23962966,
+          "source_density": 0.00042502519603242726,
+          "column_mass": 96.86951568619914,
+          "flux_error": 0.00010516742974697735,
+          "correction": 9.3e-07,
+          "effective_flux_error": 0.00010424597613978293,
+          "hydrostatic_error": 1.9798925987579707e-07,
+          "chemical_density_error": 3.675371118561088e-11,
+          "iterations": 38,
+          "depths": 112,
+          "tau_bracket": [
+            96.45194916921776,
+            129.1262273588954
+          ],
+          "optical_depth_range": [
+            3.1982730772451785e-08,
+            172.98659453247444
+          ],
+          "column_mass_range": [
+            0.0006592336000000002,
+            115.02299999999998
+          ],
+          "temperature_range": [
+            3030.054710765773,
+            5880.659005240499
+          ],
+          "density_range": [
+            3.260727061922129e-09,
+            0.00048790805920118216
+          ]
+        },
+        "relative_response": {
+          "T": 5.4254383445861976e-06,
+          "Pgas": -8.824294774112396e-05
+        }
+      },
+      {
+        "name": "t4550_g620",
+        "diagnostics": {
+          "T": 5705.985580963654,
+          "Pgas": 167440735.47686005,
+          "source_density": 0.00047433372447847706,
+          "column_mass": 105.64794220664862,
+          "flux_error": 0.00010636354207504972,
+          "correction": 8.12e-07,
+          "effective_flux_error": 0.00010101801557649281,
+          "hydrostatic_error": 1.980015060798479e-07,
+          "chemical_density_error": 3.5993430458347575e-11,
+          "iterations": 55,
+          "depths": 112,
+          "tau_bracket": [
+            97.9362818448768,
+            131.18289937354373
+          ],
+          "optical_depth_range": [
+            2.982784378554805e-08,
+            131.18289937354373
+          ],
+          "column_mass_range": [
+            0.0006592336000000002,
+            115.02299999999998
+          ],
+          "temperature_range": [
+            2981.323296678171,
+            5775.408244459303
+          ],
+          "density_range": [
+            3.274601926267837e-09,
+            0.0005079448878641783
+          ]
+        }
+      }
+    ],
+    "interpretation": "The oscillating warm-side initial iterate failed, while a cooler initial layer converged. This supports a local nonlinear-solve difficulty. It does not establish uniqueness or physical stability of the outer radiative equilibrium."
+  },
+  "native_table": {
+    "created_utc": "2026-09-27T19:32:47.831796+00:00",
+    "selected_for_evolution": false,
+    "unchanged_old_queries": 90,
+    "supported_new_queries": 32,
+    "missing_queries_rejected": 3,
+    "maximum_derivative_error": 2.6049313817111397e-09,
+    "old_rows_preserved": 112,
+    "high_table_sha256": "8c3e8114ccf34e3234dced49902b3fbf9b2e9786ae0a7fd9fe552374730a0e78",
+    "scope": "Completed cold cells using accepted source columns and interpolation. No missing-corner extrapolation. Matching optical depth remains100; gas-only and trace-He qualifications unchanged."
+  },
+  "scope": "Same gas-only opacity, optical-depth100 match and source acceptance. Cooler starting guess solves the nonlinear source equations; thermal-profile uniqueness is not established."
+}

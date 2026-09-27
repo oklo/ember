@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-27T12:55:39.038403+00:00",
+  "created_utc": "2026-09-27T19:40:36.122868+00:00",
   "sources": [
     {
       "path": "out/continuous-lifetime-sept27-v2/initial-check/history.jsonl",
@@ -99,13 +99,85 @@
     },
     {
       "path": "out/continuous-lifetime-sept27-v15/evolution/history.jsonl",
-      "retained_through": 9593,
-      "source_bytes_sha256": "27c668b869397d1ee934daf9408b56c35e858a403f762647a4d532e896538ba0",
-      "CPU_seconds": 1301.943575
+      "retained_through": 10152,
+      "source_bytes_sha256": "bc805ec149afab043639281eff5ed5939cd3a7b96c88c9677b234db01eee2d0d",
+      "CPU_seconds": 7370.897575
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v16/evolution/history.jsonl",
+      "retained_through": 11650,
+      "source_bytes_sha256": "d5cdb949ce421277a9d72603f203ad331542025f6efb60846cc0ab3c68424ad1",
+      "CPU_seconds": 20000.803736
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v17/evolution/history.jsonl",
+      "retained_through": 12298,
+      "source_bytes_sha256": "38700a8ddf4aea233792f6205425a6297b1c27d907ca39dc6add6287ce43a888",
+      "CPU_seconds": 2587.148099
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v18/evolution/history.jsonl",
+      "retained_through": 12308,
+      "source_bytes_sha256": "18bf9dd071a6629257bed64e8c26d6ee285a74780ee59e4db7485c071f039ddd",
+      "CPU_seconds": 29.550889
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v19/evolution/history.jsonl",
+      "retained_through": 12699,
+      "source_bytes_sha256": "e669c27ac51902cc5177bf90d5b15a114604cce737f440ce0ef5f1acedce2810",
+      "CPU_seconds": 1039.227558
+    },
+    {
+      "path": "out/opus-integration-sept27-v1/current_retry/evolution/history.jsonl",
+      "retained_through": 12702,
+      "source_bytes_sha256": "dc740974a9ba444f01fbe364d438cb09edfee59643f7abb4fd1bd648fe0f2329",
+      "CPU_seconds": 5.070873
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v20/evolution/history.jsonl",
+      "retained_through": 15169,
+      "source_bytes_sha256": "54f172c2c1c6f7c8cef2f8ade83e25b82767c7b327ed4059a7edc1890b39190d",
+      "CPU_seconds": 4230.331711
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v21/evolution/history.jsonl",
+      "retained_through": 16702,
+      "source_bytes_sha256": "fd387caa0b97d3199f79675dd53d632626705f7f3ecc56d88464d9a9391be536",
+      "CPU_seconds": 15680.470012
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v22/evolution/history.jsonl",
+      "retained_through": 16884,
+      "source_bytes_sha256": "a004e3b2e1a9924facbbad213686cc186ee4cd6f7273dc8452b922c6f80c20e3",
+      "CPU_seconds": 347.395322
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v23/evolution/history.jsonl",
+      "retained_through": 16907,
+      "source_bytes_sha256": "9f0f2b835b413a8c9a3cb5fccc76b8d8cff4fdb4cb85eec911f4bebf9e458ff7",
+      "CPU_seconds": 32.237079
+    },
+    {
+      "path": "out/current-newton-diagnosis-sept27-v1/cap_003/evolution/history.jsonl",
+      "retained_through": 16912,
+      "source_bytes_sha256": "7fc5f004057e320f57b1ccc141bbeb50c4be47812e621d24df2d5df23bb99904",
+      "CPU_seconds": 8.4388
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v24/evolution/history.jsonl",
+      "retained_through": 16921,
+      "source_bytes_sha256": "0eebf18f5dbb0f8c2688f9e923abfe3ce383d671bbb098ea81bd7ad393ab8ee4",
+      "CPU_seconds": 18.603227
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v25/evolution/history.jsonl",
+      "retained_through": 16946,
+      "source_bytes_sha256": "edfaf932382815054db692dc7450ed218871687ed487967ea8ce8ee7a30ed537",
+      "CPU_seconds": 90.363321
     }
   ],
-  "models": 9594,
-  "CPU_seconds": 62529.267455,
+  "models": 16947,
+  "CPU_seconds": 112667.86208200002,
   "contraction_model": {
     "years": 990131259.1322539,
     "step_years": 35442295.89326342,
@@ -135,32 +207,42 @@
     "cpu_seconds": 944.506238
   },
   "latest": {
-    "years": 3615125248250.1606,
-    "step_years": 65155505.92191429,
-    "accepted": 9593,
-    "rejected": 956,
-    "radius_Rsun": 0.14195023704866427,
-    "Teff_K": 3497.129260192604,
-    "luminosity_Lsun": 0.002715267754469893,
-    "nuclear_fraction": 0.9971267823915827,
-    "central_T_K": 10909806.951166073,
-    "H_mass_g": 3.1651696942693696e+31,
-    "He3_mass_g": 2.7154699458800336e+29,
+    "years": 4005206718393.5786,
+    "step_years": 4937.156760817571,
+    "accepted": 16946,
+    "rejected": 5020,
+    "radius_Rsun": 0.04456325268094651,
+    "Teff_K": 4560.379488847998,
+    "luminosity_Lsun": 0.0007738403623615297,
+    "nuclear_fraction": 0.9076269544141663,
+    "central_T_K": 6396886.053259485,
+    "central_density_g_cm3": 40046.82596525833,
+    "central_X": 3.471635417795693e-08,
+    "central_He3": 8.892610382584945e-15,
+    "eps_nuc_peak_erg_g_s": 0.5039558868262324,
+    "eps_nuc_peak_q": 0.9669468040771528,
+    "burning_half_max_inner_q": 0.9541068657373265,
+    "burning_half_max_outer_q": 0.9760233249972516,
+    "burning_half_max_cells": 18,
+    "He3_peak": 0.018621947253568312,
+    "He3_peak_q": 0.971484245216312,
+    "H_mass_g": 7.443994590184786e+30,
+    "He3_mass_g": 7.775605834287228e+28,
     "D_mass_g": 0,
-    "surface_X": 0.27771042975129706,
-    "surface_Z": 0.013302284403673042,
-    "error_norm": 0.5044003952736631,
+    "surface_X": 0.9976204509966228,
+    "surface_Z": 4.684988894654899e-37,
+    "error_norm": 0.0002652794944230215,
     "initial_D_approximation": 0,
     "omitted_mixing_heat_fraction": 0,
     "gross_mixing_heat_fraction": 0,
-    "burn_gradient_estimate": 1.7907838273006774e-12,
-    "drift_gradient_proxy": 7.245129969902516e-07,
-    "kinetic_heat_proxy": 0.008666687276126355,
-    "convective_mass_fraction": 0.27681911871654064,
-    "radiative_boundaries": 306,
-    "relative_mixing_gradient": 6.448385207946312e-12,
-    "convective_travel_years": 0.29010798912215935,
-    "cpu_seconds": 1301.943575
+    "burn_gradient_estimate": 4.0841987131404065e-13,
+    "drift_gradient_proxy": 5.477005536393613e-07,
+    "kinetic_heat_proxy": 0.01585795930826074,
+    "convective_mass_fraction": 0.017996690610771266,
+    "radiative_boundaries": 406,
+    "relative_mixing_gradient": 1.0307748279243975e-10,
+    "convective_travel_years": 0.06105047645952943,
+    "cpu_seconds": 90.363321
   },
   "first_radiative_region": {
     "years": 3558470608835.955,
@@ -190,6 +272,6 @@
     "convective_travel_years": 0.8592243358117583,
     "cpu_seconds": 54.993664
   },
-  "csv_sha256": "fabecb79418da4f5ed8ea996951909e3c702147fd4f1b1212887c8889f546c07",
+  "csv_sha256": "7489784b235582a105c93075582ec638eaa3a6f1cbaa08f98dc14d25bb8a2e97",
   "scope": "One continuous Hayashi-origin trajectory. Duplicate restart rows removed; exact retained prefixes listed. CPU includes retained invocation startup and retries; separate accuracy, EOS and atmosphere work excluded."
 }

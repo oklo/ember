@@ -1,0 +1,54 @@
+{
+  "created_utc": "2026-09-27T19:58:16.800597+00:00",
+  "selected_for_evolution": true,
+  "unchanged_old_queries": 122,
+  "supported_new_queries": 20,
+  "missing_queries_rejected": 3,
+  "maximum_derivative_error": 7.70564589913647e-09,
+  "old_rows_preserved": 136,
+  "high_table_sha256": "b953f35c4e776c76d862df8429163265cc80716c42942c75620f945af485fe4c",
+  "scope": "Completed cold cells using accepted source columns and interpolation. No missing-corner extrapolation. Matching optical depth remains100; gas-only and trace-He qualifications unchanged.",
+  "source_summary": {
+    "4500_610": {
+      "T": 5638.029157040114,
+      "Pgas": 160676783.42734566,
+      "flux_error": 0.00017960807111316868,
+      "effective_flux_error": 2.7839786318040183e-05,
+      "correction": 9.78e-07,
+      "hydrostatic_error": 1.9477325152728042e-07,
+      "chemical_density_error": 3.123001857119334e-11,
+      "tau_bracket": [
+        83.32149763604251,
+        111.7822120728235
+      ]
+    },
+    "4500_620": {
+      "T": 5648.0248817160655,
+      "Pgas": 198765026.20723647,
+      "flux_error": 0.00014400425591731825,
+      "effective_flux_error": 6.336835993792089e-05,
+      "correction": 8.96e-07,
+      "hydrostatic_error": 1.980236199461416e-07,
+      "chemical_density_error": 2.571920454386145e-11,
+      "tau_bracket": [
+        93.75956910131424,
+        115.9186893457941
+      ]
+    },
+    "4550_630": {
+      "T": 5715.412169579512,
+      "Pgas": 207479224.9874985,
+      "flux_error": 0.0001097658826796355,
+      "effective_flux_error": 9.756396252857957e-05,
+      "correction": 7.62e-07,
+      "hydrostatic_error": 2.0124613819838544e-07,
+      "chemical_density_error": 4.410738441151807e-11,
+      "tau_bracket": [
+        81.76688854099949,
+        101.0510821589073
+      ]
+    }
+  },
+  "source_receipt": "out/highg-table-extension-sept27-v9/sources.json",
+  "selected_run": "continuous-lifetime-sept27-v27"
+}

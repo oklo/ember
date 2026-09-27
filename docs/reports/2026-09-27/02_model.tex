@@ -77,13 +77,13 @@ nearly pure hydrogen, including trace helium, at the same optical depth.
 The 4600 K gravity row and its high-gravity corner have solved source
 columns; intermediate knots interpolate the sources. Trace helium remains
 approximated. The nearly pure-hydrogen high-gravity family covers
-4600--6000 K and $\log g=5.9$--6.2. \\[4pt]
+4550--6000 K through $\log g=6.2$; the $\log g=6.3$ columns extend down
+to 4600 K. Only cells with complete source coverage are interpolated. \\[4pt]
 Mesh and time integration & 512 mass points, fixed for Tracks S, F and P;
 flash grids refined locally to 578--2115 points. Structure, burning and
 mixing are solved together implicitly. Every accepted step is compared with
 two half steps; species inventories, inert-metal mass, nuclear rest-mass
-release and the first law are checked independently. Saved models restart
-exactly. & 512 zones; the same step-doubling check; independent isotope,
+release and the first law are checked independently. Saved models support restarts. & 512 zones; the same step-doubling check; independent isotope,
 mass-defect and first-law audits on every interval; exact restart replay.
 Radiative-core evolution and restart are registered tests. \\
 \bottomrule

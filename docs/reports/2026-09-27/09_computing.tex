@@ -12,7 +12,7 @@ $2\times10^9$ operations per CPU-second, uncertain by a factor of three,
 puts the sequences near $3\times10^{14}$ floating-point operations and the
 tables near $10^{15}$. The continuous
 Hayashi-started sequence through $\continuousAge\Tyr$ uses
-\continuousCPUHours\ CPU-hours on four threads, including its retained
+\continuousCPUHours\ CPU-hours, using up to eight threads, including its retained
 contraction and main-sequence intervals and process startup; separate
 atmosphere and accuracy controls are excluded. The flash continuations were computed in segments; a complete
 cooling-track runtime has not been measured, and none of these numbers
@@ -21,10 +21,15 @@ predicts it.
 Implicit transport is required: the explicit stability limit of the initial
 diffusion coefficients is 672.7--936.1 yr, while accepted steps late on
 Track S have a median length of 59.44 Myr among those longer than 1 Myr.
-Reusing exactly matching nuclear evaluations reduced the CPU time of a
-matched run through $3.757\Tyr$ from 162.4 to 101.8 minutes with identical
-output; the other performance changes recorded during development were each
-measured in isolation and are not additive.
+The structure iteration includes a local estimate of how implicit burning
+changes nuclear heating with temperature and density; its final check uses
+the original equations. With predicted initial structures and bounded reuse
+of material derivatives, a matched 1 Gyr comparison near $3.997\Tyr$
+requires 15.47 CPU seconds and 10.14 seconds of elapsed time, versus 149.5
+and 79.28 seconds without the burning response. Global quantities differ
+by at most 0.01382\%, and every interval retains its full-step/two-half-step
+check. These measurements describe this gradual phase, not flash evolution
+or the cost of building the tables.
 
 The repository at \url{https://github.com/oklo/ember} contains the code,
 table-generation instructions, the records of input choices and checks,

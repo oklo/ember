@@ -4,14 +4,14 @@
 
 Continue the same Hayashi-started star through hydrogen exhaustion and onto
 white-dwarf cooling, testing whether the helium-3 pulse occurs with a consistent
-atmosphere history. The published trajectory reaches **3.615 Tyr**. Its centre
-is radiative, beneath a convective envelope; **72.32%** of the mass is radiative
-at the plotted endpoint. The first radiative region formed as a shell at
-**3.558 Tyr**. The live calculation has continued farther; read the
+atmosphere history. The current paper follows the trajectory through **4.005 Tyr**, at
+**4560 K**. Convection occupies **1.800%** of the mass in an outer envelope;
+hydrogen burning peaks at **m/M = 0.9669** and supplies **90.76%** of the
+surface luminosity. Its power is declining and no helium-3 runaway has
+occurred in this continuous calculation. The first radiative region formed
+at **3.558 Tyr**. The live calculation can be farther along; read the
 [current handoff](../HANDOFF.md) before starting or changing jobs.
-[Trajectory and inputs](reports/2026-09-27/pms_figure_inputs.json),
-[first radiative region](results/continuous_radiative_core_sept27_v1.json),
-[structure at the plotted endpoint](results/radiative_interior_sept27_v2.json).
+[Trajectory and current state](reports/2026-09-27/pms_figure_inputs.json).
 
 The common lifetime program includes initial deuterium, pp and explicit CN
 burning, plasma neutrino losses, composition-dependent EOS and opacity,
@@ -37,17 +37,25 @@ do not establish time convergence through a flash.
 [Time accuracy](results/envelope_time_accuracy_sept27_v1.json),
 [local solve](results/local_correction_comparison_sept27_v2.json).
 
-The atmosphere match remains at optical depth **100** throughout. The selected
-high-gravity grid covers **4600–6000 K**, **log g = 5.9–6.2**, using checked
-source columns and declared interpolation. The extension preserves all 5999
-saved atmosphere queries and three stellar intervals exactly, including the
-final physical checkpoint. Its actual continuation preserves the starting
-physical state. All 67 saved late comparison structures remain supported.
-Those separate histories inherit an atmosphere adjustment and cannot establish
-atmosphere-independent ignition. Gas-only and trace-helium assumptions remain
-explicit, and additional coverage is being prepared in advance.
-[Atmosphere checks](results/highg_atmosphere_extension_sept27_v2.json),
-[EOS coverage](results/eos_lifetime_coverage_sept27_v1.json).
+The atmosphere match remains at optical depth **100** throughout. Solved
+hydrogen-dominated columns extend to **4550 K** through **log g = 6.2**;
+only cells with complete source support are interpolated. The cold extension
+preserves previously supported stellar boundaries. A cooler starting guess
+for one oscillating, optically thin layer resolves the 4550 K source without
+changing its equations or convergence requirements. The same-state control
+changes joining pressure by **0.008824%**. Gas-only and trace-helium
+assumptions remain explicit. The separate flash histories retain their
+atmosphere adjustment and cannot establish atmosphere-independent ignition.
+[Cold source checks](results/cold_atmosphere_initialization_sept27_v1.json).
+
+In the dense hydrogen envelope, the opacity approximation uses the measured
+hydrogen slope of the retained source while remaining within its temperature
+and density domain. At the current limit convection carries more than
+**99.9%** of the heat. Half/double-opacity controls over **20 Myr** show no
+meaningful structural response and support extending the declared density
+coordinate to **log R = 2.2**. This does not establish opacity accuracy in
+radiative layers.
+[Opacity response](results/dense_envelope_extension_sept27_v1.json).
 
 Exact reuse of repeated EOS evaluations preserves six stellar intervals and
 the final physical checkpoint, using about **5%** less CPU in one timing pair.

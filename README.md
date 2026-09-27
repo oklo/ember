@@ -13,14 +13,15 @@ resolve the stellar/brown-dwarf boundary as initial mass and composition vary.
 The full calculation is not yet established.
 
 The common `ember-evolve --lifetime` program carries the Hayashi-started star
-through **3.615 Tyr**, at **3497 K** and surface hydrogen **X = 0.2777**.
+through **4.005 Tyr**, at **4560 K** and surface hydrogen **X = 0.9976**.
 A radiative shell first forms at **3.558 Tyr**; the centre subsequently becomes
-radiative. At the plotted endpoint the radiative interior contains **72.32%**
-of the mass beneath a convective envelope. The atmosphere matching depth
+radiative. At the plotted endpoint the convective envelope contains **1.800%**
+of the mass. Shell burning supplies **90.76%** of the luminosity and is declining;
+no helium-3 runaway has occurred in this continuous calculation. The atmosphere matching depth
 remains at optical depth 100 throughout. The retained sequence has used
-**17.37 CPU-hours**, including rejected timestep trials.
+**31.30 CPU-hours**, including rejected timestep trials.
 [Current trajectory and inputs](docs/reports/2026-09-27/pms_figure_inputs.json),
-[internal structure](docs/results/radiative_interior_sept27_v2.json).
+[current model](docs/reports/2026-09-27/pms_figure_inputs.json).
 
 The selected physics includes initial deuterium burning, pp reactions and
 explicit C12/C13/N14 conversion with Solar Fusion III rates, plasma neutrino

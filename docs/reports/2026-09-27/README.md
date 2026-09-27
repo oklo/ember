@@ -4,12 +4,12 @@
 
 The draft is reduced from 63 to 30 pages while retaining the physical
 assumptions, comparisons, numerical qualifications and lifetime timeline.
-The continuous Hayashi-started calculation reaches **3.615 Tyr** at **3497 K**,
-with surface **X = 0.2777** and a radiative interior containing **72.32%**
-of the mass beneath a convective envelope. It selects composition-dependent
+The continuous Hayashi-started calculation reaches **4.005 Tyr** at **4560 K**,
+with surface **X = 0.9976** and a helium-rich interior beneath a convective envelope occupying **1.800%**
+of the mass. It selects composition-dependent
 atmospheres at optical depth 100 throughout. Figure 1 now shows its complete
 computed HR trajectory and its initial rise to sustained hydrogen burning.
-The retained sequence used **17.37 CPU-hours**, including its timestep trials.
+The retained sequence used **31.30 CPU-hours**, including its timestep trials.
 No continuous flash result is established.
 
 The flash figure and table now use the same accepted histories. The largest
