@@ -1,0 +1,89 @@
+{
+  "created_utc": "2026-09-27T08:31:02.800227+00:00",
+  "change": "Return the final-structure species solution and matching total heat rates, after checking actual structural residual, required Newton correction and convective-region stability. Continue coupling if either structural or region check fails. No physical input, time-error or global audit change.",
+  "negative_control": {
+    "command": [
+      "/Users/greglaughlin/Projects/ember/out/endpoint-consistency-sept27-v1/before-control",
+      "/Users/greglaughlin/Projects/ember/out/continuous-lifetime-sept27-v6/data/configuration.txt",
+      "/Users/greglaughlin/Projects/ember/out/finite-core-onset-sept27-v1/snapshot.checkpoint",
+      "lagged",
+      "1e-13",
+      "32000000"
+    ],
+    "returncode": 1,
+    "wall_seconds": 5.9832614585757256
+  },
+  "negative_control_output": "initial_drift_proxy=8.0375570572592002e-07 initial_heat_proxy=0.012222127365193864\naudit_pass=0 audit_species=8.3226712441358186e-14 first_law=9.9920072216264089e-16 mass_error_surface=-9.94118211977359e-09 source_error=0\nfinite interval violates unchanged isotope or energy audit\n",
+  "finite_controls": [
+    {
+      "name": "lagged32",
+      "command": [
+        "/Users/greglaughlin/Projects/ember/out/endpoint-consistency-sept27-v1/after-control",
+        "/Users/greglaughlin/Projects/ember/out/continuous-lifetime-sept27-v6/data/configuration.txt",
+        "/Users/greglaughlin/Projects/ember/out/finite-core-onset-sept27-v1/snapshot.checkpoint",
+        "lagged",
+        "1e-13",
+        "32000000"
+      ],
+      "returncode": 0,
+      "wall_seconds": 9.970562749542296,
+      "output": "initial_drift_proxy=8.0375570572592002e-07 initial_heat_proxy=0.012222127365193864\naudit_pass=1 audit_species=2.3990624279366692e-15 first_law=1.4443179985335064e-10 mass_error_surface=-3.8270515369871078e-10 source_error=0\ndrift_proxy=8.0376557206484321e-07 heat_proxy=0.012222558291811245\naudit_pass=1 audit_species=1.9187223255264906e-15 first_law=4.3895997947629439e-12 mass_error_surface=-6.0976326002710352e-10 source_error=0\ndrift_proxy=8.0376063826661726e-07 heat_proxy=0.01222234278352728\naudit_pass=1 audit_species=2.8346262511726172e-15 first_law=4.4206860394524483e-12 mass_error_surface=-9.0176348189753443e-10 source_error=0\ndrift_proxy=8.0376557178560652e-07 heat_proxy=0.012222558269052611\nPASS mode=lagged full_half_structure=1.9221646496703215e-09 full_half_species=9.8827335204276778e-12 CPU_seconds=13.052076\n"
+    },
+    {
+      "name": "lagged128",
+      "command": [
+        "/Users/greglaughlin/Projects/ember/out/endpoint-consistency-sept27-v1/after-control",
+        "/Users/greglaughlin/Projects/ember/out/continuous-lifetime-sept27-v6/data/configuration.txt",
+        "/Users/greglaughlin/Projects/ember/out/finite-core-onset-sept27-v1/snapshot.checkpoint",
+        "lagged",
+        "1e-13",
+        "128000000"
+      ],
+      "returncode": 0,
+      "wall_seconds": 14.62546437419951,
+      "output": "initial_drift_proxy=8.0375570572592002e-07 initial_heat_proxy=0.012222127365193864\naudit_pass=1 audit_species=3.2083134705786914e-15 first_law=9.0402241248455084e-11 mass_error_surface=-1.2781337891583467e-10 source_error=0\ndrift_proxy=8.037953427863825e-07 heat_proxy=0.012223858873891838\naudit_pass=1 audit_species=1.9913338014133919e-15 first_law=5.7451710056000138e-11 mass_error_surface=-1.584905636536602e-10 source_error=0\ndrift_proxy=8.0377545960176233e-07 heat_proxy=0.012222989964249795\naudit_pass=1 audit_species=1.8471738759883935e-15 first_law=8.2104101295499277e-11 mass_error_surface=-1.4764786800060657e-10 source_error=0\ndrift_proxy=8.0435974761220743e-07 heat_proxy=0.012283744951475739\nPASS mode=lagged full_half_structure=0.0044360298068228943 full_half_species=0.00017767033225352113 CPU_seconds=21.277652\n"
+    },
+    {
+      "name": "implicit32",
+      "command": [
+        "/Users/greglaughlin/Projects/ember/out/endpoint-consistency-sept27-v1/after-control",
+        "/Users/greglaughlin/Projects/ember/out/continuous-lifetime-sept27-v6/data/configuration.txt",
+        "/Users/greglaughlin/Projects/ember/out/finite-core-onset-sept27-v1/snapshot.checkpoint",
+        "implicit",
+        "1e-13",
+        "32000000"
+      ],
+      "returncode": 0,
+      "wall_seconds": 9.93695450015366,
+      "output": "initial_drift_proxy=8.0375570572592002e-07 initial_heat_proxy=0.012222127365193864\naudit_pass=1 audit_species=2.379786499156003e-15 first_law=1.4444312412820182e-10 mass_error_surface=-3.794313554121402e-10 source_error=0\ndrift_proxy=8.0376557206495269e-07 heat_proxy=0.012222558291840342\naudit_pass=1 audit_species=2.7224202201663137e-15 first_law=4.4138026566997723e-12 mass_error_surface=-8.6804071422805583e-10 source_error=0\ndrift_proxy=8.0376063827220661e-07 heat_proxy=0.01222234278353484\naudit_pass=1 audit_species=2.9005648015010491e-15 first_law=4.4269032883903492e-12 mass_error_surface=-9.229813929573403e-10 source_error=0\ndrift_proxy=8.0376557179224218e-07 heat_proxy=0.012222558269070561\nPASS mode=implicit full_half_structure=1.922912495899709e-09 full_half_species=9.8742958254405266e-12 CPU_seconds=13.362674999999999\n"
+    }
+  ],
+  "time_resolution": "The 128-Myr full and half intervals conserve species and energy but disagree by 0.004436 in log structure and 0.0001777 in abundance: the existing time-error controller must reject that interval. It is not an accepted production step.",
+  "instantaneous_same_age": {
+    "returncode": 0,
+    "wall_seconds": 26.43253779131919,
+    "report": {
+      "requested_age_reached": 1,
+      "age_years": 3559188917529.877,
+      "accepted_this_invocation": 6,
+      "accepted_total": 6753,
+      "rejected_total": 142,
+      "stop_reason": "requested age",
+      "cpu_seconds": 41.631534,
+      "wall_seconds": 25.984621125,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "same_age_profile_difference": {
+    "radius": 7.105427357600977e-15,
+    "density": 2.4868995751603816e-14,
+    "temperature": 7.105427357601027e-15,
+    "maximum_absolute_stored_abundance": 2.6645352591003757e-15
+  },
+  "tests": {
+    "passed": 11,
+    "scope": "PMS CN/deuterium, controller recovery, real screened envelope/restart, generic microscopic heat, physical-metal instantaneous and finite full/half/restart evolution."
+  },
+  "finite_provider_limit": "Private finite controls omit microscopic exchange only inside confirmed strongly convective cool faces and retain existing validity bounds. This finite provider is not selected in production."
+}

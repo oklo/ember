@@ -409,6 +409,27 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
         pending_regions=std::move(next_regions);pending=std::move(next);
         have_pending=true;continue;
       }
+      // The last species solve uses the final thermal state. Returning the
+      // preceding composition can violate its integrated source balance even
+      // when the outer iteration's abundance change is small. Retain this
+      // solution and its matching heat fluxes only if the actual returned
+      // structure and convective partition still satisfy convergence.
+      const auto final_regions=finite?convective_mixing_regions(current,coupled):next_regions;
+      if(current.comp!=next.composition || update.total_rates!=next.total_rates
+          || update.total_metal_rates!=next.total_metal_rates) {
+        current.comp=std::move(next.composition);
+        if(frozen) {frozen->rates=next.total_rates;frozen->metal_rates=next.total_metal_rates;}
+        for(std::size_t i=0;i<current.size();++i)
+          if(composition_difference(current.comp[i],previous.comp[i])>options.max_abundance_change)
+            throw std::runtime_error("evolve_step: abundance change exceeds step limit");
+        auto verification=options.relaxation;verification.max_iterations=0;
+        const auto checked=relax(current,coupled,atmosphere,verification,dt,&previous);
+        result.residual=checked.residual;result.correction=checked.correction;
+        if(!checked.converged || convective_mixing_regions(current,coupled)!=final_regions)
+          continue;
+        update.total_rates=std::move(next.total_rates);
+        update.total_metal_rates=std::move(next.total_metal_rates);
+      }
       double mass_release=0;
       for(std::size_t i=0;i<current.size();++i) {
         const auto e=p.eos->eval(current.T(i),current.rho(i),current.comp[i]);

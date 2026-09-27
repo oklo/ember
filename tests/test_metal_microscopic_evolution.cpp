@@ -3,6 +3,7 @@
 #include "ember/stellar_seed.hpp"
 #include "ember/detail/differential.hpp"
 #include "ember/evolution_checkpoint.hpp"
+#include "ember/convective_evolution_checks.hpp"
 #include <algorithm>
 #include <cmath>
 #include <iomanip>
@@ -78,7 +79,8 @@ int main(int argc,char** argv) {
     if(!equilibrium.converged)throw std::runtime_error("transport equilibrium: "+equilibrium.message);
     const auto initial=equilibrium.model;const auto regions=convective_mixing_regions(initial,physics);
     require(regions.size()>1 && regions.size()<initial.size(),"mixed and radiative regions required");
-    EvolutionOptions options;options.max_abundance_change=.01;const double dt=1e6*365.25*86400;
+    EvolutionOptions options;options.max_abundance_change=.01;options.abundance_tolerance=1e-13;
+    const double dt=1e6*365.25*86400;
     const bool finite=argc>2;
     std::vector<MetalSpeciesVector> initial_heat_rates;
     double full_half_error=0;
@@ -102,6 +104,8 @@ int main(int argc,char** argv) {
     require(transport.total_calls>0 && step.total_metal_species_rates.size()==initial.size()-1 && step.total_species_rates.empty(),"three-mass total rates not used");
     require(std::abs(step.luminosity_balance)<2e-8 && std::abs(step.nuclear_mass_balance)<2e-6,"discrete stellar energy or nuclear mass balance");
     require(step.abundance_residual<=options.abundance_tolerance && step.material_heat_residual<=options.material_heat_tolerance,"abundance or heat convergence");
+    require(driver::check_interval(initial,step,dt,nuclear,1e-14).pass,
+        "returned composition must conserve integrated nuclear sources and energy");
     const auto weights=nodal_mass_weights(initial);double inert=0,maximum_rate=0;
     for(std::size_t i=0;i<initial.size();++i) {
       const auto before=metal_cn_abundances(initial.comp[i]),after=metal_cn_abundances(step.model.comp[i]);
@@ -120,6 +124,9 @@ int main(int argc,char** argv) {
       auto follow=options;follow.previous_metal_heat_rates=half.total_metal_species_rates;
       const auto twice=evolve_step(half.model,physics,atmosphere,dt/2,follow);
       if(!twice.converged)throw std::runtime_error("finite second half step: "+twice.message);
+      require(driver::check_interval(initial,half,dt/2,nuclear,1e-14).pass
+          && driver::check_interval(half.model,twice,dt/2,nuclear,1e-14).pass,
+          "each half interval must conserve its own nuclear sources and energy");
       const auto stamp=std::chrono::high_resolution_clock::now().time_since_epoch().count();
       const auto file=std::filesystem::temp_directory_path()/("ember-finite-"+std::to_string(stamp)+".checkpoint");
       const driver::Selections selection{"synthetic","CN","physical metals",argv[2],"total material heat"};
