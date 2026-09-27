@@ -4,13 +4,13 @@
 
 Continue the same Hayashi-started star through hydrogen exhaustion and onto
 white-dwarf cooling, testing whether a helium-3 pulse occurs with a consistent
-atmosphere history. The current model has reached **4.006 Tyr** and **4402 K**.
+atmosphere history. The current model has reached **4.006 Tyr** and **4401 K**.
 Convection occupies **2.214%** of the mass in an outer envelope; hydrogen
-burning peaks at **m/M = 0.9704** and supplies **46.40%** of the surface
+burning peaks at **m/M = 0.9704** and supplies **46.24%** of the surface
 luminosity. Its power is declining and no helium-3 runaway has occurred.
 The first radiative region formed at **3.558 Tyr**. Read the
 [current handoff](../HANDOFF.md) before starting or changing jobs.
-[Current state and inputs](results/mixed_helium_cooling_join_sept27_v1.json).
+[Current state and opacity response](results/dense_envelope_density_extension_sept27_v1.json).
 
 The common lifetime program includes initial deuterium, pp and explicit CN
 burning, plasma neutrino losses, composition-dependent EOS and opacity,
@@ -39,19 +39,19 @@ mixed hydrogen–helium columns cover **4400–4550 K** at **log g = 6.1–6.3**
 with hydrogen fractions **0.98–0.9955**. A continuous composition overlap
 carries the star through the former **0.5% helium** limit. Only cells with
 complete source support are interpolated; cooler columns are being calculated.
-The EOS supports the accepted state. The current stop is the declared
-dense-hydrogen interior-opacity boundary at **log R = 2.2**. Gas-only and helium-isotope approximations remain explicit. The separate flash histories retain their atmosphere
+The EOS supports the accepted state. A tested interior-opacity extension permits
+further cooling; completed atmosphere coverage currently ends at **4400 K**. Gas-only and helium-isotope approximations remain explicit. The separate flash histories retain their atmosphere
 adjustment and cannot establish atmosphere-independent ignition.
 [Cold source checks](results/cold_atmosphere_4400_sept27_v1.json).
 
 In the dense hydrogen envelope, the opacity approximation uses the measured
 hydrogen slope of the retained source while remaining within its temperature
-and density coverage. The selected domain extends through **log R = 2.2**
-and **log T = 6.3**. Affected layers are efficiently convective: matched
-half/double-opacity controls over **20 Myr** produce negligible structural
-changes. This supports the local approximation without establishing opacity
+and density coverage. The selected domain extends through **log R = 2.5**
+and **log T = 6.3**. At the latest density limit, convection carries **99.95%**
+of the thermal luminosity. Matched **1 Myr** half/double-opacity controls
+produce negligible structural changes. This supports the local approximation without establishing opacity
 accuracy in radiative layers.
-[Opacity response](results/dense_envelope_temperature_extension_sept27_v1.json).
+[Opacity response](results/dense_envelope_density_extension_sept27_v1.json).
 
 The [working paper](reports/2026-09-27/ember_status_and_future.pdf) is **30 pages**
 and currently plots the trajectory through **4560 K**. It retains the
