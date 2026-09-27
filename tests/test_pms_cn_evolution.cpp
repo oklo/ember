@@ -78,7 +78,9 @@ int main(int argc,char**) {
       control.target_age=controller_initial.age+dt;control.maximum_dt=dt;
       control.audit_failure_is_fatal=false;control.maximum_consecutive_rejections=3;
       EvolutionControlHooks hooks;
-      hooks.physics=[&](const Model&)->const Physics& {return physics;};
+      std::vector<double> physics_ages,option_ages;
+      hooks.physics=[&](const Model& m)->const Physics& {physics_ages.push_back(m.age);return physics;};
+      hooks.configure_step=[&](const Model& m,EvolutionOptions&) {option_ages.push_back(m.age);};
       hooks.species_difference=[](const Composition& a,const Composition& b) {
         double error=0;
         for(std::size_t k=0;k<a.X.size();++k)error=std::max(error,std::abs(a.X[k]-b.X[k]));
@@ -105,6 +107,12 @@ int main(int argc,char**) {
               "failed full-step audit must reject the entire trial");
       require(attempts[1].start_age==controller_initial.age && attempts[1].dt==dt/2,
               "retry must start from the retained state at half the duration");
+      require(physics_ages==option_ages && physics_ages.size()==2*attempts.size(),
+              "each half interval must select physics and options from its own starting state");
+      for(std::size_t i=0;i<attempts.size();++i)
+        require(physics_ages[2*i]==attempts[i].start_age
+            && physics_ages[2*i+1]==attempts[i].start_age+attempts[i].dt/2,
+            "second half reused the first half's starting state");
       for(const auto& attempt:attempts)if(attempt.accepted)
         require(attempt.audit_pass && attempt.error_norm<=1,"failed trial was accepted");
       fail_all=true;attempts.clear();state={controller_initial,dt,0,0};

@@ -39,6 +39,9 @@ struct EvolutionAttempt {
 // then remains the last accepted state, with the failure in the result.
 struct EvolutionControlHooks {
   std::function<const Physics&(const Model&)> physics;
+  // Optional state-dependent selection before a solve. The second half
+  // interval uses its own starting model, including any exhausted isotope.
+  std::function<void(const Model&, EvolutionOptions&)> configure_step;
   std::function<double(const Composition&, const Composition&)> species_difference;
   std::function<EvolutionAudit(const Model&, const EvolutionStep&, double)> audit;
   std::function<void(const Model&, std::span<const std::array<double, 3>>)> assess;

@@ -49,13 +49,15 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
       if (state.model.age + ds == state.model.age || ds <= 0)
         throw std::runtime_error("timestep is below clock resolution");
       auto selected = options.step;
+      if (hooks.configure_step) hooks.configure_step(state.model, selected);
       selected.previous_metal_heat_rates = state.metal_heat_rates;
       const auto& physics = hooks.physics(state.model);
       const auto full = evolve_step(state.model, physics, atmosphere, ds, selected);
       const auto h1 = full.converged ? evolve_step(state.model, physics, atmosphere, ds / 2, selected) : full;
-      auto second_options = selected;
+      auto second_options = options.step;
+      if (h1.converged && hooks.configure_step) hooks.configure_step(h1.model, second_options);
       second_options.previous_metal_heat_rates = h1.total_metal_species_rates;
-      const auto h2 = h1.converged ? evolve_step(h1.model, physics, atmosphere, ds / 2, second_options) : h1;
+      const auto h2 = h1.converged ? evolve_step(h1.model, hooks.physics(h1.model), atmosphere, ds / 2, second_options) : h1;
       EvolutionAttempt attempt;
       attempt.start_age = state.model.age;
       attempt.dt = ds;

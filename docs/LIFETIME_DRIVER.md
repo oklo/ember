@@ -82,9 +82,35 @@ The join agrees with the existing stellar transport implementation at saved
 faces. A short stellar comparison and an independent radiative-core/mixed-envelope
 control pass, including explicit rejection of an unsupported cool boundary.
 [Integration evidence](results/envelope_transport_integration_sept26_v1.json).
-Finite convection remains available in the common engine for phases where
-burning and mixing times become comparable. Initial D exhaustion is not a
-criterion for losing convection or requiring finite mixing.
+For phases where burning and mixing times become comparable, the same program
+can select `convective_mixing "finite_implicit"` or `"finite_lagged"` with
+`transport "screened_core"`. The default is `"instantaneous"`. Finite implicit
+mixing recomputes the mass conductance during the coupled solve; finite lagged
+mixing holds its value from the starting model and requires saved composition
+heat rates for a stratified restart.
+
+The optional `instantaneous_mixing_below_T_K` retains instantaneous mixing on
+convective faces with either endpoint below that temperature. Zero, the default,
+leaves all faces finite. The hot microscopic law cannot support such a choice
+in a cool envelope; an explicit cool mixing approximation is then needed. Its
+gradient and drift/heat checks remain in force. Radiative faces are never merged,
+and every exposed interface must satisfy the microscopic provider's domain.
+The numerical mixing temperature is independent of that physical domain limit.
+Both the physical convection regions and numerical composition blocks are
+checked on the returned structure, after its composition and heat update.
+
+Initial D still uses the assessed wholly convective approximation. Once D is
+exhausted, each interval selects the configured mixing treatment from its own
+starting model, including the second half of a time-accuracy comparison.
+The mixing mode and temperature enter restart identity. D exhaustion itself
+is not a criterion for losing convection or requiring finite mixing.
+
+A **12.73 Myr** comparison at **3.609 Tyr** passes every full/half-interval
+audit. Finite mixing changes the helium-3 inventory by **5.107e-15** relative
+to instantaneous mixing in this slow phase. The default program reproduces
+three intervals and the final physical checkpoint exactly. This establishes
+integration for the tested states, not convergence through a flash.
+[Driver and transport checks](results/finite_mixing_driver_sept27_v1.json).
 
 Atmosphere overlaps, the bounded approximation for small metal changes and the
 measured response to settling are described in [ATMOSPHERE.md](ATMOSPHERE.md).

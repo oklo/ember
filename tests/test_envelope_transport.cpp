@@ -122,6 +122,20 @@ int main() {
   catch(const std::domain_error& e){domain_rejected=std::string(e.what()).find("microscopic species domain")!=std::string::npos;}
   check(domain_rejected,
       "unsupported cold radiative boundary cannot silently stop settling");
+  EvolutionOptions finite;finite.convective_mixing=ConvectiveMixing::finite_implicit;
+  finite.instantaneous_mixing_below_T=2e6;
+  check(instantaneous_mixing_regions(m,physics,finite)==MixingRegions{{0,1},{1,3}},
+      "cool convection is collapsed independently of a hot radiative interface");
+  check(instantaneous_mixing_regions(cool_core,physics,finite)==MixingRegions{{0,1},{1,3}},
+      "cool radiative interface must remain exposed in finite mode");
+  check(rejects([&]{driver::check_envelope_transport(cool_core,physics,join,rates,2e6,.01,finite);}),
+      "finite mode must also reject unsupported cool radiative exchange");
+  finite.instantaneous_mixing_below_T=m.T(2);
+  check(instantaneous_mixing_regions(m,physics,finite)==MixingRegions{{0,1},{1,2},{2,3}},
+      "threshold equality leaves a face finite");
+  finite.instantaneous_mixing_below_T=std::nextafter(m.T(2),INFINITY);
+  check(instantaneous_mixing_regions(m,physics,finite)==MixingRegions{{0,1},{1,3}},
+      "the current thermal state must determine the instantaneous partition");
   auto unmixed=m;unmixed.comp[2].X[0]-=1e-8;unmixed.comp[2].X[2]+=1e-8;
   check(rejects([&]{driver::check_envelope_transport(unmixed,physics,join,rates,2e6,.01);}),
       "instantaneous mixing cannot accept a residual envelope gradient");

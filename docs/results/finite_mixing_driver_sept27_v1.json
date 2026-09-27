@@ -1,0 +1,51 @@
+{
+  "created_utc": "2026-09-27T12:31:47.023253+00:00",
+  "scope": "Common lifetime driver finite mixing integration, with unchanged default instantaneous evolution",
+  "selected_for_primary": false,
+  "default_exact_replay_intervals": 3,
+  "default_final_physical_checkpoint_exact": true,
+  "finite_intervals": 3,
+  "start_years": 3609218560281.008,
+  "end_years": 3609231291684.2026,
+  "finite_duration_years": 12731403.194824219,
+  "finite_mode": "finite_implicit",
+  "instantaneous_mixing_below_T_K": 2000000,
+  "maximum_log_structure_difference": 1.7852386235972517e-12,
+  "maximum_material_abundance_difference": 3.693156891415583e-13,
+  "relative_He3_inventory_difference": 5.10702591327572e-15,
+  "finite_maximum_species_audit": 2.5809940935785786e-16,
+  "finite_maximum_first_law": 3.6447955764629114e-11,
+  "CPU_seconds": {
+    "baseline": 19.223242,
+    "instantaneous": 19.128039,
+    "finite": 22.195175
+  },
+  "tests_passed": 10,
+  "tests": [
+    "evolution_controller",
+    "pms_cn_evolution",
+    "pms_cn_face_evolution",
+    "envelope_transport",
+    "screened_envelope_evolution",
+    "finite_screened_envelope_evolution",
+    "metal_microscopic_evolution",
+    "metal_microscopic_face_evolution",
+    "finite_metal_evolution",
+    "lagged_finite_metal_evolution"
+  ],
+  "limitations": [
+    "Slow evolution control only; not flash convergence or validation of cool microscopic coefficients.",
+    "Live primary remains instantaneous; finite mode remains an explicit choice.",
+    "Initial D retains the assessed whole-star approximation.",
+    "The cool instantaneous blocks retain measured gradient, drift and heat checks; radiative faces remain exposed."
+  ],
+  "hashes": {
+    "snapshot.checkpoint": "ba44c17ddac0f829375b9b101c8a2c0218d5f3c2d3b09e2fb60c016052602f24",
+    "ember-evolve": "18c8f9e9402a96d4efc4cf91c008c916fb4bf147e407b61543e9f6144f5ea037",
+    "plan.json": "27760db8b1500612248a47d8266b7dd7b955c98c02790d65a8440b32a708bf95",
+    "baseline/evolution/final.checkpoint": "3dd1df4a2773e74a18575fcb0a1b16e4e4d8ff8aeab2f0767761a38e4090d31d",
+    "instantaneous/evolution/final.checkpoint": "2cd542e6677a91e96589da12bd5eac58936ed6521bf6a244d92585761617535f",
+    "finite/evolution/final.checkpoint": "bfbcb8b1b3f7b52d428fbcf839503ef58c08b482575aebe0ae590222580ea76f"
+  },
+  "build": "All current CMake targets rebuilt successfully; ten focused tests passed."
+}

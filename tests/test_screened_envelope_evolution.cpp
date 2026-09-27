@@ -14,7 +14,7 @@
 #include <chrono>
 using namespace ember;
 int main(int argc,char**argv) {
- if(argc!=3)return 2;
+ if(argc!=3 && argc!=4)return 2;
  try {
   const auto start=std::clock();const std::filesystem::path data=argv[1];std::ifstream input(data/"production/configuration.txt");std::map<std::string,std::string> cfg;std::string k,v;
   while(input>>k>>std::quoted(v))cfg[k]=v;
@@ -72,10 +72,44 @@ int main(int argc,char**argv) {
   EvolutionOptions options;options.relaxation.zone_threads=2;options.abundance_tolerance=1e-12;
   options.homogeneous_abundance_tolerance=1e-15;
   options.previous_metal_heat_rates=rates;
+  const bool finite=argc==4;
+  if(finite) {
+    options.convective_mixing=ConvectiveMixing::finite_implicit;
+    options.instantaneous_mixing_below_T=2e6;
+    const auto blocks=instantaneous_mixing_regions(m,physics,options);
+    require(blocks.size()>regions.size() && blocks.size()<count,
+            "fixture must exercise finite convection and cool instantaneous blocks");
+    auto all=options;all.instantaneous_mixing_below_T=1e99;
+    require(instantaneous_mixing_regions(m,physics,all)==regions,
+            "a temperature choice must never collapse a radiative face");
+    auto unsupported=options;unsupported.instantaneous_mixing_below_T=0;
+    const auto rejected=evolve_step(m,physics,atmosphere,31557600.,unsupported);
+    require(!rejected.converged && rejected.model.comp==m.comp,
+            "finite convection must not omit unsupported cool microscopic exchange");
+  }
   const double dt=1e6*31557600.;const auto first=evolve_step(m,physics,atmosphere,dt,options);
   if(!first.converged)throw std::runtime_error(first.message);
   const auto audit=driver::check_interval(m,first,dt,nuclear,1e-14);
   require(audit.pass,"real screened evolution must pass the unchanged isotope and energy audits");
+  if(finite) {
+    transport.diagnostic_rates=first.total_metal_species_rates;
+    material.diagnostic_rates=first.total_metal_species_rates;
+    const auto guard=driver::check_envelope_transport(first.model,physics,transport,
+        first.total_metal_species_rates,2e6,.01,options);
+    require(std::abs(guard.convective_mass_fraction-first.convective_mass_fraction)<1e-14,
+            "finite faces must retain physical convection diagnostics");
+    const auto blocks=instantaneous_mixing_regions(first.model,physics,options);
+    for(auto [a,b]:blocks)for(auto i=a;i<b;++i)
+      require(first.model.comp[i]==first.model.comp[a],"selected instantaneous block is not homogeneous");
+    transport.diagnostic_rates={};material.diagnostic_rates={};
+    const auto half=evolve_step(m,physics,atmosphere,dt/2,options);
+    require(half.converged,"finite first half must converge");
+    auto next=options;next.previous_metal_heat_rates=half.total_metal_species_rates;
+    const auto end=evolve_step(half.model,physics,atmosphere,dt/2,next);
+    require(end.converged && driver::check_interval(m,half,dt/2,nuclear,1e-14).pass
+        && driver::check_interval(half.model,end,dt/2,nuclear,1e-14).pass,
+        "finite half steps must each conserve species and energy");
+  }
   const auto preserved=first.model;
   auto wrong=first;
   auto abundance=metal_cn_abundances(wrong.model.comp[256]);abundance[0]+=1e-6;

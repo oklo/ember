@@ -108,6 +108,16 @@ int lifetime_main(int argc,char** argv) {
     if(transport_selection!="whole_convective" && transport_selection!="screened_core")
       throw std::invalid_argument("unknown lifetime transport selection");
     const bool screened_core=transport_selection=="screened_core";
+    const auto mixing_selection=cfg.values.contains("convective_mixing")?cfg.get("convective_mixing"):"instantaneous";
+    ConvectiveMixing mixing_mode=ConvectiveMixing::instantaneous;
+    if(mixing_selection=="finite_implicit")mixing_mode=ConvectiveMixing::finite_implicit;
+    else if(mixing_selection=="finite_lagged")mixing_mode=ConvectiveMixing::finite_lagged;
+    else if(mixing_selection!="instantaneous")throw std::invalid_argument("unknown convective mixing selection");
+    const double instantaneous_below=cfg.values.contains("instantaneous_mixing_below_T_K")
+        ?cfg.number("instantaneous_mixing_below_T_K"):0;
+    if(instantaneous_below<0 || (mixing_mode==ConvectiveMixing::instantaneous && instantaneous_below!=0)
+        || (mixing_mode!=ConvectiveMixing::instantaneous && !screened_core))
+      throw std::invalid_argument("finite convection requires screened-core transport and a nonnegative mixing temperature");
     const double heat_upper=screened_core?cfg.number("screened_heat_upper_T_K"):minimum_temperature;
     const double mixing_gradient=screened_core?cfg.number("maximum_relative_mixing_gradient"):0;
     if(screened_core && (!(heat_upper>minimum_temperature) || !(mixing_gradient>0 && mixing_gradient<=.01)))
@@ -156,6 +166,8 @@ int lifetime_main(int argc,char** argv) {
       identity.number("opacity.maximum_X",opacity_extension->maximum_X);
     }
     identity.values["transport.selection"]=transport_selection;
+    if(mixing_mode!=ConvectiveMixing::instantaneous)
+      identity.number("convection.instantaneous_mixing_below_T_K",instantaneous_below);
     if(screened_core) {
       identity.number("transport.screened_heat_upper_T_K",heat_upper);
       identity.number("transport.maximum_relative_mixing_gradient",mixing_gradient);
@@ -193,7 +205,7 @@ int lifetime_main(int argc,char** argv) {
         {"collisions",collision_path},{"composition",composition_path}})identity.file(role,p);
     const auto& identities=identity.values;
     const Selections selections{"lifetime.volume_faces.v1","ppcn.sfiii.svh.physical_metals.v1",
-      "losses.plasma_neutrino.v1","convection.instantaneous.material_heat_after_D.v1",
+      "losses.plasma_neutrino.v1","convection."+mixing_selection+".material_heat_after_D.v1",
       screened_core?"transport.screened_core.material_envelope.v1":"transport.whole_convective_limit.v1"};
     Checkpoint state;
     // Reject incompatible or damaged restarts before allocating/parsing EOS
@@ -309,6 +321,10 @@ int lifetime_main(int argc,char** argv) {
     HomogeneousCheck guard;
     EvolutionControlHooks hooks;
     hooks.physics=[&](const Model& m)->const Physics& {return has_D(m)?early:later;};
+    hooks.configure_step=[&](const Model& m,EvolutionOptions& selected) {
+      selected.convective_mixing=has_D(m)?ConvectiveMixing::instantaneous:mixing_mode;
+      selected.instantaneous_mixing_below_T=has_D(m)?0:instantaneous_below;
+    };
     hooks.species_difference=[](const Composition& x,const Composition& y) {
       const auto a=metal_cn_abundances(x),b=metal_cn_abundances(y);double difference=0;
       for(std::size_t k=0;k<METAL_CN_SIZE;++k)difference=std::max(difference,std::abs(a[k]-b[k]));
@@ -320,8 +336,9 @@ int lifetime_main(int argc,char** argv) {
     hooks.assess=[&](const Model& m,std::span<const std::array<double,3>> rates) {
       const bool initial_D=has_D(m);convective_heat.diagnostic_rates=rates;envelope_heat.diagnostic_rates=rates;
       try {
+        auto selected=options;hooks.configure_step(m,selected);
         guard=screened_core && !initial_D && !rates.empty()
-          ?check_envelope_transport(m,later,envelope_heat,rates,minimum_temperature,mixing_gradient)
+          ?check_envelope_transport(m,later,envelope_heat,rates,minimum_temperature,mixing_gradient,selected)
           :check_initial_convection(m,initial_D?early:later,table_eos,nuclear,initial_D);
         convective_heat.diagnostic_rates={};envelope_heat.diagnostic_rates={};
       }catch(...) {convective_heat.diagnostic_rates={};envelope_heat.diagnostic_rates={};throw;}

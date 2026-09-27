@@ -223,7 +223,10 @@ add_executable(test_screened_envelope_evolution test_screened_envelope_evolution
 target_link_libraries(test_screened_envelope_evolution PRIVATE ember)
 add_test(NAME screened_envelope_evolution COMMAND test_screened_envelope_evolution
   ${CMAKE_SOURCE_DIR}/data ${CMAKE_CURRENT_SOURCE_DIR}/data/early_radiative_core.dat)
-set_tests_properties(screened_envelope_evolution PROPERTIES TIMEOUT 120 LABELS "material-data;integration")
+add_test(NAME finite_screened_envelope_evolution COMMAND test_screened_envelope_evolution
+  ${CMAKE_SOURCE_DIR}/data ${CMAKE_CURRENT_SOURCE_DIR}/data/early_radiative_core.dat finite)
+set_tests_properties(screened_envelope_evolution finite_screened_envelope_evolution
+  PROPERTIES TIMEOUT 120 LABELS "material-data;integration")
 find_package(Python3 COMPONENTS Interpreter QUIET)
 if(Python3_Interpreter_FOUND)
   add_test(NAME tops_sources COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_CURRENT_SOURCE_DIR}/test_tops_sources.py)

@@ -95,34 +95,46 @@ inline HomogeneousCheck check_initial_convection(const Model& m,const Physics& p
   return out;
 }
 
-// Assess the instantaneous-mixing approximation region by region. Species
-// crossing a radiative boundary use the actual microscopic provider. Within
+// Assess each selected instantaneous block. All exposed interfaces use the
+// actual microscopic provider, including finite convective interfaces. Within
 // a mixed region, flux/(rho D) estimates the gradient needed for convection
 // to carry the reconstructed total rate. The omitted cool drift/heat retain
 // the same order-of-magnitude estimates used for the wholly convective star.
 inline HomogeneousCheck check_envelope_transport(const Model& m,const Physics& physics,
     const MetalMicroscopicTransport& transport,std::span<const MetalSpeciesVector> rates,
-    double minimum_microscopic_T,double maximum_relative_gradient) {
+    double minimum_microscopic_T,double maximum_relative_gradient,const EvolutionOptions& options={}) {
   if(rates.size()+1!=m.size() || !(maximum_relative_gradient>0))
     throw std::domain_error("envelope transport assessment: missing rates or invalid mixing allowance");
   for(const auto& c:m.comp)if(c[Species::H2]!=0)
     throw std::domain_error("envelope transport assessment requires initial D exhaustion");
-  const auto regions=convective_mixing_regions(m,physics);
+  const auto physical_regions=convective_mixing_regions(m,physics);
+  const auto regions=options.convective_mixing==ConvectiveMixing::instantaneous
+      ?physical_regions:instantaneous_mixing_regions(m,physics,options);
   const auto mixing=convective_mixing_faces(m,physics);const auto weights=nodal_mass_weights(m);
   HomogeneousCheck out;out.convective_mass_fraction=0;
+  for(const auto [begin,end]:physical_regions) {
+    if(end<m.size())++out.radiative_boundaries;
+    if(end-begin<2)continue;
+    double travel=0;
+    for(std::size_t i=begin;i<end;++i)out.convective_mass_fraction+=weights[i]/m.M;
+    for(std::size_t i=begin;i+1<end;++i) {
+      if(!(mixing[i].velocity>0 && mixing[i].diffusivity>0))
+        throw std::domain_error("convective region lacks finite mixing");
+      travel+=(m.r(i+1)-m.r(i))/mixing[i].velocity/31557600.;
+    }
+    out.travel_years=std::max(out.travel_years,travel);
+  }
   for(const auto [begin,end]:regions) {
     if(end-begin>1) {
-      std::array<double,3> gradient{};double travel=0;
+      std::array<double,3> gradient{};
       for(std::size_t i=begin;i<end;++i) {
         if(m.comp[i]!=m.comp[begin])throw std::domain_error("instantaneous convective region is not homogeneous");
-        out.convective_mass_fraction+=weights[i]/m.M;
       }
       for(std::size_t i=begin;i+1<end;++i) {
         const double T=std::sqrt(m.T(i)*m.T(i+1)),rho=.5*(m.rho(i)+m.rho(i+1));
         const double r=.5*(m.r(i)+m.r(i+1)),mass=.5*(m.m[i]+m.m[i+1]),dr=m.r(i+1)-m.r(i);
         if(!(mixing[i].velocity>0 && mixing[i].diffusivity>0))
           throw std::domain_error("convective region lacks finite mixing");
-        travel+=dr/mixing[i].velocity/31557600.;
         auto convection_rate=rates[i];
         if(std::min(m.T(i),m.T(i+1))>=minimum_microscopic_T) {
           const auto micro=transport.metal_eval(i,m.m[i],m.m[i+1],m.y[i],m.comp[i],m.y[i+1],m.comp[i+1],false);
@@ -138,7 +150,6 @@ inline HomogeneousCheck check_envelope_transport(const Model& m,const Physics& p
         for(std::size_t k=0;k<3;++k)
           gradient[k]+=std::abs(convection_rate[k])*dr/(4*M_PI*r*r*rho*mixing[i].diffusivity);
       }
-      out.travel_years=std::max(out.travel_years,travel);
       for(std::size_t k=0;k<3;++k) {
         out.burn_gradient_estimate=std::max(out.burn_gradient_estimate,gradient[k]);
         const double abundance=k==2?m.comp[begin].Z():m.comp[begin].X[k];
@@ -147,7 +158,7 @@ inline HomogeneousCheck check_envelope_transport(const Model& m,const Physics& p
       }
     }
     if(end<m.size()) {
-      const auto i=end-1;++out.radiative_boundaries;
+      const auto i=end-1;
       // No cool fallback for species: this verifies the actual law's domain.
       (void)transport.metal_eval(i,m.m[i],m.m[i+1],m.y[i],m.comp[i],m.y[i+1],m.comp[i+1],false);
     }

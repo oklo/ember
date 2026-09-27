@@ -49,6 +49,11 @@ struct EvolutionOptions {
   // Jacobian, normalized at each face to max(|L_lo|,|L_hi|,1e-12*max|L|).
   double material_heat_tolerance{1e-10};
   ConvectiveMixing convective_mixing{ConvectiveMixing::instantaneous};
+  // In a finite mode, collapse only convective faces with either endpoint
+  // cooler than this temperature (K). Zero leaves all faces finite.
+  // This selects a mixing approximation, not a microscopic validity limit;
+  // exposed interfaces must still satisfy the chosen transport provider.
+  double instantaneous_mixing_below_T{};
   // Accepted total face rates from the preceding interval, matching previous.
   // A lagged finite coefficient needs these to recover the previous thermal
   // luminosity. Only an exactly homogeneous initial model can omit them:
@@ -56,6 +61,9 @@ struct EvolutionOptions {
   std::span<const SpeciesVector> previous_species_heat_rates;
   std::span<const std::array<double,3>> previous_metal_heat_rates;
 };
+// Numerical composition blocks, including single cells. Radiative faces
+// always separate blocks, independently of the temperature selection.
+MixingRegions instantaneous_mixing_regions(const Model&,const Physics&,const EvolutionOptions&);
 struct EvolutionStep {
   Model model; // previous model on failure; never a partially accepted step
   bool converged{};

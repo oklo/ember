@@ -199,6 +199,32 @@ std::vector<Composition> burn_and_mix(const Model& thermal,const Model& previous
   return output;
 }
 
+MixingRegions instantaneous_mixing_regions(const Model& model,const Physics& physics,
+    const EvolutionOptions& options) {
+  if(!std::isfinite(options.instantaneous_mixing_below_T) || options.instantaneous_mixing_below_T<0)
+    throw std::invalid_argument("invalid instantaneous mixing temperature");
+  if(options.convective_mixing!=ConvectiveMixing::instantaneous
+      && options.convective_mixing!=ConvectiveMixing::finite_implicit
+      && options.convective_mixing!=ConvectiveMixing::finite_lagged)
+    throw std::invalid_argument("unknown convective mixing choice");
+  if(options.convective_mixing==ConvectiveMixing::instantaneous)
+    return convective_mixing_regions(model,physics);
+  MixingRegions regions;regions.reserve(model.size());
+  if(options.instantaneous_mixing_below_T==0) {
+    for(std::size_t i=0;i<model.size();++i)regions.emplace_back(i,i+1);
+    return regions;
+  }
+  for(const auto [begin,end]:convective_mixing_regions(model,physics)) {
+    auto first=begin;
+    for(std::size_t i=begin;i+1<end;++i)
+      if(std::min(model.T(i),model.T(i+1))>=options.instantaneous_mixing_below_T) {
+        regions.emplace_back(first,i+1);first=i+1;
+      }
+    regions.emplace_back(first,end);
+  }
+  return regions;
+}
+
 EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmosphere& atmosphere,
     double dt,const EvolutionOptions& options) {
   EvolutionStep result;result.model=previous;
@@ -208,6 +234,8 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       || !std::isfinite(options.abundance_tolerance) || options.abundance_tolerance<=0
       || !std::isfinite(options.homogeneous_abundance_tolerance) || options.homogeneous_abundance_tolerance<0
       || options.homogeneous_abundance_tolerance>options.abundance_tolerance
+      || !std::isfinite(options.instantaneous_mixing_below_T) || options.instantaneous_mixing_below_T<0
+      || (options.convective_mixing==ConvectiveMixing::instantaneous && options.instantaneous_mixing_below_T!=0)
       || !std::isfinite(options.material_heat_tolerance) || options.material_heat_tolerance<=0
       || !std::isfinite(options.max_abundance_change) || options.max_abundance_change<=0)
     throw std::invalid_argument("evolve_step: invalid physics, age or options");
@@ -265,13 +293,10 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       lagged_mixing=finite_mixing_conductances(previous,coupled);
     }
     auto mixing_regions=[&]() {
-      if(!finite)return convective_mixing_regions(current,coupled);
-      MixingRegions regions;regions.reserve(current.size());
-      for(std::size_t i=0;i<current.size();++i)regions.emplace_back(i,i+1);
-      return regions;
+      return instantaneous_mixing_regions(current,coupled,options);
     };
     auto abundance_tolerance=[&](const MixingRegions& regions) {
-      return !finite && regions.size()==1 && options.homogeneous_abundance_tolerance>0
+      return regions.size()==1 && options.homogeneous_abundance_tolerance>0
           ?options.homogeneous_abundance_tolerance:options.abundance_tolerance;
     };
     auto burning=[&](const MixingRegions& regions)->CompositionUpdate {
@@ -429,7 +454,8 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
         auto verification=options.relaxation;verification.max_iterations=0;
         const auto checked=relax(current,coupled,atmosphere,verification,dt,&previous);
         result.residual=checked.residual;result.correction=checked.correction;
-        if(!checked.converged || convective_mixing_regions(current,coupled)!=final_regions)
+        if(!checked.converged || convective_mixing_regions(current,coupled)!=final_regions
+            || (finite && mixing_regions()!=next_regions))
           continue;
         update.total_rates=std::move(next.total_rates);
         update.total_metal_rates=std::move(next.total_metal_rates);
