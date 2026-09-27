@@ -2,13 +2,16 @@
 
 ## Current priority — September 27, 2026
 
-The continuous Hayashi-started sequence forms its first radiative core at
+The continuous Hayashi-started sequence forms its first radiative region at
 **3.558 Tyr**, **3250 K**, with surface hydrogen **X=.1722**. The checked
-continuation reaches **8.312% radiative mass**, with H/He and metal
-diffusion active across radiative boundaries. All accepted intervals pass the
+continuation passes **3.561 Tyr**, with H/He and metal
+diffusion active across radiative boundaries. A radiative shell first surrounds
+the convective centre; the centre then becomes radiative. About **34%** of the
+mass is now radiative. All accepted intervals pass the
 unchanged isotope and energy audits. The fixed-metal-atmosphere comparison
 is complete at **3.078 Tyr**. Both use the common lifetime program.
-[First radiative-core calculation](results/continuous_radiative_core_sept27_v1.json).
+[First radiative region](results/continuous_radiative_core_sept27_v1.json),
+[internal structure](results/radiative_shell_geometry_sept27_v1.json).
 Read the [current handoff](../HANDOFF.md) for the live process and next work.
 
 Failed trial audits now trigger a smaller timestep, with a bounded number of
@@ -19,6 +22,15 @@ their tests in the isolated checkout. Local composition tolerances remain
 the global inventory budget remains 1e-14. A matched 11.76-Myr comparison reduces
 accepted intervals from 19 to 10, with a 0.00004235% luminosity difference.
 [Composition-solve comparison](results/radiative_core_solve_accuracy_sept27_v1.json).
+
+A matched **100 Myr** comparison supports species time-error **1e-6** in this
+phase, with **19** accepted intervals instead of **31** and a **0.0002978%**
+difference in total helium-3. Separating local Newton correction accuracy from
+integrated conservation also removes a solver stall: a checked **100 Myr**
+continuation passes in **17** steps with no rejections. Integrated species and
+reconstructed continuity still use **1e-14**; local corrections use **1e-13**.
+[Time accuracy](results/radiative_shell_time_accuracy_sept27_v1.json),
+[diffusion convergence](results/species_correction_accuracy_sept27_v1.json).
 
 The continuous trajectory passes all isotope and energy checks. A checked continuation adds the later trace-He/pure-H atmosphere inputs without changing
 its accepted physical state. All 5932 tested early boundary values remain exact,
@@ -57,7 +69,7 @@ the abrupt atmosphere adjustment used in the separate late-evolution experiments
 The program should also support neighboring masses, including the boundary
 between stars and brown dwarfs.
 
-1. Finish a continuous sequence through the first radiative core with H/He and
+1. Continue through the growth of the radiative interior with H/He and
    metal diffusion. Prepare atmosphere and interior table coverage in advance;
    preserve explicit source limits and verify overlap values and derivatives.
 2. Continue through hydrogen exhaustion with a consistent joining depth between

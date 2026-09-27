@@ -1,0 +1,89 @@
+{
+  "created_utc": "2026-09-27T08:37:47.891401+00:00",
+  "scope": "Direct Ledoux classification of retained continuous Hayashi-origin structures using their saved total-species heat rates. Radiative mass is not automatically a central radiative core.",
+  "latest_checked": {
+    "accepted": 7019,
+    "age_years": 3559798678651.5977,
+    "central_region": "convective",
+    "convective_centre_node_range": [
+      0,
+      148
+    ],
+    "radiative_shell_node_range": [
+      149,
+      233
+    ],
+    "convective_envelope_node_range": [
+      234,
+      511
+    ],
+    "radiative_nodes_enclosed_mass_fraction": [
+      0.0477909,
+      0.338148
+    ],
+    "radiative_nodes_radius_fraction": [
+      0.205772,
+      0.436683
+    ],
+    "radiative_shell_nodal_weight_mass_fraction": 0.293732,
+    "radiative_node_temperature_K": [
+      5758640.0,
+      7856420.0
+    ],
+    "central_temperature_K": 8625990.0,
+    "central_density_g_cm3": 296.993,
+    "nuclear_luminosity_over_surface_luminosity": {
+      "centre": 0.37737,
+      "radiative_shell": 0.584211,
+      "envelope": 0.039461
+    },
+    "central_He3_mass_fraction": 0.000318765,
+    "shell_peak_He3_mass_fraction": 0.001064,
+    "surface_He3_mass_fraction": 0.000597136
+  },
+  "earlier_retained": {
+    "accepted": 6314,
+    "central_region": "convective",
+    "convective_centre_node_range": [
+      0,
+      195
+    ],
+    "radiative_shell_node_range": [
+      196,
+      215
+    ],
+    "convective_envelope_node_range": [
+      216,
+      511
+    ],
+    "radiative_shell_nodal_weight_mass_fraction": 0.0831233
+  },
+  "first_onset_limit": "History first records a radiative region at accepted6239. That exact profile was not retained; its spatial location is inferred from adjacent retained structures, not directly measured.",
+  "interpretation_limit": "This classification does not isolate each nuclear reaction or abundance contribution to buoyancy. A uniform He3 abundance does not imply no He3 contribution to the luminosity profile.",
+  "source_sha256": {
+    "out/fable-adversarial-review-20260926/conservation/v6_latest_copy.checkpoint": "11cdfc03c765c72bbe46977daadf6759a5bbc15db1f04d39c5b3f06f7519d631",
+    "out/fable-adversarial-review-20260926/conservation/probe6.cpp": "b88e35f30996ab3995a09ac00b258bb66c73c6d6c0d39926c328dfd1a5dfc0b8",
+    "out/fable-adversarial-review-20260926/conservation/probe6_v6.txt": "dda4cf613fb2a70479e6001903aa110dff13271032b3c4b2834b884e5fe75888",
+    "out/fable-adversarial-review-20260926/conservation/probe6_6314.txt": "f0385f87a4e77b76a866f4cfbf86c34e2064d756241134ed944412ad1e3c5dd6"
+  },
+  "later_centre_is_radiative": {
+    "accepted": 7538,
+    "age_years": 3560514693151.8994,
+    "radiative_node_range": [
+      0,
+      233
+    ],
+    "convective_envelope_node_range": [
+      234,
+      511
+    ],
+    "radiative_mass_fraction": 0.34073436394946954,
+    "central_temperature_K": 8579101.588043608,
+    "central_density_g_cm3": 299.074,
+    "radius_Rsun": 0.14207296883746262,
+    "Teff_K": 3253.7429356881935,
+    "nuclear_luminosity_in_radiative_interior_over_surface_luminosity": 0.961785,
+    "source": "out/species-correction-floor-sept27-v1/structure.txt",
+    "source_sha256": "4cb69764817531ee2a61b6b2f6263104a9fb4fa7714e6e90f106bee93954d234"
+  }
+}

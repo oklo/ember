@@ -1,6 +1,6 @@
 {
   "created_utc": "2026-09-27T07:48:43.102665+00:00",
-  "scope": "Continuous Hayashi-origin0.1-solar-mass star develops a radiative core under the same tau100 atmosphere family. Accepted states only; failed trials never retained.",
+  "scope": "Continuous Hayashi-origin0.1-solar-mass star develops a radiative region under the same tau100 atmosphere family. Accepted states only; failed trials never retained.",
   "first_radiative_model": {
     "years": 3558470608835.955,
     "step_years": 629709.9256394553,
@@ -110,5 +110,6 @@
     "Finite convection remains under assessment.",
     "No claim of flash-independent ignition or completed white-dwarf cooling.",
     "Cool radiative microscopic transport and colder atmosphere coverage remain incomplete."
-  ]
+  ],
+  "geometry_clarification": "The retained structure has a convective centre, radiative shell and convective envelope. See radiative_shell_geometry_sept27_v1.json; the original filename is retained for existing links."
 }

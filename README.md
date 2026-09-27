@@ -13,18 +13,20 @@ resolve the stellar/brown-dwarf boundary as initial mass and composition vary.
 The full calculation is not yet established.
 
 The common `ember-evolve --lifetime` program carries the Hayashi-started star
-through the formation of its first radiative core at **3.558 Tyr**, **3250 K**
+through its first radiative region at **3.558 Tyr**, **3250 K**
 and surface hydrogen **X = 0.1722**. It retains the same optical-depth-100
-atmosphere treatment throughout. The checked continuation passes
-all conservation checks and reaches a radiative mass fraction of **8.312%**.
-The calculation continues with H/He and metal diffusion across radiative boundaries.
-[Continuous radiative-core calculation](docs/results/continuous_radiative_core_sept27_v1.json).
+atmosphere treatment throughout. It now passes **3.561 Tyr** with H/He and metal
+diffusion and unchanged conservation checks. A radiative shell first separates
+the convective centre from the envelope. The centre subsequently becomes
+radiative, leaving about **34%** of the mass in the radiative interior.
+[Continuous calculation](docs/results/continuous_radiative_core_sept27_v1.json),
+[internal structure](docs/results/radiative_shell_geometry_sept27_v1.json).
 A fixed-metal-atmosphere comparison reaches **3.078 Tyr**, also without rejected
 intervals. [Comparison](docs/results/continuous_lifetime_sept26_v3.json).
 
 The common driver selects hot microscopic H/He/metal transport, conservative
 mixing heat, metal-dependent atmospheres and the existing composition-dependent
-interior opacities. A saved radiative-core model evolves with nonzero settling,
+interior opacities. A saved model containing radiative layers evolves with nonzero settling,
 passes the physical conservation checks, and restarts exactly. Initial
 fully mixed deuterium burning uses tighter composition convergence than the
 stratified diffusion solve; the physical audits stay unchanged. Controller recovery, physical diffusion and exact-restart tests pass in the
@@ -50,19 +52,38 @@ endpoint; the finite-mixing treatment of the cool envelope remains under test.
 [Atmosphere checks](docs/results/highg_energy_balance_sept27_v1.json),
 [density-inversion checks](docs/results/local_density_inversion_sept27_v1.json),
 [adjacent atmosphere columns](docs/results/highg_adjacent_columns_sept27_v1.json).
+Cooler sources also pass at **4600 K/log g = 6.0** and
+**4650 K/log g = 6.1 and 6.2**, using converged neighboring atmospheres as
+initial guesses. [Cool atmosphere checks](docs/results/cool_highg_sources_sept27_v1.json).
 The selected EOS supports the nodes and cell boundaries of all 67 saved settling
 structures, including the composition derivatives used for diffusion and heat.
 [EOS coverage](docs/results/eos_lifetime_coverage_sept27_v1.json).
 A 50-Gyr timestep comparison used 25 intervals instead of 73, with a
 0.0004605% luminosity difference and 0.001502% helium-3-reservoir difference.
-The continuous star now uses that tested time-error setting; structure accuracy
-and all conservation checks are unchanged.
+That comparison covers the fully convective phase.
 [Timestep comparison](docs/results/lifetime_time_accuracy_sept27_v1.json).
-At radiative-core onset, a matched **11.76 Myr** comparison supports a tighter
+A separate **100 Myr** comparison in the radiative-shell phase supports a
+species time-error tolerance of **1e-6**: **19** intervals instead of **31**,
+with a **0.0002978%** difference in the total helium-3 reservoir. Structure,
+nuclear-power and conservation checks remain unchanged.
+[Radiative-shell comparison](docs/results/radiative_shell_time_accuracy_sept27_v1.json).
+At the onset of the radiative shell, a matched **11.76 Myr** comparison supports a tighter
 local composition solve, **1e-13**. It uses **10** accepted intervals and **2**
 retries instead of **19** and **10**, with a **0.00004235%** luminosity difference.
 This setting is now selected; global conservation checks are unchanged.
 [Composition-solve comparison](docs/results/radiative_core_solve_accuracy_sept27_v1.json).
+The coupled solve returns composition and heat rates evaluated on the final
+thermal state, after checking the structure equations and convection again.
+This removes a demonstrated conservation failure without relaxing its limit.
+Skipping unused EOS derivatives also preserves an exact six-step replay and
+reduced CPU use by **13.4%** in that comparison.
+[Coupling check](docs/results/endpoint_species_consistency_sept27_v1.json),
+[EOS work comparison](docs/results/thermal_eos_work_sept27_v1.json).
+Local diffusion corrections and integrated conservation now have separate
+stopping criteria. This removes a demonstrated solver stall: the checked
+continuation advances **100 Myr in 17 steps**, with no rejected intervals and
+all original conservation checks passing.
+[Diffusion convergence check](docs/results/species_correction_accuracy_sept27_v1.json).
 The microscopic metal law assumes complete ionization; unsupported cool
 radiative layers are rejected. Initial deuterium uses a checked whole-star
 mixing approximation. Nuclear burning includes the pp chain and explicit

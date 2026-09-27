@@ -1,0 +1,177 @@
+{
+  "created_utc": "2026-09-27T08:38:50.544526+00:00",
+  "scope": "Previously oscillating high-gravity atmosphere sources now converge from accepted cooler or same-temperature neighbors. Identical physical opacity and unchanged source acceptance. These rows are not yet selected in stellar evolution.",
+  "selected_for_evolution": false,
+  "sources": [
+    {
+      "path": "out/highg-cool-continuation-sept27-v2/t4650_g610",
+      "teff_K": 4650.0,
+      "log_g": 6.1,
+      "initial_source": "/Users/greglaughlin/Projects/ember/out/highg-cool-seed-control-sept27-v1/t4650_g600_cool_seed",
+      "CPU_seconds": 514.053517,
+      "diagnostics": {
+        "T": 5839.800389583574,
+        "Pgas": 95233426.23808305,
+        "source_density": 0.00023925041124109648,
+        "column_mass": 75.646586445114,
+        "flux_error": 8.566099217954815e-06,
+        "correction": 9.15e-07,
+        "effective_flux_error": 0.00020703989908832376,
+        "hydrostatic_error": 1.9467621981128502e-07,
+        "chemical_density_error": 4.4849568503479986e-11,
+        "iterations": 63,
+        "depths": 112,
+        "tau_bracket": [
+          76.52695906345699,
+          102.76143271969758
+        ],
+        "optical_depth_range": [
+          4.921731553608558e-08,
+          807.153173127029
+        ],
+        "column_mass_range": [
+          0.0008299260545634509,
+          144.80532229482537
+        ],
+        "temperature_range": [
+          3331.027103735139,
+          6465.054054326577
+        ],
+        "density_range": [
+          3.2216074271584525e-09,
+          0.00040007780733519884
+        ]
+      },
+      "source_executable_sha256": "74663fb1529dd57c95a435c9cf2385777d80eab836745ccd39f39cb81138161a",
+      "opacity_sha256": "1837c2ae92a39519b04fea53c152fe43f30e6694690597937b2c8638e8e7113b",
+      "retained_sha256": {
+        "run.log": "45dbcda4de4417bf0908c355bddc0488a0d0636692218a56da94ba35929865ea",
+        "fort.5": "e3b4ca2e3e7bcbb743a8a9876b2448b6830d7ea40bc8b260bc97ab3138b0d839",
+        "fort.15": "a6d635880938f9d6b95a24a09d15b8a712ba5286655740bb257c9b16b641e558",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "fort.9.gz": "063efd99a5db92ae44aaba58c2a8366f801587aecb7def916020ad88a8e2dfaa",
+        "physics.json": "73ceb5078c22f2a05d78a8ecde968e1fdb26d75e180a6edb0dffa7a691c13a37",
+        "fort.7": "8213da5eac06acf584021e9c61a06d03f9c6526cf0c33d9631fa5e707c5069c2",
+        "fort.8": "9de5b96cc450859577781841eb98a575bd88a22950c052f61b53bb697a11e387",
+        "tas": "6eb32ab19cbccb5617e7035ba3c765939883dd30aa114b23beeb812eb9533a47"
+      }
+    },
+    {
+      "path": "out/highg-cool-continuation-sept27-v2/t4600_g600",
+      "teff_K": 4600.0,
+      "log_g": 6.0,
+      "initial_source": "/Users/greglaughlin/Projects/ember/out/highg-cool-seed-control-sept27-v1/t4650_g600_cool_seed",
+      "CPU_seconds": 635.68809,
+      "diagnostics": {
+        "T": 5764.687699236832,
+        "Pgas": 91562976.10375486,
+        "source_density": 0.0002354456024088338,
+        "column_mass": 91.56296074313346,
+        "flux_error": 9.370767787064693e-06,
+        "correction": 8.73e-07,
+        "effective_flux_error": 0.00020703266889687821,
+        "hydrostatic_error": 1.9143426754908432e-07,
+        "chemical_density_error": 5.2487125756783826e-11,
+        "iterations": 81,
+        "depths": 112,
+        "tau_bracket": [
+          86.87481172514256,
+          116.58888797494282
+        ],
+        "optical_depth_range": [
+          5.28806740680523e-08,
+          913.0131021753512
+        ],
+        "column_mass_range": [
+          0.001044815,
+          182.29909999999998
+        ],
+        "temperature_range": [
+          3248.1487208354474,
+          6410.622559423697
+        ],
+        "density_range": [
+          3.2523839455070824e-09,
+          0.0004067564584331098
+        ]
+      },
+      "source_executable_sha256": "74663fb1529dd57c95a435c9cf2385777d80eab836745ccd39f39cb81138161a",
+      "opacity_sha256": "1837c2ae92a39519b04fea53c152fe43f30e6694690597937b2c8638e8e7113b",
+      "retained_sha256": {
+        "run.log": "e19120c774ef7559387f3b6e9c47d1e3017b57f6aebefdc10adc2a3c8e68365e",
+        "fort.5": "bf3fdbd2410d7b6ec85d0ed8ed1889b4522638eed977004e940615faa0aa61fc",
+        "fort.15": "a6d635880938f9d6b95a24a09d15b8a712ba5286655740bb257c9b16b641e558",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "fort.9.gz": "151949c4cc3c10ed232cf2a8e768ce82d1e2bc892625a9201b592f05dac52c18",
+        "physics.json": "73ceb5078c22f2a05d78a8ecde968e1fdb26d75e180a6edb0dffa7a691c13a37",
+        "fort.7": "bbc785698f87fe3ec518a05e3cec860bfb92181cc7e8edaf8058d2ba60917d36",
+        "fort.8": "53ab63b7cc40d34d9ecff3d800f7fa1ab95713e5f630d9ab6d246f450ed0acc3",
+        "tas": "6eb32ab19cbccb5617e7035ba3c765939883dd30aa114b23beeb812eb9533a47"
+      }
+    },
+    {
+      "path": "out/highg-cool-continuation-sept27-v3/t4650_g620",
+      "teff_K": 4650.0,
+      "log_g": 6.2,
+      "initial_source": "/Users/greglaughlin/Projects/ember/out/highg-cool-continuation-sept27-v2/t4650_g610",
+      "CPU_seconds": 524.6013260000001,
+      "diagnostics": {
+        "T": 5838.677023046534,
+        "Pgas": 118138885.31572366,
+        "source_density": 0.0003045597829653195,
+        "column_mass": 74.54058404881152,
+        "flux_error": 4.613742645709351e-06,
+        "correction": 9.91e-07,
+        "effective_flux_error": 0.0002070304189143446,
+        "hydrostatic_error": 1.9794690575558604e-07,
+        "chemical_density_error": 3.8183678441328084e-11,
+        "iterations": 61,
+        "depths": 112,
+        "tau_bracket": [
+          92.59768463384984,
+          124.21772419916944
+        ],
+        "optical_depth_range": [
+          3.9600898986657076e-08,
+          400.13102998933203
+        ],
+        "column_mass_range": [
+          0.0006592337339646066,
+          115.02293832771984
+        ],
+        "temperature_range": [
+          3229.146857911981,
+          6235.512505342288
+        ],
+        "density_range": [
+          3.219138940012792e-09,
+          0.0004301823098266551
+        ]
+      },
+      "source_executable_sha256": "74663fb1529dd57c95a435c9cf2385777d80eab836745ccd39f39cb81138161a",
+      "opacity_sha256": "1837c2ae92a39519b04fea53c152fe43f30e6694690597937b2c8638e8e7113b",
+      "retained_sha256": {
+        "run.log": "bd61138e3f5daa6472893b9644845c4dfb75d0dff5811b0856d13956990beef9",
+        "fort.5": "351748934d541187e25886990f635c8f2f0baec15a8044622e9e8e5411179a9b",
+        "fort.15": "a6d635880938f9d6b95a24a09d15b8a712ba5286655740bb257c9b16b641e558",
+        "opacity.sha256": "1369ea93e3087a8d0a6d2e0276bc679455612a426d81f20ce69cbea5acda3b3d",
+        "ember-masses.dat": "be05cbbe49b1ab6611ee797d8f3ffc6b466214e70fd3f06459cef3e4cb695877",
+        "fort.9.gz": "db720f031be149c794de3f6c3cd22ae18bb892614f33a4bf5638dbac7a305b28",
+        "physics.json": "73ceb5078c22f2a05d78a8ecde968e1fdb26d75e180a6edb0dffa7a691c13a37",
+        "fort.7": "6698587756c5182675d2db6ab2e23f433f07b287426e3800bf9edf9ee18f12b7",
+        "fort.8": "dc651ddc901fcc13bf2f64b63d7366bd7178c55c33177c990f9adedbfec24354",
+        "tas": "6eb32ab19cbccb5617e7035ba3c765939883dd30aa114b23beeb812eb9533a47"
+      }
+    }
+  ],
+  "acceptance": "Correction <=1e-5, total/emergent flux error <=.002, opacity/chemistry/hydrostatic support and an optical-depth-100 bracket; all unchanged.",
+  "failed_adjacent_source": {
+    "teff_K": 4600,
+    "log_g": 6.1,
+    "CPU_seconds": 1500.744498,
+    "reason": "source process exit -24",
+    "selected_for_evolution": false
+  }
+}

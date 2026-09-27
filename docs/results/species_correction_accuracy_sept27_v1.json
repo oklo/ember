@@ -84,5 +84,35 @@
     "out/species-correction-floor-sept27-v1/pilot/final.checkpoint": "20be4cb779d74cec850b85dde24506cd06e54bff78066a8a85af15cbd3307e09",
     "out/species-correction-floor-sept27-v1/ember-evolve": "b4734b81c8cacf17aa7da72778586fc894be79a104cd8fa6e996a080e22a86bb",
     "out/species-correction-floor-sept27-v1/structure.txt": "4cb69764817531ee2a61b6b2f6263104a9fb4fa7714e6e90f106bee93954d234"
+  },
+  "selected_continuation": {
+    "created_utc": "2026-09-27T08:59:02.284438+00:00",
+    "status": "running",
+    "previous_run": "out/continuous-lifetime-sept27-v8",
+    "previous_accepted_limit": 7521,
+    "retained_recovery": "out/species-correction-floor-sept27-v1/pilot",
+    "recovery_accepted_limit": 7538,
+    "initial_age_years": 3560514693151.8994,
+    "command": [
+      "/Users/greglaughlin/Projects/ember/out/continuous-lifetime-sept27-v9/ember-evolve",
+      "--lifetime",
+      "/Users/greglaughlin/Projects/ember/out/continuous-lifetime-sept27-v9/data/configuration.txt",
+      "4500000000000",
+      "/Users/greglaughlin/Projects/ember/out/continuous-lifetime-sept27-v9/evolution",
+      "--restart",
+      "/Users/greglaughlin/Projects/ember/out/continuous-lifetime-sept27-v9/restart.checkpoint",
+      "--max-steps",
+      "25000",
+      "--cpu-seconds",
+      "4499.910652"
+    ],
+    "maximum_cpu_seconds": 4499.910652,
+    "source_commit": "85999d5",
+    "scope": "Continue the verified17-step100Myr recovery from the same accepted v8 star. The original v8 prefix ends at the recovery seed; its later smaller-step branch remains preserved as a comparison. All physical inputs, global audits and time-error controls unchanged.",
+    "validation": "docs/results/species_correction_accuracy_sept27_v1.json",
+    "executable_sha256": "b4734b81c8cacf17aa7da72778586fc894be79a104cd8fa6e996a080e22a86bb",
+    "restart_sha256": "20be4cb779d74cec850b85dde24506cd06e54bff78066a8a85af15cbd3307e09",
+    "pid": 18036,
+    "caffeinate_pid": 18037
   }
 }

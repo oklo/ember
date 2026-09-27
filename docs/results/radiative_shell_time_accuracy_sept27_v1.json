@@ -1,0 +1,102 @@
+{
+  "created_utc": "2026-09-27T08:43:14.813972+00:00",
+  "scope": "Exact common100Myr interval during the growth of the radiative shell, using the same accepted starting state and executable. Only species time-error tolerance changes1e-7 to1e-6; no physical, structure/energy error, local solve or conservation changes.",
+  "initial_age_years": 3560176775296.7104,
+  "final_age_years": 3560276775296.7104,
+  "comparison": {
+    "radius": 6.803821891657802e-07,
+    "density": 2.3895936611921652e-06,
+    "temperature": 3.991178754151861e-06,
+    "maximum_stored_composition_absolute_difference": 3.15209146117823e-07,
+    "surface_and_inventory_relative_difference": {
+      "radius_Rsun": -6.376577232902747e-07,
+      "Teff_K": -5.635916622281911e-08,
+      "luminosity_Lsun": -1.5007513978204656e-06,
+      "central_T_K": 3.912309664455549e-06,
+      "H_mass_g": 7.378524902179606e-09,
+      "He3_mass_g": -2.9778117925927106e-06,
+      "surface_X": -1.7710490296529713e-08,
+      "surface_Z": 2.8748148306334542e-09
+    },
+    "cases": [
+      {
+        "years": 3560276775296.7104,
+        "step_years": 4431260.129433417,
+        "accepted": 7173,
+        "rejected": 227,
+        "radius_Rsun": 0.14193259167366448,
+        "Teff_K": 3252.958429236101,
+        "luminosity_Lsun": 0.0020322259725879164,
+        "nuclear_fraction": 1.0019474169888336,
+        "central_T_K": 8589958.39100881,
+        "H_mass_g": 3.4151388140249027e+31,
+        "He3_mass_g": 1.3800988600927314e+29,
+        "D_mass_g": 0,
+        "surface_X": 0.1738119992745946,
+        "surface_Z": 0.01989453571194994,
+        "error_norm": 0.4410614732599724,
+        "initial_D_approximation": 0,
+        "omitted_mixing_heat_fraction": 0,
+        "gross_mixing_heat_fraction": 0,
+        "burn_gradient_estimate": 1.5892132420657364e-12,
+        "drift_gradient_proxy": 8.107029179574204e-07,
+        "kinetic_heat_proxy": 0.01267982675719814,
+        "convective_mass_fraction": 0.6643871023736928,
+        "radiative_boundaries": 137,
+        "relative_mixing_gradient": 6.458925034290586e-11,
+        "convective_travel_years": 0.5612867249625523,
+        "cpu_seconds": 40.474447,
+        "accepted_in_comparison": 31
+      },
+      {
+        "years": 3560276775296.7104,
+        "step_years": 1295621.9977995793,
+        "accepted": 7161,
+        "rejected": 222,
+        "radius_Rsun": 0.1419325011692512,
+        "Teff_K": 3252.958245902076,
+        "luminosity_Lsun": 0.0020322229227219472,
+        "nuclear_fraction": 1.0019461949076884,
+        "central_T_K": 8589991.99758604,
+        "H_mass_g": 3.4151388392235897e+31,
+        "He3_mass_g": 1.3800947504180709e+29,
+        "D_mass_g": 0,
+        "surface_X": 0.17381199619629886,
+        "surface_Z": 0.01989453576914305,
+        "error_norm": 0.0046518144596204535,
+        "initial_D_approximation": 0,
+        "omitted_mixing_heat_fraction": 0,
+        "gross_mixing_heat_fraction": 0,
+        "burn_gradient_estimate": 1.5892174711902873e-12,
+        "drift_gradient_proxy": 8.107032670611575e-07,
+        "kinetic_heat_proxy": 0.012679863203566127,
+        "convective_mass_fraction": 0.6643871023736928,
+        "radiative_boundaries": 137,
+        "relative_mixing_gradient": 6.458959901349408e-11,
+        "convective_travel_years": 0.561292279922114,
+        "cpu_seconds": 239.20953,
+        "accepted_in_comparison": 19
+      }
+    ]
+  },
+  "interval_counts": {
+    "1e-7": {
+      "accepted": 31,
+      "rejected": 11,
+      "CPU_seconds": 341.833929
+    },
+    "1e-6": {
+      "accepted": 19,
+      "rejected": 6,
+      "CPU_seconds": 239.224198
+    }
+  },
+  "timing_limit": "Initial controls ran concurrently and CPU cost varies with scheduling; use the accepted/rejected counts and matched-state accuracy as the primary evidence. Baseline was continued to the exact common endpoint after its original CPU allocation.",
+  "selected_setting": 1e-06,
+  "qualification": "Supported by this100Myr radiative-shell interval, not an accuracy proof for a future rapid-burning episode. Existing structure, nuclear-power and conservation checks remain enforced.",
+  "sha256": {
+    "out/radiative-shell-time-accuracy-sept27-v1/snapshot.checkpoint": "51bc0ff49ac4afc61a86d0df2460915e5cb2ad3120b9e72d0bf4dc2776e87609",
+    "out/radiative-shell-time-accuracy-sept27-v1/baseline/continuation/final.checkpoint": "b92989e07276318830523d42ae52caf31f6376865c469a499ead7c3e6b812706",
+    "out/radiative-shell-time-accuracy-sept27-v1/looser/evolution/final.checkpoint": "c71d2c8bbbe84a04fd522dd7839d68ece063702f22e64f9b55e464a295adb082"
+  }
+}
