@@ -2,6 +2,7 @@
 #include "ember/opacity_mixture.hpp"
 #include "ember/opacity_metal_lower_continuation.hpp"
 #include "ember/interp.hpp"
+#include "ember/opacity_hydrogen_continuation.hpp"
 #include <fstream>
 #include <iomanip>
 
@@ -42,7 +43,7 @@ inline Composition at(const Composition& c, double z) {
 // unchanged. Selecting this class requires separate physical comparisons.
 class HydrogenShareMixtureOpacity final : public Opacity {
 public:
-  explicit HydrogenShareMixtureOpacity(const std::filesystem::path& path) {
+  explicit HydrogenShareMixtureOpacity(const std::filesystem::path& path, bool tiny_zero_metal_endpoint=false) {
     std::ifstream in(path);
     std::string magic, axis, label;
     int version;
@@ -64,7 +65,14 @@ public:
       if (std::abs(table->metallicity() - z) > 1e-12)
         throw std::runtime_error("HydrogenShareMixtureOpacity: source Z mismatch");
       z_.push_back(z);
-      tables_.push_back(std::move(table));
+      if(tiny_zero_metal_endpoint && z==0 && table->range().X_max<1.) {
+        const double anchor=table->range().X_max;
+        if(anchor<1.-1e-6)throw std::domain_error("zero-metal endpoint continuation exceeds trace-helium interval");
+        // The AESOPUS endpoint is X=.9999999. Continue only this last
+        // trace-helium interval, retaining all T/density limits and source nodes.
+        auto endpoint=std::make_unique<HydrogenOpacityContinuation>(*table,anchor,1e-4,1.);
+        endpoint_sources_.push_back(std::move(table));tables_.push_back(std::move(endpoint));
+      } else tables_.push_back(std::move(table));
     }
     if (in >> magic)
       throw std::runtime_error("HydrogenShareMixtureOpacity: trailing manifest data");
@@ -96,7 +104,8 @@ public:
   const char* name() const override { return "source opacity at fixed hydrogen share"; }
 private:
   std::vector<double> z_;
-  std::vector<std::unique_ptr<TabulatedOpacity>> tables_;
+  std::vector<std::unique_ptr<TabulatedOpacity>> endpoint_sources_;
+  std::vector<std::unique_ptr<Opacity>> tables_;
   std::pair<std::size_t,double> interval(const Composition& c) const {
     hydrogen_share::check(c);
     if (c.Z() < z_.front()-2e-14 || c.Z() > z_.back()+2e-14)
@@ -116,7 +125,7 @@ public:
   LowerMetalHydrogenShareOpacity(const Opacity& source, double anchor,
       double minimum, Method method, double step = .01)
       : source_(source), anchor_(anchor), minimum_(minimum), step_(step), method_(method) {
-    if (!std::isfinite(anchor+minimum+step) || minimum <= 0 || anchor <= minimum ||
+    if (!std::isfinite(anchor+minimum+step) || minimum < 0 || anchor <= minimum ||
         step <= 0 || anchor+step >= 1 || source.includes_conduction())
       throw std::invalid_argument("LowerMetalHydrogenShareOpacity: invalid radiative interval");
   }

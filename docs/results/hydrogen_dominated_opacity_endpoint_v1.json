@@ -1,0 +1,194 @@
+{
+  "created_utc": "2026-09-16T00:45:07.586233+00:00",
+  "passed": true,
+  "checks": [
+    {
+      "T": 4000.0,
+      "rho": 6.400000000000001e-09,
+      "fractional_opacity_change": 1.4306156526089353e-07,
+      "log_linear_identity_error": 3.1936164960317637e-16
+    },
+    {
+      "T": 4000.0,
+      "rho": 6.4e-08,
+      "fractional_opacity_change": 1.4398110481650406e-07,
+      "log_linear_identity_error": 4.4327216716309704e-16
+    },
+    {
+      "T": 4000.0,
+      "rho": 6.4e-07,
+      "fractional_opacity_change": 5.5226169859423635e-08,
+      "log_linear_identity_error": 3.7654764966895196e-16
+    },
+    {
+      "T": 4000.0,
+      "rho": 6.4000000000000006e-06,
+      "fractional_opacity_change": -8.899263792550016e-08,
+      "log_linear_identity_error": 2.613384236434889e-16
+    },
+    {
+      "T": 4000.0,
+      "rho": 6.400000000000001e-05,
+      "fractional_opacity_change": -3.879289389718821e-08,
+      "log_linear_identity_error": 2.0345792935285868e-16
+    },
+    {
+      "T": 4000.0,
+      "rho": 0.00064,
+      "fractional_opacity_change": -1.0367546743328404e-07,
+      "log_linear_identity_error": 3.5649216602668117e-16
+    },
+    {
+      "T": 6143.810358,
+      "rho": 2.3190675840950574e-08,
+      "fractional_opacity_change": 1.460579521772587e-07,
+      "log_linear_identity_error": 2.303428146557143e-16
+    },
+    {
+      "T": 6143.810358,
+      "rho": 2.319067584095057e-07,
+      "fractional_opacity_change": 1.4913784518455486e-07,
+      "log_linear_identity_error": 8.607479988571236e-17
+    },
+    {
+      "T": 6143.810358,
+      "rho": 2.319067584095057e-06,
+      "fractional_opacity_change": 1.5043383649882003e-07,
+      "log_linear_identity_error": 1.4644564383316412e-16
+    },
+    {
+      "T": 6143.810358,
+      "rho": 2.3190675840950573e-05,
+      "fractional_opacity_change": 1.4179742535702644e-07,
+      "log_linear_identity_error": 1.5274291027952622e-16
+    },
+    {
+      "T": 6143.810358,
+      "rho": 0.0002319067584095057,
+      "fractional_opacity_change": 7.76395192580992e-08,
+      "log_linear_identity_error": 3.4335417547150964e-16
+    },
+    {
+      "T": 6143.810358,
+      "rho": 0.0023190675840950572,
+      "fractional_opacity_change": -5.6850135710107e-09,
+      "log_linear_identity_error": 1.6403542283778377e-16
+    },
+    {
+      "T": 10000.0,
+      "rho": 1.0000000000000002e-07,
+      "fractional_opacity_change": 1.2064251531107573e-07,
+      "log_linear_identity_error": 1.845192454166529e-16
+    },
+    {
+      "T": 10000.0,
+      "rho": 1.0000000000000002e-06,
+      "fractional_opacity_change": 1.2623052070281915e-07,
+      "log_linear_identity_error": 3.7375230859411476e-16
+    },
+    {
+      "T": 10000.0,
+      "rho": 1.0000000000000003e-05,
+      "fractional_opacity_change": 1.3540699228542508e-07,
+      "log_linear_identity_error": 2.7873691713145566e-16
+    },
+    {
+      "T": 10000.0,
+      "rho": 0.00010000000000000002,
+      "fractional_opacity_change": 1.4274975490558006e-07,
+      "log_linear_identity_error": 5.540949404269751e-16
+    },
+    {
+      "T": 10000.0,
+      "rho": 0.0010000000000000002,
+      "fractional_opacity_change": 1.3671985521490626e-07,
+      "log_linear_identity_error": 5.854434974559587e-17
+    },
+    {
+      "T": 10000.0,
+      "rho": 0.010000000000000002,
+      "fractional_opacity_change": 9.808750545126088e-08,
+      "log_linear_identity_error": 5.749910050077223e-16
+    },
+    {
+      "T": 17480.0,
+      "rho": 5.341020991999999e-07,
+      "fractional_opacity_change": 1.7393452345082494e-07,
+      "log_linear_identity_error": 3.456808426287192e-16
+    },
+    {
+      "T": 17480.0,
+      "rho": 5.341020991999999e-06,
+      "fractional_opacity_change": 1.366991766449388e-07,
+      "log_linear_identity_error": 7.79498745671919e-16
+    },
+    {
+      "T": 17480.0,
+      "rho": 5.3410209919999994e-05,
+      "fractional_opacity_change": 1.2625751177886002e-07,
+      "log_linear_identity_error": 3.4529605144264933e-16
+    },
+    {
+      "T": 17480.0,
+      "rho": 0.0005341020991999999,
+      "fractional_opacity_change": 1.3308955848501114e-07,
+      "log_linear_identity_error": 5.667091933055026e-16
+    },
+    {
+      "T": 17480.0,
+      "rho": 0.005341020992,
+      "fractional_opacity_change": 1.445963895285729e-07,
+      "log_linear_identity_error": 5.538957288656927e-16
+    },
+    {
+      "T": 17480.0,
+      "rho": 0.05341020991999999,
+      "fractional_opacity_change": 1.119118973047506e-07,
+      "log_linear_identity_error": 7.567608079473673e-16
+    },
+    {
+      "T": 25000.0,
+      "rho": 1.5625000000000005e-06,
+      "fractional_opacity_change": 1.944196048597746e-07,
+      "log_linear_identity_error": 6.765852749019259e-16
+    },
+    {
+      "T": 25000.0,
+      "rho": 1.5625000000000004e-05,
+      "fractional_opacity_change": 1.6863053131643824e-07,
+      "log_linear_identity_error": 5.953898612484312e-16
+    },
+    {
+      "T": 25000.0,
+      "rho": 0.00015625000000000003,
+      "fractional_opacity_change": 1.3522186725900553e-07,
+      "log_linear_identity_error": 1.0604333956641443e-15
+    },
+    {
+      "T": 25000.0,
+      "rho": 0.0015625000000000003,
+      "fractional_opacity_change": 1.309744255273415e-07,
+      "log_linear_identity_error": 8.738150702552972e-16
+    },
+    {
+      "T": 25000.0,
+      "rho": 0.015625000000000003,
+      "fractional_opacity_change": 1.3984336066918956e-07,
+      "log_linear_identity_error": 9.578315271396225e-16
+    },
+    {
+      "T": 25000.0,
+      "rho": 0.15625000000000003,
+      "fractional_opacity_change": 1.1341859607050253e-07,
+      "log_linear_identity_error": 1.6385501640054718e-16
+    }
+  ],
+  "maximum_fractional_opacity_change": 1.944196048597746e-07,
+  "maximum_log_linear_identity_error": 1.0604333956641443e-15,
+  "scope": "Explicit continuation from actual AESOPUS H=.9999999 to pure hydrogen at zero metals. Actual source values at and below anchor retained; thermal/density coverage unchanged. Finite local source checks, not an independent new opacity calculation.",
+  "input_sha256": {
+    "/tmp/ember-check-pure-h-opacity-limit-v1.py": "fe6c65a6d5af73c0036805a49f24a93650391b1b194597930c190cce2f5514bc",
+    "/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/opacity": "6b0e6d1dbc38946af3cfb9a78c30878ea66662eda71eb4298836bc9e4b3ec365",
+    "/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/include/ember/opacity_hydrogen_share.hpp": "3b695444b7d3a896ffe138933ff9e52ae6e1ee32aed6112894019c91d7efde67"
+  }
+}

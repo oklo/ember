@@ -1,0 +1,292 @@
+{
+  "input_sha256": {
+    "data/atmosphere/nongrey_gs98_z020_x085_t4000_v1.dat": "ebb45869759deaa3ca2a0fa40e1c3db2828bf1998a696cf93990fba0e6dbc914",
+    "docs/results/warm_metal_atmosphere_reference_v2.json": "44217f9bb8b8d0a0130a90f029c7336d5e9675eccd92374da7c3b2e6cd234781",
+    "docs/results/warm_metal_atmosphere_reference_v3.json": "30615df69cf20c013a648b8f68903b2046687632d9e2f9a2cf3ce879c662dd0c",
+    "docs/results/depleted_metal_atmosphere_response_v2.json": "b6b4ad0a37e3ba6af495f28daa1c2fd0b9e3a72578220a9848e0604ce8a92693",
+    "docs/results/z001_atmosphere_response_v1.json": "5aac1f850f775e4ec2c8caad91afb5262b759dce9e31e7fac88988bd8ecd8518",
+    "docs/results/z0005_atmosphere_response_v1.json": "8396f1789338a0fda679490c33a6359f0edac7f615eff8a7e389bf5be6a23fec"
+  },
+  "unchanged_present_states": 372,
+  "recovered_reference_states": [
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        3.6232492903979003,
+        4.9
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-x070-t4400-v1/x450-y000-t4200-g490"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        3.6232492903979003,
+        5.15
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-x070-t4400-v1/x450-y000-t4200-g515"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        3.6434526764861874,
+        4.9
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-x070-t4400-v1/x450-y000-t4400-g490"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.0,
+        3.6434526764861874,
+        5.15
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-t4400-column-v1/x450-y000-t4400-g515-tau1000"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3.6232492903979003,
+        4.9
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-x070-t4400-v1/x450-y120-t4200-g490"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3.6232492903979003,
+        5.15
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-x070-t4400-v1/x450-y120-t4200-g515"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3.6434526764861874,
+        4.9
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-x070-t4400-v1/x450-y120-t4400-g490"
+    },
+    {
+      "coordinates": [
+        0.45,
+        0.12,
+        3.6434526764861874,
+        5.15
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-t4400-short-v1/x450-y120-t4400-g515-tau1000"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        3.6232492903979003,
+        4.9
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-x070-t4400-v1/x700-y000-t4200-g490"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        3.6232492903979003,
+        5.15
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-x070-t4400-v1/x700-y000-t4200-g515"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        3.6434526764861874,
+        4.9
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-x070-t4400-v1/x700-y000-t4400-g490"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.0,
+        3.6434526764861874,
+        5.15
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-t4400-short-v1/x700-y000-t4400-g515-tau1000"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3.6232492903979003,
+        4.9
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-x070-t4400-v1/x700-y120-t4200-g490"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3.6232492903979003,
+        5.15
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-x070-t4400-v1/x700-y120-t4200-g515"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3.6434526764861874,
+        4.9
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-x070-t4400-v1/x700-y120-t4400-g490"
+    },
+    {
+      "coordinates": [
+        0.7,
+        0.12,
+        3.6434526764861874,
+        5.15
+      ],
+      "report": "warm_metal_atmosphere_reference_v2",
+      "work": "/tmp/ember-primary-nongrey-t4400-short-v1/x700-y120-t4400-g515-tau1000"
+    },
+    {
+      "coordinates": [
+        0.85,
+        0.0,
+        3.6232492903979003,
+        4.9
+      ],
+      "report": "warm_metal_atmosphere_reference_v3",
+      "work": "/tmp/ember-primary-nongrey-x085-t4400-v1/x850-y000-t4200-g490"
+    },
+    {
+      "coordinates": [
+        0.85,
+        0.0,
+        3.6232492903979003,
+        5.15
+      ],
+      "report": "warm_metal_atmosphere_reference_v3",
+      "work": "/tmp/ember-primary-nongrey-x085-t4400-v1/x850-y000-t4200-g515"
+    },
+    {
+      "coordinates": [
+        0.85,
+        0.0,
+        3.6434526764861874,
+        4.9
+      ],
+      "report": "warm_metal_atmosphere_reference_v3",
+      "work": "/tmp/ember-primary-nongrey-x085-t4400-v1/x850-y000-t4400-g490"
+    },
+    {
+      "coordinates": [
+        0.85,
+        0.0,
+        3.6434526764861874,
+        5.15
+      ],
+      "report": "warm_metal_atmosphere_reference_v3",
+      "work": "/tmp/ember-primary-nongrey-x085-t4400-recovery-v1/x850-y000-t4400-g515"
+    },
+    {
+      "coordinates": [
+        0.85,
+        0.12,
+        3.6232492903979003,
+        4.9
+      ],
+      "report": "warm_metal_atmosphere_reference_v3",
+      "work": "/tmp/ember-primary-nongrey-x085-t4400-v1/x850-y120-t4200-g490"
+    },
+    {
+      "coordinates": [
+        0.85,
+        0.12,
+        3.6232492903979003,
+        5.15
+      ],
+      "report": "warm_metal_atmosphere_reference_v3",
+      "work": "/tmp/ember-primary-nongrey-x085-t4400-v1/x850-y120-t4200-g515"
+    },
+    {
+      "coordinates": [
+        0.85,
+        0.12,
+        3.6434526764861874,
+        4.9
+      ],
+      "report": "warm_metal_atmosphere_reference_v3",
+      "work": "/tmp/ember-primary-nongrey-x085-t4400-v1/x850-y120-t4400-g490"
+    },
+    {
+      "coordinates": [
+        0.85,
+        0.12,
+        3.6434526764861874,
+        5.15
+      ],
+      "report": "warm_metal_atmosphere_reference_v3",
+      "work": "/tmp/ember-primary-nongrey-x085-t4400-recovery-v1/x850-y120-t4400-g515"
+    }
+  ],
+  "recovered_responses": [
+    {
+      "file": "metal_z005_z0025.dat",
+      "reference_Z": 0.005,
+      "source_Z": 0.0025,
+      "paired_sources": 12,
+      "original_report": "depleted_metal_atmosphere_response_v2"
+    },
+    {
+      "file": "metal_z0025_z001.dat",
+      "reference_Z": 0.0025,
+      "source_Z": 0.001,
+      "paired_sources": 8,
+      "original_report": "z001_atmosphere_response_v1"
+    },
+    {
+      "file": "metal_z001_z0005.dat",
+      "reference_Z": 0.001,
+      "source_Z": 0.0005,
+      "paired_sources": 8,
+      "original_report": "z0005_atmosphere_response_v1"
+    }
+  ],
+  "limitations": [
+    "No new atmosphere solution or independent physical validation.",
+    "Gas only, tau=100, fixed GS98 ratios, separable small-He3 response.",
+    "The reference H axis ends at .85; later H-rich families remain separate.",
+    "Missing source values remain masked; derivative changes at newly supported edges need checking."
+  ],
+  "output_sha256": {
+    "metal_z0025_z001.dat": "5d02ce514922663bb01615729a904881120ff64790982396b8e7a1736ab7bd3d",
+    "metal_z020_z010.dat": "7cffa901b19a837a0427818d9a10c0e6ad3c3b2c52d20fc484c4878cbb9b666a",
+    "metal_z001_z0005.dat": "18c3570f9857ab9f19f009f30d02dc6083f34b6eed2136088ac16c97099aeff5",
+    "metal_z010_z005.dat": "0885cf8e405227c4a7612190b03c295f916d12c076b79869c26bc428049137b1",
+    "metal_z005_z0025.dat": "e067da028e4e27deb40460751464c06e359f8d55c1385463af71373498ef15f7",
+    "metal_chain.dat": "706006323179bb9435bdcb79dfe88f366dbf482fe2a0eff8cfc2266469121a41",
+    "main_sequence_reference.dat": "bfafea3f3f2920c209d4a43fdd6ff34dd51746d08acc4a589c11b0e72afac6ab",
+    "metal_chain_extended.dat": "50db71019c9b69e4b1ab801fd5a5639b4fe1885c7cd78ea051179869c7d7fc6e"
+  }
+}

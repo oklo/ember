@@ -15,7 +15,7 @@ import shutil
 
 INPUT_KEYS = ("eos", "opacity_low", "opacity_warm", "opacity_bridge",
               "opacity_hot", "conduction", "atmosphere", "collisions", "composition")
-OPTIONAL_INPUT_KEYS = ("atmosphere_main_sequence",)
+OPTIONAL_INPUT_KEYS = ("atmosphere_main_sequence", "atmosphere_metal_chain", "opacity_hydrogen_response")
 
 
 def input_keys(configuration):
@@ -23,6 +23,9 @@ def input_keys(configuration):
 
 
 def is_family(path, role):
+    if role == "atmosphere_metal_chain":
+        with path.open() as stream:
+            return stream.readline().startswith("EMBER_METAL_ATMOSPHERE_CHAIN ")
     if role == "eos":
         with path.open("rb") as stream:
             header = stream.readline(128)
@@ -61,6 +64,15 @@ def family(path, role):
             count *= int(row[1])
         header, rows = lines[:4], [shlex.split(line) for line in lines[4:]]
         width = 1
+    elif role == "atmosphere_metal_chain":
+        row = shlex.split(lines[0])
+        if len(row) != 3 or row[:2] != ["EMBER_METAL_ATMOSPHERE_CHAIN", "1"]:
+            raise ValueError(f"unsupported atmosphere chain: {path}")
+        count = int(row[2])
+        if not 1 <= count <= 16:
+            raise ValueError(f"invalid atmosphere interval count: {path}")
+        header, rows = lines[:1], [shlex.split(line) for line in lines[1:]]
+        width = 2
     else:
         row = shlex.split(lines[0])
         if len(row) != 5 or row[:2] != ["EMBER_OPACITY_MIXTURE", "1"]:

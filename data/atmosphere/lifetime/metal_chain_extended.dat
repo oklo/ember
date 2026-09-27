@@ -1,0 +1,6 @@
+EMBER_METAL_ATMOSPHERE_CHAIN 1 5
+.02 "metal_z020_z010.dat"
+.01 "metal_z010_z005.dat"
+0.0050000000000000001 "metal_z005_z0025.dat"
+0.0025000000000000001 "metal_z0025_z001.dat"
+0.001 "metal_z001_z0005.dat"

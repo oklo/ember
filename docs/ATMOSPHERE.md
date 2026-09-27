@@ -12,6 +12,40 @@ temperature and gravity coverage. Its composition mapping, interpolation and
 physical checks are documented in [NONGREY.md](NONGREY.md). The continuous
 evolution driver selects its atmosphere file explicitly.
 
+## Metal settling
+
+The lifetime driver can select the existing measured metal responses from the
+start of contraction:
+
+```text
+atmosphere_metal_chain "metal_chain_extended.dat"
+atmosphere_metal_join_low ".01998"
+atmosphere_metal_join_high ".01999"
+```
+
+This requires a main-sequence reference atmosphere and the bounded fixed-Z
+option below. Above the upper join, the contraction/MS boundary is returned
+exactly. Below the lower join, `MetalAtmosphereChain` applies the measured
+response in each supported Z interval. Between them, `MetalIntervalAtmosphere`
+interpolates log temperature and log gas pressure at the two fixed composition
+anchors. Both sides use the same optical depth. Radiation pressure is added
+once, and density is inverted using the actual composition. Temperature and
+pressure are continuous; composition slopes may differ across interval edges.
+No unsupported lower-metal source is queried during early contraction.
+
+The supplied chain spans **Z=.02 to .0005**, subject to its H/He3/T/g masks.
+It assumes fixed GS98 metal ratios and a separable response for **He3≤.003**.
+The reference currently ends at **H=.85**; this selection alone does not cover
+the nearly pure-hydrogen atmosphere or WD cooling. Missing sources still reject
+a query. No grey fallback or abundance clipping is introduced.
+
+`scripts/recover_lifetime_atmospheres.py` reconstructs three measured response
+tables and **24** reference states from their saved numerical source reports.
+It retains every existing reference value and records the source hashes in
+`data/atmosphere/lifetime/recovery.json`. The five response tables, interval
+coordinates and join settings enter restart identity. The runtime data packager
+includes each child table and rewrites only its filename.
+
 ## Small metal changes
 
 The default `--lifetime` selection requires the atmosphere's recorded metal

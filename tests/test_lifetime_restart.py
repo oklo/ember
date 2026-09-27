@@ -118,6 +118,55 @@ def main():
                        expected=1, configuration=changed)
         assert "checkpoint" in rejected.stderr
 
+        # The later metal-dependent boundary must be selectable from the PMS
+        # without querying its unsupported early-temperature/He3 cells. Its
+        # response payloads and interval coordinates remain restart identities.
+        response_dir = Path(__file__).resolve().parents[1] / "data/atmosphere/lifetime"
+        chain_rows = ["EMBER_METAL_ATMOSPHERE_CHAIN 1 2"]
+        for z, name in ((".02", "metal_z020_z010.dat"), (".01", "metal_z010_z005.dat")):
+            chain_rows.append(z + " " + json.dumps(payload(response_dir / name)))
+        chain_path = relocated / "metal-chain.dat"
+        chain_path.write_text("\n".join(chain_rows) + "\n")
+        chain_settings = {
+            "atmosphere_metals": "bounded_fixed_Z", "atmosphere_maximum_delta_Z": "2e-5",
+            "atmosphere_main_sequence": settings["atmosphere"],
+            "atmosphere_join_log_g_low": "4.95", "atmosphere_join_log_g_high": "5.1",
+            "atmosphere_join_hydrogen_low": ".6985", "atmosphere_join_hydrogen_high": ".6995",
+            "atmosphere_metal_chain": chain_path.name,
+            "atmosphere_metal_join_low": ".01998", "atmosphere_metal_join_high": ".01999",
+            "zone_threads": "2", "initial_step_years": "1000"}
+        # Use exactly the original invocation's timestep for the comparison.
+        initial_settings = dict(shlex.split(line) for line in config.read_text().splitlines()
+                                if line.strip() and not line.startswith("#"))
+        chain_settings["initial_step_years"] = initial_settings["initial_step_years"]
+        chain_config = configuration_file("with-metal-chain.txt", chain_settings)
+        run("with-metal-chain", maximum_steps=3, configuration=chain_config)
+        assert history(work / "with-metal-chain") == history(work / "prefix")
+        restart_chain = ("--restart", str(work / "with-metal-chain/final.checkpoint"))
+        renamed_chain = relocated / "renamed-metal-chain.dat"
+        renamed_chain.write_bytes(chain_path.read_bytes())
+        renamed_config = configuration_file("renamed-chain.txt", dict(chain_settings,
+                                           atmosphere_metal_chain=renamed_chain.name))
+        run("renamed-chain", restart_chain, configuration=renamed_config)
+        assert history(work / "renamed-chain") == history(work / "resumed")
+        broken_rows = chain_rows[:]
+        # Quoted manifest filenames use the C++ quoted-string convention.
+        broken_rows[2] = ".009 " + json.dumps(shlex.split(chain_rows[2])[1])
+        (relocated / "changed-chain.dat").write_text("\n".join(broken_rows) + "\n")
+        bad_chain = configuration_file("changed-chain.txt", dict(chain_settings,
+                                       atmosphere_metal_chain="changed-chain.dat"))
+        rejected = run("chain-axis-change", restart_chain, expected=1, configuration=bad_chain)
+        assert "checkpoint" in rejected.stderr and "atmosphere.metal_chain" in rejected.stderr
+
+        # A local nonlinear correction tolerance and a global inventory budget
+        # measure different quantities; neither must be ordered against the other.
+        independent = configuration_file("independent-tolerances.txt", {
+            "coupling_abundance_tolerance": "1e-12", "inventory_abundance_tolerance": "1e-14",
+            "initial_step_years": "1000"})
+        run("independent-tolerances", maximum_steps=1, configuration=independent)
+        audit_rows = [json.loads(line) for line in (work / "independent-tolerances/attempts.jsonl").read_text().splitlines()]
+        assert audit_rows and audit_rows[-1]["accepted"]
+
         # A corrupted table must be rejected by identity, before its parser is
         # constructed. Do not edit a hard link to the retained source dataset.
         (relocated / "broken-conduction.dat").write_text("not a conduction table\n")

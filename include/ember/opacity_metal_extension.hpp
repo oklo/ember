@@ -73,7 +73,7 @@ private:
   double anchor_,maximum_,step_;Method method_;
   void check(const Composition& c) const {
     if(c.basis!=AbundanceBasis::atomic_mass || c.X[1]!=0 ||
-       !std::isfinite(c.Z()) || c.Z()<=0 || c.Z()>maximum_+2e-14 ||
+       !std::isfinite(c.Z()) || c.Z()<0 || c.Z()>maximum_+2e-14 ||
        std::abs(c.sum()-1)>1e-10)
       throw std::domain_error("MetalOpacityExtension: composition outside interval");
     for(double x:c.X) if(!std::isfinite(x) || x<0)

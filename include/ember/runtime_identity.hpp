@@ -24,6 +24,24 @@ public:
     values[role]=text.str();
   }
 
+  void metal_atmosphere_chain(const std::string& role,const fs::path& path) {
+    std::ifstream in(path);std::string magic,name;unsigned version{},count{};
+    in>>magic>>version;
+    if(!in || version!=1)throw std::runtime_error("invalid metal-atmosphere identity format");
+    if(magic=="EMBER_METAL_ATMOSPHERE_RESPONSE") {file(role+".response",path);return;}
+    if(magic!="EMBER_METAL_ATMOSPHERE_CHAIN" || !(in>>count) || count<1 || count>16)
+      throw std::runtime_error("invalid metal-atmosphere identity chain");
+    values[role+".format"]=magic+" "+std::to_string(version);
+    number(role+".size",count);
+    for(unsigned i=0;i<count;++i) {
+      const auto interval=role+".interval."+std::to_string(i);
+      number(interval+".reference_Z",read_representable_double(in));
+      if(!(in>>std::quoted(name)) || name.empty())throw std::runtime_error("missing metal-atmosphere response");
+      file(interval+".response",path.parent_path()/name);
+    }
+    if(in>>name)throw std::runtime_error("trailing metal-atmosphere identity data");
+  }
+
   void family(const std::string& role,const fs::path& path,bool eos) {
     std::ifstream in(path);std::string magic,label,name;int version{};std::size_t count=1;
     in>>magic>>version;

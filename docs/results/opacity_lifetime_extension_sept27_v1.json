@@ -1,0 +1,38 @@
+{
+  "created_utc": "2026-09-27T03:39:37.707405+00:00",
+  "scope": "Integration of the already studied composition-opacity approximations into the common lifetime driver",
+  "selected_for_continuous_run": false,
+  "queries": 34304,
+  "supported": 34304,
+  "profiles": 67,
+  "maximum_temperature_density_derivative_error": 1.9505691408738812e-06,
+  "maximum_relative_change_on_old_base_support": 0.00033288057456104525,
+  "early_settling_maximum_relative_change": 2.807502912127724e-05,
+  "source_controls": [
+    "docs/results/dense_hydrogen_temperature_selection_v2.json",
+    "docs/results/dense_hydrogen_temperature_controls_v2.json",
+    "docs/results/metal016_opacity_diagnosis_v1.json",
+    "docs/results/hydrogen_dominated_material_control_v3.json",
+    "docs/results/hydrogen_dominated_opacity_endpoint_v1.json"
+  ],
+  "source_sha256": {
+    "include/ember/opacity_radiative.hpp": "67ab9bc7837ade6226719289cca81c76104f785f4136e5cf03d13cf36645d815",
+    "include/ember/opacity_hydrogen_dense.hpp": "4b0e81c401ae8bf1c2bd937f45cb6ba35b7439f6cb142075d4c585445e500caf",
+    "include/ember/opacity_hydrogen_share.hpp": "9b26b52da33abbea04762fd37d11df6df4c9c3f869920614cbddc3824059b9ed",
+    "include/ember/opacity_metal_extension.hpp": "193726c0353fb64203aa5bec34ba70ec994922cd1438f655c745fae213f16f51",
+    "apps/lifetime_driver.cpp": "937fbd9dcc0458db5c5a25131b7b92d7850e4cfe5fe5bb7653a4a2f253e583ba",
+    "tests/test_opacity_radiative.cpp": "c6a2d5eaa801c12539ef7d6be63327e548636580c06e52677a8d5c644980d402",
+    "tests/test_screened_envelope_evolution.cpp": "98e146227b93fe6bf41e4eb9f82ba3917c27370955ebb0d80e49165fcf4672a9",
+    "data/opacity/lifetime/provenance.json": "5cbae25650d2396964ce75861e46a6a98b10f161103aa534941651aa0d21f006",
+    "data/opacity/lifetime/oplib_hydrogen_z0.01.dat": "f19f3658edaed6223f35941a646ba766d89bcb948ba7a8211424a67bfddc7de4",
+    "data/opacity/lifetime/oplib_hydrogen_z0.02.dat": "7bc8f35813faa3a9f4807d54364dd71e489dced05849742d977290ce40e207cd",
+    "data/opacity/lifetime/oplib_hydrogen_z0.03.dat": "f3924f55f3846f0ab32ff79df49b1688cb02fb84fb92a8ee1069f8bcc65c4db1",
+    "data/opacity/lifetime/hydrogen_response.dat": "de56b2c7a4f832d112cefff1bb2c1ef1254fce24bea070337014d909d09b41b2"
+  },
+  "limitations": [
+    "Same GS98 proxy and previously selected composition continuations; not newly calculated opacities.",
+    "Saved models test support and derivatives, not the existence or absence of a flash on a newly evolved trajectory.",
+    "Low-temperature opacity has no grain contribution.",
+    "The high-metal linear approximation needs its documented conduction/structure relevance assessment on any new trajectory."
+  ]
+}

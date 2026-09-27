@@ -1,0 +1,7 @@
+{
+  "source": "out/completed-metal-segments/v1/checkpoint.json",
+  "source_sha256": "abed7c4c46392bbb4aefc6895deb97a655113ffc3d5f81af9b23d6e6901d65f6",
+  "fixture_sha256": "29da300130eb7bf379373e68f33491f3afedafc801f02ae0fcc12f79ddbb9f0f",
+  "layout": "age_seconds, zone_count; then zone_count rows (m,r,rho,T,L,H,He3,C12_molality,C13_molality,N14_molality,Z); then zone_count-1 total H/He3/Z face rates in g/s",
+  "purpose": "Integration regression for a radiative core with nonzero screened diffusion and a convective envelope. The test converts nodal L to adjacent face averages; this fixture is not a production restart."
+}

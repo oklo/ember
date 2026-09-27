@@ -1,0 +1,29 @@
+{
+  "created_utc": "2026-09-27T03:32:10.246272+00:00",
+  "source": "Retained OPLIB GS98 actual helium-free endpoint tables; no new opacity calculation",
+  "files": [
+    {
+      "file": "oplib_hydrogen_z0.01.dat",
+      "source": "/Users/greglaughlin/Projects/ember/out/material-input-recovery-v1/closed/f1/f19f3658edaed6223f35941a646ba766d89bcb948ba7a8211424a67bfddc7de4.dat",
+      "sha256": "f19f3658edaed6223f35941a646ba766d89bcb948ba7a8211424a67bfddc7de4"
+    },
+    {
+      "file": "oplib_hydrogen_z0.02.dat",
+      "source": "/Users/greglaughlin/Projects/ember/out/material-input-recovery-v1/closed/7b/7bc8f35813faa3a9f4807d54364dd71e489dced05849742d977290ce40e207cd.dat",
+      "sha256": "7bc8f35813faa3a9f4807d54364dd71e489dced05849742d977290ce40e207cd"
+    },
+    {
+      "file": "oplib_hydrogen_z0.03.dat",
+      "source": "/Users/greglaughlin/Projects/ember/out/material-input-recovery-v1/closed/f3/f3924f55f3846f0ab32ff79df49b1688cb02fb84fb92a8ee1069f8bcc65c4db1.dat",
+      "sha256": "f3924f55f3846f0ab32ff79df49b1688cb02fb84fb92a8ee1069f8bcc65c4db1"
+    }
+  ],
+  "physical_controls": [
+    "docs/results/hydrogen_dominated_material_control_v3.json",
+    "docs/results/hydrogen_dominated_opacity_endpoint_v1.json"
+  ],
+  "limitations": [
+    "The response scales existing hot opacity with composition; it does not extend the source temperature or density domain.",
+    "Warm/bridge high-H and atomic low/high-Z continuations remain explicit approximations."
+  ]
+}

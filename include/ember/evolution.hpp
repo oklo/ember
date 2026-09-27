@@ -40,6 +40,10 @@ struct EvolutionOptions {
   RelaxationOptions relaxation{};
   std::size_t max_coupling_iterations{30};
   double abundance_tolerance{1e-12};
+  // Optional tighter correction bound when instantaneous convection joins
+  // the entire star into one abundance unknown. Zero uses the bound above.
+  // This is a solver setting, independent of the global inventory audit.
+  double homogeneous_abundance_tolerance{};
   double max_abundance_change{.001};
   // Convergence of total-species enthalpy transport outside the local thermal
   // Jacobian, normalized at each face to max(|L_lo|,|L_hi|,1e-12*max|L|).

@@ -1,0 +1,84 @@
+{
+  "created_utc": "2026-09-27T03:19:46.593901+00:00",
+  "scope": "Local real-screened-transport integration control on a retained early radiative-core state, not a continuous-run restart",
+  "source": "out/completed-metal-segments/v1/checkpoint.json",
+  "arms": [
+    {
+      "faces": 0,
+      "tolerance": 1e-15,
+      "regions": 231,
+      "maximum_metal_flux_g_s": 273255733473.14035,
+      "minimum_boundary_T": 5695463.444730427,
+      "converged": 0,
+      "message": "CN diffusion: line search failed at iteration 7, correction 1.327e-14, balance 3.54e-18, last rejection ",
+      "audit": 0,
+      "species_residual": 0,
+      "mass_over_L": 0,
+      "first_law": 0,
+      "CPU_seconds": 2.074319
+    },
+    {
+      "faces": 0,
+      "tolerance": 1e-12,
+      "regions": 231,
+      "maximum_metal_flux_g_s": 273255733473.14035,
+      "minimum_boundary_T": 5695463.444730427,
+      "converged": 1,
+      "message": "converged",
+      "audit": 1,
+      "species_residual": 5.174577214335724e-18,
+      "mass_over_L": 2.6427007605001173e-11,
+      "first_law": 3.1086244689504383e-15,
+      "CPU_seconds": 3.535846
+    },
+    {
+      "faces": 1,
+      "tolerance": 1e-15,
+      "regions": 231,
+      "maximum_metal_flux_g_s": 273255733473.14035,
+      "minimum_boundary_T": 5695463.444730427,
+      "converged": 0,
+      "message": "CN diffusion: line search failed at iteration 7, correction 1.327e-14, balance 3.54e-18, last rejection ",
+      "audit": 0,
+      "species_residual": 0,
+      "mass_over_L": 0,
+      "first_law": 0,
+      "CPU_seconds": 4.071903
+    },
+    {
+      "faces": 1,
+      "tolerance": 1e-12,
+      "regions": 231,
+      "maximum_metal_flux_g_s": 273255733473.14035,
+      "minimum_boundary_T": 5695463.444730427,
+      "converged": 1,
+      "message": "converged",
+      "audit": 1,
+      "species_residual": 7.256637138245998e-18,
+      "mass_over_L": 3.784674261972253e-11,
+      "first_law": 1.7430501486614958e-14,
+      "CPU_seconds": 5.344134
+    }
+  ],
+  "registered_test": "screened_envelope_evolution",
+  "registered_test_pass": true,
+  "test_checks": [
+    "Nonzero microscopic metal flux across hot radiative faces",
+    "Convergence at local composition tolerance 1e-12",
+    "Unchanged global inventory tolerance 1e-14 and energy audits",
+    "Injected hydrogen error rejected",
+    "Exact structure/composition/face-rate restart replay"
+  ],
+  "limitations": [
+    "The fixture began with nodal luminosities; the volume-face control averages adjacent stored values before its first interval.",
+    "This is not evidence that the fresh Hayashi trajectory has reached its radiative core.",
+    "Cold radiative microscopic exchange and finite convection remain separate domain/approximation questions."
+  ],
+  "input_sha256": {
+    "tests/test_screened_envelope_evolution.cpp": "c13479f2e3e957bc4e64897d46b8dda5054edbebd51c5ef1dc7f9c09a7b393dc",
+    "tests/data/early_radiative_core.dat": "29da300130eb7bf379373e68f33491f3afedafc801f02ae0fcc12f79ddbb9f0f",
+    "tests/data/early_radiative_core.json": "9e31e51b010d49cf66def6b525dc14514ead65b01d8a3bc5b68fe1a49468801a",
+    "include/ember/envelope_transport.hpp": "d93eaac16c199f9f858d56813edec085238f6430f1fed7256d606ac0e8c43ed5",
+    "src/screened_metal_microscopic_transport.cpp": "36a7eb4461ff0712677a00342b12a763f4698543bb6fb0f497fea203ba3e9766"
+  }
+}

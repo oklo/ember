@@ -1,0 +1,35 @@
+{
+  "created_utc": "2026-09-27T03:17:42.332538+00:00",
+  "scope": "Integration of retained measured metal-atmosphere responses into the common lifetime driver; not a new stellar frontier",
+  "retained_queries": 5932,
+  "retained_queries_exact": true,
+  "early_settling_queries": 10,
+  "late_derivative_max": 2.161627321584092e-09,
+  "portable_replay": {
+    "seed.checkpoint": true,
+    "final.checkpoint": true,
+    "same_seed_as_v3": true,
+    "same_first_interval_as_v3": true
+  },
+  "portable_file_count": 31,
+  "input_sha256": {
+    "apps/lifetime_driver.cpp": "04936160d2ef51ed6c011a692fe8b1c0bb9b74324b9164e52d161567807c0bc5",
+    "include/ember/runtime_identity.hpp": "22184b2dfabd9023f04097cce4d7db65667a818fc643c74e06b58d04ee6f6760",
+    "scripts/package_runtime_data.py": "3ff478535d747727543cf8cb1cbecc9c49cddbb1664c63942ba6821d0bb92a38",
+    "scripts/recover_lifetime_atmospheres.py": "93f076053be7febdae2fe0235bcee66f9c26fcddc92439046a2859fc569a6048",
+    "data/atmosphere/lifetime/metal_z0025_z001.dat": "5d02ce514922663bb01615729a904881120ff64790982396b8e7a1736ab7bd3d",
+    "data/atmosphere/lifetime/metal_z020_z010.dat": "7cffa901b19a837a0427818d9a10c0e6ad3c3b2c52d20fc484c4878cbb9b666a",
+    "data/atmosphere/lifetime/metal_z001_z0005.dat": "18c3570f9857ab9f19f009f30d02dc6083f34b6eed2136088ac16c97099aeff5",
+    "data/atmosphere/lifetime/metal_z010_z005.dat": "0885cf8e405227c4a7612190b03c295f916d12c076b79869c26bc428049137b1",
+    "data/atmosphere/lifetime/metal_z005_z0025.dat": "e067da028e4e27deb40460751464c06e359f8d55c1385463af71373498ef15f7",
+    "data/atmosphere/lifetime/metal_chain.dat": "706006323179bb9435bdcb79dfe88f366dbf482fe2a0eff8cfc2266469121a41",
+    "data/atmosphere/lifetime/main_sequence_reference.dat": "bfafea3f3f2920c209d4a43fdd6ff34dd51746d08acc4a589c11b0e72afac6ab",
+    "data/atmosphere/lifetime/metal_chain_extended.dat": "50db71019c9b69e4b1ab801fd5a5639b4fe1885c7cd78ea051179869c7d7fc6e"
+  },
+  "limitations": [
+    "No new atmosphere solutions: saved source values and masks were recovered.",
+    "Reference H ends at .85; cool/high-gravity and nearly-pure-H coverage still needs integration.",
+    "Native symmetric finite differences cross some existing PMS grid knots; the maximum cross-knot discrepancy is not an analytic derivative error.",
+    "The local nonlinear and global conservation tolerances are now independent; conservation acceptance is unchanged."
+  ]
+}

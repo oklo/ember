@@ -1,4 +1,5 @@
 #include "ember/atmosphere_metal_response.hpp"
+#include "ember/atmosphere_metal_interval.hpp"
 #include "ember/constants.hpp"
 #include <algorithm>
 #include <cmath>
@@ -51,6 +52,17 @@ public:
   }
   const char* name()const override{return "analytic reference atmosphere";}
 };
+class BoundedReference final : public Atmosphere {
+  const Eos& eos_;const Atmosphere& source_;
+public:
+  BoundedReference(const Eos& eos,const Atmosphere& source):eos_(eos),source_(source){}
+  AtmosphereState eval(double t,double g,const Composition& c)const override {
+    if(std::abs(c.Z()-.02)>2.000001e-5)throw std::domain_error("test fixed-Z bound");
+    auto q=composition(.02,c.X[1]);q.X[2]+=q.X[0]-c.X[0];q.X[0]=c.X[0];
+    auto s=source_.eval(t,g,q);s.rho=eos_.rho_from_PT(s.T,s.P,c,s.rho);return s;
+  }
+  const char* name()const override{return "test bounded fixed-Z atmosphere";}
+};
 double dt(double x,double t,double g){return -.1+.02*x+.01*t-.005*g+.004*x*t*g;}
 double dp(double x,double t,double g){return .4-.05*x-.02*t+.015*g-.008*x*t*g;}
 std::string fixture(int missing=-1){
@@ -95,5 +107,29 @@ int main(){
   check(throws([&]{masked.eval(t,g,composition(.015));}),"missing derivative corner rejected");
   auto edge=composition(.015);edge.X[0]=.6;edge.X[2]+=.02;
   check(!throws([&]{masked.eval(t,g,edge);}),"complete one-sided cell retained at an exact knot");
+  BoundedReference fixed(eos,reference);
+  MetalIntervalAtmosphere joined(eos,atmosphere,fixed,.01998,.01999);
+  auto early=composition(.020001,.1);
+  const auto a=joined.eval(2800,g,early),b=fixed.eval(2800,g,early);
+  check(a.T==b.T && a.P==b.P && a.rho==b.rho,
+      "undepleted early star never queries unsupported metal-response temperature or He3");
+  for(double z:{.015,.0199799,.01998,.019985,.01999,.0199901}) {
+    const auto c=composition(z),preserved=c;const auto s=joined.eval(t,g,c);
+    const double h=1e-6;
+    const auto tp=joined.eval(t*std::exp(h),g,c),tm=joined.eval(t*std::exp(-h),g,c);
+    const auto gp=joined.eval(t,g*std::exp(h),c),gm=joined.eval(t,g*std::exp(-h),c);
+    check(c==preserved && std::abs(eos.eval(s.T,s.rho,c).P/s.P-1)<1e-8,
+        "metal overlap preserves composition and actual-density boundary");
+    check(near(std::log(tp.P/tm.P)/(2*h),s.dlnP_dlnTeff,1e-8) &&
+          near(std::log(gp.P/gm.P)/(2*h),s.dlnP_dlng,1e-8),
+        "metal overlap pressure derivatives agree with finite differences");
+  }
+  for(double z:{.01998,.01999}) {
+    const auto left=joined.eval(t,g,composition(z-1e-12)),right=joined.eval(t,g,composition(z+1e-12));
+    check(std::abs(left.T/right.T-1)<1e-9 && std::abs(left.P/right.P-1)<1e-9,
+        "metal overlap has continuous temperature and pressure at both endpoints");
+  }
+  check(throws([&]{joined.eval(2800,g,composition(.01998));}),
+      "depleted star cannot fall back to an unsupported fixed-Z approximation");
   return failures ? 1 : 0;
 }

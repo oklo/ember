@@ -1,0 +1,17 @@
+{
+  "completed_unix": 1790480822.5329401,
+  "elapsed_seconds": 92.18860912322998,
+  "deleted_files": 230000,
+  "deleted_interval_directories": 57500,
+  "logical_bytes_deleted": 33043576157,
+  "free_bytes_before": 17044348928,
+  "free_bytes_after": 50872664064,
+  "measured_free_increase_bytes": 33828315136,
+  "protected_files_verified": 345,
+  "held_segments": [
+    "out/pms-trillion-v1/seg-011 missing segment record",
+    "out/pms-longterm-v1/seg-022 final differs from last interval"
+  ],
+  "deletion_log": "out/cleanup-sept27-v1/obsolete-pms-deleted.jsonl.gz",
+  "scope": "Obsolete homogeneous PMS experiment per-interval trial checkpoints only; retain every segment history, attempts and final checkpoint"
+}

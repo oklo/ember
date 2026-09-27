@@ -86,9 +86,12 @@ Finite convection remains available in the common engine for phases where
 burning and mixing times become comparable. Initial D exhaustion is not a
 criterion for losing convection or requiring finite mixing.
 
-Atmosphere table overlaps and the explicitly bounded approximation for small
-metal changes are described in [ATMOSPHERE.md](ATMOSPHERE.md). Those selections,
-the transport choice, join temperatures and mixing allowance enter restart identity.
+Atmosphere overlaps, the bounded approximation for small metal changes and the
+measured response to settling are described in [ATMOSPHERE.md](ATMOSPHERE.md).
+`atmosphere_metal_chain` selects the measured intervals in the same driver;
+the contraction boundary remains exactly selected at the initial Z. These
+selections, all response files, the transport choice, join temperatures and
+mixing allowance enter restart identity.
 
 The volume-face thermal gradient now uses the same logarithmic-temperature
 mean with and without a material-heat provider. A zero heat/conduction
@@ -101,10 +104,40 @@ nuclear energy control the timestep. Separate global isotope and mass-defect
 budgets and the first law check every interval. The nuclear-error scale is the
 larger of nuclear and surface power, so vanishing nuclear power does not impose
 an inappropriate relative-precision requirement.
-The nonlinear composition tolerance and global inventory budget are separate:
-the selected control solves to **1e-15** and checks inventories to **1e-14**.
-The tighter solve resolves a marginal budget failure without loosening the
-inventory or energy acceptance criteria.
+The nonlinear composition tolerance and global inventory budget are independent.
+The former limits a local correction; the latter checks mass-weighted global
+conservation. A stratified radiative-core control converges with a **1e-12**
+local tolerance while passing the unchanged **1e-14** inventory budget and
+energy checks; forcing the local correction to **1e-15** stalls its line search.
+The global budget need not be larger than the local correction tolerance.
+Neither setting replaces the full-step/two-half-step accuracy check.
+When instantaneous convection mixes the whole star, the driver tightens the
+composition correction to the smaller of the selected tolerance and **1e-15**.
+This inexpensive one-region solve needs that precision during initial
+deuterium burning: a **1000-year** test with **1e-12** throughout fails the
+unchanged inventory and mass-power checks. The tighter setting follows the
+actual mixing regions at each coupling iteration, including a newly formed
+radiative core; it does not depend on an assigned evolutionary phase or age.
+The general stratified tolerance applies once more than one region is present.
+Both settings are bound into restart identity, and all interval audits remain
+unchanged.
+
+The optional `opacity_hydrogen_response` family selects the existing bounded
+composition extensions through `RadiativeOpacity`. Its bounds are explicit:
+`opacity_minimum_Z`, `opacity_maximum_Z`, and `opacity_maximum_X`. The prepared
+selection uses **0**, **0.16**, and **1**, respectively. Low-temperature tables
+interpolate at fixed hydrogen share; the final **1e-7** in hydrogen at zero
+metals uses the measured source slope. Warm/bridge hydrogen and low/high-metal
+extensions retain their earlier linear approximations. Hot hydrogen opacity
+uses OPLIB composition ratios, joined to the TOPS composition slope at high
+density over **log R = 1.25–1.45**, bounded by **log R = 1.8** and
+**log T = 5.6–6.1**. These are explicit composition approximations, not new
+opacity calculations; temperature and density coverage is still enforced.
+The selected linear high-metal method does not load the unused second metal
+table family. The opacity contributes radiation only; the heat transport
+implementation supplies conduction. Selection and all source bytes are bound
+into restart identity. See `docs/results/opacity_lifetime_extension_sept27_v1.json`
+for saved-profile checks and the earlier physical sensitivity tests.
 
 `history.jsonl` retains every accepted model's scalar diagnostics;
 `attempts.jsonl` retains acceptance and conservation checks. Only the initial,

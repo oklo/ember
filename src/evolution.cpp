@@ -206,6 +206,8 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       || previous.comp.size()!=previous.size()
       || !std::isfinite(previous.age+dt) || previous.age<0 || !(previous.age+dt>previous.age)
       || !std::isfinite(options.abundance_tolerance) || options.abundance_tolerance<=0
+      || !std::isfinite(options.homogeneous_abundance_tolerance) || options.homogeneous_abundance_tolerance<0
+      || options.homogeneous_abundance_tolerance>options.abundance_tolerance
       || !std::isfinite(options.material_heat_tolerance) || options.material_heat_tolerance<=0
       || !std::isfinite(options.max_abundance_change) || options.max_abundance_change<=0)
     throw std::invalid_argument("evolve_step: invalid physics, age or options");
@@ -268,7 +270,12 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       for(std::size_t i=0;i<current.size();++i)regions.emplace_back(i,i+1);
       return regions;
     };
+    auto abundance_tolerance=[&](const MixingRegions& regions) {
+      return !finite && regions.size()==1 && options.homogeneous_abundance_tolerance>0
+          ?options.homogeneous_abundance_tolerance:options.abundance_tolerance;
+    };
     auto burning=[&](const MixingRegions& regions)->CompositionUpdate {
+      const double tolerance=abundance_tolerance(regions);
       if(p.microscopic) {
         std::vector<double> mixing;
         if(!lagged_mixing.empty())mixing=lagged_mixing;
@@ -285,7 +292,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           return microscopic_face(*p.microscopic,i,current.m[i],current.m[i+1],
               current.y[i],left,current.y[i+1],right,derivatives).species;
         };
-        SpeciesTransportOptions transport_options;transport_options.abundance_tolerance=options.abundance_tolerance*.1;
+        SpeciesTransportOptions transport_options;transport_options.abundance_tolerance=tolerance*.1;
         transport_options.seed_present_species=p.microscopic->requires_positive_species_guess();
         if(metal) {
           transport_options.evaluation_threads=options.relaxation.zone_threads;
@@ -338,9 +345,9 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
         return {std::move(updated.comp),std::move(redistribution.face_rates),{}};
       }
       if(regions.size()==1 || (p.alpha_semiconvection==0 && p.alpha_thermohaline==0))
-        return {burn_and_mix(current,previous,*p.nuclear,regions,dt,options.abundance_tolerance*.1),{},{}};
+        return {burn_and_mix(current,previous,*p.nuclear,regions,dt,tolerance*.1),{},{}};
       return {burn_and_transport(current,previous,*p.nuclear,regions,secular_mixing_diffusivities(current,coupled),
-          dt,options.abundance_tolerance*.1),{},{}};
+          dt,tolerance*.1),{},{}};
     };
     MixingRegions pending_regions;
     CompositionUpdate pending;
@@ -397,7 +404,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           deuterium_coupled &= std::abs(a-b)<=1e-8*std::max(a,b)+2*std::numeric_limits<double>::denorm_min();
         }
       }
-      if(!deuterium_coupled || regions!=next_regions || residual>options.abundance_tolerance
+      if(!deuterium_coupled || regions!=next_regions || residual>abundance_tolerance(next_regions)
           || result.material_heat_residual>options.material_heat_tolerance) {
         pending_regions=std::move(next_regions);pending=std::move(next);
         have_pending=true;continue;

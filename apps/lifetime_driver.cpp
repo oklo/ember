@@ -8,11 +8,13 @@
 #include "ember/atmosphere_deuterium.hpp"
 #include "ember/atmosphere_fixed_metal.hpp"
 #include "ember/atmosphere_overlap.hpp"
+#include "ember/atmosphere_metal_chain.hpp"
+#include "ember/atmosphere_metal_interval.hpp"
 #include "ember/atmosphere_grid.hpp"
 #include "ember/conduction_table.hpp"
 #include "ember/eos_deuterium.hpp"
 #include "ember/metal_microscopic_transport.hpp"
-#include "ember/opacity_mixture.hpp"
+#include "ember/opacity_radiative.hpp"
 #include <charconv>
 #include <chrono>
 #include <ctime>
@@ -81,6 +83,11 @@ int lifetime_main(int argc,char** argv) {
     const auto path=[&](const char* key){return fs::canonical(config.parent_path()/cfg.get(key));};
     const auto eos_path=path("eos"),low_path=path("opacity_low"),warm_path=path("opacity_warm"),bridge_path=path("opacity_bridge"),hot_path=path("opacity_hot");
     const auto conduction_path=path("conduction"),atmosphere_path=path("atmosphere"),collision_path=path("collisions"),composition_path=path("composition");
+    std::optional<RadiativeOpacity::Extension> opacity_extension;
+    if(cfg.values.contains("opacity_hydrogen_response")) {
+      opacity_extension=RadiativeOpacity::Extension{path("opacity_hydrogen_response"),
+        cfg.number("opacity_minimum_Z"),cfg.number("opacity_maximum_Z"),cfg.number("opacity_maximum_X")};
+    }
     fs::path main_atmosphere_path;
     AtmosphereOverlap::Options atmosphere_join;
     if(cfg.values.contains("atmosphere_main_sequence")) {
@@ -106,6 +113,16 @@ int lifetime_main(int argc,char** argv) {
     const auto atmosphere_metals=cfg.values.contains("atmosphere_metals")?cfg.get("atmosphere_metals"):"strict";
     const double atmosphere_delta_Z=cfg.values.contains("atmosphere_maximum_delta_Z")
         ?cfg.number("atmosphere_maximum_delta_Z"):0;
+    fs::path metal_atmosphere_path;
+    double metal_join_low=0,metal_join_high=0;
+    if(cfg.values.contains("atmosphere_metal_chain")) {
+      metal_atmosphere_path=path("atmosphere_metal_chain");
+      metal_join_low=cfg.number("atmosphere_metal_join_low");
+      metal_join_high=cfg.number("atmosphere_metal_join_high");
+      if(main_atmosphere_path.empty() || atmosphere_metals!="bounded_fixed_Z" ||
+          !(metal_join_low>=0 && metal_join_high>metal_join_low && metal_join_high<1))
+        throw std::invalid_argument("metal-dependent atmosphere requires a bounded reference and ordered overlap");
+    }
     if((atmosphere_metals!="strict" && atmosphere_metals!="bounded_fixed_Z") ||
         (atmosphere_metals=="strict"?atmosphere_delta_Z!=0:atmosphere_delta_Z<=0))
       throw std::invalid_argument("invalid atmosphere metal approximation selection");
@@ -114,7 +131,7 @@ int lifetime_main(int argc,char** argv) {
         && count>=128 && count<=8192 && std::floor(count)==count && threads>=1 && threads<=4 && std::floor(threads)==threads
         && structure_tolerance>0 && structure_tolerance<=1e-3 && species_tolerance>0 && species_tolerance<=1e-6
         && energy_tolerance>0 && energy_tolerance<=.01 && abundance_tolerance>0 && abundance_tolerance<=1e-12
-        && inventory_tolerance>=abundance_tolerance && inventory_tolerance<=std::min(1e-12,.01*species_tolerance)))
+        && inventory_tolerance>0 && inventory_tolerance<=std::min(1e-12,.01*species_tolerance)))
       throw std::invalid_argument("lifetime physical or accuracy setting out of range");
     const auto points=static_cast<std::size_t>(count);
     Composition initial;initial.basis=AbundanceBasis::baryon_mass;initial.metal_inventory=MetalInventory::gs98;
@@ -125,6 +142,13 @@ int lifetime_main(int argc,char** argv) {
     initial.cn_molality=initial_gs98_cn(initial);initial=explicit_cn_material(initial);
 
     RuntimeIdentity identity;identity.file("executable",argv[0]);
+    identity.values["opacity.composition_extension"]=opacity_extension?"hydrogen_share.linear_Z.source_log_X.v1":"none";
+    if(opacity_extension) {
+      identity.family("opacity_hydrogen_response",opacity_extension->hydrogen_response,false);
+      identity.number("opacity.minimum_Z",opacity_extension->minimum_Z);
+      identity.number("opacity.maximum_Z",opacity_extension->maximum_Z);
+      identity.number("opacity.maximum_X",opacity_extension->maximum_X);
+    }
     identity.values["transport.selection"]=transport_selection;
     if(screened_core) {
       identity.number("transport.screened_heat_upper_T_K",heat_upper);
@@ -132,6 +156,11 @@ int lifetime_main(int argc,char** argv) {
     }
     identity.values["atmosphere.metals"]=atmosphere_metals;
     identity.number("atmosphere.maximum_delta_Z",atmosphere_delta_Z);
+    if(!metal_atmosphere_path.empty()) {
+      identity.metal_atmosphere_chain("atmosphere.metal_chain",metal_atmosphere_path);
+      identity.number("atmosphere.metal_join_low",metal_join_low);
+      identity.number("atmosphere.metal_join_high",metal_join_high);
+    }
     identity.values["atmosphere.overlap"]=main_atmosphere_path.empty()?"none":"gravity_hydrogen.v1";
     if(!main_atmosphere_path.empty()) {
       identity.file("atmosphere_main_sequence",main_atmosphere_path);
@@ -146,6 +175,7 @@ int lifetime_main(int argc,char** argv) {
         {"species_tolerance",species_tolerance},{"energy_tolerance",energy_tolerance},
         {"coupling_abundance_tolerance",abundance_tolerance},{"inventory_abundance_tolerance",inventory_tolerance}})
       identity.number("configuration."+key,value);
+    identity.number("solver.homogeneous_abundance_tolerance",std::min(1e-15,abundance_tolerance));
     identity.family("eos",eos_path,true);
     for(const auto& [role,p]:std::map<std::string,fs::path>{{"opacity_low",low_path},{"opacity_warm",warm_path},
         {"opacity_bridge",bridge_path},{"opacity_hot",hot_path}})identity.family(role,p,false);
@@ -167,9 +197,10 @@ int lifetime_main(int argc,char** argv) {
       if(state.model.age>=target)throw std::invalid_argument("target must exceed the saved age");
     }
     VariableMetalHelmholtzEos table_eos(eos_path,HelmholtzTableEos::Mixture::allow_documented_proxy);DeuteriumApproxEos eos(table_eos);
-    MixtureOpacity low(low_path),warm(warm_path),bridge(bridge_path),hot(hot_path);
-    BlendedOpacity mid(warm,bridge,5.05,5.10),upper(mid,hot,5.6,5.7),raw(low,upper,4.4,4.47);
-    auto radiation=std::make_shared<ElementalOpacity>(raw);TabulatedConduction table_conduction(conduction_path);
+    const RadiativeOpacity::Tables opacity_tables{low_path,warm_path,bridge_path,hot_path};
+    auto radiation=opacity_extension?std::make_shared<RadiativeOpacity>(opacity_tables,*opacity_extension)
+        :std::make_shared<RadiativeOpacity>(opacity_tables);
+    TabulatedConduction table_conduction(conduction_path);
     auto conduction=std::make_shared<HotConduction>(table_conduction);CombinedOpacity combined(radiation,conduction);
     CompositionAtmosphereGrid table_atmosphere(eos,atmosphere_path,CompositionAtmosphereGrid::Mixture::allow_documented_proxy);
     std::unique_ptr<FixedMetalAtmosphere> fixed_metal_atmosphere;
@@ -188,8 +219,20 @@ int lifetime_main(int argc,char** argv) {
       const Atmosphere& main=fixed_main_atmosphere?static_cast<const Atmosphere&>(*fixed_main_atmosphere):*main_atmosphere;
       atmosphere_overlap=std::make_unique<AtmosphereOverlap>(eos,contraction_atmosphere,main,atmosphere_join);
     }
-    TraceDeuteriumAtmosphere atmosphere(eos,atmosphere_overlap
-        ?static_cast<const Atmosphere&>(*atmosphere_overlap):contraction_atmosphere);
+    const Atmosphere& reference_boundary=atmosphere_overlap
+        ?static_cast<const Atmosphere&>(*atmosphere_overlap):contraction_atmosphere;
+    std::unique_ptr<MetalAtmosphereChain> metal_atmosphere;
+    std::unique_ptr<MetalIntervalAtmosphere> metal_overlap;
+    if(!metal_atmosphere_path.empty()) {
+      const double z=main_atmosphere->reference_metallicity();
+      if(metal_join_high>z || metal_join_low<z-atmosphere_delta_Z)
+        throw std::invalid_argument("metal atmosphere overlap exceeds the fixed-Z reference allowance");
+      metal_atmosphere=std::make_unique<MetalAtmosphereChain>(eos,*main_atmosphere,metal_atmosphere_path,z);
+      metal_overlap=std::make_unique<MetalIntervalAtmosphere>(eos,*metal_atmosphere,
+          reference_boundary,metal_join_low,metal_join_high);
+    }
+    TraceDeuteriumAtmosphere atmosphere(eos,metal_overlap
+        ?static_cast<const Atmosphere&>(*metal_overlap):reference_boundary);
     PPCNNetwork nuclear(PPRates::solar_fusion_iii,PPScreening::salpeter_van_horn,PPRates::solar_fusion_iii);
     PlasmaNeutrinoLosses losses;ScreenedCollisionTransport collisions(collision_path.string());
     ScreenedMetalMicroscopicTransport microscopic(table_eos,collisions,true,minimum_temperature,{true,true,true},true);
@@ -200,6 +243,7 @@ int lifetime_main(int argc,char** argv) {
     auto later=early;later.opacity=radiation.get();later.microscopic=&convective_heat;later.explicit_metal_mixing_only=false;
     if(screened_core)later.microscopic=&envelope_heat;
     EvolutionOptions options;options.relaxation.zone_threads=static_cast<std::size_t>(threads);options.abundance_tolerance=abundance_tolerance;
+    options.homogeneous_abundance_tolerance=std::min(1e-15,abundance_tolerance);
     if(restart.empty()) {
       ContractingSource seed_source(nuclear,entropy_loss);auto seed_physics=early;seed_physics.nuclear=&seed_source;
       const auto guess=contracting_guess(points,mass,radius,teff,initial,seed_physics,atmosphere);

@@ -1,0 +1,20 @@
+{
+  "files": [
+    {
+      "file": "data/atmosphere/lifetime/metal_z020_z010.dat",
+      "recovered_from": "out/material-input-recovery-v1/closed/7c/7cffa901b19a837a0427818d9a10c0e6ad3c3b2c52d20fc484c4878cbb9b666a.dat",
+      "sha256": "7cffa901b19a837a0427818d9a10c0e6ad3c3b2c52d20fc484c4878cbb9b666a"
+    },
+    {
+      "file": "data/atmosphere/lifetime/metal_z010_z005.dat",
+      "recovered_from": "out/material-input-recovery-v1/closed/08/0885cf8e405227c4a7612190b03c295f916d12c076b79869c26bc428049137b1.dat",
+      "sha256": "0885cf8e405227c4a7612190b03c295f916d12c076b79869c26bc428049137b1"
+    }
+  ],
+  "source_receipt": "docs/results/highg_material_assembly_v1.json",
+  "limitations": [
+    "LTE gas; no grains; fixed GS98 metal ratios",
+    "Measured metal response assumed separable from small He3 abundance",
+    "Masks and original source coverage retained"
+  ]
+}

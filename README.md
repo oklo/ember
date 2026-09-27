@@ -4,7 +4,7 @@ Ember is a one-dimensional stellar evolution code written in C++23. It calculate
 
 [Read the working paper](docs/reports/2026-09-26/ember_status_and_future.pdf) ([LaTeX, figures and plotting data](docs/reports/2026-09-26/README.md)).
 
-## Research status — September 26, 2026
+## Research status — September 27, 2026
 
 The objective is one continuous calculation from a Hayashi starting model,
 through hydrogen burning and helium-white-dwarf cooling, to extreme cold and
@@ -21,23 +21,26 @@ An overly restrictive atmosphere metal allowance caused **28 rejected trials**
 and a final rounding-sensitive audit failure after repeated timestep reductions.
 [Retained calculation](docs/results/continuous_lifetime_sept26_v2.json).
 
-The driver now selects the existing hot microscopic H/He/metal transport with
-conservative mixing heat in the cool convective envelope. A fresh Hayashi run
-uses this prescription and a broader, measured atmosphere metal allowance.
-Both changes are explicit configuration choices. Existing broad main-sequence
-atmosphere tables join smoothly to the contraction boundary. Source masks and
-conservation acceptance criteria remain unchanged. **All 74 tests pass** in an
-isolated build with the required datasets.
+The common driver selects hot microscopic H/He/metal transport, conservative
+mixing heat, metal-dependent atmospheres and the existing composition-dependent
+interior opacities. A saved radiative-core model evolves with nonzero settling,
+passes the physical conservation checks, and restarts exactly. Initial
+fully mixed deuterium burning uses tighter composition convergence than the
+stratified diffusion solve; the physical audits stay unchanged. **All 76 tests
+pass** in the working and isolated builds with the required datasets.
 [Common driver](docs/LIFETIME_DRIVER.md),
-[transport checks](docs/results/envelope_transport_integration_sept26_v1.json),
-[atmosphere comparisons](docs/results/archived_ms_atmosphere_check_sept26_v1.json).
+[diffusion and restart test](docs/results/screened_radiative_core_sept27_v1.json),
+[atmosphere coverage](docs/results/atmosphere_lifetime_atlas_sept27_v1.json),
+[opacity coverage](docs/results/opacity_lifetime_extension_sept27_v1.json).
 
-Continuous boundary selection for substantial settling and WD cooling remains
-unfinished. The microscopic metal law assumes complete ionization; unsupported
-cool radiative layers are rejected. Initial deuterium is handled in a checked
-whole-star mixing approximation. Nuclear burning includes the pp chain and
-explicit C12/C13/N14 conversion, with Solar Fusion III rates in the common driver;
-this is not a full CNO network.
+A fresh Hayashi calculation with hot transport is running. The additional
+composition tables are being prepared ahead of it; complete continuous coverage
+of the hydrogen-rich and WD atmospheres remains unfinished. New high-gravity
+hydrogen columns use the same joining depth as the main-sequence atmospheres.
+The microscopic metal law assumes complete ionization; unsupported cool
+radiative layers are rejected. Initial deuterium uses a checked whole-star
+mixing approximation. Nuclear burning includes the pp chain and explicit
+C12/C13/N14 conversion with Solar Fusion III rates, rather than a full CNO network.
 
 Separate late-evolution calculations develop a helium-3 shell pulse after an
 atmosphere adjustment and then turn toward cooling. They establish a possible
@@ -46,8 +49,8 @@ The continuous calculation tests whether the pulse survives a consistent history
 [Working paper](docs/reports/2026-09-26/ember_status_and_future.pdf),
 [Fortran comparison](docs/F77_LBA97_COMPARISON.md).
 
-The coherent source update is prepared locally. Public runtime/test-data
-availability and the shorter paper are still being completed.
+Public runtime/test-data availability and the shorter paper are still being
+completed. The large local datasets are required for the full test suite.
 
 ## Building
 

@@ -1,0 +1,163 @@
+{
+  "created_utc": "2026-09-16T00:43:38.324648+00:00",
+  "selected_for_evolution": false,
+  "passed": true,
+  "current_profile_queries": 512,
+  "exact_current_opacity_retention": true,
+  "future_queries": 350,
+  "errors": [],
+  "derivative_checks": [
+    {
+      "variable": "T",
+      "normalized_error": 5.364361230316713e-11
+    },
+    {
+      "variable": "rho",
+      "normalized_error": 8.177385608976265e-11
+    },
+    {
+      "variable": "X",
+      "normalized_error": 2.5930954477868436e-10
+    },
+    {
+      "variable": "Z",
+      "normalized_error": 1.4787005108749688e-07
+    },
+    {
+      "variable": "T",
+      "normalized_error": 6.106878139225996e-11
+    },
+    {
+      "variable": "rho",
+      "normalized_error": 3.9037170108745614e-10
+    },
+    {
+      "variable": "X",
+      "normalized_error": 1.9012258013775563e-08
+    },
+    {
+      "variable": "Z",
+      "normalized_error": 2.411709853164802e-06
+    },
+    {
+      "variable": "T",
+      "normalized_error": 3.2265823611987626e-11
+    },
+    {
+      "variable": "rho",
+      "normalized_error": 6.191246864234108e-10
+    },
+    {
+      "variable": "X",
+      "normalized_error": 3.8091277590212487e-07
+    },
+    {
+      "variable": "Z",
+      "normalized_error": 7.073594345462292e-06
+    },
+    {
+      "variable": "T",
+      "normalized_error": 3.521880290370768e-11
+    },
+    {
+      "variable": "rho",
+      "normalized_error": 5.103868026846644e-10
+    },
+    {
+      "variable": "X",
+      "normalized_error": 5.3020785227452046e-08
+    },
+    {
+      "variable": "Z",
+      "normalized_error": 4.248774883329245e-07
+    },
+    {
+      "variable": "T",
+      "normalized_error": 1.260468008552003e-10
+    },
+    {
+      "variable": "rho",
+      "normalized_error": 2.1118874860341548e-10
+    },
+    {
+      "variable": "X",
+      "normalized_error": 2.8103662772246555e-08
+    },
+    {
+      "variable": "Z",
+      "normalized_error": 1.0640553858969298e-07
+    }
+  ],
+  "domain_rejections": [
+    {
+      "error": "AESOPUS_2.1_GS98_gas: (logT=1.000000, logR=10.000000, X=0.999990) outside table"
+    },
+    {
+      "error": "AESOPUS_2.1_GS98_gas: (logT=4.000000, logR=16.000000, X=0.999990) outside table"
+    },
+    {
+      "error": "MetalOpacityExtension: invalid composition"
+    },
+    {
+      "error": "MetalOpacityExtension: composition outside interval"
+    }
+  ],
+  "build_commands": [
+    [
+      "/usr/bin/c++",
+      "-std=c++23",
+      "-O3",
+      "-DNDEBUG",
+      "-ffp-contract=fast",
+      "-fno-math-errno",
+      "-mcpu=apple-m4",
+      "-DEMBER_HAVE_ACCELERATE=1",
+      "-I/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/include",
+      "-I/Users/greglaughlin/Projects/ember/include",
+      "-I/Users/greglaughlin/Projects/ember/scripts",
+      "/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/native.cpp",
+      "/Users/greglaughlin/Projects/ember/build/src/libember.a",
+      "-framework",
+      "Accelerate",
+      "-o",
+      "/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/native"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++23",
+      "-O3",
+      "-DNDEBUG",
+      "-ffp-contract=fast",
+      "-fno-math-errno",
+      "-mcpu=apple-m4",
+      "-DEMBER_HAVE_ACCELERATE=1",
+      "-I/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/include",
+      "-I/Users/greglaughlin/Projects/ember/include",
+      "-I/Users/greglaughlin/Projects/ember/scripts",
+      "/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/opacity.cpp",
+      "/Users/greglaughlin/Projects/ember/build/src/libember.a",
+      "-framework",
+      "Accelerate",
+      "-o",
+      "/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/opacity"
+    ]
+  ],
+  "source_changes": "Zero-metal opacity continuation and maximum hydrogen of one; explicit AESOPUS molecular continuation across the final 1e-7 in hydrogen using the last actual source interval. Source values and thermal/density bounds unchanged.",
+  "limitations": [
+    "Warm/hot low-metal opacities remain the existing linear composition continuation from actual Z=.01/.02 sources, not newly calculated zero-metal atomic opacity. Existing independent source comparisons and stellar sensitivities retain their stated limits.",
+    "Molecular opacity includes actual zero-metal source tables to H=.9999999, with an explicit tiny continuation to H=1. No physical-composition floor is imposed.",
+    "Future query samples establish local numerical support, not whole-track or cold-remnant accuracy."
+  ],
+  "input_sha256": {
+    "/tmp/ember-check-hydrogen-dominated-material-v3.py": "1884f0a166f6a2e55984e21125777017d4e30de4b37396f0df71731f66a0b605",
+    "/Users/greglaughlin/Projects/ember/out/completed-metal-segments/v47/checkpoint.json": "28c9f57b0b143a099f9545163cb66eecb889ff38d2250b672f4ab5da31923b48",
+    "/Users/greglaughlin/Projects/ember/build/src/libember.a": "991ad6931f547561e0e3dfa5e8df8850e77f9c70c3b8bfecde914c67c65a8f09",
+    "/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/native.cpp": "dfd08e8c09cf355980063bacbf30b34f75328e9c9de9aee6852e7b746c72d86d",
+    "/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/opacity.cpp": "7ae313935a23a9bbbbb1e253469d9997ec2100e0f0817835c13d949cbff67474",
+    "/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/include/ember/opacity_hydrogen_share.hpp": "3b695444b7d3a896ffe138933ff9e52ae6e1ee32aed6112894019c91d7efde67",
+    "/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/include/ember/atmosphere_hydrogen_dominated.hpp": "93f4871add7b561e7a8188e907a796808a71d867f86d07250ff379983e3156b2",
+    "/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-material-v3/include/ember/opacity_metal_extension.hpp": "f0b1ad6864d820a0acc9d80ccc74308659d5ecd03cb77660607598708ad1d06f",
+    "/Users/greglaughlin/Projects/ember/out/hydrogen-dominated-atmosphere-v1/grid.dat": "d687887c6789155672f5f7482616e4ffdd048d9c62027adc05e3ee7ddf7968e3",
+    "/Users/greglaughlin/Projects/ember/docs/results/hydrogen_dominated_atmosphere_control_v2.json": "5ea25a77baa0eaf3b5a004beffbde9f27ca21216cee647a71cf22bea13032d39"
+  }
+}
