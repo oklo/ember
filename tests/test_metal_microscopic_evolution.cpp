@@ -102,6 +102,19 @@ int main(int argc,char** argv) {
     }
     const auto step=evolve_step(initial,physics,atmosphere,dt,options);
     if(!step.converged)throw std::runtime_error("physical metal evolution: "+step.message);
+    if(finite) {
+      auto limited=options;limited.max_abundance_change=1e-12;
+      const auto before=evolve_step(initial,physics,atmosphere,dt,limited);
+      limited.abundance_cap_after_mixing=true;
+      const auto after=evolve_step(initial,physics,atmosphere,dt,limited);
+      require(!before.converged && !after.converged
+          && before.message=="evolve_step: abundance change exceeds step limit"
+          && after.message==before.message,
+          "finite transport must retain the pointwise abundance cap");
+      require(before.model.comp==initial.comp && after.model.comp==initial.comp
+          && before.model.age==initial.age && after.model.age==initial.age,
+          "a finite-mixing cap failure changed the retained state");
+    }
     require(transport.total_calls>0 && step.total_metal_species_rates.size()==initial.size()-1 && step.total_species_rates.empty(),"three-mass total rates not used");
     require(std::abs(step.luminosity_balance)<2e-8 && std::abs(step.nuclear_mass_balance)<2e-6,"discrete stellar energy or nuclear mass balance");
     require(step.abundance_residual<=options.abundance_tolerance && step.material_heat_residual<=options.material_heat_tolerance,"abundance or heat convergence");

@@ -127,6 +127,9 @@ int lifetime_main(int argc,char** argv) {
     const double abundance_cap=cfg.values.contains("abundance_cap")?cfg.number("abundance_cap"):.001;
     if(!std::isfinite(abundance_cap) || abundance_cap<=0 || abundance_cap>.01)
       throw std::invalid_argument("abundance cap must lie in (0,0.01]");
+    const double cap_after_mixing=optional_number("abundance_cap_after_mixing");
+    if(cap_after_mixing!=0 && cap_after_mixing!=1)
+      throw std::invalid_argument("abundance_cap_after_mixing must be 0 or 1");
     const double coupling_stop=optional_number("coupling_stop_tolerance");
     const double richardson=optional_number("richardson_extrapolation");
     if(richardson!=0 && richardson!=1)throw std::invalid_argument("richardson_extrapolation must be 0 or 1");
@@ -253,6 +256,8 @@ int lifetime_main(int argc,char** argv) {
         {"opacity_bridge",bridge_path},{"opacity_hot",hot_path}})identity.family(role,p,false);
     for(const auto& [role,p]:std::map<std::string,fs::path>{{"conduction",conduction_path},{"atmosphere",atmosphere_path},
         {"collisions",collision_path},{"composition",composition_path}})identity.file(role,p);
+    if(cap_after_mixing==1)
+      identity.values["solver.abundance_cap_reference"]="instantaneously_mixed_previous.v1";
     if(richardson==1) {
       identity.values["integrator"]="richardson.full_two_half.assessed.v3";
       identity.number("integrator.residual_limit",1e-5);
@@ -340,6 +345,7 @@ int lifetime_main(int argc,char** argv) {
     EvolutionOptions options;options.relaxation.zone_threads=static_cast<std::size_t>(threads);options.abundance_tolerance=abundance_tolerance;
     options.linearized_burning=linearized_burning==1;
     options.max_abundance_change=abundance_cap;
+    options.abundance_cap_after_mixing=cap_after_mixing==1;
     options.homogeneous_abundance_tolerance=std::min(1e-15,abundance_tolerance);
     options.coupling_stop_tolerance=coupling_stop;
     if(material_heat>0)options.material_heat_tolerance=material_heat;

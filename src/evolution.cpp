@@ -155,6 +155,41 @@ MixingRegions convective_mixing_regions(const Model& m,const Physics& p,std::siz
   regions.emplace_back(first,m.size());return regions;
 }
 
+double abundance_change_after_mixing(const Model& previous,
+    const std::vector<Composition>& next,const MixingRegions& regions) {
+  if(previous.comp.size()!=previous.size() || next.size()!=previous.size())
+    throw std::invalid_argument("abundance change: inconsistent mesh size");
+  const auto weights=nodal_mass_weights(previous);
+  double largest=0;std::size_t consumed=0;
+  for(auto [begin,end]:regions) {
+    if(begin!=consumed || end<=begin || end>previous.size())
+      throw std::invalid_argument("abundance change: regions must partition the mesh");
+    consumed=end;
+    auto average=previous.comp[begin];
+    if(end>begin+1) {
+      long double mass=0;std::array<long double,NSPEC> inventory{};
+      std::array<long double,3> cn{};
+      for(std::size_t i=begin;i<end;++i) {
+        const auto& c=previous.comp[i];
+        if(c.basis!=average.basis || c.metal_inventory!=average.metal_inventory)
+          throw std::invalid_argument("abundance change: incompatible composition conventions");
+        (void)composition_difference(c,average);
+        mass+=weights[i];
+        for(std::size_t j=0;j<NSPEC;++j)inventory[j]+=static_cast<long double>(weights[i])*c.X[j];
+        if(c.cn_molality)for(std::size_t j=0;j<3;++j)
+          cn[j]+=static_cast<long double>(weights[i])*(*c.cn_molality)[j];
+      }
+      for(std::size_t j=0;j<NSPEC;++j)average.X[j]=static_cast<double>(inventory[j]/mass);
+      if(average.cn_molality)for(std::size_t j=0;j<3;++j)
+        (*average.cn_molality)[j]=static_cast<double>(cn[j]/mass);
+    }
+    for(std::size_t i=begin;i<end;++i)
+      largest=std::max(largest,composition_difference(next[i],average));
+  }
+  if(consumed!=previous.size())throw std::invalid_argument("abundance change: incomplete partition");
+  return largest;
+}
+
 std::vector<Composition> burn_and_mix(const Model& thermal,const Model& previous,
     const Nuclear& nuclear,const MixingRegions& regions,double dt,double tolerance) {
   if(!std::isfinite(dt) || dt<=0 || !std::isfinite(tolerance) || tolerance<=0
@@ -447,7 +482,9 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       if(frozen) {frozen->rates=update.total_rates;frozen->metal_rates=update.total_metal_rates;}
       have_pending=false;
       double change=0;
-      for(std::size_t i=0;i<current.size();++i)
+      if(options.abundance_cap_after_mixing && !finite)
+        change=abundance_change_after_mixing(previous,current.comp,regions);
+      else for(std::size_t i=0;i<current.size();++i)
         change=std::max(change,composition_difference(current.comp[i],previous.comp[i]));
       if(change>options.max_abundance_change) throw std::runtime_error("evolve_step: abundance change exceeds step limit");
       if(options.linearized_burning && iteration==0)
@@ -520,9 +557,13 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           || update.total_metal_rates!=next.total_metal_rates || !burning_response.empty()) {
         current.comp=std::move(next.composition);
         if(frozen) {frozen->rates=next.total_rates;frozen->metal_rates=next.total_metal_rates;}
-        for(std::size_t i=0;i<current.size();++i)
-          if(composition_difference(current.comp[i],previous.comp[i])>options.max_abundance_change)
-            throw std::runtime_error("evolve_step: abundance change exceeds step limit");
+        double final_change=0;
+        if(options.abundance_cap_after_mixing && !finite)
+          final_change=abundance_change_after_mixing(previous,current.comp,next_regions);
+        else for(std::size_t i=0;i<current.size();++i)
+          final_change=std::max(final_change,composition_difference(current.comp[i],previous.comp[i]));
+        if(final_change>options.max_abundance_change)
+          throw std::runtime_error("evolve_step: abundance change exceeds step limit");
         auto verification=options.relaxation;verification.max_iterations=0;
         if(options.verification_residual_tolerance>0)verification.residual_tolerance=options.verification_residual_tolerance;
         if(options.verification_correction_tolerance>0)verification.correction_tolerance=options.verification_correction_tolerance;

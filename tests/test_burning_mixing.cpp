@@ -67,6 +67,13 @@ int main() {
   }
   check(conservative && mixed[0].X==mixed[1].X && mixed[2].X==mixed[3].X && mixed[1].X!=mixed[2].X,
         "mixing conserves every species and does not cross disconnected regions");
+  check(abundance_change_after_mixing(model,mixed,split)<1e-12,
+        "instantaneous homogenization does not count as time-dependent composition change");
+  const MixingRegions separate{{0,1},{1,2},{2,3},{3,4}};
+  double direct=0;for(std::size_t i=0;i<4;++i)for(std::size_t j=0;j<NSPEC;++j)
+    direct=std::max(direct,std::abs(mixed[i].X[j]-model.comp[i].X[j]));
+  check(abundance_change_after_mixing(model,mixed,separate)==direct,
+        "isolated radiative cells retain the original pointwise change");
   const double dt=1e17;const auto burnt=burn_and_mix(model,model,nuclear,{{0,4}},dt,1e-14);
   double residual=0;
   for(std::size_t j=0;j<3;++j) {
@@ -74,6 +81,8 @@ int main() {
       rate+=w[i]*nuclear.eval(model.T(i),model.rho(i),burnt[i]).dXdt[j]/model.M;}
     residual=std::max(residual,std::abs(burnt[0].X[j]-old-dt*rate));
   }
+  check(abundance_change_after_mixing(model,burnt,{{0,4}})>.006,
+        "real implicit burning still exceeds a small cap in a mixed region");
   double old_h=0;for(std::size_t i=0;i<4;++i) old_h+=w[i]*model.comp[i].X[0]/model.M;
   check(residual<1e-12 && burnt[0].X[0]<old_h && burnt[0].X[1]>0 && burnt[0].X[2]>0,
         "stiff implicit burn and mixing solve integrated species equations with positive abundances",residual);

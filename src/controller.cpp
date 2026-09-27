@@ -68,9 +68,15 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
     if (options.predict_structure && before && ratio > 0 && std::isfinite(ratio)
         && before->M == start.M && before->m == start.m && before->size() == start.size()
         && before->luminosity_grid == start.luminosity_grid) {
-      guess = start;
-      bool finite = true;
+      bool smooth_history = true;
       for (std::size_t i = 0; i < start.size(); ++i)
+        if (hooks.species_difference(start.comp[i], before->comp[i]) > selected.max_abundance_change)
+          smooth_history = false;
+      // Instantaneous mixing changes are not proportional to elapsed time.
+      // Do not extrapolate their structural response into the next step.
+      if (smooth_history) guess = start;
+      bool finite = smooth_history;
+      for (std::size_t i = 0; smooth_history && i < start.size(); ++i)
         for (std::size_t k = 0; k < NVAR; ++k) {
           const auto v = static_cast<Var>(k);
           guess->y[i][v] += ratio * (start.y[i][v] - before->y[i][v]);

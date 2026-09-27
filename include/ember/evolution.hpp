@@ -6,6 +6,12 @@
 namespace ember {
 using MixingRegions = std::vector<std::pair<std::size_t,std::size_t>>; // [first,last), includes isolated points
 std::vector<double> nodal_mass_weights(const Model&);
+// Change from the previous abundances mass-averaged over the specified
+// instantaneous regions. Measures burning and transport after prescribed
+// homogenization; it does not modify either state or replace time-error checks.
+double abundance_change_after_mixing(const Model& previous,
+    const std::vector<Composition>& next,const MixingRegions&);
+
 MixingRegions schwarzschild_mixing_regions(const Model&,const Physics&);
 MixingRegions convective_mixing_regions(const Model&,const Physics&,std::size_t threads=1);
 // Implicit pp burning with instantaneous homogeneous mixing within each
@@ -57,6 +63,9 @@ struct EvolutionOptions {
   // retains the corresponding relaxation tolerance.
   double verification_residual_tolerance{},verification_correction_tolerance{};
   double max_abundance_change{.001};
+  // Exclude prescribed instantaneous homogenization from the abundance cap.
+  // Finite mixing keeps the original pointwise cap, irrespective of this flag.
+  bool abundance_cap_after_mixing{false};
   // Convergence of total-species enthalpy transport outside the local thermal
   // Jacobian, normalized at each face to max(|L_lo|,|L_hi|,1e-12*max|L|).
   double material_heat_tolerance{1e-10};

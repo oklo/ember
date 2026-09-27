@@ -442,3 +442,20 @@ its accuracy but does not show a speed gain or validate rapid burning. The
 controller tests cover missing assessment, declined and throwing assessments,
 and acceptance; a real initial-deuterium step confirms the application fallback.
 [Comparison](results/richardson_current_physics_sept27_v1.json).
+
+## Abundance changes during instantaneous mixing
+
+`abundance_cap_after_mixing "1"` measures the abundance cap from the initial
+composition conservatively averaged over each instantaneous mixed region.
+It prevents newly incorporated material from imposing a finite composition
+jump that cannot be reduced by shortening the timestep. Radiative cells keep
+the pointwise comparison; finite and lagged finite mixing retain the original
+cap regardless of this setting. The default is off. The selected cap reference
+is recorded in restart identity.
+
+Every full and half interval still passes the usual composition, structure
+and energy error checks. Linear structure prediction is skipped after a
+preceding abundance jump larger than the cap, because instantaneous mixing
+is not proportional to elapsed time. This only changes the initial guess.
+A resolved envelope-boundary comparison and finite-mixing regression checks
+are recorded in [the numerical comparison](results/instantaneous_mixing_step_cap_sept27_v1.json).

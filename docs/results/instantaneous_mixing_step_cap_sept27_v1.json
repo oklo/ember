@@ -1,0 +1,127 @@
+{
+  "scope": "One instantaneous envelope mixing event from the continuous Hayashi-started model at4.005Tyr; optional cap reference and structure-predictor guard. No flash or complete-track convergence claim.",
+  "base_commit": "848ada5",
+  "source": "out/envelope-mixing-cap-sept27-v3",
+  "diagnosis": {
+    "cell": 403,
+    "mass_fraction": 0.9800147396,
+    "old_H": 0.9880829181,
+    "mixed_previous_H": 0.9962711152,
+    "raw_change_H_50kyr": 0.008187615135,
+    "post_mixing_H_change_50kyr": -5.82e-07,
+    "selected_cap": 0.006,
+    "halving_result": "Raw H change approaches0.008188 rather than zero; instantaneous mixing cannot satisfy a smaller pointwise time cap."
+  },
+  "change": "Default-off abundance_cap_after_mixing compares abundances against the mass-weighted initial abundances in the current instantaneous partition. Finite convection keeps the original cap. Do not extrapolate an initial structure guess across a preceding composition change above the cap. Full/two-half errors and conservation audits unchanged.",
+  "comparison": {
+    "candidate": "candidate_matched_fine20",
+    "reference": "fine20_no_jump_predictor",
+    "same_age_years": 4005355170438.0107,
+    "global_relative_differences": {
+      "luminosity_Lsun": -2.5202136841873113e-06,
+      "radius_Rsun": -6.461223280851414e-07,
+      "Teff_K": -3.0699289954583264e-07,
+      "central_T_K": -7.978310234690866e-10,
+      "central_density_g_cm3": 5.438849370875687e-11,
+      "H_mass_g": 1.553512873897489e-11,
+      "He3_mass_g": 1.769087099035005e-10,
+      "He3_peak": 7.04510094706734e-09,
+      "convective_mass_fraction": 0.0
+    },
+    "profile_max_differences": {
+      "lnr": 6.4612253680707e-07,
+      "lnrho": 1.124017116982401e-05,
+      "lnT": 1.6976766023191203e-05,
+      "H1": 2.9036020920969463e-08,
+      "He3": 6.515912515277222e-09,
+      "He3_over_peak": 3.477441625118051e-07
+    },
+    "same_convective_boundary_count": true,
+    "accepted_checks": {
+      "candidate_matched_fine20": {
+        "accepted": 12,
+        "max_time_error": 0.8526888798421339,
+        "max_first_law": 1.6205364383736764e-08,
+        "report": {
+          "requested_age_reached": 1,
+          "age_years": 4005355170438.0107,
+          "accepted_this_invocation": 12,
+          "accepted_total": 17034,
+          "rejected_total": 5082,
+          "stop_reason": "requested age",
+          "cpu_seconds": 21.6395,
+          "wall_seconds": 12.829399208,
+          "full_production_track_validated": false,
+          "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+        }
+      },
+      "fine20_no_jump_predictor": {
+        "accepted": 25,
+        "max_time_error": 0.6480780118423013,
+        "max_first_law": 1.2460399378966258e-08,
+        "report": {
+          "requested_age_reached": 0,
+          "age_years": 4005355170438.0107,
+          "accepted_this_invocation": 25,
+          "accepted_total": 17047,
+          "rejected_total": 5089,
+          "stop_reason": "repeated step rejection: evolve_step: Newton iteration limit reached",
+          "cpu_seconds": 104.230676,
+          "wall_seconds": 55.267019416,
+          "full_production_track_validated": false,
+          "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+        }
+      },
+      "control": {
+        "accepted": 12,
+        "max_time_error": 0.8526888798066068,
+        "max_first_law": 1.6179840578445237e-08,
+        "report": {
+          "requested_age_reached": 1,
+          "age_years": 4005355170563.0586,
+          "accepted_this_invocation": 12,
+          "accepted_total": 17034,
+          "rejected_total": 5082,
+          "stop_reason": "requested age",
+          "cpu_seconds": 21.170073,
+          "wall_seconds": 12.908298792,
+          "full_production_track_validated": false,
+          "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+        }
+      },
+      "candidate_no_jump_predictor": {
+        "accepted": 12,
+        "max_time_error": 0.8526888798421339,
+        "max_first_law": 1.622147882684999e-08,
+        "report": {
+          "requested_age_reached": 1,
+          "age_years": 4005355170563.0586,
+          "accepted_this_invocation": 12,
+          "accepted_total": 17034,
+          "rejected_total": 5082,
+          "stop_reason": "requested age",
+          "cpu_seconds": 17.034972,
+          "wall_seconds": 10.60499925,
+          "full_production_track_validated": false,
+          "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+        }
+      }
+    },
+    "limitations": [
+      "The reference is its last accepted state,125.0yr short of its original target because the tiny last step failed. Candidate was explicitly rerun to that exact accepted age.",
+      "Only one mixing event tested; production option remains unselected pending focused regression checks."
+    ]
+  },
+  "tests": {
+    "command": "ctest --test-dir out/build -R '^(burning_mixing|evolution_controller|finite_metal_evolution|lagged_finite_metal_evolution)$' --output-on-failure -j 2",
+    "passed": 4,
+    "failed": 0,
+    "coverage": "Conservative homogenization, real burning cap, isolated cells, finite and lagged finite cap failures preserve initial state; existing controller prediction/audit/extrapolation integration."
+  },
+  "limitations": [
+    "Only one instantaneous boundary event studied here.",
+    "First cap-only prototypes failed the unchanged time checks because a predicted half step changed its convective partition; they remain excluded.",
+    "Fine references encountered small final-target step failures. The matched comparison explicitly targets the reference last accepted age.",
+    "No change to the instantaneous-convection physical approximation itself."
+  ]
+}
