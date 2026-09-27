@@ -1,3 +1,4 @@
+#include "ember/detail/complete_grid_cell.hpp"
 #include "ember/atmosphere_grid.hpp"
 #include "ember/constants.hpp"
 #include "ember/interp.hpp"
@@ -231,43 +232,7 @@ CompositionAtmosphereGrid::stencil(const std::array<double, 4> &q) const {
     preferred[k] = axes_[k].size()==1 ? 0 : interp::locate(axes_[k], q[k]);
   if (!has_missing_states_ && cell_valid_.empty())
     return preferred;
-  // At an exact knot either incident cell provides a one-sided derivative.
-  // Prefer the ordinary upper-side cell. If absent, use a complete lower-
-  // side cell, preserving closed edges of the existing supported domain.
-  // No tolerance, extrapolation, or omitted derivative corner is allowed.
-  for (unsigned alternative = 0; alternative < 16; ++alternative) {
-    auto base = preferred;
-    bool eligible = true;
-    for (unsigned k = 0; k < 4; ++k) {
-      if (!(alternative & (1U << k)))
-        continue;
-      if (!base[k] || q[k] != axes_[k][base[k]]) {
-        eligible = false;
-        break;
-      }
-      --base[k];
-    }
-    if (!eligible)
-      continue;
-    if(!cell_valid_.empty()) {
-      std::size_t cell=0;
-      for(unsigned k=0;k<4;++k)cell=cell*std::max(std::size_t{1},axes_[k].size()-1)+base[k];
-      if(!cell_valid_[cell])continue;
-    }
-    bool complete = true;
-    for (unsigned corner = 0; corner < 16; ++corner) {
-      std::size_t index = 0;
-      for (unsigned k = 0; k < 4; ++k)
-        index = index * axes_[k].size() + base[k] + (axes_[k].size()>1 && (corner & (1U << k)));
-      if (!valid_[index]) {
-        complete = false;
-        break;
-      }
-    }
-    if (complete)
-      return base;
-  }
-  return std::nullopt;
+  return detail::complete_grid_cell(axes_,q,valid_,cell_valid_);
 }
 std::array<double, 4>
 CompositionAtmosphereGrid::coordinates(double Teff, double g,

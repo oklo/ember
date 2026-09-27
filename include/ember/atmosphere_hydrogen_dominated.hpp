@@ -2,6 +2,7 @@
 #include "ember/atmosphere.hpp"
 #include "ember/constants.hpp"
 #include "ember/interp.hpp"
+#include "ember/detail/complete_grid_cell.hpp"
 #include <array>
 #include <algorithm>
 #include <cmath>
@@ -38,11 +39,12 @@ public:
   if(z<axes_[0].front()-eps||z>axes_[0].back()+eps)return false;
   auto q=coordinates(t,g,z);
   for(std::size_t k=0;k<3;++k)if(q[k]<axes_[k].front()||q[k]>axes_[k].back())return false;
-  return true;
+  return stencil(q).has_value();
  }
  AtmosphereState eval(double t,double g,const Composition& c)const override {
   if(!covers(t,g,c))throw std::domain_error("HydrogenDominatedAtmosphereGrid: outside explicit composition or source domain");
-  auto q=coordinates(t,g,c.Z());auto T=sample(logT_,q),pg=sample(logPg_,q);
+  auto q=coordinates(t,g,c.Z());const auto cell=*stencil(q);
+  auto T=sample(logT_,q,cell),pg=sample(logPg_,q,cell);
   const double pr=constants::a_rad*std::pow(T[0],4)/3;
   AtmosphereState s{};s.T=T[0];s.Pgas=pg[0];s.P=s.Pgas+pr;s.tau=tau_;
   if(!positive(s.P)||s.P==pr)throw std::domain_error("HydrogenDominatedAtmosphereGrid: invalid pressure");
@@ -62,7 +64,7 @@ private:
  }
  void read(std::istream& in,Approximation a,double maximum){
   auto label=[&](const char* expected){std::string s;if(!(in>>s)||s!=expected)throw std::runtime_error(std::string("HydrogenDominatedAtmosphereGrid: expected ")+expected);};
-  label("EMBER_HYDROGEN_DOMINATED_ATMOSPHERE");int version{};in>>version;if(version!=1)throw std::runtime_error("HydrogenDominatedAtmosphereGrid: version");
+  label("EMBER_HYDROGEN_DOMINATED_ATMOSPHERE");int version{};in>>version;if(version!=1 && version!=2)throw std::runtime_error("HydrogenDominatedAtmosphereGrid: version");
   label("source");in>>std::quoted(source_);label("approximation");in>>std::quoted(approximation_);
   if(!in||source_.empty()||approximation_.empty()||a!=Approximation::neglect_trace_atmospheric_helium||
      !positive(maximum)||maximum>=1)throw std::invalid_argument("HydrogenDominatedAtmosphereGrid: explicit approximation required");
@@ -80,12 +82,29 @@ private:
       (k==0?(v<0||v>=1):!positive(std::pow(10.,v))))throw std::runtime_error("HydrogenDominatedAtmosphereGrid: axis");}
   }
   label("data");logT_.resize(count);logPg_.resize(count);
-  for(std::size_t j=0;j<count;++j){in>>logT_[j]>>logPg_[j];if(!in||!positive(std::pow(10.,logT_[j]))||!positive(std::pow(10.,logPg_[j])))throw std::runtime_error("HydrogenDominatedAtmosphereGrid: incomplete source");}
+  if(version==2)valid_.resize(count);
+  bool any=false;
+  for(std::size_t j=0;j<count;++j){
+   if(version==2){
+    int present{};in>>present;
+    if(!in || (present!=0 && present!=1))throw std::runtime_error("HydrogenDominatedAtmosphereGrid: invalid source mask");
+    valid_[j]=present;
+    if(!present)continue;
+   }
+   in>>logT_[j]>>logPg_[j];
+   if(!in||!positive(std::pow(10.,logT_[j]))||!positive(std::pow(10.,logPg_[j])))throw std::runtime_error("HydrogenDominatedAtmosphereGrid: incomplete source");
+   any=true;
+  }
+  if(!any)throw std::runtime_error("HydrogenDominatedAtmosphereGrid: no source states");
   std::string extra;if(in>>extra)throw std::runtime_error("HydrogenDominatedAtmosphereGrid: trailing data");
  }
- std::array<double,4> sample(const std::vector<double>& f,const std::array<double,3>& q)const {
-  std::array<std::size_t,3> lo{};std::array<double,3> u{},width{};
-  for(std::size_t k=0;k<3;++k){lo[k]=interp::locate(axes_[k],q[k]);width[k]=axes_[k][lo[k]+1]-axes_[k][lo[k]];u[k]=(q[k]-axes_[k][lo[k]])/width[k];}
+ std::optional<std::array<std::size_t,3>> stencil(const std::array<double,3>& q)const {
+  return detail::complete_grid_cell(axes_,q,valid_);
+ }
+ std::array<double,4> sample(const std::vector<double>& f,const std::array<double,3>& q,
+     const std::array<std::size_t,3>& lo)const {
+  std::array<double,3> u{},width{};
+  for(std::size_t k=0;k<3;++k){width[k]=axes_[k][lo[k]+1]-axes_[k][lo[k]];u[k]=(q[k]-axes_[k][lo[k]])/width[k];}
   std::array<double,4> out{};
   for(unsigned corner=0;corner<8;++corner){
    std::size_t idx=0;std::array<double,3>w{};
@@ -99,6 +118,7 @@ private:
  std::array<double,NMETALS> pattern_{};
  std::array<std::vector<double>,3> axes_;
  std::vector<double> logT_,logPg_;
+ std::vector<bool> valid_;
 };
 
 } // namespace ember

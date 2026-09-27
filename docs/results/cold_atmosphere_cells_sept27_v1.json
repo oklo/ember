@@ -1,0 +1,17 @@
+{
+  "created_utc": "2026-09-27T19:00:39.242691+00:00",
+  "selected_for_evolution": false,
+  "unchanged_old_queries": 90,
+  "supported_new_queries": 28,
+  "missing_queries_rejected": 3,
+  "maximum_derivative_error": 2.6049313817111397e-09,
+  "old_rows_preserved": 112,
+  "high_table_sha256": "86c673ff183dce76e96e249d402c821e0e3b3ab9333e69ef9f38369b030f0aea",
+  "scope": "Completed cold cells using accepted source columns and interpolation. No missing-corner extrapolation. Matching optical depth remains100; gas-only and trace-He qualifications unchanged.",
+  "code_tests": [
+    "atmosphere_grid",
+    "atmosphere_trace_helium",
+    "atmosphere_hydrogen_envelope"
+  ],
+  "source_provenance": "out/highg-table-extension-sept27-v7/sources.json"
+}

@@ -333,3 +333,21 @@ density, source identity and preservation of preceding models. The live star
 still uses its existing boundary. Cooler high-gravity columns and gaps between
 the warm and cooling source regions are being filled before selecting the new
 connection. [Checks and limitations](results/mixed_helium_atmosphere_sept27_v1.json).
+
+
+### Incomplete hydrogen-atmosphere extensions
+
+Version 2 of `EMBER_HYDROGEN_DOMINATED_ATMOSPHERE` permits missing vertices.
+After the unchanged axes and `data` marker, each present vertex is written as
+`1 log10(T) log10(Pgas)`; an absent vertex is `0`. Version 1 remains readable.
+Interpolation and its derivatives require every corner of the enclosing cell.
+At an exact grid edge, a complete cell on either side supplies the value and
+one-sided derivatives. No tolerance extends a query into a missing cell. The
+hydrogen and composition-dependent readers share this cell selection.
+
+This allows completed cooler cells to be used while higher-gravity columns
+are still being calculated. In the current extension, 90 preceding queries
+are unchanged, 28 new queries are supported, and three missing-cell queries
+are rejected. The largest finite-difference derivative error is **2.605e-9**.
+Matching depth remains 100; gas-only and trace-helium assumptions are unchanged.
+[Checks](results/cold_atmosphere_cells_sept27_v1.json).

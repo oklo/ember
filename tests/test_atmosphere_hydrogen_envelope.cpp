@@ -72,6 +72,18 @@ std::string table() {
     out<<.9*lt+.04*lg+.25+3*z<<' '<<-.3*lt+.8*lg-2+20*z<<'\n';
   return out.str();
 }
+std::string incomplete_extension() {
+  auto header=table();header.resize(header.find("metallicity"));
+  header.replace(header.find("ATMOSPHERE 1"),12,"ATMOSPHERE 2");
+  std::ostringstream out;out<<std::setprecision(17)<<header
+    <<"metallicity 2 0 .001\nlog_teff 3 3.4 3.5 4\nlog_g 3 5 5.5 6\ndata\n";
+  for(double z:{0.,.001})for(double lt:{3.4,3.5,4.})for(double lg:{5.,5.5,6.}) {
+    if(lt==3.4 && lg==6.)out<<"0\n";
+    else out<<"1 "<<.9*lt+.04*lg+.25+3*z<<' '<<-.3*lt+.8*lg-2+20*z<<'\n';
+  }
+  return out.str();
+}
+
 }
 int main() {
   try {
@@ -104,6 +116,29 @@ int main() {
     require(!grid.covers(4700,3e5,composition(.002,1e-5)),"helium approximation exceeded");
     require(!grid.covers(4700,3e5,composition(.0005,.002)),"metals extrapolated");
     require(!grid.covers(4700,1e7,c),"gravity extrapolated");
+
+    // A cold extension can be complete at low gravity while its high-gravity
+    // corner is missing. It must not invalidate the older hot boundary.
+    std::istringstream sparse_input(incomplete_extension());
+    HydrogenDominatedAtmosphereGrid sparse(eos,sparse_input,
+        HydrogenDominatedAtmosphereGrid::Approximation::neglect_trace_atmospheric_helium,.001);
+    for(double t:{std::pow(10.,3.5),4700.,10000.})for(double lg:{5.,5.25,5.5,5.75,6.}) {
+      const auto old=grid.eval(t,std::pow(10.,lg),c),added=sparse.eval(t,std::pow(10.,lg),c);
+      require(close(old.T,added.T) && close(old.P,added.P),"incomplete extension changed existing atmosphere values");
+      require(close(old.dlnT_dlnTeff,added.dlnT_dlnTeff)
+          && close(old.dlnP_dlng,added.dlnP_dlng),"incomplete extension changed existing derivatives");
+    }
+    require(sparse.covers(2900,std::pow(10.,5.25),c),"complete cold cell rejected");
+    require(derivative_error(sparse,2900,std::pow(10.,5.25),c)<2e-9,"cold cell derivatives incorrect");
+    require(sparse.covers(2900,std::pow(10.,5.5),c),"closed edge of completed cell rejected");
+    require(!sparse.covers(2900,std::pow(10.,5.75),c),"missing cold cell interpolated");
+    require(rejects([&]{sparse.eval(2900,std::pow(10.,5.75),c);}),"evaluation accepted missing cell");
+    require(!sparse.covers(std::pow(10.,3.5)*std::exp(-1e-7),std::pow(10.,5.75),c),
+        "missing cell reached by tolerance at old boundary");
+    require(!sparse.covers(std::pow(10.,3.4),1e6,c),"missing source vertex accepted");
+    auto invalid_mask=incomplete_extension();invalid_mask.replace(invalid_mask.find("data\n")+5,1,"2");
+    require(rejects([&]{std::istringstream bad(invalid_mask);HydrogenDominatedAtmosphereGrid q(eos,bad,
+        HydrogenDominatedAtmosphereGrid::Approximation::neglect_trace_atmospheric_helium,.001);}),"invalid source mask accepted");
 
     // Use retained physical sources to check the actual selection, including
     // composition joins and both gravity intervals, without a stellar solve.
