@@ -20,7 +20,7 @@ of the mass beneath a convective envelope. The atmosphere matching depth
 remains at optical depth 100 throughout. The retained sequence has used
 **13.48 CPU-hours**, including rejected timestep trials.
 [Current trajectory and inputs](docs/reports/2026-09-27/pms_figure_inputs.json),
-[internal structure](docs/results/radiative_shell_geometry_sept27_v1.json).
+[internal structure](docs/results/radiative_interior_sept27_v1.json).
 
 The selected physics includes initial deuterium burning, pp reactions and
 explicit C12/C13/N14 conversion with Solar Fusion III rates, plasma neutrino
@@ -37,16 +37,16 @@ isotope and energy audits. Matched-age controls support the timestep settings
 used in the fully convective and radiative-core phases. Separating local
 Newton correction accuracy from integrated species conservation removes a
 verified solver stall without weakening the conservation requirement.
-[Time accuracy](docs/results/radiative_shell_time_accuracy_sept27_v1.json),
-[diffusion convergence](docs/results/species_correction_accuracy_sept27_v1.json).
+[Time accuracy](docs/results/radiative_core_time_accuracy_sept27_v2.json),
+[diffusion convergence](docs/results/local_correction_comparison_sept27_v2.json).
 
 The atmosphere and EOS inputs cover all 67 saved settling comparison
-structures. The cooler, higher-gravity atmosphere family still contains
-explicitly inferred values. Independent source columns pass down to
-**4600 K at log g = 6.0** and **4650 K at log g = 6.2**; more coverage is needed
-for cooling, and these new rows have not yet been selected in the live run.
-[Atmosphere coverage](docs/results/hydrogen_envelope_integration_sept27_v1.json),
-[cool source checks](docs/results/cool_highg_sources_sept27_v1.json),
+structures. The selected high-gravity atmosphere table covers **4600–5400 K**
+and **log g = 5.9–6.2**, using checked source solutions and explicit
+interpolation. Its extension preserves all 5999 saved atmosphere queries,
+three stellar intervals and the actual continuation's starting state exactly.
+The boundary remains gas-only, with declared trace-helium and composition limits.
+[Atmosphere checks](docs/results/highg_atmosphere_extension_sept27_v1.json),
 [EOS coverage](docs/results/eos_lifetime_coverage_sept27_v1.json).
 
 Separate late-evolution calculations develop a helium-3 shell pulse after an

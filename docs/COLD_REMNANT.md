@@ -2,79 +2,59 @@
 
 ## Current priority — September 27, 2026
 
-The continuous Hayashi-started sequence forms its first radiative region at
-**3.558 Tyr**, **3250 K**, with surface hydrogen **X=.1722**. The checked
-continuation passes **3.585 Tyr**, with H/He and metal
-diffusion active across radiative boundaries. A radiative shell first surrounds
-the convective centre; the centre then becomes radiative. About **54.23%** of the
-mass is now radiative. All accepted intervals pass the
-unchanged isotope and energy audits. The fixed-metal-atmosphere comparison
-is complete at **3.078 Tyr**. Both use the common lifetime program.
-[First radiative region](results/continuous_radiative_core_sept27_v1.json),
-[internal structure](results/radiative_shell_geometry_sept27_v1.json).
-The updated paper and Figure 1 use the continuous history through **3.585 Tyr**.
-Read the [current handoff](../HANDOFF.md) for the live process and next work.
+Continue the same Hayashi-started star through hydrogen exhaustion and onto
+white-dwarf cooling, testing whether the helium-3 pulse occurs with a consistent
+atmosphere history. The published trajectory reaches **3.585 Tyr**. Its centre
+is radiative, beneath a convective envelope; **54.23%** of the mass is radiative
+at the plotted endpoint. The first radiative region formed as a shell at
+**3.558 Tyr**. The live calculation has continued farther; read the
+[current handoff](../HANDOFF.md) before starting or changing jobs.
+[Trajectory and inputs](reports/2026-09-27/pms_figure_inputs.json),
+[first radiative region](results/continuous_radiative_core_sept27_v1.json),
+[structure at the plotted endpoint](results/radiative_interior_sept27_v1.json).
 
-Failed trial audits now trigger a smaller timestep, with a bounded number of
-retries. Every full and half interval still has to pass the same checks before
-acceptance. Controller recovery, physical diffusion and exact restart pass
-their tests in the isolated checkout. Local composition tolerances remain
-1e-15 for one instantaneously mixed region and a checked 1e-13 setting otherwise;
-the global inventory budget remains 1e-14. A matched 11.76-Myr comparison reduces
-accepted intervals from 19 to 10, with a 0.00004235% luminosity difference.
-[Composition-solve comparison](results/radiative_core_solve_accuracy_sept27_v1.json).
+The common lifetime program includes initial deuterium, pp and explicit CN
+burning, plasma neutrino losses, composition-dependent EOS and opacity,
+wavelength-dependent atmospheres, hot H/He/metal diffusion, and conservative
+heat transport during composition changes. Each connected convective region
+is mixed instantaneously, with a check on the gradient needed to carry its
+species flux. Finite mixing is available in the engine but is not selected
+in this trajectory. Unsupported cool radiative transport remains a limitation;
+there is no silent replacement for the missing microscopic law.
 
-A matched **100 Myr** comparison supports species time-error **1e-6** in this
-phase, with **19** accepted intervals instead of **31** and a **0.0002978%**
-difference in total helium-3. Separating local Newton correction accuracy from
-integrated conservation also removes a solver stall: a checked **100 Myr**
-continuation passes in **17** steps with no rejections. Integrated species and
-reconstructed continuity still use **1e-14**; local corrections use **1e-13**.
-[Time accuracy](results/radiative_shell_time_accuracy_sept27_v1.json),
-[diffusion convergence](results/species_correction_accuracy_sept27_v1.json).
+All accepted full and half intervals must pass isotope and energy audits.
+For the present radiative-interior phase, a matched **500 Myr** comparison
+supports species time accuracy **1e-5**: the total helium-3 inventory differs
+by **0.002766%** from the tighter calculation. A separate **1 Gyr** comparison
+supports local Newton corrections of **1e-12**, while retaining **1e-13** outer
+composition coupling and **1e-14** integrated species balance. It uses
+**27.12%** less CPU and changes total helium-3 by **0.0002092%**. These controls
+do not establish time convergence through a flash.
+[Time accuracy](results/radiative_core_time_accuracy_sept27_v2.json),
+[local solve](results/local_correction_comparison_sept27_v2.json).
 
-A matched **1 Gyr** comparison supports a local Newton correction criterion ten
-times the outer coupling accuracy while retaining the same conservation bounds.
-It removes five stalled local solves and uses **27.12%** less CPU in this comparison;
-the total helium-3 inventory differs by **0.0002092%**. Twelve existing burning,
-transport, finite-mixing and restart tests pass. The same star continues with
-this setting beyond **3.573 Tyr**. This is evidence for the present gradual
-evolution, not for time convergence through a flash.
-[Local-solve accuracy](results/local_correction_comparison_sept27_v2.json).
+The atmosphere match remains at optical depth **100** throughout. The selected
+high-gravity grid covers **4600–5400 K**, **log g = 5.9–6.2**, using checked
+source columns and declared interpolation. The extension preserves all 5999
+saved atmosphere queries and three stellar intervals exactly, including the
+final physical checkpoint. Its actual continuation preserves the starting
+physical state. All 67 saved late comparison structures remain supported.
+Those separate histories inherit an atmosphere adjustment and cannot establish
+atmosphere-independent ignition. Gas-only and trace-helium assumptions remain
+explicit, and additional coverage is being prepared in advance.
+[Atmosphere checks](results/highg_atmosphere_extension_sept27_v1.json),
+[EOS coverage](results/eos_lifetime_coverage_sept27_v1.json).
 
-The continuous trajectory passes all isotope and energy checks and is beyond
-**3.585 Tyr**. The atmosphere match remains at optical depth 100. The 4600 K
-gravity row and 4625 K, log g = 6.1 corner now have checked source solutions.
-All 5932 checked early evaluations remain exact, and all 67 saved late
-structures are supported. Matching pressure changes by at most 1.101% on
-those late structures; three stellar intervals and the final physical
-checkpoint match exactly. The actual continuation also preserves its physical
-starting state. Gas-only and trace-helium qualifications remain, and the
-high-gravity source domain has not yet been extended. Separate flash histories
-still inherit a forced atmosphere change.
-[Atmosphere replacement checks](results/highg_atmosphere_integration_sept27_v2.json),
-[hydrogen-rich boundary](results/hydrogen_envelope_integration_sept27_v1.json).
-
-Exact reuse of repeated EOS evaluations preserves six complete stellar
-intervals and the final physical checkpoint. Six EOS, transport and restart
-tests pass. The matched timing pair uses about **5%** less CPU, with scheduling
-variation included. The continuous calculation now uses this implementation.
+Exact reuse of repeated EOS evaluations preserves six stellar intervals and
+the final physical checkpoint, using about **5%** less CPU in one timing pair.
+Six EOS, transport and restart tests pass. No interpolation or source-domain
+checks change.
 [EOS comparison](results/exact_eos_reuse_sept27_v1.json).
 
-The [September 27 paper](reports/2026-09-27/ember_status_and_future.pdf) is
-**30 pages**, reduced from 63 with physical qualifications, comparisons and the
-lifetime timeline retained.
-
-[Hydrogen-rich atmosphere recovery](results/atmosphere_hydrogen_recovery_sept27_v1.json),
-[real diffusion/restart check](results/screened_radiative_core_sept27_v1.json),
-[opacity support](results/opacity_lifetime_extension_sept27_v1.json),
-[completed review](research/fable/ADVERSARIAL_REVIEW_20260926.md).
-
-A 50-Gyr comparison supports a species time-error tolerance of 1e-7 in the
-smooth fully convective phase. It required 25 intervals instead of 73;
-structure accuracy and conservation checks are unchanged. The same star
-continues with this setting from 1.846 Tyr.
-[Timestep comparison](results/lifetime_time_accuracy_sept27_v1.json).
+The [working paper](reports/2026-09-27/ember_status_and_future.pdf) is **30 pages**,
+with the physical qualifications, model comparisons and lifetime timeline retained.
+The [completed review](research/fable/ADVERSARIAL_REVIEW_20260926.md) records
+remaining code, reproduction and physics limitations.
 
 ## Objective and next milestones
 

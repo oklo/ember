@@ -11,21 +11,25 @@ pure-hydrogen sources neglect trace atmospheric helium in the matching
 pressure and temperature. Density always uses the actual stellar composition.
 
 `high.dat` contains solved gas atmospheres and explicit interpolated knots.
-The complete 4600 K gravity row and the 4625 K, log g = 6.1 column now have
-independently checked source solutions. Older warm anchors retain their
-recorded provenance. The grid covers 4600–4800 K and log g = 5.9–6.1;
-`sources.json` identifies the source calculations and remaining interpolation.
-Trace atmospheric helium is still approximated, and helium mass fractions
-above the declared limits are rejected.
+It covers 4600–5400 K and log g = 5.9–6.2. The forward extension uses 12
+independently checked columns on the same fine opacity grid. The 4800 K,
+log g = 6.2 entry interpolates the solved 4700 K and 5000 K columns; a separate
+attempt to calculate it directly reached its CPU limit and was not used.
+`sources.json` records the source columns and each interpolated entry.
 
-The latest source replacement preserves all 5932 checked early boundary
-queries exactly and supports all 67 saved late structures. On the late
-structures, matching temperature changes by at most 0.2367% and pressure by
-1.101%. A three-step stellar replay and its final physical checkpoint are
-identical before and after the update. The actual continuation also preserves
-its initial physical state. These checks establish compatibility over the
-sampled structures; future models still require coverage checks. See
-[the integration checks](../../../docs/results/highg_atmosphere_integration_sept27_v2.json).
+The extension preserves all 50 original numerical rows and all 5999 saved
+atmosphere queries exactly. Another 100 queries test the added domain and its
+derivatives. Three actual stellar intervals and their final physical checkpoint
+are identical before and after the extension; the production continuation also
+preserves its starting physical state. Values are continuous at the former
+4800 K and log g = 6.1 boundaries, while the new cells supply different
+one-sided slopes. This is the existing piecewise logarithmic interpolation.
+[Validation](../../../docs/results/highg_atmosphere_extension_sept27_v1.json).
+
+Trace atmospheric helium remains approximated. The high-gravity metallicity
+range is still 0 to 1e-20; separate small-metal source controls have not changed
+that domain. Future models outside the declared composition, temperature or
+gravity bounds require additional coverage.
 
 The manifest selects composition and gravity intervals. Each interval queries
 covered source endpoints, preserving the original full-composition boundary

@@ -1,0 +1,185 @@
+{
+  "created_utc": "2026-09-27T12:02:20.177422+00:00",
+  "selected_for_evolution": true,
+  "saved_queries_exact": 5999,
+  "new_supported_queries": 100,
+  "maximum_derivative_error": 7.049003158954292e-09,
+  "unchanged_prior_numeric_rows": 50,
+  "edge_values_exact": true,
+  "edge_one_sided_slopes": [
+    {
+      "edge": "4800K",
+      "log_g": 5.9,
+      "old_logarithmic_T_Pgas_slopes": [
+        1.7170915581767747,
+        -16.10349141378736
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        2.372352506922461,
+        -15.881746226661681
+      ]
+    },
+    {
+      "edge": "4800K",
+      "log_g": 5.95,
+      "old_logarithmic_T_Pgas_slopes": [
+        1.695978065134922,
+        -16.225766997401408
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        2.29609709724445,
+        -15.628132687512863
+      ]
+    },
+    {
+      "edge": "4800K",
+      "log_g": 6.0,
+      "old_logarithmic_T_Pgas_slopes": [
+        1.6748645720931181,
+        -16.34804258101555
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        2.2198416875664138,
+        -15.374519148364046
+      ]
+    },
+    {
+      "edge": "4800K",
+      "log_g": 6.05,
+      "old_logarithmic_T_Pgas_slopes": [
+        1.6183301239568844,
+        -16.396135522416646
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        2.158324949075024,
+        -15.471159354737813
+      ]
+    },
+    {
+      "edge": "4800K",
+      "log_g": 6.1,
+      "old_logarithmic_T_Pgas_slopes": [
+        1.5617956758206504,
+        -16.444228463817645
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        2.0968082105836334,
+        -15.56779956111163
+      ]
+    },
+    {
+      "edge": "logg6.1",
+      "Teff_K": 4599.999999999998,
+      "old_logarithmic_T_Pgas_slopes": [
+        0.0009022264435731874,
+        0.9306050656575271
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        0.002996076319123892,
+        0.9370305215185176
+      ]
+    },
+    {
+      "edge": "logg6.1",
+      "Teff_K": 4624.999999999998,
+      "old_logarithmic_T_Pgas_slopes": [
+        -0.0019119326450756158,
+        0.9347319524514253
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        0.0011559530119153944,
+        0.9370926243497685
+      ]
+    },
+    {
+      "edge": "logg6.1",
+      "Teff_K": 4650.000000000001,
+      "old_logarithmic_T_Pgas_slopes": [
+        -0.0027567375308734754,
+        0.9367977635813529
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        -0.0008355059867115555,
+        0.9360345947302967
+      ]
+    },
+    {
+      "edge": "logg6.1",
+      "Teff_K": 4700.000000000001,
+      "old_logarithmic_T_Pgas_slopes": [
+        -0.007418104043797084,
+        0.9368248643723509
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        -0.004357245540691478,
+        0.9423312112832999
+      ]
+    },
+    {
+      "edge": "logg6.1",
+      "Teff_K": 4799.999999999999,
+      "old_logarithmic_T_Pgas_slopes": [
+        -0.017756422258461475,
+        0.9280302241401761
+      ],
+      "new_logarithmic_T_Pgas_slopes": [
+        0.01695621402944427,
+        0.9804951365360496
+      ]
+    }
+  ],
+  "high_sha256": "f344e5a9220b4259bf239050ca3b31d5011e8ca1d071b37926705ca81f8a2020",
+  "limitations": [
+    "Gas-only and trace-atmospheric-helium approximation retained.",
+    "Metallicity domain remains0..1e-20.",
+    "Piecewise logarithmic interpolation is continuous in value; slopes change at knots. This extension has no forced matching-depth change."
+  ],
+  "exact_driver_replay_intervals": 3,
+  "exact_final_physical_checkpoint": true,
+  "only_restart_identity_changed": "atmosphere.hydrogen_envelope.high_gravity",
+  "replay_accepted_end": 8970,
+  "replay_age_end_years": 3597460570095.9326,
+  "portable_input_files": 55,
+  "hashes": {
+    "high.dat": "f344e5a9220b4259bf239050ca3b31d5011e8ca1d071b37926705ca81f8a2020",
+    "sources.json": "395e39d85584d444a5ca1abe3209d1fb0ac66c66b20f82aba2ac1e1efb731632",
+    "snapshot.checkpoint": "573102ec4cee477ab5f808fe3cb319f604c697db3f20fe31562df7233be79af4",
+    "candidate/data/MANIFEST.json": "4be5640e518745dc35990baa37d1863860805b56120b0b01eeb1857c69365c7b",
+    "candidate/evolution/final.checkpoint": "7b98582285191abd74fa68704950dad9dd46674466fb05c2e50d888bd0b5688b",
+    "baseline/evolution/final.checkpoint": "7c45fc516d34331fb7d4bc57edbbabc1525ca73c81055181cdda305745e2f32d",
+    "public_sources.json": "43810dc13f5f7c5633773d798966e11d80fcb97604eea7b2b3f1070072fa9ed8",
+    "production_manifest": "bf8dd2bce1308c337a7af6ecc8e458765991d24ef08618d448e087157814039c"
+  },
+  "scope": "High-gravity atmosphere extension from4600\u20134800 K/logg5.9\u20136.1 to4600\u20135400 K/logg5.9\u20136.2, using12 independently checked source columns and declared interpolation. Original values retained.",
+  "selection_utc": "2026-09-27T12:08:45.540729+00:00",
+  "production_run": "out/continuous-lifetime-sept27-v14",
+  "previous_retained_accepted": 9000,
+  "selection_age_years": 3598358878775.514,
+  "production_start_physical_history_exact": true,
+  "physical_payload_sha256": "d83b749d2b533740c0e0b01fbeb7e27b5c5bd5acf11f59b2a5233c36c68da680",
+  "executable_sha256": "8e41373a113b9f72e5d27231a702663ffa83b99c016e28115414f90a372b2846",
+  "source_commit": "b38aba5",
+  "accepted_source_columns": 12,
+  "domain_Teff_K": [
+    4600,
+    5400
+  ],
+  "domain_log_g": [
+    5.9,
+    6.2
+  ],
+  "metallicity_domain": [
+    0,
+    1e-20
+  ],
+  "interpolated_control": {
+    "Teff_K": 4800,
+    "log_g": 6.2,
+    "source_Teff_K": [
+      4700,
+      5000
+    ],
+    "independent_attempt": "out/highg-4800-completion-sept27-v1",
+    "outcome": "CPU bound reached; never used as a physical source"
+  }
+}

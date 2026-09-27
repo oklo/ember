@@ -1,0 +1,42 @@
+{
+  "created_utc": "2026-09-27T11:21:33.032595+00:00",
+  "scope": "Read-only diagnostic on the exact published continuous-star endpoint, using saved transported-heat rates and the actual Ledoux criterion.",
+  "age_years": 3585155270962.023,
+  "accepted": 8564,
+  "central_temperature_K": 9340630.027662998,
+  "central_density_g_cm3": 512.6430146689402,
+  "central_H": 0.07572511120785977,
+  "central_He3": 5.47392153590644e-05,
+  "surface_He3": 0.0012874084807817949,
+  "radiative_cells": [
+    0,
+    270
+  ],
+  "radiative_mass_fraction": 0.5423262626274409,
+  "radiative_outer_radius_fraction": 0.5059891333854002,
+  "convective_cells": [
+    271,
+    511
+  ],
+  "nuclear_fraction": 0.9981316707414095,
+  "nuclear_radiative_contribution": 0.9871272076665433,
+  "nuclear_convective_contribution": 0.011004463074866093,
+  "He3_maximum": 0.002818654555792679,
+  "He3_maximum_mass_fraction_coordinate": 0.41805262080320915,
+  "semiconvective_faces": 0,
+  "thermohaline_faces": 0,
+  "qualification": "The absence of these two mixing criteria on this snapshot does not exclude their appearance later. No physics selection changed.",
+  "CPU_seconds": 2.982413,
+  "hashes": {
+    "snapshot.checkpoint": "51a144e452ab53e0e5fade8cce3cb5130e339e762877d60b02d6a499b2abfbaf",
+    "structure.cpp": "ad5caa055a186726465aecc265bf9bf1cc1d0face7eaa2547060d3b7e5ebe28c",
+    "structure": "dd5fd8cb706a592f755f1a9d045913399f5db13fb0e77c5c0e3c292822c0983b",
+    "structure.txt": "5e908ff8388ec92017bc638aa479db86fc6f94daf4eb7b1f1cc2567953475e00",
+    "faces.csv": "61681de8fe0ebee9beb2a186b5f0f759f90c4de84cdd2db4408bfdc10935e47e"
+  },
+  "source_commit": "b38aba5",
+  "private_evidence_directory": "out/radiative-progress-sept27-v2",
+  "cell_indices": "zero-based inclusive",
+  "nuclear_contribution_normalization": "surface luminosity; radiative plus convective contributions sum to nuclear_fraction",
+  "physical_selection_changed": false
+}
