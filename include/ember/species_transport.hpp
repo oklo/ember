@@ -8,7 +8,7 @@ namespace ember {
 using SpeciesFlux = std::function<SpeciesFaceResponse(
     std::size_t face, const Composition& left, const Composition& right, bool derivatives)>;
 struct SpeciesTransportOptions {
-  // Bound the Newton abundance correction and the integrated species balance.
+  // Bound the Newton abundance correction; also the default balance bound.
   // A local rate residual alone is not an abundance error in stiff diffusion.
   double abundance_tolerance{1e-13};
   std::size_t max_iterations{60}, max_backtracks{50};
@@ -24,6 +24,10 @@ struct SpeciesTransportOptions {
   // Opt-in parallel callers must supply a thread-safe const flux callback.
   // Matrix assembly and conservation sums retain their serial order.
   std::size_t evaluation_threads{1};
+  // Independent bound on the integrated species balance. Zero uses
+  // abundance_tolerance. Local correction accuracy need not equal the
+  // accuracy of a mass-weighted conservation sum.
+  double integrated_balance_tolerance{};
 };
 struct SpeciesBoundaryFlux {std::size_t face{};SpeciesVector rate{};};
 struct SpeciesTransportResult {

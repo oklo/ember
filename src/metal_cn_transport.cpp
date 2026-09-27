@@ -77,9 +77,15 @@ MetalCNTransportResult burn_metal_cn_and_diffuse(const Model& thermal,const Mode
   if(thermal.m!=previous.m || thermal.comp.size()!=thermal.size() || previous.comp.size()!=thermal.size()
       || thermal.M!=previous.M || !flux || !std::isfinite(dt) || dt<=0
       || !std::isfinite(options.abundance_tolerance) || options.abundance_tolerance<=0
+      || !std::isfinite(options.integrated_balance_tolerance) || options.integrated_balance_tolerance<0
       || !options.evaluation_threads || options.evaluation_threads>64
       || !options.max_iterations || !options.max_backtracks || regions.empty())
     throw std::invalid_argument("CN diffusion: invalid model, flux, step or options");
+  const double balance_tolerance=options.integrated_balance_tolerance>0?
+      options.integrated_balance_tolerance:options.abundance_tolerance;
+  const double balance_scale=options.abundance_tolerance/balance_tolerance;
+  if(!std::isfinite(balance_scale) || balance_scale<=0)
+    throw std::invalid_argument("CN diffusion: unrepresentable tolerance ratio");
   if(!common_mixing_rates.empty() && common_mixing_rates.size()+1!=thermal.size())
     throw std::invalid_argument("CN diffusion: common mixing size differs");
   for(double g:common_mixing_rates)if(!std::isfinite(g) || g<0)
@@ -229,7 +235,7 @@ MetalCNTransportResult burn_metal_cn_and_diffuse(const Model& thermal,const Mode
     const auto correction=newton_correction(current,state,state,linear_mixing?&conserved_flux:nullptr);
     double change=0;for(const auto& row:correction)change=std::max(change,measure(row));
     result.residual=state.norm;result.abundance_correction=change;
-    const double merit=std::max(change,measure(state.balance));
+    const double merit=std::max(change,balance_scale*measure(state.balance));
     if(merit<=options.abundance_tolerance) {
       result.iterations=iteration;result.integrated_balance=physical(state.balance);result.composition=previous.comp;
       for(std::size_t i=0;i<n;++i)for(std::size_t cell=regions[i].first;cell<regions[i].second;++cell)
@@ -255,7 +261,7 @@ MetalCNTransportResult burn_metal_cn_and_diffuse(const Model& thermal,const Mode
         try {
           const auto test=evaluate(candidate,false);
           const auto remaining=newton_correction(candidate,test,state);
-          double trial_merit=measure(test.balance);for(const auto& row:remaining)trial_merit=std::max(trial_merit,measure(row));
+          double trial_merit=balance_scale*measure(test.balance);for(const auto& row:remaining)trial_merit=std::max(trial_merit,measure(row));
           if(trial_merit<merit*(1-1e-4*damping) || trial_merit<=options.abundance_tolerance) {
             if(!accepted || trial_merit<best_merit){best=std::move(candidate);best_merit=trial_merit;accepted_damping=damping;accepted=true;}
             break;

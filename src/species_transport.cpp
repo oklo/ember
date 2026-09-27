@@ -128,9 +128,15 @@ SpeciesTransportResult burn_and_diffuse(const Model& thermal,const Model& previo
   if(thermal.m!=previous.m || thermal.size()!=previous.size() || thermal.comp.size()!=thermal.size()
       || previous.comp.size()!=previous.size() || !flux || !(dt>0) || !std::isfinite(dt)
       || !(options.abundance_tolerance>0) || !std::isfinite(options.abundance_tolerance)
+      || !std::isfinite(options.integrated_balance_tolerance) || options.integrated_balance_tolerance<0
       || !options.max_iterations || !options.max_backtracks || regions.empty()
       || thermal.M!=previous.M || !(thermal.M>0) || !std::isfinite(thermal.M))
     throw std::invalid_argument("burn and diffuse: invalid models, callback, time or options");
+  const double balance_tolerance=options.integrated_balance_tolerance>0?
+      options.integrated_balance_tolerance:options.abundance_tolerance;
+  const double balance_scale=options.abundance_tolerance/balance_tolerance;
+  if(!std::isfinite(balance_scale) || balance_scale<=0)
+    throw std::invalid_argument("burn and diffuse: unrepresentable tolerance ratio");
   const auto weights=nodal_mass_weights(thermal);
   for(const auto& c:previous.comp)composition_check(c,previous.comp.front());
   std::vector<Composition> old;std::vector<double> mass;std::vector<std::size_t> faces;
@@ -241,7 +247,7 @@ SpeciesTransportResult burn_and_diffuse(const Model& thermal,const Model& previo
     }
     result.abundance_correction=change;result.residual=state.norm;
     if(change<=options.abundance_tolerance
-        && std::max(std::abs(balance[0]),std::abs(balance[1]))<=options.abundance_tolerance) {
+        && std::max(std::abs(balance[0]),std::abs(balance[1]))<=balance_tolerance) {
       result.iterations=iteration;result.residual=state.norm;result.abundance_correction=change;result.composition=previous.comp;
       for(std::size_t i=0;i<n;++i) {
         for(std::size_t cell=regions[i].first;cell<regions[i].second;++cell)result.composition[cell]=current[i];
@@ -254,7 +260,7 @@ SpeciesTransportResult burn_and_diffuse(const Model& thermal,const Model& previo
     // tiny-cell rate residual can increase while the abundance error falls.
     // The current Jacobian converts each trial residual to an estimated
     // remaining abundance correction; the next iteration recomputes it.
-    const double merit=std::max({change,std::abs(balance[0]),std::abs(balance[1])});
+    const double merit=std::max({change,balance_scale*std::abs(balance[0]),balance_scale*std::abs(balance[1])});
     bool accepted=false;double best_merit=merit,accepted_damping=0;
     std::vector<Composition> best;
     auto search=[&](const std::vector<V>& direction) {
@@ -290,7 +296,7 @@ SpeciesTransportResult burn_and_diffuse(const Model& thermal,const Model& previo
           V trial_balance{};
           for(const auto& row:test.residual)for(std::size_t j=0;j<2;++j)trial_balance[j]+=row[j];
           const double trial_merit=std::max({remaining_norm,
-              std::abs(trial_balance[0]),std::abs(trial_balance[1])});
+              balance_scale*std::abs(trial_balance[0]),balance_scale*std::abs(trial_balance[1])});
           if(trial_merit<merit*(1-1e-4*damping) || trial_merit<=options.abundance_tolerance) {
             if(!accepted || trial_merit<best_merit) {
               best=std::move(candidate);best_merit=trial_merit;accepted_damping=damping;accepted=true;

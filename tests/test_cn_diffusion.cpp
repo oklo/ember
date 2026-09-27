@@ -72,6 +72,17 @@ int main() {
     SpeciesTransportOptions options;options.abundance_tolerance=1e-14;
     const std::vector<double> common(2,mode>0 && mode<4?.3/dt:0.);
     const auto result=burn_cn_and_diffuse(m,m,nuclear,regions,flux,dt,options,common);
+    if(warm && mode==0) {
+      auto separate=options;separate.abundance_tolerance=1e-6;
+      const auto loose=burn_cn_and_diffuse(m,m,nuclear,regions,flux,dt,separate,common);
+      double loose_balance=0;for(double x:loose.integrated_balance)loose_balance=std::max(loose_balance,std::abs(x));
+      check(loose_balance>1e-14,"independent-balance control exercises a loose residual",loose_balance);
+      separate.integrated_balance_tolerance=1e-14;
+      const auto bounded=burn_cn_and_diffuse(m,m,nuclear,regions,flux,dt,separate,common);
+      for(double x:bounded.integrated_balance)check(std::abs(x)<=1e-14,
+          "independent integrated CN balance remains enforced",x);
+      check(bounded.abundance_correction<=separate.abundance_tolerance,"independent local CN correction bound");
+    }
     Six global{};double heat=0,rest=0;std::vector<Six> residual;
     for(std::size_t i=0;i<m.size();++i) {
       const auto a=physical(m.comp[i]),b=physical(result.composition[i]);

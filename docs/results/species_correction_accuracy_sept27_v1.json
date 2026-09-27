@@ -1,0 +1,88 @@
+{
+  "created_utc": "2026-09-27T08:57:40.202544+00:00",
+  "change": "Separate the local Newton correction bound from the integrated species-balance bound in all three diffusion solvers. Defaults preserve the former behavior. Evolution requests local correction accuracy equal to the outer coupling tolerance1e-13; integrated balance and reconstructed continuity retain1e-14. Global species/energy audits, structure convergence and full/half time-error criteria are unchanged.",
+  "negative_and_positive_controls": [
+    {
+      "name": "before1",
+      "command": [
+        "/Users/greglaughlin/Projects/ember/out/endpoint-consistency-sept27-v1/after-control",
+        "/Users/greglaughlin/Projects/ember/out/continuous-lifetime-sept27-v8/data/configuration.txt",
+        "/Users/greglaughlin/Projects/ember/out/species-correction-floor-sept27-v1/snapshot.checkpoint",
+        "instantaneous",
+        "1e-13",
+        "1000000"
+      ],
+      "returncode": 1,
+      "wall_seconds": 3.954084583558142,
+      "output": "initial_drift_proxy=8.1021011918423502e-07 initial_heat_proxy=0.012642446653241496\nresidual=0 abundance_residual=0 material_heat_residual=0 correction=0\nCN diffusion: line search failed at iteration 9, correction 2.418e-14, balance 1.281e-18, last rejection \n"
+    },
+    {
+      "name": "after1",
+      "command": [
+        "/Users/greglaughlin/Projects/ember/out/species-correction-floor-sept27-v1/after-control",
+        "/Users/greglaughlin/Projects/ember/out/continuous-lifetime-sept27-v8/data/configuration.txt",
+        "/Users/greglaughlin/Projects/ember/out/species-correction-floor-sept27-v1/snapshot.checkpoint",
+        "instantaneous",
+        "1e-13",
+        "1000000"
+      ],
+      "returncode": 0,
+      "wall_seconds": 6.468272540718317,
+      "output": "initial_drift_proxy=8.1021011918423502e-07 initial_heat_proxy=0.012642446653241496\naudit_pass=1 audit_species=1.560605265756845e-18 first_law=2.744959815004222e-11 mass_error_surface=-8.2289262518421805e-12 source_error=0\ndrift_proxy=8.1020704384542795e-07 heat_proxy=0.012642227965793822\naudit_pass=1 audit_species=8.9439267691765641e-18 first_law=1.4854784069484595e-12 mass_error_surface=9.5593772386376435e-11 source_error=0\ndrift_proxy=8.1020857958989067e-07 heat_proxy=0.012642337130692691\naudit_pass=1 audit_species=1.2403668576439216e-16 first_law=1.6261436641684668e-12 mass_error_surface=-4.9955988666309892e-10 source_error=0\ndrift_proxy=8.1020704191741526e-07 heat_proxy=0.01264222778728093\nPASS mode=instantaneous full_half_structure=2.2584455194873954e-08 full_half_species=7.9078041283122541e-10 CPU_seconds=8.3209569999999999\n"
+    },
+    {
+      "name": "after5",
+      "command": [
+        "/Users/greglaughlin/Projects/ember/out/species-correction-floor-sept27-v1/after-control",
+        "/Users/greglaughlin/Projects/ember/out/continuous-lifetime-sept27-v8/data/configuration.txt",
+        "/Users/greglaughlin/Projects/ember/out/species-correction-floor-sept27-v1/snapshot.checkpoint",
+        "instantaneous",
+        "1e-13",
+        "5000000"
+      ],
+      "returncode": 0,
+      "wall_seconds": 8.635108957998455,
+      "output": "initial_drift_proxy=8.1021011918423502e-07 initial_heat_proxy=0.012642446653241496\naudit_pass=1 audit_species=5.0101998830091865e-19 first_law=1.6892043319671757e-12 mass_error_surface=-4.9416038153108319e-13 source_error=0\ndrift_proxy=8.1019489481812773e-07 heat_proxy=0.01264136738737681\naudit_pass=1 audit_species=5.8406098086736212e-18 first_law=3.439915019498585e-12 mass_error_surface=-1.2383547472502117e-11 source_error=0\ndrift_proxy=8.1020245955908401e-07 heat_proxy=0.012641902605909408\naudit_pass=1 audit_species=7.1381584047488025e-18 first_law=3.3348879213690452e-12 mass_error_surface=-1.5015482046837166e-11 source_error=0\ndrift_proxy=8.1019484736030594e-07 heat_proxy=0.012641363015928754\nPASS mode=instantaneous full_half_structure=4.5869426124056645e-07 full_half_species=1.5965332223356193e-08 CPU_seconds=12.475721999999999\n"
+    }
+  ],
+  "earlier_finite32Myr_control": {
+    "returncode": 0,
+    "wall_seconds": 9.299059166572988,
+    "output": "initial_drift_proxy=8.0375570572592002e-07 initial_heat_proxy=0.012222127365193864\naudit_pass=1 audit_species=2.3990624279366692e-15 first_law=1.4443179985335064e-10 mass_error_surface=-3.8270515369871078e-10 source_error=0\ndrift_proxy=8.0376557206484321e-07 heat_proxy=0.012222558291811245\naudit_pass=1 audit_species=1.9187223255264906e-15 first_law=4.3895997947629439e-12 mass_error_surface=-6.0976326002710352e-10 source_error=0\ndrift_proxy=8.0376063826661726e-07 heat_proxy=0.01222234278352728\naudit_pass=1 audit_species=2.8346262511726172e-15 first_law=4.4206860394524483e-12 mass_error_surface=-9.0176348189753443e-10 source_error=0\ndrift_proxy=8.0376557178560652e-07 heat_proxy=0.012222558269052611\nPASS mode=lagged full_half_structure=1.9221646496703215e-09 full_half_species=9.8827335204276778e-12 CPU_seconds=12.883908999999999\n"
+  },
+  "common_driver": {
+    "returncode": 0,
+    "wall_seconds": 63.701740792021155,
+    "report": {
+      "requested_age_reached": 1,
+      "age_years": 3560514693151.8994,
+      "accepted_this_invocation": 17,
+      "accepted_total": 7538,
+      "rejected_total": 430,
+      "stop_reason": "requested age",
+      "cpu_seconds": 146.718887,
+      "wall_seconds": 63.255928334,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "common_driver_checks": {
+    "accepted": 17,
+    "rejected": 0,
+    "maximum_species_audit": 6.263173701107355e-17,
+    "maximum_first_law_error": 1.0385592386086273e-09,
+    "maximum_step_years": 30687155.7108105
+  },
+  "tests": {
+    "passed": 13,
+    "independent_balance_regressions": "Loose local correction tests in CN and physical-metal CN exercise a conservation error above1e-14 unless the independent balance bound is requested; the bound enforces1e-14. PP bound and invalid-setting checks also pass.",
+    "other_tests": "PMS CN/deuterium, controller, screened envelope and exact restart, finite/instantaneous physical-metal transport and material heat."
+  },
+  "physical_inputs_changed": false,
+  "source_sha256": {
+    "out/species-correction-floor-sept27-v1/snapshot.checkpoint": "0e5ac092e29d0b6a90b2f3554a0d092b39904d7fc33a3bee84c2d0afe9b282f8",
+    "out/species-correction-floor-sept27-v1/pilot/final.checkpoint": "20be4cb779d74cec850b85dde24506cd06e54bff78066a8a85af15cbd3307e09",
+    "out/species-correction-floor-sept27-v1/ember-evolve": "b4734b81c8cacf17aa7da72778586fc894be79a104cd8fa6e996a080e22a86bb",
+    "out/species-correction-floor-sept27-v1/structure.txt": "4cb69764817531ee2a61b6b2f6263104a9fb4fa7714e6e90f106bee93954d234"
+  }
+}

@@ -292,7 +292,8 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           return microscopic_face(*p.microscopic,i,current.m[i],current.m[i+1],
               current.y[i],left,current.y[i+1],right,derivatives).species;
         };
-        SpeciesTransportOptions transport_options;transport_options.abundance_tolerance=tolerance*.1;
+        SpeciesTransportOptions transport_options;transport_options.abundance_tolerance=tolerance;
+        transport_options.integrated_balance_tolerance=tolerance*.1;
         transport_options.seed_present_species=p.microscopic->requires_positive_species_guess();
         if(metal) {
           transport_options.evaluation_threads=options.relaxation.zone_threads;
@@ -305,7 +306,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           Model updated=current;updated.comp=std::move(full.composition);
           auto redistribution=reconstruct_metal_fluxes(updated,previous,*cn_network,regions,full.boundary_fluxes,dt);
           for(const auto& cell:redistribution.cell_balances)for(double balance:cell)
-            if(std::abs(balance)>transport_options.abundance_tolerance)
+            if(std::abs(balance)>transport_options.integrated_balance_tolerance)
               throw std::runtime_error("evolve_step: reconstructed metal species continuity exceeds tolerance");
           return {std::move(updated.comp),{},std::move(redistribution.face_rates)};
         }
@@ -340,7 +341,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
         Model updated=current;updated.comp=std::move(species.composition);
         auto redistribution=reconstruct_species_fluxes(updated,previous,*p.nuclear,regions,species.boundary_fluxes,dt);
         for(const auto& cell:redistribution.cell_balances)for(double balance:cell)
-          if(std::abs(balance)>transport_options.abundance_tolerance)
+          if(std::abs(balance)>transport_options.integrated_balance_tolerance)
             throw std::runtime_error("evolve_step: reconstructed species continuity exceeds tolerance");
         return {std::move(updated.comp),std::move(redistribution.face_rates),{}};
       }

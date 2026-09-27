@@ -90,6 +90,17 @@ int main() {
     SpeciesTransportOptions options;options.abundance_tolerance=1e-14;
     const std::vector<double> mixing(2,mode==1?.3/dt:(mode==3?1e12/dt:0.));
     const auto result=burn_metal_cn_and_diffuse(model,model,nuclear,regions,flux,dt,options,mixing);
+    if(warm && mode==0) {
+      auto separate=options;separate.abundance_tolerance=1e-6;
+      const auto loose=burn_metal_cn_and_diffuse(model,model,nuclear,regions,flux,dt,separate,mixing);
+      double loose_balance=0;for(double x:loose.integrated_balance)loose_balance=std::max(loose_balance,std::abs(x));
+      check(loose_balance>1e-14,"independent-balance control must exercise a loose conservation residual",loose_balance);
+      separate.integrated_balance_tolerance=1e-14;
+      const auto bounded=burn_metal_cn_and_diffuse(model,model,nuclear,regions,flux,dt,separate,mixing);
+      for(double x:bounded.integrated_balance)check(std::abs(x)<=1e-14,
+          "looser local Newton accuracy must preserve the selected integrated balance",x);
+      check(bounded.abundance_correction<=separate.abundance_tolerance,"independent local correction bound");
+    }
     auto current=model;current.comp=result.composition;const auto reconstruction=reconstruct_metal_fluxes(current,model,nuclear,regions,result.boundary_fluxes,dt);
     MetalCNVector total{};double rest=0,heat=0;
     for(std::size_t i=0;i<3;++i) {

@@ -124,6 +124,13 @@ void pp_and_inputs() {
   const auto reference=burn_and_mix(m,m,pp,regions,1e14,1e-14);
   const auto result=burn_and_diffuse(m,m,pp,regions,fick(0),1e14);
   for(std::size_t i=0;i<m.size();++i)for(std::size_t j=0;j<NSPEC;++j)close(result.composition[i].X[j],reference[i].X[j],2e-14);
+  SpeciesTransportOptions independent;independent.abundance_tolerance=1e-6;
+  independent.integrated_balance_tolerance=1e-14;
+  const auto bounded=burn_and_diffuse(m,m,pp,regions,fick(0),1e14,independent);
+  require(bounded.abundance_correction<=independent.abundance_tolerance,"local Newton correction bound");
+  for(double v:bounded.integrated_balance)require(std::abs(v)<=1e-14,"independent integrated PP balance");
+  independent.integrated_balance_tolerance=-1;
+  rejects([&]{burn_and_diffuse(m,m,pp,regions,fick(0),1e14,independent);});
   const Reaction zero(0);
   rejects([&]{burn_and_diffuse(m,m,zero,{{0,2},{1,6}},fick(1),1);});
   rejects([&]{burn_and_diffuse(m,m,zero,regions,fick(1),0);});
