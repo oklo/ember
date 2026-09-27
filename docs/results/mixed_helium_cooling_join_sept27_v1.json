@@ -1,0 +1,701 @@
+{
+  "created_utc": "2026-09-27T22:56:16.706775+00:00",
+  "selected_for_evolution": true,
+  "table_sha256": "322eca255c73dc619c104f26f0194fc9bb3291ef477b48274deb248ec31cfa47",
+  "matching_tau": 100,
+  "hydrogen_interval": [
+    0.98,
+    0.9955
+  ],
+  "Teff_interval_K": [
+    4400,
+    4550
+  ],
+  "log_g_interval": [
+    6.1,
+    6.3
+  ],
+  "source_vertices": [
+    {
+      "coordinates": [
+        0.98,
+        4400.0,
+        6.1
+      ],
+      "T_K": 5535.973688140036,
+      "Pgas": 229856174.68437257,
+      "maximum_flux_error": 0.00029189513083482943,
+      "opacity_sha256": "d9c6094fc3538c0cfe06b37b18f43fc50cd22abca800eb160ef53634ef7e57f1",
+      "result_sha256": "7b76a7700d7df855ceb9025ea583cd5ce5e1aa24c52a500ebc0e868a39064b2b"
+    },
+    {
+      "coordinates": [
+        0.98,
+        4400.0,
+        6.3
+      ],
+      "T_K": 5567.559381837295,
+      "Pgas": 347356811.2468299,
+      "maximum_flux_error": 0.00035654325468037484,
+      "opacity_sha256": "d9c6094fc3538c0cfe06b37b18f43fc50cd22abca800eb160ef53634ef7e57f1",
+      "result_sha256": "bfa6f061a0d5118c9579ee77b61a602f6e258339ec568fe0e1d7f5d9f99dea0d"
+    },
+    {
+      "coordinates": [
+        0.98,
+        4550.0,
+        6.1
+      ],
+      "T_K": 5701.197492284384,
+      "Pgas": 137881295.39943463,
+      "maximum_flux_error": 0.0016100782383134948,
+      "opacity_sha256": "d9c6094fc3538c0cfe06b37b18f43fc50cd22abca800eb160ef53634ef7e57f1",
+      "result_sha256": "ae7327accb8b3a4d90e4c8b60c5e870dc200ff92ee9314931a03360b8a5cd5f2"
+    },
+    {
+      "coordinates": [
+        0.98,
+        4550.0,
+        6.3
+      ],
+      "T_K": 5719.792381691666,
+      "Pgas": 212205615.24563813,
+      "maximum_flux_error": 0.00016662259612654218,
+      "opacity_sha256": "d9c6094fc3538c0cfe06b37b18f43fc50cd22abca800eb160ef53634ef7e57f1",
+      "result_sha256": "0e1e9c4c31a9024f6725398f16555804507b337c0b00a8af504ce80703858152"
+    },
+    {
+      "coordinates": [
+        0.9955,
+        4400.0,
+        6.1
+      ],
+      "T_K": 5534.263807440426,
+      "Pgas": 227125253.45518976,
+      "maximum_flux_error": 0.00029642319748512946,
+      "opacity_sha256": "7cab116f80573a32344886132e8d1ba808e25d6f3aa4449b0619acf6317feb5c",
+      "result_sha256": "2c9766ab04c6da081faa0e6fc9f43e5b7dab2639d97733f93f54c83ddcb41594"
+    },
+    {
+      "coordinates": [
+        0.9955,
+        4400.0,
+        6.3
+      ],
+      "T_K": 5565.651587674618,
+      "Pgas": 343375160.29392135,
+      "maximum_flux_error": 0.0003638391969640331,
+      "opacity_sha256": "7cab116f80573a32344886132e8d1ba808e25d6f3aa4449b0619acf6317feb5c",
+      "result_sha256": "60eb9f68e0c7a45eb703e65b0caad792f4f5574489605e9d45ba7dd5c5696a38"
+    },
+    {
+      "coordinates": [
+        0.9955,
+        4550.0,
+        6.1
+      ],
+      "T_K": 5699.805341381275,
+      "Pgas": 136077337.82394215,
+      "maximum_flux_error": 0.0017482026508512938,
+      "opacity_sha256": "7cab116f80573a32344886132e8d1ba808e25d6f3aa4449b0619acf6317feb5c",
+      "result_sha256": "76203fda05247f90d903f6f02540a30ea2395e292746d651fef8cd4572044de2"
+    },
+    {
+      "coordinates": [
+        0.9955,
+        4550.0,
+        6.3
+      ],
+      "T_K": 5718.1917273681165,
+      "Pgas": 209543333.03316048,
+      "maximum_flux_error": 0.00013355730554920342,
+      "opacity_sha256": "7cab116f80573a32344886132e8d1ba808e25d6f3aa4449b0619acf6317feb5c",
+      "result_sha256": "1613c0e5f0ab05a642a55e00097dd269f9a1e76ac00b560fc53c92f2b3c05fc3"
+    }
+  ],
+  "lower_boundary_checks": [
+    {
+      "coordinates": [
+        0.98,
+        4550.0,
+        6.3
+      ],
+      "relative_changes": {
+        "T": -1.0178730429410976e-05,
+        "Pgas": 0.00011686529414967062
+      },
+      "shallow_source": "/Users/greglaughlin/Projects/ember/out/cold-mixed-depth-sept27-v2/tau250",
+      "deep_source": "/Users/greglaughlin/Projects/ember/out/cold-mixed-depth-sept27-v2/tau400",
+      "rejected_source": "/Users/greglaughlin/Projects/ember/out/cold-mixed-atmosphere-sept27-v2/h0.9800_t4550_g630",
+      "rejected_reason": "unconverged source: correction=9.68e-07, flux error=0.00663265"
+    },
+    {
+      "coordinates": [
+        0.9955,
+        4550.0,
+        6.3
+      ],
+      "relative_changes": {
+        "T": -1.7833575991166306e-05,
+        "Pgas": 0.000275390584552504
+      },
+      "shallow_source": "/Users/greglaughlin/Projects/ember/out/cold-mixed-depth-sept27-v1/tau250",
+      "deep_source": "/Users/greglaughlin/Projects/ember/out/cold-mixed-depth-sept27-v1/tau400",
+      "rejected_source": "/Users/greglaughlin/Projects/ember/out/cold-mixed-atmosphere-sept27-v2/h0.9955_t4550_g630",
+      "rejected_reason": "unconverged source: correction=9.21e-07, flux error=0.0103771"
+    }
+  ],
+  "interior_comparisons": [
+    {
+      "hydrogen": 0.9955,
+      "source": "/Users/greglaughlin/Projects/ember/out/cold-mixed-atmosphere-sept27-v1/mixed_9955_19",
+      "relative_error": {
+        "T": 0.0009315525216659903,
+        "Pgas": -0.006580593688563785
+      }
+    },
+    {
+      "hydrogen": 0.98,
+      "source": "/Users/greglaughlin/Projects/ember/out/cold-mixed-atmosphere-sept27-v2/h0.9800_t4450_g620",
+      "relative_error": {
+        "T": 0.0009310911381685827,
+        "Pgas": -0.006513789232334588
+      }
+    }
+  ],
+  "native_checks": {
+    "created_utc": "2026-09-27T22:47:43.192903+00:00",
+    "selected_for_evolution": false,
+    "unchanged_old_queries": 30,
+    "new_supported_queries": 84,
+    "missing_queries_rejected": 4,
+    "maximum_derivative_error": 5.967229599335155e-09,
+    "existing_knot_checks": [
+      {
+        "coordinate": "temperature",
+        "one_sided_derivative_error": {
+          "T": 7.495186249428798e-09,
+          "P": 6.025523013875045e-08
+        },
+        "two_sided_value_change": {
+          "T": 1.6857187290497677e-07,
+          "P": 3.0182624889407705e-06
+        }
+      },
+      {
+        "coordinate": "gravity",
+        "one_sided_derivative_error": {
+          "T": 8.138321197503906e-09,
+          "P": 1.539625316127058e-08
+        },
+        "two_sided_value_change": {
+          "T": 2.3441373286914313e-09,
+          "P": 1.8126523282369078e-07
+        }
+      }
+    ],
+    "overlap": [
+      {
+        "coordinates": [
+          4425.0,
+          6.15,
+          0.99549999,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": -4.440892098500626e-16,
+          "Pgas": 1.1102230246251565e-15,
+          "rho": 0.0
+        }
+      },
+      {
+        "coordinates": [
+          4425.0,
+          6.15,
+          0.99525,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 0.00044785349601372815,
+          "Pgas": 0.0017974753688965173,
+          "rho": 0.001040695817253301
+        }
+      },
+      {
+        "coordinates": [
+          4425.0,
+          6.15,
+          0.99500001,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 0.0009008534739791685,
+          "Pgas": 0.0037931385670144646,
+          "rho": 0.002288663491800902
+        }
+      },
+      {
+        "coordinates": [
+          4425.0,
+          6.25,
+          0.99549999,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 4.440892098500626e-16,
+          "Pgas": 8.881784197001252e-16,
+          "rho": 0.0
+        }
+      },
+      {
+        "coordinates": [
+          4425.0,
+          6.25,
+          0.99525,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 0.0004055547144703464,
+          "Pgas": 0.0010541423386565274,
+          "rho": 0.00031903543674483004
+        }
+      },
+      {
+        "coordinates": [
+          4425.0,
+          6.25,
+          0.99500001,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 0.0008164946864956946,
+          "Pgas": 0.0023004781042152977,
+          "rho": 0.0008387595518288826
+        }
+      },
+      {
+        "coordinates": [
+          4475.0,
+          6.15,
+          0.99549999,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 4.440892098500626e-16,
+          "Pgas": 0.0,
+          "rho": 0.0
+        }
+      },
+      {
+        "coordinates": [
+          4475.0,
+          6.15,
+          0.99525,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 0.0006527109821625743,
+          "Pgas": 0.0012074994374644543,
+          "rho": -7.539690057611903e-05
+        }
+      },
+      {
+        "coordinates": [
+          4475.0,
+          6.15,
+          0.99500001,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 0.0013104483435828485,
+          "Pgas": 0.002617617583689613,
+          "rho": 6.374583271684386e-05
+        }
+      },
+      {
+        "coordinates": [
+          4475.0,
+          6.25,
+          0.99549999,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 4.440892098500626e-16,
+          "Pgas": 4.440892098500626e-16,
+          "rho": 0.0
+        }
+      },
+      {
+        "coordinates": [
+          4475.0,
+          6.25,
+          0.99525,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 0.0006361447674936294,
+          "Pgas": 0.0007542354095957382,
+          "rho": -0.0005230342079877159
+        }
+      },
+      {
+        "coordinates": [
+          4475.0,
+          6.25,
+          0.99500001,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 0.0012775748671400855,
+          "Pgas": 0.0017061063086583061,
+          "rho": -0.0008372041085908943
+        }
+      },
+      {
+        "coordinates": [
+          4525.0,
+          6.15,
+          0.99549999,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 2.220446049250313e-16,
+          "Pgas": 4.440892098500626e-16,
+          "rho": 0.0
+        }
+      },
+      {
+        "coordinates": [
+          4525.0,
+          6.15,
+          0.99525,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 0.0003981703959707872,
+          "Pgas": 0.0030910691396575096,
+          "rho": 0.0025875160134454234
+        }
+      },
+      {
+        "coordinates": [
+          4525.0,
+          6.15,
+          0.99500001,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 0.00080075378896316,
+          "Pgas": 0.006399997059227669,
+          "rho": 0.005406067464727604
+        }
+      },
+      {
+        "coordinates": [
+          4525.0,
+          6.25,
+          0.99549999,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": -6.661338147750939e-16,
+          "Pgas": -3.3306690738754696e-16,
+          "rho": 0.0
+        }
+      },
+      {
+        "coordinates": [
+          4525.0,
+          6.25,
+          0.99525,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 0.00045689123775383145,
+          "Pgas": 0.0030220500185242916,
+          "rho": 0.0023846355504266725
+        }
+      },
+      {
+        "coordinates": [
+          4525.0,
+          6.25,
+          0.99500001,
+          0.001,
+          1e-30
+        ],
+        "relative": {
+          "T": 0.0009185315181732268,
+          "Pgas": 0.006257252119899359,
+          "rho": 0.004993411295622252
+        }
+      }
+    ],
+    "maximum_overlap_difference": {
+      "T": 0.0013104483435828485,
+      "Pgas": 0.006399997059227669,
+      "rho": 0.005406067464727604
+    },
+    "table_sha256": "322eca255c73dc619c104f26f0194fc9bb3291ef477b48274deb248ec31cfa47",
+    "qualification": "Native atmosphere values/derivatives and domain rejection checked. Stellar overlap comparison still required; same tau100, explicit H/He isotope mapping and gas-only sources."
+  },
+  "opacity_checks": {
+    "created_utc": "2026-09-27T22:34:07.816582+00:00",
+    "accepted_isotherms": 62,
+    "total_isotherms": 62,
+    "CPU_seconds": 2752.540981,
+    "hydrogen": [
+      0.9955,
+      0.98
+    ],
+    "shape": [
+      30000,
+      19,
+      31
+    ],
+    "maximum_old_overlap_log_opacity": 6.866455078125e-05,
+    "maximum_old_overlap_log_electrons": 6.225202557885723e-06,
+    "tables": {
+      "0.9955": {
+        "sha256": "7cab116f80573a32344886132e8d1ba808e25d6f3aa4449b0619acf6317feb5c",
+        "bytes": 75727800
+      },
+      "0.98": {
+        "sha256": "d9c6094fc3538c0cfe06b37b18f43fc50cd22abca800eb160ef53634ef7e57f1",
+        "bytes": 75727800
+      }
+    },
+    "pilot_coordinates": {
+      "Teff_K": 4450.0,
+      "log_g": 6.2,
+      "matching_tau": 100.0
+    },
+    "pure_density_grid_change": {
+      "T": 0.00034143150414189805,
+      "Pgas": 0.0028751032850629077
+    },
+    "same_grid_helium_change": {
+      "T": 0.00012693545648345683,
+      "Pgas": 0.0037769518752255316
+    },
+    "selected_for_evolution": false,
+    "qualification": "Source material and two accepted atmosphere pilots; full source rectangle and stellar comparison still required. Pure-H37-to19 density comparison measures a local grid response, not a global error bound.",
+    "work": "out/cold-mixed-opacity-sept27-v1"
+  },
+  "stellar_overlap": {
+    "created_utc": "2026-09-27T22:52:18.125790+00:00",
+    "requested_duration_years": 20000000.0,
+    "clock_difference_years": -0.00146484375,
+    "relative_differences": {
+      "luminosity_Lsun": -0.0011480135492201171,
+      "radius_Rsun": 4.775468471152067e-05,
+      "Teff_K": -0.00031099665814338096,
+      "central_T_K": -1.5554230952119497e-06,
+      "central_density_g_cm3": -1.4378035173567838e-06,
+      "He3_peak": -3.7230402105681293e-07,
+      "H_mass_g": 3.927191905006566e-09,
+      "He3_mass_g": 2.984030491592904e-07,
+      "eps_nuc_peak_erg_g_s": 4.080748249490895e-05
+    },
+    "Teff_difference_K": -1.3905490440183712,
+    "same_convective_mass": true,
+    "old": {
+      "years": 4005426157259.1196,
+      "step_years": 1281878.1806312266,
+      "accepted": 17076,
+      "rejected": 5107,
+      "radius_Rsun": 0.04101207335326216,
+      "Teff_K": 4471.26683714211,
+      "luminosity_Lsun": 0.0006056747704905064,
+      "nuclear_fraction": 0.6318003983676823,
+      "central_T_K": 6350173.709753788,
+      "central_density_g_cm3": 40431.46471898473,
+      "central_X": 3.456573643707825e-08,
+      "central_He3": 8.961140668685136e-15,
+      "eps_nuc_peak_erg_g_s": 0.2671894578590499,
+      "eps_nuc_peak_q": 0.969276301246281,
+      "burning_half_max_inner_q": 0.9556023011504496,
+      "burning_half_max_outer_q": 0.9769560298913097,
+      "burning_half_max_cells": 18,
+      "He3_peak": 0.01880605943690538,
+      "He3_peak_q": 0.971484245216312,
+      "H_mass_g": 7.440215561543535e+30,
+      "He3_mass_g": 7.989610870269202e+28,
+      "D_mass_g": 0,
+      "surface_X": 0.9951242955143398,
+      "surface_Z": 8.012439045960385e-32,
+      "error_norm": 0.19163665703077504,
+      "initial_D_approximation": 0,
+      "omitted_mixing_heat_fraction": 0,
+      "gross_mixing_heat_fraction": 0,
+      "burn_gradient_estimate": 1.5484439130487209e-12,
+      "drift_gradient_proxy": 5.194779868625388e-07,
+      "kinetic_heat_proxy": 0.018348965276662393,
+      "convective_mass_fraction": 0.021258848077554546,
+      "radiative_boundaries": 402,
+      "relative_mixing_gradient": 1.3668715892165045e-10,
+      "convective_travel_years": 0.061331570273871754,
+      "cpu_seconds": 32.459109
+    },
+    "new": {
+      "years": 4005426157259.118,
+      "step_years": 1284963.0562364692,
+      "accepted": 17076,
+      "rejected": 5107,
+      "radius_Rsun": 0.04101403187189451,
+      "Teff_K": 4469.876288098091,
+      "luminosity_Lsun": 0.0006049794476475625,
+      "nuclear_fraction": 0.6325559051347133,
+      "central_T_K": 6350163.832546941,
+      "central_density_g_cm3": 40431.406586482546,
+      "central_X": 3.4565736432801776e-08,
+      "central_He3": 8.96114791934308e-15,
+      "eps_nuc_peak_erg_g_s": 0.2672003611881743,
+      "eps_nuc_peak_q": 0.969276301246281,
+      "burning_half_max_inner_q": 0.9556023011504496,
+      "burning_half_max_outer_q": 0.9769560298913097,
+      "burning_half_max_cells": 18,
+      "He3_peak": 0.01880605243533383,
+      "He3_peak_q": 0.971484245216312,
+      "H_mass_g": 7.44021559076269e+30,
+      "He3_mass_g": 7.989613254393448e+28,
+      "D_mass_g": 0,
+      "surface_X": 0.9951244859053194,
+      "surface_Z": 8.005735550679391e-32,
+      "error_norm": 0.19193757675847806,
+      "initial_D_approximation": 0,
+      "omitted_mixing_heat_fraction": 0,
+      "gross_mixing_heat_fraction": 0,
+      "burn_gradient_estimate": 1.5502443213806152e-12,
+      "drift_gradient_proxy": 5.181691483293174e-07,
+      "kinetic_heat_proxy": 0.018375475061280316,
+      "convective_mass_fraction": 0.021258848077554546,
+      "radiative_boundaries": 402,
+      "relative_mixing_gradient": 1.3683959533519894e-10,
+      "convective_travel_years": 0.06136531524573122,
+      "cpu_seconds": 31.122226
+    },
+    "report": {
+      "requested_age_reached": 1,
+      "age_years": 4005426157259.118,
+      "accepted_this_invocation": 17,
+      "accepted_total": 17076,
+      "rejected_total": 5107,
+      "stop_reason": "requested age",
+      "cpu_seconds": 31.129105,
+      "wall_seconds": 18.545497916,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    },
+    "new_atmosphere_sha256": "322eca255c73dc619c104f26f0194fc9bb3291ef477b48274deb248ec31cfa47",
+    "scope": "Same earlier physical star, heat history, executable family and numerical settings, with a composition-dependent H/He atmosphere joined continuously at totalHe0.0045\u20130.005. Initial atmosphere unchanged. This measures a boundary-physics response rather than a same-physics truncation error.",
+    "limitations": [
+      "Final totalHe0.004876 remains inside the join, so continuation must monitor crossing its upper edge.",
+      "Source interpolation comparison at4450K gives up to0.6581% pressure and0.09316% temperature differences.",
+      "Same-state pure-H opacity-density comparison gives0.2875% pressure difference.",
+      "Gas-only sources, approximate He3 isotope mapping; no rapid-burning validation."
+    ]
+  },
+  "continuation": {
+    "last": {
+      "years": 4005514011220.616,
+      "step_years": 12136.269288451382,
+      "accepted": 17115,
+      "rejected": 5126,
+      "radius_Rsun": 0.03907344739656213,
+      "Teff_K": 4402.080005835845,
+      "luminosity_Lsun": 0.0005165220477137632,
+      "nuclear_fraction": 0.46404633748641083,
+      "central_T_K": 6306383.073784461,
+      "central_density_g_cm3": 40732.15046870137,
+      "central_X": 3.450540207824819e-08,
+      "central_He3": 9.048050517999229e-15,
+      "eps_nuc_peak_erg_g_s": 0.1736382964244667,
+      "eps_nuc_peak_q": 0.9703952386387595,
+      "burning_half_max_inner_q": 0.9570627137583326,
+      "burning_half_max_outer_q": 0.9769560298913097,
+      "burning_half_max_cells": 17,
+      "He3_peak": 0.018865527841946235,
+      "He3_peak_q": 0.971484245216312,
+      "H_mass_g": 7.439018482789156e+30,
+      "He3_mass_g": 8.092382188286708e+28,
+      "D_mass_g": 0,
+      "surface_X": 0.9934342288073232,
+      "surface_Z": 1.4246381561580725e-30,
+      "error_norm": 0.0015476430739248693,
+      "initial_D_approximation": 0,
+      "omitted_mixing_heat_fraction": 0,
+      "gross_mixing_heat_fraction": 0,
+      "burn_gradient_estimate": 1.5613067903617076e-12,
+      "drift_gradient_proxy": 4.940926922623164e-07,
+      "kinetic_heat_proxy": 0.02020825101877517,
+      "convective_mass_fraction": 0.022138183304963307,
+      "radiative_boundaries": 401,
+      "relative_mixing_gradient": 9.745499379424119e-11,
+      "convective_travel_years": 0.060464437602732395,
+      "cpu_seconds": 189.138144
+    },
+    "report": {
+      "requested_age_reached": 0,
+      "age_years": 4005514011220.616,
+      "accepted_this_invocation": 39,
+      "accepted_total": 17115,
+      "rejected_total": 5134,
+      "stop_reason": "repeated step rejection: evolve_step: line search failed: residual did not decrease",
+      "cpu_seconds": 255.250402,
+      "wall_seconds": 70.355120333,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    },
+    "first_material_domain_failure": {
+      "start_years": 4005512390504.259,
+      "step_years": 4909645.333876234,
+      "converged": 0,
+      "audit_pass": 0,
+      "accepted": 0,
+      "error_norm": 1e+30,
+      "message": "evolve_step: line search failed: DenseHydrogenOpacity: outside selected bounds at logT=5.607055, logR=2.200000",
+      "species_error": [
+        0,
+        0,
+        0
+      ],
+      "mass_error_surface": [
+        0,
+        0,
+        0
+      ],
+      "first_law": [
+        0,
+        0,
+        0
+      ]
+    },
+    "actual_stop": "Declared dense-hydrogen opacity logR=2.2 boundary at logT5.607; subsequent tiny-step Newton failures are not the primary cause.",
+    "retained_prefix": "v28 through17059; mixed-cooling-overlap-sept27-v1 17060\u201317076; v30 17077\u201317115. Old pure-H states after17059 are comparisons, not extra retained evolution.",
+    "checkpoint_sha256": "4532d4275e3d0f44f29c6ecd94abd31620de30629a338fb181f03e942637ecad"
+  },
+  "interpretation": "The same star crossed the old0.5%He atmosphere limit through a continuous composition overlap and reached4402K with0.6566%surfaceHe. Nuclear support fell to46.40%; no runaway. The EOS supports this state. The next active material limit is interior opacity, while cooler atmosphere sources are being prepared.",
+  "limitations": [
+    "Gas-only source atmospheres; no isotope-dependent opacity, with He3 handled by the stated number-ratio/gravity approximation.",
+    "Density and interpolation errors are measured locally, not a universal source uncertainty.",
+    "No claim of final nuclear-free cooling, flash-onset convergence or spatial convergence."
+  ]
+}
