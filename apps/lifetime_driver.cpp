@@ -118,6 +118,15 @@ int lifetime_main(int argc,char** argv) {
     const double buoyancy_spacing=optional_number("buoyancy_reuse_spacing");
     const double screening_spacing=optional_number("screening_reuse_spacing");
     const double verify_responses=optional_number("verify_response_reuse");
+    const double coupling_stop=optional_number("coupling_stop_tolerance");
+    const double material_heat=optional_number("material_heat_tolerance");
+    const double verification_residual=optional_number("verification_residual_tolerance");
+    const double verification_correction=optional_number("verification_correction_tolerance");
+    for(double t:{coupling_stop,material_heat,verification_residual,verification_correction})
+      if(!std::isfinite(t) || t<0)throw std::invalid_argument("invalid coupling or verification tolerance");
+    if(coupling_stop>1e-3*species_tolerance || material_heat>1e-3*energy_tolerance
+        || verification_residual>1e-3*structure_tolerance || verification_correction>1e-2*structure_tolerance)
+      throw std::invalid_argument("coupling or verification tolerance must remain below time accuracy");
     for(double r:{eos_radius,buoyancy_spacing,screening_spacing})
       if(!std::isfinite(r) || r<0 || r>1e-4)throw std::invalid_argument("response reuse radius must lie in [0,1e-4]");
     if(verify_responses!=0 && verify_responses!=1)throw std::invalid_argument("verify_response_reuse must be zero or one");
@@ -220,6 +229,10 @@ int lifetime_main(int argc,char** argv) {
     if(eos_radius>0)identity.number("solver.eos_taylor_radius",eos_radius);
     if(buoyancy_spacing>0)identity.number("solver.buoyancy_reuse_spacing",buoyancy_spacing);
     if(screening_spacing>0)identity.number("solver.screening_reuse_spacing",screening_spacing);
+    for(const auto& [key,value]:std::map<std::string,double>{{"coupling_stop_tolerance",coupling_stop},
+        {"material_heat_tolerance",material_heat},{"verification_residual_tolerance",verification_residual},
+        {"verification_correction_tolerance",verification_correction}})
+      if(value>0)identity.number("solver."+key,value);
     identity.family("eos",eos_path,true);
     for(const auto& [role,p]:std::map<std::string,fs::path>{{"opacity_low",low_path},{"opacity_warm",warm_path},
         {"opacity_bridge",bridge_path},{"opacity_hot",hot_path}})identity.family(role,p,false);
@@ -306,6 +319,10 @@ int lifetime_main(int argc,char** argv) {
     if(screened_core)later.microscopic=&envelope_heat;
     EvolutionOptions options;options.relaxation.zone_threads=static_cast<std::size_t>(threads);options.abundance_tolerance=abundance_tolerance;
     options.homogeneous_abundance_tolerance=std::min(1e-15,abundance_tolerance);
+    options.coupling_stop_tolerance=coupling_stop;
+    if(material_heat>0)options.material_heat_tolerance=material_heat;
+    options.verification_residual_tolerance=verification_residual;
+    options.verification_correction_tolerance=verification_correction;
     if(restart.empty()) {
       ContractingSource seed_source(nuclear,entropy_loss);auto seed_physics=early;seed_physics.nuclear=&seed_source;
       const auto guess=contracting_guess(points,mass,radius,teff,initial,seed_physics,atmosphere);

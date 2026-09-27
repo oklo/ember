@@ -47,5 +47,5 @@ struct MetalFluxReconstruction {
   MetalSpeciesVector integrated_balance{};
 };
 MetalFluxReconstruction reconstruct_metal_fluxes(const Model&,const Model&,const PPCNNetwork&,
-    const MixingRegions&,std::span<const MetalCNBoundaryFlux>,double dt);
+    const MixingRegions&,std::span<const MetalCNBoundaryFlux>,double dt,std::size_t threads=1);
 } // namespace ember

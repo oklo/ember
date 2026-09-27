@@ -240,6 +240,9 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       || options.homogeneous_abundance_tolerance>options.abundance_tolerance
       || !std::isfinite(options.instantaneous_mixing_below_T) || options.instantaneous_mixing_below_T<0
       || (options.convective_mixing==ConvectiveMixing::instantaneous && options.instantaneous_mixing_below_T!=0)
+      || !std::isfinite(options.coupling_stop_tolerance) || options.coupling_stop_tolerance<0
+      || !std::isfinite(options.verification_residual_tolerance) || options.verification_residual_tolerance<0
+      || !std::isfinite(options.verification_correction_tolerance) || options.verification_correction_tolerance<0
       || !std::isfinite(options.material_heat_tolerance) || options.material_heat_tolerance<=0
       || !std::isfinite(options.max_abundance_change) || options.max_abundance_change<=0)
     throw std::invalid_argument("evolve_step: invalid physics, age or options");
@@ -349,7 +352,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           };
           auto full=burn_metal_cn_and_diffuse(current,previous,*cn_network,regions,flux,dt,transport_options,mixing);
           Model updated=current;updated.comp=std::move(full.composition);
-          auto redistribution=reconstruct_metal_fluxes(updated,previous,*cn_network,regions,full.boundary_fluxes,dt);
+          auto redistribution=reconstruct_metal_fluxes(updated,previous,*cn_network,regions,full.boundary_fluxes,dt,options.relaxation.zone_threads);
           for(const auto& cell:redistribution.cell_balances)for(double balance:cell)
             if(std::abs(balance)>transport_options.integrated_balance_tolerance)
               throw std::runtime_error("evolve_step: reconstructed metal species continuity exceeds tolerance");
@@ -426,7 +429,8 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       if(frozen) {
         double luminosity_floor=0;
         for(const auto& point:current.y)luminosity_floor=std::max(luminosity_floor,1e-12*std::abs(point.L));
-        for(std::size_t i=0;i+1<current.size();++i) {
+        std::vector<double> face_residual(current.size()-1);
+        detail::independent_evaluations(current.size()-1,options.relaxation.zone_threads,[&](std::size_t i) {
           const auto old_heat=microscopic_heat(*frozen,i,current.m[i],current.m[i+1],
               current.y[i],current.comp[i],current.y[i+1],current.comp[i+1],false);
           // The supplied rate enters linearly. Reuse its exact enthalpy
@@ -440,9 +444,9 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
               (next.total_metal_rates[i][2]-update.total_metal_rates[i][2]);
           const double scale=std::max({std::abs(current.y[i].L),std::abs(current.y[i+1].L),
               luminosity_floor,std::numeric_limits<double>::min()});
-          result.material_heat_residual=std::max(result.material_heat_residual,
-              std::abs(heat_change)/scale);
-        }
+          face_residual[i]=std::abs(heat_change)/scale;
+        });
+        for(double r:face_residual)result.material_heat_residual=std::max(result.material_heat_residual,r);
       }
       bool deuterium_coupled=true;
       if(dynamic_cast<const PPDeuterium*>(p.nuclear) || cn_network) {
@@ -451,10 +455,11 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           deuterium_coupled &= std::abs(a-b)<=1e-8*std::max(a,b)+2*std::numeric_limits<double>::denorm_min();
         }
       }
-      if(!deuterium_coupled || regions!=next_regions || residual>abundance_tolerance(next_regions)
+      const double stop=std::max(options.coupling_stop_tolerance,abundance_tolerance(next_regions));
+      if(!deuterium_coupled || regions!=next_regions || residual>stop
           || result.material_heat_residual>options.material_heat_tolerance) {
         coupling_reason=regions!=next_regions?"convective boundary changes":
-          (!deuterium_coupled?"deuterium coupling":(residual>abundance_tolerance(next_regions)?"composition coupling":"transported heat coupling"));
+          (!deuterium_coupled?"deuterium coupling":(residual>stop?"composition coupling":"transported heat coupling"));
         pending_regions=std::move(next_regions);pending=std::move(next);
         have_pending=true;continue;
       }
@@ -472,6 +477,8 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           if(composition_difference(current.comp[i],previous.comp[i])>options.max_abundance_change)
             throw std::runtime_error("evolve_step: abundance change exceeds step limit");
         auto verification=options.relaxation;verification.max_iterations=0;
+        if(options.verification_residual_tolerance>0)verification.residual_tolerance=options.verification_residual_tolerance;
+        if(options.verification_correction_tolerance>0)verification.correction_tolerance=options.verification_correction_tolerance;
         const auto checked=relax(current,coupled,atmosphere,verification,dt,&previous);
         result.residual=checked.residual;result.correction=checked.correction;
         if(!checked.converged || convective_mixing_regions(current,coupled,options.relaxation.zone_threads)!=final_regions

@@ -311,7 +311,7 @@ measured approximation error.
 
 Convection-region tests now share the configured zone threads; the connected
 regions are assembled in mesh order. The driver permits up to 16 threads;
-four are selected on the M4 Max. This does not change the mixing prescription.
+eight are selected on the M4 Max after the additional parallel work below. This does not change the mixing prescription.
 
 A matched 1-Gyr segment starting at 3.718 Tyr, with four threads and every
 full/two-half timestep check retained, used **48.97 CPU seconds** and
@@ -324,3 +324,33 @@ potential/enthalpy group errors by **2.782e-8**; the maximum absolute error in
 the buoyancy term was **1.634e-6**. These checks concern gradual shell burning,
 not convergence through a flash. Sampled timestep checking remains unselected.
 [Comparison and verification](results/response_reuse_sept27_v1.json).
+
+
+### Coupled-solve accuracy and additional parallel work
+
+The optional settings `coupling_stop_tolerance "1e-10"`,
+`material_heat_tolerance "1e-7"`, `verification_residual_tolerance "1e-8"`
+and `verification_correction_tolerance "1e-7"` separate the outer iteration
+from the inner species solve and its integrated conservation bounds. The
+returned composition still passes a structure residual and correction check.
+Omitting these settings retains the previous stopping criteria. Selected values
+enter the restart identity; the driver requires them to remain smaller than
+the corresponding time-discretization tolerances.
+
+Face mixing coefficients, transported-heat residuals and nuclear sources used
+in flux reconstruction now share the zone threads. Ordered conservation sums
+remain serial. On the same Hayashi-origin star at **3.841 Tyr**, a **5 Gyr**
+comparison took **31.53 wall seconds** with eight threads, versus **54.95 seconds**
+with four threads and the preceding code: **1.743 times** faster. CPU use was
+**154.7** versus **142.0 seconds**; the elapsed-time gain here comes from using
+more cores. Both retained 75 intervals and every full/two-half check.
+Relative global differences were at most **1.068e-12** and the helium-3 profile
+difference, normalized by its peak, was **5.861e-11**.
+
+Five integration tests cover ordinary, finite and lagged convection, unchanged
+conservation bounds, parallel face coefficients, actual convective-region sets
+and invalid solver settings. The production histories record boundary counts;
+they do not independently establish identical boundary positions. This
+comparison covers gradual shell burning; sampled timestep control and flash
+convergence remain separate work.
+[Measurements](results/parallel_coupling_sept27_v1.json).

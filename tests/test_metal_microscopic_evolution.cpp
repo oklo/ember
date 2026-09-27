@@ -5,6 +5,7 @@
 #include "ember/evolution_checkpoint.hpp"
 #include "ember/convective_evolution_checks.hpp"
 #include <algorithm>
+#include <atomic>
 #include <cmath>
 #include <iomanip>
 #include <iostream>
@@ -52,7 +53,7 @@ struct MetalControl final:MetalMicroscopicTransport {
   }
   MicroscopicHeatResponse heat_with_total_metal_rate(std::size_t,double ma,double mb,const Point& a,
       const Composition& ca,const Point& b,const Composition& cb,const MetalSpeciesVector& total,bool derivatives)const override {
-    ++total_calls;return response(ma,mb,a,ca,b,cb,&total,derivatives);
+    std::atomic_ref(total_calls).fetch_add(1,std::memory_order_relaxed);return response(ma,mb,a,ca,b,cb,&total,derivatives);
   }
   const char* name()const override{return "analytic three-mass integration control";}
 };
@@ -106,6 +107,44 @@ int main(int argc,char** argv) {
     require(step.abundance_residual<=options.abundance_tolerance && step.material_heat_residual<=options.material_heat_tolerance,"abundance or heat convergence");
     require(driver::check_interval(initial,step,dt,nuclear,1e-14).pass,
         "returned composition must conserve integrated nuclear sources and energy");
+    auto fast=options;
+    fast.relaxation.zone_threads=4;
+    fast.coupling_stop_tolerance=1e-10;
+    fast.material_heat_tolerance=1e-7;
+    fast.verification_residual_tolerance=1e-8;
+    fast.verification_correction_tolerance=1e-7;
+    const auto parallel=evolve_step(initial,physics,atmosphere,dt,fast);
+    if(!parallel.converged)throw std::runtime_error("parallel coupling: "+parallel.message);
+    require(driver::check_interval(initial,parallel,dt,nuclear,1e-14).pass,
+        "outer stopping rule changed integrated conservation");
+    require(convective_mixing_regions(parallel.model,physics)==convective_mixing_regions(step.model,physics),
+        "parallel coupling changed convection boundaries");
+    for(std::size_t i=0;i<initial.size();++i) {
+      for(auto v:{Var::lnr,Var::lnrho,Var::lnT})
+        require(std::abs(parallel.model.y[i][v]-step.model.y[i][v])<1e-6,
+            "outer stopping rule changed the thermal solution");
+      for(std::size_t k=0;k<NSPEC;++k)
+        require(std::abs(parallel.model.comp[i].X[k]-step.model.comp[i].X[k])<1e-8,
+            "outer stopping rule changed the species solution");
+    }
+    const auto serial_faces=convective_mixing_faces(initial,physics);
+    const auto parallel_faces=convective_mixing_faces(initial,physics,4);
+    for(std::size_t i=0;i<serial_faces.size();++i) {
+      const auto& a=serial_faces[i];const auto& b=parallel_faces[i];
+      require(a.diffusivity==b.diffusivity && a.velocity==b.velocity && a.length==b.length
+          && a.buoyancy_contrast==b.buoyancy_contrast && a.composition_term==b.composition_term,
+          "parallel face test changed a transport coefficient");
+    }
+    for(int k=0;k<3;++k) {
+      auto bad=options;
+      if(k==0)bad.coupling_stop_tolerance=-1;
+      if(k==1)bad.verification_residual_tolerance=std::numeric_limits<double>::quiet_NaN();
+      if(k==2)bad.verification_correction_tolerance=-1;
+      bool refused=false;
+      try{(void)evolve_step(initial,physics,atmosphere,dt,bad);}
+      catch(const std::invalid_argument&){refused=true;}
+      require(refused,"invalid coupling setting accepted");
+    }
     const auto weights=nodal_mass_weights(initial);double inert=0,maximum_rate=0;
     for(std::size_t i=0;i<initial.size();++i) {
       const auto before=metal_cn_abundances(initial.comp[i]),after=metal_cn_abundances(step.model.comp[i]);

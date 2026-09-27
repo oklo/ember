@@ -23,7 +23,7 @@ std::vector<double> secular_mixing_diffusivities(const Model&,const Physics&);
 struct ConvectiveMixingFace {
   double diffusivity{},velocity{},length{},buoyancy_contrast{},composition_term{};
 };
-std::vector<ConvectiveMixingFace> convective_mixing_faces(const Model&,const Physics&);
+std::vector<ConvectiveMixingFace> convective_mixing_faces(const Model&,const Physics&,std::size_t threads=1);
 // (4 pi r^2 rho)^2 D / Delta m, in g/s, including selected slow mixing.
 std::vector<double> finite_mixing_conductances(const Model&,const Physics&);
 // Conservative backward-Euler diffusion and burning, with instantaneous
@@ -47,6 +47,12 @@ struct EvolutionOptions {
   // the entire star into one abundance unknown. Zero uses the bound above.
   // This is a solver setting, independent of the global inventory audit.
   double homogeneous_abundance_tolerance{};
+  // Optional outer composition bound, independent of the inner species and
+  // inventory solves. Zero retains the abundance tolerance above.
+  double coupling_stop_tolerance{};
+  // Final structure verification after the last composition update. Zero
+  // retains the corresponding relaxation tolerance.
+  double verification_residual_tolerance{},verification_correction_tolerance{};
   double max_abundance_change{.001};
   // Convergence of total-species enthalpy transport outside the local thermal
   // Jacobian, normalized at each face to max(|L_lo|,|L_hi|,1e-12*max|L|).

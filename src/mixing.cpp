@@ -6,23 +6,24 @@
 #include "ember/deuterium_burning.hpp"
 #include "ember/metal_cn_transport.hpp"
 #include "thermal_transport.hpp"
+#include "parallel_evaluate.hpp"
 #include <algorithm>
 #include <cmath>
 #include <stdexcept>
 
 namespace ember {
-std::vector<ConvectiveMixingFace> convective_mixing_faces(const Model& m,const Physics& p) {
+std::vector<ConvectiveMixingFace> convective_mixing_faces(const Model& m,const Physics& p,std::size_t threads) {
   if(!p.eos || !p.opacity || m.comp.size()!=m.size())
     throw std::invalid_argument("finite convection: invalid model or physics");
   detail::check_thermal_transport(p);nodal_mass_weights(m);
-  std::vector<EosState> state;std::vector<double> opacity;
-  state.reserve(m.size());opacity.reserve(m.size());
-  for(std::size_t i=0;i<m.size();++i) {
-    state.push_back(p.eos->eval(m.T(i),m.rho(i),m.comp[i]));
-    opacity.push_back(p.opacity->eval(m.T(i),m.rho(i),m.comp[i]).kappa);
-  }
+  std::vector<EosState> state(m.size());std::vector<double> opacity(m.size());
+  detail::independent_evaluations(m.size(),threads,[&](std::size_t i) {
+    state[i]=p.eos->eval(m.T(i),m.rho(i),m.comp[i]);
+    opacity[i]=p.opacity->eval(m.T(i),m.rho(i),m.comp[i]).kappa;
+  });
   std::vector<ConvectiveMixingFace> result(m.size()-1);
-  for(std::size_t i=0;i+1<m.size();++i) {
+  // Faces are independent (identical arithmetic on each thread).
+  detail::independent_evaluations(m.size()-1,threads,[&](std::size_t i) {
     const double T=.5*(m.T(i)+m.T(i+1)),rho=.5*(m.rho(i)+m.rho(i+1));
     const double r=.5*(m.r(i)+m.r(i+1)),mass=.5*(m.m[i]+m.m[i+1]);
     const double P=.5*(state[i].P+state[i+1].P),cp=.5*(state[i].cp+state[i+1].cp);
@@ -48,7 +49,7 @@ std::vector<ConvectiveMixingFace> convective_mixing_faces(const Model& m,const P
     if(!std::isfinite(D+velocity+length) || D<0)
       throw std::domain_error("finite convection: invalid mixing coefficient");
     result[i]={D,velocity,length,c.element_contrast,B};
-  }
+  });
   return result;
 }
 

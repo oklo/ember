@@ -318,7 +318,7 @@ std::vector<Composition> burn_metal_cn_and_transport(const Model& thermal,const 
 
 MetalFluxReconstruction reconstruct_metal_fluxes(const Model& current,
     const Model& previous,const PPCNNetwork& nuclear,const MixingRegions& regions,
-    std::span<const MetalCNBoundaryFlux> boundaries,double dt) {
+    std::span<const MetalCNBoundaryFlux> boundaries,double dt,std::size_t threads) {
   if(current.m!=previous.m || current.size()!=previous.size()
       || current.comp.size()!=current.size() || previous.comp.size()!=previous.size()
       || current.M!=previous.M || !(current.M>0) || !std::isfinite(current.M)
@@ -356,13 +356,18 @@ MetalFluxReconstruction reconstruct_metal_fluxes(const Model& current,
   std::vector<std::array<long double,3>> change(current.size());
   std::array<long double,3> integrated{};
   const long double factor=static_cast<long double>(dt)/current.M;
+  // Cell sources are independent; the ordered accumulation below is serial.
+  std::vector<NuclearState> sources(current.size());
+  detail::independent_evaluations(current.size(),threads,[&](std::size_t i) {
+    sources[i]=nuclear.eval(current.T(i),current.rho(i),current.comp[i]);
+  });
   for(std::size_t r=0;r<regions.size();++r) {
     const auto [begin,end]=regions[r];
     const R left=r?collapsed(boundaries[r-1].rate):R{};
     const R right=r+1<regions.size()?collapsed(boundaries[r].rate):R{};
     std::array<long double,3> accumulated{};
     for(std::size_t i=begin;i<end;++i) {
-      NuclearResponse reaction;reaction.state=nuclear.eval(current.T(i),current.rho(i),current.comp[i]);
+      NuclearResponse reaction;reaction.state=sources[i];
       detail::flux_finite(reaction.state.dXdt);
       double metal_source=0;for(std::size_t j=3;j<METAL_END;++j)metal_source+=reaction.state.dXdt[j];
       for(std::size_t k=0;k<3;++k) {

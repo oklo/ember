@@ -107,10 +107,10 @@ inline HomogeneousCheck check_envelope_transport(const Model& m,const Physics& p
     throw std::domain_error("envelope transport assessment: missing rates or invalid mixing allowance");
   for(const auto& c:m.comp)if(c[Species::H2]!=0)
     throw std::domain_error("envelope transport assessment requires initial D exhaustion");
-  const auto physical_regions=convective_mixing_regions(m,physics);
+  const auto physical_regions=convective_mixing_regions(m,physics,options.relaxation.zone_threads);
   const auto regions=options.convective_mixing==ConvectiveMixing::instantaneous
       ?physical_regions:instantaneous_mixing_regions(m,physics,options);
-  const auto mixing=convective_mixing_faces(m,physics);const auto weights=nodal_mass_weights(m);
+  const auto mixing=convective_mixing_faces(m,physics,options.relaxation.zone_threads);const auto weights=nodal_mass_weights(m);
   HomogeneousCheck out;out.convective_mass_fraction=0;
   for(const auto [begin,end]:physical_regions) {
     if(end<m.size())++out.radiative_boundaries;
