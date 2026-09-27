@@ -1,0 +1,21 @@
+{
+  "created_utc": "2026-09-27T09:18:14.527561+00:00",
+  "checkpoint": "out/radiative-progress-sept27-v1/snapshot.checkpoint",
+  "checkpoint_sha256": "2bef8f39f4a2cbcb5916562223509173a97a9897c4ac376540e160d3c122ade4",
+  "age_years": 3562419215414.2,
+  "accepted": 7678,
+  "faces": 511,
+  "semiconvective_faces": 0,
+  "thermohaline_faces": 0,
+  "method": "Actual Ledoux face gradients include the saved total-species heat rates and conductive heat transport. Evaluate existing secular-mixing coefficients with each alpha set to1 on the unchanged state; both are zero at all faces. No mixing is enabled and no evolution is performed.",
+  "limitations": [
+    "One saved structure; does not rule out either instability later.",
+    "This applies to the selected material and convection physics, not an independent validation of them."
+  ],
+  "CPU_seconds": 3.140583,
+  "files": {
+    "structure.cpp": "ad5caa055a186726465aecc265bf9bf1cc1d0face7eaa2547060d3b7e5ebe28c",
+    "structure.txt": "f60a3767d8f3e741a6dbf4d0efd3d0b6bfbc8e02e9b01dc606299d7e6b02f940",
+    "faces.csv": "b405cff3751b842409c8af1b3c58c755e0f6d352c760f11bfde63ea5f4a33200"
+  }
+}

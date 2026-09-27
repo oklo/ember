@@ -60,11 +60,16 @@ Proxima & $0.120\pm0.003$ & $0.146\pm0.007$ & $2980\pm80$ & $0.00151\pm0.00008$ 
 \paragraph{Continuous hydrogen burning.}
 With composition-dependent atmospheres and hot microscopic transport, the
 Hayashi-started calculation reaches $\continuousAge\Tyr$ in
-\continuousAccepted\ accepted intervals with no rejections. At that point
-$X=\continuousHydrogen$, $\Teff=\continuousTemperature$ K,
+\continuousAccepted\ accepted intervals and \continuousRejected\ rejected
+trials. At that point surface $X=\continuousHydrogen$, $\Teff=\continuousTemperature$ K,
 $R=\continuousRadius\Rs$, $L=\continuousLuminosity\Ls$, and the central
 temperature is \continuousCoreTemperature\ MK. Nuclear burning supplies
-essentially all the surface luminosity. The star remains fully convective.
+\continuousNuclearPercent\% of the surface luminosity. A radiative shell
+first appears at $3.558\Tyr$, separating the convective centre from the
+envelope. The centre subsequently becomes radiative; the radiative interior
+now contains \continuousRadiativePercent\% of the mass, beneath a
+convective envelope. Microscopic diffusion is active across the radiative
+interfaces, while convection mixes each connected convective region.
 
 A fixed-metal atmosphere comparison reaches $3.078\Tyr$, 3130 K and
 $X=0.2629$, also without rejected intervals. The composition-dependent
@@ -72,7 +77,7 @@ selection spans the saved settling structures, including their trace-helium
 and nearly pure-hydrogen surfaces. All sources join at optical depth 100;
 the coolest, highest-gravity rows include inferred values, and support
 below 4600 K remains to be completed. The continuous calculation has not
-yet reached a radiative core or tested whether a helium-3 flash occurs.
+yet tested whether a helium-3 flash occurs.
 Tracks S, F and P supply the late hydrogen-burning comparisons in
 Section~\ref{sec:hydrogen}.
 
@@ -80,5 +85,8 @@ A 50 Gyr time-resolution comparison in the fully convective phase supports
 an absolute species time-error tolerance of $10^{-7}$: it uses 25 intervals
 instead of 73 at $10^{-8}$, with maximum relative density difference
 $7.451\times10^{-6}$ and helium-3 inventory difference $1.502\times10^{-5}$.
+In the radiative-core transition, a matched 100 Myr comparison supports
+$10^{-6}$: the largest temperature difference is $3.991\times10^{-6}$
+relative and the total helium-3 difference is $2.978\times10^{-6}$ relative.
 The structure tolerance remains $10^{-4}$, and all conservation checks are
-unchanged. This comparison does not establish convergence during a flash.
+unchanged. These comparisons do not establish convergence during a flash.

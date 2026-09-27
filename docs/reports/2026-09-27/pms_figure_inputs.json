@@ -1,5 +1,5 @@
 {
-  "created_utc": "2026-09-27T07:16:37.479132+00:00",
+  "created_utc": "2026-09-27T09:12:56.712490+00:00",
   "sources": [
     {
       "path": "out/continuous-lifetime-sept27-v2/initial-check/history.jsonl",
@@ -21,13 +21,55 @@
     },
     {
       "path": "out/continuous-lifetime-sept27-v4/evolution/history.jsonl",
-      "source_bytes_sha256": "136da22f9f6c4d91a034230e96ebd0543ec212128efe99cf9419289b1709e637",
-      "retained_through": 6099,
-      "CPU_seconds": 5138.969893
+      "source_bytes_sha256": "d3a7c6082f97af28ae6d85c6faf924655ba0dcf7944ce9a9e2f8303d990462e1",
+      "retained_through": 6234,
+      "CPU_seconds": 6907.096001
+    },
+    {
+      "path": "out/radiative-onset-retry-sept27-v1/evolution/history.jsonl",
+      "source_bytes_sha256": "53daf833b7d48b89ffff3a44a46ccb7645c007ba81ae0c80b3c510d5f16c1b7e",
+      "retained_through": 6314,
+      "CPU_seconds": 353.413761
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v5/evolution/history.jsonl",
+      "source_bytes_sha256": "a4bd8b1580c4731522f5767d1eab66c190faf14b502fc16dc5433cda8c8a9e08",
+      "retained_through": 6496,
+      "CPU_seconds": 1959.617766
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v6/evolution/history.jsonl",
+      "source_bytes_sha256": "f263b537b19e5a55716db0e165f2230ac5b01e752e56a9a3df43adcd1035a451",
+      "retained_through": 7093,
+      "CPU_seconds": 4050.61408
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v7/evolution/history.jsonl",
+      "source_bytes_sha256": "0c90633df69d2985450545d6e9b8cc41425b61d66def411fbc974e153ce5a74a",
+      "retained_through": 7295,
+      "CPU_seconds": 1595.077229
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v8/evolution/history.jsonl",
+      "source_bytes_sha256": "b88d1f22de7e0dfdd03e0420c234ded517c29033d772c4d5b4da82fb82ad80f6",
+      "retained_through": 7521,
+      "CPU_seconds": 958.357107
+    },
+    {
+      "path": "out/species-correction-floor-sept27-v1/pilot/history.jsonl",
+      "source_bytes_sha256": "82f67446121ed006cd505d3ebb99388d125cb1d735c8870cc3f924a1776c7e23",
+      "retained_through": 7538,
+      "CPU_seconds": 146.703336
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v9/evolution/history.jsonl",
+      "source_bytes_sha256": "d52e4fd332497aeca49fb7a30406dbbac9a84bfb2fcf28ce5cb9a74130ac056b",
+      "retained_through": 7678,
+      "CPU_seconds": 2148.291641
     }
   ],
-  "models": 6100,
-  "CPU_seconds": 18655.903286,
+  "models": 7679,
+  "CPU_seconds": 31636.104314,
   "contraction_model": {
     "years": 990131259.1322539,
     "step_years": 35442295.89326342,
@@ -57,33 +99,61 @@
     "cpu_seconds": 944.506238
   },
   "latest": {
-    "years": 3212734519206.5645,
-    "step_years": 2659935651.8877234,
-    "accepted": 6099,
-    "rejected": 0,
-    "radius_Rsun": 0.14801845171068528,
-    "Teff_K": 3153.7847319416087,
-    "luminosity_Lsun": 0.0019527811664344127,
-    "nuclear_fraction": 0.9999813853184655,
-    "central_T_K": 7546093.269266063,
-    "H_mass_g": 4.742710424762992e+31,
-    "He3_mass_g": 3.636139331927839e+29,
+    "years": 3562419215414.2,
+    "step_years": 16270541.5662191,
+    "accepted": 7678,
+    "rejected": 453,
+    "radius_Rsun": 0.14233463584488698,
+    "Teff_K": 3259.1728650072814,
+    "luminosity_Lsun": 0.0020594177463781603,
+    "nuclear_fraction": 0.9990415153902176,
+    "central_T_K": 8592936.037985306,
+    "H_mass_g": 3.405232700761577e+31,
+    "He3_mass_g": 1.609499709263991e+29,
     "D_mass_g": 0,
-    "surface_X": 0.23851774700243336,
-    "surface_Z": 0.020000944421361792,
-    "error_norm": 0.6397529231372268,
+    "surface_X": 0.1757353644106588,
+    "surface_Z": 0.019749418255280808,
+    "error_norm": 0.0851748163943622,
     "initial_D_approximation": 0,
     "omitted_mixing_heat_fraction": 0,
     "gross_mixing_heat_fraction": 0,
-    "burn_gradient_estimate": 2.633435751023071e-12,
-    "drift_gradient_proxy": 7.462965591178653e-07,
-    "kinetic_heat_proxy": 0.011454624326758058,
-    "convective_mass_fraction": 0.9999999999999997,
-    "radiative_boundaries": 0,
-    "relative_mixing_gradient": 9.964343969803035e-11,
-    "convective_travel_years": 0.9708906417477807,
-    "cpu_seconds": 5138.969893
+    "burn_gradient_estimate": 1.6527592040109823e-12,
+    "drift_gradient_proxy": 8.073641582298732e-07,
+    "kinetic_heat_proxy": 0.012524469188225851,
+    "convective_mass_fraction": 0.6436313300562375,
+    "radiative_boundaries": 237,
+    "relative_mixing_gradient": 5.7260272325555e-11,
+    "convective_travel_years": 0.605579683555869,
+    "cpu_seconds": 2148.291641
   },
-  "csv_sha256": "23e43a5684ee54988ec1ff693ee0a843e01d607d22c16e00221b134f4ea96d2d",
-  "scope": "One continuous Hayashi-origin trajectory; duplicate restart records removed. HR panel uses all retained models; nuclear-power panel shows the firstGyr. Finite-mixing and atmosphere-source controls excluded from track CPU accounting."
+  "first_radiative_region": {
+    "years": 3558470608835.955,
+    "step_years": 629709.9256394553,
+    "accepted": 6239,
+    "rejected": 15,
+    "radius_Rsun": 0.14386106440207486,
+    "Teff_K": 3250.121491922385,
+    "luminosity_Lsun": 0.00208055211550283,
+    "nuclear_fraction": 0.9996338839225668,
+    "central_T_K": 8508644.759666605,
+    "H_mass_g": 3.4240518107992256e+31,
+    "He3_mass_g": 1.083925838369073e+29,
+    "D_mass_g": 0,
+    "surface_X": 0.1722009682548938,
+    "surface_Z": 0.02000823434328683,
+    "error_norm": 0.05062523900090099,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.8681173199497938e-12,
+    "drift_gradient_proxy": 8.037699648801017e-07,
+    "kinetic_heat_proxy": 0.012222314872384276,
+    "convective_mass_fraction": 0.995859293863489,
+    "radiative_boundaries": 2,
+    "relative_mixing_gradient": 3.389443078692099e-10,
+    "convective_travel_years": 0.8592243358117583,
+    "cpu_seconds": 54.993664
+  },
+  "csv_sha256": "cdb41ef527b5d8f23f30d2f105c648bffbe16fcbf384fa3fd677d1895ebc4e9a",
+  "scope": "One continuous Hayashi-origin trajectory. Duplicate restart records removed and the v8 prefix ends at7521, followed by the retained correction-control pilot7522..7538 and v9. CPU accounting includes retained process startup and retries; separate accuracy and atmosphere jobs excluded."
 }

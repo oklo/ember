@@ -4,14 +4,15 @@
 
 The continuous Hayashi-started sequence forms its first radiative region at
 **3.558 Tyr**, **3250 K**, with surface hydrogen **X=.1722**. The checked
-continuation passes **3.561 Tyr**, with H/He and metal
+continuation passes **3.562 Tyr**, with H/He and metal
 diffusion active across radiative boundaries. A radiative shell first surrounds
-the convective centre; the centre then becomes radiative. About **34%** of the
+the convective centre; the centre then becomes radiative. About **36%** of the
 mass is now radiative. All accepted intervals pass the
 unchanged isotope and energy audits. The fixed-metal-atmosphere comparison
 is complete at **3.078 Tyr**. Both use the common lifetime program.
 [First radiative region](results/continuous_radiative_core_sept27_v1.json),
 [internal structure](results/radiative_shell_geometry_sept27_v1.json).
+The updated paper and Figure 1 use the continuous history through **3.562 Tyr**.
 Read the [current handoff](../HANDOFF.md) for the live process and next work.
 
 Failed trial audits now trigger a smaller timestep, with a bounded number of

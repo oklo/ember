@@ -13,81 +13,41 @@ resolve the stellar/brown-dwarf boundary as initial mass and composition vary.
 The full calculation is not yet established.
 
 The common `ember-evolve --lifetime` program carries the Hayashi-started star
-through its first radiative region at **3.558 Tyr**, **3250 K**
-and surface hydrogen **X = 0.1722**. It retains the same optical-depth-100
-atmosphere treatment throughout. It now passes **3.561 Tyr** with H/He and metal
-diffusion and unchanged conservation checks. A radiative shell first separates
-the convective centre from the envelope. The centre subsequently becomes
-radiative, leaving about **34%** of the mass in the radiative interior.
-[Continuous calculation](docs/results/continuous_radiative_core_sept27_v1.json),
+through **3.562 Tyr**, at **3259 K** and surface hydrogen **X = 0.1757**.
+A radiative shell first forms at **3.558 Tyr**; the centre subsequently becomes
+radiative. At the plotted endpoint the radiative interior contains **35.64%**
+of the mass beneath a convective envelope. The atmosphere matching depth
+remains at optical depth 100 throughout. The retained sequence has used
+**8.788 CPU-hours**, including its timestep comparisons and retries.
+[Current trajectory and inputs](docs/reports/2026-09-27/pms_figure_inputs.json),
 [internal structure](docs/results/radiative_shell_geometry_sept27_v1.json).
-A fixed-metal-atmosphere comparison reaches **3.078 Tyr**, also without rejected
-intervals. [Comparison](docs/results/continuous_lifetime_sept26_v3.json).
 
-The common driver selects hot microscopic H/He/metal transport, conservative
-mixing heat, metal-dependent atmospheres and the existing composition-dependent
-interior opacities. A saved model containing radiative layers evolves with nonzero settling,
-passes the physical conservation checks, and restarts exactly. Initial
-fully mixed deuterium burning uses tighter composition convergence than the
-stratified diffusion solve; the physical audits stay unchanged. Controller recovery, physical diffusion and exact-restart tests pass in the
-isolated build with the required datasets.
-[Common driver](docs/LIFETIME_DRIVER.md),
-[diffusion and restart test](docs/results/screened_radiative_core_sept27_v1.json),
-[atmosphere coverage](docs/results/atmosphere_lifetime_atlas_sept27_v1.json),
-[opacity coverage](docs/results/opacity_lifetime_extension_sept27_v1.json).
+The selected physics includes initial deuterium burning, pp reactions and
+explicit C12/C13/N14 conversion with Solar Fusion III rates, plasma neutrino
+losses, composition-dependent thermodynamics and opacities, wavelength-dependent
+atmospheres, hot microscopic H/He/metal diffusion, and conservative heat
+transport during composition changes. Convection mixes each connected region
+instantaneously. This is not a full CNO network; grains, finite convective
+mixing and cool radiative microscopic transport are not selected.
+[Physics and remaining work](docs/COLD_REMNANT.md),
+[driver configuration](docs/LIFETIME_DRIVER.md).
 
-The continuous calculation retains optical depth 100 through its composition-dependent
-atmosphere family. Adding later table coverage leaves the accepted stellar state
-unchanged and reproduces an independent ten-interval restart exactly. All 5932 tested early
-surface values remain unchanged. The combined inputs cover all 67 saved
-settling comparison states at the original optical depth of 100. Cool,
-high-gravity rows include bounded estimates, which still need source checks;
-continuous WD cooling is not yet established.
-[Current calculation](docs/results/continuous_radiative_core_sept27_v1.json),
-[atmosphere coverage and restart evidence](docs/results/hydrogen_envelope_integration_sept27_v1.json).
-Independent atmosphere columns now pass at 4800 K/log g = 6.2 and
-4700 K/log g = 6.0, 6.1 and 6.2 with unchanged acceptance criteria. A density-inversion
-correction also removes rejection caused solely by a remote unstable EOS
-endpoint; the finite-mixing treatment of the cool envelope remains under test.
-[Atmosphere checks](docs/results/highg_energy_balance_sept27_v1.json),
-[density-inversion checks](docs/results/local_density_inversion_sept27_v1.json),
-[adjacent atmosphere columns](docs/results/highg_adjacent_columns_sept27_v1.json).
-Cooler sources also pass at **4600 K/log g = 6.0** and
-**4650 K/log g = 6.1 and 6.2**, using converged neighboring atmospheres as
-initial guesses. [Cool atmosphere checks](docs/results/cool_highg_sources_sept27_v1.json).
-The selected EOS supports the nodes and cell boundaries of all 67 saved settling
-structures, including the composition derivatives used for diffusion and heat.
+Every accepted interval passes full-step/two-half-step accuracy checks and
+isotope and energy audits. Matched-age controls support the timestep settings
+used in the fully convective and radiative-core phases. Separating local
+Newton correction accuracy from integrated species conservation removes a
+verified solver stall without weakening the conservation requirement.
+[Time accuracy](docs/results/radiative_shell_time_accuracy_sept27_v1.json),
+[diffusion convergence](docs/results/species_correction_accuracy_sept27_v1.json).
+
+The atmosphere and EOS inputs cover all 67 saved settling comparison
+structures. The cooler, higher-gravity atmosphere family still contains
+explicitly inferred values. Independent source columns pass down to
+**4600 K at log g = 6.0** and **4650 K at log g = 6.2**; more coverage is needed
+for cooling, and these new rows have not yet been selected in the live run.
+[Atmosphere coverage](docs/results/hydrogen_envelope_integration_sept27_v1.json),
+[cool source checks](docs/results/cool_highg_sources_sept27_v1.json),
 [EOS coverage](docs/results/eos_lifetime_coverage_sept27_v1.json).
-A 50-Gyr timestep comparison used 25 intervals instead of 73, with a
-0.0004605% luminosity difference and 0.001502% helium-3-reservoir difference.
-That comparison covers the fully convective phase.
-[Timestep comparison](docs/results/lifetime_time_accuracy_sept27_v1.json).
-A separate **100 Myr** comparison in the radiative-shell phase supports a
-species time-error tolerance of **1e-6**: **19** intervals instead of **31**,
-with a **0.0002978%** difference in the total helium-3 reservoir. Structure,
-nuclear-power and conservation checks remain unchanged.
-[Radiative-shell comparison](docs/results/radiative_shell_time_accuracy_sept27_v1.json).
-At the onset of the radiative shell, a matched **11.76 Myr** comparison supports a tighter
-local composition solve, **1e-13**. It uses **10** accepted intervals and **2**
-retries instead of **19** and **10**, with a **0.00004235%** luminosity difference.
-This setting is now selected; global conservation checks are unchanged.
-[Composition-solve comparison](docs/results/radiative_core_solve_accuracy_sept27_v1.json).
-The coupled solve returns composition and heat rates evaluated on the final
-thermal state, after checking the structure equations and convection again.
-This removes a demonstrated conservation failure without relaxing its limit.
-Skipping unused EOS derivatives also preserves an exact six-step replay and
-reduced CPU use by **13.4%** in that comparison.
-[Coupling check](docs/results/endpoint_species_consistency_sept27_v1.json),
-[EOS work comparison](docs/results/thermal_eos_work_sept27_v1.json).
-Local diffusion corrections and integrated conservation now have separate
-stopping criteria. This removes a demonstrated solver stall: the checked
-continuation advances **100 Myr in 17 steps**, with no rejected intervals and
-all original conservation checks passing.
-[Diffusion convergence check](docs/results/species_correction_accuracy_sept27_v1.json).
-The microscopic metal law assumes complete ionization; unsupported cool
-radiative layers are rejected. Initial deuterium uses a checked whole-star
-mixing approximation. Nuclear burning includes the pp chain and explicit
-C12/C13/N14 conversion with Solar Fusion III rates, rather than a full CNO network.
 
 Separate late-evolution calculations develop a helium-3 shell pulse after an
 atmosphere adjustment and then turn toward cooling. They establish a possible
@@ -96,7 +56,7 @@ The continuous calculation tests whether the pulse survives a consistent history
 [Working paper](docs/reports/2026-09-27/ember_status_and_future.pdf),
 [Fortran comparison](docs/F77_LBA97_COMPARISON.md).
 
-The working paper is now 30 pages, reduced from 63 while retaining the
+The working paper is **30 pages**, reduced from 63 while retaining the
 physical qualifications and lifetime timeline. The large local datasets are
 required for the full test suite; public runtime/test-data availability remains
 incomplete.
