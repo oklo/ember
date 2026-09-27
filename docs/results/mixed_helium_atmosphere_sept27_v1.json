@@ -1,0 +1,272 @@
+{
+  "created_utc": "2026-09-27T17:16:41.491883+00:00",
+  "selected_for_evolution": false,
+  "scope": "Optional fixed-He3 source grid and explicit helium-isotope atmosphere mapping, with a smooth same-depth connection. Native queries use the physical EOS. Source holes remain rejected; current continuous-star inputs unchanged.",
+  "source_grid_sha256": "f73882fbce7ca32217721728d516b720e576419a5709f1fe5cae55a19f9bc3d5",
+  "source_counts": {
+    "measured_columns": 165,
+    "derived_vertices": 36,
+    "missing_vertices": 150,
+    "supported_cells": 92,
+    "total_cells": 192
+  },
+  "native_queries": {
+    "high_gravity_tested": 169,
+    "high_gravity_supported": 96,
+    "unchanged_preceding_queries": 36,
+    "low_middle_tested": 36,
+    "low_middle_supported": 23,
+    "old_postpulse_states_supported": 4,
+    "explicit_outside_cases_rejected": 3,
+    "maximum_derivative_error": 3.982828289395002e-09,
+    "maximum_overlap_temperature_difference": 0.004450030422636253,
+    "maximum_overlap_pressure_difference": 0.02385370430811684
+  },
+  "trace_helium_controls": {
+    "controls": [
+      {
+        "teff_K": 4600,
+        "log_g": 5.8,
+        "pure_state": {
+          "T": 5773.52725585665,
+          "Pgas": 60377098.499761276,
+          "source_density": 0.00014773792154978974,
+          "column_mass": 95.69123816955481,
+          "flux_error": 0.00012798795482216185,
+          "correction": 8.53e-07,
+          "effective_flux_error": 9.240080455175104e-05,
+          "hydrostatic_error": 1.8480863173131468e-07,
+          "chemical_density_error": 2.365649898194988e-10,
+          "iterations": 55,
+          "depths": 100,
+          "tau_bracket": [
+            94.54480271363758,
+            128.9697395571517
+          ],
+          "optical_depth_range": [
+            8.199097294355943e-08,
+            3686.9700159690155
+          ],
+          "column_mass_range": [
+            0.0016559201808812594,
+            288.92460258178795
+          ],
+          "temperature_range": [
+            3377.0479059226864,
+            6951.777373792099
+          ],
+          "density_range": [
+            3.2567304522313697e-09,
+            0.00035092658436888406
+          ]
+        },
+        "mixed_state": {
+          "T": 5772.603235833314,
+          "Pgas": 60890810.91627438,
+          "source_density": 0.00014962880405053352,
+          "column_mass": 96.50541732777991,
+          "flux_error": 4.4180166121732256e-05,
+          "correction": 7.73e-07,
+          "effective_flux_error": 0.00016697586068692427,
+          "hydrostatic_error": 1.8481567232164764e-07,
+          "chemical_density_error": 5.340172748447003e-14,
+          "iterations": 14,
+          "depths": 100,
+          "tau_bracket": [
+            96.66321684200463,
+            123.47629655816736
+          ],
+          "optical_depth_range": [
+            7.705606121618878e-08,
+            26873.41421483411
+          ],
+          "column_mass_range": [
+            0.0015873630000000003,
+            543.1477000000002
+          ],
+          "temperature_range": [
+            3264.2006427713704,
+            7889.6436409815915
+          ],
+          "density_range": [
+            3.1320596038450415e-09,
+            0.0005680929909395078
+          ]
+        },
+        "relative_pure_minus_mixed": {
+          "T": 0.00016006990011030453,
+          "Pgas": -0.008436616441509837
+        },
+        "pure_result": "out/helium-limit-tau100-sept27-v1/cool/result.json",
+        "pure_result_sha256": "efac63fed7c6646d286900af0c476090afaed2179c1458729bf78cc78962758b"
+      },
+      {
+        "teff_K": 5000,
+        "log_g": 5.8,
+        "pure_state": {
+          "T": 6851.497440024872,
+          "Pgas": 16379013.722130615,
+          "source_density": 2.9157968690780963e-05,
+          "column_mass": 25.958990053391656,
+          "flux_error": 1.774139849342049e-05,
+          "correction": 7.33e-07,
+          "effective_flux_error": 0.00020474292886996093,
+          "hydrostatic_error": 1.837391649939235e-07,
+          "chemical_density_error": 3.299205353357593e-11,
+          "iterations": 34,
+          "depths": 100,
+          "tau_bracket": [
+            68.91543769910078,
+            107.52163693768645
+          ],
+          "optical_depth_range": [
+            2.7400141131169227e-07,
+            502.5869018053572
+          ],
+          "column_mass_range": [
+            0.0016559199999999997,
+            38.10050714532796
+          ],
+          "temperature_range": [
+            4146.343000328252,
+            7759.493588825126
+          ],
+          "density_range": [
+            3.0308435869495977e-09,
+            3.754333854324876e-05
+          ]
+        },
+        "mixed_state": {
+          "T": 6847.141634575159,
+          "Pgas": 16515546.790540319,
+          "source_density": 2.9523456493497322e-05,
+          "column_mass": 26.175380321954524,
+          "flux_error": 3.746339651700126e-05,
+          "correction": 7.9e-07,
+          "effective_flux_error": 0.0001708908742746873,
+          "hydrostatic_error": 3.846343739066782e-07,
+          "chemical_density_error": 9.992007221626409e-14,
+          "iterations": 54,
+          "depths": 100,
+          "tau_bracket": [
+            62.37626601233648,
+            102.71676738172361
+          ],
+          "optical_depth_range": [
+            2.567066028650492e-07,
+            60574.77255916768
+          ],
+          "column_mass_range": [
+            0.0015873630000000003,
+            134.8306733721741
+          ],
+          "temperature_range": [
+            4146.274958905291,
+            11827.701082030942
+          ],
+          "density_range": [
+            2.915189336437502e-09,
+            8.596700647316906e-05
+          ]
+        },
+        "relative_pure_minus_mixed": {
+          "T": 0.0006361494594646633,
+          "Pgas": -0.008266942060186966
+        },
+        "pure_result": "out/helium-limit-tau100-sept27-v3/middle/result.json",
+        "pure_result_sha256": "fff06b8d2ee9c3e97179286f1becd71a1ad2c3c3c4ec9a347bf72dcacd1c31a8"
+      },
+      {
+        "teff_K": 6000,
+        "log_g": 5.4,
+        "pure_state": {
+          "T": 9219.985713737877,
+          "Pgas": 1576166.0885495532,
+          "source_density": 2.0401686182749705e-06,
+          "column_mass": 6.274894840124128,
+          "flux_error": 1.570409487761104e-05,
+          "correction": 8.95e-07,
+          "effective_flux_error": 0.00020656049589928838,
+          "hydrostatic_error": 1.1086989946340609e-05,
+          "chemical_density_error": 5.986877660291157e-12,
+          "iterations": 28,
+          "depths": 100,
+          "tau_bracket": [
+            89.45458540993407,
+            135.27774265425592
+          ],
+          "optical_depth_range": [
+            6.096469594408455e-06,
+            231.139728390723
+          ],
+          "column_mass_range": [
+            0.003594714999999999,
+            7.517090999999999
+          ],
+          "temperature_range": [
+            4842.158457971807,
+            9770.50332956485
+          ],
+          "density_range": [
+            2.2385052618435725e-09,
+            2.295616070755888e-06
+          ]
+        },
+        "mixed_state": {
+          "T": 9237.777772562455,
+          "Pgas": 1589926.1970820946,
+          "source_density": 2.060724228880652e-06,
+          "column_mass": 6.329675370996765,
+          "flux_error": 1.4659129075722532e-05,
+          "correction": 9.47e-07,
+          "effective_flux_error": 0.00020809948532307665,
+          "hydrostatic_error": 1.1045088231131928e-05,
+          "chemical_density_error": 2.3425705819590803e-14,
+          "iterations": 44,
+          "depths": 100,
+          "tau_bracket": [
+            85.89681871054128,
+            129.27540995998484
+          ],
+          "optical_depth_range": [
+            6.205493280610856e-06,
+            219.99875685558345
+          ],
+          "column_mass_range": [
+            0.0035947150709938038,
+            7.517091274256711
+          ],
+          "temperature_range": [
+            4858.327207602855,
+            9762.088405094652
+          ],
+          "density_range": [
+            2.2424460563568795e-09,
+            2.3056245929086087e-06
+          ]
+        },
+        "relative_pure_minus_mixed": {
+          "T": -0.0019260106989608117,
+          "Pgas": -0.008654558027784365
+        },
+        "pure_result": "out/helium-limit-tau100-sept27-v1/warm/result.json",
+        "pure_result_sha256": "fb1e764e6bf3c15e52e4ed0f94c9231c7d7768617503b8698e16bf63336a3294"
+      }
+    ],
+    "maximum_temperature_difference": 0.0019260106989608117,
+    "maximum_pressure_difference": 0.008654558027784365,
+    "scope": "Three representative direct comparisons at common opacity resolution; not a uniform error bound across the whole source domain. Atmosphere density still uses actual composition. Changes to low/middle tables only extend declared helium allowance; all source values unchanged."
+  },
+  "tests": [
+    "atmosphere_grid",
+    "atmosphere_hydrogen_envelope"
+  ],
+  "input_closure_checked": true,
+  "limitations": [
+    "Gas-only LTE sources with approximate isotope cross sections and broadening.",
+    "Native derivative checks establish interpolation consistency, not atmosphere model accuracy.",
+    "High-gravity cold cells and gaps between warm/cooling patches need additional sources; these calculations are in progress.",
+    "Trace-helium controls are three representative states, not a bound across every cell.",
+    "The new atmosphere is not selected in the live star."
+  ]
+}

@@ -2,6 +2,8 @@
 #include <iomanip>
 #include <iostream>
 #include <sstream>
+#include <chrono>
+#include "ember/runtime_identity.hpp"
 
 using namespace ember;
 namespace {
@@ -126,6 +128,55 @@ int main() {
     require(rejects([&]{envelope.eval(4500,1e6,composition(.0001,1e-30));}),"cool unsupported state extrapolated");
     require(rejects([&]{envelope.eval(4731,2e6,composition(.0001,1e-30));}),"high-gravity unsupported state extrapolated");
     require(rejects([&]{envelope.eval(4731,1e6,composition(.006,1e-30));}),"large helium fraction accepted");
+    const auto stamp=std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    const auto temporary=std::filesystem::temp_directory_path()/("ember-mixed-helium-"+std::to_string(stamp));
+    std::filesystem::create_directory(temporary);
+    const auto mixed_path=temporary/"mixed.dat";
+    {
+      std::ofstream out(mixed_path);out<<std::setprecision(17)
+        <<"EMBER_COMPOSITION_ATMOSPHERE 4\nsource \"analytic mixed helium\"\napproximation \"test only\"\nbasis baryon_mass\ntau 100\nmetals 0 0 0 0 0\nmetal_tolerance 0\n"
+        <<"hydrogen 2 .78 .9995\nhelium3 1 0\nlog_teff 2 3.5 4\nlog_g 2 4.5 6.3\ndata\n";
+      for(double hydrogen:{.78,.9995})for(double t:{3.5,4.})for(double g:{4.5,6.3})
+        out<<"1 "<<.9*t+.04*g+.25+.02*(1-hydrogen)<<' '<<-.3*t+.8*g+4+.1*(1-hydrogen)<<'\n';
+      out<<"cells\n1\n";
+    }
+    auto spec=HydrogenEnvelopeAtmosphere::read(path);
+    spec.mixed_helium=mixed_path;spec.mixed_maximum_helium3=.02;spec.mixed_maximum_metals=1e-10;
+    spec.mixed_helium_join={.0005,.0009};spec.mixed_metal_join={1e-12,1e-10};
+    HydrogenEnvelopeAtmosphere mixed(eos,a,spec);
+    for(double he:{.0001,.0005,.0007,.0009,.01,.1}) {
+      const auto q=composition(he,1e-30,std::min(he/5,.009));
+      const auto v=mixed.eval(4901,std::pow(10.,6.03),q);
+      require(close(eos.eval(v.T,v.rho,q).P,v.P),"mixed-helium envelope lost actual-composition density");
+      require(derivative_error(mixed,4901,std::pow(10.,6.03),q)<2e-8,"mixed-helium connection derivative");
+      if(he<=.0005) {
+        const auto old=envelope.eval(4901,std::pow(10.,6.03),q);
+        require(old.T==v.T && old.P==v.P && old.rho==v.rho,"optional mixed source changed preceding models");
+      }
+    }
+    for(double edge:{.0005,.0009}) {
+      const auto l=mixed.eval(4901,1e6,composition(edge-1e-12,1e-30));
+      const auto r=mixed.eval(4901,1e6,composition(edge+1e-12,1e-30));
+      require(std::abs(std::log(l.P/r.P))<1e-6,"mixed-helium connection is discontinuous");
+    }
+    require(rejects([&]{mixed.eval(4901,1e6,composition(.03,1e-30,.021));}),"mixed envelope ignored its isotope bound");
+    const auto manifest=temporary/"envelope.dat";
+    {
+      std::ifstream in(path);std::ofstream out(manifest);std::string line;std::getline(in,line);
+      out<<"EMBER_HYDROGEN_ENVELOPE_ATMOSPHERE 2\n";
+      for(int i=0;std::getline(in,line);++i) {
+        if(i<4) {std::istringstream row(line);std::string key,file;row>>key>>std::quoted(file);out<<key<<' '<<std::quoted((path.parent_path()/file).string())<<'\n';}
+        else out<<line<<'\n';
+      }
+      out<<"mixed_helium \"mixed.dat\"\nmixed_maximum_helium3 .02\nmixed_maximum_metals 1e-10\nmixed_helium_join .0005 .0009\nmixed_metal_join 1e-12 1e-10\n";
+    }
+    HydrogenEnvelopeAtmosphere parsed(eos,a,manifest);
+    const auto q=composition(.1,1e-30,.009);
+    require(parsed.eval(4901,1e6,q).P==mixed.eval(4901,1e6,q).P,"mixed-helium manifest changed its selection");
+    driver::RuntimeIdentity identity;identity.hydrogen_envelope("boundary",manifest);
+    require(identity.values.contains("boundary.mixed_helium")
+        && identity.values.contains("boundary.mixed_helium_join.low"),"mixed source absent from restart identity");
+    std::filesystem::remove_all(temporary);
     std::cout<<checks<<" atmosphere checks passed\n";
   }catch(const std::exception& e){std::cerr<<"after "<<checks<<" checks: "<<e.what()<<'\n';return 1;}
 }

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <iomanip>
 #include <numeric>
+#include <limits>
 #include <stdexcept>
 
 namespace ember {
@@ -39,7 +40,7 @@ void CompositionAtmosphereGrid::read(std::istream &in, Mixture mixture) {
   };
   label("EMBER_COMPOSITION_ATMOSPHERE");
   int version{};
-  if (!(in >> version) || (version != 1 && version != 2 && version != 3))
+  if (!(in >> version) || (version < 1 || version > 4))
     throw std::runtime_error("CompositionAtmosphereGrid: version");
   helium_fraction_coordinates_ = version == 3;
   label("source");
@@ -67,7 +68,7 @@ void CompositionAtmosphereGrid::read(std::istream &in, Mixture mixture) {
   if (z >= 1)
     throw std::runtime_error(
         "CompositionAtmosphereGrid: invalid total metallicity");
-  if (helium_fraction_coordinates_) {
+  if (helium_fraction_coordinates_ || version == 4) {
     label("metal_tolerance");
     if (!(in >> metal_tolerance_) || !std::isfinite(metal_tolerance_) ||
         metal_tolerance_ < 0 || metal_tolerance_ > 1e-12)
@@ -80,7 +81,7 @@ void CompositionAtmosphereGrid::read(std::istream &in, Mixture mixture) {
   for (std::size_t k = 0; k < axes_.size(); ++k) {
     label(labels[k]);
     std::size_t n{};
-    if (!(in >> n) || n < 2 || n > 10000 || cells > 1000000 / n)
+    if (!(in >> n) || n < ((version == 4 && k == 1) ? 1u : 2u) || n > 10000 || cells > 1000000 / n)
       throw std::runtime_error("CompositionAtmosphereGrid: invalid grid size");
     cells *= n;
     auto &axis = axes_[k];
@@ -122,6 +123,27 @@ void CompositionAtmosphereGrid::read(std::istream &in, Mixture mixture) {
   }
   if (!accepted)
     throw std::runtime_error("CompositionAtmosphereGrid: no source states");
+  if(version == 4) {
+    label("cells");
+    std::size_t count=1;
+    for(const auto& axis:axes_)count*=std::max(std::size_t{1},axis.size()-1);
+    cell_valid_.resize(count);bool any=false;
+    for(std::size_t i=0;i<count;++i) {
+      int present{};
+      if(!(in>>present) || (present!=0 && present!=1))
+        throw std::runtime_error("CompositionAtmosphereGrid: invalid cell mask");
+      cell_valid_[i]=present;any|=present;has_missing_states_|=!present;
+      if(!present)continue;
+      std::array<std::size_t,4> base{};auto value=i;
+      for(int k=3;k>=0;--k) {const auto n=std::max(std::size_t{1},axes_[k].size()-1);base[k]=value%n;value/=n;}
+      for(unsigned corner=0;corner<16;++corner) {
+        std::size_t node=0;
+        for(unsigned k=0;k<4;++k)node=node*axes_[k].size()+base[k]+(axes_[k].size()>1 && (corner&(1u<<k)));
+        if(!valid_[node])throw std::runtime_error("CompositionAtmosphereGrid: supported cell has a missing vertex");
+      }
+    }
+    if(!any)throw std::runtime_error("CompositionAtmosphereGrid: no supported cells");
+  }
   std::string extra;
   if (in >> extra)
     throw std::runtime_error("CompositionAtmosphereGrid: trailing data");
@@ -143,7 +165,7 @@ std::size_t CompositionAtmosphereGrid::check_temperature_extension(
   if (source_ != old.source_ || approximation_ != old.approximation_ ||
       tau_ != old.tau_ || metals_ != old.metals_ ||
       helium_fraction_coordinates_ != old.helium_fraction_coordinates_ ||
-      metal_tolerance_ != old.metal_tolerance_)
+      metal_tolerance_ != old.metal_tolerance_ || cell_valid_.empty()!=old.cell_valid_.empty())
     throw std::runtime_error("atmosphere extension: physics or matching depth changed");
   for (std::size_t k : {0u, 1u, 3u})
     if (axes_[k] != old.axes_[k])
@@ -166,6 +188,13 @@ std::size_t CompositionAtmosphereGrid::check_temperature_extension(
               (valid_[i] && (logT_[i] != old.logT_[j] || logPg_[i] != old.logPg_[j])))
             throw std::runtime_error("atmosphere extension: original source values or mask changed");
         }
+  for(std::size_t i=0;i<old.cell_valid_.size();++i) {
+    std::array<std::size_t,4> base{};auto value=i;
+    for(int k=3;k>=0;--k) {const auto n=std::max(std::size_t{1},old.axes_[k].size()-1);base[k]=value%n;value/=n;}
+    std::size_t j=0;
+    for(std::size_t k=0;k<4;++k)j=j*std::max(std::size_t{1},axes_[k].size()-1)+base[k];
+    if(cell_valid_[j]!=old.cell_valid_[i])throw std::runtime_error("atmosphere extension: original cell support changed");
+  }
   if (!added)
     throw std::runtime_error("atmosphere extension: no source states added");
   return added;
@@ -199,8 +228,8 @@ std::optional<std::array<std::size_t, 4>>
 CompositionAtmosphereGrid::stencil(const std::array<double, 4> &q) const {
   std::array<std::size_t, 4> preferred{};
   for (std::size_t k = 0; k < q.size(); ++k)
-    preferred[k] = interp::locate(axes_[k], q[k]);
-  if (!has_missing_states_)
+    preferred[k] = axes_[k].size()==1 ? 0 : interp::locate(axes_[k], q[k]);
+  if (!has_missing_states_ && cell_valid_.empty())
     return preferred;
   // At an exact knot either incident cell provides a one-sided derivative.
   // Prefer the ordinary upper-side cell. If absent, use a complete lower-
@@ -220,11 +249,16 @@ CompositionAtmosphereGrid::stencil(const std::array<double, 4> &q) const {
     }
     if (!eligible)
       continue;
+    if(!cell_valid_.empty()) {
+      std::size_t cell=0;
+      for(unsigned k=0;k<4;++k)cell=cell*std::max(std::size_t{1},axes_[k].size()-1)+base[k];
+      if(!cell_valid_[cell])continue;
+    }
     bool complete = true;
     for (unsigned corner = 0; corner < 16; ++corner) {
       std::size_t index = 0;
       for (unsigned k = 0; k < 4; ++k)
-        index = index * axes_[k].size() + base[k] + bool(corner & (1U << k));
+        index = index * axes_[k].size() + base[k] + (axes_[k].size()>1 && (corner & (1U << k)));
       if (!valid_[index]) {
         complete = false;
         break;
@@ -253,6 +287,7 @@ CompositionAtmosphereGrid::interpolate(const std::vector<double> &f,
   const auto &base = *selected;
   std::array<double, 4> u{}, width{};
   for (std::size_t k = 0; k < q.size(); ++k) {
+    if(axes_[k].size()==1) {width[k]=1;u[k]=0;continue;}
     width[k] = axes_[k][base[k] + 1] - axes_[k][base[k]];
     u[k] = (q[k] - axes_[k][base[k]]) / width[k];
   }
@@ -262,11 +297,12 @@ CompositionAtmosphereGrid::interpolate(const std::vector<double> &f,
     std::array<double, 4> w{};
     for (unsigned k = 0; k < 4; ++k) {
       const bool high = corner & (1U << k);
-      index = index * axes_[k].size() + base[k] + high;
+      index = index * axes_[k].size() + base[k] + (axes_[k].size()>1 && high);
       w[k] = high ? u[k] : 1 - u[k];
     }
     result[0] += f[index] * w[0] * w[1] * w[2] * w[3];
     for (unsigned k = 0; k < 4; ++k) {
+      if(axes_[k].size()==1)continue;
       double derivative = (corner & (1U << k) ? 1. : -1.) / width[k];
       for (unsigned j = 0; j < 4; ++j)
         if (j != k)
@@ -317,6 +353,7 @@ CompositionAtmosphereGrid::composition_response(double Teff, double g,
     t[2] /= helium;
     pg[2] /= helium;
   }
+  if(axes_[1].size()==1)t[2]=pg[2]=std::numeric_limits<double>::quiet_NaN();
   return {t[1], t[2], (pg[0] * pg[1] + 4 * pr * t[1]) / p,
           (pg[0] * pg[2] + 4 * pr * t[2]) / p};
 }

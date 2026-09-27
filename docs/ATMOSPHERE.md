@@ -294,3 +294,42 @@ are documented in [NONGREY.md](NONGREY.md). Runtime values and derivatives
 come from the same four-dimensional interpolant in H1, He3, Teff and gravity.
 Source support and mixture assumptions are explicit; the reader never
 fills holes, extrapolates or substitutes a grey boundary.
+
+
+## Mixed helium at the same optical matching depth
+
+Composition-atmosphere format4 permits a singleton helium-3 axis and an explicit
+mask of supported interpolation cells. Shared source vertices give continuous
+values across cell faces. Missing cells remain unavailable even if their corner
+values happen to exist; a fixed isotope axis supplies no isotope derivative.
+
+An optional version2 hydrogen-envelope manifest adds `mixed_helium`,
+`mixed_maximum_helium3`, `mixed_maximum_metals`, `mixed_helium_join`, and
+`mixed_metal_join`. The source and selected bounds enter restart identity and
+the portable input package. A quintic helium weight joins sources at the same
+optical depth. Models below that helium interval retain the original boundary
+exactly. A metal interval confines the new approximation to negligible metals.
+
+For a helium-4 source grid, let s = 1 + X(helium-3)/3. Query it at
+X(H)' = X(H)/s and g' = g/s. This preserves the hydrogen/helium number ratio
+and the ratio of gravity to mass opacity when isotope-dependent atomic and
+molecular effects are neglected. Matching temperature and gas pressure come
+from that source; density is recalculated with the actual stellar composition.
+The source query substitutes its declared trace-metal mixture. This is an
+explicit isotope approximation, not new helium-3 opacity data.
+
+At three representative states between4600 and6000K, direct comparisons of
+nearly pure hydrogen with X(H)=0.9955 give matching-temperature differences
+up to **0.1926%** and pressure differences up to **0.8655%**. They support a
+small trace-helium overlap but do not bound every atmosphere cell. The trial
+connection to the mixed table also includes interpolation differences: up to
+**0.4450%** in temperature and **2.385%** in pressure at the queried overlap
+points. Its native thermal/gravity derivatives agree with finite differences
+within **3.983e-9**.
+
+These optional code paths pass the atmosphere tests, including cell masks,
+fixed-axis behavior, continuous joins, isotope limits, actual-composition
+density, source identity and preservation of preceding models. The live star
+still uses its existing boundary. Cooler high-gravity columns and gaps between
+the warm and cooling source regions are being filled before selecting the new
+connection. [Checks and limitations](results/mixed_helium_atmosphere_sept27_v1.json).

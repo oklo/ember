@@ -1,5 +1,6 @@
 #include "ember/stellar_seed.hpp"
 #include "ember/atmosphere_grid.hpp"
+#include "ember/atmosphere_helium_isotope.hpp"
 #include "ember/constants.hpp"
 #include <algorithm>
 #include <cmath>
@@ -81,12 +82,69 @@ std::string fixture(int version = 1, int missing = -1, bool extended = false) {
         }
   return s.str();
 }
+std::string fixed_fixture(bool hole=false,bool extended=false,bool bad_vertex=false) {
+  std::ostringstream s;s<<std::setprecision(17);
+  s<<"EMBER_COMPOSITION_ATMOSPHERE 4\nsource \"fixed isotope test\"\napproximation \"test source\"\nbasis baryon_mass\ntau 100\nmetals 0 0 0 0 0\nmetal_tolerance 0\n"
+    <<"hydrogen 3 .4 .55 .7\nhelium3 1 0\nlog_teff "
+    <<(extended?"3 3.4 3.6 3.8":"2 3.4 3.6")<<"\nlog_g 2 4.5 5.5\ndata\n";
+  for(double x:{.4,.55,.7})for(double t:(extended?std::vector<double>{3.4,3.6,3.8}:std::vector<double>{3.4,3.6}))
+    for(double g:{4.5,5.5}) {
+      if(bad_vertex && x==.4 && t==3.4 && g==4.5)s<<"0\n";
+      else s<<"1 "<<temperature(x,0,t,g)<<' '<<pressure(x,0,t,g)<<'\n';
+    }
+  s<<"cells\n";
+  for(int h=0;h<2;++h)for(int t=0;t<(extended?2:1);++t)s<<(!(hole && h==1 && t==0))<<'\n';
+  return s.str();
+}
 } // namespace
 int main() {
   Gas eos;
   const auto proxy = CompositionAtmosphereGrid::Mixture::allow_documented_proxy;
   std::istringstream in(fixture());
   CompositionAtmosphereGrid grid(eos, in, proxy);
+  {
+    std::istringstream fi(fixed_fixture()),hi(fixed_fixture(true)),ei(fixed_fixture(true,true));
+    CompositionAtmosphereGrid fixed(eos,fi,proxy),masked(eos,hi,proxy),extended(eos,ei,proxy);
+    auto comp=solar_scaled(.5,0.);comp.basis=AbundanceBasis::baryon_mass;
+    const double t=std::pow(10.,3.5),g=1e5;
+    const auto q=fixed.eval(t,g,comp);const auto d=fixed.composition_response(t,g,comp);
+    HeliumIsotopeAtmosphere isotope(eos,fixed,.02,1e-10);
+    auto actual=comp;actual.metal_inventory=MetalInventory::gs98;
+    actual[Species::He3]=.01;actual[Species::He4]-=.01;
+    const auto mapped=isotope.eval(t,g,actual);const double scale=1+.01/3;
+    check(near(std::log10(mapped.T),temperature(.5/scale,0,3.5,5-std::log10(scale)))
+        && near(std::log10(mapped.Pgas),pressure(.5/scale,0,3.5,5-std::log10(scale))),
+        "isotope mapping preserves the H/He number ratio and rescales source gravity");
+    check(near(eos.eval(mapped.T,mapped.rho,actual).P,mapped.P),"isotope mapping uses the actual composition for density");
+    const auto ip=isotope.eval(t*std::exp(1e-5),g,actual),im=isotope.eval(t*std::exp(-1e-5),g,actual);
+    check(near(mapped.dlnT_dlnTeff,std::log(ip.T/im.T)/2e-5,1e-8),"isotope mapping preserves thermal derivatives");
+    auto bad=actual;bad[Species::H2]=1e-6;bad[Species::He4]-=1e-6;
+    check(throws([&]{isotope.eval(t,g,bad);}),"isotope mapping rejects unsupported deuterium");
+    bad=actual;bad[Species::He3]=.021;bad[Species::He4]-=.011;
+    check(throws([&]{isotope.eval(t,g,bad);}),"isotope mapping enforces its abundance limit");
+    check(near(std::log10(q.T),temperature(.5,0,3.5,5.)) && near(std::log10(q.Pgas),pressure(.5,0,3.5,5.)),
+          "fixed He3 axis interpolates the measured three-dimensional source");
+    check(std::isnan(d.dlnT_dX3) && std::isnan(d.dlnP_dX3) && std::isfinite(d.dlnT_dXH),
+          "fixed isotope axis does not invent an isotope derivative");
+    auto off=comp;off.X[1]=1e-12;off.X[2]-=1e-12;
+    check(!fixed.covers(t,g,off) && throws([&]{fixed.eval(t,g,off);}),"fixed isotope axis rejects off-plane composition");
+    auto c=solar_scaled(.6,0.);c.basis=comp.basis;
+    check(fixed.covers(t,g,c) && !masked.covers(t,g,c) && throws([&]{masked.eval(t,g,c);}),
+          "cell mask excludes a hole even when all its vertices exist");
+    c=solar_scaled(.55,0.);c.basis=comp.basis;
+    check(masked.covers(t,g,c) && near(masked.eval(t,g,c).T,fixed.eval(t,g,c).T),
+          "masked table retains the complete incident cell at a closed edge");
+    constexpr double h=1e-6;
+    const auto lo=fixed.eval(t*std::exp(-h),g,comp),up=fixed.eval(t*std::exp(h),g,comp);
+    check(near(q.dlnT_dlnTeff,std::log(up.T/lo.T)/(2*h),1e-8),"fixed-axis thermal derivative matches its interpolant");
+    auto ca=solar_scaled(.55-h,0.),cb=solar_scaled(.55+h,0.);ca.basis=cb.basis=comp.basis;
+    check(std::abs(std::log(fixed.eval(t,g,ca).T/fixed.eval(t,g,cb).T))<1e-6,"shared vertices retain continuous cell faces");
+    check(extended.check_temperature_extension(masked)==6,"temperature extension preserves fixed axes and cell masks");
+    check(throws([&]{std::istringstream in(fixed_fixture(false,false,true));CompositionAtmosphereGrid bad(eos,in,proxy);}),
+          "a supported cell cannot refer to a missing source vertex");
+    check(throws([&]{std::istringstream in(fixed_fixture(false,true));CompositionAtmosphereGrid bad(eos,in,proxy);bad.check_temperature_extension(masked);}),
+          "temperature extension cannot fill an old unsupported cell");
+  }
   const auto bounds = grid.support();
   check(bounds.hydrogen == std::array{.4, .7} &&
             bounds.helium3 == std::array{0., .12} &&

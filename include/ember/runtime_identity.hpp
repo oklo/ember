@@ -72,11 +72,20 @@ public:
 
   void hydrogen_envelope(const std::string& role,const fs::path& path) {
     const auto s=HydrogenEnvelopeAtmosphere::read(path);
-    number(role+".version",1);
+    number(role+".version",s.mixed_helium.empty()?1:2);
     file(role+".trace",s.trace);file(role+".low_gravity",s.low_gravity);
     file(role+".middle_gravity",s.middle_gravity);file(role+".high_gravity",s.high_gravity);
     number(role+".maximum_helium3",s.maximum_helium3);
     number(role+".maximum_helium",s.maximum_helium);
+    if(!s.mixed_helium.empty()) {
+      file(role+".mixed_helium",s.mixed_helium);
+      number(role+".mixed_maximum_helium3",s.mixed_maximum_helium3);
+      number(role+".mixed_maximum_metals",s.mixed_maximum_metals);
+      number(role+".mixed_helium_join.low",s.mixed_helium_join[0]);
+      number(role+".mixed_helium_join.high",s.mixed_helium_join[1]);
+      number(role+".mixed_metal_join.low",s.mixed_metal_join[0]);
+      number(role+".mixed_metal_join.high",s.mixed_metal_join[1]);
+    }
     for(const auto& [name,bounds]:std::map<std::string,std::array<double,2>>{
         {"gravity_low",s.gravity_low},{"gravity_high",s.gravity_high},
         {"trace_helium_join",s.trace_helium_join},{"composition_helium_join",s.composition_helium_join},

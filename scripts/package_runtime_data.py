@@ -41,13 +41,16 @@ def atmosphere_children(path):
             raise ValueError(f"invalid atmosphere interval fields: {path}")
         indices = [i for i, row in enumerate(rows[1:], 1)
                    if row[0] in ("lower_interval", "lower_metal_chain", "reference", "chain")]
-    elif rows[0] == ["EMBER_HYDROGEN_ENVELOPE_ATMOSPHERE", "1"]:
+    elif rows[0] in (["EMBER_HYDROGEN_ENVELOPE_ATMOSPHERE", "1"], ["EMBER_HYDROGEN_ENVELOPE_ATMOSPHERE", "2"]):
         fields = ["trace_helium", "low_gravity", "middle_gravity", "high_gravity",
                   "maximum_helium3", "maximum_helium", "gravity_low", "gravity_high",
                   "trace_helium_join", "composition_helium_join", "metal_join", "pure_metal_join"]
+        if rows[0][1] == "2":
+            fields += ["mixed_helium", "mixed_maximum_helium3", "mixed_maximum_metals",
+                       "mixed_helium_join", "mixed_metal_join"]
         if len(rows) != len(fields) + 1 or any(not row or row[0] != field for row, field in zip(rows[1:], fields)):
             raise ValueError(f"invalid hydrogen envelope fields: {path}")
-        indices = range(1, 5)
+        indices = list(range(1, 5)) + ([13] if rows[0][1] == "2" else [])
     else:
         return None
     children = []
