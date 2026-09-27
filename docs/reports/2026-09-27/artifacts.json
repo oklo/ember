@@ -127,11 +127,11 @@
     },
     "pms_figure_inputs.json": {
       "bytes": 7795,
-      "sha256": "6e8cb9deef7d30ef0a6e60931015b3fe1a57807fd4e42da9970fcdb44a8dc9d7"
+      "sha256": "8c52d9a9a1bfe80a4fe73e5319e1063118260226ffe5cbcb541218da1f6851a4"
     },
     "pms_main_sequence.csv": {
-      "bytes": 988405,
-      "sha256": "e4ba37e8f5fadb9697005a72fd4ec3fc75450c2a11f36389e9f6ef0a395fc445"
+      "bytes": 986665,
+      "sha256": "fabecb79418da4f5ed8ea996951909e3c702147fd4f1b1212887c8889f546c07"
     },
     "pms_main_sequence.pdf": {
       "bytes": 25021,
