@@ -99,6 +99,15 @@ class SourceAcceptance(unittest.TestCase):
                 self.assertEqual((plain/name).read_bytes(), (damped/name).read_bytes())
             self.assertNotEqual(input_fingerprint("same-binary", plain),
                                 input_fingerprint("same-binary", damped))
+            tightened = root/"tightened"
+            atmosphere_inputs(tightened, prepared, dict(spec, temperature_convergence=1e-8),
+                              table, abundance, masses, 4600, 5.65)
+            self.assertEqual((tightened/"tas").read_text(),
+                             (plain/"tas").read_text().replace("CHMAX=1.e-6", "CHMAX=1e-08"))
+            for name in ["fort.5", "ember-masses.dat", "opacity.sha256"]:
+                self.assertEqual((plain/name).read_bytes(), (tightened/name).read_bytes())
+            self.assertNotEqual(input_fingerprint("same-binary", plain),
+                                input_fingerprint("same-binary", tightened))
 
     def test_energy_balance_depth_is_explicit_and_inside_the_atmosphere(self):
         from generate_nongrey_grid import energy_balance_tau_division
@@ -124,6 +133,14 @@ class SourceAcceptance(unittest.TestCase):
             for value in [0., spec["tau_top"], spec["tau"], math.inf, math.nan]:
                 with self.subTest(value=value), self.assertRaisesRegex(ValueError, "transition depth"):
                     energy_balance_tau_division(dict(spec, energy_balance_tau_division=value))
+
+    def test_temperature_iteration_can_be_tightened_without_weakening_acceptance(self):
+        from generate_nongrey_grid import temperature_convergence
+        self.assertEqual(temperature_convergence({}), 1e-6)
+        self.assertEqual(temperature_convergence(dict(temperature_convergence=1e-8)), 1e-8)
+        for value in [0., -1e-8, 1e-5, math.inf, math.nan]:
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, "temperature convergence"):
+                temperature_convergence(dict(temperature_convergence=value))
 
     def test_single_composition_uses_four_independent_opacity_workers(self):
         barrier = threading.Barrier(4, timeout=5)
@@ -412,6 +429,10 @@ class SourceAcceptance(unittest.TestCase):
                              "HMIX0=1.9,IFRSET=20000,ND=200,TAUFIR=1e-7,TAULAS=1000,TAUDIV=.01,CHMAX=1e-6,ILGDER=1,NITER=200,DPSILT=1.03,DERT=.001"}
         marker=f"EMBER ELEMENT MASSES: {w[0]} {w[1]}\nEMBER MOLECULAR EQUILIBRIUM TOLERANCE: 1e-8\n"
         source_inputs(inputs,spec,.55,.1,2800,5,marker)
+        tightened = {**inputs, "parameters":inputs["parameters"].replace("CHMAX=1e-6", "CHMAX=1e-8")}
+        source_inputs(tightened,dict(spec,temperature_convergence=1e-8),.55,.1,2800,5,marker)
+        with self.assertRaisesRegex(ValueError,"settings mismatch"):
+            source_inputs(inputs,dict(spec,temperature_convergence=1e-8),.55,.1,2800,5,marker)
         balanced = {**inputs, "parameters":inputs["parameters"].replace("TAUDIV=.01", "TAUDIV=.0001")}
         with self.assertRaisesRegex(ValueError,"settings mismatch"):
             source_inputs(balanced,spec,.55,.1,2800,5,marker)

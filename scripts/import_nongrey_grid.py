@@ -32,7 +32,7 @@ def read_text(path):
 
 def source_inputs(inputs, spec, x, y, teff, logg, log):
     """Check archived input physics independently of the model's grid label."""
-    from generate_nongrey_grid import composition, energy_balance_tau_division
+    from generate_nongrey_grid import composition, energy_balance_tau_division, temperature_convergence
     abundance, masses = composition(x, y, spec["metals"])
     rows = inputs["atmosphere_input"].splitlines()
     if len(rows) != 98 or [float(v) for v in rows[0].split()] != [teff, logg]:
@@ -67,6 +67,8 @@ def source_inputs(inputs, spec, x, y, teff, logg, log):
                 "DERT":spec.get("convection_derivative_step",.001)}
     if "newton_relaxation" in spec:
         required["ORELAX"] = spec["newton_relaxation"]
+    if "temperature_convergence" in spec:
+        required["CHMAX"] = temperature_convergence(spec)
     if any(settings.get(k) != v for k,v in required.items()) or not 0 < settings.get("CHMAX",1) <= 1e-6:
         raise ValueError("source atmosphere physical/numerical settings mismatch")
 

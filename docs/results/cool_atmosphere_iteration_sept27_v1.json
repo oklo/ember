@@ -1,0 +1,53 @@
+{
+  "purpose": "Accurate convective flux checks after restarting cool atmosphere columns.",
+  "coordinates": {
+    "hydrogen": 0.9955,
+    "teff_K": 4250.0,
+    "log_g": 6.3
+  },
+  "matching_optical_depth": 100,
+  "source_executable_sha256": "74663fb1529dd57c95a435c9cf2385777d80eab836745ccd39f39cb81138161a",
+  "unchanged_acceptance": {
+    "maximum_flux_error": 0.002,
+    "maximum_temperature_correction": 1e-05,
+    "chemical_density_error": 0.002
+  },
+  "source_iteration_thresholds": {
+    "default": 1e-06,
+    "tested": 1e-08
+  },
+  "default_threshold_maximum_flux_error": 0.004873508003430449,
+  "tightened_threshold_maximum_flux_error": 0.0005780487417326174,
+  "lower_boundaries": [
+    243.57020606248403,
+    382.3015350324428
+  ],
+  "joining_relative_response": {
+    "T": -4.93826091130245e-11,
+    "Pgas": 1.6076739939308027e-10
+  },
+  "tests": {
+    "command": "out/science-env-sept18-v1/bin/python tests/test_nongrey_import.py",
+    "passed": 36,
+    "qualification": "Full local source fixtures installed. Isolated checkout initially lacked nine archived-data fixtures; same tests pass with the installed inputs."
+  },
+  "selected_for_stellar_evolution": false,
+  "limitations": [
+    "This verifies two H.9955,4250K,logg6.3 gas columns and their lower-boundary response. It does not establish the full new atmosphere grid.",
+    "Fixed frequency and opacity grids; grain and helium-isotope approximations unchanged."
+  ],
+  "evidence": [
+    {
+      "path": "out/cold-column-depth-sept27-v3/comparison.json",
+      "sha256": "0a02fe664371d169baf91a3edcee07df41b7aaf5be26ba068c675f8634454d39"
+    },
+    {
+      "path": "out/cold-column-depth-sept27-v3/h0.9955_t4250_g630_tau250/result.json",
+      "sha256": "9b535b227741c1ff1dd6b4355f5e200e3608a0d8b5122d62df959863dbdca254"
+    },
+    {
+      "path": "out/cold-column-depth-sept27-v3/h0.9955_t4250_g630_tau400/result.json",
+      "sha256": "ad22479f90526370f879f75d82ffc713ec819ba033fe73c81865b101de44cced"
+    }
+  ]
+}

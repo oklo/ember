@@ -243,8 +243,18 @@ def energy_balance_tau_division(spec):
     return value
 
 
+def temperature_convergence(spec):
+    """Source iteration threshold; flux and chemistry checks remain independent."""
+    value = spec.get("temperature_convergence", 1e-6)
+    if not math.isfinite(value) or not 0 < value <= 1e-6:
+        raise ValueError("invalid source temperature convergence threshold")
+    return value
+
+
 def atmosphere_inputs(directory, prepared, spec, table, abundance, masses, teff, logg, initial=None):
     balance_tau = energy_balance_tau_division(spec)
+    correction = temperature_convergence(spec)
+    chmax = format(correction, ".17g") if "temperature_convergence" in spec else "1.e-6"
     directory.mkdir(parents=True,exist_ok=True)
     text=f"{teff:.17g} {logg:.17g}\nT T\n 'tas'\n0\n92\n"
     # TLUSTY's atomic partition functions support elements through Zn.
@@ -268,7 +278,7 @@ def atmosphere_inputs(directory, prepared, spec, table, abundance, masses, teff,
         # initial model must use the same discretization (ILGDER=1).
         # Save a full initial-structure checkpoint after each iteration.
         # Only the final independent diagnostics can validate a grid cell.
-        f"ND={spec['depths']},NITER=200,CHMAX=1.e-6,ILGDER=1,IPRIND=2\n"
+        f"ND={spec['depths']},NITER=200,CHMAX={chmax},ILGDER=1,IPRIND=2\n"
         f"DPSILT={spec.get('temperature_step_limit', 1.03)},DERT={spec.get('convection_derivative_step',.001)}\n"
         f"TAUFIR={spec['tau_top']},TAULAS={spec['tau_bottom']},TAUDIV={balance_tau}\n")
     # Explicit numerical control for source comparisons. Omit it by default
