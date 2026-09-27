@@ -33,18 +33,18 @@ reconstructed continuity still use **1e-14**; local corrections use **1e-13**.
 [Time accuracy](results/radiative_shell_time_accuracy_sept27_v1.json),
 [diffusion convergence](results/species_correction_accuracy_sept27_v1.json).
 
-The continuous trajectory passes all isotope and energy checks. A checked continuation adds the later trace-He/pure-H atmosphere inputs without changing
-its accepted physical state. All 5932 tested early boundary values remain exact,
-and the combined selection covers all 67 saved settling structures. The
-matching depth remains tau = 100. Cool, high-gravity rows include bounded
-inferred values; cooler source columns still need numerical work. The accepted
-4800 K / log g 6.0 and 6.1 columns provide useful independent checks.
-The 4800 K/log g = 6.2 and 4700 K/log g = 6.0, 6.1 and 6.2 columns now also
-pass all source checks. These additional rows are not yet selected in the running star.
-[Source calculation results](results/highg_energy_balance_sept27_v1.json).
-The separate flash histories inherit a forced atmosphere change;
-atmosphere-independent ignition is not established.
-[Coverage and continuation evidence](results/hydrogen_envelope_integration_sept27_v1.json).
+The continuous trajectory passes all isotope and energy checks and is beyond
+**3.569 Tyr**. The atmosphere match remains at optical depth 100. Seven newly
+validated high-gravity gas columns now replace part of the inferred table;
+all 5932 checked early evaluations remain exact, and all 67 saved late structures
+are supported. On the late structures, matching pressure changes by less than
+0.9396%. A three-step replay and the actual continuation preserve the starting
+physical state exactly. Inferred cool, high-gravity rows remain, including the
+4600 K, log g = 6.1 corner. Source coverage is not yet complete enough to establish
+atmosphere-independent helium-3 ignition. The separate flash histories also
+inherit a forced atmosphere change.
+[Atmosphere replacement checks](results/highg_atmosphere_integration_sept27_v1.json),
+[hydrogen-rich boundary](results/hydrogen_envelope_integration_sept27_v1.json).
 
 The [September 27 paper](reports/2026-09-27/ember_status_and_future.pdf) is
 **30 pages**, reduced from 63 with physical qualifications, comparisons and the

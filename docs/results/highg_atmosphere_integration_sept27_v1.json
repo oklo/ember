@@ -1,0 +1,45 @@
+{
+  "created_utc": "2026-09-27T09:47:07.956336+00:00",
+  "scope": "Seven revalidated source columns replace part of the inferred high-gravity gas-atmosphere table at the same optical depth100. Domain and joining law unchanged. Selected for continuation of the same Hayashi-origin star.",
+  "accepted_sources": 7,
+  "actual_early_queries_exact": 5932,
+  "actual_late_queries_supported": 67,
+  "current_checkpoint_queries_exact": 2,
+  "late_maximum_temperature_fractional_change": 0.0007159967284415814,
+  "late_maximum_pressure_fractional_change": 0.00939560232927128,
+  "late_maximum_derivative_error": 6.38772235106444e-09,
+  "remaining_limitations": [
+    "Inferred cells remain, including4600K/logg6.1. No independent validation is claimed there.",
+    "Gas opacity only; trace atmospheric helium is still an explicit approximation."
+  ],
+  "selected_for_evolution": true,
+  "hashes": {
+    "high.dat": "98e45b3e3f0c6f131c32f29173bdd1c2cc460e606a666284f06b54a16f7a6a61",
+    "envelope.dat": "06a5d589486820b041a1895e6e0644b963c2b84fbac0994ed1e33b0f3b8c7c4b",
+    "sources.json": "03d869f7dd84877f76c689d893d05ea0fd631d1e28fe23d280c1ae70ad966f18",
+    "queries.txt": "9f2aeaf97e90100e72cd050271b9cf2ab41332844a238eaa87fba071d2bb342f",
+    "baseline_queries.jsonl": "cb1dc890a1067e3b3ee2c848a3beaf956bc7948946d0d59ade9f8673193deb97",
+    "candidate_queries.jsonl": "7588b113b541ee859f1adbe299baecdda602f0c72cba14762c8531655b3770d2",
+    "current_queries.txt": "51c59df5aaa384b31210e583322060720d32bfe3017fbd2638c058a81eb97a07",
+    "current_baseline.jsonl": "e694e4e5032e0ec4acaf1e614875495da6ffcf311a633dd9b4d6ce7da699b5de",
+    "current_candidate.jsonl": "e694e4e5032e0ec4acaf1e614875495da6ffcf311a633dd9b4d6ce7da699b5de",
+    "probe.cpp": "9296f34d8af2299120c5e52687f67b08c93025a61bea09f83424e782f085ad74"
+  },
+  "exact_driver_replay_intervals": 3,
+  "exact_final_physical_checkpoint": true,
+  "only_restart_identity_changed": "atmosphere.hydrogen_envelope.high_gravity",
+  "replay_CPU_seconds": [
+    54.252293,
+    54.439364
+  ],
+  "selection_utc": "2026-09-27T10:00:43.168205+00:00",
+  "production_run": "out/continuous-lifetime-sept27-v11",
+  "previous_retained_accepted": 8055,
+  "selection_age_years": 3569502248315.3975,
+  "production_start_physical_history_exact": true,
+  "physical_payload_sha256": "701e334fd3df13f1378789c444f223f0d121f278125ba3ba52611a93d0573634",
+  "executable_sha256": "53d36afad9ecf0606c4dab57fd330b425061b3d74f5a7371f870d94b3ba0bc00",
+  "portable_input_files": 55,
+  "portable_input_manifest_sha256": "e3fab4e86d2730c8bee2941a9b47738bf4c47bccfdad1ac7b0aece329081fcf5",
+  "table_provenance": "data/atmosphere/lifetime_hydrogen_envelope/sources.json"
+}
