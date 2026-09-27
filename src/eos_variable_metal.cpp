@@ -3,6 +3,8 @@
 #include "ember/interp.hpp"
 #include "composition_spline.hpp"
 #include <algorithm>
+#include <bit>
+#include <cstdint>
 #include <cmath>
 #include <fstream>
 #include <iomanip>
@@ -235,8 +237,38 @@ VariableMetalHelmholtzEos::Weights VariableMetalHelmholtzEos::weights(const Comp
   return out;
 }
 std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::jets(double T,double rho,const Composition& c,std::size_t channels) const {
+  // Neighboring faces and heat/force queries often revisit the same material
+  // state. Reuse only exact inputs, with separate derivative requests. The
+  // thread-local storage is bounded and never retains the source tables.
+  struct Entry {
+    bool valid{};std::size_t channels{};double T{},rho{};
+    Composition composition;std::array<HelmholtzJet,10> value;
+  };
+  struct Cache {
+    std::shared_ptr<const char> owner;
+    std::array<std::array<Entry,3>,3> entries;
+    std::array<std::size_t,3> next{};
+  };
+  thread_local Cache cache;
+  if(cache.owner!=jet_cache_identity_) {
+    for(auto& bank:cache.entries)for(auto& entry:bank)entry.valid=false;
+    cache.next.fill(0);cache.owner=jet_cache_identity_;
+  }
+  const std::size_t bank=channels==1?0:(channels==4?1:2);
+  using FractionBits=std::array<std::uint64_t,NSPEC>;
+  const auto bits=std::bit_cast<FractionBits>(c.X);
+  for(const auto& entry:cache.entries[bank])
+    if(entry.valid && entry.channels==channels && entry.composition==c
+        && std::bit_cast<FractionBits>(entry.composition.X)==bits
+        && std::bit_cast<std::uint64_t>(entry.T)==std::bit_cast<std::uint64_t>(T)
+        && std::bit_cast<std::uint64_t>(entry.rho)==std::bit_cast<std::uint64_t>(rho))return entry.value;
   const auto w=weights(c,channels);
-  return HelmholtzTableEos::mixed_composition_jets(T,rho,std::span<const WeightedTable>(w.tables).first(w.count),channels);
+  const auto result=HelmholtzTableEos::mixed_composition_jets(
+      T,rho,std::span<const WeightedTable>(w.tables).first(w.count),channels);
+  auto& entry=cache.entries[bank][cache.next[bank]];
+  cache.next[bank]=(cache.next[bank]+1)%cache.entries[bank].size();
+  entry={true,channels,T,rho,c,result};
+  return result;
 }
 std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range(double T,const Composition& c) const {
   const auto w=weights(c,1);DensityRange result{0,std::numeric_limits<double>::infinity()};

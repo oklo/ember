@@ -64,5 +64,7 @@ class VariableMetalHelmholtzEos final : public Eos {
   std::vector<MetalExtension> metal_extensions_;
   std::vector<std::unique_ptr<HelmholtzTableEos>> tables_,slopes_;
   std::array<double,5> metal_pattern_{};
+  // Cache ownership must survive address reuse without retaining the tables.
+  std::shared_ptr<const char> jet_cache_identity_{std::make_shared<const char>(0)};
 };
 } // namespace ember

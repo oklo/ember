@@ -1,0 +1,47 @@
+{
+  "created_utc": "2026-09-27T11:03:15.041723+00:00",
+  "scope": "Reuse exact thermodynamic-state evaluations in the variable-composition EOS. Fixed three entries per requested derivative channel per thread; table identity survives address reuse. No interpolation, source mask, physical model or numerical tolerance changes.",
+  "source_parent": "f39b1e3",
+  "instrumented_two_step_counts": {
+    "1": {
+      "calls": 808667,
+      "repeated": 133070
+    },
+    "4": {
+      "calls": 427758,
+      "repeated": 124191
+    },
+    "10": {
+      "calls": 124497,
+      "repeated": 36252
+    }
+  },
+  "comparison_CPU_seconds": {
+    "cached": 122.62077,
+    "baseline": 129.074621
+  },
+  "measured_CPU_reduction_fraction": 0.050000929307396635,
+  "timing_qualification": "One simultaneous timing pair; scheduling and cache variation included.",
+  "exact_driver_intervals": 6,
+  "exact_final_physical_checkpoint": true,
+  "only_checkpoint_difference": "executable identity",
+  "age_years": 3577000128702.0117,
+  "accepted_final": 8309,
+  "executable_sha256": "8e41373a113b9f72e5d27231a702663ffa83b99c016e28115414f90a372b2846",
+  "tests": [
+    "eos",
+    "variable_metal_eos",
+    "screened_envelope_evolution",
+    "finite_metal_evolution",
+    "lagged_finite_metal_evolution",
+    "evolution_restart"
+  ],
+  "additional_regressions": [
+    "Repeated thermal/force/heat requests preserve requested derivatives",
+    "Invalid T, rho and abundance basis remain rejected after a supported query",
+    "Replacement EOS at the same address uses its own source material and masks"
+  ],
+  "selected_for_production": true,
+  "selection_run": "out/continuous-lifetime-sept27-v13",
+  "selection_note": "Prepared for the next immutable continuation; actual startup check follows."
+}

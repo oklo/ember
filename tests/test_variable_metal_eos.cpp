@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <fstream>
 #include <iomanip>
+#include <optional>
 
 using namespace ember;
 namespace {
@@ -136,6 +137,40 @@ int main() {
     check(cache_error==0,"binary families preserve thermal and composition responses exactly",cache_error);
     check(thermal_channels_identical,"omitting unused composition Hessians leaves all requested channels identical");
     check(unrequested_channels_nan,"unrequested composition derivatives remain explicitly unavailable");
+    {
+      const auto c=composition(.3,.03,.1);
+      std::optional<VariableMetalHelmholtzEos> replacement;
+      replacement.emplace(dir/"smooth.bin",M::allow_documented_proxy);
+      const void* address=&*replacement;
+      const auto before=replacement->eval(T,rho,c);
+      // Interleave derivative requests, then revisit the same state. A value
+      // query must not supply zero-filled unrequested derivatives to a later
+      // composition-force or heat query.
+      const auto potential=replacement->composition_potential(T,rho,c);
+      const auto heat=replacement->composition_heat(T,rho,c);
+      replacement->composition_potential(T,rho,c,{true,true,true},false);
+      const auto repeated=replacement->composition_potential(T,rho,c);
+      const auto repeated_heat=replacement->composition_heat(T,rho,c);
+      check(potential.gradient==repeated.gradient && potential.hessian==repeated.hessian
+          && heat.enthalpy_partials==repeated_heat.enthalpy_partials,
+            "repeated state retains the requested force and heat derivatives");
+      check(throws([&]{replacement->eval(0,rho,c);})
+          && throws([&]{replacement->eval(T,0,c);}),
+            "a supported cached state does not admit invalid temperature or density");
+      auto wrong_basis=c;wrong_basis.basis=static_cast<AbundanceBasis>(255);
+      check(throws([&]{replacement->eval(T,rho,wrong_basis);}),
+            "cached state still requires the correct abundance basis");
+      replacement.reset();
+      replacement.emplace(dir/"masked.bin",M::allow_documented_proxy);
+      check(address==&*replacement,"replacement EOS occupies the same address");
+      check(throws([&]{replacement->eval(T,rho,c);}),
+            "replacement EOS retains its own source masks after a cached query");
+      replacement.reset();
+      replacement.emplace(dir/"cubic/family6.dat",M::allow_documented_proxy);
+      const auto after=replacement->eval(T,rho,c),expected=cubic.eval(T,rho,c);
+      check(after.P==expected.P && after.E==expected.E && after.P!=before.P,
+            "replacement EOS uses the new material at the same composition");
+    }
     check(throws([&]{cached_masked.eval(T,rho,composition(.3,.03,.1));}),"binary family preserves source masks");
     check(throws([&]{cached.eval(T,rho,composition(.3,.03,.301));}),"binary family still rejects extrapolation");
     check(throws([&]{VariableMetalHelmholtzEos::pack_binary(dir/"smooth/family6.dat",dir/"smooth.bin");}),
