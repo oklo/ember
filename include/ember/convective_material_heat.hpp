@@ -42,7 +42,7 @@ class ConvectiveMaterialHeat final:public MetalMicroscopicTransport {
     if(derivatives)for(std::size_t v=0;v<8;++v)
       K.d[v]=K.value*((3-k.dlnk_dlnT)*lt.d[v]-(1+k.dlnk_dlnRho)*lr.d[v]);
     const std::array<bool,3> active{c.X[0]>0,c.X[1]>0,c.Z()>0};
-    const auto h=eos_.composition_heat(T.value,rho.value,c,active,derivatives);
+    const auto h=eos_.composition_heat(T.value,rho.value,c,active,derivatives,false);
     D Q;MicroscopicHeatResponse out;
     for(std::size_t i=0;i<3;++i) {
       if(!active[i] && rate[i]!=0)throw std::domain_error("convective material heat: absent transported species");

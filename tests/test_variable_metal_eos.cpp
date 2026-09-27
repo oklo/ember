@@ -95,6 +95,7 @@ int main() {
     VariableMetalHelmholtzEos cached_masked(dir/"masked.bin",M::allow_documented_proxy);
     const double T=3e5,rho=.3;
     double exact=0,preserved=0,extended_preserved=0,cache_error=0;
+    bool thermal_channels_identical=true,unrequested_channels_nan=true;
     for(double z:{1e-6,.004,.015,.02,std::nextafter(.02,1.),.03,.04,.040001,.07,.12,.16,.18,.24,.3})
       for(double u:{.53,.73})for(double v:{.07,.15}) {
         const auto c=composition((1-z)*u,(1-z)*(1-u)*v,z);
@@ -109,11 +110,32 @@ int main() {
         }
         cache_error=std::max(cache_error,response_difference(two,cached,T,rho,c));
         if(z<=.16)extended_preserved=std::max(extended_preserved,response_difference(one,two,T,rho,c));
+        const auto full_p=two.composition_potential(T,rho,c);
+        const auto thermal_p=two.composition_potential(T,rho,c,{true,true,true},false);
+        const auto full_h=two.composition_heat(T,rho,c);
+        const auto thermal_h=two.composition_heat(T,rho,c,{true,true,true},true,false);
+        thermal_channels_identical &= full_p.phi==thermal_p.phi
+          && full_p.gradient==thermal_p.gradient && full_p.dgradient_dlnT==thermal_p.dgradient_dlnT
+          && full_p.dgradient_dlnRho==thermal_p.dgradient_dlnRho
+          && full_h.material_delta==thermal_h.material_delta
+          && full_h.exchange_enthalpy==thermal_h.exchange_enthalpy
+          && full_h.radiation_enthalpy==thermal_h.radiation_enthalpy;
+        for(std::size_t k=0;k<3;++k)for(std::size_t l=0;l<2;++l)
+          thermal_channels_identical &= full_h.enthalpy_partials[k][l]==thermal_h.enthalpy_partials[k][l]
+            && full_h.radiation_enthalpy_partials[k][l]==thermal_h.radiation_enthalpy_partials[k][l]
+            && full_h.delta_partials[l]==thermal_h.delta_partials[l];
+        for(std::size_t k=0;k<3;++k)for(std::size_t l=0;l<3;++l)
+          unrequested_channels_nan &= std::isnan(thermal_p.hessian[k][l])
+            && std::isnan(thermal_h.enthalpy_partials[k][2+l])
+            && std::isnan(thermal_h.radiation_enthalpy_partials[k][2+l])
+            && std::isnan(thermal_h.delta_partials[2+l]);
       }
     check(exact<2e-11,"arbitrary cubic source pressure/energy reproduced across both extensions",exact);
     check(preserved==0,"all low-Z responses unchanged, including ULP perturbation and masked distant planes",preserved);
     check(extended_preserved==0,"a further source plane preserves every previously covered response",extended_preserved);
     check(cache_error==0,"binary families preserve thermal and composition responses exactly",cache_error);
+    check(thermal_channels_identical,"omitting unused composition Hessians leaves all requested channels identical");
+    check(unrequested_channels_nan,"unrequested composition derivatives remain explicitly unavailable");
     check(throws([&]{cached_masked.eval(T,rho,composition(.3,.03,.1));}),"binary family preserves source masks");
     check(throws([&]{cached.eval(T,rho,composition(.3,.03,.301));}),"binary family still rejects extrapolation");
     check(throws([&]{VariableMetalHelmholtzEos::pack_binary(dir/"smooth/family6.dat",dir/"smooth.bin");}),

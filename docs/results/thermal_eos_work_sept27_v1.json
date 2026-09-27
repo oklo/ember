@@ -1,0 +1,67 @@
+{
+  "created_utc": "2026-09-27T08:23:10.295289+00:00",
+  "change": "Skip only unrequested EOS composition second derivatives during thermal-only transport and heat evaluations. Full derivatives remain the default; every requested value is unchanged.",
+  "node_control": {
+    "nodes": 512,
+    "repetitions": 12,
+    "all_used_values_identical": 1,
+    "unrequested_derivatives_nan": 1,
+    "full_CPU_seconds": 0.23770599999999997,
+    "thermal_only_CPU_seconds": 0.06290599999999999,
+    "CPU_ratio": 3.7787492449050966,
+    "checksum": -6169451416694.284
+  },
+  "evolution_control": {
+    "accepted_steps": 6,
+    "all_physical_history_values_identical": true,
+    "final_checkpoint_identical_except_executable_identity": true,
+    "cases": [
+      {
+        "name": "baseline",
+        "returncode": 0,
+        "wall_seconds": 24.376082833856344,
+        "report": {
+          "requested_age_reached": 0,
+          "age_years": 3559188917529.877,
+          "accepted_this_invocation": 6,
+          "accepted_total": 6753,
+          "rejected_total": 142,
+          "stop_reason": "accepted-step budget",
+          "cpu_seconds": 45.276756,
+          "wall_seconds": 24.327385459,
+          "full_production_track_validated": false,
+          "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+        }
+      },
+      {
+        "name": "optimized",
+        "returncode": 0,
+        "wall_seconds": 20.911659291945398,
+        "report": {
+          "requested_age_reached": 0,
+          "age_years": 3559188917529.877,
+          "accepted_this_invocation": 6,
+          "accepted_total": 6753,
+          "rejected_total": 142,
+          "stop_reason": "accepted-step budget",
+          "cpu_seconds": 39.191086,
+          "wall_seconds": 20.529523292,
+          "full_production_track_validated": false,
+          "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+        }
+      }
+    ],
+    "CPU_ratio_baseline_over_optimized": 1.1552819944821127,
+    "timing_limit": "One sequential replay pair; observed whole-run reduction is not a portable speed claim."
+  },
+  "tests": [
+    "variable_metal_eos",
+    "screened_envelope_evolution",
+    "metal_microscopic_evolution",
+    "metal_microscopic_face_evolution",
+    "finite_metal_evolution",
+    "lagged_finite_metal_evolution"
+  ],
+  "all_tests_pass": true,
+  "live_executable_changed": false
+}

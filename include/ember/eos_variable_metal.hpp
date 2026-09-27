@@ -40,10 +40,13 @@ class VariableMetalHelmholtzEos final : public Eos {
   }
   EosResponse eval_with_derivatives(double,double,const Composition&) const override;
   EosCompositionResponse composition_response(double,double,const Composition&) const override;
+  // Unrequested derivative entries remain NaN. Thermal-only callers do not
+  // need second derivatives with respect to composition.
   MetalCompositionPotentialResponse composition_potential(double,double,const Composition&,
-      std::array<bool,3> active={true,true,true}) const;
+      std::array<bool,3> active={true,true,true},bool hessian=true) const;
   MetalCompositionHeatResponse composition_heat(double,double,const Composition&,
-      std::array<bool,3> active={true,true,true},bool derivatives=true) const;
+      std::array<bool,3> active={true,true,true},bool derivatives=true,
+      bool composition_derivatives=true) const;
   std::optional<DensityRange> density_range(double,const Composition&) const override;
   const char* name() const override {return "FreeEOS variable GS98 metals, H and helium-isotope potential";}
  private:

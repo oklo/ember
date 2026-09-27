@@ -41,7 +41,7 @@ template<std::size_t N,bool abundances=true> MetalMicroscopicFaceResponse evalua
     radius[e]=exp(D::variable(p.lnr,o));rho[e]=exp(D::variable(p.lnrho,o+1));
     lt[e]=D::variable(p.lnT,o+2);T[e]=exp(lt[e]);
     require(T[e].value>=minimum_T,"temperature below the declared hot domain");
-    const auto chemical=eos.composition_potential(T[e].value,rho[e].value,c,active);
+    const auto chemical=eos.composition_potential(T[e].value,rho[e].value,c,active,N>0 && abundances);
     for(std::size_t k=0;k<3;++k) {
       if(!active[k])continue;
       if constexpr(abundances)fraction[e][k]=D::variable(k==2?c.Z():c.X[k],o+4+k);
@@ -92,17 +92,17 @@ template<std::size_t N,bool abundances=true> MetalMicroscopicFaceResponse evalua
     }
     return result;
   };
-  const auto heat=eos.composition_heat(Tb.value,rhob.value,c,active,N>0);
+  const auto heat=eos.composition_heat(Tb.value,rhob.value,c,active,N>0,abundances);
   std::array<D,3> enthalpy,eos_enthalpy,kinetic_enthalpy,radiation_enthalpy,force,rate;
   for(std::size_t k=0;k<3;++k) {
     if(!active[k])continue;
     D h(heat.exchange_enthalpy[k]);
-    if constexpr(N>0)for(std::size_t j=0;j<N;++j)for(std::size_t v=0;v<5;++v)
+    if constexpr(N>0)for(std::size_t j=0;j<N;++j)for(std::size_t v=0;v<(abundances?5:2);++v)
       if(v<2 || active[v-2])h.d[j]+=heat.enthalpy_partials[k][v]*coords[v].d[j];
     eos_enthalpy[k]=h;
     if(total_rate && radiation_with_redistribution) {
       D hr(heat.radiation_enthalpy[k]);
-      if constexpr(N>0)for(std::size_t j=0;j<N;++j)for(std::size_t v=0;v<5;++v)
+      if constexpr(N>0)for(std::size_t j=0;j<N;++j)for(std::size_t v=0;v<(abundances?5:2);++v)
         if(v<2 || active[v-2])hr.d[j]+=heat.radiation_enthalpy_partials[k][v]*coords[v].d[j];
       radiation_enthalpy[k]=hr;
     }

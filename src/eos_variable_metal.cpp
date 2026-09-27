@@ -253,20 +253,20 @@ EosCompositionResponse VariableMetalHelmholtzEos::composition_response(double T,
   return out;
 }
 MetalCompositionPotentialResponse VariableMetalHelmholtzEos::composition_potential(double T,double rho,
-    const Composition& c,std::array<bool,3> active) const {
-  check_active(c,active);const auto j=jets(T,rho,c,active_any(active)?10:1);
+    const Composition& c,std::array<bool,3> active,bool hessian) const {
+  check_active(c,active);const auto j=jets(T,rho,c,active_any(active)?(hessian?10:4):1);
   MetalCompositionPotentialResponse out;out.phi=j[0][0][0]+full_mixing(c);
   const double nan=std::numeric_limits<double>::quiet_NaN();
   out.gradient.fill(nan);out.dgradient_dlnT.fill(nan);out.dgradient_dlnRho.fill(nan);for(auto& h:out.hessian)h.fill(nan);
   for(std::size_t k=0;k<3;++k)if(active[k]) {
     out.gradient[k]=j[1+k][0][0];out.dgradient_dlnT[k]=j[1+k][1][0];out.dgradient_dlnRho[k]=j[1+k][0][1];
-    for(std::size_t l=0;l<3;++l)if(active[l])out.hessian[k][l]=j[second_channel(k,l)][0][0];
+    if(hessian)for(std::size_t l=0;l<3;++l)if(active[l])out.hessian[k][l]=j[second_channel(k,l)][0][0];
   }
   auto add=[&](double n,std::array<double,3> b) {
     if(n<=0)return;
     for(std::size_t k=0;k<3;++k)if(active[k]) {
       out.gradient[k]+=constants::R_gas*b[k]*(std::log(n)+1);
-      for(std::size_t l=0;l<3;++l)if(active[l])out.hessian[k][l]+=constants::R_gas*b[k]*b[l]/n;
+      if(hessian)for(std::size_t l=0;l<3;++l)if(active[l])out.hessian[k][l]+=constants::R_gas*b[k]*b[l]/n;
     }
   };
   add(c.X[0],{1,0,0});add(c.X[1]/3,{0,1./3,0});add(c.X[2]/4,{-.25,-.25,-.25});
@@ -275,8 +275,8 @@ MetalCompositionPotentialResponse VariableMetalHelmholtzEos::composition_potenti
   return out;
 }
 MetalCompositionHeatResponse VariableMetalHelmholtzEos::composition_heat(double T,double rho,
-    const Composition& c,std::array<bool,3> active,bool derivatives) const {
-  check_active(c,active);const auto j=jets(T,rho,c,active_any(active)?(derivatives?10:4):1);const auto& f=j[0];
+    const Composition& c,std::array<bool,3> active,bool derivatives,bool composition_derivatives) const {
+  check_active(c,active);const auto j=jets(T,rho,c,active_any(active)?(derivatives && composition_derivatives?10:4):1);const auto& f=j[0];
   (void)helmholtz_response(T,rho,f);
   const double denominator=f[0][1]+f[0][2],delta=(f[0][1]+f[1][1])/denominator;
   const double radiation=4*constants::a_rad*T*T*T/(3*rho*denominator);
@@ -293,14 +293,17 @@ MetalCompositionHeatResponse VariableMetalHelmholtzEos::composition_heat(double 
   d[0]=(f[1][1]+f[2][1]-delta*(f[1][1]+f[1][2]))/denominator;
   d[1]=(f[0][2]+f[1][2]-delta*(f[0][2]+f[0][3]))/denominator;
   for(std::size_t k=0;k<3;++k)if(active[k]) {
-    const auto& g=j[1+k];d[2+k]=(g[0][1]+g[1][1]-delta*(g[0][1]+g[0][2]))/denominator;
-    dr[2+k]=-radiation*(g[0][1]+g[0][2])/denominator;
+    const auto& g=j[1+k];
+    if(composition_derivatives) {
+      d[2+k]=(g[0][1]+g[1][1]-delta*(g[0][1]+g[0][2]))/denominator;
+      dr[2+k]=-radiation*(g[0][1]+g[0][2])/denominator;
+    }
     auto& h=out.enthalpy_partials[k];h[0]=out.exchange_enthalpy[k]+T*(d[0]*g[0][1]+delta*g[1][1]-g[2][0]);
     h[1]=T*(d[1]*g[0][1]+delta*g[0][2]-g[1][1]);
     auto& hr=out.radiation_enthalpy_partials[k];hr[0]=out.radiation_enthalpy[k]+T*(dr[0]*g[0][1]+radiation*g[1][1]);
     hr[1]=T*(dr[1]*g[0][1]+radiation*g[0][2]);
   }
-  for(std::size_t k=0;k<3;++k)if(active[k])for(std::size_t l=k;l<3;++l)if(active[l]) {
+  if(composition_derivatives)for(std::size_t k=0;k<3;++k)if(active[k])for(std::size_t l=k;l<3;++l)if(active[l]) {
     const auto& second=j[second_channel(k,l)];const double fixed=T*(delta*second[0][1]-second[1][0]);
     out.enthalpy_partials[k][2+l]=fixed+T*d[2+l]*j[1+k][0][1];out.enthalpy_partials[l][2+k]=fixed+T*d[2+k]*j[1+l][0][1];
     const double radfixed=T*radiation*second[0][1];
@@ -308,7 +311,7 @@ MetalCompositionHeatResponse VariableMetalHelmholtzEos::composition_heat(double 
   }
   for(std::size_t k=0;k<3;++k)if(active[k]) {
     if(!std::isfinite(out.exchange_enthalpy[k]+out.radiation_enthalpy[k]))throw std::domain_error("variable EOS: nonfinite enthalpy");
-    for(std::size_t l=0;l<5;++l)if(l<2 || active[l-2])
+    for(std::size_t l=0;l<5;++l)if(l<2 || (composition_derivatives && active[l-2]))
       if(!std::isfinite(out.enthalpy_partials[k][l]+out.radiation_enthalpy_partials[k][l]+d[l]))
         throw std::domain_error("variable EOS: nonfinite enthalpy derivative");
   }
