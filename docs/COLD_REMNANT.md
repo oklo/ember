@@ -33,8 +33,17 @@ reconstructed continuity still use **1e-14**; local corrections use **1e-13**.
 [Time accuracy](results/radiative_shell_time_accuracy_sept27_v1.json),
 [diffusion convergence](results/species_correction_accuracy_sept27_v1.json).
 
+A matched **1 Gyr** comparison supports a local Newton correction criterion ten
+times the outer coupling accuracy while retaining the same conservation bounds.
+It removes five stalled local solves and uses **27.12%** less CPU in this comparison;
+the total helium-3 inventory differs by **0.0002092%**. Twelve existing burning,
+transport, finite-mixing and restart tests pass. The same star continues with
+this setting beyond **3.573 Tyr**. This is evidence for the present gradual
+evolution, not for time convergence through a flash.
+[Local-solve accuracy](results/local_correction_comparison_sept27_v2.json).
+
 The continuous trajectory passes all isotope and energy checks and is beyond
-**3.569 Tyr**. The atmosphere match remains at optical depth 100. Seven newly
+**3.573 Tyr**. The atmosphere match remains at optical depth 100. Seven newly
 validated high-gravity gas columns now replace part of the inferred table;
 all 5932 checked early evaluations remain exact, and all 67 saved late structures
 are supported. On the late structures, matching pressure changes by less than

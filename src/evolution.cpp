@@ -292,7 +292,10 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           return microscopic_face(*p.microscopic,i,current.m[i],current.m[i+1],
               current.y[i],left,current.y[i+1],right,derivatives).species;
         };
-        SpeciesTransportOptions transport_options;transport_options.abundance_tolerance=tolerance;
+        // A local correction can reach its floating-point floor before the
+        // integrated balance does. Keep conservation and outer coupling tight
+        // without requiring this inner Newton solve to resolve that floor.
+        SpeciesTransportOptions transport_options;transport_options.abundance_tolerance=10*tolerance;
         transport_options.integrated_balance_tolerance=tolerance*.1;
         transport_options.seed_present_species=p.microscopic->requires_positive_species_guess();
         if(metal) {
