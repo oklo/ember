@@ -1,0 +1,77 @@
+{
+  "created_utc": "2026-09-27T15:17:35.117483+00:00",
+  "outcome": "structure prediction retains checked implicit evolution",
+  "interval_years": 1000000000.0,
+  "endpoint_years": 3676093384416.2427,
+  "comparison_pass": true,
+  "baseline_CPU_seconds": 297.802469,
+  "predicted_CPU_seconds": 197.603799,
+  "CPU_reduction_fraction": 0.33646017219555013,
+  "speed_ratio": 1.5070685407217295,
+  "accepted_intervals": 24,
+  "relative_global_changes": {
+    "luminosity_Lsun": -3.8169112315245e-10,
+    "radius_Rsun": -2.6215829507236776e-10,
+    "Teff_K": 3.565636674807138e-11,
+    "central_T_K": 1.3484999783486273e-09,
+    "central_density_g_cm3": -5.282032589093433e-10,
+    "H_mass_g": 5.041744799427761e-12,
+    "He3_mass_g": 6.471616575964845e-10,
+    "He3_peak": 1.644224756347512e-10,
+    "surface_X": 7.621903108656625e-12
+  },
+  "maximum_local_absolute_changes": {
+    "lnr": 4.3798920046356216e-10,
+    "lnrho": 1.5732606328811016e-09,
+    "lnT": 1.496669455036681e-09,
+    "H": 3.2768676661021345e-11,
+    "He3": 9.83935589254914e-12
+  },
+  "convective_mass_fraction_change": 0.0,
+  "radiative_boundary_count_change": 0,
+  "accepted_audits_pass": true,
+  "maximum_accepted_species_audit": 9.748865778842352e-15,
+  "maximum_accepted_first_law": 1.6019061410688096e-08,
+  "unchanged": [
+    "full-step/two-half-step time control",
+    "isotope and energy audits",
+    "nonlinear tolerances",
+    "composition and thermal history",
+    "physics and atmosphere"
+  ],
+  "tests": [
+    "pms_cn_evolution",
+    "pms_cn_face_evolution",
+    "evolution_controller"
+  ],
+  "limitations": [
+    "One gradual-phase interval with two zone threads; CPU timings vary with concurrent jobs.",
+    "Prediction is only an initial nonlinear guess and falls back if it fails; this comparison does not establish flash convergence.",
+    "Other methods in the Opus study are not selected by this change."
+  ],
+  "provenance": {
+    "plan": {
+      "target_years": 3676093384416.242,
+      "source_checkpoint": "out/current-performance-sept27-v1/snapshot.checkpoint",
+      "baseline": "out/opus-speedup-sept27-v1/runs/base",
+      "old_executable_fnv": "0715eac76fb856ce",
+      "new_executable_fnv": "2f04b906b2a562df",
+      "executable_sha256": "a529c67660e4bb2490dc1f992c45400097f3ed07bfe78057843bf88100de80ee",
+      "changed_identity": [
+        "executable",
+        "solver.structure_prediction"
+      ],
+      "physical_starting_state_unchanged": true,
+      "maximum_cpu_seconds": 1500
+    },
+    "baseline": "out/opus-speedup-sept27-v1/runs/base/evolution",
+    "candidate": "out/structure-prediction-sept27-v1/evolution"
+  },
+  "input_sha256": {
+    "out/opus-speedup-sept27-v1/runs/base/evolution/report.json": "383865cf80dc3522f3b594f3ee5fd297599088b7c965b38139074349c8b02aa8",
+    "out/opus-speedup-sept27-v1/runs/base/evolution/final.checkpoint": "123c3f54aa0c114f8d1ab11f8d8703889b727f1cae13815adae9663e493dfce8",
+    "out/structure-prediction-sept27-v1/evolution/report.json": "013e5d65627abebd6d56925c8b1596a6e18440e7cae54e95e2fec7cc6e1d3d81",
+    "out/structure-prediction-sept27-v1/evolution/final.checkpoint": "2de9d73fae58f586327e7d4a073e429b4beb93638264ef1dce434fbd550394f4",
+    "out/structure-prediction-sept27-v1/restart.checkpoint": "b2aa211e2a8baf6e90fed5c4b2c85a5337f270469ca9fd400f3329c2e2ee0706"
+  }
+}

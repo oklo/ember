@@ -1,6 +1,7 @@
 #include "ember/controller.hpp"
 #include <algorithm>
 #include <cmath>
+#include <optional>
 #include <stdexcept>
 
 namespace ember {
@@ -26,6 +27,33 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
   check_options(options, hooks);
   EvolutionControlResult result;
   std::size_t failed = 0;
+  std::optional<Model> preceding;
+  double preceding_dt = 0;
+  const auto solve = [&](const Model& start, const Physics& physics, double dt,
+                         EvolutionOptions selected, const Model* before, double ratio) {
+    std::optional<Model> guess;
+    selected.initial_structure_guess = nullptr;
+    if (options.predict_structure && before && ratio > 0 && std::isfinite(ratio)
+        && before->M == start.M && before->m == start.m && before->size() == start.size()
+        && before->luminosity_grid == start.luminosity_grid) {
+      guess = start;
+      bool finite = true;
+      for (std::size_t i = 0; i < start.size(); ++i)
+        for (std::size_t k = 0; k < NVAR; ++k) {
+          const auto v = static_cast<Var>(k);
+          guess->y[i][v] += ratio * (start.y[i][v] - before->y[i][v]);
+          finite = finite && std::isfinite(guess->y[i][v]);
+        }
+      if (finite) selected.initial_structure_guess = &*guess;
+    }
+    auto step = evolve_step(start, physics, atmosphere, dt, selected);
+    if (!step.converged && selected.initial_structure_guess) {
+      // A poor prediction must not force a smaller physical timestep.
+      selected.initial_structure_guess = nullptr;
+      step = evolve_step(start, physics, atmosphere, dt, selected);
+    }
+    return step;
+  };
   try {
     hooks.assess(state.model, state.metal_heat_rates);
     if (hooks.accepted) hooks.accepted(state, 0, 0);
@@ -52,12 +80,15 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
       if (hooks.configure_step) hooks.configure_step(state.model, selected);
       selected.previous_metal_heat_rates = state.metal_heat_rates;
       const auto& physics = hooks.physics(state.model);
-      const auto full = evolve_step(state.model, physics, atmosphere, ds, selected);
-      const auto h1 = full.converged ? evolve_step(state.model, physics, atmosphere, ds / 2, selected) : full;
+      const Model* before = preceding ? &*preceding : nullptr;
+      const double ratio = preceding_dt > 0 ? ds / preceding_dt : 0;
+      const auto full = solve(state.model, physics, ds, selected, before, ratio);
+      const auto h1 = full.converged ? solve(state.model, physics, ds / 2, selected, before, ratio / 2) : full;
       auto second_options = options.step;
       if (h1.converged && hooks.configure_step) hooks.configure_step(h1.model, second_options);
       second_options.previous_metal_heat_rates = h1.total_metal_species_rates;
-      const auto h2 = h1.converged ? evolve_step(h1.model, hooks.physics(h1.model), atmosphere, ds / 2, second_options) : h1;
+      const auto h2 = h1.converged ? solve(h1.model, hooks.physics(h1.model), ds / 2,
+                                         second_options, &state.model, 1.) : h1;
       EvolutionAttempt attempt;
       attempt.start_age = state.model.age;
       attempt.dt = ds;
@@ -90,6 +121,10 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
         attempt.message = "physical inventory/energy audit failed";
       if (hooks.attempted) hooks.attempted(attempt);
       if (attempt.accepted) {
+        if (options.predict_structure) {
+          preceding = state.model;
+          preceding_dt = ds;
+        }
         state.model = h2.model;
         state.metal_heat_rates = h2.total_metal_species_rates;
         ++state.accepted;

@@ -38,6 +38,9 @@ std::vector<Composition> burn_and_transport(const Model& thermal,const Model& pr
 enum class ConvectiveMixing { instantaneous, finite_implicit, finite_lagged };
 struct EvolutionOptions {
   RelaxationOptions relaxation{};
+  // Optional starting structure on the same mass mesh. Composition, age and
+  // thermal history still come from the accepted previous model.
+  const Model* initial_structure_guess{};
   std::size_t max_coupling_iterations{30};
   double abundance_tolerance{1e-12};
   // Optional tighter correction bound when instantaneous convection joins

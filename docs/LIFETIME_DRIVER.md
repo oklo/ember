@@ -25,6 +25,19 @@ Version 1 requires the following keys; paths are relative to the configuration:
   `coupling_abundance_tolerance`, `inventory_abundance_tolerance`, and
   `version` (set to `1`).
 
+The optional `structure_prediction "linear"` uses the recent evolution to
+estimate the next radius, density, temperature and luminosity before solving.
+The accepted composition and thermal history remain the physical starting
+state. Every full step and half step retains the same convergence, conservation
+and time-accuracy checks. If the predicted solve fails, the program retries
+from the previous structure. The default is `"none"`; after a restart, the
+prediction history is rebuilt from newly accepted states.
+
+A matched 1 Gyr interval used **197.6 CPU seconds** with prediction and
+**297.8 CPU seconds** without it. Structural and fuel differences were
+negligible. This is one timing comparison in a gradual phase, not a benchmark
+for the complete track. [Comparison](results/structure_prediction_sept27_v1.json).
+
 The initial composition file contains the nine baryonic mass fractions in
 `Composition` order. The CN inventory starts with the declared GS98 isotope
 mixture and evolves thereafter. Mass and starting-state parameters are inputs;

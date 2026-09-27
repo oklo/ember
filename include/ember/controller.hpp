@@ -23,6 +23,7 @@ struct EvolutionControlOptions {
   std::size_t maximum_steps{500};
   double maximum_cpu_seconds{std::numeric_limits<double>::infinity()};
   bool audit_failure_is_fatal{true};
+  bool predict_structure{false};
 };
 
 struct EvolutionAttempt {

@@ -72,9 +72,32 @@ int main(int argc,char**) {
     require(full.model.age==initial.age+dt && end.model.age==initial.age+dt,"clock mismatch");
     require(full.model.luminosity_grid==grid && end.model.luminosity_grid==grid,"luminosity grid changed");
     if(argc>2) {
+      auto predicted=initial;
+      for(std::size_t i=0;i<initial.size();++i)for(std::size_t k=0;k<NVAR;++k) {
+        const auto v=static_cast<Var>(k);
+        predicted.y[i][v]+=2*(half.model.y[i][v]-initial.y[i][v]);
+      }
+      auto predicted_options=options;predicted_options.initial_structure_guess=&predicted;
+      const auto predicted_step=evolve_step(initial,physics,atmosphere,dt,predicted_options);
+      require(predicted_step.converged,"predicted starting structure failed: "+predicted_step.message);
+      double prediction_difference=0;
+      for(std::size_t i=0;i<initial.size();++i) {
+        for(const auto v:{Var::lnr,Var::lnrho,Var::lnT})
+          prediction_difference=std::max(prediction_difference,std::abs(predicted_step.model.y[i][v]-full.model.y[i][v]));
+        for(std::size_t k=0;k<initial.comp[i].X.size();++k)
+          prediction_difference=std::max(prediction_difference,std::abs(predicted_step.model.comp[i].X[k]-full.model.comp[i].X[k]));
+      }
+      require(prediction_difference<1e-7,"starting prediction changed the converged solution");
+      require(std::abs(predicted_step.luminosity_balance)<2e-7 && std::abs(predicted_step.nuclear_mass_balance)<2e-5,
+              "prediction changed energy accounting");
+      predicted.m[0]*=1.01;bool mismatch_rejected=false;
+      try { (void)evolve_step(initial,physics,atmosphere,dt,predicted_options); }
+      catch(const std::invalid_argument&) {mismatch_rejected=true;}
+      require(mismatch_rejected,"starting prediction from another mesh was accepted");
       // Fault injection tests recovery policy independently of stellar accuracy.
       // Every accepted trial still passes the normal energy checks above.
       EvolutionControlOptions control;control.step=options;
+      control.predict_structure=true;
       control.target_age=controller_initial.age+dt;control.maximum_dt=dt;
       control.audit_failure_is_fatal=false;control.maximum_consecutive_rejections=3;
       EvolutionControlHooks hooks;

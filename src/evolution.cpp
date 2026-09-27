@@ -243,6 +243,16 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
   detail::check_thermal_transport(p);
   for(const auto& c:previous.comp) validate_composition(c);
   Model current=previous;
+  if(const auto* guess=options.initial_structure_guess) {
+    if(guess->M!=previous.M || guess->m!=previous.m || guess->size()!=previous.size()
+        || guess->luminosity_grid!=previous.luminosity_grid)
+      throw std::invalid_argument("evolve_step: initial structure uses a different mesh");
+    for(const auto& point:guess->y)
+      for(std::size_t k=0;k<NVAR;++k)
+        if(!std::isfinite(point[static_cast<Var>(k)]))
+          throw std::invalid_argument("evolve_step: nonfinite initial structure");
+    current.y=guess->y;
+  }
   try {
     for(const auto& c:previous.comp)if(c[Species::H2]!=0 && p.microscopic)
       throw std::invalid_argument("evolve_step: microscopic transport with D needs an isotope-aware provider");

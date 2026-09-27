@@ -104,6 +104,9 @@ int lifetime_main(int argc,char** argv) {
     const double structure_tolerance=cfg.number("structure_tolerance"),species_tolerance=cfg.number("species_tolerance"),energy_tolerance=cfg.number("energy_tolerance");
     const double abundance_tolerance=cfg.number("coupling_abundance_tolerance");
     const double inventory_tolerance=cfg.number("inventory_abundance_tolerance");
+    const auto structure_prediction=cfg.values.contains("structure_prediction")?cfg.get("structure_prediction"):"none";
+    if(structure_prediction!="none" && structure_prediction!="linear")
+      throw std::invalid_argument("unknown structure prediction method");
     const auto transport_selection=cfg.values.contains("transport")?cfg.get("transport"):"whole_convective";
     if(transport_selection!="whole_convective" && transport_selection!="screened_core")
       throw std::invalid_argument("unknown lifetime transport selection");
@@ -198,6 +201,7 @@ int lifetime_main(int argc,char** argv) {
         {"coupling_abundance_tolerance",abundance_tolerance},{"inventory_abundance_tolerance",inventory_tolerance}})
       identity.number("configuration."+key,value);
     identity.number("solver.homogeneous_abundance_tolerance",std::min(1e-15,abundance_tolerance));
+    if(structure_prediction=="linear")identity.number("solver.structure_prediction",1);
     identity.family("eos",eos_path,true);
     for(const auto& [role,p]:std::map<std::string,fs::path>{{"opacity_low",low_path},{"opacity_warm",warm_path},
         {"opacity_bridge",bridge_path},{"opacity_hot",hot_path}})identity.family(role,p,false);
@@ -340,6 +344,7 @@ int lifetime_main(int argc,char** argv) {
     control.target_age=target;control.maximum_dt=maximum_dt;
     control.structure_tolerance=structure_tolerance;control.species_tolerance=species_tolerance;
     control.energy_tolerance=energy_tolerance;control.maximum_steps=maximum_steps;
+    control.predict_structure=structure_prediction=="linear";
     control.maximum_cpu_seconds=maximum_cpu;
     // A failed trial must not replace the accepted model. Retry with a shorter
     // interval under the same audits; the controller bounds repeated rejection.
