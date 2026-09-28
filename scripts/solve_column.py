@@ -34,7 +34,7 @@ def _scripts_dir():
                 return c
     raise SystemExit('cannot locate Ember scripts/ (set EMBER_ROOT)')
 sys.path.insert(0, str(_scripts_dir()))
-from generate_nongrey_grid import composition, temperatures, sequence, temperature_convergence_text, resample_initial_structure
+from generate_nongrey_grid import composition, temperatures, sequence, temperature_convergence_text, resample_initial_structure, continuation_structure
 from import_nongrey_grid import source_inputs, source_state
 
 INPUTS = ['fort.5', 'tas', 'ember-masses.dat', 'fort.15', 'fort.8']
@@ -116,6 +116,29 @@ def run(att, exe, cap, nd, rule):
                 wall_seconds=time.monotonic() - t0, monitor_stop=stop, iterations=len(h),
                 history=[float('%.3g' % x) for x in h])
 
+def donor_guess(donor, col, spec, nd):
+    """Initial guess from an accepted neighbouring column (a guess only: the solve and acceptance are unchanged).
+
+    T scales with the Teff ratio and column mass with 1/g (continuation_structure keeps n k T and g m fixed), then the
+    profile is resampled to this column's depth count. The donor must be accepted, unchanged since its result, and
+    have the same source physics (assemble_nongrey_grid.physical_identity); its composition may differ.
+    """
+    from assemble_nongrey_grid import physical_identity
+    record = json.loads((donor / 'result.json').read_text())
+    if not record.get('accepted'): raise SystemExit('donor column is not accepted')
+    for name, checksum in record.get('retained_sha256', {}).items():
+        if name in ('fort.7', 'specification.json') and sha(donor / name) != checksum:
+            raise SystemExit(f'donor output changed since its result: {name}')
+    dspec = json.loads((donor / 'specification.json').read_text())
+    if physical_identity(dspec, json.loads((donor / 'provenance.json').read_text())) != \
+            physical_identity(spec, json.loads((col / 'provenance.json').read_text())):
+        raise SystemExit('donor source physics differs from this column')
+    dt, dg = dspec['teff_K'][0], dspec['log_g'][0]
+    text = continuation_structure((donor / 'fort.7').read_text(), dt, dg, spec['teff_K'][0], spec['log_g'][0])
+    text = resample_initial_structure(text, nd, allow_coarsen=True)
+    return text, dict(directory=str(donor), fort7_sha256=sha(donor / 'fort.7'), result_sha256=sha(donor / 'result.json'),
+                      teff_K=dt, log_g=dg, hydrogen=dspec['hydrogen'][0], helium3=dspec['helium3'][0])
+
 def main():
     a = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     a.add_argument('column', type=Path); a.add_argument('--executable', required=True)
@@ -124,6 +147,8 @@ def main():
     a.add_argument('--strategy', choices=['hybrid', 'damped'], default='hybrid')
     a.add_argument('--chmax', type=float, default=None, help='optional source stop for every attempt (e.g. 1e-9)')
     a.add_argument('--max-phases', type=int, default=5)
+    a.add_argument('--initial-from', type=Path, default=None,
+                   help='accepted donor column: scale its final structure to this Teff/log g as the initial guess')
     args = a.parse_args()
     col = args.column.resolve()
     args.executable = str(Path(args.executable).resolve())          # attempts run with cwd inside the column
@@ -151,6 +176,9 @@ def main():
     if args.strategy == 'hybrid' and orelax0 == 1.0: orelax0 = 0.3
     opacity = {'temperature_K': temperatures(spec0), 'density_g_cm3': sequence(spec0['log_density'])}
     guess = (col / 'fort.8').read_text() if (col / 'fort.8').exists() else None
+    donor = None
+    if args.initial_from is not None:
+        guess, donor = donor_guess(args.initial_from.resolve(), col, spec0, nd)
     attempts, total, kind = [], 0.0, ('newton' if args.strategy == 'hybrid' else 'damped')
     budget_exhausted = False
     (col / 'attempts').mkdir()
@@ -205,7 +233,7 @@ def main():
                 (att / (f + '.gz')).write_bytes(gzip.compress(p.read_bytes(), compresslevel=6, mtime=0)); p.unlink()
         for p in att.glob('fort.*'):
             if p.name not in ('fort.5', 'fort.7', 'fort.8', 'fort.9', 'fort.9.gz', 'fort.15'): p.unlink()
-    result = dict(name=col.name, strategy=args.strategy, accepted=accepted is not None,
+    result = dict(name=col.name, strategy=args.strategy, accepted=accepted is not None, initial_from=donor,
                   CPU_seconds=total, wall_seconds=sum(r['wall_seconds'] for r in attempts),
                   selected_for_evolution=False, executable_sha256=args.executable_sha256,
                   attempts=[{k: v for k, v in r.items() if k != 'diagnostics'} for r in attempts])

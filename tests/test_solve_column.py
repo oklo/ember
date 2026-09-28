@@ -8,6 +8,23 @@ HERE = Path(__file__).resolve().parent; ROOT = HERE.parent
 SOLVER = ROOT / 'scripts/solve_column.py'; FAKE = HERE / 'fixtures/fake_tlusty.py'
 SHA = hashlib.sha256(FAKE.read_bytes()).hexdigest()
 ND = 20
+PROV = {'executables': {'tlusty': SHA, 'synspec': 's'}, 'data_sha256': 'd', 'line_list_sha256': ['l'],
+        'opacity_method': 'sampling'}
+
+def structure(nd, teff):
+    mass = [1e-6 * 10 ** (i / 4) for i in range(nd)]
+    rows = [f'{teff * (1 + i / nd):.6e} {1e14:.6e} {1e-8 * (1 + i):.6e} {1e17:.6e}' for i in range(nd)]
+    return f'{nd} -4\n' + '\n'.join(f'{m:.6e}' for m in mass) + '\n' + '\n'.join(rows) + '\n'
+
+def donor(tmp, accepted=True, alpha=1.9, teff=3900.0, logg=6.0):
+    d = Path(tmp) / 'donor'; d.mkdir()
+    spec = dict(hydrogen=[0.98], helium3=[0.0], metals=[0.0]*5, teff_K=[teff], log_g=[logg], tau=100, alpha=alpha,
+                wavelength_A=[900, 300000], microturbulence_km_s=1.0, line_threshold=1e-4)
+    (d / 'specification.json').write_text(json.dumps(spec)); (d / 'provenance.json').write_text(json.dumps(PROV))
+    (d / 'fort.7').write_text(structure(24, teff))
+    sums = {n: hashlib.sha256((d / n).read_bytes()).hexdigest() for n in ('fort.7', 'specification.json')}
+    (d / 'result.json').write_text(json.dumps(dict(accepted=accepted, retained_sha256=sums)))
+    return d
 
 def column(tmp, newton, damped, sleep=0.3):
     c = Path(tmp) / 'col'; c.mkdir()
@@ -16,9 +33,10 @@ def column(tmp, newton, damped, sleep=0.3):
     (c / 'ember-masses.dat').write_text('1.0\n'); (c / 'fort.15').write_text("'opacity.bin' 1\n")
     (c / 'opacity.bin').write_text('x'); (c / 'data').mkdir()
     spec = dict(hydrogen=[0.98], helium3=[0.0], metals=[0.0]*5, teff_K=[4000.0], log_g=[6.0], tau=100,
-                log_temperature=[3, 3.0, 4.0], log_density=[3, -10.0, -1.0])
+                log_temperature=[3, 3.0, 4.0], log_density=[3, -10.0, -1.0], alpha=1.9, wavelength_A=[900, 300000],
+                microturbulence_km_s=1.0, line_threshold=1e-4)
     (c / 'specification.json').write_text(json.dumps(spec))
-    (c / 'provenance.json').write_text(json.dumps({'executables': {'tlusty': SHA}}))
+    (c / 'provenance.json').write_text(json.dumps(PROV))
     (c / 'opacity.sha256').write_text(hashlib.sha256(b'x').hexdigest()+'\n')
     (c / 'fake.json').write_text(json.dumps(dict(newton=newton, damped=damped, nd=ND, sleep=sleep)))
     return c
@@ -99,6 +117,29 @@ class T(unittest.TestCase):
             pid, status, usage = sc.stop_and_reap(p.pid)
         p.returncode = os.waitstatus_to_exitcode(status)
         self.assertEqual(pid, p.pid)
+
+
+    def test_donor_must_be_accepted(self):
+        c = column(self.tmp, [1e-2], [1e-2]); d = donor(tempfile.mkdtemp(dir=self.tmp), accepted=False)
+        r = solve(c, '--initial-from', str(d)); self.assertNotEqual(r.returncode, 0); self.assertIn('not accepted', r.stderr + r.stdout)
+        self.assertFalse((c / 'attempts').exists())
+    def test_donor_physics_must_match(self):
+        c = column(self.tmp, [1e-2], [1e-2]); d = donor(tempfile.mkdtemp(dir=self.tmp), alpha=1.5)
+        r = solve(c, '--initial-from', str(d)); self.assertNotEqual(r.returncode, 0); self.assertIn('physics differs', r.stderr + r.stdout)
+    def test_changed_donor_output_rejected(self):
+        c = column(self.tmp, [1e-2], [1e-2]); d = donor(tempfile.mkdtemp(dir=self.tmp))
+        (d / 'fort.7').write_text(structure(24, 3950.0))
+        r = solve(c, '--initial-from', str(d)); self.assertNotEqual(r.returncode, 0); self.assertIn('donor output changed', r.stderr + r.stdout)
+    def test_donor_guess_is_scaled_and_recorded(self):
+        sys.path.insert(0, str(ROOT / 'scripts'))
+        from generate_nongrey_grid import continuation_structure, resample_initial_structure
+        c = column(self.tmp, [1e-2, 1e-3], [1e-2]); d = donor(tempfile.mkdtemp(dir=self.tmp))
+        solve(c, '--initial-from', str(d), '--max-phases', '1')
+        expected = resample_initial_structure(continuation_structure((d / 'fort.7').read_text(), 3900.0, 6.0, 4000.0, 6.0), ND, allow_coarsen=True)
+        attempt = next((c / 'attempts').iterdir())
+        self.assertEqual((attempt / 'fort.8').read_text(), expected)
+        res = json.loads((c / 'result.json').read_text())
+        self.assertEqual((res['initial_from']['teff_K'], res['initial_from']['log_g']), (3900.0, 6.0))
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

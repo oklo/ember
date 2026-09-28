@@ -148,6 +148,12 @@ attempts, their CPU time and the final acceptance decision. Accepted columns can
 be checked and assembled with `extend_mixed_atmosphere.py`; failed attempts still
 count toward the reported cost. [Measured comparisons](results/atmosphere_solver_sept28_v1.json).
 
+For a new column, `scripts/find_donor.py COLUMN SOURCE_DIRECTORY` finds a nearby
+accepted column with matching source physics. Pass its directory as
+`--initial-from DONOR` to `solve_column.py`. The temperature and column mass of
+that saved structure are scaled to provide a starting guess. The target still
+undergoes the full atmosphere solve and the usual acceptance checks.
+
 Archive and import only a complete, independently accepted family following
 [NONGREY.md](NONGREY.md). The condensate pipeline is an unfinished experiment:
 the grain-enthalpy failures remain real, and no command here promotes it to an
