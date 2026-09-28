@@ -1,0 +1,66 @@
+{
+  "selected_for_evolution": true,
+  "maximum_ln_structure_difference": 2.3983173124797474e-05,
+  "maximum_absolute_abundance_difference": 1.6911081622994484e-05,
+  "global_relative_differences": {
+    "radius_Rsun": 5.07730523402472e-07,
+    "Teff_K": 4.242370066354084e-07,
+    "luminosity_Lsun": 2.7124121344535013e-06,
+    "central_T_K": 8.195557674728349e-07,
+    "central_density_g_cm3": 9.424011245595665e-06,
+    "H_mass_g": 1.0524538862632937e-07,
+    "He3_mass_g": 6.850353910792251e-06
+  },
+  "costs": {
+    "before": {
+      "CPU_seconds": 102.160483,
+      "wall_seconds": 111.79065595799999
+    },
+    "after": {
+      "CPU_seconds": 96.33838499999999,
+      "wall_seconds": 105.686667625
+    }
+  },
+  "created_utc": "2026-09-28T09:58:05.311545+00:00",
+  "selected_runs": [
+    "cold-eos-stellar-control-sept28-v6/reference",
+    "cold-eos-stellar-control-sept28-v6/candidate"
+  ],
+  "initial_age_years": 3592087265440.033,
+  "duration_years": 1000000000.0,
+  "zone_threads": 1,
+  "source_sha256_before": "f5b78dd8a181a64cc3c9fc1dec3805996de76612d7b8931b8daa6dbb69cb82c1",
+  "source_sha256_after": "378dba869d427d43f0cd12cae46a17b521f85881ba56fb119ac8c0f46015cd70",
+  "executable_sha256_by_arm": {
+    "before": "0068c022e69d6a9e7456903c67276686e02f5fcd3b70b7f45750fa2628c2d017",
+    "after": "faed169cdeb698c17799357886f58d59a4ba8aae77666a7af48a999700b4f102"
+  },
+  "tests_passed": [
+    "lagged_finite_metal_evolution",
+    "finite_metal_evolution",
+    "metal_microscopic_evolution",
+    "metal_microscopic_face_evolution",
+    "metal_cn_transport",
+    "stiff_mixing_flux"
+  ],
+  "test_log_sha256": "be0d1df6f640a2a3a1bbcb9e0931900837a5311952d62953d28fedbf16497775",
+  "test_scope": "Synthetic metal transport plus grey 0.5-solar-mass integration, finite and instantaneous convection; not a full stellar or cold-EOS validation.",
+  "rejections": {
+    "local_continuity": {
+      "before": 3,
+      "after": 0
+    },
+    "time_error": {
+      "before": 3,
+      "after": 5
+    }
+  },
+  "change": "When the returned species solve fails independent local continuity, refine that solve from its answer at the existing integrated-balance tolerance. Reconstruct fluxes and check again; reject if still invalid.",
+  "unchanged_requirements": [
+    "Physical evolution equations",
+    "Local continuity tolerance",
+    "Global species audit",
+    "Energy audit",
+    "Full/two-half time-error check"
+  ]
+}

@@ -373,6 +373,20 @@ convergence remain separate work.
 [Measurements](results/parallel_coupling_sept27_v1.json).
 
 
+### Refining a species solve before rejection
+
+A small Newton correction and a closed global inventory can still leave a
+local species balance outside its existing tolerance. In that case, the
+solver refines only the species solution, starting from its returned answer,
+then reconstructs and checks the fluxes again. Failure still rejects the step;
+no abundance, flux or conservation requirement is adjusted afterward.
+
+Over a matched **1 Gyr** interval near **3.592 Tyr**, this removes three
+local-continuity rejections and reduces CPU use by **5.699%**. The altered
+step sequence changes luminosity by **2.712e-6** relative and total He3 by
+**6.851e-6**. Six transport and mixing tests pass.
+[Comparison and test scope](results/species_continuity_refinement_sept28_v1.json).
+
 ### Composition response in the structure iteration
 
 The optional `linearized_burning "1"` includes the change in nuclear heating

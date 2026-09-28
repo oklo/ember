@@ -422,9 +422,26 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           auto full=burn_metal_cn_and_diffuse(current,previous,*cn_network,regions,flux,dt,transport_options,mixing);
           Model updated=current;updated.comp=std::move(full.composition);
           auto redistribution=reconstruct_metal_fluxes(updated,previous,*cn_network,regions,full.boundary_fluxes,dt,options.relaxation.zone_threads);
-          for(const auto& cell:redistribution.cell_balances)for(double balance:cell)
-            if(std::abs(balance)>transport_options.integrated_balance_tolerance)
-              throw std::runtime_error("evolve_step: reconstructed metal species continuity exceeds tolerance");
+          auto continuous=[&]() {
+            for(const auto& cell:redistribution.cell_balances)for(double balance:cell)
+              if(std::abs(balance)>transport_options.integrated_balance_tolerance)return false;
+            return true;
+          };
+          if(!continuous()) {
+            // A small Newton correction and a closed global inventory can
+            // coexist with a larger regional flux residual. Refine species
+            // from this answer before discarding the entire stellar step.
+            // The independent continuity and energy requirements are unchanged.
+            transport_options.initial_guess=updated.comp;
+            transport_options.abundance_tolerance=std::min(
+                transport_options.abundance_tolerance,transport_options.integrated_balance_tolerance);
+            full=burn_metal_cn_and_diffuse(current,previous,*cn_network,regions,flux,dt,transport_options,mixing);
+            updated.comp=std::move(full.composition);
+            redistribution=reconstruct_metal_fluxes(updated,previous,*cn_network,regions,
+                full.boundary_fluxes,dt,options.relaxation.zone_threads);
+            if(!continuous())
+              throw std::runtime_error("evolve_step: reconstructed metal species continuity exceeds tolerance after refinement");
+          }
           return {std::move(updated.comp),{},std::move(redistribution.face_rates)};
         }
         SpeciesTransportResult species;
