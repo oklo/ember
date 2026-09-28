@@ -77,6 +77,18 @@ int main() {
   check(refused,"strongly quantum and freezing regime requires further physics");
   refused=false;try{(void)ion_quantum_liquid_jets(1e4,1,c);}catch(const std::domain_error&){refused=true;}
   check(refused,"significant partial-ionization correction refused");
+  const auto dense_h=mixture(.99,.003,0);
+  const auto cool=ion_quantum_liquid_jets(250000,90,dense_h,1)[0];
+  const auto cool_p=ion_quantum_liquid_jets(250000*std::exp(h),90,dense_h,1)[0];
+  const auto cool_m=ion_quantum_liquid_jets(250000*std::exp(-h),90,dense_h,1)[0];
+  check(cool[0][0]>0 && std::abs((cool_p[0][0]-cool_m[0][0])/(2*h)/cool[1][0]-1)<2e-7,
+        "pressure-ionized hydrogen keeps the same potential and thermal response below300kK");
+  refused=false;try{(void)ion_quantum_liquid_jets(250000,90,mixture(.9,.003,0));}
+  catch(const std::domain_error&){refused=true;}
+  check(refused,"dense hydrogen extension does not admit unsupported helium-rich material");
+  refused=false;try{(void)ion_quantum_liquid_jets(250000,40,dense_h);}
+  catch(const std::domain_error&){refused=true;}
+  check(refused,"dense hydrogen extension retains its assessed density boundary");
   refused=false;try{(void)ion_quantum_liquid_jets(1e6,3e4,mixture(.01,0,.98));}catch(const std::domain_error&){refused=true;}
   check(refused,"strong ionic coupling is not treated as an assessed liquid");
   const auto dilute=ion_quantum_liquid_jets(3000,1e-7,c,1)[0];

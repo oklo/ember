@@ -121,12 +121,17 @@ chemical forces and transported enthalpies must all use this same potential.
 A series through the fourteenth power evaluates the published expression
 without cancellation or repeated multidimensional differentiation.
 
-The initial assessed range requires the hydrogen plasma-temperature ratio
-Tp,H/T ≤ 1 and the number-weighted ionic coupling parameter ≤ 100. Below
-300 kK, only Tp,H/T ≤ 0.1 is accepted, where the ideal-ion heat correction is
-at most 0.05556%. These are validity checks, not switches in the potential.
-They neither determine melting nor establish a partially ionized quantum EOS.
-The present 2752 K remnant's mesh remains in the accepted fully ionized regime.
+The assessed range requires the hydrogen plasma-temperature ratio Tp,H/T ≤ 1
+and number-weighted ionic coupling ≤ 100. Below 300 kK, Tp,H/T must be ≤ 0.1
+unless the material lies in the checked dense-hydrogen interval: T ≥ 200 kK,
+50 ≤ rho ≤ 150 g/cm³, X ≥ 0.97, Z ≤ 1e-8, and He3 at most half the helium.
+Variable-ionization FreeEOS calculations across that interval give an electron
+deficit below 2.785e-5, including pressure ionization. Outside it, the smaller
+quantum-ratio limit bounds the ideal-ion heat correction to 0.05556%.
+
+These restrictions change no potential values or derivatives. They do not
+supply crystallization or a partially ionized quantum EOS.
+[Dense-hydrogen checks](results/quantum_dense_hydrogen_sept28_v1.json).
 
 The unit test compares F, U, P and Cv against the pinned independent `LIQUBC`
 implementation, including near the upper assessed quantum ratio; the maximum

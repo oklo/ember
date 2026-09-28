@@ -1,0 +1,50 @@
+{
+  "method": "FreeEOS3.0.0, options3,223,-2: variable ionization including pressure ionization; existing1e-13 electron quadrature. Actual helium isotopes use the established baryon/atomic mass mapping. Metals are negligible in this check.",
+  "source_sha256": "1bfcfc7226449987de1609afb8bb9b7625588457d394fc0038b4baa56ac76c9f",
+  "maximum_electron_deficit": 2.784313913373193e-05,
+  "minimum_H_ionized": 0.9999999999999981,
+  "minimum_He_doubly_ionized": 0.9967419788039917,
+  "thermal_comparison": {
+    "P": 3.418961493140138e-06,
+    "E": 9.155389789849977e-06,
+    "cv": 1.2412674477602081e-05,
+    "cp": 2.6490013591562445e-06,
+    "grad_ad": 9.300683646562558e-05
+  },
+  "overlap_stellar_comparison": {
+    "relative_differences": {
+      "Teff_K": 0.0,
+      "luminosity_Lsun": 0.0,
+      "radius_Rsun": 0.0,
+      "central_T_K": 0.0,
+      "central_density_g_cm3": 0.0,
+      "H_mass_g": 0.0,
+      "He3_mass_g": 0.0
+    },
+    "passed": true
+  },
+  "scope": "Bounds the use of the existing quantum-liquid formula in the stated dense-H domain. It does not establish a general partially ionized quantum EOS or remove the thetaH/ionic-coupling limits. FreeEOS supplies the ionization model; its physical uncertainty is separate from these numerical checks.",
+  "source_grid": {
+    "X": [
+      0.97,
+      0.99055,
+      0.9999
+    ],
+    "He3_fraction_of_helium": [
+      0,
+      0.5
+    ],
+    "Z": 0,
+    "T_K": [
+      200000,
+      250000,
+      300000
+    ],
+    "rho_g_cm3": [
+      50,
+      90,
+      150
+    ],
+    "queries": 54
+  }
+}

@@ -57,10 +57,14 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   // Initial production scope is weakly quantum liquid. At theta_H<=1,
   // the common-density mixture recovers the exact leading term; beyond
   // that limit mixture and phase effects need an independent assessment.
-  // Cool, partially ionized matter is admitted only when the largest
-  // ideal-ion heat correction is < theta_H^2/18 <= 5.556e-4. There is no
-  // switch in the potential: unsupported material is refused explicitly.
-  if(thetaH>1 || (T<3e5 && thetaH>.1))
+  // FreeEOS with variable ionization supports the dense H-rich extension:
+  // over this range the electron deficit is <2.8e-5, including pressure
+  // ionization. Elsewhere below 300 kK the largest ideal-ion heat correction
+  // must remain < theta_H^2/18 <= 5.556e-4. These checks limit the domain;
+  // they do not switch or weight the free energy.
+  const bool dense_hydrogen=T>=2e5 && rho>=50 && rho<=150 &&
+      c.X[0]>=.97 && c.Z()<=1e-8 && c.X[1]<=.5*(c.X[1]+c.X[2]);
+  if(thetaH>1 || (T<3e5 && thetaH>.1 && !dense_hydrogen))
     throw std::domain_error("quantum ion EOS: outside assessed ionization/quantum range");
   double ion_number=c.X[0]+c.X[1]/3+c.X[2]/4;
   double charge_moment=c.X[0]+(c.X[1]/3+c.X[2]/4)*std::pow(2.,5./3);
