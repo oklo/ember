@@ -1,0 +1,62 @@
+--- a/tlusty/tlusty208.f
++++ b/tlusty/tlusty208.f
+@@ -46139,11 +46139,14 @@
+      *              NELEM(5,600),NATO(5,600),MMAX(600),
+      *              NELEMX(100),NMETAL,NMOLEC,NIMAX
+         DIMENSION FX(100),DFX(100),Z(100),PREV(100),WA(100),
+-     *            UIIDU2(100)
++     *            UIIDU2(100),PLG(100)
+ C
+ C       ECONST=4.342945E-1
+         ECONST=4.3426E-1
+         XKCON=6.667343E-1
++        DO I=1,NMETAL
++           IF(NELEMX(I).NE.I) STOP 'EMBER RUSSEL NELEMX'
++        END DO
+         EPSDIE=5.0E-5
+         T=5040.4/TEM
+         PGLOG=log10(PG)
+@@ -46264,13 +46267,20 @@
+ C
+         SPNION=0.0
+         spnplu=0.
++c     EMBER: identical arithmetic, reorganized. log10 of each partial
++c     pressure is evaluated once per sweep instead of once per molecule.
++        DO I=1,NMETAL
++           PLG(I)=log10(P(I))
++        END DO
++        PLG(99)=log10(P(99))
++        PLG(100)=log10(P(100))
+         DO J=1,NMOLEC
+            MMAXJ=MMAX(J)
+            PMOLJL=-APMLOG(J)
+            DO M=1,MMAXJ
+               NELEMJ=NELEM(M,J)
+               NATOMJ=NATO(M,J)
+-              PMOLJL=PMOLJL+DFLOAT(NATOMJ)*log10(P(NELEMJ))
++              PMOLJL=PMOLJL+DFLOAT(NATOMJ)*PLG(NELEMJ)
+            END DO
+ C
+            PMOLJ=EXP(PMOLJL/ECONST)
+@@ -46285,14 +46295,13 @@
+                     SPNPLU=SPNPLU-PMOLJ*NATOMJ
+                  end if
+               end if
+-              DO I=1,NMETAL
+-                 NELEMI=NELEMX(I)
+-                 IF(NELEMJ.EQ.NELEMI) THEN
+-                    FX(NELEMI)=FX(NELEMI)+ATOMJ*PMOLJ
+-                    DFX(NELEMI)=DFX(NELEMI)+ATOMJ**2*
+-     *                          PMOLJ/P(NELEMI)
+-                 END IF
+-              END DO
++c     EMBER: NELEMX(I)=I (set in MOLEQ), so the element search is a
++c     direct index; the same single update is applied in the same order.
++              IF(NELEMJ.GE.1.AND.NELEMJ.LE.NMETAL) THEN
++                 FX(NELEMJ)=FX(NELEMJ)+ATOMJ*PMOLJ
++                 DFX(NELEMJ)=DFX(NELEMJ)+ATOMJ**2*
++     *                       PMOLJ/P(NELEMJ)
++              END IF
+            END DO
+            PPMOL(J)=PMOLJ
+         END DO

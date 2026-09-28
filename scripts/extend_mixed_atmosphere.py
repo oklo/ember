@@ -113,7 +113,35 @@ def render(header, old_axes, old_rows, old_cells, additions):
     return '\n'.join(output) + '\n', axes, cells
 
 
-def load_column(directory, expected_physics):
+def numerical_variants(paths):
+    """Explicitly reviewed solver optimizations; retain actual executable hashes."""
+    variants, evidence = {}, {}
+    for path in paths:
+        report = json.loads(path.read_text())
+        if report.get('passed') is not True or not report.get('cases'):
+            raise ValueError('a passing numerical solver comparison is required')
+        tolerance = report['maximum_allowed_relative_difference']
+        if not 0 < tolerance <= .001:
+            raise ValueError('invalid numerical solver comparison tolerance')
+        for case in report['cases']:
+            if (case.get('accepted') is not True or not case['relative_changes']
+                    or any(not math.isfinite(v) or abs(v) > tolerance
+                           for v in case['relative_changes'].values())):
+                raise ValueError('numerical solver comparison failed')
+        if not report.get('input_sha256'):
+            raise ValueError('numerical solver comparison needs its input records')
+        for name, checksum in report['input_sha256'].items():
+            if digest(path.parent / name) != checksum:
+                raise ValueError('numerical solver comparison dependency changed')
+        new, old = (report[k] for k in ['variant_executable_sha256', 'reference_executable_sha256'])
+        if new == old or new in variants:
+            raise ValueError('ambiguous numerical solver comparison')
+        variants[new] = old
+        evidence[str(path)] = digest(path)
+    return variants, evidence
+
+
+def load_column(directory, expected_physics, variants=None):
     def archived(name):
         path = directory / name
         return read_text(path if path.exists() else path.with_name(name + '.gz'))
@@ -127,7 +155,12 @@ def load_column(directory, expected_physics):
             raise ValueError(f'changed source output: {directory / name}')
     spec = json.loads((directory / 'specification.json').read_text())
     prepared = json.loads((directory / 'provenance.json').read_text())
-    if physical_identity(spec, prepared) != expected_physics:
+    actual = physical_identity(spec, prepared)
+    comparison = dict(actual, executables=dict(actual['executables']))
+    if variants and comparison != expected_physics:
+        binary = comparison['executables']['tlusty']
+        comparison['executables']['tlusty'] = variants.get(binary, binary)
+    if comparison != expected_physics:
         raise ValueError(f'atmosphere physics differs: {directory}')
     if spec['helium3'] != [0.] or any(len(spec[k]) != 1
                                     for k in ['hydrogen', 'teff_K', 'log_g']):
@@ -148,7 +181,8 @@ def load_column(directory, expected_physics):
         raise ValueError('source diagnostics differ from the completion record')
     return (x, t, g), state, dict(coordinates=[x, t, g], directory=str(directory),
                                  result_sha256=digest(result_path),
-                                 opacity_sha256=digest(opacity), diagnostics=state)
+                                 opacity_sha256=digest(opacity), diagnostics=state,
+                                 physical_identity=actual)
 
 
 def interpolate(axes, nodes, key):
@@ -187,9 +221,10 @@ def assemble(plan_path, output):
         reference = Path(next(iter(columns.values()))['directory'])
         physics = physical_identity(json.loads((reference/'specification.json').read_text()),
                                     json.loads((reference/'provenance.json').read_text()))
+    variants, evidence = numerical_variants([resolve(p) for p in plan.get('numerical_solver_comparisons', [])])
     added = {}
     for path in plan['sources']:
-        key, state, record = load_column(resolve(path), physics)
+        key, state, record = load_column(resolve(path), physics, variants)
         if key in added:
             raise ValueError('duplicate new source column')
         added[key] = state
@@ -200,7 +235,7 @@ def assemble(plan_path, output):
     nodes = {k: v['diagnostics'] for k, v in columns.items()}
     checks = []
     for path in plan['independent_checks']:
-        key, state, record = load_column(resolve(path), physics)
+        key, state, record = load_column(resolve(path), physics, variants)
         if key in nodes:
             raise ValueError('an independent check duplicates a table column')
         if not any(c['supported'] and all(lo <= x <= hi for x, (lo, hi) in
@@ -221,6 +256,7 @@ def assemble(plan_path, output):
                   limitations=base['limitations'], physical_identity=physics,
                   parent=str(parent),
                   parent_table_sha256=base['table_sha256'],
+                  numerical_solver_comparisons=evidence,
                   preserved_valid_vertices=sum(v != '0' for v in old_rows.values()),
                   new_source_columns=len(added), plan_sha256=digest(plan_path),
                   assembler_sha256=digest(__file__))

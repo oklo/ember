@@ -154,6 +154,18 @@ accepted column with matching source physics. Pass its directory as
 that saved structure are scaled to provide a starting guess. The target still
 undergoes the full atmosphere solve and the usual acceptance checks.
 
+The source build also applies `tlusty208-russel.patch`, which avoids repeated
+element searches and logarithms in molecular equilibrium. Two completed source
+comparisons reduced CPU time by **1.601–3.455 times**, with matching-state
+changes below **1.628e-7** relative. The equations and double precision are
+unchanged; iteration paths can differ through rounding.
+[Source comparisons](results/tlusty_russel_sept28_v1.json).
+When combining old and optimized sources, an extension plan can explicitly
+list `numerical_solver_comparisons`. Each referenced report must contain
+passing comparisons and unchanged input records. Only its named TLUSTY
+executable substitution is accepted; all other source physics must match,
+and each column retains its actual executable identity.
+
 Archive and import only a complete, independently accepted family following
 [NONGREY.md](NONGREY.md). The condensate pipeline is an unfinished experiment:
 the grain-enthalpy failures remain real, and no command here promotes it to an

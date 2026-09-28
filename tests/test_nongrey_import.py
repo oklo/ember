@@ -23,6 +23,25 @@ from assemble_nongrey_grid import complete_cells
 
 
 class SourceAcceptance(unittest.TestCase):
+    def test_numerical_solver_comparison_requires_unchanged_evidence(self):
+        from extend_mixed_atmosphere import numerical_variants
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory); source = path/'source'; source.write_text('reviewed source')
+            report = dict(passed=True, maximum_allowed_relative_difference=.001,
+                          variant_executable_sha256='new', reference_executable_sha256='old',
+                          cases=[dict(accepted=True, relative_changes=dict(T=1e-7, Pgas=-2e-7))],
+                          input_sha256={'source':hashlib.sha256(source.read_bytes()).hexdigest()})
+            receipt = path/'comparison.json'; receipt.write_text(json.dumps(report))
+            variants, evidence = numerical_variants([receipt])
+            self.assertEqual(variants, {'new':'old'}); self.assertIn(str(receipt), evidence)
+            source.write_text('changed')
+            with self.assertRaisesRegex(ValueError, 'dependency changed'):
+                numerical_variants([receipt])
+            source.write_text('reviewed source'); report['cases'][0]['relative_changes']['Pgas']=.01
+            receipt.write_text(json.dumps(report))
+            with self.assertRaisesRegex(ValueError, 'comparison failed'):
+                numerical_variants([receipt])
+
     def test_mixed_extension_preserves_values_and_disabled_cells(self):
         from extend_mixed_atmosphere import render
         axes = [[.98, .9955], [3600., 3800.], [6.3, 6.5]]

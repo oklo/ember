@@ -1,0 +1,68 @@
+{
+  "reference_executable_sha256": "74663fb1529dd57c95a435c9cf2385777d80eab836745ccd39f39cb81138161a",
+  "variant_executable_sha256": "48e9830ea0476c732ce7dcd033894fe87dca5abd428a028dd00990c0f0db465a",
+  "build_receipt_sha256": "bd1b6fc8c16d947d9ebe592719ac5a5386fdb6ff8238a0b139c9e58715ff9a56",
+  "maximum_allowed_relative_difference": 0.001,
+  "passed": true,
+  "scope": "Reviewed removal of repeated element searches and logarithms; unchanged physical equations. Two independently re-imported source controls.",
+  "cases": [
+    {
+      "CPU_seconds": 127.900116,
+      "reference_CPU_seconds": 441.91846,
+      "CPU_speedup": 3.4551842001456823,
+      "relative_changes": {
+        "T": -2.540190280342358e-12,
+        "Pgas": 8.078870905592339e-11,
+        "source_density": 8.716227739569149e-11,
+        "column_mass": 8.078515634224459e-11
+      },
+      "iterations": 78,
+      "reference_iterations": 71
+    },
+    {
+      "CPU_seconds": 179.603896,
+      "reference_CPU_seconds": 287.47564,
+      "CPU_speedup": 1.600609153823701,
+      "relative_changes": {
+        "T": 1.9698941366996792e-08,
+        "Pgas": -1.4158058614377467e-07,
+        "source_density": -1.6272807012995827e-07,
+        "column_mass": -1.415795825021604e-07
+      },
+      "iterations": 45,
+      "reference_iterations": 43
+    }
+  ],
+  "build": {
+    "reference_source_sha256": "1b24ef14bc627c0b7c778564128f46dbdea8d771f56f8bb98dc5de4afeccfdab",
+    "patch_sha256": "8d82ef711e3d2840c4bab3665e69b72b1ecd2267b835110f273614f1e4a383a4",
+    "source_sha256": {
+      "BASICS.FOR": "1f8577e74764f07b53846213892eed4bc4d5820411b22dba090e1f2c513f1d13",
+      "IMPLIC.FOR": "c088399f5fd35a7c9a4e3661bb04d5343febe9ed5a2335929d90e468ec45325b",
+      "ARRAY1.FOR": "3b833427eb79a365d587d4a0e27d6b3e681bd875d276a2a3e7c73e0019ceb4c2",
+      "ATOMIC.FOR": "41337dd7c8864c20975277416a384c306269c88b53b91d793394c8fb1350acb2",
+      "ALIPAR.FOR": "f9b2feb4b09efa0568cd8555307deac575d6ec275d2e7850f73705f2fe71c7dd",
+      "MODELQ.FOR": "bb477387adfb9d0617743212d5fc382a6ed96e85b1fc67f7c9161bbd41c80672",
+      "ODFPAR.FOR": "ad6d6c46c0f156fa7d2fb55a324850d8c8855fe0f8219cfb410dedc0f7874331",
+      "tlusty208.f": "40de6d6fe623f349c2011cf6c36023859baa640eaabab80665b3ea274cf05f56",
+      "ITERAT.FOR": "f869f2489baa2c2c085a4407c867792e838077f5ffcbf6c05288e1ce1b3e24da"
+    },
+    "command": [
+      "gfortran",
+      "-O2",
+      "-g",
+      "-fno-automatic",
+      "-std=legacy",
+      "-fallow-argument-mismatch",
+      "-fcheck=bounds",
+      "-fbacktrace",
+      "-o",
+      "tlusty.exe",
+      "tlusty208.f"
+    ],
+    "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+    "physics_changed": false,
+    "precision": "REAL*8; double precision",
+    "executable_sha256": "48e9830ea0476c732ce7dcd033894fe87dca5abd428a028dd00990c0f0db465a"
+  }
+}
