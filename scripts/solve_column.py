@@ -38,6 +38,9 @@ from generate_nongrey_grid import composition, temperatures, sequence, temperatu
 from import_nongrey_grid import source_inputs, source_state
 
 INPUTS = ['fort.5', 'tas', 'ember-masses.dat', 'fort.15', 'fort.8']
+RETAINED_SOURCE_FILES = [*INPUTS, 'fort.7', 'fort.9', 'fort.9.gz', 'run.log', 'run.log.gz',
+                         'specification.json', 'specification.prepared.json', 'provenance.json',
+                         'physics.json', 'opacity.sha256']
 
 def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
 
@@ -218,8 +221,10 @@ def main():
     else:
         result['failure'] = ('CPU budget exhausted before another attempt (< 30 s left)' if budget_exhausted and attempts
                              else attempts[-1].get('failure') if attempts else 'no attempt within budget (< 30 CPU s)')
-    result['retained_sha256'] = {p.name: sha(p) for p in sorted(col.iterdir()) if p.is_file() and not p.is_symlink()
-                                 and p.name != 'result.json'}
+    # A caller may redirect our stdout into this directory and keep writing after
+    # result.json is closed. Hash the scientific record, not caller-owned logs.
+    result['retained_sha256'] = {name: sha(col / name) for name in RETAINED_SOURCE_FILES
+                                 if (col / name).is_file()}
     (col / 'result.json').write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps({k: result[k] for k in ['name', 'accepted', 'CPU_seconds']} | {'attempts': len(attempts)}))
 

@@ -73,6 +73,16 @@ class T(unittest.TestCase):
         c = column(self.tmp, [1e-2], [1e-2]); r = solve(c, '--total-cpu', '10')
         res = json.loads((c / 'result.json').read_text())
         self.assertFalse(res['accepted']); self.assertIn('budget', res['failure']); self.assertEqual(res['attempts'], [])
+    def test_caller_log_is_not_part_of_source_checksums(self):
+        c = column(self.tmp, [1e-2], [1e-2])
+        with (c / 'controller.log').open('w') as log:
+            subprocess.run([sys.executable, str(SOLVER), str(c), '--executable', str(FAKE),
+                            '--executable-sha256', SHA, '--total-cpu', '10'], stdout=log, check=True)
+            log.write('caller finished\n')
+        hashes = json.loads((c / 'result.json').read_text())['retained_sha256']
+        self.assertNotIn('controller.log', hashes)
+        for name in ('fort.5', 'tas', 'specification.json', 'provenance.json', 'opacity.sha256'):
+            self.assertEqual(hashes[name], hashlib.sha256((c / name).read_bytes()).hexdigest())
     def test_last_phase_is_damped(self):
         grow = [1e-2, 5e-3, 1e-1, 5.0, 50.0]     # undamped growth -> monitor stop
         for phases in (1, 2, 3, 4, 5):
