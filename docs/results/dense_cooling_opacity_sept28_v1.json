@@ -1,0 +1,67 @@
+{
+  "created_utc": "2026-09-28T13:04:01.772785+00:00",
+  "scope": "Matched200Myr cooling interval from4205K; source-slope radiative opacity varied by half and double, with selected maximum logR3.5. Actual source domains remain enforced.",
+  "relative_response": {
+    "half": {
+      "Teff_K": 0.00014440944236771003,
+      "luminosity_Lsun": 0.0006751603591061972,
+      "radius_Rsun": 4.8669422106240035e-05,
+      "He3_mass_g": -2.712375076541207e-06,
+      "H_mass_g": 2.9406669099785177e-08,
+      "He3_peak": -3.5491129328768523e-06,
+      "central_T_K": -9.730525176721017e-07,
+      "central_density_g_cm3": 8.21495643843484e-06,
+      "convective_mass_fraction": 0.0
+    },
+    "double": {
+      "Teff_K": -9.071671471361231e-05,
+      "luminosity_Lsun": -0.00043226410499619394,
+      "radius_Rsun": -3.473651625396368e-05,
+      "He3_mass_g": 8.724400272885902e-06,
+      "H_mass_g": -9.650069443534193e-08,
+      "He3_peak": 5.200474169742009e-06,
+      "central_T_K": -9.821593340619827e-06,
+      "central_density_g_cm3": -1.7545082107162102e-06,
+      "convective_mass_fraction": 0.0
+    }
+  },
+  "maximum_global_response": 0.0006751603591061972,
+  "fixed_state_checks": {
+    "successful_queries": 584,
+    "outside_source_queries_rejected": 18,
+    "old_values_unchanged": true,
+    "maximum_derivative_error": 3.503114509584293e-08
+  },
+  "selected_nominal": true,
+  "limitations": [
+    "Hydrogen composition is a source-slope approximation, not a direct pure-H source calculation.",
+    "The bound on stellar response applies to this200Myr interval; reassess as envelope transport changes.",
+    "The cold EOS reconstruction and metal proxy remain under physical assessment."
+  ],
+  "restart_note": "The12000K EOS and3400K atmosphere extensions preserve old cells; tiny trial steps left after source-bound failures were reset to0.2Myr, with all physical state, heat and acceptance checks retained.",
+  "nominal_endpoint": {
+    "years": 4008367575116.878,
+    "Teff_K": 4035.1394059010945,
+    "luminosity_Lsun": 0.0002891170249263237,
+    "nuclear_fraction": 0.12600037933437663,
+    "surface_X": 0.9908614031916871,
+    "convective_mass_fraction": 0.022138183304963307
+  },
+  "evidence": {
+    "nominal": {
+      "history": "out/dense-envelope-extension-sept28-v3/evolution/history.jsonl",
+      "history_sha256": "ee5b125d1c9d072536a658cbdc7cf538632a080304f5f9e274bb745c0cfd65bd",
+      "requested_age_reached": 1
+    },
+    "half": {
+      "history": "out/dense-envelope-extension-sept28-v3/half/evolution/history.jsonl",
+      "history_sha256": "902f55d409f172914034a73e6387ce1229f64e00bd4d972acf16593c27ab4613",
+      "requested_age_reached": 1
+    },
+    "double": {
+      "history": "out/dense-envelope-extension-sept28-v3/double/evolution/history.jsonl",
+      "history_sha256": "d806cbdcd83fc4ab3dcb60951d210dc92904d6f5c677ea46b1ff63de8f7e7b99",
+      "requested_age_reached": 1
+    }
+  }
+}

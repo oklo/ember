@@ -18,9 +18,13 @@ occupies an outer **2.214%** of the mass; surface hydrogen is **X = 0.9922**.
 A fresh calculation from Hayashi contraction reproduces the cooling luminosity
 within **0.08179%** and total He3 within **0.8907%**, using **5.361 CPU-hours**
 with the physics tables prepared. Both stop at the same dense-envelope EOS
-limit. A revised cold-envelope EOS is being assessed from initialization.
+limit. A trial with a revised cold-envelope EOS present from Hayashi
+initialization has continued to **4035 K**, with nuclear burning supplying
+**12.60%** of its luminosity and no late helium-3 runaway. The physical EOS
+approximation remains under assessment.
 [Current structure](docs/results/cooling_envelope_4235_sept27_v1.json),
 [fresh-track comparison](docs/results/fresh_hayashi_cooling_sept28_v1.json).
+[Cooling opacity comparison](docs/results/dense_cooling_opacity_sept28_v1.json).
 
 The selected physics includes deuterium and pp burning, explicit C12/C13/N14
 conversion with Solar Fusion III rates, plasma neutrino losses,

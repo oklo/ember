@@ -85,11 +85,19 @@ adjustment and cannot establish atmosphere-independent ignition.
 
 In the dense hydrogen envelope, the opacity approximation uses the measured
 hydrogen slope of the retained source while remaining within its temperature
-and density coverage. The selected domain extends through **log R = 2.5**
+and density coverage. The retained trajectory used **log R = 2.5**
 and **log T = 6.6**. Matched **20 Myr** half/double-opacity controls change
 the global quantities by at most **2.174e-5** relative. This supports the
 approximation locally without establishing opacity accuracy in radiative layers.
 [Opacity response](results/dense_envelope_hot_extension_sept27_v1.json).
+The revised-EOS trial extends the selected density range to **log R = 3.5**,
+while enforcing the actual opacity-source domain. Over a matched **200 Myr**
+cooling interval to **4035 K**, halving or doubling the dense radiative opacity
+changes luminosity by at most **0.06752%**, with unchanged convective mass.
+Nuclear burning supplies **12.60%** of the final luminosity. This supports the
+composition approximation in the current convective envelope; it does not
+establish its accuracy in a future radiative envelope.
+[Cooling opacity comparison](results/dense_cooling_opacity_sept28_v1.json).
 
 The [working paper](reports/2026-09-27/ember_status_and_future.pdf) is **30 pages**
 and currently plots the trajectory through **4560 K**. It retains the

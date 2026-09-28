@@ -105,6 +105,24 @@ int main(int argc,char**argv) {
   try{denser.eval(4.15e5, std::pow(10.,2.51)*std::pow(.415,3),hrich);}
   catch(const std::domain_error&){denser_rejected=true;}
   require(denser_rejected,"expanded approximation must retain its declared density limit");
+  RadiativeOpacity cooling(files,{data/"opacity/lifetime/hydrogen_response.dat",0,.16,1,3.5,6.6});
+  for(double logr:{2.51,2.9,3.49}) {
+    const double t=4.05e5,r=std::pow(10.,logr)*std::pow(t/1e6,3);
+    const auto state=cooling.eval(t,r,hrich);
+    const auto logk=[&](double tt,double rr){return std::log(cooling.eval(tt,rr,hrich).kappa);};
+    require(std::abs((logk(t*std::exp(e),r)-logk(t*std::exp(-e),r))/(2*e)-state.dlnk_dlnT)<2e-5,
+        "cooling-envelope temperature derivative mismatch");
+    require(std::abs((logk(t,r*std::exp(e))-logk(t,r*std::exp(-e)))/(2*e)-state.dlnk_dlnRho)<2e-5,
+        "cooling-envelope density derivative mismatch");
+    const auto range=cooling.density_range(t,hrich);
+    require(range && range->min<r && range->max>r,"cooling-envelope source range missing");
+    bool prior_rejected=false;
+    try{denser.eval(t,r,hrich);}catch(const std::domain_error&){prior_rejected=true;}
+    require(prior_rejected,"previous selected density bound must still reject denser states");
+  }
+  bool source_rejected=false;
+  try{cooling.eval(3.89e6,1.9e4,hrich);}catch(const std::domain_error&){source_rejected=true;}
+  require(source_rejected,"larger approximation domain must not bypass actual source support");
   bool old_rejected=false;try{opacity.eval(newT,newrho,hrich);}catch(const std::domain_error&){old_rejected=true;}
   require(old_rejected,"default approximation domain must remain unchanged");
   bool rejected=false;try{opacity.eval(T,100.,hrich);}catch(const std::domain_error&){rejected=true;}
