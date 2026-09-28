@@ -4,13 +4,13 @@
 
 Continue the same Hayashi-started star through hydrogen exhaustion and onto
 white-dwarf cooling, testing whether a helium-3 pulse occurs with a consistent
-atmosphere history. The current model has reached **4.006 Tyr** and **4401 K**.
+atmosphere history. The current model has reached **4.006 Tyr** and **4382 K**.
 Convection occupies **2.214%** of the mass in an outer envelope; hydrogen
-burning peaks at **m/M = 0.9704** and supplies **46.24%** of the surface
+burning peaks at **m/M = 0.9704** and supplies **43.22%** of the surface
 luminosity. Its power is declining and no helium-3 runaway has occurred.
 The first radiative region formed at **3.558 Tyr**. Read the
 [current handoff](../HANDOFF.md) before starting or changing jobs.
-[Current state and opacity response](results/dense_envelope_density_extension_sept27_v1.json).
+[Current state and atmosphere checks](results/cool_mixed_atmosphere_extension_sept27_v1.json).
 
 The common lifetime program includes initial deuterium, pp and explicit CN
 burning, plasma neutrino losses, composition-dependent EOS and opacity,
@@ -35,12 +35,14 @@ These controls do not establish convergence through a flash.
 [mixing limit](results/instantaneous_mixing_step_cap_sept27_v1.json).
 
 The atmosphere match remains at optical depth **100** throughout. Solved
-mixed hydrogen–helium columns cover **4400–4550 K** at **log g = 6.1–6.3**,
+mixed hydrogen–helium columns cover **4250–4550 K** at **log g = 6.1–6.3**,
 with hydrogen fractions **0.98–0.9955**. A continuous composition overlap
 carries the star through the former **0.5% helium** limit. Only cells with
 complete source support are interpolated; cooler columns are being calculated.
-The EOS supports the accepted state. A tested interior-opacity extension permits
-further cooling; completed atmosphere coverage currently ends at **4400 K**. Gas-only and helium-isotope approximations remain explicit. The separate flash histories retain their atmosphere
+The EOS supports the accepted state, but a neighboring trial state reaches a mask
+in a **4% metal** source table used by interpolation. The affected layer has
+**Z = 1.572e-30**; its hydrogen–helium tables still have support. A consistent
+trace-metal treatment is under review. Atmosphere coverage now reaches **4250 K**. Gas-only and helium-isotope approximations remain explicit. The separate flash histories retain their atmosphere
 adjustment and cannot establish atmosphere-independent ignition.
 [Cold source checks](results/cold_atmosphere_4400_sept27_v1.json).
 

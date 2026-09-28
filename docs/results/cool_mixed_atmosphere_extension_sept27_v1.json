@@ -1,0 +1,240 @@
+{
+  "purpose": "Continue cooling with solved mixed-H/He atmospheres at the same optical matching depth.",
+  "table_sha256": "bbdabc1b033816569c032474bbdccd344bbc03f28d8b267ff69ccc9de34a92fe",
+  "axes": [
+    [
+      0.98,
+      0.9955
+    ],
+    [
+      4250.0,
+      4400.0,
+      4550.0
+    ],
+    [
+      6.1,
+      6.3,
+      6.5
+    ]
+  ],
+  "supported_cells": [
+    {
+      "teff": [
+        4250.0,
+        4400.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4250.0,
+        4400.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": false
+    },
+    {
+      "teff": [
+        4400.0,
+        4550.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4400.0,
+        4550.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": false
+    }
+  ],
+  "preserved_warm_vertices": 8,
+  "independent_source_comparisons": [
+    {
+      "hydrogen": 0.98,
+      "source": "/Users/greglaughlin/Projects/ember/out/cold-column-depth-sept27-v4/h0.9800_t4325_g620_tau400",
+      "relative_error": {
+        "T": 0.0009887120884046752,
+        "Pgas": -0.009565114185581702
+      }
+    },
+    {
+      "hydrogen": 0.9955,
+      "source": "/Users/greglaughlin/Projects/ember/out/cold-column-depth-sept27-v5/h0.9955_t4325_g620_tau400",
+      "relative_error": {
+        "T": 0.0009941235735195786,
+        "Pgas": -0.009477404386370902
+      }
+    }
+  ],
+  "depth_comparisons": [
+    {
+      "coordinates": [
+        0.9955,
+        4250.0,
+        6.1
+      ],
+      "deeper_source": "/Users/greglaughlin/Projects/ember/out/cold-column-depth-sept27-v4/h0.9955_t4250_g610_tau400",
+      "shallower_source": "/Users/greglaughlin/Projects/ember/out/cold-mixed-forward-sept27-v2/h0.9955_t4250_g610",
+      "relative_response": {
+        "T": 2.0888581753197855e-08,
+        "Pgas": -4.4825646383639395e-07
+      }
+    },
+    {
+      "coordinates": [
+        0.9955,
+        4250.0,
+        6.3
+      ],
+      "deeper_source": "/Users/greglaughlin/Projects/ember/out/cold-column-depth-sept27-v3/h0.9955_t4250_g630_tau400",
+      "shallower_source": "/Users/greglaughlin/Projects/ember/out/cold-column-depth-sept27-v3/h0.9955_t4250_g630_tau250",
+      "relative_response": {
+        "T": -4.93826091130245e-11,
+        "Pgas": 1.6076739939308027e-10
+      }
+    }
+  ],
+  "native_checks": {
+    "created_utc": "2026-09-28T00:33:10.081564+00:00",
+    "selected_for_evolution": false,
+    "unchanged_old_queries": 30,
+    "new_supported_queries": 60,
+    "missing_queries_rejected": 6,
+    "maximum_derivative_error": 3.176289564699175e-09,
+    "temperature_join_checks": [
+      {
+        "log_g": 6.12,
+        "one_sided_derivative_error": {
+          "T": 1.2136285976183103e-08,
+          "P": 6.001126529042722e-08
+        },
+        "two_sided_value_change": {
+          "T": 1.5397513930537343e-07,
+          "P": 2.8608530142637534e-06
+        }
+      },
+      {
+        "log_g": 6.25,
+        "one_sided_derivative_error": {
+          "T": 6.850519040924041e-10,
+          "P": 8.624727421135958e-08
+        },
+        "two_sided_value_change": {
+          "T": 1.4435323847372672e-07,
+          "P": 2.787511350632599e-06
+        }
+      },
+      {
+        "log_g": 6.28,
+        "one_sided_derivative_error": {
+          "T": 1.047949327315223e-08,
+          "P": 7.417903802320325e-08
+        },
+        "two_sided_value_change": {
+          "T": 1.421328017503498e-07,
+          "P": 2.7705863567817346e-06
+        }
+      }
+    ],
+    "table_sha256": "bbdabc1b033816569c032474bbdccd344bbc03f28d8b267ff69ccc9de34a92fe",
+    "qualification": "Old warm values preserved, colder supported cells and4400K continuity checked. Source interpolation and depth comparisons in assembly.json. No new grain or helium-isotope physics."
+  },
+  "matching_tau": 100,
+  "selected_for_evolution": true,
+  "stellar_continuation": {
+    "run": "out/continuous-lifetime-sept27-v31",
+    "start_accepted": 17119,
+    "end_accepted": 17136,
+    "elapsed_years": 19109365.376953125,
+    "report": {
+      "requested_age_reached": 0,
+      "age_years": 4005534120585.9937,
+      "accepted_this_invocation": 17,
+      "accepted_total": 17136,
+      "rejected_total": 5155,
+      "stop_reason": "repeated step rejection: evolve_step: line search failed: residual did not decrease",
+      "cpu_seconds": 92.051302,
+      "wall_seconds": 49.94191275,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    },
+    "endpoint": {
+      "years": 4005534120585.9937,
+      "Teff_K": 4381.679336100578,
+      "radius_Rsun": 0.03866989484533971,
+      "luminosity_Lsun": 0.0004965946384581834,
+      "central_T_K": 6291354.509776676,
+      "central_density_g_cm3": 40811.92366153347,
+      "nuclear_fraction": 0.43220992679230935,
+      "H_mass_g": 7.438793835553415e+30,
+      "He3_mass_g": 8.11319055506619e+28,
+      "surface_X": 0.9932111175732126,
+      "surface_Z": 1.5715473421891458e-30,
+      "eps_nuc_peak_q": 0.9703952386387595,
+      "convective_mass_fraction": 0.022138183304963307
+    }
+  },
+  "next_limit": {
+    "kind": "EOS interpolation support",
+    "cell": 492,
+    "q": 0.9999959701452216,
+    "T_K": 82970.0029891499,
+    "rho": 1.1307891541643666,
+    "metal_fraction": 1.5715473421891458e-30,
+    "masked_source_Z": 0.04,
+    "masked_source_H": 0.9408,
+    "masked_logQ_max": 1.675,
+    "diagnostic": "512nodes and511midpoints plus0.1percent T/rho probes:5115queries, two nearby failures at this cell. All unperturbed queries pass. No mask changed."
+  },
+  "limitations": [
+    "Gas-only columns and helium-isotope approximation retained.",
+    "Interior source comparison errors approach1percent in pressure; this is not a claim of sub-per-mille atmosphere accuracy.",
+    "The same-age mesh comparison remains in progress. No helium3 runaway occurred over this continuation."
+  ],
+  "evidence": [
+    {
+      "path": "out/cold-mixed-grid-sept27-v2/assembly.json",
+      "sha256": "5588feff42ceeb4cd4d5d9d4c7f25c41a37713488bf947d4655dd0e683c9c99a"
+    },
+    {
+      "path": "out/cold-mixed-grid-sept27-v2/validation.json",
+      "sha256": "0de3681f2b57cf20f7cb946c7f5e681803f9840d50bce15bac8d87724920fd75"
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v31/PLAN.json",
+      "sha256": "d265e1b3da7a774a06c5cb24cf5de6856b8b1a490d541a238c2963b7dba3a29d"
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v31/evolution/report.json",
+      "sha256": "f2d62e541785f21fb1b65e361ff29aa2483953102be3b2c9175a86f5cc733f29"
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v31/evolution/final.checkpoint",
+      "sha256": "8203c407995479cc677b6a00b83bfc6ef1c1fc8941bf0b1a8ad00e8113f8d251"
+    },
+    {
+      "path": "out/cooling-eos-boundary-sept27-v1/summary.json",
+      "sha256": "83d688293ed8f07a38f077d571f48e8460e1c24c829bde63c7449280a0d4244a"
+    },
+    {
+      "path": "out/cooling-eos-boundary-sept27-v1/failed_details.jsonl",
+      "sha256": "7b8e345207828c785ee624a1806cb944bae96c192bcfce90e23f3f63eeb1b21e"
+    }
+  ]
+}
