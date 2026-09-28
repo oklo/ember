@@ -1,6 +1,6 @@
 # The 0.1-solar-mass calculation through remnant cooling
 
-## Current priority — September 27, 2026
+## Current priority — September 28, 2026
 
 Continue the same Hayashi-started star through hydrogen exhaustion and onto
 white-dwarf cooling, testing whether a helium-3 pulse occurs with a consistent
@@ -54,10 +54,13 @@ threads, including rejected trials at the next EOS limit. Direct comparisons
 against other dense-hydrogen models show substantial pressure and heat-response
 differences there. A suitable EOS treatment and a smooth transition are under
 assessment; no replacement has entered the accepted trajectory.
-Prepared columns also cover **4000–4200 K** at **log g = 6.3–6.5**.
-Independent **4100 K** columns agree with the interpolation to **0.08212%**
-in temperature and **1.496%** in pressure. Every previously supported value
-is retained. These cooler cells have not yet entered a stellar continuation.
+Prepared columns also cover **3800–4200 K** at **log g = 6.3–6.5**.
+Independent **3900 K** columns agree with the interpolation to **0.04550%**
+in temperature and **0.9102%** in pressure; the **4100 K** comparison gives
+**0.08212%** and **1.496%**. Every previously supported value is retained.
+The fresh EOS comparison uses the coverage through **4000 K**; the accepted
+cooling trajectory still uses its previous table through **4200 K**.
+[3800 K source checks](results/cold_atmosphere_3800_sept28_v1.json),
 [4000 K source checks](results/cold_atmosphere_4000_sept28_v1.json).
 Gas-only and helium-isotope approximations remain explicit. The separate flash histories retain their atmosphere
 adjustment and cannot establish atmosphere-independent ignition.

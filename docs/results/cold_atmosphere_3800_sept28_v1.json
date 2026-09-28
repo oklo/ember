@@ -1,0 +1,397 @@
+{
+  "created_utc": "2026-09-28T08:09:30.054989+00:00",
+  "axes": [
+    [
+      0.98,
+      0.9955
+    ],
+    [
+      3800.0,
+      4000.0,
+      4200.0,
+      4250.0,
+      4400.0,
+      4550.0
+    ],
+    [
+      6.1,
+      6.3,
+      6.5
+    ]
+  ],
+  "supported_cells": [
+    {
+      "teff": [
+        3800.0,
+        4000.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": false
+    },
+    {
+      "teff": [
+        3800.0,
+        4000.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4000.0,
+        4200.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": false
+    },
+    {
+      "teff": [
+        4000.0,
+        4200.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4200.0,
+        4250.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4200.0,
+        4250.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4250.0,
+        4400.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4250.0,
+        4400.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4400.0,
+        4550.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4400.0,
+        4550.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": false
+    }
+  ],
+  "held_out": [
+    {
+      "hydrogen": 0.98,
+      "source": "/Users/greglaughlin/Projects/ember/out/cold3900-holdout-sept28-v3/h0.9800_t3900_g640_heldout",
+      "relative_error": {
+        "T": 0.0004492947307961348,
+        "Pgas": -0.00901584696557478
+      }
+    },
+    {
+      "hydrogen": 0.9955,
+      "source": "/Users/greglaughlin/Projects/ember/out/cold3900-holdout-sept28-v3/h0.9955_t3900_g640_heldout",
+      "relative_error": {
+        "T": 0.000454952528505137,
+        "Pgas": -0.009102398697779401
+      }
+    }
+  ],
+  "depth_comparisons": [
+    {
+      "coordinates": [
+        0.98,
+        3800.0,
+        6.5
+      ],
+      "deeper_source": "/Users/greglaughlin/Projects/ember/out/cold3800-depth-sept28-v3/h0.9800_t3800_g650_depth2.0",
+      "shallower_source": "/Users/greglaughlin/Projects/ember/out/cold3800-depth-sept28-v3/h0.9800_t3800_g650_depth1.6",
+      "relative_response": {
+        "T": 7.815970093361102e-13,
+        "Pgas": -1.9241608306685976e-11
+      }
+    }
+  ],
+  "table_sha256": "06cd08175d2c270a3d1d08fcdff727ef80b29cea34d2831518216331300288ab",
+  "matching_tau": 100,
+  "selected_for_evolution": false,
+  "current_star_Teff_K": 4235.365820025632,
+  "new_atmosphere_table": "out/cold-mixed-grid-sept28-v1/mixed_tau100.dat",
+  "source_columns": [
+    {
+      "coordinates": [
+        0.98,
+        3800.0,
+        6.3
+      ],
+      "directory": "/Users/greglaughlin/Projects/ember/out/cold3800-corners-sept28-v3/h0.9800_t3800_g630",
+      "result_sha256": "3eae2b4eefa90d9ea117f224d1ff18f22bd3188614a605bec71ed5b0b5ecab4c",
+      "opacity_sha256": "4929f818edb775939a08f687a930c79da00585e297141fc0651e22d423f2efcb",
+      "diagnostics": {
+        "T": 5234.624746373324,
+        "Pgas": 1435644814.855448,
+        "source_density": 0.0059497233647815406,
+        "column_mass": 719.52670909499,
+        "flux_error": 0.00038388364463060043,
+        "correction": 8.34e-09,
+        "effective_flux_error": 0.00016641278348972222,
+        "hydrostatic_error": 2.0138566192429153e-07,
+        "chemical_density_error": 2.220446049250313e-16,
+        "iterations": 15,
+        "depths": 124,
+        "tau_bracket": [
+          89.35219527419581,
+          104.491908818819
+        ],
+        "optical_depth_range": [
+          1.4780496799243446e-06,
+          2500.4647991351353
+        ],
+        "column_mass_range": [
+          0.03640294000000001,
+          1797.183
+        ],
+        "temperature_range": [
+          1680.8418426087376,
+          6061.490137991873
+        ],
+        "density_range": [
+          1.0388116118784115e-06,
+          0.012399775573240412
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.98,
+        3800.0,
+        6.5
+      ],
+      "directory": "/Users/greglaughlin/Projects/ember/out/cold3800-depth-sept28-v3/h0.9800_t3800_g650_depth2.0",
+      "result_sha256": "4cad62e69144a775ba9163ce80fdbee858724337e72b0692de4beefc088c35e2",
+      "opacity_sha256": "4929f818edb775939a08f687a930c79da00585e297141fc0651e22d423f2efcb",
+      "diagnostics": {
+        "T": 5295.672743434186,
+        "Pgas": 2010359303.1173093,
+        "source_density": 0.008323636157176907,
+        "column_mass": 635.7312997256496,
+        "flux_error": 0.001138200135411549,
+        "correction": 9.21e-09,
+        "effective_flux_error": 0.00010057897727144827,
+        "hydrostatic_error": 2.0780226117622647e-07,
+        "chemical_density_error": 2.220446049250313e-16,
+        "iterations": 11,
+        "depths": 124,
+        "tau_bracket": [
+          92.5460308326909,
+          108.34948276473878
+        ],
+        "optical_depth_range": [
+          1.0015735359200579e-06,
+          1741.4772941450376
+        ],
+        "column_mass_range": [
+          0.0229687,
+          1417.4319999999996
+        ],
+        "temperature_range": [
+          1602.0427574684786,
+          6038.922184641389
+        ],
+        "density_range": [
+          1.1015675056700572e-06,
+          0.015815362139497764
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.9955,
+        3800.0,
+        6.3
+      ],
+      "directory": "/Users/greglaughlin/Projects/ember/out/cold3800-corners-sept28-v3/h0.9955_t3800_g630",
+      "result_sha256": "53c8b760275a1f884ba0d247155a6cbdf62f66eaaaa59bb3266cabbc62b90d91",
+      "opacity_sha256": "9f12f9af6c5068cdb23fd0d2c76e1339c32b9236ee9b23021181fea2c52dae0a",
+      "diagnostics": {
+        "T": 5231.799270821713,
+        "Pgas": 1425549963.7997715,
+        "source_density": 0.00586201456531942,
+        "column_mass": 714.4672996376764,
+        "flux_error": 0.0004798615848400356,
+        "correction": 9.62e-09,
+        "effective_flux_error": 0.00017389935691314307,
+        "hydrostatic_error": 2.013844790926811e-07,
+        "chemical_density_error": 2.220446049250313e-16,
+        "iterations": 14,
+        "depths": 124,
+        "tau_bracket": [
+          91.67613589112712,
+          107.17473972885323
+        ],
+        "optical_depth_range": [
+          1.4939261882060405e-06,
+          2548.544383622493
+        ],
+        "column_mass_range": [
+          0.03640294000000001,
+          1797.183
+        ],
+        "temperature_range": [
+          1685.8797765011223,
+          6062.93501334382
+        ],
+        "density_range": [
+          1.0248847728160546e-06,
+          0.01229090988549471
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.9955,
+        3800.0,
+        6.5
+      ],
+      "directory": "/Users/greglaughlin/Projects/ember/out/cold3800-corners-sept28-v1/h0.9955_t3800_g650",
+      "result_sha256": "0c39f4194b62bd2a098d3f626a67344e049ac88c63998cce25c39545c107f9f1",
+      "opacity_sha256": "9f12f9af6c5068cdb23fd0d2c76e1339c32b9236ee9b23021181fea2c52dae0a",
+      "diagnostics": {
+        "T": 5292.753964467012,
+        "Pgas": 1996196938.211405,
+        "source_density": 0.008201362861605058,
+        "column_mass": 631.2527676393851,
+        "flux_error": 0.00032068927878414755,
+        "correction": 7.16e-09,
+        "effective_flux_error": 0.00010725036020442502,
+        "hydrostatic_error": 2.0780169140977023e-07,
+        "chemical_density_error": 2.220446049250313e-16,
+        "iterations": 41,
+        "depths": 124,
+        "tau_bracket": [
+          94.96898452484508,
+          111.14672886424725
+        ],
+        "optical_depth_range": [
+          1.0154652642065666e-06,
+          813.157580376739
+        ],
+        "column_mass_range": [
+          0.0229687,
+          1133.946
+        ],
+        "temperature_range": [
+          1606.3331034526589,
+          5820.267588854983
+        ],
+        "density_range": [
+          1.0900859578767432e-06,
+          0.013121364302357226
+        ]
+      }
+    }
+  ],
+  "native_validation": {
+    "created_utc": "2026-09-28T08:10:02.312514+00:00",
+    "selected_for_evolution": false,
+    "unchanged_old_queries": 54,
+    "new_supported_queries": 100,
+    "missing_queries_rejected": 7,
+    "maximum_derivative_error": 5.5886451022502115e-09,
+    "temperature_join_checks": [
+      {
+        "log_g": 6.32,
+        "one_sided_derivative_error": {
+          "T": 8.739018952930167e-09,
+          "P": 1.0498962943472634e-07
+        },
+        "two_sided_value_change": {
+          "T": 7.007423352689557e-08,
+          "P": 1.6831811207040914e-06
+        }
+      },
+      {
+        "log_g": 6.4,
+        "one_sided_derivative_error": {
+          "T": 9.35341554209046e-09,
+          "P": 3.7428796062499714e-08
+        },
+        "two_sided_value_change": {
+          "T": 6.844121158700034e-08,
+          "P": 1.6514012640689302e-06
+        }
+      },
+      {
+        "log_g": 6.48,
+        "one_sided_derivative_error": {
+          "T": 7.810080637771222e-09,
+          "P": 1.364524315761173e-08
+        },
+        "two_sided_value_change": {
+          "T": 6.680819009119432e-08,
+          "P": 1.6196214185359992e-06
+        }
+      }
+    ],
+    "table_sha256": "06cd08175d2c270a3d1d08fcdff727ef80b29cea34d2831518216331300288ab",
+    "qualification": "Old warm values preserved, colder supported cells and4000K continuity checked. Source interpolation and depth comparisons in assembly.json. No new grain or helium-isotope physics."
+  },
+  "opacity_extension": "out/cold-mixed-opacity-sept28-v4",
+  "limitations": [
+    "Prepared support; the accepted 4235 K star remains at its dense-envelope EOS limit.",
+    "3800\u20134200 K is supported only at log g 6.3\u20136.5, H 0.98\u20130.9955.",
+    "Gas-only LTE plane-parallel source, trace metal mixture and helium-isotope approximation remain; no new condensate or irradiation physics."
+  ]
+}
