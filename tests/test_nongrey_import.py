@@ -23,6 +23,49 @@ from assemble_nongrey_grid import complete_cells
 
 
 class SourceAcceptance(unittest.TestCase):
+    def test_mixed_extension_preserves_values_and_disabled_cells(self):
+        from extend_mixed_atmosphere import render
+        axes = [[.98, .9955], [3600., 3800.], [6.3, 6.5]]
+        header = ['EMBER_COMPOSITION_ATMOSPHERE 4', 'hydrogen 2 .98 .9955',
+                  'helium3 1 0', 'log_teff 2 3.5563025007672873 3.5797835966168101',
+                  'log_g 2 6.3 6.5', 'data']
+        old = {key: f'1 {3.7+i*.001:.17g} {9+i*.01:.17g}'
+               for i, key in enumerate(itertools.product(*axes))}
+        cell = ((.98, .9955), (3600., 3800.), (6.3, 6.5))
+        additions = {(h, 3400., g): dict(T=4800., Pgas=1e9)
+                     for h, g in itertools.product(axes[0], axes[2])}
+        text, new_axes, cells = render(header, axes, old, {cell: 0}, additions)
+        lines = text.splitlines()
+        rows = dict(zip(itertools.product(*new_axes),
+                        lines[lines.index('data')+1:lines.index('cells')], strict=True))
+        self.assertTrue(all(rows[k] == value for k, value in old.items()))
+        self.assertEqual([c['supported'] for c in cells], [True, False])
+        self.assertIn('hydrogen 2 .98 .9955', lines)
+        self.assertEqual(new_axes[1], [3400., 3600., 3800.])
+
+    def test_mixed_extension_rejects_changed_old_interpolation_and_partial_cells(self):
+        from extend_mixed_atmosphere import render
+        axes = [[.98, .9955], [3600., 3800.], [6.3, 6.5]]
+        header = ['hydrogen 2 .98 .9955', 'log_teff 2 3.5563 3.5798',
+                  'log_g 2 6.3 6.5', 'data']
+        old = {k: '1 3.7 9' for k in itertools.product(*axes)}
+        cell = ((.98, .9955), (3600., 3800.), (6.3, 6.5))
+        state = dict(T=4800., Pgas=1e9)
+        with self.assertRaisesRegex(ValueError, 'interior coordinate'):
+            render(header, axes, old, {cell: 1}, {(.98, 3700., 6.3): state})
+        with self.assertRaisesRegex(ValueError, 'replace an existing'):
+            render(header, axes, old, {cell: 1}, {(.98, 3600., 6.3): state})
+        _, _, cells = render(header, axes, old, {cell: 1}, {(.98, 3400., 6.3): state})
+        self.assertEqual([c['supported'] for c in cells], [False, True])
+
+    def test_mixed_extension_rejects_unfinished_source(self):
+        from extend_mixed_atmosphere import load_column
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)
+            (path/'result.json').write_text(json.dumps(dict(accepted=False)))
+            with self.assertRaisesRegex(ValueError, 'unaccepted atmosphere'):
+                load_column(path, {})
+
     def test_depth_control_requires_verified_donor_and_deeper_boundary(self):
         from generate_nongrey_grid import main
         with tempfile.TemporaryDirectory() as temporary:

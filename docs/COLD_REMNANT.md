@@ -69,6 +69,13 @@ interpolation by at most **0.03541%** in temperature and **0.7639%** in pressure
 The addition preserves all previous values and is ready for a planned continuation;
 it is not selected in either the retained star or the running fresh candidate.
 [Higher-gravity checks](results/cold_atmosphere_high_gravity_sept28_v1.json).
+A further extension covers **3400–3600 K** at **log g = 6.3–6.7**.
+Independent **3500 K** columns differ from interpolation by at most
+**0.01710%** in temperature and **0.4924%** in pressure. Increasing the bottom
+column at **3500 K**, **log g = 6.6** changes matching pressure by **0.04344%**.
+The shared table assembler preserves existing values and interpolation intervals
+and checks the completed source columns before adding new support.
+[3400 K checks](results/cold_atmosphere_3400_sept28_v1.json).
 [3600 K source checks](results/cold_atmosphere_3600_sept28_v1.json),
 [3800 K source checks](results/cold_atmosphere_3800_sept28_v1.json),
 [4000 K source checks](results/cold_atmosphere_4000_sept28_v1.json).

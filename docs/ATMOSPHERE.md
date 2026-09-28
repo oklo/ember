@@ -338,10 +338,36 @@ within **3.983e-9**.
 
 These optional code paths pass the atmosphere tests, including cell masks,
 fixed-axis behavior, continuous joins, isotope limits, actual-composition
-density, source identity and preservation of preceding models. The live star
-still uses its existing boundary. Cooler high-gravity columns and gaps between
-the warm and cooling source regions are being filled before selecting the new
-connection. [Checks and limitations](results/mixed_helium_atmosphere_sept27_v1.json).
+density, source identity and preservation of preceding models. The continuous
+Hayashi-started calculation selects this connection, with the same matching
+depth throughout. Prepared columns extend to **3400 K**, with
+**log g = 6.3–6.7** over **3400–4000 K**. Independent **3500 K**
+columns differ from interpolation by at most **0.01710%** in temperature and
+**0.4924%** in pressure; a deeper column changes matching pressure by **0.04344%**.
+[3400 K coverage](results/cold_atmosphere_3400_sept28_v1.json).
+[Isotope checks](results/mixed_helium_atmosphere_sept27_v1.json),
+[cooler coverage](results/cold_atmosphere_high_gravity_sept28_v1.json).
+
+### Adding completed mixed-atmosphere columns
+
+```sh
+python scripts/extend_mixed_atmosphere.py plan.json output-directory
+```
+
+The JSON plan names `parent` (the directory containing `mixed_tau100.dat` and
+`assembly.json`), lists completed source directories under `sources`, and gives
+their `[XH, Teff_K, log_g]` coordinates in `required_coordinates`. It also lists
+separate completed columns under `independent_checks`. Paths are relative to
+the plan. The source directories contain their input specifications, numerical
+results and retained output hashes.
+
+The command rechecks new source convergence, flux, chemistry and matching depth,
+and verifies a common physical prescription. It retains existing values and
+permits new axis coordinates only outside old intervals, so extending a table
+does not change its existing interpolation. Missing corners and intentionally
+disabled cells remain unsupported. Independent columns measure the interpolation
+differences; they do not become table vertices. A native value/derivative check
+and a scientific assessment of those differences are still needed before use.
 
 
 ### Incomplete hydrogen-atmosphere extensions

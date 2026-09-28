@@ -1,0 +1,140 @@
+{
+  "created_utc": "2026-09-28T12:53:35.392342+00:00",
+  "ready_for_bounded_continuation": true,
+  "selected_for_evolution": false,
+  "table_sha256": "34a865aba394565fe1889bf925438877067d17cbb070075c2f89bbceb5fce248",
+  "new_coverage": {
+    "teff_K": [
+      3400,
+      3600
+    ],
+    "log_g": [
+      6.3,
+      6.7
+    ],
+    "hydrogen": [
+      0.98,
+      0.9955
+    ]
+  },
+  "native_checks": {
+    "unchanged_old_queries": 86,
+    "new_supported_queries": 180,
+    "missing_queries_rejected": 7,
+    "maximum_derivative_error": 6.095659088600769e-09
+  },
+  "independent_columns": [
+    {
+      "hydrogen": 0.98,
+      "teff_K": 3500.0,
+      "log_g": 6.4,
+      "source": "out/cold3400-atmospheres-sept28-v1/h0.9800_t3500_g640_heldout",
+      "relative_error": {
+        "T": 0.00016502728777778586,
+        "Pgas": -0.004924371716841458
+      }
+    },
+    {
+      "hydrogen": 0.98,
+      "teff_K": 3500.0,
+      "log_g": 6.6,
+      "source": "out/cold3400-atmospheres-sept28-v1/h0.9800_t3500_g660_heldout",
+      "relative_error": {
+        "T": 0.00010668594358098638,
+        "Pgas": -0.004529447034301359
+      }
+    },
+    {
+      "hydrogen": 0.9955,
+      "teff_K": 3500.0,
+      "log_g": 6.4,
+      "source": "out/cold3400-atmospheres-sept28-v1/h0.9955_t3500_g640_heldout",
+      "relative_error": {
+        "T": 0.0001709897720023612,
+        "Pgas": -0.004923819697060128
+      }
+    },
+    {
+      "hydrogen": 0.9955,
+      "teff_K": 3500.0,
+      "log_g": 6.6,
+      "source": "out/cold3400-atmospheres-sept28-v1/h0.9955_t3500_g660_heldout",
+      "relative_error": {
+        "T": 0.0001068121357907792,
+        "Pgas": -0.0047063409166866466
+      }
+    }
+  ],
+  "maximum_independent_relative_difference": {
+    "T": 0.0001709897720023612,
+    "Pgas": 0.004924371716841458
+  },
+  "deeper_column": {
+    "result": "out/cold3500-depth-sept28-v1/h0.9800_t3500_g660_heldout_depth1.6/result.json",
+    "result_sha256": "29fb7a601cf2041a704909e81158e8c7e54ec05381d2fe0dc48a0a8f672c749d",
+    "control_response": {
+      "T": -1.7027538671499087e-05,
+      "Pgas": -0.00043439891137220243
+    },
+    "control_pass": true,
+    "matching_tau": 100
+  },
+  "limitations": [
+    "Nineteen opacity density points; same-state pure-H comparison changes joining pressure by0.2875%.",
+    "Gas-only; He3 represented by number-ratio and gravity mapping, neglecting isotope-dependent opacity.",
+    "No source-H interior comparison yet; no stellar overlap comparison until table validation."
+  ],
+  "table": "out/cold-mixed-grid-sept28-v4/mixed_tau100.dat",
+  "assembler": "scripts/extend_mixed_atmosphere.py",
+  "assembler_sha256": "3264452cfb951147b82185584089f87b74c50108ab01226e45d61a81f966e3f6",
+  "source_columns": [
+    {
+      "coordinates": [
+        0.98,
+        3400.0,
+        6.3
+      ],
+      "result_sha256": "2590704f3134c368578e5fb4b8a7d4de0e89731ac1f6c63ae9b371ca4006ee3a"
+    },
+    {
+      "coordinates": [
+        0.98,
+        3400.0,
+        6.5
+      ],
+      "result_sha256": "9fd24c0c4e15821da1b27b89d69a83beb27f2198973a9a09c2bb36844f3fc0d6"
+    },
+    {
+      "coordinates": [
+        0.98,
+        3400.0,
+        6.7
+      ],
+      "result_sha256": "539b6772c74ef3f68fb3d10d206476b6cee47973b35ab30d5e9d59078e270ed0"
+    },
+    {
+      "coordinates": [
+        0.9955,
+        3400.0,
+        6.3
+      ],
+      "result_sha256": "1cc0a268885e7a2af8cf84f047c668985bb953f043f392ed99c25d83ad41895b"
+    },
+    {
+      "coordinates": [
+        0.9955,
+        3400.0,
+        6.5
+      ],
+      "result_sha256": "e911f608d32797e9acec7cf89038b7e1a23725d23589e95e1ba88fb518d965cc"
+    },
+    {
+      "coordinates": [
+        0.9955,
+        3400.0,
+        6.7
+      ],
+      "result_sha256": "1dc68678e5e80aa9acdeccafa0c0d7f2bbd6f13e10aca5430873bc3192317ab8"
+    }
+  ]
+}

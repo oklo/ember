@@ -33,13 +33,13 @@ transport are not selected.
 [configuration](docs/LIFETIME_DRIVER.md).
 
 Atmospheres join the interior at optical depth **100**. Prepared mixed H/He
-columns extend to **3600 K**, including **log g = 6.5–6.7** over **3600–4000 K**.
-Independent columns in this addition differ from interpolation by at most
-**0.03541%** in temperature and **0.7639%** in pressure. These are interpolation
+columns extend to **3400 K**, with **log g = 6.3–6.7** over **3400–4000 K**.
+Independent **3500 K** columns differ from interpolation by at most
+**0.01710%** in temperature and **0.4924%** in pressure. These are interpolation
 checks, not absolute atmosphere errors. Existing table values are preserved;
 the retained cooling star still uses its table through **4200 K**. The boundary
 is gas-only, with an explicit helium-isotope approximation.
-[Atmosphere coverage and checks](docs/results/cold_atmosphere_high_gravity_sept28_v1.json).
+[Atmosphere coverage and checks](docs/results/cold_atmosphere_3400_sept28_v1.json).
 
 The solver uses zone threads, nearby EOS and collision responses, a structure
 predictor and local burning feedback. Every accepted interval retains full-step/
