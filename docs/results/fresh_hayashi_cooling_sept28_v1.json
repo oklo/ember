@@ -1,0 +1,94 @@
+{
+  "created_utc": "2026-09-28T10:55:40.537203+00:00",
+  "reference_stop": "Original EOS source mask at T=74990 K, rho=1.573 g/cm3, X=.98, He3=0, Z=.02; later Newton failures followed step collapse.",
+  "comparison_scope": "Fresh Hayashi reference versus retained trajectory at nearly identical effective temperature; no interpolation, so the 0.1336 K endpoint difference remains.",
+  "reference": {
+    "years": 4007392863550.196,
+    "Teff_K": 4235.232193257173,
+    "luminosity_Lsun": 0.00038559962434000177,
+    "radius_Rsun": 0.03647262417752201,
+    "central_T_K": 6114757.198552256,
+    "central_density_g_cm3": 41463.58984872812,
+    "H_mass_g": 7.412124101207718e+30,
+    "He3_mass_g": 8.152346033797378e+28,
+    "surface_X": 0.991920788664665,
+    "nuclear_fraction": 0.2515937511670161,
+    "convective_mass_fraction": 0.022138183304963307
+  },
+  "retained": {
+    "years": 4005683203205.6333,
+    "Teff_K": 4235.365820025632,
+    "luminosity_Lsun": 0.00038591525095534507,
+    "radius_Rsun": 0.036485245830920214,
+    "central_T_K": 6096357.883684263,
+    "central_density_g_cm3": 41479.686065036134,
+    "H_mass_g": 7.43763021558037e+30,
+    "He3_mass_g": 8.225612595361626e+28,
+    "surface_X": 0.9921525611468777,
+    "nuclear_fraction": 0.25501561031603287,
+    "convective_mass_fraction": 0.022138183304963307
+  },
+  "relative_difference": {
+    "years": 0.00042680867603173134,
+    "Teff_K": -3.1550230638277554e-05,
+    "luminosity_Lsun": -0.0008178651000756432,
+    "radius_Rsun": -0.000345938559841219,
+    "central_T_K": 0.0030180831275072872,
+    "central_density_g_cm3": -0.00038805058174196105,
+    "H_mass_g": -0.003429333488403574,
+    "He3_mass_g": -0.008907125240199432,
+    "surface_X": -0.0002336056885694493,
+    "nuclear_fraction": -0.013418234063303669,
+    "convective_mass_fraction": 0.0
+  },
+  "segments": [
+    {
+      "report": "out/cold-eos-stellar-control-sept28-v1/reference/evolution/report.json",
+      "age_years": 15084126.662201623,
+      "CPU_seconds": 200.76608,
+      "driver_wall_seconds": 110.314877,
+      "stop_reason": "CPU budget"
+    },
+    {
+      "report": "out/cold-eos-stellar-control-sept28-v2/reference/evolution/report.json",
+      "age_years": 1000000000,
+      "CPU_seconds": 677.998811,
+      "driver_wall_seconds": 265.33027175,
+      "stop_reason": "requested age"
+    },
+    {
+      "report": "out/cold-eos-stellar-control-sept28-v4/reference/evolution/report.json",
+      "age_years": 3300000000000,
+      "CPU_seconds": 1131.546498,
+      "driver_wall_seconds": 1461.86886625,
+      "stop_reason": "requested age"
+    },
+    {
+      "report": "out/cold-eos-stellar-control-sept28-v5/reference/evolution/report.json",
+      "age_years": 3620348691184.5273,
+      "CPU_seconds": 5000.872655,
+      "driver_wall_seconds": 5936.390257708,
+      "stop_reason": "CPU budget"
+    },
+    {
+      "report": "out/cold-eos-stellar-control-sept28-v6/reference/evolution/report.json",
+      "age_years": 3881261189923.691,
+      "CPU_seconds": 9003.839659,
+      "driver_wall_seconds": 10412.736647292,
+      "stop_reason": "CPU budget"
+    },
+    {
+      "report": "out/cold-eos-stellar-control-sept28-v7/reference/evolution/report.json",
+      "age_years": 4007392863550.196,
+      "CPU_seconds": 3283.131633,
+      "driver_wall_seconds": 2986.93213075,
+      "stop_reason": "repeated step rejection: evolve_step: Newton iteration limit reached"
+    }
+  ],
+  "total_driver_CPU_seconds": 19298.155336,
+  "total_driver_wall_seconds": 21173.57305075,
+  "timing_qualification": "Sum of all reference invocations including startup, retries and CPU-budget restarts. Four zone threads, concurrent candidate and source jobs. Driver wall and external supervisors did not always use equivalent elapsed clocks; no dedicated uninterrupted-machine wall estimate is inferred.",
+  "scope": "Fresh Hayashi-started reference through its dense-envelope EOS limit. All invocations retain the physical state and accounting; arithmetic/numerical executable updates and overlap-preserving atmosphere extensions are recorded locally. This is not a completed ultracold track or a dedicated-machine timing benchmark.",
+  "reference_history_sha256": "c1a17418147195f62cdd6aa0064db8b7faf351659f9518e97f5dfec413a888bf",
+  "reference_checkpoint_sha256": "91634bb54e356fb1371989a61502fe152833bac6d5490f7a7fcfaea6af504fe1"
+}

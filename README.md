@@ -19,14 +19,23 @@ radiative. The convective envelope now contains **2.214%** of the mass.
 Shell burning supplies **25.50%** of the luminosity and is declining;
 no helium-3 runaway has occurred in this continuous calculation. The atmosphere
 matching depth remains at optical depth 100. A continuous composition overlap now includes mixed hydrogen–helium atmospheres.
-Solved mixed-atmosphere cells are available down to **3800 K** at the current
-gravity; the selected continuation uses the table through **4200 K**. The latest continuation
+Solved mixed-atmosphere cells are available down to **3600 K** at **log g = 6.3–6.5**;
+the retained cooling trajectory uses the table through **4200 K**. The latest continuation
 advanced **20.48 Myr** in **34.06 seconds**, including failed trials at a dense-envelope
 EOS limit. A dense-hydrogen EOS candidate is being tested from the same Hayashi start alongside a reference calculation; it has not replaced the accepted cooling trajectory. The paper currently shows the track through **4560 K** and
 accounts for **31.30 CPU-hours** in that plotted sequence.
-[3800 K atmosphere checks](docs/results/cold_atmosphere_3800_sept28_v1.json),
+[3600 K atmosphere checks](docs/results/cold_atmosphere_3600_sept28_v1.json),
 [Current model and envelope checks](docs/results/cooling_envelope_4235_sept27_v1.json),
 [plotted trajectory](docs/reports/2026-09-27/pms_figure_inputs.json).
+
+A fresh Hayashi-started reference independently reaches **4235 K**, with no
+late helium-3 flash and luminosity within **0.08179%** of the retained track
+at nearly the same temperature. Total He3 differs by **0.8907%**. It uses
+**5.361 CPU-hours**, including initialization and rejected trials, with the
+physics tables already prepared. Both reach the same dense-envelope EOS limit.
+A revised cold-envelope treatment is being tested from initialization; its
+physical approximations remain under assessment.
+[Fresh-track comparison and accounting](docs/results/fresh_hayashi_cooling_sept28_v1.json).
 
 The selected physics includes initial deuterium burning, pp reactions and
 explicit C12/C13/N14 conversion with Solar Fusion III rates, plasma neutrino

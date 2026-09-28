@@ -54,12 +54,16 @@ threads, including rejected trials at the next EOS limit. Direct comparisons
 against other dense-hydrogen models show substantial pressure and heat-response
 differences there. A suitable EOS treatment and a smooth transition are under
 assessment; no replacement has entered the accepted trajectory.
-Prepared columns also cover **3800–4200 K** at **log g = 6.3–6.5**.
+Prepared columns also cover **3600–4200 K** at **log g = 6.3–6.5**.
 Independent **3900 K** columns agree with the interpolation to **0.04550%**
 in temperature and **0.9102%** in pressure; the **4100 K** comparison gives
 **0.08212%** and **1.496%**. Every previously supported value is retained.
-The fresh EOS comparison uses the coverage through **4000 K**; the accepted
+The fresh EOS comparison uses the coverage through **3600 K**; the accepted
 cooling trajectory still uses its previous table through **4200 K**.
+Independent **3700 K** checks differ by at most **0.02755%** in temperature
+and **0.5884%** in pressure. A deeper **3600 K** column changes matching
+pressure by **0.03360%**.
+[3600 K source checks](results/cold_atmosphere_3600_sept28_v1.json),
 [3800 K source checks](results/cold_atmosphere_3800_sept28_v1.json),
 [4000 K source checks](results/cold_atmosphere_4000_sept28_v1.json).
 Gas-only and helium-isotope approximations remain explicit. The separate flash histories retain their atmosphere
@@ -79,6 +83,15 @@ and currently plots the trajectory through **4560 K**. It retains the
 physical qualifications, model comparisons and lifetime timeline. The
 [completed review](research/fable/ADVERSARIAL_REVIEW_20260926.md) records
 remaining code, reproduction and physics limitations.
+
+A fresh reference from Hayashi contraction reproduces the **4235 K** cooling
+state without a late helium-3 flash: luminosity differs by **0.08179%** and
+total He3 by **0.8907%** at nearly identical effective temperature. Its summed
+work is **5.361 CPU-hours**, including initialization, rejected steps and
+budget restarts, with source tables already prepared. The same EOS coverage
+limit stops it. The cold-EOS trial has not extended that frontier; its
+transition and source approximations are being assessed in a fresh calculation.
+[Fresh-track evidence](results/fresh_hayashi_cooling_sept28_v1.json).
 
 ## Objective and next milestones
 
