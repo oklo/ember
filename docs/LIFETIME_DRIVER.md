@@ -10,8 +10,16 @@ calculation is not yet established.
 
 ```
 ember-evolve --lifetime CONFIG TARGET_YEARS NEW_OUTPUT_DIRECTORY \
-  [--restart CHECKPOINT] [--max-steps N] [--cpu-seconds S]
+  [--restart CHECKPOINT] [--restart-step-years Y] [--max-steps N] [--cpu-seconds S]
 ```
+
+A restart normally retains the saved next trial step. Optional
+`--restart-step-years Y` changes only that trial interval, capped by
+`maximum_step_years`; the saved structure, age and composition are unchanged.
+This is useful after an input-coverage stop has driven the saved interval too
+small for a well-conditioned thermal solve. Every trial still passes the normal
+time-error and conservation checks. The requested and effective intervals are
+recorded in `execution.json`.
 
 The configuration is a text file containing one `key "value"` per line.
 Version 1 requires the following keys; paths are relative to the configuration:

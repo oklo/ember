@@ -47,6 +47,28 @@ def main():
         assert history(work / "full") == history(work / "prefix") + history(work / "resumed")[1:]
         assert history(work / "full")[-1]["years"] == 10000
 
+        # An explicit restart interval changes the controller, not the saved star.
+        restart = ("--restart", str(work / "prefix/final.checkpoint"))
+        run("reset-step", (*restart, "--restart-step-years", "100"))
+        execution = json.loads((work / "reset-step/execution.json").read_text())
+        assert execution["restart_step_years"] == 100
+        assert execution["effective_initial_step_years"] == 100
+        prefix_lines = (work / "prefix/final.checkpoint").read_text().splitlines()
+        reset_lines = (work / "reset-step/seed.checkpoint").read_text().splitlines()
+        differences = [(a, b) for a, b in zip(prefix_lines, reset_lines) if a != b]
+        assert len(differences) == 1
+        saved_fields, reset_fields = (line.split() for line in differences[0])
+        assert saved_fields[:3] == reset_fields[:3] and saved_fields[4:] == reset_fields[4:]
+        assert float(reset_fields[3]) == 100 * 31557600
+        endpoint = history(work / "reset-step")[-1]
+        assert endpoint["years"] == 10000
+        for key in ("luminosity_Lsun", "radius_Rsun", "Teff_K", "H_mass_g", "He3_mass_g"):
+            assert abs(endpoint[key] / history(work / "full")[-1][key] - 1) < 1e-4
+        rejected = run("step-without-restart", ("--restart-step-years", "100"), expected=1)
+        assert "requires --restart" in rejected.stderr
+        for index, value in enumerate(("0", "-1", "nan", "inf")):
+            run(f"invalid-restart-step-{index}", (*restart, "--restart-step-years", value), expected=1)
+
         # Rename the configuration, all family manifests and every payload;
         # preserve only their content and logical roles. Hard links avoid
         # copying the large material dataset and are never modified below.

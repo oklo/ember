@@ -6,6 +6,8 @@
 #include <algorithm>
 #include <cmath>
 #include <stdexcept>
+#include <sstream>
+#include <iomanip>
 
 namespace ember {
 namespace {
@@ -116,6 +118,7 @@ RelaxationResult relax(const Model& initial, const Physics& p, const Atmosphere&
   }
   RelaxationResult result{};
   result.model = initial;
+  std::string last_rejection = "none";
   for (;;) {
     const auto system = assemble(result.model, p, atmosphere, Lunit, dt, prev, true,options.zone_threads);
     result.residual = system.norm;
@@ -138,7 +141,13 @@ RelaxationResult relax(const Model& initial, const Physics& p, const Atmosphere&
       return result;
     }
     if (result.iterations >= options.max_iterations) {
-      result.message = "Newton iteration limit reached";
+      std::ostringstream message;
+      message << std::setprecision(4) << "Newton iteration limit reached: residual="
+              << result.residual << ", correction=" << result.correction;
+      if (!result.history.empty())
+        message << ", last damping=" << result.history.back().damping;
+      message << ", last rejected trial: " << last_rejection;
+      result.message = message.str();
       return result;
     }
     double damping = 1.0;
@@ -148,7 +157,7 @@ RelaxationResult relax(const Model& initial, const Physics& p, const Atmosphere&
     if (surface_dL < 0.0)
       damping = std::min(damping, -0.8 * result.model.y.back().L / surface_dL);
     bool accepted = false;
-    std::string last_rejection = "residual did not decrease";
+    last_rejection = "none";
     for (std::size_t trial = 0; trial < options.max_backtracks; ++trial) {
       Model candidate = result.model;
       for (std::size_t i = 0; i < candidate.size(); ++i)

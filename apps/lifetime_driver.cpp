@@ -64,7 +64,7 @@ bool has_D(const Model& m) {return std::any_of(m.comp.begin(),m.comp.end(),[](co
 int lifetime_main(int argc,char** argv) {
   if(argc<5) {
     std::cerr<<"usage: ember-evolve --lifetime CONFIG TARGET_YEARS NEW_OUTPUT_DIRECTORY"
-      " [--restart CHECKPOINT] [--max-steps N] [--cpu-seconds S]\n"
+      " [--restart CHECKPOINT] [--restart-step-years Y] [--max-steps N] [--cpu-seconds S]\n"
       "Common Hayashi-to-remnant driver under integration. Source-domain failures stop; no atmosphere fallback.\n";
     return 2;
   }
@@ -72,17 +72,20 @@ int lifetime_main(int argc,char** argv) {
     const auto wall_start=std::chrono::steady_clock::now();const auto cpu_start=std::clock();
     const fs::path config=fs::canonical(argv[2]),work=argv[4];const double target=positive(argv[3])*year;
     if(fs::exists(work))throw std::invalid_argument("lifetime output directory already exists");
-    std::string restart;std::size_t maximum_steps=500;double maximum_cpu=240;
+    std::string restart;std::size_t maximum_steps=500;double maximum_cpu=240,restart_step_years=0;
     for(int i=5;i<argc;i+=2) {
       if(i+1>=argc)throw std::invalid_argument("lifetime option needs a value");
       const std::string key=argv[i];
       if(key=="--restart" && restart.empty())restart=argv[i+1];
+      else if(key=="--restart-step-years" && restart_step_years==0)restart_step_years=positive(argv[i+1]);
       else if(key=="--max-steps") {
         const double value=positive(argv[i+1]);if(value>100000 || std::floor(value)!=value)throw std::invalid_argument("invalid step budget");
         maximum_steps=static_cast<std::size_t>(value);
       }else if(key=="--cpu-seconds")maximum_cpu=positive(argv[i+1]);
       else throw std::invalid_argument("unknown lifetime argument: "+key);
     }
+    if(restart_step_years>0 && restart.empty())
+      throw std::invalid_argument("--restart-step-years requires --restart");
     Settings cfg(config);
     if(cfg.get("version")!="1")throw std::invalid_argument("unsupported lifetime configuration version");
     const auto path=[&](const char* key){return fs::canonical(config.parent_path()/cfg.get(key));};
@@ -313,6 +316,7 @@ int lifetime_main(int argc,char** argv) {
       state=read_checkpoint(restart,points,mass,initial,selections,abundance_tolerance,identities,
                             LuminosityGrid::volume_faces,version==6);
       if(state.model.age>=target)throw std::invalid_argument("target must exceed the saved age");
+      if(restart_step_years>0)state.next_dt=std::min(restart_step_years,maximum_dt/year)*year;
     }
     VariableMetalHelmholtzEos table_eos(eos_path,HelmholtzTableEos::Mixture::allow_documented_proxy,
         low_metal_interpolation=="quadratic"?VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic
@@ -411,6 +415,8 @@ int lifetime_main(int argc,char** argv) {
     std::ofstream execution(work/"execution.json");execution<<std::setprecision(17)
       <<"{\"configuration_path\":"<<std::quoted(config.string())<<",\"configuration_fnv1a\":"<<std::quoted(file_identity(config))
       <<",\"restart_path\":"<<std::quoted(restart)<<",\"zone_threads\":"<<threads
+      <<",\"restart_step_years\":"<<restart_step_years
+      <<",\"effective_initial_step_years\":"<<state.next_dt/year
       <<",\"initial_step_years\":"<<dt/year<<",\"maximum_step_years\":"<<maximum_dt/year
       <<",\"maximum_steps\":"<<maximum_steps<<",\"maximum_cpu_seconds\":"<<maximum_cpu<<"}\n";
     std::ofstream history(work/"history.jsonl"),attempts(work/"attempts.jsonl");history<<std::setprecision(17);attempts<<std::setprecision(17);
