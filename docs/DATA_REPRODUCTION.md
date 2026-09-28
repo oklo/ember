@@ -28,7 +28,7 @@ receipt; do not silently replace a pinned hash to make an import pass.
 | TOPS opacity compositions | `fetch_tops_composition.py`, `import_tops_composition.py`, `import_tops_mixtures.py` | `audit_opacity_extension.py`, `audit_tops_heldout.py`; [opacity README](../data/opacity/README.md) |
 | AESOPUS low-temperature opacity | `archive_aesopus_mixtures.py`, `import_aesopus.py`, `import_aesopus_mixtures.py` | Original source hashes and unchanged cells; [opacity README](../data/opacity/README.md) |
 | Ioffe conduction | `import_conduction.py`; direct-source reference via `conduction_reference_probe.f90`, `generate_conduction_reference.py` | [conduction README](../data/conduction/README.md), [CONDUCTION.md](CONDUCTION.md) |
-| Non-grey gas atmospheres | `prepare_nongrey_sources.py`, `generate_nongrey_grid.py`, `archive_nongrey_grid.py`, `import_nongrey_grid.py`, `run_nongrey_plan.py`, `assemble_nongrey_grid.py` | `audit_nongrey_family.py`, source/chemistry/flux checks; [NONGREY.md](NONGREY.md) |
+| Non-grey gas atmospheres | `prepare_nongrey_sources.py`, `generate_nongrey_grid.py`, `solve_column.py`, `archive_nongrey_grid.py`, `import_nongrey_grid.py`, `run_nongrey_plan.py`, `assemble_nongrey_grid.py` | `audit_nongrey_family.py`, source/chemistry/flux checks; [NONGREY.md](NONGREY.md) |
 | Condensate experiments | `prepare_fastchem_sources.py`, `prepare_condensate_sources.py`, `generate_condensate_opacity.py`, `run_condensate_atmosphere.py`, `generate_condensate_grid.py`, archive/collect scripts | `audit_condensate_atmosphere.py`, `audit_condensate_material.py`, `audit_condensate_interpolation.py`; [FORWARD_EVOLUTION.md](FORWARD_EVOLUTION.md) |
 
 All script names in the table are under `scripts/`. The source distributions keep
@@ -127,9 +127,26 @@ element metadata and grid specifications consumed by these scripts. Preparation
 downloads and checks the external source packages and line lists. Do not use
 `--initial-models` with an absent local archive. From-scratch starting structures
 can require additional initialization work; the existing continuation/CONREF
-tools help generate initial guesses, and canonical replay supplies acceptance.
-This is a reproducible pipeline, not a promise that every cold source cell will
-converge without further work.
+tools help generate initial guesses. Each final atmosphere must pass the source,
+flux, hydrostatic and chemical-equilibrium checks.
+
+For an individual prepared column, `solve_column.py` tries Newton iteration and
+falls back to damped iteration from the best complete saved structure. It changes
+numerical controls while retaining the physical inputs and acceptance checks:
+
+```sh
+python3 scripts/solve_column.py /tmp/prepared-column \
+  --executable /path/to/tlusty.exe --executable-sha256 SOURCE_SHA256 \
+  --attempt-cpu 600 --total-cpu 2000 --chmax 1e-9
+```
+
+Use the executable checksum recorded in the prepared provenance.
+The directory must contain `specification.json`, `provenance.json`, the TLUSTY
+input files and `opacity.sha256`. Existing attempts are preserved: an interrupted
+column must be inspected before preparing a new run. `result.json` records all
+attempts, their CPU time and the final acceptance decision. Accepted columns can
+be checked and assembled with `extend_mixed_atmosphere.py`; failed attempts still
+count toward the reported cost. [Measured comparisons](results/atmosphere_solver_sept28_v1.json).
 
 Archive and import only a complete, independently accepted family following
 [NONGREY.md](NONGREY.md). The condensate pipeline is an unfinished experiment:

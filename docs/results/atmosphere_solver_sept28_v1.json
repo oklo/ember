@@ -1,0 +1,100 @@
+{
+  "scope": "Adaptive Newton and damped iteration for prepared TLUSTY columns; physical source inputs and final import checks unchanged.",
+  "comparison_scope": "Three completed cold-column replay comparisons, including all attempted phases. These are not a completed survey of all difficult or failed columns. Machine load varied.",
+  "replay_comparisons": [
+    {
+      "Teff_K": 3400.0,
+      "log_g": 6.3,
+      "hydrogen": 0.98,
+      "original_CPU_seconds": 441.91846,
+      "hybrid_CPU_seconds": 166.281845,
+      "CPU_speedup": 2.657647081074906,
+      "original_iterations": 71,
+      "hybrid_iterations": 22,
+      "relative_matching_state_changes": {
+        "T": -1.3036682844358438e-11,
+        "Pgas": 1.8594903394841822e-11,
+        "source_density": 3.7408298680929875e-11,
+        "column_mass": 1.859135068116302e-11
+      },
+      "receipt_sha256": "f37bd3a25fe2435e83fb4f6491273bd76fe673c025545311faa6a8f5829d170b"
+    },
+    {
+      "Teff_K": 3600.0,
+      "log_g": 6.7,
+      "hydrogen": 0.98,
+      "original_CPU_seconds": 396.389573,
+      "hybrid_CPU_seconds": 163.862031,
+      "CPU_speedup": 2.4190446717946514,
+      "original_iterations": 61,
+      "hybrid_iterations": 19,
+      "relative_matching_state_changes": {
+        "T": -3.821953748039952e-06,
+        "Pgas": 9.106385281887341e-05,
+        "source_density": 9.96125596286479e-05,
+        "column_mass": 9.106385277712903e-05
+      },
+      "receipt_sha256": "fe3b83b501b045c4f1e58bf6bb74796fb10efd08c0920dc1c186841d26adbfd5"
+    },
+    {
+      "Teff_K": 4200.0,
+      "log_g": 6.5,
+      "hydrogen": 0.9955,
+      "original_CPU_seconds": 392.86436699999996,
+      "hybrid_CPU_seconds": 112.45729399999999,
+      "CPU_speedup": 3.4934538528021135,
+      "original_iterations": 72,
+      "hybrid_iterations": 16,
+      "relative_matching_state_changes": {
+        "T": -5.323019802716544e-11,
+        "Pgas": 1.2362484369532467e-09,
+        "source_density": 1.4279724069865551e-09,
+        "column_mass": 1.2362439960611482e-09
+      },
+      "receipt_sha256": "e27288d078e660ee7f12c3adb6f796d2d5ee42764bc6fc400a5994d32e588076"
+    }
+  ],
+  "packaged_runner_import_checks": [
+    {
+      "coordinates": [
+        0.9955,
+        4200.0,
+        6.5
+      ],
+      "reimport_accepted": true,
+      "unchanged_physical_identity": true,
+      "CPU_seconds": 112.06891999999999,
+      "original_CPU_seconds": 392.86436699999996,
+      "relative_matching_state_changes": {
+        "T": -5.323019802716544e-11,
+        "Pgas": 1.2362484369532467e-09,
+        "source_density": 1.4279724069865551e-09
+      },
+      "result_sha256": "b4f1d8fabb7a555a7d790d8967475e243a36a37ab1949148e637c22bb5e9cd89"
+    },
+    {
+      "coordinates": [
+        0.98,
+        4200.0,
+        6.5
+      ],
+      "reimport_accepted": true,
+      "unchanged_physical_identity": true,
+      "CPU_seconds": 47.759466,
+      "original_CPU_seconds": 217.36905,
+      "relative_matching_state_changes": {
+        "T": -1.8273382806910377e-11,
+        "Pgas": 4.206093251468701e-10,
+        "source_density": 4.858069502233775e-10
+      },
+      "result_sha256": "9767f38ac88aa922d9c02fc918bc6427f88bef5ce3150ac9c84c702bbafa5e86"
+    }
+  ],
+  "limitations": [
+    "Some poor starting guesses still require continuation from neighbouring atmospheres.",
+    "Maximum matching-pressure difference in these three replays is 0.009106 percent.",
+    "No reduction of frequency or depth resolution is selected."
+  ],
+  "focused_tests": 7,
+  "existing_import_tests": 39
+}
