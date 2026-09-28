@@ -1,118 +1,73 @@
 # The 0.1-solar-mass calculation through remnant cooling
 
-## Current priority — September 28, 2026
+## Current calculation — September 28, 2026
 
-Continue the same Hayashi-started star through hydrogen exhaustion and onto
-white-dwarf cooling, testing whether a helium-3 pulse occurs with a consistent
-atmosphere history. The current model has reached **4.006 Tyr** and **4235 K**.
-Convection occupies **2.214%** of the mass in an outer envelope; hydrogen
-burning peaks at **m/M = 0.9693** and supplies **25.50%** of the surface
-luminosity. Its power is declining and no helium-3 runaway has occurred.
-The first radiative region formed at **3.558 Tyr**. Read the
-[current handoff](../HANDOFF.md) before starting or changing jobs.
-[Current state and envelope checks](results/cooling_envelope_4235_sept27_v1.json).
+The common lifetime program follows Hayashi contraction, main-sequence burning
+and helium-white-dwarf cooling. The reference reaches **4235 K** without a late
+helium-3 runaway. A fresh calculation reproduces its luminosity to **0.08179%**
+and total He3 to **0.8907%**, using **5.361 CPU-hours** with tables prepared.
+Both reference calculations stop at the same dense-envelope EOS limit.
+[Fresh calculation](results/fresh_hayashi_cooling_sept28_v1.json).
 
-The common lifetime program includes initial deuterium, pp and explicit CN
-burning, plasma neutrino losses, composition-dependent EOS and opacity,
-wavelength-dependent atmospheres, hot H/He/metal diffusion, and conservative
-heat transport during composition changes. Each connected convective region
-is mixed instantaneously, with a check on the gradient needed to carry its
-species flux. Finite mixing is available in the same program but is not
-selected in this trajectory. Unsupported cool radiative transport remains a
-limitation; no missing microscopic law is silently replaced.
-[Finite-mixing checks](results/finite_mixing_driver_sept27_v1.json).
+A trial with a revised cold-envelope EOS present from Hayashi initialization
+reaches **4.009 Tyr**, **3728 K**, and **0.0001943 Lsun**. Shell burning supplies
+**5.200%** of luminosity and peaks at **m/M = 0.9693**; convection occupies an
+outer **2.214%** of the mass. No late He3 runaway occurs. The latest continuation
+adds **38.46 Myr** in **48.10 seconds**, including failed trials at its endpoint.
+This is provisional: the cold-EOS join distorts heat capacity and the adiabatic
+gradient, and the outer mesh also differs from a resolved envelope integration.
+A direct-source outer boundary is being tested. The final solver failure occurs
+near an EOS support gap; a direct EOS exception is not established by that log.
+[Trial structure and limitations](results/cooling_trial_3728_sept28_v1.json).
 
-All accepted full and half intervals pass isotope and energy audits. The
-current cooling calculation also uses checked Richardson extrapolation.
-Across a **20 Myr** comparison, its selected settings reduce wall time from
-**26.56 to 19.25 seconds**, with differences below **0.1%** against a
-smaller-step reference. A mixing-step limit compares new composition against
-the previous composition averaged over the current instantaneous mixed regions,
-so prescribed homogenization does not force arbitrarily small steps. Burning
-and transport changes still count; finite mixing retains its pointwise limit.
-These controls do not establish convergence through a flash.
+The trial selects an optional quantum nuclear-screening correction at **3965 K**;
+it is therefore not yet an unchanged-physics calculation from Hayashi contraction.
+A matched **50 Myr** comparison changes Teff by **0.02668 K** and luminosity by
+**0.003276%**, with unchanged convective mass. The correction retains explicit
+validity limits; pycnonuclear burning remains unsupported.
+[Screening and transport checks](results/quantum_screening_sept28_v1.json).
+
+The code includes initial deuterium, pp and explicit CN burning, plasma neutrino
+losses, composition-dependent EOS and opacity, wavelength-dependent atmospheres,
+hot H/He/metal diffusion, and conservative heat transport during composition
+changes. Connected convective regions mix instantaneously in this trajectory.
+Finite mixing is available in the same program. Full-step/two-half-step checks,
+isotope and energy audits remain active; checked Richardson extrapolation falls
+back when its physical checks fail. A matched **20 Myr** comparison reduces wall
+time from **26.56 to 19.25 seconds** with differences below **0.1%** against a
+smaller-step reference. This does not establish convergence through a flash.
 [Time accuracy](results/richardson_cooling_sept27_v1.json),
-[mixing limit](results/instantaneous_mixing_step_cap_sept27_v1.json).
+[mixing step limit](results/instantaneous_mixing_step_cap_sept27_v1.json),
+[finite mixing](results/finite_mixing_driver_sept27_v1.json).
 
-The atmosphere match remains at optical depth **100** throughout. Solved
-mixed hydrogen–helium columns cover **4200–4550 K** at **log g = 6.1–6.3**,
-with hydrogen fractions **0.98–0.9955**; the **4200–4400 K** interval also
-reaches **log g = 6.5**. A continuous composition overlap
-carries the star through the former **0.5% helium** limit. Only cells with
-complete source support are interpolated; cooler columns are being calculated.
-The selected low-metal EOS differentiates a quadratic free energy through all
-thermal and composition channels, joining smoothly to the original cubic at
-larger metal abundance. A matched **10 Myr** comparison changes luminosity by
-**3.637e-6** relative and temperature by **0.002140 K**. Direct source
-re-evaluations and narrower derivative stencils recover additional support
-while preserving every previously valid table value and all source acceptance
-criteria. Some still cooler, dense source states remain excluded; this is
-not a claim of complete cold-remnant EOS coverage.
-[EOS comparison](results/low_metal_eos_sept27_v1.json).
-The latest continuation advanced **20.48 Myr** in **34.06 seconds** on four zone
-threads, including rejected trials at the next EOS limit. Direct comparisons
-against other dense-hydrogen models show substantial pressure and heat-response
-differences there. A suitable EOS treatment and a smooth transition are under
-assessment; no replacement has entered the accepted trajectory.
-Prepared columns also cover **3600–4200 K** at **log g = 6.3–6.5**.
-Independent **3900 K** columns agree with the interpolation to **0.04550%**
-in temperature and **0.9102%** in pressure; the **4100 K** comparison gives
-**0.08212%** and **1.496%**. Every previously supported value is retained.
-The fresh EOS comparison uses the coverage through **3600 K**; the accepted
-cooling trajectory still uses its previous table through **4200 K**.
-Independent **3700 K** checks differ by at most **0.02755%** in temperature
-and **0.5884%** in pressure. A deeper **3600 K** column changes matching
-pressure by **0.03360%**.
-Higher-gravity columns also cover **3600–4000 K** through **log g = 6.7**.
-Independent **3700 K** and **3900 K** columns at **log g = 6.6** differ from
-interpolation by at most **0.03541%** in temperature and **0.7639%** in pressure.
-The addition preserves all previous values and is ready for a planned continuation;
-it is not selected in either the retained star or the running fresh candidate.
-[Higher-gravity checks](results/cold_atmosphere_high_gravity_sept28_v1.json).
-A further extension covers **3400–3600 K** at **log g = 6.3–6.7**.
-Independent **3500 K** columns differ from interpolation by at most
-**0.01710%** in temperature and **0.4924%** in pressure. Increasing the bottom
-column at **3500 K**, **log g = 6.6** changes matching pressure by **0.04344%**.
-The shared table assembler preserves existing values and interpolation intervals
-and checks the completed source columns before adding new support.
-[3400 K checks](results/cold_atmosphere_3400_sept28_v1.json).
-[3600 K source checks](results/cold_atmosphere_3600_sept28_v1.json),
-[3800 K source checks](results/cold_atmosphere_3800_sept28_v1.json),
-[4000 K source checks](results/cold_atmosphere_4000_sept28_v1.json).
-Gas-only and helium-isotope approximations remain explicit. The separate flash histories retain their atmosphere
-adjustment and cannot establish atmosphere-independent ignition.
-[Cold source checks](results/cold_atmosphere_4400_sept27_v1.json).
+The atmosphere joins at optical depth **100**. Mixed H/He coverage reaches
+**3200 K**, with **log g = 6.3–6.7** and **X = 0.98–0.9955** over the cold cells.
+Independent **3300 K** columns differ from interpolation by at most **0.3912%**
+in pressure and **0.009569%** in temperature; a deeper **3200 K** column changes
+matching pressure by **0.02925%**. Old supported values remain unchanged.
+The cooling trial uses the extended table. Gas-only and helium-isotope
+approximations remain explicit.
+[Atmosphere coverage](results/cold_atmosphere_3200_sept28_v1.json),
+[source optimization](results/tlusty_russel_sept28_v1.json).
 
-In the dense hydrogen envelope, the opacity approximation uses the measured
-hydrogen slope of the retained source while remaining within its temperature
-and density coverage. The retained trajectory used **log R = 2.5**
-and **log T = 6.6**. Matched **20 Myr** half/double-opacity controls change
-the global quantities by at most **2.174e-5** relative. This supports the
-approximation locally without establishing opacity accuracy in radiative layers.
-[Opacity response](results/dense_envelope_hot_extension_sept27_v1.json).
-The revised-EOS trial extends the selected density range to **log R = 3.5**,
-while enforcing the actual opacity-source domain. Over a matched **200 Myr**
-cooling interval to **4035 K**, halving or doubling the dense radiative opacity
-changes luminosity by at most **0.06752%**, with unchanged convective mass.
-Nuclear burning supplies **12.60%** of the final luminosity. This supports the
-composition approximation in the current convective envelope; it does not
-establish its accuracy in a future radiative envelope.
-[Cooling opacity comparison](results/dense_cooling_opacity_sept28_v1.json).
+The low-metal EOS uses a quadratic free energy joined smoothly to the original
+composition interpolation. Direct source calculations extend its supported
+domain without accepting failed source states. The experimental cold-envelope
+replacement still needs physical validation; energy consistency alone does not
+establish the accuracy of its heat response.
+[Low-metal EOS comparison](results/low_metal_eos_sept27_v1.json).
+Dense radiative opacity uses the retained source's hydrogen slope within its
+actual temperature/density coverage. Over **200 Myr** of cooling to **4035 K**,
+halving or doubling it changes luminosity by at most **0.06752%**, with unchanged
+convective mass. That supports this approximation locally in the convective
+envelope, not in a future radiative envelope.
+[Opacity comparison](results/dense_cooling_opacity_sept28_v1.json).
 
-The [working paper](reports/2026-09-27/ember_status_and_future.pdf) is **30 pages**
-and currently plots the trajectory through **4560 K**. It retains the
-physical qualifications, model comparisons and lifetime timeline. The
-[completed review](research/fable/ADVERSARIAL_REVIEW_20260926.md) records
-remaining code, reproduction and physics limitations.
-
-A fresh reference from Hayashi contraction reproduces the **4235 K** cooling
-state without a late helium-3 flash: luminosity differs by **0.08179%** and
-total He3 by **0.8907%** at nearly identical effective temperature. Its summed
-work is **5.361 CPU-hours**, including initialization, rejected steps and
-budget restarts, with source tables already prepared. The same EOS coverage
-limit stops it. The cold-EOS trial has not extended that frontier; its
-transition and source approximations are being assessed in a fresh calculation.
-[Fresh-track evidence](results/fresh_hayashi_cooling_sept28_v1.json).
+Separate flash histories retain an atmosphere adjustment before ignition and
+cannot establish atmosphere-independent ignition. The [working paper](reports/2026-09-27/ember_status_and_future.pdf)
+remains **30 pages** and currently plots the continuous trajectory through
+**4560 K**; its figures lag these calculations. Current jobs and continuation
+instructions are in [HANDOFF.md](../HANDOFF.md).
 
 ## Objective and next milestones
 

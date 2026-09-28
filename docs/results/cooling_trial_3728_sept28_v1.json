@@ -1,0 +1,63 @@
+{
+  "created_utc": "2026-09-28T15:56:18.315877+00:00",
+  "provisional": true,
+  "full_production_track_validated": false,
+  "last_state": {
+    "years": 4008740734274.7446,
+    "step_years": 175781.25,
+    "accepted": 4019,
+    "rejected": 1350,
+    "radius_Rsun": 0.03340749206649949,
+    "Teff_K": 3728.4480214732725,
+    "luminosity_Lsun": 0.00019430939426466252,
+    "nuclear_fraction": 0.052000214888177285,
+    "central_T_K": 4615085.923577278,
+    "central_density_g_cm3": 44189.9965787388,
+    "central_X": 3.252241945266576e-08,
+    "central_He3": 1.0384090719059401e-14,
+    "eps_nuc_peak_erg_g_s": 0.00669903851170952,
+    "eps_nuc_peak_q": 0.969276301246281,
+    "burning_half_max_inner_q": 0.9541068657373265,
+    "burning_half_max_outer_q": 0.9750632359033806,
+    "burning_half_max_cells": 17,
+    "He3_peak": 0.017607499272001715,
+    "He3_peak_q": 0.9703952386387595,
+    "H_mass_g": 7.400079148255354e+30,
+    "He3_mass_g": 8.14798090185108e+28,
+    "D_mass_g": 0,
+    "surface_X": 0.990143305976772,
+    "surface_Z": 1.1451910816266298e-30,
+    "error_norm": 0.0015186948455077063,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.6919276687461135e-13,
+    "drift_gradient_proxy": 3.2664589966881566e-07,
+    "kinetic_heat_proxy": 0.02056762813587836,
+    "convective_mass_fraction": 0.022138183304963307,
+    "radiative_boundaries": 401,
+    "relative_mixing_gradient": 4.182832639798112e-12,
+    "convective_travel_years": 0.06518987621342923,
+    "cpu_seconds": 72.600732
+  },
+  "continuation": {
+    "new_models": 16,
+    "duration_years": 38464843.74902344,
+    "CPU_seconds": 145.600881,
+    "wall_seconds": 48.095953832380474
+  },
+  "history": "Cold-envelope EOS present at Hayashi initialization; small quantum nuclear correction selected at 3965 K after a matched 50 Myr comparison. Coverage extensions preserve earlier supported values.",
+  "stop": "Repeated line-search and Newton failures near the outer cold-EOS support boundary; direct queries show a gap above rho=0.08 at T=9104 K. The final log alone does not establish which trial query caused failure.",
+  "limitations": [
+    "The experimental cold-EOS join distorts heat capacity and the adiabatic gradient in the outer envelope; a direct-source boundary is being tested.",
+    "Outer-cell discretization also affects the resolved envelope profile.",
+    "This is not an unchanged-physics validated calculation from Hayashi to extreme cold.",
+    "Grains, solidification, quantum liquid thermodynamics and cool partially ionized microscopic diffusion remain incomplete."
+  ],
+  "input_sha256": {
+    "out/quantum-cooling-sept28-v3/completion.json": "88f21589e35493a06e24085d40218340d803e3a60c05796a25fde592aa4c4586",
+    "out/quantum-cooling-sept28-v3/PLAN.json": "4f492b075951ba6aeef19ebe4ec71164361770fa0740a7aa95b62d10eb82a1a9",
+    "out/quantum-cooling-sept28-v3/candidate/evolution/final.checkpoint": "5836c28e637a778a208679759ef361bca3ec1e49fdc058af1d470b86f4ad961a",
+    "out/quantum-cooling-sept28-v3/candidate/configuration.txt": "f6049b9a0d081a66869247f43eec48ba2ae4995a62a035101d0d2f17e75b14c5"
+  }
+}

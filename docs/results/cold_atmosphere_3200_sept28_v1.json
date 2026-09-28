@@ -1,0 +1,88 @@
+{
+  "created_utc": "2026-09-28T15:56:18.315877+00:00",
+  "selected_in_private_cooling_trial": true,
+  "ready_for_bounded_continuation": true,
+  "table_sha256": "4b353518764504f2515232f30b8013085d2f428dc6f5adf5036a1913f0cb4820",
+  "new_coverage": {
+    "teff_K": [
+      3200,
+      3400
+    ],
+    "log_g": [
+      6.3,
+      6.7
+    ],
+    "hydrogen": [
+      0.98,
+      0.9955
+    ]
+  },
+  "native_checks": {
+    "unchanged_old_queries": 102,
+    "new_supported_queries": 180,
+    "missing_queries_rejected": 7,
+    "maximum_derivative_error": 6.144508901684276e-09
+  },
+  "independent_columns": [
+    {
+      "hydrogen": 0.98,
+      "teff_K": 3300.0,
+      "log_g": 6.4,
+      "relative_error": {
+        "T": 4.638281878044381e-05,
+        "Pgas": -0.0038597285066682696
+      }
+    },
+    {
+      "hydrogen": 0.98,
+      "teff_K": 3300.0,
+      "log_g": 6.6,
+      "relative_error": {
+        "T": 9.569104656037553e-05,
+        "Pgas": -0.0021959934382841384
+      }
+    },
+    {
+      "hydrogen": 0.9955,
+      "teff_K": 3300.0,
+      "log_g": 6.4,
+      "relative_error": {
+        "T": 4.335634584085035e-05,
+        "Pgas": -0.003911624236664912
+      }
+    },
+    {
+      "hydrogen": 0.9955,
+      "teff_K": 3300.0,
+      "log_g": 6.6,
+      "relative_error": {
+        "T": 9.055824991355266e-05,
+        "Pgas": -0.0022487529989178023
+      }
+    }
+  ],
+  "depth_control": {
+    "hydrogen": 0.98,
+    "teff_K": 3200,
+    "log_g": 6.7,
+    "bottom_column_factor": 1.6,
+    "CPU_seconds": 33.070644,
+    "relative_changes": {
+      "T": -8.480624591800101e-06,
+      "Pgas": -0.00029248809428583655,
+      "column_mass": -0.00029248809422366406
+    },
+    "optimized_executable_sha256": "48e9830ea0476c732ce7dcd033894fe87dca5abd428a028dd00990c0f0db465a"
+  },
+  "limitations": [
+    "Nineteen opacity density points; same-state pure-H comparison changes joining pressure by0.2875%.",
+    "Gas-only; He3 represented by number-ratio and gravity mapping, neglecting isotope-dependent opacity.",
+    "No source-H interior comparison yet; no stellar overlap comparison until table validation."
+  ],
+  "input_sha256": {
+    "out/cold-mixed-grid-sept28-v5/validation.json": "c2530e336dcfecd1c8909b65e2b6785711b586d8a570a0f0389057fb7365617a",
+    "out/cold-mixed-grid-sept28-v5/assembly.json": "747909e4232af6bfe32b5298eeb78f0b40db5ae4509c85acd7d1bc35e8fa4508",
+    "out/cold3200-depth-sept28-v1/h0.9800_t3200_g670_depth1.6/result.json": "4c8e78a335a267a89f4cbab7c3720327563523d99ed267c90191503339629d4d",
+    "out/cold3200-atmospheres-sept28-v2/h0.9800_t3200_g670/result.json": "847cb5e2a8fef9d1081cf48da1a9f296eb5f9b746055acc85d0e227ac345b7d7"
+  }
+}

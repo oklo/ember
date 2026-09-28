@@ -19,12 +19,14 @@ A fresh calculation from Hayashi contraction reproduces the cooling luminosity
 within **0.08179%** and total He3 within **0.8907%**, using **5.361 CPU-hours**
 with the physics tables prepared. Both stop at the same dense-envelope EOS
 limit. A trial with a revised cold-envelope EOS present from Hayashi
-initialization has continued to **4035 K**, with nuclear burning supplying
-**12.60%** of its luminosity and no late helium-3 runaway. The physical EOS
-approximation remains under assessment.
+initialization has continued to **3728 K**, with nuclear burning supplying
+**5.200%** of its luminosity and no late helium-3 runaway. A small quantum
+nuclear correction was selected at **3965 K** after a matched comparison.
+The trial remains provisional: its cold-EOS join distorts the outer-envelope
+temperature gradient, and a direct-source boundary treatment is being tested.
 [Current structure](docs/results/cooling_envelope_4235_sept27_v1.json),
 [fresh-track comparison](docs/results/fresh_hayashi_cooling_sept28_v1.json).
-[Cooling opacity comparison](docs/results/dense_cooling_opacity_sept28_v1.json).
+[Cooling trial](docs/results/cooling_trial_3728_sept28_v1.json).
 
 The selected physics includes deuterium and pp burning, explicit C12/C13/N14
 conversion with Solar Fusion III rates, plasma neutrino losses,
@@ -37,13 +39,16 @@ transport are not selected.
 [configuration](docs/LIFETIME_DRIVER.md).
 
 Atmospheres join the interior at optical depth **100**. Prepared mixed H/He
-columns extend to **3400 K**, with **log g = 6.3–6.7** over **3400–4000 K**.
-Independent **3500 K** columns differ from interpolation by at most
-**0.01710%** in temperature and **0.4924%** in pressure. These are interpolation
-checks, not absolute atmosphere errors. Existing table values are preserved;
-the retained cooling star still uses its table through **4200 K**. The boundary
-is gas-only, with an explicit helium-isotope approximation.
-[Atmosphere coverage and checks](docs/results/cold_atmosphere_3400_sept28_v1.json).
+columns extend to **3200 K**, with **log g = 6.3–6.7** over **3200–4000 K**.
+Independent **3300 K** columns differ from interpolation by at most
+**0.009569%** in temperature and **0.3912%** in pressure. A deeper **3200 K**
+column changes matching pressure by **0.02925%**. These test interpolation and
+boundary depth, not absolute physical accuracy. The cooling trial uses this
+coverage; the atmosphere remains gas-only with a helium-isotope approximation.
+[Atmosphere checks](docs/results/cold_atmosphere_3200_sept28_v1.json).
+Removing repeated chemistry work reduced source CPU time by **1.601–3.455**
+in two controls, with state differences below **1.628e-7**.
+[Source optimization](docs/results/tlusty_russel_sept28_v1.json).
 
 The solver uses zone threads, nearby EOS and collision responses, a structure
 predictor and local burning feedback. Every accepted interval retains full-step/
