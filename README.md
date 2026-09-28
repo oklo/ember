@@ -19,15 +19,16 @@ within **0.08179%** and total He3 within **0.8907%**, using **5.361 CPU-hours**
 with the physics tables prepared.
 [Fresh-track comparison](docs/results/fresh_hayashi_cooling_sept28_v1.json).
 
-A development calculation with a source-integrated outer envelope reaches
-**3069 K** at **4.010 Tyr**. Nuclear burning supplies **0.4510%** of luminosity;
-the core remains at **2.750 MK**. Its latest **300 Myr** took **13.15 seconds**
-on four CPU threads, with no rejected intervals. The envelope treatment was
-introduced near **3757 K**, so this continuation is provisional: the final
-boundary must still be applied in a fresh calculation from Hayashi contraction.
-The leading quantum-ion heat-capacity correction is estimated at **0.1754%**
-when integrated over this structure; it is not yet selected in the calculation.
-[Cooling boundary checks](docs/results/cooling_boundary_sept28_v1.json).
+A development calculation with an integrated outer envelope reaches
+**2752 K** at **4.010 Tyr**. Nuclear burning supplies **0.1587%** of luminosity;
+the core remains at **2.089 MK**. Quantum-liquid ion thermodynamics is now
+included. Its latest continuation advances **487.1 Myr** before reaching a
+missing dense-core EOS cell. The envelope treatment was introduced near
+**3757 K**, so the final physics must still be applied in a fresh calculation
+from Hayashi contraction. The common-EOS envelope has passed an initial
+**0.1 Myr** Hayashi evolution check.
+[Quantum-ion and cooling checks](docs/results/quantum_liquid_sept28_v1.json),
+[outer-boundary checks](docs/results/cooling_boundary_sept28_v1.json).
 
 The selected physics includes deuterium and pp burning, explicit C12/C13/N14
 conversion with Solar Fusion III rates, plasma neutrino losses,

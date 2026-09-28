@@ -2,11 +2,23 @@
 
 ## Current calculation — September 28, 2026
 
-The furthest diagnostic with a source-integrated outer envelope reaches
-**3069 K**, **4.010 Tyr**, and **8.045e-5 Lsun**. Nuclear burning supplies
-**0.4510%** of luminosity and is declining; no late helium-3 runaway occurs.
-The latest segment advances **300 Myr** in **13.15 seconds**, with **16**
-accepted intervals and no rejections. It reached its requested age.
+The furthest diagnostic with an integrated outer envelope reaches
+**2752 K**, **4.010 Tyr**, and **5.072e-5 Lsun**. Nuclear burning supplies
+**0.1587%** of luminosity and is declining; no late helium-3 runaway occurs.
+The latest continuation advances **487.1 Myr** in **196.5 wall seconds**,
+including rejected attempts at a missing dense-core EOS cell. It stops there.
+The prepared density extension has the same missing cells and does not resolve
+this particular limit.
+
+Quantum-liquid ion thermodynamics now follows the Baiko–Chugunov free energy,
+with all thermal and composition responses derived consistently. At the
+3069 K comparison state, central and integrated heat capacities decrease by
+**0.3761%** and **0.1751%**, respectively. A matched **150 Myr** evolution test
+changes luminosity by **0.05775%**, with unchanged convective extent. The
+initial assessed range is weakly quantum liquid; strongly quantum mixtures,
+crystallization and latent heat remain unfinished.
+[Quantum-ion checks](results/quantum_liquid_sept28_v1.json),
+[physical treatment](DENSE_EOS.md).
 
 Revised molecular collision-induced absorption is selected throughout the
 new cooling atmosphere table. In a matched **150 Myr** stellar comparison,
