@@ -126,6 +126,9 @@ int lifetime_main(int argc,char** argv) {
     const double eos_radius=optional_number("eos_taylor_radius");
     const double buoyancy_spacing=optional_number("buoyancy_reuse_spacing");
     const double screening_spacing=optional_number("screening_reuse_spacing");
+    const double quantum_screening=optional_number("quantum_screening_zeta_max");
+    if(!std::isfinite(quantum_screening) || quantum_screening<0 || quantum_screening>1.6)
+      throw std::invalid_argument("quantum_screening_zeta_max must lie in [0,1.6]");
     const double verify_responses=optional_number("verify_response_reuse");
     const double linearized_burning=optional_number("linearized_burning");
     if(linearized_burning!=0 && linearized_burning!=1)
@@ -164,9 +167,12 @@ int lifetime_main(int argc,char** argv) {
     if(instantaneous_below<0 || (mixing_mode==ConvectiveMixing::instantaneous && instantaneous_below!=0)
         || (mixing_mode!=ConvectiveMixing::instantaneous && !screened_core))
       throw std::invalid_argument("finite convection requires screened-core transport and a nonnegative mixing temperature");
+    const double heat_lower=screened_core && cfg.values.contains("screened_heat_lower_T_K")
+        ?cfg.number("screened_heat_lower_T_K"):minimum_temperature;
     const double heat_upper=screened_core?cfg.number("screened_heat_upper_T_K"):minimum_temperature;
     const double mixing_gradient=screened_core?cfg.number("maximum_relative_mixing_gradient"):0;
-    if(screened_core && (!(heat_upper>minimum_temperature) || !(mixing_gradient>0 && mixing_gradient<=.01)))
+    if(screened_core && (!(heat_upper>heat_lower && heat_lower>=minimum_temperature)
+        || !(mixing_gradient>0 && mixing_gradient<=.01)))
       throw std::invalid_argument("invalid screened-core heat overlap or mixing approximation");
     const auto atmosphere_metals=cfg.values.contains("atmosphere_metals")?cfg.get("atmosphere_metals"):"strict";
     const double atmosphere_delta_Z=cfg.values.contains("atmosphere_maximum_delta_Z")
@@ -219,6 +225,8 @@ int lifetime_main(int argc,char** argv) {
     if(mixing_mode!=ConvectiveMixing::instantaneous)
       identity.number("convection.instantaneous_mixing_below_T_K",instantaneous_below);
     if(screened_core) {
+      if(heat_lower!=minimum_temperature)
+        identity.number("transport.screened_heat_lower_T_K",heat_lower);
       identity.number("transport.screened_heat_upper_T_K",heat_upper);
       identity.number("transport.maximum_relative_mixing_gradient",mixing_gradient);
     }
@@ -255,6 +263,10 @@ int lifetime_main(int argc,char** argv) {
     if(eos_radius>0)identity.number("solver.eos_taylor_radius",eos_radius);
     if(buoyancy_spacing>0)identity.number("solver.buoyancy_reuse_spacing",buoyancy_spacing);
     if(screening_spacing>0)identity.number("solver.screening_reuse_spacing",screening_spacing);
+    if(quantum_screening>0) {
+      identity.values["nuclear.quantum_screening"]="svh.cd09_finite_zeta.v1";
+      identity.number("nuclear.quantum_screening_zeta_max",quantum_screening);
+    }
     for(const auto& [key,value]:std::map<std::string,double>{{"coupling_stop_tolerance",coupling_stop},
         {"material_heat_tolerance",material_heat},{"verification_residual_tolerance",verification_residual},
         {"verification_correction_tolerance",verification_correction}})
@@ -343,6 +355,7 @@ int lifetime_main(int argc,char** argv) {
     ScreenedMetalMicroscopicTransport microscopic(table_eos,collisions,true,minimum_temperature,{true,true,true},true);
     set_composition_buoyancy_reuse(buoyancy_spacing,verify_responses==1);
     set_screening_reuse(screening_spacing);
+    set_quantum_screening(quantum_screening);
     if(eos_radius>0)microscopic.use_eos_taylor(eos_radius,verify_responses==1);
     std::shared_ptr<CollisionTaylorCache> collision_reuse;
     if(collision_radius>0) {
@@ -350,7 +363,7 @@ int lifetime_main(int argc,char** argv) {
       microscopic.use_collision_taylor(collision_reuse);
     }
     ConvectiveMaterialHeat convective_heat(table_eos,*conduction);
-    EnvelopeTransport envelope_heat(convective_heat,microscopic,minimum_temperature,
+    EnvelopeTransport envelope_heat(convective_heat,microscopic,heat_lower,
         screened_core?heat_upper:1.5*minimum_temperature);
     Physics early{&eos,&combined,&nuclear,1.9,ConvectiveCriterion::ledoux};early.neutrino_losses=&losses;early.explicit_metal_mixing_only=true;
     auto later=early;later.opacity=radiation.get();later.microscopic=&convective_heat;later.explicit_metal_mixing_only=false;

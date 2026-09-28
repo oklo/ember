@@ -146,14 +146,27 @@ This screening model is not derived from the interior's FreeEOS Coulomb
 potential and does not establish thermodynamic consistency between the two
 physical approximations.
 
-For the new screening choices, `zeta=3*Gamma_12/tau` must be <=.2. This is an
-operational classical-ion restriction, not a fitted accuracy bound;
-it rejects quantum-dominated states rather than capping their enhancement.
-The 20-Gyr track's actual central and maximum active-layer zeta are recorded
-in the audit. The final central zeta is .0503 and the maximum above the
-burning cutoff is .1004. Quantum corrections and a full
-polarization/mixing free-energy treatment remain unimplemented. See the quantum-regime discussion in
-[Potekhin & Chabrier (2012)](https://arxiv.org/abs/1201.2133).
+Without the optional quantum correction, `zeta=3*Gamma_12/tau` must be <=.2.
+This is an operational classical-ion restriction, not an accuracy bound.
+The lifetime setting `quantum_screening_zeta_max "1"` adds the finite-zeta
+tunnelling correction from equations 23–25 and A4 of
+[Chugunov & DeWitt (2009)](https://arxiv.org/abs/0905.3844):
+`h = h_SVH + h_CDW(Gamma,zeta) - h_CDW(Gamma,0)`.
+The classical SVH interpolation and its electron response are retained.
+This combination is an approximation, rather than the complete CDW prescription.
+The energy-dependent S-factor shift is omitted; its estimated effect in the
+current burning shell is below **0.16%**. Reaction-specific reduced masses
+distinguish the helium-3 + helium-3 and helium-3 + helium-4 corrections.
+
+The option defaults to zero (off), is recorded in checkpoints, and accepts
+limits up to **1.6**. Evaluation stops beyond the selected zeta limit or
+`Gamma_12 = 200`; pycnonuclear burning is still unsupported. The correction
+vanishes smoothly as zeta approaches zero. The implementation differentiates
+the same expression for temperature, density and abundance responses.
+A matched **50 Myr** cooling comparison changes surface temperature by
+**0.02668 K**, luminosity by **0.003276%**, and leaves convective boundaries
+unchanged. This comparison tests the local stellar response, not the full
+screening uncertainty. [Checks](results/quantum_screening_sept28_v1.json).
 
 Three screening choices are available. `sfii-svh` is the evolution default;
 `sfii-debye` retains the finite-degeneracy weak formula as a sensitivity control;

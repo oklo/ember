@@ -65,6 +65,12 @@ ScreeningState pp_screening(double T,double rho,const Composition&,PPReaction,PP
 // Optional process-wide first-order reuse of the electron screening
 // susceptibility on a grid of spacing h in (ln T, ln n_e); h=0 is exact.
 void set_screening_reuse(double h);
+// Optional Chugunov & DeWitt (2009, PRC 80, 014611; eqs. 23-25, A4) quantum-tunnelling
+// correction added to the Salpeter--Van Horn exponent. zeta_max=0 disables it (default;
+// results unchanged). When enabled, the classical zeta<=0.2 stop is replaced by the
+// mean-field domain zeta<=zeta_max (<=1.6) and Gamma12<=200; beyond it, an explicit
+// thermo-pycnonuclear domain error. The correction vanishes as zeta->0.
+void set_quantum_screening(double zeta_max);
 
 // N14(p,gamma) bottleneck of a closed CN cycle. The Solar Fusion III choice
 // uses its S(0) with Solar Fusion II's first and second derivatives.

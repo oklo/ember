@@ -182,7 +182,38 @@ Susceptibility electrons(double T,double ne) {
   s.theta+=s.dtheta_dlnT*(lt-at)+s.dtheta_dlnne*(ln-an);
   return s;
 }
+// Chugunov & DeWitt (2009) building blocks, differentiated exactly.
+template<class D> D atan_d(const D& x) {
+  D out(std::atan(x.value));
+  for(std::size_t i=0;i<out.d.size();++i) out.d[i]=x.d[i]/(1+x.value*x.value);
+  return out;
+}
+// Potekhin & Chabrier (2000) one-component-plasma Coulomb free energy per ion
+// (CD09 eq. 24). A small-Gamma series keeps the Debye--Hueckel limit exact.
+template<class D> D cd09_f0(const D& g) {
+  using detail::sqrt;using detail::log;using detail::log1p;
+  constexpr double A1=-.907,A2=.62954,B1=.00456,B2=211.6,B3=-1e-4,B4=.00462;
+  const double A3=-std::sqrt(3.)/2-A1/std::sqrt(A2);
+  const D s=sqrt(g),sa=sqrt(g/A2);
+  if(g.value<1e-3) {
+    // Series of the same fit avoid subtracting nearly equal square roots,
+    // logarithms and arctangents in the dilute limit.
+    const D x=g/A2,z=g/B2;
+    return A1*A2*sa*x*(2./3+x*(-1./5+x*(3./28+x*(-5./72+x*35./704))))
+      +2*A3*s*g*(1./3+g*(-1./5+g*(1./7+g*(-1./9+g/11))))
+      +B1*g*z*(.5+z*(-1./3+z*(.25-z/5)))+.5*B3*log1p(g*g/B4);
+  }
+  return A1*(sqrt(g*(A2+g))-A2*log(sa+sqrt(1+g/A2)))+2*A3*(s-atan_d(s))
+        +B1*(g-B2*log1p(g/B2))+.5*B3*log1p(g*g/B4);
+}
 } // namespace
+
+std::atomic<double> quantum_screening_zeta_max{0};
+void set_quantum_screening(double zeta_max) {
+  if(!std::isfinite(zeta_max) || zeta_max<0 || zeta_max>1.6)
+    throw std::invalid_argument("quantum screening zeta_max must lie in [0,1.6] (mean-field WKB domain)");
+  quantum_screening_zeta_max=zeta_max;
+}
 
 void set_screening_reuse(double h) {
   if(!std::isfinite(h) || h<0 || h>.01)throw std::invalid_argument("screening reuse spacing must lie in [0,0.01]");
@@ -268,15 +299,36 @@ static ScreeningState screening_response(double T,double rho,const Composition& 
   out.gamma_e=ge.value;
   const double g12=ge.value*2*r.z1*r.z2/(std::cbrt(r.z1)+std::cbrt(r.z2));
   out.zeta=g12/std::cbrt(gamow_energy(r)/(4*kB*T));
+  const double zeta_max=quantum_screening_zeta_max.load(std::memory_order_relaxed);
+  const bool quantum=zeta_max>0 && model==PPScreening::salpeter_van_horn;
   // Explicit classical-ion thermonuclear domain, not a cap or an extrapolation.
-  if(model!=PPScreening::legacy_weak && out.zeta>.2)
+  if(model!=PPScreening::legacy_weak && !quantum && out.zeta>.2)
     throw std::domain_error("PPChains: classical-ion screening requires zeta<=0.2; quantum burning unavailable");
+  if(quantum && (out.zeta>zeta_max || g12>200))
+    throw std::domain_error("PPChains: beyond the mean-field quantum screening domain (thermo-pycnonuclear); no extrapolation");
   const auto weak=r.z1*r.z2*e2/(kB*temp)*exp(.5*log(4*M_PI*e2*NA*density*(ions+theta*ye)/(kB*temp)));
   D exponent=weak;
   if(model==PPScreening::legacy_weak && weak.value>=2) exponent=D(2);
   if(model==PPScreening::salpeter_van_horn) {
     const auto strong=.9*ge*(std::pow(r.z1+r.z2,5./3)-std::pow(r.z1,5./3)-std::pow(r.z2,5./3));
     exponent=weak*strong/exp(.5*log(weak*weak+strong*strong));
+  }
+  if(quantum) {
+    // CD09 eqs. 23-25 with the A4 weak-coupling interpolation: only the finite-zeta
+    // tunnelling change h(Gamma,zeta)-h(Gamma,0) is added, so the established
+    // classical SVH exponent (with electron polarization) is retained as zeta->0.
+    const auto g12d=ge*(2*r.z1*r.z2/(std::cbrt(r.z1)+std::cbrt(r.z2)));
+    const auto zeta=g12d/detail::cbrt(D(gamow_energy(r)/(4*kB))/temp);
+    const double y=4*r.z1*r.z2/((r.z1+r.z2)*(r.z1+r.z2));
+    const auto t=detail::cbrt(1+.013*y*y*zeta+.406*std::pow(y,.14)*zeta*zeta
+                              +(.062*std::pow(y,.19)+1.8/g12d)*zeta*zeta*zeta);
+    const double a=std::pow(r.z1,5./3),b=std::pow(r.z2,5./3),c=std::pow(r.z1+r.z2,5./3);
+    auto mixing=[&](const D& scale){return cd09_f0(ge*a/scale)+cd09_f0(ge*b/scale)-cd09_f0(ge*c/scale);};
+    const auto moment=ions/ye;   // <Z^2>/<Z> of the ion mixture
+    const auto cfac=3*r.z1*r.z2*detail::sqrt(moment)
+                    /(std::pow(r.z1+r.z2,2.5)-std::pow(r.z1,2.5)-std::pow(r.z2,2.5));
+    const auto weight=(cfac+g12d*g12d)/(1+g12d*g12d);
+    exponent=exponent+weight*(mixing(t)-mixing(D(1)));
   }
   out.log_factor=exponent.value;out.dlog_dlnT=exponent.d[0];out.dlog_dlnRho=exponent.d[1];
   for(std::size_t j=0;j<NSPEC;++j) out.dlog_dX[j]=exponent.d[j+2];
@@ -293,13 +345,15 @@ NuclearResponse PPChains::composition_response(double T,double rho,const Composi
   if(T<1e5) return result; // retained explicit negligible-burning cutoff
   const std::array rates{pp_bare_rate(T,PPReaction::pp,rates_),pp_bare_rate(T,PPReaction::he3_he3,rates_),
     pp_bare_rate(T,PPReaction::he3_he4,rates_)};
-  // Classical screening depends on charge, so both helium reactions share it.
-  // The two reactions see exactly the same T, density and composition.
-  // Share their electron inversion only within this evaluation.
+  // The classical helium factors agree; quantum tunnelling also depends on
+  // reduced mass, so compute the two factors separately when selected.
   std::optional<Susceptibility> shared_electrons;
   const auto f1=screening_response(T,rho,comp,reaction(PPReaction::pp),screening_,&shared_electrons);
   const auto f2=screening_response(T,rho,comp,reaction(PPReaction::he3_he3),screening_,&shared_electrons);
-  const std::array screens{f1,f2,f2};
+  const auto f3=quantum_screening_zeta_max.load(std::memory_order_relaxed)>0
+    && screening_==PPScreening::salpeter_van_horn
+    ?screening_response(T,rho,comp,reaction(PPReaction::he3_he4),screening_,&shared_electrons):f2;
+  const std::array screens{f1,f2,f3};
   const std::array w{comp.abundance_weight(0),comp.abundance_weight(1),comp.abundance_weight(2)};
   const std::array y{comp.X[0]/w[0],comp.X[1]/w[1],comp.X[2]/w[2]};
   const double m1=nuclides[0].A,m3=nuclides[1].A,m4=nuclides[2].A;

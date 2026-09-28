@@ -127,5 +127,42 @@ int main() {
   check(reuse_error<1e-7,"screening reuse preserves He3 rates through current dense-core conditions",reuse_error);
   check(rejects([&]{latest_network.eval(2.001e7,100,comp);}),"screening reuse retains nuclear temperature bounds");
   set_screening_reuse(0);
+  check(rejects([]{set_quantum_screening(-1);}) && rejects([]{set_quantum_screening(2);}),
+        "invalid quantum screening domains are rejected");
+  set_quantum_screening(1);
+  double quantum_derivatives=0,helium_channels=0;
+  for(auto [temperature,density]:{std::pair{3e6,700.},std::pair{5e6,4.3e4},std::pair{1e7,1e-8}}) {
+    auto mixture=solar_scaled(.1,.02);mixture.basis=AbundanceBasis::baryon_mass;
+    mixture.X[1]=1e-5;mixture.X[2]-=1e-5;
+    const auto response=latest_network.composition_response(temperature,density,mixture);
+    const auto& state=response.state;
+    const double delta=1e-5;
+    const double derivative=(std::log(latest_network.eval(temperature*std::exp(delta),density,mixture).eps)
+      -std::log(latest_network.eval(temperature*std::exp(-delta),density,mixture).eps))/(2*delta);
+    quantum_derivatives=std::max(quantum_derivatives,std::abs(derivative-state.dlneps_dlnT));
+    for(std::size_t j=0;j<NSPEC;++j) {
+      if(mixture.X[j]<1e-8)continue;
+      const double dx=mixture.X[j]*1e-4;auto plus=mixture,minus=mixture;
+      plus.X[j]+=dx;minus.X[j]-=dx;
+      const double fd=(latest_network.eval(temperature,density,plus).eps
+                     -latest_network.eval(temperature,density,minus).eps)/(2*dx);
+      quantum_derivatives=std::max(quantum_derivatives,
+        std::abs(fd-response.deps_dX[j])/std::max(state.eps,std::abs(response.deps_dX[j])));
+    }
+    double helium_rate=0;
+    for(auto reaction:{PPReaction::he3_he3,PPReaction::he3_he4}) {
+      const auto bare=pp_bare_rate(temperature,reaction,PPRates::solar_fusion_iii);
+      const auto screen=pp_screening(temperature,density,mixture,reaction,PPScreening::salpeter_van_horn);
+      helium_rate+=density*bare.molar_rate*std::exp(screen.log_factor)*mixture.X[1]/3
+        *(reaction==PPReaction::he3_he3?.5*mixture.X[1]/3:mixture.X[2]/4);
+    }
+    helium_channels=std::max(helium_channels,std::abs(state.dXdt[2]/4/helium_rate-1));
+  }
+  check(quantum_derivatives<1e-5,"quantum-screened network temperature and abundance derivatives",quantum_derivatives);
+  check(helium_channels<1e-11,"burning network uses the distinct helium-reaction quantum factors",helium_channels);
+  check(!rejects([&]{cn_screening(5e6,4.3e4,comp,PPScreening::salpeter_van_horn);}),
+        "quantum correction continues through the former classical boundary");
+  check(rejects([&]{latest_network.eval(2e5,1e6,comp);}),"thermo-pycnonuclear conditions remain unsupported");
+  set_quantum_screening(0);
   return failures?1:0;
 }

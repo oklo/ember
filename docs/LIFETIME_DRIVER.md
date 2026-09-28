@@ -25,6 +25,15 @@ Version 1 requires the following keys; paths are relative to the configuration:
   `coupling_abundance_tolerance`, `inventory_abundance_tolerance`, and
   `version` (set to `1`).
 
+For screened-core transport, optional `screened_heat_lower_T_K` separates the
+start of the heat-law transition from the lower temperature limit of the
+microscopic species law. It defaults to `screened_minimum_T_K` and must lie
+between that limit and `screened_heat_upper_T_K`. This permits independently
+checked species coverage to grow while retaining the same heat prescription.
+It does not establish ionization or collision-table support; those still need
+physical assessment. Optional `quantum_screening_zeta_max` selects the
+[nuclear quantum correction](NUCLEAR.md); its default is zero.
+
 The optional `structure_prediction "linear"` uses the recent evolution to
 estimate the next radius, density, temperature and luminosity before solving.
 The accepted composition and thermal history remain the physical starting
