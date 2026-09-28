@@ -54,6 +54,11 @@ threads, including rejected trials at the next EOS limit. Direct comparisons
 against other dense-hydrogen models show substantial pressure and heat-response
 differences there. A suitable EOS treatment and a smooth transition are under
 assessment; no replacement has entered the accepted trajectory.
+Prepared columns also cover **4000–4200 K** at **log g = 6.3–6.5**.
+Independent **4100 K** columns agree with the interpolation to **0.08212%**
+in temperature and **1.496%** in pressure. Every previously supported value
+is retained. These cooler cells have not yet entered a stellar continuation.
+[4000 K source checks](results/cold_atmosphere_4000_sept28_v1.json).
 Gas-only and helium-isotope approximations remain explicit. The separate flash histories retain their atmosphere
 adjustment and cannot establish atmosphere-independent ignition.
 [Cold source checks](results/cold_atmosphere_4400_sept27_v1.json).

@@ -19,10 +19,12 @@ radiative. The convective envelope now contains **2.214%** of the mass.
 Shell burning supplies **25.50%** of the luminosity and is declining;
 no helium-3 runaway has occurred in this continuous calculation. The atmosphere
 matching depth remains at optical depth 100. A continuous composition overlap now includes mixed hydrogen–helium atmospheres.
-Solved mixed-atmosphere cells extend to **4200 K**. The latest continuation
+Solved mixed-atmosphere cells are available down to **4000 K** at the current
+gravity; the selected continuation uses the table through **4200 K**. The latest continuation
 advanced **20.48 Myr** in **34.06 seconds**, including failed trials at a dense-envelope
-EOS limit. Cooler atmosphere columns and the dense-hydrogen EOS are being assessed. The paper currently shows the track through **4560 K** and
+EOS limit. Cooler atmosphere columns and a consistent dense-hydrogen EOS treatment are being assessed. The paper currently shows the track through **4560 K** and
 accounts for **31.30 CPU-hours** in that plotted sequence.
+[4000 K atmosphere checks](docs/results/cold_atmosphere_4000_sept28_v1.json),
 [Current model and envelope checks](docs/results/cooling_envelope_4235_sept27_v1.json),
 [plotted trajectory](docs/reports/2026-09-27/pms_figure_inputs.json).
 

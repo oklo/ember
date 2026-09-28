@@ -1,0 +1,411 @@
+{
+  "created_utc": "2026-09-28T03:48:48.895438+00:00",
+  "selected_for_evolution": false,
+  "current_star_Teff_K": 4235.365820025632,
+  "new_atmosphere_table": "out/cold-mixed-grid-sept27-v5/mixed_tau100.dat",
+  "table_sha256": "85a9d458ba562724f7b9c07868604458cf510354c5902ba3c5bfe3a9c314e93e",
+  "matching_tau": 100,
+  "axes": [
+    [
+      0.98,
+      0.9955
+    ],
+    [
+      4000.0,
+      4200.0,
+      4250.0,
+      4400.0,
+      4550.0
+    ],
+    [
+      6.1,
+      6.3,
+      6.5
+    ]
+  ],
+  "supported_cells": [
+    {
+      "teff": [
+        4000.0,
+        4200.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": false
+    },
+    {
+      "teff": [
+        4000.0,
+        4200.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4200.0,
+        4250.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4200.0,
+        4250.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4250.0,
+        4400.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4250.0,
+        4400.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4400.0,
+        4550.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4400.0,
+        4550.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": false
+    }
+  ],
+  "source_columns": [
+    {
+      "coordinates": [
+        0.98,
+        4000.0,
+        6.3
+      ],
+      "directory": "/Users/greglaughlin/Projects/ember/out/cold4000-atmospheres-sept27-v3/h0.9800_t4000_g630_depth2.0",
+      "result_sha256": "5556b34065fb48287a1f73ef20d6218d01bd0d8b88743c8a22a24b683985d587",
+      "opacity_sha256": "d9c6094fc3538c0cfe06b37b18f43fc50cd22abca800eb160ef53634ef7e57f1",
+      "diagnostics": {
+        "T": 5316.190279581106,
+        "Pgas": 981219088.3299402,
+        "source_density": 0.0038760578139944543,
+        "column_mass": 491.77438223835367,
+        "flux_error": 0.0018667406879477877,
+        "correction": 9.59e-08,
+        "effective_flux_error": 0.00036936814185439815,
+        "hydrostatic_error": 2.0139087442139214e-07,
+        "chemical_density_error": 5.971889649458717e-13,
+        "iterations": 49,
+        "depths": 144,
+        "tau_bracket": [
+          95.94458908632069,
+          121.87385839928307
+        ],
+        "optical_depth_range": [
+          1.0695943852663167e-08,
+          2601.2986628491076
+        ],
+        "column_mass_range": [
+          0.0012448889086901773,
+          1279.132111006493
+        ],
+        "temperature_range": [
+          1957.2432742072424,
+          6170.398719571235
+        ],
+        "density_range": [
+          2.991766551561134e-08,
+          0.00835112586670566
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.98,
+        4000.0,
+        6.5
+      ],
+      "directory": "/Users/greglaughlin/Projects/ember/out/cold4000-atmospheres-sept27-v5/h0.9800_t4000_g650_depth2.0",
+      "result_sha256": "0ce723fd665ed3a798db383631de71f82f0ce8c48903c8d45c04110003ac235e",
+      "opacity_sha256": "d9c6094fc3538c0cfe06b37b18f43fc50cd22abca800eb160ef53634ef7e57f1",
+      "diagnostics": {
+        "T": 5375.223258589841,
+        "Pgas": 1391538496.401038,
+        "source_density": 0.00551656614324799,
+        "column_mass": 440.0430191442733,
+        "flux_error": 0.0005637210993447717,
+        "correction": 8.53e-09,
+        "effective_flux_error": 0.0003212016203624213,
+        "hydrostatic_error": 2.0780326637215296e-07,
+        "chemical_density_error": 5.501155087017651e-13,
+        "iterations": 11,
+        "depths": 144,
+        "tau_bracket": [
+          85.84046871351185,
+          100.01545860293841
+        ],
+        "optical_depth_range": [
+          6.745075011143719e-09,
+          823.342747508843
+        ],
+        "column_mass_range": [
+          0.0007854718000000002,
+          807.0777999999999
+        ],
+        "temperature_range": [
+          1871.4531573164036,
+          5915.018169440225
+        ],
+        "density_range": [
+          3.001317262056201e-08,
+          0.008978996103341885
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.9955,
+        4000.0,
+        6.3
+      ],
+      "directory": "/Users/greglaughlin/Projects/ember/out/cold4000-atmospheres-sept27-v4/h0.9955_t4000_g630_depth2.0",
+      "result_sha256": "1709bfb2b48309ded3645d8c6f36ca51d645f8003efc9ce8d31bb294f00adf1e",
+      "opacity_sha256": "7cab116f80573a32344886132e8d1ba808e25d6f3aa4449b0619acf6317feb5c",
+      "diagnostics": {
+        "T": 5313.467145582812,
+        "Pgas": 973381854.4596968,
+        "source_density": 0.003814172804118898,
+        "column_mass": 487.84646146484573,
+        "flux_error": 0.0018912656966698638,
+        "correction": 8.27e-08,
+        "effective_flux_error": 0.00037773062563628557,
+        "hydrostatic_error": 2.0139021716936156e-07,
+        "chemical_density_error": 5.864198016070077e-13,
+        "iterations": 49,
+        "depths": 144,
+        "tau_bracket": [
+          98.66568306635813,
+          125.26816387686375
+        ],
+        "optical_depth_range": [
+          1.087329376567659e-08,
+          2658.412930414441
+        ],
+        "column_mass_range": [
+          0.0012448889086901773,
+          1279.132111006493
+        ],
+        "temperature_range": [
+          1961.8679700678856,
+          6172.872576592077
+        ],
+        "density_range": [
+          2.9673021181164777e-08,
+          0.008273754405142037
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.9955,
+        4000.0,
+        6.5
+      ],
+      "directory": "/Users/greglaughlin/Projects/ember/out/cold4000-atmospheres-sept27-v6/h0.9955_t4000_g650_depth2.0",
+      "result_sha256": "bc74f7b48e7fabaad262a17bab66d3673d5624f4c199061c90c552e9df97dcbb",
+      "opacity_sha256": "7cab116f80573a32344886132e8d1ba808e25d6f3aa4449b0619acf6317feb5c",
+      "diagnostics": {
+        "T": 5372.363891157336,
+        "Pgas": 1380999115.9720237,
+        "source_density": 0.00543149644059787,
+        "column_mass": 436.7101751072961,
+        "flux_error": 0.0005368433471366618,
+        "correction": 8.89e-09,
+        "effective_flux_error": 0.00032948619280448455,
+        "hydrostatic_error": 2.0780282561361219e-07,
+        "chemical_density_error": 5.579980921766037e-13,
+        "iterations": 12,
+        "depths": 144,
+        "tau_bracket": [
+          88.19710233478017,
+          102.72856502547137
+        ],
+        "optical_depth_range": [
+          6.856582109772984e-09,
+          842.1677811379569
+        ],
+        "column_mass_range": [
+          0.0007854718000000002,
+          807.0777999999999
+        ],
+        "temperature_range": [
+          1875.991614073262,
+          5917.613071729471
+        ],
+        "density_range": [
+          2.977736874564267e-08,
+          0.008896784274878455
+        ]
+      }
+    }
+  ],
+  "held_out": [
+    {
+      "hydrogen": 0.98,
+      "source": "/Users/greglaughlin/Projects/ember/out/cold4000-atmospheres-sept27-v6/h0.9800_t4100_g640_heldout",
+      "relative_error": {
+        "T": 0.0008212038465418292,
+        "Pgas": -0.0149301405259471
+      }
+    },
+    {
+      "hydrogen": 0.9955,
+      "source": "/Users/greglaughlin/Projects/ember/out/cold4000-atmospheres-sept27-v6/h0.9955_t4100_g640_heldout",
+      "relative_error": {
+        "T": 0.0008175300525770091,
+        "Pgas": -0.014958884514623016
+      }
+    }
+  ],
+  "depth_comparisons": [
+    {
+      "coordinates": [
+        0.98,
+        4000.0,
+        6.5
+      ],
+      "deeper_source": "/Users/greglaughlin/Projects/ember/out/cold4000-atmospheres-sept27-v5/h0.9800_t4000_g650_depth2.0",
+      "shallower_source": "/Users/greglaughlin/Projects/ember/out/cold4000-atmospheres-sept27-v5/h0.9800_t4000_g650_depth1.6",
+      "relative_response": {
+        "T": -4.044529041458134e-06,
+        "Pgas": -2.4751138028356046e-05
+      }
+    },
+    {
+      "coordinates": [
+        0.9955,
+        4000.0,
+        6.5
+      ],
+      "deeper_source": "/Users/greglaughlin/Projects/ember/out/cold4000-atmospheres-sept27-v6/h0.9955_t4000_g650_depth2.0",
+      "shallower_source": "/Users/greglaughlin/Projects/ember/out/cold4000-atmospheres-sept27-v6/h0.9955_t4000_g650_depth1.6",
+      "relative_response": {
+        "T": -2.5407204073957246e-06,
+        "Pgas": -1.924485879867266e-05
+      }
+    }
+  ],
+  "native_validation": {
+    "created_utc": "2026-09-28T03:21:28.088923+00:00",
+    "selected_for_evolution": false,
+    "unchanged_old_queries": 42,
+    "new_supported_queries": 100,
+    "missing_queries_rejected": 7,
+    "maximum_derivative_error": 4.610169246355156e-09,
+    "temperature_join_checks": [
+      {
+        "log_g": 6.32,
+        "one_sided_derivative_error": {
+          "T": 3.901662937177974e-09,
+          "P": 4.905255224230132e-08
+        },
+        "two_sided_value_change": {
+          "T": 8.919685789976484e-08,
+          "P": 2.058033188423458e-06
+        }
+      },
+      {
+        "log_g": 6.4,
+        "one_sided_derivative_error": {
+          "T": 1.1422282064632583e-08,
+          "P": 3.302030293639291e-08
+        },
+        "two_sided_value_change": {
+          "T": 8.643111004680293e-08,
+          "P": 2.0078736135964448e-06
+        }
+      },
+      {
+        "log_g": 6.48,
+        "one_sided_derivative_error": {
+          "T": 1.0164948882618319e-09,
+          "P": 5.7819107723844354e-08
+        },
+        "two_sided_value_change": {
+          "T": 8.366536330406404e-08,
+          "P": 1.9577140399906767e-06
+        }
+      }
+    ],
+    "table_sha256": "85a9d458ba562724f7b9c07868604458cf510354c5902ba3c5bfe3a9c314e93e",
+    "qualification": "Old warm values preserved, colder supported cells and4200K continuity checked. Source interpolation and depth comparisons in assembly.json. No new grain or helium-isotope physics."
+  },
+  "colder_opacity_extension": {
+    "base": "out/cold-mixed-opacity-sept27-v1",
+    "extension": "out/cold-mixed-opacity-sept28-v2",
+    "minimum_temperature_K": 1495.3337144509792,
+    "maximum_temperature_K": 13148.344665403018,
+    "temperature_points": 34,
+    "density_points": 19,
+    "frequency_points": 30000,
+    "CPU_seconds": 401.893286,
+    "overlap": [
+      {
+        "hydrogen": 0.98,
+        "old_cells_identical": true,
+        "old_sha256": "d9c6094fc3538c0cfe06b37b18f43fc50cd22abca800eb160ef53634ef7e57f1",
+        "new_sha256": "fe60d1b94ce262190d2b85e21ef17599b19c73931a338ac31b586e4a259b5c76"
+      },
+      {
+        "hydrogen": 0.9955,
+        "old_cells_identical": true,
+        "old_sha256": "7cab116f80573a32344886132e8d1ba808e25d6f3aa4449b0619acf6317feb5c",
+        "new_sha256": "0987871963af81d57d172687dd4804a6e41d1e4880ba7a0a834d39bbd5310bd4"
+      }
+    ]
+  },
+  "limitations": [
+    "Prepared support; the selected main star still uses the previous atmosphere table and stops at a dense-envelope EOS limit.",
+    "Only complete cells are supported; 4000-4200K at logg6.1-6.3 is missing.",
+    "Gas-only LTE plane-parallel source, fixed trace metal mixture, helium-isotope approximation; no new condensate or irradiation physics.",
+    "3800K atmosphere columns are being solved and are not part of this table."
+  ]
+}
