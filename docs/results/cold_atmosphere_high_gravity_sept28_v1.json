@@ -1,0 +1,572 @@
+{
+  "created_utc": "2026-09-28T12:03:14.453701+00:00",
+  "selected_for_evolution": false,
+  "table": "out/cold-mixed-grid-sept28-v3/mixed_tau100.dat",
+  "table_sha256": "3a429ee19b91629c78505862ec299361201757be80a08531609b07b43d8715f7",
+  "matching_tau": 100,
+  "axes": [
+    [
+      0.98,
+      0.9955
+    ],
+    [
+      3600.0,
+      3800.0,
+      4000.0,
+      4200.0,
+      4250.0,
+      4400.0,
+      4550.0
+    ],
+    [
+      6.1,
+      6.3,
+      6.5,
+      6.7
+    ]
+  ],
+  "supported_cells": [
+    {
+      "teff": [
+        3600.0,
+        3800.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": false
+    },
+    {
+      "teff": [
+        3600.0,
+        3800.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        3600.0,
+        3800.0
+      ],
+      "log_g": [
+        6.5,
+        6.7
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        3800.0,
+        4000.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": false
+    },
+    {
+      "teff": [
+        3800.0,
+        4000.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        3800.0,
+        4000.0
+      ],
+      "log_g": [
+        6.5,
+        6.7
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4000.0,
+        4200.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": false
+    },
+    {
+      "teff": [
+        4000.0,
+        4200.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4000.0,
+        4200.0
+      ],
+      "log_g": [
+        6.5,
+        6.7
+      ],
+      "supported": false
+    },
+    {
+      "teff": [
+        4200.0,
+        4250.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4200.0,
+        4250.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4200.0,
+        4250.0
+      ],
+      "log_g": [
+        6.5,
+        6.7
+      ],
+      "supported": false
+    },
+    {
+      "teff": [
+        4250.0,
+        4400.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4250.0,
+        4400.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4250.0,
+        4400.0
+      ],
+      "log_g": [
+        6.5,
+        6.7
+      ],
+      "supported": false
+    },
+    {
+      "teff": [
+        4400.0,
+        4550.0
+      ],
+      "log_g": [
+        6.1,
+        6.3
+      ],
+      "supported": true
+    },
+    {
+      "teff": [
+        4400.0,
+        4550.0
+      ],
+      "log_g": [
+        6.3,
+        6.5
+      ],
+      "supported": false
+    },
+    {
+      "teff": [
+        4400.0,
+        4550.0
+      ],
+      "log_g": [
+        6.5,
+        6.7
+      ],
+      "supported": false
+    }
+  ],
+  "native_validation": {
+    "created_utc": "2026-09-28T12:00:11.998913+00:00",
+    "selected_for_evolution": false,
+    "unchanged_old_queries": 78,
+    "new_supported_queries": 200,
+    "missing_queries_rejected": 7,
+    "maximum_derivative_error": 6.0376689203778255e-09,
+    "gravity_join_checks": [
+      {
+        "teff_K": 3650.0,
+        "gravity_span": 2e-07,
+        "two_sided_value_change": {
+          "T": 1.174998609521083e-08,
+          "P": 3.332527673816088e-07
+        }
+      },
+      {
+        "teff_K": 3750.0,
+        "gravity_span": 2e-07,
+        "two_sided_value_change": {
+          "T": 1.1639427643928002e-08,
+          "P": 3.3555842104959765e-07
+        }
+      },
+      {
+        "teff_K": 3850.0,
+        "gravity_span": 2e-07,
+        "two_sided_value_change": {
+          "T": 1.1442861103105884e-08,
+          "P": 3.4000961268709773e-07
+        }
+      },
+      {
+        "teff_K": 3950.0,
+        "gravity_span": 2e-07,
+        "two_sided_value_change": {
+          "T": 1.1163553859105946e-08,
+          "P": 3.465247921941028e-07
+        }
+      }
+    ],
+    "table_sha256": "3a429ee19b91629c78505862ec299361201757be80a08531609b07b43d8715f7",
+    "qualification": "Old values preserved; higher-gravity cells and logg6.5 continuity checked. Source interpolation and depth comparisons in assembly.json. No new grain or helium-isotope physics."
+  },
+  "independent_columns": [
+    {
+      "hydrogen": 0.98,
+      "teff_K": 3700.0,
+      "log_g": 6.6,
+      "source": "out/cold-highg-atmospheres-sept28-v1/h0.9800_t3700_g660_heldout",
+      "relative_error": {
+        "T": 0.0002524487585100488,
+        "Pgas": -0.005907614017249374
+      }
+    },
+    {
+      "hydrogen": 0.98,
+      "teff_K": 3900.0,
+      "log_g": 6.6,
+      "source": "out/cold-highg-atmospheres-sept28-v1/h0.9800_t3900_g660_heldout",
+      "relative_error": {
+        "T": 0.00035059244460078354,
+        "Pgas": -0.007511977019555638
+      }
+    },
+    {
+      "hydrogen": 0.9955,
+      "teff_K": 3700.0,
+      "log_g": 6.6,
+      "source": "out/cold-highg-atmospheres-sept28-v1/h0.9955_t3700_g660_heldout",
+      "relative_error": {
+        "T": 0.00025706420152959986,
+        "Pgas": -0.005971718808474691
+      }
+    },
+    {
+      "hydrogen": 0.9955,
+      "teff_K": 3900.0,
+      "log_g": 6.6,
+      "source": "out/cold-highg-atmospheres-sept28-v1/h0.9955_t3900_g660_heldout",
+      "relative_error": {
+        "T": 0.00035412736111606335,
+        "Pgas": -0.007639201929617201
+      }
+    }
+  ],
+  "maximum_independent_relative_difference": {
+    "T": 0.00035412736111606335,
+    "Pgas": 0.007639201929617201
+  },
+  "source_columns": [
+    {
+      "coordinates": [
+        0.98,
+        3600.0,
+        6.7
+      ],
+      "result_sha256": "97819d31ee8ef61902fe1bfa00b5188eb310ba2e9b92be3030c85cef1b29a490",
+      "diagnostics": {
+        "T": 5288.614104559716,
+        "Pgas": 3895449233.9717517,
+        "source_density": 0.016611832108971755,
+        "column_mass": 777.2441394777536,
+        "flux_error": 0.00015632279822863637,
+        "correction": 9.53e-10,
+        "effective_flux_error": 5.7736133643349064e-05,
+        "hydrostatic_error": 2.142138284533246e-07,
+        "chemical_density_error": 3.552713678800501e-15,
+        "iterations": 61,
+        "depths": 124,
+        "tau_bracket": [
+          86.08055011851172,
+          101.46459860209278
+        ],
+        "optical_depth_range": [
+          1.8661591810001405e-06,
+          966.7248006823182
+        ],
+        "column_mass_range": [
+          0.02318763193305953,
+          1430.9424829305294
+        ],
+        "temperature_range": [
+          1335.4705825031133,
+          5874.261434202872
+        ],
+        "density_range": [
+          2.1145389943271017e-06,
+          0.027026108059172396
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.98,
+        3800.0,
+        6.7
+      ],
+      "result_sha256": "808173e5aaf85bb32ab2fb826a45e11d6b25a167c5fbd71696846eb73042a6e8",
+      "diagnostics": {
+        "T": 5358.50108905753,
+        "Pgas": 2824255722.81192,
+        "source_density": 0.011670517268588263,
+        "column_mass": 563.5129807916762,
+        "flux_error": 0.0003082996974030916,
+        "correction": 8.89e-10,
+        "effective_flux_error": 9.708758123272432e-05,
+        "hydrostatic_error": 2.1421038320923458e-07,
+        "chemical_density_error": 2.220446049250313e-16,
+        "iterations": 64,
+        "depths": 124,
+        "tau_bracket": [
+          94.76063123299087,
+          111.11447270366315
+        ],
+        "optical_depth_range": [
+          6.718640956566711e-07,
+          537.0559285291561
+        ],
+        "column_mass_range": [
+          0.014492269958162217,
+          894.3391307012491
+        ],
+        "temperature_range": [
+          1534.1999956789034,
+          5786.59642480173
+        ],
+        "density_range": [
+          1.1503434086936653e-06,
+          0.016887906955580113
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.98,
+        4000.0,
+        6.7
+      ],
+      "result_sha256": "953ab91bf6d3ff7d488711a91d5a0d6d0b52d7b6ff6966a92bb1660b94559618",
+      "diagnostics": {
+        "T": 5436.784961350931,
+        "Pgas": 1972039690.752976,
+        "source_density": 0.007831490541342747,
+        "column_mass": 393.47356393482335,
+        "flux_error": 0.0004978633330725568,
+        "correction": 4.42e-10,
+        "effective_flux_error": 0.0002905045525674055,
+        "hydrostatic_error": 2.142099420066046e-07,
+        "chemical_density_error": 5.405675906899887e-13,
+        "iterations": 74,
+        "depths": 144,
+        "tau_bracket": [
+          88.59584772338445,
+          113.20626493691141
+        ],
+        "optical_depth_range": [
+          8.188440986573431e-09,
+          1280.2157325723795
+        ],
+        "column_mass_range": [
+          0.0007929587217473237,
+          814.7706647630658
+        ],
+        "temperature_range": [
+          1788.5478586466963,
+          6120.803484856407
+        ],
+        "density_range": [
+          4.846192507834152e-08,
+          0.014019368466435327
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.9955,
+        3600.0,
+        6.7
+      ],
+      "result_sha256": "a05b825d67ef16fbf26ecab933ef8e5cf0c1660e094044763acd92cbb9b746a0",
+      "diagnostics": {
+        "T": 5285.617967317152,
+        "Pgas": 3869663777.5683384,
+        "source_density": 0.016377649678795157,
+        "column_mass": 772.099265635484,
+        "flux_error": 4.1400995040019595e-05,
+        "correction": 9.59e-10,
+        "effective_flux_error": 0.00017493893931863624,
+        "hydrostatic_error": 2.1421243423525027e-07,
+        "chemical_density_error": 3.3306690738754696e-15,
+        "iterations": 72,
+        "depths": 124,
+        "tau_bracket": [
+          90.52335761421153,
+          106.64614369616858
+        ],
+        "optical_depth_range": [
+          2.7777283681634067e-06,
+          986.0922062345618
+        ],
+        "column_mass_range": [
+          0.028984539916324423,
+          1430.9431138878733
+        ],
+        "temperature_range": [
+          1339.2289195706592,
+          5876.003514437099
+        ],
+        "density_range": [
+          2.615283264314262e-06,
+          0.026794450953875292
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.9955,
+        3800.0,
+        6.7
+      ],
+      "result_sha256": "08847480fa73b375fd8d89a4328e10d819bf8a05ad0eb8757640e8b8553e2e1f",
+      "diagnostics": {
+        "T": 5355.465986561223,
+        "Pgas": 2803700342.417588,
+        "source_density": 0.011497029180863172,
+        "column_mass": 559.4116440823319,
+        "flux_error": 0.00025548685585508046,
+        "correction": 8.04e-10,
+        "effective_flux_error": 4.1047752030287654e-05,
+        "hydrostatic_error": 2.142073729505256e-07,
+        "chemical_density_error": 2.220446049250313e-16,
+        "iterations": 71,
+        "depths": 124,
+        "tau_bracket": [
+          95.03983937093275,
+          111.40237318338275
+        ],
+        "optical_depth_range": [
+          1.4709423676673658e-06,
+          1319.7295275743068
+        ],
+        "column_mass_range": [
+          0.02318763193305954,
+          1144.7544911102987
+        ],
+        "temperature_range": [
+          1538.6078838018536,
+          6036.569549230203
+        ],
+        "density_range": [
+          1.8210361583733697e-06,
+          0.020374673126587396
+        ]
+      }
+    },
+    {
+      "coordinates": [
+        0.9955,
+        4000.0,
+        6.7
+      ],
+      "result_sha256": "f0f48cf8456aaf8eea87a86312aaa2412db009cd1cbd1ca94a4b714cec1a3566",
+      "diagnostics": {
+        "T": 5433.828743275052,
+        "Pgas": 1957259778.289369,
+        "source_density": 0.007712020408790253,
+        "column_mass": 390.5245843299338,
+        "flux_error": 0.0005061231595346882,
+        "correction": 6.43e-10,
+        "effective_flux_error": 0.00029875449774752205,
+        "hydrostatic_error": 2.1420963891571887e-07,
+        "chemical_density_error": 5.491163079796024e-13,
+        "iterations": 76,
+        "depths": 144,
+        "tau_bracket": [
+          91.02500899604895,
+          116.25199144532085
+        ],
+        "optical_depth_range": [
+          8.323086251208881e-09,
+          1308.0595621518141
+        ],
+        "column_mass_range": [
+          0.0007929587217473237,
+          814.7706647630658
+        ],
+        "temperature_range": [
+          1793.1448913906859,
+          6123.214869236048
+        ],
+        "density_range": [
+          4.80829020874695e-08,
+          0.013892991312430037
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "Higher-gravity addition covers3600\u20134000K at logg6.5\u20136.7, H0.98\u20130.9955; other support is explicit in supported_cells.",
+    "Gas-only LTE plane-parallel atmospheres; no new grain, irradiation or helium-isotope physics.",
+    "Independent-column differences measure interpolation, not absolute physical accuracy.",
+    "The retained cooling star and the currently running fresh candidate have not selected this addition."
+  ]
+}

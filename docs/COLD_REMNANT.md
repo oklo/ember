@@ -63,6 +63,12 @@ cooling trajectory still uses its previous table through **4200 K**.
 Independent **3700 K** checks differ by at most **0.02755%** in temperature
 and **0.5884%** in pressure. A deeper **3600 K** column changes matching
 pressure by **0.03360%**.
+Higher-gravity columns also cover **3600–4000 K** through **log g = 6.7**.
+Independent **3700 K** and **3900 K** columns at **log g = 6.6** differ from
+interpolation by at most **0.03541%** in temperature and **0.7639%** in pressure.
+The addition preserves all previous values and is ready for a planned continuation;
+it is not selected in either the retained star or the running fresh candidate.
+[Higher-gravity checks](results/cold_atmosphere_high_gravity_sept28_v1.json).
 [3600 K source checks](results/cold_atmosphere_3600_sept28_v1.json),
 [3800 K source checks](results/cold_atmosphere_3800_sept28_v1.json),
 [4000 K source checks](results/cold_atmosphere_4000_sept28_v1.json).
