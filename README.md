@@ -13,17 +13,17 @@ resolve the stellar/brown-dwarf boundary as initial mass and composition vary.
 The full calculation is not yet established.
 
 The common `ember-evolve --lifetime` program carries the Hayashi-started star
-through **4.006 Tyr**, at **4255 K** and surface hydrogen **X = 0.9923**.
+through **4.006 Tyr**, at **4235 K** and surface hydrogen **X = 0.9922**.
 A radiative shell first forms at **3.558 Tyr**; the centre subsequently becomes
 radiative. The convective envelope now contains **2.214%** of the mass.
-Shell burning supplies **27.35%** of the luminosity and is declining;
+Shell burning supplies **25.50%** of the luminosity and is declining;
 no helium-3 runaway has occurred in this continuous calculation. The atmosphere
 matching depth remains at optical depth 100. A continuous composition overlap now includes mixed hydrogen–helium atmospheres.
-Solved mixed-atmosphere cells extend to **4250 K**. The latest continuation
-completed **20 Myr** in **14.17 seconds** of wall time, using four zone threads.
-Cooler atmosphere columns are being prepared. The paper currently shows the track through **4560 K** and
+Solved mixed-atmosphere cells extend to **4200 K**. The latest continuation
+advanced **20.48 Myr** in **34.06 seconds**, including failed trials at a dense-envelope
+EOS limit. Cooler atmosphere columns and the dense-hydrogen EOS are being assessed. The paper currently shows the track through **4560 K** and
 accounts for **31.30 CPU-hours** in that plotted sequence.
-[Current model and envelope checks](docs/results/cooling_envelope_4255_sept27_v1.json),
+[Current model and envelope checks](docs/results/cooling_envelope_4235_sept27_v1.json),
 [plotted trajectory](docs/reports/2026-09-27/pms_figure_inputs.json).
 
 The selected physics includes initial deuterium burning, pp reactions and
@@ -48,9 +48,12 @@ it does not measure a complete track or validate flash onset.
 [Cooling comparison](docs/results/richardson_cooling_sept27_v1.json),
 [solver settings and earlier measurements](docs/LIFETIME_DRIVER.md).
 
-The EOS supports the current structure. Completed mixed hydrogen–helium
-atmosphere cells cover **4250–4550 K**, **log g = 6.1–6.3**, and hydrogen
-fractions **0.98–0.9955**; the **4250–4400 K** interval also reaches **log g = 6.5**.
+The accepted structure is within EOS support, but cooler trial states encounter
+excluded source values. Direct comparisons show substantial differences between
+FreeEOS and independent dense-hydrogen models in this region; more source points
+alone may not resolve the limitation. Completed mixed hydrogen–helium
+atmosphere cells cover **4200–4550 K**, **log g = 6.1–6.3**, and hydrogen
+fractions **0.98–0.9955**; the **4200–4400 K** interval also reaches **log g = 6.5**.
 An independent atmosphere calculation inside the table measures a maximum
 **0.9565%** pressure interpolation difference. Interpolation uses only supported
 cells; the boundary remains gas-only with an explicit helium-isotope approximation.

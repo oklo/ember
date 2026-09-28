@@ -1,0 +1,142 @@
+{
+  "created_utc": "2026-09-28T02:45:23.044620+00:00",
+  "scope": "Continuous Hayashi-started track through4235K; atmosphere coverage extended to4200K. Main continuation stopped at a dense-envelope EOS source mask. Complete cold-remnant evolution is not validated.",
+  "endpoint": {
+    "years": 4005683203205.6333,
+    "step_years": 9269.71435546875,
+    "accepted": 17214,
+    "rejected": 5210,
+    "radius_Rsun": 0.036485245830920214,
+    "Teff_K": 4235.365820025632,
+    "luminosity_Lsun": 0.00038591525095534507,
+    "nuclear_fraction": 0.25501561031603287,
+    "central_T_K": 6096357.883684263,
+    "central_density_g_cm3": 41479.686065036134,
+    "central_X": 3.438898464900345e-08,
+    "central_He3": 9.445993524029002e-15,
+    "eps_nuc_peak_erg_g_s": 0.06983954152391962,
+    "eps_nuc_peak_q": 0.969276301246281,
+    "burning_half_max_inner_q": 0.9556023011504496,
+    "burning_half_max_outer_q": 0.9760233249972516,
+    "burning_half_max_cells": 17,
+    "He3_peak": 0.018756286764211316,
+    "He3_peak_q": 0.971484245216312,
+    "H_mass_g": 7.43763021558037e+30,
+    "He3_mass_g": 8.225612595361626e+28,
+    "D_mass_g": 0,
+    "surface_X": 0.9921525611468777,
+    "surface_Z": 1.5432929866711733e-30,
+    "error_norm": 0.0005771398957586124,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 6.568538703685273e-13,
+    "drift_gradient_proxy": 4.3565816344329086e-07,
+    "kinetic_heat_proxy": 0.023440357443500107,
+    "convective_mass_fraction": 0.022138183304963307,
+    "radiative_boundaries": 401,
+    "relative_mixing_gradient": 3.239858013823141e-11,
+    "convective_travel_years": 0.05866305525892735,
+    "cpu_seconds": 83.409836
+  },
+  "report": {
+    "requested_age_reached": 0,
+    "age_years": 4005683203205.6333,
+    "accepted_this_invocation": 11,
+    "accepted_total": 17214,
+    "rejected_total": 5218,
+    "stop_reason": "repeated step rejection: evolve_step: Newton iteration limit reached",
+    "cpu_seconds": 117.413516,
+    "wall_seconds": 34.05979175,
+    "full_production_track_validated": false,
+    "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+  },
+  "advance_years": 20483151.623046875,
+  "checkpoint_sha256": "2bbcc61629c5daa51593e2f9fd12c6a3d1f721f8ab0a59708d3d283b0064f3e7",
+  "selected_eos_sha256": "41018d3a00365671d5af37c2493b869138d2b13f0fc9cf980f4add52f8b2aca1",
+  "selected_eos_low_metal_interpolation": "quadratic",
+  "selected_atmosphere": {
+    "local": "out/cold-mixed-grid-sept27-v4",
+    "table_sha256": "2fe02b0ccaf6df04e015c6af50cac96adad0a0613e8f303c6700f91cbbcbf06f",
+    "match_tau": 100,
+    "hydrogen": [
+      0.98,
+      0.9955
+    ],
+    "temperature_K": [
+      4200,
+      4250,
+      4400,
+      4550
+    ],
+    "log_g": [
+      6.1,
+      6.3,
+      6.5
+    ],
+    "unsupported_cells": "4400\u20134550K at log g6.3\u20136.5 remains unsupported",
+    "validation": {
+      "created_utc": "2026-09-28T02:09:48.062618+00:00",
+      "selected_for_evolution": true,
+      "unchanged_old_queries": 30,
+      "new_supported_queries": 100,
+      "missing_queries_rejected": 6,
+      "maximum_derivative_error": 7.678883306994067e-09,
+      "temperature_join_checks": [
+        {
+          "log_g": 6.12,
+          "one_sided_derivative_error": {
+            "T": 1.5522921392729927e-08,
+            "P": 7.042330985029821e-08
+          },
+          "two_sided_value_change": {
+            "T": 1.212277973561271e-07,
+            "P": 2.536452930912425e-06
+          }
+        },
+        {
+          "log_g": 6.25,
+          "one_sided_derivative_error": {
+            "T": 1.9142154528140054e-09,
+            "P": 1.4059795105936246e-08
+          },
+          "two_sided_value_change": {
+            "T": 1.1284145418066771e-07,
+            "P": 2.4447508221170366e-06
+          }
+        },
+        {
+          "log_g": 6.28,
+          "one_sided_derivative_error": {
+            "T": 8.30460655798504e-09,
+            "P": 5.7870932934633856e-08
+          },
+          "two_sided_value_change": {
+            "T": 1.1090614404629662e-07,
+            "P": 2.4235887883250484e-06
+          }
+        }
+      ],
+      "table_sha256": "2fe02b0ccaf6df04e015c6af50cac96adad0a0613e8f303c6700f91cbbcbf06f",
+      "qualification": "Old warm values preserved, colder supported cells and4250K continuity checked. Source interpolation and depth comparisons in assembly.json. No new grain or helium-isotope physics."
+    }
+  },
+  "first_failure_query": {
+    "temperature_K": 74990,
+    "density_g_cm3": 1.571,
+    "source_hydrogen": 0.98,
+    "source_helium3": 0,
+    "source_metals": 0.02
+  },
+  "EOS_comparison": {
+    "status": "diagnostic only; no replacement EOS selected",
+    "source_query_local": "out/cooling-eos-reference-sept27-v1",
+    "matched_element_counts": true,
+    "matched_source_density": true,
+    "representative_baryonic_X": 0.9922,
+    "representative_baryonic_He3": 0.0032,
+    "metals": 0,
+    "FreeEOS_pressure_over_MESA_OPAL_SCVH": 1.1933256005359083,
+    "limitation": "Pressure agreement alone does not establish ionization or caloric accuracy. Partial-ionization/free-energy transition remains under assessment."
+  }
+}

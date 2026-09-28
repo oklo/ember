@@ -108,6 +108,23 @@ class SourceAcceptance(unittest.TestCase):
                 self.assertEqual((plain/name).read_bytes(), (tightened/name).read_bytes())
             self.assertNotEqual(input_fingerprint("same-binary", plain),
                                 input_fingerprint("same-binary", tightened))
+            # .17g formerly expanded 1e-7 to a 22-character token, aborting
+            # TLUSTY before it could read the atmosphere or solve any physics.
+            for threshold in [1e-7, 1.2e-7]:
+                changed = root/str(threshold)
+                atmosphere_inputs(changed, prepared, dict(spec, temperature_convergence=threshold),
+                                  table, abundance, masses, 4600, 5.65)
+                token = (changed/"tas").read_text().split("CHMAX=")[1].replace(",", " ").split()[0]
+                self.assertLessEqual(len(token), 6)
+                self.assertEqual(float(token), threshold)
+                self.assertEqual((changed/"tas").read_text(),
+                                 (plain/"tas").read_text().replace("CHMAX=1.e-6", "CHMAX="+token))
+            unsupported = root/"unsupported"
+            with self.assertRaisesRegex(ValueError, "six-character field"):
+                atmosphere_inputs(unsupported, prepared,
+                                  dict(spec, temperature_convergence=1.23456e-7),
+                                  table, abundance, masses, 4600, 5.65)
+            self.assertFalse(unsupported.exists())
 
     def test_energy_balance_depth_is_explicit_and_inside_the_atmosphere(self):
         from generate_nongrey_grid import energy_balance_tau_division
@@ -141,6 +158,8 @@ class SourceAcceptance(unittest.TestCase):
         for value in [0., -1e-8, 1e-5, math.inf, math.nan]:
             with self.subTest(value=value), self.assertRaisesRegex(ValueError, "temperature convergence"):
                 temperature_convergence(dict(temperature_convergence=value))
+        with self.assertRaisesRegex(ValueError, "six-character field"):
+            temperature_convergence(dict(temperature_convergence=1.23456e-7))
 
     def test_single_composition_uses_four_independent_opacity_workers(self):
         barrier = threading.Barrier(4, timeout=5)

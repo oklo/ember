@@ -4,13 +4,13 @@
 
 Continue the same Hayashi-started star through hydrogen exhaustion and onto
 white-dwarf cooling, testing whether a helium-3 pulse occurs with a consistent
-atmosphere history. The current model has reached **4.006 Tyr** and **4255 K**.
+atmosphere history. The current model has reached **4.006 Tyr** and **4235 K**.
 Convection occupies **2.214%** of the mass in an outer envelope; hydrogen
-burning peaks at **m/M = 0.9693** and supplies **27.35%** of the surface
+burning peaks at **m/M = 0.9693** and supplies **25.50%** of the surface
 luminosity. Its power is declining and no helium-3 runaway has occurred.
 The first radiative region formed at **3.558 Tyr**. Read the
 [current handoff](../HANDOFF.md) before starting or changing jobs.
-[Current state and envelope checks](results/cooling_envelope_4255_sept27_v1.json).
+[Current state and envelope checks](results/cooling_envelope_4235_sept27_v1.json).
 
 The common lifetime program includes initial deuterium, pp and explicit CN
 burning, plasma neutrino losses, composition-dependent EOS and opacity,
@@ -35,8 +35,8 @@ These controls do not establish convergence through a flash.
 [mixing limit](results/instantaneous_mixing_step_cap_sept27_v1.json).
 
 The atmosphere match remains at optical depth **100** throughout. Solved
-mixed hydrogen–helium columns cover **4250–4550 K** at **log g = 6.1–6.3**,
-with hydrogen fractions **0.98–0.9955**; the **4250–4400 K** interval also
+mixed hydrogen–helium columns cover **4200–4550 K** at **log g = 6.1–6.3**,
+with hydrogen fractions **0.98–0.9955**; the **4200–4400 K** interval also
 reaches **log g = 6.5**. A continuous composition overlap
 carries the star through the former **0.5% helium** limit. Only cells with
 complete source support are interpolated; cooler columns are being calculated.
@@ -49,8 +49,11 @@ while preserving every previously valid table value and all source acceptance
 criteria. Some still cooler, dense source states remain excluded; this is
 not a claim of complete cold-remnant EOS coverage.
 [EOS comparison](results/low_metal_eos_sept27_v1.json).
-The latest **20 Myr** continuation completed in **14.17 seconds** on four zone
-threads, reaching the neighborhood of the **4250 K** atmosphere boundary.
+The latest continuation advanced **20.48 Myr** in **34.06 seconds** on four zone
+threads, including rejected trials at the next EOS limit. Direct comparisons
+against other dense-hydrogen models show substantial pressure and heat-response
+differences there. A suitable EOS treatment and a smooth transition are under
+assessment; no replacement has entered the accepted trajectory.
 Gas-only and helium-isotope approximations remain explicit. The separate flash histories retain their atmosphere
 adjustment and cannot establish atmosphere-independent ignition.
 [Cold source checks](results/cold_atmosphere_4400_sept27_v1.json).

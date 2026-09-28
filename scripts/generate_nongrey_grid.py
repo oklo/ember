@@ -248,13 +248,25 @@ def temperature_convergence(spec):
     value = spec.get("temperature_convergence", 1e-6)
     if not math.isfinite(value) or not 0 < value <= 1e-6:
         raise ValueError("invalid source temperature convergence threshold")
+    temperature_convergence_text(value)
     return value
+
+
+def temperature_convergence_text(value):
+    """Encode CHMAX exactly within TLUSTY's six-character keyword field."""
+    text = repr(float(value))
+    if len(text) > 6:
+        text = text.replace("e-0", "e-").replace("e+0", "e+")
+    if len(text) > 6 or float(text) != value:
+        raise ValueError("source temperature convergence threshold must fit "
+                         "TLUSTY's six-character field without rounding")
+    return text
 
 
 def atmosphere_inputs(directory, prepared, spec, table, abundance, masses, teff, logg, initial=None):
     balance_tau = energy_balance_tau_division(spec)
     correction = temperature_convergence(spec)
-    chmax = format(correction, ".17g") if "temperature_convergence" in spec else "1.e-6"
+    chmax = temperature_convergence_text(correction) if "temperature_convergence" in spec else "1.e-6"
     directory.mkdir(parents=True,exist_ok=True)
     text=f"{teff:.17g} {logg:.17g}\nT T\n 'tas'\n0\n92\n"
     # TLUSTY's atomic partition functions support elements through Zn.
