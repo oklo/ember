@@ -35,6 +35,14 @@ comparison changes the largest tracked global quantity by **0.0004176%**.
 This extends the same collision model; it does not add correlated or relativistic
 scattering. [Collision coverage](results/electron_pair_eta128_sept28_v1.json).
 
+An interior EOS extension is also ready. It fills missing source calculations
+across the composition planes and improves agreement with direct FreeEOS
+queries: the largest checked heat-capacity error falls from **0.3800%** to
+**0.001378%**. A matched **5 Myr** stellar comparison changes luminosity by
+**0.004556%**, with unchanged convective mass. The outer cold-envelope gap
+still requires separate treatment.
+[EOS coverage and source comparison](results/cooling_eos_fill_sept28_v1.json).
+
 The code includes initial deuterium, pp and explicit CN burning, plasma neutrino
 losses, composition-dependent EOS and opacity, wavelength-dependent atmospheres,
 hot H/He/metal diffusion, and conservative heat transport during composition

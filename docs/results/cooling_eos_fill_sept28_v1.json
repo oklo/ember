@@ -1,0 +1,115 @@
+{
+  "created_utc": "2026-09-28T17:32:24.436904+00:00",
+  "selected_for_next_continuation": true,
+  "full_production_track_validated": false,
+  "EOS_sha256": "5d67f5fb115fd73cd86066ef3d35906ac284004cce7ae121112bc2fe63b90f66",
+  "source_model": "FreeEOS 3, option tuple 3/223/-2, existing composition and mass normalization; radiation added in the stellar EOS.",
+  "coverage": {
+    "log10_T_K": [
+      5,
+      6.7
+    ],
+    "log10_density_coordinate": [
+      2.3,
+      4.25
+    ],
+    "composition_planes": 240,
+    "recovered_nodes": 871292
+  },
+  "interpolation": "Existing valid potential nodes retained. Supported composition intervals grow, so their fitted composition slopes change. Old interpolated values are not required to remain identical.",
+  "direct_source_check": {
+    "scope": "Ten worst changed thermodynamic states above the cold join; composition-derivative accuracy is a separate question.",
+    "states": 10,
+    "maximum_relative_errors": {
+      "old": {
+        "P": 8.21173005416398e-06,
+        "E": 9.072552188182925e-06,
+        "cv": 0.0034909122391348912,
+        "cp": 0.003799798903380225,
+        "chiT": 0.0034414305551655477,
+        "chiRho": 0.00030786820320383157,
+        "delta": 0.0037504534037198223,
+        "grad_ad": 5.2427674290145276e-05
+      },
+      "new": {
+        "P": 3.7462845536850864e-07,
+        "E": 5.753185270407357e-07,
+        "cv": 1.3363856786630102e-05,
+        "cp": 1.3775570518959057e-05,
+        "chiT": 9.239329375909655e-06,
+        "chiRho": 5.853779037057194e-07,
+        "delta": 9.824701528549085e-06,
+        "grad_ad": 4.382584697593117e-06
+      }
+    }
+  },
+  "stellar_overlap": {
+    "duration_years": 5000000.0,
+    "global_comparison": {
+      "Teff_K": {
+        "control": 3753.4264479361113,
+        "extended": 3753.4687626195173,
+        "relative": 1.1273614654028208e-05
+      },
+      "luminosity_Lsun": {
+        "control": 0.0002006791399675217,
+        "extended": 0.00020068828197692843,
+        "relative": 4.555535472294814e-05
+      },
+      "radius_Rsun": {
+        "control": 0.03350028152550011,
+        "extended": 0.033500289232453156,
+        "relative": 2.3005636662354334e-07
+      },
+      "central_T_K": {
+        "control": 4695029.172708454,
+        "extended": 4695030.678739503,
+        "relative": 3.207713932251721e-07
+      },
+      "central_density_g_cm3": {
+        "control": 44064.39521879231,
+        "extended": 44064.393885058824,
+        "relative": -3.0267826911511975e-08
+      },
+      "H_mass_g": {
+        "control": 7.400099263216474e+30,
+        "extended": 7.400099264404473e+30,
+        "relative": 1.6053824936079764e-10
+      },
+      "He3_mass_g": {
+        "control": 8.145969469432295e+28,
+        "extended": 8.145969350649377e+28,
+        "relative": -1.4581802543212063e-08
+      },
+      "He3_peak": {
+        "control": 0.017642173172408283,
+        "extended": 0.017642173133735586,
+        "relative": -2.1920597559343946e-09
+      },
+      "nuclear_fraction": {
+        "control": 0.056233981160924575,
+        "extended": 0.056231466820342475,
+        "relative": -4.47121212154844e-05
+      },
+      "convective_mass_fraction": {
+        "control": 0.022138183304963307,
+        "extended": 0.022138183304963307,
+        "relative": 0.0
+      }
+    },
+    "maximum_profile_absolute_changes": {
+      "lnr": 2.3005634020023535e-07,
+      "lnrho": 7.629033291856047e-05,
+      "lnT": 8.375887980349717e-05,
+      "X": 1.0454683898736272e-06,
+      "He3": 5.00251598673819e-09
+    },
+    "CPU_seconds": 9.903459,
+    "wall_seconds": 6.947310333140194,
+    "reused_control": true
+  },
+  "limitations": [
+    "Outer cold-potential support gap is not repaired by this interior fill.",
+    "The cold-envelope EOS blend remains provisional; its replacement is being tested."
+  ]
+}
