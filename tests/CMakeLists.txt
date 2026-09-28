@@ -300,3 +300,7 @@ add_test(NAME deuterium_material COMMAND test_deuterium_material)
 
 add_executable(pms_deuterium_table_control ../scripts/pms_deuterium_table_control.cpp)
 target_link_libraries(pms_deuterium_table_control PRIVATE ember)
+
+add_executable(test_ion_quantum test_ion_quantum.cpp)
+target_link_libraries(test_ion_quantum PRIVATE ember)
+add_test(NAME ion_quantum COMMAND test_ion_quantum)

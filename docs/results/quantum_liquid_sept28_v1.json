@@ -1,0 +1,169 @@
+{
+  "component": "BC22 quantum liquid ions, common-electron-density linear mixture",
+  "source": "https://doi.org/10.1093/mnras/stab3613",
+  "independent_reference_sha256": "f514e1781f4f476c8e23ad03848488445aa539dd7ccbdda049dd9ed91d7f8ae9",
+  "profile": {
+    "checkpoint": "/Users/greglaughlin/Projects/ember/out/cia-envelope-cooling-sept28-v1/candidate/evolution/final.checkpoint",
+    "checkpoint_sha256": "28c7da5e4363c2d2f84b4ad57d77f31b2cfc3405c1117499a370f04cb4b4a8bc",
+    "models": 450,
+    "central_Cv_change_fraction": -0.0037607891037465925,
+    "integrated_Cv_change_fraction": -0.0017511479854885035,
+    "maximum_relative_changes": {
+      "P": 0.00025497616404090984,
+      "E": 0.0003860937939255127,
+      "cv": 0.0037607891037465535,
+      "cp": 0.0037762688323619287,
+      "grad_ad": 0.0006799682139548846
+    },
+    "integrated_BC22_minus_leading_WK_fraction_of_Cv": 3.1062319207448572e-06,
+    "exact_potential_Cv_identity_max_relative": 5.559684784682479e-15,
+    "central_theta_H": 0.4362408561062341,
+    "central_theta_He": 0.308468867583343,
+    "scope": "Classical versus BC22 quantum-liquid free energy at identical actual stellar states; not an evolution or cooling-age measurement."
+  },
+  "comparison": {
+    "arms": {
+      "classical": {
+        "age_years": 4009968329401.856,
+        "accepted": 11,
+        "rejected": 0,
+        "CPU_seconds": 20.134004,
+        "wall_seconds": 13.082874165847898,
+        "endpoint": {
+          "Teff_K": 2992.9844820176427,
+          "luminosity_Lsun": 7.226595406696118e-05,
+          "radius_Rsun": 0.03161630415801864,
+          "central_T_K": 2557249.735363125,
+          "H_mass_g": 7.399926429931718e+30,
+          "He3_mass_g": 8.163252627295104e+28,
+          "nuclear_fraction": 0.0035014632378524073,
+          "surface_X": 0.9900624397911284,
+          "convective_mass_fraction": 0.022138183304963376
+        },
+        "audit_maxima": {
+          "first_law": 7.887177677634583e-08,
+          "species_error": 3.2940275506241614e-18
+        }
+      },
+      "quantum": {
+        "age_years": 4009968329401.857,
+        "accepted": 14,
+        "rejected": 3,
+        "CPU_seconds": 255.964991,
+        "wall_seconds": 161.190502458252,
+        "endpoint": {
+          "Teff_K": 2992.3074564957647,
+          "luminosity_Lsun": 7.220878078380421e-05,
+          "radius_Rsun": 0.031618097719993285,
+          "central_T_K": 2556165.4199730502,
+          "H_mass_g": 7.399926421587234e+30,
+          "He3_mass_g": 8.163253461743208e+28,
+          "nuclear_fraction": 0.003502089987480443,
+          "surface_X": 0.9900623300717425,
+          "convective_mass_fraction": 0.022138183304963376
+        },
+        "audit_maxima": {
+          "first_law": 5.1629693631483065e-08,
+          "species_error": 4.1935241839588686e-18
+        }
+      },
+      "quantum_fast": {
+        "age_years": 4009968329401.856,
+        "accepted": 11,
+        "rejected": 0,
+        "CPU_seconds": 40.100355,
+        "wall_seconds": 28.836352166719735,
+        "endpoint": {
+          "Teff_K": 2992.456210424873,
+          "luminosity_Lsun": 7.222422127421806e-05,
+          "radius_Rsun": 0.031618334300615135,
+          "central_T_K": 2556665.0379794766,
+          "H_mass_g": 7.399926439031835e+30,
+          "He3_mass_g": 8.163251717283153e+28,
+          "nuclear_fraction": 0.0035039177877827874,
+          "surface_X": 0.9900625356855778,
+          "convective_mass_fraction": 0.022138183304963376
+        },
+        "audit_maxima": {
+          "first_law": 4.083343074778867e-08,
+          "species_error": 3.663643942882963e-18
+        }
+      }
+    },
+    "comparisons": {
+      "quantum_fast_relative_to_classical": {
+        "Teff_K": -0.0001765032849129211,
+        "luminosity_Lsun": -0.0005774889888597867,
+        "radius_Rsun": 6.421188847216541e-05,
+        "central_T_K": -0.00022864305177661137,
+        "H_mass_g": 1.2297576290620782e-09,
+        "He3_mass_g": -1.1147663714350386e-07,
+        "nuclear_fraction": 0.0007010069115807038,
+        "surface_X": 9.685697133221538e-08,
+        "convective_mass_fraction": 0.0,
+        "max_abs_delta_ln_rho": 0.00029984669375782147,
+        "max_abs_delta_ln_T": 0.00031874139293108783,
+        "max_abs_delta_abundance": 3.112276593997265e-06
+      },
+      "quantum_fast_relative_to_quantum": {
+        "Teff_K": 4.9712113902478094e-05,
+        "luminosity_Lsun": 0.00021383120233076092,
+        "radius_Rsun": 7.482443249662296e-06,
+        "central_T_K": 0.0001954560540262662,
+        "H_mass_g": 2.357401829300443e-09,
+        "He3_mass_g": -2.1369666680648436e-07,
+        "nuclear_fraction": 0.0005219170006707241,
+        "surface_X": 2.0767766750751093e-07,
+        "convective_mass_fraction": 0.0,
+        "max_abs_delta_ln_rho": 2.8464044325993143e-05,
+        "max_abs_delta_ln_T": 0.00019543695498036584,
+        "max_abs_delta_abundance": 3.5718582644950203e-06
+      }
+    },
+    "selection": "quantum_fast selected for the bounded current cooling diagnostic. Global differences from direct evaluation are below 0.1%; identical 1 Myr step agrees within 4.296e-6 locally. No claim of a fully validated strongly quantum mixture, phase change, or uninterrupted Hayashi track."
+  },
+  "same_interval": {
+    "global_relative": {
+      "Teff_K": 4.950686536275839e-07,
+      "luminosity_Lsun": 2.012377283699962e-06,
+      "radius_Rsun": 1.6050567097636304e-08,
+      "central_T_K": -1.0240845171871626e-07,
+      "H_mass_g": 1.6346923814580805e-12,
+      "He3_mass_g": -1.4816337046141825e-10
+    },
+    "max_delta_ln_rho": 4.972829730220951e-07,
+    "max_delta_lnT": 4.295855799085757e-06,
+    "max_delta_species": 2.3399947535196475e-09
+  },
+  "continuation": {
+    "checkpoint_sha256": "1f055fbcc1a9552ab28890a986fbe51236b52a8cf686bf56fc52521b869b1f03",
+    "age_advanced_years": 487148107.5957031,
+    "CPU_seconds": 302.453494,
+    "wall_seconds": 196.5059417905286,
+    "accepted": 29,
+    "rejected": 16,
+    "max_first_law": 5.6586190511076495e-08,
+    "max_species_error": 3.656975766564184e-18,
+    "central_rho_g_cm3": 47848.310341163975,
+    "base_T_K": 316233.83787071606,
+    "base_rho_g_cm3": 87.81224926533521,
+    "stop": "repeated step rejection: evolve_step: Newton iteration limit reached",
+    "diagnosis": "Dense-core interpolation enters a masked source cell. Actual saved model passes; a .999 temperature projection fails45 core nodes in both available families.",
+    "next": "Recover supported dense source nodes; do not keep shrinking timesteps at this source edge."
+  },
+  "endpoint": {
+    "years": 4010455477509.4517,
+    "Teff_K": 2752.1093536842136,
+    "luminosity_Lsun": 5.0715642961247135e-05,
+    "radius_Rsun": 0.03132512091042768,
+    "central_T_K": 2088982.3153757248,
+    "surface_X": 0.9903301740211394,
+    "nuclear_fraction": 0.001586701254107979
+  },
+  "limitations": [
+    "Quantum-liquid mixture above theta_H=1 is not validated.",
+    "No crystallization or latent heat.",
+    "Current integrated-envelope application is in the working calculation; standalone library component is public.",
+    "A new final-physics uninterrupted Hayashi calculation remains required."
+  ]
+}

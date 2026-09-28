@@ -1,8 +1,9 @@
 # Dense-matter preparation for the helium remnant
 
-No dense remnant EOS has been installed in the evolved 0.1 Msun calculation.
-The present work tests components needed for that installation. It does not
-establish a white-dwarf cooling age or cold-atmosphere coverage.
+The cooling calculation uses a composition-dependent material EOS. The
+components below extend its thermal response toward colder conditions.
+Quantum-ion freezing, phase separation and the final cold-envelope EOS remain
+incomplete; the current calculation is not an extreme-cold cooling-age prediction.
 
 ## Cold electron thermal response
 
@@ -92,8 +93,53 @@ finite-difference truncation. All other tested identities agree to 1.42e-8
 or better in their corresponding ideal-ion units. The residual is recorded,
 not treated as zero or as an error bound on total stellar pressure.
 
-No source correction has been submitted upstream or installed into stellar
-evolution. Quantum helium phase equilibrium, mixed compositions, caloric
-reference matching to the partially ionized EOS, and consistent coexistence
-remain outstanding. The native Gamma=175 switch is a documented source
+No source correction has been submitted upstream. The quantum-liquid
+component below differentiates the same free energy directly. Quantum helium
+phase equilibrium, strongly quantum mixtures, caloric reference matching to
+the partially ionized EOS, and consistent coexistence remain outstanding. The native Gamma=175 switch is a documented source
 choice; it is not a self-consistent helium melting calculation.
+
+
+## Quantum liquid ions
+
+`ion_quantum_liquid_jets` evaluates the quantum addition to the ion Helmholtz
+free energy using equations (33)–(34) of
+[Baiko & Chugunov (2022)](https://doi.org/10.1093/mnras/stab3613).
+It adds no electron, classical ion, radiation or screening contribution.
+Use it only with an EOS whose ion term is classical, to avoid double counting.
+
+For a mixture, each ion species uses the same neutralizing electron density.
+The free energies are summed by ion number, retaining the H, He3 and GS98 metal
+composition derivatives as He4 is replaced. This gives the exact leading
+Wigner–Kirkwood mixture term. Higher orders use linear mixing of single-species
+fits, an approximation whose uncertainty grows as the ions become more quantum.
+
+The function returns material F/T and its logarithmic temperature/density
+derivatives through third order, together with three composition gradients
+and six symmetric second derivatives. Pressure, energy, entropy, heat capacity,
+chemical forces and transported enthalpies must all use this same potential.
+A series through the fourteenth power evaluates the published expression
+without cancellation or repeated multidimensional differentiation.
+
+The initial assessed range requires the hydrogen plasma-temperature ratio
+Tp,H/T ≤ 1 and the number-weighted ionic coupling parameter ≤ 100. Below
+300 kK, only Tp,H/T ≤ 0.1 is accepted, where the ideal-ion heat correction is
+at most 0.05556%. These are validity checks, not switches in the potential.
+They neither determine melting nor establish a partially ionized quantum EOS.
+The present 2752 K remnant's mesh remains in the accepted fully ionized regime.
+
+The unit test compares F, U, P and Cv against the pinned independent `LIQUBC`
+implementation, including near the upper assessed quantum ratio; the maximum
+relative difference is 6.104e-11. Finite differences also test all thermal and
+composition derivative channels. The published source's pressure-derivative
+issues described above are avoided by differentiating the free energy itself.
+
+At the saved 3069 K stellar state, the new term lowers central Cv by 0.3761%
+and mass-integrated Cv by 0.1751%. Its difference from the leading quantum
+term is 3.106e-6 of the integrated heat capacity. A matched 150 Myr evolution
+comparison changes luminosity by 0.05775% and leaves the convective extent
+unchanged. These are local measurements, not a bound on the final cooling age.
+The standalone component is available in the library; its use with the
+integrated stellar envelope remains in the tested working calculation.
+
+[Component checks and matched cooling comparison](results/quantum_liquid_sept28_v1.json).
