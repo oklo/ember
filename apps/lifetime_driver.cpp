@@ -19,6 +19,7 @@
 #include "ember/eos_deuterium.hpp"
 #include "ember/metal_microscopic_transport.hpp"
 #include "ember/opacity_radiative.hpp"
+#include "ember/opacity_conductive_interior.hpp"
 #include <charconv>
 #include <chrono>
 #include <ctime>
@@ -91,6 +92,14 @@ int lifetime_main(int argc,char** argv) {
     if(low_metal_interpolation!="cubic" && low_metal_interpolation!="quadratic")
       throw std::invalid_argument("unknown low-metal EOS interpolation");
     const auto conduction_path=path("conduction"),atmosphere_path=path("atmosphere"),collision_path=path("collisions"),composition_path=path("composition");
+    const double conductive_opacity=cfg.values.contains("opacity_conductive_interior")
+        ?cfg.number("opacity_conductive_interior"):0;
+    const double conductive_opacity_scale=cfg.values.contains("opacity_conductive_scale")
+        ?cfg.number("opacity_conductive_scale"):1;
+    if((conductive_opacity!=0 && conductive_opacity!=1) || !std::isfinite(conductive_opacity_scale)
+        || conductive_opacity_scale<.1 || conductive_opacity_scale>10
+        || (conductive_opacity==0 && conductive_opacity_scale!=1))
+      throw std::invalid_argument("invalid conductive-interior radiative opacity selection");
     std::optional<RadiativeOpacity::Extension> opacity_extension;
     if(cfg.values.contains("opacity_hydrogen_response")) {
       opacity_extension=RadiativeOpacity::Extension{path("opacity_hydrogen_response"),
@@ -211,6 +220,11 @@ int lifetime_main(int argc,char** argv) {
 
     RuntimeIdentity identity;identity.file("executable",argv[0]);
     identity.values["opacity.composition_extension"]=opacity_extension?"hydrogen_share.linear_Z.source_log_X.v1":"none";
+    if(conductive_opacity==1) {
+      identity.values["opacity.conductive_interior"]="source_slope.fixed_density_overlap.v3";
+      identity.number("opacity.conductive_transport_uncertainty_limit",.001);
+      identity.number("opacity.conductive_scale",conductive_opacity_scale);
+    }
     if(opacity_extension) {
       identity.family("opacity_hydrogen_response",opacity_extension->hydrogen_response,false);
       identity.number("opacity.minimum_Z",opacity_extension->minimum_Z);
@@ -305,10 +319,17 @@ int lifetime_main(int argc,char** argv) {
                                             :VariableMetalHelmholtzEos::LowMetalInterpolation::cubic);
     DeuteriumApproxEos eos(table_eos);
     const RadiativeOpacity::Tables opacity_tables{low_path,warm_path,bridge_path,hot_path};
-    auto radiation=opacity_extension?std::make_shared<RadiativeOpacity>(opacity_tables,*opacity_extension)
+    auto source_radiation=opacity_extension?std::make_shared<RadiativeOpacity>(opacity_tables,*opacity_extension)
         :std::make_shared<RadiativeOpacity>(opacity_tables);
     TabulatedConduction table_conduction(conduction_path);
-    auto conduction=std::make_shared<HotConduction>(table_conduction);CombinedOpacity combined(radiation,conduction);
+    auto conduction=std::make_shared<HotConduction>(table_conduction);
+    std::shared_ptr<ConductiveInteriorOpacity> continued_radiation;
+    std::shared_ptr<Opacity> radiation=source_radiation;
+    if(conductive_opacity==1) {
+      continued_radiation=std::make_shared<ConductiveInteriorOpacity>(*source_radiation,*conduction,.001,conductive_opacity_scale);
+      radiation=continued_radiation;
+    }
+    CombinedOpacity combined(radiation,conduction);
     CompositionAtmosphereGrid table_atmosphere(eos,atmosphere_path,CompositionAtmosphereGrid::Mixture::allow_documented_proxy);
     std::unique_ptr<FixedMetalAtmosphere> fixed_metal_atmosphere;
     if(atmosphere_metals=="bounded_fixed_Z")fixed_metal_atmosphere=std::make_unique<FixedMetalAtmosphere>(
@@ -497,6 +518,12 @@ int lifetime_main(int argc,char** argv) {
       }
     };
     const auto outcome=ember::evolve(state,atmosphere,control,hooks);
+    if(continued_radiation) {
+      std::ofstream diagnostic(work/"conductive_opacity.json");diagnostic<<std::setprecision(17)
+        <<"{\"evaluations\":"<<continued_radiation->continued_evaluations()
+        <<",\"maximum_relative_transport_uncertainty\":"
+        <<continued_radiation->maximum_transport_uncertainty()<<",\"opacity_scale\":"<<conductive_opacity_scale<<"}\n";
+    }
     if(richardson==1)std::cerr<<"Richardson accepted "<<outcome.richardson_accepted
       <<", declined "<<outcome.richardson_declined<<'\n';
     if(eos_radius>0 || buoyancy_spacing>0 || screening_spacing>0) {

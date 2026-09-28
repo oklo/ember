@@ -1,0 +1,109 @@
+{
+  "scope": "Optional radiative-opacity continuation in a conduction-dominated interior; no change when disabled.",
+  "native_checks": {
+    "queries": 3345,
+    "passed": 3345,
+    "failures": [],
+    "maximum_relative_transport_uncertainty": 0.0005166431008205927,
+    "maximum_supported_combined_opacity_change": 1.8404109598524343e-06,
+    "maximum_absolute_temperature_derivative_error": 6.825190705939121e-07,
+    "maximum_absolute_density_derivative_error": 3.5748130233770326e-08
+  },
+  "overlap_duration_years": 351156711.5805664,
+  "overlap_relative_changes": {
+    "radius_Rsun": 2.8842362302938795e-06,
+    "Teff_K": 1.3185872031584722e-05,
+    "luminosity_Lsun": 5.8513316373742796e-05,
+    "nuclear_fraction": 0.00014036534746142415,
+    "central_T_K": 2.996841962366048e-05,
+    "central_density_g_cm3": -3.614517017580532e-06,
+    "H_mass_g": 5.894644106163582e-09,
+    "He3_mass_g": -5.345487309460495e-07,
+    "He3_peak": 3.7879703997933944e-06,
+    "convective_mass_fraction": 0.0,
+    "surface_X": 9.742956308400608e-08
+  },
+  "opacity_bracket_duration_years": 150000000,
+  "comparisons": {
+    "new_map_vs_nominal": {
+      "relative_endpoint_changes": {
+        "Teff_K": 8.485390146084626e-07,
+        "luminosity_Lsun": 4.00592929405974e-06,
+        "radius_Rsun": 3.0588337285308853e-07,
+        "central_T_K": 5.7506884365565725e-06,
+        "central_density_g_cm3": -5.086851193603081e-07,
+        "nuclear_fraction": 1.6194832919369517e-05,
+        "He3_peak": 1.3012912489784867e-06,
+        "He3_mass_g": -5.7663794739148955e-08,
+        "H_mass_g": 6.359659465715595e-10,
+        "surface_X": 2.3732807719056837e-08,
+        "convective_mass_fraction": 0.0
+      },
+      "maximum_absolute_profile_changes": {
+        "lnr": 3.002501145488168e-07,
+        "lnrho": 1.2967535472085956e-06,
+        "lnT": 5.750671901338933e-06,
+        "X": 3.4306972029884975e-07,
+        "Y3": 2.2492931756740164e-08
+      }
+    },
+    "low_vs_new_map": {
+      "relative_endpoint_changes": {
+        "Teff_K": -2.029405690817665e-05,
+        "luminosity_Lsun": -8.8685827752788e-05,
+        "radius_Rsun": -3.7563475606683383e-06,
+        "central_T_K": -4.341891015535726e-05,
+        "central_density_g_cm3": 4.769044604113759e-06,
+        "nuclear_fraction": -0.0002023584521281263,
+        "He3_peak": -5.2010529876245215e-06,
+        "He3_mass_g": 2.619109034096567e-07,
+        "H_mass_g": -2.8885804859157815e-09,
+        "surface_X": -1.047277925492196e-07,
+        "convective_mass_fraction": 0.0
+      },
+      "maximum_absolute_profile_changes": {
+        "lnr": 3.5249472496445833e-06,
+        "lnrho": 1.4227194164995183e-05,
+        "lnT": 4.8636209839969524e-05,
+        "X": 1.1397306186600176e-06,
+        "Y3": 8.990076760112542e-08
+      }
+    },
+    "high_vs_new_map": {
+      "relative_endpoint_changes": {
+        "Teff_K": 1.2008441550692694e-05,
+        "luminosity_Lsun": 5.226710493810849e-05,
+        "radius_Rsun": 2.116132869600662e-06,
+        "central_T_K": 2.09383377245409e-05,
+        "central_density_g_cm3": -2.3188936663087745e-06,
+        "nuclear_fraction": 0.00013608607405490858,
+        "He3_peak": 2.689652029985723e-06,
+        "He3_mass_g": -9.97993671036923e-08,
+        "H_mass_g": 1.1006735523011457e-09,
+        "surface_X": 5.051359930341448e-08,
+        "convective_mass_fraction": 0.0
+      },
+      "maximum_absolute_profile_changes": {
+        "lnr": 1.9741617940383094e-06,
+        "lnrho": 8.353162626484334e-06,
+        "lnT": 3.010109073464662e-05,
+        "X": 6.74162280334123e-07,
+        "Y3": 4.6490928405640286e-08
+      }
+    }
+  },
+  "limits": {
+    "temperature_K": [
+      1000000.0,
+      3600000.0
+    ],
+    "density_g_cm3": [
+      8500,
+      1000000.0
+    ],
+    "opacity_uncertainty_factor": 10,
+    "maximum_transport_uncertainty": 0.001,
+    "conductivity_reference_multiplier": 0.5
+  },
+  "limitations": "Conditional on the factor-ten opacity bracket and conductive margin; revisit as cooling changes conditions. Envelope diagnostic is not an unchanged-physics Hayashi track."
+}

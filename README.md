@@ -28,6 +28,14 @@ temperature gradient, and a direct-source boundary treatment is being tested.
 [fresh-track comparison](docs/results/fresh_hayashi_cooling_sept28_v1.json).
 [Cooling trial](docs/results/cooling_trial_3728_sept28_v1.json).
 
+A diagnostic using a source-integrated outer envelope has reached **3222 K**
+at **4.010 Tyr**, with nuclear burning down to **0.7665%** of luminosity.
+It has no late helium-3 runaway. Its outer boundary was changed near **3757 K**;
+the initial readjustment remains provisional. A fresh Hayashi calculation with
+the final boundary throughout is still required. The latest stop is the cold
+edge of the envelope interpolation table; colder source atmospheres are being
+prepared. [Cooling boundary checks](docs/results/cooling_boundary_sept28_v1.json).
+
 The selected physics includes deuterium and pp burning, explicit C12/C13/N14
 conversion with Solar Fusion III rates, plasma neutrino losses,
 composition-dependent EOS and opacities, wavelength-dependent atmospheres,

@@ -510,3 +510,28 @@ half/double-opacity comparison supports this choice in the efficiently
 convective envelope of the current remnant; it does not establish accurate
 radiative opacity for arbitrary pure-hydrogen layers. See the
 [temperature-domain comparison](results/dense_envelope_temperature_extension_sept27_v1.json).
+
+
+### Radiative opacity in the conductive interior
+
+`opacity_conductive_interior "1"` permits a bounded density continuation of
+radiative opacity in cool, dense cells. It measures the source opacity slope
+near 8500 g/cm³ and joins smoothly over 8500–9500 g/cm³. The original source
+is recovered over 3.4–3.6 MK. Temperature and composition still require
+supported source queries at the anchor; the option does not supply missing
+opacity data.
+
+The continuation is allowed only when a factor-ten uncertainty in radiation
+changes total heat conductivity by at most 0.1%. The check uses half the
+tabulated electron conductivity, conservatively below the microscopic value
+measured along the tested cooling segment. This margin must be reassessed
+as the physical conditions change. `opacity_conductive_scale` accepts values
+from 0.1 to 10 for sensitivity calculations; its default is 1. Both selections
+are recorded in restart identity. `conductive_opacity.json` records the number
+of continued evaluations and largest conditional transport uncertainty.
+
+The 150 Myr cooling comparison changes luminosity by at most 0.008869% for
+the two extreme opacity scales. This supports the approximation in that
+segment, conditional on its declared uncertainty; it is not validation of
+the opacity source outside its tabulated domain.
+[Numerical and stellar checks](results/conductive_interior_opacity_sept28_v1.json).
