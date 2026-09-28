@@ -34,7 +34,7 @@ def _scripts_dir():
                 return c
     raise SystemExit('cannot locate Ember scripts/ (set EMBER_ROOT)')
 sys.path.insert(0, str(_scripts_dir()))
-from generate_nongrey_grid import temperatures, sequence, temperature_convergence_text, resample_initial_structure
+from generate_nongrey_grid import composition, temperatures, sequence, temperature_convergence_text, resample_initial_structure
 from import_nongrey_grid import source_inputs, source_state
 
 INPUTS = ['fort.5', 'tas', 'ember-masses.dat', 'fort.15', 'fort.8']
@@ -141,6 +141,8 @@ def main():
         raise SystemExit('opacity differs from the prepared source table')
     spec0 = json.loads((col / 'specification.json').read_text())
     x, y, t, g = (spec0[k][0] for k in ['hydrogen', 'helium3', 'teff_K', 'log_g'])
+    # Check mixture metadata before spending CPU on the source solve.
+    composition(x, y, spec0['metals'])
     tas0 = (col / 'tas').read_text(); nd = int(re.search(r'\bND\s*=\s*(\d+)', tas0).group(1))
     m = re.search(r'\bORELAX\s*=\s*([0-9.eE+-]+)', tas0); orelax0 = float(m.group(1)) if m else 1.0
     if args.strategy == 'hybrid' and orelax0 == 1.0: orelax0 = 0.3

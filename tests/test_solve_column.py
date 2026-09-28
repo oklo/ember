@@ -15,7 +15,7 @@ def column(tmp, newton, damped, sleep=0.3):
     (c / 'tas').write_text(f'IOPTAB=-1,IFRSET=5000\nND={ND},NITER=200,CHMAX=1e-08\nORELAX=0.3\n')
     (c / 'ember-masses.dat').write_text('1.0\n'); (c / 'fort.15').write_text("'opacity.bin' 1\n")
     (c / 'opacity.bin').write_text('x'); (c / 'data').mkdir()
-    spec = dict(hydrogen=[0.98], helium3=[0.0], teff_K=[4000.0], log_g=[6.0], tau=100,
+    spec = dict(hydrogen=[0.98], helium3=[0.0], metals=[0.0]*5, teff_K=[4000.0], log_g=[6.0], tau=100,
                 log_temperature=[3, 3.0, 4.0], log_density=[3, -10.0, -1.0])
     (c / 'specification.json').write_text(json.dumps(spec))
     (c / 'provenance.json').write_text(json.dumps({'executables': {'tlusty': SHA}}))
@@ -52,6 +52,19 @@ class T(unittest.TestCase):
         r = solve(c, '--max-phases', '1', exe=rel, cwd=HERE)
         res = json.loads((c / 'result.json').read_text())
         self.assertEqual(res['attempts'][0]['returncode'], 0, r.stderr)   # the fake ran from inside attempts/00_*
+    def test_missing_metadata_fails_before_source_launch(self):
+        c = column(self.tmp, [1], [1])
+        scripts = Path(self.tmp) / 'snapshot' / 'scripts'; scripts.mkdir(parents=True)
+        for name in ['solve_column.py', 'generate_nongrey_grid.py', 'import_nongrey_grid.py',
+                     'prepare_nongrey_sources.py', 'nongrey_opacity.py']:
+            shutil.copyfile(SOLVER.parent / name, scripts / name)
+        env = {k:v for k,v in os.environ.items() if k != 'EMBER_ROOT'}
+        result = subprocess.run([sys.executable, str(scripts / 'solve_column.py'), str(c),
+                                 '--executable', str(FAKE), '--executable-sha256', SHA],
+                                capture_output=True, text=True, env=env)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('synple-elements.json', result.stderr)
+        self.assertFalse((c / 'attempts').exists())
     def test_invalid_budgets_rejected(self):
         for args in (['--total-cpu', '0'], ['--attempt-cpu', 'nan'], ['--max-phases', '0'], ['--chmax', '1e-3']):
             c = column(tempfile.mkdtemp(dir=self.tmp), [1], [1])
