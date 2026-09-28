@@ -11,30 +11,23 @@ hydrogen burning, helium-white-dwarf cooling and extreme cold, with conditional
 nucleon-decay scenarios. Varying the initial mass and composition should also
 resolve the stellar/brown-dwarf boundary. The full calculation remains unfinished.
 
-The `ember-evolve --lifetime` program has carried the initially **0.1-solar-mass**
-star to **4.006 Tyr** and **4235 K**, without a late helium-3 runaway. Shell
-burning supplies **25.50%** of its luminosity and is declining. Convection
-occupies an outer **2.214%** of the mass; surface hydrogen is **X = 0.9922**.
-A fresh calculation from Hayashi contraction reproduces the cooling luminosity
+The common `ember-evolve --lifetime` program follows an initially
+**0.1-solar-mass** star from Hayashi contraction onto helium-white-dwarf
+cooling, without a late helium-3 runaway. A fresh calculation reaches
+**4235 K** at **4.007 Tyr** and reproduces the reference cooling luminosity
 within **0.08179%** and total He3 within **0.8907%**, using **5.361 CPU-hours**
-with the physics tables prepared. Both stop at the same dense-envelope EOS
-limit. A trial with a revised cold-envelope EOS present from Hayashi
-initialization has continued to **3728 K**, with nuclear burning supplying
-**5.200%** of its luminosity and no late helium-3 runaway. A small quantum
-nuclear correction was selected at **3965 K** after a matched comparison.
-The trial remains provisional: its cold-EOS join distorts the outer-envelope
-temperature gradient, and a direct-source boundary treatment is being tested.
-[Current structure](docs/results/cooling_envelope_4235_sept27_v1.json),
-[fresh-track comparison](docs/results/fresh_hayashi_cooling_sept28_v1.json).
-[Cooling trial](docs/results/cooling_trial_3728_sept28_v1.json).
+with the physics tables prepared.
+[Fresh-track comparison](docs/results/fresh_hayashi_cooling_sept28_v1.json).
 
-A diagnostic using a source-integrated outer envelope has reached **3222 K**
-at **4.010 Tyr**, with nuclear burning down to **0.7665%** of luminosity.
-It has no late helium-3 runaway. Its outer boundary was changed near **3757 K**;
-the initial readjustment remains provisional. A fresh Hayashi calculation with
-the final boundary throughout is still required. The latest stop is the cold
-edge of the envelope interpolation table; colder source atmospheres are being
-prepared. [Cooling boundary checks](docs/results/cooling_boundary_sept28_v1.json).
+A development calculation with a source-integrated outer envelope reaches
+**3069 K** at **4.010 Tyr**. Nuclear burning supplies **0.4510%** of luminosity;
+the core remains at **2.750 MK**. Its latest **300 Myr** took **13.15 seconds**
+on four CPU threads, with no rejected intervals. The envelope treatment was
+introduced near **3757 K**, so this continuation is provisional: the final
+boundary must still be applied in a fresh calculation from Hayashi contraction.
+The leading quantum-ion heat-capacity correction is estimated at **0.1754%**
+when integrated over this structure; it is not yet selected in the calculation.
+[Cooling boundary checks](docs/results/cooling_boundary_sept28_v1.json).
 
 The selected physics includes deuterium and pp burning, explicit C12/C13/N14
 conversion with Solar Fusion III rates, plasma neutrino losses,
@@ -46,14 +39,15 @@ transport are not selected.
 [Physics and remaining work](docs/COLD_REMNANT.md),
 [configuration](docs/LIFETIME_DRIVER.md).
 
-Atmospheres join the interior at optical depth **100**. Prepared mixed H/He
-columns extend to **3200 K**, with **log g = 6.3–6.7** over **3200–4000 K**.
-Independent **3300 K** columns differ from interpolation by at most
-**0.009569%** in temperature and **0.3912%** in pressure. A deeper **3200 K**
-column changes matching pressure by **0.02925%**. These test interpolation and
-boundary depth, not absolute physical accuracy. The cooling trial uses this
-coverage; the atmosphere remains gas-only with a helium-isotope approximation.
-[Atmosphere checks](docs/results/cold_atmosphere_3200_sept28_v1.json).
+Atmospheres use wavelength-dependent gas absorption and match at optical
+depth **100**. The cooling calculation integrates the outer **0.15%** of
+the mass beneath that atmosphere. New mixed H/He source columns reach
+**2500 K**, with some edge cells still unsupported. Revised molecular
+collision-induced absorption changes the stellar effective temperature by
+**3.219 K** and luminosity by **0.3513%** in a matched **150 Myr** comparison.
+These tables and the integrated-envelope implementation remain local research
+inputs; public runtime and test-data availability is incomplete.
+[Atmosphere and stellar checks](docs/results/cooling_boundary_sept28_v1.json).
 Removing repeated chemistry work reduced source CPU time by **1.601–3.455**
 in two controls, with state differences below **1.628e-7**.
 [Source optimization](docs/results/tlusty_russel_sept28_v1.json).

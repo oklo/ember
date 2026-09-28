@@ -1,48 +1,48 @@
 {
   "endpoint": {
-    "years": 4009527157526.856,
-    "step_years": 78125.00004563085,
-    "accepted": 4079,
-    "rejected": 1354,
-    "radius_Rsun": 0.03198207306798819,
-    "Teff_K": 3221.6270793310528,
-    "luminosity_Lsun": 9.926770212800177e-05,
-    "nuclear_fraction": 0.007664934274410649,
-    "central_T_K": 3145865.101430888,
-    "central_density_g_cm3": 46419.338747267655,
-    "central_X": 3.2040244564463616e-08,
-    "central_He3": 1.108217482724979e-14,
-    "eps_nuc_peak_erg_g_s": 0.0005178909021597992,
+    "years": 4009818329401.8564,
+    "step_years": 2353039.846209851,
+    "accepted": 4091,
+    "rejected": 1346,
+    "radius_Rsun": 0.03172516033195534,
+    "Teff_K": 3069.03103718156,
+    "luminosity_Lsun": 8.044636986795143e-05,
+    "nuclear_fraction": 0.004509970256674794,
+    "central_T_K": 2750318.778812552,
+    "central_density_g_cm3": 46974.204756753104,
+    "central_X": 3.187221908858879e-08,
+    "central_He3": 1.1136574243100115e-14,
+    "eps_nuc_peak_erg_g_s": 0.00025971684659709116,
     "eps_nuc_peak_q": 0.969276301246281,
-    "burning_half_max_inner_q": 0.9556023011504496,
-    "burning_half_max_outer_q": 0.9750632359033806,
+    "burning_half_max_inner_q": 0.9570627137583326,
+    "burning_half_max_outer_q": 0.9760233249972516,
     "burning_half_max_cells": 16,
-    "He3_peak": 0.01727831100751027,
+    "He3_peak": 0.017315630611408516,
     "He3_peak_q": 0.9703952386387595,
-    "H_mass_g": 7.399937544937235e+30,
-    "He3_mass_g": 8.162141126749816e+28,
+    "H_mass_g": 7.399928989652453e+30,
+    "He3_mass_g": 8.162996655221423e+28,
     "D_mass_g": 0,
-    "surface_X": 0.9899085934927787,
-    "surface_Z": 1.0842666438506663e-30,
-    "error_norm": 7.835326687069029e-05,
+    "surface_X": 0.9899980039754223,
+    "surface_Z": 9.13417120617503e-31,
+    "error_norm": 0.001562773812580076,
     "initial_D_approximation": 0,
     "omitted_mixing_heat_fraction": 0,
     "gross_mixing_heat_fraction": 0,
-    "burn_gradient_estimate": 7.260964493915756e-14,
-    "drift_gradient_proxy": 1.1724672185373665e-10,
-    "kinetic_heat_proxy": 0.007437362645337783,
+    "burn_gradient_estimate": 7.336354893418132e-14,
+    "drift_gradient_proxy": 1.1700125358914794e-10,
+    "kinetic_heat_proxy": 0.00851183195497531,
     "convective_mass_fraction": 0.022138183304963376,
     "radiative_boundaries": 401,
-    "relative_mixing_gradient": 4.908711836456972e-12,
-    "convective_travel_years": 0.06532119160307961,
-    "cpu_seconds": 63.523951
+    "relative_mixing_gradient": 4.873440470606287e-12,
+    "convective_travel_years": 0.07102459993151646,
+    "cpu_seconds": 32.557796
   },
-  "last_segment_years": 158828124.99951172,
-  "last_segment_CPU_seconds": 219.427538,
-  "last_segment_wall_seconds": 90.22151483409107,
-  "last_segment_requested_age_reached": false,
-  "stop": "The last successful base Teff is 3338.390669752745 K. A factor 0.99999 reduction reaches an unsupported envelope-map cell. Repeated Newton failures follow those support errors. Process terminated itself; primary sent no signal.",
-  "last_checkpoint_sha256": "492913adb9341855901a684d0f7f9e228f95dccea9a12dbb054ce98b97867ffa",
+  "last_segment_years": 300000000.0,
+  "last_segment_CPU_seconds": 32.594114000000005,
+  "last_segment_wall_seconds": 13.152154540643096,
+  "last_segment_requested_age_reached": true,
+  "stop": "Requested age reached; 16 accepted intervals, none rejected.",
+  "last_checkpoint_sha256": "28c7da5e4363c2d2f84b4ad57d77f31b2cfc3405c1117499a370f04cb4b4a8bc",
   "outer_mass_fraction": 0.0015,
   "outer_layer_model": "Hydrostatic, homogeneous, constant-luminosity envelope; base-state heat and composition reservoir retained in the evolution equations.",
   "steady_envelope_heat_error_fraction_estimate": [
@@ -50,5 +50,55 @@
     0.0003
   ],
   "initial_adjustment": "The boundary was inserted near 3757 K. The insertion transient is not established to 0.1 percent accuracy. A fresh Hayashi calculation with the final boundary is required.",
-  "status": "Diagnostic; final boundary and full-lifetime validation unfinished."
+  "status": "Development diagnostic. The integrated envelope, revised cold EOS and molecular-opacity tables are local research inputs; final boundary and full-lifetime validation remain unfinished.",
+  "interval_audits": {
+    "max_accepted_first_law": 1.335772629174059e-07,
+    "max_accepted_species_error": 3.7518448851913216e-18
+  },
+  "molecular_absorption_update": {
+    "prescription": "CIA v2: HITRAN absolute (Abel 2011 H2-H2 T<=3000 K; Abel 2012 H2-He); Borysow 2001 H2-H2 >=4000 K; declared 3000-4000 K blend; partf at max(T,1000 K)",
+    "table_sha256": "48f190950f5cbc4a8d7d5470852a179979f884ce397ee726797c4779e8dd9181",
+    "source_columns": 92,
+    "held_out_maximum_relative_errors": {
+      "T": 0.00018603710556353015,
+      "Pgas": 0.0008572336300951555
+    },
+    "matched_duration_years": 150000000.0,
+    "matched_temperature_change_K": 3.218767001834749,
+    "matched_relative_changes": {
+      "luminosity_Lsun": 0.0035126955766306978,
+      "Teff_K": 0.0009976077759141777,
+      "radius_Rsun": -0.00024092172999101713,
+      "central_T_K": -2.2573616069943014e-05,
+      "central_density_g_cm3": 3.407009578038078e-05,
+      "nuclear_fraction": -0.01988726987915057,
+      "H_mass_g": 1.057364817924622e-08,
+      "He3_mass_g": -9.586296838559605e-07,
+      "He3_peak": 5.7180442646354024e-05,
+      "convective_mass_fraction": 0.0
+    },
+    "atmosphere_coverage_K": [
+      2500,
+      4550
+    ],
+    "limitations": "Some edge cells remain masked; native envelope coverage reaches about 2550\u20132600 K along the expected cooling corridor. Revised CIA is a physical correction, selected after a matched stellar comparison."
+  },
+  "quantum_ion_assessment": {
+    "selected": false,
+    "central_cv_fraction": -0.0037726445347875635,
+    "integrated_cv_fraction": -0.0017542542174092555,
+    "scope": "Offline first quantum-ion correction, assuming fully ionized point ions in a uniform neutralizing electron background. Not selected in the stellar EOS.",
+    "limitations": [
+      "Partial ionization and electron screening modify the uniform-background approximation.",
+      "The all-charged versus neutral-metal comparison is a sensitivity estimate, not a full partial-ionization model.",
+      "Mass-integrated heat capacity is not a measured change in cooling age.",
+      "Baiko-Yakovlev 2019 treats one ion species; its use here only estimates higher-order size for helium.",
+      "Reuse the retained Baiko-Chugunov 2022 research before implementing deeper quantum cooling and melting."
+    ],
+    "references": [
+      "https://arxiv.org/abs/1001.0690",
+      "https://doi.org/10.3390/atoms10020065",
+      "https://arxiv.org/abs/1910.06771"
+    ]
+  }
 }
