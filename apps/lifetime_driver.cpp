@@ -86,6 +86,10 @@ int lifetime_main(int argc,char** argv) {
     if(cfg.get("version")!="1")throw std::invalid_argument("unsupported lifetime configuration version");
     const auto path=[&](const char* key){return fs::canonical(config.parent_path()/cfg.get(key));};
     const auto eos_path=path("eos"),low_path=path("opacity_low"),warm_path=path("opacity_warm"),bridge_path=path("opacity_bridge"),hot_path=path("opacity_hot");
+    const auto low_metal_interpolation=cfg.values.contains("eos_low_metal_interpolation")
+        ?cfg.get("eos_low_metal_interpolation"):"cubic";
+    if(low_metal_interpolation!="cubic" && low_metal_interpolation!="quadratic")
+      throw std::invalid_argument("unknown low-metal EOS interpolation");
     const auto conduction_path=path("conduction"),atmosphere_path=path("atmosphere"),collision_path=path("collisions"),composition_path=path("composition");
     std::optional<RadiativeOpacity::Extension> opacity_extension;
     if(cfg.values.contains("opacity_hydrogen_response")) {
@@ -256,6 +260,8 @@ int lifetime_main(int argc,char** argv) {
         {"verification_correction_tolerance",verification_correction}})
       if(value>0)identity.number("solver."+key,value);
     identity.family("eos",eos_path,true);
+    if(low_metal_interpolation=="quadratic")
+      identity.values["eos.low_metal_interpolation"]="quadratic.C2_to_cubic.v1";
     for(const auto& [role,p]:std::map<std::string,fs::path>{{"opacity_low",low_path},{"opacity_warm",warm_path},
         {"opacity_bridge",bridge_path},{"opacity_hot",hot_path}})identity.family(role,p,false);
     for(const auto& [role,p]:std::map<std::string,fs::path>{{"conduction",conduction_path},{"atmosphere",atmosphere_path},
@@ -282,7 +288,10 @@ int lifetime_main(int argc,char** argv) {
                             LuminosityGrid::volume_faces,version==6);
       if(state.model.age>=target)throw std::invalid_argument("target must exceed the saved age");
     }
-    VariableMetalHelmholtzEos table_eos(eos_path,HelmholtzTableEos::Mixture::allow_documented_proxy);DeuteriumApproxEos eos(table_eos);
+    VariableMetalHelmholtzEos table_eos(eos_path,HelmholtzTableEos::Mixture::allow_documented_proxy,
+        low_metal_interpolation=="quadratic"?VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic
+                                            :VariableMetalHelmholtzEos::LowMetalInterpolation::cubic);
+    DeuteriumApproxEos eos(table_eos);
     const RadiativeOpacity::Tables opacity_tables{low_path,warm_path,bridge_path,hot_path};
     auto radiation=opacity_extension?std::make_shared<RadiativeOpacity>(opacity_tables,*opacity_extension)
         :std::make_shared<RadiativeOpacity>(opacity_tables);

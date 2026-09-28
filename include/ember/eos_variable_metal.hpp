@@ -30,8 +30,11 @@ struct MetalCompositionHeatResponse {
 // a higher-Z plane never changes the already covered composition interval.
 class VariableMetalHelmholtzEos final : public Eos {
  public:
+  // Optional local low-Z potential; C2 blend back to cubic by z_[2].
+  enum class LowMetalInterpolation { cubic, quadratic };
   explicit VariableMetalHelmholtzEos(const std::filesystem::path&,
-      HelmholtzTableEos::Mixture=HelmholtzTableEos::Mixture::exact);
+      HelmholtzTableEos::Mixture=HelmholtzTableEos::Mixture::exact,
+      LowMetalInterpolation=LowMetalInterpolation::cubic);
   // Convert a text family and its planes to one relocatable binary input.
   // Stored doubles, masks and logarithmic coordinates remain bit-identical.
   static void pack_binary(const std::filesystem::path& source,const std::filesystem::path& destination);
@@ -62,6 +65,7 @@ class VariableMetalHelmholtzEos final : public Eos {
   }
   std::vector<double> z_,u_,v_;
   bool extend_metals_{};
+  LowMetalInterpolation low_metal_interpolation_{};
   // Five source weights, each polynomial in the interval coordinate.
   using MetalExtension=std::array<std::array<double,6>,5>;
   std::vector<MetalExtension> metal_extensions_;

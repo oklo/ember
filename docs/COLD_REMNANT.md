@@ -4,13 +4,13 @@
 
 Continue the same Hayashi-started star through hydrogen exhaustion and onto
 white-dwarf cooling, testing whether a helium-3 pulse occurs with a consistent
-atmosphere history. The current model has reached **4.006 Tyr** and **4382 K**.
+atmosphere history. The current model has reached **4.006 Tyr** and **4255 K**.
 Convection occupies **2.214%** of the mass in an outer envelope; hydrogen
-burning peaks at **m/M = 0.9704** and supplies **43.22%** of the surface
+burning peaks at **m/M = 0.9693** and supplies **27.35%** of the surface
 luminosity. Its power is declining and no helium-3 runaway has occurred.
 The first radiative region formed at **3.558 Tyr**. Read the
 [current handoff](../HANDOFF.md) before starting or changing jobs.
-[Current state and atmosphere checks](results/cool_mixed_atmosphere_extension_sept27_v1.json).
+[Current state and envelope checks](results/cooling_envelope_4255_sept27_v1.json).
 
 The common lifetime program includes initial deuterium, pp and explicit CN
 burning, plasma neutrino losses, composition-dependent EOS and opacity,
@@ -36,24 +36,32 @@ These controls do not establish convergence through a flash.
 
 The atmosphere match remains at optical depth **100** throughout. Solved
 mixed hydrogen–helium columns cover **4250–4550 K** at **log g = 6.1–6.3**,
-with hydrogen fractions **0.98–0.9955**. A continuous composition overlap
+with hydrogen fractions **0.98–0.9955**; the **4250–4400 K** interval also
+reaches **log g = 6.5**. A continuous composition overlap
 carries the star through the former **0.5% helium** limit. Only cells with
 complete source support are interpolated; cooler columns are being calculated.
-The EOS supports the accepted state, but a neighboring trial state reaches a mask
-in a **4% metal** source table used by interpolation. The affected layer has
-**Z = 1.572e-30**; its hydrogen–helium tables still have support. A consistent
-trace-metal treatment is under review. Atmosphere coverage now reaches **4250 K**. Gas-only and helium-isotope approximations remain explicit. The separate flash histories retain their atmosphere
+The selected low-metal EOS differentiates a quadratic free energy through all
+thermal and composition channels, joining smoothly to the original cubic at
+larger metal abundance. A matched **10 Myr** comparison changes luminosity by
+**3.637e-6** relative and temperature by **0.002140 K**. Direct source
+re-evaluations and narrower derivative stencils recover additional support
+while preserving every previously valid table value and all source acceptance
+criteria. Some still cooler, dense source states remain excluded; this is
+not a claim of complete cold-remnant EOS coverage.
+[EOS comparison](results/low_metal_eos_sept27_v1.json).
+The latest **20 Myr** continuation completed in **14.17 seconds** on four zone
+threads, reaching the neighborhood of the **4250 K** atmosphere boundary.
+Gas-only and helium-isotope approximations remain explicit. The separate flash histories retain their atmosphere
 adjustment and cannot establish atmosphere-independent ignition.
 [Cold source checks](results/cold_atmosphere_4400_sept27_v1.json).
 
 In the dense hydrogen envelope, the opacity approximation uses the measured
 hydrogen slope of the retained source while remaining within its temperature
 and density coverage. The selected domain extends through **log R = 2.5**
-and **log T = 6.3**. At the latest density limit, convection carries **99.95%**
-of the thermal luminosity. Matched **1 Myr** half/double-opacity controls
-produce negligible structural changes. This supports the local approximation without establishing opacity
-accuracy in radiative layers.
-[Opacity response](results/dense_envelope_density_extension_sept27_v1.json).
+and **log T = 6.6**. Matched **20 Myr** half/double-opacity controls change
+the global quantities by at most **2.174e-5** relative. This supports the
+approximation locally without establishing opacity accuracy in radiative layers.
+[Opacity response](results/dense_envelope_hot_extension_sept27_v1.json).
 
 The [working paper](reports/2026-09-27/ember_status_and_future.pdf) is **30 pages**
 and currently plots the trajectory through **4560 K**. It retains the

@@ -26,8 +26,8 @@ class DenseHydrogenOpacity final: public Opacity {
      :ratio_(ratio),slope_(slope),maximum_(maximum_logR),maximum_logT_(maximum_logT) {
    if(!std::isfinite(maximum_) || maximum_<1.8 || maximum_>2.5)
      throw std::invalid_argument("DenseHydrogenOpacity: maximum logR must lie in [1.8,2.5]");
-   if(!std::isfinite(maximum_logT_) || maximum_logT_<6.1 || maximum_logT_>6.3)
-     throw std::invalid_argument("DenseHydrogenOpacity: maximum logT must lie in [6.1,6.3]");
+   if(!std::isfinite(maximum_logT_) || maximum_logT_<6.1 || maximum_logT_>6.6)
+     throw std::invalid_argument("DenseHydrogenOpacity: maximum logT must lie in [6.1,6.6]");
  }
  OpacityState eval(double T,double rho,const Composition& c)const override {
    const double r=logR(T,rho);

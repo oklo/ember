@@ -1,0 +1,74 @@
+{
+  "created_utc": "2026-09-28T01:33:01.042363+00:00",
+  "scope": "20Myr at the current cooling stage, maximum source-slope opacity temperature logT6.6; density limit2.5 and actual source domains retained.",
+  "runs": {
+    "nominal": {
+      "requested_age_reached": 1,
+      "age_years": 4005610309627.1206,
+      "accepted_this_invocation": 11,
+      "accepted_total": 17175,
+      "rejected_total": 5178,
+      "stop_reason": "requested age",
+      "cpu_seconds": 16.327298,
+      "wall_seconds": 16.36443975,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    },
+    "half": {
+      "requested_age_reached": 1,
+      "age_years": 4005610309627.1206,
+      "accepted_this_invocation": 11,
+      "accepted_total": 17175,
+      "rejected_total": 5178,
+      "stop_reason": "requested age",
+      "cpu_seconds": 16.215341,
+      "wall_seconds": 16.228882667,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    },
+    "double": {
+      "requested_age_reached": 1,
+      "age_years": 4005610309627.1206,
+      "accepted_this_invocation": 11,
+      "accepted_total": 17175,
+      "rejected_total": 5178,
+      "stop_reason": "requested age",
+      "cpu_seconds": 16.128296,
+      "wall_seconds": 16.146868208,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "global_response": {
+    "half": {
+      "Teff_K": -3.517821883791683e-06,
+      "luminosity_Lsun": -2.1736613203149346e-05,
+      "radius_Rsun": -3.832761235611493e-06,
+      "He3_mass_g": 1.292758130322369e-06,
+      "H_mass_g": -1.5757845139852122e-08,
+      "He3_peak": 2.2373734631653264e-06,
+      "central_T_K": 2.8674727861055516e-06,
+      "central_density_g_cm3": -1.7183324385605658e-07
+    },
+    "double": {
+      "Teff_K": 1.8899783360559752e-07,
+      "luminosity_Lsun": 1.1679267017949968e-06,
+      "radius_Rsun": 2.0596739980227596e-07,
+      "He3_mass_g": -6.160458143611436e-08,
+      "H_mass_g": 7.706690841047248e-10,
+      "He3_peak": -1.1278161737848791e-07,
+      "central_T_K": -1.41962087085723e-07,
+      "central_density_g_cm3": 7.35093941273135e-09
+    }
+  },
+  "maximum_global_response": 2.1736613203149346e-05,
+  "selected_nominal": true,
+  "tests": [
+    "Native source-support, temperature/density derivative and prior-bound rejection tests through3.95MK.",
+    "All11 accepted intervals in each arm pass the original full/two-half and conservation checks."
+  ],
+  "limitations": [
+    "Hydrogen abundance remains a source-slope approximation, not a directly measured pure-H radiative opacity.",
+    "The sensitivity bound applies to this20Myr interval; reassess if transport or composition changes."
+  ]
+}

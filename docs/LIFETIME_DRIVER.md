@@ -284,6 +284,23 @@ It is a self-contained input, checked by content; the loader does not trust
 modification times or silently substitute a cache. Keep the original source
 manifest and provenance for regeneration. An existing output is never overwritten.
 
+The optional `eos_low_metal_interpolation "quadratic"` uses the first three
+metal planes below the first nonzero metal node. Between the first and second
+nonzero nodes, a quintic weight returns to the cubic interpolant with continuous
+first and second derivatives. For the current family these boundaries are
+Z = 0.005 and 0.02. The default remains `"cubic"`. This setting is part of the
+restart identity.
+
+All thermal and composition derivatives come from the same free-energy
+interpolation; the analytic ideal mixing terms and actual stellar abundances
+are retained. This avoids consulting a distant metal-rich source at trace Z.
+It does not extend the temperature/density domain of the required low-metal
+planes. A matched 10 Myr cooling comparison changes luminosity by 3.637e-6
+and He3 inventory by 2.001e-7; the convective boundary is identical. Metal
+enthalpy derivatives can change appreciably even when their contribution at
+trace abundance is small. The comparison and derivative checks are recorded in
+[the EOS assessment](results/low_metal_eos_sept27_v1.json).
+
 The retained 1-Gyr contraction reproduces all 1020 physical history rows and
 both complete physical checkpoints exactly with binary loading. In one matched
 M4 check, CPU time through construction of the initial relaxed model fell from

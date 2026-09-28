@@ -9,6 +9,7 @@
 #include <fstream>
 #include <iomanip>
 #include <limits>
+#include <sstream>
 #include <stdexcept>
 
 namespace ember {
@@ -265,7 +266,13 @@ std::array<HelmholtzJet,10> HelmholtzTableEos::mixed_composition_jets(
   const auto it=interp::locate(reference.t_,t),iq=interp::locate(reference.q_,q);
   for(const auto& p:planes) {
     const auto [lo,hi]=p.table->supported_q(it);
-    if(iq<lo || iq>=hi)throw std::domain_error("HelmholtzTableEos: masked composition support");
+    if(iq<lo || iq>=hi) {
+      std::ostringstream message;
+      message<<std::setprecision(4)<<"HelmholtzTableEos: masked composition support at T="
+             <<T<<", rho="<<rho<<"; source X="<<p.table->composition_.X[0]
+             <<", He3="<<p.table->composition_.X[1]<<", Z="<<p.table->composition_.Z();
+      throw std::domain_error(message.str());
+    }
   }
   const double ht=reference.t_[it+1]-reference.t_[it],hq=reference.q_[iq+1]-reference.q_[iq];
   const auto bt=evaluate_basis((t-reference.t_[it])/ht,ht),bq=evaluate_basis((q-reference.q_[iq])/hq,hq);

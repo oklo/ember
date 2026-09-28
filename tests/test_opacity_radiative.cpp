@@ -70,6 +70,21 @@ int main(int argc,char**argv) {
   bool temperature_rejected=false;
   try{expanded.eval(hotT,hotrho,hrich);}catch(const std::domain_error&){temperature_rejected=true;}
   require(temperature_rejected,"default temperature limit must remain unchanged");
+  RadiativeOpacity hotter(files,{data/"opacity/lifetime/hydrogen_response.dat",0,.16,1,2.5,6.6});
+  for(const auto& [t,r]:std::array<std::pair<double,double>,3>{{{2.1e6,200.},{3e6,600.},{3.95e6,1500.}}}) {
+    const auto state=hotter.eval(t,r,hrich);
+    const auto logk=[&](double tt,double rr){return std::log(hotter.eval(tt,rr,hrich).kappa);};
+    require(std::isfinite(state.kappa) && state.kappa>0,"hot envelope approximation needs valid source values");
+    require(std::abs((logk(t*std::exp(e),r)-logk(t*std::exp(-e),r))/(2*e)-state.dlnk_dlnT)<2e-5,
+        "hot envelope temperature derivative mismatch");
+    require(std::abs((logk(t,r*std::exp(e))-logk(t,r*std::exp(-e)))/(2*e)-state.dlnk_dlnRho)<2e-5,
+        "hot envelope density derivative mismatch");
+    const auto range=hotter.density_range(t,hrich);
+    require(range && range->min<r && range->max>r,"hot envelope source range missing");
+  }
+  temperature_rejected=false;
+  try{warmer.eval(2.1e6,200.,hrich);}catch(const std::domain_error&){temperature_rejected=true;}
+  require(temperature_rejected,"previously selected upper temperature still rejects unsupported requests");
   RadiativeOpacity denser(files,{data/"opacity/lifetime/hydrogen_response.dat",0,.16,1,2.5,6.3});
   for(double logr:{2.21,2.35,2.49}) {
     const double t=4.15e5,r=std::pow(10.,logr)*std::pow(t/1e6,3);

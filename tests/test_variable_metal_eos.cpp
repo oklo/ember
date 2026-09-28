@@ -26,7 +26,7 @@ double coefficient(double u,double v,double Z,bool cubic) {
 // A thermodynamically regular manufactured potential with known pressure
 // and energy. Non-polynomial Z dependence exercises joins independently of
 // the cubic-reproduction check. The final source plane can be fully masked.
-void fixture(const std::filesystem::path& dir,bool cubic,bool masked) {
+void fixture(const std::filesystem::path& dir,bool cubic,bool masked,std::size_t first_masked=4) {
   std::filesystem::create_directories(dir);
   const std::array<double,6> zs{0,.005,.02,.04,.16,.3};
   const std::array<double,4> us{0,.25,.7,1};
@@ -42,7 +42,7 @@ void fixture(const std::filesystem::path& dir,bool cubic,bool masked) {
       f<<"\nlog_t 4 4 5 6 7\nlog_q 4 -6 -2 2 6\ndata\n";
       const double a=coefficient(us[iu],vs[iv],zs[iz],cubic);
       for(int it=0;it<4;++it)for(double lq:{-6.,-2.,2.,6.}) {
-        const bool valid=!(masked && iz>=4);
+        const bool valid=!(masked && iz>=first_masked);
         f<<(valid?1:0)<<' '<<a*lq*std::log(10.)<<' '<<a<<" 0 0 0 0 0 0 0\n";
       }
     }
@@ -230,6 +230,58 @@ int main() {
     }
     check(derivative<5e-6,"composition forces, Hessian and material-heat derivatives match finite differences",derivative);
     check(firstlaw<2e-7,"enriched states retain thermodynamic first-law identity",firstlaw);
+    {
+      using L=VariableMetalHelmholtzEos::LowMetalInterpolation;
+      fixture(dir/"trace_masked",false,true,3);
+      VariableMetalHelmholtzEos local(dir/"smooth/family6.dat",M::allow_documented_proxy,L::quadratic);
+      VariableMetalHelmholtzEos trace_masked(dir/"trace_masked/family6.dat",M::allow_documented_proxy,L::quadratic);
+      VariableMetalHelmholtzEos original_masked(dir/"trace_masked/family6.dat",M::allow_documented_proxy);
+      const auto trace=composition(.993,.003,1e-30);
+      check(!throws([&]{trace_masked.eval(T,rho,trace);trace_masked.composition_potential(T,rho,trace);
+            trace_masked.composition_heat(T,rho,trace);trace_masked.validate_composition_domain(T,rho,trace);}),
+            "trace-metal values, forces, heat and reuse need only the three low-metal planes");
+      check(throws([&]{original_masked.eval(T,rho,trace);}),
+            "default cubic retains the original source requirements");
+      check(throws([&]{trace_masked.eval(T,rho,composition(.3,.03,.01));}),
+            "blended interval still requires its fourth source plane");
+      double joins=0,fd=0,preserved_high=0;
+      for(double z:{.005,.02}) {
+        const auto a=local.composition_potential(T,rho,composition(.3,.03,z-1e-10));
+        const auto b=local.composition_potential(T,rho,composition(.3,.03,z+1e-10));
+        for(std::size_t k=0;k<3;++k) {
+          joins=std::max(joins,std::abs(a.gradient[k]-b.gradient[k])/constants::R_gas);
+          for(std::size_t l=0;l<3;++l)
+            joins=std::max(joins,std::abs(a.hessian[k][l]-b.hessian[k][l])/constants::R_gas);
+        }
+      }
+      for(double z:{.001,.004,.005,.0075,.013,.019,.02,.025}) {
+        const auto c=composition(.3,.03,z);
+        const auto p=local.composition_potential(T,rho,c);
+        const auto h=local.composition_heat(T,rho,c);
+        const double step=5e-7;
+        for(std::size_t k=0;k<3;++k) {
+          std::array<double,3> x{.3,.03,z};x[k]+=step;const auto plus=composition(x[0],x[1],x[2]);
+          x[k]-=2*step;const auto minus=composition(x[0],x[1],x[2]);
+          const auto a=local.composition_potential(T,rho,plus),b=local.composition_potential(T,rho,minus);
+          const auto ha=local.composition_heat(T,rho,plus),hb=local.composition_heat(T,rho,minus);
+          fd=std::max(fd,std::abs((a.phi-b.phi)/(2*step)-p.gradient[k])/constants::R_gas);
+          for(std::size_t l=0;l<3;++l) {
+            fd=std::max(fd,std::abs((a.gradient[l]-b.gradient[l])/(2*step)-p.hessian[l][k])/constants::R_gas);
+            fd=std::max(fd,std::abs((ha.exchange_enthalpy[l]-hb.exchange_enthalpy[l])/(2*step)
+                                     -h.enthalpy_partials[l][2+k])/(T*constants::R_gas));
+          }
+        }
+        if(c.Z()>=.02)preserved_high=std::max(preserved_high,response_difference(two,local,T,rho,c));
+      }
+      check(joins<2e-6,"low-metal joins preserve continuous force and curvature",joins);
+      check(fd<5e-6,"low-metal forces, curvature and heat differentiate the same potential",fd);
+      check(preserved_high==0,"source interpolation at and above the second nonzero metal node is unchanged",preserved_high);
+      const auto a=local.composition_potential(T,rho,composition(.993,.003,1e-30));
+      const auto b=local.composition_potential(T,rho,composition(.993,.003,1e-29));
+      double ions=0;for(const auto& m:gs98_metals)if(m.charge!=19)ions+=m.fraction/m.mass_number;
+      check(std::abs((b.gradient[2]-a.gradient[2])/(constants::R_gas*ions*std::log(10.))-1)<1e-10,
+            "trace metal chemical potential retains exact logarithmic ideal mixing");
+    }
   }catch(const std::exception& e){std::fprintf(stderr,"%s\n",e.what());++failures;}
   std::filesystem::remove_all(dir);
   return failures?1:0;

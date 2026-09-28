@@ -77,7 +77,10 @@ void check_active(const Composition& c,std::array<bool,3> active) {
 }
 
 VariableMetalHelmholtzEos::VariableMetalHelmholtzEos(const std::filesystem::path& path,
-    HelmholtzTableEos::Mixture mixture) {
+    HelmholtzTableEos::Mixture mixture,LowMetalInterpolation low_metals)
+    :low_metal_interpolation_(low_metals) {
+  if(low_metals!=LowMetalInterpolation::cubic && low_metals!=LowMetalInterpolation::quadratic)
+    throw std::invalid_argument("variable EOS: unknown low-metal interpolation");
   if(mixture!=HelmholtzTableEos::Mixture::allow_documented_proxy)
     throw std::invalid_argument("variable EOS: source approximations require explicit selection");
   std::ifstream in(path,std::ios::binary);std::string key;int version{};in>>key>>version;
@@ -93,6 +96,8 @@ VariableMetalHelmholtzEos::VariableMetalHelmholtzEos(const std::filesystem::path
         || values[i]>1 || (i && values[i]<=values[i-1]))throw std::runtime_error("variable EOS: invalid axis coordinate");}
   };
   axis("metals",z_,extend_metals_?4:3,extend_metals_?32:4);
+  if(low_metals==LowMetalInterpolation::quadratic && (z_.size()<4 || z_.front()!=0))
+    throw std::invalid_argument("variable EOS: low-metal quadratic needs zero and three positive metal planes");
   axis("hydrogen_share",u_,4,100);axis("helium3_share",v_,3,4);
   if(binary) {
     in>>key;
@@ -212,6 +217,22 @@ VariableMetalHelmholtzEos::Weights VariableMetalHelmholtzEos::weights(const Comp
     for(std::size_t k=0;k<5;++k) {
       wz[k]=polynomial[k][5];
       for(int n=4;n>=0;--n)wz[k]=wz[k]*qz+polynomial[k][n];
+    }
+  }
+  // Use nearby source compositions at low Z. The quintic blend returns to
+  // the original cubic with continuous first and second derivatives. It acts
+  // on the potential weights, so all thermal and composition responses use
+  // the same free energy. Exact ideal mixing is still restored separately.
+  if(low_metal_interpolation_==LowMetalInterpolation::quadratic && z.value<z_[2]) {
+    auto low=lagrange(z,std::span<const double>(z_).first(3));
+    if(z.value<=z_[1])wz=std::move(low);
+    else {
+      const auto t=(z-z_[1])/(z_[2]-z_[1]);
+      const auto s=(z_[2]-z)/(z_[2]-z_[1]);
+      const auto blend=t.value<=.5?t*t*t*(10+t*(-15+6*t))
+                                  :1-s*s*s*(10+s*(-15+6*s));
+      for(std::size_t i=0;i<wz.size();++i)
+        wz[i]=(i<3?low[i]:CJet{})*(1-blend)+wz[i]*blend;
     }
   }
   Weights out;
