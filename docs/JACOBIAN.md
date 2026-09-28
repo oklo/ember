@@ -128,9 +128,7 @@ magnitude of gravitational heating independently. The efficient-convection
 regression still verifies temperature-row conditioning below
 `grad/grad_rad=1e-6`.
 
-Central boundary conditions and Henyey relaxation are now implemented; see
-`HENYEY.md`. A complete controlled polytrope converges toward an independent
-continuum solution. A physical stellar equilibrium and an evolutionary run
-remain pending. Physical atmosphere grids, additional opacity coverage,
-and the other pending physics in `ROADMAP.md` remain necessary for the
-0.1 solar-mass end-to-end milestone.
+Central boundary conditions and Henyey relaxation are described in
+[HENYEY.md](HENYEY.md). For the common evolution program and its physical
+limitations, see [LIFETIME_DRIVER.md](LIFETIME_DRIVER.md) and
+[COLD_REMNANT.md](COLD_REMNANT.md).

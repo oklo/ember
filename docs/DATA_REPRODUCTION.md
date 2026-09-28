@@ -1,26 +1,17 @@
-# Generating the local physics inputs
+# Physics inputs
 
-GitHub carries the C++ code, offline generators/importers/auditors, source patches,
-generation specifications, small provenance manifests, regression fixtures and
-reports. **New bulk EOS/opacity/atmosphere/conduction tables, raw source archives,
-native checkpoints and executable archives stay local and are ignored by Git.**
-Previously published tables remain in the existing Git history; this policy does
-not rewrite that history. Do not force-add newly generated tables or archives.
+The repository contains the solver, offline generators and importers, source
+patches, manifests, compact validation records and test fixtures. Bulk physics
+tables, raw source archives, native histories and executable archives remain
+local. A fresh clone can build the C++ code but cannot reproduce every stellar
+run or table-dependent test without those inputs.
 
-The development machine retains the completed inputs under `data/`, models under
-`out/`, and recovery files under `docs/reports/2026-09-10/artifacts/`. Clearing chat
-context does not remove those files. A fresh clone does not contain the new
-complete GS98/non-grey families. C++ compilation needs no source-service access,
-but stellar runs and table-dependent tests require the corresponding local inputs.
-The successful full-suite result in the report used those locally installed inputs.
+Use the configuration and source manifests for the calculation being reproduced.
+They specify compositions, source versions, coverage and hashes. A hash identifies
+an input; it cannot reconstruct a missing file. Preserve the original source
+output or regenerate and validate it before selecting a new table.
 
-Source manifests record expected hashes and parameter choices. They are metadata,
-not a substitute for the missing numeric source files. Exact reconstruction may
-depend on the recorded source version, compiler and original service output.
-Changing upstream results or numerical source builds requires a new validation
-receipt; do not silently replace a pinned hash to make an import pass.
-
-## Pipeline map
+## Source calculations
 
 | Input | Generation, retrieval and import code | Independent checks / detailed instructions |
 |---|---|---|
@@ -35,179 +26,42 @@ All script names in the table are under `scripts/`. The source distributions kee
 their own licenses; see the data READMEs. External Fortran/C++ source builds and
 line lists are offline-generation dependencies, not links added to Ember's runtime.
 
-## EOS example
+## Generate and validate
 
-Build the pinned FreeEOS probe as described in [FREEEOS.md](FREEEOS.md). Generate
-the original GS98 family in a new work directory:
+1. Build the pinned external source, retaining its version, patches and license.
+2. Generate the requested compositions and thermal range into a new directory.
+3. Import only supported source states; retain failed-state masks and derivative
+   stencil exclusions. Check source values, thermodynamic identities and independent
+   interpolation points.
+4. Compare stellar evolution over a suitable overlap before selecting new inputs.
+   Record the executable, configuration, source hashes and numerical differences.
 
-```sh
-python3 scripts/generate_metal_eos.py /tmp/ember-freeeos-source-build/probe \
-  /tmp/ember-gs98-source --hydrogen .3 .4 .5 .6 .7 .75 --helium3 0 .12 --jobs 4
-```
-
-The checked trajectory through 3.848 trillion years selects the 72-plane family
-`data/eos/low_density_refined_v2/freeeos300_gs98_z020.dat`. Its explicit source
-plane manifests and [low-density audit](results/metal_eos_low_density_source_v2.json)
-record the refined composition axis and thermal limits. The 24-plane
-family uses `.1 .125 .15 .175 .2 .25 .3 .4 .5 .6 .7 .75` at He3=0/.12.
-Generate each identified family in a separate directory. Import and assemble the completed
-source planes using the commands/formats in the EOS README and each script's
-`--help`. `assemble_metal_eos_family.py` consumes source manifests **and the raw
-files they reference**; manifests alone cannot reconstruct the EOS. Recheck
-potential masks, source responses, heldout compositions and the thermodynamic
-identities before selecting a newly built family.
-
-The numerical-electron source uses `--electron-integrals numerical`. Its
-[validation plan](../data/eos/sources/numerical_electron_base_validation_v1_specification.json)
-lists the full family and independent checks. For the separate hot dense
-addition, `build_freeeos_probe.py --electron-quadrature-error 1e-11 --jobs 2`
-builds a tighter-accuracy source in a separate working directory. The optional
-generator `--precision-fallback` requires the pinned probe, library and control
-receipt; merely changing the source executable is insufficient. A density merge
-retains the actual source identity and density interval for each affected
-isotherm. Complete thermodynamic and runtime validation is still required.
-
-## Opacity example
-
-The TOPS retriever requests one composition at a time and verifies the returned
-mixture. For example, a new independent midpoint request is:
+For example, after building the [FreeEOS probe](FREEEOS.md):
 
 ```sh
-python3 scripts/fetch_tops_composition.py /tmp/ember-tops-midpoint .15 --metallicity .02
+python3 scripts/generate_metal_eos.py /path/to/probe /tmp/ember-eos-source \
+  --hydrogen .3 .4 .5 .6 .7 .75 --helium3 0 .12 --jobs 4
 ```
 
-Use the committed request/manifests for the complete elemental mixture and source
-settings. Recreate all requested compositions before importing a family. Read actual
-request fractions: rounded filenames `x012` and `x018` denote `.125` and `.175`.
-The source service is an external dependency, so retrieval is not equivalent to
-a pinned local archive. The selected hydrogen-poor family is `hydrogen_poor_refined_v4`. Its independent
-active-domain source comparisons are in
-[the v4 audit](results/opacity_hydrogen_poor_refined_v4_audit.json). Preserve
-the rejected coarse midpoint audit when reproducing the refinements.
+This is a generation example, not a complete lifetime input family. Follow the
+selected manifest for the full set of source compositions and use each script's
+`--help` for import and assembly options. Tighter electron integration is available
+through `build_freeeos_probe.py --electron-quadrature-error`; source physics and
+thermodynamic acceptance checks must remain explicit.
 
-The current hot-core extension adds X=0/.025/.05/.075 at each Z=.01/.02/.03.
-Its complete 54-plane source manifest, 12 independent check records and original
-requests are under `data/opacity/sources/hydrogen_exhaustion/`. Raw numeric replies
-remain local. TOPS omits the hydrogen row at exactly zero H; the importer verifies
-that format and every remaining element rather than substituting a small H value.
+TOPS retrieval requires the external service or retained original replies.
+Non-gray atmosphere generation requires the documented TLUSTY/SYNSPEC sources,
+line data and opacity tables. These external source builds are offline dependencies;
+Ember does not link to them at runtime.
 
-```sh
-python3 scripts/import_tops_mixtures.py \
-  data/opacity/sources/hydrogen_exhaustion/family_manifest.json \
-  /tmp/ember-tops-source-import
-python3 scripts/assemble_hot_opacity_extension.py \
-  data/opacity/hydrogen_poor_refined_v4 /tmp/ember-tops-source-import \
-  /tmp/ember-hot-opacity-runtime
-```
+## Run inputs and archived comparisons
 
-Only the high-temperature tables are selected from the import. The original cool
-TOPS and AESOPUS files are copied unchanged. Every old hot entry is checked for
-exact agreement before assembly. This reproduces the selected
-`data/opacity/hydrogen_exhaustion_hot_v1` numeric files byte for byte. Low-H
-opacity remains unsupported where the cool TOPS branch is required. The
-[hot-profile checks](results/tops_exhaustion_hot_profile_all_v2.json) and
-[derivative checks](results/hot_opacity_runtime_v1.json) record the tested domain.
+The [lifetime configuration](LIFETIME_DRIVER.md) names all required files.
+Keep that configuration with its matching inputs and [checkpoint](RESTART.md).
+The integrated cooling envelope and some development inputs are not yet public;
+there is no complete downloadable data bundle for the latest calculation.
 
-AESOPUS is retrieved from the authors' distribution, then archived and imported;
-these scripts do not implement the authors' opacity engine. The source URL, hashes
-and selected composition planes are documented in the opacity README.
-
-## Non-grey atmosphere example
-
-```sh
-python3 scripts/prepare_nongrey_sources.py /tmp/ember-atmosphere-source
-python3 scripts/generate_nongrey_grid.py \
-  /tmp/ember-atmosphere-source/prepared.json \
-  data/atmosphere/sources/nongrey_extended_specification.json \
-  /tmp/ember-atmosphere-extended --jobs 3
-```
-
-The committed small source assets include the patches, atomic-ion input deck,
-element metadata and grid specifications consumed by these scripts. Preparation
-downloads and checks the external source packages and line lists. Do not use
-`--initial-models` with an absent local archive. From-scratch starting structures
-can require additional initialization work; the existing continuation/CONREF
-tools help generate initial guesses. Each final atmosphere must pass the source,
-flux, hydrostatic and chemical-equilibrium checks.
-
-For an individual prepared column, `solve_column.py` tries Newton iteration and
-falls back to damped iteration from the best complete saved structure. It changes
-numerical controls while retaining the physical inputs and acceptance checks:
-
-```sh
-python3 scripts/solve_column.py /tmp/prepared-column \
-  --executable /path/to/tlusty.exe --executable-sha256 SOURCE_SHA256 \
-  --attempt-cpu 600 --total-cpu 2000 --chmax 1e-9
-```
-
-Use the executable checksum recorded in the prepared provenance.
-The directory must contain `specification.json`, `provenance.json`, the TLUSTY
-input files and `opacity.sha256`. Existing attempts are preserved: an interrupted
-column must be inspected before preparing a new run. `result.json` records all
-attempts, their CPU time and the final acceptance decision. Accepted columns can
-be checked and assembled with `extend_mixed_atmosphere.py`; failed attempts still
-count toward the reported cost. [Measured comparisons](results/atmosphere_solver_sept28_v1.json).
-
-For a new column, `scripts/find_donor.py COLUMN SOURCE_DIRECTORY` finds a nearby
-accepted column with matching source physics. Pass its directory as
-`--initial-from DONOR` to `solve_column.py`. The temperature and column mass of
-that saved structure are scaled to provide a starting guess. The target still
-undergoes the full atmosphere solve and the usual acceptance checks.
-
-The source build also applies `tlusty208-russel.patch`, which avoids repeated
-element searches and logarithms in molecular equilibrium. Two completed source
-comparisons reduced CPU time by **1.601–3.455 times**, with matching-state
-changes below **1.628e-7** relative. The equations and double precision are
-unchanged; iteration paths can differ through rounding.
-[Source comparisons](results/tlusty_russel_sept28_v1.json).
-When combining old and optimized sources, an extension plan can explicitly
-list `numerical_solver_comparisons`. Each referenced report must contain
-passing comparisons and unchanged input records. Only its named TLUSTY
-executable substitution is accepted; all other source physics must match,
-and each column retains its actual executable identity.
-
-Archive and import only a complete, independently accepted family following
-[NONGREY.md](NONGREY.md). The condensate pipeline is an unfinished experiment:
-the grain-enthalpy failures remain real, and no command here promotes it to an
-accepted runtime atmosphere. Large generated outputs stay ignored/local.
-
-## What a fresh checkout can reproduce immediately
-
-The full test suite also needs the exact local inputs listed in
-`data/TEST_DATA_MANIFEST.json`: two EOS families, opacity and conduction tables, atmosphere boundary tables,
-and the archived source outputs used by the import checks. They total
-**454.1 MB** before compression. A checkout with an installed dataset can
-prepare a portable bundle without recomputing any physics:
-
-```sh
-python3 scripts/package_test_data.py --verify
-python3 scripts/package_test_data.py --pack /tmp/ember-test-data.tar.gz
-```
-
-In another checkout, install that separately supplied bundle and verify it:
-
-```sh
-python3 scripts/package_test_data.py --install /tmp/ember-test-data.tar.gz
-python3 scripts/package_test_data.py --verify
-```
-
-Installation checks every path, size and SHA-256 before writing. It refuses
-changed existing inputs. The bundle is prepared locally; no public download
-has been published. The `lifetime_restart` test additionally needs the
-continuous-star inputs described in [LIFETIME_DRIVER.md](LIFETIME_DRIVER.md).
-These datasets serve different purposes and have separate manifests.
-
-The report PDF can be rebuilt from its LaTeX source and committed vector figure.
-The figures can be regenerated from the committed Ember and F77 history CSV
-files and F77 extraction record using
-`docs/reports/2026-09-10/build_figures.py`. The F77 file contains the quantities
-needed for the graphs, extracted from accepted models; the complete printed
-outputs remain local. With local raw histories available,
-`--from-archives` repeats the history-join checks and rebuilds that CSV.
-
-For native stellar restart, use the local archived binary/checkpoint and the
-exact matching local tables; see [RESTART.md](RESTART.md). Rebuilding tables or
-changing the executable does not satisfy the existing checkpoint's identity
-contract automatically. On a different machine, generate/validate the inputs
-and start a consistent new calculation unless an exact compatible local archive
-has separately been provided.
+`docs/results/` retains compact numerical evidence. The working paper includes
+its LaTeX and figure PDFs; some underlying figure data remain local. Comparison
+CSVs under older report dates are retained because analysis scripts use them.
+Superseded papers and figures are available in Git history.

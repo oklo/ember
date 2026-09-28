@@ -30,3 +30,9 @@ __pycache__/
 # The report, its compact history CSV, figures and hash manifest are versioned.
 /docs/reports/*/artifacts/
 /docs/results/*.gz
+
+# Agent coordination stays local; scientific methods and results belong in docs/.
+/HANDOFF.md
+/docs/PROJECT_STATUS.md
+/docs/NEXT_SESSION_PROMPT.md
+/docs/research/

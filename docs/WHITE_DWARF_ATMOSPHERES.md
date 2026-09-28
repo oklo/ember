@@ -5,13 +5,12 @@ Ember evolves the structure, composition and thermal energy of an initially
 deep matching layer. Cooling requires this physical boundary as well as an
 emergent spectrum; a table of colors alone cannot supply it.
 
-The continuous Hayashi-origin calculation uses composition-dependent
-atmospheres matched at optical depth **100** throughout. Its nearly pure-H
-extension covers **4600–6000 K** and **log g = 5.9–6.2**, with a declared
-trace-helium approximation. The extension preserves the retained stellar
-trajectory exactly; coverage at still higher gravity is being prepared.
-[Current trajectory](reports/2026-09-27/pms_figure_inputs.json),
-[boundary checks](results/highg_atmosphere_extension_sept27_v2.json).
+The common lifetime calculation uses composition-dependent gas atmospheres
+matched at optical depth **100**. Available coverage is specified by each
+source family and its masks. The cooling extensions include mixed H/He
+compositions and molecular collision-induced absorption; grain opacity and
+extreme-cold coverage remain unfinished. See [atmosphere configuration](ATMOSPHERE.md)
+and [boundary checks](results/cooling_boundary_sept28_v1.json).
 
 ## Supplied white-dwarf boundary comparison
 

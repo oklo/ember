@@ -76,7 +76,7 @@ grid. It retains the source Teff/gravity bounds and the column's EOS/opacity
 bounds. The historical frozen wrapper and its abundance caps remain intact.
 Equations, derivative checks and atmosphere sensitivity comparisons are in
 [ATMOSPHERE.md](../../docs/ATMOSPHERE.md); the longer track is documented in
-[EXTENDED_EVOLUTION.md](../../docs/EXTENDED_EVOLUTION.md).
+[EXTENDED_EVOLUTION.md](../../docs/LIFETIME_DRIVER.md).
 
 ## Helium-rich non-grey source pipeline
 

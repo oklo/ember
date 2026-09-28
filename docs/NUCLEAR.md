@@ -212,7 +212,7 @@ relative after the EOS performance changes.
 The atmosphere/opacity/conduction update retains this nuclear prescription.
 The [one-trillion-year audit](results/nuclear_m010_1tyr.json) repeats the
 screening, rate and branch diagnostics at the final evolved mixture; see
-[EXTENDED_EVOLUTION.md](EXTENDED_EVOLUTION.md). He3 builds to about .102
+[LIFETIME_DRIVER.md](LIFETIME_DRIVER.md). He3 builds to about .102
 by baryonic mass near 720 Gyr and subsequently declines. The explicit
 non-equilibrium He3 abundance remains necessary throughout this calculation.
 

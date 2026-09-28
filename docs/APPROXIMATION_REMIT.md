@@ -84,6 +84,5 @@ diagnostics, uncertainty estimates and representative states. Save full time
 series only to answer a specific physical question. Never delete another task's
 data as part of cleanup.
 
-The [Fable assignment](research/fable/ASSIGNMENT.md) applies this remit to the
-encounter survey. The [cold-remnant plan](COLD_REMNANT.md) and
+The [cold-remnant plan](COLD_REMNANT.md) and
 [very cold physics plan](ULTRACOLD_PHYSICS.md) describe the stellar work.
