@@ -1,0 +1,120 @@
+{
+  "created_utc": "2026-09-28T16:57:20.922076+00:00",
+  "accepted_for_next_cooling_continuation": true,
+  "full_production_track_validated": false,
+  "physics": "Static screened, nonrelativistic Born/Pauli electron collisions; same ion collision moments and fully stripped mixture model.",
+  "eta_range": [
+    -2,
+    128
+  ],
+  "b_thermal_range": [
+    0.1,
+    150
+  ],
+  "new_eta_rows": [
+    80,
+    96,
+    112,
+    128
+  ],
+  "b_grid": [
+    0.1,
+    0.25,
+    0.5,
+    1,
+    2,
+    3,
+    7,
+    16,
+    40,
+    100,
+    150
+  ],
+  "old_eta_grid": [
+    -2,
+    -1,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5.5,
+    7,
+    8.5,
+    10,
+    13,
+    16,
+    20,
+    25,
+    32,
+    40,
+    50,
+    64
+  ],
+  "new_grid_sources": 44,
+  "withheld_source": {
+    "eta": 104,
+    "b": 0.22
+  },
+  "source_settings": {
+    "degree": 9,
+    "orders": [
+      80,
+      40,
+      40,
+      48,
+      48
+    ],
+    "quadrature_layout": "both",
+    "split_delta": 8,
+    "normalization_points": 768
+  },
+  "source_CPU_seconds": 1452.289845,
+  "source_wall_seconds": 255.94235599972308,
+  "maximum_independent_response_error": 0.0006157185015652185,
+  "current_star_native_response_change": 5.225539198170154e-06,
+  "native_queries": 547,
+  "newly_supported_queries": 69,
+  "native_failures": 0,
+  "maximum_overlap_response_change": 2.4122983897517476e-05,
+  "maximum_resolved_derivative_error": 1.1227206836874344e-06,
+  "maximum_derivative_effect_error": 1.744693148619829e-12,
+  "maximum_existing_runtime_quadrature_error": 5.026936133731797e-06,
+  "matched_stellar_years": 5000000.0,
+  "maximum_global_stellar_change": 4.1762221772989605e-06,
+  "maximum_profile_changes": {
+    "lnr": 7.715744132497093e-08,
+    "lnrho": 3.63512858925219e-07,
+    "lnT": 9.580966473521357e-07,
+    "X": 8.497867909351697e-08,
+    "He3": 5.362224006835725e-09
+  },
+  "matched_stellar_CPU_seconds": 27.90814,
+  "matched_stellar_wall_seconds": 21.10947358328849,
+  "public_generator_reproduction": {
+    "eta": 104,
+    "b": 0.22,
+    "maximum_absolute_difference_from_retained": 0.0,
+    "CPU_seconds": 28.334690000000002,
+    "normalization_points": 768
+  },
+  "table_sha256": "279c604acde6b717ab98b3639071a07b988ff2bebd6c416aa9662aa74358ad46",
+  "interpolation": "Old nodal values recovered from the retained native splines; new direct-source rows appended and positive Cholesky factors refitted. Old nodes are reproduced, but interpolation between old nodes changes and is tested.",
+  "limitations": [
+    "No new treatment of strong correlations, dynamic screening or relativistic electrons.",
+    "Coverage and source quadrature checks are not a validation of the collision model in every future plasma regime.",
+    "The stellar comparison precedes the envelope EOS stop and does not advance the main endpoint."
+  ],
+  "retained_local_evidence": [
+    "out/cooling-electron-pair-sept28-v3",
+    "out/cooling-pair-stellar-control-sept28-v1"
+  ],
+  "input_sha256": {
+    "out/cooling-electron-pair-sept28-v3/READY.json": "2e8d09178c6a047e2dac39db2d43ddabe6fbdfa4492d1f088803942ed80a1923",
+    "out/cooling-electron-pair-sept28-v3/interpolation_review.json": "b2cd11a22f5fbf68a78cc86766520afc0f37e2a79853044e4fec9c77bc0e97a6",
+    "out/cooling-electron-pair-sept28-v3/native_review.json": "42178ab528b242a85c5cf92f06513fa1ad9f0dc0c8da20c510bb21790f324e81",
+    "out/cooling-electron-pair-sept28-v3/runtime_quadrature.json": "5d1ffed11dc4d2eb29553fb4bda811c9b53da8fb9e66935c5158f73ffe7f2b81",
+    "out/cooling-electron-pair-sept28-v3/public_source_reproduction.json": "f3695a3a0efa25f7ab01c4988d248b15bd36d8a38a1c8af9697620db161b0f2d",
+    "out/cooling-pair-stellar-control-sept28-v1/comparison.json": "e5743890910ea142506a6b3d69f7f0bff9d498d01fcbd5dfb9b30e374f8baf88"
+  }
+}

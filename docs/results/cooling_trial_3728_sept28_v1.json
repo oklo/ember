@@ -47,7 +47,7 @@
     "wall_seconds": 48.095953832380474
   },
   "history": "Cold-envelope EOS present at Hayashi initialization; small quantum nuclear correction selected at 3965 K after a matched 50 Myr comparison. Coverage extensions preserve earlier supported values.",
-  "stop": "Repeated line-search and Newton failures near the outer cold-EOS support boundary; direct queries show a gap above rho=0.08 at T=9104 K. The final log alone does not establish which trial query caused failure.",
+  "stop": "Four rejected intervals at the final age explicitly hit additive-volume potential source support; smaller trials subsequently report residual/Newton failures. Direct queries show the outer support gap above rho=0.08 at T=9104 K. The individual failing zone was not recorded. A separate interior composition-plane mask is also close on the projected cooling path.",
   "limitations": [
     "The experimental cold-EOS join distorts heat capacity and the adiabatic gradient in the outer envelope; a direct-source boundary is being tested.",
     "Outer-cell discretization also affects the resolved envelope profile.",

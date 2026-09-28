@@ -16,8 +16,9 @@ outer **2.214%** of the mass. No late He3 runaway occurs. The latest continuatio
 adds **38.46 Myr** in **48.10 seconds**, including failed trials at its endpoint.
 This is provisional: the cold-EOS join distorts heat capacity and the adiabatic
 gradient, and the outer mesh also differs from a resolved envelope integration.
-A direct-source outer boundary is being tested. The final solver failure occurs
-near an EOS support gap; a direct EOS exception is not established by that log.
+A direct-source outer boundary is being tested. Rejected intervals explicitly
+hit the outer EOS support limit before smaller trials fail to converge; a
+separate interior composition-plane gap is close on the projected cooling path.
 [Trial structure and limitations](results/cooling_trial_3728_sept28_v1.json).
 
 The trial selects an optional quantum nuclear-screening correction at **3965 K**;
@@ -26,6 +27,13 @@ A matched **50 Myr** comparison changes Teff by **0.02668 K** and luminosity by
 **0.003276%**, with unchanged convective mass. The correction retains explicit
 validity limits; pycnonuclear burning remains unsupported.
 [Screening and transport checks](results/quantum_screening_sept28_v1.json).
+
+An electron-collision extension is ready for the next continuation, increasing
+the degeneracy range from **64 to 128**. Independent source checks give a
+maximum transport-response difference of **0.06157%**. A matched **5 Myr**
+comparison changes the largest tracked global quantity by **0.0004176%**.
+This extends the same collision model; it does not add correlated or relativistic
+scattering. [Collision coverage](results/electron_pair_eta128_sept28_v1.json).
 
 The code includes initial deuterium, pp and explicit CN burning, plasma neutrino
 losses, composition-dependent EOS and opacity, wavelength-dependent atmospheres,

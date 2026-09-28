@@ -32,8 +32,8 @@ class EnergyBasis:
 
 
 def energy_basis(eta, *, statistics='fermi'):
-    if not np.isfinite(eta) or not -30 <= eta <= 20:
-        raise ValueError('this comparison supports -30 <= eta <= 20 only')
+    if not np.isfinite(eta) or not -30 <= eta <= 128:
+        raise ValueError('this comparison supports -30 <= eta <= 128 only')
     if statistics == 'maxwell':
         return EnergyBasis(eta, .75*math.sqrt(math.pi)*math.exp(eta),
                            2.5-eta, 2.5, 2., math.sqrt(17.5), statistics)
