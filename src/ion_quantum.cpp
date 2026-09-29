@@ -1,3 +1,4 @@
+#include "ember/detail/ion_mixture.hpp"
 #include "ember/ion_quantum.hpp"
 #include "ember/constants.hpp"
 #include "ember/detail/taylor3.hpp"
@@ -75,32 +76,6 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   const double ae=std::cbrt(3/(4*pi*ne));
   if(charge*charge/(ae*constants::kB*T)*charge_moment/ion_number>100)
     throw std::domain_error("quantum ion EOS: strong-coupling phase treatment required");
-  const double logT=std::log(T),logne=std::log(ne);
-  std::array<HelmholtzJet,4> species{};
-  species[0]=per_mass(logT,logne,1,1);
-  species[1]=per_mass(logT,logne,3,2);
-  species[2]=per_mass(logT,logne,4,2);
-  if(Z>0 || channels>1)for(const auto& m:gs98_metals) {
-    const auto f=per_mass(logT,logne,m.mass_number,m.charge);
-    for(unsigned i=0;i<4;++i)for(unsigned j=0;i+j<=3;++j)species[3][i][j]+=m.fraction*f[i][j];
-  }
-  const std::array<double,4> fractions{c.X[0],c.X[1],c.X[2],Z};
-  const std::array<double,3> beta{.5/Ye,(1./6)/Ye,(electron_metal-.5)/Ye};
-  std::array<HelmholtzJet,10> out{};
-  for(unsigned i=0;i<4;++i)for(unsigned j=0;i+j<=3;++j)
-    for(unsigned s=0;s<4;++s)out[0][i][j]+=fractions[s]*species[s][i][j];
-  constexpr std::array<unsigned,3> which{0,1,3};
-  if(channels>1)for(unsigned a=0;a<3;++a)
-    for(unsigned i=0;i<3;++i)for(unsigned j=0;i+j<=2;++j)
-      out[1+a][i][j]=species[which[a]][i][j]-species[2][i][j]+beta[a]*out[0][i][j+1];
-  if(channels>4) {
-    unsigned ch=4;
-    for(unsigned a=0;a<3;++a)for(unsigned b=a;b<3;++b,++ch)
-      for(unsigned i=0;i<2;++i)for(unsigned j=0;i+j<=1;++j)
-        out[ch][i][j]=beta[a]*(species[which[b]][i][j+1]-species[2][i][j+1])
-          +beta[b]*(species[which[a]][i][j+1]-species[2][i][j+1])
-          +beta[a]*beta[b]*(out[0][i][j+2]-out[0][i][j+1]);
-  }
-  return out;
+  return detail::common_density_ion_jets(T,rho,c,channels,per_mass);
 }
 } // namespace ember

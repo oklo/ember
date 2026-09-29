@@ -76,4 +76,10 @@ template<std::size_t N> Differential<N> log1p(const Differential<N>& x) {
   return out;
 }
 
+template<std::size_t N> Differential<N> atan(const Differential<N>& x) {
+  Differential<N> out(std::atan(x.value));
+  for(std::size_t i=0;i<N;++i) out.d[i]=x.d[i]/(1+x.value*x.value);
+  return out;
+}
+
 } // namespace ember::detail

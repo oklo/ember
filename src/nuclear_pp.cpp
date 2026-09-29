@@ -1,3 +1,4 @@
+#include "ember/detail/ion_free_energy.hpp"
 #include "ember/nuclear.hpp"
 #include "ember/deuterium.hpp"
 #include "ember/constants.hpp"
@@ -182,30 +183,6 @@ Susceptibility electrons(double T,double ne) {
   s.theta+=s.dtheta_dlnT*(lt-at)+s.dtheta_dlnne*(ln-an);
   return s;
 }
-// Chugunov & DeWitt (2009) building blocks, differentiated exactly.
-template<class D> D atan_d(const D& x) {
-  D out(std::atan(x.value));
-  for(std::size_t i=0;i<out.d.size();++i) out.d[i]=x.d[i]/(1+x.value*x.value);
-  return out;
-}
-// Potekhin & Chabrier (2000) one-component-plasma Coulomb free energy per ion
-// (CD09 eq. 24). A small-Gamma series keeps the Debye--Hueckel limit exact.
-template<class D> D cd09_f0(const D& g) {
-  using detail::sqrt;using detail::log;using detail::log1p;
-  constexpr double A1=-.907,A2=.62954,B1=.00456,B2=211.6,B3=-1e-4,B4=.00462;
-  const double A3=-std::sqrt(3.)/2-A1/std::sqrt(A2);
-  const D s=sqrt(g),sa=sqrt(g/A2);
-  if(g.value<1e-3) {
-    // Series of the same fit avoid subtracting nearly equal square roots,
-    // logarithms and arctangents in the dilute limit.
-    const D x=g/A2,z=g/B2;
-    return A1*A2*sa*x*(2./3+x*(-1./5+x*(3./28+x*(-5./72+x*35./704))))
-      +2*A3*s*g*(1./3+g*(-1./5+g*(1./7+g*(-1./9+g/11))))
-      +B1*g*z*(.5+z*(-1./3+z*(.25-z/5)))+.5*B3*log1p(g*g/B4);
-  }
-  return A1*(sqrt(g*(A2+g))-A2*log(sa+sqrt(1+g/A2)))+2*A3*(s-atan_d(s))
-        +B1*(g-B2*log1p(g/B2))+.5*B3*log1p(g*g/B4);
-}
 } // namespace
 
 std::atomic<double> quantum_screening_zeta_max{0};
@@ -323,7 +300,7 @@ static ScreeningState screening_response(double T,double rho,const Composition& 
     const auto t=detail::cbrt(1+.013*y*y*zeta+.406*std::pow(y,.14)*zeta*zeta
                               +(.062*std::pow(y,.19)+1.8/g12d)*zeta*zeta*zeta);
     const double a=std::pow(r.z1,5./3),b=std::pow(r.z2,5./3),c=std::pow(r.z1+r.z2,5./3);
-    auto mixing=[&](const D& scale){return cd09_f0(ge*a/scale)+cd09_f0(ge*b/scale)-cd09_f0(ge*c/scale);};
+    auto mixing=[&](const D& scale){return detail::classical_ocp_free_energy(ge*a/scale)+detail::classical_ocp_free_energy(ge*b/scale)-detail::classical_ocp_free_energy(ge*c/scale);};
     const auto moment=ions/ye;   // <Z^2>/<Z> of the ion mixture
     const auto cfac=3*r.z1*r.z2*detail::sqrt(moment)
                     /(std::pow(r.z1+r.z2,2.5)-std::pow(r.z1,2.5)-std::pow(r.z2,2.5));

@@ -77,4 +77,20 @@ template<std::size_t N>Taylor3<N> log(const Taylor3<N>& a){
   if(a.value()<=0)throw std::domain_error("Taylor logarithm of nonpositive value");
   auto h=a/a.value();h.c[0]=0;const auto h2=h*h;return Taylor3<N>(std::log(a.value()))+h-h2/2+h2*h/3;
 }
+template<std::size_t N>Taylor3<N> sqrt(const Taylor3<N>& a) {
+  if(a.value()<=0)throw std::domain_error("Taylor square root of nonpositive value");
+  auto h=a/a.value();h.c[0]=0;const auto h2=h*h;
+  return std::sqrt(a.value())*(Taylor3<N>(1)+h/2-h2/8+h2*h/16);
+}
+template<std::size_t N>Taylor3<N> log1p(const Taylor3<N>& a) {
+  if(a.value()<=-1)throw std::domain_error("Taylor log1p outside its domain");
+  auto h=a/(1+a.value());h.c[0]=0;const auto h2=h*h;
+  return Taylor3<N>(std::log1p(a.value()))+h-h2/2+h2*h/3;
+}
+template<std::size_t N>Taylor3<N> atan(const Taylor3<N>& a) {
+  const double x=a.value(),den=1+x*x;auto h=a;h.c[0]=0;const auto h2=h*h;
+  return Taylor3<N>(std::atan(x))+h/den-x*h2/(den*den)
+      +(x*x-1./3)*h2*h/(den*den*den);
+}
+
 } // namespace ember::detail

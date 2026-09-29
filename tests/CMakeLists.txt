@@ -304,3 +304,7 @@ target_link_libraries(pms_deuterium_table_control PRIVATE ember)
 add_executable(test_ion_quantum test_ion_quantum.cpp)
 target_link_libraries(test_ion_quantum PRIVATE ember)
 add_test(NAME ion_quantum COMMAND test_ion_quantum)
+
+add_executable(test_ion_classical test_ion_classical.cpp)
+target_link_libraries(test_ion_classical PRIVATE ember)
+add_test(NAME ion_classical COMMAND test_ion_classical)

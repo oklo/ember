@@ -284,5 +284,11 @@
     "probe_exchange_only": "05641da350bd3e2057af4841e7f5dc37c87a513282eb9de5fbf759b72f728376",
     "ideal/skye_coulomb.f90": "58c6853ab39cb060a8ba742846085dd7bb15f544f73c9934a8082ec60f37f05b",
     "exchange_only/skye_coulomb.f90": "843be97020122cc825f0e340d284018d1281506ef9aa1efb6f08f7040b8ba2ea"
+  },
+  "skye_internal_ion_number_cutoff": {
+    "internal_ion_number_fraction_cutoff": 1e-07,
+    "maximum_omitted_ion_number_fraction": 4.189146405908866e-07,
+    "node": 284,
+    "scope": "The EOS interface mass cutoff is disabled; Skye internal phase routine still omits ions below this number fraction. The cutoff is not a cold-phase validity proof."
   }
 }

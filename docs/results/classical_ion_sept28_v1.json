@@ -1,0 +1,23 @@
+{
+  "scope": "Optional classical ion-ion liquid component, not selected in a stellar EOS. Linear mixing only; excludes electron polarization, nonlinear mixing, quantum terms and phase selection.",
+  "reference_source": "MESA26.04.1 Skye classical_ocp_liquid_free_energy, independent third-order automatic derivatives",
+  "paper": "https://doi.org/10.1103/PhysRevE.62.8554",
+  "source_sha256": "1c592c297eb71cb9069058a147eb09ab9c851171532cb411e41429b9b7e97027",
+  "reference_program_sha256": "cd28fda62d0cf3fffe6d2f34c609eea2d8a5377ed6c0ce0c49402d5a6e2ad5ef",
+  "maximum_relative_reference_error": 1.683e-13,
+  "maximum_scaled_thermal_derivative_error": 6.217e-11,
+  "maximum_scaled_composition_derivative_error": 2.323e-10,
+  "fit_boundary_Gamma": 200,
+  "continuation": "F linear in T above Gamma200, E and S fixed at the boundary for each density; no claim of stable liquid there.",
+  "existing_physics_comparison": {
+    "queries": 192,
+    "quantum_ion_and_screening_outputs_identical": true,
+    "output_sha256": "843cb65f2269ee9384ac8cc3cd245bcf759f9098c6c273aa97a58dc9ff004297"
+  },
+  "tests": [
+    "ion_classical",
+    "ion_quantum",
+    "nuclear_prescriptions"
+  ],
+  "selected_for_evolution": false
+}

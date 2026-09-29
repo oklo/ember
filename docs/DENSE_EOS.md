@@ -40,6 +40,15 @@ scale is not a measured cooling-age error. An improved prescription must enter
 the free energy, including its composition derivatives; rescaling Cv is insufficient.
 [Comparison](results/dense_core_eos_comparison_sept28_v1.json).
 
+`ion_classical_liquid_jets` supplies the liquid ion-ion free energy used by
+Potekhin & Chabrier (2000), with linear mixing and thermal/composition derivatives.
+The nuclear screening calculation shares the same fit. Individual ions beyond
+Gamma = 200 use a constant-entropy continuation; this does not choose a stable
+phase. Electron polarization and nonlinear mixture terms remain to be added.
+The component is not selected in the stellar EOS and must not be added on top
+of FreeEOS's existing Coulomb contribution.
+[Independent reference and derivative checks](results/classical_ion_sept28_v1.json).
+
 ## Weakly quantum liquid ions
 
 The optional `LiquidIonQuantumPotential` adds the liquid-ion free-energy term of
