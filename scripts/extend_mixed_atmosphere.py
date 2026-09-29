@@ -13,6 +13,7 @@ from pathlib import Path
 import shlex
 
 from assemble_nongrey_grid import physical_identity
+from atmosphere_bulk_eos import validate_bulk_eos
 from generate_nongrey_grid import sequence, temperatures
 from import_nongrey_grid import (read_text, source_diagnostics_match,
                                 source_inputs, source_state)
@@ -170,6 +171,7 @@ def load_column(directory, expected_physics, variants=None):
     if digest(opacity) != (directory / 'opacity.sha256').read_text().strip():
         raise ValueError('source opacity differs from the completed column')
     log = archived('run.log')
+    bulk = validate_bulk_eos(directory, spec, prepared, log)
     inputs = {k: (directory / name).read_text() for k, name in
               [('atmosphere_input', 'fort.5'), ('parameters', 'tas'),
                ('element_masses', 'ember-masses.dat'), ('initial_structure', 'fort.8')]}
@@ -182,7 +184,7 @@ def load_column(directory, expected_physics, variants=None):
     return (x, t, g), state, dict(coordinates=[x, t, g], directory=str(directory),
                                  result_sha256=digest(result_path),
                                  opacity_sha256=digest(opacity), diagnostics=state,
-                                 physical_identity=actual)
+                                 physical_identity=actual, bulk_eos=bulk)
 
 
 def interpolate(axes, nodes, key):

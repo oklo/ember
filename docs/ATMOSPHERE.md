@@ -426,6 +426,15 @@ Matching depth remains 100; gas-only and trace-helium assumptions are unchanged.
 
 ## Integrated envelope composition
 
+An atmosphere generated with a separate bulk EOS must record that EOS in
+`provenance.json`. The `bulk_eos` record identifies the common source data and
+interpolation recipe, plus the particular composition table and its checksum.
+The importer checks the table's composition and the source log's confirmation
+that it was loaded. This keeps ordinary and nonideal atmosphere families
+distinct while allowing different compositions from the same EOS family.
+Declaring an experimental EOS without these records does not permit assembly.
+This records the calculation's physics; it does not establish its accuracy.
+
 The integrated envelope can use the interior EOS or an explicit H/He source
 via `envelope_eos "interior"` or `envelope_source "path"`. The latter rejects
 non-trace metals unless `envelope_metals "neutral"` or `"ionized"` is selected.

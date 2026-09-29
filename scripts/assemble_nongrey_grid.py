@@ -20,6 +20,7 @@ from import_nongrey_grid import GAS_CALCULATION, gas_model_state, import_grid
 from nongrey_opacity import validate_table
 from prepare_nongrey_sources import digest
 from atmosphere_capacity_identity import CapacityEquivalence
+from atmosphere_bulk_eos import bulk_identity, validate_bulk_eos
 
 KEYS = ['XH', 'X3', 'teff_K', 'log_g']
 PHYSICS = ['metals', 'alpha', 'tau', 'wavelength_A', 'microturbulence_km_s', 'line_threshold']
@@ -45,11 +46,15 @@ def validate_shared_table(path, checksum, abundance, temperature, density):
 def physical_identity(spec, prepared):
     if any(k in prepared for k in ['depletion', 'initialization_only']):
         raise ValueError('canonical gas source required')
-    return {'settings': {k: spec[k] for k in PHYSICS},
+    identity = {'settings': {k: spec[k] for k in PHYSICS},
             'executables': {k: prepared['executables'][k] for k in ['tlusty', 'synspec']},
             'data_sha256': prepared['data_sha256'],
             'line_list_sha256': prepared['line_list_sha256'],
             'opacity_method': prepared['opacity_method']}
+    bulk = bulk_identity(prepared)
+    if bulk is not None:
+        identity['bulk_eos'] = bulk
+    return identity
 
 
 def complete_cells(axes, states):
@@ -86,6 +91,12 @@ def load_continuation(work, identity=None, capacity_equivalence=None):
         raise ValueError('final validation belongs to a different continuation')
     saved = json.loads(receipt.read_text())
     final = work/'final'
+    log_path = final/'run.log'
+    log = (log_path.read_text() if log_path.exists()
+           else gzip.decompress(log_path.with_name('run.log.gz').read_bytes()).decode())
+    bulk = validate_bulk_eos(final, dict(spec, hydrogen=[key[0]], helium3=[key[1]]), prepared, log)
+    if bulk is not None:
+        inputs[str((final/prepared['bulk_eos']['table']).resolve())] = bulk['table_sha256']
     if saved['input_sha256'] != input_fingerprint(prepared['executables']['tlusty'], final, archived=True):
         raise ValueError('canonical final source input fingerprint changed')
     if not {'fort.7', 'fort.9', 'run.log'}.issubset(saved['outputs']):
