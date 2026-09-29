@@ -353,8 +353,15 @@ EosResponse helmholtz_response(double T,double rho,HelmholtzJet f) {
   // Particle fractions are not derivatives of the equilibrium potential.
   e.mu=e.free_e=std::numeric_limits<double>::quiet_NaN();
   if (!positive(e.P) || !positive(e.cv) || !positive(e.cp) || !positive(e.chiRho)
-      || !positive(e.delta) || !positive(e.grad_ad) || !std::isfinite(e.E) || !std::isfinite(e.S))
-    throw std::domain_error("HelmholtzTableEos: unstable potential interpolant");
+      || !positive(e.delta) || !positive(e.grad_ad) || !std::isfinite(e.E) || !std::isfinite(e.S)) {
+    std::ostringstream message;
+    message << std::setprecision(4) << "HelmholtzTableEos: unstable potential interpolant"
+            << " at T=" << T << ", rho=" << rho << ", P=" << e.P
+            << ", cv=" << e.cv << ", cp=" << e.cp
+            << ", chiRho=" << e.chiRho << ", delta=" << e.delta
+            << ", grad_ad=" << e.grad_ad;
+    throw std::domain_error(message.str());
+  }
   a.dE_dlnRho=-T*ftr;
   a.dcp_dlnT=cp.d[0]; a.dcp_dlnRho=cp.d[1];
   a.ddelta_dlnT=delta.d[0]; a.ddelta_dlnRho=delta.d[1];
