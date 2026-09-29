@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "case": "g530_t4175",
+      "accepted": true,
+      "CPU_seconds": 17.839622,
+      "relative_changes": {
+        "T": -3.1047053816735115e-11,
+        "Pgas": 3.2018832030189515e-10,
+        "source_density": 4.3373127311951976e-10
+      },
+      "recovery": [
+        {
+          "method": "interpolate isolated upper-layer spikes",
+          "depths": [
+            3
+          ],
+          "parent_sha256": "7beac11398bd3863a8d21a05434b09ecc82f83bf10850010e901b7fa995b0515"
+        }
+      ],
+      "reference_result_sha256": "d646f96807b4806036f921ac0b2b842d0f64ef3a1dc24cd543bcc24094bb6ac2",
+      "result_sha256": "6aafb9670d561ee1020e5989101b95176635aef8415d6cf513ee5a591e236233"
+    },
+    {
+      "case": "g580_t4275",
+      "accepted": true,
+      "CPU_seconds": 17.791123,
+      "relative_changes": {
+        "T": 1.5758061522319622e-10,
+        "Pgas": -1.537244886939959e-09,
+        "source_density": -2.08971950854675e-09
+      },
+      "recovery": [
+        {
+          "method": "interpolate isolated upper-layer spikes",
+          "depths": [
+            4
+          ],
+          "parent_sha256": "65f7d0f3457b676608ee697937a974dbc3de5e80c8de2575616da643644b1ab7"
+        }
+      ],
+      "reference_result_sha256": "a8b3ebd2fe70cd1550fda4128c5746840ec74f339544aabf9a82faa728529595",
+      "result_sha256": "20ab96326203abbd75ac8d78eeec521cf58726da356064aa75cad0e2ba7a50f0"
+    },
+    {
+      "case": "control_4000",
+      "accepted": true,
+      "CPU_seconds": 8.944691,
+      "relative_changes": {
+        "T": -2.7321422901849246e-10,
+        "Pgas": 2.2071944272283872e-09,
+        "source_density": 2.86426793394412e-09
+      },
+      "recovery": [],
+      "reference_result_sha256": "d5cb3521d96abb60b4fd5bad94071d277264fd9e5374de0f8719f0024ec7967b",
+      "result_sha256": "99b01b6aac5a8bed40d979517a75858ff5d51eea4c3fcfef2ca17d55c8a32c2a"
+    }
+  ],
+  "scope": "Exercise the automatic guess recovery using unchanged source columns.",
+  "method": "One retry after interpolation of isolated optically thin starting-guess spikes; same mesh, source physics and acceptance checks.",
+  "tests": "14 atmosphere-column control-flow tests pass; three independently checked source comparisons.",
+  "maximum_allowed_relative_difference": 1e-07,
+  "executed_solver_sha256": "cd8a194c7886b63e47eaa5f53c5d9d5b20848511f1792005b3b9ef8ed0331095",
+  "documented_solver_sha256": "6c4b9603b5b46107b56101ce0ae8291d1ad3445a1c484422c5cc0c329915ec7f",
+  "metadata_only_change_after_comparison": "Record the solver script hash at launch in result.json."
+}

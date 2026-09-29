@@ -20,6 +20,8 @@ Schedule ("hybrid"):
   3. alternate at most 5 phases; the last phase always runs damped to TLUSTY's own end.
 A monitor stop never claims that no solution exists. A column that fails every phase is reported unaccepted, with
 per-attempt histories, so a different initial guess (continuation) can be tried.
+After a flux failure, one retry may remove isolated temperature spikes from
+the optically thin starting guess. The mesh and acceptance checks stay fixed.
 """
 import argparse, gzip, hashlib, json, math, os, re, resource, shutil, signal, subprocess, sys, time
 from pathlib import Path
@@ -64,6 +66,48 @@ def valid_structure(text, nd):
         return True
     except Exception:
         return False
+
+def upper_layer_guess(text, log, nd):
+    """Prepare a new guess from an otherwise converged, flux-rejected column.
+
+    Isolated hot roots in optically thin layers can escape the source's energy
+    equation while its independent convective-flux diagnostic rejects them.
+    Interpolate those guess points between their neighbours, then solve again.
+    No modified state is accepted without the usual full source checks.
+    """
+    if not valid_structure(text, nd) or 'FINAL MODEL ATMOSPHERE' not in log:
+        return None
+    profile = []
+    for line in log.rsplit('FINAL MODEL ATMOSPHERE', 1)[1].splitlines():
+        words = line.replace('D', 'E').split()
+        if len(words) == 11 and words[0].isdigit():
+            try: profile.append(list(map(float, words)))
+            except ValueError: return None
+    if len(profile) != nd or any(r[0] != i+1 or not all(math.isfinite(v) for v in r)
+                                 for i, r in enumerate(profile)):
+        return None
+    words = text.replace('D', 'E').split()
+    values = list(map(float, words[2:])); mass = values[:nd]
+    state = [values[nd+4*i:nd+4*i+4] for i in range(nd)]
+    if any(not math.isclose(r[1], m, rel_tol=1e-6) or
+           not math.isclose(r[3], v[0], rel_tol=1e-6)
+           for r, m, v in zip(profile, mass, state)):
+        return None
+    bad = [i for i, r in enumerate(profile) if abs(r[10]-1) > .002]
+    if not bad or len(bad) > 3:
+        return None
+    if any(i == 0 or i == nd-1 or i-1 in bad or i+1 in bad or
+           not 0 < profile[i][2] < 1e-5 or abs(profile[i][8]-1) > .002 or
+           profile[i][9] <= 0 or state[i][0] <= 1.005*max(state[i-1][0], state[i+1][0])
+           for i in bad):
+        return None
+    for i in bad:
+        w = math.log(mass[i]/mass[i-1])/math.log(mass[i+1]/mass[i-1])
+        state[i] = [math.exp((1-w)*math.log(a)+w*math.log(b))
+                    for a, b in zip(state[i-1], state[i+1])]
+    guess = (f'{nd} -4\n' + '\n'.join(format(v, '.17g') for v in mass) + '\n'
+             + '\n'.join(' '.join(format(v, '.17g') for v in row) for row in state) + '\n')
+    return (guess, [i+1 for i in bad]) if valid_structure(guess, nd) else None
 
 def set_param(tas, key, value):
     pat = re.compile(r'(\b' + key + r'\s*=\s*)([0-9.eEdD+-]+)')
@@ -140,6 +184,7 @@ def donor_guess(donor, col, spec, nd):
                       teff_K=dt, log_g=dg, hydrogen=dspec['hydrogen'][0], helium3=dspec['helium3'][0])
 
 def main():
+    solver_sha256 = sha(Path(__file__))
     a = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     a.add_argument('column', type=Path); a.add_argument('--executable', required=True)
     a.add_argument('--executable-sha256', required=True)
@@ -182,7 +227,7 @@ def main():
     attempts, total, kind = [], 0.0, ('newton' if args.strategy == 'hybrid' else 'damped')
     budget_exhausted = False
     (col / 'attempts').mkdir()
-    accepted = None
+    accepted = None; upper_guess_retried = False
     for phase in range(args.max_phases if args.strategy == 'hybrid' else 1):
         budget = min(args.attempt_cpu, args.total_cpu - total)
         if budget < 30:
@@ -221,6 +266,16 @@ def main():
             r['failure'] = str(e)[:300]
         attempts.append(r)
         if r['accepted']: accepted = (att, spec, r); break
+        if (not upper_guess_retried and args.strategy == 'hybrid' and phase+1 < args.max_phases
+                and r.get('failure', '').startswith('unconverged source:')
+                and r['history'] and r['history'][-1] <= 1e-6 and (att / 'fort.7').exists()):
+            recovered = upper_layer_guess((att / 'fort.7').read_text(), logtext, nd)
+            if recovered:
+                guess, depths = recovered; upper_guess_retried = True
+                r['next_guess'] = dict(method='interpolate isolated upper-layer spikes', depths=depths,
+                                      parent_sha256=sha(att / 'fort.7'))
+                kind = 'newton'
+                continue
         if (att / 'best.fort.7').exists(): guess = (att / 'best.fort.7').read_text()
         stop = r.get('monitor_stop') or ''
         if kind == 'newton': kind = 'damped'
@@ -235,6 +290,7 @@ def main():
             if p.name not in ('fort.5', 'fort.7', 'fort.8', 'fort.9', 'fort.9.gz', 'fort.15'): p.unlink()
     result = dict(name=col.name, strategy=args.strategy, accepted=accepted is not None, initial_from=donor,
                   CPU_seconds=total, wall_seconds=sum(r['wall_seconds'] for r in attempts),
+                  solver_sha256=solver_sha256,
                   selected_for_evolution=False, executable_sha256=args.executable_sha256,
                   attempts=[{k: v for k, v in r.items() if k != 'diagnostics'} for r in attempts])
     if accepted:

@@ -369,6 +369,13 @@ disabled cells remain unsupported. Independent columns measure the interpolation
 differences; they do not become table vertices. A native value/derivative check
 and a scientific assessment of those differences are still needed before use.
 
+`solve_column.py` can retry a flux-rejected atmosphere after removing isolated
+temperature spikes from its optically thin starting guess. It keeps the mesh,
+boundary and physical equations fixed, then solves and checks the whole column
+again. Two source comparisons agree with independently converged columns to
+**2.090e-9** in matching temperature, pressure and density. An already converged
+control does not use this recovery. [Checks](results/atmosphere_upper_guess_sept29_v1.json).
+
 
 ### Incomplete hydrogen-atmosphere extensions
 

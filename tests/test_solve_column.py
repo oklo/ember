@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Control-flow tests for solve_column.py. Acceptance uses import_nongrey_grid and
 is not re-tested here; the fake source never produces an acceptable column."""
-import hashlib, json, os, shutil, subprocess, sys, tempfile, unittest
+import hashlib, json, math, os, shutil, subprocess, sys, tempfile, unittest
 from pathlib import Path
 from unittest import mock
 HERE = Path(__file__).resolve().parent; ROOT = HERE.parent
@@ -91,6 +91,7 @@ class T(unittest.TestCase):
         c = column(self.tmp, [1e-2], [1e-2]); r = solve(c, '--total-cpu', '10')
         res = json.loads((c / 'result.json').read_text())
         self.assertFalse(res['accepted']); self.assertIn('budget', res['failure']); self.assertEqual(res['attempts'], [])
+        self.assertEqual(res['solver_sha256'], hashlib.sha256(SOLVER.read_bytes()).hexdigest())
     def test_caller_log_is_not_part_of_source_checksums(self):
         c = column(self.tmp, [1e-2], [1e-2])
         with (c / 'controller.log').open('w') as log:
@@ -140,6 +141,31 @@ class T(unittest.TestCase):
         self.assertEqual((attempt / 'fort.8').read_text(), expected)
         res = json.loads((c / 'result.json').read_text())
         self.assertEqual((res['initial_from']['teff_K'], res['initial_from']['log_g']), (3900.0, 6.0))
+
+    def test_upper_guess_keeps_mesh_and_requires_full_flux_failure_pattern(self):
+        sys.path.insert(0, str(SOLVER.parent)); import solve_column as sc
+        mass = [math.exp(i/5)*1e-5 for i in range(ND)]
+        state = [[2700., 1e6, 1e-8, 1e16] for _ in mass]
+        state[3][0] = 2900.
+        def inputs(tau=1e-7, other_bad=False):
+            rows = [[i+1, m, tau*(i+1), v[0], v[1], v[2], 3000., 0., 1.,
+                     2. if i == 3 else 0., 3. if i == 3 else 1.]
+                    for i, (m,v) in enumerate(zip(mass,state))]
+            if other_bad: rows[10][10] = 1.1
+            text = f'{ND} -4\n'+'\n'.join(map(str,mass))+'\n'+'\n'.join(' '.join(map(str,r))for r in state)+'\n'
+            log = 'FINAL MODEL ATMOSPHERE\n'+'\n'.join(' '.join([str(int(r[0])),*map(str,r[1:])])for r in rows)
+            return text, log
+        text, log = inputs()
+        guess, depths = sc.upper_layer_guess(text, log, ND)
+        self.assertEqual(depths, [4])
+        before, after = list(map(float,text.split()[2:])), list(map(float,guess.split()[2:]))
+        self.assertEqual(before[:ND], after[:ND])
+        self.assertAlmostEqual(after[ND+4*3], 2700., places=9)
+        self.assertEqual(before[ND+4*4:], after[ND+4*4:])
+        self.assertIsNone(sc.upper_layer_guess(*inputs(tau=.1), ND))
+        self.assertIsNone(sc.upper_layer_guess(*inputs(other_bad=True), ND))
+        self.assertIsNone(sc.upper_layer_guess(text, log.replace('2900.0', '2950.0'), ND))
+        self.assertIsNone(sc.upper_layer_guess(text, log.rsplit('\n', 1)[0], ND))
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
