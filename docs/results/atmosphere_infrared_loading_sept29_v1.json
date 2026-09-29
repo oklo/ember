@@ -1,0 +1,85 @@
+{
+  "date": "2026-09-29",
+  "scope": "Supplied binary opacity table is used through its declared infrared range. Source comparisons are isolated tests, not stellar cooling-age validation.",
+  "change": "Remove the binary loader rule that replaced all opacity beyond 10 microns with its 10-micron value. The independently supplied spectra span 0.09 to 30 microns.",
+  "source": {
+    "executable_sha256": "afdca4da2bbef23946d3103dcacac128ec4d27b868ba785063fe2a2ac4268510",
+    "source_sha256": "aa1b68a50457aeb9ac5736f80d79f3d16283aeeeeb97be11981b200c7193f39a",
+    "parent_sha256": "06e1521c46e5472739ae724e9434677b8d6507075677688a13f2612db3d36577",
+    "scope": "Use supplied source opacities beyond10 microns. Remove only the hard-coded flattening in binary-table loading."
+  },
+  "spectral_checks": [
+    {
+      "T_K": 3000,
+      "corrected_loader_max_relative_error": 1.284305994886381e-10,
+      "former_loader_max_relative_change": 2.1992302550441054
+    },
+    {
+      "T_K": 3100,
+      "corrected_loader_max_relative_error": 1.2754330924735768e-10,
+      "former_loader_max_relative_change": 1.7254065878854208
+    },
+    {
+      "T_K": 3300,
+      "corrected_loader_max_relative_error": 1.292208562375663e-10,
+      "former_loader_max_relative_change": 0.19832940428541912
+    },
+    {
+      "T_K": 3800,
+      "corrected_loader_max_relative_error": 1.3129808351663996e-10,
+      "former_loader_max_relative_change": 0.875957998947461
+    },
+    {
+      "T_K": 4000,
+      "corrected_loader_max_relative_error": 1.3136602916574702e-10,
+      "former_loader_max_relative_change": 0.8852499514803935
+    }
+  ],
+  "columns": [
+    {
+      "name": "warm4600",
+      "accepted": true,
+      "CPU_seconds": 104.888296,
+      "diagnostics": {
+        "T": 5811.355843346086,
+        "Pgas": 126227380.60278414,
+        "source_density": 0.0003314166981261031,
+        "flux_error": 3.156089399780626e-05,
+        "effective_flux_error": 0.00020305817031884832,
+        "chemical_density_error": 3.552713678800501e-15,
+        "correction": 4.85e-10,
+        "iterations": 16,
+        "depths": 371
+      },
+      "relative_boundary_changes": {
+        "T": 4.8614056513685e-07,
+        "Pgas": -8.015373499481449e-06,
+        "source_density": -1.0067322289697422e-05
+      }
+    },
+    {
+      "name": "cold2000",
+      "accepted": true,
+      "CPU_seconds": 77.082036,
+      "diagnostics": {
+        "T": 3997.502108291565,
+        "Pgas": 7263922218.083637,
+        "source_density": 0.04337402125202984,
+        "flux_error": 0.00013105954377068407,
+        "effective_flux_error": 0.00020758125628461688,
+        "chemical_density_error": 2.220446049250313e-16,
+        "correction": 7.32e-10,
+        "iterations": 3,
+        "depths": 186
+      },
+      "relative_boundary_changes": {
+        "T": -3.1931435796495045e-05,
+        "Pgas": 0.0003089766390063087,
+        "source_density": 0.00034465928979021676
+      }
+    }
+  ],
+  "source_patch_applies_to_pinned_archive": true,
+  "selected_for_stellar_evolution": false,
+  "source_cases": "Private H/He atmosphere controls with H3+ chemistry; each pair changes only opacity loading."
+}

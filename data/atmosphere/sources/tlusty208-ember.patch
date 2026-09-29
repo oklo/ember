@@ -91,7 +91,8 @@
  c
        if(n.eq.2) then
           a11=a(1,1)
-@@ -14144,8 +14158,8 @@
+@@ -14143,8 +14157,8 @@
+         END IF
        END IF
    501 FORMAT(2I5)
 -  502 FORMAT(1P6E13.6)
@@ -100,7 +101,6 @@
 +  503 FORMAT(1P3E25.16)
        RETURN
        END
- C
  C
 @@ -14189,6 +14203,7 @@
           END IF
@@ -119,7 +119,26 @@
    613 FORMAT(/' ---------------------'/
       *        ' FINAL DISK RING MODEL'/
       *        ' ---------------------'/
-@@ -45123,9 +45138,9 @@
+@@ -44761,18 +44776,6 @@
+ c
+ c        write(*,*) 'final NUMFREQ, FREQ(1)',numfreq,freq(1)
+ c
+-         DO K=1,NUMFREQ
+-            IF(FRTAB(K).GT.2.997925E13) THEN
+-               K0=K
+-             ELSE 
+-               do i=1,numtemp
+-                  numr=numrh(i)
+-                  do j=1,numr
+-                     absopac(i,j,k)=absopac(i,j,k0)
+-                  end do
+-               end do
+-            END IF
+-         END DO 
+          close(53)
+       end if
+ c
+@@ -45123,9 +45126,9 @@
          TL=LOG(T)
          DELTAT=(TL-TTAB1)/(TTAB2-TTAB1)*FLOAT(numtemp-1)
          JT = 1 + IDINT(DELTAT)
@@ -130,7 +149,7 @@
          t1i=tempvec(jt)
          t2i=tempvec(jt+1)
          dti=(TL-T1i)/(T2i-T1i)
-@@ -45203,14 +45218,14 @@
+@@ -45203,14 +45206,14 @@
           END DO
           IF(IRSCHE.NE.0) THEN
              DO IK=1,NFREQ
@@ -147,7 +166,7 @@
                 X2=1./X/X   
                 RCH2(IK)=(8.14E-13+1.28E-6/X+1.61*X2)*X2
              END DO
-@@ -45852,10 +45867,12 @@
+@@ -45852,10 +45855,12 @@
        sahcon=1.87840e20*tt*sqrt(tt)
        ev2erg=1.6018e-12
        nimax=3000
@@ -161,7 +180,7 @@
  c
  C---- data for atoms  ----------------
  C
-@@ -46096,8 +46113,8 @@
+@@ -46096,8 +46101,8 @@
  c
  c     don't change structure if particle conservation in not solved 
  c
@@ -172,7 +191,7 @@
           dens(id)=denso(id)
           elec(id)=eleco(id)
           wmm(id)=wmmo(id)
-@@ -47384,10 +47401,14 @@
+@@ -47384,10 +47389,14 @@
              DDTPM=-DLP/T
              CALL CONVEC(ID,T0,P0,p0-pr0,pr0,AB0,DLT,FLXCNV,VCON)
              DHCDDP=0.
@@ -190,7 +209,7 @@
              DHCDTP=DHCDT0/TP+DHCDDP*DDTP0
              DHCDTU=DHCDT0/T+DHCDDP*DDTPM
  C
-@@ -47398,7 +47419,7 @@
+@@ -47398,7 +47407,7 @@
              RDELM=DENS(ID)/DELM*reint(id)
              IF(ICONV.GT.0) THEN
                 WM(ID,ID-1)=WM(ID,ID-1)-RDELM*DHCDTM
@@ -199,7 +218,7 @@
                 WM(ID,ID+1)=WM(ID,ID+1)+RDELM*DHCDTP
              END IF
              WR(ID)=WR(ID)-RDELM*(FLXCNV-FLXC(ID))
-@@ -47766,8 +47787,12 @@
+@@ -47766,8 +47775,12 @@
                 ELEC(ID)=ELEC0(ID)
                 DENS(ID)=DENS0(ID)
                 T=TEMP(ID)
@@ -213,7 +232,7 @@
              END DO
            ELSE
              call pgset(1)
-@@ -47795,6 +47820,7 @@
+@@ -47795,6 +47808,7 @@
  C
        CALL OPACF1(IJ)
        DO ID=1,ND
@@ -221,7 +240,7 @@
           ABSO1(ID)=ABSO1(ID)/DENS(ID)
           SCAT1(ID)=SCAT1(ID)/DENS(ID)
           EMIS1(ID)=EMIS1(ID)/DENS(ID)
-@@ -50007,3 +50033,18 @@
+@@ -50007,3 +50021,18 @@
        END
  
  

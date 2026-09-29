@@ -390,6 +390,14 @@ convergence in one iteration. The equations and acceptance checks are unchanged.
 [Restart comparison](results/atmosphere_restart_precision_sept29_v1.json).
 
 
+The binary opacity loader uses the supplied infrared spectrum. Its inherited
+rule that flattened opacity beyond 10 microns has been removed; the current
+source tables extend to 30 microns. Independent spectral checks agree within
+1.314e-10. Complete 2000 K and 4600 K atmosphere comparisons change matching
+pressure by at most 0.03090%. These are two source comparisons, not a cooling-age
+error bound. Existing tables retain their recorded source identity.
+[Infrared comparison](results/atmosphere_infrared_loading_sept29_v1.json).
+
 ### Incomplete hydrogen-atmosphere extensions
 
 Version 2 of `EMBER_HYDROGEN_DOMINATED_ATMOSPHERE` permits missing vertices.
