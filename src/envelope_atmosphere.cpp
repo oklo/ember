@@ -42,28 +42,28 @@ EnvelopeSource::EnvelopeSource(const std::string& path) {
     for (std::size_t i = 1; i < a->size(); ++i) require(std::abs((*a)[i] - (*a)[i - 1] - h) <= 1e-9 * std::abs(h), "nonuniform ln T or ln rho axis");
   }
 }
-double EnvelopeSource::plane_value(std::size_t plane, std::size_t q, double lnT, double lnrho) const {
-  const auto i = cell(lt_, lnT, "temperature outside source"), j = cell(lr_, lnrho, "density outside source");
-  const auto wt = cr((lnT - lt_[i]) / (lt_[i + 1] - lt_[i])), wr = cr((lnrho - lr_[j]) / (lr_[j + 1] - lr_[j]));
-  const auto& a = planes_[plane][q]; const std::size_t nr = lr_.size(); double v = 0;
-  for (int a1 = 0; a1 < 4; ++a1) for (int b1 = 0; b1 < 4; ++b1) v += wt[a1] * wr[b1] * a[(i - 1 + a1) * nr + (j - 1 + b1)];
-  return v;
-}
 EnvelopeSource::State EnvelopeSource::eval(double lnT, double lnrho, double X, double Y3) const {
   require(X >= X_.front() && X <= X_.back() && Y3 >= Y3_.front() && Y3 <= Y3_.back(), "composition outside declared source interval");
   const auto ix = std::min<std::size_t>(std::upper_bound(X_.begin(), X_.end(), X) - X_.begin() - 1, X_.size() - 2);
   const auto iy = std::min<std::size_t>(std::upper_bound(Y3_.begin(), Y3_.end(), Y3) - Y3_.begin() - 1, Y3_.size() - 2);
   const double fx = (X - X_[ix]) / (X_[ix + 1] - X_[ix]), fy = (Y3 - Y3_[iy]) / (Y3_[iy + 1] - Y3_[iy]);
+  const auto it=cell(lt_,lnT,"temperature outside source"),ir=cell(lr_,lnrho,"density outside source");
+  const auto wt=cr((lnT-lt_[it])/(lt_[it+1]-lt_[it])),wr=cr((lnrho-lr_[ir])/(lr_[ir+1]-lr_[ir]));
+  const std::size_t nr=lr_.size();
   std::array<double,5> v{};
   for (int dx = 0; dx < 2; ++dx) for (int dy = 0; dy < 2; ++dy) {
     const double w = (dx ? fx : 1 - fx) * (dy ? fy : 1 - fy); if (w == 0) continue;
     const std::size_t plane = (ix + dx) * Y3_.size() + (iy + dy);
     // Explicit support: never interpolate across a nonpositive source response.
-    const auto it=cell(lt_,lnT,"temperature outside source"),ir=cell(lr_,lnrho,"density outside source");
     for(int a=0;a<4;++a)for(int b=0;b<4;++b)for(std::size_t q=1;q<5;++q)
       require(planes_[plane][q][(it-1+a)*lr_.size()+ir-1+b]>0,
               "unsupported envelope-source response stencil");
-    for (std::size_t q = 0; q < 5; ++q) v[q] += w * plane_value(plane, q, lnT, lnrho);
+    for (std::size_t q=0;q<5;++q) {
+      const auto& values=planes_[plane][q];double value=0;
+      for(int a=0;a<4;++a)for(int b=0;b<4;++b)
+        value+=wt[a]*wr[b]*values[(it-1+a)*nr+ir-1+b];
+      v[q]+=w*value;
+    }
   }
   return {v[0], v[1], v[2], v[3], v[4]};
 }

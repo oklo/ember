@@ -1,0 +1,40 @@
+{
+  "change": "Reuse interpolation coordinates and weights across the five envelope-source quantities.",
+  "physics": "Same source values, interpolant, source masks and stellar acceptance tests.",
+  "source_queries": {
+    "count": 2000,
+    "supported": 1974,
+    "maximum_relative_difference": 4.2304453438047005e-16,
+    "timings_seconds": [
+      0.510320291,
+      0.164601167,
+      0.167136042,
+      0.556180041
+    ]
+  },
+  "stellar_interval_years": 1000000000.0,
+  "threads_each": 2,
+  "cpu_seconds": [
+    107.08790499999999,
+    87.640899
+  ],
+  "wall_seconds": [
+    71.01552874967456,
+    56.52421949990094
+  ],
+  "global_relative_differences": {
+    "Teff_K": 3.6565037429123293e-09,
+    "luminosity_Lsun": 2.7234394868019172e-08,
+    "radius_Rsun": 6.304190268635122e-09,
+    "central_T_K": 2.7017250356019952e-08,
+    "central_density_g_cm3": 4.956528615759588e-07,
+    "central_X": 7.647648693128235e-07,
+    "surface_X": 6.35429258497225e-07,
+    "H_mass_g": 8.703664764539757e-09,
+    "He3_mass_g": 2.2002888975909178e-07,
+    "convective_mass_fraction": 0.0
+  },
+  "maximum_log_structure_difference": 2.8560991371939792e-06,
+  "maximum_relative_abundance_difference_with_1e_8_floor": 1.8618797660348316e-05,
+  "note": "Adaptive step histories differ slightly; the quoted runtime includes that effect. No tolerance changes. Both runs started from the same accepted model and ran concurrently."
+}

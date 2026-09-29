@@ -34,7 +34,6 @@ public:
 private:
   std::vector<double> X_, Y3_, lt_, lr_;
   std::vector<std::array<std::vector<double>,5>> planes_;   // [plane][quantity][iT*nr + ir]
-  double plane_value(std::size_t plane, std::size_t q, double lnT, double lnrho) const;
 };
 
 struct EnvelopeSurface {
