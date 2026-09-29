@@ -30,7 +30,7 @@ std::optional<Model> richardson(const EvolutionStep& full, const EvolutionStep& 
       || full.convective_mass_fraction != h2.convective_mass_fraction
       || h1.convective_mass_fraction != h2.convective_mass_fraction)
     return std::nullopt;
-  if (full.model.m != h2.model.m || full.model.M != h2.model.M
+  if (full.model.m != h2.model.m || full.model.M != h2.model.M || full.model.envelope_mass != h2.model.envelope_mass
       || full.model.comp.size() != h2.model.comp.size()) return std::nullopt;
   Model out = h2.model;
   for (std::size_t i = 0; i < out.size(); ++i) {
@@ -66,7 +66,7 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
     std::optional<Model> guess;
     selected.initial_structure_guess = nullptr;
     if (options.predict_structure && before && ratio > 0 && std::isfinite(ratio)
-        && before->M == start.M && before->m == start.m && before->size() == start.size()
+        && before->M == start.M && before->envelope_mass == start.envelope_mass && before->m == start.m && before->size() == start.size()
         && before->luminosity_grid == start.luminosity_grid) {
       bool smooth_history = true;
       for (std::size_t i = 0; i < start.size(); ++i)

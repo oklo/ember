@@ -12,13 +12,18 @@ namespace ember::example {
 inline Model stellar_seed(std::size_t points, double mass, double radius,
                           const Composition& comp, const Nuclear& nuclear, const Atmosphere& atmosphere,
                           double index = 3.0, double seed_Teff = 0.0,
-                          LuminosityGrid luminosity_grid = LuminosityGrid::mass_nodes) {
+                          LuminosityGrid luminosity_grid = LuminosityGrid::mass_nodes,
+                          double envelope_mass = 0) {
   if (points < 32 || points > 8192 || !std::isfinite(mass) || !std::isfinite(radius)
       || !(mass > 0.0) || !(radius > 0.0))
     throw std::invalid_argument("stellar_seed: invalid mesh, mass or radius");
   if (index != 3 && index != 1.5) throw std::invalid_argument("stellar_seed: supported indices are 3 and 1.5");
   if (!std::isfinite(seed_Teff) || seed_Teff < 0)
     throw std::invalid_argument("stellar_seed: invalid trial effective temperature");
+  if (!std::isfinite(envelope_mass) || envelope_mass < 0 || envelope_mass >= mass
+      || (envelope_mass > 0 && luminosity_grid != LuminosityGrid::volume_faces))
+    throw std::invalid_argument("stellar_seed: invalid outer reservoir or luminosity grid");
+  const double mesh_mass = mass - envelope_mass;
   const double outer_xi = index == 3 ? 6.875 : 3.65;
   std::vector<double> targets(points);
   for (std::size_t i = 0; i < points; ++i) {
@@ -27,19 +32,20 @@ inline Model stellar_seed(std::size_t points, double mass, double radius,
   }
   const auto le = lane_emden(targets, index);
   const double a = radius / outer_xi;
-  const double rhoc = mass / (4.0 * M_PI * a * a * a * le.back().mass);
+  const double rhoc = mesh_mass / (4.0 * M_PI * a * a * a * le.back().mass);
   const double Pc = 4 * M_PI / (index + 1) * constants::G * a * a * rhoc * rhoc;
   // Ideal-gas seed only; relaxation includes the actual degeneracy pressure.
   const double Tc = Pc / (constants::R_gas * rhoc * (comp.mu_ions_inv() + comp.mu_elec_inv()));
   Model m; m.M = mass;
+  m.envelope_mass = envelope_mass;
   m.luminosity_grid=luminosity_grid;
   for (const auto& s : le) {
-    m.m.push_back(mass * s.mass / le.back().mass);
+    m.m.push_back(mesh_mass * s.mass / le.back().mass);
     m.y.push_back({std::log(a * s.xi), std::log(rhoc * std::pow(s.theta, index)),
                    std::log(Tc * s.theta), 0.0});
     m.comp.push_back(comp);
   }
-  m.m.back() = mass;
+  m.m.back() = mesh_mass;
   double eps = nuclear.eval(m.T(0), m.rho(0), comp).eps;
   const bool faces=face_luminosities(m);
   m.y.front().L = luminosity_mass(m,0) * eps;
@@ -78,9 +84,9 @@ inline Model stellar_seed(std::size_t points, double mass, double radius,
     const double rhob = 0.5 * (m.rho(i) + m.rho(i - 1));
     m.m[i] = m.m[i - 1] + 4.0 * M_PI * std::pow(rb, 3) * rhob * (m.y[i].lnr - m.y[i - 1].lnr);
   }
-  const double scale = mass / m.m.back();
+  const double scale = mesh_mass / m.m.back();
   for (std::size_t i = 0; i < points; ++i) { m.m[i] *= scale; m.y[i].lnrho += std::log(scale); }
-  m.m.back() = mass;
+  m.m.back() = mesh_mass;
   for (std::size_t i = 1; i < points; ++i)
     if (!(m.m[i] > m.m[i - 1]))
       throw std::domain_error("stellar_seed: outer mass intervals are unresolved; reduce mesh points");

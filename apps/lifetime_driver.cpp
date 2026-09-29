@@ -5,6 +5,7 @@
 #include "ember/convective_evolution_checks.hpp"
 #include "ember/convective_material_heat.hpp"
 #include "ember/envelope_transport.hpp"
+#include "ember/envelope_atmosphere.hpp"
 #include "ember/evolution_checkpoint.hpp"
 #include "ember/runtime_identity.hpp"
 #include "ember/atmosphere_deuterium.hpp"
@@ -94,6 +95,11 @@ int lifetime_main(int argc,char** argv) {
         ?cfg.get("eos_low_metal_interpolation"):"cubic";
     if(low_metal_interpolation!="cubic" && low_metal_interpolation!="quadratic")
       throw std::invalid_argument("unknown low-metal EOS interpolation");
+    const auto ion_quantum=cfg.values.contains("eos_ion_quantum")?cfg.get("eos_ion_quantum"):"none";
+    if(ion_quantum!="none" && ion_quantum!="liquid_bc22")
+      throw std::invalid_argument("unknown quantum-ion EOS selection");
+    fs::path cold_eos_path;
+    if(cfg.values.contains("eos_cold_potential"))cold_eos_path=path("eos_cold_potential");
     const auto conduction_path=path("conduction"),atmosphere_path=path("atmosphere"),collision_path=path("collisions"),composition_path=path("composition");
     const double conductive_opacity=cfg.values.contains("opacity_conductive_interior")
         ?cfg.number("opacity_conductive_interior"):0;
@@ -103,6 +109,13 @@ int lifetime_main(int argc,char** argv) {
         || conductive_opacity_scale<.1 || conductive_opacity_scale>10
         || (conductive_opacity==0 && conductive_opacity_scale!=1))
       throw std::invalid_argument("invalid conductive-interior radiative opacity selection");
+    const double envelope_opacity=cfg.values.contains("opacity_conductive_envelope")
+        ?cfg.number("opacity_conductive_envelope"):0;
+    const double envelope_opacity_scale=cfg.values.contains("opacity_conductive_envelope_scale")
+        ?cfg.number("opacity_conductive_envelope_scale"):1;
+    if((envelope_opacity!=0 && envelope_opacity!=1) || !std::isfinite(envelope_opacity_scale)
+        || envelope_opacity_scale<.01 || envelope_opacity_scale>100 || (envelope_opacity==0 && envelope_opacity_scale!=1))
+      throw std::invalid_argument("invalid conductive-envelope opacity selection");
     std::optional<RadiativeOpacity::Extension> opacity_extension;
     if(cfg.values.contains("opacity_hydrogen_response")) {
       opacity_extension=RadiativeOpacity::Extension{path("opacity_hydrogen_response"),
@@ -135,6 +148,9 @@ int lifetime_main(int argc,char** argv) {
         || (collision_verify!=0 && collision_radius==0))
       throw std::invalid_argument("invalid collision reuse settings");
     const auto optional_number=[&](const char* key) {return cfg.values.contains(key)?cfg.number(key):0.;};
+    const double envelope_jacobian_radius=optional_number("envelope_jacobian_radius");
+    if(!std::isfinite(envelope_jacobian_radius) || envelope_jacobian_radius<0 || envelope_jacobian_radius>.01)
+      throw std::invalid_argument("envelope_jacobian_radius must lie in [0,0.01]");
     const double eos_radius=optional_number("eos_taylor_radius");
     const double buoyancy_spacing=optional_number("buoyancy_reuse_spacing");
     const double screening_spacing=optional_number("screening_reuse_spacing");
@@ -203,6 +219,27 @@ int lifetime_main(int argc,char** argv) {
     if(cfg.values.contains("atmosphere_hydrogen_interval"))hydrogen_atmosphere_path=path("atmosphere_hydrogen_interval");
     fs::path hydrogen_envelope_path;
     if(cfg.values.contains("atmosphere_hydrogen_envelope"))hydrogen_envelope_path=path("atmosphere_hydrogen_envelope");
+    fs::path envelope_map_path;
+    if(cfg.values.contains("envelope_map"))envelope_map_path=path("envelope_map");
+    std::unique_ptr<EnvelopeMapAtmosphere> deep_envelope;
+    if(!envelope_map_path.empty()) {
+      deep_envelope=std::make_unique<EnvelopeMapAtmosphere>(envelope_map_path.string());
+      if(deep_envelope->total_mass()!=mass)
+        throw std::invalid_argument("envelope map requires a matching total stellar mass");
+    }
+    fs::path envelope_source_path;
+    if(cfg.values.contains("envelope_source"))envelope_source_path=path("envelope_source");
+    const auto envelope_eos=cfg.values.contains("envelope_eos")?cfg.get("envelope_eos"):"";
+    if(!envelope_eos.empty() && (envelope_eos!="interior" || !envelope_source_path.empty()))
+      throw std::invalid_argument("envelope EOS must be interior, without a separate layer source");
+    const bool direct_envelope=!envelope_source_path.empty() || envelope_eos=="interior";
+    const double envelope_fraction=cfg.values.contains("envelope_mass_fraction")?cfg.number("envelope_mass_fraction"):0;
+    if(direct_envelope && (deep_envelope
+        || !(envelope_fraction>0 && envelope_fraction<=.01)))
+      throw std::invalid_argument("native envelope requires mass fraction in (0,0.01] and no envelope map");
+    if(!direct_envelope && envelope_fraction!=0)
+      throw std::invalid_argument("envelope mass fraction requires a source or the interior EOS");
+    const double selected_envelope_mass=deep_envelope?deep_envelope->envelope_mass():mass*envelope_fraction;
     if((atmosphere_metals!="strict" && atmosphere_metals!="bounded_fixed_Z") ||
         (atmosphere_metals=="strict"?atmosphere_delta_Z!=0:atmosphere_delta_Z<=0))
       throw std::invalid_argument("invalid atmosphere metal approximation selection");
@@ -222,7 +259,23 @@ int lifetime_main(int argc,char** argv) {
     initial.cn_molality=initial_gs98_cn(initial);initial=explicit_cn_material(initial);
 
     RuntimeIdentity identity;identity.file("executable",argv[0]);
+    if(deep_envelope) {
+      identity.file("atmosphere.envelope_map",envelope_map_path);
+      identity.number("atmosphere.envelope_mass",deep_envelope->envelope_mass());
+      identity.values["atmosphere.envelope_thermal"]="base_state_reservoir.v1";
+    }
+    if(direct_envelope) {
+      if(!envelope_source_path.empty())identity.file("atmosphere.envelope_source",envelope_source_path);
+      else identity.values["atmosphere.envelope_eos"]="interior.v1";
+      identity.number("atmosphere.envelope_mass",selected_envelope_mass);
+      identity.values["atmosphere.envelope_thermal"]="base_state_reservoir.v1";
+      identity.number("atmosphere.envelope_lnP_steps",20);
+    }
     identity.values["opacity.composition_extension"]=opacity_extension?"hydrogen_share.linear_Z.source_log_X.v1":"none";
+    if(envelope_opacity==1) {
+      identity.values["opacity.conductive_envelope"]="hydrogen_density_continuation.v1";
+      identity.number("opacity.conductive_envelope_scale",envelope_opacity_scale);
+    }
     if(conductive_opacity==1) {
       identity.values["opacity.conductive_interior"]="source_slope.fixed_density_overlap.v3";
       identity.number("opacity.conductive_transport_uncertainty_limit",.001);
@@ -289,8 +342,14 @@ int lifetime_main(int argc,char** argv) {
         {"verification_correction_tolerance",verification_correction}})
       if(value>0)identity.number("solver."+key,value);
     identity.family("eos",eos_path,true);
+    if(ion_quantum=="liquid_bc22")
+      identity.values["eos.ion_quantum"]="bc22.liquid.common_ne.linear_mixture.thetaH_le_1.dense_H.v2";
     if(low_metal_interpolation=="quadratic")
       identity.values["eos.low_metal_interpolation"]="quadratic.C2_to_cubic.v1";
+    if(!cold_eos_path.empty()){
+      identity.file("eos.cold_potential",cold_eos_path);
+      identity.values["eos.cold_model"]=VariableMetalHelmholtzEos::cold_model_identifier;
+    }
     for(const auto& [role,p]:std::map<std::string,fs::path>{{"opacity_low",low_path},{"opacity_warm",warm_path},
         {"opacity_bridge",bridge_path},{"opacity_hot",hot_path}})identity.family(role,p,false);
     for(const auto& [role,p]:std::map<std::string,fs::path>{{"conduction",conduction_path},{"atmosphere",atmosphere_path},
@@ -311,16 +370,22 @@ int lifetime_main(int argc,char** argv) {
     // and opacity objects. The configuration's execution controls may change.
     if(!restart.empty()) {
       std::ifstream checkpoint_header(restart);std::string magic;int version{};
-      if(!(checkpoint_header>>magic>>version) || magic!="EMBER_EVOLUTION_CHECKPOINT" || (version!=5 && version!=6))
+      if(!(checkpoint_header>>magic>>version) || magic!="EMBER_EVOLUTION_CHECKPOINT" || (version!=5 && version!=6 && version!=7))
         throw std::invalid_argument("lifetime restart requires a volume-face checkpoint");
+      bool saved_heat=version==6;
+      if(version==7) {
+        int cn{},metal{},heat{};std::string grid;checkpoint_header>>cn>>metal>>grid>>heat;
+        saved_heat=heat!=0;
+      }
       state=read_checkpoint(restart,points,mass,initial,selections,abundance_tolerance,identities,
-                            LuminosityGrid::volume_faces,version==6);
+                            LuminosityGrid::volume_faces,saved_heat,selected_envelope_mass);
       if(state.model.age>=target)throw std::invalid_argument("target must exceed the saved age");
       if(restart_step_years>0)state.next_dt=std::min(restart_step_years,maximum_dt/year)*year;
     }
     VariableMetalHelmholtzEos table_eos(eos_path,HelmholtzTableEos::Mixture::allow_documented_proxy,
         low_metal_interpolation=="quadratic"?VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic
-                                            :VariableMetalHelmholtzEos::LowMetalInterpolation::cubic);
+                                            :VariableMetalHelmholtzEos::LowMetalInterpolation::cubic,
+        cold_eos_path,ion_quantum=="liquid_bc22");
     DeuteriumApproxEos eos(table_eos);
     const RadiativeOpacity::Tables opacity_tables{low_path,warm_path,bridge_path,hot_path};
     auto source_radiation=opacity_extension?std::make_shared<RadiativeOpacity>(opacity_tables,*opacity_extension)
@@ -332,6 +397,12 @@ int lifetime_main(int argc,char** argv) {
     if(conductive_opacity==1) {
       continued_radiation=std::make_shared<ConductiveInteriorOpacity>(*source_radiation,*conduction,.001,conductive_opacity_scale);
       radiation=continued_radiation;
+    }
+    std::shared_ptr<ConductiveInteriorOpacity> envelope_radiation;
+    if(envelope_opacity==1) {
+      const ConductiveInteriorOpacity::Domain domain{180.,220.,3.1e5,5.5e5,6e5,1000.,.97,1e-8,100.};
+      envelope_radiation=std::make_shared<ConductiveInteriorOpacity>(*radiation,*conduction,.001,envelope_opacity_scale,domain);
+      radiation=envelope_radiation;
     }
     CombinedOpacity combined(radiation,conduction);
     CompositionAtmosphereGrid table_atmosphere(eos,atmosphere_path,CompositionAtmosphereGrid::Mixture::allow_documented_proxy);
@@ -373,8 +444,23 @@ int lifetime_main(int argc,char** argv) {
     std::unique_ptr<HydrogenEnvelopeAtmosphere> hydrogen_envelope;
     if(!hydrogen_envelope_path.empty())hydrogen_envelope=std::make_unique<HydrogenEnvelopeAtmosphere>(
         eos,hydrogen_boundary,hydrogen_envelope_path);
-    TraceDeuteriumAtmosphere atmosphere(eos,hydrogen_envelope
+    TraceDeuteriumAtmosphere thin_atmosphere(eos,hydrogen_envelope
         ?static_cast<const Atmosphere&>(*hydrogen_envelope):hydrogen_boundary);
+    std::unique_ptr<EnvelopeSource> envelope_source;
+    std::unique_ptr<EnvelopeAtmosphere> native_envelope;
+    if(!envelope_source_path.empty()) {
+      envelope_source=std::make_unique<EnvelopeSource>(envelope_source_path.string());
+      native_envelope=std::make_unique<EnvelopeAtmosphere>(thin_atmosphere,combined,*envelope_source,
+          1.9,mass,selected_envelope_mass,20);
+    }
+    if(envelope_eos=="interior")native_envelope=std::make_unique<EnvelopeAtmosphere>(
+        thin_atmosphere,combined,eos,1.9,mass,selected_envelope_mass,20);
+    if(native_envelope) {
+      native_envelope->evaluation_threads(static_cast<std::size_t>(threads));
+      native_envelope->jacobian_reuse(envelope_jacobian_radius);
+    }
+    const Atmosphere& atmosphere=native_envelope?static_cast<const Atmosphere&>(*native_envelope)
+        :(deep_envelope?static_cast<const Atmosphere&>(*deep_envelope):thin_atmosphere);
     PPCNNetwork nuclear(PPRates::solar_fusion_iii,PPScreening::salpeter_van_horn,PPRates::solar_fusion_iii);
     PlasmaNeutrinoLosses losses;ScreenedCollisionTransport collisions(collision_path.string());
     ScreenedMetalMicroscopicTransport microscopic(table_eos,collisions,true,minimum_temperature,{true,true,true},true);
@@ -404,7 +490,12 @@ int lifetime_main(int argc,char** argv) {
     options.verification_correction_tolerance=verification_correction;
     if(restart.empty()) {
       ContractingSource seed_source(nuclear,entropy_loss);auto seed_physics=early;seed_physics.nuclear=&seed_source;
-      const auto guess=contracting_guess(points,mass,radius,teff,initial,seed_physics,atmosphere);
+      double seed_radius=radius,seed_teff=teff;
+      if(native_envelope) {
+        const auto surface=native_envelope->from_photosphere(teff,radius,initial);
+        seed_radius=surface.r_base;seed_teff=teff*std::sqrt(radius/seed_radius);
+      }
+      const auto guess=contracting_guess(points,mass,seed_radius,seed_teff,initial,seed_physics,atmosphere,selected_envelope_mass);
       auto solved=relax(guess,seed_physics,atmosphere,options.relaxation);
       if(!solved.converged)throw std::runtime_error("Hayashi initial model: "+solved.message);
       for(const auto& c:solved.model.comp)if(c!=initial)throw std::runtime_error("initial relaxation changed isotope inventory");
@@ -441,9 +532,17 @@ int lifetime_main(int argc,char** argv) {
         outer_q=right+1==m.size()?1:.5*(m.m[right]+m.m[right+1])/m.M;
         burning_cells=right-left+1;
       }
-      const double R=m.r(m.size()-1),L=m.y.back().L;
+      double R=m.r(m.size()-1);const double L=m.y.back().L;
+      double Teff=std::pow(L/(4*M_PI*constants::sigma_SB*R*R),.25);
+      if(deep_envelope) {
+        const auto surface=deep_envelope->photosphere_R_Teff(Teff,constants::G*m.M/(R*R),m.comp.back());
+        R=surface[0];Teff=surface[1];
+      } else if(native_envelope) {
+        const auto surface=native_envelope->photosphere(Teff,constants::G*m.M/(R*R),m.comp.back());
+        R=surface.R;Teff=surface.Teff;
+      }
       history<<"{\"years\":"<<m.age/year<<",\"step_years\":"<<step/year<<",\"accepted\":"<<state.accepted<<",\"rejected\":"<<state.rejected
-        <<",\"radius_Rsun\":"<<R/constants::Rsun<<",\"Teff_K\":"<<std::pow(L/(4*M_PI*constants::sigma_SB*R*R),.25)
+        <<",\"radius_Rsun\":"<<R/constants::Rsun<<",\"Teff_K\":"<<Teff
         <<",\"luminosity_Lsun\":"<<L/constants::Lsun<<",\"nuclear_fraction\":"<<Lnuc/L<<",\"central_T_K\":"<<m.T(0)
         <<",\"central_density_g_cm3\":"<<m.rho(0)<<",\"central_X\":"<<m.comp.front()[Species::H1]
         <<",\"central_He3\":"<<m.comp.front()[Species::He3]
@@ -475,6 +574,7 @@ int lifetime_main(int argc,char** argv) {
     // interval under the same audits; the controller bounds repeated rejection.
     control.audit_failure_is_fatal=false;
     HomogeneousCheck guard;
+    double envelope_maximum_thermal_fraction=0,envelope_maximum_nuclear_fraction=0,envelope_maximum_base_T=0;
     EvolutionControlHooks hooks;
     hooks.physics=[&](const Model& m)->const Physics& {return has_D(m)?early:later;};
     hooks.configure_step=[&](const Model& m,EvolutionOptions& selected) {
@@ -487,9 +587,42 @@ int lifetime_main(int argc,char** argv) {
       return difference;
     };
     hooks.audit=[&](const Model& old,const EvolutionStep& step,double duration) {
-      return check_interval(old,step,duration,nuclear,inventory_tolerance);
+      auto audit=check_interval(old,step,duration,nuclear,inventory_tolerance);
+      if(envelope_eos=="interior" && selected_envelope_mass>0
+          && std::max(old.T(old.size()-1),step.model.T(step.model.size()-1))>1e6) {
+        const auto& m=step.model;const auto i=m.size()-1;
+        const auto a=eos.eval(old.T(i),old.rho(i),old.comp[i]);
+        const auto b=eos.eval(m.T(i),m.rho(i),m.comp[i]);
+        const double light=std::min(old.y.back().L,m.y.back().L);
+        // Conservative base-reservoir scale: absolute internal-energy change
+        // plus pressure work, without cancellation. It is an approximation
+        // check, separate from the full-star conservation audit.
+        const double power=selected_envelope_mass*(std::abs(b.E-a.E)
+          +std::max(a.P,b.P)*std::abs(1/m.rho(i)-1/old.rho(i)))/duration;
+        const double fraction=power/light;
+        if(!std::isfinite(fraction) || light<=0 || fraction>.001)
+          throw std::domain_error("native envelope thermal reservoir exceeds assessed heating fraction");
+        envelope_maximum_thermal_fraction=std::max(envelope_maximum_thermal_fraction,fraction);
+      }
+      return audit;
     };
     hooks.assess=[&](const Model& m,std::span<const std::array<double,3>> rates) {
+      if(selected_envelope_mass>0) {
+        const double minimum_envelope_T=native_envelope?1e4:(cold_eos_path.empty()?2e5:3e5);
+        const double maximum_envelope_T=envelope_eos=="interior"?2e6:1e6;
+        if(m.T(m.size()-1)<minimum_envelope_T || m.T(m.size()-1)>maximum_envelope_T)
+          throw std::domain_error("envelope base outside assessed thermal regime");
+        envelope_maximum_base_T=std::max(envelope_maximum_base_T,m.T(m.size()-1));
+        if(envelope_eos=="interior" && m.T(m.size()-1)>1e6) {
+          const double fraction=selected_envelope_mass*std::abs(nuclear.eval(m.T(m.size()-1),m.rho(m.size()-1),m.comp.back()).eps)/m.y.back().L;
+          if(!std::isfinite(fraction) || fraction>.0001)
+            throw std::domain_error("native envelope nuclear reservoir exceeds assessed heating fraction");
+          envelope_maximum_nuclear_fraction=std::max(envelope_maximum_nuclear_fraction,fraction);
+        }
+        const auto regions=convective_mixing_regions(m,has_D(m)?early:later,options.relaxation.zone_threads);
+        if(regions.back().second-regions.back().first<2)
+          throw std::domain_error("envelope reservoir requires a connected convective base");
+      }
       const bool initial_D=has_D(m);convective_heat.diagnostic_rates=rates;envelope_heat.diagnostic_rates=rates;
       try {
         auto selected=options;hooks.configure_step(m,selected);
@@ -524,6 +657,25 @@ int lifetime_main(int argc,char** argv) {
       }
     };
     const auto outcome=ember::evolve(state,atmosphere,control,hooks);
+    {
+      std::ofstream out(work/"envelope_approximation.json");
+      out<<std::setprecision(17)<<"{\"maximum_base_T_K\":"<<envelope_maximum_base_T
+        <<",\"maximum_thermal_fraction\":"<<envelope_maximum_thermal_fraction
+        <<",\"maximum_nuclear_fraction\":"<<envelope_maximum_nuclear_fraction<<"}\n";
+    }
+    if(native_envelope) {
+      std::ofstream diagnostic(work/"envelope_evaluations.json");diagnostic<<std::setprecision(17)
+        <<"{\"jacobian_radius\":"<<envelope_jacobian_radius
+        <<",\"integrations\":"<<native_envelope->integrations()
+        <<",\"jacobians_computed\":"<<native_envelope->jacobian_computed()
+        <<",\"jacobians_reused\":"<<native_envelope->jacobian_reused()<<"}\n";
+    }
+    if(envelope_radiation) {
+      std::ofstream diagnostic(work/"conductive_envelope_opacity.json");diagnostic<<std::setprecision(17)
+        <<"{\"evaluations\":"<<envelope_radiation->continued_evaluations()
+        <<",\"maximum_transport_uncertainty\":"<<envelope_radiation->maximum_transport_uncertainty()
+        <<",\"opacity_scale\":"<<envelope_opacity_scale<<"}\n";
+    }
     if(continued_radiation) {
       std::ofstream diagnostic(work/"conductive_opacity.json");diagnostic<<std::setprecision(17)
         <<"{\"evaluations\":"<<continued_radiation->continued_evaluations()

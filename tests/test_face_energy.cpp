@@ -141,6 +141,33 @@ int main() {
     const double identity_error=std::abs(static_cast<double>((residual-direct)/direct));
     require(identity_error<2e-12,"whole-star energy does not telescope on uneven mass mesh");
     const double jacobian_error=derivative_check(m,old,p,dt);
+    // A deep boundary keeps the omitted envelope as a base-state reservoir.
+    // Independently sum its mass and heat; losing it from either equation
+    // would break this test even if the surface boundary itself converged.
+    {
+      auto base=m,previous=old;
+      base.m.back()=previous.m.back()=.998*m.M;
+      base.envelope_mass=previous.envelope_mass=m.M-base.m.back();
+      const auto bw=nodal_mass_weights(base);
+      long double mass_sum=0,direct_heat=base.y.back().L;
+      double rows=central_residual(base,p,dt,&previous).f[1];
+      for(std::size_t i=0;i<base.size();++i) {
+        mass_sum+=bw[i];
+        require(nodal_volume_mass(base,i)==bw[i],"envelope heat and species masses differ");
+        const auto e=eos.eval(base.T(i),base.rho(i),base.comp[i]);
+        const auto e0=eos.eval(previous.T(i),previous.rho(i),previous.comp[i]);
+        const long double heat=-((static_cast<long double>(e.E)-e0.E)+
+            static_cast<long double>(e.P)*(1.L/base.rho(i)-1.L/previous.rho(i)))/dt;
+        direct_heat-=bw[i]*(heat-losses.eval(base.T(i),base.rho(i),base.comp[i]).eps);
+        if(i)rows+=bw[i]*zone_equations(base,i-1,p,dt,&previous)[2];
+      }
+      require(std::abs(mass_sum/base.M-1)<1e-15,"envelope mass was lost from species reservoir");
+      require(std::abs((rows-direct_heat)/direct_heat)<2e-12,"envelope energy does not telescope");
+      (void)derivative_check(base,previous,p,dt);
+      auto damaged=base;damaged.envelope_mass*=2;
+      require(rejects([&]{nodal_mass_weights(damaged);}),"inconsistent envelope mass accepted");
+    }
+
     // A zero material-heat provider cannot change the temperature equation,
     // convection boundaries or mixing coefficients of a volume-face model.
     // A nonzero temperature contrast exposes the old arithmetic/log mean
@@ -179,6 +206,20 @@ int main() {
       require(saved.model.luminosity_grid==m.luminosity_grid && saved.model.comp==m.comp,"face checkpoint loses grid or D/CN inventory");
       for(std::size_t i=0;i<m.size();++i)require(saved.model.y[i].L==m.y[i].L,"checkpoint alters luminosity");
       require(rejects([&]{driver::read_checkpoint(path,m.size(),m.M,m.comp[0],selection,1e-12,identities);}),"nodal-only reader accepts face checkpoint");
+      std::filesystem::remove(path);
+    }
+    m.m.back()=.998*m.M;m.envelope_mass=m.M-m.m.back();
+    for(bool heat:{false,true}) {
+      driver::Checkpoint state{m,dt,7,2};
+      if(heat)state.metal_heat_rates.assign(m.size()-1,{1.,-2.,3.});
+      driver::write_checkpoint(path,state,selection,1e-12,identities);
+      const auto saved=driver::read_checkpoint(path,m.size(),m.M,m.comp[0],selection,1e-12,identities,
+          LuminosityGrid::volume_faces,heat,m.envelope_mass);
+      require(saved.model.envelope_mass==m.envelope_mass && saved.model.m==m.m,
+          "checkpoint lost envelope mass or mesh");
+      require(saved.metal_heat_rates==state.metal_heat_rates,"envelope checkpoint changed heat rates");
+      require(rejects([&]{driver::read_checkpoint(path,m.size(),m.M,m.comp[0],selection,1e-12,identities,
+          LuminosityGrid::volume_faces,heat);}),"checkpoint silently removed the envelope");
       std::filesystem::remove(path);
     }
     std::cout<<std::setprecision(17)<<"{\"outcome\":\"passed\",\"checks\":"<<checks

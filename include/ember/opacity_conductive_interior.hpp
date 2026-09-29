@@ -22,22 +22,37 @@ public:
   // conductivity in this admission bound and review it as the star cools.
   static constexpr double conductivity_margin=2.;
 
+  struct Domain {
+    double anchor{anchor_density},full{full_density},minimum_T{minimum_temperature},
+        full_T{full_temperature},source_T{source_temperature},maximum_rho{maximum_density};
+    double minimum_X{},maximum_Z{1.},uncertainty{uncertainty_factor};
+  };
+
   ConductiveInteriorOpacity(const Opacity& source,const Conduction& conduction,
       double maximum_transport_uncertainty=.001,double opacity_scale=1.)
-      : source_(source),conduction_(conduction),limit_(maximum_transport_uncertainty),scale_(opacity_scale) {
+      : ConductiveInteriorOpacity(source,conduction,maximum_transport_uncertainty,opacity_scale,Domain{}) {}
+
+  ConductiveInteriorOpacity(const Opacity& source,const Conduction& conduction,
+      double maximum_transport_uncertainty,double opacity_scale,Domain domain)
+      : source_(source),conduction_(conduction),limit_(maximum_transport_uncertainty),scale_(opacity_scale),domain_(domain) {
     if(source.includes_conduction() || !std::isfinite(limit_+scale_) || limit_<=0 || limit_>.001
-        || scale_<.1 || scale_>10.)
+        || !(domain_.anchor>0 && domain_.full>domain_.anchor && domain_.maximum_rho>=domain_.full
+             && domain_.minimum_T>0 && domain_.full_T>domain_.minimum_T && domain_.source_T>domain_.full_T
+             && domain_.minimum_X>=0 && domain_.minimum_X<=1 && domain_.maximum_Z>=0 && domain_.maximum_Z<=1
+             && domain_.uncertainty>=1 && domain_.uncertainty<=100)
+        || scale_<1/domain_.uncertainty || scale_>domain_.uncertainty)
       throw std::invalid_argument("ConductiveInteriorOpacity: invalid radiative continuation");
   }
 
   OpacityState eval(double T,double rho,const Composition& c) const override {
-    if(rho<=anchor_density || T>=source_temperature)return source_.eval(T,rho,c);
-    if(!(T>=minimum_temperature && rho<=maximum_density))
+    if(rho<=domain_.anchor || T>=domain_.source_T || c.h1()<domain_.minimum_X || c.Z()>domain_.maximum_Z)
+      return source_.eval(T,rho,c);
+    if(!(T>=domain_.minimum_T && rho<=domain_.maximum_rho))
       throw std::domain_error("ConductiveInteriorOpacity: outside selected temperature/density bounds");
     constexpr double h=.05;
-    const auto a=source_.eval(T,anchor_density,c);
-    const auto b=source_.eval(T,anchor_density*std::exp(-h),c);
-    const double x=std::log(rho/anchor_density),slope=std::log(a.kappa/b.kappa)/h;
+    const auto a=source_.eval(T,domain_.anchor,c);
+    const auto b=source_.eval(T,domain_.anchor*std::exp(-h),c);
+    const double x=std::log(rho/domain_.anchor),slope=std::log(a.kappa/b.kappa)/h;
     const double nominal=a.kappa*std::exp(slope*x);
     const double kc=conductivity_margin*conduction_.eval(T,rho,c).kappa;
     if(!(nominal>0 && std::isfinite(nominal) && kc>0 && std::isfinite(kc)))
@@ -48,10 +63,10 @@ public:
       a.dlnk_dX+x*(a.dlnk_dX-b.dlnk_dX)/h,
       a.dlnk_dZ+x*(a.dlnk_dZ-b.dlnk_dZ)/h,
       a.dlnk_dY3+x*(a.dlnk_dY3-b.dlnk_dY3)/h};
-    const double width=std::log(full_density/anchor_density);
+    const double width=std::log(domain_.full/domain_.anchor);
     const auto [wr,dwr]=ramp(x/width);
-    const double twidth=std::log(source_temperature/full_temperature);
-    const auto [wt,dwt]=ramp(std::log(source_temperature/T)/twidth);
+    const double twidth=std::log(domain_.source_T/domain_.full_T);
+    const auto [wt,dwt]=ramp(std::log(domain_.source_T/T)/twidth);
     const double w=wr*wt;
     if(w<1.) {
       const auto old=source_.eval(T,rho,c);
@@ -69,7 +84,7 @@ public:
     // The unknown continued opacity enters log(kappa) with weight w. Lowering
     // it tenfold changes total conductivity by this fraction, exactly. The
     // supported part of the overlap carries no extrapolation uncertainty.
-    const double bound=std::expm1(w*std::log(uncertainty_factor))*kc/(kc+nominal_blend);
+    const double bound=std::expm1(w*std::log(domain_.uncertainty))*kc/(kc+nominal_blend);
     if(!(bound<=limit_))
       throw std::domain_error("ConductiveInteriorOpacity: radiation uncertainty="+std::to_string(bound)
           +" exceeds selected heat fraction at T="+std::to_string(T)+", rho="+std::to_string(rho));
@@ -89,7 +104,7 @@ public:
   double maximum_transport_uncertainty() const {return maximum_.load(std::memory_order_relaxed);}
 
 private:
-  const Opacity& source_;const Conduction& conduction_;double limit_,scale_;
+  const Opacity& source_;const Conduction& conduction_;double limit_,scale_;Domain domain_;
   mutable std::atomic<std::size_t> calls_{};
   mutable std::atomic<double> maximum_{};
   static std::pair<double,double> ramp(double u) {

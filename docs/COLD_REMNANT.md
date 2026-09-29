@@ -23,7 +23,8 @@ independent element velocities. The nuclear network is not full CNO.
 1. Apply the integrated envelope and physically supported EOS joins throughout
    a fresh Hayashi-to-cooling calculation. Validate surface composition, residual
    burning and the helium-3 shell against resolution and physical alternatives.
-2. Extend molecular and grain physics, cool diffusion, dense-matter thermodynamics
+2. Validate molecular charge balance and nonideal atmosphere chemistry; extend
+   grain physics, cool diffusion, dense-matter thermodynamics
    and conductive transport as the star enters their relevant regimes.
 3. Add helium crystallization, latent heat and strongly quantum mixtures.
 4. At sufficiently low luminosity, compare isolation with accretion, tidal encounters

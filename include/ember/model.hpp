@@ -5,14 +5,9 @@
 
 namespace ember {
 
-// The four variables carried at each mesh point.
-//
-// Logarithms of r, rho and T; luminosity linear, because it passes through
-// zero at the centre and changes sign wherever the star is contracting.
-// Density spans eighteen decades between a giant's photosphere and a white
-// dwarf's core, and no linear variable can be conditioned across that; the
-// Fortran ancestor used rho^(1/3) as a compromise and paid for it at both
-// ends.
+// Logarithmic radius, density and temperature, plus signed luminosity.
+// Luminosity remains linear because contraction and expansion can reverse
+// its sign within the star.
 enum class Var : std::size_t { lnr = 0, lnrho, lnT, L, COUNT };
 inline constexpr std::size_t NVAR = static_cast<std::size_t>(Var::COUNT);
 
@@ -33,21 +28,27 @@ struct Point {
   }
 };
 
-// A stellar model on a Lagrangian mass mesh.
-//
-// The mesh is stored as the mass interior to each point, and is allowed to
-// change between steps: refining where a burning shell steepens and coarsening
-// where an isothermal core does not need the points is not an optimisation but
-// a requirement, and doing it badly ate the core resolution of every giant in
-// the Fortran line.
+// A stellar model on a Lagrangian mass mesh. Each accepted step retains
+// the same mesh; explicit remapping must conserve its material inventories.
 struct Model {
   double M{};                       // total mass, g
   double age{};                     // s
-  std::vector<double> m;            // enclosed mass, g; solver uses 0 < m[0] < ... < m.back() = M
+  std::vector<double> m;            // enclosed mass, g; ends at M - envelope_mass
   std::vector<Point>  y;            // state at point i
   std::vector<Composition> comp;    // composition at point i
   std::vector<double> Lsurf_hist;   // diagnostics
   LuminosityGrid luminosity_grid{LuminosityGrid::mass_nodes};
+
+  // A homogeneous outer reservoir, represented thermally at the last node.
+  // Its mass participates in composition, mixing and energy conservation.
+  // A deep atmosphere supplies its pressure/temperature profile and true radius.
+  // The base-state thermal approximation must be bounded for each application.
+  double envelope_mass{};
+  bool valid_outer_mass() const {
+    return !m.empty() && std::isfinite(M) && M>0 && std::isfinite(envelope_mass)
+        && envelope_mass>=0 && envelope_mass<M && m.back()==M-envelope_mass
+        && (envelope_mass==0 || luminosity_grid==LuminosityGrid::volume_faces);
+  }
 
   std::size_t size() const { return y.size(); }
   double r(std::size_t i)   const { return std::exp(y[i].lnr); }

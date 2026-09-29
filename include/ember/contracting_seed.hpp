@@ -18,10 +18,11 @@ struct ContractingSource final:Nuclear {
  const char* name()const override{return "initial contracting model only";}
 };
 inline Model contracting_guess(std::size_t points,double mass,double radius,double teff,
-    const Composition& c,const Physics& physics,const Atmosphere& atmosphere) {
+    const Composition& c,const Physics& physics,const Atmosphere& atmosphere,
+    double envelope_mass=0) {
  const auto& eos=*physics.eos;const auto& seed_source=*physics.nuclear;
  auto guess=example::stellar_seed(points,mass,radius,c,seed_source,atmosphere,1.5,teff,
-                                  LuminosityGrid::volume_faces);
+                                  LuminosityGrid::volume_faces,envelope_mass);
     // Initial guess only: integrate the selected discrete stellar equations
     // inward through the envelope, then blend into the polytropic interior.
     // Global relaxation and the physical acceptance criteria remain unchanged.
@@ -42,7 +43,7 @@ inline Model contracting_guess(std::size_t points,double mass,double radius,doub
       const double Tlo=guess.T(hi)*std::pow(Plo/e.P,e.grad_ad);
       guess.y[lo]={guess.y[hi].lnr-dm/(4*M_PI*std::pow(guess.r(hi),3)*guess.rho(hi)),
         std::log(eos.rho_from_PT(Tlo,Plo,c,guess.rho(hi))),std::log(Tlo),
-        guess.y[hi].L-dm*seed_source.eval(guess.T(hi),guess.rho(hi),c).eps};
+        guess.y[hi].L-energy_interval_mass(guess,lo)*seed_source.eval(guess.T(hi),guess.rho(hi),c).eps};
       bool converged=false;
       for(std::size_t it=0;it<40;++it) {
         const auto z=zone_residual(guess,lo,physics,0.);

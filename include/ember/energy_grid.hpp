@@ -12,18 +12,19 @@ inline bool face_luminosities(const Model& m) {
   throw std::invalid_argument("unknown luminosity grid");
 }
 
-// The same nodal control volumes used for conservative abundance changes.
+// The same control volumes used for conservative abundance changes. An
+// optional homogeneous envelope is thermally represented at its base node.
 inline double nodal_volume_mass(const Model& m,std::size_t i) {
   if(m.size()<2 || m.m.size()!=m.size() || i>=m.size())
     throw std::invalid_argument("nodal volume: invalid mesh or index");
   const double inner=i ? .5*(m.m[i]-m.m[i-1]) : m.m[0];
-  return inner+(i+1<m.size() ? .5*(m.m[i+1]-m.m[i]) : 0.);
+  return inner+(i+1<m.size() ? .5*(m.m[i+1]-m.m[i]) : m.envelope_mass);
 }
 
 inline double luminosity_mass(const Model& m,std::size_t i) {
   if(i>=m.size() || m.m.size()!=m.size())
     throw std::invalid_argument("luminosity position: invalid mesh or index");
-  return face_luminosities(m) && i+1<m.size() ? .5*(m.m[i]+m.m[i+1]) : m.m[i];
+  return face_luminosities(m) ? (i+1<m.size() ? .5*(m.m[i]+m.m[i+1]) : m.M) : m.m[i];
 }
 
 // Energy row i relates luminosities i and i+1. Its mass differs from the

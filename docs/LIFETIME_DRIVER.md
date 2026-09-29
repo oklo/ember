@@ -21,6 +21,9 @@ small for a well-conditioned thermal solve. Every trial still passes the normal
 time-error and conservation checks. The requested and effective intervals are
 recorded in `execution.json`.
 
+The optional [integrated outer envelope](ENVELOPE.md) uses the same boundary
+solver from Hayashi contraction onward and includes its mass in conservation.
+
 The configuration is a text file containing one `key "value"` per line.
 Version 1 requires the following keys; paths are relative to the configuration:
 

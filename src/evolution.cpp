@@ -104,7 +104,7 @@ std::vector<BurningResponse> local_burning_response(const Model& thermal,
 }
 }
 std::vector<double> nodal_mass_weights(const Model& m) {
-  if(m.size()<2 || m.m.size()!=m.size() || !(m.m[0]>0) || m.m.back()!=m.M)
+  if(m.size()<2 || m.m.size()!=m.size() || !(m.m[0]>0) || !m.valid_outer_mass())
     throw std::invalid_argument("nodal_mass_weights: invalid mass mesh");
   std::vector<double> w(m.size());w[0]=m.m[0];
   for(std::size_t i=1;i<m.size();++i) {
@@ -112,6 +112,7 @@ std::vector<double> nodal_mass_weights(const Model& m) {
     if(!(dm>0) || !std::isfinite(dm)) throw std::invalid_argument("nodal_mass_weights: unordered mesh");
     w[i-1]+=.5*dm;w[i]+=.5*dm;
   }
+  w.back()+=m.envelope_mass;
   return w;
 }
 

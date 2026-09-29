@@ -55,5 +55,27 @@ int main(){try{
   require(rejected,"radiatively important extension was accepted");
   rejected=false;try{continued.eval(8e5,3e4,c);}catch(const std::domain_error&){rejected=true;}
   require(rejected,"missing temperature support was extrapolated");
+  // The independent envelope domain uses the same derivative and heat bound.
+  struct EnvelopeSource final : Opacity {
+    Source source;
+    OpacityState eval(double T,double rho,const Composition& c) const override { return source.eval(T*6,rho*20,c); }
+    const char* name() const override {return "scaled analytic envelope source";}
+  } envelope_source;
+  Composition hc;hc.X[0]=.99;hc.X[1]=.003;hc.X[2]=.007;
+  const ConductiveInteriorOpacity::Domain domain{180.,220.,3.1e5,5.5e5,6e5,1000.,.97,1e-8,100.};
+  ConductiveInteriorOpacity ec(envelope_source,heat,.001,1.,domain);
+  for(double T:{4e5,5.5e5,5.7e5,6e5})for(double rho:{179.,180.,200.,220.,300.}) {
+    auto v=ec.eval(T,rho,hc);constexpr double h=1e-6;
+    auto f=[&](double t,double r){return std::log(ec.eval(t,r,hc).kappa);};
+    require(std::abs((f(T*std::exp(h),rho)-f(T*std::exp(-h),rho))/(2*h)-v.dlnk_dlnT)<2e-6,"envelope T derivative");
+    require(std::abs((f(T,rho*std::exp(h))-f(T,rho*std::exp(-h)))/(2*h)-v.dlnk_dlnRho)<2e-6,"envelope density derivative");
+  }
+  require(ec.eval(5e5,160.,hc).kappa==envelope_source.eval(5e5,160.,hc).kappa,"envelope source range changed");
+  require(ec.eval(5e5,300.,c).kappa==envelope_source.eval(5e5,300.,c).kappa,"H-poor state continued");
+  rejected=false;try{ec.eval(3e5,300.,hc);}catch(const std::domain_error&){rejected=true;}
+  require(rejected,"envelope temperature bound ignored");
+  ConductiveInteriorOpacity ew(envelope_source,weak,.001,1.,domain);
+  rejected=false;try{ew.eval(5e5,300.,hc);}catch(const std::domain_error&){rejected=true;}
+  require(rejected,"radiatively important envelope accepted");
   std::cout<<"radiative continuation, derivatives, support and contribution checks passed\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

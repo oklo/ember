@@ -1,7 +1,9 @@
 #include "ember/eos_variable_metal.hpp"
 #include "ember/constants.hpp"
+#include "ember/ion_quantum.hpp"
 #include "ember/interp.hpp"
 #include "composition_spline.hpp"
+#include "ember/detail/taylor3.hpp"
 #include <algorithm>
 #include <bit>
 #include <cstdint>
@@ -10,6 +12,7 @@
 #include <iomanip>
 #include <limits>
 #include <map>
+#include <sstream>
 #include <stdexcept>
 
 namespace ember {
@@ -74,11 +77,46 @@ void check_active(const Composition& c,std::array<bool,3> active) {
       || (active_any(active) && c.X[2]<=0))
     throw std::domain_error("variable EOS: positive active species and reference He4 required");
 }
+// All join derivatives are retained in the potential. There is no gate in
+// abundance: a narrow composition gate would itself create chemical forces.
+constexpr double cold_density_start=.08, cold_density_complete=.45;
+constexpr double cold_full_temperature=1e5, cold_zero_temperature=3e5;
+double cold_weight(double T,double rho){
+  auto smooth=[](double x,double lo,double hi){if(x<=lo)return 0.;if(x>=hi)return 1.;double u=(x-lo)/(hi-lo);return u*u*u*(10+u*(-15+6*u));};
+  return (1-smooth(std::log(T),std::log(cold_full_temperature),std::log(cold_zero_temperature)))*smooth(std::log(rho),std::log(cold_density_start),std::log(cold_density_complete));
+}
+std::array<HelmholtzJet,10> cold_join(double T,double rho,const Composition& c,std::size_t channels,
+    const AdditiveVolumePotential& cold,const std::array<HelmholtzJet,10>& old){
+  if(c.Z()>.04)throw std::domain_error("cold potential metal proxy limited to Z<=0.04");
+  using J=detail::Taylor3<2>;
+  const auto values=cold.residual_jets(T,rho,c.X[0],c.X[1],channels>1);
+  std::array<HelmholtzJet,10> newer{};constexpr std::array<std::size_t,6> map{0,1,2,4,5,7};
+  for(std::size_t i=0;i<6;++i)newer[map[i]]=values[i];
+  if(T<=cold_full_temperature && rho>=cold_density_complete)return newer;
+  auto smooth=[](const J& x,double lo,double hi){if(x.value()<=lo)return J(0);if(x.value()>=hi)return J(1);auto u=(x-lo)/(hi-lo);return u*u*u*(10+u*(-15+6*u));};
+  const auto wt=1-smooth(J::variable(std::log(T),0),std::log(cold_full_temperature),std::log(cold_zero_temperature));
+  const auto wr=smooth(J::variable(std::log(rho),1),std::log(cold_density_start),std::log(cold_density_complete));
+  const auto weight=wt*wr;
+  HelmholtzJet w{};
+  for(unsigned i=0;i<4;++i)for(unsigned j=0;i+j<=3;++j)w[i][j]=weight.derivative({i,j});
+  constexpr unsigned binomial[4][4]={{1,0,0,0},{1,1,0,0},{1,2,1,0},{1,3,3,1}};
+  std::array<HelmholtzJet,10> out{};
+  for(std::size_t k=0;k<channels;++k){
+    const unsigned composition_order=k==0?0:(k<4?1:2);
+    for(unsigned i=0;i<4;++i)for(unsigned j=0;i+j+composition_order<=3;++j){
+      out[k][i][j]=old[k][i][j];
+      for(unsigned a=0;a<=i;++a)for(unsigned b=0;b<=j;++b)
+        out[k][i][j]+=binomial[i][a]*binomial[j][b]*w[a][b]*(newer[k][i-a][j-b]-old[k][i-a][j-b]);
+    }
+  }
+  return out;
+}
 }
 
 VariableMetalHelmholtzEos::VariableMetalHelmholtzEos(const std::filesystem::path& path,
-    HelmholtzTableEos::Mixture mixture,LowMetalInterpolation low_metals)
-    :low_metal_interpolation_(low_metals) {
+    HelmholtzTableEos::Mixture mixture,LowMetalInterpolation low_metals,const std::filesystem::path& cold_potential,bool quantum_ions)
+    :low_metal_interpolation_(low_metals),quantum_ions_(quantum_ions) {
+  if(!cold_potential.empty())cold_=std::make_unique<AdditiveVolumePotential>(cold_potential);
   if(low_metals!=LowMetalInterpolation::cubic && low_metals!=LowMetalInterpolation::quadratic)
     throw std::invalid_argument("variable EOS: unknown low-metal interpolation");
   if(mixture!=HelmholtzTableEos::Mixture::allow_documented_proxy)
@@ -254,6 +292,7 @@ VariableMetalHelmholtzEos::Weights VariableMetalHelmholtzEos::weights(const Comp
   return out;
 }
 std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::jets(double T,double rho,const Composition& c,std::size_t channels) const {
+  if(!(std::isfinite(T)&&T>0&&std::isfinite(rho)&&rho>0))throw std::domain_error("variable EOS: invalid thermal state");
   // Neighboring faces and heat/force queries often revisit the same material
   // state. Reuse only exact inputs, with separate derivative requests. The
   // thread-local storage is bounded and never retains the source tables.
@@ -279,9 +318,21 @@ std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::jets(double T,double rho,
         && std::bit_cast<FractionBits>(entry.composition.X)==bits
         && std::bit_cast<std::uint64_t>(entry.T)==std::bit_cast<std::uint64_t>(T)
         && std::bit_cast<std::uint64_t>(entry.rho)==std::bit_cast<std::uint64_t>(rho))return entry.value;
-  const auto w=weights(c,channels);
-  const auto result=HelmholtzTableEos::mixed_composition_jets(
+  const double cold_fraction=cold_?cold_weight(T,rho):0;
+  // Validate the original composition contract even where the original
+  // thermal source is not evaluated.
+  const auto w=weights(c,channels);std::array<HelmholtzJet,10> result{};
+  if(cold_fraction<1)result=HelmholtzTableEos::mixed_composition_jets(
       T,rho,std::span<const WeightedTable>(w.tables).first(w.count),channels);
+  if(cold_fraction>0)result=cold_join(T,rho,c,channels,*cold_,result);
+  if(quantum_ions_) {
+    const auto correction=ion_quantum_liquid_jets(T,rho,c,channels);
+    for(std::size_t k=0;k<channels;++k) {
+      const unsigned order=k==0?0:(k<4?1:2);
+      for(unsigned i=0;i<4;++i)for(unsigned j=0;i+j+order<=3;++j)
+        result[k][i][j]+=correction[k][i][j];
+    }
+  }
   auto& entry=cache.entries[bank][cache.next[bank]];
   cache.next[bank]=(cache.next[bank]+1)%cache.entries[bank].size();
   entry={true,channels,T,rho,c,result};
@@ -290,6 +341,8 @@ std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::jets(double T,double rho,
 void VariableMetalHelmholtzEos::validate_composition_domain(double T,double rho,const Composition& c) const {
   if(!(std::isfinite(T) && T>0 && std::isfinite(rho) && rho>0))
     throw std::domain_error("variable EOS: invalid reuse state");
+  if(cold_ && cold_weight(T,rho)>0){(void)helmholtz_response(T,rho,jets(T,rho,c,10)[0]);return;}
+  if(quantum_ions_)(void)ion_quantum_liquid_jets(T,rho,c,1);
   const auto w=weights(c,10);
   const double t=std::log(T),q=std::log(rho)-1.5*(t-6*std::log(10.));
   for(std::size_t i=0;i<w.count;++i) {
@@ -297,19 +350,32 @@ void VariableMetalHelmholtzEos::validate_composition_domain(double T,double rho,
     if(t<p.t_.front() || t>p.t_.back() || q<p.q_.front() || q>p.q_.back())
       throw std::domain_error("variable EOS: reuse state outside table");
     const auto iq=interp::locate(p.q_,q);
-    if(!p.supported_cell(interp::locate(p.t_,t),iq))throw std::domain_error("variable EOS: masked composition support");
+    if(!p.supported_cell(interp::locate(p.t_,t),iq)) {
+      std::ostringstream message;
+      message<<std::setprecision(4)<<"variable EOS: masked composition support at T="
+        <<T<<", rho="<<rho<<", X="<<c.X[0]<<", Y3="<<c.X[1]<<", Z="<<c.Z();
+      throw std::domain_error(message.str());
+    }
   }
 }
 std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range(double T,const Composition& c) const {
-  const auto w=weights(c,1);DensityRange result{0,std::numeric_limits<double>::infinity()};
-  for(std::size_t i=0;i<w.count;++i){const auto r=w.tables[i].table->material_density_range(T);result.min=std::max(result.min,r.min);result.max=std::min(result.max,r.max);}
-  if(result.min>=result.max)throw std::domain_error("variable EOS: empty source density overlap");
-  return result;
+  return density_range_impl(T,c,{});
 }
-
 std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_near(double T,const Composition& c,double rho) const {
+  return density_range_impl(T,c,rho);
+}
+std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_impl(double T,const Composition& c,std::optional<double> rho) const {
   const auto w=weights(c,1);DensityRange result{0,std::numeric_limits<double>::infinity()};
-  for(std::size_t i=0;i<w.count;++i){const auto r=w.tables[i].table->material_density_range_near(T,rho);result.min=std::max(result.min,r.min);result.max=std::min(result.max,r.max);}
+  for(std::size_t i=0;i<w.count;++i){const auto r=rho?w.tables[i].table->material_density_range_near(T,*rho):w.tables[i].table->material_density_range(T);result.min=std::max(result.min,r.min);result.max=std::min(result.max,r.max);}
+  if(cold_ && T<cold_zero_temperature && result.max>cold_density_start){
+    if(T<cold_->minimum_temperature()||c.Z()>.04)result.max=cold_density_start;
+    else {
+      const auto domain=cold_->density_range(T,c.X[0],c.X[1]);
+      if(domain.min>cold_density_start)result.max=std::min(result.max,cold_density_start);
+      else if(T<=cold_full_temperature && result.max>=cold_density_complete)result.max=domain.max;
+      else result.max=std::min(result.max,domain.max);
+    }
+  }
   if(result.min>=result.max)throw std::domain_error("variable EOS: empty source density overlap");
   return result;
 }

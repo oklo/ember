@@ -1,5 +1,6 @@
 #pragma once
 #include "ember/eos_helmholtz.hpp"
+#include "ember/eos_additive_volume.hpp"
 #include <memory>
 
 namespace ember {
@@ -30,11 +31,14 @@ struct MetalCompositionHeatResponse {
 // a higher-Z plane never changes the already covered composition interval.
 class VariableMetalHelmholtzEos final : public Eos {
  public:
+  static constexpr const char* cold_model_identifier=
+      "additive_volume.thermal_potential_join.He_proxy_metals.v2";
   // Optional local low-Z potential; C2 blend back to cubic by z_[2].
   enum class LowMetalInterpolation { cubic, quadratic };
   explicit VariableMetalHelmholtzEos(const std::filesystem::path&,
       HelmholtzTableEos::Mixture=HelmholtzTableEos::Mixture::exact,
-      LowMetalInterpolation=LowMetalInterpolation::cubic);
+      LowMetalInterpolation=LowMetalInterpolation::cubic,
+      const std::filesystem::path& cold_potential={},bool quantum_ions=false);
   // Convert a text family and its planes to one relocatable binary input.
   // Stored doubles, masks and logarithmic coordinates remain bit-identical.
   static void pack_binary(const std::filesystem::path& source,const std::filesystem::path& destination);
@@ -55,11 +59,14 @@ class VariableMetalHelmholtzEos final : public Eos {
   void validate_composition_domain(double T,double rho,const Composition&) const;
   std::optional<DensityRange> density_range(double,const Composition&) const override;
   std::optional<DensityRange> density_range_near(double,const Composition&,double) const override;
-  const char* name() const override {return "FreeEOS variable GS98 metals, H and helium-isotope potential";}
+  const char* name() const override {return cold_?
+      "FreeEOS with cold additive-volume H/He potential; cold metal helium proxy":
+      "FreeEOS variable GS98 metals, H and helium-isotope potential";}
  private:
   using WeightedTable=HelmholtzTableEos::WeightedCompositionTable;
   struct Weights {std::array<WeightedTable,80> tables{};std::size_t count{};};
   Weights weights(const Composition&,std::size_t channels) const;
+  std::optional<DensityRange> density_range_impl(double,const Composition&,std::optional<double>) const;
   std::array<HelmholtzJet,10> jets(double,double,const Composition&,std::size_t) const;
   std::size_t index(std::size_t z,std::size_t u,std::size_t v) const {
     return (z*u_.size()+u)*v_.size()+v;
@@ -67,6 +74,11 @@ class VariableMetalHelmholtzEos final : public Eos {
   std::vector<double> z_,u_,v_;
   bool extend_metals_{};
   LowMetalInterpolation low_metal_interpolation_{};
+  // Optional physical model, never a fallback on a failed source query.
+  // In the cold component only, metals use a helium electronic/caloric proxy;
+  // actual species inventories and analytic metal mixing entropy are retained.
+  std::unique_ptr<AdditiveVolumePotential> cold_;
+  bool quantum_ions_{};
   // Five source weights, each polynomial in the interval coordinate.
   using MetalExtension=std::array<std::array<double,6>,5>;
   std::vector<MetalExtension> metal_extensions_;

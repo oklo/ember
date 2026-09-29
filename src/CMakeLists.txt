@@ -15,6 +15,7 @@ add_library(ember
   eos_variable_metal.cpp
   ion_quantum.cpp
   ion_classical.cpp
+  eos_additive_volume.cpp
   eos_binary.cpp
   nuclear_pp.cpp
   deuterium.cpp
@@ -28,6 +29,7 @@ add_library(ember
   convection.cpp
   fingering.cpp
   conduction_table.cpp
+  envelope_atmosphere.cpp
   atmosphere_grey.cpp
   atmosphere_composition.cpp
   atmosphere_table.cpp

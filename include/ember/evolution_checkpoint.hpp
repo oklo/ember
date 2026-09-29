@@ -112,7 +112,7 @@ inline void check_state(const Checkpoint& state,std::size_t points,const Composi
     if(c.cn_molality)(void)cn_physical_ledger(c,*c.cn_molality);
     previous_mass=model.m[i];previous_radius=model.r(i);
   }
-  if(model.m.back()!=model.M)throw std::runtime_error("checkpoint surface mass differs");
+  if(!model.valid_outer_mass())throw std::runtime_error("checkpoint mesh/envelope mass differs");
   for(double value:model.Lsurf_hist)if(!std::isfinite(value))throw std::runtime_error("invalid checkpoint diagnostic");
   if(!state.metal_heat_rates.empty()) {
     if(!face_luminosities(model) || state.metal_heat_rates.size()+1!=points
@@ -141,14 +141,20 @@ inline void write_checkpoint(const fs::path& path,const Checkpoint& state,
   std::ofstream out(temporary);out.imbue(std::locale::classic());
   out.exceptions(std::ios::badbit|std::ios::failbit);
   out<<std::setprecision(std::numeric_limits<double>::max_digits10)<<"EMBER_EVOLUTION_CHECKPOINT "
-     <<(material_heat?6:(faces?5:(has_deuterium?4:(physical_metals?3:(has_cn?2:1)))))<<'\n';
-  if(faces)out<<has_cn<<' '<<physical_metals<<" volume_faces\n";
+     <<(state.model.envelope_mass>0?7:(material_heat?6:(faces?5:(has_deuterium?4:(physical_metals?3:(has_cn?2:1))))))<<'\n';
+  if(faces) {
+    out<<has_cn<<' '<<physical_metals<<" volume_faces";
+    if(state.model.envelope_mass>0)out<<' '<<material_heat;
+    out<<'\n';
+  }
   else if(has_deuterium)out<<has_cn<<' '<<physical_metals<<'\n';
   for(const auto& value:selections)out<<std::quoted(value)<<'\n';
   out<<tolerance<<'\n'<<identities.size()<<'\n';
   for(const auto& [name,value]:identities)out<<std::quoted(name)<<' '<<std::quoted(value)<<'\n';
   const auto& model=state.model;
-  out<<model.size()<<' '<<model.M<<' '<<model.age<<' '<<state.next_dt<<' '<<state.accepted<<' '<<state.rejected<<'\n';
+  out<<model.size()<<' '<<model.M<<' '<<model.age<<' '<<state.next_dt<<' '<<state.accepted<<' '<<state.rejected;
+  if(model.envelope_mass>0)out<<' '<<model.envelope_mass;
+  out<<'\n';
   for(std::size_t i=0;i<model.size();++i) {
     const auto& y=model.y[i];const auto& c=model.comp[i];
     out<<model.m[i]<<' '<<y.lnr<<' '<<y.lnrho<<' '<<y.lnT<<' '<<y.L<<' '
@@ -171,13 +177,12 @@ inline Checkpoint read_checkpoint(const fs::path& path,std::size_t expected_poin
                                   const Composition& composition,const Selections& selections,
                                   double tolerance,const Identities& identities,
                                   LuminosityGrid expected_grid=LuminosityGrid::mass_nodes,
-                                  bool expected_metal_heat_rates=false) {
+                                  bool expected_metal_heat_rates=false,double expected_envelope_mass=0) {
   std::ifstream in(path);in.imbue(std::locale::classic());
   if(!in)throw std::runtime_error("cannot open checkpoint");
   std::string marker;int version{};in>>marker>>version;
-  if(marker!="EMBER_EVOLUTION_CHECKPOINT" || version<1 || version>6)throw std::runtime_error("unsupported checkpoint format");
-  if((version==6)!=expected_metal_heat_rates)
-    throw std::runtime_error("checkpoint material-heat inventory differs");
+  if(marker!="EMBER_EVOLUTION_CHECKPOINT" || version<1 || version>7)throw std::runtime_error("unsupported checkpoint format");
+  bool material_heat=version==6;
   bool has_cn=version==2 || version==3,physical_metals=version==3;
   LuminosityGrid grid=LuminosityGrid::mass_nodes;
   if(version>=4) {
@@ -191,6 +196,13 @@ inline Checkpoint read_checkpoint(const fs::path& path,std::size_t expected_poin
       else if(placement!="mass_nodes")throw std::runtime_error("unknown checkpoint luminosity grid");
     }
   }
+  if(version==7) {
+    int flag{};in>>flag;
+    if(!in || (flag!=0 && flag!=1))throw std::runtime_error("invalid checkpoint heat flag");
+    material_heat=flag!=0;
+  }
+  if(material_heat!=expected_metal_heat_rates)
+    throw std::runtime_error("checkpoint material-heat inventory differs");
   if(grid!=expected_grid)throw std::runtime_error("checkpoint luminosity grid differs");
   Selections saved;for(auto& value:saved)in>>std::quoted(value);
   double saved_tolerance{};in>>saved_tolerance;
@@ -217,6 +229,9 @@ inline Checkpoint read_checkpoint(const fs::path& path,std::size_t expected_poin
   // unsigned values strictly: formatted extraction would accept a minus sign.
   std::string accepted,rejected;
   in>>points>>model.M>>model.age>>state.next_dt>>accepted>>rejected;
+  if(version==7)model.envelope_mass=read_representable_double(in);
+  if(model.envelope_mass!=expected_envelope_mass)
+    throw std::runtime_error("checkpoint envelope mass differs");
   auto counter=[](const std::string& value) {
     if(value.empty() || value.find_first_not_of("0123456789")!=std::string::npos)
       throw std::runtime_error("invalid checkpoint counter");
@@ -246,7 +261,7 @@ inline Checkpoint read_checkpoint(const fs::path& path,std::size_t expected_poin
   }
   in>>count;if(!in || count>20000)throw std::runtime_error("invalid checkpoint diagnostics length");
   model.Lsurf_hist.resize(count);for(auto& value:model.Lsurf_hist)in>>value;
-  if(version==6) {
+  if(material_heat) {
     in>>marker>>count;
     if(!in || marker!="METAL_HEAT_RATES" || count+1!=points)
       throw std::runtime_error("invalid checkpoint material-heat inventory");

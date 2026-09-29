@@ -21,8 +21,8 @@ void validate(const Model& m, const Physics& p, const RelaxationOptions& o, doub
   if (m.size() < 2 || m.m.size() != m.size() || m.comp.size() != m.size()
       || !p.eos || !p.opacity || !p.nuclear)
     throw std::invalid_argument("relax: invalid model arrays or missing physics");
-  if (!std::isfinite(m.M) || !(m.M > 0.0) || m.m.back() != m.M || !(m.m.front() > 0.0))
-    throw std::invalid_argument("relax: mesh must start above zero and end at total mass");
+  if (!m.valid_outer_mass() || !(m.m.front() > 0.0))
+    throw std::invalid_argument("relax: mesh and envelope must account for the total mass");
   for (std::size_t i = 0; i < m.size(); ++i) {
     if (!std::isfinite(m.m[i]) || (i > 0 && !(m.m[i] > m.m[i - 1])))
       throw std::invalid_argument("relax: mass mesh must be finite and strictly increasing");
@@ -34,7 +34,7 @@ void validate(const Model& m, const Physics& p, const RelaxationOptions& o, doub
     throw std::invalid_argument("relax: positive surface luminosity and finite dt required");
   (void)face_luminosities(m);
   if (dt > 0.0 && (!prev || prev->m != m.m || prev->size() != m.size() || prev->comp.size() != m.size()
-      || prev->luminosity_grid != m.luminosity_grid))
+      || prev->luminosity_grid != m.luminosity_grid || prev->envelope_mass != m.envelope_mass))
     throw std::invalid_argument("relax: positive dt requires previous model on the same mesh");
   for (double v : {o.residual_tolerance, o.correction_tolerance, o.max_log_step, o.max_luminosity_step})
     if (!(v > 0.0) || !std::isfinite(v)) throw std::invalid_argument("relax: invalid tolerances or step limits");
