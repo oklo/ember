@@ -1,0 +1,288 @@
+{
+  "scope": "Matched fully ionized dense stellar material; diagnostic comparison, no EOS correction selected. Cv T dm is a thermal-content scale, not a cooling-age error.",
+  "surface_temperature_K": 2511.214,
+  "number_of_profile_nodes": 450,
+  "freeeos_version": "3.0.0",
+  "freeeos_options": [
+    3,
+    223,
+    -2
+  ],
+  "mesa_version": "26.04.1",
+  "reference": "https://arxiv.org/abs/2104.00691",
+  "composition": "H1, He3, He4 plus the 18 GS98 metal elements included by the FreeEOS source. Potassium omission retained. Baryon-density and mass normalization matched.",
+  "skye_mass_fraction_cutoff": 0,
+  "quantum_control": "Private copy with only the liquid quantum-ion free-energy term disabled; all queried states liquid.",
+  "summary": [
+    {
+      "mass_range": [
+        0,
+        0.9
+      ],
+      "mass_fraction": 0.899110314940751,
+      "heat_content_relative_difference": -0.05439535446021404,
+      "skye_quantum_cv_fraction": -0.004647688544941131,
+      "maximum_pressure_difference": 0.005411729049838554,
+      "maximum_phase": 0.0
+    },
+    {
+      "mass_range": [
+        0.9,
+        0.98
+      ],
+      "mass_fraction": 0.08048418733349766,
+      "heat_content_relative_difference": -0.06100154521278256,
+      "skye_quantum_cv_fraction": -0.0013182074713459224,
+      "maximum_pressure_difference": 0.003915466592917527,
+      "maximum_phase": 0.0
+    },
+    {
+      "mass_range": [
+        0.98,
+        1
+      ],
+      "mass_fraction": 0.020405497725751322,
+      "heat_content_relative_difference": -0.06621181253089992,
+      "skye_quantum_cv_fraction": -0.0018520539633641864,
+      "maximum_pressure_difference": 0.0022437366232596068,
+      "maximum_phase": 0.0
+    }
+  ],
+  "ionization_check": 1.3580513309463527e-06,
+  "derivative_check": {
+    "relative_Cv_errors": {
+      "skye": 3.352012567514606e-08,
+      "skye_classical": 3.404583814869966e-08
+    },
+    "step_lnT": 0.0001,
+    "passed": true
+  },
+  "component_controls": {
+    "freeeos_ionization_flag": 2,
+    "maximum_ideal_Cv_relative_difference": 2.332571365915026e-05,
+    "maximum_electron_quadrature_effect": 1.9340978135495845e-05,
+    "rows": [
+      {
+        "i": 0,
+        "q": 1.2283069185285862e-10,
+        "Z": 0.1302123578531998,
+        "freeeos": {
+          "223": {
+            "cv": 41326161.89207289,
+            "P": 1.881225233189682e+20
+          },
+          "201": {
+            "cv": 41325362.61913803,
+            "P": 1.8812495145827467e+20
+          },
+          "203": {
+            "cv": 41371011.703590214,
+            "P": 1.8983483033005857e+20
+          },
+          "204": {
+            "cv": 29480145.721436378,
+            "P": 1.9664384460527642e+20
+          },
+          "205": {
+            "cv": 29525794.80588857,
+            "P": 1.9835372347706032e+20
+          }
+        },
+        "skye_ideal_cv": 29526483.532188803,
+        "skye_classical_cv": 41761523.253152974,
+        "ideal_cv_relative_difference": -2.332571365915026e-05,
+        "freeeos_coulomb_cv_increment": 11845216.897701643,
+        "freeeos_exchange_cv_increment": -45649.08445219323,
+        "skye_nonideal_cv_increment": 12235039.720964171,
+        "freeeos_quadrature_cv_difference": 1.9340978135495845e-05,
+        "skye_exchange_cv_increment": -21732.140391808003,
+        "skye_ion_interaction_cv_increment": 12256771.861355979,
+        "interaction_difference_fraction_of_full_cv_difference": 0.9453180746984899,
+        "T_K": 1725612.3878929757,
+        "rho_g_cm3": 48359.708165204676,
+        "X": 3.122721463692073e-08,
+        "Y3": 1.1132669492575454e-14
+      },
+      {
+        "i": 100,
+        "q": 0.005880389500495429,
+        "Z": 0.12380299124948001,
+        "freeeos": {
+          "223": {
+            "cv": 41381946.59242931,
+            "P": 1.777414780090038e+20
+          },
+          "201": {
+            "cv": 41381150.38203416,
+            "P": 1.7774373948462128e+20
+          },
+          "203": {
+            "cv": 41428041.28972245,
+            "P": 1.7938279525341318e+20
+          },
+          "204": {
+            "cv": 29661887.233846404,
+            "P": 1.857451387067903e+20
+          },
+          "205": {
+            "cv": 29708778.14153466,
+            "P": 1.873841944755822e+20
+          }
+        },
+        "skye_ideal_cv": 29709465.966470916,
+        "skye_classical_cv": 41923303.29619662,
+        "ideal_cv_relative_difference": -2.3151709863555858e-05,
+        "freeeos_coulomb_cv_increment": 11719263.14818779,
+        "freeeos_exchange_cv_increment": -46890.90768825635,
+        "skye_nonideal_cv_increment": 12213837.329725701,
+        "freeeos_quadrature_cv_difference": 1.92408956203316e-05,
+        "skye_exchange_cv_increment": -22411.07179609686,
+        "skye_ion_interaction_cv_increment": 12236248.401521798,
+        "interaction_difference_fraction_of_full_cv_difference": 0.9549807912902939,
+        "T_K": 1721994.6492181625,
+        "rho_g_cm3": 46710.596883522274,
+        "X": 3.662292166772589e-08,
+        "Y3": 1.5421401346293e-14
+      },
+      {
+        "i": 200,
+        "q": 0.18663394426940022,
+        "Z": 0.04679773313460421,
+        "freeeos": {
+          "223": {
+            "cv": 41977059.89346127,
+            "P": 9.70065037041022e+19
+          },
+          "201": {
+            "cv": 41976301.011496104,
+            "P": 9.700754317628454e+19
+          },
+          "203": {
+            "cv": 42038690.0678076,
+            "P": 9.804482073747911e+19
+          },
+          "204": {
+            "cv": 31848051.697214402,
+            "P": 1.0089852229668155e+20
+          },
+          "205": {
+            "cv": 31910440.753525876,
+            "P": 1.0193579985787612e+20
+          }
+        },
+        "skye_ideal_cv": 31911118.006639425,
+        "skye_classical_cv": 43901971.72289828,
+        "ideal_cv_relative_difference": -2.12231083037695e-05,
+        "freeeos_coulomb_cv_increment": 10128249.314281724,
+        "freeeos_exchange_cv_increment": -62389.05631147325,
+        "skye_nonideal_cv_increment": 11990853.716258857,
+        "freeeos_quadrature_cv_difference": 1.807881940241174e-05,
+        "skye_exchange_cv_increment": -31110.234671588987,
+        "skye_ion_interaction_cv_increment": 12021963.950930446,
+        "interaction_difference_fraction_of_full_cv_difference": 0.9837929237530779,
+        "T_K": 1683640.0961828637,
+        "rho_g_cm3": 32228.151655430516,
+        "X": 3.655321994063146e-07,
+        "Y3": 1.992753786334463e-12
+      },
+      {
+        "i": 350,
+        "q": 0.8897460303057103,
+        "Z": 8.855501928657059e-09,
+        "freeeos": {
+          "223": {
+            "cv": 43937495.62292999,
+            "P": 3.8761241878153426e+18
+          },
+          "201": {
+            "cv": 43937074.29123187,
+            "P": 3.8761377944555873e+18
+          },
+          "203": {
+            "cv": 44189246.94247448,
+            "P": 3.9627424898057974e+18
+          },
+          "204": {
+            "cv": 37425926.86100423,
+            "P": 4.1106121193791836e+18
+          },
+          "205": {
+            "cv": 37678099.512246825,
+            "P": 4.1972168147293937e+18
+          }
+        },
+        "skye_ideal_cv": 37678673.33146993,
+        "skye_classical_cv": 46921329.95435256,
+        "ideal_cv_relative_difference": -1.5229284164530732e-05,
+        "freeeos_coulomb_cv_increment": 6511147.430227652,
+        "freeeos_exchange_cv_increment": -252172.65124259144,
+        "skye_nonideal_cv_increment": 9242656.622882627,
+        "freeeos_quadrature_cv_difference": 9.589434547319087e-06,
+        "skye_exchange_cv_increment": -157304.68135813624,
+        "skye_ion_interaction_cv_increment": 9399961.304240763,
+        "interaction_difference_fraction_of_full_cv_difference": 0.9681549151677752,
+        "T_K": 1415602.7793118863,
+        "rho_g_cm3": 4589.243265196013,
+        "X": 0.009736335825858602,
+        "Y3": 0.00014733048925405398
+      },
+      {
+        "i": 449,
+        "q": 0.9985,
+        "Z": 7.189285958450297e-31,
+        "freeeos": {
+          "223": {
+            "cv": 155518137.07692125,
+            "P": 1.742902532732345e+16
+          },
+          "201": {
+            "cv": 155518114.71862638,
+            "P": 1.7429032646775534e+16
+          },
+          "203": {
+            "cv": 157411713.46493188,
+            "P": 1.861417982268809e+16
+          },
+          "204": {
+            "cv": 141249554.4891456,
+            "P": 1.9213239015625336e+16
+          },
+          "205": {
+            "cv": 143143153.235451,
+            "P": 2.0398386191537892e+16
+          }
+        },
+        "skye_ideal_cv": 143143414.56191117,
+        "skye_classical_cv": 164914043.55163747,
+        "ideal_cv_relative_difference": -1.8256268439209578e-06,
+        "freeeos_coulomb_cv_increment": 14268560.229480863,
+        "freeeos_exchange_cv_increment": -1893598.746305406,
+        "skye_nonideal_cv_increment": 21770628.989726305,
+        "freeeos_quadrature_cv_difference": 1.4376649892788862e-07,
+        "skye_exchange_cv_increment": -1067598.9723730087,
+        "skye_ion_interaction_cv_increment": 22838227.962099314,
+        "interaction_difference_fraction_of_full_cv_difference": 0.9120639669710293,
+        "T_K": 286937.7180015365,
+        "rho_g_cm3": 90.26384766034515,
+        "X": 0.9908185775747522,
+        "Y3": 0.0032891370886825276
+      }
+    ]
+  },
+  "source_sha256": {
+    "probe.f90": "0e798228ac73c75a86670100bd1332fe5d0394da8afd63137a2efbae49f78c54",
+    "probe": "d62c02553ea73fe79366ff48ce86b6dd331a10132a359188b675f3a2061f7823",
+    "probe_classical": "026639e7077ec78c5f06a549e6ca650593c443d8864feb9537e46aa0c2d11928",
+    "classical/skye_coulomb_liquid.f90": "50f72a8d7ebf71c698e6a1eb5ca535869594c6da283bf3ff6f790d4e3b173a52",
+    "compare.py": "27c43c823d1709fa11e078d26c7c97dec4a5f24ed851b6983359adf12d9e46c0",
+    "ionization.py": "02306223e031791ebbfaa114a6816bcc39687ff7dc433618c4b506984591c39b",
+    "derivatives.py": "ea2ec71c3d903906626a284abfe0fb0d5ff48af461e743e521bbaf0ab9ebba4a",
+    "components.py": "e5d6e47912648bf92235e6c44101d74c5b7912773d91a5d866527057289100a0",
+    "components_fully_ionized.py": "2f3f97bd66192854a64aec1a699724dee81a993f847b3102d13e518dc33412e9",
+    "split_fully_ionized.py": "56c36a144f0e94d8c23dd94e96c1cb3f6f5d501f83bcaa891c643da2997721f8",
+    "probe_ideal": "9e4ccbe708a096c9d057c418b081602554d2013665e0e2b576f2ca4e5c95d7fb",
+    "probe_exchange_only": "05641da350bd3e2057af4841e7f5dc37c87a513282eb9de5fbf759b72f728376",
+    "ideal/skye_coulomb.f90": "58c6853ab39cb060a8ba742846085dd7bb15f544f73c9934a8082ec60f37f05b",
+    "exchange_only/skye_coulomb.f90": "843be97020122cc825f0e340d284018d1281506ef9aa1efb6f08f7040b8ba2ea"
+  }
+}

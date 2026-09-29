@@ -1,21 +1,19 @@
-# Dense-matter preparation for the helium remnant
+# Dense-matter thermodynamics
 
-The cooling calculation uses a composition-dependent material EOS. The
-components below extend its thermal response toward colder conditions.
-Quantum-ion freezing, phase separation and the final cold-envelope EOS remain
-incomplete; the current calculation is not an extreme-cold cooling-age prediction.
+The material EOS derives pressure, energy, entropy and composition responses
+from a free energy. Crystallization, phase separation and a common EOS for
+extreme-cold interiors and envelopes remain unfinished.
 
-EOS tables may contain separate valid density intervals. Pressure inversion
-uses the interval containing the supplied density guess and cannot cross a
-masked cell; without a guess it retains the dilute interval.
+Tables can contain separate valid density intervals. Pressure inversion stays
+in the interval containing its density guess and cannot cross a masked cell;
+without a guess it uses the dilute interval.
 
-## Cold electron thermal response
+## Degenerate electrons
 
-The analytic electron component integrates relativistic Fermi-Dirac
-occupations. Its original first thermal derivatives subtracted two large
-terms to recover a small heat capacity. Pure-He tests at 100 K and
-rho=1e3..1e6 g/cm3 showed relative heat-capacity discrepancies up to .233%
-against the independently known degenerate limit:
+`ElectronGas` and `IdealEos` integrate relativistic Fermi–Dirac occupations.
+For degeneracy parameter eta > 100, paired quadrature about the Fermi surface
+avoids cancellation in heat capacity and thermal-pressure derivatives.
+Occupation entropy is evaluated directly. The cold limits are
 
 ```text
 cv = pi^2 n_e k_B^2 T / (rho p_F v_F)
@@ -23,132 +21,68 @@ dP/dlnT = rho T cv (2+x_F^2) / [3(1+x_F^2)]
 x_F = p_F/(m_e c)
 ```
 
-See the electron heat-capacity expression in
-[Baiko & Yakovlev (2019)](https://www.ioffe.ru/astro/Stars/Paper/baiko_yakovlev19mn.pdf).
+See [Baiko & Yakovlev (2019)](https://www.ioffe.ru/astro/Stars/Paper/baiko_yakovlev19mn.pdf).
+Tests cover thermal derivatives, first-law and Maxwell relations, and the
+warm/cold join. At 100 K and densities 1e3–1e6 g/cm³, heat capacity agrees with
+the degenerate limit to about 1e-10. At 10,000 K and 1000 g/cm³ the difference
+is 8.2e-7, including finite-temperature corrections.
+[Electron checks](results/cold_electron_response_v1_audit.json).
+The tabulated metal-bearing FreeEOS material is a separate implementation.
 
-`src/fermi.cpp` now pairs quadrature points at opposite offsets from the
-Fermi surface when eta>100. Kernel differences and the density-conserving
-chemical-potential response are evaluated without subtracting large nearly
-equal numbers. This also fixes cancellation in the mixed temperature/density
-derivative. These are equivalent evaluations of the same electron integrals,
-not a replacement with the leading asymptotic formula. Warm-state arithmetic
-is retained. `IdealEos` and `ElectronGas` use the same cold response.
+## Ion interactions
 
-`tests/test_eos.cpp` checks electrons separately from ions, including heat
-capacity, thermal pressure, both heat-capacity derivatives and value/response
-agreement at twelve states. `results/cold_electron_response_v1_audit.json`
-preserves before/after calculations. The largest remaining difference from
-the leading Sommerfeld heat capacity is 8.20e-7 at T=10000 K and rho=1000,
-where finite-temperature corrections are resolved. At 100 K all four density
-tests agree to about 1e-10. The current source also evaluates electron occupation entropy directly on
-the cold Fermi shell, and supplies ionic Sackur–Tetrode entropy with species
-mixing. First-law and Maxwell tests cover warm and cold regimes, including
-the branch join. The earlier response report predates this entropy addition;
-the September 10 full-suite validation tests the current implementation.
-The production metal-bearing potential EOS remains a separate implementation.
+A comparison at a 2511 K helium-WD model uses the same H/He/GS98 element numbers
+in FreeEOS and [Skye](https://arxiv.org/abs/2104.00691), with quantum ions compared
+separately. FreeEOS gives 5.440% less integrated Cv T dm over the inner 90% of
+mass. The Skye quantum term contributes −0.4648%. Controlled component tests
+attribute most of the classical difference to ion interactions. This thermal
+scale is not a measured cooling-age error. An improved prescription must enter
+the free energy, including its composition derivatives; rescaling Cv is insufficient.
+[Comparison](results/dense_core_eos_comparison_sept28_v1.json).
 
-## Ioffe source pressure-derivative audit
+## Weakly quantum liquid ions
 
-The pinned [EOS EIP source](https://www.ioffe.ru/astro/EIP/eipintr.html) is
-based on Potekhin & Chabrier and the quantum-ion update of
+The optional `LiquidIonQuantumPotential` adds the liquid-ion free-energy term of
 [Baiko & Chugunov (2022)](https://doi.org/10.1093/mnras/stab3613).
-`build_eip_probe.py --phase-probe` builds an isolated wrapper around
-`EOSFI22`, at the exact requested density and explicitly selected liquid or
-solid phase. It includes ideal ions and ion-ion, ion-electron and electron
-exchange/correlation contributions. Ideal electrons and radiation are
-excluded, avoiding the native mixture driver's approximate density inversion.
+Pressure, energy, entropy, heat capacity, chemical forces and transported
+enthalpies all derive from that potential. A series through the fourteenth
+power avoids cancellation at small plasma-temperature ratio.
 
-`audit_eip_derivatives.py` independently differences free energy, pressure
-and internal energy at three step sizes. It checks entropy, heat capacity,
-pressure, both pressure derivatives and F=U-TS. Some forced branches are
-metastable or outside their intended physical regime; this tests the
-formulae's internal derivatives, not their stable-phase applicability.
+The assessed range requires Tp,H/T ≤ 1 and number-weighted ionic coupling ≤ 100.
+Below 300 kK, Tp,H/T must be ≤ 0.1 unless T ≥ 200 kK, rho is 50–150 g/cm³,
+X ≥ 0.97, Z ≤ 1e-8, and He3 is at most half the helium. Variable-ionization
+FreeEOS checks in that dense-hydrogen interval give an electron deficit below
+2.785e-5. Outside it, the smaller quantum-ratio limit bounds the ideal-ion heat
+correction to 0.05556%. These limits do not supply crystallization or a partially
+ionized quantum EOS. [Domain checks](results/quantum_dense_hydrogen_sept28_v1.json).
 
-Two issues were found:
+Potential, pressure, energy and Cv agree with the independent `LIQUBC` source
+within 6.104e-11; finite differences check thermal and composition derivatives.
+A 150 Myr cooling comparison changes luminosity by 0.05775% without changing
+the convective extent. Its stellar use with the integrated envelope remains
+local. [Component and evolution checks](results/quantum_liquid_sept28_v1.json).
 
-- `EOSFI22` adds the quantum **temperature** derivative `PDTQL` to its
-  density derivative `PDRi`. Substitution of `PDRQL` removes the largest
-  defect, but does not fully restore consistency.
-- `LIQUBC`'s density derivative is not the full derivative of its own free
-  energy when the coefficients C_i depend on the ion density parameter.
-  The correction below is independently derived from that free energy;
-  it differs from the printed equation (39), as well as the distributed
-  implementation. The source's energy, free energy and pressure are retained.
+## Independent source derivative checks
 
-For each quantum mode, put y=C_i(r_s) T_p/T, D_i=dln C_i/dln r_s,
-a_i=1/2-D_i/3 and D_i'=dD_i/dln r_s. Since r_s is proportional to
-rho^(-1/3), and u_i=y df_i/dy:
+`build_eip_probe.py --phase-probe` evaluates the pinned
+[Ioffe EOS EIP source](https://www.ioffe.ru/astro/EIP/eipintr.html) at specified
+density and phase, excluding ideal electrons and radiation.
+`audit_eip_derivatives.py` checks free-energy, pressure and energy derivatives.
+Forced metastable phases test formula consistency, not physical applicability.
+
+Two corrections are needed in that source: `EOSFI22` uses the quantum temperature
+pressure derivative `PDTQL` where `PDRQL` is required, and `LIQUBC` omits part of
+the density dependence of its coefficients. For each mode,
 
 ```text
+y = C_i(r_s) T_p/T;  D_i = dln C_i/dln r_s;  a_i = 1/2 − D_i/3
+u_i = y df_i/dy;  D_i' = dD_i/dln r_s
 p_i = a_i u_i
-p_i + dp_i/dlnT   = a_i c_i
-p_i + dp_i/dlnrho = (a_i+a_i^2+D_i'/9) u_i - a_i^2 c_i
-D_1' = -D_1(1-D_1)
-D_2' = 0
-D_3' = D_3(3D_1-2D_3-1)
+p_i + dp_i/dlnT = a_i c_i
+p_i + dp_i/dlnrho = (a_i+a_i^2+D_i'/9) u_i − a_i^2 c_i
+D_1' = −D_1(1−D_1);  D_2' = 0;  D_3' = D_3(3D_1−2D_3−1)
 ```
 
-The optional `--repair-quantum-pressure-derivatives` build applies both
-changes, retaining the upstream source, exact patch and separate executable.
-Original and corrected v2 audit reports are in `results/`. Across sixteen
-forced-phase states, the maximum density-derivative defect drops from
-6.77 to 1.05e-6 in ideal-ion pressure units after Richardson removal of
-finite-difference truncation. All other tested identities agree to 1.42e-8
-or better in their corresponding ideal-ion units. The residual is recorded,
-not treated as zero or as an error bound on total stellar pressure.
-
-No source correction has been submitted upstream. The quantum-liquid
-component below differentiates the same free energy directly. Quantum helium
-phase equilibrium, strongly quantum mixtures, caloric reference matching to
-the partially ionized EOS, and consistent coexistence remain outstanding. The native Gamma=175 switch is a documented source
-choice; it is not a self-consistent helium melting calculation.
-
-
-## Quantum liquid ions
-
-`ion_quantum_liquid_jets` evaluates the quantum addition to the ion Helmholtz
-free energy using equations (33)–(34) of
-[Baiko & Chugunov (2022)](https://doi.org/10.1093/mnras/stab3613).
-It adds no electron, classical ion, radiation or screening contribution.
-Use it only with an EOS whose ion term is classical, to avoid double counting.
-
-For a mixture, each ion species uses the same neutralizing electron density.
-The free energies are summed by ion number, retaining the H, He3 and GS98 metal
-composition derivatives as He4 is replaced. This gives the exact leading
-Wigner–Kirkwood mixture term. Higher orders use linear mixing of single-species
-fits, an approximation whose uncertainty grows as the ions become more quantum.
-
-The function returns material F/T and its logarithmic temperature/density
-derivatives through third order, together with three composition gradients
-and six symmetric second derivatives. Pressure, energy, entropy, heat capacity,
-chemical forces and transported enthalpies must all use this same potential.
-A series through the fourteenth power evaluates the published expression
-without cancellation or repeated multidimensional differentiation.
-
-The assessed range requires the hydrogen plasma-temperature ratio Tp,H/T ≤ 1
-and number-weighted ionic coupling ≤ 100. Below 300 kK, Tp,H/T must be ≤ 0.1
-unless the material lies in the checked dense-hydrogen interval: T ≥ 200 kK,
-50 ≤ rho ≤ 150 g/cm³, X ≥ 0.97, Z ≤ 1e-8, and He3 at most half the helium.
-Variable-ionization FreeEOS calculations across that interval give an electron
-deficit below 2.785e-5, including pressure ionization. Outside it, the smaller
-quantum-ratio limit bounds the ideal-ion heat correction to 0.05556%.
-
-These restrictions change no potential values or derivatives. They do not
-supply crystallization or a partially ionized quantum EOS.
-[Dense-hydrogen checks](results/quantum_dense_hydrogen_sept28_v1.json).
-
-The unit test compares F, U, P and Cv against the pinned independent `LIQUBC`
-implementation, including near the upper assessed quantum ratio; the maximum
-relative difference is 6.104e-11. Finite differences also test all thermal and
-composition derivative channels. The published source's pressure-derivative
-issues described above are avoided by differentiating the free energy itself.
-
-At the saved 3069 K stellar state, the new term lowers central Cv by 0.3761%
-and mass-integrated Cv by 0.1751%. Its difference from the leading quantum
-term is 3.106e-6 of the integrated heat capacity. A matched 150 Myr evolution
-comparison changes luminosity by 0.05775% and leaves the convective extent
-unchanged. These are local measurements, not a bound on the final cooling age.
-The standalone component is available in the library; its use with the
-integrated stellar envelope remains in the tested working calculation.
-
-[Component checks and matched cooling comparison](results/quantum_liquid_sept28_v1.json).
+`--repair-quantum-pressure-derivatives` builds an isolated corrected source,
+retaining the original, patch and comparison. Ember differentiates the free
+energy itself. [Derivative audit](results/eip_phase_derivatives_consistent_v2_audit.json).
