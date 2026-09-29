@@ -3,9 +3,8 @@
 This document specifies calculations still needed for Ember's initially
 0.1-solar-mass star through cooling past 100 K and disappearance under explicit
 proton/nucleon-decay scenarios. It does not claim that a complete cooling trajectory or
-an environmental heating model has been implemented. The immediate stellar
-constraint is dense interior opacity; the latest computed model is at
-3.890 trillion years. [Current calculation](COLD_REMNANT.md).
+an environmental heating model has been implemented.
+[Implemented physics and remaining work](COLD_REMNANT.md).
 
 An effective temperature of 100 K does not imply a core at 100 K. Evaluate
 material properties at the temperature, density and composition of each
