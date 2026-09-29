@@ -66,6 +66,24 @@ public:
   const char* name() const override { return "density and temperature dependent (test)"; }
 };
 
+class ValuesOnlyAtmosphere final : public Atmosphere {
+public:
+  AtmosphereState state{};
+  mutable unsigned derivative_calls{}, value_calls{};
+  AtmosphereState eval(double, double, const Composition&) const override {
+    ++derivative_calls;
+    return state;
+  }
+  AtmosphereState eval_value(double, double, const Composition&) const override {
+    ++value_calls;
+    auto a = state;
+    a.dlnT_dlnTeff = a.dlnT_dlng = a.dlnP_dlnTeff = a.dlnP_dlng
+        = std::numeric_limits<double>::quiet_NaN();
+    return a;
+  }
+  const char* name() const override { return "value-only atmosphere test"; }
+};
+
 static void check_surface(const Eos& eos, const Atmosphere& atm, const Composition& comp) {
   const double mass = 0.1 * constants::Msun, gravity = std::pow(10.0, 4.3), Teff = 3000.0;
   const double radius = std::sqrt(constants::G * mass / gravity);
@@ -80,6 +98,11 @@ static void check_surface(const Eos& eos, const Atmosphere& atm, const Compositi
   // point, while the atmosphere derivatives belong to Teff and g.
   p.lnT += 0.03; p.lnrho -= 0.1;
   const auto off = surface_residual(p, mass, comp, eos, atm);
+  const auto values = surface_residual(p, mass, comp, eos, atm, false);
+  for(std::size_t k=0;k<2;++k) {
+    near(values.f[k],off.f[k],1e-13,"residual-only boundary has unchanged equations");
+    for(double v:values.dfdy[k])check(v==0,"residual-only boundary leaves Jacobian empty",v,0);
+  }
   double worst = 0.0;
   for (std::size_t v = 0; v < NVAR; ++v) {
     const Var var = static_cast<Var>(v);
@@ -99,6 +122,26 @@ int main() {
   std::printf("ember atmosphere boundaries\n\n");
   GasRadiationEos eos; ConstantOpacity constant;
   Composition comp{}; comp[Species::H1] = 0.7; comp[Species::He4] = 0.3;
+
+  {
+    ValuesOnlyAtmosphere atmosphere;
+    atmosphere.state = GreyAtmosphere(eos, constant).eval(3000, 1e4, comp);
+    const auto a = atmosphere.state;
+    const double mass = .1 * constants::Msun, radius = std::sqrt(constants::G * mass / 1e4);
+    Point p{std::log(radius), std::log(a.rho), std::log(a.T),
+            4 * M_PI * constants::sigma_SB * radius * radius * std::pow(3000., 4)};
+    const auto values = surface_residual(p, mass, comp, eos, atmosphere, false);
+    check(atmosphere.derivative_calls == 0 && atmosphere.value_calls == 1,
+          "residual-only evaluation does not request atmosphere derivatives", atmosphere.derivative_calls, 0);
+    const auto full = surface_residual(p, mass, comp, eos, atmosphere);
+    check(values.f == full.f, "unused nonfinite derivatives do not change boundary values", 0, 0);
+    atmosphere.state.dlnP_dlng = std::numeric_limits<double>::quiet_NaN();
+    check(throws([&] { surface_residual(p, mass, comp, eos, atmosphere); }),
+          "Jacobian evaluation rejects nonfinite atmosphere derivatives", 1, 1);
+    atmosphere.state.P = -1;
+    check(throws([&] { surface_residual(p, mass, comp, eos, atmosphere, false); }),
+          "residual-only evaluation still rejects invalid pressure", 1, 1);
+  }
 
   // Constant opacity is exactly soluble, including the finite surface
   // radiation pressure and the radiation force on the material.

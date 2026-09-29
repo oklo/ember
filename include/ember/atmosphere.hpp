@@ -18,6 +18,11 @@ class Atmosphere {
 public:
   virtual ~Atmosphere() = default;
   virtual AtmosphereState eval(double Teff, double gravity, const Composition&) const = 0;
+  // Values only; derivatives are unspecified. Integrated boundaries can
+  // avoid their additional sensitivity solves during residual-only trials.
+  virtual AtmosphereState eval_value(double Teff, double gravity, const Composition& c) const {
+    return eval(Teff, gravity, c);
+  }
   virtual const char* name() const = 0;
 };
 

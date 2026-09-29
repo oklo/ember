@@ -33,6 +33,6 @@ struct SurfaceResidual {
 // enclosed mass is the total mass; no fixed interior mass fraction is used.
 // L>0 is required here, even though interior points may carry inward flux.
 SurfaceResidual surface_residual(const Point& surface, double mass,
-                                 const Composition&, const Eos&, const Atmosphere&);
+                                 const Composition&, const Eos&, const Atmosphere&, bool derivatives = true);
 
 } // namespace ember

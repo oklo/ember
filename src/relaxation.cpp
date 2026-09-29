@@ -48,7 +48,7 @@ System assemble(const Model& m, const Physics& p, const Atmosphere& atmosphere,
                 std::size_t zone_threads) {
   System s{};
   const auto inner = central_residual(m, p, dt, prev);
-  const auto outer = surface_residual(m.y.back(), m.M, m.comp.back(), *p.eos, atmosphere);
+  const auto outer = surface_residual(m.y.back(), m.M, m.comp.back(), *p.eos, atmosphere, jacobian);
   s.inner = {inner.f, inner.dfdy}; s.outer = {outer.f, outer.dfdy};
   s.inner.f[1] /= Lunit.front();
   for (double& v : s.inner.dfdy[1]) v /= Lunit.front();
