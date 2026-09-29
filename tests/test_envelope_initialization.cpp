@@ -36,6 +36,13 @@ struct Transparent final : Opacity {
   OpacityState eval(double,double,const Composition&)const override {OpacityState s{};s.kappa=1e-20;return s;}
   const char* name()const override{return "radiatively isothermal limit";}
 };
+struct ConstantDensity final : Eos {
+  EosState eval(double,double,const Composition&)const override {
+    EosState s{};s.cp=1e8;s.delta=s.chiRho=1;s.grad_ad=.4;return s;
+  }
+  double rho_from_PT(double,double,const Composition&,double=0)const override{return .01;}
+  const char* name()const override{return "constant-density hydrostatic test";}
+};
 struct NarrowBoundary final : Atmosphere {
   mutable int refused{};
   AtmosphereState eval(double Teff,double g,const Composition& c)const override {
@@ -177,6 +184,15 @@ int main() {
             "metal mixture recovers independent ideal-gas density and heat capacity");
       check(std::abs(s.grad_ad-.4)<1e-7 && std::abs(s.chiRho-1)<1e-7,
             "metal mixture recovers ideal-gas convection and compressibility");
+      EnvelopeSourceDensity density(source,mode);
+      const PressureDensity& top_density=density;
+      check(std::abs(top_density.rho_from_PT(T,P,mixture)/s.rho-1)<1e-12,
+            "atmosphere density uses the envelope source without an interior EOS");
+      check(std::abs(top_density.rho_from_PT(T,P,mixture,1e-20)/s.rho-1)<1e-12,
+            "out-of-range density guess is initialized within source coverage");
+      bool invalid=false;
+      try{top_density.rho_from_PT(T,0,mixture);}catch(const std::domain_error&){invalid=true;}
+      check(invalid,"source density rejects invalid pressure");
       constexpr double h=1e-5;double gp=guess,gm=guess;
       const auto plus=source.at_pressure(std::log(T)+h,std::log(P),mixture,gp,mode);
       const auto minus=source.at_pressure(std::log(T)-h,std::log(P),mixture,gm,mode);
@@ -213,6 +229,20 @@ int main() {
     try{masked.eval(std::log(1e4),std::log(.001),.7,.02);}
     catch(const std::domain_error&){rejected=true;}
     check(rejected,"missing envelope source response is rejected across its interpolation stencil");
+
+    // Independent spherical hydrostatic solution for a very thin layer.
+    // Its integrated mass is tiny compared with M, stressing cancellation.
+    ConstantDensity uniform;
+    constexpr long double mass=1e32L,radius=1e10L,density=.01L,dm=1e24L;
+    const long double a=4*std::acos(-1.L)*density/3;
+    const long double rb=std::cbrt(radius*radius*radius-dm/a);
+    const long double pressure=1e8L+constants::G*density*((mass-a*radius*radius*radius)
+        *(1/rb-1/radius)+a*(radius*radius-rb*rb)/2);
+    EnvelopeAtmosphere thin(boundary,opacity,uniform,1.9,mass,dm,80);
+    const auto exact_check=thin.from_photosphere(3000,radius,c);
+    check(std::abs(exact_check.r_base/rb-1)<1e-12 && std::abs(exact_check.P_base/pressure-1)<2e-9,
+          "thin envelope matches independent constant-density hydrostatics",
+          exact_check.P_base/pressure-1);
 
   }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
   return failed?1:0;

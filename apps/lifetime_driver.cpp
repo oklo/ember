@@ -356,7 +356,7 @@ int lifetime_main(int argc,char** argv) {
       if(value>0)identity.number("solver."+key,value);
     identity.family("eos",eos_path,true);
     if(ion_quantum=="liquid_bc22")
-      identity.values["eos.ion_quantum"]="bc22.liquid.common_ne.linear_mixture.thetaH_le_1.dense_H.v2";
+      identity.values["eos.ion_quantum"]="bc22.liquid.common_ne.linear_mixture.thetaH_le_1.dense_H.v3";
     if(low_metal_interpolation=="quadratic")
       identity.values["eos.low_metal_interpolation"]="quadratic.C2_to_cubic.v1";
     if(!cold_eos_path.empty()){
@@ -418,22 +418,32 @@ int lifetime_main(int argc,char** argv) {
       radiation=envelope_radiation;
     }
     CombinedOpacity combined(radiation,conduction);
-    CompositionAtmosphereGrid table_atmosphere(eos,atmosphere_path,CompositionAtmosphereGrid::Mixture::allow_documented_proxy);
+    const auto selected_envelope_metals=envelope_metals=="neutral"?EnvelopeMetals::neutral
+        :(envelope_metals=="ionized"?EnvelopeMetals::ionized:EnvelopeMetals::reject);
+    std::unique_ptr<EnvelopeSource> envelope_source;
+    std::unique_ptr<EnvelopeSourceDensity> envelope_density;
+    if(!envelope_source_path.empty()) {
+      envelope_source=std::make_unique<EnvelopeSource>(envelope_source_path.string());
+      envelope_density=std::make_unique<EnvelopeSourceDensity>(*envelope_source,selected_envelope_metals);
+    }
+    const PressureDensity& atmosphere_density=envelope_density
+        ?static_cast<const PressureDensity&>(*envelope_density):eos;
+    CompositionAtmosphereGrid table_atmosphere(atmosphere_density,atmosphere_path,CompositionAtmosphereGrid::Mixture::allow_documented_proxy);
     std::unique_ptr<FixedMetalAtmosphere> fixed_metal_atmosphere;
     if(atmosphere_metals=="bounded_fixed_Z")fixed_metal_atmosphere=std::make_unique<FixedMetalAtmosphere>(
-        eos,table_atmosphere,atmosphere_delta_Z);
+        atmosphere_density,table_atmosphere,atmosphere_delta_Z);
     const Atmosphere& contraction_atmosphere=fixed_metal_atmosphere
         ?static_cast<const Atmosphere&>(*fixed_metal_atmosphere):table_atmosphere;
     std::unique_ptr<CompositionAtmosphereGrid> main_atmosphere;
     std::unique_ptr<FixedMetalAtmosphere> fixed_main_atmosphere;
     std::unique_ptr<AtmosphereOverlap> atmosphere_overlap;
     if(!main_atmosphere_path.empty()) {
-      main_atmosphere=std::make_unique<CompositionAtmosphereGrid>(eos,main_atmosphere_path,
+      main_atmosphere=std::make_unique<CompositionAtmosphereGrid>(atmosphere_density,main_atmosphere_path,
           CompositionAtmosphereGrid::Mixture::allow_documented_proxy);
       if(atmosphere_metals=="bounded_fixed_Z")fixed_main_atmosphere=std::make_unique<FixedMetalAtmosphere>(
-          eos,*main_atmosphere,atmosphere_delta_Z);
+          atmosphere_density,*main_atmosphere,atmosphere_delta_Z);
       const Atmosphere& main=fixed_main_atmosphere?static_cast<const Atmosphere&>(*fixed_main_atmosphere):*main_atmosphere;
-      atmosphere_overlap=std::make_unique<AtmosphereOverlap>(eos,contraction_atmosphere,main,atmosphere_join);
+      atmosphere_overlap=std::make_unique<AtmosphereOverlap>(atmosphere_density,contraction_atmosphere,main,atmosphere_join);
     }
     const Atmosphere& reference_boundary=atmosphere_overlap
         ?static_cast<const Atmosphere&>(*atmosphere_overlap):contraction_atmosphere;
@@ -443,29 +453,26 @@ int lifetime_main(int argc,char** argv) {
       const double z=main_atmosphere->reference_metallicity();
       if(metal_join_high>z || metal_join_low<z-atmosphere_delta_Z)
         throw std::invalid_argument("metal atmosphere overlap exceeds the fixed-Z reference allowance");
-      metal_atmosphere=std::make_unique<MetalAtmosphereChain>(eos,*main_atmosphere,metal_atmosphere_path,z);
-      metal_overlap=std::make_unique<MetalIntervalAtmosphere>(eos,*metal_atmosphere,
+      metal_atmosphere=std::make_unique<MetalAtmosphereChain>(atmosphere_density,*main_atmosphere,metal_atmosphere_path,z);
+      metal_overlap=std::make_unique<MetalIntervalAtmosphere>(atmosphere_density,*metal_atmosphere,
           reference_boundary,metal_join_low,metal_join_high);
     }
     const Atmosphere& metal_boundary=metal_overlap
         ?static_cast<const Atmosphere&>(*metal_overlap):reference_boundary;
     std::unique_ptr<HydrogenIntervalAtmosphere> hydrogen_atmosphere;
     if(!hydrogen_atmosphere_path.empty())hydrogen_atmosphere=std::make_unique<HydrogenIntervalAtmosphere>(
-        eos,metal_boundary,hydrogen_atmosphere_path);
+        atmosphere_density,metal_boundary,hydrogen_atmosphere_path);
     const Atmosphere& hydrogen_boundary=hydrogen_atmosphere
         ?static_cast<const Atmosphere&>(*hydrogen_atmosphere):metal_boundary;
     std::unique_ptr<HydrogenEnvelopeAtmosphere> hydrogen_envelope;
     if(!hydrogen_envelope_path.empty())hydrogen_envelope=std::make_unique<HydrogenEnvelopeAtmosphere>(
-        eos,hydrogen_boundary,hydrogen_envelope_path);
-    TraceDeuteriumAtmosphere thin_atmosphere(eos,hydrogen_envelope
+        atmosphere_density,hydrogen_boundary,hydrogen_envelope_path);
+    TraceDeuteriumAtmosphere thin_atmosphere(atmosphere_density,hydrogen_envelope
         ?static_cast<const Atmosphere&>(*hydrogen_envelope):hydrogen_boundary);
-    std::unique_ptr<EnvelopeSource> envelope_source;
     std::unique_ptr<EnvelopeAtmosphere> native_envelope;
-    if(!envelope_source_path.empty()) {
-      envelope_source=std::make_unique<EnvelopeSource>(envelope_source_path.string());
+    if(envelope_source) {
       native_envelope=std::make_unique<EnvelopeAtmosphere>(thin_atmosphere,combined,*envelope_source,
-          1.9,mass,selected_envelope_mass,20,envelope_metals=="neutral"?EnvelopeMetals::neutral
-          :(envelope_metals=="ionized"?EnvelopeMetals::ionized:EnvelopeMetals::reject));
+          1.9,mass,selected_envelope_mass,20,selected_envelope_metals);
     }
     if(envelope_eos=="interior")native_envelope=std::make_unique<EnvelopeAtmosphere>(
         thin_atmosphere,combined,eos,1.9,mass,selected_envelope_mass,20);

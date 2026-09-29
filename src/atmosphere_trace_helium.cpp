@@ -16,7 +16,7 @@ constexpr double ln10 = 2.302585092994045684;
 } // namespace
 
 TraceHeliumAtmosphereGrid::TraceHeliumAtmosphereGrid(
-    const Eos &eos, const std::filesystem::path &path, Approximation approximation, double maximum_helium3)
+    const PressureDensity &eos, const std::filesystem::path &path, Approximation approximation, double maximum_helium3)
     : eos_(eos) {
   std::ifstream input(path);
   if (!input)
@@ -24,7 +24,7 @@ TraceHeliumAtmosphereGrid::TraceHeliumAtmosphereGrid(
                              path.string());
   read(input, approximation, maximum_helium3);
 }
-TraceHeliumAtmosphereGrid::TraceHeliumAtmosphereGrid(const Eos &eos,
+TraceHeliumAtmosphereGrid::TraceHeliumAtmosphereGrid(const PressureDensity &eos,
                                                      std::istream &input,
                                                      Approximation approximation, double maximum_helium3)
     : eos_(eos) {

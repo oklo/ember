@@ -1,0 +1,51 @@
+{
+  "scope": "Density-only interface uses the explicitly selected envelope source. Spherical envelope mass is integrated inward from zero, preserving the equations while reducing cancellation. No acceptance or conservation threshold changed.",
+  "classical_20_Myr": {
+    "relative_change": {
+      "Teff_K": -8.728435299532045e-06,
+      "radius_Rsun": -5.362163570943324e-07,
+      "luminosity_Lsun": -3.59856790711488e-05,
+      "central_T_K": -6.139705889474101e-06,
+      "central_density_g_cm3": 7.025829340534528e-07,
+      "H_mass_g": -1.095776802628734e-10,
+      "He3_mass_g": 9.94659687947319e-09,
+      "He3_peak": -2.9704442805478237e-07,
+      "surface_X": -9.568789871572392e-09,
+      "nuclear_fraction": -2.5700086257018917e-05
+    },
+    "max_structure_log_change": 9.497038240269262e-06,
+    "max_composition_absolute_change": 2.2228852369909902e-07,
+    "both_reached_target": true,
+    "accepted_intervals": 12,
+    "new_rejections": 0
+  },
+  "earlier_phase_checks": {
+    "hayashi": {
+      "Teff_K": 7.993605777301127e-15,
+      "radius_Rsun": -9.048317650695026e-14,
+      "luminosity_Lsun": -1.482147737874584e-13,
+      "central_T_K": 1.7763568394002505e-15,
+      "central_density_g_cm3": 3.1086244689504383e-15,
+      "He3_mass_g": 0.0,
+      "H_mass_g": 0.0
+    },
+    "main_sequence": {
+      "Teff_K": -2.8388402739665253e-13,
+      "radius_Rsun": -2.964295475749168e-14,
+      "luminosity_Lsun": -1.195155086008981e-12,
+      "central_T_K": 1.7763568394002505e-15,
+      "central_density_g_cm3": -1.0658141036401503e-14,
+      "He3_mass_g": 0.0,
+      "H_mass_g": 0.0
+    }
+  },
+  "tests": {
+    "atmosphere_envelope_quantum_restart_groups": 14,
+    "status": "pass; mass-coordinate tests include an independent constant-density spherical hydrostatic solution and restart integration"
+  },
+  "quantum_control": "quantum_cool_hydrogen_sept29_v1.json",
+  "limitations": [
+    "The short quantum-on continuation includes activation readjustment.",
+    "This interface supplies no missing atmosphere physics or source extrapolation."
+  ]
+}

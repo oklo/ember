@@ -1,0 +1,80 @@
+{
+  "scope": "Assessed domain extension only; the optional quantum potential and its derivatives are unchanged. No correction is added to the separate SCVH envelope.",
+  "model": "Baiko and Chugunov 2022 weakly quantum liquid, common-electron-density linear mixture",
+  "reference": "https://doi.org/10.1093/mnras/stab3613",
+  "ionization_source": "FreeEOS 3.0.0, options 3 223 -2, electron quadrature 1e-13",
+  "ionization_probe_sha256": "1bfcfc7226449987de1609afb8bb9b7625588457d394fc0038b4baa56ac76c9f",
+  "method": "Compare fully stripped and equilibrium H+/He+/He++ populations in the same small free-energy correction. Finite differences include changing ion populations. Use shell mass weights for resolved-interior Cv estimates.",
+  "domain": {
+    "minimum_T_K": 100000.0,
+    "density_g_cm3": [
+      10,
+      150
+    ],
+    "minimum_X": 0.98,
+    "maximum_Z": 1e-08,
+    "maximum_He3_fraction_of_helium": 0.5,
+    "maximum_theta_H": 0.5
+  },
+  "source_checks": {
+    "profile_and_density_neighbors": 378,
+    "broader_prospective": 300,
+    "broader_source_failures": 1,
+    "scope_of_broader_failure": "Below the adopted temperature floor.",
+    "pressure_entropy_states": 138,
+    "prospective_states_inside_new_domain": 118,
+    "largest_sampled_Cv_difference_over_classical_ion_Cv": 0.0013466655682546841,
+    "worst_supported_prospective_state": {
+      "T": 139196.35459077652,
+      "rho": 50.96245858132256,
+      "X": 0.98,
+      "Y3": 0.010000000000000009,
+      "theta_H": 0.4000000000000001
+    },
+    "stellar_profiles": {
+      "neutral": {
+        "checkpoint_sha256": "e5a19a67ddaa46d596c4e7697a00565ede97fd59d9898564ed2e33ca7916bb07",
+        "evaluated_shells": 63,
+        "mass_fraction_evaluated": 0.0020895530097907573,
+        "quadrature_Cv_difference_over_whole_classical_ion_Cv": 2.0808103930535075e-07,
+        "max_local_times_evaluated_Cv_fraction": 2.2805806790613317e-06,
+        "maximum_pressure_difference": 2.8595187094196306e-06,
+        "maximum_entropy_difference_over_classical_ion_R": 6.770608800600742e-05
+      },
+      "ionized": {
+        "checkpoint_sha256": "2feca837999e1f131685e5b1370e6a6ede655ca6f4f214cc2b9d4bf72896b91d",
+        "evaluated_shells": 63,
+        "mass_fraction_evaluated": 0.0020843557482969717,
+        "quadrature_Cv_difference_over_whole_classical_ion_Cv": 2.078161366589541e-07,
+        "max_local_times_evaluated_Cv_fraction": 2.276854753372413e-06,
+        "maximum_pressure_difference": 2.8579206749509885e-06,
+        "maximum_entropy_difference_over_classical_ion_R": 6.778184709238007e-05
+      }
+    }
+  },
+  "limitations": [
+    "Sampling assesses the stated approximation; it is not a proof of a uniform mathematical error bound.",
+    "The SCVH integrated envelope is excluded from the mass quadrature and receives no extra quantum term.",
+    "Strong quantum mixtures, crystallization and a general partially ionized quantum EOS are not supplied."
+  ],
+  "stellar_control": {
+    "duration_years": 20000000.0,
+    "start_Teff_K": 3600.3278609021586,
+    "both_reached_target": true,
+    "accepted_intervals_per_arm": 12,
+    "rejected_intervals_per_arm": 0,
+    "relative_change_quantum_vs_classical": {
+      "Teff_K": -0.0005097226804331445,
+      "radius_Rsun": 9.769285213523382e-05,
+      "luminosity_Lsun": -0.0018423351850339609,
+      "central_T_K": -9.256297947901615e-05,
+      "central_density_g_cm3": -0.00011442820004625709,
+      "H_mass_g": 5.399924951632329e-11,
+      "He3_mass_g": -4.901530958889566e-09,
+      "He3_peak": -8.352133555877828e-07,
+      "surface_X": -2.0226218921948202e-08,
+      "nuclear_fraction": 0.002660273700392901
+    },
+    "scope": "Same retained structure; quantum activation includes initial EOS readjustment. Not a cooling-age prediction. No H3+ atmosphere selected."
+  }
+}

@@ -12,7 +12,7 @@ namespace ember {
 // It is separate from the exact fuel inventory used by the nuclear solver.
 class TraceDeuteriumAtmosphere final : public Atmosphere {
  public:
-  TraceDeuteriumAtmosphere(const Eos& eos,const Atmosphere& source)
+  TraceDeuteriumAtmosphere(const PressureDensity& eos,const Atmosphere& source)
       :eos_(eos),source_(source){}
   AtmosphereState eval(double Teff,double gravity,const Composition& c) const override {
     const double D=c[Species::H2];
@@ -33,6 +33,6 @@ class TraceDeuteriumAtmosphere final : public Atmosphere {
   }
   const char* name() const override {return "trace-D atmosphere: total H mass in T/P lookup, actual isotope EOS density";}
  private:
-  const Eos& eos_;const Atmosphere& source_;
+  const PressureDensity& eos_;const Atmosphere& source_;
 };
 } // namespace ember

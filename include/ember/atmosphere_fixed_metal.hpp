@@ -14,7 +14,7 @@ namespace ember {
 // This cannot represent settling or a changed elemental pattern.
 class FixedMetalAtmosphere final : public Atmosphere {
 public:
-  FixedMetalAtmosphere(const Eos& eos,const CompositionAtmosphereGrid& source,
+  FixedMetalAtmosphere(const PressureDensity& eos,const CompositionAtmosphereGrid& source,
                       double maximum_delta_Z)
       :eos_(eos),source_(source),maximum_delta_Z_(maximum_delta_Z),
        reference_Z_(source.reference_metallicity()) {
@@ -52,7 +52,7 @@ public:
   }
   const char* name() const override {return "bounded fixed-metal T/P boundary; actual-composition density";}
 private:
-  const Eos& eos_;
+  const PressureDensity& eos_;
   const CompositionAtmosphereGrid& source_;
   double maximum_delta_Z_,reference_Z_;
 };

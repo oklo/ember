@@ -65,7 +65,14 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   // they do not switch or weight the free energy.
   const bool dense_hydrogen=T>=2e5 && rho>=50 && rho<=150 &&
       c.X[0]>=.97 && c.Z()<=1e-8 && c.X[1]<=.5*(c.X[1]+c.X[2]);
-  if(thetaH>1 || (T<3e5 && thetaH>.1 && !dense_hydrogen))
+  // In the cooler H-rich layers, direct equilibrium-ionization comparisons
+  // find a maximum sampled difference of 0.135% of classical ion Cv in this
+  // small correction. On the 3200 K profiles, the mass-weighted uncertainty
+  // estimate is <2.3e-6 of whole-star classical ion Cv. This extends the
+  // assessed domain, without tapering the potential or altering its derivatives.
+  const bool cool_hydrogen=T>=1e5 && rho>=10 && rho<=150 && thetaH<=.5 &&
+      c.X[0]>=.98 && c.Z()<=1e-8 && c.X[1]<=.5*(c.X[1]+c.X[2]);
+  if(thetaH>1 || (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen))
     throw std::domain_error("quantum ion EOS: outside assessed ionization/quantum range");
   double ion_number=c.X[0]+c.X[1]/3+c.X[2]/4;
   double charge_moment=c.X[0]+(c.X[1]/3+c.X[2]/4)*std::pow(2.,5./3);

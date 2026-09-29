@@ -58,12 +58,22 @@ enthalpies all derive from that potential. A series through the fourteenth
 power avoids cancellation at small plasma-temperature ratio.
 
 The assessed range requires Tp,H/T ≤ 1 and number-weighted ionic coupling ≤ 100.
-Below 300 kK, Tp,H/T must be ≤ 0.1 unless T ≥ 200 kK, rho is 50–150 g/cm³,
-X ≥ 0.97, Z ≤ 1e-8, and He3 is at most half the helium. Variable-ionization
-FreeEOS checks in that dense-hydrogen interval give an electron deficit below
-2.785e-5. Outside it, the smaller quantum-ratio limit bounds the ideal-ion heat
-correction to 0.05556%. These limits do not supply crystallization or a partially
-ionized quantum EOS. [Domain checks](results/quantum_dense_hydrogen_sept28_v1.json).
+Below 300 kK, Tp,H/T must be ≤ 0.1 except in two H-rich intervals, both requiring
+Z ≤ 1e-8 and He3 at most half the helium:
+
+- T ≥ 200 kK, density 50–150 g/cm³ and X ≥ 0.97. Equilibrium-ionization checks
+  give an electron deficit below 2.785e-5.
+  [Dense-hydrogen checks](results/quantum_dense_hydrogen_sept28_v1.json).
+- T ≥ 100 kK, density 10–150 g/cm³, X ≥ 0.98 and Tp,H/T ≤ 0.5. Comparisons with
+  equilibrium ion populations find a maximum quantum-Cv difference of 0.1347%
+  of classical ion Cv. The affected layers in the 3200 K models contain about
+  0.2090% of the resolved mass; their whole-star heat-capacity effect is small.
+  [Cool-hydrogen assessment](results/quantum_cool_hydrogen_sept29_v1.json).
+
+Outside those intervals, the smaller quantum-ratio limit bounds the ideal-ion
+heat correction to 0.05556%. The potential is never tapered at a boundary;
+unsupported states are rejected. This remains a perturbative liquid-ion
+correction, without crystallization or a complete partially ionized quantum EOS.
 
 Potential, pressure, energy and Cv agree with the independent `LIQUBC` source
 within 6.104e-11; finite differences check thermal and composition derivatives.

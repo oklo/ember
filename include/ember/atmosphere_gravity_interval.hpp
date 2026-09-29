@@ -10,7 +10,7 @@ namespace ember {
 // Each source is queried only at its declared endpoint within the interval.
 class GravityIntervalAtmosphere final : public Atmosphere {
 public:
-  GravityIntervalAtmosphere(const Eos& eos, const Atmosphere& lower,
+  GravityIntervalAtmosphere(const PressureDensity& eos, const Atmosphere& lower,
       const Atmosphere& upper, double log_g_low, double log_g_high)
       : eos_(eos), lower_(lower), upper_(upper), low_(log_g_low), high_(log_g_high),
         g_low_(std::pow(10., low_)), g_high_(std::pow(10., high_)) {
@@ -49,7 +49,7 @@ public:
   }
   const char* name() const override {return "interpolated gravity atmosphere interval";}
 private:
-  const Eos& eos_;
+  const PressureDensity& eos_;
   const Atmosphere& lower_;
   const Atmosphere& upper_;
   double low_, high_, g_low_, g_high_;

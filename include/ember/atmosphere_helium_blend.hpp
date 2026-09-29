@@ -12,7 +12,7 @@ namespace ember {
 // This numerical connection does not establish agreement between the sources.
 class HeliumBlendAtmosphere final : public Atmosphere {
 public:
-  HeliumBlendAtmosphere(const Eos& eos, const Atmosphere& low_helium,
+  HeliumBlendAtmosphere(const PressureDensity& eos, const Atmosphere& low_helium,
                        const Atmosphere& high_helium, double low, double high)
       : eos_(eos), low_source_(low_helium), high_source_(high_helium),
         low_(low), high_(high) {
@@ -60,7 +60,7 @@ public:
   const char* name() const override { return "helium-dependent atmosphere connection"; }
 
 private:
-  const Eos& eos_;
+  const PressureDensity& eos_;
   const Atmosphere& low_source_;
   const Atmosphere& high_source_;
   double low_, high_;

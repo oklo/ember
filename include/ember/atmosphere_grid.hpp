@@ -21,9 +21,9 @@ namespace ember {
 class CompositionAtmosphereGrid final : public Atmosphere {
 public:
   enum class Mixture { exact, allow_documented_proxy };
-  CompositionAtmosphereGrid(const Eos &, const std::filesystem::path &,
+  CompositionAtmosphereGrid(const PressureDensity &, const std::filesystem::path &,
                             Mixture = Mixture::exact);
-  CompositionAtmosphereGrid(const Eos &, std::istream &,
+  CompositionAtmosphereGrid(const PressureDensity &, std::istream &,
                             Mixture = Mixture::exact);
   AtmosphereState eval(double Teff, double gravity,
                        const Composition &) const override;
@@ -62,7 +62,7 @@ private:
   std::array<double, 5> interpolate(const std::vector<double> &,
                                     const std::array<double, 4> &) const;
   std::array<double, 4> coordinates(double, double, const Composition &) const;
-  const Eos &eos_;
+  const PressureDensity &eos_;
   std::string source_, approximation_;
   double tau_{};
   std::array<double, NMETALS> metals_{};

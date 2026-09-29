@@ -20,12 +20,12 @@ namespace ember {
 class HydrogenDominatedAtmosphereGrid final: public Atmosphere {
 public:
  enum class Approximation { neglect_trace_atmospheric_helium };
- HydrogenDominatedAtmosphereGrid(const Eos& eos,const std::filesystem::path& path,
+ HydrogenDominatedAtmosphereGrid(const PressureDensity& eos,const std::filesystem::path& path,
      Approximation approximation,double maximum_helium):eos_(eos) {
   std::ifstream in(path);if(!in)throw std::runtime_error("HydrogenDominatedAtmosphereGrid: cannot open source");
   read(in,approximation,maximum_helium);
  }
- HydrogenDominatedAtmosphereGrid(const Eos& eos,std::istream& in,
+ HydrogenDominatedAtmosphereGrid(const PressureDensity& eos,std::istream& in,
      Approximation approximation,double maximum_helium):eos_(eos){read(in,approximation,maximum_helium);}
  bool covers(double t,double g,const Composition& c)const{
   if(!positive(t)||!positive(g)||c.basis!=AbundanceBasis::baryon_mass||
@@ -114,7 +114,7 @@ private:
   }
   out[0]=std::pow(10.,out[0]);out[1]*=std::log(10.);return out;
  }
- const Eos& eos_;std::string source_,approximation_;double tau_{},maximum_helium_{},source_helium_{};
+ const PressureDensity& eos_;std::string source_,approximation_;double tau_{},maximum_helium_{},source_helium_{};
  std::array<double,NMETALS> pattern_{};
  std::array<std::vector<double>,3> axes_;
  std::vector<double> logT_,logPg_;

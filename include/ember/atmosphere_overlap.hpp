@@ -15,7 +15,7 @@ public:
   struct Options {
     double log_g_low{},log_g_high{},hydrogen_low{},hydrogen_high{};
   };
-  AtmosphereOverlap(const Eos& eos,const Atmosphere& contraction,
+  AtmosphereOverlap(const PressureDensity& eos,const Atmosphere& contraction,
                     const Atmosphere& main_sequence,Options options)
       :eos_(eos),contraction_(contraction),main_(main_sequence),o_(options) {
     if(!std::isfinite(o_.log_g_low+o_.log_g_high+o_.hydrogen_low+o_.hydrogen_high) ||
@@ -56,6 +56,6 @@ public:
   }
   const char* name()const override{return "smooth overlap of contraction and main-sequence atmospheres";}
 private:
-  const Eos& eos_;const Atmosphere& contraction_;const Atmosphere& main_;Options o_;
+  const PressureDensity& eos_;const Atmosphere& contraction_;const Atmosphere& main_;Options o_;
 };
 } // namespace ember

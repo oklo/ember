@@ -10,7 +10,7 @@ namespace ember {
 // source query; the caller's composition supplies the matching density.
 class HeliumIsotopeAtmosphere final : public Atmosphere {
 public:
-  HeliumIsotopeAtmosphere(const Eos& eos,const CompositionAtmosphereGrid& source,
+  HeliumIsotopeAtmosphere(const PressureDensity& eos,const CompositionAtmosphereGrid& source,
                          double maximum_helium3,double maximum_metals)
       :eos_(eos),source_(source),maximum_helium3_(maximum_helium3),maximum_metals_(maximum_metals) {
     if(!std::isfinite(maximum_helium3) || maximum_helium3<=0 || maximum_helium3>=1
@@ -39,7 +39,7 @@ public:
   }
   const char* name()const override{return "mixed-helium atmosphere with isotope mapping";}
 private:
-  const Eos& eos_;
+  const PressureDensity& eos_;
   const CompositionAtmosphereGrid& source_;
   double maximum_helium3_,maximum_metals_;
 };

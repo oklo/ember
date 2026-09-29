@@ -73,10 +73,10 @@ public:
     return s;
   }
 
-  HydrogenEnvelopeAtmosphere(const Eos& eos,const Atmosphere& full,
+  HydrogenEnvelopeAtmosphere(const PressureDensity& eos,const Atmosphere& full,
       const std::filesystem::path& path):HydrogenEnvelopeAtmosphere(eos,full,read(path)) {}
 
-  HydrogenEnvelopeAtmosphere(const Eos& eos,const Atmosphere& full,const Specification& s)
+  HydrogenEnvelopeAtmosphere(const PressureDensity& eos,const Atmosphere& full,const Specification& s)
       : trace_(eos,s.trace,TraceHeliumAtmosphereGrid::Approximation::neglect_atmospheric_helium3,s.maximum_helium3),
         low_(eos,s.low_gravity,HydrogenDominatedAtmosphereGrid::Approximation::neglect_trace_atmospheric_helium,s.maximum_helium),
         middle_(eos,s.middle_gravity,HydrogenDominatedAtmosphereGrid::Approximation::neglect_trace_atmospheric_helium,s.maximum_helium),

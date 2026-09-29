@@ -44,7 +44,16 @@ struct EosCompositionResponse {
   std::array<double,2> dP{}, dE{};
 };
 
-class Eos {
+// Tabulated atmospheres supply T and P independently of the interior EOS.
+// They need only a density inversion, which may come from the envelope source.
+class PressureDensity {
+public:
+  virtual ~PressureDensity() = default;
+  virtual double rho_from_PT(double T, double P, const Composition&,
+                             double rho_guess = 0.0) const = 0;
+};
+
+class Eos : public PressureDensity {
 public:
   virtual ~Eos() = default;
   virtual EosState eval(double T, double rho, const Composition&) const = 0;
@@ -73,7 +82,7 @@ public:
   // Invalid states and failure to converge throw; no approximate density is
   // returned as if the pressure constraint had been satisfied.
   virtual double rho_from_PT(double T, double P, const Composition&,
-                     double rho_guess = 0.0) const;
+                     double rho_guess = 0.0) const override;
 };
 
 // Ideal gas + radiation + analytic Fermi-Dirac electron degeneracy.

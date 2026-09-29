@@ -14,7 +14,7 @@ namespace ember {
 // A single response file retains the original one-interval convention.
 class MetalAtmosphereChain final : public Atmosphere {
 public:
-  MetalAtmosphereChain(const Eos& eos, const Atmosphere& reference,
+  MetalAtmosphereChain(const PressureDensity& eos, const Atmosphere& reference,
                       const std::filesystem::path& path, double first_reference)
       : selected_(&reference) {
     std::ifstream in(path);

@@ -10,7 +10,7 @@ namespace ember {
 // domain. This is interpolation in composition, not time-based smoothing.
 class MetalIntervalAtmosphere final : public Atmosphere {
 public:
- MetalIntervalAtmosphere(const Eos& eos,const Atmosphere& lower,const Atmosphere& upper,
+ MetalIntervalAtmosphere(const PressureDensity& eos,const Atmosphere& lower,const Atmosphere& upper,
                          double low,double high):eos_(eos),lower_(lower),upper_(upper),low_(low),high_(high){
   if(!std::isfinite(low+high)||low<0||low>=high||high>=1)
    throw std::invalid_argument("MetalIntervalAtmosphere: invalid interval");
@@ -53,6 +53,6 @@ public:
  }
  const char* name()const override{return "interpolated metal-source atmosphere interval";}
 private:
- const Eos& eos_;const Atmosphere& lower_;const Atmosphere& upper_;double low_,high_;
+ const PressureDensity& eos_;const Atmosphere& lower_;const Atmosphere& upper_;double low_,high_;
 };
 } // namespace ember

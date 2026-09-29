@@ -14,7 +14,7 @@ constexpr double ln10 = 2.302585092994045684;
 }
 
 MetalResponseAtmosphere::MetalResponseAtmosphere(
-    const Eos &eos, const Atmosphere &reference, const std::filesystem::path &path,
+    const PressureDensity &eos, const Atmosphere &reference, const std::filesystem::path &path,
     Approximation, Options options)
     : eos_(eos), reference_(reference), options_(options) {
   std::ifstream in(path);
@@ -22,7 +22,7 @@ MetalResponseAtmosphere::MetalResponseAtmosphere(
   read(in);
 }
 MetalResponseAtmosphere::MetalResponseAtmosphere(
-    const Eos &eos, const Atmosphere &reference, std::istream &in,
+    const PressureDensity &eos, const Atmosphere &reference, std::istream &in,
     Approximation, Options options)
     : eos_(eos), reference_(reference), options_(options) { read(in); }
 

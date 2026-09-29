@@ -17,7 +17,7 @@ constexpr double ln10 = 2.302585092994045684;
 } // namespace
 
 CompositionAtmosphereGrid::CompositionAtmosphereGrid(
-    const Eos &eos, const std::filesystem::path &path, Mixture mixture)
+    const PressureDensity &eos, const std::filesystem::path &path, Mixture mixture)
     : eos_(eos) {
   std::ifstream input(path);
   if (!input)
@@ -25,7 +25,7 @@ CompositionAtmosphereGrid::CompositionAtmosphereGrid(
                              path.string());
   read(input, mixture);
 }
-CompositionAtmosphereGrid::CompositionAtmosphereGrid(const Eos &eos,
+CompositionAtmosphereGrid::CompositionAtmosphereGrid(const PressureDensity &eos,
                                                      std::istream &input,
                                                      Mixture mixture)
     : eos_(eos) {

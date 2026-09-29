@@ -22,9 +22,9 @@ public:
     // Intended for a measured small nuclear-capture increase, never clipping.
     double maximum_reference_metal_excess{};
   };
-  MetalResponseAtmosphere(const Eos &, const Atmosphere &reference,
+  MetalResponseAtmosphere(const PressureDensity &, const Atmosphere &reference,
                           const std::filesystem::path &, Approximation, Options);
-  MetalResponseAtmosphere(const Eos &, const Atmosphere &reference,
+  MetalResponseAtmosphere(const PressureDensity &, const Atmosphere &reference,
                           std::istream &, Approximation, Options);
   AtmosphereState eval(double Teff, double gravity, const Composition &) const override;
   const char *name() const override { return source_.c_str(); }
@@ -36,7 +36,7 @@ private:
   // Natural-log response, and its derivatives in H, ln Teff and ln g.
   std::array<double, 4> interpolate(const std::vector<double> &,
                                   const std::array<double, 3> &) const;
-  const Eos &eos_;
+  const PressureDensity &eos_;
   const Atmosphere &reference_;
   Options options_;
   std::string source_, approximation_;

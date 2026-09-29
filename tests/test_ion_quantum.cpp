@@ -86,9 +86,24 @@ int main() {
   refused=false;try{(void)ion_quantum_liquid_jets(250000,90,mixture(.9,.003,0));}
   catch(const std::domain_error&){refused=true;}
   check(refused,"dense hydrogen extension does not admit unsupported helium-rich material");
-  refused=false;try{(void)ion_quantum_liquid_jets(250000,40,dense_h);}
+  const auto envelope_h=mixture(.988,.0038,0);
+  const auto envelope=ion_quantum_liquid_jets(150000,40,envelope_h,1)[0];
+  const auto envelope_p=ion_quantum_liquid_jets(150000*std::exp(h),40,envelope_h,1)[0];
+  const auto envelope_m=ion_quantum_liquid_jets(150000*std::exp(-h),40,envelope_h,1)[0];
+  check(envelope[0][0]>0 && std::abs((envelope_p[0][0]-envelope_m[0][0])/(2*h)/envelope[1][0]-1)<2e-7,
+        "cool hydrogen retains the same free energy and thermal derivative");
+  refused=false;try{(void)ion_quantum_liquid_jets(100000,9,dense_h);}
   catch(const std::domain_error&){refused=true;}
-  check(refused,"dense hydrogen extension retains its assessed density boundary");
+  check(refused,"cool hydrogen retains its assessed density boundary");
+  refused=false;try{(void)ion_quantum_liquid_jets(90000,22,dense_h);}
+  catch(const std::domain_error&){refused=true;}
+  check(refused,"cool hydrogen retains its assessed temperature boundary");
+  refused=false;try{(void)ion_quantum_liquid_jets(100000,150,dense_h);}
+  catch(const std::domain_error&){refused=true;}
+  check(refused,"cool hydrogen retains its smaller plasma-temperature bound");
+  refused=false;try{(void)ion_quantum_liquid_jets(150000,40,mixture(.97,.0038,0));}
+  catch(const std::domain_error&){refused=true;}
+  check(refused,"cool hydrogen approximation does not extend to helium-rich layers");
   refused=false;try{(void)ion_quantum_liquid_jets(1e6,3e4,mixture(.01,0,.98));}catch(const std::domain_error&){refused=true;}
   check(refused,"strong ionic coupling is not treated as an assessed liquid");
   const auto dilute=ion_quantum_liquid_jets(3000,1e-7,c,1)[0];

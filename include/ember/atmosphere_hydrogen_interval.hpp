@@ -14,7 +14,7 @@ namespace ember {
 // grid exactly. No source temperature, gravity or composition is extrapolated.
 class HydrogenIntervalAtmosphere final : public Atmosphere {
 public:
-  HydrogenIntervalAtmosphere(const Eos& eos, const Atmosphere& lower,
+  HydrogenIntervalAtmosphere(const PressureDensity& eos, const Atmosphere& lower,
       const std::filesystem::path& path, unsigned depth=0) : eos_(eos), lower_(&lower) {
     if (depth > 8)
       throw std::runtime_error("HydrogenIntervalAtmosphere: excessive interval nesting");
@@ -96,7 +96,7 @@ public:
   }
   const char* name() const override { return "continuous hydrogen-source atmosphere interpolation"; }
 private:
-  const Eos& eos_;
+  const PressureDensity& eos_;
   const Atmosphere* lower_;
   std::unique_ptr<HydrogenIntervalAtmosphere> retained_lower_;
   std::unique_ptr<MetalAtmosphereChain> continued_lower_;

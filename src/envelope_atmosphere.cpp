@@ -132,6 +132,19 @@ EnvelopeSource::PressureState EnvelopeSource::at_pressure(double lnT, double lnP
   return {1/v,cp,delta,P*v*delta/(T*cp),v/(vh/hh.chiRho+vm*P/Pg)};
 }
 
+double EnvelopeSourceDensity::rho_from_PT(double T,double P,const Composition& c,double rho_guess) const {
+  require(std::isfinite(T) && T>0 && std::isfinite(P) && P>0,"invalid density query");
+  const double gasP=P-constants::a_rad*std::pow(T,4)/3;
+  require(gasP>0,"nonpositive gas pressure in density query");
+  // A neutral atomic gas provides a starting guess only. The returned value
+  // satisfies the source pressure inversion, including its molecular physics.
+  if(!(std::isfinite(rho_guess) && rho_guess>0))
+    rho_guess=gasP/(constants::R_gas*T*c.mu_ions_inv());
+  const auto range=source_.lnrho_interval();
+  double guess=std::clamp(std::log(rho_guess),range[0],range[1]);
+  return source_.at_pressure(std::log(T),std::log(P),c,guess,metals_).rho;
+}
+
 EnvelopeSurface EnvelopeAtmosphere::integrate(double Teff, double R, const Composition& c) const {
   using namespace constants;
   const double L = 4 * M_PI * R * R * sigma_SB * std::pow(Teff, 4), g0 = G * M_ / (R * R);
@@ -142,20 +155,23 @@ EnvelopeSurface EnvelopeAtmosphere::integrate(double Teff, double R, const Compo
           +" logg="+std::to_string(std::log10(g0))+": "+error.what());
     }
   }();
-  const double target = M_ - dM_;
-  double lnP = std::log(a.P), lnT = std::log(a.T), r = R, m = M_, lnrho = std::log(a.rho);
+  // Integrate mass measured inward from the surface. Subtracting tiny shell
+  // masses repeatedly from M loses precision in the final mass-depth match.
+  const double target = dM_;
+  double lnP = std::log(a.P), lnT = std::log(a.T), r = R, lnrho = std::log(a.rho);
   EnvelopeSurface out{R, Teff, L, a.T, a.P};
   auto rhs = [&](double lp, const std::array<double,3>& y, double& guess) {
     const double T = std::exp(y[0]), P = std::exp(lp);
     const auto s = at_pressure(y[0], lp, c, guess);
     const double rho = s.rho;
-    const double kappa = opacity_.eval(T, rho, c).kappa, g = G * y[2] / (y[1] * y[1]);
-    const double grad_rad = 3 * kappa * L * P / (16 * M_PI * a_rad * c_light * G * y[2] * T * T * T * T);
+    const double enclosed_mass=M_-y[2];
+    const double kappa = opacity_.eval(T, rho, c).kappa, g = G * enclosed_mass / (y[1] * y[1]);
+    const double grad_rad = 3 * kappa * L * P / (16 * M_PI * a_rad * c_light * G * enclosed_mass * T * T * T * T);
     EosState st{}; st.P = P; st.cp = s.cp; st.delta = s.delta;
     const double U = mixing_length_U(T, rho, kappa, g, st, alpha_);
     const double grad = ledoux_mixing_length_gradient(grad_rad, s.grad_ad, 0., U).grad;
     const double drdlp = -P / (rho * g);
-    return std::array<double,3>{grad, drdlp, 4 * M_PI * y[1] * y[1] * rho * drdlp};
+    return std::array<double,3>{grad, drdlp, -4 * M_PI * y[1] * y[1] * rho * drdlp};
   };
   auto step = [&](double lp, const std::array<double,3>& y, double h, double& guess) {
     auto add = [](const std::array<double,3>& u, const std::array<double,3>& k, double s) { return std::array<double,3>{u[0] + s * k[0], u[1] + s * k[1], u[2] + s * k[2]}; };
@@ -165,12 +181,12 @@ EnvelopeSurface EnvelopeAtmosphere::integrate(double Teff, double R, const Compo
     return n;
   };
   ++integrations_;
-  const double h = 1.0 / per_unit_; std::array<double,3> y{lnT, r, m};
+  const double h = 1.0 / per_unit_; std::array<double,3> y{lnT, r, 0};
   for (std::size_t n = 0; n < 200000; ++n) {
     double guess = lnrho; auto yn = step(lnP, y, h, guess);
-    if (yn[2] <= target) {   // shrink the last step so the base lies exactly at M - dM
+    if (yn[2] >= target) {   // shrink the last step so the base lies exactly at M - dM
       double lo = 0, hi = h, gg = lnrho; std::array<double,3> ym{};
-      for (int it = 0; it < 60; ++it) { const double hm = .5 * (lo + hi); gg = lnrho; ym = step(lnP, y, hm, gg); (ym[2] > target ? lo : hi) = hm; if (hi - lo < 1e-14) break; }
+      for (int it = 0; it < 60; ++it) { const double hm = .5 * (lo + hi); gg = lnrho; ym = step(lnP, y, hm, gg); (ym[2] < target ? lo : hi) = hm; if (hi - lo < 1e-14) break; }
       out.P_base = std::exp(lnP + .5 * (lo + hi)); out.T_base = std::exp(ym[0]); out.r_base = ym[1];
       out.rho_base = at_pressure(ym[0], std::log(out.P_base), c, gg).rho;
       out.steps = n + 1; return out;

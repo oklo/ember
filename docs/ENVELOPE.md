@@ -36,6 +36,15 @@ for Newton iteration. Boundary values are always reintegrated; derivatives refre
 after seven uses or a sufficient state change. The default is zero.
 
 For H/He layers, `envelope_source` can supply a separate thermodynamic table.
+The atmosphere's density inversion then uses that same source and its selected
+metal approximation. Its tabulated temperature and pressure remain unchanged.
+This keeps a cool atmosphere independent of the interior EOS temperature range;
+the envelope still rejects unsupported source states. Analytic gray atmospheres
+require a full EOS and retain their own thermodynamic calculation.
+The native integration accumulates mass inward from the surface to reduce
+roundoff in thin layers. Matched Hayashi and main-sequence checks agree within
+1.196e-12; a 20 Myr cooling check changes luminosity by 0.003599%.
+[Integration checks](results/envelope_density_integration_sept29_v1.json).
 `envelope_map` can instead supply values and derivatives tabulated from native
 integrations for one mass and envelope depth. Neither option extrapolates through
 missing cells or outside composition coverage. These alternatives retain the

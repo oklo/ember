@@ -31,9 +31,23 @@ public:
   PressureState at_pressure(double lnT,double lnP,const Composition&,double& guess,EnvelopeMetals) const;
   std::array<double,2> X_interval() const { return {X_.front(), X_.back()}; }
   std::array<double,2> Y3_interval() const { return {Y3_.front(), Y3_.back()}; }
+  std::array<double,2> lnrho_interval() const { return {lr_[1], lr_[lr_.size()-2]}; }
 private:
   std::vector<double> X_, Y3_, lt_, lr_;
   std::vector<std::array<std::vector<double>,5>> planes_;   // [plane][quantity][iT*nr + ir]
+};
+
+// Density at the top of an integrated source envelope must use that source,
+// not an interior EOS whose supported temperature range may be much hotter.
+class EnvelopeSourceDensity final : public PressureDensity {
+public:
+  EnvelopeSourceDensity(const EnvelopeSource& source, EnvelopeMetals metals)
+      : source_(source), metals_(metals) {}
+  double rho_from_PT(double T, double P, const Composition&,
+                     double rho_guess = 0.0) const override;
+private:
+  const EnvelopeSource& source_;
+  EnvelopeMetals metals_;
 };
 
 struct EnvelopeSurface {
