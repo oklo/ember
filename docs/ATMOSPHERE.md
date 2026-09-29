@@ -382,6 +382,13 @@ total CPU and phase limits remain in force, and the full source checks still
 decide acceptance. Stalled or crashed attempts do not use this recovery.
 [Checks](results/atmosphere_budget_recovery_sept29_v1.json).
 
+New TLUSTY builds save restart profiles at full double precision. The original
+seven-digit output can disturb the small temperature differences that sustain
+nearly adiabatic convection. Rounding an otherwise identical warm profile gives
+a first Newton correction of 4.1%; retaining full precision gives 2e-10 and
+convergence in one iteration. The equations and acceptance checks are unchanged.
+[Restart comparison](results/atmosphere_restart_precision_sept29_v1.json).
+
 
 ### Incomplete hydrogen-atmosphere extensions
 

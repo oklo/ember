@@ -91,6 +91,17 @@
  c
        if(n.eq.2) then
           a11=a(1,1)
+@@ -14144,8 +14158,8 @@
+       END IF
+   501 FORMAT(2I5)
+-  502 FORMAT(1P6E13.6)
+-  503 FORMAT(1P5E15.6)
++  502 FORMAT(1P3E25.16)
++  503 FORMAT(1P3E25.16)
+       RETURN
+       END
+ C
+ C
 @@ -14189,6 +14203,7 @@
           END IF
        END DO

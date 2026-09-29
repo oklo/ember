@@ -1,0 +1,37 @@
+{
+  "change": "TLUSTY OUTPUT writes column mass and state with 17 significant digits instead of 7; equations unchanged.",
+  "conditions": {
+    "effective_temperature_K": 4588,
+    "log_g": 6.3,
+    "depths": 371,
+    "composition": "Nearly pure hydrogen with traces of helium and metals; H3+ chemistry included in this private source control."
+  },
+  "matched_input_control": {
+    "precise_profile_sha256": "e6f0ec1104488cd7bb2f946802158fb1703b532d0c58b805a65282d63193cd97",
+    "rounded_profile_sha256": "0271868c3821d2097fd62519e5890dec1efee55d8d6941cdb1b2f721329dc702",
+    "only_difference": "Round every profile field to seven significant digits. The executable and physical inputs are unchanged; the rounded diagnostic stops after two iterations.",
+    "precise_first_Newton_relative_correction": 2e-10,
+    "rounded_first_Newton_relative_correction": 0.041,
+    "precise_iterations": 1,
+    "precise_CPU_seconds": 10.75,
+    "rounded_control_iterations": 2,
+    "rounded_control_accepted": false
+  },
+  "relative_change_vs_prior_converged_source": {
+    "T": -1.774e-11,
+    "Pgas": 1.704e-10,
+    "source_density": 2.307e-10
+  },
+  "relative_change_on_full_precision_replay": {
+    "T": 4.933e-11,
+    "Pgas": -4.739e-10,
+    "source_density": -6.414e-10
+  },
+  "accepted_replay_flux_error": 1.318e-05,
+  "accepted_replay_chemical_density_error": 2.22e-16,
+  "source_executable_sha256": "66028a69e9d5deb9a29ceafc75ba14233fd2463e7a881dee810e06ce84b81fbd",
+  "source_patch_sha256": "5c85b9fb001151459e7a1ae70333b990f12259bfde8f87af80ac2226d738d425",
+  "public_patch_sha256": "6c490cee7dae1370d052b962d41adda92677a54e236dd341d5dd086d401b398f",
+  "upstream_patch_check": "Applied cleanly to pinned tl208-s54.tar.gz, SHA256 ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a.",
+  "scope": "Restart fidelity only. This does not establish convergence of every warm atmosphere or select the private H3+ tables for stellar evolution."
+}
