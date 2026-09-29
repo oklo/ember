@@ -386,3 +386,19 @@ are unchanged, 28 new queries are supported, and three missing-cell queries
 are rejected. The largest finite-difference derivative error is **2.605e-9**.
 Matching depth remains 100; gas-only and trace-helium assumptions are unchanged.
 [Checks](results/cold_atmosphere_cells_sept27_v1.json).
+
+## Integrated envelope composition
+
+The integrated envelope can use the interior EOS or an explicit H/He source
+via `envelope_eos "interior"` or `envelope_source "path"`. The latter rejects
+non-trace metals unless `envelope_metals "neutral"` or `"ionized"` is selected.
+These options bracket the metals' ideal-gas particle count; they combine H/He
+and metal volumes and heat capacities at common pressure and temperature.
+Radiation is counted once. They are explicit approximations, not a metal EOS.
+Their supported metal mass fraction is at most 0.04.
+
+The H/He envelope source uses a total-hydrogen proxy for deuterium, limited to
+D mass fraction 0.0001. The stellar fuel inventory and nuclear heat are
+unchanged. Unsupported table stencils are rejected. Both source and interior
+EOS envelopes must meet the same bounds on omitted internal heat, work and
+nuclear burning. The selected metal approximation is part of restart identity.

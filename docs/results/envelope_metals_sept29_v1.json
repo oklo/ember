@@ -1,0 +1,20 @@
+{
+  "scope": "Optional ideal-metal contributions to an H/He integrated envelope at common P,T",
+  "metals": [
+    "neutral",
+    "ionized"
+  ],
+  "starting_age_years": 1000000000.0,
+  "comparison_interval_years": 100000.0,
+  "zone_threads": 2,
+  "matched_checkpoint_physics_identical": true,
+  "executable_identity_changed_only_in_private_test": true,
+  "validation": [
+    "analytic ideal-mixture density, heat capacity, expansion and compressibility",
+    "parallel boundary derivatives preserve metal selection",
+    "all existing envelope, Jacobian-reuse and restart tests retained",
+    "unsupported source stencil rejected"
+  ],
+  "source": "Compared against the private build used by the two independent Hayashi-started calculations.",
+  "selected_as_default": false
+}

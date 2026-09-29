@@ -1,4 +1,3 @@
-// PRIVATE PROTOTYPE (P998/P1000/P1001). See include/ember/envelope_atmosphere.hpp.
 #include "ember/envelope_atmosphere.hpp"
 #include "ember/constants.hpp"
 #include "ember/convection.hpp"
@@ -37,7 +36,7 @@ EnvelopeSource::EnvelopeSource(const std::string& path) {
   planes_.resize(nx * ny);
   for (auto& p : planes_) for (auto& q : p) read(q, nt * nr);
   for (const auto* a : {&X_, &Y3_, &lt_, &lr_}) for (std::size_t i = 1; i < a->size(); ++i) require((*a)[i] > (*a)[i - 1], "unordered axis");
-  // Catmull-Rom weights assume uniform spacing in ln T and ln rho (P1006): verify rather than assume.
+  // Catmull-Rom weights assume uniform spacing in ln T and ln rho: verify rather than assume.
   for (const auto* a : {&lt_, &lr_}) {
     const double h = ((*a).back() - (*a).front()) / static_cast<double>(a->size() - 1);
     for (std::size_t i = 1; i < a->size(); ++i) require(std::abs((*a)[i] - (*a)[i - 1] - h) <= 1e-9 * std::abs(h), "nonuniform ln T or ln rho axis");
@@ -59,6 +58,11 @@ EnvelopeSource::State EnvelopeSource::eval(double lnT, double lnrho, double X, d
   for (int dx = 0; dx < 2; ++dx) for (int dy = 0; dy < 2; ++dy) {
     const double w = (dx ? fx : 1 - fx) * (dy ? fy : 1 - fy); if (w == 0) continue;
     const std::size_t plane = (ix + dx) * Y3_.size() + (iy + dy);
+    // Explicit support: never interpolate across a nonpositive source response.
+    const auto it=cell(lt_,lnT,"temperature outside source"),ir=cell(lr_,lnrho,"density outside source");
+    for(int a=0;a<4;++a)for(int b=0;b<4;++b)for(std::size_t q=1;q<5;++q)
+      require(planes_[plane][q][(it-1+a)*lr_.size()+ir-1+b]>0,
+              "unsupported envelope-source response stencil");
     for (std::size_t q = 0; q < 5; ++q) v[q] += w * plane_value(plane, q, lnT, lnrho);
   }
   return {v[0], v[1], v[2], v[3], v[4]};
@@ -75,8 +79,8 @@ double EnvelopeSource::lnrho_from(double lnT, double lnP, double X, double Y3, d
 }
 
 EnvelopeAtmosphere::EnvelopeAtmosphere(const Atmosphere& top, const Opacity& opacity, const EnvelopeSource& source,
-    double alpha_mlt, double total_mass, double envelope_mass, double steps_per_unit_lnP)
-    : top_(top), opacity_(opacity), source_(&source), alpha_(alpha_mlt), M_(total_mass), dM_(envelope_mass), per_unit_(steps_per_unit_lnP) {
+    double alpha_mlt, double total_mass, double envelope_mass, double steps_per_unit_lnP, EnvelopeMetals metals)
+    : top_(top), opacity_(opacity), source_(&source), metals_(metals), alpha_(alpha_mlt), M_(total_mass), dM_(envelope_mass), per_unit_(steps_per_unit_lnP) {
   require(alpha_ > 0 && M_ > 0 && dM_ > 0 && dM_ < 0.05 * M_ && per_unit_ >= 10, "invalid envelope parameters");
 }
 
@@ -89,16 +93,43 @@ EnvelopeAtmosphere::EnvelopeAtmosphere(const Atmosphere& top, const Opacity& opa
 
 EnvelopeSource::PressureState EnvelopeAtmosphere::at_pressure(double lnT,double lnP,
     const Composition& c,double& guess) const {
-  if(source_) {
-    require(c.Z()<=max_Z && c[Species::H2]==0,"source envelope requires trace metals and no deuterium");
-    guess=source_->lnrho_from(lnT,lnP,c.X[0],c.X[1],guess);
-    const auto state=source_->eval(lnT,guess,c.X[0],c.X[1]);
-    return {std::exp(guess),state.cp,state.delta,state.grad_ad,state.chiRho};
-  }
+  if(source_)return source_->at_pressure(lnT,lnP,c,guess,metals_);
   const double T=std::exp(lnT),P=std::exp(lnP);
   const double rho=eos_->rho_from_PT(T,P,c,std::exp(guess));guess=std::log(rho);
   const auto state=eos_->eval(T,rho,c);
   return {rho,state.cp,state.delta,state.grad_ad,state.chiRho};
+}
+
+EnvelopeSource::PressureState EnvelopeSource::at_pressure(double lnT, double lnP,
+    const Composition& c, double& guess, EnvelopeMetals metals) const {
+  using namespace constants;
+  const double Z=c.Z(), D=c[Species::H2];
+  require(std::isfinite(c.sum()) && std::abs(c.sum()-1)<1e-10
+      && Z>=0 && Z<=.04 && D>=0 && D<=1e-4, "unsupported layer composition");
+  for(double x:c.X)require(std::isfinite(x) && x>=0, "invalid layer abundance");
+  require(metals!=EnvelopeMetals::reject || Z<=EnvelopeAtmosphere::max_Z,
+      "metal fraction too large for the H/He-only layer source");
+  // Preserve the previously selected trace-metal approximation in reject mode.
+  // D uses the same total-H mass proxy as the top atmosphere; fuel is untouched.
+  const double weight=metals==EnvelopeMetals::reject?1:1-Z;
+  guess=lnrho_from(lnT,lnP,(c.X[0]+D)/weight,c.X[1]/weight,guess);
+  const auto hh=eval(lnT,guess,(c.X[0]+D)/weight,c.X[1]/weight);
+  const double rh=std::exp(guess);
+  if(metals==EnvelopeMetals::reject || Z==0)return {rh,hh.cp,hh.delta,hh.grad_ad,hh.chiRho};
+  const double T=std::exp(lnT),P=std::exp(lnP),Pr=a_rad*std::pow(T,4)/3,Pg=P-Pr;
+  require(Pg>0 && hh.cp>0 && hh.delta>0 && hh.chiRho>0, "invalid layer thermodynamics");
+  double particles=0;
+  if(c.metal_inventory==MetalInventory::gs98)
+    particles=c.metal_ion_moment(0)+(metals==EnvelopeMetals::ionized?c.metal_ion_moment(1):0);
+  else for(std::size_t k=METAL_BEGIN;k<METAL_END;++k)
+    particles+=c.X[k]/Z/c.abundance_weight(k)*(1+(metals==EnvelopeMetals::ionized?nuclides[k].Z:0));
+  const double Rz=R_gas*particles, vz=Rz*T/Pg;
+  const double dz=1+4*Pr/Pg, cz=2.5*Rz+4*Pr*vz/T*(4+dz);
+  // Add Gibbs free energies at common TOTAL P,T. Each component includes
+  // radiation, so their mass-weighted volume carries radiation exactly once.
+  const double vh=weight/rh, vm=Z*vz, v=vh+vm;
+  const double cp=weight*hh.cp+Z*cz, delta=(vh*hh.delta+vm*dz)/v;
+  return {1/v,cp,delta,P*v*delta/(T*cp),v/(vh/hh.chiRho+vm*P/Pg)};
 }
 
 EnvelopeSurface EnvelopeAtmosphere::integrate(double Teff, double R, const Composition& c) const {
@@ -239,7 +270,7 @@ EnvelopeSurface EnvelopeAtmosphere::solve(double L, double r_b, const Compositio
 }
 
 EnvelopeSurface EnvelopeAtmosphere::photosphere(double Teff_b, double g_b, const Composition& c) const {
-  require(eos_ || c.Z() <= max_Z, "metal fraction too large for the H/He-only layer source");
+  require(eos_ || metals_!=EnvelopeMetals::reject || c.Z() <= max_Z, "metal fraction too large for the H/He-only layer source");
   using namespace constants;
   const double r_b = std::sqrt(G * M_ / g_b), L = 4 * M_PI * r_b * r_b * sigma_SB * std::pow(Teff_b, 4);
   return solve(L, r_b, c);
@@ -268,7 +299,7 @@ AtmosphereState EnvelopeAtmosphere::eval_value(double Teff_b, double g_b, const 
 }
 
 AtmosphereState EnvelopeAtmosphere::eval(double Teff_b, double g_b, const Composition& c) const {
-  require(eos_ || c.Z() <= max_Z, "metal fraction too large for the H/He-only layer source");
+  require(eos_ || metals_!=EnvelopeMetals::reject || c.Z() <= max_Z, "metal fraction too large for the H/He-only layer source");
   const auto s = photosphere(Teff_b, g_b, c);
   AtmosphereState out{};
   out.T=s.T_base;out.P=s.P_base;out.rho=s.rho_base;
@@ -309,7 +340,7 @@ AtmosphereState EnvelopeAtmosphere::eval(double Teff_b, double g_b, const Compos
       integrations_.fetch_add(local.integrations());
     };
     if(eos_) {EnvelopeAtmosphere local(top_,opacity_,*eos_,alpha_,M_,dM_,per_unit_);evaluate(local);}
-    else {EnvelopeAtmosphere local(top_,opacity_,*source_,alpha_,M_,dM_,per_unit_);evaluate(local);}
+    else {EnvelopeAtmosphere local(top_,opacity_,*source_,alpha_,M_,dM_,per_unit_,metals_);evaluate(local);}
   };
   if(workers==1)work(0);
   else detail::evaluation_workers().run(workers,[&](std::size_t worker) {

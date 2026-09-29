@@ -3,6 +3,9 @@
 #include "ember/eos.hpp"
 #include "ember/constants.hpp"
 #include <iostream>
+#include <filesystem>
+#include <fstream>
+#include <iomanip>
 
 using namespace ember;
 namespace {
@@ -143,6 +146,73 @@ int main() {
     rejected=false;
     try{restarted.eval(pseudo*1.1,g,c);}catch(const std::domain_error&){rejected=true;}
     check(rejected,"Jacobian reuse never bypasses boundary-value domain checks");
+
+    // An independent ideal-gas limit: exact source nodes in composition and
+    // log-linear P(T,rho), so interpolated H/He has an analytic mixture answer.
+    const auto file=std::filesystem::temp_directory_path()/"ember-envelope-ideal-source.txt";
+    struct Remove {std::filesystem::path p;~Remove(){std::filesystem::remove(p);}} remove{file};
+    const std::array<double,3> xs{.6,.7,.8};const std::array<double,2> ys{0,.02};
+    std::array<double,6> lt{},lr{};
+    for(int i=0;i<6;++i){lt[i]=std::log(1e2)+i*std::log(10.);lr[i]=std::log(1e-10)+i*std::log(100.);}
+    {std::ofstream out(file);out<<std::setprecision(17)<<"EMBER_ENVELOPE_SOURCE_V1\n3 2 6 6\n";
+      for(auto axis:{std::vector<double>(xs.begin(),xs.end()),std::vector<double>(ys.begin(),ys.end()),
+                     std::vector<double>(lt.begin(),lt.end()),std::vector<double>(lr.begin(),lr.end())}) {
+        for(double v:axis)out<<v<<' ';out<<'\n';
+      }
+      for(double X:xs)for(double Y:ys) {
+        const double gas_constant=constants::R_gas*(2*X+Y+.75*(1-X-Y));
+        for(int q=0;q<5;++q)for(double t:lt)for(double r:lr)
+          out<<(q==0?t+r+std::log(gas_constant):q==1?.4:q==2?2.5*gas_constant:1)<<'\n';
+      }
+    }
+    EnvelopeSource source(file.string());
+    Composition mixture{};mixture.basis=AbundanceBasis::baryon_mass;
+    mixture[Species::H1]=.98*.7;mixture[Species::He3]=.98*.02;
+    mixture[Species::He4]=.98*.28;mixture[Species::O16]=.02;
+    const double T=1e4,P=1e10,Rh=constants::R_gas*(2*.7+.02+.75*.28);
+    for(auto mode:{EnvelopeMetals::neutral,EnvelopeMetals::ionized}) {
+      double guess=std::log(.01);const auto s=source.at_pressure(std::log(T),std::log(P),mixture,guess,mode);
+      const double gas_constant=.98*Rh+.02*constants::R_gas*(mode==EnvelopeMetals::neutral?1:9)/16;
+      check(std::abs(s.rho/(P/(gas_constant*T))-1)<1e-7 && std::abs(s.cp/(2.5*gas_constant)-1)<1e-7,
+            "metal mixture recovers independent ideal-gas density and heat capacity");
+      check(std::abs(s.grad_ad-.4)<1e-7 && std::abs(s.chiRho-1)<1e-7,
+            "metal mixture recovers ideal-gas convection and compressibility");
+      constexpr double h=1e-5;double gp=guess,gm=guess;
+      const auto plus=source.at_pressure(std::log(T)+h,std::log(P),mixture,gp,mode);
+      const auto minus=source.at_pressure(std::log(T)-h,std::log(P),mixture,gm,mode);
+      const double fd=-(std::log(plus.rho)-std::log(minus.rho))/(2*h);
+      check(std::abs(fd-s.delta)<1e-7,"thermal expansion agrees with density differences",fd-s.delta);
+      gp=gm=guess;
+      const auto pp=source.at_pressure(std::log(T),std::log(P)+h,mixture,gp,mode);
+      const auto pm=source.at_pressure(std::log(T),std::log(P)-h,mixture,gm,mode);
+      const double fdP=(std::log(pp.rho)-std::log(pm.rho))/(2*h);
+      check(std::abs(fdP-1/s.chiRho)<1e-7,"compressibility agrees with density differences",fdP-1/s.chiRho);
+    }
+    for(auto mode:{EnvelopeMetals::neutral,EnvelopeMetals::ionized}) {
+      EnvelopeAtmosphere layer(boundary,opacity,source,1.9,M,.00015*M,20,mode);
+      const double layer_radius=1.6*constants::Rsun;
+      const auto surface=layer.from_photosphere(Teff,layer_radius,mixture);
+      const double tb=Teff*std::sqrt(layer_radius/surface.r_base),gb=constants::G*M/(surface.r_base*surface.r_base);
+      layer.evaluation_threads(1);const auto one=layer.eval(tb,gb,mixture);
+      layer.evaluation_threads(2);const auto two=layer.eval(tb,gb,mixture);
+      check(std::abs(one.T/two.T-1)<1e-12 && std::abs(one.dlnT_dlnTeff-two.dlnT_dlnTeff)<1e-10,
+            "parallel boundary derivatives retain the selected metal approximation");
+    }
+    double guess=std::log(.01);rejected=false;
+    try{source.at_pressure(std::log(T),std::log(P),mixture,guess,EnvelopeMetals::reject);}
+    catch(const std::domain_error&){rejected=true;}
+    check(rejected,"metal approximation requires explicit selection");
+    // A missing source node must not be smoothed into a supported query.
+    const auto masked_file=std::filesystem::path(file.string()+".masked");
+    Remove remove_masked{masked_file};
+    std::ifstream input(file);std::vector<std::string> lines;std::string line;
+    while(std::getline(input,line))lines.push_back(line);
+    lines[6+3*5*36+2*36+2*6+3]="0";
+    {std::ofstream output(masked_file);for(const auto& value:lines)output<<value<<'\n';}
+    EnvelopeSource masked(masked_file.string());rejected=false;
+    try{masked.eval(std::log(1e4),std::log(.001),.7,.02);}
+    catch(const std::domain_error&){rejected=true;}
+    check(rejected,"missing envelope source response is rejected across its interpolation stencil");
 
   }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
   return failed?1:0;

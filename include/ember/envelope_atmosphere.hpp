@@ -18,6 +18,8 @@
 
 namespace ember {
 
+enum class EnvelopeMetals { reject, neutral, ionized };
+
 class EnvelopeSource {
 public:
   explicit EnvelopeSource(const std::string& path);
@@ -26,6 +28,7 @@ public:
   State eval(double lnT, double lnrho, double X, double Y3) const;
   double lnrho_from(double lnT, double lnP, double X, double Y3, double guess) const;
   struct PressureState { double rho, cp, delta, grad_ad, chiRho; };
+  PressureState at_pressure(double lnT,double lnP,const Composition&,double& guess,EnvelopeMetals) const;
   std::array<double,2> X_interval() const { return {X_.front(), X_.back()}; }
   std::array<double,2> Y3_interval() const { return {Y3_.front(), Y3_.back()}; }
 private:
@@ -43,7 +46,8 @@ struct EnvelopeSurface {
 class EnvelopeAtmosphere final : public Atmosphere {
 public:
   EnvelopeAtmosphere(const Atmosphere& top, const Opacity& opacity, const EnvelopeSource& source,
-                     double alpha_mlt, double total_mass, double envelope_mass, double steps_per_unit_lnP = 40);
+                     double alpha_mlt, double total_mass, double envelope_mass, double steps_per_unit_lnP = 40,
+                     EnvelopeMetals metals = EnvelopeMetals::reject);
   EnvelopeAtmosphere(const Atmosphere& top, const Opacity& opacity, const Eos& eos,
                      double alpha_mlt, double total_mass, double envelope_mass, double steps_per_unit_lnP = 40);
   AtmosphereState eval(double Teff_b, double g_b, const Composition&) const override;
@@ -75,6 +79,7 @@ private:
   EnvelopeSource::PressureState at_pressure(double lnT,double lnP,const Composition&,double& guess) const;
   const Atmosphere& top_; const Opacity& opacity_;
   const EnvelopeSource* source_{};
+  EnvelopeMetals metals_{EnvelopeMetals::reject};
   const Eos* eos_{};
   double alpha_, M_, dM_, per_unit_;
   std::size_t threads_{1};

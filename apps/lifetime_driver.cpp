@@ -232,6 +232,10 @@ int lifetime_main(int argc,char** argv) {
     const auto envelope_eos=cfg.values.contains("envelope_eos")?cfg.get("envelope_eos"):"";
     if(!envelope_eos.empty() && (envelope_eos!="interior" || !envelope_source_path.empty()))
       throw std::invalid_argument("envelope EOS must be interior, without a separate layer source");
+    const auto envelope_metals=cfg.values.contains("envelope_metals")?cfg.get("envelope_metals"):"reject";
+    if((envelope_metals!="reject" && envelope_metals!="neutral" && envelope_metals!="ionized")
+        || (envelope_metals!="reject" && envelope_source_path.empty()))
+      throw std::invalid_argument("invalid envelope metal approximation");
     const bool direct_envelope=!envelope_source_path.empty() || envelope_eos=="interior";
     const double envelope_fraction=cfg.values.contains("envelope_mass_fraction")?cfg.number("envelope_mass_fraction"):0;
     if(direct_envelope && (deep_envelope
@@ -265,6 +269,7 @@ int lifetime_main(int argc,char** argv) {
       identity.values["atmosphere.envelope_thermal"]="base_state_reservoir.v1";
     }
     if(direct_envelope) {
+      if(envelope_metals!="reject")identity.values["atmosphere.envelope_metals"]=envelope_metals+".additive_volume.v1";
       if(!envelope_source_path.empty())identity.file("atmosphere.envelope_source",envelope_source_path);
       else identity.values["atmosphere.envelope_eos"]="interior.v1";
       identity.number("atmosphere.envelope_mass",selected_envelope_mass);
@@ -451,7 +456,8 @@ int lifetime_main(int argc,char** argv) {
     if(!envelope_source_path.empty()) {
       envelope_source=std::make_unique<EnvelopeSource>(envelope_source_path.string());
       native_envelope=std::make_unique<EnvelopeAtmosphere>(thin_atmosphere,combined,*envelope_source,
-          1.9,mass,selected_envelope_mass,20);
+          1.9,mass,selected_envelope_mass,20,envelope_metals=="neutral"?EnvelopeMetals::neutral
+          :(envelope_metals=="ionized"?EnvelopeMetals::ionized:EnvelopeMetals::reject));
     }
     if(envelope_eos=="interior")native_envelope=std::make_unique<EnvelopeAtmosphere>(
         thin_atmosphere,combined,eos,1.9,mass,selected_envelope_mass,20);
@@ -588,7 +594,7 @@ int lifetime_main(int argc,char** argv) {
     };
     hooks.audit=[&](const Model& old,const EvolutionStep& step,double duration) {
       auto audit=check_interval(old,step,duration,nuclear,inventory_tolerance);
-      if(envelope_eos=="interior" && selected_envelope_mass>0) {
+      if(native_envelope && selected_envelope_mass>0) {
         const auto& m=step.model;const auto i=m.size()-1;
         const auto a=eos.eval(old.T(i),old.rho(i),old.comp[i]);
         const auto b=eos.eval(m.T(i),m.rho(i),m.comp[i]);
@@ -608,11 +614,11 @@ int lifetime_main(int argc,char** argv) {
     hooks.assess=[&](const Model& m,std::span<const std::array<double,3>> rates) {
       if(selected_envelope_mass>0) {
         const double minimum_envelope_T=native_envelope?1e4:(cold_eos_path.empty()?2e5:3e5);
-        const double maximum_envelope_T=envelope_eos=="interior"?2e6:1e6;
+        const double maximum_envelope_T=native_envelope?2e6:1e6;
         if(m.T(m.size()-1)<minimum_envelope_T || m.T(m.size()-1)>maximum_envelope_T)
           throw std::domain_error("envelope base outside assessed thermal regime");
         envelope_maximum_base_T=std::max(envelope_maximum_base_T,m.T(m.size()-1));
-        if(envelope_eos=="interior" && m.T(m.size()-1)>1e6) {
+        if(native_envelope && m.T(m.size()-1)>1e6) {
           const double fraction=selected_envelope_mass*std::abs(nuclear.eval(m.T(m.size()-1),m.rho(m.size()-1),m.comp.back()).eps)/m.y.back().L;
           if(!std::isfinite(fraction) || fraction>.0001)
             throw std::domain_error("native envelope nuclear reservoir exceeds assessed heating fraction");
