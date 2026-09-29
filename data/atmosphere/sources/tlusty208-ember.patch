@@ -218,7 +218,42 @@
                 WM(ID,ID+1)=WM(ID,ID+1)+RDELM*DHCDTP
              END IF
              WR(ID)=WR(ID)-RDELM*(FLXCNV-FLXC(ID))
-@@ -47766,8 +47775,12 @@
+@@ -47416,19 +47425,24 @@
+             CALL CONVEC(ID,T0,P0,p0-pr0,pr0,AB0,DLT,FLXCNV,VCON)
+             if(flxcnv.le.0.) go to 10
+                DHCDDP=0.
+-               IF(DELMDE.GT.0.) DHCDDP=1.5D0/DELMDE*FLXCNV
+-               T1=1.001D0*T0
++               IF(DELMDE.GT.0.) THEN
++                  BB=BCNV*HALF
++                  CORD=UN-BB/SQRT(BB*BB+(DLT-GRDADB))
++                  DHCDDP=1.5D0/DELMDE*FLXCNV*CORD
++               END IF
++               T1=(UN+DERT)*T0
+                CALL CONVEC(ID,T1,P0,p0-pr0,pr0,AB0,DLT,FLXC1,VCON)
+-               DHCDTP=(FLXC1-FLXCNV)*1.D3/T0*HALF+DHCDDP*DDTP0
+-C
+-C           additional terms in matrices A and B (the row corresponding to
+-C           energy balance, i.e. T) due to convection
+-C
++               DHCDT0=(FLXC1-FLXCNV)*HALF/DERT
++               DHCDTP=DHCDT0/TP+DHCDDP*DDTP0
++               DHCDTU=DHCDT0/T+DHCDDP*DDTPM
++C
++C              The bottom residual uses the last face and the span
++C              from ID-2 to ID. Differentiate all three temperatures.
+                DELM=(DM(ID)-DM(ID-2))*HALF
+                RDELM=DENS(ID)/DELM*reint(id)
+-               DELHC=WMM(ID)/DELM*(FLXCNV-FLXC(ID))
+-               WM(ID,ID-1)=WM(ID,ID-1)+RDELM*(DHCDT-DHCDTP)
+-               WM(ID,ID)=WM(ID,ID)+RDELM*DHCDT
++               WM(ID,ID-2)=WM(ID,ID-2)-RDELM*DHCDTP
++               WM(ID,ID-1)=WM(ID,ID-1)+RDELM*DHCDTM
++               WM(ID,ID)=WM(ID,ID)+RDELM*(DHCDT-DHCDTU)
+                WR(ID)=WR(ID)-RDELM*(FLXC(ID)-FLXCNV)
+             END IF
+          END IF
+@@ -47766,8 +47780,12 @@
                 ELEC(ID)=ELEC0(ID)
                 DENS(ID)=DENS0(ID)
                 T=TEMP(ID)
@@ -232,7 +267,7 @@
              END DO
            ELSE
              call pgset(1)
-@@ -47795,6 +47808,7 @@
+@@ -47795,6 +47813,7 @@
  C
        CALL OPACF1(IJ)
        DO ID=1,ND
@@ -240,7 +275,7 @@
           ABSO1(ID)=ABSO1(ID)/DENS(ID)
           SCAT1(ID)=SCAT1(ID)/DENS(ID)
           EMIS1(ID)=EMIS1(ID)/DENS(ID)
-@@ -50007,3 +50021,18 @@
+@@ -50007,3 +50026,18 @@
        END
  
  

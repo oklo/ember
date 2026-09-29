@@ -1,0 +1,72 @@
+{
+  "scope": "Convection Jacobian and upper-layer coverage; no change to the bottom heat-balance residual or source acceptance checks.",
+  "parent_executable_sha256": "afdca4da2bbef23946d3103dcacac128ec4d27b868ba785063fe2a2ac4268510",
+  "candidate_executable_sha256": "a278ea67ad7b8e9843413b9f26eabf1b7eb9b7c50ad18a6f73cc4ad5fac2de9d",
+  "upstream_archive_sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a",
+  "jacobian_checks": [
+    {
+      "state": "audit4600",
+      "log_temperature_perturbation": 1e-09,
+      "component_relative_errors": [
+        2.64e-06,
+        1.26e-07,
+        7.74e-08
+      ],
+      "previous_missing_column_derivative": 0,
+      "finite_difference_for_missing_column": 237900000000000.0
+    },
+    {
+      "state": "audit4800_valid",
+      "log_temperature_perturbation": 1e-07,
+      "component_relative_errors": [
+        7.866e-07,
+        1.476e-07,
+        8.001e-08
+      ],
+      "previous_missing_column_derivative": 0,
+      "finite_difference_for_missing_column": 407200000000000.0
+    }
+  ],
+  "perturbed_control": {
+    "Teff_K": 4600,
+    "log_g": 6.3,
+    "last_three_temperature_factors": 1.001,
+    "accepted_before": true,
+    "accepted_after": true,
+    "CPU_seconds_before": 55.04,
+    "CPU_seconds_after": 54.77,
+    "iterations_before": 8,
+    "iterations_after": 8,
+    "boundary_relative_changes": {
+      "T": 1.216e-11,
+      "Pgas": -1.174e-10,
+      "source_density": -1.586e-10
+    }
+  },
+  "upper_layer_controls": [
+    {
+      "name": "control4600",
+      "CPU_seconds": 10.56,
+      "relative_boundary_changes": {
+        "T": 2.84e-11,
+        "Pgas": -2.741e-10,
+        "source_density": -3.702e-10
+      }
+    },
+    {
+      "name": "control2000",
+      "CPU_seconds": 52.21,
+      "relative_boundary_changes": {
+        "T": -5.331e-11,
+        "Pgas": 5.186e-10,
+        "source_density": 5.781e-10
+      }
+    }
+  ],
+  "limits": [
+    "Derivative check holds pressure, opacity and the density prefactor fixed, as in the convection contribution to the native Jacobian.",
+    "A large perturbation crosses the convective threshold and does not measure a local derivative.",
+    "No speed-up measured in the recovery control; this does not establish convergence of every warm atmosphere.",
+    "Controls use the private candidate H3+ source; the public change adds no H3+ physics."
+  ]
+}

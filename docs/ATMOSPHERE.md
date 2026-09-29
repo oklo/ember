@@ -398,6 +398,15 @@ pressure by at most 0.03090%. These are two source comparisons, not a cooling-ag
 error bound. Existing tables retain their recorded source identity.
 [Infrared comparison](results/atmosphere_infrared_loading_sept29_v1.json).
 
+The bottom convection Jacobian differentiates all three temperatures used by
+its heat-balance equation. Independent local checks agree within 2.640e-6;
+a perturbed 4600 K column returns to the same boundary in eight iterations
+with either Jacobian. This corrects the linearization without a measured
+speed-up in that control. New inputs also include convection from layer 2,
+so the solve and the final flux diagnostic cover the same interior faces.
+The 2000 K and 4600 K controls retain their boundary values within 5.782e-10.
+[Convection checks](results/atmosphere_convection_jacobian_sept29_v1.json).
+
 ### Incomplete hydrogen-atmosphere extensions
 
 Version 2 of `EMBER_HYDROGEN_DOMINATED_ATMOSPHERE` permits missing vertices.

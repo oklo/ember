@@ -23,6 +23,15 @@ from assemble_nongrey_grid import complete_cells
 
 
 class SourceAcceptance(unittest.TestCase):
+    def assert_patch_digest(self, path, expected):
+        # Archived calculations retain their own source version when the
+        # current patch advances. Verify those bytes rather than relabel them.
+        contents = path.read_bytes()
+        if hashlib.sha256(contents).hexdigest() != expected:
+            archive = path.parent/"nongrey_validation"/f"{expected}.patch.gz"
+            contents = gzip.decompress(archive.read_bytes())
+        self.assertEqual(hashlib.sha256(contents).hexdigest(), expected)
+
     def test_numerical_solver_comparison_requires_unchanged_evidence(self):
         from extend_mixed_atmosphere import numerical_variants
         with tempfile.TemporaryDirectory() as directory:
@@ -659,7 +668,7 @@ class SourceAcceptance(unittest.TestCase):
         for name,expected in manifest["archive_files_sha256"].items():
             self.assertEqual(hashlib.sha256((root/name).read_bytes()).hexdigest(),expected,name)
         for name,expected in manifest["provenance"]["patches"].items():
-            self.assertEqual(hashlib.sha256((data/"sources"/name).read_bytes()).hexdigest(),expected,name)
+            self.assert_patch_digest(data/"sources"/name, expected)
         with tempfile.TemporaryDirectory() as temporary:
             d=Path(temporary)
             records=import_grid(root/"manifest.json",d/"grid.dat")
@@ -730,8 +739,8 @@ class SourceAcceptance(unittest.TestCase):
         root=Path(__file__).resolve().parents[1]
         report=json.loads((root/"docs/results/nongrey_opacity_derivative.json").read_text())
         sources=root/"data/atmosphere/sources/nongrey_validation"
-        self.assertEqual(hashlib.sha256((sources.parent/"tlusty208-ember.patch").read_bytes()).hexdigest(),
-                         report["corrected_patch_sha256"])
+        self.assert_patch_digest(sources.parent/"tlusty208-ember.patch",
+                                 report["corrected_patch_sha256"])
         for name,expected in report["files"].items():
             self.assertEqual(hashlib.sha256((sources/name).read_bytes()).hexdigest(),expected)
         self.assertEqual(hashlib.sha256((root/"scripts/nongrey_opacity_derivative_probe.f").read_bytes()).hexdigest(),

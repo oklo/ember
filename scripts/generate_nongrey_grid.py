@@ -292,6 +292,9 @@ def atmosphere_inputs(directory, prepared, spec, table, abundance, masses, teff,
         # Only the final independent diagnostics can validate a grid cell.
         f"ND={spec['depths']},NITER=200,CHMAX={chmax},ILGDER=1,IPRIND=2\n"
         f"DPSILT={spec.get('temperature_step_limit', 1.03)},DERT={spec.get('convection_derivative_step',.001)}\n"
+        # Solve convection at every interior face, including surface layers.
+        # Restrict the optional initial-refinement gap search to one layer.
+        "IDCONZ=2,NDCGAP=1\n"
         f"TAUFIR={spec['tau_top']},TAULAS={spec['tau_bottom']},TAUDIV={balance_tau}\n")
     # Explicit numerical control for source comparisons. Omit it by default
     # so existing input bytes and completed-run fingerprints remain unchanged.
