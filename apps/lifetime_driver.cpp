@@ -588,8 +588,7 @@ int lifetime_main(int argc,char** argv) {
     };
     hooks.audit=[&](const Model& old,const EvolutionStep& step,double duration) {
       auto audit=check_interval(old,step,duration,nuclear,inventory_tolerance);
-      if(envelope_eos=="interior" && selected_envelope_mass>0
-          && std::max(old.T(old.size()-1),step.model.T(step.model.size()-1))>1e6) {
+      if(envelope_eos=="interior" && selected_envelope_mass>0) {
         const auto& m=step.model;const auto i=m.size()-1;
         const auto a=eos.eval(old.T(i),old.rho(i),old.comp[i]);
         const auto b=eos.eval(m.T(i),m.rho(i),m.comp[i]);

@@ -21,9 +21,9 @@ Luminosity and composition are uniform through the integrated layer. Its thermal
 energy is represented by the base state, so this approximation needs assessment
 when the envelope supplies appreciable luminosity. The driver requires a connected
 convective base. Native interior-EOS envelopes currently allow base temperatures
-from10kK to2MK. Above1MK, the absolute reservoir energy change plus pressure work
-must stay below0.1% of luminosity per interval; base nuclear power times the layer
-mass must stay below0.01%. These diagnostics supplement conservation checks and
+from10kK to2MK. The absolute reservoir energy change plus pressure work must stay
+below0.1% of luminosity per interval, including when the base is cooler than1MK.
+Above1MK, base nuclear power times the layer mass must stay below0.01%. These diagnostics supplement conservation checks and
 are not a universal bound on the spatial approximation.
 
 `envelope_jacobian_radius "0.001"` optionally reuses nearby boundary derivatives
