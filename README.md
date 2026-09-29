@@ -13,8 +13,8 @@ and helium-white-dwarf cooling.
 - Double precision and CPU parallelism optimized for Apple silicon.
 
 The code is under development. Full CNO, grain-bearing stellar atmospheres,
-crystallization and extreme-cold evolution remain unfinished. The integrated
-cooling-envelope implementation and some required tables are still local.
+crystallization and extreme-cold evolution remain unfinished. Some tables
+required for the cooling calculations are still local.
 See [physics and limitations](docs/COLD_REMNANT.md).
 
 ## Build

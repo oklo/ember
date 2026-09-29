@@ -32,9 +32,9 @@ independent element velocities. The nuclear network is not full CNO.
    lifetime and retain stable baryons as an alternative.
 5. Extend the mass/composition survey across the stellar–brown-dwarf boundary.
 
-The integrated cooling envelope and some source tables remain local research
-components. The final physics has not yet been validated in one uninterrupted
-calculation. No extreme-cold cooling age or proton-decay track is claimed.
+Some source tables remain local research inputs. The final physics has not yet
+been validated in one uninterrupted calculation. No extreme-cold cooling age
+or proton-decay track is claimed.
 
 [Atmospheres](ATMOSPHERE.md) · [Dense EOS](DENSE_EOS.md) ·
 [Nuclear network](NUCLEAR.md) · [Grains](GRAINS.md) ·
