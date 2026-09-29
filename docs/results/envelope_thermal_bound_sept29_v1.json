@@ -1,0 +1,22 @@
+{
+  "scope": "Configurable assessment of the unresolved envelope reservoir; the default and full-star conservation checks are unchanged.",
+  "default_fraction": 0.001,
+  "maximum_fraction": 0.005,
+  "limited_by_time_energy_tolerance": true,
+  "restart_identity_checked": true,
+  "invalid_or_changed_identity_cases_passed": 6,
+  "lifetime_restart_test_passed": true,
+  "lifetime_restart_test_seconds": 103.2,
+  "stellar_check": {
+    "mass_Msun": 0.1,
+    "interval_Myr": 20,
+    "accepted_intervals": 20,
+    "maximum_reservoir_scale_over_luminosity": 0.001406,
+    "final_reservoir_scale_over_luminosity": 0.00008186,
+    "main_Newton_residual_tolerances_compared": [1e-9, 1e-8],
+    "largest_global_relative_difference": 1.153e-12,
+    "selected_main_Newton_residual_tolerance": 1e-9,
+    "conservation_checks_unchanged": true
+  },
+  "limitation": "The stellar comparison tests numerical robustness, not the exact spatial error of representing the outer layer at its base state. Applications still require an envelope assessment."
+}

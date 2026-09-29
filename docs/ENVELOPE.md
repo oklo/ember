@@ -21,10 +21,15 @@ Luminosity and composition are uniform through the integrated layer. Its thermal
 energy is represented by the base state, so this approximation needs assessment
 when the envelope supplies appreciable luminosity. The driver requires a connected
 convective base. Native interior-EOS envelopes currently allow base temperatures
-from10kK to2MK. The absolute reservoir energy change plus pressure work must stay
-below0.1% of luminosity per interval, including when the base is cooler than1MK.
-Above1MK, base nuclear power times the layer mass must stay below0.01%. These diagnostics supplement conservation checks and
-are not a universal bound on the spatial approximation.
+from 10 kK to 2 MK. By default, the absolute reservoir energy change plus pressure
+work must stay below 0.1% of luminosity per interval, including below 1 MK.
+`envelope_thermal_fraction_limit` can change this assessment bound after a
+resolved-envelope or evolution comparison. It cannot exceed the selected time
+energy tolerance or 0.5%, and is part of the restart identity. The run records
+both the bound and the largest assessed fraction. Failed solves are excluded;
+conservation checks remain unchanged. Above 1 MK, base nuclear power times the
+layer mass must stay below 0.01%. These estimates are not universal bounds on
+the spatial approximation.
 
 `envelope_jacobian_radius "0.001"` optionally reuses nearby boundary derivatives
 for Newton iteration. Boundary values are always reintegrated; derivatives refresh

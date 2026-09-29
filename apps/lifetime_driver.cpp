@@ -238,6 +238,12 @@ int lifetime_main(int argc,char** argv) {
       throw std::invalid_argument("invalid envelope metal approximation");
     const bool direct_envelope=!envelope_source_path.empty() || envelope_eos=="interior";
     const double envelope_fraction=cfg.values.contains("envelope_mass_fraction")?cfg.number("envelope_mass_fraction"):0;
+    const double envelope_thermal_limit=cfg.values.contains("envelope_thermal_fraction_limit")
+        ?cfg.number("envelope_thermal_fraction_limit"):.001;
+    if(!(std::isfinite(envelope_thermal_limit) && envelope_thermal_limit>0
+        && envelope_thermal_limit<=.005 && (!direct_envelope || envelope_thermal_limit<=energy_tolerance))
+        || (!direct_envelope && envelope_thermal_limit!=.001))
+      throw std::invalid_argument("envelope thermal fraction limit requires a native envelope and must not exceed the energy tolerance or 0.005");
     if(direct_envelope && (deep_envelope
         || !(envelope_fraction>0 && envelope_fraction<=.01)))
       throw std::invalid_argument("native envelope requires mass fraction in (0,0.01] and no envelope map");
@@ -331,6 +337,8 @@ int lifetime_main(int argc,char** argv) {
         {"coupling_abundance_tolerance",abundance_tolerance},{"inventory_abundance_tolerance",inventory_tolerance}})
       identity.number("configuration."+key,value);
     identity.number("solver.homogeneous_abundance_tolerance",std::min(1e-15,abundance_tolerance));
+    if(envelope_thermal_limit!=.001)
+      identity.number("envelope.thermal_fraction_limit",envelope_thermal_limit);
     if(structure_prediction=="linear")identity.number("solver.structure_prediction",1);
     if(linearized_burning==1)identity.number("solver.linearized_burning",1);
     if(abundance_cap!=.001)identity.number("solver.abundance_cap",abundance_cap);
@@ -594,7 +602,7 @@ int lifetime_main(int argc,char** argv) {
     };
     hooks.audit=[&](const Model& old,const EvolutionStep& step,double duration) {
       auto audit=check_interval(old,step,duration,nuclear,inventory_tolerance);
-      if(native_envelope && selected_envelope_mass>0) {
+      if(step.converged && native_envelope && selected_envelope_mass>0) {
         const auto& m=step.model;const auto i=m.size()-1;
         const auto a=eos.eval(old.T(i),old.rho(i),old.comp[i]);
         const auto b=eos.eval(m.T(i),m.rho(i),m.comp[i]);
@@ -605,8 +613,12 @@ int lifetime_main(int argc,char** argv) {
         const double power=selected_envelope_mass*(std::abs(b.E-a.E)
           +std::max(a.P,b.P)*std::abs(1/m.rho(i)-1/old.rho(i)))/duration;
         const double fraction=power/light;
-        if(!std::isfinite(fraction) || light<=0 || fraction>.001)
-          throw std::domain_error("native envelope thermal reservoir exceeds assessed heating fraction");
+        if(!std::isfinite(fraction) || light<=0 || fraction>envelope_thermal_limit) {
+          std::ostringstream message;
+          message<<std::setprecision(4)<<"native envelope thermal reservoir fraction "<<fraction
+            <<" exceeds assessed limit "<<envelope_thermal_limit;
+          throw std::domain_error(message.str());
+        }
         envelope_maximum_thermal_fraction=std::max(envelope_maximum_thermal_fraction,fraction);
       }
       return audit;
@@ -665,6 +677,7 @@ int lifetime_main(int argc,char** argv) {
     {
       std::ofstream out(work/"envelope_approximation.json");
       out<<std::setprecision(17)<<"{\"maximum_base_T_K\":"<<envelope_maximum_base_T
+        <<",\"thermal_fraction_limit\":"<<envelope_thermal_limit
         <<",\"maximum_thermal_fraction\":"<<envelope_maximum_thermal_fraction
         <<",\"maximum_nuclear_fraction\":"<<envelope_maximum_nuclear_fraction<<"}\n";
     }
