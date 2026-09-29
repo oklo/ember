@@ -125,6 +125,18 @@ def damped_switch(h, switch=1e-2):
     if len(h) >= 4 and h[-1] < switch and h[-1] < h[-2] < h[-3] < h[-4]: return 'switch to undamped'
     return None
 
+def recover_damped_budget(result, attempt, nd):
+    """Reuse an improving damped solve after its per-attempt CPU limit.
+
+    The total CPU and phase limits still apply. Only a complete saved guess
+    is reused; the interrupted calculation is never accepted as a source.
+    """
+    h = result.get('history', [])
+    saved = attempt / 'best.fort.7'
+    return (result['returncode'] == -signal.SIGXCPU and len(h) >= 4
+            and 0 < min(h[-3:]) < min(1e-2, .25*h[0])
+            and saved.is_file() and valid_structure(saved.read_text(), nd))
+
 def stop_and_reap(pid):
     """Kill a source process group and reap it; the process may already have exited after the last poll."""
     try: os.killpg(pid, signal.SIGKILL)
@@ -280,6 +292,10 @@ def main():
         stop = r.get('monitor_stop') or ''
         if kind == 'newton': kind = 'damped'
         elif stop.startswith('switch'): kind = 'newton'
+        elif recover_damped_budget(r, att, nd):
+            r['next_guess'] = dict(method='Newton restart after improving damped CPU-limited attempt',
+                                  parent_sha256=sha(att / 'best.fort.7'))
+            kind = 'newton'
         else: break
     for att in (col / 'attempts').iterdir():        # compact every attempt's logs
         for f in ['fort.9', 'run.log']:

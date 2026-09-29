@@ -119,6 +119,47 @@ class T(unittest.TestCase):
         p.returncode = os.waitstatus_to_exitcode(status)
         self.assertEqual(pid, p.pid)
 
+    def test_cpu_limited_damping_reuses_guess_within_budget_and_still_checks_source(self):
+        sys.path.insert(0, str(SOLVER.parent)); import solve_column as sc
+        for budget, count in [(100, 4), (40, 2)]:
+            c = column(tempfile.mkdtemp(dir=self.tmp), [1], [1])
+            calls = []
+            def fake_run(att, exe, cap, nd, rule):
+                i = len(calls)
+                if i == 2:
+                    self.assertEqual((att/'fort.8').read_text(), structure(ND, 4001.))
+                calls.append(cap)
+                (att/'best.fort.7').write_text(structure(ND, 4000.+i))
+                (att/'run.log').write_text('incomplete source output\n')
+                (att/'fort.9').write_text('')
+                return dict(returncode=[-sc.signal.SIGKILL, -sc.signal.SIGXCPU, 0, 0][i],
+                            CPU_seconds=10 if i == 0 else 30, wall_seconds=0,
+                            monitor_stop='undamped growth' if i == 0 else None,
+                            iterations=5, history=[.15, .09, .006, .016, .006])
+            args = [str(SOLVER), str(c), '--executable', str(FAKE),
+                    '--executable-sha256', SHA, '--attempt-cpu', '60',
+                    '--total-cpu', str(budget), '--max-phases', '4']
+            with mock.patch.object(sys, 'argv', args), mock.patch.object(sc, 'run', fake_run), \
+                    mock.patch.object(sc, 'source_inputs', wraps=sc.source_inputs) as check:
+                sc.main()
+            result = json.loads((c/'result.json').read_text())
+            self.assertEqual(len(calls), count)
+            self.assertFalse(result['accepted'])
+            self.assertLessEqual(result['CPU_seconds'], budget)
+            self.assertEqual(check.call_count, max(0, count-2))
+            self.assertIn('next_guess', result['attempts'][1])
+
+    def test_damped_recovery_rejects_stalls_crashes_and_incomplete_guesses(self):
+        sys.path.insert(0, str(SOLVER.parent)); import solve_column as sc
+        att = Path(self.tmp)
+        saved = att/'best.fort.7'; saved.write_text(structure(ND, 4000.))
+        base = dict(returncode=-sc.signal.SIGXCPU, history=[.15, .09, .006, .016, .006])
+        self.assertTrue(sc.recover_damped_budget(base, att, ND))
+        self.assertFalse(sc.recover_damped_budget(dict(base, returncode=-sc.signal.SIGSEGV), att, ND))
+        self.assertFalse(sc.recover_damped_budget(dict(base, history=[.008]*6), att, ND))
+        saved.write_text('20 -4\n1.0\n')
+        self.assertFalse(sc.recover_damped_budget(base, att, ND))
+
 
     def test_donor_must_be_accepted(self):
         c = column(self.tmp, [1e-2], [1e-2]); d = donor(tempfile.mkdtemp(dir=self.tmp), accepted=False)

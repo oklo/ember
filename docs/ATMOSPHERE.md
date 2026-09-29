@@ -376,6 +376,12 @@ again. Two source comparisons agree with independently converged columns to
 **2.090e-9** in matching temperature, pressure and density. An already converged
 control does not use this recovery. [Checks](results/atmosphere_upper_guess_sept29_v1.json).
 
+A damped attempt that reaches its CPU limit while approaching convergence can
+restart Newton iteration from its best complete saved state. The original
+total CPU and phase limits remain in force, and the full source checks still
+decide acceptance. Stalled or crashed attempts do not use this recovery.
+[Checks](results/atmosphere_budget_recovery_sept29_v1.json).
+
 
 ### Incomplete hydrogen-atmosphere extensions
 
