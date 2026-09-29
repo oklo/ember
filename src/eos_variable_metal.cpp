@@ -177,11 +177,7 @@ VariableMetalHelmholtzEos::VariableMetalHelmholtzEos(const std::filesystem::path
         begin=end<nu?end+1:end;
       }
     }
-  for(auto& p:slopes_)for(std::size_t it=0;it+1<p->t_.size();++it) {
-    std::size_t hi=0;while(hi<p->q_.size() && p->nodes_[it*p->q_.size()+hi].valid
-        && p->nodes_[(it+1)*p->q_.size()+hi].valid)++hi;
-    p->supported_hi_[it]=hi;
-  }
+  for(auto& p:slopes_)p->initialize_support();
 }
 
 VariableMetalHelmholtzEos::Weights VariableMetalHelmholtzEos::weights(const Composition& c,std::size_t channels) const {
@@ -300,14 +296,20 @@ void VariableMetalHelmholtzEos::validate_composition_domain(double T,double rho,
     const auto& p=*w.tables[i].table;
     if(t<p.t_.front() || t>p.t_.back() || q<p.q_.front() || q>p.q_.back())
       throw std::domain_error("variable EOS: reuse state outside table");
-    const auto [lo,hi]=p.supported_q(interp::locate(p.t_,t));
     const auto iq=interp::locate(p.q_,q);
-    if(iq<lo || iq>=hi)throw std::domain_error("variable EOS: masked composition support");
+    if(!p.supported_cell(interp::locate(p.t_,t),iq))throw std::domain_error("variable EOS: masked composition support");
   }
 }
 std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range(double T,const Composition& c) const {
   const auto w=weights(c,1);DensityRange result{0,std::numeric_limits<double>::infinity()};
   for(std::size_t i=0;i<w.count;++i){const auto r=w.tables[i].table->material_density_range(T);result.min=std::max(result.min,r.min);result.max=std::min(result.max,r.max);}
+  if(result.min>=result.max)throw std::domain_error("variable EOS: empty source density overlap");
+  return result;
+}
+
+std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_near(double T,const Composition& c,double rho) const {
+  const auto w=weights(c,1);DensityRange result{0,std::numeric_limits<double>::infinity()};
+  for(std::size_t i=0;i<w.count;++i){const auto r=w.tables[i].table->material_density_range_near(T,rho);result.min=std::max(result.min,r.min);result.max=std::min(result.max,r.max);}
   if(result.min>=result.max)throw std::domain_error("variable EOS: empty source density overlap");
   return result;
 }

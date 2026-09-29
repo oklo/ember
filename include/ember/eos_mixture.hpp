@@ -16,6 +16,7 @@ public:
   EosResponse eval_with_derivatives(double,double,const Composition&) const override;
   EosCompositionResponse composition_response(double,double,const Composition&) const override;
   std::optional<DensityRange> density_range(double,const Composition&) const override;
+  std::optional<DensityRange> density_range_near(double,const Composition&,double) const override;
   // Require identical original potentials and masks; only hotter rows may be added.
   std::size_t check_temperature_extension(const MetalHelmholtzEos& original) const;
   // Require identical original potentials and masks; only denser columns may be added.

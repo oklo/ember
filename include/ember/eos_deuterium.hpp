@@ -18,6 +18,7 @@ class DeuteriumApproxEos final : public Eos {
   EosResponse eval_with_derivatives(double,double,const Composition&) const override;
   EosCompositionResponse composition_response(double,double,const Composition&) const override;
   std::optional<DensityRange> density_range(double,const Composition&) const override;
+  std::optional<DensityRange> density_range_near(double,const Composition&,double) const override;
   double rho_from_PT(double,double,const Composition&,double=0.) const override;
   bool has_internal_energy() const override {return source_.has_internal_energy();}
   const char* name() const override {return "trace deuterium: number-mapped EOS, isotope chemistry approximated";}

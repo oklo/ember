@@ -54,6 +54,7 @@ class VariableMetalHelmholtzEos final : public Eos {
   // evaluating the free-energy polynomial (used by optional response reuse).
   void validate_composition_domain(double T,double rho,const Composition&) const;
   std::optional<DensityRange> density_range(double,const Composition&) const override;
+  std::optional<DensityRange> density_range_near(double,const Composition&,double) const override;
   const char* name() const override {return "FreeEOS variable GS98 metals, H and helium-isotope potential";}
  private:
   using WeightedTable=HelmholtzTableEos::WeightedCompositionTable;

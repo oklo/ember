@@ -68,6 +68,14 @@ std::optional<Eos::DensityRange> CompositionHelmholtzEos::density_range(double T
   return result;
 }
 
+std::optional<Eos::DensityRange> CompositionHelmholtzEos::density_range_near(double T,const Composition& c,double rho) const {
+  const auto q=coordinates(c);
+  const auto a=tables_[q.interval]->material_density_range_near(T,rho*q.scale),b=tables_[q.interval+1]->material_density_range_near(T,rho*q.scale);
+  const DensityRange result{std::max(a.min,b.min)/q.scale,std::min(a.max,b.max)/q.scale};
+  if(result.min>=result.max) throw std::domain_error("CompositionHelmholtzEos: empty source overlap");
+  return result;
+}
+
 EosResponse CompositionHelmholtzEos::eval_with_derivatives(double T,double rho,const Composition& c) const {
   const auto q=coordinates(c);
   const auto a=tables_[q.interval]->material_jet(T,rho*q.scale),b=tables_[q.interval+1]->material_jet(T,rho*q.scale);

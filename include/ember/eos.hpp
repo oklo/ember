@@ -55,6 +55,11 @@ public:
   virtual bool has_internal_energy() const { return true; }
   struct DensityRange { double min, max; };
   virtual std::optional<DensityRange> density_range(double, const Composition&) const { return {}; }
+  // Select the connected supported interval containing an existing state.
+  // A table inversion must not cross a masked interval to find another root.
+  virtual std::optional<DensityRange> density_range_near(double T,const Composition& c,double) const {
+    return density_range(T,c);
+  }
   virtual EosResponse eval_with_derivatives(double, double, const Composition&) const {
     throw std::logic_error("Eos: analytic transport derivatives are not implemented");
   }

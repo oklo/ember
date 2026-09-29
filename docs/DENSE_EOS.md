@@ -5,6 +5,10 @@ components below extend its thermal response toward colder conditions.
 Quantum-ion freezing, phase separation and the final cold-envelope EOS remain
 incomplete; the current calculation is not an extreme-cold cooling-age prediction.
 
+EOS tables may contain separate valid density intervals. Pressure inversion
+uses the interval containing the supplied density guess and cannot cross a
+masked cell; without a guess it retains the dilute interval.
+
 ## Cold electron thermal response
 
 The analytic electron component integrates relativistic Fermi-Dirac

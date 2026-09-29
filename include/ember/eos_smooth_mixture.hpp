@@ -56,6 +56,7 @@ public:
   CompositionHeatResponse composition_heat(double,double,const Composition&,
       std::array<bool,2> active,bool derivatives=true) const;
   std::optional<DensityRange> density_range(double,const Composition&) const override;
+  std::optional<DensityRange> density_range_near(double,const Composition&,double) const override;
   const char* name() const override {
     return "FreeEOS GS98 smooth H/He3 potential; trace K omission and isotope approximation";
   }

@@ -142,11 +142,15 @@ void HelmholtzTableEos::write_binary(std::ostream& out) const {
 }
 
 void HelmholtzTableEos::initialize_support() {
-  supported_hi_.resize(t_.size()-1);
+  support_.resize(t_.size()-1);
   for(std::size_t it=0;it+1<t_.size();++it) {
-    std::size_t hi=0;
-    while(hi<q_.size() && nodes_[it*q_.size()+hi].valid && nodes_[(it+1)*q_.size()+hi].valid)++hi;
-    supported_hi_[it]=hi;
+    auto& intervals=support_[it];intervals.clear();
+    auto valid=[&](std::size_t j){return nodes_[it*q_.size()+j].valid && nodes_[(it+1)*q_.size()+j].valid;};
+    for(std::size_t j=0;j<q_.size();) {
+      if(!valid(j)){++j;continue;}
+      const auto lo=j;while(j<q_.size() && valid(j))++j;
+      if(j-lo>=2)intervals.emplace_back(lo,j-1);
+    }
   }
 }
 
@@ -159,16 +163,35 @@ void HelmholtzTableEos::check_composition(const Composition& c) const {
 }
 
 std::pair<std::size_t,std::size_t> HelmholtzTableEos::supported_q(std::size_t it) const {
-  // Only the contiguous branch attached to the dilute boundary is exposed.
-  // Do not jump across a masked phase/unstable region during PT inversion.
-  const std::size_t hi=supported_hi_[it];
-  if (hi<2) throw std::domain_error("HelmholtzTableEos: no supported density interval");
-  return {0,hi-1};
+  // Without an existing density, preserve the dilute-branch convention.
+  const auto& intervals=support_[it];
+  if(intervals.empty() || intervals.front().first!=0)
+    throw std::domain_error("HelmholtzTableEos: no supported dilute density interval");
+  return intervals.front();
+}
+
+std::pair<std::size_t,std::size_t> HelmholtzTableEos::supported_q(std::size_t it,std::size_t iq) const {
+  for(const auto& interval:support_[it])
+    if(iq>=interval.first && iq<interval.second)return interval;
+  throw std::domain_error("HelmholtzTableEos: masked density region");
 }
 
 std::optional<Eos::DensityRange> HelmholtzTableEos::density_range(double T, const Composition& c) const {
   check_composition(c);
   return material_density_range(T);
+}
+
+std::optional<Eos::DensityRange> HelmholtzTableEos::density_range_near(double T,const Composition& c,double rho) const {
+  check_composition(c);return material_density_range_near(T,rho);
+}
+
+Eos::DensityRange HelmholtzTableEos::material_density_range_near(double T,double rho) const {
+  if(!positive(T) || !positive(rho) || std::log(T)<t_.front() || std::log(T)>t_.back())
+    throw std::domain_error("HelmholtzTableEos: invalid state for density interval");
+  const double t=std::log(T),offset=1.5*(t-6*ln10);
+  const double q=std::clamp(std::log(rho)-offset,q_.front(),q_.back());
+  const auto [lo,hi]=supported_q(interp::locate(t_,t),interp::locate(q_,q));
+  return DensityRange{std::exp(q_[lo]+offset+1e-12),std::exp(q_[hi]+offset-1e-12)};
 }
 
 Eos::DensityRange HelmholtzTableEos::material_density_range(double T) const {
@@ -192,7 +215,7 @@ HelmholtzJet HelmholtzTableEos::material_jet(double T, double rho) const {
   if (t<t_.front() || t>t_.back() || q<q_.front() || q>q_.back())
     throw std::domain_error("HelmholtzTableEos: state outside table");
   const std::size_t it=interp::locate(t_,t), iq=interp::locate(q_,q);
-  const auto [lo,hi]=supported_q(it);
+  const auto [lo,hi]=supported_q(it,iq);
   if (iq<lo || iq>=hi) throw std::domain_error("HelmholtzTableEos: masked density region");
   const double ht=t_[it+1]-t_[it], hq=q_[iq+1]-q_[iq];
   const auto bt=evaluate_basis((t-t_[it])/ht,ht), bq=evaluate_basis((q-q_[iq])/hq,hq);
@@ -225,8 +248,7 @@ HelmholtzJet HelmholtzTableEos::mixed_material_jet(double T,double rho,std::span
     throw std::domain_error("HelmholtzTableEos: state outside table");
   const std::size_t it=interp::locate(reference.t_,t),iq=interp::locate(reference.q_,q);
   for(const auto& p:planes) {
-    const auto [lo,hi]=p.table->supported_q(it);
-    if(iq<lo || iq>=hi)throw std::domain_error("HelmholtzTableEos: masked density region");
+    if(!p.table->supported_cell(it,iq))throw std::domain_error("HelmholtzTableEos: masked density region");
   }
   const double ht=reference.t_[it+1]-reference.t_[it],hq=reference.q_[iq+1]-reference.q_[iq];
   const auto bt=evaluate_basis((t-reference.t_[it])/ht,ht),bq=evaluate_basis((q-reference.q_[iq])/hq,hq);
@@ -265,8 +287,7 @@ std::array<HelmholtzJet,10> HelmholtzTableEos::mixed_composition_jets(
     throw std::domain_error("HelmholtzTableEos: state outside table");
   const auto it=interp::locate(reference.t_,t),iq=interp::locate(reference.q_,q);
   for(const auto& p:planes) {
-    const auto [lo,hi]=p.table->supported_q(it);
-    if(iq<lo || iq>=hi) {
+    if(!p.table->supported_cell(it,iq)) {
       std::ostringstream message;
       message<<std::setprecision(4)<<"HelmholtzTableEos: masked composition support at T="
              <<T<<", rho="<<rho<<"; source X="<<p.table->composition_.X[0]
@@ -348,7 +369,7 @@ EosState HelmholtzTableEos::eval(double T, double rho, const Composition& c) con
 double HelmholtzTableEos::rho_from_PT(double T,double P,const Composition& c,double guess) const {
   if (!positive(P) || !std::isfinite(guess) || guess<0)
     throw std::domain_error("HelmholtzTableEos: invalid pressure or density guess");
-  const auto range=density_range(T,c).value();
+  const auto range=(guess>0?density_range_near(T,c,guess):density_range(T,c)).value();
   double lo=std::log(range.min), hi=std::log(range.max);
   const double target=std::log(P);
   if (std::log(eval(T,range.min,c).P)>target || std::log(eval(T,range.max,c).P)<target)

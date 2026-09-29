@@ -18,6 +18,7 @@ public:
   EosResponse eval_with_derivatives(double,double,const Composition&) const override;
   EosCompositionResponse composition_response(double,double,const Composition&) const override;
   std::optional<DensityRange> density_range(double,const Composition&) const override;
+  std::optional<DensityRange> density_range_near(double,const Composition&,double) const override;
   const char* name() const override { return "FreeEOS composition potential; explicit He4 metal proxy and isotope approximation"; }
 private:
   struct Coordinates {

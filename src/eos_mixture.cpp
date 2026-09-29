@@ -117,6 +117,16 @@ std::optional<Eos::DensityRange> MetalHelmholtzEos::density_range(double T,const
   return r;
 }
 
+std::optional<Eos::DensityRange> MetalHelmholtzEos::density_range_near(double T,const Composition& c,double rho) const {
+  const auto q=coordinates(c);DensityRange r{0,std::numeric_limits<double>::infinity()};
+  for(std::size_t i=0;i<2;++i)for(std::size_t j=0;j<2;++j) {
+    const auto p=table(q.x+i,q.y+j).material_density_range_near(T,rho);
+    r.min=std::max(r.min,p.min);r.max=std::min(r.max,p.max);
+  }
+  if(r.min>=r.max)throw std::domain_error("MetalHelmholtzEos: empty plane support overlap");
+  return r;
+}
+
 EosResponse MetalHelmholtzEos::eval_with_derivatives(double T,double rho,const Composition& c) const {
   const auto q=coordinates(c);std::array<HelmholtzTableEos::WeightedTable,4> planes{};
   for(std::size_t i=0;i<2;++i)for(std::size_t j=0;j<2;++j) {

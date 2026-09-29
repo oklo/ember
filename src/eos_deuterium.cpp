@@ -52,6 +52,10 @@ std::optional<Eos::DensityRange> DeuteriumApproxEos::density_range(double T,cons
   const auto m=map(c);auto r=source_.density_range(T,m.c);
   if(r){r->min/=m.f;r->max/=m.f;}return r;
 }
+std::optional<Eos::DensityRange> DeuteriumApproxEos::density_range_near(double T,const Composition& c,double rho) const {
+  const auto m=map(c);auto r=source_.density_range_near(T,m.c,rho*m.f);
+  if(r){r->min/=m.f;r->max/=m.f;}return r;
+}
 double DeuteriumApproxEos::rho_from_PT(double T,double P,const Composition& c,double guess) const {
   const auto m=map(c);return source_.rho_from_PT(T,P,m.c,guess*m.f)/m.f;
 }

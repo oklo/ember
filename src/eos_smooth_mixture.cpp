@@ -73,12 +73,7 @@ SmoothMetalHelmholtzEos::SmoothMetalHelmholtzEos(const std::filesystem::path& pa
     }
   // Slope masks can be narrower than source masks near an isolated fragment.
   // Density inversion must see exactly the same contiguous support as eval.
-  for(auto& p:slopes_)for(std::size_t it=0;it+1<p->t_.size();++it) {
-    std::size_t hi=0;
-    while(hi<p->q_.size() && p->nodes_[it*p->q_.size()+hi].valid &&
-        p->nodes_[(it+1)*p->q_.size()+hi].valid)++hi;
-    p->supported_hi_[it]=hi;
-  }
+  for(auto& p:slopes_)p->initialize_support();
 }
 
 SmoothMetalHelmholtzEos::WeightedTables
@@ -129,6 +124,17 @@ std::optional<Eos::DensityRange> SmoothMetalHelmholtzEos::density_range(double T
   const auto tables=weights(c,0,0);
   for(const auto& w:tables.span()) {
     const auto range=w.table->material_density_range(T);
+    result.min=std::max(result.min,range.min);result.max=std::min(result.max,range.max);
+  }
+  if(result.min>=result.max)throw std::domain_error("smooth EOS: empty source overlap");
+  return result;
+}
+
+std::optional<Eos::DensityRange> SmoothMetalHelmholtzEos::density_range_near(double T,const Composition& c,double rho) const {
+  DensityRange result{0,std::numeric_limits<double>::infinity()};
+  const auto tables=weights(c,0,0);
+  for(const auto& w:tables.span()) {
+    const auto range=w.table->material_density_range_near(T,rho);
     result.min=std::max(result.min,range.min);result.max=std::min(result.max,range.max);
   }
   if(result.min>=result.max)throw std::domain_error("smooth EOS: empty source overlap");

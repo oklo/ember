@@ -26,7 +26,7 @@ double coefficient(double u,double v,double Z,bool cubic) {
 // A thermodynamically regular manufactured potential with known pressure
 // and energy. Non-polynomial Z dependence exercises joins independently of
 // the cubic-reproduction check. The final source plane can be fully masked.
-void fixture(const std::filesystem::path& dir,bool cubic,bool masked,std::size_t first_masked=4) {
+void fixture(const std::filesystem::path& dir,bool cubic,bool masked,std::size_t first_masked=4,bool gap=false) {
   std::filesystem::create_directories(dir);
   const std::array<double,6> zs{0,.005,.02,.04,.16,.3};
   const std::array<double,4> us{0,.25,.7,1};
@@ -39,10 +39,12 @@ void fixture(const std::filesystem::path& dir,bool cubic,bool masked,std::size_t
       auto c=composition((1-zs[iz])*us[iu],(1-zs[iz])*(1-us[iu])*vs[iv],zs[iz]);
       c.X[2]=(1-zs[iz])*(1-us[iu])*(1-vs[iv]);
       for(std::size_t k=0;k<TABLE_NSPEC;++k)f<<' '<<c.X[k];
-      f<<"\nlog_t 4 4 5 6 7\nlog_q 4 -6 -2 2 6\ndata\n";
+      f<<"\nlog_t 4 4 5 6 7\n";
+      f<<(gap?"log_q 7 -6 -4 -2 0 2 4 6\n":"log_q 4 -6 -2 2 6\n")<<"data\n";
       const double a=coefficient(us[iu],vs[iv],zs[iz],cubic);
-      for(int it=0;it<4;++it)for(double lq:{-6.,-2.,2.,6.}) {
-        const bool valid=!(masked && iz>=first_masked);
+      const std::vector<double> qs=gap?std::vector<double>{-6,-4,-2,0,2,4,6}:std::vector<double>{-6,-2,2,6};
+      for(int it=0;it<4;++it)for(double lq:qs) {
+        const bool valid=!(masked && iz>=first_masked) && !(gap && it==1 && lq==0);
         f<<(valid?1:0)<<' '<<a*lq*std::log(10.)<<' '<<a<<" 0 0 0 0 0 0 0\n";
       }
     }
@@ -94,6 +96,30 @@ int main() {
     VariableMetalHelmholtzEos cached(dir/"smooth.bin",M::allow_documented_proxy);
     VariableMetalHelmholtzEos cached_old(dir/"old.bin",M::allow_documented_proxy);
     VariableMetalHelmholtzEos cached_masked(dir/"masked.bin",M::allow_documented_proxy);
+    fixture(dir/"disconnected",true,false,4,true);
+    VariableMetalHelmholtzEos disconnected(dir/"disconnected/family6.dat",M::allow_documented_proxy);
+    HelmholtzTableEos fixed(dir/"disconnected/2-2-1.dat",M::allow_documented_proxy);
+    auto check_intervals=[&](const Eos& eos,const Composition& c) {
+      const double T=3e5,scale=std::pow(T/1e6,1.5);
+      const double dense=1e3*scale,dilute=1e-3*scale,masked=scale;
+      const double high_P=eos.eval(T,dense,c).P,low_P=eos.eval(T,dilute,c).P;
+      check(std::abs(eos.rho_from_PT(T,high_P,c,dense*1.1)/dense-1)<1e-10,
+            "PT inversion uses valid dense interval beyond a mask");
+      check(std::abs(eos.rho_from_PT(T,low_P,c)/dilute-1)<1e-10,
+            "PT inversion without a guess retains the dilute interval");
+      check(throws([&]{eos.rho_from_PT(T,high_P,c,dilute);}) &&
+            throws([&]{eos.rho_from_PT(T,low_P,c,dense);}),
+            "PT inversion cannot cross a masked gap in either direction");
+      check(throws([&]{eos.eval(T,masked,c);}) &&
+            throws([&]{eos.rho_from_PT(T,high_P,c,masked);}),
+            "direct queries and inversion guesses inside the mask are rejected");
+    };
+    check_intervals(fixed,fixed.composition());
+    const auto gap_comp=composition(.5,.02,.025);
+    check_intervals(disconnected,gap_comp);
+    disconnected.validate_composition_domain(3e5,200,gap_comp);
+    check(throws([&]{disconnected.validate_composition_domain(3e5,.2,gap_comp);}),
+          "composition derivatives retain local masks");
     const double T=3e5,rho=.3;
     double exact=0,preserved=0,extended_preserved=0,cache_error=0;
     bool thermal_channels_identical=true,unrequested_channels_nan=true;

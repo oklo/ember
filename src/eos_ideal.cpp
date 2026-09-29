@@ -4,6 +4,8 @@
 #include "fermi.hpp"
 #include <algorithm>
 #include <cmath>
+#include <iomanip>
+#include <sstream>
 #include <limits>
 #include <stdexcept>
 
@@ -112,7 +114,8 @@ double Eos::rho_from_PT(double T, double P, const Composition& comp,
   double rho = rho_guess > 0.0 ? rho_guess
              : P / (comp.mu_ions_inv() + comp.mu_elec_inv()) / (R_gas * T);
   double lo=-std::numeric_limits<double>::infinity(),hi=std::numeric_limits<double>::infinity();
-  if(const auto bounds=density_range(T,comp)) {
+  const auto bounds=rho_guess>0?density_range_near(T,comp,rho_guess):density_range(T,comp);
+  if(bounds) {
     if(!(bounds->min>0) || !std::isfinite(bounds->max) || bounds->min>=bounds->max)
       throw std::domain_error("Eos::rho_from_PT: invalid density bounds");
     lo=std::log(bounds->min);hi=std::log(bounds->max);
@@ -142,8 +145,15 @@ double Eos::rho_from_PT(double T, double P, const Composition& comp,
     if(f<0)lo=r;else hi=r;
     const double next=r-step;
     const double candidate=std::exp(next>lo && next<hi?next:.5*(lo+hi));
-    if(candidate==rho)
-      throw std::domain_error("Eos::rho_from_PT: no supported density resolves the requested pressure");
+    if(candidate==rho) {
+      std::ostringstream message;
+      message<<std::scientific<<std::setprecision(3)
+        <<"Eos::rho_from_PT: no supported density resolves the requested pressure"
+        <<"; T="<<T<<", P="<<P<<", rho="<<rho<<", X="<<comp.X[0]
+        <<", He3="<<comp.X[1]<<", Z="<<comp.Z()<<", lnP_error="<<f;
+      if(bounds)message<<", density_range=["<<bounds->min<<','<<bounds->max<<']';
+      throw std::domain_error(message.str());
+    }
     rho=candidate;
   }
   throw std::runtime_error("Eos::rho_from_PT: density inversion did not converge");
