@@ -307,7 +307,7 @@ int lifetime_main(int argc,char** argv) {
     }
     if(envelope_opacity==1) {
       identity.values["opacity.conductive_envelope"]=conduction_envelope=="ionized"
-          ?"hydrogen_density_continuation.logR_overlap.v3":"hydrogen_density_continuation.v6";
+          ?"hydrogen_density_continuation.logR_overlap.trace_metals.v4":"hydrogen_density_continuation.v6";
       identity.number("opacity.conductive_envelope_scale",envelope_opacity_scale);
       if(envelope_opacity_uncertainty!=.001)
         identity.number("opacity.conductive_envelope_uncertainty",envelope_opacity_uncertainty);

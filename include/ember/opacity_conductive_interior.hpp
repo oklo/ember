@@ -56,6 +56,10 @@ public:
     // depth. Admission depends on radiative heat transport, not hydrogen
     // abundance; both source anchors and the uncertainty bound still apply.
     domain.minimum_X=0;domain.full_X=0;
+    // Residual metals in settled H/He layers do not remove the source
+    // anchors or the local heat-transport bound. Keep this extension trace
+    // only; the separate core domain covers metal-rich material.
+    domain.maximum_Z=1e-4;
     return domain;
   }
 

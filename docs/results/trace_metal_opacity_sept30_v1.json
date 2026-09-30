@@ -1,0 +1,66 @@
+{
+  "UTC": "2026-09-30T13:39:46.775985+00:00",
+  "change": "Allow the existing ionized H/He opacity continuation at trace metals Z<=1e-4. Source anchors, factor100 opacity allowance and local .003 transport bound unchanged.",
+  "ionization": {
+    "UTC": "2026-09-30T13:36:27.747330+00:00",
+    "checkpoint": "/Users/greglaughlin/Projects/ember/out/cooling-hydrogen-halo-sept30-v1/cooling/evolution/final.checkpoint",
+    "checkpoint_sha256": "26086990329c8df3b1ab5e565e4f56049ac16056c3ef08cc604d4277348dbfac",
+    "source_sha256": "1bfcfc7226449987de1609afb8bb9b7625588457d394fc0038b4baa56ac76c9f",
+    "source_queries": 157,
+    "failed": 0,
+    "maximum_electron_deficit": 9.781236240957725e-07,
+    "minimum_H_ionized": 0.9999999999999961,
+    "minimum_He_doubly_ionized": 0.9999999999999999,
+    "scope": "Ionization diagnostic at the current1484K star and cooler projections, using the source GS98 metal proxy. H/He ionization is checked separately from the metal electron deficit; partial metal ionization remains an approximation. This diagnostic does not validate conductivity accuracy, liquid phase stability or the source free-energy error.",
+    "H_He_ionization_supported": true
+  },
+  "coverage": {
+    "query_count": 894,
+    "recovered": 147,
+    "derivative_centres": 10,
+    "derivative_max_error": 7.217803513915024e-08,
+    "transport_differences": {
+      "stellar": 1.8732060347304014e-10,
+      "projection": 8.754441616076747e-11,
+      "grid": 0.0
+    },
+    "source_checkpoint_sha256": "26086990329c8df3b1ab5e565e4f56049ac16056c3ef08cc604d4277348dbfac",
+    "scope": "Source anchors and conduction remain unchanged. Only trace-metal admission changes; the factor100 radiative-opacity allowance and .003 total-transport bound remain active. Cooler fixed-density states are coverage probes, not evolved models.",
+    "passed": true
+  },
+  "stellar_overlap": {
+    "passed": true,
+    "errors": {
+      "ln_radius": 4.973799150320701e-13,
+      "ln_density": 1.5336176772962062e-11,
+      "ln_temperature": 1.261923898709938e-11,
+      "H_absolute": 2.7999380591836598e-11,
+      "He3_absolute": 3.1349922657852858e-12,
+      "surface_L_relative": 1.1791456699938863e-11
+    },
+    "reference": "/Users/greglaughlin/Projects/ember/out/cooling-corrected-atmosphere-sept30-v3/cooling_saved_step/evolution/final.checkpoint",
+    "candidate": "/Users/greglaughlin/Projects/ember/out/cooling-trace-opacity-sept30-v1/overlap_replay/evolution/final.checkpoint",
+    "scope": "100 Myr comparison against previously completed selected atmosphere run. Conducting H/He envelope opacity continuation extended to trace metals Z<=1e-4, using unchanged source anchors and uncertainty bound. EOS and atmosphere inputs are the currently selected versions. All solver/time/conservation tolerances unchanged."
+  },
+  "cooling": {
+    "status": 1,
+    "CPU_seconds": 56.924644,
+    "wall_seconds": 25.830141625367105,
+    "advanced_years": 95312499.99951172,
+    "Teff_K": 1477.2730788267893,
+    "accepted_total": 3536,
+    "report": {
+      "requested_age_reached": 0,
+      "age_years": 3875985920494.824,
+      "accepted_this_invocation": 5,
+      "accepted_total": 3536,
+      "rejected_total": 1508,
+      "stop_reason": "repeated step rejection: AESOPUS_2.1_GS98_gas: (logT=4.000467, logR=6.000000, X=0.994922) outside table",
+      "cpu_seconds": 56.860257,
+      "wall_seconds": 25.764636166,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "limits": "Numerical checks do not validate conductivity source accuracy, liquid phase stability or missing low-temperature physics. The subsequent stop is the warm overlap of the dense-gas opacity near10010K/logR6, not the repaired trace-metal layer."
+}
