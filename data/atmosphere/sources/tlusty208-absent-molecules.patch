@@ -1,0 +1,21 @@
+--- a/tlusty/tlusty208.f
++++ b/tlusty/tlusty208.f
+@@ -46299,6 +46299,18 @@
+         PLG(100)=log10(P(100))
+         DO J=1,NMOLEC
+            MMAXJ=MMAX(J)
++C          Ember encodes absent elements as 1e-99: ABN=0 means solar.
++C          A pressure floor must not create their molecules.
++           IABSNT=0
++           DO M=1,MMAXJ
++              IF(NELEM(M,J).NE.99) THEN
++                 IF(CCOMP(NELEM(M,J)).LE.1.D-90) IABSNT=1
++              END IF
++           END DO
++           IF(IABSNT.EQ.1) THEN
++              PPMOL(J)=0.
++              CYCLE
++           END IF
+            PMOLJL=-APMLOG(J)
+            DO M=1,MMAXJ
+               NELEMJ=NELEM(M,J)

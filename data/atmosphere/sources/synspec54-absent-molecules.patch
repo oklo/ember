@@ -1,0 +1,21 @@
+--- a/synspec/synspec54.f
++++ b/synspec/synspec54.f
+@@ -19405,6 +19405,18 @@
+         spnplu=0.
+         DO J=1,NMOLEC
+            MMAXJ=MMAX(J)
++C          Ember encodes absent elements as 1e-99: ABN=0 means solar.
++C          A pressure floor must not create their molecules.
++           IABSNT=0
++           DO M=1,MMAXJ
++              IF(NELEM(M,J).NE.99) THEN
++                 IF(CCOMP(NELEM(M,J)).LE.1.D-90) IABSNT=1
++              END IF
++           END DO
++           IF(IABSNT.EQ.1) THEN
++              PPMOL(J)=0.
++              CYCLE
++           END IF
+            PMOLJL=-APMLOG(J)
+            DO M=1,MMAXJ
+               NELEMJ=NELEM(M,J)

@@ -1,0 +1,180 @@
+{
+  "scope": "Native SYNSPEC absence-filter controls; recipe patch checks also cover TLUSTY. Cold chemistry accounting is not validation of an arbitrary atmosphere or stellar track.",
+  "input": {
+    "hydrogen_mass_fraction": 0.9955,
+    "metal_mass_fraction": 0,
+    "absent_abundance_encoding": 1e-99,
+    "absent_element_threshold": 1e-90
+  },
+  "patches": {
+    "synspec54-absent-molecules.patch": "43a8b4407fc7ac3b7f58a4a46fce45d2cbdc9adf9d0fdea9b945fc37737b0168",
+    "tlusty208-absent-molecules.patch": "ef0bf7833f294886ff8db12a1f1f2cc6818938662850c74efac47d5cc79830f4"
+  },
+  "cold_particle_controls": [
+    {
+      "temperature_K": 456.83,
+      "densities": 19,
+      "density_range_g_cm3": [
+        1.6681e-11,
+        0.16681
+      ],
+      "particle_mass_range_g": [
+        3.3286e-24,
+        3.3286e-24
+      ],
+      "maximum_particle_count_relative_error": 0.0
+    },
+    {
+      "temperature_K": 521.17,
+      "densities": 19,
+      "density_range_g_cm3": [
+        1.6681e-11,
+        0.16681
+      ],
+      "particle_mass_range_g": [
+        3.3286e-24,
+        3.3286e-24
+      ],
+      "maximum_particle_count_relative_error": 0.0
+    },
+    {
+      "temperature_K": 487.94,
+      "densities": 19,
+      "density_range_g_cm3": [
+        1.6681e-11,
+        0.16681
+      ],
+      "particle_mass_range_g": [
+        3.3286e-24,
+        3.3286e-24
+      ],
+      "maximum_particle_count_relative_error": 0.0
+    },
+    {
+      "temperature_K": 374.91,
+      "densities": 19,
+      "density_range_g_cm3": [
+        1.6681e-11,
+        0.16681
+      ],
+      "particle_mass_range_g": [
+        3.3286e-24,
+        3.3286e-24
+      ],
+      "maximum_particle_count_relative_error": 0.0
+    },
+    {
+      "temperature_K": 400.44,
+      "densities": 19,
+      "density_range_g_cm3": [
+        1.6681e-11,
+        0.16681
+      ],
+      "particle_mass_range_g": [
+        3.3286e-24,
+        3.3286e-24
+      ],
+      "maximum_particle_count_relative_error": 0.0
+    }
+  ],
+  "warm_spectral_controls": [
+    {
+      "temperature_K": 521.1667407625787,
+      "maximum_absolute_log_opacity_change": 5.7220458984375e-05,
+      "maximum_absolute_log_electron_density_change": 1.8739167330750206e-05,
+      "densities": 19,
+      "frequencies": 30000
+    },
+    {
+      "temperature_K": 594.5616205216098,
+      "maximum_absolute_log_opacity_change": 0.0,
+      "maximum_absolute_log_electron_density_change": 1.4210854715202004e-14,
+      "densities": 19,
+      "frequencies": 30000
+    },
+    {
+      "temperature_K": 826.5084905971555,
+      "maximum_absolute_log_opacity_change": 0.0,
+      "maximum_absolute_log_electron_density_change": 0.0,
+      "densities": 19,
+      "frequencies": 30000
+    },
+    {
+      "temperature_K": 1399.9999999999973,
+      "maximum_absolute_log_opacity_change": 0.0,
+      "maximum_absolute_log_electron_density_change": 0.0,
+      "densities": 19,
+      "frequencies": 30000
+    }
+  ],
+  "private_accounting_controls": [
+    {
+      "hydrogen_mass_fraction": 0.9955,
+      "temperatures_K": [
+        375.0,
+        465.0
+      ],
+      "maximum_element_inventory_relative_error": 1.266e-12,
+      "maximum_absent_element_mass_fraction": 2.129e-51,
+      "maximum_helium_hydrogen_ratio_relative_error": 1.266e-12
+    },
+    {
+      "hydrogen_mass_fraction": 0.98,
+      "temperatures_K": [
+        375.0,
+        465.0
+      ],
+      "maximum_element_inventory_relative_error": 1.254e-12,
+      "maximum_absent_element_mass_fraction": 2.129e-51,
+      "maximum_helium_hydrogen_ratio_relative_error": 1.254e-12
+    }
+  ],
+  "recipe_checks": [
+    {
+      "kind": "tlusty",
+      "archive_sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a",
+      "patches": [
+        {
+          "name": "tlusty208-ember.patch",
+          "sha256": "91fff3feded90a61f447958b1bc0e0fdcf59e2e5c7bbec387916edc92b10db83"
+        },
+        {
+          "name": "tlusty208-russel.patch",
+          "sha256": "8d82ef711e3d2840c4bab3665e69b72b1ecd2267b835110f273614f1e4a383a4"
+        },
+        {
+          "name": "tlusty208-absent-molecules.patch",
+          "sha256": "ef0bf7833f294886ff8db12a1f1f2cc6818938662850c74efac47d5cc79830f4"
+        }
+      ],
+      "syntax_check_passed": true,
+      "patched_source_sha256": "8872509ebd9f9e2037ea63cb9c889d04ab201487353a88d35176e543c028dd2f"
+    },
+    {
+      "kind": "synspec",
+      "archive_sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967",
+      "patches": [
+        {
+          "name": "synspec54-ember.patch",
+          "sha256": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f"
+        },
+        {
+          "name": "synspec54-absent-molecules.patch",
+          "sha256": "43a8b4407fc7ac3b7f58a4a46fce45d2cbdc9adf9d0fdea9b945fc37737b0168"
+        },
+        {
+          "name": "synspec54-sampling.patch",
+          "sha256": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+        }
+      ],
+      "syntax_check_passed": true,
+      "patched_source_sha256": "a982d98ab7ab35305d9edc852a8107384baa0c14353c86407d8056e45c5f7d5f"
+    }
+  ],
+  "limitations": [
+    "Cold particle masses and counts are read from printed source diagnostics.",
+    "The accounting diagnostic is a private independent check, not part of the published source patch.",
+    "Finite-metal chemistry at very low temperature can fail element conservation; the absence filter does not repair that separate issue.",
+    "No condensate physics or new stellar input family is established by these checks."
+  ]
+}

@@ -239,10 +239,26 @@ The molecular-equilibrium stopping tolerance is tightened from `1e-3` to
 accurate for deep convection: a 300-depth model with tiny temperature
 corrections still reported a 0.34% flux error. With tighter chemistry this
 falls to 0.0012%. The importer verifies the loaded chemistry tolerance.
+A source specification may declare `molecular_equilibrium_tolerance` below
+its default of `1e-8`; the importer requires that value in the source log.
+A nonideal atmosphere that solves density to `2e-9` uses `1e-11` for its inner
+chemical equilibrium. The tighter inner solve avoids noise in the density
+inversion. Flux, hydrostatic and source-coverage checks remain unchanged.
 The final convection derivative uses `DERT=1e-5`; the thermodynamic entropy
 differences retain the source's 1% temperature/pressure intervals. These are
 separate numerical controls. SYNSPEC's opacity calculations retain their
 native chemical stopping tolerance; they do not differentiate the entropy.
+
+Zero-metal inputs encode absent elements as `1e-99`, because the external
+programs interpret a zero abundance as solar. Both source patches exclude
+molecules containing an element at this absence encoding (`<=1e-90`).
+Otherwise, RUSSEL's minimum atomic pressure can produce substantial carbon
+molecules in cold hydrogen–helium gas despite the declared absence of carbon.
+The exclusion is independent of temperature and density; ordinary finite-metal
+abundances are unchanged. [Native source checks](results/absent_element_chemistry.json)
+recover the expected neutral H2/He particle mass and preserve warmer opacity
+values to within 5.723e-5 in log opacity. This correction does not validate
+finite-metal chemistry, condensates or arbitrary low-temperature coverage.
 
 The earlier `DERT=.001` produces a repeating small correction cycle in a
 3000 K/logg5.15 solar-composition model. Reducing the derivative interval
@@ -544,11 +560,3 @@ turn or white-dwarf cooling.
 ![The non-grey and corrected-COND trillion-year tracks](results/evolution_nongrey_m010_1tyr.png)
 
 [Standalone PDF](results/evolution_nongrey_m010_1tyr.pdf).
-
-A source specification may declare `molecular_equilibrium_tolerance` below
-its default of `1e-8`; the importer requires that value in the source log.
-A nonideal atmosphere that solves density to `2e-9` uses `1e-11` for its inner
-chemical equilibrium. The tighter inner solve avoids numerical noise in the
-density inversion. It leaves the flux, hydrostatic and source-coverage checks
-unchanged. Different chemical compositions still require their own opacity
-and atmosphere comparisons.

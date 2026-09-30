@@ -110,6 +110,10 @@ def main():
             run(["patch", "-p1", "--batch"], directory, root / (name + "-patch.log"), patch)
     with (SOURCES / "tlusty208-russel.patch").open("rb") as patch:
         run(["patch", "-p1", "--batch"], tl, root / "tlusty-russel-patch.log", patch)
+    for name, directory in [("tlusty208", tl), ("synspec54", sy)]:
+        with (SOURCES / (name + "-absent-molecules.patch")).open("rb") as patch:
+            run(["patch", "-p1", "--batch"], directory,
+                root / (name + "-absent-molecules-patch.log"), patch)
     flags = [a.compiler, "-O2", "-g", "-fno-automatic", "-std=legacy", "-fallow-argument-mismatch"]
     run(flags + ["-fcheck=bounds", "-fbacktrace", "-o", "tlusty.exe", "tlusty208.f"], tl / "tlusty", root / "tlusty-build.log")
     run(flags + ["-fcheck=bounds", "-fbacktrace", "-o", "synspec54", "synspec54.f"],
@@ -144,7 +148,7 @@ def main():
         "tlusty_source": str(tl), "benchmark_tables": str(tables),
         "line_lists": binary,
         "inputs": {name: {"url": url, "sha256": sha} for name, (url, sha) in ASSETS.items()},
-        "patches": {name: digest(SOURCES / name) for name in ["tlusty208-ember.patch", "tlusty208-russel.patch", "synspec54-ember.patch", "synspec54-sampling.patch"]},
+        "patches": {name: digest(SOURCES / name) for name in ["tlusty208-ember.patch", "tlusty208-russel.patch", "tlusty208-absent-molecules.patch", "synspec54-ember.patch", "synspec54-absent-molecules.patch", "synspec54-sampling.patch"]},
         "line_list_sha256": [digest(path) for path in binary],
         "data_sha256": data_digest(sy / "data"),
         "compiler": subprocess.check_output([a.compiler, "--version"], text=True).splitlines()[0],
