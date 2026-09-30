@@ -113,9 +113,9 @@ int main() {
   refused=false;try{(void)ion_quantum_liquid_jets(100000,9,dense_h);}
   catch(const std::domain_error&){refused=true;}
   check(refused,"cool hydrogen retains its assessed density boundary");
-  refused=false;try{(void)ion_quantum_liquid_jets(49999,10,envelope_h);}
+  refused=false;try{(void)ion_quantum_liquid_jets(34999,10,envelope_h);}
   catch(const std::domain_error&){refused=true;}
-  check(refused,"cool hydrogen retains its assessed temperature boundary");
+  check(refused,"hydrogen envelope retains its 35 kK floor");
   const auto colder=ion_quantum_liquid_jets(86000,23.6,envelope_h,1)[0];
   const auto colder_p=ion_quantum_liquid_jets(86000*std::exp(h),23.6,envelope_h,1)[0];
   const auto colder_m=ion_quantum_liquid_jets(86000*std::exp(-h),23.6,envelope_h,1)[0];
@@ -131,12 +131,12 @@ int main() {
   refused=false;try{(void)ion_quantum_liquid_jets(299000,4001,mixture(.3,.001,0));}
   catch(const std::domain_error&){refused=true;}
   check(refused,"dense H/He mixture retains its upper density boundary");
-  refused=false;try{(void)ion_quantum_liquid_jets(199999,201,envelope_h);}
+  refused=false;try{(void)ion_quantum_liquid_jets(159999,1001,envelope_h);}
   catch(const std::domain_error&){refused=true;}
-  check(refused,"denser hydrogen extension retains its warmer temperature boundary");
-  refused=false;try{(void)ion_quantum_liquid_jets(60000,150,dense_h);}
+  check(refused,"hydrogen envelope retains its 1000 g/cm3 density limit");
+  refused=false;try{(void)ion_quantum_liquid_jets(50000,150,dense_h);}
   catch(const std::domain_error&){refused=true;}
-  check(refused,"cold hydrogen retains its plasma-temperature bound");
+  check(refused,"hydrogen envelope retains its plasma-temperature bound 1.7");
   for(auto state:{std::pair{48000.,10.},std::pair{70000.,50.},
                   std::pair{180000.,220.},std::pair{250000.,700.}}) {
     const auto [temperature,density]=state;
@@ -147,10 +147,10 @@ int main() {
           "colder hydrogen envelope retains the free-energy response");
   }
   for(auto state:{std::array<double,3>{34999,10,.99},
-                  std::array<double,3>{180000,501,.99},
+                  std::array<double,3>{150000,1001,.99},
                   std::array<double,3>{299000,4001,.99},
-                  std::array<double,3>{45000,60,.99},
-                  std::array<double,3>{48000,10,.989}}) {
+                  std::array<double,3>{40000,120,.99},
+                  std::array<double,3>{48000,10,.94}}) {
     refused=false;
     try{(void)ion_quantum_liquid_jets(state[0],state[1],mixture(state[2],.003,0));}
     catch(const std::domain_error&){refused=true;}
@@ -176,9 +176,24 @@ int main() {
                   std::array<double,4>{290000,780,.9905,.006}})
     check(ion_quantum_liquid_jets(state[0],state[1],mixture(state[2],state[3],0),1)[0][0][0]>0,
           "extended dense and cold hydrogen domains are supported");
-  refused=false;try{(void)ion_quantum_liquid_jets(150000,40,mixture(.97,.0038,0));}
+  refused=false;try{(void)ion_quantum_liquid_jets(150000,40,mixture(.94,.0038,0));}
   catch(const std::domain_error&){refused=true;}
-  check(refused,"cool hydrogen approximation does not extend to helium-rich layers");
+  check(refused,"hydrogen envelope approximation does not extend below X 0.95 at low density");
+  refused=false;try{(void)ion_quantum_liquid_jets(159999,3300,mixture(.01,.0005,0));}
+  catch(const std::domain_error&){refused=true;}
+  check(refused,"dense H/He mixture retains its 160 kK floor");
+  // Actual envelope states beyond the former limits (1225 K profile scaled to T x 0.68-0.4): the most
+  // quantum, densest, coolest and most helium-rich hydrogen layers, and the H/He transition.
+  for(auto state:{std::array<double,4>{123392,681.001,.994238,.00262601},std::array<double,4>{193407,922.349,.954325,.0340519},
+                  std::array<double,4>{35527.8,40.7262,.998411,.00096142},std::array<double,4>{173470,3299.94,.0101669,.000458997},
+                  std::array<double,4>{222042,3299.94,.0101669,.000458997},std::array<double,4>{161815,1014.29,.821361,.0688764}}) {
+    const auto material=mixture(state[2],state[3],0);
+    const auto q=ion_quantum_liquid_jets(state[0],state[1],material,1)[0];
+    const auto p=ion_quantum_liquid_jets(state[0]*std::exp(h),state[1],material,1)[0];
+    const auto m=ion_quantum_liquid_jets(state[0]*std::exp(-h),state[1],material,1)[0];
+    check(q[0][0]>0 && std::abs((p[0][0]-m[0][0])/(2*h)/q[1][0]-1)<2e-7,
+          "extended envelope and transition states retain the free-energy response");
+  }
   refused=false;try{(void)ion_quantum_liquid_jets(1e6,3e4,mixture(.01,0,.98));}catch(const std::domain_error&){refused=true;}
   check(refused,"strong ionic coupling is not treated as an assessed liquid");
   refused=false;try{(void)ion_quantum_liquid_jets(900000,50000,mixture(.1,0,0));}

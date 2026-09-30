@@ -97,11 +97,13 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
       c.X[0]>=.97 && c.Z()<=1e-8;
   const bool cool_hydrogen=T>=5e4 && rho>=10 && (rho<=200 || (T>=2e5 && rho<=500)) && thetaH<=.7 &&
       c.X[0]>=.98 && c.Z()<=1e-8;
-  const bool cold_hydrogen=T>=3.5e4 && rho>=10 && (rho<=500 || (T>=2e5 && rho<=900)) && thetaH<=1.1 &&
-      c.X[0]>=.99 && c.Z()<=1e-8;
+  // Dense hydrogen envelope at X >= 0.95: hydrogen fully ionized in direct
+  // source checks; trace-helium recombination below ~130 kK is a declared term.
+  const bool cold_hydrogen=T>=3.5e4 && rho>=10 && rho<=1000 && thetaH<=1.7 &&
+      c.X[0]>=.95 && c.Z()<=1e-8;
   // Dense, fully ionized H/He layers of any hydrogen fraction (the He-rich
-  // mantle and the H/He transition) below 300 kK.
-  const bool dense_mixture=T>=2e5 && rho>=300 && rho<=4000 && thetaH<=1.4 &&
+  // mantle and the H/He transition) from 160 to 300 kK.
+  const bool dense_mixture=T>=1.6e5 && rho>=300 && rho<=4000 && thetaH<=1.85 &&
       c.Z()<=1e-10;
   // The liquid mixture does not determine metal separation or freezing;
   // the mean-coupling guard below is not a mixture phase boundary.
@@ -109,7 +111,7 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   // Cooler, nearly pure helium layers remain pressure ionized in direct
   // source checks. This does not extend the metal-rich core's phase range.
   const bool cool_helium=T>=4e5 && rho>=1e3 && rho<=1e5 && c.X[0]<=.01 && c.Z()<=1e-3;
-  const double theta_limit=(assessed_core || cool_helium)?4.:dense_mixture?1.4:cold_hydrogen?1.1:1.;
+  const double theta_limit=(assessed_core || cool_helium)?4.:dense_mixture?1.85:cold_hydrogen?1.7:1.;
   if(thetaH>theta_limit ||
       (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen && !cold_hydrogen && !dense_mixture)) {
     std::ostringstream message;

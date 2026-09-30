@@ -1,0 +1,257 @@
+{
+  "scope": "Dilute-H quantum model comparison; native chemical-potential and enthalpy-temperature force on supported faces, explicit CN composition. This is a model spread, not a rigorous error bound.",
+  "hydrogen_mass_fraction_limit": 0.001,
+  "hydrogen_quantum_ratio_limit": 8,
+  "models": [
+    "BC22 fitted liquid correction, extrapolated in proton R_s",
+    "leading Wigner-Kirkwood term",
+    "Einstein harmonic form with the same classical limit"
+  ],
+  "coverage_limit": "Coldest scaled profiles omit collision-table-refused central faces; a complete core flux comparison requires the next collision table.",
+  "force_controls_by_temperature_scale": {
+    "1": {
+      "faces": 347,
+      "X_max": 0.0009847,
+      "force_kT": {
+        "p10": 0.010889457433480002,
+        "p50": 0.66573799508,
+        "p90": 1.1151140143340001,
+        "max": 1.12963798388
+      },
+      "hterm_share_median": 0.05205857459860814,
+      "change_kT": {
+        "wk": {
+          "p50": 5.9695422869510936e-05,
+          "p90": 0.00011939461895650578,
+          "max": 0.00012449380421384741
+        },
+        "ein": {
+          "p50": 3.295532784177242e-05,
+          "p90": 6.518550516750514e-05,
+          "max": 6.84848399096483e-05
+        }
+      },
+      "ratio": {
+        "wk": {
+          "p50": 0.00016016678686726942,
+          "p90": 0.00023316231419555084,
+          "p99": 0.001827468542534341,
+          "max": 0.00473590634393834
+        },
+        "ein": {
+          "p50": 8.603773714195436e-05,
+          "p90": 0.0001580192768742649,
+          "p99": 0.001827468542534341,
+          "max": 0.004407809811600917
+        }
+      },
+      "enthalpy_part_of_change_max_kT": {
+        "wk": 8.523703514638338e-06,
+        "ein": 4.62922764129187e-06
+      },
+      "ratio_for_faces_with_force_above_median": {
+        "wk": 0.00017188786294637594,
+        "ein": 9.389287132559619e-05
+      }
+    },
+    "0.7": {
+      "faces": 347,
+      "X_max": 0.0009847,
+      "force_kT": {
+        "p10": 0.015636828699680003,
+        "p50": 0.9595299982200001,
+        "p90": 1.6170108470200002,
+        "max": 1.6380416949999999
+      },
+      "hterm_share_median": 0.051505873616958776,
+      "change_kT": {
+        "wk": {
+          "p50": 0.00022513839280163017,
+          "p90": 0.0004451743937518892,
+          "max": 0.0004594601059913715
+        },
+        "ein": {
+          "p50": 0.00011790755793378085,
+          "p90": 0.0002295141644966185,
+          "max": 0.0002375886392704749
+        }
+      },
+      "ratio": {
+        "wk": {
+          "p50": 0.0004179056654700979,
+          "p90": 0.0005474208126771435,
+          "p99": 0.002332423219775399,
+          "max": 0.012336787675631752
+        },
+        "ein": {
+          "p50": 0.00021149989511911943,
+          "p90": 0.0002810850686012496,
+          "p99": 0.002332423219775399,
+          "max": 0.011017611851333674
+        }
+      },
+      "enthalpy_part_of_change_max_kT": {
+        "wk": 3.199805677841775e-05,
+        "ein": 1.6514402763108382e-05
+      },
+      "ratio_for_faces_with_force_above_median": {
+        "wk": 0.0004329476452653446,
+        "ein": 0.00022056488721484876
+      }
+    },
+    "0.5": {
+      "faces": 140,
+      "X_max": 0.0009847,
+      "force_kT": {
+        "p10": 1.9756860458099998,
+        "p50": 2.2008451569,
+        "p90": 2.31136476168,
+        "max": 2.3163527109
+      },
+      "hterm_share_median": 0.0697671345704549,
+      "change_kT": {
+        "wk": {
+          "p50": 0.0009878035133276185,
+          "p90": 0.0014488501756390012,
+          "max": 0.001473251721118948
+        },
+        "ein": {
+          "p50": 0.0004981253724312678,
+          "p90": 0.0006888259426216541,
+          "max": 0.0006946634722549572
+        }
+      },
+      "ratio": {
+        "wk": {
+          "p50": 0.0004264779882017361,
+          "p90": 0.0007334085884829703,
+          "p99": 0.0008055264579708843,
+          "max": 0.000811418928097085
+        },
+        "ein": {
+          "p50": 0.00021506251146955277,
+          "p90": 0.0003487129258355508,
+          "p99": 0.0003788694301101244,
+          "max": 0.00038046531261896617
+        }
+      },
+      "enthalpy_part_of_change_max_kT": {
+        "wk": 0.00010439143811477173,
+        "ein": 4.968165408655207e-05
+      },
+      "ratio_for_faces_with_force_above_median": {
+        "wk": 0.0005866635171479,
+        "ein": 0.00028641693808248333
+      }
+    },
+    "0.45": {
+      "faces": 110,
+      "X_max": 0.0009847,
+      "force_kT": {
+        "p10": 2.30418645117,
+        "p50": 2.49967436175,
+        "p90": 2.57660879491,
+        "max": 2.5802360979000003
+      },
+      "hterm_share_median": 0.07517977911673035,
+      "change_kT": {
+        "wk": {
+          "p50": 0.0011943518576118415,
+          "p90": 0.0018349443128132235,
+          "max": 0.00195009184453732
+        },
+        "ein": {
+          "p50": 0.0005963630328201531,
+          "p90": 0.0008683594758281225,
+          "max": 0.0009094998813875877
+        }
+      },
+      "ratio": {
+        "wk": {
+          "p50": 0.00046640882974170365,
+          "p90": 0.0007418858189489941,
+          "p99": 0.0008121357554465422,
+          "max": 0.0008192778237386571
+        },
+        "ein": {
+          "p50": 0.00023288696026492405,
+          "p90": 0.0003510858992895735,
+          "p99": 0.0003795888506251752,
+          "max": 0.0003821015331155238
+        }
+      },
+      "enthalpy_part_of_change_max_kT": {
+        "wk": 0.0001483833445374876,
+        "ein": 6.840621100826839e-05
+      },
+      "ratio_for_faces_with_force_above_median": {
+        "wk": 0.00071282710396372,
+        "ein": 0.0003388679077813192
+      }
+    },
+    "0.4": {
+      "faces": 86,
+      "X_max": 0.0009847,
+      "force_kT": {
+        "p10": 2.5762843886,
+        "p50": 2.837198983,
+        "p90": 2.9076288231,
+        "max": 2.9101444875
+      },
+      "hterm_share_median": 0.08019385501361287,
+      "change_kT": {
+        "wk": {
+          "p50": 0.0015287048029467725,
+          "p90": 0.0022940208254289504,
+          "max": 0.0024709701821316226
+        },
+        "ein": {
+          "p50": 0.0007504514471367906,
+          "p90": 0.001071410287572892,
+          "max": 0.0011390313478645837
+        }
+      },
+      "ratio": {
+        "wk": {
+          "p50": 0.0005388045654846434,
+          "p90": 0.0007906806637986291,
+          "p99": 0.0008542375249146003,
+          "max": 0.0008600373795660689
+        },
+        "ein": {
+          "p50": 0.0002645029494426071,
+          "p90": 0.0003692832040580813,
+          "p99": 0.00039484558378102857,
+          "max": 0.00039644733179903776
+        }
+      },
+      "enthalpy_part_of_change_max_kT": {
+        "wk": 0.000209030711298426,
+        "ein": 9.505242127400072e-05
+      },
+      "ratio_for_faces_with_force_above_median": {
+        "wk": 0.0008600373795660689,
+        "ein": 0.00039644733179903776
+      }
+    }
+  },
+  "source_sha256": "d62999149012bb68ccea42c7deb682fd85306c3eaad918842009c7b36b44cba5",
+  "tests": [
+    "ion_quantum passed",
+    "cold_helium_base passed"
+  ],
+  "primary_native_validation": {
+    "passed": true,
+    "queries": 4486,
+    "unchanged_supported": 2937,
+    "recovered": 190,
+    "lost": [],
+    "changed": [],
+    "remaining_failures_by_provider": {
+      "collision transport": 1103,
+      "cold He base": 224,
+      "HelmholtzTableEos": 32
+    },
+    "scope": "Dilute-H domain extension after envelope extension. Actual 1157 K profile with density/composition fixed and temperatures scaled through 0.4. Unsupported collision/EOS states still refuse."
+  }
+}

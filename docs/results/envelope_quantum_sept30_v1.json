@@ -1,0 +1,198 @@
+{
+  "scope": "F753 items 1-2: envelope quantum/charge-state controls on quantum-refused states of the 1225 K profile at T x0.68-0.4 (family_v2); pressure-ionized FreeEOS continuation; BC22 vs WK vs Einstein-harmonic",
+  "transition": {
+    "states": 69,
+    "T": [
+      161815.1856416293,
+      222041.78236831445
+    ],
+    "theta_max": 1.836237275514079,
+    "H_plus_min": 0.9999999999999971,
+    "He2_min": 0.9999999999999999,
+    "ionization_max": 1.7691150942105158e-09,
+    "model_spread_max": 0.008547741920240493
+  },
+  "hydrogen": {
+    "states": 323,
+    "theta_max": 1.6479384688621388,
+    "rho_max": 922.3490757985063,
+    "X_min": 0.9543245556256565,
+    "H_plus_min": 0.9999999999999968,
+    "model_spread_max": 0.013539323681438101,
+    "ionization_below_130kK": {
+      "states": 225,
+      "all_converged": true,
+      "p90": 0.0017087024949837583,
+      "max": 0.02923721660801006
+    },
+    "ionization_above_130kK_max": 3.983405377500124e-09
+  },
+  "patch": {
+    "file": "envelope_quantum_intervals_v1.patch",
+    "base": "W 17d1ef7",
+    "sha256": "993e74ae41560d32c9fe462b6023d5d7b9e005d14e5f24975145a81b2fcdaf17"
+  },
+  "selected_for_evolution": false,
+  "primary_native_validation": {
+    "passed": true,
+    "queries": 4486,
+    "unchanged_supported": 2776,
+    "newly_supported": 161,
+    "lost": [],
+    "changed": [],
+    "recovered_examples": [
+      {
+        "scale": 0.7,
+        "face": 418,
+        "T": [
+          200565.5419624523,
+          199670.39352219834
+        ],
+        "rho": [
+          703.3825351814619,
+          683.1341230429955
+        ],
+        "X": 0.9947666045659882,
+        "Y3": 0.0025259309380030594,
+        "Z": 1.8990410711369104e-31,
+        "q": 0.975775827117174,
+        "ok": true,
+        "rate": [
+          43926065744.86165,
+          -14739847596.98941,
+          -3.972159723133001e-18
+        ],
+        "conductivity": 417680029288.8832,
+        "carried": 3.6775856989036e+25,
+        "heat_ok": true
+      },
+      {
+        "scale": 0.7,
+        "face": 419,
+        "T": [
+          199670.39352219834,
+          198758.40563948947
+        ],
+        "rho": [
+          683.1341230429955,
+          663.4019395928789
+        ],
+        "X": 0.9949073600024004,
+        "Y3": 0.002485455428171055,
+        "Z": 1.260163779499835e-31,
+        "q": 0.976647067679178,
+        "ok": true,
+        "rate": [
+          42133288861.63766,
+          -14354464912.236248,
+          -3.642824467834919e-18
+        ],
+        "conductivity": 404429548910.3825,
+        "carried": 3.453043528218023e+25,
+        "heat_ok": true
+      },
+      {
+        "scale": 0.7,
+        "face": 420,
+        "T": [
+          198758.40563948947,
+          197829.1549632387
+        ],
+        "rho": [
+          663.4019395928789,
+          644.1736866886747
+        ],
+        "X": 0.9950459544704079,
+        "Y3": 0.0024459078010523254,
+        "Z": 1.5896148155902972e-31,
+        "q": 0.9774940741739319,
+        "ok": true,
+        "rate": [
+          40386184515.75143,
+          -13973663150.452982,
+          -3.23647692398219e-18
+        ],
+        "conductivity": 391524106737.4279,
+        "carried": 3.239588734490238e+25,
+        "heat_ok": true
+      },
+      {
+        "scale": 0.7,
+        "face": 421,
+        "T": [
+          197829.1549632387,
+          196882.20480960526
+        ],
+        "rho": [
+          644.1736866886747,
+          625.4375665024804
+        ],
+        "X": 0.9951832704365179,
+        "Y3": 0.002406116544632857,
+        "Z": 1.036860481361002e-31,
+        "q": 0.9783172528673133,
+        "ok": true,
+        "rate": [
+          38683526887.46302,
+          -13593938489.64898,
+          -2.9470015479380494e-18
+        ],
+        "conductivity": 378955889302.42096,
+        "carried": 3.036809125039039e+25,
+        "heat_ok": true
+      },
+      {
+        "scale": 0.7,
+        "face": 422,
+        "T": [
+          196882.20480960526,
+          195917.1046072246
+        ],
+        "rho": [
+          625.4375665024804,
+          607.182185332101
+        ],
+        "X": 0.9953196048778272,
+        "Y3": 0.0023655167085619437,
+        "Z": 1.3127026329860838e-31,
+        "q": 0.9791170100620499,
+        "ok": true,
+        "rate": [
+          37025799851.13151,
+          -13213918716.494606,
+          -2.645398690718054e-18
+        ],
+        "conductivity": 366717159705.01544,
+        "carried": 2.84439789911348e+25,
+        "heat_ok": true
+      },
+      {
+        "scale": 0.7,
+        "face": 423,
+        "T": [
+          195917.1046072246,
+          194933.3894340295
+        ],
+        "rho": [
+          607.182185332101,
+          589.3964998198161
+        ],
+        "X": 0.9954549570487093,
+        "Y3": 0.002323869890812679,
+        "Z": 8.755938054978675e-32,
+        "q": 0.9798937519284224,
+        "ok": true,
+        "rate": [
+          35414146415.97539,
+          -12833344114.2672,
+          -2.387794660184514e-18
+        ],
+        "conductivity": 354800337567.44604,
+        "carried": 2.662080223473807e+25,
+        "heat_ok": true
+      }
+    ],
+    "scope": "Native EOS, metal diffusion, conductivity and heat derivatives on the actual 1157 K star and fixed-density cooler projections; original dilute-H and collision guards remain. Not a cooled stellar solution.",
+    "remaining_restrictions": "EOS source masks, dilute-hydrogen guard and collision-table coverage remain in this envelope-only comparison."
+  }
+}

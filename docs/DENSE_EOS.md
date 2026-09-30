@@ -119,29 +119,40 @@ fully ionized layers reproduce the source at every share:
   differencing floor. The colder layers retain the 200 g/cm³ limit.
   [Dense-envelope controls](results/cold_transport_domain_sept30_v1.json).
 
-- T ≥ 35 kK, density 10–500 g/cm³ (up to 900 above 200 kK), X ≥ 0.99,
-  Tp,H/T ≤ 1.1. Hydrogen stays fully ionized
-  in direct source checks down to 35 kK. Direct ionization controls
-  support the hydrogen-rich cooling layers. Trace-helium pressure ionization
-  makes the fully ionized quantum correction uncertain by up to 1.15% of
-  classical ion Cv at X = 0.99; the corresponding stellar-integrated sensitivity
-  in the tested cooler profile is 5.806e-7 of total Cv. This is a model comparison,
-  not a rigorous uncertainty bound. Denser sampling also finds peaks of 0.78%
-  in the X = 0.98 interval above. Neither interval supplies an ionization model
-  for the underlying classical EOS.
-  [Cold-envelope controls](results/quantum_cold_envelope_sept30_v1.json).
+- T ≥ 35 kK, density 10–1000 g/cm³, X ≥ 0.95, Tp,H/T ≤ 1.7. Hydrogen stays
+  fully ionized in direct pressure-ionized source checks of the cooling envelope
+  (323 layer states, 35–200 kK, to Tp,H/T 1.65); the fitted correction and the leading
+  Wigner–Kirkwood and Einstein-harmonic forms differ by ≤ 1.4% of classical ion Cv.
+  Where trace helium recombines (below about 130 kK) the ionization change of the
+  quantum Cv is ≤ 1.7e-3 of ion Cv at the 90th percentile and 2.9e-2 at most, at
+  the recombination front. [Envelope controls](results/envelope_quantum_sept30_v1.json).
+  These are model comparisons, not error bounds. The correction does not
+  replace the ionization treatment in the underlying classical EOS.
 
 - Dense H/He at any hydrogen fraction (the helium-rich mantle and the H/He
-  transition): T ≥ 200 kK, density 300–4000 g/cm³, Z ≤ 1e-10 and
-  Tp,H/T ≤ 1.4. Hydrogen and helium are fully ionized in direct
-  source checks (quantum-Cv ionization sensitivity ≤ 1e-8 of classical ion Cv).
+  transition): T ≥ 160 kK, density 300–4000 g/cm³, Z ≤ 1e-10 and
+  Tp,H/T ≤ 1.85. Hydrogen and helium are fully ionized in direct
+  source checks (quantum-Cv ionization sensitivity ≤ 1e-8 of classical ion Cv;
+  ≤ 2e-9 in 69 transition-layer states at 162–222 kK and Tp,H/T ≤ 1.84, where the fitted,
+  Wigner–Kirkwood and Einstein-harmonic corrections differ by ≤ 0.9% of classical ion Cv).
   The leading Wigner–Kirkwood and Hansen–Vieillefosse terms differ from the fitted
   correction by ≤ 7% and ≤ 2% of the quantum heat capacity; these are model
   comparisons, not bounds.
 
-In the cold helium liquid, trace hydrogen (mass fraction ≤ 1e-6) may reach
-Tp,H/T ≤ 6.5 (otherwise 4). There the fitted correction is used outside its
-R_S range. Its heat capacity is small but nonzero (about −1e-7 of the local Cv).
+In the cold helium liquid, dilute hydrogen (mass fraction ≤ 1e-3) may reach
+Tp,H/T ≤ 8 (otherwise 4). There the fitted correction is used outside its
+R_S range (R_S,H ≈ 80). Against the leading Wigner–Kirkwood term and an
+Einstein-harmonic form with the same classical limit, the quantum hydrogen
+chemical potential differs by up to 0.52 and 0.23 kT at Tp,H/T = 7.6. The
+native hydrogen force per face (chemical-potential difference plus the EOS and
+collision enthalpy-temperature term, 0.01–2.9 kT per H ion for X ≤ 1e-3 at
+T 0.16–0.41 MK) changes by at most 2.5e-3 kT: ≤ 8.0e-4 of the force at the 90th
+percentile and ≤ 2.4e-3 at the 99th; larger ratios occur only where the force is
+≲ 0.02 kT. The heat-capacity weight scales with the hydrogen fraction (≲ 1e-3 of the local Cv).
+The colder comparisons cover only faces supported by the collision tables:
+347 faces at the original temperature and 70% of it, falling to 86 at 40%.
+They do not yet test the coldest central transport.
+[Trace-hydrogen checks](results/trace_hydrogen_quantum_sept30_v1.json).
 The R_S sensitivity of the hydrogen chemical potential is about 0.01 kT
 (rising to 0.025 kT in colder projections).
 [Source and stellar checks](results/quantum_dense_mixture_sept30_v1.json).

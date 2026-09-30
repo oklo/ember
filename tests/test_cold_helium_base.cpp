@@ -119,11 +119,15 @@ int main(){
      check(std::isfinite(pot.gradient[0]+pot.hessian[0][0]+heat.exchange_enthalpy[0]+heat.enthalpy_partials[2][4]),
          "joined forces and heat finite",0);}
   } else std::cout<<"join checks skipped (EMBER_COLD_HELIUM_FAMILY not set)\n";
-  // Trace hydrogen in the metal-rich core may reach T_p,H/T <= 6.5; ordinary hydrogen keeps the limit 4.
+  // Dilute hydrogen in the metal-rich core may reach T_p,H/T <= 8; other hydrogen keeps the limit 4.
   {auto rejected=[](double T,double rho,const Composition& c){try{cold_helium_validate(T,rho,c);return false;}catch(const std::domain_error&){return true;}};
    check(!rejected(3.02e5,5e4,comp(3e-8,1e-14,.13)),"trace core hydrogen at T_p,H/T 4.1 supported",0);
-   check(rejected(3.02e5,5e4,comp(2e-6,1e-14,.13)),"non-trace hydrogen keeps T_p,H/T <= 4",0);
-   check(rejected(1.8e5,5e4,comp(3e-8,1e-14,.13)),"trace hydrogen beyond T_p,H/T 6.5 refused",0);
+   check(rejected(3.02e5,5e4,comp(2e-3,1e-14,.13)),"non-dilute hydrogen keeps T_p,H/T <= 4",0);
+   {bool h_limit=false;   // T_p,H/T 8.31 with Gamma_He 127: refused by the hydrogen limit, not the host limit
+    try{cold_helium_validate(2.1e5,1e5,comp(3e-8,1e-14,.13));}
+    catch(const std::domain_error& e){h_limit=std::string(e.what()).find("hydrogen quantum")!=std::string::npos;}
+    check(h_limit,"dilute hydrogen beyond T_p,H/T 8 refused",0);}
+   check(!rejected(2.25e5,1e5,comp(5e-4,1e-14,.13)),"dilute hydrogen (X 5e-4) at T_p,H/T 7.75 supported",0);
    // Metal-rich core below the former mean-coupling limit (Gamma_MCP 103 at 2.86e5 K) with helium well inside its liquid range.
    check(!rejected(2.864e5,5.03e4,comp(1e-12,1e-14,.13)),"metal-rich helium liquid beyond mean coupling 100 supported",0);
    {bool helium_limit=false;
