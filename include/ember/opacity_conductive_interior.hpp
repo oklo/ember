@@ -30,11 +30,15 @@ public:
     double minimum_X{},maximum_Z{1.},uncertainty{uncertainty_factor};
     // Optional lower-temperature overlap with the supported radiative source.
     double cold_source_T{},cold_full_T{};
+    // Optional composition overlap; zero preserves the older selection rule.
+    double full_X{};
   };
   static Domain hydrogen_envelope_domain() {
     // At rho <= 1000 the entire 700–800 kK overlap lies below log R=3.5.
     // A 550–600 kK overlap can ask for the old source beyond that edge.
-    return {180.,190.,2e5,7e5,8e5,1000.,.97,1e-8,100.,3e5,3.2e5};
+    // Finish the composition join below the source's atomic X=.75 boundary,
+    // including the conversion from baryonic H/He fractions.
+    return {180.,190.,2e5,7e5,8e5,1000.,.70,1e-8,100.,3e5,3.2e5,.745};
   }
 
   ConductiveInteriorOpacity(const Opacity& source,const Conduction& conduction,
@@ -48,6 +52,7 @@ public:
         || !(domain_.anchor>0 && domain_.full>domain_.anchor && domain_.maximum_rho>=domain_.full
              && domain_.minimum_T>0 && domain_.full_T>domain_.minimum_T && domain_.source_T>domain_.full_T
              && domain_.minimum_X>=0 && domain_.minimum_X<=1 && domain_.maximum_Z>=0 && domain_.maximum_Z<=1
+             && (domain_.full_X==0 || (domain_.full_X>domain_.minimum_X && domain_.full_X<=1))
              && domain_.uncertainty>=1 && domain_.uncertainty<=100
              && ((domain_.cold_source_T==0 && domain_.cold_full_T==0)
                  || (domain_.cold_source_T>=domain_.minimum_T
@@ -61,6 +66,13 @@ public:
     if(rho<=domain_.anchor || T>=domain_.source_T || T<=domain_.cold_source_T
         || c.h1()<domain_.minimum_X || c.Z()>domain_.maximum_Z)
       return source_.eval(T,rho,c);
+    double wx=1.,dwx=0.;
+    if(domain_.full_X>0) {
+      const double width=domain_.full_X-domain_.minimum_X;
+      const auto composition=ramp((c.h1()-domain_.minimum_X)/width);
+      wx=composition.first;dwx=composition.second/width;
+      if(wx==0)return source_.eval(T,rho,c);
+    }
     if(!(T>=domain_.minimum_T && rho<=domain_.maximum_rho))
       throw std::domain_error("ConductiveInteriorOpacity: outside selected temperature/density bounds");
     const double conduction_opacity=conduction_.eval(T,rho,c).kappa;
@@ -99,8 +111,9 @@ public:
       const auto cold=ramp(std::log(T/domain_.cold_source_T)/cold_width);
       wc=cold.first;dwc=cold.second/cold_width;
     }
-    const double w=wr*wt*wc;
-    const double dwT=wr*(wt*dwc-wc*dwt/twidth),dwR=wt*wc*dwr/width;
+    const double w=wr*wt*wc*wx;
+    const double dwT=wx*wr*(wt*dwc-wc*dwt/twidth),dwR=wx*wt*wc*dwr/width;
+    const double dwX=wr*wt*wc*dwx;
     if(w<1.) {
       const auto old=source_.eval(T,rho,c);
       nominal_blend=std::exp((1-w)*std::log(old.kappa)+w*std::log(nominal));
@@ -108,7 +121,7 @@ public:
       out.kappa=std::exp(std::log(old.kappa)+w*contrast);
       out.dlnk_dlnT=(1-w)*old.dlnk_dlnT+w*out.dlnk_dlnT+dwT*contrast;
       out.dlnk_dlnRho=(1-w)*old.dlnk_dlnRho+w*out.dlnk_dlnRho+dwR*contrast;
-      out.dlnk_dX=(1-w)*old.dlnk_dX+w*out.dlnk_dX;
+      out.dlnk_dX=(1-w)*old.dlnk_dX+w*out.dlnk_dX+dwX*contrast;
       out.dlnk_dZ=(1-w)*old.dlnk_dZ+w*out.dlnk_dZ;
       out.dlnk_dY3=(1-w)*old.dlnk_dY3+w*out.dlnk_dY3;
     }

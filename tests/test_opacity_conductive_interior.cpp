@@ -128,8 +128,8 @@ int main(){try{
   require(std::abs(assessed.maximum_transport_uncertainty()-.002)<1e-12,
       "larger envelope bound was not recorded");
   struct HotBoundedSource final : Opacity {
-    OpacityState eval(double T,double rho,const Composition&) const override {
-      if(std::log10(rho)-3*std::log10(T/1e6)>3.5)
+    OpacityState eval(double T,double rho,const Composition& mixture) const override {
+      if(mixture.h1()>.75 && std::log10(rho)-3*std::log10(T/1e6)>3.5)
         throw std::domain_error("hot source log R edge");
       const double r=std::log(rho/180.);
       return {1e3*std::exp(.7*r+.02*r*r)*std::pow(T/7e5,-.4),-.4,.7+.04*r,0,0,0};
@@ -147,6 +147,17 @@ int main(){try{
     if(rho<1000.)
       require(std::abs((f(T,rho*std::exp(h))-f(T,rho*std::exp(-h)))/(2*h)-v.dlnk_dlnRho)<2e-6,
           "upper hydrogen overlap density derivative");
+  }
+  for(double X:{.699,.70,.71,.725,.74,.745,.75,.85,.97,.99}) {
+    auto mixture=hc;mixture.X[0]=X;mixture.X[2]=1-X-mixture.X[1];
+    constexpr double T=5.5e5,rho=900.,h=1e-6;
+    const auto v=safe_join.eval(T,rho,mixture);
+    auto plus=mixture,minus=mixture;
+    plus.X[0]+=h;plus.X[2]-=h;minus.X[0]-=h;minus.X[2]+=h;
+    const double fd=(std::log(safe_join.eval(T,rho,plus).kappa)
+        -std::log(safe_join.eval(T,rho,minus).kappa))/(2*h);
+    require(std::abs(fd-v.dlnk_dX)<2e-6,"hydrogen composition join derivative");
+    if(X<=.70)require(v.kappa==bounded.eval(T,rho,mixture).kappa,"H-poor source changed");
   }
   std::cout<<"radiative continuation, derivatives, support and contribution checks passed\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

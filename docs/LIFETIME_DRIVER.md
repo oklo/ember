@@ -573,12 +573,16 @@ continues the measured density slope where radiation is a small contribution
 alongside electron conduction. Its density blend ends at 190 g/cm³, before
 one hot-source corner at 199.5 g/cm³. Temperature, composition and source
 checks remain active. Restart identity records
-`hydrogen_density_continuation.v5`. Its upper temperature overlap spans
+`hydrogen_density_continuation.v6`. Its upper temperature overlap spans
 700–800 kK, where the original source covers the full selected density range
-through 1000 g/cm³. A matched 9.5 Myr comparison changes the reported global
-quantities by at most 2.460e-7; cooling then reaches 1844 K before another
-source boundary. [Upper-join checks](results/conductive_envelope_upper_join_sept30_v1.json).
-A smooth blend recovers the original
+through 1000 g/cm³. A smooth composition blend spans baryonic hydrogen
+fractions 0.70–0.745, finishing below the hot source's atomic hydrogen
+boundary at 0.75. Its hydrogen derivative includes this blend.
+A matched 297.0 Myr comparison with opacity multipliers 0.01, 1 and 100
+changes luminosity by at most 0.0001657%. The nominal calculation reaches
+the 1800 K atmosphere boundary. The uncertainty allowance and all evolution
+checks are unchanged. [Composition-join checks](results/conductive_envelope_composition_join_sept30_v1.json).
+A smooth temperature blend recovers the original
 radiative source between 320 and 300 kK, where the conducting channel turns
 off. The source's coverage limits still apply. Missing conduction therefore
 cannot justify radiative extrapolation.

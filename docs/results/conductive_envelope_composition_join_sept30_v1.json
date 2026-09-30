@@ -1,0 +1,84 @@
+{
+  "scope": "Smooth hydrogen-composition join for conduction-dominated envelope opacity; original uncertainty allowance and evolution checks retained.",
+  "identity": "hydrogen_density_continuation.v6",
+  "baryonic_hydrogen_overlap": [
+    0.7,
+    0.745
+  ],
+  "native_assessment": {
+    "queries": 243,
+    "old_rejections": 26,
+    "proposed_rejections": 14,
+    "maximum_supported_total_conductivity_change": 1.2876495225633278e-07
+  },
+  "native_derivatives": {
+    "passed": true,
+    "centres": 21,
+    "maximum_scaled_derivative_error": 8.967231196477243e-07,
+    "maximum_conditional_transport_uncertainty": 5.317016944838735e-05
+  },
+  "stellar_overlap": {
+    "passed": true,
+    "relative_differences": {
+      "luminosity_Lsun": 9.045462823209505e-08,
+      "radius_Rsun": 1.086527090521372e-09,
+      "Teff_K": 2.2070392624584656e-08,
+      "central_T_K": 8.721126953936675e-08,
+      "central_density_g_cm3": -2.254060049722284e-09,
+      "H_mass_g": 2.6645352591003757e-15,
+      "He3_mass_g": -2.531308496145357e-13
+    }
+  },
+  "stellar_sensitivity": {
+    "passed": true,
+    "start_years": 3871746811489.0356,
+    "years": 3872043816144.9907,
+    "Teff_K": 1838.4937716929924,
+    "span_years": 297004655.9550781,
+    "opacity_scales": [
+      0.01,
+      1,
+      100
+    ],
+    "relative_differences": {
+      "continuous_low": {
+        "luminosity_Lsun": 1.6566040166310358e-06,
+        "radius_Rsun": 6.459521806334578e-10,
+        "Teff_K": 4.138277707177451e-07,
+        "central_T_K": -8.157844177958395e-09,
+        "central_density_g_cm3": 2.268963683604852e-09,
+        "H_mass_g": 4.218847493575595e-15,
+        "He3_mass_g": -3.381739333008227e-13
+      },
+      "continuous_high": {
+        "luminosity_Lsun": -1.671599181296557e-08,
+        "radius_Rsun": -6.671330154972566e-12,
+        "Teff_K": -4.175662149386028e-09,
+        "central_T_K": 8.385825367440702e-11,
+        "central_density_g_cm3": -2.2090773654781515e-11,
+        "H_mass_g": -4.440892098500626e-16,
+        "He3_mass_g": 3.774758283725532e-15
+      }
+    },
+    "scope": "Matched initial state and endpoint. The earlier restart avoids beginning at the old configuration-dependent convective-cell transition. All physics, audits and tolerances unchanged."
+  },
+  "cooling_endpoint": {
+    "years": 3872251179536.8667,
+    "Teff_K": 1800.198080933253,
+    "central_T_K": 918639.9521440165,
+    "radius_Rsun": 0.030460231627044445,
+    "nuclear_fraction": 2.780485660451793e-05,
+    "surface_X": 0.992088136892717
+  },
+  "cooling_cost": {
+    "CPU_seconds": 112.64618899999999,
+    "wall_seconds": 46.91066591721028
+  },
+  "first_domain_rejection": "envelope surface Teff=1799.821768 logg=6.470604: CompositionAtmosphereGrid: Teff, gravity or composition outside source grid",
+  "status": "Target age not reached. Accepted cooling reaches the atmosphere table floor; subsequent small-step Newton failures are secondary.",
+  "limitations": [
+    "A restart immediately at a marginal convective-cell transition stalled. All three controls starting earlier, with identical physics and tolerances, crossed it and reached their common end age.",
+    "Colder fixed-density projections still expose a separate lower-temperature radiative source limit.",
+    "The dense-core EOS remains a controlled fully ionized alternative; higher-metal H3+ atmosphere incorporation remains pending. No final cooling age is established."
+  ]
+}

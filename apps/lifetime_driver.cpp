@@ -300,7 +300,7 @@ int lifetime_main(int argc,char** argv) {
       identity.number("opacity.cold_dense_scale",cold_opacity_scale);
     }
     if(envelope_opacity==1) {
-      identity.values["opacity.conductive_envelope"]="hydrogen_density_continuation.v5";
+      identity.values["opacity.conductive_envelope"]="hydrogen_density_continuation.v6";
       identity.number("opacity.conductive_envelope_scale",envelope_opacity_scale);
       if(envelope_opacity_uncertainty!=.001)
         identity.number("opacity.conductive_envelope_uncertainty",envelope_opacity_uncertainty);
