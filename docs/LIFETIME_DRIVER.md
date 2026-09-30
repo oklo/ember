@@ -530,7 +530,7 @@ radiative opacity in cool, dense cells. It measures the source opacity slope
 near 8500 g/cm³ and joins smoothly over 8500–9500 g/cm³. The original source
 is recovered over 3.4–3.6 MK. Temperature and composition still require
 supported source queries at the anchor; the option does not supply missing
-opacity data.
+opacity data. The assessed lower temperature limit is 800 kK.
 
 The continuation is allowed only when a factor-ten uncertainty in radiation
 changes total heat conductivity by at most 0.1%. The check uses half the
@@ -551,12 +551,19 @@ The separate hydrogen-envelope option, `opacity_conductive_envelope "1"`,
 continues the measured density slope where radiation is a small contribution
 alongside electron conduction. Its density blend ends at 190 g/cm³, before
 one hot-source corner at 199.5 g/cm³. Temperature, composition and source
-checks remain active. The prescription is recorded as
-`hydrogen_density_continuation.v3` in restart identity. The minimum temperature
-is 200 kK. At the 2223 K stellar model, all 536 opacity queries are supported;
-the largest conditional transport uncertainty in the colder-envelope checks
-is 0.09722%. Colder core and hot hydrogen source limits remain enforced.
-[Temperature-domain checks](results/conductive_envelope_temperature_sept30_v1.json).
+checks remain active. Restart identity records
+`hydrogen_density_continuation.v4`. A smooth blend recovers the original
+radiative source between 320 and 300 kK, where the conducting channel turns
+off. The source's coverage limits still apply. Missing conduction therefore
+cannot justify radiative extrapolation.
+
+The join and its derivatives pass native checks; the largest measured change
+in total diffusive conductivity within the supported cold overlap is
+1.808e-8. A matched 10 Myr stellar comparison leaves the reported global
+quantities unchanged. Cooling then continues to the 2000 K atmosphere edge.
+These checks support the opacity join, not the complete low-temperature
+physics or a final cooling age.
+[Native and stellar checks](results/conductive_opacity_cold_join_sept30_v1.json).
 
 `opacity_conductive_envelope_uncertainty` selects the maximum fractional change
 in total diffusive conductivity for a factor-100 reduction of the continued

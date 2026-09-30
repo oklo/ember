@@ -1,5 +1,6 @@
 #include "ember/opacity_conductive_interior.hpp"
 #include <iostream>
+#include <limits>
 
 using namespace ember;
 namespace {
@@ -37,6 +38,21 @@ int main(){try{
     p=c;m=c;p.X[1]+=h;p.X[2]-=h;m.X[1]-=h;m.X[2]+=h;
     require(std::abs((logk(T,rho,p)-logk(T,rho,m))/(2*h)-a.dlnk_dY3)<2e-6,"helium-3 Jacobian mismatch");
   }
+  ConductiveInteriorOpacity::Domain cold_domain;
+  cold_domain.cold_source_T=1.2e6;cold_domain.cold_full_T=2.2e6;
+  ConductiveInteriorOpacity cold(source,heat,.001,1.,cold_domain);
+  for(double T:{1.1e6,1.2e6,1.4e6,2e6,2.2e6})for(double rho:{8499.,8500.,9000.,9500.,9800.}) {
+    const auto v=cold.eval(T,rho,c);constexpr double h=1e-6;
+    const auto logk=[&](double t,double r){return std::log(cold.eval(t,r,c).kappa);};
+    require(std::abs((logk(T*std::exp(h),rho)-logk(T*std::exp(-h),rho))/(2*h)-v.dlnk_dlnT)<2e-6,"cold join T derivative");
+    require(std::abs((logk(T,rho*std::exp(h))-logk(T,rho*std::exp(-h)))/(2*h)-v.dlnk_dlnRho)<2e-6,"cold join density derivative");
+    if(T<=cold_domain.cold_source_T)
+      require(v.kappa==source.eval(T,rho,c).kappa,"cold source values changed");
+    if(T>=cold_domain.cold_full_T)
+      require(v.kappa==continued.eval(T,rho,c).kappa,"warm continuation changed");
+  }
+  bool cold_rejected=false;try{cold.eval(1.5e6,3e4,c);}catch(const std::domain_error&){cold_rejected=true;}
+  require(cold_rejected,"cold overlap ignored source coverage");
   const auto extended=continued.eval(3e6,3e4,c);
   require(extended.kappa>0 && std::isfinite(extended.dlnk_dlnT),"dense continuation unavailable");
   require(continued.maximum_transport_uncertainty()<.001 && continued.continued_evaluations()>0,"contribution diagnostic missing");
@@ -53,6 +69,21 @@ int main(){try{
   Heat weak(1e4);ConductiveInteriorOpacity unsafe(source,weak);
   bool rejected=false;try{unsafe.eval(3e6,3e4,c);}catch(const std::domain_error&){rejected=true;}
   require(rejected,"radiatively important extension was accepted");
+  Heat disabled(std::numeric_limits<double>::infinity());
+  ConductiveInteriorOpacity radiative_only(source,disabled);
+  const auto direct=source.eval(3e6,9000.,c),fallback=radiative_only.eval(3e6,9000.,c);
+  require(fallback.kappa==direct.kappa && fallback.dlnk_dlnT==direct.dlnk_dlnT
+      && fallback.dlnk_dlnRho==direct.dlnk_dlnRho && fallback.dlnk_dX==direct.dlnk_dX
+      && fallback.dlnk_dZ==direct.dlnk_dZ && fallback.dlnk_dY3==direct.dlnk_dY3,
+      "disabled conduction changed the supported radiative source");
+  rejected=false;try{radiative_only.eval(3e6,3e4,c);}catch(const std::domain_error&){rejected=true;}
+  require(rejected,"disabled conduction permitted radiative extrapolation");
+  require(radiative_only.continued_evaluations()==0,"source fallback counted as continuation");
+  for(double invalid:{-std::numeric_limits<double>::infinity(),std::numeric_limits<double>::quiet_NaN(),0.,-1.}) {
+    Heat invalid_heat(invalid);ConductiveInteriorOpacity invalid_continuation(source,invalid_heat);
+    rejected=false;try{invalid_continuation.eval(3e6,9000.,c);}catch(const std::domain_error&){rejected=true;}
+    require(rejected,"invalid conduction was silently accepted");
+  }
   rejected=false;try{continued.eval(8e5,3e4,c);}catch(const std::domain_error&){rejected=true;}
   require(rejected,"missing temperature support was extrapolated");
   // The independent envelope domain uses the same derivative and heat bound.

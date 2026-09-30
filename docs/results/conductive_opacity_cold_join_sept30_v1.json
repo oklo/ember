@@ -1,0 +1,53 @@
+{
+  "scope": "Radiative-source recovery where electron conduction turns off; source-limited cold overlap and unchanged heat-transport uncertainty limits.",
+  "native": {
+    "current_stellar_queries": 536,
+    "current_failures": 0,
+    "cold_join_tests": 600,
+    "supported_cold_join_queries": 577,
+    "expected_source_boundary_rejections": 23,
+    "expected_boundary_rho": 249,
+    "radiative_source_density_note": "The elemental-isotope remapping shifts the nominal source maximum slightly; calls beyond it still reject.",
+    "forecast_unsupported": 13,
+    "forecast_note": "20% colder model reaches hot high-density H-opacity support outside the cold join. Those guards are unchanged.",
+    "core_minimum_T_selected": 800000,
+    "maximum_conditional_core_transport_uncertainty": 4.446440685732382e-11,
+    "maximum_conditional_envelope_transport_uncertainty": 0.0001826206369567372,
+    "maximum_cold_join_diffusive_heat_change": 1.807672433962182e-08,
+    "maximum_native_derivative_discrepancy": 3.1142855476673503e-06,
+    "accepted_for_stellar_overlap": true
+  },
+  "matched_10_Myr": {
+    "passed": true,
+    "relative_differences": {
+      "luminosity_Lsun": 0.0,
+      "radius_Rsun": 0.0,
+      "Teff_K": 0.0,
+      "central_T_K": 0.0,
+      "central_density_g_cm3": 0.0,
+      "H_mass_g": 0.0,
+      "He3_mass_g": 0.0
+    }
+  },
+  "cooling": {
+    "accepted_intervals": 15,
+    "CPU_seconds": 189.528303,
+    "wall_seconds": 51.228679792024195,
+    "Teff_K": 2000.28066768582,
+    "age_years": 3871303982341.6997,
+    "first_physical_stop": "Atmosphere source below 2000 K; subsequent small-step Newton failures are secondary."
+  },
+  "regression_checks": [
+    "Exact source values and derivatives with disabled conduction",
+    "Source-bound rejection in the cold overlap",
+    "NaN, negative and zero conductivity rejection",
+    "Cold and hot join temperature and density derivatives",
+    "Unchanged default transport uncertainty and explicit sensitivity controls"
+  ],
+  "limitations": [
+    "Dense-core full-ionization EOS is a controlled alternative with percent-level thermal uncertainty, not final physics.",
+    "Higher-metal H3+ atmosphere correction remains pending.",
+    "Colder projected mixed-H cells still reject outside their supported hot-opacity domain.",
+    "No below-2000 K atmosphere, crystallization or extreme-cold cooling age is supplied by this change."
+  ]
+}

@@ -4,6 +4,8 @@
 #include <atomic>
 #include <cmath>
 #include <stdexcept>
+#include <sstream>
+#include <iomanip>
 #include <string>
 
 namespace ember {
@@ -14,7 +16,7 @@ namespace ember {
 class ConductiveInteriorOpacity final : public Opacity {
 public:
   static constexpr double anchor_density=8500., full_density=9500.;
-  static constexpr double minimum_temperature=1e6, full_temperature=3.4e6,
+  static constexpr double minimum_temperature=8e5, full_temperature=3.4e6,
       source_temperature=3.6e6, maximum_density=1e6;
   static constexpr double uncertainty_factor=10.;
   // The microscopic heat law and the tabulated conduction reference differ.
@@ -26,6 +28,8 @@ public:
     double anchor{anchor_density},full{full_density},minimum_T{minimum_temperature},
         full_T{full_temperature},source_T{source_temperature},maximum_rho{maximum_density};
     double minimum_X{},maximum_Z{1.},uncertainty{uncertainty_factor};
+    // Optional lower-temperature overlap with the supported radiative source.
+    double cold_source_T{},cold_full_T{};
   };
 
   ConductiveInteriorOpacity(const Opacity& source,const Conduction& conduction,
@@ -39,24 +43,41 @@ public:
         || !(domain_.anchor>0 && domain_.full>domain_.anchor && domain_.maximum_rho>=domain_.full
              && domain_.minimum_T>0 && domain_.full_T>domain_.minimum_T && domain_.source_T>domain_.full_T
              && domain_.minimum_X>=0 && domain_.minimum_X<=1 && domain_.maximum_Z>=0 && domain_.maximum_Z<=1
-             && domain_.uncertainty>=1 && domain_.uncertainty<=100)
+             && domain_.uncertainty>=1 && domain_.uncertainty<=100
+             && ((domain_.cold_source_T==0 && domain_.cold_full_T==0)
+                 || (domain_.cold_source_T>=domain_.minimum_T
+                     && domain_.cold_full_T>domain_.cold_source_T
+                     && domain_.cold_full_T<domain_.full_T)))
         || scale_<1/domain_.uncertainty || scale_>domain_.uncertainty)
       throw std::invalid_argument("ConductiveInteriorOpacity: invalid radiative continuation");
   }
 
   OpacityState eval(double T,double rho,const Composition& c) const override {
-    if(rho<=domain_.anchor || T>=domain_.source_T || c.h1()<domain_.minimum_X || c.Z()>domain_.maximum_Z)
+    if(rho<=domain_.anchor || T>=domain_.source_T || T<=domain_.cold_source_T
+        || c.h1()<domain_.minimum_X || c.Z()>domain_.maximum_Z)
       return source_.eval(T,rho,c);
     if(!(T>=domain_.minimum_T && rho<=domain_.maximum_rho))
       throw std::domain_error("ConductiveInteriorOpacity: outside selected temperature/density bounds");
+    const double conduction_opacity=conduction_.eval(T,rho,c).kappa;
+    // Infinite conductive opacity means that this heat channel is disabled.
+    // It cannot justify an extrapolation, but the original radiative source
+    // remains usable within its own domain (and still rejects outside it).
+    if(std::isinf(conduction_opacity) && conduction_opacity>0)
+      return source_.eval(T,rho,c);
     constexpr double h=.05;
     const auto a=source_.eval(T,domain_.anchor,c);
     const auto b=source_.eval(T,domain_.anchor*std::exp(-h),c);
     const double x=std::log(rho/domain_.anchor),slope=std::log(a.kappa/b.kappa)/h;
     const double nominal=a.kappa*std::exp(slope*x);
-    const double kc=conductivity_margin*conduction_.eval(T,rho,c).kappa;
-    if(!(nominal>0 && std::isfinite(nominal) && kc>0 && std::isfinite(kc)))
-      throw std::domain_error("ConductiveInteriorOpacity: invalid anchor or conductivity");
+    const double kc=conductivity_margin*conduction_opacity;
+    if(!(nominal>0 && std::isfinite(nominal) && kc>0 && std::isfinite(kc))) {
+      std::ostringstream why;why<<std::scientific<<std::setprecision(3)
+          <<"ConductiveInteriorOpacity: invalid anchor or conductivity at T="<<T
+          <<", rho="<<rho<<", X="<<c.h1()<<", Z="<<c.Z()
+          <<"; anchor="<<a.kappa<<", lower_anchor="<<b.kappa
+          <<", continued="<<nominal<<", conduction="<<kc;
+      throw std::domain_error(why.str());
+    }
     double nominal_blend=nominal;
 
     OpacityState out{nominal*scale_,a.dlnk_dlnT+x*(a.dlnk_dlnT-b.dlnk_dlnT)/h,slope,
@@ -67,14 +88,21 @@ public:
     const auto [wr,dwr]=ramp(x/width);
     const double twidth=std::log(domain_.source_T/domain_.full_T);
     const auto [wt,dwt]=ramp(std::log(domain_.source_T/T)/twidth);
-    const double w=wr*wt;
+    double wc=1.,dwc=0.;
+    if(domain_.cold_source_T>0) {
+      const double cold_width=std::log(domain_.cold_full_T/domain_.cold_source_T);
+      const auto cold=ramp(std::log(T/domain_.cold_source_T)/cold_width);
+      wc=cold.first;dwc=cold.second/cold_width;
+    }
+    const double w=wr*wt*wc;
+    const double dwT=wr*(wt*dwc-wc*dwt/twidth),dwR=wt*wc*dwr/width;
     if(w<1.) {
       const auto old=source_.eval(T,rho,c);
       nominal_blend=std::exp((1-w)*std::log(old.kappa)+w*std::log(nominal));
       const double contrast=std::log(out.kappa/old.kappa);
       out.kappa=std::exp(std::log(old.kappa)+w*contrast);
-      out.dlnk_dlnT=(1-w)*old.dlnk_dlnT+w*out.dlnk_dlnT-wr*dwt/twidth*contrast;
-      out.dlnk_dlnRho=(1-w)*old.dlnk_dlnRho+w*out.dlnk_dlnRho+wt*dwr/width*contrast;
+      out.dlnk_dlnT=(1-w)*old.dlnk_dlnT+w*out.dlnk_dlnT+dwT*contrast;
+      out.dlnk_dlnRho=(1-w)*old.dlnk_dlnRho+w*out.dlnk_dlnRho+dwR*contrast;
       out.dlnk_dX=(1-w)*old.dlnk_dX+w*out.dlnk_dX;
       out.dlnk_dZ=(1-w)*old.dlnk_dZ+w*out.dlnk_dZ;
       out.dlnk_dY3=(1-w)*old.dlnk_dY3+w*out.dlnk_dY3;

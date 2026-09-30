@@ -288,13 +288,13 @@ int lifetime_main(int argc,char** argv) {
     }
     identity.values["opacity.composition_extension"]=opacity_extension?"hydrogen_share.linear_Z.source_log_X.v1":"none";
     if(envelope_opacity==1) {
-      identity.values["opacity.conductive_envelope"]="hydrogen_density_continuation.v3";
+      identity.values["opacity.conductive_envelope"]="hydrogen_density_continuation.v4";
       identity.number("opacity.conductive_envelope_scale",envelope_opacity_scale);
       if(envelope_opacity_uncertainty!=.001)
         identity.number("opacity.conductive_envelope_uncertainty",envelope_opacity_uncertainty);
     }
     if(conductive_opacity==1) {
-      identity.values["opacity.conductive_interior"]="source_slope.fixed_density_overlap.v3";
+      identity.values["opacity.conductive_interior"]="source_slope.fixed_density_overlap.v4";
       identity.number("opacity.conductive_transport_uncertainty_limit",.001);
       identity.number("opacity.conductive_scale",conductive_opacity_scale);
     }
@@ -422,7 +422,8 @@ int lifetime_main(int argc,char** argv) {
       // Complete the density join before the hot hydrogen source reaches
       // log R = 3.5 at its lowest selected temperature, log T = 5.6.
       // That corner lies at rho = 199.5 g/cm^3.
-      const ConductiveInteriorOpacity::Domain domain{180.,190.,2e5,5.5e5,6e5,1000.,.97,1e-8,100.};
+      // Recover the supported radiative source across the conduction turn-on.
+      const ConductiveInteriorOpacity::Domain domain{180.,190.,2e5,5.5e5,6e5,1000.,.97,1e-8,100.,3e5,3.2e5};
       envelope_radiation=std::make_shared<ConductiveInteriorOpacity>(*radiation,*conduction,envelope_opacity_uncertainty,envelope_opacity_scale,domain);
       radiation=envelope_radiation;
     }
