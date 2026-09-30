@@ -1,19 +1,19 @@
 {
-  "UTC": "2026-09-30T14:43:47.728833+00:00",
-  "checkpoint": "/Users/greglaughlin/Projects/ember/out/cooling-near-track-cold-sept30-v1/cooling_200/evolution/final.checkpoint",
-  "checkpoint_sha256": "96f73f237373185562ed683f17eb23a62cf8dc077ecd67e1208328b5907396d0",
+  "UTC": "2026-09-30T14:55:59.168526+00:00",
+  "checkpoint": "/Users/greglaughlin/Projects/ember/out/cooling-cool-helium-sept30-v3/cooling/evolution/final.checkpoint",
+  "checkpoint_sha256": "8235b3da81de8ae603c672a4f5639d643c7cf032fea161d07e4b433f5b9db149",
   "source_sha256": "1bfcfc7226449987de1609afb8bb9b7625588457d394fc0038b4baa56ac76c9f",
-  "source_queries": 168,
+  "source_queries": 285,
   "failed": 0,
   "maximum_electron_deficit": 9.791077342335974e-06,
-  "minimum_H_ionized": 0.9999999999999963,
+  "minimum_H_ionized": 0.9999999999999962,
   "minimum_He_doubly_ionized": 0.9999999999999999,
-  "scope": "Ionization diagnostic at the current1454K star and cooler nearly-pure helium layers; prospective domainT>=400kK,rho1e3..1e4,X<=.01,Z<=.001, using the source GS98 metal proxy. H/He ionization is checked separately from the metal electron deficit; partial metal ionization remains an approximation. This diagnostic does not validate conductivity accuracy, liquid phase stability or the source free-energy error.",
+  "scope": "Ionization diagnostic at the current1436K star and cooler nearly-pure helium layers; prospective domainT>=400kK,rho1e3..1e5,X<=.01,Z<=.001, using the source GS98 metal proxy. H/He ionization is checked separately from the metal electron deficit; partial metal ionization remains an approximation. This diagnostic does not validate conductivity accuracy, liquid phase stability or the source free-energy error.",
   "H_He_ionization_supported": true,
   "domain": {
     "T_min_K": 400000,
     "rho_min_g_cm3": 1000,
-    "rho_max_g_cm3": 10000,
+    "rho_max_g_cm3": 100000,
     "X_max": 0.01,
     "Z_max": 0.001,
     "thetaH_max": 4,
@@ -21,21 +21,21 @@
   },
   "free_energy_formula_changed": false,
   "metal_rich_core_domain_changed": false,
-  "test": "ion_quantum thermal/composition derivatives and domain refusal checks pass",
+  "test": "Ion_quantum: all thermal and composition derivative channels through required order at rho8500,40000,95000; source values and guards pass. Prior pure-He500kK-floor test updated to preserve that limit for the metal-rich core.",
   "stellar_comparison": {
     "passed": true,
     "relative_errors": {
-      "radius_Rsun": 4.6722569582163216e-08,
-      "Teff_K": 1.883759119332603e-06,
-      "luminosity_Lsun": 7.6285036133753755e-06,
-      "central_T_K": 3.956297175546743e-06,
-      "central_density_g_cm3": 6.502288623348267e-08,
-      "H_mass_g": 5.318007742464959e-15,
-      "He3_mass_g": 4.3034709173447924e-13,
-      "surface_X": 4.813846547620469e-08
+      "radius_Rsun": 3.1038822736536276e-09,
+      "Teff_K": 2.762945970014022e-07,
+      "luminosity_Lsun": 1.1113866179085588e-06,
+      "central_T_K": 2.372017495307435e-07,
+      "central_density_g_cm3": 3.390386704400739e-09,
+      "H_mass_g": 3.0388615671476366e-16,
+      "He3_mass_g": 3.073907795908725e-14,
+      "surface_X": 2.1553333330258895e-09
     },
-    "age_years": 3876315217369.825,
-    "reference": "/Users/greglaughlin/Projects/ember/out/cooling-near-track-cold-sept30-v1/cooling_200/evolution/final.checkpoint",
-    "scope": "Same200Myr reference interval with100Myr initial trial; original numericaltolerances. V1 with75Myr initialtrial failed; v2 proposedverificationtolerances refusedatstartup and neverevolved. Cool-He guardextension changesno supportedpotentialvalues; comparisons use physical accuracy ratherthanbyteidentity."
+    "age_years": 3876573261803.419,
+    "reference": "/Users/greglaughlin/Projects/ember/out/cooling-cool-helium-sept30-v3/cooling/evolution/final.checkpoint",
+    "scope": "Replay same258Myr actualreference interval from1454K state with100Myr initialtrial; originalnumerical tolerances. Comparison uses physical error limit. Same free-energy formula, broader directlyassessed densitycoverage."
   }
 }

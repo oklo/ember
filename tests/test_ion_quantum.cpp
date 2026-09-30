@@ -41,8 +41,7 @@ int main() {
   check(source_error<2e-8,"pure-ion F/U/P/Cv agree with independent Fortran source",source_error);
   double thermal_error=0,composition_error=0;
   const double h=2e-5;
-  for(double T:{3e6,1.05e6,8e5,5.1e5,4.5e5}) for(double rho:{8500.,4e4}) {
-  if(T<5e5 && rho>1e4)continue;
+  for(double T:{3e6,1.05e6,8e5,5.1e5,4.5e5}) for(double rho:{8500.,4e4,9.5e4}) {
   auto c=T<5e5?mixture(.005,.001,.0002):mixture(.02,.02,.13);
   const auto f=ion_quantum_liquid_jets(T,rho,c);
   // Differentiate every available channel with respect to both thermal
@@ -90,7 +89,7 @@ int main() {
   for(auto state:{std::array<double,4>{399999,8500,.005,.0002},
                   std::array<double,4>{450000,8500,.02,.0002},
                   std::array<double,4>{450000,8500,.005,.002},
-                  std::array<double,4>{450000,20000,.005,.0002}}) {
+                  std::array<double,4>{480000,110000,.005,.0002}}) {
     refused=false;
     try{(void)ion_quantum_liquid_jets(state[0],state[1],mixture(state[2],.001,state[3]));}
     catch(const std::domain_error&){refused=true;}
@@ -146,9 +145,11 @@ int main() {
   refused=false;try{(void)ion_quantum_liquid_jets(900000,50000,mixture(.1,0,0));}
   catch(const std::domain_error&){refused=true;}
   check(refused,"larger quantum ratio requires a helium-rich core");
-  refused=false;try{(void)ion_quantum_liquid_jets(499999,50000,mixture(0,0,0));}
+  check(std::isfinite(ion_quantum_liquid_jets(499999,50000,mixture(0,0,0))[0][0][0]),
+        "pure-helium liquid supports the assessed cooler density range");
+  refused=false;try{(void)ion_quantum_liquid_jets(499999,50000,mixture(0,0,.13));}
   catch(const std::domain_error&){refused=true;}
-  check(refused,"helium core retains assessed temperature floor");
+  check(refused,"metal-rich helium core retains assessed temperature floor");
   refused=false;try{(void)ion_quantum_liquid_jets(900000,50000,mixture(0,0,.17));}
   catch(const std::domain_error&){refused=true;}
   check(refused,"helium core retains the assessed metal fraction");
