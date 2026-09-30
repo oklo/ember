@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "material_points": 1260,
+  "queries": 6300,
+  "temperature_derivative_error": 2.1886000478455667e-08,
+  "density_derivative_error": 2.2347071675782315e-10,
+  "scope": "Interpolation and a matched 1235 K, 20 Myr stellar comparison of scattering added to the existing gas opacity. These do not establish accuracy of dense molecular chemistry or an extreme-cold cooling age.",
+  "source_columns": 66,
+  "nodes": 858,
+  "table_sha256": "e27471f3cd29aa585708955f7aa75349af0074ad58e1de9599b998ede33725bb",
+  "maximum_infrared_extension_change": 0.0010033749116833413,
+  "maximum_population_electron_discrepancy": 1.7284177040721715e-06,
+  "stellar_comparison_relative_changes": {
+    "Teff_K": -3.14436156001463e-08,
+    "luminosity_Lsun": -1.2541474470051384e-07,
+    "radius_Rsun": 1.7985590794467043e-10,
+    "central_T_K": 2.3074875343809254e-12,
+    "central_density_g_cm3": -2.7357005549788482e-12,
+    "H_mass_g": 0.0,
+    "He3_mass_g": 1.1102230246251565e-15,
+    "surface_X": 1.7985612998927536e-14
+  },
+  "stellar_comparison_duration_years": 20000000.0,
+  "stellar_comparison_passed": true,
+  "envelope_comparison": {
+    "Teff_K": [
+      1225.0,
+      1400.0
+    ],
+    "hydrogen_fraction": 0.9982651073634814,
+    "He3_fraction": 0.001026892132294735,
+    "comparisons": 21,
+    "maximum_relative_changes_by_opacity_scale": {
+      "0.1": {
+        "T_base": 0.025539989419443465,
+        "P_base": 0.0001197347434538365,
+        "rho_base": 0.0013960090007569814,
+        "r_base": 4.1738294072390936e-05
+      },
+      "1.0": {
+        "T_base": 1.0023872532016753e-07,
+        "P_base": 5.141984615875117e-10,
+        "rho_base": 5.924862378492435e-09,
+        "r_base": 1.7966994558804572e-10
+      },
+      "10.0": {
+        "T_base": 8.793534789219848e-09,
+        "P_base": 4.5098369483298484e-11,
+        "rho_base": 5.197637875653527e-10,
+        "r_base": 1.5760504012973797e-11
+      }
+    }
+  }
+}

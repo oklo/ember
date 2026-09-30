@@ -551,20 +551,35 @@ source smoothly over log R = 5.6–5.9, where R = rho/(T/10^6)^3. Temperature
 joins span 3000–3500 K and 16000–20000 K; composition joins limit its use to
 hydrogen-rich mixtures with Z below 1e-10. Below 3500 K, an additional density
 join over log R = 5.90–5.98 completes the change before the original source's
-log R = 6 edge. Dense states below the computed source's 3000 K floor remain
+log R = 6 edge. Dense states below the computed source's 2000 K floor remain
 unsupported. Source temperature, density and
 composition bounds remain enforced. The integer-mass source convention is
 converted explicitly, with derivatives that preserve extinction per length.
 
-The table includes gas absorption and electron scattering; nonideal chemistry,
-grain opacity and direct H3+ lines remain incomplete. Its use is supported by
-the envelope's weak sensitivity to opacity: multipliers 0.1 and 10 change
-luminosity by at most 0.0001184% over a 140 Myr cooling comparison, ending at
-1902 K. `opacity_cold_dense_scale` selects those controls; the default is 1.
-Both the file hash and scale enter restart identity. These checks support
-this cooling segment, not a final cooling age.
+The table spans densities 0.01–10 g/cm³ and hydrogen fractions .98, .9955 and
+1−10⁻⁶. It includes gas absorption, electron scattering, and Rayleigh scattering
+from the source's neutral H, H2 and He populations. Nonideal chemistry,
+correlated scattering, grain opacity and direct H3+ lines remain incomplete.
+`scripts/gas_rosseland.py` exports the populations and integrates the original
+absorption spectra. Total particle density is not used as atomic hydrogen,
+which would count molecular hydrogen twice.
+
+The generator's `integrate` command takes a JSON manifest with
+`absorption_only: true` and a `columns` list. Each column gives `X`, `T_K`,
+and `absorption`/`populations` objects containing `path` and `sha256`.
+Paths are relative to the manifest; the output is a density-coordinate table.
+The `export-populations` command adds diagnostic output to SYNSPEC54 before
+compilation. This leaves its absorption and chemical equations unchanged.
+
+At 1235 K effective temperature, adding Rayleigh scattering changes luminosity
+by 1.254e-7 relative over a matched 20 Myr interval. At colder gas temperatures
+the opacity change is large, so this comparison is not a final cooling-age
+error bound. Extending the spectral integration from 30 to 60 microns at
+2000 K changes the total Rosseland mean by at most 0.1004%.
+`opacity_cold_dense_scale` permits 0.1–10 sensitivity comparisons; the default
+is 1. Both the file hash and scale enter restart identity.
 [Source details](../data/opacity/cold_dense_hydrogen.json) ·
-[Numerical checks](results/cold_dense_gas_opacity_sept30_v1.json).
+[Numerical checks](results/gas_rayleigh_sept30_v1.json).
 
 The warmer return keeps the overlap inside both opacity sources along the
 assessed cooling envelope. At 1475–1600 K effective temperature, this changes
@@ -661,8 +676,10 @@ The corrected density blend changes luminosity by 0.005844% in its separate
 1 Gyr comparison. All energy and time-step checks are unchanged.
 [Numerical checks](results/conductive_envelope_opacity_sept30_v1.json).
 
-In the assessed H-rich cooling-envelope layers, direct pressure-ionization
-checks support `screened_minimum_T_K "400000"`. This changes a domain check,
-not the collision law. A matched 10 Myr continuation leaves global quantities
-unchanged; cooler evolution still requires covered EOS and opacity inputs.
-[Domain assessment](results/cold_transport_domain_sept30_v1.json).
+In the assessed H-rich cooling envelope, direct ionization and native transport
+checks support `screened_minimum_T_K "130000"`. The parameter only limits
+evaluation; full ionization must be assessed separately. Binary screened
+collisions in the strongly coupled liquid remain a model uncertainty.
+Below this temperature, competing estimates of trace-helium ionization require
+a charge-state or mobility sensitivity calculation before further extension.
+[Domain assessment](results/transport_floor_sept30_v1.json).

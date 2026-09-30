@@ -1,0 +1,65 @@
+{
+  "scope": "Helium isotope mixtures in bounded quantum-liquid domains; actual 1227 K profile and cooler fixed-density projections.",
+  "physics": {
+    "layers": 143,
+    "queries": 1144,
+    "intervals": [
+      "cold_hydrogen",
+      "cool_hydrogen",
+      "dense_mixture"
+    ],
+    "T_range": [
+      48502.754369483315,
+      299984.2284282444
+    ],
+    "rho_range": [
+      42.130815845494,
+      3611.919975288364
+    ],
+    "X_range": [
+      0.008001505461807376,
+      0.9983568188489579
+    ],
+    "theta_H_range": [
+      0.5130355431148116,
+      1.5528381440300936
+    ],
+    "max_ionization_change_over_ion_Cv": 0.002239293348032382,
+    "max_finite_difference_change_over_ion_Cv": 3.491432817146961e-09,
+    "quantum_Cv_over_ion_Cv": [
+      -0.08783188169297873,
+      -0.014484152327471684
+    ],
+    "max_change_of_quantum_Cv_share_0_to_1_over_ion_Cv": 0.0339320308363317,
+    "R_S_He3": [
+      2850.6467957325217,
+      10998.22853497281
+    ]
+  },
+  "table_vs_direct": {
+    "fully_ionized_H_rich": "all shares: median |dCv| <= 2.3e-6; P <= 4.2e-5; one layer (zone 409, X 0.953, logT 5.41, logQ 3.84) is inside the helium pressure-ionization block and is a branch artefact, not isotopic",
+    "partly_recombined_trace_He_T_below_110kK": "composition interpolation across the u = 0.99/0.995/1 planes: Cv differs from direct FreeEOS by <= 0.07% (share 0) and up to 2.2% (share 1); table nodes themselves reproduce the source (<5e-6) at v = 0, 0.2, 1",
+    "transition_and_He_rich": "confounded by competing helium pressure-ionization branches in the source tables"
+  },
+  "native_profile": {
+    "states": 4824,
+    "previously_supported_identical": 4281,
+    "changed": 0,
+    "newly_refused": 0,
+    "recovered": 6,
+    "recovered_cause": "He3-share guard only",
+    "stellar_stop_state": {
+      "T": 195500,
+      "rho": 166.1,
+      "X": 0.9984,
+      "Y3": 0.0009859,
+      "theta_H": 0.5162,
+      "f4dd704": "refused",
+      "patched": "accepted"
+    }
+  },
+  "tests": {
+    "test_ion_quantum": "50/50 PASS (6 new any-share states with T-derivative checks, including the stopped model and shell-tail states)",
+    "test_cold_helium_base": "0 failures"
+  }
+}

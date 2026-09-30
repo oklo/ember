@@ -1,17 +1,22 @@
 {
   "format": 1,
   "table": "cold_dense_hydrogen.dat",
-  "sha256": "061add15549ccc5892aba7b8e6c52d439d8c1f5dd5bc2acaf9867255a66f2651",
+  "sha256": "e27471f3cd29aa585708955f7aa75349af0074ad58e1de9599b998ede33725bb",
   "basis": "baryon_mass",
   "density_coordinate": "log10 rho in g of baryonic mass per cm3",
   "opacity_units": "cm2 per g of baryonic mass",
-  "source": "SYNSPEC 54 with the H3+ electron-donation change",
+  "source": "SYNSPEC54 with H3+ electron donation and corrected absent-element molecular chemistry",
   "helium3_source_fraction": 0,
   "hydrogen": [
     0.98,
-    0.9955
+    0.9955,
+    0.999999
   ],
   "temperature_K": [
+    2000.0,
+    2250.0,
+    2500.0,
+    2750.0,
     3000.0,
     3500.0,
     4000.0,
@@ -40,14 +45,18 @@
     -0.75,
     -0.5,
     -0.25,
-    0.0
+    0.0,
+    0.25,
+    0.5,
+    0.75,
+    1.0
   ],
   "frequencies": 30000,
   "wavelength_A": [
     900,
     300000
   ],
-  "method": "Trapezoidal Rosseland harmonic mean in frequency, weighted by dBnu/dT, of direct absorption plus electron scattering. No Rayleigh scattering in nominal values.",
+  "method": "Trapezoidal Rosseland mean of full-resolution absorption, Thomson electron scattering and neutral H/H2/He Rayleigh scattering from the same source populations.",
   "input_archives": {
     "tl208-s54.tar.gz": {
       "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
@@ -81,9 +90,14 @@
   "source_patch_hashes": {
     "tlusty208-ember.patch": "0b3214a4b18b6a927f2d512475f94c5895b2790e29185e82108db35724218be1",
     "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
-    "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+    "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c",
+    "population_export_equations": "gas_rosseland.population_export; diagnostic-only insertion, no equation changes",
+    "corrected_synspec_source_sha256": "920b0700ac4bf968674d7fe88be8987c57a25fac7a4596bae67f6a15f47d9e05",
+    "synspec54-absent-molecules.patch": "43a8b4407fc7ac3b7f58a4a46fce45d2cbdc9adf9d0fdea9b945fc37737b0168",
+    "tlusty208-absent-molecules.patch": "ef0bf7833f294886ff8db12a1f1f2cc6818938662850c74efac47d5cc79830f4",
+    "tlusty208-russel.patch": "8d82ef711e3d2840c4bab3665e69b72b1ecd2267b835110f273614f1e4a383a4"
   },
-  "source_executable_sha256": "c61512ef88326a6dc7a678e754fc2d693f073b875cf4d6a498ff8bbf92b29b09",
+  "source_executable_sha256": "bf10eeacc3971cd37c6d5ff94d83898642ad05b78c17f2f6404429d335bf8387",
   "line_list_sha256": [
     "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
     "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
@@ -93,191 +107,417 @@
   "data_sha256": "3ee3d1edd6c01f317fd66fcb023ebf652c44ee3d6e7da683b598faf96bc876b4",
   "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
   "limitations": [
-    "Ordinary chemical populations; not full nonideal chemical equilibrium.",
-    "No direct H3+ lines, three-body CIA or grains.",
-    "He3 handled by the elemental mapping; isotope-specific cross sections and broadening not supplied.",
-    "Negligible source metal mass below 1e-15 is omitted from the runtime source coordinates."
+    "Ordinary chemical populations are approximate at high density.",
+    "No direct H3+ lines, three-body CIA, grains, correlated scattering or refractive corrections.",
+    "He3 uses elemental mapping; isotope-specific cross sections and broadening are not supplied.",
+    "Negligible source metal mass is omitted from the runtime source coordinates."
   ],
   "source_file_hashes": [
     {
       "X": 0.98,
+      "T_K": 2000.0,
+      "absorption_sha256": "089d89b73e03a8fef106e868f4cad357138d6e3cabcede1e61af53104b039092",
+      "population_sha256": "985b22448f09e5cb475d0d062c73f16d24a7800fe1fcb708e99a2a9c815da9a8"
+    },
+    {
+      "X": 0.98,
+      "T_K": 2250.0,
+      "absorption_sha256": "bee36eb5118fa18b6533927d20e773c0d2b90ccb07a35d89dcc4e4c3bcfc480a",
+      "population_sha256": "cd6b178b892da3aae559c24f1660c593742d4a644d715531550d0bcd9f1e77fe"
+    },
+    {
+      "X": 0.98,
+      "T_K": 2500.0,
+      "absorption_sha256": "f2e94c8abc9e7591ac38e797e9fec3adf67aff1e92d7cf955802092433d63c5f",
+      "population_sha256": "526050c0c8764584590190d11e2ba2c8d141007908c24dbfa00b457235317b66"
+    },
+    {
+      "X": 0.98,
+      "T_K": 2750.0,
+      "absorption_sha256": "020b7297219fd5653346928dc508e33bd627fa988ad3c183156e2d772525b66f",
+      "population_sha256": "6d58decc9a38310586d6eff7c8638f4ec1b846e48f0d64c884d469ea67e568d1"
+    },
+    {
+      "X": 0.98,
       "T_K": 3000.0,
-      "sha256": "4bdef681f82b686010260ff0c3c6b3a634cb1515da83fe0050fb88167c268714"
+      "absorption_sha256": "e1a381b356b9f2149a39b88ceecea7a04fb730104c37b75c7f0d9c69294b5fcc",
+      "population_sha256": "8c8c7bf1d216206b5673a99d22eb22360874b0572b6f0abc5e18208060be2bb9"
     },
     {
       "X": 0.98,
       "T_K": 3500.0,
-      "sha256": "91fa5a3fb73d798110a4d10c3c70b4f0a0c2760829c673f63e0b7e5bfb82c1ef"
+      "absorption_sha256": "50856ad58fb2bac70d832581d699b0b41393c615e6b5e9636cb1a53e48a2cfa2",
+      "population_sha256": "25a4a4d1ca27a416285835254a77a8c4c55038aa8ac7021c270af8dc7f284e80"
     },
     {
       "X": 0.98,
       "T_K": 4000.0,
-      "sha256": "ff3c0c3cb21b597414b15d74a43f89352b62b0d9b290f18a3897fbe986eaa02d"
+      "absorption_sha256": "4639a3d3b5b0f9afc9c485fc9af724bb3d810bf0e62c7c52974d871abad23b3f",
+      "population_sha256": "81856cdca823287231c3a03133b632b9f07c61b1ff8f39fbf7866eed20c9b748"
     },
     {
       "X": 0.98,
       "T_K": 4500.0,
-      "sha256": "06f88c196f0acfdf4e72c11c69c15d875cb23da9e0a31f4cc4c0787127909478"
+      "absorption_sha256": "e206abac00e0570c9d620f6f95397db5431ea094329c355d127cb86a9c62b3c7",
+      "population_sha256": "b9676a0fed40c98908a8bc60d146791109479bead0189481fd47bdf14d9c0507"
     },
     {
       "X": 0.98,
       "T_K": 5000.0,
-      "sha256": "4944aa733783ff5281faa1332472a96cfcd7f994ded19d8b4a8f0e7c0a79dcde"
+      "absorption_sha256": "80ea935ef9b70c62078ba387b381557eb6d190b500b979ef62dbb7e6d3c5fd7c",
+      "population_sha256": "e4415c4a7d21f0cbc4ce95e1df0fd459c58f1883cb11234535f5c4fa6ff64c5f"
     },
     {
       "X": 0.98,
       "T_K": 5400.0,
-      "sha256": "e01545f6d730ecfc27219d394c1fcb44c6cba4e5232cf4ac1c5555612a6f1778"
+      "absorption_sha256": "fa94dd24839ce08b87e754b7b4e151a9e8bea2975704257a6f416322fbd20c87",
+      "population_sha256": "6e4a07173542673c7c334cf80f58619b939769c56e808c757e1afb6a3f3b05ba"
     },
     {
       "X": 0.98,
       "T_K": 5700.0,
-      "sha256": "ff8ff43f2343ad8f9c471e8891c9dd1444850ca585cddc21f2e06ee6adce097b"
+      "absorption_sha256": "3903d2217a0a15ae299b9df2b093ea6b45aac1738d1e9c017ae1506219195a7f",
+      "population_sha256": "1c3b6267d3d0255f0f575800e1fc11fcb494d6551c86601e8f78fb90469b7314"
     },
     {
       "X": 0.98,
       "T_K": 6000.0,
-      "sha256": "0e94bbdeec97aa99190a410b7bf53dc09b1a639edf764836fd3cfe9d75c8cfb4"
+      "absorption_sha256": "9836e02291aff10a4e80ea35d75763d8f2767c8bc14abe84749bcb96a120f93a",
+      "population_sha256": "1aac065a133184bf9280c4c914ccfa9ac32503fa3880f085b79b74143a9e7d89"
     },
     {
       "X": 0.98,
       "T_K": 6200.0,
-      "sha256": "99eac4ea2215977a1fc83a61cc748ca1d0826dea1bb2389ce333101c688f1c22"
+      "absorption_sha256": "bd35920870fb7a24aa51cabdcedded37b8b9068be19e8eb4219ec60195135cad",
+      "population_sha256": "e8a0782a9e720d73d331ee7cfbefad67abc25e9e7e2996001c2204274476bf1e"
     },
     {
       "X": 0.98,
       "T_K": 6600.0,
-      "sha256": "7ae541bf31f8087929d7b279d86352445dfbf495de97147d240f1fcba2babe3a"
+      "absorption_sha256": "09955ab5a15bbbfa4483af089e139a144291b392a47a125c77d2bbe1c4a3c652",
+      "population_sha256": "fdce705df2e88bde265cf4c141c3c8b8ab8822f3d7f41f3a1d81ef7625ed4dc6"
     },
     {
       "X": 0.98,
       "T_K": 7000.0,
-      "sha256": "7839021d4efef592a71ea02422ff772feae275a9eac224e7f8956bffc7c29cf5"
+      "absorption_sha256": "c15d441edf6c34ac0460b089027d93c2c80ee741ee3318eac36a38519e0a89ef",
+      "population_sha256": "22e7cf55cfb6c6a4ac3b5bb11b3c1f6702a60057a08573d0b92a1db8044d4217"
     },
     {
       "X": 0.98,
       "T_K": 7500.0,
-      "sha256": "2069e5cee656460e32f14faf7ce1e3c326610a3db30bf4ca2da407f34bde27d8"
+      "absorption_sha256": "51d073d4673eadfac8c228838d429e37f3df120f8e1a4c86666c04fd078a549a",
+      "population_sha256": "cdc76f6d14f80974ce02c70aaa922dd2e523c99b951e039fc476684286266f43"
     },
     {
       "X": 0.98,
       "T_K": 8000.0,
-      "sha256": "021d9552036312a961813d7cb789023e824d115e0f3d3d3792671fc39da9d890"
+      "absorption_sha256": "d16dd3883f5843f9629704c20b7a9b50a2aa8602cc99f546050bfbefc79586f2",
+      "population_sha256": "ed24d53c9317478af850f9d37a5b8a5ef68ce754f2f1b37d57e5e389fb135de1"
     },
     {
       "X": 0.98,
       "T_K": 9000.0,
-      "sha256": "4d8161acf95c2d3e345c5351f09c4e57425e85f6b5787ce1f0f135248c713e0c"
+      "absorption_sha256": "5ad92a7b7e185d6175c32248d210c1a92469de4f1e764fb9237914c1481d3012",
+      "population_sha256": "ff2b311354783e6ed88b840d0e69ca16f3c58a8c3b88daa695c012465b512acb"
     },
     {
       "X": 0.98,
       "T_K": 10000.0,
-      "sha256": "e5515ed68b76de1de3aed677cdb34308b783c424b3ccc1cf9c4863c00fdbfa7b"
+      "absorption_sha256": "6a0dec925d69237e32958fa197145f8f8e852073a5c7232e98808097206f7eb6",
+      "population_sha256": "7f9cbaa87361debdb409007c84a5066110c4a9b49cc4733d35f5a999e3c0c76b"
     },
     {
       "X": 0.98,
       "T_K": 12000.0,
-      "sha256": "bef1d91e500024877839e3c034f37c29d04f0078f1cf01423e18ee2040721e32"
+      "absorption_sha256": "e72d1fc9b771094a63e20c0612d9e4dccc47f32145092553f8477077a8f14e15",
+      "population_sha256": "71d8828fb8ac8a813a883fa5f7dc6f6b8d080808dc31dcb55ce7dae8a63982ec"
     },
     {
       "X": 0.98,
       "T_K": 16000.0,
-      "sha256": "d595b02cea721e14a8c728a354fd4aa5fda7c25aa10e10a47dbac6dc979f2a60"
+      "absorption_sha256": "bf78e8c149ef6b3a993990852ffdc7f729d1748784b37bd4869ba65d41eeec22",
+      "population_sha256": "60ac0ae60ccc2ddee851cb8aa65bd0e132eb8748a5ba91227b2cddb2d5104949"
     },
     {
       "X": 0.98,
       "T_K": 20000.0,
-      "sha256": "d99bb83efdea1509306f05519007776f8cc0645f904d678c0d3dda5eea66b90d"
+      "absorption_sha256": "b571305c517898bc4061e4dd379e0499332a748f82d035840aba6a30a3616159",
+      "population_sha256": "abf16153cee97f43042d59963b974daface116e88b808b3a92b7f833534c31e3"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 2000.0,
+      "absorption_sha256": "080aa21ce2c5e54f6cb79e0bb23957af93dd6fc3846fedfcdf69c65a3f0b8da8",
+      "population_sha256": "f8d39108d432f050ea1f38b4338b895bff28ad55bc7e085122bb3c9f06c477ec"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 2250.0,
+      "absorption_sha256": "7230e0a8c67a2f06ea3c360f39c55477832daba05ea26ea408fcf8647514ffdb",
+      "population_sha256": "2e0b22f76ca303cd6ce3209e81b6fff08bdaa86d7241c7e3907fd15cac2fc9be"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 2500.0,
+      "absorption_sha256": "672810dcae69982a185c495be7c369377e080be65f6c67582541238f69e53c45",
+      "population_sha256": "f7210e8a2ce9761102e63419d78dfc36432b45892b1a1c8fb1232610b8ef80d7"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 2750.0,
+      "absorption_sha256": "4b1feeb8a2cba2e25b64889e4855fa78d3fa17c01d3b5b2478d33b70b9d0caf5",
+      "population_sha256": "3c39c596f82d9eaafc69a59c618fef55e5e02588ac0eee2907575fe28654652f"
     },
     {
       "X": 0.9955,
       "T_K": 3000.0,
-      "sha256": "29b584319c04d1a4e35d78a3b8931d1c6a34d8bc3f1d4de37cd9aba4d092e25f"
+      "absorption_sha256": "6ad0fd00cab84f51fd3e5cb81f858b01157ea9434425a28b5b62419589f21e7e",
+      "population_sha256": "96b4ebe77816d9604abeb71eedc64dd3148da1edad1222babfb341a1ee3f6f70"
     },
     {
       "X": 0.9955,
       "T_K": 3500.0,
-      "sha256": "b156031528f49bdca79d3ce989dc5b3639782ae11c609629d0e94b169e8ecaf2"
+      "absorption_sha256": "d86dacef24f8a14cd930f6aff91e7bc7317dcb7296f90943e2691d2a3f7dae1b",
+      "population_sha256": "f6e2402a381aafb59ae9ecc96d841ba2cd5b64fb0e99b2e23be3da33f10390c0"
     },
     {
       "X": 0.9955,
       "T_K": 4000.0,
-      "sha256": "d60c698a808ada81d8013838282e4c47073501f5e5faf7af1954b9a6520e6b7b"
+      "absorption_sha256": "bd9a833f7dc716a2e8db397b72c013c6d6eaac8e861fe245c98c9eb617a1a741",
+      "population_sha256": "ff93b41ad2a298b4629b4261b6a7c43e8706161d2da4768cf2c27cafc61084d0"
     },
     {
       "X": 0.9955,
       "T_K": 4500.0,
-      "sha256": "4e0b24d0c24314ea9cb465e5ef680ecfbc9c3ee256dd11379d714b15df35fc77"
+      "absorption_sha256": "27718327553fe21c08cdb49f8375e9df2e02aeb9170efea9cd44f23be99ee397",
+      "population_sha256": "a0489c6662e7aa805023f68a997bbc6af778b1ba0a910a0fad09f8da4e142143"
     },
     {
       "X": 0.9955,
       "T_K": 5000.0,
-      "sha256": "89d9f764535a0132262008e333a2ff66d3721d5c9c9a813eee545e36e3b73252"
+      "absorption_sha256": "fa37887f88bd06c4709ae93019333c36dcb2b42b0aa4017f1dc2c7afbd9276e4",
+      "population_sha256": "115ce2dce23d58da914757a7c9039863e0e794a529c84904eeb66be73bcf83b9"
     },
     {
       "X": 0.9955,
       "T_K": 5400.0,
-      "sha256": "5492f4188fc8c681ff479341342797c8bf031734d1dd94c012d8a61637ea9665"
+      "absorption_sha256": "3ae6e0c3fe9be38bc7434f25acf8ca1f6014a7db2b9a06ddc4047155f5c5c349",
+      "population_sha256": "e5260304086cf16b60aa37f601e8f4af15b911c858be9f1717196ce191535c09"
     },
     {
       "X": 0.9955,
       "T_K": 5700.0,
-      "sha256": "e8ef8c94198b62d25d6f7b9275947d992257cd0c1aa4153eb5bee646dc718980"
+      "absorption_sha256": "6efdeafc95cea21e591f1f3ef2652bc34acf399effe8189513ea072336220cfb",
+      "population_sha256": "8ee450fdfb0120de357c1d56ed2a6137cb5e81fe41c79be918a1d08d9b4e9fc8"
     },
     {
       "X": 0.9955,
       "T_K": 6000.0,
-      "sha256": "b0fdf84cd933b72e9347c1a43fae41f2a8b08469c7b61a94b7faa87df8ca3a29"
+      "absorption_sha256": "226b9579928b03417c4a9b7d7a4aa7fef22e99b430a95622be2104850f4abb93",
+      "population_sha256": "c6e203f7c6119b057c50de8b6d3067f3532eec21d147786c89b86c2034957dce"
     },
     {
       "X": 0.9955,
       "T_K": 6200.0,
-      "sha256": "80e8437a378b60fe9616e86abb9c9f9b5749ee288ca85fb911dcda0842e2be53"
+      "absorption_sha256": "0c411e050f00869c99ca2bab49c31bd03319e1ab12acb5476c70271b38d521cd",
+      "population_sha256": "b1edb8b371d5130bbfccee2dce8fb8d706cac8d20029652d94457eed0d18ff2b"
     },
     {
       "X": 0.9955,
       "T_K": 6600.0,
-      "sha256": "5eb8e7b3755d21932052134b1ae21df0f7edc29e4989c8980e42fef5b35de119"
+      "absorption_sha256": "408c6d574e734d65fac3c42831ac08ef410fecf69b1c99a60af990ff2f245684",
+      "population_sha256": "102702ad4ca9b531ee0cec988dcf7c3d14ac3922797c300d3ca445f58228f4b7"
     },
     {
       "X": 0.9955,
       "T_K": 7000.0,
-      "sha256": "7799ff824dfb5698a0f1208829084ad1819fd0b4e615996a827729dc0b1e0e17"
+      "absorption_sha256": "1c1007ff1a6ec915398da46d044b6c0d94375c8a0247cfa076985eac1d037908",
+      "population_sha256": "3f85c23801efb6d38291f2bd285ba3d66ce42f48cc216e43610f13c4595e9ae5"
     },
     {
       "X": 0.9955,
       "T_K": 7500.0,
-      "sha256": "01cef4dd9c4d279fc79bf9b623c8d4f041042af769766ae9b9d5145e6bb784c1"
+      "absorption_sha256": "c267d0cac4c64ef293f41f8260709dff327166d7304e6f9083d00ad724f38f5e",
+      "population_sha256": "0f82fb25e630ac418b9c0141cfac614de6b3476f2ce7bfcc100eb4ff673661e0"
     },
     {
       "X": 0.9955,
       "T_K": 8000.0,
-      "sha256": "be01832dc5afde47e218c12f5a3fb60fb0ded27a02afd38f7053437c8d4d08e4"
+      "absorption_sha256": "8830a444780fc96aa75bcf7c5cac69506843aa75d28994557937f4d50805fd0c",
+      "population_sha256": "46430666ac86a662fbbb316c327827b8e461063e528f567ced96de9e6ce4e26c"
     },
     {
       "X": 0.9955,
       "T_K": 9000.0,
-      "sha256": "606a31aae52e453218d2956edf36242bb9ec9b7885b752afacf0a6ae9309365a"
+      "absorption_sha256": "42ef19248d75e8e63ef4b15b93af919215995ceed74519bfbed388424bcd858d",
+      "population_sha256": "014540f490e0b6f387cbe2a5bd7427dc4aff2276e277e31e3bb2c2967df68f20"
     },
     {
       "X": 0.9955,
       "T_K": 10000.0,
-      "sha256": "93bb17c5c562cd0a0ba70f9209c80db9b6d6bec2977b2610c4c56cf774e6c3b4"
+      "absorption_sha256": "f561672645573c986ee82e8bb2805f7fd07b38714b710f130bd74ecb0bdfa200",
+      "population_sha256": "92b75a1d17343011198b04940be4b1f240ecc144c4539314a474e69c85a82671"
     },
     {
       "X": 0.9955,
       "T_K": 12000.0,
-      "sha256": "102e8cd19d164a3e21208114b6a5a11083b1d8899edd6db8250b0e5a02cb47ac"
+      "absorption_sha256": "90615eacf00037c69a248f04fa48efb8ecd003e0461eefd573a9b4a8c7c63eda",
+      "population_sha256": "024750bbdae2a7b30b3d21f7ddf953b713206017e1650160bd81127487591442"
     },
     {
       "X": 0.9955,
       "T_K": 16000.0,
-      "sha256": "6e4316aeb72d39ba6831291180a491ab9c55b5140feee6ebc985cd7f1c93f7b7"
+      "absorption_sha256": "ec389b8f053d13ef1ce96bfad66c9ff9d8edc96164f59872c28d8e1acf18c2e7",
+      "population_sha256": "74a8382cc53e32072620c8cf1d258ddb1cce12dab607283bb4f41a4dc907fa59"
     },
     {
       "X": 0.9955,
       "T_K": 20000.0,
-      "sha256": "3cab6112243ef7b358a62df6639a66bb4874abc84ef46e313dd5eeea400b157e"
+      "absorption_sha256": "93e66e8a6746ca0b2b1f4682cd0e8f52bbb0029240fefd83135df1c876f92fe6",
+      "population_sha256": "dd104a2315db2b1f9c64519c96e32187ee650d7029b4f9b7cce756df8727ae15"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 2000.0,
+      "absorption_sha256": "4f207beda70f537f06025009eef89dbd6625a2b51ae97bc2820a42d6bd6e8097",
+      "population_sha256": "967e0ecb66302451756141a010ba79869c4ca451518f082661c366ed07b7467a"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 2250.0,
+      "absorption_sha256": "421f18f66ef48e2d56f94d35ea892bde16dcfcc40bc9710d4e2fb8db7b2f5f1b",
+      "population_sha256": "3fcdc92de1148d4e88dab8c039fb76bce5430ce2f60d536595f782f986995e55"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 2500.0,
+      "absorption_sha256": "6bfe38455b1d619bd40a9e5ae444eb7b967eb916cbeda056bef586c37e0f5a7e",
+      "population_sha256": "749809e6c94c926f59cdd648d7e3e59d78ec136aa028af5a8dd6d74f580aadbe"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 2750.0,
+      "absorption_sha256": "f435cc48b8f270aae8ed27ec131940c48c4315e8d894a93b5f59897c5c2cdee4",
+      "population_sha256": "7579457838aeca5615992b0a198acc1b122efe18ce79f203290fe170784cce38"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 3000.0,
+      "absorption_sha256": "7a419dd828ace9439903a6480fc13ccc525fe731b68e4e37ef6cd75c8fca74b7",
+      "population_sha256": "df5814e81fbe0a97492cf78c966691b080c3e2a6f6f51cd64832264833c90d0b"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 3500.0,
+      "absorption_sha256": "648025311cf41960f2defee91f30d54abeba83bce64e8ef4e5b3e58808135049",
+      "population_sha256": "dfa0fcfa15f0766b882bd5af86d701a4a1ab808086d99a64533337f9194831af"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 4000.0,
+      "absorption_sha256": "271271c52f307380a08769b416ad6dac394e4aa7472d0cb850aca5a839ab0477",
+      "population_sha256": "82fbb2b9f6525302d1efbe4fe9ba7d2c69003202d449ac769e96e2566d5462a3"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 4500.0,
+      "absorption_sha256": "fd69973d6d4c94bd0a6939bd2d474af73ca53a18cc70edf51bf3e6504da320a0",
+      "population_sha256": "e9b4122d3ec1ea8758a7f7a9be7d3c6993ee083f9a6bb01799df035b8cb3a510"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 5000.0,
+      "absorption_sha256": "a3015538055c1be1f53b86d4f6595538e4f18e18cd5c1481cb1c10fc2ac3a095",
+      "population_sha256": "4404f17e7c83a167c0b1e84d4e9a70c90697831d6d7e0c86906213f0f58019d1"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 5400.0,
+      "absorption_sha256": "d3afe7848255e02e9a777b50cfc114c60f25db3cafd099c7d7bfd72e077ea40e",
+      "population_sha256": "e6be0ccb073bf995e5ae7dc67e61d181fbfbe6bf0443ec40cdcfaad4bf744720"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 5700.0,
+      "absorption_sha256": "53a5f17711a2876ba0e447707bdf5673e10c4e011db9b926a7407609f6583526",
+      "population_sha256": "07de0ead3ce796ab9577921e4ccfbe7740934366cb9a6619acc78962ac40a4ff"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 6000.0,
+      "absorption_sha256": "e76ef3337ebd61469513398597f3d55ecc1e194510399e21e8f273a953992644",
+      "population_sha256": "f692d0f4b5256e46140673d29e96bc4554aa5a95aa872206eaa5778c8c4aa5f6"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 6200.0,
+      "absorption_sha256": "4554e5c69a4d0a54b7c601294b50576a973f3a69eadaf398d83ee7f07534d648",
+      "population_sha256": "837f5b103d09a7fa909dcdd5636979b1dabfb7b26284d8aaf544e449fa28581d"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 6600.0,
+      "absorption_sha256": "ed8b587bd00233eebbe3f7b728166af1693eb359c473cf66e1a4b95ec83b256f",
+      "population_sha256": "885d6c3f6d33b41254f77cecf4457e1c297da5fe9769c936901a2a093157acf0"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 7000.0,
+      "absorption_sha256": "acc6357db7fccbe5a5da32195d312927848d7cd8325b22f871c327f99a30bb90",
+      "population_sha256": "03852f4da5cd2099ee1ba44648cd4bc54adc3f32ddbf8d2e32c51e003f92cb3f"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 7500.0,
+      "absorption_sha256": "a5e81167d4a4a2b227238af2c7bc48ab541018d27b47ed05c726b160e81c7baa",
+      "population_sha256": "cab783578f39a9a34a6587267e8d0fa4bd510c677b3b40a2e9769605d3e8abba"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 8000.0,
+      "absorption_sha256": "3db052c7722f02d8ec3c07b30ef473919647bba1dbb6bff134aa9c120c945b40",
+      "population_sha256": "3271ca3300f5200bcdef2c2044913d3625c3ce01b37907c35be073c979958c3e"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 9000.0,
+      "absorption_sha256": "c55cda33603190902680a07b9495094e4eaaa5280a48c2ec61d3f55c634cc5cf",
+      "population_sha256": "d0cb03473dfe3746d97a2740afd6bb7d86838e82ac3a6a05efee1006f2aeda2a"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 10000.0,
+      "absorption_sha256": "6d8f83de5455537b02259ba58257beb2cb3918d4d82e51b018827f82f5606c2e",
+      "population_sha256": "9b3056cc2e452c01415a4ffdfc38f72d53d8f433e66115a29eabd61715199ec6"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 12000.0,
+      "absorption_sha256": "53cff267bf6cf4fbe97ea0514cdb2ef99a6adcb790296159da0cde731fb34323",
+      "population_sha256": "261ce08791d296be557ba871cf4d8127c60595640a19b607fe8c1da63a7b4b2a"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 16000.0,
+      "absorption_sha256": "a19d58b683c7751ff11ba737c83f5a27507a4f7e4dcb96712de1e3124ae518c8",
+      "population_sha256": "df571bb9090740104eea9feb6f83ea9175f9566c4aef1d2c5f94bb845e84c0f6"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 20000.0,
+      "absorption_sha256": "7186d4cd1201a95cdda0e5ec4116f38148bd7397c16cd83820f22b351ba0822f",
+      "population_sha256": "5cbec2f314e3827b07e374cbecf63cbde3d68c8e375075443e06a633c44d983e"
     }
+  ],
+  "generator": "scripts/gas_rosseland.py",
+  "population_export_columns": [
+    "T_K",
+    "rho",
+    "electron_density",
+    "neutral_H_ground",
+    "H2",
+    "neutral_He",
+    "total_particles_unused"
   ]
 }

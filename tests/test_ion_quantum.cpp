@@ -158,9 +158,18 @@ int main() {
   }
   check(ion_quantum_liquid_jets(290000,780,mixture(.9905,.005225,0),1)[0][0][0]>0,
         "cold hydrogen includes the assessed helium-3 shell tail");
-  refused=false;try{(void)ion_quantum_liquid_jets(290000,780,mixture(.9905,.0076,0));}
-  catch(const std::domain_error&){refused=true;}
-  check(refused,"dense H/He mixture retains its assessed helium-3 share");
+  // Any He3 share of the helium: the isotope enters through its own mass and charge only. States include
+  // the outer H layer where He3 passed 60% of the helium, the helium-3 shell tail and the He-rich mantle.
+  for(auto state:{std::array<double,4>{195500,166.1,.9984,.0009859},std::array<double,4>{276500,885.3,.9773,.01829},
+                  std::array<double,4>{290000,780,.9905,.0095-1e-12},std::array<double,4>{100000,150,.99,.01-1e-12},
+                  std::array<double,4>{210000,100,.98,.02-1e-12},std::array<double,4>{250000,1500,.5,.5-1e-12}}) {
+    const auto material=mixture(state[2],state[3],0);
+    const auto q=ion_quantum_liquid_jets(state[0],state[1],material,1)[0];
+    const auto p=ion_quantum_liquid_jets(state[0]*std::exp(h),state[1],material,1)[0];
+    const auto m=ion_quantum_liquid_jets(state[0]*std::exp(-h),state[1],material,1)[0];
+    check(q[0][0]>0 && std::abs((p[0][0]-m[0][0])/(2*h)/q[1][0]-1)<2e-7,
+          "helium-3 at any share of the helium retains the free-energy response");
+  }
   // Newly supported layers: He-rich mantle, H/He transition, colder outer hydrogen, helium-3 shell.
   for(auto state:{std::array<double,4>{290000,3000,.03,.00003},std::array<double,4>{250000,1500,.5,.001},
                   std::array<double,4>{40000,20,.99,.003},std::array<double,4>{100000,150,.99,.003},

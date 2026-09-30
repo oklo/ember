@@ -92,7 +92,12 @@ separate or freeze before the helium. The mean-coupling guard is not a mixture
 phase diagram. [Source, derivative and core checks](results/quantum_liquid_full_sept30_v1.json).
 Below 300 kK, Tp,H/T must be ≤ 0.1 except in the intervals below. Outside the helium
 core, Tp,H/T ≤ 1 unless an interval states otherwise. The hydrogen intervals require
-Z ≤ 1e-8; He3 is limited to half the helium unless stated otherwise:
+Z ≤ 1e-8. He3 may be any share of the helium in every interval below: each ion
+uses its own mass, and He3's quantum ratio is √(2/3) of the bounded hydrogen ratio.
+[He3 range checks](results/he3_share_range_sept30_v1.json). Where trace helium is partly
+recombined in the source (below about 110 kK), interpolating a helium-3-rich H envelope across
+the hydrogen-fraction planes changes the tabulated Cv by up to 2.2% (0.07% for pure He4);
+fully ionized layers reproduce the source at every share:
 
 - T ≥ 200 kK, density 50–150 g/cm³ and X ≥ 0.97. Equilibrium-ionization checks
   give an electron deficit below 2.785e-5.
@@ -115,7 +120,7 @@ Z ≤ 1e-8; He3 is limited to half the helium unless stated otherwise:
   [Dense-envelope controls](results/cold_transport_domain_sept30_v1.json).
 
 - T ≥ 35 kK, density 10–500 g/cm³ (up to 900 above 200 kK), X ≥ 0.99,
-  Tp,H/T ≤ 1.1 and He3 at most 60% of the helium. Hydrogen stays fully ionized
+  Tp,H/T ≤ 1.1. Hydrogen stays fully ionized
   in direct source checks down to 35 kK. Direct ionization controls
   support the hydrogen-rich cooling layers. Trace-helium pressure ionization
   makes the fully ionized quantum correction uncertain by up to 1.15% of
@@ -127,8 +132,8 @@ Z ≤ 1e-8; He3 is limited to half the helium unless stated otherwise:
   [Cold-envelope controls](results/quantum_cold_envelope_sept30_v1.json).
 
 - Dense H/He at any hydrogen fraction (the helium-rich mantle and the H/He
-  transition): T ≥ 200 kK, density 300–4000 g/cm³, Z ≤ 1e-10, He3 at most 75% of
-  the helium and Tp,H/T ≤ 1.4. Hydrogen and helium are fully ionized in direct
+  transition): T ≥ 200 kK, density 300–4000 g/cm³, Z ≤ 1e-10 and
+  Tp,H/T ≤ 1.4. Hydrogen and helium are fully ionized in direct
   source checks (quantum-Cv ionization sensitivity ≤ 1e-8 of classical ion Cv).
   The leading Wigner–Kirkwood and Hansen–Vieillefosse terms differ from the fitted
   correction by ≤ 7% and ≤ 2% of the quantum heat capacity; these are model

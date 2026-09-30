@@ -88,19 +88,21 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   const double ne=rho*Ye/constants::amu;
   const double thetaH=hbar/(constants::kB*T)*std::sqrt(4*pi*ne*charge*charge/constants::amu);
   // Common-density linear mixing has the correct leading quantum limit.
+  // Each ion uses its own mass, so He3 is included at any share of the
+  // helium: its quantum ratio is sqrt(2/3) of the hydrogen ratio bounded below.
   // Larger corrections and partial ionization require the bounded core or
   // hydrogen domains below. These guards never taper the free energy.
   // Physical comparisons and remaining mixture limits are in docs/DENSE_EOS.md.
   const bool dense_hydrogen=T>=2e5 && rho>=50 && rho<=150 &&
-      c.X[0]>=.97 && c.Z()<=1e-8 && c.X[1]<=.5*(c.X[1]+c.X[2]);
+      c.X[0]>=.97 && c.Z()<=1e-8;
   const bool cool_hydrogen=T>=5e4 && rho>=10 && (rho<=200 || (T>=2e5 && rho<=500)) && thetaH<=.7 &&
-      c.X[0]>=.98 && c.Z()<=1e-8 && c.X[1]<=.5*(c.X[1]+c.X[2]);
+      c.X[0]>=.98 && c.Z()<=1e-8;
   const bool cold_hydrogen=T>=3.5e4 && rho>=10 && (rho<=500 || (T>=2e5 && rho<=900)) && thetaH<=1.1 &&
-      c.X[0]>=.99 && c.Z()<=1e-8 && c.X[1]<=.6*(c.X[1]+c.X[2]);
+      c.X[0]>=.99 && c.Z()<=1e-8;
   // Dense, fully ionized H/He layers of any hydrogen fraction (the He-rich
   // mantle and the H/He transition) below 300 kK.
   const bool dense_mixture=T>=2e5 && rho>=300 && rho<=4000 && thetaH<=1.4 &&
-      c.Z()<=1e-10 && c.X[1]<=.75*(c.X[1]+c.X[2]);
+      c.Z()<=1e-10;
   // The liquid mixture does not determine metal separation or freezing;
   // the mean-coupling guard below is not a mixture phase boundary.
   const bool assessed_core=T>=5e5 && rho>=1e3 && rho<=1e5 && c.X[0]<=.05 && c.Z()<=.16;

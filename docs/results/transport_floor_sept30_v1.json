@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "queries": 1957,
+  "previously_supported": 1706,
+  "recovered": 101,
+  "current_profile_failures": [],
+  "new_temperature_band_failures": [],
+  "new_floor_K": 130000,
+  "scope": "Actual 1235 K profile and fixed-density, fixed-composition temperature projections through 70% of the original temperature. Finite species and thermal derivatives checked. The cutoff changes admission only. Cooler EOS, isotope and phase limits remain; the checks do not certify the full cooling forecast.",
+  "conditions": {
+    "hydrogen_fraction": [
+      0.9961,
+      0.9983
+    ],
+    "hydrogen_coupling_150_to_200_kK": [
+      6.4,
+      10.1
+    ],
+    "He_coupling_150_to_200_kK": [
+      20,
+      32
+    ],
+    "hydrogen_plasma_temperature_ratio": [
+      0.52,
+      0.96
+    ],
+    "temperature_over_Fermi_temperature": [
+      0.01,
+      0.022
+    ]
+  },
+  "limitations": [
+    "The cutoff is not an ionization model.",
+    "A screened binary-collision approximation in the liquid has model uncertainty of order a factor two.",
+    "Colder partially ionized trace helium is not validated."
+  ]
+}
