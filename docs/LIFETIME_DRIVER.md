@@ -603,13 +603,13 @@ direct source conductivity. Both source anchors must exist. Native checks
 cover the saved cold model and 529 cooler projected states newly admitted
 below 600 kK; queries below the source boundary still reject. The matched
 10 Myr comparison is unchanged. Restart identity records
-`source_slope.fixed_density_overlap.ionized_cold.v2`.
+`source_slope.fixed_density_overlap.ionized_cold.margin4.v3`.
 [Source-boundary checks](results/core_opacity_source_floor_sept30_v1.json).
 
 The continuation is allowed only when a factor-ten uncertainty in radiation
-changes total heat conductivity by at most 0.1%. The check uses half the
-tabulated electron conductivity, conservatively below the microscopic value
-measured along the tested cooling segment. This margin must be reassessed
+changes total heat conductivity by at most 0.1%. The check uses one quarter of the
+tabulated electron conductivity. Cold-profile comparisons give a microscopic/
+tabulated ratio as low as 0.256; the H-rich envelope gives 0.59–0.66. This margin must be reassessed
 as the physical conditions change. `opacity_conductive_scale` accepts values
 from 0.1 to 10 for sensitivity calculations; its default is 1. Both selections
 are recorded in restart identity. `conductive_opacity.json` records the number
@@ -627,8 +627,8 @@ makes the declared opacity uncertainty a small heat-transport contribution.
 The density blend spans 180–190 g/cm³. Both source anchors must exist.
 
 With `conduction_envelope "ionized"`, the upper join follows the source
-coordinate log R = log10(rho) − 3 log10(T/1e6), from 3.1 to 3.4, below the
-source boundary at 3.5. The declared limits are T≥200 kK and rho≤1e5 g/cm³;
+coordinate log R = log10(rho) − 3 log10(T/1e6), from 3.0 to 3.25, below the
+source boundary at 3.5. The declared limits are T≥130 kK and rho≤1e5 g/cm³;
 The metal limit is Z≤0.16; actual source-anchor coverage and the
 heat-uncertainty check further restrict that domain. The source uses atomic
 mass fractions, so its metal boundary need not coincide with the baryonic one.
@@ -636,7 +636,7 @@ The same bound admits both H-rich and He-rich parts of the conducting layer;
 there is no hydrogen-fraction threshold in this mode. Direct conduction
 remains active below 300 kK, so this option does not return
 to an unsupported radiative table there. Restart identity records
-`hydrogen_density_continuation.logR_overlap.metal_mixtures.v7`.
+`hydrogen_density_continuation.logR_overlap.cold130.margin4.v8`.
 The overlap spans log R = 3.0–3.25, keeping source queries below the bridge
 table's log density = 2.4 limit near log T = 5.7.
 [Source and warm-replay checks](results/warm_opacity_overlap_sept30_v1.json).
@@ -683,3 +683,11 @@ collisions in the strongly coupled liquid remain a model uncertainty.
 Below this temperature, competing estimates of trace-helium ionization require
 a charge-state or mobility sensitivity calculation before further extension.
 [Domain assessment](results/transport_floor_sept30_v1.json).
+
+At 130–200 kK, the H-rich layer remains ionized in the source EOS. Uncertain
+trace-helium charge contributes less than 0.4% of the electron-scattering
+weight. Native opacity checks retain the source anchors and derivatives;
+the stricter conductivity margin still leaves the estimated radiative heat
+uncertainty far below the selected 0.3% ceiling. These are conditional bounds
+on the opacity approximation, not a calibration of the conductivity itself.
+[Cold-envelope checks](results/cold_opacity_floor_sept30_v1.json).

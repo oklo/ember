@@ -316,14 +316,14 @@ int lifetime_main(int argc,char** argv) {
     }
     if(envelope_opacity==1) {
       identity.values["opacity.conductive_envelope"]=conduction_envelope=="ionized"
-          ?"hydrogen_density_continuation.logR_overlap.metal_mixtures.v7":"hydrogen_density_continuation.v6";
+          ?"hydrogen_density_continuation.logR_overlap.cold130.margin4.v8":"hydrogen_density_continuation.margin4.v7";
       identity.number("opacity.conductive_envelope_scale",envelope_opacity_scale);
       if(envelope_opacity_uncertainty!=.001)
         identity.number("opacity.conductive_envelope_uncertainty",envelope_opacity_uncertainty);
     }
     if(conductive_opacity==1) {
       identity.values["opacity.conductive_interior"]=conduction_envelope=="ionized"
-          ?"source_slope.fixed_density_overlap.ionized_cold.v2":"source_slope.fixed_density_overlap.v4";
+          ?"source_slope.fixed_density_overlap.ionized_cold.margin4.v3":"source_slope.fixed_density_overlap.margin4.v5";
       identity.number("opacity.conductive_transport_uncertainty_limit",.001);
       identity.number("opacity.conductive_scale",conductive_opacity_scale);
     }

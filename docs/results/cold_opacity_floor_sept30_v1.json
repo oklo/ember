@@ -1,0 +1,72 @@
+{
+  "description": "Cold-envelope radiative-opacity continuation and conductivity margin. No nominal opacity formula changed.",
+  "minimum_temperature_K": 130000,
+  "conductivity_margin": 4,
+  "native_opacity": {
+    "passed": true,
+    "queries": 840,
+    "unchanged_nominal_opacity": 840,
+    "failures": [],
+    "maximum_scaled_derivative_error": 6.92000904367183e-09,
+    "maximum_heat_uncertainty": 1.2192071087323551e-06,
+    "conductivity_margin": 4,
+    "minimum_T_K": 130000,
+    "source_sha256": "0a6b793f84d45f42f08e83430e29b9f0a7fc7c22a58149f8b59e6ae0ac51adbc",
+    "scope": "Actual selected radiative tables. Native values, derivatives, both required anchors and unchanged .003 heat-uncertainty ceiling. Compared with prior margin2 at otherwise identical conditions."
+  },
+  "previous_domain": {
+    "queries_unchanged": 528
+  },
+  "conduction_comparison": {
+    "minimum_measured_native_to_table_ratio": 0.256,
+    "hydrogen_rich_ratio_range": [
+      0.585,
+      0.66
+    ],
+    "domain": "Actual 1157 K star and fixed-density cooler projections, only where EOS and collision tables support the query. Not a guarantee outside sampled states.",
+    "refusals_retained": true
+  },
+  "stellar_continuation": {
+    "starting_Teff_K": 1156.9792465738901,
+    "accepted_steps": 1,
+    "step_years": 100000000,
+    "ending_Teff_K": 1153.885081242763,
+    "CPU_seconds": 119.150558,
+    "wall_seconds": 66.7109504584223,
+    "accepted_audit": {
+      "start_years": 3882956128791.2036,
+      "step_years": 100000000,
+      "converged": 1,
+      "audit_pass": 1,
+      "accepted": 1,
+      "error_norm": 0.3964293062835855,
+      "message": "converged",
+      "species_error": [
+        1.4367692946991834e-19,
+        1.1898301472761505e-19,
+        4.0042201749466767e-19
+      ],
+      "mass_error_surface": [
+        -9.661230256584155e-12,
+        -1.0218268305407412e-11,
+        -4.681292250737133e-12
+      ],
+      "first_law": [
+        1.9756130065218258e-10,
+        1.7868928559039432e-10,
+        6.607106972644772e-09
+      ]
+    },
+    "note": "Initial 200 Myr attempt rejected; subsequent 100 Myr full/two-half interval passed. Richardson combination declined at the moving convective boundary. Direct 100 Myr startup had failed outer iteration."
+  },
+  "tests": [
+    "opacity_conductive_interior: passed"
+  ],
+  "limits": "Measured model comparisons and an assumed factor-ten radiative-opacity uncertainty. The conductivity itself is not calibrated by this test.",
+  "inputs": {
+    "out/cooling-opacity-floor-sept30-v1/validation.json": "68d2e452a0f73ef33a69946c1de6785dcf8e8e96cd44c95f8da8eff8490a9849",
+    "out/cooling-opacity-floor-sept30-v1/margin4_validation.json": "b4e6efe3f82d048d8991d3004c944e6f71e4544abe9dbd5bec3c99c8df4b6987",
+    "out/conduction-margin-sept30-v1/cond.jsonl": "c73c02eb581b8ef6740bc26bcc9dcb1a98f165f7bff8786525a09da76762b8a5",
+    "out/conduction-margin-sept30-v1/cond2.jsonl": "15b3cb601a8bae8622703005c7d3689a34a558154b2aeccd4245b1ff32da9e8e"
+  }
+}
