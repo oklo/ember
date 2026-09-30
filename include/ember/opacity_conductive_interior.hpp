@@ -52,6 +52,10 @@ public:
     // the unextended radiative table there can leave its density support.
     // Keep the contribution bound and the explicit 200 kK domain floor.
     domain.cold_source_T=0;domain.cold_full_T=0;
+    // The same fully ionized, low-metal H/He layer becomes helium-rich at
+    // depth. Admission depends on radiative heat transport, not hydrogen
+    // abundance; both source anchors and the uncertainty bound still apply.
+    domain.minimum_X=0;domain.full_X=0;
     return domain;
   }
 
@@ -93,8 +97,14 @@ public:
       wx=composition.first;dwx=composition.second/width;
       if(wx==0)return source_.eval(T,rho,c);
     }
-    if(!(T>=domain_.minimum_T && rho<=domain_.maximum_rho))
-      throw std::domain_error("ConductiveInteriorOpacity: outside selected temperature/density bounds");
+    if(!(T>=domain_.minimum_T && rho<=domain_.maximum_rho)) {
+      std::ostringstream why;
+      why<<"ConductiveInteriorOpacity: outside selected temperature/density bounds: "
+          <<std::scientific<<std::setprecision(3)<<"T="<<T<<", rho="<<rho
+          <<", X="<<c.h1()<<", Z="<<c.Z()<<"; minimum T="<<domain_.minimum_T
+          <<", maximum rho="<<domain_.maximum_rho;
+      throw std::domain_error(why.str());
+    }
     const double conduction_opacity=conduction_.eval(T,rho,c).kappa;
     // Infinite conductive opacity means that this heat channel is disabled.
     // It cannot justify an extrapolation, but the original radiative source

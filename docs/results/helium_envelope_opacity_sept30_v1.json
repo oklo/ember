@@ -1,0 +1,107 @@
+{
+  "query_count": 1990,
+  "derivative_centres": 161,
+  "derivative_max_error": 1.5979211584333184e-07,
+  "transport_differences": {
+    "cold": 5.872300201659186e-09,
+    "warm": 0.0,
+    "grid": 4.1636520009546985e-08,
+    "join": 2.3572053382547864e-06
+  },
+  "source_checkpoint_sha256": "aee54c72f786bc683cdc34389a0781dd48e16cfed8e650b24fea8e59e55ffd99",
+  "unsupported_opacity_queries": 0,
+  "one_sided_X_zero_derivatives": {
+    "X_zero_one_sided_queries": 25,
+    "maximum_scaled_error": 2.598250477042552e-07,
+    "passed": true
+  },
+  "ionization": {
+    "UTC": "2026-09-30T09:49:24.708083+00:00",
+    "checkpoint": "out/hydrogen-opacity-lower-join-sept30-v2/cooling/evolution/final.checkpoint",
+    "checkpoint_sha256": "aee54c72f786bc683cdc34389a0781dd48e16cfed8e650b24fea8e59e55ffd99",
+    "source_sha256": "1bfcfc7226449987de1609afb8bb9b7625588457d394fc0038b4baa56ac76c9f",
+    "source_queries": 157,
+    "failed": 0,
+    "maximum_electron_deficit": 6.000466790112569e-11,
+    "minimum_He_doubly_ionized": 0.99999999996565,
+    "scope": "Fully ionized conduction admission: assessed H/He opacity extension points and fixed-density projections only; no independent validation of diffusion or liquid correlations.",
+    "passed": true,
+    "minimum_H_ionized_present": 0.9999999999999967
+  },
+  "matched_stellar_overlap": {
+    "passed": true,
+    "years": 3873557827724.3887,
+    "errors": {
+      "ln_radius": 6.604494728890131e-12,
+      "ln_density": 4.530953390258219e-11,
+      "ln_temperature": 8.315659272284393e-10,
+      "H_absolute": 2.96067614868889e-11,
+      "He3_absolute": 2.1515879355948897e-12,
+      "surface_L_relative": 2.2341990479901597e-09
+    },
+    "control_header": "536 1.9884098706980505e+32 1.2224018850419517e+20 2058138273792000 3471 1393 2.9826148060470756e+28",
+    "candidate_header": "536 1.9884098706980505e+32 1.2224018850419517e+20 2058138269810688 3471 1393 2.9826148060470756e+28",
+    "scope": "Admit the helium-rich part of the conducting, low-metal envelope under the same factor-100 radiation uncertainty bound; all solver tolerances unchanged."
+  },
+  "continuation": {
+    "status": 1,
+    "CPU_seconds": 340.1828,
+    "wall_seconds": 123.91045512445271,
+    "report": {
+      "requested_age_reached": 0,
+      "age_years": 3874458332909.3735,
+      "accepted_this_invocation": 11,
+      "accepted_total": 3494,
+      "rejected_total": 1432,
+      "stop_reason": "repeated step rejection: evolve_step: Newton iteration limit reached: residual=3.722e-08, correction=5.5e-08, last damping=0.01562, last rejected trial: residual did not decrease",
+      "cpu_seconds": 340.119817,
+      "wall_seconds": 123.848711,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "final_model": {
+    "years": 3874458332909.3735,
+    "step_years": 563135.1470947266,
+    "accepted": 3494,
+    "rejected": 1424,
+    "radius_Rsun": 0.030316269650390342,
+    "Teff_K": 1603.858136713869,
+    "luminosity_Lsun": 5.479097236023131e-06,
+    "nuclear_fraction": 3.1636633626904015e-06,
+    "central_T_K": 668808.5355402067,
+    "central_density_g_cm3": 49895.538516535176,
+    "central_X": 2.9056012749675575e-08,
+    "central_He3": 1.1157242371942546e-14,
+    "eps_nuc_peak_erg_g_s": 2.4529377380054305e-08,
+    "eps_nuc_peak_q": 0.9689645508938721,
+    "burning_half_max_inner_q": 0.9650593239120202,
+    "burning_half_max_outer_q": 0.9744194831867001,
+    "burning_half_max_cells": 9,
+    "He3_peak": 0.033966051794062126,
+    "He3_peak_q": 0.9667773376663404,
+    "H_mass_g": 7.410011164511996e+30,
+    "He3_mass_g": 8.470141838672522e+28,
+    "D_mass_g": 0,
+    "surface_X": 0.9943508073606634,
+    "surface_Z": 9.77648280849892e-31,
+    "error_norm": 1.4565783024167445e-05,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.0499208649248444e-13,
+    "drift_gradient_proxy": 6.562673699504442e-11,
+    "kinetic_heat_proxy": 0.001020094567342389,
+    "convective_mass_fraction": 0.008216289468285527,
+    "radiative_boundaries": 445,
+    "relative_mixing_gradient": 1.2679573817075528e-11,
+    "convective_travel_years": 0.1368605638053233,
+    "cpu_seconds": 167.270937
+  },
+  "first_new_limit": "Interior opacity temperature floor near T=600 kK, rho=8550 g/cm3 in the helium layer. The final Newton message follows earlier physical-domain rejections.",
+  "scope": "Remove the hydrogen-fraction admission threshold only for ionized-conduction mode with Z<=1e-8. Retain source anchors, the factor-100 opacity uncertainty, conduction margin and all thermal/numerical limits. The ionization check does not validate diffusion or a mixture phase diagram.",
+  "unit_tests": [
+    "opacity_conductive_interior passed, including supported He-rich conduction and rejection of radiatively important continuation"
+  ],
+  "executable_sha256": "15673d7b9245cdd99bf1e2ec06d8774fcf65e2cc815fb42ee29db4dca06e7aab"
+}

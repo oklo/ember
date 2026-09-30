@@ -203,6 +203,14 @@ int main(){try{
       ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
   rejected=false;try{cool_weak.eval(2.5e5,350.,hc);}catch(const std::domain_error&){rejected=true;}
   require(rejected,"cool continuation ignored heat-transport uncertainty");
+  for(double X:{0.,.01,.25,.5,.65}) {
+    auto mixture=hc;mixture.X[0]=X;mixture.X[2]=1-X-mixture.X[1];
+    rejected=false;try{cool_bounded.eval(2.5e5,350.,mixture);}catch(const std::domain_error&){rejected=true;}
+    require(rejected,"H/He source fixture unexpectedly covers the dense layer");
+    require(cool_ionized.eval(2.5e5,350.,mixture).kappa>0,"conducting He-rich layer unavailable");
+    rejected=false;try{cool_weak.eval(2.5e5,350.,mixture);}catch(const std::domain_error&){rejected=true;}
+    require(rejected,"He-rich continuation ignored heat-transport uncertainty");
+  }
   // A nearly complete blend must still query its source; rounding the C2
   // polynomial above unity must never skip a source-support check.
   struct NarrowSource final : Opacity {
@@ -213,8 +221,9 @@ int main(){try{
     }
     const char* name() const override{return "narrow source";}
   } narrow;
-  ConductiveInteriorOpacity edge(narrow,strong,.001,1.,
-      ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
+  auto composition_domain=ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain();
+  composition_domain.minimum_X=.70;composition_domain.full_X=.745;
+  ConductiveInteriorOpacity edge(narrow,strong,.001,1.,composition_domain);
   auto edge_c=hc;edge_c.X[0]=.745-1e-6;edge_c.X[2]=1-edge_c.X[0]-edge_c.X[1];
   rejected=false;try{edge.eval(6e5,2000.,edge_c);}catch(const std::domain_error&){rejected=true;}
   require(rejected,"nearly complete composition join bypassed source guard");
