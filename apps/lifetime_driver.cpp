@@ -101,6 +101,13 @@ int lifetime_main(int argc,char** argv) {
     fs::path cold_eos_path;
     if(cfg.values.contains("eos_cold_potential"))cold_eos_path=path("eos_cold_potential");
     const auto conduction_path=path("conduction"),atmosphere_path=path("atmosphere"),collision_path=path("collisions"),composition_path=path("composition");
+    fs::path cold_opacity_path;
+    if(cfg.values.contains("opacity_cold_dense"))cold_opacity_path=path("opacity_cold_dense");
+    const double cold_opacity_scale=cfg.values.contains("opacity_cold_dense_scale")
+        ?cfg.number("opacity_cold_dense_scale"):1;
+    if(!std::isfinite(cold_opacity_scale) || cold_opacity_scale<.1 || cold_opacity_scale>10
+        || (cold_opacity_path.empty() && cold_opacity_scale!=1))
+      throw std::invalid_argument("invalid cold dense-gas opacity selection");
     const double conductive_opacity=cfg.values.contains("opacity_conductive_interior")
         ?cfg.number("opacity_conductive_interior"):0;
     const double conductive_opacity_scale=cfg.values.contains("opacity_conductive_scale")
@@ -287,6 +294,11 @@ int lifetime_main(int argc,char** argv) {
       identity.number("atmosphere.envelope_lnP_steps",20);
     }
     identity.values["opacity.composition_extension"]=opacity_extension?"hydrogen_share.linear_Z.source_log_X.v1":"none";
+    if(!cold_opacity_path.empty()) {
+      identity.file("opacity.cold_dense.table",cold_opacity_path);
+      identity.values["opacity.cold_dense"]="computed_baryonic_gas.C2_logR_T_trace_Z.v1";
+      identity.number("opacity.cold_dense_scale",cold_opacity_scale);
+    }
     if(envelope_opacity==1) {
       identity.values["opacity.conductive_envelope"]="hydrogen_density_continuation.v4";
       identity.number("opacity.conductive_envelope_scale",envelope_opacity_scale);
@@ -406,7 +418,8 @@ int lifetime_main(int argc,char** argv) {
                                             :VariableMetalHelmholtzEos::LowMetalInterpolation::cubic,
         cold_eos_path,ion_quantum=="liquid_bc22");
     DeuteriumApproxEos eos(table_eos);
-    const RadiativeOpacity::Tables opacity_tables{low_path,warm_path,bridge_path,hot_path};
+    const RadiativeOpacity::Tables opacity_tables{low_path,warm_path,bridge_path,hot_path,
+        cold_opacity_path,cold_opacity_scale};
     auto source_radiation=opacity_extension?std::make_shared<RadiativeOpacity>(opacity_tables,*opacity_extension)
         :std::make_shared<RadiativeOpacity>(opacity_tables);
     TabulatedConduction table_conduction(conduction_path);

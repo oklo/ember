@@ -16,7 +16,7 @@ import shutil
 INPUT_KEYS = ("eos", "opacity_low", "opacity_warm", "opacity_bridge",
               "opacity_hot", "conduction", "atmosphere", "collisions", "composition")
 OPTIONAL_INPUT_KEYS = ("atmosphere_main_sequence", "atmosphere_metal_chain", "opacity_hydrogen_response",
-                       "atmosphere_hydrogen_interval", "atmosphere_hydrogen_envelope")
+                       "atmosphere_hydrogen_interval", "atmosphere_hydrogen_envelope", "opacity_cold_dense")
 
 
 def atmosphere_children(path):
@@ -77,6 +77,8 @@ def input_keys(configuration):
 
 
 def is_family(path, role):
+    if role == "opacity_cold_dense":
+        return False
     if role == "atmosphere_metal_chain":
         with path.open() as stream:
             return stream.readline().startswith("EMBER_METAL_ATMOSPHERE_CHAIN ")

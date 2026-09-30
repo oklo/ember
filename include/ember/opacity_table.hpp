@@ -10,11 +10,14 @@ namespace ember {
 // Monotone Hermite in the density coordinate and log T; linear in X.
 // A single X plane requires that exact composition. No extrapolation.
 // Version 2 supplies each isotherm's valid density prefix explicitly.
+// The constructor declares the mass convention; existing source tables use
+// atomic masses, while newly computed gas tables can use integer masses.
 class TabulatedOpacity : public Opacity {
 public:
   enum class DensityAxis { logR, logRho };
   TabulatedOpacity(const std::filesystem::path& file, std::string label,
-                   DensityAxis axis = DensityAxis::logR);
+                   DensityAxis axis = DensityAxis::logR,
+                   AbundanceBasis basis = AbundanceBasis::atomic_mass);
 
   OpacityState eval(double T, double rho, const Composition&) const override;
   std::optional<DensityRange> density_range(double T, const Composition&) const override;
@@ -34,6 +37,7 @@ private:
   std::vector<std::size_t> row_sizes_; // empty for a complete rectangle
   double Z_{};
   DensityAxis axis_;
+  AbundanceBasis basis_;
   std::size_t active_density_size(double logT, double X) const;
 };
 

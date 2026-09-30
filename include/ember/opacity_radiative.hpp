@@ -4,6 +4,7 @@
 #include "ember/opacity_hydrogen_continuation.hpp"
 #include "ember/opacity_hydrogen_share.hpp"
 #include "ember/opacity_metal_extension.hpp"
+#include "ember/opacity_cold_dense.hpp"
 
 namespace ember {
 
@@ -11,7 +12,11 @@ namespace ember {
 // is deliberately supplied separately by the selected heat transport law.
 class RadiativeOpacity final : public Opacity {
 public:
-  struct Tables { std::filesystem::path low,warm,bridge,hot; };
+  struct Tables {
+    std::filesystem::path low,warm,bridge,hot;
+    std::filesystem::path cold_dense{};
+    double cold_dense_scale{1};
+  };
   struct Extension {
     std::filesystem::path hydrogen_response;
     double minimum_Z{},maximum_Z{.16},maximum_X{1};
@@ -43,7 +48,7 @@ private:
       const auto& mid=add<BlendedOpacity>(warm,bridge,5.05,5.10);
       const auto& upper=add<BlendedOpacity>(mid,hot,5.6,5.7);
       const auto& raw=add<BlendedOpacity>(low,upper,4.4,4.47);
-      mapped_=&add<ElementalOpacity>(raw);return;
+      map(raw,tables);return;
     }
     const auto& e=*extension;
     if(e.hydrogen_response.empty() || !std::isfinite(e.minimum_Z+e.maximum_Z+e.maximum_X)
@@ -66,7 +71,12 @@ private:
     // consult a second high-Z family, so do not load that unused dataset.
     const auto& extended=add<MetalOpacityExtension>(raw,raw,.03,e.maximum_Z,
         MetalOpacityExtension::Method::linear_kappa);
-    mapped_=&add<ElementalOpacity>(extended);
+    map(extended,tables);
+  }
+  void map(const Opacity& raw,const Tables& tables) {
+    const auto& source=tables.cold_dense.empty()?raw:
+        add<ColdDenseOpacity>(raw,tables.cold_dense,tables.cold_dense_scale);
+    mapped_=&add<ElementalOpacity>(source);
   }
 };
 } // namespace ember

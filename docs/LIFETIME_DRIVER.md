@@ -523,6 +523,27 @@ radiative opacity for arbitrary pure-hydrogen layers. See the
 [temperature-domain comparison](results/dense_envelope_temperature_extension_sept27_v1.json).
 
 
+### Dense gas opacity in a cool envelope
+
+`opacity_cold_dense` selects the compact
+[`cold_dense_hydrogen.dat`](../data/opacity/cold_dense_hydrogen.dat) gas table
+for dense, nearly metal-free hydrogen envelopes. It replaces the low-temperature
+source smoothly over log R = 5.6–5.9, where R = rho/(T/10^6)^3. Temperature
+joins span 3000–3500 K and 10000–12000 K; composition joins limit its use to
+hydrogen-rich mixtures with Z below 1e-10. Source temperature, density and
+composition bounds remain enforced. The integer-mass source convention is
+converted explicitly, with derivatives that preserve extinction per length.
+
+The table includes gas absorption and electron scattering; nonideal chemistry,
+grain opacity and direct H3+ lines remain incomplete. Its use is supported by
+the envelope's weak sensitivity to opacity: multipliers 0.1 and 10 change
+luminosity by at most 0.0001184% over a 140 Myr cooling comparison, ending at
+1902 K. `opacity_cold_dense_scale` selects those controls; the default is 1.
+Both the file hash and scale enter restart identity. These checks support
+this cooling segment, not a final cooling age.
+[Source details](../data/opacity/cold_dense_hydrogen.json) ·
+[Numerical checks](results/cold_dense_gas_opacity_sept30_v1.json).
+
 ### Radiative opacity in the conductive interior
 
 `opacity_conductive_interior "1"` permits a bounded density continuation of

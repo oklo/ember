@@ -25,6 +25,9 @@ __pycache__/
 !/data/atmosphere/sources/synspec-ap18-ions.dat
 !/data/atmosphere/sources/condensate_free_energy_audit_states.json
 !/data/atmosphere/sources/condensate_free_energy_survey_states.json
+# Compact computed opacity and its source record, used by the cold-gas option.
+!/data/opacity/cold_dense_hydrogen.dat
+!/data/opacity/cold_dense_hydrogen.json
 
 # Local restart binaries, raw histories and source-experiment recovery files.
 # The report, its compact history CSV, figures and hash manifest are versioned.

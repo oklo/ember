@@ -1,0 +1,283 @@
+{
+  "format": 1,
+  "table": "cold_dense_hydrogen.dat",
+  "sha256": "061add15549ccc5892aba7b8e6c52d439d8c1f5dd5bc2acaf9867255a66f2651",
+  "basis": "baryon_mass",
+  "density_coordinate": "log10 rho in g of baryonic mass per cm3",
+  "opacity_units": "cm2 per g of baryonic mass",
+  "source": "SYNSPEC 54 with the H3+ electron-donation change",
+  "helium3_source_fraction": 0,
+  "hydrogen": [
+    0.98,
+    0.9955
+  ],
+  "temperature_K": [
+    3000.0,
+    3500.0,
+    4000.0,
+    4500.0,
+    5000.0,
+    5400.0,
+    5700.0,
+    6000.0,
+    6200.0,
+    6600.0,
+    7000.0,
+    7500.0,
+    8000.0,
+    9000.0,
+    10000.0,
+    12000.0,
+    16000.0,
+    20000.0
+  ],
+  "log10_density": [
+    -2.0,
+    -1.75,
+    -1.5,
+    -1.25,
+    -1.0,
+    -0.75,
+    -0.5,
+    -0.25,
+    0.0
+  ],
+  "frequencies": 30000,
+  "wavelength_A": [
+    900,
+    300000
+  ],
+  "method": "Trapezoidal Rosseland harmonic mean in frequency, weighted by dBnu/dT, of direct absorption plus electron scattering. No Rayleigh scattering in nominal values.",
+  "input_archives": {
+    "tl208-s54.tar.gz": {
+      "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/tl208-s54.tar.gz",
+      "sha256": "ec9febdc1795f2c1bbe948ea1736bed663aac9238b290483b517201132f85e4a"
+    },
+    "synple.tar.gz": {
+      "url": "https://codeload.github.com/callendeprieto/synple/tar.gz/703549b60031c5f6dd2446ad933b129c070a6560",
+      "sha256": "7e98b2f20f5c2c8ee399769f63a2d511cf69fcf2357975d94dcb798d1d5f7967"
+    },
+    "gfATOc.19.gz": {
+      "url": "ftp:gfATOc.19.gz",
+      "sha256": "0fb5f9945bce3defc151da7331d0daf96136e360eda1703b014a044b2839e737"
+    },
+    "gfMOLsun.20.gz": {
+      "url": "ftp:gfMOLsun.20.gz",
+      "sha256": "68491ac8068cfbf86491b639cb4a9a2461a8807c865b8b15b2c08e0b297a2586"
+    },
+    "gfTiO.20.gz": {
+      "url": "ftp:gfTiO.20.gz",
+      "sha256": "cee8cf61473303f5aca8f93f90cd0c404fb8fbcc4c40df9283c54edcb193a456"
+    },
+    "H2O-8.20.gz": {
+      "url": "ftp:H2O-8.20.gz",
+      "sha256": "8ca3716c74c8cd5e00905b3134f02bb164955cb1be97379174897766075aaf29"
+    },
+    "optables.tar.gz": {
+      "url": "https://www.as.arizona.edu/~hubeny/tlusty208-package/optables.tar.gz",
+      "sha256": "f0fa3faa6c9f5ed45a75f235629e91cbb71b4a067feaf4abd455eca0ffdef57a"
+    }
+  },
+  "source_patch_hashes": {
+    "tlusty208-ember.patch": "0b3214a4b18b6a927f2d512475f94c5895b2790e29185e82108db35724218be1",
+    "synspec54-ember.patch": "b1500af721095d49cff7ecbd5a165a5ef9f6663ae1e3fe6fac1b86bf713b1e8f",
+    "synspec54-sampling.patch": "757c94eb72f7554c470f63eda4a536cc50c43f4d61c4eb19e3c640e78880a92c"
+  },
+  "source_executable_sha256": "c61512ef88326a6dc7a678e754fc2d693f073b875cf4d6a498ff8bbf92b29b09",
+  "line_list_sha256": [
+    "5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c",
+    "5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c",
+    "ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61",
+    "e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be"
+  ],
+  "data_sha256": "3ee3d1edd6c01f317fd66fcb023ebf652c44ee3d6e7da683b598faf96bc876b4",
+  "compiler": "GNU Fortran (Homebrew GCC 16.1.0) 16.1.0",
+  "limitations": [
+    "Ordinary chemical populations; not full nonideal chemical equilibrium.",
+    "No direct H3+ lines, three-body CIA or grains.",
+    "He3 handled by the elemental mapping; isotope-specific cross sections and broadening not supplied.",
+    "Negligible source metal mass below 1e-15 is omitted from the runtime source coordinates."
+  ],
+  "source_file_hashes": [
+    {
+      "X": 0.98,
+      "T_K": 3000.0,
+      "sha256": "4bdef681f82b686010260ff0c3c6b3a634cb1515da83fe0050fb88167c268714"
+    },
+    {
+      "X": 0.98,
+      "T_K": 3500.0,
+      "sha256": "91fa5a3fb73d798110a4d10c3c70b4f0a0c2760829c673f63e0b7e5bfb82c1ef"
+    },
+    {
+      "X": 0.98,
+      "T_K": 4000.0,
+      "sha256": "ff3c0c3cb21b597414b15d74a43f89352b62b0d9b290f18a3897fbe986eaa02d"
+    },
+    {
+      "X": 0.98,
+      "T_K": 4500.0,
+      "sha256": "06f88c196f0acfdf4e72c11c69c15d875cb23da9e0a31f4cc4c0787127909478"
+    },
+    {
+      "X": 0.98,
+      "T_K": 5000.0,
+      "sha256": "4944aa733783ff5281faa1332472a96cfcd7f994ded19d8b4a8f0e7c0a79dcde"
+    },
+    {
+      "X": 0.98,
+      "T_K": 5400.0,
+      "sha256": "e01545f6d730ecfc27219d394c1fcb44c6cba4e5232cf4ac1c5555612a6f1778"
+    },
+    {
+      "X": 0.98,
+      "T_K": 5700.0,
+      "sha256": "ff8ff43f2343ad8f9c471e8891c9dd1444850ca585cddc21f2e06ee6adce097b"
+    },
+    {
+      "X": 0.98,
+      "T_K": 6000.0,
+      "sha256": "0e94bbdeec97aa99190a410b7bf53dc09b1a639edf764836fd3cfe9d75c8cfb4"
+    },
+    {
+      "X": 0.98,
+      "T_K": 6200.0,
+      "sha256": "99eac4ea2215977a1fc83a61cc748ca1d0826dea1bb2389ce333101c688f1c22"
+    },
+    {
+      "X": 0.98,
+      "T_K": 6600.0,
+      "sha256": "7ae541bf31f8087929d7b279d86352445dfbf495de97147d240f1fcba2babe3a"
+    },
+    {
+      "X": 0.98,
+      "T_K": 7000.0,
+      "sha256": "7839021d4efef592a71ea02422ff772feae275a9eac224e7f8956bffc7c29cf5"
+    },
+    {
+      "X": 0.98,
+      "T_K": 7500.0,
+      "sha256": "2069e5cee656460e32f14faf7ce1e3c326610a3db30bf4ca2da407f34bde27d8"
+    },
+    {
+      "X": 0.98,
+      "T_K": 8000.0,
+      "sha256": "021d9552036312a961813d7cb789023e824d115e0f3d3d3792671fc39da9d890"
+    },
+    {
+      "X": 0.98,
+      "T_K": 9000.0,
+      "sha256": "4d8161acf95c2d3e345c5351f09c4e57425e85f6b5787ce1f0f135248c713e0c"
+    },
+    {
+      "X": 0.98,
+      "T_K": 10000.0,
+      "sha256": "e5515ed68b76de1de3aed677cdb34308b783c424b3ccc1cf9c4863c00fdbfa7b"
+    },
+    {
+      "X": 0.98,
+      "T_K": 12000.0,
+      "sha256": "bef1d91e500024877839e3c034f37c29d04f0078f1cf01423e18ee2040721e32"
+    },
+    {
+      "X": 0.98,
+      "T_K": 16000.0,
+      "sha256": "d595b02cea721e14a8c728a354fd4aa5fda7c25aa10e10a47dbac6dc979f2a60"
+    },
+    {
+      "X": 0.98,
+      "T_K": 20000.0,
+      "sha256": "d99bb83efdea1509306f05519007776f8cc0645f904d678c0d3dda5eea66b90d"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 3000.0,
+      "sha256": "29b584319c04d1a4e35d78a3b8931d1c6a34d8bc3f1d4de37cd9aba4d092e25f"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 3500.0,
+      "sha256": "b156031528f49bdca79d3ce989dc5b3639782ae11c609629d0e94b169e8ecaf2"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 4000.0,
+      "sha256": "d60c698a808ada81d8013838282e4c47073501f5e5faf7af1954b9a6520e6b7b"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 4500.0,
+      "sha256": "4e0b24d0c24314ea9cb465e5ef680ecfbc9c3ee256dd11379d714b15df35fc77"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 5000.0,
+      "sha256": "89d9f764535a0132262008e333a2ff66d3721d5c9c9a813eee545e36e3b73252"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 5400.0,
+      "sha256": "5492f4188fc8c681ff479341342797c8bf031734d1dd94c012d8a61637ea9665"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 5700.0,
+      "sha256": "e8ef8c94198b62d25d6f7b9275947d992257cd0c1aa4153eb5bee646dc718980"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 6000.0,
+      "sha256": "b0fdf84cd933b72e9347c1a43fae41f2a8b08469c7b61a94b7faa87df8ca3a29"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 6200.0,
+      "sha256": "80e8437a378b60fe9616e86abb9c9f9b5749ee288ca85fb911dcda0842e2be53"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 6600.0,
+      "sha256": "5eb8e7b3755d21932052134b1ae21df0f7edc29e4989c8980e42fef5b35de119"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 7000.0,
+      "sha256": "7799ff824dfb5698a0f1208829084ad1819fd0b4e615996a827729dc0b1e0e17"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 7500.0,
+      "sha256": "01cef4dd9c4d279fc79bf9b623c8d4f041042af769766ae9b9d5145e6bb784c1"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 8000.0,
+      "sha256": "be01832dc5afde47e218c12f5a3fb60fb0ded27a02afd38f7053437c8d4d08e4"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 9000.0,
+      "sha256": "606a31aae52e453218d2956edf36242bb9ec9b7885b752afacf0a6ae9309365a"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 10000.0,
+      "sha256": "93bb17c5c562cd0a0ba70f9209c80db9b6d6bec2977b2610c4c56cf774e6c3b4"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 12000.0,
+      "sha256": "102e8cd19d164a3e21208114b6a5a11083b1d8899edd6db8250b0e5a02cb47ac"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 16000.0,
+      "sha256": "6e4316aeb72d39ba6831291180a491ab9c55b5140feee6ebc985cd7f1c93f7b7"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 20000.0,
+      "sha256": "3cab6112243ef7b358a62df6639a66bb4874abc84ef46e313dd5eeea400b157e"
+    }
+  ]
+}

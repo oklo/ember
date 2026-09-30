@@ -1,0 +1,103 @@
+{
+  "scope": "Optional cold dense-gas opacity with bounded source support. Conditional cooling comparison; no final cooling-age validation.",
+  "table_sha256": "061add15549ccc5892aba7b8e6c52d439d8c1f5dd5bc2acaf9867255a66f2651",
+  "source_basis": "baryon_mass",
+  "runtime_conversion": "Atomic elemental coordinates are converted to integer-mass H/He coordinates, preserving nuclei per volume and extinction per length. Analytic derivatives include density and composition conversion.",
+  "native": {
+    "passed": true,
+    "derivative_centres": 22,
+    "maximum_scaled_derivative_error": 1.2798716859359928e-07,
+    "unchanged_overlap": 4,
+    "outside_guards": 2,
+    "scope": "Native computed-table value/derivative and support checks. Physical source accuracy is assessed by envelope and stellar sensitivity, not this interpolation check."
+  },
+  "regression_tests": [
+    "opacity_support",
+    "opacity_radiative",
+    "opacity_conductive_interior",
+    "opacity_cold_dense"
+  ],
+  "envelope_temperature_K": [
+    1800,
+    1850,
+    1900,
+    1933,
+    2000
+  ],
+  "envelope_maximum_relative_span": {
+    "T_base": 1.84419729309937e-06,
+    "P_base": 1.4823939631369853e-08,
+    "rho_base": 1.7042029476499465e-07,
+    "r_base": 5.2003252815069345e-09
+  },
+  "opacity_multipliers": [
+    0.1,
+    1,
+    10
+  ],
+  "stellar_overlap": {
+    "passed": true,
+    "maximum_relative_differences": {
+      "luminosity_Lsun": 4.3408165883995764e-07,
+      "radius_Rsun": 2.5382462798262395e-10,
+      "Teff_K": 1.0854857279696262e-07,
+      "central_T_K": 4.387601393318619e-12,
+      "central_density_g_cm3": 1.0881961998165934e-11,
+      "H_mass_g": 6.661338147750939e-16,
+      "He3_mass_g": 1.5543122344752192e-15
+    },
+    "common_accepted_years": [
+      3871482888637.475,
+      3871484888637.475,
+      3871487888637.475,
+      3871492388637.4746
+    ],
+    "overlap_span_years": 9499999.999511719,
+    "limitation": "The new diagnostic did not finish its requested extra 0.5 Myr endpoint slice: repeated Newton residual near 1e-9 at that tiny step. Compare the existing three accepted intervals without changing audits or tolerances."
+  },
+  "stellar_sensitivity": {
+    "passed": true,
+    "years": 3871727811489.037,
+    "Teff_K": 1902.2589571804263,
+    "relative_differences": {
+      "low_opacity": {
+        "luminosity_Lsun": 1.1839008930980555e-06,
+        "radius_Rsun": -2.0452969651252317e-08,
+        "Teff_K": 3.062015798693807e-07,
+        "central_T_K": -2.4641797380375863e-07,
+        "central_density_g_cm3": 7.778782062928258e-09,
+        "H_mass_g": -8.104628079763643e-15,
+        "He3_mass_g": 7.129852264142755e-13
+      },
+      "high_opacity": {
+        "luminosity_Lsun": -1.1496149857626037e-06,
+        "radius_Rsun": -6.078530789821457e-09,
+        "Teff_K": -2.8436460586256374e-07,
+        "central_T_K": -4.4546731303718445e-07,
+        "central_density_g_cm3": 1.1785113329665364e-08,
+        "H_mass_g": -1.609823385706477e-14,
+        "He3_mass_g": 1.45328193923433e-12
+      }
+    },
+    "scope": "Matched-age 140 Myr cooling segment with the corrected source mass conversion. Not a final opacity or cooling-age validation."
+  },
+  "stellar_cost": {
+    "cooling": {
+      "CPU_seconds": 43.139652000000005,
+      "wall_seconds": 30.814597125165164
+    },
+    "low_opacity": {
+      "CPU_seconds": 44.018566,
+      "wall_seconds": 31.42910433281213
+    },
+    "high_opacity": {
+      "CPU_seconds": 43.803021,
+      "wall_seconds": 31.375134208239615
+    }
+  },
+  "remaining": [
+    "Higher-metal H3+ atmosphere incorporation.",
+    "Dense-core ionization and strongly coupled/quantum uncertainties.",
+    "Next hot-opacity support limit; source coverage at still colder projected structures."
+  ]
+}

@@ -19,8 +19,9 @@ bool inside(double value, double lo, double hi) {
 }
 }
 
-TabulatedOpacity::TabulatedOpacity(const std::filesystem::path& file, std::string label, DensityAxis axis)
-    : label_(std::move(label)), axis_(axis) {
+TabulatedOpacity::TabulatedOpacity(const std::filesystem::path& file, std::string label,
+                                 DensityAxis axis,AbundanceBasis basis)
+    : label_(std::move(label)), axis_(axis),basis_(basis) {
   std::ifstream in(file);
   if (!in) throw std::runtime_error("TabulatedOpacity: cannot open " + file.string());
   std::size_t nx = 0, nt = 0, nr = 0;
@@ -112,7 +113,7 @@ std::size_t TabulatedOpacity::active_density_size(double lt, double X) const {
 
 std::optional<Opacity::DensityRange> TabulatedOpacity::density_range(double T, const Composition& comp) const {
   const double raw_lt = std::log10(T), X = comp.h1();
-  if (comp.basis!=AbundanceBasis::atomic_mass || !inside(raw_lt, logT_.front(), logT_.back())
+  if (comp.basis!=basis_ || !inside(raw_lt, logT_.front(), logT_.back())
       || !std::isfinite(X) || X < X_.front() || X > X_.back()
       || !std::isfinite(comp.Z()) || std::abs(comp.Z() - Z_) > 1e-10)
     throw std::domain_error("TabulatedOpacity: temperature or composition outside table");
@@ -126,7 +127,7 @@ OpacityState TabulatedOpacity::eval(double T, double rho, const Composition& com
   double lt = std::log10(T);
   double lr = std::log10(rho) - (axis_ == DensityAxis::logR ? 3.0 * (lt - 6.0) : 0.0);
   const double X  = comp.h1();
-  if (comp.basis!=AbundanceBasis::atomic_mass || !std::isfinite(comp.Z()) || std::abs(comp.Z() - Z_) > 1e-10)
+  if (comp.basis!=basis_ || !std::isfinite(comp.Z()) || std::abs(comp.Z() - Z_) > 1e-10)
     throw std::domain_error(label_ + ": composition metallicity does not match fixed-Z table");
   if (!covers(T, rho, X))
     throw std::domain_error(label_ + ": (logT=" + std::to_string(lt) +
