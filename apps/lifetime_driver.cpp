@@ -101,6 +101,10 @@ int lifetime_main(int argc,char** argv) {
     fs::path cold_eos_path;
     if(cfg.values.contains("eos_cold_potential"))cold_eos_path=path("eos_cold_potential");
     const auto conduction_path=path("conduction"),atmosphere_path=path("atmosphere"),collision_path=path("collisions"),composition_path=path("composition");
+    const auto conduction_envelope=cfg.values.contains("conduction_envelope")
+        ?cfg.get("conduction_envelope"):"temperature_join";
+    if(conduction_envelope!="temperature_join" && conduction_envelope!="ionized")
+      throw std::invalid_argument("unknown conduction envelope selection");
     fs::path cold_opacity_path;
     if(cfg.values.contains("opacity_cold_dense"))cold_opacity_path=path("opacity_cold_dense");
     const double cold_opacity_scale=cfg.values.contains("opacity_cold_dense_scale")
@@ -280,6 +284,8 @@ int lifetime_main(int argc,char** argv) {
     initial.cn_molality=initial_gs98_cn(initial);initial=explicit_cn_material(initial);
 
     RuntimeIdentity identity;identity.file("executable",argv[0]);
+    if(conduction_envelope=="ionized")
+      identity.values["conduction.envelope"]="fully_ionized_source.v1";
     if(deep_envelope) {
       identity.file("atmosphere.envelope_map",envelope_map_path);
       identity.number("atmosphere.envelope_mass",deep_envelope->envelope_mass());
@@ -306,7 +312,8 @@ int lifetime_main(int argc,char** argv) {
         identity.number("opacity.conductive_envelope_uncertainty",envelope_opacity_uncertainty);
     }
     if(conductive_opacity==1) {
-      identity.values["opacity.conductive_interior"]="source_slope.fixed_density_overlap.v4";
+      identity.values["opacity.conductive_interior"]=conduction_envelope=="ionized"
+          ?"source_slope.fixed_density_overlap.ionized_cold.v1":"source_slope.fixed_density_overlap.v4";
       identity.number("opacity.conductive_transport_uncertainty_limit",.001);
       identity.number("opacity.conductive_scale",conductive_opacity_scale);
     }
@@ -422,12 +429,16 @@ int lifetime_main(int argc,char** argv) {
         cold_opacity_path,cold_opacity_scale};
     auto source_radiation=opacity_extension?std::make_shared<RadiativeOpacity>(opacity_tables,*opacity_extension)
         :std::make_shared<RadiativeOpacity>(opacity_tables);
-    TabulatedConduction table_conduction(conduction_path);
-    auto conduction=std::make_shared<HotConduction>(table_conduction);
+    auto table_conduction=std::make_shared<TabulatedConduction>(conduction_path);
+    std::shared_ptr<Conduction> conduction=table_conduction;
+    if(conduction_envelope=="temperature_join")
+      conduction=std::make_shared<HotConduction>(*table_conduction);
     std::shared_ptr<ConductiveInteriorOpacity> continued_radiation;
     std::shared_ptr<Opacity> radiation=source_radiation;
     if(conductive_opacity==1) {
-      continued_radiation=std::make_shared<ConductiveInteriorOpacity>(*source_radiation,*conduction,.001,conductive_opacity_scale);
+      auto domain=ConductiveInteriorOpacity::Domain{};
+      if(conduction_envelope=="ionized")domain.minimum_T=6e5;
+      continued_radiation=std::make_shared<ConductiveInteriorOpacity>(*source_radiation,*conduction,.001,conductive_opacity_scale,domain);
       radiation=continued_radiation;
     }
     std::shared_ptr<ConductiveInteriorOpacity> envelope_radiation;

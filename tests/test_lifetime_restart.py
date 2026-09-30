@@ -119,6 +119,14 @@ def main():
                        expected=1, configuration=changed)
         assert "checkpoint" in rejected.stderr and "configuration.energy_tolerance" in rejected.stderr
 
+        # A conductivity prescription is physical input, not a runtime control.
+        changed = configuration_file("ionized-conduction.txt", {"conduction_envelope": "ionized"})
+        rejected = run("conduction-change", restart, expected=1, configuration=changed)
+        assert "checkpoint input selection differs" in rejected.stderr, rejected.stderr
+        invalid = configuration_file("invalid-conduction.txt", {"conduction_envelope": "unknown"})
+        rejected = run("invalid-conduction", expected=1, configuration=invalid)
+        assert "unknown conduction envelope selection" in rejected.stderr
+
         changed = configuration_file("changed-transport.txt", {
             "transport": "screened_core", "screened_heat_upper_T_K": "3000000",
             "maximum_relative_mixing_gradient": ".01"})

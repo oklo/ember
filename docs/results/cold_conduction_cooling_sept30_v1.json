@@ -1,0 +1,149 @@
+{
+  "scope": "Optional fully ionized conductivity in the common lifetime driver. Cold dense matter no longer loses conduction because of a temperature-only cutoff. This is a cooling comparison, not a completed Hayashi-to-extreme-cold validation.",
+  "same_start_and_end_age": true,
+  "cooling_elapsed_years": 4445977928.541016,
+  "endpoints": {
+    "temperature_join": {
+      "years": 3872396811489.0356,
+      "Teff_K": 1775.2678276065978,
+      "luminosity_Lsun": 8.296665428690277e-06,
+      "central_T_K": 901228.8638984888,
+      "central_density_g_cm3": 49540.86118726896,
+      "radius_Rsun": 0.030449290962999823,
+      "H_mass_g": 7.410011146958858e+30,
+      "He3_mass_g": 8.470143593988727e+28,
+      "nuclear_fraction": 2.5935987942229786e-05,
+      "surface_X": 0.9921862185357223,
+      "convective_mass_fraction": 0.019729181867183015
+    },
+    "ionized": {
+      "years": 3872396811489.0356,
+      "Teff_K": 1843.9818246403458,
+      "luminosity_Lsun": 9.652597332292994e-06,
+      "central_T_K": 875539.7357500885,
+      "central_density_g_cm3": 49588.45710499053,
+      "radius_Rsun": 0.030441215073376382,
+      "H_mass_g": 7.410011170601365e+30,
+      "He3_mass_g": 8.470141229735699e+28,
+      "nuclear_fraction": 1.3142652827157959e-05,
+      "surface_X": 0.9925441293630007,
+      "convective_mass_fraction": 0.011182883614075273
+    }
+  },
+  "relative_difference": {
+    "Teff_K": 0.038706270662487885,
+    "luminosity_Lsun": 0.1634309488862642,
+    "central_T_K": -0.028504555476924764,
+    "central_density_g_cm3": 0.0009607406205889291,
+    "radius_Rsun": -0.00026522422585317784,
+    "H_mass_g": 3.1906168818096603e-09,
+    "He3_mass_g": -2.791278568281541e-07,
+    "nuclear_fraction": -0.493265772006368,
+    "surface_X": 0.0003607294886707191,
+    "convective_mass_fraction": -0.433180570316675
+  },
+  "ionization": {
+    "original": {
+      "queries": 204,
+      "max_electron_deficit": 0.003105568139990078,
+      "partly_ionized_queries": 39,
+      "max_conductive_fraction_at_adiabatic_gradient": 0.0615019904324101,
+      "minimum_full_diffusion_to_adiabatic_gradient": 16.259636362484677,
+      "max_deficit_where_full_conduction_changes_convection": 2.6645352591003757e-15
+    },
+    "corrected": {
+      "queries": 204,
+      "max_electron_deficit": 0.0028790410452149695,
+      "partly_ionized_queries": 39,
+      "max_conductive_fraction_at_adiabatic_gradient": 0.05921216333497001,
+      "minimum_full_diffusion_to_adiabatic_gradient": 16.888421967339465,
+      "max_deficit_where_full_conduction_changes_convection": 2.1094237467877974e-15
+    }
+  },
+  "outer_layer_control": {
+    "scope": "Common-age PCHIP comparison over accepted prefixes; the artificial cool-layer cutoff control stopped at a convective-boundary iteration failure. Not a common final-age completion.",
+    "age_range_years": [
+      3867950833560.4946,
+      3872205089419.3135
+    ],
+    "maximum_relative_differences": {
+      "Teff_K": 6.726229088793723e-05,
+      "luminosity_Lsun": 0.0002819218123208955,
+      "central_T_K": 0.00017063645785353465,
+      "central_density_g_cm3": 1.3135200389924329e-05,
+      "radius_Rsun": 7.078809761917881e-06,
+      "H_mass_g": 2.393491627117328e-09,
+      "He3_mass_g": 2.0942803113932484e-07,
+      "surface_X": 1.2547493466463777e-07
+    },
+    "maximum_PCHIP_vs_linear_interpolation_difference": {
+      "ionized": {
+        "Teff_K": 4.938243885621585e-05,
+        "luminosity_Lsun": 0.00020335559755857435,
+        "central_T_K": 8.598211611410278e-05,
+        "central_density_g_cm3": 1.1300037015438136e-05,
+        "radius_Rsun": 6.679856468627676e-06,
+        "H_mass_g": 3.359531319802045e-09,
+        "He3_mass_g": 2.9398498280208685e-07,
+        "surface_X": 4.2632142271958884e-07
+      },
+      "cool_join": {
+        "Teff_K": 4.938097411000264e-05,
+        "luminosity_Lsun": 0.00020335413984973183,
+        "central_T_K": 8.575190099124885e-05,
+        "central_density_g_cm3": 1.1301997881574266e-05,
+        "radius_Rsun": 6.675775441333798e-06,
+        "H_mass_g": 3.3588207770662848e-09,
+        "He3_mass_g": 2.9392450140441895e-07,
+        "surface_X": 4.25961148020626e-07
+      }
+    },
+    "endpoints": {
+      "ionized": {
+        "years": 3872396811489.0356,
+        "Teff_K": 1843.9818246403458,
+        "luminosity_Lsun": 9.652597332292994e-06,
+        "central_T_K": 875539.7357500885,
+        "central_density_g_cm3": 49588.45710499053,
+        "radius_Rsun": 0.030441215073376382,
+        "H_mass_g": 7.410011170601365e+30,
+        "He3_mass_g": 8.470141229735699e+28,
+        "surface_X": 0.9925441293630007,
+        "convective_mass_fraction": 0.011182883614075273,
+        "nuclear_fraction": 1.3142652827157959e-05
+      },
+      "cool_join": {
+        "years": 3872205089419.3135,
+        "Teff_K": 1873.4569958329648,
+        "luminosity_Lsun": 1.0295180721499696e-05,
+        "central_T_K": 902838.1057004092,
+        "central_density_g_cm3": 49548.79220489098,
+        "radius_Rsun": 0.030456689169707455,
+        "H_mass_g": 7.410011165500152e+30,
+        "He3_mass_g": 8.47014173984991e+28,
+        "surface_X": 0.992369687589742,
+        "convective_mass_fraction": 0.011671078206024253,
+        "nuclear_fraction": 1.5278124736881314e-05
+      }
+    }
+  },
+  "core_opacity_check": {
+    "passed": true,
+    "queries": 275,
+    "derivative_centres": 40,
+    "max_scaled_derivative_error": 3.9827043220882875e-09,
+    "independent_EOS_rejections": 63,
+    "scope": "Same radiative continuation and 0.001 heat-uncertainty bound, tested down to 600 kK in actual and fixed-density projected cold-core states. The density-continuation formula is unchanged; native source queries retain their own bounds. EOS projection failures are reported separately."
+  },
+  "tests": [
+    "Lifetime restart integration passes, including rejection of changed conduction selection.",
+    "Existing conductive-opacity regression passes.",
+    "Actual native opacity responses and derivatives pass down to 600 kK with unchanged 0.001 uncertainty bound."
+  ],
+  "limitations": [
+    "Conductivity assumes full ionization; electron-neutral scattering is not supplied.",
+    "The partly ionized-layer control completes only its reported prefix; its final stop is a convective-boundary iteration failure. Common-age comparisons use PCHIP interpolation, with linear-interpolation sensitivity reported.",
+    "The core EOS remains a controlled fully ionized alternative. Colder projected EOS states retain their quantum-domain rejections.",
+    "Higher-metal H3+ atmosphere incorporation and strong quantum/crystalline matter remain open."
+  ]
+}

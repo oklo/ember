@@ -24,6 +24,19 @@ recorded in `execution.json`.
 The optional [integrated outer envelope](ENVELOPE.md) uses the same boundary
 solver from Hayashi contraction onward and includes its mass in conservation.
 
+`conduction_envelope "ionized"` uses the tabulated ionized conductivity without
+the temperature cutoff. This retains conduction in cold pressure-ionized matter.
+It assumes ionization is complete wherever conduction affects the structure;
+it does not add electron-neutral scattering. Assess partly ionized layers with
+the EOS and a transport comparison before selecting it. The default,
+`"temperature_join"`, suppresses conductance below 300 kK and restores it by
+1 MK; that cutoff is unsuitable where dense cold matter remains ionized.
+The choice is part of restart identity. Source-table bounds still apply.
+With `opacity_conductive_interior` enabled, the ionized choice permits the
+same dense-core radiative continuation down to 600 kK, retaining its 0.001
+transport-uncertainty bound. This does not extend the EOS domain.
+See [conduction](CONDUCTION.md).
+
 The configuration is a text file containing one `key "value"` per line.
 Version 1 requires the following keys; paths are relative to the configuration:
 
