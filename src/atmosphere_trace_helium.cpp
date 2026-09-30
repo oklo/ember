@@ -40,8 +40,9 @@ void TraceHeliumAtmosphereGrid::read(std::istream &in, Approximation approximati
   };
   label("EMBER_TRACE_HELIUM_ATMOSPHERE");
   int version{};
-  if (!(in >> version) || version != 1)
+  if (!(in >> version) || (version != 1 && version != 2))
     throw std::runtime_error("TraceHeliumAtmosphereGrid: version");
+  hydrogen_share_ = version == 2;
   label("source");
   in >> std::quoted(source_);
   label("approximation");
@@ -71,7 +72,7 @@ void TraceHeliumAtmosphereGrid::read(std::istream &in, Approximation approximati
   if (std::abs(z-1) > 1e-12)
     throw std::runtime_error(
         "TraceHeliumAtmosphereGrid: invalid total metallicity");
-  const std::array labels{"hydrogen", "metallicity", "log_teff", "log_g"};
+  const std::array labels{hydrogen_share_ ? "hydrogen_share" : "hydrogen", "metallicity", "log_teff", "log_g"};
   std::size_t cells = 1;
   for (std::size_t k = 0; k < axes_.size(); ++k) {
     label(labels[k]);
@@ -89,7 +90,7 @@ void TraceHeliumAtmosphereGrid::read(std::istream &in, Approximation approximati
         throw std::runtime_error("TraceHeliumAtmosphereGrid: invalid axis");
     }
   }
-  if (axes_[0].back() + axes_[1].back() > 1 + 1e-12)
+  if (hydrogen_share_ ? axes_[1].back() >= 1 : axes_[0].back() + axes_[1].back() > 1 + 1e-12)
     throw std::runtime_error(
         "TraceHeliumAtmosphereGrid: grid includes negative He4");
   label("data");
@@ -123,7 +124,8 @@ void TraceHeliumAtmosphereGrid::read(std::istream &in, Approximation approximati
 }
 
 TraceHeliumAtmosphereGrid::Support TraceHeliumAtmosphereGrid::support() const {
-  return {{axes_[0].front(), axes_[0].back()},
+  return {{axes_[0].front()*(hydrogen_share_ ? 1-axes_[1].back() : 1),
+           axes_[0].back()*(hydrogen_share_ ? 1-axes_[1].front() : 1)},
           {axes_[1].front(), axes_[1].back()},
           {std::pow(10., axes_[2].front()), std::pow(10., axes_[2].back())},
           {std::pow(10., axes_[3].front()), std::pow(10., axes_[3].back())}};
@@ -141,7 +143,8 @@ bool TraceHeliumAtmosphereGrid::covers(double Teff, double g, const Composition&
   // Only the floating-point summation error in Z may be rounded to an edge.
   const double roundoff=8*std::numeric_limits<double>::epsilon()*axes_[1].back();
   if (z < axes_[1].front()-roundoff || z > axes_[1].back()+roundoff) return false;
-  const std::array q{c.X[0],std::clamp(z,axes_[1].front(),axes_[1].back()),std::log10(Teff),std::log10(g)};
+  const double zs=std::clamp(z,axes_[1].front(),axes_[1].back());
+  const std::array q{c.X[0]/(hydrogen_share_ ? 1-zs : 1),zs,std::log10(Teff),std::log10(g)};
   for (std::size_t j=0;j<4;++j)
     if (q[j] < axes_[j].front() || q[j] > axes_[j].back()) return false;
   return !has_missing_states_ || stencil(q).has_value();
@@ -193,7 +196,8 @@ TraceHeliumAtmosphereGrid::coordinates(double Teff, double g,
   if (!covers(Teff, g, c))
     throw std::domain_error("TraceHeliumAtmosphereGrid: Teff, gravity or "
                             "composition outside source grid");
-  return {c.X[0], std::clamp(c.Z(),axes_[1].front(),axes_[1].back()), std::log10(Teff), std::log10(g)};
+  const double zs=std::clamp(c.Z(),axes_[1].front(),axes_[1].back());
+  return {c.X[0]/(hydrogen_share_ ? 1-zs : 1), zs, std::log10(Teff), std::log10(g)};
 }
 std::array<double, 5>
 TraceHeliumAtmosphereGrid::interpolate(const std::vector<double> &f,
@@ -259,7 +263,10 @@ TraceHeliumAtmosphereGrid::composition_response(double Teff, double g,
   const double p = pg[0] + pr;
   if (!positive(p) || p == pr)
     throw std::domain_error("TraceHeliumAtmosphereGrid: pressure overflow");
-  return {t[1], t[2], (pg[0] * pg[1] + 4 * pr * t[1]) / p,
-          (pg[0] * pg[2] + 4 * pr * t[2]) / p};
+  const double dx=hydrogen_share_ ? 1/(1-q[1]) : 1;
+  const double dz=hydrogen_share_ ? q[0]/(1-q[1]) : 0;
+  const double tx=t[1]*dx, tz=t[2]+t[1]*dz;
+  const double px=pg[1]*dx, pz=pg[2]+pg[1]*dz;
+  return {tx, tz, (pg[0]*px+4*pr*tx)/p, (pg[0]*pz+4*pr*tz)/p};
 }
 } // namespace ember

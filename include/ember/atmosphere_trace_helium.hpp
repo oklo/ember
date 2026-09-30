@@ -7,7 +7,8 @@
 #include <string>
 #include <vector>
 namespace ember {
-// Actual zero-He3 gas sources on (XH, Z, log10 Teff, log10 g). The explicit
+// Actual zero-He3 gas sources on (XH, Z, log10 Teff, log10 g), or with
+// hydrogen share XH/(1-Z) in format version 2. The explicit
 // approximation neglects atmospheric isotope dependence only; density is
 // inverted with the caller's actual stellar composition. No extrapolation
 // or synthetic isotope source rows are used.
@@ -23,6 +24,8 @@ public:
   const char* name() const override { return source_.c_str(); }
   const std::string& approximation() const { return approximation_; }
   double tau_match() const { return tau_; }
+  // Hydrogen bounds are physical mass fractions for both file formats;
+  // covers() checks the joint composition domain.
   struct Support { std::array<double,2> hydrogen, metals, teff, gravity; };
   Support support() const;
   bool has_missing_states() const { return has_missing_states_; }
@@ -41,5 +44,6 @@ private:
   std::vector<double> logT_, logPg_;
   std::vector<bool> valid_;
   bool has_missing_states_{};
+  bool hydrogen_share_{}; // Version 2 stores X/(1-Z), keeping every metal anchor physical.
 };
 } // namespace ember

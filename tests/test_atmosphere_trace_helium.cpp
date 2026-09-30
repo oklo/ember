@@ -34,6 +34,18 @@ std::string fixture(int missing=-1,double max_y=.0003){
  }
  return s.str();
 }
+double share_lt(double u,double z,double t,double g){return t+.2*u+50*z-.01*g;}
+double share_lp(double u,double z,double t,double g){return 7+.4*u-100*z-2*(t-3.66)+.7*(g-5.5);}
+std::string share_fixture(){
+ std::ostringstream s;s<<std::setprecision(17);
+ s<<"EMBER_TRACE_HELIUM_ATMOSPHERE 2\nsource \"analytic coordinate test\"\napproximation \"test only\"\nbasis baryon_mass\ntau 100\nmaximum_helium3 .0003\nmetal_pattern";
+ auto c=comp(.7,0,.02);for(std::size_t j=METAL_BEGIN;j<METAL_END;++j)s<<' '<<c.X[j]/c.Z();
+ s<<"\nhydrogen_share 2 .98 .999999\nmetallicity 2 0 .0001\nlog_teff 2 "<<std::log10(4500.)<<' '<<std::log10(4800.)<<"\nlog_g 2 5.3 5.7\ndata\n";
+ for(double u:{.98,.999999})for(double z:{0.,.0001})for(double t:{4500.,4800.})for(double g:{5.3,5.7})
+  s<<"1 "<<share_lt(u,z,std::log10(t),g)<<' '<<share_lp(u,z,std::log10(t),g)<<'\n';
+ return s.str();
+}
+
 }
 int main(){try{
  Gas eos;const auto approx=TraceHeliumAtmosphereGrid::Approximation::neglect_atmospheric_helium3;
@@ -66,6 +78,27 @@ int main(){try{
  require(edges.covers(teff,g,comp(.9995,0,5e-8)),"complete lower stencil at exact knot was lost");
  require(!edges.covers(teff,g,comp(.9998,0,5e-8)),"missing upper stencil silently extrapolated");
  require(rejects([&]{std::istringstream too(fixture(-1,.0004));TraceHeliumAtmosphereGrid q(eos,too,approx,.0003);}),"table exceeded caller-selected isotope bound");
+ {
+  std::istringstream source(share_fixture());TraceHeliumAtmosphereGrid share(eos,source,approx,.0003);
+  for(double u:{.98,.99,.9999,.999999})for(double z:{0.,.000025,.0001}){
+   auto mixture=comp(u*(1-z),0,z);auto q=share.eval(4660,std::pow(10.,5.45),mixture);
+   require(close(std::log10(q.T),share_lt(u,z,std::log10(4660.),5.45))&&close(std::log10(q.Pgas),share_lp(u,z,std::log10(4660.),5.45)),"hydrogen-share values differ from analytic atmosphere");
+  }
+  auto mixture=comp(.9999*(1-5e-5),0,5e-5);auto d=share.composition_response(4660,std::pow(10.,5.45),mixture);
+  for(int axis=0;axis<2;++axis){
+   const double h=axis==0?1e-7:1e-8;
+   auto lo=share.eval(4660,std::pow(10.,5.45),comp(mixture.h1()-(axis==0?h:0),0,mixture.Z()-(axis==1?h:0)));
+   auto hi=share.eval(4660,std::pow(10.,5.45),comp(mixture.h1()+(axis==0?h:0),0,mixture.Z()+(axis==1?h:0)));
+   const double a=axis==0?d.dlnT_dXH:d.dlnT_dZ,b=axis==0?d.dlnP_dXH:d.dlnP_dZ;
+   const double error=std::max(std::abs(std::log(hi.T/lo.T)/(2*h)-a)/(1+std::abs(a)),std::abs(std::log(hi.P/lo.P)/(2*h)-b)/(1+std::abs(b)));
+   max_derivative_error=std::max(max_derivative_error,error);
+   require(error<1e-6,"hydrogen-share composition derivative fails independent differences");
+  }
+  require(!share.covers(4660,std::pow(10.,5.45),comp(.99995,0,.0001)),"negative helium accepted");
+  require(!share.covers(4660,std::pow(10.,5.45),comp(.9798,0,.0001)),"outside hydrogen-share domain accepted");
+  const auto support=share.support();
+  require(close(support.hydrogen[0],.98*(1-.0001))&&close(support.hydrogen[1],.999999),"support did not return physical hydrogen bounds");
+ }
  std::cout<<std::setprecision(17)<<"{\"checks\":"<<checks<<",\"maximum_derivative_error\":"<<max_derivative_error<<",\"actual_isotope_density_fractional_difference\":"<<s.rho/zero.rho-1<<"}\n";
  return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

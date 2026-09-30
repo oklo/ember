@@ -12,6 +12,14 @@ temperature and gravity coverage. Its composition mapping, interpolation and
 physical checks are documented in [NONGREY.md](NONGREY.md). The continuous
 evolution driver selects its atmosphere file explicitly.
 
+`TraceHeliumAtmosphereGrid` also reads metal-dependent gas tables with an
+explicit bound on neglected atmospheric helium-3 effects. Format version 1
+uses hydrogen mass fraction `X`; version 2 uses `hydrogen_share`, defined as
+`X/(1-Z)`, followed by the same metallicity, log-temperature and log-gravity
+axes. This keeps the H/He proportions fixed when interpolating between metal
+abundances. Composition derivatives remain derivatives with respect to actual
+`X` and `Z`, and matching density uses the actual stellar composition.
+
 ## Metal settling
 
 The lifetime driver can select the existing measured metal responses from the
