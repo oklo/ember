@@ -472,6 +472,16 @@ class SourceAcceptance(unittest.TestCase):
             self.assertAlmostEqual(a[0]*x,x,places=14)
             self.assertAlmostEqual(a[1]*w[1]*hm*x/mu,1-x-.02,places=14)
 
+    def test_pure_hydrogen_source_does_not_restore_solar_helium(self):
+        a,w=composition(1.,0.,[0.]*5)
+        mu=1.66053906660e-24; hm=1.67333e-24
+        self.assertEqual(a[0],1.)
+        self.assertTrue(all(0 < v < 1e-90 for v in a[1:]))
+        self.assertAlmostEqual(w[1]*hm/mu,4.,places=14)
+        self.assertAlmostEqual(sum(v*m for v,m in zip(a,w))*hm/mu,1.,places=13)
+        with self.assertRaises(ValueError):
+            composition(1.001,0.,[0.]*5)
+
     def test_initial_structure_preserves_hydrostatic_power_law(self):
         mass = [10**(-4+5*i/19) for i in range(20)]
         seed = "20 -4\n" + "\n".join(str(v) for v in mass) + "\n"

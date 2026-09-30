@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Calculate a helium-rich non-grey atmosphere family with pinned sources.
+"""Calculate non-grey atmosphere and opacity grids with pinned sources.
 
 Run prepare_nongrey_sources.py first. A JSON specification controls the
 physical composition, opacity sampling and atmosphere mesh. Source runs are
@@ -100,11 +100,14 @@ def composition(x, y, metals):
     if len(metals) != 5 or any(v < 0 or not math.isfinite(v) for v in metals):
         raise ValueError("invalid fixed metal abundances")
     z = sum(metals); he4 = 1-x-y-z
-    if not x > 0 or not y >= 0 or not he4 >= 0 or not y+he4 > 0:
+    if not x > 0 or not y >= 0 or not he4 >= 0:
         raise ValueError("unphysical atmosphere composition")
     elements = json.loads((SOURCES/"synple-elements.json").read_text())
     masses = [float(round(v)) for v in elements["mass"]]
-    masses[0] = 1.; masses[1] = (y+he4)/(y/3+he4/4)
+    masses[0] = 1.
+    # An absent helium species still needs a finite source mass. Its tiny
+    # numerical abundance below prevents ABN=0 from selecting solar helium.
+    masses[1] = (y+he4)/(y/3+he4/4) if y+he4 > 0 else 4.
     fractions = [0.] * 99
     fractions[0] = x; fractions[1] = y+he4
     request = json.loads((ROOT/"data/opacity/sources/tops_gs98_x070_z020.request.json").read_text())

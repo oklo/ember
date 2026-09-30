@@ -386,6 +386,19 @@ columns differ from interpolation by at most **0.01710%** in temperature and
 [Isotope checks](results/mixed_helium_atmosphere_sept27_v1.json),
 [cooler coverage](results/cold_atmosphere_high_gravity_sept28_v1.json).
 
+The source generator also accepts pure hydrogen. Absent elements retain a
+negligible positive numerical abundance because the source program interprets
+zero as its solar default. Direct pure-H opacity calculations extend the cold
+table's composition axis to X=1; the largest change from its one-part-per-million
+helium plane is 0.0002557%, and all existing opacity nodes remain unchanged.
+The cold atmosphere's limiting matching temperature and pressure still use
+that measured trace-helium source, with density evaluated at the actual
+composition. Across 100 integrated-envelope checks from 800–1500 K, varying
+helium from zero to ten times the current surface abundance changes the
+matching quantities by at most 0.001340%. This is a composition sensitivity,
+not a cooling-age error estimate. Unsupported temperature gaps remain masked.
+[Source and envelope checks](results/pure_hydrogen_source_sept30_v1.json).
+
 ### Adding completed mixed-atmosphere columns
 
 ```sh

@@ -1,0 +1,83 @@
+{
+  "scope": "Conditional fully stripped H-envelope transport through70kK; no changed kinetic equations, source bounds or energy/time tolerances. Trace-He ionization and correlated-liquid mobility remain approximations.",
+  "native": {
+    "queries": 444,
+    "old_supported_unchanged": 231,
+    "recovered": 98,
+    "remaining_refusals": 115,
+    "lost": [],
+    "changed": []
+  },
+  "current_layer": {
+    "scale": 1.0,
+    "points": 34,
+    "source_flags": [
+      0.0
+    ],
+    "Hplus": [
+      0.9999999999999969,
+      1.0000000000000042
+    ],
+    "Heplus": [
+      0.0009762865806240702,
+      0.9999794868487938
+    ],
+    "Hepp": [
+      3.5037494110806704e-06,
+      0.999023713419376
+    ],
+    "Gamma_H": [
+      8.88770716557271,
+      11.258685183822942
+    ],
+    "theta_H": [
+      0.6676787814027711,
+      0.7294062213981365
+    ],
+    "electron_Born": [
+      0.14316886090827666,
+      0.2043086623866533
+    ],
+    "T_over_TF": [
+      0.016787190987237993,
+      0.01891116586226776
+    ],
+    "He_total": [
+      4.406567236133789e-06,
+      8.947860884781631e-06
+    ],
+    "helium_mass_g": 2.1827431552732426e+24,
+    "He3_mass_g": 2.165235081705602e+24,
+    "layer_mass_g": 3.619233918516909e+29,
+    "gravitational_energy_to_layer_inner_edge_erg": 2.2624379508476694e+38,
+    "gravitational_energy_to_center_erg": 2.326900848918257e+40,
+    "electron_pressure_gradient_share": [
+      1.0983325809148583,
+      1.1485545244194946
+    ],
+    "max_ion_scattering_fraction_He": 1.1904537033337269e-05,
+    "max_electron_deficit_singly_ionized_He": 2.9761342583343173e-06,
+    "native_faces": 42,
+    "gravitational_energy_to_center_over_current_L_1Gyr": 0.0004385822557998604
+  },
+  "stellar": {
+    "interval_years": 1000000000.0,
+    "age_years": 3900417922497.775,
+    "Teff_K": 846.4683975210858,
+    "central_T_K": 207611.52336804263,
+    "accepted": 6,
+    "CPU_seconds": 556.022842,
+    "wall_seconds": 161.8927720412612,
+    "stop_reason": "requested age"
+  },
+  "limits": [
+    "Not a calibrated trace-He clearing time. Charge-state drift estimate8\u201311times and additional factor2 coupling-model spread are not rigorous bounds.",
+    "Current-inventory gravitational energy scale is not a future-inflow bound.",
+    "Much colder projected profiles still encounter unchanged EOS masks. No solid phase is selected."
+  ],
+  "evidence_sha256": {
+    "assessment.json": "c37865dc91848627cb4145b76c277aa9042f92f3421d5aca840ef28c9bfc6888",
+    "native_validation.json": "31288ef466ed35a63e8ceb8df5c50ba7ef48e112be5bb1fea769197aed5c866e",
+    "physics_assessment.json": "668d839734ae4abf15678f8c90b91e2417713fd5b04987c8ee35290b8c9c680b"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "scope": "Pure-H source input and composition-limit extension for cold gas opacity and atmosphere matching. No change to supported opacity nodes or to stellar time/energy tolerances.",
+  "source": {
+    "new_pure_H_columns": 26,
+    "new_pure_H_nodes": 338,
+    "maximum_pure_to_one_ppm_He_opacity_change": 2.5573947135537622e-06,
+    "old_opacity_nodes_unchanged": true,
+    "source_trace_He_control_spectrum_unchanged": true
+  },
+  "native_opacity": {
+    "passed": true,
+    "material_points": 2400,
+    "queries": 12000,
+    "old_supported_queries": 7500,
+    "old_maximum_scaled_change": 0.0,
+    "temperature_derivative_error": 2.1811015148388123e-08,
+    "density_derivative_error": 2.917090388687704e-10,
+    "outside_domain_refusals": 5,
+    "scope": "Native opacity values and T/rho derivatives throughout all cells and eight compositions, including the new direct pure-H source plane. No source-domain extrapolation."
+  },
+  "atmosphere": {
+    "passed": true,
+    "old_supported_queries": 538,
+    "lost": [],
+    "maximum_old_relative_difference": 3.0642244358274853e-13,
+    "new_supported_queries": 252,
+    "failed_cold": [],
+    "maximum_scaled_derivative_error": 4.558945276844639e-09,
+    "outside_rejections": 3,
+    "scope": "Native T/P and T,g derivatives of the selected atmosphere wrapper. Matching density is checked separately in the integrated-envelope tests; this native probe deliberately substitutes a constant density."
+  },
+  "integrated_envelope": {
+    "passed": true,
+    "queries": 100,
+    "old_supported": 20,
+    "newly_supported": 80,
+    "lost": [],
+    "failures": [],
+    "maximum_old_relative_change": 0.0,
+    "maximum_composition_sensitivity": 1.3397247138779989e-05,
+    "current_helium": 2.8417144029005207e-06,
+    "scope": "Full20pressure-step nominal-opacity envelope with actual SCVH composition-dependent density; trace-He0 through ten times current amount at fixedTeff/radius. Source remains measured X=.999999 for trace-limit T/P. Not a cooling-age uncertainty bound."
+  },
+  "limitations": [
+    "Pure-H opacities are calculated directly. Cold atmosphere matching T/P still uses the explicitly declared one-ppm-He source limit; integrated density uses actual H/He abundances.",
+    "No added dense-fluid correction, grain opacity or three-body CIA.",
+    "Composition sensitivity is not a cooling-age uncertainty bound."
+  ],
+  "evidence_sha256": {
+    "out/cold-opacity-pure-h-sept30-v2/assembly.json": "5624d399746f8ae9e4dd92b68ff7ef91a23be347e72019b39746120c3ff7dba6",
+    "out/cold-opacity-pure-h-sept30-v2/native_validation.json": "eae484fdfac45ec387f4aad493bc5488512fe15d312b4e3639dbe2562ed9dcf3",
+    "out/atmosphere-trace-cold-sept30-v1/native_validation.json": "a8d88b6b887af8c89651ee5830d8a8f5173c5303db3c4f69bf49e6cd047e4ed8",
+    "out/atmosphere-trace-cold-sept30-v1/envelope_validation.json": "18ca4b79c1e342e65f245bddcbefc66c59df0578ede8c5a0674060a203cef93e",
+    "out/cold-opacity-pure-h-sept30-v1/pilot_validation.json": "aefb059c06933e6e89f8c4e57907a58753a96c4ffd1bb4d7fd8c10e084f71339"
+  }
+}
