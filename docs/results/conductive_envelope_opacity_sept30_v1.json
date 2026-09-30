@@ -1,0 +1,86 @@
+{
+  "scope": "Hydrogen-rich conducting-envelope opacity: matched stellar sensitivity and source-overlap coverage. No claim of accurate opacity beyond the original data.",
+  "uncertainty_factors": [
+    0.01,
+    1,
+    100
+  ],
+  "comparison_duration_years": 1000000000.0,
+  "default_local_uncertainty": 0.001,
+  "stellar_opacity_comparisons": {
+    "low": {
+      "global_relative": {
+        "luminosity_Lsun": -4.231e-05,
+        "radius_Rsun": -7.212e-07,
+        "Teff_K": -1.022e-05,
+        "central_T_K": -1.903e-05,
+        "central_density_g_cm3": 1.202e-06,
+        "nuclear_fraction": -7.016e-05,
+        "H_mass_g": -6.676e-10,
+        "He3_mass_g": 5.854e-08,
+        "He3_peak": 1.509e-07,
+        "surface_X": -1.884e-08
+      },
+      "max_profile_log_difference": {
+        "radius": 7.017e-07,
+        "density": 2.701e-06,
+        "temperature": 1.903e-05
+      },
+      "max_H_absolute": 5.874e-07,
+      "max_He3_absolute": 2.88e-08
+    },
+    "high": {
+      "global_relative": {
+        "luminosity_Lsun": 0.0004833,
+        "radius_Rsun": 8.368e-06,
+        "Teff_K": 0.0001166,
+        "central_T_K": 0.0002338,
+        "central_density_g_cm3": -1.438e-05,
+        "nuclear_fraction": 0.000807,
+        "H_mass_g": 1.92e-09,
+        "He3_mass_g": -1.684e-07,
+        "He3_peak": 4.285e-06,
+        "surface_X": 1.385e-07
+      },
+      "max_profile_log_difference": {
+        "radius": 8.149e-06,
+        "density": 3.15e-05,
+        "temperature": 0.0002338
+      },
+      "max_H_absolute": 6.441e-06,
+      "max_He3_absolute": 2.383e-07
+    }
+  },
+  "maximum_exercised_transport_uncertainty": 0.001142,
+  "overlap_repair": {
+    "old_full_density": 220,
+    "new_full_density": 190,
+    "source_corner_density": 199.5,
+    "native": {
+      "queries": 216,
+      "failures": [],
+      "maximum_transport_bound": 0.0003004,
+      "maximum_absolute_derivative_error": 4.805e-07,
+      "maximum_same_state_transport_difference": 2.508e-07
+    },
+    "stellar_comparison": {
+      "relative_differences": {
+        "luminosity_Lsun": -5.844e-05,
+        "radius_Rsun": -9.965e-07,
+        "Teff_K": -1.411e-05,
+        "central_T_K": -2.63e-05,
+        "central_density_g_cm3": 1.66e-06,
+        "H_mass_g": -9.342e-10,
+        "He3_mass_g": 8.192e-08
+      },
+      "passed": true
+    }
+  },
+  "later_cooling": {
+    "surface_temperature_K": 2618,
+    "stop": "Missing cool dense EOS nodes; all three opacity variants reach this independent boundary. Their final ages differ and are not used as a matched-age comparison."
+  },
+  "energy_and_timestep_checks_unchanged": true,
+  "matched_test_selected_local_uncertainty": 0.01,
+  "adopted_local_uncertainty": 0.003
+}

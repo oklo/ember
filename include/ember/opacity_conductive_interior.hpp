@@ -9,7 +9,7 @@
 namespace ember {
 
 // Density continuation of radiative opacity, only where electron conduction
-// makes a factor-ten uncertainty in that opacity a small heat-transport term.
+// makes the declared opacity uncertainty a small heat-transport term.
 // The fixed overlap avoids following the irregular edge of a source stencil.
 class ConductiveInteriorOpacity final : public Opacity {
 public:
@@ -35,7 +35,7 @@ public:
   ConductiveInteriorOpacity(const Opacity& source,const Conduction& conduction,
       double maximum_transport_uncertainty,double opacity_scale,Domain domain)
       : source_(source),conduction_(conduction),limit_(maximum_transport_uncertainty),scale_(opacity_scale),domain_(domain) {
-    if(source.includes_conduction() || !std::isfinite(limit_+scale_) || limit_<=0 || limit_>.001
+    if(source.includes_conduction() || !std::isfinite(limit_+scale_) || limit_<=0 || limit_>.01
         || !(domain_.anchor>0 && domain_.full>domain_.anchor && domain_.maximum_rho>=domain_.full
              && domain_.minimum_T>0 && domain_.full_T>domain_.minimum_T && domain_.source_T>domain_.full_T
              && domain_.minimum_X>=0 && domain_.minimum_X<=1 && domain_.maximum_Z>=0 && domain_.maximum_Z<=1
@@ -82,7 +82,8 @@ public:
     if(!(out.kappa>0 && std::isfinite(out.kappa+out.dlnk_dlnT+out.dlnk_dlnRho)))
       throw std::domain_error("ConductiveInteriorOpacity: invalid radiative response");
     // The unknown continued opacity enters log(kappa) with weight w. Lowering
-    // it tenfold changes total conductivity by this fraction, exactly. The
+    // it by the selected uncertainty factor changes total conductivity by
+    // this fraction, exactly. The
     // supported part of the overlap carries no extrapolation uncertainty.
     const double bound=std::expm1(w*std::log(domain_.uncertainty))*kc/(kc+nominal_blend);
     if(!(bound<=limit_))

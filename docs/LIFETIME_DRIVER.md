@@ -546,3 +546,26 @@ the two extreme opacity scales. This supports the approximation in that
 segment, conditional on its declared uncertainty; it is not validation of
 the opacity source outside its tabulated domain.
 [Numerical and stellar checks](results/conductive_interior_opacity_sept28_v1.json).
+
+The separate hydrogen-envelope option, `opacity_conductive_envelope "1"`,
+continues the measured density slope where radiation is a small contribution
+alongside electron conduction. Its density blend ends at 190 g/cm³, before
+one hot-source corner at 199.5 g/cm³. Temperature, composition and source
+checks remain active. The prescription is recorded as
+`hydrogen_density_continuation.v2` in restart identity.
+
+`opacity_conductive_envelope_uncertainty` selects the maximum fractional change
+in total diffusive conductivity for a factor-100 reduction of the continued
+radiative opacity. The default is 0.001; values up to 0.01 permit explicit
+sensitivity studies. Any nondefault value enters restart identity. This is
+an assumed opacity range, not a measured physical uncertainty. Select a
+larger allowance only after checking its effect on the stellar calculation.
+The envelope opacity multiplier accepts 0.01–100 for those comparisons.
+
+In a matched 1 Gyr comparison, the two extreme opacity multipliers change
+luminosity by at most 0.04833% and effective temperature by 0.01166%.
+The largest exercised local transport bound is 0.001142. An allowance of
+0.003 supports this segment; it is not a general cooling-age error bound.
+The corrected density blend changes luminosity by 0.005844% in its separate
+1 Gyr comparison. All energy and time-step checks are unchanged.
+[Numerical checks](results/conductive_envelope_opacity_sept30_v1.json).

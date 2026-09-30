@@ -58,13 +58,17 @@ int main(){try{
   // The independent envelope domain uses the same derivative and heat bound.
   struct EnvelopeSource final : Opacity {
     Source source;
-    OpacityState eval(double T,double rho,const Composition& c) const override { return source.eval(T*6,rho*20,c); }
+    OpacityState eval(double T,double rho,const Composition& c) const override {
+      if(T>=std::pow(10.,5.6) && std::log10(rho)-3*std::log10(T/1e6)>3.5)
+        throw std::domain_error("test hot hydrogen source corner");
+      return source.eval(T*6,rho*20,c);
+    }
     const char* name() const override {return "scaled analytic envelope source";}
   } envelope_source;
   Composition hc;hc.X[0]=.99;hc.X[1]=.003;hc.X[2]=.007;
-  const ConductiveInteriorOpacity::Domain domain{180.,220.,3.1e5,5.5e5,6e5,1000.,.97,1e-8,100.};
+  const ConductiveInteriorOpacity::Domain domain{180.,190.,3.1e5,5.5e5,6e5,1000.,.97,1e-8,100.};
   ConductiveInteriorOpacity ec(envelope_source,heat,.001,1.,domain);
-  for(double T:{4e5,5.5e5,5.7e5,6e5})for(double rho:{179.,180.,200.,220.,300.}) {
+  for(double T:{3.95e5,4e5,5.5e5,5.7e5,6e5})for(double rho:{179.,180.,185.,190.,200.,210.,300.}) {
     auto v=ec.eval(T,rho,hc);constexpr double h=1e-6;
     auto f=[&](double t,double r){return std::log(ec.eval(t,r,hc).kappa);};
     require(std::abs((f(T*std::exp(h),rho)-f(T*std::exp(-h),rho))/(2*h)-v.dlnk_dlnT)<2e-6,"envelope T derivative");
@@ -77,5 +81,20 @@ int main(){try{
   ConductiveInteriorOpacity ew(envelope_source,weak,.001,1.,domain);
   rejected=false;try{ew.eval(5e5,300.,hc);}catch(const std::domain_error&){rejected=true;}
   require(rejected,"radiatively important envelope accepted");
+  // A caller may select a larger local transport bound after a stellar
+  // sensitivity check. It changes admission, not the opacity prescription.
+  const double kr=ec.eval(5e5,300.,hc).kappa;
+  Heat intermediate(.002*kr/(2*(domain.uncertainty-1-.002)));
+  ConductiveInteriorOpacity strict(envelope_source,intermediate,.001,1.,domain);
+  ConductiveInteriorOpacity assessed(envelope_source,intermediate,.003,1.,domain);
+  ConductiveInteriorOpacity low_opacity(envelope_source,intermediate,.003,.01,domain);
+  rejected=false;try{strict.eval(5e5,300.,hc);}catch(const std::domain_error&){rejected=true;}
+  require(rejected,"default envelope uncertainty limit changed");
+  require(assessed.eval(5e5,300.,hc).kappa==kr,"larger bound changed nominal opacity");
+  const double low=low_opacity.eval(5e5,300.,hc).kappa,kcond=2*intermediate.opacity;
+  require(std::abs((1/low+1/kcond)/(1/kr+1/kcond)-1-.002)<1e-12,
+      "selected envelope bound differs from independent transport change");
+  require(std::abs(assessed.maximum_transport_uncertainty()-.002)<1e-12,
+      "larger envelope bound was not recorded");
   std::cout<<"radiative continuation, derivatives, support and contribution checks passed\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
