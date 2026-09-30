@@ -543,7 +543,7 @@ radiative opacity for arbitrary pure-hydrogen layers. See the
 [`cold_dense_hydrogen.dat`](../data/opacity/cold_dense_hydrogen.dat) gas table
 for dense, nearly metal-free hydrogen envelopes. It replaces the low-temperature
 source smoothly over log R = 5.6–5.9, where R = rho/(T/10^6)^3. Temperature
-joins span 3000–3500 K and 10000–12000 K; composition joins limit its use to
+joins span 3000–3500 K and 16000–20000 K; composition joins limit its use to
 hydrogen-rich mixtures with Z below 1e-10. Source temperature, density and
 composition bounds remain enforced. The integer-mass source convention is
 converted explicitly, with derivatives that preserve extinction per length.
@@ -557,6 +557,15 @@ Both the file hash and scale enter restart identity. These checks support
 this cooling segment, not a final cooling age.
 [Source details](../data/opacity/cold_dense_hydrogen.json) ·
 [Numerical checks](results/cold_dense_gas_opacity_sept30_v1.json).
+
+The warmer return keeps the overlap inside both opacity sources along the
+assessed cooling envelope. At 1475–1600 K effective temperature, this changes
+the nominal envelope base by less than 9e-14 relative. Scaling the entire
+computed dense opacity by 0.1–10 instead changes base temperature by up to
+0.5140%, so the older 1902 K sensitivity does not apply unchanged at lower
+temperatures. A 100 Myr stellar replay agrees within 3e-11; the continuation
+then stops at the 1475 K atmosphere limit.
+[Warm-overlap checks](results/cold_gas_warm_overlap_sept30_v1.json).
 
 ### Radiative opacity in the conductive interior
 

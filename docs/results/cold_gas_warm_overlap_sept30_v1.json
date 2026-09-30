@@ -1,0 +1,136 @@
+{
+  "change": "Use existing computed16\u201320kK gas-opacity coverage for the warm return, retaining all source support checks.",
+  "native": {
+    "centres": 50,
+    "failures": [],
+    "maximum_scaled_derivative_error": 8.912938645976357e-07,
+    "previously_unsupported": 18,
+    "outside_guards_preserved": true,
+    "inactive_values_unchanged": true,
+    "passed": true
+  },
+  "envelope": {
+    "passed": true,
+    "common_nominal_changes": [
+      {
+        "Teff": 1475.0,
+        "T_base": -6.761258219967203e-14,
+        "P_base": 0.0,
+        "rho_base": 6.217248937900877e-15,
+        "r_base": 0.0
+      },
+      {
+        "Teff": 1477.0,
+        "T_base": -6.572520305780927e-14,
+        "P_base": 0.0,
+        "rho_base": 6.661338147750939e-15,
+        "r_base": 2.220446049250313e-16
+      },
+      {
+        "Teff": 1485.0,
+        "T_base": -6.572520305780927e-14,
+        "P_base": 0.0,
+        "rho_base": 1.5987211554602254e-14,
+        "r_base": 0.0
+      },
+      {
+        "Teff": 1500.0,
+        "T_base": -6.938893903907228e-14,
+        "P_base": 0.0,
+        "rho_base": 3.3306690738754696e-15,
+        "r_base": 2.220446049250313e-16
+      },
+      {
+        "Teff": 1550.0,
+        "T_base": -8.693046282814976e-14,
+        "P_base": 0.0,
+        "rho_base": 2.220446049250313e-15,
+        "r_base": 2.220446049250313e-16
+      },
+      {
+        "Teff": 1600.0,
+        "T_base": -7.982503547054876e-14,
+        "P_base": 0.0,
+        "rho_base": 1.2656542480726785e-14,
+        "r_base": 2.220446049250313e-16
+      }
+    ],
+    "dense_opacity_factor10_sensitivity": [
+      {
+        "Teff": 1475.0,
+        "T_base": 0.005139760660719195,
+        "P_base": 3.0643916871908594e-05,
+        "rho_base": 0.00035079940508220275,
+        "r_base": 1.0699550129000812e-05
+      },
+      {
+        "Teff": 1477.0,
+        "T_base": 0.00493608604508633,
+        "P_base": 2.9464356844477457e-05,
+        "rho_base": 0.00033740003587290346,
+        "r_base": 1.0287717388868245e-05
+      },
+      {
+        "Teff": 1485.0,
+        "T_base": 0.004241046006613347,
+        "P_base": 2.543611602534579e-05,
+        "rho_base": 0.00029165139142817154,
+        "r_base": 8.881357695944558e-06
+      },
+      {
+        "Teff": 1500.0,
+        "T_base": 0.003112391018156413,
+        "P_base": 1.8837766493584596e-05,
+        "rho_base": 0.00021641088024693111,
+        "r_base": 6.577664668272476e-06
+      },
+      {
+        "Teff": 1550.0,
+        "T_base": 0.0007123389106412636,
+        "P_base": 4.448427663561461e-06,
+        "rho_base": 5.110223569282368e-05,
+        "r_base": 1.5535015813750164e-06
+      },
+      {
+        "Teff": 1600.0,
+        "T_base": 1.9047429852259157e-06,
+        "P_base": 1.2249138481301713e-08,
+        "rho_base": 1.4041935569863995e-07,
+        "r_base": 4.281144105888757e-09
+      }
+    ],
+    "scope": "Integrated envelope with current isotope composition, direct source conduction and production20 pressure steps. The opacity scale changes the whole dense gas contribution. Source accuracy and atmosphere mesh uncertainties remain separate."
+  },
+  "stellar_overlap": {
+    "passed": true,
+    "errors": {
+      "ln_radius": 5.897504706808832e-13,
+      "ln_density": 1.5332624059283262e-11,
+      "ln_temperature": 1.2567724638756772e-11,
+      "H_absolute": 2.7990942896849447e-11,
+      "He3_absolute": 3.133174275582462e-12,
+      "surface_L_relative": 1.50615075966698e-11
+    },
+    "reference": "/Users/greglaughlin/Projects/ember/out/cooling-corrected-atmosphere-sept30-v3/cooling_saved_step/evolution/final.checkpoint",
+    "candidate": "/Users/greglaughlin/Projects/ember/out/cooling-warm-opacity-sept30-v1/overlap_replay/evolution/final.checkpoint",
+    "scope": "100 Myr comparison against previously completed selected atmosphere run. Computed dense gas source now joins the original at16-20kK, within existing source coverage. Source values unchanged. EOS, atmosphere and solver/time/conservation tolerances unchanged."
+  },
+  "continuation": {
+    "status": 1,
+    "CPU_seconds": 199.445336,
+    "wall_seconds": 71.74075650051236,
+    "report": {
+      "requested_age_reached": 0,
+      "age_years": 3876015217369.8247,
+      "accepted_this_invocation": 3,
+      "accepted_total": 3539,
+      "rejected_total": 1521,
+      "stop_reason": "repeated step rejection: evolve_step: Newton iteration limit reached: residual=4.088e-08, correction=4.151e-08, last damping=0.007812, last rejected trial: residual did not decrease",
+      "cpu_seconds": 199.394622,
+      "wall_seconds": 71.687180834,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "scope": "The continuation advances29.3Myr and stops at1475K atmosphere coverage; the final Newton failure follows repeated domain rejections. No low-temperature atmosphere extension or final cooling age is established."
+}

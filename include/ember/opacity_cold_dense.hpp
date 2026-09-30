@@ -22,7 +22,11 @@ public:
     if(!(T>0 && rho>0) || !std::isfinite(T+rho))
       throw std::domain_error("ColdDenseOpacity: invalid temperature or density");
     const double Z=c.Z();
-    const auto lo=step((T-3000)/500),hi=step((12000-T)/2000);
+    // The computed gas source reaches 20 kK. Returning to the original
+    // table at 10–12 kK leaves its log R <= 6 support in cool envelopes.
+    // Use the warmer overlap; both sources must still cover every query
+    // whenever their weights are nonzero.
+    const auto lo=step((T-3000)/500),hi=step((20000-T)/4000);
     const auto x=step((c.X[0]-.98)/.005),z=step((1e-10-Z)/(1e-10-1e-12));
     const double factor=lo.value*hi.value*x.value*z.value;
     if(factor==0)return original_.eval(T,rho,c);
@@ -46,7 +50,7 @@ public:
     const auto a=original_.eval(T,rho,c);
     const double delta=std::log(b.kappa/a.kappa);
     const double dwT=factor*d.derivative*(-3/(.3*ln10))
-        +d.value*x.value*z.value*T*(lo.derivative*hi.value/500-lo.value*hi.derivative/2000);
+        +d.value*x.value*z.value*T*(lo.derivative*hi.value/500-lo.value*hi.derivative/4000);
     const double dwR=factor*d.derivative/(.3*ln10);
     const double dwX=d.value*lo.value*hi.value*z.value*x.derivative/.005;
     const double dwZ=-d.value*lo.value*hi.value*x.value*z.derivative/(1e-10-1e-12);
@@ -57,7 +61,7 @@ public:
         (1-w)*a.dlnk_dZ+dwZ*delta};
   }
   std::optional<DensityRange> density_range(double T,const Composition& c) const override {
-    if(T<=3000 || T>=12000 || c.X[0]<=.98 || c.Z()>=1e-10)
+    if(T<=3000 || T>=20000 || c.X[0]<=.98 || c.Z()>=1e-10)
       return original_.density_range(T,c);
     // The union depends on both join weights and each source's stencil.
     // eval enforces both domains wherever their weights are nonzero.

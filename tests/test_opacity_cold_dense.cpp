@@ -26,13 +26,13 @@ int main()try {
       ("ember-cold-opacity-"+std::to_string(std::chrono::steady_clock::now().time_since_epoch().count())+".dat");
   struct Remove {std::filesystem::path p;~Remove(){std::error_code e;std::filesystem::remove(p,e);}} cleanup{file};
   {
-    std::ofstream f(file);f<<std::setprecision(17)<<"2 4 5 synthetic\n-2 -1.5 -1 -.5 0\n";
+    std::ofstream f(file);f<<std::setprecision(17)<<"2 4 7 synthetic\n-2 -1.5 -1 -.5 0 .5 1\n";
     for(double T:{3000.,5000.,12000.,20000.})f<<std::log10(T)<<' ';
     f<<'\n';
     for(double X:{.98,.9955}) {
       f<<X<<" 0\n";
       for(double T:{3000.,5000.,12000.,20000.}) {
-        for(double r:{-2.,-1.5,-1.,-.5,0.})
+        for(double r:{-2.,-1.5,-1.,-.5,0.,.5,1.})
           f<<std::log10(17.)-.6*std::log10(T/5000)+.4*(r+1)+.7*X/std::log(10.)<<' ';
         f<<'\n';
       }
@@ -40,7 +40,7 @@ int main()try {
   }
   Original original;ColdDenseOpacity joined(original,file);
   for(auto [T,R,X,Z]:{std::array{5000.,5.75,.99,0.},std::array{3250.,5.95,.99,0.},
-      std::array{11000.,5.8,.99,0.},std::array{6000.,6.1,.9825,0.},
+      std::array{11000.,5.8,.99,0.},std::array{18000.,5.8,.99,0.},std::array{6000.,6.1,.9825,0.},
       std::array{6000.,6.1,.99,5e-11},std::array{6000.,6.1,.99,0.}}) {
     const double rho=std::pow(10.,R+3*(std::log10(T)-6)),h=1e-6;
     auto c=comp(X,Z);const auto a=joined.eval(T,rho,c);
@@ -59,10 +59,35 @@ int main()try {
     check(a.kappa==b.kappa && a.dlnk_dlnT==b.dlnk_dlnT && a.dlnk_dX==b.dlnk_dX,"inactive source changed");
   }
   auto c=comp(.99,0);
-  for(auto [rho,X]:{std::array{1.1,.99},std::array{.4,.999}}) {
+  for(auto [rho,X]:{std::array{11.,.99},std::array{.4,.999}}) {
     bool rejected=false;try{joined.eval(6000,rho,comp(X,0));}catch(const std::domain_error&){rejected=true;}
     check(rejected,"outside dense table accepted");
   }
+  // The old 10–12 kK return queried the original source beyond its density
+  // edge. The warmer overlap covers this actual cooling-envelope corner.
+  struct BoundedOriginal : Original {
+    OpacityState eval(double T,double rho,const Composition& c) const override {
+      if(std::log10(rho)-3*(std::log10(T)-6)>6)
+        throw std::domain_error("original density edge");
+      return Original::eval(T,rho,c);
+    }
+  } bounded;
+  ColdDenseOpacity warm(bounded,file);
+  for(double T:{9999.,10000.,10010.,12000.,15999.,16000.}) {
+    const double rho=std::pow(10.,6.01+3*(std::log10(T)-6));
+    const auto v=warm.eval(T,rho,c);
+    check(v.kappa>0,"warm dense-gas coverage gap");
+  }
+  for(double T:{16001.,18000.,19999.,20000.,20001.}) {
+    const double rho=std::pow(10.,5.8+3*(std::log10(T)-6)),h=1e-6;
+    auto f=[&](double t,double r){return std::log(warm.eval(t,r,c).kappa);};
+    const auto v=warm.eval(T,rho,c);
+    near(v.dlnk_dlnT,(f(T*std::exp(h),rho)-f(T*std::exp(-h),rho))/(2*h),"warm overlap T derivative");
+    near(v.dlnk_dlnRho,(f(T,rho*std::exp(h))-f(T,rho*std::exp(-h)))/(2*h),"warm overlap density derivative");
+  }
+  bool overlap_rejected=false;
+  try{warm.eval(18000.,7.,c);}catch(const std::domain_error&){overlap_rejected=true;}
+  check(overlap_rejected,"warm overlap skipped unsupported original source");
   ColdDenseOpacity small(original,file,.1),large(original,file,10);
   near(large.eval(6000,.4,c).kappa/small.eval(6000,.4,c).kappa,100,"scale control");
   ElementalOpacity mapped(joined);c.basis=AbundanceBasis::baryon_mass;
