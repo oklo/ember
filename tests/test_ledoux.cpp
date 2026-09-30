@@ -29,6 +29,25 @@ public:
   OpacityState eval(double,double,const Composition&) const override {return {1,0,0};}
   const char* name() const override {return "test opacity";}
 };
+// Dense tables can have a supported interval even when the dilute branch
+// selected without a density guess has no overlap with the cold EOS.
+class DenseGas final:public Eos {
+public:
+  EosState eval(double T,double rho,const Composition& c) const override {
+    if(rho<1e3 || rho>1e5)throw std::domain_error("outside dense gas interval");
+    return gas_.eval(T,rho,c);
+  }
+  std::optional<DensityRange> density_range(double,const Composition&) const override {
+    throw std::domain_error("no dilute gas interval");
+  }
+  std::optional<DensityRange> density_range_near(double,const Composition&,double rho) const override {
+    if(rho<1e3 || rho>1e5)throw std::domain_error("no interval near this density");
+    return DensityRange{1e3,1e5};
+  }
+  const char* name() const override {return "dense test gas";}
+private:
+  Gas gas_;
+};
 double jacobian_error(const Model& m,const Physics& p) {
   const auto a=zone_residual(m,0,p,0),b=zone_residual_numerical(m,0,p,0,nullptr,1e-5);
   double worst=0;
@@ -74,6 +93,19 @@ int main() {
     derivative=std::max(derivative,std::abs((plus.B-minus.B)/(2*h)-d[k])/std::max(1.,std::abs(d[k])));
   }
   check(derivative<2e-7,"nonideal EOS buoyancy derivatives match independent perturbations",derivative);
+  DenseGas dense;
+  const auto dense_exact=composition_buoyancy(dense,T,100*P,1,contrast,inner,outer,1e4);
+  set_composition_buoyancy_reuse(1e-4,true);
+  bool dense_reused=false;
+  try {
+    const auto first=composition_buoyancy(dense,T,100*P,1,contrast,inner,outer,1e4);
+    const auto next=composition_buoyancy(dense,T,100*P,1,contrast,inner,outer,1e4);
+    const auto stats=composition_buoyancy_reuse_statistics();
+    dense_reused=std::abs(first.B-dense_exact.B)<1e-10
+        && next.B==first.B && stats.hits>0;
+  } catch(const std::domain_error&) {}
+  check(dense_reused,"buoyancy reuse selects the dense connected EOS interval");
+  set_composition_buoyancy_reuse(0);
   Model m;m.M=.1*constants::Msun;m.m={.4*m.M,m.M};m.comp={inner,outer};
   m.y={{std::log(3e9),std::log(gas.rho_from_PT(T,P,inner)),std::log(T),0},
        {std::log(4e9),std::log(gas.rho_from_PT(.98*T,P*std::exp(contrast),outer)),std::log(.98*T),0}};

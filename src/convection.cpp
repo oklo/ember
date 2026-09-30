@@ -110,10 +110,14 @@ CompositionBuoyancy composition_buoyancy(const Eos& eos,double T,double P,double
     // edge use the exact inversion, with a generous one-percent margin
     // relative to the <=1e-4 logarithmic response step.
     const auto interior=[&](const Composition& composition,double rho,double expansion,double chi) {
-      const auto range=eos.density_range(T,composition);
-      if(!range)return true;
       const double predicted=std::log(rho)-expansion*(lnT-lnTa)+(lnP-lnPa)/chi;
-      return predicted>std::log(range->min)+.01 && predicted<std::log(range->max)-.01;
+      try {
+        const auto range=eos.density_range_near(T,composition,std::exp(predicted));
+        if(!range)return true;
+        return predicted>std::log(range->min)+.01 && predicted<std::log(range->max)-.01;
+      } catch(const std::domain_error&) {
+        return false; // Let the exact inversion check the actual state.
+      }
     };
     if(interior(lo,anchor.rho_lo,anchor.delta_lo,anchor.chi_lo)
         && interior(hi,anchor.rho_hi,anchor.delta_hi,anchor.chi_hi))
