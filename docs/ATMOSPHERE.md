@@ -494,3 +494,13 @@ source checks. A 1750 K control converges after two such restarts; matching
 pressure agrees with an independent accepted solution to 1.839e-9 relative.
 No failed column is admitted to a table.
 [Recovery check](results/atmosphere_flux_restart_sept30_v1.json).
+
+For a supplied atmosphere profile, `TAUFIR` does not reset the upper column
+boundary. `generate_nongrey_grid.py --initial-top-tau VALUE` removes donor
+layers above the measured Rosseland depth before refinement to the requested
+depth count. It requires a verified continuation or composition donor and
+records the boundary change. Final transfer, chemistry and flux checks remain
+unchanged. At 1225 K and log g = 6.475, independently converged tops near
+1e-7 and 1e-6 agree in matching temperature and pressure within 1.840e-7
+relative. This check supports that cold column; a different regime needs its
+own boundary check. [Comparison](results/atmosphere_top_sept30_v1.json).

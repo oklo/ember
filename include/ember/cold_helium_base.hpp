@@ -8,7 +8,10 @@ namespace ember {
 // and the Baiko-Chugunov quantum-ion correction at a common electron density.
 // Crystallization is not included. See docs/DENSE_EOS.md for domains and approximations.
 struct ColdHeliumOptions {
-  double max_mixture_hydrogen=.05,max_mixture_metals=.16,max_mixture_gamma=100;
+  // Liquid host limit: helium coupling Gamma_He = 2^(5/3) Gamma_e stays below both assessed
+  // melting references (OCP ~175; electron-screened He 141-147 at 1e4-1e5 g/cm3).
+  // Trace metals are more strongly coupled but are not the host phase.
+  double max_mixture_hydrogen=.05,max_mixture_metals=.16,max_helium_gamma=130;
   double minimum_density=1e3;
   double maximum_electron_temperature_ratio=.05;
   double maximum_hydrogen_quantum=4;

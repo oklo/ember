@@ -1,3 +1,4 @@
+#include <string>
 // Checks of the cold dense-He base and its optional join to the production EOS.
 // References: Ember's Fermi-Dirac IdealEos (electrons) and the pinned eos22.f EXCOR7 (exchange-correlation,
 // values below from EOSFI22 minus its separately probed ion and screening parts). The join checks need the
@@ -123,6 +124,13 @@ int main(){
    check(!rejected(3.02e5,5e4,comp(3e-8,1e-14,.13)),"trace core hydrogen at T_p,H/T 4.1 supported",0);
    check(rejected(3.02e5,5e4,comp(2e-6,1e-14,.13)),"non-trace hydrogen keeps T_p,H/T <= 4",0);
    check(rejected(1.8e5,5e4,comp(3e-8,1e-14,.13)),"trace hydrogen beyond T_p,H/T 6.5 refused",0);
+   // Metal-rich core below the former mean-coupling limit (Gamma_MCP 103 at 2.86e5 K) with helium well inside its liquid range.
+   check(!rejected(2.864e5,5.03e4,comp(1e-12,1e-14,.13)),"metal-rich helium liquid beyond mean coupling 100 supported",0);
+   {bool helium_limit=false;
+    try{(void)cold_helium_material_jets(1.57e5,5.03e4,comp(0,1e-14,.13),1);}
+    catch(const std::domain_error& e){helium_limit=std::string(e.what()).find("helium coupling")!=std::string::npos;}
+    check(helium_limit,"helium coupling above 130 refused by the host limit",0);
+    check(std::isfinite(cold_helium_material_jets(1.69e5,5.03e4,comp(0,1e-14,.13),1)[0][0][0]),"helium coupling 125 supported",0);}
    const auto j=cold_helium_material_jets(3.02e5,5e4,comp(3e-8,1e-14,.13),10);
    check(std::isfinite(j[1][0][0]+j[4][0][0]),"trace-hydrogen composition channels finite",0);}
   std::cout<<"cold helium base: failures "<<failures<<'\n';

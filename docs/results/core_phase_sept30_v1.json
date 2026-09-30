@@ -1,0 +1,151 @@
+{
+  "T_centre": 409210.0241435775,
+  "bulk_helium": {
+    "Gamma_He_centre": 51.7,
+    "Tp_over_T_He": 2.15,
+    "classical_melt_Gamma": 175,
+    "T_at_Gamma_He_130_K": 163000,
+    "screened_He_melt_Gamma": "141-147 (HELIUM_SOLID_REFERENCE_20260930)",
+    "admitted_Gamma_He_max": 130
+  },
+  "Fe": {
+    "T_onset_pure_Fe_centre": 404642.7409014027,
+    "ratio_Tc_to_onset": 1.0112871992513703,
+    "benchmark": "+-20% in onset T against Caplan et al. 2021 MD (Fe in C/O); charge ratio 13 and quantum Fe not benchmarked",
+    "core_Fe_mass_Msun": 0.0001513887966088357,
+    "sink_energy_upper_erg_all_core_Fe": 3.3630196579718655e+43,
+    "energy_equivalent_time_at_current_L_Gyr": 0.15071153139345758,
+    "max_sink_energy_over_thermal_release_per_slice": 0.030909128915008365,
+    "slices": [
+      {
+        "Tc_from": 409210.0241435775,
+        "Tc_to": 398979.77353998803,
+        "sink_energy_over_thermal": 0.0005171616278859544
+      },
+      {
+        "Tc_from": 398979.77353998803,
+        "Tc_to": 388749.5229363986,
+        "sink_energy_over_thermal": 0.005672398151089334
+      },
+      {
+        "Tc_from": 388749.5229363986,
+        "Tc_to": 378519.2723328092,
+        "sink_energy_over_thermal": 0.012679216264240779
+      },
+      {
+        "Tc_from": 378519.2723328092,
+        "Tc_to": 368289.02172921976,
+        "sink_energy_over_thermal": 0.02024519785504449
+      },
+      {
+        "Tc_from": 368289.02172921976,
+        "Tc_to": 347828.52052204084,
+        "sink_energy_over_thermal": 0.026314604707454194
+      },
+      {
+        "Tc_from": 347828.52052204084,
+        "Tc_to": 327368.01931486203,
+        "sink_energy_over_thermal": 0.030909128915008365
+      },
+      {
+        "Tc_from": 327368.01931486203,
+        "Tc_to": 306907.5181076831,
+        "sink_energy_over_thermal": 0.02759756150219618
+      },
+      {
+        "Tc_from": 306907.5181076831,
+        "Tc_to": 286447.01690050424,
+        "sink_energy_over_thermal": 0.023424135009870152
+      },
+      {
+        "Tc_from": 286447.01690050424,
+        "Tc_to": 265986.5156933254,
+        "sink_energy_over_thermal": 0.013910884139139408
+      },
+      {
+        "Tc_from": 265986.5156933254,
+        "Tc_to": 245526.01448614648,
+        "sink_energy_over_thermal": 0.007892202687402467
+      },
+      {
+        "Tc_from": 245526.01448614648,
+        "Tc_to": 225065.51327896764,
+        "sink_energy_over_thermal": 0.0036314137065023397
+      },
+      {
+        "Tc_from": 225065.51327896764,
+        "Tc_to": 204605.01207178875,
+        "sink_energy_over_thermal": 0.0013455689157187622
+      }
+    ],
+    "central_Fe_enrichment_x3": "energy scales ~x3 (not modelled: common metal settling velocity)",
+    "latent_heat_erg": "~1e41, negligible"
+  },
+  "metal_supercooled_liquid_Cv": {
+    "1.0": {
+      "core_ion_Cv_liquid_fit": 7.162072431703468e+39,
+      "core_ion_Cv_solid_like": 7.131490208120496e+39,
+      "relative": 0.004288335633995272,
+      "max_Gamma_MCP": 71.61771521227944,
+      "max_Gamma_He": 51.68028532709158
+    },
+    "0.8": {
+      "core_ion_Cv_liquid_fit": 7.445404213586978e+39,
+      "core_ion_Cv_solid_like": 7.408295679035626e+39,
+      "relative": 0.005009051495658332,
+      "max_Gamma_MCP": 89.52214401534927,
+      "max_Gamma_He": 64.60035665886446
+    },
+    "0.7": {
+      "core_ion_Cv_liquid_fit": 7.625246455960413e+39,
+      "core_ion_Cv_solid_like": 7.583797791296934e+39,
+      "relative": 0.005465423235709876,
+      "max_Gamma_MCP": 102.31102173182776,
+      "max_Gamma_He": 73.82897903870226
+    },
+    "0.6": {
+      "core_ion_Cv_liquid_fit": 7.843154624728536e+39,
+      "core_ion_Cv_solid_like": 7.79625183249236e+39,
+      "relative": 0.006016069419499657,
+      "max_Gamma_MCP": 119.3628586871324,
+      "max_Gamma_He": 86.13380887848597
+    },
+    "0.5": {
+      "core_ion_Cv_liquid_fit": 8.116296871256674e+39,
+      "core_ion_Cv_solid_like": 8.062278091006983e+39,
+      "relative": 0.006700188165172093,
+      "max_Gamma_MCP": 143.23543042455887,
+      "max_Gamma_He": 103.36057065418316
+    },
+    "0.4": {
+      "core_ion_Cv_liquid_fit": 8.476043020550941e+39,
+      "core_ion_Cv_solid_like": 8.412240049343585e+39,
+      "relative": 0.00758454000754944,
+      "max_Gamma_MCP": 179.04428803069854,
+      "max_Gamma_He": 129.2007133177289
+    }
+  },
+  "checkpoint_sha256": "78381082547ab733296238079d45bc1161b18acc663284cbf1d0ed4bbabb5d4c",
+  "references": [
+    "https://arxiv.org/abs/1002.3327",
+    "https://arxiv.org/abs/2108.11389"
+  ],
+  "limitations": [
+    "The precipitation estimate uses classical free-energy fits calibrated against Fe in C/O; He/Fe charge ratio13 and quantum corrections to separation are not benchmarked.",
+    "Complete instantaneous sinking is an energy upper scenario, not a kinetic prediction.",
+    "Present EOS continues the metal liquid fit without precipitation; helium melting is not implemented in the selected liquid mode."
+  ],
+  "native_transport_checks": {
+    "passed": true,
+    "queries": 3207,
+    "unchanged_supported": 2257,
+    "recovered": 169,
+    "executable_sha256": "99057e808ba15ebdb56a05548098f5b933706070a7d121c84d1421c19c5310ff",
+    "scope": "Actual current-profile transport and thermal fluxes with finite derivatives, plus homologous cooling projections. Host helium coupling130, original dilute-H limits retained.",
+    "remaining_cooler_limits": [
+      "electron collision degeneracy coverage",
+      "H quantum terms",
+      "masked H/He EOS interpolation cells"
+    ]
+  }
+}

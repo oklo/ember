@@ -41,12 +41,10 @@ void check_domain(double T,double rho,const Composition& c,std::size_t channels,
   if((X>0||channels>1)
       &&!(io::plasma(std::log(T),logne,1.,1.).tpt<=(X<=o.trace_hydrogen?o.maximum_trace_hydrogen_quantum:o.maximum_hydrogen_quantum)))
     fail("hydrogen quantum parameter beyond the production limit");
-  {   // number-weighted mean coupling, Gamma_e <Z^(5/3)>, as in the production liquid guard
-    double num=X+Y3/3+X4/4,moment=X+(Y3/3+X4/4)*std::pow(2.,5./3);
-    for(const auto& m:gs98_metals){num+=Zm*m.fraction/m.mass_number;moment+=Zm*m.fraction/m.mass_number*std::pow(m.charge,5./3);}
+  {   // helium host coupling; the trace-metal mean coupling is not a phase criterion (docs/DENSE_EOS.md)
     const double rs=std::exp((std::log(3/(4*pi))-logne)/3)/io::bohr;
-    if(!(io::hartree_k/(rs*T)*moment/num<=o.max_mixture_gamma))
-      fail("mixture coupling beyond the assessed liquid range; phase unsupported");
+    if(!(io::hartree_k/(rs*T)*std::pow(2.,5./3)<=o.max_helium_gamma))
+      fail("helium coupling beyond the assessed liquid range; phase unsupported");
   }
 }
 std::array<K,2> electron_parts(const K& lt,const K& ln) {

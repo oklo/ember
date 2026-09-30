@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "relative_changes": {
+    "T": -1.7763510684609685e-07,
+    "Pgas": -1.839995791286242e-07,
+    "source_density": -2.9011556268443428e-08,
+    "column_mass": -1.8399958079395873e-07
+  },
+  "effective_flux_errors": [
+    0.00020818627446250737,
+    0.00020818627446250737
+  ],
+  "source_flux_errors": [
+    0.0017533792628270373,
+    0.0017580107749057827
+  ],
+  "actual_top_tau": [
+    9.87856615378453e-08,
+    9.832332852820358e-07
+  ],
+  "scope": "Identical physics, retained deeper mesh, independent convergence at two optically thin top boundaries. No source acceptance change.",
+  "result_sha256": [
+    "56beaf0d141b8f7f2314da3dc99649cf69382b6fda0a976dc4fb2937dab74b21",
+    "42ff799c2461fd8a0bc612b4d34b5d32fad21e04a424d886f6fc397d9d0d4d6e"
+  ],
+  "coordinates": {
+    "Teff_K": 1225,
+    "log_g": 6.475,
+    "X_H": 0.999999,
+    "Z": 0
+  },
+  "source_executable_sha256": "ecf4d6a64e89521e1f84d77cc97e5da37ad964b3700d0290000353ac622b8ea0",
+  "depths": [
+    317,
+    291
+  ]
+}

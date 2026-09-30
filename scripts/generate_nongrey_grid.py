@@ -312,16 +312,17 @@ def atmosphere_inputs(directory, prepared, spec, table, abundance, masses, teff,
     link(directory/"data",Path(prepared["synple"])/"data")
 
 
-def truncate_initial_structure(text, log, bottom_tau):
+def truncate_initial_structure(text, log, bottom_tau=None, *, top_tau=None):
     """Cut a verified seed at its measured Rosseland depth, without extrapolation.
 
     TAULAS controls TLUSTY's grey initialization; it does not reset the mass
     grid of an input structure. A continuation can otherwise inherit a much
     deeper physical column than the nominal input optical depth suggests.
-    This changes the computational lower boundary, whose influence must be
-    checked by independently converged models at multiple column depths.
+    Optional top truncation retains the first point at or below the requested
+    optical depth and every deeper point. It does not resample the retained
+    mesh. Both boundaries require independently converged sensitivity checks.
     """
-    from bisect import bisect_right
+    from bisect import bisect_left, bisect_right
     words = text.replace('D', 'E').split()
     n = int(words[0])
     resample_initial_structure(text, n)
@@ -347,33 +348,41 @@ def truncate_initial_structure(text, log, bottom_tau):
     tau = [r[2] for r in profile]
     if any(not math.isfinite(t) or t <= 0 for t in tau) or any(a >= b for a, b in zip(tau, tau[1:])):
         raise ValueError('invalid seed optical depths')
-    if not math.isfinite(bottom_tau) or not tau[0] < bottom_tau < tau[-1]:
-        raise ValueError('requested seed bottom is not strictly inside its source profile')
-    j = bisect_right(tau, bottom_tau)-1
-    if j < 19:
+    cut_mass, cut_structure = mass, structure
+    if bottom_tau is not None:
+        if not math.isfinite(bottom_tau) or not tau[0] < bottom_tau < tau[-1]:
+            raise ValueError('requested seed bottom is not strictly inside its source profile')
+        j = bisect_right(tau, bottom_tau)-1
+        fraction = math.log(bottom_tau/tau[j])/math.log(tau[j+1]/tau[j])
+        def mix(a, b):
+            return math.exp((1-fraction)*math.log(a)+fraction*math.log(b))
+        cut_mass, cut_structure = mass[:j+1], structure[:j+1]
+        if fraction:
+            cut_mass.append(mix(mass[j], mass[j+1]))
+            cut_structure.append([mix(a, b) for a, b in zip(structure[j], structure[j+1])])
+    if top_tau is not None:
+        end_tau = tau[-1] if bottom_tau is None else bottom_tau
+        if not math.isfinite(top_tau) or not 0 < top_tau < end_tau:
+            raise ValueError('requested seed top must be positive and above the bottom')
+        i = bisect_left(tau, top_tau)
+        cut_mass, cut_structure = cut_mass[i:], cut_structure[i:]
+    if len(cut_mass) < 20:
         raise ValueError('truncated seed has fewer than twenty depth points')
-    fraction = math.log(bottom_tau/tau[j])/math.log(tau[j+1]/tau[j])
-    def mix(a, b):
-        return math.exp((1-fraction)*math.log(a)+fraction*math.log(b))
-    cut_mass, cut_structure = mass[:j+1], structure[:j+1]
-    if fraction:
-        cut_mass.append(mix(mass[j], mass[j+1]))
-        cut_structure.append([mix(a, b) for a, b in zip(structure[j], structure[j+1])])
     result = f'{len(cut_mass)} -4\n'+'\n'.join(format(v, '.17g') for v in cut_mass)+'\n'
     result += '\n'.join(' '.join(format(v, '.17g') for v in row) for row in cut_structure)+'\n'
     resample_initial_structure(result, len(cut_mass))
     return result
 
 
-def initial_depth_control(text, directory, bottom_tau):
-    """Optionally change a verified donor's computational lower boundary."""
-    if bottom_tau is None:
+def initial_depth_control(text, directory, bottom_tau=None, top_tau=None):
+    """Optionally change a verified donor's computational boundaries."""
+    if bottom_tau is None and top_tau is None:
         return text
     from import_nongrey_grid import read_text
     path = Path(directory)/'run.log'
     if not path.exists():
         path = path.with_name('run.log.gz')
-    return truncate_initial_structure(text, read_text(path), bottom_tau)
+    return truncate_initial_structure(text, read_text(path), bottom_tau, top_tau=top_tau)
 
 
 def convective_tail(initial, depths):
@@ -517,6 +526,8 @@ def main():
                    help="prefer nearby accepted atmospheres at the same composition, preserving trial gas pressure while changing Teff/gravity")
     p.add_argument("--composition-donor",type=Path,
                    help="use independently accepted nearby-composition columns as INITIAL GUESSES only; target composition/opacity and final checks unchanged")
+    p.add_argument("--initial-top-tau",type=float,
+                   help="remove thinner donor layers before refinement to the requested depth count; requires an upper-boundary sensitivity check")
     p.add_argument("--initial-bottom-tau",type=float,
                    help="truncate a verified continuation/donor at its measured Rosseland depth; requires independent lower-boundary checks")
     p.add_argument("--plane",type=int,help="compute only this zero-based composition plane")
@@ -543,6 +554,10 @@ def main():
         if (not math.isfinite(a.initial_bottom_tau) or a.initial_bottom_tau <= spec['tau']
                 or not (a.continuation_models or a.composition_donor) or a.initial_models):
             raise ValueError('initial bottom depth requires a verified donor and must exceed matching depth')
+    if a.initial_top_tau is not None:
+        if (not math.isfinite(a.initial_top_tau) or not 0 < a.initial_top_tau < spec['tau']
+                or not (a.continuation_models or a.composition_donor) or a.initial_models):
+            raise ValueError('initial top depth requires a verified donor and must precede matching depth')
     composition_donor = None
     if a.composition_donor:
         if a.continuation_models or a.initial_models:
@@ -684,7 +699,7 @@ def main():
                 old=Path(file).parent
                 text=completed_initial_structure(old,continuation_spec,candidate['teff_K'],candidate['log_g'],spec['depths'])
                 if text is not None:
-                    text=initial_depth_control(text,old,a.initial_bottom_tau)
+                    text=initial_depth_control(text,old,a.initial_bottom_tau,a.initial_top_tau)
                     initial=continuation_structure(text,candidate['teff_K'],candidate['log_g'],teff,logg)
                     continuation={'source':str(old.resolve()),'source_receipt_sha256':digest(old/'completed.json'),
                                   'teff_K':candidate['teff_K'],'log_g':candidate['log_g'],
@@ -699,13 +714,16 @@ def main():
             if text is None:raise ValueError('donor depth grid cannot initialize target')
             if any(digest(p)!=h for p,h in donor_pins.items()):
                 raise ValueError('composition donor changed after independent validation')
-            text=initial_depth_control(text,old,a.initial_bottom_tau)
+            text=initial_depth_control(text,old,a.initial_bottom_tau,a.initial_top_tau)
             initial=continuation_structure(text,record['teff_K'],record['log_g'],teff,logg)
             continuation={'source':str(old.resolve()),'source_receipt_sha256':digest(old/'completed.json'),
                           'teff_K':record['teff_K'],'log_g':record['log_g'],
                           'donor_XH':record['XH'],'donor_XHe3':record['X3'],
                           'donor_inputs_sha256':donor_pins,
                           'method':'nearby-composition INITIAL GUESS with pressure-preserving Teff/gravity rescaling; target chemistry, opacity, transfer and hydrostatic balance solved anew'}
+        if continuation is not None and a.initial_top_tau is not None:
+            continuation['initial_top_tau']=a.initial_top_tau
+            continuation['upper_boundary_note']='Optically thin donor layers removed before refinement to the requested depth count. Final optical depth and boundary sensitivity must be checked.'
         if continuation is not None and a.initial_bottom_tau is not None:
             continuation['initial_bottom_tau']=a.initial_bottom_tau
             continuation['lower_boundary_note']='Computational lower boundary changed at measured donor optical depth; final depth is solved and lower-boundary sensitivity must be checked.'

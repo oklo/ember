@@ -356,6 +356,25 @@ class SourceAcceptance(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'mass grid'):
             truncate_initial_structure(damaged,log,1000)
 
+    def test_seed_top_preserves_deeper_mesh(self):
+        n=60; tau=[10**(-9+12*i/(n-1)) for i in range(n)]
+        mass=[2*t for t in tau]; rows=[[3000+t**.25,1e12,1e-5,1e15]for t in tau]
+        seed=f'{n} -4\n'+'\n'.join(map(str,mass))+'\n'+'\n'.join(' '.join(map(str,r))for r in rows)+'\n'
+        log='FINAL MODEL ATMOSPHERE\n'+'\n'.join(f'{i+1} {m} {t} 3000 1e12 1e-5 1e7 -3 .5 .5 1'for i,(m,t)in enumerate(zip(mass,tau)))
+        words=truncate_initial_structure(seed,log,top_tau=1e-6).split()
+        cut=next(i for i,t in enumerate(tau)if t>=1e-6); count=n-cut
+        self.assertEqual(int(words[0]),count)
+        self.assertEqual(list(map(float,words[2:2+count])),mass[cut:])
+        self.assertEqual(list(map(float,words[2+count:])),[x for row in rows[cut:]for x in row])
+        both=truncate_initial_structure(seed,log,100.,top_tau=1e-6).split(); count=int(both[0])
+        self.assertEqual(float(both[2]),mass[cut]); self.assertAlmostEqual(float(both[1+count]),200.)
+        for top in (0.,-1.,float('nan'),1000.,100.):
+            with self.assertRaises(ValueError):truncate_initial_structure(seed,log,100.,top_tau=top)
+        with self.assertRaisesRegex(ValueError,'mass grid'):
+            truncate_initial_structure(seed,log.replace(f'1 {mass[0]} ','1 99 '),top_tau=1e-6)
+        with self.assertRaisesRegex(ValueError,'twenty'):
+            truncate_initial_structure(seed,log,top_tau=50.)
+
     def test_warm_composition_extension_preserves_complete_old_cells(self):
         old_axes = [[.3, .7], [0, .12], [2600, 2800, 3000, 3200], [4.9, 5.15, 5.4]]
         old = set(itertools.product(*old_axes))

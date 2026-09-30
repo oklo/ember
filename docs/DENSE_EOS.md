@@ -174,8 +174,21 @@ dependence carries model differences below the join, including differences
 in chemical forces. The cold heat capacity is retained. All resulting thermal
 and composition derivatives enter transport and energy accounting.
 
-The model requires density ≥ 1000 g/cm³, Z ≤ 0.16, number-weighted coupling
-≤ 100, kT/E_F ≤ 0.05 and Tp,H/T ≤ 4. The helium quantum fit requires
+The model requires density ≥ 1000 g/cm³, Z ≤ 0.16, helium coupling
+Γ_He ≤ 130 (a practical bound below both assessed melting references: classical OCP
+about 175, electron-screened helium 141–147 at 1e4–1e5 g/cm³), kT/E_F ≤ 0.05
+and Tp,H/T ≤ 4. The number-weighted mean coupling is not a phase criterion here:
+it is sensitive to strongly coupled trace metals (Γ_Fe ≈ 3700 at a 409 kK centre where Γ_He = 52).
+The liquid fit continued to those metals overstates their Coulomb heat capacity
+relative to a harmonic solid; integrated over the core this is +0.43% of ion Cv at
+409 kK and +0.76% at 164 kK. Metal precipitation is not modelled: the calibrated
+pure-Fe onset at the centre is about 405 kK (±20% against molecular dynamics for Fe
+in C/O), and sinking all core Fe releases at most 3.4e43 erg in the current profile.
+This is a conditional energy bound: the large He/Fe charge ratio and quantum
+correction to separation are unbenchmarked. The estimated energy is at most
+3.1% of the thermal release in the sampled cooling intervals; it is not a
+measured cooling-age error.
+[Core phase bounds](results/core_phase_sept30_v1.json). The helium quantum fit requires
 500 ≤ R_S ≤ 1.2e5 and Tp,He/T ≤ 30. Trace-proton quantum terms use the same
 linear-mixture approximation as the warmer EOS; comparison with leading-order
 terms measures sensitivity, not a rigorous error bound. Tests cover source
