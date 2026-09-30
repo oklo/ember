@@ -244,6 +244,8 @@ set_tests_properties(screened_envelope_evolution finite_screened_envelope_evolut
   PROPERTIES TIMEOUT 120 LABELS "material-data;integration")
 find_package(Python3 COMPONENTS Interpreter QUIET)
 if(Python3_Interpreter_FOUND)
+  add_test(NAME atmosphere_bulk_eos COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test_atmosphere_bulk_eos.py)
+  add_test(NAME tlusty_bulk_eos COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test_tlusty_bulk_eos.py)
   add_test(NAME atmosphere_column_solver COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test_solve_column.py)
   add_test(NAME tops_sources COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_CURRENT_SOURCE_DIR}/test_tops_sources.py)
   add_test(NAME remnant_endpoints COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_CURRENT_SOURCE_DIR}/test_remnant_endpoints.py)

@@ -63,6 +63,18 @@ class BulkEosIdentity(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'checksum'):
             validate_bulk_eos(self.directory, self.spec, self.prepared, self.log)
 
+    def test_masked_bulk_table_format(self):
+        text = self.table.read_text().replace('BULK_EOS 1', 'BULK_EOS 2')
+        self.table.write_text(text+'cells\n1\n')
+        self.bulk['table_sha256'] = hashlib.sha256(self.table.read_bytes()).hexdigest()
+        self.assertEqual(validate_bulk_eos(self.directory, self.spec, self.prepared,
+                                          self.log)['hydrogen'], .98)
+        for suffix in ['', 'wrong\n1\n', 'cells\n2\n', 'cells\n1 0\n']:
+            self.table.write_text(text+suffix)
+            self.bulk['table_sha256'] = hashlib.sha256(self.table.read_bytes()).hexdigest()
+            with self.assertRaisesRegex(ValueError, 'cell mask'):
+                validate_bulk_eos(self.directory, self.spec, self.prepared, self.log)
+
     def test_bad_table_is_rejected_even_with_a_matching_checksum(self):
         for text in ['bad header\n', 'EMBER_ATMOSPHERE_BULK_EOS 1\n2 2 .98\n7 8\n12 13\n',
                      self.table.read_text().replace('7 8', '8 7'),

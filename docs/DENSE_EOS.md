@@ -144,14 +144,15 @@ Tp,H/T ≤ 8 (otherwise 4). There the fitted correction is used outside its
 R_S range (R_S,H ≈ 80). Against the leading Wigner–Kirkwood term and an
 Einstein-harmonic form with the same classical limit, the quantum hydrogen
 chemical potential differs by up to 0.52 and 0.23 kT at Tp,H/T = 7.6. The
-native hydrogen force per face (chemical-potential difference plus the EOS and
-collision enthalpy-temperature term, 0.01–2.9 kT per H ion for X ≤ 1e-3 at
-T 0.16–0.41 MK) changes by at most 2.5e-3 kT: ≤ 8.0e-4 of the force at the 90th
-percentile and ≤ 2.4e-3 at the 99th; larger ratios occur only where the force is
-≲ 0.02 kT. The heat-capacity weight scales with the hydrogen fraction (≲ 1e-3 of the local Cv).
-The colder comparisons cover only faces supported by the collision tables:
-347 faces at the original temperature and 70% of it, falling to 86 at 40%.
-They do not yet test the coldest central transport.
+native hydrogen force (chemical-potential difference plus the EOS and collision
+enthalpy-temperature term) changes by less than 0.0032 kT per H ion across the
+tested liquid layers. Relative changes are below 0.002 at the 90th percentile
+and 0.0038 at the 99th; the largest ratios occur where the force is nearly zero.
+All 352 dilute-H faces are covered down to half the temperature of the 1100 K
+surface model, with density and composition fixed. At 48%, 90 central faces
+cross the helium-liquid limit and are excluded. These comparisons bound the
+observed model spread, not the physical error. The heat-capacity contribution
+scales with the hydrogen fraction (at most about 0.001 of local Cv).
 [Trace-hydrogen checks](results/trace_hydrogen_quantum_sept30_v1.json).
 The R_S sensitivity of the hydrogen chemical potential is about 0.01 kT
 (rising to 0.025 kT in colder projections).

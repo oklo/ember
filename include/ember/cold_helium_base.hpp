@@ -16,7 +16,7 @@ struct ColdHeliumOptions {
   double maximum_electron_temperature_ratio=.05;
   double maximum_hydrogen_quantum=4;
   // Dilute hydrogen (mass fraction <= trace_hydrogen) may reach a larger T_p,H/T: its per-ion
-  // quantum model spread changes the native diffusion force by <=2.4e-3 (99th percentile)
+  // quantum model spread changes the native diffusion force by <=3.8e-3 (99th percentile)
   // and the local heat capacity by ~X (docs/DENSE_EOS.md).
   double trace_hydrogen=1e-3,maximum_trace_hydrogen_quantum=8;
   double join_cold=5e5,join_hot=8e5;

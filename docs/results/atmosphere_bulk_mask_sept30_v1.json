@@ -1,0 +1,81 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "X": 0.9955,
+      "warm_queries": 1202,
+      "maximum_warm_relative_difference": 0.0,
+      "cold_queries": 200,
+      "maximum_cold_relative_difference": 0.0,
+      "legacy_format_difference": 0.0,
+      "unsupported_corner_rejected": true,
+      "outside_rejected": true
+    },
+    {
+      "X": 0.999999,
+      "warm_queries": 1202,
+      "maximum_warm_relative_difference": 0.0,
+      "cold_queries": 200,
+      "maximum_cold_relative_difference": 0.0,
+      "legacy_format_difference": 0.0,
+      "unsupported_corner_rejected": true,
+      "outside_rejected": true
+    }
+  ],
+  "scope": "Native Fortran interpolation and support, unchanged warm full-pressure domain and validated cold rows, both legacy and masked formats. No cold/high-pressure source extrapolation.",
+  "source_sha256": "ce4469c95a89abfa2bbf0dc1c820591c73d61606ff4162daf5c34c63593d2de3",
+  "source": "SCVH hydrogen and helium; additive volume and mixing entropy, native logT2.42 row with pressure coverage retained per cell",
+  "table_sha256": {
+    "0.9955": "77c756a673d1df5b17e734ea937263c1fbabe4d1b0a9a1a9f6a1ae956b5f89d0",
+    "0.999999": "f6a58afdcff6e7801b9c7a318db92fc3463064e8d6814878cba44a38dd1f4dc7"
+  },
+  "assembly_recipe_sha256": "e4cdb97d92fd68b8c4e2c9b098a2eaabcd9d987b215c6ba54c30fbfb1d59dcfa",
+  "atmosphere_overlap": {
+    "x0.9955_g645_t1050": {
+      "T": 3.225748557156294e-10,
+      "Pgas": 1.4178844764956011e-09
+    },
+    "x0.9955_g650_t1050": {
+      "T": -1.1595169269185135e-10,
+      "Pgas": -7.141380820030463e-10
+    },
+    "x0.999999_g647.5_t1050": {
+      "T": 1.5268675213064853e-11,
+      "Pgas": 7.52180540075642e-11
+    },
+    "x0.999999_g650_t1050": {
+      "T": -2.3662316550598916e-10,
+      "Pgas": -1.4796022185237234e-09
+    }
+  },
+  "colder_columns_accepted": [
+    "x0.9955_g645_t1000",
+    "x0.9955_g645_t975",
+    "x0.9955_g650_t1000",
+    "x0.9955_g650_t975",
+    "x0.999999_g647.5_t1000",
+    "x0.999999_g647.5_t975",
+    "x0.999999_g650_t1000",
+    "x0.999999_g650_t975"
+  ],
+  "native_atmosphere_table": {
+    "passed": true,
+    "unchanged_supported_queries": 264,
+    "maximum_overlap_difference": 0.0,
+    "new_cell_centres": 40,
+    "maximum_scaled_derivative_error": 3.0888660518257893e-09,
+    "outside_rejections": 4,
+    "independent_source_relative_errors": {
+      "T": -6.858434509793288e-05,
+      "Pgas": 7.180764274927753e-05
+    },
+    "scope": "Native values and derivatives for every newly supported cell, unchanged old queries, rejected outside-support corners, and the independent 1375 K/logg6.475 source excluded from interpolation."
+  },
+  "integrated_envelopes_nominal": true,
+  "limitations": [
+    "Cell support preserves the source domain; it does not improve the underlying SCVH physical approximation.",
+    "The independent SCVH density/entropy interpolants give Maxwell-relation mismatch up to0.005314 in the added row.",
+    "Only nominal opacity integrated envelopes tested; low-opacity sensitivity remains outside the source domain.",
+    "Grains and H3+ line absorption remain absent from these gas columns."
+  ]
+}

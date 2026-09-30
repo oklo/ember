@@ -473,6 +473,17 @@ distinct while allowing different compositions from the same EOS family.
 Declaring an experimental EOS without these records does not permit assembly.
 This records the calculation's physics; it does not establish its accuracy.
 
+The optional Fortran module [tlusty_bulk_eos.f90](../scripts/tlusty_bulk_eos.f90)
+reads both rectangular tables (version 1) and tables with explicit cell support
+(version 2). This preserves the warm, high-pressure source while adding colder
+rows with narrower pressure coverage. Unsupported cells reject queries; their
+placeholder values are never interpolated. Version 2 appends `cells` and
+`(nt-1)*(np-1)` zero/one entries, with temperature varying fastest. The stored
+values and derivatives use the same bicubic interpolation in both versions.
+Native checks preserve 2804 warm and cold queries; four matched 1050 K
+atmospheres change the matching pressure by less than `1.480e-9`.
+[Source and atmosphere checks](results/atmosphere_bulk_mask_sept30_v1.json).
+
 The integrated envelope can use the interior EOS or an explicit H/He source
 via `envelope_eos "interior"` or `envelope_source "path"`. The latter rejects
 non-trace metals unless `envelope_metals "neutral"` or `"ionized"` is selected.
