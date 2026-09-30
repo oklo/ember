@@ -1,0 +1,58 @@
+{
+  "scope": "Optional weakly quantum liquid-ion domain extension, assessed against variable-ionization FreeEOS and a paired stellar comparison. No crystallization or general partially-ionized quantum EOS.",
+  "source": "FreeEOS 3.0.0 option 223, numerical electron integrals; BC22 quantum free-energy correction, unchanged formula.",
+  "proposed_domain": {
+    "minimum_T_K": 50000,
+    "density_g_cm3": [
+      10,
+      200
+    ],
+    "minimum_X": 0.98,
+    "maximum_Z": 1e-08,
+    "maximum_He3_share_of_helium": 0.5,
+    "maximum_TpH_over_T": 0.5
+  },
+  "profile": {
+    "checkpoint_sha256": "78baa6da30f77b5f3f3ce4c603e6536efb1701a0d7f393c5a948605e7aa951b2",
+    "Teff_K": 2488,
+    "queries": 536,
+    "unsupported": 0,
+    "integrated_delta_Cv_over_Cv": -0.0055969011958389445,
+    "integrated_delta_CvT_over_CvT": -0.005909690926727016
+  },
+  "ionization": {
+    "queries_all": 81,
+    "queries_in_proposed_domain": 53,
+    "maximum_delta_Cv_over_classical_ion_Cv": 0.0003263564752305524,
+    "maximum_finite_difference_noise": 7.063651614006184e-10,
+    "profile_integrated_absolute_delta_Cv_over_whole_Cv": 9.618124854567766e-09
+  },
+  "pressure_entropy": {
+    "scope": "Pressure/entropy and integrated heat-capacity impact of quantum ionization.\nNo stellar selections or source-domain edits. The mass quadrature covers the\nresolved interior, not the separate integrated SCVH envelope.\n",
+    "queries": 33,
+    "maximum_pressure_difference": 1.8847503848776673e-05,
+    "maximum_entropy_difference_over_classical_ion_R": 0.00038194345005812823,
+    "selected_for_evolution": false
+  },
+  "previous_checks": "quantum_cool_hydrogen_sept29_v1.json",
+  "evolution_comparison": {
+    "scope": "Matched 20 Myr; same starting 2488 K star and refined classical EOS. Quantum activation includes initial EOS readjustment, so this is not a cooling-age measurement.",
+    "age_years": 3869921423954.4355,
+    "duration_years": 20000000.0,
+    "relative_change": {
+      "Teff_K": -0.0021121368753720393,
+      "luminosity_Lsun": -0.008149661887308701,
+      "radius_Rsun": 0.00013722462043319616,
+      "central_T_K": -0.0002300640897290318,
+      "central_density_g_cm3": -0.00026913758724689263,
+      "H_mass_g": -1.2112533198660458e-13,
+      "He3_mass_g": 1.0508482972682032e-11,
+      "surface_X": -9.831107039559583e-10,
+      "nuclear_fraction": 0.009850962069261726,
+      "convective_mass_fraction": 0.0
+    },
+    "both_reached_requested_age": true,
+    "accepted_intervals_each": 5,
+    "new_rejected_intervals_each": 0
+  }
+}

@@ -70,7 +70,10 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   // small correction. On the 3200 K profiles, the mass-weighted uncertainty
   // estimate is <2.3e-6 of whole-star classical ion Cv. This extends the
   // assessed domain, without tapering the potential or altering its derivatives.
-  const bool cool_hydrogen=T>=1e5 && rho>=10 && rho<=150 && thetaH<=.5 &&
+  // At 2488 K, the additional 21 envelope shells carry 0.03875% of the
+  // resolved mass. Equilibrium-ionization derivatives change the integrated
+  // heat capacity by less than 1e-8; sampled colder controls are also small.
+  const bool cool_hydrogen=T>=5e4 && rho>=10 && rho<=200 && thetaH<=.5 &&
       c.X[0]>=.98 && c.Z()<=1e-8 && c.X[1]<=.5*(c.X[1]+c.X[2]);
   if(thetaH>1 || (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen))
     throw std::domain_error("quantum ion EOS: outside assessed ionization/quantum range");

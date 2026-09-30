@@ -95,9 +95,19 @@ int main() {
   refused=false;try{(void)ion_quantum_liquid_jets(100000,9,dense_h);}
   catch(const std::domain_error&){refused=true;}
   check(refused,"cool hydrogen retains its assessed density boundary");
-  refused=false;try{(void)ion_quantum_liquid_jets(90000,22,dense_h);}
+  refused=false;try{(void)ion_quantum_liquid_jets(49999,10,dense_h);}
   catch(const std::domain_error&){refused=true;}
   check(refused,"cool hydrogen retains its assessed temperature boundary");
+  const auto colder=ion_quantum_liquid_jets(86000,23.6,envelope_h,1)[0];
+  const auto colder_p=ion_quantum_liquid_jets(86000*std::exp(h),23.6,envelope_h,1)[0];
+  const auto colder_m=ion_quantum_liquid_jets(86000*std::exp(-h),23.6,envelope_h,1)[0];
+  check(colder[0][0]>0 && std::abs((colder_p[0][0]-colder_m[0][0])/(2*h)/colder[1][0]-1)<2e-7,
+        "cooling envelope keeps the quantum potential derivative");
+  check(ion_quantum_liquid_jets(50000,10,dense_h,1)[0][0][0]>0,
+        "assessed 50 kK hydrogen state is supported");
+  refused=false;try{(void)ion_quantum_liquid_jets(299000,201,dense_h);}
+  catch(const std::domain_error&){refused=true;}
+  check(refused,"cooling hydrogen retains its upper density boundary");
   refused=false;try{(void)ion_quantum_liquid_jets(100000,150,dense_h);}
   catch(const std::domain_error&){refused=true;}
   check(refused,"cool hydrogen retains its smaller plasma-temperature bound");

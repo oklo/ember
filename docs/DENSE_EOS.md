@@ -64,11 +64,16 @@ Z ≤ 1e-8 and He3 at most half the helium:
 - T ≥ 200 kK, density 50–150 g/cm³ and X ≥ 0.97. Equilibrium-ionization checks
   give an electron deficit below 2.785e-5.
   [Dense-hydrogen checks](results/quantum_dense_hydrogen_sept28_v1.json).
-- T ≥ 100 kK, density 10–150 g/cm³, X ≥ 0.98 and Tp,H/T ≤ 0.5. Comparisons with
-  equilibrium ion populations find a maximum quantum-Cv difference of 0.1347%
-  of classical ion Cv. The affected layers in the 3200 K models contain about
-  0.2090% of the resolved mass; their whole-star heat-capacity effect is small.
-  [Cool-hydrogen assessment](results/quantum_cool_hydrogen_sept29_v1.json).
+- T ≥ 50 kK, density 10–200 g/cm³, X ≥ 0.98 and Tp,H/T ≤ 0.5. Equilibrium-ion
+  comparisons give quantum-Cv differences up to 0.1347% of classical ion Cv
+  in the warmer controls and 0.03264% in the added controls. At 2488 K the
+  additional envelope layers contain 0.03875% of the resolved mass; their
+  ionization uncertainty contributes less than 1e-8 of integrated stellar Cv.
+  The full quantum correction reduces that Cv by 0.5597%.
+  [Warm controls](results/quantum_cool_hydrogen_sept29_v1.json) ·
+  [Cooling-envelope checks](results/quantum_cooling_envelope_sept30_v1.json). A matched 20 Myr
+  comparison changes luminosity by -0.815%; this includes the initial EOS
+  readjustment and is not a cooling-age measurement.
 
 Outside those intervals, the smaller quantum-ratio limit bounds the ideal-ion
 heat correction to 0.05556%. The potential is never tapered at a boundary;
