@@ -47,7 +47,11 @@ public:
   static Domain ionized_hydrogen_envelope_domain() {
     auto domain=hydrogen_envelope_domain();
     domain.maximum_rho=1e5;
-    domain.source_logR=3.1;domain.full_logR=3.4;
+    // Below log T = 5.7 the radiative source is the warm/bridge blend, whose ATOMIC bridge is supported
+    // only to log rho = 2.4 there (log rho = log R + 3 log10(T/1e6)). The part of this overlap that still
+    // reads the source at the actual state (log R < full_logR) must stay inside it up to log T = 5.7:
+    // full_logR <= 3.3, kept at 3.25 for the interpolation stencil.
+    domain.source_logR=3.0;domain.full_logR=3.25;
     // Direct ionized conduction remains active below 300 kK. Returning to
     // the unextended radiative table there can leave its density support.
     // Keep the contribution bound and the explicit 200 kK domain floor.

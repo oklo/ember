@@ -1,0 +1,45 @@
+{
+  "scope": "Conducting-envelope radiative-opacity overlap kept within the warm bridge source support.",
+  "selection": {
+    "previous_logR": [
+      3.1,
+      3.4
+    ],
+    "current_logR": [
+      3.0,
+      3.25
+    ],
+    "source_logrho_upper": 2.4,
+    "problem_logT_interval": [
+      5.667,
+      5.7
+    ],
+    "opacity_uncertainty_factor": 100,
+    "total_transport_bound": 0.003
+  },
+  "controls": {
+    "recovered_failures": 20,
+    "actual_zone_face_maximum_relative_total_conductivity_change": 3e-07,
+    "composition_variant_maximum_relative_change": 2.5e-06,
+    "actual_maximum_uncertainty_bound": 0.00016,
+    "composition_variant_maximum_bound": 0.0023,
+    "derivative_centres": 423,
+    "maximum_scaled_derivative_error": 1e-05,
+    "finite_difference_log_step": 0.0001,
+    "profile_1406K_unchanged": true
+  },
+  "stellar": {
+    "matched_warm_interval_years": 20000000.0,
+    "maximum_relative_global_difference": 0.0,
+    "continuation_years": 2000000000.0,
+    "CPU_seconds": 178.6,
+    "wall_seconds": 61.98,
+    "zone_threads": 8,
+    "Teff_K": 2145
+  },
+  "limitations": [
+    "The radiative uncertainty is an assumed factor, not a measured distribution.",
+    "The continuation is a warm replay of current physics; it does not extend the selected1406K endpoint."
+  ],
+  "evidence": "out/warm-opacity-coverage-sept30-v1 and out/cooling-liquid-replay-sept30-v2"
+}

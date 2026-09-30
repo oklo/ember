@@ -163,7 +163,7 @@ int main(){try{
   // when density grows. The uncertainty check remains local and unchanged.
   ConductiveInteriorOpacity coordinate(bounded,strong,.001,1.,
       ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
-  for(double T:{4.1e5,6e5,1e6})for(double logR:{3.0999,3.1,3.1001,3.25,3.3999,3.4,3.4001,4.}) {
+  for(double T:{4.1e5,6e5,1e6})for(double logR:{2.9999,3.,3.0001,3.125,3.2499,3.25,3.2501,4.}) {
     const double rho=std::pow(10.,logR)*std::pow(T/1e6,3);
     const auto v=coordinate.eval(T,rho,hc);constexpr double h=1e-6;
     auto f=[&](double t,double r){return std::log(coordinate.eval(t,r,hc).kappa);};
@@ -171,9 +171,23 @@ int main(){try{
         "source-coordinate temperature derivative");
     require(std::abs((f(T,rho*std::exp(h))-f(T,rho*std::exp(-h)))/(2*h)-v.dlnk_dlnRho)<2e-6,
         "source-coordinate density derivative");
-    if(logR<=3.1)require(v.kappa==bounded.eval(T,rho,hc).kappa,"supported low log R source changed");
+    if(logR<=3.)require(v.kappa==bounded.eval(T,rho,hc).kappa,"supported low log R source changed");
   }
   require(coordinate.eval(6e5,1002.,hc).kappa>0,"density extension unavailable");
+  // The bridge table is bounded in density, not log R. Trial states crossing
+  // log T=5.7 must finish the join before asking it for rho>10^2.4.
+  struct BridgeEdge final : Opacity {
+    OpacityState eval(double T,double rho,const Composition&) const override {
+      if(T<std::pow(10.,5.7)&&rho>std::pow(10.,2.4))
+        throw std::domain_error("bridge density edge");
+      return {2e4,0,0};
+    }
+    const char* name() const override{return "density-bounded bridge";}
+  } bridge_edge;
+  ConductiveInteriorOpacity safe_bridge(bridge_edge,strong,.001,1.,
+      ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
+  for(double T:{4.8e5,5e5,5.011e5,5.013e5})for(double rho:{240.,251.,260.})
+    require(safe_bridge.eval(T,rho,hc).kappa>0,"overlap exceeded bridge support");
   ConductiveInteriorOpacity coordinate_weak(bounded,weak,.001,1.,
       ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
   rejected=false;try{coordinate_weak.eval(6e5,2000.,hc);}catch(const std::domain_error&){rejected=true;}

@@ -613,7 +613,10 @@ The same bound admits both H-rich and He-rich parts of the conducting layer;
 there is no hydrogen-fraction threshold in this mode. Direct conduction
 remains active below 300 kK, so this option does not return
 to an unsupported radiative table there. Restart identity records
-`hydrogen_density_continuation.logR_overlap.metal_mixtures.v6`.
+`hydrogen_density_continuation.logR_overlap.metal_mixtures.v7`.
+The overlap spans log R = 3.0–3.25, keeping source queries below the bridge
+table's log density = 2.4 limit near log T = 5.7.
+[Source and warm-replay checks](results/warm_opacity_overlap_sept30_v1.json).
 
 The original conduction option retains its metal limit of 1e-8, hydrogen blend over mass fractions
 0.70–0.745, its 700–800 kK upper overlap,
