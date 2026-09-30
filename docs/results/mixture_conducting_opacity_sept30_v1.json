@@ -1,0 +1,47 @@
+{
+  "scope": "Density continuation of radiative opacity in conducting H/He/metal layers. The maximum baryonic metal fraction is 0.16; atomic-composition source anchors impose their own limits. Conduction physics, source anchors and the total-transport uncertainty bound are unchanged.",
+  "opacity": {
+    "query_count": 2064,
+    "derivative_centres": 14,
+    "derivative_max_error": 4.2983955372624225e-07,
+    "transport_differences": {
+      "stellar": 2.2111201758434618e-12,
+      "projection": 0.0,
+      "grid": 0.0
+    },
+    "source_checkpoint_sha256": "0ce34cfce11f5f3baa520b23feb527145337584c1c7d9258457a8b9485ba6b5f",
+    "passed": true
+  },
+  "supported_queries": 2040,
+  "expected_source_refusals": 24,
+  "source_refusal_reason": "Baryonic Z=0.1599 maps beyond the radiative source atomic-metal interval for these 24 grid states. All actual and projected stellar layers pass.",
+  "ionization": {
+    "source_queries": 577,
+    "failed": 0,
+    "maximum_electron_deficit": 0.003782102241977725,
+    "minimum_H_ionized": 0.9999999999999958,
+    "minimum_He_doubly_ionized": 0.999999999964226,
+    "H_He_ionization_supported": true,
+    "source_sha256": "1bfcfc7226449987de1609afb8bb9b7625588457d394fc0038b4baa56ac76c9f"
+  },
+  "stellar_comparison": {
+    "passed": true,
+    "relative_errors": {
+      "radius_Rsun": 6.712302288152681e-10,
+      "Teff_K": 1.0007424667849854e-07,
+      "luminosity_Lsun": 4.016393861501674e-07,
+      "central_T_K": 1.970776097057701e-08,
+      "central_density_g_cm3": 2.2997601152241436e-10,
+      "H_mass_g": 4.558292350774651e-16,
+      "He3_mass_g": 1.8692682523603294e-15,
+      "surface_X": 2.750459669567652e-10
+    },
+    "age_years": 3877033661030.2993,
+    "scope": "Same 142.4 Myr interval and saved state. Only the conducting-opacity metal limit changes to the source composition range; source-anchor coverage and the total-transport uncertainty bound are retained. EOS, atmosphere and numerical settings unchanged."
+  },
+  "limitations": [
+    "The ionization diagnostic supports fully ionized H/He; it does not measure conductivity errors from partial metal ionization.",
+    "No crystallization or phase separation is introduced.",
+    "Cooler projected states are coverage tests, not evolved models."
+  ]
+}

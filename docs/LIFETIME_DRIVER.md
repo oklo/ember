@@ -606,13 +606,14 @@ The density blend spans 180–190 g/cm³. Both source anchors must exist.
 With `conduction_envelope "ionized"`, the upper join follows the source
 coordinate log R = log10(rho) − 3 log10(T/1e6), from 3.1 to 3.4, below the
 source boundary at 3.5. The declared limits are T≥200 kK and rho≤1e5 g/cm³;
-The trace-metal limit is Z≤0.001; source support and the heat-uncertainty
-check further restrict that domain.
-The same bound admits both H-rich and He-rich parts of the low-metal layer;
+The metal limit is Z≤0.16; actual source-anchor coverage and the
+heat-uncertainty check further restrict that domain. The source uses atomic
+mass fractions, so its metal boundary need not coincide with the baryonic one.
+The same bound admits both H-rich and He-rich parts of the conducting layer;
 there is no hydrogen-fraction threshold in this mode. Direct conduction
 remains active below 300 kK, so this option does not return
 to an unsupported radiative table there. Restart identity records
-`hydrogen_density_continuation.logR_overlap.trace_metals.v5`.
+`hydrogen_density_continuation.logR_overlap.metal_mixtures.v6`.
 
 The original conduction option retains its metal limit of 1e-8, hydrogen blend over mass fractions
 0.70–0.745, its 700–800 kK upper overlap,
@@ -620,14 +621,17 @@ The original conduction option retains its metal limit of 1e-8, hydrogen blend o
 where conduction switches off. Missing conduction cannot justify an opacity
 continuation. Its restart identity is `hydrogen_density_continuation.v6`.
 
-The trace-metal extension passes 1001 native opacity queries and thermal and
-composition derivative checks. Independent ionization calculations at 229
-points support treating H and He as fully ionized. A matched 255.1 Myr
-stellar interval changes global quantities by at most 1.895e-7 relative.
-The source opacity anchors, factor-100 radiative-opacity uncertainty and
-0.003 bound on its contribution to total transport are unchanged. These
-checks do not establish a mixture phase diagram or a cooling-age error bound.
-[Trace-metal checks](results/settled_helium_opacity_sept30_v1.json) ·
+The mixture extension supports 2040 of 2064 native opacity queries; the
+remaining 24 correctly fail the source composition limit. Thermal and
+composition derivative checks pass. All current and projected stellar layers
+are supported. In 577 independent ionization calculations, H and He remain
+fully ionized; partial metal ionization produces an electron deficit up to
+0.3782%. Its effect on conductivity remains a physical approximation.
+A matched 142.4 Myr interval changes global stellar quantities by at most
+4.017e-7 relative. The factor-100 radiative-opacity uncertainty and 0.003 bound
+on its contribution to total transport are unchanged. These checks do not
+establish a mixture phase diagram or a cooling-age error bound.
+[Mixture checks](results/mixture_conducting_opacity_sept30_v1.json) ·
 [Lower-temperature overlap](results/hydrogen_opacity_lower_join_sept30_v1.json).
 
 `opacity_conductive_envelope_uncertainty` selects the maximum fractional change
