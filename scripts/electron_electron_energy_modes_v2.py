@@ -17,7 +17,9 @@ class PolynomialBasis:
         if not isinstance(degree,int) or not 2<=degree<=10:
             raise ValueError('polynomial degree 2 through 10 required')
         # Resolve the narrow Fermi surface at larger degeneracy.
-        if points is None:points=384 if eta<=64 else 768 if eta<=256 else 1536
+        if points is None:
+            points=384 if eta<=64 else 768 if eta<=256 else 1536
+            if eta>1024:points=math.ceil(1536*(eta+normalization_tail)/(1024+normalization_tail))
         if not isinstance(points,int) or points<32:raise ValueError("at least 32 normalization points required")
         self.base=energy_basis(eta,statistics=statistics)
         self.degree=degree;self.statistics=statistics
@@ -53,10 +55,13 @@ class PolynomialBasis:
 
     def ion_matrix(self,bthermal,*,points=None,tail=None):
         if not np.isfinite(bthermal) or bthermal<=0:raise ValueError('positive screening required')
-        if points is None:points=512 if self.base.eta<=256 else 1536
-        if not isinstance(points,int) or points<32:raise ValueError('at least 32 ion quadrature points required')
         tail=self.normalization_tail if tail is None else tail
         if not np.isfinite(tail) or not 50<=tail<=120:raise ValueError('controlled ion energy tail required')
+        if points is None:
+            points=512 if self.base.eta<=256 else 1536
+            if self.base.eta>1024:
+                points=math.ceil(1536*(self.base.eta+tail)/(1024+tail))
+        if not isinstance(points,int) or points<32:raise ValueError('at least 32 ion quadrature points required')
         momentum,weight=rule(points,0,math.sqrt(max(self.base.eta,0)+tail))
         x,w=momentum**2,2*momentum*weight
         occupation=(expit(self.base.eta-x)*expit(x-self.base.eta)

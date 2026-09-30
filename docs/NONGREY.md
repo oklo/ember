@@ -260,6 +260,15 @@ recover the expected neutral H2/He particle mass and preserve warmer opacity
 values to within 5.723e-5 in log opacity. This correction does not validate
 finite-metal chemistry, condensates or arbitrary low-temperature coverage.
 
+`prepare_nongrey_sources.py --cold-algebra` avoids overflow in cold LTE
+opacity calculations. Boltzmann factors are combined before exponentiation;
+Planck functions use negative exponents. Molecular-line strength is retained
+for both line selection and wing extent. Matched spectra at 307.7, 1000 and
+8000 K are unchanged in the tested H/He cases; 207 and 221 K cases are finite.
+The 207 K control also passes with invalid-operation and overflow traps.
+This numerical repair adds no opacity process or lower-temperature CIA data.
+[Source checks](results/cold_opacity_algebra_sept30_v1.json).
+
 The earlier `DERT=.001` produces a repeating small correction cycle in a
 3000 K/logg5.15 solar-composition model. Reducing the derivative interval
 to `1e-5` converges the retained structure in three iterations: maximum

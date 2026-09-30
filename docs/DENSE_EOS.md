@@ -235,11 +235,15 @@ energy itself. [Derivative audit](results/eip_phase_derivatives_consistent_v2_au
 
 ## Electron collision sources
 
-The coupled transport table covers electron degeneracy −2 ≤ eta ≤ 1024
-and screening coordinate 0.02–150. At eta > 256 the source generator uses
-1536 points for polynomial normalization and electron–ion integration;
-explicit quadrature settings remain available. Independent normalization,
+The coupled transport table covers electron degeneracy −2 ≤ eta ≤ 2048
+and screening coordinate 0.01–150. At eta > 256 the source generator uses
+1536 points for polynomial normalization and electron–ion integration,
+increasing the count above eta = 1024 to resolve the Fermi surface over the
+larger energy interval. Explicit quadrature settings remain available. Independent normalization,
 source reproduction and native transport checks accompany the
-[table extension](results/electron_pair_eta1024_sept30_v1.json).
+[table extension](results/electron_pair_eta2048_sept30_v1.json).
+The low-order transport response is tested; the highest raw operator moments
+are not converged. A matched 100 Myr stellar interval changes luminosity by
+5.103e-13 relative.
 This extends the same screened Born collision model; it does not add
 strong-correlation or relativistic corrections.

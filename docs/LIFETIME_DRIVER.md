@@ -676,13 +676,15 @@ The corrected density blend changes luminosity by 0.005844% in its separate
 1 Gyr comparison. All energy and time-step checks are unchanged.
 [Numerical checks](results/conductive_envelope_opacity_sept30_v1.json).
 
-In the assessed H-rich cooling envelope, direct ionization and native transport
-checks support `screened_minimum_T_K "130000"`. The parameter only limits
-evaluation; full ionization must be assessed separately. Binary screened
-collisions in the strongly coupled liquid remain a model uncertainty.
-Below this temperature, competing estimates of trace-helium ionization require
-a charge-state or mobility sensitivity calculation before further extension.
-[Domain assessment](results/transport_floor_sept30_v1.json).
+In the assessed H-rich cooling envelope, `screened_minimum_T_K "100000"`
+retains fully stripped transport as a trace-helium approximation. Hydrogen
+remains ionized; the helium charge-state change affects conductivity by about
+1e-4, but may change helium-3 drift by a factor of 8–10, with further mobility
+uncertainty. The affected helium-3 inventory is small: its estimated local
+settling energy is at most 0.14% of the assessed layer's thermal release.
+This supports cooling through the segment, not an accurate trace-helium
+clearing time. The parameter only limits evaluation; ionization and coupling
+must be assessed separately. [Assessment](results/transport_floor100_sept30_v1.json).
 
 At 130–200 kK, the H-rich layer remains ionized in the source EOS. Uncertain
 trace-helium charge contributes less than 0.4% of the electron-scattering

@@ -95,6 +95,8 @@ def main():
     p.add_argument("cache", type=Path)
     p.add_argument("--compiler", default="gfortran")
     p.add_argument("--offline", action="store_true")
+    p.add_argument("--cold-algebra", action="store_true",
+                   help="avoid overflow in cold LTE opacity calculations")
     a = p.parse_args()
     root = a.cache.resolve(); downloads = root / "downloads"
     downloads.mkdir(parents=True, exist_ok=True)
@@ -114,6 +116,10 @@ def main():
         with (SOURCES / (name + "-absent-molecules.patch")).open("rb") as patch:
             run(["patch", "-p1", "--batch"], directory,
                 root / (name + "-absent-molecules-patch.log"), patch)
+    if a.cold_algebra:
+        with (SOURCES / "synspec54-cold-algebra.patch").open("rb") as patch:
+            run(["patch", "-p1", "--batch", "--fuzz=0"], sy,
+                root / "synspec-cold-algebra-patch.log", patch)
     flags = [a.compiler, "-O2", "-g", "-fno-automatic", "-std=legacy", "-fallow-argument-mismatch"]
     run(flags + ["-fcheck=bounds", "-fbacktrace", "-o", "tlusty.exe", "tlusty208.f"], tl / "tlusty", root / "tlusty-build.log")
     run(flags + ["-fcheck=bounds", "-fbacktrace", "-o", "synspec54", "synspec54.f"],
@@ -153,6 +159,9 @@ def main():
         "data_sha256": data_digest(sy / "data"),
         "compiler": subprocess.check_output([a.compiler, "--version"], text=True).splitlines()[0],
     }
+    if a.cold_algebra:
+        receipt["patches"]["synspec54-cold-algebra.patch"] = digest(
+            SOURCES / "synspec54-cold-algebra.patch")
     receipt["executables"] = {name: digest(receipt[name]) for name in ["tlusty", "synspec", "dense_synspec"]}
     (root / "prepared.json").write_text(json.dumps(receipt, indent=2) + "\n")
     print(root / "prepared.json")

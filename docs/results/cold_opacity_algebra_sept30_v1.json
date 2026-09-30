@@ -1,0 +1,117 @@
+{
+  "passed": true,
+  "source_sha256": "bc6060a6677b2ab85fe27549af5c8ced227f0b884161c612c4c662c34c0b5fbd",
+  "executable_sha256": "d7b067ac5f35bcd26136117aadc8cc521af050cfb36b3f8c09a55da992a22441",
+  "patch_sha256": "cbae5cd0e592dacb495fbc79d4bae9e30dc70d4fae5a1808f08f7e03cc98d9f7",
+  "scope": "Overflow-safe LTE algebra; preserves molecular-line strength for both line selection and wing extent. No new opacity process.",
+  "warm_comparisons": [
+    {
+      "X": 0.9955,
+      "T": 307.67766875508426,
+      "maximum_log_opacity_difference": 0.0,
+      "maximum_log_electron_difference": 0.0
+    },
+    {
+      "X": 0.9955,
+      "T": 1000.0,
+      "maximum_log_opacity_difference": 0.0,
+      "maximum_log_electron_difference": 0.0
+    },
+    {
+      "X": 0.9955,
+      "T": 8000.0,
+      "maximum_log_opacity_difference": 0.0,
+      "maximum_log_electron_difference": 0.0
+    },
+    {
+      "X": 0.999999,
+      "T": 307.67766875508426,
+      "maximum_log_opacity_difference": 0.0,
+      "maximum_log_electron_difference": 0.0
+    },
+    {
+      "X": 0.999999,
+      "T": 1000.0,
+      "maximum_log_opacity_difference": 0.0,
+      "maximum_log_electron_difference": 0.0
+    },
+    {
+      "X": 0.999999,
+      "T": 8000.0,
+      "maximum_log_opacity_difference": 0.0,
+      "maximum_log_electron_difference": 0.0
+    }
+  ],
+  "cold_checks": [
+    {
+      "X": 0.9955,
+      "T": 207.0,
+      "shape": [
+        30000,
+        3,
+        1
+      ],
+      "finite": true
+    },
+    {
+      "X": 0.9955,
+      "T": 221.0,
+      "shape": [
+        30000,
+        3,
+        1
+      ],
+      "finite": true
+    },
+    {
+      "X": 0.999999,
+      "T": 207.0,
+      "shape": [
+        30000,
+        3,
+        1
+      ],
+      "finite": true
+    },
+    {
+      "X": 0.999999,
+      "T": 221.0,
+      "shape": [
+        30000,
+        3,
+        1
+      ],
+      "finite": true
+    }
+  ],
+  "floating_point_trap_check": {
+    "status": 0,
+    "CPU_seconds": 8.856899,
+    "shape": [
+      30000,
+      3,
+      1
+    ],
+    "finite": true
+  },
+  "pinned_source_build": {
+    "passed": true,
+    "patch_sha256": "cbae5cd0e592dacb495fbc79d4bae9e30dc70d4fae5a1808f08f7e03cc98d9f7",
+    "scope": "Applies without fuzz after the pinned upstream and public Ember/absent-molecule patches; patched upstream source compiles.",
+    "command": [
+      "gfortran",
+      "-O2",
+      "-fno-automatic",
+      "-std=legacy",
+      "-fallow-argument-mismatch",
+      "-o",
+      "s54_test",
+      "synspec54.f"
+    ]
+  },
+  "limitations": [
+    "Cold H/He gas and the sampled warm controls are tested; not a general NLTE validation.",
+    "Stored single-precision line extent is saturated only beyond the physical frequency grid.",
+    "The CIA input still has a 200 K lower temperature limit."
+  ]
+}

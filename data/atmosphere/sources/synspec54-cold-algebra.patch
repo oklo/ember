@@ -1,0 +1,278 @@
+--- a/synspec/synspec54.f
++++ b/synspec/synspec54.f
+@@ -4604,6 +4604,7 @@
+          HKF=HKT*FR
+          ABF=0.
+          EBF=0.
++         EBFC=0.
+          AFF=0.
+          DO 100 IL=1,NION
+             N0I=NFIRST(IL)
+@@ -4629,9 +4630,17 @@
+                END IF
+                if(sg.le.0.) go to 10
+                ABF=ABF+SG*POPUL(II,ID)
+-               XX=SG*XN*EXP(ENION(II)*TK)*WOP(II,ID)
+-               IF(XX.lt.conts) go to 10
+-               EBF=EBF+XX*CON*G(II)/G(NKE)
++               if(enion(ii)*tk.le.600.) then
++                  XX=SG*XN*EXP(ENION(II)*TK)*WOP(II,ID)
++                  IF(XX.lt.conts) go to 10
++                  EBF=EBF+XX*CON*G(II)/G(NKE)
++               else
++c                 Store this contribution after its Boltzmann factor.
++                  if(sg.le.0.or.xn.le.0.) go to 10
++                  XX=SG*XN*EXP(ENION(II)*TK-HKF)*WOP(II,ID)
++                  IF(XX.lt.conts*EXP(-HKF)) go to 10
++                  EBFC=EBFC+XX*CON*G(II)/G(NKE)
++               end if
+    10       CONTINUE
+ 
+             IT=IFREE(IL)
+@@ -4649,11 +4658,18 @@
+ C           non-explicit, LTE energy levels of the ion IL
+ C
+             HKFM=HKT*MIN(FF(IL),FR)
+-            SF2=EXP(HKFM)
+             IF(IT.NE.2) GO TO 50
+             SG=GFREE(T,FR/CH)
+-            SF2=SF2+SG-UN
+-   50       SFF=SF1*SF2
++   50       if(hkfm.le.600.) then
++               sf2=exp(hkfm)
++               if(it.eq.2) sf2=sf2+sg-un
++               sff=sf1*sf2
++            else
++c              Form the product before exponentiating at low temperature.
++               SFF=0.
++               if(sf1.gt.0.) sff=exp(log(sf1)+hkfm)
++               if(it.eq.2) sff=sff+sf1*(sg-un)
++            end if
+             GO TO 70
+    65       SFF=SFFHMI(XN,FR,T)
+    70       AFF=AFF+SFF
+@@ -4669,9 +4685,9 @@
+          X=EXP(-HKF)
+          X1=UN-X
+          BNE=BNU*X*ANE
+-c        ABSO(IJ)=ABF+ANE*(X1*AFF-X*EBF)+ABAD+ABLY
+-         ABSO(IJ)=ABF+ANE*(X1*AFF-X*EBF)+ABAD
+-         EMIS(IJ)=BNE*(AFF+EBF)+EMAD+EMLY
++c        ABSO(IJ)=ABF+ANE*(X1*AFF-X*EBF-EBFC)+ABAD+ABLY
++         ABSO(IJ)=ABF+ANE*(X1*AFF-X*EBF-EBFC)+ABAD
++         EMIS(IJ)=BNE*(AFF+EBF)+BNU*ANE*EBFC+EMAD+EMLY
+          SCAT(IJ)=SCAD+SCLY+sce
+          IF(IJ.EQ.1) THEN
+          ABLY1=ABLY
+@@ -4836,6 +4852,7 @@
+          HKF=HKT*FR
+          ABF=0.
+          EBF=0.
++         EBFC=0.
+          AFF=0.
+          DO 100 IL=1,NION
+             N0I=NFIRST(IL)
+@@ -4860,9 +4877,17 @@
+                   END IF
+                END IF
+                ABF=ABF+SG*POPUL(II,ID)
+-               XX=SG*XN*EXP(ENION(II)*TK)*WOP(II,ID)
+-               IF(XX.lt.conts) go to 10
+-               EBF=EBF+XX*CON*G(II)/G(NKE)
++               if(enion(ii)*tk.le.600.) then
++                  XX=SG*XN*EXP(ENION(II)*TK)*WOP(II,ID)
++                  IF(XX.lt.conts) go to 10
++                  EBF=EBF+XX*CON*G(II)/G(NKE)
++               else
++c                 Store this contribution after its Boltzmann factor.
++                  if(sg.le.0.or.xn.le.0.) go to 10
++                  XX=SG*XN*EXP(ENION(II)*TK-HKF)*WOP(II,ID)
++                  IF(XX.lt.conts*EXP(-HKF)) go to 10
++                  EBFC=EBFC+XX*CON*G(II)/G(NKE)
++               end if
+    10       CONTINUE
+             IT=IFREE(IL)
+             IF(IT.EQ.0) GO TO 100
+@@ -4879,11 +4904,18 @@
+ C           non-explicit, LTE energy levels of the ion IL
+ C
+             HKFM=HKT*MIN(FF(IL),FR)
+-            SF2=EXP(HKFM)
+             IF(IT.NE.2) GO TO 50
+             SG=GFREE(T,FR/CH)
+-            SF2=SF2+SG-UN
+-   50       SFF=SF1*SF2
++   50       if(hkfm.le.600.) then
++               sf2=exp(hkfm)
++               if(it.eq.2) sf2=sf2+sg-un
++               sff=sf1*sf2
++            else
++c              Form the product before exponentiating at low temperature.
++               SFF=0.
++               if(sf1.gt.0.) sff=exp(log(sf1)+hkfm)
++               if(it.eq.2) sff=sff+sf1*(sg-un)
++            end if
+             GO TO 70
+    65       SFF=SFFHMI(XN,FR,T)
+    70       AFF=AFF+SFF
+@@ -4899,8 +4931,8 @@
+          X=EXP(-HKF)
+          X1=UN-X
+          BNE=BNU*X*ANE
+-         ABSOC(IJ)=ABF+ANE*(X1*AFF-X*EBF)+ANE*SIGE+ABAD+ABLY
+-         EMISC(IJ)=BNE*(AFF+EBF)+EMAD+EMLY
++         ABSOC(IJ)=ABF+ANE*(X1*AFF-X*EBF-EBFC)+ANE*SIGE+ABAD+ABLY
++         EMISC(IJ)=BNE*(AFF+EBF)+BNU*ANE*EBFC+EMAD+EMLY
+          SCATC(IJ)=SCAD+SCLY
+          ABL1(IJ)=ABLY
+          EML1(IJ)=EMLY
+@@ -5586,11 +5618,23 @@
+          JJ=J*J
+          XJJ=UN/JJ
+          ABTRA=PJ(I)*WNHINT(J,ID)
+-         EMTRA=PJ(J)*WNHINT(I,ID)*II*XJJ*EXP(CPJ*(XII-XJJ)*T1)
+-         if(i.le.2.and.j.le.i+2) then
+-            abtra=pj(i)
+-            emtra=pj(j)*wnhint(i,id)/wnhint(j,id)*
+-     *            ii*xjj*exp(cpj*(xii-xjj)*t1)
++c        LTE detailed balance avoids an underflowed population times
++c        an overflowing Boltzmann factor. The net frequency-dependent
++c        stimulated-emission factor is applied at the end of this routine.
++         if(lte.and.cpj*(xii-xjj)*t1.gt.600.) then
++            emtra=abtra
++            if(i.le.2.and.j.le.i+2) then
++               abtra=pj(i)
++               emtra=abtra
++            end if
++         else
++            EMTRA=PJ(J)*WNHINT(I,ID)*II*XJJ*
++     *            EXP(CPJ*(XII-XJJ)*T1)
++            if(i.le.2.and.j.le.i+2) then
++               abtra=pj(i)
++               emtra=pj(j)*wnhint(i,id)/wnhint(j,id)*
++     *               ii*xjj*exp(cpj*(xii-xjj)*t1)
++            end if
+          end if
+          IF(I.LE.4.AND.J.LE.22) ILINE=ILIN0(I,J)
+ c
+@@ -5958,11 +6002,23 @@
+          JJ=J*J
+          XJJ=UN/JJ
+          ABTRA=PJ(I)*WNHINT(J,ID)
+-         EMTRA=PJ(J)*WNHINT(I,ID)*II*XJJ*EXP(CPJ*(XII-XJJ)*T1)
+-         if(i.le.2.and.j.le.i+2) then
+-            abtra=pj(i)
+-            emtra=pj(j)*wnhint(i,id)/wnhint(j,id)*
+-     *            ii*xjj*exp(cpj*(xii-xjj)*t1)
++c        LTE detailed balance avoids an underflowed population times
++c        an overflowing Boltzmann factor. The net frequency-dependent
++c        stimulated-emission factor is applied at the end of this routine.
++         if(lte.and.cpj*(xii-xjj)*t1.gt.600.) then
++            emtra=abtra
++            if(i.le.2.and.j.le.i+2) then
++               abtra=pj(i)
++               emtra=abtra
++            end if
++         else
++            EMTRA=PJ(J)*WNHINT(I,ID)*II*XJJ*
++     *            EXP(CPJ*(XII-XJJ)*T1)
++            if(i.le.2.and.j.le.i+2) then
++               abtra=pj(i)
++               emtra=pj(j)*wnhint(i,id)/wnhint(j,id)*
++     *               ii*xjj*exp(cpj*(xii-xjj)*t1)
++            end if
+          end if
+          IF(I.LE.4.AND.J.LE.22) ILINE=ILIN0(I,J)
+ c
+@@ -9620,10 +9676,9 @@
+       DO ID=1,ND
+          T=TEMP(ID)
+          ANE=ELEC(ID)
+-         EXH=EXP(HKF/T)
+-         EXHK(ID)=UN/EXH
+-         PLAN(ID)=BNU/(EXH-UN)
++         EXHK(ID)=EXP(-HKF/T)
+          STIM(ID)=UN-EXHK(ID)
++         PLAN(ID)=BNU*EXHK(ID)/STIM(ID)
+          if(iath.gt.0) then
+             ANP=POPUL(NKH,ID)
+             AH=DENS(ID)/WMM(ID)/YTOT(ID)-ANP
+@@ -9785,10 +9840,9 @@
+       ID=IDSTD
+       T=TEMP(ID)
+       ANE=ELEC(ID)
+-      EXH=EXP(HKF/T)
+-      EXHK(ID)=UN/EXH
+-      PLAN(ID)=BNU/(EXH-UN)
++      EXHK(ID)=EXP(-HKF/T)
+       STIM(ID)=UN-EXHK(ID)
++      PLAN(ID)=BNU*EXHK(ID)/STIM(ID)
+       DOPA1(IAT,ID)=UN/(XX*DP0*SQRT(DP1*T/AMAS(IAT)+VTURB(ID)))
+       ISERL=ILOWH
+       ISERU=ILOWH
+@@ -10307,9 +10361,9 @@
+          X15=XX*1.E-15
+          BNU=BN*X15*X15*X15
+          HKF=HK*XX
+-         EXH=EXP(HKF/T)
+-         PLANF(IJ)=BNU/(EXH-1.)
+-         STIMU(IJ)=1.-1./EXH
++         EXH=EXP(-HKF/T)
++         STIMU(IJ)=1.-EXH
++         PLANF(IJ)=BNU*EXH/STIMU(IJ)
+       END DO
+       DO I=1,NPHT
+          IF(JPHT(I).LE.0) THEN
+@@ -12351,9 +12405,9 @@
+          X15=XX*1.E-15
+          BNU=BN*X15*X15*X15
+          HKF=HK*XX
+-         EXH=EXP(HKF/T)
+-         PLANF(IJ)=BNU/(EXH-1.)
+-         STIMU(IJ)=1.-1./EXH
++         EXH=EXP(-HKF/T)
++         STIMU(IJ)=1.-EXH
++         PLANF(IJ)=BNU*EXH/STIMU(IJ)
+       END DO
+ C
+       IF(IASV.EQ.0) GOTO 100
+@@ -18244,7 +18298,14 @@
+             ab0=0.
+             if(gx.gt.-30) then
+                dops=dp0*sqrt(tkm*td+vturb(id))
+-               AB0=EXP(gx)*RRMOL(IMOL,ID)/(DOPS*abstdw(ijc,id)*relop)
++c              Keep the strength for both selection and wing extent.
++               if(rrmol(imol,id).gt.0) then
++                  xablog=700.d0
++                  if(abstdw(ijc,id).gt.0.) xablog=
++     *               gx+log(rrmol(imol,id))-log(dops)-
++     *               log(abstdw(ijc,id))-log(relop)
++                  ab0=exp(min(xablog,700.d0))
++               end if
+             end if
+             if(ab0.ge.un) go to 15
+          end do
+@@ -18275,7 +18336,9 @@
+       EX0=AB0*ASTD*10.
+       EXT=EXT0
+       IF(EX0.GT.TEN) EXT=SQRT(EX0)
+-      EXTIN0=EXT*DOPSTD
++c     Saturate only beyond the range of the stored single-precision
++c     width, which already covers the entire physical frequency grid.
++      EXTIN0=MIN(EXT*DOPSTD,0.5D0*DBLE(HUGE(EXTINM(1,1))))
+ C
+ C     store parameters for selected lines
+ C
+@@ -18503,10 +18566,9 @@
+       HKF=HK*XX
+       DO ID=1,ND
+          T=TEMP(ID)
+-         EXH=EXP(HKF/T)
+-         EXHK(ID)=UN/EXH
+-         PLAN(ID)=BNU/(EXH-UN)
++         EXHK(ID)=EXP(-HKF/T)
+          STIM(ID)=UN-EXHK(ID)
++         PLAN(ID)=BNU*EXHK(ID)/STIM(ID)
+          DO IMOL=1,NMOLEC
+             IF(AMMOL(IMOL).GT.0.)
+      *      DOPMOL(IMOL,ID)=UN/(XX*DP0*SQRT(DP1*T/AMMOL(IMOL)+

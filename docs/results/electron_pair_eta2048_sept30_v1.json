@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "table_sha256": "cda673c385c4bab7cb19b75ff47627e960cc209135080b5c4374ee7d68e225ff",
+  "electron_degeneracy_range": [
+    -2,
+    2048
+  ],
+  "screening_coordinate_range": [
+    0.01,
+    150
+  ],
+  "native": {
+    "passed": true,
+    "queries": 3111,
+    "previously_supported": 1879,
+    "recovered": 908,
+    "lost": [],
+    "maximum_relative_conductivity_change": 3.5156055996576896e-05,
+    "remaining_failures_by_provider": {
+      "quantum ion EOS": 3,
+      "HelmholtzTableEos": 37,
+      "cold He base": 284
+    },
+    "current_profile_failures": 0,
+    "scope": "Native thermodynamic, species and heat response of the1075K checkpoint with fixed-density temperature projections. Only collision table changes. Existing EOS and phase limits remain."
+  },
+  "stellar": {
+    "duration_years": 100000000.0,
+    "relative_global_differences": {
+      "radius_Rsun": 4.107825191113079e-15,
+      "Teff_K": 1.2945200467129325e-13,
+      "luminosity_Lsun": 5.102585021177219e-13,
+      "central_T_K": 2.9309887850104133e-13,
+      "central_density_g_cm3": 5.968558980384842e-13,
+      "central_X": 1.8356904885052927e-10,
+      "central_He3": 8.372613713447663e-11,
+      "He3_peak": 4.474198789239381e-13,
+      "He3_mass_g": 2.220446049250313e-16,
+      "H_mass_g": 4.440892098500626e-16,
+      "surface_X": 4.107825191113079e-15,
+      "surface_Z": 1.6773249456036865e-12,
+      "convective_mass_fraction": 0.0
+    }
+  },
+  "limitations": [
+    "Validation applies to the low-order transport response; highest raw collision-operator moments are not converged.",
+    "Same screened Born model; no new strong-correlation or relativistic correction."
+  ]
+}

@@ -27,6 +27,8 @@ independent element velocities. The nuclear network is not full CNO.
    grain physics, cool diffusion, dense-matter thermodynamics
    and conductive transport as the star enters their relevant regimes.
 3. Add helium crystallization, latent heat and strongly quantum mixtures.
+   Resolve individual metal settling and precipitation, including the possible
+   concentration of trace heavy elements in the center.
 4. At sufficiently low luminosity, compare isolation with accretion, tidal encounters
    and conditional dark-matter heating. Treat nucleon decay with an explicit assumed
    lifetime and retain stable baryons as an alternative.

@@ -1,0 +1,25 @@
+{
+  "scope": "Extend the configured screened-transport minimum from130kK to100kK for the current H-rich cooling envelope. Same fully stripped transport equations; trace-helium charge uncertainty retained.",
+  "source_evidence": {
+    "out/transport-floor-sept30-v1/floor100.json": "09b2307568afbb8ea8b1971df017db488bf6d8997662b2a5bc7b8922510041c5",
+    "out/transport-floor-sept30-v1/efield_summary.json": "9527c6a2a06924baa241ad85abbf12ba52c7bd75bcec157703e734b795f9ebd4"
+  },
+  "hydrogen_ionized": true,
+  "relative_conductivity_charge_sensitivity": 0.0001,
+  "trace_helium3_drift_model_ratio": [
+    8,
+    10
+  ],
+  "additional_coupling_model_spread": 2,
+  "trace_He3_mass_Msun": [
+    7e-09,
+    2.1e-08
+  ],
+  "local_settling_energy_erg": [
+    1.9e+38,
+    1.9e+39
+  ],
+  "maximum_local_thermal_release_fraction": 0.0014,
+  "limitation": "Partial helium ionization makes trace-He3 clearing time uncertain; fully stripped diffusion is an approximation. The GMm/R value is an energy scale, not a rigorous bound on sinking to the centre. No accuracy claim for the final trace-He abundance.",
+  "passed": true
+}
