@@ -1,0 +1,25 @@
+{
+  "UTC": "2026-09-30T12:37:17.093827+00:00",
+  "checkpoint": "/Users/greglaughlin/Projects/ember/out/cooling-corrected-colder-sept30-v1/cooling/evolution/final.checkpoint",
+  "checkpoint_sha256": "dee6f2c89fb35f7e24655b4f834e6debd4524db737b7e38790ae7544ee9473c8",
+  "source_sha256": "1bfcfc7226449987de1609afb8bb9b7625588457d394fc0038b4baa56ac76c9f",
+  "source_queries": 136,
+  "failed": 0,
+  "maximum_electron_deficit": 0.0015595213740717817,
+  "minimum_H_ionized": 0.9999999999999961,
+  "minimum_He_doubly_ionized": 0.9999999999999999,
+  "scope": "Ionization diagnostic at the current1524K star and the lower-density helium quantum domain, using the source GS98 metal proxy. H/He ionization is checked separately from the metal electron deficit; partial metal ionization remains an approximation. This diagnostic does not validate conductivity accuracy, liquid phase stability or the source free-energy error.",
+  "H_He_ionization_supported": true,
+  "domain": {
+    "T_min_K": 500000,
+    "rho_min_g_cm3": 1000,
+    "rho_max_g_cm3": 100000,
+    "X_max": 0.05,
+    "Z_max": 0.16,
+    "thetaH_max": 4,
+    "mean_Gamma_max": 100
+  },
+  "free_energy_formula_changed": false,
+  "temperature_and_phase_guards_changed": false,
+  "derivative_test": "Existing full thermal and composition derivative tests extended to rho8500, crossing the former density limit."
+}

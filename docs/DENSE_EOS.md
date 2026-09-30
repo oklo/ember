@@ -59,8 +59,12 @@ used at larger plasma-temperature ratios; its series avoids cancellation
 when the ratio is small.
 
 The assessed range requires number-weighted ionic coupling ≤ 100. Tp,H/T is
-limited to 1, except in a helium-rich core with T ≥ 500 kK, density 1e4–1e5
+limited to 1, except in a helium-rich core with T ≥ 500 kK, density 1e3–1e5
 g/cm³, X ≤ 0.05 and Z ≤ 0.16, where the assessed limit is 4.
+The lower-density helium extension passes 136 direct equilibrium-ionization
+checks: hydrogen and helium remain fully ionized. Partial metal ionization
+produces an electron deficit up to 0.156%; that approximation remains.
+[Ionization checks](results/helium_quantum_domain_sept30_v1.json).
 Common-electron-density linear mixing follows the prescription discussed by
 [Baiko (2022)](https://academic.oup.com/mnras/article/517/3/3962/6712718).
 At the assessed 1786 K model, the quantum term reduces the core heat-capacity

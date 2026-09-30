@@ -41,8 +41,8 @@ int main() {
   check(source_error<2e-8,"pure-ion F/U/P/Cv agree with independent Fortran source",source_error);
   double thermal_error=0,composition_error=0;
   const double h=2e-5;
-  for(double T:{3e6,1.05e6,8e5,5.1e5}) {
-  auto c=mixture(.02,.02,.13);const double rho=4e4;
+  for(double T:{3e6,1.05e6,8e5,5.1e5}) for(double rho:{8500.,4e4}) {
+  auto c=mixture(.02,.02,.13);
   const auto f=ion_quantum_liquid_jets(T,rho,c);
   // Differentiate every available channel with respect to both thermal
   // coordinates, including chemical-potential and Hessian responses.
