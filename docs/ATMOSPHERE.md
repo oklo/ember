@@ -456,3 +456,11 @@ D mass fraction 0.0001. The stellar fuel inventory and nuclear heat are
 unchanged. Unsupported table stencils are rejected. Both source and interior
 EOS envelopes must meet the same bounds on omitted internal heat, work and
 nuclear burning. The selected metal approximation is part of restart identity.
+
+A completed column with small temperature corrections can still fail the
+independent flux check. The solver permits up to two undamped restarts from
+its complete final profile, within the original CPU budget, and repeats all
+source checks. A 1750 K control converges after two such restarts; matching
+pressure agrees with an independent accepted solution to 1.839e-9 relative.
+No failed column is admitted to a table.
+[Recovery check](results/atmosphere_flux_restart_sept30_v1.json).

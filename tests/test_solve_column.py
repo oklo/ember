@@ -160,6 +160,36 @@ class T(unittest.TestCase):
         saved.write_text('20 -4\n1.0\n')
         self.assertFalse(sc.recover_damped_budget(base, att, ND))
 
+    def test_flux_restart_is_bounded_and_rechecks_acceptance(self):
+        sys.path.insert(0, str(SOLVER.parent)); import solve_column as sc
+        for strategy, budget, complete, expected in [('hybrid',100,True,3),
+                ('damped',100,True,3), ('damped',40,True,1), ('damped',100,False,1)]:
+            c = column(tempfile.mkdtemp(dir=self.tmp), [1], [1]); calls=[]
+            saved = structure(ND,4001.) if complete else 'incomplete\n'
+            def fake_run(att, exe, cap, nd, rule):
+                if calls:
+                    self.assertEqual((att/'fort.8').read_text(),saved)
+                    self.assertIn('ORELAX=1', (att/'tas').read_text())
+                calls.append(cap)
+                (att/'fort.7').write_text(saved)
+                (att/'run.log').write_text('FINAL MODEL ATMOSPHERE\n')
+                (att/'fort.9').write_text('')
+                return dict(returncode=0, CPU_seconds=20, wall_seconds=0,
+                            monitor_stop=None, iterations=1, history=[1e-7])
+            args=[str(SOLVER),str(c),'--executable',str(FAKE),'--executable-sha256',SHA,
+                  '--strategy',strategy,'--total-cpu',str(budget)]
+            with mock.patch.object(sys,'argv',args), mock.patch.object(sc,'run',fake_run), \
+                    mock.patch.object(sc,'source_inputs') as inputs, \
+                    mock.patch.object(sc,'source_state',side_effect=ValueError(
+                        'unconverged source: correction=1e-7, flux error=.1')) as state:
+                sc.main()
+            result=json.loads((c/'result.json').read_text())
+            self.assertEqual(len(calls),expected)
+            self.assertEqual(inputs.call_count,expected)
+            self.assertEqual(state.call_count,expected)
+            self.assertFalse(result['accepted'])
+            self.assertLessEqual(result['CPU_seconds'],budget)
+
 
     def test_donor_must_be_accepted(self):
         c = column(self.tmp, [1e-2], [1e-2]); d = donor(tempfile.mkdtemp(dir=self.tmp), accepted=False)

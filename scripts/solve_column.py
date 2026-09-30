@@ -22,6 +22,9 @@ A monitor stop never claims that no solution exists. A column that fails every p
 per-attempt histories, so a different initial guess (continuation) can be tried.
 After a flux failure, one retry may remove isolated temperature spikes from
 the optically thin starting guess. The mesh and acceptance checks stay fixed.
+An otherwise converged, flux-rejected column may also restart up to twice from
+its complete final profile with an undamped Newton step. The same source checks
+and total CPU limit still apply, including when the initial strategy is damped.
 """
 import argparse, gzip, hashlib, json, math, os, re, resource, shutil, signal, subprocess, sys, time
 from pathlib import Path
@@ -239,13 +242,14 @@ def main():
     attempts, total, kind = [], 0.0, ('newton' if args.strategy == 'hybrid' else 'damped')
     budget_exhausted = False
     (col / 'attempts').mkdir()
-    accepted = None; upper_guess_retried = False
-    for phase in range(args.max_phases if args.strategy == 'hybrid' else 1):
+    accepted = None; upper_guess_retried = False; flux_restarts = 0
+    phase_limit = args.max_phases if args.strategy == 'hybrid' else 3
+    for phase in range(phase_limit):
         budget = min(args.attempt_cpu, args.total_cpu - total)
         if budget < 30:
             budget_exhausted = True; break
-        if args.strategy == 'hybrid' and phase == args.max_phases - 1:
-            kind = 'damped'                               # the final phase is always the damped fallback
+        if args.strategy == 'hybrid' and phase == args.max_phases - 1 and not flux_restarts:
+            kind = 'damped'  # Final fallback, except for a requested undamped flux restart.
         att = col / 'attempts' / f'{phase:02d}_{kind}'
         att.mkdir(parents=True, exist_ok=False)
         for f in INPUTS:
@@ -288,6 +292,19 @@ def main():
                                       parent_sha256=sha(att / 'fort.7'))
                 kind = 'newton'
                 continue
+        if (r.get('failure', '').startswith('unconverged source:')
+                and r['returncode'] == 0 and not r['monitor_stop']
+                and r['history'] and r['history'][-1] <= 1e-6):
+            saved = att / 'fort.7'
+            if (flux_restarts < 2 and phase+1 < phase_limit and saved.exists()
+                    and valid_structure(saved.read_text(), nd)):
+                guess = saved.read_text(); flux_restarts += 1; kind = 'newton'
+                r['next_guess'] = dict(method='undamped restart of complete flux-rejected profile; unchanged physics',
+                                      parent_sha256=sha(saved))
+                continue
+            break
+        if args.strategy == 'damped':
+            break  # Extra phases are reserved for flux restarts.
         if (att / 'best.fort.7').exists(): guess = (att / 'best.fort.7').read_text()
         stop = r.get('monitor_stop') or ''
         if kind == 'newton': kind = 'damped'

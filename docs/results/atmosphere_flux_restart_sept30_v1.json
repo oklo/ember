@@ -1,0 +1,85 @@
+{
+  "scope": "Bounded undamped restarts of a completed TLUSTY profile rejected by the independent flux check. The saved profile is an initial guess only; source, flux, hydrostatic and EOS checks are repeated.",
+  "passed": true,
+  "source": {
+    "Teff_K": 1750,
+    "hydrogen": 0.98,
+    "log_g": 6.5,
+    "depths": 186,
+    "executable_sha256": "8bc98c58474229f9419d8d6486bfcc1faae34ee78db515ed8778e7bca60b4843"
+  },
+  "solver_sha256": "ad1d02ad1b58a6f29390cb390e3c7a056542e3bb0a4b6f9e8c2a3ef3ab6054d5",
+  "total_CPU_seconds": 168.486893,
+  "attempts": [
+    {
+      "CPU_seconds": 156.33313800000002,
+      "iterations": 45,
+      "kind": "damped",
+      "ORELAX": 0.3,
+      "accepted": false,
+      "failure": "unconverged source: correction=8.19e-07, flux error=0.293357"
+    },
+    {
+      "CPU_seconds": 6.150174,
+      "iterations": 1,
+      "kind": "newton",
+      "ORELAX": 1.0,
+      "accepted": false,
+      "failure": "unconverged source: correction=9.47e-07, flux error=0.0118054"
+    },
+    {
+      "CPU_seconds": 6.0035810000000005,
+      "iterations": 1,
+      "kind": "newton",
+      "ORELAX": 1.0,
+      "accepted": true
+    }
+  ],
+  "diagnostics": {
+    "T": 3837.599478897399,
+    "Pgas": 15561469586.777405,
+    "source_density": 0.06845422414345953,
+    "column_mass": 4920.967740758786,
+    "flux_error": 6.646350174499549e-05,
+    "correction": 2.64e-07,
+    "effective_flux_error": 0.00020793690206200033,
+    "hydrostatic_error": 2.0783896248488531e-07,
+    "chemical_density_error": 2.220446049250313e-16,
+    "iterations": 1,
+    "depths": 186,
+    "tau_bracket": [
+      77.76169893701285,
+      104.3773458522281
+    ],
+    "optical_depth_range": [
+      8.477729745501892e-10,
+      360.3136294534291
+    ],
+    "column_mass_range": [
+      0.0007854719000000001,
+      7044.486999999995
+    ],
+    "temperature_range": [
+      601.2213661319371,
+      4089.043450267322
+    ],
+    "density_range": [
+      9.960955063879236e-08,
+      0.08503080035049304
+    ]
+  },
+  "relative_difference_from_independent_accepted_source": {
+    "T": 2.0253132504421956e-10,
+    "Pgas": -1.8389093581205884e-09,
+    "source_density": -1.489454337644247e-09
+  },
+  "constraints": [
+    "At most two flux restarts, within the existing total CPU budget.",
+    "Requires successful source-process exit, no monitor stop, small last correction and a complete physical profile.",
+    "All acceptance checks are unchanged. A later flux failure remains rejected."
+  ],
+  "unit_tests": {
+    "suite": "test_solve_column.py",
+    "passed": 17
+  }
+}
