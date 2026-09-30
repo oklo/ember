@@ -318,6 +318,11 @@ It is a self-contained input, checked by content; the loader does not trust
 modification times or silently substitute a cache. Keep the original source
 manifest and provenance for regeneration. An existing output is never overwritten.
 
+`eos_cold_helium "liquid_mixture"` selects the optional dense-liquid replacement
+described in [Dense EOS](DENSE_EOS.md#cold-liquid-mixture). It requires
+`eos_ion_quantum "liquid_bc22"` and enters restart identity. Its stellar cooling
+replay is still under validation; crystallization is not included.
+
 The optional `eos_low_metal_interpolation "quadratic"` uses the first three
 metal planes below the first nonzero metal node. Between the first and second
 nonzero nodes, a quintic weight returns to the cubic interpolant with continuous
@@ -544,7 +549,10 @@ radiative opacity for arbitrary pure-hydrogen layers. See the
 for dense, nearly metal-free hydrogen envelopes. It replaces the low-temperature
 source smoothly over log R = 5.6–5.9, where R = rho/(T/10^6)^3. Temperature
 joins span 3000–3500 K and 16000–20000 K; composition joins limit its use to
-hydrogen-rich mixtures with Z below 1e-10. Source temperature, density and
+hydrogen-rich mixtures with Z below 1e-10. Below 3500 K, an additional density
+join over log R = 5.90–5.98 completes the change before the original source's
+log R = 6 edge. Dense states below the computed source's 3000 K floor remain
+unsupported. Source temperature, density and
 composition bounds remain enforced. The integer-mass source convention is
 converted explicitly, with derivatives that preserve extinction per length.
 

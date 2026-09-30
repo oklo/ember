@@ -114,8 +114,11 @@ std::array<HelmholtzJet,10> cold_join(double T,double rho,const Composition& c,s
 }
 
 VariableMetalHelmholtzEos::VariableMetalHelmholtzEos(const std::filesystem::path& path,
-    HelmholtzTableEos::Mixture mixture,LowMetalInterpolation low_metals,const std::filesystem::path& cold_potential,bool quantum_ions)
-    :low_metal_interpolation_(low_metals),quantum_ions_(quantum_ions) {
+    HelmholtzTableEos::Mixture mixture,LowMetalInterpolation low_metals,const std::filesystem::path& cold_potential,bool quantum_ions,
+    std::optional<ColdHeliumOptions> cold_helium)
+    :low_metal_interpolation_(low_metals),quantum_ions_(quantum_ions),cold_helium_(cold_helium) {
+  if(cold_helium_ && (!quantum_ions || !cold_potential.empty()))
+    throw std::invalid_argument("variable EOS: cold liquid join requires quantum ions and no cold additive potential");
   if(!cold_potential.empty())cold_=std::make_unique<AdditiveVolumePotential>(cold_potential);
   if(low_metals!=LowMetalInterpolation::cubic && low_metals!=LowMetalInterpolation::quadratic)
     throw std::invalid_argument("variable EOS: unknown low-metal interpolation");
@@ -318,6 +321,15 @@ std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::jets(double T,double rho,
         && std::bit_cast<FractionBits>(entry.composition.X)==bits
         && std::bit_cast<std::uint64_t>(entry.T)==std::bit_cast<std::uint64_t>(T)
         && std::bit_cast<std::uint64_t>(entry.rho)==std::bit_cast<std::uint64_t>(rho))return entry.value;
+  const auto result=cold_helium_?cold_helium_joined_jets(
+      [this](double t,double r,const Composition& x,std::size_t n){return source_jets(t,r,x,n);},
+      T,rho,c,channels,*cold_helium_):source_jets(T,rho,c,channels);
+  auto& entry=cache.entries[bank][cache.next[bank]];
+  cache.next[bank]=(cache.next[bank]+1)%cache.entries[bank].size();
+  entry={true,channels,T,rho,c,result};
+  return result;
+}
+std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::source_jets(double T,double rho,const Composition& c,std::size_t channels) const {
   const double cold_fraction=cold_?cold_weight(T,rho):0;
   // Validate the original composition contract even where the original
   // thermal source is not evaluated.
@@ -333,15 +345,26 @@ std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::jets(double T,double rho,
         result[k][i][j]+=correction[k][i][j];
     }
   }
-  auto& entry=cache.entries[bank][cache.next[bank]];
-  cache.next[bank]=(cache.next[bank]+1)%cache.entries[bank].size();
-  entry={true,channels,T,rho,c,result};
   return result;
 }
 void VariableMetalHelmholtzEos::validate_composition_domain(double T,double rho,const Composition& c) const {
   if(!(std::isfinite(T) && T>0 && std::isfinite(rho) && rho>0))
     throw std::domain_error("variable EOS: invalid reuse state");
   if(cold_ && cold_weight(T,rho)>0){(void)helmholtz_response(T,rho,jets(T,rho,c,10)[0]);return;}
+  // Cold He join: the base limits, and source support wherever the join reads the table (both anchors, and T
+  // itself while the weight is fractional), without building the potential.
+  if(cold_helium_) {
+    const double w=cold_helium_join_weight(T,c,*cold_helium_);
+    if(w>0) {
+      cold_helium_validate(T,rho,c,*cold_helium_);
+      validate_source_domain(cold_helium_->join_cold,rho,c);validate_source_domain(cold_helium_->join_hot,rho,c);
+      if(w<1)validate_source_domain(T,rho,c);
+      return;
+    }
+  }
+  validate_source_domain(T,rho,c);
+}
+void VariableMetalHelmholtzEos::validate_source_domain(double T,double rho,const Composition& c) const {
   if(quantum_ions_)(void)ion_quantum_liquid_jets(T,rho,c,1);
   const auto w=weights(c,10);
   const double t=std::log(T),q=std::log(rho)-1.5*(t-6*std::log(10.));
@@ -366,6 +389,17 @@ std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_near(d
 }
 std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_impl(double T,const Composition& c,std::optional<double> rho) const {
   const auto w=weights(c,1);DensityRange result{0,std::numeric_limits<double>::infinity()};
+  // In the cold He join the table is needed at both anchors, and at T only where the join weight is fractional.
+  if(cold_helium_ && cold_helium_join_weight(T,c,*cold_helium_)>0) {
+    std::vector<double> temperatures{cold_helium_->join_cold,cold_helium_->join_hot};
+    if(cold_helium_join_weight(T,c,*cold_helium_)<1)temperatures.push_back(T);
+    result.min=cold_helium_->minimum_density;
+    for(const double t:temperatures)for(std::size_t i=0;i<w.count;++i){
+      const auto r=rho?w.tables[i].table->material_density_range_near(t,*rho):w.tables[i].table->material_density_range(t);
+      result.min=std::max(result.min,r.min);result.max=std::min(result.max,r.max);}
+    if(result.min>=result.max)throw std::domain_error("variable EOS: empty cold He join density overlap");
+    return result;
+  }
   for(std::size_t i=0;i<w.count;++i){const auto r=rho?w.tables[i].table->material_density_range_near(T,*rho):w.tables[i].table->material_density_range(T);result.min=std::max(result.min,r.min);result.max=std::min(result.max,r.max);}
   if(cold_ && T<cold_zero_temperature && result.max>cold_density_start){
     if(T<cold_->minimum_temperature()||c.Z()>.04)result.max=cold_density_start;

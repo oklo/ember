@@ -11,4 +11,9 @@ namespace ember {
 // No electron quantum, radiation, screening, or classical ion term is added.
 std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
     double T,double rho,const Composition&,std::size_t channels=10);
+namespace detail {
+// The same correction for one pure species (unit mass fraction), F/T per mass, at ln T and ln n_e,
+// without domain guards (callers apply their own). Used by the cold He liquid mixture.
+HelmholtzJet bc22_liquid_quantum_per_mass(double logT,double logne,double A,double Z);
+}
 } // namespace ember

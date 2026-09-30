@@ -71,6 +71,9 @@ HelmholtzJet per_mass(double logT,double logne,double A,double Z) {
   return out;
 }
 }
+HelmholtzJet detail::bc22_liquid_quantum_per_mass(double logT,double logne,double A,double Z) {
+  return per_mass(logT,logne,A,Z);
+}
 std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
     double T,double rho,const Composition& c,std::size_t channels) {
   if(!(std::isfinite(T)&&T>0&&std::isfinite(rho)&&rho>0) ||
@@ -92,13 +95,16 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
       c.X[0]>=.97 && c.Z()<=1e-8 && c.X[1]<=.5*(c.X[1]+c.X[2]);
   const bool cool_hydrogen=T>=5e4 && rho>=10 && (rho<=200 || (T>=2e5 && rho<=500)) && thetaH<=.7 &&
       c.X[0]>=.98 && c.Z()<=1e-8 && c.X[1]<=.5*(c.X[1]+c.X[2]);
+  const bool cold_hydrogen=T>=4.5e4 && rho>=10 && (rho<=250 || (T>=2e5 && rho<=900)) && thetaH<=.85 &&
+      c.X[0]>=.99 && c.Z()<=1e-8 && c.X[1]<=.6*(c.X[1]+c.X[2]);
   // The liquid mixture does not determine metal separation or freezing;
   // the mean-coupling guard below is not a mixture phase boundary.
   const bool assessed_core=T>=5e5 && rho>=1e3 && rho<=1e5 && c.X[0]<=.05 && c.Z()<=.16;
   // Cooler, nearly pure helium layers remain pressure ionized in direct
   // source checks. This does not extend the metal-rich core's phase range.
   const bool cool_helium=T>=4e5 && rho>=1e3 && rho<=1e5 && c.X[0]<=.01 && c.Z()<=1e-3;
-  if(thetaH>((assessed_core || cool_helium)?4.:1.) || (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen)) {
+  if(thetaH>((assessed_core || cool_helium)?4.:1.) ||
+      (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen && !cold_hydrogen)) {
     std::ostringstream message;
     message << std::setprecision(4) << "quantum ion EOS: outside assessed ionization/quantum range"
       << " (T=" << T << ", rho=" << rho << ", X=" << c.X[0]

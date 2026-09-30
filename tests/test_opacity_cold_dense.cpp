@@ -53,7 +53,7 @@ int main()try {
       near(a.dlnk_dZ,(ln(T,rho,comp(X,Z+hz))-ln(T,rho,comp(X,Z-hz)))/(2*hz),"metal join derivative");
     }
   }
-  for(auto [T,rho,X,Z]:{std::array{2500.,.1,.99,0.},std::array{15000.,.1,.99,0.},
+  for(auto [T,rho,X,Z]:{std::array{2500.,.004,.99,0.},std::array{15000.,.1,.99,0.},
       std::array{6000.,.01,.99,0.},std::array{6000.,.5,.7,.02}}) {
     auto c=comp(X,Z);const auto a=joined.eval(T,rho,c),b=original.eval(T,rho,c);
     check(a.kappa==b.kappa && a.dlnk_dlnT==b.dlnk_dlnT && a.dlnk_dX==b.dlnk_dX,"inactive source changed");
@@ -85,6 +85,22 @@ int main()try {
     near(v.dlnk_dlnT,(f(T*std::exp(h),rho)-f(T*std::exp(-h),rho))/(2*h),"warm overlap T derivative");
     near(v.dlnk_dlnRho,(f(T,rho*std::exp(h))-f(T,rho*std::exp(-h)))/(2*h),"warm overlap density derivative");
   }
+  // Below 3500 K the original ends at log R = 6 while cool envelopes reach 6.4: the density join must reach
+  // the computed source before that edge at every T >= 3000 K (with smooth derivatives through it).
+  for(double T:{3001.,3200.,3480.,3499.}) {
+    const double rho=std::pow(10.,6.4+3*(std::log10(T)-6));
+    check(warm.eval(T,rho,c).kappa>0,"cool dense-gas coverage gap");
+  }
+  for(double T:{3100.,3300.})for(double R:{5.91,5.94,5.97}) {
+    const double rho=std::pow(10.,R+3*(std::log10(T)-6)),h=1e-6;
+    auto f=[&](double t,double r){return std::log(warm.eval(t,r,c).kappa);};
+    const auto v=warm.eval(T,rho,c);
+    near(v.dlnk_dlnT,(f(T*std::exp(h),rho)-f(T*std::exp(-h),rho))/(2*h),"cool overlap T derivative");
+    near(v.dlnk_dlnRho,(f(T,rho*std::exp(h))-f(T,rho*std::exp(-h)))/(2*h),"cool overlap density derivative");
+  }
+  bool corner_rejected=false;   // neither source covers T < 3000 K beyond log R 5.98
+  try{warm.eval(2900.,std::pow(10.,6.4+3*(std::log10(2900.)-6)),c);}catch(const std::domain_error&){corner_rejected=true;}
+  check(corner_rejected,"unsupported cool corner accepted");
   bool overlap_rejected=false;
   try{warm.eval(18000.,7.,c);}catch(const std::domain_error&){overlap_rejected=true;}
   check(overlap_rejected,"warm overlap skipped unsupported original source");

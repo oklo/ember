@@ -1,0 +1,74 @@
+{
+  "scope": "Bounded quantum liquid-ion extension in a pressure-ionized H-rich envelope; equations unchanged.",
+  "domain": {
+    "minimum_X": 0.99,
+    "minimum_T_K": 45000,
+    "minimum_density": 10,
+    "maximum_density_below_200kK": 250,
+    "maximum_density_above_200kK": 900,
+    "maximum_TpH_over_T": 0.85,
+    "maximum_He3_fraction_of_helium": 0.6,
+    "maximum_Z": 1e-08
+  },
+  "native_validation": {
+    "passed": true,
+    "counts": {
+      "1.0": {
+        "queries": 122,
+        "before_failures": 0,
+        "after_failures": 0
+      },
+      "0.95": {
+        "queries": 122,
+        "before_failures": 0,
+        "after_failures": 0
+      },
+      "0.9": {
+        "queries": 122,
+        "before_failures": 13,
+        "after_failures": 0
+      },
+      "0.8": {
+        "queries": 122,
+        "before_failures": 53,
+        "after_failures": 0
+      },
+      "0.775": {
+        "queries": 122,
+        "before_failures": 69,
+        "after_failures": 0
+      },
+      "0.75": {
+        "queries": 122,
+        "before_failures": 78,
+        "after_failures": 18
+      }
+    },
+    "old_supported_density_results_unchanged": true,
+    "max_density_inversion_error": 0
+  },
+  "physical_controls": {
+    "source": "FreeEOS 3.0.0, options 3 223 -2, equilibrium H/He ionization; unchanged BC22 quantum free energy",
+    "maximum_quantum_Cv_ionization_sensitivity_over_ion_Cv_X099": 0.0115,
+    "maximum_quantum_Cv_ionization_sensitivity_over_ion_Cv_X09963": 0.0033,
+    "maximum_existing_interval_sensitivity_X098": 0.0078,
+    "helium3_controls": 360,
+    "helium3_source_failures": 0,
+    "maximum_helium3_control_ionization_sensitivity": 2.1e-09
+  },
+  "stellar_projection": {
+    "failures": 53,
+    "mass_Msun": 0.0008722260270710647,
+    "Cv_share": 0.025438364228648095,
+    "quantum_effect_on_stellar_Cv": -0.000473322406976736,
+    "ionization_sensitivity_of_stellar_Cv": 5.805933024826832e-07,
+    "max_dgrad_ad": 0.002407070000000011,
+    "max_dP": 0.001606572785262994,
+    "unevaluable": 0
+  },
+  "limitations": [
+    "Common-electron-density linear mixing beyond the leading quantum limit is an approximation.",
+    "The .75-temperature projection retains source-table masks and quantum-domain exclusions.",
+    "No crystallization or latent heat is supplied."
+  ]
+}

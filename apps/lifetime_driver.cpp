@@ -98,6 +98,15 @@ int lifetime_main(int argc,char** argv) {
     const auto ion_quantum=cfg.values.contains("eos_ion_quantum")?cfg.get("eos_ion_quantum"):"none";
     if(ion_quantum!="none" && ion_quantum!="liquid_bc22")
       throw std::invalid_argument("unknown quantum-ion EOS selection");
+    // Optional cold dense-He liquid-mixture join below 8e5 K (He-dominated material only; no phase change).
+    const auto cold_helium=cfg.values.contains("eos_cold_helium")?cfg.get("eos_cold_helium"):"none";
+    if(cold_helium!="none" && cold_helium!="liquid_mixture")
+      throw std::invalid_argument("unknown cold helium EOS selection");
+    std::optional<ColdHeliumOptions> cold_helium_options;
+    if(cold_helium=="liquid_mixture") {
+      if(ion_quantum!="liquid_bc22")throw std::invalid_argument("eos_cold_helium requires eos_ion_quantum liquid_bc22");
+      cold_helium_options=ColdHeliumOptions{};
+    }
     fs::path cold_eos_path;
     if(cfg.values.contains("eos_cold_potential"))cold_eos_path=path("eos_cold_potential");
     const auto conduction_path=path("conduction"),atmosphere_path=path("atmosphere"),collision_path=path("collisions"),composition_path=path("composition");
@@ -302,7 +311,7 @@ int lifetime_main(int argc,char** argv) {
     identity.values["opacity.composition_extension"]=opacity_extension?"hydrogen_share.linear_Z.source_log_X.v1":"none";
     if(!cold_opacity_path.empty()) {
       identity.file("opacity.cold_dense.table",cold_opacity_path);
-      identity.values["opacity.cold_dense"]="computed_baryonic_gas.C2_logR_T_trace_Z.warm20k.v2";
+      identity.values["opacity.cold_dense"]="computed_baryonic_gas.C2_logR_T_trace_Z.density_complete.v3";
       identity.number("opacity.cold_dense_scale",cold_opacity_scale);
     }
     if(envelope_opacity==1) {
@@ -382,7 +391,8 @@ int lifetime_main(int argc,char** argv) {
       if(value>0)identity.number("solver."+key,value);
     identity.family("eos",eos_path,true);
     if(ion_quantum=="liquid_bc22")
-      identity.values["eos.ion_quantum"]="bc22.liquid.common_ne.linear_mixture.full_expression.v7";
+      identity.values["eos.ion_quantum"]="bc22.liquid.common_ne.linear_mixture.full_expression.v8";
+    if(cold_helium_options)identity.values["eos.cold_helium"]=VariableMetalHelmholtzEos::cold_helium_identifier;
     if(low_metal_interpolation=="quadratic")
       identity.values["eos.low_metal_interpolation"]="quadratic.C2_to_cubic.v1";
     if(!cold_eos_path.empty()){
@@ -424,7 +434,7 @@ int lifetime_main(int argc,char** argv) {
     VariableMetalHelmholtzEos table_eos(eos_path,HelmholtzTableEos::Mixture::allow_documented_proxy,
         low_metal_interpolation=="quadratic"?VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic
                                             :VariableMetalHelmholtzEos::LowMetalInterpolation::cubic,
-        cold_eos_path,ion_quantum=="liquid_bc22");
+        cold_eos_path,ion_quantum=="liquid_bc22",cold_helium_options);
     DeuteriumApproxEos eos(table_eos);
     const RadiativeOpacity::Tables opacity_tables{low_path,warm_path,bridge_path,hot_path,
         cold_opacity_path,cold_opacity_scale};

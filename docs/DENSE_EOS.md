@@ -90,8 +90,8 @@ comparisons measure sensitivity, not a proved mixture error bound or cooling-age
 error. The liquid treatment does not determine whether concentrated metals
 separate or freeze before the helium. The mean-coupling guard is not a mixture
 phase diagram. [Source, derivative and core checks](results/quantum_liquid_full_sept30_v1.json).
-Below 300 kK, Tp,H/T must be ≤ 0.1 except in two H-rich intervals, both requiring
-Z ≤ 1e-8 and He3 at most half the helium:
+Below 300 kK, Tp,H/T must be ≤ 0.1 except in the H-rich intervals below.
+All require Z ≤ 1e-8; He3 is limited to half the helium unless stated otherwise:
 
 - T ≥ 200 kK, density 50–150 g/cm³ and X ≥ 0.97. Equilibrium-ionization checks
   give an electron deficit below 2.785e-5.
@@ -113,6 +113,17 @@ Z ≤ 1e-8 and He3 at most half the helium:
   differencing floor. The colder layers retain the 200 g/cm³ limit.
   [Dense-envelope controls](results/cold_transport_domain_sept30_v1.json).
 
+- T ≥ 45 kK, density 10–250 g/cm³ (up to 900 above 200 kK), X ≥ 0.99,
+  Tp,H/T ≤ 0.85 and He3 at most 60% of the helium. Direct ionization controls
+  support the hydrogen-rich cooling layers. Trace-helium pressure ionization
+  makes the fully ionized quantum correction uncertain by up to 1.15% of
+  classical ion Cv at X = 0.99; the corresponding stellar-integrated sensitivity
+  in the tested cooler profile is 5.806e-7 of total Cv. This is a model comparison,
+  not a rigorous uncertainty bound. Denser sampling also finds peaks of 0.78%
+  in the X = 0.98 interval above. Neither interval supplies an ionization model
+  for the underlying classical EOS.
+  [Cold-envelope controls](results/quantum_cold_envelope_sept30_v1.json).
+
 Outside those intervals, the smaller quantum-ratio limit bounds the ideal-ion
 heat correction to 0.05556%. The potential is never tapered at a boundary;
 unsupported states are rejected. This remains a perturbative liquid-ion
@@ -123,6 +134,32 @@ within 6.104e-11; finite differences check thermal and composition derivatives.
 A 150 Myr cooling comparison changes luminosity by 0.05775% without changing
 the convective extent. Its stellar use with the integrated envelope remains
 local. [Component and evolution checks](results/quantum_liquid_sept28_v1.json).
+
+## Cold liquid mixture
+
+`eos_cold_helium "liquid_mixture"` optionally replaces the dense, helium-rich
+material free energy below 800 kK. It combines degenerate electrons through
+the Sommerfeld T² term, classical Coulomb ions, electron polarization and
+exchange-correlation from [Potekhin & Chabrier (2013), appendices A–C](https://arxiv.org/abs/1212.3405),
+and the existing Baiko–Chugunov quantum correction. Radiation and ideal mixing
+are included once by the surrounding EOS. This is a liquid approximation;
+it does not select crystallization or latent heat.
+
+The temperature join spans 500–800 kK; the hydrogen join spans X = 0.01–0.05.
+An alignment term `a(rho, composition) + b(rho, composition)/T` matches the
+two source potentials at both temperature anchors. Its density and composition
+dependence carries model differences below the join, including differences
+in chemical forces. The cold heat capacity is retained. All resulting thermal
+and composition derivatives enter transport and energy accounting.
+
+The model requires density ≥ 1000 g/cm³, Z ≤ 0.16, number-weighted coupling
+≤ 100, kT/E_F ≤ 0.05 and Tp,H/T ≤ 4. The helium quantum fit requires
+500 ≤ R_S ≤ 1.2e5 and Tp,He/T ≤ 30. Trace-proton quantum terms use the same
+linear-mixture approximation as the warmer EOS; comparison with leading-order
+terms measures sensitivity, not a rigorous error bound. Tests cover source
+responses, derivatives, join continuity and unchanged warm states. A replay from an unchanged warm model has cooled smoothly to 1550 K. At the
+same age, interpolation of the comparison history gives a luminosity difference
+of 0.1799%; this is an initial cooling comparison, not a final cooling-age test.
 
 ## Independent source derivative checks
 

@@ -1,6 +1,8 @@
 #pragma once
 #include "ember/eos_helmholtz.hpp"
 #include "ember/eos_additive_volume.hpp"
+#include "ember/cold_helium_base.hpp"
+#include <optional>
 #include <memory>
 
 namespace ember {
@@ -38,7 +40,14 @@ class VariableMetalHelmholtzEos final : public Eos {
   explicit VariableMetalHelmholtzEos(const std::filesystem::path&,
       HelmholtzTableEos::Mixture=HelmholtzTableEos::Mixture::exact,
       LowMetalInterpolation=LowMetalInterpolation::cubic,
-      const std::filesystem::path& cold_potential={},bool quantum_ions=false);
+      const std::filesystem::path& cold_potential={},bool quantum_ions=false,
+      std::optional<ColdHeliumOptions> cold_helium={});
+  // Optional cold dense-He liquid-mixture join (cold_helium_base.hpp), applied to the material potential
+  // itself so that eval, composition forces, transported enthalpies and domain checks share it. It requires
+  // quantum_ions (the base carries the same Baiko-Chugunov term, so it is present exactly once on each side),
+  // is exclusive with cold_potential, and never replaces a failed source query below its window.
+  static constexpr const char* cold_helium_identifier=
+      "cold_helium.liquid_mixture.full_anchor.bc22_linear.X_join.v1";
   // Convert a text family and its planes to one relocatable binary input.
   // Stored doubles, masks and logarithmic coordinates remain bit-identical.
   static void pack_binary(const std::filesystem::path& source,const std::filesystem::path& destination);
@@ -57,9 +66,15 @@ class VariableMetalHelmholtzEos final : public Eos {
   // Source support for all composition derivative channels, without
   // evaluating the free-energy polynomial (used by optional response reuse).
   void validate_composition_domain(double T,double rho,const Composition&) const;
+  // Material F/T jets (radiation excluded) of the same potential used by eval(); exposed so that an
+  // external component can be joined to this table at the potential level.
+  std::array<HelmholtzJet,10> material_jets(double T,double rho,const Composition& c,std::size_t channels) const {
+    return jets(T,rho,c,channels);
+  }
   std::optional<DensityRange> density_range(double,const Composition&) const override;
   std::optional<DensityRange> density_range_near(double,const Composition&,double) const override;
-  const char* name() const override {return cold_?
+  const char* name() const override {return cold_helium_?
+      "FreeEOS variable GS98 metals with cold dense-He liquid-mixture join":cold_?
       "FreeEOS with cold additive-volume H/He potential; cold metal helium proxy":
       "FreeEOS variable GS98 metals, H and helium-isotope potential";}
  private:
@@ -68,6 +83,8 @@ class VariableMetalHelmholtzEos final : public Eos {
   Weights weights(const Composition&,std::size_t channels) const;
   std::optional<DensityRange> density_range_impl(double,const Composition&,std::optional<double>) const;
   std::array<HelmholtzJet,10> jets(double,double,const Composition&,std::size_t) const;
+  std::array<HelmholtzJet,10> source_jets(double,double,const Composition&,std::size_t) const;
+  void validate_source_domain(double,double,const Composition&) const;
   std::size_t index(std::size_t z,std::size_t u,std::size_t v) const {
     return (z*u_.size()+u)*v_.size()+v;
   }
@@ -79,6 +96,7 @@ class VariableMetalHelmholtzEos final : public Eos {
   // actual species inventories and analytic metal mixing entropy are retained.
   std::unique_ptr<AdditiveVolumePotential> cold_;
   bool quantum_ions_{};
+  std::optional<ColdHeliumOptions> cold_helium_;
   // Five source weights, each polynomial in the interval coordinate.
   using MetalExtension=std::array<std::array<double,6>,5>;
   std::vector<MetalExtension> metal_extensions_;

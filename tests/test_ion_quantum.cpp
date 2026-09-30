@@ -113,7 +113,7 @@ int main() {
   refused=false;try{(void)ion_quantum_liquid_jets(100000,9,dense_h);}
   catch(const std::domain_error&){refused=true;}
   check(refused,"cool hydrogen retains its assessed density boundary");
-  refused=false;try{(void)ion_quantum_liquid_jets(49999,10,dense_h);}
+  refused=false;try{(void)ion_quantum_liquid_jets(49999,10,envelope_h);}
   catch(const std::domain_error&){refused=true;}
   check(refused,"cool hydrogen retains its assessed temperature boundary");
   const auto colder=ion_quantum_liquid_jets(86000,23.6,envelope_h,1)[0];
@@ -128,15 +128,39 @@ int main() {
   const auto warm_dense_m=ion_quantum_liquid_jets(250000*std::exp(-h),350,dense_h,1)[0];
   check(warm_dense[0][0]>0 && std::abs((warm_dense_p[0][0]-warm_dense_m[0][0])/(2*h)/warm_dense[1][0]-1)<2e-7,
         "denser pressure-ionized hydrogen retains the free-energy derivative");
-  refused=false;try{(void)ion_quantum_liquid_jets(299000,501,dense_h);}
+  refused=false;try{(void)ion_quantum_liquid_jets(299000,501,envelope_h);}
   catch(const std::domain_error&){refused=true;}
   check(refused,"cooling hydrogen retains its upper density boundary");
-  refused=false;try{(void)ion_quantum_liquid_jets(199999,201,dense_h);}
+  refused=false;try{(void)ion_quantum_liquid_jets(199999,201,envelope_h);}
   catch(const std::domain_error&){refused=true;}
   check(refused,"denser hydrogen extension retains its warmer temperature boundary");
   refused=false;try{(void)ion_quantum_liquid_jets(100000,150,dense_h);}
   catch(const std::domain_error&){refused=true;}
   check(refused,"cool hydrogen retains its smaller plasma-temperature bound");
+  for(auto state:{std::pair{48000.,10.},std::pair{70000.,50.},
+                  std::pair{180000.,220.},std::pair{250000.,700.}}) {
+    const auto [temperature,density]=state;
+    const auto q=ion_quantum_liquid_jets(temperature,density,dense_h,1)[0];
+    const auto p=ion_quantum_liquid_jets(temperature*std::exp(h),density,dense_h,1)[0];
+    const auto m=ion_quantum_liquid_jets(temperature*std::exp(-h),density,dense_h,1)[0];
+    check(q[0][0]>0 && std::abs((p[0][0]-m[0][0])/(2*h)/q[1][0]-1)<2e-7,
+          "colder hydrogen envelope retains the free-energy response");
+  }
+  for(auto state:{std::array<double,3>{44999,10,.99},
+                  std::array<double,3>{180000,251,.99},
+                  std::array<double,3>{299000,901,.99},
+                  std::array<double,3>{70000,60,.99},
+                  std::array<double,3>{48000,10,.989}}) {
+    refused=false;
+    try{(void)ion_quantum_liquid_jets(state[0],state[1],mixture(state[2],.003,0));}
+    catch(const std::domain_error&){refused=true;}
+    check(refused,"colder hydrogen domain retains its assessed limits");
+  }
+  check(ion_quantum_liquid_jets(290000,780,mixture(.9905,.005225,0),1)[0][0][0]>0,
+        "cold hydrogen includes the assessed helium-3 shell tail");
+  refused=false;try{(void)ion_quantum_liquid_jets(290000,780,mixture(.9905,.006,0));}
+  catch(const std::domain_error&){refused=true;}
+  check(refused,"cold hydrogen retains its assessed helium-3 share");
   refused=false;try{(void)ion_quantum_liquid_jets(150000,40,mixture(.97,.0038,0));}
   catch(const std::domain_error&){refused=true;}
   check(refused,"cool hydrogen approximation does not extend to helium-rich layers");
