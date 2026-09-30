@@ -1,0 +1,140 @@
+{
+  "receipt": {
+    "table": "out/irregular-atmosphere-reader-sept30-v1/irregular_z1e-5.dat",
+    "table_sha256": "92c83e788a17036e43f1c6caad76ad747547f6bac36e5f4a392dbaa4d8f3bdc8",
+    "scale": {
+      "offset": [
+        0.9955,
+        0,
+        3.6720978579357175,
+        5.5
+      ],
+      "width": [
+        0.01,
+        1e-05,
+        0.008685889638065035,
+        0.1
+      ]
+    },
+    "vertices": 69,
+    "qhull_simplices": 689,
+    "flat_dropped": 68,
+    "simplices_retained": 621,
+    "hull_volume_scaled": 76.88670537574403,
+    "rebuild_reproducible": true,
+    "source_study": "out/h3plus-metal-interpolation-sept30-v1/study.json",
+    "source_study_sha256": "a9b3fdb831971721bb90404a617c50f1e07eec607f57feb49bbc90a7b7609e29",
+    "independent_control": "out/h3plus-metal-composition-sept30-v1/mid_metal_t4700_g550",
+    "builder_sha256": "d3eaadf430b07e56230b94c192fbffe5b9a3552329f3a90d518cc0d8d9ad9683",
+    "patch": "out/irregular-atmosphere-reader-sept30-v1/irregular_reader_ee598b0.patch",
+    "base_commit": "ee598b0"
+  },
+  "matching_triangulation_verification": {
+    "affine_field": {
+      "queries": 300,
+      "supported": 300,
+      "max_abs_log10T": 4.440892098500626e-15,
+      "max_abs_log10Pg": 2.842170943040401e-14,
+      "max_abs_dlnT_dlnTeff_dlng": 4.0080161411992776e-10,
+      "max_abs_composition_T": 1.709177013253793e-07,
+      "outside_rejected": [
+        true,
+        true
+      ]
+    },
+    "sources": {
+      "n": 69,
+      "supported": 69,
+      "max_rel_T": 3.1086244689504383e-15,
+      "max_rel_Pg": 2.7200464103316335e-13
+    },
+    "path": {
+      "n": 537,
+      "supported": 537,
+      "max_abs_log10_vs_barycentric_same_simplices": 1.7763568394002505e-15,
+      "native_derivative_vs_native_fd_median": 5.7024192486043734e-09,
+      "native_derivative_vs_native_fd_max": 1.4221835709093966e-08,
+      "fd_points": 54
+    },
+    "metal_midpoint": {
+      "query": [
+        0.9955009955009956,
+        1e-06,
+        4700,
+        5.5
+      ],
+      "native_rel_T": -0.0009697745473435937,
+      "native_rel_Pg": 0.008363945676974183,
+      "study_rel": {
+        "T": -0.000969774547862845,
+        "Pgas": 0.008363945689089824
+      }
+    },
+    "unit_tests": {
+      "test_atmosphere_trace_helium": {
+        "checks": 95,
+        "maximum_derivative_error": 8.73373867397782e-09,
+        "actual_isotope_density_fractional_difference": -3.335323440989413e-06
+      },
+      "test_atmosphere_trace_helium_irregular": {
+        "checks": 611,
+        "affine_composition_derivative_rel": 2.499921339417334e-13,
+        "face_jump": 1.0706757703223011e-10,
+        "one_sided_fd_error": 2.6255730922741805e-10
+      }
+    }
+  },
+  "triangulation_sensitivity_study": {
+    "note": "Different valid Delaunay triangulations of the same grid-like sources (Qhull tie-breaking under roundoff/scaling). Differences are interpolation non-uniqueness, not reader error; derivatives are piecewise constant and differ between triangulations.",
+    "vs_study_LinearNDInterpolator": {
+      "study_simplices": 705,
+      "file_simplices": 621,
+      "max_abs_ln_value": 3.0391609485036497e-05,
+      "max_abs_dlnT_derivative_vs_study_fd": 0.010118818730724344
+    },
+    "zscale": {
+      "3e-05": {
+        "supported": 537,
+        "max_abs_ln_diff_vs_z1e5": 0.0020429678460212705
+      },
+      "0.0001": {
+        "supported": 537,
+        "max_abs_ln_diff_vs_z1e5": 0.0020429678460212705
+      }
+    }
+  },
+  "claims": {
+    "smooth_derivatives": false,
+    "rectangular_coverage": false,
+    "selected_for_evolution": false
+  },
+  "primary_native_check": {
+    "max_abs_log10_vs_same_triangulation": 1.7763568394002505e-15,
+    "native_derivative_vs_native_fd_median": 5.7024192486043734e-09,
+    "native_derivative_vs_native_fd_max": 1.4221835709093966e-08,
+    "fd_points": 54,
+    "study_simplices": 705,
+    "file_simplices": 621
+  },
+  "primary_packaging_check": {
+    "passed": true,
+    "scope": "Envelope manifest discovery, immutable format-3 leaf copy and complete relative-path verification; dummy other atmosphere children, no physics claimed.",
+    "table_sha256": "92c83e788a17036e43f1c6caad76ad747547f6bac36e5f4a392dbaa4d8f3bdc8",
+    "files": 3
+  },
+  "primary_tests": {
+    "atmosphere_trace_helium": {
+      "checks": 95,
+      "maximum_derivative_error": 8.73373867397782e-09,
+      "actual_isotope_density_fractional_difference": -3.335323440989413e-06
+    },
+    "atmosphere_trace_helium_irregular": {
+      "checks": 616,
+      "affine_composition_derivative_rel": 2.499921339417334e-13,
+      "face_jump": 1.0706757703223011e-10,
+      "one_sided_fd_error": 2.6255730922741805e-10
+    },
+    "atmosphere_hydrogen_envelope": "167 atmosphere checks passed"
+  },
+  "primary_additions": "Reject nonfinite offsets, unrepresentable scaled/log values, and queries inside the bounding box but outside stored simplices. has_missing_states is conservative for irregular grids."
+}

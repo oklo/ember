@@ -20,6 +20,28 @@ axes. This keeps the H/He proportions fixed when interpolating between metal
 abundances. Composition derivatives remain derivatives with respect to actual
 `X` and `Z`, and matching density uses the actual stellar composition.
 
+Format version 3 accepts irregular source points in `(X/(1-Z), Z, log10 Teff,
+log10 g)`. After the same provenance, optical-depth and composition fields,
+`irregular_scale` supplies four offsets and four positive widths. `vertices N`
+is followed by N rows of the four coordinates, log10 temperature and log10
+gas pressure. `simplices M` is followed by M rows of five zero-based vertex
+indices. The file therefore records both the sources and their triangulation.
+
+Values are linear within each simplex and continuous across shared faces;
+derivatives are constant within a simplex and may jump at its faces. The
+first stored simplex containing a shared-face query supplies its derivative.
+`covers()` tests the actual domain; `support()` gives only its bounding box.
+Queries outside all stored simplices reject. Packaging preserves the source
+file and its triangulation without adding synthetic grid corners.
+
+Reader tests reproduce analytic fields and accepted atmosphere sources, check
+shared-face values and derivatives, and reject malformed or unsupported
+queries. An independent metal-abundance midpoint gives a 0.8364% gas-pressure
+interpolation error for the assessed source set. Different triangulations
+remain an interpolation uncertainty. Reader validation does not select a
+physical atmosphere table for evolution or add missing opacity processes.
+[Validation](results/irregular_atmosphere_reader_sept30_v1.json).
+
 ## Metal settling
 
 The lifetime driver can select the existing measured metal responses from the
