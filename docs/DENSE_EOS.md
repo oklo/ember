@@ -90,8 +90,9 @@ comparisons measure sensitivity, not a proved mixture error bound or cooling-age
 error. The liquid treatment does not determine whether concentrated metals
 separate or freeze before the helium. The mean-coupling guard is not a mixture
 phase diagram. [Source, derivative and core checks](results/quantum_liquid_full_sept30_v1.json).
-Below 300 kK, Tp,H/T must be ≤ 0.1 except in the H-rich intervals below.
-All require Z ≤ 1e-8; He3 is limited to half the helium unless stated otherwise:
+Below 300 kK, Tp,H/T must be ≤ 0.1 except in the intervals below. Outside the helium
+core, Tp,H/T ≤ 1 unless an interval states otherwise. The hydrogen intervals require
+Z ≤ 1e-8; He3 is limited to half the helium unless stated otherwise:
 
 - T ≥ 200 kK, density 50–150 g/cm³ and X ≥ 0.97. Equilibrium-ionization checks
   give an electron deficit below 2.785e-5.
@@ -113,8 +114,9 @@ All require Z ≤ 1e-8; He3 is limited to half the helium unless stated otherwis
   differencing floor. The colder layers retain the 200 g/cm³ limit.
   [Dense-envelope controls](results/cold_transport_domain_sept30_v1.json).
 
-- T ≥ 45 kK, density 10–250 g/cm³ (up to 900 above 200 kK), X ≥ 0.99,
-  Tp,H/T ≤ 0.85 and He3 at most 60% of the helium. Direct ionization controls
+- T ≥ 35 kK, density 10–500 g/cm³ (up to 900 above 200 kK), X ≥ 0.99,
+  Tp,H/T ≤ 1.1 and He3 at most 60% of the helium. Hydrogen stays fully ionized
+  in direct source checks down to 35 kK. Direct ionization controls
   support the hydrogen-rich cooling layers. Trace-helium pressure ionization
   makes the fully ionized quantum correction uncertain by up to 1.15% of
   classical ion Cv at X = 0.99; the corresponding stellar-integrated sensitivity
@@ -123,6 +125,21 @@ All require Z ≤ 1e-8; He3 is limited to half the helium unless stated otherwis
   in the X = 0.98 interval above. Neither interval supplies an ionization model
   for the underlying classical EOS.
   [Cold-envelope controls](results/quantum_cold_envelope_sept30_v1.json).
+
+- Dense H/He at any hydrogen fraction (the helium-rich mantle and the H/He
+  transition): T ≥ 200 kK, density 300–4000 g/cm³, Z ≤ 1e-10, He3 at most 75% of
+  the helium and Tp,H/T ≤ 1.4. Hydrogen and helium are fully ionized in direct
+  source checks (quantum-Cv ionization sensitivity ≤ 1e-8 of classical ion Cv).
+  The leading Wigner–Kirkwood and Hansen–Vieillefosse terms differ from the fitted
+  correction by ≤ 7% and ≤ 2% of the quantum heat capacity; these are model
+  comparisons, not bounds.
+
+In the cold helium liquid, trace hydrogen (mass fraction ≤ 1e-6) may reach
+Tp,H/T ≤ 6.5 (otherwise 4). There the fitted correction is used outside its
+R_S range. Its heat capacity is small but nonzero (about −1e-7 of the local Cv).
+The R_S sensitivity of the hydrogen chemical potential is about 0.01 kT
+(rising to 0.025 kT in colder projections).
+[Source and stellar checks](results/quantum_dense_mixture_sept30_v1.json).
 
 Outside those intervals, the smaller quantum-ratio limit bounds the ideal-ion
 heat correction to 0.05556%. The potential is never tapered at a boundary;
@@ -185,3 +202,14 @@ D_1' = −D_1(1−D_1);  D_2' = 0;  D_3' = D_3(3D_1−2D_3−1)
 `--repair-quantum-pressure-derivatives` builds an isolated corrected source,
 retaining the original, patch and comparison. Ember differentiates the free
 energy itself. [Derivative audit](results/eip_phase_derivatives_consistent_v2_audit.json).
+
+## Electron collision sources
+
+The coupled transport table covers electron degeneracy −2 ≤ eta ≤ 1024
+and screening coordinate 0.02–150. At eta > 256 the source generator uses
+1536 points for polynomial normalization and electron–ion integration;
+explicit quadrature settings remain available. Independent normalization,
+source reproduction and native transport checks accompany the
+[table extension](results/electron_pair_eta1024_sept30_v1.json).
+This extends the same screened Born collision model; it does not add
+strong-correlation or relativistic corrections.

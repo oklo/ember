@@ -1,0 +1,36 @@
+{
+  "scope": "Same nonrelativistic screened energy-mode model; only the source eta<=1024 guard raised (order-convergence controls). Physical correlations and relativity remain separate uncertainties.",
+  "eta_range": [
+    -2,
+    1024
+  ],
+  "screening_coordinate_range": [
+    0.02,
+    150
+  ],
+  "new_source_nodes": 91,
+  "maximum_independent_response_error": 0.0006157185015652185,
+  "native_queries": 689,
+  "native_failures": 0,
+  "newly_supported": 110,
+  "maximum_old_conductivity_change": 2.719341083423643e-07,
+  "maximum_resolved_derivative_error": 2.527962926402098e-07,
+  "source_reproduction": {
+    "passed": true,
+    "maximum_absolute_differences": {
+      "collision_matrix": 0.0,
+      "electron_ion_matrix": 0.0,
+      "basis_alpha": 0.0,
+      "basis_beta": 0.0
+    },
+    "CPU_seconds": 23.879981,
+    "normalization_points": 1536,
+    "eta": 1024,
+    "b_thermal": 0.02
+  },
+  "table_sha256": "cef76e83e1a6cf1a17543cfb1271e8ad190c42d6561253c15bd981151f803767",
+  "limitations": [
+    "High-degree electron-electron matrix entries are not fully quadrature-converged; higher-order checks establish transport-response accuracy instead.",
+    "Static screened, nonrelativistic Born/Pauli collision model; strong correlations, dynamic screening and relativistic corrections are separate physical uncertainties."
+  ]
+}

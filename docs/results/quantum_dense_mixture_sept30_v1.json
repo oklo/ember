@@ -1,0 +1,66 @@
+{
+  "scope": "Bounded quantum-ion domain extension. Free energy is unchanged wherever the earlier model was supported. A liquid treatment does not establish the mixture phase boundary.",
+  "profile_Teff_K": 1283.470483626159,
+  "queries": 3216,
+  "previously_supported": 2362,
+  "previously_supported_responses_unchanged": true,
+  "newly_supported": 338,
+  "projections": {
+    "1": {
+      "queries": 536,
+      "before_failures": 0,
+      "after_failures": 0
+    },
+    "0.9": {
+      "queries": 536,
+      "before_failures": 0,
+      "after_failures": 0
+    },
+    "0.8": {
+      "queries": 536,
+      "before_failures": 28,
+      "after_failures": 2
+    },
+    "0.7": {
+      "queries": 536,
+      "before_failures": 87,
+      "after_failures": 6
+    },
+    "0.6": {
+      "queries": 536,
+      "before_failures": 336,
+      "after_failures": 193
+    },
+    "0.5": {
+      "queries": 536,
+      "before_failures": 403,
+      "after_failures": 315
+    }
+  },
+  "derivative_states": 49,
+  "thermal_derivative_max_relative_error": 2.4e-07,
+  "composition_hessian_max_relative_error": 2.7e-06,
+  "derivative_limitations": "Trace-H gradients obtained by differencing the total free energy lose precision; this is not a bound on the chemical-potential approximation.",
+  "matched_interval_years": 20000000.0,
+  "matched_stellar_relative_differences": {
+    "radius_Rsun": 0.0,
+    "Teff_K": 0.0,
+    "luminosity_Lsun": 0.0,
+    "central_T_K": 0.0,
+    "central_density_g_cm3": 0.0,
+    "H_mass_g": 0.0,
+    "He3_mass_g": 0.0,
+    "surface_X": 0.0,
+    "nuclear_fraction": 0.0
+  },
+  "quantum_model_sensitivity": {
+    "dense_mixture_Cv_relative_to_quantum": 0.068,
+    "stellar_Cv": 6.7e-05,
+    "trace_hydrogen_mu_kT": 0.025
+  },
+  "remaining": [
+    "Equilibrium-EOS source gaps and unstable interpolants in cooler H/He layers.",
+    "Helium-3 fraction beyond the tested mixture interval.",
+    "Liquid/solid phase equilibrium and metal separation."
+  ]
+}

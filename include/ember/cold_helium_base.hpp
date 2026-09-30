@@ -12,6 +12,8 @@ struct ColdHeliumOptions {
   double minimum_density=1e3;
   double maximum_electron_temperature_ratio=.05;
   double maximum_hydrogen_quantum=4;
+  // Trace hydrogen (mass fraction <= trace_hydrogen) may reach a larger T_p,H/T.
+  double trace_hydrogen=1e-6,maximum_trace_hydrogen_quantum=6.5;
   double join_cold=5e5,join_hot=8e5;
   double hydrogen_join_full=.01,hydrogen_join_zero=.05;
 };

@@ -128,15 +128,15 @@ int main() {
   const auto warm_dense_m=ion_quantum_liquid_jets(250000*std::exp(-h),350,dense_h,1)[0];
   check(warm_dense[0][0]>0 && std::abs((warm_dense_p[0][0]-warm_dense_m[0][0])/(2*h)/warm_dense[1][0]-1)<2e-7,
         "denser pressure-ionized hydrogen retains the free-energy derivative");
-  refused=false;try{(void)ion_quantum_liquid_jets(299000,501,envelope_h);}
+  refused=false;try{(void)ion_quantum_liquid_jets(299000,4001,mixture(.3,.001,0));}
   catch(const std::domain_error&){refused=true;}
-  check(refused,"cooling hydrogen retains its upper density boundary");
+  check(refused,"dense H/He mixture retains its upper density boundary");
   refused=false;try{(void)ion_quantum_liquid_jets(199999,201,envelope_h);}
   catch(const std::domain_error&){refused=true;}
   check(refused,"denser hydrogen extension retains its warmer temperature boundary");
-  refused=false;try{(void)ion_quantum_liquid_jets(100000,150,dense_h);}
+  refused=false;try{(void)ion_quantum_liquid_jets(60000,150,dense_h);}
   catch(const std::domain_error&){refused=true;}
-  check(refused,"cool hydrogen retains its smaller plasma-temperature bound");
+  check(refused,"cold hydrogen retains its plasma-temperature bound");
   for(auto state:{std::pair{48000.,10.},std::pair{70000.,50.},
                   std::pair{180000.,220.},std::pair{250000.,700.}}) {
     const auto [temperature,density]=state;
@@ -146,10 +146,10 @@ int main() {
     check(q[0][0]>0 && std::abs((p[0][0]-m[0][0])/(2*h)/q[1][0]-1)<2e-7,
           "colder hydrogen envelope retains the free-energy response");
   }
-  for(auto state:{std::array<double,3>{44999,10,.99},
-                  std::array<double,3>{180000,251,.99},
-                  std::array<double,3>{299000,901,.99},
-                  std::array<double,3>{70000,60,.99},
+  for(auto state:{std::array<double,3>{34999,10,.99},
+                  std::array<double,3>{180000,501,.99},
+                  std::array<double,3>{299000,4001,.99},
+                  std::array<double,3>{45000,60,.99},
                   std::array<double,3>{48000,10,.989}}) {
     refused=false;
     try{(void)ion_quantum_liquid_jets(state[0],state[1],mixture(state[2],.003,0));}
@@ -158,9 +158,15 @@ int main() {
   }
   check(ion_quantum_liquid_jets(290000,780,mixture(.9905,.005225,0),1)[0][0][0]>0,
         "cold hydrogen includes the assessed helium-3 shell tail");
-  refused=false;try{(void)ion_quantum_liquid_jets(290000,780,mixture(.9905,.006,0));}
+  refused=false;try{(void)ion_quantum_liquid_jets(290000,780,mixture(.9905,.0076,0));}
   catch(const std::domain_error&){refused=true;}
-  check(refused,"cold hydrogen retains its assessed helium-3 share");
+  check(refused,"dense H/He mixture retains its assessed helium-3 share");
+  // Newly supported layers: He-rich mantle, H/He transition, colder outer hydrogen, helium-3 shell.
+  for(auto state:{std::array<double,4>{290000,3000,.03,.00003},std::array<double,4>{250000,1500,.5,.001},
+                  std::array<double,4>{40000,20,.99,.003},std::array<double,4>{100000,150,.99,.003},
+                  std::array<double,4>{290000,780,.9905,.006}})
+    check(ion_quantum_liquid_jets(state[0],state[1],mixture(state[2],state[3],0),1)[0][0][0]>0,
+          "extended dense and cold hydrogen domains are supported");
   refused=false;try{(void)ion_quantum_liquid_jets(150000,40,mixture(.97,.0038,0));}
   catch(const std::domain_error&){refused=true;}
   check(refused,"cool hydrogen approximation does not extend to helium-rich layers");

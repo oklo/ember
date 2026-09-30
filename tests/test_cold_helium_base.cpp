@@ -118,6 +118,13 @@ int main(){
      check(std::isfinite(pot.gradient[0]+pot.hessian[0][0]+heat.exchange_enthalpy[0]+heat.enthalpy_partials[2][4]),
          "joined forces and heat finite",0);}
   } else std::cout<<"join checks skipped (EMBER_COLD_HELIUM_FAMILY not set)\n";
+  // Trace hydrogen in the metal-rich core may reach T_p,H/T <= 6.5; ordinary hydrogen keeps the limit 4.
+  {auto rejected=[](double T,double rho,const Composition& c){try{cold_helium_validate(T,rho,c);return false;}catch(const std::domain_error&){return true;}};
+   check(!rejected(3.02e5,5e4,comp(3e-8,1e-14,.13)),"trace core hydrogen at T_p,H/T 4.1 supported",0);
+   check(rejected(3.02e5,5e4,comp(2e-6,1e-14,.13)),"non-trace hydrogen keeps T_p,H/T <= 4",0);
+   check(rejected(1.8e5,5e4,comp(3e-8,1e-14,.13)),"trace hydrogen beyond T_p,H/T 6.5 refused",0);
+   const auto j=cold_helium_material_jets(3.02e5,5e4,comp(3e-8,1e-14,.13),10);
+   check(std::isfinite(j[1][0][0]+j[4][0][0]),"trace-hydrogen composition channels finite",0);}
   std::cout<<"cold helium base: failures "<<failures<<'\n';
   return failures?1:0;
 }

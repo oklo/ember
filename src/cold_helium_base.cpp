@@ -39,7 +39,7 @@ void check_domain(double T,double rho,const Composition& c,std::size_t channels,
   for(const double A:{3.,4.}){const auto p=io::plasma(std::log(T),logne,A,2.);
     if(!(p.rsi>=500&&p.rsi<=1.2e5&&p.tpt<=30))fail("He isotope outside the Baiko-Chugunov fitted quantum domain");}
   if((X>0||channels>1)
-      &&!(io::plasma(std::log(T),logne,1.,1.).tpt<=o.maximum_hydrogen_quantum))
+      &&!(io::plasma(std::log(T),logne,1.,1.).tpt<=(X<=o.trace_hydrogen?o.maximum_trace_hydrogen_quantum:o.maximum_hydrogen_quantum)))
     fail("hydrogen quantum parameter beyond the production limit");
   {   // number-weighted mean coupling, Gamma_e <Z^(5/3)>, as in the production liquid guard
     double num=X+Y3/3+X4/4,moment=X+(Y3/3+X4/4)*std::pow(2.,5./3);
