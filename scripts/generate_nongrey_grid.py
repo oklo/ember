@@ -244,9 +244,9 @@ def energy_balance_tau_division(spec):
 
 
 def temperature_convergence(spec):
-    """Source iteration threshold; flux and chemistry checks remain independent."""
+    """Iteration target, bounded below the independent 1e-5 correction check."""
     value = spec.get("temperature_convergence", 1e-6)
-    if not math.isfinite(value) or not 0 < value <= 1e-6:
+    if not math.isfinite(value) or not 0 < value <= 5e-6:
         raise ValueError("invalid source temperature convergence threshold")
     temperature_convergence_text(value)
     return value

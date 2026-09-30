@@ -72,7 +72,7 @@ def source_inputs(inputs, spec, x, y, teff, logg, log):
         required["ORELAX"] = spec["newton_relaxation"]
     if "temperature_convergence" in spec:
         required["CHMAX"] = temperature_convergence(spec)
-    if any(settings.get(k) != v for k,v in required.items()) or not 0 < settings.get("CHMAX",1) <= 1e-6:
+    if any(settings.get(k) != v for k,v in required.items()) or not 0 < settings.get("CHMAX",1) <= 5e-6:
         raise ValueError("source atmosphere physical/numerical settings mismatch")
 
 

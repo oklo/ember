@@ -222,10 +222,11 @@ class SourceAcceptance(unittest.TestCase):
                 with self.subTest(value=value), self.assertRaisesRegex(ValueError, "transition depth"):
                     energy_balance_tau_division(dict(spec, energy_balance_tau_division=value))
 
-    def test_temperature_iteration_can_be_tightened_without_weakening_acceptance(self):
+    def test_temperature_iteration_stays_below_independent_correction_limit(self):
         from generate_nongrey_grid import temperature_convergence
         self.assertEqual(temperature_convergence({}), 1e-6)
         self.assertEqual(temperature_convergence(dict(temperature_convergence=1e-8)), 1e-8)
+        self.assertEqual(temperature_convergence(dict(temperature_convergence=5e-6)), 5e-6)
         for value in [0., -1e-8, 1e-5, math.inf, math.nan]:
             with self.subTest(value=value), self.assertRaisesRegex(ValueError, "temperature convergence"):
                 temperature_convergence(dict(temperature_convergence=value))
@@ -532,6 +533,8 @@ class SourceAcceptance(unittest.TestCase):
                               .55,.1,2800,5,marker)
         tightened = {**inputs, "parameters":inputs["parameters"].replace("CHMAX=1e-6", "CHMAX=1e-8")}
         source_inputs(tightened,dict(spec,temperature_convergence=1e-8),.55,.1,2800,5,marker)
+        bounded = {**inputs, "parameters":inputs["parameters"].replace("CHMAX=1e-6", "CHMAX=5e-6")}
+        source_inputs(bounded,dict(spec,temperature_convergence=5e-6),.55,.1,2800,5,marker)
         with self.assertRaisesRegex(ValueError,"settings mismatch"):
             source_inputs(inputs,dict(spec,temperature_convergence=1e-8),.55,.1,2800,5,marker)
         balanced = {**inputs, "parameters":inputs["parameters"].replace("TAUDIV=.01", "TAUDIV=.0001")}

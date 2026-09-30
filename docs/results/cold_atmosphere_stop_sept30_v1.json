@@ -1,0 +1,94 @@
+{
+  "created_utc": "2026-09-30T14:40:25.182325+00:00",
+  "scope": "Bounded optional TLUSTY stopping target; independent flux, correction, chemistry, hydrostatic and coverage acceptance retained. No stellar tolerances changed.",
+  "source_default_stop": 1e-06,
+  "source_maximum_optional_stop": 5e-06,
+  "independent_maximum_correction": 1e-05,
+  "independent_maximum_flux_error": 0.002,
+  "same_atmosphere_control": {
+    "passed": true,
+    "relative_errors": {
+      "T": 2.914664065656325e-10,
+      "Pgas": -1.2672528582058362e-09,
+      "source_density": -9.916201193505003e-10
+    },
+    "baseline_stop": 1e-06,
+    "candidate_stop": 5e-06,
+    "unchanged_importer_max_correction": 1e-05,
+    "unchanged_importer_max_flux_error": 0.002,
+    "scope": "Same physical atmosphere and248depth mesh. Candidate starts from accepted tighter-control profile, changes only numerical stopping threshold. Independent final flux/chemical/hydrostatic checks rerun."
+  },
+  "native_table_checks": {
+    "passed": true,
+    "unchanged_supported_queries": 72,
+    "maximum_overlap_difference": 0.0,
+    "new_cell_centres": 64,
+    "maximum_scaled_derivative_error": 3.748752253063259e-09,
+    "outside_rejections": 4,
+    "independent_source_relative_errors": {
+      "T": -9.831262197046442e-05,
+      "Pgas": -0.0009193114365880772
+    },
+    "scope": "Native values, derivatives, old supported queries, outside-support guards, and held-out1400K atmosphere. The source remains excluded from construction."
+  },
+  "envelope_queries": 18,
+  "sources": [
+    {
+      "coordinates": "x0.98_g645_t1400",
+      "accepted": true,
+      "cpu_seconds": 34.371972,
+      "diagnostics": {
+        "correction": 4.4e-06,
+        "flux_error": 0.0015906747976575097,
+        "T": 3563.837970415374,
+        "Pgas": 23698877836.96938
+      },
+      "result_sha256": "2ee58d6041ed18a97ae069d66f9c2377fc26f5aa4f826d9aa2486b1b168be21f"
+    },
+    {
+      "coordinates": "x0.9955_g645_t1400",
+      "accepted": true,
+      "cpu_seconds": 154.431533,
+      "diagnostics": {
+        "correction": 3.48e-06,
+        "flux_error": 0.0015996138083465006,
+        "T": 3562.3373030858256,
+        "Pgas": 23501077549.11177
+      },
+      "result_sha256": "63522cdb31ac473f1fc2f31f9e0035986d6b5b22dbfd87bc17942163806a6487"
+    },
+    {
+      "coordinates": "x0.9955_g647.5_t1400",
+      "accepted": true,
+      "cpu_seconds": 6.494232,
+      "diagnostics": {
+        "correction": 1.74e-06,
+        "flux_error": 1.6730041723089784e-06,
+        "T": 3562.8361935144344,
+        "Pgas": 24538536817.156975
+      },
+      "result_sha256": "5641bcc9dc150a6dd471b3232cf4eaed6943a90f295c9544814e91518b719ec9"
+    }
+  ],
+  "stellar_overlap": {
+    "passed": true,
+    "relative_errors": {
+      "radius_Rsun": 3.670157778106067e-15,
+      "Teff_K": 5.1298537669204765e-14,
+      "luminosity_Lsun": 2.1320589409760365e-13,
+      "central_T_K": 6.93484213055166e-14,
+      "central_density_g_cm3": 9.077305172369388e-13,
+      "H_mass_g": 1.519430783561417e-16,
+      "He3_mass_g": 4.153929456896518e-16,
+      "surface_X": 2.118328846761512e-15
+    },
+    "age_years": 3876315217369.825,
+    "reference": "/Users/greglaughlin/Projects/ember/out/cooling-near-track-cold-sept30-v1/cooling_200/evolution/final.checkpoint",
+    "scope": "Same200Myr interval, same saved state and all stellar settings. Only atmosphere table support extended; current supported values preserved."
+  },
+  "tests": {
+    "nongrey_import": 40,
+    "solve_column": 18,
+    "passed": true
+  }
+}

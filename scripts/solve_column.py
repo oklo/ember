@@ -220,8 +220,8 @@ def main():
         v = getattr(args, name)
         if not (math.isfinite(v) and v > 0): raise SystemExit(f'--{name.replace("_", "-")} must be finite and positive')
     if args.max_phases < 1: raise SystemExit('--max-phases must be >= 1')
-    if args.chmax is not None and not (math.isfinite(args.chmax) and 0 < args.chmax <= 1e-6):
-        raise SystemExit('--chmax must lie in (0, 1e-6]')
+    if args.chmax is not None and not (math.isfinite(args.chmax) and 0 < args.chmax <= 5e-6):
+        raise SystemExit('--chmax must lie in (0, 5e-6]')
     prepared = json.loads((col / 'provenance.json').read_text())
     if prepared['executables']['tlusty'] != args.executable_sha256:
         raise SystemExit('executable differs from the prepared source physics')

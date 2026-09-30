@@ -319,13 +319,21 @@ The independent checks recover the constant-opacity Eddington limit, compare der
 
 ## Non-grey composition grid
 
-The source specification accepts `temperature_convergence` to tighten TLUSTY's
-temperature-iteration threshold below its default of `1e-6`. Independent checks
+The source specification accepts `temperature_convergence` up to `5e-6`;
+the default is `1e-6`. Independent checks
 of flux, chemical equilibrium, hydrostatic balance and source coverage still
 decide whether a column can enter the atmosphere table. Strong convection can
 require `1e-8`: a small temperature correction can otherwise leave a measurable
 error in the convective flux. This setting changes iteration accuracy, not the
-atmosphere's physical equations or the acceptance limits.
+atmosphere's physical equations. The independent correction limit remains
+`1e-5` and the maximum relative flux error remains `0.002`. At 1400 K,
+convection-boundary iteration can oscillate after meeting those limits;
+`5e-6` avoids requiring another factor of ten in the iteration target.
+A restart control changes matching temperature and pressure by less than
+`1.3e-9`; an independently calculated column agrees with the resulting table
+to `0.09194%` in pressure. These comparisons test the numerical choice, not
+the completeness of the atmospheric physics.
+[1400 K checks](results/cold_atmosphere_stop_sept30_v1.json).
 [Cool-column checks](results/cool_atmosphere_iteration_sept27_v1.json).
 
 `CompositionAtmosphereGrid` and the pinned source-generation/import pipeline
