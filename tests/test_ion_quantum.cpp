@@ -20,6 +20,9 @@ int main() {
   // rather than relying on LIQUBC's known pressure-derivative transcription.
   struct Reference{double X,Y3,T,rho,A,f,u,p,cv;};
   const Reference refs[]{
+    {0,0,510000,100000,4,0.23815767721227404,0.46229481396279182,0.23108161861309917,-0.40989100858630345},
+    {0,1,550000,100000,3,0.35837431682064352,0.68579776391843983,0.34270014033333823,-0.57383920637448582},
+    {0,0,800000,50000,4,0.049594653597738458,0.098547211813387658,0.049271160919621339,-0.096016084818755676},
     {0,0,900000,50000,4,.039239300629936025,.07807529008828462,.03903611044704816,-.0764806265431045},
     {0,1,1050000,50000,3,.051167433198013895,.10164473765723248,.05081875065165928,-.09892582855332743},
     {0,0,1e6,3e4,4,0.019121148459931334,0.038146240041516677,0.019072805451553331,-0.037764178358202005},
@@ -38,7 +41,7 @@ int main() {
   check(source_error<2e-8,"pure-ion F/U/P/Cv agree with independent Fortran source",source_error);
   double thermal_error=0,composition_error=0;
   const double h=2e-5;
-  for(double T:{3e6,1.05e6}) {
+  for(double T:{3e6,1.05e6,8e5,5.1e5}) {
   auto c=mixture(.02,.02,.13);const double rho=4e4;
   const auto f=ion_quantum_liquid_jets(T,rho,c);
   // Differentiate every available channel with respect to both thermal
@@ -133,9 +136,9 @@ int main() {
   refused=false;try{(void)ion_quantum_liquid_jets(900000,50000,mixture(.1,0,0));}
   catch(const std::domain_error&){refused=true;}
   check(refused,"larger quantum ratio requires a helium-rich core");
-  refused=false;try{(void)ion_quantum_liquid_jets(800000,50000,mixture(0,0,0));}
+  refused=false;try{(void)ion_quantum_liquid_jets(499999,50000,mixture(0,0,0));}
   catch(const std::domain_error&){refused=true;}
-  check(refused,"helium core retains assessed thetaH ceiling");
+  check(refused,"helium core retains assessed temperature floor");
   refused=false;try{(void)ion_quantum_liquid_jets(900000,50000,mixture(0,0,.17));}
   catch(const std::domain_error&){refused=true;}
   check(refused,"helium core retains the assessed metal fraction");

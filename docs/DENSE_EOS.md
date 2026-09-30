@@ -54,18 +54,22 @@ of FreeEOS's existing Coulomb contribution.
 The optional `LiquidIonQuantumPotential` adds the liquid-ion free-energy term of
 [Baiko & Chugunov (2022)](https://doi.org/10.1093/mnras/stab3613).
 Pressure, energy, entropy, heat capacity, chemical forces and transported
-enthalpies all derive from that potential. A series through the fourteenth
-power avoids cancellation at small plasma-temperature ratio.
+enthalpies all derive from that potential. The full published expression is
+used at larger plasma-temperature ratios; its series avoids cancellation
+when the ratio is small.
 
 The assessed range requires number-weighted ionic coupling ≤ 100. Tp,H/T is
 limited to 1, except in a helium-rich core with T ≥ 500 kK, density 1e4–1e5
-g/cm³, X ≤ 0.05 and Z ≤ 0.16, where the assessed limit is 1.5.
+g/cm³, X ≤ 0.05 and Z ≤ 0.16, where the assessed limit is 4.
 Common-electron-density linear mixing follows the prescription discussed by
 [Baiko (2022)](https://academic.oup.com/mnras/article/517/3/3962/6712718).
-Compared with the leading quantum term, the higher terms change integrated
-core Cv T by 0.01103% at the tested state and 0.04342% in a colder projection.
-That comparison measures sensitivity, not a proved mixture error bound.
-[Core and envelope checks](results/quantum_cooling_core_sept30_v1.json).
+At the assessed 1786 K model, the quantum term reduces the core heat-capacity
+integral by 2.229%. Higher terms change it by 0.05104% relative to the leading
+quantum term, rising to 0.3069% in a cooler fixed-density projection. These
+comparisons measure sensitivity, not a proved mixture error bound or cooling-age
+error. The liquid treatment does not determine whether concentrated metals
+separate or freeze before the helium. The mean-coupling guard is not a mixture
+phase diagram. [Source, derivative and core checks](results/quantum_liquid_full_sept30_v1.json).
 Below 300 kK, Tp,H/T must be ≤ 0.1 except in two H-rich intervals, both requiring
 Z ≤ 1e-8 and He3 at most half the helium:
 

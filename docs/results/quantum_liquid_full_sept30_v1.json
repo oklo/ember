@@ -1,0 +1,134 @@
+{
+  "source_check": {
+    "passed": true,
+    "points": 63,
+    "maximum_relative_F_U_P_Cv_error": 5.617284415393442e-12,
+    "worst_coordinates": [
+      100,
+      0.1
+    ],
+    "scope": "Numerical comparison to the independent LIQUBC Fortran expression; broad mathematical checks do not establish a physical phase domain.",
+    "source_sha256": "f514e1781f4f476c8e23ad03848488445aa539dd7ccbdda049dd9ed91d7f8ae9",
+    "reference_executable_sha256": "f3b44bb29079595a4402c856e5136ecc9ccc9f8a4c0cba10ae3c22cc083bb367"
+  },
+  "core_assessment": {
+    "checkpoint": "/Users/greglaughlin/Projects/ember/out/hydrogen-opacity-coordinate-sept30-v4/cooling/evolution/final.checkpoint",
+    "checkpoint_sha256": "5fca0a7d53d17bb931ba02ea0c7bb59eab0394d68ec957c894219c41ca54f652",
+    "summaries": [
+      {
+        "T_factor": 1.0,
+        "queries": 325,
+        "supported": 325,
+        "resolved_mass_fraction": 0.7429516798433068,
+        "maximum_theta_H": 1.499880595836925,
+        "maximum_theta_He4": 1.0605757402864089,
+        "maximum_number_weighted_Gamma": 35.21491018993153,
+        "quantum_delta_CvT_over_classical": -0.02229478354734658,
+        "higher_order_CvT_sensitivity": 0.0005104380610373374,
+        "series_truncation_CvT": 6.714516694097676e-14,
+        "maximum_series_relative_dCv_error": 2.3992363651359483e-11
+      },
+      {
+        "T_factor": 0.9,
+        "queries": 325,
+        "supported": 325,
+        "resolved_mass_fraction": 0.7429516798433068,
+        "maximum_theta_H": 1.6665339953743612,
+        "maximum_theta_He4": 1.178417489207121,
+        "maximum_number_weighted_Gamma": 39.12767798881281,
+        "quantum_delta_CvT_over_classical": -0.026970261767215384,
+        "higher_order_CvT_sensitivity": 0.0007621994355177027,
+        "series_truncation_CvT": 3.551003271781809e-13,
+        "maximum_series_relative_dCv_error": 1.0513956372193434e-10
+      },
+      {
+        "T_factor": 0.8,
+        "queries": 325,
+        "supported": 325,
+        "resolved_mass_fraction": 0.7429516798433068,
+        "maximum_theta_H": 1.8748507447961564,
+        "maximum_theta_He4": 1.3257196753580114,
+        "maximum_number_weighted_Gamma": 44.01863773741441,
+        "quantum_delta_CvT_over_classical": -0.03329660785968499,
+        "higher_order_CvT_sensitivity": 0.0011906593927407001,
+        "series_truncation_CvT": 2.2808417922954253e-12,
+        "maximum_series_relative_dCv_error": 5.487940102355537e-10
+      },
+      {
+        "T_factor": 0.7,
+        "queries": 325,
+        "supported": 325,
+        "resolved_mass_fraction": 0.7429516798433068,
+        "maximum_theta_H": 2.142686565481321,
+        "maximum_theta_He4": 1.5151082004091556,
+        "maximum_number_weighted_Gamma": 50.30701455704503,
+        "quantum_delta_CvT_over_classical": -0.04215124560215097,
+        "higher_order_CvT_sensitivity": 0.0019680313295054003,
+        "series_truncation_CvT": 1.8729714658088622e-11,
+        "maximum_series_relative_dCv_error": 3.5765271855225933e-09
+      },
+      {
+        "T_factor": 0.65,
+        "queries": 291,
+        "supported": 291,
+        "resolved_mass_fraction": 0.5799312067764253,
+        "maximum_theta_H": 2.3075086089798846,
+        "maximum_theta_He4": 1.6316549850560138,
+        "maximum_number_weighted_Gamma": 54.176784907586956,
+        "quantum_delta_CvT_over_classical": -0.05297089568504334,
+        "higher_order_CvT_sensitivity": 0.0030690460549347982,
+        "series_truncation_CvT": 7.577421723649171e-11,
+        "maximum_series_relative_dCv_error": 1.0127296778961181e-08
+      }
+    ],
+    "full_wall_seconds": 2.4934354163706303,
+    "series_wall_seconds": 2.4123619170859456,
+    "limitations": [
+      "Fixed-density projections are diagnostics, not evolved stars.",
+      "Higher-order sensitivity relative to Wigner-Kirkwood is not a rigorous quantum-mixture error bound.",
+      "No phase separation, crystallization or latent heat is included.",
+      "Trace-H chemical response is retained even though its direct thermal contribution is small."
+    ]
+  },
+  "thermal_derivative_error": 3.198e-10,
+  "composition_derivative_error": 3.681e-09,
+  "physical_scope": "Controlled liquid continuation; no phase separation, latent heat, improved classical Coulomb EOS or full quantum-mixture calculation.",
+  "stellar_overlap": {
+    "passed": true,
+    "years": 3872485444301.5366,
+    "errors": {
+      "ln_radius": 4.4941828036826337e-13,
+      "ln_density": 3.2933655802480644e-12,
+      "ln_temperature": 5.471179065352771e-13,
+      "H_absolute": 3.9190872769268026e-14,
+      "He3_absolute": 2.6770252681274087e-14,
+      "surface_L_relative": 1.3240519791679617e-12
+    },
+    "control_header": "536 1.9884098706980505e+32 1.2220634665709017e+20 946728000000000 3442 1341 2.9826148060470756e+28",
+    "candidate_header": "536 1.9884098706980505e+32 1.2220634665709017e+20 946728000000000 3442 1341 2.9826148060470756e+28",
+    "scope": "Quantum expression plus atmosphere and cold-opacity extension; no input tolerance changes."
+  },
+  "cold_atmosphere_validation": {
+    "passed": true,
+    "unchanged_overlap_queries": 128,
+    "unchanged_unsupported_old_queries": 8,
+    "cold_cell_centres": 24,
+    "maximum_scaled_derivative_error": 3.5181955126972753e-09,
+    "outside_rejections": 4,
+    "independent_source_relative_errors": {
+      "T": 2.1347527505710673e-06,
+      "Pgas": -0.0001534344743845395
+    },
+    "scope": "Native interpolation and derivative checks; density in this probe is synthetic. Stellar overlap and integrated envelope test follow."
+  },
+  "tests": {
+    "ion_quantum": "passed",
+    "lifetime_restart": "passed",
+    "lifetime_restart_seconds": 111.3
+  },
+  "continuation": {
+    "accepted_models": 0,
+    "first_stop": "convective partition alternates during the coupled solve; no quantum-domain failure",
+    "scope": "The core-domain extension removes its source bound; it does not solve this separate iteration problem."
+  }
+}
