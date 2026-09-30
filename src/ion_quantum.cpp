@@ -15,7 +15,7 @@ constexpr double hbar=constants::h/(2*pi);
 constexpr double electron_metal=gs98_ion_moment(1);
 
 // Equation 34 is ln[sinh(x/2)/(x/2)]. Within the explicitly assessed
-// theta_H<=1 range its series through x^14 has absolute error <2.2e-14
+// theta_H<=1.5 range its series through x^14 has a small truncation error
 // per oscillator. Density coefficients retain their derivatives. The
 // temperature dependence of each term is exactly T^(-2m), avoiding a
 // costly multivariable expansion at every stellar mesh point.
@@ -55,9 +55,9 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   const double Z=c.Z(),Ye=c.X[0]+(2./3)*c.X[1]+.5*c.X[2]+electron_metal*Z;
   const double ne=rho*Ye/constants::amu;
   const double thetaH=hbar/(constants::kB*T)*std::sqrt(4*pi*ne*charge*charge/constants::amu);
-  // Initial production scope is weakly quantum liquid. At theta_H<=1,
-  // the common-density mixture recovers the exact leading term; beyond
-  // that limit mixture and phase effects need an independent assessment.
+  // Common-electron-density linear mixing reproduces the leading quantum
+  // term. The assessed helium-rich core range also admits theta_H<=1.5;
+  // its higher-order mixture dependence is an approximation, not a phase EOS.
   // FreeEOS with variable ionization supports the dense H-rich extension:
   // over this range the electron deficit is <2.8e-5, including pressure
   // ionization. Elsewhere below 300 kK the largest ideal-ion heat correction
@@ -72,10 +72,12 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   // assessed domain, without tapering the potential or altering its derivatives.
   // At 2488 K, the additional 21 envelope shells carry 0.03875% of the
   // resolved mass. Equilibrium-ionization derivatives change the integrated
-  // heat capacity by less than 1e-8; sampled colder controls are also small.
-  const bool cool_hydrogen=T>=5e4 && rho>=10 && rho<=200 && thetaH<=.5 &&
+  // heat capacity by less than 1e-8. Controls through theta_H=.7 differ
+  // by at most 0.4033% of classical ion Cv and 2.253e-5 of source pressure.
+  const bool cool_hydrogen=T>=5e4 && rho>=10 && rho<=200 && thetaH<=.7 &&
       c.X[0]>=.98 && c.Z()<=1e-8 && c.X[1]<=.5*(c.X[1]+c.X[2]);
-  if(thetaH>1 || (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen))
+  const bool assessed_core=T>=5e5 && rho>=1e4 && rho<=1e5 && c.X[0]<=.05 && c.Z()<=.16;
+  if(thetaH>(assessed_core?1.5:1.) || (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen))
     throw std::domain_error("quantum ion EOS: outside assessed ionization/quantum range");
   double ion_number=c.X[0]+c.X[1]/3+c.X[2]/4;
   double charge_moment=c.X[0]+(c.X[1]/3+c.X[2]/4)*std::pow(2.,5./3);

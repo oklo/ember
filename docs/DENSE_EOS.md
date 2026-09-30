@@ -57,16 +57,25 @@ Pressure, energy, entropy, heat capacity, chemical forces and transported
 enthalpies all derive from that potential. A series through the fourteenth
 power avoids cancellation at small plasma-temperature ratio.
 
-The assessed range requires Tp,H/T ≤ 1 and number-weighted ionic coupling ≤ 100.
+The assessed range requires number-weighted ionic coupling ≤ 100. Tp,H/T is
+limited to 1, except in a helium-rich core with T ≥ 500 kK, density 1e4–1e5
+g/cm³, X ≤ 0.05 and Z ≤ 0.16, where the assessed limit is 1.5.
+Common-electron-density linear mixing follows the prescription discussed by
+[Baiko (2022)](https://academic.oup.com/mnras/article/517/3/3962/6712718).
+Compared with the leading quantum term, the higher terms change integrated
+core Cv T by 0.01103% at the tested state and 0.04342% in a colder projection.
+That comparison measures sensitivity, not a proved mixture error bound.
+[Core and envelope checks](results/quantum_cooling_core_sept30_v1.json).
 Below 300 kK, Tp,H/T must be ≤ 0.1 except in two H-rich intervals, both requiring
 Z ≤ 1e-8 and He3 at most half the helium:
 
 - T ≥ 200 kK, density 50–150 g/cm³ and X ≥ 0.97. Equilibrium-ionization checks
   give an electron deficit below 2.785e-5.
   [Dense-hydrogen checks](results/quantum_dense_hydrogen_sept28_v1.json).
-- T ≥ 50 kK, density 10–200 g/cm³, X ≥ 0.98 and Tp,H/T ≤ 0.5. Equilibrium-ion
+- T ≥ 50 kK, density 10–200 g/cm³, X ≥ 0.98 and Tp,H/T ≤ 0.7. Equilibrium-ion
   comparisons give quantum-Cv differences up to 0.1347% of classical ion Cv
-  in the warmer controls and 0.03264% in the added controls. At 2488 K the
+  in the warmer controls, 0.03264% through Tp,H/T = 0.5, and 0.4033%
+  through Tp,H/T = 0.7. Pressure differences stay below 0.002253%. At 2488 K the
   additional envelope layers contain 0.03875% of the resolved mass; their
   ionization uncertainty contributes less than 1e-8 of integrated stellar Cv.
   The full quantum correction reduces that Cv by 0.5597%.

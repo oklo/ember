@@ -1,0 +1,94 @@
+{
+  "scope": "Optional liquid-ion domain assessment. Existing potential and all values in the earlier domain are unchanged; no crystallization, phase separation or full quantum-mixture uncertainty bound.",
+  "sources": [
+    "https://doi.org/10.1093/mnras/stab3613",
+    "https://academic.oup.com/mnras/article/517/3/3962/6712718"
+  ],
+  "core_domain": {
+    "minimum_T_K": 500000.0,
+    "density_g_cm3": [
+      10000.0,
+      100000.0
+    ],
+    "maximum_X": 0.05,
+    "maximum_Z": 0.16,
+    "maximum_theta_H": 1.5,
+    "maximum_number_weighted_Gamma": 100
+  },
+  "hydrogen_envelope_domain": {
+    "minimum_T_K": 50000.0,
+    "density_g_cm3": [
+      10,
+      200
+    ],
+    "minimum_X": 0.98,
+    "maximum_Z": 1e-08,
+    "maximum_He3_share_of_helium": 0.5,
+    "maximum_theta_H": 0.7
+  },
+  "independent_Fortran_reference_SHA256": "f514e1781f4f476c8e23ad03848488445aa539dd7ccbdda049dd9ed91d7f8ae9",
+  "unit_checks": {
+    "pure_ion_reference_max_relative_error": 6.1042e-11,
+    "thermal_derivative_max_error": 3.1982e-10,
+    "composition_derivative_max_error": 3.5499e-09
+  },
+  "core_profile_sensitivity": [
+    {
+      "factor": 1.0,
+      "queries": 324,
+      "supported": 324,
+      "maximum_theta_H": 0.9999369506232558,
+      "maximum_number_weighted_Gamma": 23.497454158085926,
+      "integrated_quantum_delta_CvT": -0.010726293251060282,
+      "integrated_higher_order_CvT": 0.00011025365404305965,
+      "maximum_local_higher_order_Cv": 0.00029378688807693906
+    },
+    {
+      "factor": 0.9,
+      "queries": 324,
+      "supported": 324,
+      "maximum_theta_H": 1.111041056248062,
+      "maximum_number_weighted_Gamma": 26.108282397873257,
+      "integrated_quantum_delta_CvT": -0.013045796205247056,
+      "integrated_higher_order_CvT": 0.00016553977241286693,
+      "maximum_local_higher_order_Cv": 0.00043927329734614874
+    },
+    {
+      "factor": 0.8,
+      "queries": 324,
+      "supported": 324,
+      "maximum_theta_H": 1.24992118827907,
+      "maximum_number_weighted_Gamma": 29.371817697607412,
+      "integrated_quantum_delta_CvT": -0.01621389053712902,
+      "integrated_higher_order_CvT": 0.0002603674300002112,
+      "maximum_local_higher_order_Cv": 0.0006875539464975215
+    },
+    {
+      "factor": 0.7,
+      "queries": 324,
+      "supported": 324,
+      "maximum_theta_H": 1.4284813580332227,
+      "maximum_number_weighted_Gamma": 33.567791654408474,
+      "integrated_quantum_delta_CvT": -0.020701104200491365,
+      "integrated_higher_order_CvT": 0.0004341319063202797,
+      "maximum_local_higher_order_Cv": 0.0011398490669428834
+    }
+  ],
+  "hydrogen_equilibrium_ionization": {
+    "queries": 69,
+    "maximum_delta_Cv_over_classical_ion_Cv": 0.004032228477058268,
+    "pressure_entropy": {
+      "scope": "Pressure/entropy and integrated heat-capacity impact of quantum ionization.\nNo stellar selections or source-domain edits. The mass quadrature covers the\nresolved interior, not the separate integrated SCVH envelope.\n",
+      "queries": 33,
+      "maximum_pressure_difference": 2.251977382648269e-05,
+      "maximum_entropy_difference_over_classical_ion_R": 0.00038194345005812823,
+      "selected_for_evolution": false
+    }
+  },
+  "limitations": [
+    "Classical Coulomb mixture treatment remains FreeEOS; known comparison with Skye differs by several percent in thermal content.",
+    "Linear mixing of the quantum term has no independently established multicomponent uncertainty bound.",
+    "No phase equilibrium or crystallization follows from this guard extension.",
+    "The sampled classical core EOS is a controlled fully ionized FreeEOS alternative; its difference from equilibrium ionization is separate from the quantum correction."
+  ]
+}
