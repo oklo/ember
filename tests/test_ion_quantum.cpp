@@ -41,8 +41,9 @@ int main() {
   check(source_error<2e-8,"pure-ion F/U/P/Cv agree with independent Fortran source",source_error);
   double thermal_error=0,composition_error=0;
   const double h=2e-5;
-  for(double T:{3e6,1.05e6,8e5,5.1e5}) for(double rho:{8500.,4e4}) {
-  auto c=mixture(.02,.02,.13);
+  for(double T:{3e6,1.05e6,8e5,5.1e5,4.5e5}) for(double rho:{8500.,4e4}) {
+  if(T<5e5 && rho>1e4)continue;
+  auto c=T<5e5?mixture(.005,.001,.0002):mixture(.02,.02,.13);
   const auto f=ion_quantum_liquid_jets(T,rho,c);
   // Differentiate every available channel with respect to both thermal
   // coordinates, including chemical-potential and Hessian responses.
@@ -86,6 +87,15 @@ int main() {
   check(refused,"strongly quantum and freezing regime requires further physics");
   refused=false;try{(void)ion_quantum_liquid_jets(1e4,1,c);}catch(const std::domain_error&){refused=true;}
   check(refused,"significant partial-ionization correction refused");
+  for(auto state:{std::array<double,4>{399999,8500,.005,.0002},
+                  std::array<double,4>{450000,8500,.02,.0002},
+                  std::array<double,4>{450000,8500,.005,.002},
+                  std::array<double,4>{450000,20000,.005,.0002}}) {
+    refused=false;
+    try{(void)ion_quantum_liquid_jets(state[0],state[1],mixture(state[2],.001,state[3]));}
+    catch(const std::domain_error&){refused=true;}
+    check(refused,"cool helium extension retains temperature, density and composition limits");
+  }
   const auto dense_h=mixture(.99,.003,0);
   const auto cool=ion_quantum_liquid_jets(250000,90,dense_h,1)[0];
   const auto cool_p=ion_quantum_liquid_jets(250000*std::exp(h),90,dense_h,1)[0];

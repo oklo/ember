@@ -65,6 +65,13 @@ The lower-density helium extension passes 136 direct equilibrium-ionization
 checks: hydrogen and helium remain fully ionized. Partial metal ionization
 produces an electron deficit up to 0.156%; that approximation remains.
 [Ionization checks](results/helium_quantum_domain_sept30_v1.json).
+Nearly pure-helium layers also permit Tp,H/T up to 4 at T ≥ 400 kK,
+density 1e3–1e4 g/cm³, X ≤ 0.01 and Z ≤ 0.001. In 168 direct ionization
+checks, H and He remain fully ionized and the metal electron deficit is below
+`9.792e-6`. Thermal and composition derivative checks pass. This extends the
+same liquid potential; the metal-rich core limits and mean-coupling limit
+remain fixed. It does not establish phase stability of the central mixture.
+[Cool-helium checks](results/cool_helium_quantum_domain_sept30_v1.json).
 Common-electron-density linear mixing follows the prescription discussed by
 [Baiko (2022)](https://academic.oup.com/mnras/article/517/3/3962/6712718).
 At the assessed 1786 K model, the quantum term reduces the core heat-capacity

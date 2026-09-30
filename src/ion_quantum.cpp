@@ -95,7 +95,10 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   // The liquid mixture does not determine metal separation or freezing;
   // the mean-coupling guard below is not a mixture phase boundary.
   const bool assessed_core=T>=5e5 && rho>=1e3 && rho<=1e5 && c.X[0]<=.05 && c.Z()<=.16;
-  if(thetaH>(assessed_core?4.:1.) || (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen)) {
+  // Cooler, nearly pure helium layers remain pressure ionized in direct
+  // source checks. This does not extend the metal-rich core's phase range.
+  const bool cool_helium=T>=4e5 && rho>=1e3 && rho<=1e4 && c.X[0]<=.01 && c.Z()<=1e-3;
+  if(thetaH>((assessed_core || cool_helium)?4.:1.) || (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen)) {
     std::ostringstream message;
     message << std::setprecision(4) << "quantum ion EOS: outside assessed ionization/quantum range"
       << " (T=" << T << ", rho=" << rho << ", X=" << c.X[0]
