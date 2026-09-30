@@ -362,7 +362,7 @@ int lifetime_main(int argc,char** argv) {
       if(value>0)identity.number("solver."+key,value);
     identity.family("eos",eos_path,true);
     if(ion_quantum=="liquid_bc22")
-      identity.values["eos.ion_quantum"]="bc22.liquid.common_ne.linear_mixture.assessed_core_envelope.v5";
+      identity.values["eos.ion_quantum"]="bc22.liquid.common_ne.linear_mixture.assessed_core_envelope.v6";
     if(low_metal_interpolation=="quadratic")
       identity.values["eos.low_metal_interpolation"]="quadratic.C2_to_cubic.v1";
     if(!cold_eos_path.empty()){

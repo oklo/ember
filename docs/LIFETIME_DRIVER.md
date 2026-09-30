@@ -580,3 +580,9 @@ The largest exercised local transport bound is 0.001142. An allowance of
 The corrected density blend changes luminosity by 0.005844% in its separate
 1 Gyr comparison. All energy and time-step checks are unchanged.
 [Numerical checks](results/conductive_envelope_opacity_sept30_v1.json).
+
+In the assessed H-rich cooling-envelope layers, direct pressure-ionization
+checks support `screened_minimum_T_K "400000"`. This changes a domain check,
+not the collision law. A matched 10 Myr continuation leaves global quantities
+unchanged; cooler evolution still requires covered EOS and opacity inputs.
+[Domain assessment](results/cold_transport_domain_sept30_v1.json).

@@ -83,6 +83,11 @@ Z ≤ 1e-8 and He3 at most half the helium:
   [Cooling-envelope checks](results/quantum_cooling_envelope_sept30_v1.json). A matched 20 Myr
   comparison changes luminosity by -0.815%; this includes the initial EOS
   readjustment and is not a cooling-age measurement.
+  Above 200 kK this H-rich domain extends to 500 g/cm³, with the same quantum
+  ratio and composition limits. Direct equilibrium-ionization controls change
+  the quantum Cv by less than 3.090e-10 of classical ion Cv, at the numerical
+  differencing floor. The colder layers retain the 200 g/cm³ limit.
+  [Dense-envelope controls](results/cold_transport_domain_sept30_v1.json).
 
 Outside those intervals, the smaller quantum-ratio limit bounds the ideal-ion
 heat correction to 0.05556%. The potential is never tapered at a boundary;

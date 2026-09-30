@@ -4,6 +4,8 @@
 #include "ember/detail/taylor3.hpp"
 #include <cmath>
 #include <numbers>
+#include <iomanip>
+#include <sstream>
 #include <stdexcept>
 
 namespace ember {
@@ -74,11 +76,20 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   // resolved mass. Equilibrium-ionization derivatives change the integrated
   // heat capacity by less than 1e-8. Controls through theta_H=.7 differ
   // by at most 0.4033% of classical ion Cv and 2.253e-5 of source pressure.
-  const bool cool_hydrogen=T>=5e4 && rho>=10 && rho<=200 && thetaH<=.7 &&
+  // At T>=200 kK, the assessed pressure-ionized H-rich range extends to
+  // rho=500 g/cm3. Direct equilibrium-ionization controls change the quantum
+  // Cv by less than 3.1e-10 of classical ion Cv, at the differencing floor.
+  // The colder envelope keeps its narrower density range.
+  const bool cool_hydrogen=T>=5e4 && rho>=10 && (rho<=200 || (T>=2e5 && rho<=500)) && thetaH<=.7 &&
       c.X[0]>=.98 && c.Z()<=1e-8 && c.X[1]<=.5*(c.X[1]+c.X[2]);
   const bool assessed_core=T>=5e5 && rho>=1e4 && rho<=1e5 && c.X[0]<=.05 && c.Z()<=.16;
-  if(thetaH>(assessed_core?1.5:1.) || (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen))
-    throw std::domain_error("quantum ion EOS: outside assessed ionization/quantum range");
+  if(thetaH>(assessed_core?1.5:1.) || (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen)) {
+    std::ostringstream message;
+    message << std::setprecision(4) << "quantum ion EOS: outside assessed ionization/quantum range"
+      << " (T=" << T << ", rho=" << rho << ", X=" << c.X[0]
+      << ", Y3=" << c.X[1] << ", Z=" << Z << ", theta_H=" << thetaH << ')';
+    throw std::domain_error(message.str());
+  }
   double ion_number=c.X[0]+c.X[1]/3+c.X[2]/4;
   double charge_moment=c.X[0]+(c.X[1]/3+c.X[2]/4)*std::pow(2.,5./3);
   for(const auto& m:gs98_metals) {

@@ -4,8 +4,10 @@
 #include "ember/detail/differential.hpp"
 #include <atomic>
 #include <cmath>
+#include <iomanip>
 #include <memory>
 #include <mutex>
+#include <sstream>
 #include <stdexcept>
 #include <utility>
 
@@ -141,7 +143,14 @@ template<std::size_t N,bool abundances=true> MetalMicroscopicFaceResponse evalua
     for(double v:{p.lnr,p.lnrho,p.lnT,p.L})require(std::isfinite(v),"nonfinite stellar point");
     radius[e]=exp(D::variable(p.lnr,o));rho[e]=exp(D::variable(p.lnrho,o+1));
     lt[e]=D::variable(p.lnT,o+2);T[e]=exp(lt[e]);
-    require(T[e].value>=minimum_T,"temperature below the declared hot domain");
+    if(T[e].value<minimum_T) {
+      std::ostringstream message;
+      message << std::setprecision(4) << "screened microscopic transport: temperature below the declared hot domain"
+        << " (face=" << face << ", endpoint=" << e << ", T=" << T[e].value
+        << ", minimum=" << minimum_T << ", rho=" << rho[e].value
+        << ", X=" << c.X[0] << ", Y3=" << c.X[1] << ", Z=" << c.Z() << ')';
+      throw std::domain_error(message.str());
+    }
     const auto chemical=eos_cache?eos_cache->potential(eos,face+e,T[e].value,rho[e].value,c,active)
         :eos.composition_potential(T[e].value,rho[e].value,c,active,N>0 && abundances);
     for(std::size_t k=0;k<3;++k) {

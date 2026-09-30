@@ -1,0 +1,69 @@
+{
+  "created_utc": "2026-09-30T05:44:12.281515+00:00",
+  "scope": "Numerical domain and ionization checks for the existing liquid-ion correction and screened transport; not a validation of final cooling ages or exact mixture diffusion.",
+  "quantum_domain": {
+    "T_min": 200000.0,
+    "T_max": 300000.0,
+    "rho_min": 200,
+    "rho_max": 500,
+    "X_min": 0.98,
+    "Z_max": 1e-08,
+    "thetaH_max": 0.7,
+    "He3_fraction_max": 0.5
+  },
+  "quantum_controls": 40,
+  "maximum_ionization_Cv_difference_over_classical_ion_Cv": 3.089112058280474e-10,
+  "maximum_finite_difference_difference": 3.0306607847691754e-10,
+  "transport": {
+    "temperature_range_K": [
+      400000.0,
+      600000.0
+    ],
+    "direct_ionization_queries": 25,
+    "maximum_electron_deficit": 4.218847493575595e-15,
+    "minimum_H_ionized": 0.9999999999999967,
+    "minimum_He_doubly_ionized": 0.9999999999999999,
+    "native_face_queries": 204,
+    "native_failures": 0
+  },
+  "stellar_overlap": {
+    "years": 10000000.0,
+    "passed": true,
+    "relative_differences": {
+      "luminosity_Lsun": 0.0,
+      "radius_Rsun": 0.0,
+      "Teff_K": 0.0,
+      "central_T_K": 0.0,
+      "central_density_g_cm3": 0.0,
+      "H_mass_g": 0.0,
+      "He3_mass_g": 0.0
+    }
+  },
+  "candidate_endpoint": {
+    "years": 3871587811489.0366,
+    "Teff_K": 1932.950331486184,
+    "central_T_K": 1018253.4729170036,
+    "nuclear_fraction": 3.905984661870878e-05,
+    "surface_X": 0.9916288564949515
+  },
+  "next_limit": "AESOPUS low-temperature radiative opacity logR=6, not a demonstrated physical instability.",
+  "regressions": [
+    "ion_quantum",
+    "metal_microscopic_evolution",
+    "screened_envelope_evolution"
+  ],
+  "evidence_sha256": {
+    "out/cold-transport-assessment-sept30-v1/assessment.json": "e6639f7d60e2412151eeed067afde7967a4f47a89c0da94f458fd4586e56deac",
+    "out/cold-transport-assessment-sept30-v1/quantum_ionization.json": "66539d96be895c663ae0754833f50391e824836ad394334f2efd15a36dc7285e",
+    "out/cold-transport-assessment-sept30-v1/transport_check.json": "5836104bc5270fef26a7557fac37198205e2e821b4ccf242380d8c25d50b0651",
+    "out/cooling-replay-sept30-v6/overlap_comparison.json": "e31f83146081b296524091e408dadc5d76366f89ef6b67f3cad7dbf9b90c0356",
+    "out/cooling-replay-sept30-v6/cooling/evolution/final.checkpoint": "6199657e58b6d7b3fb8266a97821bc6b125416ac197b9ed639045e30403484b9"
+  },
+  "limitations": [
+    "Direct FreeEOS pressure-ionization assessment, not an independent atomic calculation.",
+    "Quantum correction uses common-electron-density linear mixing; no phase transition model.",
+    "Existing screened collision law remains approximate in the moderately coupled plasma.",
+    "Dense-core EOS is a controlled fully ionized alternative with unresolved percent-level thermal uncertainty.",
+    "Higher-metal H3+ atmospheres have not yet been integrated throughout the Hayashi-to-cooling run."
+  ]
+}
