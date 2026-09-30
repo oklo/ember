@@ -1,0 +1,60 @@
+{
+  "date": "2026-09-30",
+  "scope": "Optional omission of unsupported quantum-screened reactions in depleted cells; no pycnonuclear rate is claimed.",
+  "limits": {
+    "default": 0,
+    "selected_H_D_He3_mass_fraction_limit": 1e-06,
+    "screening_zeta_max": 1.6,
+    "Gamma12_max": 200
+  },
+  "native": {
+    "passed": true,
+    "queries": 3216,
+    "unchanged": 2332,
+    "recovered": 878,
+    "refused_fuel_rich": 6,
+    "lost": 0,
+    "maximum_relative_change_supported": 0
+  },
+  "matched_stellar": {
+    "passed": true,
+    "same_physical_checkpoint": true,
+    "same_audits": true,
+    "interval_years": 100000000.0,
+    "scope": "Old executable and new optional trace-fuel treatment, before the nuclear-domain boundary, same950K parent, same925K atmosphere, two zone threads, all interval checks unchanged."
+  },
+  "pilot": {
+    "parent_sha256": "de44cf3537dcba117c63a8b8f5e6a84ae765a548c1fb61548cf030dcb3cfab9f",
+    "interval_years": 100000000.00048828,
+    "start_Teff_K": 932.1904290927858,
+    "end_Teff_K": 930.7109219284288,
+    "end_core_T_K": 247466.5915730933,
+    "end_nuclear_fraction": 1.8771192247694782e-08,
+    "affected_cells": 67,
+    "affected_mass_g": 9.257394841394758e+28,
+    "current_fuel_energy_ceiling_erg": 1.3834457578458297e+40,
+    "error_norm": 0.02349692816205895,
+    "CPU_seconds": 116.487903,
+    "audits_unchanged": true
+  },
+  "physical_assessment": {
+    "source": "Yakovlev et al. 2006, Phys. Rev. C 74,035803; https://arxiv.org/abs/astro-ph/0608488",
+    "calculation": "All retained reactions, actual932K compositions and CN abundances, uniformtemperature projections at fixed density; Y06 maximum parameter scenario and selected Solar Fusion III S(0).",
+    "temperature_factors": [
+      0.95,
+      0.9,
+      0.8
+    ],
+    "scenario_omitted_power_over_present_L": [
+      1.3e-09,
+      4.5e-09,
+      2.2e-08
+    ],
+    "limitations": [
+      "The unified-rate fit was calibrated on heavy-ion systems, not trace protons in helium; these are scenario estimates, not rigorous bounds.",
+      "Fuel-energy ceilings cover only current inventories and include daughter-proton burning. They do not bound future diffusion or mixing into affected cells.",
+      "The next continuation is limited to2Gyr and retains strict refusal above the selected trace-fuel limit.",
+      "No final cooling age or stronglyquantum nuclear-burning prescription is established."
+    ]
+  }
+}

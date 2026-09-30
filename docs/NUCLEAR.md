@@ -91,6 +91,24 @@ limits through 1.6. Evaluation stops beyond the selected limit or
 `Gamma_12 = 200`. This does not supply pycnonuclear burning.
 [Quantum-screening checks](results/quantum_screening_sept28_v1.json).
 
+For a depleted cooling core, optional `quantum_burning_fuel_limit` instead
+omits an out-of-domain reaction when the local sum of H, D and He3 mass
+fractions is below that limit. It defaults to zero (strict refusal) and
+accepts at most `1e-6`. Supported reactions are unchanged. Each omitted
+reaction has zero rate, heat and derivatives; its fuel remains available
+for transport and later burning. Fuel-rich cells still refuse evaluation.
+This approximation does not extend the screening formula or supply a
+pycnonuclear rate.
+
+The driver records affected cells, mass and their current fuel-energy
+ceiling, including subsequent burning of daughter protons. This inventory
+does not bound future fuel delivery by diffusion. Selecting the option
+requires an independent estimate of missing power and a finite cooling
+interval; a small fuel fraction alone does not establish negligible heat.
+The option and its limit are part of the restart identity.
+[Profile checks and a bounded cooling test](results/cold_trace_burning_sept30_v1.json)
+record the current evidence and the rate-estimate limitations.
+
 ## Verification
 
 Independent adaptive energy integration checks the rates and thermal responses;

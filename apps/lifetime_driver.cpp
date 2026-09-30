@@ -181,6 +181,10 @@ int lifetime_main(int argc,char** argv) {
     const double quantum_screening=optional_number("quantum_screening_zeta_max");
     if(!std::isfinite(quantum_screening) || quantum_screening<0 || quantum_screening>1.6)
       throw std::invalid_argument("quantum_screening_zeta_max must lie in [0,1.6]");
+    const double quantum_fuel_limit=optional_number("quantum_burning_fuel_limit");
+    if(!std::isfinite(quantum_fuel_limit) || quantum_fuel_limit<0 || quantum_fuel_limit>1e-6
+        || (quantum_fuel_limit>0 && quantum_screening==0))
+      throw std::invalid_argument("quantum_burning_fuel_limit requires quantum screening and must lie in [0,1e-6]");
     const double verify_responses=optional_number("verify_response_reuse");
     const double linearized_burning=optional_number("linearized_burning");
     if(linearized_burning!=0 && linearized_burning!=1)
@@ -385,6 +389,10 @@ int lifetime_main(int argc,char** argv) {
       identity.values["nuclear.quantum_screening"]="svh.cd09_finite_zeta.v1";
       identity.number("nuclear.quantum_screening_zeta_max",quantum_screening);
     }
+    if(quantum_fuel_limit>0) {
+      identity.values["nuclear.quantum_burning_omission"]="trace_H_D_He3.v1";
+      identity.number("nuclear.quantum_burning_fuel_limit",quantum_fuel_limit);
+    }
     for(const auto& [key,value]:std::map<std::string,double>{{"coupling_stop_tolerance",coupling_stop},
         {"material_heat_tolerance",material_heat},{"verification_residual_tolerance",verification_residual},
         {"verification_correction_tolerance",verification_correction}})
@@ -537,6 +545,7 @@ int lifetime_main(int argc,char** argv) {
     set_composition_buoyancy_reuse(buoyancy_spacing,verify_responses==1);
     set_screening_reuse(screening_spacing);
     set_quantum_screening(quantum_screening);
+    set_quantum_burning_fuel_limit(quantum_fuel_limit);
     if(eos_radius>0)microscopic.use_eos_taylor(eos_radius,verify_responses==1);
     std::shared_ptr<CollisionTaylorCache> collision_reuse;
     if(collision_radius>0) {
@@ -584,11 +593,26 @@ int lifetime_main(int argc,char** argv) {
     const auto record=[&](double step,double error,const HomogeneousCheck& guard) {
       const auto& m=state.model;const auto w=nodal_mass_weights(m);double H=0,Y3=0,D=0,Lnuc=0;
       std::vector<double> eps(m.size());std::size_t burning_peak=0,he3_peak=0;
+      std::size_t omitted_cells=0;double omitted_mass=0,omitted_fuel_energy=0;
       for(std::size_t i=0;i<m.size();++i) {
         H+=w[i]*m.comp[i][Species::H1];Y3+=w[i]*m.comp[i][Species::He3];D+=w[i]*m.comp[i][Species::H2];
         eps[i]=nuclear.eval(m.T(i),m.rho(i),m.comp[i]).eps;Lnuc+=w[i]*eps[i];
         if(eps[i]>eps[burning_peak])burning_peak=i;
         if(m.comp[i][Species::He3]>m.comp[he3_peak][Species::He3])he3_peak=i;
+        if(quantum_fuel_limit>0 && m.T(i)>=1e5) {
+          bool omitted=false;
+          for(auto r:{PPReaction::pp,PPReaction::he3_he3,PPReaction::he3_he4,PPReaction::deuterium_p})
+            omitted|=pp_screening(m.T(i),m.rho(i),m.comp[i],r,PPScreening::salpeter_van_horn).reaction_omitted;
+          for(auto r:{CNReaction::c12_p,CNReaction::c13_p,CNReaction::n14_p})
+            omitted|=cn_screening(m.T(i),m.rho(i),m.comp[i],r,PPScreening::salpeter_van_horn).reaction_omitted;
+          if(omitted) {
+            ++omitted_cells;omitted_mass+=w[i];
+            // Rounded rest-energy ceilings to He4, including daughter protons.
+            // Current inventory only: this does not bound future fuel inflow.
+            omitted_fuel_energy+=w[i]*(6.5e18*m.comp[i][Species::H1]
+              +5.8e18*m.comp[i][Species::H2]+4.5e18*m.comp[i][Species::He3]);
+          }
+        }
       }
       // Contiguous cells above half the peak specific nuclear power. This
       // describes the resolved burning region; it is not a convergence test.
@@ -623,6 +647,9 @@ int lifetime_main(int argc,char** argv) {
         <<",\"He3_peak\":"<<m.comp[he3_peak][Species::He3]
         <<",\"He3_peak_q\":"<<(m.comp[he3_peak][Species::He3]>0?m.m[he3_peak]/m.M:0)
         <<",\"H_mass_g\":"<<H<<",\"He3_mass_g\":"<<Y3<<",\"D_mass_g\":"<<D<<",\"surface_X\":"<<m.comp.back().X[0]
+        <<",\"quantum_burning_omitted_cells\":"<<omitted_cells
+        <<",\"quantum_burning_omitted_mass_g\":"<<omitted_mass
+        <<",\"quantum_burning_current_fuel_energy_erg\":"<<omitted_fuel_energy
         <<",\"surface_Z\":"<<m.comp.back().Z()<<",\"error_norm\":"<<error<<",\"initial_D_approximation\":"<<has_D(m)
         <<",\"omitted_mixing_heat_fraction\":"<<(has_D(m)?guard.maximum_heat_fraction:0)<<",\"gross_mixing_heat_fraction\":"<<guard.maximum_gross_heat_fraction
         <<",\"burn_gradient_estimate\":"<<guard.burn_gradient_estimate<<",\"drift_gradient_proxy\":"<<guard.drift_gradient_proxy

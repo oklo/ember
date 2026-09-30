@@ -1,4 +1,5 @@
 #include "ember/nuclear.hpp"
+#include "ember/nuclear_cn.hpp"
 #include "ember/constants.hpp"
 #include <algorithm>
 #include <cmath>
@@ -163,6 +164,43 @@ int main() {
   check(!rejects([&]{cn_screening(5e6,4.3e4,comp,PPScreening::salpeter_van_horn);}),
         "quantum correction continues through the former classical boundary");
   check(rejects([&]{latest_network.eval(2e5,1e6,comp);}),"thermo-pycnonuclear conditions remain unsupported");
+  set_quantum_screening(1.6);
+  auto cold=solar_scaled(1e-8,.13);cold.basis=AbundanceBasis::baryon_mass;
+  cold.metal_inventory=MetalInventory::gs98;
+  cold.X[1]=1e-12;cold[Species::H2]=1e-9;cold.X[2]=1-cold.Z()-cold.X[0]-cold.X[1]-cold[Species::H2];
+  cold.cn_molality=initial_gs98_cn(cold);
+  cold.cn_mass_convention=CNMassConvention::explicit_metal_mass;
+  PPCNNetwork total(PPRates::solar_fusion_iii,PPScreening::salpeter_van_horn);
+  const auto warm_before=total.composition_response(1e7,1000,cold);
+  check(rejects([&]{total.eval(1.1e5,5e4,cold);}),"depleted cold core still refuses by default");
+  check(rejects([]{set_quantum_burning_fuel_limit(-1);})
+      && rejects([]{set_quantum_burning_fuel_limit(1.001e-6);})
+      && rejects([]{set_quantum_burning_fuel_limit(std::numeric_limits<double>::quiet_NaN());}),
+        "trace-fuel omission requires a finite fraction no larger than one ppm");
+  set_quantum_burning_fuel_limit(1e-6);
+  const auto warm_after=total.composition_response(1e7,1000,cold);
+  check(warm_before.state.eps==warm_after.state.eps
+      && warm_before.state.dXdt==warm_after.state.dXdt
+      && warm_before.d_dXdt_dX==warm_after.d_dXdt_dX
+      && warm_before.deps_dX==warm_after.deps_dX,"supported reactions unchanged by trace-fuel option");
+  const auto zero=total.composition_response(1.1e5,5e4,cold);
+  bool exact_zero=zero.state.eps==0 && zero.state.eps_neutrino==0;
+  for(std::size_t i=0;i<NSPEC;++i) {
+    exact_zero&=zero.state.dXdt[i]==0 && zero.deps_dX[i]==0;
+    for(double d:zero.d_dXdt_dX[i])exact_zero&=d==0;
+  }
+  const auto cn_zero=total.cn().response(1.1e5,5e4,cold,*cold.cn_molality);
+  for(double f:cn_zero.frequency)exact_zero&=f==0;
+  check(exact_zero,"omitted pp, D and CN reactions preserve fuel with zero heat and derivatives");
+  const auto flagged=cn_screening(1.1e5,5e4,cold,CNReaction::n14_p,PPScreening::salpeter_van_horn);
+  check(flagged.reaction_omitted && flagged.zeta>1.6 && std::exp(flagged.log_factor)==0,
+        "omission is distinct from a supported screening factor");
+  for(auto fuel:{Species::H1,Species::He3,Species::H2}) {
+    auto rich=cold;rich[fuel]=2e-6;
+    check(rejects([&]{total.eval(1.1e5,5e4,rich);}),"fuel-rich cells retain the quantum-domain refusal");
+  }
+  set_quantum_burning_fuel_limit(0);
+  check(rejects([&]{total.eval(1.1e5,5e4,cold);}),"disabling omission restores strict refusal");
   set_quantum_screening(0);
   return failures?1:0;
 }

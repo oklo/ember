@@ -186,6 +186,12 @@ Susceptibility electrons(double T,double ne) {
 } // namespace
 
 std::atomic<double> quantum_screening_zeta_max{0};
+std::atomic<double> quantum_burning_fuel_limit{0};
+void set_quantum_burning_fuel_limit(double max_fraction) {
+  if(!std::isfinite(max_fraction) || max_fraction<0 || max_fraction>1e-6)
+    throw std::invalid_argument("quantum burning fuel limit must lie in [0,1e-6]");
+  quantum_burning_fuel_limit=max_fraction;
+}
 void set_quantum_screening(double zeta_max) {
   if(!std::isfinite(zeta_max) || zeta_max<0 || zeta_max>1.6)
     throw std::invalid_argument("quantum screening zeta_max must lie in [0,1.6] (mean-field WKB domain)");
@@ -281,8 +287,16 @@ static ScreeningState screening_response(double T,double rho,const Composition& 
   // Explicit classical-ion thermonuclear domain, not a cap or an extrapolation.
   if(model!=PPScreening::legacy_weak && !quantum && out.zeta>.2)
     throw std::domain_error("PPChains: classical-ion screening requires zeta<=0.2; quantum burning unavailable");
-  if(quantum && (out.zeta>zeta_max || g12>200))
+  if(quantum && (out.zeta>zeta_max || g12>200)) {
+    const double limit=quantum_burning_fuel_limit.load(std::memory_order_relaxed);
+    const double fuel=comp[Species::H1]+comp[Species::H2]+comp[Species::He3];
+    if(limit>0 && fuel<=limit) {
+      out.reaction_omitted=true;
+      out.log_factor=-std::numeric_limits<double>::infinity();
+      return out;
+    }
     throw std::domain_error("PPChains: beyond the mean-field quantum screening domain (thermo-pycnonuclear); no extrapolation");
+  }
   const auto weak=r.z1*r.z2*e2/(kB*temp)*exp(.5*log(4*M_PI*e2*NA*density*(ions+theta*ye)/(kB*temp)));
   D exponent=weak;
   if(model==PPScreening::legacy_weak && weak.value>=2) exponent=D(2);

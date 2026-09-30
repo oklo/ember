@@ -58,6 +58,10 @@ checked species coverage to grow while retaining the same heat prescription.
 It does not establish ionization or collision-table support; those still need
 physical assessment. Optional `quantum_screening_zeta_max` selects the
 [nuclear quantum correction](NUCLEAR.md); its default is zero.
+Optional `quantum_burning_fuel_limit` permits omission of unsupported quantum
+reactions in depleted cells, with the [restrictions and diagnostics](NUCLEAR.md#screening)
+described there. It defaults to zero; a positive value changes the physical
+approximation and the restart identity.
 
 The optional `structure_prediction "linear"` uses the recent evolution to
 estimate the next radius, density, temperature and luminosity before solving.

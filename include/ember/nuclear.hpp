@@ -59,6 +59,7 @@ struct ScreeningState {
   std::array<double,NSPEC> dlog_dX{}; // unconstrained abundance partials
   double electron_eta{}, electron_susceptibility{}; // kT/ne * dne/dmu
   double gamma_e{}, zeta{}; // electron-sphere coupling; 3 Gamma_12/tau
+  bool reaction_omitted{}; // explicit trace-fuel approximation; not a screening fit
 };
 ThermonuclearRate pp_bare_rate(double T, PPReaction, PPRates);
 ScreeningState pp_screening(double T,double rho,const Composition&,PPReaction,PPScreening);
@@ -71,6 +72,11 @@ void set_screening_reuse(double h);
 // mean-field domain zeta<=zeta_max (<=1.6) and Gamma12<=200; beyond it, an explicit
 // thermo-pycnonuclear domain error. The correction vanishes as zeta->0.
 void set_quantum_screening(double zeta_max);
+// Optional omission of reactions outside the quantum screening domain, only
+// when X(H1)+X(D)+X(He3) <= max_fraction. Zero (default) retains the domain error.
+// This preserves fuel and omits heat and all rate derivatives together. The
+// caller must assess the missing power; a small inventory alone is not a rate.
+void set_quantum_burning_fuel_limit(double max_fraction);
 
 // N14(p,gamma) bottleneck of a closed CN cycle. The Solar Fusion III choice
 // uses its S(0) with Solar Fusion II's first and second derivatives.
