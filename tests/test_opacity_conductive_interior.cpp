@@ -159,5 +159,39 @@ int main(){try{
     require(std::abs(fd-v.dlnk_dX)<2e-6,"hydrogen composition join derivative");
     if(X<=.70)require(v.kappa==bounded.eval(T,rho,mixture).kappa,"H-poor source changed");
   }
+  // Following the table's log R edge keeps the overlap inside the source
+  // when density grows. The uncertainty check remains local and unchanged.
+  ConductiveInteriorOpacity coordinate(bounded,strong,.001,1.,
+      ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
+  for(double T:{4.1e5,6e5,1e6})for(double logR:{3.0999,3.1,3.1001,3.25,3.3999,3.4,3.4001,4.}) {
+    const double rho=std::pow(10.,logR)*std::pow(T/1e6,3);
+    const auto v=coordinate.eval(T,rho,hc);constexpr double h=1e-6;
+    auto f=[&](double t,double r){return std::log(coordinate.eval(t,r,hc).kappa);};
+    require(std::abs((f(T*std::exp(h),rho)-f(T*std::exp(-h),rho))/(2*h)-v.dlnk_dlnT)<2e-6,
+        "source-coordinate temperature derivative");
+    require(std::abs((f(T,rho*std::exp(h))-f(T,rho*std::exp(-h)))/(2*h)-v.dlnk_dlnRho)<2e-6,
+        "source-coordinate density derivative");
+    if(logR<=3.1)require(v.kappa==bounded.eval(T,rho,hc).kappa,"supported low log R source changed");
+  }
+  require(coordinate.eval(6e5,1002.,hc).kappa>0,"density extension unavailable");
+  ConductiveInteriorOpacity coordinate_weak(bounded,weak,.001,1.,
+      ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
+  rejected=false;try{coordinate_weak.eval(6e5,2000.,hc);}catch(const std::domain_error&){rejected=true;}
+  require(rejected,"source-coordinate extension ignored radiation uncertainty");
+  // A nearly complete blend must still query its source; rounding the C2
+  // polynomial above unity must never skip a source-support check.
+  struct NarrowSource final : Opacity {
+    HotBoundedSource source;
+    OpacityState eval(double T,double rho,const Composition& c) const override {
+      if(rho>200.)throw std::domain_error("narrow density support");
+      return source.eval(T,rho,c);
+    }
+    const char* name() const override{return "narrow source";}
+  } narrow;
+  ConductiveInteriorOpacity edge(narrow,strong,.001,1.,
+      ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
+  auto edge_c=hc;edge_c.X[0]=.745-1e-6;edge_c.X[2]=1-edge_c.X[0]-edge_c.X[1];
+  rejected=false;try{edge.eval(6e5,2000.,edge_c);}catch(const std::domain_error&){rejected=true;}
+  require(rejected,"nearly complete composition join bypassed source guard");
   std::cout<<"radiative continuation, derivatives, support and contribution checks passed\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

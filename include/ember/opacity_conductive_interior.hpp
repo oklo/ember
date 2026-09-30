@@ -12,7 +12,7 @@ namespace ember {
 
 // Density continuation of radiative opacity, only where electron conduction
 // makes the declared opacity uncertainty a small heat-transport term.
-// The fixed overlap avoids following the irregular edge of a source stencil.
+// The overlap stays within the source support; missing source cells still reject.
 class ConductiveInteriorOpacity final : public Opacity {
 public:
   static constexpr double anchor_density=8500., full_density=9500.;
@@ -32,6 +32,9 @@ public:
     double cold_source_T{},cold_full_T{};
     // Optional composition overlap; zero preserves the older selection rule.
     double full_X{};
+    // Optional upper join in the radiative source coordinate
+    // log R = log10(rho) - 3 log10(T/1e6), instead of fixed temperatures.
+    double source_logR{},full_logR{};
   };
   static Domain hydrogen_envelope_domain() {
     // At rho <= 1000 the entire 700–800 kK overlap lies below log R=3.5.
@@ -39,6 +42,13 @@ public:
     // Finish the composition join below the source's atomic X=.75 boundary,
     // including the conversion from baryonic H/He fractions.
     return {180.,190.,2e5,7e5,8e5,1000.,.70,1e-8,100.,3e5,3.2e5,.745};
+  }
+
+  static Domain ionized_hydrogen_envelope_domain() {
+    auto domain=hydrogen_envelope_domain();
+    domain.maximum_rho=1e5;
+    domain.source_logR=3.1;domain.full_logR=3.4;
+    return domain;
   }
 
   ConductiveInteriorOpacity(const Opacity& source,const Conduction& conduction,
@@ -53,6 +63,9 @@ public:
              && domain_.minimum_T>0 && domain_.full_T>domain_.minimum_T && domain_.source_T>domain_.full_T
              && domain_.minimum_X>=0 && domain_.minimum_X<=1 && domain_.maximum_Z>=0 && domain_.maximum_Z<=1
              && (domain_.full_X==0 || (domain_.full_X>domain_.minimum_X && domain_.full_X<=1))
+             && ((domain_.source_logR==0 && domain_.full_logR==0)
+                 || (std::isfinite(domain_.source_logR+domain_.full_logR)
+                     && domain_.full_logR>domain_.source_logR))
              && domain_.uncertainty>=1 && domain_.uncertainty<=100
              && ((domain_.cold_source_T==0 && domain_.cold_full_T==0)
                  || (domain_.cold_source_T>=domain_.minimum_T
@@ -63,7 +76,10 @@ public:
   }
 
   OpacityState eval(double T,double rho,const Composition& c) const override {
-    if(rho<=domain_.anchor || T>=domain_.source_T || T<=domain_.cold_source_T
+    const bool coordinate_join=domain_.full_logR>domain_.source_logR;
+    const double logR=coordinate_join?std::log10(rho)-3*std::log10(T/1e6):0.;
+    if(rho<=domain_.anchor || (coordinate_join?logR<=domain_.source_logR:T>=domain_.source_T)
+        || T<=domain_.cold_source_T
         || c.h1()<domain_.minimum_X || c.Z()>domain_.maximum_Z)
       return source_.eval(T,rho,c);
     double wx=1.,dwx=0.;
@@ -104,7 +120,14 @@ public:
     const double width=std::log(domain_.full/domain_.anchor);
     const auto [wr,dwr]=ramp(x/width);
     const double twidth=std::log(domain_.source_T/domain_.full_T);
-    const auto [wt,dwt]=ramp(std::log(domain_.source_T/T)/twidth);
+    const auto upper=coordinate_join
+        ?ramp((logR-domain_.source_logR)/(domain_.full_logR-domain_.source_logR))
+        :ramp(std::log(domain_.source_T/T)/twidth);
+    const double wt=upper.first;
+    const double upper_derivative=coordinate_join
+        ?upper.second/((domain_.full_logR-domain_.source_logR)*std::log(10.)):0.;
+    const double dwtT=coordinate_join?-3*upper_derivative:-upper.second/twidth;
+    const double dwtR=upper_derivative;
     double wc=1.,dwc=0.;
     if(domain_.cold_source_T>0) {
       const double cold_width=std::log(domain_.cold_full_T/domain_.cold_source_T);
@@ -112,7 +135,8 @@ public:
       wc=cold.first;dwc=cold.second/cold_width;
     }
     const double w=wr*wt*wc*wx;
-    const double dwT=wx*wr*(wt*dwc-wc*dwt/twidth),dwR=wx*wt*wc*dwr/width;
+    const double dwT=wx*wr*(wt*dwc+wc*dwtT);
+    const double dwR=wx*wc*(wt*dwr/width+wr*dwtR);
     const double dwX=wr*wt*wc*dwx;
     if(w<1.) {
       const auto old=source_.eval(T,rho,c);
@@ -156,7 +180,10 @@ private:
   mutable std::atomic<double> maximum_{};
   static std::pair<double,double> ramp(double u) {
     if(u<=0)return {0,0};if(u>=1)return {1,0};
-    return {u*u*u*(10+u*(-15+6*u)),30*u*u*(1-u)*(1-u)};
+    const double v=1-u;
+    const double value=u<=.5?u*u*u*(10+u*(-15+6*u))
+        :1-v*v*v*(10+v*(-15+6*v));
+    return {value,30*u*u*v*v};
   }
 };
 } // namespace ember

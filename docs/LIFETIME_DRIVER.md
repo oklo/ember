@@ -564,7 +564,8 @@ radiative opacity in cool, dense cells. It measures the source opacity slope
 near 8500 g/cm³ and joins smoothly over 8500–9500 g/cm³. The original source
 is recovered over 3.4–3.6 MK. Temperature and composition still require
 supported source queries at the anchor; the option does not supply missing
-opacity data. The assessed lower temperature limit is 800 kK.
+opacity data. The assessed lower temperature limit is 800 kK, or 600 kK when
+`conduction_envelope "ionized"` selects direct source conductivity.
 
 The continuation is allowed only when a factor-ten uncertainty in radiation
 changes total heat conductivity by at most 0.1%. The check uses half the
@@ -591,6 +592,19 @@ checks remain active. Restart identity records
 through 1000 g/cm³. A smooth composition blend spans baryonic hydrogen
 fractions 0.70–0.745, finishing below the hot source's atomic hydrogen
 boundary at 0.75. Its hydrogen derivative includes this blend.
+With `conduction_envelope "ionized"`, the upper join follows the source
+coordinate log R = log10(rho) − 3 log10(T/1e6), from 3.1 to 3.4. This ends
+below the hot-source boundary at 3.5 as density grows. The selected density
+ceiling is 1e5 g/cm³; source support and the heat-uncertainty check can reject
+states within that ceiling. The lower temperature and composition joins stay
+the same. Restart identity is `hydrogen_density_continuation.logR_overlap.v1`.
+
+A 68.63 Myr overlap changes luminosity by 7.862e-7 relative to the saved track.
+It also uses `material_heat_tolerance "5e-6"`, a local iteration threshold a
+thousand times below the energy time tolerance; conservation checks are
+unchanged. Cooling proceeds to 1786 K before reaching the quantum EOS range.
+[Native and stellar checks](results/hydrogen_opacity_coordinate_sept30_v1.json).
+
 A matched 297.0 Myr comparison with opacity multipliers 0.01, 1 and 100
 changes luminosity by at most 0.0001657%. The nominal calculation reaches
 the 1800 K atmosphere boundary. The uncertainty allowance and all evolution
