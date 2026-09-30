@@ -1,0 +1,134 @@
+{
+  "scope": "Recover masked warm dense helium-rich composition-plane vertices using converged equilibrium-ionization FreeEOS. Preserve all existing valid nodes and the existing fully ionized potential blend.",
+  "base_sha256": "c50ef3eb102b870e3cd92df5da511a12c29ab92026b3f9dd48a07d98434fbaf6",
+  "table_sha256": "59f98384b8c95781ff79987f7502bce3a8eb93df6c3c5c7ab237e55f20ff189b",
+  "source_queries": 5939,
+  "new_vertices": 305,
+  "planes": 23,
+  "source_sha256_by_plane": [
+    {
+      "index": 0,
+      "source_sha256": "55ec2fa0954480d27f4fd36b24337e362aeea5e4469dc01919fb302356efde44"
+    },
+    {
+      "index": 4,
+      "source_sha256": "5cd482883b9510a979a7801d84a4ae47686d6dc73874a3d824c80b648a9765a9"
+    },
+    {
+      "index": 13,
+      "source_sha256": "e02cbc6211cc222f6256795f5f4ab859713a40282b4de583b42375f9d13672d7"
+    },
+    {
+      "index": 60,
+      "source_sha256": "13c8aa08b34782889f313540baa9e8c8ae95d4843ef2cfed08d563d1e2190158"
+    },
+    {
+      "index": 66,
+      "source_sha256": "e6e79c32f71d7cfbcc7d948e6e004e0c0271742c60db78745f209e94042e87c7"
+    },
+    {
+      "index": 73,
+      "source_sha256": "82079ae99be51f2ec1f21ef5741bc2b12bbea5aea9e65c3b3bc18e53130b4567"
+    },
+    {
+      "index": 120,
+      "source_sha256": "8bce832d3b495a96e070def4f7383eb425bea287de49d03bb83ace042250c549"
+    },
+    {
+      "index": 121,
+      "source_sha256": "4892daab86c5a2e8ea5f33511937929340570b9447ecee82df40a81593c41e75"
+    },
+    {
+      "index": 122,
+      "source_sha256": "c970f8b55d775ffaf31e638a2cd2b690735ebcfa8470dbf003b3be5511723d85"
+    },
+    {
+      "index": 124,
+      "source_sha256": "50a70f891c252c9d9ee4eb0954f0a2c368c6635ab9d1c05319847569b918558c"
+    },
+    {
+      "index": 125,
+      "source_sha256": "3950c4d73060eb9483624b72c7bcbc95e55a614b4f8fde74239114d83fccad20"
+    },
+    {
+      "index": 126,
+      "source_sha256": "9fc904a0484c8129dc981db4a9bff4f1e3a5afa87db51a280e9e7e0b720b25f8"
+    },
+    {
+      "index": 127,
+      "source_sha256": "88051f01e11e64eb574547372872a3a24d24810b7b46949354114860992ce750"
+    },
+    {
+      "index": 128,
+      "source_sha256": "891745a868346089c8834d89d95be473ec3494c8bd49f6a0dd2f76f19fb54f99"
+    },
+    {
+      "index": 129,
+      "source_sha256": "fb7a30952fc48dafd0b56034f4838c4c9a25cbb6a9c3ef758bc1bedf0f1a5ba9"
+    },
+    {
+      "index": 130,
+      "source_sha256": "3c180eca3ed5ae2a1cefc74f2cb5371d8846249c9a2bef8c2e7bd37970e67bcb"
+    },
+    {
+      "index": 132,
+      "source_sha256": "85743154020d0db4919a98e89ac88bbc9c18e4b38410da963f5f7429d2c0b5e4"
+    },
+    {
+      "index": 133,
+      "source_sha256": "50a52db68c978f02649df414ef50b6612dffdd0d914b43d7b5cb13496ec32373"
+    },
+    {
+      "index": 134,
+      "source_sha256": "052f1c9cb4d59678f263f489951b2463d4cd8a3f98feb3fbcae9ce09b56ad626"
+    },
+    {
+      "index": 136,
+      "source_sha256": "5b67f363b96abdbd0f19eaf54a01a639ef15ed307f71d57a25b565d196869111"
+    },
+    {
+      "index": 137,
+      "source_sha256": "879e77f327a87a26e2d1a18cff99525288dcdafe6b808a7e0c1a77ceb3298dc6"
+    },
+    {
+      "index": 138,
+      "source_sha256": "6f79c317fdaf09457ffa6585ae01a273808d8cf471f26cc9157c7c6b8d7db144"
+    },
+    {
+      "index": 139,
+      "source_sha256": "c45d94f3200d749177868fc8067099cca883675df6ac38c45b3093e97cd21c8c"
+    }
+  ],
+  "validation": {
+    "queries": 2144,
+    "previously_supported_maximum_state_difference": 0.0,
+    "maximum_source_difference": 1.1521218528431909e-05,
+    "source_queries_covered": 41,
+    "current_profile_maximum_state_difference": 0.0,
+    "passed": true
+  },
+  "derivatives": {
+    "centres": 11,
+    "queries": 55,
+    "maximum_scaled_error": 9.999266831602162e-10,
+    "passed": true,
+    "scope": "Independent centered differences of composition-potential thermal and density derivatives at newly supported physical stellar states; h=1e-5 in logarithmic T or rho."
+  },
+  "matched_stellar_interval": {
+    "passed": true,
+    "relative_errors": {
+      "radius_Rsun": 9.772652337033315e-11,
+      "Teff_K": 8.122706519564772e-08,
+      "luminosity_Lsun": 3.2471276844675983e-07,
+      "central_T_K": 7.894408802282652e-08,
+      "central_density_g_cm3": 1.046851457521165e-09,
+      "H_mass_g": 3.0388615671732134e-16,
+      "He3_mass_g": 8.307858901743474e-15,
+      "surface_X": 7.820414964192382e-10
+    },
+    "age_years": 3876891230553.4185,
+    "scope": "Same 62.89 Myr interval and saved state. Only previously masked EOS vertices are filled with direct source values and the existing fully ionized potential blend. Existing valid vertices and all stellar settings are unchanged."
+  },
+  "CPU_seconds": 63.060705,
+  "limitations": "This fills missing source support. It does not add crystallization or extend the separately enforced quantum-ion domain."
+}

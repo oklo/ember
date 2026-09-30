@@ -8,6 +8,15 @@ Tables can contain separate valid density intervals. Pressure inversion stays
 in the interval containing its density guess and cannot cross a masked cell;
 without a guess it uses the dilute interval.
 
+Missing composition-plane vertices can be repaired with converged source
+evaluations and complete derivative stencils, without changing valid table
+values. A repair of 305 warm, dense helium-rich vertices passes 2144 native
+queries. Newly supported states agree with direct FreeEOS responses within
+1.152e-5; a matched 62.89 Myr stellar interval differs by at most 3.247e-7
+in global quantities. These are interpolation and evolution checks, separate
+from the physical uncertainty of the EOS.
+[Source-support checks](results/cooling_eos_support_sept30_v1.json).
+
 ## Degenerate electrons
 
 `ElectronGas` and `IdealEos` integrate relativistic Fermi–Dirac occupations.
