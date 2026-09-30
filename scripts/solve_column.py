@@ -276,7 +276,9 @@ def main():
                       ('element_masses', 'ember-masses.dat')]}
             if (att / 'fort.8').exists(): inputs['initial_structure'] = (att / 'fort.8').read_text()
             source_inputs(inputs, spec, x, y, t, g, logtext)
-            r['diagnostics'] = source_state(logtext, (att / 'fort.9').read_text(errors='ignore'), t, g, opacity, spec['tau'])
+            convergence = att / 'fort.9'
+            changes = convergence.read_text(errors='ignore') if convergence.exists() else ''
+            r['diagnostics'] = source_state(logtext, changes, t, g, opacity, spec['tau'])
             r['accepted'] = True
         except Exception as e:
             r['failure'] = str(e)[:300]

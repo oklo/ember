@@ -56,7 +56,10 @@ def source_inputs(inputs, spec, x, y, teff, logg, log):
     if not marker or any(not math.isclose(float(a.replace("D","E")),b,rel_tol=1e-12) for a,b in zip(marker[-1],masses)):
         raise ValueError("source did not load the baryonic element masses")
     chemistry=re.findall(r"EMBER MOLECULAR EQUILIBRIUM TOLERANCE:\s*([0-9.eEdD+-]+)",log)
-    if not chemistry or float(chemistry[-1].replace("D","E")) != 1e-8:
+    expected_chemistry = spec.get("molecular_equilibrium_tolerance", 1e-8)
+    if not math.isfinite(expected_chemistry) or not 0 < expected_chemistry <= 1e-8:
+        raise ValueError("invalid source molecular equilibrium tolerance")
+    if not chemistry or any(float(v.replace("D","E")) != expected_chemistry for v in chemistry):
         raise ValueError("source molecular equilibrium tolerance mismatch")
     settings = {k:float(v.replace("D","E")) for k,v in re.findall(
         r"([A-Z][A-Z0-9]*)\s*=\s*([0-9.eEdD+-]+)",inputs["parameters"].upper())}

@@ -519,6 +519,17 @@ class SourceAcceptance(unittest.TestCase):
                              "HMIX0=1.9,IFRSET=20000,ND=200,TAUFIR=1e-7,TAULAS=1000,TAUDIV=.01,CHMAX=1e-6,ILGDER=1,NITER=200,DPSILT=1.03,DERT=.001"}
         marker=f"EMBER ELEMENT MASSES: {w[0]} {w[1]}\nEMBER MOLECULAR EQUILIBRIUM TOLERANCE: 1e-8\n"
         source_inputs(inputs,spec,.55,.1,2800,5,marker)
+        precise = dict(spec, molecular_equilibrium_tolerance=1e-11)
+        precise_marker = marker.replace("TOLERANCE: 1e-8", "TOLERANCE: 1e-11")
+        source_inputs(inputs,precise,.55,.1,2800,5,precise_marker)
+        for declared, actual in [(spec, precise_marker), (precise, marker),
+                                 (precise, precise_marker+marker)]:
+            with self.assertRaisesRegex(ValueError,"molecular equilibrium tolerance mismatch"):
+                source_inputs(inputs,declared,.55,.1,2800,5,actual)
+        for value in [0, -1e-11, 1e-7, math.nan, math.inf]:
+            with self.assertRaisesRegex(ValueError,"invalid source molecular equilibrium tolerance"):
+                source_inputs(inputs,dict(spec,molecular_equilibrium_tolerance=value),
+                              .55,.1,2800,5,marker)
         tightened = {**inputs, "parameters":inputs["parameters"].replace("CHMAX=1e-6", "CHMAX=1e-8")}
         source_inputs(tightened,dict(spec,temperature_convergence=1e-8),.55,.1,2800,5,marker)
         with self.assertRaisesRegex(ValueError,"settings mismatch"):

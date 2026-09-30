@@ -544,3 +544,11 @@ turn or white-dwarf cooling.
 ![The non-grey and corrected-COND trillion-year tracks](results/evolution_nongrey_m010_1tyr.png)
 
 [Standalone PDF](results/evolution_nongrey_m010_1tyr.pdf).
+
+A source specification may declare `molecular_equilibrium_tolerance` below
+its default of `1e-8`; the importer requires that value in the source log.
+A nonideal atmosphere that solves density to `2e-9` uses `1e-11` for its inner
+chemical equilibrium. The tighter inner solve avoids numerical noise in the
+density inversion. It leaves the flux, hydrostatic and source-coverage checks
+unchanged. Different chemical compositions still require their own opacity
+and atmosphere comparisons.

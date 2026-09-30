@@ -119,6 +119,25 @@ class T(unittest.TestCase):
         p.returncode = os.waitstatus_to_exitcode(status)
         self.assertEqual(pid, p.pid)
 
+    def test_source_failure_without_history_keeps_the_physical_diagnostic(self):
+        sys.path.insert(0, str(SOLVER.parent)); import solve_column as sc
+        for text, expected in [("DOES NOT CONVERGE AFTER 3000 ITERATIONS", "DOES NOT CONVERGE"),
+                               ("source stopped before a final model", "no final atmosphere")]:
+            c = column(tempfile.mkdtemp(dir=self.tmp), [1], [1])
+            def failed_run(att, exe, cap, nd, rule):
+                (att/'run.log').write_text(text)
+                return dict(returncode=0, CPU_seconds=1, wall_seconds=0,
+                            monitor_stop=None, iterations=0, history=[])
+            args = [str(SOLVER), str(c), '--executable', str(FAKE),
+                    '--executable-sha256', SHA, '--strategy', 'damped']
+            with mock.patch.object(sys, 'argv', args), mock.patch.object(sc, 'run', failed_run), \
+                    mock.patch.object(sc, 'source_inputs'):
+                sc.main()
+            result = json.loads((c/'result.json').read_text())
+            self.assertFalse(result['accepted'])
+            self.assertIn(expected, result['attempts'][0]['failure'])
+            self.assertNotIn('No such file', result['attempts'][0]['failure'])
+
     def test_cpu_limited_damping_reuses_guess_within_budget_and_still_checks_source(self):
         sys.path.insert(0, str(SOLVER.parent)); import solve_column as sc
         for budget, count in [(100, 4), (40, 2)]:
