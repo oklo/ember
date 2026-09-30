@@ -127,5 +127,26 @@ int main(){try{
       "selected envelope bound differs from independent transport change");
   require(std::abs(assessed.maximum_transport_uncertainty()-.002)<1e-12,
       "larger envelope bound was not recorded");
+  struct HotBoundedSource final : Opacity {
+    OpacityState eval(double T,double rho,const Composition&) const override {
+      if(std::log10(rho)-3*std::log10(T/1e6)>3.5)
+        throw std::domain_error("hot source log R edge");
+      const double r=std::log(rho/180.);
+      return {1e3*std::exp(.7*r+.02*r*r)*std::pow(T/7e5,-.4),-.4,.7+.04*r,0,0,0};
+    }
+    const char* name() const override {return "source with hot density bound";}
+  } bounded;
+  Heat strong(1e-6);
+  ConductiveInteriorOpacity safe_join(bounded,strong,.001,1.,
+      ConductiveInteriorOpacity::hydrogen_envelope_domain());
+  for(double T:{5.5e5,6e5,7e5,7.5e5,8e5})for(double rho:{190.,500.,900.,1000.}) {
+    const auto v=safe_join.eval(T,rho,hc);constexpr double h=1e-6;
+    auto f=[&](double t,double r){return std::log(safe_join.eval(t,r,hc).kappa);};
+    require(std::abs((f(T*std::exp(h),rho)-f(T*std::exp(-h),rho))/(2*h)-v.dlnk_dlnT)<2e-6,
+        "upper hydrogen overlap temperature derivative");
+    if(rho<1000.)
+      require(std::abs((f(T,rho*std::exp(h))-f(T,rho*std::exp(-h)))/(2*h)-v.dlnk_dlnRho)<2e-6,
+          "upper hydrogen overlap density derivative");
+  }
   std::cout<<"radiative continuation, derivatives, support and contribution checks passed\n";
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

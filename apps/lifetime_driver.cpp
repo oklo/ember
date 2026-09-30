@@ -300,7 +300,7 @@ int lifetime_main(int argc,char** argv) {
       identity.number("opacity.cold_dense_scale",cold_opacity_scale);
     }
     if(envelope_opacity==1) {
-      identity.values["opacity.conductive_envelope"]="hydrogen_density_continuation.v4";
+      identity.values["opacity.conductive_envelope"]="hydrogen_density_continuation.v5";
       identity.number("opacity.conductive_envelope_scale",envelope_opacity_scale);
       if(envelope_opacity_uncertainty!=.001)
         identity.number("opacity.conductive_envelope_uncertainty",envelope_opacity_uncertainty);
@@ -436,7 +436,7 @@ int lifetime_main(int argc,char** argv) {
       // log R = 3.5 at its lowest selected temperature, log T = 5.6.
       // That corner lies at rho = 199.5 g/cm^3.
       // Recover the supported radiative source across the conduction turn-on.
-      const ConductiveInteriorOpacity::Domain domain{180.,190.,2e5,5.5e5,6e5,1000.,.97,1e-8,100.,3e5,3.2e5};
+      const auto domain=ConductiveInteriorOpacity::hydrogen_envelope_domain();
       envelope_radiation=std::make_shared<ConductiveInteriorOpacity>(*radiation,*conduction,envelope_opacity_uncertainty,envelope_opacity_scale,domain);
       radiation=envelope_radiation;
     }

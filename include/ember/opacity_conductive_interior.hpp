@@ -31,6 +31,11 @@ public:
     // Optional lower-temperature overlap with the supported radiative source.
     double cold_source_T{},cold_full_T{};
   };
+  static Domain hydrogen_envelope_domain() {
+    // At rho <= 1000 the entire 700–800 kK overlap lies below log R=3.5.
+    // A 550–600 kK overlap can ask for the old source beyond that edge.
+    return {180.,190.,2e5,7e5,8e5,1000.,.97,1e-8,100.,3e5,3.2e5};
+  }
 
   ConductiveInteriorOpacity(const Opacity& source,const Conduction& conduction,
       double maximum_transport_uncertainty=.001,double opacity_scale=1.)

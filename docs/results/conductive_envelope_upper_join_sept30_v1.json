@@ -1,0 +1,43 @@
+{
+  "scope": "Upper-temperature join repair for hydrogen-envelope radiative opacity; unchanged conductivity uncertainty admission.",
+  "identity": "hydrogen_density_continuation.v5",
+  "overlap_T_K": [
+    700000,
+    800000
+  ],
+  "maximum_density_g_cm3": 1000,
+  "reason": "The full upper overlap lies below the old source logR limit 3.5 over the selected density range.",
+  "native_queries": 230,
+  "maximum_shared_total_conductivity_change": 1.7474899705050007e-07,
+  "regression_test": "opacity_conductive_interior",
+  "stellar_overlap": {
+    "passed": true,
+    "relative_differences": {
+      "luminosity_Lsun": 2.077136795897161e-08,
+      "radius_Rsun": 2.3187980424665966e-09,
+      "Teff_K": 4.033442912998453e-09,
+      "central_T_K": 2.459411005961698e-07,
+      "central_density_g_cm3": -6.32710073222853e-09,
+      "H_mass_g": 9.769962616701378e-15,
+      "He3_mass_g": -7.153166947659884e-13
+    }
+  },
+  "cooling_endpoint": {
+    "years": 3872013816144.9907,
+    "Teff_K": 1844.2952401903028,
+    "central_T_K": 950587.7975998739,
+    "radius_Rsun": 0.03047964927844698,
+    "nuclear_fraction": 3.135446266857525e-05,
+    "surface_X": 0.9919256382265715
+  },
+  "cooling_cost": {
+    "CPU_seconds": 274.15160499999996,
+    "wall_seconds": 99.79573541600257
+  },
+  "status": "Target age not reached. The first physical-input rejection is hot hydrogen opacity logR=3.5 near 665.6kK; a composition-restricted transition remains to be assessed. Later small-step Newton failures are secondary.",
+  "limitations": [
+    "The nominal cooling track remains a controlled dense-core EOS alternative.",
+    "Cooler projections expose separate lower-temperature source limits.",
+    "Higher-metal H3+ atmosphere incorporation remains pending."
+  ]
+}
