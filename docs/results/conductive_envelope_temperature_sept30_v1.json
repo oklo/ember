@@ -1,0 +1,24 @@
+{
+  "scope": "Extend only the hydrogen-rich conducting-envelope temperature domain from 310 kK to 200 kK. Old-supported opacity values and derivatives are unchanged. Existing source, composition and conditional transport-uncertainty checks remain active.",
+  "profile_queries": 536,
+  "profile_failed": 0,
+  "forecast": {
+    "core_minimum_T": 1000000.0,
+    "envelope_minimum_T": 200000.0,
+    "failed": 185,
+    "failure_examples": [
+      "fail 178 0.80000000000000004 ConductiveInteriorOpacity: outside selected temperature/density bounds",
+      "fail 179 0.80000000000000004 ConductiveInteriorOpacity: outside selected temperature/density bounds",
+      "fail 180 0.80000000000000004 ConductiveInteriorOpacity: outside selected temperature/density bounds"
+    ],
+    "maximum_fd_error": 2.5832190075902872e-06,
+    "max_envelope_uncertainty": 0.0009721261288959101,
+    "max_core_uncertainty": 2.232492936301083e-10
+  },
+  "conditional_uncertainty_factor": 100,
+  "selected_uncertainty_limit": 0.003,
+  "conductivity_margin": 2.0,
+  "remaining_forecast_failures": "Cold core opacity and hot dense-hydrogen source limits remain enforced. No approval of those unsupported forecast states is implied.",
+  "unit_test": "test_opacity_conductive_interior passed",
+  "stellar": "Quantum-corrected continuation passed 2177 K with unchanged audits; subsequently reached the quantum-ion assessed-domain limit."
+}

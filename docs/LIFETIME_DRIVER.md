@@ -552,7 +552,11 @@ continues the measured density slope where radiation is a small contribution
 alongside electron conduction. Its density blend ends at 190 g/cm³, before
 one hot-source corner at 199.5 g/cm³. Temperature, composition and source
 checks remain active. The prescription is recorded as
-`hydrogen_density_continuation.v2` in restart identity.
+`hydrogen_density_continuation.v3` in restart identity. The minimum temperature
+is 200 kK. At the 2223 K stellar model, all 536 opacity queries are supported;
+the largest conditional transport uncertainty in the colder-envelope checks
+is 0.09722%. Colder core and hot hydrogen source limits remain enforced.
+[Temperature-domain checks](results/conductive_envelope_temperature_sept30_v1.json).
 
 `opacity_conductive_envelope_uncertainty` selects the maximum fractional change
 in total diffusive conductivity for a factor-100 reduction of the continued
