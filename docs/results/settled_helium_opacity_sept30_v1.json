@@ -1,0 +1,45 @@
+{
+  "scope": "Conducting settled H/He layers with trace metals up to Z=0.001. Source anchors and transport uncertainty limit remain required.",
+  "opacity": {
+    "query_count": 1001,
+    "failures": [],
+    "derivative_centres": 10,
+    "derivative_max_error": 4.957719819916889e-08,
+    "transport_differences": {
+      "stellar": 6.014300168999398e-12,
+      "projection": 0.0,
+      "grid": 0.0
+    },
+    "source_checkpoint_sha256": "0f1a22e843b046be4b3f305b185202c7f955ac41f76b161049f81b7d79f4eb31"
+  },
+  "ionization": {
+    "checkpoint_sha256": "0f1a22e843b046be4b3f305b185202c7f955ac41f76b161049f81b7d79f4eb31",
+    "source_sha256": "1bfcfc7226449987de1609afb8bb9b7625588457d394fc0038b4baa56ac76c9f",
+    "source_queries": 229,
+    "failed": 0,
+    "maximum_electron_deficit": 2.3612691622321158e-05,
+    "minimum_H_ionized": 0.9999999999999968,
+    "minimum_He_doubly_ionized": 0.9999999999626732,
+    "scope": "Ionization diagnostic at the current1419K star and cooler projections, using the source GS98 metal proxy. H/He ionization is checked separately from the metal electron deficit; partial metal ionization remains an approximation. This diagnostic does not validate conductivity accuracy, liquid phase stability or the source free-energy error.",
+    "H_He_ionization_supported": true
+  },
+  "stellar_comparison": {
+    "passed": true,
+    "relative_errors": {
+      "radius_Rsun": 9.415053343638725e-10,
+      "Teff_K": 2.384981467508745e-08,
+      "luminosity_Lsun": 9.728227222269558e-08,
+      "central_T_K": 1.8953929838879388e-07,
+      "central_density_g_cm3": 2.5867327430999367e-09,
+      "H_mass_g": 1.0636015485089863e-15,
+      "He3_mass_g": 1.993886136687322e-14,
+      "surface_X": 2.0320990657856714e-09
+    },
+    "age_years": 3876828339928.4185,
+    "scope": "Same255Myr interval, same saved state and all stellar settings. Only conducting-envelope maximumZ1e-4 to1e-3 changes. Source anchors, same free-energy formula, numerical settings, opacity uncertainty and transport bounds retained."
+  },
+  "limitations": [
+    "Partial metal ionization remains a conductivity approximation.",
+    "These controls do not validate crystallization or the total cooling-age error."
+  ]
+}

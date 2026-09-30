@@ -59,7 +59,7 @@ public:
     // Residual metals in settled H/He layers do not remove the source
     // anchors or the local heat-transport bound. Keep this extension trace
     // only; the separate core domain covers metal-rich material.
-    domain.maximum_Z=1e-4;
+    domain.maximum_Z=1e-3;
     return domain;
   }
 

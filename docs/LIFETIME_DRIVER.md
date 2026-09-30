@@ -601,31 +601,33 @@ the opacity source outside its tabulated domain.
 The hydrogen-envelope option, `opacity_conductive_envelope "1"`, continues
 measured radiative-opacity density slopes only where electron conduction
 makes the declared opacity uncertainty a small heat-transport contribution.
-The density blend spans 180–190 g/cm³. The metal limit is 1e-8, and both source anchors must exist.
+The density blend spans 180–190 g/cm³. Both source anchors must exist.
 
 With `conduction_envelope "ionized"`, the upper join follows the source
 coordinate log R = log10(rho) − 3 log10(T/1e6), from 3.1 to 3.4, below the
 source boundary at 3.5. The declared limits are T≥200 kK and rho≤1e5 g/cm³;
-source support and the heat-uncertainty check further restrict that domain.
+The trace-metal limit is Z≤0.001; source support and the heat-uncertainty
+check further restrict that domain.
 The same bound admits both H-rich and He-rich parts of the low-metal layer;
 there is no hydrogen-fraction threshold in this mode. Direct conduction
 remains active below 300 kK, so this option does not return
 to an unsupported radiative table there. Restart identity records
-`hydrogen_density_continuation.logR_overlap.v3`.
+`hydrogen_density_continuation.logR_overlap.trace_metals.v5`.
 
-The original conduction option retains its hydrogen blend over mass fractions
+The original conduction option retains its metal limit of 1e-8, hydrogen blend over mass fractions
 0.70–0.745, its 700–800 kK upper overlap,
 1000 g/cm³ density ceiling, and 300–320 kK return to the radiative source
 where conduction switches off. Missing conduction cannot justify an opacity
 continuation. Its restart identity is `hydrogen_density_continuation.v6`.
 
-Native checks exercise 1990 opacity queries and both saved stellar profiles.
-Independent H/He ionization checks at 157 points support the fully ionized
-conduction approximation. A matched 500 Myr comparison changes luminosity
-by 2.234e-9; continuation reaches 1604 K before meeting the separate interior
-opacity temperature floor. These checks do not validate a mixture phase
-diagram or establish a cooling-age error bound.
-[H/He checks](results/helium_envelope_opacity_sept30_v1.json) ·
+The trace-metal extension passes 1001 native opacity queries and thermal and
+composition derivative checks. Independent ionization calculations at 229
+points support treating H and He as fully ionized. A matched 255.1 Myr
+stellar interval changes global quantities by at most 1.895e-7 relative.
+The source opacity anchors, factor-100 radiative-opacity uncertainty and
+0.003 bound on its contribution to total transport are unchanged. These
+checks do not establish a mixture phase diagram or a cooling-age error bound.
+[Trace-metal checks](results/settled_helium_opacity_sept30_v1.json) ·
 [Lower-temperature overlap](results/hydrogen_opacity_lower_join_sept30_v1.json).
 
 `opacity_conductive_envelope_uncertainty` selects the maximum fractional change

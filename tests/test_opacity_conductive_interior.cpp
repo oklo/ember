@@ -214,7 +214,7 @@ int main(){try{
   // Crossing a tiny residual-metal abundance must not create a hole in a
   // conducting H/He layer. The actual source anchors and heat bound still
   // apply, and metal-rich compositions are outside this envelope extension.
-  for(double Z:{0.,.999e-8,1.001e-8,1e-6,1e-4}) {
+  for(double Z:{0.,.999e-8,1.001e-8,1e-6,.999e-4,1.001e-4,1e-3}) {
     auto mixture=hc;mixture.X[0]=.004;mixture.X[3]=Z;
     mixture.X[2]=1-mixture.X[0]-mixture.X[1]-Z;
     require(cool_ionized.eval(2.5e5,350.,mixture).kappa>0,
@@ -226,7 +226,7 @@ int main(){try{
       catch(const std::domain_error&){rejected=true;}
     require(rejected,"trace-metal continuation bypassed the heat bound");
   }
-  auto rich=hc;rich.X[3]=1.001e-4;rich.X[2]-=rich.X[3];
+  auto rich=hc;rich.X[3]=1.001e-3;rich.X[2]-=rich.X[3];
   rejected=false;try{cool_ionized.eval(2.5e5,350.,rich);}
     catch(const std::domain_error&){rejected=true;}
   require(rejected,"trace-metal continuation accepted unsupported metal-rich material");
