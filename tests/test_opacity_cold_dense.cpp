@@ -73,12 +73,12 @@ int main()try {
     }
   } bounded;
   ColdDenseOpacity warm(bounded,file);
-  for(double T:{9999.,10000.,10010.,12000.,15999.,16000.}) {
+  for(double T:{9999.,10000.,10010.,12000.,15999.,16000.,16450.,17499.,17500.}) {
     const double rho=std::pow(10.,6.01+3*(std::log10(T)-6));
     const auto v=warm.eval(T,rho,c);
     check(v.kappa>0,"warm dense-gas coverage gap");
   }
-  for(double T:{16001.,18000.,19999.,20000.,20001.}) {
+  for(double T:{16001.,17499.,17500.,17501.,18000.,19999.,20000.,20001.}) {
     const double rho=std::pow(10.,5.8+3*(std::log10(T)-6)),h=1e-6;
     auto f=[&](double t,double r){return std::log(warm.eval(t,r,c).kappa);};
     const auto v=warm.eval(T,rho,c);

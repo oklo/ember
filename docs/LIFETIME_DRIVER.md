@@ -552,13 +552,15 @@ radiative opacity for arbitrary pure-hydrogen layers. See the
 [`cold_dense_hydrogen.dat`](../data/opacity/cold_dense_hydrogen.dat) gas table
 for dense, nearly metal-free hydrogen envelopes. It replaces the low-temperature
 source smoothly over log R = 5.6–5.9, where R = rho/(T/10^6)^3. Temperature
-joins span 3000–3500 K and 16000–20000 K; composition joins limit its use to
+joins span 3000–3500 K and 17500–20000 K; composition joins limit its use to
 hydrogen-rich mixtures with Z below 1e-10. Below 3500 K, an additional density
 join over log R = 5.90–5.98 completes the change before the original source's
 log R = 6 edge. Dense states below the computed source's 2000 K floor remain
 unsupported. Source temperature, density and
 composition bounds remain enforced. The integer-mass source convention is
 converted explicitly, with derivatives that preserve extinction per length.
+[Overlap tests](results/cold_opacity_overlap800_sept30_v1.json) cover the
+800 K envelope and a matched 100 Myr stellar interval.
 
 The table spans densities 0.01–10 g/cm³ and hydrogen fractions .98, .9955 and
 1−10⁻⁶. It includes gas absorption, electron scattering, and Rayleigh scattering

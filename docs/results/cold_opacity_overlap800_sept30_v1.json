@@ -1,0 +1,174 @@
+{
+  "date": "2026-09-30",
+  "change": "Move the existing dense-gas warm overlap from16\u201320kK to17.5\u201320kK, retaining each source domain and all source tables.",
+  "native_test": "test_opacity_cold_dense: values, thermal/composition derivatives, unsupported corners and newlycovered16.45\u201317.5kK states pass.",
+  "envelopes": {
+    "passed": true,
+    "nominal_queries": 13,
+    "supported_controls": 25,
+    "maximum_relative_change_supported": 2.220446049250313e-15,
+    "recovered": [
+      [
+        800.0,
+        0.030033737464715847,
+        0.9999825820745019,
+        1.741792549814214e-05,
+        1.0
+      ],
+      [
+        812.5,
+        0.030033737464715847,
+        0.9999825820745019,
+        1.741792549814214e-05,
+        1.0
+      ],
+      [
+        825.0,
+        0.030033737464715847,
+        0.9999825820745019,
+        1.741792549814214e-05,
+        1.0
+      ],
+      [
+        1100.0,
+        0.030033737464715847,
+        0.9999825820745019,
+        1.741792549814214e-05,
+        0.1
+      ]
+    ],
+    "excluded_stress_queries": [
+      {
+        "query": [
+          800.0,
+          0.030033737464715847,
+          0.9999825820745019,
+          1.741792549814214e-05,
+          0.1
+        ],
+        "error": "envelope atmosphere: unsupported envelope-source response stencil"
+      },
+      {
+        "query": [
+          812.5,
+          0.030033737464715847,
+          0.9999825820745019,
+          1.741792549814214e-05,
+          0.1
+        ],
+        "error": "envelope atmosphere: unsupported envelope-source response stencil"
+      },
+      {
+        "query": [
+          825.0,
+          0.030033737464715847,
+          0.9999825820745019,
+          1.741792549814214e-05,
+          0.1
+        ],
+        "error": "envelope atmosphere: unsupported envelope-source response stencil"
+      },
+      {
+        "query": [
+          837.5,
+          0.030033737464715847,
+          0.9999825820745019,
+          1.741792549814214e-05,
+          0.1
+        ],
+        "error": "envelope atmosphere: unsupported envelope-source response stencil"
+      },
+      {
+        "query": [
+          850.0,
+          0.030033737464715847,
+          0.9999825820745019,
+          1.741792549814214e-05,
+          0.1
+        ],
+        "error": "envelope atmosphere: unsupported envelope-source response stencil"
+      },
+      {
+        "query": [
+          875.0,
+          0.030033737464715847,
+          0.9999825820745019,
+          1.741792549814214e-05,
+          0.1
+        ],
+        "error": "envelope atmosphere: unsupported envelope-source response stencil"
+      },
+      {
+        "query": [
+          900.0,
+          0.030033737464715847,
+          0.9999825820745019,
+          1.741792549814214e-05,
+          0.1
+        ],
+        "error": "envelope atmosphere: unsupported envelope-source response stencil"
+      },
+      {
+        "query": [
+          925.0,
+          0.030033737464715847,
+          0.9999825820745019,
+          1.741792549814214e-05,
+          0.1
+        ],
+        "error": "envelope atmosphere: unsupported envelope-source response stencil"
+      },
+      {
+        "query": [
+          950.0,
+          0.030033737464715847,
+          0.9999825820745019,
+          1.741792549814214e-05,
+          0.1
+        ],
+        "error": "envelope atmosphere: unsupported envelope-source response stencil"
+      },
+      {
+        "query": [
+          1000.0,
+          0.030033737464715847,
+          0.9999825820745019,
+          1.741792549814214e-05,
+          0.1
+        ],
+        "error": "AESOPUS_2.1_GS98_gas: (logT=4.245879, logR=6.085890, X=0.999977) outside table"
+      }
+    ],
+    "scope": "Existing gas source and unchanged tables; warm overlap moved from16\u201320kKto17.5\u201320kK. Nominal envelopes800\u20131300K pass. Previously supported nominal and factor10/0.1 cases retained. Unsupported factor0.1 cases remain excluded."
+  },
+  "stellar": {
+    "passed": true,
+    "reference": "out/cooling-resumed902-sept30-v1/evolution/history.jsonl at matched100Myr",
+    "candidate": "new/evolution/history.jsonl",
+    "old_threads": 4,
+    "new_threads": 2,
+    "age_years": 3895905617810.277,
+    "interval_years": 100000000.0,
+    "relative_changes": {
+      "Teff_K": 2.4728037038499892e-14,
+      "radius_Rsun": 6.931232427748308e-16,
+      "luminosity_Lsun": 1.007809097808605e-13,
+      "central_T_K": 2.0611252696597843e-13,
+      "central_density_g_cm3": 1.1172473161917787e-12,
+      "H_mass_g": 3.038861568932669e-16,
+      "He3_mass_g": 2.076964620234808e-16,
+      "surface_X": 7.660667647346817e-15,
+      "He3_peak": 1.475435333553878e-13,
+      "He3_peak_q": 0.0,
+      "eps_nuc_peak_q": 0.0,
+      "convective_mass_fraction": 0.0
+    },
+    "maximum_relative_change": 1.1172473161917787e-12,
+    "same_convective_boundaries": true,
+    "limitations": [
+      "The separate two-thread old-opacity control failed its first100/50Myr solves and was stopped; it is excluded. The successful four-thread production interval starts from the same physical checkpoint, uses the same inputs and retains every interval audit.",
+      "Only global/profile-summary quantities at the matched age were retained for the reference; no pointwise checkpoint comparison is claimed.",
+      "No speed comparison is made from the shared-machine timings."
+    ]
+  }
+}

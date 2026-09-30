@@ -24,13 +24,14 @@ public:
     const double Z=c.Z();
     // The computed gas source reaches 20 kK. Returning to the original
     // table at 10–12 kK leaves its log R <= 6 support in cool envelopes.
-    // Use the warmer overlap; both sources must still cover every query
-    // whenever their weights are nonzero.
+    // The 800 K envelope remains beyond that density edge up to 16.42 kK.
+    // Return over 17.5–20 kK, within the existing computed source. Both
+    // sources must cover every query whenever their weights are nonzero.
     // Below 3500 K the original (AESOPUS) table ends at log R = 6, while cool
     // envelopes reach log R ~ 6.4. Complete the density join to the computed
     // source by log R = 5.98 at every T >= 3000 K (e), so the original is read
     // only where it is supported; unchanged for log R <= 5.9.
-    const auto lo=step((T-3000)/500),hi=step((20000-T)/4000);
+    const auto lo=step((T-3000)/500),hi=step((20000-T)/2500);
     const auto x=step((c.X[0]-.98)/.005),z=step((1e-10-Z)/(1e-10-1e-12));
     const double outer=hi.value*x.value*z.value;
     if(outer==0)return original_.eval(T,rho,c);
@@ -59,7 +60,7 @@ public:
     const double dm_lnT=T*lo.derivative/500*(1-e.value)-3*(1-lo.value)*de_lnrho;
     const double dm_lnrho=(1-lo.value)*de_lnrho;
     const double dwT=outer*(-3*dd_lnrho*m+d.value*dm_lnT)
-        -x.value*z.value*d.value*m*T*hi.derivative/4000;
+        -x.value*z.value*d.value*m*T*hi.derivative/2500;
     const double dwR=outer*(dd_lnrho*m+d.value*dm_lnrho);
     const double dwX=d.value*m*hi.value*z.value*x.derivative/.005;
     const double dwZ=-d.value*m*hi.value*x.value*z.derivative/(1e-10-1e-12);

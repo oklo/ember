@@ -315,7 +315,7 @@ int lifetime_main(int argc,char** argv) {
     identity.values["opacity.composition_extension"]=opacity_extension?"hydrogen_share.linear_Z.source_log_X.v1":"none";
     if(!cold_opacity_path.empty()) {
       identity.file("opacity.cold_dense.table",cold_opacity_path);
-      identity.values["opacity.cold_dense"]="computed_baryonic_gas.C2_logR_T_trace_Z.density_complete.v3";
+      identity.values["opacity.cold_dense"]="computed_baryonic_gas.C2_logR_T_trace_Z.density_complete.v4";
       identity.number("opacity.cold_dense_scale",cold_opacity_scale);
     }
     if(envelope_opacity==1) {
