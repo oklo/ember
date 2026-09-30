@@ -1,0 +1,179 @@
+{
+  "query_count": 1750,
+  "derivative_centres": 102,
+  "derivative_failures": [
+    {
+      "stage": "grid",
+      "T": 310000.0,
+      "rho": 1000.0,
+      "X": 0.745,
+      "Y3": 0.0265,
+      "Z": 0.0,
+      "mass": 1e+32,
+      "L": 1e+28,
+      "P": 7.545669231375007e+17,
+      "grad_ad": 0.36733887713229124,
+      "K_hot": 1068754275193.901,
+      "K_full": 1068754275193.901,
+      "k_rad_dT": -21.944884936638616,
+      "k_rad_drho": 5.146203155845114,
+      "k_rad_dX": 5.86733772931826,
+      "k_rad_dY3": 2.5862555765544863,
+      "k_rad": 103884701307.79617,
+      "grad_hot": 0.27154550443562453,
+      "grad_full": 0.27154550443562453,
+      "variable": "X"
+    },
+    {
+      "stage": "grid",
+      "T": 320000.0,
+      "rho": 5000.0,
+      "X": 0.745,
+      "Y3": 0.0265,
+      "Z": 0.0,
+      "mass": 1e+32,
+      "L": 1e+28,
+      "P": 0,
+      "grad_ad": 0,
+      "K_hot": 5866134263414.015,
+      "K_full": 5866134263414.015,
+      "k_rad_dT": -29.891898008963125,
+      "k_rad_drho": 4.9673544852270535,
+      "k_rad_dX": 8.313912160360475,
+      "k_rad_dY3": 3.7923140310656125,
+      "k_rad": 155887452045214.56,
+      "grad_hot": 0,
+      "grad_full": 0,
+      "eos_error": "quantum ion EOS: outside assessed ionization/quantum range (T=3.2e+05, rho=5000, X=0.745, Y3=0.0265, Z=0, theta_H=1.621)",
+      "variable": "X"
+    }
+  ],
+  "derivative_max_error": 2.5887895710954447e-07,
+  "largest_derivative_errors": [
+    {
+      "stage": "join",
+      "T": 1000000.0,
+      "rho": 2512.4648813287704,
+      "X": 0.745,
+      "variable": "X",
+      "error": 2.5887895710954447e-07
+    },
+    {
+      "stage": "join",
+      "T": 1000000.0,
+      "rho": 2511.88643150958,
+      "X": 0.745,
+      "variable": "X",
+      "error": 2.5877517742639635e-07
+    },
+    {
+      "stage": "join",
+      "T": 1000000.0,
+      "rho": 2511.3081148680485,
+      "X": 0.745,
+      "variable": "X",
+      "error": 2.5845340093982555e-07
+    },
+    {
+      "stage": "grid",
+      "T": 310000.0,
+      "rho": 5000.0,
+      "X": 0.96,
+      "variable": "X",
+      "error": 1.794642001783283e-07
+    },
+    {
+      "stage": "join",
+      "T": 1000000.0,
+      "rho": 2511.3081148680485,
+      "X": 0.70001,
+      "variable": "X",
+      "error": 1.449993651039208e-07
+    }
+  ],
+  "transport_differences": {
+    "cold": 3.701172701653377e-11,
+    "warm": 0.0,
+    "grid": 1.1246470421610866e-10,
+    "join": 0.0
+  },
+  "source_checkpoint_sha256": "803cbab2cd9f8957f5f5aa3ebaabb5e52b0764495b73e429947e5847cfe25cb1",
+  "unsupported_off_path_queries": 198,
+  "actual_profile_failures": 0,
+  "matched_stellar_overlap": {
+    "passed": true,
+    "years": 3872843107265.4043,
+    "errors": {
+      "ln_radius": 0.0,
+      "ln_density": 0.0,
+      "ln_temperature": 0.0,
+      "H_absolute": 0.0,
+      "He3_absolute": 0.0,
+      "surface_L_relative": 0.0
+    },
+    "control_header": "536 1.9884098706980505e+32 1.2221763364183871e+20 473364000000000 3453 1376 2.9826148060470756e+28",
+    "candidate_header": "536 1.9884098706980505e+32 1.2221763364183871e+20 473364000000000 3453 1376 2.9826148060470756e+28",
+    "scope": "Remove unsupported lower-temperature opacity return in ionized-conduction mode; contribution bounds and solver tolerances unchanged."
+  },
+  "cooling": {
+    "status": 1,
+    "CPU_seconds": 359.17984,
+    "wall_seconds": 131.60660258308053,
+    "report": {
+      "requested_age_reached": 0,
+      "age_years": 3874132769545.3447,
+      "accepted_this_invocation": 23,
+      "accepted_total": 3483,
+      "rejected_total": 1414,
+      "stop_reason": "repeated step rejection: evolve_step: Newton iteration limit reached: residual=1.966e-08, correction=1.253e-08, last damping=0.01562, last rejected trial: residual did not decrease",
+      "cpu_seconds": 359.129734,
+      "wall_seconds": 131.551800041,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "final_model": {
+    "years": 3874132769545.3447,
+    "step_years": 1119799.810046535,
+    "accepted": 3483,
+    "rejected": 1406,
+    "radius_Rsun": 0.03033166803744451,
+    "Teff_K": 1635.2798943129512,
+    "luminosity_Lsun": 5.92726924378581e-06,
+    "nuclear_fraction": 3.855344075581589e-06,
+    "central_T_K": 693920.551562118,
+    "central_density_g_cm3": 49857.68091570133,
+    "central_X": 2.9185561633419784e-08,
+    "central_He3": 1.1179166409540173e-14,
+    "eps_nuc_peak_erg_g_s": 3.1766195430241836e-08,
+    "eps_nuc_peak_q": 0.9689645508938721,
+    "burning_half_max_inner_q": 0.9650593239120202,
+    "burning_half_max_outer_q": 0.9753278867737608,
+    "burning_half_max_cells": 10,
+    "He3_peak": 0.032362993083276594,
+    "He3_peak_q": 0.9667773376663404,
+    "H_mass_g": 7.410011164877405e+30,
+    "He3_mass_g": 8.470141802131196e+28,
+    "D_mass_g": 0,
+    "surface_X": 0.9940782510822709,
+    "surface_Z": 1.1083903704102076e-30,
+    "error_norm": 5.561707205892219e-05,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.0786837968525898e-13,
+    "drift_gradient_proxy": 6.446987483162998e-11,
+    "kinetic_heat_proxy": 0.0009947505576061904,
+    "convective_mass_fraction": 0.008594413756903023,
+    "radiative_boundaries": 444,
+    "relative_mixing_gradient": 1.237483857668271e-11,
+    "convective_travel_years": 0.1273908190159245,
+    "cpu_seconds": 240.606197
+  },
+  "first_new_source_failure": "ATOMIC logT=5.700, logrho=3.036, atomic X=0.6506; outside source table in a layer below the hydrogen composition join.",
+  "scope": "Ionized-conduction mode only: omit the lower return to unextended radiative opacity, retaining the 200 kK floor, source anchors and factor-100 radiation uncertainty bound. No final cooling age or rectangular source coverage claimed.",
+  "unit_tests": [
+    "opacity_conductive_interior passed"
+  ],
+  "initial_attempt": "v1 overlap rejected before evolution because the selected transport minimum was not recorded in the private restart. v2 applies the same 200 kK selection to both arms."
+}

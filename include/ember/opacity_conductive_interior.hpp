@@ -48,6 +48,10 @@ public:
     auto domain=hydrogen_envelope_domain();
     domain.maximum_rho=1e5;
     domain.source_logR=3.1;domain.full_logR=3.4;
+    // Direct ionized conduction remains active below 300 kK. Returning to
+    // the unextended radiative table there can leave its density support.
+    // Keep the contribution bound and the explicit 200 kK domain floor.
+    domain.cold_source_T=0;domain.cold_full_T=0;
     return domain;
   }
 

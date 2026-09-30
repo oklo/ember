@@ -178,6 +178,31 @@ int main(){try{
       ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
   rejected=false;try{coordinate_weak.eval(6e5,2000.,hc);}catch(const std::domain_error&){rejected=true;}
   require(rejected,"source-coordinate extension ignored radiation uncertainty");
+  struct CoolBoundedSource final : Opacity {
+    HotBoundedSource source;
+    OpacityState eval(double T,double rho,const Composition& c) const override {
+      if(T<4e5 && rho>250.)throw std::domain_error("cool source density edge");
+      return source.eval(T*4,rho,c);
+    }
+    const char* name() const override{return "source with cool density bound";}
+  } cool_bounded;
+  ConductiveInteriorOpacity cool_ionized(cool_bounded,strong,.001,1.,
+      ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
+  for(double T:{2.001e5,2.5e5,2.999e5,3e5,3.001e5,3.1e5,3.2e5,3.5e5}) {
+    constexpr double rho=350.,h=1e-6;
+    const auto v=cool_ionized.eval(T,rho,hc);
+    auto f=[&](double t,double r){return std::log(cool_ionized.eval(t,r,hc).kappa);};
+    require(std::abs((f(T*std::exp(h),rho)-f(T*std::exp(-h),rho))/(2*h)-v.dlnk_dlnT)<2e-6,
+        "ionized cool continuation temperature derivative");
+    require(std::abs((f(T,rho*std::exp(h))-f(T,rho*std::exp(-h)))/(2*h)-v.dlnk_dlnRho)<2e-6,
+        "ionized cool continuation density derivative");
+  }
+  rejected=false;try{cool_ionized.eval(199999.,350.,hc);}catch(const std::domain_error&){rejected=true;}
+  require(rejected,"ionized continuation lost its lower temperature bound");
+  ConductiveInteriorOpacity cool_weak(cool_bounded,weak,.001,1.,
+      ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
+  rejected=false;try{cool_weak.eval(2.5e5,350.,hc);}catch(const std::domain_error&){rejected=true;}
+  require(rejected,"cool continuation ignored heat-transport uncertainty");
   // A nearly complete blend must still query its source; rounding the C2
   // polynomial above unity must never skip a source-support check.
   struct NarrowSource final : Opacity {

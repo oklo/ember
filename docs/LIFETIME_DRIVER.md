@@ -582,45 +582,33 @@ segment, conditional on its declared uncertainty; it is not validation of
 the opacity source outside its tabulated domain.
 [Numerical and stellar checks](results/conductive_interior_opacity_sept28_v1.json).
 
-The separate hydrogen-envelope option, `opacity_conductive_envelope "1"`,
-continues the measured density slope where radiation is a small contribution
-alongside electron conduction. Its density blend ends at 190 g/cm³, before
-one hot-source corner at 199.5 g/cm³. Temperature, composition and source
-checks remain active. Restart identity records
-`hydrogen_density_continuation.v6`. Its upper temperature overlap spans
-700–800 kK, where the original source covers the full selected density range
-through 1000 g/cm³. A smooth composition blend spans baryonic hydrogen
-fractions 0.70–0.745, finishing below the hot source's atomic hydrogen
-boundary at 0.75. Its hydrogen derivative includes this blend.
+The hydrogen-envelope option, `opacity_conductive_envelope "1"`, continues
+measured radiative-opacity density slopes only where electron conduction
+makes the declared opacity uncertainty a small heat-transport contribution.
+The density blend spans 180–190 g/cm³. The hydrogen blend spans mass fractions
+0.70–0.745 and includes its composition derivative; the metal limit is 1e-8.
+Both source anchors must exist.
+
 With `conduction_envelope "ionized"`, the upper join follows the source
-coordinate log R = log10(rho) − 3 log10(T/1e6), from 3.1 to 3.4. This ends
-below the hot-source boundary at 3.5 as density grows. The selected density
-ceiling is 1e5 g/cm³; source support and the heat-uncertainty check can reject
-states within that ceiling. The lower temperature and composition joins stay
-the same. Restart identity is `hydrogen_density_continuation.logR_overlap.v1`.
+coordinate log R = log10(rho) − 3 log10(T/1e6), from 3.1 to 3.4, below the
+source boundary at 3.5. The declared limits are T≥200 kK and rho≤1e5 g/cm³;
+source support and the heat-uncertainty check further restrict that domain.
+Direct conduction remains active below 300 kK, so this option does not return
+to an unsupported radiative table there. Restart identity records
+`hydrogen_density_continuation.logR_overlap.v2`.
 
-A 68.63 Myr overlap changes luminosity by 7.862e-7 relative to the saved track.
-It also uses `material_heat_tolerance "5e-6"`, a local iteration threshold a
-thousand times below the energy time tolerance; conservation checks are
-unchanged. Cooling proceeds to 1786 K before reaching the quantum EOS range.
-[Native and stellar checks](results/hydrogen_opacity_coordinate_sept30_v1.json).
+The original conduction option retains its 700–800 kK upper overlap,
+1000 g/cm³ density ceiling, and 300–320 kK return to the radiative source
+where conduction switches off. Missing conduction cannot justify an opacity
+continuation. Its restart identity is `hydrogen_density_continuation.v6`.
 
-A matched 297.0 Myr comparison with opacity multipliers 0.01, 1 and 100
-changes luminosity by at most 0.0001657%. The nominal calculation reaches
-the 1800 K atmosphere boundary. The uncertainty allowance and all evolution
-checks are unchanged. [Composition-join checks](results/conductive_envelope_composition_join_sept30_v1.json).
-A smooth temperature blend recovers the original
-radiative source between 320 and 300 kK, where the conducting channel turns
-off. The source's coverage limits still apply. Missing conduction therefore
-cannot justify radiative extrapolation.
-
-The join and its derivatives pass native checks; the largest measured change
-in total diffusive conductivity within the supported cold overlap is
-1.808e-8. A matched 10 Myr stellar comparison leaves the reported global
-quantities unchanged. Cooling then continues to the 2000 K atmosphere edge.
-These checks support the opacity join, not the complete low-temperature
-physics or a final cooling age.
-[Native and stellar checks](results/conductive_opacity_cold_join_sept30_v1.json).
+Native checks cover both saved stellar profiles and the temperature,
+density and composition derivatives; off-path source gaps remain explicit.
+A matched 10 Myr comparison leaves the reported state unchanged. The cold
+continuation reaches 1635 K before encountering an unsupported H/He opacity
+query. These are checks of the selected opacity approximation, not a complete
+cold-matter calculation or a cooling-age error estimate.
+[Native and stellar checks](results/hydrogen_opacity_lower_join_sept30_v1.json).
 
 `opacity_conductive_envelope_uncertainty` selects the maximum fractional change
 in total diffusive conductivity for a factor-100 reduction of the continued
