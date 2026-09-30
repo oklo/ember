@@ -1,0 +1,82 @@
+{
+  "date": "2026-09-30",
+  "change": "Use the existing ATOMIC source temperature boundary at log10(T/K)=5.7 for the dense radiative-opacity continuation when direct ionized conduction is selected.",
+  "unchanged": [
+    "Original source at both density anchors",
+    "Density overlap8500\u20139500g/cm3",
+    "Factor10 radiative-opacity uncertainty and0.001 total-transport admission bound",
+    "Conductivity prescription and margin2",
+    "EOS domain, atmosphere inputs, time control and conservation checks"
+  ],
+  "native": {
+    "query_count": 2155,
+    "actual_profile_failures": 0,
+    "cooler_projection_queries_newly_admitted": 529,
+    "rejected_queries": 99,
+    "rejection_scope": "All at temperatures below the source floor; unsupported queries remain explicit errors.",
+    "derivative_centres": 27,
+    "maximum_derivative_error": 9.963580034427021e-08,
+    "unsupported_derivative_directions": 16,
+    "unsupported_derivative_scope": "Central differences crossing X=0 or the temperature boundary are not counted as validations.",
+    "maximum_overlap_transport_change": {
+      "cold": 0.0,
+      "projection": 0.0,
+      "grid": 0.0
+    }
+  },
+  "ionization": {
+    "queries": 277,
+    "failed": 0,
+    "minimum_H_ionized": 0.9999999999999954,
+    "minimum_He_doubly_ionized": 0.9999999999999999,
+    "maximum_electron_deficit": 0.0007729902221369489,
+    "scope": "Ionization diagnostic at the current1604K star and cooler projections, using the source GS98 metal proxy. H/He ionization is checked separately from the metal electron deficit; partial metal ionization remains an approximation. This diagnostic does not validate conductivity accuracy, liquid phase stability or the source free-energy error."
+  },
+  "matched_interval": {
+    "years": 10000000.0,
+    "errors": {
+      "ln_radius": 0.0,
+      "ln_density": 0.0,
+      "ln_temperature": 0.0,
+      "H_absolute": 0.0,
+      "He3_absolute": 0.0,
+      "surface_L_relative": 0.0
+    },
+    "passed": true,
+    "CPU_seconds": 30.587421
+  },
+  "continuation": {
+    "years_advanced": 30000000.0,
+    "accepted_models": 3,
+    "rejected_new": 0,
+    "CPU_seconds": 22.947107,
+    "wall_seconds": 14.119384583085775,
+    "endpoint": {
+      "years": 3874488332909.3735,
+      "Teff_K": 1601.069407321952,
+      "central_T_K": 666597.4810869034,
+      "central_density_g_cm3": 49898.87789717442,
+      "radius_Rsun": 0.03031492096874443,
+      "surface_X": 0.9943759487019903,
+      "nuclear_fraction": 3.1081158127027804e-06
+    },
+    "contribution_diagnostics": {
+      "evaluations": 132250,
+      "maximum_relative_transport_uncertainty": 4.630872735555862e-18,
+      "opacity_scale": 1
+    }
+  },
+  "identity": "source_slope.fixed_density_overlap.ionized_cold.v2",
+  "validation": "opacity_conductive_interior CTest passed; native source queries and matched stellar comparison passed.",
+  "scope": "Liquid-core reference. These checks do not establish mixture phase stability, complete metal ionization, conductivity accuracy or a final cooling-age bound. Atmosphere table remains limited to1600K.",
+  "files": {
+    "out/core-opacity-500k-sept30-v1/probe.cpp": "1f43f99deffd7a1dcd85e0dda0ce05c7a6b4fc140ebbf64060da148c1be2c3e9",
+    "out/core-opacity-500k-sept30-v1/check.py": "2e1752ed10c0c1f068594d36e0eef11537e38869abaeed89dd3fdc81700e254c",
+    "out/core-opacity-500k-sept30-v1/evolve.py": "bac4168595d19c73b6e6e78e0292eed5bb526382e5c272acdfe5604ded474e4e",
+    "out/core-opacity-500k-sept30-v1/checks.json": "9db99159df037525d848b14ddab8931564cb92206d64882aae94634532c7a0bf",
+    "out/core-opacity-500k-sept30-v1/ionization.py": "c6390877f6230e9801d10ac541a1d1785bd8a37679e321ce6b39bd3ba673e3ca",
+    "out/core-opacity-500k-sept30-v1/ionization.json": "22915b7a7574f18d7892d0025760d243ee97f1c4bdf9c1c92257a57c61bc6665",
+    "out/core-opacity-500k-sept30-v1/stellar_overlap.json": "4ee132541856377fbfb382d71eaed5af56e7791681b6a261d57d67cb70cf0bd8",
+    "out/core-opacity-500k-sept30-v1/cooling/evolution/final.checkpoint": "456e4a630285c105584029d19c0d363cb0f71757225dd5e44b53b5cec54ec9b4"
+  }
+}

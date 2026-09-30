@@ -33,7 +33,8 @@ the EOS and a transport comparison before selecting it. The default,
 1 MK; that cutoff is unsuitable where dense cold matter remains ionized.
 The choice is part of restart identity. Source-table bounds still apply.
 With `opacity_conductive_interior` enabled, the ionized choice permits the
-same dense-core radiative continuation down to 600 kK, retaining its 0.001
+same dense-core radiative continuation down to the source boundary at
+log10(T/K) = 5.7 (501.2 kK), retaining its 0.001
 transport-uncertainty bound. This does not extend the EOS domain.
 See [conduction](CONDUCTION.md).
 
@@ -564,8 +565,14 @@ radiative opacity in cool, dense cells. It measures the source opacity slope
 near 8500 g/cm³ and joins smoothly over 8500–9500 g/cm³. The original source
 is recovered over 3.4–3.6 MK. Temperature and composition still require
 supported source queries at the anchor; the option does not supply missing
-opacity data. The assessed lower temperature limit is 800 kK, or 600 kK when
-`conduction_envelope "ionized"` selects direct source conductivity.
+opacity data. The lower temperature limit is 800 kK, or the source boundary at
+log10(T/K) = 5.7 (501.2 kK) when `conduction_envelope "ionized"` selects
+direct source conductivity. Both source anchors must exist. Native checks
+cover the saved cold model and 529 cooler projected states newly admitted
+below 600 kK; queries below the source boundary still reject. The matched
+10 Myr comparison is unchanged. Restart identity records
+`source_slope.fixed_density_overlap.ionized_cold.v2`.
+[Source-boundary checks](results/core_opacity_source_floor_sept30_v1.json).
 
 The continuation is allowed only when a factor-ten uncertainty in radiation
 changes total heat conductivity by at most 0.1%. The check uses half the

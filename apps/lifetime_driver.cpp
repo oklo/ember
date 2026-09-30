@@ -314,7 +314,7 @@ int lifetime_main(int argc,char** argv) {
     }
     if(conductive_opacity==1) {
       identity.values["opacity.conductive_interior"]=conduction_envelope=="ionized"
-          ?"source_slope.fixed_density_overlap.ionized_cold.v1":"source_slope.fixed_density_overlap.v4";
+          ?"source_slope.fixed_density_overlap.ionized_cold.v2":"source_slope.fixed_density_overlap.v4";
       identity.number("opacity.conductive_transport_uncertainty_limit",.001);
       identity.number("opacity.conductive_scale",conductive_opacity_scale);
     }
@@ -438,7 +438,9 @@ int lifetime_main(int argc,char** argv) {
     std::shared_ptr<Opacity> radiation=source_radiation;
     if(conductive_opacity==1) {
       auto domain=ConductiveInteriorOpacity::Domain{};
-      if(conduction_envelope=="ionized")domain.minimum_T=6e5;
+      // The cool ATOMIC source starts at log10(T/K)=5.7. Both density
+      // anchors must still exist, and the radiative heat bound is unchanged.
+      if(conduction_envelope=="ionized")domain.minimum_T=std::pow(10.,5.7);
       continued_radiation=std::make_shared<ConductiveInteriorOpacity>(*source_radiation,*conduction,.001,conductive_opacity_scale,domain);
       radiation=continued_radiation;
     }
