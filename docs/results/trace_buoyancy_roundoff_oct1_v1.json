@@ -1,0 +1,74 @@
+{
+  "scope": "Dominant-H rounding bound used only for unresolved composition buoyancy well inside thermal stability. No material coverage, abundance, time or conservation tolerance change. Cold-envelope EOS consistency is a separate unresolved issue.",
+  "failing_layer": {
+    "mass_fraction": 0.999597014990047,
+    "T_K": 64728.54948456691,
+    "rho_g_cm3": 45.6618194749612,
+    "hydrogen_outward_difference": 0,
+    "He3_outward_difference": -1.429224551045792e-16,
+    "resolved_density_contrast": 1.8073703900750794e-17,
+    "density_roundoff_bound": 2.766289383479278e-16,
+    "thermal_restoring_density_contrast": 3.826266375553344e-05
+  },
+  "face_regression": {
+    "queries": 231,
+    "original_failures": 18,
+    "corrected_failures": 0,
+    "resolved_inverse_gradients_still_refused": true,
+    "cold_material_limit_preserved": true
+  },
+  "saved_profiles": {
+    "queries": 1070,
+    "maximum_mixing_coefficient_change": 0,
+    "maximum_heat_flux_change": 0
+  },
+  "overlap": {
+    "years": 6000000.0,
+    "global_relative_differences": {
+      "Teff_K": 2.886579864025407e-15,
+      "luminosity_Lsun": 1.1546319456101628e-14,
+      "radius_Rsun": 0.0,
+      "central_T_K": 3.872457909892546e-13,
+      "central_density_g_cm3": 8.881784197001252e-15,
+      "H_mass_g": 0.0,
+      "He3_mass_g": 2.220446049250313e-16
+    },
+    "maximum_log_structure_change": 4.281019982954604e-12,
+    "maximum_abundance_change": 8.943653408351079e-13,
+    "completion": {
+      "exit_code": 0,
+      "CPU_seconds": 431.5733,
+      "wall_seconds": 254.51862249989063,
+      "report": {
+        "requested_age_reached": 1,
+        "age_years": 3925407820682.886,
+        "accepted_this_invocation": 1,
+        "accepted_total": 3998,
+        "rejected_total": 1689,
+        "stop_reason": "requested age",
+        "cpu_seconds": 431.521264,
+        "wall_seconds": 254.190800958,
+        "full_production_track_validated": false,
+        "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+      }
+    }
+  },
+  "previously_blocked_interval": {
+    "exit_code": 0,
+    "CPU_seconds": 221.06844,
+    "wall_seconds": 125.96726820804179,
+    "report": {
+      "requested_age_reached": 1,
+      "age_years": 3926896135283.8804,
+      "accepted_this_invocation": 1,
+      "accepted_total": 3896,
+      "rejected_total": 1594,
+      "stop_reason": "requested age",
+      "cpu_seconds": 221.000549,
+      "wall_seconds": 125.631527959,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "passed": true
+}

@@ -90,8 +90,17 @@ BrownFingeringTransport::Face BrownFingeringTransport::face(std::size_t index,
         for(unsigned j=0;j<3;++j)if(dx[j]!=0)
           contrast=std::fma(response.dlnRho[j],dx[j],contrast);
         const double resolved=contrast/(delta*dp);
-        if(resolved>=0) {
-          result.density_ratio=resolved==0?std::numeric_limits<double>::infinity():(ad-grad)/(-resolved);
+        // He4 is the dependent fraction. Near pure H, rounding the
+        // dominant H abundance leaves an uncertainty of order epsilon in
+        // the residual He4 and therefore in its density contrast. Do not
+        // request an unsupported mixing law for an unresolved sign. Require
+        // the thermal restoring contrast to exceed that bound by 64 times.
+        const double density_roundoff=std::numeric_limits<double>::epsilon()
+          *(std::abs(a.X[0])+std::abs(b.X[0]))*std::abs(response.dlnRho[0]);
+        const bool unresolved=std::abs(contrast)<=density_roundoff
+          && -delta*dp*(ad-grad)>64*density_roundoff;
+        if(resolved>=0 || unresolved) {
+          result.density_ratio=resolved==0 || unresolved?std::numeric_limits<double>::infinity():(ad-grad)/(-resolved);
           return result;
         }
       }

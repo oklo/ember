@@ -41,6 +41,13 @@ marginal growth and recover the stationary law. Heat and composition use the
 real, phase-dependent response to that mode. These are uncalibrated nonlinear
 assumptions, not published oscillatory transport fits.
 
+Near pure hydrogen, a composition-density contrast smaller than the rounding
+uncertainty of the dominant hydrogen fraction is treated as unresolved. This
+requires the thermal restoring contrast to exceed that uncertainty by a factor
+of 64. It prevents trace-helium roundoff from requesting unsupported mixing;
+resolved inverse gradients remain subject to the material limits. No abundances
+are clipped, and microscopic diffusion and conservation checks are unchanged.
+
 The dense material range extends to 100,000 K at densities above 300 g/cm³,
 subject to the viscosity, EOS and collision limits. Direct source ionization
 checks over 100,000–120,000 K find hydrogen ionized and the doubly ionized helium
@@ -55,6 +62,7 @@ supported responses; separate mixed-H/He EOS limits remain. The model does
 not treat composition layers, crystal mixing, rotation or magnetic fields.
 A final full-lifetime validation remains unfinished.
 
+[Trace-composition checks](results/trace_buoyancy_roundoff_oct1_v1.json) ·
 [Cold material checks](results/fingering_cold100_oct1_v1.json) ·
 [Oscillatory checks](results/fingering_oscillatory_oct1_v1.json) ·
 [Stationary and conservation checks](results/fingering_two_composition_oct1_v1.json).

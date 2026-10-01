@@ -22,11 +22,13 @@ int main(int argc,char**argv)try{
   VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,o,VariableMetalHelmholtzEos::IsotopeInterpolation::number_density);
  ScreenedCollisionTransport col(collisions);ScreenedMetalMicroscopicTransport base(eos,col,true,5e4);
  UnusedRadiation radiation;BrownFingeringTransport transport(eos,radiation,base,col,OscillatoryMixing::growth_squared);
- // Two nearly pure-H faces. The outward reduction in He3 makes density decrease
- // at fixed T/P. Subtracting separate density inversions can reverse that sign.
- const std::array<std::array<double,10>,2> cases{{
+ // Near-pure-H faces. Separate density inversions can reverse a stable
+ // contrast; rounding dominant H can also leave unresolved He4 gradients.
+ // The third case reproduces an evolution failure at a trace-He boundary.
+ const std::array<std::array<double,10>,3> cases{{
  {11.194442944388559,4.0140572793315208,0.99999999999995637,4.3446745120768268e-14,1.8501974700038406e-16,11.176610325107879,3.9787128997547798,0.99999999999995948,4.041346672672761e-14,1.0967367209060386e-16},
- {11.096837321990273,3.837836243491247,0.99999999999996747,3.2247387874146398e-14,2.8214674737068859e-16,11.074627321571418,3.8030760731722948,0.99999999999996847,3.1194851428973045e-14,3.3548247038140087e-16}
+ {11.096837321990273,3.837836243491247,0.99999999999996747,3.2247387874146398e-14,2.8214674737068859e-16,11.074627321571418,3.8030760731722948,0.99999999999996847,3.1194851428973045e-14,3.3548247038140087e-16},
+ {11.088509243733608,3.8385093208614696,0.99999999999999623,3.7452899641124248e-15,2.9468319613107479e-17,11.067293516777376,3.8037129752764316,0.99999999999999623,3.6023675090078456e-15,1.7239077471768668e-16}
  }};
  unsigned failures=0,queries=0;set_composition_buoyancy_reuse(1e-4);
  for(const auto& x:cases)for(int it=-5;it<=5;++it)for(int ir=-3;ir<=3;++ir){
@@ -62,5 +64,5 @@ int main(int argc,char**argv)try{
   if(refused!=(scale<.9)){++failures;std::cerr<<"cold mixing material range is wrong\n";}
  }
  set_composition_buoyancy_reuse(0);
- std::cout<<queries<<" stable faces, "<<failures<<" failures\n";return failures?1:0;
+ std::cout<<queries<<" stable or unresolved faces, "<<failures<<" failures\n";return failures?1:0;
 }catch(const std::exception&e){std::cerr<<e.what()<<'\n';return 1;}
