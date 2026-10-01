@@ -107,7 +107,15 @@ requires an independent estimate of missing power and a finite cooling
 interval; a small fuel fraction alone does not establish negligible heat.
 The option and its limit are part of the restart identity.
 [Profile checks and a bounded cooling test](results/cold_trace_burning_sept30_v1.json)
-record the current evidence and the rate-estimate limitations.
+record the initial evidence and the rate-estimate limitations.
+
+At 775.1 K, a refreshed [rate assessment](results/cold_trace_burning_oct1_v1.json)
+using [Yakovlev et al. (2006)](https://arxiv.org/abs/astro-ph/0608488) gives
+7.915e16–3.502e19 erg/s for the omitted reactions, or at most 3.131e-8 of
+the present luminosity within those scenarios. These are uniform-mixture
+extrapolations, not calibrated bounds for trace hydrogen in helium. Frozen
+profiles with temperatures reduced by 10% already encounter cells above the
+selected fuel limit; continued cooling will require a new assessment there.
 
 ## Verification
 

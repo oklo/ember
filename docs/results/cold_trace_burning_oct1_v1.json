@@ -1,0 +1,61 @@
+{
+  "scope": "Frozen-profile uniform-mixture Y06 scenarios; no production rate change and no calibrated upper bound for H/He.",
+  "runtime_source": "a9ecdd9",
+  "checkpoint_sha256": "61653e64cef8bc36f9af1e163f49b412965fe4b1ddc4338655dc872c8ee17c0c",
+  "Teff_K": 775.1,
+  "L_erg_s": 1.118e+27,
+  "affected_cells": 249,
+  "production_rounded_fuel_ceiling_erg": 7.983e+43,
+  "power_optimal_erg_s": 7.915e+16,
+  "power_maximum_erg_s": 3.502e+19,
+  "power_maximum_over_present_L": 3.131e-08,
+  "equivalent_Teff_K": [
+    2.248,
+    10.31
+  ],
+  "projections": [
+    {
+      "interior_temperature_factor": 1.0,
+      "cells_above_selected_fuel_limit": 0,
+      "power_maximum_over_present_L": 3.131e-08
+    },
+    {
+      "interior_temperature_factor": 0.9,
+      "cells_above_selected_fuel_limit": 13,
+      "power_maximum_over_present_L": 8.012e-08
+    },
+    {
+      "interior_temperature_factor": 0.8,
+      "cells_above_selected_fuel_limit": 35,
+      "power_maximum_over_present_L": 2.117e-07
+    },
+    {
+      "interior_temperature_factor": 0.7,
+      "cells_above_selected_fuel_limit": 56,
+      "power_maximum_over_present_L": 5.122e-07
+    },
+    {
+      "interior_temperature_factor": 0.6,
+      "cells_above_selected_fuel_limit": 79,
+      "power_maximum_over_present_L": 1.004e-06
+    },
+    {
+      "interior_temperature_factor": 0.5,
+      "cells_above_selected_fuel_limit": 102,
+      "power_maximum_over_present_L": 1.47e-06
+    }
+  ],
+  "source": "Yakovlev et al. (2006), PRC 74,035803, equations12,33,36\u201339 and TableII; https://arxiv.org/abs/astro-ph/0608488",
+  "checks": [
+    "Native screening masks, baryonic composition moments and nodal mass weights.",
+    "Affected-cell count and rounded fuel ceiling agree with production history.",
+    "Printed TableII and literal equation38 temperature parameters change total power by at most2.090e-5 fractionally."
+  ],
+  "limitations": [
+    "Frozen T profiles: no re-equilibrated star, no fuel transport or depletion.",
+    "Y06 uniform-mixture extrapolation is not calibrated for trace protons in helium. Models are not rigorous bounds.",
+    "Selected SFIII S(0), with generous downstream Q. No energy-dependent S(E) or additional reaction channels.",
+    "Native fixed-pattern GS98 ion/electron moments and actual CN reaction abundances match the production approximation.",
+    "At a projected fuel-rich refusal the selected production nuclear provider would stop."
+  ]
+}
