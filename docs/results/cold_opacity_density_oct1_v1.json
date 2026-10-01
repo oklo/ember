@@ -1,0 +1,85 @@
+{
+  "scope": "Warm density-prefix opacity extension and575\u2013800K integrated-envelope comparisons. No completed stellar continuation or source-physics accuracy claim.",
+  "source_CPU_seconds": 92.934343,
+  "source_overlap_maximum": 1.172808072880116e-09,
+  "all_old_nodes_preserved": true,
+  "table_sha256": "d05e8b3c038ac5d20dacff3c0f013557f745e237cf91ed5f8a6e6b87b0f9edd0",
+  "native": {
+    "passed": true,
+    "material_points": 2136,
+    "queries": 10680,
+    "temperature_derivative_error": 2.1811015148388123e-08,
+    "density_derivative_error": 2.7996590462597837e-10,
+    "scope": "Native density-coordinate opacity interpolation at every cell midpoint and six H compositions. Positive finite means and central-difference derivatives. Physical errors require source and envelope checks."
+  },
+  "reproduction": {
+    "nodes": 1608,
+    "maximum_log10_opacity_difference": 3.1086244689504383e-15,
+    "maximum_relative_difference": 7.105427357601002e-15,
+    "passed": true,
+    "scope": "Re-export all old and new source columns with the public generator, preserving explicit density prefixes. Numerical comparison, not a byte-identity requirement."
+  },
+  "envelope": {
+    "queries": 165,
+    "errors": [],
+    "recovered": 60,
+    "max_overlap": {
+      "T_base": 0.0,
+      "P_base": 0.0,
+      "rho_base": 0.0,
+      "r_base": 0.0
+    },
+    "max_sensitivity": {
+      "T_base": 2.8901325777042075e-12,
+      "P_base": 7.216449660063518e-15,
+      "rho_base": 1.3278267374516872e-13,
+      "r_base": 2.6645352591003757e-15
+    },
+    "scope": "Integrated 20-step-per-lnP envelope. Gas opacity in 16\u201330 kK is scaled from0.001to1000, with smooth shoulders12\u201316and30\u201336kK; conduction unchanged. Sensitivity is not an opacity accuracy claim."
+  },
+  "SCVH_source_sha256": "fbf57e420901bb56b71ddaa7a2812b4ce3817824d88073e9d17494db6910f320",
+  "SCVH_free_electron_minimum": 0.9997856614693541,
+  "gas_free_electron_range": [
+    5.017794067168308e-06,
+    0.0007678653197682888
+  ],
+  "SCVH_outside": [
+    {
+      "T": 16000,
+      "rho": 31.62277660168379,
+      "reason": "outside native SCVH density range at a bracketing temperature"
+    }
+  ],
+  "assumptions": [
+    "Same gas absorption and neutral-scattering approximation; no pressure-ionization correction is inferred from the comparison.",
+    "Conduction retains the fully ionized source; independent SCVH supports that ionization regime in the admitted new warm envelope states.",
+    "The opacity sensitivity is a practical structural check, not a measured uncertainty bound.",
+    "The independent575K atmosphere sources are local research inputs and are not included in this gas table."
+  ],
+  "outside_validation": {
+    "queries": [
+      [
+        1.0,
+        15000.0,
+        12.0
+      ],
+      [
+        1.0,
+        19000.0,
+        12.0
+      ],
+      [
+        1.0,
+        22000.0,
+        35.0
+      ],
+      [
+        1.0,
+        31000.0,
+        1.0
+      ]
+    ],
+    "refused": 4,
+    "passed": true
+  }
+}

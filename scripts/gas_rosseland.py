@@ -84,6 +84,35 @@ def isotherm(table, populations):
     return rosseland(nu, temperature, absorption + scattering), errors
 
 
+def write_opacity_table(rows, output):
+    """Write a rectangular table or explicitly supported density prefixes."""
+    xs, ts, rs = [sorted({key[i] for key in rows}) for i in range(3)]
+    if min(len(ts), len(rs)) < 2 or any(not np.isfinite(v) or v <= 0 for v in rows.values()):
+        raise ValueError("positive material values and at least two temperatures/densities required")
+    counts, densities = {}, {}
+    for x, t, r in rows:
+        densities.setdefault((x,t), []).append(r)
+    for x in xs:
+        for t in ts:
+            actual = sorted(densities.get((x,t), []))
+            if len(actual) < 2 or actual != rs[:len(actual)]:
+                raise ValueError("each isotherm must contain a contiguous density prefix")
+            counts[x,t] = len(actual)
+    ragged = any(n != len(rs) for n in counts.values())
+    if ragged and (len(ts) < 4 or min(counts.values()) < 4):
+        raise ValueError("masked tables require four temperatures and four densities per row")
+    text = [f'{len(xs)} {len(ts)} {len(rs)} HHe_absorption_electron_Rayleigh',
+            ' '.join(format(r, '.17g') for r in rs),
+            ' '.join(format(np.log10(t), '.17g') for t in ts)]
+    for x in xs:
+        text.append(format(x, '.17g') + ' 0')
+        for t in ts:
+            values = ' '.join(format(np.log10(rows[x,t,r]), '.17g') for r in rs[:counts[x,t]])
+            text.append((str(counts[x,t])+' ' if ragged else '') + values)
+    if ragged: text.insert(0, 'EMBER_OPACITY_TABLE 2')
+    output.write_text('\n'.join(text) + '\n')
+
+
 def integrate(manifest, output):
     spec = json.loads(manifest.read_text())
     if spec.get('absorption_only') is not True:
@@ -105,23 +134,19 @@ def integrate(manifest, output):
                 or abs(t/np.exp(table['log_temperature'][0])-1) > 1e-8):
             raise ValueError("H/He abundance or temperature label mismatch")
         mean, errors = isotherm(table, np.loadtxt(paths['populations']))
-        for lr, value in zip(table['log_density'], mean):
+        indices = column.get('density_indices', list(range(len(mean))))
+        if (not isinstance(indices, list) or not indices
+                or any(type(i) is not int or i < 0 or i >= len(mean) for i in indices)
+                or len(set(indices)) != len(indices)):
+            raise ValueError("density_indices must select distinct source rows")
+        for i in indices:
+            lr, value = table['log_density'][i], mean[i]
             key = x, t, round(lr/np.log(10), 10)
             if key in rows:
                 raise ValueError("duplicate material node")
             rows[key] = float(value)
         sources.append(dict(column, population_relative_errors=errors))
-    xs, ts, rs = [sorted({key[i] for key in rows}) for i in range(3)]
-    if len(rows) != len(xs)*len(ts)*len(rs) or min(len(ts), len(rs)) < 2:
-        raise ValueError("a complete rectangular material grid is required")
-    text = [f'{len(xs)} {len(ts)} {len(rs)} HHe_absorption_electron_Rayleigh',
-            ' '.join(format(r, '.17g') for r in rs),
-            ' '.join(format(np.log10(t), '.17g') for t in ts)]
-    for x in xs:
-        text.append(format(x, '.17g') + ' 0')
-        for t in ts:
-            text.append(' '.join(format(np.log10(rows[x,t,r]), '.17g') for r in rs))
-    output.write_text('\n'.join(text) + '\n')
+    write_opacity_table(rows, output)
     return dict(nodes=len(rows), columns=sources,
                 sha256=hashlib.sha256(output.read_bytes()).hexdigest())
 

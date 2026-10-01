@@ -600,7 +600,10 @@ converted explicitly, with derivatives that preserve extinction per length.
 [Overlap tests](results/cold_opacity_overlap800_sept30_v1.json) cover the
 800 K envelope and a matched 100 Myr stellar interval.
 
-The table spans 1000–24000 K, densities 0.01–10 g/cm³ and hydrogen fractions
+The table spans 1000–30000 K, with density 0.01–10 g/cm³ throughout and
+additional warm density support to 31.62 g/cm³. Each isotherm declares its
+valid density prefix; the four-isotherm interpolation admits the extension
+only at 20000–30000 K. The hydrogen fractions are
 .98, .9955, 1−10⁻⁶ and 1. It includes gas absorption, electron scattering, and Rayleigh scattering
 from the source's neutral H, H2 and He populations. Nonideal chemistry,
 correlated scattering, grain opacity and direct H3+ lines remain incomplete.
@@ -615,6 +618,13 @@ scaling their opacity from 0.1 to 10 changes the deep temperature by less
 than 4e-14 relative. This test concerns the warm envelope layers, not the
 cool photosphere or an arbitrary star.
 [Atmosphere and envelope checks](results/cold_envelope700_oct1_v1.json).
+A separate density extension supports complete 575–800 K envelopes. Scaling
+warm-layer opacity by 0.001–1000 changes base temperature by at most 2.890e-12
+relative in 165 comparisons; all supported old envelopes are unchanged.
+The EOS predicts almost full ionization there, which the gas-opacity chemistry
+misses. Efficient convection makes this approximation structurally insensitive
+in these tests. It is not a nonideal opacity model for other states.
+[Density extension and checks](results/cold_opacity_density_oct1_v1.json).
 A matched 10 Myr stellar overlap also passes with the original time and
 conservation checks; it does not yet establish a cooling sequence to 700 K.
 
@@ -622,6 +632,9 @@ The generator's `integrate` command takes a JSON manifest with
 `absorption_only: true` and a `columns` list. Each column gives `X`, `T_K`,
 and `absorption`/`populations` objects containing `path` and `sha256`.
 Paths are relative to the manifest; the output is a density-coordinate table.
+Optional `density_indices` select explicit source rows when supplementing an
+existing isotherm. The exporter writes version 2 for unequal density coverage
+and rejects gaps within a density prefix; it never fills absent source values.
 The `export-populations` command adds diagnostic output to SYNSPEC54 before
 compilation. This leaves its absorption and chemical equations unchanged.
 

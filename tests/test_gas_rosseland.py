@@ -1,11 +1,12 @@
 """Independent limits and input checks for the scattering-inclusive mean."""
 import sys
 import unittest
+import tempfile
 from pathlib import Path
 
 import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'scripts'))
-from gas_rosseland import isotherm, population_export, rosseland
+from gas_rosseland import isotherm, population_export, rosseland, write_opacity_table
 
 
 class GasRosselandTests(unittest.TestCase):
@@ -33,6 +34,30 @@ class GasRosselandTests(unittest.TestCase):
     def test_invalid_spectrum(self):
         with self.assertRaises(ValueError): rosseland([2.,1.],3000,[1.,1.])
         with self.assertRaises(ValueError): rosseland([1.,2.],3000,[1.,0.])
+
+    def test_density_support_is_explicit(self):
+        rows = {(1., t, r): 10**r for t in [100.,200.,300.,400.]
+                for r in range(4 if t < 300 else 5)}
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)/'table.dat'
+            write_opacity_table(rows, path)
+            lines = path.read_text().splitlines()
+            self.assertEqual(lines[:2], ['EMBER_OPACITY_TABLE 2',
+                                        '1 4 5 HHe_absorption_electron_Rayleigh'])
+            self.assertEqual([int(line.split()[0]) for line in lines[5:]], [4,4,5,5])
+            del rows[1., 300., 2]
+            with self.assertRaises(ValueError): write_opacity_table(rows, path)
+            del rows[1., 100., 0]
+            with self.assertRaises(ValueError): write_opacity_table(rows, path)
+
+    def test_rectangular_format_is_retained(self):
+        rows = {(1., t, r): 10**r for t in [100.,200.,300.,400.] for r in range(4)}
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory)/'table.dat'
+            write_opacity_table(rows, path)
+            lines = path.read_text().splitlines()
+            self.assertEqual(lines[0], '1 4 4 HHe_absorption_electron_Rayleigh')
+            self.assertEqual(lines[4:], ['0 1 2 3']*4)
 
     def test_export_is_diagnostic_and_idempotent(self):
         source = '      subroutine ougrid(abso)\n      if (nfreq.le.3) return \n      end\n'

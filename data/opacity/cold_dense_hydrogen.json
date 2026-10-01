@@ -1,7 +1,7 @@
 {
-  "format": 1,
+  "format": 2,
   "table": "cold_dense_hydrogen.dat",
-  "sha256": "85cfb375f7920806931d793c12a21542afa472d0820cb44b7acbd05dbdc6f580",
+  "sha256": "d05e8b3c038ac5d20dacff3c0f013557f745e237cf91ed5f8a6e6b87b0f9edd0",
   "basis": "baryon_mass",
   "density_coordinate": "log10 rho in g of baryonic mass per cm3",
   "opacity_units": "cm2 per g of baryonic mass",
@@ -41,7 +41,9 @@
     16000.0,
     20000.0,
     22000.0,
-    24000.0
+    24000.0,
+    26000.0,
+    30000.0
   ],
   "log10_density": [
     -2.0,
@@ -56,7 +58,9 @@
     0.25,
     0.5,
     0.75,
-    1.0
+    1.0,
+    1.25,
+    1.5
   ],
   "frequencies": 30000,
   "method": "Trapezoidal Rosseland mean of full-resolution absorption, Thomson electron scattering and neutral H/H2/He Rayleigh scattering from the same source populations.",
@@ -113,7 +117,9 @@
     "Ordinary chemical populations are approximate at high density.",
     "No direct H3+ lines, three-body CIA, grains, correlated scattering or refractive corrections.",
     "He3 uses elemental mapping; isotope-specific cross sections and broadening are not supplied.",
-    "Negligible source metal mass is omitted from the runtime source coordinates."
+    "Negligible source metal mass is omitted from the runtime source coordinates.",
+    "Density above10g/cm3 is supported only by the warm isotherms and the native four-isotherm stencil (20\u201330kK).",
+    "In the assessed575\u2013800K envelopes the warm gas opacity is an insensitive approximation: its chemical ionization differs substantially from SCVH. It is not a calibrated nonideal plasma opacity."
   ],
   "source_file_hashes": [
     {
@@ -787,6 +793,214 @@
       "T_K": 24000.0,
       "absorption_sha256": "f4c735a2bf08270b31d0ef28e4da5aa4a2eedf898bb04c40228a5d85cb731133",
       "population_sha256": "b0b00443d2e8748f31b0eb080f8764816ceff04bfc12a8d788e43543a9ade989"
+    },
+    {
+      "X": 0.98,
+      "T_K": 16000.0,
+      "absorption_sha256": "a897b6c5023d81a618e2144ac6d8279c972d6b90fdfab32b8e921b00f121f46d",
+      "population_sha256": "f90a5f447df81d38c361d694090e949f2e1c416d71f38971d9506a6cc9108f86",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 0.98,
+      "T_K": 20000.0,
+      "absorption_sha256": "754321e47c96b2bf3a6a81332c6c6e133c41035f28df7912d61d637ab594a046",
+      "population_sha256": "d0008d538432a68e1cf5296fb5e03f7c83f673e0e1eb323e85954acea90a7550",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 0.98,
+      "T_K": 22000.0,
+      "absorption_sha256": "e91f7b934b5c35df8992d60d5abba47c4ab6a457865387ca7d1a71aebaee7e23",
+      "population_sha256": "8f209690767a4eea65760edb8b1a9e11115256c60e9d42898c727d32198d885e",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 0.98,
+      "T_K": 24000.0,
+      "absorption_sha256": "5cea1a6a3f9b52a25cfd66aeb65ed0f58215b8883a1d28fdc1a71b191c4ad602",
+      "population_sha256": "55729af64bd7ba6bbf3b93dc6b06c6b5f79cd242ab7182af7f07b674594f190f",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 0.98,
+      "T_K": 26000.0,
+      "absorption_sha256": "048b0e91d543dd5bf7c8998d48f25b52fdc73608a9604f90bf3c38f267ad9823",
+      "population_sha256": "daafaf0f043bb1ff2c22cbefb25b68bd37267bd61ecc68c17a76bf184b3eb396"
+    },
+    {
+      "X": 0.98,
+      "T_K": 30000.0,
+      "absorption_sha256": "4a5278e5ea2d8e2acbcced5762c9fc5e1ec978581c5cb92a1292e6e16230473c",
+      "population_sha256": "6f6f28495316e63a31bbb560dc047fbac07e89d08ef764d6fb4e3a4a4a6d8e16"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 16000.0,
+      "absorption_sha256": "cd8c430cb5593bd5fa71e732e9bc1ddd74427618e47113cfaf3de093e790aa46",
+      "population_sha256": "63bcd4218b597ae556ababcd7510fd2b28a5b84683adcbe8d514eef1fcf86ee2",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 0.9955,
+      "T_K": 20000.0,
+      "absorption_sha256": "819e2fef526945d8cbd37aa8d3de91f7143c893bf48bef2d1f1b367dec872e12",
+      "population_sha256": "fbcb4028b63712af471bb4044cf35405e4f537bba000464381a88029b25bf8df",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 0.9955,
+      "T_K": 22000.0,
+      "absorption_sha256": "e49ec1d761f2e3c55324eb9d67984f6446e052dd2358166c9f948e7c24ab21db",
+      "population_sha256": "dc8cf888d5c07cb47d06722128406849fdf880c035742c9d2de318605846375f",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 0.9955,
+      "T_K": 24000.0,
+      "absorption_sha256": "fe9da1ba7a84c3fc0da75822bc231a265d716e44fc72d121b40af65a2d83fb77",
+      "population_sha256": "5d640c526657a65b0e068a2d06f8b22804315bb077c9296b152d98470ad07999",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 0.9955,
+      "T_K": 26000.0,
+      "absorption_sha256": "5db4bd0e41635811e8c24d106dbda3ea4f56dacf0872ea107fa33887a5c56a9e",
+      "population_sha256": "aa1a2a81c00c000cc613920ba0c246907e5026979cbf12e452651788a6ceace1"
+    },
+    {
+      "X": 0.9955,
+      "T_K": 30000.0,
+      "absorption_sha256": "3968b25afcc34f2a339330f03f12919355eb48beccd89f35dbddfb90a2e0a0d5",
+      "population_sha256": "7bc4bdc64543a6ad41d3f014a388c53798c0751144127213dd3b83b3a9d3491a"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 16000.0,
+      "absorption_sha256": "f22b300321f8f89b82b1c5b5fbfdfa8c4b3d7ed51904eacf9d6fb699f91f4dfc",
+      "population_sha256": "f3d89c7238f6d3ddfe801c5157f45935a0cd12fea9f078c597f18574867600ac",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 0.999999,
+      "T_K": 20000.0,
+      "absorption_sha256": "1094f9038b5a38ca778ca29ff190441b51d9be89f3e0f9abdaedd45824e0015d",
+      "population_sha256": "d62f97c208fb017a4e21b1209f6d961ebf14cdcb3b6a3aebe9e658a933ce54f1",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 0.999999,
+      "T_K": 22000.0,
+      "absorption_sha256": "a5c75b770378e4390a0a2306bd5aafd785b624cb0319945ec22506032debef7d",
+      "population_sha256": "44a1a3f66adb7a41d7b3db7fce613f36401b9effdd054bb22f5897a1182cb2f0",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 0.999999,
+      "T_K": 24000.0,
+      "absorption_sha256": "6b86fc69940ef2951b059e5cf05a094d946483dc850bd90064c9db5d24e81490",
+      "population_sha256": "6b6fd9eba6fcb234c1687497f0a3c6201f07db193fa94bf26915b80cce32e9c3",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 0.999999,
+      "T_K": 26000.0,
+      "absorption_sha256": "91662059983a9b20742dc11bcb27f2794488c3c05ed6fba08f6028cef3a7ecd7",
+      "population_sha256": "aa6443dcb6c1770036a0504d5ee7a9bdac7bd51e3e48aa436bab85d29cd08e10"
+    },
+    {
+      "X": 0.999999,
+      "T_K": 30000.0,
+      "absorption_sha256": "24fd239b56938e060b41e36cfb61932005e51fb5f093e7b1f0cb543f2eab3af2",
+      "population_sha256": "768510dac69b7f290d51b365c64f039770c0fcbe9e54c84d1cec3940121fcf95"
+    },
+    {
+      "X": 1.0,
+      "T_K": 16000.0,
+      "absorption_sha256": "1a9b0eb2ff3e6231ccb5e3c861919ddcc1b22ba336adefd4cfef0ab39481bd75",
+      "population_sha256": "2e195fc507a99c6cd9527e74bb38fbd738c1aaeefaa2e2e90425e0312717e342",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 1.0,
+      "T_K": 20000.0,
+      "absorption_sha256": "9fe1e12cc5c889ac773d2e18caa302fd16d44b93a5ab5053733a07a2cada90aa",
+      "population_sha256": "2dc08b71d12b78f993b579870301f3289f2e093cf8460c3d6b7d7cebbb4bb27b",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 1.0,
+      "T_K": 22000.0,
+      "absorption_sha256": "24bfe5b0c2b7613e986d98929b6dc5db36b255ae4778947aebb594e6b43bea2b",
+      "population_sha256": "61506fe010dc91f8dde8762adcec1029577fd2606227d11f7a7c17c3144ce7e5",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 1.0,
+      "T_K": 24000.0,
+      "absorption_sha256": "182c28d0c2715406a4c1e8a44f07b22e2618d4d4f76e8f8a87293d6c3f4fac27",
+      "population_sha256": "bf7576370bf39eaf29c80c78d99f7311816df81df4f06e39df0dc28c95b3eee5",
+      "density_indices": [
+        1,
+        2
+      ]
+    },
+    {
+      "X": 1.0,
+      "T_K": 26000.0,
+      "absorption_sha256": "a0eaad773f7443656a1963a726091b8b975ee1daace53af377b2fe3518419008",
+      "population_sha256": "842db249333798b767652954386c6a9402e95870b61cbf0777c1d9471a286cf1"
+    },
+    {
+      "X": 1.0,
+      "T_K": 30000.0,
+      "absorption_sha256": "ee24e35c4737b7d784a63d12a017385187b29c3b3684c9168da815047128201c",
+      "population_sha256": "1e35c9370bfb066c9b8b37faceb790ba3bc83a02af094933e1530d4e1fe5b7cf"
     }
   ],
   "generator": "scripts/gas_rosseland.py",
@@ -810,7 +1024,7 @@
     },
     {
       "T_min_K": 16000,
-      "T_max_K": 24000,
+      "T_max_K": 30000,
       "wavelength_A": [
         200,
         300000
@@ -818,5 +1032,37 @@
     }
   ],
   "pure_hydrogen_convention": "Absent species use1e-99 number abundance to avoid the source zero-abundance solar default. Their opacity and mass contribution are negligible.",
-  "validation": "../../docs/results/cold_envelope700_oct1_v1.json"
+  "validation": "../../docs/results/cold_opacity_density_oct1_v1.json",
+  "density_counts_by_temperature": [
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    13,
+    15,
+    15,
+    15,
+    15,
+    15,
+    15
+  ]
 }
