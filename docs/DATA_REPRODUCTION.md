@@ -19,6 +19,7 @@ output or regenerate and validate it before selecting a new table.
 | TOPS opacity compositions | `fetch_tops_composition.py`, `import_tops_composition.py`, `import_tops_mixtures.py` | `audit_opacity_extension.py`, `audit_tops_heldout.py`; [opacity README](../data/opacity/README.md) |
 | AESOPUS low-temperature opacity | `archive_aesopus_mixtures.py`, `import_aesopus.py`, `import_aesopus_mixtures.py` | Original source hashes and unchanged cells; [opacity README](../data/opacity/README.md) |
 | Ioffe conduction | `import_conduction.py`; direct-source reference via `conduction_reference_probe.f90`, `generate_conduction_reference.py` | [conduction README](../data/conduction/README.md), [CONDUCTION.md](CONDUCTION.md) |
+| Microscopic collision response | `build_electron_pair_table.py`, `electron_pair_table.py`, `extend_ion_collision_table.py` | `audit_electron_pair_interpolation.py`; [cold coverage and overlap checks](results/electron_pair_eta4096_oct1_v1.json) |
 | Non-grey gas atmospheres | `prepare_nongrey_sources.py`, `generate_nongrey_grid.py`, `solve_column.py`, `archive_nongrey_grid.py`, `import_nongrey_grid.py`, `run_nongrey_plan.py`, `assemble_nongrey_grid.py` | `audit_nongrey_family.py`, source/chemistry/flux checks; [NONGREY.md](NONGREY.md) |
 | Condensate experiments | `prepare_fastchem_sources.py`, `prepare_condensate_sources.py`, `generate_condensate_opacity.py`, `run_condensate_atmosphere.py`, `generate_condensate_grid.py`, archive/collect scripts | `audit_condensate_atmosphere.py`, `audit_condensate_material.py`, `audit_condensate_interpolation.py`; [FORWARD_EVOLUTION.md](FORWARD_EVOLUTION.md) |
 
@@ -53,6 +54,16 @@ TOPS retrieval requires the external service or retained original replies.
 Non-gray atmosphere generation requires the documented TLUSTY/SYNSPEC sources,
 line data and opacity tables. These external source builds are offline dependencies;
 Ember does not link to them at runtime.
+
+Electron-pair source integration supports degeneracy parameter eta through
+4096. The checked cold table extends its screening coordinate down to 0.005
+and retains the classical-ion grid through log strength 5. A matched 100 Myr
+stellar comparison changes global quantities by less than 6.893e-13.
+This extends coverage of the same screened Born/Pauli model. It does not add
+relativistic or strongly correlated mixture physics. Source refinement at the
+high-screening corner changes the response by 0.1084%; numerical accuracy is
+better in the tested small-screening stellar region. The compact record above
+separates source convergence, interpolation, and stellar comparisons.
 
 ## Run inputs and archived comparisons
 

@@ -1,0 +1,231 @@
+{
+  "table_sha256": "737193df8a3a00bbaa057a5a0dcdcf97b838ca3085a0112b08c93d360306dd1d",
+  "selected_in_stellar_continuation": true,
+  "electron_degeneracy_range": [
+    -2.0,
+    4096.0
+  ],
+  "screening_coordinate_range": [
+    0.005,
+    150.0
+  ],
+  "classical_ion_log_strength_maximum": 5,
+  "source_grid": {
+    "eta_previous": [
+      -2,
+      -1,
+      0,
+      1,
+      2,
+      3,
+      4,
+      5.5,
+      7,
+      8.5,
+      10,
+      13,
+      16,
+      20,
+      25,
+      32,
+      40,
+      50,
+      64,
+      80,
+      96,
+      112,
+      128,
+      160,
+      192,
+      224,
+      256,
+      320,
+      384,
+      448,
+      512,
+      640,
+      768,
+      896,
+      1024,
+      1280,
+      1536,
+      1792,
+      2048
+    ],
+    "eta_added": [
+      2560,
+      3072,
+      3584,
+      4096
+    ],
+    "b": [
+      0.005,
+      0.01,
+      0.02,
+      0.025,
+      0.03535533905932738,
+      0.05,
+      0.1,
+      0.25,
+      0.5,
+      1,
+      2,
+      3,
+      7,
+      16,
+      40,
+      100,
+      150
+    ],
+    "CPU_seconds": 5188.236878,
+    "source_records": 112,
+    "new_node_recipe": "Append every eta_added row at all b nodes; append b=0.005 at all eta_previous nodes. Retain all other old nodes.",
+    "default_orders": [
+      80,
+      40,
+      40,
+      48,
+      48
+    ],
+    "new_eta_b_ge_100_orders": [
+      128,
+      64,
+      64,
+      80,
+      80
+    ],
+    "control_orders": [
+      100,
+      50,
+      50,
+      60,
+      60
+    ],
+    "off_grid_eta_b": [
+      [
+        2176.0,
+        0.007
+      ],
+      [
+        2816.0,
+        0.012
+      ],
+      [
+        3328.0,
+        0.025
+      ],
+      [
+        3840.0,
+        0.04
+      ],
+      [
+        3328.0,
+        10
+      ]
+    ],
+    "reused_records": 3
+  },
+  "interpolation": {
+    "maximum_response_error": 0.00080682962919003,
+    "small_b_control_response_error": 2.7572282702472497e-06,
+    "old_node_reproduction_error": 9.039096472851286e-15
+  },
+  "native": {
+    "queries": 1008,
+    "recovered": 326,
+    "failures": 0,
+    "maximum_overlap_response_error": 2.6908807407658118e-09,
+    "maximum_derivative_effect": 3.5006287986212565e-13,
+    "coverage": {
+      "0.35": {
+        "queries": 144,
+        "failed": 0
+      },
+      "0.4": {
+        "queries": 144,
+        "failed": 0
+      },
+      "0.5": {
+        "queries": 144,
+        "failed": 0
+      },
+      "0.6": {
+        "queries": 144,
+        "failed": 0
+      },
+      "0.7": {
+        "queries": 144,
+        "failed": 0
+      },
+      "0.85": {
+        "queries": 144,
+        "failed": 0
+      },
+      "1.0": {
+        "queries": 144,
+        "failed": 0
+      }
+    }
+  },
+  "independent_ion_moment_checks": {
+    "upper_guard_refused": true,
+    "maximum_operator_error": 1.199545655834009e-13,
+    "CPU_seconds": 0.15049799999999997,
+    "sha256": {
+      "electron_electron_collision.py": "b65ee71e1d53a549d44eb871f7bd15a5346bc776eccde0ae414c6cd1797ee336",
+      "electron_electron_energy_modes_v2.py": "cd647fe9994b9e90cd79272e6f63226a36c82583b3521bb6bcdd91e135ccc293"
+    },
+    "scope": "Independent adaptive ion moments and source normalization on new electron degeneracy nodes; pair scattering convergence is assessed separately.",
+    "passed": true,
+    "normalization_warning": "Adaptive basis normalization emitted a roundoff warning; the independent ion-moment operator check agrees within 1.200e-13. Pair-matrix convergence is assessed separately.",
+    "cases": 15,
+    "eta_values": [
+      2048.0,
+      2560.0,
+      3072.0,
+      3584.0,
+      4096.0
+    ],
+    "b_values": [
+      0.005,
+      0.04,
+      150.0
+    ],
+    "maximum_gram_error": 2.55351295663786e-14
+  },
+  "stellar_comparison": {
+    "years": 3906089107989.866,
+    "global_relative": {
+      "Teff_K": 7.749356711883593e-14,
+      "radius_Rsun": -4.440892098500626e-16,
+      "luminosity_Lsun": 3.0886404545071855e-13,
+      "central_T_K": -6.892264536872972e-13,
+      "central_density_g_cm3": -3.552713678800501e-13,
+      "He3_peak": 3.299582829185965e-13,
+      "H_mass_g": 2.220446049250313e-16,
+      "He3_mass_g": 8.881784197001252e-16
+    },
+    "maximum_point_relative_r_rho_T": [
+      3.7125857943458343e-13,
+      2.7071678232496463e-12,
+      2.4797941477996748e-12
+    ],
+    "maximum_point_L_difference_over_surface_L": 5.345298767198045e-10,
+    "maximum_absolute_H_He3_He4_difference": [
+      8.416600749683312e-13,
+      8.417270611395967e-13,
+      3.372302437298913e-11
+    ],
+    "worst_species_q": 5.110514086835344e-10,
+    "same_convective_mass_fraction": true,
+    "scope": "Matched 100 Myr, same code, physical models and accuracy; only collision-table coverage changes",
+    "duration_years": 100000000,
+    "new_table_CPU_seconds": 376.810576,
+    "no_timing_claim": "Compared under different competing load."
+  },
+  "limitations": [
+    "The high-b source refinement changes retained response by 0.1084%; no uniform 0.1% quadrature accuracy is claimed.",
+    "Same screened Born/Pauli model; no added strong-correlation or relativistic correction.",
+    "Fixed-density temperature projections test collision coverage, not EOS support or a self-consistent cooling track."
+  ]
+}
