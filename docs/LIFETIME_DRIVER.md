@@ -397,6 +397,10 @@ The optional settings `coupling_stop_tolerance "1e-10"`,
 and `verification_correction_tolerance "1e-7"` separate the outer iteration
 from the inner species solve and its integrated conservation bounds. The
 returned composition still passes a structure residual and correction check.
+`structure_inner_residual_tolerance` and `structure_inner_correction_tolerance`
+optionally control the fixed-composition Newton solves (defaults 1e-9 and 1e-8).
+They also must remain at least 100 times below the temporal structure target.
+The separate final structure checks and conservation audits still apply.
 Omitting these settings retains the previous stopping criteria. Selected values
 enter the restart identity; the driver requires them to remain smaller than
 the corresponding time-discretization tolerances. Each final structure check

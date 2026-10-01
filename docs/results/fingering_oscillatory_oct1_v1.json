@@ -1,0 +1,68 @@
+{
+  "years": 3902133360621.589,
+  "global_relative": {
+    "Teff_K": 2.437476886996137e-10,
+    "radius_Rsun": 2.269695542622685e-11,
+    "luminosity_Lsun": 1.0203846656509086e-09,
+    "central_T_K": 2.956870304160475e-09,
+    "central_density_g_cm3": -1.622713075022375e-11,
+    "He3_peak": -1.1408077815744377e-09,
+    "H_mass_g": 8.881784197001252e-16,
+    "He3_mass_g": -2.220446049250313e-16
+  },
+  "maximum_point_relative_r_rho_T": [
+    1.3699263945548566e-11,
+    7.658913506338477e-10,
+    3.182170976235233e-09
+  ],
+  "maximum_point_L_difference_over_surface_L": 2.024775416692611e-07,
+  "maximum_absolute_H_He3_He4_difference": [
+    8.382501359704975e-10,
+    2.8254251716042234e-10,
+    1.120792569864193e-09
+  ],
+  "worst_species_q": 0.9644771026421379,
+  "same_convective_mass_fraction": true,
+  "scope": "Same age and physics, different adaptive intervals following central convergence sensitivity; not a byte-identity or speed comparison",
+  "independent_oscillatory_references": 87,
+  "model": "Explicit uncalibrated growth-squared or growth-times-frequency saturation; strict rejection remains default",
+  "tests": [
+    "fingering",
+    "metal_cn_transport",
+    "collision_reuse",
+    "coupled_evolution",
+    "nonlinear_metal_mixing",
+    "finite_metal_evolution",
+    "lagged_finite_metal_evolution",
+    "finite_screened_envelope_evolution",
+    "lifetime_restart"
+  ],
+  "matched_3_Gyr_saturation_sensitivity": {
+    "global_relative": {
+      "Teff_K": -1.0383405610880914e-06,
+      "radius_Rsun": -7.63557894689626e-09,
+      "luminosity_Lsun": -4.168626869360814e-06,
+      "central_T_K": 1.2601920875709993e-06,
+      "central_density_g_cm3": -3.6570195760532442e-09,
+      "He3_peak": -8.528519473971485e-06,
+      "H_mass_g": 0.0,
+      "He3_mass_g": 8.881784197001252e-16
+    },
+    "Teff_difference_K": -0.0008866082828262734,
+    "maximum_point_relative_r_rho_T": [
+      7.224539163013163e-09,
+      5.703086253032625e-07,
+      1.367560609784171e-06
+    ],
+    "maximum_point_L_difference_over_surface_L": 2.243702568462127e-05,
+    "maximum_absolute_H_He3_He4_difference": [
+      6.642759076136429e-07,
+      1.107248761067492e-06,
+      1.7715246686256236e-06
+    ],
+    "worst_species_q": 0.9644771024956773,
+    "same_convective_mass_fraction": true
+  },
+  "efficiency_limit": "Arithmetic reassociation changes convective-partition iteration in the central region; common comparison used four smaller intervals after two failures, versus one private interval. This is not a speedup claim.",
+  "physical_limit": "No nonlinear oscillatory calibration or spatial convergence claim; no full-lifetime fingering prescription."
+}

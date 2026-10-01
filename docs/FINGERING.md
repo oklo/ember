@@ -30,11 +30,27 @@ negligible metal buoyancy. It uses a classical mean-ion viscosity alongside
 electron viscosity. It supplies no multicomponent closure outside that material
 domain, and refuses a net inverse-composition layer that needs unsupported
 coefficients. Opposing buoyancy contributions can support both stationary and
-oscillatory modes. The fastest growth determines the classification; a dominant
-oscillatory mode is refused because its transport is not supplied. This is not yet a full-lifetime fingering prescription, a crystal
-mixing law, or a treatment of composition layers, rotation or magnetic fields.
+oscillatory modes. The fastest growth determines the classification.
 
-A warm-state diagnostic advances 100 Myr from 848.7 K with the original
-conservation and time-error checks. It finishes at 847.6 K. The longer warm replay encounters an oscillatory branch in trial states.
-Passage through the colder mixing event and spatial convergence remain unproven.
-[Checks and limits](results/fingering_two_composition_oct1_v1.json).
+By default an oscillatory fastest mode is refused. The explicit sensitivity
+options `fingering_oscillation "growth_squared"` and `"growth_frequency"`
+use dimensionless squared velocities `49 alpha²/q` and
+`49 alpha sqrt(alpha²+omega²)/q`, respectively. Here `alpha+i omega` is
+the fastest growth mode and `q` is its squared wavenumber. Both vanish at
+marginal growth and recover the stationary law. Heat and composition use the
+real, phase-dependent response to that mode. These are uncalibrated nonlinear
+assumptions, not published oscillatory transport fits.
+
+A matched 3 Gyr cooling comparison reaches 853.9 K with surface temperatures
+differing by 0.0008866 K and luminosities by 0.0004169%. This establishes a
+small sensitivity over that interval, not a general error bound. At 828.2 K,
+the weaker choice requires shorter steps through a nonlinear composition
+adjustment. Passage through the colder event and spatial convergence remain
+unfinished. The model does not treat composition layers, crystal mixing,
+rotation or magnetic fields, and is not yet a full-lifetime prescription.
+The common executable reproduces the private 6 Myr comparison at the same age:
+luminosity differs by 1.020e-9 and abundances by at most 1.121e-9. It took
+smaller intervals because the central convective partition changed during
+iteration; this comparison does not establish a performance improvement.
+[Oscillatory checks](results/fingering_oscillatory_oct1_v1.json) ·
+[Stationary and conservation checks](results/fingering_two_composition_oct1_v1.json).

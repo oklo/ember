@@ -137,6 +137,39 @@ int main() {
       catch(const std::domain_error&){oscillatory=true;}
       require(oscillatory,"an actually dominant oscillatory mode must be reported");
     }
+    std::ifstream oscillatory_data(std::string(EMBER_TEST_DATA_DIR)+"/fingering_oscillatory_reference.txt");
+    require(bool(oscillatory_data),"missing independent oscillatory reference");
+    int oscillatory_count=0;
+    while(std::getline(oscillatory_data,line)) {
+      if(line.empty() || line[0]=='#')continue;
+      double pr,t0,t1,g0,g1,lambda,q,omega;std::istringstream in(line);
+      require(bool(in>>pr>>t0>>t1>>g0>>g1>>lambda>>q>>omega),"bad oscillatory reference row");
+      const auto a=two_composition_fingering(pr,{t0,t1},{g0,g1},OscillatoryMixing::growth_squared);
+      const auto b=two_composition_fingering(pr,{t0,t1},{g0,g1},OscillatoryMixing::growth_frequency);
+      require(a.regime==FingeringRegime::fingering &&
+          std::abs(a.growth_rate/lambda-1)<3e-6 && std::abs(a.wavenumber_squared/q-1)<2e-4 &&
+          std::abs(a.oscillation_frequency-omega)/std::max(lambda,omega)<3e-6,
+          "oscillatory mode disagrees with independent eigenvalues");
+      require(a.growth_rate==b.growth_rate && a.oscillation_frequency==b.oscillation_frequency &&
+          a.wavenumber_squared==b.wavenumber_squared,"saturation choice changed the linear mode");
+      const double ratio=std::hypot(a.growth_rate,a.oscillation_frequency)/a.growth_rate;
+      require(a.velocity_squared>0 && std::abs(b.velocity_squared/a.velocity_squared/ratio-1)<1e-12 &&
+          std::abs(b.thermal_nusselt_excess/a.thermal_nusselt_excess/ratio-1)<1e-12,
+          "continuous oscillatory saturation has inconsistent heat amplitude");
+      for(std::size_t i=0;i<2;++i)
+        require(a.mixing_over_thermal[i]>0 &&
+            std::abs(b.mixing_over_thermal[i]/a.mixing_over_thermal[i]/ratio-1)<1e-12,
+            "oscillatory composition transport has inconsistent phase response");
+      ++oscillatory_count;
+    }
+    require(oscillatory_count>=80,"incomplete oscillatory reference set");
+    for(auto policy:{OscillatoryMixing::reject,OscillatoryMixing::growth_squared,OscillatoryMixing::growth_frequency}) {
+      const auto f=two_composition_fingering(.015,{1e-4,1e-4},{.04,-.01},policy);
+      require(f.oscillation_frequency==0 && f.velocity_squared>0,"stationary limit acquired an oscillation");
+      require(two_composition_fingering(.015,{1e-4,2e-4},{-.1,-.1},policy).velocity_squared==0,
+          "stable state acquired a saturation amplitude");
+    }
+    std::cout<<"PASS: "<<oscillatory_count<<" independent oscillatory cases and both explicit saturation choices\n";
     std::ifstream two_data(std::string(EMBER_TEST_DATA_DIR)+"/fingering_two_reference.txt");
     require(bool(two_data),"missing two-composition eigenvalue reference");
     int two_count=0;double two_error=0;

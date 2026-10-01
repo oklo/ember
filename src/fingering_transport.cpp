@@ -47,8 +47,8 @@ MetalCNVector mixing_rates(const BrownFingeringTransport::Face& f,
 
 BrownFingeringTransport::BrownFingeringTransport(const VariableMetalHelmholtzEos& eos,
     const Opacity& radiation,const MetalMicroscopicTransport& base,
-    const ScreenedCollisionTransport& collisions)
-    :eos_(eos),radiation_(radiation),base_(base),collisions_(collisions) {
+    const ScreenedCollisionTransport& collisions,OscillatoryMixing oscillatory)
+    :eos_(eos),radiation_(radiation),base_(base),collisions_(collisions),oscillatory_(oscillatory) {
   if(radiation.includes_conduction())
     throw std::invalid_argument("fingering: opacity must contain radiation only");
 }
@@ -137,14 +137,25 @@ BrownFingeringTransport::Face BrownFingeringTransport::face(std::size_t index,
   if(eigenvalues[1]>=thermal)
     throw std::domain_error("fingering: chemical diffusion is outside the heat-fast closure domain");
   const auto f=two_composition_fingering(result.prandtl,
-      {eigenvalues[0]/thermal,eigenvalues[1]/thermal},drive);
+      {eigenvalues[0]/thermal,eigenvalues[1]/thermal},drive,oscillatory_);
   if(f.regime!=FingeringRegime::fingering)return result;
   result.thermal_nusselt_excess=f.thermal_nusselt_excess;
   MetalSpeciesMatrix relaxation{};
   for(std::size_t j=0;j<3;++j)for(std::size_t k=0;k<3;++k)
     relaxation[j][k]=f.wavenumber_squared*chemical[j][k]/thermal+(j==k?f.growth_rate:0);
-  const auto response=inverse(relaxation);
-  const double scale=thermal*49*f.growth_rate*f.growth_rate/f.wavenumber_squared;
+  auto response=inverse(relaxation);
+  if(f.oscillation_frequency>0) {
+    MetalSpeciesMatrix square{},real_response{};
+    for(std::size_t j=0;j<3;++j)for(std::size_t k=0;k<3;++k) {
+      for(std::size_t l=0;l<3;++l)square[j][k]+=relaxation[j][l]*relaxation[l][k];
+      if(j==k)square[j][k]+=f.oscillation_frequency*f.oscillation_frequency;
+    }
+    const auto inv=inverse(square);
+    for(std::size_t j=0;j<3;++j)for(std::size_t k=0;k<3;++k)for(std::size_t l=0;l<3;++l)
+      real_response[j][k]+=inv[j][l]*relaxation[l][k];
+    response=real_response;
+  }
+  const double scale=thermal*f.velocity_squared;
   result.diffusivity=scale*.5*(response[0][0]+response[1][1]);
   const double Tlog=detail::logarithmic_temperature<0>(lo.lnT,hi.lnT).value;
   const double conductance=4*pi*constants::G*mass*rho*conductivity*Tlog/P;
@@ -198,7 +209,7 @@ void BrownFingeringTransport::add_mixing_flux(MetalCNFaceResponse& out,std::size
   const auto left=metal_cn_abundances(a),right=metal_cn_abundances(b);
   for(int side=0;side<2;++side)for(std::size_t col=0;col<METAL_CN_D;++col) {
     const auto& composition=side?b:a;const auto values=side?right:left;
-    const double step=1e-5*std::min(values[col],composition.X[2]);
+    const double step=1e-6*std::min(values[col],composition.X[2]);
     if(step==0)continue;
     auto plus=values,minus=values;plus[col]+=step;minus[col]-=step;
     const auto cp=metal_cn_composition(composition,plus),cm=metal_cn_composition(composition,minus);

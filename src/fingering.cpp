@@ -5,6 +5,7 @@
 #include <limits>
 #include <sstream>
 #include <iomanip>
+#include <complex>
 #include <stdexcept>
 
 namespace ember {
@@ -117,7 +118,10 @@ FingeringResponse brown_fingering_response(double pr, double tau, double R) {
 }
 
 TwoCompositionFingering two_composition_fingering(double pr,
-    std::array<double,2> tau,std::array<double,2> driving) {
+    std::array<double,2> tau,std::array<double,2> driving,OscillatoryMixing oscillatory) {
+  if(oscillatory!=OscillatoryMixing::reject && oscillatory!=OscillatoryMixing::growth_squared
+      && oscillatory!=OscillatoryMixing::growth_frequency)
+    throw std::invalid_argument("two-composition fingering: unknown oscillatory saturation model");
   if(!(pr>0 && tau[0]>0 && tau[1]>=tau[0] && tau[1]<1)
       || !std::isfinite(pr+tau[0]+tau[1]+driving[0]+driving[1]))
     throw std::invalid_argument("two-composition fingering: invalid diffusivity or driving");
@@ -130,6 +134,7 @@ TwoCompositionFingering two_composition_fingering(double pr,
     const auto f=brown_fingering_flux(pr,tau[0],1/net);
     out.regime=f.regime;out.growth_rate=f.growth_rate;
     out.wavenumber_squared=f.wavenumber_squared;out.thermal_nusselt_excess=f.thermal_nusselt_excess;
+    if(f.wavenumber_squared>0)out.velocity_squared=49*f.growth_rate*f.growth_rate/f.wavenumber_squared;
     out.mixing_over_thermal.fill(tau[0]*f.chemical_nusselt_excess);return out;
   }
   // The quartic follows by multiplying
@@ -236,12 +241,37 @@ TwoCompositionFingering two_composition_fingering(double pr,
     if(!(best>0))throw std::runtime_error("two-composition fingering: spectral maximum not resolved");
     const double stationary=at(bestq).lambda;
     if(stationary<best*(1-1e-7)) {
-      std::ostringstream message;
-      message<<std::setprecision(17)<<"two-composition fingering: fastest mode is oscillatory; closure unavailable"
-          <<" Pr="<<pr<<" tau0="<<tau[0]<<" tau1="<<tau[1]
-          <<" g0="<<driving[0]<<" g1="<<driving[1]<<" growth="<<best<<" q="<<bestq;
-      throw std::domain_error(message.str());
-    }
+      if(oscillatory==OscillatoryMixing::reject) {
+        std::ostringstream message;
+        message<<std::setprecision(17)<<"two-composition fingering: fastest mode is oscillatory; closure unavailable"
+            <<" Pr="<<pr<<" tau0="<<tau[0]<<" tau1="<<tau[1]
+            <<" g0="<<driving[0]<<" g1="<<driving[1]<<" growth="<<best<<" q="<<bestq;
+        throw std::domain_error(message.str());
+      }
+      auto oscillation=[&](double q) {
+        const double alpha=growth(q),a3=q*A,a2=q*q*B+pr*(1-net),a1=q*(q*q*C+pr*D);
+        const double omega2=(a1+alpha*(2*a2+alpha*(3*a3+4*alpha)))/(a3+4*alpha);
+        if(!(omega2>0))throw std::runtime_error("two-composition oscillatory mode: frequency is not positive");
+        return std::complex<double>(alpha,std::sqrt(omega2));
+      };
+      auto derivative=[&](double q) {
+        const auto z=oscillation(q);
+        const double a3=q*A,a2=q*q*B+pr*(1-net),a1=q*(q*q*C+pr*D);
+        const auto Fz=((4.*z+3*a3)*z+2*a2)*z+a1;
+        const auto Fq=A*z*z*z+2*q*B*z*z+(3*q*q*C+pr*D)*z+pr*(4*product*q*q*q+2*E*q);
+        return (-Fq/Fz).real();
+      };
+      double left=bestq*.999,right=bestq*1.001;
+      if(!(derivative(left)>0 && derivative(right)<0))
+        throw std::runtime_error("two-composition oscillatory mode: maximum not bracketed");
+      for(int j=0;j<60;++j) {
+        const double q=.5*(left+right);
+        if(derivative(q)>0)left=q;else right=q;
+        if(right-left<=2e-12*(left+right))break;
+      }
+      bestq=.5*(left+right);const auto z=oscillation(bestq);best=z.real();
+      out.oscillation_frequency=z.imag();
+    } else {
     // A value maximum alone leaves O(sqrt(epsilon)) wavelength noise. Refine
     // F_q=0 so composition finite differences see smooth transport coefficients.
     double a=bestq*.999,b=bestq*1.001;
@@ -253,6 +283,7 @@ TwoCompositionFingering two_composition_fingering(double pr,
       if(b-a<=2e-12*(a+b))break;
     }
     bestq=.5*(a+b);best=at(bestq).lambda;
+    }
   } else {
     const double drive_weight=driving[0]/tau[0]+driving[1]/tau[1];
     if(drive_weight<=1)return out;
@@ -281,9 +312,12 @@ TwoCompositionFingering two_composition_fingering(double pr,
     if(!(best>0 && bestq>0))throw std::runtime_error("two-composition fingering: fastest mode not resolved");
   }
   out.regime=FingeringRegime::fingering;out.growth_rate=best;out.wavenumber_squared=bestq;
-  const double velocity_squared=49*best*best/bestq;
-  out.thermal_nusselt_excess=velocity_squared/(best+bestq);
-  for(std::size_t j=0;j<2;++j)out.mixing_over_thermal[j]=velocity_squared/(best+tau[j]*bestq);
+  const double omega=out.oscillation_frequency;
+  const double velocity_squared=49*best*(oscillatory==OscillatoryMixing::growth_frequency
+      ?std::hypot(best,omega):best)/bestq;
+  out.velocity_squared=velocity_squared;
+  out.thermal_nusselt_excess=velocity_squared*(best+bestq)/(std::pow(best+bestq,2)+omega*omega);
+  for(std::size_t j=0;j<2;++j)out.mixing_over_thermal[j]=velocity_squared*(best+tau[j]*bestq)/(std::pow(best+tau[j]*bestq,2)+omega*omega);
   return out;
 }
 } // namespace ember

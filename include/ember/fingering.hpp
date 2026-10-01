@@ -47,9 +47,14 @@ struct FingeringResponse {
 FingeringResponse brown_fingering_response(double prandtl, double diffusivity_ratio,
                                          double density_ratio);
 
+// Optional, uncalibrated continuations of Brown saturation for a complex mode.
+// Both vanish as its growth rate tends to zero. The default supplies no such law.
+enum class OscillatoryMixing { reject, growth_squared, growth_frequency };
+
 struct TwoCompositionFingering {
   FingeringRegime regime{FingeringRegime::stable};
-  double growth_rate{},wavenumber_squared{},thermal_nusselt_excess{};
+  double growth_rate{},oscillation_frequency{},wavenumber_squared{},thermal_nusselt_excess{};
+  double velocity_squared{}; // dimensionless saturation amplitude
   // Extra diffusivity / thermal diffusivity, in the two chemical diffusion
   // eigenmodes. Does not include microscopic diffusion.
   std::array<double,2> mixing_over_thermal{};
@@ -60,11 +65,13 @@ struct TwoCompositionFingering {
 // from slow to fast, with 0<tau[0]<=tau[1]<1. A destabilizing slow field and
 // a stabilizing fast field are supported even if their net buoyancy is stable.
 // For the opposite ordering, both spectral branches are compared; a dominant
-// oscillatory mode is explicitly refused. Buoyancy signs alone cannot classify it.
+// oscillatory mode is refused unless an explicit sensitivity model is selected.
+// Buoyancy signs alone cannot classify it.
 // The linear dispersion relation retains both fields exactly. Applying the
 // Brown C=7 saturation hypothesis to it is an UNCALIBRATED extension, not a
 // published multicomponent transport fit. Equal diffusivities recover Brown.
 TwoCompositionFingering two_composition_fingering(double prandtl,
-    std::array<double,2> diffusivity_ratios,std::array<double,2> driving);
+    std::array<double,2> diffusivity_ratios,std::array<double,2> driving,
+    OscillatoryMixing oscillatory=OscillatoryMixing::reject);
 
 } // namespace ember

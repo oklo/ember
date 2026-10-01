@@ -220,6 +220,11 @@ int lifetime_main(int argc,char** argv) {
     const double material_heat=optional_number("material_heat_tolerance");
     const double verification_residual=optional_number("verification_residual_tolerance");
     const double verification_correction=optional_number("verification_correction_tolerance");
+    const double inner_residual=optional_number("structure_inner_residual_tolerance");
+    const double inner_correction=optional_number("structure_inner_correction_tolerance");
+    for(double t:{inner_residual,inner_correction})
+      if(!std::isfinite(t) || t<0 || t>1e-2*structure_tolerance)
+        throw std::invalid_argument("inner structure tolerance must remain below time accuracy");
     for(double t:{coupling_stop,material_heat,verification_residual,verification_correction})
       if(!std::isfinite(t) || t<0)throw std::invalid_argument("invalid coupling or verification tolerance");
     // Both final structure tests remain at least 100 times tighter than the
@@ -238,6 +243,13 @@ int lifetime_main(int argc,char** argv) {
     const auto fingering=cfg.values.contains("fingering")?cfg.get("fingering"):"none";
     if((fingering!="none" && fingering!="brown_two_composition") || (fingering=="brown_two_composition" && !screened_core))
       throw std::invalid_argument("fingering must be none or brown_two_composition; mixing requires screened_core transport");
+    const auto oscillation_selection=cfg.values.contains("fingering_oscillation")?cfg.get("fingering_oscillation"):"reject";
+    OscillatoryMixing oscillatory=OscillatoryMixing::reject;
+    if(oscillation_selection=="growth_squared")oscillatory=OscillatoryMixing::growth_squared;
+    else if(oscillation_selection=="growth_frequency")oscillatory=OscillatoryMixing::growth_frequency;
+    else if(oscillation_selection!="reject")throw std::invalid_argument("unknown fingering_oscillation model");
+    if(oscillatory!=OscillatoryMixing::reject && fingering!="brown_two_composition")
+      throw std::invalid_argument("fingering_oscillation requires brown_two_composition");
     const auto mixing_selection=cfg.values.contains("convective_mixing")?cfg.get("convective_mixing"):"instantaneous";
     ConvectiveMixing mixing_mode=ConvectiveMixing::instantaneous;
     if(mixing_selection=="finite_implicit")mixing_mode=ConvectiveMixing::finite_implicit;
@@ -369,6 +381,10 @@ int lifetime_main(int argc,char** argv) {
     identity.values["transport.selection"]=transport_selection;
     if(fingering=="brown_two_composition")identity.values["transport.fingering"]=
         "brown_saturation.two_HHe_fields.CY05.DRB14.inward_heat.v3";
+    if(oscillatory!=OscillatoryMixing::reject)
+      identity.values["transport.fingering_oscillation"]=oscillation_selection+".phase_response.v1";
+    if(inner_residual>0)identity.number("solver.structure_inner_residual_tolerance",inner_residual);
+    if(inner_correction>0)identity.number("solver.structure_inner_correction_tolerance",inner_correction);
     if(mixing_mode!=ConvectiveMixing::instantaneous)
       identity.number("convection.instantaneous_mixing_below_T_K",instantaneous_below);
     if(screened_core) {
@@ -595,10 +611,12 @@ int lifetime_main(int argc,char** argv) {
     if(screened_core)later.microscopic=&envelope_heat;
     std::unique_ptr<BrownFingeringTransport> finger;
     if(fingering=="brown_two_composition") {
-      finger=std::make_unique<BrownFingeringTransport>(table_eos,*radiation,envelope_heat,collisions);
+      finger=std::make_unique<BrownFingeringTransport>(table_eos,*radiation,envelope_heat,collisions,oscillatory);
       later.microscopic=finger.get();
     }
     EvolutionOptions options;options.relaxation.zone_threads=static_cast<std::size_t>(threads);options.abundance_tolerance=abundance_tolerance;
+    if(inner_residual>0)options.relaxation.residual_tolerance=inner_residual;
+    if(inner_correction>0)options.relaxation.correction_tolerance=inner_correction;
     options.linearized_burning=linearized_burning==1;
     options.max_abundance_change=abundance_cap;
     options.abundance_cap_after_mixing=cap_after_mixing==1;

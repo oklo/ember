@@ -1,5 +1,6 @@
 #pragma once
 #include "ember/metal_microscopic_transport.hpp"
+#include "ember/fingering.hpp"
 #include "ember/opacity.hpp"
 
 namespace ember {
@@ -11,7 +12,8 @@ namespace ember {
 class BrownFingeringTransport final:public MetalMicroscopicTransport {
  public:
   BrownFingeringTransport(const VariableMetalHelmholtzEos&,const Opacity& radiation,
-      const MetalMicroscopicTransport& base,const ScreenedCollisionTransport&);
+      const MetalMicroscopicTransport& base,const ScreenedCollisionTransport&,
+      OscillatoryMixing oscillatory=OscillatoryMixing::reject);
   struct Face {
     double heat_luminosity{},mass_conductance{},diffusivity{};
     MetalSpeciesMatrix mixing_conductance{};
@@ -40,5 +42,6 @@ class BrownFingeringTransport final:public MetalMicroscopicTransport {
   const Opacity& radiation_;
   const MetalMicroscopicTransport& base_;
   const ScreenedCollisionTransport& collisions_;
+  OscillatoryMixing oscillatory_;
 };
 } // namespace ember
