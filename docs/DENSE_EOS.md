@@ -209,6 +209,33 @@ responses, derivatives, join continuity and unchanged warm states. A replay from
 same age, interpolation of the comparison history gives a luminosity difference
 of 0.1799%; this is an initial cooling comparison, not a final cooling-age test.
 
+## Dense hydrogen–helium transition
+
+`eos_dense_hhe_transition "liquid"` extends the same dense-material potential
+to the metal-depleted H/He transition. It requires `eos_cold_helium` and leaves
+that helium-core potential unchanged. The temperature overlap is 200–300 kK
+and the density overlap is 300–600 g/cm³. Both weights and their derivatives
+act on the free energy, including its composition derivatives. The two warm
+source potentials supply the alignment described above; source values remain
+required wherever their weight is nonzero.
+
+The assessed range requires T ≥ 120 kK, density ≤ 4000 g/cm³, Z ≤ 1e-8 and
+Tp,H/T ≤ 2.5, along with the existing degeneracy and helium-ion limits.
+Direct source checks keep H and He fully ionized. Quantum prescriptions differ
+by at most 2.772% of classical ion Cv over the admitted comparison points;
+this is model sensitivity, not an error bound.
+
+At the 790.3 K stellar model, pressure changes by less than 0.1%, local Cv
+by up to 6.269%, and the adiabatic gradient by up to 10.92%. The different
+Coulomb prescriptions and the potential overlap contribute to these changes.
+A tabulated Cv anomaly at a colder projected state is checked against direct
+FreeEOS values rather than treated as a physical reference. All 536 current
+states and three cooler projections through 88% of their temperature pass
+EOS and pressure-inversion checks; colder states retain the physical limits.
+A matched 50 Myr comparison changes luminosity by 0.02604%, with conservation
+checks passing. This is not a complete cooling-age test.
+[Source, derivative and stellar comparisons](results/dense_hhe_transition_oct1_v1.json).
+
 ## Independent source derivative checks
 
 `build_eip_probe.py --phase-probe` evaluates the pinned

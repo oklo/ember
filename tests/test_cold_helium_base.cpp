@@ -118,6 +118,71 @@ int main(){
      const auto pot=joined.composition_potential(3.5e5,2e4,core);const auto heat=joined.composition_heat(3.5e5,2e4,core);
      check(std::isfinite(pot.gradient[0]+pot.hessian[0][0]+heat.exchange_enthalpy[0]+heat.enthalpy_partials[2][4]),
          "joined forces and heat finite",0);}
+    // The transition extends the same EOS. Its derivatives, forces, heat and pressure inversion
+    // must agree with the joined potential, including both density and temperature overlaps.
+    {ColdHeliumOptions options;options.mixture_phase=true;options.liquid_continuation_gamma=200;
+     VariableMetalHelmholtzEos core(path,HelmholtzTableEos::Mixture::allow_documented_proxy,
+        VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,options);
+     options.dense_transition=true;
+     VariableMetalHelmholtzEos joined(path,HelmholtzTableEos::Mixture::allow_documented_proxy,
+        VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,options);
+     const auto helium=comp(1e-8,1e-10,.13);
+     check(joined.material_jets(1.85e5,5e4,helium,10)==core.material_jets(1.85e5,5e4,helium,10),
+         "dense H/He extension preserves the selected helium core",0);
+     const auto hydrogen=comp(.9855,.005,5e-9);
+     double derivative=0,inversion=0;
+     for(double T:{1.5e5,2.4e5,3.1e5})for(double r:{350.,450.,550.,800.}) {
+       const auto a=joined.material_jets(T,r,hydrogen,10);const double h=2e-5;
+       for(unsigned coordinate=0;coordinate<2;++coordinate) {
+         const double tp=coordinate==0?T*std::exp(h):T,tm=coordinate==0?T*std::exp(-h):T;
+         const double rp=coordinate==1?r*std::exp(h):r,rm=coordinate==1?r*std::exp(-h):r;
+         const auto plus=joined.material_jets(tp,rp,hydrogen,10),minus=joined.material_jets(tm,rm,hydrogen,10);
+         for(unsigned k=0;k<10;++k)for(unsigned i=0;i<3;++i)for(unsigned j=0;i+j+(k==0?0:k<4?1:2)<=2;++j) {
+           const double v=a[k][i+(coordinate==0)][j+(coordinate==1)];
+           derivative=std::max(derivative,std::abs((plus[k][i][j]-minus[k][i][j])/(2*h)-v)
+               /(1e-2*std::abs(a[0][1][0])+std::abs(v)));
+         }
+       }
+       for(unsigned coordinate=0;coordinate<3;++coordinate) {
+         const double step=coordinate==2?2e-9:1e-5;
+         auto x=std::array{hydrogen.X[0],hydrogen.X[1],hydrogen.Z()},y=x;
+         x[coordinate]+=step;y[coordinate]-=step;
+         const auto plus=joined.material_jets(T,r,comp(x[0],x[1],x[2]),10);
+         const auto minus=joined.material_jets(T,r,comp(y[0],y[1],y[2]),10);
+         constexpr unsigned second[3][3]={{4,5,6},{5,7,8},{6,8,9}};
+         for(unsigned k=0;k<4;++k)for(unsigned i=0;i<2;++i)for(unsigned j=0;i+j<=1;++j) {
+           // Resolve mixed metal derivatives by varying H/He instead: a 2e-9
+           // metal perturbation loses precision in differences of large gradients.
+           // The metal-metal Hessian is covered by the component EOS tests.
+           if(coordinate==2&&k>0)continue;
+           const double v=a[k==0?1+coordinate:second[k-1][coordinate]][i][j];
+           const double error=std::abs((plus[k][i][j]-minus[k][i][j])/(2*step)-v)
+               /(1e-2*std::abs(a[0][1][0])+std::abs(v));
+           derivative=std::max(derivative,error);
+         }
+       }
+       const auto s=joined.eval(T,r,hydrogen);joined.validate_composition_domain(T,r,hydrogen);
+       inversion=std::max(inversion,std::abs(joined.rho_from_PT(T,s.P,hydrogen,r*1.001)/r-1));
+       const auto heat=joined.composition_heat(T,r,hydrogen);
+       const auto force=joined.composition_potential(T,r,hydrogen);
+       check(std::isfinite(heat.exchange_enthalpy[0]+force.gradient[0]),"dense transition forces and heat",0);
+     }
+     check(derivative<1e-4,"dense transition thermal and mixed derivatives",derivative);
+     check(inversion<1e-10,"dense transition pressure inversions",inversion);
+     std::cout<<"dense transition derivative error "<<derivative<<", inversion error "<<inversion<<'\n';
+     for(double r:{299.9,300.1,599.9,600.1}) {
+       const auto s=joined.eval(1.5e5,r,hydrogen);
+       const double rr=joined.rho_from_PT(1.5e5,s.P,hydrogen,r<600?600.2:599.8);
+       check(std::abs(rr/r-1)<1e-10,"inversion across density overlap",rr/r-1);
+     }
+     for(auto [T,r]:{std::pair{3.1e5,800.},std::pair{1.5e5,200.}})
+       check(joined.material_jets(T,r,hydrogen,10)==core.material_jets(T,r,hydrogen,10),
+           "dense transition preserves zero-weight source states",0);
+     for(auto [T,r,z]:{std::tuple{1.19e5,800.,1e-10},std::tuple{1.5e5,4100.,1e-10},std::tuple{1.5e5,800.,2e-8}}) {
+       bool refused=false;try{joined.eval(T,r,comp(.99,.005,z));}catch(const std::domain_error&){refused=true;}
+       check(refused,"dense transition physical domain refusal",T);
+     }
+    }
   } else std::cout<<"join checks skipped (EMBER_COLD_HELIUM_FAMILY not set)\n";
   // Dilute hydrogen in the metal-rich core may reach T_p,H/T <= 8; other hydrogen keeps the limit 4.
   {auto rejected=[](double T,double rho,const Composition& c){try{cold_helium_validate(T,rho,c);return false;}catch(const std::domain_error&){return true;}};

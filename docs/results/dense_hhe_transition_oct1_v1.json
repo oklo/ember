@@ -1,0 +1,148 @@
+{
+  "UTC": "2026-10-01T02:20:49.717093+00:00",
+  "option": "eos_dense_hhe_transition liquid",
+  "passed": true,
+  "physical_scope": "Metal-depleted fully ionized H/He; same existing dense electron/ion free energy. Same-composition helium-core phase treatment remains unchanged. No phase separation or new element velocities.",
+  "join": {
+    "temperature_K": [
+      200000,
+      300000
+    ],
+    "density_g_cm3": [
+      300,
+      600
+    ],
+    "minimum_temperature_K": 120000,
+    "maximum_density_g_cm3": 4000,
+    "maximum_Z": 1e-08,
+    "maximum_hydrogen_plasma_temperature_ratio": 2.5,
+    "alignment": "a(rho,composition)+b(rho,composition)/T from both warm source potentials; complete derivatives; not only an energy-zero shift"
+  },
+  "native": [
+    {
+      "scale": 1.0,
+      "count": 536,
+      "errors": {},
+      "inversion_max": 9.769962616701378e-15,
+      "new_only": 0
+    },
+    {
+      "scale": 0.96,
+      "count": 536,
+      "errors": {},
+      "inversion_max": 5.440092820663267e-15,
+      "new_only": 15
+    },
+    {
+      "scale": 0.92,
+      "count": 536,
+      "errors": {},
+      "inversion_max": 8.992806499463768e-15,
+      "new_only": 18
+    },
+    {
+      "scale": 0.88,
+      "count": 536,
+      "errors": {},
+      "inversion_max": 1.1546319456101628e-14,
+      "new_only": 21
+    },
+    {
+      "scale": 0.8,
+      "count": 536,
+      "errors": {
+        "cold He base: hydrogen quantum parameter beyond the production limit": 151,
+        "cold He base: outside assessed dense H/He transition range": 14
+      },
+      "inversion_max": 8.881784197001252e-15,
+      "new_only": 17
+    }
+  ],
+  "profile_at_790K": {
+    "maximum_relative_change": {
+      "P": 0.0009848105133699603,
+      "E": 0.0010438307642604006,
+      "cv": 0.0626907214701653,
+      "chiRho": 0.0030581102875496535,
+      "grad_ad": 0.10915074124560964
+    },
+    "trapezoid_integrated_Cv_relative_change": 0.004523451297942849
+  },
+  "ionization": {
+    "queries": 27,
+    "admitted_quantum_ratio_queries": 25,
+    "all_source_flags_zero": true,
+    "minimum_Hplus": 0.9999999999999974,
+    "minimum_He2": 0.9999999999738176,
+    "maximum_quantum_Cv_ionization_change_over_classical_ion_Cv": 1.9066355214160073e-09,
+    "maximum_quantum_model_spread_over_classical_ion_Cv": 0.027718665652608127,
+    "interpretation": "Model comparison, not an error bound. Two of the source-check corners exceed the selected hydrogen quantum limit and are excluded from its model-spread summary."
+  },
+  "derivative_checks": {
+    "maximum_scaled_difference": 1.05733e-05,
+    "maximum_pressure_inversion_relative_error": 2.55351e-15,
+    "scope": "Thermal derivatives through third order; H/He composition derivatives and metal gradient. Mixed metal derivatives checked by changing H/He, avoiding cancellation from trace-Z perturbations. Metal-metal Hessian inherits component tests. Density-overlap inversions, zero-weight equality, unchanged core and physical refusals pass."
+  },
+  "stellar_50Myr": {
+    "runs": {
+      "control": {
+        "status": 0,
+        "CPU_seconds": 275.322907,
+        "observed_wall_seconds": 148.42956070881337,
+        "report": {
+          "requested_age_reached": 1,
+          "age_years": 3905282085979.962,
+          "accepted_this_invocation": 4,
+          "accepted_total": 3776,
+          "rejected_total": 1663,
+          "stop_reason": "requested age",
+          "cpu_seconds": 275.277458,
+          "wall_seconds": 148.148847625,
+          "full_production_track_validated": false,
+          "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+        },
+        "max_first_law": 1.89666454764037e-08,
+        "all_audits_pass": true,
+        "accepted_intervals": 4
+      },
+      "transition": {
+        "status": 0,
+        "CPU_seconds": 567.916974,
+        "observed_wall_seconds": 306.95428050030023,
+        "report": {
+          "requested_age_reached": 1,
+          "age_years": 3905282085979.962,
+          "accepted_this_invocation": 4,
+          "accepted_total": 3776,
+          "rejected_total": 1663,
+          "stop_reason": "requested age",
+          "cpu_seconds": 567.797477,
+          "wall_seconds": 306.606698875,
+          "full_production_track_validated": false,
+          "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+        },
+        "max_first_law": 3.9361891523981285e-09,
+        "all_audits_pass": true,
+        "accepted_intervals": 4
+      }
+    },
+    "endpoint_relative_changes": {
+      "Teff_K": 7.76601717966674e-05,
+      "radius_Rsun": -2.5123596812393068e-05,
+      "luminosity_Lsun": 0.0002604147027991388,
+      "central_T_K": 7.602155860375603e-07,
+      "central_density_g_cm3": 1.749941928030907e-06,
+      "H_mass_g": -4.440892098500626e-16,
+      "He3_mass_g": -4.440892098500626e-16
+    },
+    "interpretation": "Short comparison from the same saved state; not a full cooling-age or warm-join replay."
+  },
+  "evidence_sha256": {
+    "out/cold-transition-join-oct1-v1/native.jsonl": "90267cf2a5e83057fff16683777779bd7eecbadabfdf111ae439dd108ae5f7c7",
+    "out/cold-transition-join-oct1-v1/ionization_corners.json": "c5a5a4fb1c012af389cb3dfbbad4b259d92e93e76b4419c9137cb12db0dca08b",
+    "out/cold-transition-join-oct1-v1/unit.log": "f34f6da7671540c08ec3ca5de386c9747ddfb18e07343e380da725ef1b80cc69",
+    "out/cold-transition-assessment-oct1-v1/heat_capacity_outlier.json": "4b3a8d25eaa186a5d18d8ba77a0a6a41575f400edd6292feb32e273c3118eeb0",
+    "out/dense-transition-stellar-oct1-v1/control/evolution/attempts.jsonl": "58257394627058f835af2a31ea081ae8beb3c12ef53910a311034145efc0fad8",
+    "out/dense-transition-stellar-oct1-v1/transition/evolution/attempts.jsonl": "ba5b10e7117adfe0aacf6f7150d7940ec9dca0580705ca3d0be4292041465868"
+  }
+}

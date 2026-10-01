@@ -9,6 +9,9 @@ namespace ember {
 // Crystallization is optional and assumes no element fractionation.
 // See docs/DENSE_EOS.md for domains and approximations.
 struct ColdHeliumOptions {
+  // Optional metal-depleted, fully ionized H/He transition below 300 kK.
+  // The existing helium-core join and phase response are unchanged.
+  bool dense_transition=false;
   // Default liquid-only host limit. Metals can move a mixture phase boundary
   // above the pure-helium melting temperature; this is not a phase criterion.
   double max_mixture_hydrogen=.05,max_mixture_metals=.16,max_helium_gamma=130;
@@ -46,6 +49,13 @@ std::array<HelmholtzJet,10> cold_helium_joined_jets(const ColdHeliumTable&,doubl
 void cold_helium_validate(double T,double rho,const Composition&,const ColdHeliumOptions& = {});
 // Product of C2 temperature and hydrogen weights; zero returns the original EOS.
 double cold_helium_join_weight(double T,const Composition&,const ColdHeliumOptions& = {});
+// H/He transition: temperature weight 200--300 kK, density weight 300--600 g/cm3.
+// Valid at 120 kK or warmer, rho <= 4000, Z <= 1e-8, and T_p,H/T <= 2.5.
+// Both source anchors and any fractionally weighted source must remain supported.
+double dense_hhe_transition_weight(double T,double rho);
+void dense_hhe_transition_validate(double T,double rho,const Composition&,const ColdHeliumOptions&);
+std::array<HelmholtzJet,10> dense_hhe_transition_jets(const ColdHeliumTable&,double T,double rho,
+    const Composition&,std::size_t channels,const ColdHeliumOptions&);
 // Solid weight including the existing temperature/composition joins, followed
 // by derivatives in ln T, ln rho, XH, X3 and Z. Zero when the phase is off.
 std::array<double,6> cold_helium_solid_response(double T,double rho,const Composition&,

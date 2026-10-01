@@ -76,7 +76,52 @@ std::array<double,4> falling(double x,double lo,double hi) {
   const double h=hi-lo,u=(x-lo)/h;
   return {1-u*u*u*(10+u*(-15+6*u)),-30*u*u*(1-u)*(1-u)/h,-60*u*(1-u)*(1-2*u)/(h*h),-60*(1-6*u+6*u*u)/(h*h*h)};
 }
+ColdHeliumOptions transition_options(const ColdHeliumOptions& source) {
+  auto o=source;
+  o.dense_transition=false;o.mixture_phase=false;
+  o.max_mixture_hydrogen=1.;o.hydrogen_join_full=.99;o.hydrogen_join_zero=1.;
+  o.minimum_density=300.;o.join_cold=2e5;o.join_hot=3e5;
+  o.maximum_hydrogen_quantum=2.5;o.maximum_trace_hydrogen_quantum=2.5;
+  return o;
+}
 } // namespace
+
+double dense_hhe_transition_weight(double T,double rho) {
+  if(!(T>0&&rho>0&&std::isfinite(T)&&std::isfinite(rho)))fail("invalid H/He transition state");
+  return falling(std::log(T),std::log(2e5),std::log(3e5))[0]
+      *(1-falling(std::log(rho),std::log(300.),std::log(600.))[0]);
+}
+void dense_hhe_transition_validate(double T,double rho,const Composition& c,const ColdHeliumOptions& source) {
+  if(!(T>=1.2e5&&rho<=4e3&&c.Z()<=1e-8))fail("outside assessed dense H/He transition range");
+  const auto o=transition_options(source);
+  for(double t:{T,o.join_cold,o.join_hot})cold_helium_validate(t,rho,c,o);
+}
+std::array<HelmholtzJet,10> dense_hhe_transition_jets(const ColdHeliumTable& table,double T,double rho,
+    const Composition& c,std::size_t channels,const ColdHeliumOptions& source) {
+  const double w=dense_hhe_transition_weight(T,rho);
+  if(w==0)return table(T,rho,c,channels);
+  dense_hhe_transition_validate(T,rho,c,source);
+  const auto o=transition_options(source);
+  auto base=cold_helium_material_jets(T,rho,c,channels,o);
+  const auto alignment=cold_helium_alignment_jets(table,T,rho,c,channels,o);
+  for(std::size_t k=0;k<channels;++k)for(unsigned i=0;i<4;++i)for(unsigned j=0;i+j<=3;++j)
+    base[k][i][j]+=alignment[k][i][j];
+  if(w==1)return base;
+  const auto old=table(T,rho,c,channels);
+  const auto wt=falling(std::log(T),std::log(o.join_cold),std::log(o.join_hot));
+  auto wr=falling(std::log(rho),std::log(300.),std::log(600.));
+  wr[0]=1-wr[0];for(unsigned k=1;k<4;++k)wr[k]=-wr[k];
+  constexpr unsigned binomial[4][4]={{1,0,0,0},{1,1,0,0},{1,2,1,0},{1,3,3,1}};
+  auto result=old;
+  for(std::size_t k=0;k<channels;++k) {
+    const unsigned order=k==0?0:(k<4?1:2);
+    for(unsigned i=0;i<4;++i)for(unsigned j=0;i+j+order<=3;++j)
+      for(unsigned a=0;a<=i;++a)for(unsigned b=0;b<=j;++b)
+        result[k][i][j]+=binomial[i][a]*binomial[j][b]*wt[a]*wr[b]
+            *(base[k][i-a][j-b]-old[k][i-a][j-b]);
+  }
+  return result;
+}
 
 std::array<HelmholtzJet,10> cold_helium_material_jets(double T,double rho,const Composition& c,std::size_t channels,
     const ColdHeliumOptions& o) {

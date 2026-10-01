@@ -51,6 +51,8 @@ class VariableMetalHelmholtzEos final : public Eos {
   // Opt-in same-composition phase variant (ColdHeliumOptions::mixture_phase).
   static constexpr const char* cold_helium_phase_identifier=
       "cold_helium.mixture_softmin.same_composition.common_liquid.width0.005.full_anchor.bc22_linear.X_join.v2";
+  static constexpr const char* dense_transition_identifier=
+      "dense_hhe.liquid.bc22.T200_300.rho300_600.full_anchor.v1";
   // Convert a text family and its planes to one relocatable binary input.
   // Stored doubles, masks and logarithmic coordinates remain bit-identical.
   static void pack_binary(const std::filesystem::path& source,const std::filesystem::path& destination);
@@ -88,7 +90,9 @@ class VariableMetalHelmholtzEos final : public Eos {
   std::optional<DensityRange> density_range_impl(double,const Composition&,std::optional<double>) const;
   std::array<HelmholtzJet,10> jets(double,double,const Composition&,std::size_t) const;
   std::array<HelmholtzJet,10> source_jets(double,double,const Composition&,std::size_t) const;
+  std::array<HelmholtzJet,10> raw_source_jets(double,double,const Composition&,std::size_t) const;
   void validate_source_domain(double,double,const Composition&) const;
+  void validate_raw_source_domain(double,double,const Composition&) const;
   std::size_t index(std::size_t z,std::size_t u,std::size_t v) const {
     return (z*u_.size()+u)*v_.size()+v;
   }

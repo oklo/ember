@@ -330,6 +330,13 @@ std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::jets(double T,double rho,
   return result;
 }
 std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::source_jets(double T,double rho,const Composition& c,std::size_t channels) const {
+  if(cold_helium_ && cold_helium_->dense_transition)
+    return dense_hhe_transition_jets(
+        [this](double t,double r,const Composition& x,std::size_t n){return raw_source_jets(t,r,x,n);},
+        T,rho,c,channels,*cold_helium_);
+  return raw_source_jets(T,rho,c,channels);
+}
+std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::raw_source_jets(double T,double rho,const Composition& c,std::size_t channels) const {
   const double cold_fraction=cold_?cold_weight(T,rho):0;
   // Validate the original composition contract even where the original
   // thermal source is not evaluated.
@@ -365,6 +372,18 @@ void VariableMetalHelmholtzEos::validate_composition_domain(double T,double rho,
   validate_source_domain(T,rho,c);
 }
 void VariableMetalHelmholtzEos::validate_source_domain(double T,double rho,const Composition& c) const {
+  if(cold_helium_ && cold_helium_->dense_transition) {
+    const double w=dense_hhe_transition_weight(T,rho);
+    if(w>0) {
+      dense_hhe_transition_validate(T,rho,c,*cold_helium_);
+      validate_raw_source_domain(2e5,rho,c);validate_raw_source_domain(3e5,rho,c);
+      if(w<1)validate_raw_source_domain(T,rho,c);
+      return;
+    }
+  }
+  validate_raw_source_domain(T,rho,c);
+}
+void VariableMetalHelmholtzEos::validate_raw_source_domain(double T,double rho,const Composition& c) const {
   if(quantum_ions_)(void)ion_quantum_liquid_jets(T,rho,c,1);
   const auto w=weights(c,10);
   const double t=std::log(T),q=std::log(rho)-1.5*(t-6*std::log(10.));
@@ -389,18 +408,46 @@ std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_near(d
 }
 std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_impl(double T,const Composition& c,std::optional<double> rho) const {
   const auto w=weights(c,1);DensityRange result{0,std::numeric_limits<double>::infinity()};
+  const auto raw_range=[&](double t,std::optional<double> guess) {
+    DensityRange d{0,std::numeric_limits<double>::infinity()};
+    for(std::size_t i=0;i<w.count;++i) {
+      const auto r=guess?w.tables[i].table->material_density_range_near(t,*guess):w.tables[i].table->material_density_range(t);
+      d.min=std::max(d.min,r.min);d.max=std::min(d.max,r.max);
+    }
+    return d;
+  };
+  const auto source_range=[&](double t) {
+    if(!cold_helium_ || !cold_helium_->dense_transition || t>=3e5 || !rho || *rho<=300.)
+      return raw_range(t,rho);
+    dense_hhe_transition_validate(t,*rho,c,*cold_helium_);
+    const auto a=raw_range(2e5,rho),b=raw_range(3e5,rho);
+    DensityRange d{std::max({300.,a.min,b.min}),std::min({4e3,a.max,b.max})};
+    if(t<=2e5 && *rho>=600.) {
+      d.min=std::max(d.min,600.);
+      // Join the cold component only to the connected supported table interval below it.
+      // A masked interval below 600 remains a boundary; it is never crossed by an inversion.
+      try {
+        const auto r=raw_range(t,600.);
+        if(r.max>=600.)d.min=std::max(a.min,b.min)<=300.?r.min:std::max({a.min,b.min,r.min});
+      } catch(const std::domain_error&) { }
+    } else {
+      const auto r=raw_range(t,rho);d.min=std::max(d.min,r.min);d.max=std::min(d.max,r.max);
+      if(std::max(a.min,b.min)<=300.)d.min=r.min;
+      if(t<=2e5 && r.max>=600.)d.max=std::min({4e3,a.max,b.max});
+    }
+    return d;
+  };
   // In the cold He join the table is needed at both anchors, and at T only where the join weight is fractional.
   if(cold_helium_ && cold_helium_join_weight(T,c,*cold_helium_)>0) {
     std::vector<double> temperatures{cold_helium_->join_cold,cold_helium_->join_hot};
     if(cold_helium_join_weight(T,c,*cold_helium_)<1)temperatures.push_back(T);
     result.min=cold_helium_->minimum_density;
-    for(const double t:temperatures)for(std::size_t i=0;i<w.count;++i){
-      const auto r=rho?w.tables[i].table->material_density_range_near(t,*rho):w.tables[i].table->material_density_range(t);
+    for(const double t:temperatures){const auto r=source_range(t);
       result.min=std::max(result.min,r.min);result.max=std::min(result.max,r.max);}
     if(result.min>=result.max)throw std::domain_error("variable EOS: empty cold He join density overlap");
     return result;
   }
-  for(std::size_t i=0;i<w.count;++i){const auto r=rho?w.tables[i].table->material_density_range_near(T,*rho):w.tables[i].table->material_density_range(T);result.min=std::max(result.min,r.min);result.max=std::min(result.max,r.max);}
+  result=source_range(T);
   if(cold_ && T<cold_zero_temperature && result.max>cold_density_start){
     if(T<cold_->minimum_temperature()||c.Z()>.04)result.max=cold_density_start;
     else {

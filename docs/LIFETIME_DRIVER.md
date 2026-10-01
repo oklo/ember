@@ -714,6 +714,12 @@ on the opacity approximation, not a calibration of the conductivity itself.
 [Cold-envelope checks](results/cold_opacity_floor_sept30_v1.json).
 
 
+`eos_dense_hhe_transition "liquid"` optionally extends the cold H/He EOS through
+the metal-depleted transition below 300 kK. It requires `eos_cold_helium` and is
+recorded in restart identity. Its temperature, density, ionization and quantum
+limits are described in [Dense EOS](DENSE_EOS.md#dense-hydrogenhelium-transition).
+The default is `none`.
+
 The optional cold-core phase calculation uses `eos_cold_helium "mixture_softmin"`
 and, for the declared liquid-fit continuation, for example
 `eos_metal_liquid_continuation_gamma "200"`. The latter also works with
