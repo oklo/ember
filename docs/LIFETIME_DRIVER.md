@@ -738,30 +738,20 @@ The corrected density blend changes luminosity by 0.005844% in its separate
 1 Gyr comparison. All energy and time-step checks are unchanged.
 [Numerical checks](results/conductive_envelope_opacity_sept30_v1.json).
 
-In the assessed H-rich cooling envelope, `screened_minimum_T_K "70000"`
-retains fully stripped transport as a trace-helium approximation. Hydrogen
-remains ionized. Helium is 4–9 parts per million in the sampled outer layer;
-its charge uncertainty contributes about 1e-5 of the ion-scattering weight,
-but may change helium-3 drift by a factor of 8–11, with further uncertainty
-from ion correlations. The present affected helium inventory's gravitational
-energy to the centre is 0.04386% of the current luminosity integrated over
-1 Gyr. This is an energy scale, not a bound on future inflow or cooling-age
-error. A checked 1 Gyr continuation reaches 846.5 K. Accurate trace-helium
-clearing times remain unestablished. The parameter only limits evaluation;
-ionization and coupling must be assessed separately.
-[Assessment](results/transport_floor70_sept30_v1.json).
+For the assessed nearly pure-H cooling envelope, `screened_minimum_T_K "50000"`
+permits microscopic transport while retaining the configured 2–3 MK heat
+transition. The temperature limit restricts evaluation; it does not establish
+ionization or collision-model accuracy. Hydrogen remains ionized in the sampled
+50–90 kK layer. Helium is partly neutral, so its fully stripped drift rate is
+an explicit trace-species approximation. At 702 K the affected layer contains
+only 3.457e-12–1.503e-11 helium by mass. Accurate helium clearing rates and
+future helium inflow remain separate questions.
 
-At 702 K, `screened_minimum_T_K "50000"` extends this trace-helium
-approximation while retaining the existing 2–3 MK heat transition. Direct
-source checks keep hydrogen ionized in the sampled 50–90 kK layer. Helium
-is partly neutral, but its mass fraction is only 3.457e-12–1.503e-11 there;
-accurate helium drift still requires charge-dependent transport. All 232
-native face queries pass, including 69 newly admitted queries; previously
-supported values are unchanged. A 6 Myr step passes the original energy and
-species audits where the 70 kK configuration rejects at its domain limit.
-This is a conditional cooling continuation, not a calibration of strongly
-coupled or quantum diffusion or a bound on future helium inflow.
-[Checks](results/transport_floor50_oct1_v1.json).
+All 232 native face queries pass, including 69 newly admitted queries; supported
+values are unchanged. A 6 Myr interval passes the energy and species audits.
+These checks support this conditional continuation, without calibrating strongly
+coupled or quantum diffusion. [Checks](results/transport_floor50_oct1_v1.json),
+[higher-temperature assessment](results/transport_floor70_sept30_v1.json).
 
 At 130–200 kK, the H-rich layer remains ionized in the source EOS. Uncertain
 trace-helium charge contributes less than 0.4% of the electron-scattering

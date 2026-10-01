@@ -1,5 +1,5 @@
 {
-  "scope": "Conditional trace-helium transport extension on the702Kcooling replay; not a partially ionized diffusion calibration or a final-physics Hayashi validation.",
+  "scope": "Conditional trace-helium transport extension on the 702 K cooling replay; not a partially ionized diffusion calibration or a full validation from Hayashi contraction.",
   "snapshot_sha256": "3bd6b629632e02f8d0e16f461250b7d0f64890d0ea351f95d5e7b098a5c4538e",
   "source_probe_sha256": "1bfcfc7226449987de1609afb8bb9b7625588457d394fc0038b4baa56ac76c9f",
   "minimum_temperature_K": 50000,
@@ -66,7 +66,7 @@
   "candidate_Teff_K": 702.1958680494546,
   "candidate_CPU_seconds": 158.695415,
   "candidate_wall_seconds": 60.71954150032252,
-  "reference_result": "70kKcontrol rejected6,3and1.5Myrtrials at its declared temperature limit; stopped after that diagnosis. No matched successful70kKendpoint exists.",
+  "reference_result": "The 70 kK control rejected 6, 3 and 1.5 Myr trials at its declared temperature limit and was stopped after that diagnosis. No matched successful 70 kK endpoint exists.",
   "reference_CPU_seconds": 542.361449,
   "limitations": "Fixed-density profiles forecast coverage, not evolution. Present helium energy is not a bound on future inflow. Source equilibrium charge states do not calibrate strongly coupled or quantum diffusion; the fully stripped helium rate remains an explicit trace-ion approximation. No atmosphere or heat-transition change."
 }
