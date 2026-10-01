@@ -64,6 +64,42 @@ has not yet been quantified for Ember. Black-dwarf supernova calculations
 concern much more massive remnants and do not establish an endpoint for this
 helium star. [Caplan (2020)](https://arxiv.org/abs/2008.02296).
 
+## Radioactive heating and cold surfaces
+
+Add a trace-isotope decay inventory before interpreting kelvin-scale cooling.
+Evolve parent and daughter populations analytically where rates are constant;
+count deposited particles and photons, excluding escaping neutrinos. Tie the
+initial inventory to the starting elemental composition, so CN processing and
+settling cannot create radioactive fuel. Assess ionization, electron capture
+and electron blocking before using laboratory weak-decay rates in dense matter.
+
+Include measured two-neutrino double-beta decays as well as long-lived alpha
+and beta emitters. Calcium-48, for example, has a measured half-life of
+6.4e19 yr and can outlast several commonly considered radioactive sources.
+Its energy deposition still requires a spectrum and plasma assessment.
+[NEMO-3 (2016)](https://arxiv.org/abs/1604.01710).
+
+At lower temperatures, calculate whether the actual pressure-temperature
+profile permits gas, liquid or solid hydrogen and helium. Include latent heat,
+available material, vapor opacity and conduction through any solid cover.
+Laboratory hydrogen thermodynamics provide a starting point within their
+stated pressure and temperature range, not a complete remnant envelope.
+[Leachman et al. (2009)](https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=832374).
+
+Test hydrogen oceans, exposed helium liquid and liquid beneath a floating
+solid cover as distinct possibilities. A proposed helium layer above hydrogen
+ice needs a buoyancy and deformation assessment. Also evaluate isotope
+partition, helium superfluidity and hydrogen ortho/para conversion where they
+change the heat capacity, transport or finite energy inventory.
+
+Use physical surface temperature to determine phases. Converting luminosity
+to that temperature requires the emissivity of the layered surface and its
+atmosphere; a bare conducting surface is a separate limiting case. Assess
+whether accreted dust remains exposed or is buried. A relation between core
+temperature and luminosity fitted to the present warm remnant does not
+establish the duration of a cryogenic ocean. These surface states remain
+research questions, not stages already demonstrated by the evolution code.
+
 ## Accretion and encounters
 
 Follow gas and solid interstellar objects separately, with evolving abundance,

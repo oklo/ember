@@ -32,10 +32,13 @@ independent element velocities. The nuclear network is not full CNO.
    quantum mixtures. The current phase option keeps both phases at the same composition.
    Resolve individual metal settling and precipitation, including the possible
    concentration of trace heavy elements in the center.
-4. At sufficiently low luminosity, compare isolation with accretion, tidal encounters
+4. Add trace-isotope radioactive heating with daughter and neutrino accounting;
+   assess condensed hydrogen/helium surfaces, possible liquid layers and their
+   thermal boundary conditions before interpreting kelvin-scale cooling.
+5. At sufficiently low luminosity, compare isolation with accretion, tidal encounters
    and conditional dark-matter heating. Treat nucleon decay with an explicit assumed
    lifetime and retain stable baryons as an alternative.
-5. Extend the mass/composition survey across the stellar–brown-dwarf boundary.
+6. Extend the mass/composition survey across the stellar–brown-dwarf boundary.
 
 Some source tables remain local research inputs. The final physics has not yet
 been validated in one uninterrupted calculation. No extreme-cold cooling age
