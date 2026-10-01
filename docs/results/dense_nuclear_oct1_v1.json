@@ -1,0 +1,258 @@
+{
+  "scope": "Optional Y06 uniform-mixture quantum nuclear rate; implemented and short-interval checked, not calibrated for trace H in a He crystal.",
+  "source": "https://arxiv.org/html/astro-ph/0608488",
+  "references": {
+    "coefficient_comparisons": 37520,
+    "worst_relative_error": 2.994271497414047e-13,
+    "adjustments": [
+      "Identical e and hbar constants",
+      "Analytic lambda from Eq.12 instead of rounded numerical coefficient",
+      "Kinematic nuclear masses in both calculations"
+    ]
+  },
+  "frozen_profiles": [
+    {
+      "T_factor": 1.0,
+      "model": "optimal",
+      "cells": 536,
+      "old_refused": 0,
+      "total_nuclear_erg_s": 4.317339006968246e+18,
+      "fraction_present_L": 3.86054400529059e-09,
+      "old_supported_nuclear_erg_s": 3.9829027779370875e+18,
+      "difference_from_old_supported_erg_s": 3.344362290311583e+17,
+      "sub100kK_erg_s": 9661825045.779663,
+      "sub100kK_fraction_L": 8.639558000992879e-18
+    },
+    {
+      "T_factor": 1.0,
+      "model": "high",
+      "cells": 536,
+      "old_refused": 0,
+      "total_nuclear_erg_s": 2.2895862994156244e+20,
+      "fraction_present_L": 2.0473371788822018e-07,
+      "old_supported_nuclear_erg_s": 3.9829027779370875e+18,
+      "difference_from_old_supported_erg_s": 2.2497572716362534e+20,
+      "sub100kK_erg_s": 9661825045.779663,
+      "sub100kK_fraction_L": 8.639558000992879e-18
+    },
+    {
+      "T_factor": 0.9,
+      "model": "optimal",
+      "cells": 536,
+      "old_refused": 13,
+      "total_nuclear_erg_s": 2.2726061848470502e+18,
+      "fraction_present_L": 2.0321536411982132e-09,
+      "old_supported_nuclear_erg_s": 1.7878806783920916e+18,
+      "difference_from_old_supported_erg_s": 4.847255064549586e+17,
+      "sub100kK_erg_s": 67761807818.04016,
+      "sub100kK_fraction_L": 6.059228625256577e-17
+    },
+    {
+      "T_factor": 0.9,
+      "model": "high",
+      "cells": 536,
+      "old_refused": 13,
+      "total_nuclear_erg_s": 3.5235586476296805e+20,
+      "fraction_present_L": 3.1507493834608273e-07,
+      "old_supported_nuclear_erg_s": 1.7878806783920916e+18,
+      "difference_from_old_supported_erg_s": 3.50567984084576e+20,
+      "sub100kK_erg_s": 67761807818.04016,
+      "sub100kK_fraction_L": 6.059228625256577e-17
+    },
+    {
+      "T_factor": 0.8,
+      "model": "optimal",
+      "cells": 536,
+      "old_refused": 35,
+      "total_nuclear_erg_s": 1.4131376441232128e+18,
+      "fraction_present_L": 1.2636209600091897e-09,
+      "old_supported_nuclear_erg_s": 7.660668816989134e+17,
+      "difference_from_old_supported_erg_s": 6.470707624242994e+17,
+      "sub100kK_erg_s": 1271551052302.3237,
+      "sub100kK_fraction_L": 1.1370149030371898e-15
+    },
+    {
+      "T_factor": 0.8,
+      "model": "high",
+      "cells": 536,
+      "old_refused": 35,
+      "total_nuclear_erg_s": 5.022845182969428e+20,
+      "fraction_present_L": 4.4914042722422616e-07,
+      "old_supported_nuclear_erg_s": 7.660668816989134e+17,
+      "difference_from_old_supported_erg_s": 5.015184514152439e+20,
+      "sub100kK_erg_s": 1271551052302.3237,
+      "sub100kK_fraction_L": 1.1370149030371898e-15
+    },
+    {
+      "T_factor": 0.6,
+      "model": "optimal",
+      "cells": 536,
+      "old_refused": 79,
+      "total_nuclear_erg_s": 9.871151138580695e+17,
+      "fraction_present_L": 8.826736397549096e-10,
+      "old_supported_nuclear_erg_s": 487483660696209.4,
+      "difference_from_old_supported_erg_s": 9.866276301973733e+17,
+      "sub100kK_erg_s": 1.3128234599757584e+17,
+      "sub100kK_fraction_L": 1.1739204936730933e-10
+    },
+    {
+      "T_factor": 0.6,
+      "model": "high",
+      "cells": 536,
+      "old_refused": 79,
+      "total_nuclear_erg_s": 7.456724607263784e+20,
+      "fraction_present_L": 6.66776767708359e-07,
+      "old_supported_nuclear_erg_s": 487483660696209.4,
+      "difference_from_old_supported_erg_s": 7.456719732427177e+20,
+      "sub100kK_erg_s": 1.6769694956396433e+19,
+      "sub100kK_fraction_L": 1.499538146760692e-08
+    },
+    {
+      "T_factor": 0.5,
+      "model": "optimal",
+      "cells": 536,
+      "old_refused": 0,
+      "total_nuclear_erg_s": 9.391064396995037e+17,
+      "fraction_present_L": 8.397445116679886e-10,
+      "old_supported_nuclear_erg_s": 0.0,
+      "difference_from_old_supported_erg_s": 9.391064396995037e+17,
+      "sub100kK_erg_s": 9.391064396995039e+17,
+      "sub100kK_fraction_L": 8.397445116679887e-10
+    },
+    {
+      "T_factor": 0.5,
+      "model": "high",
+      "cells": 536,
+      "old_refused": 0,
+      "total_nuclear_erg_s": 7.931070241042681e+20,
+      "fraction_present_L": 7.091925286658666e-07,
+      "old_supported_nuclear_erg_s": 0.0,
+      "difference_from_old_supported_erg_s": 7.931070241042681e+20,
+      "sub100kK_erg_s": 7.931070241042681e+20,
+      "sub100kK_fraction_L": 7.091925286658666e-07
+    }
+  ],
+  "stellar_comparison": {
+    "optimal": {
+      "years": 3907982353674.638,
+      "global_relative": {
+        "Teff_K": -9.205288231672881e-07,
+        "radius_Rsun": -1.3029957890431376e-08,
+        "luminosity_Lsun": -3.7081700289265385e-06,
+        "central_T_K": -1.6739772837559563e-05,
+        "central_density_g_cm3": 2.269913168539972e-08,
+        "He3_peak": 1.5228807348499629e-06,
+        "H_mass_g": 2.220446049250313e-16,
+        "He3_mass_g": 5.773159728050814e-15
+      },
+      "maximum_point_relative_r_rho_T": [
+        1.2929895293009955e-08,
+        2.5997570225627787e-07,
+        1.6739772837587607e-05
+      ],
+      "maximum_point_L_difference_over_surface_L": 0.00035558356352723424,
+      "maximum_absolute_H_He3_He4_difference": [
+        3.6173340900447215e-07,
+        2.4892837527379363e-07,
+        6.106617843615325e-07
+      ],
+      "worst_species_q": 0.9632836181732018,
+      "same_convective_mass_fraction": true,
+      "Teff_K": 774.2415948895513
+    },
+    "high": {
+      "years": 3907982353674.638,
+      "global_relative": {
+        "Teff_K": -7.637224186396452e-13,
+        "radius_Rsun": 4.997335878442755e-12,
+        "luminosity_Lsun": 6.9393379931170784e-12,
+        "central_T_K": 2.19895213149357e-11,
+        "central_density_g_cm3": -5.203615316418109e-13,
+        "He3_peak": -5.63861535241017e-09,
+        "H_mass_g": -4.496403249731884e-14,
+        "He3_mass_g": 3.9048764222116006e-12
+      },
+      "maximum_point_relative_r_rho_T": [
+        3.33315597339508e-11,
+        2.4366299497409382e-08,
+        8.513705299933285e-10
+      ],
+      "maximum_point_L_difference_over_surface_L": 3.915251480026029e-06,
+      "maximum_absolute_H_He3_He4_difference": [
+        1.8272739765734514e-08,
+        1.6298319915897252e-09,
+        1.8417702696282845e-08
+      ],
+      "worst_species_q": 0.9620607023191245,
+      "same_convective_mass_fraction": true,
+      "Teff_K": 774.2423076013202
+    },
+    "scope": "Same 775 K parent and 100 Myr endpoint, original checks. This is a short state comparison, not physical calibration or a general precision guarantee. Different accepted step sequences are retained.",
+    "sha256": {
+      "reference": "c0cc9f4ee784ae99bac1dbd2f57866005669ee9d9f3a1a4973e6d0ae1ac56c8b",
+      "optimal": "bf84e98e15c5ad89c7c46fe598e2db51ae366f6945d2b3f8246b726166e217c7",
+      "high": "eccefeaec7bb63f4fbacbca3e1184ed666d11218a5b6f031e21c01d69a4b0da6"
+    }
+  },
+  "stellar_cost": [
+    {
+      "name": "reference",
+      "status": 0,
+      "CPU_seconds": 578.722475,
+      "wall_seconds": 334.0881493743509
+    },
+    {
+      "name": "optimal",
+      "status": 0,
+      "CPU_seconds": 833.362557,
+      "wall_seconds": 474.9593650409952
+    },
+    {
+      "name": "high",
+      "status": 0,
+      "CPU_seconds": 406.40065,
+      "wall_seconds": 233.27099733334035
+    }
+  ],
+  "driver_checks": {
+    "passed": true,
+    "cases": [
+      {
+        "name": "unknown",
+        "status": 1,
+        "message": "unknown dense_nuclear_model"
+      },
+      {
+        "name": "missing_screening",
+        "status": 1,
+        "message": "dense_nuclear_model requires quantum_screening_zeta_max1.6 and no fuel omission"
+      },
+      {
+        "name": "conflicting_omission",
+        "status": 1,
+        "message": "dense_nuclear_model requires quantum_screening_zeta_max1.6 and no fuel omission"
+      },
+      {
+        "name": "changed_model",
+        "status": 1,
+        "message": "checkpoint executable or input tables differ: nuclear.dense_rate"
+      }
+    ]
+  },
+  "tests": {
+    "count": 13,
+    "passed": true,
+    "log_sha256": "c3877ac1661af55bb251b19ef1415b91e281f541870e6b393cb4507417d5acd0"
+  },
+  "provenance": {
+    "parent_sha256": "61653e64cef8bc36f9af1e163f49b412965fe4b1ddc4338655dc872c8ee17c0c",
+    "executable_sha256": "902315ee788a8b8bc1fe6b6c7b2d88cf3ca22a22d3d7b24f93519be07ab53e5e"
+  },
+  "limitations": [
+    "Fixed-density/composition temperature projections, not evolved stars",
+    "Fully ionized uniform-mixture approximation; trace-proton validity is not calibrated",
+    "Sub100kK rates quantify the contribution restored below the old thermal cutoff, not a complete neutral-matter reaction model",
+    "Different accepted step sequences: reference/high one interval, optimal three after two species line-search rejections; unchanged checks throughout.",
+    "Short comparisons do not establish later cold burning or a full-physics Hayashi track."
+  ]
+}

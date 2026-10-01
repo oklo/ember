@@ -204,6 +204,13 @@ int lifetime_main(int argc,char** argv) {
     if(!std::isfinite(quantum_fuel_limit) || quantum_fuel_limit<0 || quantum_fuel_limit>1e-6
         || (quantum_fuel_limit>0 && quantum_screening==0))
       throw std::invalid_argument("quantum_burning_fuel_limit requires quantum screening and must lie in [0,1e-6]");
+    const auto dense_nuclear=cfg.values.contains("dense_nuclear_model")?cfg.get("dense_nuclear_model"):"none";
+    DenseNuclearModel dense_model=DenseNuclearModel::none;
+    if(dense_nuclear=="uniform_optimal")dense_model=DenseNuclearModel::uniform_optimal;
+    else if(dense_nuclear=="uniform_high")dense_model=DenseNuclearModel::uniform_high;
+    else if(dense_nuclear!="none")throw std::invalid_argument("unknown dense_nuclear_model");
+    if(dense_model!=DenseNuclearModel::none&&(quantum_screening!=1.6||quantum_fuel_limit!=0))
+      throw std::invalid_argument("dense_nuclear_model requires quantum_screening_zeta_max1.6 and no fuel omission");
     const double verify_responses=optional_number("verify_response_reuse");
     const double linearized_burning=optional_number("linearized_burning");
     if(linearized_burning!=0 && linearized_burning!=1)
@@ -433,6 +440,8 @@ int lifetime_main(int argc,char** argv) {
       identity.values["nuclear.quantum_screening"]="svh.cd09_finite_zeta.v1";
       identity.number("nuclear.quantum_screening_zeta_max",quantum_screening);
     }
+    if(dense_model!=DenseNuclearModel::none)
+      identity.values["nuclear.dense_rate"]="y06."+dense_nuclear+".s0.zeta1_1.6.gamma120_200.v1";
     if(quantum_fuel_limit>0) {
       identity.values["nuclear.quantum_burning_omission"]="trace_H_D_He3.v1";
       identity.number("nuclear.quantum_burning_fuel_limit",quantum_fuel_limit);
@@ -597,6 +606,7 @@ int lifetime_main(int argc,char** argv) {
     set_screening_reuse(screening_spacing);
     set_quantum_screening(quantum_screening);
     set_quantum_burning_fuel_limit(quantum_fuel_limit);
+    set_dense_nuclear_model(dense_model);
     if(eos_radius>0)microscopic.use_eos_taylor(eos_radius,verify_responses==1);
     std::shared_ptr<CollisionTaylorCache> collision_reuse;
     if(collision_radius>0) {

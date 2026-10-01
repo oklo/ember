@@ -84,22 +84,16 @@ DeuteriumCapture deuterium_capture(double T,double rho,const Composition& other,
   DeuteriumCapture out;
   out.heat_per_mole=(nuclides[0].A+deuterium_atomic_mass-nuclides[1].A)*c_light*c_light;
   if(xd==0 || other.X[0]==0) return out;
-  const auto bare=deuterium_bare_rate(T);
-  // Do not evaluate a fully ionized screening model in cold molecular layers
-  // where the explicitly omitted thermal capture rate is negligible.
-  if(bare.molar_rate==0) return out;
-  // Fully ionized D has exactly the same charge moments as half as much H1
-  // baryon mass. This temporary mixture is ONLY for Coulomb screening, never
-  // for material lookup or the conserved abundance array.
-  auto screening_counts=other;screening_counts.X[0]+=.5*xd;
-  const auto s=pp_screening(T,rho,screening_counts,PPReaction::deuterium_p,screening);
-  const double r=rho*bare.molar_rate*std::exp(s.log_factor)*other.X[0]*xd/2;
+  auto mixture=other;mixture[Species::H2]=xd;
+  if(T<1e4&&dense_nuclear_model()==DenseNuclearModel::none)return out;
+  const auto response=pp_rate_response(T,rho,mixture,PPReaction::deuterium_p,PPRates::solar_fusion_iii,screening);
+  const double r=rho*response.molar_rate*other.X[0]*xd/2;
   out.molar_reactions_per_gram_second=r;
   out.dX_deuterium_dt=-2*r;
   out.source.dXdt[0]=-r;out.source.dXdt[1]=3*r;
   out.source.eps=r*out.heat_per_mole;
-  out.source.dlneps_dlnT=bare.dlnrate_dlnT+s.dlog_dlnT;
-  out.source.dlneps_dlnRho=1+s.dlog_dlnRho;
+  out.source.dlneps_dlnT=response.dlnrate_dlnT;
+  out.source.dlneps_dlnRho=1+response.dlnrate_dlnRho;
   // Radiative capture produces no escaping nuclear neutrino.
   return out;
 }
@@ -110,24 +104,23 @@ NuclearResponse PPDeuterium::composition_response(double T,double rho,const Comp
   // This is only the light-isotope source. A separate CN source can use the
   // same composition; its catalysts are neither consumed nor reset here.
   auto out=pp_.composition_response(T,rho,c);
-  const auto bare=deuterium_bare_rate(T);
-  if(bare.molar_rate==0)return out;
+  if(T<1e4&&dense_nuclear_model()==DenseNuclearModel::none)return out;
   constexpr auto d=static_cast<std::size_t>(Species::H2);
-  const auto screen=pp_screening(T,rho,c,PPReaction::deuterium_p,screening_);
-  const double coefficient=rho*bare.molar_rate*std::exp(screen.log_factor);
+  const auto response=pp_rate_response(T,rho,c,PPReaction::deuterium_p,PPRates::solar_fusion_iii,screening_);
+  const double coefficient=rho*response.molar_rate;
   const double rate=coefficient*c.X[0]*c.X[d]/2;
   const double Q=(nuclides[0].A+deuterium_atomic_mass-nuclides[1].A)*c_light*c_light;
   const double heat=rate*Q,pp_heat=out.state.eps;
   out.state.eps+=heat;
   if(out.state.eps>0) {
     out.state.dlneps_dlnT=(pp_heat*out.state.dlneps_dlnT+
-        heat*(bare.dlnrate_dlnT+screen.dlog_dlnT))/out.state.eps;
+        heat*response.dlnrate_dlnT)/out.state.eps;
     out.state.dlneps_dlnRho=(pp_heat*out.state.dlneps_dlnRho+
-        heat*(1+screen.dlog_dlnRho))/out.state.eps;
+        heat*(1+response.dlnrate_dlnRho))/out.state.eps;
   }
   out.state.dXdt[0]-=rate;out.state.dXdt[1]+=3*rate;out.state.dXdt[d]-=2*rate;
   for(std::size_t j=0;j<NSPEC;++j) {
-    const double dr=rate*screen.dlog_dX[j]+coefficient*
+    const double dr=rate*response.dlnrate_dX[j]+coefficient*
         ((j==0?c.X[d]/2:0)+(j==d?c.X[0]/2:0));
     out.deps_dX[j]+=dr*Q;
     out.d_dXdt_dX[0][j]-=dr;out.d_dXdt_dX[1][j]+=3*dr;out.d_dXdt_dX[d][j]-=2*dr;

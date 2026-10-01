@@ -20,6 +20,7 @@ add_library(ember
   eos_additive_volume.cpp
   eos_binary.cpp
   nuclear_pp.cpp
+  dense_nuclear.cpp
   deuterium.cpp
   deuterium_burning.cpp
   nuclear_cn.cpp

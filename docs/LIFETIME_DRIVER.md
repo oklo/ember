@@ -58,6 +58,11 @@ checked species coverage to grow while retaining the same heat prescription.
 It does not establish ionization or collision-table support; those still need
 physical assessment. Optional `quantum_screening_zeta_max` selects the
 [nuclear quantum correction](NUCLEAR.md); its default is zero.
+Optional `dense_nuclear_model` selects `uniform_optimal` or `uniform_high`
+Yakovlev et al. quantum-burning scenarios; default `none` retains the previous
+rates. It requires `quantum_screening_zeta_max 1.6` and disables the trace-fuel
+omission option below. See [assumptions and limits](NUCLEAR.md).
+
 Optional `quantum_burning_fuel_limit` permits omission of unsupported quantum
 reactions in depleted cells, with the [restrictions and diagnostics](NUCLEAR.md#screening)
 described there. It defaults to zero; a positive value changes the physical

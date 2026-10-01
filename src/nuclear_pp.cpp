@@ -56,7 +56,7 @@ Reaction reaction(PPReaction r,PPRates prescription=PPRates::solar_fusion_ii) {
   const double m1=nuclides[0].A*amu-me, m3=nuclides[1].A*amu-2*me;
   const double m4=nuclides[2].A*amu-2*me;
   if(r==PPReaction::deuterium_p)
-    return {1,1,m1,deuterium_atomic_mass*amu-me,0,0,0};
+    return {1,1,m1,deuterium_atomic_mass*amu-me,2.028e-7,0,0};
   if(prescription==PPRates::solar_fusion_iii) {
     // Acharya et al. (2025), equations 8--9 and section V.C.
     // The 34 reaction uses the full equation 14 below, not a Taylor fit.
@@ -216,7 +216,7 @@ ThermonuclearRate pp_bare_rate(double T,PPReaction which,PPRates prescription) {
   const auto r=reaction(which,prescription);
   if(prescription!=PPRates::legacy && T>2e7)
     throw std::domain_error("PPChains: Solar Fusion low-energy rates limited to T<=2e7 K");
-  if(T<1e5) return {};
+  if(T<1e5 && dense_nuclear_model()==DenseNuclearModel::none) return {};
   if(prescription==PPRates::legacy) {
     const auto v=which==PPReaction::pp?pp(T*1e-9):which==PPReaction::he3_he3?he3he3(T*1e-9):he3he4(T*1e-9);
     return {v.v,v.dlnv_dlnT};
@@ -326,6 +326,67 @@ static ScreeningState screening_response(double T,double rho,const Composition& 
   return out;
 }
 
+// The conventional rates remain exact below the join. The blend and its
+// derivatives finish inside the supported CD09 range, before any refusal.
+static NuclearRateResponse combined_rate(double T,double rho,const Composition& c,
+    const Reaction& pair,const ThermonuclearRate& bare,PPScreening screening,
+    std::optional<Susceptibility>* shared_electrons) {
+  validate(T,rho,c);
+  using D=detail::Differential<NSPEC+2>;
+  D weight;
+  const auto model=dense_nuclear_model();
+  if(model!=DenseNuclearModel::none) {
+    if(screening!=PPScreening::salpeter_van_horn||quantum_screening_zeta_max.load()<1.6)
+      throw std::invalid_argument("dense nuclear model requires SVH with quantum screening limit1.6");
+    D ye;
+    for(std::size_t j=0;j<NSPEC;++j) {
+      const double moment=c.metal_inventory==MetalInventory::gs98&&is_metal_species(j)
+        ?c.metal_ion_moment(1):nuclides[j].Z/c.abundance_weight(j);
+      ye+=D::variable(c.X[j],j+2)*moment;
+    }
+    const auto temp=detail::exp(D::variable(std::log(T),0));
+    const auto density=detail::exp(D::variable(std::log(rho),1));
+    const auto ge=e2/(kB*temp)*detail::cbrt(4*M_PI*NA*density*ye/3);
+    const auto coupling=ge*(2*pair.z1*pair.z2/(std::cbrt(pair.z1)+std::cbrt(pair.z2)));
+    const auto zeta=coupling/detail::cbrt(D(gamow_energy(pair)/(4*kB))/temp);
+    auto smooth=[](const D& x,double lo,double hi) {
+      if(x.value<=lo)return D(0);if(x.value>=hi)return D(1);
+      const auto u=(x-lo)/(hi-lo);return u*u*u*(10+u*(-15+6*u));
+    };
+    weight=1-(1-smooth(zeta,1.,1.6))*(1-smooth(coupling,120.,200.));
+  }
+  NuclearRateResponse dense;
+  if(weight.value>0) {
+    const NuclearPair p{pair.z1,pair.z2,pair.m1/amu,pair.m2/amu,pair.s0};
+    dense=dense_nuclear_rate(T,rho,c,p,model);
+    if(weight.value==1)return dense;
+  }
+  const auto screen=screening_response(T,rho,c,pair,screening,shared_electrons);
+  NuclearRateResponse conventional;
+  conventional.molar_rate=bare.molar_rate*std::exp(screen.log_factor);
+  conventional.dlnrate_dlnT=bare.dlnrate_dlnT+screen.dlog_dlnT;
+  conventional.dlnrate_dlnRho=screen.dlog_dlnRho;
+  conventional.dlnrate_dX=screen.dlog_dX;
+  if(weight.value==0)return conventional;
+  const double a=(1-weight.value)*conventional.molar_rate,b=weight.value*dense.molar_rate;
+  NuclearRateResponse result;result.molar_rate=a+b;
+  if(result.molar_rate>0) {
+    auto blend=[&](double da,double db,std::size_t j) {
+      return (a*da+b*db+weight.d[j]*(dense.molar_rate-conventional.molar_rate))/result.molar_rate;
+    };
+    result.dlnrate_dlnT=blend(conventional.dlnrate_dlnT,dense.dlnrate_dlnT,0);
+    result.dlnrate_dlnRho=blend(conventional.dlnrate_dlnRho,dense.dlnrate_dlnRho,1);
+    for(std::size_t j=0;j<NSPEC;++j)result.dlnrate_dX[j]=blend(conventional.dlnrate_dX[j],dense.dlnrate_dX[j],j+2);
+  }
+  return result;
+}
+NuclearRateResponse pp_rate_response(double T,double rho,const Composition& c,PPReaction which,PPRates rates,PPScreening screening) {
+  return combined_rate(T,rho,c,reaction(which,rates),pp_bare_rate(T,which,rates),screening,nullptr);
+}
+NuclearRateResponse cn_rate_response(double T,double rho,const Composition& c,CNReaction which,PPRates rates,PPScreening screening) {
+  return combined_rate(T,rho,c,cn_reaction(rates,which),cn_bare_rate(T,which,rates),screening,nullptr);
+}
+
 ScreeningState pp_screening(double T,double rho,const Composition& comp,PPReaction which,PPScreening model) {
   return screening_response(T,rho,comp,reaction(which),model,nullptr);
 }
@@ -333,18 +394,13 @@ ScreeningState pp_screening(double T,double rho,const Composition& comp,PPReacti
 NuclearResponse PPChains::composition_response(double T,double rho,const Composition& comp) const {
   validate(T,rho,comp);
   NuclearResponse result;
-  if(T<1e5) return result; // retained explicit negligible-burning cutoff
-  const std::array rates{pp_bare_rate(T,PPReaction::pp,rates_),pp_bare_rate(T,PPReaction::he3_he3,rates_),
-    pp_bare_rate(T,PPReaction::he3_he4,rates_)};
-  // The classical helium factors agree; quantum tunnelling also depends on
-  // reduced mass, so compute the two factors separately when selected.
+  if(T<1e5 && dense_nuclear_model()==DenseNuclearModel::none) return result;
   std::optional<Susceptibility> shared_electrons;
-  const auto f1=screening_response(T,rho,comp,reaction(PPReaction::pp),screening_,&shared_electrons);
-  const auto f2=screening_response(T,rho,comp,reaction(PPReaction::he3_he3),screening_,&shared_electrons);
-  const auto f3=quantum_screening_zeta_max.load(std::memory_order_relaxed)>0
-    && screening_==PPScreening::salpeter_van_horn
-    ?screening_response(T,rho,comp,reaction(PPReaction::he3_he4),screening_,&shared_electrons):f2;
-  const std::array screens{f1,f2,f3};
+  std::array<NuclearRateResponse,3> rates;
+  for(std::size_t k=0;k<3;++k) {
+    const auto which=static_cast<PPReaction>(k);
+    rates[k]=combined_rate(T,rho,comp,reaction(which,rates_),pp_bare_rate(T,which,rates_),screening_,&shared_electrons);
+  }
   const std::array w{comp.abundance_weight(0),comp.abundance_weight(1),comp.abundance_weight(2)};
   const std::array y{comp.X[0]/w[0],comp.X[1]/w[1],comp.X[2]/w[2]};
   const double m1=nuclides[0].A,m3=nuclides[1].A,m4=nuclides[2].A;
@@ -357,15 +413,15 @@ NuclearResponse PPChains::composition_response(double T,double rho,const Composi
   auto& s=result.state;
   double epsT=0,epsR=0;
   for(std::size_t k=0;k<3;++k) {
-    const double coefficient=(k<2?.5:1.)*rho*rates[k].molar_rate*std::exp(screens[k].log_factor);
+    const double coefficient=(k<2?.5:1.)*rho*rates[k].molar_rate;
     // Moles of reactions / g / s, not individual reactions / g / s.
     const double rate=coefficient*y[a[k]]*y[b[k]], heat=total_q[k]-nu_q[k];
     s.eps+=rate*heat;s.eps_neutrino+=rate*nu_q[k];
-    epsT+=rate*heat*(rates[k].dlnrate_dlnT+screens[k].dlog_dlnT);
-    epsR+=rate*heat*(1+screens[k].dlog_dlnRho);
+    epsT+=rate*heat*rates[k].dlnrate_dlnT;
+    epsR+=rate*heat*(1+rates[k].dlnrate_dlnRho);
     for(std::size_t i=0;i<3;++i) s.dXdt[i]+=stoich[k][i]*rate*w[i];
     for(std::size_t j=0;j<NSPEC;++j) {
-      const double derivative=rate*screens[k].dlog_dX[j]
+      const double derivative=rate*rates[k].dlnrate_dX[j]
         +(j==static_cast<std::size_t>(a[k])?coefficient*y[b[k]]/w[a[k]]:0)
         +(j==static_cast<std::size_t>(b[k])?coefficient*y[a[k]]/w[b[k]]:0);
       result.deps_dX[j]+=heat*derivative;
@@ -400,7 +456,7 @@ ThermonuclearRate cn_bare_rate(double T,CNReaction which,PPRates prescription) {
   const auto r=cn_reaction(prescription,which);
   if(!std::isfinite(T) || T<=0 || T>2e7)
     throw std::domain_error("CNCycle: positive finite T<=2e7 K required for low-energy rates");
-  if(T<1e5)return {};
+  if(T<1e5 && dense_nuclear_model()==DenseNuclearModel::none)return {};
   using Entry=std::array<std::optional<ThermonuclearRate>,6>;
   thread_local std::unordered_map<double,Entry> cache;
   const auto index=2*static_cast<std::size_t>(which)+(prescription==PPRates::solar_fusion_iii?1:0);
@@ -443,15 +499,14 @@ NuclearResponse CNCycle::composition_response(double T,double rho,const Composit
   validate(T,rho,c);
   if(c.metal_inventory!=MetalInventory::gs98)
     throw std::domain_error("CNCycle: fixed GS98 catalyst approximation requires GS98 inventory");
-  const auto bare=cn_bare_rate(T,rates_);
   NuclearResponse out;
-  if(T<1e5)return out;
-  const auto scr=cn_screening(T,rho,c,screening_);
+  if(T<1e5 && dense_nuclear_model()==DenseNuclearModel::none)return out;
+  const auto rate_response=cn_rate_response(T,rho,c,CNReaction::n14_p,rates_,screening_);
   const double catalyst_per_Z=(converted_carbon_*gs98_metals[0].fraction/12
     +gs98_metals[1].fraction/14)/(c.basis==AbundanceBasis::baryon_mass?1.:gs98_atomic_mass_scale());
   const double wH=c.abundance_weight(0),wHe=c.abundance_weight(2);
   const double hydrogen=c.X[0]/wH,catalyst=c.Z()*catalyst_per_Z;
-  const double coefficient=rho*bare.molar_rate*std::exp(scr.log_factor);
+  const double coefficient=rho*rate_response.molar_rate;
   const double rate=coefficient*hydrogen*catalyst; // mol of cycles / g / s
   const double q=(4*nuclides[0].A-nuclides[2].A)*c_light*c_light;
   const double nu=(.706+.996)*mev*NA,heat=q-nu;
@@ -459,11 +514,11 @@ NuclearResponse CNCycle::composition_response(double T,double rho,const Composit
   s.eps=rate*heat;s.eps_neutrino=rate*nu;
   s.dXdt[0]=-4*wH*rate;s.dXdt[2]=wHe*rate;
   if(s.eps>0) {
-    s.dlneps_dlnT=bare.dlnrate_dlnT+scr.dlog_dlnT;
-    s.dlneps_dlnRho=1+scr.dlog_dlnRho;
+    s.dlneps_dlnT=rate_response.dlnrate_dlnT;
+    s.dlneps_dlnRho=1+rate_response.dlnrate_dlnRho;
   }
   for(std::size_t j=0;j<NSPEC;++j) {
-    const double dr=rate*scr.dlog_dX[j]+(j==0?coefficient*catalyst/wH:0)
+    const double dr=rate*rate_response.dlnrate_dX[j]+(j==0?coefficient*catalyst/wH:0)
       +(is_metal_species(j)?coefficient*hydrogen*catalyst_per_Z:0);
     out.deps_dX[j]=heat*dr;
     out.d_dXdt_dX[0][j]=-4*wH*dr;out.d_dXdt_dX[2][j]=wHe*dr;

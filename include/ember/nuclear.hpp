@@ -1,5 +1,6 @@
 #pragma once
 #include "ember/composition.hpp"
+#include "ember/dense_nuclear.hpp"
 #include <array>
 #include <stdexcept>
 
@@ -62,6 +63,9 @@ struct ScreeningState {
   bool reaction_omitted{}; // explicit trace-fuel approximation; not a screening fit
 };
 ThermonuclearRate pp_bare_rate(double T, PPReaction, PPRates);
+// Combined coefficients avoid multiplying an underflowed thermal rate by a
+// divergent screening factor in the quantum limit. Dense model is opt-in.
+NuclearRateResponse pp_rate_response(double T,double rho,const Composition&,PPReaction,PPRates,PPScreening);
 ScreeningState pp_screening(double T,double rho,const Composition&,PPReaction,PPScreening);
 // Optional process-wide first-order reuse of the electron screening
 // susceptibility on a grid of spacing h in (ln T, ln n_e); h=0 is exact.
@@ -85,6 +89,7 @@ ScreeningState cn_screening(double T,double rho,const Composition&,PPScreening);
 // Resolved CN captures; the two-argument overload above retains N14(p,gamma).
 enum class CNReaction { c12_p, c13_p, n14_p };
 ThermonuclearRate cn_bare_rate(double T,CNReaction,PPRates);
+NuclearRateResponse cn_rate_response(double T,double rho,const Composition&,CNReaction,PPRates,PPScreening);
 ScreeningState cn_screening(double T,double rho,const Composition&,CNReaction,PPScreening);
 
 // Fixed GS98 catalyst-number approximation; does not convert the inert metal

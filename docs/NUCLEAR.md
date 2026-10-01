@@ -3,7 +3,8 @@
 The lifetime calculation evolves initial deuterium, the reduced pp chains and
 carbon–nitrogen burning, with Solar Fusion III pp rates and finite-degeneracy
 screening. Checkpoints record the selected prescriptions. The network omits
-pep, hep, ppIII, oxygen branches and pycnonuclear burning.
+pep, hep, ppIII and oxygen branches. An optional uniform-mixture
+quantum-burning approximation extends the cold rates, as described below.
 
 ## Network and energy accounting
 
@@ -37,8 +38,9 @@ renormalize abundances or clip the energy release.
 of [Solar Fusion III](https://arxiv.org/abs/2405.06470v3), the helium-3 pair
 polynomial from section V.C, and the helium-3/helium-4 energy dependence from
 equation 14. The latter is restricted to its stated range through 1.6 MeV.
-The operational temperature range is 0.1–20 MK: burning is set to zero below
-the lower cutoff and unsupported hotter states are rejected.
+The default operational temperature range is 0.1–20 MK: burning is set to zero
+below the lower cutoff and unsupported hotter states are rejected. The optional
+dense-rate model removes the cold cutoff; it does not extend the hot range.
 
 The retained `sfii-svh` option uses
 [Solar Fusion II](https://arxiv.org/abs/1004.2318), Table I and equations 25–26,
@@ -116,6 +118,35 @@ the present luminosity within those scenarios. These are uniform-mixture
 extrapolations, not calibrated bounds for trace hydrogen in helium. Frozen
 profiles with temperatures reduced by 10% already encounter cells above the
 selected fuel limit; continued cooling will require a new assessment there.
+
+`dense_nuclear_model uniform_optimal` or `uniform_high` instead evaluates the
+Yakovlev et al. uniform-mixture coefficient, including its zero-temperature
+term, with analytic temperature, density and abundance derivatives. The high
+choice is a sensitivity scenario. Both retain each network's stoichiometry,
+nuclear masses and neutrino accounting. Constant SFII/SFIII S(0) values are used;
+this is a fully ionized background approximation, uncalibrated for dilute
+hydrogen in helium or a separated crystal.
+
+The coefficient joins the existing rates smoothly over zeta1–1.6 or
+Gamma12 120–200, completing before their domain boundary. Below both intervals
+the existing rates are unchanged. The printed MCP parameters in Y06 TableII
+are used. This option requires `quantum_screening_zeta_max 1.6` and zero
+`quantum_burning_fuel_limit`; its identity is recorded on restart. It is off
+by default. The deuterium join uses SFIII S(0)=2.028e-7 MeV barn. This changes
+reaction coefficients, not the reduced network's assumed fast daughter reactions.
+Their validity must be reassessed if cold burning becomes energetically important.
+
+[Implementation and stellar checks](results/dense_nuclear_oct1_v1.json) include
+13 passing tests and 37520 independent coefficient comparisons, agreeing within
+2.995e-13 relatively. Over the same 100 Myr from a 775.1 K parent, the optimal
+and high scenarios differ from the prior treatment by at most 3.709e-6 in
+surface luminosity and 1.674e-5 in central temperature; convective mass agrees.
+The optimal run takes three intervals after two species-solve rejections,
+while the other arms take one. These checks retain all accuracy requirements;
+they do not establish a new time-accuracy bound or validate the physical rate.
+At that parent state the two scenarios supply 3.861e-9 and 2.047e-7 of the
+surface luminosity. Frozen colder profiles remain diagnostic projections,
+not evolved cooling states or established temperature floors.
 
 ## Verification
 

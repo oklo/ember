@@ -41,14 +41,13 @@ CNNetworkResponse CNNetwork::response(double T,double rho,const Composition& c,c
   if(!std::isfinite(T) || !std::isfinite(rho) || T<=0 || rho<=0 || T>2e7)
     throw std::domain_error("CNNetwork: finite positive T<=20 MK and density required");
   CNNetworkResponse out;
-  if(T<1e5)return out;
+  if(T<1e5 && dense_nuclear_model()==DenseNuclearModel::none)return out;
   constexpr double mev=1.602176634e-6;
   constexpr std::array<double,3> neutrino{.706*mev*NA,0,.996*mev*NA};
   double epsT=0,epsR=0;
   for(std::size_t k=0;k<3;++k) {
-    const auto bare=cn_bare_rate(T,reactions[k],rates_);
-    const auto screen=cn_screening(T,rho,c,reactions[k],screening_);
-    const double coefficient=rho*bare.molar_rate*std::exp(screen.log_factor);
+    const auto response=cn_rate_response(T,rho,c,reactions[k],rates_,screening_);
+    const double coefficient=rho*response.molar_rate;
     const double frequency=coefficient*c.X[0],rate=frequency*y[k];
     out.frequency[k]=frequency;out.reaction_rate[k]=rate;
     double q=0;
@@ -57,15 +56,15 @@ CNNetworkResponse CNNetwork::response(double T,double rho,const Composition& c,c
     const double heat=q-neutrino[k];
     auto& n=out.physical;auto& s=n.state;
     s.eps+=rate*heat;s.eps_neutrino+=rate*neutrino[k];
-    epsT+=rate*heat*(bare.dlnrate_dlnT+screen.dlog_dlnT);
-    epsR+=rate*heat*(1+screen.dlog_dlnRho);
+    epsT+=rate*heat*response.dlnrate_dlnT;
+    epsR+=rate*heat*(1+response.dlnrate_dlnRho);
     out.deps_dY[k]=frequency*heat;
     for(std::size_t i=0;i<NSPEC;++i) {
       s.dXdt[i]+=stoich[k][i]*mass_numbers[i]*rate;
       out.d_dXdt_dY[i][k]=stoich[k][i]*mass_numbers[i]*frequency;
     }
     for(std::size_t j=0;j<NSPEC;++j) {
-      const double dr=rate*screen.dlog_dX[j]+(j==0?coefficient*y[k]:0);
+      const double dr=rate*response.dlnrate_dX[j]+(j==0?coefficient*y[k]:0);
       n.deps_dX[j]+=heat*dr;
       for(std::size_t i=0;i<NSPEC;++i)
         n.d_dXdt_dX[i][j]+=stoich[k][i]*mass_numbers[i]*dr;
