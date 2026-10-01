@@ -29,11 +29,19 @@ MetalCNVector metal_cn_abundances(const Composition& c) {
   return {c.X[0],c.X[1],carbon12,carbon13,nitrogen14,cn_inert_metal_fraction(c.Z(),y),c[Species::H2]};
 }
 Composition metal_cn_composition(const Composition& reference,const MetalCNVector& v) {
-  check(reference,reference);double total=0;
-  for(double x:v){if(!std::isfinite(x) || x<0)throw std::domain_error("metal CN transport: invalid independent fraction");total+=x;}
-  if(total>1)throw std::domain_error("metal CN transport: negative reference helium");
+  check(reference,reference);double helium=1,roundoff=0;
+  for(double x:v) {
+    if(!std::isfinite(x) || x<0)throw std::domain_error("metal CN transport: invalid independent fraction");
+    // Sum 1 - X_i with compensation. Summing X_i first can round away
+    // positive trace He4 before the final subtraction in a hydrogen envelope.
+    const double next=helium-x;
+    roundoff+=std::abs(helium)>=x?(helium-next)-x:(-x-next)+helium;
+    helium=next;
+  }
+  helium+=roundoff;
+  if(helium<0)throw std::domain_error("metal CN transport: negative reference helium");
   const double Z=v[2]+v[3]+v[4]+v[5];auto c=reference;
-  c.X[0]=v[0];c.X[1]=v[1];c.X[2]=1-total;c[Species::H2]=v[METAL_CN_D];
+  c.X[0]=v[0];c.X[1]=v[1];c.X[2]=helium;c[Species::H2]=v[METAL_CN_D];
   const auto pattern=reference.Z()>0?reference:solar_scaled(0.,1.);
   for(std::size_t k=3;k<METAL_END;++k)c.X[k]=Z*pattern.X[k]/pattern.Z();
   c.cn_molality=CNAbundances{v[2]/12,v[3]/13,v[4]/14};check(c,reference);return c;
@@ -128,11 +136,13 @@ MetalCNTransportResult burn_metal_cn_and_diffuse(const Model& thermal,const Mode
     if(options.initial_guess.size()!=thermal.size())throw std::invalid_argument("CN diffusion: guess size differs");
     for(const auto& c:options.initial_guess)check(c,reference);
     for(std::size_t i=0;i<n;++i) {
-      current[i]={};
+      const auto anchor=metal_cn_abundances(options.initial_guess[regions[i].first]);
+      current[i]={};double weight=0;
       for(std::size_t cell=regions[i].first;cell<regions[i].second;++cell) {
-        const auto v=metal_cn_abundances(options.initial_guess[cell]);
-        for(std::size_t k=0;k<METAL_CN_SIZE;++k)current[i][k]+=weights[cell]/thermal.M/mass[i]*v[k];
+        const auto v=metal_cn_abundances(options.initial_guess[cell]);weight+=weights[cell];
+        for(std::size_t k=0;k<METAL_CN_SIZE;++k)current[i][k]+=weights[cell]*(v[k]-anchor[k]);
       }
+      for(std::size_t k=0;k<METAL_CN_SIZE;++k)current[i][k]=anchor[k]+current[i][k]/weight;
     }
     for(auto& v:current)v[METAL_CN_D]/=dunit;
   }

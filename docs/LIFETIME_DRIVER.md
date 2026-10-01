@@ -331,6 +331,13 @@ It is a self-contained input, checked by content; the loader does not trust
 modification times or silently substitute a cache. Keep the original source
 manifest and provenance for regeneration. An existing output is never overwritten.
 
+Trace helium-4 is reconstructed with compensated subtraction of the independent
+fractions. Regional starting guesses average differences from one local
+composition, preserving a uniform mixture even near pure hydrogen. This avoids
+rounding a positive helium remainder to zero; it imposes no abundance floor.
+A stopped 720.9 K model advances 6 Myr with unchanged conservation checks.
+[Regression and stellar check](results/trace_helium_remainder_oct1_v1.json).
+
 ### Compact helium-isotope tables
 
 The optional `eos_helium_isotopes "number_density"` replaces helium-isotope

@@ -44,6 +44,14 @@ int main() {
     const double inert=cn_inert_metal_fraction(z,CNAbundances{z/24,0,0});
     check(std::abs(inert/z-.5)<1e-15,"positive inert-metal remainder unchanged");
   }
+  // Trace He4 remains representable even when sum(independent) rounds to one.
+  {
+    MetalCNVector v{};v[0]=std::nextafter(1.,0.);v[1]=1-v[0]-1e-20;
+    const auto c=metal_cn_composition(converted,v);
+    check(c.X[2]>0 && c.X[2]<2e-20,"positive trace helium is not lost in the unit sum",c.X[2]);
+    v[1]=1-v[0]+1e-20;
+    check(rejects([&]{metal_cn_composition(converted,v);}),"negative trace helium is rejected without a floor");
+  }
   auto left=composition(.2,.1,.7,.6),right=composition(.55,.8,1.3,1.4);
   const auto midpoint=mean_composition(left,right);
   const auto physical_left=metal_cn_abundances(left),physical_right=metal_cn_abundances(right);
@@ -157,6 +165,23 @@ int main() {
      std::printf("seed regression: %s\n",e.what());
      check(false,"positive starting guess reaches the unchanged state");
    }
+  }
+  // A uniform mixed region must remain uniform in the initial iterate,
+  // including trace reference helium. Unequal nodal weights exercise rounding.
+  {
+    auto uniform=model;MetalCNVector v{};v[0]=std::nextafter(1.,0.);v[1]=(1-v[0])*.9;
+    const auto c=metal_cn_composition(left,v);uniform.comp.assign(uniform.size(),c);
+    for(auto& y:uniform.y){y.lnT=std::log(1e4);y.lnrho=0;}
+    SpeciesTransportOptions options;options.initial_guess=uniform.comp;
+    const MetalCNFlux zero=[&](std::size_t,const Composition& a,const Composition& b,bool){
+      if(a.X[2]<=0 || b.X[2]<=0)throw std::domain_error("test: lost trace helium");
+      return MetalCNFaceResponse{};
+    };
+    try {
+      const auto result=burn_metal_cn_and_diffuse(uniform,uniform,nuclear,{{0,2},{2,3}},zero,1.,options);
+      bool same=true;for(const auto& next:result.composition)same&=next.X==c.X;
+      check(same,"uniform warm start preserves trace composition");
+    }catch(const std::exception& e){std::printf("trace warm start: %s\n",e.what());check(false,"uniform trace warm start succeeds");}
   }
   const auto path=std::filesystem::temp_directory_path()/"ember-metal-cn-checkpoint-test.restart";
   check(!std::filesystem::exists(path),"checkpoint test uses a new file");

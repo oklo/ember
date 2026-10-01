@@ -1,0 +1,28 @@
+{
+  "scope": "Trace-He4 subtraction and regional-guess regression; same stopped star, tables, executable options and unchanged audits in both arms.",
+  "base_commit": "5928a0b",
+  "tests_passed": [
+    "metal_cn_transport",
+    "metal_microscopic_evolution",
+    "metal_microscopic_face_evolution"
+  ],
+  "new_test_failures_with_original_source": 3,
+  "original": {
+    "accepted_intervals": 0,
+    "stop_reason": "repeated step rejection: screened microscopic transport: positive reference He4 required",
+    "CPU_seconds": 16.77
+  },
+  "corrected": {
+    "accepted_intervals": 1,
+    "interval_years": 6000000,
+    "requested_age_reached": true,
+    "CPU_seconds": 141.7,
+    "wall_seconds": 83.66,
+    "error_norm": 0.0003135,
+    "maximum_species_error": 2.26e-18,
+    "maximum_first_law": 2.942e-09
+  },
+  "abundance_floor_added": false,
+  "tolerances_changed": false,
+  "limitation": "This fixes arithmetic loss of a positive He4 remainder. Extreme atmospheric purity remains a model result subject to physical mixing, accretion and transport uncertainty."
+}
