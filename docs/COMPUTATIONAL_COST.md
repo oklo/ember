@@ -22,6 +22,14 @@ starts, local burning feedback and bounded reuse of EOS and collision responses.
 Independent zone work uses CPU threads. Source atmosphere calculations can run
 in parallel; the stellar solver does not currently use the GPU.
 
+When an absent species needs a positive Newton guess, the solver mixes complete
+compositions. It limits increases of existing species to 1%, avoiding a large
+temporary fuel supply in a depleted core. CN mass accounting allows only
+relative floating-point roundoff in a zero inert-metal remainder. These fixes
+recover a failed 40 Myr cooling interval with unchanged time, structure and
+conservation tolerances.
+[Regression and stellar checks](results/cold_composition_start_oct1_v1.json).
+
 Degenerate-electron collision integrals concentrate quadrature points near the
 Fermi surface. A saved-state batch uses about half the CPU time, with transport
 changes below 1.447e-9. A 200 Myr cooling comparison confirms negligible changes

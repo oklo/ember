@@ -2,6 +2,7 @@
 #include "ember/constants.hpp"
 #include <algorithm>
 #include <cmath>
+#include <limits>
 #include <stdexcept>
 
 namespace ember {
@@ -130,6 +131,18 @@ double PPCNNetwork::rest_energy_correction(const Composition& c) const {
   if(!c.cn_molality)throw std::invalid_argument("PPCNNetwork: missing physical CN inventory");
   return cn_physical_ledger(c,*c.cn_molality).rest_energy_difference;
 }
+double cn_inert_metal_fraction(double total_metals,const CNAbundances& y) {
+  check_catalysts(y);
+  if(!std::isfinite(total_metals)||total_metals<0)
+    throw std::domain_error("CN ledger: invalid total metal mass");
+  const double cn_mass=12*y[0]+13*y[1]+14*y[2],inert=total_metals-cn_mass;
+  // Five material slots and three mass/molality conversions each round.
+  // This is relative to metal mass, never an absolute abundance floor.
+  const double roundoff=16*std::numeric_limits<double>::epsilon()*std::max(total_metals,cn_mass);
+  if(!std::isfinite(cn_mass)||inert < -roundoff)
+    throw std::domain_error("CN ledger: catalysts exceed total metal mass");
+  return std::max(0.,inert);
+}
 CNPhysicalLedger cn_physical_ledger(const Composition& lookup,const CNAbundances& y) {
   const auto initial=initial_gs98_cn(lookup);check_catalysts(y);
   if(std::abs(lookup.sum()-1)>1e-10)
@@ -137,8 +150,7 @@ CNPhysicalLedger cn_physical_ledger(const Composition& lookup,const CNAbundances
   if(lookup.cn_mass_convention==CNMassConvention::explicit_metal_mass) {
     CNPhysicalLedger out;out.molality=y;out.hydrogen=lookup.X[0];out.helium3=lookup.X[1];
     out.helium4=lookup.X[2];out.metal_fraction=lookup.Z();
-    const double cn_mass=12*y[0]+13*y[1]+14*y[2],inert=out.metal_fraction-cn_mass;
-    if(inert<0)throw std::domain_error("CN ledger: catalysts exceed total metal mass");
+    const double inert=cn_inert_metal_fraction(out.metal_fraction,y);
     double fraction=0,ions=0,electrons=0,rest=0;
     for(std::size_t i=2;i<gs98_metals.size();++i) {
       const auto& m=gs98_metals[i];fraction+=m.fraction;

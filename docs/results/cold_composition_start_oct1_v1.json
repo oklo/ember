@@ -1,0 +1,41 @@
+{
+  "scope": "Fix species Newton initialization and zero inert-metal subtraction. No physical rate, accepted evolution equation, accuracy setting or conservation budget changes.",
+  "reference_source": "933bf5a",
+  "starting_Teff_K": 775.4,
+  "ending_Teff_K": 775.1,
+  "elapsed_years": 40000000,
+  "accepted_intervals": 1,
+  "rejected_intervals": 0,
+  "CPU_seconds": 254.9,
+  "wall_seconds": 63.07,
+  "zone_threads": 8,
+  "step_error": 0.01392,
+  "maximum_species_inventory_error": 2.955e-18,
+  "maximum_first_law_error": 5.375e-09,
+  "evidence": {
+    "invalid_guess": {
+      "cell": 408,
+      "mass_fraction_excess": 0.0001235,
+      "seeded_inert_metal_fraction": 0.0001556
+    },
+    "zero_remainder_rounding": {
+      "total_metal_fraction": 1.493e-32,
+      "relative_CN_excess": 1.833e-16
+    }
+  },
+  "changes": {
+    "guess": "If a missing species is globally present, mix the entire independent composition with its normalized mass-weighted mean. Choose one mixing fraction, at most0.01, limiting every present species increase to1%. The previous-time state is unchanged.",
+    "inert_metals": "Use the same subtraction in the physical ledger and transported vector. A negative remainder no larger than16 times double epsilon times max(total metals,CN mass) is rounding; larger discrepancies still fail. No absolute abundance floor."
+  },
+  "tests": [
+    "New normalized-guess regression fails before the correction and passes afterward.",
+    "Checks cover depleted-core fuel, absent metals, unchanged accepted abundances, zero-metal refusal and true catalyst-excess refusal at total metal fractions from1e-50 to0.1.",
+    "nuclear_cn, metal_cn_transport, metal_microscopic_evolution, metal_microscopic_face_evolution and nonlinear_metal_mixing pass."
+  ],
+  "limitations": [
+    "The single accepted interval demonstrates recovery of this stop, not a measured end-to-end speed factor.",
+    "Conditional oscillatory mixing and same-composition crystallization remain separate physical assumptions."
+  ],
+  "starting_checkpoint_sha256": "f6e7c29c88b5b6d395b48bb5d1084e7f85deaa088161ca017b06cbc6ad86c9bc",
+  "ending_checkpoint_sha256": "61653e64cef8bc36f9af1e163f49b412965fe4b1ddc4338655dc872c8ee17c0c"
+}

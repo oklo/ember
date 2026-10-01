@@ -35,6 +35,15 @@ int main() {
   check(before.hydrogen==after.hydrogen && before.helium3==after.helium3 && before.helium4==after.helium4,"material conversion preserves hydrogen and helium");
   check(before.molality==after.molality && std::abs(before.metal_fraction-after.metal_fraction)<1e-16,"material conversion preserves actual CN and total metals");
   check(explicit_cn_material(converted)==converted,"explicit composition conversion is idempotent");
+  for(double z:{1e-50,1e-32,1e-12,.1}) {
+    const CNAbundances y{z/12,0,0};
+    const double rounded_low=std::nextafter(12*y[0],0.);
+    check(cn_inert_metal_fraction(rounded_low,y)==0,"CN zero remainder tolerates one rounding step");
+    check(rejects([&]{cn_inert_metal_fraction(z*(1-1e-12),y);}),"actual CN excess remains rejected");
+    check(rejects([&]{cn_inert_metal_fraction(0,y);}),"nonzero CN cannot inhabit zero total metals");
+    const double inert=cn_inert_metal_fraction(z,CNAbundances{z/24,0,0});
+    check(std::abs(inert/z-.5)<1e-15,"positive inert-metal remainder unchanged");
+  }
   auto left=composition(.2,.1,.7,.6),right=composition(.55,.8,1.3,1.4);
   const auto midpoint=mean_composition(left,right);
   const auto physical_left=metal_cn_abundances(left),physical_right=metal_cn_abundances(right);
@@ -120,6 +129,34 @@ int main() {
     if(warm){const double e=std::abs(rest/heat-1);max_energy=std::max(max_energy,e);check(e<2e-6,"nuclear heat agrees with changing physical rest mass",e);}
     if(mode)check(current.comp.front().Z()!=model.comp.front().Z(),"total metal mass actually redistributed");
     for(auto [a,b]:regions)for(std::size_t i=a+1;i<b;++i)check(current.comp[i]==current.comp[a],"mixed composition homogeneous");
+  }
+  // Seeding absent metals in a hydrogen-rich cell must not create negative He4.
+  {auto seed_model=model;
+   auto depleted=metal_cn_abundances(seed_model.comp.front());depleted[0]=1e-8;depleted[1]=1e-14;
+   seed_model.comp.front()=metal_cn_composition(left,depleted);
+   const MetalCNVector surface{.99,.0099999,0,0,0,0,0};
+   seed_model.comp.back()=metal_cn_composition(right,surface);
+   for(auto& y:seed_model.y){y.lnT=std::log(1e4);y.lnrho=0;}
+   const MixingRegions regions{{0,1},{1,2},{2,3}};
+   double maximum_core_H=0;
+   const MetalCNFlux zero=[&](std::size_t face,const Composition& a,const Composition&,bool){
+     if(face==0)maximum_core_H=std::max(maximum_core_H,a.X[0]);return MetalCNFaceResponse{};
+   };
+   SpeciesTransportOptions options;options.seed_present_species=true;
+   try {
+     const auto result=burn_metal_cn_and_diffuse(seed_model,seed_model,nuclear,regions,zero,1.,options);
+     double error=0;
+     for(std::size_t i=0;i<seed_model.size();++i) {
+       const auto start=metal_cn_abundances(seed_model.comp[i]),next=metal_cn_abundances(result.composition[i]);
+       for(std::size_t k=0;k<METAL_CN_SIZE;++k)error=std::max(error,std::abs(next[k]-start[k]));
+       check(result.composition[i].X[2]>=0,"seeded solve preserves nonnegative helium");
+     }
+     check(error<1e-12,"positive starting guess adds no material to accepted state",error);
+     check(maximum_core_H<=1.011e-8,"starting guess does not refill depleted core hydrogen",maximum_core_H);
+   } catch(const std::exception& e) {
+     std::printf("seed regression: %s\n",e.what());
+     check(false,"positive starting guess reaches the unchanged state");
+   }
   }
   const auto path=std::filesystem::temp_directory_path()/"ember-metal-cn-checkpoint-test.restart";
   check(!std::filesystem::exists(path),"checkpoint test uses a new file");

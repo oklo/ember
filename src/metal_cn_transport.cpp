@@ -26,7 +26,7 @@ void check(const Composition& c,const Composition& reference) {
 MetalCNVector metal_cn_abundances(const Composition& c) {
   check(c,c);const auto& y=*c.cn_molality;
   const double carbon12=12*y[0],carbon13=13*y[1],nitrogen14=14*y[2];
-  return {c.X[0],c.X[1],carbon12,carbon13,nitrogen14,c.Z()-(carbon12+carbon13+nitrogen14),c[Species::H2]};
+  return {c.X[0],c.X[1],carbon12,carbon13,nitrogen14,cn_inert_metal_fraction(c.Z(),y),c[Species::H2]};
 }
 Composition metal_cn_composition(const Composition& reference,const MetalCNVector& v) {
   check(reference,reference);double total=0;
@@ -137,10 +137,23 @@ MetalCNTransportResult burn_metal_cn_and_diffuse(const Model& thermal,const Mode
     for(auto& v:current)v[METAL_CN_D]/=dunit;
   }
   if(options.seed_present_species) {
-    V mean{};std::array<bool,METAL_CN_SIZE> absent{};
-    for(std::size_t i=0;i<n;++i)for(std::size_t k=0;k<METAL_CN_SIZE;++k){mean[k]+=mass[i]*current[i][k];absent[k]|=current[i][k]==0;}
-    for(auto& v:current)for(std::size_t k=0;k<METAL_CN_SIZE;++k)
-      if(absent[k] && mean[k]>0)v[k]=.99*v[k]+.01*mean[k];
+    V mean{};std::array<bool,METAL_CN_SIZE> absent{};double weight=0;
+    for(std::size_t i=0;i<n;++i) {
+      weight+=mass[i];
+      for(std::size_t k=0;k<METAL_CN_SIZE;++k){mean[k]+=mass[i]*current[i][k];absent[k]|=current[i][k]==0;}
+    }
+    bool seed=false;
+    for(std::size_t k=0;k<METAL_CN_SIZE;++k){mean[k]/=weight;seed|=absent[k]&&mean[k]>0;}
+    double fraction=.01;
+    if(seed)for(const auto& v:current)for(std::size_t k=0;k<METAL_CN_SIZE;++k)
+      if(v[k]>0&&mean[k]>v[k])fraction=std::min(fraction,.01*(v[k]/(mean[k]-v[k])));
+    // Mix complete compositions, including the implicit He4 remainder.
+    // Adding only absent components can make their sum exceed one. This
+    // changes the Newton guess; the conserved starting state stays intact.
+    // Limit increases of present species to 1%, so the guess does not supply
+    // substantial temporary fuel to a depleted, cold core.
+    if(seed)for(auto& v:current)for(std::size_t k=0;k<METAL_CN_SIZE;++k)
+      v[k]=(1-fraction)*v[k]+fraction*mean[k];
   }
   struct Evaluation {
     std::vector<M> E,A,B;std::vector<V> residual,storage;std::vector<MetalCNFaceResponse> faces;

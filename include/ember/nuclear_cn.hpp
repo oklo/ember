@@ -68,6 +68,9 @@ struct CNPhysicalLedger {
   double rest_energy_difference{};
 };
 CNPhysicalLedger cn_physical_ledger(const Composition& lookup,const CNAbundances&);
+// Remaining metal mass after CN; allow only relative floating-point roundoff
+// when mass fractions and catalyst molalities describe the same zero remainder.
+double cn_inert_metal_fraction(double total_metals,const CNAbundances&);
 // Re-express an existing isotope inventory with actual total metal and He4
 // mass fractions. Preserves H, He3, CN numbers and inert metal mass. This is
 // an explicit material-model conversion, not an evolutionary timestep.
