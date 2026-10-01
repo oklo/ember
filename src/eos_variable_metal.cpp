@@ -421,7 +421,7 @@ std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_impl(d
       return raw_range(t,rho);
     dense_hhe_transition_validate(t,*rho,c,*cold_helium_);
     const auto a=raw_range(2e5,rho),b=raw_range(3e5,rho);
-    DensityRange d{std::max({300.,a.min,b.min}),std::min({4e3,a.max,b.max})};
+    DensityRange d{std::max({300.,a.min,b.min}),std::min({6e3,a.max,b.max})};
     if(t<=2e5 && *rho>=600.) {
       d.min=std::max(d.min,600.);
       // Join the cold component only to the connected supported table interval below it.
@@ -433,7 +433,7 @@ std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_impl(d
     } else {
       const auto r=raw_range(t,rho);d.min=std::max(d.min,r.min);d.max=std::min(d.max,r.max);
       if(std::max(a.min,b.min)<=300.)d.min=r.min;
-      if(t<=2e5 && r.max>=600.)d.max=std::min({4e3,a.max,b.max});
+      if(t<=2e5 && r.max>=600.)d.max=std::min({6e3,a.max,b.max});
     }
     return d;
   };

@@ -140,6 +140,15 @@ fully ionized layers reproduce the source at every share:
   correction by ≤ 7% and ≤ 2% of the quantum heat capacity; these are model
   comparisons, not bounds.
 
+  The helium-rich source overlap (X ≤ 0.20) extends to 6000 g/cm³,
+  Z ≤ 1e-8 and Tp,H/T ≤ 2.5, with the same 160 kK floor. This supplies
+  the warm potential wherever the cold composition overlap has nonzero
+  weight. In 27 supported source stencils, H and He remain fully ionized;
+  the ionization sensitivity is below 6.317e-10 of classical ion Cv.
+  Alternative quantum formulas differ by up to 3.505% of that Cv,
+  which is model sensitivity rather than a physical error bound.
+  [Source and overlap checks](results/dense_hhe_overlap_oct1_v1.json).
+
 In the cold helium liquid, dilute hydrogen (mass fraction ≤ 1e-3) may reach
 Tp,H/T ≤ 8 (otherwise 4). There the fitted correction is used outside its
 R_S range (R_S,H ≈ 80). Against the leading Wigner–Kirkwood term and an
@@ -231,8 +240,15 @@ act on the free energy, including its composition derivatives. The two warm
 source potentials supply the alignment described above; source values remain
 required wherever their weight is nonzero.
 
-The assessed range requires T ≥ 120 kK, density ≤ 4000 g/cm³, Z ≤ 1e-8 and
+The assessed range requires T ≥ 120 kK, density ≤ 6000 g/cm³, Z ≤ 1e-8 and
 Tp,H/T ≤ 2.5, along with the existing degeneracy and helium-ion limits.
+Both warm anchors must also be supported; above 4000 g/cm³ the quantum
+source extension requires X ≤ 0.20. Pressure inversions use this same
+density range. On 536 stellar states and five cooler projections through
+80% of their temperatures, all source and inversion checks pass; previously
+supported values are unchanged. A 100 Myr continuation crosses the former
+source boundary with five accepted steps and no rejections; the largest
+relative first-law residual is 2.745e-8, with unchanged accuracy settings.
 Direct source checks keep H and He fully ionized. Quantum prescriptions differ
 by at most 2.772% of classical ion Cv over the admitted comparison points;
 this is model sensitivity, not an error bound.

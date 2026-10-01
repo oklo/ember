@@ -53,7 +53,7 @@ void cold_helium_validate(double T,double rho,const Composition&,const ColdHeliu
 // Product of C2 temperature and hydrogen weights; zero returns the original EOS.
 double cold_helium_join_weight(double T,const Composition&,const ColdHeliumOptions& = {});
 // H/He transition: temperature weight 200--300 kK, density weight 300--600 g/cm3.
-// Valid at 120 kK or warmer, rho <= 4000, Z <= 1e-8, and T_p,H/T <= 2.5.
+// Valid at 120 kK or warmer, rho <= 6000, Z <= 1e-8, and T_p,H/T <= 2.5.
 // Both source anchors and any fractionally weighted source must remain supported.
 double dense_hhe_transition_weight(double T,double rho);
 void dense_hhe_transition_validate(double T,double rho,const Composition&,const ColdHeliumOptions&);

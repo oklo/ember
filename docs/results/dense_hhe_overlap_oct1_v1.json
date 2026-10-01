@@ -1,0 +1,102 @@
+{
+  "scope": "Extend existing fully ionized quantum correction only in helium-rich cold-source overlap: T>=160kK,rho300..6000,X<=.20,Z<=1e-8,thetaH<=2.5. Dense transition density maximum6000 with source anchors retained. No thermodynamic formula, interpolation, mixing or accuracy change.",
+  "source_commit": "2991764 plus recorded source patch",
+  "source_stencils": 39,
+  "source_CPU_seconds": 96.49019899999999,
+  "supported_stencils": 27,
+  "source_failures": [],
+  "minimum_Hplus": 0.999999999999998,
+  "minimum_He2": 1.0,
+  "maximum_quantum_Cv_ionization_sensitivity": 6.316755914108829e-10,
+  "maximum_quantum_model_spread_over_classical_ion_Cv": 0.03505335581893557,
+  "model_comparison_is_error_bound": false,
+  "profile_projections": [
+    {
+      "T_scale": 1,
+      "points": 536,
+      "failures": [],
+      "maximum_pressure_inversion_error": 3.552713678800501e-15
+    },
+    {
+      "T_scale": 0.999,
+      "points": 536,
+      "failures": [],
+      "maximum_pressure_inversion_error": 3.552713678800501e-15
+    },
+    {
+      "T_scale": 0.95,
+      "points": 536,
+      "failures": [],
+      "maximum_pressure_inversion_error": 3.552713678800501e-15
+    },
+    {
+      "T_scale": 0.9,
+      "points": 536,
+      "failures": [],
+      "maximum_pressure_inversion_error": 3.552713678800501e-15
+    },
+    {
+      "T_scale": 0.85,
+      "points": 536,
+      "failures": [],
+      "maximum_pressure_inversion_error": 3.552713678800501e-15
+    },
+    {
+      "T_scale": 0.8,
+      "points": 536,
+      "failures": [],
+      "maximum_pressure_inversion_error": 3.552713678800501e-15
+    }
+  ],
+  "maximum_previously_supported_state_change": 0,
+  "source_records_sha256": {
+    "transition_layers.json": "97df3142cec622054048319575db389cfaa8325ec10108d73c689e6dcbcf987a",
+    "dense/transition_layers.json": "42884df2b2f37e5926c00590701ebb280d6c3d5ae3f4163b64aeabb29974b91f",
+    "helium_edge/transition_layers.json": "68bf76f76bce7a7e5f640631563be0bb4ceabfb1b470e17e9051f85f5d4f48b9"
+  },
+  "regression_tests": [
+    "ion_quantum",
+    "cold_helium_base with full production family"
+  ],
+  "stellar_continuation": {
+    "status": 0,
+    "CPU_seconds": 129.32826699999998,
+    "wall_seconds": 74.64667220879346,
+    "report": {
+      "requested_age_reached": 1,
+      "age_years": 3880663395909.68,
+      "accepted_this_invocation": 5,
+      "accepted_total": 3550,
+      "rejected_total": 1425,
+      "stop_reason": "requested age",
+      "cpu_seconds": 129.289619,
+      "wall_seconds": 74.415413042,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "stellar_summary": {
+    "interval_years": 100000000.0,
+    "accepted": 5,
+    "rejected": 0,
+    "max_error_norm": 0.01979016061470773,
+    "max_abs_first_law": 2.745469729337202e-08,
+    "max_abs_species_error": 3.5766075684341066e-18,
+    "final_Teff_K": 1236.383002410345,
+    "final_central_T_K": 415899.7689900429,
+    "accuracy_settings_changed": false
+  },
+  "tests": {
+    "ion_quantum": "pass",
+    "cold_helium_base": "pass with production family; derivative and inversion checks included"
+  },
+  "controls": {
+    "exact_cache_probe": "Stopped by species Newton correction floor; not an accuracy comparison.",
+    "temporary_structure_tolerance_probe": "Exposed source-domain edge; discarded. No tolerance change adopted."
+  },
+  "data": {
+    "family_sha256": "aca70d6ac4950e7f482ad90f03705b32a577970659dbf990e3670a999f262738",
+    "checkpoint_sha256": "c2ddf8910e73cc6f6004349ddca5fc6604cebfba733fcf56151a4145af577341",
+    "executable_sha256": "76663e3a81b1b1b52e7eed861f49e8b717635f83c6b5b6ca777cfeb94cc83e5b"
+  }
+}

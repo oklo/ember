@@ -196,9 +196,16 @@ int main(){
      for(auto [T,r]:{std::pair{3.1e5,800.},std::pair{1.5e5,200.}})
        check(joined.material_jets(T,r,hydrogen,10)==core.material_jets(T,r,hydrogen,10),
            "dense transition preserves zero-weight source states",0);
-     for(auto [T,r,z]:{std::tuple{1.19e5,800.,1e-10},std::tuple{1.5e5,4100.,1e-10},std::tuple{1.5e5,800.,2e-8}}) {
+     for(auto [T,r,z]:{std::tuple{1.19e5,800.,1e-10},std::tuple{1.5e5,6100.,1e-10},std::tuple{1.5e5,800.,2e-8}}) {
        bool refused=false;try{joined.eval(T,r,comp(.99,.005,z));}catch(const std::domain_error&){refused=true;}
        check(refused,"dense transition physical domain refusal",T);
+     }
+     for(auto [T,r]:{std::pair{3.653e5,4329.},std::pair{2.9e5,5990.},std::pair{1.5e5,4300.}}) {
+       const auto mixture=comp(.00514,.0001625,5e-10);
+       const auto s=joined.eval(T,r,mixture);
+       const auto recovered=joined.rho_from_PT(T,s.P,mixture,r*1.001);
+       check(std::abs(recovered/r-1)<1e-9 && s.cv>0 && s.chiRho>0,
+             "dense overlap source and cold potential have common coverage",recovered/r-1);
      }
     }
   } else std::cout<<"join checks skipped (EMBER_COLD_HELIUM_FAMILY not set)\n";

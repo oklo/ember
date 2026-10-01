@@ -422,7 +422,7 @@ int lifetime_main(int argc,char** argv) {
     if(solid_mobility>=0)identity.number("transport.solid_ion_mobility_fraction",solid_mobility);
     identity.family("eos",eos_path,true);
     if(ion_quantum=="liquid_bc22")
-      identity.values["eos.ion_quantum"]="bc22.liquid.common_ne.linear_mixture.full_expression.v8";
+      identity.values["eos.ion_quantum"]="bc22.liquid.common_ne.linear_mixture.full_expression.v9";
     if(cold_helium_options)identity.values["eos.cold_helium"]=cold_helium_options->mixture_phase?
         VariableMetalHelmholtzEos::cold_helium_phase_identifier:VariableMetalHelmholtzEos::cold_helium_identifier;
     if(cold_helium_options && cold_helium_options->liquid_continuation_gamma>0.)

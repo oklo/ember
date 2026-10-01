@@ -52,7 +52,7 @@ class VariableMetalHelmholtzEos final : public Eos {
   static constexpr const char* cold_helium_phase_identifier=
       "cold_helium.mixture_softmin.same_composition.common_liquid.width0.005.full_anchor.bc22_linear.X005_200.v3";
   static constexpr const char* dense_transition_identifier=
-      "dense_hhe.liquid.bc22.T200_300.rho300_600.full_anchor.v1";
+      "dense_hhe.liquid.bc22.T200_300.rho300_600.full_anchor.v2";
   // Convert a text family and its planes to one relocatable binary input.
   // Stored doubles, masks and logarithmic coordinates remain bit-identical.
   static void pack_binary(const std::filesystem::path& source,const std::filesystem::path& destination);

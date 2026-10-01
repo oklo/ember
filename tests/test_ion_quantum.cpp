@@ -128,7 +128,7 @@ int main() {
   const auto warm_dense_m=ion_quantum_liquid_jets(250000*std::exp(-h),350,dense_h,1)[0];
   check(warm_dense[0][0]>0 && std::abs((warm_dense_p[0][0]-warm_dense_m[0][0])/(2*h)/warm_dense[1][0]-1)<2e-7,
         "denser pressure-ionized hydrogen retains the free-energy derivative");
-  refused=false;try{(void)ion_quantum_liquid_jets(299000,4001,mixture(.3,.001,0));}
+  refused=false;try{(void)ion_quantum_liquid_jets(299000,6001,mixture(.3,.001,0));}
   catch(const std::domain_error&){refused=true;}
   check(refused,"dense H/He mixture retains its upper density boundary");
   refused=false;try{(void)ion_quantum_liquid_jets(159999,1001,envelope_h);}
@@ -148,7 +148,7 @@ int main() {
   }
   for(auto state:{std::array<double,3>{34999,10,.99},
                   std::array<double,3>{150000,1001,.99},
-                  std::array<double,3>{299000,4001,.99},
+                  std::array<double,3>{299000,6001,.99},
                   std::array<double,3>{40000,120,.99},
                   std::array<double,3>{48000,10,.94}}) {
     refused=false;
@@ -182,6 +182,26 @@ int main() {
   refused=false;try{(void)ion_quantum_liquid_jets(159999,3300,mixture(.01,.0005,0));}
   catch(const std::domain_error&){refused=true;}
   check(refused,"dense H/He mixture retains its 160 kK floor");
+  // A fractional cold EOS overlap still evaluates its warm source. These
+  // layers crossed the old quantum limit despite their full ionization.
+  for(auto state:{std::array<double,3>{365300,4329,.00514},
+                  std::array<double,3>{200000,6000,.10},
+                  std::array<double,3>{300000,6000,.20}}) {
+    const auto material=mixture(state[2],.0001625,5e-10);
+    const auto q=ion_quantum_liquid_jets(state[0],state[1],material,1)[0];
+    const auto p=ion_quantum_liquid_jets(state[0]*std::exp(h),state[1],material,1)[0];
+    const auto m=ion_quantum_liquid_jets(state[0]*std::exp(-h),state[1],material,1)[0];
+    check(q[0][0]>0 && std::abs((p[0][0]-m[0][0])/(2*h)/q[1][0]-1)<2e-7,
+          "dense overlap source retains its free-energy derivative");
+  }
+  for(auto state:{std::array<double,4>{200000,6000,.1,2e-8},
+                  std::array<double,4>{160000,6000,.20,0},
+                  std::array<double,4>{200000,6000,.21,0}}) {
+    refused=false;
+    try{(void)ion_quantum_liquid_jets(state[0],state[1],mixture(state[2],.0001,state[3]));}
+    catch(const std::domain_error&){refused=true;}
+    check(refused,"dense overlap keeps its metal and quantum limits");
+  }
   // Actual envelope states beyond the former limits (1225 K profile scaled to T x 0.68-0.4): the most
   // quantum, densest, coolest and most helium-rich hydrogen layers, and the H/He transition.
   for(auto state:{std::array<double,4>{123392,681.001,.994238,.00262601},std::array<double,4>{193407,922.349,.954325,.0340519},

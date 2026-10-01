@@ -105,15 +105,20 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   // mantle and the H/He transition) from 160 to 300 kK.
   const bool dense_mixture=T>=1.6e5 && rho>=300 && rho<=4000 && thetaH<=1.85 &&
       c.Z()<=1e-10;
+  // The helium-dominated cold overlap still requires its warm source and
+  // anchors. Direct source checks retain full ionization in this interval.
+  const bool dense_helium_overlap=T>=1.6e5 && rho>=300 && rho<=6000
+      && c.X[0]<=.20 && c.Z()<=1e-8 && thetaH<=2.5;
   // The liquid mixture does not determine metal separation or freezing;
   // the mean-coupling guard below is not a mixture phase boundary.
   const bool assessed_core=T>=5e5 && rho>=1e3 && rho<=1e5 && c.X[0]<=.05 && c.Z()<=.16;
   // Cooler, nearly pure helium layers remain pressure ionized in direct
   // source checks. This does not extend the metal-rich core's phase range.
   const bool cool_helium=T>=4e5 && rho>=1e3 && rho<=1e5 && c.X[0]<=.01 && c.Z()<=1e-3;
-  const double theta_limit=(assessed_core || cool_helium)?4.:dense_mixture?1.85:cold_hydrogen?1.7:1.;
+  const double theta_limit=(assessed_core || cool_helium)?4.:dense_helium_overlap?2.5:dense_mixture?1.85:cold_hydrogen?1.7:1.;
   if(thetaH>theta_limit ||
-      (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen && !cold_hydrogen && !dense_mixture)) {
+      (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen && !cold_hydrogen
+          && !dense_mixture && !dense_helium_overlap)) {
     std::ostringstream message;
     message << std::setprecision(4) << "quantum ion EOS: outside assessed ionization/quantum range"
       << " (T=" << T << ", rho=" << rho << ", X=" << c.X[0]
