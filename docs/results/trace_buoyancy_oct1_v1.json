@@ -1,0 +1,28 @@
+{
+  "change": "Resolve tiny buoyancy contrasts from fixed-pressure EOS composition derivatives.",
+  "stable_faces": 154,
+  "old_false_refusals": 11,
+  "new_false_refusals": 0,
+  "resolved_negative_controls": 2,
+  "tests_passed": [
+    "fingering_face",
+    "fingering",
+    "ledoux",
+    "convection"
+  ],
+  "stellar_comparison": {
+    "clean": {
+      "CPU_seconds": 1227.4,
+      "accepted_intervals": 0,
+      "advanced_Myr": 0.0,
+      "stop_reason": "repeated step rejection: evolve_step: Newton iteration limit reached: residual=3.016e-08, correction=3.496e-08, last damping=0.007812, last rejected trial: residual did not decrease"
+    },
+    "response": {
+      "CPU_seconds": 1234.6,
+      "accepted_intervals": 3,
+      "advanced_Myr": 16.6,
+      "stop_reason": "CPU budget"
+    }
+  },
+  "scope": "The stellar comparison used diagnostic logging before the final zero-metal active-field correction. Physical ranges, abundances, conservation and solve tolerances are unchanged. Other opacity and Newton retries remain. The native regression requires separately supplied EOS and collision tables and reports skipped if absent."
+}

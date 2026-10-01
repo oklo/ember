@@ -75,7 +75,28 @@ BrownFingeringTransport::Face BrownFingeringTransport::face(std::size_t index,
   if(c.basis!=AbundanceBasis::baryon_mass || c.metal_inventory!=MetalInventory::gs98
       || c[Species::H2]!=0 || c.Z()>1e-6 || !(c.X[0]>0 && c.X[1]>0 && c.X[2]>0)
       || rho<300 || T<1.2e5) {
-    if(B<0)throw std::domain_error("fingering coefficients require cold dense baryonic H/He liquid with negligible metals");
+    if(B<0) {
+      // Tiny composition contrasts can be smaller than the error in two
+      // separate density inversions. Resolve their sign from the EOS response
+      // at fixed pressure; a negative result still requires supported mixing.
+      const std::array<double,3> dx{b.X[0]-a.X[0],b.X[1]-a.X[1],b.Z()-a.Z()};
+      if(c.basis==AbundanceBasis::baryon_mass && c.metal_inventory==MetalInventory::gs98
+          && c[Species::H2]==0 && c.Z()<=1e-6 && c.X[0]>.999
+          && std::max({std::abs(dx[0]),std::abs(dx[1]),std::abs(dx[2])})
+             <std::sqrt(std::numeric_limits<double>::epsilon())) {
+        const double rp=eos_.rho_from_PT(T,P,c,rho);
+        const auto response=eos_.isobaric_composition_response(T,rp,c,{c.X[0]>0,c.X[1]>0,c.Z()>0});
+        double contrast=0;
+        for(unsigned j=0;j<3;++j)if(dx[j]!=0)
+          contrast=std::fma(response.dlnRho[j],dx[j],contrast);
+        const double resolved=contrast/(delta*dp);
+        if(resolved>=0) {
+          result.density_ratio=resolved==0?std::numeric_limits<double>::infinity():(ad-grad)/(-resolved);
+          return result;
+        }
+      }
+      throw std::domain_error("fingering coefficients require cold dense baryonic H/He liquid with negligible metals");
+    }
     return result; // no multicomponent prescription is supplied outside this material domain
   }
   const double rp=eos_.rho_from_PT(T,P,c,rho);
