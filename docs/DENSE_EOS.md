@@ -263,6 +263,19 @@ dependence carries model differences below the join, including differences
 in chemical forces. The cold heat capacity is retained. All resulting thermal
 and composition derivatives enter transport and energy accounting.
 
+The alignment adds entropy `-a` and energy `b`. Its density dependence can
+produce a thermal pressure proportional to temperature even in a cold crystal;
+the warm match does not establish the zero-temperature limit. At pure-helium
+density 5e4 g/cm³ and 500–800 kK, direct FreeEOS and the cold model differ in
+physical entropy by 0.4678–0.5291 k per ion, mainly through their Coulomb terms.
+[Component checks](results/cold_entropy_oct1_v1.json).
+
+Compare physical potentials consistently: `material_jets()` omits the analytic
+ionic composition term restored by `eval()`. Its entropy alone is therefore
+not the physical entropy. The extreme-cold join must also retain consistent
+thermal and composition derivatives; deleting the entire alignment entropy
+is not an assessed continuation into the solid.
+
 The composition overlap is broad enough to avoid artificial separation from
 curvature of the joining weight. In 2066 supported H/He3 queries, the chemical
 potential matrix at fixed temperature and pressure is positive definite; its

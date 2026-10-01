@@ -83,8 +83,9 @@ class VariableMetalHelmholtzEos final : public Eos {
   // Source support for all composition derivative channels, without
   // evaluating the free-energy polynomial (used by optional response reuse).
   void validate_composition_domain(double T,double rho,const Composition&) const;
-  // Material F/T jets (radiation excluded) of the same potential used by eval(); exposed so that an
-  // external component can be joined to this table at the potential level.
+  // Material F/T jets before restoring analytic ionic composition terms and radiation.
+  // eval() restores both; -phi-dphi/dlnT here alone is not the physical entropy.
+  // Exposed for joining external components using the same potential convention.
   std::array<HelmholtzJet,10> material_jets(double T,double rho,const Composition& c,std::size_t channels) const {
     return jets(T,rho,c,channels);
   }
