@@ -42,8 +42,11 @@ void check_domain(double T,double rho,const Composition& c,std::size_t channels,
   if(!(constants::kB*T/eF<=o.maximum_electron_temperature_ratio))fail("electrons not degenerate enough for the Sommerfeld form");
   for(const double A:{3.,4.}){const auto p=io::plasma(std::log(T),logne,A,2.);
     if(!(p.rsi>=500&&p.rsi<=1.2e5&&p.tpt<=30))fail("He isotope outside the Baiko-Chugunov fitted quantum domain");}
+  const double hydrogen_limit=o.mixture_phase&&X<=o.ultratrace_hydrogen?
+      o.maximum_ultratrace_hydrogen_quantum:
+      (X<=o.trace_hydrogen?o.maximum_trace_hydrogen_quantum:o.maximum_hydrogen_quantum);
   if((X>0||channels>1)
-      &&!(io::plasma(std::log(T),logne,1.,1.).tpt<=(X<=o.trace_hydrogen?o.maximum_trace_hydrogen_quantum:o.maximum_hydrogen_quantum)))
+      &&!(io::plasma(std::log(T),logne,1.,1.).tpt<=hydrogen_limit))
     fail("hydrogen quantum parameter beyond the production limit");
   {   // helium host coupling; the trace-metal mean coupling is not a phase criterion (docs/DENSE_EOS.md)
     const double rs=std::exp((std::log(3/(4*pi))-logne)/3)/io::bohr;
@@ -92,7 +95,7 @@ double dense_hhe_transition_weight(double T,double rho) {
       *(1-falling(std::log(rho),std::log(300.),std::log(600.))[0]);
 }
 void dense_hhe_transition_validate(double T,double rho,const Composition& c,const ColdHeliumOptions& source) {
-  if(!(T>=1.2e5&&rho<=6e3&&c.Z()<=1e-8))fail("outside assessed dense H/He transition range");
+  if(!(T>=1e5&&rho<=6e3&&c.Z()<=1e-8))fail("outside assessed dense H/He transition range");
   const auto o=transition_options(source);
   for(double t:{T,o.join_cold,o.join_hot})cold_helium_validate(t,rho,c,o);
 }

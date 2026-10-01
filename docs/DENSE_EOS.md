@@ -164,6 +164,18 @@ cross the helium-liquid limit and are excluded. These comparisons bound the
 observed model spread, not the physical error. The heat-capacity contribution
 scales with the hydrogen fraction (at most about 0.001 of local Cv).
 [Trace-hydrogen checks](results/trace_hydrogen_quantum_sept30_v1.json).
+With the optional mixture phase model, material with X ≤ 1e-6 supports
+Tp,H/T ≤ 12. This retains the same free energy and its derivatives. On a
+784.5 K model and cooler temperature projections, replacing the proton quantum
+term by an Einstein form changes local Cv by at most 1.613e-6 fractionally.
+Removing or doubling the proton phase difference changes Cv by at most
+8.737e-5 and the largest carried-heat flux by 3.307e-6 of the reference
+surface luminosity. The hydrogen flux can change by 5.411%; its small mass
+fraction alone does not establish an accurate diffusion force. These are
+model sensitivities, not a calibration of quantum impurities or element
+separation. Both phase branches receive the same Einstein correction;
+the phase-difference variations are separate controls.
+[Cold trace-H checks](results/cold_trace_hydrogen_oct1_v1.json).
 The R_S sensitivity of the hydrogen chemical potential is about 0.01 kT
 (rising to 0.025 kT in colder projections).
 [Source and stellar checks](results/quantum_dense_mixture_sept30_v1.json).
@@ -240,8 +252,13 @@ act on the free energy, including its composition derivatives. The two warm
 source potentials supply the alignment described above; source values remain
 required wherever their weight is nonzero.
 
-The assessed range requires T ≥ 120 kK, density ≤ 6000 g/cm³, Z ≤ 1e-8 and
+The assessed range requires T ≥ 100 kK, density ≤ 6000 g/cm³, Z ≤ 1e-8 and
 Tp,H/T ≤ 2.5, along with the existing degeneracy and helium-ion limits.
+Direct source checks at 100–120 kK retain ionized H and He in the sampled
+transition layers; the quantum-Cv sensitivity to ionization is below
+5.643e-9 of classical ion Cv. Alternative quantum formulas differ by up to
+3.648% of that Cv. This is a model spread, not an error bound. Colder
+envelope source gaps remain unsupported.
 Both warm anchors must also be supported; above 4000 g/cm³ the quantum
 source extension requires X ≤ 0.20. Pressure inversions use this same
 density range. On 536 stellar states and five cooler projections through

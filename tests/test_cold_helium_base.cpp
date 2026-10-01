@@ -149,7 +149,8 @@ int main(){
          "dense H/He extension preserves the selected helium core",0);
      const auto hydrogen=comp(.9855,.005,5e-9);
      double derivative=0,inversion=0;
-     for(double T:{1.5e5,2.4e5,3.1e5})for(double r:{350.,450.,550.,800.}) {
+     for(double T:{1.1e5,1.5e5,2.4e5,3.1e5})for(double r:{350.,450.,550.,800.}) {
+       if(T<1.2e5&&r<600)continue; // partial source weights still require the tabulated source
        const auto a=joined.material_jets(T,r,hydrogen,10);const double h=2e-5;
        for(unsigned coordinate=0;coordinate<2;++coordinate) {
          const double tp=coordinate==0?T*std::exp(h):T,tm=coordinate==0?T*std::exp(-h):T;
@@ -196,7 +197,7 @@ int main(){
      for(auto [T,r]:{std::pair{3.1e5,800.},std::pair{1.5e5,200.}})
        check(joined.material_jets(T,r,hydrogen,10)==core.material_jets(T,r,hydrogen,10),
            "dense transition preserves zero-weight source states",0);
-     for(auto [T,r,z]:{std::tuple{1.19e5,800.,1e-10},std::tuple{1.5e5,6100.,1e-10},std::tuple{1.5e5,800.,2e-8}}) {
+     for(auto [T,r,z]:{std::tuple{9.99e4,800.,1e-10},std::tuple{1.5e5,6100.,1e-10},std::tuple{1.5e5,800.,2e-8}}) {
        bool refused=false;try{joined.eval(T,r,comp(.99,.005,z));}catch(const std::domain_error&){refused=true;}
        check(refused,"dense transition physical domain refusal",T);
      }
@@ -227,6 +228,24 @@ int main(){
     check(std::isfinite(cold_helium_material_jets(1.69e5,5.03e4,comp(0,1e-14,.13),1)[0][0][0]),"helium coupling 125 supported",0);}
    const auto j=cold_helium_material_jets(3.02e5,5e4,comp(3e-8,1e-14,.13),10);
    check(std::isfinite(j[1][0][0]+j[4][0][0]),"trace-hydrogen composition channels finite",0);}
+  {ColdHeliumOptions phase;phase.mixture_phase=true;phase.liquid_continuation_gamma=200;
+   const auto c=comp(1e-6,1e-14,.13);const double T=1.1e5,rho=5e4,h=2e-5;
+   const auto j=cold_helium_material_jets(T,rho,c,10,phase);
+   const auto plus=cold_helium_material_jets(T*std::exp(h),rho,c,10,phase);
+   const auto minus=cold_helium_material_jets(T*std::exp(-h),rho,c,10,phase);
+   double error=0;
+   for(unsigned k=0;k<10;++k)for(unsigned i=0;i+1+(k==0?0:k<4?1:2)<=3;++i) {
+     const double exact=j[k][i+1][0],fd=(plus[k][i][0]-minus[k][i][0])/(2*h);
+     error=std::max(error,std::abs(fd-exact)/(constants::R_gas+std::abs(exact)));
+   }
+   check(error<1e-5,"colder trace-H thermal and composition derivatives",error);
+   check(helmholtz_response(T,rho,j[0]).state.cv>0,"colder trace-H heat capacity positive",0);
+   for(auto [t,x]:{std::pair{T,1.01e-6},std::pair{1e5,1e-8}}) {
+     bool refused=false;try{cold_helium_validate(t,rho,comp(x,1e-14,.13),phase);}
+     catch(const std::domain_error& e){refused=std::string(e.what()).find("hydrogen quantum")!=std::string::npos;}
+     check(refused,"colder trace-H domain remains bounded",t);
+   }
+  }
   std::cout<<"cold helium base: failures "<<failures<<'\n';
   return failures?1:0;
 }

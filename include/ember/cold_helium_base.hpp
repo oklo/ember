@@ -22,6 +22,8 @@ struct ColdHeliumOptions {
   // quantum model spread changes the native diffusion force by <=3.8e-3 (99th percentile)
   // and the local heat capacity by ~X (docs/DENSE_EOS.md).
   double trace_hydrogen=1e-3,maximum_trace_hydrogen_quantum=8;
+  // Further dilute-H range assessed with the optional mixture phase model.
+  double ultratrace_hydrogen=1e-6,maximum_ultratrace_hydrogen_quantum=12;
   double join_cold=5e5,join_hot=8e5;
   // The narrow X=0.01--0.05 overlap introduces a non-convex composition
   // potential between the differently aligned sources. This broader overlap
@@ -53,7 +55,7 @@ void cold_helium_validate(double T,double rho,const Composition&,const ColdHeliu
 // Product of C2 temperature and hydrogen weights; zero returns the original EOS.
 double cold_helium_join_weight(double T,const Composition&,const ColdHeliumOptions& = {});
 // H/He transition: temperature weight 200--300 kK, density weight 300--600 g/cm3.
-// Valid at 120 kK or warmer, rho <= 6000, Z <= 1e-8, and T_p,H/T <= 2.5.
+// Valid at 100 kK or warmer, rho <= 6000, Z <= 1e-8, and T_p,H/T <= 2.5.
 // Both source anchors and any fractionally weighted source must remain supported.
 double dense_hhe_transition_weight(double T,double rho);
 void dense_hhe_transition_validate(double T,double rho,const Composition&,const ColdHeliumOptions&);
