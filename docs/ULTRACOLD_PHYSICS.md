@@ -82,15 +82,26 @@ Its energy deposition still requires a spectrum and plasma assessment.
 At lower temperatures, calculate whether the actual pressure-temperature
 profile permits gas, liquid or solid hydrogen and helium. Include latent heat,
 available material, vapor opacity and conduction through any solid cover.
-Laboratory hydrogen thermodynamics provide a starting point within their
-stated pressure and temperature range, not a complete remnant envelope.
-[Leachman et al. (2009)](https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=832374).
+Laboratory hydrogen thermodynamics and a measured-data fit for H2/He fluid
+mixtures provide starting points within their stated ranges. Check mixture
+phase separation and dissolved helium; pure-fluid melting curves alone do
+not establish the layers. Neither source covers the whole remnant envelope.
+[Leachman et al. (2009)](https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=832374),
+[Beckmüller et al. (2024)](https://doi.org/10.1016/j.cryogenics.2024.103817).
 
 Test hydrogen oceans, exposed helium liquid and liquid beneath a floating
 solid cover as distinct possibilities. A proposed helium layer above hydrogen
 ice needs a buoyancy and deformation assessment. Also evaluate isotope
 partition, helium superfluidity and hydrogen ortho/para conversion where they
 change the heat capacity, transport or finite energy inventory.
+
+Pressure can restrict a liquid layer to a small depth. For an exposed,
+isothermal pure-helium-4 surface at 1 K and gravity 3.059e6 cm/s², the
+2.535 MPa melting pressure permits a liquid column of 8.286 g/cm², at most
+57.07 cm deep using the saturated liquid density. A temperature gradient,
+mixed composition or overlying ice changes this estimate; it establishes
+neither an ocean in the present H-covered star nor its duration.
+[Arp et al., NIST TN 1334](https://nvlpubs.nist.gov/nistpubs/Legacy/TN/nbstechnicalnote1334.pdf).
 
 Use physical surface temperature to determine phases. Converting luminosity
 to that temperature requires the emissivity of the layered surface and its
@@ -249,12 +260,19 @@ environmental effects above.
 
 ## Order of implementation and evidence
 
-First resolve the current density coverage, finish atmosphere acceptance and
-continue hydrogen exhaustion. Develop diffusion and coupled grain chemistry
-before their effects become important along the track. Validate solid and
-partially ionized matter in the regions the cooling star actually visits.
-Then evaluate nuclear and external heating against its calculated luminosity,
-using bounds to identify which detailed calculations are necessary.
+Extend the cold EOS, atmosphere and transport over the states reached by the
+cooling calculation. In parallel, compare crystallization and separation energy,
+radioactive and residual nuclear heat, and environmental heating with the
+photon luminosity. Keep finite fuel reservoirs and episodic events distinct
+from sustained power.
+
+Before predicting oceans or their lifetimes, solve hydrostatic and thermal
+balance through the condensed surface and its vapor, using the available
+H/He/isotope inventory. Compare mixing, freezing, settling and thermal
+relaxation times with the cooling time. An effect needs more detail when it
+changes the cooling age, layer composition or order of phase transitions;
+a useful bound is sufficient when it cannot. Do this above any assumed
+nucleon-decay heating level, retaining a stable-baryon alternative.
 
 For each result, keep numerical error, uncertainty in material properties and
 assumptions about the future environment explicit. Report families of cooling
