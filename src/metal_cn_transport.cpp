@@ -292,8 +292,10 @@ MetalCNTransportResult burn_metal_cn_and_diffuse(const Model& thermal,const Mode
         } catch(const std::domain_error& e){last_rejection=e.what();}
       }
     };
-    search(correction);
-    if(!accepted || accepted_damping<.125) {
+    // Try the positivity-limited direction first. A trace species can make
+    // the ordinary Newton step inadmissible while other species need its
+    // full correction. The final equations and acceptance bounds are unchanged.
+    {
       auto limited=correction;bool changed=false;
       for(std::size_t i=0;i<n;++i) {
         double positive=0,negative=0;
@@ -310,6 +312,7 @@ MetalCNTransportResult burn_metal_cn_and_diffuse(const Model& thermal,const Mode
       }
       if(changed)search(limited);
     }
+    if(!accepted || accepted_damping<.125)search(correction);
     if(!accepted) {
       std::ostringstream error;error<<std::setprecision(4)<<"CN diffusion: line search failed at iteration "<<iteration
         <<", correction "<<change<<", balance "<<measure(state.balance)<<", last rejection "<<last_rejection;

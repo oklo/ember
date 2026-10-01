@@ -1,0 +1,66 @@
+{
+  "accepted_age_years": 3923147592806.223,
+  "globals_relative": {
+    "Teff_K": 8.881784197001252e-16,
+    "radius_Rsun": 0.0,
+    "luminosity_Lsun": 3.9968028886505635e-15,
+    "central_T_K": 0.0,
+    "central_density_g_cm3": 0.0,
+    "H_mass_g": 2.220446049250313e-16,
+    "He3_mass_g": 4.440892098500626e-16,
+    "He3_peak": 2.220446049250313e-16
+  },
+  "maximum_log_structure_difference": 2.3092638912203256e-14,
+  "luminosity_profile_relative": 9.818047379021251e-13,
+  "maximum_composition_difference": 2.5222272018079594e-14,
+  "convective_mass_difference": 0.0,
+  "boundary_counts": [
+    505,
+    505
+  ],
+  "CPU_seconds": [
+    302.859345,
+    255.336853
+  ],
+  "wall_seconds": [
+    173.69890741538256,
+    148.40704283304513
+  ],
+  "scope": "Same73.06Myr fully checked interval from686.5K; two threads, exact same initial state/tables, different Newton line-search order only. Both private binaries include identical bounded diagnostics. Scientific comparison rather than byte identity; does not establish a cure for all singular-pivot/negative-He4 failures.",
+  "regressions": {
+    "metal_cn_transport_checks": 542,
+    "failures": 0,
+    "evolution_variants": [
+      "nodes",
+      "faces",
+      "nonlinear mixing",
+      "finite convection",
+      "lagged finite convection"
+    ]
+  },
+  "species_solves": [
+    48,
+    48
+  ],
+  "Newton_iterations": [
+    106,
+    98
+  ],
+  "recorded_composition_rejections": [
+    24,
+    0
+  ],
+  "rejection_logging_limit": 24,
+  "maximum_first_law_error": [
+    8.757924607749601e-09,
+    8.750102420407302e-09
+  ],
+  "maximum_species_balance_error": [
+    1.867128779945458e-18,
+    1.8720174241814025e-18
+  ],
+  "integrated_build_regressions": {
+    "passed": 6,
+    "failed": 0
+  }
+}
