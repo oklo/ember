@@ -161,14 +161,15 @@ void check_mixture(double T,double rho,const Composition& c,std::size_t channels
   if(c.basis!=AbundanceBasis::baryon_mass||c.metal_inventory!=MetalInventory::gs98||c[Species::H2]!=0)
     throw std::domain_error("mixture phase: requires baryonic GS98 material after D mapping");
 }
-MixtureTerms mixture_terms(double T,double rho,const Composition& c,const MixturePhaseOptions& o) {
+MixtureTerms mixture_terms(double T,double rho,const Composition& c,const MixturePhaseOptions& o,
+    bool evaluate_solid=false) {
   const J5 xh=J5::variable(c.X[0],2),x3=J5::variable(c.X[1],3),xz=J5::variable(c.Z(),4);
   const J5 x4=1-xh-x3-xz;
   const double Ye=c.X[0]+(2./3)*c.X[1]+.5*c.X[2]+gs98_ion_moment(1)*c.Z();
   const double logT=std::log(T),logne=std::log(rho*Ye/constants::amu);
   const double gamma_he=detail::ioffe::plasma(logT,logne,4.,2.).gami;
   J5 D(0);
-  if(gamma_he>=o.minimum_solid_gamma) {
+  if(gamma_he>=o.minimum_solid_gamma || evaluate_solid) {
     for(const double A:{3.,4.}) {
       const auto p=detail::ioffe::plasma(logT,logne,A,2.);
       if(p.rsi<500||p.rsi>1.2e5||p.tpt>30) {
@@ -238,9 +239,14 @@ std::array<HelmholtzJet,10> ion_mixture_phase_difference_jets(
   std::array<HelmholtzJet,10> out{};
   if(m.gamma_he<o.minimum_solid_gamma)return out;   // liquid; the forced-solid formula re-crosses spuriously below
   const J5 y=m.D/m.W;
-  // The coupling cut and the hydrogen limit must be invisible: negligible solid weight near/beyond them.
-  if(m.gamma_he<o.minimum_solid_gamma+10&&y.value()<20)
-    throw std::domain_error("mixture phase: solid weight not negligible near the helium Gamma cut");
+  // Check the omitted branch at the actual cut, at fixed density and composition.
+  // Its physical tail can grow above that cut: requiring y > 20 throughout
+  // the next ten units of Gamma rejects continuous cooling before freezing.
+  if(m.gamma_he<o.minimum_solid_gamma+10) {
+    const auto cut=mixture_terms(T*m.gamma_he/o.minimum_solid_gamma,rho,c,o,true);
+    if(cut.D.value()/cut.W.value()<20)
+      throw std::domain_error("mixture phase: solid weight not negligible at the helium Gamma cut");
+  }
   if(c.X[0]>o.trace_hydrogen&&y.value()<20) {
     std::ostringstream s;s<<std::setprecision(4)<<"mixture phase: hydrogen "<<c.X[0]
       <<" beyond the trace limit where the solid solution is not negligible (D/W="<<y.value()<<')';

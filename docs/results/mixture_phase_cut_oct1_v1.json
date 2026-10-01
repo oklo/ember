@@ -1,0 +1,81 @@
+{
+  "UTC": "2026-10-01T03:44:19.343859+00:00",
+  "scope": "Correct the domain check for the same-composition mixture phase option. Liquid/solid free energies, Gamma90 cut, width and acceptance tolerances are unchanged.",
+  "cause": "The former check demanded D/W>=20 throughout Gamma90\u2013100, stopping the physical increasing solid tail after a valid cut. The corrected check measures separation at Gamma90 at fixed density and composition.",
+  "trigger": {
+    "zone": 0,
+    "q": 1.2271117760506058e-10,
+    "actual": true,
+    "rho": 50587.61258562308,
+    "T": 229024.59079063823,
+    "Z": 0.1352987172172636,
+    "X": 2.1897050059330122e-08,
+    "gamma": 92.53431466974301,
+    "weight": 2.0611416066151436e-09,
+    "D_over_W": 20.000005827615166
+  },
+  "at_actual_cut": {
+    "zone": 0,
+    "q": 1.2271117760506058e-10,
+    "actual": false,
+    "rho": 50587.61258562308,
+    "T": 235473.70612588938,
+    "Z": 0.1352987172172636,
+    "X": 2.1897050059330122e-08,
+    "gamma": 90,
+    "weight": 5.32507398288817e-10,
+    "D_over_W": 21.35342432440885
+  },
+  "native_tests": {
+    "test_mixture_phase": "pass",
+    "test_phase_mobility": "pass",
+    "new_regression": "Gamma90.001\u2013120 at the metal-enriched core composition gives identical potential derivatives to a lower-cut evaluation. A bad cutoff remains rejected; boundary free energy and heat are negligible.",
+    "thermal_heat_integral_and_composition_derivatives": "existing mixture-phase tests pass"
+  },
+  "stellar_step": {
+    "passed": true,
+    "parent_sha256": "436c53d350cfd723c8b69b21b829a3ecf9f5a9099775ab2fe9d4c8635e932a19",
+    "executable_sha256": "c70a5af317241fb791634f78ac964f1ff457aeccd730b7add2def25aa51e850a",
+    "step_years": 10000000.0,
+    "result": {
+      "start_years": 3896521689378.941,
+      "step_years": 10000000,
+      "converged": 1,
+      "audit_pass": 1,
+      "accepted": 1,
+      "error_norm": 0.00016442225247992326,
+      "message": "converged",
+      "species_error": [
+        2.59366377928634e-19,
+        3.1513176861397397e-19,
+        1.101415214823743e-18
+      ],
+      "mass_error_surface": [
+        -5.219687809536737e-11,
+        -4.4822170753990757e-10,
+        -1.0728156848810243e-10
+      ],
+      "first_law": [
+        2.4204638293667813e-10,
+        2.016897759915537e-11,
+        4.538433295842026e-09
+      ]
+    },
+    "cost": {
+      "status": 0,
+      "CPU_seconds": 107.786029,
+      "wall_seconds": 61.15740291681141
+    },
+    "private_execution_limits": "Six outer passes and at most one rejected trial; no acceptance tolerance changes. The checked full/two-half interval completed within these limits."
+  },
+  "limitations": [
+    "Same-composition crystallization is a physical scenario; element separation and crystal mixture thermodynamics remain unresolved.",
+    "A longer continuation using the original response-cache settings hit a transported-heat iteration floor. A subsequent shorter diagnostic completed; numerical path sensitivity is under investigation. This record establishes one accepted crossing, not a completed long cooling replay.",
+    "The actual cutoff check still rejects mixtures whose omitted solid branch is significant there."
+  ],
+  "local_evidence": [
+    "out/cooling-dense-hhe-replay-oct1-v1",
+    "out/phase-cut-review-oct1-v1",
+    "out/cold-envelope700-stellar-oct1-v3"
+  ]
+}

@@ -48,7 +48,7 @@ std::array<HelmholtzJet,10> ion_phase_difference_jets(
 // mixture with a width c per ion (c times the ion number per mass), so
 //   F/T = F_L/T + W g(D/W),  D = sum_s X_s R/A_s (f_s,s - f_l,s),  W = c R sum_s X_s/A_s,
 // g(y) = -ln(1 + exp(-y)); returned as F/T - F_L/T per mass with all composition channels.
-// No phase term below the helium coupling cut; the solid weight must be negligible near it.
+// No phase term below the helium coupling cut; the solid weight must be negligible at the cut.
 // Hydrogen above trace_hydrogen is outside the assessed lattice treatment and throws if the
 // solid weight is not negligible there. Phase separation of metals is not represented.
 struct MixturePhaseOptions {

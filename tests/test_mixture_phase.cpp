@@ -152,6 +152,35 @@ int main(){
     try{(void)cold_helium_material_jets(2e5,rho,c,1,o);}catch(const std::domain_error&){invalid=true;}
     check(invalid,"unsupported continuation choice refused",0.);
   }
+  // A continuous cooling path crosses Gamma 90 before reaching the phase
+  // window. With the continued metal liquid the physical solid tail grows
+  // above exp(-20) near Gamma 93, although it is negligible at the cut itself.
+  {
+    const auto c=comp(2.190e-8,9.742e-15,.1353);
+    constexpr double rho=50588.,Tref=229000.;
+    const double ne=rho*c.mu_elec_inv()/constants::amu;
+    const double gref=detail::ioffe::plasma(std::log(Tref),std::log(ne),4.,2.).gami;
+    MixturePhaseOptions o;o.liquid_continuation_gamma=200.;
+    auto lower=o;lower.minimum_solid_gamma=80.;
+    double difference=0;
+    for(double g:{90.001,92.,94.,96.,98.,99.999,100.001,110.,120.}) {
+      const double T=Tref*gref/g;
+      const auto a=ion_mixture_phase_difference_jets(T,rho,c,10,o);
+      const auto b=ion_mixture_phase_difference_jets(T,rho,c,10,lower);
+      for(int k=0;k<10;++k)for(int i=0;i<4;++i)for(int j=0;i+j<=3;++j)
+        difference=std::max(difference,std::abs(a[k][i][j]-b[k][i][j]));
+    }
+    check(difference==0,"cut check preserves the complete phase potential and derivatives",difference);
+    const double Tc=Tref*gref/90.;
+    const auto edge=ion_mixture_phase_difference_jets(Tc*(1-1e-8),rho,c,1,o)[0];
+    const double unit=constants::R_gas/4;
+    check(std::abs(edge[0][0])/unit<1e-10 && std::abs(heat(edge))/unit<1e-7,
+      "negligible free energy and heat capacity at the actual cut",std::abs(heat(edge))/unit);
+    auto bad=o;bad.minimum_solid_gamma=60.;bool refused=false;
+    try{(void)ion_mixture_phase_difference_jets(Tref*gref/62.,rho,c,1,bad);}
+    catch(const std::domain_error& e){refused=std::string(e.what()).find("Gamma cut")!=std::string::npos;}
+    check(refused,"a cut on the spurious solid branch remains refused",0.);
+  }
   std::cout<<"mixture phase: failures "<<failures<<'\n';
   return failures?1:0;
 }

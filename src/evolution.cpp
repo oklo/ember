@@ -489,6 +489,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
     CompositionUpdate pending;
     bool have_pending=false;
     std::string coupling_reason;
+    double heat_residual_q=0,heat_residual_surface=0;
     std::vector<BurningResponse> burning_response;
     for(std::size_t iteration=0;iteration<options.max_coupling_iterations;++iteration) {
       // The convergence check below already evaluates the next composition
@@ -528,10 +529,11 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
         residual=std::max(residual,composition_difference(current.comp[i],next.composition[i]));
       result.abundance_residual=residual;
       result.material_heat_residual=0;
+      heat_residual_q=heat_residual_surface=0;
       if(frozen) {
         double luminosity_floor=0;
         for(const auto& point:current.y)luminosity_floor=std::max(luminosity_floor,1e-12*std::abs(point.L));
-        std::vector<double> face_residual(current.size()-1);
+        std::vector<double> face_residual(current.size()-1),absolute_heat_change(current.size()-1);
         detail::independent_evaluations(current.size()-1,options.relaxation.zone_threads,[&](std::size_t i) {
           const auto old_heat=microscopic_heat(*frozen,i,current.m[i],current.m[i+1],
               current.y[i],current.comp[i],current.y[i+1],current.comp[i+1],false);
@@ -547,8 +549,16 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           const double scale=std::max({std::abs(current.y[i].L),std::abs(current.y[i+1].L),
               luminosity_floor,std::numeric_limits<double>::min()});
           face_residual[i]=std::abs(heat_change)/scale;
+          absolute_heat_change[i]=std::abs(heat_change);
         });
-        for(double r:face_residual)result.material_heat_residual=std::max(result.material_heat_residual,r);
+        for(std::size_t i=0;i<face_residual.size();++i) {
+          if(face_residual[i]>result.material_heat_residual) {
+            result.material_heat_residual=face_residual[i];
+            heat_residual_q=.5*(current.m[i]+current.m[i+1])/current.M;
+          }
+          heat_residual_surface=std::max(heat_residual_surface,absolute_heat_change[i]/
+              std::max(std::abs(current.y.back().L),std::numeric_limits<double>::min()));
+        }
       }
       bool deuterium_coupled=true;
       if(dynamic_cast<const PPDeuterium*>(p.nuclear) || cn_network) {
@@ -639,6 +649,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
     std::ostringstream reason;reason.precision(4);
     reason<<"evolve_step: coupling iteration limit ("<<coupling_reason
       <<"; abundance="<<result.abundance_residual<<", transported heat="<<result.material_heat_residual
+      <<", heat q="<<heat_residual_q<<", max heat/surface L="<<heat_residual_surface
       <<", structure="<<result.residual<<", correction="<<result.correction<<")";
     result.message=reason.str();
   } catch(const std::exception& e) {result.message=e.what();}

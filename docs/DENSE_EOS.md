@@ -285,6 +285,11 @@ with width 0.005 kT per ion, supplies the latent heat through the same potential
 as pressure and composition forces. The composition dependence of that width
 is differentiated. The default remains `liquid_mixture`.
 
+The forced-solid fit is excluded below helium coupling Gamma = 90. The solid
+branch must be negligible at that boundary, evaluated at the local density
+and composition. Its weight may then increase continuously above the boundary.
+[Boundary and cooling-step checks](results/mixture_phase_cut_oct1_v1.json).
+
 `eos_metal_liquid_continuation_gamma "200"` selects a thermodynamically
 consistent continuation of the classical liquid fit. Beyond the stated coupling,
 its internal energy follows the value and slope at the join; integrating it
