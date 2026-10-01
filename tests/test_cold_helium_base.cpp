@@ -197,6 +197,19 @@ int main(){
      for(auto [T,r]:{std::pair{3.1e5,800.},std::pair{1.5e5,200.}})
        check(joined.material_jets(T,r,hydrogen,10)==core.material_jets(T,r,hydrogen,10),
            "dense transition preserves zero-weight source states",0);
+     // The colder admitted domain is nearly pure H, while the existing
+     // helium-rich transition and all warm anchors retain their limits.
+     for(double T:{80000.,95000.}) {
+       const auto near_h=comp(.9992,.00079,1e-10);
+       const double r=T<9e4?600.:800.;
+       const auto s=joined.eval(T,r,near_h);
+       const auto force=joined.composition_potential(T,r,near_h);
+       const auto heat=joined.composition_heat(T,r,near_h);
+       check(s.cv>0&&s.chiRho>0&&std::isfinite(force.gradient[0]+heat.exchange_enthalpy[1]),
+             "cold nearly pure-H transition thermal and composition responses",s.cv);
+       const auto recovered=joined.rho_from_PT(T,s.P,near_h,r*1.001);
+       check(std::abs(recovered/r-1)<1e-9,"cold nearly pure-H transition pressure inversion",recovered/r-1);
+     }
      for(auto [T,r,z]:{std::tuple{9.99e4,800.,1e-10},std::tuple{1.5e5,6100.,1e-10},std::tuple{1.5e5,800.,2e-8}}) {
        bool refused=false;try{joined.eval(T,r,comp(.99,.005,z));}catch(const std::domain_error&){refused=true;}
        check(refused,"dense transition physical domain refusal",T);

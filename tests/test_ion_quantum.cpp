@@ -156,6 +156,34 @@ int main() {
     catch(const std::domain_error&){refused=true;}
     check(refused,"colder hydrogen domain retains its assessed limits");
   }
+  // Cold nearly pure H: retain the same potential while extending only its
+  // supported range. These include the next layers reached by the cooling star.
+  for(auto state:{std::pair{85000.,600.},std::pair{100000.,900.},std::pair{71000.,300.}}) {
+    const auto material=mixture(.9992,.00079,1e-12);
+    const auto [temperature,density]=state;
+    const auto q=ion_quantum_liquid_jets(temperature,density,material,10);
+    for(unsigned d=0;d<2;++d) {
+      const auto p=ion_quantum_liquid_jets(temperature*std::exp(d==0?h:0),density*std::exp(d==1?h:0),material,10);
+      const auto m=ion_quantum_liquid_jets(temperature*std::exp(d==0?-h:0),density*std::exp(d==1?-h:0),material,10);
+      double error=0;
+      for(unsigned ch=0;ch<4;++ch)for(unsigned i=0;i<2;++i)for(unsigned j=0;i+j<2;++j) {
+        const auto exact=q[ch][i+(d==0)][j+(d==1)];
+        error=std::max(error,std::abs((p[ch][i][j]-m[ch][i][j])/(2*h)-exact)
+            /std::max(std::abs(q[0][0][0]),std::abs(exact)));
+      }
+      check(error<2e-7,"cold nearly pure H thermal and chemical derivatives",error);
+    }
+  }
+  for(auto state:{std::array<double,4>{69999,400,.9992,1e-12},
+                  std::array<double,4>{85000,600,.998,1e-12},
+                  std::array<double,4>{100000,1001,.9992,1e-12},
+                  std::array<double,4>{70000,1000,.9992,1e-12},
+                  std::array<double,4>{85000,600,.9992,2e-8}}) {
+    refused=false;
+    try{(void)ion_quantum_liquid_jets(state[0],state[1],mixture(state[2],.0001,state[3]));}
+    catch(const std::domain_error&){refused=true;}
+    check(refused,"nearly pure H extension retains temperature/composition/density/quantum/metal limits");
+  }
   check(ion_quantum_liquid_jets(290000,780,mixture(.9905,.005225,0),1)[0][0][0]>0,
         "cold hydrogen includes the assessed helium-3 shell tail");
   // Any He3 share of the helium: the isotope enters through its own mass and charge only. States include

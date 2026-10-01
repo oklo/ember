@@ -101,6 +101,11 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   // source checks; trace-helium recombination below ~130 kK is a declared term.
   const bool cold_hydrogen=T>=3.5e4 && rho>=10 && rho<=1000 && thetaH<=1.7 &&
       c.X[0]>=.95 && c.Z()<=1e-8;
+  // More strongly quantum, nearly pure hydrogen. Direct equilibrium-ionization
+  // controls assess the trace-He contribution separately; the classical EOS
+  // retains its ionization physics. This only extends the admitted domain.
+  const bool nearly_pure_hydrogen=T>=7e4 && rho>=10 && rho<=1000 && thetaH<=2.5 &&
+      c.X[0]>=.999 && c.Z()<=1e-8;
   // Dense, fully ionized H/He layers of any hydrogen fraction (the He-rich
   // mantle and the H/He transition) from 160 to 300 kK.
   const bool dense_mixture=T>=1.6e5 && rho>=300 && rho<=4000 && thetaH<=1.85 &&
@@ -115,10 +120,10 @@ std::array<HelmholtzJet,10> ion_quantum_liquid_jets(
   // Cooler, nearly pure helium layers remain pressure ionized in direct
   // source checks. This does not extend the metal-rich core's phase range.
   const bool cool_helium=T>=4e5 && rho>=1e3 && rho<=1e5 && c.X[0]<=.01 && c.Z()<=1e-3;
-  const double theta_limit=(assessed_core || cool_helium)?4.:dense_helium_overlap?2.5:dense_mixture?1.85:cold_hydrogen?1.7:1.;
+  const double theta_limit=(assessed_core || cool_helium)?4.:dense_helium_overlap || nearly_pure_hydrogen?2.5:dense_mixture?1.85:cold_hydrogen?1.7:1.;
   if(thetaH>theta_limit ||
       (T<3e5 && thetaH>.1 && !dense_hydrogen && !cool_hydrogen && !cold_hydrogen
-          && !dense_mixture && !dense_helium_overlap)) {
+          && !dense_mixture && !dense_helium_overlap && !nearly_pure_hydrogen)) {
     std::ostringstream message;
     message << std::setprecision(4) << "quantum ion EOS: outside assessed ionization/quantum range"
       << " (T=" << T << ", rho=" << rho << ", X=" << c.X[0]

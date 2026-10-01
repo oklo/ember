@@ -95,7 +95,11 @@ double dense_hhe_transition_weight(double T,double rho) {
       *(1-falling(std::log(rho),std::log(300.),std::log(600.))[0]);
 }
 void dense_hhe_transition_validate(double T,double rho,const Composition& c,const ColdHeliumOptions& source) {
-  if(!(T>=1e5&&rho<=6e3&&c.Z()<=1e-8))fail("outside assessed dense H/He transition range");
+  // The colder extension is assessed only in the nearly pure-H envelope.
+  // The helium-rich transition retains its existing 100 kK lower boundary.
+  const bool colder_hydrogen=T>=7e4 && rho<=1000 && c.X[0]>=.999;
+  if(!((T>=1e5 || colder_hydrogen)&&rho<=6e3&&c.Z()<=1e-8))
+    fail("outside assessed dense H/He transition range");
   const auto o=transition_options(source);
   for(double t:{T,o.join_cold,o.join_hot})cold_helium_validate(t,rho,c,o);
 }

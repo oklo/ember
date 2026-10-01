@@ -171,6 +171,20 @@ fully ionized layers reproduce the source at every share:
   These are model comparisons, not error bounds. The correction does not
   replace the ionization treatment in the underlying classical EOS.
 
+- Nearly pure hydrogen, X ≥ 0.999: T ≥ 70 kK, density 10–1000 g/cm³,
+  Z ≤ 1e-8 and Tp,H/T ≤ 2.5. The same quantum potential applies; only its
+  assessed range is extended. In 92 direct equilibrium-ionization controls,
+  hydrogen remains ionized. Allowing the trace helium to recombine changes
+  quantum Cv by at most 0.008271% of classical ion Cv in the projected star.
+  These controls have proton rs = 253.1–586.2, partly below the fit's lowest
+  PIMC density parameter, rs = 500. This is a stated extrapolation, not a new
+  simulation of a proton liquid. Leading Wigner–Kirkwood and harmonic model
+  comparisons differ by up to 5.761% of classical ion Cv; their largest
+  difference weighted over the newly admitted layers is 0.05611% of the
+  projected star's heat capacity. These are sensitivities, not error bounds.
+  The small bulk ionization effect does not validate trace-ion diffusion.
+  [Controls and restart check](results/cold_hydrogen_oct1_v1.json).
+
 - Dense H/He at any hydrogen fraction (the helium-rich mantle and the H/He
   transition): T ≥ 160 kK, density 300–4000 g/cm³, Z ≤ 1e-10 and
   Tp,H/T ≤ 1.85. Hydrogen and helium are fully ionized in direct
@@ -295,6 +309,11 @@ required wherever their weight is nonzero.
 
 The assessed range requires T ≥ 100 kK, density ≤ 6000 g/cm³, Z ≤ 1e-8 and
 Tp,H/T ≤ 2.5, along with the existing degeneracy and helium-ion limits.
+For X ≥ 0.999 and density ≤ 1000 g/cm³, the assessed lower temperature is
+70 kK, using the hydrogen controls above. The other limits and warm anchors
+remain in place. Together with the classical source repair, all 536 zones
+of the 720.8 K profile remain supported at 0.8 times their temperatures.
+That projection holds density and composition fixed; it is not a cooling age.
 Direct source checks at 100–120 kK retain ionized H and He in the sampled
 transition layers; the quantum-Cv sensitivity to ionization is below
 5.643e-9 of classical ion Cv. Alternative quantum formulas differ by up to

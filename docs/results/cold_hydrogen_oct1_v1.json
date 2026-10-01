@@ -1,0 +1,87 @@
+{
+  "scope": "Independent equilibrium-ionization sensitivity and quantum-model comparisons ahead of the 720.8 K star.",
+  "ionization": {
+    "profile": {
+      "queries": 76,
+      "failures": [],
+      "minimum_Hplus": 1.0,
+      "minimum_He2": 3.295e-10,
+      "maximum_thetaH": 2.418,
+      "maximum_quantum_Cv_reduction": 0.2672,
+      "maximum_ionization_Cv_change": 8.27e-05,
+      "maximum_finite_difference_noise": 3.767e-09,
+      "maximum_model_spread": 0.05761
+    },
+    "edge": {
+      "queries": 16,
+      "failures": [],
+      "minimum_Hplus": 1.0,
+      "minimum_He2": 9.083e-14,
+      "maximum_thetaH": 2.35,
+      "maximum_quantum_Cv_reduction": 0.2548,
+      "maximum_ionization_Cv_change": 7.422e-05,
+      "maximum_finite_difference_noise": 5.573e-09,
+      "maximum_model_spread": 0.05189
+    },
+    "hydrogen_rs_range": [
+      253.1,
+      586.2
+    ],
+    "hydrogen_gamma_range": [
+      13.56,
+      22.7
+    ],
+    "CPU_seconds": 557.0
+  },
+  "native_queries": 4288,
+  "native_supported_unchanged": 3976,
+  "native_newly_supported": 72,
+  "native_lost": 0,
+  "native_changed": 0,
+  "profile_0_8_supported": 536,
+  "response": {
+    "supported": 36,
+    "refused": 0,
+    "maximum_derivative_error": 5.827e-05,
+    "maximum_inversion_error": 7.772e-15,
+    "minimum_fixed_pressure_composition_eigenvalue_over_R": 211.0
+  },
+  "weighted_model_sensitivity": {
+    "scope": "Fixed720.8K profile at0.8T; conservative weighting of the measured maximum BC22/WK/Einstein spread over newly admitted cells. Not a physical error bound or cooling-age measurement.",
+    "newly_admitted_mass_fraction": 0.005375,
+    "maximum_diagnostic_heat_capacity_spread_over_resolved_stellar_Cv": 0.0005611,
+    "total_resolved_Cv": 1.368e+40
+  },
+  "regressions_passed": [
+    "ion_quantum",
+    "cold_helium_base_with_full_family",
+    "variable_metal_eos"
+  ],
+  "stellar": {
+    "age_years": 3916000000000.0,
+    "interval_years": 6000000.0,
+    "relative_global": {
+      "Teff_K": -1.577e-14,
+      "radius_Rsun": 2.887e-15,
+      "luminosity_Lsun": -5.729e-14,
+      "central_T_K": 1.84e-12,
+      "central_density_g_cm3": 3.375e-14,
+      "He3_mass_g": -2.22e-16,
+      "H_mass_g": 0.0,
+      "He3_peak": 4.647e-12
+    },
+    "max_abs_log_coordinate_change": 5.523e-11,
+    "max_absolute_abundance_change": 6.101e-11,
+    "maximum_first_law": 1.976e-09,
+    "maximum_species_error": 3.62e-19,
+    "same_step": true,
+    "scope": "One matched6Myr interval at721K; demonstrates restart/table compatibility and unchanged present-domain evolution, not a cooled-star validation of future physics."
+  },
+  "limitations": [
+    "Fit-density extrapolation below the lowest PIMC r_s=500; model comparisons are not an error bound.",
+    "Ionization sensitivity of bulk quantum Cv does not establish trace-ion diffusion accuracy.",
+    "Fixed-density and composition temperature projections are not evolved cooling states.",
+    "Colder mixed-helium and source-mask restrictions remain."
+  ],
+  "source_table_sha256": "6a906edc27ef8a190208a2a05b8a67e0d581a78866a2abf55e89b2327e7ca93a"
+}
