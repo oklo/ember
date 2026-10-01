@@ -1,0 +1,92 @@
+{
+  "change": "Fermi-surface quadrature for degenerate electrons; collision equations, scattering tables and physical domain checks unchanged.",
+  "coordinate": "energy divided by kT minus eta",
+  "threshold_eta": 128,
+  "energy_limits": [
+    -80,
+    80
+  ],
+  "panels": [
+    -80,
+    -8,
+    8,
+    80
+  ],
+  "points_per_panel": [
+    64,
+    128,
+    64
+  ],
+  "density_identity": "F_1/2 = (2/3) integral x^(3/2) f(1-f) dx; its eta derivative is integral sqrt(x) f(1-f) dx.",
+  "independent_adaptive_moment_checks": {
+    "cases": 8,
+    "maximum_relative_operator_error": 1.3875134440374345e-11
+  },
+  "native_checks": {
+    "states": 140,
+    "maximum_operator_error": 1.4469212320576119e-09,
+    "maximum_heat_error": 1.4469205833478327e-09,
+    "maximum_derivative_effect_error": 7.577457360960604e-11,
+    "passed": true,
+    "cost": {
+      "original": {
+        "wall_seconds": 0.1330304155126214,
+        "CPU_seconds": 0.129683
+      },
+      "centered": {
+        "wall_seconds": 0.06791666708886623,
+        "CPU_seconds": 0.064384
+      }
+    }
+  },
+  "switch_checks": {
+    "states": 72,
+    "maximum_heat_change": 5.508612233029453e-09,
+    "maximum_eta_change": 4.920508445138694e-13,
+    "maximum_derivative_effect_error": 3.826560017936775e-13,
+    "passed": true
+  },
+  "stellar_comparison": {
+    "reference": "reference",
+    "comparison": "centered",
+    "global_relative": {
+      "Teff_K": -1.8984813721090177e-14,
+      "radius_Rsun": -2.220446049250313e-16,
+      "luminosity_Lsun": -7.616129948928574e-14,
+      "central_T_K": 6.821210263296962e-12,
+      "central_density_g_cm3": 6.306066779870889e-13,
+      "He3_peak": 2.155831069217129e-12,
+      "H_mass_g": 0.0,
+      "He3_mass_g": 6.661338147750939e-16
+    },
+    "Teff_difference_K": -1.693933882052079e-11,
+    "maximum_point_relative_r_rho_T": [
+      2.1138646388860746e-13,
+      1.4388490399131677e-12,
+      7.069900220837988e-12
+    ],
+    "maximum_point_L_difference_over_surface_L": 3.6789439505476586e-10,
+    "maximum_absolute_H_He3_He4_difference": [
+      5.81312775693732e-13,
+      5.826383517629988e-13,
+      1.908917468540494e-11
+    ],
+    "worst_species_q": 9.132031427658266e-05,
+    "same_convective_mass_fraction": true
+  },
+  "stellar_scope": "Private 200-Myr cooling control with the same conditional phase-aware fingering model in both arms. Six accepted intervals, no rejection. Numerical validation, not independent validation of that mixing prescription.",
+  "performance_scope": "The saved-state collision batch is about twice as fast in CPU. Whole-star timings had different thread counts and machine load, so no whole-track speed factor is inferred.",
+  "tables_extended": false,
+  "input_hashes": {
+    "collision_transport.cpp": "e0a0d944d6590387e8b6aa75468a7b6b4ad634d719d4756c252e79e9f4ba2906",
+    "basis_adaptive_checks.json": "c579c68e1772bff79155f0521e0b98222ec145c00a2c1f81fefedd48aa56b685",
+    "native_checks.json": "b0f7c1d92345680be47e5f3fc721f4e3edc1fe43e515fa737a8e4cfad8f6aa19",
+    "switch_checks.json": "78d8ccf101faf6794e3f7cdcde373fecfe57a26127c84c4ccae9d15cabe6938b",
+    "stellar_comparison.json": "a48590e3418ff395180e0f2d756035d4dd12906a54bc32dcc8e5646080d69c22"
+  },
+  "tests": [
+    "collision_reuse with extended collision table, including Sommerfeld density and derivative checks across eta128",
+    "fingering",
+    "metal_cn_transport"
+  ]
+}

@@ -22,6 +22,13 @@ starts, local burning feedback and bounded reuse of EOS and collision responses.
 Independent zone work uses CPU threads. Source atmosphere calculations can run
 in parallel; the stellar solver does not currently use the GPU.
 
+Degenerate-electron collision integrals concentrate quadrature points near the
+Fermi surface. A saved-state batch uses about half the CPU time, with transport
+changes below 1.447e-9. A 200 Myr cooling comparison confirms negligible changes
+in structure and composition. This measures the collision calculation, not a
+factor-of-two speedup of the whole track.
+[Numerical checks](results/fermi_surface_quadrature_oct1_v1.json).
+
 Configuration and validation records:
 [driver options](LIFETIME_DRIVER.md),
 [starting guesses](results/solver_starting_guesses_sept27_v1.json),

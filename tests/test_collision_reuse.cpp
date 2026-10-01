@@ -2,6 +2,7 @@
 #include <cmath>
 #include <fstream>
 #include <iostream>
+#include <numbers>
 #include <stdexcept>
 #include <vector>
 using namespace ember;
@@ -44,6 +45,29 @@ int main(int argc,char** argv) {
     const double edge=std::sqrt(std::exp(ty.back()-2e-5)*hbar*hbar/(8*me*kb*T));
     cache.value(table,2,T,rho,X,Y3,Z,edge);
     rejects([&]{cache.value(table,2,T,rho,X,Y3,Z,edge*std::exp(2e-5));});
+    if(tx.back()>128.1) {
+      // Independent Sommerfeld density and finite differences across the
+      // change of quadrature, including a more degenerate state when covered.
+      constexpr double pi=std::numbers::pi,amu=1.66053906660e-24;
+      constexpr double temperature=1e6,hydrogen=.5,he3=.01;
+      constexpr double Ye=hydrogen+2*he3/3+(1-hydrogen-he3)/2;
+      const double length=std::sqrt(std::exp(.5*(ty.front()+ty.back()))*hbar*hbar/(8*me*kb*temperature));
+      for(double eta:{127.99999,128.00001,std::min(512.,.9*tx.back())}) {
+        const double F=(2./3)*std::pow(eta,1.5)+pi*pi/12/std::sqrt(eta)
+            +7*std::pow(pi,4)/960/std::pow(eta,2.5)
+            +31*std::pow(pi,6)/4608/std::pow(eta,4.5);
+        const double ne=std::pow(2*me*kb*temperature,1.5)/(2*pi*pi*std::pow(hbar,3))*F;
+        const double density=ne*amu/Ye;
+        const auto r=table.bulk_metal_derivatives(temperature,density,hydrogen,he3,0,length);
+        check(std::abs(r.value.eta/eta-1)<1e-10,"degenerate density integral disagrees with Sommerfeld expansion");
+        constexpr double h=2e-5;
+        const auto lo=table.bulk_metal_eval(temperature*std::exp(-h),density,hydrogen,he3,0,length);
+        const auto hi=table.bulk_metal_eval(temperature*std::exp(h),density,hydrogen,he3,0,length);
+        const double derivative=(hi.conductivity-lo.conductivity)/(2*h);
+        check(std::abs(derivative-r.partials[0].conductivity)/r.value.conductivity<2e-5,
+            "degenerate conductivity derivative failed across quadrature switch");
+      }
+    }
     std::cout<<"collision reuse: exact comparison, species changes, table identity and domain passed\n";
   }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
 }

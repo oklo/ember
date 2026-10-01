@@ -21,6 +21,43 @@ constexpr double e2=2.3070775523417355e-19, pi=std::numbers::pi;
 void require(bool ok,const char* why) {
   if(!ok) throw std::domain_error(std::string("collision transport: ")+why);
 }
+// A fixed quadrature in energy minus chemical potential. At eta >= 128,
+// occupation derivatives are exponentially small outside [-80,80].
+// The central panel resolves the Fermi surface; the tails retain high modes.
+struct FermiRule {std::vector<double> x,w;};
+const FermiRule& fermi_rule() {
+  static const FermiRule result=[] {
+    FermiRule r;
+    for(const auto panel:std::array<std::array<double,3>,3>{{{-80,-8,64},{-8,8,128},{8,80,64}}}) {
+      const int n=static_cast<int>(panel[2]);
+      const double mid=.5*(panel[0]+panel[1]),half=.5*(panel[1]-panel[0]);
+      for(int i=0;i<n;++i) {
+        double z=std::cos(pi*(i+.75)/(n+.5)),derivative=0;
+        for(int iteration=0;iteration<20;++iteration) {
+          double p=1,previous=0;
+          for(int k=1;k<=n;++k) {const double old=p;p=((2*k-1)*z*p-(k-1)*previous)/k;previous=old;}
+          derivative=n*(z*p-previous)/(z*z-1);
+          const double correction=p/derivative;z-=correction;
+          if(std::abs(correction)<2e-16)break;
+        }
+        r.x.push_back(mid+half*z);
+        r.w.push_back(half*2/((1-z*z)*derivative*derivative));
+      }
+    }
+    return r;
+  }();
+  return result;
+}
+std::array<double,2> degenerate_density_integrals(double eta) {
+  const auto& q=fermi_rule();double f=0,df=0;
+  for(std::size_t i=0;i<q.x.size();++i) {
+    const double e=std::exp(-std::abs(q.x[i]));
+    const double weight=q.w[i]*e/((1+e)*(1+e))*std::sqrt(eta+q.x[i]);
+    // Integration by parts: integral sqrt(x) f = 2/3 integral x^(3/2) f(1-f).
+    f+=(2./3)*(eta+q.x[i])*weight;df+=weight;
+  }
+  return {f,df};
+}
 using detail::Differential;
 using std::sqrt;using std::exp;using std::log;using std::log1p;using std::pow;using std::cbrt;
 double value(double x) {return x;}
@@ -268,6 +305,7 @@ struct ScreenedCollisionTransport::Data {
     return ee;
   }
   double fhalf(double eta) const {
+    if(eta>=128)return degenerate_density_integrals(eta)[0];
     const double upper=std::sqrt(std::max(eta,0.)+80.);double value=0;
     for(std::size_t i=0;i<gx.size();++i) {
       const double t=(gx[i]+1)*upper/2;
@@ -287,11 +325,16 @@ struct ScreenedCollisionTransport::Data {
     double x=std::clamp(classical<0?classical:std::pow(1.5*target,2./3),lo,hi);
     constexpr double tolerance=8*std::numeric_limits<double>::epsilon();
     for(int iteration=0;iteration<64;++iteration) {
-      const double upper=std::sqrt(std::max(x,0.)+80.);double f=0,df=0;
-      for(std::size_t i=0;i<gx.size();++i) {
-        const double t=(gx[i]+1)*upper/2,w=gw[i]*upper*t*t;
-        f+=w*occupation(x,t*t);
-        df+=w*occupation_derivative(x,t*t);
+      double f=0,df=0;
+      if(x>=128) {
+        const auto v=degenerate_density_integrals(x);f=v[0];df=v[1];
+      } else {
+        const double upper=std::sqrt(std::max(x,0.)+80.);
+        for(std::size_t i=0;i<gx.size();++i) {
+          const double t=(gx[i]+1)*upper/2,w=gw[i]*upper*t*t;
+          f+=w*occupation(x,t*t);
+          df+=w*occupation_derivative(x,t*t);
+        }
       }
       const double residual=f-target;
       if(std::abs(residual)<=tolerance*target)return x;
@@ -307,10 +350,14 @@ struct ScreenedCollisionTransport::Data {
     const double eta_value=eta(value(ne),value(T));
     if constexpr(std::is_same_v<S,double>) return eta_value;
     else {
-      const double upper=std::sqrt(std::max(eta_value,0.)+80.);double derivative=0;
-      for(std::size_t i=0;i<gx.size();++i) {
-        const double t=(gx[i]+1)*upper/2;
-        derivative+=gw[i]*upper*t*t*occupation_derivative(eta_value,t*t);
+      double derivative=0;
+      if(eta_value>=128)derivative=degenerate_density_integrals(eta_value)[1];
+      else {
+        const double upper=std::sqrt(std::max(eta_value,0.)+80.);
+        for(std::size_t i=0;i<gx.size();++i) {
+          const double t=(gx[i]+1)*upper/2;
+          derivative+=gw[i]*upper*t*t*occupation_derivative(eta_value,t*t);
+        }
       }
       positive(derivative);const double ratio=fhalf(eta_value)/derivative;
       S out(eta_value);
@@ -325,33 +372,44 @@ struct ScreenedCollisionTransport::Data {
       return compose_binary_response(electron_ion(Local::variable(eta.value,0),
           Local::variable(bthermal.value,1)),eta,bthermal);
     }
+    const bool centered=value(eta)>=128;
+    const auto& rule=fermi_rule();
+    const std::size_t count=centered?rule.x.size():jx.size();
     const S length=positive_part(eta)+80.;
-    std::vector<S> x(jx.size()),w(jx.size());
+    std::vector<S> x(count),w(count);
     S norm=0,mean=0,variance=0;
-    for(std::size_t i=0;i<jx.size();++i) {
-      x[i]=(jx[i]+1)*length/2;
-      w[i]=jw[i]*pow(length/2,2.5)*occupation_derivative(eta,x[i]);
+    for(std::size_t i=0;i<count;++i) {
+      if(centered) {
+        x[i]=eta+rule.x[i];
+        w[i]=rule.w[i]*pow(x[i],1.5)*occupation_derivative(eta,x[i]);
+      } else {
+        x[i]=(jx[i]+1)*length/2;
+        w[i]=jw[i]*pow(length/2,2.5)*occupation_derivative(eta,x[i]);
+      }
       norm+=w[i];mean+=w[i]*(x[i]-eta);
     }
     positive(norm);mean/=norm;
-    for(std::size_t i=0;i<jx.size();++i) {w[i]/=norm;variance+=w[i]*pow(x[i]-eta-mean,2);}
+    for(std::size_t i=0;i<count;++i) {w[i]/=norm;variance+=w[i]*pow(x[i]-eta-mean,2);}
     positive(variance);const S sd=sqrt(variance);
-    Matrix<S> q(10,jx.size());std::array<S,10> alpha{},beta{};beta[1]=1;
-    for(std::size_t i=0;i<jx.size();++i) {x[i]=(x[i]-eta-mean)/sd;q(0,i)=1;q(1,i)=x[i];}
+    Matrix<S> q(10,count);std::array<S,10> alpha{},beta{};beta[1]=1;
+    for(std::size_t i=0;i<count;++i) {x[i]=(x[i]-eta-mean)/sd;q(0,i)=1;q(1,i)=x[i];}
     for(std::size_t n=1;n<9;++n) {
-      for(std::size_t i=0;i<jx.size();++i) alpha[n]+=w[i]*x[i]*q(n,i)*q(n,i);
+      for(std::size_t i=0;i<count;++i) alpha[n]+=w[i]*x[i]*q(n,i)*q(n,i);
       S v=0;
-      for(std::size_t i=0;i<jx.size();++i) {
+      for(std::size_t i=0;i<count;++i) {
         q(n+1,i)=(x[i]-alpha[n])*q(n,i)-beta[n]*q(n-1,i);
         v+=w[i]*q(n+1,i)*q(n+1,i);
       }
       positive(v);beta[n+1]=sqrt(v);
-      for(std::size_t i=0;i<jx.size();++i) q(n+1,i)/=beta[n+1];
+      for(std::size_t i=0;i<count;++i) q(n+1,i)/=beta[n+1];
     }
     Matrix<S> out(10,10);const S upper=sqrt(length);
-    for(std::size_t i=0;i<gx.size();++i) {
-      const S t=(gx[i]+1)*upper/2,energy=t*t,u=(energy-eta-mean)/sd;
-      const S weight=gw[i]*upper*t*occupation_derivative(eta,energy)*bracket(bthermal*energy);
+    const std::size_t integral_count=centered?rule.x.size():gx.size();
+    for(std::size_t i=0;i<integral_count;++i) {
+      const S t=centered?S(0):(gx[i]+1)*upper/2;
+      const S energy=centered?eta+rule.x[i]:t*t,u=(energy-eta-mean)/sd;
+      const S measure=centered?S(rule.w[i]):gw[i]*upper*t;
+      const S weight=measure*occupation_derivative(eta,energy)*bracket(bthermal*energy);
       std::array<S,10> p{1,u};
       for(std::size_t n=1;n<9;++n) p[n+1]=((u-alpha[n])*p[n]-beta[n]*p[n-1])/beta[n+1];
       p[1]/=sd;

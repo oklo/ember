@@ -17,9 +17,10 @@ class PolynomialBasis:
         if not isinstance(degree,int) or not 2<=degree<=10:
             raise ValueError('polynomial degree 2 through 10 required')
         # Resolve the narrow Fermi surface at larger degeneracy.
+        centered=statistics=='fermi' and eta>=128
         if points is None:
-            points=384 if eta<=64 else 768 if eta<=256 else 1536
-            if eta>1024:points=math.ceil(1536*(eta+normalization_tail)/(1024+normalization_tail))
+            points=256 if centered else 384 if eta<=64 else 768 if eta<=256 else 1536
+            if not centered and eta>1024:points=math.ceil(1536*(eta+normalization_tail)/(1024+normalization_tail))
         if not isinstance(points,int) or points<32:raise ValueError("at least 32 normalization points required")
         self.base=energy_basis(eta,statistics=statistics)
         self.degree=degree;self.statistics=statistics
@@ -27,10 +28,16 @@ class PolynomialBasis:
             raise ValueError('controlled polynomial energy tail required')
         self.normalization_tail=normalization_tail
         length=max(eta,0)+normalization_tail
-        node,w=roots_jacobi(points,0,1.5)
-        x=(node+1)*length/2
-        f=(expit(eta-x)*expit(x-eta) if statistics=='fermi' else np.exp(eta-x))
-        weight=w*(length/2)**2.5*f/self.base.normalization
+        if centered:
+            y,w=_three_panel_rule(points,[-normalization_tail,-8.,8.,normalization_tail])
+            x=eta+y
+            f=expit(-y)*expit(y)
+            weight=w*x**1.5*f/self.base.normalization
+        else:
+            node,w=roots_jacobi(points,0,1.5)
+            x=(node+1)*length/2
+            f=(expit(eta-x)*expit(x-eta) if statistics=='fermi' else np.exp(eta-x))
+            weight=w*(length/2)**2.5*f/self.base.normalization
         u=(x-eta-self.base.mean)/math.sqrt(self.base.variance)
         q=[np.ones_like(x),u]
         self.alpha=[0.];self.beta=[0.,1.]
@@ -57,15 +64,21 @@ class PolynomialBasis:
         if not np.isfinite(bthermal) or bthermal<=0:raise ValueError('positive screening required')
         tail=self.normalization_tail if tail is None else tail
         if not np.isfinite(tail) or not 50<=tail<=120:raise ValueError('controlled ion energy tail required')
+        centered=self.statistics=='fermi' and self.base.eta>=128
         if points is None:
-            points=512 if self.base.eta<=256 else 1536
-            if self.base.eta>1024:
+            points=256 if centered else 512 if self.base.eta<=256 else 1536
+            if not centered and self.base.eta>1024:
                 points=math.ceil(1536*(self.base.eta+tail)/(1024+tail))
         if not isinstance(points,int) or points<32:raise ValueError('at least 32 ion quadrature points required')
-        momentum,weight=rule(points,0,math.sqrt(max(self.base.eta,0)+tail))
-        x,w=momentum**2,2*momentum*weight
-        occupation=(expit(self.base.eta-x)*expit(x-self.base.eta)
-                    if self.statistics=='fermi' else np.exp(self.base.eta-x))
+        if centered:
+            y,w=_three_panel_rule(points,[-tail,-8.,8.,tail])
+            x=self.base.eta+y
+            occupation=expit(-y)*expit(y)
+        else:
+            momentum,weight=rule(points,0,math.sqrt(max(self.base.eta,0)+tail))
+            x,w=momentum**2,2*momentum*weight
+            occupation=(expit(self.base.eta-x)*expit(x-self.base.eta)
+                        if self.statistics=='fermi' else np.exp(self.base.eta-x))
         p=self.values(x)
         return (p*(w*occupation*coulomb_bracket(bthermal*x)))@p.T
 
