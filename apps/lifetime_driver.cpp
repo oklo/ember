@@ -98,15 +98,22 @@ int lifetime_main(int argc,char** argv) {
     const auto ion_quantum=cfg.values.contains("eos_ion_quantum")?cfg.get("eos_ion_quantum"):"none";
     if(ion_quantum!="none" && ion_quantum!="liquid_bc22")
       throw std::invalid_argument("unknown quantum-ion EOS selection");
-    // Optional cold dense-He liquid-mixture join below 8e5 K (He-dominated material only; no phase change).
+    // Optional cold dense-He mixture, with a separately selected same-composition phase model.
     const auto cold_helium=cfg.values.contains("eos_cold_helium")?cfg.get("eos_cold_helium"):"none";
-    if(cold_helium!="none" && cold_helium!="liquid_mixture")
+    if(cold_helium!="none" && cold_helium!="liquid_mixture" && cold_helium!="mixture_softmin")
       throw std::invalid_argument("unknown cold helium EOS selection");
     std::optional<ColdHeliumOptions> cold_helium_options;
-    if(cold_helium=="liquid_mixture") {
+    if(cold_helium!="none") {
       if(ion_quantum!="liquid_bc22")throw std::invalid_argument("eos_cold_helium requires eos_ion_quantum liquid_bc22");
       cold_helium_options=ColdHeliumOptions{};
+      cold_helium_options->mixture_phase=cold_helium=="mixture_softmin";
+      cold_helium_options->liquid_continuation_gamma=(cfg.values.contains("eos_metal_liquid_continuation_gamma")?cfg.number("eos_metal_liquid_continuation_gamma"):0.);
+      const double g=cold_helium_options->liquid_continuation_gamma;
+      if(!(g==0. || (std::isfinite(g) && g>=175. && g<=300.)))
+        throw std::invalid_argument("eos_metal_liquid_continuation_gamma must be zero or between 175 and 300");
     }
+    if(!cold_helium_options && cfg.values.contains("eos_metal_liquid_continuation_gamma"))
+      throw std::invalid_argument("eos_metal_liquid_continuation_gamma requires eos_cold_helium");
     fs::path cold_eos_path;
     if(cfg.values.contains("eos_cold_potential"))cold_eos_path=path("eos_cold_potential");
     const auto conduction_path=path("conduction"),atmosphere_path=path("atmosphere"),collision_path=path("collisions"),composition_path=path("composition");
@@ -400,7 +407,10 @@ int lifetime_main(int argc,char** argv) {
     identity.family("eos",eos_path,true);
     if(ion_quantum=="liquid_bc22")
       identity.values["eos.ion_quantum"]="bc22.liquid.common_ne.linear_mixture.full_expression.v8";
-    if(cold_helium_options)identity.values["eos.cold_helium"]=VariableMetalHelmholtzEos::cold_helium_identifier;
+    if(cold_helium_options)identity.values["eos.cold_helium"]=cold_helium_options->mixture_phase?
+        VariableMetalHelmholtzEos::cold_helium_phase_identifier:VariableMetalHelmholtzEos::cold_helium_identifier;
+    if(cold_helium_options && cold_helium_options->liquid_continuation_gamma>0.)
+      identity.number("eos.metal_liquid_continuation_gamma",cold_helium_options->liquid_continuation_gamma);
     if(low_metal_interpolation=="quadratic")
       identity.values["eos.low_metal_interpolation"]="quadratic.C2_to_cubic.v1";
     if(!cold_eos_path.empty()){

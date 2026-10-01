@@ -4,6 +4,7 @@
 #include "ember/gs98_mixture.hpp"
 #include "ember/detail/ion_mixture.hpp"
 #include "ember/ion_quantum.hpp"
+#include "ember/ion_phase.hpp"
 #include <cmath>
 #include <iomanip>
 #include <numbers>
@@ -23,6 +24,9 @@ constexpr double me=9.1093837015e-28,clight=2.99792458e10,hbar=1.054571817e-27;
 void check_domain(double T,double rho,const Composition& c,std::size_t channels,const ColdHeliumOptions& o) {
   if(!(std::isfinite(T)&&T>0&&std::isfinite(rho)&&rho>0)||(channels!=1&&channels!=4&&channels!=10))
     fail("invalid state or derivative request");
+  if(!(o.liquid_continuation_gamma==0. || (std::isfinite(o.liquid_continuation_gamma)
+      && o.liquid_continuation_gamma>=175. && o.liquid_continuation_gamma<=300.)))
+    fail("metal-liquid continuation must be zero or between Gamma 175 and 300");
   if(c.basis!=AbundanceBasis::baryon_mass||c.metal_inventory!=MetalInventory::gs98||c[Species::H2]!=0)
     fail("requires baryonic GS98 material after D mapping");
   for(double fraction:c.X)
@@ -43,8 +47,10 @@ void check_domain(double T,double rho,const Composition& c,std::size_t channels,
     fail("hydrogen quantum parameter beyond the production limit");
   {   // helium host coupling; the trace-metal mean coupling is not a phase criterion (docs/DENSE_EOS.md)
     const double rs=std::exp((std::log(3/(4*pi))-logne)/3)/io::bohr;
-    if(!(io::hartree_k/(rs*T)*std::pow(2.,5./3)<=o.max_helium_gamma))
-      fail("helium coupling beyond the assessed liquid range; phase unsupported");
+    const double gamma=io::hartree_k/(rs*T)*std::pow(2.,5./3);
+    if(o.mixture_phase) {
+      if(!(gamma<=o.max_phase_helium_gamma))fail("helium coupling beyond the fitted liquid and solid branches");
+    } else if(!(gamma<=o.max_helium_gamma))fail("helium coupling beyond the assessed liquid range; phase unsupported");
   }
 }
 std::array<K,2> electron_parts(const K& lt,const K& ln) {
@@ -79,8 +85,8 @@ std::array<HelmholtzJet,10> cold_helium_material_jets(double T,double rho,const 
   const K lt=K::variable(std::log(T),0),ln=K::variable(std::log(rho*Ye/constants::amu),1);
   const auto electrons=electron_parts(lt,ln);
   const K E=electrons[0]+electrons[1];
-  return detail::common_density_ion_jets(T,rho,c,channels,[&](double,double,double A,double Z) {
-    const K f=io::classical_liquid(io::plasma(lt,ln,A,Z));
+  auto out=detail::common_density_ion_jets(T,rho,c,channels,[&](double,double,double A,double Z) {
+    const K f=io::classical_liquid(io::plasma(lt,ln,A,Z),o.liquid_continuation_gamma);
     const K total=(constants::R_gas/A)*f+(Z/A)*E;
     // Quantum term: the production Baiko-Chugunov implementation itself (He isotopes; H and metals by default).
     const HelmholtzJet q=detail::bc22_liquid_quantum_per_mass(lt.value(),ln.value(),A,Z);
@@ -88,6 +94,12 @@ std::array<HelmholtzJet,10> cold_helium_material_jets(double T,double rho,const 
     for(unsigned i=0;i<4;++i)for(unsigned j=0;i+j<=3;++j)out[i][j]=total.derivative({i,j})+q[i][j];
     return out;
   });
+  if(o.mixture_phase) {
+    MixturePhaseOptions p;p.liquid_continuation_gamma=o.liquid_continuation_gamma;p.width=o.phase_width;p.minimum_solid_gamma=o.minimum_solid_gamma;p.trace_hydrogen=o.trace_hydrogen;
+    const auto d=ion_mixture_phase_difference_jets(T,rho,c,channels,p);
+    for(std::size_t k=0;k<channels;++k)for(unsigned i=0;i<4;++i)for(unsigned j=0;i+j<=3;++j)out[k][i][j]+=d[k][i][j];
+  }
+  return out;
 }
 HelmholtzJet cold_helium_component_jet(int component,double T,double rho,const Composition& c,const ColdHeliumOptions& o) {
   check_domain(T,rho,c,1,o);

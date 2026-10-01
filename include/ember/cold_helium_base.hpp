@@ -6,11 +6,11 @@ namespace ember {
 // Dense liquid H/He/GS98 mixture: relativistic degenerate electrons through T^2,
 // classical Coulomb ions, electron polarization and exchange-correlation,
 // and the Baiko-Chugunov quantum-ion correction at a common electron density.
-// Crystallization is not included. See docs/DENSE_EOS.md for domains and approximations.
+// Crystallization is optional and assumes no element fractionation.
+// See docs/DENSE_EOS.md for domains and approximations.
 struct ColdHeliumOptions {
-  // Liquid host limit: helium coupling Gamma_He = 2^(5/3) Gamma_e stays below both assessed
-  // melting references (OCP ~175; electron-screened He 141-147 at 1e4-1e5 g/cm3).
-  // Trace metals are more strongly coupled but are not the host phase.
+  // Default liquid-only host limit. Metals can move a mixture phase boundary
+  // above the pure-helium melting temperature; this is not a phase criterion.
   double max_mixture_hydrogen=.05,max_mixture_metals=.16,max_helium_gamma=130;
   double minimum_density=1e3;
   double maximum_electron_temperature_ratio=.05;
@@ -21,6 +21,15 @@ struct ColdHeliumOptions {
   double trace_hydrogen=1e-3,maximum_trace_hydrogen_quantum=8;
   double join_cold=5e5,join_hot=8e5;
   double hydrogen_join_full=.01,hydrogen_join_zero=.05;
+  // Optional same-composition crystallization (ion_phase.hpp, ion_mixture_phase_difference_jets):
+  // a soft minimum of the liquid and a solid solution of the per-species bcc branches, width
+  // phase_width k per ion. It replaces max_helium_gamma by the supercooled-liquid limit below and adds
+  // nothing where Gamma_He < minimum_solid_gamma. Metal fractionation and precipitation are not included.
+  // Classical-liquid continuation coupling (detail/ion_ocp_components.hpp); 0 keeps FITION9 at all couplings.
+  // Applies to every species' liquid in both the base and the phase difference.
+  double liquid_continuation_gamma=0;
+  bool mixture_phase=false;
+  double phase_width=.005,minimum_solid_gamma=90,max_phase_helium_gamma=250;
 };
 // Material F/T and its thermal, density and composition derivatives. Radiation and
 // ideal mixing are supplied once by the surrounding EOS.

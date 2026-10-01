@@ -48,6 +48,9 @@ class VariableMetalHelmholtzEos final : public Eos {
   // is exclusive with cold_potential, and never replaces a failed source query below its window.
   static constexpr const char* cold_helium_identifier=
       "cold_helium.liquid_mixture.full_anchor.bc22_linear.X_join.v1";
+  // Opt-in same-composition phase variant (ColdHeliumOptions::mixture_phase).
+  static constexpr const char* cold_helium_phase_identifier=
+      "cold_helium.mixture_softmin.same_composition.common_liquid.width0.005.full_anchor.bc22_linear.X_join.v2";
   // Convert a text family and its planes to one relocatable binary input.
   // Stored doubles, masks and logarithmic coordinates remain bit-identical.
   static void pack_binary(const std::filesystem::path& source,const std::filesystem::path& destination);
@@ -73,8 +76,9 @@ class VariableMetalHelmholtzEos final : public Eos {
   }
   std::optional<DensityRange> density_range(double,const Composition&) const override;
   std::optional<DensityRange> density_range_near(double,const Composition&,double) const override;
-  const char* name() const override {return cold_helium_?
-      "FreeEOS variable GS98 metals with cold dense-He liquid-mixture join":cold_?
+  const char* name() const override {return cold_helium_?(cold_helium_->mixture_phase?
+      "FreeEOS variable GS98 metals with cold dense-He mixture join and same-composition crystallization":
+      "FreeEOS variable GS98 metals with cold dense-He liquid-mixture join"):cold_?
       "FreeEOS with cold additive-volume H/He potential; cold metal helium proxy":
       "FreeEOS variable GS98 metals, H and helium-isotope potential";}
  private:

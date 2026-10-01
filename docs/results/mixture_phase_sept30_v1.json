@@ -1,0 +1,393 @@
+{
+  "passed": true,
+  "interval_years": 100000000.0,
+  "phase_relative_to_continued_liquid": {
+    "luminosity_Lsun": 1.1521450460350025e-11,
+    "radius_Rsun": -3.662292691331004e-12,
+    "Teff_K": 4.711342427299314e-12,
+    "central_T_K": 1.6669398461566232e-07,
+    "central_density_g_cm3": 1.8200161377990298e-09,
+    "H_mass_g": -7.771561172376096e-16,
+    "He3_mass_g": -6.661338147750939e-16,
+    "He3_peak": 2.007283228522283e-13,
+    "surface_X": 2.19824158875781e-14
+  },
+  "continued_liquid_relative_to_original": {
+    "luminosity_Lsun": -6.602192122895367e-06,
+    "radius_Rsun": 2.0612606952408186e-06,
+    "Teff_K": -2.6811791703496013e-06,
+    "central_T_K": -8.49198557171249e-05,
+    "central_density_g_cm3": -2.166062347774833e-05,
+    "H_mass_g": 2.220446049250313e-16,
+    "He3_mass_g": 1.9984014443252818e-15,
+    "He3_peak": -1.0407641293230796e-07,
+    "surface_X": 9.57012247226885e-14
+  },
+  "default_unchanged_physical_checkpoint": true,
+  "arms": {
+    "continued": {
+      "CPU_seconds": 130.316812,
+      "wall_seconds": 43.88196462485939,
+      "accepted": 3,
+      "rejected": 0,
+      "max_error_norm": 0.0034019018713138394,
+      "max_first_law_residual": 4.0118226518615074e-09
+    },
+    "phase": {
+      "CPU_seconds": 164.937669,
+      "wall_seconds": 53.29754783399403,
+      "accepted": 3,
+      "rejected": 0,
+      "max_error_norm": 0.003389334066739025,
+      "max_first_law_residual": 4.034127587537739e-09
+    }
+  },
+  "endpoint": {
+    "years": 3901517922497.774,
+    "Teff_K": 834.6399634320404,
+    "central_T_K": 202237.4550568346,
+    "central_density_g_cm3": 50632.887322656556
+  },
+  "chain_rule": {
+    "points": 2680,
+    "supported_sets_equal": true,
+    "worst_relative": {
+      "P": 3.3092702008587173e-16,
+      "E": 5.233025524958091e-16,
+      "S": 2.991877677810111e-13,
+      "cv": 2.9175759634752502e-12,
+      "chiRho": 1.2002075943639612e-15,
+      "weight": 9.114313633847951e-12,
+      "muZ": 4.244527117070759e-15
+    },
+    "passed": true
+  },
+  "profile_checks": {
+    "passed": true,
+    "scope": "Actual joined EOS on the accepted835.7K profile and homologous temperature projections with actual composition. Fixed-density projections are not evolved stars.",
+    "results": [
+      {
+        "scale": 1.0,
+        "continued": {
+          "compared": 536,
+          "lost": [],
+          "max_relative_change": {
+            "P": 1.46318419296243e-05,
+            "cv": 0.039783996896160634,
+            "chiRho": 3.827092352581829e-06
+          },
+          "total_Cv_ratio": 0.9957171406529717,
+          "integrated_delta_U_erg": 9.357385505267209e+42,
+          "minimum_Cv": 38873156.588531494,
+          "minimum_stiffness": 1.6654983998310087,
+          "weighted_solid_mass_fraction": 0.0,
+          "maximum_solid_weight": 0
+        },
+        "phase": {
+          "compared": 536,
+          "lost": [],
+          "max_relative_change": {
+            "P": 2.374664131998827e-09,
+            "cv": 0.00037456181261585897,
+            "chiRho": 3.9510917870799744e-08
+          },
+          "total_Cv_ratio": 1.0000005876953462,
+          "integrated_delta_U_erg": -1.363839456522715e+37,
+          "minimum_Cv": 38887716.98852539,
+          "minimum_stiffness": 1.6654983340256382,
+          "weighted_solid_mass_fraction": 4.10884769633865e-08,
+          "maximum_solid_weight": 1.8426232986515642e-05
+        },
+        "refusal_counts": {
+          "baseline": 0,
+          "continued": 0,
+          "phase": 0
+        }
+      },
+      {
+        "scale": 0.96,
+        "continued": {
+          "compared": 536,
+          "lost": [],
+          "max_relative_change": {
+            "P": 1.5483600281029908e-05,
+            "cv": 0.041704740435920096,
+            "chiRho": 4.059864345484776e-06
+          },
+          "total_Cv_ratio": 0.9955341504625176,
+          "integrated_delta_U_erg": 9.724317446811368e+42,
+          "minimum_Cv": 38396512.671230316,
+          "minimum_stiffness": 1.6655355909652938,
+          "weighted_solid_mass_fraction": 0.0,
+          "maximum_solid_weight": 0
+        },
+        "phase": {
+          "compared": 536,
+          "lost": [],
+          "max_relative_change": {
+            "P": 1.3614142890805425e-07,
+            "cv": 0.024898723729833927,
+            "chiRho": 2.5687240231553332e-06
+          },
+          "total_Cv_ratio": 1.0000350485213134,
+          "integrated_delta_U_erg": -6.916372757599105e+38,
+          "minimum_Cv": 38879161.38824844,
+          "minimum_stiffness": 1.6655313126640099,
+          "weighted_solid_mass_fraction": 1.9148154614593772e-06,
+          "maximum_solid_weight": 0.0009606583840025486
+        },
+        "refusal_counts": {
+          "baseline": 0,
+          "continued": 0,
+          "phase": 0
+        }
+      },
+      {
+        "scale": 0.92,
+        "continued": {
+          "compared": 536,
+          "lost": [],
+          "max_relative_change": {
+            "P": 1.6377919942245356e-05,
+            "cv": 0.04379735362228088,
+            "chiRho": 4.304828898016311e-06
+          },
+          "total_Cv_ratio": 0.9953356567061441,
+          "integrated_delta_U_erg": 1.0105628960640899e+43,
+          "minimum_Cv": 37889867.686813354,
+          "minimum_stiffness": 1.6655725132787857,
+          "weighted_solid_mass_fraction": 0.0,
+          "maximum_solid_weight": 0
+        },
+        "phase": {
+          "compared": 536,
+          "lost": [],
+          "max_relative_change": {
+            "P": 1.3569303184524095e-05,
+            "cv": 2.6210115842168196,
+            "chiRho": 0.00026211105954931924
+          },
+          "total_Cv_ratio": 1.0037209581364857,
+          "integrated_delta_U_erg": -6.507555585289541e+40,
+          "minimum_Cv": 39201244.08387375,
+          "minimum_stiffness": 1.665135948302574,
+          "weighted_solid_mass_fraction": 0.00016817249789617087,
+          "maximum_solid_weight": 0.08857699215017283
+        },
+        "refusal_counts": {
+          "baseline": 0,
+          "continued": 0,
+          "phase": 0
+        }
+      },
+      {
+        "scale": 0.9,
+        "continued": {
+          "compared": 526,
+          "lost": [],
+          "max_relative_change": {
+            "P": 1.6841945241541367e-05,
+            "cv": 0.04491488101501451,
+            "chiRho": 4.4321486445397795e-06
+          },
+          "total_Cv_ratio": 0.9950835834898886,
+          "integrated_delta_U_erg": 1.0301983786398175e+43,
+          "minimum_Cv": 37625083.80512619,
+          "minimum_stiffness": 1.6655908592211142,
+          "weighted_solid_mass_fraction": 0.0,
+          "maximum_solid_weight": 0
+        },
+        "phase": {
+          "compared": 526,
+          "lost": [],
+          "max_relative_change": {
+            "P": 8.884257348629188e-05,
+            "cv": 9.049107011761418,
+            "chiRho": 0.0008859918115999843
+          },
+          "total_Cv_ratio": 1.0307703214205162,
+          "integrated_delta_U_erg": -6.2290068974062574e+41,
+          "minimum_Cv": 39371400.411026,
+          "minimum_stiffness": 1.6641294841597793,
+          "weighted_solid_mass_fraction": 0.001566164307061407,
+          "maximum_solid_weight": 0.5607468203788103
+        },
+        "refusal_counts": {
+          "baseline": 10,
+          "continued": 10,
+          "phase": 10
+        }
+      },
+      {
+        "scale": 0.87,
+        "continued": {
+          "compared": 519,
+          "lost": [],
+          "max_relative_change": {
+            "P": 1.7560177104858354e-05,
+            "cv": 0.04668879226210265,
+            "chiRho": 4.6295014669572865e-06
+          },
+          "total_Cv_ratio": 0.9948304706480329,
+          "integrated_delta_U_erg": 1.060401686948232e+43,
+          "minimum_Cv": 37213381.576049805,
+          "minimum_stiffness": 1.6656182170231362,
+          "weighted_solid_mass_fraction": 0.0,
+          "maximum_solid_weight": 0
+        },
+        "phase": {
+          "compared": 519,
+          "lost": [],
+          "max_relative_change": {
+            "P": 0.00016382238317247388,
+            "cv": 9.449965518771013,
+            "chiRho": 0.0009349223524230954
+          },
+          "total_Cv_ratio": 1.1035887330284715,
+          "integrated_delta_U_erg": -4.7641795021063857e+42,
+          "minimum_Cv": 39640782.2075119,
+          "minimum_stiffness": 1.6645931885446958,
+          "weighted_solid_mass_fraction": 0.011683800189382455,
+          "maximum_solid_weight": 0.9886451258298673
+        },
+        "refusal_counts": {
+          "baseline": 17,
+          "continued": 17,
+          "phase": 17
+        }
+      }
+    ]
+  },
+  "conductivity_scenarios": {
+    "source": "http://www.ioffe.ru/astro/conduct/condegen19.f",
+    "source_sha256": "b66ccb45aaceda2ec03643991e577aaf6ef50990d27098f4be783d258baab1e0",
+    "source_edit": "Only the demonstrated syntax typo continie -> continue, on line492. Original retained. No source physics change.",
+    "temperature_factors": [
+      1.0,
+      0.9,
+      0.8
+    ],
+    "source_scenarios": [
+      "pure He at same electron density",
+      "mean ion, no impurity",
+      "mean ion, random-mixture Qimp"
+    ],
+    "summary": [
+      {
+        "q_limit": 0.01,
+        "q_actual": 0.009775000522312161,
+        "radius_cm": 211294018.62484995,
+        "observed_T_drop_K": 130.28509325828054,
+        "native_required_T_drop_K": 140.80619788684865,
+        "native_drop_if_no_carried_heat_K": 323.32372919187094,
+        "reference_required_T_drop_K": [
+          [
+            133.68353451364564,
+            150.82938429607515,
+            499.8679688993741
+          ],
+          [
+            134.20906675511276,
+            154.7121243151844,
+            542.5327738744056
+          ],
+          [
+            147.22981625974006,
+            153.3702591040917,
+            589.6684898582153
+          ]
+        ],
+        "native_drop_over_central_T": 0.0006945459965804063,
+        "conductivity_reference_over_native_min": [
+          1.0505831045954357,
+          0.9058228216249239,
+          0.27115923132963726
+        ],
+        "conductivity_reference_over_native_max": [
+          1.0559919483364386,
+          0.9995231442527823,
+          0.2965182755001556
+        ]
+      },
+      {
+        "q_limit": 0.05,
+        "q_actual": 0.04929502065666313,
+        "radius_cm": 369604206.924145,
+        "observed_T_drop_K": 416.1371606621542,
+        "native_required_T_drop_K": 437.71704931148184,
+        "native_drop_if_no_carried_heat_K": 956.8357026573815,
+        "reference_required_T_drop_K": [
+          [
+            417.9535377839325,
+            448.5185389587438,
+            1431.3546350513916
+          ],
+          [
+            420.1241711709125,
+            478.49909757232314,
+            1570.5392043419317
+          ],
+          [
+            439.96755306655945,
+            479.73029649449074,
+            1708.2754166103002
+          ]
+        ],
+        "native_drop_over_central_T": 0.0021590997328014144,
+        "conductivity_reference_over_native_min": [
+          1.0386578310927426,
+          0.9058228216249239,
+          0.27115923132963726
+        ],
+        "conductivity_reference_over_native_max": [
+          1.0559919483364386,
+          0.9995231442527823,
+          0.34292933547430987
+        ]
+      },
+      {
+        "q_limit": 0.1,
+        "q_actual": 0.09775132891428887,
+        "radius_cm": 473107165.9366135,
+        "observed_T_drop_K": 709.7235575408267,
+        "native_required_T_drop_K": 738.2521260709617,
+        "native_drop_if_no_carried_heat_K": 1530.1108668410598,
+        "reference_required_T_drop_K": [
+          [
+            709.0440240335265,
+            750.8125649733826,
+            2238.7658169633164
+          ],
+          [
+            713.6147863154555,
+            782.6496545986026,
+            2435.931045698529
+          ],
+          [
+            733.9079556097604,
+            811.2175196945719,
+            2671.1590846819886
+          ]
+        ],
+        "native_drop_over_central_T": 0.0036415304604816043,
+        "conductivity_reference_over_native_min": [
+          1.0268532604251157,
+          0.9058228216249239,
+          0.27115923132963726
+        ],
+        "conductivity_reference_over_native_max": [
+          1.0559919483364386,
+          0.9995231442527823,
+          0.4029418085549154
+        ]
+      }
+    ]
+  },
+  "initial_phase_trial": {
+    "accepted": 0,
+    "rejected": 2,
+    "stop": "CPU budget after convective membership cycling",
+    "CPU_seconds": 504.688578
+  },
+  "scope": "Same-composition phase EOS; no metal fractionation, solid-ion mobility validation, or final cooling-age claim. Matched100Myr pre-onset runs retain all audits and time checks;25Myr initial steps resolve the initial boundary iteration without changed tolerances."
+}

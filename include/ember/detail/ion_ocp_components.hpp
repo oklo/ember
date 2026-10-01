@@ -34,6 +34,16 @@ template<class J> J fition9(const J& g) {
   const J F0=A1*(sqrt(g*(A2+g))-A2*log(sqrt(g/A2)+sqrt(1+g/A2)))+2*A3*(sg-atan(sg));
   return F0+C1*(g-G1*log1p(g/G1))+C2/2*log1p(g*g/G2);
 }
+// Optional continuation of the classical OCP liquid beyond gstar (gstar <= 0: FITION9 everywhere). FITION9's
+// supercooled internal energy falls below the classical bcc crystal near Gamma ~ 1000; beyond gstar the excess
+// internal energy u = Gamma df/dGamma is continued linearly in Gamma from its value and slope at gstar, and f is
+// its integral f = f(gstar) + int u dGamma/Gamma, so the continuation is C2 and thermodynamically consistent.
+template<class J> J fition9_continued(const J& g,double gstar) {
+  if(!(gstar>0)||g.value()<=gstar)return fition9(g);
+  const auto s=fition9(Taylor3<1>::variable(gstar,0));
+  const double f1=s.derivative({1}),f2=s.derivative({2}),u=gstar*f1,du=f1+gstar*f2;
+  return s.value()+(u-du*gstar)*log(g/gstar)+du*(g-gstar);
+}
 // Ideal ion gas (without mixing entropy), as in EOSFI22.
 template<class J> J ideal_ion(const Plasma<J>& p){return 1.5*log(p.tpt*p.tpt/p.gami)-1.323515;}
 // FSCRliq8: electron-ion screening (polarization) in the liquid.
@@ -76,7 +86,7 @@ template<class J> J excor7(const J& rs,const J& game) {
   const J S4=2/E/discr*(D*B3+B4*B2)*(atan(C4/discr)-atan(D/discr));
   return S1+S2+S3+S4;
 }
-template<class J> J classical_liquid(const Plasma<J>& p) {
-  return fition9(p.gami)+ideal_ion(p)+fscr_liquid(p);
+template<class J> J classical_liquid(const Plasma<J>& p,double gstar=0) {
+  return fition9_continued(p.gami,gstar)+ideal_ion(p)+fscr_liquid(p);
 }
 } // namespace ember::detail::ioffe

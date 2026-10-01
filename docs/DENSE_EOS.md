@@ -1,8 +1,9 @@
 # Dense-matter thermodynamics
 
 The material EOS derives pressure, energy, entropy and composition responses
-from a free energy. Crystallization, phase separation and a common EOS for
-extreme-cold interiors and envelopes remain unfinished.
+from a free energy. An optional crystallization model keeps the same composition
+in the liquid and solid. Element separation and a common EOS for extreme-cold
+interiors and envelopes remain unfinished.
 
 Tables can contain separate valid density intervals. Pressure inversion stays
 in the interval containing its density guess and cannot cross a masked cell;
@@ -247,3 +248,43 @@ are not converged. A matched 100 Myr stellar interval changes luminosity by
 5.103e-13 relative.
 This extends the same screened Born collision model; it does not add
 strong-correlation or relativistic corrections.
+
+
+## Optional freezing at fixed composition
+
+`eos_cold_helium "mixture_softmin"` adds liquid and bcc-solid ion free energies
+from Potekhin & Chabrier (2013) and Baiko & Chugunov (2022). A smooth minimum,
+with width 0.005 kT per ion, supplies the latent heat through the same potential
+as pressure and composition forces. The composition dependence of that width
+is differentiated. The default remains `liquid_mixture`.
+
+`eos_metal_liquid_continuation_gamma "200"` selects a thermodynamically
+consistent continuation of the classical liquid fit. Beyond the stated coupling,
+its internal energy follows the value and slope at the join; integrating it
+gives the free energy. Values 175–300 are available for sensitivity tests; zero
+retains the original fit. Both settings enter restart identity. This avoids
+using the original liquid fit's unphysical extrapolation below the bcc ground
+energy, but does not establish a multicomponent phase diagram.
+
+On the 835.7 K surface-temperature profile, the continued liquid changes total
+heat capacity by −0.4283%; the phase term is still negligible. The choices
+175, 200 and 300 place the central transition at approximately 188, 183 and
+171 kK. These are declared scenarios, not measured uncertainty bounds. Actual
+freezing may separate elements. Independent metal velocities, crystal diffusion
+and precipitation are not selected by this EOS option. Do not extend a
+liquid-ion transport prescription through appreciable freezing without assessing
+that approximation. Hydrogen and quantum-domain guards remain active.
+
+The selected Ioffe electron-conduction table already treats liquid and crystal
+scattering. A random-impurity comparison on the current profile changes the
+required temperature drop across its inner 0.9775% by mass from 140.8 to
+499.9 K. This is a fixed-profile sensitivity, not a cooling-age error estimate.
+
+A matched 100 Myr comparison begins with 25 Myr steps and passes every time
+and conservation check. With the same liquid continuation, the phase term
+changes central temperature by 1.667e-7 relative and luminosity by
+1.152e-11: freezing has not yet appreciably begun. With the phase option off,
+the original physical checkpoint is reproduced. The thermal and composition
+chain-rule implementation agrees with direct five-variable differentiation
+within 9.115e-12 over 2680 profile queries. Initial larger-step failures are
+retained in the [numerical checks](results/mixture_phase_sept30_v1.json).

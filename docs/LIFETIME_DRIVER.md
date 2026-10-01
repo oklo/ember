@@ -702,3 +702,12 @@ the stricter conductivity margin still leaves the estimated radiative heat
 uncertainty far below the selected 0.3% ceiling. These are conditional bounds
 on the opacity approximation, not a calibration of the conductivity itself.
 [Cold-envelope checks](results/cold_opacity_floor_sept30_v1.json).
+
+
+The optional cold-core phase calculation uses `eos_cold_helium "mixture_softmin"`
+and, for the declared liquid-fit continuation, for example
+`eos_metal_liquid_continuation_gamma "200"`. The latter also works with
+`liquid_mixture`; zero preserves the original liquid. These are physical
+selections recorded in the checkpoint identity. Both phases have the same
+composition; ion mobility in a solid and element precipitation require separate
+treatment. See [Dense EOS](DENSE_EOS.md#optional-freezing-at-fixed-composition).
