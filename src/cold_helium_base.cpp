@@ -117,6 +117,23 @@ double cold_helium_join_weight(double T,const Composition& c,const ColdHeliumOpt
   check_join(o);
   return falling(std::log(T),std::log(o.join_cold),std::log(o.join_hot))[0]*falling(c.X[0],o.hydrogen_join_full,o.hydrogen_join_zero)[0];
 }
+std::array<double,6> cold_helium_solid_response(double T,double rho,const Composition& c,const ColdHeliumOptions& o) {
+  check_join(o);
+  if(!o.mixture_phase)return {};
+  const auto wt=falling(std::log(T),std::log(o.join_cold),std::log(o.join_hot));
+  const auto wx=falling(c.X[0],o.hydrogen_join_full,o.hydrogen_join_zero);
+  if(wt[0]*wx[0]==0)return {};
+  check_domain(T,rho,c,10,o);
+  MixturePhaseOptions p;p.liquid_continuation_gamma=o.liquid_continuation_gamma;
+  p.width=o.phase_width;p.minimum_solid_gamma=o.minimum_solid_gamma;p.trace_hydrogen=o.trace_hydrogen;
+  const auto raw=ion_mixture_phase_weight_response(T,rho,c,p);
+  auto result=raw;
+  for(auto& v:result)v*=wt[0]*wx[0];
+  result[1]+=raw[0]*wt[1]*wx[0];
+  result[3]+=raw[0]*wt[0]*wx[1];
+  return result;
+}
+
 std::array<HelmholtzJet,10> cold_helium_alignment_jets(const ColdHeliumTable& table,double T,double rho,
     const Composition& c,std::size_t channels,const ColdHeliumOptions& o) {
   check_join(o);

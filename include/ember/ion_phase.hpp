@@ -62,4 +62,7 @@ std::array<HelmholtzJet,10> ion_mixture_phase_difference_jets(
     double T,double rho,const Composition&,std::size_t channels=10,const MixturePhaseOptions& = {});
 // Diagnostic: solid-solution weight 1/(1+exp(D/W)) and D/W at a state (value channel only).
 std::array<double,2> ion_mixture_phase_weight(double T,double rho,const Composition&,const MixturePhaseOptions& = {});
+// Solid weight and its derivatives in ln T, ln rho, XH, X3, Z.
+std::array<double,6> ion_mixture_phase_weight_response(double T,double rho,const Composition&,
+    const MixturePhaseOptions& = {});
 } // namespace ember

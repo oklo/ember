@@ -55,6 +55,11 @@ class ScreenedMetalMicroscopicTransport final : public MetalMicroscopicTransport
   // the anchor's fraction), using the EOS's own first
   // derivatives. Returned derivative arrays are the anchor's. r=0 disables.
   void use_eos_taylor(double radius,bool verify=false);
+  // Optional phase scenario: multiply the entire species mobility matrix by
+  // (1-w)+remaining*w, where w is the selected EOS solid weight. The same
+  // factor applies to microscopic carried heat; zero-flux conduction remains.
+  // remaining=0 is an immobile-solid limit, not a calibrated crystal law.
+  void use_phase_mobility(const ColdHeliumOptions&,double remaining);
   struct EosReuse {std::size_t hits{},exact{},verified{};double worst_potential{},worst_enthalpy{};};
   EosReuse eos_reuse_statistics() const;
  private:
@@ -69,5 +74,7 @@ class ScreenedMetalMicroscopicTransport final : public MetalMicroscopicTransport
   struct EosCache;
  private:
   std::shared_ptr<EosCache> eos_cache_;
+  std::optional<ColdHeliumOptions> phase_options_;
+  double solid_mobility_=1;
 };
 } // namespace ember

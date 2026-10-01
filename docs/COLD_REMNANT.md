@@ -13,6 +13,8 @@ to extreme cold and conditional nucleon-decay scenarios.
 - Ledoux convection with instantaneous or finite-rate mixing.
 - Adaptive time control, checked Richardson extrapolation and conservation audits.
 - A tested weakly quantum liquid-ion free-energy correction.
+- Optional same-composition crystallization and latent heat, with solid-ion
+  mobility scenarios.
 
 The current stellar configuration uses instantaneous mixing within each
 connected convective region. Metals share a GS98 mixture response rather than
@@ -26,7 +28,8 @@ independent element velocities. The nuclear network is not full CNO.
 2. Validate molecular charge balance and nonideal atmosphere chemistry; extend
    grain physics, cool diffusion, dense-matter thermodynamics
    and conductive transport as the star enters their relevant regimes.
-3. Add helium crystallization, latent heat and strongly quantum mixtures.
+3. Assess crystallization with element separation, crystal diffusion and strongly
+   quantum mixtures. The current phase option keeps both phases at the same composition.
    Resolve individual metal settling and precipitation, including the possible
    concentration of trace heavy elements in the center.
 4. At sufficiently low luminosity, compare isolation with accretion, tidal encounters

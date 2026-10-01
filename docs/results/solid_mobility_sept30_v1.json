@@ -1,0 +1,106 @@
+{
+  "passed": true,
+  "interval_years": 100000000.0,
+  "arms": {
+    "unchanged": {
+      "CPU_seconds": 182.785464,
+      "wall_seconds": 59.456789375282824,
+      "accepted": 3,
+      "rejected": 0,
+      "maximum_time_error": 0.0010758568080859732,
+      "maximum_first_law_residual": 1.7251611250657106e-08
+    },
+    "immobile": {
+      "CPU_seconds": 150.66400199999998,
+      "wall_seconds": 50.619780249893665,
+      "accepted": 3,
+      "rejected": 0,
+      "maximum_time_error": 0.0010758466029159308,
+      "maximum_first_law_residual": 1.7224404569304852e-08
+    },
+    "residual": {
+      "CPU_seconds": 184.225025,
+      "wall_seconds": 59.67488387506455,
+      "accepted": 3,
+      "rejected": 0,
+      "maximum_time_error": 0.0010758517721143335,
+      "maximum_first_law_residual": 1.7505090599279072e-08
+    }
+  },
+  "relative_to_unchanged": {
+    "immobile": {
+      "luminosity_Lsun": -3.1544766798674573e-12,
+      "radius_Rsun": -1.8207657603852567e-13,
+      "Teff_K": -6.977751709769109e-13,
+      "central_T_K": -3.0666954531355373e-09,
+      "central_density_g_cm3": -4.8335024871448695e-09,
+      "H_mass_g": 0.0,
+      "He3_mass_g": 6.661338147750939e-16,
+      "He3_peak": -5.094826782681139e-10,
+      "surface_X": -1.8096635301390052e-14
+    },
+    "residual": {
+      "luminosity_Lsun": -6.317946166234378e-12,
+      "radius_Rsun": -8.43769498715119e-14,
+      "Teff_K": -1.5374368445009168e-12,
+      "central_T_K": -3.033081341641264e-09,
+      "central_density_g_cm3": -4.7861430374496194e-09,
+      "H_mass_g": 2.220446049250313e-16,
+      "He3_mass_g": -4.440892098500626e-16,
+      "He3_peak": 6.550315845288424e-14,
+      "surface_X": 2.220446049250313e-16
+    }
+  },
+  "native": {
+    "points": 68,
+    "phase_points": 33,
+    "maximum_solid_weight": 0.9996480886084549,
+    "maximum_rate_scale_error": 8.786764018487239e-17,
+    "maximum_unity_control_error": 0,
+    "maximum_product_rule_error": 5.814332486136856e-15,
+    "maximum_heat_derivative_error": 1.0075090803096415e-05,
+    "maximum_conductivity_change": 0,
+    "maximum_metal_derivative_error_with_phase": 3.8383520245056624e-05,
+    "scope": "Actual profile plus temperature projections; includes nearly solid states. Raw relative finite differences at near-zero Z suffer subtraction error; default transport gives the same discrepancy. Product-rule checks and resolved phase states isolate the new factor.",
+    "passed": true
+  },
+  "finite_difference_steps": {
+    "native_debug": {
+      "phase_fd": 3.8383520245056624e-05,
+      "trace_fd": 54.46181738101191
+    },
+    "native_half": {
+      "phase_fd": 2.6075502870366645e-05,
+      "trace_fd": 300.0435239777735
+    },
+    "native_wide": {
+      "phase_fd": 0.29009015173743935,
+      "trace_fd": 1.00904917800964
+    }
+  },
+  "endpoint": {
+    "years": 3903617922497.772,
+    "Teff_K": 813.3830703552019,
+    "central_T_K": 192702.65445275983,
+    "accepted": 3747
+  },
+  "verification": {
+    "residual_tolerance": 2e-06,
+    "correction_tolerance": 2e-06,
+    "temporal_structure_target": 0.0004,
+    "unchanged_checks": [
+      "species",
+      "inventory",
+      "transported heat",
+      "full/two-half steps",
+      "first law"
+    ],
+    "strict_attempt": {
+      "CPU_seconds": 898.019006,
+      "accepted": 0,
+      "reason": "Repeated verification and convective-boundary failures; stopped by primary. Final verification was about 1.2e-6 versus the old 4e-7 residual threshold. Evidence retained.",
+      "path": "out/phase-mobility-primary-sept30-v1/unchanged"
+    }
+  },
+  "scope": "Continuous common scaling of liquid ion mobility by the same EOS solid weight. Zero and 0.01 residual fractions are declared scenarios, not calibrated crystal coefficients. Same-composition phases only; no independent metal velocities or precipitation. Actual star remains almost entirely liquid. Projected-profile checks reach solid weights above 0.999."
+}

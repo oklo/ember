@@ -395,7 +395,9 @@ from the inner species solve and its integrated conservation bounds. The
 returned composition still passes a structure residual and correction check.
 Omitting these settings retains the previous stopping criteria. Selected values
 enter the restart identity; the driver requires them to remain smaller than
-the corresponding time-discretization tolerances.
+the corresponding time-discretization tolerances. Each final structure check
+must be at least 100 times tighter than the temporal structure target; species
+and transported-heat limits retain their factor of 1000.
 
 Face mixing coefficients, transported-heat residuals and nuclear sources used
 in flux reconstruction now share the zone threads. Ordered conservation sums
@@ -709,5 +711,8 @@ and, for the declared liquid-fit continuation, for example
 `eos_metal_liquid_continuation_gamma "200"`. The latter also works with
 `liquid_mixture`; zero preserves the original liquid. These are physical
 selections recorded in the checkpoint identity. Both phases have the same
-composition; ion mobility in a solid and element precipitation require separate
-treatment. See [Dense EOS](DENSE_EOS.md#optional-freezing-at-fixed-composition).
+composition. With this phase calculation, `solid_ion_mobility_fraction "0.01"`
+selects a continuous reduction to 1% of liquid ion mobility in the solid;
+zero gives the immobile limit. These are sensitivity scenarios, not calibrated
+crystal diffusion. The default leaves mobility unchanged. Element precipitation
+is not included. See [Dense EOS](DENSE_EOS.md#ion-motion-during-freezing).

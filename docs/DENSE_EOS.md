@@ -288,3 +288,30 @@ the original physical checkpoint is reproduced. The thermal and composition
 chain-rule implementation agrees with direct five-variable differentiation
 within 9.115e-12 over 2680 profile queries. Initial larger-step failures are
 retained in the [numerical checks](results/mixture_phase_sept30_v1.json).
+
+## Ion motion during freezing
+
+`solid_ion_mobility_fraction` optionally reduces the full ion mobility matrix
+by `1 - (1 - f) w`, where `w` is the same solid weight used by the EOS and
+`f` is the remaining fraction of liquid mobility in a fully solid region.
+It requires `mixture_softmin`; omitting it leaves transport unchanged.
+Values zero and 0.01 provide an immobile limit and a finite-mobility comparison.
+They are scenarios, not fitted diffusion coefficients for a helium crystal.
+
+The factor and its thermal and composition derivatives enter species fluxes
+and their carried heat together. Scaling the whole matrix preserves its mass
+and current constraints. Electron conductivity remains in the selected
+conduction treatment. The option is recorded in restart identity.
+
+[Hughto et al. (2011)](https://arxiv.org/abs/1104.4822) find diffusion through
+both nearly perfect and defective Coulomb crystals. Consequently, freezing
+does not establish permanent chemical trapping. Species-dependent crystal
+diffusion and precipitation require additional physics; this option cannot
+decide whether lead forms a separate core.
+
+On a matched 100 Myr interval beginning at 814.4 K, both mobility scenarios
+change global quantities by less than 5e-9 relative to unchanged transport.
+Every interval is step-doubled; the largest first-law residual is 1.725e-8.
+The final structure residual and Newton correction are each limited to 2e-6,
+200 times tighter than the temporal structure target. Profile checks also
+cover nearly solid states. [Numerical checks](results/solid_mobility_sept30_v1.json).

@@ -46,6 +46,10 @@ std::array<HelmholtzJet,10> cold_helium_joined_jets(const ColdHeliumTable&,doubl
 void cold_helium_validate(double T,double rho,const Composition&,const ColdHeliumOptions& = {});
 // Product of C2 temperature and hydrogen weights; zero returns the original EOS.
 double cold_helium_join_weight(double T,const Composition&,const ColdHeliumOptions& = {});
+// Solid weight including the existing temperature/composition joins, followed
+// by derivatives in ln T, ln rho, XH, X3 and Z. Zero when the phase is off.
+std::array<double,6> cold_helium_solid_response(double T,double rho,const Composition&,
+    const ColdHeliumOptions& = {});
 // Electron components for independent checks: 0 ideal, 1 exchange-correlation.
 HelmholtzJet cold_helium_component_jet(int,double T,double rho,const Composition&,const ColdHeliumOptions& = {});
 } // namespace ember

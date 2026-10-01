@@ -114,6 +114,12 @@ int lifetime_main(int argc,char** argv) {
     }
     if(!cold_helium_options && cfg.values.contains("eos_metal_liquid_continuation_gamma"))
       throw std::invalid_argument("eos_metal_liquid_continuation_gamma requires eos_cold_helium");
+    const double solid_mobility=cfg.values.contains("solid_ion_mobility_fraction")?
+        cfg.number("solid_ion_mobility_fraction"):-1.;
+    if(cfg.values.contains("solid_ion_mobility_fraction") &&
+       (!(std::isfinite(solid_mobility)&&solid_mobility>=0&&solid_mobility<=1)||
+        !cold_helium_options || !cold_helium_options->mixture_phase))
+      throw std::invalid_argument("solid_ion_mobility_fraction requires mixture_softmin and a value in [0,1]");
     fs::path cold_eos_path;
     if(cfg.values.contains("eos_cold_potential"))cold_eos_path=path("eos_cold_potential");
     const auto conduction_path=path("conduction"),atmosphere_path=path("atmosphere"),collision_path=path("collisions"),composition_path=path("composition");
@@ -210,8 +216,11 @@ int lifetime_main(int argc,char** argv) {
     const double verification_correction=optional_number("verification_correction_tolerance");
     for(double t:{coupling_stop,material_heat,verification_residual,verification_correction})
       if(!std::isfinite(t) || t<0)throw std::invalid_argument("invalid coupling or verification tolerance");
+    // Both final structure tests remain at least 100 times tighter than the
+    // temporal target. A stricter residual-only cap can reject a converged
+    // cold model even when its Newton correction is below that same budget.
     if(coupling_stop>1e-3*species_tolerance || material_heat>1e-3*energy_tolerance
-        || verification_residual>1e-3*structure_tolerance || verification_correction>1e-2*structure_tolerance)
+        || verification_residual>1e-2*structure_tolerance || verification_correction>1e-2*structure_tolerance)
       throw std::invalid_argument("coupling or verification tolerance must remain below time accuracy");
     for(double r:{eos_radius,buoyancy_spacing,screening_spacing})
       if(!std::isfinite(r) || r<0 || r>1e-4)throw std::invalid_argument("response reuse radius must lie in [0,1e-4]");
@@ -404,6 +413,7 @@ int lifetime_main(int argc,char** argv) {
         {"material_heat_tolerance",material_heat},{"verification_residual_tolerance",verification_residual},
         {"verification_correction_tolerance",verification_correction}})
       if(value>0)identity.number("solver."+key,value);
+    if(solid_mobility>=0)identity.number("transport.solid_ion_mobility_fraction",solid_mobility);
     identity.family("eos",eos_path,true);
     if(ion_quantum=="liquid_bc22")
       identity.values["eos.ion_quantum"]="bc22.liquid.common_ne.linear_mixture.full_expression.v8";
@@ -552,6 +562,7 @@ int lifetime_main(int argc,char** argv) {
     PPCNNetwork nuclear(PPRates::solar_fusion_iii,PPScreening::salpeter_van_horn,PPRates::solar_fusion_iii);
     PlasmaNeutrinoLosses losses;ScreenedCollisionTransport collisions(collision_path.string());
     ScreenedMetalMicroscopicTransport microscopic(table_eos,collisions,true,minimum_temperature,{true,true,true},true);
+    if(solid_mobility>=0)microscopic.use_phase_mobility(*cold_helium_options,solid_mobility);
     set_composition_buoyancy_reuse(buoyancy_spacing,verify_responses==1);
     set_screening_reuse(screening_spacing);
     set_quantum_screening(quantum_screening);

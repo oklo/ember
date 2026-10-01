@@ -217,6 +217,20 @@ std::array<double,2> ion_mixture_phase_weight(double T,double rho,const Composit
   return {y>=0?std::exp(-y)/(1+std::exp(-y)):1/(1+std::exp(y)),y};
 }
 
+std::array<double,6> ion_mixture_phase_weight_response(double T,double rho,const Composition& c,
+    const MixturePhaseOptions& o) {
+  check_mixture(T,rho,c,10,o);
+  const auto m=mixture_terms(T,rho,c,o);
+  std::array<double,6> out{};
+  if(m.gamma_he<o.minimum_solid_gamma)return out;
+  const J5 y=m.D/m.W;
+  const double e=std::exp(-std::abs(y.value()));
+  out[0]=y.value()>=0?e/(1+e):1/(1+e);
+  const double slope=-e/((1+e)*(1+e));
+  for(unsigned k=0;k<5;++k){J5::Powers p{};p[k]=1;out[1+k]=slope*y.derivative(p);}
+  return out;
+}
+
 std::array<HelmholtzJet,10> ion_mixture_phase_difference_jets(
     double T,double rho,const Composition& c,std::size_t channels,const MixturePhaseOptions& o) {
   check_mixture(T,rho,c,channels,o);

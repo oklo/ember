@@ -332,3 +332,7 @@ add_test(NAME cold_helium_base COMMAND test_cold_helium_base)
 add_executable(test_ion_classical test_ion_classical.cpp)
 target_link_libraries(test_ion_classical PRIVATE ember)
 add_test(NAME ion_classical COMMAND test_ion_classical)
+
+add_executable(test_phase_mobility test_phase_mobility.cpp)
+target_link_libraries(test_phase_mobility PRIVATE ember)
+add_test(NAME phase_mobility COMMAND test_phase_mobility)
