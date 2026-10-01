@@ -31,7 +31,11 @@ def main():
                    help='reuse exact temperature/density coordinates from a source specification or manifest')
     p.add_argument('--precision-fallback',type=Path,
                    help='pinned tighter-quadrature probe, used only if the nominal source process fails')
+    p.add_argument('--start-temperature',type=float,
+                   help='approach each isotherm from this temperature at its upper density, then decrease density')
     a=p.parse_args()
+    if a.start_temperature is not None and (not math.isfinite(a.start_temperature) or a.start_temperature<=0):
+        raise ValueError('starting temperature must be positive and finite')
     if not 1<=a.jobs<=8 or not .005<=a.step<=.05:raise ValueError('invalid jobs or material step')
     if any(sorted(set(axis))!=axis for axis in [a.hydrogen,a.helium3]):raise ValueError('axes must increase')
     ts=[3.5+i*a.step for i in range(round(3.6/a.step)+1)]
@@ -46,14 +50,14 @@ def main():
         ts,qs=grid['logT'],grid['logQ']
         for axis in [ts,qs]:
             if (len(axis)<5 or not all(math.isfinite(v) for v in axis)
-                    or any(v>=w for v,w in zip(axis,axis[1:]))
-                    or any(abs((w-v)/a.step-1)>1e-10 for v,w in zip(axis,axis[1:]))):
-                raise ValueError('reference grid does not match the requested uniform material step')
+                    or any(v>=w for v,w in zip(axis,axis[1:]))):
+                raise ValueError('reference grid axes must be finite and strictly increasing')
         grid_reference={'grid_reference':str(a.grid_from.resolve()),
                         'grid_reference_sha256':sha(a.grid_from.read_bytes())}
     spec={'hydrogen':a.hydrogen,'helium3':a.helium3,'logT':ts,'logQ':qs,'probe_sha256':source_sha,
           'source_archive_sha256':'4ab1c15a51385a3eab3b08c6f3f240739c0105d92ec828d635ac95720edefb09',**grid_reference}
     if a.metallicity is not None:spec['metallicity']=a.metallicity
+    if a.start_temperature is not None:spec['start_temperature']=a.start_temperature
     if a.grid_from and grid.get('source_coverage') is not None:
         spec['source_coverage']=grid['source_coverage']
     options=[3,223,-2] if a.electron_integrals=='numerical' else [3,1,-2]
@@ -97,8 +101,16 @@ def main():
                     or m['hydrogen']>coverage.get('maximum_added_hydrogen',1.)):
                 selected_q=[q for q in qs if q<=coverage['original_logQ_max']]
         scale=m['source_mass_scale']
-        request=' '.join(map(str,m['eps']))+'\n'+' '.join(map(str,options))+'\n'+''.join(
-            f'{math.log(scale)+math.log(10)*(q+1.5*(t-6)):.17g} {math.log(10)*t:.17g}\n' for q in selected_q)
+        prefix='';starting_rows=0;request_q=selected_q
+        if a.start_temperature is not None:
+            begin,end=math.log(a.start_temperature),math.log(10)*t
+            steps=max(1,math.ceil(abs(end-begin)/.025))
+            if steps>2000:raise ValueError('starting path is too long')
+            density=math.log(scale)+math.log(10)*(selected_q[-1]+1.5*(t-6))
+            prefix=''.join(f'{density:.17g} {begin+(end-begin)*i/steps:.17g}\n' for i in range(steps+1))
+            starting_rows=steps+1;request_q=list(reversed(selected_q))
+        request=' '.join(map(str,m['eps']))+'\n'+' '.join(map(str,options))+'\n'+prefix+''.join(
+            f'{math.log(scale)+math.log(10)*(q+1.5*(t-6)):.17g} {math.log(10)*t:.17g}\n' for q in request_q)
         fingerprint=sha((source_sha+request).encode())
         if path.exists():
             saved=json.loads(gzip.decompress(path.read_bytes()))
@@ -112,8 +124,9 @@ def main():
         def responses(result):
             try:rows=[list(map(float,line.split())) for line in result.stdout.splitlines()]
             except ValueError:return None
-            if result.returncode or len(rows)!=len(selected_q) or any(len(r)!=22 or not all(math.isfinite(v) for v in r) for r in rows):return None
-            return rows
+            if result.returncode or len(rows)!=starting_rows+len(selected_q) or any(len(r)!=22 or not all(math.isfinite(v) for v in r) for r in rows):return None
+            rows=rows[starting_rows:]
+            return list(reversed(rows)) if starting_rows else rows
         rows=responses(result);override={}
         if rows is None and fallback:
             nominal=d/f'temperature-{it:03d}.nominal-failure.log'
@@ -152,6 +165,9 @@ def main():
                                   **{key:cache[key] for key in ['actual_probe_input_sha256','nominal_failure_sha256']}})
         raw={**m,'version':'FreeEOS 3.0.0','options':options,'logT':ts,'logQ':qs,
              'source_archive_sha256':spec['source_archive_sha256'],'probe_sha256':source_sha,'data':data}
+        if a.start_temperature is not None:
+            raw['start_temperature']=a.start_temperature
+            raw['source_path']='temperature continuation at upper density, then descending density'
         if spec.get('source_coverage'):
             raw['source_coverage']=spec['source_coverage']
             absent_source_rows(raw)

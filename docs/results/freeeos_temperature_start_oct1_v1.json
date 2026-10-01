@@ -1,0 +1,19 @@
+{
+  "cold_queries": 25,
+  "all_converged": true,
+  "maximum_relative_differences": {
+    "rho": 8.881784197001252e-16,
+    "T": 0.0,
+    "P": 2.220446049250313e-16,
+    "E": 3.3306690738754696e-16,
+    "Cv": 9.00390872971002e-14
+  },
+  "comparison": "same target states from distinct upper-density starting paths",
+  "cache_resume_without_source_call": true,
+  "changed_temperature_rejected": true,
+  "unequal_axis_queries": 25,
+  "default_unchanged_queries": 25,
+  "default_matches_previous": true,
+  "source_probe_sha256": "1bfcfc7226449987de1609afb8bb9b7625588457d394fc0038b4baa56ac76c9f",
+  "scope": "FreeEOS source starting path; no EOS formula, tolerance or stellar runtime change"
+}

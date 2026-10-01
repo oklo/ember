@@ -50,6 +50,14 @@ selected manifest for the full set of source compositions and use each script's
 through `build_freeeos_probe.py --electron-quadrature-error`; source physics and
 thermodynamic acceptance checks must remain explicit.
 
+For difficult cold FreeEOS states, `generate_metal_eos.py --start-temperature
+200000` first follows temperature at the upper requested density, then samples
+each isotherm in decreasing density. This changes the starting guesses, not the
+source physics or the import checks; failed target states remain flagged.
+`--grid-from` preserves the supplied coordinates, including unequal axis spacing.
+Both choices are recorded, and incompatible cached requests are rejected.
+[Source and cache checks](results/freeeos_temperature_start_oct1_v1.json).
+
 TOPS retrieval requires the external service or retained original replies.
 Non-gray atmosphere generation requires the documented TLUSTY/SYNSPEC sources,
 line data and opacity tables. These external source builds are offline dependencies;
