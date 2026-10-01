@@ -1,0 +1,214 @@
+{
+  "option": "eos_cold_helium_deep_solid on",
+  "default": "off",
+  "bounds": {
+    "maximum_hydrogen_fraction": 0.001,
+    "maximum_helium_Tp_over_T": 30,
+    "helium_Rs": [
+      500,
+      120000
+    ],
+    "maximum_phase_free_energy_over_width": -16
+  },
+  "EOS_sha256": "6a906edc27ef8a190208a2a05b8a67e0d581a78866a2abf55e89b2327e7ca93a",
+  "executable_sha256": "203727adfd721bfb9d8e5fd6242dc42b452ef5a331421d0c13f067e1172bb9a8",
+  "tests": {
+    "passed": [
+      "cold_helium_base",
+      "ion_phase",
+      "ion_quantum",
+      "variable_metal_eos"
+    ],
+    "joined_EOS_tests": "Production zero-He3 family, number-density isotope mapping; all join checks enabled",
+    "crystal_derivative_test_limit": 2e-05,
+    "phase_margin_tests": [
+      15,
+      17
+    ]
+  },
+  "profile": [
+    {
+      "temperature_multiplier": 1,
+      "states": 536,
+      "supported": 536,
+      "recovered": 0,
+      "previously_supported_lost": 0,
+      "maximum_old_relative_Cv_change": 0
+    },
+    {
+      "temperature_multiplier": 0.9,
+      "states": 536,
+      "supported": 536,
+      "recovered": 0,
+      "previously_supported_lost": 0,
+      "maximum_old_relative_Cv_change": 0
+    },
+    {
+      "temperature_multiplier": 0.8,
+      "states": 536,
+      "supported": 533,
+      "recovered": 0,
+      "previously_supported_lost": 0,
+      "maximum_old_relative_Cv_change": 0
+    },
+    {
+      "temperature_multiplier": 0.7,
+      "states": 536,
+      "supported": 471,
+      "recovered": 141,
+      "previously_supported_lost": 0,
+      "maximum_old_relative_Cv_change": 0
+    },
+    {
+      "temperature_multiplier": 0.6,
+      "states": 536,
+      "supported": 443,
+      "recovered": 241,
+      "previously_supported_lost": 0,
+      "maximum_old_relative_Cv_change": 0
+    },
+    {
+      "temperature_multiplier": 0.5,
+      "states": 536,
+      "supported": 419,
+      "recovered": 315,
+      "previously_supported_lost": 0,
+      "maximum_old_relative_Cv_change": 0
+    },
+    {
+      "temperature_multiplier": 0.4,
+      "states": 536,
+      "supported": 401,
+      "recovered": 358,
+      "previously_supported_lost": 0,
+      "maximum_old_relative_Cv_change": 0
+    },
+    {
+      "temperature_multiplier": 0.3,
+      "states": 536,
+      "supported": 401,
+      "recovered": 389,
+      "previously_supported_lost": 0,
+      "maximum_old_relative_Cv_change": 0
+    },
+    {
+      "temperature_multiplier": 0.25,
+      "states": 536,
+      "supported": 401,
+      "recovered": 401,
+      "previously_supported_lost": 0,
+      "maximum_old_relative_Cv_change": 0
+    },
+    {
+      "temperature_multiplier": 0.2,
+      "states": 536,
+      "supported": 196,
+      "recovered": 196,
+      "previously_supported_lost": 0,
+      "maximum_old_relative_Cv_change": 0
+    }
+  ],
+  "composition_hessians": 105,
+  "least_normalized_composition_eigenvalue": 0.9780619750014035,
+  "material_liquid_sensitivity": {
+    "liquid_model_Cv_difference": {
+      "zone": 272,
+      "q": 0.4826332376843567,
+      "scale": 0.7,
+      "T": 97567.13072169473,
+      "rho": 19964.394206226574,
+      "X": 1.0279529270885295e-06,
+      "liquid_model_Cv_difference": 6.07747288716709e-07
+    },
+    "liquid_model_delta_difference": {
+      "zone": 272,
+      "q": 0.4826332376843567,
+      "scale": 0.7,
+      "T": 97567.13072169473,
+      "rho": 19964.394206226574,
+      "X": 1.0279529270885295e-06,
+      "liquid_model_delta_difference": 3.922495390717984e-07
+    },
+    "liquid_model_jet_difference": {
+      "zone": 272,
+      "q": 0.4826332376843567,
+      "scale": 0.7,
+      "T": 97567.13072169473,
+      "rho": 19964.394206226574,
+      "X": 1.0279529270885295e-06,
+      "liquid_model_jet_difference": 0.0005314073573485424
+    }
+  },
+  "trace_H_impurity_sensitivity": {
+    "H_impurity_liquid_Cv_relative": {
+      "zone": 400,
+      "q": 0.9554912152522029,
+      "scale": 0.25,
+      "T": 32136.489611735775,
+      "rho": 2427.222206926364,
+      "X": 0.0006934686720759783,
+      "H_impurity_liquid_Cv_relative": -0.003165042677158114
+    },
+    "H_impurity_liquid_P_relative": {
+      "zone": 400,
+      "q": 0.9554912152522029,
+      "scale": 0.2,
+      "T": 25709.191689388623,
+      "rho": 2427.222206926364,
+      "X": 0.0006934686720759783,
+      "H_impurity_liquid_P_relative": 4.1470822154110465e-07
+    }
+  },
+  "stellar_overlap": {
+    "duration_years": 6000000.0,
+    "initial_Teff_K": 686.130271661473,
+    "identical_numerical_state": true,
+    "global_relative_differences": {
+      "Teff_K": 0.0,
+      "radius_Rsun": 0.0,
+      "luminosity_Lsun": 0.0,
+      "central_T_K": 0.0,
+      "central_density_g_cm3": 0.0,
+      "H_mass_g": 0.0,
+      "He3_mass_g": 0.0,
+      "He3_peak": 0.0
+    },
+    "completion": {
+      "reference": {
+        "exit_code": 0,
+        "CPU_seconds": 193.09311599999998,
+        "wall_seconds": 113.34143495839089,
+        "report": {
+          "requested_age_reached": 1,
+          "age_years": 3923153592806.223,
+          "accepted_this_invocation": 1,
+          "accepted_total": 3976,
+          "rejected_total": 1675,
+          "stop_reason": "requested age",
+          "cpu_seconds": 193.058925,
+          "wall_seconds": 113.070642292,
+          "full_production_track_validated": false,
+          "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+        }
+      },
+      "candidate": {
+        "exit_code": 0,
+        "CPU_seconds": 192.75619799999998,
+        "wall_seconds": 113.20191741734743,
+        "report": {
+          "requested_age_reached": 1,
+          "age_years": 3923153592806.223,
+          "accepted_this_invocation": 1,
+          "accepted_total": 3976,
+          "rejected_total": 1675,
+          "stop_reason": "requested age",
+          "cpu_seconds": 192.716571,
+          "wall_seconds": 112.923469792,
+          "full_production_track_validated": false,
+          "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+        }
+      }
+    }
+  },
+  "scope": "Projected states hold density, mass and composition fixed; these are not evolved cold models. Existing supported equations are unchanged. Both He isotope fits retain their published temperature/density domain. The fixed-composition crystal, trace-H impurity thermodynamics, metal phase partition and solid diffusion remain approximations. Liquid sensitivity compares unaligned material potentials, not different warm joins. Impurity sensitivity replaces only the H crystal term by a mobile-liquid term locally; it is not an error bound or selected evolution. The warm-alignment low-temperature entropy/density problem is not repaired. H-rich envelope extension and colder He beyond Tp/T=30 are separate work."
+}

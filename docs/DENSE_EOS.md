@@ -439,6 +439,27 @@ chain-rule implementation agrees with direct five-variable differentiation
 within 9.115e-12 over 2680 profile queries. Initial larger-step failures are
 retained in the [numerical checks](results/mixture_phase_sept30_v1.json).
 
+## Colder helium crystals
+
+`eos_cold_helium_deep_solid "on"` extends `mixture_softmin` to colder states
+with hydrogen mass fraction at most 0.001 and liquid weight below exp(-16).
+It uses the existing solid-solution free energy and retains the fitted limits
+for both helium isotopes: 500 ≤ R_S ≤ 120000 and T_p/T ≤ 30
+([Baiko & Chugunov 2022](https://doi.org/10.1093/mnras/stab3613)).
+The default is off; selection enters restart identity.
+
+Across 5360 fixed-profile queries, 2041 unsupported states are recovered without
+changing any previously supported heat capacity. Sampled composition Hessians
+remain positive. A matched 6 Myr evolution at 686.1 K gives identical numerical
+states with the option off and on. Replacing only the trace-H crystal term
+locally by its liquid term changes heat capacity by at most 0.3165% in the
+sampled states; this is a sensitivity, not a calibrated impurity model.
+[Checks and scope](results/cold_solid_fitted_oct1_v1.json).
+
+The warm alignment, element fractionation and crystal diffusion approximations
+are unchanged. This option does not cover the hydrogen-rich envelope or
+helium colder than the fit limit, and establishes no extreme-cold cooling age.
+
 ## Ion motion during freezing
 
 `solid_ion_mobility_fraction` optionally reduces the full ion mobility matrix

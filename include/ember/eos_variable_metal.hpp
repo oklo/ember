@@ -61,6 +61,8 @@ class VariableMetalHelmholtzEos final : public Eos {
       "cold_helium.mixture_softmin.same_composition.common_liquid.width0.005.full_anchor.bc22_linear.X005_200.v4";
   static constexpr const char* dense_transition_identifier=
       "dense_hhe.liquid.bc22.T200_300.rho300_600.full_anchor.v3";
+  static constexpr const char* deep_solid_identifier=
+      "cold_helium.solid.traceH.fittedHe30.margin16.v1";
   // Pack a text or binary family. Optional zero-He3 extraction requires the
   // number-density isotope mode when the resulting family is used.
   // Stored doubles, masks and logarithmic coordinates remain bit-identical.

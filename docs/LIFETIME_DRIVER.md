@@ -792,6 +792,11 @@ zero gives the immobile limit. These are sensitivity scenarios, not calibrated
 crystal diffusion. The default leaves mobility unchanged. Element precipitation
 is not included. See [Dense EOS](DENSE_EOS.md#ion-motion-during-freezing).
 
+`eos_cold_helium_deep_solid "on"` optionally admits colder trace-H crystals
+when the liquid contribution is negligible, retaining the fitted helium
+quantum and density limits. It requires `mixture_softmin`, defaults to `off`,
+and enters restart identity. See [limits and checks](DENSE_EOS.md#colder-helium-crystals).
+
 ## Central luminosity scaling
 
 Structure and transported-heat convergence use an absolute scale of at least

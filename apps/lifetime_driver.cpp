@@ -118,7 +118,14 @@ int lifetime_main(int argc,char** argv) {
       const auto transition=cfg.values.contains("eos_dense_hhe_transition")?cfg.get("eos_dense_hhe_transition"):"none";
       if(transition!="none"&&transition!="liquid")throw std::invalid_argument("unknown dense H/He transition EOS");
       cold_helium_options->dense_transition=transition=="liquid";
+      const auto solid=cfg.values.contains("eos_cold_helium_deep_solid")?cfg.get("eos_cold_helium_deep_solid"):"off";
+      if(solid!="off"&&solid!="on")throw std::invalid_argument("eos_cold_helium_deep_solid must be off or on");
+      if(solid=="on"&&!cold_helium_options->mixture_phase)
+        throw std::invalid_argument("eos_cold_helium_deep_solid requires mixture_softmin");
+      cold_helium_options->deep_solid=solid=="on";
     }
+    if(!cold_helium_options && cfg.values.contains("eos_cold_helium_deep_solid"))
+      throw std::invalid_argument("eos_cold_helium_deep_solid requires eos_cold_helium");
     if(!cold_helium_options && cfg.values.contains("eos_dense_hhe_transition"))
       throw std::invalid_argument("eos_dense_hhe_transition requires eos_cold_helium");
     if(!cold_helium_options && cfg.values.contains("eos_metal_liquid_continuation_gamma"))
@@ -465,6 +472,8 @@ int lifetime_main(int argc,char** argv) {
       identity.number("eos.metal_liquid_continuation_gamma",cold_helium_options->liquid_continuation_gamma);
     if(cold_helium_options && cold_helium_options->dense_transition)
       identity.values["eos.dense_hhe_transition"]=VariableMetalHelmholtzEos::dense_transition_identifier;
+    if(cold_helium_options && cold_helium_options->deep_solid)
+      identity.values["eos.cold_helium_deep_solid"]=VariableMetalHelmholtzEos::deep_solid_identifier;
     if(low_metal_interpolation=="quadratic")
       identity.values["eos.low_metal_interpolation"]="quadratic.C2_to_cubic.v1";
     if(!cold_eos_path.empty()){

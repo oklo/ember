@@ -45,16 +45,25 @@ void check_domain(double T,double rho,const Composition& c,std::size_t channels,
   const double hydrogen_limit=o.mixture_phase&&X<=o.ultratrace_hydrogen?
       o.maximum_ultratrace_hydrogen_quantum:
       (X<=o.trace_hydrogen?o.maximum_trace_hydrogen_quantum:o.maximum_hydrogen_quantum);
+  std::string beyond;
   if((X>0||channels>1)
-      &&!(io::plasma(std::log(T),logne,1.,1.).tpt<=hydrogen_limit))
-    fail("hydrogen quantum parameter beyond the production limit");
+      &&!(io::plasma(std::log(T),logne,1.,1.).tpt<=hydrogen_limit)) {
+    beyond="hydrogen quantum parameter beyond the production limit";
+    if(!(o.deep_solid&&o.mixture_phase&&X<=o.trace_hydrogen))fail(beyond);
+  }
   {   // helium host coupling; the trace-metal mean coupling is not a phase criterion (docs/DENSE_EOS.md)
     const double rs=std::exp((std::log(3/(4*pi))-logne)/3)/io::bohr;
     const double gamma=io::hartree_k/(rs*T)*std::pow(2.,5./3);
     if(o.mixture_phase) {
-      if(!(gamma<=o.max_phase_helium_gamma))fail("helium coupling beyond the fitted liquid and solid branches");
+      if(!(gamma<=o.max_phase_helium_gamma)&&beyond.empty())beyond="helium coupling beyond the fitted liquid and solid branches";
     } else if(!(gamma<=o.max_helium_gamma))fail("helium coupling beyond the assessed liquid range; phase unsupported");
   }
+  if(beyond.empty())return;
+  if(!(o.deep_solid&&o.mixture_phase&&X<=o.trace_hydrogen))fail(beyond);
+  MixturePhaseOptions p;p.liquid_continuation_gamma=o.liquid_continuation_gamma;
+  p.width=o.phase_width;p.minimum_solid_gamma=o.minimum_solid_gamma;p.trace_hydrogen=o.trace_hydrogen;
+  if(!(ion_mixture_phase_weight(T,rho,c,p)[1]<=-16))
+    fail(beyond+" (liquid contribution is not negligible)");
 }
 std::array<K,2> electron_parts(const K& lt,const K& ln) {
 
@@ -81,7 +90,7 @@ std::array<double,4> falling(double x,double lo,double hi) {
 }
 ColdHeliumOptions transition_options(const ColdHeliumOptions& source) {
   auto o=source;
-  o.dense_transition=false;o.mixture_phase=false;
+  o.dense_transition=false;o.mixture_phase=false;o.deep_solid=false;
   o.max_mixture_hydrogen=1.;o.hydrogen_join_full=.99;o.hydrogen_join_zero=1.;
   o.minimum_density=300.;o.join_cold=2e5;o.join_hot=3e5;
   o.maximum_hydrogen_quantum=2.5;o.maximum_trace_hydrogen_quantum=2.5;

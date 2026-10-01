@@ -8,6 +8,7 @@
 #include "ember/eos.hpp"
 #include "ember/eos_variable_metal.hpp"
 #include "ember/ion_quantum.hpp"
+#include "ember/ion_phase.hpp"
 #include "ember/detail/ion_ocp_components.hpp"
 #include <algorithm>
 #include <cmath>
@@ -73,7 +74,7 @@ int main(){
   // 8. Join (needs the production family).
   if(const char* path=std::getenv("EMBER_COLD_HELIUM_FAMILY")){
     VariableMetalHelmholtzEos production(path,HelmholtzTableEos::Mixture::allow_documented_proxy,
-        VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true);
+        VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,std::nullopt,VariableMetalHelmholtzEos::IsotopeInterpolation::number_density);
     const ColdHeliumTable table=[&](double T,double r,const Composition& x,std::size_t n){return production.material_jets(T,r,x,n);};
     const auto c=comp(6.5e-5,3.3e-7,1.2e-4);const double rho=1.4e4;ColdHeliumOptions o;
     auto b=cold_helium_material_jets(o.join_cold,rho,c);const auto g=cold_helium_alignment_jets(table,o.join_cold,rho,c);
@@ -107,7 +108,7 @@ int main(){
      check(wfd<1e-5,"X-joined composition channels vs differences",wfd);}
     // The optional EOS join: one potential for eval, forces and heat; production unchanged at w=0.
     {const ColdHeliumOptions jo=mix;VariableMetalHelmholtzEos joined(path,HelmholtzTableEos::Mixture::allow_documented_proxy,
-        VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,jo);
+        VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,jo,VariableMetalHelmholtzEos::IsotopeInterpolation::number_density);
      const auto hot=comp(.21,1e-3,1e-6);double same=0;
      for(auto [T,r]:{std::pair{4.2e5,2.4e3},std::pair{9e5,2e4}}){
        const auto a=joined.eval_with_derivatives(T,r,hot).state,reference=production.eval_with_derivatives(T,r,hot).state;
@@ -122,10 +123,10 @@ int main(){
     // must agree with the joined potential, including both density and temperature overlaps.
     {ColdHeliumOptions options;options.mixture_phase=true;options.liquid_continuation_gamma=200;
      VariableMetalHelmholtzEos core(path,HelmholtzTableEos::Mixture::allow_documented_proxy,
-        VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,options);
+        VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,options,VariableMetalHelmholtzEos::IsotopeInterpolation::number_density);
      options.dense_transition=true;
      VariableMetalHelmholtzEos joined(path,HelmholtzTableEos::Mixture::allow_documented_proxy,
-        VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,options);
+        VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,options,VariableMetalHelmholtzEos::IsotopeInterpolation::number_density);
      // Joining two stable sources must not create artificial H/He separation.
      // Check the H/He3 chemical-potential matrix at fixed T and P, including
      // ideal mixing and the density response. The former narrow X overlap
@@ -257,6 +258,40 @@ int main(){
      bool refused=false;try{cold_helium_validate(t,rho,comp(x,1e-14,.13),phase);}
      catch(const std::domain_error& e){refused=std::string(e.what()).find("hydrogen quantum")!=std::string::npos;}
      check(refused,"colder trace-H domain remains bounded",t);
+   }
+  }
+  {ColdHeliumOptions off;off.mixture_phase=true;off.liquid_continuation_gamma=200;
+   auto on=off;on.deep_solid=true;const auto c=comp(2e-8,1e-14,.13);const double rho=5e4,h=2e-5;
+   for(double T:{1e5,7e4,4.6e4,3.5e4}) {
+     bool refused=false;try{cold_helium_validate(T,rho,c,off);}catch(const std::domain_error&){refused=true;}
+     check(refused,"colder crystal retains default refusal",T);
+     const auto j=cold_helium_material_jets(T,rho,c,10,on);
+     check(helmholtz_response(T,rho,j[0]).state.cv>0,"fitted crystal has positive heat capacity",T);
+     double error=0;
+     for(unsigned axis=0;axis<2;++axis) {
+       const auto a=cold_helium_material_jets(T*std::exp(axis==0?h:0),rho*std::exp(axis==1?h:0),c,10,on);
+       const auto b=cold_helium_material_jets(T*std::exp(axis==0?-h:0),rho*std::exp(axis==1?-h:0),c,10,on);
+       for(unsigned k=0;k<10;++k)for(unsigned i=0;i<3;++i)for(unsigned d=0;i+d+(k==0?0:k<4?1:2)<3;++d) {
+         const double exact=j[k][i+(axis==0)][d+(axis==1)],fd=(a[k][i][d]-b[k][i][d])/(2*h);
+         error=std::max(error,std::abs(fd-exact)/(constants::R_gas+std::abs(exact)));
+       }
+     }
+     check(error<2e-5,"fitted-solid thermal density and composition derivatives",error);
+   }
+   for(auto [T,x]:{std::pair{2.5e4,2e-8},std::pair{1e5,2e-3}}) {
+     bool refused=false;try{cold_helium_validate(T,rho,comp(x,1e-14,.13),on);}catch(const std::domain_error&){refused=true;}
+     check(refused,"fitted solid retains He quantum and hydrogen fraction limits",T);
+   }
+   for(double T:{2e5,5e5,8e5})
+     check(cold_helium_material_jets(T,rho,c,10,on)==cold_helium_material_jets(T,rho,c,10,off),
+           "solid extension preserves supported states",T);
+   const auto near=comp(1.03e-6,7.7e-10,.0006885);
+   MixturePhaseOptions p;p.liquid_continuation_gamma=200;
+   for(double margin:{15.,17.}) {
+     double lo=5e4,hi=2e5;
+     for(int k=0;k<50;++k){const double T=.5*(lo+hi);if(ion_mixture_phase_weight(T,3e4,near,p)[1]<-margin)lo=T;else hi=T;}
+     bool supported=true;try{cold_helium_validate(.5*(lo+hi),3e4,near,on);}catch(const std::domain_error&){supported=false;}
+     check(supported==(margin>16),"solid extension requires negligible liquid contribution",margin);
    }
   }
   std::cout<<"cold helium base: failures "<<failures<<'\n';

@@ -38,6 +38,10 @@ struct ColdHeliumOptions {
   double liquid_continuation_gamma=0;
   bool mixture_phase=false;
   double phase_width=.005,minimum_solid_gamma=90,max_phase_helium_gamma=250;
+  // Admit colder trace-H crystals when the liquid weight is below exp(-16).
+  // The same solid-solution equations apply; the He-isotope fitted ranges
+  // (including Tp/T <= 30) and all other material limits remain in force.
+  bool deep_solid=false;
 };
 // Material F/T and its thermal, density and composition derivatives. Radiation and
 // ideal mixing are supplied once by the surrounding EOS.
