@@ -1,0 +1,72 @@
+{
+  "scope": "Conditional trace-helium transport extension on the702Kcooling replay; not a partially ionized diffusion calibration or a final-physics Hayashi validation.",
+  "snapshot_sha256": "3bd6b629632e02f8d0e16f461250b7d0f64890d0ea351f95d5e7b098a5c4538e",
+  "source_probe_sha256": "1bfcfc7226449987de1609afb8bb9b7625588457d394fc0038b4baa56ac76c9f",
+  "minimum_temperature_K": 50000,
+  "unchanged_heat_transition_K": [
+    2000000,
+    3000000
+  ],
+  "source_queries": 162,
+  "native_queries": 232,
+  "recovered_queries": 69,
+  "old_supported_queries_unchanged": true,
+  "current_layer": {
+    "temperature_K": [
+      50373.38893728943,
+      89805.33592840224
+    ],
+    "rho": [
+      29.728324836957132,
+      85.98993991765417
+    ],
+    "Hplus": [
+      0.999999999999997,
+      1.0000000000000042
+    ],
+    "Heplus": [
+      3.137731938028416e-05,
+      0.9999959117098879
+    ],
+    "Hepp": [
+      8.261686136087324e-13,
+      0.0001246063736411918
+    ],
+    "Gamma_H": [
+      11.179931810799864,
+      13.988819215713066
+    ],
+    "theta_H": [
+      0.7807880127626643,
+      0.8477423094993093
+    ],
+    "electron_Born": [
+      0.16387989786620563,
+      0.2334988542341456
+    ],
+    "T_over_TF": [
+      0.015275862080768678,
+      0.017394938393121787
+    ],
+    "helium_fraction": [
+      3.4570124540778124e-12,
+      1.5031753619609844e-11
+    ],
+    "helium_mass_g": 1.2918890253905508e+18,
+    "max_helium_ion_scattering_fraction": 2.004224946698714e-11,
+    "present_helium_energy_over_current_L_1Gyr": 5.856734977317051e-10
+  },
+  "projected_maximum_theta_H": 1.3013352310914048,
+  "candidate_interval_years": 6000000,
+  "candidate_requested_age_reached": 1,
+  "candidate_accepted_intervals": 1,
+  "candidate_error_norm": 0.00024220418559650625,
+  "candidate_maximum_first_law": 8.464925649320776e-09,
+  "candidate_maximum_species_error": 2.5326085913522834e-18,
+  "candidate_Teff_K": 702.1958680494546,
+  "candidate_CPU_seconds": 158.695415,
+  "candidate_wall_seconds": 60.71954150032252,
+  "reference_result": "70kKcontrol rejected6,3and1.5Myrtrials at its declared temperature limit; stopped after that diagnosis. No matched successful70kKendpoint exists.",
+  "reference_CPU_seconds": 542.361449,
+  "limitations": "Fixed-density profiles forecast coverage, not evolution. Present helium energy is not a bound on future inflow. Source equilibrium charge states do not calibrate strongly coupled or quantum diffusion; the fully stripped helium rate remains an explicit trace-ion approximation. No atmosphere or heat-transition change."
+}

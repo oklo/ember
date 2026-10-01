@@ -751,6 +751,18 @@ clearing times remain unestablished. The parameter only limits evaluation;
 ionization and coupling must be assessed separately.
 [Assessment](results/transport_floor70_sept30_v1.json).
 
+At 702 K, `screened_minimum_T_K "50000"` extends this trace-helium
+approximation while retaining the existing 2–3 MK heat transition. Direct
+source checks keep hydrogen ionized in the sampled 50–90 kK layer. Helium
+is partly neutral, but its mass fraction is only 3.457e-12–1.503e-11 there;
+accurate helium drift still requires charge-dependent transport. All 232
+native face queries pass, including 69 newly admitted queries; previously
+supported values are unchanged. A 6 Myr step passes the original energy and
+species audits where the 70 kK configuration rejects at its domain limit.
+This is a conditional cooling continuation, not a calibration of strongly
+coupled or quantum diffusion or a bound on future helium inflow.
+[Checks](results/transport_floor50_oct1_v1.json).
+
 At 130–200 kK, the H-rich layer remains ionized in the source EOS. Uncertain
 trace-helium charge contributes less than 0.4% of the electron-scattering
 weight. Native opacity checks retain the source anchors and derivatives;
