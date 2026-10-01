@@ -66,7 +66,7 @@ int main(){
    check(wx<1e-6,"base H composition gradient vs difference",wx);}
   // 5. Guards.
   {auto throws=[](auto f){try{f();return false;}catch(const std::domain_error&){return true;}};
-   check(throws([&]{cold_helium_material_jets(3e5,1.5e4,comp(.06,0,0),1);}),"composition gate",0);
+   check(throws([&]{cold_helium_material_jets(3e5,1.5e4,comp(.21,0,0),1);}),"composition gate",0);
    check(throws([&]{cold_helium_material_jets(3e5,500,comp(0,0,0),1);}),"pressure-ionization density floor",0);
    // The Sommerfeld electron approximation is never used silently outside kT/eps_F <= 0.05.
    check(throws([&]{cold_helium_material_jets(2.5e6,1e3,comp(0,0,0),1);}),"electron degeneracy guard",0);}
@@ -108,7 +108,7 @@ int main(){
     // The optional EOS join: one potential for eval, forces and heat; production unchanged at w=0.
     {const ColdHeliumOptions jo=mix;VariableMetalHelmholtzEos joined(path,HelmholtzTableEos::Mixture::allow_documented_proxy,
         VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,jo);
-     const auto hot=comp(.06,1e-3,1e-6);double same=0;
+     const auto hot=comp(.21,1e-3,1e-6);double same=0;
      for(auto [T,r]:{std::pair{4.2e5,2.4e3},std::pair{9e5,2e4}}){
        const auto a=joined.eval_with_derivatives(T,r,hot).state,reference=production.eval_with_derivatives(T,r,hot).state;
        same=std::max({same,std::abs(a.P-reference.P),std::abs(a.cv-reference.cv)});}
@@ -126,6 +126,24 @@ int main(){
      options.dense_transition=true;
      VariableMetalHelmholtzEos joined(path,HelmholtzTableEos::Mixture::allow_documented_proxy,
         VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,options);
+     // Joining two stable sources must not create artificial H/He separation.
+     // Check the H/He3 chemical-potential matrix at fixed T and P, including
+     // ideal mixing and the density response. The former narrow X overlap
+     // made its smallest eigenvalue negative in these transition layers.
+     {double least=std::numeric_limits<double>::infinity();
+      for(double T:{1.2e5,1.8e5,2.4e5,6e5})for(double density:{1100.,2000.})
+        for(double y3:{.001,.14})for(double x:{.005,.015,.03,.04,.06,.10,.15,.19,.20}) {
+          const auto mixture=comp(x,y3,1e-10);
+          const auto p=joined.composition_potential(T,density,mixture);
+          const auto j=joined.material_jets(T,density,mixture,10);
+          const auto e=joined.eval(T,density,mixture);
+          double h[2][2];
+          for(unsigned a=0;a<2;++a)for(unsigned column=0;column<2;++column)
+            h[a][column]=(p.hessian[a][column]-p.dgradient_dlnRho[a]*density*T*j[1+column][0][1]
+                /(e.P*e.chiRho))/constants::R_gas;
+          least=std::min(least,.5*(h[0][0]+h[1][1]-std::hypot(h[0][0]-h[1][1],2*h[0][1])));
+        }
+      check(least>0,"H/He composition join stays convex at fixed pressure",least);}
      const auto helium=comp(1e-8,1e-10,.13);
      check(joined.material_jets(1.85e5,5e4,helium,10)==core.material_jets(1.85e5,5e4,helium,10),
          "dense H/He extension preserves the selected helium core",0);

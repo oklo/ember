@@ -14,7 +14,7 @@ struct ColdHeliumOptions {
   bool dense_transition=false;
   // Default liquid-only host limit. Metals can move a mixture phase boundary
   // above the pure-helium melting temperature; this is not a phase criterion.
-  double max_mixture_hydrogen=.05,max_mixture_metals=.16,max_helium_gamma=130;
+  double max_mixture_hydrogen=.20,max_mixture_metals=.16,max_helium_gamma=130;
   double minimum_density=1e3;
   double maximum_electron_temperature_ratio=.05;
   double maximum_hydrogen_quantum=4;
@@ -23,7 +23,10 @@ struct ColdHeliumOptions {
   // and the local heat capacity by ~X (docs/DENSE_EOS.md).
   double trace_hydrogen=1e-3,maximum_trace_hydrogen_quantum=8;
   double join_cold=5e5,join_hot=8e5;
-  double hydrogen_join_full=.01,hydrogen_join_zero=.05;
+  // The narrow X=0.01--0.05 overlap introduces a non-convex composition
+  // potential between the differently aligned sources. This broader overlap
+  // retains positive H/He3 curvature in the assessed liquid transition.
+  double hydrogen_join_full=.005,hydrogen_join_zero=.20;
   // Optional same-composition crystallization (ion_phase.hpp, ion_mixture_phase_difference_jets):
   // a soft minimum of the liquid and a solid solution of the per-species bcc branches, width
   // phase_width k per ion. It replaces max_helium_gamma by the supercooled-liquid limit below and adds

@@ -180,12 +180,24 @@ and the existing Baiko–Chugunov quantum correction. Radiation and ideal mixing
 are included once by the surrounding EOS. This is a liquid approximation;
 it does not select crystallization or latent heat.
 
-The temperature join spans 500–800 kK; the hydrogen join spans X = 0.01–0.05.
+The temperature join spans 500–800 kK; the hydrogen join spans X = 0.005–0.20.
 An alignment term `a(rho, composition) + b(rho, composition)/T` matches the
 two source potentials at both temperature anchors. Its density and composition
 dependence carries model differences below the join, including differences
 in chemical forces. The cold heat capacity is retained. All resulting thermal
 and composition derivatives enter transport and energy accounting.
+
+The composition overlap is broad enough to avoid artificial separation from
+curvature of the joining weight. In 2066 supported H/He3 queries, the chemical
+potential matrix at fixed temperature and pressure is positive definite; its
+smallest eigenvalue is 5.309 R. This checks local mixture stability and includes
+ideal mixing and density adjustment at fixed pressure. Source masks and physical
+domain limits remain enforced. Pressure inversions and derivative tests pass.
+Transport uses the joined chemical potentials and exchange enthalpies, so this
+choice affects diffusion as well as structure. Short stellar controls pass their
+conservation audits but encounter a separate convective switching problem;
+a complete cooling-age comparison remains pending.
+[Composition stability checks](results/cold_composition_join_oct1_v1.json).
 
 The model requires density ≥ 1000 g/cm³, Z ≤ 0.16, helium coupling
 Γ_He ≤ 130 (a practical bound below both assessed melting references: classical OCP
