@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "queries": 162,
+  "newly_supported": 96,
+  "failed": [],
+  "lost": [],
+  "old_maximum_relative_change": 0.0,
+  "maximum_scaled_derivative_error": 1.4240740974956207e-07,
+  "maximum_heat_uncertainty": 0.001866349604452649,
+  "minimum_temperature_K": 100000,
+  "conductivity_margin": 4,
+  "scope": "Radiative density continuation only. Exact same measured source anchors, factor-100 radiative uncertainty and .003 total-transport bound. This does not extend the EOS, microscopic transport or atmospheric domains.",
+  "microscopic_conductivity": {
+    "passed": true,
+    "queries": 241,
+    "relevant_faces": 129,
+    "supported_faces": 118,
+    "minimum_conductivity_ratio": 0.5472932874317795,
+    "maximum_conductivity_ratio": 0.61864935765534,
+    "margin": 4,
+    "scope": "Native microscopic/reference conductivity on supported actual and cooler-profile faces. Eleven colder, denser points are refused by the unchanged EOS and are not claimed as transport coverage. Current and projected rho<=500 g/cm3 faces all pass.",
+    "separate_EOS_refused_points": 11
+  },
+  "ionization_source": {
+    "path": "out/transport-cold857-sept30-v1/assessment.json",
+    "sha256": "c37865dc91848627cb4145b76c277aa9042f92f3421d5aca840ef28c9bfc6888",
+    "scope": "Retained direct FreeEOS checks of the H-rich envelope through 70\u2013130 kK; trace-He charge uncertainty recorded there."
+  },
+  "native_evidence": {
+    "out/conductive-opacity100-oct1-v1/queries.json": "56e65c217182779e3552925646070e6dc9c6b6918163b69542e74f986fd7a3d1",
+    "out/conductive-opacity100-oct1-v1/old.jsonl": "a7a77564cd547008b17867921d4ddf37c255a6220cf679562ca66cb03ad687ce",
+    "out/conductive-opacity100-oct1-v1/new.jsonl": "cb50951519167c1e3d6697243fd528cc4c8c2dae554fd21005e152430980bf9f",
+    "out/conductive-opacity100-oct1-v1/faces.jsonl": "64d384b78841edf607740a7f0ffd8a8bb00f479cd4a10a8d44a504cb5217b4c2",
+    "out/conductive-opacity100-oct1-v1/validation.json": "46f65d740b3bcf91998dcd20027620b09fa30602c816c3d1e34cd874cc15af43",
+    "out/conductive-opacity100-oct1-v1/conductivity_validation.json": "c9de8891ea53bd1573ae0b71c1fcea0cba11e41e61a08188f8bd44c22998cb2c"
+  }
+}

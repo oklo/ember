@@ -636,7 +636,7 @@ The density blend spans 180–190 g/cm³. Both source anchors must exist.
 
 With `conduction_envelope "ionized"`, the upper join follows the source
 coordinate log R = log10(rho) − 3 log10(T/1e6), from 3.0 to 3.25, below the
-source boundary at 3.5. The declared limits are T≥130 kK and rho≤1e5 g/cm³;
+source boundary at 3.5. The declared limits are T≥100 kK and rho≤1e5 g/cm³;
 The metal limit is Z≤0.16; actual source-anchor coverage and the
 heat-uncertainty check further restrict that domain. The source uses atomic
 mass fractions, so its metal boundary need not coincide with the baryonic one.
@@ -644,10 +644,18 @@ The same bound admits both H-rich and He-rich parts of the conducting layer;
 there is no hydrogen-fraction threshold in this mode. Direct conduction
 remains active below 300 kK, so this option does not return
 to an unsupported radiative table there. Restart identity records
-`hydrogen_density_continuation.logR_overlap.cold130.margin4.v8`.
+`hydrogen_density_continuation.logR_overlap.cold100.margin4.v9`.
 The overlap spans log R = 3.0–3.25, keeping source queries below the bridge
 table's log density = 2.4 limit near log T = 5.7.
 [Source and warm-replay checks](results/warm_opacity_overlap_sept30_v1.json).
+
+The extension to 100 kK retains both source anchors and the same local heat
+bound. Across 162 source queries, old opacities are unchanged and 96 additional
+states are supported. In 118 supported cooling-layer face comparisons, the
+microscopic conductivity is 0.5473–0.6187 of the tabulated reference, above the
+one-quarter value used in the admission bound. Colder points rejected by the
+separate EOS remain unsupported.
+[Cold opacity checks](results/conductive_opacity100_oct1_v1.json).
 
 The original conduction option retains its metal limit of 1e-8, hydrogen blend over mass fractions
 0.70–0.745, its 700–800 kK upper overlap,

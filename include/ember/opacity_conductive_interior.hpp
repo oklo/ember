@@ -48,7 +48,7 @@ public:
   static Domain ionized_hydrogen_envelope_domain() {
     auto domain=hydrogen_envelope_domain();
     domain.maximum_rho=1e5;
-    domain.minimum_T=1.3e5;
+    domain.minimum_T=1e5;
     // Below log T = 5.7 the radiative source is the warm/bridge blend, whose ATOMIC bridge is supported
     // only to log rho = 2.4 there (log rho = log R + 3 log10(T/1e6)). The part of this overlap that still
     // reads the source at the actual state (log R < full_logR) must stay inside it up to log T = 5.7:
@@ -56,7 +56,7 @@ public:
     domain.source_logR=3.0;domain.full_logR=3.25;
     // Direct ionized conduction remains active below 300 kK. Returning to
     // the unextended radiative table there can leave its density support.
-    // Source anchors and H-layer charge/conductivity checks support 130 kK.
+    // Source anchors and H-layer charge/conductivity checks support 100 kK.
     // Keep the contribution bound and explicit lower temperature limit.
     domain.cold_source_T=0;domain.cold_full_T=0;
     // The same fully ionized, low-metal H/He layer becomes helium-rich at

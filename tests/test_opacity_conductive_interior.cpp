@@ -202,7 +202,7 @@ int main(){try{
   } cool_bounded;
   ConductiveInteriorOpacity cool_ionized(cool_bounded,strong,.001,1.,
       ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
-  for(double T:{1.301e5,1.5e5,1.75e5,2.001e5,2.5e5,2.999e5,3e5,3.001e5,3.1e5,3.2e5,3.5e5}) {
+  for(double T:{1.001e5,1.15e5,1.301e5,1.5e5,1.75e5,2.001e5,2.5e5,2.999e5,3e5,3.001e5,3.1e5,3.2e5,3.5e5}) {
     constexpr double rho=350.,h=1e-6;
     const auto v=cool_ionized.eval(T,rho,hc);
     auto f=[&](double t,double r){return std::log(cool_ionized.eval(t,r,hc).kappa);};
@@ -211,7 +211,7 @@ int main(){try{
     require(std::abs((f(T,rho*std::exp(h))-f(T,rho*std::exp(-h)))/(2*h)-v.dlnk_dlnRho)<2e-6,
         "ionized cool continuation density derivative");
   }
-  rejected=false;try{cool_ionized.eval(129999.,350.,hc);}catch(const std::domain_error&){rejected=true;}
+  rejected=false;try{cool_ionized.eval(99999.,350.,hc);}catch(const std::domain_error&){rejected=true;}
   require(rejected,"ionized continuation lost its lower temperature bound");
   ConductiveInteriorOpacity cool_weak(cool_bounded,weak,.001,1.,
       ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
