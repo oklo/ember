@@ -10,10 +10,11 @@ and helium-white-dwarf cooling.
 - Deuterium, pp and CN burning, nuclear screening and plasma-neutrino losses.
 - H/He/metal settling, composition-dependent energy accounting, adaptive time
   steps and energy and isotope conservation checks.
+- Optional quantum-ion thermodynamics, crystallization and latent heat.
 - Double precision and CPU parallelism optimized for Apple silicon.
 
 The code is under development. Full CNO, grain-bearing stellar atmospheres,
-crystallization and extreme-cold evolution remain unfinished. Some tables
+element separation during freezing and extreme-cold evolution remain unfinished. Some tables
 required for the cooling calculations are still local.
 See [physics and limitations](docs/COLD_REMNANT.md).
 

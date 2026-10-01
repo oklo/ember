@@ -58,6 +58,13 @@ source physics or the import checks; failed target states remain flagged.
 Both choices are recorded, and incompatible cached requests are rejected.
 [Source and cache checks](results/freeeos_temperature_start_oct1_v1.json).
 
+Retained TOPS replies can supply missing low-hydrogen warm-opacity planes
+without new source requests. `extend_tops_warm_family.py --source-manifest
+SOURCE --warm-manifest WARM --output DIRECTORY` preserves the original axes
+and rows, verifies source checksums and mixtures, and excludes every substituted
+density. The [coverage checks](results/warm_helium_opacity_oct1_v1.json) include
+stellar queries and the local contribution of radiative heat transport.
+
 TOPS retrieval requires the external service or retained original replies.
 Non-gray atmosphere generation requires the documented TLUSTY/SYNSPEC sources,
 line data and opacity tables. These external source builds are offline dependencies;

@@ -1,0 +1,20 @@
+{
+  "ready": true,
+  "native_checks": {
+    "grid_unchanged": 84,
+    "grid_recovered": 36,
+    "grid_rejected": 0,
+    "max_relative_change": 0,
+    "max_scaled_derivative_error": 3.0571855669236925e-07,
+    "profile_unchanged": 1667,
+    "profile_recovered": 458,
+    "profile_lost": 0,
+    "profile_both_rejected": 19,
+    "profile_max_relative_change": 0,
+    "new_profile_100fold_opacity_heat_bound": 1.0397699173313152e-05
+  },
+  "unchanged_source_states": 132300,
+  "added_source_states": 37800,
+  "reproduction": "All four files produced by scripts/extend_tops_warm_family.py match the selected inputs.",
+  "scope": "Restored checksum-verified native TOPS composition coverage, with every old source value retained. Profile tests do not establish arbitrary cold-state coverage. The resumed sequence accepts its first four checked intervals (203.1 Myr) without rejection; later evolution remains in progress."
+}
