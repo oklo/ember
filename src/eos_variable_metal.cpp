@@ -490,6 +490,25 @@ MetalCompositionPotentialResponse VariableMetalHelmholtzEos::composition_potenti
   if(active[1])out.gradient[1]-=.5*constants::R_gas*std::log(nuclides[1].A/nuclides[2].A);
   return out;
 }
+IsobaricCompositionResponse VariableMetalHelmholtzEos::isobaric_composition_response(
+    double T,double rho,const Composition& c,std::array<bool,3> active) const {
+  const auto p=composition_potential(T,rho,c,active,true);
+  const auto e=eval(T,rho,c);
+  // dP/dX = rho*T*d(phi)/dlnrho/dX; eliminate the density change required
+  // to keep P fixed. Radiation contributes no composition or density term.
+  const double scale=rho*T/(e.P*e.chiRho);
+  if(!(scale>0) || !std::isfinite(scale))
+    throw std::domain_error("isobaric composition: nonpositive compressibility");
+  IsobaricCompositionResponse result;
+  result.dlnRho.fill(std::numeric_limits<double>::quiet_NaN());
+  result.potential_hessian=p.hessian;
+  for(std::size_t j=0;j<3;++j)if(active[j]) {
+    result.dlnRho[j]=-scale*p.dgradient_dlnRho[j];
+    for(std::size_t k=0;k<3;++k)if(active[k])
+      result.potential_hessian[k][j]-=scale*p.dgradient_dlnRho[k]*p.dgradient_dlnRho[j];
+  }
+  return result;
+}
 MetalCompositionHeatResponse VariableMetalHelmholtzEos::composition_heat(double T,double rho,
     const Composition& c,std::array<bool,3> active,bool derivatives,bool composition_derivatives) const {
   check_active(c,active);const auto j=jets(T,rho,c,active_any(active)?(derivatives && composition_derivatives?10:4):1);const auto& f=j[0];

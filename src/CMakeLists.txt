@@ -30,6 +30,7 @@ add_library(ember
   losses.cpp
   convection.cpp
   fingering.cpp
+  viscosity.cpp
   conduction_table.cpp
   envelope_atmosphere.cpp
   atmosphere_grey.cpp

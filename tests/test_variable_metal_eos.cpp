@@ -121,6 +121,36 @@ int main() {
     check(throws([&]{disconnected.validate_composition_domain(3e5,.2,gap_comp);}),
           "composition derivatives retain local masks");
     const double T=3e5,rho=.3;
+    // Constant-pressure composition derivatives include the density response.
+    // Test them by perturbing abundances and independently reinverting P.
+    double isobaric_error=0,isobaric_density_error=0;
+    for(auto c:{composition(.7,.02,.02),composition(.999,.0008,1e-5)}) {
+      const double P=two.eval(T,rho,c).P;
+      const auto response=two.isobaric_composition_response(T,rho,c);
+      for(std::size_t j=0;j<3;++j) {
+        const double x=j<2?c.X[j]:c.Z(),step=1e-4*std::min(x,c.X[2]);
+        auto plus=c,minus=c;
+        if(j<2){plus.X[j]+=step;minus.X[j]-=step;}
+        else for(std::size_t k=METAL_BEGIN;k<METAL_END;++k){plus.X[k]*=1+step/x;minus.X[k]*=1-step/x;}
+        plus.X[2]-=step;minus.X[2]+=step;
+        const double rp=two.rho_from_PT(T,P,plus,rho),rm=two.rho_from_PT(T,P,minus,rho);
+        const auto a=two.composition_potential(T,rp,plus),b=two.composition_potential(T,rm,minus);
+        isobaric_density_error=std::max(isobaric_density_error,
+            std::abs(std::log(rp/rm)/(2*step)-response.dlnRho[j])/(1+std::abs(response.dlnRho[j])));
+        for(std::size_t k=0;k<3;++k) {
+          const double scale=std::sqrt(std::abs(response.potential_hessian[j][j]*response.potential_hessian[k][k]));
+          isobaric_error=std::max(isobaric_error,
+              std::abs((a.gradient[k]-b.gradient[k])/(2*step)-response.potential_hessian[k][j])/scale);
+          const double symmetry=std::abs(response.potential_hessian[k][j]-response.potential_hessian[j][k])/scale;
+          check(symmetry<5e-15,"isobaric chemical matrix is symmetric to roundoff",symmetry);
+        }
+      }
+      const auto partial=two.isobaric_composition_response(T,rho,c,{true,true,false});
+      check(std::isnan(partial.dlnRho[2]) && std::isnan(partial.potential_hessian[2][2]),
+            "unrequested isobaric composition channels remain undefined");
+    }
+    check(isobaric_error<2e-5,"isobaric chemical response vs fixed-pressure differences",isobaric_error);
+    check(isobaric_density_error<2e-5,"isobaric density response vs pressure inversions",isobaric_density_error);
     double exact=0,preserved=0,extended_preserved=0,cache_error=0;
     bool thermal_channels_identical=true,unrequested_channels_nan=true;
     for(double z:{1e-6,.004,.015,.02,std::nextafter(.02,1.),.03,.04,.040001,.07,.12,.16,.18,.24,.3})

@@ -1,0 +1,35 @@
+{
+  "source_model": "CY2005 electron viscosity; Daligault2014 classical OCP ions",
+  "selected_in_evolution": false,
+  "hydrogen_layer": {
+    "T": 159000,
+    "rho": 911.7,
+    "Z": 1,
+    "A": 1,
+    "x": 0.09782302346981267,
+    "T_over_TF": 0.005617370995061097,
+    "Gamma": 13.872208528434424,
+    "theta_quantum": 1.4873345369711326,
+    "s": 0.14839219422110875,
+    "w": 4.605545367706854,
+    "Lambda": 0.20516310085189557,
+    "nu_ei": 1.085081475708261e+16,
+    "nu_ee": 10619151052162.168,
+    "ee_fraction": 0.0009776932900368576,
+    "eta_e": 78.82975498173656,
+    "eta_i_classical": 1.5203884931831988,
+    "kinematic": 0.08813221835573079,
+    "ion_fraction": 0.01892203831170218
+  },
+  "independent_adaptive_quadrature_cases": 8,
+  "maximum_relative_quadrature_error": 7.55e-15,
+  "maximum_scaled_derivative_error": 5.245e-07,
+  "isobaric_response_finite_difference_error": 6.996e-07,
+  "isobaric_density_finite_difference_error": 1.474e-08,
+  "limitations": [
+    "Fully ionized single-component liquid; a mixture prescription is separate",
+    "Nonrelativistic degenerate electron domain",
+    "Classical ion term is a sensitivity estimate where ion quantum effects matter",
+    "Numerical agreement does not measure physical accuracy"
+  ]
+}

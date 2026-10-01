@@ -19,6 +19,11 @@ struct MetalCompositionHeatResponse {
   std::array<double,5> delta_partials{};
   std::array<std::array<double,5>,3> enthalpy_partials{},radiation_enthalpy_partials{};
 };
+struct IsobaricCompositionResponse {
+  // H1, He3 and GS98 metals replace He4, at fixed temperature and pressure.
+  std::array<double,3> dlnRho{};
+  std::array<std::array<double,3>,3> potential_hessian{}; // Gibbs free energy / T
+};
 
 // Free-energy interpolation in Z, u=XH/(1-Z), and v=X3/(1-Z-XH).
 // The source grid remains physical as the helium reservoir shrinks. Source
@@ -65,6 +70,8 @@ class VariableMetalHelmholtzEos final : public Eos {
   // need second derivatives with respect to composition.
   MetalCompositionPotentialResponse composition_potential(double,double,const Composition&,
       std::array<bool,3> active={true,true,true},bool hessian=true) const;
+  IsobaricCompositionResponse isobaric_composition_response(double,double,const Composition&,
+      std::array<bool,3> active={true,true,true}) const;
   MetalCompositionHeatResponse composition_heat(double,double,const Composition&,
       std::array<bool,3> active={true,true,true},bool derivatives=true,
       bool composition_derivatives=true) const;
