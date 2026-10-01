@@ -274,6 +274,19 @@ changes the cooling age, layer composition or order of phase transitions;
 a useful bound is sufficient when it cannot. Do this above any assumed
 nucleon-decay heating level, retaining a stable-baryon alternative.
 
+For each candidate, distinguish added power, stored energy, heat capacity and
+resistance to heat flow. Compare deposited power with photon losses, available
+energy with the energy radiated over the relevant interval, and transport or
+relaxation times with the cooling time. A shallow liquid layer can warrant
+attention through its vapor or solid cover even when its latent-heat reservoir
+is small. Record which of these mechanisms actually changes each ocean scenario.
+
+Include absorbed radiation from the evolving surroundings in the surface energy
+balance. Screen residual rotation, magnetic-field decay and elastic strain with
+finite-energy and dissipation-time estimates before adding detailed models.
+Prioritize mechanisms that change cooling ages or the surface phase sequence;
+give a quantitative exclusion where the available reservoir cannot matter.
+
 For each result, keep numerical error, uncertainty in material properties and
 assumptions about the future environment explicit. Report families of cooling
 histories and event probabilities when those assumptions permit different
