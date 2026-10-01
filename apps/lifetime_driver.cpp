@@ -92,6 +92,9 @@ int lifetime_main(int argc,char** argv) {
     if(cfg.get("version")!="1")throw std::invalid_argument("unsupported lifetime configuration version");
     const auto path=[&](const char* key){return fs::canonical(config.parent_path()/cfg.get(key));};
     const auto eos_path=path("eos"),low_path=path("opacity_low"),warm_path=path("opacity_warm"),bridge_path=path("opacity_bridge"),hot_path=path("opacity_hot");
+    const auto helium_isotopes=cfg.values.contains("eos_helium_isotopes")?cfg.get("eos_helium_isotopes"):"tabulated";
+    if(helium_isotopes!="tabulated" && helium_isotopes!="number_density")
+      throw std::invalid_argument("unknown helium-isotope EOS interpolation");
     const auto low_metal_interpolation=cfg.values.contains("eos_low_metal_interpolation")
         ?cfg.get("eos_low_metal_interpolation"):"cubic";
     if(low_metal_interpolation!="cubic" && low_metal_interpolation!="quadratic")
@@ -452,6 +455,8 @@ int lifetime_main(int argc,char** argv) {
       if(value>0)identity.number("solver."+key,value);
     if(solid_mobility>=0)identity.number("transport.solid_ion_mobility_fraction",solid_mobility);
     identity.family("eos",eos_path,true);
+    if(helium_isotopes=="number_density")
+      identity.values["eos.helium_isotopes"]=VariableMetalHelmholtzEos::isotope_mapping_identifier;
     if(ion_quantum=="liquid_bc22")
       identity.values["eos.ion_quantum"]="bc22.liquid.common_ne.linear_mixture.full_expression.v9";
     if(cold_helium_options)identity.values["eos.cold_helium"]=cold_helium_options->mixture_phase?
@@ -501,7 +506,9 @@ int lifetime_main(int argc,char** argv) {
     VariableMetalHelmholtzEos table_eos(eos_path,HelmholtzTableEos::Mixture::allow_documented_proxy,
         low_metal_interpolation=="quadratic"?VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic
                                             :VariableMetalHelmholtzEos::LowMetalInterpolation::cubic,
-        cold_eos_path,ion_quantum=="liquid_bc22",cold_helium_options);
+        cold_eos_path,ion_quantum=="liquid_bc22",cold_helium_options,
+        helium_isotopes=="number_density"?VariableMetalHelmholtzEos::IsotopeInterpolation::number_density
+                                         :VariableMetalHelmholtzEos::IsotopeInterpolation::tabulated);
     DeuteriumApproxEos eos(table_eos);
     const RadiativeOpacity::Tables opacity_tables{low_path,warm_path,bridge_path,hot_path,
         cold_opacity_path,cold_opacity_scale};

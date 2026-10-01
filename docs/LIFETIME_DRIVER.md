@@ -331,6 +331,22 @@ It is a self-contained input, checked by content; the loader does not trust
 modification times or silently substitute a cache. Keep the original source
 manifest and provenance for regeneration. An existing output is never overwritten.
 
+### Compact helium-isotope tables
+
+The optional `eos_helium_isotopes "number_density"` replaces helium-isotope
+interpolation with the classical number-density transformation described in
+[Dense EOS](DENSE_EOS.md#helium-isotope-mapping). It works with an existing full
+family or a compact copy containing only zero-helium-3 source planes:
+
+```sh
+build/apps/ember-pack-eos data/production/eos.bin data/production/eos-isotopes.bin --zero-helium3
+```
+
+The input may be text or binary. Set `eos` to the new file and select the option
+explicitly; the default tabulated mode rejects a single-plane isotope family.
+The packed file preserves source values and masks. Changing the archive or
+isotope treatment changes restart identity and requires an explicit continuation.
+
 `eos_cold_helium "liquid_mixture"` selects the optional dense-liquid replacement
 described in [Dense EOS](DENSE_EOS.md#cold-liquid-mixture). It requires
 `eos_ion_quantum "liquid_bc22"` and enters restart identity. Its stellar cooling

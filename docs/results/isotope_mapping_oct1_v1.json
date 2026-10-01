@@ -1,0 +1,91 @@
+{
+  "scope": "Optional classical FreeEOS helium-isotope transformation, compact zero-He3 source family, and checked 100 Myr cooling comparison. No new quantum-mixture or phase-separation physics.",
+  "source_base_commit": "94098ef000f9c9d2500420103be2af80bc963254",
+  "candidate_source_diff_sha256": "f9a01d1fac709f3a4fdfb445104e148bf7b1f6a914202729d80a053d0443e357",
+  "executable_sha256": "0e1290f4b80996faf08c0b5c4dbcdb922e29c8398270728be659b770d8437333",
+  "direct_source_pairs": 8,
+  "maximum_direct_source_relative_difference": 5.009e-12,
+  "cold_thermal_controls": {
+    "queries": 48,
+    "supported_before": 18,
+    "supported_after": 30,
+    "maximum_Cv_relative_error_before": 0.9558,
+    "maximum_Cv_relative_error_after": 8.794e-05
+  },
+  "chemical_control": {
+    "independent_source_queries": 57,
+    "states": 3,
+    "maximum_gradient_relative_error": 0.001351,
+    "maximum_carried_enthalpy_relative_error": 0.03723,
+    "trace_metal_entire_inventory_energy_difference_over_CvT": 7.131e-07,
+    "limitation": "Coarse trace-metal interpolation is not uniformly accurate to 0.1%; the quoted energy ratio is for one tested inventory, not an arbitrary diffusion rate."
+  },
+  "packing": {
+    "CPU_seconds": 0.8612,
+    "wall_seconds": 1.319,
+    "source_bytes": 1900108415,
+    "source_sha256": "aca70d6ac4950e7f482ad90f03705b32a577970659dbf990e3670a999f262738",
+    "output_bytes": 475027280,
+    "output_sha256": "d655c9ddc14b691479a32f429b64a27832d1ff05fc3627d68a1645644ac41d77"
+  },
+  "compact_native_validation": {
+    "queries": 4288,
+    "supported": 4144,
+    "identical_values_heat_masks_inversions": true,
+    "full_peak_RSS_bytes": 3815636992,
+    "compact_peak_RSS_bytes": 958955520,
+    "scope": "macOS standalone EOS probe, not full stellar runtime"
+  },
+  "default_preservation": 4141,
+  "regression_tests_passed": 10,
+  "configuration_checks_passed": 2,
+  "stellar": {
+    "scope": "Two matched 50 Myr checked intervals from the same 744 K snapshot; compact mapped family versus tabulated isotope reference. Current quantum/phase and transport choices retained. Not an end-to-end test.",
+    "age_years": 3912000000000.0,
+    "accepted_steps_years": {
+      "reference": [
+        50000000,
+        50000000.0
+      ],
+      "mapped": [
+        50000000,
+        50000000.0
+      ]
+    },
+    "global_relative": {
+      "Teff_K": -1.5e-09,
+      "radius_Rsun": -3.212e-09,
+      "luminosity_Lsun": -1.242e-08,
+      "central_T_K": 4.22e-10,
+      "central_density_g_cm3": 9.171e-10,
+      "He3_peak": -0.0001465,
+      "H_mass_g": -1.11e-16,
+      "He3_mass_g": 1.554e-15
+    },
+    "maximum_point_relative_r_rho_T": [
+      2.908e-08,
+      1.958e-05,
+      2.129e-07
+    ],
+    "maximum_internal_L_change_over_surface": 0.001387,
+    "maximum_absolute_H_He3_He4_change": [
+      3.232e-05,
+      2.701e-05,
+      5.307e-06
+    ],
+    "same_convective_mass_fraction": true,
+    "convective_mass_fraction": [
+      0.0005564,
+      0.0005564
+    ],
+    "Teff_K": 742.9,
+    "maximum_first_law": 2.589e-09,
+    "maximum_species_error": 3.302e-18,
+    "within_0.1pct_global_and_structure": true
+  },
+  "stellar_cost_CPU_seconds": {
+    "reference": 1068.0,
+    "compact_mapped": 590.2
+  },
+  "stellar_cost_limitation": "Reference had an additional rejected 100 Myr trial. Do not interpret total costs as an isolated speed factor."
+}

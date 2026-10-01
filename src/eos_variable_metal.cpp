@@ -115,8 +115,11 @@ std::array<HelmholtzJet,10> cold_join(double T,double rho,const Composition& c,s
 
 VariableMetalHelmholtzEos::VariableMetalHelmholtzEos(const std::filesystem::path& path,
     HelmholtzTableEos::Mixture mixture,LowMetalInterpolation low_metals,const std::filesystem::path& cold_potential,bool quantum_ions,
-    std::optional<ColdHeliumOptions> cold_helium)
-    :low_metal_interpolation_(low_metals),quantum_ions_(quantum_ions),cold_helium_(cold_helium) {
+    std::optional<ColdHeliumOptions> cold_helium,IsotopeInterpolation isotopes)
+    :low_metal_interpolation_(low_metals),isotope_interpolation_(isotopes),
+      quantum_ions_(quantum_ions),cold_helium_(cold_helium) {
+  if(isotopes!=IsotopeInterpolation::tabulated && isotopes!=IsotopeInterpolation::number_density)
+    throw std::invalid_argument("variable EOS: unknown helium-isotope interpolation");
   if(cold_helium_ && (!quantum_ions || !cold_potential.empty()))
     throw std::invalid_argument("variable EOS: cold liquid join requires quantum ions and no cold additive potential");
   if(!cold_potential.empty())cold_=std::make_unique<AdditiveVolumePotential>(cold_potential);
@@ -139,7 +142,9 @@ VariableMetalHelmholtzEos::VariableMetalHelmholtzEos(const std::filesystem::path
   axis("metals",z_,extend_metals_?4:3,extend_metals_?32:4);
   if(low_metals==LowMetalInterpolation::quadratic && (z_.size()<4 || z_.front()!=0))
     throw std::invalid_argument("variable EOS: low-metal quadratic needs zero and three positive metal planes");
-  axis("hydrogen_share",u_,4,100);axis("helium3_share",v_,3,4);
+  axis("hydrogen_share",u_,4,100);axis("helium3_share",v_,isotopes==IsotopeInterpolation::number_density?1:3,4);
+  if(isotopes==IsotopeInterpolation::number_density && v_.front()!=0)
+    throw std::invalid_argument("variable EOS: isotope mapping requires zero-He3 source planes");
   if(binary) {
     in>>key;
     if(key!="planes_binary_v1" || in.get()!='\n')throw std::runtime_error("variable EOS: invalid binary plane marker");
@@ -221,7 +226,7 @@ VariableMetalHelmholtzEos::VariableMetalHelmholtzEos(const std::filesystem::path
   for(auto& p:slopes_)p->initialize_support();
 }
 
-VariableMetalHelmholtzEos::Weights VariableMetalHelmholtzEos::weights(const Composition& c,std::size_t channels) const {
+VariableMetalHelmholtzEos::Weights VariableMetalHelmholtzEos::weights(const Composition& c,std::size_t channels,bool isotope_map) const {
   if(c[Species::H2]!=0)throw std::domain_error("variable EOS: select an explicit deuterium material approximation");
   if(c.basis!=AbundanceBasis::baryon_mass || c.metal_inventory!=MetalInventory::gs98 || std::abs(c.sum()-1)>1e-10)
     throw std::domain_error("variable EOS: normalized baryonic GS98 composition required");
@@ -230,9 +235,14 @@ VariableMetalHelmholtzEos::Weights VariableMetalHelmholtzEos::weights(const Comp
   if(metal>=1)throw std::domain_error("variable EOS: empty H/He material");
   for(std::size_t k=0;k<5;++k)if(std::abs(c.X[3+k]-metal*metal_pattern_[k])>1e-12)
     throw std::domain_error("variable EOS: changed relative metal pattern");
-  const auto H=CJet::variable(c.X[0],0),Y=CJet::variable(c.X[1],1),Z=CJet::variable(metal,2);
+  auto H=CJet::variable(c.X[0],0),Y=CJet::variable(c.X[1],1),Z=CJet::variable(metal,2);
+  if(isotope_map) {const auto f=1+Y/3;H=H/f;Z=Z/f;Y=CJet(0);}
   auto u=H/(1-Z);CJet v;
-  if(c.X[1]+c.X[2]>0) {
+  if(isotope_map) {
+    // The source sees helium nuclei only; the original isotope entropy and
+    // quantum contribution are restored at the physical composition.
+    v=CJet(0);
+  }else if(c.X[1]+c.X[2]>0) {
     auto helium=1-H-Z;helium.value=c.X[1]+c.X[2];v=Y/helium;
   }else if(channels!=1)throw std::domain_error("variable EOS: pure-H composition derivatives require a different reference species");
   auto bracket=[](CJet& x,const std::vector<double>& axis) {
@@ -340,9 +350,11 @@ std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::raw_source_jets(double T,
   const double cold_fraction=cold_?cold_weight(T,rho):0;
   // Validate the original composition contract even where the original
   // thermal source is not evaluated.
-  const auto w=weights(c,channels);std::array<HelmholtzJet,10> result{};
-  if(cold_fraction<1)result=HelmholtzTableEos::mixed_composition_jets(
-      T,rho,std::span<const WeightedTable>(w.tables).first(w.count),channels);
+  const bool mapped=isotope_interpolation_==IsotopeInterpolation::number_density;
+  const auto w=weights(c,channels,mapped);std::array<HelmholtzJet,10> result{};
+  if(cold_fraction<1)result=mapped?isotope_mapped_jets(T,rho,c,channels,w):
+      HelmholtzTableEos::mixed_composition_jets(T,rho,
+          std::span<const WeightedTable>(w.tables).first(w.count),channels);
   if(cold_fraction>0)result=cold_join(T,rho,c,channels,*cold_,result);
   if(quantum_ions_) {
     const auto correction=ion_quantum_liquid_jets(T,rho,c,channels);
@@ -353,6 +365,48 @@ std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::raw_source_jets(double T,
     }
   }
   return result;
+}
+std::array<HelmholtzJet,10> VariableMetalHelmholtzEos::isotope_mapped_jets(
+    double T,double rho,const Composition& c,std::size_t channels,const Weights& weights_here) const {
+  const double f=1+c.X[1]/3;
+  const auto b=HelmholtzTableEos::mixed_composition_jets(T,rho*f,
+      std::span<const WeightedTable>(weights_here.tables).first(weights_here.count),channels);
+  std::array<HelmholtzJet,10> out{};
+  for(unsigned i=0;i<4;++i)for(unsigned j=0;i+j<=3;++j)out[0][i][j]=f*b[0][i][j];
+  if(channels>1)for(std::size_t a=0;a<3;++a) {
+    const double fa=a==1?1./3:0,la=fa/f;
+    for(unsigned i=0;i<3;++i)for(unsigned j=0;i+j<=2;++j)
+      out[1+a][i][j]=f*(b[1+a][i][j]+la*b[0][i][j+1])+fa*b[0][i][j];
+  }
+  if(channels>4)for(std::size_t a=0;a<3;++a)for(std::size_t d=a;d<3;++d) {
+    const double fa=a==1?1./3:0,fd=d==1?1./3:0;
+    const double la=fa/f,ld=fd/f,lad=-la*ld;
+    const auto k=second_channel(a,d);
+    for(unsigned i=0;i<2;++i)for(unsigned j=0;i+j<=1;++j)
+      out[k][i][j]=f*(b[k][i][j]+ld*b[1+a][i][j+1]+la*b[1+d][i][j+1]
+          +la*ld*b[0][i][j+2]+lad*b[0][i][j+1])
+          +fa*(b[1+d][i][j]+ld*b[0][i][j+1])
+          +fd*(b[1+a][i][j]+la*b[0][i][j+1]);
+  }
+  // The mapped tables subtract source ionic mixing. Restore its change of
+  // number normalization, leaving full_mixing(c) to the existing callers.
+  const auto X=CJet::variable(c.X[0],0),Y=CJet::variable(c.X[1],1),Z=CJet::variable(c.Z(),2);
+  const auto F=1+Y/3;
+  CJet logarithm(std::log(F.value));
+  for(std::size_t a=0;a<3;++a) {
+    logarithm.d[a]=F.d[a]/F.value;
+    for(std::size_t d=0;d<3;++d)
+      logarithm.h[a][d]=F.h[a][d]/F.value-F.d[a]*F.d[d]/(F.value*F.value);
+  }
+  double metal_number=0;
+  for(const auto& m:gs98_metals)if(!potassium(m))metal_number+=m.fraction/m.mass_number;
+  const auto number=X+Y/3+(1-X-Y-Z)/4+Z*metal_number;
+  const auto correction=(-constants::R_gas)*number*logarithm;
+  out[0][0][0]+=correction.value;
+  if(channels>1)for(std::size_t a=0;a<3;++a)out[1+a][0][0]+=correction.d[a];
+  if(channels>4)for(std::size_t a=0;a<3;++a)for(std::size_t d=a;d<3;++d)
+    out[second_channel(a,d)][0][0]+=correction.h[a][d];
+  return out;
 }
 void VariableMetalHelmholtzEos::validate_composition_domain(double T,double rho,const Composition& c) const {
   if(!(std::isfinite(T) && T>0 && std::isfinite(rho) && rho>0))
@@ -385,8 +439,10 @@ void VariableMetalHelmholtzEos::validate_source_domain(double T,double rho,const
 }
 void VariableMetalHelmholtzEos::validate_raw_source_domain(double T,double rho,const Composition& c) const {
   if(quantum_ions_)(void)ion_quantum_liquid_jets(T,rho,c,1);
-  const auto w=weights(c,10);
-  const double t=std::log(T),q=std::log(rho)-1.5*(t-6*std::log(10.));
+  const bool mapped=isotope_interpolation_==IsotopeInterpolation::number_density;
+  const auto w=weights(c,10,mapped);
+  const double source_rho=rho*(mapped?1+c.X[1]/3:1);
+  const double t=std::log(T),q=std::log(source_rho)-1.5*(t-6*std::log(10.));
   for(std::size_t i=0;i<w.count;++i) {
     const auto& p=*w.tables[i].table;
     if(t<p.t_.front() || t>p.t_.back() || q<p.q_.front() || q>p.q_.back())
@@ -407,12 +463,14 @@ std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_near(d
   return density_range_impl(T,c,rho);
 }
 std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_impl(double T,const Composition& c,std::optional<double> rho) const {
-  const auto w=weights(c,1);DensityRange result{0,std::numeric_limits<double>::infinity()};
+  const bool mapped=isotope_interpolation_==IsotopeInterpolation::number_density;
+  const double f=mapped?1+c.X[1]/3:1;
+  const auto w=weights(c,1,mapped);DensityRange result{0,std::numeric_limits<double>::infinity()};
   const auto raw_range=[&](double t,std::optional<double> guess) {
     DensityRange d{0,std::numeric_limits<double>::infinity()};
     for(std::size_t i=0;i<w.count;++i) {
-      const auto r=guess?w.tables[i].table->material_density_range_near(t,*guess):w.tables[i].table->material_density_range(t);
-      d.min=std::max(d.min,r.min);d.max=std::min(d.max,r.max);
+      const auto r=guess?w.tables[i].table->material_density_range_near(t,*guess*f):w.tables[i].table->material_density_range(t);
+      d.min=std::max(d.min,r.min/f);d.max=std::min(d.max,r.max/f);
     }
     return d;
   };

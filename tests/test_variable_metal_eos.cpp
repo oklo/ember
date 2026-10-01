@@ -1,5 +1,6 @@
 #include "ember/eos_variable_metal.hpp"
 #include "ember/constants.hpp"
+#include "ember/ion_quantum.hpp"
 #include <algorithm>
 #include <bit>
 #include <chrono>
@@ -26,7 +27,7 @@ double coefficient(double u,double v,double Z,bool cubic) {
 // A thermodynamically regular manufactured potential with known pressure
 // and energy. Non-polynomial Z dependence exercises joins independently of
 // the cubic-reproduction check. The final source plane can be fully masked.
-void fixture(const std::filesystem::path& dir,bool cubic,bool masked,std::size_t first_masked=4,bool gap=false) {
+void fixture(const std::filesystem::path& dir,bool cubic,bool masked,std::size_t first_masked=4,bool gap=false,bool isotope_mask=false) {
   std::filesystem::create_directories(dir);
   const std::array<double,6> zs{0,.005,.02,.04,.16,.3};
   const std::array<double,4> us{0,.25,.7,1};
@@ -44,7 +45,7 @@ void fixture(const std::filesystem::path& dir,bool cubic,bool masked,std::size_t
       const double a=coefficient(us[iu],vs[iv],zs[iz],cubic);
       const std::vector<double> qs=gap?std::vector<double>{-6,-4,-2,0,2,4,6}:std::vector<double>{-6,-2,2,6};
       for(int it=0;it<4;++it)for(double lq:qs) {
-        const bool valid=!(masked && iz>=first_masked) && !(gap && it==1 && lq==0);
+        const bool valid=!(masked && iz>=first_masked) && !(gap && it==1 && lq==0) && !(isotope_mask && iv>0);
         f<<(valid?1:0)<<' '<<a*lq*std::log(10.)<<' '<<a<<" 0 0 0 0 0 0 0\n";
       }
     }
@@ -337,6 +338,70 @@ int main() {
       double ions=0;for(const auto& m:gs98_metals)if(m.charge!=19)ions+=m.fraction/m.mass_number;
       check(std::abs((b.gradient[2]-a.gradient[2])/(constants::R_gas*ions*std::log(10.))-1)<1e-10,
             "trace metal chemical potential retains exact logarithmic ideal mixing");
+    }
+    {
+      using I=VariableMetalHelmholtzEos::IsotopeInterpolation;
+      using L=VariableMetalHelmholtzEos::LowMetalInterpolation;
+      VariableMetalHelmholtzEos mapped(dir/"smooth/family6.dat",M::allow_documented_proxy,L::cubic,{},false,{},I::number_density);
+      VariableMetalHelmholtzEos mapped_gap(dir/"disconnected/family6.dat",M::allow_documented_proxy,L::cubic,{},false,{},I::number_density);
+      check_intervals(mapped_gap,gap_comp);
+      double state_error=0,derivative_error=0,range_error=0;
+      auto relative=[&](double a,double b){state_error=std::max(state_error,std::abs(a-b)/(1+std::abs(b)));};
+      const double tt=2.413e5,rr=123.4;
+      for(const auto xyz:std::array<std::array<double,3>,3>{{{.2,.05,.02},{.7,.02,.001},{.93,.01,.004}}}) {
+        const auto c=composition(xyz[0],xyz[1],xyz[2]);const double f=1+c.X[1]/3;
+        const auto transformed=composition(c.X[0]/f,0,c.Z()/f);
+        const auto a=mapped.eval(tt,rr,c),b=two.eval(tt,rr*f,transformed);
+        const double n3=c.X[1]/3,n4=c.X[2]/4;
+        const double isotope=constants::R_gas*(n3*std::log(n3)+n4*std::log(n4)
+            -(n3+n4)*std::log(n3+n4)-1.5*n3*std::log(nuclides[1].A/nuclides[2].A));
+        relative(a.P,b.P);relative(a.E,f*b.E);relative(a.S,f*b.S-isotope);
+        relative(a.cp,f*b.cp);relative(a.cv,f*b.cv);relative(a.grad_ad,b.grad_ad);
+        relative(mapped.rho_from_PT(tt,a.P,c,rr*1.01),rr);
+        mapped.validate_composition_domain(tt,rr,c);
+        const auto ra=*mapped.density_range_near(tt,c,rr),rb=*two.density_range_near(tt,transformed,rr*f);
+        range_error=std::max({range_error,std::abs(ra.min*f/rb.min-1),std::abs(ra.max*f/rb.max-1)});
+        const auto p=mapped.composition_potential(tt,rr,c);const auto heat=mapped.composition_heat(tt,rr,c);
+        const double step=1e-6;
+        for(std::size_t k=0;k<3;++k) {
+          auto x=xyz;x[k]+=step;const auto plus=composition(x[0],x[1],x[2]);
+          x[k]-=2*step;const auto minus=composition(x[0],x[1],x[2]);
+          const auto pp=mapped.composition_potential(tt,rr,plus),pm=mapped.composition_potential(tt,rr,minus);
+          const auto hp=mapped.composition_heat(tt,rr,plus),hm=mapped.composition_heat(tt,rr,minus);
+          derivative_error=std::max(derivative_error,std::abs((pp.phi-pm.phi)/(2*step)-p.gradient[k])/constants::R_gas);
+          for(std::size_t l=0;l<3;++l) {
+            derivative_error=std::max(derivative_error,std::abs((pp.gradient[l]-pm.gradient[l])/(2*step)-p.hessian[l][k])/(constants::R_gas+std::abs(p.hessian[l][k])));
+            derivative_error=std::max(derivative_error,std::abs((hp.exchange_enthalpy[l]-hm.exchange_enthalpy[l])/(2*step)-heat.enthalpy_partials[l][2+k])/(tt*constants::R_gas));
+          }
+        }
+      }
+      check(state_error<1e-10,"isotope mapping preserves source state and restores physical isotope entropy",state_error);
+      VariableMetalHelmholtzEos::pack_binary(dir/"smooth/family6.dat",dir/"isotope-text.bin",true);
+      VariableMetalHelmholtzEos::pack_binary(dir/"smooth.bin",dir/"isotope-binary.bin",true);
+      VariableMetalHelmholtzEos single_text(dir/"isotope-text.bin",M::allow_documented_proxy,L::cubic,{},false,{},I::number_density);
+      VariableMetalHelmholtzEos single_binary(dir/"isotope-binary.bin",M::allow_documented_proxy,L::cubic,{},false,{},I::number_density);
+      const auto single_comp=composition(.7,.04,.001);
+      check(response_difference(mapped,single_text,tt,rr,single_comp)==0 &&
+            response_difference(mapped,single_binary,tt,rr,single_comp)==0,
+            "removing unused isotope planes preserves all values, forces and heat derivatives");
+      check(throws([&]{VariableMetalHelmholtzEos invalid(dir/"isotope-binary.bin",M::allow_documented_proxy);}),
+            "one-plane source requires explicit number-density isotope selection");
+      check(range_error<1e-13,"mapped density support uses the physical density coordinate",range_error);
+      check(derivative_error<5e-6,"mapped forces, curvature and transported heat match finite differences",derivative_error);
+      fixture(dir/"isotope_masked",false,false,4,false,true);
+      VariableMetalHelmholtzEos isotope_masked(dir/"isotope_masked/family6.dat",M::allow_documented_proxy,L::cubic,{},false,{},I::number_density);
+      VariableMetalHelmholtzEos original_isotope_masked(dir/"isotope_masked/family6.dat",M::allow_documented_proxy);
+      const auto c=composition(.7,.04,.001);
+      check(!throws([&]{isotope_masked.eval(tt,rr,c);isotope_masked.composition_potential(tt,rr,c);
+          isotope_masked.composition_heat(tt,rr,c);isotope_masked.validate_composition_domain(tt,rr,c);}),
+          "mapped values, forces, heat and support need only zero-He3 planes");
+      check(throws([&]{original_isotope_masked.eval(tt,rr,c);}),"tabulated isotope mode still requires its nonzero-He3 planes");
+      VariableMetalHelmholtzEos mapped_quantum(dir/"smooth/family6.dat",M::allow_documented_proxy,L::cubic,{},true,{},I::number_density);
+      const auto q=ion_quantum_liquid_jets(1e6,rr,c,1)[0];
+      const auto base=mapped.eval(1e6,rr,c),quantum=mapped_quantum.eval(1e6,rr,c);
+      check(std::abs((quantum.P-base.P)-rr*1e6*q[0][1])/base.P<1e-12 &&
+            std::abs((quantum.E-base.E)+1e6*q[1][0])/std::abs(base.E)<1e-12,
+            "quantum correction uses original physical abundances and density exactly once");
     }
   }catch(const std::exception& e){std::fprintf(stderr,"%s\n",e.what());++failures;}
   std::filesystem::remove_all(dir);

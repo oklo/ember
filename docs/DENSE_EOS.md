@@ -18,6 +18,47 @@ in global quantities. These are interpolation and evolution checks, separate
 from the physical uncertainty of the EOS.
 [Source-support checks](results/cooling_eos_support_sept30_v1.json).
 
+## Helium isotope mapping
+
+`eos_helium_isotopes "number_density"` evaluates the classical source using
+only its zero-helium-3 planes. With baryonic mass fractions and
+`f = 1 + Y3/3`, the transformed state is
+
+```text
+rho' = f rho; X' = X/f; Z' = Z/f
+Y3' = 0; Y4' = (Y4 + 4 Y3/3)/f
+```
+
+These transformations preserve every element's number density in FreeEOS's
+classical isotope approximation. Specific thermodynamic potentials scale by
+`f`; the physical isotope mixing and translational entropy are restored.
+The normalization correction to the mixing-subtracted potential `F/T` is
+`-R N_nuclei ln(f)`. Thermal and composition derivatives include the density
+shift and this correction. Quantum and phase terms use the original physical
+composition and density. This is not a new quantum-mixture or phase-separation
+model. The default remains `"tabulated"`, and the option enters restart identity.
+
+Eight direct source pairs agree within 5.009e-12. In 48 cold-envelope controls,
+the supported thermal queries increase from 18 to 30 and the largest heat
+capacity error falls from 95.58% to 0.008794%. Independent source differences
+also check the chemical forces and enthalpies carried by diffusion. A cold
+trace-metal enthalpy derivative still differs by 3.723%; its whole tested
+Z = 1e-6 inventory corresponds to an energy difference of 7.131e-7 Cv T.
+Thus this is not a uniform accuracy bound for all composition derivatives.
+Missing thermal source cells remain masked.
+
+Two matched 50 Myr intervals from a 744 K remnant change surface luminosity by
+1.242e-8, peak helium-3 by 0.01465%, and local mass fractions by at most
+3.232e-5, with the same convective mass. The largest internal luminosity change
+is 0.1387% of surface luminosity near m/M = 0.9622. Species and energy checks
+pass; the small redistribution is retained rather than called identical physics.
+
+Removing unused isotope planes reduces this table from 1.900 GB to 475.0 MB.
+All 4288 native queries are unchanged between full and compact mapped tables.
+In that standalone probe peak memory falls from 3.816 GB to 0.9590 GB; this is
+not a whole-star speed benchmark. See [checks](results/isotope_mapping_oct1_v1.json)
+and [packing instructions](LIFETIME_DRIVER.md#compact-helium-isotope-tables).
+
 ## Degenerate electrons
 
 `ElectronGas` and `IdealEos` integrate relativistic Fermi–Dirac occupations.

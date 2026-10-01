@@ -42,11 +42,14 @@ class VariableMetalHelmholtzEos final : public Eos {
       "additive_volume.thermal_potential_join.He_proxy_metals.v2";
   // Optional local low-Z potential; C2 blend back to cubic by z_[2].
   enum class LowMetalInterpolation { cubic, quadratic };
+  enum class IsotopeInterpolation { tabulated, number_density };
+  static constexpr const char* isotope_mapping_identifier="helium_isotopes.classical_number_density.v1";
   explicit VariableMetalHelmholtzEos(const std::filesystem::path&,
       HelmholtzTableEos::Mixture=HelmholtzTableEos::Mixture::exact,
       LowMetalInterpolation=LowMetalInterpolation::cubic,
       const std::filesystem::path& cold_potential={},bool quantum_ions=false,
-      std::optional<ColdHeliumOptions> cold_helium={});
+      std::optional<ColdHeliumOptions> cold_helium={},
+      IsotopeInterpolation=IsotopeInterpolation::tabulated);
   // Optional cold dense-He liquid-mixture join (cold_helium_base.hpp), applied to the material potential
   // itself so that eval, composition forces, transported enthalpies and domain checks share it. It requires
   // quantum_ions (the base carries the same Baiko-Chugunov term, so it is present exactly once on each side),
@@ -58,9 +61,11 @@ class VariableMetalHelmholtzEos final : public Eos {
       "cold_helium.mixture_softmin.same_composition.common_liquid.width0.005.full_anchor.bc22_linear.X005_200.v4";
   static constexpr const char* dense_transition_identifier=
       "dense_hhe.liquid.bc22.T200_300.rho300_600.full_anchor.v3";
-  // Convert a text family and its planes to one relocatable binary input.
+  // Pack a text or binary family. Optional zero-He3 extraction requires the
+  // number-density isotope mode when the resulting family is used.
   // Stored doubles, masks and logarithmic coordinates remain bit-identical.
-  static void pack_binary(const std::filesystem::path& source,const std::filesystem::path& destination);
+  static void pack_binary(const std::filesystem::path& source,const std::filesystem::path& destination,
+      bool zero_helium3_only=false);
   EosState eval(double T,double rho,const Composition& c) const override {
     return eval_with_derivatives(T,rho,c).state;
   }
@@ -93,7 +98,9 @@ class VariableMetalHelmholtzEos final : public Eos {
  private:
   using WeightedTable=HelmholtzTableEos::WeightedCompositionTable;
   struct Weights {std::array<WeightedTable,80> tables{};std::size_t count{};};
-  Weights weights(const Composition&,std::size_t channels) const;
+  Weights weights(const Composition&,std::size_t channels,bool isotope_map=false) const;
+  std::array<HelmholtzJet,10> isotope_mapped_jets(double,double,const Composition&,
+      std::size_t,const Weights&) const;
   std::optional<DensityRange> density_range_impl(double,const Composition&,std::optional<double>) const;
   std::array<HelmholtzJet,10> jets(double,double,const Composition&,std::size_t) const;
   std::array<HelmholtzJet,10> source_jets(double,double,const Composition&,std::size_t) const;
@@ -106,6 +113,7 @@ class VariableMetalHelmholtzEos final : public Eos {
   std::vector<double> z_,u_,v_;
   bool extend_metals_{};
   LowMetalInterpolation low_metal_interpolation_{};
+  IsotopeInterpolation isotope_interpolation_{};
   // Optional physical model, never a fallback on a failed source query.
   // In the cold component only, metals use a helium electronic/caloric proxy;
   // actual species inventories and analytic metal mixing entropy are retained.
