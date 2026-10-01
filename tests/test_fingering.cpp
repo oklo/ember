@@ -128,10 +128,15 @@ int main() {
     require(cancel.regime==FingeringRegime::fingering && cancel.growth_rate>0 &&
         cancel.mixing_over_thermal[0]>cancel.mixing_over_thermal[1],
         "opposing diffusion modes can grow at zero net composition buoyancy");
-    bool oscillatory=false;
-    try{two_composition_fingering(.01,{1e-4,2e-4},{-.1,.2});}
-    catch(const std::domain_error&){oscillatory=true;}
-    require(oscillatory,"unsupported oscillatory ordering must be reported");
+    for(const auto& input:std::array<std::array<double,5>,2>{{
+        {.0004,.00005,.0034,-1.1,.83},
+        {.013569673496689305,.00011105469291715423,.00011544183077567232,
+          -.18989186929200672,.19034483027947444}}}) {
+      bool oscillatory=false;
+      try{two_composition_fingering(input[0],{input[1],input[2]},{input[3],input[4]});}
+      catch(const std::domain_error&){oscillatory=true;}
+      require(oscillatory,"an actually dominant oscillatory mode must be reported");
+    }
     std::ifstream two_data(std::string(EMBER_TEST_DATA_DIR)+"/fingering_two_reference.txt");
     require(bool(two_data),"missing two-composition eigenvalue reference");
     int two_count=0;double two_error=0;

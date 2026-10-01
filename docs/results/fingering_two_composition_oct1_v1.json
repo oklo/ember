@@ -1,10 +1,42 @@
 {
   "scope": "Optional two-composition extension of Brown saturation; nonlinear multicomponent calibration and colder stellar passage unproven.",
   "linear_checks": {
-    "independent_cases": 206,
-    "maximum_growth_relative_error": 4.6073644899280453e-10,
-    "maximum_wavenumber_relative_error": 3.9939485219520066e-05,
-    "reference": "Independent 4-by-4 eigensolves and wavelength maximization; 29 representative cases retained in tests/data/fingering_two_reference.txt"
+    "independent_cases": 808,
+    "maximum_growth_relative_error": 6.145287612113748e-10,
+    "maximum_wavenumber_relative_error": 7.887992871302707e-05,
+    "oscillatory_dominant_refusals": 87,
+    "reference": "Independent 4-by-4 eigenvalues and wavelength maximization; representative stationary cases retained in tests/data/fingering_two_reference.txt",
+    "regression": "Fast destabilizing composition does not alone imply oscillatory growth. Shifted Routh-Hurwitz determinants now compare the dominant branches.",
+    "first_false_refusal": {
+      "name": "stellar_trial",
+      "inputs": [
+        0.01357002897897414,
+        0.00011104792180930877,
+        0.00011543411980414513,
+        -0.17222463623781015,
+        0.18328339719133852
+      ],
+      "fastest_q": 0.952609743826122,
+      "growth": 0.004562908470385748,
+      "frequency": 0.0,
+      "stationary_unstable_samples": 1450,
+      "oscillatory_unstable_samples": 6
+    },
+    "later_genuine_refusal": {
+      "name": "stellar_trial",
+      "inputs": [
+        0.013569673496689305,
+        0.00011105469291715423,
+        0.00011544183077567232,
+        -0.18989186929200672,
+        0.19034483027947444
+      ],
+      "fastest_q": 0.5163802274430005,
+      "growth": 3.5993812143587935e-05,
+      "frequency": 0.0004074411347100376,
+      "stationary_unstable_samples": 0,
+      "oscillatory_unstable_samples": 1084
+    }
   },
   "integration_checks": [
     "metal_cn_transport: 518 checks pass",
@@ -47,7 +79,16 @@
   "provenance": {
     "local_evidence": "out/fingering-integration-oct1-v1",
     "stellar_evidence": "out/fingering-stellar-oct1-v2",
-    "parent": "cooling-broad-hhe-replay-oct1-v2/milestones/below_850K.checkpoint"
+    "parent": "cooling-broad-hhe-replay-oct1-v2/milestones/below_850K.checkpoint",
+    "classification_evidence": "out/fingering-fast-mode-oct1-v1"
   },
-  "negative_result": "An earlier scalar projection accepted 12.5 Myr and then repeatedly became negative despite positive native chemical diffusion eigenvalues; not selected."
+  "negative_result": "An earlier scalar projection accepted 12.5 Myr and then repeatedly became negative despite positive native chemical diffusion eigenvalues; not selected.",
+  "corrected_warm_replay": {
+    "accepted_additional_years": 12500000.0,
+    "Teff_K": 892.6851437965258,
+    "error_norm": 0.0002730766635039572,
+    "status": "Stopped after repeated oscillatory trial refusals. One shorter interval passes; no cold-passage or nonlinear-calibration claim.",
+    "source_of_regression": "out/fingering-fast-mode-oct1-v1",
+    "oscillatory_trial_evidence": "out/fingering-oscillatory-mode-oct1-v1"
+  }
 }

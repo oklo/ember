@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <cmath>
 #include <limits>
+#include <sstream>
+#include <iomanip>
 #include <stdexcept>
 
 namespace ember {
@@ -139,16 +141,6 @@ TwoCompositionFingering two_composition_fingering(double pr,
   const double cross=driving[0]*tau[1]+driving[1]*tau[0];
   const double A=1+pr+sum,B=(1+pr)*sum+pr+product;
   const double C=(1+pr)*product+pr*sum,D=sum-net-cross,E=product-cross;
-  if(driving[0]<0) {
-    // Routh-Hurwitz determinants are polynomials in q^2. Establish stability
-    // for ALL wavelengths before refusing the unmodelled oscillatory regime.
-    const long double h2=A*B-C,h0=A*pr*(1-net)-pr*D;
-    const long double a=C*h2-A*A*pr*product;
-    const long double b=C*h0+pr*D*h2-A*A*pr*E,c=pr*D*h0;
-    if(D>=0 && E>=0 && h2>=0 && h0>=0 && a>0
-        && (b>=0?c>=0:4*a*c>=b*b))return out;
-    throw std::domain_error("two-composition fingering: unstable fast field needs an oscillatory closure");
-  }
   const double upper=std::sqrt(pr*(std::max(0.,driving[0])+std::max(0.,driving[1])));
   auto at=[&](double q) -> Mode {
     const double a3=q*A,a2=q*q*B+pr*(1-net),a1=q*(q*q*C+pr*D);
@@ -176,32 +168,118 @@ TwoCompositionFingering two_composition_fingering(double pr,
         +pr*(4*product*q*q*q+2*E*q);
     return {x,dq};
   };
-  const double drive_weight=driving[0]/tau[0]+driving[1]/tau[1];
-  if(drive_weight<=1)return out;
-  const double qmax=std::sqrt(drive_weight-1);
-  // Resolve every sampled local maximum, rather than assuming the two
-  // diffusivities create a single extremum. Refine by the analytic F_q=0.
-  constexpr int samples=96;
   double best=0,bestq=0;
-  const double qmin=std::min(1.,qmax)*1e-8;
-  double previous_q=qmin;auto previous=at(previous_q);
-  for(int i=1;i<=samples;++i) {
-    const double q=std::exp(std::log(qmin)+(std::log(qmax)-std::log(qmin))*double(i)/samples);
-    const auto current=at(q);
-    if(previous.lambda>0 && previous.derivative_numerator<0
-        && (current.lambda==0 || current.derivative_numerator>=0)) {
-      double a=previous_q,b=q;
-      for(int j=0;j<60;++j) {
-        const double middle=.5*(a+b);const auto m=at(middle);
-        if(m.lambda>0 && m.derivative_numerator<0)a=middle;else b=middle;
-        if(b-a<=2e-12*(a+b))break;
-      }
-      const double peakq=.5*(a+b),growth=at(peakq).lambda;
-      if(growth>best){best=growth;bestq=peakq;}
+  if(driving[0]<0) {
+    // Opposite buoyancy signs do not identify the fastest mode: stationary
+    // and oscillatory branches can coexist. Routh-Hurwitz applied after a
+    // real shift gives the spectral abscissa without complex quartic roots.
+    const long double h2=A*B-C,h0=A*pr*(1-net)-pr*D;
+    const long double aa=C*h2-A*A*pr*product;
+    const long double bb=C*h0+pr*D*h2-A*A*pr*E,cc=pr*D*h0;
+    if(D>=0 && E>=0 && h2>=0 && h0>=0 && aa>0
+        && (bb>=0?cc>=0:4*aa*cc>=bb*bb))return out;
+    if(!(h2>0 && aa>0))
+      throw std::runtime_error("two-composition fingering: unresolved stability bound");
+    // Above these four determinant roots every mode is damped. The last
+    // determinant is quadratic in q^2; use a cancellation-safe upper root.
+    long double end2=std::max<long double>({0.L,-pr*D/C,-E/product,-h0/h2});
+    const long double discriminant=bb*bb-4*aa*cc;
+    if(discriminant>=0) {
+      const long double root=std::sqrt(discriminant);
+      const long double largest=bb<0?(-bb+root)/(2*aa):
+          (bb+root>0?-2*cc/(bb+root):0);
+      end2=std::max(end2,largest);
     }
-    previous=current;previous_q=q;
+    if(!(end2>0))
+      throw std::runtime_error("two-composition fingering: unresolved unstable range");
+    auto growth=[&](double q) {
+      const long double a3=q*A,a2=q*q*B+pr*(1-net),a1=q*(q*q*C+pr*D);
+      const long double a0=pr*q*q*(product*q*q+E);
+      auto stable_shift=[&](long double x) {
+        const long double b3=a3+4*x,b2=a2+3*a3*x+6*x*x;
+        const long double b1=a1+x*(2*a2+x*(3*a3+4*x));
+        const long double b0=a0+x*(a1+x*(a2+x*(a3+x)));
+        return b1>0 && b0>0 && b3*b2>b1 &&
+            b1*(b3*b2-b1)>b3*b3*b0;
+      };
+      if(stable_shift(0))return 0.;
+      const double stationary=at(q).lambda;
+      if(stationary>0 && stable_shift(stationary*(1+1e-10)))return stationary;
+      double lo=stationary,hi=upper;
+      if(!stable_shift(hi))
+        throw std::runtime_error("two-composition fingering: unresolved spectral bound");
+      for(int j=0;j<70;++j) {
+        const double x=.5*(lo+hi);
+        if(stable_shift(x))hi=x;else lo=x;
+        if(hi-lo<=2e-13*(hi+lo))break;
+      }
+      return .5*(lo+hi);
+    };
+    const double qmax=std::sqrt(double(end2)),qmin=std::min(1.,qmax)*1e-10;
+    constexpr int samples=128;
+    std::array<double,samples+1> logs{},rates{};
+    for(int i=0;i<=samples;++i) {
+      logs[i]=std::log(qmin)+double(i)/samples*std::log(qmax/qmin);
+      rates[i]=growth(std::exp(logs[i]));
+    }
+    for(int i=1;i<samples;++i)if(rates[i]>0 && rates[i]>=rates[i-1] && rates[i]>=rates[i+1]) {
+      double a=logs[i-1],b=logs[i+1];
+      constexpr double ratio=.6180339887498948482;
+      double x=b-ratio*(b-a),y=a+ratio*(b-a),gx=growth(std::exp(x)),gy=growth(std::exp(y));
+      for(int j=0;j<70 && b-a>2e-10;++j) {
+        if(gx<gy) {a=x;x=y;gx=gy;y=a+ratio*(b-a);gy=growth(std::exp(y));}
+        else {b=y;y=x;gy=gx;x=b-ratio*(b-a);gx=growth(std::exp(x));}
+      }
+      const double q=std::exp(.5*(a+b)),value=growth(q);
+      if(value>best){best=value;bestq=q;}
+    }
+    if(!(best>0))throw std::runtime_error("two-composition fingering: spectral maximum not resolved");
+    const double stationary=at(bestq).lambda;
+    if(stationary<best*(1-1e-7)) {
+      std::ostringstream message;
+      message<<std::setprecision(17)<<"two-composition fingering: fastest mode is oscillatory; closure unavailable"
+          <<" Pr="<<pr<<" tau0="<<tau[0]<<" tau1="<<tau[1]
+          <<" g0="<<driving[0]<<" g1="<<driving[1]<<" growth="<<best<<" q="<<bestq;
+      throw std::domain_error(message.str());
+    }
+    // A value maximum alone leaves O(sqrt(epsilon)) wavelength noise. Refine
+    // F_q=0 so composition finite differences see smooth transport coefficients.
+    double a=bestq*.999,b=bestq*1.001;
+    if(!(at(a).derivative_numerator<0 && at(b).derivative_numerator>0))
+      throw std::runtime_error("two-composition fingering: stationary maximum not bracketed");
+    for(int j=0;j<60;++j) {
+      const double q=.5*(a+b);
+      if(at(q).derivative_numerator<0)a=q;else b=q;
+      if(b-a<=2e-12*(a+b))break;
+    }
+    bestq=.5*(a+b);best=at(bestq).lambda;
+  } else {
+    const double drive_weight=driving[0]/tau[0]+driving[1]/tau[1];
+    if(drive_weight<=1)return out;
+    const double qmax=std::sqrt(drive_weight-1);
+    // Resolve every sampled local maximum, rather than assuming the two
+    // diffusivities create a single extremum. Refine by the analytic F_q=0.
+    constexpr int samples=96;
+    const double qmin=std::min(1.,qmax)*1e-8;
+    double previous_q=qmin;auto previous=at(previous_q);
+    for(int i=1;i<=samples;++i) {
+      const double q=std::exp(std::log(qmin)+(std::log(qmax)-std::log(qmin))*double(i)/samples);
+      const auto current=at(q);
+      if(previous.lambda>0 && previous.derivative_numerator<0
+          && (current.lambda==0 || current.derivative_numerator>=0)) {
+        double a=previous_q,b=q;
+        for(int j=0;j<60;++j) {
+          const double middle=.5*(a+b);const auto m=at(middle);
+          if(m.lambda>0 && m.derivative_numerator<0)a=middle;else b=middle;
+          if(b-a<=2e-12*(a+b))break;
+        }
+        const double peakq=.5*(a+b),growth=at(peakq).lambda;
+        if(growth>best){best=growth;bestq=peakq;}
+      }
+      previous=current;previous_q=q;
+    }
+    if(!(best>0 && bestq>0))throw std::runtime_error("two-composition fingering: fastest mode not resolved");
   }
-  if(!(best>0 && bestq>0))throw std::runtime_error("two-composition fingering: fastest mode not resolved");
   out.regime=FingeringRegime::fingering;out.growth_rate=best;out.wavenumber_squared=bestq;
   const double velocity_squared=49*best*best/bestq;
   out.thermal_nusselt_excess=velocity_squared/(best+bestq);

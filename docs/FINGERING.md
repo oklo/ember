@@ -29,11 +29,12 @@ The coefficient model covers fully ionized, degenerate liquid H/He with
 negligible metal buoyancy. It uses a classical mean-ion viscosity alongside
 electron viscosity. It supplies no multicomponent closure outside that material
 domain, and refuses a net inverse-composition layer that needs unsupported
-coefficients. An unstable ordering requiring oscillatory convection is also
-refused. This is not yet a full-lifetime fingering prescription, a crystal
+coefficients. Opposing buoyancy contributions can support both stationary and
+oscillatory modes. The fastest growth determines the classification; a dominant
+oscillatory mode is refused because its transport is not supplied. This is not yet a full-lifetime fingering prescription, a crystal
 mixing law, or a treatment of composition layers, rotation or magnetic fields.
 
 A warm-state diagnostic advances 100 Myr from 848.7 K with the original
-conservation and time-error checks. It finishes at 847.6 K. This does not yet
-establish passage through the colder mixing event or spatial convergence.
+conservation and time-error checks. It finishes at 847.6 K. The longer warm replay encounters an oscillatory branch in trial states.
+Passage through the colder mixing event and spatial convergence remain unproven.
 [Checks and limits](results/fingering_two_composition_oct1_v1.json).

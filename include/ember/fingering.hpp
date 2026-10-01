@@ -59,7 +59,8 @@ struct TwoCompositionFingering {
 // destabilizing; sum(driving) is inverse R0. Diffusivity ratios are ordered
 // from slow to fast, with 0<tau[0]<=tau[1]<1. A destabilizing slow field and
 // a stabilizing fast field are supported even if their net buoyancy is stable.
-// An unstable opposite ordering can be oscillatory and is explicitly refused.
+// For the opposite ordering, both spectral branches are compared; a dominant
+// oscillatory mode is explicitly refused. Buoyancy signs alone cannot classify it.
 // The linear dispersion relation retains both fields exactly. Applying the
 // Brown C=7 saturation hypothesis to it is an UNCALIBRATED extension, not a
 // published multicomponent transport fit. Equal diffusivities recover Brown.

@@ -368,7 +368,7 @@ int lifetime_main(int argc,char** argv) {
     }
     identity.values["transport.selection"]=transport_selection;
     if(fingering=="brown_two_composition")identity.values["transport.fingering"]=
-        "brown_saturation.two_HHe_fields.CY05.DRB14.inward_heat.v2";
+        "brown_saturation.two_HHe_fields.CY05.DRB14.inward_heat.v3";
     if(mixing_mode!=ConvectiveMixing::instantaneous)
       identity.number("convection.instantaneous_mixing_below_T_K",instantaneous_below);
     if(screened_core) {
