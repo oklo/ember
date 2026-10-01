@@ -8,6 +8,10 @@ struct UnusedRadiation final:Opacity {
  OpacityState eval(double,double,const Composition&)const override{throw std::runtime_error("stable face evaluated unsupported radiative transport");}
  const char* name()const override{return "unused radiation";}
 };
+struct ConstantRadiation final:Opacity {
+ OpacityState eval(double,double,const Composition&)const override{return {1e4,0,0};}
+ const char* name()const override{return "constant test opacity";}
+};
 Composition material(double X,double Y3,double Y4){auto c=solar_scaled(X,0);c.X[1]=Y3;c.X[2]=Y4;c.basis=AbundanceBasis::baryon_mass;c.metal_inventory=MetalInventory::gs98;return c;}
 int main(int argc,char**argv)try{
  const char* family=argc>1?argv[1]:std::getenv("EMBER_COLD_HELIUM_FAMILY");
@@ -40,6 +44,22 @@ int main(int argc,char**argv)try{
   auto a=material(1-2*amplitude,amplitude,amplitude),b=material(1-3*amplitude,2*amplitude,amplitude);
   bool refused=false;try{transport.face(0,1e32,1.001e32,lo,a,hi,b);}catch(const std::domain_error&){refused=true;}
   if(!refused){++failures;std::cerr<<"resolved instability was suppressed\n";}
+ }
+ // A dense, ionized H-rich face below 120 kK remains an active liquid
+ // instability. The 100 kK floor must still reject a colder inverse gradient.
+ ConstantRadiation constant;BrownFingeringTransport cold(eos,constant,base,col,OscillatoryMixing::growth_squared);
+ for(double scale:{.9,.8}) {
+  Point lo{21.165603919388833,6.833333611894318,11.726500180576595+std::log(scale),6.1127900473684186e26};
+  Point hi{21.170643797255362,6.8052882453780255,11.724535611766834+std::log(scale),6.1278682066601316e26};
+  auto a=material(.99994980028111979,4.9735371667703596e-5,4.643472125025384e-7);
+  auto b=material(.99994929786654618,5.0235425225314747e-5,4.6670822850238615e-7);
+  bool refused=false;
+  try{const auto f=cold.face(409,1.9223496009829335e32,1.9245518375458182e32,lo,a,hi,b);
+    if(!(f.diffusivity>0 && f.mass_conductance>0 && f.heat_luminosity<0)){
+      ++failures;std::cerr<<"cold inverse gradient has no mixing response\n";
+    }
+  }catch(const std::domain_error&){refused=true;}
+  if(refused!=(scale<.9)){++failures;std::cerr<<"cold mixing material range is wrong\n";}
  }
  set_composition_buoyancy_reuse(0);
  std::cout<<queries<<" stable faces, "<<failures<<" failures\n";return failures?1:0;

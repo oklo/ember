@@ -1,0 +1,104 @@
+{
+  "minimum_temperature_K": 100000,
+  "minimum_density_g_cm3": 300,
+  "native": {
+    "queries": 396,
+    "recovered": 24,
+    "lost": 0,
+    "old_supported_max_D_change": 0.0,
+    "relative_mixing_sensitivity": {
+      "no_ion_viscosity": 0.0002601254589651436,
+      "double_ion_viscosity": 0.0002521693836692318
+    },
+    "remaining_errors": [
+      {
+        "scale": 0.85,
+        "face": 401,
+        "q": 0.9568670315179022,
+        "T": 106690.95442133938,
+        "rho": 2318.6168747650213,
+        "X": 0.007835975363410772,
+        "He3": 0.0001126283509954289,
+        "He4": 0.9920513962855938,
+        "Z": 8.393589663568711e-36,
+        "ok": false,
+        "error": "cold He base: hydrogen quantum parameter beyond the production limit"
+      },
+      {
+        "scale": 0.85,
+        "face": 404,
+        "q": 0.9608079682368488,
+        "T": 106139.36355900425,
+        "rho": 1809.0671280683873,
+        "X": 0.1878643090779204,
+        "He3": 0.018970563544318912,
+        "He4": 0.7931651273777607,
+        "Z": 8.114440935762214e-28,
+        "ok": false,
+        "error": "cold He base: hydrogen quantum parameter beyond the production limit"
+      },
+      {
+        "scale": 0.85,
+        "face": 405,
+        "q": 0.9620607023191245,
+        "T": 105946.94651332796,
+        "rho": 1440.2532156852158,
+        "X": 0.42476470745056394,
+        "He3": 0.12238041734379253,
+        "He4": 0.4528548752056431,
+        "Z": 3.856491643873715e-16,
+        "ok": false,
+        "error": "cold He base: hydrogen quantum parameter beyond the production limit"
+      }
+    ],
+    "CPU_seconds": 10.377514999999999
+  },
+  "ionization": {
+    "profile_queries": 36,
+    "material_grid_queries": 36,
+    "minimum_Hplus": 0.9999999999999971,
+    "minimum_Hepp": 0.9999443939938093,
+    "source_sha256": "1bfcfc7226449987de1609afb8bb9b7625588457d394fc0038b4baa56ac76c9f"
+  },
+  "stellar_overlap": {
+    "years": 6000000,
+    "relative_global_differences": {
+      "Teff_K": 0.0,
+      "luminosity_Lsun": 0.0,
+      "radius_Rsun": 0.0,
+      "central_T_K": 0.0,
+      "central_density_g_cm3": 0.0,
+      "H_mass_g": 0.0,
+      "He3_mass_g": 0.0
+    },
+    "maximum_profile_differences": {
+      "ln_radius": 0.0,
+      "ln_density": 0.0,
+      "ln_temperature": 0.0,
+      "absolute_abundance": 0.0
+    },
+    "CPU_seconds": {
+      "reference": 453.309653,
+      "candidate": 450.612574
+    },
+    "accepted_intervals": {
+      "reference": 1,
+      "candidate": 1
+    },
+    "largest_first_law_error": 9.534364409091722e-10,
+    "largest_species_error": 1.334345432998435e-18
+  },
+  "limitations": [
+    "Native projections hold density and composition fixed; they are not evolved stars.",
+    "Classical ion-viscosity sensitivity is not a bound on quantum mixture diffusion or nonlinear oscillatory mixing.",
+    "The three mixed-H/He EOS quantum-limit refusals remain outside this change.",
+    "Cold material extension does not calibrate saturation, composition layers, rotation or magnetic fields."
+  ],
+  "passed": true,
+  "tests": [
+    "fingering_face",
+    "fingering",
+    "ledoux",
+    "convection"
+  ]
+}

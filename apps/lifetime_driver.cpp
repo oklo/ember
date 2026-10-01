@@ -397,7 +397,7 @@ int lifetime_main(int argc,char** argv) {
     }
     identity.values["transport.selection"]=transport_selection;
     if(fingering=="brown_two_composition")identity.values["transport.fingering"]=
-        "brown_saturation.two_HHe_fields.CY05.DRB14.inward_heat.v3";
+        "brown_saturation.two_HHe_fields.CY05.DRB14.inward_heat.100k.v4";
     if(oscillatory!=OscillatoryMixing::reject)
       identity.values["transport.fingering_oscillation"]=oscillation_selection+".phase_response.v1";
     if(inner_residual>0)identity.number("solver.structure_inner_residual_tolerance",inner_residual);

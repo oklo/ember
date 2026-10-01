@@ -41,16 +41,20 @@ marginal growth and recover the stationary law. Heat and composition use the
 real, phase-dependent response to that mode. These are uncalibrated nonlinear
 assumptions, not published oscillatory transport fits.
 
-A matched 3 Gyr cooling comparison reaches 853.9 K with surface temperatures
-differing by 0.0008866 K and luminosities by 0.0004169%. This establishes a
-small sensitivity over that interval, not a general error bound. At 828.2 K,
-the weaker choice requires shorter steps through a nonlinear composition
-adjustment. Passage through the colder event and spatial convergence remain
-unfinished. The model does not treat composition layers, crystal mixing,
-rotation or magnetic fields, and is not yet a full-lifetime prescription.
-The common executable reproduces the private 6 Myr comparison at the same age:
-luminosity differs by 1.020e-9 and abundances by at most 1.121e-9. It took
-smaller intervals because the central convective partition changed during
-iteration; this comparison does not establish a performance improvement.
+The dense material range extends to 100,000 K at densities above 300 g/cm³,
+subject to the viscosity, EOS and collision limits. Direct source ionization
+checks over 100,000–120,000 K find hydrogen ionized and the doubly ionized helium
+fraction above 0.9999. In the tested hydrogen-rich mixing layer, omitting or
+doubling the classical ion viscosity changes the additional mixing by at most
+0.02602%. This is a component sensitivity, not an error bound on quantum
+mixture diffusion or nonlinear saturation.
+
+A matched 6 Myr comparison leaves the warmer stellar state unchanged.
+Colder projected queries recover the mixing layer without changing previously
+supported responses; separate mixed-H/He EOS limits remain. The model does
+not treat composition layers, crystal mixing, rotation or magnetic fields.
+A final full-lifetime validation remains unfinished.
+
+[Cold material checks](results/fingering_cold100_oct1_v1.json) ·
 [Oscillatory checks](results/fingering_oscillatory_oct1_v1.json) ·
 [Stationary and conservation checks](results/fingering_two_composition_oct1_v1.json).

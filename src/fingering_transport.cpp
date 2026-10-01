@@ -74,7 +74,7 @@ BrownFingeringTransport::Face BrownFingeringTransport::face(std::size_t index,
   const auto c=mean_composition(a,b);
   if(c.basis!=AbundanceBasis::baryon_mass || c.metal_inventory!=MetalInventory::gs98
       || c[Species::H2]!=0 || c.Z()>1e-6 || !(c.X[0]>0 && c.X[1]>0 && c.X[2]>0)
-      || rho<300 || T<1.2e5) {
+      || rho<300 || T<1e5) {
     if(B<0) {
       // Tiny composition contrasts can be smaller than the error in two
       // separate density inversions. Resolve their sign from the EOS response
