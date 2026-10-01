@@ -557,20 +557,30 @@ source smoothly over log R = 5.6–5.9, where R = rho/(T/10^6)^3. Temperature
 joins span 3000–3500 K and 17500–20000 K; composition joins limit its use to
 hydrogen-rich mixtures with Z below 1e-10. Below 3500 K, an additional density
 join over log R = 5.90–5.98 completes the change before the original source's
-log R = 6 edge. Dense states below the computed source's 2000 K floor remain
-unsupported. Source temperature, density and
+log R = 6 edge. The warm return uses the same density interval: dense states
+retain the computed source until the original table is supported. Source temperature, density and
 composition bounds remain enforced. The integer-mass source convention is
 converted explicitly, with derivatives that preserve extinction per length.
 [Overlap tests](results/cold_opacity_overlap800_sept30_v1.json) cover the
 800 K envelope and a matched 100 Myr stellar interval.
 
-The table spans densities 0.01–10 g/cm³ and hydrogen fractions .98, .9955 and
-1−10⁻⁶. It includes gas absorption, electron scattering, and Rayleigh scattering
+The table spans 1000–24000 K, densities 0.01–10 g/cm³ and hydrogen fractions
+.98, .9955, 1−10⁻⁶ and 1. It includes gas absorption, electron scattering, and Rayleigh scattering
 from the source's neutral H, H2 and He populations. Nonideal chemistry,
 correlated scattering, grain opacity and direct H3+ lines remain incomplete.
 `scripts/gas_rosseland.py` exports the populations and integrates the original
 absorption spectra. Total particle density is not used as atomic hydrogen,
 which would count molecular hydrogen twice.
+
+Above 12000 K, the updated source columns extend the short-wavelength edge
+from 900 to 200 Å. At 20000–24000 K this changes some means by 18.46%.
+The affected layers are convective in the tested 700–850 K envelopes:
+scaling their opacity from 0.1 to 10 changes the deep temperature by less
+than 4e-14 relative. This test concerns the warm envelope layers, not the
+cool photosphere or an arbitrary star.
+[Atmosphere and envelope checks](results/cold_envelope700_oct1_v1.json).
+A matched 10 Myr stellar overlap also passes with the original time and
+conservation checks; it does not yet establish a cooling sequence to 700 K.
 
 The generator's `integrate` command takes a JSON manifest with
 `absorption_only: true` and a `columns` list. Each column gives `X`, `T_K`,
@@ -730,3 +740,14 @@ selects a continuous reduction to 1% of liquid ion mobility in the solid;
 zero gives the immobile limit. These are sensitivity scenarios, not calibrated
 crystal diffusion. The default leaves mobility unchanged. Element precipitation
 is not included. See [Dense EOS](DENSE_EOS.md#ion-motion-during-freezing).
+
+## Central luminosity scaling
+
+Structure and transported-heat convergence use an absolute scale of at least
+1e-8 times the model's maximum absolute luminosity. This prevents almost-zero
+central luminosities from amplifying negligible heat differences. The selected
+heat and final-structure tolerances then permit absolute residuals of only
+5e-14 and 2e-14 of that luminosity near the centre. Energy equations, time-step
+checks and conservation audits are unchanged. A matched 10 Myr comparison
+changes the temperature and density profiles by less than 5e-12.
+[Normalization checks](results/luminosity_normalization_oct1_v1.json).

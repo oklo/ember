@@ -1,0 +1,101 @@
+{
+  "UTC": "2026-10-01T03:55:56.215119+00:00",
+  "passed": true,
+  "change": "Mixed relative/absolute convergence scale for local luminosity and transported heat. No physical equation, conservation audit or timestep acceptance changed.",
+  "scale_floor_fraction_of_max_absolute_model_L": 1e-08,
+  "observed_stall": {
+    "mass_fraction": 1.3e-10,
+    "relative_local_heat_mismatch": 5.053e-05,
+    "maximum_absolute_heat_mismatch_over_surface_L": 6.408e-13,
+    "fine_response_cache_did_not_resolve": true
+  },
+  "selected_tolerances": {
+    "material_heat": 5e-06,
+    "final_structure_residual": 2e-06,
+    "final_structure_correction": 2e-06,
+    "temporal_structure": 0.0004,
+    "temporal_species": 0.0001,
+    "energy_audit": 0.005,
+    "inventory_absolute": 1e-14
+  },
+  "bounds_near_zero_local_L": {
+    "material_heat_over_max_model_L": 5e-14,
+    "final_structure_energy_row_over_max_model_L": 2e-14
+  },
+  "strict_reference_comparison": {
+    "global_relative_differences": {
+      "radius_Rsun": -3.774758283725532e-15,
+      "Teff_K": -6.23945339839338e-14,
+      "luminosity_Lsun": -2.5779378631796135e-13,
+      "central_T_K": -1.1651790643441018e-12,
+      "central_density_g_cm3": -1.4221956945448255e-13,
+      "H_mass_g": 6.661338147750939e-16,
+      "He3_mass_g": 1.5543122344752192e-15
+    },
+    "maximum_log_structure_difference": 4.39648317751562e-12,
+    "maximum_absolute_fraction_difference": 2.0142776335774215e-11,
+    "maximum_L_difference_over_max_L": 3.9214569002346124e-10,
+    "worst_local_L": {
+      "zone": 6,
+      "relative": -4.33693472134955e-06,
+      "absolute_over_max_L": -1.6598463331358078e-14
+    },
+    "passed": true
+  },
+  "matched_interval_years": 10000000.0,
+  "strict_reference_CPU_seconds": 107.786029,
+  "normalized_CPU_seconds": 86.072689,
+  "normalized_control": {
+    "cost": {
+      "status": 0,
+      "CPU_seconds": 86.072689,
+      "wall_seconds": 50.43463295791298,
+      "report": {
+        "requested_age_reached": 1,
+        "age_years": 3896531689378.9404,
+        "accepted_this_invocation": 1,
+        "accepted_total": 3646,
+        "rejected_total": 1462,
+        "stop_reason": "requested age",
+        "cpu_seconds": 86.031675,
+        "wall_seconds": 50.141283834,
+        "full_production_track_validated": false,
+        "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+      }
+    },
+    "accepted_attempts": [
+      {
+        "start_years": 3896521689378.941,
+        "step_years": 10000000,
+        "converged": 1,
+        "audit_pass": 1,
+        "accepted": 1,
+        "error_norm": 0.00016442259553883787,
+        "message": "converged",
+        "species_error": [
+          1.6370612145917793e-19,
+          3.820452195641605e-19,
+          1.9141597854161085e-19
+        ],
+        "mass_error_surface": [
+          -1.2210306041619815e-10,
+          -7.896542365255437e-10,
+          7.063815030630768e-10
+        ],
+        "first_law": [
+          7.263500911847132e-10,
+          1.898281531964585e-11,
+          4.642320750036788e-09
+        ]
+      }
+    ]
+  },
+  "unit_test": "test_relaxation passes independent Lane-Emden, thermal equilibrium, energy, failure-contract and parallel comparisons.",
+  "restart_identity": "solver.luminosity_scale=local_mass_absolute_1e-8.v1",
+  "limits": "Only local solver convergence normalization changes. This is not an end-to-end accuracy benchmark; all full/two-half timestep checks remain active.",
+  "local_evidence": [
+    "out/phase-cut-review-oct1-v1/heat_diagnostic",
+    "out/cold-envelope700-stellar-oct1-v4",
+    "out/cold-envelope700-stellar-oct1-v5"
+  ]
+}

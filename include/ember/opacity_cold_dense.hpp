@@ -22,21 +22,21 @@ public:
     if(!(T>0 && rho>0) || !std::isfinite(T+rho))
       throw std::domain_error("ColdDenseOpacity: invalid temperature or density");
     const double Z=c.Z();
-    // The computed gas source reaches 20 kK. Returning to the original
-    // table at 10–12 kK leaves its log R <= 6 support in cool envelopes.
-    // The 800 K envelope remains beyond that density edge up to 16.42 kK.
-    // Return over 17.5–20 kK, within the existing computed source. Both
-    // sources must cover every query whenever their weights are nonzero.
+    // Return over 17.5–20 kK only where the original log R <= 6 table
+    // is supported. At higher density retain the computed source, which
+    // still enforces its own temperature and density limits. Every source with
+    // nonzero weight must support the query.
     // Below 3500 K the original (AESOPUS) table ends at log R = 6, while cool
     // envelopes reach log R ~ 6.4. Complete the density join to the computed
     // source by log R = 5.98 at every T >= 3000 K (e), so the original is read
     // only where it is supported; unchanged for log R <= 5.9.
     const auto lo=step((T-3000)/500),hi=step((20000-T)/2500);
     const auto x=step((c.X[0]-.98)/.005),z=step((1e-10-Z)/(1e-10-1e-12));
-    const double outer=hi.value*x.value*z.value;
-    if(outer==0)return original_.eval(T,rho,c);
     const double ln10=std::log(10.),logR=std::log10(rho)-3*(std::log10(T)-6);
     const auto d=step((logR-5.6)/.3),e=step((logR-5.9)/.08);
+    const double hot=hi.value+(1-hi.value)*e.value;
+    const double outer=hot*x.value*z.value;
+    if(outer==0)return original_.eval(T,rho,c);
     const double m=lo.value+(1-lo.value)*e.value;
     const double w=outer*d.value*m;
     if(w==0)return original_.eval(T,rho,c);
@@ -59,11 +59,14 @@ public:
     const double dd_lnrho=d.derivative/(.3*ln10),de_lnrho=e.derivative/(.08*ln10);
     const double dm_lnT=T*lo.derivative/500*(1-e.value)-3*(1-lo.value)*de_lnrho;
     const double dm_lnrho=(1-lo.value)*de_lnrho;
+    const double dh_lnT=-T*hi.derivative/2500*(1-e.value)-3*(1-hi.value)*de_lnrho;
+    const double dh_lnrho=(1-hi.value)*de_lnrho;
     const double dwT=outer*(-3*dd_lnrho*m+d.value*dm_lnT)
-        -x.value*z.value*d.value*m*T*hi.derivative/2500;
-    const double dwR=outer*(dd_lnrho*m+d.value*dm_lnrho);
-    const double dwX=d.value*m*hi.value*z.value*x.derivative/.005;
-    const double dwZ=-d.value*m*hi.value*x.value*z.derivative/(1e-10-1e-12);
+        +x.value*z.value*d.value*m*dh_lnT;
+    const double dwR=outer*(dd_lnrho*m+d.value*dm_lnrho)
+        +x.value*z.value*d.value*m*dh_lnrho;
+    const double dwX=d.value*m*hot*z.value*x.derivative/.005;
+    const double dwZ=-d.value*m*hot*x.value*z.derivative/(1e-10-1e-12);
     return {std::exp((1-w)*std::log(a.kappa)+w*std::log(b.kappa)),
         (1-w)*a.dlnk_dlnT+w*b.dlnk_dlnT+dwT*delta,
         (1-w)*a.dlnk_dlnRho+w*b.dlnk_dlnRho+dwR*delta,
@@ -71,7 +74,7 @@ public:
         (1-w)*a.dlnk_dZ+dwZ*delta};
   }
   std::optional<DensityRange> density_range(double T,const Composition& c) const override {
-    if(T>=20000 || c.X[0]<=.98 || c.Z()>=1e-10)
+    if(c.X[0]<=.98 || c.Z()>=1e-10)
       return original_.density_range(T,c);
     // The union depends on both join weights and each source's stencil.
     // eval enforces both domains wherever their weights are nonzero.

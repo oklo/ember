@@ -532,7 +532,8 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
       heat_residual_q=heat_residual_surface=0;
       if(frozen) {
         double luminosity_floor=0;
-        for(const auto& point:current.y)luminosity_floor=std::max(luminosity_floor,1e-12*std::abs(point.L));
+        for(const auto& point:current.y)luminosity_floor=std::max(luminosity_floor,
+            minimum_luminosity_scale_fraction*std::abs(point.L));
         std::vector<double> face_residual(current.size()-1),absolute_heat_change(current.size()-1);
         detail::independent_evaluations(current.size()-1,options.relaxation.zone_threads,[&](std::size_t i) {
           const auto old_heat=microscopic_heat(*frozen,i,current.m[i],current.m[i+1],

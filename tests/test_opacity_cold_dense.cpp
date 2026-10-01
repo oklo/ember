@@ -40,7 +40,8 @@ int main()try {
   }
   Original original;ColdDenseOpacity joined(original,file);
   for(auto [T,R,X,Z]:{std::array{5000.,5.75,.99,0.},std::array{3250.,5.95,.99,0.},
-      std::array{11000.,5.8,.99,0.},std::array{18000.,5.8,.99,0.},std::array{6000.,6.1,.9825,0.},
+      std::array{11000.,5.8,.99,0.},std::array{18000.,5.8,.99,0.},std::array{18000.,5.94,.99,0.},
+      std::array{19000.,5.96,.9825,5e-11},std::array{6000.,6.1,.9825,0.},
       std::array{6000.,6.1,.99,5e-11},std::array{6000.,6.1,.99,0.}}) {
     const double rho=std::pow(10.,R+3*(std::log10(T)-6)),h=1e-6;
     auto c=comp(X,Z);const auto a=joined.eval(T,rho,c);
@@ -73,7 +74,7 @@ int main()try {
     }
   } bounded;
   ColdDenseOpacity warm(bounded,file);
-  for(double T:{9999.,10000.,10010.,12000.,15999.,16000.,16450.,17499.,17500.}) {
+  for(double T:{9999.,10000.,10010.,12000.,15999.,16000.,16450.,17499.,17500.,18000.,19000.,20000.}) {
     const double rho=std::pow(10.,6.01+3*(std::log10(T)-6));
     const auto v=warm.eval(T,rho,c);
     check(v.kappa>0,"warm dense-gas coverage gap");
@@ -101,9 +102,13 @@ int main()try {
   bool corner_rejected=false;   // neither source covers T < 3000 K beyond log R 5.98
   try{warm.eval(2900.,std::pow(10.,6.4+3*(std::log10(2900.)-6)),c);}catch(const std::domain_error&){corner_rejected=true;}
   check(corner_rejected,"unsupported cool corner accepted");
-  bool overlap_rejected=false;
-  try{warm.eval(18000.,7.,c);}catch(const std::domain_error&){overlap_rejected=true;}
-  check(overlap_rejected,"warm overlap skipped unsupported original source");
+  check(warm.eval(18000.,7.,c).kappa>0,"dense return queried unsupported original source");
+  bool upper_rejected=false;
+  try{warm.eval(20001.,9.,c);}catch(const std::domain_error&){upper_rejected=true;}
+  check(upper_rejected,"computed opacity temperature limit bypassed");
+  bool composition_rejected=false;
+  try{warm.eval(18000.,7.,comp(.9825,0));}catch(const std::domain_error&){composition_rejected=true;}
+  check(composition_rejected,"partial composition weight skipped required original source");
   ColdDenseOpacity small(original,file,.1),large(original,file,10);
   near(large.eval(6000,.4,c).kappa/small.eval(6000,.4,c).kappa,100,"scale control");
   ElementalOpacity mapped(joined);c.basis=AbundanceBasis::baryon_mass;

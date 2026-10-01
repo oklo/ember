@@ -106,13 +106,14 @@ RelaxationResult relax(const Model& initial, const Physics& p, const Atmosphere&
                        const RelaxationOptions& options, double dt, const Model* prev) {
   validate(initial, p, options, dt, prev);
   // Fix units for the whole solve, including every line-search trial. Small
-  // central luminosities get a local enclosed-mass scale, without a solar
-  // luminosity floor or division by luminosity that can cross zero.
+  // central luminosities use an enclosed-mass scale with a small absolute
+  // part tied to this model, not to the solar luminosity.
   double reference_L = 0.0;
   for (const auto& point : initial.y) reference_L = std::max(reference_L, std::abs(point.L));
   std::vector<double> Lunit(initial.size());
   for (std::size_t i = 0; i < initial.size(); ++i) {
-    Lunit[i] = std::max(std::abs(initial.y[i].L), reference_L * (luminosity_mass(initial,i) / initial.M));
+    Lunit[i] = std::max(std::abs(initial.y[i].L), reference_L *
+        std::max(luminosity_mass(initial,i) / initial.M,minimum_luminosity_scale_fraction));
     if (!(Lunit[i] > 0.0) || !std::isfinite(Lunit[i]))
       throw std::domain_error("relax: luminosity units are not representable");
   }

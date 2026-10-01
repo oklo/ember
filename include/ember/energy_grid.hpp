@@ -4,6 +4,12 @@
 
 namespace ember {
 
+// Absolute part of the luminosity convergence scale, relative to the model's
+// maximum |L|. At a tolerance of 1e-6 this permits only 1e-14 of that luminosity
+// near the centre, where dividing by a vanishing local L amplifies roundoff.
+// This scales solver residuals; it does not change any energy equation or audit.
+inline constexpr double minimum_luminosity_scale_fraction=1e-8;
+
 inline bool face_luminosities(const Model& m) {
   switch(m.luminosity_grid) {
     case LuminosityGrid::mass_nodes: return false;

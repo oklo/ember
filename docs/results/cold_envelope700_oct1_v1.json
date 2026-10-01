@@ -1,0 +1,215 @@
+{
+  "UTC": "2026-10-01T03:55:56.214896+00:00",
+  "scope": "Optional cold-envelope inputs validated natively through700K and by a matched10Myr stellar overlap at893K; selected in the continued cooling replay.",
+  "stellar_validated": true,
+  "atmosphere": {
+    "surface_temperature_floor_K": 700,
+    "high_gravity_range": [
+      6.475,
+      6.5
+    ],
+    "composition": "near-pure H source, X=0.999999; existing trace-helium response retained",
+    "native": {
+      "passed": true,
+      "old_supported_queries": 634,
+      "lost": [],
+      "maximum_old_relative_difference": 0.0,
+      "new_supported_queries": 60,
+      "failed_cold": [],
+      "maximum_scaled_derivative_error": 3.101355158796615e-09,
+      "outside_rejections": 4,
+      "scope": "Native T/P and T,g derivatives of the selected atmosphere wrapper. Matching density is checked separately in the integrated-envelope tests; this native probe deliberately substitutes a constant density."
+    },
+    "independent_midpoint_relative_interpolation_minus_source": {
+      "T": 0.001731685592495591,
+      "Pgas": 0.007216684904936432
+    },
+    "old_atmosphere_nodes_preserved": true
+  },
+  "integrated_envelope": {
+    "scope": "Separate the atmosphere midpoint, opacity join, and warm gas-opacity sensitivity (12\u201330kK; full scaling16\u201324kK) in complete envelopes.",
+    "queries": 81,
+    "failures": [],
+    "midpoint": {
+      "common": 27,
+      "maximum_relative_change": {
+        "T_base": 1.3911280187572928e-05,
+        "P_base": 2.7406490432646535e-07,
+        "rho_base": 4.2710002579049444e-07,
+        "r_base": 7.452526429307937e-08
+      }
+    },
+    "old_code_and_tables": {
+      "common": 15,
+      "maximum_relative_change": {
+        "T_base": 0.0,
+        "P_base": 0.0,
+        "rho_base": 0.0,
+        "r_base": 0.0
+      }
+    },
+    "warm_opacity_scale_0p1_to_10": {
+      "T_base": 3.7192471324942744e-14,
+      "P_base": 0.0,
+      "rho_base": 1.554312234475219e-14,
+      "r_base": 2.220446049250313e-16
+    },
+    "passed": true
+  },
+  "opacity": {
+    "table_sha256": "85cfb375f7920806931d793c12a21542afa472d0820cb44b7acbd05dbdc6f580",
+    "temperature_K": [
+      1000,
+      24000
+    ],
+    "hydrogen": [
+      0.98,
+      0.9955,
+      0.999999,
+      1.0
+    ],
+    "density_g_cm3": [
+      0.01,
+      10.0
+    ],
+    "UV_extension_maximum_relative_change": 0.18460710703218575,
+    "UV_test_scope": "900 to200 Angstrom lower edge at unchanged30000samples; combined range/sampling comparison, not a separate frequency convergence test.",
+    "join": "At high density retain the computed source until the original table has support; derivatives include this density-dependent warm return. All nonzero source weights require valid source stencils.",
+    "unit_test": "test_opacity_cold_dense passes, including warm-return derivatives and genuine source-domain refusals."
+  },
+  "stellar_comparisons": {
+    "older_797K_checkpoint": {
+      "control": "50Myr completed, four accepted intervals",
+      "extended": "No acceptance; transported-heat iteration floor. Loosening only the heat iteration setting failed final structure verification. Disabling response reuse failed species line searches. No modified tolerance selected."
+    },
+    "smooth_893K_replay_checkpoint": {
+      "unchanged_control": "Stopped at the same mixture-phase coupling-cut guard as the main replay. No changed-input arm was launched.",
+      "phase_cut_correction": "One strict10Myr interval passed. The remaining heat mismatch was measured at q=1.3e-10 and removed with an absolute luminosity convergence scale; a matched strict-reference comparison is recorded separately."
+    },
+    "normalized_893K_overlap": {
+      "comparison": {
+        "global_relative_differences": {
+          "radius_Rsun": 3.552713678800501e-15,
+          "Teff_K": -7.993605777301127e-15,
+          "luminosity_Lsun": -2.398081733190338e-14,
+          "central_T_K": 3.490541189421492e-12,
+          "central_density_g_cm3": 6.412648190234904e-13,
+          "H_mass_g": -4.440892098500626e-16,
+          "He3_mass_g": -4.440892098500626e-16
+        },
+        "maximum_log_structure_difference": 4.4142467459096224e-12,
+        "maximum_absolute_fraction_difference": 2.0086265983820795e-11,
+        "maximum_L_difference_over_max_L": 4.470283747332727e-10,
+        "worst_local_L": {
+          "zone": 5,
+          "relative": 4.1222236399907075e-06,
+          "absolute_over_max_L": 8.912496174427859e-15
+        },
+        "passed": true
+      },
+      "control": {
+        "cost": {
+          "status": 0,
+          "CPU_seconds": 86.072689,
+          "wall_seconds": 50.43463295791298,
+          "report": {
+            "requested_age_reached": 1,
+            "age_years": 3896531689378.9404,
+            "accepted_this_invocation": 1,
+            "accepted_total": 3646,
+            "rejected_total": 1462,
+            "stop_reason": "requested age",
+            "cpu_seconds": 86.031675,
+            "wall_seconds": 50.141283834,
+            "full_production_track_validated": false,
+            "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+          }
+        },
+        "accepted_attempts": [
+          {
+            "start_years": 3896521689378.941,
+            "step_years": 10000000,
+            "converged": 1,
+            "audit_pass": 1,
+            "accepted": 1,
+            "error_norm": 0.00016442259553883787,
+            "message": "converged",
+            "species_error": [
+              1.6370612145917793e-19,
+              3.820452195641605e-19,
+              1.9141597854161085e-19
+            ],
+            "mass_error_surface": [
+              -1.2210306041619815e-10,
+              -7.896542365255437e-10,
+              7.063815030630768e-10
+            ],
+            "first_law": [
+              7.263500911847132e-10,
+              1.898281531964585e-11,
+              4.642320750036788e-09
+            ]
+          }
+        ]
+      },
+      "extended": {
+        "cost": {
+          "status": 0,
+          "CPU_seconds": 86.866463,
+          "wall_seconds": 50.30021862499416,
+          "report": {
+            "requested_age_reached": 1,
+            "age_years": 3896531689378.9404,
+            "accepted_this_invocation": 1,
+            "accepted_total": 3646,
+            "rejected_total": 1462,
+            "stop_reason": "requested age",
+            "cpu_seconds": 86.825538,
+            "wall_seconds": 50.057119542,
+            "full_production_track_validated": false,
+            "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+          }
+        },
+        "accepted_attempts": [
+          {
+            "start_years": 3896521689378.941,
+            "step_years": 10000000,
+            "converged": 1,
+            "audit_pass": 1,
+            "accepted": 1,
+            "error_norm": 0.00016442248673698145,
+            "message": "converged",
+            "species_error": [
+              4.396211026245143e-19,
+              1.70405063568764e-19,
+              3.378086705123331e-19
+            ],
+            "mass_error_surface": [
+              9.714138513106358e-11,
+              6.26994670645333e-10,
+              -6.787612914894802e-10
+            ],
+            "first_law": [
+              1.6005374803285122e-10,
+              5.4598325860411023e-11,
+              4.756650962001174e-09
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "LTE gas chemistry and scattering remain approximate at high density; this adds no grain opacity, correlated scattering or direct H3+ lines.",
+    "Warm-opacity insensitivity applies to the tested convective envelope layers, not to the cool photosphere.",
+    "The stellar evolution has not yet traversed750\u2013700K using these inputs."
+  ],
+  "local_evidence": [
+    "out/atmosphere-trace700-oct1-v2",
+    "out/cold-opacity-warm24-uv-oct1-v2",
+    "out/cold-envelope700-stellar-oct1-v1",
+    "out/cold-envelope700-stellar-oct1-v2",
+    "out/cold-envelope700-stellar-oct1-v3",
+    "out/cold-envelope700-stellar-oct1-v5"
+  ]
+}
