@@ -31,6 +31,7 @@ add_library(ember
   convection.cpp
   fingering.cpp
   viscosity.cpp
+  fingering_transport.cpp
   conduction_table.cpp
   envelope_atmosphere.cpp
   atmosphere_grey.cpp

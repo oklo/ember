@@ -113,4 +113,99 @@ FingeringResponse brown_fingering_response(double pr, double tau, double R) {
   result.derivatives_defined=true;
   return result;
 }
+
+TwoCompositionFingering two_composition_fingering(double pr,
+    std::array<double,2> tau,std::array<double,2> driving) {
+  if(!(pr>0 && tau[0]>0 && tau[1]>=tau[0] && tau[1]<1)
+      || !std::isfinite(pr+tau[0]+tau[1]+driving[0]+driving[1]))
+    throw std::invalid_argument("two-composition fingering: invalid diffusivity or driving");
+  TwoCompositionFingering out;
+  const double net=driving[0]+driving[1];
+  if(net>=1){out.regime=FingeringRegime::overturning;return out;}
+  if(driving[0]<=0 && driving[1]<=0)return out;
+  if(tau[0]==tau[1]) {
+    if(net<=0)return out;
+    const auto f=brown_fingering_flux(pr,tau[0],1/net);
+    out.regime=f.regime;out.growth_rate=f.growth_rate;
+    out.wavenumber_squared=f.wavenumber_squared;out.thermal_nusselt_excess=f.thermal_nusselt_excess;
+    out.mixing_over_thermal.fill(tau[0]*f.chemical_nusselt_excess);return out;
+  }
+  // The quartic follows by multiplying
+  // lambda+Pr*q+Pr/(lambda+q)-Pr*sum(gamma_i/(lambda+tau_i*q))=0
+  // by its three positive denominators. Net driving <1 makes its second
+  // derivative positive for lambda>=0: there is at most one positive minimum.
+  // Solve on the rising side of that minimum, without complex root formulas.
+  const double sum=tau[0]+tau[1],product=tau[0]*tau[1];
+  const double cross=driving[0]*tau[1]+driving[1]*tau[0];
+  const double A=1+pr+sum,B=(1+pr)*sum+pr+product;
+  const double C=(1+pr)*product+pr*sum,D=sum-net-cross,E=product-cross;
+  if(driving[0]<0) {
+    // Routh-Hurwitz determinants are polynomials in q^2. Establish stability
+    // for ALL wavelengths before refusing the unmodelled oscillatory regime.
+    const long double h2=A*B-C,h0=A*pr*(1-net)-pr*D;
+    const long double a=C*h2-A*A*pr*product;
+    const long double b=C*h0+pr*D*h2-A*A*pr*E,c=pr*D*h0;
+    if(D>=0 && E>=0 && h2>=0 && h0>=0 && a>0
+        && (b>=0?c>=0:4*a*c>=b*b))return out;
+    throw std::domain_error("two-composition fingering: unstable fast field needs an oscillatory closure");
+  }
+  const double upper=std::sqrt(pr*(std::max(0.,driving[0])+std::max(0.,driving[1])));
+  auto at=[&](double q) -> Mode {
+    const double a3=q*A,a2=q*q*B+pr*(1-net),a1=q*(q*q*C+pr*D);
+    const double a0=pr*q*q*(product*q*q+E);
+    auto polynomial=[&](double x){return (((x+a3)*x+a2)*x+a1)*x+a0;};
+    auto slope=[&](double x){return ((4*x+3*a3)*x+2*a2)*x+a1;};
+    double lo=0;
+    if(a1<0) {
+      double a=0,b=upper;
+      for(int i=0;i<55;++i) {const double x=.5*(a+b);if(slope(x)<0)a=x;else b=x;}
+      lo=.5*(a+b);
+    }
+    if(polynomial(lo)>=0)return {};
+    double hi=upper,x=.5*(lo+hi);
+    if(polynomial(hi)<0)throw std::runtime_error("two-composition fingering: unresolved root bound");
+    for(int i=0;i<100;++i) {
+      const double f=polynomial(x),df=slope(x);
+      if(f>0)hi=x;else lo=x;
+      if(hi-lo<=8*std::numeric_limits<double>::epsilon()*(hi+lo))break;
+      const double next=x-f/df;
+      x=next>lo && next<hi?next:.5*(lo+hi);
+    }
+    x=.5*(lo+hi);
+    const double dq=A*x*x*x+2*q*B*x*x+(3*q*q*C+pr*D)*x
+        +pr*(4*product*q*q*q+2*E*q);
+    return {x,dq};
+  };
+  const double drive_weight=driving[0]/tau[0]+driving[1]/tau[1];
+  if(drive_weight<=1)return out;
+  const double qmax=std::sqrt(drive_weight-1);
+  // Resolve every sampled local maximum, rather than assuming the two
+  // diffusivities create a single extremum. Refine by the analytic F_q=0.
+  constexpr int samples=96;
+  double best=0,bestq=0;
+  const double qmin=std::min(1.,qmax)*1e-8;
+  double previous_q=qmin;auto previous=at(previous_q);
+  for(int i=1;i<=samples;++i) {
+    const double q=std::exp(std::log(qmin)+(std::log(qmax)-std::log(qmin))*double(i)/samples);
+    const auto current=at(q);
+    if(previous.lambda>0 && previous.derivative_numerator<0
+        && (current.lambda==0 || current.derivative_numerator>=0)) {
+      double a=previous_q,b=q;
+      for(int j=0;j<60;++j) {
+        const double middle=.5*(a+b);const auto m=at(middle);
+        if(m.lambda>0 && m.derivative_numerator<0)a=middle;else b=middle;
+        if(b-a<=2e-12*(a+b))break;
+      }
+      const double peakq=.5*(a+b),growth=at(peakq).lambda;
+      if(growth>best){best=growth;bestq=peakq;}
+    }
+    previous=current;previous_q=q;
+  }
+  if(!(best>0 && bestq>0))throw std::runtime_error("two-composition fingering: fastest mode not resolved");
+  out.regime=FingeringRegime::fingering;out.growth_rate=best;out.wavenumber_squared=bestq;
+  const double velocity_squared=49*best*best/bestq;
+  out.thermal_nusselt_excess=velocity_squared/(best+bestq);
+  for(std::size_t j=0;j<2;++j)out.mixing_over_thermal[j]=velocity_squared/(best+tau[j]*bestq);
+  return out;
+}
 } // namespace ember

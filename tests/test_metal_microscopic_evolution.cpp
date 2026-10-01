@@ -25,7 +25,25 @@ struct AnalyticOpacity final:Opacity {
 // integration from source-table coverage and physical collision assumptions.
 struct MetalControl final:MetalMicroscopicTransport {
   double diffusion{100},metal_heat{3e14};
-  mutable std::size_t total_calls{};
+  double additional_mixing{};
+  mutable std::size_t total_calls{},mixing_calls{};
+  void add_mixing_flux(MetalCNFaceResponse& out,std::size_t,double ma,double mb,
+      const Point& a,const Composition& ca,const Point& b,const Composition& cb,bool derivatives)const override {
+    if(additional_mixing==0)return;
+    std::atomic_ref(mixing_calls).fetch_add(1,std::memory_order_relaxed);
+    const auto left=metal_cn_abundances(ca),right=metal_cn_abundances(cb);
+    const double r=.5*(std::exp(a.lnr)+std::exp(b.lnr));
+    const double rho=.5*(std::exp(a.lnrho)+std::exp(b.lnrho)),area_mass=4*M_PI*r*r*rho;
+    const double base=additional_mixing*area_mass*area_mass/(mb-ma),dx=left[0]-right[0];
+    const double g=base*(1+10*dx*dx),dg=20*base*dx;
+    for(std::size_t row=0;row<METAL_CN_SIZE;++row) {
+      const double contrast=left[row]-right[row];out.rate[row]+=g*contrast;
+      if(derivatives) {
+        out.dleft[row][row]+=g;out.dright[row][row]-=g;
+        out.dleft[row][0]+=dg*contrast;out.dright[row][0]-=dg*contrast;
+      }
+    }
+  }
   MetalMicroscopicFaceResponse response(double ma,double mb,const Point& a,const Composition& ca,
       const Point& b,const Composition& cb,const MetalSpeciesVector* total,bool derivatives)const {
     using D=detail::Differential<8>;using detail::exp;
@@ -75,14 +93,16 @@ int main(int argc,char** argv) {
       v[0]-=.003*fraction;v[5]+=.003*fraction;
       seed.comp[i]=metal_cn_composition(seed.comp[i],v);
     }
-    MetalControl transport;physics.microscopic=&transport;physics.criterion=ConvectiveCriterion::ledoux;
+    const bool extra_mixing=argc>2 && std::string(argv[2])=="nonlinear";
+    MetalControl transport;if(extra_mixing)transport.additional_mixing=100;
+    physics.microscopic=&transport;physics.criterion=ConvectiveCriterion::ledoux;
     equilibrium=relax(seed,physics,atmosphere);
     if(!equilibrium.converged)throw std::runtime_error("transport equilibrium: "+equilibrium.message);
     const auto initial=equilibrium.model;const auto regions=convective_mixing_regions(initial,physics);
     require(regions.size()>1 && regions.size()<initial.size(),"mixed and radiative regions required");
     EvolutionOptions options;options.max_abundance_change=.01;options.abundance_tolerance=1e-13;
     const double dt=1e6*365.25*86400;
-    const bool finite=argc>2;
+    const bool finite=argc>2 && !extra_mixing;
     std::vector<MetalSpeciesVector> initial_heat_rates;
     double full_half_error=0;
     if(finite) {
@@ -116,6 +136,7 @@ int main(int argc,char** argv) {
           "a finite-mixing cap failure changed the retained state");
     }
     require(transport.total_calls>0 && step.total_metal_species_rates.size()==initial.size()-1 && step.total_species_rates.empty(),"three-mass total rates not used");
+    require(!extra_mixing || transport.mixing_calls>0,"nonlinear isotope mixing was omitted from the solve");
     require(std::abs(step.luminosity_balance)<2e-8 && std::abs(step.nuclear_mass_balance)<2e-6,"discrete stellar energy or nuclear mass balance");
     require(step.abundance_residual<=options.abundance_tolerance && step.material_heat_residual<=options.material_heat_tolerance,"abundance or heat convergence");
     require(driver::check_interval(initial,step,dt,nuclear,1e-14).pass,

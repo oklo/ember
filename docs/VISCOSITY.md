@@ -28,4 +28,5 @@ density gives the local composition diffusion matrix. A scalar reduction for
 fingering convection needs a separate check when composition contributions to
 buoyancy nearly cancel.
 
-These components do not yet select fingering transport in the evolution driver.
+An optional [cold fingering treatment](FINGERING.md) uses these components;
+it remains experimental and is off by default.

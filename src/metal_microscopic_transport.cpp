@@ -49,4 +49,12 @@ MicroscopicHeatResponse microscopic_heat_with_total_metal_rate(const MetalMicros
   heat_check(r,derivatives);finite(r.total_rate_enthalpy);
   finite(std::array{r.total_metal_rate_enthalpy});return r;
 }
+MetalSpeciesFaceResponse metal_species_face(const MetalMicroscopicTransport& transport,
+    std::size_t face,double mlo,double mhi,const Point& lo,const Composition& a,
+    const Point& hi,const Composition& b,bool derivatives) {
+  interval(mlo,mhi);const auto r=transport.species(face,mlo,mhi,lo,a,hi,b,derivatives);
+  finite(r.rate);
+  if(derivatives){for(const auto& row:r.dleft)finite(row);for(const auto& row:r.dright)finite(row);}
+  return r;
+}
 } // namespace ember

@@ -1,0 +1,53 @@
+{
+  "scope": "Optional two-composition extension of Brown saturation; nonlinear multicomponent calibration and colder stellar passage unproven.",
+  "linear_checks": {
+    "independent_cases": 206,
+    "maximum_growth_relative_error": 4.6073644899280453e-10,
+    "maximum_wavenumber_relative_error": 3.9939485219520066e-05,
+    "reference": "Independent 4-by-4 eigensolves and wavelength maximization; 29 representative cases retained in tests/data/fingering_two_reference.txt"
+  },
+  "integration_checks": [
+    "metal_cn_transport: 518 checks pass",
+    "coupled_evolution pass",
+    "metal_microscopic_face_evolution pass",
+    "nonlinear_metal_mixing pass",
+    "fingering pass"
+  ],
+  "local_after_scalar_test": {
+    "structure_J_error": 3.307194465352993e-10,
+    "mixing_J_error": 5.105573343096862e-05
+  },
+  "stellar": {
+    "start_years": 3900224874943.993,
+    "end_years": 3900324874943.9937,
+    "start_Teff_K": 848.6724877499694,
+    "end_Teff_K": 847.558455546537,
+    "accepted_intervals": 4,
+    "rejected_intervals": 1,
+    "maximum_accepted_error_norm": 0.00833799988671658,
+    "same_time_error_and_conservation_tests": true,
+    "cost": {
+      "status": 0,
+      "CPU_seconds": 891.869629,
+      "wall_seconds": 255.1278820000589,
+      "report": {
+        "requested_age_reached": 1,
+        "age_years": 3900324874943.9937,
+        "accepted_this_invocation": 4,
+        "accepted_total": 3651,
+        "rejected_total": 1476,
+        "stop_reason": "requested age",
+        "cpu_seconds": 891.811495,
+        "wall_seconds": 254.765902459,
+        "full_production_track_validated": false,
+        "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+      }
+    }
+  },
+  "provenance": {
+    "local_evidence": "out/fingering-integration-oct1-v1",
+    "stellar_evidence": "out/fingering-stellar-oct1-v2",
+    "parent": "cooling-broad-hhe-replay-oct1-v2/milestones/below_850K.checkpoint"
+  },
+  "negative_result": "An earlier scalar projection accepted 12.5 Myr and then repeatedly became negative despite positive native chemical diffusion eigenvalues; not selected."
+}

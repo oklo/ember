@@ -47,4 +47,23 @@ struct FingeringResponse {
 FingeringResponse brown_fingering_response(double prandtl, double diffusivity_ratio,
                                          double density_ratio);
 
+struct TwoCompositionFingering {
+  FingeringRegime regime{FingeringRegime::stable};
+  double growth_rate{},wavenumber_squared{},thermal_nusselt_excess{};
+  // Extra diffusivity / thermal diffusivity, in the two chemical diffusion
+  // eigenmodes. Does not include microscopic diffusion.
+  std::array<double,2> mixing_over_thermal{};
+};
+
+// Two independently diffusing composition fields. Positive driving is
+// destabilizing; sum(driving) is inverse R0. Diffusivity ratios are ordered
+// from slow to fast, with 0<tau[0]<=tau[1]<1. A destabilizing slow field and
+// a stabilizing fast field are supported even if their net buoyancy is stable.
+// An unstable opposite ordering can be oscillatory and is explicitly refused.
+// The linear dispersion relation retains both fields exactly. Applying the
+// Brown C=7 saturation hypothesis to it is an UNCALIBRATED extension, not a
+// published multicomponent transport fit. Equal diffusivities recover Brown.
+TwoCompositionFingering two_composition_fingering(double prandtl,
+    std::array<double,2> diffusivity_ratios,std::array<double,2> driving);
+
 } // namespace ember

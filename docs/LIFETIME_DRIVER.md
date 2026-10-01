@@ -63,6 +63,10 @@ reactions in depleted cells, with the [restrictions and diagnostics](NUCLEAR.md#
 described there. It defaults to zero; a positive value changes the physical
 approximation and the restart identity.
 
+Optional `fingering "brown_two_composition"` adds the experimental
+[cold H/He fingering treatment](FINGERING.md). It is off by default and is not
+yet a full-lifetime mixing prescription. The selection enters restart identity.
+
 The optional `structure_prediction "linear"` uses the recent evolution to
 estimate the next radius, density, temperature and luminosity before solving.
 The accepted composition and thermal history remain the physical starting

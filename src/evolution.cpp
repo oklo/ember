@@ -416,9 +416,12 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
           transport_options.initial_guess=current.comp;
           transport_options.evaluation_threads=options.relaxation.zone_threads;
           MetalCNFlux flux=[&](std::size_t i,const Composition& left,const Composition& right,bool derivatives) {
-            const auto face=metal_microscopic_face(*metal,i,current.m[i],current.m[i+1],
+            const auto face=metal_species_face(*metal,i,current.m[i],current.m[i+1],
                 current.y[i],left,current.y[i+1],right,derivatives);
-            return common_metal_cn_flux(face.species,left,right,derivatives);
+            auto combined=common_metal_cn_flux(face,left,right,derivatives);
+            metal->add_mixing_flux(combined,i,current.m[i],current.m[i+1],
+                current.y[i],left,current.y[i+1],right,derivatives);
+            return combined;
           };
           auto full=burn_metal_cn_and_diffuse(current,previous,*cn_network,regions,flux,dt,transport_options,mixing);
           Model updated=current;updated.comp=std::move(full.composition);

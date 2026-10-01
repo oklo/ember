@@ -101,6 +101,54 @@ int main() {
     require(!brown_fingering_response(1e-6,1e-7,1).derivatives_defined &&
       !brown_fingering_response(1e-6,1e-7,1e7).derivatives_defined,
       "do not claim open-regime derivatives at stability boundaries");
+    for(double pr:{1e-6,.015})for(double tau:{1e-7,1e-4})for(double net:{.001,.1,.9}) {
+      const auto a=two_composition_fingering(pr,{tau,tau},{1.,net-1.});
+      const auto b=brown_fingering_flux(pr,tau,1/(1+(net-1.)));
+      require(std::abs(a.growth_rate/b.growth_rate-1)<1e-12 &&
+          std::abs(a.thermal_nusselt_excess/b.thermal_nusselt_excess-1)<1e-12 &&
+          std::abs(a.mixing_over_thermal[0]/(tau*b.chemical_nusselt_excess)-1)<1e-12 &&
+          a.mixing_over_thermal[0]==a.mixing_over_thermal[1],
+          "equal composition diffusivities must recover Brown heat and mixing");
+    }
+    require(two_composition_fingering(.01,{1e-4,2e-4},{1e-4,0}).regime==FingeringRegime::stable,
+        "two-component stationary threshold must not mix");
+    require(two_composition_fingering(.01,{1e-4,2e-4},{-.1,-.1}).regime==FingeringRegime::stable,
+        "two stabilizing fields must not mix");
+    require(two_composition_fingering(.01,{1e-4,2e-4},{-.1,.01}).regime==FingeringRegime::stable,
+        "Routh-Hurwitz test must recognize stable fast-field driving");
+    for(std::size_t field=0;field<2;++field) {
+      const std::array<double,2> tau{1e-5,1e-4};std::array<double,2> drive{};drive[field]=.03;
+      const auto a=two_composition_fingering(.015,tau,drive);
+      const auto b=brown_fingering_flux(.015,tau[field],1/.03);
+      require(std::abs(a.growth_rate/b.growth_rate-1)<1e-10 &&
+          std::abs(a.wavenumber_squared/b.wavenumber_squared-1)<1e-9,
+          "a passive composition field must leave the active Brown mode unchanged");
+    }
+    const auto cancel=two_composition_fingering(.015,{1e-4,1.04e-4},{.05,-.05});
+    require(cancel.regime==FingeringRegime::fingering && cancel.growth_rate>0 &&
+        cancel.mixing_over_thermal[0]>cancel.mixing_over_thermal[1],
+        "opposing diffusion modes can grow at zero net composition buoyancy");
+    bool oscillatory=false;
+    try{two_composition_fingering(.01,{1e-4,2e-4},{-.1,.2});}
+    catch(const std::domain_error&){oscillatory=true;}
+    require(oscillatory,"unsupported oscillatory ordering must be reported");
+    std::ifstream two_data(std::string(EMBER_TEST_DATA_DIR)+"/fingering_two_reference.txt");
+    require(bool(two_data),"missing two-composition eigenvalue reference");
+    int two_count=0;double two_error=0;
+    while(std::getline(two_data,line)) {
+      if(line.empty() || line[0]=='#')continue;
+      double pr,t0,t1,g0,g1,lambda,q;std::istringstream in(line);
+      require(bool(in>>pr>>t0>>t1>>g0>>g1>>lambda>>q),"bad two-composition reference row");
+      const auto f=two_composition_fingering(pr,{t0,t1},{g0,g1});
+      const double error=std::abs(f.growth_rate/lambda-1);two_error=std::max(two_error,error);
+      require(f.regime==FingeringRegime::fingering && error<2e-6 &&
+          std::abs(f.wavenumber_squared/q-1)<2e-4,"two-field mode disagrees with independent eigenvalues");
+      require(f.thermal_nusselt_excess>0 && f.mixing_over_thermal[0]>0 && f.mixing_over_thermal[1]>0,
+          "two-field saturation must preserve transport signs");
+      ++two_count;
+    }
+    require(two_count>=25,"incomplete two-composition reference set");
+    std::cout<<"PASS: "<<two_count<<" two-composition eigenvalue cases; maximum growth error "<<two_error<<'\n';
     std::cout<<"PASS: "<<count<<" independent spectral cases; maximum relative error "
       <<maximum_error<<"; maximum scaled derivative error "<<maximum_derivative_error
       <<"; instability boundaries, invalid inputs and calibration flag pass\n";

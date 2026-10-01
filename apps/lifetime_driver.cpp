@@ -19,6 +19,7 @@
 #include "ember/conduction_table.hpp"
 #include "ember/eos_deuterium.hpp"
 #include "ember/metal_microscopic_transport.hpp"
+#include "ember/fingering_transport.hpp"
 #include "ember/opacity_radiative.hpp"
 #include "ember/opacity_conductive_interior.hpp"
 #include <charconv>
@@ -234,6 +235,9 @@ int lifetime_main(int argc,char** argv) {
     if(transport_selection!="whole_convective" && transport_selection!="screened_core")
       throw std::invalid_argument("unknown lifetime transport selection");
     const bool screened_core=transport_selection=="screened_core";
+    const auto fingering=cfg.values.contains("fingering")?cfg.get("fingering"):"none";
+    if((fingering!="none" && fingering!="brown_two_composition") || (fingering=="brown_two_composition" && !screened_core))
+      throw std::invalid_argument("fingering must be none or brown_two_composition; mixing requires screened_core transport");
     const auto mixing_selection=cfg.values.contains("convective_mixing")?cfg.get("convective_mixing"):"instantaneous";
     ConvectiveMixing mixing_mode=ConvectiveMixing::instantaneous;
     if(mixing_selection=="finite_implicit")mixing_mode=ConvectiveMixing::finite_implicit;
@@ -363,6 +367,8 @@ int lifetime_main(int argc,char** argv) {
         identity.number("opacity.dense_hydrogen_maximum_logT",opacity_extension->dense_hydrogen_maximum_logT);
     }
     identity.values["transport.selection"]=transport_selection;
+    if(fingering=="brown_two_composition")identity.values["transport.fingering"]=
+        "brown_saturation.two_HHe_fields.CY05.DRB14.inward_heat.v2";
     if(mixing_mode!=ConvectiveMixing::instantaneous)
       identity.number("convection.instantaneous_mixing_below_T_K",instantaneous_below);
     if(screened_core) {
@@ -587,6 +593,11 @@ int lifetime_main(int argc,char** argv) {
     Physics early{&eos,&combined,&nuclear,1.9,ConvectiveCriterion::ledoux};early.neutrino_losses=&losses;early.explicit_metal_mixing_only=true;
     auto later=early;later.opacity=radiation.get();later.microscopic=&convective_heat;later.explicit_metal_mixing_only=false;
     if(screened_core)later.microscopic=&envelope_heat;
+    std::unique_ptr<BrownFingeringTransport> finger;
+    if(fingering=="brown_two_composition") {
+      finger=std::make_unique<BrownFingeringTransport>(table_eos,*radiation,envelope_heat,collisions);
+      later.microscopic=finger.get();
+    }
     EvolutionOptions options;options.relaxation.zone_threads=static_cast<std::size_t>(threads);options.abundance_tolerance=abundance_tolerance;
     options.linearized_burning=linearized_burning==1;
     options.max_abundance_change=abundance_cap;
