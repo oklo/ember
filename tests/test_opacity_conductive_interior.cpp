@@ -213,6 +213,25 @@ int main(){try{
   }
   rejected=false;try{cool_ionized.eval(99999.,350.,hc);}catch(const std::domain_error&){rejected=true;}
   require(rejected,"ionized continuation lost its lower temperature bound");
+  // The colder allowance applies only to trace-He, trace-metal hydrogen.
+  ConductiveInteriorOpacity trace_hydrogen(bridge_edge,strong,.001,1.,
+      ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
+  auto pure_h=solar_scaled(1.,0.);
+  for(double T:{70000.,80000.,99999.,100001.})
+    require(trace_hydrogen.eval(T,350.,pure_h).kappa>0,"cold trace-H opacity unavailable");
+  rejected=false;try{trace_hydrogen.eval(69999.,350.,pure_h);}catch(const std::domain_error&){rejected=true;}
+  require(rejected,"trace-H continuation lost its assessed temperature bound");
+  auto mixed_h=solar_scaled(.9998,0.);
+  rejected=false;try{trace_hydrogen.eval(90000.,350.,mixed_h);}catch(const std::domain_error&){rejected=true;}
+  require(rejected,"trace-H allowance extended an unassessed helium mixture");
+  auto metal_h=solar_scaled(.99995,2e-8);
+  rejected=false;try{trace_hydrogen.eval(90000.,350.,metal_h);}catch(const std::domain_error&){rejected=true;}
+  require(rejected,"trace-H allowance extended unassessed metals");
+  ConductiveInteriorOpacity trace_weak(bridge_edge,weak,.001,1.,
+      ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
+  rejected=false;try{trace_weak.eval(80000.,350.,pure_h);}catch(const std::domain_error&){rejected=true;}
+  require(rejected,"trace-H allowance ignored the heat-transport uncertainty bound");
+
   ConductiveInteriorOpacity cool_weak(cool_bounded,weak,.001,1.,
       ConductiveInteriorOpacity::ionized_hydrogen_envelope_domain());
   rejected=false;try{cool_weak.eval(2.5e5,350.,hc);}catch(const std::domain_error&){rejected=true;}

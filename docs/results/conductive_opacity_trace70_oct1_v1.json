@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "scope": "Radiative-opacity density continuation only: 70 kK <= T < 100 kK requires X >= 0.9999 and Z <= 1e-8. Other mixtures retain the 100 kK floor. Existing opacity anchors, factor-100 uncertainty, margin-4 conductivity allowance, solver settings and conservation checks are unchanged.",
+  "queries": 360,
+  "newly_supported": 80,
+  "lost_support": [],
+  "old_maximum_relative_change": 0.0,
+  "maximum_scaled_derivative_error": 5.618828757884574e-07,
+  "maximum_heat_uncertainty": 0.002989767572571514,
+  "expected_refusals": 121,
+  "source_ionization": {
+    "queries": 16,
+    "minimum_Hplus": 0.999999999999998,
+    "helium_charge_uncertainty": "Helium is not assumed fully ionized below 100 kK; this extension is restricted to its trace limit."
+  },
+  "microscopic_transport": {
+    "queries": 130,
+    "passed": 108,
+    "minimum_conductivity_ratio": 0.47660348093335153,
+    "EOS_refused": 22,
+    "scope": "Actual and temperature-scaled profile faces. The 22 colder EOS refusals remain unsupported; no source masks are changed."
+  },
+  "matched_5Myr": {
+    "same_model_arrays": false,
+    "maximum_log_structure_difference": 1.2075673794242903e-11,
+    "maximum_abundance_difference": 4.054090396721222e-12,
+    "maximum_luminosity_relative_difference": 3.160167243012258e-08
+  },
+  "blocked_5Myr": {
+    "exit_code": 0,
+    "CPU_seconds": 143.572261,
+    "wall_seconds": 82.20031499955803,
+    "report": {
+      "requested_age_reached": 1,
+      "age_years": 3928146857389.207,
+      "accepted_this_invocation": 1,
+      "accepted_total": 4067,
+      "rejected_total": 1736,
+      "stop_reason": "requested age",
+      "cpu_seconds": 143.539429,
+      "wall_seconds": 81.892291791,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "native_evidence": {
+    "out/conductive-opacity70-oct1-v1/scoped_validation.json": "6419043b41201c945f49245d8cd2e562bb4080943c79ee9207bf73e71b5a6f0d",
+    "out/conductive-opacity70-oct1-v1/scoped_queries.json": "a3f93f802cd4ca83936c9e0ce0d635b61df31affca614b5c0c1b2fe7d6630a15",
+    "out/conductive-opacity70-oct1-v1/faces.jsonl": "257893455283aae073ad659df318c4545bd7900e869b52e571efcf9fd4d2c139",
+    "out/conductive-opacity70-oct1-v1/ionization_domain.json": "9b78ac9032d6045f9e4b1c24606a031c538ade85494ec885d4d8325193f90e90",
+    "out/conductive-opacity70-oct1-v1/overlap_comparison.json": "5a109ffb39dcd6eb03a06b443a137688f591806bf52d274fa04bd17acd167416",
+    "out/conductive-opacity70-oct1-v1/blocked/completion.json": "61e5ee52e76be9b2add301540e14e3521a54b15ba79f04a4f08886c8284b3b7d"
+  }
+}

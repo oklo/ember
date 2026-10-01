@@ -36,13 +36,18 @@ stops at a convective-boundary iteration failure. Its uncompleted interval is
 not counted as evidence. The EOS and cold-atmosphere limitations remain open.
 [Calculations and limits](results/cold_conduction_cooling_sept30_v1.json).
 
-The optional radiative-opacity continuation covers conducting H/He layers with
-trace metals through `Z = 1e-4`. It uses two supported density anchors and admits
-an extension only when its configured opacity uncertainty has a sufficiently
-small effect on total heat transport. The selected cooling calculation allows
-a factor of 100 in that opacity and at most 0.3% in transport. Direct EOS queries
-support full H/He ionization in the tested layers. The change recovers 147
-previously unsupported queries; a 100 Myr stellar comparison changes hydrogen
-mass fraction by less than 3e-11. These checks do not establish the accuracy of
-the conductivity source or the liquid-phase assumption.
-[Checks and continued evolution](results/trace_metal_opacity_sept30_v1.json).
+The optional radiative-opacity continuation uses two supported density anchors
+where electron conduction dominates. The selected cooling calculation allows
+a factor of 100 uncertainty in the continued opacity only when its effect on
+total heat transport is below 0.3%. It retains the source's composition and
+density checks.
+
+The general H/He temperature limit is 100 kK. Nearly pure hydrogen
+(`X >= 0.9999`, `Z <= 1e-8`) is supported down to 70 kK after direct
+ionization, opacity and conductivity checks. Helium need not be fully ionized
+in this trace limit. The 360-query comparison recovers 80 previously refused
+states without changing existing supported values. A matched 5 Myr stellar
+interval agrees within 1.208e-11 in logarithmic structure, and the previously
+blocked interval completes with unchanged solver settings and audits.
+Separate EOS refusals and the uncertainty of the conductivity model remain.
+[Checks](results/conductive_opacity_trace70_oct1_v1.json).

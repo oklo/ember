@@ -36,6 +36,8 @@ public:
     // Optional upper join in the radiative source coordinate
     // log R = log10(rho) - 3 log10(T/1e6), instead of fixed temperatures.
     double source_logR{},full_logR{};
+    // Colder, nearly pure hydrogen may be assessed separately from H/He mixtures.
+    double trace_hydrogen_minimum_T{};
   };
   static Domain hydrogen_envelope_domain() {
     // At rho <= 1000 the entire 700–800 kK overlap lies below log R=3.5.
@@ -49,6 +51,7 @@ public:
     auto domain=hydrogen_envelope_domain();
     domain.maximum_rho=1e5;
     domain.minimum_T=1e5;
+    domain.trace_hydrogen_minimum_T=7e4;
     // Below log T = 5.7 the radiative source is the warm/bridge blend, whose ATOMIC bridge is supported
     // only to log rho = 2.4 there (log rho = log R + 3 log10(T/1e6)). The part of this overlap that still
     // reads the source at the actual state (log R < full_logR) must stay inside it up to log T = 5.7:
@@ -56,7 +59,9 @@ public:
     domain.source_logR=3.0;domain.full_logR=3.25;
     // Direct ionized conduction remains active below 300 kK. Returning to
     // the unextended radiative table there can leave its density support.
-    // Source anchors and H-layer charge/conductivity checks support 100 kK.
+    // Source anchors support 100 kK in the general mixture. Direct H-layer
+    // charge and conductivity checks also support 70 kK when H >= 0.9999
+    // and Z <= 1e-8; other material and source bounds remain independent.
     // Keep the contribution bound and explicit lower temperature limit.
     domain.cold_source_T=0;domain.cold_full_T=0;
     // The same fully ionized, low-metal H/He layer becomes helium-rich at
@@ -85,6 +90,9 @@ public:
              && ((domain_.source_logR==0 && domain_.full_logR==0)
                  || (std::isfinite(domain_.source_logR+domain_.full_logR)
                      && domain_.full_logR>domain_.source_logR))
+             && (domain_.trace_hydrogen_minimum_T==0
+                 || (domain_.trace_hydrogen_minimum_T>0
+                     && domain_.trace_hydrogen_minimum_T<=domain_.minimum_T))
              && domain_.uncertainty>=1 && domain_.uncertainty<=100
              && ((domain_.cold_source_T==0 && domain_.cold_full_T==0)
                  || (domain_.cold_source_T>=domain_.minimum_T
@@ -108,11 +116,14 @@ public:
       wx=composition.first;dwx=composition.second/width;
       if(wx==0)return source_.eval(T,rho,c);
     }
-    if(!(T>=domain_.minimum_T && rho<=domain_.maximum_rho)) {
+    const double minimum_T=domain_.trace_hydrogen_minimum_T>0
+        && c.h1()>=.9999 && c.Z()<=1e-8
+        ?domain_.trace_hydrogen_minimum_T:domain_.minimum_T;
+    if(!(T>=minimum_T && rho<=domain_.maximum_rho)) {
       std::ostringstream why;
       why<<"ConductiveInteriorOpacity: outside selected temperature/density bounds: "
           <<std::scientific<<std::setprecision(3)<<"T="<<T<<", rho="<<rho
-          <<", X="<<c.h1()<<", Z="<<c.Z()<<"; minimum T="<<domain_.minimum_T
+          <<", X="<<c.h1()<<", Z="<<c.Z()<<"; minimum T="<<minimum_T
           <<", maximum rho="<<domain_.maximum_rho;
       throw std::domain_error(why.str());
     }
