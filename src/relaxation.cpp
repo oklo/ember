@@ -126,6 +126,15 @@ RelaxationResult relax(const Model& initial, const Physics& p, const Atmosphere&
   RelaxationResult result{};
   result.model = initial;
   std::string last_rejection = "none";
+  const bool check_balance=dt>0 && options.luminosity_balance_tolerance>0;
+  const auto merit=[&](const System& system) {
+    // A local residual can already be below its required accuracy while the
+    // summed energy equation still needs a correction. Judge that correction
+    // by the same two residual limits used to decide convergence.
+    return check_balance ? std::max(system.norm/options.residual_tolerance,
+        std::abs(system.luminosity_balance)/options.luminosity_balance_tolerance)
+        : system.norm;
+  };
   for (;;) {
     const auto system = assemble(result.model, p, atmosphere, Lunit, dt, prev, true,options.zone_threads);
     result.residual = system.norm;
@@ -175,11 +184,16 @@ RelaxationResult relax(const Model& initial, const Physics& p, const Atmosphere&
         for (std::size_t v = 0; v < NVAR; ++v)
           candidate.y[i][static_cast<Var>(v)] += damping * correction.dy[i][v] * (v == 3 ? Lunit[i] : 1.0);
       try {
-        const double norm = assemble(candidate, p, atmosphere, Lunit, dt, prev, false,options.zone_threads).norm;
-        if (norm < system.norm && norm <= (1.0 - 1e-4 * damping) * system.norm) {
+        const auto trial_system = assemble(candidate, p, atmosphere, Lunit, dt, prev, false,options.zone_threads);
+        const double trial_merit=merit(trial_system),current_merit=merit(system);
+        if (trial_merit < current_merit && trial_merit <= (1.0 - 1e-4 * damping) * current_merit) {
           result.model = std::move(candidate); accepted = true; break;
         }
-        last_rejection = "residual did not decrease";
+        std::ostringstream why;
+        why<<std::setprecision(4)<<"residual did not decrease: local="
+           <<system.norm<<" -> "<<trial_system.norm<<", balance="
+           <<system.luminosity_balance<<" -> "<<trial_system.luminosity_balance;
+        last_rejection = why.str();
       } catch (const std::domain_error& e) {
         last_rejection = e.what();
       } catch (const std::out_of_range& e) {

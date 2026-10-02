@@ -29,6 +29,16 @@ static double distance(const Model& a, const Model& b) {
     }
   return error;
 }
+static double energy_imbalance(const Model& m,const Model& previous,const Physics& p,double dt) {
+  long double power=0;const auto weights=nodal_mass_weights(m);
+  for(std::size_t i=0;i<m.size();++i) {
+    const auto e=p.eos->eval(m.T(i),m.rho(i),m.comp[i]);
+    const auto old=p.eos->eval(previous.T(i),previous.rho(i),previous.comp[i]);
+    power+=weights[i]*(p.nuclear->eval(m.T(i),m.rho(i),m.comp[i]).eps
+        -(e.E-old.E+e.P*(1/m.rho(i)-1/previous.rho(i)))/dt);
+  }
+  return static_cast<double>(power/m.y.back().L-1);
+}
 
 int main() {
   std::printf("ember central boundary and stellar relaxation\n");
@@ -142,19 +152,37 @@ int main() {
             "energy stopping check refuses an unfinished thermal solve");
       loose.max_iterations=10;
       const auto balanced=relax(trial,p,benchmark.atmosphere,loose,1e12,&r.model);
-      long double power=0;const auto weights=nodal_mass_weights(balanced.model);
-      for(std::size_t i=0;i<balanced.model.size();++i) {
-        const auto& m=balanced.model;
-        const auto e=p.eos->eval(m.T(i),m.rho(i),m.comp[i]);
-        const auto old=p.eos->eval(r.model.T(i),r.model.rho(i),r.model.comp[i]);
-        power+=weights[i]*(p.nuclear->eval(m.T(i),m.rho(i),m.comp[i]).eps
-            -(e.E-old.E+e.P*(1/m.rho(i)-1/r.model.rho(i)))/1e12);
-      }
-      const double imbalance=static_cast<double>(power/balanced.model.y.back().L-1);
+      const double imbalance=energy_imbalance(balanced.model,r.model,p,1e12);
       check(balanced.converged && std::abs(imbalance)<1e-9,
             "extra Newton correction satisfies independently integrated first law",imbalance);
       check(std::abs(imbalance-balanced.luminosity_balance)<1e-12,
             "assembled energy residual matches the physical global balance");
+
+      // A boundary calculation has finite precision. Corrections to the
+      // interior energy balance must remain possible after the boundary
+      // residual reaches that precision, well below its acceptance limit.
+      class RoundedAtmosphere final : public Atmosphere {
+        const Atmosphere& base_;double spacing_;
+      public:
+        RoundedAtmosphere(const Atmosphere& a,double spacing):base_(a),spacing_(spacing){}
+        AtmosphereState eval(double T,double g,const Composition& c)const override {
+          auto a=base_.eval(T,g,c);
+          a.T=std::exp(spacing_*std::round(std::log(a.T)/spacing_));
+          a.P=std::exp(spacing_*std::round(std::log(a.P)/spacing_));
+          return a;
+        }
+        const char* name()const override{return "finite precision test atmosphere";}
+      };
+      for(double spacing:{1e-6,3e-6,1e-5}) {
+        RoundedAtmosphere rounded(benchmark.atmosphere,spacing);
+        auto displaced=r.model;
+        for(auto& point:displaced.y){point.L*=1.001;point.lnT+=.001;point.lnrho-=.001;}
+        const auto corrected=relax(displaced,p,rounded,loose,1e12,&r.model);
+        const double balance=energy_imbalance(corrected.model,r.model,p,1e12);
+        check(corrected.converged && corrected.residual<=loose.residual_tolerance
+              && corrected.correction<=loose.correction_tolerance && std::abs(balance)<1e-9,
+              "finite boundary precision does not block global energy convergence",balance);
+      }
     }
   }
 

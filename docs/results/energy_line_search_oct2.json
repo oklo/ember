@@ -1,0 +1,71 @@
+{
+  "errors": {
+    "luminosity_Lsun": 8.294006508258178e-07,
+    "Teff_K": 2.1079131728996003e-07,
+    "radius_Rsun": 6.8824365095920825e-09,
+    "central_T_K": 2.3994509712466083e-08,
+    "central_density_g_cm3": 7.755622233318604e-08,
+    "H_mass_g": 6.599957247388488e-09,
+    "He3_mass_g": 2.9627608100213365e-07,
+    "maximum_log_structure_change": 8.306698873195018e-08
+  },
+  "CPU_speedup": 2.7712427030037303,
+  "wall_speedup": 2.839723034649436,
+  "baseline": {
+    "exit_code": 0,
+    "CPU_seconds": 88.411973,
+    "wall_seconds": 74.42957533337176,
+    "completed_utc": "2026-10-02T14:48:46.056945+00:00",
+    "report": {
+      "requested_age_reached": 1,
+      "age_years": 3248141576395.9775,
+      "accepted_this_invocation": 6,
+      "accepted_total": 902,
+      "rejected_total": 170,
+      "stop_reason": "requested age",
+      "cpu_seconds": 88.380542,
+      "wall_seconds": 74.016389875,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "balanced": {
+    "exit_code": 0,
+    "CPU_seconds": 31.903367,
+    "wall_seconds": 26.210153041407466,
+    "completed_utc": "2026-10-02T14:47:57.837513+00:00",
+    "report": {
+      "requested_age_reached": 1,
+      "age_years": 3248141576395.9775,
+      "accepted_this_invocation": 2,
+      "accepted_total": 898,
+      "rejected_total": 167,
+      "stop_reason": "requested age",
+      "cpu_seconds": 31.872795,
+      "wall_seconds": 25.947332583,
+      "full_production_track_validated": false,
+      "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+    }
+  },
+  "scope": "Matched 1 Gyr interval at 3.247 Tyr, two zone threads per arm; identical physical inputs and tolerances; numerical executable identity migration only.",
+  "tests": [
+    "relaxation, including finite-precision atmosphere regression",
+    "pms_cn_evolution",
+    "pms_cn_face_evolution",
+    "evolution_controller",
+    "face_energy"
+  ],
+  "global_energy_limit": 5e-08,
+  "maximum_accepted_first_law": {
+    "baseline": 4.841877898620339e-08,
+    "balanced": 4.988725033072683e-08
+  },
+  "accepted_intervals": {
+    "baseline": 6,
+    "balanced": 2
+  },
+  "rejected_trials": {
+    "baseline": 3,
+    "balanced": 0
+  }
+}
