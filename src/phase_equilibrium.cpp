@@ -1,4 +1,5 @@
 #include "ember/phase_equilibrium.hpp"
+#include "ember/constants.hpp"
 #include <algorithm>
 #include <cmath>
 #include <limits>
@@ -141,6 +142,50 @@ PhaseEquilibrium equilibrate_phases(const PhaseCoordinates&q,const PhaseSplit&gu
   // roundoff, especially when a trace-species coordinate is very small.
   for(std::size_t i=0;i<5;++i)for(std::size_t j=0;j<i;++j)
     p.hessian[i][j]=p.hessian[j][i]=.5*(p.hessian[i][j]+p.hessian[j][i]);
+  return result;
+}
+
+PhaseMaterial phase_equilibrium_material(const PhaseCoordinates&q,const PhaseSplit&guess,
+    const PhaseEvaluator&first,const PhaseEvaluator&second,double step){
+  if(!(std::isfinite(step)&&step>0))throw std::invalid_argument("phase material: invalid difference step");
+  PhaseMaterial result;result.equilibrium=equilibrate_phases(q,guess,first,second);
+  const auto&p=result.equilibrium.potential;
+  std::array<std::array<PhaseCoordinates,5>,2> third{};
+  for(std::size_t k=0;k<2;++k){
+    auto plus=q,minus=q;plus[k]+=step;minus[k]-=step;
+    if(plus[k]==q[k]||minus[k]==q[k])throw std::invalid_argument("phase material: unresolved difference step");
+    const auto a=equilibrate_phases(plus,result.equilibrium.split,first,second);
+    const auto b=equilibrate_phases(minus,result.equilibrium.split,first,second);
+    for(std::size_t i=0;i<5;++i)for(std::size_t j=0;j<5;++j)
+      third[k][i][j]=(a.potential.hessian[i][j]-b.potential.hessian[i][j])/(2*step);
+  }
+  constexpr std::array<std::array<unsigned,3>,10> powers{{
+    {0,0,0},{1,0,0},{0,1,0},{0,0,1},{2,0,0},
+    {1,1,0},{1,0,1},{0,2,0},{0,1,1},{0,0,2}}};
+  for(std::size_t k=0;k<10;++k){
+    const auto&c=powers[k];const unsigned order=c[0]+c[1]+c[2];
+    for(unsigned t=0;t+order<=3;++t)for(unsigned r=0;t+r+order<=3;++r){
+      std::array<unsigned,3> indices{};unsigned n=0;
+      for(unsigned j=0;j<t;++j)indices[n++]=0;
+      for(unsigned j=0;j<r;++j)indices[n++]=1;
+      for(unsigned j=0;j<3;++j)for(unsigned l=0;l<c[j];++l)indices[n++]=j+2;
+      double value=p.value;
+      if(n==1)value=p.gradient[indices[0]];
+      if(n==2)value=p.hessian[indices[0]][indices[1]];
+      if(n==3){
+        // Mixed derivatives have two independently evaluated routes. Average
+        // only those available from a thermal/density Hessian difference.
+        value=0;unsigned routes=0;
+        for(unsigned j=0;j<3;++j)if(indices[j]<2){
+          value+=third[indices[j]][indices[(j+1)%3]][indices[(j+2)%3]];++routes;
+        }
+        value/=routes;
+      }
+      value*=constants::R_gas;
+      if(!std::isfinite(value))throw std::domain_error("phase material: nonfinite response");
+      result.jets[k][t][r]=value;
+    }
+  }
   return result;
 }
 } // namespace ember

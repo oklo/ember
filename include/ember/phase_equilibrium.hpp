@@ -1,4 +1,5 @@
 #pragma once
+#include "ember/eos_helmholtz.hpp"
 #include <array>
 #include <functional>
 #include <cstddef>
@@ -33,4 +34,21 @@ struct PhaseEquilibrium {
 // fractions and compositions are not frozen in the thermal response.
 PhaseEquilibrium equilibrate_phases(const PhaseCoordinates&,const PhaseSplit&,
                                    const PhaseEvaluator&,const PhaseEvaluator&);
+
+struct PhaseMaterial {
+  PhaseEquilibrium equilibrium;
+  // Material F/T, including the supplied phase mixing terms, without radiation.
+  // Channels: value, X, He3, Z, XX, XHe3, XZ, He3He3, He3Z, ZZ.
+  // Thermal/density derivatives are populated through total order three.
+  std::array<HelmholtzJet,10> jets{};
+};
+// Connect coexistence thermodynamics to the material EOS representation.
+// Four nearby coexistence solves differentiate the implicit Hessian for its
+// thermal/density third derivatives. The same distinct phases must remain
+// supported throughout this stencil; a failed solve is not silently replaced
+// by a single phase. Phase selection and its boundaries remain the caller's job.
+// Intended for material evaluation/tabulation, not unseeded searches in each
+// stellar Newton iteration. Do not restore mixing or add latent heat again.
+PhaseMaterial phase_equilibrium_material(const PhaseCoordinates&,const PhaseSplit&,
+    const PhaseEvaluator&,const PhaseEvaluator&,double log_step=1e-4);
 } // namespace ember

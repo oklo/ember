@@ -36,3 +36,24 @@ Those physical probes formally extend the metal-rich phase beyond the current
 Z=0.16 material limit. They assess a candidate approximation and do not validate
 that extension for evolution. The effective GS98 metal group, quantum mixture
 corrections and residual solid entropy still require physical comparisons.
+
+## Material EOS derivatives
+
+`phase_equilibrium_material` returns the material Helmholtz derivatives used by
+the EOS: F/T, its thermal and density derivatives through third order, and the
+H, He3 and shared-metal composition derivatives. It converts the dimensionless
+phase potential to physical units. The supplied phase mixing terms are included;
+radiation is not. Do not add mixing or latent heat a second time.
+
+Four nearby coexistence solves differentiate the analytic Hessian in ln T and
+ln rho, with a default increment of 1e-4. They start from the central split.
+The same two phases must remain supported across that interval. A failed or
+unsupported solve is reported, rather than replaced by a single phase. This is
+a material evaluation and tabulation interface; phase selection, phase-boundary
+handling and efficient reuse are still needed before selecting it in evolution.
+
+Nine analytic controls with moving coexistence endpoints verify all populated
+channels and the resulting pressure, energy, heat capacity, adiabatic gradient
+and their derivatives. Eight saved-state controls agree with an independent
+phase calculation; ultra-trace relative differences are assessed by their
+abundance-weighted effect, not mistaken for a uniform relative-accuracy bound.
