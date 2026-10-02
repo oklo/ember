@@ -1,0 +1,45 @@
+{
+  "scope": "Zero-metal continuity in explicitly selected neutral/ionized envelope mixtures. Default reject mode unchanged. Actual saved positive-metal envelopes unchanged.",
+  "regression": "Four new zero/trace-metal cases fail before the fix and pass after it; existing envelope initialization tests pass.",
+  "comparison": [
+    {
+      "Teff_K": 3751.0,
+      "original_zero_Z_Tbase_K": 272400.0,
+      "positive_Z_Tbase_K": 116900.0,
+      "positive_Z_unchanged": true,
+      "zero_Z_matches_positive_limit": true,
+      "saved_boundary_relative_difference": -6.575e-10,
+      "candidate_coverage": "Missing low-density H source near local 10900 K"
+    },
+    {
+      "Teff_K": 3043.0,
+      "original_zero_Z_Tbase_K": 176600.0,
+      "positive_Z_Tbase_K": 101700.0,
+      "positive_Z_unchanged": true,
+      "zero_Z_matches_positive_limit": true,
+      "saved_boundary_relative_difference": -1.451e-12,
+      "candidate_coverage": "Missing low-density H source near local 10900 K"
+    },
+    {
+      "Teff_K": 2145.0,
+      "original_zero_Z_Tbase_K": 114700.0,
+      "positive_Z_Tbase_K": 79910.0,
+      "positive_Z_unchanged": true,
+      "zero_Z_matches_positive_limit": true,
+      "saved_boundary_relative_difference": -3.783e-09,
+      "candidate_Tbase_K": 125300.0,
+      "candidate_change_from_production_percent": 56.83
+    },
+    {
+      "Teff_K": 656.0,
+      "original_zero_Z_Tbase_K": 44330.0,
+      "positive_Z_Tbase_K": 44660.0,
+      "positive_Z_unchanged": true,
+      "zero_Z_matches_positive_limit": true,
+      "saved_boundary_relative_difference": -1.776e-15,
+      "candidate_Tbase_K": 61160.0,
+      "candidate_change_from_production_percent": 36.95
+    }
+  ],
+  "limitation": "This fixes a discontinuity, not the thermodynamic inconsistency of separately tabulated source responses. The candidate Gibbs EOS is private and unselected."
+}

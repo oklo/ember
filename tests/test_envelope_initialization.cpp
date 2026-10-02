@@ -230,6 +230,30 @@ int main() {
     catch(const std::domain_error&){rejected=true;}
     check(rejected,"missing envelope source response is rejected across its interpolation stencil");
 
+    // Independently interpolated source responses need not obey the identity
+    // exactly. Metal-mixture mode must use the same closure as Z tends to zero.
+    const auto inconsistent_file=std::filesystem::path(file.string()+".gradient");
+    Remove remove_inconsistent{inconsistent_file};
+    std::ifstream ideal_input(file);lines.clear();
+    while(std::getline(ideal_input,line))lines.push_back(line);
+    for(std::size_t plane=0;plane<6;++plane)
+      for(std::size_t cell=0;cell<36;++cell)lines[6+(plane*5+1)*36+cell]="0.2";
+    {std::ofstream output(inconsistent_file);for(const auto& value:lines)output<<value<<'\n';}
+    EnvelopeSource independent(inconsistent_file.string());
+    for(auto mode:{EnvelopeMetals::neutral,EnvelopeMetals::ionized})
+      for(auto inventory:{MetalInventory::carried_isotopes,MetalInventory::gs98}) {
+        auto pure=solar_scaled(.7,0.);pure.basis=AbundanceBasis::baryon_mass;
+        pure.metal_inventory=inventory;pure[Species::He3]=.02;pure[Species::He4]-=.02;
+        auto trace=pure;trace[Species::O16]=1e-30;trace[Species::He4]-=1e-30;
+        double g0=std::log(.01),gt=g0;
+        const auto zero=independent.at_pressure(std::log(T),std::log(P),pure,g0,mode);
+        const auto small=independent.at_pressure(std::log(T),std::log(P),trace,gt,mode);
+        check(std::abs(zero.grad_ad-small.grad_ad)<1e-12 && std::abs(zero.grad_ad-.4)<1e-12,
+              "zero-metal envelope has the continuous mixture gradient");
+        check(std::isfinite(zero.rho+zero.cp+zero.delta+zero.chiRho),
+              "zero-metal mixture avoids division by metal abundance");
+      }
+
     // Independent spherical hydrostatic solution for a very thin layer.
     // Its integrated mass is tiny compared with M, stressing cancellation.
     ConstantDensity uniform;

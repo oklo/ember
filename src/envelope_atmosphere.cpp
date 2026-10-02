@@ -115,18 +115,22 @@ EnvelopeSource::PressureState EnvelopeSource::at_pressure(double lnT, double lnP
   guess=lnrho_from(lnT,lnP,(c.X[0]+D)/weight,c.X[1]/weight,guess);
   const auto hh=eval(lnT,guess,(c.X[0]+D)/weight,c.X[1]/weight);
   const double rh=std::exp(guess);
-  if(metals==EnvelopeMetals::reject || Z==0)return {rh,hh.cp,hh.delta,hh.grad_ad,hh.chiRho};
+  if(metals==EnvelopeMetals::reject)return {rh,hh.cp,hh.delta,hh.grad_ad,hh.chiRho};
   const double T=std::exp(lnT),P=std::exp(lnP),Pr=a_rad*std::pow(T,4)/3,Pg=P-Pr;
   require(Pg>0 && hh.cp>0 && hh.delta>0 && hh.chiRho>0, "invalid layer thermodynamics");
   double particles=0;
-  if(c.metal_inventory==MetalInventory::gs98)
-    particles=c.metal_ion_moment(0)+(metals==EnvelopeMetals::ionized?c.metal_ion_moment(1):0);
-  else for(std::size_t k=METAL_BEGIN;k<METAL_END;++k)
-    particles+=c.X[k]/Z/c.abundance_weight(k)*(1+(metals==EnvelopeMetals::ionized?nuclides[k].Z:0));
+  if(Z>0) {
+    if(c.metal_inventory==MetalInventory::gs98)
+      particles=c.metal_ion_moment(0)+(metals==EnvelopeMetals::ionized?c.metal_ion_moment(1):0);
+    else for(std::size_t k=METAL_BEGIN;k<METAL_END;++k)
+      particles+=c.X[k]/Z/c.abundance_weight(k)*(1+(metals==EnvelopeMetals::ionized?nuclides[k].Z:0));
+  }
   const double Rz=R_gas*particles, vz=Rz*T/Pg;
   const double dz=1+4*Pr/Pg, cz=2.5*Rz+4*Pr*vz/T*(4+dz);
   // Add Gibbs free energies at common TOTAL P,T. Each component includes
   // radiation, so their mass-weighted volume carries radiation exactly once.
+  // Use this closure also at Z=0: separately tabulated grad_ad can disagree
+  // with P*v*delta/(T*cp), so switching there creates a finite jump.
   const double vh=weight/rh, vm=Z*vz, v=vh+vm;
   const double cp=weight*hh.cp+Z*cz, delta=(vh*hh.delta+vm*dz)/v;
   return {1/v,cp,delta,P*v*delta/(T*cp),v/(vh/hh.chiRho+vm*P/Pg)};

@@ -503,7 +503,10 @@ non-trace metals unless `envelope_metals "neutral"` or `"ionized"` is selected.
 These options bracket the metals' ideal-gas particle count; they combine H/He
 and metal volumes and heat capacities at common pressure and temperature.
 Radiation is counted once. They are explicit approximations, not a metal EOS.
-Their supported metal mass fraction is at most 0.04.
+Their supported metal mass fraction is at most 0.04. The same mixture
+gradient, `P delta / (rho T cp)`, is used at zero metals so the boundary remains
+continuous. This does not repair inconsistencies between the source responses.
+[Zero-metal comparison](results/envelope_zero_metals_oct1_v1.json).
 
 The H/He envelope source uses a total-hydrogen proxy for deuterium, limited to
 D mass fraction 0.0001. The stellar fuel inventory and nuclear heat are
