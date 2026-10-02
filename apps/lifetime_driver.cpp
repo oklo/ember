@@ -327,6 +327,11 @@ int lifetime_main(int argc,char** argv) {
     if(envelope_integration_tolerance<0 || envelope_integration_tolerance>1e-3
         || (envelope_eos=="gibbs_hhe" && envelope_integration_tolerance==0))
       throw std::invalid_argument("invalid envelope integration tolerance");
+    const auto envelope_integration_method=cfg.values.contains("envelope_integration_method")
+        ?cfg.get("envelope_integration_method"):"backward_euler";
+    if((envelope_integration_method!="backward_euler" && envelope_integration_method!="sdirk2")
+        || (envelope_integration_method=="sdirk2" && envelope_integration_tolerance==0))
+      throw std::invalid_argument("invalid envelope integration method or missing positive tolerance");
     const auto envelope_metals=cfg.values.contains("envelope_metals")?cfg.get("envelope_metals"):"reject";
     if((envelope_metals!="reject" && envelope_metals!="neutral" && envelope_metals!="ionized")
         || (envelope_metals!="reject" && envelope_source_path.empty() && envelope_eos!="gibbs_hhe"))
@@ -383,7 +388,8 @@ int lifetime_main(int argc,char** argv) {
         identity.file("atmosphere.envelope_gibbs_helium_warm",gibbs_files.helium_warm);
       }else identity.values["atmosphere.envelope_eos"]="interior.v1";
       if(envelope_integration_tolerance>0) {
-        identity.values["atmosphere.envelope_integration"]="implicit.checked.v1";
+        identity.values["atmosphere.envelope_integration"]=envelope_integration_method=="sdirk2"
+            ?"sdirk2.checked.v1":"implicit.checked.v1";
         identity.number("atmosphere.envelope_integration_tolerance",envelope_integration_tolerance);
       }
       identity.number("atmosphere.envelope_mass",selected_envelope_mass);
@@ -638,6 +644,8 @@ int lifetime_main(int argc,char** argv) {
         thin_atmosphere,combined,eos,1.9,mass,selected_envelope_mass,20);
     if(native_envelope) {
       native_envelope->integration_tolerance(envelope_integration_tolerance);
+      native_envelope->integration_method(envelope_integration_method=="sdirk2"
+          ?EnvelopeIntegration::sdirk2:EnvelopeIntegration::backward_euler);
       native_envelope->evaluation_threads(static_cast<std::size_t>(threads));
       native_envelope->jacobian_reuse(envelope_jacobian_radius);
     }

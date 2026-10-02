@@ -97,6 +97,31 @@ The integration method and tolerance enter restart identity. Their existence
 does not validate a physical table or justify changing an evolved star's boundary
 without assessing its earlier evolution.
 
+With a positive tolerance, `envelope_integration_method "sdirk2"` selects a
+second-order, L-stable pressure integration. Its two implicit stages have
+diagonal coefficient `1 - 1/sqrt(2)` and retain the bracketed thermal solves.
+Full and half pressure steps control error; the base-mass root uses the same
+two-half-step solution as the accepted integration. The default remains
+`backward_euler`, preserving existing configurations. This choice affects the
+envelope calculation, not the stellar time-integration method.
+The radius solve normally targets one tenth of the integration tolerance,
+with a minimum relative accuracy of 1e-11.
+If adaptive mesh changes prevent an exact radius root, the bracket must still
+close within 1e-11 relative and the radius residual must be smaller than
+the integration tolerance. Measured Hayashi cases reached machine-scale brackets
+with residuals of 5.261e-10 and 2.104e-8; requiring a smaller residual stalled
+without improving the physical accuracy.
+
+Across twelve early and cooling envelopes, the second-order integration uses
+about five times less CPU. Tightening its tolerance from 1e-7 to 1e-9 changes
+base temperature, pressure and density by at most 4.988e-6 relative. Analytic
+spherical hydrostatic and radiative-diffusion solutions test convergence
+independently of the EOS tables. [Checks](results/envelope_second_order_oct2_v1.json).
+Matched fresh Hayashi starts followed to 500 yr take 28.47 versus 132.2 CPU s
+and 18.76 versus 74.16 wall s with eight zone threads. Both accept one interval
+without rejection; all compared quantities agree within 0.1%. This short
+control does not establish a speed ratio for an entire stellar lifetime.
+
 Analytic tests check mass conventions, radiation, caloric energy, entropy
 derivatives, missing cells and component joins. Seven complete envelopes from
 656 to 4500 K agree with the independently assessed implementation within

@@ -122,6 +122,7 @@ int main() {
     const double mass=.1*constants::Msun,radius=.1*constants::Rsun;
     EnvelopeAtmosphere envelope(top,transparent,negative,1.9,mass,.000001*mass,20);
     envelope.integration_tolerance(1e-7);
+    envelope.integration_method(EnvelopeIntegration::sdirk2);
     const auto surface=envelope.from_photosphere(3000,radius,c);
     check(std::abs(surface.T_base/3e4-1)<1e-7 && surface.r_base<radius,
           "negative expansion with outward radiation integrates without convective transport");

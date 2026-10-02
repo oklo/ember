@@ -196,41 +196,52 @@ EnvelopeSurface EnvelopeAtmosphere::integrate(double Teff, double R, const Compo
     const double drdlp = -P / (rho * g);
     return std::array<double,3>{grad, drdlp, -4 * M_PI * y[1] * y[1] * rho * drdlp};
   };
+  auto implicit_step = [&](double lp, const std::array<double,3>& y, double dlnp, double& guess) {
+    // At an unresolved but continuous buoyancy transition, a temperature
+    // bracket bounds the implicit root even when the evaluated residual
+    // jumps across zero between adjacent representable temperatures.
+    auto candidate=[&](double t) {
+      std::array<double,3> next{t,y[1],y[2]};
+      for(int it=0;it<20;++it) {
+        const auto rate=rhs(lp+dlnp,next,guess);
+        const double r=y[1]+dlnp*rate[1],m=y[2]+dlnp*rate[2];
+        const double err=std::max(std::abs(r-next[1])/R,std::abs(m-next[2])/target);
+        next[1]=r;next[2]=m;if(err<1e-13)break;
+        if(it==19)throw std::domain_error("implicit envelope geometry limit");
+      }
+      return std::pair{next,t-y[0]-dlnp*rhs(lp+dlnp,next,guess)[0]};
+    };
+    double lo=y[0];auto left=candidate(lo);
+    if(left.second>0)throw std::domain_error("implicit envelope temperature decreases");
+    if(left.second==0)return left.first;
+    double width=std::clamp(-1.2*left.second,.001,.05),hi=lo+width;
+    auto right=candidate(hi);
+    for(int k=0;right.second<0 && k<16;++k){width*=2.;hi=lo+width;right=candidate(hi);}
+    if(right.second<0)throw std::domain_error("implicit envelope no thermal bracket");
+    for(int k=0;k<64;++k) {
+      double mid=.5*(lo+hi);
+      if(k<32 && k%4!=3) {
+        const double secant=lo-left.second*(hi-lo)/(right.second-left.second);
+        mid=std::clamp(secant,lo+.01*(hi-lo),hi-.01*(hi-lo));
+      }
+      auto value=candidate(mid);
+      if(std::abs(value.second)<2e-13)return value.first;
+      if(value.second<0){lo=mid;left=value;}else{hi=mid;right=value;}
+      if(hi-lo<2e-13)return candidate(.5*(lo+hi)).first;
+    }
+    throw std::domain_error("implicit envelope thermal bracket limit");
+  };
   auto step = [&](double lp, const std::array<double,3>& y, double dlnp, double& guess) {
     if(integration_tolerance_>0) {
-      // At an unresolved but continuous buoyancy transition, a temperature
-      // bracket bounds the implicit root even when the evaluated residual
-      // jumps across zero between adjacent representable temperatures.
-      auto candidate=[&](double t) {
-        std::array<double,3> next{t,y[1],y[2]};
-        for(int it=0;it<20;++it) {
-          const auto rate=rhs(lp+dlnp,next,guess);
-          const double r=y[1]+dlnp*rate[1],m=y[2]+dlnp*rate[2];
-          const double err=std::max(std::abs(r-next[1])/R,std::abs(m-next[2])/target);
-          next[1]=r;next[2]=m;if(err<1e-13)break;
-          if(it==19)throw std::domain_error("implicit envelope geometry limit");
-        }
-        return std::pair{next,t-y[0]-dlnp*rhs(lp+dlnp,next,guess)[0]};
-      };
-      double lo=y[0];auto left=candidate(lo);
-      if(left.second>0)throw std::domain_error("implicit envelope temperature decreases");
-      if(left.second==0)return left.first;
-      double width=std::clamp(-1.2*left.second,.001,.05),hi=lo+width;
-      auto right=candidate(hi);
-      for(int k=0;right.second<0 && k<16;++k){width*=2.;hi=lo+width;right=candidate(hi);}
-      if(right.second<0)throw std::domain_error("implicit envelope no thermal bracket");
-      for(int k=0;k<64;++k) {
-        double mid=.5*(lo+hi);
-        if(k<32 && k%4!=3) {
-          const double secant=lo-left.second*(hi-lo)/(right.second-left.second);
-          mid=std::clamp(secant,lo+.01*(hi-lo),hi-.01*(hi-lo));
-        }
-        auto value=candidate(mid);
-        if(std::abs(value.second)<2e-13)return value.first;
-        if(value.second<0){lo=mid;left=value;}else{hi=mid;right=value;}
-        if(hi-lo<2e-13)return candidate(.5*(lo+hi)).first;
-      }
-      throw std::domain_error("implicit envelope thermal bracket limit");
+      if(integration_method_==EnvelopeIntegration::backward_euler)
+        return implicit_step(lp,y,dlnp,guess);
+      // Stiffly accurate, L-stable two-stage SDIRK. Both stages retain the
+      // bracketed thermal solve and evaluate the original envelope equations.
+      const double gamma=1-1/std::sqrt(2.);
+      const auto first=implicit_step(lp,y,gamma*dlnp,guess);
+      std::array<double,3> base{};
+      for(int i=0;i<3;++i)base[i]=y[i]+(1-gamma)/gamma*(first[i]-y[i]);
+      return implicit_step(lp+(1-gamma)*dlnp,base,gamma*dlnp,guess);
     }
     auto add = [](const std::array<double,3>& u, const std::array<double,3>& k, double s) { return std::array<double,3>{u[0] + s * k[0], u[1] + s * k[1], u[2] + s * k[2]}; };
     const auto k1 = rhs(lp, y, guess), k2 = rhs(lp + dlnp / 2, add(y, k1, dlnp / 2), guess);
@@ -240,6 +251,8 @@ EnvelopeSurface EnvelopeAtmosphere::integrate(double Teff, double R, const Compo
   };
   ++integrations_;
   double dlnp=1./per_unit_;const double max_h=dlnp,tolerance=integration_tolerance_;
+  const bool second_order=integration_method_==EnvelopeIntegration::sdirk2;
+  auto error_scale=[&](double error){return second_order?std::cbrt(error):std::sqrt(error);};
   std::array<double,3> y{lnT,r,0};
   for(std::size_t n=0;n<200000;++n) {
     double guess=lnrho,next_h=dlnp;std::array<double,3> yn;
@@ -254,13 +267,18 @@ EnvelopeSurface EnvelopeAtmosphere::integrate(double Teff, double R, const Compo
       require(std::isfinite(error),"nonfinite integration error");
       if(error>1) {
         require(dlnp>=1e-10,"integration minimum step");
-        dlnp*=std::max(.2,.8/std::sqrt(error));continue;
+        dlnp*=std::max(.2,.8/error_scale(error));continue;
       }
-      next_h=std::min(max_h,dlnp*std::min(1.8,.9/std::sqrt(std::max(error,1e-12))));
+      next_h=std::min(max_h,dlnp*std::min(1.8,.9/error_scale(std::max(error,1e-12))));
     }else yn=step(lnP,y,dlnp,guess);
     if (yn[2] >= target) {   // shrink the last step so the base lies exactly at M - dM
       double lo = 0, hi = dlnp, gg = lnrho; std::array<double,3> ym{};
-      for (int it = 0; it < 60; ++it) { const double hm = .5 * (lo + hi); gg = lnrho; ym = step(lnP, y, hm, gg); (ym[2] < target ? lo : hi) = hm; if (hi - lo < 1e-14) break; }
+      for (int it = 0; it < 60; ++it) { const double hm = .5 * (lo + hi); gg = lnrho;
+        if(tolerance>0 && second_order) {
+          const auto middle=step(lnP,y,.5*hm,gg);
+          ym=step(lnP+.5*hm,middle,.5*hm,gg);
+        }else ym=step(lnP,y,hm,gg);
+        (ym[2] < target ? lo : hi) = hm; if (hi - lo < 1e-14) break; }
       out.P_base = std::exp(lnP + .5 * (lo + hi)); out.T_base = std::exp(ym[0]); out.r_base = ym[1];
       out.rho_base = at_pressure(ym[0], std::log(out.P_base), c, gg).rho;
       out.steps = n + 1; return out;
@@ -272,6 +290,8 @@ EnvelopeSurface EnvelopeAtmosphere::integrate(double Teff, double R, const Compo
 
 EnvelopeSurface EnvelopeAtmosphere::solve(double L, double r_b, const Composition& c) const {
   using namespace constants;
+  const double radius_tolerance=integration_method_==EnvelopeIntegration::sdirk2
+      ?std::max(1e-11,.1*integration_tolerance_):1e-11;
   auto teff = [&](double R) { return std::pow(L / (4 * M_PI * sigma_SB * R * R), .25); };
   EnvelopeSurface last{};
   auto f = [&](double R) { last = integrate(teff(R), R, c); return last.r_base - r_b; };
@@ -282,11 +302,11 @@ EnvelopeSurface EnvelopeAtmosphere::solve(double L, double r_b, const Compositio
       double x0 = r_b * q0;
       if (usable(x0)) {
         double f0 = f(x0);
-        if (std::abs(f0) < 1e-11 * r_b) { ratio_.store(x0 / r_b); return last; }
+        if (std::abs(f0) < radius_tolerance * r_b) { ratio_.store(x0 / r_b); return last; }
         double x1 = x0 - f0 * q0;
         for (int it = 0; it < 8 && usable(x1); ++it) {
           const double f1 = f(x1);
-          if (std::abs(f1) < 1e-11 * r_b) { ratio_.store(x1 / r_b); return last; }
+          if (std::abs(f1) < radius_tolerance * r_b) { ratio_.store(x1 / r_b); return last; }
           if (!std::isfinite(f1) || f1 == f0) break;
           const double x2 = x1 - f1 * (x1 - x0) / (f1 - f0);
           x0 = x1; f0 = f1; x1 = x2;
@@ -352,11 +372,23 @@ EnvelopeSurface EnvelopeAtmosphere::solve(double L, double r_b, const Compositio
   require(fa <= 0 && fb >= 0, "photospheric radius not bracketed");
   for (int it = 0; it < 100; ++it) {   // Illinois regula falsi
     const double c1 = b - fb * (b - a) / (fb - fa), fc = f(c1);
-    if (std::abs(fc) < 1e-11 * r_b) { ratio_.store(c1 / r_b); return last; }
+    if (std::abs(fc) < radius_tolerance * r_b) { ratio_.store(c1 / r_b); return last; }
+    // Adaptive pressure meshes can change discretely as R varies. Once the
+    // radius bracket is resolved, accept only a residual below
+    // the integration tolerance; demanding a zero below that noise can stall.
+    if(integration_tolerance_>0 && integration_method_==EnvelopeIntegration::sdirk2
+        && std::abs(b-a)<1e-11*r_b && std::abs(fc)<integration_tolerance_*r_b) {
+      ratio_.store(c1/r_b);return last;
+    }
     if (fc * fb < 0) { a = b; fa = fb; } else fa *= .5;
     b = c1; fb = fc;
   }
-  throw std::domain_error("envelope atmosphere: photospheric radius did not converge");
+  std::ostringstream diagnostic;
+  diagnostic.precision(17);
+  diagnostic<<"envelope atmosphere: photospheric radius did not converge; relative bracket="
+      <<std::abs(b-a)/r_b<<" residual="<<(last.r_base-r_b)/r_b
+      <<" L="<<L<<" base radius="<<r_b;
+  throw std::domain_error(diagnostic.str());
 }
 
 EnvelopeSurface EnvelopeAtmosphere::photosphere(double Teff_b, double g_b, const Composition& c) const {
@@ -419,6 +451,7 @@ AtmosphereState EnvelopeAtmosphere::eval(double Teff_b, double g_b, const Compos
     // state. Thread scheduling cannot change another derivative's guess.
     auto evaluate=[&](EnvelopeAtmosphere& local) {
       local.integration_tolerance(integration_tolerance_);
+      local.integration_method(integration_method_);
       for(std::size_t i=worker;i<offsets.size();i+=workers) {
         try {
           local.ratio_.store(s.R/s.r_base);

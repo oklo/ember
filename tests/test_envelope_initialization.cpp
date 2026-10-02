@@ -43,6 +43,12 @@ struct ConstantDensity final : Eos {
   double rho_from_PT(double,double,const Composition&,double=0)const override{return .01;}
   const char* name()const override{return "constant-density hydrostatic test";}
 };
+struct ConstantOpacity final : Opacity {
+  OpacityState eval(double,double,const Composition&)const override {
+    OpacityState s{};s.kappa=.1;return s;
+  }
+  const char* name()const override{return "constant opacity";}
+};
 struct NarrowBoundary final : Atmosphere {
   mutable int refused{};
   AtmosphereState eval(double Teff,double g,const Composition& c)const override {
@@ -267,6 +273,30 @@ int main() {
     check(std::abs(exact_check.r_base/rb-1)<1e-12 && std::abs(exact_check.P_base/pressure-1)<2e-9,
           "thin envelope matches independent constant-density hydrostatics",
           exact_check.P_base/pressure-1);
+
+    // Constant density and opacity give independent spherical solutions for
+    // both hydrostatic pressure and radiative diffusion, including self-gravity.
+    ConstantOpacity opaque;
+    const long double layer_mass=1e28L;
+    const long double base_radius=std::cbrt(radius*radius*radius-layer_mass/a);
+    const long double base_pressure=1e8L+constants::G*density*((mass-a*radius*radius*radius)
+        *(1/base_radius-1/radius)+a*(radius*radius-base_radius*base_radius)/2);
+    const long double luminosity=4*std::acos(-1.L)*radius*radius*constants::sigma_SB*std::pow(3000.L,4);
+    const long double base_temperature=std::pow(std::pow(3e4L,4)
+        +3*.1L*luminosity*density/(4*std::acos(-1.L)*constants::a_rad*constants::c_light)
+        *(1/base_radius-1/radius),.25L);
+    double previous_error=1;
+    for(double tolerance:{2e-7,2e-9,2e-11}) {
+      EnvelopeAtmosphere checked(boundary,opaque,uniform,1.9,mass,layer_mass,20);
+      checked.integration_tolerance(tolerance);
+      checked.integration_method(EnvelopeIntegration::sdirk2);
+      const auto result=checked.from_photosphere(3000,radius,c);
+      const double error=std::max({std::abs(result.r_base/base_radius-1),
+          std::abs(result.P_base/base_pressure-1),std::abs(result.T_base/base_temperature-1)});
+      check(error<previous_error/5,"second-order envelope converges to the analytic radiative sphere",error);
+      previous_error=error;
+    }
+    check(previous_error<2e-8,"resolved envelope recovers analytic pressure, radius and temperature",previous_error);
 
   }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}
   return failed?1:0;

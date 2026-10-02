@@ -1,0 +1,79 @@
+{
+  "scope": "12 static H/He stellar envelopes; five early compositions and seven cooling/turnoff surface states",
+  "method": "two-stage stiffly accurate SDIRK, gamma=1-1/sqrt(2), full/two-half pressure checks",
+  "tolerance": 1e-07,
+  "early_maximum_relative_change_from_BE": 0.00038789608974609813,
+  "cold_maximum_relative_change_from_BE": 0.0002782169214401442,
+  "early_tolerance_control_maximum": 4.930751379084164e-06,
+  "cold_tolerance_control_maximum": 4.988013889484222e-06,
+  "early_BE_tight_vs_sdirk_tight": 3.871039796854436e-05,
+  "early_integration_CPU_speedup": 5.458822450827219,
+  "cold_integration_CPU_speedup": 4.930110763237391,
+  "passed": true,
+  "stellar_control": {
+    "scope": "Matched fresh Hayashi-to-500-year runs, overlapping machine load, 8 zone threads, same physical inputs and checks",
+    "euler": {
+      "exit_code": 0,
+      "CPU_seconds": 132.183311,
+      "wall_seconds": 74.16375645808876,
+      "completed_utc": "2026-10-02T08:37:49.454411+00:00",
+      "report": {
+        "requested_age_reached": 1,
+        "age_years": 500,
+        "accepted_this_invocation": 1,
+        "accepted_total": 1,
+        "rejected_total": 0,
+        "stop_reason": "requested age",
+        "cpu_seconds": 132.154453,
+        "wall_seconds": 73.958466375,
+        "full_production_track_validated": false,
+        "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+      }
+    },
+    "sdirk2": {
+      "exit_code": 0,
+      "CPU_seconds": 28.468709,
+      "wall_seconds": 18.760393999516964,
+      "completed_utc": "2026-10-02T08:36:52.746471+00:00",
+      "report": {
+        "requested_age_reached": 1,
+        "age_years": 500,
+        "accepted_this_invocation": 1,
+        "accepted_total": 1,
+        "rejected_total": 0,
+        "stop_reason": "requested age",
+        "cpu_seconds": 28.437359,
+        "wall_seconds": 18.53382975,
+        "full_production_track_validated": false,
+        "scope": "Common driver under integration; cool microscopic transport and atmosphere corridor unfinished"
+      }
+    },
+    "CPU_speedup": 4.643108719822877,
+    "wall_speedup": 3.953208896358909,
+    "relative_differences": {
+      "Teff_K": -2.2058139382274966e-05,
+      "radius_Rsun": 2.852180238144264e-05,
+      "luminosity_Lsun": -3.119025295561517e-05,
+      "central_T_K": -3.150401766538469e-05,
+      "central_density_g_cm3": -9.462482964306407e-05,
+      "He3_mass_g": -4.0624104080677625e-10,
+      "H_mass_g": 5.995204332975845e-15,
+      "D_mass_g": 3.210978150036681e-10,
+      "He3_peak": -4.0624159591828857e-10,
+      "nuclear_fraction": -0.0005337315789346597,
+      "convective_mass_fraction": 0.0
+    },
+    "binary_sha256": {
+      "gibbs-hayashi-euler-control-oct2-v1": "3eb755bfa5cb2517f3ec19d9bc1141635b77709fe68875334a99ae6b820a9f35",
+      "gibbs-hayashi-sdirk-oct2-v4": "2775c854690d8b7be09f3260328cf20ae10caa59a86ebcb698da544fe6ae3e46"
+    },
+    "gibbs-hayashi-euler-control-oct2-v1_audit": {
+      "all_pass": true,
+      "max_first_law": 3.767196621318192e-08
+    },
+    "gibbs-hayashi-sdirk-oct2-v4_audit": {
+      "all_pass": true,
+      "max_first_law": 3.7663903995621695e-08
+    }
+  }
+}

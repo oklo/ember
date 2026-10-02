@@ -20,6 +20,7 @@
 namespace ember {
 
 enum class EnvelopeMetals { reject, neutral, ionized };
+enum class EnvelopeIntegration { backward_euler, sdirk2 };
 
 // Envelope integration is naturally expressed at fixed temperature and pressure.
 // Providers also supply the density used at the top atmosphere boundary.
@@ -86,6 +87,7 @@ public:
   // Positive tolerance selects checked implicit integration through narrow
   // thermodynamic transitions. Zero retains the fixed-step RK4 method.
   void integration_tolerance(double tolerance);
+  void integration_method(EnvelopeIntegration method) { integration_method_=method; }
   std::size_t jacobian_reused() const { return jacobian_reused_; }
   std::size_t jacobian_computed() const { return jacobian_computed_; }
   const char* name() const override { return "integrated outer envelope"; }
@@ -113,6 +115,7 @@ private:
   const Eos* eos_{};
   double alpha_, M_, dM_, per_unit_;
   double integration_tolerance_{};
+  EnvelopeIntegration integration_method_{EnvelopeIntegration::backward_euler};
   std::size_t threads_{1};
   double jacobian_radius_{};
   struct JacobianCache {
