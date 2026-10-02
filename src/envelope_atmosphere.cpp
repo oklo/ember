@@ -177,12 +177,22 @@ EnvelopeSurface EnvelopeAtmosphere::integrate(double Teff, double R, const Compo
   const double target = dM_;
   double lnP = std::log(a.P), lnT = std::log(a.T), r = R, lnrho = std::log(a.rho);
   EnvelopeSurface out{R, Teff, L, a.T, a.P};
-  auto rhs = [&](double lp, const std::array<double,3>& y, double& guess) {
-    const double T = std::exp(y[0]), P = std::exp(lp);
-    const auto s = at_pressure(y[0], lp, c, guess);
+  struct Material {
+    double T,P;
+    EnvelopeSource::PressureState state;
+    double kappa;
+  };
+  auto material = [&](double lp,double lt,double& guess) {
+    const double T=std::exp(lt),P=std::exp(lp);
+    const auto state=at_pressure(lt,lp,c,guess);
+    return Material{T,P,state,opacity_.eval(T,state.rho,c).kappa};
+  };
+  auto rates = [&](const Material& local,const std::array<double,3>& y) {
+    const auto& s=local.state;
+    const double T=local.T,P=local.P,kappa=local.kappa;
     const double rho = s.rho;
     const double enclosed_mass=M_-y[2];
-    const double kappa = opacity_.eval(T, rho, c).kappa, g = G * enclosed_mass / (y[1] * y[1]);
+    const double g = G * enclosed_mass / (y[1] * y[1]);
     const double grad_rad = 3 * kappa * L * P / (16 * M_PI * a_rad * c_light * G * enclosed_mass * T * T * T * T);
     EosState st{}; st.P = P; st.cp = s.cp; st.delta = s.delta;
     double grad;
@@ -196,20 +206,26 @@ EnvelopeSurface EnvelopeAtmosphere::integrate(double Teff, double R, const Compo
     const double drdlp = -P / (rho * g);
     return std::array<double,3>{grad, drdlp, -4 * M_PI * y[1] * y[1] * rho * drdlp};
   };
+  auto rhs = [&](double lp,const std::array<double,3>& y,double& guess) {
+    return rates(material(lp,y[0],guess),y);
+  };
   auto implicit_step = [&](double lp, const std::array<double,3>& y, double dlnp, double& guess) {
     // At an unresolved but continuous buoyancy transition, a temperature
     // bracket bounds the implicit root even when the evaluated residual
     // jumps across zero between adjacent representable temperatures.
     auto candidate=[&](double t) {
+      // P, T and composition stay fixed during the geometry iteration.
+      // Only gravity, enclosed mass and the resulting flux gradient change.
+      const auto local=material(lp+dlnp,t,guess);
       std::array<double,3> next{t,y[1],y[2]};
       for(int it=0;it<20;++it) {
-        const auto rate=rhs(lp+dlnp,next,guess);
+        const auto rate=rates(local,next);
         const double r=y[1]+dlnp*rate[1],m=y[2]+dlnp*rate[2];
         const double err=std::max(std::abs(r-next[1])/R,std::abs(m-next[2])/target);
         next[1]=r;next[2]=m;if(err<1e-13)break;
         if(it==19)throw std::domain_error("implicit envelope geometry limit");
       }
-      return std::pair{next,t-y[0]-dlnp*rhs(lp+dlnp,next,guess)[0]};
+      return std::pair{next,t-y[0]-dlnp*rates(local,next)[0]};
     };
     double lo=y[0];auto left=candidate(lo);
     if(left.second>0)throw std::domain_error("implicit envelope temperature decreases");
