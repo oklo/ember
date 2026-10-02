@@ -102,5 +102,80 @@
   "tests": [
     "Actual coupled evolution compares six periodic intervals with tighter control, including first/periodic/final tightening and recovery from a failed relaxed solve at unchanged duration.",
     "Matched 5-Gyr global, profile, fuel and conservation comparisons."
-  ]
+  ],
+  "core_exhaustion_comparison": {
+    "scope": "Matched 2 Gyr near core hydrogen exhaustion; same initial state and executable, two threads per arm",
+    "start_age_Tyr": 3.634,
+    "end_age_Tyr": 3.636,
+    "central_H_range": [
+      0.0003025,
+      0.0001814
+    ],
+    "CPU_seconds": [
+      760.3,
+      631.4
+    ],
+    "wall_seconds": [
+      620.1,
+      516.8
+    ],
+    "wall_speedup": 1.2,
+    "global_relative_differences": {
+      "radius_Rsun": -1.865e-05,
+      "Teff_K": -1.384e-05,
+      "luminosity_Lsun": -9.267e-05,
+      "central_T_K": 7.009e-05,
+      "central_density_g_cm3": -0.0001553,
+      "central_X": 0.0005946,
+      "central_He3": 0.0003497,
+      "H_mass_g": -1.028e-06,
+      "He3_mass_g": 1.173e-05,
+      "surface_X": -2.897e-05,
+      "surface_Z": 0.0001112,
+      "convective_mass_fraction": 0.0
+    },
+    "maximum_log_structure_difference": 0.0001553,
+    "profiles": {
+      "H": {
+        "maximum_absolute": 0.0001022,
+        "maximum_fraction_of_peak": 0.000171
+      },
+      "He3": {
+        "maximum_absolute": 1.214e-06,
+        "maximum_fraction_of_peak": 0.000194
+      },
+      "He4": {
+        "maximum_absolute": 9.942e-05,
+        "maximum_fraction_of_peak": 0.000103
+      }
+    },
+    "hydrogen_consumed_relative_difference": -0.0001379,
+    "helium3_consumed_relative_difference": 0.0002592,
+    "unchanged_convective_boundary": true,
+    "audits": {
+      "control": {
+        "attempts": 21,
+        "accepted": 15,
+        "rejected": 6,
+        "max_first_law": 4.319e-08,
+        "max_species_inventory": 1.646e-15
+      },
+      "periodic": {
+        "attempts": 18,
+        "accepted": 12,
+        "rejected": 6,
+        "max_first_law": 4.319e-08,
+        "max_species_inventory": 1.009e-15
+      }
+    },
+    "accepted_intervals": [
+      15,
+      12
+    ],
+    "rejected_intervals": [
+      6,
+      6
+    ],
+    "conclusion": "Periodic control retains measured accuracy here, but gives 1.20x rather than the earlier 5.05x gain; not a whole-track error bound."
+  }
 }

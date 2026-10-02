@@ -79,6 +79,11 @@ The interval count may be 0–16 and the factor 1–10, subject to the effective
 time-tolerance limits above. Settings are recorded in checkpoint identities.
 Assess accumulated errors over complete intervals against a tighter sequence;
 a tight endpoint alone does not correct earlier burning or transport errors.
+A matched 2 Gyr check near core hydrogen exhaustion gives a 1.200× wall-time
+gain, compared with 5.054× during radiative-core growth. Maximum global
+differences are 0.05946%; H and He3 consumption differ by 0.01379% and
+0.02592%, with the same convective boundary. These are local comparisons,
+not a whole-track error bound. [Measured controls](results/periodic_accuracy_oct2.json).
 
 `coupling_abundance_tolerance` accepts values up to `1e-10`. It controls the
 structure/composition iteration and the associated local species solve and
