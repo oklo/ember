@@ -21,6 +21,31 @@ void check_options(const EvolutionControlOptions& options, const EvolutionContro
         && options.maximum_consecutive_rejections > 0 && options.maximum_steps > 0
         && options.maximum_cpu_seconds > 0))
     throw std::invalid_argument("invalid evolution controller options");
+  if (options.relaxed_intervals > 16 || !std::isfinite(options.relaxed_accuracy_factor)
+      || options.relaxed_accuracy_factor < 1 || options.relaxed_accuracy_factor > 10
+      || (!options.relaxed_intervals && options.relaxed_accuracy_factor != 1))
+    throw std::invalid_argument("invalid periodic accuracy settings");
+}
+EvolutionOptions solve_accuracy(EvolutionOptions selected, double factor) {
+  selected.relaxation.residual_tolerance *= factor;
+  selected.relaxation.correction_tolerance *= factor;
+  selected.coupling_stop_tolerance *= factor;
+  selected.verification_residual_tolerance *= factor;
+  selected.verification_correction_tolerance *= factor;
+  return selected;
+}
+bool rapid_change(const Model& start, const EvolutionStep& trial,
+                  const std::optional<double>& previous_power) {
+  if (!trial.converged) return true;
+  const double luminosity = start.y.back().L;
+  if (!(luminosity > 0 && trial.model.y.back().L > 0)
+      || std::abs(std::log(trial.model.y.back().L / luminosity)) > .10) return true;
+  if (previous_power && std::abs(trial.nuclear_luminosity - *previous_power)
+      > .10 * std::max(std::abs(*previous_power), luminosity)) return true;
+  for (std::size_t i=0;i<start.size();++i)
+    if (std::abs(trial.model.y[i].lnT-start.y[i].lnT) > .05
+        || std::abs(trial.model.y[i].lnrho-start.y[i].lnrho) > .10) return true;
+  return false;
 }
 // 2*h2 - full, or nothing when the combination is not admissible. The cheap
 // count/mass prefilter is only a shortcut; the physical partition comparison
@@ -60,6 +85,7 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
   EvolutionControlResult result;
   std::size_t failed = 0;
   std::optional<Model> preceding;
+  std::optional<double> previous_power;
   double preceding_dt = 0;
   const auto solve = [&](const Model& start, const Physics& physics, double dt,
                          EvolutionOptions selected, const Model* before, double ratio) {
@@ -114,20 +140,33 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
       const double ds = std::min({state.next_dt, options.maximum_dt, target - state.model.age});
       if (state.model.age + ds == state.model.age || ds <= 0)
         throw std::runtime_error("timestep is below clock resolution");
-      auto selected = options.step;
+      double accuracy_factor = options.relaxed_intervals && result.accepted_this_invocation
+          && !failed && state.accepted % (options.relaxed_intervals + 1) != 0
+          && ds < target-state.model.age ? options.relaxed_accuracy_factor : 1.;
+      auto selected = solve_accuracy(options.step,accuracy_factor);
       if (hooks.configure_step) hooks.configure_step(state.model, selected);
       selected.previous_metal_heat_rates = state.metal_heat_rates;
       const auto& physics = hooks.physics(state.model);
       const Model* before = preceding ? &*preceding : nullptr;
       const double ratio = preceding_dt > 0 ? ds / preceding_dt : 0;
-      const auto full = solve(state.model, physics, ds, selected, before, ratio);
+      auto full = solve(state.model, physics, ds, selected, before, ratio);
+      bool tightened_after_trial = false;
+      if (accuracy_factor > 1 && rapid_change(state.model,full,previous_power)) {
+        accuracy_factor = 1; tightened_after_trial = true;
+        selected = options.step;
+        if (hooks.configure_step) hooks.configure_step(state.model,selected);
+        selected.previous_metal_heat_rates = state.metal_heat_rates;
+        full = solve(state.model,physics,ds,selected,before,ratio);
+      }
       const auto h1 = full.converged ? solve(state.model, physics, ds / 2, selected, before, ratio / 2) : full;
-      auto second_options = options.step;
+      auto second_options = solve_accuracy(options.step,accuracy_factor);
       if (h1.converged && hooks.configure_step) hooks.configure_step(h1.model, second_options);
       second_options.previous_metal_heat_rates = h1.total_metal_species_rates;
       const auto h2 = h1.converged ? solve(h1.model, hooks.physics(h1.model), ds / 2,
                                          second_options, &state.model, 1.) : h1;
       EvolutionAttempt attempt;
+      attempt.accuracy_factor = accuracy_factor;
+      attempt.tightened_after_trial = tightened_after_trial;
       attempt.start_age = state.model.age;
       attempt.dt = ds;
       attempt.converged = full.converged && h1.converged && h2.converged;
@@ -140,15 +179,15 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
         error = 0;
         for (std::size_t i = 0; i < state.model.size(); ++i) {
           for (const auto v : {Var::lnr, Var::lnrho, Var::lnT})
-            error = std::max(error, std::abs(full.model.y[i][v] - h2.model.y[i][v]) / options.structure_tolerance);
+            error = std::max(error, std::abs(full.model.y[i][v] - h2.model.y[i][v]) / (accuracy_factor * options.structure_tolerance));
           error = std::max(error, hooks.species_difference(full.model.comp[i], h2.model.comp[i])
-                                 / options.species_tolerance);
+                                 / (accuracy_factor * options.species_tolerance));
         }
         const double half_power = .5 * (h1.nuclear_luminosity + h2.nuclear_luminosity);
         const double power_scale = std::max(std::abs(half_power),
             .5 * (std::abs(h1.model.y.back().L) + std::abs(h2.model.y.back().L)));
         error = std::max(error, std::abs(full.nuclear_luminosity - half_power) / (options.energy_tolerance * power_scale));
-        error = std::max(error, std::abs(full.model.y.back().L / h2.model.y.back().L - 1) / (4 * options.structure_tolerance));
+        error = std::max(error, std::abs(full.model.y.back().L / h2.model.y.back().L - 1) / (4 * accuracy_factor * options.structure_tolerance));
         hooks.assess(full.model, full.total_metal_species_rates);
         hooks.assess(h1.model, h1.total_metal_species_rates);
         hooks.assess(h2.model, h2.total_metal_species_rates);
@@ -180,6 +219,7 @@ EvolutionControlResult evolve(EvolutionState& state, const Atmosphere& atmospher
         attempt.message = "physical inventory/energy audit failed";
       if (hooks.attempted) hooks.attempted(attempt);
       if (attempt.accepted) {
+        previous_power = h2.nuclear_luminosity;
         if (options.predict_structure) {
           preceding = state.model;
           preceding_dt = ds;

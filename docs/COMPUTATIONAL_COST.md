@@ -24,6 +24,19 @@ to three, with a 4.816-fold wall-time saving. Conservation tolerances remain
 unchanged; local profile differences and the limited evolutionary range of
 the test are recorded alongside the timing.
 
+A [5 Gyr comparison](results/periodic_accuracy_oct2.json) uses four relaxed
+intervals between tighter ones, retaining full/two-half checks throughout.
+It reduces 49 accepted intervals and 22 rejections to 11 and zero. With two
+threads per calculation, wall time falls from 1003 to 198.4 seconds, a factor
+of 5.054. Global differences are at most 0.1049%; the largest local He3
+difference is 0.8320% of its peak abundance. Hydrogen consumed differs by
+0.1303%. The small net He3 production over this interval differs by 20.21%,
+although the final He3 inventory differs by only 0.04061%. This distinction
+matters when interpreting nearly stationary quantities. These results support
+the tested radiative-core-growth interval, not a universal accuracy or speed
+claim. The controller returns to tighter solves for rapid structural or nuclear
+changes, with the same nuclear-power and conservation limits in every interval.
+
 The solver reduces repeated work with structure prediction, composition warm
 starts, local burning feedback and bounded reuse of EOS and collision responses.
 Independent zone work uses CPU threads. Source atmosphere calculations can run

@@ -50,7 +50,9 @@ Version 1 requires the following keys; paths are relative to the configuration:
   `coupling_abundance_tolerance`, `inventory_abundance_tolerance`, and
   `version` (set to `1`).
 
-`species_tolerance` permits values up to `2e-4`. It bounds the maximum absolute
+`species_tolerance` permits values up to `0.002`; `structure_tolerance` permits
+values up to `0.004`. These are input limits, not accuracy guarantees.
+The species setting bounds the maximum absolute
 composition difference between a full step and two half steps, independently
 of the species conservation audit. During radiative-core growth, changing it
 from `1e-4` to `2e-4` reduced a matched 1 Gyr calculation from 381.8 to 76.39
@@ -58,6 +60,25 @@ CPU seconds. Global differences were below 0.006446%; the largest local He3
 difference was 0.1068% of its profile peak. This comparison supports the tested
 phase, not an accuracy claim for the whole lifetime or rare species.
 [Comparison](results/warm_species_time_tolerance_oct2.json).
+
+Optional `relaxed_intervals "4"` and `relaxed_accuracy_factor "5"` allow four
+intervals with larger time-error and local solve tolerances between tighter
+intervals. Both default to disabled (`0` and `1`). The first interval after a
+restart, the final interval and retries after rejection use the supplied base
+tolerances. Every interval still computes a full step and two half steps.
+Inventory, total-energy, species-solve and nuclear-power error limits do not
+change. A failed relaxed solve is retried tightly at the same duration.
+
+The controller also repeats a relaxed trial tightly when its temperature change
+exceeds 0.05 in ln T, density change exceeds 0.1 in ln rho, surface luminosity
+change exceeds 0.1 in ln L, or nuclear power changes by more than 10% of the
+larger preceding nuclear power and surface luminosity. These are additional
+warning thresholds; the full/two-half error estimates remain active throughout.
+Attempt records report the applied factor and any immediate tightening.
+The interval count may be 0–16 and the factor 1–10, subject to the effective
+time-tolerance limits above. Settings are recorded in checkpoint identities.
+Assess accumulated errors over complete intervals against a tighter sequence;
+a tight endpoint alone does not correct earlier burning or transport errors.
 
 `coupling_abundance_tolerance` accepts values up to `1e-10`. It controls the
 structure/composition iteration and the associated local species solve and

@@ -187,6 +187,44 @@ int main(int argc,char**) {
       require(extrapolated.requested_age_reached && extrapolated.richardson_accepted>0,
               "controller did not accept an assessed admissible extrapolation");
 
+      // Compare a complete accuracy cycle with the same six tightly checked
+      // intervals. A failed relaxed solve must be retried tightly at the same
+      // age and duration, before it can force a shorter physical interval.
+      control.target_age=controller_initial.age+6*dt;
+      control.minimum_growth=control.maximum_growth=1.;
+      calls=1;attempts.clear();state={controller_initial,dt,0,0};
+      const auto tight_cycle=evolve(state,atmosphere,control,hooks);
+      require(tight_cycle.requested_age_reached,"tight cycle control failed");
+      const auto cycle_reference=state;
+      control.relaxed_intervals=2;control.relaxed_accuracy_factor=5;
+      bool injected_relaxed_failure=false;
+      hooks.configure_step=[&](const Model&,EvolutionOptions& selected) {
+        if(!injected_relaxed_failure && selected.relaxation.residual_tolerance>
+            options.relaxation.residual_tolerance) {
+          selected.relaxation.residual_tolerance=1e-300;
+          selected.relaxation.max_iterations=1;
+          injected_relaxed_failure=true;
+        }
+      };
+      calls=1;attempts.clear();state={controller_initial,dt,0,0};
+      const auto cycle=evolve(state,atmosphere,control,hooks);
+      require(cycle.requested_age_reached && injected_relaxed_failure,"periodic accuracy cycle failed");
+      require(attempts.size()==6 && attempts.front().accuracy_factor==1
+          && attempts.back().accuracy_factor==1 && attempts[3].accuracy_factor==1,
+          "initial, periodic or final tight accuracy was skipped");
+      require(attempts[1].tightened_after_trial && attempts[1].accuracy_factor==1
+          && attempts[1].dt==dt && attempts[1].accepted,
+          "failed relaxed solve was not recovered tightly at the original duration");
+      require(attempts[2].accuracy_factor==5 && attempts[4].accuracy_factor==5,
+          "quiet intervals did not use relaxed accuracy");
+      for(std::size_t i=0;i<state.model.size();++i) {
+        for(const auto v:{Var::lnr,Var::lnrho,Var::lnT})
+          require(std::abs(state.model.y[i][v]-cycle_reference.model.y[i][v])<1e-6,
+                  "periodic accuracy changed the control structure excessively");
+        require(hooks.species_difference(state.model.comp[i],cycle_reference.model.comp[i])<1e-7,
+                "periodic accuracy changed control fuel excessively");
+      }
+
     }
     std::cout<<std::setprecision(17)<<"{\"outcome\":\"passed\",\"scope\":\"analytic EOS/grey coupled 0.5 solar mass test with trace-D injection; not a physical track\""
       <<",\"face_luminosities\":"<<face_luminosities(initial)

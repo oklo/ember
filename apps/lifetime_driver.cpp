@@ -202,6 +202,13 @@ int lifetime_main(int argc,char** argv) {
         || (collision_verify!=0 && collision_radius==0))
       throw std::invalid_argument("invalid collision reuse settings");
     const auto optional_number=[&](const char* key) {return cfg.values.contains(key)?cfg.number(key):0.;};
+    const double relaxed_intervals=optional_number("relaxed_intervals");
+    const double relaxed_factor=cfg.values.contains("relaxed_accuracy_factor")?cfg.number("relaxed_accuracy_factor"):1.;
+    if(!std::isfinite(relaxed_intervals) || relaxed_intervals<0 || relaxed_intervals>16
+        || std::floor(relaxed_intervals)!=relaxed_intervals || !std::isfinite(relaxed_factor)
+        || relaxed_factor<1 || relaxed_factor>10 || (relaxed_intervals==0 && relaxed_factor!=1)
+        || relaxed_factor*structure_tolerance>.004 || relaxed_factor*species_tolerance>.002)
+      throw std::invalid_argument("invalid periodic accuracy settings");
     const double envelope_jacobian_radius=optional_number("envelope_jacobian_radius");
     if(!std::isfinite(envelope_jacobian_radius) || envelope_jacobian_radius<0 || envelope_jacobian_radius>.01)
       throw std::invalid_argument("envelope_jacobian_radius must lie in [0,0.01]");
@@ -360,7 +367,7 @@ int lifetime_main(int argc,char** argv) {
     if(!cfg.values.empty())throw std::invalid_argument("unknown lifetime setting: "+cfg.values.begin()->first);
     if(!(mass>0 && radius>0 && teff>0 && entropy_loss>0 && dt>0 && maximum_dt>=dt && minimum_temperature>0
         && count>=128 && count<=8192 && std::floor(count)==count && threads>=1 && threads<=16 && std::floor(threads)==threads
-        && structure_tolerance>0 && structure_tolerance<=1e-3 && species_tolerance>0 && species_tolerance<=2e-4
+        && structure_tolerance>0 && structure_tolerance<=.004 && species_tolerance>0 && species_tolerance<=.002
         && energy_tolerance>0 && energy_tolerance<=.01 && abundance_tolerance>0 && abundance_tolerance<=1e-10
         && inventory_tolerance>0 && inventory_tolerance<=std::min(1e-12,.01*species_tolerance)))
       throw std::invalid_argument("lifetime physical or accuracy setting out of range");
@@ -476,6 +483,11 @@ int lifetime_main(int argc,char** argv) {
     if(structure_prediction=="linear")identity.number("solver.structure_prediction",1);
     if(linearized_burning==1)identity.number("solver.linearized_burning",1);
     if(abundance_cap!=.001)identity.number("solver.abundance_cap",abundance_cap);
+    if(relaxed_intervals>0) {
+      identity.number("solver.relaxed_intervals",relaxed_intervals);
+      identity.number("solver.relaxed_accuracy_factor",relaxed_factor);
+      identity.values["solver.accuracy_cycle"]="checked_with_rapid_change_retry.v1";
+    }
     if(collision_radius>0)identity.number("solver.collision_taylor_radius",collision_radius);
     if(eos_radius>0)identity.number("solver.eos_taylor_radius",eos_radius);
     if(buoyancy_spacing>0)identity.number("solver.buoyancy_reuse_spacing",buoyancy_spacing);
@@ -792,6 +804,8 @@ int lifetime_main(int argc,char** argv) {
     control.energy_tolerance=energy_tolerance;control.maximum_steps=maximum_steps;
     control.predict_structure=structure_prediction=="linear";
     control.richardson_extrapolation=richardson==1;
+    control.relaxed_intervals=static_cast<std::size_t>(relaxed_intervals);
+    control.relaxed_accuracy_factor=relaxed_factor;
     control.maximum_cpu_seconds=maximum_cpu;
     // A failed trial must not replace the accepted model. Retry with a shorter
     // interval under the same audits; the controller bounds repeated rejection.
@@ -870,6 +884,7 @@ int lifetime_main(int argc,char** argv) {
     hooks.attempted=[&](const EvolutionAttempt& attempt) {
       const auto& af=attempt.audits[0];const auto& a1=attempt.audits[1];const auto& a2=attempt.audits[2];
       attempts<<"{\"start_years\":"<<attempt.start_age/year<<",\"step_years\":"<<attempt.dt/year<<",\"converged\":"<<attempt.converged<<",\"audit_pass\":"<<attempt.audit_pass
+        <<",\"accuracy_factor\":"<<attempt.accuracy_factor<<",\"tightened_after_trial\":"<<attempt.tightened_after_trial
         <<",\"accepted\":"<<attempt.accepted<<",\"error_norm\":"<<attempt.error_norm<<",\"message\":"<<std::quoted(attempt.message)
         <<",\"species_error\":["<<af.maximum_species_error<<','<<a1.maximum_species_error<<','<<a2.maximum_species_error
         <<"],\"mass_error_surface\":["<<af.mass_error_surface<<','<<a1.mass_error_surface<<','<<a2.mass_error_surface

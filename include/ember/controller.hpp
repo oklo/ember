@@ -26,11 +26,18 @@ struct EvolutionControlOptions {
   bool audit_failure_is_fatal{true};
   bool predict_structure{false};
   bool richardson_extrapolation{false};
+  // Optional accuracy cycle. The first, last and every (N+1)th interval use
+  // the supplied tolerances. Others may use factor times the time and local
+  // solve tolerances. Nuclear-power and conservation limits never change.
+  std::size_t relaxed_intervals{};
+  double relaxed_accuracy_factor{1};
 };
 
 struct EvolutionAttempt {
   double start_age{}, dt{}, error_norm{1e30};
   bool converged{}, audit_pass{}, accepted{};
+  double accuracy_factor{1};
+  bool tightened_after_trial{};
   std::string message;
   // Full step, first half and second half, respectively.
   std::array<EvolutionAudit, 3> audits{};
