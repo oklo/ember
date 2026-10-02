@@ -329,7 +329,7 @@ int lifetime_main(int argc,char** argv) {
       throw std::invalid_argument("invalid envelope integration tolerance");
     const auto envelope_metals=cfg.values.contains("envelope_metals")?cfg.get("envelope_metals"):"reject";
     if((envelope_metals!="reject" && envelope_metals!="neutral" && envelope_metals!="ionized")
-        || (envelope_metals!="reject" && envelope_source_path.empty()))
+        || (envelope_metals!="reject" && envelope_source_path.empty() && envelope_eos!="gibbs_hhe"))
       throw std::invalid_argument("invalid envelope metal approximation");
     const bool direct_envelope=!envelope_source_path.empty() || !envelope_eos.empty();
     if(!direct_envelope && envelope_integration_tolerance!=0)throw std::invalid_argument("integration tolerance requires an integrated envelope");
@@ -376,7 +376,7 @@ int lifetime_main(int argc,char** argv) {
       if(envelope_metals!="reject")identity.values["atmosphere.envelope_metals"]=envelope_metals+".additive_volume.v1";
       if(!envelope_source_path.empty())identity.file("atmosphere.envelope_source",envelope_source_path);
       else if(envelope_eos=="gibbs_hhe") {
-        identity.values["atmosphere.envelope_eos"]="gibbs_hhe.dilute.baryon.v1";
+        identity.values["atmosphere.envelope_eos"]="gibbs_hhe.additive.isotopes.gs98.v2";
         identity.file("atmosphere.envelope_gibbs_hydrogen",gibbs_files.hydrogen);
         identity.file("atmosphere.envelope_gibbs_helium",gibbs_files.helium);
         identity.file("atmosphere.envelope_gibbs_hydrogen_warm",gibbs_files.hydrogen_warm);
@@ -583,7 +583,7 @@ int lifetime_main(int argc,char** argv) {
       envelope_density=std::make_unique<EnvelopeSourceDensity>(*envelope_source,selected_envelope_metals);
     }
     std::unique_ptr<GibbsEnvelope> gibbs_envelope;
-    if(envelope_eos=="gibbs_hhe")gibbs_envelope=std::make_unique<GibbsEnvelope>(gibbs_files);
+    if(envelope_eos=="gibbs_hhe")gibbs_envelope=std::make_unique<GibbsEnvelope>(gibbs_files,selected_envelope_metals);
     const EnvelopeThermodynamics* envelope_thermodynamics=gibbs_envelope
         ?static_cast<const EnvelopeThermodynamics*>(gibbs_envelope.get()):envelope_density.get();
     const PressureDensity& atmosphere_density=envelope_thermodynamics

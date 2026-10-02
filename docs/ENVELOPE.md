@@ -59,15 +59,25 @@ envelope_gibbs_hydrogen "hydrogen.dat"
 envelope_gibbs_helium "helium.dat"
 envelope_gibbs_hydrogen_warm "hydrogen_warm.dat"
 envelope_gibbs_helium_warm "helium_warm.dat"
+envelope_metals "neutral"
 envelope_mass_fraction "0.00015"
 ```
 
-This selection requires `envelope_metals "reject"` or its default, without
-`envelope_source`. The current mixture is assessed only for hydrogen mass
-fraction X>=0.985, Z<=1e-12 and no deuterium. It combines component potentials
-at common gas pressure, converts atomic to baryon mass, uses a number-density
-He3 proxy and adds radiation once. It does not calculate phase separation.
-This restricted mixture cannot yet start a solar-composition Hayashi run.
+Use this selection without `envelope_source`. Component potentials combine at
+common gas pressure, convert atomic to baryon mass and include radiation once.
+He3 and trace D use their nuclear number densities with the classical isotope
+entropy correction. D must be at most 1e-4; molecular isotope shifts are omitted.
+For Z up to 0.04, `neutral` or `ionized` adds ideal GS98 metals in the specified
+charge state. The default `reject` permits only Z<=1e-12. These options do not
+solve metal ionization, nonideal H/He mixing or element separation.
+
+Five complete early-track envelope comparisons span X=0.1710–0.7000 and He3
+up to 0.1013. Neutral versus ionized metals changes the base temperature by at
+most 2.501%. A separate consistent-potential sensitivity to the published H/He
+interaction correction changes it by up to 4.121%. Neither comparison is a
+universal error bound; the interaction correction is not included in this
+provider. A fresh evolutionary calculation and comparison with observed
+low-mass stars are still required. [Mixture checks](results/gibbs_mixture_oct2_v1.json).
 
 Each `EMBER_GIBBS_GAS_V1` file records the spline degree, knot vectors in ln T
 and ln gas pressure, row-major coefficients of G/(R T), the original source
@@ -75,7 +85,8 @@ axes, and a Boolean source mask. Each numeric vector begins with its length;
 the mask has one entry per source-grid node. Coefficients refer to atomic mass
 and CGS units. Queries need a supported source cell and must remain within the
 fitted potential. Warm joins must preserve the potential and its first two
-derivatives. The four table hashes enter restart identity and runtime packaging.
+derivatives. The four table hashes, isotope treatment and metal selection enter
+restart identity; the tables are included in runtime packaging.
 
 `envelope_integration_tolerance` selects checked implicit integration when
 positive; its default is 1e-7 for `gibbs_hhe` and zero for the existing methods.
@@ -99,7 +110,5 @@ A complete fresh Hayashi-to-cold-white-dwarf calculation remains under validatio
 Cool molecular chemistry, nonideal atmospheres and strong quantum effects are
 not established by the existence of this boundary solver.
 
-Validation includes86 test groups with the required local source data, a matched
-1Gyr restart comparison with unchanged global quantities, and explicit mass,
-energy and checkpoint tests for the envelope reservoir. Source-table coverage
-and physical approximation checks are still required for each application.
+Envelope tests also check mass, energy, restart identity and the layer reservoir.
+Source coverage and physical approximation checks remain necessary for each use.

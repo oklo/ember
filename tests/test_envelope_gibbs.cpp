@@ -74,16 +74,50 @@ int main() {
       const auto above=eos.evaluate(join*std::exp(1e-8),P,c).pressure;
       check(std::abs(above.cp/below.cp-1)<1e-6,"warm component join preserves heat capacity");
     }
+    for(auto metals:{EnvelopeMetals::neutral,EnvelopeMetals::ionized}) {
+      GibbsEnvelope mixture(files,metals);
+      for(auto q:{std::array<double,4>{.7,3e-5,3e-5,.02},
+                  {.5635,.1013,0,.02},{.171,.00053,0,.02},{0.,.4,0,0}}) {
+        auto m=solar_scaled(q[0],q[3]);m.basis=AbundanceBasis::baryon_mass;
+        m.metal_inventory=MetalInventory::gs98;m[Species::He3]=q[1];
+        m[Species::H2]=q[2];m[Species::He4]-=q[1]+q[2];
+        const double particles=m.mu_ions_inv()
+            +(metals==EnvelopeMetals::ionized?m.Z()*m.metal_ion_moment(1):0);
+        for(double temperature:{5000.,20000.,200000.}) {
+          const double gas=constants::R_gas*particles;
+          const double radiation=constants::a_rad*std::pow(temperature,4)/3;
+          const double v=gas*temperature/(P-radiation);
+          const auto s=mixture.evaluate(temperature,P,m);
+          check(std::abs(s.pressure.rho*v-1)<3e-12,"H/He, D and GS98 metals preserve particle counts");
+          check(std::abs(s.energy-(1.5*gas*temperature+3*radiation*v))/(gas*temperature)<3e-12,
+                "full mixture has the ideal gas and photon energy");
+          const auto hot=mixture.evaluate(temperature*std::exp(step),P,m);
+          const auto cool=mixture.evaluate(temperature*std::exp(-step),P,m);
+          const auto high=mixture.evaluate(temperature,P*std::exp(step),m);
+          const auto low=mixture.evaluate(temperature,P*std::exp(-step),m);
+          check(std::abs((hot.entropy-cool.entropy)/(2*step)/s.pressure.cp-1)<2e-7,
+                "mixture heat capacity differentiates its entropy");
+          check(std::abs((high.entropy-low.entropy)/(2*step)/(P*v/temperature)+s.pressure.delta)<2e-7,
+                "mixture density and entropy obey the Maxwell relation");
+        }
+      }
+    }
     auto bad=c;bad.basis=AbundanceBasis::atomic_mass;
     rejects([&]{eos.evaluate(T,P,bad);},"atomic mass input is not mistaken for baryon fractions");
-    bad=solar_scaled(.7,0);bad.basis=AbundanceBasis::baryon_mass;
-    rejects([&]{eos.evaluate(T,P,bad);},"unassessed composition is refused");
+    bad=solar_scaled(.7,.02);bad.basis=AbundanceBasis::baryon_mass;
+    rejects([&]{eos.evaluate(T,P,bad);},"metals require an explicit approximation");
+    bad=c;bad[Species::H2]=.001;bad[Species::H1]-=.001;
+    rejects([&]{eos.evaluate(T,P,bad);},"deuterium outside the trace approximation is refused");
     rejects([&]{eos.evaluate(999,P,c);},"outside temperature coverage is refused");
     table(files.hydrogen_warm,9000,2e6,1/1.00782503,false,.01);
     rejects([&]{GibbsEnvelope discontinuous(files);},"discontinuous component joins are refused");
     table(files.hydrogen_warm,9000,2e6,1/1.00782503);
     table(files.hydrogen,1000,1e6,1/1.00782503,true);
     rejects([&]{GibbsEnvelope masked(files);masked.evaluate(4000,P,c);},"missing source cells cannot be interpolated across");
+    auto helium=solar_scaled(0.,0.);helium.basis=AbundanceBasis::baryon_mass;
+    GibbsEnvelope masked(files);
+    check(std::isfinite(masked.evaluate(4000,P,helium).pressure.rho),
+          "pure helium does not query an absent hydrogen source cell");
     Top top;Transparent transparent;NegativeExpansion negative;
     const double mass=.1*constants::Msun,radius=.1*constants::Rsun;
     EnvelopeAtmosphere envelope(top,transparent,negative,1.9,mass,.000001*mass,20);

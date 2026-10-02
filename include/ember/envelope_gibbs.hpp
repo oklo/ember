@@ -6,13 +6,14 @@ namespace ember {
 
 // Additive Gibbs potentials at common gas pressure, with radiation included once.
 // Tables contain G/(R T) on the atomic-mass basis; evaluation converts to baryon
-// mass. The He3 term uses the He4 reference at equal number density.
-// This implementation is assessed for X>=0.985 and trace metals only. It is not
-// a phase-separation model or a substitute for full-composition PMS coverage.
+// mass. He3 and trace D use the classical equal-number isotope approximation.
+// Optional ideal GS98 metals are neutral or fully ionized; these are declared
+// approximations, not an ionization or phase-separation calculation. Component
+// additivity omits nonideal H/He mixing and needs an uncertainty assessment.
 class GibbsEnvelope final : public EnvelopeThermodynamics {
 public:
   struct Files { std::string hydrogen, helium, hydrogen_warm, helium_warm; };
-  explicit GibbsEnvelope(const Files&);
+  explicit GibbsEnvelope(const Files&,EnvelopeMetals = EnvelopeMetals::reject);
   ~GibbsEnvelope();
   struct Thermodynamics { State pressure; double entropy, energy; };
   Thermodynamics evaluate(double T, double P, const Composition&) const;

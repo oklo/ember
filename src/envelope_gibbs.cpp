@@ -99,15 +99,33 @@ public:
     require(checked>0,"potential join has no common supported states");
   }
 };
+
+struct MetalGas {
+  double ions{},electrons{},ion_reference{},number_entropy{},electron_reference{};
+  MetalGas() {
+    using namespace constants;
+    const auto reference=[](double mass,double spin) {
+      return 1.5*std::log(h*h/(2*M_PI*mass*kB))-std::log(spin*kB);
+    };
+    for(const auto& e:gs98_metals) {
+      const double n=e.fraction/e.mass_number;
+      ions+=n;electrons+=n*e.charge;
+      ion_reference+=n*reference(e.atomic_weight/NA,1.);
+      number_entropy+=n*std::log(n);
+    }
+    electron_reference=reference(me,2.);
+  }
+};
 } // namespace
 
 struct GibbsEnvelope::Impl {
   Potential h,he,hw,hew;
-  explicit Impl(const Files& f):h(f.hydrogen),he(f.helium),hw(f.hydrogen_warm),hew(f.helium_warm) {
+  EnvelopeMetals metals;
+  explicit Impl(const Files& f,EnvelopeMetals m):h(f.hydrogen),he(f.helium),hw(f.hydrogen_warm),hew(f.helium_warm),metals(m) {
     hw.check_join(h);hew.check_join(he);
   }
 };
-GibbsEnvelope::GibbsEnvelope(const Files& f):impl_(std::make_unique<Impl>(f)) {}
+GibbsEnvelope::GibbsEnvelope(const Files& f,EnvelopeMetals m):impl_(std::make_unique<Impl>(f,m)) {}
 GibbsEnvelope::~GibbsEnvelope()=default;
 
 GibbsEnvelope::Thermodynamics GibbsEnvelope::evaluate(double T,double P,const Composition& c) const {
@@ -115,22 +133,42 @@ GibbsEnvelope::Thermodynamics GibbsEnvelope::evaluate(double T,double P,const Co
   require(c.basis==AbundanceBasis::baryon_mass,"baryon mass fractions required");
   require(std::isfinite(c.sum()) && std::abs(c.sum()-1)<1e-12,"composition is not normalized");
   for(double x:c.X)require(std::isfinite(x) && x>=0,"invalid mass fraction");
-  const double X=c.h1(),Y3=c[Species::He3],Y4=c[Species::He4];
-  require(X>=.985 && X<=1 && c.Z()<=1e-12 && c[Species::H2]==0,"composition outside assessed H-rich interval");
+  const double X=c.h1(),D=c[Species::H2],Y3=c[Species::He3],Y4=c[Species::He4],Z=c.Z();
+  require(D<=1e-4 && Z<=.04,"composition outside trace-D and metal approximation");
+  require(impl_->metals!=EnvelopeMetals::reject || Z<=1e-12,"metal approximation must be selected explicitly");
+  require(impl_->metals==EnvelopeMetals::reject || Z==0 || c.metal_inventory==MetalInventory::gs98,"GS98 metal distribution required");
   const J t=J::variable(std::log(T),0),p=J::variable(std::log(P),1);
   const J Pg=exp(p)-constants::a_rad/3.*exp(4.*t);
   require(Pg.value>0,"nonpositive gas pressure");
   const J pg=log(Pg);
-  const auto& h=t.value>impl_->hw.minimum_temperature()?impl_->hw:impl_->h;
-  J f=X*(constants::R_gas*1.00782503)*h.value(t,pg);
+  J f;
+  if(X+D>0) {
+    const auto& h=t.value>impl_->hw.minimum_temperature()?impl_->hw:impl_->h;
+    f=(X+D/2.)*(constants::R_gas*1.00782503)*h.value(t,pg);
+  }
   const double heweight=Y4+4./3.*Y3;
   if(heweight>0) {
     const auto& he=t.value>impl_->hew.minimum_temperature()?impl_->hew:impl_->he;
     f=f+heweight*(constants::R_gas*4.00260325/4.)*he.value(t,pg);
   }
-  const double n[]={X,Y3/3.,Y4/4.},total=n[0]+n[1]+n[2];double mixing=0;
-  for(double v:n)if(v>0)mixing-=constants::R_gas*v*std::log(v/total);
-  f=f-mixing+constants::R_gas*.5*Y3*std::log(4.00260325/3.01602932);
+  // The isotope terms alter the classical entropy reference but not heat
+  // capacity. Trace D omits molecular rotational and zero-point isotope shifts.
+  f=f+constants::R_gas*(.5*Y3*std::log(4.00260325/3.01602932)
+                        +.75*D*std::log(1.00782503/2.01410177812));
+  const double n[]={X,D/2.,Y3/3.,Y4/4.};double total=0,number_entropy=0;
+  for(double v:n)if(v>0){total+=v;number_entropy+=v*std::log(v);}
+  if(impl_->metals!=EnvelopeMetals::reject && Z>0) {
+    static const MetalGas metal;
+    f=f+constants::R_gas*Z*(metal.ions*(pg-2.5*t)+metal.ion_reference);
+    total+=Z*metal.ions;
+    number_entropy+=Z*(metal.ions*std::log(Z)+metal.number_entropy);
+    if(impl_->metals==EnvelopeMetals::ionized) {
+      const double electrons=Z*metal.electrons;
+      f=f+constants::R_gas*electrons*(pg-2.5*t+metal.electron_reference);
+      total+=electrons;number_entropy+=electrons*std::log(electrons);
+    }
+  }
+  f=f-constants::R_gas*(total*std::log(total)-number_entropy);
   const double gp=f.d[1],cp=-(f.d[0]+f.h[0][0]),delta=1+f.h[0][1]/gp;
   const double chi=1/(1-f.h[1][1]/gp),cv=cp-gp*delta*delta*chi;
   const double rho=P/(T*gp),grad=gp*delta/cp;

@@ -1,0 +1,70 @@
+{
+  "scope": "Static complete envelopes at saved surface conditions. No evolutionary track or physical error bound is established.",
+  "equation_of_state": "Additive H/He Gibbs potentials; classical equal-number He3 and trace D; explicit neutral or fully ionized ideal GS98 metals; radiation included once.",
+  "interaction_scope": "Private sensitivity using Howard & Guillot 2023 projected onto a Gibbs potential; not included in production provider.",
+  "source_repair": "Original CMS density and entropy retained near its 100000 K join; incompatible independently differentiated responses omitted from the fit in that region. Positive response required throughout admitted pieces.",
+  "warm_source_pieces": 8092,
+  "independent_warm_queries": 30000,
+  "nonphysical_warm_queries": 0,
+  "repaired_queries": 8,
+  "compiled_vs_private_maximum_relative_change": 7.1589401073879344e-12,
+  "analytic_tests": "Full H/He and isotope particle counts, gas/photon caloric energy, Cp and Maxwell relation for neutral and ionized GS98 metals, explicit unsupported metal/D refusals, pure-He source selection.",
+  "rows": [
+    {
+      "stage": "hayashi",
+      "surface_X": 0.6999706012347481,
+      "surface_He3": 3.485566047027145e-05,
+      "neutral_Tbase_K": 20319.266029799586,
+      "ionized_Tbase_K": 20376.68167996073,
+      "interaction_sensitivity_Tbase_K": 20318.866722351144,
+      "metal_relative_change": 0.0028256753997382145,
+      "interaction_relative_change": -1.9651666937958723e-05
+    },
+    {
+      "stage": "deuterium",
+      "surface_X": 0.6999559082340487,
+      "surface_He3": 7.893466256566835e-05,
+      "neutral_Tbase_K": 26161.084914509625,
+      "ionized_Tbase_K": 26279.02939105541,
+      "interaction_sensitivity_Tbase_K": 26144.642568935302,
+      "metal_relative_change": 0.004508393934395727,
+      "interaction_relative_change": -0.0006285039641151791
+    },
+    {
+      "stage": "main_sequence",
+      "surface_X": 0.6997949344391153,
+      "surface_He3": 0.00023992117743776276,
+      "neutral_Tbase_K": 73095.96920471049,
+      "ionized_Tbase_K": 74257.11329125409,
+      "interaction_sensitivity_Tbase_K": 70820.27727105776,
+      "metal_relative_change": 0.015885199952568207,
+      "interaction_relative_change": -0.03113293329868161
+    },
+    {
+      "stage": "he3_maximum",
+      "surface_X": 0.5635138014289949,
+      "surface_He3": 0.10125693619632108,
+      "neutral_Tbase_K": 80593.71702343148,
+      "ionized_Tbase_K": 82037.18676936586,
+      "interaction_sensitivity_Tbase_K": 77272.17595082754,
+      "metal_relative_change": 0.017910450085267815,
+      "interaction_relative_change": -0.04121339969514315
+    },
+    {
+      "stage": "hydrogen_minimum",
+      "surface_X": 0.17098972004992033,
+      "surface_He3": 0.0005255864516951559,
+      "neutral_Tbase_K": 144555.11508635923,
+      "ionized_Tbase_K": 148170.39336889738,
+      "interaction_sensitivity_Tbase_K": 144441.02808029318,
+      "metal_relative_change": 0.025009687691634586,
+      "interaction_relative_change": -0.0007892284268038452
+    }
+  ],
+  "limitations": [
+    "Original EOS source errors are nonuniform.",
+    "H/He interaction correction and metal ionization require physical uncertainty assessment.",
+    "Trace-D molecular isotope shifts are omitted.",
+    "No mixture phase equilibrium is computed."
+  ]
+}
