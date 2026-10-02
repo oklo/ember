@@ -1,0 +1,72 @@
+{
+  "change": "Dense helium potential has a C2 density weight from 1000 to 3000 g/cm3; the dilute source and all physical guards remain in force.",
+  "restart_identity_changed": true,
+  "saved_structure_and_composition_unchanged": true,
+  "maximum_restart_density_g_cm3": 263.4177189363896,
+  "density_join_derivative_relative_error": 1.02727e-07,
+  "pressure_inversion_relative_error": 2.62568e-13,
+  "phase_weight_derivative_relative_error": 3.89481e-06,
+  "physical_scan": {
+    "successful_states": 362,
+    "unsupported_states": 58,
+    "maximum_relative_changes": {
+      "dP": {
+        "T": "250000",
+        "rho": "1500",
+        "X": "0.001",
+        "Y3": "0.001",
+        "Z": "1e-10",
+        "dP": "-0.0015650610434779777",
+        "dCv": "-0.035804637222721203",
+        "dGradAd": "0.17156354831072584"
+      },
+      "dCv": {
+        "T": "500000",
+        "rho": "1500",
+        "X": "0.029999999999999999",
+        "Y3": "0.001",
+        "Z": "0.13",
+        "dP": "0",
+        "dCv": "0.23439982040744756",
+        "dGradAd": "-0.15818470071025914"
+      },
+      "dGradAd": {
+        "T": "250000",
+        "rho": "1500",
+        "X": "0.001",
+        "Y3": "0.001",
+        "Z": "1e-10",
+        "dP": "-0.0015650610434779777",
+        "dCv": "-0.035804637222721203",
+        "dGradAd": "0.17156354831072584"
+      }
+    }
+  },
+  "crossing": {
+    "start_age_years": 3384844882304.5464,
+    "end_age_years": 3405000000000.0005,
+    "end_central_hydrogen": 0.1958844670797498,
+    "end_effective_temperature_K": 3265.3683462940166,
+    "accepted": 3,
+    "rejected": 1,
+    "CPU_seconds": 173.53368500000002,
+    "wall_seconds": 113.39694762509316,
+    "maximum_accepted_time_error_norm": 0.03329819841690895,
+    "maximum_accepted_first_law_residual": 4.1138043638255795e-08
+  },
+  "checks": [
+    "cold_helium_base with actual source family",
+    "phase_mobility including density-overlap derivatives",
+    "variable_metal_eos",
+    "pms_cn_evolution",
+    "pms_cn_face_evolution",
+    "evolution_controller",
+    "screened_envelope_evolution with installed runtime data"
+  ],
+  "limits": [
+    "The 58 source refusals remain refusals; density weighting does not extend thermal or composition coverage.",
+    "Cold overlap changes to heat capacity are physical-model differences, not measured numerical errors.",
+    "The optional same-composition phase model has a host-coupling cutoff; this work does not validate metal-rich phase equilibrium below that cutoff.",
+    "This is a main-sequence crossing and material-source test, not a completed cold end-to-end evolution."
+  ]
+}

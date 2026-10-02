@@ -72,10 +72,50 @@ int main(){
    // The Sommerfeld electron approximation is never used silently outside kT/eps_F <= 0.05.
    check(throws([&]{cold_helium_material_jets(2.5e6,1e3,comp(0,0,0),1);}),"electron degeneracy guard",0);}
   // 8. Join (needs the production family).
+  {ColdHeliumOptions o;o.mixture_phase=true;
+   std::array<HelmholtzJet,10> reference{};reference[0][0][0]=42.;int calls=0;
+   ColdHeliumTable source=[&](double,double,const Composition&,std::size_t){++calls;return reference;};
+   for(double x:{.21,.20,.199999,.10,.001})for(double r:{10.,500.,1000.}) {
+     const auto c=comp(x,.001,.02);
+     check(cold_helium_joined_jets(source,3e5,r,c,10,o)==reference,"dilute envelope uses only its source",r);
+     check(cold_helium_solid_response(3e5,r,c,o)==std::array<double,6>{},"dilute envelope has no dense phase weight",r);
+   }
+   check(calls==15,"zero density weight avoids cold anchors",calls);}
   if(const char* path=std::getenv("EMBER_COLD_HELIUM_FAMILY")){
     VariableMetalHelmholtzEos production(path,HelmholtzTableEos::Mixture::allow_documented_proxy,
         VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,std::nullopt,VariableMetalHelmholtzEos::IsotopeInterpolation::number_density);
     const ColdHeliumTable table=[&](double T,double r,const Composition& x,std::size_t n){return production.material_jets(T,r,x,n);};
+    {ColdHeliumOptions o;
+     VariableMetalHelmholtzEos joined(path,HelmholtzTableEos::Mixture::allow_documented_proxy,
+         VariableMetalHelmholtzEos::LowMetalInterpolation::quadratic,{},true,o,VariableMetalHelmholtzEos::IsotopeInterpolation::number_density);
+     double derivative=0,inversion=0;
+     for(double X:{.199999,.15,.03,.001})for(double T:{3.5e5,6e5}) {
+       const auto c=comp(X,.001,.02);
+       for(double r:{50.,300.,999.}) {
+         check(joined.material_jets(T,r,c,10)==production.material_jets(T,r,c,10),
+               "physical dilute envelope unchanged across X=0.2",r);
+         joined.validate_composition_domain(T,r,c);
+       }
+       for(double r:{1000.1,1200.,1800.,2600.,2999.9}) {
+         const auto a=joined.material_jets(T,r,c,10);const double h=1e-5;
+         const auto plus=joined.material_jets(T,r*std::exp(h),c,10),minus=joined.material_jets(T,r*std::exp(-h),c,10);
+         for(unsigned k=0;k<10;++k)for(unsigned i=0;i<3;++i)for(unsigned j=0;i+j+(k==0?0:k<4?1:2)<=2;++j) {
+           const double v=a[k][i][j+1];
+           derivative=std::max(derivative,std::abs((plus[k][i][j]-minus[k][i][j])/(2*h)-v)
+               /(constants::R_gas+std::abs(v)));
+         }
+         const auto s=joined.eval(T,r,c);joined.validate_composition_domain(T,r,c);
+         const double guess=r<1100?999.:(r>2900?3001.:r*1.001);
+         inversion=std::max(inversion,std::abs(joined.rho_from_PT(T,s.P,c,guess)/r-1));
+       }
+       for(double r:{999.9,3000.1}) {
+         const auto s=joined.eval(T,r,c);
+         inversion=std::max(inversion,std::abs(joined.rho_from_PT(T,s.P,c,r<1000?1000.1:2999.9)/r-1));
+       }
+     }
+     check(derivative<2e-5,"cold He density-join derivatives",derivative);
+     check(inversion<1e-9,"pressure inversion crosses cold He density joins",inversion);
+     std::cout<<"cold He density-join derivative error "<<derivative<<", inversion error "<<inversion<<'\n';}
     const auto c=comp(6.5e-5,3.3e-7,1.2e-4);const double rho=1.4e4;ColdHeliumOptions o;
     auto b=cold_helium_material_jets(o.join_cold,rho,c);const auto g=cold_helium_alignment_jets(table,o.join_cold,rho,c);
     const auto jc=cold_helium_joined_jets(table,o.join_cold,rho,c),t2=table(o.join_hot,rho,c,10),

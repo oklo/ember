@@ -16,6 +16,9 @@ struct ColdHeliumOptions {
   // above the pure-helium melting temperature; this is not a phase criterion.
   double max_mixture_hydrogen=.20,max_mixture_metals=.16,max_helium_gamma=130;
   double minimum_density=1e3;
+  // Use the tabulated envelope below minimum_density, and join the dense
+  // potential smoothly in ln rho before reaching this density (g/cm3).
+  double density_join_full=3e3;
   double maximum_electron_temperature_ratio=.05;
   double maximum_hydrogen_quantum=4;
   // Dilute hydrogen (mass fraction <= trace_hydrogen) may reach a larger T_p,H/T: its per-ion
@@ -56,8 +59,8 @@ std::array<HelmholtzJet,10> cold_helium_alignment_jets(const ColdHeliumTable&,do
 std::array<HelmholtzJet,10> cold_helium_joined_jets(const ColdHeliumTable&,double T,double rho,
     const Composition&,std::size_t channels=10,const ColdHeliumOptions& = {});
 void cold_helium_validate(double T,double rho,const Composition&,const ColdHeliumOptions& = {});
-// Product of C2 temperature and hydrogen weights; zero returns the original EOS.
-double cold_helium_join_weight(double T,const Composition&,const ColdHeliumOptions& = {});
+// Product of C2 temperature, density and hydrogen weights; zero returns the original EOS.
+double cold_helium_join_weight(double T,double rho,const Composition&,const ColdHeliumOptions& = {});
 // H/He transition: temperature weight 200--300 kK, density weight 300--600 g/cm3.
 // Valid at 100 kK or warmer, rho <= 6000, Z <= 1e-8, and T_p,H/T <= 2.5.
 // Both source anchors and any fractionally weighted source must remain supported.

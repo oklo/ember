@@ -257,6 +257,16 @@ are included once by the surrounding EOS. This is a liquid approximation;
 it does not select crystallization or latent heat.
 
 The temperature join spans 500–800 kK; the hydrogen join spans X = 0.005–0.20.
+The dense contribution is zero below 1000 g/cm³ and rises smoothly to its full
+weight at 3000 g/cm³. This prevents hydrogen depletion from selecting a dense
+EOS in the dilute envelope. Temperature, density and composition derivatives
+all differentiate the same weighted potential; pressure inversions preserve
+the connected source coverage. The physical dense-EOS guards still apply.
+This overlap changes the material model: a sampled comparison with the former
+dense selection gives differences up to 0.1565% in pressure and 23.44% in heat
+capacity. Its cold-envelope consequences require assessment alongside the
+source alignment below. A main-sequence crossing of X = 0.2 is unchanged from
+the tabulated EOS and now completes. [Checks](results/cold_helium_density_oct2.json).
 An alignment term `a(rho, composition) + b(rho, composition)/T` matches the
 two source potentials at both temperature anchors. Its density and composition
 dependence carries model differences below the join, including differences

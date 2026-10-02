@@ -55,10 +55,10 @@ class VariableMetalHelmholtzEos final : public Eos {
   // quantum_ions (the base carries the same Baiko-Chugunov term, so it is present exactly once on each side),
   // is exclusive with cold_potential, and never replaces a failed source query below its window.
   static constexpr const char* cold_helium_identifier=
-      "cold_helium.liquid_mixture.full_anchor.bc22_linear.X005_200.v2";
+      "cold_helium.liquid_mixture.full_anchor.bc22_linear.X005_200.rho1000_3000.v3";
   // Opt-in same-composition phase variant (ColdHeliumOptions::mixture_phase).
   static constexpr const char* cold_helium_phase_identifier=
-      "cold_helium.mixture_softmin.same_composition.common_liquid.width0.005.full_anchor.bc22_linear.X005_200.v4";
+      "cold_helium.mixture_softmin.same_composition.common_liquid.width0.005.full_anchor.bc22_linear.X005_200.rho1000_3000.v5";
   static constexpr const char* dense_transition_identifier=
       "dense_hhe.liquid.bc22.T200_300.rho300_600.full_anchor.v3";
   static constexpr const char* deep_solid_identifier=

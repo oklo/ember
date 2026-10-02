@@ -415,7 +415,7 @@ void VariableMetalHelmholtzEos::validate_composition_domain(double T,double rho,
   // Cold He join: the base limits, and source support wherever the join reads the table (both anchors, and T
   // itself while the weight is fractional), without building the potential.
   if(cold_helium_) {
-    const double w=cold_helium_join_weight(T,c,*cold_helium_);
+    const double w=cold_helium_join_weight(T,rho,c,*cold_helium_);
     if(w>0) {
       cold_helium_validate(T,rho,c,*cold_helium_);
       validate_source_domain(cold_helium_->join_cold,rho,c);validate_source_domain(cold_helium_->join_hot,rho,c);
@@ -474,13 +474,13 @@ std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_impl(d
     }
     return d;
   };
-  const auto source_range=[&](double t) {
-    if(!cold_helium_ || !cold_helium_->dense_transition || t>=3e5 || !rho || *rho<=300.)
-      return raw_range(t,rho);
-    dense_hhe_transition_validate(t,*rho,c,*cold_helium_);
-    const auto a=raw_range(2e5,rho),b=raw_range(3e5,rho);
+  const auto source_range=[&](double t,std::optional<double> guess) {
+    if(!cold_helium_ || !cold_helium_->dense_transition || t>=3e5 || !guess || *guess<=300.)
+      return raw_range(t,guess);
+    dense_hhe_transition_validate(t,*guess,c,*cold_helium_);
+    const auto a=raw_range(2e5,guess),b=raw_range(3e5,guess);
     DensityRange d{std::max({300.,a.min,b.min}),std::min({6e3,a.max,b.max})};
-    if(t<=2e5 && *rho>=600.) {
+    if(t<=2e5 && *guess>=600.) {
       d.min=std::max(d.min,600.);
       // Join the cold component only to the connected supported table interval below it.
       // A masked interval below 600 remains a boundary; it is never crossed by an inversion.
@@ -489,23 +489,47 @@ std::optional<Eos::DensityRange> VariableMetalHelmholtzEos::density_range_impl(d
         if(r.max>=600.)d.min=std::max(a.min,b.min)<=300.?r.min:std::max({a.min,b.min,r.min});
       } catch(const std::domain_error&) { }
     } else {
-      const auto r=raw_range(t,rho);d.min=std::max(d.min,r.min);d.max=std::min(d.max,r.max);
+      const auto r=raw_range(t,guess);d.min=std::max(d.min,r.min);d.max=std::min(d.max,r.max);
       if(std::max(a.min,b.min)<=300.)d.min=r.min;
       if(t<=2e5 && r.max>=600.)d.max=std::min({6e3,a.max,b.max});
     }
     return d;
   };
-  // In the cold He join the table is needed at both anchors, and at T only where the join weight is fractional.
-  if(cold_helium_ && cold_helium_join_weight(T,c,*cold_helium_)>0) {
-    std::vector<double> temperatures{cold_helium_->join_cold,cold_helium_->join_hot};
-    if(cold_helium_join_weight(T,c,*cold_helium_)<1)temperatures.push_back(T);
-    result.min=cold_helium_->minimum_density;
-    for(const double t:temperatures){const auto r=source_range(t);
-      result.min=std::max(result.min,r.min);result.max=std::min(result.max,r.max);}
-    if(result.min>=result.max)throw std::domain_error("variable EOS: empty cold He join density overlap");
+  // The dilute source, density overlap and dense source form separate pieces.
+  // Join only touching supported intervals; a masked gap must not become an
+  // admissible pressure-inversion bracket.
+  if(cold_helium_ && cold_helium_join_weight(T,cold_helium_->density_join_full,c,*cold_helium_)>0) {
+    const auto& o=*cold_helium_;
+    const double boundary[2]={o.minimum_density,o.density_join_full};
+    const double thermal_weight=cold_helium_join_weight(T,o.density_join_full,c,o);
+    const auto piece=[&](int part,std::optional<double> guess) {
+      DensityRange d{part==0?0:boundary[part-1],part==2?std::numeric_limits<double>::infinity():boundary[part]};
+      auto intersect=[&](double t) {const auto r=source_range(t,guess);
+        d.min=std::max(d.min,r.min);d.max=std::min(d.max,r.max);};
+      if(part>0){intersect(o.join_cold);intersect(o.join_hot);}
+      if(part<2||thermal_weight<1)intersect(T);
+      if(d.min>=d.max)throw std::domain_error("variable EOS: empty cold He join density overlap");
+      return d;
+    };
+    const int part=rho?(*rho<=boundary[0]?0:(*rho<boundary[1]?1:2)):2;
+    result=piece(part,rho);
+    for(int p=part-1;p>=0;--p) {
+      if(result.min>boundary[p])break;
+      try{const auto r=piece(p,std::nextafter(boundary[p],0.));
+        if(r.max<result.min)break;
+        result.min=r.min;
+      }catch(const std::domain_error&){break;}
+    }
+    for(int p=part+1;p<=2;++p) {
+      if(result.max<boundary[p-1])break;
+      try{const auto r=piece(p,std::nextafter(boundary[p-1],std::numeric_limits<double>::infinity()));
+        if(r.min>result.max)break;
+        result.max=r.max;
+      }catch(const std::domain_error&){break;}
+    }
     return result;
   }
-  result=source_range(T);
+  result=source_range(T,rho);
   if(cold_ && T<cold_zero_temperature && result.max>cold_density_start){
     if(T<cold_->minimum_temperature()||c.Z()>.04)result.max=cold_density_start;
     else {
