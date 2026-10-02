@@ -50,6 +50,16 @@ Version 1 requires the following keys; paths are relative to the configuration:
   `coupling_abundance_tolerance`, `inventory_abundance_tolerance`, and
   `version` (set to `1`).
 
+`coupling_abundance_tolerance` accepts values up to `1e-10`. It controls the
+structure/composition iteration and the associated local species solve and
+continuity checks. It does not change `inventory_abundance_tolerance`, the
+final structure check, heat/energy accounting, or timestep error control.
+The setting is part of the restart identity. Choose it using comparisons at
+the same evolved age; an absolute abundance tolerance is not a relative
+accuracy guarantee for rare species.
+A [cold-model comparison](results/cold_species_tolerance_oct1_v1.json) records
+the measured agreement and the limits of the cost estimate.
+
 For screened-core transport, optional `screened_heat_lower_T_K` separates the
 start of the heat-law transition from the lower temperature limit of the
 microscopic species law. It defaults to `screened_minimum_T_K` and must lie

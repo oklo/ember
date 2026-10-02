@@ -1,0 +1,52 @@
+{
+  "configuration_change": {
+    "coupling_abundance_tolerance": [
+      1e-12,
+      1e-10
+    ]
+  },
+  "unchanged": [
+    "physical equations and tables",
+    "global inventory tolerance 1e-14",
+    "final structure verification",
+    "material heat and energy checks",
+    "step-doubling acceptance"
+  ],
+  "affected": [
+    "outer composition convergence",
+    "inner species stopping threshold",
+    "local species continuity allowance"
+  ],
+  "matched_10_Myr": {
+    "control_CPU_seconds": 360.498533,
+    "candidate_CPU_seconds": 214.36388499999998,
+    "control_wall_seconds": 225.45257283374667,
+    "candidate_wall_seconds": 138.4795577917248,
+    "max_log_structure_difference": 1.6104326761023913e-09,
+    "max_absolute_abundance_difference": 9.998163408297955e-10,
+    "max_luminosity_profile_difference_over_peak": 1.218898775303717e-06,
+    "convective_summary_equal": true
+  },
+  "longer_test": {
+    "candidate_reached_30_Myr": true,
+    "control_initial_budget_reached_Myr": 25.41992187451172,
+    "interpolated_global_history_relative_differences": {
+      "Teff_K": 1.2603651131903568e-09,
+      "luminosity_Lsun": 7.392647776475289e-09,
+      "radius_Rsun": 1.834678351507814e-11,
+      "central_T_K": 5.351653098883583e-09,
+      "central_density_g_cm3": 1.9846824793557097e-11,
+      "H_mass_g": 4.558292355619377e-16,
+      "He3_mass_g": 8.307858126907718e-16,
+      "He3_peak": 5.5415865954002734e-09,
+      "convective_mass_fraction": 0.0
+    },
+    "scope": "Global history comparison at control saved ages, linearly interpolating the candidate. Not a matched-checkpoint profile comparison or full interval speed ratio."
+  },
+  "limits": [
+    "Measured on a cold model near 656 K, not a full-lifetime speed measurement.",
+    "The 30 Myr control initially stopped at its CPU allowance; no equal-duration speed ratio is claimed.",
+    "Interpolated history comparisons do not establish local-profile convergence.",
+    "Absolute abundance tolerance is not relative accuracy for rare species."
+  ]
+}

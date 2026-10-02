@@ -339,7 +339,7 @@ int lifetime_main(int argc,char** argv) {
     if(!(mass>0 && radius>0 && teff>0 && entropy_loss>0 && dt>0 && maximum_dt>=dt && minimum_temperature>0
         && count>=128 && count<=8192 && std::floor(count)==count && threads>=1 && threads<=16 && std::floor(threads)==threads
         && structure_tolerance>0 && structure_tolerance<=1e-3 && species_tolerance>0 && species_tolerance<=1e-4
-        && energy_tolerance>0 && energy_tolerance<=.01 && abundance_tolerance>0 && abundance_tolerance<=1e-12
+        && energy_tolerance>0 && energy_tolerance<=.01 && abundance_tolerance>0 && abundance_tolerance<=1e-10
         && inventory_tolerance>0 && inventory_tolerance<=std::min(1e-12,.01*species_tolerance)))
       throw std::invalid_argument("lifetime physical or accuracy setting out of range");
     const auto points=static_cast<std::size_t>(count);
