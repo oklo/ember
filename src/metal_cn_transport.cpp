@@ -13,6 +13,42 @@ namespace ember {
 namespace {
 using V=MetalCNVector;using M=MetalCNMatrix;
 using detail::independent_evaluations;
+// Separate total-metal transport from redistribution among C, N and inert mass.
+// This exact change of variables removes repeated large d(flux)/dZ columns
+// before finite storage is added to the diffusion blocks.
+V total_metal_coordinates(const V& x) {
+  return {x[0],x[1],x[2]+x[3]+x[4]+x[5],x[2],x[3],x[4],x[6]};
+}
+V isotope_coordinates(const V& x) {
+  return {x[0],x[1],x[3],x[4],x[5],x[2]-x[3]-x[4]-x[5],x[6]};
+}
+M total_metal_matrix(const M& a) {
+  M columns{},result{};
+  for(std::size_t i=0;i<METAL_CN_SIZE;++i)
+    columns[i]={a[i][0],a[i][1],a[i][5],a[i][2]-a[i][5],a[i][3]-a[i][5],a[i][4]-a[i][5],a[i][6]};
+  for(std::size_t j=0;j<METAL_CN_SIZE;++j) {
+    V col{};for(std::size_t i=0;i<METAL_CN_SIZE;++i)col[i]=columns[i][j];
+    col=total_metal_coordinates(col);
+    for(std::size_t i=0;i<METAL_CN_SIZE;++i)result[i][j]=col[i];
+  }
+  return result;
+}
+std::vector<V> solve_metal_chain(std::span<const M> E,std::span<const M> A,
+    std::span<const M> B,std::span<const V> b,std::span<const V> d,
+    std::vector<V>* face_fluxes=nullptr) {
+  auto matrices=[](std::span<const M> input) {
+    std::vector<M> out;out.reserve(input.size());for(const auto& m:input)out.push_back(total_metal_matrix(m));return out;
+  };
+  auto vectors=[](std::span<const V> input) {
+    std::vector<V> out;out.reserve(input.size());for(const auto& v:input)out.push_back(total_metal_coordinates(v));return out;
+  };
+  const auto e=matrices(E),a=matrices(A),bb=matrices(B);const auto rhs=vectors(b),offset=vectors(d);
+  auto answer=detail::solve_flux_chain<METAL_CN_SIZE>(e,a,bb,rhs,offset,face_fluxes);
+  for(auto& v:answer)v=isotope_coordinates(v);
+  if(face_fluxes)for(auto& v:*face_fluxes)v=isotope_coordinates(v);
+  return answer;
+}
+
 void check(const Composition& c,const Composition& reference) {
   if(!c.cn_molality || c.cn_mass_convention!=CNMassConvention::explicit_metal_mass
       || c.basis!=AbundanceBasis::baryon_mass || c.metal_inventory!=MetalInventory::gs98)
@@ -233,7 +269,7 @@ MetalCNTransportResult burn_metal_cn_and_diffuse(const Model& thermal,const Mode
     auto rhs=value.residual;std::vector<V> offset(n-1);
     if(!linear_mixing) {
       for(auto& row:rhs)for(double& x:row)x=-x;
-      return detail::solve_flux_chain<METAL_CN_SIZE>(jacobian.E,jacobian.A,jacobian.B,rhs,offset);
+      return solve_metal_chain(jacobian.E,jacobian.A,jacobian.B,rhs,offset);
     }
     // Solve for the absolute next state. The linear mixing flux has exactly
     // zero affine offset; forming it by subtracting its large face residuals
@@ -247,7 +283,7 @@ MetalCNTransportResult burn_metal_cn_and_diffuse(const Model& thermal,const Mode
       const auto right=detail::flux_product(jacobian.faces[i].dright,at[i+1]);
       for(std::size_t k=0;k<METAL_CN_SIZE;++k)offset[i][k]=factor*(value.faces[i].rate[k]-left[k]-right[k]);
     }
-    auto destination=detail::solve_flux_chain<METAL_CN_SIZE>(jacobian.E,jacobian.A,jacobian.B,rhs,offset,conserved_flux);
+    auto destination=solve_metal_chain(jacobian.E,jacobian.A,jacobian.B,rhs,offset,conserved_flux);
     for(std::size_t i=0;i<n;++i)for(std::size_t k=0;k<METAL_CN_SIZE;++k)destination[i][k]-=at[i][k];
     return destination;
   };

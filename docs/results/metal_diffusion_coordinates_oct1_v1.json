@@ -1,0 +1,61 @@
+{
+  "scope": "Exact change of diffusion variables; unchanged equations, composition, physics and tolerances.",
+  "source_before": "68f894b",
+  "captured_matrix_sha256": "51a7412eeaa2bd9cad4a2f169ad638edfa424d497401866d1003a3801066f8c7",
+  "high_precision": {
+    "precision_decimal_digits": 80,
+    "CPU_seconds": 0.293761,
+    "maximum_absolute_error": 5.048709793414476e-29,
+    "maximum_relative_to_species_peak": 9.301701541717673e-16,
+    "species_peak": [
+      7.502248923482307e-14,
+      7.498415630947828e-14,
+      1.6674147214924176e-20,
+      5.6615605951934004e-21,
+      1.568257228249959e-17,
+      4.744539922726181e-17,
+      1e-300
+    ],
+    "absolute_error": [
+      5.048709793414476e-29,
+      2.524354896707238e-29,
+      3.009265538105056e-36,
+      5.266214691683848e-36,
+      6.162975822039155e-33,
+      1.5407439555097887e-32,
+      0.0
+    ]
+  },
+  "regression": {
+    "old_failures": 1,
+    "new_checks": 561,
+    "new_failures": 0
+  },
+  "overlap": {
+    "duration_years": 5000000.0,
+    "max_log_structure_error": 4.272138198757602e-12,
+    "max_absolute_abundance_error": 1.587618925213974e-14,
+    "luminosity_error_relative_to_peak": 6.774678700214475e-10
+  },
+  "runs": {
+    "blocked": {
+      "CPU_seconds": 145.408165,
+      "wall_seconds": 50.70146070793271,
+      "accepted": 1,
+      "rejected": 0
+    },
+    "overlap_control": {
+      "CPU_seconds": 148.019021,
+      "wall_seconds": 84.89031637553126,
+      "accepted": 1,
+      "rejected": 0
+    },
+    "overlap_candidate": {
+      "CPU_seconds": 152.947401,
+      "wall_seconds": 87.58267495874316,
+      "accepted": 1,
+      "rejected": 0
+    }
+  },
+  "passed": true
+}

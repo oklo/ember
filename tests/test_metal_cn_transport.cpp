@@ -183,6 +183,34 @@ int main() {
       check(same,"uniform warm start preserves trace composition");
     }catch(const std::exception& e){std::printf("trace warm start: %s\n",e.what());check(false,"uniform trace warm start succeeds");}
   }
+  // Steep gradients in vanishing metals make the chemical-potential
+  // derivative large even though the actual mass flux is negligible.
+  // Keep every trace species, including its isotope ratios, without a floor.
+  {
+    auto trace=model;
+    for(std::size_t i=0;i<trace.size();++i) {
+      auto v=metal_cn_abundances(left);const double z=i==1?1e-48:1e-30;
+      double old_z=0;for(std::size_t k=2;k<6;++k)old_z+=v[k];
+      for(std::size_t k=2;k<6;++k)v[k]*=z/old_z;
+      v[0]=.99;v[1]=1e-4;trace.comp[i]=metal_cn_composition(left,v);
+      trace.y[i].lnT=std::log(1e4);trace.y[i].lnrho=0;
+    }
+    const MetalCNFlux flux=[](std::size_t,const Composition& a,const Composition& b,bool derivatives) {
+      const double za=a.Z(),zb=b.Z(),gradient=std::log(za/zb),mean=.5*(za+zb);
+      MetalSpeciesFaceResponse f;f.rate[2]=mean*gradient;f.rate[0]=-f.rate[2];
+      f.dleft[2][2]=.5*gradient+mean/za;f.dright[2][2]=.5*gradient-mean/zb;
+      f.dleft[0][2]=-f.dleft[2][2];f.dright[0][2]=-f.dright[2][2];
+      return common_metal_cn_flux(f,a,b,derivatives);
+    };
+    try {
+      const auto result=burn_metal_cn_and_diffuse(trace,trace,nuclear,{{0,1},{1,2},{2,3}},flux,1.);
+      for(std::size_t i=0;i<trace.size();++i) {
+        const auto x=metal_cn_abundances(result.composition[i]);
+        for(std::size_t k=2;k<6;++k)check(x[k]>0 && x[k]<1e-28,"trace metals retained without a floor");
+      }
+      for(double b:result.integrated_balance)check(std::abs(b)<1e-14,"trace chemical-potential flux conserves material",b);
+    } catch(const std::exception& e) {std::printf("trace gradient: %s\n",e.what());check(false,"extreme trace-metal gradient has a nonsingular solve");}
+  }
   const auto path=std::filesystem::temp_directory_path()/"ember-metal-cn-checkpoint-test.restart";
   check(!std::filesystem::exists(path),"checkpoint test uses a new file");
   driver::Checkpoint state{model,1.,1,0};driver::Selections selections{"metal-cn","a","b","c","d"};driver::Identities identities{{"executable","test-only"}};

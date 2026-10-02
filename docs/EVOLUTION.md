@@ -31,6 +31,11 @@ radiative regions retain local abundances and microscopic transport. Positivity,
 isotope inventories and the discrete first law are checked independently.
 Conservation accuracy is distinct from spatial and time accuracy.
 
+The metal diffusion solve separates total metal abundance from its isotope
+shares before eliminating matrix blocks. This change of variables preserves
+the equations and prevents nearly identical derivatives in depleted layers
+from erasing finite mass terms. No abundance floor is introduced.
+
 The controller compares a full step with two half steps. Optional Richardson
 extrapolation is accepted only with its physical and accounting checks; otherwise
 it retains the two-half-step state. An abundance-change cap supplements the
