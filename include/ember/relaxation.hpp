@@ -17,6 +17,9 @@ struct RelaxationOptions {
   // Opt-in parallel zone evaluation. All supplied physics providers must
   // permit concurrent const evaluation. Boundaries and reductions stay serial.
   std::size_t zone_threads{1};
+  // Optional global thermal-balance stopping check, relative to surface L.
+  // Applied for time-dependent solves; zero keeps the local checks alone.
+  double luminosity_balance_tolerance{};
 };
 
 struct RelaxationIteration {
@@ -28,6 +31,7 @@ struct RelaxationResult {
   bool converged{};
   std::size_t iterations{};  // accepted Newton updates
   double residual{}, correction{std::numeric_limits<double>::infinity()};
+  double luminosity_balance{};
   std::string message;
   std::vector<RelaxationIteration> history;
 };

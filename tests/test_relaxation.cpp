@@ -1,6 +1,7 @@
 #include "ember/boundary.hpp"
 #include "ember/eos_composite.hpp"
 #include "ember/relaxation.hpp"
+#include "ember/evolution.hpp"
 #include "../examples/radiative_polytrope.hpp"
 #include <algorithm>
 #include <cmath>
@@ -127,6 +128,33 @@ int main() {
       check(distance(dynamic.model, r.model) < 1e-7,
             "an equilibrium stays fixed under a thermal step", distance(dynamic.model, r.model));
       check(dynamic.model.age == perturbed.age, "relaxation does not advance age or claim a time integrator");
+
+      auto trial=r.model;
+      for(auto& point:trial.y)point.L*=1+5e-6;
+      RelaxationOptions loose;loose.residual_tolerance=loose.correction_tolerance=1e-3;
+      loose.max_iterations=0;
+      const auto local_only=relax(trial,p,benchmark.atmosphere,loose,1e12,&r.model);
+      check(local_only.converged && std::abs(local_only.luminosity_balance)>4e-6,
+            "local stopping tests can leave a resolved global energy residual");
+      loose.luminosity_balance_tolerance=1e-9;
+      const auto incomplete=relax(trial,p,benchmark.atmosphere,loose,1e12,&r.model);
+      check(!incomplete.converged && incomplete.iterations==0,
+            "energy stopping check refuses an unfinished thermal solve");
+      loose.max_iterations=10;
+      const auto balanced=relax(trial,p,benchmark.atmosphere,loose,1e12,&r.model);
+      long double power=0;const auto weights=nodal_mass_weights(balanced.model);
+      for(std::size_t i=0;i<balanced.model.size();++i) {
+        const auto& m=balanced.model;
+        const auto e=p.eos->eval(m.T(i),m.rho(i),m.comp[i]);
+        const auto old=p.eos->eval(r.model.T(i),r.model.rho(i),r.model.comp[i]);
+        power+=weights[i]*(p.nuclear->eval(m.T(i),m.rho(i),m.comp[i]).eps
+            -(e.E-old.E+e.P*(1/m.rho(i)-1/r.model.rho(i)))/1e12);
+      }
+      const double imbalance=static_cast<double>(power/balanced.model.y.back().L-1);
+      check(balanced.converged && std::abs(imbalance)<1e-9,
+            "extra Newton correction satisfies independently integrated first law",imbalance);
+      check(std::abs(imbalance-balanced.luminosity_balance)<1e-12,
+            "assembled energy residual matches the physical global balance");
     }
   }
 

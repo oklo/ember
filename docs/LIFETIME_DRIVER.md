@@ -447,6 +447,19 @@ returned composition still passes a structure residual and correction check.
 optionally control the fixed-composition Newton solves (defaults 1e-9 and 1e-8).
 They also must remain at least 100 times below the temporal structure target.
 The separate final structure checks and conservation audits still apply.
+Optional `structure_luminosity_balance_tolerance` also requires the sum of the
+thermal equations to close within that fraction of surface luminosity before
+a time-dependent Newton solve stops. Zero disables this additional stopping
+check; positive values must not exceed the driver's 2e-7 first-law limit.
+It does not change the equations, line-search merit or independent audit.
+This can prevent discarding an otherwise accurate timestep when one more
+Newton correction would satisfy energy conservation. In a matched 10,000-yr
+Hayashi control, selecting 5e-8 reduced 19 accepted steps and 11 rejections to
+five accepted steps without rejection, with a 3.902-fold CPU improvement.
+Global structural differences stayed below 0.02850%; the weak nuclear source
+changed by 0.1869% relative, or 2.126e-6 of surface luminosity. These are finite
+timestep differences, not a whole-lifetime accuracy guarantee.
+[Control](results/hayashi_energy_stop_oct2_v1.json).
 Omitting these settings retains the previous stopping criteria. Selected values
 enter the restart identity; the driver requires them to remain smaller than
 the corresponding time-discretization tolerances. Each final structure check

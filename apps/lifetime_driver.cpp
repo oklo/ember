@@ -240,6 +240,9 @@ int lifetime_main(int argc,char** argv) {
     const double verification_correction=optional_number("verification_correction_tolerance");
     const double inner_residual=optional_number("structure_inner_residual_tolerance");
     const double inner_correction=optional_number("structure_inner_correction_tolerance");
+    const double structure_balance=optional_number("structure_luminosity_balance_tolerance");
+    if(!std::isfinite(structure_balance) || structure_balance<0 || structure_balance>2e-7)
+      throw std::invalid_argument("structure luminosity tolerance must not exceed the interval energy audit");
     for(double t:{inner_residual,inner_correction})
       if(!std::isfinite(t) || t<0 || t>1e-2*structure_tolerance)
         throw std::invalid_argument("inner structure tolerance must remain below time accuracy");
@@ -432,6 +435,7 @@ int lifetime_main(int argc,char** argv) {
       identity.values["transport.fingering_oscillation"]=oscillation_selection+".phase_response.v1";
     if(inner_residual>0)identity.number("solver.structure_inner_residual_tolerance",inner_residual);
     if(inner_correction>0)identity.number("solver.structure_inner_correction_tolerance",inner_correction);
+    if(structure_balance>0)identity.number("solver.structure_luminosity_balance_tolerance",structure_balance);
     if(mixing_mode!=ConvectiveMixing::instantaneous)
       identity.number("convection.instantaneous_mixing_below_T_K",instantaneous_below);
     if(screened_core) {
@@ -680,6 +684,7 @@ int lifetime_main(int argc,char** argv) {
     EvolutionOptions options;options.relaxation.zone_threads=static_cast<std::size_t>(threads);options.abundance_tolerance=abundance_tolerance;
     if(inner_residual>0)options.relaxation.residual_tolerance=inner_residual;
     if(inner_correction>0)options.relaxation.correction_tolerance=inner_correction;
+    options.relaxation.luminosity_balance_tolerance=structure_balance;
     options.linearized_burning=linearized_burning==1;
     options.max_abundance_change=abundance_cap;
     options.abundance_cap_after_mixing=cap_after_mixing==1;

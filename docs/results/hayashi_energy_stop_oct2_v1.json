@@ -1,0 +1,39 @@
+{
+  "scope": "Same fresh Hayashi initial configuration and executable; 2 threads; optional energy stopping check off vs 5e-8; no audit or time tolerance changed",
+  "age_years": 10000,
+  "relative_difference": {
+    "radius_Rsun": 0.00010388725711374391,
+    "Teff_K": -8.307849783117938e-06,
+    "luminosity_Lsun": 0.00017454741686639963,
+    "central_T_K": -9.494878597104961e-05,
+    "central_density_g_cm3": -0.00028498420882527853,
+    "H_mass_g": -3.149702720861569e-12,
+    "He3_mass_g": 1.8979273241903627e-07,
+    "D_mass_g": -1.5001868236552696e-07,
+    "nuclear_fraction": -0.0018691946212864297
+  },
+  "nuclear_difference_in_surface_luminosity": -2.1259929036268576e-06,
+  "CPU_seconds": {
+    "control": 417.61699000000004,
+    "balanced": 107.03591
+  },
+  "wall_seconds": {
+    "control": 320.198090583086,
+    "balanced": 85.02685891650617
+  },
+  "CPU_speedup": 3.9016530994130854,
+  "wall_speedup": 3.765846400341696,
+  "audit": {
+    "control": {
+      "accepted": 19,
+      "rejected": 11,
+      "max_first_law_accepted": 1.7507220961832104e-07
+    },
+    "balanced": {
+      "accepted": 5,
+      "rejected": 0,
+      "max_first_law_accepted": 4.59684188491849e-08
+    }
+  },
+  "full_track_validated": false
+}

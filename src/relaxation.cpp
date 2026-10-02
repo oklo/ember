@@ -15,6 +15,7 @@ struct System {
   BoundaryBlock inner, outer;
   std::vector<ZoneResidual> zones;
   double norm{};
+  double luminosity_balance{};
 };
 
 void validate(const Model& m, const Physics& p, const RelaxationOptions& o, double dt, const Model* prev) {
@@ -41,6 +42,8 @@ void validate(const Model& m, const Physics& p, const RelaxationOptions& o, doub
   if (o.max_backtracks == 0) throw std::invalid_argument("relax: at least one line-search trial is required");
   if (o.zone_threads == 0 || o.zone_threads > 64)
     throw std::invalid_argument("relax: zone thread count must be between 1 and 64");
+  if(!std::isfinite(o.luminosity_balance_tolerance) || o.luminosity_balance_tolerance<0)
+    throw std::invalid_argument("relax: invalid luminosity-balance tolerance");
 }
 
 System assemble(const Model& m, const Physics& p, const Atmosphere& atmosphere,
@@ -50,6 +53,7 @@ System assemble(const Model& m, const Physics& p, const Atmosphere& atmosphere,
   const auto inner = central_residual(m, p, dt, prev);
   const auto outer = surface_residual(m.y.back(), m.M, m.comp.back(), *p.eos, atmosphere, jacobian);
   s.inner = {inner.f, inner.dfdy}; s.outer = {outer.f, outer.dfdy};
+  long double energy_residual=inner.f[1];
   s.inner.f[1] /= Lunit.front();
   for (double& v : s.inner.dfdy[1]) v /= Lunit.front();
   for (std::size_t k = 0; k < 2; ++k) {
@@ -82,6 +86,7 @@ System assemble(const Model& m, const Physics& p, const Atmosphere& atmosphere,
     if (!evaluated.empty()) z = evaluated[i];
     else if (jacobian) z = zone_residual(m, i, p, dt, prev);
     else z.f = zone_equations(m, i, p, dt, prev);
+    energy_residual+=static_cast<long double>(energy_interval_mass(m,i))*z.f[2];
     const double dm = m.m[i + 1] - m.m[i];
     for (std::size_t k = 0; k < NVAR; ++k) {
       const double scale = k == 2 ? energy_interval_mass(m,i) / std::max(Lunit[i], Lunit[i + 1]) : dm;
@@ -98,6 +103,7 @@ System assemble(const Model& m, const Physics& p, const Atmosphere& atmosphere,
     if (jacobian) s.zones.push_back(z);
   }
   if (!std::isfinite(s.norm)) throw std::domain_error("relax: non-finite scaled residual");
+  s.luminosity_balance=-static_cast<double>(energy_residual/m.y.back().L);
   return s;
 }
 } // namespace
@@ -123,6 +129,7 @@ RelaxationResult relax(const Model& initial, const Physics& p, const Atmosphere&
   for (;;) {
     const auto system = assemble(result.model, p, atmosphere, Lunit, dt, prev, true,options.zone_threads);
     result.residual = system.norm;
+    result.luminosity_balance=system.luminosity_balance;
     result.correction = std::numeric_limits<double>::infinity();
     HenyeyCorrection correction;
     try { correction = solve_henyey(system.inner, system.zones, system.outer); }
@@ -136,7 +143,10 @@ RelaxationResult relax(const Model& initial, const Physics& p, const Atmosphere&
       L_step = std::max(L_step, std::abs(dy[3]));
     }
     result.correction = std::max(log_step, L_step);
-    if (result.residual <= options.residual_tolerance && result.correction <= options.correction_tolerance) {
+    const bool balanced=dt<=0 || options.luminosity_balance_tolerance==0
+        || std::abs(result.luminosity_balance)<=options.luminosity_balance_tolerance;
+    if (result.residual <= options.residual_tolerance && result.correction <= options.correction_tolerance
+        && balanced) {
       result.converged = true; result.message = "converged";
       result.history.push_back({result.residual, result.correction, 0.0, correction.backward_error});
       return result;
