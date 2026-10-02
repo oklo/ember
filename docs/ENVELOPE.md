@@ -50,6 +50,51 @@ integrations for one mass and envelope depth. Neither option extrapolates throug
 missing cells or outside composition coverage. These alternatives retain the
 same evolution program and require their own physical and interpolation checks.
 
+An optional Gibbs-potential source supplies density and all thermal derivatives
+from the same function of temperature and pressure:
+
+```text
+envelope_eos "gibbs_hhe"
+envelope_gibbs_hydrogen "hydrogen.dat"
+envelope_gibbs_helium "helium.dat"
+envelope_gibbs_hydrogen_warm "hydrogen_warm.dat"
+envelope_gibbs_helium_warm "helium_warm.dat"
+envelope_mass_fraction "0.00015"
+```
+
+This selection requires `envelope_metals "reject"` or its default, without
+`envelope_source`. The current mixture is assessed only for hydrogen mass
+fraction X>=0.985, Z<=1e-12 and no deuterium. It combines component potentials
+at common gas pressure, converts atomic to baryon mass, uses a number-density
+He3 proxy and adds radiation once. It does not calculate phase separation.
+This restricted mixture cannot yet start a solar-composition Hayashi run.
+
+Each `EMBER_GIBBS_GAS_V1` file records the spline degree, knot vectors in ln T
+and ln gas pressure, row-major coefficients of G/(R T), the original source
+axes, and a Boolean source mask. Each numeric vector begins with its length;
+the mask has one entry per source-grid node. Coefficients refer to atomic mass
+and CGS units. Queries need a supported source cell and must remain within the
+fitted potential. Warm joins must preserve the potential and its first two
+derivatives. The four table hashes enter restart identity and runtime packaging.
+
+`envelope_integration_tolerance` selects checked implicit integration when
+positive; its default is 1e-7 for `gibbs_hhe` and zero for the existing methods.
+The implicit solver brackets temperature, falls back to bisection, and compares
+a full pressure step with two half-steps. Negative thermal expansion uses the
+signed buoyancy test; an outward-radiating stable layer remains radiative.
+The integration method and tolerance enter restart identity. Their existence
+does not validate a physical table or justify changing an evolved star's boundary
+without assessing its earlier evolution.
+
+Analytic tests check mass conventions, radiation, caloric energy, entropy
+derivatives, missing cells and component joins. Seven complete envelopes from
+656 to 4500 K agree with the independently assessed implementation within
+4.435e-9. A bracketed secant solve reduces their CPU cost from 58.81 to 12.56 s.
+An 8 Myr control with the existing EOS retains four accepted intervals and no
+rejections; maximum global differences are below 3.841e-12. These checks validate
+the implementation and preservation of the existing calculation, not the full
+physical accuracy of the new tables. [Checks](results/gibbs_envelope_oct2_v1.json).
+
 A complete fresh Hayashi-to-cold-white-dwarf calculation remains under validation.
 Cool molecular chemistry, nonideal atmospheres and strong quantum effects are
 not established by the existence of this boundary solver.

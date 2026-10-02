@@ -80,7 +80,7 @@ double EnvelopeSource::lnrho_from(double lnT, double lnP, double X, double Y3, d
 
 EnvelopeAtmosphere::EnvelopeAtmosphere(const Atmosphere& top, const Opacity& opacity, const EnvelopeSource& source,
     double alpha_mlt, double total_mass, double envelope_mass, double steps_per_unit_lnP, EnvelopeMetals metals)
-    : top_(top), opacity_(opacity), source_(&source), metals_(metals), alpha_(alpha_mlt), M_(total_mass), dM_(envelope_mass), per_unit_(steps_per_unit_lnP) {
+    : top_(top), opacity_(opacity), table_source_(std::in_place,source,metals), thermodynamics_(&*table_source_), alpha_(alpha_mlt), M_(total_mass), dM_(envelope_mass), per_unit_(steps_per_unit_lnP) {
   require(alpha_ > 0 && M_ > 0 && dM_ > 0 && dM_ < 0.05 * M_ && per_unit_ >= 10, "invalid envelope parameters");
 }
 
@@ -91,9 +91,22 @@ EnvelopeAtmosphere::EnvelopeAtmosphere(const Atmosphere& top, const Opacity& opa
   require(alpha_>0 && M_>0 && dM_>0 && dM_<.05*M_ && per_unit_>=10,"invalid envelope parameters");
 }
 
+EnvelopeAtmosphere::EnvelopeAtmosphere(const Atmosphere& top,const Opacity& opacity,
+    const EnvelopeThermodynamics& source,double alpha_mlt,double total_mass,
+    double envelope_mass,double steps_per_unit_lnP)
+    :top_(top),opacity_(opacity),thermodynamics_(&source),alpha_(alpha_mlt),
+     M_(total_mass),dM_(envelope_mass),per_unit_(steps_per_unit_lnP) {
+  require(alpha_>0 && M_>0 && dM_>0 && dM_<.05*M_ && per_unit_>=10,"invalid envelope parameters");
+}
+
+void EnvelopeAtmosphere::integration_tolerance(double tolerance) {
+  require(std::isfinite(tolerance) && tolerance>=0 && tolerance<=1e-3,"invalid integration tolerance");
+  integration_tolerance_=tolerance;
+}
+
 EnvelopeSource::PressureState EnvelopeAtmosphere::at_pressure(double lnT,double lnP,
     const Composition& c,double& guess) const {
-  if(source_)return source_->at_pressure(lnT,lnP,c,guess,metals_);
+  if(thermodynamics_)return thermodynamics_->at_pressure(lnT,lnP,c,guess);
   const double T=std::exp(lnT),P=std::exp(lnP);
   const double rho=eos_->rho_from_PT(T,P,c,std::exp(guess));guess=std::log(rho);
   const auto state=eos_->eval(T,rho,c);
@@ -172,30 +185,87 @@ EnvelopeSurface EnvelopeAtmosphere::integrate(double Teff, double R, const Compo
     const double kappa = opacity_.eval(T, rho, c).kappa, g = G * enclosed_mass / (y[1] * y[1]);
     const double grad_rad = 3 * kappa * L * P / (16 * M_PI * a_rad * c_light * G * enclosed_mass * T * T * T * T);
     EosState st{}; st.P = P; st.cp = s.cp; st.delta = s.delta;
-    const double U = mixing_length_U(T, rho, kappa, g, st, alpha_);
-    const double grad = ledoux_mixing_length_gradient(grad_rad, s.grad_ad, 0., U).grad;
+    double grad;
+    if(s.delta<=0) {
+      require(s.delta*(grad_rad-s.grad_ad)<=0,"negative-expansion convection is not supported");
+      grad=grad_rad;
+    } else {
+      const double U=mixing_length_U(T,rho,kappa,g,st,alpha_);
+      grad=ledoux_mixing_length_gradient(grad_rad,s.grad_ad,0.,U).grad;
+    }
     const double drdlp = -P / (rho * g);
     return std::array<double,3>{grad, drdlp, -4 * M_PI * y[1] * y[1] * rho * drdlp};
   };
-  auto step = [&](double lp, const std::array<double,3>& y, double h, double& guess) {
+  auto step = [&](double lp, const std::array<double,3>& y, double dlnp, double& guess) {
+    if(integration_tolerance_>0) {
+      // At an unresolved but continuous buoyancy transition, a temperature
+      // bracket bounds the implicit root even when the evaluated residual
+      // jumps across zero between adjacent representable temperatures.
+      auto candidate=[&](double t) {
+        std::array<double,3> next{t,y[1],y[2]};
+        for(int it=0;it<20;++it) {
+          const auto rate=rhs(lp+dlnp,next,guess);
+          const double r=y[1]+dlnp*rate[1],m=y[2]+dlnp*rate[2];
+          const double err=std::max(std::abs(r-next[1])/R,std::abs(m-next[2])/target);
+          next[1]=r;next[2]=m;if(err<1e-13)break;
+          if(it==19)throw std::domain_error("implicit envelope geometry limit");
+        }
+        return std::pair{next,t-y[0]-dlnp*rhs(lp+dlnp,next,guess)[0]};
+      };
+      double lo=y[0];auto left=candidate(lo);
+      if(left.second>0)throw std::domain_error("implicit envelope temperature decreases");
+      if(left.second==0)return left.first;
+      double width=std::clamp(-1.2*left.second,.001,.05),hi=lo+width;
+      auto right=candidate(hi);
+      for(int k=0;right.second<0 && k<16;++k){width*=2.;hi=lo+width;right=candidate(hi);}
+      if(right.second<0)throw std::domain_error("implicit envelope no thermal bracket");
+      for(int k=0;k<64;++k) {
+        double mid=.5*(lo+hi);
+        if(k<32 && k%4!=3) {
+          const double secant=lo-left.second*(hi-lo)/(right.second-left.second);
+          mid=std::clamp(secant,lo+.01*(hi-lo),hi-.01*(hi-lo));
+        }
+        auto value=candidate(mid);
+        if(std::abs(value.second)<2e-13)return value.first;
+        if(value.second<0){lo=mid;left=value;}else{hi=mid;right=value;}
+        if(hi-lo<2e-13)return candidate(.5*(lo+hi)).first;
+      }
+      throw std::domain_error("implicit envelope thermal bracket limit");
+    }
     auto add = [](const std::array<double,3>& u, const std::array<double,3>& k, double s) { return std::array<double,3>{u[0] + s * k[0], u[1] + s * k[1], u[2] + s * k[2]}; };
-    const auto k1 = rhs(lp, y, guess), k2 = rhs(lp + h / 2, add(y, k1, h / 2), guess);
-    const auto k3 = rhs(lp + h / 2, add(y, k2, h / 2), guess), k4 = rhs(lp + h, add(y, k3, h), guess);
-    std::array<double,3> n{}; for (int i = 0; i < 3; ++i) n[i] = y[i] + h / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]);
+    const auto k1 = rhs(lp, y, guess), k2 = rhs(lp + dlnp / 2, add(y, k1, dlnp / 2), guess);
+    const auto k3 = rhs(lp + dlnp / 2, add(y, k2, dlnp / 2), guess), k4 = rhs(lp + dlnp, add(y, k3, dlnp), guess);
+    std::array<double,3> n{}; for (int i = 0; i < 3; ++i) n[i] = y[i] + dlnp / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]);
     return n;
   };
   ++integrations_;
-  const double h = 1.0 / per_unit_; std::array<double,3> y{lnT, r, 0};
-  for (std::size_t n = 0; n < 200000; ++n) {
-    double guess = lnrho; auto yn = step(lnP, y, h, guess);
+  double dlnp=1./per_unit_;const double max_h=dlnp,tolerance=integration_tolerance_;
+  std::array<double,3> y{lnT,r,0};
+  for(std::size_t n=0;n<200000;++n) {
+    double guess=lnrho,next_h=dlnp;std::array<double,3> yn;
+    if(tolerance>0) {
+      double error;
+      try {
+        const auto coarse=step(lnP,y,dlnp,guess);guess=lnrho;
+        const auto middle=step(lnP,y,.5*dlnp,guess);yn=step(lnP+.5*dlnp,middle,.5*dlnp,guess);
+        error=std::max({std::abs(yn[0]-coarse[0])/tolerance,
+          std::abs(yn[1]-coarse[1])/(tolerance*R),std::abs(yn[2]-coarse[2])/(tolerance*target)});
+      }catch(const std::domain_error&){if(dlnp<1e-9)throw;dlnp*=.5;continue;}
+      require(std::isfinite(error),"nonfinite integration error");
+      if(error>1) {
+        require(dlnp>=1e-10,"integration minimum step");
+        dlnp*=std::max(.2,.8/std::sqrt(error));continue;
+      }
+      next_h=std::min(max_h,dlnp*std::min(1.8,.9/std::sqrt(std::max(error,1e-12))));
+    }else yn=step(lnP,y,dlnp,guess);
     if (yn[2] >= target) {   // shrink the last step so the base lies exactly at M - dM
-      double lo = 0, hi = h, gg = lnrho; std::array<double,3> ym{};
+      double lo = 0, hi = dlnp, gg = lnrho; std::array<double,3> ym{};
       for (int it = 0; it < 60; ++it) { const double hm = .5 * (lo + hi); gg = lnrho; ym = step(lnP, y, hm, gg); (ym[2] < target ? lo : hi) = hm; if (hi - lo < 1e-14) break; }
       out.P_base = std::exp(lnP + .5 * (lo + hi)); out.T_base = std::exp(ym[0]); out.r_base = ym[1];
       out.rho_base = at_pressure(ym[0], std::log(out.P_base), c, gg).rho;
       out.steps = n + 1; return out;
     }
-    y = yn; lnP += h; lnrho = guess;
+    y = yn; lnP += dlnp; lnrho = guess;dlnp=next_h;
   }
   throw std::domain_error("envelope atmosphere: step limit before reaching the envelope base");
 }
@@ -290,7 +360,6 @@ EnvelopeSurface EnvelopeAtmosphere::solve(double L, double r_b, const Compositio
 }
 
 EnvelopeSurface EnvelopeAtmosphere::photosphere(double Teff_b, double g_b, const Composition& c) const {
-  require(eos_ || metals_!=EnvelopeMetals::reject || c.Z() <= max_Z, "metal fraction too large for the H/He-only layer source");
   using namespace constants;
   const double r_b = std::sqrt(G * M_ / g_b), L = 4 * M_PI * r_b * r_b * sigma_SB * std::pow(Teff_b, 4);
   return solve(L, r_b, c);
@@ -319,7 +388,6 @@ AtmosphereState EnvelopeAtmosphere::eval_value(double Teff_b, double g_b, const 
 }
 
 AtmosphereState EnvelopeAtmosphere::eval(double Teff_b, double g_b, const Composition& c) const {
-  require(eos_ || metals_!=EnvelopeMetals::reject || c.Z() <= max_Z, "metal fraction too large for the H/He-only layer source");
   const auto s = photosphere(Teff_b, g_b, c);
   AtmosphereState out{};
   out.T=s.T_base;out.P=s.P_base;out.rho=s.rho_base;
@@ -350,6 +418,7 @@ AtmosphereState EnvelopeAtmosphere::eval(double Teff_b, double g_b, const Compos
     // Each derivative starts from the same radius guess and owns its root
     // state. Thread scheduling cannot change another derivative's guess.
     auto evaluate=[&](EnvelopeAtmosphere& local) {
+      local.integration_tolerance(integration_tolerance_);
       for(std::size_t i=worker;i<offsets.size();i+=workers) {
         try {
           local.ratio_.store(s.R/s.r_base);
@@ -360,7 +429,7 @@ AtmosphereState EnvelopeAtmosphere::eval(double Teff_b, double g_b, const Compos
       integrations_.fetch_add(local.integrations());
     };
     if(eos_) {EnvelopeAtmosphere local(top_,opacity_,*eos_,alpha_,M_,dM_,per_unit_);evaluate(local);}
-    else {EnvelopeAtmosphere local(top_,opacity_,*source_,alpha_,M_,dM_,per_unit_,metals_);evaluate(local);}
+    else {EnvelopeAtmosphere local(top_,opacity_,*thermodynamics_,alpha_,M_,dM_,per_unit_);evaluate(local);}
   };
   if(workers==1)work(0);
   else detail::evaluation_workers().run(workers,[&](std::size_t worker) {

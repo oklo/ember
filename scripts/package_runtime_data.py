@@ -16,7 +16,9 @@ import shutil
 INPUT_KEYS = ("eos", "opacity_low", "opacity_warm", "opacity_bridge",
               "opacity_hot", "conduction", "atmosphere", "collisions", "composition")
 OPTIONAL_INPUT_KEYS = ("atmosphere_main_sequence", "atmosphere_metal_chain", "opacity_hydrogen_response",
-                       "atmosphere_hydrogen_interval", "atmosphere_hydrogen_envelope", "opacity_cold_dense")
+                       "atmosphere_hydrogen_interval", "atmosphere_hydrogen_envelope", "opacity_cold_dense",
+                       "envelope_source", "envelope_map", "envelope_gibbs_hydrogen",
+                       "envelope_gibbs_helium", "envelope_gibbs_hydrogen_warm", "envelope_gibbs_helium_warm")
 
 
 def atmosphere_children(path):

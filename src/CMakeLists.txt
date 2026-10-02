@@ -35,6 +35,7 @@ add_library(ember
   fingering_transport.cpp
   conduction_table.cpp
   envelope_atmosphere.cpp
+  envelope_gibbs.cpp
   atmosphere_grey.cpp
   atmosphere_composition.cpp
   atmosphere_table.cpp

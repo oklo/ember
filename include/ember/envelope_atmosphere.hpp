@@ -13,12 +13,21 @@
 #include <array>
 #include <atomic>
 #include <mutex>
+#include <optional>
 #include <string>
 #include <vector>
 
 namespace ember {
 
 enum class EnvelopeMetals { reject, neutral, ionized };
+
+// Envelope integration is naturally expressed at fixed temperature and pressure.
+// Providers also supply the density used at the top atmosphere boundary.
+class EnvelopeThermodynamics : public PressureDensity {
+public:
+  struct State { double rho, cp, delta, grad_ad, chiRho; };
+  virtual State at_pressure(double lnT, double lnP, const Composition&, double& guess) const = 0;
+};
 
 class EnvelopeSource {
 public:
@@ -27,7 +36,7 @@ public:
   // Bicubic (Catmull-Rom) in (ln T, ln rho) per composition plane, bilinear between planes in (X, Y3).
   State eval(double lnT, double lnrho, double X, double Y3) const;
   double lnrho_from(double lnT, double lnP, double X, double Y3, double guess) const;
-  struct PressureState { double rho, cp, delta, grad_ad, chiRho; };
+  using PressureState = EnvelopeThermodynamics::State;
   PressureState at_pressure(double lnT,double lnP,const Composition&,double& guess,EnvelopeMetals) const;
   std::array<double,2> X_interval() const { return {X_.front(), X_.back()}; }
   std::array<double,2> Y3_interval() const { return {Y3_.front(), Y3_.back()}; }
@@ -39,12 +48,15 @@ private:
 
 // Density at the top of an integrated source envelope must use that source,
 // not an interior EOS whose supported temperature range may be much hotter.
-class EnvelopeSourceDensity final : public PressureDensity {
+class EnvelopeSourceDensity final : public EnvelopeThermodynamics {
 public:
   EnvelopeSourceDensity(const EnvelopeSource& source, EnvelopeMetals metals)
       : source_(source), metals_(metals) {}
   double rho_from_PT(double T, double P, const Composition&,
                      double rho_guess = 0.0) const override;
+  State at_pressure(double lnT, double lnP, const Composition& c, double& guess) const override {
+    return source_.at_pressure(lnT,lnP,c,guess,metals_);
+  }
 private:
   const EnvelopeSource& source_;
   EnvelopeMetals metals_;
@@ -63,12 +75,17 @@ public:
                      EnvelopeMetals metals = EnvelopeMetals::reject);
   EnvelopeAtmosphere(const Atmosphere& top, const Opacity& opacity, const Eos& eos,
                      double alpha_mlt, double total_mass, double envelope_mass, double steps_per_unit_lnP = 40);
+  EnvelopeAtmosphere(const Atmosphere& top, const Opacity& opacity, const EnvelopeThermodynamics&,
+                     double alpha_mlt, double total_mass, double envelope_mass, double steps_per_unit_lnP = 40);
   AtmosphereState eval(double Teff_b, double g_b, const Composition&) const override;
   AtmosphereState eval_value(double Teff_b, double g_b, const Composition&) const override;
   void evaluation_threads(std::size_t threads);
   // Modified Newton: reuse nearby boundary derivatives, never boundary values.
   // Refresh after at most seven uses or a composition/structure displacement.
   void jacobian_reuse(double radius);
+  // Positive tolerance selects checked implicit integration through narrow
+  // thermodynamic transitions. Zero retains the fixed-step RK4 method.
+  void integration_tolerance(double tolerance);
   std::size_t jacobian_reused() const { return jacobian_reused_; }
   std::size_t jacobian_computed() const { return jacobian_computed_; }
   const char* name() const override { return "integrated outer envelope"; }
@@ -91,10 +108,11 @@ private:
   EnvelopeSurface solve(double L, double r_b, const Composition&) const;         // root in R
   EnvelopeSource::PressureState at_pressure(double lnT,double lnP,const Composition&,double& guess) const;
   const Atmosphere& top_; const Opacity& opacity_;
-  const EnvelopeSource* source_{};
-  EnvelopeMetals metals_{EnvelopeMetals::reject};
+  std::optional<EnvelopeSourceDensity> table_source_;
+  const EnvelopeThermodynamics* thermodynamics_{};
   const Eos* eos_{};
   double alpha_, M_, dM_, per_unit_;
+  double integration_tolerance_{};
   std::size_t threads_{1};
   double jacobian_radius_{};
   struct JacobianCache {

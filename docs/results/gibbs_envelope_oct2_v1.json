@@ -1,0 +1,44 @@
+{
+  "scope": "Optional H-rich envelope thermodynamics in the common evolution code; no Gibbs stellar trajectory selected.",
+  "source": "CMS and SCAN/SCVH components represented by one Gibbs potential per component and range",
+  "mixture": {
+    "minimum_X": 0.985,
+    "maximum_Z": 1e-12,
+    "deuterium": false,
+    "helium3": "equal-number-density He4 proxy",
+    "phase_separation": false
+  },
+  "complete_envelopes": 7,
+  "photosphere_range_K": [
+    656,
+    4500
+  ],
+  "maximum_boundary_relative_difference": 4.435e-09,
+  "bracket_solve": {
+    "bisection_CPU_seconds": 58.81,
+    "secant_CPU_seconds": 12.56,
+    "CPU_speedup": 4.681
+  },
+  "legacy_evolution": {
+    "interval_years": 8000000.0,
+    "accepted": 4,
+    "rejected": 0,
+    "maximum_log_structure_difference": 3.448e-09,
+    "maximum_absolute_composition_difference": 4.721e-10,
+    "maximum_luminosity_profile_difference_over_peak": 2.981e-06,
+    "maximum_global_relative_difference": 3.841e-12,
+    "maximum_first_law": 1.617e-08
+  },
+  "tests": [
+    "envelope_gibbs",
+    "envelope_initialization",
+    "envelope_transport",
+    "runtime_packaging"
+  ],
+  "restart_check": "Old envelope selection rejected before constructing the new source",
+  "limitations": [
+    "Actual table files are local research inputs.",
+    "The current mixture does not cover solar-composition PMS conditions.",
+    "No new whole-star cooling age or Debye surface temperature is established."
+  ]
+}

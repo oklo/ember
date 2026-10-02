@@ -6,6 +6,7 @@
 #include "ember/convective_material_heat.hpp"
 #include "ember/envelope_transport.hpp"
 #include "ember/envelope_atmosphere.hpp"
+#include "ember/envelope_gibbs.hpp"
 #include "ember/evolution_checkpoint.hpp"
 #include "ember/runtime_identity.hpp"
 #include "ember/atmosphere_deuterium.hpp"
@@ -312,13 +313,26 @@ int lifetime_main(int argc,char** argv) {
     fs::path envelope_source_path;
     if(cfg.values.contains("envelope_source"))envelope_source_path=path("envelope_source");
     const auto envelope_eos=cfg.values.contains("envelope_eos")?cfg.get("envelope_eos"):"";
-    if(!envelope_eos.empty() && (envelope_eos!="interior" || !envelope_source_path.empty()))
-      throw std::invalid_argument("envelope EOS must be interior, without a separate layer source");
+    if(!envelope_eos.empty() && ((envelope_eos!="interior" && envelope_eos!="gibbs_hhe") || !envelope_source_path.empty()))
+      throw std::invalid_argument("envelope EOS must be interior or gibbs_hhe, without a separate layer source");
+    GibbsEnvelope::Files gibbs_files;
+    if(envelope_eos=="gibbs_hhe") {
+      gibbs_files.hydrogen=path("envelope_gibbs_hydrogen").string();
+      gibbs_files.helium=path("envelope_gibbs_helium").string();
+      gibbs_files.hydrogen_warm=path("envelope_gibbs_hydrogen_warm").string();
+      gibbs_files.helium_warm=path("envelope_gibbs_helium_warm").string();
+    }
+    const double envelope_integration_tolerance=cfg.values.contains("envelope_integration_tolerance")
+        ?cfg.number("envelope_integration_tolerance"):(envelope_eos=="gibbs_hhe"?1e-7:0.);
+    if(envelope_integration_tolerance<0 || envelope_integration_tolerance>1e-3
+        || (envelope_eos=="gibbs_hhe" && envelope_integration_tolerance==0))
+      throw std::invalid_argument("invalid envelope integration tolerance");
     const auto envelope_metals=cfg.values.contains("envelope_metals")?cfg.get("envelope_metals"):"reject";
     if((envelope_metals!="reject" && envelope_metals!="neutral" && envelope_metals!="ionized")
         || (envelope_metals!="reject" && envelope_source_path.empty()))
       throw std::invalid_argument("invalid envelope metal approximation");
-    const bool direct_envelope=!envelope_source_path.empty() || envelope_eos=="interior";
+    const bool direct_envelope=!envelope_source_path.empty() || !envelope_eos.empty();
+    if(!direct_envelope && envelope_integration_tolerance!=0)throw std::invalid_argument("integration tolerance requires an integrated envelope");
     const double envelope_fraction=cfg.values.contains("envelope_mass_fraction")?cfg.number("envelope_mass_fraction"):0;
     const double envelope_thermal_limit=cfg.values.contains("envelope_thermal_fraction_limit")
         ?cfg.number("envelope_thermal_fraction_limit"):.001;
@@ -361,7 +375,17 @@ int lifetime_main(int argc,char** argv) {
     if(direct_envelope) {
       if(envelope_metals!="reject")identity.values["atmosphere.envelope_metals"]=envelope_metals+".additive_volume.v1";
       if(!envelope_source_path.empty())identity.file("atmosphere.envelope_source",envelope_source_path);
-      else identity.values["atmosphere.envelope_eos"]="interior.v1";
+      else if(envelope_eos=="gibbs_hhe") {
+        identity.values["atmosphere.envelope_eos"]="gibbs_hhe.dilute.baryon.v1";
+        identity.file("atmosphere.envelope_gibbs_hydrogen",gibbs_files.hydrogen);
+        identity.file("atmosphere.envelope_gibbs_helium",gibbs_files.helium);
+        identity.file("atmosphere.envelope_gibbs_hydrogen_warm",gibbs_files.hydrogen_warm);
+        identity.file("atmosphere.envelope_gibbs_helium_warm",gibbs_files.helium_warm);
+      }else identity.values["atmosphere.envelope_eos"]="interior.v1";
+      if(envelope_integration_tolerance>0) {
+        identity.values["atmosphere.envelope_integration"]="implicit.checked.v1";
+        identity.number("atmosphere.envelope_integration_tolerance",envelope_integration_tolerance);
+      }
       identity.number("atmosphere.envelope_mass",selected_envelope_mass);
       identity.values["atmosphere.envelope_thermal"]="base_state_reservoir.v1";
       identity.number("atmosphere.envelope_lnP_steps",20);
@@ -558,8 +582,12 @@ int lifetime_main(int argc,char** argv) {
       envelope_source=std::make_unique<EnvelopeSource>(envelope_source_path.string());
       envelope_density=std::make_unique<EnvelopeSourceDensity>(*envelope_source,selected_envelope_metals);
     }
-    const PressureDensity& atmosphere_density=envelope_density
-        ?static_cast<const PressureDensity&>(*envelope_density):eos;
+    std::unique_ptr<GibbsEnvelope> gibbs_envelope;
+    if(envelope_eos=="gibbs_hhe")gibbs_envelope=std::make_unique<GibbsEnvelope>(gibbs_files);
+    const EnvelopeThermodynamics* envelope_thermodynamics=gibbs_envelope
+        ?static_cast<const EnvelopeThermodynamics*>(gibbs_envelope.get()):envelope_density.get();
+    const PressureDensity& atmosphere_density=envelope_thermodynamics
+        ?static_cast<const PressureDensity&>(*envelope_thermodynamics):eos;
     CompositionAtmosphereGrid table_atmosphere(atmosphere_density,atmosphere_path,CompositionAtmosphereGrid::Mixture::allow_documented_proxy);
     std::unique_ptr<FixedMetalAtmosphere> fixed_metal_atmosphere;
     if(atmosphere_metals=="bounded_fixed_Z")fixed_metal_atmosphere=std::make_unique<FixedMetalAtmosphere>(
@@ -602,13 +630,14 @@ int lifetime_main(int argc,char** argv) {
     TraceDeuteriumAtmosphere thin_atmosphere(atmosphere_density,hydrogen_envelope
         ?static_cast<const Atmosphere&>(*hydrogen_envelope):hydrogen_boundary);
     std::unique_ptr<EnvelopeAtmosphere> native_envelope;
-    if(envelope_source) {
-      native_envelope=std::make_unique<EnvelopeAtmosphere>(thin_atmosphere,combined,*envelope_source,
-          1.9,mass,selected_envelope_mass,20,selected_envelope_metals);
+    if(envelope_thermodynamics) {
+      native_envelope=std::make_unique<EnvelopeAtmosphere>(thin_atmosphere,combined,*envelope_thermodynamics,
+          1.9,mass,selected_envelope_mass,20);
     }
     if(envelope_eos=="interior")native_envelope=std::make_unique<EnvelopeAtmosphere>(
         thin_atmosphere,combined,eos,1.9,mass,selected_envelope_mass,20);
     if(native_envelope) {
+      native_envelope->integration_tolerance(envelope_integration_tolerance);
       native_envelope->evaluation_threads(static_cast<std::size_t>(threads));
       native_envelope->jacobian_reuse(envelope_jacobian_radius);
     }
