@@ -36,10 +36,12 @@ struct PhaseMixture {
   double residual{};
   std::size_t iterations{};
 };
-// Two or three distinct phases. A phase may use the same evaluator as another
-// phase (for example, two solid compositions). All fractions must be positive.
+// One homogeneous phase, or two or three distinct coexisting phases.
+// A phase may use the same evaluator as another (two solid compositions, for
+// example). Coexisting phase fractions and all bulk abundances must be positive.
 // This finds a stationary coexistence state; global selection is the caller's
-// responsibility. No phase is discarded or merged during this solve.
+// responsibility. No phase is discarded or merged during this solve. For one
+// phase the bulk state is used directly; its supplied seed is not a constraint.
 PhaseMixture equilibrate_phases(const PhaseCoordinates&,std::span<const PhaseState>,
                                std::span<const PhaseEvaluator>);
 struct PhaseSplit {

@@ -71,6 +71,44 @@ int main(){
     else{const auto local=phase_equilibrium_material(q,seed,bounded,second);
       if(!local.equilibrium.potential.has_third)++failures;}
   }
+  // A vanishing mixture must join the homogeneous material without an energy
+  // jump. Check both sides with an exact common-tangent construction, including
+  // the large third derivatives of trace species and finite-difference mode.
+  for(bool analytic:{false,true})for(int phase:{0,1}){
+    const PhaseCoordinates q{t0+.05,r0,1e-8,1e-10,.4};
+    const double dt=q[0]-t0,a=a0+.05*dt+.02*dt*dt;
+    const double mu=(.2*dt+.07*dt*dt)/gap;
+    auto boundary=q;boundary[4]=a+mu/stiffness+(phase?gap:0.);
+    const PhaseEvaluator evaluator=[=](const PhaseCoordinates&x){return branch(x,phase,analytic);};
+    // A single phase uses the bulk state, irrespective of an obsolete seed.
+    const std::array<PhaseState,1> one{{{r0+.1,{.001,.002,.3},.2}}};
+    const std::array<PhaseEvaluator,1> single{evaluator};
+    const auto m=phase_equilibrium_material(boundary,one,single);
+    const auto exact=potential(boundary,phase);
+    for(unsigned k=0;k<10;++k){const auto&c=powers[k];const unsigned order=c[0]+c[1]+c[2];
+      for(unsigned t=0;t+order<=3;++t)for(unsigned r=0;t+r+order<=3;++r)
+        derivative_error=std::max(derivative_error,relative(m.jets[k][t][r]/constants::R_gas,
+            exact.derivative({t,r,c[0],c[1],c[2]})));
+    }
+    if(m.equilibrium.phases[0].mass_fraction!=1 || m.analytic_third!=analytic)++failures;
+    for(double fraction:{1e-3,1e-5,1e-7}){
+      auto inside=boundary;inside[4]+=(phase?-gap:gap)*fraction;
+      const PhaseEvaluator first=[=](const PhaseCoordinates&x){return branch(x,0,analytic);};
+      const PhaseEvaluator second=[=](const PhaseCoordinates&x){return branch(x,1,analytic);};
+      const PhaseSplit seed{r0,r0,{q[2],q[3],a+mu/stiffness},
+        {q[2],q[3],a+mu/stiffness+gap},phase?1-fraction:fraction};
+      const std::array<PhaseState,2> pair{{{seed.log_density_first,seed.composition_first,1-seed.second_mass_fraction},
+        {seed.log_density_second,seed.composition_second,seed.second_mass_fraction}}};
+      const std::array<PhaseEvaluator,2> branches{first,second};
+      const auto mix=phase_equilibrium_material(inside,pair,branches);
+      // F and its first derivatives approach the common tangent. Cv can jump
+      // at the boundary and must not be forced to match the homogeneous value.
+      for(unsigned k=0;k<5;++k)
+        if(std::abs(mix.equilibrium.potential.gradient[k]-m.equilibrium.potential.gradient[k])
+            >2*fraction)++failures;
+      if(std::abs(mix.equilibrium.potential.value-m.equilibrium.potential.value)>fraction)++failures;
+    }
+  }
   if(derivative_error>1e-5||response_error>1e-6)++failures;
   std::cout<<"phase material: derivative error "<<derivative_error<<", EOS response error "<<response_error
            <<", failures "<<failures<<'\n';

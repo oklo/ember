@@ -4,6 +4,8 @@
 three phases with equal pressure and chemical potentials. He4 is the remaining
 mass fraction. Separate phases can use the same material model, allowing two
 solid compositions to coexist with a liquid. Both APIs use the same solver.
+The multi-phase API also accepts one phase, evaluating its bulk state directly
+through the same material interface.
 
 Each material supplies F/(R T) and derivatives in ln T, ln rho, X_H, X_He3, Z.
 The result differentiates the equilibrium constraints, including changing phase
@@ -13,8 +15,10 @@ model's domain restrictions. Nonfinite derivatives are rejected.
 
 This is a library component, **not yet selected by stellar evolution**. The
 caller must choose the stable supported phases and provide an initial split.
-All species and phase fractions must be positive. Global phase selection,
-vanishing species/phases and separation kinetics remain the caller's work.
+All species and coexisting phase fractions must be positive. The caller can
+switch to a homogeneous phase when coexistence ends; the solver does not
+silently remove a phase after a failed solve. Global selection, absent-species
+limits and separation kinetics remain the caller's work.
 A converged stationary solution alone does not establish global stability.
 
 ## Material derivatives
@@ -44,6 +48,10 @@ wells test conservation, phase fractions, potential derivatives and material
 responses. Controls include changing phase order, trace species, a stiff thermal
 transition and both derivative methods. The stiff third-derivative check uses a
 0.1% bound because it subtracts large terms to obtain an order-unity response.
+Homogeneous limits test both ends of coexistence down to a phase fraction of
+1e-7. Free energy and its first derivatives approach the same boundary values;
+heat capacity can jump and is not forced to match across the transition.
+[Homogeneous and boundary checks](results/phase_homogeneous_oct2.json).
 
 Private cold-interior controls compare C++ with an independent implementation.
 The narrow three-phase transitions conserve latent energy when heat capacity

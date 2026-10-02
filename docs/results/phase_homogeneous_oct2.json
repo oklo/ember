@@ -1,0 +1,50 @@
+{
+  "scope": "Homogeneous material interface and limits of positive-composition coexistence; not a selected stellar EOS or global phase diagram.",
+  "analytic_tests": {
+    "phase_fractions": [
+      0.001,
+      1e-05,
+      1e-07
+    ],
+    "derivative_error": 9.095e-09,
+    "response_error": 1.296e-08,
+    "methods": [
+      "analytic third derivatives",
+      "adaptive finite differences"
+    ],
+    "passed": [
+      "phase_equilibrium",
+      "phase_material",
+      "phase_mixture"
+    ]
+  },
+  "private_physical_comparison": {
+    "states": 365,
+    "homogeneous": 64,
+    "two_phase": 286,
+    "three_phase": 15,
+    "temperature_factors": [
+      1,
+      0.99
+    ],
+    "solid_entropy_choices": 2,
+    "maximum_relative_pressure_difference": 1.342e-12,
+    "maximum_relative_energy_difference": 2.703e-12,
+    "maximum_relative_Cv_difference": 1.18e-10,
+    "maximum_relative_finite_cooling_energy_difference": 2.231e-07,
+    "minimum_scaled_isobaric_chemical_curvature": -3.159e-09,
+    "all_Cv_and_compressibility_positive": true,
+    "CPU_seconds": 105.0,
+    "wall_seconds": 105.0
+  },
+  "limits": [
+    "Private candidate selection is not a global stability certificate.",
+    "High-metal GS98 phases and trace quantum limits retain their stated physical uncertainties.",
+    "No absent-species extension, outer-EOS join or stellar selection added."
+  ],
+  "evidence": {
+    "phase_continuation.cpp": "4962f9c334b55eb831c87a6a28e1e4fee0575badc0e45ef5dad8e2e49612ab2a",
+    "check_phase_continuation_v2.py": "2c11dd3c75726ea96e90722e6338c543ce85518e2afdf53de688f66ab556310f",
+    "material_continuation_v2/results.jsonl": "93e6a8d01dc02a6f133a3d4832eebdcde3f797b719427f15f68f210e03d6d938"
+  }
+}

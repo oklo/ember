@@ -308,8 +308,11 @@ PhaseMixtureMaterial material(const PhaseCoordinates&q,std::span<const PhaseStat
   if(!(std::isfinite(step)&&step>0))throw std::invalid_argument("phase material: invalid difference step");
   PhaseMixtureMaterial result;result.equilibrium=equilibrate_phases(q,guess,evaluators);
   std::array<std::array<PhaseCoordinates,5>,2> third{};
-  const auto exact=guess.size()==2?analytic_material<2>(q,result.equilibrium,evaluators):
-                                   analytic_material<3>(q,result.equilibrium,evaluators);
+  const auto exact=guess.size()==1
+      ? (result.equilibrium.potential.has_third
+          ? std::optional<Third>(result.equilibrium.potential.third) : std::nullopt)
+      : guess.size()==2?analytic_material<2>(q,result.equilibrium,evaluators):
+                        analytic_material<3>(q,result.equilibrium,evaluators);
   if(exact){
     result.equilibrium.potential.third=*exact;result.equilibrium.potential.has_third=true;
     third[0]=(*exact)[0];third[1]=(*exact)[1];result.analytic_third=true;
@@ -351,9 +354,17 @@ PhaseMixture equilibrate_phases(const PhaseCoordinates&q,std::span<const PhaseSt
   if(!(q[2]>0&&q[3]>0&&q[4]>0&&q[2]+q[3]+q[4]<1))
     throw std::domain_error("phase equilibrium: positive composition required");
   if(guess.size()!=evaluators.size())throw std::invalid_argument("phase equilibrium: evaluator count");
+  if(guess.size()==1){
+    PhaseMixture result;result.potential=evaluators[0](q);check_potential(result.potential);
+    result.phases.push_back({q[1],{q[2],q[3],q[4]},1});
+    result.fraction_response.resize(1);result.state_response.resize(1);
+    result.state_response[0][0][1]=1;
+    for(std::size_t k=0;k<3;++k)result.state_response[0][k+1][k+2]=1/q[k+2];
+    return result;
+  }
   if(guess.size()==2)return solve<2>(q,guess,evaluators);
   if(guess.size()==3)return solve<3>(q,guess,evaluators);
-  throw std::invalid_argument("phase equilibrium: two or three phases required");
+  throw std::invalid_argument("phase equilibrium: one to three phases required");
 }
 PhaseEquilibrium equilibrate_phases(const PhaseCoordinates&q,const PhaseSplit&guess,
     const PhaseEvaluator&first,const PhaseEvaluator&second){
