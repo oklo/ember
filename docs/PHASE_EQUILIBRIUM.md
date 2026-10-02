@@ -1,59 +1,53 @@
-# Two-phase thermodynamics
+# Phase equilibrium
 
-`equilibrate_phases` solves for two densities, both phase compositions and
-their mass fractions. It conserves specific volume, H, He3 and metals, with
-equal pressure and chemical potentials. He4 is the remaining mass fraction.
-Each supplied phase evaluates one free energy and its first two derivatives.
+`equilibrate_phases` conserves volume, H, He3 and metals while finding two or
+three phases with equal pressure and chemical potentials. He4 is the remaining
+mass fraction. Separate phases can use the same material model, allowing two
+solid compositions to coexist with a liquid. Both APIs use the same solver.
 
-The returned free-energy derivatives include changes in the phase fractions
-and compositions. Thus the heat capacity includes phase adjustment; it is not
-an average of the two frozen-phase heat capacities. Derivatives follow the
-equilibrium equations by implicit differentiation. Unsupported trial states
-shorten the Newton step; they do not extend either material model's domain.
+Each material supplies F/(R T) and derivatives in ln T, ln rho, X_H, X_He3, Z.
+The result differentiates the equilibrium constraints, including changing phase
+fractions and compositions. Its heat capacity therefore includes phase heat.
+Unsupported trials shorten the Newton step; accepted states retain the material
+model's domain restrictions. Nonfinite derivatives are rejected.
 
-This is a library calculation, **not yet selected by stellar evolution**.
-The caller must choose the globally stable supported phase pair and provide
-a nearby initial split. Phase-diagram search, single-phase boundaries,
-zero-abundance limits and separation kinetics are separate responsibilities.
-The API uses positive H, He3 and metal fractions, with He4 positive in each
-phase. Potential units are F/(R T); coordinates are ln T, ln rho, X_H, X_He3, Z.
+This is a library component, **not yet selected by stellar evolution**. The
+caller must choose the stable supported phases and provide an initial split.
+All species and phase fractions must be positive. Global phase selection,
+vanishing species/phases and separation kinetics remain the caller's work.
+A converged stationary solution alone does not establish global stability.
 
-The analytic test uses two composition wells with a temperature-dependent
-relative energy. Their exact common tangent tests the potential, thermal and
-composition derivatives, phase fractions, volume and species conservation.
-Nine states pass, including nonzero phase heat. Invalid compositions and
-nonfinite material derivatives are rejected.
+## Material derivatives
 
-Independent private checks use four saved cold-core conditions with two
-choices of solid mixing entropy. C++ heat capacities agree with the prototype
-within 1.011e-11 relative. The largest difference among composition response
-entries is 9.196e-6 relative, in a trace-He3 cross derivative; after scaling by
-the corresponding diagonal responses the difference is below 1.481e-10.
-The four solves take 0.1041 CPU seconds, with seven or eight iterations each.
-That is a point-physics measurement, not a stellar runtime estimate.
+`phase_equilibrium_material` returns F/T derivatives through third thermal and
+density order and second composition order. It includes the supplied mixing
+terms and excludes radiation. Do not add mixing or latent heat again.
 
-Those physical probes formally extend the metal-rich phase beyond the current
-Z=0.16 material limit. They assess a candidate approximation and do not validate
-that extension for evolution. The effective GS98 metal group, quantum mixture
-corrections and residual solid entropy still require physical comparisons.
+When every phase supplies third derivatives, the method differentiates the
+same equilibrium equations a second time. One matrix solve with 15 right-hand
+sides gives the quadratic responses. No displaced coexistence solves or
+finite-difference increments are needed. This is useful at narrow transitions,
+where differencing large thermal terms can obscure a small transport response.
 
-## Material EOS derivatives
+Otherwise, four nearby coexistence solves differentiate the Hessian. They use
+predicted densities, compositions and phase fractions as starting guesses.
+The multi-phase interface shortens the requested increment near a phase
+boundary; its returned `log_steps` records the increments actually used.
+With analytic derivatives both increments are zero and `analytic_third` is true.
+Failed or unsupported neighboring solves are reported, not replaced by another
+phase set. Finite differences can remain ill-conditioned at narrow transitions.
 
-`phase_equilibrium_material` returns the material Helmholtz derivatives used by
-the EOS: F/T, its thermal and density derivatives through third order, and the
-H, He3 and shared-metal composition derivatives. It converts the dimensionless
-phase potential to physical units. The supplied phase mixing terms are included;
-radiation is not. Do not add mixing or latent heat a second time.
+## Checks and limits
 
-Four nearby coexistence solves differentiate the analytic Hessian in ln T and
-ln rho, with a default increment of 1e-4. They start from the central split.
-The same two phases must remain supported across that interval. A failed or
-unsupported solve is reported, rather than replaced by a single phase. This is
-a material evaluation and tabulation interface; phase selection, phase-boundary
-handling and efficient reuse are still needed before selecting it in evolution.
+Exact common tangents and a common plane through three moving composition
+wells test conservation, phase fractions, potential derivatives and material
+responses. Controls include changing phase order, trace species, a stiff thermal
+transition and both derivative methods. The stiff third-derivative check uses a
+0.1% bound because it subtracts large terms to obtain an order-unity response.
 
-Nine analytic controls with moving coexistence endpoints verify all populated
-channels and the resulting pressure, energy, heat capacity, adiabatic gradient
-and their derivatives. Eight saved-state controls agree with an independent
-phase calculation; ultra-trace relative differences are assessed by their
-abundance-weighted effect, not mistaken for a uniform relative-accuracy bound.
+Private cold-interior controls compare C++ with an independent implementation.
+The narrow three-phase transitions conserve latent energy when heat capacity
+is integrated across them. These controls assess numerical thermodynamics;
+they do not validate the formal metal-rich extension of the effective GS98
+mixture. Element-specific partitioning and solid entropy remain physical
+uncertainties. The numerical summary is in `results/phase_mixture_oct2.json`.

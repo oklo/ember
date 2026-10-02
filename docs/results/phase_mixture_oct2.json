@@ -1,0 +1,71 @@
+{
+  "scope": "Two/three-phase equilibrium and optional analytic material derivatives; not selected by stellar evolution",
+  "analytic_tests": {
+    "three_phase_cases": 36,
+    "potential_response_error": 3.69446e-10,
+    "material_error": 1.78986e-12,
+    "third_derivative_abundance_weighted_error": 2.68431e-13,
+    "stiff_third_derivative_abundance_weighted_error": 1.21777e-05,
+    "two_phase_material_cases": 18,
+    "two_phase_derivative_error": 9.09495e-09,
+    "two_phase_eos_response_error": 1.2957e-08
+  },
+  "physical_cpp_comparison": {
+    "evaluations": 571,
+    "worst_scaled_error": 9.517439997219768e-08,
+    "CPU_seconds": 0.576803
+  },
+  "independent_material_derivative_checks": {
+    "conditions": 2,
+    "coordinates": [
+      "ln T",
+      "ln rho"
+    ],
+    "increments_per_coordinate": 2,
+    "max_cp_delta_relative_error": 9.043416891595479e-05,
+    "max_grad_ad_derivative_absolute_error": 0.0001742600606673625
+  },
+  "latent_energy_checks": [
+    {
+      "entropy_choice": "baseline",
+      "width_K": 4.1455410707276314,
+      "midpoint_K": 127875.78946022288,
+      "Cv_integral": 1332657861540.2725,
+      "energy_change": 1332660165983.0,
+      "relative_integral_error": 1.7292050789041724e-06
+    },
+    {
+      "entropy_choice": "alternative",
+      "width_K": 5.155450333011686,
+      "midpoint_K": 127902.82459525626,
+      "Cv_integral": 1777856087056.6313,
+      "energy_change": 1777825511567.5,
+      "relative_integral_error": 1.719825085899629e-05
+    }
+  ],
+  "material_benchmark": {
+    "evaluations_per_repeat": 60,
+    "repeats_per_method": 2,
+    "mean_CPU_seconds": {
+      "analytic": 0.150136,
+      "finite-difference": 1.2060805
+    },
+    "CPU_speedup": 8.03325318378004,
+    "scope": "Two saved three-phase states; not a stellar evolution benchmark"
+  },
+  "tests": [
+    "ion_phase",
+    "mixture_phase",
+    "phase_equilibrium",
+    "phase_material",
+    "phase_mixture",
+    "cold_helium_base",
+    "phase_mobility"
+  ],
+  "limitations": [
+    "Approximate fixed GS98 metal pattern and formally extended high-Z branches",
+    "Global phase search and zero-fraction limits are not implemented by this primitive",
+    "Phase kinetics and a complete cold evolutionary track remain unvalidated",
+    "The native-cell heat-capacity integral misses narrow transitions and is not a cooling-age bound"
+  ]
+}

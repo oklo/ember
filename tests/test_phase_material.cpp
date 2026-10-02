@@ -20,22 +20,26 @@ J potential(const PhaseCoordinates&q,int phase){
   const auto center=a+(phase?gap:0.);
   return base+.5*stiffness*(z-center)*(z-center)+(phase?offset:J(0));
 }
-PhasePotential branch(const PhaseCoordinates&q,int phase){
+PhasePotential branch(const PhaseCoordinates&q,int phase,bool analytic=false){
   const auto j=potential(q,phase);PhasePotential p;p.value=j.value();
   for(unsigned i=0;i<5;++i){J::Powers a{};a[i]++;p.gradient[i]=j.derivative(a);
     for(unsigned k=0;k<5;++k){auto b=a;b[k]++;p.hessian[i][k]=j.derivative(b);}}
+  if(analytic){p.has_third=true;
+    for(unsigned i=0;i<5;++i)for(unsigned k=0;k<5;++k)for(unsigned n=0;n<5;++n){
+      J::Powers a{};++a[i];++a[k];++a[n];p.third[i][k][n]=j.derivative(a);}
+  }
   return p;
 }
 double relative(double a,double b){return std::abs(a-b)/std::max(1.,std::abs(b));}
 }
 int main(){
   unsigned failures=0;double derivative_error=0,response_error=0;
-  const PhaseEvaluator first=[](const PhaseCoordinates&q){return branch(q,0);};
-  const PhaseEvaluator second=[](const PhaseCoordinates&q){return branch(q,1);};
   constexpr std::array<std::array<unsigned,3>,10> powers{{
     {0,0,0},{1,0,0},{0,1,0},{0,0,1},{2,0,0},
     {1,1,0},{1,0,1},{0,2,0},{0,1,1},{0,0,2}}};
-  for(double dt:{-.1,0.,.1})for(double z:{.2,.4,.6}){
+  for(bool analytic:{false,true})for(double dt:{-.1,0.,.1})for(double z:{.2,.4,.6}){
+    const PhaseEvaluator first=[analytic](const PhaseCoordinates&q){return branch(q,0,analytic);};
+    const PhaseEvaluator second=[analytic](const PhaseCoordinates&q){return branch(q,1,analytic);};
     const PhaseCoordinates q{t0+dt,r0+.3*dt,1e-4,1e-3,z};
     const PhaseSplit seed{q[1]+.01,q[1]-.01,{q[2],q[3],a0},{q[2],q[3],a0+gap},(z-a0)/gap};
     const auto result=phase_equilibrium_material(q,seed,first,second);
@@ -63,7 +67,9 @@ int main(){
       if(std::abs(v[0]-q[0])>5e-5)throw std::domain_error("unsupported test phase");
       return first(v);
     };
-    try{phase_equilibrium_material(q,seed,bounded,second);++failures;}catch(const std::domain_error&){}
+    if(!analytic){try{phase_equilibrium_material(q,seed,bounded,second);++failures;}catch(const std::domain_error&){} }
+    else{const auto local=phase_equilibrium_material(q,seed,bounded,second);
+      if(!local.equilibrium.potential.has_third)++failures;}
   }
   if(derivative_error>1e-5||response_error>1e-6)++failures;
   std::cout<<"phase material: derivative error "<<derivative_error<<", EOS response error "<<response_error
