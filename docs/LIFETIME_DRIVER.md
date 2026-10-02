@@ -60,6 +60,14 @@ accuracy guarantee for rare species.
 A [cold-model comparison](results/cold_species_tolerance_oct1_v1.json) records
 the measured agreement and the limits of the cost estimate.
 
+The metal species solve also bounds the binding-energy error of its integrated
+inventory before returning. The driver includes abundance-storage roundoff in
+both forms of the binding audit and records it as `mass_roundoff_surface` in
+`attempts.jsonl`. This matters when cooling luminosity is small: shortening a
+step magnifies a fixed rounding error in the inferred nuclear power. The
+first-law and timestep criteria remain unchanged. An [8 Myr cold comparison](results/cold_conservation_oct2_v1.json)
+checks response reuse against exact evaluation.
+
 For screened-core transport, optional `screened_heat_lower_T_K` separates the
 start of the heat-law transition from the lower temperature limit of the
 microscopic species law. It defaults to `screened_minimum_T_K` and must lie

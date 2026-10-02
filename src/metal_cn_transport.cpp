@@ -1,4 +1,5 @@
 #include "ember/metal_cn_transport.hpp"
+#include "ember/constants.hpp"
 #include "metal_cn_source.hpp"
 #include "flux_chain.hpp"
 #include "parallel_evaluate.hpp"
@@ -122,6 +123,7 @@ MetalCNTransportResult burn_metal_cn_and_diffuse(const Model& thermal,const Mode
       || thermal.M!=previous.M || !flux || !std::isfinite(dt) || dt<=0
       || !std::isfinite(options.abundance_tolerance) || options.abundance_tolerance<=0
       || !std::isfinite(options.integrated_balance_tolerance) || options.integrated_balance_tolerance<0
+      || !std::isfinite(options.integrated_binding_tolerance) || options.integrated_binding_tolerance<0
       || !options.evaluation_threads || options.evaluation_threads>64
       || !options.max_iterations || !options.max_backtracks || regions.empty())
     throw std::invalid_argument("CN diffusion: invalid model, flux, step or options");
@@ -287,6 +289,27 @@ MetalCNTransportResult burn_metal_cn_and_diffuse(const Model& thermal,const Mode
     for(std::size_t i=0;i<n;++i)for(std::size_t k=0;k<METAL_CN_SIZE;++k)destination[i][k]-=at[i][k];
     return destination;
   };
+  // The species solve must conserve enough binding energy for a faint
+  // cooling star, even when its local abundance correction is already small.
+  // This changes the stopping test, never the fluxes or the solved equations.
+  // Keep it out of the line-search merit: a roundoff-scale global budget must
+  // not prevent the large local corrections needed early in a Newton solve.
+  const auto binding_merit=[&](const std::vector<V>& candidate,const V& balance) {
+    if(options.integrated_binding_tolerance==0)return 0.;
+    constexpr std::array<std::size_t,METAL_CN_SIZE> slot{0,1,3,4,5,7,8};
+    const auto ulp=[](double x){return std::nextafter(x,std::numeric_limits<double>::infinity())-x;};
+    long double error=0,roundoff=0;
+    for(std::size_t k=0;k<METAL_CN_SIZE;++k) {
+      const double unit=k==METAL_CN_D?dunit:1.;
+      const long double binding=(nuclides[slot[k]].A/mass_numbers[slot[k]]-nuclides[2].A/4)
+          *constants::c*constants::c;
+      error+=binding*balance[k]*unit;
+      for(std::size_t i=0;i<n;++i)
+        roundoff+=mass[i]*std::abs(binding)*2*(ulp(old[i][k]*unit)+ulp(candidate[i][k]*unit));
+    }
+    return options.abundance_tolerance*static_cast<double>(std::abs(error)
+        /(options.integrated_binding_tolerance+roundoff));
+  };
   MetalCNTransportResult result;std::string last_rejection;
   for(std::size_t iteration=0;iteration<options.max_iterations;++iteration) {
     const auto state=evaluate(current,true);result.residual_history.push_back(state.norm);
@@ -295,7 +318,7 @@ MetalCNTransportResult burn_metal_cn_and_diffuse(const Model& thermal,const Mode
     double change=0;for(const auto& row:correction)change=std::max(change,measure(row));
     result.residual=state.norm;result.abundance_correction=change;
     const double merit=std::max(change,balance_scale*measure(state.balance));
-    if(merit<=options.abundance_tolerance) {
+    if(merit<=options.abundance_tolerance && binding_merit(current,state.balance)<=options.abundance_tolerance) {
       result.iterations=iteration;result.integrated_balance=physical(state.balance);result.composition=previous.comp;
       for(std::size_t i=0;i<n;++i)for(std::size_t cell=regions[i].first;cell<regions[i].second;++cell)
         result.composition[cell]=composition(current[i]);

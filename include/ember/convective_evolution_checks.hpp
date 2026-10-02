@@ -205,10 +205,11 @@ inline EvolutionAudit check_interval(const Model& old,const EvolutionStep& step,
   }
   const double L=next.y.back().L;const long double released=heat+neutrinos;
   out.mass_error_surface=static_cast<double>((mass_power-released)/L);
+  out.mass_roundoff_surface=static_cast<double>(mass_roundoff/L);
   out.source_error=static_cast<double>((heat-step.nuclear_luminosity)/L);
   out.first_law=std::abs(step.luminosity_balance);
   out.pass=species && std::abs(mass_power-released)<=2e-6L*std::abs(released)+mass_roundoff
-    && std::abs(out.mass_error_surface)<2e-7 && std::abs(out.source_error)<2e-7 && out.first_law<2e-7;
+    && std::abs(mass_power-released)<2e-7L*L+mass_roundoff && std::abs(out.source_error)<2e-7 && out.first_law<2e-7;
   return out;
 }
 } // namespace ember::driver

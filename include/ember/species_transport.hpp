@@ -28,6 +28,9 @@ struct SpeciesTransportOptions {
   // abundance_tolerance. Local correction accuracy need not equal the
   // accuracy of a mass-weighted conservation sum.
   double integrated_balance_tolerance{};
+  // Optional bound on the binding energy of the integrated species residual,
+  // in erg/g over the step. Representable abundance roundoff is added to it.
+  double integrated_binding_tolerance{};
 };
 struct SpeciesBoundaryFlux {std::size_t face{};SpeciesVector rate{};};
 struct SpeciesTransportResult {

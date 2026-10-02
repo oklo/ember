@@ -1,0 +1,42 @@
+{
+  "scope": "Same source and physical inputs, same eight-million-year interval; response reuse versus exact evaluation. No time-error, structure, or first-law relaxation.",
+  "base_source": "5c27f42",
+  "parent_checkpoint_sha256": "2d83107d73e40e3d8fde12265abd967c9fdbd363f65dd00aa3c4720393b87d8e",
+  "interval_Myr": 8,
+  "accepted_intervals_per_arm": 4,
+  "rejected_intervals_per_arm": 0,
+  "maximum_log_structure_difference": 1.197e-08,
+  "maximum_abundance_difference": 1.734e-09,
+  "maximum_luminosity_profile_difference_over_peak": 7.629e-06,
+  "convective_summaries_equal": true,
+  "global_relative_differences": {
+    "radius_Rsun": -3.075e-13,
+    "Teff_K": 3.171e-13,
+    "luminosity_Lsun": 6.533e-13,
+    "central_T_K": -1.305e-11,
+    "central_density_g_cm3": 4.334e-13,
+    "H_mass_g": 2.22e-16,
+    "He3_mass_g": 0.0,
+    "He3_peak": -8.895e-10
+  },
+  "controls": {
+    "cached_v2": {
+      "CPU_seconds": 352.3,
+      "wall_seconds": 115.6,
+      "maximum_species_error": 1.277e-17,
+      "maximum_mass_error_over_L": 1.214e-07,
+      "maximum_first_law": 1.53e-08,
+      "maximum_roundoff_bound_over_L": 2.965e-06
+    },
+    "exact_v2": {
+      "CPU_seconds": 1073.0,
+      "wall_seconds": 305.7,
+      "maximum_species_error": 1.022e-17,
+      "maximum_mass_error_over_L": 1.096e-07,
+      "maximum_first_law": 1.985e-08,
+      "maximum_roundoff_bound_over_L": 2.965e-06
+    }
+  },
+  "regression": "The new regression fails the original source in both the species stopping check and the binding audit. It also rejects resolved binding errors and first-law errors.",
+  "limits": "A local cold continuation and warm screened-transport tests; not a fresh lifetime replay. The nominal binding budget adds measured representation roundoff. The first-law and time-error criteria are unchanged."
+}

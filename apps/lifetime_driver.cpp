@@ -831,6 +831,7 @@ int lifetime_main(int argc,char** argv) {
         <<",\"accepted\":"<<attempt.accepted<<",\"error_norm\":"<<attempt.error_norm<<",\"message\":"<<std::quoted(attempt.message)
         <<",\"species_error\":["<<af.maximum_species_error<<','<<a1.maximum_species_error<<','<<a2.maximum_species_error
         <<"],\"mass_error_surface\":["<<af.mass_error_surface<<','<<a1.mass_error_surface<<','<<a2.mass_error_surface
+        <<"],\"mass_roundoff_surface\":["<<af.mass_roundoff_surface<<','<<a1.mass_roundoff_surface<<','<<a2.mass_roundoff_surface
         <<"],\"first_law\":["<<af.first_law<<','<<a1.first_law<<','<<a2.first_law<<"]}\n";attempts.flush();
     };
     hooks.accepted=[&](const EvolutionState&,double duration,double error) {

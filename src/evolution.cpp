@@ -411,6 +411,7 @@ EvolutionStep evolve_step(const Model& previous,const Physics& p,const Atmospher
         transport_options.integrated_balance_tolerance=tolerance*.1;
         transport_options.seed_present_species=p.microscopic->requires_positive_species_guess();
         if(metal) {
+          transport_options.integrated_binding_tolerance=1e-8*std::abs(current.y.back().L)*dt/current.M;
           // Reuse the last coupling iterate; previous still supplies every
           // storage term and conservation reference in the implicit solve.
           transport_options.initial_guess=current.comp;

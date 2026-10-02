@@ -10,6 +10,7 @@ namespace ember {
 struct EvolutionAudit {
   bool pass{};
   double maximum_species_error{}, mass_error_surface{}, source_error{}, first_law{};
+  double mass_roundoff_surface{};
 };
 
 struct EvolutionControlOptions {

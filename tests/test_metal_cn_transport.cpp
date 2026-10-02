@@ -1,5 +1,6 @@
 #include "ember/metal_cn_transport.hpp"
 #include "ember/constants.hpp"
+#include "ember/convective_evolution_checks.hpp"
 #include "../src/metal_cn_source.hpp"
 #include "ember/evolution_checkpoint.hpp"
 #include <algorithm>
@@ -137,6 +138,38 @@ int main() {
     if(warm){const double e=std::abs(rest/heat-1);max_energy=std::max(max_energy,e);check(e<2e-6,"nuclear heat agrees with changing physical rest mass",e);}
     if(mode)check(current.comp.front().Z()!=model.comp.front().Z(),"total metal mass actually redistributed");
     for(auto [a,b]:regions)for(std::size_t i=a+1;i<b;++i)check(current.comp[i]==current.comp[a],"mixed composition homogeneous");
+  }
+  // A small warm-start error can pass a loose abundance bound but carries
+  // too much spurious binding energy for a faint remnant. Refine the solve;
+  // do not project its final abundances or change its conservative equations.
+  {
+    auto cold=model;for(auto& y:cold.y){y.lnT=std::log(1e4);y.lnrho=std::log(1e-8);y.L=1e8;}
+    auto guess=cold.comp;auto v=metal_cn_abundances(guess[1]);v[0]+=1e-9;
+    guess[1]=metal_cn_composition(guess[1],v);
+    const MetalCNFlux zero=[](std::size_t,const Composition&,const Composition&,bool){return MetalCNFaceResponse{};};
+    SpeciesTransportOptions loose;loose.initial_guess=guess;loose.abundance_tolerance=1e-6;
+    const MixingRegions single{{0,1},{1,2},{2,3}};
+    const auto control=burn_metal_cn_and_diffuse(cold,cold,nuclear,single,zero,1.,loose);
+    check(control.composition[1].X[0]!=cold.comp[1].X[0],"control retains warm-start inventory error");
+    loose.integrated_binding_tolerance=1.;
+    const auto refined=burn_metal_cn_and_diffuse(cold,cold,nuclear,single,zero,1.,loose);
+    for(std::size_t i=0;i<cold.size();++i)
+      check(std::abs(refined.composition[i].X[0]-cold.comp[i].X[0])<2e-16,
+          "binding bound removes warm-start inventory error");
+    EvolutionStep step;step.converged=true;step.model=cold;
+    auto shifted=metal_cn_abundances(step.model.comp[1]);
+    shifted[0]=std::nextafter(shifted[0],1.);
+    step.model.comp[1]=metal_cn_composition(step.model.comp[1],shifted);
+    const auto audit=driver::check_interval(cold,step,1.,nuclear,1e-14);
+    check(std::abs(audit.mass_error_surface)>2e-7,"audit fixture exceeds a bare luminosity bound");
+    check(audit.pass,"roundoff allowance applies consistently to the binding audit");
+    shifted[0]+=1e-15;step.model.comp[1]=metal_cn_composition(step.model.comp[1],shifted);
+    const auto bad_binding=driver::check_interval(cold,step,1.,nuclear,1e-14);
+    check(bad_binding.maximum_species_error<1e-14 && !bad_binding.pass,
+        "resolved binding error remains rejected below the species allowance");
+    step.model=cold;step.luminosity_balance=1e-5;
+    check(!driver::check_interval(cold,step,1.,nuclear,1e-14).pass,
+        "roundoff allowance does not relax the first law");
   }
   // Seeding absent metals in a hydrogen-rich cell must not create negative He4.
   {auto seed_model=model;
