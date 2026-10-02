@@ -137,3 +137,10 @@ not established by the existence of this boundary solver.
 
 Envelope tests also check mass, energy, restart identity and the layer reservoir.
 Source coverage and physical approximation checks remain necessary for each use.
+
+A warm-H source repair follows the measured inconsistent-response region near
+100,000 K, fitting the source density and entropy to one stable potential. It
+retains the cold join and all previous coverage. In two saved envelopes the
+base-temperature change is at most 0.003910%; the failed 4014 K envelope and
+hotter 4250 K trial now complete. This does not validate the inconsistent source
+derivatives or supply missing atmosphere cells. [Checks](results/gibbs_hydrogen_coverage_oct2.json).

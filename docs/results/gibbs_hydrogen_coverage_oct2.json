@@ -1,0 +1,37 @@
+{
+  "scope": "Reconstruct inconsistent warm-hydrogen Gibbs responses from the existing source density and entropy; no new microscopic calculation",
+  "failed_state": {
+    "temperature_K": 103500.0,
+    "gas_pressure_dyn_cm2": 523900000000.0
+  },
+  "source_defect": "The source stencil reaches a negative-Cv node just below the former pressure cutoff. The reconstruction now follows measured defective nodes with a two-cell margin.",
+  "source_nodes_added": 2,
+  "source_nodes_lost": 0,
+  "random_queries": 20000,
+  "nonphysical_random_queries": 0,
+  "cold_join": "Unchanged through second derivatives at9000K",
+  "fit_CPU_seconds": 15.52,
+  "envelope_comparison": {
+    "age3600": {
+      "T_base": -1.058e-05,
+      "P_base": -1.278e-06,
+      "rho_base": -2.253e-05
+    },
+    "exhaustion": {
+      "T_base": -3.91e-05,
+      "P_base": -4.764e-06,
+      "rho_base": -8.199e-05
+    }
+  },
+  "frontier_and_hotter_probes_recovered": [
+    "4014 K saved star",
+    "4050 K coverage trial",
+    "4250 K coverage trial"
+  ],
+  "limits": [
+    "4500 K trial is blocked by a separate atmosphere table, not this Gibbs potential.",
+    "The reconstruction does not establish the accuracy of inconsistent source derivatives.",
+    "This is a source repair along the evolving calculation; a final common-input full-lifetime replay is still required."
+  ],
+  "table_sha256": "a393101695281d6dc0a5a57a53a010e05b012f48248eca9e2d1276cc78422585"
+}
