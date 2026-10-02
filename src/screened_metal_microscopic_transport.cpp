@@ -44,7 +44,7 @@ struct ScreenedMetalMicroscopicTransport::EosCache {
     }
     return true;
   }
-  MetalCompositionPotentialResponse potential(const VariableMetalHelmholtzEos& eos,std::size_t point,
+  MetalCompositionPotentialResponse potential(const MaterialEos& eos,std::size_t point,
       double T,double rho,const Composition& c,std::array<bool,3> active) {
     if(point>=capacity)return eos.composition_potential(T,rho,c,active,true);
     const auto x=coordinates(T,rho,c);std::array<double,5> d{};
@@ -69,7 +69,7 @@ struct ScreenedMetalMicroscopicTransport::EosCache {
     exact.fetch_add(1,std::memory_order_relaxed);
     return slot.exact;
   }
-  MetalCompositionHeatResponse heat(const VariableMetalHelmholtzEos& eos,std::size_t face,
+  MetalCompositionHeatResponse heat(const MaterialEos& eos,std::size_t face,
       double T,double rho,const Composition& c,std::array<bool,3> active,bool radiation) {
     if(face>=capacity)return eos.composition_heat(T,rho,c,active,true,true);
     const auto x=coordinates(T,rho,c);std::array<double,5> d{};
@@ -115,16 +115,23 @@ ScreenedMetalMicroscopicTransport::EosReuse ScreenedMetalMicroscopicTransport::e
 void ScreenedMetalMicroscopicTransport::use_phase_mobility(const ColdHeliumOptions& phase,double remaining) {
   require(phase.mixture_phase,"solid mobility requires the same-composition phase EOS");
   require(std::isfinite(remaining)&&remaining>=0&&remaining<=1,"solid mobility fraction must lie in [0,1]");
-  phase_options_=phase;solid_mobility_=remaining;
+  use_phase_mobility([phase](double T,double rho,const Composition& c){
+    return cold_helium_solid_response(T,rho,c,phase);
+  },remaining);
 }
 
+void ScreenedMetalMicroscopicTransport::use_phase_mobility(SolidResponse response,double remaining) {
+  require(bool(response),"phase response is required");
+  require(std::isfinite(remaining) && remaining>=0 && remaining<=1,"invalid solid mobility fraction");
+  solid_response_=std::move(response);solid_mobility_=remaining;
+}
 namespace {
 template<std::size_t N,bool abundances=true> MetalMicroscopicFaceResponse evaluate(
-    const VariableMetalHelmholtzEos& eos,const ScreenedCollisionTransport& collision,
+    const MaterialEos& eos,const ScreenedCollisionTransport& collision,
     const CollisionTaylorCache* cache,ScreenedMetalMicroscopicTransport::EosCache* eos_cache,
     std::size_t face,bool ions,double minimum_T,std::array<bool,3> active,double mlo,double mhi,const Point& lo,const Composition& a,
     const Point& hi,const Composition& b,const MetalSpeciesVector* total_rate=nullptr,
-    bool radiation_with_redistribution=false,const ColdHeliumOptions* phase=nullptr,double solid_mobility=1) {
+    bool radiation_with_redistribution=false,const ScreenedMetalMicroscopicTransport::SolidResponse* phase=nullptr,double solid_mobility=1) {
   using D=detail::Differential<N>;using detail::exp;using detail::log;
   constexpr std::size_t stride=abundances?7:NVAR;
   require(std::isfinite(mlo) && std::isfinite(mhi) && mlo>=0 && mhi>mlo,"invalid mass interval");
@@ -233,7 +240,9 @@ template<std::size_t N,bool abundances=true> MetalMicroscopicFaceResponse evalua
   const D area=4*M_PI*rb*rb,geometry=area*area*rhob/(mhi-mlo);
   D mobility_factor(1);
   if(phase && solid_mobility<1) {
-    const auto w=cold_helium_solid_response(Tb.value,rhob.value,c,*phase);
+    const auto w=(*phase)(Tb.value,rhob.value,c);
+    require(w[0]>=0 && w[0]<=1,"invalid EOS solid fraction");
+    for(double v:w)require(std::isfinite(v),"nonfinite solid fraction response");
     mobility_factor.value=1-(1-solid_mobility)*w[0];
     if constexpr(N>0)for(std::size_t j=0;j<N;++j)for(std::size_t v=0;v<5;++v)
       mobility_factor.d[j]-=(1-solid_mobility)*w[1+v]*coords[v].d[j];
@@ -267,7 +276,7 @@ template<std::size_t N,bool abundances=true> MetalMicroscopicFaceResponse evalua
   return result;
 }
 } // namespace
-ScreenedMetalMicroscopicTransport::ScreenedMetalMicroscopicTransport(const VariableMetalHelmholtzEos& eos,
+ScreenedMetalMicroscopicTransport::ScreenedMetalMicroscopicTransport(const MaterialEos& eos,
     ScreenedCollisionTransport collision,bool ions,double minimum_T,std::array<bool,3> active,
     bool radiation_with_redistribution):eos_(eos),collisions_(std::move(collision)),
     include_ions_(ions),minimum_temperature_(minimum_T),active_(active),
@@ -276,8 +285,8 @@ ScreenedMetalMicroscopicTransport::ScreenedMetalMicroscopicTransport(const Varia
 }
 MetalMicroscopicFaceResponse ScreenedMetalMicroscopicTransport::metal_eval(std::size_t face,double mlo,double mhi,
     const Point& lo,const Composition& a,const Point& hi,const Composition& b,bool derivatives) const {
-  if(derivatives)return evaluate<14>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,active_,mlo,mhi,lo,a,hi,b,nullptr,false,phase_options_?&*phase_options_:nullptr,solid_mobility_);
-  return evaluate<0>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,active_,mlo,mhi,lo,a,hi,b,nullptr,false,phase_options_?&*phase_options_:nullptr,solid_mobility_);
+  if(derivatives)return evaluate<14>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,active_,mlo,mhi,lo,a,hi,b,nullptr,false,solid_response_?&solid_response_:nullptr,solid_mobility_);
+  return evaluate<0>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,active_,mlo,mhi,lo,a,hi,b,nullptr,false,solid_response_?&solid_response_:nullptr,solid_mobility_);
 }
 MicroscopicHeatResponse ScreenedMetalMicroscopicTransport::heat(std::size_t face,double mlo,double mhi,
     const Point& lo,const Composition& a,const Point& hi,const Composition& b,bool derivatives) const {
@@ -286,8 +295,8 @@ MicroscopicHeatResponse ScreenedMetalMicroscopicTransport::heat(std::size_t face
   // A species missing at only one endpoint is still rejected. Removing it
   // there would change the physical face rather than restrict thermal
   // derivatives to a fixed-composition subspace.
-  if(derivatives)return evaluate<2*NVAR,false>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,present,mlo,mhi,lo,a,hi,b,nullptr,false,phase_options_?&*phase_options_:nullptr,solid_mobility_);
-  return evaluate<0,false>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,present,mlo,mhi,lo,a,hi,b,nullptr,false,phase_options_?&*phase_options_:nullptr,solid_mobility_);
+  if(derivatives)return evaluate<2*NVAR,false>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,present,mlo,mhi,lo,a,hi,b,nullptr,false,solid_response_?&solid_response_:nullptr,solid_mobility_);
+  return evaluate<0,false>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,present,mlo,mhi,lo,a,hi,b,nullptr,false,solid_response_?&solid_response_:nullptr,solid_mobility_);
 }
 MicroscopicHeatResponse ScreenedMetalMicroscopicTransport::heat_with_total_metal_rate(std::size_t face,
     double mlo,double mhi,const Point& lo,const Composition& a,const Point& hi,const Composition& b,
@@ -295,8 +304,8 @@ MicroscopicHeatResponse ScreenedMetalMicroscopicTransport::heat_with_total_metal
   auto present=active_;
   for(std::size_t k=0;k<3;++k)if((k==2?a.Z():a.X[k])==0 && (k==2?b.Z():b.X[k])==0)present[k]=false;
   if(derivatives)return evaluate<2*NVAR,false>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,
-      present,mlo,mhi,lo,a,hi,b,&total_rate,radiation_with_redistribution_,phase_options_?&*phase_options_:nullptr,solid_mobility_);
+      present,mlo,mhi,lo,a,hi,b,&total_rate,radiation_with_redistribution_,solid_response_?&solid_response_:nullptr,solid_mobility_);
   return evaluate<0,false>(eos_,collisions_,taylor_.get(),eos_cache_.get(),face,include_ions_,minimum_temperature_,
-      present,mlo,mhi,lo,a,hi,b,&total_rate,radiation_with_redistribution_,phase_options_?&*phase_options_:nullptr,solid_mobility_);
+      present,mlo,mhi,lo,a,hi,b,&total_rate,radiation_with_redistribution_,solid_response_?&solid_response_:nullptr,solid_mobility_);
 }
 } // namespace ember

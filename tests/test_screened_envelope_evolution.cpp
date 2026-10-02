@@ -1,3 +1,4 @@
+#include "ember/eos_variable_metal.hpp"
 #include "ember/envelope_transport.hpp"
 #include "ember/convective_material_heat.hpp"
 #include "ember/convective_evolution_checks.hpp"

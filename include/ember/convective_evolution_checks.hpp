@@ -1,5 +1,5 @@
 #pragma once
-#include "ember/eos_variable_metal.hpp"
+#include "ember/eos_material.hpp"
 #include "ember/constants.hpp"
 #include "ember/metal_cn_transport.hpp"
 #include "ember/metal_microscopic_transport.hpp"
@@ -10,7 +10,7 @@
 
 namespace ember::driver {
 using HeatDirections=std::array<double,4>; // H1, He3, total Z, initial D; He4 closes the mass
-inline HeatDirections trace_deuterium_enthalpy(const VariableMetalHelmholtzEos& eos,
+inline HeatDirections trace_deuterium_enthalpy(const MaterialEos& eos,
     double T,double rho,const Composition& composition) {
   const double f=1-composition[Species::H2]/2;auto c=composition;
   c.X[0]+=c[Species::H2]/2;c[Species::H2]=0;
@@ -42,7 +42,7 @@ struct HomogeneousCheck {
 // can change its global inventory. This does not bound microscopic kinetic
 // heat or establish a partially ionized diffusion law.
 inline HomogeneousCheck check_initial_convection(const Model& m,const Physics& physics,
-    const VariableMetalHelmholtzEos& eos,const PPCNNetwork& nuclear,bool omit_material_heat=true) {
+    const MaterialEos& eos,const PPCNNetwork& nuclear,bool omit_material_heat=true) {
   const auto regions=convective_mixing_regions(m,physics);
   if(regions.size()!=1 || regions.front()!=std::pair<std::size_t,std::size_t>{0,m.size()})
     throw std::domain_error("initial-D approximation requires whole-star convection");

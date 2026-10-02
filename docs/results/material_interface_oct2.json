@@ -1,0 +1,33 @@
+{
+  "purpose": "Shared material free-energy responses for table and phase EOS providers; unchanged table physics",
+  "unit_tests": {
+    "existing_relevant_groups_passed": 12,
+    "independent_material_test_passed": true,
+    "force_relative_error": 5.261e-08,
+    "heat_relative_error": 6.043e-09,
+    "density_response_relative_error": 9.641e-10
+  },
+  "matched_stellar_interval": {
+    "duration_years": 100000000.0,
+    "zone_threads_per_arm": 2,
+    "maximum_saved_structure_difference": 0.0,
+    "maximum_saved_abundance_difference": 0.0,
+    "maximum_saved_global_relative_difference": 0.0,
+    "convective_boundary_unchanged": true,
+    "control_CPU_seconds": 29.36,
+    "shared_CPU_seconds": 29.38,
+    "control_wall_seconds": 24.83,
+    "shared_wall_seconds": 24.7
+  },
+  "private_phase_adapter": {
+    "completed_physical_states": 10,
+    "three_phase_boundary_cases_unresolved": 2,
+    "scope": "Local seeded prototype; not a globally supported production EOS",
+    "selection_failures_retained": true
+  },
+  "limitations": [
+    "The interface does not validate GS98 metal-rich phase physics or separation kinetics",
+    "New coexistence material is not selected by the stellar executable",
+    "No speed improvement is claimed for this refactor"
+  ]
+}

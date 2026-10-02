@@ -1,3 +1,4 @@
+#include "ember/eos_variable_metal.hpp"
 #include "lifetime_driver.hpp"
 #include "lifetime_extrapolation.hpp"
 #include "ember/convection.hpp"

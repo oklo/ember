@@ -45,7 +45,7 @@ MetalCNVector mixing_rates(const BrownFingeringTransport::Face& f,
 }
 }
 
-BrownFingeringTransport::BrownFingeringTransport(const VariableMetalHelmholtzEos& eos,
+BrownFingeringTransport::BrownFingeringTransport(const MaterialEos& eos,
     const Opacity& radiation,const MetalMicroscopicTransport& base,
     const ScreenedCollisionTransport& collisions,OscillatoryMixing oscillatory)
     :eos_(eos),radiation_(radiation),base_(base),collisions_(collisions),oscillatory_(oscillatory) {

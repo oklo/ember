@@ -1,8 +1,10 @@
 #pragma once
 #include "ember/collision_transport.hpp"
-#include "ember/eos_variable_metal.hpp"
+#include "ember/eos_material.hpp"
+#include "ember/cold_helium_base.hpp"
 #include "ember/metal_cn_transport.hpp"
 #include "ember/microscopic_transport.hpp"
+#include <functional>
 
 namespace ember {
 struct MetalMicroscopicFaceResponse : MicroscopicHeatResponse {
@@ -48,7 +50,7 @@ MicroscopicHeatResponse microscopic_heat_with_total_metal_rate(const MetalMicros
 // The temperature bound limits evaluation; it does not prove full ionization.
 class ScreenedMetalMicroscopicTransport final : public MetalMicroscopicTransport {
  public:
-  ScreenedMetalMicroscopicTransport(const VariableMetalHelmholtzEos&,
+  ScreenedMetalMicroscopicTransport(const MaterialEos&,
       ScreenedCollisionTransport,bool include_ion_screening,double minimum_temperature,
       std::array<bool,3> active_species={true,true,true},bool radiation_with_redistribution=false);
   MetalMicroscopicFaceResponse metal_eval(std::size_t,double,double,const Point&,
@@ -73,10 +75,14 @@ class ScreenedMetalMicroscopicTransport final : public MetalMicroscopicTransport
   // factor applies to microscopic carried heat; zero-flux conduction remains.
   // remaining=0 is an immobile-solid limit, not a calibrated crystal law.
   void use_phase_mobility(const ColdHeliumOptions&,double remaining);
+  // A different phase EOS supplies its own solid fraction and derivatives in
+  // ln T, ln rho, XH, X3 and Z, keeping transport tied to that same phase state.
+  using SolidResponse=std::function<std::array<double,6>(double,double,const Composition&)>;
+  void use_phase_mobility(SolidResponse,double remaining);
   struct EosReuse {std::size_t hits{},exact{},verified{};double worst_potential{},worst_enthalpy{};};
   EosReuse eos_reuse_statistics() const;
  private:
-  const VariableMetalHelmholtzEos& eos_;
+  const MaterialEos& eos_;
   ScreenedCollisionTransport collisions_;
   bool include_ions_;
   double minimum_temperature_;
@@ -87,7 +93,7 @@ class ScreenedMetalMicroscopicTransport final : public MetalMicroscopicTransport
   struct EosCache;
  private:
   std::shared_ptr<EosCache> eos_cache_;
-  std::optional<ColdHeliumOptions> phase_options_;
+  SolidResponse solid_response_;
   double solid_mobility_=1;
 };
 } // namespace ember

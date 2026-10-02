@@ -12,7 +12,7 @@ namespace ember::driver {
 // law for cool radiative layers: any species boundary explicitly rejects.
 class ConvectiveMaterialHeat final:public MetalMicroscopicTransport {
  public:
-  ConvectiveMaterialHeat(const VariableMetalHelmholtzEos& eos,const Conduction& conduction)
+  ConvectiveMaterialHeat(const MaterialEos& eos,const Conduction& conduction)
       :eos_(eos),conduction_(conduction) {}
   // Accepted rates for diagnostic queries. Evolution supplies its own rates
   // explicitly and converges them with the structure.
@@ -63,6 +63,6 @@ class ConvectiveMaterialHeat final:public MetalMicroscopicTransport {
   }
   const char* name()const override{return "whole-star convective limit with material conduction and composition enthalpy";}
  private:
-  const VariableMetalHelmholtzEos& eos_;const Conduction& conduction_;
+  const MaterialEos& eos_;const Conduction& conduction_;
 };
 } // namespace ember::driver

@@ -1,30 +1,11 @@
 #pragma once
-#include "ember/eos_helmholtz.hpp"
+#include "ember/eos_material.hpp"
 #include "ember/eos_additive_volume.hpp"
 #include "ember/cold_helium_base.hpp"
 #include <optional>
 #include <memory>
 
 namespace ember {
-struct MetalCompositionPotentialResponse {
-  double phi{};
-  // Physical mass-fraction directions H1, He3, GS98 metals replacing He4.
-  std::array<double,3> gradient{},dgradient_dlnT{},dgradient_dlnRho{};
-  std::array<std::array<double,3>,3> hessian{};
-};
-struct MetalCompositionHeatResponse {
-  double material_delta{};
-  std::array<double,3> exchange_enthalpy{},radiation_enthalpy{};
-  // Coordinates ln T, ln rho, XH, X3, Z.
-  std::array<double,5> delta_partials{};
-  std::array<std::array<double,5>,3> enthalpy_partials{},radiation_enthalpy_partials{};
-};
-struct IsobaricCompositionResponse {
-  // H1, He3 and GS98 metals replace He4, at fixed temperature and pressure.
-  std::array<double,3> dlnRho{};
-  std::array<std::array<double,3>,3> potential_hessian{}; // Gibbs free energy / T
-};
-
 // Free-energy interpolation in Z, u=XH/(1-Z), and v=X3/(1-Z-XH).
 // The source grid remains physical as the helium reservoir shrinks. Source
 // ionic mixing is removed before interpolation, and exact isotope mixing
@@ -36,7 +17,7 @@ struct IsobaricCompositionResponse {
 // the first four Z planes identical and appends C2 quintic intervals.
 // Endpoint derivatives come from the preceding four source planes; adding
 // a higher-Z plane never changes the already covered composition interval.
-class VariableMetalHelmholtzEos final : public Eos {
+class VariableMetalHelmholtzEos final : public MaterialEos {
  public:
   static constexpr const char* cold_model_identifier=
       "additive_volume.thermal_potential_join.He_proxy_metals.v2";
@@ -68,27 +49,13 @@ class VariableMetalHelmholtzEos final : public Eos {
   // Stored doubles, masks and logarithmic coordinates remain bit-identical.
   static void pack_binary(const std::filesystem::path& source,const std::filesystem::path& destination,
       bool zero_helium3_only=false);
-  EosState eval(double T,double rho,const Composition& c) const override {
-    return eval_with_derivatives(T,rho,c).state;
-  }
-  EosResponse eval_with_derivatives(double,double,const Composition&) const override;
-  EosCompositionResponse composition_response(double,double,const Composition&) const override;
-  // Unrequested derivative entries remain NaN. Thermal-only callers do not
-  // need second derivatives with respect to composition.
-  MetalCompositionPotentialResponse composition_potential(double,double,const Composition&,
-      std::array<bool,3> active={true,true,true},bool hessian=true) const;
-  IsobaricCompositionResponse isobaric_composition_response(double,double,const Composition&,
-      std::array<bool,3> active={true,true,true}) const;
-  MetalCompositionHeatResponse composition_heat(double,double,const Composition&,
-      std::array<bool,3> active={true,true,true},bool derivatives=true,
-      bool composition_derivatives=true) const;
   // Source support for all composition derivative channels, without
   // evaluating the free-energy polynomial (used by optional response reuse).
-  void validate_composition_domain(double T,double rho,const Composition&) const;
+  void validate_composition_domain(double T,double rho,const Composition&) const override;
   // Material F/T jets before restoring analytic ionic composition terms and radiation.
   // eval() restores both; -phi-dphi/dlnT here alone is not the physical entropy.
   // Exposed for joining external components using the same potential convention.
-  std::array<HelmholtzJet,10> material_jets(double T,double rho,const Composition& c,std::size_t channels) const {
+  std::array<HelmholtzJet,10> material_jets(double T,double rho,const Composition& c,std::size_t channels) const override {
     return jets(T,rho,c,channels);
   }
   std::optional<DensityRange> density_range(double,const Composition&) const override;

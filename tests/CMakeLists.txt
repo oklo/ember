@@ -366,3 +366,7 @@ add_test(NAME ion_classical COMMAND test_ion_classical)
 add_executable(test_phase_mobility test_phase_mobility.cpp)
 target_link_libraries(test_phase_mobility PRIVATE ember)
 add_test(NAME phase_mobility COMMAND test_phase_mobility)
+
+add_executable(test_material_eos test_material_eos.cpp)
+target_link_libraries(test_material_eos PRIVATE ember)
+add_test(NAME material_eos COMMAND test_material_eos)

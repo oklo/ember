@@ -1,3 +1,4 @@
+#include "ember/eos_variable_metal.hpp"
 // Finite stellar control of the physical metal-mass and heat integration.
 // Opacity composition is fixed by default. Explicit selectors allow changing
 // interior opacity and a measured atmospheric metal response. The caller

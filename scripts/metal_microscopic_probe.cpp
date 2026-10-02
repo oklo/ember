@@ -1,3 +1,4 @@
+#include "ember/eos_variable_metal.hpp"
 #include "ember/metal_microscopic_transport.hpp"
 #include "conditional_metal_envelope_heat.hpp"
 #include "ember/conduction.hpp"

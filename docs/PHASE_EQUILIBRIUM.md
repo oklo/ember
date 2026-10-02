@@ -41,6 +41,21 @@ With analytic derivatives both increments are zero and `analytic_third` is true.
 Failed or unsupported neighboring solves are reported, not replaced by another
 phase set. Finite differences can remain ill-conditioned at narrow transitions.
 
+## Shared EOS and transport
+
+`MaterialEos` derives pressure, internal energy, composition forces and carried
+enthalpy from one material F/T potential. `VariableMetalHelmholtzEos` supplies
+the table implementation. Microscopic transport, convective material heat and
+fingering mixing accept this common interface. A phase provider can supply its
+solid fraction and derivatives to the existing mobility calculation.
+
+The interface restores analytic H/He/GS98 ionic mixing and radiation. A provider
+whose phase potential already contains ionic mixing must subtract that term
+before returning `material_jets`; phase conversion energy stays in the potential.
+This interface does not select the stable phases or extend their physical domain.
+The coexistence provider is still under integration and is not used by the
+running star. [Interface checks](results/material_interface_oct2.json).
+
 ## Checks and limits
 
 Exact common tangents and a common plane through three moving composition

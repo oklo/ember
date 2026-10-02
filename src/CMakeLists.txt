@@ -13,6 +13,7 @@ add_library(ember
   eos_mixture.cpp
   eos_smooth_mixture.cpp
   eos_variable_metal.cpp
+  eos_material.cpp
   ion_quantum.cpp
   ion_phase.cpp
   phase_equilibrium.cpp

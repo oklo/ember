@@ -11,7 +11,7 @@ namespace ember {
 // H/He with negligible metals. It is not an atmosphere or solid mixing law.
 class BrownFingeringTransport final:public MetalMicroscopicTransport {
  public:
-  BrownFingeringTransport(const VariableMetalHelmholtzEos&,const Opacity& radiation,
+  BrownFingeringTransport(const MaterialEos&,const Opacity& radiation,
       const MetalMicroscopicTransport& base,const ScreenedCollisionTransport&,
       OscillatoryMixing oscillatory=OscillatoryMixing::reject);
   struct Face {
@@ -38,7 +38,7 @@ class BrownFingeringTransport final:public MetalMicroscopicTransport {
  private:
   void add_heat(MicroscopicHeatResponse&,std::size_t,double,double,const Point&,
       const Composition&,const Point&,const Composition&,bool) const;
-  const VariableMetalHelmholtzEos& eos_;
+  const MaterialEos& eos_;
   const Opacity& radiation_;
   const MetalMicroscopicTransport& base_;
   const ScreenedCollisionTransport& collisions_;

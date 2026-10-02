@@ -1,3 +1,4 @@
+#include "ember/eos_variable_metal.hpp"
 #include "ember/fingering_transport.hpp"
 #include "ember/convection.hpp"
 #include <cstdlib>
