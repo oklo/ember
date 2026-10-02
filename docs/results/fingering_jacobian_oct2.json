@@ -1,0 +1,29 @@
+{
+  "change": "Resolve trace-helium composition perturbations in the fingering flux Jacobian; physical fluxes and tolerances unchanged",
+  "base_source": "f758929",
+  "independent_flux_checks": 48,
+  "old_failures": 36,
+  "old_maximum_relative_error": 3.00242,
+  "new_maximum_relative_error": 0.0180493,
+  "regression_tolerance": 0.05,
+  "tests": [
+    "fingering",
+    "fingering_face",
+    "fingering_jacobian",
+    "metal_cn_transport"
+  ],
+  "runtime_tables_used": true,
+  "step_comparison": {
+    "interval_Myr": 185.12264227293073,
+    "short_steps": 4,
+    "long_steps": 2,
+    "short_step_Myr": 46.28066056823268,
+    "long_step_Myr": 92.56132113646537,
+    "relative_surface_luminosity_difference": 1.3e-06,
+    "internal_energy_difference_erg": -3.9e+38,
+    "solid_mass_difference_g": -4.1e+25,
+    "solid_front_mass_fraction_difference": 3.2e-07,
+    "scope": "Worker comparison on bf78f4e plus the same one-line numerical change; not a whole-track timing"
+  },
+  "limitation": "Near machine-precision dependent He4, central differences still lose resolution"
+}

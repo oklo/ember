@@ -62,6 +62,15 @@ supported responses; separate mixed-H/He EOS limits remain. The model does
 not treat composition layers, crystal mixing, rotation or magnetic fields.
 A final full-lifetime validation remains unfinished.
 
+The composition Jacobian uses perturbations large enough to resolve changes
+in hydrogen when the dependent helium-4 fraction is very small. A cooling-layer
+regression checks 48 derivatives against larger flux perturbations: the maximum
+difference is 1.805%, while the former step produced errors up to a factor of
+four. This changes the solve, not the flux law. Two 92.56 Myr intervals agree
+with four 46.28 Myr intervals to within 0.2% of the measured profile changes;
+energy and solid-mass differences are smaller. At helium-4 fractions near
+machine precision, a different derivative treatment is still needed.
+
 [Trace-composition checks](results/trace_buoyancy_roundoff_oct1_v1.json) ·
 [Cold material checks](results/fingering_cold100_oct1_v1.json) ·
 [Oscillatory checks](results/fingering_oscillatory_oct1_v1.json) ·

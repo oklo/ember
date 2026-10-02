@@ -239,7 +239,9 @@ void BrownFingeringTransport::add_mixing_flux(MetalCNFaceResponse& out,std::size
   const auto left=metal_cn_abundances(a),right=metal_cn_abundances(b);
   for(int side=0;side<2;++side)for(std::size_t col=0;col<METAL_CN_D;++col) {
     const auto& composition=side?b:a;const auto values=side?right:left;
-    const double step=1e-6*std::min(values[col],composition.X[2]);
+    // A trace dependent He4 fraction limits the admissible perturbation,
+    // but scaling it by 1e-6 can put the H perturbation below one ULP.
+    const double step=std::min(1e-6*values[col],1e-3*composition.X[2]);
     if(step==0)continue;
     auto plus=values,minus=values;plus[col]+=step;minus[col]-=step;
     const auto cp=metal_cn_composition(composition,plus),cm=metal_cn_composition(composition,minus);
