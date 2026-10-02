@@ -50,6 +50,15 @@ Version 1 requires the following keys; paths are relative to the configuration:
   `coupling_abundance_tolerance`, `inventory_abundance_tolerance`, and
   `version` (set to `1`).
 
+`species_tolerance` permits values up to `2e-4`. It bounds the maximum absolute
+composition difference between a full step and two half steps, independently
+of the species conservation audit. During radiative-core growth, changing it
+from `1e-4` to `2e-4` reduced a matched 1 Gyr calculation from 381.8 to 76.39
+CPU seconds. Global differences were below 0.006446%; the largest local He3
+difference was 0.1068% of its profile peak. This comparison supports the tested
+phase, not an accuracy claim for the whole lifetime or rare species.
+[Comparison](results/warm_species_time_tolerance_oct2.json).
+
 `coupling_abundance_tolerance` accepts values up to `1e-10`. It controls the
 structure/composition iteration and the associated local species solve and
 continuity checks. It does not change `inventory_abundance_tolerance`, the

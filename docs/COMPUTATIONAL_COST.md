@@ -17,6 +17,13 @@ Include rejected trials and startup cost. Report changes in global quantities,
 fuel inventories, profiles and convective boundaries alongside the speed ratio.
 A short gradual-burning benchmark does not measure a full lifetime or flash cost.
 
+A moving convective boundary can make the estimated composition error jump
+as it crosses a mesh cell. A [matched 1 Gyr comparison](results/warm_species_time_tolerance_oct2.json)
+uses a stated larger time-error allowance and reduces 16 accepted intervals
+to three, with a 4.816-fold wall-time saving. Conservation tolerances remain
+unchanged; local profile differences and the limited evolutionary range of
+the test are recorded alongside the timing.
+
 The solver reduces repeated work with structure prediction, composition warm
 starts, local burning feedback and bounded reuse of EOS and collision responses.
 Independent zone work uses CPU threads. Source atmosphere calculations can run

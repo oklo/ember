@@ -1,0 +1,46 @@
+{
+  "scope": "One billion years during radiative-core growth, from the same 3.554 Tyr model, two CPU threads per arm. No claim of whole-lifetime convergence.",
+  "source": "f789efb with only the permitted species time-tolerance ceiling changed",
+  "species_tolerances": [
+    0.0001,
+    0.0002
+  ],
+  "CPU_seconds": [
+    381.8,
+    76.39
+  ],
+  "wall_seconds": [
+    293.1,
+    60.86
+  ],
+  "accepted_intervals": [
+    16,
+    3
+  ],
+  "rejected_intervals": [
+    9,
+    0
+  ],
+  "maximum_global_relative_difference": 6.446e-05,
+  "maximum_log_structure_difference": 7.585e-05,
+  "maximum_H_absolute_difference": 6.341e-05,
+  "maximum_He3_absolute_difference": 2.799e-06,
+  "maximum_He3_difference_over_profile_peak": 0.001068,
+  "total_He3_relative_difference": -4.653e-05,
+  "convective_mass_fraction_identical": true,
+  "maximum_first_law_error": [
+    4.074e-08,
+    4.412e-09
+  ],
+  "maximum_species_inventory_error": [
+    6.463e-18,
+    1.026e-16
+  ],
+  "retained_checks": [
+    "full step versus two half steps in every interval",
+    "all mesh points included",
+    "structure and nuclear-power error limits",
+    "species inventory and energy audits"
+  ],
+  "limitation": "The local He3 profile difference is about 0.1% of its peak. Assess later burning and cooling separately; this permits a setting rather than changing defaults."
+}
