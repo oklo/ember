@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <fstream>
 #include <limits>
+#include <sstream>
+#include <iomanip>
 
 namespace ember {
 namespace {
@@ -14,6 +16,7 @@ void require(bool ok,const char* why) {
 class Potential {
   std::vector<double> t_,p_,coeff_,source_t_,source_p_;
   std::vector<int> support_;
+  std::string source_;
   int degree_{};
   std::size_t nt_{},np_{};
   static std::pair<std::size_t,std::vector<J>> basis(const std::vector<double>& axis,int k,const J& x) {
@@ -32,7 +35,7 @@ class Potential {
     return {span-k,values};
   }
 public:
-  explicit Potential(const std::string& path) {
+  explicit Potential(const std::string& path):source_(path) {
     std::ifstream in(path);std::string tag;in>>tag>>degree_;
     require(tag=="EMBER_GIBBS_GAS_V1" && degree_>=3 && degree_<=5,"invalid potential format");
     auto read=[&](std::vector<double>& a) {
@@ -75,7 +78,12 @@ public:
     return true;
   }
   J value(const J& t,const J& p) const {
-    require(supported(t.value,p.value),"state outside supported source");
+    if(!supported(t.value,p.value)) {
+      std::ostringstream message;message<<std::setprecision(4)
+        <<"Gibbs envelope: state outside supported source; T="<<std::exp(t.value)
+        <<" K, gas P="<<std::exp(p.value)<<" dyn/cm2, source="<<source_;
+      throw std::domain_error(message.str());
+    }
     const auto [it,bt]=basis(t_,degree_,t);const auto [ip,bp]=basis(p_,degree_,p);J f;
     for(int a=0;a<=degree_;++a)for(int b=0;b<=degree_;++b)
       f=f+coeff_[(it+a)*np_+ip+b]*bt[a]*bp[b];
