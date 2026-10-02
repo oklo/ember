@@ -15,6 +15,7 @@ add_library(ember
   eos_variable_metal.cpp
   ion_quantum.cpp
   ion_phase.cpp
+  phase_equilibrium.cpp
   cold_helium_base.cpp
   ion_classical.cpp
   eos_additive_volume.cpp
