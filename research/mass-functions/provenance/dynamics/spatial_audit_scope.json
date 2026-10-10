@@ -1,0 +1,5 @@
+{
+  "uncertainty": "Only existing mass/age sensitivity draws; not counting, membership or completeness errors.",
+  "centers": "Illustrative catalogue centers: Hyades (66.75,15.87 deg,47.03 pc); Pleiades (56.75,24.12 deg,136.2 pc).",
+  "caution": "Distances without measurements may be membership-conditioned. Radius cuts are diagnostic only; all associated members remain in the target population."
+}

@@ -1,0 +1,34 @@
+{
+  "pleiades": {
+    "mass_Msun": 0.15,
+    "fit_age_range_years": [
+      30000000.0,
+      150000000.0
+    ],
+    "elapsed_age_shift_years": 12747476.521866947,
+    "rms_logL_after_shift": 0.00034288565203772364,
+    "comparison_age_years": 125000000.0,
+    "relative_differences_before_clock_shift": {
+      "luminosity_Lsun": 0.05385799153574311,
+      "radius_Rsun": 0.02534546435076024,
+      "Teff_K": 0.0005968339237210074
+    },
+    "scope": "Elapsed-age comparison of two post-deuterium initial states; fitted shift aligns their tracks and is not an independently calibrated formation age."
+  },
+  "hyades": {
+    "mass_Msun": 0.15,
+    "fit_age_range_years": [
+      30000000.0,
+      150000000.0
+    ],
+    "elapsed_age_shift_years": 12219285.052005628,
+    "rms_logL_after_shift": 2.5870232004830093e-05,
+    "comparison_age_years": 650000000.0,
+    "relative_differences_before_clock_shift": {
+      "luminosity_Lsun": 4.852879829142509e-05,
+      "radius_Rsun": 2.5042930119623108e-05,
+      "Teff_K": -3.895107166806966e-07
+    },
+    "scope": "Elapsed-age comparison of two post-deuterium initial states; fitted shift aligns their tracks and is not an independently calibrated formation age."
+  }
+}

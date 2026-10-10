@@ -1,0 +1,203 @@
+{
+  "source": "https://doi.org/10.5281/zenodo.10086810",
+  "scope": "Add observed SED luminosities and empirical K-band corrections for faint members.\n\nNo published evolutionary mass, radius or temperature is used. Kinematic\ndistances assume membership and a common Hyades velocity, fitted to Gaia data.\nThey do not use luminosity. This is a provisional uncertainty-aware conversion.\n",
+  "hyades_velocity_fit": {
+    "input_stars": 524,
+    "retained_stars": 461,
+    "velocity_ICRS_km_s": [
+      -6.114244682379366,
+      45.4919509938496,
+      5.486912579254365
+    ],
+    "median_tangential_residual_km_s": 0.4308113441095341,
+    "rejection_limit_km_s": 2,
+    "scope": "Common velocity fitted to Gaia proper motions and parallaxes, conditional on core membership."
+  },
+  "hyades_distance_check": {
+    "count": 13,
+    "median_fractional_difference": 0.1153244639076052,
+    "rms_fractional_difference": 0.34347736389161715,
+    "new_kinematic_distances": 19,
+    "assumed_fractional_uncertainty": 0.2,
+    "note": "Some published candidate parallaxes disagree substantially with common motion; retain their measured distances and do not treat kinematic membership as confirmed."
+  },
+  "hyades_published_convergent_point_check": {
+    "count": 8,
+    "maximum_fractional_difference": 0.008762944087965074
+  },
+  "SED_matches": [
+    {
+      "object_id": "hyades:gaia:3409343115420601728",
+      "reference_name": "Hya04",
+      "separation_arcsec": 0.061803409508612135,
+      "flagged_SED": false
+    },
+    {
+      "object_id": "hyades:gaia:3311691879984803072",
+      "reference_name": "Hya03",
+      "separation_arcsec": 0.12276409028144222,
+      "flagged_SED": false
+    },
+    {
+      "object_id": "hyades:gaia:357194429801576448",
+      "reference_name": "2MASS J01472702+4731142",
+      "separation_arcsec": 0.16384611946626879,
+      "flagged_SED": false
+    },
+    {
+      "object_id": "hyades:gaia:3303130326536280832",
+      "reference_name": "SDSS J035308.54+103056.0",
+      "separation_arcsec": 0.19215786907557256,
+      "flagged_SED": false
+    },
+    {
+      "object_id": "hyades:gaia:3392546632197477248",
+      "reference_name": "2MASSI J0502134+144236",
+      "separation_arcsec": 0.1992657311141656,
+      "flagged_SED": true
+    },
+    {
+      "object_id": "hyades:gaia:127547918667757568",
+      "reference_name": "2MASS J02301551+2704061",
+      "separation_arcsec": 0.08376550977020347,
+      "flagged_SED": true
+    },
+    {
+      "object_id": "hyades:gaia:3282728853923029376",
+      "reference_name": "2MASS J04441479+0543573",
+      "separation_arcsec": 0.16809882315666097,
+      "flagged_SED": true
+    },
+    {
+      "object_id": "hyades:gaia:322492502798326144",
+      "reference_name": "2MASS J01311838+3801554",
+      "separation_arcsec": 0.2007226101452929,
+      "flagged_SED": true
+    },
+    {
+      "object_id": "hyades:gaia:105449766468765952",
+      "reference_name": "2MASSW J0208183+254253",
+      "separation_arcsec": 0.08644303869633618,
+      "flagged_SED": false
+    },
+    {
+      "object_id": "hyades:gaia:1954170404122975232",
+      "reference_name": "2MASS J21481628+4003593",
+      "separation_arcsec": 0.07304145267764071,
+      "flagged_SED": true
+    },
+    {
+      "object_id": "hyades:gaia:65638443294980224",
+      "reference_name": "2MASS J03540135+2316339",
+      "separation_arcsec": 0.17034434751266733,
+      "flagged_SED": true
+    },
+    {
+      "object_id": "hyades:gaia:1924288873531145728",
+      "reference_name": "2MASS J2320292+412341",
+      "separation_arcsec": 0.13497032051946337,
+      "flagged_SED": false
+    },
+    {
+      "object_id": "hyades:source:schneider2022:J032905.95+132231.5",
+      "reference_name": "PSO J052.2746+13.3754",
+      "separation_arcsec": 0.34898388748604026,
+      "flagged_SED": false
+    },
+    {
+      "object_id": "hyades:source:schneider2022:J035542.11+225700.9",
+      "reference_name": "2MASSW J0355419+225702",
+      "separation_arcsec": 0.3878633713581703,
+      "flagged_SED": false
+    },
+    {
+      "object_id": "hyades:source:schneider2022:J043038.87+130956.7",
+      "reference_name": "CFHT-Hy-20",
+      "separation_arcsec": 0.3154550242154684,
+      "flagged_SED": false
+    },
+    {
+      "object_id": "hyades:source:schneider2022:J043543.04+132344.8",
+      "reference_name": "Hya12",
+      "separation_arcsec": 0.5181196276106075,
+      "flagged_SED": false
+    },
+    {
+      "object_id": "hyades:source:schneider2022:J044635.44+145125.7",
+      "reference_name": "Hya09",
+      "separation_arcsec": 0.19272544460592958,
+      "flagged_SED": false
+    }
+  ],
+  "K_MKO_field": {
+    "count": 415,
+    "coefficients": [
+      -20.287198991420688,
+      5.229018257619485,
+      -0.37042304285449895,
+      0.008226339957867868
+    ],
+    "absolute_magnitude_domain": [
+      9.422856241841368,
+      16.922417839788746
+    ],
+    "scatter_mag": 0.1548248386138983
+  },
+  "K_MKO_young": {
+    "count": 177,
+    "coefficients": [
+      -5.6135115457744345,
+      1.7484040613531784,
+      -0.09919771507197464,
+      0.001303771408962315
+    ],
+    "absolute_magnitude_domain": [
+      8.5876473120625,
+      16.234200520489228
+    ],
+    "scatter_mag": 0.16457362735224318
+  },
+  "Ks_2MASS_field": {
+    "count": 336,
+    "coefficients": [
+      -7.902142495675323,
+      2.155466810733286,
+      -0.1223878903827125,
+      0.0017291876831955289
+    ],
+    "absolute_magnitude_domain": [
+      9.456092935644774,
+      16.004701474950117
+    ],
+    "scatter_mag": 0.14997794542552417
+  },
+  "Ks_2MASS_young": {
+    "count": 154,
+    "coefficients": [
+      2.084117928899609,
+      -0.21878007156705723,
+      0.06255854743876854,
+      -0.002949726682067994
+    ],
+    "absolute_magnitude_domain": [
+      8.558479010593853,
+      16.406224047954463
+    ],
+    "scatter_mag": 0.1326835950065103
+  },
+  "coverage": {
+    "hyades": {
+      "Cifuentes2020_Gaia_colour_control": 1443,
+      "unavailable": 513,
+      "Sanghi2023_empirical_K_MKO_field": 20,
+      "Sanghi2023_observed_SED_rescaled": 17
+    },
+    "pleiades": {
+      "Cifuentes2020_Gaia_colour_control": 2507,
+      "Bouy2015_SED_rescaled_distance": 1782,
+      "unavailable": 1408,
+      "Sanghi2023_empirical_K_MKO_young": 3,
+      "Zapatero2018_SED_published_distance": 3
+    }
+  }
+}

@@ -1,0 +1,243 @@
+{
+  "individual_rows": 3582,
+  "direct_luminosity_matches": 316,
+  "imputed_luminosities": 157,
+  "imputation_scatter_dex": 0.18,
+  "imputed_density_by_bin": [
+    0.00013152556626492757,
+    0.0003725342326915572,
+    0.0006477550101623583,
+    0.0005828150131249141,
+    0.00033229235276632275,
+    0.00024728334640344965,
+    0.00023465571349748208,
+    0.00017662137029086193
+  ],
+  "W2_calibration": {
+    "count": 436,
+    "domain": [
+      8.71500124727376,
+      15.90961034954536
+    ],
+    "scatter_mag": 0.2975319633039448,
+    "coefficients": [
+      -117.19919975898124,
+      41.492932936692924,
+      -5.303879278689109,
+      0.2980306491959451,
+      -0.006147792899375363
+    ]
+  },
+  "volume": "20 pc for Teff >=600 K and warmer objects without a BD temperature; 15 pc for 450--600 K; colder excluded.",
+  "correction": "K24 sky factors; Gaussian parallax likelihood with local-volume prior; missing photometry correction within spectral-type/multiplicity classes; measurement and Poisson bootstrap covariance.",
+  "luminosity_methods": {
+    "Cifuentes2020_empirical_Gaia_BC": 1664,
+    "unavailable": 1303,
+    "Sanghi2023_SED_measured_flux": 173,
+    "Best2024_bolometric_or_supermag": 135,
+    "temperature_conditioned_missing_flux": 91,
+    "Sanghi2023_empirical_W2_BC": 62,
+    "Sanghi2023_Ks_2MASS_field": 34,
+    "Cifuentes2020_empirical_Ks_BC": 21,
+    "Sanghi2023_K_MKO_field": 13
+  },
+  "temperature_rows": 579,
+  "temperature_rows_with_luminosity": 573,
+  "remaining": "Unknown binaries, age-metallicity correlations, and unknown objects outside the parent catalogue are not fully recoverable. No progenitor/birth-population correction.",
+  "input_photometry_groups": {
+    "(np.float64(-8.0), False)": [
+      0,
+      3
+    ],
+    "(np.float64(-8.0), True)": [
+      0,
+      2
+    ],
+    "(np.float64(-7.0), False)": [
+      0,
+      4
+    ],
+    "(np.float64(-7.0), True)": [
+      0,
+      1
+    ],
+    "(np.float64(-6.0), False)": [
+      0,
+      8
+    ],
+    "(np.float64(-6.0), True)": [
+      0,
+      3
+    ],
+    "(np.float64(-5.0), False)": [
+      0,
+      30
+    ],
+    "(np.float64(-5.0), True)": [
+      0,
+      22
+    ],
+    "(np.float64(-4.0), False)": [
+      0,
+      27
+    ],
+    "(np.float64(-4.0), True)": [
+      0,
+      15
+    ],
+    "(np.float64(-3.0), False)": [
+      0,
+      30
+    ],
+    "(np.float64(-3.0), True)": [
+      0,
+      12
+    ],
+    "(np.float64(-2.0), False)": [
+      1,
+      82
+    ],
+    "(np.float64(-2.0), True)": [
+      4,
+      64
+    ],
+    "(np.float64(-1.0), False)": [
+      46,
+      61
+    ],
+    "(np.float64(-1.0), True)": [
+      25,
+      35
+    ],
+    "(np.float64(0.0), False)": [
+      803,
+      803
+    ],
+    "(np.float64(0.0), True)": [
+      220,
+      246
+    ],
+    "(np.float64(1.0), False)": [
+      299,
+      299
+    ],
+    "(np.float64(1.0), True)": [
+      44,
+      55
+    ],
+    "(np.float64(2.0), False)": [
+      2,
+      2
+    ],
+    "(np.float64(100.0), False)": [
+      1,
+      1
+    ],
+    "(np.float64(101.0), False)": [
+      76,
+      79
+    ],
+    "(np.float64(101.0), True)": [
+      13,
+      14
+    ],
+    "(np.float64(102.0), False)": [
+      103,
+      103
+    ],
+    "(np.float64(102.0), True)": [
+      24,
+      24
+    ],
+    "(np.float64(103.0), False)": [
+      62,
+      62
+    ],
+    "(np.float64(103.0), True)": [
+      21,
+      21
+    ],
+    "(np.float64(104.0), False)": [
+      60,
+      60
+    ],
+    "(np.float64(104.0), True)": [
+      30,
+      30
+    ],
+    "(np.float64(105.0), False)": [
+      29,
+      29
+    ],
+    "(np.float64(105.0), True)": [
+      21,
+      21
+    ],
+    "(np.float64(106.0), False)": [
+      34,
+      34
+    ],
+    "(np.float64(106.0), True)": [
+      8,
+      8
+    ],
+    "(np.float64(107.0), False)": [
+      10,
+      10
+    ],
+    "(np.float64(107.0), True)": [
+      4,
+      4
+    ]
+  },
+  "LF": [
+    {
+      "Mbol_low": 13.0,
+      "Mbol_high": 14.0,
+      "density_pc3": 0.002325106817739595,
+      "error_pc3": 0.00029660840477825986
+    },
+    {
+      "Mbol_low": 14.0,
+      "Mbol_high": 15.0,
+      "density_pc3": 0.0020096445580028393,
+      "error_pc3": 0.00029916460771946404
+    },
+    {
+      "Mbol_low": 15.0,
+      "Mbol_high": 16.0,
+      "density_pc3": 0.001614933023792646,
+      "error_pc3": 0.00026062994005374336
+    },
+    {
+      "Mbol_low": 16.0,
+      "Mbol_high": 17.0,
+      "density_pc3": 0.002405327148052533,
+      "error_pc3": 0.00030824490191467527
+    },
+    {
+      "Mbol_low": 17.0,
+      "Mbol_high": 18.0,
+      "density_pc3": 0.0021992881835580878,
+      "error_pc3": 0.0003075941372586345
+    },
+    {
+      "Mbol_low": 18.0,
+      "Mbol_high": 19.0,
+      "density_pc3": 0.0019846974060930096,
+      "error_pc3": 0.0003161418202955447
+    },
+    {
+      "Mbol_low": 19.0,
+      "Mbol_high": 20.0,
+      "density_pc3": 0.001932044827950461,
+      "error_pc3": 0.000373232072190292
+    },
+    {
+      "Mbol_low": 20.0,
+      "Mbol_high": 21.0,
+      "density_pc3": 0.0018165989719395451,
+      "error_pc3": 0.00045144714512058504
+    }
+  ]
+}

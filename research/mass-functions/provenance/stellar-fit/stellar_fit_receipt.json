@@ -1,0 +1,10 @@
+{
+  "training_mass_Msun": [
+    0.1,
+    0.2
+  ],
+  "selection_uses_BD_counts": false,
+  "fit_sha256": "13e3f9d7665ffabd9fe0cdb8d621effa8bce9aa80accc96efc62589d6a9495be",
+  "objective": "Reference-star disjoint angular x mass cells only; covariance-weighted diagnostic. No fitted bound-cluster normalization.",
+  "caveat": "Scores are not calibrated likelihoods. Published Gaia detection does not calibrate cluster membership or infrared completeness."
+}

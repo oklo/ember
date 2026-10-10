@@ -1,0 +1,368 @@
+[
+  {
+    "file": "pleiades_hobart2026.html",
+    "url": "https://lachlanhobart.github.io/Data/",
+    "bytes": 8849,
+    "sha256": "0424b72c8a9624e5e66d39cb2f1e3d820fd1c8930b8aaf5267e0d72660b6aba6"
+  },
+  {
+    "file": "pleiades_hobart2026_paper.html",
+    "url": "https://arxiv.org/html/2607.17300v1",
+    "bytes": 701269,
+    "sha256": "73ca27983b75c52d73b5484e09694de33497c78f1a7760a6e9dc509449d5fb96"
+  },
+  {
+    "file": "hyades_schneider2024.html",
+    "url": "https://arxiv.org/html/2408.10112v1",
+    "bytes": 294287,
+    "sha256": "a13b0d4263242ec8c18ad53ca8fd5b8eeb451fb10b23c7304ab068a6d7da2e5d"
+  },
+  {
+    "file": "clusters_2025.html",
+    "url": "https://arxiv.org/html/2504.08179v1",
+    "bytes": 252519,
+    "sha256": "2b7ffc5f11262efb17a6b067929dfc80efd258f16818bb00c3c2883f18bb3319"
+  },
+  {
+    "file": "pleiades_olivares2018_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/617/A15/ReadMe",
+    "bytes": 5589,
+    "sha256": "f1cc411255549d6aa3d2a9c4352b79291ec608c53aaa9fe734c104f5b7f06a59"
+  },
+  {
+    "file": "pleiades_bouy2015_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/577/A148/ReadMe",
+    "bytes": 13927,
+    "sha256": "87e161b6d994c135a4feb4ae77d7389bc36d953e4dfab68761c866b93d3f6f36"
+  },
+  {
+    "file": "pleiades_liu2025_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/169/116/ReadMe",
+    "bytes": 13027,
+    "sha256": "7356622facbf0fa00a22cb49fd360f32ee6d7255ebababd1402ced55fa10aec5"
+  },
+  {
+    "file": "hyades_schneider2024_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/168/165/ReadMe",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "file": "hyades_kos2024_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/691/A28/ReadMe",
+    "bytes": 11495,
+    "sha256": "35e35ea31048976d0c51c07519ffa96cf97c8ce2e243aa642d9cc5068f13113f"
+  },
+  {
+    "file": "pleiades_deep2014_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/568/A77/ReadMe",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "file": "pleiades_hobart2026.txt",
+    "url": "https://lachlanhobart.github.io/assets/data/pleiades_catalog.txt",
+    "sha256": "1cfe0ee2103651a9ba9fd7fb64628de533190a6146e7f3d390de8cfb582db15d",
+    "bytes": 1025270
+  },
+  {
+    "file": "pleiades_olivares2018.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F617%2FA15%2Ftable1&pc=%3E0.1&-out.all=&-out.max=unlimited",
+    "sha256": "10a359fcc31c97e21e24b0f0cdbaae081b1fb9666d742772c355f0c1c2f0ffd1",
+    "bytes": 492679
+  },
+  {
+    "file": "pleiades_bouy2015.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F577%2FA148%2Fdancep&proba=%3E0.001&-out.all=&-out.max=20000",
+    "sha256": "445028a4c058ba90fa2e6ecc1116b2aa197044fae63996b40dfcd5a957c2612c",
+    "bytes": 3023818
+  },
+  {
+    "file": "hyades_kos2024_clusters.dat",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/691/A28/clusters.dat",
+    "sha256": "49f5b1be0eb1203ea878f467e125348dc46d65df55ccd3b2db5c74c04c455fc0",
+    "bytes": 263228
+  },
+  {
+    "file": "hyades_gcns_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/649/A6/ReadMe",
+    "sha256": "a6ed8e561bd6903f9f29b3fe1a9b375b69202d6d55adfcdf2ad74a93c3fbb3ee",
+    "bytes": 39878
+  },
+  {
+    "file": "hyades_lodieu2019_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/623/A35/ReadMe",
+    "sha256": "71f3231725ee39254e5be89ebf355999e5949e8de852674dbeee5f29b8cb1cac",
+    "bytes": 5073
+  },
+  {
+    "file": "hyades_gcns.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F649%2FA6%2Fhyacomb&-out.all=&-out.max=unlimited",
+    "sha256": "2aade2646e56854b5dedcf06177b706f0ba0a8475327bd94fe3682012be89e34",
+    "bytes": 50749
+  },
+  {
+    "file": "pleiades_liu2025.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FAJ%2F169%2F116%2Ftable1&-out.all=&-out.max=unlimited",
+    "sha256": "8ae1ce491deff2d1cd819be260d8e0ff0497112a7e6db3dd59e02aefb2943dc4",
+    "bytes": 1212866
+  },
+  {
+    "file": "pleiades_deep2014.pdf",
+    "url": "https://arxiv.org/pdf/1407.2849",
+    "sha256": "158817c6681ec79de7e6db06fa16df10bf63405b68c7617e8b73623bf6e617e3",
+    "bytes": 13747171
+  },
+  {
+    "file": "clusters_liu2025_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/169/326/ReadMe",
+    "sha256": "e09f21e272bede4532690c96a4cadd2918b6fde740ffb3ccc8de3e0f538aa97b",
+    "bytes": 11343
+  },
+  {
+    "file": "hyades_kos2024.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F691%2FA28%2Fmembers&Cluster=Melotte_25&-out.all=1&-out.max=unlimited",
+    "sha256": "bc1a1ed3ce46d84644d43371e48834e130788293cd6f9f11eafc974ed5a332aa",
+    "bytes": 3525953
+  },
+  {
+    "file": "pleiades_bouy2015_p001.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F577%2FA148%2Fdancep&Pmb=%3E0.001&-out.all=1&-out.max=unlimited",
+    "error": "The read operation timed out"
+  },
+  {
+    "file": "hyades_brandner2023_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/518/662/ReadMe",
+    "sha256": "9329ed7b5b7bfd7827ed6ea1b61de07dc7ff70475671c2b53ba8eec487da145a",
+    "bytes": 5602
+  },
+  {
+    "file": "clusters_liu2025_members.dat",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/169/326/members.dat",
+    "error": "HTTP Error 404: Not Found"
+  },
+  {
+    "file": "clusters_liu2025_clusters.dat",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/169/326/clusters.dat",
+    "sha256": "ca4e6afa547d4230e88c2a233b09c4e0b101565b1d58d24baba63b6446e6ff8b",
+    "bytes": 3480
+  },
+  {
+    "file": "hyades_schneider2022.pdf",
+    "url": "https://arxiv.org/pdf/2203.11090",
+    "sha256": "a7eff3319234ffcd3639933d05f412a92c4d9ca14084bb956dd70ae62490a759",
+    "bytes": 783712
+  },
+  {
+    "file": "pleiades_confirm2018.pdf",
+    "url": "https://arxiv.org/pdf/1712.01698",
+    "sha256": "9c1ac2bb146ef93462f041cc8beae874f4d0cf420c4fa44908306be1fa3f8923",
+    "bytes": 1095398
+  },
+  {
+    "file": "pleiades_bouy2015.pdf",
+    "url": "https://arxiv.org/pdf/1502.03728",
+    "sha256": "5288e7121899e59e2b1bd833db9df8e6cb1f33e493e05a5a7c6b5ce12ef9773e",
+    "bytes": 5946314
+  },
+  {
+    "file": "pleiades_olivares2018.pdf",
+    "url": "https://arxiv.org/pdf/1804.08360",
+    "sha256": "24aa0e8eb863edfbd19a5f5d5a735ddcd9cc8c28ca3baae0ffee552a60b75c2c",
+    "bytes": 9923207
+  },
+  {
+    "file": "hyades_abundances2025.html",
+    "url": "https://arxiv.org/html/2509.11938v1",
+    "sha256": "9d8ac3e51783806e6fd480cbe0a4f4ddbc9b203820b0e28ec089dde6d831d028",
+    "bytes": 214771
+  },
+  {
+    "file": "hyades_lodieu2019_members.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F623%2FA35&-out.all=1&-out.max=unlimited",
+    "sha256": "c8ce0513b7ace49cfb65b8d7cc0f27214938bea051ec9027dcdb47aed304ece2",
+    "bytes": 354454
+  },
+  {
+    "file": "hyades_liu2025.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FAJ%2F169%2F326%2Fmembers&Name=Melotte+25&-out.all=1&-out.max=unlimited",
+    "sha256": "859e2bc11a7030946619ee4d833629316ed5e6a6f71526bd550e30910d64506b",
+    "bytes": 3274
+  },
+  {
+    "file": "pleiades_liu2025.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FAJ%2F169%2F326%2Fmembers&Name=Melotte+22&-out.all=1&-out.max=unlimited",
+    "sha256": "1d6d34e74b4118864e7af83afb257fe76a980db0aea8a4649d8dd3207ccdc9da",
+    "bytes": 3274
+  },
+  {
+    "file": "pleiades_kos2024.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F691%2FA28%2Fmembers&Cluster=Melotte_22&-out.all=1&-out.max=unlimited",
+    "sha256": "b60eecaea5312f3bb5f49892f1e14fabd3ddf446eb39b973bf79c45c5f9c1efa",
+    "bytes": 2441773
+  },
+  {
+    "file": "pleiades_dance_join.csv",
+    "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+p.%2A%2C+b.%2A+FROM+%22J%2FA%2BA%2F617%2FA15%2Ftable1%22+AS+p+JOIN+%22J%2FA%2BA%2F577%2FA148%2Fdancep%22+AS+b+ON+p.BouyID%3Db.DANCe+WHERE+p.pc%3E0.1",
+    "sha256": "25982b72c2690e72b3fc937c4ed1553542d50e0fec6ddd340d126c85f1876574",
+    "bytes": 1517621
+  },
+  {
+    "file": "pleiades_boyle2025.html",
+    "url": "https://arxiv.org/html/2511.07533v1",
+    "sha256": "c531f25728c544b906e2d49367e64a652f177d4cdd601600ea80e101ddf2d6d9",
+    "bytes": 403045
+  },
+  {
+    "file": "hyades_liu2025_members.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FAJ%2F169%2F326%2Fmembers&Name=Melotte_25&-out.all=1&-out.max=unlimited",
+    "sha256": "1c07f973739122f2b63f16fb1d103265ce2585c651576752c282a54f8ca33346",
+    "bytes": 179302
+  },
+  {
+    "file": "pleiades_liu2025_members.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FAJ%2F169%2F326%2Fmembers&Name=Melotte_22&-out.all=1&-out.max=unlimited",
+    "sha256": "35ec59062b68c7a81712955414b87117e7b8eba3665383e5f54b847d52221fd8",
+    "bytes": 320962
+  },
+  {
+    "file": "pleiades_liu2025_binaries.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FAJ%2F169%2F116%2Ftable1&-out.all=1&-out.max=unlimited",
+    "sha256": "d347cf945aabac0146cd5dbe1e6091f50398e015ca48f50b1a9a2e0543c687c0",
+    "bytes": 1267372
+  },
+  {
+    "file": "pleiades_boyle2025_table2_mrt.txt",
+    "url": "https://content.cld.iop.org/journals/0004-637X/994/1/24/revision1/apjae0724t2_mrt.txt",
+    "sha256": "fde8bae1af4156c157b10818bcbc47b432f390af1b5affca694dcaaa1ca5b3b2",
+    "bytes": 378938
+  },
+  {
+    "file": "pleiades_boyle2025_journal.html",
+    "url": "https://iopscience.iop.org/article/10.3847/1538-4357/ae0724",
+    "sha256": "0ca683560a292f4062f5ec9d52cfb2f2e7781dddc96f836534a09f0bc1d22117",
+    "bytes": 14371
+  },
+  {
+    "file": "pleiades_dance_join.vot",
+    "url": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=votable&QUERY=SELECT+p.BouyID%2Cp.pc%2Cp.pemb%2Cp.s_pc%2Cp.s_pemb%2Cp.MissingCI%2Cb.%2A+FROM+%22J%2FA%2BA%2F617%2FA15%2Ftable1%22+AS+p+JOIN+%22J%2FA%2BA%2F577%2FA148%2Fdancep%22+AS+b+ON+p.BouyID%3Db.DANCe+WHERE+p.pc%3E0.1",
+    "sha256": "1027c84ef6d5472f8889127cd7407d152e1e9da2750849be05fd5245717275c4"
+  },
+  {
+    "file": "hyades_jerabkova2021_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/647/A137/ReadMe",
+    "bytes": 6695,
+    "sha256": "a44148a6e31a725a5d89f7b0efa7b3cdd87e480b3e85e3f7b94e138a5c9e7627"
+  },
+  {
+    "file": "tidal2025_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/704/A167/ReadMe",
+    "bytes": 6339,
+    "sha256": "9104743e29650f29d48e21a09ebc0a3e74ad5e8be3f0917345e1ff65bb4758c5"
+  },
+  {
+    "file": "hyades_jerabkova2021_b1.dat",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/647/A137/tableb1.dat",
+    "bytes": 131971,
+    "sha256": "34acfab9612b14366c66727f7ac301670d2582cd06ca978d88abe54e9c78a10c"
+  },
+  {
+    "file": "hyades_jerabkova2021_b2.dat",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/647/A137/tableb2.dat",
+    "bytes": 96544,
+    "sha256": "3110722116d1d06d051145f9b7367600c4781a14f3b6a4b5aac74fb8398eae2a"
+  },
+  {
+    "file": "risbud2025_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/694/A258/ReadMe",
+    "bytes": 7934,
+    "sha256": "c107cd67d745236170cc34a4e8e994d3decde94188646d77291f81f99be76274"
+  },
+  {
+    "file": "risbud2025_clusters.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F694%2FA258%2Fclusters&-out.all=&-out.max=unlimited",
+    "bytes": 3151,
+    "sha256": "4033cffd9e0710606c4ee8fa2df38d815e6e748e67afc805b6e8830a58842240"
+  },
+  {
+    "file": "risbud2025_members.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F694%2FA258%2Fmembers&-out.all=&-out.max=unlimited",
+    "bytes": 3405954,
+    "sha256": "724c8f2b2a0d0ff6cb6423771b71d6faee4e0bfaaa72376e133f661755e9210f"
+  },
+  {
+    "file": "cifuentes2020_ReadMe",
+    "source": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/642/A115/ReadMe",
+    "bytes": 13877,
+    "sha256": "23f585ea9ee9c4cc501e213b3263a58e2bc81f5a0d7c33e7415412ab2dde85eb",
+    "note": "Source identifier; exact ASU query is also preserved in the raw table header where applicable."
+  },
+  {
+    "file": "cifuentes2020.tsv",
+    "source": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/642/A115",
+    "bytes": 2077829,
+    "sha256": "d33655e0e99975c8f51ab8bd838702c038f53c154b3360b5c7d333f96d954f90",
+    "note": "Source identifier; exact ASU query is also preserved in the raw table header where applicable."
+  },
+  {
+    "file": "sphinx_grid.json",
+    "source": "https://zenodo.org/api/records/7416042",
+    "bytes": 10808,
+    "sha256": "e33b7344a0413c42bce162ea2d32d5eda09e5c17dfdf02df28bae88089f1588d",
+    "note": "Source identifier; exact ASU query is also preserved in the raw table header where applicable."
+  },
+  {
+    "file": "red_diamondback_latest.json",
+    "source": "https://zenodo.org/api/records/17343710",
+    "bytes": 8312,
+    "sha256": "d25f1013a6f00060e148c913ab9e6d712a60d65dfce75340eeb3ce61124fe16c",
+    "note": "Source identifier; exact ASU query is also preserved in the raw table header where applicable."
+  },
+  {
+    "file": "red_diamondback_photometry.zip",
+    "source": "https://zenodo.org/records/15611937/files/photometry.zip",
+    "bytes": 42096,
+    "sha256": "0efd3ed1f9e230bf1db4181eec04cc71486c3d50835fa36b847145e5e01f1098",
+    "note": "Source identifier; exact ASU query is also preserved in the raw table header where applicable."
+  },
+  {
+    "file": "SPHINX_MODELS_MLT_1.zip",
+    "status": "Incomplete failed full download removed; verified range extraction retained",
+    "bytes": 38771904,
+    "sha256": "1cdc5cbb370a5526a6589120f5b80f85795b69505a2f7ad603a870a4d4a80479"
+  },
+  {
+    "file": "raw/jadhav2025_ReadMe",
+    "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/704/A50/ReadMe",
+    "bytes": 17621,
+    "sha256": "0c2eed6133e89d6fa75d4b24f40ab7c77482c946d72dff18a873b94793238e4a"
+  },
+  {
+    "file": "literature/risbud2025.html",
+    "url": "https://arxiv.org/html/2501.17225v1",
+    "bytes": 361032,
+    "sha256": "5ce6a4545c1d21a8bedf7df30f1c39b106739ad0ebe77090e133a0020cebb333"
+  },
+  {
+    "file": "literature/jadhav2025.html",
+    "url": "https://arxiv.org/html/2508.15056v1",
+    "bytes": 492577,
+    "sha256": "5054d864d58b81c33053978d8d186b38264e1b7d24bce062d5a32d993939e06b"
+  },
+  {
+    "file": "jadhav2025_clusters.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F704%2FA50%2Fclusters&-out.all=&-out.max=unlimited",
+    "bytes": 45276,
+    "sha256": "282941d906c65347f1ec5c61b788ac5d4b12561528c0ab02ad5a699d5918c304"
+  },
+  {
+    "file": "hyades_jadhav2025.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F704%2FA50%2Fsources&-out.all=&-out.max=unlimited&Cluster=Melotte_25",
+    "bytes": 2024518,
+    "sha256": "1c22879e34c1dba483c17225f4e7d705c49178fc04c5260990da88ab998dc270"
+  },
+  {
+    "file": "pleiades_jadhav2025.tsv",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J%2FA%2BA%2F704%2FA50%2Fsources&-out.all=&-out.max=unlimited&Cluster=Melotte_22",
+    "bytes": 2216386,
+    "sha256": "2c6c806ea99fa36692368657956492e9b43f4bacdfb533fdce56eb108ae85ecb"
+  }
+]

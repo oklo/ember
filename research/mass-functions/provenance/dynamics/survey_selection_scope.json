@@ -1,0 +1,56 @@
+{
+  "description": "Survey thresholds used as sensitivity brackets, not a calibrated union-selection probability.",
+  "Hyades_Schneider2022": {
+    "url": "https://arxiv.org/abs/2203.11090",
+    "RA_deg": [
+      46,
+      85
+    ],
+    "Dec_deg": [
+      -4.5,
+      38.5
+    ],
+    "pmra_masyr": [
+      42,
+      197
+    ],
+    "pmdec_masyr": [
+      -92,
+      43
+    ],
+    "J_followup_limit": 17.5,
+    "J_minus_W2_min": 1.5,
+    "limitations": "Actual overlapping IR footprint, colour cuts, source vetting and BANYAN membership not reconstructed."
+  },
+  "Hyades_Schneider2024": {
+    "url": "https://arxiv.org/abs/2408.10112",
+    "radius_pc": 18,
+    "J_followup_limit": 18,
+    "proper_motion_direction_max_deg": 7,
+    "limitations": "J=19.6 UHS sensitivity is not the completed spectroscopic census limit; colour and BANYAN cuts not modeled."
+  },
+  "Pleiades_DANCe": {
+    "url": "https://arxiv.org/abs/1502.03728",
+    "central_aperture_deg": 3,
+    "conservative_Ks_complete": 17,
+    "outer_approximation_deg": 5,
+    "outer_deep_Ks_limit": 18,
+    "limitations": "Outer 5-deg circular field only approximates the irregular footprint. Not an injection-recovery completeness model."
+  },
+  "wide_Gaia": {
+    "G_limits": [
+      20,
+      20.7
+    ],
+    "cluster_radius_limit_pc": 200,
+    "limitations": "Published membership algorithms, astrometric quality, contamination, and sky-dependent Gaia recovery not simulated. Radius 200pc contains almost all reference stars of current union, but is not a universal Gaia limit."
+  },
+  "deep_Pleiades": {
+    "url": "https://arxiv.org/abs/1407.2849",
+    "area_deg2": 0.8,
+    "JH_complete": 20.2,
+    "treatment": "Not extrapolated beyond its published patchy footprint; simulation focuses on .03-.08 Msun."
+  },
+  "mock_luminosity": "Existing Ember cluster isochrones at 125 and 650 Myr, respective Z=.01648 and .02307. Both atmosphere/cloud choices propagated. Bolometric measurement scatter .05 dex. No new stellar tracks.",
+  "mock_binaries": "Bound pairs with separation <.01 pc and projected angular separation <1 arcsec are combined. Calibrated low-mass component light summed in flux. Bright >.25-Msun ordinary stellar companions hide low-mass members. Evolved companions not assigned a synthetic composite mass."
+}

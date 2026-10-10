@@ -1,0 +1,144 @@
+{
+  "normalization_interval_Msun": [
+    0.1,
+    0.2
+  ],
+  "definition": "(dN/dlog10M) / N(0.10 <= M < 0.20 Msun), separately for every saved realization",
+  "reason": "Common stellar interval, above uncertain substellar coverage and below the upper model boundary. No claim of completeness.",
+  "population": "All selected candidates with a model-supported mass, including identified tails and associations; no core-only cut.",
+  "uncertainty": "16th--84th percentiles of the existing age/cloud/initial-state/luminosity sensitivity draws, including normalization variation. Not counting errors or a complete posterior.",
+  "missing_corrections": [
+    "detection completeness",
+    "membership contamination",
+    "unresolved binaries"
+  ],
+  "source_receipt": "observed_mass_function_receipt.json",
+  "bins_Msun": [
+    0.008,
+    0.01,
+    0.014,
+    0.02,
+    0.028,
+    0.04,
+    0.056,
+    0.08,
+    0.1,
+    0.14142135623730953,
+    0.2,
+    0.25
+  ],
+  "clusters": {
+    "hyades": {
+      "normalization_count_quantiles": [
+        339.0,
+        361.0,
+        383.0
+      ],
+      "maximum_normalization_error": 1.1102230246251565e-16,
+      "minimum_model_mass_Msun": 0.02,
+      "input_sha256": "a87984d6562160134ed32d3b7771d352f652a9bfdce58c6e2865f25e830b2451",
+      "age_scenarios_years": {
+        "nominal": 650000000.0,
+        "low": 600000000.0,
+        "high": 800000000.0
+      },
+      "relative_density_quantiles": [
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.018697578630117503,
+          0.09516074878228421,
+          0.17999267073488331,
+          0.44250547792096756,
+          1.2553264353479165,
+          2.81576105644437,
+          3.6273714753790705,
+          4.592396366813534
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.039902704248530645,
+          0.1655306727131507,
+          0.23258361081707446,
+          0.48307508162425816,
+          1.3926354281791062,
+          2.9232967235008784,
+          3.7205594662738455,
+          4.863553230120265
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.07625100798716088,
+          0.22941583354262945,
+          0.27315014146163313,
+          0.5233967783926321,
+          1.544397584749663,
+          3.0164847143956535,
+          3.828095133330354,
+          5.11880999105085
+        ]
+      ]
+    },
+    "pleiades": {
+      "normalization_count_quantiles": [
+        505.8,
+        590.0,
+        688.2
+      ],
+      "maximum_normalization_error": 2.220446049250313e-16,
+      "minimum_model_mass_Msun": 0.008,
+      "input_sha256": "e7de427d32ff511f041571a534d83f5ea8145e5d310ac0928fe0d7488495efc9",
+      "age_scenarios_years": {
+        "nominal": 125000000.0,
+        "low": 110000000.0,
+        "high": 140000000.0
+      },
+      "relative_density_quantiles": [
+        [
+          0.0,
+          0.02176697259788907,
+          0.0,
+          0.016745635044126413,
+          0.5005897671695457,
+          0.6403355894669006,
+          0.8852315136107143,
+          1.388644337081833,
+          1.9545175734924258,
+          4.183958992639663,
+          5.189232941225526
+        ],
+        [
+          0.0,
+          0.026705640164658644,
+          0.0,
+          0.03131996943185331,
+          0.5544382219033501,
+          0.7474215231743628,
+          0.9801351350486738,
+          1.5646789989213286,
+          2.212767042023633,
+          4.4310891477510905,
+          6.389796532199513
+        ],
+        [
+          0.0,
+          0.03574154565831341,
+          0.010040197585296727,
+          0.07033330063960086,
+          0.6272986405742148,
+          0.8591699803949314,
+          1.09258064337422,
+          1.7543610675342116,
+          2.4598971971350596,
+          4.689338616282297,
+          7.432368389486468
+        ]
+      ]
+    }
+  }
+}

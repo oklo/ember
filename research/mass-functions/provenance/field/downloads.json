@@ -1,0 +1,65 @@
+[
+  {
+    "name": "Kirkpatrick2024_20pcCensus_Table4_Parameters.csv",
+    "url": "https://exoplanetarchive.ipac.caltech.edu/data/Contributed/20pcCensus/Kirkpatrick2024_20pcCensus_Table4_Parameters.csv",
+    "bytes": 2364015,
+    "sha256": "376b2ad0a681f230043deece0f7e85d3325c0ef2da80a712d7f74361a185941f",
+    "retrieved_utc": "2026-10-09T15:50:44.004290+00:00"
+  },
+  {
+    "name": "Kirkpatrick2024_20pcCensus_Table4_Columns.pdf",
+    "url": "https://exoplanetarchive.ipac.caltech.edu/data/Contributed/20pcCensus/Kirkpatrick2024_20pcCensus_Table4_Columns.pdf",
+    "bytes": 646584,
+    "sha256": "37e396c9605f2f38b86b8faf985cfe369c904856cfe9c8c7332a8886f3c2198e",
+    "retrieved_utc": "2026-10-09T15:50:44.554511+00:00"
+  },
+  {
+    "name": "Kirkpatrick2024_20pcCensus_Table4_Parameters_GeneralNotes_References.csv",
+    "url": "https://exoplanetarchive.ipac.caltech.edu/data/Contributed/20pcCensus/Kirkpatrick2024_20pcCensus_Table4_Parameters_GeneralNotes_References.csv",
+    "bytes": 21544,
+    "sha256": "cd59a127477f630afa7780629f5de0f4de9d771b9f9ea6413a484f9bc7365497",
+    "retrieved_utc": "2026-10-09T15:50:44.877099+00:00"
+  },
+  {
+    "name": "Kirkpatrick2024_20pcCensus_Table4_Parameters_Astrometry_References.csv",
+    "url": "https://exoplanetarchive.ipac.caltech.edu/data/Contributed/20pcCensus/Kirkpatrick2024_20pcCensus_Table4_Parameters_Astrometry_References.csv",
+    "bytes": 3432,
+    "sha256": "cced0b21f57502bfaf77b171abd5416871035b5180744d41d12ee9678179df77",
+    "retrieved_utc": "2026-10-09T15:50:45.160956+00:00"
+  },
+  {
+    "name": "Kirkpatrick2024_20pcCensus_Table4_Parameters_Masses_References.csv",
+    "url": "https://exoplanetarchive.ipac.caltech.edu/data/Contributed/20pcCensus/Kirkpatrick2024_20pcCensus_Table4_Parameters_Masses_References.csv",
+    "bytes": 10005,
+    "sha256": "ecc05c5f6ab60abf41c69a488967573dcf4ea74afb045e86b34071e936f107b3",
+    "retrieved_utc": "2026-10-09T15:50:45.420599+00:00"
+  },
+  {
+    "name": "Kirkpatrick2024_20pcCensus_Table4_Parameters_Photometry_References.csv",
+    "url": "https://exoplanetarchive.ipac.caltech.edu/data/Contributed/20pcCensus/Kirkpatrick2024_20pcCensus_Table4_Parameters_Photometry_References.csv",
+    "bytes": 3373,
+    "sha256": "5d67d741eaa2bec153b104b320be01715e676ba320e6ce826f7119c5694e47ba",
+    "retrieved_utc": "2026-10-09T15:50:45.685552+00:00"
+  },
+  {
+    "name": "Kirkpatrick2024_20pcCensus_Table4_Parameters_SpectralTypes_References.csv",
+    "url": "https://exoplanetarchive.ipac.caltech.edu/data/Contributed/20pcCensus/Kirkpatrick2024_20pcCensus_Table4_Parameters_SpectralTypes_References.csv",
+    "bytes": 20058,
+    "sha256": "d9847073871266aee50e47d744bd7e878bd5cd196f8f81f1651d0ccc7aa27cbf",
+    "retrieved_utc": "2026-10-09T15:50:45.992673+00:00"
+  },
+  {
+    "name": "best2024.html",
+    "url": "https://arxiv.org/html/2401.09535v1",
+    "bytes": 2324866,
+    "sha256": "0d09d4f89f6ae6c8444e18b9101f89cdc64661f41c8724e06870c07b70462462",
+    "retrieved_utc": "2026-10-09T15:50:52.123264+00:00"
+  },
+  {
+    "name": "kirkpatrick2024.pdf",
+    "url": "https://arxiv.org/pdf/2312.03639",
+    "bytes": 7273699,
+    "sha256": "4e063bea83fcf96952d9f415c3cd913b0ad62e3538346cf47ff07b079552f4c5",
+    "retrieved_utc": "2026-10-09T15:50:52.370445+00:00"
+  }
+]

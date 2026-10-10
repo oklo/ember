@@ -1,0 +1,138 @@
+{
+  "double_mass_and_age_quadrature": {
+    "baseline_alpha_quantiles": [
+      0.04995971112765205,
+      0.3061661497914007,
+      0.5188164432878121
+    ],
+    "refined_alpha_quantiles": [
+      0.044911332034362345,
+      0.3024017174730259,
+      0.5157648815133868
+    ],
+    "baseline_beta_quantiles": [
+      -0.4879148713597082,
+      -0.37277402764061757,
+      -0.2638956282589007
+    ],
+    "refined_beta_quantiles": [
+      -0.4852568059775068,
+      -0.37057784478057754,
+      -0.2621513473586975
+    ],
+    "largest_LF_fraction_change": 0.0009333273987688351,
+    "refined_chi2_LF": 2.5651932824938535
+  },
+  "native_metallicity_luminosity_max_error_dex": 8.881784197001252e-16,
+  "lower_mass_cutoff_0014": {
+    "cloud": "nc",
+    "observable": "component_luminosity",
+    "age_scale": 1.0,
+    "young_age_Gyr": 0.2,
+    "mass_min": 0.014099750431366473,
+    "mass_max": 0.08479942110233747,
+    "metallicity": null,
+    "binary_fraction": 0.0,
+    "alpha_quantiles": [
+      0.11236696316073257,
+      0.39988833680505514,
+      0.641307545849798
+    ],
+    "beta_quantiles": [
+      -0.4615730560968139,
+      -0.3574403862993712,
+      -0.2555859671692149
+    ],
+    "best": {
+      "alpha": 0.42500000000000004,
+      "beta": -0.3400000000000001,
+      "amplitude_pc3_dex": 0.024125972103805703,
+      "chi2_distribution": 2.9267694221056275,
+      "chi2_young": 0.020123945873842138,
+      "young_fraction": 0.0883116687498657,
+      "predicted": [
+        0.0017927646746145845,
+        0.0018820404688717931,
+        0.0021356566770269663,
+        0.0023058660276805507,
+        0.0021324457269444996,
+        0.0017253474068462328
+      ]
+    },
+    "data": [
+      0.0020096445580028393,
+      0.001614933023792646,
+      0.002405327148052533,
+      0.0021992881835580878,
+      0.0019846974060930096,
+      0.001932044827950461
+    ],
+    "error_low": [
+      0.00029916460771946404,
+      0.00026062994005374336,
+      0.00030824490191467527,
+      0.0003075941372586345,
+      0.0003161418202955447,
+      0.000373232072190292
+    ],
+    "error_high": [
+      0.00029916460771946404,
+      0.00026062994005374336,
+      0.00030824490191467527,
+      0.0003075941372586345,
+      0.0003161418202955447,
+      0.000373232072190292
+    ],
+    "track_cases": [
+      "field_metalpoor_nc_m0.010_v2",
+      "field_metalpoor_nc_m0.020_v1",
+      "field_metalpoor_nc_m0.025_v2",
+      "field_metalpoor_nc_m0.050_v1",
+      "field_metalpoor_nc_m0.065_v1",
+      "field_metalpoor_nc_m0.075_v1",
+      "field_metalpoor_nc_m0.085_v1",
+      "field_nc_m0.008_v1",
+      "field_nc_m0.010_v1",
+      "field_nc_m0.012_v1",
+      "field_nc_m0.014_v1",
+      "field_nc_m0.020_v1",
+      "field_nc_m0.025_v7",
+      "field_nc_m0.035_v7",
+      "field_nc_m0.050_v7",
+      "field_nc_m0.060_v7",
+      "field_nc_m0.070_v5",
+      "field_nc_m0.075_v1",
+      "field_nc_m0.080_v5",
+      "field_nc_m0.085_v5",
+      "field_nc_m0.090_v1",
+      "field_metalrich_nc_m0.010_v2",
+      "field_metalrich_nc_m0.020_v1",
+      "field_metalrich_nc_m0.025_v1",
+      "field_metalrich_nc_m0.050_v1",
+      "field_metalrich_nc_m0.065_v1",
+      "field_metalrich_nc_m0.075_v1",
+      "field_metalrich_nc_m0.085_v1"
+    ],
+    "prior": "uniform alpha [-1.5,2], beta [-1.5,.5], local log-uniform positive normalization",
+    "limits": "Three-node local metallicity mixture when metallicity is null; otherwise the stated fixed metallicity. Young-fraction calibration and clouds are sensitivity cases. Not a reconstructed birth IMF."
+  },
+  "imputed_luminosity_fraction_per_fitted_bin": [
+    0.1853731950797196,
+    0.4011033278897941,
+    0.2423017648958017,
+    0.15109086442174585,
+    0.12459498644190857,
+    0.12145459054716035
+  ],
+  "imputed_luminosity_fraction_fitted_total": 0.1990242529126035,
+  "field_metallicity_nodes": [
+    -0.3,
+    0,
+    0.3
+  ],
+  "field_metallicity_weights": [
+    0.235,
+    0.63,
+    0.135
+  ]
+}

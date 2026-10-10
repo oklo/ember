@@ -1,0 +1,15 @@
+{
+  "purpose": "Constrain cluster/association descriptions with reference-star data, then test brown-dwarf predictions without fitting their normalization.",
+  "input": "Existing complete PeTar endpoints, Ember isochrones and catalogue union; preserve all associated candidates.",
+  "model": "One existing bound-cluster realization plus a diffuse, initially unbound population integrated through MWPotential2014. Bound-cluster amplitude is fixed; only the diffuse population abundance is fitted.",
+  "diffuse_initial_one_axis_size_pc": [10, 30, 60],
+  "diffuse_initial_one_axis_velocity_kms": [0.3, 0.7, 1.5],
+  "dynamics_scope": "Diffuse stars neglect self-gravity and the bound cluster's force. Check inferred mass/virial ratios and use exact Galactic orbit integration. This is an extended-association test, not a gas-expulsion or primordial-segregation simulation.",
+  "training_mass_Msun": [0.10, 0.20],
+  "prediction_mass_Msun": [0.03, 0.08],
+  "selection": "Published Gaia DR3 sky/magnitude detection model; literature infrared footprints; DANCe core classifier adjustment. Catalogue membership recovery is not supplied by the Gaia detection map.",
+  "membership_recovery_scenarios": [0.8, 1.0],
+  "meaning_of_recovery_scenarios": "Uniform sensitivity assumptions applied to Gaia-selected associated members, not measured completeness or freely fitted spatial functions.",
+  "fit": "Disjoint angular reference-star counts, with observational mass-inference covariance and simulated counting variance. Structure mass/size ranges are prior screening checks. Do not adjust birth BD ratio to fit observed BD counts.",
+  "limitations": "A diffuse component that fails its neglected-gravity check cannot be accepted. Catalogue contamination and detailed membership selection remain unresolved; any fit is conditional, not a recovered birth mass function. No new broad collisional ensemble is authorized by this plan."
+}

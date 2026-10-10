@@ -1,0 +1,13 @@
+{
+  "source": "https://github.com/gaia-unlimited/gaiaunlimited/blob/main/src/gaiaunlimited/selectionfunctions/surveyTCG.py",
+  "data": "https://zenodo.org/records/8063930",
+  "sha256": {
+    "survey.py": "1cd5e9e985f34269f31a031010f5c3f3c7532c6c14931c61e75dee609f4e81a7",
+    "allsky_M10_hpx7.hdf5": "43ca2c512c0e5e7d9e6d6bd8a82d3198e4437ab27689285d9fb84aa53f65b888",
+    "gaiaunlimited_LICENSE": "d2faa1c2aa055768dce71bd738fd0e7f352a712b266c4279c17b0ae92ed23246",
+    "surveyTCG.py": "9ff8e099eb08c3aad485179756f635c32c758de36f7c55e58352f61bdb823c91",
+    "zenodo.json": "9c23d1303dc69ac05b417bf5ca008abccf57b08de322bde2cab68b3172a69fa6"
+  },
+  "scope": "Gaia DR3 source-catalogue inclusion, NOT astrometry-quality or cluster-membership recovery.",
+  "monotonicity_and_probability_checks": true
+}

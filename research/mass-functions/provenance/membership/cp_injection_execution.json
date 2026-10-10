@@ -1,0 +1,32 @@
+[
+  {
+    "run": "hyades_r2.5_assort_s43",
+    "background_count": 480841,
+    "removed_known_candidates": 3451,
+    "wall_seconds": 12.790658958256245,
+    "core_mean_pm_masyr": [
+      104.31858991911542,
+      -24.055343752956183
+    ]
+  },
+  {
+    "run": "pleiades_r3_assort_s43",
+    "background_count": 284749,
+    "removed_known_candidates": 4314,
+    "wall_seconds": 23.87873591668904,
+    "core_mean_pm_masyr": [
+      19.92505430501649,
+      -45.59137223930872
+    ]
+  },
+  {
+    "run": "pleiades_r4_fieldlow_s43",
+    "background_count": 284749,
+    "removed_known_candidates": 4314,
+    "wall_seconds": 23.853995874524117,
+    "core_mean_pm_masyr": [
+      20.067404519347875,
+      -45.45461804482379
+    ]
+  }
+]

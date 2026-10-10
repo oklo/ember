@@ -1,0 +1,120 @@
+{
+  "mass_range_Msun": [
+    0.01,
+    0.25
+  ],
+  "brown_dwarf_powerlaw": "dN/dM proportional to M^(-alpha); normalization per cubic parsec per dex",
+  "component_population": "Individual components in K24; temperatures choose published completeness radius; luminosities and Ember determine masses.",
+  "slope_nominal_quantiles": [
+    0.050000000000000044,
+    0.3250000000000002,
+    0.5249999999999999
+  ],
+  "slope_sensitivity_quantiles": [
+    0.10000000000000009,
+    0.375,
+    0.6750000000000003
+  ],
+  "beta_nominal_quantiles": [
+    -0.48,
+    -0.3599999999999999,
+    -0.26
+  ],
+  "BD_003_008_to_stars_010_020_nominal": [
+    0.6018642633911937,
+    0.6692573456131803,
+    0.737562892933874
+  ],
+  "BD_003_008_to_stars_010_020_sensitivity": [
+    0.5480947583773708,
+    0.6291172838816415,
+    0.7147941905612587
+  ],
+  "reference_density_quantiles": [
+    0.01439513042079191,
+    0.015129219779948553,
+    0.015971498810878147
+  ],
+  "missing_late_metalrich_cell_density_bound": [
+    9.26402125526973e-06,
+    2.0118957204841583e-05,
+    3.8766927097185054e-05
+  ],
+  "uncertainty": "16th--84th percentiles across statistical draws and declared sensitivity cases. This is not a full systematic-error posterior.",
+  "sensitivity_cases": [
+    "nc_component_luminosity_mixed",
+    "nc_component_young100",
+    "nc_component_young300",
+    "nc_component_coldbound",
+    "nc_component_binary05",
+    "nc_component_age0",
+    "nc_component_age2",
+    "nc_component_solar",
+    "f2_component_luminosity_mixed",
+    "f2_component_young100",
+    "f2_component_young300",
+    "f2_component_coldbound",
+    "f2_component_binary05",
+    "f2_component_age0",
+    "f2_component_age2",
+    "f2_component_solar"
+  ],
+  "limits": [
+    "Adopted 0.01 Msun lower population cutoff; no free low-mass cutoff inference.",
+    "Field metallicity represented by three nodes, Y=.27, scaled GS98 mixture; no age-metallicity correlation.",
+    "Approximate missing-component luminosities are flagged and propagated; single-object LF is a separate cross-check.",
+    "Residual unresolved binaries represented by a 0--5% equal-light-pair sensitivity, not a measured individual classification.",
+    "Temperature-function mismatch shows remaining atmosphere/calibration limitations.",
+    "Cluster curves remain incomplete; local field comparison is not a measurement of cluster birth differences."
+  ],
+  "cluster_observed_ratios": {
+    "hyades": [
+      0.1217479507634948,
+      0.1303153818335242,
+      0.13826993671598767
+    ],
+    "pleiades": [
+      0.3084698018620196,
+      0.3426040485273396,
+      0.3749879465264081
+    ]
+  },
+  "goodness_of_fit": {
+    "nc_component_luminosity_mixed": {
+      "chi2_LF": 2.57368635590869,
+      "bins": 6,
+      "nominal_dof": 3,
+      "nominal_tail_probability": 0.4621213543223194
+    },
+    "nc_luminosity_mixed": {
+      "chi2_LF": 0.8500636181952783,
+      "bins": 6,
+      "nominal_dof": 3,
+      "nominal_tail_probability": 0.837458735516866
+    },
+    "nc_temperature_mixed": {
+      "chi2_LF": 14.756726022537116,
+      "bins": 10,
+      "nominal_dof": 7,
+      "nominal_tail_probability": 0.03924738051568409
+    },
+    "f2_component_luminosity_mixed": {
+      "chi2_LF": 10.81815732074347,
+      "bins": 6,
+      "nominal_dof": 3,
+      "nominal_tail_probability": 0.012750924262498823
+    },
+    "f2_luminosity_mixed": {
+      "chi2_LF": 6.005859673503421,
+      "bins": 6,
+      "nominal_dof": 3,
+      "nominal_tail_probability": 0.11132548700623043
+    },
+    "f2_temperature_mixed": {
+      "chi2_LF": 48.88926030600215,
+      "bins": 10,
+      "nominal_dof": 7,
+      "nominal_tail_probability": 2.385163609925267e-08
+    }
+  }
+}

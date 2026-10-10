@@ -1,0 +1,33 @@
+cluster,stage,selection,population,expected_count,source_count
+hyades,0,All retained candidates,BD,47.01953125,1480
+hyades,0,All retained candidates,reference,361.40234375,1480
+hyades,1,Gaia counterpart,BD,26.08203125,1455
+hyades,1,Gaia counterpart,reference,361.40234375,1455
+hyades,2,Astrometry and distance,BD,26.08203125,1453
+hyades,2,Astrometry and distance,reference,361.40234375,1453
+hyades,3,Three Gaia bands,BD,26.08203125,1452
+hyades,3,Three Gaia bands,reference,361.40234375,1452
+hyades,4,Astrometric quality,BD,6.9765625,1220
+hyades,4,Astrometric quality,reference,335.36328125,1220
+hyades,5,Distance precision,BD,6.9765625,1156
+hyades,5,Distance precision,reference,328.05859375,1156
+hyades,6,Search volume,BD,6.9765625,1145
+hyades,6,Search volume,reference,327.11328125,1145
+hyades,7,Automatic membership,BD,4.6171875,735
+hyades,7,Automatic membership,reference,225.15625,735
+pleiades,0,All retained candidates,BD,200.9765625,4295
+pleiades,0,All retained candidates,reference,594.7890625,4295
+pleiades,1,Gaia counterpart,BD,67.7734375,3960
+pleiades,1,Gaia counterpart,reference,560.11328125,3960
+pleiades,2,Astrometry and distance,BD,67.7734375,3960
+pleiades,2,Astrometry and distance,reference,560.11328125,3960
+pleiades,3,Three Gaia bands,BD,67.7734375,3960
+pleiades,3,Three Gaia bands,reference,560.11328125,3960
+pleiades,4,Astrometric quality,BD,32.21484375,3483
+pleiades,4,Astrometric quality,reference,540.1328125,3483
+pleiades,5,Distance precision,BD,28.66015625,3477
+pleiades,5,Distance precision,reference,539.6171875,3477
+pleiades,6,Search volume,BD,27.578125,2577
+pleiades,6,Search volume,reference,496.14453125,2577
+pleiades,7,Automatic membership,BD,24.734375,2078
+pleiades,7,Automatic membership,reference,453.62109375,2078

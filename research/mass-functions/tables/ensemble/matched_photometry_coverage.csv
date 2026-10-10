@@ -1,0 +1,5 @@
+cluster,population,expected_in_geometry,expected_missing_band,expected_selected
+hyades,BD,31.8203125,0.0,25.41015625
+hyades,stars,111.94140625,4.40234375,107.5390625
+pleiades,BD,136.90234375,0.0,136.90234375
+pleiades,stars,274.1015625,0.0,274.1015625

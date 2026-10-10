@@ -1,0 +1,14 @@
+{
+  "pleiades": {
+    "assumed_age": 125000000.0,
+    "old_initial_scale": 42307332.50061774,
+    "new_initial_scale": 19288620.84460462,
+    "luminosity_fractional_difference_after_analytic_clock_correction": 0.00656461842419831
+  },
+  "hyades": {
+    "assumed_age": 650000000.0,
+    "old_initial_scale": 41925183.14824405,
+    "new_initial_scale": 28107614.414692156,
+    "luminosity_fractional_difference_after_analytic_clock_correction": 0.0019404102927764733
+  }
+}

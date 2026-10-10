@@ -1,0 +1,14 @@
+{
+  "database_integrity": "ok",
+  "rows_with_luminosity": 5775,
+  "selected_catalogue_counts": {
+    "hyades": 1993,
+    "pleiades": 5703
+  },
+  "unique_object_ids": true,
+  "unique_nonnull_gaia_ids_per_cluster": true,
+  "ordered_mass_quantiles": true,
+  "analytic_mass_inverse": true,
+  "multiple_mass_branches_preserved": true,
+  "out_of_range_values_not_clamped": true
+}

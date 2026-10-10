@@ -1,0 +1,6 @@
+{
+  "source": "https://arxiv.org/abs/1804.08360",
+  "objects": 1353,
+  "scope": "Fixed nominal age/initial-age correction; two cloud cases and luminosity uncertainties. P_EMB recognizes high-mass-ratio pairs only. Flux-ratio assumptions 0.6 and 1 bracket a sensitivity, not a fitted q distribution. Not a correction for missing stars, low-q pairs or dissolution.",
+  "field_warning": "This gives component counts in a central survey footprint, not a recovered birth component mass function."
+}

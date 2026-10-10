@@ -1,0 +1,21 @@
+{
+  "files": {
+    "resume_optimized.py": "e5f8b73391fa178fd8e92ceada85a82253e0773a75e480ac2ead804b17bc1401",
+    "audit_spatial_selection.py": "15abbe781e7f40fd662111686fc27d46da6a61a6f51c1be5acf6d9d79ffc5f47",
+    "run_cluster.py": "ab8c30ddc79c228f4cd8be458556f92fa06464241495e823ff9f640aad12df7f",
+    "archive_results.py": "b6d9f918ae10b8f6caccae23a26d48054df9c7cc4fd66be814f5aebdb11c079d",
+    "tune_cluster_step.py": "b05254155672ccf46aa950f5876d8b48a3521e0afd26fd47cf9cc3eb661d2060",
+    "check_core_step.py": "80468811ab0d82b7c86d84ee53ebf7e0cb80752a3c4620b9f9a4363b793caf5a",
+    "analyze_clusters.py": "cbe592743ab1a0346d52001a83178151aba46a038917160351255244144f45d4",
+    "plot_results.py": "ee158d461b26581ae9cb7dc168c9004bac3ee99e3f2c4b49147be52cc328b15b",
+    "check_larger_step.py": "06acb012a90a5c2fb770bdf640a31c1786955cae98432c3f9388098082f1054b",
+    "install/bin/petar.omp.bse.galpy.d": "81b8024f77f636881d661ecc4cbcde724d44ee9c29519706345692aed350299c",
+    "vendor_receipt.json": "c915c310469805b85c5397c239115498bd7e98d1ae04e4a189b2756820293ce5",
+    "build_command.json": "6ee8c8660a61a63a5883ebf935b2b730dbef965a8adcc621cf39d8b2ac759067"
+  },
+  "cpu_seconds": 16489.751518999998,
+  "sum_job_wall_seconds": 8592.920339167118,
+  "completed_cluster_runs": 8,
+  "sqlite": "@EMBER_ROOT@/out/cluster-dissolution-oct9-v1/cluster_dissolution.sqlite",
+  "scope": "Evolution cost includes the deliberately stopped compact-run stage and its continuation, excludes software compilation and short validation probes. Sum of job wall times is not elapsed campaign wall time."
+}

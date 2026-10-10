@@ -1,0 +1,23 @@
+{
+  "configure": [
+    "./configure",
+    "--prefix=@EMBER_ROOT@/out/cluster-dissolution-oct9-v1/install",
+    "--with-mpi=no",
+    "--with-interrupt=bse",
+    "--with-external=galpy",
+    "--with-galpy-prefix=@EMBER_ROOT@/out/cluster-dissolution-oct9-v1/vendor/galpy/galpy",
+    "--with-debug=assert",
+    "--with-arch=arm64"
+  ],
+  "environment": {
+    "CXX": "/opt/homebrew/bin/g++-16",
+    "CC": "/opt/homebrew/bin/gcc-16",
+    "FC": "/opt/homebrew/bin/gfortran-16",
+    "CXXFLAGS": "-O3",
+    "CFLAGS": "-O3",
+    "FCFLAGS": "-O3 -fallow-argument-mismatch",
+    "GSL_CFLAGS": "-I@EMBER_ROOT@/out/cluster-dissolution-oct9-v1/install/include",
+    "GSL_LIBS": "-L@EMBER_ROOT@/out/cluster-dissolution-oct9-v1/install/lib -lgsl -lgslcblas -lm",
+    "FCLIBS": "/opt/homebrew/Cellar/gcc/16.1.0/bin/../lib/gcc/current/gcc/aarch64-apple-darwin25/16/../../../libgfortran.dylib"
+  }
+}

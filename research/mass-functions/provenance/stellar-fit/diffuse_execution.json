@@ -1,0 +1,191 @@
+[
+  {
+    "tag": "hyades_R0.63_r10_v0.3",
+    "wall_seconds": 6.466504208743572,
+    "n_orbits": 14292,
+    "rhs_calls": 1481,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "hyades_R0.63_r10_v0.7",
+    "wall_seconds": 6.534919957630336,
+    "n_orbits": 14292,
+    "rhs_calls": 1445,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "hyades_R0.63_r10_v1.5",
+    "wall_seconds": 6.370603082701564,
+    "n_orbits": 14292,
+    "rhs_calls": 1337,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "hyades_R0.63_r30_v0.3",
+    "wall_seconds": 5.932299166917801,
+    "n_orbits": 14292,
+    "rhs_calls": 1313,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "hyades_R0.63_r30_v0.7",
+    "wall_seconds": 5.941136583685875,
+    "n_orbits": 14292,
+    "rhs_calls": 1289,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "hyades_R0.63_r30_v1.5",
+    "wall_seconds": 6.149394792504609,
+    "n_orbits": 14292,
+    "rhs_calls": 1277,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "hyades_R0.63_r60_v0.3",
+    "wall_seconds": 6.057267208583653,
+    "n_orbits": 14292,
+    "rhs_calls": 1289,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "hyades_R0.63_r60_v0.7",
+    "wall_seconds": 6.132105666212738,
+    "n_orbits": 14292,
+    "rhs_calls": 1289,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "hyades_R0.63_r60_v1.5",
+    "wall_seconds": 6.365098583512008,
+    "n_orbits": 14292,
+    "rhs_calls": 1301,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.63_r10_v0.3",
+    "wall_seconds": 1.4498058324679732,
+    "n_orbits": 14292,
+    "rhs_calls": 341,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.63_r10_v0.7",
+    "wall_seconds": 1.4496714165434241,
+    "n_orbits": 14292,
+    "rhs_calls": 341,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.63_r10_v1.5",
+    "wall_seconds": 1.4781329585239291,
+    "n_orbits": 14292,
+    "rhs_calls": 329,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.63_r30_v0.3",
+    "wall_seconds": 1.2642581658437848,
+    "n_orbits": 14292,
+    "rhs_calls": 293,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.63_r30_v0.7",
+    "wall_seconds": 1.3029360845685005,
+    "n_orbits": 14292,
+    "rhs_calls": 305,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.63_r30_v1.5",
+    "wall_seconds": 1.3738990845158696,
+    "n_orbits": 14292,
+    "rhs_calls": 305,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.63_r60_v0.3",
+    "wall_seconds": 1.3081465000286698,
+    "n_orbits": 14292,
+    "rhs_calls": 293,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.63_r60_v0.7",
+    "wall_seconds": 1.3064242089167237,
+    "n_orbits": 14292,
+    "rhs_calls": 293,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.63_r60_v1.5",
+    "wall_seconds": 1.3635261254385114,
+    "n_orbits": 14292,
+    "rhs_calls": 293,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.55_r10_v0.3",
+    "wall_seconds": 1.368588499724865,
+    "n_orbits": 14248,
+    "rhs_calls": 341,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.55_r10_v0.7",
+    "wall_seconds": 1.4377267081290483,
+    "n_orbits": 14248,
+    "rhs_calls": 341,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.55_r10_v1.5",
+    "wall_seconds": 1.4367790827527642,
+    "n_orbits": 14248,
+    "rhs_calls": 329,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.55_r30_v0.3",
+    "wall_seconds": 1.3821717910468578,
+    "n_orbits": 14248,
+    "rhs_calls": 317,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.55_r30_v0.7",
+    "wall_seconds": 1.2911612913012505,
+    "n_orbits": 14248,
+    "rhs_calls": 305,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.55_r30_v1.5",
+    "wall_seconds": 1.3514863746240735,
+    "n_orbits": 14248,
+    "rhs_calls": 305,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.55_r60_v0.3",
+    "wall_seconds": 1.2996083749458194,
+    "n_orbits": 14248,
+    "rhs_calls": 293,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.55_r60_v0.7",
+    "wall_seconds": 1.296563958749175,
+    "n_orbits": 14248,
+    "rhs_calls": 293,
+    "rtol": 2e-09
+  },
+  {
+    "tag": "pleiades_R0.55_r60_v1.5",
+    "wall_seconds": 1.334184375591576,
+    "n_orbits": 14248,
+    "rhs_calls": 293,
+    "rtol": 2e-09
+  }
+]

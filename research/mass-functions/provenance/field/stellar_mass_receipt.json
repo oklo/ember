@@ -1,0 +1,125 @@
+{
+  "objects_with_luminosities": 1444,
+  "reference_Msun": [
+    0.1,
+    0.2
+  ],
+  "reference_density_quantiles": [
+    0.01439513042079191,
+    0.015129219779948553,
+    0.015971498810878147
+  ],
+  "single_reference_density_quantiles": [
+    0.011605012411101864,
+    0.012233967897944906,
+    0.012909499685787204
+  ],
+  "inner15_reference_density_quantiles": [
+    0.014214252893362943,
+    0.01527564688504024,
+    0.01635389160511421
+  ],
+  "hard20_reference_density_quantiles": [
+    0.013988877816263907,
+    0.014646438874227872,
+    0.015406079380230722
+  ],
+  "photometry_completeness_groups": {
+    "(0.0, False)": [
+      123,
+      123
+    ],
+    "(0.0, True)": [
+      50,
+      53
+    ],
+    "(1.0, False)": [
+      389,
+      389
+    ],
+    "(1.0, True)": [
+      104,
+      120
+    ],
+    "(2.0, False)": [
+      435,
+      435
+    ],
+    "(2.0, True)": [
+      92,
+      105
+    ],
+    "(3.0, False)": [
+      99,
+      99
+    ],
+    "(3.0, True)": [
+      11,
+      12
+    ],
+    "(4.0, False)": [
+      56,
+      56
+    ],
+    "(4.0, True)": [
+      7,
+      11
+    ]
+  },
+  "tracks": [
+    "field_metalpoor_nc_m0.010_v2",
+    "field_metalpoor_nc_m0.020_v1",
+    "field_metalpoor_nc_m0.025_v2",
+    "field_metalpoor_nc_m0.050_v1",
+    "field_metalpoor_nc_m0.065_v1",
+    "field_metalpoor_nc_m0.075_v1",
+    "field_metalpoor_nc_m0.085_v1",
+    "field_metalpoor_nc_m0.100_v1",
+    "field_metalpoor_nc_m0.150_v1",
+    "field_metalpoor_nc_m0.200_v1",
+    "field_metalpoor_nc_m0.250_v2",
+    "field_nc_m0.008_v1",
+    "field_nc_m0.010_v1",
+    "field_nc_m0.012_v1",
+    "field_nc_m0.014_v1",
+    "field_nc_m0.020_v1",
+    "field_nc_m0.025_v7",
+    "field_nc_m0.035_v7",
+    "field_nc_m0.050_v7",
+    "field_nc_m0.060_v7",
+    "field_nc_m0.070_v5",
+    "field_nc_m0.075_v1",
+    "field_nc_m0.080_v5",
+    "field_nc_m0.085_v5",
+    "field_nc_m0.090_v1",
+    "field_nc_m0.100_v7",
+    "field_nc_m0.120_v7",
+    "field_nc_m0.150_v7",
+    "field_nc_m0.200_v7",
+    "field_nc_m0.250_v7",
+    "field_metalrich_nc_m0.010_v2",
+    "field_metalrich_nc_m0.020_v1",
+    "field_metalrich_nc_m0.025_v1",
+    "field_metalrich_nc_m0.050_v1",
+    "field_metalrich_nc_m0.065_v1",
+    "field_metalrich_nc_m0.075_v1",
+    "field_metalrich_nc_m0.085_v1",
+    "field_metalrich_nc_m0.100_v1",
+    "field_metalrich_nc_m0.150_v3",
+    "field_metalrich_nc_m0.200_v1",
+    "field_metalrich_nc_m0.250_v3"
+  ],
+  "age_assumption": "Local age distribution inferred from brown-dwarf population; stellar prior dN/dM proportional to M^-0.3 with luminosity Jacobian.",
+  "metallicity_nodes": [
+    -0.3,
+    0,
+    0.3
+  ],
+  "metallicity_weights": [
+    0.235,
+    0.63,
+    0.135
+  ],
+  "residual_binaries": "Uniform 0--5% of apparent singles treated statistically as equal-light pairs; known components not counted twice.",
+  "caution": "Metallicity and age-metallicity correlation remain approximate. Missing-photometry correction assumes exchangeability within spectral-type/multiplicity classes. The 15-pc check omits the small residual-binary adjustment."
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "cluster": "hyades",
+    "all_associated_reference": 361.40234375,
+    "training_reference": 361.40234375,
+    "all_associated_BD": 47.01953125,
+    "comparison_BD": 47.01953125
+  },
+  {
+    "cluster": "pleiades",
+    "all_associated_reference": 594.7890625,
+    "training_reference": 583.91796875,
+    "all_associated_BD": 200.9765625,
+    "comparison_BD": 195.71875
+  }
+]

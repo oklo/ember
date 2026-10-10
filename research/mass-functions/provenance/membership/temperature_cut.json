@@ -1,0 +1,14 @@
+[
+  {
+    "cloud": "f2",
+    "lowest_mass_temperature_cut_Msun": 0.10712452047998057,
+    "maximum_BD_temperature_K": 2837.7030486649196,
+    "BD_temperature_eligibility_fraction": 0.0
+  },
+  {
+    "cloud": "nc",
+    "lowest_mass_temperature_cut_Msun": 0.10712452047998057,
+    "maximum_BD_temperature_K": 2837.8440336009407,
+    "BD_temperature_eligibility_fraction": 0.0
+  }
+]

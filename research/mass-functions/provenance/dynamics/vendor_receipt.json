@@ -1,0 +1,30 @@
+[
+  {
+    "name": "PeTar",
+    "url": "https://github.com/lwang-astro/PeTar.git",
+    "tag": null,
+    "sha": "e16eb5d605d9197041194276b475d2d2bc07973c",
+    "returncode": 0
+  },
+  {
+    "name": "FDPS",
+    "url": "https://github.com/FDPS/FDPS.git",
+    "tag": "v7.0",
+    "sha": "6fedb4b8bd7a504598e83a4189a7a83c533a0848",
+    "returncode": 0
+  },
+  {
+    "name": "SDAR",
+    "url": "https://github.com/lwang-astro/SDAR.git",
+    "tag": null,
+    "sha": "f64f11801f494bdceda9f4c93dad71dd64c57278",
+    "returncode": 0
+  },
+  {
+    "name": "galpy",
+    "url": "https://github.com/jobovy/galpy.git",
+    "tag": "v1.10.2",
+    "sha": "e91c67c9c246b5059f594918182e890be883bc04",
+    "returncode": 0
+  }
+]

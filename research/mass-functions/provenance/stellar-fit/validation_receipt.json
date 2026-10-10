@@ -1,0 +1,30 @@
+{
+  "completed_collisional_runs": 17,
+  "bound_templates_used": 15,
+  "diffuse_geometries": 27,
+  "selection_scenarios_per_geometry": 8,
+  "all_counts_finite_and_nonnegative": true,
+  "published_map_checksum_verified": true,
+  "training_mass_Msun": [
+    0.1,
+    0.2
+  ],
+  "held_out_mass_Msun": [
+    0.03,
+    0.08
+  ],
+  "cluster_normalizations_fixed": true,
+  "selected_diffuse_core_mass_upper_Msun": 0.0099261396547006,
+  "selected_diffuse_neglected_gravity_fraction_max": 0.0219971616688466,
+  "independent_diagonal_objective_check": true,
+  "code_sha256": {
+    "build_diffuse.py": "0b2851868fd9d845f74906af9e1bf93364ae0e69cf59a00150e687b74bcae62f",
+    "fit_stars.py": "961282ec75bad6b6f670f3c6883c01c481289cdd0f786cfc21892994dab15127",
+    "build_templates.py": "1b7efef6bd3a3ae77fd4b5559128312dfeb5f0999d2addd5385c5e3251e383a2",
+    "common.py": "3332db7fec4aca86c71da90b08c87ee0fcd170933a90e61da9e3cb6b458206e0",
+    "selection.py": "49705ce71369fd294c1cf6768d5bb3528f68a1cd0532adb63f9d5f550cde8008",
+    "make_results.py": "6f578de0797087f709f9f4e7c3c818818bc3b8a381346e7dfc3fc464455c81e5",
+    "galactic_diffusion.py": "011f658a8ff3b223a88e8376a3e7d174f48756d874ba4f67ffa7984929f0dad2",
+    "audit_fit.py": "8a5a2579c71024e52ec33311a00b332d7fd88d2c1c0171711508eace2a06fd60"
+  }
+}

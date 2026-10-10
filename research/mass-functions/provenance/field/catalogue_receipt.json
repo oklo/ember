@@ -1,0 +1,26 @@
+{
+  "selected_tracks": 69,
+  "saved_track_states": 6551,
+  "completed_to_10Gyr": 44,
+  "cold_edge_tracks": 24,
+  "other_partial_tracks": [
+    {
+      "case": "field_metalrich_nc_m0.050_v1",
+      "end_age_Gyr": 9.383454972014615
+    }
+  ],
+  "database_tables": [
+    "best_corrected_single_LF",
+    "component_luminosity_function",
+    "ember_track_states",
+    "ember_tracks",
+    "field_mass_function",
+    "individual_observations",
+    "luminosity_observations",
+    "population_fits",
+    "source_best2024",
+    "source_kirkpatrick2024",
+    "stellar_mass_estimates"
+  ],
+  "sqlite_integrity": "ok"
+}

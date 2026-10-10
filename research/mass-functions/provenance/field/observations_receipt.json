@@ -1,0 +1,43 @@
+{
+  "component_rows": 3582,
+  "best_objects": 504,
+  "Cifuentes_Ks_calibration": {
+    "count": 1267,
+    "domain": [
+      4.656826354174959,
+      9.295824828754338
+    ],
+    "scatter_mag": 0.06682715276902236,
+    "coefficients": [
+      -1.871205792700859,
+      1.8498978722820598,
+      -0.25726431365277025,
+      0.012336918979372436
+    ]
+  },
+  "hard_20pc_components": 3496,
+  "luminosity_methods": {
+    "Cifuentes2020_empirical_Gaia_BC": 1707,
+    "unavailable": 1558,
+    "Sanghi2023_Ks_2MASS_field": 128,
+    "Sanghi2023_K_MKO_field": 82,
+    "Cifuentes2020_empirical_Ks_BC": 21
+  },
+  "remnant_rows": 160,
+  "population_warning": "K24 individual components and Best singles must not be conflated or counted twice.",
+  "missing_luminosity_warning": "A component without deblended photometry retains missing luminosity; no parent flux is assigned to every child.",
+  "young_single_L0_L7_fraction": {
+    "value": 0.092,
+    "error_low": 0.026,
+    "error_high": 0.03,
+    "age_limit_Myr": 200,
+    "age_sensitivity_Myr": [
+      100,
+      300
+    ]
+  },
+  "sources": [
+    "https://doi.org/10.3847/1538-4365/ad24e2",
+    "https://arxiv.org/abs/2401.09535"
+  ]
+}

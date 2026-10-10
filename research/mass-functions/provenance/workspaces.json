@@ -1,0 +1,9 @@
+{
+  "clusters": "cluster-mass-functions-oct9-v1",
+  "field": "field-mass-function-oct9-v1",
+  "metallicity": "field-metallicity-oct9-v1",
+  "dynamics": "cluster-dissolution-oct9-v1",
+  "ensemble": "cluster-dissolution-oct9-v2",
+  "stellar-fit": "cluster-stellar-fit-oct9-v1",
+  "membership": "cluster-membership-oct9-v1"
+}

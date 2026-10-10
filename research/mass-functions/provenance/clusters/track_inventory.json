@@ -1,0 +1,3534 @@
+[
+  {
+    "case": "cluster_hyades_f2_m0.020_hybrid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.02,
+    "cloud": "f2",
+    "scope": "Post-deuterium cold-boundary pilot; clear or specified cloud-clearing scenario.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 59,
+    "wall_seconds": 42.91564750019461,
+    "start_radius_Rsun": 0.18785147358836707,
+    "start_Teff_K": 2226.5566397101534,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 894.1601431118132,
+    "final_luminosity_Lsun": 6.453739763006842e-06,
+    "accepted_steps": 58,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 12224620.215679718,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 4.359422112074021e-05,
+        "radius_Rsun": 0.12980615838921936,
+        "Teff_K": 1300.0541797268006,
+        "central_X": 0.7068885103774277
+      },
+      "125000000": {
+        "luminosity_Lsun": 3.3558905454380635e-05,
+        "radius_Rsun": 0.12744281431064508,
+        "Teff_K": 1229.3551732840033,
+        "central_X": 0.7068885103773561
+      },
+      "150000000": {
+        "luminosity_Lsun": 2.809160868417742e-05,
+        "radius_Rsun": 0.1255709256387131,
+        "Teff_K": 1185.3313235772337,
+        "central_X": 0.7068885103772876
+      },
+      "600000000": {
+        "luminosity_Lsun": 1.0151264292040704e-05,
+        "radius_Rsun": 0.10972232418585122,
+        "Teff_K": 983.530935386704,
+        "central_X": 0.7068885103765761
+      },
+      "650000000": {
+        "luminosity_Lsun": 9.377076389481117e-06,
+        "radius_Rsun": 0.10878259557327401,
+        "Teff_K": 968.4114846070815,
+        "central_X": 0.7068885103765403
+      },
+      "750000000": {
+        "luminosity_Lsun": 7.894544725091191e-06,
+        "radius_Rsun": 0.10716780674467,
+        "Teff_K": 934.5395413321454,
+        "central_X": 0.7068885103764833
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_f2_m0.025_hybrid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.025,
+    "cloud": "f2",
+    "scope": "Post-deuterium cold-boundary pilot; clear or specified cloud-clearing scenario.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 61,
+    "wall_seconds": 47.90971404220909,
+    "start_radius_Rsun": 0.19959453440917035,
+    "start_Teff_K": 2397.8228897043214,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 1021.6553335857725,
+    "final_luminosity_Lsun": 1.1040663105927782e-05,
+    "accepted_steps": 60,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 11839132.170254802,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 7.6725155982845e-05,
+        "radius_Rsun": 0.12882147138623432,
+        "Teff_K": 1504.7372511225087,
+        "central_X": 0.7068885103721213
+      },
+      "125000000": {
+        "luminosity_Lsun": 6.0571872933559984e-05,
+        "radius_Rsun": 0.12613085272213148,
+        "Teff_K": 1433.0406579581584,
+        "central_X": 0.7068885103703186
+      },
+      "150000000": {
+        "luminosity_Lsun": 4.913113040030544e-05,
+        "radius_Rsun": 0.12400637863501661,
+        "Teff_K": 1372.279039539481,
+        "central_X": 0.7068885103685394
+      },
+      "600000000": {
+        "luminosity_Lsun": 1.4263821339058373e-05,
+        "radius_Rsun": 0.10989798559164134,
+        "Teff_K": 1070.0169456383442,
+        "central_X": 0.7068885103447731
+      },
+      "650000000": {
+        "luminosity_Lsun": 1.3497035586694275e-05,
+        "radius_Rsun": 0.10902772690673097,
+        "Teff_K": 1059.51486073268,
+        "central_X": 0.7068885103430347
+      },
+      "750000000": {
+        "luminosity_Lsun": 1.2174277701052367e-05,
+        "radius_Rsun": 0.10744827204761659,
+        "Teff_K": 1040.1300395461628,
+        "central_X": 0.7068885103399662
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_f2_m0.030_faint_grid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.03,
+    "cloud": "f2",
+    "scope": "Post-deuterium pilot; initial age calibration pending.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 63,
+    "wall_seconds": 64.94658241700381,
+    "start_radius_Rsun": 0.21257002661963875,
+    "start_Teff_K": 2522.122250919136,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 965.1844148930572,
+    "final_luminosity_Lsun": 8.949375125996665e-06,
+    "accepted_steps": 62,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 11529914.487892423,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.00013224798311870282,
+        "radius_Rsun": 0.12861765579019713,
+        "Teff_K": 1724.0687958964609,
+        "central_X": 0.7068885103217212
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.00010241028397573753,
+        "radius_Rsun": 0.12541479526367152,
+        "Teff_K": 1638.1447412976158,
+        "central_X": 0.7068885103004362
+      },
+      "150000000": {
+        "luminosity_Lsun": 8.156176466533953e-05,
+        "radius_Rsun": 0.12302933513248376,
+        "Teff_K": 1561.3716523548792,
+        "central_X": 0.706888510278824
+      },
+      "600000000": {
+        "luminosity_Lsun": 1.3889300209932943e-05,
+        "radius_Rsun": 0.10942403937657305,
+        "Teff_K": 1065.1080772501518,
+        "central_X": 0.7068885099458789
+      },
+      "650000000": {
+        "luminosity_Lsun": 1.2476371318869382e-05,
+        "radius_Rsun": 0.1088380239104277,
+        "Teff_K": 1039.7422696057895,
+        "central_X": 0.7068885099158313
+      },
+      "750000000": {
+        "luminosity_Lsun": 1.0557746739373967e-05,
+        "radius_Rsun": 0.1078335412267914,
+        "Teff_K": 1001.902539386021,
+        "central_X": 0.7068885098588968
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_f2_m0.030_hybrid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.03,
+    "cloud": "f2",
+    "scope": "Post-deuterium start. Specified Bobcat-Diamondback cloud clearing 900-1200 K, SPHINX above 2400 K. Formation-age uncertainty remains.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 62,
+    "wall_seconds": 55.818201249465346,
+    "start_radius_Rsun": 0.21242560390950857,
+    "start_Teff_K": 2523.236807112135,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 1085.6077881927542,
+    "final_luminosity_Lsun": 1.3975777730221288e-05,
+    "accepted_steps": 61,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 11533047.270434054,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.00013542362998397403,
+        "radius_Rsun": 0.12891639996143708,
+        "Teff_K": 1732.5640708239594,
+        "central_X": 0.7068885103227208
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.00010434017100820209,
+        "radius_Rsun": 0.12564959713625803,
+        "Teff_K": 1644.1351058786497,
+        "central_X": 0.7068885103014774
+      },
+      "150000000": {
+        "luminosity_Lsun": 8.315450960401969e-05,
+        "radius_Rsun": 0.12320695397277745,
+        "Teff_K": 1567.680284032805,
+        "central_X": 0.706888510279879
+      },
+      "600000000": {
+        "luminosity_Lsun": 1.7858566047200703e-05,
+        "radius_Rsun": 0.10907879754834152,
+        "Teff_K": 1136.0715200470295,
+        "central_X": 0.7068885099472366
+      },
+      "650000000": {
+        "luminosity_Lsun": 1.690529394032424e-05,
+        "radius_Rsun": 0.10830986895662507,
+        "Teff_K": 1124.5767931642533,
+        "central_X": 0.7068885099180275
+      },
+      "750000000": {
+        "luminosity_Lsun": 1.5280548314710218e-05,
+        "radius_Rsun": 0.10691690343263059,
+        "Teff_K": 1103.6441867990882,
+        "central_X": 0.7068885098640435
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_f2_m0.035_hybrid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.035,
+    "cloud": "f2",
+    "scope": "Post-deuterium start. Specified Bobcat-Diamondback cloud clearing 900-1200 K, SPHINX above 2400 K. Formation-age uncertainty remains.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 64,
+    "wall_seconds": 62.69512079190463,
+    "start_radius_Rsun": 0.2277704993314406,
+    "start_Teff_K": 2601.942269598424,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 1142.8122176922386,
+    "final_luminosity_Lsun": 1.6848680297400846e-05,
+    "accepted_steps": 63,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 11261785.039247388,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0002211094379678442,
+        "radius_Rsun": 0.1301649068370804,
+        "Teff_K": 1949.3226984146381,
+        "central_X": 0.7068885100567535
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.00016733898001511187,
+        "radius_Rsun": 0.12611797836306343,
+        "Teff_K": 1847.7990258425918,
+        "central_X": 0.7068885099088441
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.00013274433581754252,
+        "radius_Rsun": 0.12320885065848541,
+        "Teff_K": 1763.4530677763876,
+        "central_X": 0.7068885097517549
+      },
+      "600000000": {
+        "luminosity_Lsun": 2.1738430945143846e-05,
+        "radius_Rsun": 0.10767428065303548,
+        "Teff_K": 1201.0447958904854,
+        "central_X": 0.7068885070442664
+      },
+      "650000000": {
+        "luminosity_Lsun": 2.0331963930079174e-05,
+        "radius_Rsun": 0.10700079765087439,
+        "Teff_K": 1184.8888073107132,
+        "central_X": 0.7068885067856057
+      },
+      "750000000": {
+        "luminosity_Lsun": 1.835368141172042e-05,
+        "radius_Rsun": 0.10579088854789133,
+        "Teff_K": 1161.5173694058897,
+        "central_X": 0.7068885062945313
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_f2_m0.035_v2",
+    "cluster": "hyades",
+    "mass_Msun": 0.035,
+    "cloud": "f2",
+    "scope": "Finite entropy start; formation-age and initial-entropy controls pending; no final mass assignments",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 64,
+    "wall_seconds": 56.98164124973118,
+    "start_radius_Rsun": 0.2277781255235478,
+    "start_Teff_K": 2601.8806813658225,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 1074.4557926651307,
+    "final_luminosity_Lsun": 1.322820563698021e-05,
+    "accepted_steps": 63,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 11261720.142953498,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.00021168750219288863,
+        "radius_Rsun": 0.12952147350917967,
+        "Teff_K": 1933.7785691460251,
+        "central_X": 0.7068885100488436
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.00016251182308484085,
+        "radius_Rsun": 0.1257147940912651,
+        "Teff_K": 1836.5881259958446,
+        "central_X": 0.7068885098989207
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.000129177956316105,
+        "radius_Rsun": 0.12289990957404823,
+        "Teff_K": 1753.2377280287776,
+        "central_X": 0.7068885097412021
+      },
+      "600000000": {
+        "luminosity_Lsun": 2.1501811199458205e-05,
+        "radius_Rsun": 0.10759885764062131,
+        "Teff_K": 1198.1121298046896,
+        "central_X": 0.7068885070382199
+      },
+      "650000000": {
+        "luminosity_Lsun": 1.930261156055091e-05,
+        "radius_Rsun": 0.10694599563058542,
+        "Teff_K": 1169.8567502767964,
+        "central_X": 0.7068885067805418
+      },
+      "750000000": {
+        "luminosity_Lsun": 1.576877728148784e-05,
+        "radius_Rsun": 0.10585273444649065,
+        "Teff_K": 1117.8695195895489,
+        "central_X": 0.7068885062894769
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_f2_m0.050_faint_grid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.05,
+    "cloud": "f2",
+    "scope": "Post-deuterium pilot; initial age calibration pending.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 68,
+    "wall_seconds": 81.8352617919445,
+    "start_radius_Rsun": 0.2736866690626389,
+    "start_Teff_K": 2738.8896822502857,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 1419.540538839607,
+    "final_luminosity_Lsun": 3.716998535345457e-05,
+    "accepted_steps": 67,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10790339.494669277,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0006192224399179323,
+        "radius_Rsun": 0.1393417795247774,
+        "Teff_K": 2438.5459546054967,
+        "central_X": 0.7068885011526296
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0004994754679749133,
+        "radius_Rsun": 0.1327019834951833,
+        "Teff_K": 2368.222800574144,
+        "central_X": 0.7068884945133266
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.00041240130311036196,
+        "radius_Rsun": 0.1277884895090552,
+        "Teff_K": 2299.911069194427,
+        "central_X": 0.7068884862529108
+      },
+      "600000000": {
+        "luminosity_Lsun": 6.225175574843077e-05,
+        "radius_Rsun": 0.10421208581999314,
+        "Teff_K": 1588.0150800354716,
+        "central_X": 0.7068882618916067
+      },
+      "650000000": {
+        "luminosity_Lsun": 5.512296323690776e-05,
+        "radius_Rsun": 0.10334783857651161,
+        "Teff_K": 1547.0623538188595,
+        "central_X": 0.7068882364206951
+      },
+      "750000000": {
+        "luminosity_Lsun": 4.4543284142017434e-05,
+        "radius_Rsun": 0.1019354535726479,
+        "Teff_K": 1476.8220980737908,
+        "central_X": 0.7068881866637077
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_f2_m0.060_hybrid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.06,
+    "cloud": "f2",
+    "scope": "Post-deuterium start. Specified Bobcat-Diamondback cloud clearing 900-1200 K, SPHINX above 2400 K. Formation-age uncertainty remains.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 70,
+    "wall_seconds": 91.73371720779687,
+    "start_radius_Rsun": 0.30283025101604977,
+    "start_Teff_K": 2791.3685990383074,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 1679.5095645723059,
+    "final_luminosity_Lsun": 7.17410963478921e-05,
+    "accepted_steps": 69,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10631392.903777149,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0009252687002343599,
+        "radius_Rsun": 0.14861466926478584,
+        "Teff_K": 2610.836730806948,
+        "central_X": 0.7068884766786719
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0007667822577998102,
+        "radius_Rsun": 0.14068014527211203,
+        "Teff_K": 2560.2450691008835,
+        "central_X": 0.7068884475900054
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0006481931749598417,
+        "radius_Rsun": 0.13465883122868377,
+        "Teff_K": 2509.1341246548195,
+        "central_X": 0.7068884084133887
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.00012033432267621889,
+        "radius_Rsun": 0.10425596645861801,
+        "Teff_K": 1872.1309739757116,
+        "central_X": 0.7068868105882763
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.00010732930658875536,
+        "radius_Rsun": 0.10316356357789712,
+        "Teff_K": 1829.0408124395701,
+        "central_X": 0.7068865983647125
+      },
+      "750000000": {
+        "luminosity_Lsun": 8.579484179780472e-05,
+        "radius_Rsun": 0.10139992677136768,
+        "Teff_K": 1744.3862012295626,
+        "central_X": 0.7068861736914173
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_f2_m0.075_hybrid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.075,
+    "cloud": "f2",
+    "scope": "Post-deuterium start. Specified Bobcat-Diamondback cloud clearing 900-1200 K, SPHINX above 2400 K. Formation-age uncertainty remains.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 72,
+    "wall_seconds": 106.056346334517,
+    "start_radius_Rsun": 0.34195654887944377,
+    "start_Teff_K": 2857.433433132437,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 2162.128817493637,
+    "final_luminosity_Lsun": 0.00021217994157295123,
+    "accepted_steps": 71,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10506533.639520694,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0014211195306541385,
+        "radius_Rsun": 0.16322790780934754,
+        "Teff_K": 2773.846307434998,
+        "central_X": 0.7068883897763186
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0012040576208787242,
+        "radius_Rsun": 0.1537344136171014,
+        "Teff_K": 2742.058228489084,
+        "central_X": 0.7068882677391494
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.001045289975757999,
+        "radius_Rsun": 0.1464929289927247,
+        "Teff_K": 2711.3254470997144,
+        "central_X": 0.7068880885454693
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.00028838362751896753,
+        "radius_Rsun": 0.1085560698851616,
+        "Teff_K": 2282.856829099333,
+        "central_X": 0.7068759549029092
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.0002672883411928177,
+        "radius_Rsun": 0.10729559432941736,
+        "Teff_K": 2253.0357335921344,
+        "central_X": 0.7068739762523633
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.00023485228543834835,
+        "radius_Rsun": 0.10530422315100324,
+        "Teff_K": 2201.8895769672686,
+        "central_X": 0.7068698408257268
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.020_hybrid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.02,
+    "cloud": "nc",
+    "scope": "Post-deuterium cold-boundary pilot; clear or specified cloud-clearing scenario.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 60,
+    "wall_seconds": 45.09719799924642,
+    "start_radius_Rsun": 0.1857156092535696,
+    "start_Teff_K": 2241.9295711804416,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 782.3870279521983,
+    "final_luminosity_Lsun": 3.6077117323846537e-06,
+    "accepted_steps": 59,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 12307818.971173558,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 5.763733319779156e-05,
+        "radius_Rsun": 0.12216313712685756,
+        "Teff_K": 1437.5492328443918,
+        "central_X": 0.7068885103774349
+      },
+      "125000000": {
+        "luminosity_Lsun": 4.5025817115489715e-05,
+        "radius_Rsun": 0.11939225741804634,
+        "Teff_K": 1366.6756719837729,
+        "central_X": 0.7068885103773811
+      },
+      "150000000": {
+        "luminosity_Lsun": 3.644029509366118e-05,
+        "radius_Rsun": 0.11728226963090997,
+        "Teff_K": 1307.7351283538662,
+        "central_X": 0.7068885103773349
+      },
+      "600000000": {
+        "luminosity_Lsun": 5.7562419865384255e-06,
+        "radius_Rsun": 0.10535659413846583,
+        "Teff_K": 870.9274647652989,
+        "central_X": 0.7068885103769951
+      },
+      "650000000": {
+        "luminosity_Lsun": 5.158187791637668e-06,
+        "radius_Rsun": 0.10487320265211897,
+        "Teff_K": 849.384646067265,
+        "central_X": 0.706888510376979
+      },
+      "750000000": {
+        "luminosity_Lsun": 4.256249758780125e-06,
+        "radius_Rsun": 0.10405567549776015,
+        "Teff_K": 812.6832432816326,
+        "central_X": 0.7068885103769517
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.025_hybrid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.025,
+    "cloud": "nc",
+    "scope": "Post-deuterium cold-boundary pilot; clear or specified cloud-clearing scenario.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 62,
+    "wall_seconds": 50.2636325834319,
+    "start_radius_Rsun": 0.19879208070460785,
+    "start_Teff_K": 2403.924522263557,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 925.3656223383286,
+    "final_luminosity_Lsun": 6.725995190639785e-06,
+    "accepted_steps": 61,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 11861883.67161751,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.00010455687189080124,
+        "radius_Rsun": 0.12329514349827139,
+        "Teff_K": 1660.8809137390967,
+        "central_X": 0.706888510371929
+      },
+      "125000000": {
+        "luminosity_Lsun": 8.082914358592533e-05,
+        "radius_Rsun": 0.11990493677942,
+        "Teff_K": 1580.4186659104091,
+        "central_X": 0.7068885103702528
+      },
+      "150000000": {
+        "luminosity_Lsun": 6.563934671596376e-05,
+        "radius_Rsun": 0.11738857515875502,
+        "Teff_K": 1516.2947028322603,
+        "central_X": 0.7068885103687188
+      },
+      "600000000": {
+        "luminosity_Lsun": 1.094707722970095e-05,
+        "radius_Rsun": 0.10321999256305907,
+        "Teff_K": 1033.3965711587855,
+        "central_X": 0.7068885103552978
+      },
+      "650000000": {
+        "luminosity_Lsun": 9.801970665703996e-06,
+        "radius_Rsun": 0.10265302983278955,
+        "Teff_K": 1007.9273078381331,
+        "central_X": 0.7068885103545949
+      },
+      "750000000": {
+        "luminosity_Lsun": 8.009884327481095e-06,
+        "radius_Rsun": 0.10168897231000772,
+        "Teff_K": 962.9301246015428,
+        "central_X": 0.7068885103533766
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.030_faint_grid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.03,
+    "cloud": "nc",
+    "scope": "Post-deuterium pilot; initial age calibration pending.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 63,
+    "wall_seconds": 55.70442258287221,
+    "start_radius_Rsun": 0.21257610686365883,
+    "start_Teff_K": 2522.0731506284333,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 1065.327501909137,
+    "final_luminosity_Lsun": 1.137813345703081e-05,
+    "accepted_steps": 62,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 11529822.974318901,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.000169284780198044,
+        "radius_Rsun": 0.12520186548014423,
+        "Teff_K": 1859.763730337273,
+        "central_X": 0.7068885103198652
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.00013265957262603435,
+        "radius_Rsun": 0.1212775798700609,
+        "Teff_K": 1777.898619222905,
+        "central_X": 0.7068885102982806
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.00010823123833531527,
+        "radius_Rsun": 0.11834172866060032,
+        "Teff_K": 1710.0727673035776,
+        "central_X": 0.7068885102771496
+      },
+      "600000000": {
+        "luminosity_Lsun": 1.860619308680723e-05,
+        "radius_Rsun": 0.1017402791101406,
+        "Teff_K": 1188.3489047141038,
+        "central_X": 0.706888510048124
+      },
+      "650000000": {
+        "luminosity_Lsun": 1.6605616181292277e-05,
+        "radius_Rsun": 0.10106429349207857,
+        "Teff_K": 1158.9940462082861,
+        "central_X": 0.7068885100342649
+      },
+      "750000000": {
+        "luminosity_Lsun": 1.3577929750159617e-05,
+        "radius_Rsun": 0.09993730473144136,
+        "Teff_K": 1108.251991794366,
+        "central_X": 0.7068885100102876
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.030_hybrid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.03,
+    "cloud": "nc",
+    "scope": "Post-deuterium start. Specified Bobcat-Diamondback cloud clearing 900-1200 K, SPHINX above 2400 K. Formation-age uncertainty remains.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 63,
+    "wall_seconds": 56.79984504170716,
+    "start_radius_Rsun": 0.21248885575720894,
+    "start_Teff_K": 2522.750147575141,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 1065.6688799017284,
+    "final_luminosity_Lsun": 1.1393489592102519e-05,
+    "accepted_steps": 62,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 11531645.074367993,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.00017022718462220287,
+        "radius_Rsun": 0.12529516886323672,
+        "Teff_K": 1861.5388487132525,
+        "central_X": 0.7068885103201423
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.00013313581517754698,
+        "radius_Rsun": 0.12133453690992034,
+        "Teff_K": 1779.1978010227945,
+        "central_X": 0.7068885102985549
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.00010857815607310454,
+        "radius_Rsun": 0.11838714831412535,
+        "Teff_K": 1711.1925357438415,
+        "central_X": 0.706888510277409
+      },
+      "600000000": {
+        "luminosity_Lsun": 1.8626233982720688e-05,
+        "radius_Rsun": 0.10174701760602138,
+        "Teff_K": 1188.6331233419057,
+        "central_X": 0.706888510048134
+      },
+      "650000000": {
+        "luminosity_Lsun": 1.6622567527358897e-05,
+        "radius_Rsun": 0.10106997048077204,
+        "Teff_K": 1159.267519398023,
+        "central_X": 0.7068885100342586
+      },
+      "750000000": {
+        "luminosity_Lsun": 1.3594055701830302e-05,
+        "radius_Rsun": 0.09994183084419178,
+        "Teff_K": 1108.558256792152,
+        "central_X": 0.7068885100102649
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.035_pilot",
+    "cluster": "hyades",
+    "mass_Msun": 0.035,
+    "cloud": "clear",
+    "scope": "Post-deuterium initial state; missing early age and thermal memory unresolved; do not assign final cluster masses from this pilot alone.",
+    "status": "failed",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 1,
+    "wall_seconds": 2.665492083877325,
+    "start_radius_Rsun": 0.22782011017464276,
+    "start_Teff_K": 2601.8314556332843,
+    "final_elapsed_years": 0,
+    "final_Teff_K": 2601.8314556332843,
+    "final_luminosity_Lsun": 0.002142863132851753,
+    "accepted_steps": 0,
+    "rejected_steps": 0,
+    "completed_target": false,
+    "initial_contraction_scale_years": 11256346.894246079,
+    "at_elapsed_years": {}
+  },
+  {
+    "case": "cluster_hyades_nc_m0.035_shallow",
+    "cluster": "hyades",
+    "mass_Msun": 0.035,
+    "cloud": "clear",
+    "scope": "Post-deuterium initial state; missing early age and thermal memory unresolved; do not assign final cluster masses from this pilot alone.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 65,
+    "wall_seconds": 58.69616062566638,
+    "start_radius_Rsun": 0.2277781255235478,
+    "start_Teff_K": 2601.8806813658225,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 1203.9307072152008,
+    "final_luminosity_Lsun": 1.8079213835549376e-05,
+    "accepted_steps": 64,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 11261720.142953498,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0002534756420501475,
+        "radius_Rsun": 0.12790129553327048,
+        "Teff_K": 2036.1543670778824,
+        "central_X": 0.7068885100430295
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.00020120919604892253,
+        "radius_Rsun": 0.12339051739026348,
+        "Teff_K": 1955.7328386797474,
+        "central_X": 0.7068885098877751
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.00016462613379045955,
+        "radius_Rsun": 0.11994621575196276,
+        "Teff_K": 1886.532827252493,
+        "central_X": 0.7068885097261067
+      },
+      "600000000": {
+        "luminosity_Lsun": 2.9375205045691773e-05,
+        "radius_Rsun": 0.10086088142010743,
+        "Teff_K": 1337.932383941635,
+        "central_X": 0.7068885075427012
+      },
+      "650000000": {
+        "luminosity_Lsun": 2.631077637983822e-05,
+        "radius_Rsun": 0.10008768263925759,
+        "Teff_K": 1306.5478583402337,
+        "central_X": 0.7068885073909836
+      },
+      "750000000": {
+        "luminosity_Lsun": 2.1550446158588073e-05,
+        "radius_Rsun": 0.0987856225514324,
+        "Teff_K": 1251.1991806765925,
+        "central_X": 0.7068885071222559
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.045_grid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.045,
+    "cloud": "clear",
+    "scope": "Post-deuterium pilot. Relative clock; initial age not calibrated. Do not interpret as a complete Hayashi-started sequence.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 67,
+    "wall_seconds": 68.9057974582538,
+    "start_radius_Rsun": 0.2584349383572865,
+    "start_Teff_K": 2705.158529679393,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 1466.6966399822495,
+    "final_luminosity_Lsun": 3.874581566906083e-05,
+    "accepted_steps": 66,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10908239.287314892,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.00048025025472888896,
+        "radius_Rsun": 0.13510165963467616,
+        "Teff_K": 2323.822292011918,
+        "central_X": 0.706888506501609
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0003846289447114554,
+        "radius_Rsun": 0.1291913782977478,
+        "Teff_K": 2247.955056420138,
+        "central_X": 0.7068885040243623
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.00031826791480472487,
+        "radius_Rsun": 0.12473863313385543,
+        "Teff_K": 2182.0507849155765,
+        "central_X": 0.706888501121892
+      },
+      "600000000": {
+        "luminosity_Lsun": 6.163608654995818e-05,
+        "radius_Rsun": 0.10039115445510577,
+        "Teff_K": 1614.0010995234716,
+        "central_X": 0.7068884389475039
+      },
+      "650000000": {
+        "luminosity_Lsun": 5.5436943704727165e-05,
+        "radius_Rsun": 0.09940270883257316,
+        "Teff_K": 1579.6540705708119,
+        "central_X": 0.7068884332161599
+      },
+      "750000000": {
+        "luminosity_Lsun": 4.589728080206597e-05,
+        "radius_Rsun": 0.09774716566047738,
+        "Teff_K": 1519.4943207478423,
+        "central_X": 0.7068884226905894
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.050_faint_grid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.05,
+    "cloud": "nc",
+    "scope": "Post-deuterium pilot; initial age calibration pending.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 68,
+    "wall_seconds": 87.62927275057882,
+    "start_radius_Rsun": 0.2736866690626389,
+    "start_Teff_K": 2738.8896822502857,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 1589.4066437313031,
+    "final_luminosity_Lsun": 5.324741809816722e-05,
+    "accepted_steps": 67,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10790339.494669277,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0006188504720585725,
+        "radius_Rsun": 0.13934438573308983,
+        "Teff_K": 2438.1583973658608,
+        "central_X": 0.7068885011529523
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.000500442130489926,
+        "radius_Rsun": 0.13270106962476463,
+        "Teff_K": 2369.4037202072554,
+        "central_X": 0.7068884945138516
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0004173608402204872,
+        "radius_Rsun": 0.12775421552014882,
+        "Teff_K": 2307.2711562709915,
+        "central_X": 0.7068884862460073
+      },
+      "600000000": {
+        "luminosity_Lsun": 8.446076369731311e-05,
+        "radius_Rsun": 0.10066134450320845,
+        "Teff_K": 1743.8916989113804,
+        "central_X": 0.7068882648110386
+      },
+      "650000000": {
+        "luminosity_Lsun": 7.599127601419197e-05,
+        "radius_Rsun": 0.09955784991755388,
+        "Teff_K": 1707.9515126185202,
+        "central_X": 0.7068882416376486
+      },
+      "750000000": {
+        "luminosity_Lsun": 6.288018350981591e-05,
+        "radius_Rsun": 0.09772297660390475,
+        "Teff_K": 1644.1093088642242,
+        "central_X": 0.7068881981635232
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.060_pilot",
+    "cluster": "hyades",
+    "mass_Msun": 0.06,
+    "cloud": "clear",
+    "scope": "Post-deuterium initial state; missing early age and thermal memory unresolved; do not assign final cluster masses from this pilot alone.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 68,
+    "wall_seconds": 97.18161445856094,
+    "start_radius_Rsun": 0.302733867085781,
+    "start_Teff_K": 2792.402988450432,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 1828.7477098902843,
+    "final_luminosity_Lsun": 9.53773673940175e-05,
+    "accepted_steps": 67,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10625791.522637768,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0009221601323492672,
+        "radius_Rsun": 0.1487288583438423,
+        "Teff_K": 2608.0450464931155,
+        "central_X": 0.7068884770355199
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0007619319222175086,
+        "radius_Rsun": 0.1408187071126139,
+        "Teff_K": 2555.4099485278425,
+        "central_X": 0.7068884483201947
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0006469508536541249,
+        "radius_Rsun": 0.1349052451796101,
+        "Teff_K": 2505.5230587974515,
+        "central_X": 0.7068884089968389
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.00014663786382277167,
+        "radius_Rsun": 0.10249025269770086,
+        "Teff_K": 1983.8468745796954,
+        "central_X": 0.7068867932240759
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.00013302785555285775,
+        "radius_Rsun": 0.1012059139122361,
+        "Teff_K": 1948.4951329139253,
+        "central_X": 0.70688658116344
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.00011164509829349215,
+        "radius_Rsun": 0.09906053894837107,
+        "Teff_K": 1884.9907682846592,
+        "central_X": 0.70688616267991
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.075_grid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.075,
+    "cloud": "clear",
+    "scope": "Post-deuterium pilot. Relative clock; initial age not calibrated. Do not interpret as a complete Hayashi-started sequence.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 72,
+    "wall_seconds": 95.1727550830692,
+    "start_radius_Rsun": 0.34195654887944377,
+    "start_Teff_K": 2857.433433132437,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 2209.236079920844,
+    "final_luminosity_Lsun": 0.00022741802039916322,
+    "accepted_steps": 71,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10506533.639520694,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0014211195306541385,
+        "radius_Rsun": 0.16322790780934754,
+        "Teff_K": 2773.846307434998,
+        "central_X": 0.7068883897763186
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0012040576208787242,
+        "radius_Rsun": 0.1537344136171014,
+        "Teff_K": 2742.058228489084,
+        "central_X": 0.7068882677391494
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.001045289975757999,
+        "radius_Rsun": 0.1464929289927247,
+        "Teff_K": 2711.3254470997144,
+        "central_X": 0.7068880885454693
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.00030248691911459946,
+        "radius_Rsun": 0.10808596647907978,
+        "Teff_K": 2315.2963565204486,
+        "central_X": 0.706875873178385
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.0002817786703680735,
+        "radius_Rsun": 0.10674487462449493,
+        "Teff_K": 2288.8606968008858,
+        "central_X": 0.7068738664150284
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.0002501549082612673,
+        "radius_Rsun": 0.1045913514015943,
+        "Teff_K": 2244.527867108005,
+        "central_X": 0.7068696658847652
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.090_grid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.09,
+    "cloud": "clear",
+    "scope": "Post-deuterium pilot. Relative clock; initial age not calibrated. Do not interpret as a complete Hayashi-started sequence.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 73,
+    "wall_seconds": 106.40068375039846,
+    "start_radius_Rsun": 0.37529356164611655,
+    "start_Teff_K": 2923.1910198844944,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 2587.3342924335398,
+    "final_luminosity_Lsun": 0.0005415659474403987,
+    "accepted_steps": 72,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10449537.91001082,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.001948834340405659,
+        "radius_Rsun": 0.17792115967897676,
+        "Teff_K": 2874.865644273636,
+        "central_X": 0.7068882218939676
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0016765762239801172,
+        "radius_Rsun": 0.16718135558881142,
+        "Teff_K": 2856.2302349527563,
+        "central_X": 0.706887911803762
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0014769019294118492,
+        "radius_Rsun": 0.15895112068558195,
+        "Teff_K": 2837.8584458705272,
+        "central_X": 0.7068874379287273
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.0005992433301531565,
+        "radius_Rsun": 0.11878224086174113,
+        "Teff_K": 2620.296439988678,
+        "central_X": 0.706847353440605
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.0005815035789254551,
+        "radius_Rsun": 0.1178759751489201,
+        "Teff_K": 2610.6532384201623,
+        "central_X": 0.7068404011467921
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.0005566952228218623,
+        "radius_Rsun": 0.11660014511649983,
+        "Teff_K": 2596.4567875391795,
+        "central_X": 0.7068258457207542
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.120_grid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.12,
+    "cloud": "clear",
+    "scope": "Post-deuterium pilot. Relative clock; initial age not calibrated. Do not interpret as a complete Hayashi-started sequence.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 77,
+    "wall_seconds": 119.781603500247,
+    "start_radius_Rsun": 0.38975935596660805,
+    "start_Teff_K": 3049.532566847522,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 2935.5566390005124,
+    "final_luminosity_Lsun": 0.0014692544475190927,
+    "accepted_steps": 76,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 14002124.491690768,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.003003152056805115,
+        "radius_Rsun": 0.20258301571730367,
+        "Teff_K": 3001.873517336579,
+        "central_X": 0.7068874691000826
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.002634987046826824,
+        "radius_Rsun": 0.19070735767052316,
+        "Teff_K": 2994.432981654792,
+        "central_X": 0.7068863754420561
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0023697360106376816,
+        "radius_Rsun": 0.18174757072224723,
+        "Teff_K": 2987.0162919085255,
+        "central_X": 0.7068846828196019
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.0014776739489358018,
+        "radius_Rsun": 0.14853443026672988,
+        "Teff_K": 2936.348736669626,
+        "central_X": 0.7067672258988673
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.001473941332972244,
+        "radius_Rsun": 0.14838345320527235,
+        "Teff_K": 2935.985373687599,
+        "central_X": 0.7067501360274921
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.0014704641270703296,
+        "radius_Rsun": 0.1482417555233257,
+        "Teff_K": 2935.654305282417,
+        "central_X": 0.7067157052037709
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.150_earlier_ramp_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.15,
+    "cloud": "clear",
+    "scope": "Earlier post-deuterium initial-state control. Initial entropy continuation is not evolution. Relative age still omits earliest contraction.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 83,
+    "wall_seconds": 130.5909072495997,
+    "start_radius_Rsun": 0.5019355681592016,
+    "start_Teff_K": 3364.8358873199118,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 3063.5482431574073,
+    "final_luminosity_Lsun": 0.002512522216103477,
+    "accepted_steps": 82,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 6910941.963836665,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.004274997599669246,
+        "radius_Rsun": 0.22876472102776904,
+        "Teff_K": 3085.7636521839254,
+        "central_X": 0.7068865275199568
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0037736966308906717,
+        "radius_Rsun": 0.21551333935711206,
+        "Teff_K": 3081.572169527378,
+        "central_X": 0.7068843502272258
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0034213689759512397,
+        "radius_Rsun": 0.20569421152285178,
+        "Teff_K": 3077.975827909236,
+        "central_X": 0.7068810542608075
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.002513971925595354,
+        "radius_Rsun": 0.17798879546209606,
+        "Teff_K": 3063.5174189384443,
+        "central_X": 0.7066997936112138
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.002513119662275182,
+        "radius_Rsun": 0.17795938305764475,
+        "Teff_K": 3063.5108768295477,
+        "central_X": 0.7066761235917438
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.002512565901135643,
+        "radius_Rsun": 0.17793821165327314,
+        "Teff_K": 3063.5243393408196,
+        "central_X": 0.7066287283100583
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.150_pilot",
+    "cluster": "hyades",
+    "mass_Msun": 0.15,
+    "cloud": "clear",
+    "scope": "Post-deuterium initial state; missing early age and thermal memory unresolved; do not assign final cluster masses from this pilot alone.",
+    "status": "failed",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 1,
+    "wall_seconds": 3.2541737090796232,
+    "start_radius_Rsun": 0.3765238692924582,
+    "start_Teff_K": 3155.634276610312,
+    "final_elapsed_years": 0,
+    "final_Teff_K": 3155.634276610312,
+    "final_luminosity_Lsun": 0.012665588189184309,
+    "accepted_steps": 0,
+    "rejected_steps": 0,
+    "completed_target": false,
+    "initial_contraction_scale_years": 21164719.270890743,
+    "at_elapsed_years": {}
+  },
+  {
+    "case": "cluster_hyades_nc_m0.150_shallow",
+    "cluster": "hyades",
+    "mass_Msun": 0.15,
+    "cloud": "clear",
+    "scope": "Post-deuterium initial state; missing early age and thermal memory unresolved; do not assign final cluster masses from this pilot alone.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 75,
+    "wall_seconds": 116.34490962512791,
+    "start_radius_Rsun": 0.37707804170779946,
+    "start_Teff_K": 3151.7738799108297,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 3063.5489641224167,
+    "final_luminosity_Lsun": 0.0025125219260378,
+    "accepted_steps": 74,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 21174968.517336257,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.004005811010726879,
+        "radius_Rsun": 0.2217506657731935,
+        "Teff_K": 3083.6231244362675,
+        "central_X": 0.7068856019919914
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0035860935147543345,
+        "radius_Rsun": 0.21034423841688313,
+        "Teff_K": 3079.751835513842,
+        "central_X": 0.7068829003843929
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0032872472004175633,
+        "radius_Rsun": 0.20183212132410686,
+        "Teff_K": 3076.3749621424604,
+        "central_X": 0.7068789908729484
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.0025137172007860843,
+        "radius_Rsun": 0.17798006532738322,
+        "Teff_K": 3063.51494490998,
+        "central_X": 0.7066940148937002
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.0025129977095162304,
+        "radius_Rsun": 0.17795492654485484,
+        "Teff_K": 3063.5120701003298,
+        "central_X": 0.7066703385998591
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.002512539010928232,
+        "radius_Rsun": 0.17793724424265167,
+        "Teff_K": 3063.524470479926,
+        "central_X": 0.7066229380952295
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.200_grid_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.2,
+    "cloud": "clear",
+    "scope": "Post-deuterium pilot. Relative clock; initial age not calibrated. Do not interpret as a complete Hayashi-started sequence.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 73,
+    "wall_seconds": 112.96352358255535,
+    "start_radius_Rsun": 0.3881434450900579,
+    "start_Teff_K": 3256.7281980016496,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 3177.1800703941076,
+    "final_luminosity_Lsun": 0.004514140661686729,
+    "accepted_steps": 72,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 30276896.546003047,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.005952908858285092,
+        "radius_Rsun": 0.25303059372131476,
+        "Teff_K": 3187.2243792740524,
+        "central_X": 0.7068796557251116
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.005461811676323814,
+        "radius_Rsun": 0.24271708064513217,
+        "Teff_K": 3184.9845241355565,
+        "central_X": 0.7068729390174834
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.005126437855228499,
+        "radius_Rsun": 0.23549742886877964,
+        "Teff_K": 3182.632450078843,
+        "central_X": 0.7068641207990326
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.004513290403562615,
+        "radius_Rsun": 0.22173944929862469,
+        "Teff_K": 3177.08195438885,
+        "central_X": 0.7065923342489216
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.004513367670119773,
+        "radius_Rsun": 0.22173889618102613,
+        "Teff_K": 3177.099514584802,
+        "central_X": 0.7065604050174393
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.004513732833900653,
+        "radius_Rsun": 0.2217418359519312,
+        "Teff_K": 3177.142714270164,
+        "central_X": 0.706496548254299
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.250_earlier_bounded_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.25,
+    "cloud": "clear",
+    "scope": "Earlier post-deuterium initial-state control. Initial entropy continuation is not evolution. Relative age still omits earliest contraction.",
+    "status": "complete",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 73,
+    "wall_seconds": 136.87279629148543,
+    "start_radius_Rsun": 0.4407504561216153,
+    "start_Teff_K": 3372.158487644316,
+    "final_elapsed_years": 850000000,
+    "final_Teff_K": 3279.5792509140774,
+    "final_luminosity_Lsun": 0.007047381453795961,
+    "accepted_steps": 72,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 28107614.414692156,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.008576368410350485,
+        "radius_Rsun": 0.2829769471924225,
+        "Teff_K": 3301.96489858471,
+        "central_X": 0.7068715856550156
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.007932009740482436,
+        "radius_Rsun": 0.2737291829102387,
+        "Teff_K": 3292.386964965174,
+        "central_X": 0.7068599424047123
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.007555490831697642,
+        "radius_Rsun": 0.2680638312763265,
+        "Teff_K": 3286.794714534868,
+        "central_X": 0.7068455418391888
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.007041859191723009,
+        "radius_Rsun": 0.25997145582132686,
+        "Teff_K": 3279.3334691136142,
+        "central_X": 0.7064959073117016
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.007042784082971066,
+        "radius_Rsun": 0.2599819398855415,
+        "Teff_K": 3279.375017919717,
+        "central_X": 0.7064561649024681
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.007044966274227343,
+        "radius_Rsun": 0.26000624995427307,
+        "Teff_K": 3279.475692166765,
+        "central_X": 0.7063767378471362
+      }
+    }
+  },
+  {
+    "case": "cluster_hyades_nc_m0.250_earlier_ramp_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.25,
+    "cloud": "clear",
+    "scope": "Earlier post-deuterium initial-state control. Initial entropy continuation is not evolution. Relative age still omits earliest contraction.",
+    "status": "failed",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 7.077219665981829
+  },
+  {
+    "case": "cluster_hyades_nc_m0.250_earlier_shallow_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.25,
+    "cloud": "clear",
+    "scope": "Earlier post-deuterium initial-state control. Initial entropy continuation is not evolution. Relative age still omits earliest contraction.",
+    "status": "failed",
+    "target_elapsed_years": 850000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 0,
+    "wall_seconds": 6.936428375542164
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.008_cool500_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.008,
+    "cloud": "f2",
+    "scope": "Primordial D; Bobcat below 900 K, blended to Diamondback by 1200 K. f2 is a specified cloud-clearing scenario, not a low-temperature f2 grid.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 42,
+    "wall_seconds": 27.719915292225778,
+    "start_radius_Rsun": 0.21474756266516812,
+    "start_Teff_K": 1960.9640893540088,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 673.8111267414315,
+    "final_luminosity_Lsun": 2.713517401840969e-06,
+    "accepted_steps": 41,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 2176060.038406763,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 8.133273386112476e-06,
+        "radius_Rsun": 0.12705705610984455,
+        "Teff_K": 862.8650312417443,
+        "central_X": 0.7134877724458055
+      },
+      "125000000": {
+        "luminosity_Lsun": 5.588932149853765e-06,
+        "radius_Rsun": 0.1247166497983623,
+        "Teff_K": 794.0611947781994,
+        "central_X": 0.7134877723842801
+      },
+      "150000000": {
+        "luminosity_Lsun": 4.188400661212435e-06,
+        "radius_Rsun": 0.12309355170633961,
+        "Teff_K": 743.9393354301736,
+        "central_X": 0.7134877723442631
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.010_cool500_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.01,
+    "cloud": "f2",
+    "scope": "Primordial D; Bobcat below 900 K, blended to Diamondback by 1200 K. f2 is a specified cloud-clearing scenario, not a low-temperature f2 grid.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 42,
+    "wall_seconds": 29.20999995805323,
+    "start_radius_Rsun": 0.22372856232382543,
+    "start_Teff_K": 2127.5366103855476,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 813.862845981088,
+    "final_luminosity_Lsun": 5.746947136401038e-06,
+    "accepted_steps": 41,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 2170109.8997377334,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 1.4591254009064197e-05,
+        "radius_Rsun": 0.12900683280310016,
+        "Teff_K": 993.1823373594511,
+        "central_X": 0.7134876632126067
+      },
+      "125000000": {
+        "luminosity_Lsun": 1.1952425835535945e-05,
+        "radius_Rsun": 0.12601091462296315,
+        "Teff_K": 955.6242766573436,
+        "central_X": 0.7134876535175253
+      },
+      "150000000": {
+        "luminosity_Lsun": 9.51006285602236e-06,
+        "radius_Rsun": 0.12366677183424409,
+        "Teff_K": 911.3105400642766,
+        "central_X": 0.7134876469501382
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.010_faint_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.01,
+    "cloud": "f2",
+    "scope": "Primordial deuterium; finite initial entropy still needs age control.",
+    "status": "failed",
+    "target_elapsed_years": 150000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 44,
+    "wall_seconds": 37.19284929241985,
+    "start_radius_Rsun": 0.22372856232382543,
+    "start_Teff_K": 2127.5366103855476,
+    "final_elapsed_years": 78304566.19438657,
+    "final_Teff_K": 900.0738960656017,
+    "final_luminosity_Lsun": 1.1004286845055372e-05,
+    "accepted_steps": 43,
+    "rejected_steps": 14,
+    "completed_target": false,
+    "initial_contraction_scale_years": 2170109.8997377334,
+    "at_elapsed_years": {}
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.012_cool500_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.012,
+    "cloud": "f2",
+    "scope": "Primordial D; Bobcat below 900 K, blended to Diamondback by 1200 K. f2 is a specified cloud-clearing scenario, not a low-temperature f2 grid.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 56,
+    "wall_seconds": 41.57494683377445,
+    "start_radius_Rsun": 0.234523439027735,
+    "start_Teff_K": 2255.689989876131,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 1140.397445836202,
+    "final_luminosity_Lsun": 2.818516306572639e-05,
+    "accepted_steps": 55,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 2147040.6804225,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 4.399992765156837e-05,
+        "radius_Rsun": 0.1427127292916865,
+        "Teff_K": 1244.3702995643107,
+        "central_X": 0.7134839501086429
+      },
+      "125000000": {
+        "luminosity_Lsun": 3.958876692076368e-05,
+        "radius_Rsun": 0.14080644713136803,
+        "Teff_K": 1220.117646692259,
+        "central_X": 0.7134831659759086
+      },
+      "150000000": {
+        "luminosity_Lsun": 3.54776344804333e-05,
+        "radius_Rsun": 0.13904471022467313,
+        "Teff_K": 1194.6260996872143,
+        "central_X": 0.7134824719496251
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.012_v2",
+    "cluster": "pleiades",
+    "mass_Msun": 0.012,
+    "cloud": "f2",
+    "scope": "Finite entropy start; formation-age and initial-entropy controls pending; no final mass assignments",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 55,
+    "wall_seconds": 38.94273833371699,
+    "start_radius_Rsun": 0.234523439027735,
+    "start_Teff_K": 2255.689989876131,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 1087.1672225540315,
+    "final_luminosity_Lsun": 2.3686086667996462e-05,
+    "accepted_steps": 54,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 2147040.6804225,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 4.4456529530479086e-05,
+        "radius_Rsun": 0.14257138057079655,
+        "Teff_K": 1248.2077585424508,
+        "central_X": 0.7134839515795618
+      },
+      "125000000": {
+        "luminosity_Lsun": 3.979867640652163e-05,
+        "radius_Rsun": 0.14055558904865492,
+        "Teff_K": 1222.8105071046978,
+        "central_X": 0.7134831714348757
+      },
+      "150000000": {
+        "luminosity_Lsun": 3.408086996312025e-05,
+        "radius_Rsun": 0.13887020688423468,
+        "Teff_K": 1183.4247951009233,
+        "central_X": 0.7134824819502559
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.014_primordial_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.014,
+    "cloud": "f2",
+    "scope": "Primordial deuterium control near the burning threshold; low-gravity Sonora/Bobcat boundary.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 121,
+    "wall_seconds": 95.80342245753855,
+    "start_radius_Rsun": 0.2469209213688029,
+    "start_Teff_K": 2355.225666163338,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 1074.930428562048,
+    "final_luminosity_Lsun": 1.9488602751227003e-05,
+    "accepted_steps": 120,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 2106718.4337581526,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 7.033298219685742e-05,
+        "radius_Rsun": 0.14450389094036695,
+        "Teff_K": 1390.4692056085491,
+        "central_X": 0.7134732159474563
+      },
+      "125000000": {
+        "luminosity_Lsun": 4.266988512386721e-05,
+        "radius_Rsun": 0.13820635992322877,
+        "Teff_K": 1254.807222316047,
+        "central_X": 0.7134729231637218
+      },
+      "150000000": {
+        "luminosity_Lsun": 3.085333268180981e-05,
+        "radius_Rsun": 0.1334264804534591,
+        "Teff_K": 1177.4980197689551,
+        "central_X": 0.713472838941232
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.016_primordial_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.016,
+    "cloud": "f2",
+    "scope": "Primordial deuterium control near the burning threshold; low-gravity Sonora/Bobcat boundary.",
+    "status": "failed",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 0,
+    "wall_seconds": 2.585983708500862
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.020_faint_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.02,
+    "cloud": "f2",
+    "scope": "Post-deuterium pilot; initial age calibration pending.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 39,
+    "wall_seconds": 27.809597332961857,
+    "start_radius_Rsun": 0.18111764183648565,
+    "start_Teff_K": 2268.2643634697583,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 1029.361637536641,
+    "final_luminosity_Lsun": 1.4921043094310911e-05,
+    "accepted_steps": 38,
+    "rejected_steps": 2,
+    "completed_target": true,
+    "initial_contraction_scale_years": 12663601.623086207,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 4.183428748551135e-05,
+        "radius_Rsun": 0.12793964505216873,
+        "Teff_K": 1297.2868713642058,
+        "central_X": 0.7134727904713883
+      },
+      "125000000": {
+        "luminosity_Lsun": 3.48326774898751e-05,
+        "radius_Rsun": 0.12560408815979604,
+        "Teff_K": 1250.9334012900943,
+        "central_X": 0.7134727904713354
+      },
+      "150000000": {
+        "luminosity_Lsun": 2.8014875111123682e-05,
+        "radius_Rsun": 0.12365117481441103,
+        "Teff_K": 1193.727169066732,
+        "central_X": 0.7134727904712856
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.020_primordial_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.02,
+    "cloud": "f2",
+    "scope": "Primordial deuterium control near the burning threshold; low-gravity Sonora/Bobcat boundary.",
+    "status": "failed",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 0,
+    "wall_seconds": 2.3941719997674227
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.025_faint_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.025,
+    "cloud": "f2",
+    "scope": "Post-deuterium pilot; initial age calibration pending.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 39,
+    "wall_seconds": 27.06551245879382,
+    "start_radius_Rsun": 0.19271159996320686,
+    "start_Teff_K": 2443.828007446783,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 1270.8243097190937,
+    "final_luminosity_Lsun": 3.3526166946805566e-05,
+    "accepted_steps": 38,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 12190684.378600346,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 7.498855478192306e-05,
+        "radius_Rsun": 0.12684355625026425,
+        "Teff_K": 1506.2776100365481,
+        "central_X": 0.71347279046674
+      },
+      "125000000": {
+        "luminosity_Lsun": 5.904127392370288e-05,
+        "radius_Rsun": 0.12429937544682446,
+        "Teff_K": 1433.8458716936923,
+        "central_X": 0.7134727904653219
+      },
+      "150000000": {
+        "luminosity_Lsun": 4.755105239392676e-05,
+        "radius_Rsun": 0.12236128419690559,
+        "Teff_K": 1367.7437657755283,
+        "central_X": 0.7134727904639596
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.035_v2",
+    "cluster": "pleiades",
+    "mass_Msun": 0.035,
+    "cloud": "f2",
+    "scope": "Finite entropy start; formation-age and initial-entropy controls pending; no final mass assignments",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 42,
+    "wall_seconds": 30.823605832643807,
+    "start_radius_Rsun": 0.22086442142481458,
+    "start_Teff_K": 2648.7931742884048,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 1632.1927947848358,
+    "final_luminosity_Lsun": 8.77556037050941e-05,
+    "accepted_steps": 41,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 11500607.998633439,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.00021126893755887474,
+        "radius_Rsun": 0.12744777416650138,
+        "Teff_K": 1947.5498398669492,
+        "central_X": 0.7134727901627925
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0001610748031945271,
+        "radius_Rsun": 0.12371493502309197,
+        "Teff_K": 1847.827133990898,
+        "central_X": 0.7134727900329463
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.00012688518983206047,
+        "radius_Rsun": 0.12098116001532468,
+        "Teff_K": 1760.8535938354898,
+        "central_X": 0.7134727898992239
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.050_faint_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.05,
+    "cloud": "f2",
+    "scope": "Post-deuterium pilot; initial age calibration pending.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 46,
+    "wall_seconds": 42.32792687509209,
+    "start_radius_Rsun": 0.2643585752610164,
+    "start_Teff_K": 2799.0468683536915,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 2169.699662811898,
+    "final_luminosity_Lsun": 0.0002827304448439701,
+    "accepted_steps": 45,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10976738.319291145,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0006126609758182892,
+        "radius_Rsun": 0.1365660090626811,
+        "Teff_K": 2457.0817701395003,
+        "central_X": 0.7134727808700141
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0004946772862147895,
+        "radius_Rsun": 0.13030688585389752,
+        "Teff_K": 2383.8485548159724,
+        "central_X": 0.713472774322522
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.000406680093623723,
+        "radius_Rsun": 0.1255898352535477,
+        "Teff_K": 2312.1941058693706,
+        "central_X": 0.7134727664868301
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.060_hybrid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.06,
+    "cloud": "f2",
+    "scope": "Post-deuterium start. Specified Bobcat-Diamondback cloud clearing 900-1200 K, SPHINX above 2400 K. Formation-age uncertainty remains.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 48,
+    "wall_seconds": 54.886903333477676,
+    "start_radius_Rsun": 0.29247398682162934,
+    "start_Teff_K": 2854.2992905085657,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 2415.2723161521144,
+    "final_luminosity_Lsun": 0.0004705105168214704,
+    "accepted_steps": 47,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10794360.525802094,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0009248944504129182,
+        "radius_Rsun": 0.14535729768300923,
+        "Teff_K": 2639.85539233035,
+        "central_X": 0.7134727536808801
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0007625267717581886,
+        "radius_Rsun": 0.1377728416909702,
+        "Teff_K": 2583.8158091275163,
+        "central_X": 0.71347272355043
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0006467517974024908,
+        "radius_Rsun": 0.13206638973278,
+        "Teff_K": 2532.220374799532,
+        "central_X": 0.7134726835863077
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_f2_m0.075_hybrid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.075,
+    "cloud": "f2",
+    "scope": "Post-deuterium start. Specified Bobcat-Diamondback cloud clearing 900-1200 K, SPHINX above 2400 K. Formation-age uncertainty remains.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 50,
+    "wall_seconds": 59.88130512461066,
+    "start_radius_Rsun": 0.3307602303432941,
+    "start_Teff_K": 2920.014736068702,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 2678.204696474856,
+    "final_luminosity_Lsun": 0.0008223730546135537,
+    "accepted_steps": 49,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10646250.711150404,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0014347429438278806,
+        "radius_Rsun": 0.15933700665809158,
+        "Teff_K": 2813.8915595112076,
+        "central_X": 0.713472650946382
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0012127199514064759,
+        "radius_Rsun": 0.15021008304082628,
+        "Teff_K": 2778.819841630591,
+        "central_X": 0.7134725163934906
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0010501593953962099,
+        "radius_Rsun": 0.14326974237173157,
+        "Teff_K": 2744.6396771819655,
+        "central_X": 0.7134723217970618
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.008_cool500_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.008,
+    "cloud": "nc",
+    "scope": "Primordial D; Bobcat below 900 K, blended to Diamondback by 1200 K. f2 is a specified cloud-clearing scenario, not a low-temperature f2 grid.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 42,
+    "wall_seconds": 28.369534708559513,
+    "start_radius_Rsun": 0.2094642946953575,
+    "start_Teff_K": 1989.8428373875463,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 647.8697657510111,
+    "final_luminosity_Lsun": 2.2874791748241162e-06,
+    "accepted_steps": 41,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 2211714.4250257434,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 5.553744238752843e-06,
+        "radius_Rsun": 0.12467179376104513,
+        "Teff_K": 792.5212569545032,
+        "central_X": 0.7134877728397943
+      },
+      "125000000": {
+        "luminosity_Lsun": 4.19274904770983e-06,
+        "radius_Rsun": 0.12307838716005971,
+        "Teff_K": 743.404046314534,
+        "central_X": 0.7134877728005892
+      },
+      "150000000": {
+        "luminosity_Lsun": 3.307761619914757e-06,
+        "radius_Rsun": 0.12185243089107982,
+        "Teff_K": 704.5548848556092,
+        "central_X": 0.7134877727717615
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.010_cool500_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.01,
+    "cloud": "nc",
+    "scope": "Primordial D; Bobcat below 900 K, blended to Diamondback by 1200 K. f2 is a specified cloud-clearing scenario, not a low-temperature f2 grid.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 44,
+    "wall_seconds": 31.254337125457823,
+    "start_radius_Rsun": 0.22096546240072182,
+    "start_Teff_K": 2143.676880290816,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 749.8306514755157,
+    "final_luminosity_Lsun": 4.012510932942882e-06,
+    "accepted_steps": 43,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 2185464.2351530916,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 9.995327861330827e-06,
+        "radius_Rsun": 0.1238731220355606,
+        "Teff_K": 920.5692933818161,
+        "central_X": 0.7134876987332412
+      },
+      "125000000": {
+        "luminosity_Lsun": 7.497909233835292e-06,
+        "radius_Rsun": 0.122070943137983,
+        "Teff_K": 862.9768021711078,
+        "central_X": 0.7134876940094689
+      },
+      "150000000": {
+        "luminosity_Lsun": 5.917345337430615e-06,
+        "radius_Rsun": 0.12070855527305806,
+        "Teff_K": 818.1810576157307,
+        "central_X": 0.7134876905696156
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.010_faint_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.01,
+    "cloud": "nc",
+    "scope": "Primordial deuterium; finite initial entropy still needs age control.",
+    "status": "failed",
+    "target_elapsed_years": 150000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 45,
+    "wall_seconds": 33.801059333607554,
+    "start_radius_Rsun": 0.22096546240072182,
+    "start_Teff_K": 2143.676880290816,
+    "final_elapsed_years": 107926961.95212127,
+    "final_Teff_K": 900.0652755623895,
+    "final_luminosity_Lsun": 8.953286235235487e-06,
+    "accepted_steps": 44,
+    "rejected_steps": 13,
+    "completed_target": false,
+    "initial_contraction_scale_years": 2185464.2351530916,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 9.943579398117337e-06,
+        "radius_Rsun": 0.12374264397453623,
+        "Teff_K": 921.0936380405171,
+        "central_X": 0.7134876986069234
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.012_cool500_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.012,
+    "cloud": "nc",
+    "scope": "Primordial D; Bobcat below 900 K, blended to Diamondback by 1200 K. f2 is a specified cloud-clearing scenario, not a low-temperature f2 grid.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 69,
+    "wall_seconds": 51.96095758304,
+    "start_radius_Rsun": 0.23327846459160678,
+    "start_Teff_K": 2263.233214730305,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 1023.4473019491445,
+    "final_luminosity_Lsun": 1.4849693327830394e-05,
+    "accepted_steps": 68,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 2152660.328862369,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 3.3040796028532806e-05,
+        "radius_Rsun": 0.1293916179392783,
+        "Teff_K": 1216.5239801562036,
+        "central_X": 0.7134846954883175
+      },
+      "125000000": {
+        "luminosity_Lsun": 2.6170182501333885e-05,
+        "radius_Rsun": 0.12714591057069252,
+        "Teff_K": 1157.7492268733538,
+        "central_X": 0.713484298808104
+      },
+      "150000000": {
+        "luminosity_Lsun": 2.1239957718041907e-05,
+        "radius_Rsun": 0.1253409028048251,
+        "Teff_K": 1106.7728113698306,
+        "central_X": 0.7134839883914403
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.012_v2",
+    "cluster": "pleiades",
+    "mass_Msun": 0.012,
+    "cloud": "nc",
+    "scope": "Finite entropy start; formation-age and initial-entropy controls pending; no final mass assignments",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 69,
+    "wall_seconds": 47.321399374864995,
+    "start_radius_Rsun": 0.23327846459160678,
+    "start_Teff_K": 2263.233214730305,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 1024.6625165092903,
+    "final_luminosity_Lsun": 1.4910981118084751e-05,
+    "accepted_steps": 68,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 2152660.328862369,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 3.30377846094469e-05,
+        "radius_Rsun": 0.1293926939750317,
+        "Teff_K": 1216.4915147002687,
+        "central_X": 0.7134846954663752
+      },
+      "125000000": {
+        "luminosity_Lsun": 2.6197686725387598e-05,
+        "radius_Rsun": 0.1271447892564064,
+        "Teff_K": 1158.0590366761653,
+        "central_X": 0.7134842987682498
+      },
+      "150000000": {
+        "luminosity_Lsun": 2.129113312788371e-05,
+        "radius_Rsun": 0.12533129364831755,
+        "Teff_K": 1107.4834443718537,
+        "central_X": 0.7134839885210358
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.014_primordial_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.014,
+    "cloud": "nc",
+    "scope": "Primordial deuterium control near the burning threshold; low-gravity Sonora/Bobcat boundary.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 114,
+    "wall_seconds": 93.61521141696721,
+    "start_radius_Rsun": 0.246397129287745,
+    "start_Teff_K": 2358.5485798333434,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 1053.991231599956,
+    "final_luminosity_Lsun": 1.5843563612674202e-05,
+    "accepted_steps": 113,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 2108259.3186812806,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 6.92606351633828e-05,
+        "radius_Rsun": 0.13386345966482865,
+        "Teff_K": 1439.1849706432604,
+        "central_X": 0.713473129713205
+      },
+      "125000000": {
+        "luminosity_Lsun": 4.160405091568445e-05,
+        "radius_Rsun": 0.12781306692140723,
+        "Teff_K": 1296.4468556244883,
+        "central_X": 0.7134729396284268
+      },
+      "150000000": {
+        "luminosity_Lsun": 2.8221161661239835e-05,
+        "radius_Rsun": 0.12395503799440138,
+        "Teff_K": 1194.4754751874816,
+        "central_X": 0.7134728755044853
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.016_primordial_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.016,
+    "cloud": "nc",
+    "scope": "Primordial deuterium control near the burning threshold; low-gravity Sonora/Bobcat boundary.",
+    "status": "failed",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 0,
+    "wall_seconds": 3.096444124355912
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.020_faint_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.02,
+    "cloud": "nc",
+    "scope": "Post-deuterium pilot; initial age calibration pending.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 38,
+    "wall_seconds": 25.054812625050545,
+    "start_radius_Rsun": 0.18071184889108796,
+    "start_Teff_K": 2271.2589524391788,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 1197.1521440119898,
+    "final_luminosity_Lsun": 2.3924939333705443e-05,
+    "accepted_steps": 37,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 12681998.199104255,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 5.460938481324436e-05,
+        "radius_Rsun": 0.12119075787818,
+        "Teff_K": 1425.0334226945115,
+        "central_X": 0.7134727904714031
+      },
+      "125000000": {
+        "luminosity_Lsun": 4.252964310192275e-05,
+        "radius_Rsun": 0.11860460193866088,
+        "Teff_K": 1352.9545412792875,
+        "central_X": 0.7134727904713655
+      },
+      "150000000": {
+        "luminosity_Lsun": 3.425709443132403e-05,
+        "radius_Rsun": 0.1166103960227152,
+        "Teff_K": 1293.0168709006607,
+        "central_X": 0.7134727904713335
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.020_primordial_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.02,
+    "cloud": "nc",
+    "scope": "Primordial deuterium control near the burning threshold; low-gravity Sonora/Bobcat boundary.",
+    "status": "failed",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 0,
+    "wall_seconds": 2.5911936657503247
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.025_faint_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.025,
+    "cloud": "nc",
+    "scope": "Post-deuterium pilot; initial age calibration pending.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 40,
+    "wall_seconds": 27.949498041532934,
+    "start_radius_Rsun": 0.19272879969185197,
+    "start_Teff_K": 2443.692653114581,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 1400.4746034348548,
+    "final_luminosity_Lsun": 4.42920440949346e-05,
+    "accepted_steps": 39,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 12190121.297316113,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 9.998947287838498e-05,
+        "radius_Rsun": 0.12198520963304739,
+        "Teff_K": 1651.3839520243173,
+        "central_X": 0.7134727904667515
+      },
+      "125000000": {
+        "luminosity_Lsun": 7.782489334035649e-05,
+        "radius_Rsun": 0.1188958040850939,
+        "Teff_K": 1570.5385119244997,
+        "central_X": 0.7134727904655023
+      },
+      "150000000": {
+        "luminosity_Lsun": 6.313500141680339e-05,
+        "radius_Rsun": 0.11654596541415783,
+        "Teff_K": 1505.3046900925815,
+        "central_X": 0.7134727904643839
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.035_pilot",
+    "cluster": "pleiades",
+    "mass_Msun": 0.035,
+    "cloud": "clear",
+    "scope": "Post-deuterium initial state; missing early age and thermal memory unresolved; do not assign final cluster masses from this pilot alone.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 42,
+    "wall_seconds": 37.803930750116706,
+    "start_radius_Rsun": 0.22094356000054238,
+    "start_Teff_K": 2648.425730155739,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 1764.8561519476252,
+    "final_luminosity_Lsun": 0.0001134761390489083,
+    "accepted_steps": 41,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 11494631.278747847,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0002494288303976622,
+        "radius_Rsun": 0.12624711385152054,
+        "Teff_K": 2040.5838082117082,
+        "central_X": 0.713472790160582
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.00019638303066424266,
+        "radius_Rsun": 0.12190602365793418,
+        "Teff_K": 1955.9650975602096,
+        "central_X": 0.713472790028524
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.00016008674522983277,
+        "radius_Rsun": 0.11866840025813116,
+        "Teff_K": 1883.2177522136217,
+        "central_X": 0.7134727898943886
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.045_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.045,
+    "cloud": "clear",
+    "scope": "Post-deuterium pilot. Relative clock; initial age not calibrated. Do not interpret as a complete Hayashi-started sequence.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 45,
+    "wall_seconds": 38.6300303330645,
+    "start_radius_Rsun": 0.25002793985679694,
+    "start_Teff_K": 2760.6112157113907,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 2077.3079047361052,
+    "final_luminosity_Lsun": 0.00022857079392326292,
+    "accepted_steps": 44,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 11106893.306083474,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0004734964649972806,
+        "radius_Rsun": 0.13266740159117485,
+        "Teff_K": 2336.785914360652,
+        "central_X": 0.7134727865562833
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0003760780304245636,
+        "radius_Rsun": 0.12700457341406868,
+        "Teff_K": 2255.4145565297135,
+        "central_X": 0.7134727842402169
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.00031220709577488455,
+        "radius_Rsun": 0.12286390431779073,
+        "Teff_K": 2187.856712637599,
+        "central_X": 0.7134727815639352
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.050_faint_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.05,
+    "cloud": "nc",
+    "scope": "Post-deuterium pilot; initial age calibration pending.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 46,
+    "wall_seconds": 42.64572245813906,
+    "start_radius_Rsun": 0.2643585752610164,
+    "start_Teff_K": 2799.0468683536915,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 2203.4894065593703,
+    "final_luminosity_Lsun": 0.00029968470950969615,
+    "accepted_steps": 45,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10976738.319291145,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0006123816777546586,
+        "radius_Rsun": 0.13656723262403328,
+        "Teff_K": 2456.7886889974006,
+        "central_X": 0.7134727808701052
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.000495079633844434,
+        "radius_Rsun": 0.13030793984558442,
+        "Teff_K": 2384.346781805191,
+        "central_X": 0.7134727743230064
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0004097586251949159,
+        "radius_Rsun": 0.12557042635468532,
+        "Teff_K": 2316.867752391874,
+        "central_X": 0.7134727664845024
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.060_pilot",
+    "cluster": "pleiades",
+    "mass_Msun": 0.06,
+    "cloud": "clear",
+    "scope": "Post-deuterium initial state; missing early age and thermal memory unresolved; do not assign final cluster masses from this pilot alone.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 46,
+    "wall_seconds": 57.35426370892674,
+    "start_radius_Rsun": 0.2923947538708599,
+    "start_Teff_K": 2855.2205596100707,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 2429.724747323373,
+    "final_luminosity_Lsun": 0.00048278085619507906,
+    "accepted_steps": 45,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10789201.781187937,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0009231412199913439,
+        "radius_Rsun": 0.1455448588924115,
+        "Teff_K": 2636.7325827125374,
+        "central_X": 0.7134727538193475
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0007613639614574221,
+        "radius_Rsun": 0.13800065606425613,
+        "Teff_K": 2580.2928702991735,
+        "central_X": 0.7134727237694427
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0006428457446711205,
+        "radius_Rsun": 0.13225793869486194,
+        "Teff_K": 2526.752955797638,
+        "central_X": 0.7134726844355955
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.075_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.075,
+    "cloud": "clear",
+    "scope": "Post-deuterium pilot. Relative clock; initial age not calibrated. Do not interpret as a complete Hayashi-started sequence.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 50,
+    "wall_seconds": 55.3765452504158,
+    "start_radius_Rsun": 0.3307602303432941,
+    "start_Teff_K": 2920.014736068702,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 2678.204696474856,
+    "final_luminosity_Lsun": 0.0008223730546135537,
+    "accepted_steps": 49,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10646250.711150404,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0014347429438278806,
+        "radius_Rsun": 0.15933700665809158,
+        "Teff_K": 2813.8915595112076,
+        "central_X": 0.713472650946382
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0012127199514064759,
+        "radius_Rsun": 0.15021008304082628,
+        "Teff_K": 2778.819841630591,
+        "central_X": 0.7134725163934906
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0010501593953962099,
+        "radius_Rsun": 0.14326974237173157,
+        "Teff_K": 2744.6396771819655,
+        "central_X": 0.7134723217970618
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.090_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.09,
+    "cloud": "clear",
+    "scope": "Post-deuterium pilot. Relative clock; initial age not calibrated. Do not interpret as a complete Hayashi-started sequence.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 50,
+    "wall_seconds": 57.930702708661556,
+    "start_radius_Rsun": 0.36448214895579356,
+    "start_Teff_K": 2979.2515550829107,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 2840.861907187208,
+    "final_luminosity_Lsun": 0.001213711118365572,
+    "accepted_steps": 49,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10572598.095558839,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.001981430248128011,
+        "radius_Rsun": 0.1735028234680769,
+        "Teff_K": 2923.4056654082638,
+        "central_X": 0.713472454217301
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0017019495676795682,
+        "radius_Rsun": 0.16316952308468893,
+        "Teff_K": 2902.025912263528,
+        "central_X": 0.7134721010510796
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0014960714121226844,
+        "radius_Rsun": 0.15520873282918987,
+        "Teff_K": 2881.3323712552083,
+        "central_X": 0.7134715759357697
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.120_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.12,
+    "cloud": "clear",
+    "scope": "Post-deuterium pilot. Relative clock; initial age not calibrated. Do not interpret as a complete Hayashi-started sequence.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 48,
+    "wall_seconds": 61.241595334373415,
+    "start_radius_Rsun": 0.3797810651998341,
+    "start_Teff_K": 3101.114403239337,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 3022.889371327505,
+    "final_luminosity_Lsun": 0.002063385128805615,
+    "accepted_steps": 47,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 14152905.509240255,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.003077867874132374,
+        "radius_Rsun": 0.19783681454180405,
+        "Teff_K": 3056.3573578625824,
+        "central_X": 0.7134715657155256
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.002699252127671599,
+        "radius_Rsun": 0.18638002444442195,
+        "Teff_K": 3047.244355022717,
+        "central_X": 0.713470297788572
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0024267851692275503,
+        "radius_Rsun": 0.17773911871062453,
+        "Teff_K": 3038.551682721291,
+        "central_X": 0.7134683718493592
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.150_earlier_ramp_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.15,
+    "cloud": "clear",
+    "scope": "Earlier post-deuterium initial-state control. Initial entropy continuation is not evolution. Relative age still omits earliest contraction.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 54,
+    "wall_seconds": 76.7668572915718,
+    "start_radius_Rsun": 0.493567744645098,
+    "start_Teff_K": 3399.782713755387,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 3129.423979300818,
+    "final_luminosity_Lsun": 0.0030986096279421635,
+    "accepted_steps": 53,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 6974157.551631176,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.004426887221512019,
+        "radius_Rsun": 0.2243914894167816,
+        "Teff_K": 3143.0120923042723,
+        "central_X": 0.7134705421303039
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.003913509163679221,
+        "radius_Rsun": 0.21141567704893915,
+        "Teff_K": 3139.6988816737808,
+        "central_X": 0.7134680779399185
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.003549783394188165,
+        "radius_Rsun": 0.20184185845415603,
+        "Teff_K": 3135.924729839552,
+        "central_X": 0.7134643688039823
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.150_pilot",
+    "cluster": "pleiades",
+    "mass_Msun": 0.15,
+    "cloud": "clear",
+    "scope": "Post-deuterium initial state; missing early age and thermal memory unresolved; do not assign final cluster masses from this pilot alone.",
+    "status": "failed",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 1,
+    "wall_seconds": 3.4592115422710776,
+    "start_radius_Rsun": 0.3678562422968728,
+    "start_Teff_K": 3203.019186989692,
+    "final_elapsed_years": 0,
+    "final_Teff_K": 3203.019186989692,
+    "final_luminosity_Lsun": 0.012831815289645677,
+    "accepted_steps": 0,
+    "rejected_steps": 0,
+    "completed_target": false,
+    "initial_contraction_scale_years": 21382779.57181508,
+    "at_elapsed_years": {}
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.150_shallow",
+    "cluster": "pleiades",
+    "mass_Msun": 0.15,
+    "cloud": "clear",
+    "scope": "Post-deuterium initial state; missing early age and thermal memory unresolved; do not assign final cluster masses from this pilot alone.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 47,
+    "wall_seconds": 64.57814624998719,
+    "start_radius_Rsun": 0.368300695858592,
+    "start_Teff_K": 3199.7419494767464,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 3128.1420606633956,
+    "final_luminosity_Lsun": 0.003022884508619343,
+    "accepted_steps": 46,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 21392880.827899538,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.004141885812770588,
+        "radius_Rsun": 0.21726270001194498,
+        "Teff_K": 3141.390098491952,
+        "central_X": 0.7134694384237719
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0037135071282006675,
+        "radius_Rsun": 0.2061897032750866,
+        "Teff_K": 3137.82612059827,
+        "central_X": 0.7134663565772337
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.003404690686758425,
+        "radius_Rsun": 0.1979165634214952,
+        "Teff_K": 3134.0398325288006,
+        "central_X": 0.7134619766497057
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.200_grid_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.2,
+    "cloud": "clear",
+    "scope": "Post-deuterium pilot. Relative clock; initial age not calibrated. Do not interpret as a complete Hayashi-started sequence.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 49,
+    "wall_seconds": 74.48160579055548,
+    "start_radius_Rsun": 0.38100656040568326,
+    "start_Teff_K": 3294.626267965292,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 3235.726614973885,
+    "final_luminosity_Lsun": 0.00496934254686131,
+    "accepted_steps": 48,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 30562733.574513268,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.0061629314008148405,
+        "radius_Rsun": 0.24877487631239378,
+        "Teff_K": 3242.366498170746,
+        "central_X": 0.7134629541091826
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.005663525040364585,
+        "radius_Rsun": 0.23875492716638425,
+        "Teff_K": 3240.5579150537574,
+        "central_X": 0.713455565289416
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.005326281301515923,
+        "radius_Rsun": 0.23184987441029187,
+        "Teff_K": 3238.3804946055016,
+        "central_X": 0.7134459135837954
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.250_earlier_bounded_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.25,
+    "cloud": "clear",
+    "scope": "Earlier post-deuterium initial-state control. Initial entropy continuation is not evolution. Relative age still omits earliest contraction.",
+    "status": "complete",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 53,
+    "wall_seconds": 102.49010616540909,
+    "start_radius_Rsun": 0.4831872509547858,
+    "start_Teff_K": 3458.172542647895,
+    "final_elapsed_years": 200000000,
+    "final_Teff_K": 3329.3055383505884,
+    "final_luminosity_Lsun": 0.007510189528864102,
+    "accepted_steps": 52,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 19288620.84460462,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.009145179321464194,
+        "radius_Rsun": 0.28379848529648694,
+        "Teff_K": 3350.5573572236144,
+        "central_X": 0.7134582597281113
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.008370868653364416,
+        "radius_Rsun": 0.2731500581561332,
+        "Teff_K": 3340.542447559542,
+        "central_X": 0.7134470329432459
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.007917989011935621,
+        "radius_Rsun": 0.2666059177432526,
+        "Teff_K": 3334.605073774155,
+        "central_X": 0.7134327273807348
+      }
+    }
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.250_earlier_ramp_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.25,
+    "cloud": "clear",
+    "scope": "Earlier post-deuterium initial-state control. Initial entropy continuation is not evolution. Relative age still omits earliest contraction.",
+    "status": "failed",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 9.167457374744117
+  },
+  {
+    "case": "cluster_pleiades_nc_m0.250_earlier_shallow_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.25,
+    "cloud": "clear",
+    "scope": "Earlier post-deuterium initial-state control. Initial entropy continuation is not evolution. Relative age still omits earliest contraction.",
+    "status": "failed",
+    "target_elapsed_years": 200000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.001,
+    "accepted_records": 0,
+    "wall_seconds": 5.579465082846582
+  },
+  {
+    "case": "control_m0.25_z0.02",
+    "cluster": null,
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.00015,
+    "accepted_records": 0,
+    "wall_seconds": 2.5178697500377893
+  },
+  {
+    "case": "seed_continuation_disabled_control",
+    "cluster": null,
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "complete",
+    "target_elapsed_years": 1000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 2,
+    "wall_seconds": 4.003492541611195,
+    "start_radius_Rsun": 0.37811100163155437,
+    "start_Teff_K": 3415.3888480731334,
+    "final_elapsed_years": 1000,
+    "final_Teff_K": 3415.370139288641,
+    "final_luminosity_Lsun": 0.017525677581125776,
+    "accepted_steps": 1,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 42307332.50061774,
+    "at_elapsed_years": {}
+  },
+  {
+    "case": "sphinx_hyades_m0.10_pilot",
+    "cluster": "hyades",
+    "mass_Msun": 0.1,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 3.0647355001419783
+  },
+  {
+    "case": "sphinx_hyades_m0.10_postD",
+    "cluster": "hyades",
+    "mass_Msun": 0.1,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 0.003652249462902546
+  },
+  {
+    "case": "sphinx_hyades_m0.10_seed2",
+    "cluster": "hyades",
+    "mass_Msun": 0.1,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 5.05988849978894
+  },
+  {
+    "case": "sphinx_hyades_m0.10_traceD",
+    "cluster": "hyades",
+    "mass_Msun": 0.1,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "complete",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 72,
+    "wall_seconds": 145.79633654095232,
+    "start_radius_Rsun": 0.3936040932054029,
+    "start_Teff_K": 2974.8250032229807,
+    "final_elapsed_years": 800000000,
+    "final_Teff_K": 2745.219382426179,
+    "final_luminosity_Lsun": 0.0008246344515712967,
+    "accepted_steps": 71,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10426287.148549138,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.002317273956789321,
+        "radius_Rsun": 0.18746418623572988,
+        "Teff_K": 2924.750639676243,
+        "central_X": 0.7068880650021143
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.002003537894676615,
+        "radius_Rsun": 0.17599435100333502,
+        "Teff_K": 2910.8472819759327,
+        "central_X": 0.7068875803964505
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.001775942305486802,
+        "radius_Rsun": 0.16732489645418686,
+        "Teff_K": 2896.4588773301266,
+        "central_X": 0.706886815418271
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.0008545036513080051,
+        "radius_Rsun": 0.12835368030732427,
+        "Teff_K": 2754.5454034093787,
+        "central_X": 0.7068223117766862
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.0008428846718627914,
+        "radius_Rsun": 0.1278095164014003,
+        "Teff_K": 2750.9752908907067,
+        "central_X": 0.7068116106799921
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.0008288561674076472,
+        "radius_Rsun": 0.12714877110461245,
+        "Teff_K": 2746.5667481824403,
+        "central_X": 0.7067895737170821
+      }
+    }
+  },
+  {
+    "case": "sphinx_hyades_m0.25_compact_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "complete",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 68,
+    "wall_seconds": 140.94391970802099,
+    "start_radius_Rsun": 0.3836491239110418,
+    "start_Teff_K": 3386.0171399560772,
+    "final_elapsed_years": 800000000,
+    "final_Teff_K": 3277.4708261226874,
+    "final_luminosity_Lsun": 0.0070328491114678236,
+    "accepted_steps": 67,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 41925183.14824405,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.008122285462431926,
+        "radius_Rsun": 0.2769486948244521,
+        "Teff_K": 3292.6397532289966,
+        "central_X": 0.7068650006843037
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.007661378832659201,
+        "radius_Rsun": 0.2700508941041536,
+        "Teff_K": 3286.090185635396,
+        "central_X": 0.7068516495012347
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.007393354705542929,
+        "radius_Rsun": 0.26590428645269015,
+        "Teff_K": 3282.2680974308428,
+        "central_X": 0.7068359669811307
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.007028456430681712,
+        "radius_Rsun": 0.2600508920275309,
+        "Teff_K": 3277.2713075608426,
+        "central_X": 0.7064847747814045
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.007029484432947267,
+        "radius_Rsun": 0.26006176145033805,
+        "Teff_K": 3277.3226453026373,
+        "central_X": 0.7064451141692258
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.007031601961710338,
+        "radius_Rsun": 0.26008646256879564,
+        "Teff_K": 3277.413785764418,
+        "central_X": 0.7063658502157352
+      }
+    }
+  },
+  {
+    "case": "sphinx_hyades_m0.25_earlier_v1",
+    "cluster": "hyades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 6.271741000004113
+  },
+  {
+    "case": "sphinx_hyades_m0.25_pilot",
+    "cluster": "hyades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 4.533061916008592
+  },
+  {
+    "case": "sphinx_hyades_m0.25_postD",
+    "cluster": "hyades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 0.004059792496263981
+  },
+  {
+    "case": "sphinx_hyades_m0.25_seed2",
+    "cluster": "hyades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 4.9022297924384475
+  },
+  {
+    "case": "sphinx_hyades_m0.25_traceD",
+    "cluster": "hyades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 5.598278249613941
+  },
+  {
+    "case": "sphinx_hyades_m0.25_traceD2",
+    "cluster": "hyades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.005,
+    "accepted_records": 0,
+    "wall_seconds": 4.8802267499268055
+  },
+  {
+    "case": "sphinx_pleiades_m0.10_compact_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.1,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "complete",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 71,
+    "wall_seconds": 132.98278487473726,
+    "start_radius_Rsun": 0.3829089680319267,
+    "start_Teff_K": 3028.5007022934824,
+    "final_elapsed_years": 800000000,
+    "final_Teff_K": 2780.484112006422,
+    "final_luminosity_Lsun": 0.0008420496065324065,
+    "accepted_steps": 70,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 10542821.738742763,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.002361958939587728,
+        "radius_Rsun": 0.1827905358857626,
+        "Teff_K": 2976.0407187465257,
+        "central_X": 0.7134722647146067
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.0020398111110743774,
+        "radius_Rsun": 0.17174976803996078,
+        "Teff_K": 2959.772162007904,
+        "central_X": 0.7134717042228882
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.0018065342777526213,
+        "radius_Rsun": 0.16341018688971287,
+        "Teff_K": 2943.4413520455482,
+        "central_X": 0.7134708338609329
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.0008720925040326393,
+        "radius_Rsun": 0.12636919482193146,
+        "Teff_K": 2790.268171835144,
+        "central_X": 0.7134030953833144
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.0008604035376781828,
+        "radius_Rsun": 0.1258567667515998,
+        "Teff_K": 2786.5298155621854,
+        "central_X": 0.7133921081198022
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.0008462989103558702,
+        "radius_Rsun": 0.12523669475198582,
+        "Teff_K": 2781.900767612778,
+        "central_X": 0.7133695262079102
+      }
+    }
+  },
+  {
+    "case": "sphinx_pleiades_m0.10_pilot",
+    "cluster": "pleiades",
+    "mass_Msun": 0.1,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 5.2534471256658435
+  },
+  {
+    "case": "sphinx_pleiades_m0.10_postD",
+    "cluster": "pleiades",
+    "mass_Msun": 0.1,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 0.004252417013049126
+  },
+  {
+    "case": "sphinx_pleiades_m0.10_seed2",
+    "cluster": "pleiades",
+    "mass_Msun": 0.1,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 5.131997457705438
+  },
+  {
+    "case": "sphinx_pleiades_m0.10_traceD",
+    "cluster": "pleiades",
+    "mass_Msun": 0.1,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 1,
+    "wall_seconds": 3.001756750047207,
+    "start_radius_Rsun": 0.3829089680319267,
+    "start_Teff_K": 3028.5007022934824,
+    "final_elapsed_years": 0,
+    "final_Teff_K": 3028.5007022934824,
+    "final_luminosity_Lsun": 0.011112082806450003,
+    "accepted_steps": 0,
+    "rejected_steps": 0,
+    "completed_target": false,
+    "initial_contraction_scale_years": 10542821.738742763,
+    "at_elapsed_years": {}
+  },
+  {
+    "case": "sphinx_pleiades_m0.10_traceD2",
+    "cluster": "pleiades",
+    "mass_Msun": 0.1,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.005,
+    "accepted_records": 1,
+    "wall_seconds": 3.336968082934618,
+    "start_radius_Rsun": 0.3830417497555065,
+    "start_Teff_K": 3027.4339032599296,
+    "final_elapsed_years": 0,
+    "final_Teff_K": 3027.4339032599296,
+    "final_luminosity_Lsun": 0.011104131188175017,
+    "accepted_steps": 0,
+    "rejected_steps": 0,
+    "completed_target": false,
+    "initial_contraction_scale_years": 10546714.111312747,
+    "at_elapsed_years": {}
+  },
+  {
+    "case": "sphinx_pleiades_m0.25_compact_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "complete",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 68,
+    "wall_seconds": 144.69496912509203,
+    "start_radius_Rsun": 0.37811100163155437,
+    "start_Teff_K": 3415.3888480731334,
+    "final_elapsed_years": 800000000,
+    "final_Teff_K": 3325.446122955588,
+    "final_luminosity_Lsun": 0.007312255773410756,
+    "accepted_steps": 67,
+    "rejected_steps": 0,
+    "completed_target": true,
+    "initial_contraction_scale_years": 42307332.50061774,
+    "at_elapsed_years": {
+      "100000000": {
+        "luminosity_Lsun": 0.008377293549800593,
+        "radius_Rsun": 0.27366040197913516,
+        "Teff_K": 3338.062844498006,
+        "central_X": 0.7134479686207649
+      },
+      "125000000": {
+        "luminosity_Lsun": 0.007915738782078071,
+        "radius_Rsun": 0.26694366668032254,
+        "Teff_K": 3332.263117083269,
+        "central_X": 0.7134338565703443
+      },
+      "150000000": {
+        "luminosity_Lsun": 0.007653172897718575,
+        "radius_Rsun": 0.2629952466418186,
+        "Teff_K": 3328.989833945895,
+        "central_X": 0.713417307100952
+      },
+      "600000000": {
+        "luminosity_Lsun": 0.007307697247137597,
+        "radius_Rsun": 0.2575680473956311,
+        "Teff_K": 3325.260888739575,
+        "central_X": 0.7130516370348853
+      },
+      "650000000": {
+        "luminosity_Lsun": 0.007308709838712816,
+        "radius_Rsun": 0.2575794236802544,
+        "Teff_K": 3325.3026382065923,
+        "central_X": 0.7130104063779803
+      },
+      "750000000": {
+        "luminosity_Lsun": 0.007310981989416249,
+        "radius_Rsun": 0.25760521481315163,
+        "Teff_K": 3325.3945734510717,
+        "central_X": 0.7129280074770465
+      }
+    }
+  },
+  {
+    "case": "sphinx_pleiades_m0.25_earlier_v1",
+    "cluster": "pleiades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 2.9459481248632073
+  },
+  {
+    "case": "sphinx_pleiades_m0.25_pilot",
+    "cluster": "pleiades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 4.86305904109031
+  },
+  {
+    "case": "sphinx_pleiades_m0.25_postD",
+    "cluster": "pleiades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 0.0037881676107645035
+  },
+  {
+    "case": "sphinx_pleiades_m0.25_seed2",
+    "cluster": "pleiades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": false,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 5.185451124794781
+  },
+  {
+    "case": "sphinx_pleiades_m0.25_traceD",
+    "cluster": "pleiades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.01,
+    "accepted_records": 0,
+    "wall_seconds": 2.5635288758203387
+  },
+  {
+    "case": "sphinx_pleiades_m0.25_traceD2",
+    "cluster": "pleiades",
+    "mass_Msun": 0.25,
+    "cloud": "nc",
+    "scope": "Pilot; see original configuration and receipts",
+    "status": "failed",
+    "target_elapsed_years": 800000000,
+    "post_deuterium_start": true,
+    "elapsed_age_is_not_cluster_age": true,
+    "envelope_mass_fraction": 0.005,
+    "accepted_records": 0,
+    "wall_seconds": 6.571838832460344
+  }
+]

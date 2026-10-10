@@ -1,0 +1,46 @@
+[
+  {
+    "cluster": "hyades",
+    "published_members": 1071,
+    "velocity_residual_median_kms": [
+      0.057634516533504154,
+      -0.00018896117996206052
+    ],
+    "velocity_residual_abs90_kms": [
+      0.06156850454499729,
+      0.004482464944335962
+    ],
+    "parent_rows": 745474,
+    "parent_inside_window": 484292,
+    "published_members_in_parent": 1033,
+    "automatic_recovered_published": 922,
+    "published_neighbors_median": 17.0,
+    "reproduced_neighbors_median": 20.0,
+    "eroded_boundary_recovery": 891,
+    "published_CP_members": 975,
+    "automatic_recovered_CP_members": 922,
+    "wall_seconds": 0.923306250013411
+  },
+  {
+    "cluster": "pleiades",
+    "published_members": 2029,
+    "velocity_residual_median_kms": [
+      -0.07446404305271515,
+      0.009196567427550484
+    ],
+    "velocity_residual_abs90_kms": [
+      0.07851823702564013,
+      0.013062381012366354
+    ],
+    "parent_rows": 319489,
+    "parent_inside_window": 289063,
+    "published_members_in_parent": 2029,
+    "automatic_recovered_published": 2028,
+    "published_neighbors_median": 700.0,
+    "reproduced_neighbors_median": 700.0,
+    "eroded_boundary_recovery": 2028,
+    "published_CP_members": 2029,
+    "automatic_recovered_CP_members": 2028,
+    "wall_seconds": 0.4937245827168226
+  }
+]

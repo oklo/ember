@@ -1,0 +1,11 @@
+{
+  "expected_birth_ratio": 0.55,
+  "seeds": [
+    41,
+    42,
+    43
+  ],
+  "rh_pc": 4,
+  "started_unix": 1791573053.460427,
+  "reason": "Explicit lower-field normalization, not an IMF value fitted to clusters.\n\nR=.55 is the lower edge of the independent field sensitivity interval. The\nexisting 4-pc Pleiades configuration was closest in absolute reference-star\ncounts. Three seeds quantify draw sensitivity; Hyades remains at R=.63.\n"
+}

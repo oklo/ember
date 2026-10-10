@@ -1,0 +1,24 @@
+{
+  "purpose": "Test stellar structure and selection before using brown-dwarf counts; not a formal IMF posterior.",
+  "frozen_before_endpoints": "2026-10-09",
+  "birth_population": "Same field-normalized component IMF as v1; independent seeds 41, 42, 43, with paired seeds across clusters.",
+  "structural_screen": {
+    "hyades": {"aperture_pc": 9, "mass_excluding_BH_NS_Msun": [240, 360], "half_mass_radius_pc": [3, 6]},
+    "pleiades": {"aperture_pc": 11.6, "mass_excluding_BH_NS_Msun": [600, 1000], "half_mass_radius_pc": [2.5, 5.5]},
+    "meaning": "Broad screening ranges, not Gaussian errors or a fitted prior. Mass includes white dwarfs but excludes black holes and neutron stars; report both total and nonremnant mass. Radius is measured in the same aperture. Compare all model results, not only passing runs."
+  },
+  "stellar_holdout": "Compare absolute reference-star counts and disjoint radial bins independently of BD counts. Do not freely rescale the simulated population to fit the ratio.",
+  "survey_tests": [
+    "Original full candidate union, retaining all associated and tidal-tail candidates as the scientific target.",
+    "Pleiades DANCe selected members (pc > 0.84), theta < 3 degrees, observed Ks < 17; synthetic sources use the same aperture and magnitude cut.",
+    "Apply published DANCe classifier recovery only within the observed survey, never as correction for unobserved tails. Aggregate classifier rates are not mass-dependent calibrations."
+  ],
+  "not_fitted": ["BD formation normalization", "gas expulsion", "primordial mass segregation", "arbitrary global membership probability for the union"],
+  "sources": [
+    "https://arxiv.org/abs/1105.6093",
+    "https://academic.oup.com/mnras/article/524/2/1965/7210551",
+    "https://academic.oup.com/mnras/article/525/2/2315/7233111",
+    "https://arxiv.org/abs/1502.03728",
+    "https://cdsarc.cds.unistra.fr/viz-bin/ReadMe/J/A+A/617/A15"
+  ]
+}

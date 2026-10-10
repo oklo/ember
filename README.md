@@ -35,7 +35,8 @@ it does not currently use Metal or the GPU.
 
 [Run configuration](docs/LIFETIME_DRIVER.md) ·
 [Working paper](docs/reports/2026-09-27/ember_status_and_future.pdf) ·
-[Paper source](docs/reports/2026-09-27/README.md)
+[Paper source](docs/reports/2026-09-27/README.md) ·
+[Cluster and field mass functions](research/mass-functions/README.md)
 
 ## License
 

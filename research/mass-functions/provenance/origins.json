@@ -1,0 +1,907 @@
+[
+  {
+    "path": "reports/cluster-mass-functions.md",
+    "source": "docs/research/independent/CLUSTER_MASS_FUNCTIONS_20261009.md",
+    "source_sha256": "e254cc360bcabaa65e5dec4691e1040e813f2c1a11704b744ea54c06ccb1b8d0"
+  },
+  {
+    "path": "reports/field-mass-function.md",
+    "source": "docs/research/independent/FIELD_MASS_FUNCTION_20261009.md",
+    "source_sha256": "fcfb415d86d05c3609adf4773e2104fb2a68a274619685e0652bef9f883fedd2"
+  },
+  {
+    "path": "reports/cluster-dynamics.md",
+    "source": "docs/research/independent/CLUSTER_DISSOLUTION_FOLLOWUP_20261009.md",
+    "source_sha256": "6f450d84b70a875196dd6abf284b91a45eb70bc03b122863bbeded3e6462e153"
+  },
+  {
+    "path": "reports/stellar-fit.md",
+    "source": "docs/research/independent/CLUSTER_STELLAR_TEST_20261009.md",
+    "source_sha256": "e66b558e2eb064cf7f2314e2517bd63d882e2a7e538778950d8d15c7a861a0fc"
+  },
+  {
+    "path": "reports/membership-selection.md",
+    "source": "docs/research/independent/CLUSTER_MEMBERSHIP_TEST_20261009.md",
+    "source_sha256": "0480b60c76edec3f3f79b555ab18dc64f6894b64660b9ab9406c8954dca193d5"
+  },
+  {
+    "path": "figures/cluster-mass-functions.png",
+    "source": "docs/research/independent/CLUSTER_MASS_FUNCTIONS_20261009.png",
+    "source_sha256": "026f7343c9e6e1bc64dff4b95e7664975fee3876e29aeb5ae0be28ba56cf5d6a"
+  },
+  {
+    "path": "figures/cluster-mass-functions.pdf",
+    "source": "docs/research/independent/CLUSTER_MASS_FUNCTIONS_20261009.pdf",
+    "source_sha256": "6c4734f7438d78cedab212051ec0d7ec689237036c0100fd81a4a71661e5d62d"
+  },
+  {
+    "path": "figures/field-mass-function.png",
+    "source": "docs/research/independent/FIELD_MASS_FUNCTION_20261009.png",
+    "source_sha256": "3437d399f86163b2a194860dbd184fa22dc2d58a26bc2f9975a760e4dc69ae5c"
+  },
+  {
+    "path": "figures/field-mass-function.pdf",
+    "source": "docs/research/independent/FIELD_MASS_FUNCTION_20261009.pdf",
+    "source_sha256": "9fcc5631e53a1b40a0fc22f429874d60505c0d5ccaca314d742a119bfc3da2c8"
+  },
+  {
+    "path": "figures/cluster-dynamics.png",
+    "source": "docs/research/independent/CLUSTER_DISSOLUTION_FOLLOWUP_20261009.png",
+    "source_sha256": "ab343d8084f876e90f7785cce134013aea8f839d5b103870f03dfa4629534ca0"
+  },
+  {
+    "path": "figures/cluster-dynamics.pdf",
+    "source": "docs/research/independent/CLUSTER_DISSOLUTION_FOLLOWUP_20261009.pdf",
+    "source_sha256": "60aa9779af37f3435890579671f9542583adb30d79e734da3284abbc100157f6"
+  },
+  {
+    "path": "figures/stellar-fit.png",
+    "source": "docs/research/independent/CLUSTER_STELLAR_TEST_20261009.png",
+    "source_sha256": "ecffde2ee0b0d0a0168e01b9bed2031b9dfa81fb563010feb345d46a5ad033ad"
+  },
+  {
+    "path": "figures/stellar-fit.pdf",
+    "source": "docs/research/independent/CLUSTER_STELLAR_TEST_20261009.pdf",
+    "source_sha256": "d483e1d6b17aa1e93bac62530ea66cab8440d658c5751c29fe055c35bd23afec"
+  },
+  {
+    "path": "figures/membership-selection.png",
+    "source": "docs/research/independent/CLUSTER_MEMBERSHIP_TEST_20261009.png",
+    "source_sha256": "6a2797bbefd2968ed969bcac0f79f3b8022faa8c9f11d4b00bbb3da2b492ee33"
+  },
+  {
+    "path": "figures/membership-selection.pdf",
+    "source": "docs/research/independent/CLUSTER_MEMBERSHIP_TEST_20261009.pdf",
+    "source_sha256": "a49eef76e3f98991d6284129baa74f65137fc38c9a881d5d4f1ece32cf8cf164"
+  },
+  {
+    "path": "figures/normalized-cluster-mass-functions.png",
+    "source": "docs/research/independent/CLUSTER_MASS_FUNCTIONS_NORMALIZED_20261009.png",
+    "source_sha256": "12d8847583d644f9dd6954742a6603b8feb2e91361517cae11c632c90d036a5b"
+  },
+  {
+    "path": "figures/normalized-cluster-mass-functions.pdf",
+    "source": "docs/research/independent/CLUSTER_MASS_FUNCTIONS_NORMALIZED_20261009.pdf",
+    "source_sha256": "7bcd195939bfe0543d3e76dc6da8ffd4a6b684c9320fa3fc6df7536553bcd292"
+  },
+  {
+    "path": "figures/field-checks.png",
+    "source": "docs/research/independent/FIELD_MASS_FUNCTION_CHECKS_20261009.png",
+    "source_sha256": "000367bad4202d334610228173a98a2c969ee22090ea7d787f7ca627704c29f2"
+  },
+  {
+    "path": "figures/field-checks.pdf",
+    "source": "docs/research/independent/FIELD_MASS_FUNCTION_CHECKS_20261009.pdf",
+    "source_sha256": "421794023f93e42e029d4a65b3507a8b81b139945347ed496700268c4df7da38"
+  },
+  {
+    "path": "figures/matched-mass-distributions.png",
+    "source": "docs/research/independent/CLUSTER_MASS_SHAPES_20261009.png",
+    "source_sha256": "d9d8f3a0b2294b0d8e4b8c039a667657c3b6e6b3deb2d8e1ff2e838be13a96fc"
+  },
+  {
+    "path": "figures/matched-mass-distributions.pdf",
+    "source": "docs/research/independent/CLUSTER_MASS_SHAPES_20261009.pdf",
+    "source_sha256": "5b6665379980ff1fc54faf0a17c71bfa40beea2db5ea99596b6d944c2047cfc7"
+  },
+  {
+    "path": "tables/clusters/cluster_isochrones_provisional.csv",
+    "source": "out/cluster-mass-functions-oct9-v1/cluster_isochrones_provisional.csv",
+    "source_sha256": "19222f598f955b71ca033bd9e3bb917097b1f5204e61f1fedf4ff932d484e8e4"
+  },
+  {
+    "path": "tables/clusters/observed_mass_function_bins.csv",
+    "source": "out/cluster-mass-functions-oct9-v1/observed_mass_function_bins.csv",
+    "source_sha256": "a164eb2d309924327c316c23e749a2215ceca1169eb2126fef95966adec53910"
+  },
+  {
+    "path": "tables/clusters/normalized_observed_mass_functions_bins.csv",
+    "source": "out/cluster-mass-functions-oct9-v1/normalized_observed_mass_functions_bins.csv",
+    "source_sha256": "46f38ae876eb38ff677d020127ae59313fe58550949e749a5181a95eaaddc170"
+  },
+  {
+    "path": "tables/field/field_mass_function.csv",
+    "source": "out/field-mass-function-oct9-v1/field_mass_function.csv",
+    "source_sha256": "ef4b259ced9b32d6e5cfbdd5ebf12ccac40de3f9c0f2d4a4e2a4dd38a053220d"
+  },
+  {
+    "path": "tables/field/component_luminosity_function.csv",
+    "source": "out/field-mass-function-oct9-v1/component_luminosity_function.csv",
+    "source_sha256": "8f9e45b1581219593ca465d794a6534a5ad690ee2a5d229e050973a6349201c3"
+  },
+  {
+    "path": "tables/field/best2024_corrected_single_luminosity_function.csv",
+    "source": "out/field-mass-function-oct9-v1/best2024_corrected_single_luminosity_function.csv",
+    "source_sha256": "cbb294e251710d08a9edac0b7cb25641ad329ec5b50561a06db7f07aae3835bf"
+  },
+  {
+    "path": "tables/field/kirkpatrick2024_corrected_temperature_function.csv",
+    "source": "out/field-mass-function-oct9-v1/kirkpatrick2024_corrected_temperature_function.csv",
+    "source_sha256": "ff9edd3f9e9ba9343192f9faf90ce194434bb9dff2becc92d76d38e2722a81d6"
+  },
+  {
+    "path": "tables/field/selected_tracks.csv",
+    "source": "out/field-mass-function-oct9-v1/selected_tracks.csv",
+    "source_sha256": "6eba2a33a69da12cf851613f362a4aca7d4107a859aa31235dc34cae73c1ac31"
+  },
+  {
+    "path": "tables/dynamics/dynamical_history.csv",
+    "source": "out/cluster-dissolution-oct9-v1/dynamical_history.csv",
+    "source_sha256": "b0ed18cf0ca80755a541191cd315f5148705b0997f950ab41033e000ecdd174e"
+  },
+  {
+    "path": "tables/dynamics/observed_aperture_ratios.csv",
+    "source": "out/cluster-dissolution-oct9-v1/observed_aperture_ratios.csv",
+    "source_sha256": "46ec836238e54546d091bdc4833646541b01f3b1972d155aec1b13dc9417b156"
+  },
+  {
+    "path": "tables/dynamics/observed_ratio_counting_uncertainty.csv",
+    "source": "out/cluster-dissolution-oct9-v1/observed_ratio_counting_uncertainty.csv",
+    "source_sha256": "dc97a8bc35d841e102814cd0ba11edc99c4f692d4b5635274ec19f727e1b39a0"
+  },
+  {
+    "path": "tables/dynamics/observed_source_contributions.csv",
+    "source": "out/cluster-dissolution-oct9-v1/observed_source_contributions.csv",
+    "source_sha256": "919f151ece125ccc0c54c49207a9bfb158a1a122ae6a28375cf3a99d700cc5b0"
+  },
+  {
+    "path": "tables/ensemble/structural_endpoints.csv",
+    "source": "out/cluster-dissolution-oct9-v2/structural_endpoints.csv",
+    "source_sha256": "adc886c3788e79507f453a59ba78bdffb959b07c1b7ceec6930dbc266b15aec9"
+  },
+  {
+    "path": "tables/ensemble/execution_cost.csv",
+    "source": "out/cluster-dissolution-oct9-v2/execution_cost.csv",
+    "source_sha256": "b3b169662f9fb9ed2040072ab646d7f3029d07c9b8e7d163e9ed4575ea02b637"
+  },
+  {
+    "path": "tables/ensemble/observed_matched_counts.csv",
+    "source": "out/cluster-dissolution-oct9-v2/observed_matched_counts.csv",
+    "source_sha256": "b058400f3ea25f3c3ac605691f0629606ab43cc583bf87950c67e3b7af347e46"
+  },
+  {
+    "path": "tables/ensemble/joint_checks.csv",
+    "source": "out/cluster-dissolution-oct9-v2/joint_checks.csv",
+    "source_sha256": "4700c97831c76a85ad2897ca381179ed4e69bf8a9cda86e2ba6557a7375e6787"
+  },
+  {
+    "path": "tables/ensemble/normalized_mass_shapes.csv",
+    "source": "out/cluster-dissolution-oct9-v2/normalized_mass_shapes.csv",
+    "source_sha256": "a1cbe8770a5cf46709a90da9c960b4d979797076afb243a05591e05816411fd7"
+  },
+  {
+    "path": "tables/ensemble/dance_binary_sensitivity.csv",
+    "source": "out/cluster-dissolution-oct9-v2/dance_binary_sensitivity.csv",
+    "source_sha256": "e84728c7109f64901c97ecebf4a298344cb935e0d935362e4b78b8fedefee877"
+  },
+  {
+    "path": "tables/ensemble/dance_magnitude_comparison.csv",
+    "source": "out/cluster-dissolution-oct9-v2/dance_magnitude_comparison.csv",
+    "source_sha256": "d132b748cdb1ba76e609eaf715ae88f5157569c968808e755e9e4ffa85837708"
+  },
+  {
+    "path": "tables/ensemble/dance_luminosity_coverage.csv",
+    "source": "out/cluster-dissolution-oct9-v2/dance_luminosity_coverage.csv",
+    "source_sha256": "0abf5f71c34cc023677e393d648b007a5d01e44bc9d2f1b5c7f3f951445311ba"
+  },
+  {
+    "path": "tables/ensemble/matched_photometry_coverage.csv",
+    "source": "out/cluster-dissolution-oct9-v2/matched_photometry_coverage.csv",
+    "source_sha256": "06935607d4d2cc0d9c5ddbf4c9bcecb4bb51d8ff130cdcd6bc8d741c0a6c2e7b"
+  },
+  {
+    "path": "tables/ensemble/structurally_screened_ranges.csv",
+    "source": "out/cluster-dissolution-oct9-v2/structurally_screened_ranges.csv",
+    "source_sha256": "a6d3d3f621ec3dcfc6b008c60d037155a88b41d1e91b319c7009357d3b3a4463"
+  },
+  {
+    "path": "tables/stellar-fit/brown_dwarf_predictions.csv",
+    "source": "out/cluster-stellar-fit-oct9-v1/brown_dwarf_predictions.csv",
+    "source_sha256": "433369cc614768d668dc0bc8be579289c2fdeff80f189629d0aec7cff38c233e"
+  },
+  {
+    "path": "tables/stellar-fit/frozen_stellar_choices.csv",
+    "source": "out/cluster-stellar-fit-oct9-v1/frozen_stellar_choices.csv",
+    "source_sha256": "13e3f9d7665ffabd9fe0cdb8d621effa8bce9aa80accc96efc62589d6a9495be"
+  },
+  {
+    "path": "tables/stellar-fit/fitted_profiles.csv",
+    "source": "out/cluster-stellar-fit-oct9-v1/fitted_profiles.csv",
+    "source_sha256": "8d50ffaa67a87aac1a1de029a6f4ea5a4846fb7032b411169ce94377e7f8bd15"
+  },
+  {
+    "path": "tables/stellar-fit/diagonal_objective_check.csv",
+    "source": "out/cluster-stellar-fit-oct9-v1/diagonal_objective_check.csv",
+    "source_sha256": "338e9698bdb0512250879ad192b82290320716131452a59d9c40fd51eb6f21a1"
+  },
+  {
+    "path": "tables/stellar-fit/catalogue_attribution.csv",
+    "source": "out/cluster-stellar-fit-oct9-v1/catalogue_attribution.csv",
+    "source_sha256": "9a5858b5f35e0bf004f0be08b0f415ec83a79ab4777548634e7a4b3c10512758"
+  },
+  {
+    "path": "tables/stellar-fit/stellar_fits.csv",
+    "source": "out/cluster-stellar-fit-oct9-v1/stellar_fits.csv",
+    "source_sha256": "95c3642741c6e3696d877c5b4abb328d4e7a08949a5ea1f343ec15ab7213d96b"
+  },
+  {
+    "path": "tables/membership/candidate_recovery_counts.csv",
+    "source": "out/cluster-membership-oct9-v1/candidate_recovery_counts.csv",
+    "source_sha256": "2253b1ee7b477f3f3298328f215146c325a70c8fcba5b4bc5ca5de1eebcfa05a"
+  },
+  {
+    "path": "tables/membership/catalogue_count_audit.csv",
+    "source": "out/cluster-membership-oct9-v1/catalogue_count_audit.csv",
+    "source_sha256": "40e6d2f7cd107146cea76a6886d69e26bc4f3942a9b8282bbb13bb7acf06c8da"
+  },
+  {
+    "path": "tables/membership/conditional_CP_comparison.csv",
+    "source": "out/cluster-membership-oct9-v1/conditional_CP_comparison.csv",
+    "source_sha256": "ada5f4aac5fb715ee396a565f62448a4b11522145e5ed746a809833d7f680c09"
+  },
+  {
+    "path": "tables/membership/cp_injection_summary.csv",
+    "source": "out/cluster-membership-oct9-v1/cp_injection_summary.csv",
+    "source_sha256": "9dfabcefee7cd300c9ba3fd0ae26009eb1ee32b50e9dd28ce23da5eb6a081d2d"
+  },
+  {
+    "path": "tables/membership/isochrones_with_temperature.csv",
+    "source": "out/cluster-membership-oct9-v1/isochrones_with_temperature.csv",
+    "source_sha256": "23a904eea5d7fcb1c1a8755c7e13fa0776346610ae60d03d68d00f29ca74cdfe"
+  },
+  {
+    "path": "tables/membership/pleiades_groups.csv",
+    "source": "out/cluster-membership-oct9-v1/pleiades_groups.csv",
+    "source_sha256": "e8b82480c584e2a3373d2fbddd5cf091a46054ab2c44cda0ca70ac8d4bb39307"
+  },
+  {
+    "path": "tables/membership/published_CP_counts.csv",
+    "source": "out/cluster-membership-oct9-v1/published_CP_counts.csv",
+    "source_sha256": "e1291009087c805575f8b44c9556d9f059ae6d4ca6944e3248bb9172fccf41d3"
+  },
+  {
+    "path": "tables/membership/temperature_scatter_sensitivity.csv",
+    "source": "out/cluster-membership-oct9-v1/temperature_scatter_sensitivity.csv",
+    "source_sha256": "91e8135d4b6043d04b40b1f33527aa61e2caa74378fc15a3ebc4570b55e5850d"
+  },
+  {
+    "path": "provenance/clusters/downloads.json",
+    "source": "out/cluster-mass-functions-oct9-v1/downloads.json",
+    "source_sha256": "f78aa62d75627e4fdcfa85afb23066641294573f271247ddf92741ec9d93f270"
+  },
+  {
+    "path": "provenance/clusters/catalogue_coverage.json",
+    "source": "out/cluster-mass-functions-oct9-v1/catalogue_coverage.json",
+    "source_sha256": "111b94af630fbf85939a7d65e785684b9067ae615f78b2ce18b52211db86ac45"
+  },
+  {
+    "path": "provenance/clusters/luminosity_calibration.json",
+    "source": "out/cluster-mass-functions-oct9-v1/luminosity_calibration.json",
+    "source_sha256": "629f1afa1b198d4db73ace8b35951fff892575c747583075d7c3c7cfb11c3763"
+  },
+  {
+    "path": "provenance/clusters/substellar_luminosity_receipt.json",
+    "source": "out/cluster-mass-functions-oct9-v1/substellar_luminosity_receipt.json",
+    "source_sha256": "173c6f2efbaa0a17f38de3749cea355dbad32c2c40c3ed06e0256be837e86d44"
+  },
+  {
+    "path": "provenance/clusters/initial_age_control.json",
+    "source": "out/cluster-mass-functions-oct9-v1/initial_age_control.json",
+    "source_sha256": "85ef3c8da9215fa776de9927bbad7b83c7628d57f7adf5d6da2032fc44815a58"
+  },
+  {
+    "path": "provenance/clusters/initial_age_upper_mass_check.json",
+    "source": "out/cluster-mass-functions-oct9-v1/initial_age_upper_mass_check.json",
+    "source_sha256": "6281e2fe0896e6eac1d279b35756258c08b1225ac5377cfac43ddae38fc5a7e5"
+  },
+  {
+    "path": "provenance/clusters/mass_inference_checks.json",
+    "source": "out/cluster-mass-functions-oct9-v1/mass_inference_checks.json",
+    "source_sha256": "33c1b04013ff948e1d20b71226299dc9164445f920fcc13fab436e794c317b4c"
+  },
+  {
+    "path": "provenance/clusters/observed_mass_function_receipt.json",
+    "source": "out/cluster-mass-functions-oct9-v1/observed_mass_function_receipt.json",
+    "source_sha256": "08ad73f60cfa1b6089c04756fdd8175544de020c7486c77835702aa6d8ac1cc1"
+  },
+  {
+    "path": "provenance/clusters/normalized_observed_mass_functions_receipt.json",
+    "source": "out/cluster-mass-functions-oct9-v1/normalized_observed_mass_functions_receipt.json",
+    "source_sha256": "0aed25702e6426bd52be5f6a708a6673eb14c1f3df8d0d83250996221f939192"
+  },
+  {
+    "path": "provenance/clusters/track_inventory.json",
+    "source": "out/cluster-mass-functions-oct9-v1/track_inventory.json",
+    "source_sha256": "b221032b0c29ae4ed9370b4e23931742ee7935008b25cf1e263ccb5107cb285e"
+  },
+  {
+    "path": "provenance/field/downloads.json",
+    "source": "out/field-mass-function-oct9-v1/downloads.json",
+    "source_sha256": "3a0bfb84d7fe60783007db7614c68f8f33418a82101c7d13b0311a296995035c"
+  },
+  {
+    "path": "provenance/field/catalogue_receipt.json",
+    "source": "out/field-mass-function-oct9-v1/catalogue_receipt.json",
+    "source_sha256": "0a769aab11fb6eb72c6793eeb636a0bad689953099b2014f120102bca5a94e31"
+  },
+  {
+    "path": "provenance/field/observations_receipt.json",
+    "source": "out/field-mass-function-oct9-v1/observations_receipt.json",
+    "source_sha256": "ec2cd46a6135ef7242b17317acf324f86c3038460341561102833989ec3b7ee3"
+  },
+  {
+    "path": "provenance/field/component_luminosity_receipt.json",
+    "source": "out/field-mass-function-oct9-v1/component_luminosity_receipt.json",
+    "source_sha256": "148ff9cd0a579af51d5067578d3844fd85a94b550b39c78f1a600a1ebaed39e2"
+  },
+  {
+    "path": "provenance/field/field_mass_function_receipt.json",
+    "source": "out/field-mass-function-oct9-v1/field_mass_function_receipt.json",
+    "source_sha256": "2c7ad6cd189a604d2310f092b4b2dafe6b76d5abe2d09be4426529095f1a89e7"
+  },
+  {
+    "path": "provenance/field/stellar_mass_receipt.json",
+    "source": "out/field-mass-function-oct9-v1/stellar_mass_receipt.json",
+    "source_sha256": "6c7ac501da542369730bf98242709bcfaf2aeaa9089ade85112da4553c3af6d5"
+  },
+  {
+    "path": "provenance/field/validation.json",
+    "source": "out/field-mass-function-oct9-v1/validation.json",
+    "source_sha256": "0a21fd8ef2d6c5837c5dd91a408e340e489bb0571042d013ae3ff53e15d735b9"
+  },
+  {
+    "path": "provenance/field/boundary_controls.json",
+    "source": "out/field-mass-function-oct9-v1/boundary_controls.json",
+    "source_sha256": "8528aa6f02e0e268a3cefaf2d116aec9673cecc1ce5d4f3b2027522bcb0da957"
+  },
+  {
+    "path": "provenance/field/population_final_fits.json",
+    "source": "out/field-mass-function-oct9-v1/population_final_fits.json",
+    "source_sha256": "f7f9c200f78aeab6920184d7bd42b2da7f6c24464e1b1c651d04b4856c5c7534"
+  },
+  {
+    "path": "provenance/dynamics/vendor_receipt.json",
+    "source": "out/cluster-dissolution-oct9-v1/vendor_receipt.json",
+    "source_sha256": "c915c310469805b85c5397c239115498bd7e98d1ae04e4a189b2756820293ce5"
+  },
+  {
+    "path": "provenance/dynamics/build_command.json",
+    "source": "out/cluster-dissolution-oct9-v1/build_command.json",
+    "source_sha256": "6ee8c8660a61a63a5883ebf935b2b730dbef965a8adcc621cf39d8b2ac759067"
+  },
+  {
+    "path": "provenance/dynamics/analysis_receipt.json",
+    "source": "out/cluster-dissolution-oct9-v1/analysis_receipt.json",
+    "source_sha256": "26efcecb9dd678f06c5dd5e359a2bab4ef821d4ad63ee6d6cd2e8c39ce01e41b"
+  },
+  {
+    "path": "provenance/dynamics/orbit_roundtrip.json",
+    "source": "out/cluster-dissolution-oct9-v1/orbit_roundtrip.json",
+    "source_sha256": "44a27a87c80fc25be537193ad52ea04e38bda697e5024c418401b9b3db6a4b90"
+  },
+  {
+    "path": "provenance/dynamics/pilot_accuracy.json",
+    "source": "out/cluster-dissolution-oct9-v1/pilot_accuracy.json",
+    "source_sha256": "cab20be6ac512ecb2e198028319b2c7eff077e1c68f3cba242fb662019682909"
+  },
+  {
+    "path": "provenance/dynamics/pilot_group_accuracy.json",
+    "source": "out/cluster-dissolution-oct9-v1/pilot_group_accuracy.json",
+    "source_sha256": "257fe78708321fb685a2ecb6ca0cd8b4e4216c3a15e950137569d074f7da6a88"
+  },
+  {
+    "path": "provenance/dynamics/survey_selection_scope.json",
+    "source": "out/cluster-dissolution-oct9-v1/survey_selection_scope.json",
+    "source_sha256": "5458935dcfba2854efb8b614d5c0881a53bf95f0f03a541476351246856a8bcd"
+  },
+  {
+    "path": "provenance/dynamics/spatial_audit_scope.json",
+    "source": "out/cluster-dissolution-oct9-v1/spatial_audit_scope.json",
+    "source_sha256": "bdcf8d280a3fae4412f2fe0c61727eccd4fb3bd167edee941b02165e6518d84d"
+  },
+  {
+    "path": "provenance/dynamics/photometric_calibration.json",
+    "source": "out/cluster-dissolution-oct9-v1/photometric_calibration.json",
+    "source_sha256": "b520b9b807f37418a944b50dd699e0143f25558bc318db984db50c02342e0342"
+  },
+  {
+    "path": "provenance/ensemble/analysis_plan.json",
+    "source": "out/cluster-dissolution-oct9-v2/analysis_plan.json",
+    "source_sha256": "fd6e8ed0c3431f83d7402f93f370c16639fa98797d3d8ea7a2e3af45f4383490"
+  },
+  {
+    "path": "provenance/ensemble/ensemble_plan.json",
+    "source": "out/cluster-dissolution-oct9-v2/ensemble_plan.json",
+    "source_sha256": "f554a47dc33f6ff999d292bea3d9781123be6f74532e75ba4ff25bb773b9636f"
+  },
+  {
+    "path": "provenance/ensemble/field_sensitivity_plan.json",
+    "source": "out/cluster-dissolution-oct9-v2/field_sensitivity_plan.json",
+    "source_sha256": "e994e9e5440aefd3f9751809a09b12772fb0cea094d7db5cb102cad310a295d1"
+  },
+  {
+    "path": "provenance/ensemble/validation_receipt.json",
+    "source": "out/cluster-dissolution-oct9-v2/validation_receipt.json",
+    "source_sha256": "8d899bfd6423c1bee0576b2e6f0112ad42d77c67cc6b773065ad068324f98984"
+  },
+  {
+    "path": "provenance/ensemble/dance_binary_scope.json",
+    "source": "out/cluster-dissolution-oct9-v2/dance_binary_scope.json",
+    "source_sha256": "83874f7be448a9653e378d62f92120be7bc674d25d826cb9d2e82e3756fe663b"
+  },
+  {
+    "path": "provenance/ensemble/dance_magnitude_receipt.json",
+    "source": "out/cluster-dissolution-oct9-v2/dance_magnitude_receipt.json",
+    "source_sha256": "cf0e5e002c37ade21c7162a9b28ad28cf27f7bfb0cd4dbaa79f9ad3dd1843eb5"
+  },
+  {
+    "path": "provenance/ensemble/hyades_2mass_receipt.json",
+    "source": "out/cluster-dissolution-oct9-v2/hyades_2mass_receipt.json",
+    "source_sha256": "f3b86152e85b3fd930c8629baf620f7ad2523f94e340696ad8c72bd2f6f71277"
+  },
+  {
+    "path": "provenance/ensemble/photometric_calibration.json",
+    "source": "out/cluster-dissolution-oct9-v2/photometric_calibration.json",
+    "source_sha256": "8eb0841d54cd942299cb21d417a8a128c29589c1fe50610922053d646424badb"
+  },
+  {
+    "path": "provenance/stellar-fit/plan.json",
+    "source": "out/cluster-stellar-fit-oct9-v1/plan.json",
+    "source_sha256": "4effcb5c581783e1d2849a814007345cc3bceb03caee141e7c2e9e9f1a79fb13"
+  },
+  {
+    "path": "provenance/stellar-fit/dependency_versions.json",
+    "source": "out/cluster-stellar-fit-oct9-v1/dependency_versions.json",
+    "source_sha256": "835adff331a1b6a2b5d9f3dcd8a8233ed2b873ca82006c8eb6ad5da0d04072ea"
+  },
+  {
+    "path": "provenance/stellar-fit/selection_receipt.json",
+    "source": "out/cluster-stellar-fit-oct9-v1/selection_receipt.json",
+    "source_sha256": "fea7df625955adb862e7f2075e54f7e51d5515b5047d07a16c6785543eff56e3"
+  },
+  {
+    "path": "provenance/stellar-fit/stellar_fit_receipt.json",
+    "source": "out/cluster-stellar-fit-oct9-v1/stellar_fit_receipt.json",
+    "source_sha256": "a1027a73a57167964d32e0b19d2b2b5b98a1b059ade2a677db69a70ef7193f2f"
+  },
+  {
+    "path": "provenance/stellar-fit/validation_receipt.json",
+    "source": "out/cluster-stellar-fit-oct9-v1/validation_receipt.json",
+    "source_sha256": "37ffc9000f3b5074c3138fb2e65a8f226e14ab29a4148fe062fc0a84299720ed"
+  },
+  {
+    "path": "provenance/stellar-fit/galactic_integration_check.json",
+    "source": "out/cluster-stellar-fit-oct9-v1/galactic_integration_check.json",
+    "source_sha256": "8199408bcb669c85ec0aa129e3fddf6f00690f94ce0ea620a288b8b4121197fe"
+  },
+  {
+    "path": "provenance/stellar-fit/diffuse_execution.json",
+    "source": "out/cluster-stellar-fit-oct9-v1/diffuse_execution.json",
+    "source_sha256": "adcfe8635bc3dcc1226ce02dbeda2268d77819fb56a436a082a864a03dc581ab"
+  },
+  {
+    "path": "provenance/stellar-fit/observed_scope.json",
+    "source": "out/cluster-stellar-fit-oct9-v1/observed_scope.json",
+    "source_sha256": "6c9f3f6d403003e9c577d75bdf0af1a58c436d06a44f14cbc5031f8377cee44b"
+  },
+  {
+    "path": "provenance/membership/validation_receipt.json",
+    "source": "out/cluster-membership-oct9-v1/validation_receipt.json",
+    "source_sha256": "e822e5ec8736af81a91c40cd16d068f6ee066a14655730a30d5bbc28737e2c61"
+  },
+  {
+    "path": "provenance/membership/candidate_gaia_receipt.json",
+    "source": "out/cluster-membership-oct9-v1/candidate_gaia_receipt.json",
+    "source_sha256": "dc1815e0284ec33d913776960ef85d05802c93a6d5143ac005958e480728e966"
+  },
+  {
+    "path": "provenance/membership/cp_reproduction.json",
+    "source": "out/cluster-membership-oct9-v1/cp_reproduction.json",
+    "source_sha256": "6e9644c5cc73c00d500394002e375da25d90fc17bfa485e3d8ff11df081a1050"
+  },
+  {
+    "path": "provenance/membership/cp_injection_execution.json",
+    "source": "out/cluster-membership-oct9-v1/cp_injection_execution.json",
+    "source_sha256": "78841257024c88f14ff944638d0a27e36036ecdd19c31debc92aef2c18e19cbb"
+  },
+  {
+    "path": "provenance/membership/temperature_cut.json",
+    "source": "out/cluster-membership-oct9-v1/temperature_cut.json",
+    "source_sha256": "c726c17943b7fc4dab1485493907a96bf21c50b850b99a485291923ff2e739a1"
+  },
+  {
+    "path": "analysis/clusters/build_membership.py",
+    "source": "out/cluster-mass-functions-oct9-v1/build_membership.py",
+    "source_sha256": "9ee0659b08046db06ef06a42b7aa834c31fa6220ce5eb3934654c93da3ab4671"
+  },
+  {
+    "path": "analysis/clusters/derive_luminosities.py",
+    "source": "out/cluster-mass-functions-oct9-v1/derive_luminosities.py",
+    "source_sha256": "45673182257bf27608a3ca83a122148fc3447706bdcdcfad92d94f75b07bfcd2"
+  },
+  {
+    "path": "analysis/clusters/export_cluster_results.py",
+    "source": "out/cluster-mass-functions-oct9-v1/export_cluster_results.py",
+    "source_sha256": "b2f00b58ba51b6b04fb5819df049798d28081721e0cc46c32b317fac3793efc3"
+  },
+  {
+    "path": "analysis/clusters/extend_substellar_luminosities.py",
+    "source": "out/cluster-mass-functions-oct9-v1/extend_substellar_luminosities.py",
+    "source_sha256": "ba47357573b10bc9ee27825848d10122d81e74729ccac3fd6b154fea9741e675"
+  },
+  {
+    "path": "analysis/clusters/fetch_gaia.py",
+    "source": "out/cluster-mass-functions-oct9-v1/fetch_gaia.py",
+    "source_sha256": "f05e0f2670681918da00ab178f3a28ec87e0e4e9797f036f49146c24294203ce"
+  },
+  {
+    "path": "analysis/clusters/infer_observed_mass_functions.py",
+    "source": "out/cluster-mass-functions-oct9-v1/infer_observed_mass_functions.py",
+    "source_sha256": "5ffa9d08b1a29e212d34bdd4eeca9fe85d51fe8d0c16e43632948ad2d069fa51"
+  },
+  {
+    "path": "analysis/clusters/normalize_catalogues.py",
+    "source": "out/cluster-mass-functions-oct9-v1/normalize_catalogues.py",
+    "source_sha256": "e6194e600f1a1b32f0d70cc5a365a1bee3724a89ab38c8fc91a04bc9235df121"
+  },
+  {
+    "path": "analysis/clusters/physics/build_colder_boundary.py",
+    "source": "out/cluster-mass-functions-oct9-v1/physics/build_colder_boundary.py",
+    "source_sha256": "c2b63350558f7496d07f0a96df9c5e55289d78cefdc7b874e9383f78b68077a9"
+  },
+  {
+    "path": "analysis/clusters/physics/build_cool_boundary.py",
+    "source": "out/cluster-mass-functions-oct9-v1/physics/build_cool_boundary.py",
+    "source_sha256": "5a5c259c0054805999b78a61a2c40b75ee875677ab2c77d25f073519cab51f36"
+  },
+  {
+    "path": "analysis/clusters/physics/build_sphinx_boundary.py",
+    "source": "out/cluster-mass-functions-oct9-v1/physics/build_sphinx_boundary.py",
+    "source_sha256": "dbfdcaa11d094174fed126750d4cba1cffbac98c7d77bcbeae4ca35b2ae3cfd4"
+  },
+  {
+    "path": "analysis/clusters/physics/prepare_seed_continuation.py",
+    "source": "out/cluster-mass-functions-oct9-v1/physics/prepare_seed_continuation.py",
+    "source_sha256": "a24aa241b3038d9ee516804d4effbe43a3060e85f716963f9cf14bf8bc2f09dc"
+  },
+  {
+    "path": "analysis/clusters/plot_catalogue_checks.py",
+    "source": "out/cluster-mass-functions-oct9-v1/plot_catalogue_checks.py",
+    "source_sha256": "8154c722f072baa648473e1283001a338806a4e4f1845f785df9dec8b41102ca"
+  },
+  {
+    "path": "analysis/clusters/plot_normalized_mass_functions.py",
+    "source": "out/cluster-mass-functions-oct9-v1/plot_normalized_mass_functions.py",
+    "source_sha256": "090424d9bea2046740efd2e5d8446f87c558b62d1ef15d8b746fba54b1515508"
+  },
+  {
+    "path": "analysis/clusters/prepare_mass_grid.py",
+    "source": "out/cluster-mass-functions-oct9-v1/prepare_mass_grid.py",
+    "source_sha256": "9e108d2308edb9ae7173540f4770d763c268407b5b0cf80668b8c79d79c5b989"
+  },
+  {
+    "path": "analysis/clusters/run_tracks.py",
+    "source": "out/cluster-mass-functions-oct9-v1/run_tracks.py",
+    "source_sha256": "f0b5365bbd8abf95019dcf33356b3c23468710cb65bab889a6afe204f8d0c426"
+  },
+  {
+    "path": "analysis/clusters/summarize_tracks.py",
+    "source": "out/cluster-mass-functions-oct9-v1/summarize_tracks.py",
+    "source_sha256": "72e07f1cec90a5d3e4fe48bf569d66bf96f18ce3507e44019316e8d6191a4275"
+  },
+  {
+    "path": "analysis/clusters/README.md",
+    "source": "out/cluster-mass-functions-oct9-v1/README.md",
+    "source_sha256": "f32d5d97d59aac2a3319bdf2bcc54b5b8bde8f7c5d3f804f5cd9f2b43598edfe"
+  },
+  {
+    "path": "analysis/field/component_luminosity_function.py",
+    "source": "out/field-mass-function-oct9-v1/component_luminosity_function.py",
+    "source_sha256": "3d0df5bbd5db7dff84b3a9a5ce87e7cfb00081862e15e237d0f944d7cf55d82c"
+  },
+  {
+    "path": "analysis/field/finalize_catalogue.py",
+    "source": "out/field-mass-function-oct9-v1/finalize_catalogue.py",
+    "source_sha256": "d1b0cfe861af7ca96f641c00916f6907146827a834c9e15d4e64e91a93881f9f"
+  },
+  {
+    "path": "analysis/field/plot_results.py",
+    "source": "out/field-mass-function-oct9-v1/plot_results.py",
+    "source_sha256": "ace9b2d3c16cdd945eab452a227b87cf1a4aff9d508ea9896a2f881567ef1dab"
+  },
+  {
+    "path": "analysis/field/population.py",
+    "source": "out/field-mass-function-oct9-v1/population.py",
+    "source_sha256": "f94e3c33566c06d9d7081a1232f12e3ace01ae4f6c20bb564f727335f50757c1"
+  },
+  {
+    "path": "analysis/field/prepare_controls.py",
+    "source": "out/field-mass-function-oct9-v1/prepare_controls.py",
+    "source_sha256": "3e0a1dce81d5263d7be04e40e992c0f34e500f80e7435fab897b54807afbffc6"
+  },
+  {
+    "path": "analysis/field/prepare_observations.py",
+    "source": "out/field-mass-function-oct9-v1/prepare_observations.py",
+    "source_sha256": "acfaf3341aef21f3a602c7aa2583fff61acae70759256076225239f3e12102b2"
+  },
+  {
+    "path": "analysis/field/prepare_tracks.py",
+    "source": "out/field-mass-function-oct9-v1/prepare_tracks.py",
+    "source_sha256": "8696758e60b7f03b105a77b6cd4b71463db49ceb90435d47e909ad6e48bff172"
+  },
+  {
+    "path": "analysis/field/run_inference.py",
+    "source": "out/field-mass-function-oct9-v1/run_inference.py",
+    "source_sha256": "34aef760fd572a126be66ef330480683113be4b0311abfe42f21856b3ba6bc14"
+  },
+  {
+    "path": "analysis/field/run_tracks.py",
+    "source": "out/field-mass-function-oct9-v1/run_tracks.py",
+    "source_sha256": "6bb5dc3f14e3a7826fcf68b1331894780cef1ce99aa0d6e5cf1b60f871453a1b"
+  },
+  {
+    "path": "analysis/field/stellar_mass_function.py",
+    "source": "out/field-mass-function-oct9-v1/stellar_mass_function.py",
+    "source_sha256": "b735387ec024aee897cf0a9c7de400c029ffe7db73901839a2f01f301ace05ea"
+  },
+  {
+    "path": "analysis/field/validate_population.py",
+    "source": "out/field-mass-function-oct9-v1/validate_population.py",
+    "source_sha256": "4b3e6da0da559fac1a60be8136d9ceffab56130d69e36d68e23176cc7bea5d02"
+  },
+  {
+    "path": "analysis/field/README.md",
+    "source": "out/field-mass-function-oct9-v1/README.md",
+    "source_sha256": "ef47b766e62e27f3beb969e654dca3ed120d0c3d5975c1300ce6df0e10365723"
+  },
+  {
+    "path": "analysis/metallicity/physics/build_colder_boundary.py",
+    "source": "out/field-metallicity-oct9-v1/physics/build_colder_boundary.py",
+    "source_sha256": "1622a103b11047a40c34bc0e3dca3283d9b1956dd7329c697235f3d3d6527021"
+  },
+  {
+    "path": "analysis/metallicity/physics/build_cool_boundary.py",
+    "source": "out/field-metallicity-oct9-v1/physics/build_cool_boundary.py",
+    "source_sha256": "9150a3ebcb58f200cf9c6a3f3d20d71e1e13e1f15364680a545a95adbfdc2bee"
+  },
+  {
+    "path": "analysis/metallicity/physics/build_sphinx_boundary.py",
+    "source": "out/field-metallicity-oct9-v1/physics/build_sphinx_boundary.py",
+    "source_sha256": "aaed9cf260f20776920a24f8692e58906b42ec87e781fd2fe8b88597dcb2aff1"
+  },
+  {
+    "path": "analysis/dynamics/analyze_clusters.py",
+    "source": "out/cluster-dissolution-oct9-v1/analyze_clusters.py",
+    "source_sha256": "cbe592743ab1a0346d52001a83178151aba46a038917160351255244144f45d4"
+  },
+  {
+    "path": "analysis/dynamics/archive_results.py",
+    "source": "out/cluster-dissolution-oct9-v1/archive_results.py",
+    "source_sha256": "b6d9f918ae10b8f6caccae23a26d48054df9c7cc4fd66be814f5aebdb11c079d"
+  },
+  {
+    "path": "analysis/dynamics/audit_spatial_selection.py",
+    "source": "out/cluster-dissolution-oct9-v1/audit_spatial_selection.py",
+    "source_sha256": "15abbe781e7f40fd662111686fc27d46da6a61a6f51c1be5acf6d9d79ffc5f47"
+  },
+  {
+    "path": "analysis/dynamics/check_core_step.py",
+    "source": "out/cluster-dissolution-oct9-v1/check_core_step.py",
+    "source_sha256": "80468811ab0d82b7c86d84ee53ebf7e0cb80752a3c4620b9f9a4363b793caf5a"
+  },
+  {
+    "path": "analysis/dynamics/check_larger_step.py",
+    "source": "out/cluster-dissolution-oct9-v1/check_larger_step.py",
+    "source_sha256": "06acb012a90a5c2fb770bdf640a31c1786955cae98432c3f9388098082f1054b"
+  },
+  {
+    "path": "analysis/dynamics/plot_results.py",
+    "source": "out/cluster-dissolution-oct9-v1/plot_results.py",
+    "source_sha256": "ee158d461b26581ae9cb7dc168c9004bac3ee99e3f2c4b49147be52cc328b15b"
+  },
+  {
+    "path": "analysis/dynamics/run_cluster.py",
+    "source": "out/cluster-dissolution-oct9-v1/run_cluster.py",
+    "source_sha256": "ab8c30ddc79c228f4cd8be458556f92fa06464241495e823ff9f640aad12df7f"
+  },
+  {
+    "path": "analysis/dynamics/tune_cluster_step.py",
+    "source": "out/cluster-dissolution-oct9-v1/tune_cluster_step.py",
+    "source_sha256": "b05254155672ccf46aa950f5876d8b48a3521e0afd26fd47cf9cc3eb661d2060"
+  },
+  {
+    "path": "analysis/dynamics/README.md",
+    "source": "out/cluster-dissolution-oct9-v1/README.md",
+    "source_sha256": "618cdcb0ed52d298f8f519f2be1014c16e07eb706d2e4a8d2947481f581c83e5"
+  },
+  {
+    "path": "analysis/ensemble/analysis_functions.py",
+    "source": "out/cluster-dissolution-oct9-v2/analysis_functions.py",
+    "source_sha256": "8008e69815ce3a44839429cd09720b8cb91584b48d13b7def50445feb2865d14"
+  },
+  {
+    "path": "analysis/ensemble/analyze_followup.py",
+    "source": "out/cluster-dissolution-oct9-v2/analyze_followup.py",
+    "source_sha256": "4afd2f105e02fc43378307a466bea8972d60072e18bd916cdf93ff0e1dfa5292"
+  },
+  {
+    "path": "analysis/ensemble/audit_magnitude_coverage.py",
+    "source": "out/cluster-dissolution-oct9-v2/audit_magnitude_coverage.py",
+    "source_sha256": "d3eab0895635c3b76383f463b00d011f13eaf8e6f4f76420837b3fb522e4d9f7"
+  },
+  {
+    "path": "analysis/ensemble/check_binary_step.py",
+    "source": "out/cluster-dissolution-oct9-v2/check_binary_step.py",
+    "source_sha256": "f97b1df50c6d9818056575e1affdad58a22ea2f2caa0f986e6f72548266d4467"
+  },
+  {
+    "path": "analysis/ensemble/check_seed43_step.py",
+    "source": "out/cluster-dissolution-oct9-v2/check_seed43_step.py",
+    "source_sha256": "4e25b8c5a27a605c6c4f28a329235f330bcb09be5c4635302e1106d1e4a1f6f0"
+  },
+  {
+    "path": "analysis/ensemble/compare_populations.py",
+    "source": "out/cluster-dissolution-oct9-v2/compare_populations.py",
+    "source_sha256": "81563d2889ad164bedcfbb51e22d03ca3874766a71514d23f710a66bdc19e8e3"
+  },
+  {
+    "path": "analysis/ensemble/dance_multiplicity.py",
+    "source": "out/cluster-dissolution-oct9-v2/dance_multiplicity.py",
+    "source_sha256": "bc84d0e2184d643c2d009db5bee76998890e9c95d7340457cfa6834112961c72"
+  },
+  {
+    "path": "analysis/ensemble/fetch_hyades_2mass.py",
+    "source": "out/cluster-dissolution-oct9-v2/fetch_hyades_2mass.py",
+    "source_sha256": "53d578a652ecd6b2f39343eb8477defea9c295e571e50c0a225c3b7891b464f2"
+  },
+  {
+    "path": "analysis/ensemble/plot_followup.py",
+    "source": "out/cluster-dissolution-oct9-v2/plot_followup.py",
+    "source_sha256": "aeddb6320513932a54329e45fd11c3bc574310a9b34672e55a379ca62da0ddd9"
+  },
+  {
+    "path": "analysis/ensemble/plot_mass_shapes.py",
+    "source": "out/cluster-dissolution-oct9-v2/plot_mass_shapes.py",
+    "source_sha256": "3a51842d9ecae7bf86fa8321e943ed131abc9e01bf27a170c890f45304aadfd2"
+  },
+  {
+    "path": "analysis/ensemble/run_ensemble.py",
+    "source": "out/cluster-dissolution-oct9-v2/run_ensemble.py",
+    "source_sha256": "ae2bd4ee763e0589c26338b87a6239a96befdf119b99e20e2bff13832e56a927"
+  },
+  {
+    "path": "analysis/ensemble/run_field_sensitivity.py",
+    "source": "out/cluster-dissolution-oct9-v2/run_field_sensitivity.py",
+    "source_sha256": "0302881e87a65798f6fa80a4c4bc36d40554e52aa1f41306b075b0d2d41b4db5"
+  },
+  {
+    "path": "analysis/ensemble/validate_and_archive.py",
+    "source": "out/cluster-dissolution-oct9-v2/validate_and_archive.py",
+    "source_sha256": "3b648e3993c8d5c112ec6ba472bbd5c42ada1a8dff36b426a1749ab1553c2eaf"
+  },
+  {
+    "path": "analysis/ensemble/write_report.py",
+    "source": "out/cluster-dissolution-oct9-v2/write_report.py",
+    "source_sha256": "ae2ab6f1734f329fdc4bc5e781afe82ab9bb64be8fb39081ea133643c1b570fb"
+  },
+  {
+    "path": "analysis/ensemble/README.md",
+    "source": "out/cluster-dissolution-oct9-v2/README.md",
+    "source_sha256": "2fd5cf466420662a4dd5d006f0f86c9ded186f82186030d0da86a0b2308a52fc"
+  },
+  {
+    "path": "analysis/stellar-fit/audit_fit.py",
+    "source": "out/cluster-stellar-fit-oct9-v1/audit_fit.py",
+    "source_sha256": "8a5a2579c71024e52ec33311a00b332d7fd88d2c1c0171711508eace2a06fd60"
+  },
+  {
+    "path": "analysis/stellar-fit/build_diffuse.py",
+    "source": "out/cluster-stellar-fit-oct9-v1/build_diffuse.py",
+    "source_sha256": "0b2851868fd9d845f74906af9e1bf93364ae0e69cf59a00150e687b74bcae62f"
+  },
+  {
+    "path": "analysis/stellar-fit/build_templates.py",
+    "source": "out/cluster-stellar-fit-oct9-v1/build_templates.py",
+    "source_sha256": "1b7efef6bd3a3ae77fd4b5559128312dfeb5f0999d2addd5385c5e3251e383a2"
+  },
+  {
+    "path": "analysis/stellar-fit/common.py",
+    "source": "out/cluster-stellar-fit-oct9-v1/common.py",
+    "source_sha256": "3332db7fec4aca86c71da90b08c87ee0fcd170933a90e61da9e3cb6b458206e0"
+  },
+  {
+    "path": "analysis/stellar-fit/fit_stars.py",
+    "source": "out/cluster-stellar-fit-oct9-v1/fit_stars.py",
+    "source_sha256": "961282ec75bad6b6f670f3c6883c01c481289cdd0f786cfc21892994dab15127"
+  },
+  {
+    "path": "analysis/stellar-fit/galactic_diffusion.py",
+    "source": "out/cluster-stellar-fit-oct9-v1/galactic_diffusion.py",
+    "source_sha256": "011f658a8ff3b223a88e8376a3e7d174f48756d874ba4f67ffa7984929f0dad2"
+  },
+  {
+    "path": "analysis/stellar-fit/make_results.py",
+    "source": "out/cluster-stellar-fit-oct9-v1/make_results.py",
+    "source_sha256": "6f578de0797087f709f9f4e7c3c818818bc3b8a381346e7dfc3fc464455c81e5"
+  },
+  {
+    "path": "analysis/stellar-fit/selection.py",
+    "source": "out/cluster-stellar-fit-oct9-v1/selection.py",
+    "source_sha256": "49705ce71369fd294c1cf6768d5bb3528f68a1cd0532adb63f9d5f550cde8008"
+  },
+  {
+    "path": "analysis/stellar-fit/README.md",
+    "source": "out/cluster-stellar-fit-oct9-v1/README.md",
+    "source_sha256": "1ced10d6542492bf00103b49840ce5b2a993e4dcc4b643d979ed9dc9ebb99708"
+  },
+  {
+    "path": "analysis/membership/audit_candidates.py",
+    "source": "out/cluster-membership-oct9-v1/audit_candidates.py",
+    "source_sha256": "f05bd178dabedb068f920143d4a67f4947f9f048496132452bb1ba31d4743eb3"
+  },
+  {
+    "path": "analysis/membership/cp_selection.py",
+    "source": "out/cluster-membership-oct9-v1/cp_selection.py",
+    "source_sha256": "a649731c6c8404b23b69cf8243295cca08294378354d793988056a473d38c8f4"
+  },
+  {
+    "path": "analysis/membership/fetch_candidates.py",
+    "source": "out/cluster-membership-oct9-v1/fetch_candidates.py",
+    "source_sha256": "fdd6c1e51d75818227364a39108ba06c419bde8a9b4f906a0add795e507326e6"
+  },
+  {
+    "path": "analysis/membership/fetch_hyades_extension.py",
+    "source": "out/cluster-membership-oct9-v1/fetch_hyades_extension.py",
+    "source_sha256": "9f990a7a011aed276d4ce3cfef9619d4a1ae38e6ecf29c95821136107e940683"
+  },
+  {
+    "path": "analysis/membership/fetch_parent.py",
+    "source": "out/cluster-membership-oct9-v1/fetch_parent.py",
+    "source_sha256": "9565f75a28c2bb8fe697f3759daed560d721b20ded7da79364e73ee1475d185d"
+  },
+  {
+    "path": "analysis/membership/inject_clusters.py",
+    "source": "out/cluster-membership-oct9-v1/inject_clusters.py",
+    "source_sha256": "14b5cf5b85a1933d3bc7c4aa970452ef1b12d680f0ef2954c365b9b4fca60774"
+  },
+  {
+    "path": "analysis/membership/make_results.py",
+    "source": "out/cluster-membership-oct9-v1/make_results.py",
+    "source_sha256": "f0d11faa83d70b31b820b5c28b7594c5b74e525f9f7115d5857ce5f3be7a4c73"
+  },
+  {
+    "path": "analysis/membership/source_audit.py",
+    "source": "out/cluster-membership-oct9-v1/source_audit.py",
+    "source_sha256": "4b767e190f9aa8c1266107795c68d7f0fe3e5c7869d5da30c1bbd38401adaf0f"
+  },
+  {
+    "path": "analysis/membership/README.md",
+    "source": "out/cluster-membership-oct9-v1/README.md",
+    "source_sha256": "83ce71a09d4fd646ce1d083573ee7381e8de3d5b75373572f5bd15354b46e452"
+  },
+  {
+    "path": "provenance/dynamics/petar_m4_compatibility.patch",
+    "source": "out/cluster-dissolution-oct9-v1/petar_m4_compatibility.patch",
+    "source_sha256": "6bcaae9d10f1710fc860d0150f39f835f1a18bc4605838bce345c9ab8cb44321"
+  }
+]

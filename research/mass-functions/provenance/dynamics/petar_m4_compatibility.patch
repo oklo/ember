@@ -1,0 +1,14 @@
+diff --git a/galpy-interface/galpy_interface.h b/galpy-interface/galpy_interface.h
+index c3deb07..41a8cbb 100644
+--- a/galpy-interface/galpy_interface.h
++++ b/galpy-interface/galpy_interface.h
+@@ -9,6 +9,9 @@
+ #include <algorithm>
+ #include "../src/io.hpp"
+ 
++#ifdef _OPENMP
++#include <omp.h> // GCC 16 requires C++ declarations outside galpy extern C.
++#endif
+ #include <integrateFullOrbit.h>
+ 
+ //! IO parameters for Galpy manager

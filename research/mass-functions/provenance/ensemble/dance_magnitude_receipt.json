@@ -1,0 +1,8 @@
+{
+  "selected_core_objects": 1412,
+  "without_luminosity": 59,
+  "faint_range": "13.5 <= Ks < 17",
+  "faint_objects": 334,
+  "faint_without_luminosity": 13,
+  "interpretation": "Counts missing luminosities are included in this magnitude check, but do not receive invented masses. The empirical magnitude-luminosity conversion and single-cluster dynamics remain assumptions."
+}

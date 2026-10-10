@@ -1,0 +1,43 @@
+{
+  "source": "https://doi.org/10.1051/0004-6361/202038295",
+  "fitted_stars": 1302,
+  "degree": 4,
+  "coefficient_order": "increasing powers of G-RP",
+  "coefficients": [
+    -6.62486439356528,
+    27.898832131945262,
+    -42.385724366533964,
+    27.03588485230516,
+    -6.53541922031545
+  ],
+  "colour_valid_min": 0.8264029999999996,
+  "colour_valid_max": 1.592124,
+  "residual_scatter_mag": 0.024762307458433816,
+  "held_out_stars": 248,
+  "held_out_rms_mag": 0.02466689760807411,
+  "note": "Empirical DR2 colour-to-bolometric correction applied provisionally to DR3; cluster crosscheck below. No evolutionary masses used.",
+  "pleiades_independent_SED_check": {
+    "objects": 1176,
+    "median_logL_difference": 0.011318674471809897,
+    "robust_scatter_dex": 0.018442589856482904,
+    "p90_abs_difference_dex": 0.04620340200288686
+  },
+  "coverage": {
+    "hyades": {
+      "Cifuentes2020_Gaia_colour_control": 1454,
+      "unavailable": 539
+    },
+    "pleiades": {
+      "Cifuentes2020_Gaia_colour_control": 2507,
+      "Bouy2015_SED_rescaled_distance": 1782,
+      "unavailable": 1411,
+      "Zapatero2018_SED_published_distance": 3
+    }
+  },
+  "uncertainty_limits": [
+    "SED distance errors remain missing where no individual parallax is available.",
+    "Published SED uncertainties and parallax errors are combined conservatively without a covariance model.",
+    "Extinction, unresolved binaries, atmosphere-model fill-in and metallicity/gravity systematics require separate treatment.",
+    "The empirical calibration uses observed Gaia colours; DR2/DR3 differences are assessed only through the cluster crosscheck."
+  ]
+}

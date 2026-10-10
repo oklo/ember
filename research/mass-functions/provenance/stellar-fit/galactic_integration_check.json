@@ -1,0 +1,14 @@
+{
+  "wall_seconds": 0.5038350420072675,
+  "n_orbits": 1024,
+  "rhs_calls": 1289,
+  "rtol": 2e-09,
+  "center_position_error_pc": 2.069254861982206e-06,
+  "max_position_error_tighter_control_pc": 4.831116447814968e-06,
+  "control": {
+    "wall_seconds": 0.15452529210597277,
+    "n_orbits": 32,
+    "rhs_calls": 2261,
+    "rtol": 2e-11
+  }
+}
