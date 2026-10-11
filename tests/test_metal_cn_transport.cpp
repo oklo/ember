@@ -244,6 +244,36 @@ int main() {
       for(double b:result.integrated_balance)check(std::abs(b)<1e-14,"trace chemical-potential flux conserves material",b);
     } catch(const std::exception& e) {std::printf("trace gradient: %s\n",e.what());check(false,"extreme trace-metal gradient has a nonsingular solve");}
   }
+  // Burning and conservative H/He transport must preserve exactly absent
+  // CN and inert metals; introducing a small metal floor changes the model.
+  auto primordial=model;
+  for(std::size_t i=0;i<primordial.size();++i) {
+    MetalCNVector v{};v[0]=.70+.01*static_cast<double>(i);v[1]=.001;
+    primordial.comp[i]=metal_cn_composition(left,v);
+    primordial.y[i].lnT=std::log(3e6);primordial.y[i].lnrho=std::log(100.);
+  }
+  const MetalCNFlux light_flux=[](std::size_t,const Composition& a,const Composition& b,bool derivatives) {
+    MetalSpeciesFaceResponse f;
+    for(std::size_t k=0;k<2;++k) {
+      f.rate[k]=1e-13*(a.X[k]-b.X[k]);f.dleft[k][k]=1e-13;f.dright[k][k]=-1e-13;
+    }
+    return common_metal_cn_flux(f,a,b,derivatives);
+  };
+  const auto primordial_result=burn_metal_cn_and_diffuse(primordial,primordial,nuclear,
+      {{0,1},{1,2},{2,3}},light_flux,1e13);
+  check(primordial_result.composition.front().X[0]>primordial.comp.front().X[0],
+      "metal-free H transport changes the composition");
+  double consumed_hydrogen=0;
+  for(std::size_t i=0;i<primordial.size();++i)
+    consumed_hydrogen+=weights[i]*(primordial.comp[i].X[0]-primordial_result.composition[i].X[0]);
+  check(consumed_hydrogen>1e-8,"metal-free pp burning consumes hydrogen");
+  primordial.comp=primordial_result.composition;
+  for(const auto& q:primordial.comp) {
+    check(q.Z()==0 && *q.cn_molality==CNAbundances{},"metal-free burning creates no catalysts or inert metals");
+    check(std::abs(q.sum()-1)<3e-16,"metal-free composition remains normalized");
+  }
+  for(double b:primordial_result.integrated_balance)
+    check(std::abs(b)<3e-14,"metal-free burning and transport conserve material",b);
   const auto path=std::filesystem::temp_directory_path()/"ember-metal-cn-checkpoint-test.restart";
   check(!std::filesystem::exists(path),"checkpoint test uses a new file");
   driver::Checkpoint state{model,1.,1,0};driver::Selections selections{"metal-cn","a","b","c","d"};driver::Identities identities{{"executable","test-only"}};
@@ -251,6 +281,11 @@ int main() {
   const auto restored=driver::read_checkpoint(path,3,model.M,model.comp.front(),selections,1.,identities);
   check(restored.model.comp==model.comp,"variable-metal physical checkpoint round trip");
   check(rejects([&]{driver::read_checkpoint(path,3,model.M,old,selections,1.,identities);}),"physical checkpoint rejects proxy convention");
+  std::filesystem::remove(path);
+  state.model=primordial;
+  driver::write_checkpoint(path,state,selections,1.,identities);
+  const auto primordial_restart=driver::read_checkpoint(path,3,primordial.M,primordial.comp.front(),selections,1.,identities);
+  check(primordial_restart.model.comp==primordial.comp,"metal-free restart retains exact zero metals");
   std::filesystem::remove(path);
   check(rejects([&]{burn_cn_and_diffuse(model,model,nuclear,{{0,3}},[](auto,const auto&,const auto&,bool){return CNSpeciesFaceResponse{};},1.);}),"old solver rejects physical metal convention");
   std::printf("%d checks, %d failures; flux %.4g source %.4g balance %.4g mass-energy %.4g extreme-mixing-local-mismatch %.4g\n",checks,failures,max_flux,max_source,max_balance,max_energy,max_stiff_mismatch);

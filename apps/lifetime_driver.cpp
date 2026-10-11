@@ -670,7 +670,9 @@ int lifetime_main(int argc,char** argv) {
         :(deep_envelope?static_cast<const Atmosphere&>(*deep_envelope):thin_atmosphere);
     PPCNNetwork nuclear(PPRates::solar_fusion_iii,PPScreening::salpeter_van_horn,PPRates::solar_fusion_iii);
     PlasmaNeutrinoLosses losses;ScreenedCollisionTransport collisions(collision_path.string());
-    ScreenedMetalMicroscopicTransport microscopic(table_eos,collisions,true,minimum_temperature,{true,true,true},true);
+    // The pp/CN network cannot create metals in an initially metal-free star.
+    ScreenedMetalMicroscopicTransport microscopic(table_eos,collisions,true,minimum_temperature,
+        {true,true,initial.Z()>0},true);
     if(solid_mobility>=0)microscopic.use_phase_mobility(*cold_helium_options,solid_mobility);
     set_composition_buoyancy_reuse(buoyancy_spacing,verify_responses==1);
     set_screening_reuse(screening_spacing);

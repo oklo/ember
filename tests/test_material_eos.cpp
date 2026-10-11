@@ -1,6 +1,7 @@
 #include "ember/eos_material.hpp"
 #include "ember/constants.hpp"
 #include "ember/detail/taylor3.hpp"
+#include "ember/convective_evolution_checks.hpp"
 #include <algorithm>
 #include <cmath>
 #include <iostream>
@@ -59,6 +60,17 @@ int main(){
    }
   }
  }
+ // A metal-free deuterium-burning model needs H/He enthalpies, not the
+ // undefined chemical potential of an absent metal species.
+ auto primordial=c;primordial[Species::Zrest]=0;primordial.X[2]+=.04;
+ primordial[Species::H2]=2e-5;primordial.X[0]-=2e-5;
+ const auto h0=driver::trace_deuterium_enthalpy(eos,1e6,100,primordial);
+ auto trace=primordial;trace[Species::Zrest]=1e-12;trace.X[2]-=1e-12;
+ const auto ht=driver::trace_deuterium_enthalpy(eos,1e6,100,trace);
+ for(unsigned k:{0u,1u,3u})if(!std::isfinite(h0[k]) || relative(h0[k],ht[k])>1e-9) {
+   ++failures;std::cerr<<"zero-metal deuterium channel "<<k<<": "<<h0[k]<<" vs "<<ht[k]<<'\n';
+ }
+ if(h0[2]!=0)++failures;
  if(force_error>1e-5 || heat_error>1e-5 || response_error>1e-5)++failures;
  std::cout<<"material EOS: force "<<force_error<<", heat "<<heat_error<<", density response "<<response_error<<", failures "<<failures<<'\n';
  return failures?1:0;

@@ -1,0 +1,79 @@
+{
+  "scope": "Exactly absent metals in the deuterium enthalpy check and H/He microscopic transport. No completed zero-metal stellar track or atmosphere coverage is claimed.",
+  "implementation": "Do not request or multiply undefined absent-metal chemical-potential derivatives; keep H/He channels active. The pp/CN network does not create metals in a metal-free star.",
+  "relevant_tests_passed": [
+    "material_eos",
+    "metal_cn_transport",
+    "deuterium_material",
+    "deuterium_burning",
+    "pms_cn_evolution",
+    "pms_cn_face_evolution",
+    "evolution_controller",
+    "metal_microscopic_evolution",
+    "metal_microscopic_face_evolution",
+    "nonlinear_metal_mixing",
+    "finite_metal_evolution",
+    "lagged_finite_metal_evolution"
+  ],
+  "actual_material_integration": {
+    "description": "Three cells at 3 MK and 200 g/cm3; two implicit 1e13-s burning/transport steps with actual composition-dependent material tables and screened collision transport. H starts at 0.70, 0.72, 0.74. Restart control, positive-Z control, and trace-metal limit.",
+    "public_material": [
+      {
+        "Z": 0,
+        "maximum_material_balance": 4.9022878855289886e-17,
+        "restart_abundance_difference": 0,
+        "trace_limit_abundance_difference": 0,
+        "surface_dX": -0.009025730753648653,
+        "maximum_carried_heat_erg_s": 3.7730680092062544e+28,
+        "passed": true
+      },
+      {
+        "Z": 1e-12,
+        "maximum_material_balance": 5.2234827791278193e-17,
+        "restart_abundance_difference": 0,
+        "trace_limit_abundance_difference": 3.552713678800501e-15,
+        "surface_dX": -0.0090257307536451,
+        "maximum_carried_heat_erg_s": 3.7730680092081794e+28,
+        "passed": true
+      },
+      {
+        "Z": 0.02,
+        "maximum_material_balance": 5.109218034543214e-17,
+        "restart_abundance_difference": 0,
+        "trace_limit_abundance_difference": 0,
+        "surface_dX": -0.008946078353941012,
+        "maximum_carried_heat_erg_s": 3.822947365220879e+28,
+        "passed": true
+      }
+    ],
+    "boundary_material": [
+      {
+        "Z": 0,
+        "maximum_material_balance": 3.189333156296617e-17,
+        "restart_abundance_difference": 0,
+        "trace_limit_abundance_difference": 0,
+        "surface_dX": -0.008998432342820717,
+        "maximum_carried_heat_erg_s": 3.756035373198743e+28,
+        "passed": true
+      },
+      {
+        "Z": 1e-12,
+        "maximum_material_balance": 3.056179576988241e-17,
+        "restart_abundance_difference": 0,
+        "trace_limit_abundance_difference": 3.4416913763379853e-15,
+        "surface_dX": -0.008998432342817275,
+        "maximum_carried_heat_erg_s": 3.75603537320148e+28,
+        "passed": true
+      },
+      {
+        "Z": 0.02,
+        "maximum_material_balance": 2.5343225781848666e-17,
+        "restart_abundance_difference": 0,
+        "trace_limit_abundance_difference": 0,
+        "surface_dX": -0.008927875696180254,
+        "maximum_carried_heat_erg_s": 3.810394218029038e+28,
+        "passed": true
+      }
+    ]
+  }
+}

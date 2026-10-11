@@ -8,6 +8,11 @@ mixed cool envelope. The atmosphere selection keeps the same matching depth
 through the supplied composition and gravity coverage. The complete Hayashi-to-white-dwarf
 calculation is not yet established.
 
+For an initially metal-free composition, the driver excludes absent metals
+from microscopic transport and the initial deuterium heat calculation. H/He
+transport and pp burning remain active; no artificial metal floor is added.
+This does not extend atmosphere or opacity coverage. [Checks](results/zero_metal_transport.json).
+
 ```
 ember-evolve --lifetime CONFIG TARGET_YEARS NEW_OUTPUT_DIRECTORY \
   [--restart CHECKPOINT] [--restart-step-years Y] [--max-steps N] [--cpu-seconds S]

@@ -17,10 +17,11 @@ inline HeatDirections trace_deuterium_enthalpy(const MaterialEos& eos,
   for(auto& x:c.X)x/=f;
   if(c.cn_molality)for(auto& x:*c.cn_molality)x/=f;
   const auto response=eos.eval_with_derivatives(T,f*rho,c);const auto& e=response.state;
-  const auto potential=eos.composition_potential(T,f*rho,c,{true,true,true});
+  const std::array<bool,3> active{true,true,c.Z()>0};
+  const auto potential=eos.composition_potential(T,f*rho,c,active);
   HeatDirections h{};double ed=-.5*(e.E+response.dE_dlnRho),pd=-e.P*e.chiRho/(2*f);
   const std::array<double,3> direction{1+c.X[0],c.X[1],c.Z()};
-  for(std::size_t k=0;k<3;++k) {
+  for(std::size_t k=0;k<3;++k)if(active[k]) {
     const double ek=-T*potential.dgradient_dlnT[k],pk=f*rho*T*potential.dgradient_dlnRho[k];
     h[k]=ek+e.delta*pk/(f*rho);ed+=.5*direction[k]*ek;pd+=direction[k]*pk/(2*f);
   }
