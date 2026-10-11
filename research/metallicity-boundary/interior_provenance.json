@@ -1,0 +1,29 @@
+{
+  "mass_Msun": 0.05825,
+  "initial_Z": 0.049446779395953475,
+  "initial_Y": 0.27,
+  "last_age_Gyr": 143.7950352357,
+  "profiles": 744,
+  "mass_points": 536,
+  "sources": [
+    "early_fresh_v3",
+    "end_original"
+  ],
+  "replay_matches_saved_ages": false,
+  "comparison_uses_time_interpolation": true,
+  "maximum_relative_history_difference": {
+    "luminosity_Lsun": 2.3478436298520872e-05,
+    "Teff_K": 5.958209476902227e-06,
+    "radius_Rsun": 4.2924284935595025e-07,
+    "central_T_K": 4.0979484828107145e-07,
+    "central_X": 1.873670734772868e-08,
+    "surface_X": 2.742687507913394e-09,
+    "nuclear_fraction": 2.3901806702556098e-05
+  },
+  "maximum_convective_fraction_difference": 4.474198789239381e-14,
+  "conduction_definition": "kappa_rad/(kappa_rad+kappa_cond); electron fraction of photon+electron diffusion, not of total flux in a convective cell.",
+  "convection_definition": "Node belongs to a mixed region if at least one adjoining face is Ledoux unstable, matching the evolution diagnostics.",
+  "envelope_note": "The thermally approximated outer 0.0003 of the mass is assigned to the outermost node, as in evolution accounting; atmosphere structure is not shown.",
+  "configuration_sha256": "1c8b4882a53c306069175c2e606550aba791a140b5f7be3d7a1af23f635675c9",
+  "scope": "Accepted profiles replaying the same refined0.05825-Msun calculation as in the mass comparison; instantaneous mixing throughout. Table/model systematics remain."
+}

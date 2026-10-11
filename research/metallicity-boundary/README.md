@@ -9,8 +9,9 @@ atmospheres between 900 and 1200 K.
 
 The upper panel contains 13 masses; eight reach 1 Tyr. Open circles mark
 incomplete calculations. All accepted states are shown, with straight lines
-between them. The lower panel compares independent 50-Myr-step calculations
-with the coarser early evolution. The displayed 0.057 curve follows its fresh 50-Myr early calculation,
+between them. The lower panel shows log10(L/L_sun) for the same models,
+colored by photospheric temperature and sharing the age axis. The displayed
+0.057 curve follows its fresh 50-Myr early calculation,
 then 100-Myr steps through the peak and 250-Myr steps afterward. It stops
 at 56.12 Gyr on atmospheric H/He coverage. Steps are smaller for the displayed 0.058 and 0.05825 tracks
 (250 Myr maximum), and for 0.0585 (500 Myr); the remaining full curves allow
@@ -57,5 +58,35 @@ states. `provenance.json` records endpoints and input fingerprints;
 development tables and full stellar checkpoints are not included; these
 files reproduce the figures, not a complete stellar calculation.
 
-Run `python plot.py` with NumPy and Matplotlib installed to regenerate both
-PNGs. Machine-readable data retain full precision.
+Run `python plot.py` with NumPy and Matplotlib installed to regenerate the
+two mass-comparison PNGs. Machine-readable data retain full precision.
+
+The displayed 0.05825 track now resolves all but 0.0003 of the mass in the
+evolution calculation. It reaches 143.8 Gyr; the separately plotted interior
+profiles replay this same calculation. Its maximum nuclear fraction is
+1.022 at 115.6 Gyr. The later finite-mixing sensitivity is not spliced into
+these figures.
+
+## Interior of the borderline model
+
+![Interior evolution](Ember_boundary_interior.png)
+
+The 0.05825-solar-mass calculation develops a nonconvective layer that
+separates a convective center from the mixed envelope. Electron conduction
+dominates photon diffusion in that layer; it is not simply radiative.
+The lower panel enlarges the separating layer and shows hydrogen moving
+outward while the inner material becomes richer in helium and metals.
+The temperature contours are in millions of kelvin.
+
+These 744 saved profiles extend to 143.8 Gyr. They retain instantaneous
+mixing throughout; no later finite-mixing sensitivity is appended. The
+profile replay agrees with the original global history within 0.0024%,
+and its convection map reproduces the reported convective mass fraction.
+The outermost 0.0003 of the mass uses the same approximate envelope as the
+evolution run; the atmosphere itself is not resolved in this diagram.
+Conduction colors compare only photon and electron diffusion, not the
+conductive fraction of total luminosity inside convective regions.
+
+`interior.npz` contains the plotted fields; `interior_provenance.json`
+records definitions and numerical comparisons. Run `python plot_interior.py`
+to regenerate this PNG and PDF.

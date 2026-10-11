@@ -23,27 +23,51 @@ def line(ax,rows,y,**style):
 
 tracks=read('tracks.csv','mass_Msun');early=read('early.csv','mass_Msun')
 coarse=read('coarse_early.csv','mass_Msun')
-fig=plt.figure(figsize=(11.5,10));ax=fig.add_axes([.085,.43,.695,.52]);bottom=fig.add_axes([.085,.095,.695,.24])
-colors=dict(zip(sorted(tracks),plt.cm.viridis(np.linspace(.08,.85,len(tracks)))))
-for mass,h in sorted(tracks.items()):
-    color=colors[mass];line(ax,h,'nuclear_fraction',c=color,lw=2 if mass==.058 else 1.55,label=f'{mass:.4g}')
-    end=h[-1];complete=end['age_Gyr']>=1000*(1-1e-10)
-    ax.plot(end['age_Gyr'],end['nuclear_fraction'],'o',ms=5.5,mec=color,mfc=color if complete else 'white')
-ax.set(xscale='log',xlim=(.05,1150),ylim=(-.025,1.07),xlabel='Age (Gyr)',ylabel=r'$L_{\rm nuc}/L$')
-ax.set_xticks([.1,1,10,100,1000],labels=['0.1','1','10','100','1000'])
-ax.axhline(1,c='.35',ls=':',lw=.8);ax.grid(alpha=.13)
-ax.text(.03,.895,r'$3Z_{\rm ref}$ · cloudy, $f_{\rm sed}=2$',transform=ax.transAxes,va='top',fontsize=14)
-ax.legend(title=r'Mass ($M_\odot$)',loc='upper left',bbox_to_anchor=(1.015,1),frameon=False)
-ax.text(1.03,.25,'Filled: 1 Tyr\nOpen: incomplete',transform=ax.transAxes,fontsize=10.5,linespacing=1.5)
-for mass,h in sorted(early.items()):
-    line(bottom,coarse[mass],'nuclear_fraction',c=colors[mass],alpha=.45,lw=1.2,ls='--')
-    line(bottom,h,'nuclear_fraction',c=colors[mass],lw=2,label=f'{mass:.4g}')
-bottom.set(xlim=(.5,5),ylim=(.025,.91),xlabel='Age (Gyr)',ylabel=r'$L_{\rm nuc}/L$');bottom.grid(alpha=.13)
-bottom.legend(title=r'Mass ($M_\odot$)',loc='upper left',bbox_to_anchor=(1.015,1),frameon=False)
-bottom.text(1.03,.36,'Solid: 50 Myr steps\nDashed: coarser steps',transform=bottom.transAxes,fontsize=10.5,linespacing=1.5)
-fig.text(.085,.365,'Early evolution — independent timestep checks',fontsize=12)
-fig.text(.085,.025,'Open endpoints are incomplete. The 0.057 track follows the finer sampling through its maximum.',fontsize=10,color='.25')
-fig.savefig(ROOT/'boundary.png');plt.close(fig)
+from matplotlib.collections import LineCollection
+from matplotlib.colors import Normalize, LinearSegmentedColormap
+fig,(ax,lum)=plt.subplots(2,1,figsize=(11.5,10.4),sharex=True,
+                         gridspec_kw={'height_ratios':[1,1.05]})
+fig.subplots_adjust(left=.10,right=.78,bottom=.09,top=.965,hspace=.065)
+colors=plt.cm.viridis(np.linspace(.08,.85,max(2,len(tracks))));rows=[];points=[]
+tnorm=Normalize(650,2700)
+tcmap=LinearSegmentedColormap.from_list('stellar_temperature',plt.cm.plasma(np.linspace(.04,.90,256)))
+endpoints=[]
+for (m,h),color in zip(sorted(tracks.items()),colors):
+ x=np.array([a['age_Gyr'] for a in h]);y=np.array([a['nuclear_fraction']for a in h]);mask=x>=.05
+ ax.plot(x[mask],y[mask],color=color,lw=2 if m==.05825 else 1.6,label=f'{m:.4g}')
+ last=h[-1];full=last['age_Gyr']>=1000*(1-1e-10);marker='o'
+ ax.plot(x[-1],y[-1],marker=marker,ms=5,mec=color,mfc=color if full else 'white',zorder=5)
+ ll=np.log10([a['luminosity_Lsun'] for a in h]);tt=np.array([a['Teff_K']for a in h])
+ xy=np.column_stack((x[mask],ll[mask]));segments=np.stack((xy[:-1],xy[1:]),axis=1)
+ lc=LineCollection(segments,cmap=tcmap,norm=tnorm,linewidths=1.8 if m!=.05825 else 2.5,capstyle='round')
+ lc.set_array(.5*(tt[mask][:-1]+tt[mask][1:]));lum.add_collection(lc)
+ color_end=tcmap(tnorm(tt[-1]))
+ lum.plot(x[-1],ll[-1],marker=marker,ms=5,mec=color_end,mfc=color_end if full else 'white',zorder=5)
+ endpoints.append((m,x[-1],ll[-1],full))
+ax.set(xscale='log',xlim=(.05,1150),ylim=(-.025,1.07),ylabel=r'$L_{\rm nuc}/L$')
+ax.axhline(1,color='.35',ls=':',lw=.8)
+ax.text(.025,.88,r'$3Z_{\rm ref}$ · cloudy, $f_{\rm sed}=2$',transform=ax.transAxes,va='top',fontsize=14)
+ax.legend(title=r'Mass ($M_\odot$)',loc='upper left',bbox_to_anchor=(1.015,1),frameon=False,labelspacing=.38)
+ax.text(1.03,.12,'Filled: 1 Tyr\nOpen: incomplete',transform=ax.transAxes,fontsize=10.5,linespacing=1.5)
+lum.set(ylim=(-6.2,-2.55),xlabel='Age (Gyr)',ylabel=r'$\log_{10}(L/L_\odot)$')
+lum.set_xticks([.1,1,10,100,1000],labels=['0.1','1','10','100','1000'])
+for a in [ax,lum]:a.grid(alpha=.13)
+# Identify the warming borderline track and the mass range without a second large legend.
+for mass,offset in [(.054,(-48,0)),(.058,(-36,17)),(.05825,(4,20)),(.0585,(-5,-25)),(max(tracks),(-42,20))]:
+ end=next((e for e in endpoints if e[0]==mass),None)
+ if end is None:continue
+ m,x,y,_=end
+ lum.annotate(f'{m:.4g}',xy=(x,y),xytext=offset,textcoords='offset points',fontsize=10,
+              ha='center',va='center',color='black',bbox=dict(facecolor='white',edgecolor='none',alpha=.8,pad=.8),
+              arrowprops=dict(arrowstyle='-',lw=.65,color='.35',shrinkA=2,shrinkB=4))
+lum.text(.50,.95,r'Labels: mass in $M_\odot$',transform=lum.transAxes,va='top',fontsize=10.5)
+cax=fig.add_axes([.815,.18,.017,.245])
+cb=fig.colorbar(plt.cm.ScalarMappable(norm=tnorm,cmap=tcmap),cax=cax)
+cb.set_ticks([700,1000,1500,2000,2500]);cb.set_label(r'$T_{\rm eff}$ (K)',labelpad=8)
+fig.text(.10,.025,'Same saved models in both panels; no extrapolated tails.',fontsize=10.5,color='.25')
+fig.savefig(ROOT/'boundary.png')
+fig.savefig(ROOT/'boundary.pdf')
+plt.close(fig)
 
 data=read('timestep_comparison.csv','case')
 fig,axes=plt.subplots(1,2,figsize=(12,5.6));fig.subplots_adjust(left=.075,right=.975,bottom=.24,top=.92,wspace=.27)

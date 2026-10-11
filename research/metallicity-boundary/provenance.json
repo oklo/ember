@@ -71,14 +71,15 @@
     },
     {
       "mass_Msun": 0.05825,
-      "age_Gyr": 129.11257007036187,
-      "Teff_K": 1460.0564596861777,
-      "nuclear_fraction": 1.0187690536455036,
+      "age_Gyr": 143.7954838190083,
+      "Teff_K": 1493.2315486477157,
+      "nuclear_fraction": 1.0163723188654763,
       "reached_1Tyr": false,
-      "case": "z300_f2_m0.05825_feature_quarterGyr",
+      "case": "z300_f2_m0.05825_envelope_3e4_quarterGyr",
       "maximum_step_Gyr": 0.25,
       "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "8a180958cf6f0e9a5198b034f842cae015050191fd031842353f17c36c58a26e"
+      "configuration_sha256": "152b77971814aa5a00849e9135574279bcae2a6f65cb894605aa611e56798200",
+      "envelope_mass_fraction": 0.0003
     },
     {
       "mass_Msun": 0.0585,
@@ -267,5 +268,11 @@
     }
   ],
   "updated_utc": "2026-10-11T16:20:24.318567+00:00",
-  "coarse_early_scope": "Original coarse histories for 0.057, 0.059, 0.060 through 6 Gyr; only 0.5\u20135 Gyr displayed."
+  "coarse_early_scope": "Original coarse histories for 0.057, 0.059, 0.060 through 6 Gyr; only 0.5\u20135 Gyr displayed.",
+  "luminosity_panel": {
+    "quantity": "log10(L/Lsun)",
+    "color": "photospheric Teff in K",
+    "age_axis": "shared logarithmic age in Gyr",
+    "same_accepted_states": true
+  }
 }

@@ -64,5 +64,13 @@
       "mass_Msun": 0.05825
     }
   ],
-  "scope": "Peak controls share a 5-Gyr initial state. Energy checks use the same EOS and base-envelope approximation as the tracks, not independent validation of those physical inputs."
+  "scope": "Peak controls share a 5-Gyr initial state. Energy checks use the same EOS and base-envelope approximation as the tracks, not independent validation of those physical inputs.",
+  "shared_time_luminosity_figure": {
+    "saved_states": 8973,
+    "masses": 13,
+    "positive_luminosity_and_Teff": true,
+    "strictly_increasing_age_per_mass": true,
+    "same_rows_in_both_panels": true,
+    "extrapolated_tails": false
+  }
 }
