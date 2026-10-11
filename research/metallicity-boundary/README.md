@@ -19,10 +19,12 @@ Physical uncertainties are additional.
 ![Cloudy tracks at three times the reference metallicity](boundary.png)
 
 The 22 masses use Z = 0.04945. Filled endpoints reach 1 Tyr or the fading
-cutoff; open endpoints are unfinished. Five surge tracks end at atmosphere
-composition limits. Three have advanced to 294.3–311.6 Gyr after a change
-to the solver's starting guess, with physical equations unchanged. Lines
-connect saved models; there are no smoothed or extrapolated tails.
+cutoff; open endpoints are unfinished. The 0.05835-solar-mass continuation reaches 897 Gyr and 825.4 K,
+with nuclear support below 0.1%. Four warmer originals reach 486.7–500 Gyr
+using documented atmosphere and interior-table extensions. The opacity and
+H/He boundary responses retain stated approximations. These completions
+do not validate the earlier mixing events or tighten the mass bracket.
+Lines connect saved models; no tail is drawn beyond a computed endpoint.
 
 ## Mixing and the sharp features
 
@@ -46,6 +48,13 @@ The subsequent minima are 0.6639 and 0.5077. At 120 Gyr, luminosities still
 differ by 18.82%. Mixing leaves composition steps whose spacing roughly
 halves with the mesh. The detailed excursions and later trajectories
 remain uncertain; conservation alone does not validate them.
+
+Coupled heat/composition mixing removes the broad peak and sharp dip on
+both grids, but leaves a 10.48% luminosity difference at 120 Gyr. It forms
+mixed blocks separated by thin composition jumps whose positions still
+depend on the grid. Nearly all the mass can be in convective regions
+without those regions being connected. This smoother alternative is also
+not spatially converged.
 
 The nearby-metallicity tests hold mass at 0.05815 solar masses and helium
 fixed. Their endpoints have unequal ages. The 3.03-Z_ref case includes a

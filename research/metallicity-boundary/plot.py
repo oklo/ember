@@ -49,11 +49,16 @@ ax.axhline(1,color='.35',ls=':',lw=.8)
 ax.text(.025,.955,r'$3Z_{\rm ref}$ · cloudy, $f_{\rm sed}=2$',transform=ax.transAxes,va='top',fontsize=14)
 ax.legend(title=r'Mass ($M_\odot$)',loc='upper left',bbox_to_anchor=(1.015,1),frameon=False,labelspacing=.38)
 ax.text(1.03,-.10,'Filled: 1 Tyr or\nfaded below 0.1%\nOpen: incomplete',transform=ax.transAxes,fontsize=10.5,linespacing=1.5,va='top')
+if .05815 in tracks:
+ last=tracks[.05815][-1]
+ ax.annotate('0.05815',xy=(last['age_Gyr'],last['nuclear_fraction']),
+             xytext=(13,24),textcoords='offset points',fontsize=10,va='center',
+             arrowprops=dict(arrowstyle='-',lw=.65,color='.35',shrinkA=2,shrinkB=4))
 lum.set(ylim=(-6.2,-2.55),xlabel='Age (Gyr)',ylabel=r'$\log_{10}(L/L_\odot)$')
 lum.set_xticks([.1,1,10,100,1000],labels=['0.1','1','10','100','1000'])
 for a in [ax,lum]:a.grid(alpha=.13)
 # Identify the warming borderline track and the mass range without a second large legend.
-for mass,offset in [(.054,(-48,0)),(.058,(-36,17)),(.0582,(-70,25)),(.05825,(4,20)),(.0583,(24,18)),(.0585,(-5,-25)),(max(tracks),(-42,20))]:
+for mass,offset in [(.054,(-48,0)),(.058,(-36,17)),(.0582,(-70,25)),(.05825,(4,20)),(.0583,(28,-2)),(.05835,(-48,-10)),(.0585,(-5,-25)),(max(tracks),(-42,20))]:
  end=next((e for e in endpoints if e[0]==mass),None)
  if end is None:continue
  m,x,y,_=end

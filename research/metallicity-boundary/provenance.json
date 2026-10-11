@@ -14,7 +14,7 @@
       "Teff_K": 776.7798165629508,
       "nuclear_fraction": 0.000918836143845008,
       "reached_1Tyr": false,
-      "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
+      "stop": "nuclear fraction below0.001, declining",
       "case": "z300_f2_m0.05000_long30",
       "configuration_sha256": "2e4f83310b4f81458cad88dfc01bf58094c4cc761c8fcfe11360f20d675861ce",
       "maximum_step_Gyr": 0.1,
@@ -23,16 +23,19 @@
         {
           "case": "z300_f2_m0.05000_early",
           "configuration_sha256": "fa321bca879d8e4c84724ebfdbd3628564c3a02c51698a5ecd78f89b1a327f4c",
+          "history_sha256": "a770aeb47df3d240ac301728da8cd698573cef580af33d4fc3fd161dcb0ed2f1",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 50000000.0
         },
         {
           "case": "z300_f2_m0.05000_long30",
           "configuration_sha256": "2e4f83310b4f81458cad88dfc01bf58094c4cc761c8fcfe11360f20d675861ce",
+          "history_sha256": "b459692716dcdf803e90c248d6f5045dda12f917c4a98488e384a33e3761d973",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 100000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": true
     },
     {
       "mass_Msun": 0.051,
@@ -40,7 +43,7 @@
       "Teff_K": 781.5125063435805,
       "nuclear_fraction": 0.0009625015201975657,
       "reached_1Tyr": false,
-      "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
+      "stop": "nuclear fraction below0.001, declining",
       "case": "z300_f2_m0.05100_long30",
       "configuration_sha256": "5207eec7b2f9849d77031c105afab4404f501ad08c57f36897b6072e3db02a5e",
       "maximum_step_Gyr": 0.1,
@@ -49,16 +52,19 @@
         {
           "case": "z300_f2_m0.05100_early",
           "configuration_sha256": "73f22421e8beb4f52c78af2220e17e029c9745b94e91f4b232e8e33c370650b2",
+          "history_sha256": "ba9e229eb39e50956209f9ec1c05e87988fa65b833563ff6178e30675ba1aa3e",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 50000000.0
         },
         {
           "case": "z300_f2_m0.05100_long30",
           "configuration_sha256": "5207eec7b2f9849d77031c105afab4404f501ad08c57f36897b6072e3db02a5e",
+          "history_sha256": "fab37c860eb0d2a2c48d642f81d789dd4f4388a1e79d4fc0aaa62ef086fd59c5",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 100000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": true
     },
     {
       "mass_Msun": 0.052,
@@ -66,7 +72,7 @@
       "Teff_K": 783.3102434542609,
       "nuclear_fraction": 0.0009488284368708993,
       "reached_1Tyr": false,
-      "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
+      "stop": "nuclear fraction below0.001, declining",
       "case": "z300_f2_m0.05200_long30",
       "configuration_sha256": "3018ae76b11b04f14abe2c318681aca3fcbe279bd3ff95824751b345290d7cc6",
       "maximum_step_Gyr": 0.1,
@@ -75,16 +81,19 @@
         {
           "case": "z300_f2_m0.05200_early",
           "configuration_sha256": "3047194841dbd86d8364ef9575068bcdb7800807d0cfbe1e23cd8ae233a7accb",
+          "history_sha256": "6e68fe4044ba905601e11176573339d1778d1833c2b6baeb815f7a60fb3ea8cb",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 50000000.0
         },
         {
           "case": "z300_f2_m0.05200_long30",
           "configuration_sha256": "3018ae76b11b04f14abe2c318681aca3fcbe279bd3ff95824751b345290d7cc6",
+          "history_sha256": "30a5a099bb9ce25c651cb2494c89b5f8969f28b6fe8523a6a3b3a847ff0935a4",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 100000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": true
     },
     {
       "mass_Msun": 0.053,
@@ -101,22 +110,26 @@
         {
           "case": "z300_f2_m0.05300_early",
           "configuration_sha256": "e8886f4a7cafe688c90687056b108b9296dc210927353c689e1b31a68fab7f41",
+          "history_sha256": "2d22bd59939a111f215930b0de79f21336c01090c6ee188bff7f61009aba614f",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 50000000.0
         },
         {
           "case": "z300_f2_m0.05300_long30",
           "configuration_sha256": "1f50e539675b11f967b4a30a6aa36df99d0261a8847aaa2c1794e36f4c151013",
+          "history_sha256": "1aaaeb343798b1d42d231ecc15d10906d32aa84019a7439b52f682a2e48c8c8e",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 100000000.0
         },
         {
           "case": "z300_f2_m0.05300_long1000",
           "configuration_sha256": "acacd462306d66d37fb06944c3bd29709e5737e5ceb89d9bfdc600d2851349f1",
+          "history_sha256": "f6a14d94b126f172b5aa8dba3dbbe410be673d3920c09445ff98fc08a453fbcd",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.054,
@@ -133,22 +146,26 @@
         {
           "case": "z300_f2_m0.05400_early",
           "configuration_sha256": "4238378834aa41ca78f856c4b6fa5a5af1ceeb7beb52be071f286c46e6609087",
+          "history_sha256": "82b15cca3359f9b01fb5d85d7bbc31b299756c0816dd3caa244b577eee33165d",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 50000000.0
         },
         {
           "case": "z300_f2_m0.05400_long30",
           "configuration_sha256": "3e2c2266570f1acbbc531c1141326bb7fdec9c5915d042572e11d2f46767f1de",
+          "history_sha256": "5e330498fd972bc6d02da92ecbcb6bb2ab79dba0e60f6befca821ff02c42cedd",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 100000000.0
         },
         {
           "case": "z300_f2_m0.05400_long1000",
           "configuration_sha256": "e90cb6ca597c4b0da7e3c13ed582e49525e1db72827cb2b5c9f15d0ea228c2da",
+          "history_sha256": "8aea10e42c13f65b7c0062a91e677ed2e81718b5788475c42dfb4864541640dd",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.055,
@@ -156,7 +173,7 @@
       "Teff_K": 767.6905351449362,
       "nuclear_fraction": 0.0005957485249568718,
       "reached_1Tyr": false,
-      "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
+      "stop": "nuclear fraction below0.001, declining",
       "case": "z300_f2_m0.05500_long1000",
       "configuration_sha256": "71aba6065225cb64742fc97df9a2fb8a807dcc37ee0d9f58092215bef22951dd",
       "maximum_step_Gyr": 0.25,
@@ -165,22 +182,26 @@
         {
           "case": "z300_f2_m0.05500_early",
           "configuration_sha256": "11d609469740ae5ba0dd61199af1f3b8dd4aa771e647944d9a511f2efe4412c9",
+          "history_sha256": "ef60378e34e7d993c998c98f1976db825a1c2cdee11d291a5c29afa6fa973bcd",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 50000000.0
         },
         {
           "case": "z300_f2_m0.05500_long30",
           "configuration_sha256": "54600fa193b96c59b921ef4d79632d6ec08d13ab9b875499d6421a21045c849e",
+          "history_sha256": "429bb61bf4992c23ce05830c1c5562148cedf3bf380d363adc9c60ccf76bed8f",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 100000000.0
         },
         {
           "case": "z300_f2_m0.05500_long1000",
           "configuration_sha256": "71aba6065225cb64742fc97df9a2fb8a807dcc37ee0d9f58092215bef22951dd",
+          "history_sha256": "5d8bf7afd8e87dd536daf59d8c696677f5feea6c029771fa740b397af36d5fff",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": true
     },
     {
       "mass_Msun": 0.056,
@@ -197,16 +218,19 @@
         {
           "case": "z300_f2_m0.05600_terayear",
           "configuration_sha256": "4215a7df4b967272e48c8faa18596e5c905b18679ab061201827cd290fd04306",
+          "history_sha256": "7f3ffdf649504ef5435b3fabe3430830e3e39389967f70ae3b847431e97f14b7",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 2000000000.0
         },
         {
           "case": "z300_f2_m0.05600_dense_q6",
           "configuration_sha256": "e5e06005b10320586bcf291ad5ab7251f02fb664f05f53a292133cb06c2e308b",
+          "history_sha256": "144db93e302b53c934acf2432660c97fe84d684db665fe77341417366545b91d",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 2000000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.057,
@@ -223,22 +247,26 @@
         {
           "case": "z300_f2_m0.05700_feature_50Myr",
           "configuration_sha256": "2b8d2e7b10d9664ff85c667bd5cd1390ddde9d2dc6ea53e8f818ee766b2daee2",
+          "history_sha256": "2ddcb4640b474cbe3381951b0b2f4b92c780d2be6de137be17cbe9d245a86ff9",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 50000000.0
         },
         {
           "case": "z300_f2_m0.05700_peak_100Myr",
           "configuration_sha256": "c131e1b78a0d59384afd05e3e378d70c5bbfdad26bda7c57d1e78dc986758a81",
+          "history_sha256": "647de6dc0275c5e7a540ddb2627515091d47277ba0ae762e619e9ee65f68673c",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 100000000.0
         },
         {
           "case": "z300_f2_m0.05700_fine_peak_continuation_q6",
           "configuration_sha256": "69c26b8ec73a0e5a64d121cba08db21fd785a71af6842dd467694c14c5fabdab",
+          "history_sha256": "14385e22cc3eb2cd326b0208000f9ef1347676afc8d6be5ee82f3145c58a9eb1",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.058,
@@ -255,200 +283,346 @@
         {
           "case": "m058_quarter_early",
           "configuration_sha256": "1c88767fab5a163036b3a668d3a6a403f8fc3ee0cf382c39cdd2e4bc18622d6a",
+          "history_sha256": "b7cb124ef7968d601faf749787c09aab5c09243163efbff3ce18682aae206dba",
           "executable_sha256": null,
           "maximum_step_years": 250000000.0
         },
         {
           "case": "z300_f2_m0.05800_quarterGyr_q6",
           "configuration_sha256": "57eea94fbe0943c266ebd8a384b36992d84ba9891e14fb8d749239cc732c1f1e",
+          "history_sha256": "45bbbaea9b97af379b26863ae64af8ab4e3a417be9ba71cb8936503f9a3745d3",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.05815,
-      "age_Gyr": 299.1414848829351,
-      "Teff_K": 1923.4837338472673,
-      "nuclear_fraction": 1.0002810672500777,
+      "age_Gyr": 486.6604044440325,
+      "Teff_K": 2278.3146957825606,
+      "nuclear_fraction": 1.0007621822444863,
       "reached_1Tyr": false,
-      "stop": "repeated step rejection: evolve_step: line search failed: residual did not decrease: local=4.461e-06 -> 4.461e-06, balance=-3.82e-07 -> -3.82e-07",
-      "case": "z300_f2_m0.05815_continued_1Gyr",
-      "configuration_sha256": "37d2de380b6966f313c1a579be69c3015dddc7d40b5b8a42d3dc2a394d20ab24",
+      "stop": "repeated step rejection: evolve_step: line search failed: residual did not decrease: local=0.0001013 -> 0.0001013, balance=-1.323e-05 -> -1.323e-05",
+      "case": "z300_f2_m0.05815_warm_response_500Gyr",
+      "configuration_sha256": "8b2906247ec804824eb7e7ae7d4d2cfabb2baadb8427ebba6be770cb115b8adb",
       "maximum_step_Gyr": 1.0,
       "running": false,
       "lineage": [
         {
           "case": "z300_f2_m0.05815_early",
           "configuration_sha256": "315b3a5385cc5f0b5e75fa2171659cb6ba31397bd4e5a6d5a1353bc549fa7daf",
+          "history_sha256": "d24357d9ce7e7521cf9c8b72e7ae0b243078aeee1a1272618beacba7f78df8b3",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 100000000.0
         },
         {
           "case": "z300_f2_m0.05815_long1000",
           "configuration_sha256": "10f5a770daceb51899787903f8859197740db668043734960fa2d4d3bb3a40d5",
+          "history_sha256": "a8b8e2651bdb2b2acd324ac92abaf078fbd758e0ecadb7dd8cd8f9c09dae9f37",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         },
         {
           "case": "z300_f2_m0.05815_no_predictor",
           "configuration_sha256": "cf198bcb90aa3c6d31d6f5850036dbfabc3c0f81bd7215eee68cbde6c4584e40",
+          "history_sha256": "4d9e88442d663a2f5f81868b1e6649cfb73fccae2e6b41b362a8c2210560c29e",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         },
         {
           "case": "z300_f2_m0.05815_continued",
           "configuration_sha256": "cf198bcb90aa3c6d31d6f5850036dbfabc3c0f81bd7215eee68cbde6c4584e40",
+          "history_sha256": "70bf14d83ad4cac538180ec942af6512eac6431cd799fc2f5a7db2dc3213d6b1",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         },
         {
           "case": "z300_f2_m0.05815_continued_1Gyr",
           "configuration_sha256": "37d2de380b6966f313c1a579be69c3015dddc7d40b5b8a42d3dc2a394d20ab24",
+          "history_sha256": "2c6c4b20898ac0c3ff85d8ccb94cf85d98258f050cdea167911027e7796dfaa4",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 1000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05815_hhe008_350Gyr",
+          "configuration_sha256": "fa46dd20328416dc1186c4211f6a02eac94595efc288774c6c60b1612ef4318f",
+          "history_sha256": "add345065ff14a5e5c5de1b63c6d80852324ea58773d516e2ad851ebbd9e751b",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 1000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05815_hotcore_450Gyr",
+          "configuration_sha256": "4125acb3004173dd7ed10684863733b6b425e7d54ed7124c301f47fe82642c6e",
+          "history_sha256": "02996ab01116ddee482a1fe41b1d0989e45a70b1238e20e157b7a280f3c9853a",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 1000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05815_warm_response_500Gyr",
+          "configuration_sha256": "8b2906247ec804824eb7e7ae7d4d2cfabb2baadb8427ebba6be770cb115b8adb",
+          "history_sha256": "f655941b8d1364fc4f821547ce0cf465cbc049d46f5350b281e263f3495b6745",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 1000000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.0582,
-      "age_Gyr": 311.56132497084104,
-      "Teff_K": 1936.0526466202602,
-      "nuclear_fraction": 1.0002473041798927,
+      "age_Gyr": 500.0,
+      "Teff_K": 2274.575870777793,
+      "nuclear_fraction": 1.0007353699834638,
       "reached_1Tyr": false,
-      "stop": "repeated step rejection: evolve_step: line search failed: residual did not decrease: local=5.984e-06 -> 5.984e-06, balance=1.514e-07 -> 1.514e-07",
-      "case": "z300_f2_m0.05820_continued_1Gyr",
-      "configuration_sha256": "f81a420e45ac0ed60635ec0b714a2284f3f69a4cb273ecee8395bca10b2c84e5",
+      "stop": "requested age",
+      "case": "z300_f2_m0.05820_warm_response_500Gyr",
+      "configuration_sha256": "806c3ee40c781504be961e54da4ef19cbcad23b05a57a2a5b6993056de48fd2a",
       "maximum_step_Gyr": 1.0,
       "running": false,
       "lineage": [
         {
           "case": "z300_f2_m0.05820_early",
           "configuration_sha256": "7662b52db9ea894018c8b3a22881fc89f5f49f4c925d6cef66981a2ac8031870",
+          "history_sha256": "ccf386b97607e9a0740e11649f310b38bb21ba0b11ebd21e85cb2ab3de7dfe7e",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 100000000.0
         },
         {
           "case": "z300_f2_m0.05820_long1000",
           "configuration_sha256": "54221da635094393058a79c0c1d22a72ae181b83595a0b784bd44ee0fe176e02",
+          "history_sha256": "6eab967e600a056c683b999478222ee0891c9a4aff6c06baadec6f464b4fe1ca",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         },
         {
           "case": "z300_f2_m0.05820_no_predictor",
           "configuration_sha256": "7face00d9078dd6436911ff45eb4f7a9982910a573f200289c28df0c8198416b",
+          "history_sha256": "34e2149892bfee05f3c6da42fbd0f166b8b4a7d425bb630cba3026fea959273c",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         },
         {
           "case": "z300_f2_m0.05820_continued",
           "configuration_sha256": "7face00d9078dd6436911ff45eb4f7a9982910a573f200289c28df0c8198416b",
+          "history_sha256": "817cf8602154847ddc75e334df1d4685a22029ed8eace4539a7a9b76b8025c02",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         },
         {
           "case": "z300_f2_m0.05820_continued_1Gyr",
           "configuration_sha256": "f81a420e45ac0ed60635ec0b714a2284f3f69a4cb273ecee8395bca10b2c84e5",
+          "history_sha256": "0eb025aeac5868364171ad5486832251ec5a5c33422ffc98092ef440d878b7fb",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 1000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05820_hhe008_360Gyr",
+          "configuration_sha256": "e0efd342a342d7ac8feea82d6b8a58c9439fa4546415bee0a0b89c9e60f51e4e",
+          "history_sha256": "bf81e5271e7a7f9714fa95d9a77868c0a62c241f5021785ddb2146dced0f5697",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 1000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05820_hotcore_450Gyr",
+          "configuration_sha256": "180cbfa7966624c137c342856522e733f9108624bd0cb79f9371fa9e3e87e7a8",
+          "history_sha256": "d6d2217a1e0f11cd97f1f92a31a151d8b431cf41795d4974b7b112980edb85f3",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 1000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05820_warm_response_500Gyr",
+          "configuration_sha256": "806c3ee40c781504be961e54da4ef19cbcad23b05a57a2a5b6993056de48fd2a",
+          "history_sha256": "559549d1ff825c2c9384e84c853f73648e1cf9d816a267cccdd061fe710d31e2",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 1000000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.05825,
-      "age_Gyr": 294.3413838663289,
-      "Teff_K": 1859.8925577691398,
-      "nuclear_fraction": 1.0007640286709658,
+      "age_Gyr": 500.0,
+      "Teff_K": 2226.443170238371,
+      "nuclear_fraction": 0.9999127975939636,
       "reached_1Tyr": false,
-      "stop": "repeated step rejection: evolve_step: line search failed: residual did not decrease: local=9.361e-05 -> 9.361e-05, balance=-2.127e-06 -> -2.128e-06",
-      "case": "z300_f2_m0.05825_continued_1Gyr",
-      "configuration_sha256": "ea0b91a4bfc02c1da2ea55fdd7e2059f9889c456883473fb1cd0595b15afb3e5",
+      "stop": "requested age",
+      "case": "z300_f2_m0.05825_warm_response_500Gyr",
+      "configuration_sha256": "af2fb12c5fa231e056995e5a9370b0be424f6a8f6a7cc94e76a2dd0561aea020",
       "maximum_step_Gyr": 1.0,
       "running": false,
       "lineage": [
         {
           "case": "z300_f2_m0.05825_early",
           "configuration_sha256": "0e5b75677c07fa3438f280e0ea9a39bbda278a299782b733442f9aacc64a7f95",
+          "history_sha256": "373af49dad7d5ef9d4701de1ca31d0536c297a05fae2ad1786863f7adc1284b5",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 100000000.0
         },
         {
           "case": "z300_f2_m0.05825_long1000",
           "configuration_sha256": "97cf03af65e8ccfd040d8eac71204811779130bcf5299fd097431a6b18cb9e26",
+          "history_sha256": "3f8532038c78be600986e7588da70b08d3ea1dff8217d7ad88efae1e0088c7a6",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         },
         {
           "case": "z300_f2_m0.05825_no_predictor",
           "configuration_sha256": "ec15d7fae2301dbf48750febd2afda2ebf54604af7093538aaf2d465f2024b20",
+          "history_sha256": "f7babcdf69ca5fd86f094ed569726b9fd4b077e70a62b1b7c6ac72df57515d08",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         },
         {
           "case": "z300_f2_m0.05825_continued",
           "configuration_sha256": "ec15d7fae2301dbf48750febd2afda2ebf54604af7093538aaf2d465f2024b20",
+          "history_sha256": "519eafe977c07fb81d888e5b413b1f687bb980472965e7702d1343fdbd9827f4",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         },
         {
           "case": "z300_f2_m0.05825_continued_1Gyr",
           "configuration_sha256": "ea0b91a4bfc02c1da2ea55fdd7e2059f9889c456883473fb1cd0595b15afb3e5",
+          "history_sha256": "45510a2d32bfd7ed5b4db8bb255c87d20dc520568cceb836e0da97c467530fee",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 1000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05825_hhe008_350Gyr",
+          "configuration_sha256": "4b3bb09e515bf4281b0d8d53cb59206b66c36b6a313013c557de91d6b537dcc6",
+          "history_sha256": "56abe0dd67aacce8dd0c8e086221757be236a311fc2eb4f342d7c9edad958b41",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 1000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05825_hotcore_450Gyr",
+          "configuration_sha256": "5eaca96c9e01f64c1cc30926f98a1e0288abbc971b0600ae22a15666a0397829",
+          "history_sha256": "e6d080b6f2c49f26f23eb9c3367969dc80c47eb62ceac924ea93d755e6c9cf6c",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 1000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05825_warm_response_500Gyr",
+          "configuration_sha256": "af2fb12c5fa231e056995e5a9370b0be424f6a8f6a7cc94e76a2dd0561aea020",
+          "history_sha256": "ff08332dc63edf17ab6dd490d92e7ed70e1f21067d6306a74b73bfb043d844fb",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 1000000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.0583,
-      "age_Gyr": 329.14783228468644,
-      "Teff_K": 1853.6184795193242,
-      "nuclear_fraction": 1.000983415592176,
+      "age_Gyr": 500.0,
+      "Teff_K": 2162.0268742488074,
+      "nuclear_fraction": 0.9997933538753084,
       "reached_1Tyr": false,
-      "stop": "repeated step rejection: envelope surface Teff=1853.620306 logg=5.220499: pressure family: H/He mismatch exceeds declared domain",
-      "case": "z300_f2_m0.05830_long1000",
-      "configuration_sha256": "2714023852c2d92d84f105f778d83d1561402fbb3b3065425c25e1fc27b3043e",
+      "stop": "requested age",
+      "case": "z300_f2_m0.05830_warm_response_500Gyr",
+      "configuration_sha256": "a61ae48c05abbb76c0c2e2839f5a03e42782ad2a40a392edc196585af87ed834",
       "maximum_step_Gyr": 0.25,
       "running": false,
       "lineage": [
         {
           "case": "z300_f2_m0.05830_early",
           "configuration_sha256": "818cfdcb9f524a206433a43bc3002b37a8bd57e1b5a0170c7ce32453ccc93e39",
+          "history_sha256": "77d5349570e07eefd67c067887968c0f8a4a97f31f245a6ed84243fd55df5124",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 100000000.0
         },
         {
           "case": "z300_f2_m0.05830_long1000",
           "configuration_sha256": "2714023852c2d92d84f105f778d83d1561402fbb3b3065425c25e1fc27b3043e",
+          "history_sha256": "6a2dbe60232d40897ff4941360b9d379532e2cdbbd02aa14be0efb6bcb21d3f7",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 250000000.0
+        },
+        {
+          "case": "z300_f2_m0.05830_hhe008_380Gyr",
+          "configuration_sha256": "52cf49689fa88274b2e8ba13d1c2e88699f853cda5935e63a45593b5b177d955",
+          "history_sha256": "34ace9d7a2be238a9b17a43822c4f109bafa0eb06ef7eb5274beafb502c66b92",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 250000000.0
+        },
+        {
+          "case": "z300_f2_m0.05830_hotcore_450Gyr",
+          "configuration_sha256": "12859906c75a38238c396f5a8fcfd250b4da4a093453a6aff885a99a8bc6aa37",
+          "history_sha256": "f5e81fe34d69af6d4c49ee7a804268ddce57035d02736cf5a580fbd839876c1a",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 250000000.0
+        },
+        {
+          "case": "z300_f2_m0.05830_warm_response_500Gyr",
+          "configuration_sha256": "a61ae48c05abbb76c0c2e2839f5a03e42782ad2a40a392edc196585af87ed834",
+          "history_sha256": "00473cc69c0e5c632c0ff64f99b81878c4084a3d89b9dee23a49ea88772a0ca8",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.05835,
-      "age_Gyr": 809.9176963651569,
-      "Teff_K": 1426.5006361020892,
-      "nuclear_fraction": 0.9899062017082818,
+      "age_Gyr": 897.0,
+      "Teff_K": 825.3859533285392,
+      "nuclear_fraction": 0.00089989197894669,
       "reached_1Tyr": false,
-      "stop": "repeated step rejection: evolve_step: line search failed: residual did not decrease: local=0.0002202 -> 0.0002202, balance=9.054e-06 -> 9.056e-06",
-      "case": "z300_f2_m0.05835_long1000",
-      "configuration_sha256": "b9ea518a1184eb7909fd86c00422af875607d58bc58edb418d1ebb8ac14b5fea",
+      "stop": "nuclear fraction below0.001, declining",
+      "case": "z300_f2_m0.05835_measured_lowz_897Gyr_v6",
+      "configuration_sha256": "462bd3967e176ad21fa55012c1605d411da603dee4bee0f4bf04aa5086300ed3",
       "maximum_step_Gyr": 0.25,
       "running": false,
       "lineage": [
         {
           "case": "z300_f2_m0.05835_early",
           "configuration_sha256": "60e2cea722397f5a47b1504af3101fe4150bf372a72e141839cb24fd1dda99ad",
+          "history_sha256": "fb226b75eb9ff172dd3c8b6c4213d315631979cdabe11742ee7e736d6eccbf12",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 100000000.0
         },
         {
           "case": "z300_f2_m0.05835_long1000",
           "configuration_sha256": "b9ea518a1184eb7909fd86c00422af875607d58bc58edb418d1ebb8ac14b5fea",
+          "history_sha256": "2e1aca3f201b2c280ccada2aef27722696198fdcf43089c5582ac8126a2bc4eb",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 250000000.0
+        },
+        {
+          "case": "z300_f2_m0.05835_measured_lowz_850Gyr_v2",
+          "configuration_sha256": "2156686ce6d0c4cadc975499d548b45d1462a3c1a6765388e8e220a13d0b5e05",
+          "history_sha256": "03be7a53f3a03e15ca13740047affd75c9288a1b5753bc45837cc0839ca508ed",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 250000000.0
+        },
+        {
+          "case": "z300_f2_m0.05835_measured_lowz_880Gyr_v3",
+          "configuration_sha256": "f02c6b1e186b006d3df60f42352fe4fac233c2156c7c8496cdf422d989acf57d",
+          "history_sha256": "6c53cfe4287e0fba229456020909a580bf49ba325b6817da752a38325d8c61ae",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 250000000.0
+        },
+        {
+          "case": "z300_f2_m0.05835_measured_lowz_885Gyr_v4",
+          "configuration_sha256": "793fa9b0910b9bc45870a48e0fb46fb7c24d1ef65df104e8230ee4eb1f6dcc23",
+          "history_sha256": "27458d4b7d45ad2cb025635ecae5ab678d759f3b3313228475d05b2518293fbb",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 250000000.0
+        },
+        {
+          "case": "z300_f2_m0.05835_measured_lowz_893Gyr_v5",
+          "configuration_sha256": "462bd3967e176ad21fa55012c1605d411da603dee4bee0f4bf04aa5086300ed3",
+          "history_sha256": "3ca381c8bf219455615fa03d5573fe527bb5c5bd8cf1ab80d4b81425810e6de5",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 250000000.0
+        },
+        {
+          "case": "z300_f2_m0.05835_measured_lowz_897Gyr_v6",
+          "configuration_sha256": "462bd3967e176ad21fa55012c1605d411da603dee4bee0f4bf04aa5086300ed3",
+          "history_sha256": "9569d3a4c04005a4ed02400506b82da6b70d50022fdbeddbb9e245356f827f16",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": true
     },
     {
       "mass_Msun": 0.0585,
@@ -465,10 +639,12 @@
         {
           "case": "z300_f2_m0.05850_halfGyr_Z16",
           "configuration_sha256": "f7bacf80af14e77eb181e8ed684a975c334c13552ee58f26901a1e618ce8e907",
+          "history_sha256": "9b496d7de34a9eee7ec34d34618b712d78b6c338e945da8a6366a395d04669e8",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 500000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.05875,
@@ -485,10 +661,12 @@
         {
           "case": "z300_f2_m0.05875_terayear",
           "configuration_sha256": "427095577f54d7711280cb7a90c1410237b28c365e9dda39de7a1754c17d5802",
+          "history_sha256": "9eb828ca4e928c8e004cd44a829bbaf2b1c724f55f5a8b8f0ea1231ab3d2ab5d",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 2000000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.059,
@@ -505,10 +683,12 @@
         {
           "case": "z300_f2_m0.05900_terayear",
           "configuration_sha256": "b3d141dbe0551f9cf4b2972ad4d6743e45b3e4d598c7cf74c50c928a16fd03ce",
+          "history_sha256": "432055659d26285cc8a4c5e38279ec38ddef3ad4df959d2c2b1004169d3ae9e4",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 2000000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.05925,
@@ -525,10 +705,12 @@
         {
           "case": "z300_f2_m0.05925_terayear",
           "configuration_sha256": "248b7ae5cf2594d10a0733e4e916cf8d409c0c1b3660ce1c9d8a3062c73e51a4",
+          "history_sha256": "0ac3d51e423d90b37720296f2ef2a7a693aa6cd3ec6a5ace1e3fa871289b3106",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 2000000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.0595,
@@ -545,10 +727,12 @@
         {
           "case": "z300_f2_m0.05950_terayear",
           "configuration_sha256": "5c2d9dd285e7b1bde116f617e879831357f98c82ba54739ec2851ab4805cc402",
+          "history_sha256": "1a03724659938cfc6b6f7bbc3132fe67b32d309ca0d63ce3f344adfee8dc2286",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 2000000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.06,
@@ -565,10 +749,12 @@
         {
           "case": "z300_f2_m0.06000_terayear",
           "configuration_sha256": "68523329bed868a4d4c305ccf892db65d3f5c284091c7a440728e501011d07f9",
+          "history_sha256": "401a7d0116f65310be2832a0cee72ff20ae198e4f74270d1cd89e8a9f09fadd4",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 2000000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.061,
@@ -585,16 +771,19 @@
         {
           "case": "z300_f2_m0.06100",
           "configuration_sha256": "45c21cc45cdb98feaac91bc184a4f1d4f7886d4b2791844f49ec38f54d22b8cc",
+          "history_sha256": "e2b62e2becc959d45adcc4c75126988d031d490b75d8ee019b61a970bda3c21c",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 2000000000.0
         },
         {
           "case": "z300_f2_m0.06100_terayear",
           "configuration_sha256": "3c5e2d689922dc9450ae6d4c16e19040c77d2e65b032fd57b085c43a01a7870e",
+          "history_sha256": "68726492fd9642fd05df35bb2d61ab623981f2677188c831cee41ce9504dda8d",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 2000000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.064,
@@ -611,16 +800,19 @@
         {
           "case": "z300_f2_m0.06400",
           "configuration_sha256": "f7be28c229a1fdc5144bebd5a031489325631436d129eb663f6977db1511f6d5",
+          "history_sha256": "7317dfb77ee74f43dc36545e8a31200b44d11583e099dbbcdcb3833951c145aa",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 2000000000.0
         },
         {
           "case": "z300_f2_m0.06400_terayear",
           "configuration_sha256": "822ae1a2a82ba0cf630da14782adc251c65b2332a5a61469a0055f465dabbf92",
+          "history_sha256": "397a3db2620ee85714942895658478a392f8dde92753512b5508a5636e8503e8",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 2000000000.0
         }
-      ]
+      ],
+      "reached_cooling_cutoff": false
     }
   ],
   "inputs": [
@@ -720,7 +912,7 @@
       "sha256": "5b5fafa8d97804067dd8d6ff09059a93da863dabb695871d6ffed392edd35f32"
     }
   ],
-  "updated_utc": "2026-10-11T21:59:16.079255+00:00",
+  "updated_utc": "2026-10-11T23:38:02.217379+00:00",
   "coarse_early_scope": "Original coarse histories for 0.057, 0.059, 0.060 through 6 Gyr; only 0.5\u20135 Gyr displayed.",
   "luminosity_panel": {
     "quantity": "log10(L/Lsun)",
@@ -728,6 +920,19 @@
     "age_axis": "shared logarithmic age in Gyr",
     "same_accepted_states": true
   },
-  "tracks_sha256": "e582c714a21e4a350386402e4da31971492022404a1181835a830f67ccb41c94",
-  "mixing": "Instantaneous Ledoux convection. No semiconvective transport."
+  "tracks_sha256": "83d6a597c8a3223b854b005e0dff36ac4f473e83dc220fc75056ea4781d94b5f",
+  "mixing": "Instantaneous Ledoux convection. No semiconvective transport.",
+  "continuation_limits": {
+    "scope": "Original mixing retained. Detailed merger histories remain numerically unresolved; these continuations do not tighten the mass bracket.",
+    "cooling_endpoint": {
+      "mass_Msun": 0.05835,
+      "age_Gyr": 897,
+      "Teff_K": 825.4,
+      "nuclear_fraction": 0.0008999
+    },
+    "warm_H_He": "Reference temperature retained through H/He mismatch0.10. Nearby composition calculations estimate a temperature response below0.6%, with about2% cloud-iteration variation; not a bound on track accuracy.",
+    "warm_response": "Measured metallicity response joined to the old boundary. Final2200K slope held constant only to2300K; hotter-source check pending.",
+    "EOS": "Direct Z=.24/.4 dense-core extension uses the original CMS/FreeEOS hot blend and material-energy reference. Existing planes retained.",
+    "opacity": "Same linear-in-Z prescription throughZ=.20. Omitting or doubling only the increment beyondZ=.16 changes total conductivity by at most0.5590% at the .05815 restart; not a bound on all opacity uncertainty."
+  }
 }
