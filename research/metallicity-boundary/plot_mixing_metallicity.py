@@ -41,6 +41,7 @@ if __name__ == '__main__':
     upper_age = max(150, latest*1.12)
     visible = [row for group in groups for curve in group for row in curve['rows'] if row['years'] >= 1e10]
     upper_surplus = max(16, 5*np.ceil(max(100*(row['nuclear_fraction']-1) for row in visible)/5)+5)
+    lower_surplus = min(-15, 5*np.floor(min(100*(row['nuclear_fraction']-1) for row in visible)/5)-2)
     upper_teff = max(1530, 50*np.ceil(max(row['Teff_K'] for row in visible)*1.02/50))
     for column, curves in enumerate(groups):
         for curve in curves:
@@ -53,9 +54,10 @@ if __name__ == '__main__':
                 ax = axes[row,column]
                 ax.plot(x[mask],y[mask],color=curve['color'],ls=curve['style'],lw=2.1,
                         label=curve['label'])
-                ax.plot(x[-1],y[-1],marker='o',ms=5,mec=curve['color'],mfc='white',zorder=4)
+                ax.plot(x[-1],y[-1],marker='o',ms=5,mec=curve['color'],
+                        mfc=curve['color'] if x[-1]>=1000*(1-1e-10) else 'white',zorder=4)
         axes[0,column].axhline(0,color='.4',lw=.8,ls=':')
-        axes[0,column].set_ylim(-15,upper_surplus)
+        axes[0,column].set_ylim(lower_surplus,upper_surplus)
         axes[0,column].legend(loc='lower left' if column == 0 else 'lower right',frameon=False)
         axes[1,column].set_xlabel('Age (Gyr)')
         axes[1,column].set_ylim(1080,upper_teff)
@@ -71,7 +73,7 @@ if __name__ == '__main__':
                    transform=axes[0,0].transAxes,va='top',fontsize=13)
     axes[0,1].text(.025,.955,r'$0.05815\,M_\odot$ · fixed helium',
                    transform=axes[0,1].transAxes,va='top',fontsize=13)
-    fig.text(.095,.061,'Cloudy atmospheres. Each calculation starts on the Hayashi track. Open circles: latest saved model.',fontsize=10.5,color='.3')
+    fig.text(.095,.061,'Cloudy atmospheres; each sequence starts on the Hayashi track. Filled endpoints: 1 Tyr. Open: incomplete.',fontsize=10.5,color='.3')
     fig.text(.095,.032,'Weak mixing: composition only. Heat + composition: assumed layer height H/d = 25 and marginal mixing between regimes.',fontsize=10.5,color='.3')
     for ext in ['png','pdf']:
         fig.savefig(DEST / f'mixing_metallicity.{ext}',dpi=200)

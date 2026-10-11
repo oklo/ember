@@ -72,5 +72,110 @@
     "strictly_increasing_age_per_mass": true,
     "same_rows_in_both_panels": true,
     "extrapolated_tails": false
+  },
+  "convective_merger_timestep_check": {
+    "start_years": 80227012996.82317,
+    "end_years": 82993679325.86021,
+    "fine_models": 203,
+    "coarse_models": 31,
+    "comparison": {
+      "nuclear_fraction": {
+        "coarse": 0.8678463863371817,
+        "fine": 0.850374859794272,
+        "delta": -0.017471526542909732,
+        "relative": -0.02013204965529647
+      },
+      "luminosity_Lsun": {
+        "coarse": 2.782772497932338e-05,
+        "fine": 2.744026254571444e-05,
+        "delta": -3.87462433608941e-07,
+        "relative": -0.01392361157431421
+      },
+      "radius_Rsun": {
+        "coarse": 0.0941660272918709,
+        "fine": 0.09392512060657147,
+        "delta": -0.00024090668529942738,
+        "relative": -0.0025583184533497505
+      },
+      "Teff_K": {
+        "coarse": 1366.1515580611022,
+        "fine": 1363.1158425198312,
+        "delta": -3.0357155412709744,
+        "relative": -0.002222092800288844
+      },
+      "central_T_K": {
+        "coarse": 2849624.431484536,
+        "fine": 2828986.179136446,
+        "delta": -20638.25234808959,
+        "relative": -0.0072424464501583685
+      },
+      "central_density_g_cm3": {
+        "coarse": 582.0328823557203,
+        "fine": 590.1613687408957,
+        "delta": 8.128486385175393,
+        "relative": 0.01396568240659568
+      },
+      "H_mass_g": {
+        "coarse": 7.868610040029588e+31,
+        "fine": 7.868619834841823e+31,
+        "delta": 9.794812234840402e+25,
+        "relative": 1.2447957371541918e-06
+      },
+      "He3_mass_g": {
+        "coarse": 8.032180289797984e+28,
+        "fine": 8.022385477986184e+28,
+        "delta": -9.794811811799345e+25,
+        "relative": -0.0012194462099214265
+      },
+      "central_X": {
+        "coarse": 0.6099062347846776,
+        "fine": 0.6099445251305464,
+        "delta": 3.8290345868774445e-05,
+        "relative": 6.278070904186528e-05
+      },
+      "central_He3": {
+        "coarse": 0.0018735626585071562,
+        "fine": 0.0018700162288901717,
+        "delta": -3.5464296169844534e-06,
+        "relative": -0.0018928801771754822
+      },
+      "surface_X": {
+        "coarse": 0.7146019335673243,
+        "fine": 0.7146024680033657,
+        "delta": 5.344360414216709e-07,
+        "relative": 7.478793666582106e-07
+      },
+      "surface_Z": {
+        "coarse": 0.03795493617626873,
+        "fine": 0.03795526933787764,
+        "delta": 3.3316160891194713e-07,
+        "relative": 8.777820291072658e-06
+      },
+      "convective_mass_fraction": {
+        "coarse": 0.9718436390986991,
+        "fine": 0.9813481059073537,
+        "delta": 0.009504466808654577,
+        "relative": 0.009779831267372474
+      },
+      "radiative_boundaries": {
+        "coarse": 15,
+        "fine": 14,
+        "delta": -1,
+        "relative": -0.06666666666666665
+      }
+    },
+    "coarse": {
+      "minimum_ratio": 0.831971289464554,
+      "minimum_age_years": 81243679325.86021,
+      "integrated_L_Lsun_year": 82351.57577586277,
+      "integrated_Lnuc_Lsun_year": 70906.19530901601
+    },
+    "fine": {
+      "minimum_ratio": 0.8044216970910121,
+      "minimum_age_years": 81128575496.82317,
+      "integrated_L_Lsun_year": 82492.71853166139,
+      "integrated_Lnuc_Lsun_year": 69130.11850059583
+    },
+    "scope": "Same original checkpoint and physical inputs. First100Myr refined to2Myr maximum steps, remainder to20Myr, against250Myr. The mesh and instantaneous mixing are unchanged. Spatial convergence remains unproved."
   }
 }

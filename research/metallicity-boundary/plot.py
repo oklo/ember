@@ -64,7 +64,7 @@ lum.text(.50,.95,r'Labels: mass in $M_\odot$',transform=lum.transAxes,va='top',f
 cax=fig.add_axes([.815,.18,.017,.245])
 cb=fig.colorbar(plt.cm.ScalarMappable(norm=tnorm,cmap=tcmap),cax=cax)
 cb.set_ticks([700,1000,1500,2000,2500]);cb.set_label(r'$T_{\rm eff}$ (K)',labelpad=8)
-fig.text(.10,.025,'Instantaneous convection; semiconvective transport not included.',fontsize=10.5,color='.25')
+fig.text(.10,.025,'Instantaneous convection; no semiconvection. Sharp merger features remain unresolved.',fontsize=10.5,color='.25')
 fig.savefig(ROOT/'boundary.png')
 fig.savefig(ROOT/'boundary.pdf')
 plt.close(fig)

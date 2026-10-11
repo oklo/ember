@@ -1,13 +1,13 @@
 {
-  "updated_utc": "2026-10-11T20:09:44.130907+00:00",
+  "updated_utc": "2026-10-11T21:58:33.794992+00:00",
   "tracks": [
     {
       "label": "No semiconvection",
       "mass_Msun": 0.05825,
       "Z_factor": 3,
-      "age_Gyr": 128.83218855734893,
-      "Teff_K": 1459.4428776394914,
-      "nuclear_fraction": 1.018908550246116,
+      "age_Gyr": 294.3413838663289,
+      "Teff_K": 1859.8925577691398,
+      "nuclear_fraction": 1.0007640286709658,
       "maximum_nuclear_fraction": 1.0271920736733633,
       "maximum_age_Gyr": 109.31672921383637
     },
@@ -25,11 +25,11 @@
       "label": "Heat + composition mixing",
       "mass_Msun": 0.05825,
       "Z_factor": 3,
-      "age_Gyr": 269.5497679143492,
-      "Teff_K": 1326.5723189267849,
-      "nuclear_fraction": 0.9958774558535471,
-      "maximum_nuclear_fraction": 1.0037046736077004,
-      "maximum_age_Gyr": 103.54016626707114
+      "age_Gyr": 1000.0,
+      "Teff_K": 1343.4481019125042,
+      "nuclear_fraction": 0.9986380672647511,
+      "maximum_nuclear_fraction": 1.0207931426600525,
+      "maximum_age_Gyr": 269.56730188538677
     },
     {
       "label": "$2.97 Z_{\\rm ref}$",
@@ -45,9 +45,9 @@
       "label": "$3.00 Z_{\\rm ref}$",
       "mass_Msun": 0.05815,
       "Z_factor": 3.0,
-      "age_Gyr": 55.84262850573982,
-      "Teff_K": 1260.5031138910288,
-      "nuclear_fraction": 1.13309650013704,
+      "age_Gyr": 299.1414848829351,
+      "Teff_K": 1923.4837338472673,
+      "nuclear_fraction": 1.0002810672500777,
       "maximum_nuclear_fraction": 1.1331243690219615,
       "maximum_age_Gyr": 55.84146633159856
     },
@@ -78,6 +78,27 @@
           "snapshot_sha256": "3f8532038c78be600986e7588da70b08d3ea1dff8217d7ad88efae1e0088c7a6",
           "case": "z300_f2_m0.05825_long1000",
           "configuration_sha256": "97cf03af65e8ccfd040d8eac71204811779130bcf5299fd097431a6b18cb9e26",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232"
+        },
+        {
+          "rows": 31,
+          "snapshot_sha256": "f7babcdf69ca5fd86f094ed569726b9fd4b077e70a62b1b7c6ac72df57515d08",
+          "case": "z300_f2_m0.05825_no_predictor",
+          "configuration_sha256": "ec15d7fae2301dbf48750febd2afda2ebf54604af7093538aaf2d465f2024b20",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232"
+        },
+        {
+          "rows": 391,
+          "snapshot_sha256": "519eafe977c07fb81d888e5b413b1f687bb980472965e7702d1343fdbd9827f4",
+          "case": "z300_f2_m0.05825_continued",
+          "configuration_sha256": "ec15d7fae2301dbf48750febd2afda2ebf54604af7093538aaf2d465f2024b20",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232"
+        },
+        {
+          "rows": 86,
+          "snapshot_sha256": "45510a2d32bfd7ed5b4db8bb255c87d20dc520568cceb836e0da97c467530fee",
+          "case": "z300_f2_m0.05825_continued_1Gyr",
+          "configuration_sha256": "ea0b91a4bfc02c1da2ea55fdd7e2059f9889c456883473fb1cd0595b15afb3e5",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232"
         }
       ],
@@ -123,6 +144,20 @@
           "rows": 998,
           "snapshot_sha256": "13612b30f6ca5877327f773bd4e0f12de20a6253497715fb3bf1b0cf7f2c85c4",
           "case": "moll25_marginal_to1Tyr",
+          "configuration_sha256": "b6516d741b6c8be8b46536549b7b8cec3f94e0b8f1de100a377444fe7c5456e4",
+          "executable_sha256": "49a8c72b8e2db47beced46a786949218a8e98a038aceea5ac4cd8e71e246d109"
+        },
+        {
+          "rows": 39,
+          "snapshot_sha256": "e4b6f77887738bbef20febf6cadc50b300ef4913843c3d006ef2f1a8729815a0",
+          "case": "moll25_marginal_smallstep",
+          "configuration_sha256": "b6516d741b6c8be8b46536549b7b8cec3f94e0b8f1de100a377444fe7c5456e4",
+          "executable_sha256": "49a8c72b8e2db47beced46a786949218a8e98a038aceea5ac4cd8e71e246d109"
+        },
+        {
+          "rows": 2939,
+          "snapshot_sha256": "adebefc67bb499c5d91e25723817f8f2e36af5a1670ccc0f2c09eaa4966121c2",
+          "case": "moll25_marginal_after_event",
           "configuration_sha256": "b6516d741b6c8be8b46536549b7b8cec3f94e0b8f1de100a377444fe7c5456e4",
           "executable_sha256": "49a8c72b8e2db47beced46a786949218a8e98a038aceea5ac4cd8e71e246d109"
         }
@@ -172,6 +207,27 @@
           "case": "z300_f2_m0.05815_long1000",
           "configuration_sha256": "10f5a770daceb51899787903f8859197740db668043734960fa2d4d3bb3a40d5",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232"
+        },
+        {
+          "rows": 31,
+          "snapshot_sha256": "4d9e88442d663a2f5f81868b1e6649cfb73fccae2e6b41b362a8c2210560c29e",
+          "case": "z300_f2_m0.05815_no_predictor",
+          "configuration_sha256": "cf198bcb90aa3c6d31d6f5850036dbfabc3c0f81bd7215eee68cbde6c4584e40",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232"
+        },
+        {
+          "rows": 294,
+          "snapshot_sha256": "70bf14d83ad4cac538180ec942af6512eac6431cd799fc2f5a7db2dc3213d6b1",
+          "case": "z300_f2_m0.05815_continued",
+          "configuration_sha256": "cf198bcb90aa3c6d31d6f5850036dbfabc3c0f81bd7215eee68cbde6c4584e40",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232"
+        },
+        {
+          "rows": 192,
+          "snapshot_sha256": "2c6c4b20898ac0c3ff85d8ccb94cf85d98258f050cdea167911027e7796dfaa4",
+          "case": "z300_f2_m0.05815_continued_1Gyr",
+          "configuration_sha256": "37d2de380b6966f313c1a579be69c3015dddc7d40b5b8a42d3dc2a394d20ab24",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232"
         }
       ],
       "color": "#777777",
@@ -203,6 +259,6 @@
       "z_factor": 3.03
     }
   ],
-  "data_sha256": "06f1e3d19856143cc253e8c685796ebf5818eec22d42c47af243a2bed195e033",
-  "scope": "Separate fresh Hayashi sequences. Weak mixing transports composition only; coupled mixing transports heat and composition with H/d25 and a marginal transition prescription. The metallicity arms omit semiconvection and stopped at unequal ages on envelope thermal checks. No final physical peak is established."
+  "data_sha256": "b56b29665f4b672d214dc594eee717917eeaa3f3fed803e6e5e784fb77def9d5",
+  "scope": "Separate fresh Hayashi sequences. Weak mixing transports composition only; coupled mixing transports heat and composition with H/d25 and a marginal transition prescription. Both mixing sensitivities reach1Tyr. The metallicity arms omit semiconvection and end at unequal ages, on numerical or atmosphere-domain limits. No converged physical surge is established."
 }
