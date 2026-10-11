@@ -259,5 +259,380 @@
     "convective_boundaries_identical": true,
     "scope": "Ordinary finite MLT convection compared with instantaneous mixing from one pre-merger state. Does not validate boundary placement or earlier evolution.",
     "source_report_sha256": "914828c88ab15ff39bb425a235e249023ad5b1aee7270fafbf2dbad266bedabe"
+  },
+  "independent_mesh_comparison": {
+    "scope": "Same physical inputs; independently evolved meshes. Predictor disabled at20Gyr in both, maximum step250Myr. Common-age values interpolate saved states; rapid-event differences can include timing shifts.",
+    "models": {
+      "536": {
+        "last_age_years": 120000000000,
+        "peak_fraction": {
+          "years": 80019531250,
+          "nuclear_fraction": 1.0708985158388409
+        },
+        "dip": {
+          "years": 84647124301.66599,
+          "nuclear_fraction": 0.6638507724438757
+        },
+        "source_history_sha256": [
+          "ccf386b97607e9a0740e11649f310b38bb21ba0b11ebd21e85cb2ab3de7dfe7e",
+          "1dd2f8670655f35ff77465de9f954d12278e2564e1e658871106153505f7d7e5"
+        ],
+        "late_profile": {
+          "stable_faces": 10,
+          "isolated_stable_faces": 6,
+          "isolated_q_spacing_median": 0.019646939521850038,
+          "isolated_stability_margin_range": [
+            -6.267040406211,
+            -5.705575618441
+          ],
+          "source_checkpoint_sha256": "7985e9886450ba5c274df458e70c2eb77c1d33ad3acbf44af550cdc71c425217",
+          "profile_sha256": "b320b3621cf4cb24ae6bc24f539556e0b7ab0212790c5d0358ebfc69d7d1c296"
+        }
+      },
+      "1071": {
+        "last_age_years": 120000000000,
+        "peak_fraction": {
+          "years": 80019531250,
+          "nuclear_fraction": 1.07084695198483
+        },
+        "dip": {
+          "years": 82720152433.01564,
+          "nuclear_fraction": 0.5076528525253231
+        },
+        "source_history_sha256": [
+          "fcf5a3bb1131bb924a3b5c66ba507bb1346705a12dcb18199eca1cb8c75ff65b",
+          "0a56c661d0d4ccc9a6db0add5f7ec59ae6d624faf9c9d51fa1b26df88e9bef34"
+        ],
+        "late_profile": {
+          "stable_faces": 10,
+          "isolated_stable_faces": 8,
+          "isolated_q_spacing_median": 0.009630329445149965,
+          "isolated_stability_margin_range": [
+            -20.01763051522,
+            -12.12740830817
+          ],
+          "source_checkpoint_sha256": "6a9c634c150093c8b498d78a2255dea8185a2990a9b83e07c136889d298c45be",
+          "profile_sha256": "8d3d79eaf07c811a2a3086e6c6f53447cd7de478079ed93410c82c467bb5a2f1"
+        }
+      }
+    },
+    "common_ages": [
+      {
+        "age_Gyr": 20,
+        "comparison": {
+          "luminosity_Lsun": {
+            "coarse": 1.0620950236695236e-05,
+            "fine": 1.0623800554581444e-05,
+            "relative": 0.0002683675022183696
+          },
+          "Teff_K": {
+            "coarse": 1102.8723716526547,
+            "fine": 1102.9543301066672,
+            "relative": 7.431363421472881e-05
+          },
+          "radius_Rsun": {
+            "coarse": 0.08926564212822409,
+            "fine": 0.08926435171368431,
+            "relative": -1.4455892648257418e-05
+          },
+          "central_T_K": {
+            "coarse": 2415278.240425697,
+            "fine": 2415328.232888052,
+            "relative": 2.0698427832366306e-05
+          },
+          "central_density_g_cm3": {
+            "coarse": 622.2303816703687,
+            "fine": 622.1658668417358,
+            "relative": -0.00010368318637821172
+          },
+          "nuclear_fraction": {
+            "coarse": 0.9739851400042912,
+            "fine": 0.973985370873761,
+            "relative": 2.3703592622048575e-07
+          },
+          "H_mass_g": {
+            "coarse": 7.874563488461351e+31,
+            "fine": 7.874563256327352e+31,
+            "relative": -2.9478967156215674e-08
+          },
+          "He3_mass_g": {
+            "coarse": 2.0787318757240854e+28,
+            "fine": 2.0789640097196085e+28,
+            "relative": 0.00011167096547359812
+          }
+        }
+      },
+      {
+        "age_Gyr": 40,
+        "comparison": {
+          "luminosity_Lsun": {
+            "coarse": 1.2318336041350948e-05,
+            "fine": 1.2320696227901805e-05,
+            "relative": 0.0001915994613992389
+          },
+          "Teff_K": {
+            "coarse": 1141.9514084365574,
+            "fine": 1142.018244876302,
+            "relative": 5.852826946139977e-05
+          },
+          "radius_Rsun": {
+            "coarse": 0.089667257103749,
+            "fine": 0.08966535056375685,
+            "relative": -2.1262387784881653e-05
+          },
+          "central_T_K": {
+            "coarse": 2495799.5516715385,
+            "fine": 2495830.273894215,
+            "relative": 1.230957135800459e-05
+          },
+          "central_density_g_cm3": {
+            "coarse": 636.3282944567032,
+            "fine": 636.2806654961149,
+            "relative": -7.484966644299984e-05
+          },
+          "nuclear_fraction": {
+            "coarse": 1.0185211297163503,
+            "fine": 1.0185570369895602,
+            "relative": 3.5254323314637404e-05
+          },
+          "H_mass_g": {
+            "coarse": 7.873295118509355e+31,
+            "fine": 7.873294574979054e+31,
+            "relative": -6.903466620578058e-08
+          },
+          "He3_mass_g": {
+            "coarse": 3.3471018276996366e+28,
+            "fine": 3.347645357979289e+28,
+            "relative": 0.00016238833104931238
+          }
+        }
+      },
+      {
+        "age_Gyr": 60,
+        "comparison": {
+          "luminosity_Lsun": {
+            "coarse": 1.7219524309638527e-05,
+            "fine": 1.722676887601871e-05,
+            "relative": 0.0004207181481854505
+          },
+          "Teff_K": {
+            "coarse": 1229.5479819217262,
+            "fine": 1229.6783292696375,
+            "relative": 0.00010601241255137062
+          },
+          "radius_Rsun": {
+            "coarse": 0.09144766454730735,
+            "fine": 0.09144750915746813,
+            "relative": -1.6992215163824653e-06
+          },
+          "central_T_K": {
+            "coarse": 2668926.1099866135,
+            "fine": 2669075.3518748023,
+            "relative": 5.591832896012505e-05
+          },
+          "central_density_g_cm3": {
+            "coarse": 612.2030853851911,
+            "fine": 612.1187200360425,
+            "relative": -0.00013780614825797954
+          },
+          "nuclear_fraction": {
+            "coarse": 1.038443015388721,
+            "fine": 1.0384398291685848,
+            "relative": -3.068266711703238e-06
+          },
+          "H_mass_g": {
+            "coarse": 7.871620404366338e+31,
+            "fine": 7.871619269211302e+31,
+            "relative": -1.4420855909413888e-07
+          },
+          "He3_mass_g": {
+            "coarse": 5.021815970259748e+28,
+            "fine": 5.0229511252821015e+28,
+            "relative": 0.00022604472746046156
+          }
+        }
+      },
+      {
+        "age_Gyr": 80,
+        "comparison": {
+          "luminosity_Lsun": {
+            "coarse": 2.7322137447786304e-05,
+            "fine": 2.7333025552687245e-05,
+            "relative": 0.00039850853256817587
+          },
+          "Teff_K": {
+            "coarse": 1351.576178604432,
+            "fine": 1351.7093980763013,
+            "relative": 9.856601054258896e-05
+          },
+          "radius_Rsun": {
+            "coarse": 0.09532990462942396,
+            "fine": 0.09533010419404779,
+            "relative": 2.093410505388249e-06
+          },
+          "central_T_K": {
+            "coarse": 2967004.4918666244,
+            "fine": 2967166.186000634,
+            "relative": 5.4497434854861027e-05
+          },
+          "central_density_g_cm3": {
+            "coarse": 530.0207961998732,
+            "fine": 529.9403350417266,
+            "relative": -0.00015180754929522422
+          },
+          "nuclear_fraction": {
+            "coarse": 1.070895206045482,
+            "fine": 1.0708434534311484,
+            "relative": -4.832649734665129e-05
+          },
+          "H_mass_g": {
+            "coarse": 7.869046589102749e+31,
+            "fine": 7.869044448108924e+31,
+            "relative": -2.720779195275469e-07
+          },
+          "He3_mass_g": {
+            "coarse": 7.595631221329009e+28,
+            "fine": 7.59777221510159e+28,
+            "relative": 0.0002818717378707536
+          }
+        }
+      },
+      {
+        "age_Gyr": 90,
+        "comparison": {
+          "luminosity_Lsun": {
+            "coarse": 2.1767614681652783e-05,
+            "fine": 1.720072938180386e-05,
+            "relative": -0.20980182563127603
+          },
+          "Teff_K": {
+            "coarse": 1304.0862931738186,
+            "fine": 1239.5060272494393,
+            "relative": -0.04952146668699908
+          },
+          "radius_Rsun": {
+            "coarse": 0.0913993473518079,
+            "fine": 0.0899349745417698,
+            "relative": -0.01602169875898063
+          },
+          "central_T_K": {
+            "coarse": 2708408.607297299,
+            "fine": 2611273.7009033426,
+            "relative": -0.03586419941667762
+          },
+          "central_density_g_cm3": {
+            "coarse": 670.4940039508963,
+            "fine": 709.3177773110905,
+            "relative": 0.05790323721230095
+          },
+          "nuclear_fraction": {
+            "coarse": 0.8936562772854004,
+            "fine": 0.9475137156902018,
+            "relative": 0.06026639075193496
+          },
+          "H_mass_g": {
+            "coarse": 7.8676238557864825e+31,
+            "fine": 7.867873227109538e+31,
+            "relative": 3.169588780882471e-05
+          },
+          "He3_mass_g": {
+            "coarse": 9.018364518234984e+28,
+            "fine": 8.768993204765761e+28,
+            "relative": -0.027651500775445315
+          }
+        }
+      },
+      {
+        "age_Gyr": 100,
+        "comparison": {
+          "luminosity_Lsun": {
+            "coarse": 1.9225630807443423e-05,
+            "fine": 1.6584223325030986e-05,
+            "relative": -0.13738989939356294
+          },
+          "Teff_K": {
+            "coarse": 1271.1777499866064,
+            "fine": 1230.6945588710937,
+            "relative": -0.03184699473849284
+          },
+          "radius_Rsun": {
+            "coarse": 0.09040259204846188,
+            "fine": 0.08957775229164343,
+            "relative": -0.009124071977673842
+          },
+          "central_T_K": {
+            "coarse": 2687211.921292837,
+            "fine": 2611209.737364975,
+            "relative": -0.028282914096070533
+          },
+          "central_density_g_cm3": {
+            "coarse": 709.5137159020396,
+            "fine": 726.9805381417797,
+            "relative": 0.024618019142214287
+          },
+          "nuclear_fraction": {
+            "coarse": 0.9917810385914626,
+            "fine": 0.9932708055482845,
+            "relative": 0.001502112763657637
+          },
+          "H_mass_g": {
+            "coarse": 7.866558598282713e+31,
+            "fine": 7.866955917318731e+31,
+            "relative": 5.0507350966011444e-05
+          },
+          "He3_mass_g": {
+            "coarse": 1.0083622017685954e+29,
+            "fine": 9.686302993801021e+28,
+            "relative": -0.03940241147358192
+          }
+        }
+      },
+      {
+        "age_Gyr": 120,
+        "comparison": {
+          "luminosity_Lsun": {
+            "coarse": 2.1767337540272297e-05,
+            "fine": 1.7671410618871344e-05,
+            "relative": -0.18816848472271708
+          },
+          "Teff_K": {
+            "coarse": 1309.0679206377902,
+            "fine": 1250.636052770527,
+            "relative": -0.04463623846102249
+          },
+          "radius_Rsun": {
+            "coarse": 0.0907050476891997,
+            "fine": 0.08954201880938255,
+            "relative": -0.012822096558531726
+          },
+          "central_T_K": {
+            "coarse": 2753329.311765254,
+            "fine": 2637689.2938471828,
+            "relative": -0.04200006785382693
+          },
+          "central_density_g_cm3": {
+            "coarse": 725.4908579122504,
+            "fine": 744.0812149089164,
+            "relative": 0.025624522754378543
+          },
+          "nuclear_fraction": {
+            "coarse": 1.0020504391142029,
+            "fine": 0.9949607741623863,
+            "relative": -0.00707515777158263
+          },
+          "H_mass_g": {
+            "coarse": 7.864266747984831e+31,
+            "fine": 7.865038753293471e+31,
+            "relative": 9.816621604774589e-05
+          },
+          "He3_mass_g": {
+            "coarse": 1.237547229817814e+29,
+            "fine": 1.1603467013735171e+29,
+            "relative": -0.062381884573134205
+          }
+        }
+      }
+    ],
+    "assessment": "Pre-merger tracks agree closely. Merger depth and lasting structure do not converge on these two meshes; detailed pulses are not physical predictions."
   }
 }

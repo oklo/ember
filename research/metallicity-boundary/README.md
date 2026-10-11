@@ -34,14 +34,18 @@ and 1.021 with coupled heat/composition transport. Both mixing sensitivities
 reach 1 Tyr. The coupled model assumes layer height H/d = 25 and marginal
 transport between mixing regimes; that prescription remains uncertain.
 
-Convective-region mergers produce sharp excursions. A smaller-timestep
-0.05820 calculation retains the dip and recovery, but its minimum ratio
-changes from 0.8320 to 0.8044. At the common 82.99-Gyr endpoint, luminosity
-differs by 1.392% and temperature by 3.036 K. Changing the solver prediction
-history earlier on the same mesh moves the
-dip to 84.65 Gyr and deepens it to 0.6639. Alternating single-cell stable
-layers remain unresolved. The detailed excursions are not validated
-physical predictions.
+Convective-region mergers produce sharp excursions that do not converge
+numerically. Shorter steps change one dip from 0.8320 to 0.8044; changing
+only the solver prediction history moves it and deepens it to 0.6639.
+
+![Independent mesh comparison](mesh_comparison.png)
+
+Fresh 0.05820-solar-mass tracks on 536 and 1071 points agree in luminosity
+within 0.043% before the merger and both reach 107.1% nuclear support.
+The subsequent minima are 0.6639 and 0.5077. At 120 Gyr, luminosities still
+differ by 18.82%. Mixing leaves composition steps whose spacing roughly
+halves with the mesh. The detailed excursions and later trajectories
+remain uncertain; conservation alone does not validate them.
 
 The nearby-metallicity tests hold mass at 0.05815 solar masses and helium
 fixed. Their endpoints have unequal ages. The 3.03-Z_ref case includes a
@@ -61,7 +65,8 @@ these uncertainties.
 ## Reproduce the figures
 
 Run `python plot.py`, `python plot_transition_mass.py`,
-`python plot_mixing_metallicity.py` and `python plot_interior.py` with NumPy
+`python plot_mixing_metallicity.py`, `python plot_interior.py` and
+`python plot_mesh_comparison.py` with NumPy
 and Matplotlib. CSV/NPZ files retain plotted states; JSON records source
 fingerprints, endpoints, assumptions and numerical checks. These reproduce
 figures, not stellar runs; full physics tables and checkpoints are separate.
