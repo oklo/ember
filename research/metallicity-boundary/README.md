@@ -7,15 +7,19 @@ atmospheres between 900 and 1200 K.
 
 ![Nuclear luminosity relative to emitted luminosity](boundary.png)
 
-The upper panel contains 13 masses; eight reach 1 Tyr. Open circles mark
-incomplete calculations. All accepted states are shown, with straight lines
-between them. The lower panel shows log10(L/L_sun) for the same models,
+The upper panel contains 18 masses; eight reach 1 Tyr. Open endpoints mark
+incomplete calculations. Accepted states are connected without smoothing
+or extrapolated tails. The lower panel shows log10(L/L_sun) for the same models,
 colored by photospheric temperature and sharing the age axis. The displayed
-0.057 curve follows its fresh 50-Myr early calculation,
+0.057 curve uses 50-Myr early steps,
 then 100-Myr steps through the peak and 250-Myr steps afterward. It stops
 at 56.12 Gyr on atmospheric H/He coverage. Steps are smaller for the displayed 0.058 and 0.05825 tracks
 (250 Myr maximum), and for 0.0585 (500 Myr); the remaining full curves allow
-2 Gyr. The continuing survey follows burning objects to at least 1 Tyr,
+2 Gyr. The 0.051–0.054-solar-mass runs use at most 50 Myr through their
+nuclear maxima. The 0.0582, 0.05825 and 0.0583 runs use at most 100 Myr
+to 20 Gyr, then 250 Myr. All three exceed unit nuclear fraction. Their
+maxima so far are 1.071, 1.027 and 1.008, respectively. The survey
+follows burning objects to at least 1 Tyr,
 rather than ending when nuclear power first approaches surface luminosity.
 
 ## What the checks establish
@@ -61,11 +65,17 @@ files reproduce the figures, not a complete stellar calculation.
 Run `python plot.py` with NumPy and Matplotlib installed to regenerate the
 two mass-comparison PNGs. Machine-readable data retain full precision.
 
-The displayed 0.05825 track now resolves all but 0.0003 of the mass in the
-evolution calculation. It reaches 143.8 Gyr; the separately plotted interior
-profiles replay this same calculation. Its maximum nuclear fraction is
-1.022 at 115.6 Gyr. The later finite-mixing sensitivity is not spliced into
-these figures.
+The close-mass tracks resolve all but 0.0003 of the mass in the
+evolution calculation. The interior figure below uses a separately saved
+sequence with the same instantaneous-mixing prescription; its provenance
+is distinct from the finer mass survey. No mixing sensitivity is appended
+to either figure.
+
+The separating layer first becomes stable through conductive heat transport.
+Later it relies on a composition gradient and appears susceptible to
+oscillatory mixing (semiconvection), which these tracks omit. The persistence
+of the separation and its effect on late nuclear burning remain under test.
+[Mirouh et al. (2012)](https://arxiv.org/abs/1112.4819).
 
 ## Interior of the borderline model
 

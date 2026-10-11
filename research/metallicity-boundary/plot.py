@@ -1,6 +1,6 @@
 """Render the saved stellar states; no interpolation or extrapolated tails."""
 from pathlib import Path
-import csv
+import csv,json
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
@@ -21,8 +21,8 @@ def read(name,key):
 def line(ax,rows,y,**style):
     ax.plot([r['age_Gyr'] for r in rows],[r[y] for r in rows],**style)
 
-tracks=read('tracks.csv','mass_Msun');early=read('early.csv','mass_Msun')
-coarse=read('coarse_early.csv','mass_Msun')
+tracks=read('tracks.csv','mass_Msun')
+metadata={e['mass_Msun']:e for e in json.loads((ROOT/'provenance.json').read_text())['endpoints']}
 from matplotlib.collections import LineCollection
 from matplotlib.colors import Normalize, LinearSegmentedColormap
 fig,(ax,lum)=plt.subplots(2,1,figsize=(11.5,10.4),sharex=True,
@@ -35,7 +35,7 @@ endpoints=[]
 for (m,h),color in zip(sorted(tracks.items()),colors):
  x=np.array([a['age_Gyr'] for a in h]);y=np.array([a['nuclear_fraction']for a in h]);mask=x>=.05
  ax.plot(x[mask],y[mask],color=color,lw=2 if m==.05825 else 1.6,label=f'{m:.4g}')
- last=h[-1];full=last['age_Gyr']>=1000*(1-1e-10);marker='o'
+ last=h[-1];full=last['age_Gyr']>=1000*(1-1e-10);marker='s' if metadata[m].get('running') else 'o'
  ax.plot(x[-1],y[-1],marker=marker,ms=5,mec=color,mfc=color if full else 'white',zorder=5)
  ll=np.log10([a['luminosity_Lsun'] for a in h]);tt=np.array([a['Teff_K']for a in h])
  xy=np.column_stack((x[mask],ll[mask]));segments=np.stack((xy[:-1],xy[1:]),axis=1)
@@ -44,16 +44,16 @@ for (m,h),color in zip(sorted(tracks.items()),colors):
  color_end=tcmap(tnorm(tt[-1]))
  lum.plot(x[-1],ll[-1],marker=marker,ms=5,mec=color_end,mfc=color_end if full else 'white',zorder=5)
  endpoints.append((m,x[-1],ll[-1],full))
-ax.set(xscale='log',xlim=(.05,1150),ylim=(-.025,1.07),ylabel=r'$L_{\rm nuc}/L$')
+ax.set(xscale='log',xlim=(.05,1150),ylim=(-.025,max(1.07,1.035*max(a['nuclear_fraction'] for h in tracks.values() for a in h if a['age_Gyr']>=.05))),ylabel=r'$L_{\rm nuc}/L$')
 ax.axhline(1,color='.35',ls=':',lw=.8)
 ax.text(.025,.88,r'$3Z_{\rm ref}$ · cloudy, $f_{\rm sed}=2$',transform=ax.transAxes,va='top',fontsize=14)
 ax.legend(title=r'Mass ($M_\odot$)',loc='upper left',bbox_to_anchor=(1.015,1),frameon=False,labelspacing=.38)
-ax.text(1.03,.12,'Filled: 1 Tyr\nOpen: incomplete',transform=ax.transAxes,fontsize=10.5,linespacing=1.5)
+ax.text(1.03,-.025,'Filled: 1 Tyr\nOpen: incomplete',transform=ax.transAxes,fontsize=10.5,linespacing=1.5,va='top')
 lum.set(ylim=(-6.2,-2.55),xlabel='Age (Gyr)',ylabel=r'$\log_{10}(L/L_\odot)$')
 lum.set_xticks([.1,1,10,100,1000],labels=['0.1','1','10','100','1000'])
 for a in [ax,lum]:a.grid(alpha=.13)
 # Identify the warming borderline track and the mass range without a second large legend.
-for mass,offset in [(.054,(-48,0)),(.058,(-36,17)),(.05825,(4,20)),(.0585,(-5,-25)),(max(tracks),(-42,20))]:
+for mass,offset in [(.054,(-48,0)),(.058,(-36,17)),(.0582,(-70,25)),(.05825,(4,20)),(.0583,(24,18)),(.0585,(-5,-25)),(max(tracks),(-42,20))]:
  end=next((e for e in endpoints if e[0]==mass),None)
  if end is None:continue
  m,x,y,_=end
@@ -64,7 +64,7 @@ lum.text(.50,.95,r'Labels: mass in $M_\odot$',transform=lum.transAxes,va='top',f
 cax=fig.add_axes([.815,.18,.017,.245])
 cb=fig.colorbar(plt.cm.ScalarMappable(norm=tnorm,cmap=tcmap),cax=cax)
 cb.set_ticks([700,1000,1500,2000,2500]);cb.set_label(r'$T_{\rm eff}$ (K)',labelpad=8)
-fig.text(.10,.025,'Same saved models in both panels; no extrapolated tails.',fontsize=10.5,color='.25')
+fig.text(.10,.025,'Instantaneous convection; semiconvective transport not included.',fontsize=10.5,color='.25')
 fig.savefig(ROOT/'boundary.png')
 fig.savefig(ROOT/'boundary.pdf')
 plt.close(fig)

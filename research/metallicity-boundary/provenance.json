@@ -9,15 +9,110 @@
   ],
   "endpoints": [
     {
-      "mass_Msun": 0.054,
-      "age_Gyr": 52.6220800466712,
-      "Teff_K": 683.3256971712079,
-      "nuclear_fraction": 9.508494587972868e-05,
+      "mass_Msun": 0.051,
+      "age_Gyr": 13.449503010107472,
+      "Teff_K": 957.2988411218299,
+      "nuclear_fraction": 0.017877172250886905,
       "reached_1Tyr": false,
-      "case": "z300_f2_m0.05400_dense_q6",
-      "maximum_step_Gyr": 2.0,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "97b4a4ca8b5acef2f53a77326197370ad598be8932fe9eb9a36240580bf9e73f"
+      "stop": "running",
+      "case": "z300_f2_m0.05100_long30",
+      "configuration_sha256": "5207eec7b2f9849d77031c105afab4404f501ad08c57f36897b6072e3db02a5e",
+      "maximum_step_Gyr": 0.1,
+      "running": true,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05100_early",
+          "configuration_sha256": "73f22421e8beb4f52c78af2220e17e029c9745b94e91f4b232e8e33c370650b2",
+          "maximum_step_years": 50000000.0
+        },
+        {
+          "case": "z300_f2_m0.05100_long30",
+          "configuration_sha256": "5207eec7b2f9849d77031c105afab4404f501ad08c57f36897b6072e3db02a5e",
+          "maximum_step_years": 100000000.0
+        }
+      ]
+    },
+    {
+      "mass_Msun": 0.052,
+      "age_Gyr": 13.751672536247973,
+      "Teff_K": 975.0486243881626,
+      "nuclear_fraction": 0.024319029320439174,
+      "reached_1Tyr": false,
+      "stop": "running",
+      "case": "z300_f2_m0.05200_long30",
+      "configuration_sha256": "3018ae76b11b04f14abe2c318681aca3fcbe279bd3ff95824751b345290d7cc6",
+      "maximum_step_Gyr": 0.1,
+      "running": true,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05200_early",
+          "configuration_sha256": "3047194841dbd86d8364ef9575068bcdb7800807d0cfbe1e23cd8ae233a7accb",
+          "maximum_step_years": 50000000.0
+        },
+        {
+          "case": "z300_f2_m0.05200_long30",
+          "configuration_sha256": "3018ae76b11b04f14abe2c318681aca3fcbe279bd3ff95824751b345290d7cc6",
+          "maximum_step_years": 100000000.0
+        }
+      ]
+    },
+    {
+      "mass_Msun": 0.053,
+      "age_Gyr": 51.71009038829673,
+      "Teff_K": 665.2578541758797,
+      "nuclear_fraction": 6.423487479573628e-05,
+      "reached_1Tyr": false,
+      "stop": "native envelope thermal reservoir fraction 0.01223 exceeds assessed limit 0.01",
+      "case": "z300_f2_m0.05300_long1000",
+      "configuration_sha256": "acacd462306d66d37fb06944c3bd29709e5737e5ceb89d9bfdc600d2851349f1",
+      "maximum_step_Gyr": 0.25,
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05300_early",
+          "configuration_sha256": "e8886f4a7cafe688c90687056b108b9296dc210927353c689e1b31a68fab7f41",
+          "maximum_step_years": 50000000.0
+        },
+        {
+          "case": "z300_f2_m0.05300_long30",
+          "configuration_sha256": "1f50e539675b11f967b4a30a6aa36df99d0261a8847aaa2c1794e36f4c151013",
+          "maximum_step_years": 100000000.0
+        },
+        {
+          "case": "z300_f2_m0.05300_long1000",
+          "configuration_sha256": "acacd462306d66d37fb06944c3bd29709e5737e5ceb89d9bfdc600d2851349f1",
+          "maximum_step_years": 250000000.0
+        }
+      ]
+    },
+    {
+      "mass_Msun": 0.054,
+      "age_Gyr": 51.71624380946159,
+      "Teff_K": 679.731474065196,
+      "nuclear_fraction": 8.725135241601046e-05,
+      "reached_1Tyr": false,
+      "stop": "repeated step rejection: envelope surface Teff=679.732145 logg=5.462503: pressure family: H/He mismatch exceeds declared domain",
+      "case": "z300_f2_m0.05400_long1000",
+      "configuration_sha256": "e90cb6ca597c4b0da7e3c13ed582e49525e1db72827cb2b5c9f15d0ea228c2da",
+      "maximum_step_Gyr": 0.25,
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05400_early",
+          "configuration_sha256": "4238378834aa41ca78f856c4b6fa5a5af1ceeb7beb52be071f286c46e6609087",
+          "maximum_step_years": 50000000.0
+        },
+        {
+          "case": "z300_f2_m0.05400_long30",
+          "configuration_sha256": "3e2c2266570f1acbbc531c1141326bb7fdec9c5915d042572e11d2f46767f1de",
+          "maximum_step_years": 100000000.0
+        },
+        {
+          "case": "z300_f2_m0.05400_long1000",
+          "configuration_sha256": "e90cb6ca597c4b0da7e3c13ed582e49525e1db72827cb2b5c9f15d0ea228c2da",
+          "maximum_step_years": 250000000.0
+        }
+      ]
     },
     {
       "mass_Msun": 0.056,
@@ -25,10 +120,23 @@
       "Teff_K": 715.6252261284274,
       "nuclear_fraction": 0.00018310642041134378,
       "reached_1Tyr": false,
+      "stop": "native envelope thermal reservoir fraction 0.01334 exceeds assessed limit 0.01",
       "case": "z300_f2_m0.05600_dense_q6",
+      "configuration_sha256": "e5e06005b10320586bcf291ad5ab7251f02fb664f05f53a292133cb06c2e308b",
       "maximum_step_Gyr": 2.0,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "e5e06005b10320586bcf291ad5ab7251f02fb664f05f53a292133cb06c2e308b"
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05600_terayear",
+          "configuration_sha256": "4215a7df4b967272e48c8faa18596e5c905b18679ab061201827cd290fd04306",
+          "maximum_step_years": 2000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05600_dense_q6",
+          "configuration_sha256": "e5e06005b10320586bcf291ad5ab7251f02fb664f05f53a292133cb06c2e308b",
+          "maximum_step_years": 2000000000.0
+        }
+      ]
     },
     {
       "mass_Msun": 0.057,
@@ -36,10 +144,11 @@
       "Teff_K": 730.3549877643334,
       "nuclear_fraction": 0.00024247533512777755,
       "reached_1Tyr": false,
+      "stop": "native envelope thermal reservoir fraction 0.02922 exceeds assessed limit 0.01",
       "case": "z300_f2_m0.05700_fine_peak_continuation_q6",
-      "maximum_step_Gyr": 0.25,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
       "configuration_sha256": "69c26b8ec73a0e5a64d121cba08db21fd785a71af6842dd467694c14c5fabdab",
+      "maximum_step_Gyr": 0.25,
+      "running": false,
       "lineage": [
         {
           "case": "z300_f2_m0.05700_feature_50Myr",
@@ -64,22 +173,95 @@
       "Teff_K": 778.5726819223883,
       "nuclear_fraction": 0.0006354442059911026,
       "reached_1Tyr": false,
+      "stop": "repeated step rejection: envelope surface Teff=778.573441 logg=5.499674: pressure family: H/He mismatch exceeds declared domain",
       "case": "z300_f2_m0.05800_quarterGyr_q6",
+      "configuration_sha256": "57eea94fbe0943c266ebd8a384b36992d84ba9891e14fb8d749239cc732c1f1e",
       "maximum_step_Gyr": 0.25,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "57eea94fbe0943c266ebd8a384b36992d84ba9891e14fb8d749239cc732c1f1e"
+      "running": false,
+      "lineage": [
+        {
+          "case": "m058_quarter_early",
+          "configuration_sha256": "1c88767fab5a163036b3a668d3a6a403f8fc3ee0cf382c39cdd2e4bc18622d6a",
+          "maximum_step_years": 250000000.0
+        },
+        {
+          "case": "z300_f2_m0.05800_quarterGyr_q6",
+          "configuration_sha256": "57eea94fbe0943c266ebd8a384b36992d84ba9891e14fb8d749239cc732c1f1e",
+          "maximum_step_years": 250000000.0
+        }
+      ]
+    },
+    {
+      "mass_Msun": 0.0582,
+      "age_Gyr": 80.22701299682316,
+      "Teff_K": 1353.1144714990307,
+      "nuclear_fraction": 1.0708853341102442,
+      "reached_1Tyr": false,
+      "stop": "native envelope thermal reservoir fraction 0.01885 exceeds assessed limit 0.01",
+      "case": "z300_f2_m0.05820_long1000",
+      "configuration_sha256": "54221da635094393058a79c0c1d22a72ae181b83595a0b784bd44ee0fe176e02",
+      "maximum_step_Gyr": 0.25,
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05820_early",
+          "configuration_sha256": "7662b52db9ea894018c8b3a22881fc89f5f49f4c925d6cef66981a2ac8031870",
+          "maximum_step_years": 100000000.0
+        },
+        {
+          "case": "z300_f2_m0.05820_long1000",
+          "configuration_sha256": "54221da635094393058a79c0c1d22a72ae181b83595a0b784bd44ee0fe176e02",
+          "maximum_step_years": 250000000.0
+        }
+      ]
     },
     {
       "mass_Msun": 0.05825,
-      "age_Gyr": 143.7954838190083,
-      "Teff_K": 1493.2315486477157,
-      "nuclear_fraction": 1.0163723188654763,
+      "age_Gyr": 128.83218855734893,
+      "Teff_K": 1459.4428776394914,
+      "nuclear_fraction": 1.018908550246116,
       "reached_1Tyr": false,
-      "case": "z300_f2_m0.05825_envelope_3e4_quarterGyr",
+      "stop": "native envelope thermal reservoir fraction 0.0148 exceeds assessed limit 0.01",
+      "case": "z300_f2_m0.05825_long1000",
+      "configuration_sha256": "97cf03af65e8ccfd040d8eac71204811779130bcf5299fd097431a6b18cb9e26",
       "maximum_step_Gyr": 0.25,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "152b77971814aa5a00849e9135574279bcae2a6f65cb894605aa611e56798200",
-      "envelope_mass_fraction": 0.0003
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05825_early",
+          "configuration_sha256": "0e5b75677c07fa3438f280e0ea9a39bbda278a299782b733442f9aacc64a7f95",
+          "maximum_step_years": 100000000.0
+        },
+        {
+          "case": "z300_f2_m0.05825_long1000",
+          "configuration_sha256": "97cf03af65e8ccfd040d8eac71204811779130bcf5299fd097431a6b18cb9e26",
+          "maximum_step_years": 250000000.0
+        }
+      ]
+    },
+    {
+      "mass_Msun": 0.0583,
+      "age_Gyr": 329.14783228468644,
+      "Teff_K": 1853.6184795193242,
+      "nuclear_fraction": 1.000983415592176,
+      "reached_1Tyr": false,
+      "stop": "repeated step rejection: envelope surface Teff=1853.620306 logg=5.220499: pressure family: H/He mismatch exceeds declared domain",
+      "case": "z300_f2_m0.05830_long1000",
+      "configuration_sha256": "2714023852c2d92d84f105f778d83d1561402fbb3b3065425c25e1fc27b3043e",
+      "maximum_step_Gyr": 0.25,
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05830_early",
+          "configuration_sha256": "818cfdcb9f524a206433a43bc3002b37a8bd57e1b5a0170c7ce32453ccc93e39",
+          "maximum_step_years": 100000000.0
+        },
+        {
+          "case": "z300_f2_m0.05830_long1000",
+          "configuration_sha256": "2714023852c2d92d84f105f778d83d1561402fbb3b3065425c25e1fc27b3043e",
+          "maximum_step_years": 250000000.0
+        }
+      ]
     },
     {
       "mass_Msun": 0.0585,
@@ -87,10 +269,18 @@
       "Teff_K": 1123.3815796526903,
       "nuclear_fraction": 1.0001121328470821,
       "reached_1Tyr": true,
+      "stop": "requested age",
       "case": "z300_f2_m0.05850_halfGyr_Z16",
+      "configuration_sha256": "f7bacf80af14e77eb181e8ed684a975c334c13552ee58f26901a1e618ce8e907",
       "maximum_step_Gyr": 0.5,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "f7bacf80af14e77eb181e8ed684a975c334c13552ee58f26901a1e618ce8e907"
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05850_halfGyr_Z16",
+          "configuration_sha256": "f7bacf80af14e77eb181e8ed684a975c334c13552ee58f26901a1e618ce8e907",
+          "maximum_step_years": 500000000.0
+        }
+      ]
     },
     {
       "mass_Msun": 0.05875,
@@ -98,10 +288,18 @@
       "Teff_K": 1142.444680509915,
       "nuclear_fraction": 1.0001250149371437,
       "reached_1Tyr": true,
+      "stop": "requested age",
       "case": "z300_f2_m0.05875_terayear",
+      "configuration_sha256": "427095577f54d7711280cb7a90c1410237b28c365e9dda39de7a1754c17d5802",
       "maximum_step_Gyr": 2.0,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "427095577f54d7711280cb7a90c1410237b28c365e9dda39de7a1754c17d5802"
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05875_terayear",
+          "configuration_sha256": "427095577f54d7711280cb7a90c1410237b28c365e9dda39de7a1754c17d5802",
+          "maximum_step_years": 2000000000.0
+        }
+      ]
     },
     {
       "mass_Msun": 0.059,
@@ -109,10 +307,18 @@
       "Teff_K": 1161.4869227299125,
       "nuclear_fraction": 1.0001137375742568,
       "reached_1Tyr": true,
+      "stop": "requested age",
       "case": "z300_f2_m0.05900_terayear",
+      "configuration_sha256": "b3d141dbe0551f9cf4b2972ad4d6743e45b3e4d598c7cf74c50c928a16fd03ce",
       "maximum_step_Gyr": 2.0,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "b3d141dbe0551f9cf4b2972ad4d6743e45b3e4d598c7cf74c50c928a16fd03ce"
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05900_terayear",
+          "configuration_sha256": "b3d141dbe0551f9cf4b2972ad4d6743e45b3e4d598c7cf74c50c928a16fd03ce",
+          "maximum_step_years": 2000000000.0
+        }
+      ]
     },
     {
       "mass_Msun": 0.05925,
@@ -120,10 +326,18 @@
       "Teff_K": 1180.029326727184,
       "nuclear_fraction": 1.0000489089074285,
       "reached_1Tyr": true,
+      "stop": "requested age",
       "case": "z300_f2_m0.05925_terayear",
+      "configuration_sha256": "248b7ae5cf2594d10a0733e4e916cf8d409c0c1b3660ce1c9d8a3062c73e51a4",
       "maximum_step_Gyr": 2.0,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "248b7ae5cf2594d10a0733e4e916cf8d409c0c1b3660ce1c9d8a3062c73e51a4"
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05925_terayear",
+          "configuration_sha256": "248b7ae5cf2594d10a0733e4e916cf8d409c0c1b3660ce1c9d8a3062c73e51a4",
+          "maximum_step_years": 2000000000.0
+        }
+      ]
     },
     {
       "mass_Msun": 0.0595,
@@ -131,10 +345,18 @@
       "Teff_K": 1198.058325356083,
       "nuclear_fraction": 0.9999328595609471,
       "reached_1Tyr": true,
+      "stop": "requested age",
       "case": "z300_f2_m0.05950_terayear",
+      "configuration_sha256": "5c2d9dd285e7b1bde116f617e879831357f98c82ba54739ec2851ab4805cc402",
       "maximum_step_Gyr": 2.0,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "5c2d9dd285e7b1bde116f617e879831357f98c82ba54739ec2851ab4805cc402"
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05950_terayear",
+          "configuration_sha256": "5c2d9dd285e7b1bde116f617e879831357f98c82ba54739ec2851ab4805cc402",
+          "maximum_step_years": 2000000000.0
+        }
+      ]
     },
     {
       "mass_Msun": 0.06,
@@ -142,10 +364,18 @@
       "Teff_K": 1234.0877080182304,
       "nuclear_fraction": 1.0000649132072106,
       "reached_1Tyr": true,
+      "stop": "requested age",
       "case": "z300_f2_m0.06000_terayear",
+      "configuration_sha256": "68523329bed868a4d4c305ccf892db65d3f5c284091c7a440728e501011d07f9",
       "maximum_step_Gyr": 2.0,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "68523329bed868a4d4c305ccf892db65d3f5c284091c7a440728e501011d07f9"
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.06000_terayear",
+          "configuration_sha256": "68523329bed868a4d4c305ccf892db65d3f5c284091c7a440728e501011d07f9",
+          "maximum_step_years": 2000000000.0
+        }
+      ]
     },
     {
       "mass_Msun": 0.061,
@@ -153,10 +383,23 @@
       "Teff_K": 1309.5429428583157,
       "nuclear_fraction": 1.0001526886815664,
       "reached_1Tyr": true,
+      "stop": "requested age",
       "case": "z300_f2_m0.06100_terayear",
+      "configuration_sha256": "3c5e2d689922dc9450ae6d4c16e19040c77d2e65b032fd57b085c43a01a7870e",
       "maximum_step_Gyr": 2.0,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "3c5e2d689922dc9450ae6d4c16e19040c77d2e65b032fd57b085c43a01a7870e"
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.06100",
+          "configuration_sha256": "45c21cc45cdb98feaac91bc184a4f1d4f7886d4b2791844f49ec38f54d22b8cc",
+          "maximum_step_years": 2000000000.0
+        },
+        {
+          "case": "z300_f2_m0.06100_terayear",
+          "configuration_sha256": "3c5e2d689922dc9450ae6d4c16e19040c77d2e65b032fd57b085c43a01a7870e",
+          "maximum_step_years": 2000000000.0
+        }
+      ]
     },
     {
       "mass_Msun": 0.064,
@@ -164,10 +407,23 @@
       "Teff_K": 1534.439504479648,
       "nuclear_fraction": 1.0000490150515398,
       "reached_1Tyr": true,
+      "stop": "requested age",
       "case": "z300_f2_m0.06400_terayear",
+      "configuration_sha256": "822ae1a2a82ba0cf630da14782adc251c65b2332a5a61469a0055f465dabbf92",
       "maximum_step_Gyr": 2.0,
-      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "822ae1a2a82ba0cf630da14782adc251c65b2332a5a61469a0055f465dabbf92"
+      "running": false,
+      "lineage": [
+        {
+          "case": "z300_f2_m0.06400",
+          "configuration_sha256": "f7be28c229a1fdc5144bebd5a031489325631436d129eb663f6977db1511f6d5",
+          "maximum_step_years": 2000000000.0
+        },
+        {
+          "case": "z300_f2_m0.06400_terayear",
+          "configuration_sha256": "822ae1a2a82ba0cf630da14782adc251c65b2332a5a61469a0055f465dabbf92",
+          "maximum_step_years": 2000000000.0
+        }
+      ]
     }
   ],
   "inputs": [
@@ -274,5 +530,7 @@
     "color": "photospheric Teff in K",
     "age_axis": "shared logarithmic age in Gyr",
     "same_accepted_states": true
-  }
+  },
+  "tracks_sha256": "c2f5ce8786bb9aab656f2812aaa05fc7c762deccafc4056a6f90913fe17d0eed",
+  "mixing": "Instantaneous Ledoux convection. No semiconvective transport."
 }
