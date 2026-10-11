@@ -1,0 +1,68 @@
+{
+  "peak_controls": [
+    {
+      "maximum_step_Myr": 100,
+      "start_age_Gyr": 5,
+      "achieved_age_Gyr": 20.0,
+      "peak_age_Gyr": 6.625,
+      "peak_nuclear_fraction": 0.7197122385159657
+    },
+    {
+      "maximum_step_Myr": 50,
+      "start_age_Gyr": 5,
+      "achieved_age_Gyr": 20.0,
+      "peak_age_Gyr": 6.6,
+      "peak_nuclear_fraction": 0.7197763174514408
+    },
+    {
+      "maximum_step_Myr": 25,
+      "start_age_Gyr": 5,
+      "achieved_age_Gyr": 20.0,
+      "peak_age_Gyr": 6.6,
+      "peak_nuclear_fraction": 0.7198332810102275
+    }
+  ],
+  "energy_checks": [
+    {
+      "old_age_Gyr": 127.35024214585931,
+      "new_age_Gyr": 127.60024214585931,
+      "Lmean_erg_s": 1.250598514630021e+29,
+      "dU_dt_erg_s": -1.697071011309458e+27,
+      "dOmega_dt_erg_s": 3.8675966467592617e+27,
+      "PdV_dt_erg_s": 3.8675162821945275e+27,
+      "stored_power_over_L": 0.017355894877997158,
+      "heat_power_over_L": 0.01735525226916792,
+      "U_old_erg": 5.111115547394402e+46,
+      "U_new_erg": 5.109776660190742e+46,
+      "Omega_old_erg": -1.156328119732231e+47,
+      "Omega_new_erg": -1.1560229895623832e+47,
+      "envelope_mass_fraction": 0.0003,
+      "expected_nuclear_excess_over_mean_L": 0.017355847943077065,
+      "radius_fraction_change": 0.00026018291895923973,
+      "central_T_fraction_change": 0.0007987169816563444,
+      "note": "Trapezoidal endpoint power comparison; envelope mass treated at base. Diagnostic, not an independent atmosphere energy integration.",
+      "mass_Msun": 0.05825
+    },
+    {
+      "old_age_Gyr": 129.11256680779812,
+      "new_age_Gyr": 129.11257007036187,
+      "Lmean_erg_s": 1.4430023078705047e+29,
+      "dU_dt_erg_s": -2.1269046078128652e+27,
+      "dOmega_dt_erg_s": 4.8354622246845666e+27,
+      "PdV_dt_erg_s": 4.835257467263429e+27,
+      "stored_power_over_L": 0.0187702930348658,
+      "heat_power_over_L": 0.018768874066787785,
+      "U_old_erg": 5.015193482150748e+46,
+      "U_new_erg": 5.015193460252415e+46,
+      "Omega_old_erg": -1.1348361873523116e+47,
+      "Omega_new_erg": -1.1348361823737834e+47,
+      "envelope_mass_fraction": 0.001,
+      "expected_nuclear_excess_over_mean_L": 0.01876903860772188,
+      "radius_fraction_change": 5.818787451872254e-09,
+      "central_T_fraction_change": 1.1462724103239452e-08,
+      "note": "Trapezoidal endpoint power comparison; envelope mass treated at base. Diagnostic, not an independent atmosphere energy integration.",
+      "mass_Msun": 0.05825
+    }
+  ],
+  "scope": "Peak controls share a 5-Gyr initial state. Energy checks use the same EOS and base-envelope approximation as the tracks, not independent validation of those physical inputs."
+}

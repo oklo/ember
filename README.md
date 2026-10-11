@@ -13,8 +13,9 @@ and helium-white-dwarf cooling.
 - Optional quantum-ion thermodynamics, crystallization and latent heat.
 - Double precision and CPU parallelism optimized for Apple silicon.
 
-The code is under development. Full CNO, grain-bearing stellar atmospheres,
-element separation during freezing and extreme-cold evolution remain unfinished. Some tables
+The code is under development. Low-mass boundary studies use external clear
+and cloudy atmosphere tables. Full CNO, element separation during freezing
+and extreme-cold evolution remain unfinished. Some tables
 required for the cooling calculations are still local.
 See [physics and limitations](docs/COLD_REMNANT.md).
 
@@ -36,7 +37,8 @@ it does not currently use Metal or the GPU.
 [Run configuration](docs/LIFETIME_DRIVER.md) ·
 [Working paper](docs/reports/2026-09-27/ember_status_and_future.pdf) ·
 [Paper source](docs/reports/2026-09-27/README.md) ·
-[Cluster and field mass functions](research/mass-functions/README.md)
+[Cluster and field mass functions](research/mass-functions/README.md) ·
+[Hydrogen-burning boundary](research/metallicity-boundary/README.md)
 
 ## License
 

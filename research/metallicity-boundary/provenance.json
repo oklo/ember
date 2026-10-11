@@ -1,0 +1,252 @@
+{
+  "scope": "Interim 3 Zref cloudy boundary; exact age and accepted-state samples. Local table files are not included.",
+  "initial_Y": 0.27,
+  "initial_Z": 0.04944677939595347,
+  "cloud_fsed": 2,
+  "cloud_clearing_Teff_K": [
+    900,
+    1200
+  ],
+  "endpoints": [
+    {
+      "mass_Msun": 0.054,
+      "age_Gyr": 52.6220800466712,
+      "Teff_K": 683.3256971712079,
+      "nuclear_fraction": 9.508494587972868e-05,
+      "reached_1Tyr": false,
+      "case": "z300_f2_m0.05400_dense_q6",
+      "maximum_step_Gyr": 2.0,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "97b4a4ca8b5acef2f53a77326197370ad598be8932fe9eb9a36240580bf9e73f"
+    },
+    {
+      "mass_Msun": 0.056,
+      "age_Gyr": 54.05082605721229,
+      "Teff_K": 715.6252261284274,
+      "nuclear_fraction": 0.00018310642041134378,
+      "reached_1Tyr": false,
+      "case": "z300_f2_m0.05600_dense_q6",
+      "maximum_step_Gyr": 2.0,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "e5e06005b10320586bcf291ad5ab7251f02fb664f05f53a292133cb06c2e308b"
+    },
+    {
+      "mass_Msun": 0.057,
+      "age_Gyr": 57.04796857317828,
+      "Teff_K": 734.8007856876546,
+      "nuclear_fraction": 0.00026527169294783765,
+      "reached_1Tyr": false,
+      "case": "z300_f2_m0.05700_extended_reset",
+      "maximum_step_Gyr": 2.0,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "b7f814b7cff5a623ef2d101aa13b76afeeb727c79708afa51acdcce8bbd3a6fb"
+    },
+    {
+      "mass_Msun": 0.058,
+      "age_Gyr": 81.87098239524717,
+      "Teff_K": 778.5726819223883,
+      "nuclear_fraction": 0.0006354442059911026,
+      "reached_1Tyr": false,
+      "case": "z300_f2_m0.05800_quarterGyr_q6",
+      "maximum_step_Gyr": 0.25,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "57eea94fbe0943c266ebd8a384b36992d84ba9891e14fb8d749239cc732c1f1e"
+    },
+    {
+      "mass_Msun": 0.05825,
+      "age_Gyr": 129.11257007036187,
+      "Teff_K": 1460.0564596861777,
+      "nuclear_fraction": 1.0187690536455036,
+      "reached_1Tyr": false,
+      "case": "z300_f2_m0.05825_feature_quarterGyr",
+      "maximum_step_Gyr": 0.25,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "8a180958cf6f0e9a5198b034f842cae015050191fd031842353f17c36c58a26e"
+    },
+    {
+      "mass_Msun": 0.0585,
+      "age_Gyr": 1000.0,
+      "Teff_K": 1123.3815796526903,
+      "nuclear_fraction": 1.0001121328470821,
+      "reached_1Tyr": true,
+      "case": "z300_f2_m0.05850_halfGyr_Z16",
+      "maximum_step_Gyr": 0.5,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "f7bacf80af14e77eb181e8ed684a975c334c13552ee58f26901a1e618ce8e907"
+    },
+    {
+      "mass_Msun": 0.05875,
+      "age_Gyr": 1000.0,
+      "Teff_K": 1142.444680509915,
+      "nuclear_fraction": 1.0001250149371437,
+      "reached_1Tyr": true,
+      "case": "z300_f2_m0.05875_terayear",
+      "maximum_step_Gyr": 2.0,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "427095577f54d7711280cb7a90c1410237b28c365e9dda39de7a1754c17d5802"
+    },
+    {
+      "mass_Msun": 0.059,
+      "age_Gyr": 1000.0,
+      "Teff_K": 1161.4869227299125,
+      "nuclear_fraction": 1.0001137375742568,
+      "reached_1Tyr": true,
+      "case": "z300_f2_m0.05900_terayear",
+      "maximum_step_Gyr": 2.0,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "b3d141dbe0551f9cf4b2972ad4d6743e45b3e4d598c7cf74c50c928a16fd03ce"
+    },
+    {
+      "mass_Msun": 0.05925,
+      "age_Gyr": 1000.0,
+      "Teff_K": 1180.029326727184,
+      "nuclear_fraction": 1.0000489089074285,
+      "reached_1Tyr": true,
+      "case": "z300_f2_m0.05925_terayear",
+      "maximum_step_Gyr": 2.0,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "248b7ae5cf2594d10a0733e4e916cf8d409c0c1b3660ce1c9d8a3062c73e51a4"
+    },
+    {
+      "mass_Msun": 0.0595,
+      "age_Gyr": 1000.0,
+      "Teff_K": 1198.058325356083,
+      "nuclear_fraction": 0.9999328595609471,
+      "reached_1Tyr": true,
+      "case": "z300_f2_m0.05950_terayear",
+      "maximum_step_Gyr": 2.0,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "5c2d9dd285e7b1bde116f617e879831357f98c82ba54739ec2851ab4805cc402"
+    },
+    {
+      "mass_Msun": 0.06,
+      "age_Gyr": 1000.0,
+      "Teff_K": 1234.0877080182304,
+      "nuclear_fraction": 1.0000649132072106,
+      "reached_1Tyr": true,
+      "case": "z300_f2_m0.06000_terayear",
+      "maximum_step_Gyr": 2.0,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "68523329bed868a4d4c305ccf892db65d3f5c284091c7a440728e501011d07f9"
+    },
+    {
+      "mass_Msun": 0.061,
+      "age_Gyr": 1000.0,
+      "Teff_K": 1309.5429428583157,
+      "nuclear_fraction": 1.0001526886815664,
+      "reached_1Tyr": true,
+      "case": "z300_f2_m0.06100_terayear",
+      "maximum_step_Gyr": 2.0,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "3c5e2d689922dc9450ae6d4c16e19040c77d2e65b032fd57b085c43a01a7870e"
+    },
+    {
+      "mass_Msun": 0.064,
+      "age_Gyr": 1000.0,
+      "Teff_K": 1534.439504479648,
+      "nuclear_fraction": 1.0000490150515398,
+      "reached_1Tyr": true,
+      "case": "z300_f2_m0.06400_terayear",
+      "maximum_step_Gyr": 2.0,
+      "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+      "configuration_sha256": "822ae1a2a82ba0cf630da14782adc251c65b2332a5a61469a0055f465dabbf92"
+    }
+  ],
+  "inputs": [
+    {
+      "setting": "eos",
+      "filename": "family_q6_candidate.bin",
+      "sha256": "2ae555a519751ef9c458cd1d6d342413c552412841e03ac86ac5850d5e1cebca"
+    },
+    {
+      "setting": "opacity_low",
+      "filename": "opacity_low.dat",
+      "sha256": "d72e8ab92a5699a30c6421adb56f69c339ab114b231ea7c47e448c515f7dad08"
+    },
+    {
+      "setting": "opacity_warm",
+      "filename": "opacity_warm.dat",
+      "sha256": "046fa47a5ec6386d52cfee8fe572e9d5bd1e823b0f9cc0af56d987d0a5191a09"
+    },
+    {
+      "setting": "opacity_bridge",
+      "filename": "opacity_bridge.dat",
+      "sha256": "19cc8c894695a1a3b02b1fb674526b03a85a4bfee3ac5854f7d8d1a2e2cdcf11"
+    },
+    {
+      "setting": "opacity_hot",
+      "filename": "opacity_hot.dat",
+      "sha256": "c100e70621592ccf603b5f94a74011091a9dbc57b74146d8628663077114fa9e"
+    },
+    {
+      "setting": "conduction",
+      "filename": "conduction_lowrho_v1.dat",
+      "sha256": "8aafb8b6bfe3fa5a54f3d82e16ca08c1fe6fafa13cef59b31fec3603517edcea"
+    },
+    {
+      "setting": "atmosphere",
+      "filename": "grid_pms_src_v3.dat",
+      "sha256": "b60ff70c553e01792c3b352503ca74defc2a4da7723b3b04f6160c3b643a0b09"
+    },
+    {
+      "setting": "collisions",
+      "filename": "collisions_eta4096_ion5.dat",
+      "sha256": "737193df8a3a00bbaa057a5a0dcdcf97b838ca3085a0112b08c93d360306dd1d"
+    },
+    {
+      "setting": "composition",
+      "filename": "z300_primordial.dat",
+      "sha256": "d2ccc983264a4f6be0681653f3ef3d6b42de18ebfc1813f9e2ce1a5a54d1a7da"
+    },
+    {
+      "setting": "opacity_hydrogen_response",
+      "filename": "opacity_hydrogen_response.dat",
+      "sha256": "766af68f5de15eeb64b0bf5dee5caf7bba24f076fcc555cef4b41e539bb7b641"
+    },
+    {
+      "setting": "opacity_cold_dense",
+      "filename": "rosseland.dat",
+      "sha256": "d05e8b3c038ac5d20dacff3c0f013557f745e237cf91ed5f8a6e6b87b0f9edd0"
+    },
+    {
+      "setting": "envelope_gibbs_hydrogen",
+      "filename": "potential.dat",
+      "sha256": "c68fe0b4f6ed7ed4514451332f1e54d59aaba3dacd87e8ec1c1b233cc73d199f"
+    },
+    {
+      "setting": "envelope_gibbs_helium",
+      "filename": "potential.dat",
+      "sha256": "3604597e39760be019f7afe6ade288fdee9b7e8eb5d9e93285127f70479ae503"
+    },
+    {
+      "setting": "envelope_gibbs_hydrogen_warm",
+      "filename": "potential.dat",
+      "sha256": "a393101695281d6dc0a5a57a53a010e05b012f48248eca9e2d1276cc78422585"
+    },
+    {
+      "setting": "envelope_gibbs_helium_warm",
+      "filename": "potential.dat",
+      "sha256": "d13cc5b46f316fa7b6a5458181da44cdb82c1a864479333efff082edabc936e3"
+    },
+    {
+      "setting": "atmosphere_pressure_matched",
+      "filename": "atmosphere_f2_family_extra03.dat",
+      "sha256": "bf9746b387c0c03015a9ab829afb8a35bab6807e347ebdb6964e37a4f00a4334"
+    },
+    {
+      "setting": "eos",
+      "filename": "family_z16_candidate.bin",
+      "sha256": "71e574e4e206e5f5b0ce10d557f9834a8803c23011c6c3b715bf8096c5925e0a"
+    },
+    {
+      "setting": "eos",
+      "filename": "family_g6e_boundary.bin",
+      "sha256": "802d76ffb4f076545963aa4569af6063d17bef66f0e73db8c5fc47d052caa508"
+    },
+    {
+      "setting": "atmosphere_pressure_matched",
+      "filename": "atmosphere_f2_family.dat",
+      "sha256": "5b5fafa8d97804067dd8d6ff09059a93da863dabb695871d6ffed392edd35f32"
+    }
+  ]
+}
