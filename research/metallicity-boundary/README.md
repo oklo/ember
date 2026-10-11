@@ -11,9 +11,10 @@ Bars span tested cooling and burning masses. Cooling requires nuclear support
 below 0.1%; sustained burning requires 99–101% support at 1 Tyr, varying by
 less than 2 percentage points over the final 50 Gyr. These are finite-age
 numerical brackets, not statistical confidence intervals. Hollow diamonds
-are unfinished trials. Asterisks flag pairs with different EOS coverage or
-envelope resolution; matched controls are pending. Physical uncertainties
-are additional.
+are unfinished trials. Interval ends now use matched EOS and envelope settings.
+At three times Z_ref, fresh controls confirm the 0.0580–0.0585-solar-mass cloudy
+interval. At one third Z_ref, the cloudy interval narrows to 0.0695–0.0705.
+Physical uncertainties are additional.
 
 ![Cloudy tracks at three times the reference metallicity](boundary.png)
 
@@ -36,9 +37,11 @@ transport between mixing regimes; that prescription remains uncertain.
 Convective-region mergers produce sharp excursions. A smaller-timestep
 0.05820 calculation retains the dip and recovery, but its minimum ratio
 changes from 0.8320 to 0.8044. At the common 82.99-Gyr endpoint, luminosity
-differs by 1.392% and temperature by 3.036 K. One additional cell mixes;
-alternating single-cell stable layers remain unresolved. These checks
-support a thermal response within the model, not a converged physical surge.
+differs by 1.392% and temperature by 3.036 K. Changing the solver prediction
+history earlier on the same mesh moves the
+dip to 84.65 Gyr and deepens it to 0.6639. Alternating single-cell stable
+layers remain unresolved. The detailed excursions are not validated
+physical predictions.
 
 The nearby-metallicity tests hold mass at 0.05815 solar masses and helium
 fixed. Their endpoints have unequal ages. The 3.03-Z_ref case includes a

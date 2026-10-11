@@ -58,7 +58,10 @@ def main():
     ax.legend(handles=legend,loc='lower left',bbox_to_anchor=(.015,.105),frameon=False,fontsize=11)
     fig.text(.12,.958,'Ember  |  Hydrogen-burning boundary',fontsize=17)
     fig.text(.12,.10,'Bars span demonstrated cooling and sustained burning at 1 Tyr; they are not statistical error bars.',fontsize=10.5)
-    fig.text(.12,.067,'* EOS/envelope settings differ at interval ends; matched repeats pending. Physical uncertainties are separate.',fontsize=10)
+    note=('* EOS/envelope settings differ at interval ends; matched repeats pending. Physical uncertainties are separate.'
+          if any(b['unmatched_eos_or_envelope'] for b in bounds)
+          else 'Interval ends use matched EOS/envelope settings. Atmosphere and mixing uncertainties are additional.')
+    fig.text(.12,.067,note,fontsize=10)
     for ext in ['png','pdf']:
         fig.savefig(OUT/f'transition_mass.{ext}',dpi=220)
     plt.close(fig)

@@ -177,5 +177,87 @@
       "integrated_Lnuc_Lsun_year": 69130.11850059583
     },
     "scope": "Same original checkpoint and physical inputs. First100Myr refined to2Myr maximum steps, remainder to20Myr, against250Myr. The mesh and instantaneous mixing are unchanged. Spatial convergence remains unproved."
+  },
+  "matched_boundary_controls": [
+    {
+      "case": "z100_nc_m0.07075_long100",
+      "age_years": 69282196458.51753,
+      "nuclear_fraction": 0.0007349425306585268,
+      "outcome": "cooling",
+      "stop_receipt_sha256": "d56472da89b4437e20d3154bb5269cb6f37c84736580fcab865e17c1a28da97c"
+    },
+    {
+      "case": "z300_f2_m0.05800_long100",
+      "age_years": 78706445312.5,
+      "nuclear_fraction": 0.0008578778662197476,
+      "outcome": "cooling",
+      "stop_receipt_sha256": "2fc00a165c0a5d93d6168d4e0ef5da35db9fad76ff25296ed037d1c7c289a9c4"
+    },
+    {
+      "case": "z300_f2_m0.05850_long1000",
+      "age_years": 1000000000000,
+      "nuclear_fraction": 1.0000989916790073,
+      "outcome": "supported_1Tyr",
+      "final_50Gyr_nuclear_fraction_span": 4.071354303847308e-05,
+      "report_sha256": "180c699117d1e731a73dd2d8a8db753911e49d5b25420cd0a6f2b78122d6d697"
+    }
+  ],
+  "predictor_history_merger_sensitivity": {
+    "age_years": 82993679325.86021,
+    "new_predictor_off_since_years": 20000000000.0,
+    "original_predictor_off_since_years": 80227012996.82317,
+    "comparison": {
+      "nuclear_fraction": {
+        "original": 0.8678463863371817,
+        "predictor_off_earlier_interpolated": 1.0442867364168618
+      },
+      "luminosity_Lsun": {
+        "original": 2.782772497932338e-05,
+        "predictor_off_earlier_interpolated": 2.956141679131096e-05
+      },
+      "central_T_K": {
+        "original": 2849624.431484536,
+        "predictor_off_earlier_interpolated": 3008197.4033706733
+      },
+      "H_mass_g": {
+        "original": 7.868610040029588e+31,
+        "predictor_off_earlier_interpolated": 7.868540655887569e+31
+      },
+      "He3_mass_g": {
+        "original": 8.032180289797984e+28,
+        "predictor_off_earlier_interpolated": 8.101564427117872e+28
+      },
+      "convective_mass_fraction": {
+        "original": 0.9718436390986991,
+        "predictor_off_earlier_interpolated": 0.8922505866630366
+      },
+      "radiative_boundaries": {
+        "original": 15,
+        "predictor_off_earlier_interpolated": 23.0
+      }
+    },
+    "scope": "Same mass, mesh, physical inputs and tolerances; changing the earlier predictor changes the accepted time path and convective mergers. Not a converged physical pulse.",
+    "new_path_dip": {
+      "minimum_nuclear_fraction": 0.6638507724438757,
+      "age_years": 84647124301.66599,
+      "final_age_years": 120000000000
+    }
+  },
+  "low_metallicity_cloudy_upper_bound": {
+    "mass_Msun": 0.0705,
+    "metallicity": "z033",
+    "age_years": 1000000000000,
+    "nuclear_fraction": 1.0000810705456793,
+    "final_50Gyr_span": 0.00010250397502598041,
+    "history_sha256": "32926c4eb3b348dbf509bbfd8fec38ac7bbc8ecb5e984d81a07284bf58f335f7"
+  },
+  "finite_convection_merger_test": {
+    "mass_Msun": 0.0582,
+    "start_age_years": 80227012996.82317,
+    "end_age_years": 80327012996.82317,
+    "maximum_relative_luminosity_difference": 2.9e-05,
+    "convective_boundaries_identical": true,
+    "scope": "Ordinary finite MLT convection compared with instantaneous mixing from one pre-merger state. Does not validate boundary placement or earlier evolution.",
+    "source_report_sha256": "914828c88ab15ff39bb425a235e249023ad5b1aee7270fafbf2dbad266bedabe"
   }
 }
