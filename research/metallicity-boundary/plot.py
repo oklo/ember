@@ -35,7 +35,7 @@ endpoints=[]
 for (m,h),color in zip(sorted(tracks.items()),colors):
  x=np.array([a['age_Gyr'] for a in h]);y=np.array([a['nuclear_fraction']for a in h]);mask=x>=.05
  ax.plot(x[mask],y[mask],color=color,lw=2 if m==.05825 else 1.6,label=f'{m:.4g}')
- last=h[-1];full=last['age_Gyr']>=1000*(1-1e-10);marker='s' if metadata[m].get('running') else 'o'
+ last=h[-1];full=last['age_Gyr']>=1000*(1-1e-10) or metadata[m].get('stop','').startswith('nuclear fraction below');marker='s' if metadata[m].get('running') else 'o'
  ax.plot(x[-1],y[-1],marker=marker,ms=5,mec=color,mfc=color if full else 'white',zorder=5)
  ll=np.log10([a['luminosity_Lsun'] for a in h]);tt=np.array([a['Teff_K']for a in h])
  xy=np.column_stack((x[mask],ll[mask]));segments=np.stack((xy[:-1],xy[1:]),axis=1)
@@ -46,9 +46,9 @@ for (m,h),color in zip(sorted(tracks.items()),colors):
  endpoints.append((m,x[-1],ll[-1],full))
 ax.set(xscale='log',xlim=(.05,1150),ylim=(-.025,max(1.07,1.035*max(a['nuclear_fraction'] for h in tracks.values() for a in h if a['age_Gyr']>=.05))),ylabel=r'$L_{\rm nuc}/L$')
 ax.axhline(1,color='.35',ls=':',lw=.8)
-ax.text(.025,.88,r'$3Z_{\rm ref}$ · cloudy, $f_{\rm sed}=2$',transform=ax.transAxes,va='top',fontsize=14)
+ax.text(.025,.955,r'$3Z_{\rm ref}$ · cloudy, $f_{\rm sed}=2$',transform=ax.transAxes,va='top',fontsize=14)
 ax.legend(title=r'Mass ($M_\odot$)',loc='upper left',bbox_to_anchor=(1.015,1),frameon=False,labelspacing=.38)
-ax.text(1.03,-.025,'Filled: 1 Tyr\nOpen: incomplete',transform=ax.transAxes,fontsize=10.5,linespacing=1.5,va='top')
+ax.text(1.03,-.10,'Filled: 1 Tyr or\nfaded below 0.1%\nOpen: incomplete',transform=ax.transAxes,fontsize=10.5,linespacing=1.5,va='top')
 lum.set(ylim=(-6.2,-2.55),xlabel='Age (Gyr)',ylabel=r'$\log_{10}(L/L_\odot)$')
 lum.set_xticks([.1,1,10,100,1000],labels=['0.1','1','10','100','1000'])
 for a in [ax,lum]:a.grid(alpha=.13)

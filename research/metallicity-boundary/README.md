@@ -1,102 +1,69 @@
 # Hydrogen burning near the stellar boundary
 
-These preliminary Ember calculations follow objects near the hydrogen-burning
-limit at three times the reference metal abundance: Z=0.04945, Y=0.27.
-The cloudy atmosphere uses f_sed=2, with a prescribed transition to clear
-atmospheres between 900 and 1200 K.
+Ember tracks compare clear and cloudy atmospheres at five initial metal
+abundances, from one third to three times Z_ref=0.01648, with Y=0.27.
+The cloudy case uses f_sed=2 and clears between 900 and 1200 K. All tracks
+begin on Hayashi contraction with deuterium.
 
-![Nuclear luminosity relative to emitted luminosity](boundary.png)
+![Transition mass and metallicity](transition_mass.png)
 
-The upper panel contains 18 masses; eight reach 1 Tyr. Open endpoints mark
-incomplete calculations. Accepted states are connected without smoothing
-or extrapolated tails. The lower panel shows log10(L/L_sun) for the same models,
-colored by photospheric temperature and sharing the age axis. The displayed
-0.057 curve uses 50-Myr early steps,
-then 100-Myr steps through the peak and 250-Myr steps afterward. It stops
-at 56.12 Gyr on atmospheric H/He coverage. Steps are smaller for the displayed 0.058 and 0.05825 tracks
-(250 Myr maximum), and for 0.0585 (500 Myr); the remaining full curves allow
-2 Gyr. The 0.051–0.054-solar-mass runs use at most 50 Myr through their
-nuclear maxima. The 0.0582, 0.05825 and 0.0583 runs use at most 100 Myr
-to 20 Gyr, then 250 Myr. All three exceed unit nuclear fraction. Their
-maxima so far are 1.071, 1.027 and 1.008, respectively. The survey
-follows burning objects to at least 1 Tyr,
-rather than ending when nuclear power first approaches surface luminosity.
+Bars span tested cooling and burning masses. Cooling requires nuclear
+support below 0.1%; sustained burning requires 99–101% support at 1 Tyr,
+with less than 2 percentage points of variation over the final 50 Gyr.
+These are finite-age numerical brackets, not statistical confidence
+intervals. Hollow diamonds are unfinished trials. Asterisks flag endpoint
+pairs with different EOS coverage or envelope resolution; matched controls
+are pending. Atmospheric and mixing uncertainties are additional.
 
-## What the checks establish
+![Cloudy tracks at three times the reference metal abundance](boundary.png)
 
-- The original 0.058-solar-mass upturn changes qualitatively with timestep.
-  Smaller steps lead to fading, so the larger-step upturn is not a reliable
-  physical result. The time of fading is still sensitive to the step size.
-- Around the 0.057-solar-mass nuclear maximum, matched 100-, 50- and 25-Myr
-  steps give peak ratios of 0.7197, 0.7198 and 0.7198 at about 6.6 Gyr.
-  These controls share the same 5-Gyr starting model; they test the maximum,
-  not accumulated error in the earlier evolution.
-- The 0.05825-solar-mass overshoot survives a timestep reduction: maxima
-  are 1.022 and 1.027 with 500- and 250-Myr steps. Nuclear power may exceed
-  emitted luminosity while the object expands. Near 129 Gyr, the 1.877%
-  excess agrees with the change in internal plus gravitational energy. A
-  calculation resolving more of the envelope also retains an energy-balanced
-  excess. These checks use the same physical inputs as the evolution; the
-  detailed amplitude, timing and atmosphere dependence remain under test.
+The detailed figure contains 22 masses at Z=0.04945. Filled endpoints mark
+1 Tyr or the fading cutoff; open endpoints are incomplete. The lower panel
+shows luminosity colored by effective temperature. Lines connect saved
+models without smoothing or extrapolated tails.
 
-![Timestep sensitivity at 0.058 solar masses](timestep_comparison.png)
+## Is the nuclear surplus physical?
 
-Fine mass spacing is not a measurement of the physical boundary's uncertainty.
-Atmospheric H/He changes, high-metallicity cloud physics and the additive
-metal EOS remain important limitations. The EOS includes ideal neutral metals
-in the H/He mixture; this is not a validated partial-ionization treatment at
-large interior metal abundance. Atmospheric H/He coverage and the approximation
-used for the outer envelope stop several tracks before 1 Tyr.
+![Mixing and metallicity comparisons](mixing_metallicity.png)
 
-The atmosphere tables also affect the shoulders near 2 Gyr: nuclear power is
-smooth while surface cooling changes slope. The Diamondback authors caution
-that some cloudy-grid irregularities are numerical, so individual bends
-cannot yet be assigned to specific opacity species.
-[Morley et al. 2024](https://arxiv.org/html/2402.00758v1).
+At 0.05825 solar masses, the maximum nuclear-to-surface luminosity ratio is
+1.027 without semiconvection, 1.009 with weak composition mixing, and 1.004
+so far with coupled heat/composition transport. The coupled calculation
+assumes layer height H/d=25 and marginal transport between mixing regimes;
+its effect depends on that uncertain assumption. Small abrupt excursions
+can accompany individual cells joining convection. These results do not
+establish a physical surge.
 
-## Data
+The nearby-metallicity tests hold mass at 0.05815 solar masses and helium
+fixed. They stopped at different ages, so their largest saved ratios are
+not established final peaks. The 3.03-Z_ref case uses a small declared
+atmosphere continuation beyond the native grid.
 
-`tracks.csv`, `early.csv`, `coarse_early.csv` and `timestep_comparison.csv` contain the plotted
-states. `provenance.json` records endpoints and input fingerprints;
-`numerical_checks.json` records the peak and energy checks. The local
-development tables and full stellar checkpoints are not included; these
-files reproduce the figures, not a complete stellar calculation.
+A separating conductive layer allows composition gradients to develop.
+Later, its stability depends on the helium-rich interior beneath the
+hydrogen-rich envelope. Such a layer can undergo oscillatory mixing;
+conduction does not imply complete isolation.
+[Mirouh et al.](https://arxiv.org/abs/1112.4819),
+[Moll et al.](https://arxiv.org/abs/1506.07900).
+[Interior diagram](Ember_boundary_interior.png) and its 744 saved profiles
+show the instantaneous-convection calculation, without semiconvection.
 
-Run `python plot.py` with NumPy and Matplotlib installed to regenerate the
-two mass-comparison PNGs. Machine-readable data retain full precision.
+Useful numerical checks: the 0.057 solar-mass burning maximum agrees to
+0.0001 in matched 50- and 25-Myr tests. The 0.05825 surplus survives halving
+the timestep and resolving more of the envelope; near 129 Gyr its 1.877%
+excess agrees with the change in internal plus gravitational energy.
+However, the 0.058 upturn disappears with shorter timesteps.
+[Timestep comparison](timestep_comparison.png).
 
-The close-mass tracks resolve all but 0.0003 of the mass in the
-evolution calculation. The interior figure below uses a separately saved
-sequence with the same instantaneous-mixing prescription; its provenance
-is distinct from the finer mass survey. No mixing sensitivity is appended
-to either figure.
+Remaining uncertainties include atmospheric H/He response, prescribed cloud
+clearing and the additive ideal-metal EOS. Finer mass spacing does not
+remove them. Atmosphere-table irregularities also affect some early
+shoulders; see [Morley et al.](https://arxiv.org/html/2402.00758v1).
 
-The separating layer first becomes stable through conductive heat transport.
-Later it relies on a composition gradient and appears susceptible to
-oscillatory mixing (semiconvection), which these tracks omit. The persistence
-of the separation and its effect on late nuclear burning remain under test.
-[Mirouh et al. (2012)](https://arxiv.org/abs/1112.4819).
+## Reproduce the figures
 
-## Interior of the borderline model
-
-![Interior evolution](Ember_boundary_interior.png)
-
-The 0.05825-solar-mass calculation develops a nonconvective layer that
-separates a convective center from the mixed envelope. Electron conduction
-dominates photon diffusion in that layer; it is not simply radiative.
-The lower panel enlarges the separating layer and shows hydrogen moving
-outward while the inner material becomes richer in helium and metals.
-The temperature contours are in millions of kelvin.
-
-These 744 saved profiles extend to 143.8 Gyr. They retain instantaneous
-mixing throughout; no later finite-mixing sensitivity is appended. The
-profile replay agrees with the original global history within 0.0024%,
-and its convection map reproduces the reported convective mass fraction.
-The outermost 0.0003 of the mass uses the same approximate envelope as the
-evolution run; the atmosphere itself is not resolved in this diagram.
-Conduction colors compare only photon and electron diffusion, not the
-conductive fraction of total luminosity inside convective regions.
-
-`interior.npz` contains the plotted fields; `interior_provenance.json`
-records definitions and numerical comparisons. Run `python plot_interior.py`
-to regenerate this PNG and PDF.
+Run `python plot.py`, `python plot_transition_mass.py`,
+`python plot_mixing_metallicity.py` and `python plot_interior.py` with NumPy
+and Matplotlib. CSV/NPZ files retain plotted states; JSON records source
+fingerprints, endpoints and assumptions. These reproduce figures, not
+stellar runs: the full physics tables and checkpoints are not included.
