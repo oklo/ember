@@ -10,9 +10,10 @@ atmospheres between 900 and 1200 K.
 The upper panel contains 13 masses; eight reach 1 Tyr. Open circles mark
 incomplete calculations. All accepted states are shown, with straight lines
 between them. The lower panel compares independent 50-Myr-step calculations
-with the coarser early evolution. Those short runs are not joined to older
-tails. Steps are smaller for the displayed 0.058 and 0.05825 tracks
-(250 Myr maximum), and for 0.0585 (500 Myr); the other full curves allow
+with the coarser early evolution. The displayed 0.057 curve follows its fresh 50-Myr early calculation,
+then 100-Myr steps through the peak and 250-Myr steps afterward. It stops
+at 56.12 Gyr on atmospheric H/He coverage. Steps are smaller for the displayed 0.058 and 0.05825 tracks
+(250 Myr maximum), and for 0.0585 (500 Myr); the remaining full curves allow
 2 Gyr. The continuing survey follows burning objects to at least 1 Tyr,
 rather than ending when nuclear power first approaches surface luminosity.
 
@@ -50,7 +51,7 @@ cannot yet be assigned to specific opacity species.
 
 ## Data
 
-`tracks.csv`, `early.csv` and `timestep_comparison.csv` contain the plotted
+`tracks.csv`, `early.csv`, `coarse_early.csv` and `timestep_comparison.csv` contain the plotted
 states. `provenance.json` records endpoints and input fingerprints;
 `numerical_checks.json` records the peak and energy checks. The local
 development tables and full stellar checkpoints are not included; these

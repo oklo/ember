@@ -32,14 +32,31 @@
     },
     {
       "mass_Msun": 0.057,
-      "age_Gyr": 57.04796857317828,
-      "Teff_K": 734.8007856876546,
-      "nuclear_fraction": 0.00026527169294783765,
+      "age_Gyr": 56.11837161555521,
+      "Teff_K": 730.3549877643334,
+      "nuclear_fraction": 0.00024247533512777755,
       "reached_1Tyr": false,
-      "case": "z300_f2_m0.05700_extended_reset",
-      "maximum_step_Gyr": 2.0,
+      "case": "z300_f2_m0.05700_fine_peak_continuation_q6",
+      "maximum_step_Gyr": 0.25,
       "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
-      "configuration_sha256": "b7f814b7cff5a623ef2d101aa13b76afeeb727c79708afa51acdcce8bbd3a6fb"
+      "configuration_sha256": "69c26b8ec73a0e5a64d121cba08db21fd785a71af6842dd467694c14c5fabdab",
+      "lineage": [
+        {
+          "case": "z300_f2_m0.05700_feature_50Myr",
+          "configuration_sha256": "2b8d2e7b10d9664ff85c667bd5cd1390ddde9d2dc6ea53e8f818ee766b2daee2",
+          "maximum_step_years": 50000000.0
+        },
+        {
+          "case": "z300_f2_m0.05700_peak_100Myr",
+          "configuration_sha256": "c131e1b78a0d59384afd05e3e378d70c5bbfdad26bda7c57d1e78dc986758a81",
+          "maximum_step_years": 100000000.0
+        },
+        {
+          "case": "z300_f2_m0.05700_fine_peak_continuation_q6",
+          "configuration_sha256": "69c26b8ec73a0e5a64d121cba08db21fd785a71af6842dd467694c14c5fabdab",
+          "maximum_step_years": 250000000.0
+        }
+      ]
     },
     {
       "mass_Msun": 0.058,
@@ -248,5 +265,7 @@
       "filename": "atmosphere_f2_family.dat",
       "sha256": "5b5fafa8d97804067dd8d6ff09059a93da863dabb695871d6ffed392edd35f32"
     }
-  ]
+  ],
+  "updated_utc": "2026-10-11T16:20:24.318567+00:00",
+  "coarse_early_scope": "Original coarse histories for 0.057, 0.059, 0.060 through 6 Gyr; only 0.5\u20135 Gyr displayed."
 }

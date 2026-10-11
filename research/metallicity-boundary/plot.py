@@ -22,6 +22,7 @@ def line(ax,rows,y,**style):
     ax.plot([r['age_Gyr'] for r in rows],[r[y] for r in rows],**style)
 
 tracks=read('tracks.csv','mass_Msun');early=read('early.csv','mass_Msun')
+coarse=read('coarse_early.csv','mass_Msun')
 fig=plt.figure(figsize=(11.5,10));ax=fig.add_axes([.085,.43,.695,.52]);bottom=fig.add_axes([.085,.095,.695,.24])
 colors=dict(zip(sorted(tracks),plt.cm.viridis(np.linspace(.08,.85,len(tracks)))))
 for mass,h in sorted(tracks.items()):
@@ -35,13 +36,13 @@ ax.text(.03,.895,r'$3Z_{\rm ref}$ · cloudy, $f_{\rm sed}=2$',transform=ax.trans
 ax.legend(title=r'Mass ($M_\odot$)',loc='upper left',bbox_to_anchor=(1.015,1),frameon=False)
 ax.text(1.03,.25,'Filled: 1 Tyr\nOpen: incomplete',transform=ax.transAxes,fontsize=10.5,linespacing=1.5)
 for mass,h in sorted(early.items()):
-    line(bottom,tracks[mass],'nuclear_fraction',c=colors[mass],alpha=.45,lw=1.2,ls='--')
+    line(bottom,coarse[mass],'nuclear_fraction',c=colors[mass],alpha=.45,lw=1.2,ls='--')
     line(bottom,h,'nuclear_fraction',c=colors[mass],lw=2,label=f'{mass:.4g}')
 bottom.set(xlim=(.5,5),ylim=(.025,.91),xlabel='Age (Gyr)',ylabel=r'$L_{\rm nuc}/L$');bottom.grid(alpha=.13)
 bottom.legend(title=r'Mass ($M_\odot$)',loc='upper left',bbox_to_anchor=(1.015,1),frameon=False)
 bottom.text(1.03,.36,'Solid: 50 Myr steps\nDashed: coarser steps',transform=bottom.transAxes,fontsize=10.5,linespacing=1.5)
 fig.text(.085,.365,'Early evolution — independent timestep checks',fontsize=12)
-fig.text(.085,.025,'Open endpoints are incomplete. The early checks are not joined to the older tracks.',fontsize=10,color='.25')
+fig.text(.085,.025,'Open endpoints are incomplete. The 0.057 track follows the finer sampling through its maximum.',fontsize=10,color='.25')
 fig.savefig(ROOT/'boundary.png');plt.close(fig)
 
 data=read('timestep_comparison.csv','case')
