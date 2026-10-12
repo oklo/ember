@@ -370,3 +370,7 @@ add_test(NAME phase_mobility COMMAND test_phase_mobility)
 add_executable(test_material_eos test_material_eos.cpp)
 target_link_libraries(test_material_eos PRIVATE ember)
 add_test(NAME material_eos COMMAND test_material_eos)
+
+add_executable(test_opacity_native test_opacity_native.cpp)
+target_link_libraries(test_opacity_native PRIVATE ember)
+add_test(NAME opacity_native COMMAND test_opacity_native)

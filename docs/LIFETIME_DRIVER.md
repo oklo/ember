@@ -331,6 +331,14 @@ The general stratified tolerance applies once more than one region is present.
 Both settings are bound into restart identity, and all interval audits remain
 unchanged.
 
+`opacity_composition "native"` uses every supplied metallicity plane in the
+four opacity families, interpolating at fixed H/(H+He). It rejects unsupported
+hydrogen or metal fractions instead of extending their dependence. This option
+cannot be combined with `opacity_hydrogen_response`; the default behavior is
+unchanged. The choice is recorded in restart identity. The optional cold dense
+gas opacity remains available in either mode. Table coverage and mixture
+accuracy must be assessed independently of this interpolation choice.
+
 The optional `opacity_hydrogen_response` family selects the existing bounded
 composition extensions through `RadiativeOpacity`. Its bounds are explicit:
 `opacity_minimum_Z`, `opacity_maximum_Z`, and `opacity_maximum_X`. The prepared

@@ -12,6 +12,8 @@ namespace ember {
 // is deliberately supplied separately by the selected heat transport law.
 class RadiativeOpacity final : public Opacity {
 public:
+  // Interpolate within supplied X/Z planes at fixed H/(H+He).
+  struct NativeComposition {};
   struct Tables {
     std::filesystem::path low,warm,bridge,hot;
     std::filesystem::path cold_dense{};
@@ -25,6 +27,16 @@ public:
   };
   explicit RadiativeOpacity(const Tables& tables) { build(tables,nullptr); }
   RadiativeOpacity(const Tables& tables,const Extension& extension) { build(tables,&extension); }
+  RadiativeOpacity(const Tables& tables,NativeComposition) {
+    const auto& low=add<HydrogenShareMixtureOpacity>(tables.low);
+    const auto& warm=add<HydrogenShareMixtureOpacity>(tables.warm);
+    const auto& bridge=add<HydrogenShareMixtureOpacity>(tables.bridge);
+    const auto& hot=add<HydrogenShareMixtureOpacity>(tables.hot);
+    const auto& mid=add<BlendedOpacity>(warm,bridge,5.05,5.10);
+    const auto& upper=add<BlendedOpacity>(mid,hot,5.6,5.7);
+    const auto& raw=add<BlendedOpacity>(low,upper,4.4,4.47);
+    map(raw,tables);
+  }
   OpacityState eval(double T,double rho,const Composition& c) const override {
     return mapped_->eval(T,rho,c);
   }

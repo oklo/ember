@@ -171,6 +171,12 @@ int lifetime_main(int argc,char** argv) {
         || !std::isfinite(envelope_opacity_uncertainty) || envelope_opacity_uncertainty<=0 || envelope_opacity_uncertainty>.01
         || (envelope_opacity==0 && envelope_opacity_uncertainty!=.001))
       throw std::invalid_argument("invalid conductive-envelope opacity selection");
+    const auto opacity_composition=cfg.values.contains("opacity_composition")
+        ?cfg.get("opacity_composition"):"default";
+    if(opacity_composition!="default" && opacity_composition!="native")
+      throw std::invalid_argument("opacity_composition must be default or native");
+    if(opacity_composition=="native" && cfg.values.contains("opacity_hydrogen_response"))
+      throw std::invalid_argument("native opacity composition cannot use opacity_hydrogen_response");
     std::optional<RadiativeOpacity::Extension> opacity_extension;
     if(cfg.values.contains("opacity_hydrogen_response")) {
       opacity_extension=RadiativeOpacity::Extension{path("opacity_hydrogen_response"),
@@ -538,6 +544,8 @@ int lifetime_main(int argc,char** argv) {
       identity.number("integrator.residual_limit",1e-5);
       identity.number("integrator.energy_tolerance",.001);
     }
+    if(opacity_composition=="native")
+      identity.values["opacity.composition"]="native_hydrogen_share.v1";
     const auto& identities=identity.values;
     const Selections selections{"lifetime.volume_faces.v1","ppcn.sfiii.svh.physical_metals.v1",
       "losses.plasma_neutrino.v1","convection."+mixing_selection+".material_heat_after_D.v1",
@@ -568,7 +576,9 @@ int lifetime_main(int argc,char** argv) {
     DeuteriumApproxEos eos(table_eos);
     const RadiativeOpacity::Tables opacity_tables{low_path,warm_path,bridge_path,hot_path,
         cold_opacity_path,cold_opacity_scale};
-    auto source_radiation=opacity_extension?std::make_shared<RadiativeOpacity>(opacity_tables,*opacity_extension)
+    auto source_radiation=opacity_composition=="native"
+        ?std::make_shared<RadiativeOpacity>(opacity_tables,RadiativeOpacity::NativeComposition{})
+        :opacity_extension?std::make_shared<RadiativeOpacity>(opacity_tables,*opacity_extension)
         :std::make_shared<RadiativeOpacity>(opacity_tables);
     auto table_conduction=std::make_shared<TabulatedConduction>(conduction_path);
     std::shared_ptr<Conduction> conduction=table_conduction;
