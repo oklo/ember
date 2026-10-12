@@ -337,6 +337,10 @@ add_executable(test_envelope_initialization test_envelope_initialization.cpp)
 target_link_libraries(test_envelope_initialization PRIVATE ember)
 add_test(NAME envelope_initialization COMMAND test_envelope_initialization)
 
+add_executable(test_envelope_edges test_envelope_edges.cpp)
+target_link_libraries(test_envelope_edges PRIVATE ember)
+add_test(NAME envelope_edges COMMAND test_envelope_edges)
+
 add_executable(test_ion_quantum test_ion_quantum.cpp)
 target_link_libraries(test_ion_quantum PRIVATE ember)
 add_test(NAME ion_quantum COMMAND test_ion_quantum)

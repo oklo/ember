@@ -13,6 +13,9 @@
 
 namespace ember {
 namespace {
+struct SurfaceBoundaryError : std::domain_error {
+  using std::domain_error::domain_error;
+};
 void require(bool ok, const char* why) { if (!ok) throw std::domain_error(std::string("envelope atmosphere: ") + why); }
 // Catmull-Rom weights for a point at fractional position u in [0,1] between nodes 1 and 2 of a 4-node stencil.
 std::array<double,4> cr(double u) {
@@ -167,8 +170,8 @@ EnvelopeSurface EnvelopeAtmosphere::integrate(double Teff, double R, const Compo
   const double L = 4 * M_PI * R * R * sigma_SB * std::pow(Teff, 4), g0 = G * M_ / (R * R);
   const auto a = [&] {
     try{return top_.eval(Teff,g0,c);}
-    catch(const std::exception& error) {
-      throw std::domain_error("envelope surface Teff="+std::to_string(Teff)
+    catch(const std::domain_error& error) {
+      throw SurfaceBoundaryError("envelope surface Teff="+std::to_string(Teff)
           +" logg="+std::to_string(std::log10(g0))+": "+error.what());
     }
   }();
@@ -457,7 +460,7 @@ AtmosphereState EnvelopeAtmosphere::eval(double Teff_b, double g_b, const Compos
       return out;
     }
   }
-  constexpr double h = 1e-4;   // central differences of the full map; checked against h/2 in the controls
+  constexpr double h = 1e-4;   // finite differences of the full envelope map
   const std::array<std::array<double,2>,4> offsets{{{h,0},{-h,0},{0,h},{0,-h}}};
   std::array<std::array<double,2>,4> values{};
   std::array<std::exception_ptr,4> failures{};
@@ -484,10 +487,46 @@ AtmosphereState EnvelopeAtmosphere::eval(double Teff_b, double g_b, const Compos
   else detail::evaluation_workers().run(workers,[&](std::size_t worker) {
     detail::EvaluationScope scope;work(worker);
   });
-  for(const auto& error:failures)if(error)std::rethrow_exception(error);
-  const auto& tp=values[0];const auto& tm=values[1];const auto& gp=values[2];const auto& gm=values[3];
-  out.dlnT_dlnTeff = (tp[0] - tm[0]) / (2 * h); out.dlnT_dlng = (gp[0] - gm[0]) / (2 * h);
-  out.dlnP_dlnTeff = (tp[1] - tm[1]) / (2 * h); out.dlnP_dlng = (gp[1] - gm[1]) / (2 * h);
+  // An in-domain value can lie closer to a table edge than the central
+  // difference increment. Use a second-order inward difference there; never
+  // extend the physical source. Interior EOS/opacity errors still propagate.
+  auto surface_refusal=[](const std::exception_ptr& error) {
+    if(!error)return false;
+    try{std::rethrow_exception(error);}
+    catch(const SurfaceBoundaryError&){return true;}
+    catch(...){std::rethrow_exception(error);}
+  };
+  const std::array<double,2> base{std::log(out.T),std::log(out.P)};
+  std::array<std::array<double,2>,2> slopes{};
+  for(std::size_t axis=0;axis<2;++axis) {
+    const auto plus=2*axis,minus=plus+1;
+    const bool bad_plus=surface_refusal(failures[plus]);
+    const bool bad_minus=surface_refusal(failures[minus]);
+    if(!bad_plus && !bad_minus) {
+      for(std::size_t field=0;field<2;++field)
+        slopes[axis][field]=(values[plus][field]-values[minus][field])/(2*h);
+      continue;
+    }
+    if(bad_plus && bad_minus)std::rethrow_exception(failures[plus]);
+    const double direction=bad_plus?-1.:1.;
+    const auto first=bad_plus?minus:plus;
+    std::array<double,2> second{};
+    auto inward=[&](EnvelopeAtmosphere& local) {
+      local.integration_tolerance(integration_tolerance_);
+      local.integration_method(integration_method_);
+      local.ratio_.store(s.R/s.r_base);
+      const auto e=local.photosphere(Teff_b*std::exp(axis==0?2*h*direction:0.),
+                                    g_b*std::exp(axis==1?2*h*direction:0.),c);
+      second={std::log(e.T_base),std::log(e.P_base)};
+      integrations_.fetch_add(local.integrations());
+    };
+    if(eos_){EnvelopeAtmosphere local(top_,opacity_,*eos_,alpha_,M_,dM_,per_unit_);inward(local);}
+    else{EnvelopeAtmosphere local(top_,opacity_,*thermodynamics_,alpha_,M_,dM_,per_unit_);inward(local);}
+    for(std::size_t field=0;field<2;++field)
+      slopes[axis][field]=direction*(-3*base[field]+4*values[first][field]-second[field])/(2*h);
+  }
+  out.dlnT_dlnTeff=slopes[0][0];out.dlnT_dlng=slopes[1][0];
+  out.dlnP_dlnTeff=slopes[0][1];out.dlnP_dlng=slopes[1][1];
   ++jacobian_computed_;
   if(jacobian_radius_>0) {
     std::lock_guard lock(jacobian_mutex_);

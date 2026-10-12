@@ -514,6 +514,13 @@ unchanged. Unsupported table stencils are rejected. Both source and interior
 EOS envelopes must meet the same bounds on omitted internal heat, work and
 nuclear burning. The selected metal approximation is part of restart identity.
 
+Near a surface-table edge, the integrated envelope uses a second-order inward
+difference when a central temperature or gravity perturbation is unsupported.
+The physical boundary and both inward samples must remain supported. Interior
+EOS and opacity failures still propagate. Temperature- and gravity-edge tests
+compare against an unrestricted boundary, with logarithmic slopes agreeing
+within `2e-4`; existing envelope initialization checks also pass.
+
 A completed column with small temperature corrections can still fail the
 independent flux check. The solver permits up to two undamped restarts from
 its complete final profile, within the original CPU budget, and repeats all
