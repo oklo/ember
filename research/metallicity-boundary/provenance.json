@@ -299,13 +299,13 @@
     },
     {
       "mass_Msun": 0.05815,
-      "age_Gyr": 486.6604044440325,
-      "Teff_K": 2278.3146957825606,
-      "nuclear_fraction": 1.0007621822444863,
+      "age_Gyr": 550.0786265856262,
+      "Teff_K": 2399.94127647061,
+      "nuclear_fraction": 1.001888918307519,
       "reached_1Tyr": false,
-      "stop": "repeated step rejection: evolve_step: line search failed: residual did not decrease: local=0.0001013 -> 0.0001013, balance=-1.323e-05 -> -1.323e-05",
-      "case": "z300_f2_m0.05815_warm_response_500Gyr",
-      "configuration_sha256": "8b2906247ec804824eb7e7ae7d4d2cfabb2baadb8427ebba6be770cb115b8adb",
+      "stop": "repeated step rejection: envelope surface Teff=2400.183662 logg=5.247812: pressure-matched atmosphere: (Teff, g) outside warm_anchored_response table",
+      "case": "z300_f2_m0.05815_warm_lowz_600Gyr",
+      "configuration_sha256": "1c68ea67b4f486819d190fe9db7ce4fd0511d07a6f8733c0593bdc6a8b2e25db",
       "maximum_step_Gyr": 1.0,
       "running": false,
       "lineage": [
@@ -364,19 +364,26 @@
           "history_sha256": "f655941b8d1364fc4f821547ce0cf465cbc049d46f5350b281e263f3495b6745",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 1000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05815_warm_lowz_600Gyr",
+          "configuration_sha256": "1c68ea67b4f486819d190fe9db7ce4fd0511d07a6f8733c0593bdc6a8b2e25db",
+          "history_sha256": "1f37c97af61536eced51df72de65c77c8d7edf6ff10fa7f8459e4ff3c1e5bcc5",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 1000000000.0
         }
       ],
       "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.0582,
-      "age_Gyr": 500.0,
-      "Teff_K": 2274.575870777793,
-      "nuclear_fraction": 1.0007353699834638,
+      "age_Gyr": 565.1416499710083,
+      "Teff_K": 2399.7740725058493,
+      "nuclear_fraction": 1.0019907955331793,
       "reached_1Tyr": false,
-      "stop": "requested age",
-      "case": "z300_f2_m0.05820_warm_response_500Gyr",
-      "configuration_sha256": "806c3ee40c781504be961e54da4ef19cbcad23b05a57a2a5b6993056de48fd2a",
+      "stop": "repeated step rejection: envelope surface Teff=2400.016450 logg=5.243362: pressure-matched atmosphere: (Teff, g) outside warm_anchored_response table",
+      "case": "z300_f2_m0.05820_warm_lowz_650Gyr",
+      "configuration_sha256": "49bccffd001de3e0b3c76bb3bd8519154035e21e8938029b32a87fdae2568a8f",
       "maximum_step_Gyr": 1.0,
       "running": false,
       "lineage": [
@@ -435,19 +442,26 @@
           "history_sha256": "559549d1ff825c2c9384e84c853f73648e1cf9d816a267cccdd061fe710d31e2",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 1000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05820_warm_lowz_650Gyr",
+          "configuration_sha256": "49bccffd001de3e0b3c76bb3bd8519154035e21e8938029b32a87fdae2568a8f",
+          "history_sha256": "5c7576810dbe5bd9cbbe99226f6b28e6367fb3dec447e6b296ac3caed2d20c1a",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 1000000000.0
         }
       ],
       "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.05825,
-      "age_Gyr": 500.0,
-      "Teff_K": 2226.443170238371,
-      "nuclear_fraction": 0.9999127975939636,
+      "age_Gyr": 595.8532141956393,
+      "Teff_K": 2399.7932124492977,
+      "nuclear_fraction": 1.0013118122177498,
       "reached_1Tyr": false,
-      "stop": "requested age",
-      "case": "z300_f2_m0.05825_warm_response_500Gyr",
-      "configuration_sha256": "af2fb12c5fa231e056995e5a9370b0be424f6a8f6a7cc94e76a2dd0561aea020",
+      "stop": "repeated step rejection: envelope surface Teff=2400.035577 logg=5.247572: pressure-matched atmosphere: (Teff, g) outside warm_anchored_response table",
+      "case": "z300_f2_m0.05825_warm_lowz_650Gyr",
+      "configuration_sha256": "12086ee16edb2ed89c0833e4ff0e665396d40f24b2b35e6ccbda1e60d176f180",
       "maximum_step_Gyr": 1.0,
       "running": false,
       "lineage": [
@@ -506,19 +520,26 @@
           "history_sha256": "ff08332dc63edf17ab6dd490d92e7ed70e1f21067d6306a74b73bfb043d844fb",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 1000000000.0
+        },
+        {
+          "case": "z300_f2_m0.05825_warm_lowz_650Gyr",
+          "configuration_sha256": "12086ee16edb2ed89c0833e4ff0e665396d40f24b2b35e6ccbda1e60d176f180",
+          "history_sha256": "97be79719d326784f8ee293a13bec8d7e04960f9293c2ed6da6c6155fce8e8ba",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 1000000000.0
         }
       ],
       "reached_cooling_cutoff": false
     },
     {
       "mass_Msun": 0.0583,
-      "age_Gyr": 500.0,
-      "Teff_K": 2162.0268742488074,
-      "nuclear_fraction": 0.9997933538753084,
+      "age_Gyr": 639.2548415544965,
+      "Teff_K": 2399.791748850751,
+      "nuclear_fraction": 1.000987792970466,
       "reached_1Tyr": false,
-      "stop": "requested age",
-      "case": "z300_f2_m0.05830_warm_response_500Gyr",
-      "configuration_sha256": "a61ae48c05abbb76c0c2e2839f5a03e42782ad2a40a392edc196585af87ed834",
+      "stop": "repeated step rejection: envelope surface Teff=2400.034110 logg=5.251402: pressure-matched atmosphere: (Teff, g) outside warm_anchored_response table",
+      "case": "z300_f2_m0.05830_warm_lowz_650Gyr",
+      "configuration_sha256": "7a9c34a76eac41443c462888ba00a8f073dea1ddc2aa5eec7353deb553e7149c",
       "maximum_step_Gyr": 0.25,
       "running": false,
       "lineage": [
@@ -554,6 +575,20 @@
           "case": "z300_f2_m0.05830_warm_response_500Gyr",
           "configuration_sha256": "a61ae48c05abbb76c0c2e2839f5a03e42782ad2a40a392edc196585af87ed834",
           "history_sha256": "00473cc69c0e5c632c0ff64f99b81878c4084a3d89b9dee23a49ea88772a0ca8",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 250000000.0
+        },
+        {
+          "case": "z300_f2_m0.05830_warm_600Gyr",
+          "configuration_sha256": "a61ae48c05abbb76c0c2e2839f5a03e42782ad2a40a392edc196585af87ed834",
+          "history_sha256": "0f0e3f572440c597cd5872f875bcdbfdd595295054b2f25cbf49a348ba3f5c4f",
+          "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
+          "maximum_step_years": 250000000.0
+        },
+        {
+          "case": "z300_f2_m0.05830_warm_lowz_650Gyr",
+          "configuration_sha256": "7a9c34a76eac41443c462888ba00a8f073dea1ddc2aa5eec7353deb553e7149c",
+          "history_sha256": "4ff9bfe8c27971fbaaf110d1153be6716dd937146a221730fbd064d0b8a929a1",
           "executable_sha256": "1148c858df67b6cdff597acbd0cbbb648e5c9e36d1f286baa5f15d7de9255232",
           "maximum_step_years": 250000000.0
         }
@@ -912,7 +947,7 @@
       "sha256": "5b5fafa8d97804067dd8d6ff09059a93da863dabb695871d6ffed392edd35f32"
     }
   ],
-  "updated_utc": "2026-10-11T23:38:02.217379+00:00",
+  "updated_utc": "2026-10-12T00:42:46.906571+00:00",
   "coarse_early_scope": "Original coarse histories for 0.057, 0.059, 0.060 through 6 Gyr; only 0.5\u20135 Gyr displayed.",
   "luminosity_panel": {
     "quantity": "log10(L/Lsun)",
@@ -920,7 +955,7 @@
     "age_axis": "shared logarithmic age in Gyr",
     "same_accepted_states": true
   },
-  "tracks_sha256": "83d6a597c8a3223b854b005e0dff36ac4f473e83dc220fc75056ea4781d94b5f",
+  "tracks_sha256": "1a4fc0a5d4c3747f53f893d5e5b33bbab4ae85849a87169fde6ffa79fed253e1",
   "mixing": "Instantaneous Ledoux convection. No semiconvective transport.",
   "continuation_limits": {
     "scope": "Original mixing retained. Detailed merger histories remain numerically unresolved; these continuations do not tighten the mass bracket.",
@@ -931,8 +966,8 @@
       "nuclear_fraction": 0.0008999
     },
     "warm_H_He": "Reference temperature retained through H/He mismatch0.10. Nearby composition calculations estimate a temperature response below0.6%, with about2% cloud-iteration variation; not a bound on track accuracy.",
-    "warm_response": "Measured metallicity response joined to the old boundary. Final2200K slope held constant only to2300K; hotter-source check pending.",
+    "warm_response": "Measured2200/2400K metallicity and temperature responses join the retained relation through2400K. A2200K/MH=-1 column-depth control changes T100 by about2% and depth by7.6%; this is additional boundary uncertainty.",
     "EOS": "Direct Z=.24/.4 dense-core extension uses the original CMS/FreeEOS hot blend and material-energy reference. Existing planes retained.",
-    "opacity": "Same linear-in-Z prescription throughZ=.20. Omitting or doubling only the increment beyondZ=.16 changes total conductivity by at most0.5590% at the .05815 restart; not a bound on all opacity uncertainty."
+    "opacity": "Same linear-in-Z prescription throughZ=.20. Omitting or doubling only the increment beyondZ=.16 changes total conductivity by at most0.5964% at the latest .05815 endpoint; not a bound on all opacity uncertainty."
   }
 }

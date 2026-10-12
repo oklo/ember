@@ -20,7 +20,7 @@ Physical uncertainties are additional.
 
 The 22 masses use Z = 0.04945. Filled endpoints reach 1 Tyr or the fading
 cutoff; open endpoints are unfinished. The 0.05835-solar-mass continuation reaches 897 Gyr and 825.4 K,
-with nuclear support below 0.1%. Four warmer originals reach 486.7–500 Gyr
+with nuclear support below 0.1%. Four warmer originals reach 550.1–639.3 Gyr
 using documented atmosphere and interior-table extensions. The opacity and
 H/He boundary responses retain stated approximations. These completions
 do not validate the earlier mixing events or tighten the mass bracket.
@@ -50,11 +50,12 @@ halves with the mesh. The detailed excursions and later trajectories
 remain uncertain; conservation alone does not validate them.
 
 Coupled heat/composition mixing removes the broad peak and sharp dip on
-both grids, but leaves a 10.48% luminosity difference at 120 Gyr. It forms
-mixed blocks separated by thin composition jumps whose positions still
-depend on the grid. Nearly all the mass can be in convective regions
-without those regions being connected. This smoother alternative is also
-not spatially converged.
+both grids. Both retain more than 99.8% nuclear support at 1 Tyr, with a
+4.945% luminosity difference. At 120 Gyr the difference is 10.48%.
+The transition between mixing regimes can sharpen composition gradients;
+its detailed interfaces are unresolved. Shorter early steps also move the
+mixing event. These tracks demonstrate sensitivity to the assumed transport,
+not a validated replacement or a tighter mass bracket.
 
 The nearby-metallicity tests hold mass at 0.05815 solar masses and helium
 fixed. Their endpoints have unequal ages. The 3.03-Z_ref case includes a

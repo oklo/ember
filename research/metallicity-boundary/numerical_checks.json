@@ -636,6 +636,7 @@
     "assessment": "Pre-merger tracks agree closely. Merger depth and lasting structure do not converge on these two meshes; detailed pulses are not physical predictions."
   },
   "coupled_mesh_comparison": {
+    "updated_utc": "2026-10-12T00:35:45.872242+00:00",
     "models": {
       "536": {
         "inputs": [
@@ -648,17 +649,32 @@
             "case": "p536_late",
             "history_sha256": "d51c418cacf9df41c265a83c96b0351bd01f3d361700b98f0db0ba2992c62564",
             "configuration_sha256": "3e877f145c4962cb595e33111405efb31bbd8bac6b2ea42c27245a83688aa791"
+          },
+          {
+            "case": "p536_dt1000_140",
+            "history_sha256": "5aa95e6cec3a873eb10c5c2a2eb82850d448bcfa8ae62e6f7751d70882ee2e81",
+            "configuration_sha256": "a9144b256cebbe931e4bc4a3d7a4371390b66ab37416dd72d255c71a9befaccf"
+          },
+          {
+            "case": "p536_1000Gyr",
+            "history_sha256": "94d5dfee8a22b2124a040677c348c29813fd318bb000381e660f52cec3decd92",
+            "configuration_sha256": "a9144b256cebbe931e4bc4a3d7a4371390b66ab37416dd72d255c71a9befaccf"
           }
         ],
         "endpoint": {
-          "years": 120000000000,
-          "luminosity_Lsun": 1.5965813718632765e-05,
-          "Teff_K": 1221.8605746277433,
-          "central_T_K": 2579290.007533211,
-          "H_mass_g": 7.867092913403709e+31,
-          "He3_mass_g": 9.54930693096034e+28,
-          "convective_mass_fraction": 0.9999999999999986,
-          "radiative_boundaries": 4
+          "years": 1000000000000,
+          "Teff_K": 1308.791331672714,
+          "luminosity_Lsun": 1.8018524341007553e-05,
+          "nuclear_fraction": 0.9986901041256829,
+          "central_X": 0.551631098677498,
+          "central_T_K": 2526539.0537432595,
+          "H_mass_g": 7.771264551364922e+31,
+          "He3_mass_g": 1.0537766688971238e+30
+        },
+        "cost_140_to_1000_Gyr": {
+          "cpu_seconds": 2140.709613,
+          "wall_seconds": 1483.561811833,
+          "accepted_this_invocation": 885
         }
       },
       "1071": {
@@ -672,475 +688,243 @@
             "case": "p1071_late",
             "history_sha256": "19c7166c9e06d748ccdc273f38389cfed6a979fa8b987fb5d10fa8bb90e002ce",
             "configuration_sha256": "090508df4ae126fcc4942f1cf3a995947d700bbaa622d81ac92c15c5aef249dc"
+          },
+          {
+            "case": "p1071_dt1000_140",
+            "history_sha256": "9e3836d9b7c000fac221aeda303c143c46337f8f9ac27ebb12ad22d7eeae759e",
+            "configuration_sha256": "32f52c4b93a463be4043371ce343dcfcd0bc1d3284212af6e2c9be1043d4705d"
+          },
+          {
+            "case": "p1071_1000Gyr",
+            "history_sha256": "1325d81a1e81ca8ffe48b16c393c621feb6ee1995938b1bcd7cac5be4522c682",
+            "configuration_sha256": "32f52c4b93a463be4043371ce343dcfcd0bc1d3284212af6e2c9be1043d4705d"
           }
         ],
         "endpoint": {
-          "years": 120000000000,
-          "luminosity_Lsun": 1.4293064908530142e-05,
-          "Teff_K": 1190.6758567939273,
-          "central_T_K": 2527455.819350206,
-          "H_mass_g": 7.867506495324668e+31,
-          "He3_mass_g": 9.13572501125314e+28,
-          "convective_mass_fraction": 0.9999999999999998,
-          "radiative_boundaries": 5
+          "years": 1000000000000,
+          "Teff_K": 1309.5354205644735,
+          "luminosity_Lsun": 1.890948012501091e-05,
+          "nuclear_fraction": 0.9993414506903543,
+          "central_X": 0.5745474696202936,
+          "central_T_K": 2567089.0722910655,
+          "H_mass_g": 7.777599997274326e+31,
+          "He3_mass_g": 9.904222165172348e+29
+        },
+        "cost_140_to_1000_Gyr": {
+          "cpu_seconds": 3553.384367,
+          "wall_seconds": 2411.212140042,
+          "accepted_this_invocation": 868
         }
       }
     },
-    "common_ages": [
-      {
-        "age_Gyr": 20,
-        "comparison": {
-          "luminosity_Lsun": {
-            "coarse": 1.0620701023471011e-05,
-            "fine": 1.062369041631293e-05,
-            "relative": 0.000281468505262783
-          },
-          "Teff_K": {
-            "coarse": 1102.8661248253795,
-            "fine": 1102.9516104193826,
-            "relative": 7.75122130227679e-05
-          },
-          "central_T_K": {
-            "coarse": 2415276.326987794,
-            "fine": 2415324.885889684,
-            "relative": 2.01049053258906e-05
-          },
-          "central_X": {
-            "coarse": 0.6715284546214304,
-            "fine": 0.6715574024347846,
-            "relative": 4.310735182544434e-05
-          },
-          "central_He3": {
-            "coarse": 0.00029071106426415886,
-            "fine": 0.0002905040932818844,
-            "relative": -0.0007119473859665826
-          },
-          "He3_mass_g": {
-            "coarse": 2.0787298083679534e+28,
-            "fine": 2.0789582240801872e+28,
-            "relative": 0.00010988234801567742
-          },
-          "H_mass_g": {
-            "coarse": 7.8745634905287e+31,
-            "fine": 7.874563262113008e+31,
-            "relative": -2.900677509298788e-08
-          },
-          "convective_mass_fraction": {
-            "coarse": 0.8871061477274136,
-            "fine": 0.8846664056194377,
-            "relative": -0.002750225679560514
-          }
-        }
-      },
-      {
-        "age_Gyr": 21,
-        "comparison": {
-          "luminosity_Lsun": {
-            "coarse": 1.0650510923599191e-05,
-            "fine": 1.0653773252121133e-05,
-            "relative": 0.00030630723214541966
-          },
-          "Teff_K": {
-            "coarse": 1103.7326490737169,
-            "fine": 1103.8253104589369,
-            "relative": 8.39527446232502e-05
-          },
-          "central_T_K": {
-            "coarse": 2417292.8794125025,
-            "fine": 2417342.1881477037,
-            "relative": 2.0398328899773333e-05
-          },
-          "central_X": {
-            "coarse": 0.6706209379616652,
-            "fine": 0.6706498139398929,
-            "relative": 4.3058569443754635e-05
-          },
-          "central_He3": {
-            "coarse": 0.00030691300634443157,
-            "fine": 0.00030671072892025485,
-            "relative": -0.0006590708767477693
-          },
-          "He3_mass_g": {
-            "coarse": 2.137143391149368e+28,
-            "fine": 2.137387279042224e+28,
-            "relative": 0.00011411863792853971
-          },
-          "H_mass_g": {
-            "coarse": 7.874505076945909e+31,
-            "fine": 7.874504833058035e+31,
-            "relative": -3.097183520761604e-08
-          },
-          "convective_mass_fraction": {
-            "coarse": 0.8871061477274136,
-            "fine": 0.8846664056194377,
-            "relative": -0.002750225679560514
-          }
-        }
-      },
-      {
-        "age_Gyr": 22,
-        "comparison": {
-          "luminosity_Lsun": {
-            "coarse": 1.0686743136461558e-05,
-            "fine": 1.0689945408685419e-05,
-            "relative": 0.0002996490308571076
-          },
-          "Teff_K": {
-            "coarse": 1104.7369870762475,
-            "fine": 1104.8282140129852,
-            "relative": 8.257796905963843e-05
-          },
-          "central_T_K": {
-            "coarse": 2419542.9692751286,
-            "fine": 2419591.7062848695,
-            "relative": 2.014306435538238e-05
-          },
-          "central_X": {
-            "coarse": 0.6697119864534121,
-            "fine": 0.669740779693883,
-            "relative": 4.299346742087096e-05
-          },
-          "central_He3": {
-            "coarse": 0.00032316192455884835,
-            "fine": 0.00032296466688163576,
-            "relative": -0.0006103988812476979
-          },
-          "He3_mass_g": {
-            "coarse": 2.195906252489213e+28,
-            "fine": 2.1961657956708722e+28,
-            "relative": 0.00011819410840741007
-          },
-          "H_mass_g": {
-            "coarse": 7.874446314084588e+31,
-            "fine": 7.8744460545414095e+31,
-            "relative": -3.296018136200729e-08
-          },
-          "convective_mass_fraction": {
-            "coarse": 0.8871061477274136,
-            "fine": 0.8846664056194377,
-            "relative": -0.002750225679560514
-          }
-        }
-      },
-      {
-        "age_Gyr": 25,
-        "comparison": {
-          "luminosity_Lsun": {
-            "coarse": 1.0832395899629248e-05,
-            "fine": 1.0836825459691205e-05,
-            "relative": 0.00040891785187713303
-          },
-          "Teff_K": {
-            "coarse": 1108.5303654945185,
-            "fine": 1108.652208769194,
-            "relative": 0.0001099142418359289
-          },
-          "central_T_K": {
-            "coarse": 2427577.5420231163,
-            "fine": 2427538.1506673153,
-            "relative": -1.622661073397147e-05
-          },
-          "central_X": {
-            "coarse": 0.6669757266540274,
-            "fine": 0.6670044044313567,
-            "relative": 4.2996733139233356e-05
-          },
-          "central_He3": {
-            "coarse": 0.0003723009915949431,
-            "fine": 0.0003721089728443825,
-            "relative": -0.0005157621249892719
-          },
-          "He3_mass_g": {
-            "coarse": 2.3745909396007835e+28,
-            "fine": 2.3748995364219406e+28,
-            "relative": 0.00012995788706615663
-          },
-          "H_mass_g": {
-            "coarse": 7.8742676293974715e+31,
-            "fine": 7.874267320800652e+31,
-            "relative": -3.91905423668959e-08
-          },
-          "convective_mass_fraction": {
-            "coarse": 0.896552597358444,
-            "fine": 0.8964745135152232,
-            "relative": -8.709343261148472e-05
-          }
-        }
-      },
-      {
-        "age_Gyr": 30,
-        "comparison": {
-          "luminosity_Lsun": {
-            "coarse": 1.1191755053973292e-05,
-            "fine": 1.1193404629417935e-05,
-            "relative": 0.0001473920253514116
-          },
-          "Teff_K": {
-            "coarse": 1117.3662152111513,
-            "fine": 1117.418197671669,
-            "relative": 4.6522312747709904e-05
-          },
-          "central_T_K": {
-            "coarse": 2441441.76004313,
-            "fine": 2441590.2571180393,
-            "relative": 6.082351721015122e-05
-          },
-          "central_X": {
-            "coarse": 0.6624435380995707,
-            "fine": 0.6624644993429482,
-            "relative": 3.1642309377133415e-05
-          },
-          "central_He3": {
-            "coarse": 0.00045326590718081604,
-            "fine": 0.00045337946458298874,
-            "relative": 0.0002505315320955326
-          },
-          "He3_mass_g": {
-            "coarse": 2.681019582367696e+28,
-            "fine": 2.6814301094151428e+28,
-            "relative": 0.00015312347964435702
-          },
-          "H_mass_g": {
-            "coarse": 7.873961200754702e+31,
-            "fine": 7.873960790227659e+31,
-            "relative": -5.2137295702969766e-08
-          },
-          "convective_mass_fraction": {
-            "coarse": 0.9497744910896669,
-            "fine": 0.9351591648494736,
-            "relative": -0.015388206755716616
-          }
-        }
-      },
-      {
-        "age_Gyr": 40,
-        "comparison": {
-          "luminosity_Lsun": {
-            "coarse": 1.1890909337936127e-05,
-            "fine": 1.1741147248058822e-05,
-            "relative": -0.012594670905404337
-          },
-          "Teff_K": {
-            "coarse": 1134.082892486025,
-            "fine": 1131.0924281336636,
-            "relative": -0.0026369010344614585
-          },
-          "central_T_K": {
-            "coarse": 2465849.962350378,
-            "fine": 2454695.6785915825,
-            "relative": -0.004523504645093435
-          },
-          "central_X": {
-            "coarse": 0.653607102041788,
-            "fine": 0.6548707140320932,
-            "relative": 0.0019332898714807811
-          },
-          "central_He3": {
-            "coarse": 0.0006123819133346882,
-            "fine": 0.0005803741126786816,
-            "relative": -0.05226771065414071
-          },
-          "He3_mass_g": {
-            "coarse": 3.3242616486106053e+28,
-            "fine": 3.3213808280849585e+28,
-            "relative": -0.000866604626880263
-          },
-          "H_mass_g": {
-            "coarse": 7.873317958688433e+31,
-            "fine": 7.873320839508964e+31,
-            "relative": 3.658966329922464e-07
-          },
-          "convective_mass_fraction": {
-            "coarse": 0.9801298342591848,
-            "fine": 0.9999999999999998,
-            "relative": 0.02027299348135192
-          }
-        }
-      },
+    "comparisons": [
       {
         "age_Gyr": 60,
-        "comparison": {
-          "luminosity_Lsun": {
-            "coarse": 1.2867274331632672e-05,
-            "fine": 1.2328489728120827e-05,
-            "relative": -0.0418724735033672
+        "models": {
+          "536": {
+            "luminosity_Lsun": 1.2867274331632672e-05,
+            "Teff_K": 1157.0985875625897,
+            "nuclear_fraction": 0.9901560792736186,
+            "central_T_K": 2495524.091281924,
+            "H_mass_g": 7.87193455926499e+31,
+            "He3_mass_g": 4.707661071940201e+28
           },
-          "Teff_K": {
-            "coarse": 1157.0985875625897,
-            "fine": 1145.9365379731562,
-            "relative": -0.009646584750350629
-          },
-          "central_T_K": {
-            "coarse": 2495524.091281924,
-            "fine": 2475914.2962857676,
-            "relative": -0.007857986650845361
-          },
-          "central_X": {
-            "coarse": 0.6400325881422876,
-            "fine": 0.6454381967219727,
-            "relative": 0.008445833352603183
-          },
-          "central_He3": {
-            "coarse": 0.0008814882762915842,
-            "fine": 0.0007949745304837114,
-            "relative": -0.09814508954314805
-          },
-          "He3_mass_g": {
-            "coarse": 4.707661071940201e+28,
-            "fine": 4.654130399116192e+28,
-            "relative": -0.011370970001021496
-          },
-          "H_mass_g": {
-            "coarse": 7.87193455926499e+31,
-            "fine": 7.871988089937862e+31,
-            "relative": 6.800192820399786e-06
-          },
-          "convective_mass_fraction": {
-            "coarse": 0.9999999999999986,
-            "fine": 0.9999999999999998,
-            "relative": 1.3322676295501878e-15
+          "1071": {
+            "luminosity_Lsun": 1.2328489728120827e-05,
+            "Teff_K": 1145.9365379731562,
+            "nuclear_fraction": 0.9910811669547047,
+            "central_T_K": 2475914.2962857676,
+            "H_mass_g": 7.871988089937862e+31,
+            "He3_mass_g": 4.654130399116192e+28
           }
-        }
-      },
-      {
-        "age_Gyr": 80,
-        "comparison": {
-          "luminosity_Lsun": {
-            "coarse": 1.3937789299086155e-05,
-            "fine": 1.3058045253644273e-05,
-            "relative": -0.0631193388394502
-          },
-          "Teff_K": {
-            "coarse": 1180.4088698244861,
-            "fine": 1162.857607081087,
-            "relative": -0.014868799440662217
-          },
-          "central_T_K": {
-            "coarse": 2527090.62366488,
-            "fine": 2496800.0952160377,
-            "relative": -0.01198632457624893
-          },
-          "central_X": {
-            "coarse": 0.6294020071624081,
-            "fine": 0.6380050914895468,
-            "relative": 0.01366866363506647
-          },
-          "central_He3": {
-            "coarse": 0.0011457066950953324,
-            "fine": 0.0010040910815854408,
-            "relative": -0.12360546911014436
-          },
-          "He3_mass_g": {
-            "coarse": 6.203663730949861e+28,
-            "fine": 6.072461978781434e+28,
-            "relative": -0.02114907542681055
-          },
-          "H_mass_g": {
-            "coarse": 7.870438556605698e+31,
-            "fine": 7.87056975835802e+31,
-            "relative": 1.667019587014984e-05
-          },
-          "convective_mass_fraction": {
-            "coarse": 0.9999999999999986,
-            "fine": 0.9999999999999998,
-            "relative": 1.3322676295501878e-15
-          }
-        }
-      },
-      {
-        "age_Gyr": 100,
-        "comparison": {
-          "luminosity_Lsun": {
-            "coarse": 1.4974720842522894e-05,
-            "fine": 1.371150208565438e-05,
-            "relative": -0.08435674829285766
-          },
-          "Teff_K": {
-            "coarse": 1202.0429590188094,
-            "fine": 1177.6871905664266,
-            "relative": -0.02026197838408672
-          },
-          "central_T_K": {
-            "coarse": 2554621.3515340094,
-            "fine": 2513627.116735994,
-            "relative": -0.016047088455359182
-          },
-          "central_X": {
-            "coarse": 0.6202324587631813,
-            "fine": 0.631991817648219,
-            "relative": 0.018959599290381046
-          },
-          "central_He3": {
-            "coarse": 0.0014124115481962936,
-            "fine": 0.00120524672829523,
-            "relative": -0.14667454409136027
-          },
-          "He3_mass_g": {
-            "coarse": 7.8193547881173565e+28,
-            "fine": 7.569255376508356e+28,
-            "relative": -0.03198466093251873
-          },
-          "H_mass_g": {
-            "coarse": 7.868822865547869e+31,
-            "fine": 7.869072964959965e+31,
-            "relative": 3.178358648669999e-05
-          },
-          "convective_mass_fraction": {
-            "coarse": 0.9999999999999986,
-            "fine": 0.9999999999999998,
-            "relative": 1.3322676295501878e-15
-          }
+        },
+        "fine_relative_to_coarse": {
+          "luminosity_Lsun": -0.0418724735033672,
+          "Teff_K": -0.009646584750350629,
+          "nuclear_fraction": 0.0009342847056645898,
+          "central_T_K": -0.007857986650845361,
+          "H_mass_g": 6.800192820399786e-06,
+          "He3_mass_g": -0.011370970001021496
         }
       },
       {
         "age_Gyr": 120,
-        "comparison": {
-          "luminosity_Lsun": {
-            "coarse": 1.5965813718632765e-05,
-            "fine": 1.4293064908530142e-05,
-            "relative": -0.10477065808117603
+        "models": {
+          "536": {
+            "luminosity_Lsun": 1.5965813718632765e-05,
+            "Teff_K": 1221.860583592362,
+            "nuclear_fraction": 0.9932869334490183,
+            "central_T_K": 2579290.007533211,
+            "H_mass_g": 7.867092913403709e+31,
+            "He3_mass_g": 9.54930693096034e+28
           },
-          "Teff_K": {
-            "coarse": 1221.8605746277433,
-            "fine": 1190.6758567939273,
-            "relative": -0.025522321025307493
-          },
-          "central_T_K": {
-            "coarse": 2579290.007533211,
-            "fine": 2527455.819350206,
-            "relative": -0.02009630093227799
-          },
-          "central_X": {
-            "coarse": 0.6122647103058468,
-            "fine": 0.626993463272926,
-            "relative": 0.024056184717426765
-          },
-          "central_He3": {
-            "coarse": 0.0016808431255358107,
-            "fine": 0.001400873573259351,
-            "relative": -0.16656495066261012
-          },
-          "He3_mass_g": {
-            "coarse": 9.54930693096034e+28,
-            "fine": 9.13572501125314e+28,
-            "relative": -0.04331015043262487
-          },
-          "H_mass_g": {
-            "coarse": 7.867092913403709e+31,
-            "fine": 7.867506495324668e+31,
-            "relative": 5.257112449430501e-05
-          },
-          "convective_mass_fraction": {
-            "coarse": 0.9999999999999986,
-            "fine": 0.9999999999999998,
-            "relative": 1.3322676295501878e-15
+          "1071": {
+            "luminosity_Lsun": 1.4293064908530142e-05,
+            "Teff_K": 1190.6758299986977,
+            "nuclear_fraction": 0.9933676722576785,
+            "central_T_K": 2527455.819350206,
+            "H_mass_g": 7.867506495324668e+31,
+            "He3_mass_g": 9.13572501125314e+28
           }
+        },
+        "fine_relative_to_coarse": {
+          "luminosity_Lsun": -0.10477065808117603,
+          "Teff_K": -0.025522350104771108,
+          "nuclear_fraction": 8.128447676236661e-05,
+          "central_T_K": -0.02009630093227799,
+          "H_mass_g": 5.257112449430501e-05,
+          "He3_mass_g": -0.04331015043262487
+        }
+      },
+      {
+        "age_Gyr": 140,
+        "models": {
+          "536": {
+            "luminosity_Lsun": 1.692330662329928e-05,
+            "Teff_K": 1240.3390337066432,
+            "nuclear_fraction": 0.9935851584778849,
+            "central_T_K": 2601247.093593631,
+            "H_mass_g": 7.86525263767373e+31,
+            "He3_mass_g": 1.138958265855502e+29
+          },
+          "1071": {
+            "luminosity_Lsun": 1.4823623742055952e-05,
+            "Teff_K": 1202.2978337358288,
+            "nuclear_fraction": 0.9941594042141644,
+            "central_T_K": 2539399.466144565,
+            "H_mass_g": 7.865876846465219e+31,
+            "He3_mass_g": 1.076537386983819e+29
+          }
+        },
+        "fine_relative_to_coarse": {
+          "luminosity_Lsun": -0.1240704862223897,
+          "Teff_K": -0.030670001456885254,
+          "nuclear_fraction": 0.0005779532145580024,
+          "central_T_K": -0.023776144758175688,
+          "H_mass_g": 7.93628406161595e-05,
+          "He3_mass_g": -0.05480523803459736
+        }
+      },
+      {
+        "age_Gyr": 250,
+        "models": {
+          "536": {
+            "luminosity_Lsun": 1.9923605432966617e-05,
+            "Teff_K": 1299.093570958552,
+            "nuclear_fraction": 0.9961805182873399,
+            "central_T_K": 2651709.0903126816,
+            "H_mass_g": 7.853549451894789e+31,
+            "He3_mass_g": 2.309276837744892e+29
+          },
+          "1071": {
+            "luminosity_Lsun": 1.7026929953949617e-05,
+            "Teff_K": 1249.5345512607375,
+            "nuclear_fraction": 0.995389394325965,
+            "central_T_K": 2579520.0270368457,
+            "H_mass_g": 7.855998479400621e+31,
+            "He3_mass_g": 2.064374091948478e+29
+          }
+        },
+        "fine_relative_to_coarse": {
+          "luminosity_Lsun": -0.14538912089796818,
+          "Teff_K": -0.03814892229914324,
+          "nuclear_fraction": -0.0007941572303934441,
+          "central_T_K": -0.027223598372672075,
+          "H_mass_g": 0.00031183702615389386,
+          "He3_mass_g": -0.10605170492922444
+        }
+      },
+      {
+        "age_Gyr": 500,
+        "models": {
+          "536": {
+            "luminosity_Lsun": 2.040879997930682e-05,
+            "Teff_K": 1326.7551187937909,
+            "nuclear_fraction": 0.9958378161695193,
+            "central_T_K": 2615245.065411808,
+            "H_mass_g": 7.824932314182784e+31,
+            "He3_mass_g": 5.170990567026004e+29
+          },
+          "1071": {
+            "luminosity_Lsun": 1.8802551915176817e-05,
+            "Teff_K": 1293.736146371268,
+            "nuclear_fraction": 0.9969330058185525,
+            "central_T_K": 2589970.35961743,
+            "H_mass_g": 7.830477215206992e+31,
+            "He3_mass_g": 4.6165004941118856e+29
+          }
+        },
+        "fine_relative_to_coarse": {
+          "luminosity_Lsun": -0.0787036996667434,
+          "Teff_K": -0.02488701340194699,
+          "nuclear_fraction": 0.001099767081798264,
+          "central_T_K": -0.009664373763151879,
+          "H_mass_g": 0.0007086196789405363,
+          "He3_mass_g": -0.10723091943929475
+        }
+      },
+      {
+        "age_Gyr": 750,
+        "models": {
+          "536": {
+            "luminosity_Lsun": 1.904816334126174e-05,
+            "Teff_K": 1318.8305898018898,
+            "nuclear_fraction": 0.9974273607175758,
+            "central_T_K": 2560997.3849028,
+            "H_mass_g": 7.797203594233121e+31,
+            "He3_mass_g": 7.943862489858381e+29
+          },
+          "1071": {
+            "luminosity_Lsun": 1.877756449773224e-05,
+            "Teff_K": 1302.770882534301,
+            "nuclear_fraction": 0.9984246618008106,
+            "central_T_K": 2571513.873702576,
+            "H_mass_g": 7.804051765964545e+31,
+            "He3_mass_g": 7.259045374430704e+29
+          }
+        },
+        "fine_relative_to_coarse": {
+          "luminosity_Lsun": -0.014206033341983004,
+          "Teff_K": -0.012177232915109415,
+          "nuclear_fraction": 0.0009998733968128448,
+          "central_T_K": 0.004106403568301609,
+          "H_mass_g": 0.0008782856120992388,
+          "He3_mass_g": -0.08620707071679001
+        }
+      },
+      {
+        "age_Gyr": 1000,
+        "models": {
+          "536": {
+            "luminosity_Lsun": 1.8018524341007553e-05,
+            "Teff_K": 1308.791331672714,
+            "nuclear_fraction": 0.9986901041256829,
+            "central_T_K": 2526539.0537432595,
+            "H_mass_g": 7.771264551364922e+31,
+            "He3_mass_g": 1.0537766688971238e+30
+          },
+          "1071": {
+            "luminosity_Lsun": 1.890948012501091e-05,
+            "Teff_K": 1309.5354205644735,
+            "nuclear_fraction": 0.9993414506903543,
+            "central_T_K": 2567089.0722910655,
+            "H_mass_g": 7.777599997274326e+31,
+            "He3_mass_g": 9.904222165172348e+29
+          }
+        },
+        "fine_relative_to_coarse": {
+          "luminosity_Lsun": 0.049446656515354626,
+          "Teff_K": 0.0005685313416681215,
+          "nuclear_fraction": 0.000652200879913245,
+          "central_T_K": 0.016049630615338373,
+          "H_mass_g": 0.0008152400252916525,
+          "He3_mass_g": -0.060121327649240275
         }
       }
     ],
-    "assumptions": "Coupled layered heat/composition transport, H/d=25, marginal transition; same original physical inputs otherwise.",
-    "assessment": "Broad peak and sharp dip disappear on both grids, but luminosities differ by10.48% at120Gyr. Mixed blocks retain grid-dependent interfaces. Not a converged alternative.",
-    "convective_mass_caveat": "A value near1 counts mass in any mixed region; it does not establish one connected, homogeneous region."
+    "assessment": "Both meshes retain >99.8% nuclear support at1Tyr. Luminosity differs4.945%. This establishes a long-lived burning outcome for this assumed mixing law on two meshes, not a validated physical boundary. Early transitions remain timestep-sensitive and the marginal mixing branch sharpens composition gradients.",
+    "timestep_scope": "250Myr maximum before120Gyr; matched controls from120 to140Gyr justify1Gyr thereafter in the tested smooth phase; they do not validate early event times.",
+    "convective_mass_caveat": "A mass fraction near1 does not establish connected homogeneous mixing."
   },
   "warm_core_extension": {
     "freeeos_control": {
@@ -1180,43 +964,58 @@
     },
     "opacity_endpoints": {
       "0.05815": {
-        "queries": 1145,
+        "age_Gyr": 550.0786265856262,
+        "Teff_K": 2399.94127647061,
         "actual_Z_range": [
-          0.18079992357471714,
-          0.18079992357471714
+          0.18349326743516817,
+          0.18349326743516817
         ],
-        "maximum_actual_photon_share": 0.0614101753603191,
-        "actual_increment_sensitivity": 0.005019335523658963
+        "maximum_actual_photon_share": 0.06454113718823154,
+        "actual_increment_sensitivity": 0.005964074274387832,
+        "checkpoint_sha256": "8c3ce6203cbf508e19e22297aa697042b4ebceee472dc7cda6ca83a77670ebad"
       },
       "0.05820": {
-        "queries": 1165,
+        "age_Gyr": 565.1416499710083,
+        "Teff_K": 2399.7740725058493,
         "actual_Z_range": [
-          0.16876233841752591,
-          0.16876233841752591
+          0.1714581601653899,
+          0.1714581601653899
         ],
-        "maximum_actual_photon_share": 0.06450088547202892,
-        "actual_increment_sensitivity": 0.0022327726162592043
+        "maximum_actual_photon_share": 0.07035249463045286,
+        "actual_increment_sensitivity": 0.003203759234443604,
+        "checkpoint_sha256": "37e382e8e9ebefa8346761419c68c995da057d03301b0e42f74516130f1ec958"
       },
       "0.05825": {
-        "queries": 1185,
+        "age_Gyr": 595.8532141956393,
+        "Teff_K": 2399.7932124492977,
         "actual_Z_range": [
-          0.15777665586175252,
-          0.15777665586175252
+          0.16137489229703772,
+          0.16137489229703772
         ],
-        "maximum_actual_photon_share": 0.05965500513109462,
-        "actual_increment_sensitivity": 0.0,
-        "increment_note": "Actual core composition is below Z=.16; the new opacity increment is not used."
+        "maximum_actual_photon_share": 0.06721190349976666,
+        "actual_increment_sensitivity": 0.00036562459238509426,
+        "checkpoint_sha256": "187c4d6093001e34dcd8a7b9a8eb0f8906a12f5896e64f93c3706914c2c7b3c4"
       },
       "0.05830": {
-        "queries": 1195,
+        "age_Gyr": 639.2548415544965,
+        "Teff_K": 2399.791748850751,
         "actual_Z_range": [
-          0.15135276109897264,
-          0.15135276109897264
+          0.15676963660036575,
+          0.15676963660036575
         ],
-        "maximum_actual_photon_share": 0.054682527045827906,
+        "maximum_actual_photon_share": 0.06450599877457941,
         "actual_increment_sensitivity": 0.0,
-        "increment_note": "Actual core composition is below Z=.16; the new opacity increment is not used."
+        "checkpoint_sha256": "55a887d804b5e0fe1e2a8bd37465ff3ef1e8f06441451a9144d100868a895db5",
+        "increment_note": "The actual profile does not use the new increment beyondZ=.16."
       }
     }
+  },
+  "marginal_branch_diagnostic": {
+    "fixed_heat_flux_slope": "d[(k_mu+D)B]/dB = k_mu[1-(Nu_mu,L-1)/(Nu_T,L-1)]",
+    "slope_over_k_mu": [
+      -665.0,
+      -624.0
+    ],
+    "assessment": "This scalar reduction sharpens composition gradients within the marginal branch. It does not establish the full coupled heat/species stability or uniquely determine a replacement prescription."
   }
 }
