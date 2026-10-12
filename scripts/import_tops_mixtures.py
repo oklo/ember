@@ -6,6 +6,7 @@ import json
 import math
 from pathlib import Path
 from import_tops_composition import read
+from fetch_tops_composition import fraction_label
 
 
 def main():
@@ -18,6 +19,8 @@ def main():
             raise ValueError('source request checksum mismatch')
     if len(zs)<2:raise ValueError('at least two metallicities required')
     manifests={label:[f'EMBER_OPACITY_MIXTURE 1 {len(zs)} logRho TOPS_ATOMIC_GS98_{label}'] for label in ['low','high']}
+    names={z:f'z{fraction_label(z,1000)}' for z in zs}
+    if len(set(names.values()))!=len(names):raise ValueError('metallicity labels collide')
     for z in zs:
         subset=sorted([v for v in planes if v['Z']==z],key=lambda v:v['X']);xs=[v['X'] for v in subset]
         if len(xs)<2 or len(set(xs))!=len(xs):raise ValueError('invalid composition grid')
@@ -36,7 +39,7 @@ def main():
             for x,(_,_,cells,_) in zip(xs,sources,strict=True):
                 lines.append(f'{x:.17g} {z:.17g}')
                 lines.extend(' '.join(f'{math.log10(cells[t,r]):.17g}' for r in densities) for t in temps)
-            name=f'tops_gs98_mixture_z{round(z*1000):03d}_{label}.dat'
+            name=f'tops_gs98_mixture_{names[z]}_{label}.dat'
             (a.output/name).write_text('\n'.join(lines)+'\n');manifests[label].append(f'{z:.17g} "{name}"')
             print(f'Z={z:g} {label}: {len(xs)} X, {len(temps)} T, {len(densities)} rho')
     for label,lines in manifests.items():(a.output/f'tops_gs98_mixture_{label}.dat').write_text('\n'.join(lines)+'\n')

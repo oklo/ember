@@ -6,12 +6,14 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 from fetch_tops_composition import fraction_label, cached_result
 from import_tops_composition import validate_mixture, read as read_tops
 from run_evolution_snapshot import input_data
 from audit_tops_heldout import active_top_weight, KEV_TO_K
+import import_tops_mixtures
 
 
 class SourceTests(unittest.TestCase):
@@ -110,6 +112,35 @@ class SourceTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'incomplete existing'):
                 cached_result(d,'sample',.125,.02,{})
             self.assertEqual(source.read_bytes(),b'original source response')
+
+    def test_primordial_and_trace_metal_tables_remain_distinct(self):
+        # The old rounded filenames silently replaced Z=0 with Z=0.0001.
+        # Synthetic opacities isolate that data-loss bug from source physics.
+        def source(path, plane):
+            tt=[.025,.05];rr=[1.,2.,3.,4.]
+            value=1.+1000*plane['Z']+plane['X']
+            return tt,rr,{(t,r):value for t in tt for r in rr},set()
+        with tempfile.TemporaryDirectory() as tmp:
+            root=Path(tmp);request=root/'request.json';request.write_text('{}')
+            planes=[dict(Z=z,X=x,file='synthetic.txt',request=request.name,
+                request_sha256=hashlib.sha256(request.read_bytes()).hexdigest())
+                for z in [0.,.0001,.001,.02] for x in [.7,.75]]
+            manifest=root/'manifest.json';manifest.write_text(json.dumps({'planes':planes}))
+            output=root/'tables'
+            with patch.object(sys,'argv',['import_tops_mixtures',str(manifest),str(output)]), \
+                 patch.object(import_tops_mixtures,'read',side_effect=source):
+                import_tops_mixtures.main()
+            import shlex
+            for label in ['low','high']:
+                entries=[shlex.split(l) for l in
+                    (output/f'tops_gs98_mixture_{label}.dat').read_text().splitlines()[1:]]
+                self.assertEqual(len({e[1] for e in entries}),4)
+                for z,name in entries:
+                    lines=(output/name).read_text().splitlines()
+                    x,stored_z=map(float,lines[3].split())
+                    self.assertEqual(stored_z,float(z))
+                    self.assertAlmostEqual(10**float(lines[4].split()[0]),1+1000*stored_z+x)
+            self.assertTrue((output/'tops_gs98_mixture_z020_low.dat').exists())
 
     def test_snapshot_follows_external_source_references(self):
         with tempfile.TemporaryDirectory() as tmp:

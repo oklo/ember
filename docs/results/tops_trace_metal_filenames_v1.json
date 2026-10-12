@@ -1,0 +1,19 @@
+{
+  "problem": "Rounding 1000*Z to an integer made Z=0 and Z=0.0001 write the same opacity filename.",
+  "change": "Use the existing exact decimal composition labels and reject any remaining filename collision.",
+  "checks": {
+    "regression": "Z=0,0.0001,0.001,0.02 all retain separate native-opacity planes.",
+    "suite": "8 tests passed in tests/test_tops_sources.py",
+    "native_source_reassembly": "All six Z=0/.001 family files match the independently prepared source import."
+  },
+  "source_manifest_sha256": "44f0889ce102ba839378dd2f453e9eaabb86ae5e6c0e38959384a2b18c15855d",
+  "table_sha256": {
+    "tops_gs98_mixture_z001_high.dat": "d1772c9bf08f959175fc17ec38518853a552cdda0a99a6c05341c3189b367723",
+    "tops_gs98_mixture_z000_high.dat": "296bb69011d8da5c1d91d3fa84d297346f878083b46a88d534973ab809b1bb77",
+    "tops_gs98_mixture_low.dat": "d2ead5d97797d8f690ee488c7018c702d0b635a46d640d96d07552bae8b6a309",
+    "tops_gs98_mixture_z000_low.dat": "2e067434dae0ae625a7a5df77a8910a29116f3a9ed917ba95764ba0a395a406c",
+    "tops_gs98_mixture_z001_low.dat": "fa0ff63fccc48c4c75c7f44ff5e50f1493501bac26ed293354c03fd35605ebf2",
+    "tops_gs98_mixture_high.dat": "8da89008685a7ecd9dbab2685ab35c12c72b2b437171e437f6e313b8759e14d0"
+  },
+  "scope": "Importer storage and source reassembly only; no stellar trajectory or primordial atmosphere validation is claimed."
+}
