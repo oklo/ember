@@ -1,6 +1,6 @@
 {
-  "updated_utc": "2026-10-11T22:22:32.073079+00:00",
-  "definition": "Cooling: nuclear fraction below0.001 on fading branch. Supported: 1Tyr, final fraction in[0.99,1.01], final50Gyr span<0.02. Mass ordering verified. Intervals are tested finite-age bounds, not statistical or total physical uncertainty.",
+  "updated_utc": "2026-10-12T10:21:48.960010+00:00",
+  "definition": "Cooling: nuclear fraction below0.001 on fading branch. Supported: 1Tyr, final fraction in[0.99,1.01], final50Gyr span<0.02. Brackets are local intervals between computed outcomes, not statistical errors or validated physical limits. Unfinished branches do not establish monotonic ordering.",
   "brackets": [
     {
       "metallicity": "z033",
@@ -28,7 +28,8 @@
         "envelope_mass_fraction": 0.001
       },
       "lower_case": "z033_nc_m0.07450",
-      "upper_case": "z033_nc_m0.07500_continue_1Tyr"
+      "upper_case": "z033_nc_m0.07500_continue_1Tyr",
+      "physical_uncertainty": "Neutral-metal core EOS, atmospheric composition response, cloud prescription and mixing are not validated uncertainties."
     },
     {
       "metallicity": "z058",
@@ -49,7 +50,8 @@
         "envelope_mass_fraction": 0.001
       },
       "lower_case": "z058_nc_m0.07300",
-      "upper_case": "z058_nc_m0.07325_continue_1Tyr"
+      "upper_case": "z058_nc_m0.07325_continue_1Tyr",
+      "physical_uncertainty": "Neutral-metal core EOS, atmospheric composition response, cloud prescription and mixing are not validated uncertainties."
     },
     {
       "metallicity": "z100",
@@ -77,7 +79,8 @@
         "envelope_mass_fraction": 0.0003
       },
       "lower_case": "z100_nc_m0.07075_long100",
-      "upper_case": "z100_nc_m0.07125_long1000"
+      "upper_case": "z100_nc_m0.07125_long1000",
+      "physical_uncertainty": "Neutral-metal core EOS, atmospheric composition response, cloud prescription and mixing are not validated uncertainties."
     },
     {
       "metallicity": "z173",
@@ -105,7 +108,8 @@
         "envelope_mass_fraction": 0.001
       },
       "lower_case": "z173_nc_m0.06750",
-      "upper_case": "z173_nc_m0.06800_continue_1Tyr"
+      "upper_case": "z173_nc_m0.06800_continue_1Tyr",
+      "physical_uncertainty": "Neutral-metal core EOS, atmospheric composition response, cloud prescription and mixing are not validated uncertainties."
     },
     {
       "metallicity": "z300",
@@ -136,7 +140,8 @@
         "envelope_mass_fraction": 0.001
       },
       "lower_case": null,
-      "upper_case": "z300_nc_m0.06500_continue_1Tyr"
+      "upper_case": "z300_nc_m0.06500_continue_1Tyr",
+      "physical_uncertainty": "Neutral-metal core EOS, atmospheric composition response, cloud prescription and mixing are not validated uncertainties."
     },
     {
       "metallicity": "z033",
@@ -164,7 +169,8 @@
         "envelope_mass_fraction": 0.0003
       },
       "lower_case": "z033_f2_m0.06950_long60",
-      "upper_case": "z033_f2_m0.07050_long1000"
+      "upper_case": "z033_f2_m0.07050_long1000",
+      "physical_uncertainty": "Neutral-metal core EOS, atmospheric composition response, cloud prescription and mixing are not validated uncertainties."
     },
     {
       "metallicity": "z058",
@@ -192,7 +198,8 @@
         "envelope_mass_fraction": 0.0003
       },
       "lower_case": "z058_f2_m0.06700_long60",
-      "upper_case": "z058_f2_m0.06900_long1000"
+      "upper_case": "z058_f2_m0.06900_long1000",
+      "physical_uncertainty": "Neutral-metal core EOS, atmospheric composition response, cloud prescription and mixing are not validated uncertainties."
     },
     {
       "metallicity": "z100",
@@ -220,7 +227,8 @@
         "envelope_mass_fraction": 0.001
       },
       "lower_case": "z100_f2_m0.06550",
-      "upper_case": "z100_f2_m0.06600_continue_1Tyr"
+      "upper_case": "z100_f2_m0.06600_continue_1Tyr",
+      "physical_uncertainty": "Neutral-metal core EOS, atmospheric composition response, cloud prescription and mixing are not validated uncertainties."
     },
     {
       "metallicity": "z173",
@@ -248,120 +256,287 @@
         "envelope_mass_fraction": 0.001
       },
       "lower_case": "z173_f2_m0.06250",
-      "upper_case": "z173_f2_m0.06300_continue_1Tyr"
+      "upper_case": "z173_f2_m0.06300_continue_1Tyr",
+      "physical_uncertainty": "Neutral-metal core EOS, atmospheric composition response, cloud prescription and mixing are not validated uncertainties."
     },
     {
       "metallicity": "z300",
       "cloud": "f2",
       "Z": 0.049446779395953475,
       "factor": 3.000000000000029,
-      "lower_cooling_mass": 0.058,
+      "lower_cooling_mass": 0.05835,
       "upper_burning_mass": 0.0585,
-      "width": 0.0005000000000000004,
-      "unresolved": [
-        {
-          "mass_Msun": 0.05815,
-          "age_Gyr": 299.1414848829351,
-          "nuclear_fraction": 1.0002810672500777,
-          "source_case": "z300_f2_m0.05815_continued_1Gyr"
-        },
-        {
-          "mass_Msun": 0.0582,
-          "age_Gyr": 311.56132497084104,
-          "nuclear_fraction": 1.0002473041798927,
-          "source_case": "z300_f2_m0.05820_continued_1Gyr"
-        },
-        {
-          "mass_Msun": 0.05825,
-          "age_Gyr": 294.3413838663289,
-          "nuclear_fraction": 1.0007640286709658,
-          "source_case": "z300_f2_m0.05825_continued_1Gyr"
-        },
-        {
-          "mass_Msun": 0.0583,
-          "age_Gyr": 329.14783228468644,
-          "nuclear_fraction": 1.000983415592176,
-          "source_case": "z300_f2_m0.05830_long1000"
-        },
-        {
-          "mass_Msun": 0.05835,
-          "age_Gyr": 809.9176963651569,
-          "nuclear_fraction": 0.9899062017082818,
-          "source_case": "z300_f2_m0.05835_long1000"
-        }
-      ],
-      "unmatched_eos_or_envelope": false,
+      "width": 0.0001500000000000043,
+      "unresolved": [],
+      "unmatched_eos_or_envelope": true,
       "lower_settings": {
-        "eos": "family_q6_candidate.bin",
+        "eos": "family_core_z04.bin",
         "envelope_mass_fraction": 0.0003
       },
       "upper_settings": {
         "eos": "family_q6_candidate.bin",
         "envelope_mass_fraction": 0.0003
       },
-      "lower_case": "z300_f2_m0.05800_long100",
-      "upper_case": "z300_f2_m0.05850_long1000"
+      "lower_case": "z300_f2_m0.05835_measured_lowz_897Gyr_v6",
+      "upper_case": "z300_f2_m0.05850_long1000",
+      "physical_uncertainty": "Neutral-metal core EOS, atmospheric composition response, cloud prescription and mixing are not validated uncertainties.",
+      "extended_tables": true,
+      "extension_note": "The cooling endpoint uses a checked EOS-domain extension and measured low-Z atmosphere response; the initial sequence is unchanged. Separate corrected_brackets record matched metal-ionization models; do not combine the two EOS treatments.",
+      "unresolved_below_cooling": [
+        {
+          "mass_Msun": 0.05815,
+          "age_Gyr": 550.0786265856262,
+          "nuclear_fraction": 1.001888918307519,
+          "source_case": "z300_f2_m0.05815_warm_lowz_600Gyr"
+        },
+        {
+          "mass_Msun": 0.0582,
+          "age_Gyr": 565.1416499710083,
+          "nuclear_fraction": 1.0019907955331793,
+          "source_case": "z300_f2_m0.05820_warm_lowz_650Gyr"
+        },
+        {
+          "mass_Msun": 0.05825,
+          "age_Gyr": 595.8532141956393,
+          "nuclear_fraction": 1.0013118122177498,
+          "source_case": "z300_f2_m0.05825_warm_lowz_650Gyr"
+        },
+        {
+          "mass_Msun": 0.0583,
+          "age_Gyr": 639.2548415544965,
+          "nuclear_fraction": 1.000987792970466,
+          "source_case": "z300_f2_m0.05830_warm_lowz_650Gyr"
+        }
+      ]
+    }
+  ],
+  "corrected_brackets": [
+    {
+      "Z": 0.0054940865995503855,
+      "cloud": "nc",
+      "lower_cooling_mass": 0.075,
+      "upper_burning_mass": 0.0755,
+      "lower_case": "lowz_clear_075_ext2_fresh_1tyr",
+      "upper_case": "lowz_clear_0755_ext2_fresh_1tyr",
+      "lower_age_Gyr": 81.09174158344818,
+      "upper_age_Gyr": 1000.0,
+      "lower_nuclear_fraction": 0.0006290941812154355,
+      "upper_nuclear_fraction": 1.0005132759861537,
+      "numerical_differences": {},
+      "physical_configuration_sha256": "29f56ec735d34514dacd62054005e793f0c4fddaad203d00f5bfbe9769fc5ba1",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "atmosphere_domain_assessment": null,
+      "unresolved": []
+    },
+    {
+      "Z": 0.0054940865995503855,
+      "cloud": "f2",
+      "lower_cooling_mass": 0.07,
+      "upper_burning_mass": 0.0705,
+      "lower_case": "lowz_cloudy_070_ext2_fresh_1tyr",
+      "upper_case": "lowz_cloudy_0705_ext2_fresh_1tyr",
+      "lower_age_Gyr": 54.12775450826458,
+      "upper_age_Gyr": 1000.0,
+      "lower_nuclear_fraction": 0.00033181213787631883,
+      "upper_nuclear_fraction": 1.0000623778930027,
+      "numerical_differences": {},
+      "physical_configuration_sha256": "5616423980368c26cb3984a400f005167ad18e3b15a7075c4d69913836a85a79",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "atmosphere_domain_assessment": null,
+      "unresolved": []
+    },
+    {
+      "Z": 0.009516037131604595,
+      "cloud": "nc",
+      "lower_cooling_mass": 0.0735,
+      "upper_burning_mass": 0.074,
+      "lower_case": "z058_clear_0735_ext2_fresh_1tyr",
+      "upper_case": "z058_clear_074_ext2_fresh_1tyr",
+      "lower_age_Gyr": 69.85310595502749,
+      "upper_age_Gyr": 1000.0,
+      "lower_nuclear_fraction": 0.0007017733434962914,
+      "upper_nuclear_fraction": 1.0006559084356164,
+      "numerical_differences": {},
+      "physical_configuration_sha256": "c08aa752f4d1a5d90b8905448b696ef7ea60865cac93c26ad372650f23d3ac45",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "atmosphere_domain_assessment": null,
+      "unresolved": [
+        {
+          "mass_Msun": 0.07375,
+          "case": "z058_clear_07375_ext2_fresh_1tyr",
+          "status": "unresolved",
+          "years": 729331609927.739
+        }
+      ]
+    },
+    {
+      "Z": 0.009516037131604595,
+      "cloud": "f2",
+      "lower_cooling_mass": 0.068,
+      "upper_burning_mass": 0.069,
+      "lower_case": "z058_cloudy_068_ext2_fresh_1tyr",
+      "upper_case": "z058_cloudy_069_ext2_fresh_1tyr",
+      "lower_age_Gyr": 52.92819231752465,
+      "upper_age_Gyr": 1000.0,
+      "lower_nuclear_fraction": 0.0003133717176971321,
+      "upper_nuclear_fraction": 1.0000913913455822,
+      "numerical_differences": {},
+      "physical_configuration_sha256": "cf3df9e4759f529ce17441c16979634e2b682a57cf47a085910787d8bdec76da",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "atmosphere_domain_assessment": null,
+      "unresolved": [
+        {
+          "mass_Msun": 0.0685,
+          "case": "z058_cloudy_0685_ext2_fresh_1tyr",
+          "status": "unresolved",
+          "years": 98260345280.24486
+        }
+      ]
+    },
+    {
+      "Z": 0.016482259798651158,
+      "cloud": "nc",
+      "lower_cooling_mass": 0.07125,
+      "upper_burning_mass": 0.0725,
+      "lower_case": "solar_clear_07125_ext2_1tyr",
+      "upper_case": "solar_clear_0725_ext2_1tyr",
+      "lower_age_Gyr": 53.016370664826304,
+      "upper_age_Gyr": 1000.0,
+      "lower_nuclear_fraction": 0.0006479722964364252,
+      "upper_nuclear_fraction": 1.000713955463403,
+      "numerical_differences": {},
+      "physical_configuration_sha256": "8a974c9ef4fce3c957a1abec47026c0e606ab232e15fa74b5721e5e0dd31a237",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "atmosphere_domain_assessment": null,
+      "unresolved": [
+        {
+          "mass_Msun": 0.071875,
+          "case": "solar_clear_071875_ext2_fresh_1tyr",
+          "status": "unresolved",
+          "years": 311740861064.6119
+        }
+      ]
+    },
+    {
+      "Z": 0.016482259798651158,
+      "cloud": "f2",
+      "lower_cooling_mass": 0.0665,
+      "upper_burning_mass": 0.06675,
+      "lower_case": "solar_cloudy_0665_ext2_fresh_1tyr",
+      "upper_case": "solar_cloudy_06675_ext2_fresh_1tyr",
+      "lower_age_Gyr": 89.56475487640826,
+      "upper_age_Gyr": 1000.0,
+      "lower_nuclear_fraction": 0.0008250245954594823,
+      "upper_nuclear_fraction": 1.0001730206042858,
+      "numerical_differences": {},
+      "physical_configuration_sha256": "6b69ccea163a75b8d6237c422383ec02b35af22c216a16ac1be3aa4f9e8d163f",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "atmosphere_domain_assessment": null,
+      "unresolved": []
+    },
+    {
+      "Z": 0.028548111394813776,
+      "cloud": "nc",
+      "lower_cooling_mass": 0.069,
+      "upper_burning_mass": 0.07,
+      "lower_case": "z173_clear_069_ext2_fresh_1tyr",
+      "upper_case": "z173_clear_070_ext2_fresh_1tyr",
+      "lower_age_Gyr": 56.576614496266515,
+      "upper_age_Gyr": 1000.0,
+      "lower_nuclear_fraction": 0.000779631537656286,
+      "upper_nuclear_fraction": 1.0007609182145283,
+      "numerical_differences": {
+        "zone_threads": [
+          "2",
+          "4"
+        ]
+      },
+      "physical_configuration_sha256": "475ae0ac4917b51df1259517f2164048291bc1ee849d86b6afee560cfec723a3",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "atmosphere_domain_assessment": null,
+      "unresolved": [
+        {
+          "mass_Msun": 0.0695,
+          "case": "z173_clear_0695_ext2_fresh_1tyr",
+          "status": "unresolved",
+          "years": 264767022862.43893
+        }
+      ]
+    },
+    {
+      "Z": 0.028548111394813776,
+      "cloud": "f2",
+      "lower_cooling_mass": 0.0635,
+      "upper_burning_mass": 0.0645,
+      "lower_case": "z173_cloudy_0635_ext2_fresh_1tyr",
+      "upper_case": "z173_cloudy_0645_ext2_fresh_1tyr",
+      "lower_age_Gyr": 60.44842164474836,
+      "upper_age_Gyr": 1000.0,
+      "lower_nuclear_fraction": 0.0003592877314640174,
+      "upper_nuclear_fraction": 1.0001650103949058,
+      "numerical_differences": {},
+      "physical_configuration_sha256": "641fddf5ce0fabdd479e2972aabd8661d85aaece3b2c27d9cc25a2ec9b47e774",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "atmosphere_domain_assessment": null,
+      "unresolved": [
+        {
+          "mass_Msun": 0.064,
+          "case": "z173_cloudy_064_ext2_fresh_1tyr",
+          "status": "unresolved",
+          "years": 85434033135.38266
+        }
+      ]
+    },
+    {
+      "Z": 0.049446779395953475,
+      "cloud": "nc",
+      "lower_cooling_mass": 0.066,
+      "upper_burning_mass": 0.0665,
+      "lower_case": "ext2_clear_066_hhe065_probe",
+      "upper_case": "ext2_clear_0665_fresh_1tyr",
+      "lower_age_Gyr": 71.44977116551523,
+      "upper_age_Gyr": 1000.0,
+      "lower_nuclear_fraction": 0.0008823212827542798,
+      "upper_nuclear_fraction": 1.0006628468010075,
+      "numerical_differences": {},
+      "physical_configuration_sha256": "995b756f9907a11d8230de4ed9aa7a4ee1d2d77371e1e64fb6accc5dc6d88cb1",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "atmosphere_domain_assessment": {
+        "allowed_hydrogen_mismatch": [
+          0.06,
+          0.065
+        ],
+        "qualification": "Finite-age bracket under the retained fixed-H/He atmosphere approximation. Full measured pair changes T100 by1.027%; the extra0.005 in X adds about0.07823%. Source differences and cloud/EOS uncertainty exceed the mass-sampling interval; no statistical uncertainty is inferred.",
+        "review_sha256": "fe4863ed5eb5f9ed34619876a5886dce77603ad2cd4773fd5e1821e6f6eb0379"
+      },
+      "unresolved": []
+    },
+    {
+      "Z": 0.049446779395953475,
+      "cloud": "f2",
+      "lower_cooling_mass": 0.06,
+      "upper_burning_mass": 0.061,
+      "lower_case": "ext2_cloudy_060_1tyr",
+      "upper_case": "ext2_cloudy_061_fresh_1tyr",
+      "lower_age_Gyr": 67.3197694226772,
+      "upper_age_Gyr": 1000.0,
+      "lower_nuclear_fraction": 0.00041774162087921464,
+      "upper_nuclear_fraction": 1.0001091855931878,
+      "numerical_differences": {},
+      "physical_configuration_sha256": "b64890ed061e038ae16ed067122fabd197f42d1f05dc0bfbc33d1ce2f252dbf6",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "atmosphere_domain_assessment": null,
+      "unresolved": [
+        {
+          "mass_Msun": 0.0605,
+          "case": "ext2_cloudy_0605_fresh_1tyr",
+          "status": "unresolved",
+          "years": 204606055473.07584
+        }
+      ]
     }
   ],
   "sources": [
-    {
-      "metallicity": "z033",
-      "cloud": "f2",
-      "mass_Msun": 0.067,
-      "endpoint": {
-        "case": "z033_f2_m0.06700",
-        "status": "cooling",
-        "age_Gyr": 31.63311101178477,
-        "nuclear_fraction": 0.0008189513124011874,
-        "Teff_K": 840.7387370247233,
-        "radius_Rsun": 0.07346474825568564,
-        "luminosity_Lsun": 2.429382505194038e-06,
-        "central_T_K": 627592.1260855834,
-        "central_density_g_cm3": 1396.3228614239354,
-        "surface_X": 0.7600983607626479,
-        "surface_Z": 0.0036374434549133186,
-        "models": 196,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": 433.239034,
-        "wall_seconds": 297.76519687473774
-      },
-      "histories": [
-        {
-          "case": "z033_f2_m0.06700",
-          "snapshot_sha256": "7e0ca7259961b6202c184de9658effe13f29775f0f5015c8220b75ae5a7507a3",
-          "rows": 196
-        }
-      ]
-    },
-    {
-      "metallicity": "z033",
-      "cloud": "f2",
-      "mass_Msun": 0.069,
-      "endpoint": {
-        "case": "z033_f2_m0.06900_coverage03",
-        "status": "cooling",
-        "age_Gyr": 42.18743401270135,
-        "nuclear_fraction": 0.0004951747147247356,
-        "Teff_K": 812.3284336480599,
-        "radius_Rsun": 0.07231035730059461,
-        "luminosity_Lsun": 2.051262842297921e-06,
-        "central_T_K": 565473.8995093452,
-        "central_density_g_cm3": 1535.1688548168474,
-        "surface_X": 0.7753658405312537,
-        "surface_Z": 0.0029841657442986813,
-        "models": 212,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": 529.364145,
-        "wall_seconds": 361.16569404210895
-      },
-      "histories": [
-        {
-          "case": "z033_f2_m0.06900_coverage03",
-          "snapshot_sha256": "02564711949339fe54800ad6873a067ffa0fe42111858ceda13b291c57ad3570",
-          "rows": 212
-        }
-      ]
-    },
     {
       "metallicity": "z033",
       "cloud": "f2",
@@ -491,98 +666,6 @@
     },
     {
       "metallicity": "z033",
-      "cloud": "f2",
-      "mass_Msun": 0.071,
-      "endpoint": {
-        "case": "z033_f2_m0.07100_continue_1Tyr",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 0.9999936143424633,
-        "Teff_K": 1363.841701017668,
-        "radius_Rsun": 0.08508332790675717,
-        "luminosity_Lsun": 2.256516307163841e-05,
-        "central_T_K": 2425639.459625553,
-        "central_density_g_cm3": 862.1908524829207,
-        "surface_X": 0.7160865556024125,
-        "surface_Z": 0.005494086599550456,
-        "models": 2125,
-        "stop": "requested age",
-        "cpu_seconds": 1761.070986,
-        "wall_seconds": 1338.0390914157033
-      },
-      "histories": [
-        {
-          "case": "z033_f2_m0.07100",
-          "snapshot_sha256": "5ee293c0eb2c9e29208b2b4dffda8a9200857026708febb883634d8994be052b",
-          "rows": 164
-        },
-        {
-          "case": "z033_f2_m0.07100_continue_1Tyr",
-          "snapshot_sha256": "064b2514d6f3fbc0a53f6a6b3ed549566aba6ec1352a0772d7d14a35f1e3d072",
-          "rows": 1962
-        }
-      ]
-    },
-    {
-      "metallicity": "z033",
-      "cloud": "nc",
-      "mass_Msun": 0.073,
-      "endpoint": {
-        "case": "z033_nc_m0.07300_coverage03",
-        "status": "cooling",
-        "age_Gyr": 38.745865906544935,
-        "nuclear_fraction": 0.0006930974062801892,
-        "Teff_K": 833.3051613513514,
-        "radius_Rsun": 0.07108536108104478,
-        "luminosity_Lsun": 2.19518088804289e-06,
-        "central_T_K": 568985.0907651124,
-        "central_density_g_cm3": 1703.2964629267287,
-        "surface_X": 0.7739213967197602,
-        "surface_Z": 0.002994804976502122,
-        "models": 225,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": 547.39165,
-        "wall_seconds": 374.8015534169972
-      },
-      "histories": [
-        {
-          "case": "z033_nc_m0.07300_coverage03",
-          "snapshot_sha256": "9889704527b42f72bf834449a6187dd34d33361736a02e4441b78bb137825c24",
-          "rows": 225
-        }
-      ]
-    },
-    {
-      "metallicity": "z033",
-      "cloud": "nc",
-      "mass_Msun": 0.074,
-      "endpoint": {
-        "case": "z033_nc_m0.07400",
-        "status": "cooling",
-        "age_Gyr": 46.80471729891481,
-        "nuclear_fraction": 0.0008405759331800924,
-        "Teff_K": 845.6286343211804,
-        "radius_Rsun": 0.07086115904650195,
-        "luminosity_Lsun": 2.313283729798741e-06,
-        "central_T_K": 580174.0431649806,
-        "central_density_g_cm3": 1752.2674631329428,
-        "surface_X": 0.7752428226595364,
-        "surface_Z": 0.002951934632191986,
-        "models": 237,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": 601.39045,
-        "wall_seconds": 410.41959620732814
-      },
-      "histories": [
-        {
-          "case": "z033_nc_m0.07400",
-          "snapshot_sha256": "3ae6c475a4a39f6840fa4026fb2a09f82083ca93526cb08e0a53c6b6ce8627fc",
-          "rows": 237
-        }
-      ]
-    },
-    {
-      "metallicity": "z033",
       "cloud": "nc",
       "mass_Msun": 0.0745,
       "endpoint": {
@@ -675,69 +758,6 @@
           "case": "z033_nc_m0.07500_continue_1Tyr",
           "snapshot_sha256": "21a1fd68e33cf485047c7caac8a56537babf04015cee73c1705423cc5054bdce",
           "rows": 1887
-        }
-      ]
-    },
-    {
-      "metallicity": "z033",
-      "cloud": "nc",
-      "mass_Msun": 0.077,
-      "endpoint": {
-        "case": "z033_nc_m0.07700_continue_1Tyr",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0003664701189814,
-        "Teff_K": 2085.8170635852284,
-        "radius_Rsun": 0.08975585823828029,
-        "luminosity_Lsun": 0.000137380201862135,
-        "central_T_K": 3187501.738815732,
-        "central_density_g_cm3": 805.1597243805045,
-        "surface_X": 0.6879605285958356,
-        "surface_Z": 0.00549408659955268,
-        "models": 653,
-        "stop": "requested age",
-        "cpu_seconds": 1277.965239,
-        "wall_seconds": 1056.6177964573726
-      },
-      "histories": [
-        {
-          "case": "z033_nc_m0.07700",
-          "snapshot_sha256": "38006f3088b9927678d4ec8f314e1a42a56cb52d68651ea1b1980a825c200a16",
-          "rows": 162
-        },
-        {
-          "case": "z033_nc_m0.07700_continue_1Tyr",
-          "snapshot_sha256": "9ccb6121ffd558ac8456c365494387312e022394fb93d1731e5109844e7de4ca",
-          "rows": 492
-        }
-      ]
-    },
-    {
-      "metallicity": "z058",
-      "cloud": "f2",
-      "mass_Msun": 0.066,
-      "endpoint": {
-        "case": "z058_f2_m0.06600",
-        "status": "cooling",
-        "age_Gyr": 39.07789968866879,
-        "nuclear_fraction": 0.0004956316280228773,
-        "Teff_K": 801.0793608446722,
-        "radius_Rsun": 0.0729894446330453,
-        "luminosity_Lsun": 1.9765871477859546e-06,
-        "central_T_K": 577630.353039098,
-        "central_density_g_cm3": 1428.1543463471721,
-        "surface_X": 0.7682695844940358,
-        "surface_Z": 0.005491849304888495,
-        "models": 202,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": 469.274488,
-        "wall_seconds": 318.9630243750289
-      },
-      "histories": [
-        {
-          "case": "z058_f2_m0.06600",
-          "snapshot_sha256": "aa8cc79423552a89761a5be80f4544f71d5d94a75612060b607577b7e6a7de0e",
-          "rows": 202
         }
       ]
     },
@@ -870,69 +890,6 @@
     },
     {
       "metallicity": "z058",
-      "cloud": "f2",
-      "mass_Msun": 0.07,
-      "endpoint": {
-        "case": "z058_f2_m0.07000_continue_1Tyr",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0001912887014415,
-        "Teff_K": 1427.4146375861098,
-        "radius_Rsun": 0.08737761159522552,
-        "luminosity_Lsun": 2.8555817710998523e-05,
-        "central_T_K": 2560514.44748926,
-        "central_density_g_cm3": 785.7635444474167,
-        "surface_X": 0.7099156677325672,
-        "surface_Z": 0.009516037131604597,
-        "models": 2126,
-        "stop": "requested age",
-        "cpu_seconds": 1785.337734,
-        "wall_seconds": 1349.9865712085739
-      },
-      "histories": [
-        {
-          "case": "z058_f2_m0.07000",
-          "snapshot_sha256": "771ae694da9c1c5bb57d51c39cf8c73370a8fbc389acd9c1e07f023253d8de69",
-          "rows": 167
-        },
-        {
-          "case": "z058_f2_m0.07000_continue_1Tyr",
-          "snapshot_sha256": "ab76bd41a86dfff874311868bcf590e51bb49416ac24c83a4ec2201e9c995472",
-          "rows": 1960
-        }
-      ]
-    },
-    {
-      "metallicity": "z058",
-      "cloud": "nc",
-      "mass_Msun": 0.072,
-      "endpoint": {
-        "case": "z058_nc_m0.07200",
-        "status": "cooling",
-        "age_Gyr": 44.80814797503613,
-        "nuclear_fraction": 0.0007144636509969943,
-        "Teff_K": 826.8986400933074,
-        "radius_Rsun": 0.07098507496251406,
-        "luminosity_Lsun": 2.1224471242770904e-06,
-        "central_T_K": 569963.8160964383,
-        "central_density_g_cm3": 1710.5185407691908,
-        "surface_X": 0.777099017301113,
-        "surface_Z": 0.004835703792875635,
-        "models": 233,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": 568.424699,
-        "wall_seconds": 387.1365025844425
-      },
-      "histories": [
-        {
-          "case": "z058_nc_m0.07200",
-          "snapshot_sha256": "0eb7c5d002c125ffa9581cf0018f9f164896ae04bb6848ab9d27150ff47cbd7e",
-          "rows": 233
-        }
-      ]
-    },
-    {
-      "metallicity": "z058",
       "cloud": "nc",
       "mass_Msun": 0.073,
       "endpoint": {
@@ -991,137 +948,6 @@
           "case": "z058_nc_m0.07325_continue_1Tyr",
           "snapshot_sha256": "7128fb1556af4ef743bb30b0be7870975a234e2242ddf5a3393ce27a9a112572",
           "rows": 1845
-        }
-      ]
-    },
-    {
-      "metallicity": "z058",
-      "cloud": "nc",
-      "mass_Msun": 0.0735,
-      "endpoint": {
-        "case": "z058_nc_m0.07350_continue_1Tyr",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.000609636154878,
-        "Teff_K": 1611.8069586720526,
-        "radius_Rsun": 0.08420155424746778,
-        "luminosity_Lsun": 4.31107918628481e-05,
-        "central_T_K": 2619871.308152006,
-        "central_density_g_cm3": 924.4290046019169,
-        "surface_X": 0.7075501471126414,
-        "surface_Z": 0.009516037131604597,
-        "models": 2086,
-        "stop": "requested age",
-        "cpu_seconds": 1782.93653,
-        "wall_seconds": 1330.6421039998531
-      },
-      "histories": [
-        {
-          "case": "z058_nc_m0.07350",
-          "snapshot_sha256": "84ab4a1156127efd5244ae89a8e22c82c36b117848f6a18e2df0e582e9e2aa35",
-          "rows": 188
-        },
-        {
-          "case": "z058_nc_m0.07350_continue_1Tyr",
-          "snapshot_sha256": "3670462a7e73762f859cb541d24053eb6966d3c67f6b7661de32fc76b08c2f65",
-          "rows": 1899
-        }
-      ]
-    },
-    {
-      "metallicity": "z058",
-      "cloud": "nc",
-      "mass_Msun": 0.074,
-      "endpoint": {
-        "case": "z058_nc_m0.07400_continue_1Tyr",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0004938151380705,
-        "Teff_K": 1736.2727189127713,
-        "radius_Rsun": 0.08594182804187707,
-        "luminosity_Lsun": 6.047482475413026e-05,
-        "central_T_K": 2780115.4393441,
-        "central_density_g_cm3": 876.9173143951159,
-        "surface_X": 0.7025018399189304,
-        "surface_Z": 0.009516037131604597,
-        "models": 659,
-        "stop": "requested age",
-        "cpu_seconds": 940.435475,
-        "wall_seconds": 669.9355205418542
-      },
-      "histories": [
-        {
-          "case": "z058_nc_m0.07400",
-          "snapshot_sha256": "568031575fce80f3d582cddbba34a7223da5015dd98556d55ef99560f03ac00c",
-          "rows": 175
-        },
-        {
-          "case": "z058_nc_m0.07400_continue_1Tyr",
-          "snapshot_sha256": "775ee1db8148a613dd98120e56e65df5f69cf7b76d8cee04acfa607f75813fac",
-          "rows": 485
-        }
-      ]
-    },
-    {
-      "metallicity": "z058",
-      "cloud": "nc",
-      "mass_Msun": 0.076,
-      "endpoint": {
-        "case": "z058_nc_m0.07600_continue_1Tyr",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0002861111385903,
-        "Teff_K": 2087.2842096884283,
-        "radius_Rsun": 0.09194067213482784,
-        "luminosity_Lsun": 0.00014455575212569792,
-        "central_T_K": 3276583.055558372,
-        "central_density_g_cm3": 740.3116806917175,
-        "surface_X": 0.6798429566031087,
-        "surface_Z": 0.009516037131613093,
-        "models": 652,
-        "stop": "requested age",
-        "cpu_seconds": 1278.236363,
-        "wall_seconds": 1029.5050918329507
-      },
-      "histories": [
-        {
-          "case": "z058_nc_m0.07600",
-          "snapshot_sha256": "12866157b3ebaccd5cdb74c5a03aabc8c0b16f6b2f5c9cc7968babdd0941d149",
-          "rows": 160
-        },
-        {
-          "case": "z058_nc_m0.07600_continue_1Tyr",
-          "snapshot_sha256": "2f3fcf129e8fa58d73ec88ddb253e7c9fe4b8ef40fa1a011e6551de011da8c5a",
-          "rows": 493
-        }
-      ]
-    },
-    {
-      "metallicity": "z100",
-      "cloud": "f2",
-      "mass_Msun": 0.0645,
-      "endpoint": {
-        "case": "z100_f2_m0.06450",
-        "status": "cooling",
-        "age_Gyr": 45.4652783415944,
-        "nuclear_fraction": 0.000519587862990204,
-        "Teff_K": 794.1295171483746,
-        "radius_Rsun": 0.0727182870175304,
-        "luminosity_Lsun": 1.8947255557695594e-06,
-        "central_T_K": 580188.0639871315,
-        "central_density_g_cm3": 1439.6706937623103,
-        "surface_X": 0.768960792870887,
-        "surface_Z": 0.008977736112285471,
-        "models": 208,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": 509.337675,
-        "wall_seconds": 345.5397042501718
-      },
-      "histories": [
-        {
-          "case": "z100_f2_m0.06450",
-          "snapshot_sha256": "fc8e0c31646bebd15d1b104658c26f5e187206d29c85acaa572d0aa48b9da646",
-          "rows": 208
         }
       ]
     },
@@ -1224,98 +1050,6 @@
           "case": "z100_f2_m0.06600_continue_1Tyr",
           "snapshot_sha256": "3b825c999d984758370a437903196d3c4b7698778fcfec1630c50f36c30eb15f",
           "rows": 1927
-        }
-      ]
-    },
-    {
-      "metallicity": "z100",
-      "cloud": "f2",
-      "mass_Msun": 0.0665,
-      "endpoint": {
-        "case": "z100_f2_m0.06650_continue_1Tyr",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.000082615424096,
-        "Teff_K": 1282.240998815066,
-        "radius_Rsun": 0.08840719910112915,
-        "luminosity_Lsun": 1.9034767547362393e-05,
-        "central_T_K": 2479326.21544659,
-        "central_density_g_cm3": 718.8796628036158,
-        "surface_X": 0.705882785366621,
-        "surface_Z": 0.016482259798651158,
-        "models": 2116,
-        "stop": "requested age",
-        "cpu_seconds": 1839.793727,
-        "wall_seconds": 1491.7409527916461
-      },
-      "histories": [
-        {
-          "case": "z100_f2_m0.06650",
-          "snapshot_sha256": "d76ae259c8700b85f50ce7d31a87bc280255a40ac27e6939595d4b3213558709",
-          "rows": 167
-        },
-        {
-          "case": "z100_f2_m0.06650_continue_1Tyr",
-          "snapshot_sha256": "1893ef8809bccb90a1aa50caa3c58bdce9a55f4805bfbb83cdddd9c6391eefc0",
-          "rows": 1950
-        }
-      ]
-    },
-    {
-      "metallicity": "z100",
-      "cloud": "nc",
-      "mass_Msun": 0.07,
-      "endpoint": {
-        "case": "z100_nc_m0.07000",
-        "status": "cooling",
-        "age_Gyr": 48.283348316860135,
-        "nuclear_fraction": 0.0006949525424594218,
-        "Teff_K": 815.8081550606115,
-        "radius_Rsun": 0.07080172359272441,
-        "luminosity_Lsun": 2.0004767493207633e-06,
-        "central_T_K": 568530.0810465992,
-        "central_density_g_cm3": 1704.1053980768118,
-        "surface_X": 0.7786517087198842,
-        "surface_Z": 0.007818874448261603,
-        "models": 236,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": 555.722839,
-        "wall_seconds": 378.6836564159021
-      },
-      "histories": [
-        {
-          "case": "z100_nc_m0.07000",
-          "snapshot_sha256": "9e61142e5b303b965719744b498fb74f2b5a7ad36ac57ac577f28631d9efc94e",
-          "rows": 236
-        }
-      ]
-    },
-    {
-      "metallicity": "z100",
-      "cloud": "nc",
-      "mass_Msun": 0.0705,
-      "endpoint": {
-        "case": "z100_nc_m0.07050",
-        "status": "cooling",
-        "age_Gyr": 56.41390167090698,
-        "nuclear_fraction": 0.0008179982001287543,
-        "Teff_K": 825.2948476501904,
-        "radius_Rsun": 0.07072292572388084,
-        "luminosity_Lsun": 2.0905023048305294e-06,
-        "central_T_K": 579745.6606479246,
-        "central_density_g_cm3": 1732.8383347926397,
-        "surface_X": 0.778721263217966,
-        "surface_Z": 0.007845223423249769,
-        "models": 239,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": 614.796021,
-        "wall_seconds": 418.411385666579
-      },
-      "histories": [
-        {
-          "case": "z100_nc_m0.07050",
-          "snapshot_sha256": "f4a199dd88bf3a4e0cb83bd2eaa303d4ad470ab272f8004bc9dba0d3cadaae1f",
-          "rows": 239
         }
       ]
     },
@@ -1432,137 +1166,6 @@
       ]
     },
     {
-      "metallicity": "z100",
-      "cloud": "nc",
-      "mass_Msun": 0.0715,
-      "endpoint": {
-        "case": "z100_nc_m0.07150_long1000",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0006719074566544,
-        "Teff_K": 1575.4902585013049,
-        "radius_Rsun": 0.08448547748701292,
-        "luminosity_Lsun": 3.9620567603064895e-05,
-        "central_T_K": 2623413.0170254433,
-        "central_density_g_cm3": 889.7400299793815,
-        "surface_X": 0.7010662306287659,
-        "surface_Z": 0.016482259798651158,
-        "models": 4260,
-        "stop": "requested age",
-        "cpu_seconds": 3993.162242,
-        "wall_seconds": 3111.624858875759
-      },
-      "histories": [
-        {
-          "case": "z100_nc_m0.07150_refined",
-          "snapshot_sha256": "60dcdfc0deba9a35d69425417e639685e786174fc52e05996c8f946b97107690",
-          "rows": 338
-        },
-        {
-          "case": "z100_nc_m0.07150_long1000",
-          "snapshot_sha256": "7698cf165822fa535715af30a764e730e9e3bf3e17da5ba99a5fedd78252543f",
-          "rows": 3923
-        }
-      ]
-    },
-    {
-      "metallicity": "z100",
-      "cloud": "nc",
-      "mass_Msun": 0.07175,
-      "endpoint": {
-        "case": "z100_nc_m0.07175_long1000",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0005764181082368,
-        "Teff_K": 1636.9453071576136,
-        "radius_Rsun": 0.08546421999959909,
-        "luminosity_Lsun": 4.724969634092188e-05,
-        "central_T_K": 2706379.0139718303,
-        "central_density_g_cm3": 863.3700555346113,
-        "surface_X": 0.6987487656439157,
-        "surface_Z": 0.016482259798651158,
-        "models": 4260,
-        "stop": "requested age",
-        "cpu_seconds": 3725.227569,
-        "wall_seconds": 2840.410353916697
-      },
-      "histories": [
-        {
-          "case": "z100_nc_m0.07175_refined",
-          "snapshot_sha256": "23261243c179189579688783a1950118caf27a9837028a3b9fe4873a7fa32b65",
-          "rows": 338
-        },
-        {
-          "case": "z100_nc_m0.07175_long1000",
-          "snapshot_sha256": "2dec285bc200b69c609626af9c862b712c07c640f6c2d4de4b55d19f10fc5ddf",
-          "rows": 3923
-        }
-      ]
-    },
-    {
-      "metallicity": "z100",
-      "cloud": "nc",
-      "mass_Msun": 0.072,
-      "endpoint": {
-        "case": "z100_nc_m0.07200_continue_1Tyr",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0005081939838218,
-        "Teff_K": 1691.4511418984148,
-        "radius_Rsun": 0.08635490902415166,
-        "luminosity_Lsun": 5.499276680138196e-05,
-        "central_T_K": 2780951.361748248,
-        "central_density_g_cm3": 840.6027253338674,
-        "surface_X": 0.6963968392516063,
-        "surface_Z": 0.016482259798651137,
-        "models": 659,
-        "stop": "requested age",
-        "cpu_seconds": 893.141374,
-        "wall_seconds": 737.0830365410075
-      },
-      "histories": [
-        {
-          "case": "z100_nc_m0.07200",
-          "snapshot_sha256": "ab5949b5e15c57ce70cda1f6398f99bd23772fb3e3a7ee85ec024b851cb43418",
-          "rows": 176
-        },
-        {
-          "case": "z100_nc_m0.07200_continue_1Tyr",
-          "snapshot_sha256": "04acfb950c860416b10349d21306819a070885735601ea328ec96e206dda8bf2",
-          "rows": 484
-        }
-      ]
-    },
-    {
-      "metallicity": "z173",
-      "cloud": "f2",
-      "mass_Msun": 0.0615,
-      "endpoint": {
-        "case": "z173_f2_m0.06150",
-        "status": "cooling",
-        "age_Gyr": 49.92248580888193,
-        "nuclear_fraction": 0.0004767803160013784,
-        "Teff_K": 777.3243492968116,
-        "radius_Rsun": 0.0722414998899389,
-        "luminosity_Lsun": 1.7166283268976087e-06,
-        "central_T_K": 575104.9221271912,
-        "central_density_g_cm3": 1437.6783983912437,
-        "surface_X": 0.7663293898250895,
-        "surface_Z": 0.01476342887574179,
-        "models": 211,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": 543.698099,
-        "wall_seconds": 366.2702554576099
-      },
-      "histories": [
-        {
-          "case": "z173_f2_m0.06150",
-          "snapshot_sha256": "c797f94701c8babcf9661b323820465d1534c698d86543ede1ebac3371aaa876",
-          "rows": 211
-        }
-      ]
-    },
-    {
       "metallicity": "z173",
       "cloud": "f2",
       "mass_Msun": 0.0625,
@@ -1656,132 +1259,6 @@
           "case": "z173_f2_m0.06300_continue_1Tyr",
           "snapshot_sha256": "5563ad90bd4940ef233e2ced4d427228ea072d46014edfe6f5057f641978421c",
           "rows": 1919
-        }
-      ]
-    },
-    {
-      "metallicity": "z173",
-      "cloud": "f2",
-      "mass_Msun": 0.0635,
-      "endpoint": {
-        "case": "z173_f2_m0.06350_continue_1Tyr",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0000858917441307,
-        "Teff_K": 1238.6068976095262,
-        "radius_Rsun": 0.08967697883861116,
-        "luminosity_Lsun": 1.7052560243991426e-05,
-        "central_T_K": 2507512.385014314,
-        "central_density_g_cm3": 657.4044352750749,
-        "surface_X": 0.6942412794279679,
-        "surface_Z": 0.028548111394814175,
-        "models": 657,
-        "stop": "requested age",
-        "cpu_seconds": 623.898899,
-        "wall_seconds": 470.3252340005711
-      },
-      "histories": [
-        {
-          "case": "z173_f2_m0.06350",
-          "snapshot_sha256": "eafa882e1fa705f385449b040e5bc26992d788a2f1b2e7687289dfed930eb210",
-          "rows": 170
-        },
-        {
-          "case": "z173_f2_m0.06350_continue_1Tyr",
-          "snapshot_sha256": "0f6e22b6926c82e4c227cba7e710bfe38bebf1272734a5f0edfbd5c3553f658d",
-          "rows": 488
-        }
-      ]
-    },
-    {
-      "metallicity": "z173",
-      "cloud": "f2",
-      "mass_Msun": 0.0655,
-      "endpoint": {
-        "case": "z173_f2_m0.06550_continue_1Tyr",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0000857454165346,
-        "Teff_K": 1406.329108311881,
-        "radius_Rsun": 0.09158592510610068,
-        "luminosity_Lsun": 2.9559631456467667e-05,
-        "central_T_K": 2715860.2764451494,
-        "central_density_g_cm3": 639.1912951935424,
-        "surface_X": 0.6895948169661603,
-        "surface_Z": 0.028548111394813842,
-        "models": 655,
-        "stop": "requested age",
-        "cpu_seconds": 769.971109,
-        "wall_seconds": 634.53259850014
-      },
-      "histories": [
-        {
-          "case": "z173_f2_m0.06550",
-          "snapshot_sha256": "f38701c8116815db4c5d0d425949832c4015348ac76f418f0fa448bec17a555c",
-          "rows": 164
-        },
-        {
-          "case": "z173_f2_m0.06550_continue_1Tyr",
-          "snapshot_sha256": "38b014bd14315e3a681af811f717720d8752c71832c5c17a76bbe7c407c2f577",
-          "rows": 492
-        }
-      ]
-    },
-    {
-      "metallicity": "z173",
-      "cloud": "nc",
-      "mass_Msun": 0.066,
-      "endpoint": {
-        "case": "z173_nc_m0.06600",
-        "status": "cooling",
-        "age_Gyr": 44.26230186137094,
-        "nuclear_fraction": 0.000594294943743994,
-        "Teff_K": 794.7803014842153,
-        "radius_Rsun": 0.0705893015552136,
-        "luminosity_Lsun": 1.791264943243901e-06,
-        "central_T_K": 563135.6349973546,
-        "central_density_g_cm3": 1647.6746292336086,
-        "surface_X": 0.7743573606706129,
-        "surface_Z": 0.013148297406561362,
-        "models": 224,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": 581.910568,
-        "wall_seconds": 394.13847395870835
-      },
-      "histories": [
-        {
-          "case": "z173_nc_m0.06600",
-          "snapshot_sha256": "610246a13492e7d388a83a0d87abbcc7b125d4a248e24c9ae4b257b328ddc5bd",
-          "rows": 224
-        }
-      ]
-    },
-    {
-      "metallicity": "z173",
-      "cloud": "nc",
-      "mass_Msun": 0.067,
-      "endpoint": {
-        "case": "z173_nc_m0.06700",
-        "status": "cooling",
-        "age_Gyr": 50.768151134823,
-        "nuclear_fraction": 0.0006962754077407888,
-        "Teff_K": 804.3372672921395,
-        "radius_Rsun": 0.07031011917557953,
-        "luminosity_Lsun": 1.864155392849522e-06,
-        "central_T_K": 569961.0945161815,
-        "central_density_g_cm3": 1708.0096349786056,
-        "surface_X": 0.7770794157878561,
-        "surface_Z": 0.012760090532910126,
-        "models": 232,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": 621.855745,
-        "wall_seconds": 420.00258512515575
-      },
-      "histories": [
-        {
-          "case": "z173_nc_m0.06700",
-          "snapshot_sha256": "747b51188b1cb5c2bd00f27d45096ce3f40eecc5f77c47d09d60714608cc33cc",
-          "rows": 232
         }
       ]
     },
@@ -1883,395 +1360,25 @@
       ]
     },
     {
-      "metallicity": "z173",
-      "cloud": "nc",
-      "mass_Msun": 0.07,
-      "endpoint": {
-        "case": "z173_nc_m0.07000_continue_1Tyr",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.000364546502227,
-        "Teff_K": 1775.321066659001,
-        "radius_Rsun": 0.08900712847683594,
-        "luminosity_Lsun": 7.090075911159383e-05,
-        "central_T_K": 2981838.5636667777,
-        "central_density_g_cm3": 747.9605302324181,
-        "surface_X": 0.6781013403574081,
-        "surface_Z": 0.02854811139481553,
-        "models": 659,
-        "stop": "requested age",
-        "cpu_seconds": 966.528416,
-        "wall_seconds": 794.9007954169065
-      },
-      "histories": [
-        {
-          "case": "z173_nc_m0.07000",
-          "snapshot_sha256": "7d5dfa3b620315c1d53296e43670c30c37f8f2fffe477414d9573fcedefa3439",
-          "rows": 171
-        },
-        {
-          "case": "z173_nc_m0.07000_continue_1Tyr",
-          "snapshot_sha256": "917df026a76a5b9e9b1309d9e2452571856d7ed9c877000e5d765b100f91edfa",
-          "rows": 489
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.05,
-      "endpoint": {
-        "case": "z300_f2_m0.05000_long30",
-        "status": "cooling",
-        "age_Gyr": 25.110725660766427,
-        "nuclear_fraction": 0.000918836143845008,
-        "Teff_K": 776.7798165629508,
-        "radius_Rsun": 0.0756297330768931,
-        "luminosity_Lsun": 1.8761628999200795e-06,
-        "central_T_K": 710048.5863997275,
-        "central_density_g_cm3": 963.4562934945451,
-        "surface_X": 0.7041454162426624,
-        "surface_Z": 0.04088713058429365,
-        "models": 489,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": null,
-        "wall_seconds": 675.5966531252488
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05000_early",
-          "snapshot_sha256": "a770aeb47df3d240ac301728da8cd698573cef580af33d4fc3fd161dcb0ed2f1",
-          "rows": 337
-        },
-        {
-          "case": "z300_f2_m0.05000_long30",
-          "snapshot_sha256": "b459692716dcdf803e90c248d6f5045dda12f917c4a98488e384a33e3761d973",
-          "rows": 153
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.051,
-      "endpoint": {
-        "case": "z300_f2_m0.05100_long30",
-        "status": "cooling",
-        "age_Gyr": 26.64950301010747,
-        "nuclear_fraction": 0.0009625015201975657,
-        "Teff_K": 781.5125063435805,
-        "radius_Rsun": 0.07508815356673992,
-        "luminosity_Lsun": 1.8948736547720623e-06,
-        "central_T_K": 704334.1241467736,
-        "central_density_g_cm3": 1012.6814270019195,
-        "surface_X": 0.7074545767381439,
-        "surface_Z": 0.03976668039120849,
-        "models": 508,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": null,
-        "wall_seconds": 718.4822970414534
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05100_early",
-          "snapshot_sha256": "ba9e229eb39e50956209f9ec1c05e87988fa65b833563ff6178e30675ba1aa3e",
-          "rows": 339
-        },
-        {
-          "case": "z300_f2_m0.05100_long30",
-          "snapshot_sha256": "fab37c860eb0d2a2c48d642f81d789dd4f4388a1e79d4fc0aaa62ef086fd59c5",
-          "rows": 170
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.052,
-      "endpoint": {
-        "case": "z300_f2_m0.05200_long30",
-        "status": "cooling",
-        "age_Gyr": 28.651672536247972,
-        "nuclear_fraction": 0.0009488284368708993,
-        "Teff_K": 783.3102434542609,
-        "radius_Rsun": 0.07449688558667888,
-        "luminosity_Lsun": 1.8823706208283077e-06,
-        "central_T_K": 692264.0673650238,
-        "central_density_g_cm3": 1067.4627318961004,
-        "surface_X": 0.7118023903918942,
-        "surface_Z": 0.038309818055042195,
-        "models": 532,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": null,
-        "wall_seconds": 801.5689559997991
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05200_early",
-          "snapshot_sha256": "6e68fe4044ba905601e11176573339d1778d1833c2b6baeb815f7a60fb3ea8cb",
-          "rows": 339
-        },
-        {
-          "case": "z300_f2_m0.05200_long30",
-          "snapshot_sha256": "30a5a099bb9ce25c651cb2494c89b5f8969f28b6fe8523a6a3b3a847ff0935a4",
-          "rows": 194
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.053,
-      "endpoint": {
-        "case": "z300_f2_m0.05300_long1000",
-        "status": "cooling",
-        "age_Gyr": 51.71009038829673,
-        "nuclear_fraction": 6.423487479573628e-05,
-        "Teff_K": 665.2578541758797,
-        "radius_Rsun": 0.07171282221490988,
-        "luminosity_Lsun": 9.075014951644438e-07,
-        "central_T_K": 452990.67599131295,
-        "central_density_g_cm3": 1301.890545066226,
-        "surface_X": 0.7712398155965928,
-        "surface_Z": 0.020360931058240564,
-        "models": 642,
-        "stop": "native envelope thermal reservoir fraction 0.01223 exceeds assessed limit 0.01",
-        "cpu_seconds": 682.775743,
-        "wall_seconds": 498.1960271243006
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05300_early",
-          "snapshot_sha256": "2d22bd59939a111f215930b0de79f21336c01090c6ee188bff7f61009aba614f",
-          "rows": 339
-        },
-        {
-          "case": "z300_f2_m0.05300_long30",
-          "snapshot_sha256": "1aaaeb343798b1d42d231ecc15d10906d32aa84019a7439b52f682a2e48c8c8e",
-          "rows": 206
-        },
-        {
-          "case": "z300_f2_m0.05300_long1000",
-          "snapshot_sha256": "f6a14d94b126f172b5aa8dba3dbbe410be673d3920c09445ff98fc08a453fbcd",
-          "rows": 99
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.054,
-      "endpoint": {
-        "case": "z300_f2_m0.05400_long1000",
-        "status": "unresolved",
-        "age_Gyr": 51.71624380946159,
-        "nuclear_fraction": 8.725135241601046e-05,
-        "Teff_K": 679.731474065196,
-        "radius_Rsun": 0.07144632200697551,
-        "luminosity_Lsun": 9.817546133821367e-07,
-        "central_T_K": 467015.965653449,
-        "central_density_g_cm3": 1347.0712514652328,
-        "surface_X": 0.7711201795461605,
-        "surface_Z": 0.020490159900908987,
-        "models": 635,
-        "stop": "repeated step rejection: envelope surface Teff=679.732145 logg=5.462503: pressure family: H/He mismatch exceeds declared domain",
-        "cpu_seconds": 678.030948,
-        "wall_seconds": 494.89623295888305
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05400_early",
-          "snapshot_sha256": "82b15cca3359f9b01fb5d85d7bbc31b299756c0816dd3caa244b577eee33165d",
-          "rows": 337
-        },
-        {
-          "case": "z300_f2_m0.05400_long30",
-          "snapshot_sha256": "5e330498fd972bc6d02da92ecbcb6bb2ab79dba0e60f6befca821ff02c42cedd",
-          "rows": 204
-        },
-        {
-          "case": "z300_f2_m0.05400_long1000",
-          "snapshot_sha256": "8aea10e42c13f65b7c0062a91e677ed2e81718b5788475c42dfb4864541640dd",
-          "rows": 96
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.055,
-      "endpoint": {
-        "case": "z300_f2_m0.05500_long1000",
-        "status": "cooling",
-        "age_Gyr": 39.06534970524424,
-        "nuclear_fraction": 0.0005957485249568718,
-        "Teff_K": 767.6905351449362,
-        "radius_Rsun": 0.07243900897537982,
-        "luminosity_Lsun": 1.6420388324976155e-06,
-        "central_T_K": 616177.9152379984,
-        "central_density_g_cm3": 1276.8630208921384,
-        "surface_X": 0.7349595899785281,
-        "surface_Z": 0.030946902797498087,
-        "models": 584,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": null,
-        "wall_seconds": 182.12764679081738
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05500_early",
-          "snapshot_sha256": "ef60378e34e7d993c998c98f1976db825a1c2cdee11d291a5c29afa6fa973bcd",
-          "rows": 337
-        },
-        {
-          "case": "z300_f2_m0.05500_long30",
-          "snapshot_sha256": "429bb61bf4992c23ce05830c1c5562148cedf3bf380d363adc9c60ccf76bed8f",
-          "rows": 208
-        },
-        {
-          "case": "z300_f2_m0.05500_long1000",
-          "snapshot_sha256": "5d8bf7afd8e87dd536daf59d8c696677f5feea6c029771fa740b397af36d5fff",
-          "rows": 41
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.056,
-      "endpoint": {
-        "case": "z300_f2_m0.05600_dense_q6",
-        "status": "cooling",
-        "age_Gyr": 54.05082605721229,
-        "nuclear_fraction": 0.00018310642041134378,
-        "Teff_K": 715.6252261284274,
-        "radius_Rsun": 0.07102948305455255,
-        "luminosity_Lsun": 1.1921023692725784e-06,
-        "central_T_K": 506667.9584598386,
-        "central_density_g_cm3": 1440.7073378665177,
-        "surface_X": 0.7707404609926497,
-        "surface_Z": 0.02089968284591502,
-        "models": 227,
-        "stop": "native envelope thermal reservoir fraction 0.01334 exceeds assessed limit 0.01",
-        "cpu_seconds": 169.881168,
-        "wall_seconds": 109.27075695805252
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05600_terayear",
-          "snapshot_sha256": "7f3ffdf649504ef5435b3fabe3430830e3e39389967f70ae3b847431e97f14b7",
-          "rows": 200
-        },
-        {
-          "case": "z300_f2_m0.05600_dense_q6",
-          "snapshot_sha256": "144db93e302b53c934acf2432660c97fe84d684db665fe77341417366545b91d",
-          "rows": 28
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.057,
-      "endpoint": {
-        "case": "z300_f2_m0.05700_fine_peak_continuation_q6",
-        "status": "cooling",
-        "age_Gyr": 56.11837161555521,
-        "nuclear_fraction": 0.00024247533512777755,
-        "Teff_K": 730.3549877643334,
-        "radius_Rsun": 0.07077166489425385,
-        "luminosity_Lsun": 1.2839511517136503e-06,
-        "central_T_K": 521167.80737557693,
-        "central_density_g_cm3": 1494.1550620246408,
-        "surface_X": 0.7705346319581752,
-        "surface_Z": 0.021121316726826562,
-        "models": 544,
-        "stop": "native envelope thermal reservoir fraction 0.02922 exceeds assessed limit 0.01",
-        "cpu_seconds": 1035.601674,
-        "wall_seconds": 724.3732969993725
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05700_feature_50Myr",
-          "snapshot_sha256": "2ddcb4640b474cbe3381951b0b2f4b92c780d2be6de137be17cbe9d245a86ff9",
-          "rows": 236
-        },
-        {
-          "case": "z300_f2_m0.05700_peak_100Myr",
-          "snapshot_sha256": "647de6dc0275c5e7a540ddb2627515091d47277ba0ae762e619e9ee65f68673c",
-          "rows": 152
-        },
-        {
-          "case": "z300_f2_m0.05700_fine_peak_continuation_q6",
-          "snapshot_sha256": "14385e22cc3eb2cd326b0208000f9ef1347676afc8d6be5ee82f3145c58a9eb1",
-          "rows": 158
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.058,
-      "endpoint": {
-        "case": "z300_f2_m0.05800_long100",
-        "status": "cooling",
-        "age_Gyr": 78.7064453125,
-        "nuclear_fraction": 0.0008578778662197476,
-        "Teff_K": 794.7020395658074,
-        "radius_Rsun": 0.07120101812965593,
-        "luminosity_Lsun": 1.8217274247361868e-06,
-        "central_T_K": 622913.6956914343,
-        "central_density_g_cm3": 1583.4726179432496,
-        "surface_X": 0.7638590578902958,
-        "surface_Z": 0.023756804090916184,
-        "models": 706,
-        "stop": "nuclear fraction below 0.001 on declining branch (three accepted late-time models)",
-        "cpu_seconds": null,
-        "wall_seconds": 357.2553315414116
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05800_refinement",
-          "snapshot_sha256": "8f8647b5263a1395322d9ce6fe14c81e008888fe2c23cf157b173bc9c5ac32ad",
-          "rows": 337
-        },
-        {
-          "case": "z300_f2_m0.05800_long30",
-          "snapshot_sha256": "e9084bb01f106f312a2de9e26b52c6fed9a778de26a06beba373d885ed802c48",
-          "rows": 206
-        },
-        {
-          "case": "z300_f2_m0.05800_long60",
-          "snapshot_sha256": "6644436b1dca10284948c4e452092ced59f219c21c01d2a06a392208f281f6f4",
-          "rows": 123
-        },
-        {
-          "case": "z300_f2_m0.05800_long100",
-          "snapshot_sha256": "f1c6213fdf49181b348c3b61e18fca1a40a5965384146d036325222538350044",
-          "rows": 43
-        }
-      ]
-    },
-    {
       "metallicity": "z300",
       "cloud": "f2",
       "mass_Msun": 0.05815,
       "endpoint": {
-        "case": "z300_f2_m0.05815_continued_1Gyr",
+        "case": "z300_f2_m0.05815_warm_lowz_600Gyr",
         "status": "unresolved",
-        "age_Gyr": 299.1414848829351,
-        "nuclear_fraction": 1.0002810672500777,
-        "Teff_K": 1923.4837338472673,
-        "radius_Rsun": 0.09859027715709695,
-        "luminosity_Lsun": 0.00011987149597023384,
-        "central_T_K": 3879408.7338924995,
-        "central_density_g_cm3": 678.6213967281805,
-        "surface_X": 0.780387215975611,
-        "surface_Z": 0.010415892510967216,
-        "models": 1059,
-        "stop": "repeated step rejection: evolve_step: line search failed: residual did not decrease: local=4.461e-06 -> 4.461e-06, balance=-3.82e-07 -> -3.82e-07",
-        "cpu_seconds": 1169.245185,
-        "wall_seconds": 983.0279427077621
+        "age_Gyr": 550.0786265856262,
+        "nuclear_fraction": 1.001888918307519,
+        "Teff_K": 2399.94127647061,
+        "radius_Rsun": 0.09492997928335177,
+        "luminosity_Lsun": 0.0002693412747695428,
+        "central_T_K": 4458978.010316246,
+        "central_density_g_cm3": 866.5498723858683,
+        "surface_X": 0.7915344773170041,
+        "surface_Z": 0.0008109574491681252,
+        "models": 1413,
+        "stop": "repeated step rejection: envelope surface Teff=2400.183662 logg=5.247812: pressure-matched atmosphere: (Teff, g) outside warm_anchored_response table",
+        "cpu_seconds": 283.827878,
+        "wall_seconds": 192.51150370761752
       },
       "histories": [
         {
@@ -2298,6 +1405,26 @@
           "case": "z300_f2_m0.05815_continued_1Gyr",
           "snapshot_sha256": "2c6c4b20898ac0c3ff85d8ccb94cf85d98258f050cdea167911027e7796dfaa4",
           "rows": 192
+        },
+        {
+          "case": "z300_f2_m0.05815_hhe008_350Gyr",
+          "snapshot_sha256": "add345065ff14a5e5c5de1b63c6d80852324ea58773d516e2ad851ebbd9e751b",
+          "rows": 55
+        },
+        {
+          "case": "z300_f2_m0.05815_hotcore_450Gyr",
+          "snapshot_sha256": "02996ab01116ddee482a1fe41b1d0989e45a70b1238e20e157b7a280f3c9853a",
+          "rows": 136
+        },
+        {
+          "case": "z300_f2_m0.05815_warm_response_500Gyr",
+          "snapshot_sha256": "f655941b8d1364fc4f821547ce0cf465cbc049d46f5350b281e263f3495b6745",
+          "rows": 82
+        },
+        {
+          "case": "z300_f2_m0.05815_warm_lowz_600Gyr",
+          "snapshot_sha256": "1f37c97af61536eced51df72de65c77c8d7edf6ff10fa7f8459e4ff3c1e5bcc5",
+          "rows": 85
         }
       ]
     },
@@ -2306,21 +1433,21 @@
       "cloud": "f2",
       "mass_Msun": 0.0582,
       "endpoint": {
-        "case": "z300_f2_m0.05820_continued_1Gyr",
+        "case": "z300_f2_m0.05820_warm_lowz_650Gyr",
         "status": "unresolved",
-        "age_Gyr": 311.56132497084104,
-        "nuclear_fraction": 1.0002473041798927,
-        "Teff_K": 1936.0526466202602,
-        "radius_Rsun": 0.09861729683156704,
-        "luminosity_Lsun": 0.0001231029662125095,
-        "central_T_K": 3904268.7782605463,
-        "central_density_g_cm3": 676.8933117382006,
-        "surface_X": 0.7802996868686531,
-        "surface_Z": 0.010512742768832512,
-        "models": 1166,
-        "stop": "repeated step rejection: evolve_step: line search failed: residual did not decrease: local=5.984e-06 -> 5.984e-06, balance=1.514e-07 -> 1.514e-07",
-        "cpu_seconds": 892.57645,
-        "wall_seconds": 768.4925634581596
+        "age_Gyr": 565.1416499710083,
+        "nuclear_fraction": 1.0019907955331793,
+        "Teff_K": 2399.7740725058493,
+        "radius_Rsun": 0.09545861076145384,
+        "luminosity_Lsun": 0.0002722734691684016,
+        "central_T_K": 4472429.512008263,
+        "central_density_g_cm3": 840.3737350308209,
+        "surface_X": 0.7904399783139172,
+        "surface_Z": 0.0009930293099709346,
+        "models": 1495,
+        "stop": "repeated step rejection: envelope surface Teff=2400.016450 logg=5.243362: pressure-matched atmosphere: (Teff, g) outside warm_anchored_response table",
+        "cpu_seconds": 281.555939,
+        "wall_seconds": 191.98788195848465
       },
       "histories": [
         {
@@ -2347,6 +1474,26 @@
           "case": "z300_f2_m0.05820_continued_1Gyr",
           "snapshot_sha256": "0eb025aeac5868364171ad5486832251ec5a5c33422ffc98092ef440d878b7fb",
           "rows": 147
+        },
+        {
+          "case": "z300_f2_m0.05820_hhe008_360Gyr",
+          "snapshot_sha256": "bf81e5271e7a7f9714fa95d9a77868c0a62c241f5021785ddb2146dced0f5697",
+          "rows": 69
+        },
+        {
+          "case": "z300_f2_m0.05820_hotcore_450Gyr",
+          "snapshot_sha256": "d6d2217a1e0f11cd97f1f92a31a151d8b431cf41795d4974b7b112980edb85f3",
+          "rows": 107
+        },
+        {
+          "case": "z300_f2_m0.05820_warm_response_500Gyr",
+          "snapshot_sha256": "559549d1ff825c2c9384e84c853f73648e1cf9d816a267cccdd061fe710d31e2",
+          "rows": 67
+        },
+        {
+          "case": "z300_f2_m0.05820_warm_lowz_650Gyr",
+          "snapshot_sha256": "5c7576810dbe5bd9cbbe99226f6b28e6367fb3dec447e6b296ac3caed2d20c1a",
+          "rows": 90
         }
       ]
     },
@@ -2355,21 +1502,21 @@
       "cloud": "f2",
       "mass_Msun": 0.05825,
       "endpoint": {
-        "case": "z300_f2_m0.05825_continued_1Gyr",
+        "case": "z300_f2_m0.05825_warm_lowz_650Gyr",
         "status": "unresolved",
-        "age_Gyr": 294.3413838663289,
-        "nuclear_fraction": 1.0007640286709658,
-        "Teff_K": 1859.8925577691398,
-        "radius_Rsun": 0.09827891588441978,
-        "luminosity_Lsun": 0.00010412759051047143,
-        "central_T_K": 3769542.8689953187,
-        "central_density_g_cm3": 655.9987057094254,
-        "surface_X": 0.77785938596729,
-        "surface_Z": 0.013150944274911378,
-        "models": 1306,
-        "stop": "repeated step rejection: evolve_step: line search failed: residual did not decrease: local=9.361e-05 -> 9.361e-05, balance=-2.127e-06 -> -2.128e-06",
-        "cpu_seconds": 456.212743,
-        "wall_seconds": 418.254578624852
+        "age_Gyr": 595.8532141956393,
+        "nuclear_fraction": 1.0013118122177498,
+        "Teff_K": 2399.7932124492977,
+        "radius_Rsun": 0.09503781396497724,
+        "luminosity_Lsun": 0.00026988692011497737,
+        "central_T_K": 4438968.910909193,
+        "central_density_g_cm3": 832.5424314821164,
+        "surface_X": 0.7962828215388362,
+        "surface_Z": 0.0008233699569784971,
+        "models": 1683,
+        "stop": "repeated step rejection: envelope surface Teff=2400.035577 logg=5.247572: pressure-matched atmosphere: (Teff, g) outside warm_anchored_response table",
+        "cpu_seconds": 381.531751,
+        "wall_seconds": 257.6005282085389
       },
       "histories": [
         {
@@ -2396,6 +1543,26 @@
           "case": "z300_f2_m0.05825_continued_1Gyr",
           "snapshot_sha256": "45510a2d32bfd7ed5b4db8bb255c87d20dc520568cceb836e0da97c467530fee",
           "rows": 86
+        },
+        {
+          "case": "z300_f2_m0.05825_hhe008_350Gyr",
+          "snapshot_sha256": "56abe0dd67aacce8dd0c8e086221757be236a311fc2eb4f342d7c9edad958b41",
+          "rows": 76
+        },
+        {
+          "case": "z300_f2_m0.05825_hotcore_450Gyr",
+          "snapshot_sha256": "e6d080b6f2c49f26f23eb9c3367969dc80c47eb62ceac924ea93d755e6c9cf6c",
+          "rows": 117
+        },
+        {
+          "case": "z300_f2_m0.05825_warm_response_500Gyr",
+          "snapshot_sha256": "ff08332dc63edf17ab6dd490d92e7ed70e1f21067d6306a74b73bfb043d844fb",
+          "rows": 67
+        },
+        {
+          "case": "z300_f2_m0.05825_warm_lowz_650Gyr",
+          "snapshot_sha256": "97be79719d326784f8ee293a13bec8d7e04960f9293c2ed6da6c6155fce8e8ba",
+          "rows": 121
         }
       ]
     },
@@ -2404,21 +1571,21 @@
       "cloud": "f2",
       "mass_Msun": 0.0583,
       "endpoint": {
-        "case": "z300_f2_m0.05830_long1000",
+        "case": "z300_f2_m0.05830_warm_lowz_650Gyr",
         "status": "unresolved",
-        "age_Gyr": 329.14783228468644,
-        "nuclear_fraction": 1.000983415592176,
-        "Teff_K": 1853.6184795193242,
-        "radius_Rsun": 0.0980888397211067,
-        "luminosity_Lsun": 0.00010233266275281706,
-        "central_T_K": 3743208.056976934,
-        "central_density_g_cm3": 649.2352743975564,
-        "surface_X": 0.778267763287672,
-        "surface_Z": 0.012713513574599223,
-        "models": 1600,
-        "stop": "repeated step rejection: envelope surface Teff=1853.620306 logg=5.220499: pressure family: H/He mismatch exceeds declared domain",
-        "cpu_seconds": 3248.473014,
-        "wall_seconds": 2490.990728540346
+        "age_Gyr": 639.2548415544965,
+        "nuclear_fraction": 1.000987792970466,
+        "Teff_K": 2399.791748850751,
+        "radius_Rsun": 0.09466026950528367,
+        "luminosity_Lsun": 0.0002677462362261625,
+        "central_T_K": 4413978.590837468,
+        "central_density_g_cm3": 827.7871954469495,
+        "surface_X": 0.7984341320905323,
+        "surface_Z": 0.0006990717326028101,
+        "models": 2922,
+        "stop": "repeated step rejection: envelope surface Teff=2400.034110 logg=5.251402: pressure-matched atmosphere: (Teff, g) outside warm_anchored_response table",
+        "cpu_seconds": 367.816333,
+        "wall_seconds": 255.29644562490284
       },
       "histories": [
         {
@@ -2430,6 +1597,31 @@
           "case": "z300_f2_m0.05830_long1000",
           "snapshot_sha256": "6a2dbe60232d40897ff4941360b9d379532e2cdbbd02aa14be0efb6bcb21d3f7",
           "rows": 1261
+        },
+        {
+          "case": "z300_f2_m0.05830_hhe008_380Gyr",
+          "snapshot_sha256": "34ace9d7a2be238a9b17a43822c4f109bafa0eb06ef7eb5274beafb502c66b92",
+          "rows": 219
+        },
+        {
+          "case": "z300_f2_m0.05830_hotcore_450Gyr",
+          "snapshot_sha256": "f5e81fe34d69af6d4c49ee7a804268ddce57035d02736cf5a580fbd839876c1a",
+          "rows": 293
+        },
+        {
+          "case": "z300_f2_m0.05830_warm_response_500Gyr",
+          "snapshot_sha256": "00473cc69c0e5c632c0ff64f99b81878c4084a3d89b9dee23a49ea88772a0ca8",
+          "rows": 213
+        },
+        {
+          "case": "z300_f2_m0.05830_warm_600Gyr",
+          "snapshot_sha256": "0f0e3f572440c597cd5872f875bcdbfdd595295054b2f25cbf49a348ba3f5c4f",
+          "rows": 268
+        },
+        {
+          "case": "z300_f2_m0.05830_warm_lowz_650Gyr",
+          "snapshot_sha256": "4ff9bfe8c27971fbaaf110d1153be6716dd937146a221730fbd064d0b8a929a1",
+          "rows": 334
         }
       ]
     },
@@ -2438,21 +1630,21 @@
       "cloud": "f2",
       "mass_Msun": 0.05835,
       "endpoint": {
-        "case": "z300_f2_m0.05835_long1000",
-        "status": "unresolved",
-        "age_Gyr": 809.9176963651569,
-        "nuclear_fraction": 0.9899062017082818,
-        "Teff_K": 1426.5006361020892,
-        "radius_Rsun": 0.08131183261416262,
-        "luminosity_Lsun": 2.466545070203152e-05,
-        "central_T_K": 2667268.5339599657,
-        "central_density_g_cm3": 1372.68513835878,
-        "surface_X": 0.7619340863105556,
-        "surface_Z": 0.0028958160373453983,
-        "models": 3519,
-        "stop": "repeated step rejection: evolve_step: line search failed: residual did not decrease: local=0.0002202 -> 0.0002202, balance=9.054e-06 -> 9.056e-06",
-        "cpu_seconds": 6973.240097,
-        "wall_seconds": 5118.082840417512
+        "case": "z300_f2_m0.05835_measured_lowz_897Gyr_v6",
+        "status": "cooling",
+        "age_Gyr": 897.0,
+        "nuclear_fraction": 0.00089989197894669,
+        "Teff_K": 825.3859533285392,
+        "radius_Rsun": 0.0692171215390337,
+        "luminosity_Lsun": 2.0033140753435844e-06,
+        "central_T_K": 610344.6401981416,
+        "central_density_g_cm3": 2742.6570634795194,
+        "surface_X": 0.7869221307126785,
+        "surface_Z": 0.0017002911991461935,
+        "models": 3941,
+        "stop": "requested age",
+        "cpu_seconds": 99.367151,
+        "wall_seconds": 65.38536604121327
       },
       "histories": [
         {
@@ -2464,6 +1656,31 @@
           "case": "z300_f2_m0.05835_long1000",
           "snapshot_sha256": "2e1aca3f201b2c280ccada2aef27722696198fdcf43089c5582ac8126a2bc4eb",
           "rows": 3180
+        },
+        {
+          "case": "z300_f2_m0.05835_measured_lowz_850Gyr_v2",
+          "snapshot_sha256": "03be7a53f3a03e15ca13740047affd75c9288a1b5753bc45837cc0839ca508ed",
+          "rows": 174
+        },
+        {
+          "case": "z300_f2_m0.05835_measured_lowz_880Gyr_v3",
+          "snapshot_sha256": "6c53cfe4287e0fba229456020909a580bf49ba325b6817da752a38325d8c61ae",
+          "rows": 146
+        },
+        {
+          "case": "z300_f2_m0.05835_measured_lowz_885Gyr_v4",
+          "snapshot_sha256": "27458d4b7d45ad2cb025635ecae5ab678d759f3b3313228475d05b2518293fbb",
+          "rows": 33
+        },
+        {
+          "case": "z300_f2_m0.05835_measured_lowz_893Gyr_v5",
+          "snapshot_sha256": "3ca381c8bf219455615fa03d5573fe527bb5c5bd8cf1ab80d4b81425810e6de5",
+          "rows": 45
+        },
+        {
+          "case": "z300_f2_m0.05835_measured_lowz_897Gyr_v6",
+          "snapshot_sha256": "9569d3a4c04005a4ed02400506b82da6b70d50022fdbeddbb9e245356f827f16",
+          "rows": 29
         }
       ]
     },
@@ -2518,219 +1735,6 @@
           "case": "z300_f2_m0.05850_long1000",
           "snapshot_sha256": "8bd493909f5c61a9890967a6344d4d4dd4cca9531de07a2e9d7a12d1beec2d1a",
           "rows": 702
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.05875,
-      "endpoint": {
-        "case": "z300_f2_m0.05875_terayear",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0001250149371437,
-        "Teff_K": 1142.444680509915,
-        "radius_Rsun": 0.0900690352295025,
-        "luminosity_Lsun": 1.2450460628058502e-05,
-        "central_T_K": 2484746.126766142,
-        "central_density_g_cm3": 599.3945490238723,
-        "surface_X": 0.6747908095700903,
-        "surface_Z": 0.049446779395953475,
-        "models": 656,
-        "stop": "requested age",
-        "cpu_seconds": 782.799167,
-        "wall_seconds": 556.1917152497917
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05875_terayear",
-          "snapshot_sha256": "9eb828ca4e928c8e004cd44a829bbaf2b1c724f55f5a8b8f0ea1231ab3d2ab5d",
-          "rows": 656
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.059,
-      "endpoint": {
-        "case": "z300_f2_m0.05900_terayear",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0001137375742568,
-        "Teff_K": 1161.4869227299125,
-        "radius_Rsun": 0.09036312309939568,
-        "luminosity_Lsun": 1.338854679283846e-05,
-        "central_T_K": 2510912.31604978,
-        "central_density_g_cm3": 596.456021939281,
-        "surface_X": 0.6743939857182442,
-        "surface_Z": 0.049446779395953724,
-        "models": 658,
-        "stop": "requested age",
-        "cpu_seconds": 791.948739,
-        "wall_seconds": 561.8215012494475
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05900_terayear",
-          "snapshot_sha256": "432055659d26285cc8a4c5e38279ec38ddef3ad4df959d2c2b1004169d3ae9e4",
-          "rows": 658
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.05925,
-      "endpoint": {
-        "case": "z300_f2_m0.05925_terayear",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0000489089074285,
-        "Teff_K": 1180.029326727184,
-        "radius_Rsun": 0.0905713447744257,
-        "luminosity_Lsun": 1.4330010658358778e-05,
-        "central_T_K": 2534532.0768879666,
-        "central_density_g_cm3": 595.203321898218,
-        "surface_X": 0.6739870342263711,
-        "surface_Z": 0.049446779395954335,
-        "models": 656,
-        "stop": "requested age",
-        "cpu_seconds": 790.839731,
-        "wall_seconds": 560.12503116671
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05925_terayear",
-          "snapshot_sha256": "0ac3d51e423d90b37720296f2ef2a7a693aa6cd3ec6a5ace1e3fa871289b3106",
-          "rows": 656
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.0595,
-      "endpoint": {
-        "case": "z300_f2_m0.05950_terayear",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 0.9999328595609471,
-        "Teff_K": 1198.058325356083,
-        "radius_Rsun": 0.09066297721589471,
-        "luminosity_Lsun": 1.5256871093174709e-05,
-        "central_T_K": 2554871.4665946844,
-        "central_density_g_cm3": 596.1857693792105,
-        "surface_X": 0.6735855629838716,
-        "surface_Z": 0.04944677939595434,
-        "models": 656,
-        "stop": "requested age",
-        "cpu_seconds": 785.92103,
-        "wall_seconds": 556.4152941247448
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.05950_terayear",
-          "snapshot_sha256": "1a03724659938cfc6b6f7bbc3132fe67b32d309ca0d63ce3f344adfee8dc2286",
-          "rows": 656
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.06,
-      "endpoint": {
-        "case": "z300_f2_m0.06000_terayear",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0000649132072106,
-        "Teff_K": 1234.0877080182304,
-        "radius_Rsun": 0.09080473371687146,
-        "luminosity_Lsun": 1.723037633127543e-05,
-        "central_T_K": 2594449.2575430633,
-        "central_density_g_cm3": 598.9232909958093,
-        "surface_X": 0.6727852640173386,
-        "surface_Z": 0.04944677939595346,
-        "models": 658,
-        "stop": "requested age",
-        "cpu_seconds": 760.939106,
-        "wall_seconds": 536.3845122922212
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.06000_terayear",
-          "snapshot_sha256": "401a7d0116f65310be2832a0cee72ff20ae198e4f74270d1cd89e8a9f09fadd4",
-          "rows": 658
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.061,
-      "endpoint": {
-        "case": "z300_f2_m0.06100_terayear",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0001526886815664,
-        "Teff_K": 1309.5429428583157,
-        "radius_Rsun": 0.09175140651970468,
-        "luminosity_Lsun": 2.2304788903074383e-05,
-        "central_T_K": 2692334.9479282754,
-        "central_density_g_cm3": 591.4795031184418,
-        "surface_X": 0.6707841010558059,
-        "surface_Z": 0.04944677939595421,
-        "models": 658,
-        "stop": "requested age",
-        "cpu_seconds": 476.174794,
-        "wall_seconds": 338.7296062493697
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.06100",
-          "snapshot_sha256": "e2b62e2becc959d45adcc4c75126988d031d490b75d8ee019b61a970bda3c21c",
-          "rows": 168
-        },
-        {
-          "case": "z300_f2_m0.06100_terayear",
-          "snapshot_sha256": "68726492fd9642fd05df35bb2d61ab623981f2677188c831cee41ce9504dda8d",
-          "rows": 491
-        }
-      ]
-    },
-    {
-      "metallicity": "z300",
-      "cloud": "f2",
-      "mass_Msun": 0.064,
-      "endpoint": {
-        "case": "z300_f2_m0.06400_terayear",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0000490150515398,
-        "Teff_K": 1534.439504479648,
-        "radius_Rsun": 0.09462019170298663,
-        "luminosity_Lsun": 4.471573867125826e-05,
-        "central_T_K": 2984838.1952739065,
-        "central_density_g_cm3": 569.2166068524209,
-        "surface_X": 0.6623764723768459,
-        "surface_Z": 0.04944677939595782,
-        "models": 658,
-        "stop": "requested age",
-        "cpu_seconds": 546.347332,
-        "wall_seconds": 380.9744700836018
-      },
-      "histories": [
-        {
-          "case": "z300_f2_m0.06400",
-          "snapshot_sha256": "7317dfb77ee74f43dc36545e8a31200b44d11583e099dbbcdcb3833951c145aa",
-          "rows": 164
-        },
-        {
-          "case": "z300_f2_m0.06400_terayear",
-          "snapshot_sha256": "397a3db2620ee85714942895658478a392f8dde92753512b5508a5636e8503e8",
-          "rows": 495
         }
       ]
     },
@@ -2840,40 +1844,844 @@
           "rows": 1937
         }
       ]
-    },
+    }
+  ],
+  "corrected_burning_models": [
     {
-      "metallicity": "z300",
-      "cloud": "nc",
-      "mass_Msun": 0.068,
+      "case": "lowz_clear_0755_ext2_fresh_1tyr",
+      "mass_Msun": 0.0755,
+      "initial_Z": 0.0054940865995503855,
+      "atmosphere": "clear",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "supported_1Tyr",
+      "cooling_trend": null,
+      "terminal": true,
+      "stop": "requested age",
       "endpoint": {
-        "case": "z300_nc_m0.06800_continue_1Tyr",
-        "status": "supported_1Tyr",
-        "age_Gyr": 1000.0,
-        "nuclear_fraction": 1.0002076496567613,
-        "Teff_K": 1917.6699303384771,
-        "radius_Rsun": 0.09333818976251416,
-        "luminosity_Lsun": 0.00010614703302952353,
-        "central_T_K": 3324750.809274021,
-        "central_density_g_cm3": 633.4445272689735,
-        "surface_X": 0.6432709044932697,
-        "surface_Z": 0.04944677939601966,
-        "models": 659,
-        "stop": "requested age",
-        "cpu_seconds": 997.761712,
-        "wall_seconds": 751.5430434159935
+        "years": 1000000000000,
+        "Teff_K": 1681.9930291181458,
+        "nuclear_fraction": 1.0005132759861537,
+        "luminosity_Lsun": 5.1043199263190155e-05,
+        "central_T_K": 2656703.1890258025,
+        "central_density_g_cm3": 951.9543925954606,
+        "central_X": 0.7097752501141619,
+        "central_He3": 0.01480922341854695,
+        "surface_X": 0.7097752501141619,
+        "surface_Z": 0.005494086599550406
       },
+      "saved_states": 664,
+      "CPU_seconds": 1026.818426,
+      "wall_seconds": 710.7894479995593,
+      "Z": 0.0054940865995503855,
+      "cloud": "nc",
+      "included_in_cutoff": false,
+      "qualification": "Metal-ionization model; sustained burning at 1 Tyr. See corrected_brackets for any matched cooling bound.",
       "histories": [
         {
-          "case": "z300_nc_m0.06800",
-          "snapshot_sha256": "cc675ab06071c68d4c639888a6daa7248a91746fd3c400a38204fe6aed10e2fb",
-          "rows": 166
+          "case": "lowz_clear_0755_ext2_fresh_1tyr",
+          "snapshot_sha256": "127eed8bc139ee0e9c0cebf834341d94a53c3ef78a36898884b43f88fa285af0",
+          "rows": 664
+        }
+      ]
+    },
+    {
+      "case": "lowz_cloudy_0705_ext2_fresh_1tyr",
+      "mass_Msun": 0.0705,
+      "initial_Z": 0.0054940865995503855,
+      "atmosphere": "cloudy",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "supported_1Tyr",
+      "cooling_trend": null,
+      "terminal": true,
+      "stop": "requested age",
+      "endpoint": {
+        "years": 1000000000000,
+        "Teff_K": 1287.9527740163473,
+        "nuclear_fraction": 1.0000623778930027,
+        "luminosity_Lsun": 1.78664815664495e-05,
+        "central_T_K": 2349697.045884335,
+        "central_density_g_cm3": 859.896172733075,
+        "central_X": 0.7177666699953312,
+        "central_He3": 0.006817803946185887,
+        "surface_X": 0.7177666699953312,
+        "surface_Z": 0.005494086599550406
+      },
+      "saved_states": 655,
+      "CPU_seconds": 657.425688,
+      "wall_seconds": 466.7209177920595,
+      "Z": 0.0054940865995503855,
+      "cloud": "f2",
+      "included_in_cutoff": false,
+      "qualification": "Metal-ionization model; sustained burning at 1 Tyr. See corrected_brackets for any matched cooling bound.",
+      "histories": [
+        {
+          "case": "lowz_cloudy_0705_ext2_fresh_1tyr",
+          "snapshot_sha256": "42b2172bcd8d5a8402c7df438d600c1ea62704d1b7abcfb4000ca36d2853c620",
+          "rows": 655
+        }
+      ]
+    },
+    {
+      "case": "z058_clear_074_ext2_fresh_1tyr",
+      "mass_Msun": 0.074,
+      "initial_Z": 0.009516037131604595,
+      "atmosphere": "clear",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "supported_1Tyr",
+      "cooling_trend": null,
+      "terminal": true,
+      "stop": "requested age",
+      "endpoint": {
+        "years": 1000000000000,
+        "Teff_K": 1590.5203639148035,
+        "nuclear_fraction": 1.0006559084356164,
+        "luminosity_Lsun": 4.072226893740855e-05,
+        "central_T_K": 2589422.981305893,
+        "central_density_g_cm3": 934.2626248019077,
+        "central_X": 0.7084317070810052,
+        "central_He3": 0.01213081619513552,
+        "surface_X": 0.7084317070810052,
+        "surface_Z": 0.009516037131604597
+      },
+      "saved_states": 667,
+      "CPU_seconds": 973.315088,
+      "wall_seconds": 677.0602579573169,
+      "Z": 0.009516037131604595,
+      "cloud": "nc",
+      "included_in_cutoff": false,
+      "qualification": "Metal-ionization model; sustained burning at 1 Tyr. See corrected_brackets for any matched cooling bound.",
+      "histories": [
+        {
+          "case": "z058_clear_074_ext2_fresh_1tyr",
+          "snapshot_sha256": "adb18d897ace6d226f8fad322583a983f9526e1f0b90e0f7dbe72411e6cfe3a9",
+          "rows": 667
+        }
+      ]
+    },
+    {
+      "case": "z058_cloudy_069_ext2_fresh_1tyr",
+      "mass_Msun": 0.069,
+      "initial_Z": 0.009516037131604595,
+      "atmosphere": "cloudy",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "supported_1Tyr",
+      "cooling_trend": null,
+      "terminal": true,
+      "stop": "requested age",
+      "endpoint": {
+        "years": 1000000000000,
+        "Teff_K": 1283.3226377060485,
+        "nuclear_fraction": 1.0000913913455822,
+        "luminosity_Lsun": 1.835061858604606e-05,
+        "central_T_K": 2405261.5004070317,
+        "central_density_g_cm3": 790.5467952166647,
+        "central_X": 0.713398981265065,
+        "central_He3": 0.007163542141127752,
+        "surface_X": 0.713398981265065,
+        "surface_Z": 0.009516037131604597
+      },
+      "saved_states": 654,
+      "CPU_seconds": 648.318391,
+      "wall_seconds": 459.8493294585496,
+      "Z": 0.009516037131604595,
+      "cloud": "f2",
+      "included_in_cutoff": false,
+      "qualification": "Metal-ionization model; sustained burning at 1 Tyr. See corrected_brackets for any matched cooling bound.",
+      "histories": [
+        {
+          "case": "z058_cloudy_069_ext2_fresh_1tyr",
+          "snapshot_sha256": "b12d73abc3c24918f3b6ad4af45b7126de9d8acf66a34ce29ce9c42a5c1b7efa",
+          "rows": 654
+        }
+      ]
+    },
+    {
+      "case": "solar_clear_0725_ext2_1tyr",
+      "mass_Msun": 0.0725,
+      "initial_Z": 0.016482259798651158,
+      "atmosphere": "clear",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "supported_1Tyr",
+      "cooling_trend": null,
+      "terminal": true,
+      "stop": "requested age",
+      "endpoint": {
+        "years": 1000000000000,
+        "Teff_K": 1586.4800435520747,
+        "nuclear_fraction": 1.000713955463403,
+        "luminosity_Lsun": 4.1107140931956424e-05,
+        "central_T_K": 2632107.6037874627,
+        "central_density_g_cm3": 887.6931955645447,
+        "central_X": 0.7008602741744595,
+        "central_He3": 0.012736026353020593,
+        "surface_X": 0.7008602741744595,
+        "surface_Z": 0.016482259798651158
+      },
+      "saved_states": 835,
+      "CPU_seconds": 1158.0594740000001,
+      "wall_seconds": 815.4810792915523,
+      "Z": 0.016482259798651158,
+      "cloud": "nc",
+      "included_in_cutoff": false,
+      "qualification": "Metal-ionization model; sustained burning at 1 Tyr. See corrected_brackets for any matched cooling bound.",
+      "histories": [
+        {
+          "case": "solar_clear_0725_ext2_20gyr",
+          "snapshot_sha256": "7864000104954ae97a7152447f4394a2376e95641559ebdc6a516614755290ef",
+          "rows": 338
         },
         {
-          "case": "z300_nc_m0.06800_continue_1Tyr",
-          "snapshot_sha256": "500ddc2e8b9460b4ad3f3da04fb5d53cfc05e9d7293ec7391caaad4c71da1ad4",
-          "rows": 494
+          "case": "solar_clear_0725_ext2_1tyr",
+          "snapshot_sha256": "36c4cdfc12b1d888f4e9e7f085413ae541117b299d4dc8d7f1d193e36b6ad2ba",
+          "rows": 498
+        }
+      ]
+    },
+    {
+      "case": "solar_cloudy_06675_ext2_fresh_1tyr",
+      "mass_Msun": 0.06675,
+      "initial_Z": 0.016482259798651158,
+      "atmosphere": "cloudy",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "supported_1Tyr",
+      "cooling_trend": null,
+      "terminal": true,
+      "stop": "requested age",
+      "endpoint": {
+        "years": 1000000000000,
+        "Teff_K": 1228.7135914560822,
+        "nuclear_fraction": 1.0001730206042858,
+        "luminosity_Lsun": 1.594908771289052e-05,
+        "central_T_K": 2411414.653277441,
+        "central_density_g_cm3": 725.5393053853679,
+        "central_X": 0.7071812562991764,
+        "central_He3": 0.006415044441992506,
+        "surface_X": 0.7071812562991764,
+        "surface_Z": 0.016482259798651158
+      },
+      "saved_states": 654,
+      "CPU_seconds": 680.355275,
+      "wall_seconds": 491.80012779217213,
+      "Z": 0.016482259798651158,
+      "cloud": "f2",
+      "included_in_cutoff": false,
+      "qualification": "Metal-ionization model; sustained burning at 1 Tyr. See corrected_brackets for any matched cooling bound.",
+      "histories": [
+        {
+          "case": "solar_cloudy_06675_ext2_fresh_1tyr",
+          "snapshot_sha256": "0be3293cf98862d8dc23a7773a29db7b8545dc5e283db2801d4d3cd2f18b1483",
+          "rows": 654
+        }
+      ]
+    },
+    {
+      "case": "z173_clear_070_ext2_fresh_1tyr",
+      "mass_Msun": 0.07,
+      "initial_Z": 0.028548111394813776,
+      "atmosphere": "clear",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "supported_1Tyr",
+      "cooling_trend": null,
+      "terminal": true,
+      "stop": "requested age",
+      "endpoint": {
+        "years": 1000000000000,
+        "Teff_K": 1476.8032436955114,
+        "nuclear_fraction": 1.0007609182145283,
+        "luminosity_Lsun": 3.009029484291577e-05,
+        "central_T_K": 2538976.751270072,
+        "central_density_g_cm3": 886.868460163358,
+        "central_X": 0.6914920945155926,
+        "central_He3": 0.01003835457860479,
+        "surface_X": 0.6914920945155926,
+        "surface_Z": 0.028548111394813974
+      },
+      "saved_states": 668,
+      "CPU_seconds": 869.188192,
+      "wall_seconds": 475.18512570858,
+      "Z": 0.028548111394813776,
+      "cloud": "nc",
+      "included_in_cutoff": false,
+      "qualification": "Metal-ionization model; sustained burning at 1 Tyr. See corrected_brackets for any matched cooling bound.",
+      "histories": [
+        {
+          "case": "z173_clear_070_ext2_fresh_1tyr",
+          "snapshot_sha256": "0e7ed55d5b7ee9794e9d264e7b4e25df0ac2ebd8a14830c1fa07d407c5b6fbea",
+          "rows": 668
+        }
+      ]
+    },
+    {
+      "case": "z173_cloudy_0645_ext2_fresh_1tyr",
+      "mass_Msun": 0.0645,
+      "initial_Z": 0.028548111394813776,
+      "atmosphere": "cloudy",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "supported_1Tyr",
+      "cooling_trend": null,
+      "terminal": true,
+      "stop": "requested age",
+      "endpoint": {
+        "years": 1000000000000,
+        "Teff_K": 1209.406315827359,
+        "nuclear_fraction": 1.0001650103949058,
+        "luminosity_Lsun": 1.549619702891027e-05,
+        "central_T_K": 2461963.32383613,
+        "central_density_g_cm3": 664.3382139897574,
+        "central_X": 0.6950149894725468,
+        "central_He3": 0.006515459669312072,
+        "surface_X": 0.6950149894725468,
+        "surface_Z": 0.028548111394813763
+      },
+      "saved_states": 656,
+      "CPU_seconds": 646.004104,
+      "wall_seconds": 459.29085995815694,
+      "Z": 0.028548111394813776,
+      "cloud": "f2",
+      "included_in_cutoff": false,
+      "qualification": "Metal-ionization model; sustained burning at 1 Tyr. See corrected_brackets for any matched cooling bound.",
+      "histories": [
+        {
+          "case": "z173_cloudy_0645_ext2_fresh_1tyr",
+          "snapshot_sha256": "a985028f109353b1c2b2262bcb952ba6534caf01390ebaa4dbf3736956bf58b3",
+          "rows": 656
+        }
+      ]
+    },
+    {
+      "case": "ext2_clear_0665_fresh_1tyr",
+      "mass_Msun": 0.0665,
+      "initial_Z": 0.049446779395953475,
+      "atmosphere": "clear",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "supported_1Tyr",
+      "cooling_trend": null,
+      "terminal": true,
+      "stop": "requested age",
+      "endpoint": {
+        "years": 1000000000000,
+        "Teff_K": 1356.4350796825381,
+        "nuclear_fraction": 1.0006628468010075,
+        "luminosity_Lsun": 2.0439087915364925e-05,
+        "central_T_K": 2432265.005419215,
+        "central_density_g_cm3": 897.9857445975571,
+        "central_X": 0.6730681616269992,
+        "central_He3": 0.007563619510760385,
+        "surface_X": 0.6730681616269992,
+        "surface_Z": 0.04944677939595399
+      },
+      "saved_states": 668,
+      "CPU_seconds": 873.452447,
+      "wall_seconds": 621.3535726247355,
+      "Z": 0.049446779395953475,
+      "cloud": "nc",
+      "included_in_cutoff": false,
+      "qualification": "Metal-ionization model; sustained burning at 1 Tyr. See corrected_brackets for any matched cooling bound.",
+      "histories": [
+        {
+          "case": "ext2_clear_0665_fresh_1tyr",
+          "snapshot_sha256": "21470da6926513d2f2abf4d4e378baf325a17055ec2208aed2ce676baa5acf31",
+          "rows": 668
+        }
+      ]
+    },
+    {
+      "case": "ext2_cloudy_061_fresh_1tyr",
+      "mass_Msun": 0.061,
+      "initial_Z": 0.049446779395953475,
+      "atmosphere": "cloudy",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "supported_1Tyr",
+      "cooling_trend": null,
+      "terminal": true,
+      "stop": "requested age",
+      "endpoint": {
+        "years": 1000000000000,
+        "Teff_K": 1153.8317600726589,
+        "nuclear_fraction": 1.0001091855931878,
+        "luminosity_Lsun": 1.3174460166410493e-05,
+        "central_T_K": 2487437.097803571,
+        "central_density_g_cm3": 601.9175289746992,
+        "central_X": 0.674686790931376,
+        "central_He3": 0.005944990209683586,
+        "surface_X": 0.674686790931376,
+        "surface_Z": 0.04944677939595349
+      },
+      "saved_states": 657,
+      "CPU_seconds": 720.60682,
+      "wall_seconds": 515.7503691669554,
+      "Z": 0.049446779395953475,
+      "cloud": "f2",
+      "included_in_cutoff": false,
+      "qualification": "Metal-ionization model; sustained burning at 1 Tyr. See corrected_brackets for any matched cooling bound.",
+      "histories": [
+        {
+          "case": "ext2_cloudy_061_fresh_1tyr",
+          "snapshot_sha256": "ef542e78126069dc472a082fa3c2718fd438121338da1c11a05445d6dc82962d",
+          "rows": 657
         }
       ]
     }
-  ]
+  ],
+  "corrected_cooling_models": [
+    {
+      "case": "lowz_clear_075_ext2_fresh_1tyr",
+      "mass_Msun": 0.075,
+      "initial_Z": 0.0054940865995503855,
+      "atmosphere": "clear",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "cooling",
+      "cooling_trend": {
+        "start_years": 80252564915.24474,
+        "end_years": 81091741583.44818,
+        "start_fraction": 0.0007145405735642094,
+        "end_fraction": 0.0006290941812154355,
+        "decreasing": true
+      },
+      "terminal": true,
+      "stop": "native envelope thermal reservoir fraction 0.01177 exceeds assessed limit 0.01",
+      "endpoint": {
+        "years": 81091741583.44818,
+        "Teff_K": 827.0381063644425,
+        "nuclear_fraction": 0.0006290941812154355,
+        "luminosity_Lsun": 2.0999363442494496e-06,
+        "central_T_K": 549388.1225431806,
+        "central_density_g_cm3": 1823.5290708630912,
+        "central_X": 0.6896702380248323,
+        "central_He3": 0.0008695212223517137,
+        "surface_X": 0.7876358533796527,
+        "surface_Z": 0.003047574884828612
+      },
+      "saved_states": 261,
+      "CPU_seconds": 602.716795,
+      "wall_seconds": 408.4824762092903,
+      "Z": 0.0054940865995503855,
+      "cloud": "nc",
+      "included_in_cutoff": false,
+      "qualification": "Extended metal-ionization EOS; nuclear contribution below0.001 on declining branch.",
+      "histories": [
+        {
+          "case": "lowz_clear_075_ext2_fresh_1tyr",
+          "snapshot_sha256": "c5faf83ec8273ce5cced75bb950b4ba43b75b683eafe2327c4b1afe4dbd7b934",
+          "rows": 261
+        }
+      ]
+    },
+    {
+      "case": "lowz_cloudy_070_ext2_fresh_1tyr",
+      "mass_Msun": 0.07,
+      "initial_Z": 0.0054940865995503855,
+      "atmosphere": "cloudy",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "cooling",
+      "cooling_trend": {
+        "start_years": 52388826666.21036,
+        "end_years": 54127754508.26458,
+        "start_fraction": 0.0004311357561352414,
+        "end_fraction": 0.00033181213787631883,
+        "decreasing": true
+      },
+      "terminal": true,
+      "stop": "native envelope thermal reservoir fraction 0.01095 exceeds assessed limit 0.01",
+      "endpoint": {
+        "years": 54127754508.26458,
+        "Teff_K": 788.1693934170444,
+        "nuclear_fraction": 0.00033181213787631883,
+        "luminosity_Lsun": 1.7992581295999572e-06,
+        "central_T_K": 526192.9436532623,
+        "central_density_g_cm3": 1599.0556523458392,
+        "central_X": 0.6890089121981364,
+        "central_He3": 0.0005008473977436551,
+        "surface_X": 0.7876226121629821,
+        "surface_Z": 0.003056211067626621
+      },
+      "saved_states": 293,
+      "CPU_seconds": 678.953055,
+      "wall_seconds": 461.35144833289087,
+      "Z": 0.0054940865995503855,
+      "cloud": "f2",
+      "included_in_cutoff": false,
+      "qualification": "Extended metal-ionization EOS; nuclear contribution below0.001 on declining branch.",
+      "histories": [
+        {
+          "case": "lowz_cloudy_070_ext2_fresh_1tyr",
+          "snapshot_sha256": "ffecf5ff236448ed3dc07f812c222e68fa6bd72cb7b3194a8c1d4ccb0153f3e8",
+          "rows": 293
+        }
+      ]
+    },
+    {
+      "case": "z058_clear_0735_ext2_fresh_1tyr",
+      "mass_Msun": 0.0735,
+      "initial_Z": 0.009516037131604595,
+      "atmosphere": "clear",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "cooling",
+      "cooling_trend": {
+        "start_years": 67168515194.956665,
+        "end_years": 69853105955.02748,
+        "start_fraction": 0.0010457791709287446,
+        "end_fraction": 0.0007017733434962914,
+        "decreasing": true
+      },
+      "terminal": true,
+      "stop": "native envelope thermal reservoir fraction 0.01142 exceeds assessed limit 0.01",
+      "endpoint": {
+        "years": 69853105955.02748,
+        "Teff_K": 824.2575383194794,
+        "nuclear_fraction": 0.0007017733434962914,
+        "luminosity_Lsun": 2.0887607667007237e-06,
+        "central_T_K": 562390.9651520124,
+        "central_density_g_cm3": 1767.564999629485,
+        "central_X": 0.6869058462932592,
+        "central_He3": 0.0007162698872986402,
+        "surface_X": 0.7850611118674528,
+        "surface_Z": 0.005283494916197734
+      },
+      "saved_states": 260,
+      "CPU_seconds": 628.306861,
+      "wall_seconds": 425.6996256252751,
+      "Z": 0.009516037131604595,
+      "cloud": "nc",
+      "included_in_cutoff": false,
+      "qualification": "Extended metal-ionization EOS; nuclear contribution below0.001 on declining branch.",
+      "histories": [
+        {
+          "case": "z058_clear_0735_ext2_fresh_1tyr",
+          "snapshot_sha256": "fc62d73ee3fc8ccf0a7da64ee285884e3414f4e78c864ff382b41907430cf957",
+          "rows": 260
+        }
+      ]
+    },
+    {
+      "case": "z058_cloudy_068_ext2_fresh_1tyr",
+      "mass_Msun": 0.068,
+      "initial_Z": 0.009516037131604595,
+      "atmosphere": "cloudy",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "cooling",
+      "cooling_trend": {
+        "start_years": 52253351390.400635,
+        "end_years": 52928192317.52465,
+        "start_fraction": 0.0003459027105762235,
+        "end_fraction": 0.0003133717176971321,
+        "decreasing": true
+      },
+      "terminal": true,
+      "stop": "repeated step rejection: envelope surface Teff=775.859012 logg=5.551933: pressure family: H/He mismatch exceeds declared domain",
+      "endpoint": {
+        "years": 52928192317.52465,
+        "Teff_K": 775.8582463578347,
+        "nuclear_fraction": 0.0003133717176971321,
+        "luminosity_Lsun": 1.7079232773004106e-06,
+        "central_T_K": 528360.4780127555,
+        "central_density_g_cm3": 1529.8899724045923,
+        "central_X": 0.6853278316214654,
+        "central_He3": 0.0004410054522231254,
+        "surface_X": 0.7850662410405881,
+        "surface_Z": 0.005277697670017834
+      },
+      "saved_states": 224,
+      "CPU_seconds": 505.094418,
+      "wall_seconds": 340.639551917091,
+      "Z": 0.009516037131604595,
+      "cloud": "f2",
+      "included_in_cutoff": false,
+      "qualification": "Extended metal-ionization EOS; nuclear contribution below0.001 on declining branch.",
+      "histories": [
+        {
+          "case": "z058_cloudy_068_ext2_fresh_1tyr",
+          "snapshot_sha256": "a08f644395ba6a671266cfcdee5dd471688977e8ac5f3bcc14de05710172c9ab",
+          "rows": 224
+        }
+      ]
+    },
+    {
+      "case": "solar_clear_07125_ext2_1tyr",
+      "mass_Msun": 0.07125,
+      "initial_Z": 0.016482259798651158,
+      "atmosphere": "clear",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "cooling",
+      "cooling_trend": {
+        "start_years": 52361891822.51816,
+        "end_years": 53016370664.8263,
+        "start_fraction": 0.000711942444625234,
+        "end_fraction": 0.0006479722964364252,
+        "decreasing": true
+      },
+      "terminal": true,
+      "stop": "native envelope thermal reservoir fraction 0.01729 exceeds assessed limit 0.01",
+      "endpoint": {
+        "years": 53016370664.8263,
+        "Teff_K": 809.1561456296272,
+        "nuclear_fraction": 0.0006479722964364252,
+        "luminosity_Lsun": 1.9487844559743474e-06,
+        "central_T_K": 561369.0809818405,
+        "central_density_g_cm3": 1698.1339816895531,
+        "central_X": 0.6828070334018634,
+        "central_He3": 0.0004527669388257316,
+        "surface_X": 0.7816915098180248,
+        "surface_Z": 0.009003007715140815
+      },
+      "saved_states": 407,
+      "CPU_seconds": 884.626816,
+      "wall_seconds": 621.3408751673996,
+      "Z": 0.016482259798651158,
+      "cloud": "nc",
+      "included_in_cutoff": false,
+      "qualification": "Extended metal-ionization EOS; nuclear contribution below0.001 on declining branch.",
+      "histories": [
+        {
+          "case": "solar_clear_07125_ext2_20gyr",
+          "snapshot_sha256": "42396c4cde9b5e46c88c047ea1b676c15bcfc160db9df9f2c9dd0b6e2f6aba0e",
+          "rows": 338
+        },
+        {
+          "case": "solar_clear_07125_ext2_1tyr",
+          "snapshot_sha256": "6ca76fe8e8c70cdf2fdc3a3960c98caef376152b5ac8c4ce60a44aac811eb8ea",
+          "rows": 70
+        }
+      ]
+    },
+    {
+      "case": "solar_cloudy_0665_ext2_fresh_1tyr",
+      "mass_Msun": 0.0665,
+      "initial_Z": 0.016482259798651158,
+      "atmosphere": "cloudy",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "cooling",
+      "cooling_trend": {
+        "start_years": 88263301956.19615,
+        "end_years": 89564754876.40826,
+        "start_fraction": 0.0010316031045563764,
+        "end_fraction": 0.0008250245954594823,
+        "decreasing": true
+      },
+      "terminal": true,
+      "stop": "nuclear fraction below0.001 on declining branch; user-requested cooling endpoint",
+      "endpoint": {
+        "years": 89564754876.40826,
+        "Teff_K": 821.705624032638,
+        "nuclear_fraction": 0.0008250245954594823,
+        "luminosity_Lsun": 2.1874042740282334e-06,
+        "central_T_K": 616886.6370786901,
+        "central_density_g_cm3": 1531.3883491634017,
+        "central_X": 0.6516812450641912,
+        "central_He3": 0.0011648567646098324,
+        "surface_X": 0.781200170371187,
+        "surface_Z": 0.009526266466077973
+      },
+      "saved_states": 345,
+      "CPU_seconds": 782.128521,
+      "wall_seconds": 533.8203001245856,
+      "Z": 0.016482259798651158,
+      "cloud": "f2",
+      "included_in_cutoff": false,
+      "qualification": "Extended metal-ionization EOS; nuclear contribution below0.001 on declining branch.",
+      "histories": [
+        {
+          "case": "solar_cloudy_0665_ext2_fresh_1tyr",
+          "snapshot_sha256": "a051d33e7d95432fb585f6da830c9dfe1c2ce7a63616b7017a813688fa5eb07f",
+          "rows": 345
+        }
+      ]
+    },
+    {
+      "case": "z173_clear_069_ext2_fresh_1tyr",
+      "mass_Msun": 0.069,
+      "initial_Z": 0.028548111394813776,
+      "atmosphere": "clear",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "cooling",
+      "cooling_trend": {
+        "start_years": 55436641444.99576,
+        "end_years": 56576614496.26652,
+        "start_fraction": 0.0009125410806688358,
+        "end_fraction": 0.000779631537656286,
+        "decreasing": true
+      },
+      "terminal": true,
+      "stop": "native envelope thermal reservoir fraction 0.01511 exceeds assessed limit 0.01",
+      "endpoint": {
+        "years": 56576614496.26652,
+        "Teff_K": 807.3124551272232,
+        "nuclear_fraction": 0.000779631537656286,
+        "luminosity_Lsun": 1.9233451318222113e-06,
+        "central_T_K": 580064.9473721505,
+        "central_density_g_cm3": 1673.5068236681266,
+        "central_X": 0.6668571048897475,
+        "central_He3": 0.0004846258513429064,
+        "surface_X": 0.7756904214858481,
+        "surface_Z": 0.015483265193811543
+      },
+      "saved_states": 259,
+      "CPU_seconds": 577.9792,
+      "wall_seconds": 390.1259567923844,
+      "Z": 0.028548111394813776,
+      "cloud": "nc",
+      "included_in_cutoff": false,
+      "qualification": "Extended metal-ionization EOS; nuclear contribution below0.001 on declining branch.",
+      "histories": [
+        {
+          "case": "z173_clear_069_ext2_fresh_1tyr",
+          "snapshot_sha256": "c255ef6c1c98fc49cf709f1e7557464fd574c5c06266c6e5e7d1941761c38b4e",
+          "rows": 259
+        }
+      ]
+    },
+    {
+      "case": "z173_cloudy_0635_ext2_fresh_1tyr",
+      "mass_Msun": 0.0635,
+      "initial_Z": 0.028548111394813776,
+      "atmosphere": "cloudy",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "cooling",
+      "cooling_trend": {
+        "start_years": 59681994977.48553,
+        "end_years": 60448421644.74836,
+        "start_fraction": 0.00040084689128627255,
+        "end_fraction": 0.0003592877314640174,
+        "decreasing": true
+      },
+      "terminal": true,
+      "stop": "repeated step rejection: envelope surface Teff=761.935872 logg=5.520576: pressure family: H/He mismatch exceeds declared domain",
+      "endpoint": {
+        "years": 60448421644.74836,
+        "Teff_K": 761.9351201452927,
+        "nuclear_fraction": 0.0003592877314640174,
+        "luminosity_Lsun": 1.5945298398237494e-06,
+        "central_T_K": 549590.0461168515,
+        "central_density_g_cm3": 1449.378557634333,
+        "central_X": 0.6586287528841847,
+        "central_He3": 0.0004958103744831487,
+        "surface_X": 0.7755933173851303,
+        "surface_Z": 0.01558854354223595
+      },
+      "saved_states": 223,
+      "CPU_seconds": 509.33115,
+      "wall_seconds": 341.9940529167652,
+      "Z": 0.028548111394813776,
+      "cloud": "f2",
+      "included_in_cutoff": false,
+      "qualification": "Extended metal-ionization EOS; nuclear contribution below0.001 on declining branch.",
+      "histories": [
+        {
+          "case": "z173_cloudy_0635_ext2_fresh_1tyr",
+          "snapshot_sha256": "3ed5847ae48e26024f662f7a03bff8f266bab7fa0d459bafa56fb6fab6cb9a31",
+          "rows": 223
+        }
+      ]
+    },
+    {
+      "case": "ext2_clear_066_hhe065_probe",
+      "mass_Msun": 0.066,
+      "initial_Z": 0.049446779395953475,
+      "atmosphere": "clear",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "cooling",
+      "cooling_trend": {
+        "start_years": 70696301697.04298,
+        "end_years": 71449771165.51523,
+        "start_fraction": 0.0009736083913493688,
+        "end_fraction": 0.0008823212827542798,
+        "decreasing": true
+      },
+      "terminal": true,
+      "stop": "native envelope thermal reservoir fraction 0.01127 exceeds assessed limit 0.01",
+      "endpoint": {
+        "years": 71449771165.51523,
+        "Teff_K": 799.7249450274173,
+        "nuclear_fraction": 0.0008823212827542798,
+        "luminosity_Lsun": 1.815439627209302e-06,
+        "central_T_K": 592052.6505727633,
+        "central_density_g_cm3": 1700.9955689743865,
+        "central_X": 0.6337827201462811,
+        "central_He3": 0.0006492402144829133,
+        "surface_X": 0.7721573068431145,
+        "surface_Z": 0.02490959938659063
+      },
+      "saved_states": 507,
+      "CPU_seconds": 1107.815215,
+      "wall_seconds": 764.431436792016,
+      "atmosphere_domain_assessment": {
+        "allowed_hydrogen_mismatch": [
+          0.06,
+          0.065
+        ],
+        "qualification": "Finite-age bracket under the retained fixed-H/He atmosphere approximation. Full measured pair changes T100 by1.027%; the extra0.005 in X adds about0.07823%. Source differences and cloud/EOS uncertainty exceed the mass-sampling interval; no statistical uncertainty is inferred.",
+        "review_sha256": "fe4863ed5eb5f9ed34619876a5886dce77603ad2cd4773fd5e1821e6f6eb0379"
+      },
+      "Z": 0.049446779395953475,
+      "cloud": "nc",
+      "included_in_cutoff": false,
+      "qualification": "Extended metal-ionization EOS; nuclear contribution below0.001 on declining branch.",
+      "histories": [
+        {
+          "case": "ext2_clear_066_20gyr",
+          "snapshot_sha256": "14000ad42b949bc0ba1bb357cd5c585d2ba265cebd0d0ce78c7bb34dac721434",
+          "rows": 343
+        },
+        {
+          "case": "ext2_clear_066_1tyr",
+          "snapshot_sha256": "631b7cbb3a2706a0ac61f3ffe33c1a7cfa279996f9850daa5eef21c46334efcd",
+          "rows": 115
+        },
+        {
+          "case": "ext2_clear_066_hhe065_probe",
+          "snapshot_sha256": "a306887fd9c82c9016ecab4d8e66670fbc8a48022f7a1f1b5b9b77d2b67c6fe4",
+          "rows": 51
+        }
+      ]
+    },
+    {
+      "case": "ext2_cloudy_060_1tyr",
+      "mass_Msun": 0.06,
+      "initial_Z": 0.049446779395953475,
+      "atmosphere": "cloudy",
+      "EOS": "family_default_opt13_z008_ext2.bin",
+      "status": "cooling",
+      "cooling_trend": {
+        "start_years": 66494431703.25465,
+        "end_years": 67319769422.6772,
+        "start_fraction": 0.00046873657013829506,
+        "end_fraction": 0.00041774162087921464,
+        "decreasing": true
+      },
+      "terminal": true,
+      "stop": "nuclear fraction below0.001 on declining branch; user-requested cooling endpoint",
+      "endpoint": {
+        "years": 67319769422.6772,
+        "Teff_K": 753.8662771598313,
+        "nuclear_fraction": 0.00041774162087921464,
+        "luminosity_Lsun": 1.5098942445349591e-06,
+        "central_T_K": 567519.767522735,
+        "central_density_g_cm3": 1431.3813288993933,
+        "central_X": 0.6267045460758381,
+        "central_He3": 0.000597852208015108,
+        "surface_X": 0.765446012130907,
+        "surface_Z": 0.026596832313488694
+      },
+      "saved_states": 431,
+      "CPU_seconds": 1025.6228919999999,
+      "wall_seconds": 697.5356144579127,
+      "Z": 0.049446779395953475,
+      "cloud": "f2",
+      "included_in_cutoff": false,
+      "qualification": "Extended metal-ionization EOS; nuclear contribution below0.001 on declining branch.",
+      "histories": [
+        {
+          "case": "ext2_cloudy_060_20gyr",
+          "snapshot_sha256": "8a532e3be3ba66a1dbec67526d1e9ede97b3a5b62b6944c41baddf2be28d3cd0",
+          "rows": 341
+        },
+        {
+          "case": "ext2_cloudy_060_1tyr",
+          "snapshot_sha256": "15619da408f4f779f3be9fa2ee2d7f8ec8ae03b27cf7755737e8509808a298ef",
+          "rows": 91
+        }
+      ]
+    }
+  ],
+  "corrected_unresolved_models": []
 }
