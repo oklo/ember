@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-12T11:06:50.829884+00:00",
+  "updated_utc": "2026-10-12T11:59:20.189960+00:00",
   "definition": "Cooling: nuclear fraction below0.001 on fading branch. Supported: 1Tyr, final fraction in[0.99,1.01], final50Gyr span<0.02. Brackets are local intervals between computed outcomes, not statistical errors or validated physical limits. Unfinished branches do not establish monotonic ordering.",
   "brackets": [
     {
@@ -315,14 +315,19 @@
       "Z": 0.0054940865995503855,
       "cloud": "nc",
       "lower_cooling_mass": 0.075,
-      "upper_burning_mass": 0.0755,
+      "upper_burning_mass": 0.07525,
       "lower_case": "lowz_clear_075_ext2_fresh_1tyr",
-      "upper_case": "lowz_clear_0755_ext2_fresh_1tyr",
+      "upper_case": "lowz_clear_07525_ext2_fresh_1tyr",
       "lower_age_Gyr": 81.09174158344818,
       "upper_age_Gyr": 1000.0,
       "lower_nuclear_fraction": 0.0006290941812154355,
-      "upper_nuclear_fraction": 1.0005132759861537,
-      "numerical_differences": {},
+      "upper_nuclear_fraction": 1.0006585218650255,
+      "numerical_differences": {
+        "maximum_step_years": [
+          "2000000000",
+          "1000000000"
+        ]
+      },
       "physical_configuration_sha256": "29f56ec735d34514dacd62054005e793f0c4fddaad203d00f5bfbe9769fc5ba1",
       "EOS": "family_default_opt13_z008_ext2.bin",
       "atmosphere_domain_assessment": null,
@@ -331,15 +336,20 @@
     {
       "Z": 0.0054940865995503855,
       "cloud": "f2",
-      "lower_cooling_mass": 0.07,
+      "lower_cooling_mass": 0.07025,
       "upper_burning_mass": 0.0705,
-      "lower_case": "lowz_cloudy_070_ext2_fresh_1tyr",
+      "lower_case": "lowz_cloudy_07025_ext2_fresh_1tyr",
       "upper_case": "lowz_cloudy_0705_ext2_fresh_1tyr",
-      "lower_age_Gyr": 54.12775450826458,
+      "lower_age_Gyr": 77.871453836881,
       "upper_age_Gyr": 1000.0,
-      "lower_nuclear_fraction": 0.00033181213787631883,
+      "lower_nuclear_fraction": 0.000634017199092323,
       "upper_nuclear_fraction": 1.0000623778930027,
-      "numerical_differences": {},
+      "numerical_differences": {
+        "maximum_step_years": [
+          "1000000000",
+          "2000000000"
+        ]
+      },
       "physical_configuration_sha256": "5616423980368c26cb3984a400f005167ad18e3b15a7075c4d69913836a85a79",
       "EOS": "family_default_opt13_z008_ext2.bin",
       "atmosphere_domain_assessment": null,
@@ -414,6 +424,12 @@
           "case": "solar_clear_071875_ext2_fresh_1tyr",
           "status": "unresolved",
           "years": 311740861064.6119
+        },
+        {
+          "mass_Msun": 0.072,
+          "case": "solar_clear_072_ext2_fresh_1tyr",
+          "status": "unresolved",
+          "years": 12764667.51891692
         }
       ]
     },
@@ -1848,8 +1864,8 @@
   ],
   "corrected_burning_models": [
     {
-      "case": "lowz_clear_0755_ext2_fresh_1tyr",
-      "mass_Msun": 0.0755,
+      "case": "lowz_clear_07525_ext2_fresh_1tyr",
+      "mass_Msun": 0.07525,
       "initial_Z": 0.0054940865995503855,
       "atmosphere": "clear",
       "EOS": "family_default_opt13_z008_ext2.bin",
@@ -1859,28 +1875,28 @@
       "stop": "requested age",
       "endpoint": {
         "years": 1000000000000,
-        "Teff_K": 1681.9930291181458,
-        "nuclear_fraction": 1.0005132759861537,
-        "luminosity_Lsun": 5.1043199263190155e-05,
-        "central_T_K": 2656703.1890258025,
-        "central_density_g_cm3": 951.9543925954606,
-        "central_X": 0.7097752501141619,
-        "central_He3": 0.01480922341854695,
-        "surface_X": 0.7097752501141619,
-        "surface_Z": 0.005494086599550406
+        "Teff_K": 1605.3326674815696,
+        "nuclear_fraction": 1.0006585218650255,
+        "luminosity_Lsun": 4.145345069727851e-05,
+        "central_T_K": 2563800.614394326,
+        "central_density_g_cm3": 978.9303064702706,
+        "central_X": 0.7126908912756773,
+        "central_He3": 0.011893582561818817,
+        "surface_X": 0.7126908912756773,
+        "surface_Z": 0.005494086599550484
       },
-      "saved_states": 664,
-      "CPU_seconds": 1026.818426,
-      "wall_seconds": 710.7894479995593,
+      "saved_states": 1159,
+      "CPU_seconds": 1273.101844,
+      "wall_seconds": 903.2938885409385,
       "Z": 0.0054940865995503855,
       "cloud": "nc",
       "included_in_cutoff": false,
       "qualification": "Metal-ionization model; sustained burning at 1 Tyr. See corrected_brackets for any matched cooling bound.",
       "histories": [
         {
-          "case": "lowz_clear_0755_ext2_fresh_1tyr",
-          "snapshot_sha256": "127eed8bc139ee0e9c0cebf834341d94a53c3ef78a36898884b43f88fa285af0",
-          "rows": 664
+          "case": "lowz_clear_07525_ext2_fresh_1tyr",
+          "snapshot_sha256": "a1b77f21c6b1fd6f5169dc483174811225fe828770428d55e4e9b5a732a9e459",
+          "rows": 1159
         }
       ]
     },
@@ -2268,45 +2284,45 @@
       ]
     },
     {
-      "case": "lowz_cloudy_070_ext2_fresh_1tyr",
-      "mass_Msun": 0.07,
+      "case": "lowz_cloudy_07025_ext2_fresh_1tyr",
+      "mass_Msun": 0.07025,
       "initial_Z": 0.0054940865995503855,
       "atmosphere": "cloudy",
       "EOS": "family_default_opt13_z008_ext2.bin",
       "status": "cooling",
       "cooling_trend": {
-        "start_years": 52388826666.21036,
-        "end_years": 54127754508.26458,
-        "start_fraction": 0.0004311357561352414,
-        "end_fraction": 0.00033181213787631883,
+        "start_years": 76532452325.18898,
+        "end_years": 77871453836.881,
+        "start_fraction": 0.0007968394156999726,
+        "end_fraction": 0.000634017199092323,
         "decreasing": true
       },
       "terminal": true,
-      "stop": "native envelope thermal reservoir fraction 0.01095 exceeds assessed limit 0.01",
+      "stop": "nuclear fraction below0.001 on declining branch; user-requested cooling endpoint",
       "endpoint": {
-        "years": 54127754508.26458,
-        "Teff_K": 788.1693934170444,
-        "nuclear_fraction": 0.00033181213787631883,
-        "luminosity_Lsun": 1.7992581295999572e-06,
-        "central_T_K": 526192.9436532623,
-        "central_density_g_cm3": 1599.0556523458392,
-        "central_X": 0.6890089121981364,
-        "central_He3": 0.0005008473977436551,
-        "surface_X": 0.7876226121629821,
-        "surface_Z": 0.003056211067626621
+        "years": 77871453836.881,
+        "Teff_K": 826.4046056563576,
+        "nuclear_fraction": 0.000634017199092323,
+        "luminosity_Lsun": 2.193507199708881e-06,
+        "central_T_K": 581039.5321065403,
+        "central_density_g_cm3": 1632.2800059148785,
+        "central_X": 0.671551849528183,
+        "central_He3": 0.0010411081439511928,
+        "surface_X": 0.7874399983861202,
+        "surface_Z": 0.0031778416119523723
       },
-      "saved_states": 293,
-      "CPU_seconds": 678.953055,
-      "wall_seconds": 461.35144833289087,
+      "saved_states": 275,
+      "CPU_seconds": 667.591231,
+      "wall_seconds": 449.34313091728836,
       "Z": 0.0054940865995503855,
       "cloud": "f2",
       "included_in_cutoff": false,
       "qualification": "Extended metal-ionization EOS; nuclear contribution below0.001 on declining branch.",
       "histories": [
         {
-          "case": "lowz_cloudy_070_ext2_fresh_1tyr",
-          "snapshot_sha256": "ffecf5ff236448ed3dc07f812c222e68fa6bd72cb7b3194a8c1d4ccb0153f3e8",
-          "rows": 293
+          "case": "lowz_cloudy_07025_ext2_fresh_1tyr",
+          "snapshot_sha256": "fa3ef9ed309bc1eea32d55ff4ee7ee7ba089d4e702a6ba92482a3f432234d6d4",
+          "rows": 275
         }
       ]
     },

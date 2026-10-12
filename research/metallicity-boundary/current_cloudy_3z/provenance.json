@@ -1,0 +1,69 @@
+{
+  "updated_utc": "2026-10-12T11:47:32.445522+00:00",
+  "initial_Z": 0.049446779395953475,
+  "sources": [
+    {
+      "case": "ext2_cloudy_060_20gyr",
+      "sha256": "8a532e3be3ba66a1dbec67526d1e9ede97b3a5b62b6944c41baddf2be28d3cd0",
+      "history": "out/fresh-paired-eos-oct12-v1/ext2_cloudy_060_20gyr/evolution/history.jsonl"
+    },
+    {
+      "case": "ext2_cloudy_060_1tyr",
+      "sha256": "15619da408f4f779f3be9fa2ee2d7f8ec8ae03b27cf7755737e8509808a298ef",
+      "history": "out/fresh-paired-eos-oct12-v1/ext2_cloudy_060_1tyr/evolution/history.jsonl"
+    },
+    {
+      "case": "zext16_cloudy_0605_fresh_1tyr",
+      "sha256": "71235373b36cdbfe324028a9aeb1ad162a4115c228938a4ae0b28cd7be69a3d9",
+      "history": "out/fresh-paired-eos-oct12-v1/zext16_cloudy_0605_fresh_1tyr/evolution/history.jsonl"
+    },
+    {
+      "case": "zext16_cloudy_0605_2tyr",
+      "sha256": "30f227f02af7ae204cecf94605bd36f1543f17229f19c90a0f240352652e2b4f",
+      "history": "out/fresh-paired-eos-oct12-v1/zext16_cloudy_0605_2tyr/evolution/history.jsonl"
+    },
+    {
+      "case": "zext16_cloudy_0605_hhe080_2tyr",
+      "sha256": "c868f9459de2e3b1dada78c10e05cca6e5aa838a616c01a3a492560a1a0d81f5",
+      "history": "out/fresh-paired-eos-oct12-v1/zext16_cloudy_0605_hhe080_2tyr/evolution/history.jsonl"
+    },
+    {
+      "case": "ext2_cloudy_061_fresh_1tyr",
+      "sha256": "ef542e78126069dc472a082fa3c2718fd438121338da1c11a05445d6dc82962d",
+      "history": "out/fresh-paired-eos-oct12-v1/ext2_cloudy_061_fresh_1tyr/evolution/history.jsonl"
+    }
+  ],
+  "endpoints": [
+    {
+      "mass_Msun": 0.06,
+      "age_Gyr": 67.3197694226772,
+      "nuclear_fraction": 0.00041774162087921464,
+      "Teff_K": 753.8662771598313,
+      "luminosity_Lsun": 1.5098942445349591e-06,
+      "late_L_peak_age_Gyr": 10.006351337249441,
+      "late_L_peak_Lsun": 1.0625595005606394e-05
+    },
+    {
+      "mass_Msun": 0.0605,
+      "age_Gyr": 1127.507414785574,
+      "nuclear_fraction": 0.6634005387157623,
+      "Teff_K": 1150.4768666537686,
+      "luminosity_Lsun": 1.0326852743124386e-05,
+      "late_L_peak_age_Gyr": 463.09269694259655,
+      "late_L_peak_Lsun": 1.904289107121359e-05
+    },
+    {
+      "mass_Msun": 0.061,
+      "age_Gyr": 1000.0,
+      "nuclear_fraction": 1.0001091855931878,
+      "Teff_K": 1153.8317600726589,
+      "luminosity_Lsun": 1.3174460166410493e-05,
+      "late_L_peak_age_Gyr": 1000.0,
+      "late_L_peak_Lsun": 1.3174460166410493e-05
+    }
+  ],
+  "models": 1865,
+  "scope": "Metal-ionization EOS. 0.0605 uses the extended Z<=0.16 family; the other masses use Z<=0.08. Not a matched three-mass convergence test.",
+  "provisional": "Dashed continuation widens the H/He atmosphere domain with unchanged boundary equations. Its supporting PICASO response has a missing electron-opacity term under correction. No tighter mass cutoff inferred.",
+  "excluded": "The last 0.0605 state at 1149 K lies just below the 1150 K assessment limit and is omitted."
+}
