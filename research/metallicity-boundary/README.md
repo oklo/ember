@@ -36,7 +36,10 @@ mass intervals. Cloud physics, composition response, mixing and dense-matter
 thermodynamics remain larger uncertainties than the mass spacing in several
 intervals.
 
-Work above three times Z_ref is experimental and is not plotted here.
+Work above three times Z_ref remains experimental and is not included in
+the transition-mass diagram. The [five-times-reference-metallicity controls](experimental_highz/Ember_boundary_5Z_experimental.png)
+show a 0.06-solar-mass clear-atmosphere model with near-complete nuclear
+support through 891.4 Gyr. [Assumptions and data](experimental_highz/README.md).
 EOS tables have been assembled through Z = 0.24, but unresolved source
 transitions prevent general use. Default table limits are unchanged;
 no higher-metallicity hydrogen-burning boundary is established.

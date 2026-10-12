@@ -64,6 +64,6 @@
   ],
   "models": 1865,
   "scope": "Metal-ionization EOS. 0.0605 uses the extended Z<=0.16 family; the other masses use Z<=0.08. Not a matched three-mass convergence test.",
-  "provisional": "Dashed continuation widens the H/He atmosphere domain with unchanged boundary equations. Its supporting PICASO response has a missing electron-opacity term under correction. No tighter mass cutoff inferred.",
+  "provisional": "Dashed continuation widens the H/He atmosphere domain with unchanged boundary equations. Its composition response remains under assessment; correcting local electron-continuum terms alone does not validate the wider domain. No tighter mass cutoff inferred.",
   "excluded": "The last 0.0605 state at 1149 K lies just below the 1150 K assessment limit and is omitted."
 }

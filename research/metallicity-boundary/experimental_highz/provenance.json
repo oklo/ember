@@ -1,0 +1,127 @@
+{
+  "updated_utc": "2026-10-12T18:37:41.105533+00:00",
+  "initial_Z": 0.08241129899325579,
+  "initial_Y": 0.27,
+  "mass_Msun": 0.06,
+  "source_cases": [
+    {
+      "case": "tau1",
+      "history": "out/highz-native-opacity-oct12-v1/pilot_z5_m006_postD_tau1_refined1000_spike1/evolution/history.jsonl",
+      "sha256": "be049a19a25c7dee67d0bad9484f85799c8c9e3003ee533c5ae3a653b3182cb1",
+      "states": 170
+    },
+    {
+      "case": "tau1",
+      "history": "out/highz-native-opacity-oct12-v1/long_tau1_spike1/evolution/history.jsonl",
+      "sha256": "252e04441a7cead442a95946b3f791492880e0d8431a737c7d54e3466ffb9fce",
+      "states": 26
+    },
+    {
+      "case": "tau3",
+      "history": "out/highz-native-opacity-oct12-v1/pilot_z5_m006_postD_tau3_refined1000_spike1/evolution/history.jsonl",
+      "sha256": "e7498f0ca9e6a94b0f4f44cae7bbb82c308c5e4d1990e6fb3a6d91cd8b0a3c02",
+      "states": 169
+    },
+    {
+      "case": "tau3",
+      "history": "out/highz-native-opacity-oct12-v1/step_control_tau3_spike1_1Gyr/evolution/history.jsonl",
+      "sha256": "3b86ffe6e0bf9107c1b4715e1670fc1323eb250e511a60c5c813729493efaa52",
+      "states": 10
+    },
+    {
+      "case": "tau3",
+      "history": "out/highz-native-opacity-oct12-v1/long_tau3_spike1/evolution/history.jsonl",
+      "sha256": "ae77ef15582a554f0f4840f2b14c9df8d05d0ffbdf6541991a4ff06231875444",
+      "states": 892
+    },
+    {
+      "case": "tau3_original",
+      "history": "out/highz-native-opacity-oct12-v1/pilot_z5_m006_postD_tau3_refined1000/evolution/history.jsonl",
+      "sha256": "729bf11ae8ac500e34e0996b739698b035d814f1277a212a94a3791e65e61d3b",
+      "states": 169
+    },
+    {
+      "case": "tau3_original",
+      "history": "out/highz-native-opacity-oct12-v1/long_tau3_original_eos/evolution/history.jsonl",
+      "sha256": "d5619cd388c88da429bcba445b1e5d9b051eacaaa61f18e5520aba1b72a28b26",
+      "states": 900
+    }
+  ],
+  "endpoints": {
+    "tau1": {
+      "years": 24797279432.572124,
+      "Teff_K": 1159.2742696566445,
+      "luminosity_Lsun": 1.0719995808334375e-05,
+      "nuclear_fraction": 0.9861043488202984,
+      "surface_X": 0.6477109085596772,
+      "surface_Z": 0.08231129943171721,
+      "convective_mass_fraction": 0.9747397605237405,
+      "stop_reason": "repeated step rejection: envelope surface Teff=1159.275414 logg=5.397464: pressure-matched atmosphere: composition outside the declared proxy tolerance"
+    },
+    "tau3": {
+      "years": 891366226443.2122,
+      "Teff_K": 1204.0311820124684,
+      "luminosity_Lsun": 1.2750201522035179e-05,
+      "nuclear_fraction": 1.0005210525362667,
+      "surface_X": 0.6425887010067511,
+      "surface_Z": 0.08241129899325604,
+      "convective_mass_fraction": 0.9999999999999991,
+      "stop_reason": "native envelope thermal reservoir fraction 0.01739 exceeds assessed limit 0.01"
+    },
+    "tau3_original": {
+      "years": 891351490891.0024,
+      "Teff_K": 1204.0400859991992,
+      "luminosity_Lsun": 1.2750737892065033e-05,
+      "nuclear_fraction": 1.0005380619955333,
+      "surface_X": 0.6425887010067457,
+      "surface_Z": 0.08241129899325615,
+      "convective_mass_fraction": 0.9999999999999991,
+      "stop_reason": "native envelope thermal reservoir fraction 0.09638 exceeds assessed limit 0.01"
+    }
+  },
+  "restart_checks": [
+    {
+      "case": "tau1",
+      "source": "long_tau1_spike1",
+      "relative": {
+        "Teff_K": -1.02580258731777e-08,
+        "luminosity_Lsun": 0.0,
+        "nuclear_fraction": 0.0
+      }
+    },
+    {
+      "case": "tau3",
+      "source": "step_control_tau3_spike1_1Gyr",
+      "relative": {
+        "Teff_K": 9.931948596886286e-10,
+        "luminosity_Lsun": 0.0,
+        "nuclear_fraction": 0.0
+      }
+    },
+    {
+      "case": "tau3",
+      "source": "long_tau3_spike1",
+      "relative": {
+        "Teff_K": 3.250167912582924e-09,
+        "luminosity_Lsun": 0.0,
+        "nuclear_fraction": 0.0
+      }
+    },
+    {
+      "case": "tau3_original",
+      "source": "long_tau3_original_eos",
+      "relative": {
+        "Teff_K": 8.670026474533188e-09,
+        "luminosity_Lsun": 0.0,
+        "nuclear_fraction": 0.0
+      }
+    }
+  ],
+  "limitations": [
+    "Post-deuterium starts omit the formation clock and initial D heat.",
+    "Clear fixed source chemistry and imposed atmospheric adiabat are approximations; finite MLT handles deeper layers.",
+    "Tau1 reaches its fixed-composition allowance after nonconvective regions form and surface metals settle.",
+    "The regularized H/He fit changes a real source bump; it remains an EOS sensitivity experiment.",
+    "These controls do not establish a transition mass."
+  ]
+}

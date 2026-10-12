@@ -12,8 +12,9 @@ comparison, not used to tighten the mass interval.
 
 The dashed continuation beyond 1.087 Tyr widens the permitted atmospheric
 H/He mismatch without changing boundary values. Its estimated validity remains
-provisional: the supporting PICASO response calculations omit electron-dependent
-continuum opacity because of a parser defect. Corrected pairs are being checked.
+provisional: its atmosphere composition response remains under assessment.
+Local PICASO calculations now include the corrected electron-dependent
+continuum opacity; this alone does not validate the wider composition range.
 The plot stops at the last model inside the 1150 K assessment range; the next
 accepted state is slightly outside and is omitted.
 
