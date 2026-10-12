@@ -26,6 +26,28 @@ H/He boundary responses retain stated approximations. These completions
 do not validate the earlier mixing events or tighten the mass bracket.
 Lines connect saved models; no tail is drawn beyond a computed endpoint.
 
+## Interior of the 0.05835-solar-mass model
+
+![Interior evolution](interior_05835/Ember_boundary_05835_structure.png)
+
+A conductive layer separates the convective core and envelope from 12.67 Gyr.
+Settling changes their compositions independently. Nuclear burning supplies
+99.53% of the energy emitted between 20 and 850 Gyr, but this is not a fixed
+equilibrium. Central temperature peaks at 496.7 Gyr and subsequently falls.
+Burning fades rapidly near 880 Gyr as the degenerate interior cools and
+convection retreats. At 897 Gyr, about 98.24% of the initial hydrogen remains;
+the failure is not fuel exhaustion or a helium-3 flash. Prescribed cloud
+clearing overlaps the final decline.
+
+This outcome remains provisional. The neutral-metal EOS omits metal
+electrons from the degenerate pressure. Diagnostic estimates suggest a
+central pressure correction of about 3% at 20 Gyr and 12–14% at 850 Gyr,
+at fixed temperature, density and composition. Late heat-capacity
+interpolation also needs correction. These estimates are not corrected
+stellar structures or uncertainties on the lifetime. The diagram describes
+the retained calculation; it does not establish that a real star fails at
+this mass and age. [Details and figure data](interior_05835/README.md).
+
 ## Mixing and the sharp features
 
 ![Mixing and metallicity comparisons](mixing_metallicity.png)
@@ -80,3 +102,7 @@ Run `python plot.py`, `python plot_transition_mass.py`,
 and Matplotlib. CSV/NPZ files retain plotted states; JSON records source
 fingerprints, endpoints, assumptions and numerical checks. These reproduce
 figures, not stellar runs; full physics tables and checkpoints are separate.
+
+For the selected boundary curves, use
+`python plot.py --omit-masses .05815 .05820 .05825 .05830 --output-stem boundary_selected`.
+For the structure diagram, run `python interior_05835/plot_structure.py`.

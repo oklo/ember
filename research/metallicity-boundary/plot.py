@@ -1,12 +1,16 @@
 """Render the saved stellar states; no interpolation or extrapolated tails."""
 from pathlib import Path
-import csv,json
+import argparse,csv,json
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 ROOT=Path(__file__).resolve().parent
+parser=argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--omit-masses',nargs='*',type=float,default=[])
+parser.add_argument('--output-stem',type=Path,default=ROOT/'boundary')
+args=parser.parse_args()
 plt.rcParams.update({'font.size':12,'axes.labelsize':14,'legend.fontsize':10.5,
                      'axes.spines.top':False,'axes.spines.right':False,'savefig.dpi':200})
 
@@ -22,17 +26,22 @@ def line(ax,rows,y,**style):
     ax.plot([r['age_Gyr'] for r in rows],[r[y] for r in rows],**style)
 
 tracks=read('tracks.csv','mass_Msun')
+palette=dict(zip(sorted(tracks),plt.cm.viridis(np.linspace(.08,.85,max(2,len(tracks))))))
+tracks={m:h for m,h in tracks.items()
+        if not any(abs(m-omit)<1e-9 for omit in args.omit_masses)}
+if not tracks:parser.error('No tracks remain after filtering.')
 metadata={e['mass_Msun']:e for e in json.loads((ROOT/'provenance.json').read_text())['endpoints']}
 from matplotlib.collections import LineCollection
 from matplotlib.colors import Normalize, LinearSegmentedColormap
 fig,(ax,lum)=plt.subplots(2,1,figsize=(11.5,10.4),sharex=True,
                          gridspec_kw={'height_ratios':[1,1.05]})
 fig.subplots_adjust(left=.10,right=.78,bottom=.09,top=.965,hspace=.065)
-colors=plt.cm.viridis(np.linspace(.08,.85,max(2,len(tracks))));rows=[];points=[]
+rows=[];points=[]
 tnorm=Normalize(650,2700)
 tcmap=LinearSegmentedColormap.from_list('stellar_temperature',plt.cm.plasma(np.linspace(.04,.90,256)))
 endpoints=[]
-for (m,h),color in zip(sorted(tracks.items()),colors):
+for m,h in sorted(tracks.items()):
+ color=palette[m]
  x=np.array([a['age_Gyr'] for a in h]);y=np.array([a['nuclear_fraction']for a in h]);mask=x>=.05
  ax.plot(x[mask],y[mask],color=color,lw=2 if m==.05825 else 1.6,label=f'{m:.4g}')
  last=h[-1];full=last['age_Gyr']>=1000*(1-1e-10) or metadata[m].get('stop','').startswith('nuclear fraction below');marker='s' if metadata[m].get('running') else 'o'
@@ -44,7 +53,7 @@ for (m,h),color in zip(sorted(tracks.items()),colors):
  color_end=tcmap(tnorm(tt[-1]))
  lum.plot(x[-1],ll[-1],marker=marker,ms=5,mec=color_end,mfc=color_end if full else 'white',zorder=5)
  endpoints.append((m,x[-1],ll[-1],full))
-ax.set(xscale='log',xlim=(.05,1150),ylim=(-.025,max(1.07,1.035*max(a['nuclear_fraction'] for h in tracks.values() for a in h if a['age_Gyr']>=.05))),ylabel=r'$L_{\rm nuc}/L$')
+ax.set(xscale='log',xlim=(.05,1150),ylim=(-.025,max(1.12 if args.omit_masses else 1.07,1.035*max(a['nuclear_fraction'] for h in tracks.values() for a in h if a['age_Gyr']>=.05))),ylabel=r'$L_{\rm nuc}/L$')
 ax.axhline(1,color='.35',ls=':',lw=.8)
 ax.text(.025,.955,r'$3Z_{\rm ref}$ · cloudy, $f_{\rm sed}=2$',transform=ax.transAxes,va='top',fontsize=14)
 ax.legend(title=r'Mass ($M_\odot$)',loc='upper left',bbox_to_anchor=(1.015,1),frameon=False,labelspacing=.38)
@@ -69,10 +78,15 @@ lum.text(.50,.95,r'Labels: mass in $M_\odot$',transform=lum.transAxes,va='top',f
 cax=fig.add_axes([.815,.18,.017,.245])
 cb=fig.colorbar(plt.cm.ScalarMappable(norm=tnorm,cmap=tcmap),cax=cax)
 cb.set_ticks([700,1000,1500,2000,2500]);cb.set_label(r'$T_{\rm eff}$ (K)',labelpad=8)
-fig.text(.10,.025,'Instantaneous convection; no semiconvection. Sharp merger features remain unresolved.',fontsize=10.5,color='.25')
-fig.savefig(ROOT/'boundary.png')
-fig.savefig(ROOT/'boundary.pdf')
+note=('Instantaneous convection; no semiconvection. Mixing and cloud clearing remain uncertain.'
+      if args.omit_masses else
+      'Instantaneous convection; no semiconvection. Sharp merger features remain unresolved.')
+fig.text(.10,.025,note,fontsize=10.5,color='.25')
+args.output_stem.parent.mkdir(parents=True,exist_ok=True)
+fig.savefig(args.output_stem.with_suffix('.png'))
+fig.savefig(args.output_stem.with_suffix('.pdf'))
 plt.close(fig)
+if args.omit_masses:raise SystemExit(0)
 
 data=read('timestep_comparison.csv','case')
 fig,axes=plt.subplots(1,2,figsize=(12,5.6));fig.subplots_adjust(left=.075,right=.975,bottom=.24,top=.92,wspace=.27)
