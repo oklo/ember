@@ -1,5 +1,6 @@
-"""Metallicity boundary with measured mass intervals and unresolved trials."""
+"""Current clear/cloudy mass intervals, with an optional neutral-metal comparison."""
 from pathlib import Path
+import argparse
 import json
 import matplotlib
 matplotlib.use('Agg')
@@ -9,7 +10,7 @@ from matplotlib.ticker import FixedLocator,FuncFormatter,NullFormatter
 
 OUT=Path(__file__).resolve().parent
 
-def main():
+def plot_comparison():
     data=json.loads((OUT/'transition_mass.json').read_text())
     bounds=data['brackets']
     plt.rcParams.update({'font.family':'DejaVu Sans','font.size':12,
@@ -109,7 +110,76 @@ def main():
     fig.text(.11,.098,'* Provisional high-Z pair: 0.05835 cools by 897 Gyr; lower-mass warm tracks remain unfinished.',fontsize=10.3)
     fig.text(.11,.061,'Squares burn at 1 Tyr; circles cool below 0.1% nuclear support. Nearby masses remain under test.',fontsize=10.3)
     for ext in ['png','pdf']:
+        fig.savefig(OUT/f'transition_mass_comparison.{ext}',dpi=220)
+    plt.close(fig)
+
+
+def plot_current():
+    data=json.loads((OUT/'transition_mass.json').read_text())
+    bounds=data['corrected_brackets']
+    assert len({(b['Z'],b['cloud']) for b in bounds})==len(bounds)
+    assert all(b['lower_cooling_mass']<b['upper_burning_mass'] for b in bounds)
+    assert all(b['lower_nuclear_fraction']<.001 and
+               .99<=b['upper_nuclear_fraction']<=1.01 and
+               b['upper_age_Gyr']>=1000 for b in bounds)
+    plt.rcParams.update({'font.family':'DejaVu Sans','font.size':12,
+        'axes.labelsize':14,'axes.spines.top':False,'axes.spines.right':False,
+        'pdf.fonttype':42,'savefig.facecolor':'white'})
+    fig,ax=plt.subplots(figsize=(10.6,7.4))
+    fig.subplots_adjust(left=.11,right=.965,bottom=.20,top=.90)
+    colors={'nc':'#355f8b','f2':'#b76b32'}
+    for cloud in ('nc','f2'):
+        bs=sorted((b for b in bounds if b['cloud']==cloud),key=lambda b:b['Z'])
+        z=[b['Z'] for b in bs]
+        lo=[b['lower_cooling_mass'] for b in bs]
+        hi=[b['upper_burning_mass'] for b in bs]
+        color=colors[cloud]
+        # Connections guide the eye; no extra metallicities have been modeled.
+        ax.fill_between(z,lo,hi,color=color,alpha=.08,lw=0,zorder=1)
+        ax.plot(z,[(a+b)/2 for a,b in zip(lo,hi)],color=color,
+                lw=1.5,ls=(0,(2,3)),alpha=.65,zorder=2)
+        for b in bs:
+            x=b['Z'];lower=b['lower_cooling_mass'];upper=b['upper_burning_mass']
+            ax.plot([x,x],[lower,upper],color=color,lw=3,zorder=3)
+            ax.plot(x,upper,marker='s',ms=7.5,mfc=color,mec='white',mew=.8,zorder=5)
+            ax.plot(x,lower,marker='o',ms=7.5,mfc='white',mec=color,mew=1.7,zorder=5)
+            for pending in b.get('unresolved',[]):
+                ax.plot(x,pending['mass_Msun'],marker='D',ms=5.5,
+                        mfc='white',mec=color,mew=1.2,zorder=6)
+            ax.annotate(f'{lower:.4g}–{upper:.4g}',(x,upper),xytext=(0,12),
+                        textcoords='offset points',ha='center',fontsize=11,color='black')
+    ax.set(xscale='log',xlim=(.0045,.061),ylim=(.0585,.0778),
+           xlabel='Initial metal mass fraction, Z',ylabel=r'Transition mass ($M_\odot$)')
+    zvals=sorted({b['Z'] for b in bounds})
+    ax.xaxis.set_major_locator(FixedLocator(zvals))
+    ax.xaxis.set_major_formatter(FuncFormatter(lambda z,p:f'{z:.4g}'))
+    ax.xaxis.set_minor_formatter(NullFormatter())
+    ax.grid(axis='y',alpha=.14,lw=.65)
+    legends=[Line2D([],[],color=colors['nc'],lw=2.5,label='Cloud-free'),
+             Line2D([],[],color=colors['f2'],lw=2.5,label=r'Cloudy, $f_{\rm sed}=2$'),
+             Line2D([],[],color='.25',marker='s',ls='none',ms=6,
+                    label='Sustained burning at 1 Tyr'),
+             Line2D([],[],color='.25',marker='o',mfc='white',ls='none',ms=6,
+                    label='Cooling: nuclear fraction < 0.1%'),
+             Line2D([],[],color='.25',marker='D',mfc='white',ls='none',ms=5,
+                    label='Unfinished mass trial')]
+    ax.legend(handles=legends,loc='lower left',bbox_to_anchor=(.015,.07),
+              frameon=False,fontsize=11,labelspacing=.5)
+    ax.text(.03,.025,r'$Y=0.27$ • solar metal ratios • metal ionization included',
+            transform=ax.transAxes,fontsize=10.5)
+    fig.text(.11,.95,'Ember  |  Hydrogen-burning boundary',fontsize=17)
+    fig.text(.11,.10,'Bars span tested cooling and burning masses; shading connects the sampled metallicities.',fontsize=10.3)
+    fig.text(.11,.055,'Mass spacing is not a physical error bar. Atmosphere and mixing uncertainties remain.',fontsize=10.3)
+    for ext in ('png','pdf'):
         fig.savefig(OUT/f'transition_mass.{ext}',dpi=220)
     plt.close(fig)
 
-if __name__=='__main__':main()
+
+if __name__=='__main__':
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--include-comparison',action='store_true',
+                        help='Also render the neutral-metal EOS comparison separately.')
+    args=parser.parse_args()
+    plot_current()
+    if args.include_comparison:
+        plot_comparison()

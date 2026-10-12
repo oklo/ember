@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-12T10:21:48.960010+00:00",
+  "updated_utc": "2026-10-12T11:06:50.829884+00:00",
   "definition": "Cooling: nuclear fraction below0.001 on fading branch. Supported: 1Tyr, final fraction in[0.99,1.01], final50Gyr span<0.02. Brackets are local intervals between computed outcomes, not statistical errors or validated physical limits. Unfinished branches do not establish monotonic ordering.",
   "brackets": [
     {

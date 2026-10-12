@@ -7,7 +7,7 @@ with deuterium.
 
 ![Transition mass and metallicity](transition_mass.png)
 
-Thick bars span tested cooling and burning masses with metal ionization and
+Bars span tested cooling and burning masses with metal ionization and
 matching physical inputs:
 
 | Initial Z | Clear (solar masses) | Cloudy (solar masses) |
@@ -21,9 +21,10 @@ matching physical inputs:
 Squares have 99–101% nuclear support at 1 Tyr, varying by less than two
 percentage points over the final 50 Gyr. Open circles have declined below
 0.1%; diamonds are unfinished trials. These intervals measure mass sampling,
-not physical uncertainty or permanent main-sequence membership. Thin bars
-show the neutral-metal EOS comparison; different EOS treatments must not be
-combined into a tighter interval.
+not physical uncertainty or permanent main-sequence membership. Shading
+connects the five sampled metallicities. The
+[neutral-metal EOS comparison](transition_mass_comparison.png) is separate;
+different EOS treatments must not be combined into a tighter interval.
 
 The high-Z clear cooling endpoint extends the permitted atmospheric H/He
 range slightly, without changing boundary values or derivatives. A measured
@@ -57,7 +58,8 @@ mass intervals above.
 ## Reproduce the figures
 
 `plot_transition_mass.py` reproduces the cutoff diagram from
-`transition_mass.json`. Other figures use `plot.py`,
+`transition_mass.json`; add `--include-comparison` to regenerate the separate
+neutral-metal comparison. Other figures use `plot.py`,
 `plot_mixing_metallicity.py`, `plot_mesh_comparison.py`, `plot_interior.py`
 and `interior_05835/plot_structure.py`, with NumPy and Matplotlib.
 CSV/NPZ files contain plotted states; JSON records endpoints, assumptions,
