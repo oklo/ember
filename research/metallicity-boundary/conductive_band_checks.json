@@ -1,0 +1,2258 @@
+{
+  "updated_utc": "2026-10-13T13:05:13.494739+00:00",
+  "scope": "Comparisons use the stated current interior physics with the old H/He atmosphere response. Numerical and physical sensitivities are distinct. No corrected-atmosphere formation or universal band claim.",
+  "comparisons": {
+    "mesh": {
+      "reference": "mesh536_60Gyr",
+      "candidate": "mesh1072_60Gyr",
+      "age_years": 60000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": -0.026089580748267283,
+        "radius_Rsun": -0.007172747938001711,
+        "luminosity_Lsun": -0.1132046083840571,
+        "central_T_K": -0.025189346351281006,
+        "central_density_g_cm3": 0.011194853660374537,
+        "nuclear_fraction": -0.02431526834224762,
+        "H_mass_g": 1.2484773913579161e-05,
+        "He3_mass_g": -0.017793387120367377
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3576749287344,
+            0.4035457429901
+          ],
+          "intervals": 9,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966455534493,
+            0.9968314677939
+          ],
+          "X": [
+            0.62322350875,
+            0.6618300532216
+          ],
+          "Z": [
+            0.09171500936814,
+            0.07675431450167
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.3690875425331,
+            0.3817793188337
+          ],
+          "intervals": 5,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.997035112551,
+            0.9970418108876
+          ],
+          "X": [
+            0.6292988573146,
+            0.65796857804
+          ],
+          "Z": [
+            0.0908247993393,
+            0.07736440518024
+          ]
+        }
+      ]
+    },
+    "fine_mesh": {
+      "reference": "mesh1072_60Gyr",
+      "candidate": "mesh2144_60Gyr",
+      "age_years": 60000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": 0.025390655189431843,
+        "radius_Rsun": 0.006769582563361354,
+        "luminosity_Lsun": 0.12051478775321223,
+        "central_T_K": 0.024443406524071953,
+        "central_density_g_cm3": -0.010004938488805126,
+        "nuclear_fraction": 0.023356436905720868,
+        "H_mass_g": -1.185239599710286e-05,
+        "He3_mass_g": 0.01719834540239451
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3690875425331,
+            0.3817793188337
+          ],
+          "intervals": 5,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.997035112551,
+            0.9970418108876
+          ],
+          "X": [
+            0.6292988573146,
+            0.65796857804
+          ],
+          "Z": [
+            0.0908247993393,
+            0.07736440518024
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.355938769467,
+            0.4003998868507
+          ],
+          "intervals": 35,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966622402169,
+            0.9968525326653
+          ],
+          "X": [
+            0.6233151229008,
+            0.6616226704732
+          ],
+          "Z": [
+            0.09169472699731,
+            0.07682753349639
+          ]
+        }
+      ]
+    },
+    "step": {
+      "reference": "mesh536_60Gyr",
+      "candidate": "step200Myr_60Gyr",
+      "age_years": 60000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": 0.0003073857129929358,
+        "radius_Rsun": 8.876486377284998e-05,
+        "luminosity_Lsun": 0.0014078658815261935,
+        "central_T_K": 0.0004141464808427031,
+        "central_density_g_cm3": 4.44846181333336e-05,
+        "nuclear_fraction": 0.00024698662693278806,
+        "H_mass_g": 9.457538927559739e-07,
+        "He3_mass_g": -0.001347895063933846
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3576749287344,
+            0.4035457429901
+          ],
+          "intervals": 9,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966455534493,
+            0.9968314677939
+          ],
+          "X": [
+            0.62322350875,
+            0.6618300532216
+          ],
+          "Z": [
+            0.09171500936814,
+            0.07675431450167
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.3526737056797,
+            0.3983820664993
+          ],
+          "intervals": 9,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966230873066,
+            0.9968104199841
+          ],
+          "X": [
+            0.6229070840425,
+            0.6617039800066
+          ],
+          "Z": [
+            0.09183165109874,
+            0.07680508900878
+          ]
+        }
+      ]
+    },
+    "fine_step": {
+      "reference": "mesh1072_60Gyr",
+      "candidate": "mesh1072_step200Myr_60Gyr",
+      "age_years": 60000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": 0.0291407910546424,
+        "radius_Rsun": 0.00792053309816021,
+        "luminosity_Lsun": 0.1395981991101094,
+        "central_T_K": 0.0284069405021683,
+        "central_density_g_cm3": -0.01295623503210519,
+        "nuclear_fraction": 0.028529087422510813,
+        "H_mass_g": -1.244606454875452e-05,
+        "He3_mass_g": 0.018059784458698047
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3690875425331,
+            0.3817793188337
+          ],
+          "intervals": 5,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.997035112551,
+            0.9970418108876
+          ],
+          "X": [
+            0.6292988573146,
+            0.65796857804
+          ],
+          "Z": [
+            0.0908247993393,
+            0.07736440518024
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.3540185061678,
+            0.4023075370432
+          ],
+          "intervals": 19,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9965906382579,
+            0.9968142578538
+          ],
+          "X": [
+            0.6228643152645,
+            0.6618931242003
+          ],
+          "Z": [
+            0.09181482537473,
+            0.07674825996638
+          ]
+        }
+      ]
+    },
+    "mesh_short_step": {
+      "reference": "step200Myr_60Gyr",
+      "candidate": "mesh1072_step200Myr_60Gyr",
+      "age_years": 60000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": 0.001982944043425139,
+        "radius_Rsun": 0.0006021548587438197,
+        "luminosity_Lsun": 0.00916965573768791,
+        "central_T_K": 0.002087031070382217,
+        "central_density_g_cm3": -0.001950822363450011,
+        "nuclear_fraction": 0.0032723318148955016,
+        "H_mass_g": -9.071990562103949e-07,
+        "He3_mass_g": 0.0012946927760826288
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3526737056797,
+            0.3983820664993
+          ],
+          "intervals": 9,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966230873066,
+            0.9968104199841
+          ],
+          "X": [
+            0.6229070840425,
+            0.6617039800066
+          ],
+          "Z": [
+            0.09183165109874,
+            0.07680508900878
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.3540185061678,
+            0.4023075370432
+          ],
+          "intervals": 19,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9965906382579,
+            0.9968142578538
+          ],
+          "X": [
+            0.6228643152645,
+            0.6618931242003
+          ],
+          "Z": [
+            0.09181482537473,
+            0.07674825996638
+          ]
+        }
+      ]
+    },
+    "finest_mesh_short_step": {
+      "reference": "mesh1072_step200Myr_60Gyr",
+      "candidate": "mesh2144_step200Myr_60Gyr",
+      "age_years": 60000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": -0.004241866305023101,
+        "radius_Rsun": -0.0013587569216116924,
+        "luminosity_Lsun": -0.01952969160446094,
+        "central_T_K": -0.0045349501701238415,
+        "central_density_g_cm3": 0.0039102506224450995,
+        "nuclear_fraction": -0.006192394892869824,
+        "H_mass_g": 2.0683723318537517e-06,
+        "He3_mass_g": -0.00294802081452028
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3540185061678,
+            0.4023075370432
+          ],
+          "intervals": 19,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9965906382579,
+            0.9968142578538
+          ],
+          "X": [
+            0.6228643152645,
+            0.6618931242003
+          ],
+          "Z": [
+            0.09181482537473,
+            0.07674825996638
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.355938769467,
+            0.399111612967
+          ],
+          "intervals": 34,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966756126476,
+            0.9968552108354
+          ],
+          "X": [
+            0.6232405030462,
+            0.6616294054015
+          ],
+          "Z": [
+            0.09174590553227,
+            0.07681482618448
+          ]
+        }
+      ]
+    },
+    "no_richardson": {
+      "reference": "mesh1072_60Gyr",
+      "candidate": "mesh1072_no_richardson_60Gyr",
+      "age_years": 60000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": -0.0140706869022168,
+        "radius_Rsun": -0.0025975174275169044,
+        "luminosity_Lsun": -0.06000832838069692,
+        "central_T_K": -0.01148637701435562,
+        "central_density_g_cm3": -0.007150461499060734,
+        "nuclear_fraction": -0.0025698474535792437,
+        "H_mass_g": 6.086559533269309e-06,
+        "He3_mass_g": -0.008831864307443649
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3690875425331,
+            0.3817793188337
+          ],
+          "intervals": 5,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.997035112551,
+            0.9970418108876
+          ],
+          "X": [
+            0.6292988573146,
+            0.65796857804
+          ],
+          "Z": [
+            0.0908247993393,
+            0.07736440518024
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.3716165883378,
+            0.3766888407542
+          ],
+          "intervals": 2,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9971323961002,
+            0.997144405705
+          ],
+          "X": [
+            0.6365953048737,
+            0.6535792142351
+          ],
+          "Z": [
+            0.08963327796302,
+            0.07809641434324
+          ]
+        }
+      ]
+    },
+    "no_richardson_vs_short": {
+      "reference": "mesh1072_step200Myr_60Gyr",
+      "candidate": "mesh1072_no_richardson_60Gyr",
+      "age_years": 60000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": -0.04198791684525194,
+        "radius_Rsun": -0.010435396621345183,
+        "luminosity_Lsun": -0.17515517982274387,
+        "central_T_K": -0.03879137328365778,
+        "central_density_g_cm3": 0.005881981872640996,
+        "nuclear_fraction": -0.03023632025227785,
+        "H_mass_g": 1.853285474306965e-05,
+        "He3_mass_g": -0.026414606663242135
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3540185061678,
+            0.4023075370432
+          ],
+          "intervals": 19,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9965906382579,
+            0.9968142578538
+          ],
+          "X": [
+            0.6228643152645,
+            0.6618931242003
+          ],
+          "Z": [
+            0.09181482537473,
+            0.07674825996638
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.3716165883378,
+            0.3766888407542
+          ],
+          "intervals": 2,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9971323961002,
+            0.997144405705
+          ],
+          "X": [
+            0.6365953048737,
+            0.6535792142351
+          ],
+          "Z": [
+            0.08963327796302,
+            0.07809641434324
+          ]
+        }
+      ]
+    },
+    "short_step_no_richardson": {
+      "reference": "mesh1072_step200Myr_60Gyr",
+      "candidate": "mesh1072_step200Myr_no_richardson_60Gyr",
+      "age_years": 60000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": -0.003021206597316861,
+        "radius_Rsun": -0.0009052643705254049,
+        "luminosity_Lsun": -0.013818108603501411,
+        "central_T_K": -0.0030698471991172926,
+        "central_density_g_cm3": 0.002143292490752957,
+        "nuclear_fraction": -0.003710876262131624,
+        "H_mass_g": 1.121202897857998e-06,
+        "He3_mass_g": -0.0015980340795506143
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3540185061678,
+            0.4023075370432
+          ],
+          "intervals": 19,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9965906382579,
+            0.9968142578538
+          ],
+          "X": [
+            0.6228643152645,
+            0.6618931242003
+          ],
+          "Z": [
+            0.09181482537473,
+            0.07674825996638
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.3540185061678,
+            0.3997280162537
+          ],
+          "intervals": 18,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966412393485,
+            0.9968371142487
+          ],
+          "X": [
+            0.6232726060386,
+            0.6615692290167
+          ],
+          "Z": [
+            0.0916869613775,
+            0.07685898259362
+          ]
+        }
+      ]
+    },
+    "added_feh0_source": {
+      "reference": "step200Myr_60Gyr",
+      "candidate": "pilot_matched_oct13_z5_m006125_60Gyr",
+      "age_years": 60000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": 0.0037820163131481177,
+        "radius_Rsun": -0.00031123334870086783,
+        "luminosity_Lsun": 0.014582265097681457,
+        "central_T_K": 0.004388657005051755,
+        "central_density_g_cm3": 0.009536746288270503,
+        "nuclear_fraction": 0.012742647576880817,
+        "H_mass_g": 4.8059981503367766e-06,
+        "He3_mass_g": -0.006858793598635393
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3526737056797,
+            0.3983820664993
+          ],
+          "intervals": 9,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966230873066,
+            0.9968104199841
+          ],
+          "X": [
+            0.6229070840425,
+            0.6617039800066
+          ],
+          "Z": [
+            0.09183165109874,
+            0.07680508900878
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.3526739765715,
+            0.4087237621286
+          ],
+          "intervals": 11,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.99661781101,
+            0.9968702092703
+          ],
+          "X": [
+            0.618668387328,
+            0.6646063915552
+          ],
+          "Z": [
+            0.0934143762185,
+            0.07573137772012
+          ]
+        }
+      ]
+    },
+    "added_hot_row": {
+      "reference": "pilot_matched_oct13_z5_m006125_60Gyr",
+      "candidate": "pilot_matched2800_oct13_z5_m006125_60Gyr",
+      "age_years": 60000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": -8.267482243584645e-06,
+        "radius_Rsun": -6.537686166874224e-07,
+        "luminosity_Lsun": -3.437701243524938e-05,
+        "central_T_K": -2.3232133067319083e-06,
+        "central_density_g_cm3": 2.2451686196856002e-06,
+        "nuclear_fraction": 2.108862969318892e-05,
+        "H_mass_g": 3.0108708859444278e-09,
+        "He3_mass_g": -4.326602736748342e-06
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3526739765715,
+            0.4087237621286
+          ],
+          "intervals": 11,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.99661781101,
+            0.9968702092703
+          ],
+          "X": [
+            0.618668387328,
+            0.6646063915552
+          ],
+          "Z": [
+            0.0934143762185,
+            0.07573137772012
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.3526739765715,
+            0.4087237621286
+          ],
+          "intervals": 11,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966178524714,
+            0.9968702333799
+          ],
+          "X": [
+            0.6186684868655,
+            0.6646063361408
+          ],
+          "Z": [
+            0.09341432599763,
+            0.07573140442218
+          ]
+        }
+      ]
+    },
+    "warm_response": {
+      "reference": "warm_old_130Gyr",
+      "candidate": "warm_normalized_130Gyr",
+      "age_years": 130000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": 9.36996177174354e-05,
+        "radius_Rsun": 0.0009808982468031413,
+        "luminosity_Lsun": 0.0023383455491896576,
+        "central_T_K": 0.0009507924589846617,
+        "central_density_g_cm3": -0.0033598595145537535,
+        "nuclear_fraction": 0.00010009021299417498,
+        "H_mass_g": -7.037629599082607e-07,
+        "He3_mass_g": 0.00028701743921311085
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3576749287344,
+            0.3881000772588
+          ],
+          "intervals": 6,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9805118654463,
+            0.9860384989675
+          ],
+          "X": [
+            0.5679217687537,
+            0.662474629951
+          ],
+          "Z": [
+            0.1173089751416,
+            0.06402793937519
+          ]
+        },
+        {
+          "q": [
+            0.3932332395029,
+            0.4035457429901
+          ],
+          "intervals": 2,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9872847363439,
+            0.9884311761057
+          ],
+          "X": [
+            0.662474629951,
+            0.6935232593661
+          ],
+          "Z": [
+            0.06402793937519,
+            0.06197078426804
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.3576749287344,
+            0.3881000772588
+          ],
+          "intervals": 6,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9803299710677,
+            0.985924181673
+          ],
+          "X": [
+            0.5679141105919,
+            0.6624723815826
+          ],
+          "Z": [
+            0.1173157666887,
+            0.06402706363222
+          ]
+        },
+        {
+          "q": [
+            0.3932332395029,
+            0.4035457429901
+          ],
+          "intervals": 2,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9871844140188,
+            0.9883439263914
+          ],
+          "X": [
+            0.6624723815826,
+            0.693527140792
+          ],
+          "Z": [
+            0.06402706363222,
+            0.06196698337012
+          ]
+        }
+      ]
+    },
+    "warm_absolute_and_response": {
+      "reference": "warm_old_130Gyr",
+      "candidate": "warm_absolute_130Gyr",
+      "age_years": 130000000000,
+      "relative_endpoint_changes": {
+        "Teff_K": -0.0023780941468936057,
+        "radius_Rsun": -0.011120487316251926,
+        "luminosity_Lsun": -0.031386168874126485,
+        "central_T_K": -0.011720157388502295,
+        "central_density_g_cm3": 0.03952235761579037,
+        "nuclear_fraction": -0.0017511750770718981,
+        "H_mass_g": 9.244734200608562e-06,
+        "He3_mass_g": -0.0037703050697843743
+      },
+      "reference_bands": [
+        {
+          "q": [
+            0.3576749287344,
+            0.3881000772588
+          ],
+          "intervals": 6,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9805118654463,
+            0.9860384989675
+          ],
+          "X": [
+            0.5679217687537,
+            0.662474629951
+          ],
+          "Z": [
+            0.1173089751416,
+            0.06402793937519
+          ]
+        },
+        {
+          "q": [
+            0.3932332395029,
+            0.4035457429901
+          ],
+          "intervals": 2,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9872847363439,
+            0.9884311761057
+          ],
+          "X": [
+            0.662474629951,
+            0.6935232593661
+          ],
+          "Z": [
+            0.06402793937519,
+            0.06197078426804
+          ]
+        }
+      ],
+      "candidate_bands": [
+        {
+          "q": [
+            0.3576749287344,
+            0.3881000772588
+          ],
+          "intervals": 6,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9825376513508,
+            0.9873030011662
+          ],
+          "X": [
+            0.5680217355894,
+            0.662478980689
+          ],
+          "Z": [
+            0.1172253736311,
+            0.06405580134912
+          ]
+        },
+        {
+          "q": [
+            0.3932332395029,
+            0.4035457429901
+          ],
+          "intervals": 2,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9883906235834,
+            0.9893900863949
+          ],
+          "X": [
+            0.662478980689,
+            0.6934734057249
+          ],
+          "Z": [
+            0.06405580134912,
+            0.0620166421674
+          ]
+        }
+      ]
+    }
+  },
+  "runs": {
+    "mesh536_60Gyr": {
+      "endpoint": {
+        "years": 60000000000,
+        "Teff_K": 1243.3350948700374,
+        "luminosity_Lsun": 1.3812052470541595e-05,
+        "nuclear_fraction": 1.0227786605008382,
+        "central_T_K": 2379227.968325718,
+        "central_X": 0.6232235087500053,
+        "H_mass_g": 7.882415635411137e+31,
+        "He3_mass_g": 5.5307163506817594e+28
+      },
+      "first_separating_band": {
+        "years": 31488859744.216164,
+        "model": 118,
+        "Teff_K": 1184.2842392514742,
+        "nuclear_fraction": 0.9827615091546384,
+        "bands": [
+          {
+            "q": [
+              0.3576749287344,
+              0.4035457429901
+            ],
+            "intervals": 9,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9970696856093,
+              0.9971835861711
+            ],
+            "X": [
+              0.6469306916104,
+              0.6476566761725
+            ],
+            "Z": [
+              0.0825694795662,
+              0.08230874079437
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.3576749287344,
+            0.4035457429901
+          ],
+          "intervals": 9,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966455534493,
+            0.9968314677939
+          ],
+          "X": [
+            0.62322350875,
+            0.6618300532216
+          ],
+          "Z": [
+            0.09171500936814,
+            0.07675431450167
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "6063383e6c0c00345cf19be76a0f83efc56547eff7ef3ad22db874c9b096dbfc",
+        "history.jsonl": "1ac64fbc31d33224dc18856cfeca7952241be32a65d58ff924d7f4560707c9be",
+        "interior.csv": "87cdb96d1c987e050533de85457b14968f2169de9c815c8d296feb2ff69fea23"
+      }
+    },
+    "mesh1072_60Gyr": {
+      "endpoint": {
+        "years": 60000000000,
+        "Teff_K": 1210.897003515271,
+        "luminosity_Lsun": 1.2248464479633885e-05,
+        "nuclear_fraction": 0.9979095229160357,
+        "central_T_K": 2319296.7709829067,
+        "central_X": 0.6292988573145812,
+        "H_mass_g": 7.882514045588238e+31,
+        "He3_mass_g": 5.432306173601134e+28
+      },
+      "first_separating_band": {
+        "years": 31680262138.590122,
+        "model": 118,
+        "Teff_K": 1185.3166952329655,
+        "nuclear_fraction": 0.982285288875871,
+        "bands": [
+          {
+            "q": [
+              0.3690875425331,
+              0.3817793188337
+            ],
+            "intervals": 5,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9971000003264,
+              0.9971274269766
+            ],
+            "X": [
+              0.6465098052109,
+              0.6478931237078
+            ],
+            "Z": [
+              0.08272485222911,
+              0.08222159607518
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.3690875425331,
+            0.3817793188337
+          ],
+          "intervals": 5,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.997035112551,
+            0.9970418108876
+          ],
+          "X": [
+            0.6292988573146,
+            0.65796857804
+          ],
+          "Z": [
+            0.0908247993393,
+            0.07736440518024
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "857fe50ae6bb652d3405609b654887e71ac96a42326ab17dcd0905298b8a2590",
+        "history.jsonl": "9f0666de3150a60f291e44190a25ee4efcc5496a32f3e2c79e6a1b413b637f12",
+        "interior.csv": "013ff503cc93e7d8683a6a3bd02fb3dd557891a02ecca4f3108fb399b5bca23d"
+      }
+    },
+    "mesh2144_60Gyr": {
+      "endpoint": {
+        "years": 60000000000,
+        "Teff_K": 1241.6424718014434,
+        "luminosity_Lsun": 1.3724585576699722e-05,
+        "nuclear_fraction": 1.0212171337256422,
+        "central_T_K": 2375988.2848060094,
+        "central_X": 0.6233151229007645,
+        "H_mass_g": 7.882420618910317e+31,
+        "He3_mass_g": 5.5257328515062865e+28
+      },
+      "first_separating_band": {
+        "years": 31545456818.996414,
+        "model": 118,
+        "Teff_K": 1184.4505831905792,
+        "nuclear_fraction": 0.9825115434788515,
+        "bands": [
+          {
+            "q": [
+              0.355938769467,
+              0.4003998868507
+            ],
+            "intervals": 35,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9970645054751,
+              0.9971853090859
+            ],
+            "X": [
+              0.6469294120606,
+              0.6476539026243
+            ],
+            "Z": [
+              0.08256975197663,
+              0.08230954105636
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.355938769467,
+            0.4003998868507
+          ],
+          "intervals": 35,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966622402169,
+            0.9968525326653
+          ],
+          "X": [
+            0.6233151229008,
+            0.6616226704732
+          ],
+          "Z": [
+            0.09169472699731,
+            0.07682753349639
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "a698d40536e7b88385890fb7328361fa1b5537e49b867d420fbe953436647702",
+        "history.jsonl": "e41264025f42b08802b1f35a556a6233f796ed521e3f47644c9c49ea45d5cea0",
+        "interior.csv": "94aed917e9bb321135bdda4c079d797bc374d9e1b53ea227c8b6b7b769f3d07c"
+      }
+    },
+    "step200Myr_60Gyr": {
+      "endpoint": {
+        "years": 60000000000,
+        "Teff_K": 1243.7172783146632,
+        "luminosity_Lsun": 1.3831497987968721e-05,
+        "nuclear_fraction": 1.0230312731522941,
+        "central_T_K": 2380213.3172159223,
+        "central_X": 0.6229070840425209,
+        "H_mass_g": 7.882423090236409e+31,
+        "He3_mass_g": 5.5232615254126575e+28
+      },
+      "first_separating_band": {
+        "years": 30821132721.04918,
+        "model": 227,
+        "Teff_K": 1183.7929756087872,
+        "nuclear_fraction": 0.982536747264844,
+        "bands": [
+          {
+            "q": [
+              0.3576749287344,
+              0.3932332395029
+            ],
+            "intervals": 7,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9970702153369,
+              0.9971563979902
+            ],
+            "X": [
+              0.6472893304392,
+              0.6474334648626
+            ],
+            "Z": [
+              0.08244292047445,
+              0.08239144612678
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.3526737056797,
+            0.3983820664993
+          ],
+          "intervals": 9,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966230873066,
+            0.9968104199841
+          ],
+          "X": [
+            0.6229070840425,
+            0.6617039800066
+          ],
+          "Z": [
+            0.09183165109874,
+            0.07680508900878
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "7c6164e53b14469dc71e8c9c4134c953f390bb2493fb77ed564c73c1b40e65a2",
+        "history.jsonl": "9ce03f094b8fccefb7b8b755646fe3a987f9d5c3ea17d46508eafa09318bbe52",
+        "interior.csv": "d4cc9337af8a05a8ead6f9fceed312ac995b99e1852f9ec9d42db6aa8a2f9651"
+      }
+    },
+    "mesh1072_step200Myr_60Gyr": {
+      "endpoint": {
+        "years": 60000000000,
+        "Teff_K": 1246.1835000834021,
+        "luminosity_Lsun": 1.3958328062854918e-05,
+        "nuclear_fraction": 1.0263789709350635,
+        "central_T_K": 2385180.8963630893,
+        "central_X": 0.622864315264501,
+        "H_mass_g": 7.88241593930962e+31,
+        "He3_mass_g": 5.530412452210024e+28
+      },
+      "first_separating_band": {
+        "years": 31056823634.18633,
+        "model": 228,
+        "Teff_K": 1183.9938326115168,
+        "nuclear_fraction": 0.9822848846590976,
+        "bands": [
+          {
+            "q": [
+              0.3540185061678,
+              0.4023075370432
+            ],
+            "intervals": 19,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9970601667936,
+              0.9971883960739
+            ],
+            "X": [
+              0.647198701951,
+              0.6474895894169
+            ],
+            "Z": [
+              0.08247468735765,
+              0.08237070450341
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.3540185061678,
+            0.4023075370432
+          ],
+          "intervals": 19,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9965906382579,
+            0.9968142578538
+          ],
+          "X": [
+            0.6228643152645,
+            0.6618931242003
+          ],
+          "Z": [
+            0.09181482537473,
+            0.07674825996638
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "0308af7b158532164d073ef85cba2e9f99d7468dfa669a1da21ae12c8cd723c7",
+        "history.jsonl": "b48b20fdc6a33189c1d8b4ce2d08ef02f8ea7e06c0d2b84c7dded32c55ed70bb",
+        "interior.csv": "512ac18ecd89a399c1c431161f977ed7ec76866d6101ab3eb626da1e83bf437b"
+      }
+    },
+    "mesh2144_step200Myr_60Gyr": {
+      "endpoint": {
+        "years": 60000000000,
+        "Teff_K": 1240.8973562845226,
+        "luminosity_Lsun": 1.3685726220473468e-05,
+        "nuclear_fraction": 1.0200232270372962,
+        "central_T_K": 2374364.2198513513,
+        "central_X": 0.6232405030461798,
+        "H_mass_g": 7.882432243080658e+31,
+        "He3_mass_g": 5.514108681188027e+28
+      },
+      "first_separating_band": {
+        "years": 31028576456.023525,
+        "model": 228,
+        "Teff_K": 1184.018833106282,
+        "nuclear_fraction": 0.9823166389311797,
+        "bands": [
+          {
+            "q": [
+              0.355938769467,
+              0.3978242573912
+            ],
+            "intervals": 33,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9970656398602,
+              0.997179532983
+            ],
+            "X": [
+              0.6471990499917,
+              0.6474888077011
+            ],
+            "Z": [
+              0.08247464575034,
+              0.08237102042298
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.355938769467,
+            0.399111612967
+          ],
+          "intervals": 34,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966756126476,
+            0.9968552108354
+          ],
+          "X": [
+            0.6232405030462,
+            0.6616294054015
+          ],
+          "Z": [
+            0.09174590553227,
+            0.07681482618448
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "cb45e74bf2b078190ac10609148bf5d1fb27a445634a2a0ef2736a4e559360ac",
+        "history.jsonl": "8e89f464c7f7602e3ac24fa3fa0e40e2b21681bcba7178ba0996d6d703135cb8",
+        "interior.csv": "5b3bae24af0b4d90de05c1c7ab29d3a055046b1bd4d2021f737b913fe48cc9ff"
+      }
+    },
+    "mesh1072_no_richardson_60Gyr": {
+      "endpoint": {
+        "years": 60000000000,
+        "Teff_K": 1193.8588509079752,
+        "luminosity_Lsun": 1.1513454600980713e-05,
+        "nuclear_fraction": 0.9953450476696675,
+        "central_T_K": 2292656.4538632194,
+        "central_X": 0.6365953048737426,
+        "H_mass_g": 7.8825620229792485e+31,
+        "He3_mass_g": 5.3843287825994e+28
+      },
+      "first_separating_band": {
+        "years": 32531633378.08938,
+        "model": 119,
+        "Teff_K": 1185.263028743137,
+        "nuclear_fraction": 0.9822623584769488,
+        "bands": [
+          {
+            "q": [
+              0.3716165883378,
+              0.3766888407542
+            ],
+            "intervals": 2,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9971074876389,
+              0.9971136495842
+            ],
+            "X": [
+              0.6465392848719,
+              0.6478640759981
+            ],
+            "Z": [
+              0.08272116752015,
+              0.08222600352351
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.3716165883378,
+            0.3766888407542
+          ],
+          "intervals": 2,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9971323961002,
+            0.997144405705
+          ],
+          "X": [
+            0.6365953048737,
+            0.6535792142351
+          ],
+          "Z": [
+            0.08963327796302,
+            0.07809641434324
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "f18aabf5aa711a36260e2592dbf171495adefb534e05af8055352805ace30b77",
+        "history.jsonl": "37e3088b1208601d5fc35aa39be453cdffe89e507556c0caa1407636a740305f",
+        "interior.csv": "26aad762933a2ca1fa7b18393a12b44eb0591efc7dfba8d6529e6748aeaf9449"
+      }
+    },
+    "mesh1072_step200Myr_no_richardson_60Gyr": {
+      "endpoint": {
+        "years": 60000000000,
+        "Teff_K": 1242.4185222714827,
+        "luminosity_Lsun": 1.3765450369759088e-05,
+        "nuclear_fraction": 1.0225702055758694,
+        "central_T_K": 2377858.755469001,
+        "central_X": 0.623272606038648,
+        "H_mass_g": 7.882424777097213e+31,
+        "He3_mass_g": 5.521574664637422e+28
+      },
+      "first_separating_band": {
+        "years": 31253507943.97656,
+        "model": 229,
+        "Teff_K": 1183.851880880752,
+        "nuclear_fraction": 0.9823782633042228,
+        "bands": [
+          {
+            "q": [
+              0.3565170035796,
+              0.3945800333115
+            ],
+            "intervals": 15,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9970675686891,
+              0.9971678131708
+            ],
+            "X": [
+              0.6472865722626,
+              0.647431235862
+            ],
+            "Z": [
+              0.08244296455153,
+              0.08239127648543
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.3540185061678,
+            0.3997280162537
+          ],
+          "intervals": 18,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966412393485,
+            0.9968371142487
+          ],
+          "X": [
+            0.6232726060386,
+            0.6615692290167
+          ],
+          "Z": [
+            0.0916869613775,
+            0.07685898259362
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "6db819ff3df42db25f0398003f4fe05391c5bdab4e001b31ab9c2a5626a03f09",
+        "history.jsonl": "5904639952edd9f6294d5e1a24b8bf597a3b09ea07f5e1136d8a4616f7d20075",
+        "interior.csv": "6f49d0ab607b697f83c617159c1e0dee39edfc7f3a2504ee8b59bfe91d5a4db3"
+      }
+    },
+    "warm_old_130Gyr": {
+      "endpoint": {
+        "years": 130000000000,
+        "Teff_K": 1692.7288919837486,
+        "luminosity_Lsun": 6.256483144113149e-05,
+        "nuclear_fraction": 1.0130572290580133,
+        "central_T_K": 3263797.94730435,
+        "central_X": 0.5679217687537081,
+        "H_mass_g": 7.868652569675002e+31,
+        "He3_mass_g": 1.9293780700325243e+29
+      },
+      "first_separating_band": {
+        "years": 119303862548.63089,
+        "model": 228,
+        "Teff_K": 1656.7229621919344,
+        "nuclear_fraction": 1.008535422578276,
+        "bands": [
+          {
+            "q": [
+              0.3576749287344,
+              0.3881000772588
+            ],
+            "intervals": 6,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9834136399651,
+              0.987663865427
+            ],
+            "X": [
+              0.576729914431,
+              0.6607548934886
+            ],
+            "Z": [
+              0.112655777963,
+              0.06684328125685
+            ]
+          },
+          {
+            "q": [
+              0.3932332395029,
+              0.4035457429901
+            ],
+            "intervals": 2,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.988632446465,
+              0.9895215232277
+            ],
+            "X": [
+              0.6607548934886,
+              0.6886533777986
+            ],
+            "Z": [
+              0.06684328125685,
+              0.06464612216223
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.3576749287344,
+            0.3881000772588
+          ],
+          "intervals": 6,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9805118654463,
+            0.9860384989675
+          ],
+          "X": [
+            0.5679217687537,
+            0.662474629951
+          ],
+          "Z": [
+            0.1173089751416,
+            0.06402793937519
+          ]
+        },
+        {
+          "q": [
+            0.3932332395029,
+            0.4035457429901
+          ],
+          "intervals": 2,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9872847363439,
+            0.9884311761057
+          ],
+          "X": [
+            0.662474629951,
+            0.6935232593661
+          ],
+          "Z": [
+            0.06402793937519,
+            0.06197078426804
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "d4bb888b0a5a9eabb822b32a1b62a9efdda5134501eac5cfa180491ba5e6e7df",
+        "history.jsonl": "c3f5307a7821ca769cedbeb29146596636a03c3166a06ec0ddec5a10888cd9d7",
+        "interior.csv": "e7e55f9900821b4e115254c35ee7d2a0a0093dab176cf54728dbb1e8fca3f18e"
+      }
+    },
+    "warm_normalized_130Gyr": {
+      "endpoint": {
+        "years": 130000000000,
+        "Teff_K": 1692.8875000338267,
+        "luminosity_Lsun": 6.271112963626765e-05,
+        "nuclear_fraction": 1.013158626171845,
+        "central_T_K": 3266901.141780297,
+        "central_X": 0.5679141105919279,
+        "H_mass_g": 7.868647032008779e+31,
+        "He3_mass_g": 1.929931835185459e+29
+      },
+      "first_separating_band": {
+        "years": 119303862548.63089,
+        "model": 228,
+        "Teff_K": 1656.7132612232365,
+        "nuclear_fraction": 1.008535422578276,
+        "bands": [
+          {
+            "q": [
+              0.3576749287344,
+              0.3881000772588
+            ],
+            "intervals": 6,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9834136399651,
+              0.987663865427
+            ],
+            "X": [
+              0.576729914431,
+              0.6607548934886
+            ],
+            "Z": [
+              0.112655777963,
+              0.06684328125685
+            ]
+          },
+          {
+            "q": [
+              0.3932332395029,
+              0.4035457429901
+            ],
+            "intervals": 2,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.988632446465,
+              0.9895215232277
+            ],
+            "X": [
+              0.6607548934886,
+              0.6886533777986
+            ],
+            "Z": [
+              0.06684328125685,
+              0.06464612216223
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.3576749287344,
+            0.3881000772588
+          ],
+          "intervals": 6,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9803299710677,
+            0.985924181673
+          ],
+          "X": [
+            0.5679141105919,
+            0.6624723815826
+          ],
+          "Z": [
+            0.1173157666887,
+            0.06402706363222
+          ]
+        },
+        {
+          "q": [
+            0.3932332395029,
+            0.4035457429901
+          ],
+          "intervals": 2,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9871844140188,
+            0.9883439263914
+          ],
+          "X": [
+            0.6624723815826,
+            0.693527140792
+          ],
+          "Z": [
+            0.06402706363222,
+            0.06196698337012
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "bf2c96205c36a992f0d63456c117686fbbc811842202ea5cdfa5a6b0b667c462",
+        "history.jsonl": "3ead09ec040951dbd28cf154d90bbefee00fbc0c16a7f321dcd2cdfaaf9d322f",
+        "interior.csv": "7bd1f91799a454236cd7aef8ca730781fba9da190dae5a546f21ec11ae4c0677"
+      }
+    },
+    "warm_absolute_130Gyr": {
+      "endpoint": {
+        "years": 130000000000,
+        "Teff_K": 1688.7034233134443,
+        "luminosity_Lsun": 6.0601161075938874e-05,
+        "nuclear_fraction": 1.0112831884868394,
+        "central_T_K": 3225545.721677672,
+        "central_X": 0.5680217355893715,
+        "H_mass_g": 7.868725313276525e+31,
+        "He3_mass_g": 1.9221037261135498e+29
+      },
+      "first_separating_band": {
+        "years": 119303862548.63089,
+        "model": 228,
+        "Teff_K": 1656.8327883395166,
+        "nuclear_fraction": 1.008535422578276,
+        "bands": [
+          {
+            "q": [
+              0.3576749287344,
+              0.3881000772588
+            ],
+            "intervals": 6,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9834136399651,
+              0.987663865427
+            ],
+            "X": [
+              0.576729914431,
+              0.6607548934886
+            ],
+            "Z": [
+              0.112655777963,
+              0.06684328125685
+            ]
+          },
+          {
+            "q": [
+              0.3932332395029,
+              0.4035457429901
+            ],
+            "intervals": 2,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.988632446465,
+              0.9895215232277
+            ],
+            "X": [
+              0.6607548934886,
+              0.6886533777986
+            ],
+            "Z": [
+              0.06684328125685,
+              0.06464612216223
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.3576749287344,
+            0.3881000772588
+          ],
+          "intervals": 6,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9825376513508,
+            0.9873030011662
+          ],
+          "X": [
+            0.5680217355894,
+            0.662478980689
+          ],
+          "Z": [
+            0.1172253736311,
+            0.06405580134912
+          ]
+        },
+        {
+          "q": [
+            0.3932332395029,
+            0.4035457429901
+          ],
+          "intervals": 2,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9883906235834,
+            0.9893900863949
+          ],
+          "X": [
+            0.662478980689,
+            0.6934734057249
+          ],
+          "Z": [
+            0.06405580134912,
+            0.0620166421674
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "f35a0366e28785676158585acd1b0b1f1c609bf6c4b56ef31d2b3a2c41f5bcf7",
+        "history.jsonl": "fc0aac3937839d03efa6fd72c7cd8ac68664654680fd9d7933c3fd54289b9033",
+        "interior.csv": "16c5d2363703c343f2cb4cf505b19b8022832248dda84ec9ac3a6c8abd2e4818"
+      }
+    },
+    "pilot_matched_oct13_z5_m006125_60Gyr": {
+      "endpoint": {
+        "years": 60000000000,
+        "Teff_K": 1248.4210373501935,
+        "luminosity_Lsun": 1.403319255832733e-05,
+        "nuclear_fraction": 1.0360674001262016,
+        "central_T_K": 2390659.2570640394,
+        "central_X": 0.6186683873279911,
+        "H_mass_g": 7.8824609731472e+31,
+        "He3_mass_g": 5.485378614618568e+28
+      },
+      "first_separating_band": {
+        "years": 26235628003.722157,
+        "model": 204,
+        "Teff_K": 1185.7891331576145,
+        "nuclear_fraction": 0.9676209721723702,
+        "bands": [
+          {
+            "q": [
+              0.3526739765715,
+              0.3983823725001
+            ],
+            "intervals": 9,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9970863921753,
+              0.9971997594787
+            ],
+            "X": [
+              0.6472264356213,
+              0.6475158291764
+            ],
+            "Z": [
+              0.08247463571533,
+              0.0823712425456
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.3526739765715,
+            0.4087237621286
+          ],
+          "intervals": 11,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.99661781101,
+            0.9968702092703
+          ],
+          "X": [
+            0.618668387328,
+            0.6646063915552
+          ],
+          "Z": [
+            0.0934143762185,
+            0.07573137772012
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "1305c81c6fe14a76b07e661a1108b4a07717b73e968cd64468ce3131c96457c2",
+        "history.jsonl": "3c01a4dce1e68616ab3eb7c905813ccc9c2f20536ac78c57862afeb1dd6e84c5",
+        "interior.csv": "ba9dac74f3da9629f0f5051d02db935f338009da8733e75e7c2c67d4316dacde"
+      }
+    },
+    "pilot_onset_pressure_oct13_60Gyr": {
+      "endpoint": {
+        "years": 45771813685.56339,
+        "Teff_K": 936.994716342614,
+        "luminosity_Lsun": 3.6908712713428414e-06,
+        "nuclear_fraction": 0.03013829994427388,
+        "central_T_K": 1041188.8342516308,
+        "central_X": 0.6178824653480232,
+        "H_mass_g": 7.884627571250929e+31,
+        "He3_mass_g": 3.3187805109064133e+28
+      },
+      "first_separating_band": {
+        "years": 18042082507.2797,
+        "model": 163,
+        "Teff_K": 1193.4664509040408,
+        "nuclear_fraction": 0.9059950740798498,
+        "bands": [
+          {
+            "q": [
+              0.3427320695028,
+              0.3932266173834
+            ],
+            "intervals": 10,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9971925828068,
+              0.9973147692885
+            ],
+            "X": [
+              0.6472769516195,
+              0.6475645329012
+            ],
+            "Z": [
+              0.08247495945219,
+              0.08237235792826
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            1.226027086441e-10,
+            0.8842738364208
+          ],
+          "intervals": 365,
+          "separates_convective_regions": false,
+          "conductive_share": [
+            0.9990891128272,
+            0.999859088964
+          ],
+          "X": [
+            0.617882465348,
+            0.6882226831404
+          ],
+          "Z": [
+            0.09300759114117,
+            0.06647484256477
+          ]
+        }
+      ],
+      "stop_reason": "repeated step rejection: envelope surface Teff=937.089356 logg=5.499689: pressure-matched atmosphere: (Teff, g) outside PICASO_clear_tau3_response_Hdepletion table",
+      "input_and_history_sha256": {
+        "configuration.txt": "a1e3003831be5e6ba4a4a85fcbced2102947530719efa6eb7bd82381c27e7d3c",
+        "history.jsonl": "166a110e2d3494d6e73ccdd7a77998bd5e054ca202cf832dbedc7065f7674ba6",
+        "interior.csv": "f98d427d3d9e8d6f0360599c4ee00396ba2bd115bbb47aed8e13764f71385593"
+      }
+    },
+    "pilot_matched2800_oct13_z3_m0064_150Gyr": {
+      "endpoint": {
+        "years": 16173215912.934282,
+        "Teff_K": 1100.000902005486,
+        "luminosity_Lsun": 8.139692839676626e-06,
+        "nuclear_fraction": 0.2360455255937645,
+        "central_T_K": 1644601.6324327618,
+        "central_X": 0.673346259288835,
+        "H_mass_g": 8.659560470269151e+31,
+        "He3_mass_g": 2.039222197721006e+28
+      },
+      "first_separating_band": {
+        "years": 8978114711.808372,
+        "model": 117,
+        "Teff_K": 1228.1909490388846,
+        "nuclear_fraction": 0.6869687814305494,
+        "bands": [
+          {
+            "q": [
+              0.3039660700123,
+              0.3727746383118
+            ],
+            "intervals": 14,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9972115399205,
+              0.9973876944967
+            ],
+            "X": [
+              0.6803259235398,
+              0.6805778363913
+            ],
+            "Z": [
+              0.04948649056217,
+              0.04942492973171
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            1.225955640279e-10,
+            0.690563509228
+          ],
+          "intervals": 313,
+          "separates_convective_regions": false,
+          "conductive_share": [
+            0.9984388312339,
+            0.9989961119823
+          ],
+          "X": [
+            0.6733462592888,
+            0.6865582436693
+          ],
+          "Z": [
+            0.05112527509963,
+            0.04784002986444
+          ]
+        }
+      ],
+      "stop_reason": "repeated step rejection: evolve_step: line search failed: residual did not decrease: local=2.089e-06 -> 1.881e-06, balance=1.097e-07 -> 1.1e-07",
+      "input_and_history_sha256": {
+        "configuration.txt": "b5f276bb14525cdb88e591089fbeb20338eead834cba5c1f0bcb9378d82d5c2f",
+        "history.jsonl": "0c53f6f0423f5385f730c6995d1a0d1c148049183ecb9302c8c0539a8e4825b0",
+        "interior.csv": "57e03f8660469ebae545d47106d70eb7173327d74dca69ba4f47b23ecd5f580f"
+      }
+    },
+    "pilot_matched2800_oct13_z3_m00665_150Gyr": {
+      "endpoint": {
+        "years": 150000000000,
+        "Teff_K": 1321.6372824289408,
+        "luminosity_Lsun": 1.842307869597085e-05,
+        "nuclear_fraction": 1.0006596419675626,
+        "central_T_K": 2391242.9287678655,
+        "central_X": 0.6793266257730244,
+        "H_mass_g": 8.982685457965303e+31,
+        "He3_mass_g": 1.725797248789668e+29
+      },
+      "first_separating_band": null,
+      "final_bands": [],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "e50f2a4d14df67ac48a52e77b0fff845d630ef920e73b237f941a7e9c956b1e3",
+        "history.jsonl": "d6b8f332aae08d9481c42386bf8c11a735529d86b44b2dcd5a5b013e2d1a75a7",
+        "interior.csv": "97d902b13c6dbad3e250eb6fa1d18cb4a8cc624f5c328b106090ba151db64a1d"
+      }
+    },
+    "pilot_matched2800_oct13_z3_m006525_150Gyr": {
+      "endpoint": {
+        "years": 27675409226.18082,
+        "Teff_K": 1100.000480262824,
+        "luminosity_Lsun": 7.95818655354398e-06,
+        "nuclear_fraction": 0.21865113115284282,
+        "central_T_K": 1580478.1816429999,
+        "central_X": 0.6680551262206781,
+        "H_mass_g": 8.827654424687955e+31,
+        "He3_mass_g": 3.11713677242862e+28
+      },
+      "first_separating_band": {
+        "years": 14930675884.2172,
+        "model": 147,
+        "Teff_K": 1225.1588903966742,
+        "nuclear_fraction": 0.8694355485608839,
+        "bands": [
+          {
+            "q": [
+              0.3476655562625,
+              0.3932005877343
+            ],
+            "intervals": 9,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.997342147357,
+              0.9974511449864
+            ],
+            "X": [
+              0.6802722841335,
+              0.6805299969522
+            ],
+            "Z": [
+              0.04948596725568,
+              0.04942274145165
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            1.225945929537e-10,
+            0.7268998142685
+          ],
+          "intervals": 321,
+          "separates_convective_regions": false,
+          "conductive_share": [
+            0.9985303446578,
+            0.9992252232225
+          ],
+          "X": [
+            0.6680551262207,
+            0.6915732320054
+          ],
+          "Z": [
+            0.05237962291749,
+            0.04651842566219
+          ]
+        }
+      ],
+      "stop_reason": "repeated step rejection: envelope surface Teff=1099.998912 logg=5.472141: pressure-matched atmosphere: (Teff, g) outside PICASO_clear_tau3_response_Hdepletion table",
+      "input_and_history_sha256": {
+        "configuration.txt": "feae90e33f1d2cf89dc484f6f213b667b922644b76a019be39182459d38252c2",
+        "history.jsonl": "3f414f2689a4479407d7b5a9a5ab7fead1fd8c344949bbcfbb2511db0a397d0c",
+        "interior.csv": "d3ed582bc40f48fb3fcec08194c6881c3f17ca4e00a4dadcd6fb02c209fff55a"
+      }
+    },
+    "pilot_matched2800_oct13_z5_m006125_60Gyr": {
+      "endpoint": {
+        "years": 60000000000,
+        "Teff_K": 1248.4107160514347,
+        "luminosity_Lsun": 1.4032710139092247e-05,
+        "nuclear_fraction": 1.0360892493679401,
+        "central_T_K": 2390653.7030526414,
+        "central_X": 0.6186684868654717,
+        "H_mass_g": 7.882460996880272e+31,
+        "He3_mass_g": 5.485354881564442e+28
+      },
+      "first_separating_band": {
+        "years": 26235758848.468296,
+        "model": 204,
+        "Teff_K": 1185.7864814787629,
+        "nuclear_fraction": 0.9676267542451756,
+        "bands": [
+          {
+            "q": [
+              0.3526739765715,
+              0.3983823725001
+            ],
+            "intervals": 9,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9970864013119,
+              0.997199765794
+            ],
+            "X": [
+              0.6472264348421,
+              0.6475158282513
+            ],
+            "Z": [
+              0.08247463567441,
+              0.08237124257231
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.3526739765715,
+            0.4087237621286
+          ],
+          "intervals": 11,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9966178524714,
+            0.9968702333799
+          ],
+          "X": [
+            0.6186684868655,
+            0.6646063361408
+          ],
+          "Z": [
+            0.09341432599763,
+            0.07573140442218
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "configuration.txt": "7c742aba207b100da6c18428fe2fabd2cb352619cc2ebf4ffd524c39a333bbb7",
+        "history.jsonl": "95d266365e7e1f95c3dc1ec97afae0ecea76210b1e496d491dc9544fac96efd5",
+        "interior.csv": "e7dd2a59108acea3d5f3b20084fa377fb10221cce65dbf93c9e50ad3b66e2445"
+      }
+    }
+  },
+  "slow_mixing": {
+    "alpha0": {
+      "endpoint": {
+        "years": 150000000000,
+        "Teff_K": 1712.8070041206538,
+        "luminosity_Lsun": 6.532199535280713e-05,
+        "nuclear_fraction": 1.006277452117943,
+        "central_T_K": 3284007.461994595,
+        "central_X": 0.5526982523069405,
+        "H_mass_g": 7.861436609994849e+31,
+        "He3_mass_g": 2.6509735257078714e+29
+      },
+      "bands": [
+        {
+          "q": [
+            0.3526737056797,
+            0.3778839781875
+          ],
+          "intervals": 5,
+          "separates_convective_regions": true,
+          "hydrogen_contrast": 0.10826583842230009,
+          "active_faces": 5,
+          "width_cm": 92742107.59899998,
+          "planar_D_effective": 0.12896181190558506,
+          "planar_crossing_years": 2113434676.7612407,
+          "old_sum_cell_times_years": 419843291.73021805,
+          "spherical_resistance_s_per_g": 2.162006650967397e-14,
+          "two_adjacent_mixed_reservoir_years": 828379930.6631929,
+          "reservoir_masses_g": [
+            4.29502979793231e+31,
+            1.2441656189053322e+30
+          ]
+        },
+        {
+          "q": [
+            0.3881000772588,
+            0.3983820664993
+          ],
+          "intervals": 2,
+          "separates_convective_regions": true,
+          "hydrogen_contrast": 0.039505060487999955,
+          "active_faces": 2,
+          "width_cm": 38218494.35100031,
+          "planar_D_effective": 0.2320865729809796,
+          "planar_crossing_years": 199431228.49860337,
+          "old_sum_cell_times_years": 99908132.18229462,
+          "spherical_resistance_s_per_g": 5.031427844217317e-15,
+          "two_adjacent_mixed_reservoir_years": 195052993.92617047,
+          "reservoir_masses_g": [
+            1.2441656189053322e+30,
+            7.32679218706125e+31
+          ]
+        }
+      ],
+      "physical_alpha": 0.0,
+      "diagnostic_alpha": 0.1,
+      "diagnostic_note": "The alpha0 arm reports hypothetical D at alpha=.1, absent in its evolution. The other arms use their own physical mixing efficiency."
+    },
+    "alpha0.1": {
+      "endpoint": {
+        "years": 150000000000,
+        "Teff_K": 1380.9989458671146,
+        "luminosity_Lsun": 2.2267510822670627e-05,
+        "nuclear_fraction": 1.003919956825925,
+        "central_T_K": 2589315.4574194676,
+        "central_X": 0.5999840426788474,
+        "H_mass_g": 7.8723121974558e+31,
+        "He3_mass_g": 1.5634154297600176e+29
+      },
+      "bands": [
+        {
+          "q": [
+            0.3526737056797,
+            0.3677401667717
+          ],
+          "intervals": 3,
+          "separates_convective_regions": true,
+          "hydrogen_contrast": 0.04378779538690003,
+          "active_faces": 3,
+          "width_cm": 49446457.012000084,
+          "planar_D_effective": 0.020688081442366637,
+          "planar_crossing_years": 3744951285.6739063,
+          "old_sum_cell_times_years": 1247036561.217157,
+          "spherical_resistance_s_per_g": 6.436345971142973e-14,
+          "two_adjacent_mixed_reservoir_years": 3629347970.6840653,
+          "reservoir_masses_g": [
+            4.29502979793231e+31,
+            1.8563928402810565e+30
+          ]
+        },
+        {
+          "q": [
+            0.3829833891236,
+            0.3983820664993
+          ],
+          "intervals": 3,
+          "separates_convective_regions": true,
+          "hydrogen_contrast": 0.030210240155799983,
+          "active_faces": 3,
+          "width_cm": 50656305.85100031,
+          "planar_D_effective": 0.03413728202403122,
+          "planar_crossing_years": 2381958132.03213,
+          "old_sum_cell_times_years": 795505652.6549413,
+          "spherical_resistance_s_per_g": 4.012247349577149e-14,
+          "two_adjacent_mixed_reservoir_years": 2301902723.6582985,
+          "reservoir_masses_g": [
+            1.8563928402810565e+30,
+            7.32679218706125e+31
+          ]
+        }
+      ],
+      "physical_alpha": 0.1,
+      "diagnostic_alpha": 0.1,
+      "diagnostic_note": "The alpha0 arm reports hypothetical D at alpha=.1, absent in its evolution. The other arms use their own physical mixing efficiency."
+    },
+    "alpha0.01": {
+      "endpoint": {
+        "years": 150000000000,
+        "Teff_K": 1559.4172339733802,
+        "luminosity_Lsun": 3.988236740685246e-05,
+        "nuclear_fraction": 1.0058461524273896,
+        "central_T_K": 2919184.916560234,
+        "central_X": 0.571574286318298,
+        "H_mass_g": 7.867229931889025e+31,
+        "He3_mass_g": 2.0716419595252558e+29
+      },
+      "bands": [
+        {
+          "q": [
+            0.3526737056797,
+            0.3728026409121
+          ],
+          "intervals": 4,
+          "separates_convective_regions": true,
+          "hydrogen_contrast": 0.08118933782229998,
+          "active_faces": 4,
+          "width_cm": 69556862.91900015,
+          "planar_D_effective": 0.004861852665309055,
+          "planar_crossing_years": 31533647789.115402,
+          "old_sum_cell_times_years": 7854923097.101335,
+          "spherical_resistance_s_per_g": 4.0484701331339277e-13,
+          "two_adjacent_mixed_reservoir_years": 22906463696.823975,
+          "reservoir_masses_g": [
+            4.29502979793231e+31,
+            1.8629952809898737e+30
+          ]
+        },
+        {
+          "q": [
+            0.3881000772588,
+            0.3983820664993
+          ],
+          "intervals": 2,
+          "separates_convective_regions": true,
+          "hydrogen_contrast": 0.037266535668800005,
+          "active_faces": 2,
+          "width_cm": 35973863.048000336,
+          "planar_D_effective": 0.0066341543462862165,
+          "planar_crossing_years": 6181368227.462941,
+          "old_sum_cell_times_years": 3096631628.78238,
+          "spherical_resistance_s_per_g": 1.559906047784762e-13,
+          "two_adjacent_mixed_reservoir_years": 8980518518.332182,
+          "reservoir_masses_g": [
+            1.8629952809898737e+30,
+            7.32679218706125e+31
+          ]
+        }
+      ],
+      "physical_alpha": 0.01,
+      "diagnostic_alpha": 0.01,
+      "diagnostic_note": "The alpha0 arm reports hypothetical D at alpha=.1, absent in its evolution. The other arms use their own physical mixing efficiency."
+    }
+  },
+  "mixing_scope": "Review contiguous bands and frozen-coefficient mixing estimates.\n\nThese are diagnostics of the existing mixing-only comparator, not a\ncalibration of semiconvection. The diffusion coefficients vary with the\ncomposition gradient during evolution. Microscopic diffusion is additional.\n",
+  "mixing_timescale_assumptions": "Planar L^2/D_eff is a crossing scale, not an eigenmode decay time. The spherical estimate assumes two well-mixed adjacent reservoirs, negligible barrier storage, frozen D and no other transport. Neither is the coupled stellar evolution timescale."
+}

@@ -27,9 +27,11 @@ connects the five sampled metallicities. The
 different EOS treatments must not be combined into a tighter interval.
 
 The high-Z clear cooling endpoint extends the permitted atmospheric H/He
-range slightly. Its composition response remains provisional. Local atmosphere
-calculations include corrected electron-continuum terms and independent
-flux checks; these checks do not validate a boundary with a different mixture.
+range slightly. Its composition response remains provisional. An independent
+test found a normalization error in the local native gas-opacity calculation
+used to assess H/He responses. Corrected individual atmospheres now pass
+their checks; a family covering formation and evolution is being assembled.
+Passing flux checks under the old opacity does not validate the corrected model.
 The imported Bobcat, Diamondback, SPHINX and MARCS tables were not generated
 by this local calculation path. New continuations do not tighten the plotted
 mass intervals. Cloud physics, composition response, mixing and dense-matter
@@ -38,11 +40,17 @@ intervals.
 
 Work above three times Z_ref remains experimental and is not included in
 the transition-mass diagram. The [five-times-reference-metallicity controls](experimental_highz/Ember_boundary_5Z_experimental.png)
-show a 0.06-solar-mass clear-atmosphere model with near-complete nuclear
-support through 891.4 Gyr. [Assumptions and data](experimental_highz/README.md).
-EOS tables have been assembled through Z = 0.24, but unresolved source
-transitions prevent general use. Default table limits are unchanged;
-no higher-metallicity hydrogen-burning boundary is established.
+show 0.0614-, 0.0615-, 0.062- and 0.064-solar-mass clear models sustaining burning at 1 Tyr.
+The lower masses develop conductive interiors. The 0.06- and 0.061-solar-mass
+cases cool to 913.5 and 978.8 K, respectively, while the 0.06125 case warms to
+2042 K at 359.8 Gyr after exceeding nuclear balance. Atmosphere composition
+limits stop these unfinished tracks.
+[Latest ages, assumptions and data](experimental_highz/README.md).
+The EOS extension through Z = 0.24 passes tests on the enriched hot core;
+it does not establish general birth-composition coverage. No new transition
+mass is inferred. The [conductive-layer tests](CONDUCTIVE_BAND_TESTS.md)
+separate evidence for layer formation from its consequences for burning,
+including numerical resolution, slow mixing and matched metallicities.
 
 The [current cloudy three-times-reference-metallicity comparison](current_cloudy_3z/Ember_boundary_3Z_cloudy_current.png)
 shows 0.060, 0.0605 and 0.061 solar masses with metal ionization. The middle
