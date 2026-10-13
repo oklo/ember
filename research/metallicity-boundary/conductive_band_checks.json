@@ -1,5 +1,5 @@
 {
-  "updated_utc": "2026-10-13T13:05:13.494739+00:00",
+  "updated_utc": "2026-10-13T20:44:35.900797+00:00",
   "scope": "Comparisons use the stated current interior physics with the old H/He atmosphere response. Numerical and physical sensitivities are distinct. No corrected-atmosphere formation or universal band claim.",
   "comparisons": {
     "mesh": {
@@ -2078,6 +2078,140 @@
         "history.jsonl": "95d266365e7e1f95c3dc1ec97afae0ecea76210b1e496d491dc9544fac96efd5",
         "interior.csv": "e7dd2a59108acea3d5f3b20084fa377fb10221cce65dbf93c9e50ad3b66e2445"
       }
+    },
+    "pilot_matched2800_oct13_z3_m0065875_150Gyr": {
+      "endpoint": {
+        "years": 150000000000,
+        "step_years": 152434770.8693163,
+        "accepted": 861,
+        "rejected": 24,
+        "pure_h_reservoir_trace_bound_g": 0,
+        "pure_h_layer_inner_q": 1,
+        "pure_h_reservoir_eligible": 0,
+        "radius_Rsun": 0.09373413670611389,
+        "Teff_K": 1786.5081488245,
+        "luminosity_Lsun": 8.063233786925861e-05,
+        "nuclear_fraction": 1.0073725923903998,
+        "central_T_K": 3289975.1036966457,
+        "radioactive_luminosity_erg_s": 2.7517259689521168e+17,
+        "radioactive_neutrino_luminosity_erg_s": 37396989452111456,
+        "radioactive_fraction": 8.915054476589813e-13,
+        "central_density_g_cm3": 656.3637608317462,
+        "central_X": 0.596252311459931,
+        "central_He3": 0.0050340652243364556,
+        "eps_nuc_peak_erg_g_s": 0.0318934651534583,
+        "eps_nuc_peak_q": 1.2259411145708332e-10,
+        "burning_half_max_inner_q": 0,
+        "burning_half_max_outer_q": 0.04120981761601138,
+        "burning_half_max_cells": 152,
+        "He3_peak": 0.0050340652243364556,
+        "He3_peak_q": 1.2259411145708332e-10,
+        "H_mass_g": 8.884583532066374e+31,
+        "He3_mass_g": 3.0773958396087504e+29,
+        "D_mass_g": 0,
+        "surface_X": 0.729446473234377,
+        "deuterium_luminosity_erg_s": 0,
+        "quantum_burning_omitted_cells": 0,
+        "quantum_burning_omitted_mass_g": 0,
+        "quantum_burning_current_fuel_energy_erg": 0,
+        "surface_Z": 0.033841972845905594,
+        "error_norm": 0.03104305072928896,
+        "initial_D_approximation": 0,
+        "omitted_mixing_heat_fraction": 0,
+        "gross_mixing_heat_fraction": 0,
+        "initial_deuterium_heat_limit": 0.001,
+        "initial_deuterium_gradient_estimate": 0,
+        "burn_gradient_estimate": 6.433868328867681e-12,
+        "drift_gradient_proxy": 0,
+        "kinetic_heat_proxy": 0,
+        "convective_mass_fraction": 0.9744603472489068,
+        "radiative_boundaries": 7,
+        "relative_mixing_gradient": 5.084995346293502e-11,
+        "convective_travel_years": 0.9492943267587879,
+        "Li7_log_ratio": -2467.3276697863175,
+        "Li7_rate_per_year": 1.4153083402315035e-08,
+        "Li7_destructions_per_initial_atom_s": 0,
+        "Li7_complete_history": 1,
+        "Li7_origin_age_years": 0,
+        "Li7_valid_fully_convective": 0,
+        "cpu_seconds": 1404.642765
+      },
+      "first_separating_band": {
+        "years": 31910708361.665802,
+        "model": 232,
+        "Teff_K": 1222.140182788958,
+        "nuclear_fraction": 0.9784319481531357,
+        "bands": [
+          {
+            "q": [
+              0.3626657972572,
+              0.408687905051
+            ],
+            "intervals": 9,
+            "separates_convective_regions": true,
+            "conductive_share": [
+              0.9973967705588,
+              0.9975054471696
+            ],
+            "X": [
+              0.680148428056,
+              0.6804121551241
+            ],
+            "Z": [
+              0.04948582995593,
+              0.04942100735537
+            ]
+          }
+        ]
+      },
+      "final_bands": [
+        {
+          "q": [
+            0.3626657972572,
+            0.3829500843798
+          ],
+          "intervals": 4,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9805814348505,
+            0.9841334345287
+          ],
+          "X": [
+            0.5962523114599,
+            0.6760708030243
+          ],
+          "Z": [
+            0.07572770233229,
+            0.03811091019475
+          ]
+        },
+        {
+          "q": [
+            0.3931990434186,
+            0.408687905051
+          ],
+          "intervals": 3,
+          "separates_convective_regions": true,
+          "conductive_share": [
+            0.9856128238953,
+            0.9882327305158
+          ],
+          "X": [
+            0.6760708030243,
+            0.7294464732344
+          ],
+          "Z": [
+            0.03811091019475,
+            0.03384197284591
+          ]
+        }
+      ],
+      "stop_reason": "requested age",
+      "input_and_history_sha256": {
+        "/Users/greglaughlin/Projects/ember/out/highz-native-opacity-oct12-v1/pilot_matched2800_oct13_z3_m0065875_150Gyr/configuration.txt": "33897b52ad212bcfda2176df1a549b44f15c8200e969950e40cfca40536f97a0",
+        "/Users/greglaughlin/Projects/ember/out/highz-native-opacity-oct12-v1/pilot_matched2800_oct13_z3_m0065875_150Gyr/evolution/history.jsonl": "3dd2b734fff1f219730f5b62418d6d1c9c8fb5023851c6030f2b1e3ed95a4a62",
+        "/Users/greglaughlin/Projects/ember/out/highz-native-opacity-oct12-v1/pilot_matched2800_oct13_z3_m0065875_150Gyr/evolution/interior.csv": "cfa9971d51fd89b695695fbbe999b9dddc16adba3cec581bb340c362c4ad9d42"
+      }
     }
   },
   "slow_mixing": {
@@ -2254,5 +2388,617 @@
     }
   },
   "mixing_scope": "Review contiguous bands and frozen-coefficient mixing estimates.\n\nThese are diagnostics of the existing mixing-only comparator, not a\ncalibration of semiconvection. The diffusion coefficients vary with the\ncomposition gradient during evolution. Microscopic diffusion is additional.\n",
-  "mixing_timescale_assumptions": "Planar L^2/D_eff is a crossing scale, not an eigenmode decay time. The spherical estimate assumes two well-mixed adjacent reservoirs, negligible barrier storage, frozen D and no other transport. Neither is the coupled stellar evolution timescale."
+  "mixing_timescale_assumptions": "Planar L^2/D_eff is a crossing scale, not an eigenmode decay time. The spherical estimate assumes two well-mixed adjacent reservoirs, negligible barrier storage, frozen D and no other transport. Neither is the coupled stellar evolution timescale.",
+  "threeZ_physics": {
+    "scope": "Inventory and structure at the 3Z control's conductive separation and surge.",
+    "mass_Msun": 0.065875,
+    "initial_Y": 0.27,
+    "initial_Z": 0.04944677939595,
+    "milestones": {
+      "initial": {
+        "years": 0,
+        "accepted": 0,
+        "Teff_K": 2728.724214025742,
+        "radius_Rsun": 0.5880872995908687,
+        "luminosity_Lsun": 0.017274912568911498,
+        "nuclear_fraction": 1.8853552079670544e-10,
+        "central_T_K": 923394.8351691617,
+        "central_density_g_cm3": 2.777398642042017,
+        "central_X": 0.6805532206040465,
+        "central_He3": 7.856054519751176e-05,
+        "H_mass_g": 8.91432845886996e+31,
+        "He3_mass_g": 1.02903708717583e+28,
+        "surface_X": 0.6805532206040465,
+        "surface_Z": 0.04944677939595347,
+        "convective_mass_fraction": 1,
+        "nuclear_luminosity_Lsun": 3.256934637897282e-12,
+        "fraction_initial_H_consumed": 0.0,
+        "central_H_fractional_drop": 0.0,
+        "structure": {
+          "central": {
+            "years": 0.0,
+            "model": 0.0,
+            "cell": 0.0,
+            "q": 1.225941114571e-10,
+            "r_Rsun": 0.0001600421720545,
+            "T_K": 923394.8351692,
+            "rho_g_cm3": 2.777398642042,
+            "X": 0.680553220604,
+            "Y3": 7.856054519751e-05,
+            "Z": 0.04944677939595,
+            "eps_nuc": 2.002884664386e-09,
+            "convective_next": 1.0,
+            "stability_margin": 2633.115753046,
+            "conductive_share": 0.07744535007518
+          },
+          "surface": {
+            "years": 0.0,
+            "model": 0.0,
+            "cell": 535.0,
+            "q": 0.9997,
+            "r_Rsun": 0.566076030209,
+            "T_K": 29075.92306266,
+            "rho_g_cm3": 0.005234721885597,
+            "X": 0.680553220604,
+            "Y3": 7.856054519751e-05,
+            "Z": 0.04944677939595,
+            "eps_nuc": 2.171186085497e-43,
+            "convective_next": 1.0,
+            "stability_margin": 31496825.36598,
+            "conductive_share": 0.3106294140173
+          },
+          "separating_bands": []
+        }
+      },
+      "before_separation": {
+        "years": 31710708361.665802,
+        "accepted": 231,
+        "Teff_K": 1222.056528776458,
+        "radius_Rsun": 0.08056103003774721,
+        "luminosity_Lsun": 1.3040939535617016e-05,
+        "nuclear_fraction": 0.9783761479425535,
+        "central_T_K": 2259260.1526423227,
+        "central_density_g_cm3": 930.8642060932689,
+        "central_X": 0.6803091701671432,
+        "central_He3": 0.00032261098209832685,
+        "H_mass_g": 8.911131727608944e+31,
+        "He3_mass_g": 4.225768348154377e+28,
+        "surface_X": 0.6803091701671432,
+        "surface_Z": 0.04944677939595352,
+        "convective_mass_fraction": 1.0000000000000009,
+        "nuclear_luminosity_Lsun": 1.2758944188408728e-05,
+        "fraction_initial_H_consumed": 0.0003586059539724129,
+        "central_H_fractional_drop": 0.0003586059539718578,
+        "structure": {
+          "central": {
+            "years": 31710708361.67,
+            "model": 231.0,
+            "cell": 0.0,
+            "q": 1.225941114571e-10,
+            "r_Rsun": 2.304013747918e-05,
+            "T_K": 2259260.152642,
+            "rho_g_cm3": 930.8642060933,
+            "X": 0.6803091701671,
+            "Y3": 0.0003226109820983,
+            "Z": 0.04944677939595,
+            "eps_nuc": 0.005210049803587,
+            "convective_next": 1.0,
+            "stability_margin": 1.019943561644,
+            "conductive_share": 0.9960925594052
+          },
+          "surface": {
+            "years": 31710708361.67,
+            "model": 231.0,
+            "cell": 535.0,
+            "q": 0.9997,
+            "r_Rsun": 0.07952362368346,
+            "T_K": 52234.44090543,
+            "rho_g_cm3": 2.962334639597,
+            "X": 0.6803091701671,
+            "Y3": 0.0003226109820983,
+            "Z": 0.04944677939595,
+            "eps_nuc": 2.957849024628e-30,
+            "convective_next": 1.0,
+            "stability_margin": 371.9921851118,
+            "conductive_share": 0.999818216445
+          },
+          "separating_bands": []
+        }
+      },
+      "separation": {
+        "years": 31910708361.665802,
+        "accepted": 232,
+        "Teff_K": 1222.140182788958,
+        "radius_Rsun": 0.0805599790415884,
+        "luminosity_Lsun": 1.3044170338477331e-05,
+        "nuclear_fraction": 0.9784319481531357,
+        "central_T_K": 2259378.244484954,
+        "central_density_g_cm3": 931.2204505703213,
+        "central_X": 0.6801484280559508,
+        "central_He3": 0.00032559779710121674,
+        "H_mass_g": 8.911117356039156e+31,
+        "He3_mass_g": 4.240139917944104e+28,
+        "surface_X": 0.6804121551241402,
+        "surface_Z": 0.04942100735536924,
+        "convective_mass_fraction": 0.9590877148441295,
+        "nuclear_luminosity_Lsun": 1.2762832996317724e-05,
+        "fraction_initial_H_consumed": 0.00036021814157061183,
+        "central_H_fractional_drop": 0.0005947992542545411,
+        "structure": {
+          "central": {
+            "years": 31910708361.67,
+            "model": 232.0,
+            "cell": 0.0,
+            "q": 1.225941114571e-10,
+            "r_Rsun": 2.303719905265e-05,
+            "T_K": 2259378.244485,
+            "rho_g_cm3": 931.2204505703,
+            "X": 0.680148428056,
+            "Y3": 0.0003255977971012,
+            "Z": 0.04948582995593,
+            "eps_nuc": 0.005212049745329,
+            "convective_next": 1.0,
+            "stability_margin": 1.016692611421,
+            "conductive_share": 0.9960943261159
+          },
+          "surface": {
+            "years": 31910708361.67,
+            "model": 232.0,
+            "cell": 535.0,
+            "q": 0.9997,
+            "r_Rsun": 0.07952250545063,
+            "T_K": 52231.69793178,
+            "rho_g_cm3": 2.962209240629,
+            "X": 0.6804121551241,
+            "Y3": 0.0003225928532209,
+            "Z": 0.04942100735537,
+            "eps_nuc": 2.955061115569e-30,
+            "convective_next": 1.0,
+            "stability_margin": 372.1221334504,
+            "conductive_share": 0.9998182638605
+          },
+          "separating_bands": [
+            {
+              "q": [
+                0.3626657972572,
+                0.408687905051
+              ],
+              "radius_Rsun": [
+                0.03755185218553,
+                0.03963799688949
+              ],
+              "T_K": [
+                1470879.276454,
+                1397105.097806
+              ],
+              "rho_g_cm3": [
+                477.1148337646,
+                440.3118986478
+              ],
+              "conductive_share": [
+                0.9973967705588,
+                0.9975054471696
+              ],
+              "X": [
+                0.680148428056,
+                0.6804121551241
+              ],
+              "Z": [
+                0.04948582995593,
+                0.04942100735537
+              ],
+              "intervals": 9
+            }
+          ]
+        }
+      },
+      "nuclear_balance": {
+        "years": 45510708361.6658,
+        "accepted": 300,
+        "Teff_K": 1235.4170163123574,
+        "radius_Rsun": 0.08065684423575822,
+        "luminosity_Lsun": 1.3653074047411643e-05,
+        "nuclear_fraction": 1.000148400623003,
+        "central_T_K": 2285400.1242641658,
+        "central_density_g_cm3": 947.9576782033996,
+        "central_X": 0.6694679675729678,
+        "central_He3": 0.0005282404653047345,
+        "H_mass_g": 8.910112392172839e+31,
+        "He3_mass_g": 5.245103784249793e+28,
+        "surface_X": 0.6870867888980865,
+        "surface_Z": 0.047717167951814396,
+        "convective_mass_fraction": 0.9590877148441295,
+        "nuclear_luminosity_Lsun": 1.3655100172106186e-05,
+        "fraction_initial_H_consumed": 0.00047295393215252,
+        "central_H_fractional_drop": 0.016288590951402337,
+        "structure": {
+          "central": {
+            "years": 45510708361.67,
+            "model": 300.0,
+            "cell": 0.0,
+            "q": 1.225941114571e-10,
+            "r_Rsun": 2.290081088193e-05,
+            "T_K": 2285400.124264,
+            "rho_g_cm3": 947.9576782034,
+            "X": 0.669467967573,
+            "Y3": 0.0005282404653047,
+            "Z": 0.05218016364951,
+            "eps_nuc": 0.005594837653038,
+            "convective_next": 1.0,
+            "stability_margin": 1.112303417366,
+            "conductive_share": 0.9960386230709
+          },
+          "surface": {
+            "years": 45510708361.67,
+            "model": 300.0,
+            "cell": 535.0,
+            "q": 0.9997,
+            "r_Rsun": 0.07961240440726,
+            "T_K": 52226.71402559,
+            "rho_g_cm3": 2.93643973792,
+            "X": 0.6870867888981,
+            "Y3": 0.0003222338590783,
+            "Z": 0.04771716795181,
+            "eps_nuc": 2.948734883882e-30,
+            "convective_next": 1.0,
+            "stability_margin": 390.7783792129,
+            "conductive_share": 0.9998180813286
+          },
+          "separating_bands": [
+            {
+              "q": [
+                0.3626657972572,
+                0.408687905051
+              ],
+              "radius_Rsun": [
+                0.03736134243957,
+                0.03945239090789
+              ],
+              "T_K": [
+                1483475.098315,
+                1405173.627836
+              ],
+              "rho_g_cm3": [
+                483.3770005359,
+                440.4078765587
+              ],
+              "conductive_share": [
+                0.9973553784386,
+                0.9974667645432
+              ],
+              "X": [
+                0.669467967573,
+                0.6870867888981
+              ],
+              "Z": [
+                0.05218016364951,
+                0.04771716795181
+              ],
+              "intervals": 9
+            }
+          ]
+        }
+      },
+      "largest_nuclear_fraction": {
+        "years": 99510708361.6658,
+        "accepted": 570,
+        "Teff_K": 1578.8173489590324,
+        "radius_Rsun": 0.08797568031315496,
+        "luminosity_Lsun": 4.332579157869513e-05,
+        "nuclear_fraction": 1.1022518712736913,
+        "central_T_K": 2900008.3433266804,
+        "central_density_g_cm3": 765.197363844849,
+        "central_X": 0.6309063885313925,
+        "central_He3": 0.0018087628299993713,
+        "H_mass_g": 8.90331963752796e+31,
+        "He3_mass_g": 1.203785841875144e+29,
+        "surface_X": 0.7102816799552671,
+        "surface_Z": 0.041340359482481596,
+        "convective_mass_fraction": 0.9590877148441295,
+        "nuclear_luminosity_Lsun": 4.775593484203064e-05,
+        "fraction_initial_H_consumed": 0.0012349580108916847,
+        "central_H_fractional_drop": 0.07295069741729887,
+        "structure": {
+          "central": {
+            "years": 99510708361.67,
+            "model": 570.0,
+            "cell": 0.0,
+            "q": 1.225941114571e-10,
+            "r_Rsun": 2.459552071149e-05,
+            "T_K": 2900008.343327,
+            "rho_g_cm3": 765.1973638448,
+            "X": 0.6309063885314,
+            "Y3": 0.001808762829999,
+            "Z": 0.06301651744605,
+            "eps_nuc": 0.01898289771464,
+            "convective_next": 1.0,
+            "stability_margin": 3.84898244976,
+            "conductive_share": 0.9851717998713
+          },
+          "surface": {
+            "years": 99510708361.67,
+            "model": 570.0,
+            "cell": 535.0,
+            "q": 0.9997,
+            "r_Rsun": 0.08678226126289,
+            "T_K": 58560.5962792,
+            "rho_g_cm3": 2.222750533475,
+            "X": 0.7102816799553,
+            "Y3": 0.0003653118290558,
+            "Z": 0.04134035948248,
+            "eps_nuc": 2.119847994323e-29,
+            "convective_next": 1.0,
+            "stability_margin": 1249.183251599,
+            "conductive_share": 0.999635304015
+          },
+          "separating_bands": [
+            {
+              "q": [
+                0.3626657972572,
+                0.408687905051
+              ],
+              "radius_Rsun": [
+                0.0401972937593,
+                0.04249146461145
+              ],
+              "T_K": [
+                1858606.109476,
+                1594001.694561
+              ],
+              "rho_g_cm3": [
+                386.2742668742,
+                343.2461389072
+              ],
+              "conductive_share": [
+                0.9906881552629,
+                0.9934213019042
+              ],
+              "X": [
+                0.6309063885314,
+                0.7102816799553
+              ],
+              "Z": [
+                0.06301651744605,
+                0.04134035948248
+              ],
+              "intervals": 9
+            }
+          ]
+        }
+      },
+      "final": {
+        "years": 150000000000,
+        "accepted": 861,
+        "Teff_K": 1786.5081488245,
+        "radius_Rsun": 0.09373413670611389,
+        "luminosity_Lsun": 8.063233786925861e-05,
+        "nuclear_fraction": 1.0073725923903998,
+        "central_T_K": 3289975.1036966457,
+        "central_density_g_cm3": 656.3637608317462,
+        "central_X": 0.596252311459931,
+        "central_He3": 0.0050340652243364556,
+        "H_mass_g": 8.884583532066374e+31,
+        "He3_mass_g": 3.0773958396087504e+29,
+        "surface_X": 0.729446473234377,
+        "surface_Z": 0.033841972845905594,
+        "convective_mass_fraction": 0.9744603472489068,
+        "nuclear_luminosity_Lsun": 8.122680722985365e-05,
+        "fraction_initial_H_consumed": 0.003336754635060557,
+        "central_H_fractional_drop": 0.12387114863594595,
+        "structure": {
+          "central": {
+            "years": 150000000000.0,
+            "model": 861.0,
+            "cell": 0.0,
+            "q": 1.225941114571e-10,
+            "r_Rsun": 2.588604160836e-05,
+            "T_K": 3289975.103697,
+            "rho_g_cm3": 656.3637608317,
+            "X": 0.5962523114599,
+            "Y3": 0.005034065224336,
+            "Z": 0.07572770233229,
+            "eps_nuc": 0.03189346515346,
+            "convective_next": 1.0,
+            "stability_margin": 6.761995000885,
+            "conductive_share": 0.9684287135292
+          },
+          "surface": {
+            "years": 150000000000.0,
+            "model": 861.0,
+            "cell": 535.0,
+            "q": 0.9997,
+            "r_Rsun": 0.09241790989049,
+            "T_K": 60665.7568817,
+            "rho_g_cm3": 1.815645081872,
+            "X": 0.7294464732344,
+            "Y3": 0.0006704722814041,
+            "Z": 0.03384197284591,
+            "eps_nuc": 3.075040965413e-29,
+            "convective_next": 1.0,
+            "stability_margin": 2536.439625227,
+            "conductive_share": 0.9994762218527
+          },
+          "separating_bands": [
+            {
+              "q": [
+                0.3626657972572,
+                0.3829500843798
+              ],
+              "radius_Rsun": [
+                0.04236220518561,
+                0.04344398705321
+              ],
+              "T_K": [
+                2081008.808098,
+                1863016.977986
+              ],
+              "rho_g_cm3": [
+                328.9100761764,
+                304.8861120659
+              ],
+              "conductive_share": [
+                0.9805814348505,
+                0.9841334345287
+              ],
+              "X": [
+                0.5962523114599,
+                0.6760708030243
+              ],
+              "Z": [
+                0.07572770233229,
+                0.03811091019475
+              ],
+              "intervals": 4
+            },
+            {
+              "q": [
+                0.3931990434186,
+                0.408687905051
+              ],
+              "radius_Rsun": [
+                0.04399354779289,
+                0.04482183850024
+              ],
+              "T_K": [
+                1840436.856697,
+                1671831.889203
+              ],
+              "rho_g_cm3": [
+                299.2270870439,
+                286.2499157973
+              ],
+              "conductive_share": [
+                0.9856128238953,
+                0.9882327305158
+              ],
+              "X": [
+                0.6760708030243,
+                0.7294464732344
+              ],
+              "Z": [
+                0.03811091019475,
+                0.03384197284591
+              ],
+              "intervals": 3
+            }
+          ]
+        }
+      }
+    },
+    "interpretation": [
+      "Band formation precedes the nuclear-fraction maximum.",
+      "The central H decline is much larger than total H consumption; redistribution and changing convective membership matter.",
+      "Lnuc/L above one is net nuclear input in excess of surface output, not proof that total luminosity is decreasing.",
+      "No channel-resolved nuclear luminosities or full energy-storage integral are inferred here."
+    ],
+    "limitations": [
+      "Old atmosphere response retained.",
+      "Evolution ends at150Gyr; not proof of1Tyr burning or failure."
+    ],
+    "inputs": {
+      "/Users/greglaughlin/Projects/ember/out/highz-native-opacity-oct12-v1/pilot_matched2800_oct13_z3_m0065875_150Gyr/configuration.txt": "33897b52ad212bcfda2176df1a549b44f15c8200e969950e40cfca40536f97a0",
+      "/Users/greglaughlin/Projects/ember/out/highz-native-opacity-oct12-v1/pilot_matched2800_oct13_z3_m0065875_150Gyr/evolution/history.jsonl": "3dd2b734fff1f219730f5b62418d6d1c9c8fb5023851c6030f2b1e3ed95a4a62",
+      "/Users/greglaughlin/Projects/ember/out/highz-native-opacity-oct12-v1/pilot_matched2800_oct13_z3_m0065875_150Gyr/completion.json": "da85c12a62e4e8bce14bb90154d7fdc7310951f999023da0e3210218c0e491b1"
+    }
+  },
+  "native_matching_checks": [
+    {
+      "Teff_K": 1184,
+      "logg": 5.426306291511206,
+      "X": 0.6476873597251291,
+      "Z": 0.08231264027487088,
+      "receipt_sha256": "eff38422d9c9243dd94466845794bf559c6fee6f3e5dacd476831357dba382ae",
+      "native_over_current_reader": {
+        "T": 0.9993173804389045,
+        "P": 1.0776397905124668,
+        "depth": 0.993935184772089
+      }
+    },
+    {
+      "Teff_K": 1100,
+      "logg": 5.426306291511206,
+      "X": 0.6476873597251291,
+      "Z": 0.08231264027487088,
+      "receipt_sha256": "9c0da57bcaa2864dbaed1392846a2b02026706b82c28805ec674af5c1ca37188",
+      "native_over_current_reader": {
+        "T": 1.000819600864777,
+        "P": 1.0770269681836107,
+        "depth": 1.0085943180970705
+      }
+    },
+    {
+      "Teff_K": 1184,
+      "logg": 5.456306291511206,
+      "X": 0.6476873597251291,
+      "Z": 0.08231264027487088,
+      "receipt_sha256": "eebba45800e014eee122c1ed5243eb6aff1bee5c465a8ba0f22adb0e126aff1a",
+      "native_over_current_reader": {
+        "T": 0.9992703496431392,
+        "P": 1.0761747512606017,
+        "depth": 0.9950393402478456
+      }
+    },
+    {
+      "Teff_K": 1300,
+      "logg": 5.426306291511206,
+      "X": 0.6805532206040465,
+      "Z": 0.049446779395953475,
+      "receipt_sha256": "63e7db96f591e5a3fcb7b4c9e7317214cbd9e66299e82681b105ab002b03f296",
+      "native_over_current_reader": {
+        "T": 1.0008055795779813,
+        "P": 1.10517974628814,
+        "depth": 1.0397989039555797
+      }
+    },
+    {
+      "Teff_K": 1300,
+      "logg": 5.426306291511206,
+      "X": 0.6476873597251291,
+      "Z": 0.08231264027487088,
+      "receipt_sha256": "9cee40668a1dcb30e94964aab3d6461b834a69fc5eec36bdf5f2f99cb75d1114",
+      "native_over_current_reader": {
+        "T": 1.0012511297571538,
+        "P": 1.1132469184378586,
+        "depth": 1.0156452229127102
+      }
+    }
+  ],
+  "threeZ_stability_reconstruction": {
+    "scope": "Uses saved total Z and birth metal ratios in the current EOS; no replacement for channel-resolved abundances.",
+    "models": {
+      "231": {
+        "years": 31710708361.67,
+        "nonconvective_faces": 0,
+        "composition_stabilized": 0,
+        "schwarzschild_margin_range": null
+      },
+      "232": {
+        "years": 31910708361.67,
+        "nonconvective_faces": 9,
+        "composition_stabilized": 1,
+        "schwarzschild_margin_range": [
+          -0.0015717469306989992,
+          0.00033610963934082807
+        ]
+      },
+      "570": {
+        "years": 99510708361.67,
+        "nonconvective_faces": 9,
+        "composition_stabilized": 9,
+        "schwarzschild_margin_range": [
+          1.7531026005712689,
+          2.0632386903971267
+        ]
+      },
+      "861": {
+        "years": 150000000000.0,
+        "nonconvective_faces": 7,
+        "composition_stabilized": 7,
+        "schwarzschild_margin_range": [
+          3.513121004432101,
+          4.408889718340382
+        ]
+      }
+    }
+  }
 }

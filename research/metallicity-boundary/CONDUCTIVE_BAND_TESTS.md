@@ -79,10 +79,28 @@ controls. At 0.064 solar masses, a separating band appears at 8.978 Gyr,
 spanning m/M = 0.3040–0.3728 with 14 mesh intervals. The object subsequently
 cools; by 16.17 Gyr the conductive region includes the center and its surface
 reaches the 1100 K table edge. At 0.0665 solar masses the model remains fully
-convective and nuclear supported through 150 Gyr. Intermediate masses are
-being tested. This is evidence at a second metallicity with matched interior
-physics, but still uses the old H/He atmosphere response and does not yet
-locate a corrected, long-term burning boundary.
+convective and nuclear supported through 150 Gyr. At 0.06588 solar masses,
+a band forms at 31.91 Gyr and 1222 K, spanning m/M = 0.3627–0.4087 with
+nine intervals and about 99.75% conductive transport. Nuclear luminosity
+reaches 110.2% of surface luminosity near 99.51 Gyr. At 150 Gyr the star is
+at 1787 K, nearly back to energy balance, and retains two separating bands.
+An EOS reconstruction finds eight of the nine first band intervals thermally
+stable without composition gradients; by the nuclear-fraction maximum, all
+nine require composition stabilization. The reconstruction retains the birth
+metal ratios because the profile output records total Z.
+It has consumed only 0.3337% of its initial hydrogen, while central X has
+fallen by 12.39% and central Z has risen from 0.04945 to 0.07573. Composition
+redistribution therefore matters substantially. These are results at a second
+metallicity with matched interior physics; the old H/He atmosphere response
+remains, and the corrected long-term burning boundary is not yet located.
+
+Additional native atmosphere checks qualify at 1100 and 1300 K. Compared
+with the expanded three-source atmosphere family, the 5Z matching pressure
+is higher by 7.703% at 1100 K, 7.764% at 1184 K, and 11.32% at 1300 K.
+The 3Z correction at 1300 K is 10.52%. Their temperature dependence rules
+out treating a uniform pressure factor as a corrected atmosphere grid.
+A sparse interpolation test with independent temperature, gravity and
+composition checks is in progress before stellar incorporation.
 
 ## Matched sequences
 
