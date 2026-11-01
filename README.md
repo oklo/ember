@@ -1,12 +1,12 @@
 # Ember
 
 Ember is a one-dimensional stellar evolution code for very low-mass stars,
-written in C++23. The C++ source is designed to trace lineage back to the
-IBM 7094-compatible FORTRAN IV reconstruction of the algorithms described in
+written in C++23. The C++ source is written to trace lineage back to the
+IBM 7094-compatible [FORTRAN IV reconstruction](https://oklo.github.io/Henyey/)
+of the algorithms described in
 [Henyey et al. (1959)](https://adsabs.harvard.edu/pdf/1959ApJ...129..628H) and
 [Henyey, Forbes & Gould (1964)](https://adsabs.harvard.edu/pdf/1964ApJ...139..306H),
-thus providing continuity to the dawn of modern computing. The [lineage notes](docs/LINEAGE.md)
-distinguish the inherited methods from the local historical reconstructions.
+thus providing continuity to the dawn of modern computing.
 
 The main research products are exploratory tracks across the low-mass spectrum,
 especially at 0.1 solar masses, and studies of the hydrogen-burning boundary and
