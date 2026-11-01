@@ -20,7 +20,7 @@ physics. The [code guide](docs/DEVELOPMENT.md) identifies the main routines.
 
 The code is under development. Low-mass boundary studies use external clear
 and cloudy atmosphere tables. Full CNO, element separation during freezing
-and extreme-cold evolution remain unfinished. Some tables
+and extreme-cold evolution are under current development. Some tables
 required for the cooling calculations are still local.
 See [physics and limitations](docs/COLD_REMNANT.md).
 
