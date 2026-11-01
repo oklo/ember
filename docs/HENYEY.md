@@ -1,9 +1,10 @@
 # Central boundary and Henyey relaxation
 
-Ember can now relax a complete model on a fixed Lagrangian mass mesh. The
-first verified solution is an explicitly controlled radiative polytrope,
-compared with an independent Lane–Emden integration. This is a solver
-benchmark, not a physical 0.1 solar-mass stellar model or an evolutionary run.
+The structural Newton step relaxes a complete model on a fixed Lagrangian
+mass mesh. Its radiative-polytrope benchmark uses an independent Lane–Emden
+integration. The benchmark tests the solver; physical evolutionary tracks
+add the material, burning and transport equations described in the
+[run configuration](LIFETIME_DRIVER.md). See also the [method's lineage](LINEAGE.md).
 
 ## Closing the central sphere
 
@@ -50,8 +51,7 @@ and two surface constraints. `solve_henyey` solves `J dy = -f`:
 The block solve takes linear work and storage in mesh size. A boundary need
 not have an invertible subblock in a prescribed pair of variables: pivoting
 can use the zone equations. Rows are equilibrated before elimination. The
-current small-block kernel is portable C++; it does not call Accelerate,
-which remains linked and available for future linear algebra.
+small-block kernel is portable C++.
 
 The correction is checked against the original matrix using the maximum
 componentwise backward error

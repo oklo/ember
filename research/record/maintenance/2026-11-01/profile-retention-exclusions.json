@@ -1,0 +1,798 @@
+[
+  {
+    "path": "out/boundary-semiconvection-oct11-v1/fresh_weak_to1Tyr/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/reheater-opacity-logz3-oct18/runs/central_003_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/reheater-opacity-logz3-oct18/runs/central_003_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/borderline-semiconvection-oct11-fable/langer_port_p2725/t2_alpha0_diag_step200Myr_cont150Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/borderline-semiconvection-oct11-fable/langer_port_p2725/t2_alpha0_diag_step200Myr_cont150Gyr/launch.json'"
+  },
+  {
+    "path": "out/borderline-semiconvection-oct11-fable/langer_port_p2725/alpha0p1_step200Myr_cont150Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/borderline-semiconvection-oct11-fable/langer_port_p2725/alpha0p1_step200Myr_cont150Gyr/launch.json'"
+  },
+  {
+    "path": "out/borderline-semiconvection-oct11-fable/weakflux_p2387/p536_f0_20to40p5/evolution/interior_full.csv.gz",
+    "reason": "'configuration_sha256'"
+  },
+  {
+    "path": "out/borderline-semiconvection-oct11-fable/weakflux_p2387/p1071_f01_40p5to52p5/evolution/interior_full.csv.gz",
+    "reason": "'configuration_sha256'"
+  },
+  {
+    "path": "out/borderline-semiconvection-oct11-fable/weakflux_p2387/p1071_f0_40p5to52p5/evolution/interior_full.csv.gz",
+    "reason": "'configuration_sha256'"
+  },
+  {
+    "path": "out/borderline-semiconvection-oct11-fable/coupled_mesh_p2370/diverge/dt50_p536/evolution/interior_full.csv.gz",
+    "reason": "'configuration_sha256'"
+  },
+  {
+    "path": "out/borderline-semiconvection-oct11-fable/coupled_mesh_p2370/diverge/dt50_p1071/evolution/interior_full.csv.gz",
+    "reason": "'configuration_sha256'"
+  },
+  {
+    "path": "out/borderline-semiconvection-oct11-fable/langer_p2392/pilot_l83_p536/evolution/interior_full.csv.gz",
+    "reason": "'configuration_sha256'"
+  },
+  {
+    "path": "out/borderline-semiconvection-oct11-fable/langer_p2392/pilot_l83_p1071/evolution/interior_full.csv.gz",
+    "reason": "'configuration_sha256'"
+  },
+  {
+    "path": "out/reheater-atmosphere-row0085-oct18/runs/pair_001_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/reheater-atmosphere-row0085-oct18/runs/pair_001_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/reheater-atmosphere-row0045-oct18/runs/pair_001_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/reheater-atmosphere-row0045-oct18/runs/pair_001_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/long-fate-oct17/runs/z5_m0.051812500_n1278_from500.000000000_to750/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-oct17/runs/z8_m0.041000000_n1278_from500.000000000_to750/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z2_m0.065875000_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z2_m0.065875000_n1278_from150.000000000_to100000/evolution/report.json'"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z2_m0.065812500_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z8_m0.040500000_n2126_from150.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z5_m0.051781250_n1278_from635.947883088_to100000/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z6_m0.048200000_n1278_from300.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z1_m0.071700000_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z8_m0.040562500_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z5_m0.051875000_n1278_from500.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z4_m0.056400000_n1278_from300.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z4_m0.056087500_n1278_from642.250000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z4_m0.056087500_n1278_from642.250000000_to100000/evolution/report.json'"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z1_m0.071750000_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z4_m0.056087500_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z1_m0.071800000_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z6_m0.047762500_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z6_m0.047762500_n1278_from150.000000000_to100000/evolution/report.json'"
+  },
+  {
+    "path": "out/long-fate-100Tyr-oct17/runs/z5_m0.051781250_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz",
+    "reason": "integration exceeds three CPU hours"
+  },
+  {
+    "path": "out/reheater-atmosphere-depleted-oct17/runs/pair_002_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/reheater-atmosphere-depleted-oct17/runs/pair_002_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/metallicity-limits-oct16/runs/z2_m0.064750_n1278_to50/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z2_m0.064750_n1278_to50/evolution/report.json'"
+  },
+  {
+    "path": "out/metallicity-limits-oct16/runs/z8_m0.040594_n1278_to50/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z8_m0.040594_n1278_to50/evolution/report.json'"
+  },
+  {
+    "path": "out/reheater-cold750-native-oct22/runs/pair_001_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "short history already compact"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/warm_branch_5z150/z5_m0.061500_taper/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/bracket_near150/z3_m0.066125_hold/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/bracket_near150/z3_m0.066312_hold/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/bracket_near150/z5_m0.061650_hold/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/bracket_near150/z5_m0.061400_hold/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/warm_branch_3z150/z3_m0.066312_taper/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/effective_convergence_oct14/m4_seed_p6_to60/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/effective_convergence_oct14/m4_seed_p6_to150/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/effective_convergence_oct14/m8_dt200_to150/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/effective_convergence_oct14/m4_dt100_to150/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/effective_convergence_oct14/m16_dt100_to60/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/effective_convergence_oct14/m16_dt100_next_halving_to60/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/effective_convergence_oct14/m4_seed_p5_recovered_to150/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/effective_convergence_oct14/m8_dt100_to150/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/effective_convergence_oct14/m8_dt50_to150/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/effective_convergence_oct14/m8_dt100_to60/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/effective_convergence_oct14/m8_dt50_to60/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/effective_convergence_oct14/m16_dt100_next_halving_to150/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/layer_refinement_oct14/mesh4_halfstep_to60/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/layer_refinement_oct14/mesh2_to150/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/layer_refinement_oct14/mesh4_to150/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/layer_refinement_oct14/mesh1_to150/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/burning_3z_1Tyr/z3_m0.066500_hold/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/burning_5z_1Tyr/z5_m0.061800_hold/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/middle_3z150/z3_m0.066400_hold/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/bracket_upper150/z5_m0.061500_hold/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/bracket_upper150/z3_m0.066500_hold/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/formation150/z3_m0.065875_hold/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/formation150/z5_m0.061250_hold/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-corrected-item1-oct13/upper_5z150/z5_m0.061800_hold/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-coupled-transport-oct11-v1/moll25_marginal_to1Tyr/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/boundary-coupled-transport-oct11-v1/moll25_marginal_after_event/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/reheater-atmosphere-row0012-oct18/runs/pair_001_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/reheater-atmosphere-row0012-oct18/runs/pair_001_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fresh-paired-eos-oct12-v1/zext_cloudy_0605_1tyr/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/fresh-paired-eos-oct12-v1/solar_cloudy_0675_ext2_1tyr/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/fresh-paired-eos-oct12-v1/opt13_cloudy_061_1tyr/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/fresh-paired-eos-oct12-v1/lowz_cloudy_07025_ext2_fresh_1tyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fresh-paired-eos-oct12-v1/lowz_cloudy_07025_ext2_fresh_1tyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fresh-paired-eos-oct12-v1/no71_clear_068_1tyr/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/fresh-paired-eos-oct12-v1/no71_cloudy_061_1tyr/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/fresh-paired-eos-oct12-v1/no71_cloudy_062_1tyr/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/fresh-paired-eos-oct12-v1/no71_clear_067_1tyr/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/fresh-paired-eos-oct12-v1/solar_clear_0725_ext2_1tyr/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/fresh-paired-eos-oct12-v1/solar_cloudy_0665_ext2_fresh_1tyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fresh-paired-eos-oct12-v1/solar_cloudy_0665_ext2_fresh_1tyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fresh-paired-eos-oct12-v1/z173_clear_0695_hhe080_2400_1tyr/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/fresh-paired-eos-oct12-v1/opt13_clear_067_1tyr/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/reheater-nativeZc-diagnostic-oct23/runs/stage_000_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/reheater-nativeZc-diagnostic-oct23/runs/stage_000_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/z058-cloudy-transition-oct12-fable/warm0695/dt05_cont/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/z058-cloudy-transition-oct12-fable/warm0695/dt05_cont/launch.json'"
+  },
+  {
+    "path": "out/z058-cloudy-transition-oct12-fable/warm0695/dt05/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/z058-cloudy-transition-oct12-fable/warm0695/dt05/launch.json'"
+  },
+  {
+    "path": "out/z058-cloudy-transition-oct12-fable/warm0695/dt1/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/z058-cloudy-transition-oct12-fable/warm0695/dt1/launch.json'"
+  },
+  {
+    "path": "out/cbpd2022-comparison-oct19/runs/m0.075/evolution/interior_full.csv.gz",
+    "reason": "'command'"
+  },
+  {
+    "path": "out/cbpd2022-comparison-oct19/runs/m0.074/evolution/interior_full.csv.gz",
+    "reason": "'command'"
+  },
+  {
+    "path": "out/solar-fine-transition-oct16/runs/z1_m0.071450_n1278_to150/evolution/interior_full.csv.gz",
+    "reason": "most models carry selected structural changes"
+  },
+  {
+    "path": "out/boundary-interior-figure-oct11-v1/early_fresh_v3/evolution/interior_full.csv.gz",
+    "reason": "'executable_sha256'"
+  },
+  {
+    "path": "out/boundary-05835-time-oct12-v1/long/evolution/interior_full.csv.gz",
+    "reason": "'restart_sha256'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149150390625_exact_buoyancy_edgequarter_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149150390625_exact_buoyancy_edgequarter_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625000_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625000_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714914306640625_exact_buoyancy_edgesixteenth_row0025/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714914306640625_exact_buoyancy_edgesixteenth_row0025/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714916015625_exact_buoyancy_edgehalf/runs/stage_001_to50Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714916015625_exact_buoyancy_edgehalf/runs/stage_001_to50Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625_row0025/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625_row0025/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071490625_row0045/runs/stage_011_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071490625_row0045/runs/stage_011_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149140625_row0012/runs/stage_016_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149140625_row0012/runs/stage_016_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07148984375_next_refinement/runs/stage_002_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07148984375_next_refinement/runs/stage_002_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149062500_next_refinement/runs/stage_002_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149062500_next_refinement/runs/stage_002_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071484375_row0045/runs/stage_011_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071484375_row0045/runs/stage_011_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625_row0012/runs/stage_016_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625_row0012/runs/stage_016_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149140625_row0025/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149140625_row0025/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071475_row0045/runs/stage_010_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071475_row0045/runs/stage_010_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625_exact_buoyancy_a_row0025/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625_exact_buoyancy_a_row0025/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714890625_row0012/runs/stage_016_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714890625_row0012/runs/stage_016_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149062500_row0012/runs/stage_016_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149062500_row0012/runs/stage_016_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714875_row0025/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714875_row0025/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149375_row0025/runs/stage_013_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149375_row0025/runs/stage_013_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071490625000_exact_buoyancy_lower_row0012/runs/stage_017_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071490625000_exact_buoyancy_lower_row0012/runs/stage_017_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149140625_upper_peak_refinement/runs/stage_002_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149140625_upper_peak_refinement/runs/stage_002_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625_exact_buoyancy_a_row0012/runs/stage_016_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625_exact_buoyancy_a_row0012/runs/stage_016_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_cooler881_opacity_v2_continuation/late/stage_000/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_cooler881_opacity_v2_continuation/late/stage_000/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714890625_row0025/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714890625_row0025/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_recovered_midpoints_v2/mass_0.071453515625/runs/stage_009_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_recovered_midpoints_v2/mass_0.071453515625/runs/stage_009_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714921875_startup_recovered/runs/stage_002_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714921875_startup_recovered/runs/stage_002_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071490625/runs/stage_001_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071490625/runs/stage_001_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149062500_row0025/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149062500_row0025/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071550_depleted_atmosphere/runs/stage_006_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071550_depleted_atmosphere/runs/stage_006_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714875_row0012/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714875_row0012/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071490625000_exact_buoyancy_lower_row0025/runs/stage_015_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071490625000_exact_buoyancy_lower_row0025/runs/stage_015_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07148125_row0045/runs/stage_011_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07148125_row0045/runs/stage_011_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071487500_row0045/runs/stage_011_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071487500_row0045/runs/stage_011_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625_quarter_peak_refinement/runs/stage_002_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625_quarter_peak_refinement/runs/stage_002_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491455078125_exact_buoyancy_edgeeighth_row0025/runs/stage_015_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491455078125_exact_buoyancy_edgeeighth_row0025/runs/stage_015_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071492187500_exact_buoyancy_uppercontrol_row0025/runs/stage_015_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071492187500_exact_buoyancy_uppercontrol_row0025/runs/stage_015_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714921875_row0025/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714921875_row0025/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625_exact_buoyancy_b_row0012/runs/stage_016_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625_exact_buoyancy_b_row0012/runs/stage_016_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491406250_exact_buoyancy_upper_row0012/runs/stage_017_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491406250_exact_buoyancy_upper_row0012/runs/stage_017_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714916015625_exact_buoyancy_edgehalf_row0025/runs/stage_015_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714916015625_exact_buoyancy_edgehalf_row0025/runs/stage_015_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071550/runs/stage_001_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071550/runs/stage_001_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071454687500_lower_quarter_refinement/runs/stage_002_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "short history already compact"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491796875_exact_buoyancy_upperedge_row0025/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491796875_exact_buoyancy_upperedge_row0025/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625_exact_buoyancy_b_row0025/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625_exact_buoyancy_b_row0025/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071484375/runs/stage_001_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071484375/runs/stage_001_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491406250_exact_buoyancy_upper_row0025/runs/stage_015_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491406250_exact_buoyancy_upper_row0025/runs/stage_015_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07148984375_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07148984375_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071484375_row0025/runs/stage_013_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071484375_row0025/runs/stage_013_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625000_row0012/runs/stage_016_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625000_row0012/runs/stage_016_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071550_row0045_forward/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071550_row0045_forward/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071490625_row0012/runs/stage_015_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071490625_row0012/runs/stage_015_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149140625_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149140625_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491406250_exact_buoyancy_upper/runs/stage_001_to50Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491406250_exact_buoyancy_upper/runs/stage_001_to50Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149139404296875/row0045/continuation/control/stage_000/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149139404296875/row0045/continuation/control/stage_000/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149139404296875/row0012/continuation/control/stage_001/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149139404296875/row0012/continuation/control/stage_001/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.0714913818359375/row0045/continuation/control/stage_000/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.0714913818359375/row0045/continuation/control/stage_000/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.0714913818359375/row0012/continuation/control/stage_001/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.0714913818359375/row0012/continuation/control/stage_001/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149136962890625/row0045/continuation/control/stage_000/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149136962890625/row0045/continuation/control/stage_000/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149136962890625/row0012/continuation/control/stage_001/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149136962890625/row0012/continuation/control/stage_001/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.0714912109375/row0045/continuation/control/stage_000/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.0714912109375/row0045/continuation/control/stage_000/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.0714912109375/row0012/continuation/control/stage_001/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.0714912109375/row0012/continuation/control/stage_001/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149141845703125/row0045/continuation/control/stage_000/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149141845703125/row0045/continuation/control/stage_000/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149141845703125/row0012_geometry_restart/continuation/control/stage_001/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149141845703125/row0012_geometry_restart/continuation/control/stage_001/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.071491357421875/row0045/continuation/control/stage_000/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.071491357421875/row0045/continuation/control/stage_000/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.071491357421875/row0012/continuation/control/stage_000/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.071491357421875/row0012/continuation/control/stage_000/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149130859375/row0045/continuation/control/stage_000/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149130859375/row0045/continuation/control/stage_000/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149130859375/row0012/continuation/control/stage_001/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_hot_saved_atmospheres/mass_0.07149130859375/row0012/continuation/control/stage_001/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714914306640625_exact_buoyancy_edgesixteenth_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714914306640625_exact_buoyancy_edgesixteenth_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071484375_row0012/runs/stage_015_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071484375_row0012/runs/stage_015_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149062500_depleted_atmosphere/runs/stage_006_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149062500_depleted_atmosphere/runs/stage_006_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149150390625_exact_buoyancy_edgequarter_row0025/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149150390625_exact_buoyancy_edgequarter_row0025/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714890625_startup_recovered/runs/stage_002_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714890625_startup_recovered/runs/stage_002_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625000_row0025/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625000_row0025/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071456250000_lower_nuclear_refinement/runs/stage_002_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "most models carry selected structural changes"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714625_row0045_h06/runs/stage_011_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714625_row0045_h06/runs/stage_011_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071550_interpolated_H/runs/stage_002_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071550_interpolated_H/runs/stage_002_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071490625_row0025/runs/stage_013_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071490625_row0025/runs/stage_013_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625000_peak_repeat_refinement/runs/stage_002_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625000_peak_repeat_refinement/runs/stage_002_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714890625_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714890625_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071475_row0012/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071475_row0012/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071490625000_exact_buoyancy_lower_row0045/runs/stage_013_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071490625000_exact_buoyancy_lower_row0045/runs/stage_013_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714625_same_source_control/evolution/interior_full.csv.gz",
+    "reason": "short history already compact"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149062500_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149062500_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714875/runs/stage_001_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714875/runs/stage_001_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071475_row0025/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071475_row0025/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625_exact_buoyancy_a_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625_exact_buoyancy_a_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071550_row0085/runs/stage_008_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071550_row0085/runs/stage_008_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714875_row0045/runs/stage_010_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714875_row0045/runs/stage_010_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/joyplot_gravity_handovers_v2/survey_071450/stage_001/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/joyplot_gravity_handovers_v2/survey_071450/stage_001/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149375_row0045/runs/stage_011_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149375_row0045/runs/stage_011_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07148125_row0012/runs/stage_015_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07148125_row0012/runs/stage_015_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491455078125_exact_buoyancy_edgeeighth_row0045/runs/stage_013_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491455078125_exact_buoyancy_edgeeighth_row0045/runs/stage_013_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071492187500_exact_buoyancy_uppercontrol_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071492187500_exact_buoyancy_uppercontrol_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071550_row0065/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071550_row0065/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071487500_row0012/runs/stage_015_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071487500_row0012/runs/stage_015_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07148125_row0025/runs/stage_013_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07148125_row0025/runs/stage_013_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071490625000_exact_buoyancy_lower/runs/stage_001_to50Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071490625000_exact_buoyancy_lower/runs/stage_001_to50Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_midpoints_oct23/mass_0.0714515625/runs/stage_003_to50Gyr/evolution/interior_full.csv.gz",
+    "reason": "most models carry selected structural changes"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_midpoints_oct23/mass_0.071454296875/runs/stage_005_to110Gyr/evolution/interior_full.csv.gz",
+    "reason": "short history already compact"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/album_midpoints_oct23/mass_0.0716125/runs/stage_007_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/album_midpoints_oct23/mass_0.0716125/runs/stage_007_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071487500_row0025/runs/stage_013_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071487500_row0025/runs/stage_013_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491015625_exact_buoyancy_b_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491015625_exact_buoyancy_b_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491796875_exact_buoyancy_upperedge_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491796875_exact_buoyancy_upperedge_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07149150390625_exact_buoyancy_edgequarter_row0065/runs/stage_010_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07149150390625_exact_buoyancy_edgequarter_row0065/runs/stage_010_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714625_row0025_h055/runs/stage_013_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714625_row0025_h055/runs/stage_013_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07148984375_row0025/runs/stage_014_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07148984375_row0025/runs/stage_014_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071491406250_exact_buoyancy_upper_row0045/runs/stage_013_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071491406250_exact_buoyancy_upper_row0045/runs/stage_013_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.071487500/runs/stage_001_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.071487500/runs/stage_001_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714921875_row0045/runs/stage_012_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714921875_row0045/runs/stage_012_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.0714916015625_exact_buoyancy_edgehalf_row0045/runs/stage_013_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.0714916015625_exact_buoyancy_edgehalf_row0045/runs/stage_013_to100000Gyr/evolution/report.json'"
+  },
+  {
+    "path": "out/fiducial-goal-oct22/mass_0.07148984375_row0012/runs/stage_016_to100000Gyr/evolution/interior_full.csv.gz",
+    "reason": "[Errno 2] No such file or directory: '/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/mass_0.07148984375_row0012/runs/stage_016_to100000Gyr/evolution/report.json'"
+  }
+]

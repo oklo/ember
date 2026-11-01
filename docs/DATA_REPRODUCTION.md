@@ -1,5 +1,9 @@
 # Physics inputs
 
+For the retained exploratory and reheater studies, start with the
+[research record](../research/record/README.md). Its figures can be redrawn
+from compact data without regenerating EOS or atmosphere tables.
+
 The repository contains the solver, offline generators and importers, source
 patches, manifests, compact validation records and test fixtures. Bulk physics
 tables, raw source archives, native histories and executable archives remain
@@ -84,6 +88,10 @@ separates source convergence, interpolation, and stellar comparisons.
 
 The [lifetime configuration](LIFETIME_DRIVER.md) names all required files.
 Keep that configuration with its matching inputs and [checkpoint](RESTART.md).
+The November 2026 local cleanup consolidated identical material files into
+`data/retained/sha256/`, with relative links at their original paths. This bulk
+store remains local. Preserve it when copying a local campaign; published
+fixtures remain ordinary files. The research record contains the cleanup receipts.
 The integrated cooling envelope and some development inputs are not yet public;
 there is no complete downloadable data bundle for the latest calculation.
 

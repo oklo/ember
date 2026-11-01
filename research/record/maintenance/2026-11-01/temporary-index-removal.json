@@ -1,0 +1,7 @@
+{
+  "path": "research/record/maintenance/2026-11-01/inventory.sqlite",
+  "bytes": 347447296,
+  "allocated_bytes": 348090368,
+  "sha256": "64b4f7e4142503328364c0143659239db6030c1e4e07e37aa1477b0b8d7f81c4",
+  "reason": "Rebuildable SQL working index; full inventory and checksums retained as gzip CSV."
+}

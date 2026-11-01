@@ -1,0 +1,1804 @@
+{
+  "utc": "2026-10-31T12:42:47.390485+00:00",
+  "status": "Provisional metallicity map with five matched fine halfsolar delayed positives",
+  "supersedes": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/conditional_edge_interpolation_v9/review.json",
+  "correction": "The lower midpoint now exceeds 10 percent. Update its edge gap; other metallicities and outward controls are unchanged.",
+  "delayed_fractional_rise_threshold": 0.1,
+  "rows": [
+    {
+      "Z": 0.0,
+      "Z_over_solar": 0.0,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": null,
+      "sampled_positive_span_Msun": null,
+      "classification": "No positive sample supplied; width unknown"
+    },
+    {
+      "Z": 1e-06,
+      "Z_over_solar": 6.067129217814149e-05,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": null,
+      "sampled_positive_span_Msun": null,
+      "classification": "No positive sample supplied; width unknown"
+    },
+    {
+      "Z": 0.0001,
+      "Z_over_solar": 0.00606712921781415,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": null,
+      "sampled_positive_span_Msun": null,
+      "classification": "No positive sample supplied; width unknown"
+    },
+    {
+      "Z": 0.001,
+      "Z_over_solar": 0.060671292178141496,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": null,
+      "sampled_positive_span_Msun": null,
+      "classification": "Matched-source finite transition controls; no delayed positive sample, width unknown"
+    },
+    {
+      "Z": 0.005,
+      "Z_over_solar": 0.30335646089070745,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": 1.7578125000028422e-07,
+      "sampled_positive_span_Msun": 0.0,
+      "classification": "Conditional connected-band interpolation only",
+      "positive_masses_Msun": [
+        0.075952734375
+      ],
+      "lower_neighbors": [
+        {
+          "mass_Msun": 0.07595255859375,
+          "score": 0.0,
+          "classification": "Finite cooling; certified CPU-stop prefix",
+          "endpoint_Gyr": 249.86525522749818,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/native_coulomb_z005_m07595255859375_250Gyr_prefix_review_v4.json",
+          "qualification": "Reviewed finite accepted states; permanent fate and later gain not established."
+        },
+        {
+          "mass_Msun": 0.075952734375,
+          "score": 0.18438175455922498,
+          "classification": "Delayed reheater; unchanged-opacity fine trajectory",
+          "endpoint_Gyr": 322.148739349127,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/native_coulomb_z005_m075952734375_step2_322Gyr_review_v3.json",
+          "qualification": "Reviewed finite accepted states; permanent fate and later gain not established."
+        }
+      ],
+      "upper_neighbors": [
+        {
+          "mass_Msun": 0.075952734375,
+          "score": 0.18438175455922498,
+          "classification": "Delayed reheater; unchanged-opacity fine trajectory",
+          "endpoint_Gyr": 322.148739349127,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/native_coulomb_z005_m075952734375_step2_322Gyr_review_v3.json",
+          "qualification": "Reviewed finite accepted states; permanent fate and later gain not established."
+        },
+        {
+          "mass_Msun": 0.07595291015625,
+          "score": 0.0,
+          "classification": "Fully connected convection through350Gyr",
+          "endpoint_Gyr": 350.0,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/native_coulomb_z005_m07595291015625_350Gyr_review_v4.json",
+          "qualification": "Reviewed finite accepted states; permanent fate and later gain not established."
+        }
+      ],
+      "sampled_nonpositive_interlopers": [],
+      "lower_edge_scenario_interval_Msun": [
+        0.07595255859375,
+        0.075952734375
+      ],
+      "upper_edge_scenario_interval_Msun": [
+        0.075952734375,
+        0.07595291015625
+      ],
+      "midpoint_scenario_edges_Msun": [
+        0.075952646484375,
+        0.075952822265625
+      ],
+      "conditional_endpoint_width_range_Msun": [
+        0.0,
+        3.5156250000056843e-07
+      ]
+    },
+    {
+      "Z": 0.008241129899325579,
+      "Z_over_solar": 0.5,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": 7.617187500000289e-05,
+      "sampled_positive_span_Msun": 5.859375000000222e-05,
+      "positive_masses_Msun": [
+        0.07397109375,
+        0.0739828125,
+        0.073990625,
+        0.07400625,
+        0.0740296875
+      ],
+      "classification": "Five reviewed 513-point delayed positives; connected-band interpolation between finite outward controls",
+      "lower_edge_scenario_interval_Msun": [
+        0.073959375,
+        0.07397109375
+      ],
+      "upper_edge_scenario_interval_Msun": [
+        0.0740296875,
+        0.074053125
+      ],
+      "midpoint_scenario_edges_Msun": [
+        0.073965234375,
+        0.07404140625
+      ],
+      "conditional_endpoint_width_range_Msun": [
+        5.859375000000222e-05,
+        9.375000000000355e-05
+      ],
+      "mesh_points": 513,
+      "maximum_step_Gyr_from_birth": 2.5,
+      "matched_configuration_except_mass": true,
+      "lower_control": {
+        "mass_Msun": 0.073959375,
+        "review": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m073959375_n513_to250_bounded_v2_segment_8_review.json",
+        "endpoint": {
+          "years": 121853283127.85373,
+          "Teff_K": 1099.320856726726,
+          "nuclear_fraction": 0.041827241023265495,
+          "convective_mass_fraction": 0.22668537225401594,
+          "radiative_boundaries": 269,
+          "surface_Z": 0.007230051216502524,
+          "central_He3": 0.0015486899409790568
+        },
+        "first_saved_stable_layer": {
+          "years": 90458326707.87436,
+          "Teff_K": 1295.664106810347,
+          "nuclear_fraction": 0.9716545583033176,
+          "convective_mass_fraction": 0.984999037571481,
+          "radiative_boundaries": 2,
+          "surface_Z": 0.008241129898933075,
+          "central_He3": 0.000994334156081644
+        },
+        "status": "Parked finite cooling control at121.853Gyr; opacity-coverage trial failures and a subsequent zero-acceptance Newton stop preserved",
+        "source_stop_review": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_lower_source_stop_and_midpoint_admission_v1.json",
+        "declared250Gyr_target_complete": false
+      },
+      "upper_control": {
+        "mass_Msun": 0.074053125,
+        "review": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m074053125_n513_to300_bounded_v2_segment_7_review.json",
+        "endpoint": {
+          "years": 300000000000,
+          "Teff_K": 1459.5224489736747,
+          "nuclear_fraction": 1.005294507486888,
+          "convective_mass_fraction": 0.9999999999999998,
+          "radiative_boundaries": 0,
+          "surface_Z": 0.00824112989899908,
+          "central_He3": 0.003055675225215461
+        },
+        "status": "Completed300Gyr with continuously connected convection",
+        "declared300Gyr_target_complete": true
+      },
+      "positive_reviews": [
+        "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m07397109375_n513_to250_bounded_v3_segment_7_review.json",
+        "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m0739828125_n513_to200_bounded_v3_segment_7_review.json",
+        "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m073990625_n513_to205_bounded_v2_segment_6_review.json",
+        "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m07400625_n513_167Gyr_review_v1.json",
+        "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m0740296875_n513_to300_bounded_v2_segment_7_review.json"
+      ],
+      "width_divided_by_midpoint_mass": 0.0010293034782540237,
+      "physical_edges_established": false,
+      "finite_target_horizons_complete": false,
+      "qualification": "Assume the currently nonpositive outward controls remain nonpositive and that a single connected strong-reheater interval lies between them. Later delayed heating in either control changes this estimate. The range varies assumed edges over sample gaps; it is not a confidence interval or physical error bar.",
+      "reviewed_positive_events": [
+        {
+          "mass_Msun": 0.07397109375,
+          "review": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m07397109375_n513_to250_bounded_v3_segment_7_review.json",
+          "endpoint": {
+            "years": 131479122143.237,
+            "Teff_K": 1463.7704463955222,
+            "nuclear_fraction": 1.5983933667708243,
+            "convective_mass_fraction": 0.9699602334945016,
+            "radiative_boundaries": 6,
+            "surface_Z": 0.007471223384914251,
+            "central_He3": 0.0017821715922290411
+          },
+          "event": {
+            "first_stable_age_years": 97452504304.5592,
+            "maximum_gain_fraction": 0.13319346836094526,
+            "strong_positive": true,
+            "trough_age_years": 109327504304.5592,
+            "peak_age_years": 131479122143.237
+          }
+        },
+        {
+          "mass_Msun": 0.0739828125,
+          "review": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m0739828125_n513_to200_bounded_v3_segment_7_review.json",
+          "endpoint": {
+            "years": 144275557858.93997,
+            "Teff_K": 1571.7900830123156,
+            "nuclear_fraction": 1.4436493325924147,
+            "convective_mass_fraction": 0.9549971127144418,
+            "radiative_boundaries": 4,
+            "surface_Z": 0.00742557647899215,
+            "central_He3": 0.001970716615140988
+          },
+          "event": {
+            "first_stable_age_years": 105637195312.04518,
+            "maximum_gain_fraction": 0.21402051920543275,
+            "strong_positive": true,
+            "trough_age_years": 110012195312.04518,
+            "peak_age_years": 144275557858.93997
+          }
+        },
+        {
+          "mass_Msun": 0.073990625,
+          "review": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m073990625_n513_to205_bounded_v2_segment_6_review.json",
+          "endpoint": {
+            "years": 147174459607.71512,
+            "Teff_K": 1476.582785430597,
+            "nuclear_fraction": 1.397806730767968,
+            "convective_mass_fraction": 0.9401165720606006,
+            "radiative_boundaries": 5,
+            "surface_Z": 0.007531923045611007,
+            "central_He3": 0.0018978590310972279
+          },
+          "event": {
+            "first_stable_age_years": 113464195973.17921,
+            "maximum_gain_fraction": 0.1414806229404466,
+            "strong_positive": true,
+            "trough_age_years": 118464195973.17921,
+            "peak_age_years": 147174459607.71512
+          }
+        },
+        {
+          "mass_Msun": 0.07400625,
+          "review": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m07400625_n513_167Gyr_review_v1.json",
+          "endpoint": {
+            "years": 167125765227.84158,
+            "Teff_K": 1494.6329126818127,
+            "nuclear_fraction": 1.2382951762707137,
+            "convective_mass_fraction": 0.9700338314699308,
+            "radiative_boundaries": 3,
+            "surface_Z": 0.007532925708852767,
+            "central_He3": 0.0020907123535479637
+          },
+          "event": {
+            "first_stable_age_years": 133346804652.55861,
+            "maximum_gain_fraction": 0.15360492488174238,
+            "strong_positive": true,
+            "trough_age_years": 133346804652.55861,
+            "peak_age_years": 167125765227.84158
+          }
+        },
+        {
+          "mass_Msun": 0.0740296875,
+          "review": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m0740296875_n513_to300_bounded_v2_segment_7_review.json",
+          "endpoint": {
+            "years": 262650031744.18228,
+            "Teff_K": 1465.8431797560668,
+            "nuclear_fraction": 1.1458747323943863,
+            "convective_mass_fraction": 0.984999037571481,
+            "radiative_boundaries": 2,
+            "surface_Z": 0.007618465033071558,
+            "central_He3": 0.00276409443440475
+          },
+          "event": {
+            "first_stable_age_years": 232091630989.89676,
+            "maximum_gain_fraction": 0.13146178801018715,
+            "strong_positive": true,
+            "trough_age_years": 232091630989.89676,
+            "peak_age_years": 262650031744.18228
+          }
+        }
+      ]
+    },
+    {
+      "Z": 0.016482259798651158,
+      "Z_over_solar": 1.0,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": 0.0001589843749999903,
+      "sampled_positive_span_Msun": 0.00014609374999999258,
+      "classification": "Conditional connected-band interpolation only",
+      "positive_masses_Msun": [
+        0.07145390625,
+        0.0714546875,
+        0.07145625,
+        0.0714625,
+        0.071475,
+        0.07148125,
+        0.071484375,
+        0.0714875,
+        0.0714890625,
+        0.07148984375,
+        0.071490625,
+        0.071491015625,
+        0.07149140625,
+        0.071491455078125,
+        0.07149150390625,
+        0.0714916015625,
+        0.071491796875,
+        0.0714921875,
+        0.07149375,
+        0.0715,
+        0.07155,
+        0.0716
+      ],
+      "lower_neighbors": [
+        {
+          "mass_Msun": 0.071453125,
+          "score": 1.7590421166246422e-05,
+          "endpoint_Gyr": 85.27859721759606,
+          "classification": "Existing solar episode selection; running_reviewed_prefix",
+          "source": "/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/solar_reheaters_and_neighbors_plot_data.json",
+          "qualification": "Retained solar figure data and available extension review hashes; not a new trajectory or source-convergence claim."
+        },
+        {
+          "mass_Msun": 0.07145390625,
+          "score": 0.316227347588081,
+          "endpoint_Gyr": 130.68903975091058,
+          "classification": "Existing solar episode selection; running_reviewed_prefix",
+          "source": "/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/solar_reheaters_and_neighbors_plot_data.json",
+          "qualification": "Retained solar figure data and available extension review hashes; not a new trajectory or source-convergence claim."
+        }
+      ],
+      "upper_neighbors": [
+        {
+          "mass_Msun": 0.0716,
+          "score": 0.26940766993235815,
+          "endpoint_Gyr": 142.5809077882725,
+          "classification": "Existing solar episode selection; stopped_at_issue",
+          "source": "/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/solar_reheaters_and_neighbors_plot_data.json",
+          "qualification": "Retained solar figure data and available extension review hashes; not a new trajectory or source-convergence claim."
+        },
+        {
+          "mass_Msun": 0.071625,
+          "score": 0.09732280841339162,
+          "endpoint_Gyr": 650.3643744723717,
+          "classification": "Existing solar episode selection; stopped_at_issue",
+          "source": "/Users/greglaughlin/Projects/ember/out/fiducial-goal-oct22/solar_reheaters_and_neighbors_plot_data.json",
+          "qualification": "Retained solar figure data and available extension review hashes; not a new trajectory or source-convergence claim."
+        }
+      ],
+      "sampled_nonpositive_interlopers": [],
+      "lower_edge_scenario_interval_Msun": [
+        0.071453125,
+        0.07145390625
+      ],
+      "upper_edge_scenario_interval_Msun": [
+        0.0716,
+        0.071625
+      ],
+      "midpoint_scenario_edges_Msun": [
+        0.071453515625,
+        0.0716125
+      ],
+      "conditional_endpoint_width_range_Msun": [
+        0.00014609374999999258,
+        0.000171874999999988
+      ]
+    },
+    {
+      "Z": 0.032964519597302316,
+      "Z_over_solar": 2.0,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": 0.0005468750000000022,
+      "sampled_positive_span_Msun": 3.124999999999656e-05,
+      "classification": "Conditional connected-band interpolation only",
+      "positive_masses_Msun": [
+        0.06575,
+        0.06578125
+      ],
+      "lower_neighbors": [
+        {
+          "mass_Msun": 0.06475,
+          "score": 0.0,
+          "endpoint_Gyr": 15.872714359767683,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z2_m0.064750_n1278_to50",
+          "classification": "No recorded strong delayed rise yet",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": null
+        },
+        {
+          "mass_Msun": 0.06575,
+          "score": 0.41871921713432547,
+          "endpoint_Gyr": 155.37061384424882,
+          "source": "/Users/greglaughlin/Projects/ember/out/survey-z2-forward2-oct18/runs/pair_001_to100000Gyr",
+          "classification": "Finite delayed rise",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": null
+        }
+      ],
+      "upper_neighbors": [
+        {
+          "mass_Msun": 0.06578125,
+          "score": 0.34188670961948586,
+          "endpoint_Gyr": 152.48931995348005,
+          "source": "/Users/greglaughlin/Projects/ember/out/survey-shared-z2-m0.06578125-oct19/runs/pair_001_to100000Gyr",
+          "classification": "Finite delayed rise",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": null
+        },
+        {
+          "mass_Msun": 0.0658125,
+          "score": 0.0,
+          "endpoint_Gyr": 741.3262290601032,
+          "source": "/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z2_m0.065812500_n1278_from624.350000000_to100000",
+          "classification": "No recorded strong delayed rise yet",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "atmosphere coverage exhausted after repeated trials: envelope surface Teff=1338.414419 logg=5.450670: pressure family: H/He mismatch exceeds declared domain"
+        }
+      ],
+      "sampled_nonpositive_interlopers": [],
+      "lower_edge_scenario_interval_Msun": [
+        0.06475,
+        0.06575
+      ],
+      "upper_edge_scenario_interval_Msun": [
+        0.06578125,
+        0.0658125
+      ],
+      "midpoint_scenario_edges_Msun": [
+        0.06525,
+        0.065796875
+      ],
+      "conditional_endpoint_width_range_Msun": [
+        3.124999999999656e-05,
+        0.001062499999999994
+      ]
+    },
+    {
+      "Z": 0.049446779395953475,
+      "Z_over_solar": 3.0,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": 0.0002500000000000002,
+      "sampled_positive_span_Msun": 0.00021875000000000366,
+      "classification": "Conditional connected-band interpolation only",
+      "positive_masses_Msun": [
+        0.0605,
+        0.0605625,
+        0.060625,
+        0.0606875,
+        0.06071875
+      ],
+      "lower_neighbors": [
+        {
+          "mass_Msun": 0.06046875,
+          "score": 8.209678176768209e-06,
+          "endpoint_Gyr": 50.536119495029084,
+          "source": "/Users/greglaughlin/Projects/ember/out/autonomous-survey-oct18/runs/z3_000_to100000Gyr",
+          "classification": "No recorded strong delayed rise yet",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "atmosphere coverage exhausted after repeated trials: envelope surface Teff=1099.998909 logg=5.481439: pressure-matched atmosphere: (Teff, g) outside enriched_native_fit_z3 table"
+        },
+        {
+          "mass_Msun": 0.0605,
+          "score": 0.17328890562552815,
+          "endpoint_Gyr": 58.8,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z3_m0.060500_n1278_to150",
+          "classification": "Finite delayed rise",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "repeated step rejection: converged"
+        }
+      ],
+      "upper_neighbors": [
+        {
+          "mass_Msun": 0.06071875,
+          "score": 0.30018506730597805,
+          "endpoint_Gyr": 144.279471849879,
+          "source": "/Users/greglaughlin/Projects/ember/out/survey-shared-z3-m0.06071875-oct19/runs/pair_001_to100000Gyr",
+          "classification": "Finite delayed rise",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": null
+        },
+        {
+          "mass_Msun": 0.06075,
+          "score": 0.0,
+          "endpoint_Gyr": 795.9336760997833,
+          "source": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z3_012_to100000Gyr",
+          "classification": "No recorded strong delayed rise yet",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "atmosphere coverage exhausted after repeated trials: envelope surface Teff=1304.871548 logg=5.433786: pressure family: H/He mismatch exceeds declared domain"
+        }
+      ],
+      "sampled_nonpositive_interlopers": [],
+      "lower_edge_scenario_interval_Msun": [
+        0.06046875,
+        0.0605
+      ],
+      "upper_edge_scenario_interval_Msun": [
+        0.06071875,
+        0.06075
+      ],
+      "midpoint_scenario_edges_Msun": [
+        0.060484375,
+        0.060734375
+      ],
+      "conditional_endpoint_width_range_Msun": [
+        0.00021875000000000366,
+        0.0002812499999999968
+      ]
+    },
+    {
+      "Z": 0.06592903919460463,
+      "Z_over_solar": 4.0,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": 0.0011718749999999958,
+      "sampled_positive_span_Msun": 0.0001562500000000036,
+      "classification": "Conditional connected-band interpolation only",
+      "positive_masses_Msun": [
+        0.0559,
+        0.056025,
+        0.05605625
+      ],
+      "lower_neighbors": [
+        {
+          "mass_Msun": 0.0539,
+          "score": 0.0,
+          "endpoint_Gyr": 12.874549087273303,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z4_m0.053900_n1278_to50",
+          "classification": "No recorded strong delayed rise yet",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "repeated step rejection: envelope surface Teff=1099.998902 logg=5.427423: pressure-matched atmosphere: (Teff, g) outside enriched_native_fit_z4 table"
+        },
+        {
+          "mass_Msun": 0.0559,
+          "score": 0.27921134547782417,
+          "endpoint_Gyr": 67.5125,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z4_m0.055900_n1278_to150",
+          "classification": "Finite delayed rise",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "repeated step rejection: evolve_step: abundance change exceeds step limit"
+        }
+      ],
+      "upper_neighbors": [
+        {
+          "mass_Msun": 0.05605625,
+          "score": 0.29228690887059866,
+          "endpoint_Gyr": 134.21768686619845,
+          "source": "/Users/greglaughlin/Projects/ember/out/survey-shared-z4-m0.05605625-oct19/runs/pair_001_to100000Gyr",
+          "classification": "Finite delayed rise",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": null
+        },
+        {
+          "mass_Msun": 0.0560875,
+          "score": 0.0,
+          "endpoint_Gyr": 870.4295147111352,
+          "source": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z4_001_to100000Gyr",
+          "classification": "No recorded strong delayed rise yet",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "atmosphere coverage exhausted after repeated trials: envelope surface Teff=1275.744813 logg=5.419185: pressure family: H/He mismatch exceeds declared domain"
+        }
+      ],
+      "sampled_nonpositive_interlopers": [],
+      "lower_edge_scenario_interval_Msun": [
+        0.0539,
+        0.0559
+      ],
+      "upper_edge_scenario_interval_Msun": [
+        0.05605625,
+        0.0560875
+      ],
+      "midpoint_scenario_edges_Msun": [
+        0.054900000000000004,
+        0.056071875
+      ],
+      "conditional_endpoint_width_range_Msun": [
+        0.0001562500000000036,
+        0.002187499999999995
+      ]
+    },
+    {
+      "Z": 0.08241129899325579,
+      "Z_over_solar": 5.0,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": 0.0002812499999999968,
+      "sampled_positive_span_Msun": 0.0002500000000000002,
+      "classification": "Conditional connected-band interpolation only",
+      "positive_masses_Msun": [
+        0.0515,
+        0.051625,
+        0.05175
+      ],
+      "lower_neighbors": [
+        {
+          "mass_Msun": 0.05146875,
+          "score": 6.335064569714408e-08,
+          "endpoint_Gyr": 44.142829762964894,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z5_m0.051469_n1278_to50",
+          "classification": "No recorded strong delayed rise yet",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "repeated step rejection: envelope surface Teff=1099.998894 logg=5.446814: pressure-matched atmosphere: (Teff, g) outside enriched_native_fit_z5 table"
+        },
+        {
+          "mass_Msun": 0.0515,
+          "score": 0.15020245960226491,
+          "endpoint_Gyr": 51.226979851224684,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z5_m0.051500_n1278_to150",
+          "classification": "Finite delayed rise",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "repeated step rejection: converged"
+        }
+      ],
+      "upper_neighbors": [
+        {
+          "mass_Msun": 0.05175,
+          "score": 0.16202573554879093,
+          "endpoint_Gyr": 95.34547682289285,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-border-overnight-oct14/runs/z5_m0.051750_n1278_to150",
+          "classification": "Finite delayed rise",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "atmosphere coverage exhausted after repeated trials: envelope surface Teff=1402.995398 logg=5.374956: pressure family: H/He mismatch exceeds declared domain"
+        },
+        {
+          "mass_Msun": 0.05178125,
+          "score": 0.0,
+          "endpoint_Gyr": 922.8487663950625,
+          "source": "/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z5_m0.051781250_n1278_from635.947883088_to100000",
+          "classification": "No recorded strong delayed rise yet",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "atmosphere coverage exhausted after repeated trials: envelope surface Teff=1254.362707 logg=5.405592: pressure family: H/He mismatch exceeds declared domain"
+        }
+      ],
+      "sampled_nonpositive_interlopers": [],
+      "lower_edge_scenario_interval_Msun": [
+        0.05146875,
+        0.0515
+      ],
+      "upper_edge_scenario_interval_Msun": [
+        0.05175,
+        0.05178125
+      ],
+      "midpoint_scenario_edges_Msun": [
+        0.051484375,
+        0.051765624999999996
+      ],
+      "conditional_endpoint_width_range_Msun": [
+        0.0002500000000000002,
+        0.0003125000000000003
+      ]
+    },
+    {
+      "Z": 0.09889355879190695,
+      "Z_over_solar": 6.0,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": 0.0001718750000000019,
+      "sampled_positive_span_Msun": 3.12500000000035e-05,
+      "classification": "Conditional connected-band interpolation only",
+      "positive_masses_Msun": [
+        0.0477,
+        0.04773125
+      ],
+      "lower_neighbors": [
+        {
+          "mass_Msun": 0.04745,
+          "score": 1.3679889233388998e-05,
+          "endpoint_Gyr": 39.30124167034153,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z6_m0.047450_n1278_to50",
+          "classification": "No recorded strong delayed rise yet",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "repeated step rejection: evolve_step: line search failed: residual did not decrease: local=0.1403 -> 0.1403, balance=-0.5645 -> -0.5645"
+        },
+        {
+          "mass_Msun": 0.0477,
+          "score": 0.1161098482448184,
+          "endpoint_Gyr": 111.86151849630036,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z6_m0.047700_n1278_to150",
+          "classification": "Finite delayed rise",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "atmosphere coverage exhausted after repeated trials: envelope surface Teff=1337.234661 logg=5.377188: pressure family: H/He mismatch exceeds declared domain"
+        }
+      ],
+      "upper_neighbors": [
+        {
+          "mass_Msun": 0.04773125,
+          "score": 0.12752047725671845,
+          "endpoint_Gyr": 129.3703330725636,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z6_m0.047731_n1278_to150",
+          "classification": "Finite delayed rise",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "atmosphere coverage exhausted after repeated trials: envelope surface Teff=1350.466534 logg=5.375302: pressure family: H/He mismatch exceeds declared domain"
+        },
+        {
+          "mass_Msun": 0.0477625,
+          "score": 0.0,
+          "endpoint_Gyr": 976.469300103386,
+          "source": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z6_003_to100000Gyr",
+          "classification": "No recorded strong delayed rise yet",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "atmosphere coverage exhausted after repeated trials: envelope surface Teff=1236.643765 logg=5.392439: pressure family: H/He mismatch exceeds declared domain"
+        }
+      ],
+      "sampled_nonpositive_interlopers": [],
+      "lower_edge_scenario_interval_Msun": [
+        0.04745,
+        0.0477
+      ],
+      "upper_edge_scenario_interval_Msun": [
+        0.04773125,
+        0.0477625
+      ],
+      "midpoint_scenario_edges_Msun": [
+        0.047575,
+        0.047746875
+      ],
+      "conditional_endpoint_width_range_Msun": [
+        3.12500000000035e-05,
+        0.0003125000000000003
+      ]
+    },
+    {
+      "Z": 0.13185807838920927,
+      "Z_over_solar": 8.0,
+      "measured_reheater_width_Msun": null,
+      "midpoint_scenario_width_Msun": 0.00032812499999999856,
+      "sampled_positive_span_Msun": 6.250000000000006e-05,
+      "classification": "Conditional connected-band interpolation only",
+      "positive_masses_Msun": [
+        0.0405,
+        0.0405625
+      ],
+      "lower_neighbors": [
+        {
+          "mass_Msun": 0.04,
+          "score": 3.852564372959317e-06,
+          "endpoint_Gyr": 20.521876773330863,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z8_m0.040000_n1278_to50",
+          "classification": "No recorded strong delayed rise yet",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "repeated step rejection: envelope surface Teff=1099.998905 logg=5.396620: pressure-matched atmosphere: (Teff, g) outside enriched_native_fit_z8 table"
+        },
+        {
+          "mass_Msun": 0.0405,
+          "score": 0.11627312540721753,
+          "endpoint_Gyr": 162.16929411124468,
+          "source": "/Users/greglaughlin/Projects/ember/out/track-extensions-oct16/runs/z8_m0.040500000_n1278_to300",
+          "classification": "Finite delayed rise",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "atmosphere coverage exhausted after repeated trials: envelope surface Teff=1326.186977 logg=5.353167: pressure family: H/He mismatch exceeds declared domain"
+        }
+      ],
+      "upper_neighbors": [
+        {
+          "mass_Msun": 0.0405625,
+          "score": 0.1568880610595738,
+          "endpoint_Gyr": 500.87932705879217,
+          "source": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z8_015_to100000Gyr",
+          "classification": "Finite delayed rise",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": "repeated step rejection: envelope surface Teff=1373.725409 logg=5.345364: pressure family: H/He mismatch exceeds declared domain"
+        },
+        {
+          "mass_Msun": 0.04059375,
+          "score": 0.023746839604406187,
+          "endpoint_Gyr": 40.108905530417395,
+          "source": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z8_m0.040594_n1278_to50",
+          "classification": "No recorded strong delayed rise yet",
+          "qualification": "Legacy accepted-step lineage rechecked; source-censored or finite endpoints, not negative asymptotic classifications.",
+          "stop_reason": null
+        }
+      ],
+      "sampled_nonpositive_interlopers": [],
+      "lower_edge_scenario_interval_Msun": [
+        0.04,
+        0.0405
+      ],
+      "upper_edge_scenario_interval_Msun": [
+        0.0405625,
+        0.04059375
+      ],
+      "midpoint_scenario_edges_Msun": [
+        0.04025,
+        0.040578125
+      ],
+      "conditional_endpoint_width_range_Msun": [
+        6.250000000000006e-05,
+        0.0005937499999999971
+      ]
+    }
+  ],
+  "legacy_lineage_checks": [
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z2_m0.063750_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 8.487308195317508,
+      "post_interface_recovery": {
+        "gain_K": 0.008779648190966327,
+        "minimum_Teff_K": 1100.002787772008,
+        "minimum_age_Gyr": 16.339871671880005,
+        "peak_Teff_K": 1100.011567420199,
+        "peak_age_Gyr": 16.34003646680188,
+        "rise_duration_Gyr": 0.000164794921875,
+        "endpoint_decline_K": 0.009987423315806154
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z2_m0.064750_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 12.472714359767682,
+      "post_interface_recovery": {
+        "gain_K": 0.0,
+        "minimum_Teff_K": 1263.8895740039998,
+        "minimum_age_Gyr": 12.472714359767682,
+        "peak_Teff_K": 1263.8895740039998,
+        "peak_age_Gyr": 12.472714359767682,
+        "rise_duration_Gyr": 0.0,
+        "endpoint_decline_K": 37.24347068383372
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/survey-z2-forward2-oct18/runs/pair_001_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 45.76147012247143,
+      "post_interface_recovery": {
+        "gain_K": 527.2148738079611,
+        "minimum_Teff_K": 1259.1131532394659,
+        "minimum_age_Gyr": 45.76147012247143,
+        "peak_Teff_K": 1786.328027047427,
+        "peak_age_Gyr": 155.37061384424882,
+        "rise_duration_Gyr": 109.60914372177737,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/survey-shared-z2-m0.06578125-oct19/runs/pair_001_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 62.4,
+      "post_interface_recovery": {
+        "gain_K": 430.39118479084027,
+        "minimum_Teff_K": 1258.8707682432535,
+        "minimum_age_Gyr": 62.4,
+        "peak_Teff_K": 1689.2619530340937,
+        "peak_age_Gyr": 152.48931995348005,
+        "rise_duration_Gyr": 90.08931995348004,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z2_m0.065812500_n1278_from624.350000000_to100000",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z2_002_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/long-fate-oct17/runs/z2_m0.066000000_n1278_from500.000000000_to750",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z2_m0.066250000_n1278_from300.000000000_to100000",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z2_024_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z2_030_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-border-overnight-oct14/runs/z3_m0.058000_n1278_to50_recovery",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 6.611907119250166,
+      "post_interface_recovery": {
+        "gain_K": 0.0009082799824682297,
+        "minimum_Teff_K": 1100.002001168405,
+        "minimum_age_Gyr": 12.368352431750166,
+        "peak_Teff_K": 1100.0029094483875,
+        "peak_age_Gyr": 12.368682021593916,
+        "rise_duration_Gyr": 0.00032958984375,
+        "endpoint_decline_K": 0.002909397062012431
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-border-overnight-oct14/runs/z3_m0.060000_n1278_to50_recovery",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 13.569839764189988,
+      "post_interface_recovery": {
+        "gain_K": 0.01904038857355772,
+        "minimum_Teff_K": 1100.009467509698,
+        "minimum_age_Gyr": 26.258877850127487,
+        "peak_Teff_K": 1100.0285078982715,
+        "peak_age_Gyr": 26.258939648223194,
+        "rise_duration_Gyr": 6.17980957069397e-05,
+        "endpoint_decline_K": 0.028459705721388673
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z3_m0.060250_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 16.558813422890776,
+      "post_interface_recovery": {
+        "gain_K": 0.006988345210402258,
+        "minimum_Teff_K": 1100.0002549687797,
+        "minimum_age_Gyr": 32.586426909240366,
+        "peak_Teff_K": 1100.00724331399,
+        "peak_age_Gyr": 32.58642704290553,
+        "rise_duration_Gyr": 1.336651611328125e-07,
+        "endpoint_decline_K": 0.0030551133593235136
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z3_m0.060375_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 18.943506067197955,
+      "post_interface_recovery": {
+        "gain_K": 0.0018251941844482644,
+        "minimum_Teff_K": 1100.000474991952,
+        "minimum_age_Gyr": 38.687777917783905,
+        "peak_Teff_K": 1100.0023001861364,
+        "peak_age_Gyr": 38.687808816831755,
+        "rise_duration_Gyr": 3.08990478515625e-05,
+        "endpoint_decline_K": 0.0021034999485891603
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z3_m0.060437_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 20.57404354209743,
+      "post_interface_recovery": {
+        "gain_K": 0.017066170135649372,
+        "minimum_Teff_K": 1100.0000663335995,
+        "minimum_age_Gyr": 44.522462731550554,
+        "peak_Teff_K": 1100.0171325037352,
+        "peak_age_Gyr": 44.52252066726528,
+        "rise_duration_Gyr": 5.793571472930908e-05,
+        "endpoint_decline_K": 0.01701392233030674
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/autonomous-survey-oct18/runs/z3_000_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 21.566015836275408,
+      "post_interface_recovery": {
+        "gain_K": 0.009030647578811113,
+        "minimum_Teff_K": 1100.0001929875993,
+        "minimum_age_Gyr": 50.53611725923752,
+        "peak_Teff_K": 1100.0092236351782,
+        "peak_age_Gyr": 50.5361194654867,
+        "rise_duration_Gyr": 2.2062491836547852e-06,
+        "endpoint_decline_K": 0.008799544813427929
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z3_m0.060500_n1278_to150",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 22.70278427762705,
+      "post_interface_recovery": {
+        "gain_K": 213.28723074489335,
+        "minimum_Teff_K": 1230.8187299987935,
+        "minimum_age_Gyr": 34.802784277627055,
+        "peak_Teff_K": 1444.1059607436869,
+        "peak_age_Gyr": 58.8,
+        "rise_duration_Gyr": 23.997215722372946,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z3_m0.060562_n1278_to150",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 25.610664632811496,
+      "post_interface_recovery": {
+        "gain_K": 334.30566144163777,
+        "minimum_Teff_K": 1237.2157618764213,
+        "minimum_age_Gyr": 29.910664632811496,
+        "peak_Teff_K": 1571.521423318059,
+        "peak_age_Gyr": 69.3125,
+        "rise_duration_Gyr": 39.401835367188504,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/survey-z3-forward-oct18/runs/pair_001_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 30.128742851633636,
+      "post_interface_recovery": {
+        "gain_K": 389.2447646340977,
+        "minimum_Teff_K": 1238.646581834355,
+        "minimum_age_Gyr": 30.128742851633636,
+        "peak_Teff_K": 1627.8913464684526,
+        "peak_age_Gyr": 112.16114166112602,
+        "rise_duration_Gyr": 82.03239880949239,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/survey-shared-z3-m0.06068750-oct19/runs/pair_001_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 39.45179083340614,
+      "post_interface_recovery": {
+        "gain_K": 373.68469651846704,
+        "minimum_Teff_K": 1238.2981021951314,
+        "minimum_age_Gyr": 39.45179083340614,
+        "peak_Teff_K": 1611.9827987135984,
+        "peak_age_Gyr": 131.51790781861854,
+        "rise_duration_Gyr": 92.0661169852124,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/survey-shared-z3-m0.06071875-oct19/runs/pair_001_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 54.35,
+      "post_interface_recovery": {
+        "gain_K": 371.63403479116573,
+        "minimum_Teff_K": 1238.0163947740941,
+        "minimum_age_Gyr": 54.35,
+        "peak_Teff_K": 1609.6504295652599,
+        "peak_age_Gyr": 144.279471849879,
+        "rise_duration_Gyr": 89.929471849879,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z3_012_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z3_m0.061000000_n1278_from500.000000000_to100000",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z3_m0.062000000_n1278_from150.000000000_to100000",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z3_m0.066000_n1278_to150",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z4_m0.053900_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 6.954003099488438,
+      "post_interface_recovery": {
+        "gain_K": 0.0,
+        "minimum_Teff_K": 1230.0811901650677,
+        "minimum_age_Gyr": 6.954003099488438,
+        "peak_Teff_K": 1230.0811901650677,
+        "peak_age_Gyr": 6.954003099488438,
+        "rise_duration_Gyr": 0.0,
+        "endpoint_decline_K": 130.08118498555746
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z4_m0.055900_n1278_to150",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 20.72964736062946,
+      "post_interface_recovery": {
+        "gain_K": 340.70424447242226,
+        "minimum_Teff_K": 1220.2378233927534,
+        "minimum_age_Gyr": 24.82964736062946,
+        "peak_Teff_K": 1560.9420678651757,
+        "peak_age_Gyr": 67.5125,
+        "rise_duration_Gyr": 42.682852639370545,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/survey-z4-forward-oct18/runs/pair_001_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 28.84578755471173,
+      "post_interface_recovery": {
+        "gain_K": 369.8422364931814,
+        "minimum_Teff_K": 1221.2782840879063,
+        "minimum_age_Gyr": 28.84578755471173,
+        "peak_Teff_K": 1591.1205205810877,
+        "peak_age_Gyr": 125.3249295698743,
+        "rise_duration_Gyr": 96.47914201516257,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/survey-shared-z4-m0.05605625-oct19/runs/pair_001_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 35.037895049576015,
+      "post_interface_recovery": {
+        "gain_K": 356.8604976566355,
+        "minimum_Teff_K": 1220.9253539118472,
+        "minimum_age_Gyr": 35.037895049576015,
+        "peak_Teff_K": 1577.7858515684827,
+        "peak_age_Gyr": 134.21768686619845,
+        "rise_duration_Gyr": 99.17979181662244,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z4_001_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z4_013_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z4_m0.056400000_n1278_from300.000000000_to100000",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z4_025_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z4_031_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-border-overnight-oct14/runs/z5_m0.049000_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 5.451612706476382,
+      "post_interface_recovery": {
+        "gain_K": 0.0015580782458073372,
+        "minimum_Teff_K": 1100.0001194289953,
+        "minimum_age_Gyr": 9.545120854669742,
+        "peak_Teff_K": 1100.001677507241,
+        "peak_age_Gyr": 9.54524251967066,
+        "rise_duration_Gyr": 0.00012166500091743469,
+        "endpoint_decline_K": 0.0016667948148096912
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-border-overnight-oct14/runs/z5_m0.051000_n1278_to50_recovery",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 10.377363471923726,
+      "post_interface_recovery": {
+        "gain_K": 0.0022370829599367426,
+        "minimum_Teff_K": 1100.000176316857,
+        "minimum_age_Gyr": 21.77019184106435,
+        "peak_Teff_K": 1100.002413399817,
+        "peak_age_Gyr": 21.770415101489615,
+        "rise_duration_Gyr": 0.00022326042526626586,
+        "endpoint_decline_K": 0.0023967110075773235
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z5_m0.051250_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 12.234251181856356,
+      "post_interface_recovery": {
+        "gain_K": 0.0051975719316033064,
+        "minimum_Teff_K": 1100.000173135984,
+        "minimum_age_Gyr": 27.220689170137607,
+        "peak_Teff_K": 1100.0053707079155,
+        "peak_age_Gyr": 27.221199004427167,
+        "rise_duration_Gyr": 0.0005098342895584107,
+        "endpoint_decline_K": 0.005197241431233124
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z5_m0.051375_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 13.687123607182992,
+      "post_interface_recovery": {
+        "gain_K": 0.004826306776976708,
+        "minimum_Teff_K": 1100.0009744729246,
+        "minimum_age_Gyr": 32.55771381714393,
+        "peak_Teff_K": 1100.0058007797015,
+        "peak_age_Gyr": 32.55772926666785,
+        "rise_duration_Gyr": 1.5449523921966552e-05,
+        "endpoint_decline_K": 0.005744521769202038
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z5_m0.051437_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 14.49209693083017,
+      "post_interface_recovery": {
+        "gain_K": 0.0078051118284747645,
+        "minimum_Teff_K": 1100.0032334930463,
+        "minimum_age_Gyr": 38.01016333708016,
+        "peak_Teff_K": 1100.0110386048748,
+        "peak_age_Gyr": 38.0104929269239,
+        "rise_duration_Gyr": 0.00032958984375,
+        "endpoint_decline_K": 0.010952735321325235
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z5_m0.051469_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 15.062383561402015,
+      "post_interface_recovery": {
+        "gain_K": 6.968572392906935e-05,
+        "minimum_Teff_K": 1100.0002156601677,
+        "minimum_age_Gyr": 44.142825417786284,
+        "peak_Teff_K": 1100.0002853458916,
+        "peak_age_Gyr": 44.142829762964894,
+        "rise_duration_Gyr": 4.345178611755371e-06,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z5_m0.051500_n1278_to150",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 15.690832138992539,
+      "post_interface_recovery": {
+        "gain_K": 179.9241021365326,
+        "minimum_Teff_K": 1197.8772026301726,
+        "minimum_age_Gyr": 28.29083213899254,
+        "peak_Teff_K": 1377.8013047667052,
+        "peak_age_Gyr": 51.226979851224684,
+        "rise_duration_Gyr": 22.93614771223215,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z5_m0.051625_n1278_to150",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 19.09552700648665,
+      "post_interface_recovery": {
+        "gain_K": 210.72377550727379,
+        "minimum_Teff_K": 1208.1852138063464,
+        "minimum_age_Gyr": 19.09552700648665,
+        "peak_Teff_K": 1418.9089893136202,
+        "peak_age_Gyr": 74.4092257266665,
+        "rise_duration_Gyr": 55.31369872017986,
+        "endpoint_decline_K": 0.0025804917154346185
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-border-overnight-oct14/runs/z5_m0.051750_n1278_to150",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 33.01412589233129,
+      "post_interface_recovery": {
+        "gain_K": 195.625476698385,
+        "minimum_Teff_K": 1207.372866019029,
+        "minimum_age_Gyr": 33.01412589233129,
+        "peak_Teff_K": 1402.998342717414,
+        "peak_age_Gyr": 95.3454762261361,
+        "rise_duration_Gyr": 62.3313503338048,
+        "endpoint_decline_K": 0.004328609373942527
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z5_m0.051781250_n1278_from635.947883088_to100000",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z5_m0.051812500_n1278_from750.000000000_to100000",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z5_m0.051875000_n1278_from500.000000000_to100000",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z5_023_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z5_029_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z5_035_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z6_m0.046200_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 6.648738869110937,
+      "post_interface_recovery": {
+        "gain_K": 0.006637536110019937,
+        "minimum_Teff_K": 1100.0003356990362,
+        "minimum_age_Gyr": 12.885201271454687,
+        "peak_Teff_K": 1100.0069732351462,
+        "peak_age_Gyr": 12.885324867646093,
+        "rise_duration_Gyr": 0.00012359619140625,
+        "endpoint_decline_K": 0.006784315285813136
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z6_m0.047200_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 10.465270980419486,
+      "post_interface_recovery": {
+        "gain_K": 0.01166668344694699,
+        "minimum_Teff_K": 1100.0022083426156,
+        "minimum_age_Gyr": 24.152770980419486,
+        "peak_Teff_K": 1100.0138750260626,
+        "peak_age_Gyr": 24.153210433544483,
+        "rise_duration_Gyr": 0.0004394531249961853,
+        "endpoint_decline_K": 0.013776449258557477
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z6_m0.047450_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 12.959877239480255,
+      "post_interface_recovery": {
+        "gain_K": 0.015047902155629345,
+        "minimum_Teff_K": 1100.001754319866,
+        "minimum_age_Gyr": 39.30089896799587,
+        "peak_Teff_K": 1100.0168022220216,
+        "peak_age_Gyr": 39.301084362282985,
+        "rise_duration_Gyr": 0.000185394287109375,
+        "endpoint_decline_K": 0.01614079620571829
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z6_m0.047700_n1278_to150",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 20.56603793028907,
+      "post_interface_recovery": {
+        "gain_K": 139.11370665585628,
+        "minimum_Teff_K": 1198.1215095771556,
+        "minimum_age_Gyr": 20.56603793028907,
+        "peak_Teff_K": 1337.235216233012,
+        "peak_age_Gyr": 111.86149024963379,
+        "rise_duration_Gyr": 91.29545231934473,
+        "endpoint_decline_K": 0.001874003677357905
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z6_m0.047731_n1278_to150",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 24.051698361586755,
+      "post_interface_recovery": {
+        "gain_K": 152.73551670819552,
+        "minimum_Teff_K": 1197.7332581708843,
+        "minimum_age_Gyr": 24.051698361586755,
+        "peak_Teff_K": 1350.4687748790798,
+        "peak_age_Gyr": 129.3703330627177,
+        "rise_duration_Gyr": 105.31863470113095,
+        "endpoint_decline_K": 0.003572875322561231
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z6_003_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z6_014_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z6_026_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z6_m0.048200000_n1278_from756.850000000_to100000",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z6_032_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z8_m0.040000_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 8.181729753162557,
+      "post_interface_recovery": {
+        "gain_K": 0.00423782093025693,
+        "minimum_Teff_K": 1100.000031148521,
+        "minimum_age_Gyr": 20.521868975400775,
+        "peak_Teff_K": 1100.0042689694512,
+        "peak_age_Gyr": 20.521876773330863,
+        "rise_duration_Gyr": 7.797930088043212e-06,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/track-extensions-oct16/runs/z8_m0.040500000_n1278_to300",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 14.217895263741221,
+      "post_interface_recovery": {
+        "gain_K": 138.13856574207216,
+        "minimum_Teff_K": 1188.0524004001475,
+        "minimum_age_Gyr": 14.217895263741221,
+        "peak_Teff_K": 1326.1909661422196,
+        "peak_age_Gyr": 162.16929407186123,
+        "rise_duration_Gyr": 147.95139880812002,
+        "endpoint_decline_K": 0.00529663537054148
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z8_015_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 17.357625386109127,
+      "post_interface_recovery": {
+        "gain_K": 186.29455070516178,
+        "minimum_Teff_K": 1187.436121314685,
+        "minimum_age_Gyr": 17.357625386109127,
+        "peak_Teff_K": 1373.7306720198467,
+        "peak_age_Gyr": 500.87768554687506,
+        "rise_duration_Gyr": 483.5200601607659,
+        "endpoint_decline_K": 0.0066172466335956415
+      },
+      "original_positive_10percent": true,
+      "delayed_positive_10percent": true
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/metallicity-limits-oct16/runs/z8_m0.040594_n1278_to50",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": 21.708905530417393,
+      "post_interface_recovery": {
+        "gain_K": 28.191309990930222,
+        "minimum_Teff_K": 1187.1605005366428,
+        "minimum_age_Gyr": 21.708905530417393,
+        "peak_Teff_K": 1215.351810527573,
+        "peak_age_Gyr": 40.108905530417395,
+        "rise_duration_Gyr": 18.400000000000002,
+        "endpoint_decline_K": 0.0
+      },
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z8_022_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z8_028_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/long-fate-100Tyr-oct17/runs/z8_m0.041000000_n1278_from750.000000000_to100000",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z8_034_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z8_036_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    },
+    {
+      "run": "/Users/greglaughlin/Projects/ember/out/adaptive-production-oct18/runs/z8_039_to100000Gyr",
+      "numerical_lineage_passed": true,
+      "recovery_reproduced": true,
+      "first_saved_interface_Gyr": null,
+      "post_interface_recovery": null,
+      "original_positive_10percent": false,
+      "delayed_positive_10percent": false
+    }
+  ],
+  "assumptions": [
+    "Freeze each finite observed classification, including records stopped by source coverage. Later reheating or larger peaks would invalidate this scenario.",
+    "Assume one connected strong-reheater interval locally and no missed positive or negative islands.",
+    "Place each edge halfway between its nearest positive and nonpositive sampled mass. This midpoint is a chosen interpolation, not a likelihood estimate.",
+    "The endpoint width range varies the two edges over those assumed sample intervals. It is neither a confidence interval nor a physical error bound.",
+    "The 10percent rise criterion defines this strong-rise scenario; a different amplitude threshold defines a different interval.",
+    "Legacy solar/enriched and new low-Z models have different material, atmosphere, mesh and evolution assumptions. Their comparison is not a controlled metallicity derivative.",
+    "Rows without a positive sample stay unknown. No zero width is assigned to PopIII and trace-metallicity rows.",
+    "These scenarios guide the next sparse samples. They do not replace null measured widths in the authoritative outcome ledger.",
+    "All seven halfsolar birth configurations match except mass; spatial and source convergence remain unestablished.",
+    "The lower outward control remains source-limited at121.853Gyr and the upper outward control is fully connected through300Gyr. Their finite classifications are assumed to persist for this first-look interpolation.",
+    "Both new midpoints exceed the 10 percent delayed-temperature-rise threshold. Their stops at 131.479 and 262.650 Gyr do not establish peaks or completed requested ages.",
+    "Five discrete positives are treated as one connected band for interpolation only. The conditional endpoint range is neither a confidence interval nor a physical error bound."
+  ],
+  "input_hashes": {
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/update_halfsolar_fine_width_scenario_v3.py": "44000b61303f2b87b4662113ff3d15d78b9413b0a90aae959c2c21a30dd80ccd",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/delayed_rise_score_v1.py": "15362c3cdcb821c253976bfc2083e3714c12b890d5243b4573c6f9eff0f993a9",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/conditional_edge_interpolation_v9/review.json": "1a64cc4c7c2eb0ba2ef5bab8f23fa2408f49bb963c9bf5e243210c1854a0a4b0",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_both_midpoint_birth_configuration_primary_review_v1.json": "4c24117fa9ce471d5ffca06dff2152fb73a0b8dcc5a967787181ba196dc6b0ed",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m0739828125_n513_to200_bounded_v3_segment_7_review.json": "d3ec0aba6bc1abffe08b735829501ff7277c431224e91378b7db4fcfc98634a0",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0739828125_n513_birth_step2p5_v1/evolution/history.jsonl": "b8c76cd199cab50ee603b4fffdfe11f5f8a6e2c5a7a83a7ecda767ba9ca15491",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0739828125_n513_birth_step2p5_to200_cont1/evolution/history.jsonl": "2aa73aee8f2e2e9a6b88a7a83565b3f3979906c10be1adc2bae0daf77f265b25",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0739828125_n513_birth_step2p5_to200_cont2/evolution/history.jsonl": "5d85188409f55dcfb6cdc0ef36730be6c4c879e705478de1d2092385bd82638f",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0739828125_n513_birth_step2p5_to200_cont3/evolution/history.jsonl": "895fdb6d0e1bbdaad950b867bf4bafe099b0e0cd6cbfbe58450567c7c045cd6b",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0739828125_n513_birth_step2p5_to200_cont4/evolution/history.jsonl": "edfcc6cbf8f9079cef5b647d8328ce0f09ee0cbc5abbb8f624b81b8533835536",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0739828125_n513_birth_step2p5_to200_cont5/evolution/history.jsonl": "7b7557bca7645f843c8f9503906cd98308211d66161b0df57b58867262021023",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0739828125_n513_birth_step2p5_to200_cont6/evolution/history.jsonl": "5c3e2c60e8ae641937798536c843234feaa4d3918c230f635ac1627447041dee",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0739828125_n513_birth_step2p5_to200_cont7/evolution/history.jsonl": "b5bbf92ba20a1496b44c749e983ebd8f41121ecbab66189233ea92b841f6ec1b",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m073990625_n513_to205_bounded_v2_segment_6_review.json": "e0db51a4b9292e074c1c09b0513faaed9057b4334e82645430c1a01aaae88a0a",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m073990625_n513_birth_step2p5_v1/evolution/history.jsonl": "57684e40cd8ac880ac9ed141c42c3328619e4e3d2c6f03018942e40c75fcf811",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m073990625_n513_birth_step2p5_to205_cont1/evolution/history.jsonl": "7c6168b30240e0ef1df2d3bdb955d3df9d34785b1ca75c722944bf192b7bf36e",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m073990625_n513_birth_step2p5_to205_cont2/evolution/history.jsonl": "18577833f68621dff088c821cc4a83aca2d41929b7950f2c2a6e179d09aea3cb",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m073990625_n513_birth_step2p5_to205_cont3/evolution/history.jsonl": "6567e6e320fa5e37aca4adda5563c6aaaf1cbf3b9ac2a90f9fd2e7bb639a2e94",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m073990625_n513_birth_step2p5_to205_cont4/evolution/history.jsonl": "0caed210777bd9a7b50b1d9c9efac5f347b48e2e902188af000477e8aba9b0a9",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m073990625_n513_birth_step2p5_to205_cont5/evolution/history.jsonl": "114ca0c7da9fc7e2173a266cbfbe58d0ef718fbacce7fba9da4a379a5baa61f9",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m073990625_n513_birth_step2p5_to205_cont6/evolution/history.jsonl": "2d5f51d41fc1fe7d4aec0a6bd0616bd09da9bf68a6aea4ed774c7932d4f278f6",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m07400625_n513_167Gyr_review_v1.json": "c8fe9951fb155000ab0c66a3515d073eac89b339b42a6d6dec546c43402d97d6",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07400625_n513_birth_step2p5_v1/evolution/history.jsonl": "39af6e1a36255d067c68349318dbd6c026a089ca7e8632f02d5386e9a896cee8",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07400625_n513_birth_step2p5_to200_cont1/evolution/history.jsonl": "a0cfd03f6d378e6a0bda095230b14efe2633c669cc54eb674c14e052b07aeae0",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07400625_n513_birth_step2p5_to200_cont2/evolution/history.jsonl": "852f0ca5159f42b08441f6fa781d2b0c2d8ec1f0ed8c2f1e8f1b0b2af678ce67",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07400625_n513_birth_step2p5_to200_cont3/evolution/history.jsonl": "0bea66c201fac75772abc3e6faed87796d59f5962482e331eab1984db3496701",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07400625_n513_birth_step2p5_to200_cont4/evolution/history.jsonl": "f6a6975ccb1309fc7ffa85d1e8161cbe966cff6e31fe9f24459d0d2573662e98",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07400625_n513_birth_step2p5_to200_cont5/evolution/history.jsonl": "61313419e3f340c4c6a6e60558ec250b7e2e5cd41428e178200fccb06e460f57",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07400625_n513_birth_step2p5_to200_cont6/evolution/history.jsonl": "109735eeb73855856d90c92f3255586688ff5160c4e86a70c2f3fb94fa5293eb",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m0740296875_n513_to300_bounded_v2_segment_7_review.json": "daf029fbc3f813f99d66818b0148f58304859d76a28a21fbd43d12c94605abcb",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0740296875_n513_birth_step2p5_v1/evolution/history.jsonl": "3e40f3f1eed0b56e745069f017521a1cfa9354abd9af3d637d68ca23041feff5",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0740296875_n513_birth_step2p5_to300_cont1/evolution/history.jsonl": "a60a786543d4063975f4666a1b92dd6a81319bbe6a3f0d1bc6913ccb237172fd",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0740296875_n513_birth_step2p5_to300_cont2/evolution/history.jsonl": "2ad23c3ae2566f9143643a68bf3a048085bfc5a27e82a52fe5bd3ec59e448e88",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0740296875_n513_birth_step2p5_to300_cont3/evolution/history.jsonl": "8ba6c3c6ba20b487467f693a01d1e2806db274f869af0c589d20f9ea92dbb82b",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0740296875_n513_birth_step2p5_to300_cont4/evolution/history.jsonl": "e0b8867da05d203b2a3096b87c6723bce779174f9c2d8b09536c60c69c54ceb3",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0740296875_n513_birth_step2p5_to300_cont5/evolution/history.jsonl": "a58cc9e458e31129c08154f2930f5befa0980d88100040aec65a3376635b5d91",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0740296875_n513_birth_step2p5_to300_cont6/evolution/history.jsonl": "63b04eb9f26362909bb7c94ac55d4ffb96d2aded2d4cb6cf4a383608eb8e7cfb",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m0740296875_n513_birth_step2p5_to300_cont7/evolution/history.jsonl": "0ffd5a24e57a3803504b5e2691ba73f655076e456e3f1bc18e25bac9591ff155",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_m07397109375_n513_to250_bounded_v3_segment_7_review.json": "b8d2ef5fd3dd09bdbd2740c5af4e79a00b2df901124462f52a15c47f32d8a6e5",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07397109375_n513_birth_step2p5_v1/evolution/history.jsonl": "99196a7308d276f0dc5172d1a228afba6a800f175ed19cdf2fc0664bde8d4938",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07397109375_n513_birth_step2p5_to250_cont1/evolution/history.jsonl": "7e6bff49c1b8673ff2444d9aef05e07687a7612d37d69debaea1042ba42d2314",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07397109375_n513_birth_step2p5_to250_cont2/evolution/history.jsonl": "25b2cf8e03b0cc8205bc993d1cdc1cabfb575d9c2e43e6ed5038800b68e23ec1",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07397109375_n513_birth_step2p5_to250_cont3/evolution/history.jsonl": "c2ac778733fe65d2bbeeffc9cc20f3a6540658048cd1441e7374b34d410c0e79",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07397109375_n513_birth_step2p5_to250_cont4/evolution/history.jsonl": "339bb4f5375c24ddb471e61d4ed20e40463d39a2209a35633057115752c1d524",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07397109375_n513_birth_step2p5_to250_cont5/evolution/history.jsonl": "8f310529178c490da4712f2fd117048c061796f0dd691bc5e8104f3be8f182ba",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07397109375_n513_birth_step2p5_to250_cont6/evolution/history.jsonl": "beaf41aa233f5d88411c7e554dd644c4db1ea36fd0692eb66b5fe2ba7398586a",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/native_mesh_halfsolar_m07397109375_n513_birth_step2p5_to250_cont7/evolution/history.jsonl": "ddae5cfb715de17a09fa5b000def89dbd643379c690c82951eda507a614d7f41"
+  },
+  "historical_z005_update": {
+    "old_midpoint_scenario_width_Msun": 2.636718750004263e-07,
+    "new_midpoint_scenario_width_Msun": 1.7578125000028422e-07,
+    "new_upper_neighbor_review": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/native_coulomb_z005_m07595291015625_350Gyr_review_v4.json"
+  },
+  "halfsolar_update": {
+    "new_fine_midpoint_width_Msun": 7.617187500000289e-05,
+    "positive_span_Msun": 5.859375000000222e-05,
+    "positive_count": 5,
+    "physical_width_measurement": false,
+    "lower_midpoint_in_progress": false,
+    "both_midpoints_stopped_after_positive": true
+  },
+  "historical_coarse_update": {
+    "halfsolar_delayed_positive_mass_Msun": 0.073990625,
+    "halfsolar_midpoint_scenario_width_Msun": 1.1718750000000444e-05,
+    "physical_width_measurement": null
+  },
+  "historical_v9_halfsolar_update": {
+    "new_fine_midpoint_width_Msun": 7.031250000000266e-05,
+    "positive_span_Msun": 4.6875000000001776e-05,
+    "positive_count": 4,
+    "physical_width_measurement": false,
+    "lower_midpoint_in_progress": true,
+    "upper_midpoint_stopped_after_positive": true
+  }
+}

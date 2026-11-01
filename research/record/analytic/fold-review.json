@@ -1,0 +1,99 @@
+{
+  "utc": "2026-10-28T15:25:57.870010+00:00",
+  "status": "Useful exploratory local fold sensitivity; no evolved low-Z reheater or width classification",
+  "original_opus_status": "EOS client stopped at its900second wall limit before delivery.json; saved draft retained. Primary completed, checked and corrected it locally.",
+  "implementation": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/chandrasekhar_fold_primary_v3/chandrasekhar_fold.py",
+  "derivation": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/Chandrasekhar_reduction.txt",
+  "passed_checks": [
+    "n=3/2 Lane-Emden constants",
+    "Composition positivity and unit mass-fraction sum for retained scenarios",
+    "Discrete two-zone species inventory closure",
+    "Small-amplitude response close to half at half input",
+    "Composite quadrature sensitivity",
+    "Reproduction of early fold response after correcting unrelated invalid examples"
+  ],
+  "quadrature": {
+    "coarse": {
+      "lnQ_composite_minus_LE": 0.0027910718452837102,
+      "R_ratio": -0.004329495755561963
+    },
+    "refined": {
+      "lnQ_composite_minus_LE": 0.00016821983941639473,
+      "R_ratio": -0.00019451767145006738
+    },
+    "early_delta_lnQ_relative_change": -0.0003909307004945628
+  },
+  "early_solar": {
+    "label": "saved profiles m342->m491 composition only, thermal state frozen at fold",
+    "global_mean_change": {
+      "X": -9.497224145250732e-05,
+      "Y3": 9.49722414479009e-05,
+      "Y4": 4.548444954011188e-15,
+      "Z": 5.403392577124633e-17
+    },
+    "dlnQ_total": 0.011000363651056944,
+    "dlnQ_global_homogeneous": 0.0010196767779611093,
+    "dlnQ_redistribution": 0.009981816259916343,
+    "channels_redistribution": {
+      "fuel": -0.009266382972192844,
+      "mu": 0.02353350496079898,
+      "screen": 0.0003245466258938734,
+      "surfZ": -0.004607965434455963
+    },
+    "pairs_redistribution_species_in_H_out": {
+      "Y3": 0.00010597064795447864,
+      "Y4": 0.012609772336094949,
+      "Z": -0.002735931490803978
+    },
+    "dlnM_fold_total": -0.0008506769142543885,
+    "dM_fold_total_Msun": -6.0816078480217234e-05,
+    "dM_fold_redistribution_Msun": -5.518498663267858e-05,
+    "dM_fold_global_Msun": -5.637335720894965e-06,
+    "ratio_to_span_500K": -0.6950408969167684,
+    "ratio_to_span_10pct": -0.41628117890202165,
+    "linearity_half_amplitude_ratio": 0.5004670732881668,
+    "dlnQ_total_if_surface_law_uses_central_theta": 0.017564164440464936
+  },
+  "primordial_scenario": {
+    "Z": 0.0,
+    "X": 0.7515000000000001,
+    "Y": 0.2485,
+    "Zfloor_eff": 3.609776801555923e-06,
+    "M_fold_composition_only": 0.07581846064538135,
+    "M_fold_with_surface_law": 0.09593750000000002,
+    "Tc_fold_K": 2883467.8910518675,
+    "rhoc_fold": 1749.628467993255,
+    "psi_fold": 0.2841284325302442,
+    "beta": 12.083180032540497,
+    "dlnM_per_0p01_H_to_He4_global": -0.011839884315545815,
+    "dlnM_per_0p01_H_to_He3_global": -0.007911945416984405,
+    "dlnM_per_0p01_H_to_He3_fuel_only": 0.002202666066412541,
+    "onset_exchange_dM_total": -0.00010280297682613701,
+    "onset_dM_pair_He4_in_H_out": -9.491054898106549e-05,
+    "onset_dM_pair_He3_in_H_out": -7.89974921093874e-06,
+    "onset_dM_pair_Z_in_H_out_incl_surface": -0.0,
+    "onset_dM_channel_fuel": 7.070916433987548e-05,
+    "onset_dM_channel_mu": -0.00017386533576077283,
+    "onset_dM_channel_screen": 3.389718784186461e-07,
+    "onset_dM_channel_surface_Z": -0.0,
+    "onset_total_over_span_500K": -1.17489116372728,
+    "onset_total_over_span_10pct": -0.7036781301468201
+  },
+  "beta": 12.931306194783332,
+  "rejected": [
+    "Draft illustrative He3 export.001 exceeded available He3; corrected to.0001 with positivity validation.",
+    "Large trough-to-peak component partition produces negative counterfactual abundances and is excluded.",
+    "Fold mass shift is not a reheating-zone width or a time-dependent trajectory.",
+    "EffectiveZfloor3.61e-6 is fitted to the scouting midpoint, not an independently measured opacity floor.",
+    "Enriched mass trend error up to5.7percent prevents precision boundary inference."
+  ],
+  "next_measurement": "Early helium/entropy exchange across any separating layer in an evolved primordial near-boundary model; this tests whether the transferred solar drift exists.",
+  "input_sha256": {
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/chandrasekhar_fold_primary_v3/chandrasekhar_fold.py": "9b20c578a37c2361d7ffaf105bbd9f16e03d48418ca97a67ca90cef147b13c52",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/chandrasekhar_fold_primary_v3/results.json": "1fc0e9b136c92d5d6bdac542c027fcd9352facb899cc708b0c8f163e951cdd30",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/chandrasekhar_fold_primary_v3/profiles_extracted.json": "34c9af253c0dd8ff8d182ddf3677250104ab7cbbf0995bb1cb2f8a0af3087c90",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/chandrasekhar_fold_primary_refined_v1/results.json": "2324ea21804b4d2787d76f959ad7bcdba8355d67eea575a75201623b291ae721",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/chandrasekhar_fold_primary_v1/results.json": "a9b5442535477ab91d5c83607c720b8e976cb573fcf68945741d33940b0b036d",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/Chandrasekhar_reduction.txt": "d351e8339119a5aa43e9fe2d9cceadccbf384c6bbad46cc03630f1362c4795ea"
+  }
+}

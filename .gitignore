@@ -39,3 +39,7 @@ __pycache__/
 /docs/PROJECT_STATUS.md
 /docs/NEXT_SESSION_PROMPT.md
 /docs/research/
+
+# Local desktop metadata and session pointers.
+.DS_Store
+/RESUME_EMBER.txt

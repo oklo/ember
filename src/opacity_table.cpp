@@ -20,8 +20,8 @@ bool inside(double value, double lo, double hi) {
 }
 
 TabulatedOpacity::TabulatedOpacity(const std::filesystem::path& file, std::string label,
-                                 DensityAxis axis,AbundanceBasis basis)
-    : label_(std::move(label)), axis_(axis),basis_(basis) {
+                                 DensityAxis axis, AbundanceBasis basis)
+    : label_(std::move(label)), axis_(axis), basis_(basis) {
   std::ifstream in(file);
   if (!in) throw std::runtime_error("TabulatedOpacity: cannot open " + file.string());
   std::size_t nx = 0, nt = 0, nr = 0;

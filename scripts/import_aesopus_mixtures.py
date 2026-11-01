@@ -10,6 +10,13 @@ from import_aesopus import SOURCE_SHA256
 SUBSET_SHA256="0bfad00740be06cfa13b44d4375b9a893876d9196ed32e48fe85c928cd3e6255"
 
 
+def plane_filename(z):
+    """Keep established names, without rounding distinct low-Z planes together."""
+    milliz=round(z*1000)
+    tag=f'{milliz:03d}' if z==milliz/1000 else repr(z).replace('.', 'p')
+    return f'aesopus21_gs98_mixture_z{tag}.dat'
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('archive',type=Path);p.add_argument('output',type=Path)
     p.add_argument('--metals',type=float,nargs='+',default=[.01,.02,.03],
@@ -24,6 +31,8 @@ def main():
     xs=[0,.1,.2,.35,.5,.7,.8,.9,.95];zs=a.metals
     if (sorted(set(zs))!=zs or not all(math.isfinite(z) and 0<=z<1-max(xs) for z in zs)):
         raise ValueError('invalid source metal coordinates')
+    if len({plane_filename(z) for z in zs})!=len(zs):
+        raise ValueError('source metal coordinates have colliding output filenames')
     tt=list(range(2000,3701,10))+list(range(3720,4501,20));rr=list(range(-8000,6001,200))
     manifest=[f'EMBER_OPACITY_MIXTURE 1 {len(zs)} logR AESOPUS_2.1_GS98_gas'];planes=0
     with ZipFile(a.archive) as source:
@@ -60,7 +69,7 @@ def main():
                 if set(cells)!={(t,r) for t in tt for r in rr}:raise ValueError('missing source cells')
                 lines.append(f'{x:.17g} {z:.17g}')
                 lines.extend(' '.join(cells[t,r] for r in rr) for t in tt)
-            name=f'aesopus21_gs98_mixture_z{round(z*1000):03d}.dat'
+            name=plane_filename(z)
             (a.output/name).write_text('\n'.join(lines)+'\n');manifest.append(f'{z:.17g} "{name}"')
     (a.output/'aesopus21_gs98_mixture.dat').write_text('\n'.join(manifest)+'\n')
     print(f'Imported {planes} (X,Z) planes x 211 T x 71 density original AESOPUS cells')

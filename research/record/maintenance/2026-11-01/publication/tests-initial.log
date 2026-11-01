@@ -1,0 +1,263 @@
+Test project /private/tmp/ember-publish-20261101/build
+        Start   1: eos
+        Start   2: envelope_gibbs
+        Start   3: variable_metal_eos
+        Start   4: additive_volume_potential
+  1/107 Test   #1: eos ..................................   Passed    0.23 sec
+        Start   5: opacity
+  2/107 Test   #2: envelope_gibbs .......................   Passed    0.40 sec
+        Start   6: opacity_support
+  3/107 Test   #3: variable_metal_eos ...................   Passed    0.68 sec
+        Start   7: opacity_hydrogen
+  4/107 Test   #4: additive_volume_potential ............   Passed    0.72 sec
+        Start   8: opacity_radiative
+  5/107 Test   #5: opacity ..............................   Passed    0.65 sec
+        Start   9: opacity_conductive_interior
+  6/107 Test   #6: opacity_support ......................   Passed    0.65 sec
+        Start  10: opacity_cold_dense
+  7/107 Test   #7: opacity_hydrogen .....................   Passed    0.53 sec
+        Start  11: dense_opacity
+  8/107 Test   #8: opacity_radiative ....................***Failed    0.65 sec
+MixtureOpacity: invalid manifest
+
+        Start  12: nuclear
+  9/107 Test   #9: opacity_conductive_interior ..........   Passed    0.65 sec
+        Start  13: deuterium
+ 10/107 Test  #10: opacity_cold_dense ...................   Passed    0.66 sec
+        Start  14: deuterium_burning
+ 11/107 Test  #12: nuclear ..............................   Passed    0.66 sec
+        Start  15: pms_cn_burning
+ 12/107 Test  #13: deuterium ............................   Passed    0.66 sec
+        Start  16: pms_cn_evolution
+ 13/107 Test  #14: deuterium_burning ....................   Passed    0.65 sec
+        Start  17: pms_cn_face_evolution
+ 14/107 Test  #15: pms_cn_burning .......................   Passed    0.50 sec
+        Start  18: evolution_controller
+ 15/107 Test  #11: dense_opacity ........................   Passed    1.59 sec
+        Start  19: face_energy
+ 16/107 Test  #19: face_energy ..........................   Passed    0.19 sec
+        Start  20: dense_nuclear
+ 17/107 Test  #20: dense_nuclear ........................   Passed    0.18 sec
+        Start  21: nuclear_prescriptions
+ 18/107 Test  #21: nuclear_prescriptions ................   Passed    0.18 sec
+        Start  22: nuclear_cn
+ 19/107 Test  #22: nuclear_cn ...........................   Passed    0.18 sec
+        Start  23: nuclear_cn_network
+ 20/107 Test  #23: nuclear_cn_network ...................   Passed    0.18 sec
+        Start  24: cn_burning
+ 21/107 Test  #24: cn_burning ...........................   Passed    0.19 sec
+        Start  25: cn_thermal_source
+ 22/107 Test  #25: cn_thermal_source ....................   Passed    0.19 sec
+        Start  26: cn_transport
+ 23/107 Test  #26: cn_transport .........................   Passed    0.19 sec
+        Start  27: metal_cn_transport
+ 24/107 Test  #27: metal_cn_transport ...................   Passed    0.19 sec
+        Start  28: cn_diffusion
+ 25/107 Test  #28: cn_diffusion .........................   Passed    0.22 sec
+        Start  29: numeric_table_data
+ 26/107 Test  #29: numeric_table_data ...................   Passed    0.20 sec
+        Start  30: thermal_neutrinos
+ 27/107 Test  #30: thermal_neutrinos ....................   Passed    0.18 sec
+        Start  31: structure
+ 28/107 Test  #31: structure ............................   Passed    0.19 sec
+        Start  32: convection
+ 29/107 Test  #32: convection ...........................   Passed    0.18 sec
+        Start  33: fingering
+ 30/107 Test  #33: fingering ............................   Passed    0.23 sec
+        Start  34: fingering_face
+ 31/107 Test  #34: fingering_face .......................***Skipped   0.20 sec
+        Start  35: fingering_jacobian
+ 32/107 Test  #35: fingering_jacobian ...................***Skipped   0.18 sec
+        Start  36: viscosity
+ 33/107 Test  #36: viscosity ............................   Passed    0.17 sec
+        Start  37: ledoux
+ 34/107 Test  #37: ledoux ...............................   Passed    0.18 sec
+        Start  38: atmosphere
+ 35/107 Test  #17: pms_cn_face_evolution ................   Passed    4.10 sec
+        Start  39: henyey
+ 36/107 Test  #16: pms_cn_evolution .....................   Passed    4.28 sec
+        Start  40: relaxation
+ 37/107 Test  #39: henyey ...............................   Passed    0.31 sec
+        Start  41: stellar_equilibrium
+ 38/107 Test  #40: relaxation ...........................   Passed    0.48 sec
+        Start  42: cms19
+ 39/107 Test  #38: atmosphere ...........................   Passed    0.57 sec
+        Start  43: tops
+ 40/107 Test  #43: tops .................................   Passed    0.46 sec
+        Start  44: low_mass_equilibrium
+ 41/107 Test  #42: cms19 ................................   Passed    0.67 sec
+        Start  45: helmholtz
+ 42/107 Test  #45: helmholtz ............................   Passed    0.30 sec
+        Start  46: nongrey_equilibrium
+ 43/107 Test  #46: nongrey_equilibrium ..................   Passed    0.77 sec
+        Start  47: composition_physics
+ 44/107 Test  #47: composition_physics ..................   Passed    0.65 sec
+        Start  48: metal_eos
+ 45/107 Test  #48: metal_eos ............................   Passed    0.78 sec
+        Start  49: burning_mixing
+ 46/107 Test  #49: burning_mixing .......................   Passed    0.20 sec
+        Start  50: secular_mixing
+ 47/107 Test  #50: secular_mixing .......................   Passed    0.18 sec
+        Start  51: material_transport
+ 48/107 Test  #51: material_transport ...................   Passed    0.17 sec
+        Start  52: material_flux
+ 49/107 Test  #52: material_flux ........................   Passed    0.18 sec
+        Start  53: species_transport
+ 50/107 Test  #53: species_transport ....................   Passed    0.18 sec
+        Start  54: species_reconstruction
+ 51/107 Test  #54: species_reconstruction ...............   Passed    0.18 sec
+        Start  55: microscopic_structure
+ 52/107 Test  #55: microscopic_structure ................   Passed    0.17 sec
+        Start  56: microscopic_evolution
+ 53/107 Test  #18: evolution_controller .................   Passed    9.47 sec
+        Start  57: total_species_heat_evolution
+ 54/107 Test  #56: microscopic_evolution ................   Passed    0.98 sec
+        Start  58: envelope_transport
+ 55/107 Test  #44: low_mass_equilibrium .................   Passed    4.99 sec
+        Start  59: coupled_evolution
+ 56/107 Test  #58: envelope_transport ...................   Passed    0.19 sec
+        Start  60: extended_physics
+ 57/107 Test  #57: total_species_heat_evolution .........   Passed    0.83 sec
+        Start  61: convective_atmosphere
+ 58/107 Test  #41: stellar_equilibrium ..................   Passed    6.10 sec
+        Start  62: extended_evolution
+ 59/107 Test  #59: coupled_evolution ....................   Passed    1.26 sec
+        Start  63: atmosphere_grid
+ 60/107 Test  #60: extended_physics .....................   Passed    1.18 sec
+        Start  64: atmosphere_helium_blend
+ 61/107 Test  #63: atmosphere_grid ......................   Passed    0.20 sec
+        Start  65: atmosphere_metal_response
+ 62/107 Test  #64: atmosphere_helium_blend ..............   Passed    0.33 sec
+        Start  66: atmosphere_fixed_metal
+ 63/107 Test  #65: atmosphere_metal_response ............   Passed    0.32 sec
+        Start  67: atmosphere_overlap
+ 64/107 Test  #66: atmosphere_fixed_metal ...............   Passed    0.33 sec
+        Start  68: screened_envelope_evolution
+ 65/107 Test  #67: atmosphere_overlap ...................   Passed    0.32 sec
+        Start  69: finite_screened_envelope_evolution
+ 66/107 Test  #68: screened_envelope_evolution ..........***Failed    0.33 sec
+variable EOS: invalid manifest
+
+        Start  70: aesopus_import
+ 67/107 Test  #69: finite_screened_envelope_evolution ...***Failed    0.17 sec
+variable EOS: invalid manifest
+
+        Start  71: runtime_packaging
+ 68/107 Test  #71: runtime_packaging ....................   Passed    0.12 sec
+        Start  72: atmosphere_bulk_eos
+ 69/107 Test  #72: atmosphere_bulk_eos ..................   Passed    0.16 sec
+        Start  73: tlusty_bulk_eos
+ 70/107 Test  #70: aesopus_import .......................   Passed    0.42 sec
+        Start  74: atmosphere_column_solver
+ 71/107 Test  #61: convective_atmosphere ................   Passed    2.62 sec
+        Start  75: tops_sources
+ 72/107 Test  #75: tops_sources .........................   Passed    0.14 sec
+        Start  76: remnant_endpoints
+ 73/107 Test  #76: remnant_endpoints ....................   Passed    0.08 sec
+        Start  77: metal_eos_sources
+ 74/107 Test  #77: metal_eos_sources ....................   Passed    0.11 sec
+        Start  78: eos_density_merge
+ 75/107 Test  #73: tlusty_bulk_eos ......................   Passed    1.09 sec
+        Start  79: nongrey_import
+ 76/107 Test  #62: extended_evolution ...................   Passed    3.74 sec
+        Start  80: evolution_restart
+ 77/107 Test  #78: eos_density_merge ....................   Passed    1.77 sec
+        Start  81: lifetime_restart
+ 78/107 Test  #81: lifetime_restart .....................***Failed    0.11 sec
+Traceback (most recent call last):
+  File "/private/tmp/ember-publish-20261101/tests/test_lifetime_restart.py", line 293, in <module>
+    main()
+    ~~~~^^
+  File "/private/tmp/ember-publish-20261101/tests/test_lifetime_restart.py", line 41, in main
+    full.result()
+    ~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/_base.py", line 447, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/_base.py", line 396, in __get_result
+    raise self._exception
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/concurrent/futures/thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "/private/tmp/ember-publish-20261101/tests/test_lifetime_restart.py", line 35, in run
+    raise AssertionError(f"{name}: exit {result.returncode}\n{result.stdout}\n{result.stderr}")
+AssertionError: full: exit 1
+
+filesystem error: in canonical: No such file or directory ["/private/tmp/ember-publish-20261101/data/production/eos.dat"] [""]
+
+
+        Start  82: parallel_evaluate
+ 79/107 Test  #82: parallel_evaluate ....................   Passed    0.19 sec
+        Start  83: metal_microscopic_evolution
+ 80/107 Test  #79: nongrey_import .......................   Passed    2.14 sec
+        Start  84: metal_microscopic_face_evolution
+ 81/107 Test  #83: metal_microscopic_evolution ..........   Passed    4.31 sec
+        Start  85: nonlinear_metal_mixing
+ 82/107 Test  #84: metal_microscopic_face_evolution .....   Passed    3.97 sec
+        Start  86: finite_metal_evolution
+ 83/107 Test  #85: nonlinear_metal_mixing ...............   Passed    3.88 sec
+        Start  87: lagged_finite_metal_evolution
+ 84/107 Test  #86: finite_metal_evolution ...............   Passed    4.60 sec
+        Start  88: convective_envelope_transport
+ 85/107 Test  #88: convective_envelope_transport ........   Passed    0.19 sec
+        Start  89: stiff_mixing_flux
+ 86/107 Test  #89: stiff_mixing_flux ....................   Passed    0.18 sec
+        Start  90: atmosphere_trace_helium
+ 87/107 Test  #90: atmosphere_trace_helium ..............   Passed    0.17 sec
+        Start  91: atmosphere_trace_helium_irregular
+ 88/107 Test  #91: atmosphere_trace_helium_irregular ....   Passed    0.18 sec
+        Start  92: atmosphere_metal_interval
+ 89/107 Test  #92: atmosphere_metal_interval ............   Passed    0.21 sec
+        Start  93: atmosphere_hydrogen_envelope
+ 90/107 Test  #93: atmosphere_hydrogen_envelope .........   Passed    0.18 sec
+        Start  94: deuterium_material
+ 91/107 Test  #94: deuterium_material ...................   Passed    0.18 sec
+        Start  95: envelope_initialization
+ 92/107 Test  #95: envelope_initialization ..............   Passed    0.27 sec
+        Start  96: envelope_edges
+ 93/107 Test  #74: atmosphere_column_solver .............   Passed   13.70 sec
+        Start  97: ion_quantum
+ 94/107 Test  #97: ion_quantum ..........................   Passed    0.21 sec
+        Start  98: ion_phase
+ 95/107 Test  #98: ion_phase ............................   Passed    0.46 sec
+        Start  99: mixture_phase
+ 96/107 Test  #87: lagged_finite_metal_evolution ........   Passed    4.68 sec
+        Start 100: phase_equilibrium
+ 97/107 Test #100: phase_equilibrium ....................   Passed    0.19 sec
+        Start 101: phase_material
+ 98/107 Test #101: phase_material .......................   Passed    0.19 sec
+        Start 102: phase_mixture
+ 99/107 Test #102: phase_mixture ........................   Passed    0.18 sec
+        Start 103: cold_helium_base
+100/107 Test #103: cold_helium_base .....................   Passed    0.21 sec
+        Start 104: ion_classical
+101/107 Test #104: ion_classical ........................   Passed    0.18 sec
+        Start 105: phase_mobility
+102/107 Test #105: phase_mobility .......................   Passed    0.21 sec
+        Start 106: material_eos
+103/107 Test #106: material_eos .........................   Passed    0.18 sec
+        Start 107: opacity_native
+104/107 Test #107: opacity_native .......................   Passed    0.21 sec
+105/107 Test  #99: mixture_phase ........................   Passed    9.38 sec
+106/107 Test  #96: envelope_edges .......................   Passed   29.28 sec
+107/107 Test  #80: evolution_restart ....................   Passed   65.00 sec
+
+96% tests passed, 4 tests failed out of 107
+
+Label Time Summary:
+integration      =   0.61 sec*proc (3 tests)
+material-data    =   1.26 sec*proc (4 tests)
+
+Total Test time (real) =  81.64 sec
+
+The following tests did not run:
+	 34 - fingering_face (Skipped)
+	 35 - fingering_jacobian (Skipped)
+
+The following tests FAILED:
+	  8 - opacity_radiative (Failed)                        material-data
+	 68 - screened_envelope_evolution (Failed)              integration material-data
+	 69 - finite_screened_envelope_evolution (Failed)       integration material-data
+	 81 - lifetime_restart (Failed)                         integration material-data
+Errors while running CTest

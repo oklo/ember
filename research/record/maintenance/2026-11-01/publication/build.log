@@ -1,0 +1,430 @@
+[1/285] Building CXX object src/CMakeFiles/ember.dir/composition.cpp.o
+[2/285] Building CXX object src/CMakeFiles/ember.dir/fermi.cpp.o
+[3/285] Building CXX object src/CMakeFiles/ember.dir/interp.cpp.o
+[4/285] Building CXX object src/CMakeFiles/ember.dir/opacity_blend.cpp.o
+[5/285] Building CXX object src/CMakeFiles/ember.dir/eos_deuterium.cpp.o
+[6/285] Building CXX object src/CMakeFiles/ember.dir/opacity_table.cpp.o
+[7/285] Building CXX object src/CMakeFiles/ember.dir/eos_components.cpp.o
+/private/tmp/ember-publish-20261101/src/eos_components.cpp:13:63: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+   13 | EosTerm IonGas::eval(double T, double rho, const Composition& c) const {
+      |                                                               ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+1 warning generated.
+[8/285] Building CXX object src/CMakeFiles/ember.dir/opacity_mixture.cpp.o
+[9/285] Building CXX object src/CMakeFiles/ember.dir/eos_cms19.cpp.o
+[10/285] Building CXX object src/CMakeFiles/ember.dir/eos_composition.cpp.o
+[11/285] Building CXX object src/CMakeFiles/ember.dir/eos_mixture.cpp.o
+[12/285] Building CXX object src/CMakeFiles/ember.dir/eos_helmholtz.cpp.o
+[13/285] Building CXX object src/CMakeFiles/ember.dir/eos_smooth_mixture.cpp.o
+[14/285] Building CXX object src/CMakeFiles/ember.dir/eos_material.cpp.o
+[15/285] Building CXX object src/CMakeFiles/ember.dir/ion_quantum.cpp.o
+[16/285] Building CXX object src/CMakeFiles/ember.dir/eos_variable_metal.cpp.o
+[17/285] Building CXX object src/CMakeFiles/ember.dir/ion_phase.cpp.o
+[18/285] Building CXX object src/CMakeFiles/ember.dir/ion_classical.cpp.o
+[19/285] Building CXX object src/CMakeFiles/ember.dir/cold_helium_base.cpp.o
+[20/285] Building CXX object src/CMakeFiles/ember.dir/phase_equilibrium.cpp.o
+[21/285] Building CXX object src/CMakeFiles/ember.dir/eos_binary.cpp.o
+[22/285] Building CXX object src/CMakeFiles/ember.dir/nuclear_pp.cpp.o
+/private/tmp/ember-publish-20261101/src/nuclear_pp.cpp:201:33: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  201 | void set_screening_reuse(double h) {
+      |                                 ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:14:25: note: previous declaration is here
+   14 | inline constexpr double h        = 6.62607015e-27;   // erg s (exact)
+      |                         ^
+/private/tmp/ember-publish-20261101/src/nuclear_pp.cpp:316:62: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  316 |     const double a=std::pow(r.z1,5./3),b=std::pow(r.z2,5./3),c=std::pow(r.z1+r.z2,5./3);
+      |                                                              ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+/private/tmp/ember-publish-20261101/src/nuclear_pp.cpp:331:81: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  331 | static NuclearRateResponse combined_rate(double T,double rho,const Composition& c,
+      |                                                                                 ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+/private/tmp/ember-publish-20261101/src/nuclear_pp.cpp:383:77: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  383 | NuclearRateResponse pp_rate_response(double T,double rho,const Composition& c,PPReaction which,PPRates rates,PPScreening screening) {
+      |                                                                             ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+/private/tmp/ember-publish-20261101/src/nuclear_pp.cpp:386:77: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  386 | NuclearRateResponse cn_rate_response(double T,double rho,const Composition& c,CNReaction which,PPRates rates,PPScreening screening) {
+      |                                                                             ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+/private/tmp/ember-publish-20261101/src/nuclear_pp.cpp:482:68: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  482 | ScreeningState cn_screening(double T,double rho,const Composition& c,PPScreening model) {
+      |                                                                    ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+/private/tmp/ember-publish-20261101/src/nuclear_pp.cpp:485:68: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  485 | ScreeningState cn_screening(double T,double rho,const Composition& c,CNReaction which,PPScreening model) {
+      |                                                                    ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+/private/tmp/ember-publish-20261101/src/nuclear_pp.cpp:498:86: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  498 | NuclearResponse CNCycle::composition_response(double T,double rho,const Composition& c) const {
+      |                                                                                      ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+/private/tmp/ember-publish-20261101/src/nuclear_pp.cpp:528:67: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  528 | NuclearState CNCycle::eval(double T,double rho,const Composition& c) const {
+      |                                                                   ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+/private/tmp/ember-publish-20261101/src/nuclear_pp.cpp:531:84: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  531 | NuclearResponse PPCNO::composition_response(double T,double rho,const Composition& c) const {
+      |                                                                                    ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+/private/tmp/ember-publish-20261101/src/nuclear_pp.cpp:547:65: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  547 | NuclearState PPCNO::eval(double T,double rho,const Composition& c) const {
+      |                                                                 ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+11 warnings generated.
+[23/285] Building CXX object src/CMakeFiles/ember.dir/eos_additive_volume.cpp.o
+[24/285] Building CXX object src/CMakeFiles/ember.dir/dense_nuclear.cpp.o
+[25/285] Building CXX object src/CMakeFiles/ember.dir/deuterium.cpp.o
+/private/tmp/ember-publish-20261101/src/deuterium.cpp:101:90: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  101 | NuclearResponse PPDeuterium::composition_response(double T,double rho,const Composition& c) const {
+      |                                                                                          ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+/private/tmp/ember-publish-20261101/src/deuterium.cpp:130:71: warning: declaration shadows a variable in namespace 'ember::constants' [-Wshadow]
+  130 | NuclearState PPDeuterium::eval(double T,double rho,const Composition& c) const {
+      |                                                                       ^
+/private/tmp/ember-publish-20261101/include/ember/constants.hpp:10:25: note: previous declaration is here
+   10 | inline constexpr double c        = 2.99792458e10;    // cm/s (exact)
+      |                         ^
+2 warnings generated.
+[26/285] Building CXX object src/CMakeFiles/ember.dir/nuclear_cn.cpp.o
+[27/285] Building CXX object src/CMakeFiles/ember.dir/deuterium_burning.cpp.o
+[28/285] Building CXX object src/CMakeFiles/ember.dir/cn_burning.cpp.o
+[29/285] Building CXX object src/CMakeFiles/ember.dir/cn_transport.cpp.o
+[30/285] Building CXX object src/CMakeFiles/ember.dir/losses.cpp.o
+[31/285] Building CXX object src/CMakeFiles/ember.dir/convection.cpp.o
+[32/285] Building CXX object src/CMakeFiles/ember.dir/fingering.cpp.o
+[33/285] Building CXX object src/CMakeFiles/ember.dir/viscosity.cpp.o
+[34/285] Building CXX object src/CMakeFiles/ember.dir/cn_diffusion.cpp.o
+[35/285] Building CXX object src/CMakeFiles/ember.dir/metal_cn_transport.cpp.o
+[36/285] Building CXX object src/CMakeFiles/ember.dir/fingering_transport.cpp.o
+[37/285] Building CXX object src/CMakeFiles/ember.dir/conduction_table.cpp.o
+[38/285] Building CXX object src/CMakeFiles/ember.dir/atmosphere_grey.cpp.o
+[39/285] Building CXX object src/CMakeFiles/ember.dir/envelope_atmosphere.cpp.o
+[40/285] Building CXX object src/CMakeFiles/ember.dir/atmosphere_composition.cpp.o
+[41/285] Building CXX object src/CMakeFiles/ember.dir/envelope_gibbs.cpp.o
+[42/285] Building CXX object src/CMakeFiles/ember.dir/atmosphere_table.cpp.o
+[43/285] Building CXX object src/CMakeFiles/ember.dir/atmosphere_grid.cpp.o
+[44/285] Building CXX object src/CMakeFiles/ember.dir/atmosphere_metal_response.cpp.o
+[45/285] Building CXX object src/CMakeFiles/ember.dir/boundary.cpp.o
+[46/285] Building CXX object src/CMakeFiles/ember.dir/atmosphere_trace_helium.cpp.o
+[47/285] Building CXX object src/CMakeFiles/ember.dir/henyey.cpp.o
+[48/285] Building CXX object src/CMakeFiles/ember.dir/relaxation.cpp.o
+[49/285] Building CXX object src/CMakeFiles/ember.dir/controller.cpp.o
+[50/285] Building CXX object src/CMakeFiles/ember.dir/material_thermodynamics.cpp.o
+[51/285] Building CXX object src/CMakeFiles/ember.dir/evolution.cpp.o
+[52/285] Building CXX object src/CMakeFiles/ember.dir/mixing.cpp.o
+[53/285] Building CXX object src/CMakeFiles/ember.dir/material_transport.cpp.o
+/private/tmp/ember-publish-20261101/src/material_transport.cpp:21:58: warning: misleading indentation; statement is not part of the previous 'for' [-Wmisleading-indentation]
+   21 |     for(std::size_t k=0;k<n;++k)c[i][j]+=a[i][k]*b[k][j];return c;
+      |                                                          ^
+/private/tmp/ember-publish-20261101/src/material_transport.cpp:20:37: note: previous statement is here
+   20 |   M c{};for(std::size_t i=0;i<n;++i)for(std::size_t j=0;j<n;++j)
+      |                                     ^
+/private/tmp/ember-publish-20261101/src/material_transport.cpp:21:58: warning: misleading indentation; statement is not part of the previous 'for' [-Wmisleading-indentation]
+   21 |     for(std::size_t k=0;k<n;++k)c[i][j]+=a[i][k]*b[k][j];return c;
+      |                                                          ^
+/private/tmp/ember-publish-20261101/src/material_transport.cpp:20:9: note: previous statement is here
+   20 |   M c{};for(std::size_t i=0;i<n;++i)for(std::size_t j=0;j<n;++j)
+      |         ^
+/private/tmp/ember-publish-20261101/src/material_transport.cpp:28:43: warning: misleading indentation; statement is not part of the previous 'for' [-Wmisleading-indentation]
+   28 |     a[i][j]=a[j][i]=.5*a[i][j]+.5*a[j][i];return a;
+      |                                           ^
+/private/tmp/ember-publish-20261101/src/material_transport.cpp:27:31: note: previous statement is here
+   27 |   for(std::size_t i=0;i<n;++i)for(std::size_t j=0;j<i;++j)
+      |                               ^
+/private/tmp/ember-publish-20261101/src/material_transport.cpp:28:43: warning: misleading indentation; statement is not part of the previous 'for' [-Wmisleading-indentation]
+   28 |     a[i][j]=a[j][i]=.5*a[i][j]+.5*a[j][i];return a;
+      |                                           ^
+/private/tmp/ember-publish-20261101/src/material_transport.cpp:27:3: note: previous statement is here
+   27 |   for(std::size_t i=0;i<n;++i)for(std::size_t j=0;j<i;++j)
+      |   ^
+/private/tmp/ember-publish-20261101/src/material_transport.cpp:58:4: warning: misleading indentation; statement is not part of the previous 'for' [-Wmisleading-indentation]
+   58 |   }return a;
+      |    ^
+/private/tmp/ember-publish-20261101/src/material_transport.cpp:56:9: note: previous statement is here
+   56 |   M a{};for(std::size_t j=0;j<n;++j)for(std::size_t i=j;i<n;++i) {
+      |         ^
+5 warnings generated.
+[54/285] Building CXX object src/CMakeFiles/ember.dir/material_flux.cpp.o
+[55/285] Building CXX object src/CMakeFiles/ember.dir/microscopic_transport.cpp.o
+[56/285] Building CXX object src/CMakeFiles/ember.dir/metal_microscopic_transport.cpp.o
+[57/285] Building CXX object src/CMakeFiles/ember.dir/convective_envelope_transport.cpp.o
+[58/285] Building CXX object src/CMakeFiles/ember.dir/species_transport.cpp.o
+[59/285] Building CXX object src/CMakeFiles/ember.dir/structure.cpp.o
+[60/285] Building CXX object src/CMakeFiles/ember.dir/screened_microscopic_transport.cpp.o
+[61/285] Building CXX object apps/CMakeFiles/ember-info.dir/info.cpp.o
+[62/285] Building CXX object src/CMakeFiles/ember.dir/screened_metal_microscopic_transport.cpp.o
+[63/285] Building CXX object src/CMakeFiles/ember.dir/eos_ideal.cpp.o
+[64/285] Building CXX object apps/CMakeFiles/ember-pack-eos.dir/pack_eos.cpp.o
+[65/285] Building CXX object apps/CMakeFiles/ember-polytrope.dir/polytrope.cpp.o
+[66/285] Building CXX object src/CMakeFiles/ember.dir/collision_transport.cpp.o
+[67/285] Building CXX object apps/CMakeFiles/ember-equilibrium.dir/equilibrium.cpp.o
+[68/285] Linking CXX static library src/libember.a
+[69/285] Building CXX object tests/CMakeFiles/test_eos.dir/test_eos.cpp.o
+[70/285] Building CXX object tests/CMakeFiles/test_envelope_gibbs.dir/test_envelope_gibbs.cpp.o
+[71/285] Building CXX object tests/CMakeFiles/test_additive_volume_potential.dir/test_additive_volume_potential.cpp.o
+[72/285] Building CXX object apps/CMakeFiles/ember-evolve.dir/evolve.cpp.o
+[73/285] Building CXX object tests/CMakeFiles/test_variable_metal_eos.dir/test_variable_metal_eos.cpp.o
+[74/285] Building CXX object tests/CMakeFiles/opacity_family_probe.dir/__/scripts/opacity_family_probe.cpp.o
+[75/285] Building CXX object tests/CMakeFiles/test_opacity.dir/test_opacity.cpp.o
+[76/285] Building CXX object tests/CMakeFiles/test_opacity_hydrogen.dir/test_opacity_hydrogen.cpp.o
+[77/285] Building CXX object tests/CMakeFiles/test_opacity_support.dir/test_opacity_support.cpp.o
+[78/285] Building CXX object tests/CMakeFiles/test_opacity_cold_dense.dir/test_opacity_cold_dense.cpp.o
+[79/285] Building CXX object tests/CMakeFiles/test_opacity_conductive_interior.dir/test_opacity_conductive_interior.cpp.o
+[80/285] Building CXX object tests/CMakeFiles/test_opacity_radiative.dir/test_opacity_radiative.cpp.o
+[81/285] Building CXX object tests/CMakeFiles/test_nuclear.dir/test_nuclear.cpp.o
+[82/285] Building CXX object apps/CMakeFiles/ember-evolve.dir/lifetime_driver.cpp.o
+[83/285] Building CXX object tests/CMakeFiles/test_dense_opacity.dir/test_dense_opacity.cpp.o
+[84/285] Building CXX object tests/CMakeFiles/test_deuterium.dir/test_deuterium.cpp.o
+[85/285] Building CXX object tests/CMakeFiles/test_deuterium_burning.dir/test_deuterium_burning.cpp.o
+/private/tmp/ember-publish-20261101/tests/test_deuterium_burning.cpp:147:16: warning: declaration shadows a local variable [-Wshadow]
+  147 |     const auto uniform=burn_and_mix(varied,varied,network,{{0,4}},dt,1e-14);
+      |                ^
+/private/tmp/ember-publish-20261101/tests/test_deuterium_burning.cpp:58:8: note: previous declaration is here
+   58 |   auto uniform=cold;uniform.m.clear();uniform.y.clear();uniform.comp.clear();
+      |        ^
+1 warning generated.
+[86/285] Building CXX object tests/CMakeFiles/test_pms_cn_burning.dir/test_pms_cn_burning.cpp.o
+[87/285] Building CXX object tests/CMakeFiles/test_pms_cn_evolution.dir/test_pms_cn_evolution.cpp.o
+[88/285] Building CXX object tests/CMakeFiles/test_dense_nuclear.dir/test_dense_nuclear.cpp.o
+[89/285] Building CXX object tests/CMakeFiles/test_face_energy.dir/test_face_energy.cpp.o
+[90/285] Building CXX object tests/CMakeFiles/test_nuclear_cn.dir/test_nuclear_cn.cpp.o
+[91/285] Building CXX object tests/CMakeFiles/test_nuclear_cn_network.dir/test_nuclear_cn_network.cpp.o
+[92/285] Building CXX object tests/CMakeFiles/test_nuclear_prescriptions.dir/test_nuclear_prescriptions.cpp.o
+[93/285] Building CXX object tests/CMakeFiles/pms_deuterium_control.dir/__/scripts/pms_deuterium_control.cpp.o
+[94/285] Building CXX object tests/CMakeFiles/test_cn_burning.dir/test_cn_burning.cpp.o
+/private/tmp/ember-publish-20261101/tests/test_cn_burning.cpp:16:39: warning: implicit conversion from 'std::size_t' (aka 'unsigned long') to 'double' may lose precision [-Wimplicit-int-float-conversion]
+   16 |       const double X=late?.0008:.1+.1*i;
+      |                                      ~^
+/private/tmp/ember-publish-20261101/tests/test_cn_burning.cpp:19:91: warning: implicit conversion from 'std::size_t' (aka 'unsigned long') to 'double' may lose precision [-Wimplicit-int-float-conversion]
+   19 |       model.y.push_back({std::log(1.+i),std::log(late?8500.:300.),std::log(late?1.3e7:5e6+i*1e6),1.});
+      |                                                                                           ^~
+/private/tmp/ember-publish-20261101/tests/test_cn_burning.cpp:19:38: warning: implicit conversion from 'std::size_t' (aka 'unsigned long') to 'double' may lose precision [-Wimplicit-int-float-conversion]
+   19 |       model.y.push_back({std::log(1.+i),std::log(late?8500.:300.),std::log(late?1.3e7:5e6+i*1e6),1.});
+      |                                     ~^
+/private/tmp/ember-publish-20261101/tests/test_cn_burning.cpp:20:57: warning: implicit conversion from 'std::size_t' (aka 'unsigned long') to 'double' may lose precision [-Wimplicit-int-float-conversion]
+   20 |       const auto y=initial_gs98_cn(c);const double f=.2*i;
+      |                                                        ~^
+4 warnings generated.
+[95/285] Building CXX object tests/CMakeFiles/test_cn_transport.dir/test_cn_transport.cpp.o
+[96/285] Building CXX object tests/CMakeFiles/test_cn_diffusion.dir/test_cn_diffusion.cpp.o
+[97/285] Building CXX object tests/CMakeFiles/test_cn_thermal_source.dir/test_cn_thermal_source.cpp.o
+[98/285] Building CXX object tests/CMakeFiles/test_numeric_table_data.dir/test_numeric_table_data.cpp.o
+[99/285] Building CXX object tests/CMakeFiles/test_thermal_neutrinos.dir/test_thermal_neutrinos.cpp.o
+[100/285] Building CXX object tests/CMakeFiles/test_metal_cn_transport.dir/test_metal_cn_transport.cpp.o
+[101/285] Building CXX object tests/CMakeFiles/cn_thermal_probe.dir/__/scripts/cn_thermal_probe.cpp.o
+[102/285] Building CXX object tests/CMakeFiles/test_convection.dir/test_convection.cpp.o
+[103/285] Building CXX object tests/CMakeFiles/test_structure.dir/test_structure.cpp.o
+[104/285] Building CXX object tests/CMakeFiles/test_fingering.dir/test_fingering.cpp.o
+[105/285] Building CXX object tests/CMakeFiles/test_fingering_face.dir/test_fingering_face.cpp.o
+[106/285] Building CXX object tests/CMakeFiles/test_viscosity.dir/test_viscosity.cpp.o
+[107/285] Building CXX object tests/CMakeFiles/test_ledoux.dir/test_ledoux.cpp.o
+[108/285] Building CXX object tests/CMakeFiles/test_atmosphere.dir/test_atmosphere.cpp.o
+[109/285] Building CXX object tests/CMakeFiles/test_fingering_jacobian.dir/test_fingering_jacobian.cpp.o
+[110/285] Building CXX object tests/CMakeFiles/test_henyey.dir/test_henyey.cpp.o
+[111/285] Building CXX object tests/CMakeFiles/test_relaxation.dir/test_relaxation.cpp.o
+[112/285] Building CXX object tests/CMakeFiles/test_tops.dir/test_tops.cpp.o
+[113/285] Building CXX object tests/CMakeFiles/test_cms19.dir/test_cms19.cpp.o
+[114/285] Building CXX object tests/CMakeFiles/test_stellar_equilibrium.dir/test_stellar_equilibrium.cpp.o
+[115/285] Building CXX object tests/CMakeFiles/test_nongrey_equilibrium.dir/test_nongrey_equilibrium.cpp.o
+[116/285] Building CXX object tests/CMakeFiles/test_low_mass_equilibrium.dir/test_low_mass_equilibrium.cpp.o
+[117/285] Building CXX object tests/CMakeFiles/test_helmholtz.dir/test_helmholtz.cpp.o
+[118/285] Building CXX object tests/CMakeFiles/test_composition_physics.dir/test_composition_physics.cpp.o
+[119/285] Building CXX object tests/CMakeFiles/test_secular_mixing.dir/test_secular_mixing.cpp.o
+[120/285] Building CXX object tests/CMakeFiles/test_burning_mixing.dir/test_burning_mixing.cpp.o
+[121/285] Building CXX object tests/CMakeFiles/test_metal_eos.dir/test_metal_eos.cpp.o
+[122/285] Building CXX object tests/CMakeFiles/test_material_transport.dir/test_material_transport.cpp.o
+[123/285] Building CXX object tests/CMakeFiles/test_material_flux.dir/test_material_flux.cpp.o
+[124/285] Building CXX object tests/CMakeFiles/material_flux_probe.dir/__/scripts/material_flux_probe.cpp.o
+[125/285] Building CXX object tests/CMakeFiles/material_transport_probe.dir/__/scripts/material_transport_probe.cpp.o
+[126/285] Building CXX object tests/CMakeFiles/test_species_transport.dir/test_species_transport.cpp.o
+[127/285] Building CXX object tests/CMakeFiles/collision_transport_probe.dir/__/scripts/collision_transport_probe.cpp.o
+[128/285] Building CXX object tests/CMakeFiles/test_species_reconstruction.dir/test_species_reconstruction.cpp.o
+[129/285] Building CXX object tests/CMakeFiles/species_transport_probe.dir/__/scripts/species_transport_probe.cpp.o
+[130/285] Building CXX object tests/CMakeFiles/test_collision_reuse.dir/test_collision_reuse.cpp.o
+/private/tmp/ember-publish-20261101/tests/test_collision_reuse.cpp:54:20: warning: declaration shadows a local variable [-Wshadow]
+   54 |       const double length=std::sqrt(std::exp(.5*(ty.front()+ty.back()))*hbar*hbar/(8*me*kb*temperature));
+      |                    ^
+/private/tmp/ember-publish-20261101/tests/test_collision_reuse.cpp:21:55: note: previous declaration is here
+   21 |     constexpr double T=5e6,rho=100,X=.4,Y3=.004,Z=.02,length=1e-9;
+      |                                                       ^
+1 warning generated.
+[131/285] Building CXX object tests/CMakeFiles/native_heat_probe.dir/__/scripts/native_heat_probe.cpp.o
+[132/285] Building CXX object tests/CMakeFiles/screened_microscopic_probe.dir/__/scripts/screened_microscopic_probe.cpp.o
+[133/285] Building CXX object tests/CMakeFiles/test_microscopic_structure.dir/test_microscopic_structure.cpp.o
+[134/285] Building CXX object tests/CMakeFiles/physical_species_probe.dir/__/scripts/physical_species_probe.cpp.o
+[135/285] Building CXX object tests/CMakeFiles/test_microscopic_evolution.dir/test_microscopic_evolution.cpp.o
+[136/285] Building CXX object tests/CMakeFiles/test_extended_physics.dir/test_extended_physics.cpp.o
+[137/285] Building CXX object tests/CMakeFiles/test_envelope_transport.dir/test_envelope_transport.cpp.o
+[138/285] Building CXX object tests/CMakeFiles/test_coupled_evolution.dir/test_coupled_evolution.cpp.o
+[139/285] Building CXX object tests/CMakeFiles/test_convective_atmosphere.dir/test_convective_atmosphere.cpp.o
+[140/285] Building CXX object tests/CMakeFiles/test_atmosphere_helium_blend.dir/test_atmosphere_helium_blend.cpp.o
+[141/285] Building CXX object tests/CMakeFiles/test_atmosphere_grid.dir/test_atmosphere_grid.cpp.o
+[142/285] Building CXX object tests/CMakeFiles/test_extended_evolution.dir/test_extended_evolution.cpp.o
+[143/285] Building CXX object tests/CMakeFiles/test_atmosphere_metal_response.dir/test_atmosphere_metal_response.cpp.o
+[144/285] Building CXX object tests/CMakeFiles/test_atmosphere_overlap.dir/test_atmosphere_overlap.cpp.o
+[145/285] Building CXX object tests/CMakeFiles/test_atmosphere_fixed_metal.dir/test_atmosphere_fixed_metal.cpp.o
+[146/285] Building CXX object tests/CMakeFiles/physical_heat_probe.dir/__/scripts/physical_heat_probe.cpp.o
+[147/285] Building CXX object tests/CMakeFiles/total_species_heat_probe.dir/__/scripts/total_species_heat_probe.cpp.o
+[148/285] Building CXX object tests/CMakeFiles/full_star_diffusion_probe.dir/__/scripts/full_star_diffusion_probe.cpp.o
+[149/285] Building CXX object tests/CMakeFiles/physical_core_step_probe.dir/__/scripts/physical_core_step_probe.cpp.o
+[150/285] Building CXX object tests/CMakeFiles/test_screened_envelope_evolution.dir/test_screened_envelope_evolution.cpp.o
+[151/285] Building CXX object tests/CMakeFiles/test_parallel_evaluate.dir/test_parallel_evaluate.cpp.o
+[152/285] Building CXX object tests/CMakeFiles/metal_microscopic_probe.dir/__/scripts/metal_microscopic_probe.cpp.o
+[153/285] Building CXX object tests/CMakeFiles/test_convective_envelope_transport.dir/test_convective_envelope_transport.cpp.o
+[154/285] Building CXX object tests/CMakeFiles/test_stiff_mixing_flux.dir/test_stiff_mixing_flux.cpp.o
+[155/285] Building CXX object tests/CMakeFiles/test_atmosphere_trace_helium.dir/test_atmosphere_trace_helium.cpp.o
+[156/285] Building CXX object tests/CMakeFiles/test_metal_microscopic_evolution.dir/test_metal_microscopic_evolution.cpp.o
+[157/285] Building CXX object tests/CMakeFiles/test_atmosphere_trace_helium_irregular.dir/test_atmosphere_trace_helium_irregular.cpp.o
+[158/285] Building CXX object tests/CMakeFiles/test_atmosphere_metal_interval.dir/test_atmosphere_metal_interval.cpp.o
+[159/285] Building CXX object tests/CMakeFiles/metal_stellar_control.dir/__/scripts/metal_stellar_control.cpp.o
+[160/285] Building CXX object tests/CMakeFiles/test_deuterium_material.dir/test_deuterium_material.cpp.o
+[161/285] Building CXX object tests/CMakeFiles/pms_deuterium_table_control.dir/__/scripts/pms_deuterium_table_control.cpp.o
+[162/285] Building CXX object tests/CMakeFiles/test_envelope_edges.dir/test_envelope_edges.cpp.o
+[163/285] Building CXX object tests/CMakeFiles/test_atmosphere_hydrogen_envelope.dir/test_atmosphere_hydrogen_envelope.cpp.o
+[164/285] Building CXX object tests/CMakeFiles/test_envelope_initialization.dir/test_envelope_initialization.cpp.o
+[165/285] Building CXX object tests/CMakeFiles/test_ion_quantum.dir/test_ion_quantum.cpp.o
+[166/285] Building CXX object tests/CMakeFiles/test_ion_phase.dir/test_ion_phase.cpp.o
+[167/285] Building CXX object tests/CMakeFiles/test_mixture_phase.dir/test_mixture_phase.cpp.o
+[168/285] Building CXX object tests/CMakeFiles/test_phase_equilibrium.dir/test_phase_equilibrium.cpp.o
+[169/285] Building CXX object tests/CMakeFiles/test_phase_mixture.dir/test_phase_mixture.cpp.o
+[170/285] Building CXX object tests/CMakeFiles/test_ion_classical.dir/test_ion_classical.cpp.o
+[171/285] Building CXX object tests/CMakeFiles/test_phase_material.dir/test_phase_material.cpp.o
+[172/285] Building CXX object tests/CMakeFiles/test_cold_helium_base.dir/test_cold_helium_base.cpp.o
+[173/285] Building CXX object tests/CMakeFiles/test_phase_mobility.dir/test_phase_mobility.cpp.o
+[174/285] Linking CXX executable apps/ember-info
+[175/285] Linking CXX executable apps/ember-pack-eos
+[176/285] Linking CXX executable apps/ember-polytrope
+[177/285] Linking CXX executable apps/ember-equilibrium
+[178/285] Linking CXX executable apps/ember-evolve
+[179/285] Linking CXX executable tests/test_eos
+[180/285] Linking CXX executable tests/test_envelope_gibbs
+[181/285] Linking CXX executable tests/test_variable_metal_eos
+[182/285] Linking CXX executable tests/test_opacity
+[183/285] Linking CXX executable tests/test_additive_volume_potential
+[184/285] Linking CXX executable tests/opacity_family_probe
+[185/285] Building CXX object tests/CMakeFiles/test_material_eos.dir/test_material_eos.cpp.o
+[186/285] Linking CXX executable tests/test_opacity_support
+[187/285] Linking CXX executable tests/test_opacity_hydrogen
+[188/285] Linking CXX executable tests/test_opacity_conductive_interior
+[189/285] Linking CXX executable tests/test_opacity_radiative
+[190/285] Linking CXX executable tests/test_nuclear
+[191/285] Linking CXX executable tests/test_opacity_cold_dense
+[192/285] Linking CXX executable tests/test_dense_opacity
+[193/285] Linking CXX executable tests/test_deuterium
+[194/285] Linking CXX executable tests/test_deuterium_burning
+[195/285] Linking CXX executable tests/test_pms_cn_burning
+[196/285] Building CXX object tests/CMakeFiles/test_opacity_native.dir/test_opacity_native.cpp.o
+[197/285] Linking CXX executable tests/test_pms_cn_evolution
+[198/285] Linking CXX executable tests/test_face_energy
+[199/285] Linking CXX executable tests/pms_deuterium_control
+[200/285] Linking CXX executable tests/test_dense_nuclear
+[201/285] Linking CXX executable tests/test_nuclear_cn_network
+[202/285] Linking CXX executable tests/test_nuclear_prescriptions
+[203/285] Linking CXX executable tests/test_nuclear_cn
+[204/285] Linking CXX executable tests/test_cn_burning
+[205/285] Linking CXX executable tests/test_cn_thermal_source
+[206/285] Linking CXX executable tests/test_cn_diffusion
+[207/285] Linking CXX executable tests/test_cn_transport
+[208/285] Linking CXX executable tests/test_numeric_table_data
+[209/285] Linking CXX executable tests/test_metal_cn_transport
+[210/285] Linking CXX executable tests/cn_thermal_probe
+[211/285] Linking CXX executable tests/test_thermal_neutrinos
+[212/285] Linking CXX executable tests/test_convection
+[213/285] Linking CXX executable tests/test_fingering
+[214/285] Linking CXX executable tests/test_structure
+[215/285] Linking CXX executable tests/test_fingering_face
+[216/285] Linking CXX executable tests/test_ledoux
+[217/285] Linking CXX executable tests/test_fingering_jacobian
+[218/285] Linking CXX executable tests/test_viscosity
+[219/285] Linking CXX executable tests/test_atmosphere
+[220/285] Linking CXX executable tests/test_henyey
+[221/285] Linking CXX executable tests/test_relaxation
+[222/285] Linking CXX executable tests/test_stellar_equilibrium
+[223/285] Linking CXX executable tests/test_cms19
+[224/285] Linking CXX executable tests/test_tops
+[225/285] Linking CXX executable tests/test_low_mass_equilibrium
+[226/285] Linking CXX executable tests/test_helmholtz
+[227/285] Linking CXX executable tests/test_nongrey_equilibrium
+[228/285] Linking CXX executable tests/test_composition_physics
+[229/285] Linking CXX executable tests/test_metal_eos
+[230/285] Linking CXX executable tests/test_secular_mixing
+[231/285] Linking CXX executable tests/test_burning_mixing
+[232/285] Linking CXX executable tests/test_material_transport
+[233/285] Linking CXX executable tests/test_material_flux
+[234/285] Linking CXX executable tests/material_transport_probe
+[235/285] Linking CXX executable tests/material_flux_probe
+[236/285] Linking CXX executable tests/test_species_transport
+[237/285] Linking CXX executable tests/collision_transport_probe
+[238/285] Linking CXX executable tests/species_transport_probe
+[239/285] Linking CXX executable tests/test_species_reconstruction
+[240/285] Linking CXX executable tests/native_heat_probe
+[241/285] Linking CXX executable tests/test_collision_reuse
+[242/285] Linking CXX executable tests/physical_species_probe
+[243/285] Linking CXX executable tests/screened_microscopic_probe
+[244/285] Linking CXX executable tests/test_microscopic_evolution
+[245/285] Linking CXX executable tests/test_microscopic_structure
+[246/285] Linking CXX executable tests/test_envelope_transport
+[247/285] Linking CXX executable tests/test_coupled_evolution
+[248/285] Linking CXX executable tests/test_extended_physics
+[249/285] Linking CXX executable tests/test_convective_atmosphere
+[250/285] Linking CXX executable tests/test_atmosphere_grid
+[251/285] Linking CXX executable tests/test_extended_evolution
+[252/285] Linking CXX executable tests/test_atmosphere_helium_blend
+[253/285] Linking CXX executable tests/test_atmosphere_metal_response
+[254/285] Linking CXX executable tests/test_atmosphere_fixed_metal
+[255/285] Linking CXX executable tests/test_atmosphere_overlap
+[256/285] Linking CXX executable tests/test_screened_envelope_evolution
+[257/285] Linking CXX executable tests/physical_heat_probe
+[258/285] Linking CXX executable tests/total_species_heat_probe
+[259/285] Linking CXX executable tests/full_star_diffusion_probe
+[260/285] Linking CXX executable tests/physical_core_step_probe
+[261/285] Linking CXX executable tests/test_parallel_evaluate
+[262/285] Linking CXX executable tests/metal_microscopic_probe
+[263/285] Linking CXX executable tests/test_metal_microscopic_evolution
+[264/285] Linking CXX executable tests/test_convective_envelope_transport
+[265/285] Linking CXX executable tests/test_stiff_mixing_flux
+[266/285] Linking CXX executable tests/test_atmosphere_trace_helium
+[267/285] Linking CXX executable tests/metal_stellar_control
+[268/285] Linking CXX executable tests/test_atmosphere_trace_helium_irregular
+[269/285] Linking CXX executable tests/test_atmosphere_metal_interval
+[270/285] Linking CXX executable tests/test_atmosphere_hydrogen_envelope
+[271/285] Linking CXX executable tests/pms_deuterium_table_control
+[272/285] Linking CXX executable tests/test_deuterium_material
+[273/285] Linking CXX executable tests/test_envelope_initialization
+[274/285] Linking CXX executable tests/test_ion_phase
+[275/285] Linking CXX executable tests/test_envelope_edges
+[276/285] Linking CXX executable tests/test_ion_quantum
+[277/285] Linking CXX executable tests/test_mixture_phase
+[278/285] Linking CXX executable tests/test_phase_equilibrium
+[279/285] Linking CXX executable tests/test_phase_material
+[280/285] Linking CXX executable tests/test_phase_mixture
+[281/285] Linking CXX executable tests/test_phase_mobility
+[282/285] Linking CXX executable tests/test_cold_helium_base
+[283/285] Linking CXX executable tests/test_ion_classical
+[284/285] Linking CXX executable tests/test_material_eos
+[285/285] Linking CXX executable tests/test_opacity_native

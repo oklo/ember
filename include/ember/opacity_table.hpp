@@ -10,8 +10,8 @@ namespace ember {
 // Monotone Hermite in the density coordinate and log T; linear in X.
 // A single X plane requires that exact composition. No extrapolation.
 // Version 2 supplies each isotherm's valid density prefix explicitly.
-// The constructor declares the mass convention; existing source tables use
-// atomic masses, while newly computed gas tables can use integer masses.
+// Source tables use atomic masses by default; computed gas tables may instead
+// declare baryon-mass abundances. Queries must use the declared convention.
 class TabulatedOpacity : public Opacity {
 public:
   enum class DensityAxis { logR, logRho };

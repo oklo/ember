@@ -1,17 +1,20 @@
 # Ember
 
 Ember is a one-dimensional stellar evolution code for very low-mass stars,
-written in C++23. One solver follows Hayashi contraction, hydrogen burning
-and helium-white-dwarf cooling.
+written in C++23. Its numerical lineage is **Henyey FORTRAN IV → Bodenheimer
+FORTRAN 77 → Astra/Opus Ember C++**. The [lineage notes](docs/LINEAGE.md)
+distinguish the inherited methods from the local historical reconstructions.
 
-- Henyey relaxation with analytic derivatives and coupled burning and diffusion.
-- Composition-dependent EOS and opacity, non-gray atmospheres, electron conduction
-  and mixing-length convection with Ledoux stability.
-- Deuterium, pp and CN burning, nuclear screening and plasma-neutrino losses.
-- H/He/metal settling, composition-dependent energy accounting, adaptive time
-  steps and energy and isotope conservation checks.
-- Optional quantum-ion thermodynamics, crystallization and latent heat.
-- Double precision and CPU parallelism optimized for Apple silicon.
+The main research products are exploratory tracks across the low-mass spectrum,
+especially at 0.1 solar masses, and studies of the hydrogen-burning boundary and
+late reheating versus metallicity. Start with the [research record](research/record/README.md)
+for retained data, qualifications and reproduction commands. Scientific campaigns
+are paused as of November 1, 2026.
+
+The solver couples Henyey relaxation to burning, mixing and diffusion, using
+composition-dependent EOS, opacity and atmosphere inputs. It includes deuterium,
+pp and CN burning, electron conduction, settling and experimental cold-remnant
+physics. The [code guide](docs/DEVELOPMENT.md) identifies the main routines.
 
 The code is under development. Low-mass boundary studies use external clear
 and cloudy atmosphere tables. Full CNO, element separation during freezing

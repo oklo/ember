@@ -1,0 +1,68 @@
+[1/168] Building CXX object tests/CMakeFiles/test_opacity_native.dir/test_opacity_native.cpp.o
+FAILED: [code=1] tests/CMakeFiles/test_opacity_native.dir/test_opacity_native.cpp.o 
+/usr/bin/c++  -I/Users/greglaughlin/Projects/ember/include -O3 -DNDEBUG -std=c++23 -O3 -ffp-contract=fast -fno-math-errno -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wno-sign-conversion -mcpu=apple-m4 -MD -MT tests/CMakeFiles/test_opacity_native.dir/test_opacity_native.cpp.o -MF tests/CMakeFiles/test_opacity_native.dir/test_opacity_native.cpp.o.d -o tests/CMakeFiles/test_opacity_native.dir/test_opacity_native.cpp.o -c /Users/greglaughlin/Projects/ember/tests/test_opacity_native.cpp
+In file included from /Users/greglaughlin/Projects/ember/tests/test_opacity_native.cpp:1:
+In file included from /Users/greglaughlin/Projects/ember/include/ember/opacity_radiative.hpp:7:
+/Users/greglaughlin/Projects/ember/include/ember/opacity_cold_dense.hpp:16:28: error: no matching constructor for initialization of 'TabulatedOpacity'
+   16 |       :original_(original),dense_(table,"cold dense gas",TabulatedOpacity::DensityAxis::logRho,
+      |                            ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   17 |           AbundanceBasis::baryon_mass),scale_(scale),atomic_(atomic) {
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/greglaughlin/Projects/ember/include/ember/opacity_table.hpp:16:3: note: candidate constructor not viable: requires at most 3 arguments, but 4 were provided
+   16 |   TabulatedOpacity(const std::filesystem::path& file, std::string label,
+      |   ^                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   17 |                    DensityAxis axis = DensityAxis::logR);
+      |                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/greglaughlin/Projects/ember/include/ember/opacity_table.hpp:13:7: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 4 were provided
+   13 | class TabulatedOpacity : public Opacity {
+      |       ^~~~~~~~~~~~~~~~
+/Users/greglaughlin/Projects/ember/include/ember/opacity_table.hpp:13:7: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 4 were provided
+   13 | class TabulatedOpacity : public Opacity {
+      |       ^~~~~~~~~~~~~~~~
+1 error generated.
+[2/168] Building CXX object tests/CMakeFiles/test_opacity_radiative.dir/test_opacity_radiative.cpp.o
+FAILED: [code=1] tests/CMakeFiles/test_opacity_radiative.dir/test_opacity_radiative.cpp.o 
+/usr/bin/c++  -I/Users/greglaughlin/Projects/ember/include -O3 -DNDEBUG -std=c++23 -O3 -ffp-contract=fast -fno-math-errno -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wno-sign-conversion -mcpu=apple-m4 -MD -MT tests/CMakeFiles/test_opacity_radiative.dir/test_opacity_radiative.cpp.o -MF tests/CMakeFiles/test_opacity_radiative.dir/test_opacity_radiative.cpp.o.d -o tests/CMakeFiles/test_opacity_radiative.dir/test_opacity_radiative.cpp.o -c /Users/greglaughlin/Projects/ember/tests/test_opacity_radiative.cpp
+In file included from /Users/greglaughlin/Projects/ember/tests/test_opacity_radiative.cpp:1:
+In file included from /Users/greglaughlin/Projects/ember/include/ember/opacity_radiative.hpp:7:
+/Users/greglaughlin/Projects/ember/include/ember/opacity_cold_dense.hpp:16:28: error: no matching constructor for initialization of 'TabulatedOpacity'
+   16 |       :original_(original),dense_(table,"cold dense gas",TabulatedOpacity::DensityAxis::logRho,
+      |                            ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   17 |           AbundanceBasis::baryon_mass),scale_(scale),atomic_(atomic) {
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/greglaughlin/Projects/ember/include/ember/opacity_table.hpp:16:3: note: candidate constructor not viable: requires at most 3 arguments, but 4 were provided
+   16 |   TabulatedOpacity(const std::filesystem::path& file, std::string label,
+      |   ^                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   17 |                    DensityAxis axis = DensityAxis::logR);
+      |                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/greglaughlin/Projects/ember/include/ember/opacity_table.hpp:13:7: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 4 were provided
+   13 | class TabulatedOpacity : public Opacity {
+      |       ^~~~~~~~~~~~~~~~
+/Users/greglaughlin/Projects/ember/include/ember/opacity_table.hpp:13:7: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 4 were provided
+   13 | class TabulatedOpacity : public Opacity {
+      |       ^~~~~~~~~~~~~~~~
+1 error generated.
+[3/168] Building CXX object tests/CMakeFiles/test_opacity_support.dir/test_opacity_support.cpp.o
+[4/168] Building CXX object apps/CMakeFiles/ember-evolve.dir/lifetime_driver.cpp.o
+FAILED: [code=1] apps/CMakeFiles/ember-evolve.dir/lifetime_driver.cpp.o 
+/usr/bin/c++ -DEMBER_DATA_DIR=\"/Users/greglaughlin/Projects/ember/data\" -I/Users/greglaughlin/Projects/ember/include -O3 -DNDEBUG -std=c++23 -O3 -ffp-contract=fast -fno-math-errno -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wno-sign-conversion -mcpu=apple-m4 -MD -MT apps/CMakeFiles/ember-evolve.dir/lifetime_driver.cpp.o -MF apps/CMakeFiles/ember-evolve.dir/lifetime_driver.cpp.o.d -o apps/CMakeFiles/ember-evolve.dir/lifetime_driver.cpp.o -c /Users/greglaughlin/Projects/ember/apps/lifetime_driver.cpp
+In file included from /Users/greglaughlin/Projects/ember/apps/lifetime_driver.cpp:21:
+In file included from /Users/greglaughlin/Projects/ember/include/ember/opacity_radiative.hpp:7:
+/Users/greglaughlin/Projects/ember/include/ember/opacity_cold_dense.hpp:16:28: error: no matching constructor for initialization of 'TabulatedOpacity'
+   16 |       :original_(original),dense_(table,"cold dense gas",TabulatedOpacity::DensityAxis::logRho,
+      |                            ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   17 |           AbundanceBasis::baryon_mass),scale_(scale),atomic_(atomic) {
+      |           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/greglaughlin/Projects/ember/include/ember/opacity_table.hpp:16:3: note: candidate constructor not viable: requires at most 3 arguments, but 4 were provided
+   16 |   TabulatedOpacity(const std::filesystem::path& file, std::string label,
+      |   ^                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   17 |                    DensityAxis axis = DensityAxis::logR);
+      |                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/greglaughlin/Projects/ember/include/ember/opacity_table.hpp:13:7: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 4 were provided
+   13 | class TabulatedOpacity : public Opacity {
+      |       ^~~~~~~~~~~~~~~~
+/Users/greglaughlin/Projects/ember/include/ember/opacity_table.hpp:13:7: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 4 were provided
+   13 | class TabulatedOpacity : public Opacity {
+      |       ^~~~~~~~~~~~~~~~
+1 error generated.
+ninja: build stopped: subcommand failed.

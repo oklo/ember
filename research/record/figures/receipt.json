@@ -1,0 +1,18 @@
+{
+  "figures": [
+    {
+      "path": "/Users/greglaughlin/Projects/ember/research/record/figures/exploratory-hr.png",
+      "sha256": "2a1ff8fc1d29819592f5f714e271c99a553ed4d03a0ac5847af76d40f590b38e"
+    },
+    {
+      "path": "/Users/greglaughlin/Projects/ember/research/record/figures/boundary-temperature.png",
+      "sha256": "5652df24c6f9447c25a9905af19fc2df49a089f2ca2fdb32758ff4181e08372d"
+    },
+    {
+      "path": "/Users/greglaughlin/Projects/ember/research/record/figures/low-metallicity.png",
+      "sha256": "200c7fae7a4357f1eb8d007f6df7737c9e9a3abfe2a87758cd2d9653367ede5d"
+    }
+  ],
+  "new_stellar_runs": 0,
+  "new_source_calculations": 0
+}

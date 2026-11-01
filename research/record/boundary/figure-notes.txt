@@ -1,0 +1,11 @@
+EMBER H–R DIAGRAM — 31 OCTOBER 2026
+
+The overview contains every retained age of the selected important tracks. The enlarged panels focus on the late H–R region, using the extent of states after1Gyr to set each axis. Temperature decreases to the right. Both axes are logarithmic. Curves connect saved accepted states directly; no stellar evolution, source grids, fitted tracks or extrapolated ages were generated.
+
+Colour in the overview denotes birth metallicity. In the detail panels, separate masses or mesh choices have individual colours. Arrows point forward in time. Thick segments mark the largest ordered late temperature increase of at least1percent, whether or not an internal stable layer exists. Thus fully convective PopIII and trace rewarming is included. This geometric highlighting is broader than the previous10percent post-stable-layer reheater classification. Thin segments show the rest of the evolution. Filled circles are last saved states, not inferred deaths or resolved peaks. Open diamonds in detail panels mark the first saved stable internal layer.
+
+The dotted late part of the513-point Z=.005 cooling model uses the explicitly reviewed bounded hydrogen-opacity extrapolation. The original unchanged-source run stopped at131.428Gyr; the scenario continued to150Gyr. Older solar and enriched tracks retain their previously reviewed source changes and source-limited endpoints. Different metallicities use different helium, EOS, atmosphere and numerical assumptions. This is a comparison of existing calculations, not proof of a converged metallicity dependence.
+
+The selected set includes low-Z cooling and fully convective rewarming controls, the Z=.001 transition pair, coarse/fine Z=.005 contrasts, all five recent fine halfsolar reheaters and both outward controls, solar cooling/strong-reheater/upper controls, and representative enriched reheaters through8solar with cooling and upper controls at3solar and5solar. The CSV gives exact masses, horizons, sources and qualifications. Closely overlapping paths are real: similar radii produce similar H–R loci. Initial saved models are relaxed stellar starting states; no missing protostellar Hayashi phase is drawn. Approximate rapid-start scouts and user-interrupted unreviewed tails are omitted.
+
+All science runs remain paused. These figures only re-express existing saved results.

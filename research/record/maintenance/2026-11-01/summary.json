@@ -1,0 +1,45 @@
+{
+  "measurement": "lstat allocated bytes; each hardlinked inode counted once; root .git excluded; APFS clone and snapshot extents not measured independently",
+  "before_allocated_bytes": 537476706304,
+  "after_scan_allocated_bytes": 401334198272,
+  "temporary_index_removed_after_scan_bytes": 348090368,
+  "adjusted_after_allocated_bytes": 400986107904,
+  "measured_reduction_bytes": 136490598400,
+  "before_files": 1314746,
+  "after_scan_files": 1208902,
+  "consolidation": [
+    {
+      "kind": "input-consolidation",
+      "groups": 1257,
+      "paths": 4740,
+      "estimated_reclaimed_bytes": 95932125184
+    },
+    {
+      "kind": "archive-consolidation",
+      "groups": 197,
+      "paths": 960,
+      "estimated_reclaimed_bytes": 6892957696
+    }
+  ],
+  "profile_archives_removed": 615,
+  "profile_bytes_reclaimed": 32401829245,
+  "generated_cache_directories_removed": 422,
+  "generated_cache_files": 108073,
+  "generated_cache_logical_bytes": 988330041,
+  "tests_passed": 83,
+  "tests_failed": 0,
+  "provenance_references_verified": 2020,
+  "source_snapshot_files": 792,
+  "science_status": "paused",
+  "verification": {
+    "all_tests_pass": true,
+    "test_count": 83,
+    "shared_path_checks": 5700,
+    "provenance_members_verified": 2020,
+    "compact_manifest_files_verified": 22,
+    "documentation_links_resolve": true,
+    "git_diff_check_passed": true,
+    "PNG_renders_visually_checked": 3,
+    "scientific_control_enabled": false
+  }
+}

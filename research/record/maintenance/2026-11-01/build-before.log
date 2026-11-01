@@ -1,0 +1,17 @@
+[1/176] Building CXX object apps/CMakeFiles/ember-info.dir/info.cpp.o
+[2/176] Building CXX object apps/CMakeFiles/ember-pack-eos.dir/pack_eos.cpp.o
+[3/176] Building CXX object apps/CMakeFiles/ember-polytrope.dir/polytrope.cpp.o
+[4/176] Building CXX object apps/CMakeFiles/ember-equilibrium.dir/equilibrium.cpp.o
+[5/176] Building CXX object tests/CMakeFiles/test_eos.dir/test_eos.cpp.o
+[6/176] Building CXX object apps/CMakeFiles/ember-evolve.dir/lifetime_driver.cpp.o
+FAILED: [code=1] apps/CMakeFiles/ember-evolve.dir/lifetime_driver.cpp.o 
+/usr/bin/c++ -DEMBER_DATA_DIR=\"/Users/greglaughlin/Projects/ember/data\" -I/Users/greglaughlin/Projects/ember/include -O3 -DNDEBUG -std=c++23 -O3 -ffp-contract=fast -fno-math-errno -Wall -Wextra -Wpedantic -Wshadow -Wconversion -Wno-sign-conversion -mcpu=apple-m4 -MD -MT apps/CMakeFiles/ember-evolve.dir/lifetime_driver.cpp.o -MF apps/CMakeFiles/ember-evolve.dir/lifetime_driver.cpp.o.d -o apps/CMakeFiles/ember-evolve.dir/lifetime_driver.cpp.o -c /Users/greglaughlin/Projects/ember/apps/lifetime_driver.cpp
+In file included from /Users/greglaughlin/Projects/ember/apps/lifetime_driver.cpp:21:
+/Users/greglaughlin/Projects/ember/include/ember/opacity_radiative.hpp:7:10: fatal error: 'ember/opacity_cold_dense.hpp' file not found
+    7 | #include "ember/opacity_cold_dense.hpp"
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+[7/176] Building CXX object tests/CMakeFiles/test_variable_metal_eos.dir/test_variable_metal_eos.cpp.o
+[8/176] Building CXX object tests/CMakeFiles/opacity_family_probe.dir/__/scripts/opacity_family_probe.cpp.o
+[9/176] Building CXX object tests/CMakeFiles/test_opacity.dir/test_opacity.cpp.o
+ninja: build stopped: subcommand failed.

@@ -1,0 +1,2098 @@
+{
+  "backtraceGraph" : 
+  {
+    "commands" : 
+    [
+      "add_test"
+    ],
+    "files" : 
+    [
+      "/Users/greglaughlin/Projects/ember/tests/CMakeLists.txt"
+    ],
+    "nodes" : 
+    [
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 3,
+        "parent" : 0
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 6,
+        "parent" : 2
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 13,
+        "parent" : 4
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 16,
+        "parent" : 6
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 19,
+        "parent" : 8
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 23,
+        "parent" : 10
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 25,
+        "parent" : 12
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 30,
+        "parent" : 14
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 33,
+        "parent" : 16
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 37,
+        "parent" : 18
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 40,
+        "parent" : 20
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 43,
+        "parent" : 22
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 46,
+        "parent" : 24
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 47,
+        "parent" : 26
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 48,
+        "parent" : 28
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 51,
+        "parent" : 30
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 57,
+        "parent" : 32
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 60,
+        "parent" : 34
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 63,
+        "parent" : 36
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 66,
+        "parent" : 38
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 69,
+        "parent" : 40
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 72,
+        "parent" : 42
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 76,
+        "parent" : 44
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 78,
+        "parent" : 46
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 81,
+        "parent" : 48
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 87,
+        "parent" : 50
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 91,
+        "parent" : 52
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 94,
+        "parent" : 54
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 98,
+        "parent" : 56
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 101,
+        "parent" : 58
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 107,
+        "parent" : 60
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 110,
+        "parent" : 62
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 113,
+        "parent" : 64
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 117,
+        "parent" : 66
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 121,
+        "parent" : 68
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 125,
+        "parent" : 70
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 129,
+        "parent" : 72
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 134,
+        "parent" : 74
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 138,
+        "parent" : 76
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 143,
+        "parent" : 78
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 148,
+        "parent" : 80
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 151,
+        "parent" : 82
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 154,
+        "parent" : 84
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 157,
+        "parent" : 86
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 163,
+        "parent" : 88
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 168,
+        "parent" : 90
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 171,
+        "parent" : 92
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 180,
+        "parent" : 94
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 190,
+        "parent" : 96
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 194,
+        "parent" : 98
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 195,
+        "parent" : 100
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 198,
+        "parent" : 102
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 202,
+        "parent" : 104
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 207,
+        "parent" : 106
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 211,
+        "parent" : 108
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 215,
+        "parent" : 110
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 218,
+        "parent" : 112
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 221,
+        "parent" : 114
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 224,
+        "parent" : 116
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 227,
+        "parent" : 118
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 230,
+        "parent" : 120
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 233,
+        "parent" : 122
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 235,
+        "parent" : 124
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 241,
+        "parent" : 126
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 242,
+        "parent" : 128
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 243,
+        "parent" : 130
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 244,
+        "parent" : 132
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 245,
+        "parent" : 134
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 246,
+        "parent" : 136
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 247,
+        "parent" : 138
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 248,
+        "parent" : 140
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 250,
+        "parent" : 142
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 268,
+        "parent" : 144
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 274,
+        "parent" : 146
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 275,
+        "parent" : 148
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 276,
+        "parent" : 150
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 277,
+        "parent" : 152
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 280,
+        "parent" : 154
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 283,
+        "parent" : 156
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 289,
+        "parent" : 158
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 292,
+        "parent" : 160
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 296,
+        "parent" : 162
+      },
+      {
+        "file" : 0
+      },
+      {
+        "command" : 0,
+        "file" : 0,
+        "line" : 300,
+        "parent" : 164
+      }
+    ]
+  },
+  "kind" : "ctestInfo",
+  "tests" : 
+  [
+    {
+      "backtrace" : 1,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_eos"
+      ],
+      "name" : "eos",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 3,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_variable_metal_eos"
+      ],
+      "name" : "variable_metal_eos",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 5,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_opacity"
+      ],
+      "name" : "opacity",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 7,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_opacity_support"
+      ],
+      "name" : "opacity_support",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 9,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_opacity_hydrogen"
+      ],
+      "name" : "opacity_hydrogen",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 11,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_opacity_native"
+      ],
+      "name" : "opacity_native",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 13,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_opacity_radiative",
+        "/Users/greglaughlin/Projects/ember/data"
+      ],
+      "name" : "opacity_radiative",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "material-data"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 60.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 15,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_dense_opacity"
+      ],
+      "name" : "dense_opacity",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 17,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_nuclear"
+      ],
+      "name" : "nuclear",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 19,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_deuterium"
+      ],
+      "name" : "deuterium",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 21,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_deuterium_burning"
+      ],
+      "name" : "deuterium_burning",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 23,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_pms_cn_burning"
+      ],
+      "name" : "pms_cn_burning",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 25,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_pms_cn_evolution"
+      ],
+      "name" : "pms_cn_evolution",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 27,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_pms_cn_evolution",
+        "faces"
+      ],
+      "name" : "pms_cn_face_evolution",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 29,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_pms_cn_evolution",
+        "faces",
+        "controller"
+      ],
+      "name" : "evolution_controller",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 31,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_face_energy"
+      ],
+      "name" : "face_energy",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 33,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_nuclear_prescriptions"
+      ],
+      "name" : "nuclear_prescriptions",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 35,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_nuclear_cn"
+      ],
+      "name" : "nuclear_cn",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 37,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_nuclear_cn_network"
+      ],
+      "name" : "nuclear_cn_network",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 39,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_cn_burning"
+      ],
+      "name" : "cn_burning",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 41,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_cn_thermal_source"
+      ],
+      "name" : "cn_thermal_source",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 43,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_cn_transport"
+      ],
+      "name" : "cn_transport",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 45,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_metal_cn_transport"
+      ],
+      "name" : "metal_cn_transport",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 47,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_cn_diffusion"
+      ],
+      "name" : "cn_diffusion",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 49,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_numeric_table_data"
+      ],
+      "name" : "numeric_table_data",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 51,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_thermal_neutrinos"
+      ],
+      "name" : "thermal_neutrinos",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 53,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_structure"
+      ],
+      "name" : "structure",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 55,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_convection"
+      ],
+      "name" : "convection",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 57,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_fingering"
+      ],
+      "name" : "fingering",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 59,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_ledoux"
+      ],
+      "name" : "ledoux",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 61,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_atmosphere"
+      ],
+      "name" : "atmosphere",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 63,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_henyey"
+      ],
+      "name" : "henyey",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 65,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_relaxation"
+      ],
+      "name" : "relaxation",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 67,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_stellar_equilibrium"
+      ],
+      "name" : "stellar_equilibrium",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 69,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_cms19"
+      ],
+      "name" : "cms19",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 71,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_tops"
+      ],
+      "name" : "tops",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 73,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_low_mass_equilibrium"
+      ],
+      "name" : "low_mass_equilibrium",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 75,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_helmholtz"
+      ],
+      "name" : "helmholtz",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 77,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_nongrey_equilibrium"
+      ],
+      "name" : "nongrey_equilibrium",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 79,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_composition_physics"
+      ],
+      "name" : "composition_physics",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 81,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_metal_eos"
+      ],
+      "name" : "metal_eos",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 83,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_burning_mixing"
+      ],
+      "name" : "burning_mixing",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 85,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_secular_mixing"
+      ],
+      "name" : "secular_mixing",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 87,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_material_transport"
+      ],
+      "name" : "material_transport",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 89,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_material_flux"
+      ],
+      "name" : "material_flux",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 91,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_species_transport"
+      ],
+      "name" : "species_transport",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 93,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_species_reconstruction"
+      ],
+      "name" : "species_reconstruction",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 95,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_collision_reuse",
+        "/Users/greglaughlin/Projects/ember/data/production/tables/860e8313c3feac9a452073fe753fc9140d9a68cb068d8c294736b931e66007ed.dat"
+      ],
+      "name" : "collision_reuse",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 97,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_microscopic_structure"
+      ],
+      "name" : "microscopic_structure",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 99,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_microscopic_evolution"
+      ],
+      "name" : "microscopic_evolution",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 101,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_microscopic_evolution",
+        "total"
+      ],
+      "name" : "total_species_heat_evolution",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 103,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_envelope_transport"
+      ],
+      "name" : "envelope_transport",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 105,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_coupled_evolution"
+      ],
+      "name" : "coupled_evolution",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 107,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_extended_physics"
+      ],
+      "name" : "extended_physics",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 109,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_convective_atmosphere"
+      ],
+      "name" : "convective_atmosphere",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 111,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_extended_evolution"
+      ],
+      "name" : "extended_evolution",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 113,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_atmosphere_grid"
+      ],
+      "name" : "atmosphere_grid",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 115,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_atmosphere_helium_blend"
+      ],
+      "name" : "atmosphere_helium_blend",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 117,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_atmosphere_metal_response"
+      ],
+      "name" : "atmosphere_metal_response",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 119,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_atmosphere_fixed_metal"
+      ],
+      "name" : "atmosphere_fixed_metal",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 121,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_atmosphere_overlap"
+      ],
+      "name" : "atmosphere_overlap",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 123,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_screened_envelope_evolution",
+        "/Users/greglaughlin/Projects/ember/data",
+        "/Users/greglaughlin/Projects/ember/tests/data/early_radiative_core.dat"
+      ],
+      "name" : "screened_envelope_evolution",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "integration",
+            "material-data"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 120.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 125,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_screened_envelope_evolution",
+        "/Users/greglaughlin/Projects/ember/data",
+        "/Users/greglaughlin/Projects/ember/tests/data/early_radiative_core.dat",
+        "finite"
+      ],
+      "name" : "finite_screened_envelope_evolution",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "integration",
+            "material-data"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 120.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 127,
+      "command" : 
+      [
+        "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "/Users/greglaughlin/Projects/ember/tests/test_solve_column.py"
+      ],
+      "name" : "atmosphere_column_solver",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 129,
+      "command" : 
+      [
+        "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "-B",
+        "/Users/greglaughlin/Projects/ember/tests/test_tops_sources.py"
+      ],
+      "name" : "tops_sources",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 131,
+      "command" : 
+      [
+        "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "-B",
+        "/Users/greglaughlin/Projects/ember/tests/test_aesopus_import.py"
+      ],
+      "name" : "aesopus_import",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 133,
+      "command" : 
+      [
+        "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "-B",
+        "/Users/greglaughlin/Projects/ember/tests/test_remnant_endpoints.py"
+      ],
+      "name" : "remnant_endpoints",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 135,
+      "command" : 
+      [
+        "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "-B",
+        "/Users/greglaughlin/Projects/ember/tests/test_metal_eos_sources.py"
+      ],
+      "name" : "metal_eos_sources",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 137,
+      "command" : 
+      [
+        "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "-B",
+        "/Users/greglaughlin/Projects/ember/tests/test_eos_density_merge.py"
+      ],
+      "name" : "eos_density_merge",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 139,
+      "command" : 
+      [
+        "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "/Users/greglaughlin/Projects/ember/tests/test_nongrey_import.py"
+      ],
+      "name" : "nongrey_import",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 141,
+      "command" : 
+      [
+        "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "/Users/greglaughlin/Projects/ember/tests/test_evolution_restart.py",
+        "/Users/greglaughlin/Projects/ember/build/apps/ember-evolve",
+        "/Users/greglaughlin/Projects/ember/data"
+      ],
+      "name" : "evolution_restart",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 143,
+      "command" : 
+      [
+        "/opt/homebrew/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+        "/Users/greglaughlin/Projects/ember/tests/test_lifetime_restart.py",
+        "/Users/greglaughlin/Projects/ember/build/apps/ember-evolve",
+        "/Users/greglaughlin/Projects/ember/data/production/configuration.txt"
+      ],
+      "name" : "lifetime_restart",
+      "properties" : 
+      [
+        {
+          "name" : "LABELS",
+          "value" : 
+          [
+            "integration",
+            "material-data"
+          ]
+        },
+        {
+          "name" : "TIMEOUT",
+          "value" : 240.0
+        },
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 145,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_parallel_evaluate"
+      ],
+      "name" : "parallel_evaluate",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 147,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_metal_microscopic_evolution"
+      ],
+      "name" : "metal_microscopic_evolution",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 149,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_metal_microscopic_evolution",
+        "faces"
+      ],
+      "name" : "metal_microscopic_face_evolution",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 151,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_metal_microscopic_evolution",
+        "faces",
+        "finite"
+      ],
+      "name" : "finite_metal_evolution",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 153,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_metal_microscopic_evolution",
+        "faces",
+        "lagged"
+      ],
+      "name" : "lagged_finite_metal_evolution",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 155,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_convective_envelope_transport"
+      ],
+      "name" : "convective_envelope_transport",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 157,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_stiff_mixing_flux"
+      ],
+      "name" : "stiff_mixing_flux",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 159,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_atmosphere_trace_helium"
+      ],
+      "name" : "atmosphere_trace_helium",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 161,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_atmosphere_metal_interval"
+      ],
+      "name" : "atmosphere_metal_interval",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 163,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_atmosphere_hydrogen_envelope"
+      ],
+      "name" : "atmosphere_hydrogen_envelope",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    },
+    {
+      "backtrace" : 165,
+      "command" : 
+      [
+        "/Users/greglaughlin/Projects/ember/build/tests/test_deuterium_material"
+      ],
+      "name" : "deuterium_material",
+      "properties" : 
+      [
+        {
+          "name" : "WORKING_DIRECTORY",
+          "value" : "/Users/greglaughlin/Projects/ember/build/tests"
+        }
+      ]
+    }
+  ],
+  "version" : 
+  {
+    "major" : 1,
+    "minor" : 0
+  }
+}

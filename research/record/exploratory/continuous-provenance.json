@@ -1,0 +1,277 @@
+{
+  "created_utc": "2026-09-27T19:40:36.122868+00:00",
+  "sources": [
+    {
+      "path": "out/continuous-lifetime-sept27-v2/initial-check/history.jsonl",
+      "source_bytes_sha256": "7b76ef32d9a2f95355d39f23d8e444cba7716f0d9db1068ade41c2961bbeb8af",
+      "retained_through": 5,
+      "CPU_seconds": 5.05078
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v2/evolution/history.jsonl",
+      "source_bytes_sha256": "6a235271636e3aaa90d92076011287a608457f571600e9bd4c3de9295246bb69",
+      "retained_through": 3472,
+      "CPU_seconds": 5195.921808
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v3/evolution/history.jsonl",
+      "source_bytes_sha256": "dce18bf3ffd13faa493d82c6e4e72122240dd2ecaca03a03a7669a9bd193bfa6",
+      "retained_through": 5509,
+      "CPU_seconds": 8315.960805
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v4/evolution/history.jsonl",
+      "source_bytes_sha256": "d3a7c6082f97af28ae6d85c6faf924655ba0dcf7944ce9a9e2f8303d990462e1",
+      "retained_through": 6234,
+      "CPU_seconds": 6907.096001
+    },
+    {
+      "path": "out/radiative-onset-retry-sept27-v1/evolution/history.jsonl",
+      "source_bytes_sha256": "53daf833b7d48b89ffff3a44a46ccb7645c007ba81ae0c80b3c510d5f16c1b7e",
+      "retained_through": 6314,
+      "CPU_seconds": 353.413761
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v5/evolution/history.jsonl",
+      "source_bytes_sha256": "a4bd8b1580c4731522f5767d1eab66c190faf14b502fc16dc5433cda8c8a9e08",
+      "retained_through": 6496,
+      "CPU_seconds": 1959.617766
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v6/evolution/history.jsonl",
+      "source_bytes_sha256": "f263b537b19e5a55716db0e165f2230ac5b01e752e56a9a3df43adcd1035a451",
+      "retained_through": 7093,
+      "CPU_seconds": 4050.61408
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v7/evolution/history.jsonl",
+      "source_bytes_sha256": "0c90633df69d2985450545d6e9b8cc41425b61d66def411fbc974e153ce5a74a",
+      "retained_through": 7295,
+      "CPU_seconds": 1595.077229
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v8/evolution/history.jsonl",
+      "source_bytes_sha256": "b88d1f22de7e0dfdd03e0420c234ded517c29033d772c4d5b4da82fb82ad80f6",
+      "retained_through": 7521,
+      "CPU_seconds": 958.357107
+    },
+    {
+      "path": "out/species-correction-floor-sept27-v1/pilot/history.jsonl",
+      "source_bytes_sha256": "82f67446121ed006cd505d3ebb99388d125cb1d735c8870cc3f924a1776c7e23",
+      "retained_through": 7538,
+      "CPU_seconds": 146.703336
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v9/evolution/history.jsonl",
+      "source_bytes_sha256": "c5e1b602985b637060ea8899bab10cd32d8f1e8fd4f70dbc4fe55538156845f9",
+      "retained_through": 7854,
+      "CPU_seconds": 4504.43099
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v10/evolution/history.jsonl",
+      "retained_through": 8055,
+      "source_bytes_sha256": "c3c724d86469a24104cf6f86c8d2210f1c56c514671da52e196a35c3e012fa80",
+      "CPU_seconds": 4655.413865
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v11/evolution/history.jsonl",
+      "retained_through": 8178,
+      "source_bytes_sha256": "dde1242c0cbaa0e00550e97b099fdf2f8982321b5a8cf3e89b89e388482ee4a6",
+      "CPU_seconds": 3280.736723
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v12/evolution/history.jsonl",
+      "retained_through": 8564,
+      "source_bytes_sha256": "1dd734296090db6219a0fb05bd6c2d7dc38cb804a7c690b891cc7c720f42dce1",
+      "CPU_seconds": 6595.41975
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v13/evolution/history.jsonl",
+      "retained_through": 9000,
+      "source_bytes_sha256": "2c8e84c4b5881e4b1b3926279f440d8de6124a6b60f9889005ce101e79634dbd",
+      "CPU_seconds": 8105.41436
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v14/evolution/history.jsonl",
+      "retained_through": 9462,
+      "source_bytes_sha256": "351bad800818a2712c2e1217f4baa8a593bf09161682ea8c73202072b70e0484",
+      "CPU_seconds": 4598.095519
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v15/evolution/history.jsonl",
+      "retained_through": 10152,
+      "source_bytes_sha256": "bc805ec149afab043639281eff5ed5939cd3a7b96c88c9677b234db01eee2d0d",
+      "CPU_seconds": 7370.897575
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v16/evolution/history.jsonl",
+      "retained_through": 11650,
+      "source_bytes_sha256": "d5cdb949ce421277a9d72603f203ad331542025f6efb60846cc0ab3c68424ad1",
+      "CPU_seconds": 20000.803736
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v17/evolution/history.jsonl",
+      "retained_through": 12298,
+      "source_bytes_sha256": "38700a8ddf4aea233792f6205425a6297b1c27d907ca39dc6add6287ce43a888",
+      "CPU_seconds": 2587.148099
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v18/evolution/history.jsonl",
+      "retained_through": 12308,
+      "source_bytes_sha256": "18bf9dd071a6629257bed64e8c26d6ee285a74780ee59e4db7485c071f039ddd",
+      "CPU_seconds": 29.550889
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v19/evolution/history.jsonl",
+      "retained_through": 12699,
+      "source_bytes_sha256": "e669c27ac51902cc5177bf90d5b15a114604cce737f440ce0ef5f1acedce2810",
+      "CPU_seconds": 1039.227558
+    },
+    {
+      "path": "out/opus-integration-sept27-v1/current_retry/evolution/history.jsonl",
+      "retained_through": 12702,
+      "source_bytes_sha256": "dc740974a9ba444f01fbe364d438cb09edfee59643f7abb4fd1bd648fe0f2329",
+      "CPU_seconds": 5.070873
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v20/evolution/history.jsonl",
+      "retained_through": 15169,
+      "source_bytes_sha256": "54f172c2c1c6f7c8cef2f8ade83e25b82767c7b327ed4059a7edc1890b39190d",
+      "CPU_seconds": 4230.331711
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v21/evolution/history.jsonl",
+      "retained_through": 16702,
+      "source_bytes_sha256": "fd387caa0b97d3199f79675dd53d632626705f7f3ecc56d88464d9a9391be536",
+      "CPU_seconds": 15680.470012
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v22/evolution/history.jsonl",
+      "retained_through": 16884,
+      "source_bytes_sha256": "a004e3b2e1a9924facbbad213686cc186ee4cd6f7273dc8452b922c6f80c20e3",
+      "CPU_seconds": 347.395322
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v23/evolution/history.jsonl",
+      "retained_through": 16907,
+      "source_bytes_sha256": "9f0f2b835b413a8c9a3cb5fccc76b8d8cff4fdb4cb85eec911f4bebf9e458ff7",
+      "CPU_seconds": 32.237079
+    },
+    {
+      "path": "out/current-newton-diagnosis-sept27-v1/cap_003/evolution/history.jsonl",
+      "retained_through": 16912,
+      "source_bytes_sha256": "7fc5f004057e320f57b1ccc141bbeb50c4be47812e621d24df2d5df23bb99904",
+      "CPU_seconds": 8.4388
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v24/evolution/history.jsonl",
+      "retained_through": 16921,
+      "source_bytes_sha256": "0eebf18f5dbb0f8c2688f9e923abfe3ce383d671bbb098ea81bd7ad393ab8ee4",
+      "CPU_seconds": 18.603227
+    },
+    {
+      "path": "out/continuous-lifetime-sept27-v25/evolution/history.jsonl",
+      "retained_through": 16946,
+      "source_bytes_sha256": "edfaf932382815054db692dc7450ed218871687ed487967ea8ce8ee7a30ed537",
+      "CPU_seconds": 90.363321
+    }
+  ],
+  "models": 16947,
+  "CPU_seconds": 112667.86208200002,
+  "contraction_model": {
+    "years": 990131259.1322539,
+    "step_years": 35442295.89326342,
+    "accepted": 1000,
+    "rejected": 0,
+    "radius_Rsun": 0.12648223204298803,
+    "Teff_K": 2763.068430976732,
+    "luminosity_Lsun": 0.0008400773663778128,
+    "nuclear_fraction": 0.9909244760097279,
+    "central_T_K": 4621837.423986881,
+    "H_mass_g": 1.391483678918906e+32,
+    "He3_mass_g": 4.725378237480916e+28,
+    "D_mass_g": 0,
+    "surface_X": 0.6997972095312577,
+    "surface_Z": 0.02000000000011498,
+    "error_norm": 0.49839852969135734,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.2399573315269932e-12,
+    "drift_gradient_proxy": 8.458835652996426e-07,
+    "kinetic_heat_proxy": 0.010528933340239691,
+    "convective_mass_fraction": 0.9999999999999997,
+    "radiative_boundaries": 0,
+    "relative_mixing_gradient": 2.037027023612283e-09,
+    "convective_travel_years": 1.1241376124412903,
+    "cpu_seconds": 944.506238
+  },
+  "latest": {
+    "years": 4005206718393.5786,
+    "step_years": 4937.156760817571,
+    "accepted": 16946,
+    "rejected": 5020,
+    "radius_Rsun": 0.04456325268094651,
+    "Teff_K": 4560.379488847998,
+    "luminosity_Lsun": 0.0007738403623615297,
+    "nuclear_fraction": 0.9076269544141663,
+    "central_T_K": 6396886.053259485,
+    "central_density_g_cm3": 40046.82596525833,
+    "central_X": 3.471635417795693e-08,
+    "central_He3": 8.892610382584945e-15,
+    "eps_nuc_peak_erg_g_s": 0.5039558868262324,
+    "eps_nuc_peak_q": 0.9669468040771528,
+    "burning_half_max_inner_q": 0.9541068657373265,
+    "burning_half_max_outer_q": 0.9760233249972516,
+    "burning_half_max_cells": 18,
+    "He3_peak": 0.018621947253568312,
+    "He3_peak_q": 0.971484245216312,
+    "H_mass_g": 7.443994590184786e+30,
+    "He3_mass_g": 7.775605834287228e+28,
+    "D_mass_g": 0,
+    "surface_X": 0.9976204509966228,
+    "surface_Z": 4.684988894654899e-37,
+    "error_norm": 0.0002652794944230215,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 4.0841987131404065e-13,
+    "drift_gradient_proxy": 5.477005536393613e-07,
+    "kinetic_heat_proxy": 0.01585795930826074,
+    "convective_mass_fraction": 0.017996690610771266,
+    "radiative_boundaries": 406,
+    "relative_mixing_gradient": 1.0307748279243975e-10,
+    "convective_travel_years": 0.06105047645952943,
+    "cpu_seconds": 90.363321
+  },
+  "first_radiative_region": {
+    "years": 3558470608835.955,
+    "step_years": 629709.9256394553,
+    "accepted": 6239,
+    "rejected": 15,
+    "radius_Rsun": 0.14386106440207486,
+    "Teff_K": 3250.121491922385,
+    "luminosity_Lsun": 0.00208055211550283,
+    "nuclear_fraction": 0.9996338839225668,
+    "central_T_K": 8508644.759666605,
+    "H_mass_g": 3.4240518107992256e+31,
+    "He3_mass_g": 1.083925838369073e+29,
+    "D_mass_g": 0,
+    "surface_X": 0.1722009682548938,
+    "surface_Z": 0.02000823434328683,
+    "error_norm": 0.05062523900090099,
+    "initial_D_approximation": 0,
+    "omitted_mixing_heat_fraction": 0,
+    "gross_mixing_heat_fraction": 0,
+    "burn_gradient_estimate": 1.8681173199497938e-12,
+    "drift_gradient_proxy": 8.037699648801017e-07,
+    "kinetic_heat_proxy": 0.012222314872384276,
+    "convective_mass_fraction": 0.995859293863489,
+    "radiative_boundaries": 2,
+    "relative_mixing_gradient": 3.389443078692099e-10,
+    "convective_travel_years": 0.8592243358117583,
+    "cpu_seconds": 54.993664
+  },
+  "csv_sha256": "7489784b235582a105c93075582ec638eaa3a6f1cbaa08f98dc14d25bb8a2e97",
+  "scope": "One continuous Hayashi-origin trajectory. Duplicate restart rows removed; exact retained prefixes listed. CPU includes retained invocation startup and retries; separate accuracy, EOS and atmosphere work excluded."
+}

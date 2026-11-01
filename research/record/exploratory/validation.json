@@ -1,0 +1,116 @@
+{
+  "checks": [
+    {
+      "history": "out/cold-phase-selection-oct5-v1/control10/evolution/history.jsonl",
+      "restart_relative_error": 3.0333822587103043e-07,
+      "accepted_audits_pass": true,
+      "last": 804
+    },
+    {
+      "history": "out/cold-phase-selection-oct5-v1/continuation/evolution/history.jsonl",
+      "restart_relative_error": 8.8725497948694e-08,
+      "accepted_audits_pass": true,
+      "last": 805
+    },
+    {
+      "history": "out/cold-phase-selection-oct5-v4/continuation/evolution/history.jsonl",
+      "restart_relative_error": 9.37216457774781e-08,
+      "accepted_audits_pass": true,
+      "last": 811
+    },
+    {
+      "history": "out/cold-phase-selection-oct5-common-v1/continuation/evolution/history.jsonl",
+      "restart_relative_error": 1.8749535812823126e-08,
+      "accepted_audits_pass": true,
+      "last": 812
+    },
+    {
+      "history": "out/cold-coupling-common-oct5-v1/interval300/evolution/history.jsonl",
+      "restart_relative_error": 3.6838479489098575e-08,
+      "accepted_audits_pass": true,
+      "last": 813
+    },
+    {
+      "history": "out/cold-coupling-common-oct5-v1/continuation/evolution/history.jsonl",
+      "restart_relative_error": 2.758067983998913e-07,
+      "accepted_audits_pass": true,
+      "last": 816
+    },
+    {
+      "history": "out/cold-phase-common-oct5-v2/continuation/evolution/history.jsonl",
+      "restart_relative_error": 1.4860809216532544e-07,
+      "accepted_audits_pass": true,
+      "last": 835
+    },
+    {
+      "history": "out/cold-phase-common-oct5-v2/finish/evolution/history.jsonl",
+      "restart_relative_error": 7.633194254452746e-08,
+      "accepted_audits_pass": true,
+      "last": 837
+    },
+    {
+      "history": "out/cold-transport35-common-oct5-v1/continuation/evolution/history.jsonl",
+      "restart_relative_error": 6.026878329734586e-09,
+      "accepted_audits_pass": true,
+      "last": 840
+    },
+    {
+      "history": "out/cold-transport-common-oct5-v1/continuation/evolution/history.jsonl",
+      "restart_relative_error": 2.1156524199206217e-08,
+      "accepted_audits_pass": true,
+      "last": 849
+    },
+    {
+      "mass_Msun": 0.05,
+      "history": "out/ensemble-tables-oct3-v1/lowmass_v3/fable_g6_m0500_clear3/evolution/history.jsonl",
+      "accepted_audits_pass": true,
+      "saved_models": 242,
+      "maximum_first_law": 9.833373249001909e-08,
+      "age_years": 10000000000
+    },
+    {
+      "mass_Msun": 0.04,
+      "history": "out/ensemble-tables-oct3-v1/lowmass_v3/fable_g6_m0400_clear3/evolution/history.jsonl",
+      "accepted_audits_pass": true,
+      "saved_models": 238,
+      "maximum_first_law": 9.985813465007709e-08,
+      "age_years": 10000000000
+    },
+    {
+      "mass_Msun": 0.03,
+      "history": "out/ensemble-tables-oct3-v1/lowmass_v3/fable_g6_m0300_clear3/evolution/history.jsonl",
+      "accepted_audits_pass": true,
+      "saved_models": 219,
+      "maximum_first_law": 9.966602454447582e-08,
+      "age_years": 10000000000
+    },
+    {
+      "mass_Msun": 0.02,
+      "history": "out/ensemble-tables-oct3-v1/lowmass_v3/fable_g6b_m0200_full_p5/evolution/history.jsonl",
+      "accepted_audits_pass": true,
+      "saved_models": 227,
+      "maximum_first_law": 9.901184538918528e-08,
+      "age_years": 10000000000
+    },
+    {
+      "mass_Msun": 0.01,
+      "history": "out/ensemble-tables-oct3-v1/lowmass_v3/fable_g6b_m0100_p9/evolution/history.jsonl",
+      "accepted_audits_pass": true,
+      "saved_models": 76,
+      "maximum_first_law": 9.65368738281569e-08,
+      "age_years": 10000000000
+    },
+    {
+      "mass_Msun": 0.005,
+      "history": "out/ensemble-tables-oct3-v1/lowmass_v3/fable_g6b_m0050_p9/evolution/history.jsonl",
+      "accepted_audits_pass": true,
+      "saved_models": 67,
+      "maximum_first_law": 9.82400284454954e-08,
+      "age_years": 10000000000
+    }
+  ],
+  "selected_low_mass_reports": "docs/research/fable/results/COOL_MASS_TRACKS_20261005.md",
+  "main_models": 850,
+  "complete_sequences": 23,
+  "no_incomplete_comparison_track": true
+}

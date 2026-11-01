@@ -1,0 +1,19 @@
+Test project /private/tmp/ember-publish-20261101/build
+    Start  8: opacity_radiative
+    Start 69: screened_envelope_evolution
+    Start 70: finite_screened_envelope_evolution
+    Start 82: lifetime_restart
+1/5 Test  #8: opacity_radiative ....................   Passed    2.33 sec
+    Start 55: collision_reuse
+2/5 Test #55: collision_reuse ......................   Passed    0.21 sec
+3/5 Test #69: screened_envelope_evolution ..........   Passed   10.12 sec
+4/5 Test #70: finite_screened_envelope_evolution ...   Passed   12.53 sec
+5/5 Test #82: lifetime_restart .....................   Passed  148.16 sec
+
+100% tests passed out of 5
+
+Label Time Summary:
+integration      = 170.81 sec*proc (3 tests)
+material-data    = 173.14 sec*proc (4 tests)
+
+Total Test time (real) = 148.17 sec

@@ -32,8 +32,7 @@ public:
     const auto& warm=add<HydrogenShareMixtureOpacity>(tables.warm);
     const auto& bridge=add<HydrogenShareMixtureOpacity>(tables.bridge);
     const auto& hot=add<HydrogenShareMixtureOpacity>(tables.hot);
-    const auto& mid=add<BlendedOpacity>(warm,bridge,5.05,5.10);
-    const auto& upper=add<BlendedOpacity>(mid,hot,5.6,5.7);
+    const auto& upper=join_warm_tables(warm,bridge,hot);
     const auto& raw=add<BlendedOpacity>(low,upper,4.4,4.47);
     map(raw,tables);
   }
@@ -51,14 +50,17 @@ private:
     auto source=std::make_unique<T>(std::forward<Args>(args)...);
     const auto& result=*source;sources_.push_back(std::move(source));return result;
   }
+  const Opacity& join_warm_tables(const Opacity& warm,const Opacity& bridge,const Opacity& hot) {
+    const auto& mid=add<BlendedOpacity>(warm,bridge,5.05,5.10);
+    return add<BlendedOpacity>(mid,hot,5.6,5.7);
+  }
   void build(const Tables& tables,const Extension* extension) {
     const auto& warm=add<MixtureOpacity>(tables.warm);
     const auto& bridge=add<MixtureOpacity>(tables.bridge);
     const auto& hot=add<MixtureOpacity>(tables.hot);
     if(!extension) {
       const auto& low=add<MixtureOpacity>(tables.low);
-      const auto& mid=add<BlendedOpacity>(warm,bridge,5.05,5.10);
-      const auto& upper=add<BlendedOpacity>(mid,hot,5.6,5.7);
+      const auto& upper=join_warm_tables(warm,bridge,hot);
       const auto& raw=add<BlendedOpacity>(low,upper,4.4,4.47);
       map(raw,tables);return;
     }
@@ -74,8 +76,7 @@ private:
     const auto& hot_ratio=add<HydrogenOpacityExtension>(hot,dependence,.75,e.maximum_X);
     const auto& hot_slope=add<HydrogenOpacityContinuation>(hot,.75,.05,e.maximum_X);
     const auto& hot_x=add<DenseHydrogenOpacity>(hot_ratio,hot_slope,e.dense_hydrogen_maximum_logR,e.dense_hydrogen_maximum_logT);
-    const auto& mid=add<BlendedOpacity>(warm_x,bridge_x,5.05,5.10);
-    const auto& upper=add<BlendedOpacity>(mid,hot_x,5.6,5.7);
+    const auto& upper=join_warm_tables(warm_x,bridge_x,hot_x);
     const auto& lower=add<LowerMetalHydrogenShareOpacity>(upper,.01,e.minimum_Z,
         LowerMetalOpacityContinuation::Method::linear_kappa);
     const auto& raw=add<BlendedOpacity>(low,lower,4.4,4.47);

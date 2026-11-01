@@ -1,0 +1,123 @@
+{
+  "utc": "2026-11-01T00:25:51.302543+00:00",
+  "status": "paused",
+  "paused": true,
+  "reason": "User explicitly asked: let us pause work again.",
+  "previous_restart_pointer": {
+    "utc": "2026-11-01T00:14:05.420027+00:00",
+    "memory": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/progress_20261101T001405Z.json",
+    "sha256": "feae7a76548a76c38b0a54ca340dae0e6cf979a4cef47f9ef4e64520c3dbecf0",
+    "paused": false,
+    "status": "active",
+    "previous_pointer_archived": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/prior_state/20261101T001405Z_midpoint_progress/latest_restart_memory.json"
+  },
+  "archive": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/prior_state/20261101T002444Z_user_pause",
+  "goal": "Map the MS/BD transition and reheater region from Pop III through many-times solar; establish robustness using analytic theory and selective calculations with Opus EOS/atmosphere support.",
+  "this_turn_classification": "progress: completed150Gyr shortcut validation, reviewed two changed static starts, ran sparse entropy queries, reviewed Opus EOS analysis, delivered PNG, and completed initial evolution pilots awaiting scientific review; then paused on request",
+  "control": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/control.json",
+  "pause_receipt": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/user_pause_20261101T002444Z_receipt_v1.json",
+  "ledger": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/metallicity_boundary_ledger_v80.json",
+  "ledger_sha256": "baa94216f3e4623174f584912a0753e19f2b4c0c95948992014253286296e748",
+  "ledger_qualification": "Historical active ledger80 is unchanged; this paused snapshot supersedes its live-job status and adds the listed reviewed results.",
+  "reviewed_reports_sha256": {
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/primordial_resume_to150_nov01_v2_segment_3_review.json": "75ce55f6f0bc66a584c2d9b590d3f7b82fdc2c46ceeb3c148f0e972a65725623",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/z005_fine_midpoint_resume_nov01_v2_segment_2_review.json": "da41380aff9666bbf09df3b568a801e751a564f5feaa1115a4a1942e8a7689ff",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/primordial_shortcut_full150_primary_review_nov01_v1.json": "073d770908813603db3e988e1ee424d7ef262a7c8e69fcedad264aae538f0456",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_initial_cooling2_static_primary_review_nov01_v1.json": "27d8c1bf951108b3a8e0bd80f0bf603d7b0b2a0d9151380fcbfc6ed2103abb1a",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/halfsolar_initial_he3twice_static_primary_review_nov01_v1.json": "69f9c69d18ad31f91dc02fd5baa1784b47592af316d038bad07cfb73b0bcf6eb",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/isotope_structure_independent_math_nov01_v1.json": "b1c8169770dfab756271e966f707fb58db618c29f3783a400796fb032802c00b",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/isotope_structure_opus_primary_review_nov01_v1.json": "748a415c60253d53fdccfc18474d0d030b62ff1c08c3280e13ca489b3bd4219d",
+    "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/initial_entropy_displacement_nov01_v1/review.json": "d0ce939772a7e9febeb71c4436e9cbce8ffc5624477674bb2c777fe53f49f0a6"
+  },
+  "completed_native_controllers": [
+    {
+      "session_id": 99133,
+      "state": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/primordial_resume_to150_nov01_v2/state.json",
+      "target150Gyr_reached": true
+    },
+    {
+      "session_id": 47027,
+      "state": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/z005_fine_midpoint_resume_nov01_v2/state.json",
+      "endpoint_Gyr": 278.2693790426505,
+      "target350Gyr_reached": false
+    }
+  ],
+  "unreviewed_initial_evolutions": [
+    {
+      "case": "cooling2",
+      "session_id": 43480,
+      "state": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/halfsolar_initial_cooling2_evolution_nov01_v1/state.json",
+      "execution_returncode": 0,
+      "endpoint_unreviewed": {
+        "years": 425325865.9340923,
+        "Teff_K": 2134.4052975639515,
+        "nuclear_fraction": 0.25012831409491354,
+        "radiative_boundaries": 0,
+        "accepted": 19
+      },
+      "scientific_review_pending": true
+    },
+    {
+      "case": "he3twice",
+      "session_id": 71464,
+      "state": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/stellar_controls/halfsolar_initial_he3twice_evolution_nov01_v1/state.json",
+      "execution_returncode": 0,
+      "endpoint_unreviewed": {
+        "years": 467199902.83250815,
+        "Teff_K": 2046.699651236633,
+        "nuclear_fraction": 0.36084359594503396,
+        "radiative_boundaries": 0,
+        "accepted": 20
+      },
+      "scientific_review_pending": true
+    }
+  ],
+  "process_shutdown": {
+    "closed_evolution_sessions": [
+      43480,
+      71464
+    ],
+    "closed_opus_session": 49842,
+    "live_managed_state_paths": [],
+    "exact_process_check": "ps found no processes for9157,9164,9165,9166,8973 after both native session handles returned0; Opus handle also returned0 earlier"
+  },
+  "primordial_shortcut": "Full413saved-state comparison over50\u2013150Gyr passes all5declared screens; fixed50Gyr offset not refit; maxTeff4.508589K,endpoint difference-0.448109K. No physical PMS history or general robustness inferred.",
+  "initialization_static": "cooling2 radius+12.9591percent,Teff+8.1249percent; he3twice radius-0.0017600percent,Teff+0.0048306percent. Both strict static reviews pass.",
+  "entropy_probe": "30native queries returned0,zero failures,in0.06218s. Cooling2 delta-s/cp approximately0.168\u20130.171; isotope case approximately-5.2e-5 to-5.4e-5 at3mass coordinates. Cached outputs reused after correcting parser expectation57to63columns; no native rerun.",
+  "opus": "Standalone isotope-structure consultation completed; primary review accepts identities with7corrections,48independentalgebra and24polytropechecks. Actualmodelclaude-opus-5-5, cost$0.23128. No native physics changed.",
+  "desktop_figure_receipt": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/figures/lowz_progress_nov01_v1/desktop_delivery/receipt.json",
+  "desktop_figure_receipt_sha256": "c4119cc06e0bb00a95b8e4ae38326ff033a137ba271fb13232bc34f33ef1005c",
+  "resource_policy": {
+    "utc": "2026-11-01T00:17:51.403457+00:00",
+    "maximum_stellar_workers": 2,
+    "maximum_native_source_workers": 2,
+    "maximum_opus_clients": 2,
+    "global_stellar_ceiling": 4,
+    "native_threads_per_worker": 1,
+    "stellar_zone_threads": 2,
+    "runtime_free_bytes": 12000000000,
+    "external_cushion_bytes": 536870912,
+    "allocations_bytes": {
+      "stellar_controls": 2868903936,
+      "opus_eos": 29360128,
+      "opus_atmosphere": 16777216,
+      "reports": 104857600,
+      "primary_sources": 134217728
+    },
+    "accounting": "Subtract remaining allocations, not already-written bytes, before admission; preserve all checkpoints and lossless profiles.",
+    "source_run_cpu_seconds": 1800,
+    "source_run_wall_seconds": 3600,
+    "source_batch_policy": "At most one bounded local source pilot per Opus role before primary review; no unbounded grid.",
+    "external_requests": "This phase uses saved local source inputs; report specific remote source gaps for a subsequent concrete request.",
+    "opus_per_turn_budget_usd": 20,
+    "allocation_revision": "Transfer16MiB unused atmosphere reservation to the two controlled initialization evolutions. Total allocation and all worker, CPU, wall and free-space limits unchanged.",
+    "previous_policy": "/Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/prior_state/20261101T001751Z_initialization_resource/resource_policy.json"
+  },
+  "next_steps_after_explicit_resume": [
+    "Review both completed initial evolution pilots before any continuation. Native return0 alone does not supply independent origin, numerical or scientific validation. They reached0.425325866 and0.467199903Gyr,far short of the frozen147.1744596077151Gyr comparison cutoff.",
+    "Use review_native_chain_v4.py for each initial run, then separately verify initial_profile_import.json, matched config except composition, static profile provenance and snapshot_heating_in_timesteps=false; implement the fixed-elapsed comparison review before interpreting sensitivity.",
+    "The completed PopIII150Gyr shortcut comparison is now fully covered. Avoid additional mass digits being mistaken for physical accuracy.",
+    "The fineZ=.005 midpoint cleanly reaches278.269Gyr,fully connected warming; optional continuation toward350Gyr uses its segment2review. No fine delayed positive or physical width is established.",
+    "Preserve all original failed or user-interrupted prefixes. No further calculations or Opus calls while paused."
+  ]
+}

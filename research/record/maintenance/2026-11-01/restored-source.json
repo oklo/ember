@@ -1,0 +1,11 @@
+{
+  "reason": "Restore missing dependency referenced by opacity_radiative.hpp; two retained independent source snapshots agree byte-for-byte.",
+  "source": "out/luhman16-independent-oct8-v1/source/include/ember/opacity_cold_dense.hpp",
+  "corroboration": "out/balance-floor-oct7-fable/src/include/ember/opacity_cold_dense.hpp",
+  "destination": "include/ember/opacity_cold_dense.hpp",
+  "sha256": "5d798fd70bfe7146e56881937f4f554d0011bfc08984c980414b72ef687b84aa",
+  "companion_changes": {
+    "include/ember/opacity_table.hpp": "Restore optional abundance-basis declaration, default atomic_mass.",
+    "src/opacity_table.cpp": "Restore the matching basis checks; same implementation found in the retained snapshot."
+  }
+}

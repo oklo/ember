@@ -2,7 +2,7 @@
   "format": 1,
   "purpose": "Exact physical material and atmosphere-source inputs required by the registered tests; separate from the continuous-star production dataset.",
   "selection": "Two EOS family closures; the three opacity mixture closures and four conduction tables; three atmosphere boundary tables; actual source-file opens during all 34 non-grey importer tests.",
-  "total_bytes": 454087231,
+  "total_bytes": 454089441,
   "files": [
     {
       "path": "data/atmosphere/cond_gn93_tau100_solar_proxy.dat",
@@ -6651,8 +6651,8 @@
     },
     {
       "path": "data/atmosphere/sources/tlusty208-ember.patch",
-      "size": 8939,
-      "sha256": "0b3214a4b18b6a927f2d512475f94c5895b2790e29185e82108db35724218be1"
+      "size": 11149,
+      "sha256": "91fff3feded90a61f447958b1bc0e0fdcf59e2e5c7bbec387916edc92b10db83"
     },
     {
       "path": "data/conduction/condtab21_I.dat",

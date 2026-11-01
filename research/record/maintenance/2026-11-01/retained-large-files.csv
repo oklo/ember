@@ -1,0 +1,436 @@
+path,bytes,retention_reason
+out/cooling-core-eos-sept30-v6/family.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/cooling-core-eos-sept30-v9/family.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/cooling-eos-support-sept30-v23/family.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/cooling-envelope-eos-sept30-v22/family.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/h-envelope-source-repair-sept30-v1/family.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/cooling-envelope-eos-sept30-v15/family.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/cooling-core-eos-sept30-v4/family.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/lower-source-completion-sept30-v1/family_v4t.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/lower-source-completion-sept30-v1/family_v4.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/lower-source-completion-sept30-v1/family_v3.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/transition-source-repair-sept30-v1/family_v2.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/cooling-envelope-eos-sept30-v7/projected.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/cooling-envelope-eos-sept30-v9/family.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/cooling-envelope-eos-sept30-v17/family.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/cooling-envelope-eos-sept30-v19/family.bin,1900108415,Unique material or archived input: regeneration within budget not established
+out/cooling-envelope-eos-sept30-v20/family.bin,1900108415,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/aa/aae06fe62753c53ce1fe750a4d3329aac8435bfbf35f7a093896e3ea9ea18057,1522983010,Unique material or archived input: regeneration within budget not established
+out/fiducial-goal-oct22/v7g_u95_primary_review/family_v7g_u95.bin,1522983010,Unique material or archived input: regeneration within budget not established
+out/cooling-envelope-eos-sept30-v2/family.bin,1520081326,Unique material or archived input: regeneration within budget not established
+out/cooling-envelope-eos-sept30-v6/family.bin,1520081326,Unique material or archived input: regeneration within budget not established
+out/fresh-eos-refined-sept29-v1/subdivided.bin,1520081326,Unique material or archived input: regeneration within budget not established
+out/fresh-eos-refined-sept29-v1/pilot/family.bin,1520081326,Unique material or archived input: regeneration within budget not established
+out/fresh-eos-refined-sept29-v1/complete/family.bin,1520081326,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/candidate_v7g/family_v7g_full.bin,1269158229,Unique material or archived input: regeneration within budget not established
+out/fiducial-goal-oct22/qext_c2_primary_review/family_qext_c2.bin,1269158229,Unique material or archived input: regeneration within budget not established
+out/eos-lookahead-oct17-fable/followup_p2794/family_z024_spike1_hhejoin63.bin,1233247109,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/candidate_v7/family_z024_spike1_skyecore_v7.bin,1233244629,Unique material or archived input: regeneration within budget not established
+out/highz-native-opacity-oct12-v1/eos_z024_spike1/family_z024_spike1.bin,1233244629,Unique material or archived input: regeneration within budget not established
+out/highz-native-opacity-oct12-v1/family_experimental_default_opt13_z024_t71r1c.bin,1233220283,Unique material or archived input: regeneration within budget not established
+out/high-metal-warm-source-oct7-v2/family.bin,1185566932,Unique material or archived input: regeneration within budget not established
+out/fresh-envelope-eos-corridor-sept29-v5/family.bin,1163796526,Unique material or archived input: regeneration within budget not established
+out/fresh-envelope-eos-corridor-sept29-v2/family.bin,1163796526,Unique material or archived input: regeneration within budget not established
+out/fresh-envelope-eos-corridor-sept29-v3/family.bin,1163796526,Unique material or archived input: regeneration within budget not established
+out/fresh-envelope-eos-corridor-sept29-v4/family.bin,1163796526,Unique material or archived input: regeneration within budget not established
+out/fresh-envelope-eos-stability-sept29-v2/family.bin,1163796526,Unique material or archived input: regeneration within budget not established
+out/fresh-envelope-eos-one-sided-sept29-v1/family.bin,1163796526,Unique material or archived input: regeneration within budget not established
+out/dense-eos-source-repair-sept28-v1/family.bin,1163796526,Unique material or archived input: regeneration within budget not established
+out/fresh-envelope-eos-stability-sept29-v1/family.bin,1163796526,Unique material or archived input: regeneration within budget not established
+out/fresh-envelope-eos-repair-sept29-v1/family.bin,1163796526,Unique material or archived input: regeneration within budget not established
+out/eos-logq-axis-sept28-v1/family.bin,1163796526,Unique material or archived input: regeneration within budget not established
+out/highz-native-opacity-oct12-v1/family_experimental_z024_t645.bin,1147519903,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/text_p2612/family_default_opt13_z016_zext_t71r1c_spike1.bin,1109922225,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/text_p2581/family_alternate_opt13_z016_zext_t71r1c.bin,1109914845,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/text_p2581/family_default_opt13_z016_zext_t71r1c.bin,1109914620,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/text_p2581/family_baseline_z016_zext_t71r1c.bin,1109910885,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/text_p2612/family_default_opt13_z016_zext_t71_join62_affine_spike1.bin,1109908254,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/zext_p2489/family_alternate_opt13_z016_zext.bin,1056499935,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/db/dbd9211eed39959ef0a3354382e7d92845f504ecc42981b553aba9892b2c0406,1056499800,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/zext_p2489/family_baseline_z016_zext.bin,1056495210,Unique material or archived input: regeneration within budget not established
+out/boundary-hotcore-eos-oct11-v1/family_hotcore_z04.bin,1053845350,Unique material or archived input: regeneration within budget not established
+out/boundary-core-eos-oct11-v1/family_core_z04.bin,1053844270,Unique material or archived input: regeneration within budget not established
+out/cool-envelope-eos-stencils-sept27-v1/family.bin,960695326,Unique material or archived input: regeneration within budget not established
+out/eos-cooling-fill-sept28-v1/family.bin,960695326,Unique material or archived input: regeneration within budget not established
+out/cooling-core-eos-extension-sept28-v1/family.bin,960695326,Unique material or archived input: regeneration within budget not established
+out/cool-envelope-eos-repair-sept27-v1/family.bin,960692614,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/3f/3f57206bacfb67154634621415a459b570b576707ab512aca68f299368564250,960684614,Unique material or archived input: regeneration within budget not established
+out/high-metal-cold-source-oct7-v1/family.bin,922112406,Unique material or archived input: regeneration within budget not established
+out/metal-opacity-limit-oct7-v1/family.bin,922112406,Unique material or archived input: regeneration within budget not established
+out/luhman-source-retry-oct4-v1/refined.bin,890674280,Unique material or archived input: regeneration within budget not established
+out/luhman-bd-completion-oct4-v1/refined.bin,890674280,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/zext_p2489/family_alternate_opt13_z012_zext.bin,821722101,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/79/79b1485e0bc026e027c6a0d44bc35ab151a2c0d344a0298ae4ed686591040aea,821721996,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/c1/c10d0bf2de0d0743003ff6ffad3d1581650fb4036228e3ccbfa24a66e319fc46,821718426,Unique material or archived input: regeneration within budget not established
+out/long-fate-100Tyr-oct17/runs/z4_m0.056087500_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz,809133562,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/long-fate-100Tyr-oct17/runs/z5_m0.051781250_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz,801350313,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/highz-cloudy-terayear-oct11-v1/physics/family_z16_candidate.bin,790388320,Unique material or archived input: regeneration within budget not established
+out/highz-cloudy-terayear-oct11-v1/physics/family_q6_candidate.bin,790388320,Unique material or archived input: regeneration within budget not established
+out/preserved-material-inputs/e0/e08b3af5a8aaa22be9637fdb087f1729b9a7029be80dace7f9ce5da0dd41f3be,786739440,Unique material or archived input: regeneration within budget not established
+out/long-fate-100Tyr-oct17/runs/z2_m0.065812500_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz,774924156,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/long-fate-100Tyr-oct17/runs/z6_m0.048200000_n1278_from300.000000000_to100000/evolution/interior_full.csv.gz,748969503,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/long-fate-100Tyr-oct17/runs/z1_m0.071700000_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz,710636086,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/long-fate-100Tyr-oct17/runs/z4_m0.056400000_n1278_from300.000000000_to100000/evolution/interior_full.csv.gz,694299790,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/planet-cms19-oct5-fable/family/family_g6p_q43_ext.bin,686473280,Unique material or archived input: regeneration within budget not established
+out/planet-cms19-oct5-fable/family/family_g6p_ext.bin,686473280,Unique material or archived input: regeneration within budget not established
+out/long-fate-100Tyr-oct17/runs/z8_m0.040500000_n2126_from150.000000000_to100000/evolution/interior_full.csv.gz,663731670,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+data/retained/sha256/3f/3fee6ff010de50acfff1e00c9f1f11d85636deb39830ad2921c0b9f7d4dc5a07,658657880,Unique material or archived input: regeneration within budget not established
+out/cold-eos-hydrogen-envelope-oct4-v1/family.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/ext_p2483/slot08.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/zext24_p2539/slot0.24.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/zext_p2489/slot0.1.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/zext_p2489/slot0.16.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/zext_p2489/slot0.14.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/zext_p2489/slot0.12.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/luhman-eos-unblock-oct4-v1/family.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/luhman-eos-unblock-oct4-v1/family_slope.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cold-hydrogen-gaps-oct3-v1/family.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cold-source-refinement-oct1-v2/family.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cold-source-refinement-oct1-v2/subdivided.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/luhman-bd-completion-oct4-v1/family.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/planet-cms19-oct5-fable/family/family_g6p.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cold-pure-h-support-oct4-v1/family.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cms-interior-family-oct4-v1/family_g5.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cms-interior-family-oct4-v1/family_g4.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cms-interior-family-oct4-v1/family_g4_hotfit.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cms-interior-family-oct4-v1/family_g4_broad.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cms-interior-family-oct4-v1/family_g6_affine.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/highz-cloudy-terayear-oct11-v1/physics/top_z16_candidate.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/highz-cloudy-terayear-oct11-v1/physics/lower_q6.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/highz-cloudy-terayear-oct11-v1/physics/top_q6.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cold-hydrogen-below35-oct5-fable/family_cms/family_coldH_cms_v6.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cold-hydrogen-below35-oct5-fable/family_cms/family_coldH_cms_v4.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/g6cool_v1/family_g6c_cool.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/gibbs_bd_v1/family_sg_G1.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/gibbs_bd_v1/family_sg_G2.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/gibbs_bd_v1/family_sg_G3.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/gibbs_bd_v1/family_gibbs_sc.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/gibbs_bd_v1/family_gibbs_wide3.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cold-eos-hydrogen-density-oct4-v1/family.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cold-h-rich-support-oct4-v1/family.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/substellar-eos-gap-oct3-v1/family.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/lowmass-metallicity-oct10-fable/eos_z16/family_test_d.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/lowmass-metallicity-oct10-fable/eos_z16/family_test_e.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/lowmass-metallicity-oct10-fable/eos_z16/family_test_b.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/lowmass-metallicity-oct10-fable/eos_z16/family_test_c.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/lowmass-metallicity-oct10-fable/eos_z16/family_g6d_z06.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/lowmass-metallicity-oct10-fable/eos_z16/family_test_a.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/lowmass-metallicity-oct10-fable/eos_z16/family_g6b_repro.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/lowmass-metallicity-oct10-fable/eos_z16/family_g6b_repro2.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/cold-eos-support-oct4-v1/family.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/metallicity-longage-oct10-v1/physics/family_g6e_boundary.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/metallicity-longage-oct10-v1/physics/family_g6d_z06_refcorrected.bin,658657880,Unique material or archived input: regeneration within budget not established
+out/long-fate-100Tyr-oct17/runs/z1_m0.071750000_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz,649804882,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/long-fate-100Tyr-oct17/runs/z5_m0.051875000_n1278_from500.000000000_to100000/evolution/interior_full.csv.gz,623209073,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/long-fate-100Tyr-oct17/runs/z1_m0.071800000_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz,601098991,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/ext2_p2485/family_alternate_opt13_z008_ext2.bin,586944006,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/7c/7c66d5ec347e33d63e04ded61e3d9ad910a1149513678c485c01f940b32401cb,586943931,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/6e/6eaa06a957df2b15cd900c835a666933c92bc88e02b127f2cbb39ddf7986a2f8,586941381,Unique material or archived input: regeneration within budget not established
+out/long-fate-100Tyr-oct17/runs/z8_m0.040562500_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz,582122688,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/cold-source-refinement-oct1-v1/family.bin,557173880,Unique material or archived input: regeneration within budget not established
+out/cold-source-refinement-oct1-v1/subdivided.bin,557173880,Unique material or archived input: regeneration within budget not established
+out/isotope-map-integration-oct1-v1/family_number_density.bin,475027280,Unique material or archived input: regeneration within budget not established
+out/cold-source-planes-oct1-v4/family.bin,475027280,Unique material or archived input: regeneration within budget not established
+out/cold-source-planes-oct1-v2/family.bin,475027280,Unique material or archived input: regeneration within budget not established
+out/cold-source-planes-oct1-v1/family.bin,475027280,Unique material or archived input: regeneration within budget not established
+out/cold-source-planes-oct1-v1/family_repaired.bin,475027280,Unique material or archived input: regeneration within budget not established
+out/long-fate-100Tyr-oct17/runs/z5_m0.051781250_n1278_from635.947883088_to100000/evolution/interior_full.csv.gz,472201560,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/cooling-eos-reference-sept27-v1/cache/eos/helm_table.bin,454221960,Unique material or archived input: regeneration within budget not established
+out/common-scvh-envelope-sept29-v1/envelope_source_fullX.dat,420556890,Unique material or archived input: regeneration within budget not established
+out/long-fate-oct17/runs/z5_m0.051812500_n1278_from500.000000000_to750/evolution/interior_full.csv.gz,411011204,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/long-fate-oct17/runs/z8_m0.041000000_n1278_from500.000000000_to750/evolution/interior_full.csv.gz,406754818,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/refine_r2/family_fresh_alternate_r2f.bin,400984625,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/refine_r2/family_fresh_alternate_r2g.bin,400984625,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/b8/b80b254070af736cfd829f060478fb1df891b824571c3d8f636df2d4940acef7,400984535,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/53/53cf3d6aada4ffdbae0e2c175c965a61b3b64e971960fc9b4469854c508d5d61,400984535,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/refine_r2/family_fresh_baseline_r2g.bin,400980305,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/refine_r2/family_fresh_baseline_r2f.bin,400980305,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/ext_p2483/family_alternate_opt13_z008_ext.bin,384406256,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/ext_p2483/family_default_opt13_z008_ext.bin,384406181,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/ext_p2483/family_baseline_z008_ext.bin,384403631,Unique material or archived input: regeneration within budget not established
+out/envelope-source-cold-sept30-v1/envelope_source.dat,383876738,Unique material or archived input: regeneration within budget not established
+out/common-cms-envelope-sept29-v1/envelope_source_cms_radiation.dat,374984630,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/refine_r2/family_fresh_alternate_r2e.bin,371828465,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/refine_r2/family_fresh_default_r2e.bin,371828375,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/refine_r2/family_fresh_baseline_r2e.bin,371824145,Unique material or archived input: regeneration within budget not established
+out/long-fate-100Tyr-oct17/runs/z4_m0.056087500_n1278_from642.250000000_to100000/evolution/interior_full.csv.gz,369455816,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/long-fate-100Tyr-oct17/runs/z2_m0.065875000_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz,364611706,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/common-scvh-envelope-sept29-v1/envelope_source.dat,354175932,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/ca/caa0b0f605ad8dc3222004b86eebff65e824ff45f6127a9289db0cd0a40dfbee,353274575,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/0e/0e2e2d7fa1ff0ed85c299a1cac5cd8eb735e3f65e216560d43d1a1f6209feee3,353274485,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/refine_r2/family_fresh_baseline_r2d.bin,353270255,Unique material or archived input: regeneration within budget not established
+research/record/maintenance/2026-11-01/inventory.sqlite,347447296,Unique material or archived input: regeneration within budget not established
+out/preserved-material-inputs/ec/ec8593c36672d18729c4855eff17e5ce6ac465fa76d4049155b0c8eda8054f61,333292880,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/refine_r2/family_fresh_alternate_r2b.bin,329419805,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/refine_r2/family_fresh_default_r2b.bin,329419715,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/f7/f7d9005a8b4f3f452e32886ce3cb308ddd6f1a22579cc6266fbc9ca7179f93ae,329413865,Unique material or archived input: regeneration within budget not established
+out/fresh-paired-eos-oct12-v1/families/family_default_r2g_z006.bin,320787756,Unique material or archived input: regeneration within budget not established
+out/fresh-paired-eos-oct12-v1/families/family_baseline_r2g_z006.bin,320784372,Unique material or archived input: regeneration within budget not established
+out/boundary-corrected-item1-oct13/effective_convergence_oct14/m8_dt50_to150/evolution/interior_full.csv.gz,299122046,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/fresh-paired-eos-oct12-v1/families/family_alternate_r2g_z006_no71.bin,267323155,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/b3/b3eda04836882a92ebef4b2a6fcb00c53ae4dbf7d1cd412fd7814a4c43967f83,267323034,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/hcomp_pilot_p2467/z006_no725.bin,267323029,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/4b/4b089b4fe5d44d5aa2952945df175c889611fada7bc2f9ade8fab4fa416d4239,267322537,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/17/176eb8dd5d31565325e5195c6897cacd9ba6662f7938ddf464389d605803b83a,267322492,Unique material or archived input: regeneration within budget not established
+out/fresh-paired-eos-oct12-v1/families/family_baseline_r2g_z006_no71.bin,267320275,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/hcomp_pilot_p2467/baseline_z006_no71.bin,267320214,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/hcomp_pilot_p2467/baseline_z006_no725.bin,267320209,Unique material or archived input: regeneration within budget not established
+out/ember-grey-mesa-comparison-v8/accepted_models.jsonl.gz,263249883,Checkpoint or accepted stellar-state archive: preserved
+out/preserved-material-inputs/5c/5ca55fc4f9cefb894645e63ce08c1c46e8a5263d50526f25235bc0ab0e675a6c,262270664,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/gibbs_blend/candidate_gibbs_patch/family_v4_gibbs_patch.bin.patch.zst,258668279,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/he_dense/candidate_v4/family_v7g_u95_he.bin.patch.zst,257977019,Unique material or archived input: regeneration within budget not established
+out/long-fate-100Tyr-oct17/runs/z6_m0.047762500_n1278_from150.000000000_to100000/evolution/interior_full.csv.gz,257493611,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/he_dense/FAILED_v5_extension_seam/candidate_v5/family_v7g_u95_he_v5.bin.patch.zst,257350734,Unique material or archived input: regeneration within budget not established
+out/boundary-corrected-item1-oct13/effective_convergence_oct14/m16_dt100_next_halving_to150/evolution/interior_full.csv.gz,243320643,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/preserved-material-inputs/5e/5ec3c1257bed9f92edfea71f3cafb8f407dcbed0489019df2fe66351807c4e2c,241955480,Unique material or archived input: regeneration within budget not established
+out/test-fixture-release-sept26-v1/ember-test-data-complete.tar.gz,228377179,Unique material or archived input: regeneration within budget not established
+out/ember-grey-mesa-comparison-v7/accepted_models.jsonl.gz,222676087,Checkpoint or accepted stellar-state archive: preserved
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/family_fresh_alternate_r1b.bin,219616835,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/family_fresh_alternate_r1.bin,219616815,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/family_fresh_default_r1b.bin,219616775,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/family_fresh_default_r1.bin,219616755,Unique material or archived input: regeneration within budget not established
+out/core-fe-precipitation-sept30-v1/tree/.git/objects/pack/pack-b2490a8600471ee1398314d1083d55beca8431bb.pack,203019953,Historical source control: preserved
+out/fable-adversarial-review-20260926/fresh-clone/ember/.git/objects/pack/pack-b2490a8600471ee1398314d1083d55beca8431bb.pack,203019953,Historical source control: preserved
+out/deep-solid-eos-oct1-v1/tree/.git/objects/pack/pack-b2490a8600471ee1398314d1083d55beca8431bb.pack,203019953,Historical source control: preserved
+out/dense-transition-review-oct1-v1/tree_wide/.git/objects/pack/pack-b2490a8600471ee1398314d1083d55beca8431bb.pack,203019953,Historical source control: preserved
+out/dense-transition-review-oct1-v1/tree/.git/objects/pack/pack-b2490a8600471ee1398314d1083d55beca8431bb.pack,203019953,Historical source control: preserved
+out/he3-share-range-sept30-v1/tree/.git/objects/pack/pack-b2490a8600471ee1398314d1083d55beca8431bb.pack,203019953,Historical source control: preserved
+out/mixture-phase-sept30-v1/tree/.git/objects/pack/pack-b2490a8600471ee1398314d1083d55beca8431bb.pack,203019953,Historical source control: preserved
+out/transition-quantum-sept30-v1/tree/.git/objects/pack/pack-b2490a8600471ee1398314d1083d55beca8431bb.pack,203019953,Historical source control: preserved
+out/metal-groups-ca07795-v1/tree/.git/objects/pack/pack-b2490a8600471ee1398314d1083d55beca8431bb.pack,203019953,Historical source control: preserved
+out/ensemble-tables-oct3-v1/src/.git/objects/pack/pack-bf69e1e92489434e31fadd9b89e76de326eb648d.pack,200981889,Historical source control: preserved
+out/heat-basis-oct3-v1/src/.git/objects/pack/pack-c61a0791e374ff1619dc65af99b616ed4a492f9d.pack,200979303,Historical source control: preserved
+out/cold-longstep-oct2-v1/src/.git/objects/pack/pack-75b5be361fd52256cabe60e47edf2ddde287a066.pack,200928655,Historical source control: preserved
+out/radioactive-patch-oct2-v1/src/.git/objects/pack/pack-95c8d5e6a08b12100dbcb1a8c3c45181776b5775.pack,200866661,Historical source control: preserved
+out/species-step-oct2-v1/src/.git/objects/pack/pack-7115dc485ca3583619b25a39fbde81050d6385f1.pack,200856364,Historical source control: preserved
+out/negdelta-layer-oct2-v1/tree/.git/objects/pack/pack-b5c7af79a53f59a42ab1618a5e16de9c8369ea4b.pack,200838753,Historical source control: preserved
+out/production-source-oct2-v1/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/fingering3-oct5-fable/src/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/phase-eos-cost-oct5-fable/src_count/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/phase-eos-cost-oct5-fable/src_fast/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/phase-eos-cost-oct5-fable/src_phase/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/phase-eos-cost-oct5-fable/src_min/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/cold-hydrogen-below35-oct5-fable/src_hlayer/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/cold-hydrogen-below35-oct5-fable/src_h30/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/cold-hydrogen-below35-oct5-fable/src_ctl/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/ensemble-tables-oct3-v1/src_fing_patch/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/ensemble-tables-oct3-v1/src_ls_patch/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/ensemble-tables-oct3-v1/src_bdq_dbg/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/ensemble-tables-oct3-v1/src_fing_ctl/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/ensemble-tables-oct3-v1/src_li2/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/ensemble-tables-oct3-v1/src_li3/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/ensemble-tables-oct3-v1/src_uslope/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/ensemble-tables-oct3-v1/src_bnd2/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/ensemble-tables-oct3-v1/src_bnd/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/ensemble-tables-oct3-v1/src_bdq/.git/objects/pack/pack-6fa65d7b5268bf6dd8e36f76da3fff068a6c7644.pack,200803837,Historical source control: preserved
+out/cold-opacity100-oct6-v2/opacity100_x0.999999.bin,199364728,Unique material or archived input: regeneration within budget not established
+out/cold-opacity110-oct6-v1/opacity110_x0.999999.bin,196641200,Unique material or archived input: regeneration within budget not established
+out/cold-opacity100-stable-oct5-v1/opacity100_x0.999999.bin,196641200,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/family_fresh_default_r1p.bin,196218895,Unique material or archived input: regeneration within budget not established
+out/cold-opacity125-oct5-v1/opacity125_x0.999999.bin,191194144,Unique material or archived input: regeneration within budget not established
+out/cold-opacity150-oct4-v1/opacity160_x0.999999.bin,183023560,Unique material or archived input: regeneration within budget not established
+out/cold-density-opacity-sept27-v1/opacity.bin,182534776,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/2e/2e168b00ed32fe42b9c52815c5e505f2865865e104d77835ff3bf39415f67e2f,176518203,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/84/84df226f3b5f3944b8d81c5772427e3f7ae161e503be65b94ff3b8d073dce8c9,176518203,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/f5/f589421cc458fa112b6062e912cdb202dfe4a1c7f371a9f9e8d275a7dc217de0,176518203,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/ext_v6/test_family/family_ext_v7_test.bin,176518203,Unique material or archived input: regeneration within budget not established
+out/cold-cia40-oct4-v1/opacity_x0.999999.bin,174852976,Unique material or archived input: regeneration within budget not established
+out/cold-cia40-oct4-v1/tail_sensitivity/low.bin,174852976,Unique material or archived input: regeneration within budget not established
+out/cold-cia40-oct4-v1/tail_sensitivity/high.bin,174852976,Unique material or archived input: regeneration within budget not established
+out/common-cms-envelope-sept29-v1/envelope_source_cms.txt.gz,173419931,Unique material or archived input: regeneration within budget not established
+out/far-infrared-opacity-oct4-v1/opacity200_x0.9955.bin,169405920,Unique material or archived input: regeneration within budget not established
+out/far-infrared-opacity-oct4-v1/opacity200p1_x0.9955.bin,169405920,Unique material or archived input: regeneration within budget not established
+out/far-infrared-opacity-oct4-v1/opacity200_x0.999999.bin,169405920,Unique material or archived input: regeneration within budget not established
+out/far-infrared-opacity-oct4-v1/opacity200p1_x0.999999.bin,169405920,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/ext_v6/test_family/family_gapfill2_test.bin,167144043,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/ext_v6/test_family/family_gapfill_test.bin,167144043,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/ext_v6/test_family/family_gapfill3_v7s_test.bin,167144043,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/ext_v6/test_family/family_gapfill3_v7r_test.bin,167144043,Unique material or archived input: regeneration within budget not established
+out/far-infrared-opacity-oct4-v1/opacity_x0.999999.bin,166682392,Unique material or archived input: regeneration within budget not established
+out/far-infrared-opacity-oct4-v1/opacity_x0.9955.bin,166682392,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/24/24493a5987401765023575836e974107555d78535746c42b0008a791004fb7b4,164773624,Unique material or archived input: regeneration within budget not established
+out/cold-density-opacity-sept27-v1/opacity_37.bin,164773624,Unique material or archived input: regeneration within budget not established
+out/preserved-material-inputs/18/1837c2ae92a39519b04fea53c152fe43f30e6694690597937b2c8638e8e7113b,164773624,Unique material or archived input: regeneration within budget not established
+out/dense-capacity-sept29-v1/homotopy_x1/lam0.250/opacity.bin,164773624,Unique material or archived input: regeneration within budget not established
+out/dense-capacity-sept29-v1/homotopy_x1/lam0.750/opacity.bin,164773624,Unique material or archived input: regeneration within budget not established
+out/dense-capacity-sept29-v1/homotopy_x1/lam0.500/opacity.bin,164773624,Unique material or archived input: regeneration within budget not established
+out/dense-capacity-sept29-v1/matched_x1/control/opacity.bin,164773624,Unique material or archived input: regeneration within budget not established
+out/pulse-helium-response-evolution-v18/accepted_models.jsonl.gz,157825518,Checkpoint or accepted stellar-state archive: preserved
+out/pulse-helium-response-evolution-v17/accepted_models.jsonl.gz,157325577,Checkpoint or accepted stellar-state archive: preserved
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/he_dense/q6_assembly_v5/lower_q6_v5.bin.patch.zst,156275896,Unique material or archived input: regeneration within budget not established
+out/qs-boundary-sept28-v1/envelope_source_cms_v4.txt.gz,151248714,Unique material or archived input: regeneration within budget not established
+out/boundary-corrected-item1-oct13/effective_convergence_oct14/m8_dt100_to150/evolution/interior_full.csv.gz,150267327,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/lowmass-metallicity-oct10-fable/sources/marcs/marcs_st_mod.tar,150067200,Unique material or archived input: regeneration within budget not established
+out/hhe-opacity-cold-margin-sept30-v2/opacity_x0.999999.bin,146892760,Unique material or archived input: regeneration within budget not established
+out/hhe-opacity-cold-margin-sept30-v2/opacity_x0.9955.bin,146892760,Unique material or archived input: regeneration within budget not established
+out/cia-lowT-sept28-v1/hitran/H2-He_2011.cia,146854122,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/family_fresh_alternate.bin,146402735,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/family_fresh_hot_alt.bin,146402695,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/family_fresh_default.bin,146402675,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/family_fresh_hot.bin,146402655,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/be/beda991669241156fdbe4175f750181541cb33b4d244a5e24a5f17b8ebadf5e9,146395275,Unique material or archived input: regeneration within budget not established
+out/qs-boundary-sept28-v1/envelope_source_cms_v3.txt.gz,144427287,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/83/83491fd4afdd936d11cd0e8a8f2635f8c42869dae9db27f97b5bcd46b570fe43,142734603,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/ext_v6/compact/family_compact_base.bin,142734603,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/ext_v6/compact/family_compact_v7u.bin,142734603,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/ext_v6/compact/family_compact_v7t.bin,142734603,Unique material or archived input: regeneration within budget not established
+out/fiducial-goal-oct22/fiducial574_unprojected_source_diagnostic/family_unprojected_source_diagnostic.bin,142734603,Unique material or archived input: regeneration within budget not established
+out/fiducial-goal-oct22/fiducial574_projected_energy_reference_v2/family_reference_diagnostic.bin,142734603,Unique material or archived input: regeneration within budget not established
+out/fiducial-goal-oct22/fiducial574_restored_affine_source_diagnostic/family_restore_affine_diagnostic.bin,142734603,Unique material or archived input: regeneration within budget not established
+out/pulse-preonset-current-v28/accepted_models.jsonl.gz,135325111,Checkpoint or accepted stellar-state archive: preserved
+out/cold-atmosphere-sub180-fable/opacity_x0.999999_sub100.bin,135007672,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/c6/c6964b078f85f85b538043661884a43223a754f185dc3e88ba4718e57bc1823a,134170076,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/f5/f51761ebea22b0da1307d6db1465a86613b8eb966fc7a756f595c1d9374cbd50,134170076,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/a2/a2546b83855ecc600017d40b29e9d2df9205adfb622704af500cc38f2a7d02c0,134170076,Unique material or archived input: regeneration within budget not established
+out/cooling-eos-reference-sept27-v1/cache/eos/mesa-eosDT_00z100x.bin,134170076,Unique material or archived input: regeneration within budget not established
+out/cooling-eos-reference-sept27-v1/cache/eos/mesa-eosDT_00z60x.bin,134170076,Unique material or archived input: regeneration within budget not established
+out/cooling-eos-reference-sept27-v1/cache/eos/mesa-eosDT_00z40x.bin,134170076,Unique material or archived input: regeneration within budget not established
+out/cooling-eos-reference-sept27-v1/cache/eos/mesa-eosDT_00z00x.bin,134170076,Unique material or archived input: regeneration within budget not established
+out/cooling-eos-reference-sept27-v1/cache/eos/mesa-eosDT_00z80x.bin,134170076,Unique material or archived input: regeneration within budget not established
+out/mesa-01msun-comparison-v1/caches/eosDT_cache/mesa-FreeEOS_06z90x.bin,134170076,Unique material or archived input: regeneration within budget not established
+out/mesa-01msun-comparison-v1/caches/eosDT_cache/mesa-FreeEOS_04z96x.bin,134170076,Unique material or archived input: regeneration within budget not established
+out/mesa-01msun-comparison-v1/caches/eosDT_cache/mesa-FreeEOS_08z80x.bin,134170076,Unique material or archived input: regeneration within budget not established
+out/mesa-01msun-comparison-v1/caches/eosDT_cache/mesa-FreeEOS_08z90x.bin,134170076,Unique material or archived input: regeneration within budget not established
+out/mesa-01msun-comparison-v1/caches/eosDT_cache/mesa-FreeEOS_06z94x.bin,134170076,Unique material or archived input: regeneration within budget not established
+out/boundary-semiconvection-oct11-v1/fresh_weak_to1Tyr/evolution/interior_full.csv.gz,133336276,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/qs-boundary-sept28-v1/envelope_source_cms_v3b.txt.gz,130176071,Unique material or archived input: regeneration within budget not established
+out/picaso-pilot-oct11-fable/venv/lib/python3.12/site-packages/llvmlite/binding/libllvmlite.dylib,129871888,Unique material or archived input: regeneration within budget not established
+out/picaso-pilot-oct11-fable/condaenv/lib/python3.12/site-packages/llvmlite/binding/libllvmlite.dylib,127300592,Unique material or archived input: regeneration within budget not established
+out/hhe-opacity-corrected-sept30-v1/opacity_x0.98.bin,125891320,Unique material or archived input: regeneration within budget not established
+out/hhe-opacity-corrected-sept30-v1/opacity_x0.9955.bin,125891320,Unique material or archived input: regeneration within budget not established
+out/hhe-opacity-higher-hydrogen-sept30-v1/opacity_x0.999999.bin,125891320,Unique material or archived input: regeneration within budget not established
+out/pulse-helium-response-evolution-v15/accepted_models.jsonl.gz,124494688,Checkpoint or accepted stellar-state archive: preserved
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/he_dense/q6_assembly/lower_q6_he.bin.patch.zst,123549439,Unique material or archived input: regeneration within budget not established
+out/pulse-preonset-current-v5/accepted_models.jsonl.gz,123531842,Checkpoint or accepted stellar-state archive: preserved
+out/ember-grey-no-diffusion-v9/accepted_models.jsonl.gz,121581939,Checkpoint or accepted stellar-state archive: preserved
+out/cold-longwave-opacity-oct6-v1/opacity_x0.999999.bin,121287632,Unique material or archived input: regeneration within budget not established
+out/hhe-opacity-grid-sept30-v2/opacity_x0.98.bin,119050840,Unique material or archived input: regeneration within budget not established
+out/hhe-opacity-grid-sept30-v2/opacity_x0.9955.bin,119050840,Unique material or archived input: regeneration within budget not established
+out/fiducial-goal-oct22/v7d_full_private/family_v7d_full.bin.xor.gz,114903023,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/lowt_core/v7d_full_changed_map.npz,113594964,Unique material or archived input: regeneration within budget not established
+out/lowmass-metallicity-oct10-fable/sources/marcs/marcs_an_mod.tar,112834560,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/FAILED_candidate_skyecore_v3/family_z024_spike1_skyecore_v3.bin.patch.zst,112385100,Unique material or archived input: regeneration within budget not established
+out/h3plus-opacity-grid-sept29-v1/opacity.bin,112210360,Unique material or archived input: regeneration within budget not established
+out/cold-opacity-ext-sept28-v2/h0.9955/opacity.bin,112210360,Unique material or archived input: regeneration within budget not established
+out/cold-opacity-ext-sept28-v2/h0.9800/opacity.bin,112210360,Unique material or archived input: regeneration within budget not established
+out/h3plus-opacity-grid-sept29-v2/opacity.bin,112210360,Unique material or archived input: regeneration within budget not established
+out/h3plus-opacity-grid-sept29-v4/opacity.bin,112210360,Unique material or archived input: regeneration within budget not established
+out/charge-wing-opacity-sept29-v1/h0.9955/opacity.bin,112210360,Unique material or archived input: regeneration within budget not established
+out/charge-wing-opacity-sept29-v1/h0.9800/opacity.bin,112210360,Unique material or archived input: regeneration within budget not established
+out/h3plus-opacity-grid-sept29-v3/opacity.bin,112210360,Unique material or archived input: regeneration within budget not established
+out/charge-corrected-opacity-sept29-v2/h0.9955/opacity.bin,112210360,Unique material or archived input: regeneration within budget not established
+out/charge-corrected-opacity-sept29-v2/h0.9800/opacity.bin,112210360,Unique material or archived input: regeneration within budget not established
+out/hhe-opacity-grid-sept30-v1/opacity_x0.98.bin,112210360,Unique material or archived input: regeneration within budget not established
+out/hhe-opacity-grid-sept30-v1/opacity_x0.9955.bin,112210360,Unique material or archived input: regeneration within budget not established
+out/reheater-atmosphere-row0045-oct18/runs/pair_001_to100000Gyr/evolution/interior_full.csv.gz,110022372,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/pulse-preonset-current-v31/accepted_models.jsonl.gz,106582153,Checkpoint or accepted stellar-state archive: preserved
+out/boundary-05835-time-oct12-v1/long/evolution/interior_full.csv.gz,106329939,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/pulse-helium-response-evolution-v16/accepted_models.jsonl.gz,105120212,Checkpoint or accepted stellar-state archive: preserved
+out/cluster-membership-oct9-v1/raw/hyades_gaia_cp_positive_x.csv,104502895,Unique material or archived input: regeneration within budget not established
+out/cold-opacity-ext-sept28-v1/h0.9955/opacity.bin,103089720,Unique material or archived input: regeneration within budget not established
+out/cold-opacity-ext-sept28-v1/h0.9800/opacity.bin,103089720,Unique material or archived input: regeneration within budget not established
+out/boundary-corrected-item1-oct13/effective_convergence_oct14/m4_seed_p6_to150/evolution/interior_full.csv.gz,102030227,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/boundary-corrected-item1-oct13/effective_convergence_oct14/m4_seed_p5_recovered_to150/evolution/interior_full.csv.gz,101418227,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/ember-grey-mesa-comparison-v5/accepted_models.jsonl.gz,101094450,Checkpoint or accepted stellar-state archive: preserved
+out/boundary-coupled-transport-oct11-v1/moll25_marginal_after_event/evolution/interior_full.csv.gz,100240836,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/charge-wing-opacity-refined-sept29-v1/h0.9955/opacity_warm.bin,98529400,Unique material or archived input: regeneration within budget not established
+out/charge-wing-opacity-refined-sept29-v1/h0.9800/opacity_warm.bin,98529400,Unique material or archived input: regeneration within budget not established
+out/pulse-semiconvection-0p1-evolution-v2/native.stderr.gz,97033085,Unique material or archived input: regeneration within budget not established
+out/pulse-helium-response-evolution-v20/accepted_models.jsonl.gz,96783835,Checkpoint or accepted stellar-state archive: preserved
+out/cold-opacity-cia-sept28-v1/h0.9955/opacity.bin,96249240,Unique material or archived input: regeneration within budget not established
+out/cold-opacity-cia-sept28-v1/h0.9800/opacity.bin,96249240,Unique material or archived input: regeneration within budget not established
+out/pulse-front-evolution-v47/accepted_models.jsonl.gz,94019003,Checkpoint or accepted stellar-state archive: preserved
+out/cold-mixed-opacity-sept28-v7/h0.9955/opacity.bin,93969080,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-opacity-sept28-v7/h0.9800/opacity.bin,93969080,Unique material or archived input: regeneration within budget not established
+out/pulse-preonset-current-v39/accepted_models.jsonl.gz,93116866,Checkpoint or accepted stellar-state archive: preserved
+out/cold-opacity-cia-sept28-v1/metals_1e-3/h0.9800/opacity.bin,91688920,Unique material or archived input: regeneration within budget not established
+out/boundary-corrected-item1-oct13/effective_convergence_oct14/m4_dt100_to150/evolution/interior_full.csv.gz,91673881,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/pulse-preonset-current-v17/accepted_models.jsonl.gz,89542872,Checkpoint or accepted stellar-state archive: preserved
+out/cold-mixed-opacity-sept28-v5/h0.9955/opacity.bin,89408760,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-opacity-sept28-v5/h0.9800/opacity.bin,89408760,Unique material or archived input: regeneration within budget not established
+out/cluster-membership-oct9-v1/raw/hyades_gaia_cp_parent.csv,89301990,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/FAILED_candidate_skyecore_v2/family_z024_spike1_skyecore_v2.bin.patch.zst,89269868,Unique material or archived input: regeneration within budget not established
+out/pulse-preonset-current-v32/accepted_models.jsonl.gz,88849498,Checkpoint or accepted stellar-state archive: preserved
+out/completed-metal-segments/v3/accepted_models.jsonl.gz,87151643,Checkpoint or accepted stellar-state archive: preserved
+out/cold-mixed-opacity-sept28-v10/h0.9800/opacity.bin,87128600,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/b6/b6683a60c5e714860aa864e9ce99d866b59b2bf117972da7b918390739421449,84848440,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/8a/8a1c586b6c2a784e4b92e49cfcd191336c99eaf8cf8a45cbf0925897dac132e5,84848440,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/7c/7c400a3254169f83c7a43b8517b560d6b6316b20adaa83d4d3a4cb87d8c8aaf0,84848440,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/58/582028525e7d4dce21f6ac61c8c849f7b206eac8fe9098e48081f0bc8344755d,84848440,Unique material or archived input: regeneration within budget not established
+out/pms-grain-opacity-v1/absorption.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-opacity-sept28-v11/h0.9800/opacity.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-opacity-sept28-v8/h0.9955/opacity.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-opacity-sept28-v8/h0.9800/opacity.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-opacity-sept28-v6/h0.9955/opacity.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-opacity-sept28-v6/h0.9800/opacity.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-atmosphere-sept27-v1/pure_opacity_19.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/grain_column/absorption.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/grain_column/gas.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/grain_column/scattering.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/cold-opacity-cia-sept28-v1/x_highg_v2/h0.99999/opacity.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/cold-opacity-cia-sept28-v1/x_highg_v2/h0.99900/opacity.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/cold-opacity-cia-sept28-v1/x_highg_v2/h0.99950/opacity.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/cold-opacity-cia-sept28-v1/x0.70_z0.02_v1/opacity.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/cold-opacity-cia-sept28-v1/x0.70_z0.02_v2/opacity.bin,84848440,Unique material or archived input: regeneration within budget not established
+out/pulse-preonset-current-v25/accepted_models.jsonl.gz,83596964,Checkpoint or accepted stellar-state archive: preserved
+out/cluster-membership-oct9-v1/raw/pleiades_gaia_cp_parent.csv,83028724,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-opacity-sept28-v4/h0.9955/opacity.bin,82568280,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-opacity-sept28-v4/h0.9800/opacity.bin,82568280,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-opacity-sept28-v2/h0.9955/opacity.bin,82568280,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-opacity-sept28-v2/h0.9800/opacity.bin,82568280,Unique material or archived input: regeneration within budget not established
+out/balance-floor-oct7-fable/cold_base/profile.txt,82128772,Unique material or archived input: regeneration within budget not established
+out/pulse-gravity-matched500-prefix-v1/accepted_models.jsonl.gz,81459207,Checkpoint or accepted stellar-state archive: preserved
+out/reheater-opacity-logz3-oct18/runs/central_003_to100000Gyr/evolution/interior_full.csv.gz,81211198,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+out/warm-metal-atmospheres-oct2-v1/h090_z020/opacity.bin,80288120,Unique material or archived input: regeneration within budget not established
+out/warm-metal-atmospheres-oct2-v1/h090_z001/opacity.bin,80288120,Unique material or archived input: regeneration within budget not established
+out/warm-reference-atmospheres-oct2-v1/h700_y120/opacity.bin,80288120,Unique material or archived input: regeneration within budget not established
+out/warm-reference-atmospheres-oct2-v1/h700_y000/opacity.bin,80288120,Unique material or archived input: regeneration within budget not established
+out/warm-reference-atmospheres-oct2-v1/h850_y120/opacity.bin,80288120,Unique material or archived input: regeneration within budget not established
+out/warm-reference-atmospheres-oct2-v1/h850_y000/opacity.bin,80288120,Unique material or archived input: regeneration within budget not established
+out/warm-h090-lowmetal-oct2-v1/h900_y000_z0001/opacity.bin,80288120,Unique material or archived input: regeneration within budget not established
+out/warm-h090-extension-oct2-v1/h900_y000_z010/opacity.bin,80288120,Unique material or archived input: regeneration within budget not established
+out/warm-h090-extension-oct2-v1/h900_y030_z020/opacity.bin,80288120,Unique material or archived input: regeneration within budget not established
+out/warm-h090-extension-oct2-v1/h900_y000_z0025/opacity.bin,80288120,Unique material or archived input: regeneration within budget not established
+out/warm-h090-extension-oct2-v1/h900_y000_z005/opacity.bin,80288120,Unique material or archived input: regeneration within budget not established
+out/warm-h090-extension-oct2-v1/h900_y000_z0005/opacity.bin,80288120,Unique material or archived input: regeneration within budget not established
+out/boundary-05835-time-oct12-v1/interior_05835.npz,78320892,Unique material or archived input: regeneration within budget not established
+out/balance-floor-oct7-fable/c5s_prof/profile.txt,77623580,Unique material or archived input: regeneration within budget not established
+out/mesa-01msun-comparison-v1/diffusion/LOGS/history.data,76645483,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/70/70fa7202daaf624c8141166e3d1748fde7b3e0f04b78f0f9c1dc0246dffc1bcd,75727800,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/f6/f6cbdf8a2d34fdefcf0e03f125593a4ee72d51446e35d6577f763c65a118234a,75727800,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/80/802c254b009562a3aae3541acd64fcd1106d65386be256216adfd6d4654e5960,75727800,Unique material or archived input: regeneration within budget not established
+data/retained/sha256/7c/7cab116f80573a32344886132e8d1ba808e25d6f3aa4449b0619acf6317feb5c,75727800,Unique material or archived input: regeneration within budget not established
+out/cold-mixed-opacity-sept27-v1/h0.9800/opacity.bin,75727800,Unique material or archived input: regeneration within budget not established
+out/helium-limit-tau100-sept27-v1/pure_h_opacity.bin,75727800,Unique material or archived input: regeneration within budget not established
+out/lowmass-metallicity-oct10-fable/sources/marcs/marcs_ae_mod.tar,74291200,Unique material or archived input: regeneration within budget not established
+out/qs-boundary-sept28-v1/envelope_source_cms_v2.txt.gz,73960037,Unique material or archived input: regeneration within budget not established
+out/h3plus-metal-grid-sept29-v3/off/opacity.bin,73447640,Unique material or archived input: regeneration within budget not established
+out/h3plus-metal-grid-sept29-v3/on/opacity.bin,73447640,Unique material or archived input: regeneration within budget not established
+out/h3plus-metal-grid-sept29-v4/on/opacity.bin,73447640,Unique material or archived input: regeneration within budget not established
+out/h3plus-metal-grid-sept29-v2/off/opacity.bin,73447640,Unique material or archived input: regeneration within budget not established
+out/h3plus-metal-grid-sept29-v2/on/opacity.bin,73447640,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/opacity_cool/on_x4500_y0000/opacity.bin,73447640,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/opacity_cool/on_x7000_y0000/opacity.bin,73447640,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/opacity_cool/on_x4500_y1200/opacity.bin,73447640,Unique material or archived input: regeneration within budget not established
+out/ensemble-tables-oct3-v1/opacity_cool/on_x7000_y1200/opacity.bin,73447640,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/gibbs_blend/FAILED_full_window/candidate_gibbs_full/family_v4_gibbs_full.bin.patch.zst,73322473,Unique material or archived input: regeneration within budget not established
+out/pulse-preonset-current-v9/accepted_models.jsonl.gz,73277797,Checkpoint or accepted stellar-state archive: preserved
+out/pulse-preonset-current-v58/accepted_models.jsonl.gz,72338920,Checkpoint or accepted stellar-state archive: preserved
+out/pulse-face-matched-bisected-evolution-v3/accepted_models.jsonl.gz,72265252,Checkpoint or accepted stellar-state archive: preserved
+out/lowmass-metallicity-oct10-fable/sources/marcs/marcs_ap_mod.tar,72069120,Unique material or archived input: regeneration within budget not established
+out/borderline-semiconvection-oct11-fable/langer_p2392/pilot_l83_p1071/evolution/interior_full.csv.gz,72052082,"Full interiors: expensive, primary 0.1-Msun study, or insufficient replay evidence"
+data/atmosphere/sources/condensation_material_refinement/opacity/opacity.bin.gz,69873235,Unique material or archived input: regeneration within budget not established
+out/balance-floor-oct7-fable/src/data/atmosphere/sources/condensation_material_refinement/opacity/opacity.bin.gz,69873235,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/FAILED_candidate_skyecore_v4/family_z024_spike1_skyecore_v4.bin.patch.zst,69563752,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/FAILED_candidate_skyecore_v6/family_z024_spike1_skyecore_v6.bin.patch.zst,69563103,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/FAILED_candidate_skyecore_v5/family_z024_spike1_skyecore_v5.bin.patch.zst,69562699,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/FAILED_candidate_skyecore_v1/family_z024_spike1_skyecore_v1.bin.patch.zst,69560510,Unique material or archived input: regeneration within budget not established
+out/pulse-preonset-current-v56/accepted_models.jsonl.gz,69165992,Checkpoint or accepted stellar-state archive: preserved
+out/pulse-preonset-current-v60/accepted_models.jsonl.gz,68684021,Checkpoint or accepted stellar-state archive: preserved
+out/pulse-preonset-current-v53/accepted_models.jsonl.gz,68454437,Checkpoint or accepted stellar-state archive: preserved
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/lowt_core/v7b_nodes.npz,68357753,Unique material or archived input: regeneration within budget not established
+out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/candidate_v8_arrays/v8_correction.npz,68193913,Unique material or archived input: regeneration within budget not established
+out/pulse-preonset-current-v13/accepted_models.jsonl.gz,67607762,Checkpoint or accepted stellar-state archive: preserved
+out/pulse-preonset-current-v59/accepted_models.jsonl.gz,67433611,Checkpoint or accepted stellar-state archive: preserved
+out/pulse-preonset-current-v37/accepted_models.jsonl.gz,67374619,Checkpoint or accepted stellar-state archive: preserved
+out/pulse-preonset-current-v57/accepted_models.jsonl.gz,67357075,Checkpoint or accepted stellar-state archive: preserved

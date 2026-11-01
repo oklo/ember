@@ -1,0 +1,182 @@
+{
+  "date": "2026-11-01",
+  "science_status": "paused",
+  "files": [
+    {
+      "path": "exploratory/tracks.json.gz",
+      "sha256": "afb257d202bed64b366a8a05f434184657fa351f6e21794daa07992b422f10d0",
+      "bytes": 1388046,
+      "original": "out/headline-hr-oct5-v1/tracks.json",
+      "original_sha256": "c3df40d2cd47e0ae566c45451d913094b67507234129160689df96ec0e842a11",
+      "encoding": "gzip"
+    },
+    {
+      "path": "exploratory/validation.json",
+      "sha256": "084980646e46c70aad9ad32309426294bc3b3f374cac84234bd324026318375a",
+      "bytes": 4036,
+      "original": "out/headline-hr-oct5-v1/track_validation.json",
+      "original_sha256": "084980646e46c70aad9ad32309426294bc3b3f374cac84234bd324026318375a",
+      "encoding": "identity"
+    },
+    {
+      "path": "exploratory/original-notes.md",
+      "sha256": "b21d74053142ace8ca47de8799c3a3b1f12dcf74142fd436b2a79071ebac3ce4",
+      "bytes": 2324,
+      "original": "out/headline-hr-oct5-v1/README.md",
+      "original_sha256": "b21d74053142ace8ca47de8799c3a3b1f12dcf74142fd436b2a79071ebac3ce4",
+      "encoding": "identity"
+    },
+    {
+      "path": "exploratory/continuous-0.1Msun.csv.gz",
+      "sha256": "44832c895a72a34f789baea03614c8d208351d4995c41c8e3dd128dd81bb60f8",
+      "bytes": 748457,
+      "original": "docs/reports/2026-09-27/pms_main_sequence.csv",
+      "original_sha256": "7489784b235582a105c93075582ec638eaa3a6f1cbaa08f98dc14d25bb8a2e97",
+      "encoding": "gzip"
+    },
+    {
+      "path": "exploratory/continuous-provenance.json",
+      "sha256": "ca8e43691b316a65760cf3180be72b667282edef26a0eb193f3079e32c7f364c",
+      "bytes": 11269,
+      "original": "docs/reports/2026-09-27/pms_figure_inputs.json",
+      "original_sha256": "ca8e43691b316a65760cf3180be72b667282edef26a0eb193f3079e32c7f364c",
+      "encoding": "identity"
+    },
+    {
+      "path": "boundary/tracks.json.gz",
+      "sha256": "4554009e70a4f4eb7765dc9125ea9cdd4725359c2a14c35e3a508628681f2805",
+      "bytes": 2937795,
+      "original": "out/metallicity-map-oct27/figures/hr_tracks_oct31_v1/track_data.json",
+      "original_sha256": "2d4470e8048f6936f02b9132742e821861dfc7d2119161e078c74c64c9e24b2b",
+      "encoding": "gzip"
+    },
+    {
+      "path": "boundary/provenance.json",
+      "sha256": "179c500e66d31d761332ebac0f3051a0e64ed0273e247d1cda734522f1922c77",
+      "bytes": 195847,
+      "original": "out/metallicity-map-oct27/figures/hr_tracks_oct31_v1/provenance.json",
+      "original_sha256": "179c500e66d31d761332ebac0f3051a0e64ed0273e247d1cda734522f1922c77",
+      "encoding": "identity"
+    },
+    {
+      "path": "boundary/catalogue.csv",
+      "sha256": "108a0a53e4b2744397a28b1034880b58eae022738361b89bbcb58b4d96c4250a",
+      "bytes": 8512,
+      "original": "out/metallicity-map-oct27/figures/hr_tracks_oct31_v1/Track catalogue.csv",
+      "original_sha256": "108a0a53e4b2744397a28b1034880b58eae022738361b89bbcb58b4d96c4250a",
+      "encoding": "identity"
+    },
+    {
+      "path": "boundary/figure-notes.txt",
+      "sha256": "59db94fbdc76234d451acad3eb503ac397979be8b477f4191df04cab44f0bf08",
+      "bytes": 2373,
+      "original": "out/metallicity-map-oct27/figures/hr_tracks_oct31_v1/Figure notes.txt",
+      "original_sha256": "59db94fbdc76234d451acad3eb503ac397979be8b477f4191df04cab44f0bf08",
+      "encoding": "identity"
+    },
+    {
+      "path": "boundary/ledger.json",
+      "sha256": "baa94216f3e4623174f584912a0753e19f2b4c0c95948992014253286296e748",
+      "bytes": 228472,
+      "original": "out/metallicity-map-oct27/reports/metallicity_boundary_ledger_v80.json",
+      "original_sha256": "baa94216f3e4623174f584912a0753e19f2b4c0c95948992014253286296e748",
+      "encoding": "identity"
+    },
+    {
+      "path": "boundary/conditional-widths.json",
+      "sha256": "443a3c3bd1103486f448253eb02eda91622cb45b7a85da2ff3f24ec0ddb51ab1",
+      "bytes": 87159,
+      "original": "out/metallicity-map-oct27/reports/conditional_edge_interpolation_v10/review.json",
+      "original_sha256": "443a3c3bd1103486f448253eb02eda91622cb45b7a85da2ff3f24ec0ddb51ab1",
+      "encoding": "identity"
+    },
+    {
+      "path": "low-metallicity/tracks.json.gz",
+      "sha256": "03d7610c2d0dc5110fd017327040723b16aa98f53d102a3e75ffa131d4146a0c",
+      "bytes": 39026,
+      "original": "out/metallicity-map-oct27/figures/lowz_progress_nov01_v1/track_data.json",
+      "original_sha256": "dd3e963e769b9f3c3eac3ac50c00e657878c9a3f4fd59b3dffcc0e6a0a2bb0ab",
+      "encoding": "gzip"
+    },
+    {
+      "path": "low-metallicity/provenance.json",
+      "sha256": "2e3987a1904174d2b7a4aab3e4c3ced14c1ff6d85b377545a9e39223013b8c9d",
+      "bytes": 11194,
+      "original": "out/metallicity-map-oct27/figures/lowz_progress_nov01_v1/provenance.json",
+      "original_sha256": "2e3987a1904174d2b7a4aab3e4c3ced14c1ff6d85b377545a9e39223013b8c9d",
+      "encoding": "identity"
+    },
+    {
+      "path": "low-metallicity/figure-notes.txt",
+      "sha256": "8d742c9e3148f91a4baa2ec83b7328aefb5c5575b8df99511d75a7b5f061ee32",
+      "bytes": 2501,
+      "original": "out/metallicity-map-oct27/figures/lowz_progress_nov01_v1/Low-metallicity evolution \u2014 notes.txt",
+      "original_sha256": "8d742c9e3148f91a4baa2ec83b7328aefb5c5575b8df99511d75a7b5f061ee32",
+      "encoding": "identity"
+    },
+    {
+      "path": "paused-state.json",
+      "sha256": "79646f29697b80e540fa5b42b617ade1352b5d830634f07a9a1cf6cf7238d73c",
+      "bytes": 9037,
+      "original": "out/metallicity-map-oct27/progress_20261101T002551Z.json",
+      "original_sha256": "79646f29697b80e540fa5b42b617ade1352b5d830634f07a9a1cf6cf7238d73c",
+      "encoding": "identity"
+    },
+    {
+      "path": "analytic/map.json.gz",
+      "sha256": "81563f5a56ca3d8356362e5179827f8e93831a3f5a6cc567aa00ab411ebda284",
+      "bytes": 6479,
+      "original": "out/metallicity-map-oct27/analytic_first_look_v10/map_data.json",
+      "original_sha256": "3fbd6e33116a95a89c0582a782023e58bc0c9a71090b906b464abb8815429a94",
+      "encoding": "gzip"
+    },
+    {
+      "path": "analytic/manifest.json",
+      "sha256": "813d70d2df2aad67496bf2c81305fa5f42cf3249217c5fdb534414984a01b113",
+      "bytes": 716,
+      "original": "out/metallicity-map-oct27/analytic_first_look_v10/manifest.json",
+      "original_sha256": "813d70d2df2aad67496bf2c81305fa5f42cf3249217c5fdb534414984a01b113",
+      "encoding": "identity"
+    },
+    {
+      "path": "analytic/notes.txt",
+      "sha256": "67e803522ecdecbbe571abb2f8d4873f489870d9607a3c2c2b4be6d2fb052485",
+      "bytes": 5334,
+      "original": "out/metallicity-map-oct27/analytic_first_look_v10/Ember - Reheating Map - Oct 28 2026.txt",
+      "original_sha256": "67e803522ecdecbbe571abb2f8d4873f489870d9607a3c2c2b4be6d2fb052485",
+      "encoding": "identity"
+    },
+    {
+      "path": "analytic/fold-review.json",
+      "sha256": "03e662d48277488105544517daf14a77410ced4a3f61c9f0d4a89b350a7d51b8",
+      "bytes": 5533,
+      "original": "out/metallicity-map-oct27/reports/chandrasekhar_fold_primary_review.json",
+      "original_sha256": "03e662d48277488105544517daf14a77410ced4a3f61c9f0d4a89b350a7d51b8",
+      "encoding": "identity"
+    },
+    {
+      "path": "provenance.tar.gz",
+      "sha256": "b3e86cebdfd305c9657a37d842ee2e7564b3c370c848cbcf523f7637a5adb6c0",
+      "bytes": 29491060,
+      "original": "Assembled during maintenance; source paths recorded in archive/index",
+      "original_sha256": "b3e86cebdfd305c9657a37d842ee2e7564b3c370c848cbcf523f7637a5adb6c0",
+      "encoding": "identity"
+    },
+    {
+      "path": "provenance-index.json",
+      "sha256": "3e2f321185a3ac46b6fdb32e991f36a680495ca057110920d59db0663cd2f0eb",
+      "bytes": 689913,
+      "original": "Assembled during maintenance; source paths recorded in archive/index",
+      "original_sha256": "3e2f321185a3ac46b6fdb32e991f36a680495ca057110920d59db0663cd2f0eb",
+      "encoding": "identity"
+    },
+    {
+      "path": "current-source.tar.gz",
+      "sha256": "a1407edb1bfc5160f76440082bda42be9191243ef638cfaa0fb1219bbedb2a75",
+      "bytes": 1486681,
+      "original": "Assembled during maintenance; source paths recorded in archive/index",
+      "original_sha256": "a1407edb1bfc5160f76440082bda42be9191243ef638cfaa0fb1219bbedb2a75",
+      "encoding": "identity"
+    }
+  ]
+}

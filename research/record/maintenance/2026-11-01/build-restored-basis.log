@@ -1,0 +1,196 @@
+[1/176] Building CXX object src/CMakeFiles/ember.dir/opacity_mixture.cpp.o
+[2/176] Building CXX object src/CMakeFiles/ember.dir/opacity_table.cpp.o
+[3/176] Building CXX object apps/CMakeFiles/ember-equilibrium.dir/equilibrium.cpp.o
+[4/176] Linking CXX static library src/libember.a
+[5/176] Building CXX object tests/CMakeFiles/opacity_family_probe.dir/__/scripts/opacity_family_probe.cpp.o
+[6/176] Building CXX object tests/CMakeFiles/test_opacity.dir/test_opacity.cpp.o
+[7/176] Building CXX object tests/CMakeFiles/test_opacity_support.dir/test_opacity_support.cpp.o
+[8/176] Building CXX object apps/CMakeFiles/ember-evolve.dir/evolve.cpp.o
+[9/176] Building CXX object tests/CMakeFiles/test_opacity_radiative.dir/test_opacity_radiative.cpp.o
+[10/176] Building CXX object tests/CMakeFiles/test_dense_opacity.dir/test_dense_opacity.cpp.o
+[11/176] Building CXX object tests/CMakeFiles/test_nuclear.dir/test_nuclear.cpp.o
+[12/176] Building CXX object tests/CMakeFiles/test_opacity_native.dir/test_opacity_native.cpp.o
+[13/176] Building CXX object tests/CMakeFiles/test_deuterium.dir/test_deuterium.cpp.o
+[14/176] Building CXX object apps/CMakeFiles/ember-evolve.dir/lifetime_driver.cpp.o
+[15/176] Building CXX object tests/CMakeFiles/test_deuterium_burning.dir/test_deuterium_burning.cpp.o
+/Users/greglaughlin/Projects/ember/tests/test_deuterium_burning.cpp:147:16: warning: declaration shadows a local variable [-Wshadow]
+  147 |     const auto uniform=burn_and_mix(varied,varied,network,{{0,4}},dt,1e-14);
+      |                ^
+/Users/greglaughlin/Projects/ember/tests/test_deuterium_burning.cpp:58:8: note: previous declaration is here
+   58 |   auto uniform=cold;uniform.m.clear();uniform.y.clear();uniform.comp.clear();
+      |        ^
+1 warning generated.
+[16/176] Building CXX object tests/CMakeFiles/test_pms_cn_burning.dir/test_pms_cn_burning.cpp.o
+[17/176] Building CXX object tests/CMakeFiles/test_pms_cn_evolution.dir/test_pms_cn_evolution.cpp.o
+[18/176] Building CXX object tests/CMakeFiles/test_nuclear_cn.dir/test_nuclear_cn.cpp.o
+[19/176] Building CXX object tests/CMakeFiles/test_nuclear_prescriptions.dir/test_nuclear_prescriptions.cpp.o
+[20/176] Building CXX object tests/CMakeFiles/test_nuclear_cn_network.dir/test_nuclear_cn_network.cpp.o
+[21/176] Building CXX object tests/CMakeFiles/pms_deuterium_control.dir/__/scripts/pms_deuterium_control.cpp.o
+[22/176] Building CXX object tests/CMakeFiles/test_face_energy.dir/test_face_energy.cpp.o
+[23/176] Building CXX object tests/CMakeFiles/test_cn_burning.dir/test_cn_burning.cpp.o
+/Users/greglaughlin/Projects/ember/tests/test_cn_burning.cpp:16:39: warning: implicit conversion from 'std::size_t' (aka 'unsigned long') to 'double' may lose precision [-Wimplicit-int-float-conversion]
+   16 |       const double X=late?.0008:.1+.1*i;
+      |                                      ~^
+/Users/greglaughlin/Projects/ember/tests/test_cn_burning.cpp:19:91: warning: implicit conversion from 'std::size_t' (aka 'unsigned long') to 'double' may lose precision [-Wimplicit-int-float-conversion]
+   19 |       model.y.push_back({std::log(1.+i),std::log(late?8500.:300.),std::log(late?1.3e7:5e6+i*1e6),1.});
+      |                                                                                           ^~
+/Users/greglaughlin/Projects/ember/tests/test_cn_burning.cpp:19:38: warning: implicit conversion from 'std::size_t' (aka 'unsigned long') to 'double' may lose precision [-Wimplicit-int-float-conversion]
+   19 |       model.y.push_back({std::log(1.+i),std::log(late?8500.:300.),std::log(late?1.3e7:5e6+i*1e6),1.});
+      |                                     ~^
+/Users/greglaughlin/Projects/ember/tests/test_cn_burning.cpp:20:57: warning: implicit conversion from 'std::size_t' (aka 'unsigned long') to 'double' may lose precision [-Wimplicit-int-float-conversion]
+   20 |       const auto y=initial_gs98_cn(c);const double f=.2*i;
+      |                                                        ~^
+4 warnings generated.
+[24/176] Building CXX object tests/CMakeFiles/test_cn_transport.dir/test_cn_transport.cpp.o
+[25/176] Building CXX object tests/CMakeFiles/test_cn_thermal_source.dir/test_cn_thermal_source.cpp.o
+[26/176] Building CXX object tests/CMakeFiles/test_cn_diffusion.dir/test_cn_diffusion.cpp.o
+[27/176] Building CXX object tests/CMakeFiles/test_numeric_table_data.dir/test_numeric_table_data.cpp.o
+[28/176] Building CXX object tests/CMakeFiles/test_metal_cn_transport.dir/test_metal_cn_transport.cpp.o
+[29/176] Building CXX object tests/CMakeFiles/test_thermal_neutrinos.dir/test_thermal_neutrinos.cpp.o
+[30/176] Building CXX object tests/CMakeFiles/test_convection.dir/test_convection.cpp.o
+[31/176] Building CXX object tests/CMakeFiles/cn_thermal_probe.dir/__/scripts/cn_thermal_probe.cpp.o
+[32/176] Building CXX object tests/CMakeFiles/test_structure.dir/test_structure.cpp.o
+[33/176] Building CXX object tests/CMakeFiles/test_fingering.dir/test_fingering.cpp.o
+[34/176] Building CXX object tests/CMakeFiles/test_ledoux.dir/test_ledoux.cpp.o
+[35/176] Building CXX object tests/CMakeFiles/test_henyey.dir/test_henyey.cpp.o
+[36/176] Building CXX object tests/CMakeFiles/test_atmosphere.dir/test_atmosphere.cpp.o
+[37/176] Building CXX object tests/CMakeFiles/test_relaxation.dir/test_relaxation.cpp.o
+[38/176] Building CXX object tests/CMakeFiles/test_stellar_equilibrium.dir/test_stellar_equilibrium.cpp.o
+[39/176] Building CXX object tests/CMakeFiles/test_tops.dir/test_tops.cpp.o
+[40/176] Building CXX object tests/CMakeFiles/test_cms19.dir/test_cms19.cpp.o
+[41/176] Building CXX object tests/CMakeFiles/test_low_mass_equilibrium.dir/test_low_mass_equilibrium.cpp.o
+[42/176] Building CXX object tests/CMakeFiles/test_helmholtz.dir/test_helmholtz.cpp.o
+[43/176] Building CXX object tests/CMakeFiles/test_composition_physics.dir/test_composition_physics.cpp.o
+[44/176] Building CXX object tests/CMakeFiles/test_nongrey_equilibrium.dir/test_nongrey_equilibrium.cpp.o
+[45/176] Building CXX object tests/CMakeFiles/test_burning_mixing.dir/test_burning_mixing.cpp.o
+[46/176] Building CXX object tests/CMakeFiles/test_metal_eos.dir/test_metal_eos.cpp.o
+[47/176] Building CXX object tests/CMakeFiles/test_secular_mixing.dir/test_secular_mixing.cpp.o
+[48/176] Building CXX object tests/CMakeFiles/test_material_transport.dir/test_material_transport.cpp.o
+[49/176] Building CXX object tests/CMakeFiles/test_material_flux.dir/test_material_flux.cpp.o
+[50/176] Building CXX object tests/CMakeFiles/material_flux_probe.dir/__/scripts/material_flux_probe.cpp.o
+[51/176] Building CXX object tests/CMakeFiles/material_transport_probe.dir/__/scripts/material_transport_probe.cpp.o
+[52/176] Building CXX object tests/CMakeFiles/test_species_transport.dir/test_species_transport.cpp.o
+[53/176] Building CXX object tests/CMakeFiles/collision_transport_probe.dir/__/scripts/collision_transport_probe.cpp.o
+[54/176] Building CXX object tests/CMakeFiles/test_species_reconstruction.dir/test_species_reconstruction.cpp.o
+[55/176] Building CXX object tests/CMakeFiles/species_transport_probe.dir/__/scripts/species_transport_probe.cpp.o
+[56/176] Building CXX object tests/CMakeFiles/test_collision_reuse.dir/test_collision_reuse.cpp.o
+[57/176] Building CXX object tests/CMakeFiles/native_heat_probe.dir/__/scripts/native_heat_probe.cpp.o
+[58/176] Building CXX object tests/CMakeFiles/screened_microscopic_probe.dir/__/scripts/screened_microscopic_probe.cpp.o
+[59/176] Building CXX object tests/CMakeFiles/physical_species_probe.dir/__/scripts/physical_species_probe.cpp.o
+[60/176] Building CXX object tests/CMakeFiles/test_microscopic_structure.dir/test_microscopic_structure.cpp.o
+[61/176] Building CXX object tests/CMakeFiles/test_microscopic_evolution.dir/test_microscopic_evolution.cpp.o
+[62/176] Building CXX object tests/CMakeFiles/test_envelope_transport.dir/test_envelope_transport.cpp.o
+[63/176] Building CXX object tests/CMakeFiles/test_coupled_evolution.dir/test_coupled_evolution.cpp.o
+[64/176] Building CXX object tests/CMakeFiles/test_extended_physics.dir/test_extended_physics.cpp.o
+[65/176] Building CXX object tests/CMakeFiles/test_convective_atmosphere.dir/test_convective_atmosphere.cpp.o
+[66/176] Building CXX object tests/CMakeFiles/test_atmosphere_helium_blend.dir/test_atmosphere_helium_blend.cpp.o
+[67/176] Building CXX object tests/CMakeFiles/test_extended_evolution.dir/test_extended_evolution.cpp.o
+[68/176] Building CXX object tests/CMakeFiles/test_atmosphere_metal_response.dir/test_atmosphere_metal_response.cpp.o
+[69/176] Building CXX object tests/CMakeFiles/test_atmosphere_grid.dir/test_atmosphere_grid.cpp.o
+[70/176] Building CXX object tests/CMakeFiles/test_atmosphere_overlap.dir/test_atmosphere_overlap.cpp.o
+[71/176] Building CXX object tests/CMakeFiles/test_atmosphere_fixed_metal.dir/test_atmosphere_fixed_metal.cpp.o
+[72/176] Building CXX object tests/CMakeFiles/physical_heat_probe.dir/__/scripts/physical_heat_probe.cpp.o
+[73/176] Building CXX object tests/CMakeFiles/total_species_heat_probe.dir/__/scripts/total_species_heat_probe.cpp.o
+[74/176] Building CXX object tests/CMakeFiles/full_star_diffusion_probe.dir/__/scripts/full_star_diffusion_probe.cpp.o
+[75/176] Building CXX object tests/CMakeFiles/physical_core_step_probe.dir/__/scripts/physical_core_step_probe.cpp.o
+[76/176] Building CXX object tests/CMakeFiles/test_screened_envelope_evolution.dir/test_screened_envelope_evolution.cpp.o
+[77/176] Building CXX object tests/CMakeFiles/test_parallel_evaluate.dir/test_parallel_evaluate.cpp.o
+[78/176] Building CXX object tests/CMakeFiles/metal_microscopic_probe.dir/__/scripts/metal_microscopic_probe.cpp.o
+[79/176] Building CXX object tests/CMakeFiles/test_convective_envelope_transport.dir/test_convective_envelope_transport.cpp.o
+[80/176] Building CXX object tests/CMakeFiles/test_stiff_mixing_flux.dir/test_stiff_mixing_flux.cpp.o
+[81/176] Building CXX object tests/CMakeFiles/test_atmosphere_trace_helium.dir/test_atmosphere_trace_helium.cpp.o
+[82/176] Building CXX object tests/CMakeFiles/test_metal_microscopic_evolution.dir/test_metal_microscopic_evolution.cpp.o
+[83/176] Building CXX object tests/CMakeFiles/test_atmosphere_metal_interval.dir/test_atmosphere_metal_interval.cpp.o
+[84/176] Building CXX object tests/CMakeFiles/test_deuterium_material.dir/test_deuterium_material.cpp.o
+[85/176] Linking CXX executable apps/ember-info
+[86/176] Linking CXX executable apps/ember-pack-eos
+[87/176] Building CXX object tests/CMakeFiles/metal_stellar_control.dir/__/scripts/metal_stellar_control.cpp.o
+[88/176] Linking CXX executable apps/ember-polytrope
+[89/176] Linking CXX executable apps/ember-equilibrium
+[90/176] Linking CXX executable apps/ember-evolve
+[91/176] Linking CXX executable tests/test_eos
+[92/176] Linking CXX executable tests/test_variable_metal_eos
+[93/176] Linking CXX executable tests/test_opacity
+[94/176] Linking CXX executable tests/opacity_family_probe
+[95/176] Linking CXX executable tests/test_opacity_support
+[96/176] Linking CXX executable tests/test_opacity_radiative
+[97/176] Linking CXX executable tests/test_opacity_hydrogen
+[98/176] Linking CXX executable tests/test_dense_opacity
+[99/176] Linking CXX executable tests/test_opacity_native
+[100/176] Linking CXX executable tests/test_nuclear
+[101/176] Linking CXX executable tests/test_deuterium
+[102/176] Building CXX object tests/CMakeFiles/pms_deuterium_table_control.dir/__/scripts/pms_deuterium_table_control.cpp.o
+[103/176] Linking CXX executable tests/test_pms_cn_burning
+[104/176] Linking CXX executable tests/test_deuterium_burning
+[105/176] Linking CXX executable tests/test_face_energy
+[106/176] Linking CXX executable tests/test_pms_cn_evolution
+[107/176] Linking CXX executable tests/pms_deuterium_control
+[108/176] Linking CXX executable tests/test_nuclear_prescriptions
+[109/176] Linking CXX executable tests/test_nuclear_cn
+[110/176] Linking CXX executable tests/test_nuclear_cn_network
+[111/176] Linking CXX executable tests/test_cn_transport
+[112/176] Linking CXX executable tests/test_cn_thermal_source
+[113/176] Linking CXX executable tests/test_cn_burning
+[114/176] Linking CXX executable tests/test_numeric_table_data
+[115/176] Linking CXX executable tests/test_metal_cn_transport
+[116/176] Linking CXX executable tests/test_cn_diffusion
+[117/176] Linking CXX executable tests/test_thermal_neutrinos
+[118/176] Linking CXX executable tests/cn_thermal_probe
+[119/176] Linking CXX executable tests/test_structure
+[120/176] Linking CXX executable tests/test_fingering
+[121/176] Linking CXX executable tests/test_convection
+[122/176] Linking CXX executable tests/test_ledoux
+[123/176] Linking CXX executable tests/test_henyey
+[124/176] Linking CXX executable tests/test_atmosphere
+[125/176] Linking CXX executable tests/test_relaxation
+[126/176] Building CXX object tests/CMakeFiles/test_atmosphere_hydrogen_envelope.dir/test_atmosphere_hydrogen_envelope.cpp.o
+[127/176] Linking CXX executable tests/test_tops
+[128/176] Linking CXX executable tests/test_low_mass_equilibrium
+[129/176] Linking CXX executable tests/test_cms19
+[130/176] Linking CXX executable tests/test_stellar_equilibrium
+[131/176] Linking CXX executable tests/test_helmholtz
+[132/176] Linking CXX executable tests/test_composition_physics
+[133/176] Linking CXX executable tests/test_nongrey_equilibrium
+[134/176] Linking CXX executable tests/test_metal_eos
+[135/176] Linking CXX executable tests/test_material_transport
+[136/176] Linking CXX executable tests/material_transport_probe
+[137/176] Linking CXX executable tests/test_burning_mixing
+[138/176] Linking CXX executable tests/test_secular_mixing
+[139/176] Linking CXX executable tests/test_material_flux
+[140/176] Linking CXX executable tests/material_flux_probe
+[141/176] Linking CXX executable tests/test_species_reconstruction
+[142/176] Linking CXX executable tests/test_species_transport
+[143/176] Linking CXX executable tests/species_transport_probe
+[144/176] Linking CXX executable tests/collision_transport_probe
+[145/176] Linking CXX executable tests/test_collision_reuse
+[146/176] Linking CXX executable tests/native_heat_probe
+[147/176] Linking CXX executable tests/test_microscopic_structure
+[148/176] Linking CXX executable tests/screened_microscopic_probe
+[149/176] Linking CXX executable tests/test_microscopic_evolution
+[150/176] Linking CXX executable tests/physical_species_probe
+[151/176] Linking CXX executable tests/test_extended_physics
+[152/176] Linking CXX executable tests/test_envelope_transport
+[153/176] Linking CXX executable tests/test_convective_atmosphere
+[154/176] Linking CXX executable tests/test_coupled_evolution
+[155/176] Linking CXX executable tests/test_atmosphere_helium_blend
+[156/176] Linking CXX executable tests/test_atmosphere_metal_response
+[157/176] Linking CXX executable tests/test_atmosphere_grid
+[158/176] Linking CXX executable tests/test_extended_evolution
+[159/176] Linking CXX executable tests/test_atmosphere_overlap
+[160/176] Linking CXX executable tests/test_screened_envelope_evolution
+[161/176] Linking CXX executable tests/physical_heat_probe
+[162/176] Linking CXX executable tests/test_atmosphere_fixed_metal
+[163/176] Linking CXX executable tests/test_parallel_evaluate
+[164/176] Linking CXX executable tests/total_species_heat_probe
+[165/176] Linking CXX executable tests/physical_core_step_probe
+[166/176] Linking CXX executable tests/full_star_diffusion_probe
+[167/176] Linking CXX executable tests/test_stiff_mixing_flux
+[168/176] Linking CXX executable tests/metal_microscopic_probe
+[169/176] Linking CXX executable tests/test_metal_microscopic_evolution
+[170/176] Linking CXX executable tests/test_convective_envelope_transport
+[171/176] Linking CXX executable tests/test_atmosphere_trace_helium
+[172/176] Linking CXX executable tests/test_atmosphere_metal_interval
+[173/176] Linking CXX executable tests/test_atmosphere_hydrogen_envelope
+[174/176] Linking CXX executable tests/metal_stellar_control
+[175/176] Linking CXX executable tests/test_deuterium_material
+[176/176] Linking CXX executable tests/pms_deuterium_table_control

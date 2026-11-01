@@ -1,0 +1,175 @@
+Test project /Users/greglaughlin/Projects/ember/build
+      Start 72: lifetime_restart
+      Start 71: evolution_restart
+      Start 63: finite_screened_envelope_evolution
+      Start 62: screened_envelope_evolution
+ 1/83 Test #62: screened_envelope_evolution ..........   Passed   10.15 sec
+      Start 64: atmosphere_column_solver
+ 2/83 Test #63: finite_screened_envelope_evolution ...   Passed   12.31 sec
+      Start 15: evolution_controller
+ 3/83 Test #15: evolution_controller .................   Passed    5.43 sec
+      Start 76: finite_metal_evolution
+ 4/83 Test #76: finite_metal_evolution ...............   Passed    4.03 sec
+      Start 77: lagged_finite_metal_evolution
+ 5/83 Test #64: atmosphere_column_solver .............   Passed   12.63 sec
+      Start 13: pms_cn_evolution
+ 6/83 Test #13: pms_cn_evolution .....................   Passed    2.87 sec
+      Start 75: metal_microscopic_face_evolution
+ 7/83 Test #77: lagged_finite_metal_evolution ........   Passed    4.10 sec
+      Start 14: pms_cn_face_evolution
+ 8/83 Test #75: metal_microscopic_face_evolution .....   Passed    2.84 sec
+      Start 74: metal_microscopic_evolution
+ 9/83 Test #14: pms_cn_face_evolution ................   Passed    2.88 sec
+      Start  7: opacity_radiative
+10/83 Test  #7: opacity_radiative ....................   Passed    2.18 sec
+      Start 56: extended_evolution
+11/83 Test #74: metal_microscopic_evolution ..........   Passed    2.63 sec
+      Start 55: convective_atmosphere
+12/83 Test #55: convective_atmosphere ................   Passed    2.55 sec
+      Start 69: eos_density_merge
+13/83 Test #56: extended_evolution ...................   Passed    3.94 sec
+      Start 50: microscopic_evolution
+14/83 Test #69: eos_density_merge ....................   Passed    1.55 sec
+      Start 54: extended_physics
+15/83 Test #50: microscopic_evolution ................   Passed    1.03 sec
+      Start 51: total_species_heat_evolution
+16/83 Test #54: extended_physics .....................   Passed    1.09 sec
+      Start 66: aesopus_import
+17/83 Test #66: aesopus_import .......................   Passed    0.39 sec
+      Start 34: stellar_equilibrium
+18/83 Test #51: total_species_heat_evolution .........   Passed    0.85 sec
+      Start 37: low_mass_equilibrium
+19/83 Test #37: low_mass_equilibrium .................   Passed    5.18 sec
+      Start 11: deuterium_burning
+20/83 Test #11: deuterium_burning ....................   Passed    0.23 sec
+      Start 10: deuterium
+21/83 Test #10: deuterium ............................   Passed    0.20 sec
+      Start 12: pms_cn_burning
+22/83 Test #12: pms_cn_burning .......................   Passed    0.22 sec
+      Start 18: nuclear_cn
+23/83 Test #34: stellar_equilibrium ..................   Passed    5.92 sec
+      Start  2: variable_metal_eos
+24/83 Test #18: nuclear_cn ...........................   Passed    0.21 sec
+      Start 48: collision_reuse
+25/83 Test  #2: variable_metal_eos ...................   Passed    0.42 sec
+      Start 47: species_reconstruction
+26/83 Test #48: collision_reuse ......................   Passed    0.39 sec
+      Start 52: envelope_transport
+27/83 Test #47: species_reconstruction ...............   Passed    0.31 sec
+      Start 46: species_transport
+28/83 Test #52: envelope_transport ...................   Passed    0.39 sec
+      Start 44: material_transport
+29/83 Test #46: species_transport ....................   Passed    0.41 sec
+      Start 58: atmosphere_helium_blend
+30/83 Test #44: material_transport ...................   Passed    0.40 sec
+      Start 45: material_flux
+31/83 Test #58: atmosphere_helium_blend ..............   Passed    0.38 sec
+      Start 61: atmosphere_overlap
+32/83 Test #45: material_flux ........................   Passed    0.42 sec
+      Start 60: atmosphere_fixed_metal
+33/83 Test #61: atmosphere_overlap ...................   Passed    0.48 sec
+      Start 19: nuclear_cn_network
+34/83 Test #60: atmosphere_fixed_metal ...............   Passed    0.46 sec
+      Start 29: fingering
+35/83 Test #19: nuclear_cn_network ...................   Passed    0.41 sec
+      Start 22: cn_transport
+36/83 Test #29: fingering ............................   Passed    0.40 sec
+      Start 25: numeric_table_data
+37/83 Test #22: cn_transport .........................   Passed    0.40 sec
+      Start 26: thermal_neutrinos
+38/83 Test #25: numeric_table_data ...................   Passed    0.41 sec
+      Start 70: nongrey_import
+39/83 Test #26: thermal_neutrinos ....................   Passed    0.39 sec
+      Start 41: metal_eos
+40/83 Test #41: metal_eos ............................   Passed    0.94 sec
+      Start 20: cn_burning
+41/83 Test #20: cn_burning ...........................   Passed    0.23 sec
+      Start 83: deuterium_material
+42/83 Test #83: deuterium_material ...................   Passed    0.22 sec
+      Start 16: face_energy
+43/83 Test #16: face_energy ..........................   Passed    0.29 sec
+      Start 49: microscopic_structure
+44/83 Test #49: microscopic_structure ................   Passed    0.21 sec
+      Start 73: parallel_evaluate
+45/83 Test #73: parallel_evaluate ....................   Passed    0.20 sec
+      Start 82: atmosphere_hydrogen_envelope
+46/83 Test #70: nongrey_import .......................   Passed    2.44 sec
+      Start 78: convective_envelope_transport
+47/83 Test #82: atmosphere_hydrogen_envelope .........   Passed    0.21 sec
+      Start 79: stiff_mixing_flux
+48/83 Test #78: convective_envelope_transport ........   Passed    0.22 sec
+      Start 53: coupled_evolution
+49/83 Test #79: stiff_mixing_flux ....................   Passed    0.36 sec
+      Start 23: metal_cn_transport
+50/83 Test #23: metal_cn_transport ...................   Passed    0.41 sec
+      Start 24: cn_diffusion
+51/83 Test #24: cn_diffusion .........................   Passed    0.22 sec
+      Start  6: opacity_native
+52/83 Test  #6: opacity_native .......................   Passed    0.24 sec
+      Start 21: cn_thermal_source
+53/83 Test #21: cn_thermal_source ....................   Passed    0.22 sec
+      Start 65: tops_sources
+54/83 Test #65: tops_sources .........................   Passed    0.15 sec
+      Start 80: atmosphere_trace_helium
+55/83 Test #53: coupled_evolution ....................   Passed    1.50 sec
+      Start 81: atmosphere_metal_interval
+56/83 Test #80: atmosphere_trace_helium ..............   Passed    0.22 sec
+      Start  4: opacity_support
+57/83 Test #81: atmosphere_metal_interval ............   Passed    0.33 sec
+      Start 59: atmosphere_metal_response
+58/83 Test  #4: opacity_support ......................   Passed    0.38 sec
+      Start  5: opacity_hydrogen
+59/83 Test #59: atmosphere_metal_response ............   Passed    0.37 sec
+      Start  8: dense_opacity
+60/83 Test  #5: opacity_hydrogen .....................   Passed    0.38 sec
+      Start 39: nongrey_equilibrium
+61/83 Test #39: nongrey_equilibrium ..................   Passed    0.99 sec
+      Start 67: remnant_endpoints
+62/83 Test #67: remnant_endpoints ....................   Passed    0.08 sec
+      Start 68: metal_eos_sources
+63/83 Test #68: metal_eos_sources ....................   Passed    0.13 sec
+      Start 40: composition_physics
+64/83 Test  #8: dense_opacity ........................   Passed    1.61 sec
+      Start 30: ledoux
+65/83 Test #30: ledoux ...............................   Passed    0.22 sec
+      Start 57: atmosphere_grid
+66/83 Test #57: atmosphere_grid ......................   Passed    0.22 sec
+      Start 35: cms19
+67/83 Test #40: composition_physics ..................   Passed    0.73 sec
+      Start 17: nuclear_prescriptions
+68/83 Test #17: nuclear_prescriptions ................   Passed    0.33 sec
+      Start 43: secular_mixing
+69/83 Test #35: cms19 ................................   Passed    0.55 sec
+      Start 42: burning_mixing
+70/83 Test #43: secular_mixing .......................   Passed    0.21 sec
+      Start 38: helmholtz
+71/83 Test #42: burning_mixing .......................   Passed    0.26 sec
+      Start 36: tops
+72/83 Test #38: helmholtz ............................   Passed    0.51 sec
+      Start 33: relaxation
+73/83 Test #36: tops .................................   Passed    0.41 sec
+      Start 31: atmosphere
+74/83 Test #33: relaxation ...........................   Passed    0.27 sec
+      Start 32: henyey
+75/83 Test #32: henyey ...............................   Passed    0.37 sec
+      Start 28: convection
+76/83 Test #28: convection ...........................   Passed    0.21 sec
+      Start  9: nuclear
+77/83 Test #31: atmosphere ...........................   Passed    0.78 sec
+      Start 27: structure
+78/83 Test  #9: nuclear ..............................   Passed    0.33 sec
+      Start  1: eos
+79/83 Test #27: structure ............................   Passed    0.48 sec
+      Start  3: opacity
+80/83 Test  #1: eos ..................................   Passed    0.37 sec
+81/83 Test  #3: opacity ..............................   Passed    0.37 sec
+82/83 Test #71: evolution_restart ....................   Passed   89.44 sec
+83/83 Test #72: lifetime_restart .....................   Passed  147.47 sec
+
+100% tests passed out of 83
+
+Label Time Summary:
+integration      = 169.93 sec*proc (3 tests)
+material-data    = 172.11 sec*proc (4 tests)
+
+Total Test time (real) = 147.47 sec

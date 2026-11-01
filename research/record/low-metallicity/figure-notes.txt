@@ -1,0 +1,15 @@
+EMBER — LOW-METALLICITY EVOLUTION — 1 NOVEMBER 2026
+
+Horizontal coordinate: elapsed time from each compact initial model, in Gyr, on a logarithmic axis. The extended Hayashi PMS phase is not included. The displayed window starts at10Gyr.
+Vertical coordinate: photospheric effective temperature. Colour: surface luminosity on one shared logarithmic scale. Thick tracks are the newly reviewed midpoints; thin tracks are controls. Dots mark last reviewed states. Lines between saved states are for visualization.
+
+primordial: cooling control, M=0.096091359252929692Msun, 257points, through125.000000Gyr; /Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/primordial_m0960913592529297_to125_bounded_v1_segment_10_review.json
+primordial: new midpoint, M=0.096091394958496099Msun, 257points, through150.000000Gyr; /Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/primordial_resume_to150_nov01_v2_segment_3_review.json
+z005: cooling control, M=0.075952734374999997Msun, 513points, through128.097126Gyr; /Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/native_mesh_z005_m075952734375_n513_129Gyr_review_v4.json
+z005: new midpoint, M=0.076076367187499994Msun, 513points, through278.269379Gyr; /Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/z005_fine_midpoint_resume_nov01_v2_segment_2_review.json
+z005: upper control, M=0.076200000000000004Msun, 513points, through350.000000Gyr; /Users/greglaughlin/Projects/ember/out/metallicity-map-oct27/reports/native_mesh_z005_m076200_n513_350Gyr_review_v4.json
+
+The warm tracks here remain fully connected convectively. They are not post-stable-layer delayed reheaters. The common125Gyr cooling-to-warming sample gaps are3.570556640630773e-8Msun for PopIII and1.2363281249999636e-4Msun forZ=.005; neither is a physical reheater width or converged uncertainty.
+PopIII midpoint reached150Gyr. Its independent approximate-snapshot calculation passed all five declared fixed-offset comparisons over50–150Gyr, with maximumTeff error4.5086K; that shortcut is not separately overplotted. No age offset was refitted.
+Z=.005 midpoint reached278.269Gyr; the upper control reaches350Gyr. Finite endpoints do not establish permanent fates. The lowerZ=.005 track uses the unchanged source calculation, not its later bounded-opacity extrapolation.
+This figure adds new reviewed low-metallicity tracks. The earlier all-metallicity overview/temperature/luminosity PNGs retain their prior data cutoff.

@@ -1,0 +1,2534 @@
+[
+  {
+    "directory": "out/core-fe-precipitation-sept30-v1/build_base/CMakeFiles",
+    "files": 12,
+    "bytes": 293025,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/core-fe-precipitation-sept30-v1/build/CMakeFiles",
+    "files": 12,
+    "bytes": 292215,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/production-source-oct2-v1/out/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 159417,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/production-source-oct2-v1/out/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 42940,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/production-source-oct2-v1/out/build/tests/CMakeFiles",
+    "files": 850,
+    "bytes": 927878,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/production-source-oct2-v1/out/build/CMakeFiles",
+    "files": 156,
+    "bytes": 693160,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/picaso-pilot-oct11-fable/multiregion_p2678/__pycache__",
+    "files": 1,
+    "bytes": 26461,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/picaso-pilot-oct11-fable/__pycache__",
+    "files": 5,
+    "bytes": 61156,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fable-adversarial-review-20260926/build/src/CMakeFiles",
+    "files": 110,
+    "bytes": 5353848,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fable-adversarial-review-20260926/build/apps/CMakeFiles",
+    "files": 48,
+    "bytes": 898438,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fable-adversarial-review-20260926/build/tests/CMakeFiles",
+    "files": 838,
+    "bytes": 9742464,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fable-adversarial-review-20260926/build/CMakeFiles",
+    "files": 184,
+    "bytes": 614670,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fable-adversarial-review-20260926/conservation/build/src/CMakeFiles",
+    "files": 115,
+    "bytes": 13257272,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fable-adversarial-review-20260926/conservation/build/apps/CMakeFiles",
+    "files": 47,
+    "bytes": 44052,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fable-adversarial-review-20260926/conservation/build/CMakeFiles",
+    "files": 14,
+    "bytes": 204481,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fable-adversarial-review-20260926/fresh-clone/ember/build/src/CMakeFiles",
+    "files": 26,
+    "bytes": 547592,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fable-adversarial-review-20260926/fresh-clone/ember/build/apps/CMakeFiles",
+    "files": 4,
+    "bytes": 283080,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fable-adversarial-review-20260926/fresh-clone/ember/build/tests/CMakeFiles",
+    "files": 28,
+    "bytes": 841656,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fable-adversarial-review-20260926/fresh-clone/ember/build/CMakeFiles",
+    "files": 12,
+    "bytes": 246747,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/transport-floor-sept30-v1/build/CMakeFiles",
+    "files": 12,
+    "bytes": 291201,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/pair574/members/__pycache__",
+    "files": 1,
+    "bytes": 19548,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/pair574/decomp/__pycache__",
+    "files": 1,
+    "bytes": 15145,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/pair574/reader/__pycache__",
+    "files": 1,
+    "bytes": 18382,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/__pycache__",
+    "files": 10,
+    "bytes": 105572,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/unwindow/__pycache__",
+    "files": 1,
+    "bytes": 18757,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-efficiency-oct21/opus_tables/eos/dense_core/ext_v6/__pycache__",
+    "files": 2,
+    "bytes": 9765,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-efficiency-oct21/opus_tables/cold_segment_p2819/h1_family_intake_primarytask/forward650/stageB_lowZ_forward595/scripts/__pycache__",
+    "files": 1,
+    "bytes": 22961,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-efficiency-oct21/opus_tables/cold_segment_p2819/h1_family_intake_primarytask/forward650/scripts_v2/__pycache__",
+    "files": 1,
+    "bytes": 17602,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-efficiency-oct21/opus_tables/cold_segment_p2819/h1_family_intake_primarytask/forward650/scripts/__pycache__",
+    "files": 1,
+    "bytes": 17880,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-efficiency-oct21/opus_tables/cold_segment_p2819/h1_family_intake_primarytask/forward650/joyplot900/scripts/__pycache__",
+    "files": 1,
+    "bytes": 29042,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-efficiency-oct21/opus_tables/cold_segment_p2819/opacity_cooling_x85/lowz_source_focused/paired_Z5_reader/tools/__pycache__",
+    "files": 1,
+    "bytes": 6867,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/negdelta-layer-oct2-v1/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 153588,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/negdelta-layer-oct2-v1/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 43591,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/negdelta-layer-oct2-v1/build/tests/CMakeFiles",
+    "files": 794,
+    "bytes": 881232,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/negdelta-layer-oct2-v1/build/CMakeFiles",
+    "files": 156,
+    "bytes": 665125,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/deep-solid-eos-oct1-v1/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 148781,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/deep-solid-eos-oct1-v1/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 43591,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/deep-solid-eos-oct1-v1/build/tests/CMakeFiles",
+    "files": 770,
+    "bytes": 855036,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/deep-solid-eos-oct1-v1/build/CMakeFiles",
+    "files": 156,
+    "bytes": 657568,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-mixing-oct6-fable/build-common/src/CMakeFiles",
+    "files": 154,
+    "bytes": 9566206,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-mixing-oct6-fable/build-common/apps/CMakeFiles",
+    "files": 51,
+    "bytes": 1306335,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-mixing-oct6-fable/build-common/tests/CMakeFiles",
+    "files": 1199,
+    "bytes": 1209249,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-mixing-oct6-fable/build-common/CMakeFiles",
+    "files": 184,
+    "bytes": 763160,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-mixing-oct6-fable/build/src/CMakeFiles",
+    "files": 10,
+    "bytes": 175029,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-mixing-oct6-fable/build/apps/CMakeFiles",
+    "files": 64,
+    "bytes": 3174668,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-mixing-oct6-fable/build/tests/CMakeFiles",
+    "files": 933,
+    "bytes": 1165678,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-mixing-oct6-fable/build/CMakeFiles",
+    "files": 184,
+    "bytes": 751233,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-mixing-oct6-fable/build-base/src/CMakeFiles",
+    "files": 154,
+    "bytes": 9533177,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-mixing-oct6-fable/build-base/apps/CMakeFiles",
+    "files": 47,
+    "bytes": 44497,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-mixing-oct6-fable/build-base/tests/CMakeFiles",
+    "files": 1183,
+    "bytes": 1315750,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-mixing-oct6-fable/build-base/CMakeFiles",
+    "files": 184,
+    "bytes": 756206,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/metallicity-map-oct27/opus_eos/homology_energy_20261028T134452Z/__pycache__",
+    "files": 1,
+    "bytes": 41710,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/metallicity-map-oct27/__pycache__",
+    "files": 2,
+    "bytes": 19319,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fastchem-pms-sept21-v1/verified-build/CMakeFiles",
+    "files": 36,
+    "bytes": 442743,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/interface-phase-assessment-oct5-v1/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 172527,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/interface-phase-assessment-oct5-v1/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 43954,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/interface-phase-assessment-oct5-v1/build/tests/CMakeFiles",
+    "files": 962,
+    "bytes": 1073950,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/interface-phase-assessment-oct5-v1/build/CMakeFiles",
+    "files": 156,
+    "bytes": 732008,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-atmosphere-bottom-two-oct5-v1/scripts/__pycache__",
+    "files": 2,
+    "bytes": 28619,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/borderline-semiconvection-oct11-fable/metal_eos_p2393/text_p2612/__pycache__",
+    "files": 1,
+    "bytes": 29486,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/borderline-semiconvection-oct11-fable/metal_eos_p2393/ext2_p2485/__pycache__",
+    "files": 1,
+    "bytes": 0,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/borderline-semiconvection-oct11-fable/metal_eos_p2393/freeeos_build/build/src/CMakeFiles",
+    "files": 125,
+    "bytes": 2973303,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/borderline-semiconvection-oct11-fable/metal_eos_p2393/freeeos_build/build/document_FreeEOS/figure_utils/CMakeFiles",
+    "files": 36,
+    "bytes": 92351,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/borderline-semiconvection-oct11-fable/metal_eos_p2393/freeeos_build/build/CMakeFiles",
+    "files": 10,
+    "bytes": 442075,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/borderline-semiconvection-oct11-fable/metal_eos_p2393/freeeos_build/build/test_FreeEOS/utils/CMakeFiles",
+    "files": 21,
+    "bytes": 52375,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/borderline-semiconvection-oct11-fable/metal_eos_p2393/fresh_family_p2410/__pycache__",
+    "files": 1,
+    "bytes": 18656,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/borderline-semiconvection-oct11-fable/metal_eos_p2393/freeeos_paired_p2408/__pycache__",
+    "files": 1,
+    "bytes": 13616,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/borderline-semiconvection-oct11-fable/metal_eos_p2393/zext_p2489/__pycache__",
+    "files": 1,
+    "bytes": 33283,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/envelope-speed-oct7-fable/build/src/CMakeFiles",
+    "files": 155,
+    "bytes": 21296352,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/envelope-speed-oct7-fable/build/apps/CMakeFiles",
+    "files": 52,
+    "bytes": 1824753,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/envelope-speed-oct7-fable/build/tests/CMakeFiles",
+    "files": 1208,
+    "bytes": 1217420,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/envelope-speed-oct7-fable/build/CMakeFiles",
+    "files": 184,
+    "bytes": 762266,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/envelope-auto-oct7-fable/build/src/CMakeFiles",
+    "files": 155,
+    "bytes": 21295372,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/envelope-auto-oct7-fable/build/apps/CMakeFiles",
+    "files": 60,
+    "bytes": 2232280,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/envelope-auto-oct7-fable/build/tests/CMakeFiles",
+    "files": 1477,
+    "bytes": 18895823,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/envelope-auto-oct7-fable/build/CMakeFiles",
+    "files": 184,
+    "bytes": 761159,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/production-source-oct3-v1/out/build/src/CMakeFiles",
+    "files": 157,
+    "bytes": 21772954,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/production-source-oct3-v1/out/build/apps/CMakeFiles",
+    "files": 60,
+    "bytes": 2313915,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/production-source-oct3-v1/out/build/tests/CMakeFiles",
+    "files": 1517,
+    "bytes": 24245305,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/production-source-oct3-v1/out/build/CMakeFiles",
+    "files": 184,
+    "bytes": 775948,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/metal-groups-rebase-oct5-fable/src/out/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 177747,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/metal-groups-rebase-oct5-fable/src/out/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 45002,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/metal-groups-rebase-oct5-fable/src/out/build/tests/CMakeFiles",
+    "files": 978,
+    "bytes": 1117892,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/metal-groups-rebase-oct5-fable/src/out/build/CMakeFiles",
+    "files": 156,
+    "bytes": 740503,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/irregular-atmosphere-reader-sept30-v1/tree/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 145916,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/irregular-atmosphere-reader-sept30-v1/tree/build/apps/CMakeFiles",
+    "files": 66,
+    "bytes": 74972,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/irregular-atmosphere-reader-sept30-v1/tree/build/CMakeFiles",
+    "files": 14,
+    "bytes": 207961,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/luhman16-independent-oct8-v1/build/src/CMakeFiles",
+    "files": 156,
+    "bytes": 9897904,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/luhman16-independent-oct8-v1/build/apps/CMakeFiles",
+    "files": 51,
+    "bytes": 1356247,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/luhman16-independent-oct8-v1/build/CMakeFiles",
+    "files": 14,
+    "bytes": 210897,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fingering3-oct5-fable/src/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 168188,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fingering3-oct5-fable/src/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 43678,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fingering3-oct5-fable/src/build/tests/CMakeFiles",
+    "files": 930,
+    "bytes": 1035052,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fingering3-oct5-fable/src/build/CMakeFiles",
+    "files": 156,
+    "bytes": 706721,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-alignment-fade-oct6-fable/src/out/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 174857,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-alignment-fade-oct6-fable/src/out/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 45000,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-alignment-fade-oct6-fable/src/out/build/tests/CMakeFiles",
+    "files": 1002,
+    "bytes": 1144126,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-alignment-fade-oct6-fable/src/out/build/CMakeFiles",
+    "files": 156,
+    "bytes": 743107,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/element-settling-oct6-fable/src/out/build_fb2/src/CMakeFiles",
+    "files": 11,
+    "bytes": 181941,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/element-settling-oct6-fable/src/out/build_fb2/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44906,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/element-settling-oct6-fable/src/out/build_fb2/tests/CMakeFiles",
+    "files": 1018,
+    "bytes": 1160913,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/element-settling-oct6-fable/src/out/build_fb2/CMakeFiles",
+    "files": 156,
+    "bytes": 754234,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/element-settling-oct6-fable/src/out/build_fb/src/CMakeFiles",
+    "files": 11,
+    "bytes": 181647,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/element-settling-oct6-fable/src/out/build_fb/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44841,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/element-settling-oct6-fable/src/out/build_fb/tests/CMakeFiles",
+    "files": 1018,
+    "bytes": 1159388,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/element-settling-oct6-fable/src/out/build_fb/CMakeFiles",
+    "files": 156,
+    "bytes": 753253,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/element-settling-oct6-fable/src/out/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 180765,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/element-settling-oct6-fable/src/out/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44646,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/element-settling-oct6-fable/src/out/build/tests/CMakeFiles",
+    "files": 1018,
+    "bytes": 1154813,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/element-settling-oct6-fable/src/out/build/CMakeFiles",
+    "files": 156,
+    "bytes": 745369,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/dense-transition-review-oct1-v1/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 146460,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/dense-transition-review-oct1-v1/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44653,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/dense-transition-review-oct1-v1/build/tests/CMakeFiles",
+    "files": 754,
+    "bytes": 856153,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/dense-transition-review-oct1-v1/build/CMakeFiles",
+    "files": 156,
+    "bytes": 660919,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/dense-transition-review-oct1-v1/build_wide/src/CMakeFiles",
+    "files": 11,
+    "bytes": 149100,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/dense-transition-review-oct1-v1/build_wide/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 45243,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/dense-transition-review-oct1-v1/build_wide/tests/CMakeFiles",
+    "files": 754,
+    "bytes": 866173,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/dense-transition-review-oct1-v1/build_wide/CMakeFiles",
+    "files": 156,
+    "bytes": 665454,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cooling-eos-support-sept30-v23/__pycache__",
+    "files": 1,
+    "bytes": 6564,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-interface-oct6-v1/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 167397,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-interface-oct6-v1/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 42536,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-interface-oct6-v1/build/tests/CMakeFiles",
+    "files": 994,
+    "bytes": 1077420,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-interface-oct6-v1/build/CMakeFiles",
+    "files": 156,
+    "bytes": 729640,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/end-to-end-physics-sept21-v1/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 113376,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/end-to-end-physics-sept21-v1/build/apps/CMakeFiles",
+    "files": 34,
+    "bytes": 31401,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/end-to-end-physics-sept21-v1/build/tests/CMakeFiles",
+    "files": 562,
+    "bytes": 594306,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/end-to-end-physics-sept21-v1/build/CMakeFiles",
+    "files": 156,
+    "bytes": 596889,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/highz-native-opacity-oct12-v1/normalized_native/__pycache__",
+    "files": 1,
+    "bytes": 6057,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/highz-native-opacity-oct12-v1/warm_atmosphere_controls/__pycache__",
+    "files": 3,
+    "bytes": 17776,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/highz-native-opacity-oct12-v1/column_gravity/__pycache__",
+    "files": 1,
+    "bytes": 2800,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/opus-speedup-sept27-v1/tree/build/src/CMakeFiles",
+    "files": 115,
+    "bytes": 13700299,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/opus-speedup-sept27-v1/tree/build/apps/CMakeFiles",
+    "files": 64,
+    "bytes": 2590436,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/opus-speedup-sept27-v1/tree/build/tests/CMakeFiles",
+    "files": 986,
+    "bytes": 31511102,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/opus-speedup-sept27-v1/tree/build/CMakeFiles",
+    "files": 184,
+    "bytes": 625083,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/dense-eos-source-repair-sept28-v1/probe-1e13/build/src/CMakeFiles",
+    "files": 65,
+    "bytes": 2068877,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/dense-eos-source-repair-sept28-v1/probe-1e13/build/document_FreeEOS/figure_utils/CMakeFiles",
+    "files": 36,
+    "bytes": 88257,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/dense-eos-source-repair-sept28-v1/probe-1e13/build/CMakeFiles",
+    "files": 10,
+    "bytes": 462439,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/dense-eos-source-repair-sept28-v1/probe-1e13/build/test_FreeEOS/utils/CMakeFiles",
+    "files": 21,
+    "bytes": 50121,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-source-refinement-oct1-v2/__pycache__",
+    "files": 1,
+    "bytes": 21359,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/warm-local-retry-sept29-v2/scripts/__pycache__",
+    "files": 4,
+    "bytes": 138209,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-dm/src/CMakeFiles",
+    "files": 156,
+    "bytes": 9864817,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-dm/apps/CMakeFiles",
+    "files": 51,
+    "bytes": 1349691,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-dm/tests/CMakeFiles",
+    "files": 1217,
+    "bytes": 1228653,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-dm/CMakeFiles",
+    "files": 184,
+    "bytes": 766863,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ge/src/CMakeFiles",
+    "files": 157,
+    "bytes": 21782360,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ge/apps/CMakeFiles",
+    "files": 60,
+    "bytes": 2322869,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ge/tests/CMakeFiles",
+    "files": 1499,
+    "bytes": 19366989,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ge/CMakeFiles",
+    "files": 184,
+    "bytes": 769603,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-pg/src/CMakeFiles",
+    "files": 155,
+    "bytes": 21322534,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-pg/apps/CMakeFiles",
+    "files": 51,
+    "bytes": 1343371,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-pg/tests/CMakeFiles",
+    "files": 1210,
+    "bytes": 1338416,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-pg/CMakeFiles",
+    "files": 184,
+    "bytes": 764207,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-st/src/CMakeFiles",
+    "files": 156,
+    "bytes": 9870443,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-st/apps/CMakeFiles",
+    "files": 51,
+    "bytes": 1351433,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-st/tests/CMakeFiles",
+    "files": 1226,
+    "bytes": 1238151,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-st/CMakeFiles",
+    "files": 184,
+    "bytes": 769603,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build/src/CMakeFiles",
+    "files": 155,
+    "bytes": 21310836,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build/apps/CMakeFiles",
+    "files": 64,
+    "bytes": 3217502,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build/tests/CMakeFiles",
+    "files": 1610,
+    "bytes": 53616377,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build/CMakeFiles",
+    "files": 184,
+    "bytes": 761159,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-d/src/CMakeFiles",
+    "files": 154,
+    "bytes": 9667010,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-d/apps/CMakeFiles",
+    "files": 51,
+    "bytes": 1345738,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-d/tests/CMakeFiles",
+    "files": 1208,
+    "bytes": 1217792,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-d/CMakeFiles",
+    "files": 184,
+    "bytes": 763191,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-c/src/CMakeFiles",
+    "files": 155,
+    "bytes": 21386457,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-c/apps/CMakeFiles",
+    "files": 52,
+    "bytes": 1859704,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-c/tests/CMakeFiles",
+    "files": 1208,
+    "bytes": 1217792,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-c/CMakeFiles",
+    "files": 184,
+    "bytes": 758250,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ic/src/CMakeFiles",
+    "files": 156,
+    "bytes": 9891030,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ic/apps/CMakeFiles",
+    "files": 59,
+    "bytes": 1802703,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ic/tests/CMakeFiles",
+    "files": 1498,
+    "bytes": 19093057,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ic/CMakeFiles",
+    "files": 184,
+    "bytes": 769603,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ft/src/CMakeFiles",
+    "files": 157,
+    "bytes": 21776052,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ft/apps/CMakeFiles",
+    "files": 52,
+    "bytes": 1892740,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ft/tests/CMakeFiles",
+    "files": 1226,
+    "bytes": 1238151,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ft/CMakeFiles",
+    "files": 184,
+    "bytes": 769603,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-sgi/src/CMakeFiles",
+    "files": 156,
+    "bytes": 9892341,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-sgi/apps/CMakeFiles",
+    "files": 51,
+    "bytes": 1352434,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-sgi/tests/CMakeFiles",
+    "files": 1226,
+    "bytes": 1239784,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-sgi/CMakeFiles",
+    "files": 184,
+    "bytes": 770629,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-cb/src/CMakeFiles",
+    "files": 157,
+    "bytes": 21780057,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-cb/apps/CMakeFiles",
+    "files": 52,
+    "bytes": 1863673,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-cb/tests/CMakeFiles",
+    "files": 1217,
+    "bytes": 1228653,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-cb/CMakeFiles",
+    "files": 184,
+    "bytes": 766863,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-e2b/src/CMakeFiles",
+    "files": 154,
+    "bytes": 9632095,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-e2b/apps/CMakeFiles",
+    "files": 51,
+    "bytes": 1343436,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-e2b/tests/CMakeFiles",
+    "files": 1208,
+    "bytes": 1221010,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-e2b/CMakeFiles",
+    "files": 184,
+    "bytes": 765223,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ctl/src/CMakeFiles",
+    "files": 154,
+    "bytes": 9661598,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ctl/apps/CMakeFiles",
+    "files": 51,
+    "bytes": 1345868,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ctl/tests/CMakeFiles",
+    "files": 1208,
+    "bytes": 1221010,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ctl/CMakeFiles",
+    "files": 184,
+    "bytes": 765223,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-diag/src/CMakeFiles",
+    "files": 155,
+    "bytes": 21312866,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-diag/apps/CMakeFiles",
+    "files": 52,
+    "bytes": 1852739,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-diag/tests/CMakeFiles",
+    "files": 1208,
+    "bytes": 1222619,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-diag/CMakeFiles",
+    "files": 184,
+    "bytes": 766239,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-bc/src/CMakeFiles",
+    "files": 157,
+    "bytes": 21818974,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-bc/apps/CMakeFiles",
+    "files": 51,
+    "bytes": 1353169,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-bc/tests/CMakeFiles",
+    "files": 1228,
+    "bytes": 1526862,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-bc/CMakeFiles",
+    "files": 184,
+    "bytes": 769603,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-mr/src/CMakeFiles",
+    "files": 154,
+    "bytes": 9667368,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-mr/apps/CMakeFiles",
+    "files": 51,
+    "bytes": 1349275,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-mr/tests/CMakeFiles",
+    "files": 1208,
+    "bytes": 1219401,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-mr/CMakeFiles",
+    "files": 184,
+    "bytes": 764207,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-gi/src/CMakeFiles",
+    "files": 157,
+    "bytes": 21765470,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-gi/apps/CMakeFiles",
+    "files": 52,
+    "bytes": 1865148,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-gi/tests/CMakeFiles",
+    "files": 1229,
+    "bytes": 1812934,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-gi/CMakeFiles",
+    "files": 184,
+    "bytes": 769603,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-eos/src/CMakeFiles",
+    "files": 155,
+    "bytes": 21363355,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-eos/apps/CMakeFiles",
+    "files": 52,
+    "bytes": 1839554,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-eos/tests/CMakeFiles",
+    "files": 1208,
+    "bytes": 1221010,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-eos/CMakeFiles",
+    "files": 184,
+    "bytes": 765223,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-g/src/CMakeFiles",
+    "files": 157,
+    "bytes": 21757052,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-g/apps/CMakeFiles",
+    "files": 47,
+    "bytes": 44485,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-g/tests/CMakeFiles",
+    "files": 1228,
+    "bytes": 1350316,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-g/CMakeFiles",
+    "files": 184,
+    "bytes": 763636,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-f/src/CMakeFiles",
+    "files": 154,
+    "bytes": 9590064,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-f/apps/CMakeFiles",
+    "files": 51,
+    "bytes": 1313300,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-f/tests/CMakeFiles",
+    "files": 1208,
+    "bytes": 1219029,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-f/CMakeFiles",
+    "files": 184,
+    "bytes": 759583,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-cn/src/CMakeFiles",
+    "files": 155,
+    "bytes": 21393663,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-cn/apps/CMakeFiles",
+    "files": 52,
+    "bytes": 1860113,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-cn/tests/CMakeFiles",
+    "files": 1208,
+    "bytes": 1219401,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-cn/CMakeFiles",
+    "files": 184,
+    "bytes": 764207,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-e2/src/CMakeFiles",
+    "files": 155,
+    "bytes": 21374527,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-e2/apps/CMakeFiles",
+    "files": 52,
+    "bytes": 1858049,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-e2/tests/CMakeFiles",
+    "files": 1208,
+    "bytes": 1219401,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-e2/CMakeFiles",
+    "files": 184,
+    "bytes": 764207,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ld/src/CMakeFiles",
+    "files": 157,
+    "bytes": 21770262,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ld/apps/CMakeFiles",
+    "files": 52,
+    "bytes": 1865604,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ld/tests/CMakeFiles",
+    "files": 1226,
+    "bytes": 1238151,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-ld/CMakeFiles",
+    "files": 184,
+    "bytes": 769603,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-cs/src/CMakeFiles",
+    "files": 157,
+    "bytes": 21834558,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-cs/apps/CMakeFiles",
+    "files": 52,
+    "bytes": 1865732,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-cs/tests/CMakeFiles",
+    "files": 1229,
+    "bytes": 1813190,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/balance-floor-oct7-fable/build-cs/CMakeFiles",
+    "files": 184,
+    "bytes": 769603,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/eos-join-sept28-v1/tree/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 129145,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/eos-join-sept28-v1/tree/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 43458,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/eos-join-sept28-v1/tree/build/CMakeFiles",
+    "files": 14,
+    "bytes": 203293,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/long-fate-100Tyr-oct17/__pycache__",
+    "files": 1,
+    "bytes": 34917,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/he3-share-range-sept30-v1/build/CMakeFiles",
+    "files": 12,
+    "bytes": 291243,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/metallicity-limits-oct16/__pycache__",
+    "files": 5,
+    "bytes": 73120,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-longstep-oct2-v1/src/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 158543,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-longstep-oct2-v1/src/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 43680,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-longstep-oct2-v1/src/build/tests/CMakeFiles",
+    "files": 834,
+    "bytes": 926889,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-longstep-oct2-v1/src/build/CMakeFiles",
+    "files": 156,
+    "bytes": 680164,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/quantum-domain-patch-sept30-v1/build/CMakeFiles",
+    "files": 12,
+    "bytes": 292053,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/mixture-phase-sept30-v1/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 144786,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/mixture-phase-sept30-v1/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 43709,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/mixture-phase-sept30-v1/build/tests/CMakeFiles",
+    "files": 762,
+    "bytes": 849198,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/mixture-phase-sept30-v1/build/CMakeFiles",
+    "files": 156,
+    "bytes": 651356,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/track-extensions-oct16/__pycache__",
+    "files": 1,
+    "bytes": 18129,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-proton-oct5-fable/src/out/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 167523,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-proton-oct5-fable/src/out/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44058,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-proton-oct5-fable/src/out/build/tests/CMakeFiles",
+    "files": 962,
+    "bytes": 1078854,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-proton-oct5-fable/src/out/build/CMakeFiles",
+    "files": 156,
+    "bytes": 721844,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-envelope-heat-oct6-fable/src/out/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 174230,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-envelope-heat-oct6-fable/src/out/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44882,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-envelope-heat-oct6-fable/src/out/build/tests/CMakeFiles",
+    "files": 1002,
+    "bytes": 1141469,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-envelope-heat-oct6-fable/src/out/build/CMakeFiles",
+    "files": 156,
+    "bytes": 746986,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-envelope-heat-oct6-fable/srcwide/out/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 176738,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-envelope-heat-oct6-fable/srcwide/out/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 45354,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-envelope-heat-oct6-fable/srcwide/out/build/tests/CMakeFiles",
+    "files": 1002,
+    "bytes": 1152097,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-envelope-heat-oct6-fable/srcwide/out/build/CMakeFiles",
+    "files": 156,
+    "bytes": 751234,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/transition-quantum-sept30-v1/build_base/CMakeFiles",
+    "files": 12,
+    "bytes": 292539,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/transition-quantum-sept30-v1/build/CMakeFiles",
+    "files": 12,
+    "bytes": 291729,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/survey-throughput-oct3-v1/sanitized_source/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 168493,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/survey-throughput-oct3-v1/sanitized_source/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 45120,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/survey-throughput-oct3-v1/sanitized_source/build/CMakeFiles",
+    "files": 14,
+    "bytes": 213123,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cooling-eos-boundary-sept27-v2/__pycache__",
+    "files": 2,
+    "bytes": 11598,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_count/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 171975,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_count/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44858,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_count/build/tests/CMakeFiles",
+    "files": 930,
+    "bytes": 1059732,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_count/build/CMakeFiles",
+    "files": 156,
+    "bytes": 721832,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_fast/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 171357,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_fast/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44740,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_fast/build/tests/CMakeFiles",
+    "files": 930,
+    "bytes": 1057264,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_fast/build/CMakeFiles",
+    "files": 156,
+    "bytes": 720815,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_phase/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 171975,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_phase/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44858,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_phase/build/tests/CMakeFiles",
+    "files": 930,
+    "bytes": 1059732,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_phase/build/CMakeFiles",
+    "files": 156,
+    "bytes": 721832,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_min/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 170739,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_min/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44622,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_min/build/tests/CMakeFiles",
+    "files": 930,
+    "bytes": 1054796,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-eos-cost-oct5-fable/src_min/build/CMakeFiles",
+    "files": 156,
+    "bytes": 719798,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/metal-groups-ca07795-v1/build/src/CMakeFiles",
+    "files": 131,
+    "bytes": 16319691,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/metal-groups-ca07795-v1/build/apps/CMakeFiles",
+    "files": 47,
+    "bytes": 44292,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/metal-groups-ca07795-v1/build/tests/CMakeFiles",
+    "files": 929,
+    "bytes": 8820599,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/metal-groups-ca07795-v1/build/CMakeFiles",
+    "files": 184,
+    "bytes": 657560,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/qs-boundary-sept28-v1/tree/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 133098,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/qs-boundary-sept28-v1/tree/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 43812,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/qs-boundary-sept28-v1/tree/build/CMakeFiles",
+    "files": 14,
+    "bytes": 198547,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-warm-oct5-fable/src/out/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 166905,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-warm-oct5-fable/src/out/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 43940,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-warm-oct5-fable/src/out/build/tests/CMakeFiles",
+    "files": 962,
+    "bytes": 1076140,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/phase-warm-oct5-fable/src/out/build/CMakeFiles",
+    "files": 156,
+    "bytes": 720751,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/pms-eos-precision-repair-v1/probe-1e11/build/src/CMakeFiles",
+    "files": 125,
+    "bytes": 2962320,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/pms-eos-precision-repair-v1/probe-1e11/build/document_FreeEOS/figure_utils/CMakeFiles",
+    "files": 36,
+    "bytes": 87189,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/pms-eos-precision-repair-v1/probe-1e11/build/CMakeFiles",
+    "files": 10,
+    "bytes": 433839,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/pms-eos-precision-repair-v1/probe-1e11/build/test_FreeEOS/utils/CMakeFiles",
+    "files": 21,
+    "bytes": 49533,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/transport-floor-oct5-fable/src/out/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 169995,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/transport-floor-oct5-fable/src/out/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44530,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/transport-floor-oct5-fable/src/out/build/tests/CMakeFiles",
+    "files": 962,
+    "bytes": 1089305,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/transport-floor-oct5-fable/src/out/build/CMakeFiles",
+    "files": 156,
+    "bytes": 731017,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-hydrogen-below35-oct5-fable/src_hlayer/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 176919,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-hydrogen-below35-oct5-fable/src_hlayer/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 45802,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-hydrogen-below35-oct5-fable/src_hlayer/build/tests/CMakeFiles",
+    "files": 930,
+    "bytes": 1079476,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-hydrogen-below35-oct5-fable/src_hlayer/build/CMakeFiles",
+    "files": 156,
+    "bytes": 729968,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-hydrogen-below35-oct5-fable/src_h30/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 175065,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-hydrogen-below35-oct5-fable/src_h30/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 45448,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-hydrogen-below35-oct5-fable/src_h30/build/tests/CMakeFiles",
+    "files": 930,
+    "bytes": 1072072,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-hydrogen-below35-oct5-fable/src_h30/build/CMakeFiles",
+    "files": 156,
+    "bytes": 726917,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-hydrogen-below35-oct5-fable/src_ctl/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 175065,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-hydrogen-below35-oct5-fable/src_ctl/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 45448,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-hydrogen-below35-oct5-fable/src_ctl/build/tests/CMakeFiles",
+    "files": 930,
+    "bytes": 1072072,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-hydrogen-below35-oct5-fable/src_ctl/build/CMakeFiles",
+    "files": 156,
+    "bytes": 726917,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-envelope-sept28-v1/t3811/__pycache__",
+    "files": 1,
+    "bytes": 4128,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/reheater-breakthrough-oct16/__pycache__",
+    "files": 1,
+    "bytes": 14215,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/trace-metal-eos-sept27-v1/freeeos_source/build/src/CMakeFiles",
+    "files": 65,
+    "bytes": 2067909,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/trace-metal-eos-sept27-v1/freeeos_source/build/document_FreeEOS/figure_utils/CMakeFiles",
+    "files": 36,
+    "bytes": 87545,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/trace-metal-eos-sept27-v1/freeeos_source/build/CMakeFiles",
+    "files": 10,
+    "bytes": 461303,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/trace-metal-eos-sept27-v1/freeeos_source/build/test_FreeEOS/utils/CMakeFiles",
+    "files": 21,
+    "bytes": 49729,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 159723,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 43916,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src/build/tests/CMakeFiles",
+    "files": 850,
+    "bytes": 948502,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src/build/CMakeFiles",
+    "files": 156,
+    "bytes": 687024,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_fing_patch/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 168859,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_fing_patch/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 45212,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_fing_patch/build/tests/CMakeFiles",
+    "files": 906,
+    "bytes": 1040634,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_fing_patch/build/CMakeFiles",
+    "files": 156,
+    "bytes": 717282,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_ls_patch/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 167659,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_ls_patch/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44976,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_ls_patch/build/tests/CMakeFiles",
+    "files": 906,
+    "bytes": 1035824,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_ls_patch/build/CMakeFiles",
+    "files": 156,
+    "bytes": 715278,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_li/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 161496,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_li/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44270,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_li/build/tests/CMakeFiles",
+    "files": 850,
+    "bytes": 955276,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_li/build/CMakeFiles",
+    "files": 156,
+    "bytes": 689925,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bdq_dbg/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 164451,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bdq_dbg/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44860,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bdq_dbg/build/tests/CMakeFiles",
+    "files": 858,
+    "bytes": 976498,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bdq_dbg/build/CMakeFiles",
+    "files": 156,
+    "bytes": 697680,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_fing_ctl/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 167659,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_fing_ctl/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44976,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_fing_ctl/build/tests/CMakeFiles",
+    "files": 906,
+    "bytes": 1035824,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_fing_ctl/build/CMakeFiles",
+    "files": 156,
+    "bytes": 715278,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_li2/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 162087,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_li2/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44388,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_li2/build/tests/CMakeFiles",
+    "files": 850,
+    "bytes": 957534,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_li2/build/CMakeFiles",
+    "files": 156,
+    "bytes": 690892,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_li3/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 162087,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_li3/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44388,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_li3/build/tests/CMakeFiles",
+    "files": 858,
+    "bytes": 966653,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_li3/build/CMakeFiles",
+    "files": 156,
+    "bytes": 693540,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_uslope/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 166459,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_uslope/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44740,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_uslope/build/tests/CMakeFiles",
+    "files": 898,
+    "bytes": 1021508,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_uslope/build/CMakeFiles",
+    "files": 156,
+    "bytes": 710499,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bnd2/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 162678,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bnd2/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44506,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bnd2/build/tests/CMakeFiles",
+    "files": 858,
+    "bytes": 969661,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bnd2/build/CMakeFiles",
+    "files": 156,
+    "bytes": 694764,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bnd/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 162087,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bnd/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44388,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bnd/build/tests/CMakeFiles",
+    "files": 850,
+    "bytes": 957534,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bnd/build/CMakeFiles",
+    "files": 156,
+    "bytes": 690892,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bdq/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 162087,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bdq/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44388,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bdq/build/tests/CMakeFiles",
+    "files": 858,
+    "bytes": 967382,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/ensemble-tables-oct3-v1/src_bdq/build/CMakeFiles",
+    "files": 156,
+    "bytes": 693792,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/deep-solid-he-oct6-fable/src/out/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 178803,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/deep-solid-he-oct6-fable/src/out/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44292,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/deep-solid-he-oct6-fable/src/out/build/tests/CMakeFiles",
+    "files": 1042,
+    "bytes": 1174028,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/deep-solid-he-oct6-fable/src/out/build/CMakeFiles",
+    "files": 156,
+    "bytes": 750112,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-atmosphere-energy-form-sept30-v1/scripts/__pycache__",
+    "files": 3,
+    "bytes": 106245,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-interface-oct5-fable/src/out/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 169377,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-interface-oct5-fable/src/out/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44412,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-interface-oct5-fable/src/out/build/tests/CMakeFiles",
+    "files": 962,
+    "bytes": 1086510,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/cold-interface-oct5-fable/src/out/build/CMakeFiles",
+    "files": 156,
+    "bytes": 729896,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/native-envelope-speed-sept28-v1/wcopy/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 140850,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/native-envelope-speed-sept28-v1/wcopy/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 45098,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/native-envelope-speed-sept28-v1/wcopy/build/tests/CMakeFiles",
+    "files": 698,
+    "bytes": 799895,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/native-envelope-speed-sept28-v1/wcopy/build/CMakeFiles",
+    "files": 156,
+    "bytes": 643739,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/quantum-screening-sept28-v1/tree/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 133492,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/quantum-screening-sept28-v1/tree/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44520,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/quantum-screening-sept28-v1/tree/build/CMakeFiles",
+    "files": 14,
+    "bytes": 203860,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/species-step-oct2-v1/src/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 148366,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/species-step-oct2-v1/src/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 43562,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/species-step-oct2-v1/src/build/tests/CMakeFiles",
+    "files": 778,
+    "bytes": 863308,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/species-step-oct2-v1/src/build/CMakeFiles",
+    "files": 156,
+    "bytes": 661448,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/reheater-overnight-oct17/__pycache__",
+    "files": 1,
+    "bytes": 9600,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/heat-basis-oct3-v1/src/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 156770,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/heat-basis-oct3-v1/src/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 43324,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/heat-basis-oct3-v1/src/build/tests/CMakeFiles",
+    "files": 842,
+    "bytes": 928282,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/heat-basis-oct3-v1/src/build/CMakeFiles",
+    "files": 156,
+    "bytes": 679588,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/zero-metal-integration-oct11-v1/build/src/CMakeFiles",
+    "files": 139,
+    "bytes": 17096571,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/zero-metal-integration-oct11-v1/build/apps/CMakeFiles",
+    "files": 52,
+    "bytes": 1533586,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/zero-metal-integration-oct11-v1/build/tests/CMakeFiles",
+    "files": 943,
+    "bytes": 2529153,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/zero-metal-integration-oct11-v1/build/CMakeFiles",
+    "files": 184,
+    "bytes": 693610,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/helium-solid-potential-sept30-v1/wbuild/CMakeFiles",
+    "files": 12,
+    "bytes": 291694,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/helium-solid-potential-sept30-v1/tbuild2/CMakeFiles",
+    "files": 12,
+    "bytes": 294265,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/helium-solid-potential-sept30-v1/tbuild/CMakeFiles",
+    "files": 12,
+    "bytes": 293303,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/radioactive-patch-oct2-v1/src/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 158553,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/radioactive-patch-oct2-v1/src/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44152,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/radioactive-patch-oct2-v1/src/build/tests/CMakeFiles",
+    "files": 826,
+    "bytes": 927162,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/radioactive-patch-oct2-v1/src/build/CMakeFiles",
+    "files": 156,
+    "bytes": 681522,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/unified-evolution-sept25-v1/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 119999,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/unified-evolution-sept25-v1/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 41222,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/unified-evolution-sept25-v1/build/tests/CMakeFiles",
+    "files": 658,
+    "bytes": 694315,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/unified-evolution-sept25-v1/build/CMakeFiles",
+    "files": 156,
+    "bytes": 630609,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-goal-oct22/h1_three_region_oct25/__pycache__",
+    "files": 1,
+    "bytes": 27289,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-goal-oct22/cold_envelope_primary_oct24/__pycache__",
+    "files": 1,
+    "bytes": 23895,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-goal-oct22/__pycache__",
+    "files": 65,
+    "bytes": 1465943,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-goal-oct22/storage_tools/afsctool-build/src/private/lzfse/CMakeFiles",
+    "files": 204,
+    "bytes": 277515,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/fiducial-goal-oct22/storage_tools/afsctool-build/CMakeFiles",
+    "files": 68,
+    "bytes": 1492912,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/lba-attribution-sept29-v1/tree2/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 140306,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/lba-attribution-sept29-v1/tree2/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44402,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/lba-attribution-sept29-v1/tree2/build/CMakeFiles",
+    "files": 14,
+    "bytes": 203815,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/lba-attribution-sept29-v1/tree/build/src/CMakeFiles",
+    "files": 11,
+    "bytes": 139796,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/lba-attribution-sept29-v1/tree/build/apps/CMakeFiles",
+    "files": 42,
+    "bytes": 44284,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  },
+  {
+    "directory": "out/lba-attribution-sept29-v1/tree/build/CMakeFiles",
+    "files": 14,
+    "bytes": 203752,
+    "reason": "Generated compiler or Python bytecode cache; source and executables retained."
+  }
+]

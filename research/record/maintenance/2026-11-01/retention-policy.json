@@ -1,0 +1,24 @@
+{
+  "authorization": "User requested full artifact review, deletion of intermediates and results reproducible within a few hours per study, research-record preservation, replicable workflows, and code/documentation cleanup.",
+  "recompute_budget": "A few hours per study",
+  "scientific_evolution": "remains paused",
+  "primary_products": [
+    "0.1Msun exploratory evolution",
+    "exploratory tracks across the mass spectrum",
+    "MS/BD boundary versus metallicity",
+    "reheater existence, width, strength and robustness"
+  ],
+  "preserve": [
+    "unique raw physics inputs and retrieval receipts",
+    "source versions, licenses and patches",
+    "selected compact tracks and profiles used in conclusions and figures",
+    "restart points needed for expensive unfinished studies",
+    "run configurations, numerical controls, input hashes and failed-test qualifications"
+  ],
+  "delete_only_after_record": [
+    "duplicate content",
+    "rebuildable compiler products and package caches",
+    "superseded intermediates with retained inputs and regeneration commands",
+    "verbose generated diagnostics after retaining scientific summaries"
+  ]
+}
