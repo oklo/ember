@@ -32,28 +32,3 @@ specific source copies or continuation chains. Keep those identities intact;
 promote a workflow into maintained code only when its inputs and behavior are
 understood. The compact research-record renderer deliberately reads saved data
 without importing campaign supervisors.
-
-## Evidence used in the November 2026 cleanup
-
-Cotroneo, Improta and Liguori's [ISSRE study](https://arxiv.org/abs/2508.21634)
-found repetition and unused constructs in generated Python/Java samples.
-[GitClear's observational report](https://www.gitclear.com/ai_assistant_code_quality_2025_research)
-reports increasing duplication and declining code movement in its sample.
-[CodeRabbit's PR study](https://www.coderabbit.ai/blog/state-of-ai-vs-human-code-generation-report)
-reports readability and dependency problems, while acknowledging uncertain
-authorship classification. These are useful review prompts, not a reliable
-test of who wrote any particular function or evidence that a coding style
-caused a defect.
-
-Documentation evidence is mixed. Guelman and colleagues' [comment study](https://arxiv.org/abs/2408.14007)
-found most generated Javadoc equivalent or superior to the originals under
-expert review. Katzy and colleagues' [multilingual study](https://arxiv.org/abs/2505.15469)
-identified failures of correctness and informativeness that automatic metrics
-did not reliably distinguish. The practical criterion here is accurate,
-useful explanation, rather than making prose appear less machine-written.
-
-For documentation, the useful standard is whether a reader can find the method,
-its limits and a working command. Google's [review guidance](https://google.github.io/eng-practices/review/reviewer/looking-for.html)
-supports concise explanations of intent, proportionate abstraction and keeping
-documentation consistent with behavior. The cleanup applies those criteria
-while retaining the explicit Astra/Opus development lineage.
