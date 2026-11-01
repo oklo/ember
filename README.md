@@ -8,11 +8,6 @@ of the algorithms described in
 [Henyey, Forbes & Gould (1964)](https://adsabs.harvard.edu/pdf/1964ApJ...139..306H),
 thus providing continuity to the dawn of modern computing.
 
-The main research products are exploratory tracks across the low-mass spectrum,
-especially at 0.1 solar masses, and studies of the hydrogen-burning boundary and
-late reheating versus metallicity. Start with the [research record](research/record/README.md)
-for retained data, qualifications and reproduction commands.
-
 The solver couples Henyey relaxation to burning, mixing and diffusion, using
 composition-dependent EOS, opacity and atmosphere inputs. It includes deuterium,
 pp and CN burning, electron conduction, settling and experimental cold-remnant
