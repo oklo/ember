@@ -8,8 +8,7 @@ distinguish the inherited methods from the local historical reconstructions.
 The main research products are exploratory tracks across the low-mass spectrum,
 especially at 0.1 solar masses, and studies of the hydrogen-burning boundary and
 late reheating versus metallicity. Start with the [research record](research/record/README.md)
-for retained data, qualifications and reproduction commands. Scientific campaigns
-are paused as of November 1, 2026.
+for retained data, qualifications and reproduction commands.
 
 The solver couples Henyey relaxation to burning, mixing and diffusion, using
 composition-dependent EOS, opacity and atmosphere inputs. It includes deuterium,
