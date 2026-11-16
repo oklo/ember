@@ -44,7 +44,7 @@ require a full EOS and retain their own thermodynamic calculation.
 The native integration accumulates mass inward from the surface to reduce
 roundoff in thin layers. Matched Hayashi and main-sequence checks agree within
 1.196e-12; a 20 Myr cooling check changes luminosity by 0.003599%.
-[Integration checks](results/envelope_density_integration_sept29_v1.json).
+[Integration checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/envelope_density_integration_sept29_v1.json).
 `envelope_map` can instead supply values and derivatives tabulated from native
 integrations for one mass and envelope depth. Neither option extrapolates through
 missing cells or outside composition coverage. These alternatives retain the
@@ -77,7 +77,7 @@ most 2.501%. A separate consistent-potential sensitivity to the published H/He
 interaction correction changes it by up to 4.121%. Neither comparison is a
 universal error bound; the interaction correction is not included in this
 provider. A fresh evolutionary calculation and comparison with observed
-low-mass stars are still required. [Mixture checks](results/gibbs_mixture_oct2_v1.json).
+low-mass stars are still required. [Mixture checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/gibbs_mixture_oct2_v1.json).
 
 Each `EMBER_GIBBS_GAS_V1` file records the spline degree, knot vectors in ln T
 and ln gas pressure, row-major coefficients of G/(R T), the original source
@@ -116,7 +116,7 @@ Across twelve early and cooling envelopes, the second-order integration uses
 about five times less CPU. Tightening its tolerance from 1e-7 to 1e-9 changes
 base temperature, pressure and density by at most 4.988e-6 relative. Analytic
 spherical hydrostatic and radiative-diffusion solutions test convergence
-independently of the EOS tables. [Checks](results/envelope_second_order_oct2_v1.json).
+independently of the EOS tables. [Checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/envelope_second_order_oct2_v1.json).
 Matched fresh Hayashi starts followed to 500 yr take 28.47 versus 132.2 CPU s
 and 18.76 versus 74.16 wall s with eight zone threads. Both accept one interval
 without rejection; all compared quantities agree within 0.1%. This short
@@ -129,7 +129,7 @@ derivatives, missing cells and component joins. Seven complete envelopes from
 An 8 Myr control with the existing EOS retains four accepted intervals and no
 rejections; maximum global differences are below 3.841e-12. These checks validate
 the implementation and preservation of the existing calculation, not the full
-physical accuracy of the new tables. [Checks](results/gibbs_envelope_oct2_v1.json).
+physical accuracy of the new tables. [Checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/gibbs_envelope_oct2_v1.json).
 
 A complete fresh Hayashi-to-cold-white-dwarf calculation remains under validation.
 Cool molecular chemistry, nonideal atmospheres and strong quantum effects are
@@ -143,4 +143,4 @@ A warm-H source repair follows the measured inconsistent-response region near
 retains the cold join and all previous coverage. In two saved envelopes the
 base-temperature change is at most 0.003910%; the failed 4014 K envelope and
 hotter 4250 K trial now complete. This does not validate the inconsistent source
-derivatives or supply missing atmosphere cells. [Checks](results/gibbs_hydrogen_coverage_oct2.json).
+derivatives or supply missing atmosphere cells. [Checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/gibbs_hydrogen_coverage_oct2.json).

@@ -14,7 +14,7 @@ import statistics
 
 import numpy as np
 
-from audit_mesa_oplib_native import read_native, evaluate
+from oplib_native import read_native, evaluate
 from compare_mesa_oplib_means_v2 import stencil, KELVIN_PER_KEV
 from import_tops_composition import read as read_tops
 
@@ -45,7 +45,7 @@ def main():
     if OUTPUT.exists():
         raise FileExistsError(OUTPUT)
     inputs = {str(p): digest(p) for p in [Path(__file__), BASE, MANIFEST,
-        ROOT/'scripts/audit_mesa_oplib_native.py',
+        ROOT/'scripts/oplib_native.py',
         ROOT/'scripts/compare_mesa_oplib_means_v2.py',
         ROOT/'scripts/import_tops_composition.py']}
     base = json.loads(BASE.read_text())

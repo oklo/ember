@@ -11,7 +11,7 @@ masks. The integrated cooling envelope and some tables remain local research
 components; they have not yet been validated in one uninterrupted
 Hayashi-to-cooling calculation.
 [Configuration](ATMOSPHERE.md) ·
-[Boundary checks](results/cooling_boundary_sept28_v1.json).
+[Boundary checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cooling_boundary_sept28_v1.json).
 
 ## Composition and matching
 

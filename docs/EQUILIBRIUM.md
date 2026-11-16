@@ -11,7 +11,7 @@ or an evolutionary calculation.
 The quoted values below are archived at `6cc4fb4`. The composition/burning
 milestone corrected the classical Debye screening normalization. The same
 atomic-basis static command now gives R=.1294 Rsun, L=.0009404 Lsun
-and Teff=2810 K; see [updated static metadata](results/equilibrium_m010_screening_corrected.json).
+and Teff=2810 K; see [updated static metadata](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/equilibrium_m010_screening_corrected.json).
 The new baryonic-mass evolution is documented in [EVOLUTION.md](EVOLUTION.md).
 
 ## Reproduce the static calculation
@@ -42,7 +42,7 @@ when available. Diagnostics include the residual, undamped correction,
 Newton history, nuclear integral, independent virial check, EOS Maxwell
 identity, and full profile. A JSON file alone never establishes convergence.
 Compact current metadata are in
-[results/equilibrium_m010_nongrey.json](results/equilibrium_m010_nongrey.json).
+[results/equilibrium_m010_nongrey.json](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/equilibrium_m010_nongrey.json).
 
 ## Separate effects of EOS and atmosphere
 
@@ -72,7 +72,7 @@ Tc=4.586e+6 K and rhoc=350.6 g/cm³. The temperature agreement has
 improved, while the radius offset has grown. Unmatched abundances,
 atmosphere models and age prevent interpreting these as calibrated errors.
 The previous observed-star mass runs are clearly retained as CMS19/grey
-in [LITERATURE_COMPARISON.md](LITERATURE_COMPARISON.md).
+in [LITERATURE_COMPARISON.md](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/LITERATURE_COMPARISON.md).
 
 ## Current mesh and integral checks
 

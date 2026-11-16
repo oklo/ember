@@ -91,7 +91,7 @@ energy-dependent S-factor shift; it is not the full CDW prescription.
 The option defaults to zero (off), is recorded in checkpoints and accepts
 limits through 1.6. Evaluation stops beyond the selected limit or
 `Gamma_12 = 200`. This does not supply pycnonuclear burning.
-[Quantum-screening checks](results/quantum_screening_sept28_v1.json).
+[Quantum-screening checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/quantum_screening_sept28_v1.json).
 
 For a depleted cooling core, optional `quantum_burning_fuel_limit` instead
 omits an out-of-domain reaction when the local sum of H, D and He3 mass
@@ -108,10 +108,10 @@ does not bound future fuel delivery by diffusion. Selecting the option
 requires an independent estimate of missing power and a finite cooling
 interval; a small fuel fraction alone does not establish negligible heat.
 The option and its limit are part of the restart identity.
-[Profile checks and a bounded cooling test](results/cold_trace_burning_sept30_v1.json)
+[Profile checks and a bounded cooling test](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_trace_burning_sept30_v1.json)
 record the initial evidence and the rate-estimate limitations.
 
-At 775.1 K, a refreshed [rate assessment](results/cold_trace_burning_oct1_v1.json)
+At 775.1 K, a refreshed [rate assessment](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_trace_burning_oct1_v1.json)
 using [Yakovlev et al. (2006)](https://arxiv.org/abs/astro-ph/0608488) gives
 7.915e16–3.502e19 erg/s for the omitted reactions, or at most 3.131e-8 of
 the present luminosity within those scenarios. These are uniform-mixture
@@ -136,7 +136,7 @@ by default. The deuterium join uses SFIII S(0)=2.028e-7 MeV barn. This changes
 reaction coefficients, not the reduced network's assumed fast daughter reactions.
 Their validity must be reassessed if cold burning becomes energetically important.
 
-[Implementation and stellar checks](results/dense_nuclear_oct1_v1.json) include
+[Implementation and stellar checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/dense_nuclear_oct1_v1.json) include
 13 passing tests and 37520 independent coefficient comparisons, agreeing within
 2.995e-13 relatively. Over the same 100 Myr from a 775.1 K parent, the optimal
 and high scenarios differ from the prior treatment by at most 3.709e-6 in
@@ -155,7 +155,7 @@ separate Fermi integration checks screening. Tests cover abundance derivatives,
 zero helium-3, mass conventions, baryon and nuclear-energy conservation,
 timestep refinement and rejection outside supported domains.
 
-[SFIII rate checks](results/nuclear_sfiii_bare_rate_comparison_v1.json) ·
-[Stellar comparison](results/nuclear_sfiii_evolution_control_v1.json) ·
+[SFIII rate checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/nuclear_sfiii_bare_rate_comparison_v1.json) ·
+[Stellar comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/nuclear_sfiii_evolution_control_v1.json) ·
 [Reference generator](../scripts/generate_sfiii_reference.py) ·
 [Run configuration](LIFETIME_DRIVER.md)

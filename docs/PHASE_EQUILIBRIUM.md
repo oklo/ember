@@ -54,7 +54,7 @@ whose phase potential already contains ionic mixing must subtract that term
 before returning `material_jets`; phase conversion energy stays in the potential.
 This interface does not select the stable phases or extend their physical domain.
 The coexistence provider is still under integration and is not used by the
-running star. [Interface checks](results/material_interface_oct2.json).
+running star. [Interface checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/material_interface_oct2.json).
 
 ## Checks and limits
 
@@ -66,7 +66,7 @@ transition and both derivative methods. The stiff third-derivative check uses a
 Homogeneous limits test both ends of coexistence down to a phase fraction of
 1e-7. Free energy and its first derivatives approach the same boundary values;
 heat capacity can jump and is not forced to match across the transition.
-[Homogeneous and boundary checks](results/phase_homogeneous_oct2.json).
+[Homogeneous and boundary checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/phase_homogeneous_oct2.json).
 
 Private cold-interior controls compare C++ with an independent implementation.
 The narrow three-phase transitions conserve latent energy when heat capacity

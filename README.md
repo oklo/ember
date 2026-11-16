@@ -26,20 +26,20 @@ Requires CMake, Ninja and a C++23 compiler.
 ```sh
 cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
 cmake --build build
-ctest --test-dir build --output-on-failure
+ctest --test-dir build -LE material-data --output-on-failure
 ```
 
-Stellar runs and table-dependent tests also require the
+This runs the tests that do not require external material fixtures. To run
+the full suite, install the [test inputs](tests/README.md) and omit
+`-LE material-data`. Stellar runs also require the
 [physics inputs](docs/DATA_REPRODUCTION.md); a fresh clone does not contain
 all inputs used by the development calculations. The solver uses CPU threads;
 it does not currently use Metal or the GPU.
 
 [Autonomous control](docs/AUTONOMY.md) ·
 [Run configuration](docs/LIFETIME_DRIVER.md) ·
-[Working paper](docs/reports/2026-09-27/ember_status_and_future.pdf) ·
-[Paper source](docs/reports/2026-09-27/README.md) ·
-[Cluster and field mass functions](research/mass-functions/README.md) ·
-[Hydrogen-burning boundary](research/metallicity-boundary/README.md)
+[Physics inputs](docs/DATA_REPRODUCTION.md) ·
+[Numerical lineage](docs/LINEAGE.md)
 
 ## License
 

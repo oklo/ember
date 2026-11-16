@@ -30,7 +30,7 @@ are identical before and after the extension; the production continuation also
 preserves its starting physical state. Values are continuous at the former
 4800 K and log g = 6.1 boundaries, while the new cells supply different
 one-sided slopes. This is the existing piecewise logarithmic interpolation.
-[Validation](../../../docs/results/highg_atmosphere_extension_sept27_v2.json).
+[Validation](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/highg_atmosphere_extension_sept27_v2.json).
 
 Trace atmospheric helium remains approximated. The high-gravity metallicity
 range is still 0 to 1e-20; separate small-metal source controls have not changed
@@ -45,6 +45,6 @@ selection or interpolation across missing source cells.
 The retained helium approximation was checked at helium mass fraction 0.005
 at 4650 K and 4800 K, log g = 5.9: matching temperature changes were below
 0.1% and pressure changes below 2.1%. See
-[the source comparison](../../../docs/results/hydrogen_envelope_integration_sept27_v1.json).
+[the source comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/hydrogen_envelope_integration_sept27_v1.json).
 Those local controls do not establish accuracy throughout the cooler,
 higher-gravity region or after a structural instability.

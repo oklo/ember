@@ -95,8 +95,8 @@ Near the core, the step-cutoff normalization changes the combined opacity by
 about 0.7421%; the collisionless refractive-index diagnostic changes it by
 about 2.700%. These four fixed-state comparisons do not replace the actual
 profile calculation or establish a bound for the whole added table domain.
-[Core comparison](results/tops_core_classical_cutoff_v1.json),
-[dense comparison](results/tops_dense_classical_cutoff_v1.json).
+[Core comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/tops_core_classical_cutoff_v1.json),
+[dense comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/tops_dense_classical_cutoff_v1.json).
 
 ## Interpolation with conduction included
 
@@ -112,7 +112,7 @@ This does not remove the plasma-normalization question. In some of the tested
 states, radiative transport still contributes enough that removing it entirely
 would change the combined opacity by much more than the interpolation error.
 The diagnostic leaves all stellar inputs unchanged.
-[Combined transport comparison](results/tops_density_fine_transport_v1.json).
+[Combined transport comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/tops_density_fine_transport_v1.json).
 
 ## Reproduction and remaining work
 
@@ -122,10 +122,10 @@ and power-law opacity controls verify its normalization independently.
 `scripts/audit_profile_plasma_normalization.py` re-evaluates the saved profile's
 opacity and conduction with its selected physical tables.
 
-The records are [dense spectra](results/tops_dense_spectral_means_v1.json),
-[core spectra](results/tops_core_spectral_means_v1.json),
-[density scan](results/tops_density_structure_v1.json) and
-[fixed stellar profile](results/plasma_normalization_profile_3848gyr_v1.json).
+The records are [dense spectra](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/tops_dense_spectral_means_v1.json),
+[core spectra](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/tops_core_spectral_means_v1.json),
+[density scan](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/tops_density_structure_v1.json) and
+[fixed stellar profile](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/plasma_normalization_profile_3848gyr_v1.json).
 Raw requests and spectra remain local with recorded hashes.
 
 Before selecting dense tables, the radiative transport prescription must

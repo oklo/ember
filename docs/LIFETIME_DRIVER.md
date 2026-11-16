@@ -5,13 +5,13 @@ Hayashi starting model, explicit initial D and pp/CN burning, plasma neutrino
 losses, face luminosities and the finite metal-transport interface. It supports
 the wholly convective limit and an explicitly selected hot diffusion law with a
 mixed cool envelope. The atmosphere selection keeps the same matching depth
-through the supplied composition and gravity coverage. The complete Hayashi-to-white-dwarf
-calculation is not yet established.
+through the supplied composition and gravity coverage. A complete calculation requires material inputs covering every phase;
+see [physics inputs](DATA_REPRODUCTION.md).
 
 For an initially metal-free composition, the driver excludes absent metals
 from microscopic transport and the initial deuterium heat calculation. H/He
 transport and pp burning remain active; no artificial metal floor is added.
-This does not extend atmosphere or opacity coverage. [Checks](results/zero_metal_transport.json).
+This does not extend atmosphere or opacity coverage. [Checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/zero_metal_transport.json).
 
 ```
 ember-evolve --lifetime CONFIG TARGET_YEARS NEW_OUTPUT_DIRECTORY \
@@ -59,12 +59,7 @@ Version 1 requires the following keys; paths are relative to the configuration:
 values up to `0.004`. These are input limits, not accuracy guarantees.
 The species setting bounds the maximum absolute
 composition difference between a full step and two half steps, independently
-of the species conservation audit. During radiative-core growth, changing it
-from `1e-4` to `2e-4` reduced a matched 1 Gyr calculation from 381.8 to 76.39
-CPU seconds. Global differences were below 0.006446%; the largest local He3
-difference was 0.1068% of its profile peak. This comparison supports the tested
-phase, not an accuracy claim for the whole lifetime or rare species.
-[Comparison](results/warm_species_time_tolerance_oct2.json).
+of the species conservation audit.
 
 Optional `relaxed_intervals "4"` and `relaxed_accuracy_factor "5"` allow four
 intervals with larger time-error and local solve tolerances between tighter
@@ -84,11 +79,6 @@ The interval count may be 0–16 and the factor 1–10, subject to the effective
 time-tolerance limits above. Settings are recorded in checkpoint identities.
 Assess accumulated errors over complete intervals against a tighter sequence;
 a tight endpoint alone does not correct earlier burning or transport errors.
-A matched 2 Gyr check near core hydrogen exhaustion gives a 1.200× wall-time
-gain, compared with 5.054× during radiative-core growth. Maximum global
-differences are 0.05946%; H and He3 consumption differ by 0.01379% and
-0.02592%, with the same convective boundary. These are local comparisons,
-not a whole-track error bound. [Measured controls](results/periodic_accuracy_oct2.json).
 
 `coupling_abundance_tolerance` accepts values up to `1e-10`. It controls the
 structure/composition iteration and the associated local species solve and
@@ -97,15 +87,13 @@ final structure check, heat/energy accounting, or timestep error control.
 The setting is part of the restart identity. Choose it using comparisons at
 the same evolved age; an absolute abundance tolerance is not a relative
 accuracy guarantee for rare species.
-A [cold-model comparison](results/cold_species_tolerance_oct1_v1.json) records
-the measured agreement and the limits of the cost estimate.
 
 The metal species solve also bounds the binding-energy error of its integrated
 inventory before returning. The driver includes abundance-storage roundoff in
 both forms of the binding audit and records it as `mass_roundoff_surface` in
 `attempts.jsonl`. This matters when cooling luminosity is small: shortening a
 step magnifies a fixed rounding error in the inferred nuclear power. The
-first-law and timestep criteria remain unchanged. An [8 Myr cold comparison](results/cold_conservation_oct2_v1.json)
+first-law and timestep criteria remain unchanged. An [8 Myr cold comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_conservation_oct2_v1.json)
 checks response reuse against exact evaluation.
 
 For screened-core transport, optional `screened_heat_lower_T_K` separates the
@@ -138,12 +126,8 @@ and time-accuracy checks. If the predicted solve fails, the program retries
 from the previous structure. The default is `"none"`; after a restart, the
 prediction history is rebuilt from newly accepted states.
 
-The physical-metal burning/diffusion solve also reuses the latest composition
-from the coupled iteration as its starting guess. Together with structure
-prediction, this reduced a matched 1 Gyr interval from **297.8 to 143.5 CPU
-seconds**, with negligible structural and fuel differences. This is one timing
-comparison in a gradual phase, not a benchmark for the complete track.
-[Comparison](results/solver_starting_guesses_sept27_v1.json).
+The physical-metal burning/diffusion solve reuses the latest composition
+from the coupled iteration as its starting guess.
 
 Optional `collision_taylor_radius "1e-4"` reuses collision responses with a
 first-order Taylor expansion around the last exact evaluation at each face.
@@ -155,15 +139,8 @@ The approximation changes transport coefficients, not their conservative
 exchange between neighboring cells. Its radius is recorded in the checkpoint;
 the default is zero (exact evaluation), and the supported maximum is 1e-4.
 
-With both starting-guess improvements, this reduced the same 1 Gyr comparison
-from **143.5 to 81.76 CPU seconds**: **3.642 times** faster than the original
-**297.8 seconds**, retaining full-step/two-half-step checks. Relative global
-changes were at most **1.022e-9**. A separate four-interval check recomputed
-every reuse exactly, measuring a maximum coefficient-group error of
-**1.195e-8**. These are gradual-phase measurements, not a complete-track or
-flash-convergence benchmark. Optional `collision_verify_reuse "1"` enables
-that diagnostic; `collision_reuse.json` records counts and measured errors.
-[Collision comparison](results/collision_reuse_sept27_v1.json).
+Optional `collision_verify_reuse "1"` recomputes reused collision responses
+exactly. `collision_reuse.json` records counts and measured errors.
 
 The recovered high-hydrogen atmosphere families overlap over **X = 0.99–0.995**.
 The lower family remains valid through X = 0.995; the next reference requires
@@ -173,7 +150,7 @@ comparison found matching-temperature differences below **0.5354%** and
 gas-pressure differences below **0.6945%** between the overlapping descriptions.
 The accepted stellar continuation preserves its starting physical state and
 passes the existing timestep and conservation checks.
-[Atmosphere overlap](results/hydrogen_atmosphere_join_sept27_v1.json).
+[Atmosphere overlap](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/hydrogen_atmosphere_join_sept27_v1.json).
 
 The initial composition file contains the nine baryonic mass fractions in
 `Composition` order. The CN inventory starts with the declared GS98 isotope
@@ -188,7 +165,7 @@ checks its estimated mixing heat and convective travel time. The sum of the
 absolute species heat contributions must remain below **0.01000%** of local
 luminosity, and the estimated D nonuniformity below **1e-8** in mass fraction.
 The controls supporting these choices are in
-[the initial transport assessment](results/pms_initial_transport_bound_sept26_v1.json).
+[the initial transport assessment](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/pms_initial_transport_bound_sept26_v1.json).
 These limits bound this particular mixing approximation; they do not validate
 a microscopic kinetic-heat or partially ionized collision prescription.
 
@@ -201,7 +178,7 @@ microscopic-drift estimate below **1e-6**, and its kinetic-heat estimate below
 **5%** of local luminosity. The latter two are order-of-magnitude proxies,
 not validated partially ionized collision coefficients. Bounded stellar
 controls vary conduction and residual heat to assess their structural effect.
-[Transport assessment](results/convective_transport_integration_sept26_v1.json).
+[Transport assessment](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/convective_transport_integration_sept26_v1.json).
 
 To permit hot radiative regions, select:
 
@@ -229,10 +206,6 @@ drift and kinetic-heat estimates described above remain in force. A model that
 needs greater abundance gradients requires finite mixing. These checks assess
 the instantaneous-convection approximation, not every uncertainty in diffusion.
 
-The join agrees with the existing stellar transport implementation at saved
-faces. A short stellar comparison and an independent radiative-core/mixed-envelope
-control pass, including explicit rejection of an unsupported cool boundary.
-[Integration evidence](results/envelope_transport_integration_sept26_v1.json).
 For phases where burning and mixing times become comparable, the same program
 can select `convective_mixing "finite_implicit"` or `"finite_lagged"` with
 `transport "screened_core"`. The default is `"instantaneous"`. Finite implicit
@@ -256,13 +229,6 @@ starting model, including the second half of a time-accuracy comparison.
 The mixing mode and temperature enter restart identity. D exhaustion itself
 is not a criterion for losing convection or requiring finite mixing.
 
-A **12.73 Myr** comparison at **3.609 Tyr** passes every full/half-interval
-audit. Finite mixing changes the helium-3 inventory by **5.107e-15** relative
-to instantaneous mixing in this slow phase. The default program reproduces
-three intervals and the final physical checkpoint exactly. This establishes
-integration for the tested states, not convergence through a flash.
-[Driver and transport checks](results/finite_mixing_driver_sept27_v1.json).
-
 Atmosphere overlaps, the bounded approximation for small metal changes and the
 measured response to settling are described in [ATMOSPHERE.md](ATMOSPHERE.md).
 `atmosphere_metal_chain` selects the measured intervals in the same driver;
@@ -279,7 +245,7 @@ and the runtime packager includes their complete input set.
 The cool, high-gravity source contains bounded inferred rows; using that family
 does not establish independently solved coverage throughout the late track.
 [Source limits](../data/atmosphere/lifetime_hydrogen_envelope/README.md),
-[coverage and exact continuation checks](results/hydrogen_envelope_integration_sept27_v1.json).
+[coverage and exact continuation checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/hydrogen_envelope_integration_sept27_v1.json).
 
 The volume-face thermal gradient now uses the same logarithmic-temperature
 mean with and without a material-heat provider. A zero heat/conduction
@@ -313,13 +279,13 @@ helium-3 difference is **4.027e-7** in mass fraction at the envelope boundary.
 No cell is omitted from the time-error estimate. Structure accuracy remains
 1e-4, nuclear-power accuracy .005 and the global inventory budget 1e-14.
 This comparison supports the gradual phase, not time resolution during a flash.
-[Matched-age comparison](results/envelope_time_accuracy_sept27_v1.json).
+[Matched-age comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/envelope_time_accuracy_sept27_v1.json).
 The preceding 1e-5 setting has an independent
-[500 Myr comparison](results/radiative_core_time_accuracy_sept27_v2.json).
+[500 Myr comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/radiative_core_time_accuracy_sept27_v2.json).
 The continuous star now uses a tighter **1e-13** stratified solve after a matched
 **11.76-Myr** comparison at radiative-core onset. This reduces audit retries
 without changing the global budget; luminosities differ by **0.00004235%**.
-[Comparison and exact continuation](results/radiative_core_solve_accuracy_sept27_v1.json).
+[Comparison and exact continuation](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/radiative_core_solve_accuracy_sept27_v1.json).
 When instantaneous convection mixes the whole star, the driver tightens the
 composition correction to the smaller of the selected tolerance and **1e-15**.
 This inexpensive one-region solve needs that precision during initial
@@ -402,7 +368,7 @@ fractions. Regional starting guesses average differences from one local
 composition, preserving a uniform mixture even near pure hydrogen. This avoids
 rounding a positive helium remainder to zero; it imposes no abundance floor.
 A stopped 720.9 K model advances 6 Myr with unchanged conservation checks.
-[Regression and stellar check](results/trace_helium_remainder_oct1_v1.json).
+[Regression and stellar check](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/trace_helium_remainder_oct1_v1.json).
 
 ### Compact helium-isotope tables
 
@@ -440,13 +406,7 @@ planes. A matched 10 Myr cooling comparison changes luminosity by 3.637e-6
 and He3 inventory by 2.001e-7; the convective boundary is identical. Metal
 enthalpy derivatives can change appreciably even when their contribution at
 trace abundance is small. The comparison and derivative checks are recorded in
-[the EOS assessment](results/low_metal_eos_sept27_v1.json).
-
-The retained 1-Gyr contraction reproduces all 1020 physical history rows and
-both complete physical checkpoints exactly with binary loading. In one matched
-M4 check, CPU time through construction of the initial relaxed model fell from
-6.748 to 2.591 s, including input checks and loading. This is a startup improvement;
-it does not imply the same speedup for a long evolutionary calculation.
+[the EOS assessment](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/low_metal_eos_sept27_v1.json).
 
 
 ### Optional reuse of nearby transport states
@@ -470,18 +430,6 @@ measured approximation error.
 Convection-region tests now share the configured zone threads; the connected
 regions are assembled in mesh order. The driver permits up to 16 threads;
 eight are selected on the M4 Max after the additional parallel work below. This does not change the mixing prescription.
-
-A matched 1-Gyr segment starting at 3.718 Tyr, with four threads and every
-full/two-half timestep check retained, used **48.97 CPU seconds** and
-**20.34 wall seconds**, versus **78.08** and **41.37** for the preceding code.
-Both accepted 28 intervals. Relative changes in global stellar quantities were
-below **2e-12**; all isotope and energy audits passed. The concurrent timing
-pair is an estimate of the gain, not a hardware-independent benchmark.
-Over four further checked intervals, more than 460,000 exact comparisons bounded EOS
-potential/enthalpy group errors by **2.782e-8**; the maximum absolute error in
-the buoyancy term was **1.634e-6**. These checks concern gradual shell burning,
-not convergence through a flash. Sampled timestep checking remains unselected.
-[Comparison and verification](results/response_reuse_sept27_v1.json).
 
 
 ### Coupled-solve accuracy and additional parallel work
@@ -507,30 +455,16 @@ five accepted steps without rejection, with a 3.902-fold CPU improvement.
 Global structural differences stayed below 0.02850%; the weak nuclear source
 changed by 0.1869% relative, or 2.126e-6 of surface luminosity. These are finite
 timestep differences, not a whole-lifetime accuracy guarantee.
-[Control](results/hayashi_energy_stop_oct2_v1.json).
+[Control](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/hayashi_energy_stop_oct2_v1.json).
 Omitting these settings retains the previous stopping criteria. Selected values
 enter the restart identity; the driver requires them to remain smaller than
 the corresponding time-discretization tolerances. Each final structure check
 must be at least 100 times tighter than the temporal structure target; species
 and transported-heat limits retain their factor of 1000.
 
-Face mixing coefficients, transported-heat residuals and nuclear sources used
-in flux reconstruction now share the zone threads. Ordered conservation sums
-remain serial. On the same Hayashi-origin star at **3.841 Tyr**, a **5 Gyr**
-comparison took **31.53 wall seconds** with eight threads, versus **54.95 seconds**
-with four threads and the preceding code: **1.743 times** faster. CPU use was
-**154.7** versus **142.0 seconds**; the elapsed-time gain here comes from using
-more cores. Both retained 75 intervals and every full/two-half check.
-Relative global differences were at most **1.068e-12** and the helium-3 profile
-difference, normalized by its peak, was **5.861e-11**.
-
-Five integration tests cover ordinary, finite and lagged convection, unchanged
-conservation bounds, parallel face coefficients, actual convective-region sets
-and invalid solver settings. The production histories record boundary counts;
-they do not independently establish identical boundary positions. This
-comparison covers gradual shell burning; sampled timestep control and flash
-convergence remain separate work.
-[Measurements](results/parallel_coupling_sept27_v1.json).
+Face mixing coefficients, transported-heat residuals and nuclear sources
+used in flux reconstruction share the zone threads. Ordered conservation
+sums remain serial.
 
 
 ### Refining a species solve before rejection
@@ -540,12 +474,6 @@ local species balance outside its existing tolerance. In that case, the
 solver refines only the species solution, starting from its returned answer,
 then reconstructs and checks the fluxes again. Failure still rejects the step;
 no abundance, flux or conservation requirement is adjusted afterward.
-
-Over a matched **1 Gyr** interval near **3.592 Tyr**, this removes three
-local-continuity rejections and reduces CPU use by **5.699%**. The altered
-step sequence changes luminosity by **2.712e-6** relative and total He3 by
-**6.851e-6**. Six transport and mixing tests pass.
-[Comparison and test scope](results/species_continuity_refinement_sept28_v1.json).
 
 ### Composition response in the structure iteration
 
@@ -563,23 +491,6 @@ assisted solution passes the original structure equations, physical convection
 test, species conservation and energy checks. An unsuccessful auxiliary burn
 falls back to the existing iteration. The option is off by default and enters
 the restart identity when enabled. It works with `structure_prediction "linear"`.
-
-For the same Hayashi-origin star near **3.997 Tyr**, a **1 Gyr** comparison
-with two threads per run used **15.47 CPU seconds** versus **149.5 seconds**
-with the current production solver. Measured elapsed times were **10.14** and
-**79.28 seconds**: **7.815 times** faster in this phase, with **9.663 times**
-less CPU. Both runs retained every full-step/two-half-step check and the same
-acceptance thresholds. The improved iteration accepted eight longer intervals,
-versus 49; rejections fell from 30 to one.
-
-The maximum relative global difference was **0.01382%**. The largest local
-ln-density difference was **2.994e-4**, and the helium-3 profile difference
-normalized by its peak was **1.102e-4**. Convective mass and boundary counts
-agreed. Five tests cover the differentiated structure equations and ordinary,
-finite and lagged mixing. This single comparison measures gradual shell
-burning under shared machine load; it does not establish flash convergence
-or a whole-lifetime speed-up.
-[Comparison](results/linearized_burning_sept27_v1.json).
 
 ## Dense hydrogen opacity in a convective envelope
 
@@ -599,7 +510,7 @@ half and twice the approximated opacity changes global quantities by at most
 atmosphere coverage limits the duration of this comparison. The source data
 support the larger density interval, but the composition continuation remains
 an approximation and needs reassessment if these layers become radiative.
-[Measured response](results/dense_envelope_density_extension_sept27_v1.json).
+[Measured response](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/dense_envelope_density_extension_sept27_v1.json).
 
 
 ## Second-order accepted states
@@ -624,18 +535,6 @@ Any failed assessment uses the ordinary two-half-step result. Initial-deuterium
 evolution also uses that fallback. Integrator selection and assessment limits
 are recorded in checkpoint identity.
 
-A matched 1 Gyr comparison near 3.997 Tyr, using the current physics and two
-threads, compared both methods with a 5 Myr-step reference. The reference ends
-0.03955 yr short because of accumulated absolute-age rounding; this negligible
-offset is included in the receipt. Richardson reduces the helium-3 peak error
-from 0.005233% to 0.0004588%, while the largest local structure difference is
-0.04542%. It costs 20.61 retained CPU seconds versus 14.64 for the ordinary
-method. It remains off in the production trajectory: this comparison supports
-its accuracy but does not show a speed gain or validate rapid burning. The
-controller tests cover missing assessment, declined and throwing assessments,
-and acceptance; a real initial-deuterium step confirms the application fallback.
-[Comparison](results/richardson_current_physics_sept27_v1.json).
-
 ## Abundance changes during instantaneous mixing
 
 `abundance_cap_after_mixing "1"` measures the abundance cap from the initial
@@ -651,7 +550,7 @@ and energy error checks. Linear structure prediction is skipped after a
 preceding abundance jump larger than the cap, because instantaneous mixing
 is not proportional to elapsed time. This only changes the initial guess.
 A resolved envelope-boundary comparison and finite-mixing regression checks
-are recorded in [the numerical comparison](results/instantaneous_mixing_step_cap_sept27_v1.json).
+are recorded in [the numerical comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/instantaneous_mixing_step_cap_sept27_v1.json).
 
 The optional `opacity_dense_hydrogen_maximum_logT` extends the declared
 source-slope hydrogen-opacity approximation from its default upper log T of
@@ -660,7 +559,7 @@ the selected log R limit. It is recorded in restart identity. A 20 Myr
 half/double-opacity comparison supports this choice in the efficiently
 convective envelope of the current remnant; it does not establish accurate
 radiative opacity for arbitrary pure-hydrogen layers. See the
-[temperature-domain comparison](results/dense_envelope_temperature_extension_sept27_v1.json).
+[temperature-domain comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/dense_envelope_temperature_extension_sept27_v1.json).
 
 
 ### Dense gas opacity in a cool envelope
@@ -676,7 +575,7 @@ log R = 6 edge. The warm return uses the same density interval: dense states
 retain the computed source until the original table is supported. Source temperature, density and
 composition bounds remain enforced. The integer-mass source convention is
 converted explicitly, with derivatives that preserve extinction per length.
-[Overlap tests](results/cold_opacity_overlap800_sept30_v1.json) cover the
+[Overlap tests](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_opacity_overlap800_sept30_v1.json) cover the
 800 K envelope and a matched 100 Myr stellar interval.
 
 The table spans 1000–30000 K, with density 0.01–10 g/cm³ throughout and
@@ -696,14 +595,14 @@ The affected layers are convective in the tested 700–850 K envelopes:
 scaling their opacity from 0.1 to 10 changes the deep temperature by less
 than 4e-14 relative. This test concerns the warm envelope layers, not the
 cool photosphere or an arbitrary star.
-[Atmosphere and envelope checks](results/cold_envelope700_oct1_v1.json).
+[Atmosphere and envelope checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_envelope700_oct1_v1.json).
 A separate density extension supports complete 575–800 K envelopes. Scaling
 warm-layer opacity by 0.001–1000 changes base temperature by at most 2.890e-12
 relative in 165 comparisons; all supported old envelopes are unchanged.
 The EOS predicts almost full ionization there, which the gas-opacity chemistry
 misses. Efficient convection makes this approximation structurally insensitive
 in these tests. It is not a nonideal opacity model for other states.
-[Density extension and checks](results/cold_opacity_density_oct1_v1.json).
+[Density extension and checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_opacity_density_oct1_v1.json).
 A matched 10 Myr stellar overlap also passes with the original time and
 conservation checks; it does not yet establish a cooling sequence to 700 K.
 
@@ -717,15 +616,10 @@ and rejects gaps within a density prefix; it never fills absent source values.
 The `export-populations` command adds diagnostic output to SYNSPEC54 before
 compilation. This leaves its absorption and chemical equations unchanged.
 
-At 1235 K effective temperature, adding Rayleigh scattering changes luminosity
-by 1.254e-7 relative over a matched 20 Myr interval. At colder gas temperatures
-the opacity change is large, so this comparison is not a final cooling-age
-error bound. Extending the spectral integration from 30 to 60 microns at
-2000 K changes the total Rosseland mean by at most 0.1004%.
 `opacity_cold_dense_scale` permits 0.1–10 sensitivity comparisons; the default
 is 1. Both the file hash and scale enter restart identity.
 [Source details](../data/opacity/cold_dense_hydrogen.json) ·
-[Numerical checks](results/gas_rayleigh_sept30_v1.json).
+[Numerical checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/gas_rayleigh_sept30_v1.json).
 
 The warmer return keeps the overlap inside both opacity sources along the
 assessed cooling envelope. At 1475–1600 K effective temperature, this changes
@@ -734,7 +628,7 @@ computed dense opacity by 0.1–10 instead changes base temperature by up to
 0.5140%, so the older 1902 K sensitivity does not apply unchanged at lower
 temperatures. A 100 Myr stellar replay agrees within 3e-11; the continuation
 then stops at the 1475 K atmosphere limit.
-[Warm-overlap checks](results/cold_gas_warm_overlap_sept30_v1.json).
+[Warm-overlap checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_gas_warm_overlap_sept30_v1.json).
 
 ### Radiative opacity in the conductive interior
 
@@ -750,7 +644,7 @@ cover the saved cold model and 529 cooler projected states newly admitted
 below 600 kK; queries below the source boundary still reject. The matched
 10 Myr comparison is unchanged. Restart identity records
 `source_slope.fixed_density_overlap.ionized_cold.margin4.v3`.
-[Source-boundary checks](results/core_opacity_source_floor_sept30_v1.json).
+[Source-boundary checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/core_opacity_source_floor_sept30_v1.json).
 
 The continuation is allowed only when a factor-ten uncertainty in radiation
 changes total heat conductivity by at most 0.1%. The check uses one quarter of the
@@ -765,7 +659,7 @@ The 150 Myr cooling comparison changes luminosity by at most 0.008869% for
 the two extreme opacity scales. This supports the approximation in that
 segment, conditional on its declared uncertainty; it is not validation of
 the opacity source outside its tabulated domain.
-[Numerical and stellar checks](results/conductive_interior_opacity_sept28_v1.json).
+[Numerical and stellar checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/conductive_interior_opacity_sept28_v1.json).
 
 The hydrogen-envelope option, `opacity_conductive_envelope "1"`, continues
 measured radiative-opacity density slopes only where electron conduction
@@ -785,7 +679,7 @@ to an unsupported radiative table there. Restart identity records
 `hydrogen_density_continuation.logR_overlap.cold100.margin4.v9`.
 The overlap spans log R = 3.0–3.25, keeping source queries below the bridge
 table's log density = 2.4 limit near log T = 5.7.
-[Source and warm-replay checks](results/warm_opacity_overlap_sept30_v1.json).
+[Source and warm-replay checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/warm_opacity_overlap_sept30_v1.json).
 
 The extension to 100 kK retains both source anchors and the same local heat
 bound. Across 162 source queries, old opacities are unchanged and 96 additional
@@ -793,7 +687,7 @@ states are supported. In 118 supported cooling-layer face comparisons, the
 microscopic conductivity is 0.5473–0.6187 of the tabulated reference, above the
 one-quarter value used in the admission bound. Colder points rejected by the
 separate EOS remain unsupported.
-[Cold opacity checks](results/conductive_opacity100_oct1_v1.json).
+[Cold opacity checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/conductive_opacity100_oct1_v1.json).
 
 The original conduction option retains its metal limit of 1e-8, hydrogen blend over mass fractions
 0.70–0.745, its 700–800 kK upper overlap,
@@ -811,8 +705,8 @@ A matched 142.4 Myr interval changes global stellar quantities by at most
 4.017e-7 relative. The factor-100 radiative-opacity uncertainty and 0.003 bound
 on its contribution to total transport are unchanged. These checks do not
 establish a mixture phase diagram or a cooling-age error bound.
-[Mixture checks](results/mixture_conducting_opacity_sept30_v1.json) ·
-[Lower-temperature overlap](results/hydrogen_opacity_lower_join_sept30_v1.json).
+[Mixture checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/mixture_conducting_opacity_sept30_v1.json) ·
+[Lower-temperature overlap](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/hydrogen_opacity_lower_join_sept30_v1.json).
 
 `opacity_conductive_envelope_uncertainty` selects the maximum fractional change
 in total diffusive conductivity for a factor-100 reduction of the continued
@@ -828,7 +722,7 @@ The largest exercised local transport bound is 0.001142. An allowance of
 0.003 supports this segment; it is not a general cooling-age error bound.
 The corrected density blend changes luminosity by 0.005844% in its separate
 1 Gyr comparison. All energy and time-step checks are unchanged.
-[Numerical checks](results/conductive_envelope_opacity_sept30_v1.json).
+[Numerical checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/conductive_envelope_opacity_sept30_v1.json).
 
 For the assessed nearly pure-H cooling envelope, `screened_minimum_T_K "50000"`
 permits microscopic transport while retaining the configured 2–3 MK heat
@@ -842,8 +736,8 @@ future helium inflow remain separate questions.
 All 232 native face queries pass, including 69 newly admitted queries; supported
 values are unchanged. A 6 Myr interval passes the energy and species audits.
 These checks support this conditional continuation, without calibrating strongly
-coupled or quantum diffusion. [Checks](results/transport_floor50_oct1_v1.json),
-[higher-temperature assessment](results/transport_floor70_sept30_v1.json).
+coupled or quantum diffusion. [Checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/transport_floor50_oct1_v1.json),
+[higher-temperature assessment](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/transport_floor70_sept30_v1.json).
 
 At 130–200 kK, the H-rich layer remains ionized in the source EOS. Uncertain
 trace-helium charge contributes less than 0.4% of the electron-scattering
@@ -851,7 +745,7 @@ weight. Native opacity checks retain the source anchors and derivatives;
 the stricter conductivity margin still leaves the estimated radiative heat
 uncertainty far below the selected 0.3% ceiling. These are conditional bounds
 on the opacity approximation, not a calibration of the conductivity itself.
-[Cold-envelope checks](results/cold_opacity_floor_sept30_v1.json).
+[Cold-envelope checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_opacity_floor_sept30_v1.json).
 
 
 `eos_dense_hhe_transition "liquid"` optionally extends the cold H/He EOS through
@@ -885,4 +779,4 @@ heat and final-structure tolerances then permit absolute residuals of only
 5e-14 and 2e-14 of that luminosity near the centre. Energy equations, time-step
 checks and conservation audits are unchanged. A matched 10 Myr comparison
 changes the temperature and density profiles by less than 5e-12.
-[Normalization checks](results/luminosity_normalization_oct1_v1.json).
+[Normalization checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/luminosity_normalization_oct1_v1.json).

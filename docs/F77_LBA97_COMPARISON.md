@@ -35,11 +35,11 @@ of the discrepancy. No controlled experiment has yet assigned their separate
 effects on the published milestones.
 
 F77's central convection flag changes only after a finite margin beyond
-marginal stability. The [recorded transition brackets](results/f77_core_onset_comparison_v1.json)
+marginal stability. The [recorded transition brackets](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/f77_core_onset_comparison_v1.json)
 retain that distinction. The Ferguson calculation later fails during cooling;
 its last accepted state does not establish a completed cooling calculation.
 No new F77 evolution or numerical convergence study was needed for this
-comparison. The [comparison data](results/f77_lba97_comparison_v1.json) were
+comparison. The [comparison data](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/f77_lba97_comparison_v1.json) were
 extracted from the same saved calculations used for the working-paper graphs.
 
 `scripts/summarize_f77_lba97.py` checks the published figure CSV against its
@@ -48,3 +48,13 @@ milestones. It also records the original paper's PDF hash. The early luminosity
 minimum included in that data file is explicitly distinguished from the paper's
 definition of the start of the main sequence, which requires nuclear heating
 to supply all of the surface luminosity.
+
+Supply the archived history, onset audit and original paper explicitly:
+
+```sh
+python3 scripts/summarize_f77_lba97.py --paper /path/to/lba97.pdf \
+  --f77-source /path/to/baseline.f --history /path/to/f77_history.csv \
+  --onset /path/to/core-onset.json --output /tmp/ember-f77-comparison.json
+```
+
+The history's adjacent `f77_history_provenance.json` is also required.

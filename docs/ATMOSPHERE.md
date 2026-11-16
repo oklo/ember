@@ -40,7 +40,7 @@ queries. An independent metal-abundance midpoint gives a 0.8364% gas-pressure
 interpolation error for the assessed source set. Different triangulations
 remain an interpolation uncertainty. Reader validation does not select a
 physical atmosphere table for evolution or add missing opacity processes.
-[Validation](results/irregular_atmosphere_reader_sept30_v1.json).
+[Validation](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/irregular_atmosphere_reader_sept30_v1.json).
 
 ## Metal settling
 
@@ -97,7 +97,7 @@ changes matching-layer temperature by at most **0.01569%** and gas pressure
 by **0.08141%** in those comparisons. These are sampled source differences,
 not a bound at every composition. The smaller **1e-8** allowance in the first
 continuous run was unnecessarily restrictive for these measured responses.
-[Sensitivity results](results/trace_metal_atmosphere_check_sept26_v1.json).
+[Sensitivity results](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/trace_metal_atmosphere_check_sept26_v1.json).
 Hydrogen and helium-3 retain their actual values in the lookup. Only that lookup
 transfers the metal difference to helium-4. The returned density uses the actual
 composition and EOS. The star's composition, nuclear reactions, interior opacity
@@ -302,7 +302,7 @@ C = 3 kappa P rho cp alpha v0 / (32 sigma_SB T³ g).
 
 The terms represent the element contrast, element cooling, and convective flux. The adopted alpha=1.9 and y=1/3 recover the interior's Bohm–Vitense coefficients in the optically thick limit. The alternative y=.076 is a sensitivity control. Scaling the cubic bounds its root without subtracting nearly equal gradients. The two Teff/gravity sensitivity equations propagate the EOS, opacity, buoyancy, heat capacity and cubic derivatives analytically.
 
-The default integration tolerance is 2e-8 for both logarithmic states and sensitivities. Sensitivities must also be well resolved: loosening them can allow boundary-value noise that prevents a tight stellar Newton solve from converging. Separate controls permit convergence tests; normal evolution keeps both tight. The EOS inversion stays within its declared density interval and checks every sampled state. A valid local pressure root does not require a stable interpolant at a remote density endpoint. [Density-inversion checks](results/local_density_inversion_sept27_v1.json).
+The default integration tolerance is 2e-8 for both logarithmic states and sensitivities. Sensitivities must also be well resolved: loosening them can allow boundary-value noise that prevents a tight stellar Newton solve from converging. Separate controls permit convergence tests; normal evolution keeps both tight. The EOS inversion stays within its declared density interval and checks every sampled state. A valid local pressure root does not require a stable interpolant at a remote density endpoint. [Density-inversion checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/local_density_inversion_sept27_v1.json).
 
 For a declared reference mixture c0, with baryonic X=.7, Z=.02 and zero He3, the corrected boundary is
 
@@ -315,7 +315,7 @@ Radiation pressure is then added once at the corrected T, and density is inverte
 
 This assumes that the non-grey correction at c0 transfers to other mixtures. Radiative transfer is still represented by a grey closure, and isotope-dependent collision-induced absorption and line broadening are absent. The anchor covers Teff=1800..3300 K and log g=3.5..6; the EOS and column impose additional restrictions, including the temperature of the upper atmosphere. There is no fallback outside their common support.
 
-The independent checks recover the constant-opacity Eddington limit, compare derivatives through convective layers, verify exact reference anchoring and test the top-column truncation. Static comparisons at four homogeneous compositions are in [the boundary sensitivity results](results/extended_boundary_sensitivity.json). Removing the COND anchor changes luminosity by 7–14%; changing y, alpha or the starting optical depth has a smaller effect. These are sensitivity experiments, **not a calibrated physical error bar**. A helium-enriched non-grey atmosphere remains the preferred next replacement.
+The independent checks recover the constant-opacity Eddington limit, compare derivatives through convective layers, verify exact reference anchoring and test the top-column truncation. Static comparisons at four homogeneous compositions are in [the boundary sensitivity results](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/extended_boundary_sensitivity.json). Removing the COND anchor changes luminosity by 7–14%; changing y, alpha or the starting optical depth has a smaller effect. These are sensitivity experiments, **not a calibrated physical error bar**. A helium-enriched non-grey atmosphere remains the preferred next replacement.
 
 ## Non-grey composition grid
 
@@ -333,8 +333,8 @@ A restart control changes matching temperature and pressure by less than
 `1.3e-9`; an independently calculated column agrees with the resulting table
 to `0.09194%` in pressure. These comparisons test the numerical choice, not
 the completeness of the atmospheric physics.
-[1400 K checks](results/cold_atmosphere_stop_sept30_v1.json).
-[Cool-column checks](results/cool_atmosphere_iteration_sept27_v1.json).
+[1400 K checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_atmosphere_stop_sept30_v1.json).
+[Cool-column checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cool_atmosphere_iteration_sept27_v1.json).
 
 `CompositionAtmosphereGrid` and the pinned source-generation/import pipeline
 are documented in [NONGREY.md](NONGREY.md). Runtime values and derivatives
@@ -382,9 +382,9 @@ depth throughout. Prepared columns extend to **3400 K**, with
 **log g = 6.3–6.7** over **3400–4000 K**. Independent **3500 K**
 columns differ from interpolation by at most **0.01710%** in temperature and
 **0.4924%** in pressure; a deeper column changes matching pressure by **0.04344%**.
-[3400 K coverage](results/cold_atmosphere_3400_sept28_v1.json).
-[Isotope checks](results/mixed_helium_atmosphere_sept27_v1.json),
-[cooler coverage](results/cold_atmosphere_high_gravity_sept28_v1.json).
+[3400 K coverage](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_atmosphere_3400_sept28_v1.json).
+[Isotope checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/mixed_helium_atmosphere_sept27_v1.json),
+[cooler coverage](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_atmosphere_high_gravity_sept28_v1.json).
 
 The source generator also accepts pure hydrogen. Absent elements retain a
 negligible positive numerical abundance because the source program interprets
@@ -397,7 +397,7 @@ composition. Across 100 integrated-envelope checks from 800–1500 K, varying
 helium from zero to ten times the current surface abundance changes the
 matching quantities by at most 0.001340%. This is a composition sensitivity,
 not a cooling-age error estimate. Unsupported temperature gaps remain masked.
-[Source and envelope checks](results/pure_hydrogen_source_sept30_v1.json).
+[Source and envelope checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/pure_hydrogen_source_sept30_v1.json).
 
 ### Adding completed mixed-atmosphere columns
 
@@ -425,20 +425,20 @@ temperature spikes from its optically thin starting guess. It keeps the mesh,
 boundary and physical equations fixed, then solves and checks the whole column
 again. Two source comparisons agree with independently converged columns to
 **2.090e-9** in matching temperature, pressure and density. An already converged
-control does not use this recovery. [Checks](results/atmosphere_upper_guess_sept29_v1.json).
+control does not use this recovery. [Checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/atmosphere_upper_guess_sept29_v1.json).
 
 A damped attempt that reaches its CPU limit while approaching convergence can
 restart Newton iteration from its best complete saved state. The original
 total CPU and phase limits remain in force, and the full source checks still
 decide acceptance. Stalled or crashed attempts do not use this recovery.
-[Checks](results/atmosphere_budget_recovery_sept29_v1.json).
+[Checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/atmosphere_budget_recovery_sept29_v1.json).
 
 New TLUSTY builds save restart profiles at full double precision. The original
 seven-digit output can disturb the small temperature differences that sustain
 nearly adiabatic convection. Rounding an otherwise identical warm profile gives
 a first Newton correction of 4.1%; retaining full precision gives 2e-10 and
 convergence in one iteration. The equations and acceptance checks are unchanged.
-[Restart comparison](results/atmosphere_restart_precision_sept29_v1.json).
+[Restart comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/atmosphere_restart_precision_sept29_v1.json).
 
 
 The binary opacity loader uses the supplied infrared spectrum. Its inherited
@@ -447,7 +447,7 @@ source tables extend to 30 microns. Independent spectral checks agree within
 1.314e-10. Complete 2000 K and 4600 K atmosphere comparisons change matching
 pressure by at most 0.03090%. These are two source comparisons, not a cooling-age
 error bound. Existing tables retain their recorded source identity.
-[Infrared comparison](results/atmosphere_infrared_loading_sept29_v1.json).
+[Infrared comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/atmosphere_infrared_loading_sept29_v1.json).
 
 The bottom convection Jacobian differentiates all three temperatures used by
 its heat-balance equation. Independent local checks agree within 2.640e-6;
@@ -456,7 +456,7 @@ with either Jacobian. This corrects the linearization without a measured
 speed-up in that control. New inputs also include convection from layer 2,
 so the solve and the final flux diagnostic cover the same interior faces.
 The 2000 K and 4600 K controls retain their boundary values within 5.782e-10.
-[Convection checks](results/atmosphere_convection_jacobian_sept29_v1.json).
+[Convection checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/atmosphere_convection_jacobian_sept29_v1.json).
 
 ### Incomplete hydrogen-atmosphere extensions
 
@@ -473,7 +473,7 @@ are still being calculated. In the current extension, 90 preceding queries
 are unchanged, 28 new queries are supported, and three missing-cell queries
 are rejected. The largest finite-difference derivative error is **2.605e-9**.
 Matching depth remains 100; gas-only and trace-helium assumptions are unchanged.
-[Checks](results/cold_atmosphere_cells_sept27_v1.json).
+[Checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_atmosphere_cells_sept27_v1.json).
 
 ## Integrated envelope composition
 
@@ -495,7 +495,7 @@ placeholder values are never interpolated. Version 2 appends `cells` and
 values and derivatives use the same bicubic interpolation in both versions.
 Native checks preserve 2804 warm and cold queries; four matched 1050 K
 atmospheres change the matching pressure by less than `1.480e-9`.
-[Source and atmosphere checks](results/atmosphere_bulk_mask_sept30_v1.json).
+[Source and atmosphere checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/atmosphere_bulk_mask_sept30_v1.json).
 
 The integrated envelope can use the interior EOS or an explicit H/He source
 via `envelope_eos "interior"` or `envelope_source "path"`. The latter rejects
@@ -506,7 +506,7 @@ Radiation is counted once. They are explicit approximations, not a metal EOS.
 Their supported metal mass fraction is at most 0.04. The same mixture
 gradient, `P delta / (rho T cp)`, is used at zero metals so the boundary remains
 continuous. This does not repair inconsistencies between the source responses.
-[Zero-metal comparison](results/envelope_zero_metals_oct1_v1.json).
+[Zero-metal comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/envelope_zero_metals_oct1_v1.json).
 
 The H/He envelope source uses a total-hydrogen proxy for deuterium, limited to
 D mass fraction 0.0001. The stellar fuel inventory and nuclear heat are
@@ -527,7 +527,7 @@ its complete final profile, within the original CPU budget, and repeats all
 source checks. A 1750 K control converges after two such restarts; matching
 pressure agrees with an independent accepted solution to 1.839e-9 relative.
 No failed column is admitted to a table.
-[Recovery check](results/atmosphere_flux_restart_sept30_v1.json).
+[Recovery check](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/atmosphere_flux_restart_sept30_v1.json).
 
 For a supplied atmosphere profile, `TAUFIR` does not reset the upper column
 boundary. `generate_nongrey_grid.py --initial-top-tau VALUE` removes donor
@@ -537,4 +537,4 @@ records the boundary change. Final transfer, chemistry and flux checks remain
 unchanged. At 1225 K and log g = 6.475, independently converged tops near
 1e-7 and 1e-6 agree in matching temperature and pressure within 1.840e-7
 relative. This check supports that cold column; a different regime needs its
-own boundary check. [Comparison](results/atmosphere_top_sept30_v1.json).
+own boundary check. [Comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/atmosphere_top_sept30_v1.json).

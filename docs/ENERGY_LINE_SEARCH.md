@@ -18,4 +18,4 @@ converges with the new line search. Its energy balance is checked independently
 by integrating heating and the change in internal energy plus pressure work.
 The relaxation, PMS/CN, face-energy and evolution-controller tests pass.
 
-Numerical results: [energy_line_search_oct2.json](results/energy_line_search_oct2.json).
+Numerical results: [energy_line_search_oct2.json](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/energy_line_search_oct2.json).

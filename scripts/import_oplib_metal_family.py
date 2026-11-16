@@ -15,7 +15,7 @@ import tarfile
 
 import numpy as np
 
-from audit_mesa_oplib_native import read_native
+from oplib_native import read_native
 from write_scientific_result import write_result
 
 
@@ -38,7 +38,7 @@ def main():
         raise ValueError('ordered positive source metallicities through Z=.05 required')
     hydrogen = [i/20 for i in range(20)]
     inputs = {str(q.resolve()): digest(q) for q in
-              [a.archive, Path(__file__), Path(__file__).with_name('audit_mesa_oplib_native.py')]}
+              [a.archive, Path(__file__), Path(__file__).with_name('oplib_native.py')]}
     a.work.mkdir(parents=True)
     source = a.work/'source'
     source.mkdir()

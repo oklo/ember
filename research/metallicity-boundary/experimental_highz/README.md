@@ -1,6 +1,6 @@
 # Clear atmospheres at five times reference metallicity
 
-![Nuclear support and luminosity](Ember_boundary_5Z_experimental.png)
+Run `python3 plot.py` in this directory to regenerate the figure.
 
 These experimental tracks use initial Z = 0.08241, Y = 0.27, solar metal
 ratios, and an EOS that includes metal ionization. They start after deuterium
@@ -41,7 +41,7 @@ the two calculations differ by 0.2903% in luminosity at 118 Gyr. Fresh
 short-step controls at 536, 1072 and 2144 points retain separation, with
 percent-level luminosity differences. Added slow mixing also retains layers
 through 150 Gyr but can strongly change luminosity. See the
-[conductive-layer tests](../CONDUCTIVE_BAND_TESTS.md) for the comparisons and
+[conductive-layer tests](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/research/metallicity-boundary/CONDUCTIVE_BAND_TESTS.md) for the comparisons and
 physical limitations.
 
 Reducing conductivity by 10% keeps the 0.06125-solar-mass model fully

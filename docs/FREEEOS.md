@@ -79,16 +79,16 @@ with fresh-process calculations; the discrepancy is present in FreeEOS itself.
 Integrating the density derivative across the tested interval leaves a
 free-energy-over-temperature mismatch of about 21 erg/g/K. A control mixture
 whose interval does not cross the join has no comparable mismatch.
-[Source integral checks](results/freeeos_electron_fit_join_v1.json).
+[Source integral checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/freeeos_electron_fit_join_v1.json).
 
 The smooth potential interpolant spreads this jump across a material cell.
 Heat capacities at some tested mixtures consequently differ from direct source
 responses by more than the 0.30% comparison criterion. The broad
-[hot-table audit](results/metal_eos_hot_source_v1.json) retains its failed
+[hot-table audit](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/metal_eos_hot_source_v1.json) retains its failed
 result. All 512 zones of the saved 3.848-trillion-year star pass their separate
 comparison, with a maximum heat-capacity difference of 0.2081%; this is a
 profile check, not a bound across the table.
-[Saved-profile comparison](results/metal_eos_hot_profile_v1.json).
+[Saved-profile comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/metal_eos_hot_profile_v1.json).
 
 FreeEOS option 223 retains the EOS1 material choices while using numerical
 electron integrals and omitting radiation. The importer supports this explicit
@@ -96,10 +96,10 @@ source selection and lets Ember add radiation once. The source integral
 control no longer resolves the jump. An independent check using options 1 and
 220 isolates radiation restoration from the electron treatment and agrees
 within 5.202e-11 fractionally.
-[Radiation check](results/freeeos_radiation_restoration_v1.json).
+[Radiation check](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/freeeos_radiation_restoration_v1.json).
 The numerical-electron pilot passes the unchanged source and thermodynamic
-criteria. [Pilot](results/numerical_electron_pilot_v1.json),
-[generation and import checks](results/numerical_electron_source_pipeline_v1.json).
+criteria. [Pilot](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/numerical_electron_pilot_v1.json),
+[generation and import checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/numerical_electron_source_pipeline_v1.json).
 
 The full 72-mixture numerical-electron source family is being calculated with
 `scripts/generate_metal_eos.py --electron-integrals numerical`; the exact
@@ -140,9 +140,9 @@ CMS19 retains its independent static-only guard and its original audit.
 
 ## Reproduction
 
-Normal builds use the versioned C++ table and need no Fortran or network.
-The source numerical evaluations are retained under `data/eos/sources/`.
-Rebuild the potential with standard-library Python:
+Normal C++ builds need no Fortran or network. The generated potential tables
+and raw evaluations are installed separately. If raw evaluations are already
+available, rebuild the potential with standard-library Python:
 
 ```
 python3 scripts/import_freeeos_potential.py \
@@ -158,6 +158,15 @@ python3 scripts/build_freeeos_probe.py /tmp/ember-freeeos300.tar.gz /tmp/ember-f
 python3 scripts/generate_freeeos_grid.py /tmp/ember-freeeos-source-build/probe /tmp/freeeos-raw.json.gz
 python3 scripts/import_freeeos_potential.py /tmp/freeeos-raw.json.gz /tmp/freeeos-potential.dat
 ```
+
+To regenerate the four fixed-composition test planes, repeat generation and
+import for X = 0.60, 0.65, 0.70 and 0.75, passing the same `--hydrogen X`
+to both commands. Install each potential as
+`data/eos/freeeos300_hhe_xNNN_potential.dat` (NNN = 060, 065, 070, 075).
+The source specifications and expected hashes remain in
+`data/eos/sources/freeeos300_composition_manifest.json`. Source generation
+may vary in its last bits across compilers; retain a changed source identity
+and compare physical responses rather than silently replacing reference data.
 
 The archive SHA-256 is
 `4ab1c15a51385a3eab3b08c6f3f240739c0105d92ec828d635ac95720edefb09`.
@@ -180,11 +189,10 @@ python3 scripts/audit_freeeos.py /tmp/ember-freeeos-source-build/probe /tmp/embe
 The script queries each source state in a fresh process, checks convergence
 and the local identities, compares the 912 off-grid states, and integrates
 the derivative across the 9000-K molecular fit join. The recorded output is
-[results/freeeos_audit.json](results/freeeos_audit.json). Its source identity
+[results/freeeos_audit.json](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/freeeos_audit.json). Its source identity
 residual is 5.98e-13 while the finite-interval potential mismatch remains
 1640 erg/g/K, demonstrating why both checks are needed.
 
 FreeEOS source is GPL-2.0-or-later and remains in the external build
-directory. The versioned files are numerical outputs and ember's own
-interpolation/import code; FreeEOS is not linked into ember. Cite Irwin
+directory. The numerical outputs retain their source attribution; FreeEOS is not linked into ember. Cite Irwin
 and the FreeEOS release when using these calculations.

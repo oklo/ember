@@ -21,9 +21,9 @@ heat-capacity difference 0.2952%. Another 792 comparisons in the old range pass.
 All 132 existing atmosphere models now have EOS support, including the four
 low-density models outside the older family. These are interpolation and
 consistency checks, not physical uncertainty bounds. See the
-[new-density checks](../../docs/results/metal_eos_low_density_source_v2.json),
-[old-density checks](../../docs/results/metal_eos_low_density_retained_v2.json),
-and [atmosphere integration](../../docs/results/nongrey_t3600_low_density_eos_v2.json).
+[new-density checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/metal_eos_low_density_source_v2.json),
+[old-density checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/metal_eos_low_density_retained_v2.json),
+and [atmosphere integration](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/nongrey_t3600_low_density_eos_v2.json).
 
 With the local numeric files present, reassemble the checked family without
 calculating the source again:
@@ -48,9 +48,9 @@ source comparisons, 2240 thermodynamic identities, 512 stellar-profile zones
 and 227 atmosphere queries pass. Maximum heat-capacity differences are
 0.2952% across the general tests and 0.09778% on the saved stellar profile.
 A fresh stellar calculation selects this EOS with the checked 5000 K atmosphere.
-[Acceptance](../../docs/results/numerical_electron_base_acceptance_v1.json),
-[general comparisons](../../docs/results/numerical_electron_base_general_v4.json),
-[profile comparisons](../../docs/results/numerical_electron_base_profile_v4.json).
+[Acceptance](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/numerical_electron_base_acceptance_v1.json),
+[general comparisons](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/numerical_electron_base_general_v4.json),
+[profile comparisons](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/numerical_electron_base_profile_v4.json).
 
 The nominal source contains 66 states failing thermodynamic identities and one
 failing its density-coordinate criterion. Recomputing their complete isotherms
@@ -60,7 +60,7 @@ and every potential derivative stencil touching it is excluded. The runtime
 rejects queries requiring an unsupported stencil. No acceptance criterion is
 relaxed. All preserved source and runtime files match the independently checked
 family byte for byte.
-[Source repair](../../docs/results/numerical_electron_source_repair_v4.json),
+[Source repair](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/numerical_electron_source_repair_v4.json),
 [installation](numerical_electron_base_v1/sources/installation_specification.json).
 
 A separate hot density addition reuses the completed source isotherms. One
@@ -72,8 +72,8 @@ passes. The generator records the actual executable and input hashes for
 every isotherm requiring this fallback. No unsuccessful source values are
 filled or extrapolated.
 [Precision specification](sources/numerical_electron_precision_fallback_v1_specification.json),
-[controls](../../docs/results/numerical_electron_precision_controls_v1.json),
-[pilot](../../docs/results/numerical_electron_precision_fallback_pilot_v1.json).
+[controls](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/numerical_electron_precision_controls_v1.json),
+[pilot](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/numerical_electron_precision_fallback_pilot_v1.json).
 
 At five dense isotherms, independent quadrature targets of 1e-11 and 1e-13
 agree within 2.446e-10 across 605 states. A fresh build reproduces all 605
@@ -82,8 +82,8 @@ at 1e-11, retaining any source isotherm already calculated at that accuracy.
 Changes larger than 1e-5 require an independent 1e-13 calculation of the entire
 isotherm, agreeing within 1e-8; thermodynamic and coordinate criteria remain
 unchanged. This source calculation is not yet an accepted dense EOS.
-[Convergence comparison](../../docs/results/numerical_electron_dense_quadrature_convergence_v1.json),
-[build reproduction](../../docs/results/numerical_electron_quadrature13_builder_v1.json).
+[Convergence comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/numerical_electron_dense_quadrature_convergence_v1.json),
+[build reproduction](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/numerical_electron_quadrature13_builder_v1.json).
 
 The offline builder requires a fresh working directory and accepts
 `--electron-quadrature-error 1e-9`, `1e-11` or `1e-13`.
@@ -147,7 +147,10 @@ of a material free-energy potential from FreeEOS 3.0.0 EOS1. It is the
 current fixed-composition equilibrium EOS. The numerical source mixture
 is H=.7, He=.3 (metals-as-helium approximation); it is not a full-metal,
 He3-capable EOS. Original direct numerical evaluations are retained in
-`sources/freeeos300_hhe_x070_raw.json.gz`. Normal builds need no Fortran.
+`sources/freeeos300_hhe_x070_raw.json.gz`. Normal C++ builds need no Fortran. These generated tables and raw
+evaluations are local inputs; follow [reproduction](../../docs/FREEEOS.md)
+to create them. The four fixed-X potentials and raw grids are not distributed
+in Git.
 
 The 305×593 source grid has .0125-dex spacing in log T and
 log Q=log[rho/(T/1e6)^1.5]. The potential retains 301×589 nodes after
@@ -276,6 +279,6 @@ python3 scripts/generate_freeeos_composition_reference.py /tmp/freeeos-probe \
   tests/data/freeeos300_extended_reference.dat --extended
 ```
 
-The 63 direct off-composition queries, including He3 mass fractions up to .105, differ by at most 0.083% in P/E and 0.421% in thermal responses. These test the stated elemental/isotope approximation; they are not comparisons with an independent physical EOS. The metals-as-He4 approximation remains explicit. A separate [metal sensitivity audit](../../docs/results/extended_eos_metal_sensitivity.json) compares direct FreeEOS evaluations with GS98 metals at 15 sampled states; differences are below .91% in P/E and .37% in cp/adiabatic gradient. That audit omits unsupported potassium and does not provide a consistent new metal mixture grid.
+The 63 direct off-composition queries, including He3 mass fractions up to .105, differ by at most 0.083% in P/E and 0.421% in thermal responses. These test the stated elemental/isotope approximation; they are not comparisons with an independent physical EOS. The metals-as-He4 approximation remains explicit. A separate [metal sensitivity audit](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/extended_eos_metal_sensitivity.json) compares direct FreeEOS evaluations with GS98 metals at 15 sampled states; differences are below .91% in P/E and .37% in cp/adiabatic gradient. That audit omits unsupported potassium and does not provide a consistent new metal mixture grid.
 
 Pressure inversion now honors the composition family's density support even when the initial ideal-gas guess lies outside it. Immutable mask intervals and integer polynomial scale factors are precomputed for speed; the potential, interpolation order, masks and physical derivatives are unchanged.

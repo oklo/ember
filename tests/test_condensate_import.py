@@ -109,7 +109,7 @@ class CondensateAcceptance(unittest.TestCase):
     def test_thermal_controls_replay_original_source_outputs(self):
         archive=ROOT/'data/atmosphere/sources/condensation_material_refinement/refined-2800-diagnostic'
         reference=validate(archive,diagnostic_grain_transport=True)
-        result=thermal_sensitivity(ROOT/'docs/results/condensation_warm_heat_capacity_controls.json',reference,archive)
+        result=thermal_sensitivity(ROOT/'tests/data/source_checks/condensation_warm_heat_capacity_controls.json',reference,archive)
         self.assertEqual(len(result['controls']),2)
         self.assertLess(abs(result['controls'][1]['relative_boundary_difference']['Pgas']),1e-5)
         self.assertFalse(reference['chemistry']['grain_enthalpy_supported'])
@@ -117,7 +117,7 @@ class CondensateAcceptance(unittest.TestCase):
     def test_thermal_diagnostic_requires_matching_reference_and_both_controls(self):
         archive=ROOT/'data/atmosphere/sources/condensation_material_refinement/refined-2800-diagnostic'
         reference=validate(archive,diagnostic_grain_transport=True)
-        original=json.loads((ROOT/'docs/results/condensation_warm_heat_capacity_controls.json').read_text())
+        original=json.loads((ROOT/'tests/data/source_checks/condensation_warm_heat_capacity_controls.json').read_text())
         with tempfile.TemporaryDirectory() as temp:
             path=Path(temp)/'control.json'
             altered={**original,'reference_source_sha256':'0'*64};path.write_text(json.dumps(altered))

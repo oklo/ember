@@ -5,8 +5,6 @@ Z_ref = 0.01648, with Y = 0.27 and solar metal ratios. The cloudy models use
 f_sed = 2 and clear between 900 and 1200 K. Tracks start on Hayashi contraction
 with deuterium.
 
-![Transition mass and metallicity](transition_mass.png)
-
 Bars span tested cooling and burning masses with metal ionization and
 matching physical inputs:
 
@@ -23,7 +21,7 @@ percentage points over the final 50 Gyr. Open circles have declined below
 0.1%; diamonds are unfinished trials. These intervals measure mass sampling,
 not physical uncertainty or permanent main-sequence membership. Shading
 connects the five sampled metallicities. The
-[neutral-metal EOS comparison](transition_mass_comparison.png) is separate;
+neutral-metal EOS comparison is separate;
 different EOS treatments must not be combined into a tighter interval.
 
 The high-Z clear cooling endpoint extends the permitted atmospheric H/He
@@ -38,57 +36,18 @@ mass intervals. Cloud physics, composition response, mixing and dense-matter
 thermodynamics remain larger uncertainties than the mass spacing in several
 intervals.
 
-Work above three times Z_ref remains experimental and is not included in
-the transition-mass diagram. The [five-times-reference-metallicity controls](experimental_highz/Ember_boundary_5Z_experimental.png)
-show 0.0614-, 0.0615-, 0.062- and 0.064-solar-mass clear models sustaining burning at 1 Tyr.
-The lower masses develop conductive interiors. The 0.06- and 0.061-solar-mass
-cases cool to 913.5 and 978.8 K, respectively, while the 0.06125 case warms to
-2042 K at 359.8 Gyr after exceeding nuclear balance. Atmosphere composition
-limits stop these unfinished tracks.
-[Latest ages, assumptions and data](experimental_highz/README.md).
-The EOS extension through Z = 0.24 passes tests on the enriched hot core;
-it does not establish general birth-composition coverage. No new transition
-mass is inferred. The [conductive-layer tests](CONDUCTIVE_BAND_TESTS.md)
-separate evidence for layer formation from its consequences for burning,
-including numerical resolution, slow mixing and matched metallicities.
+## Replot
 
-The [current cloudy three-times-reference-metallicity comparison](current_cloudy_3z/Ember_boundary_3Z_cloudy_current.png)
-shows 0.060, 0.0605 and 0.061 solar masses with metal ionization. The middle
-mass uses a wider EOS domain; its dashed late continuation awaits an atmosphere
-check. [Assumptions and data](current_cloudy_3z/README.md).
+Install the [research-record dependencies](../record/requirements.txt), then:
 
-## Neutral-metal comparisons
+```sh
+python3 research/metallicity-boundary/plot_transition_mass.py --include-comparison
+python3 research/metallicity-boundary/plot.py
+```
 
-The following figures use an EOS that omits metal electrons from degenerate
-pressure. They illustrate transport sensitivity, rather than the corrected
-mass intervals above.
-
-- [Cloudy tracks at three times Z_ref](boundary.png), and the
-  [selected curves](boundary_selected.png).
-- [Structure of the 0.05835-solar-mass model](interior_05835/Ember_boundary_05835_structure.png).
-  A conductive layer separates the core and envelope. Burning fades near
-  880 Gyr despite about 98.24% of the initial hydrogen remaining at 897 Gyr.
-  The omitted metal pressure and late heat-capacity interpolation make this
-  outcome provisional. [Physical interpretation and data](interior_05835/README.md).
-- [Mixing comparisons](mixing_metallicity.png) and
-  [independent meshes](mesh_comparison.png). Sharp mixing events change with
-  timestep and mesh. Coupled heat/composition mixing removes the broad peak
-  and dip on both tested meshes; both retain over 99.8% nuclear support at
-  1 Tyr, with a 4.945% luminosity difference. The transport prescription
-  remains uncertain.
-- [Timestep comparison](timestep_comparison.png): the separate
-  0.058-solar-mass upturn disappears with shorter steps.
-
-## Reproduce the figures
-
-`plot_transition_mass.py` reproduces the cutoff diagram from
-`transition_mass.json`; add `--include-comparison` to regenerate the separate
-neutral-metal comparison. Other figures use `plot.py`,
-`plot_mixing_metallicity.py`, `plot_mesh_comparison.py`, `plot_interior.py`
-and `interior_05835/plot_structure.py`, with NumPy and Matplotlib.
-CSV/NPZ files contain plotted states; JSON records endpoints, assumptions,
-input fingerprints and numerical checks. These reproduce figures; the full
-stellar checkpoints and physics tables are separate.
-
-For the selected curves:
-`python plot.py --omit-masses .05815 .05820 .05825 .05830 --output-stem boundary_selected`.
+The scripts read the retained JSON/CSV samples and write local figures.
+Generated figures are not versioned. `transition_mass.json` and `provenance.json`
+retain source identities and assumptions. `numerical_checks.json` and
+`conductive_band_checks.json` retain compact numerical comparisons; the
+experimental high-metallicity and cloudy continuations have separate data
+under their respective subdirectories. They do not tighten the intervals above.

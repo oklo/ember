@@ -9,41 +9,6 @@ source-generation and acceptance checks. Gas-opacity coverage does not by
 itself supply the full atmosphere physics needed for white-dwarf cooling.
 See [the current trajectory](COLD_REMNANT.md) and [EOS data](../data/eos/README.md).
 
-The wavelength-opacity tables extend to a material temperature of about
-13,150 K. All 31.92 million retained absorption values in the four
-H/He3 tables are exact. Two additional source temperatures per composition
-provide this coverage. A separate 15,000 K calculation produced nonfinite
-absorption near He I 4471 Angstrom and was rejected. No missing absorption was
-filled or clipped. The 4400 K atmosphere extension has passed source,
-interpolation, lower-boundary, condensation and EOS checks.
-See the [retained-cell check](results/nongrey_opacity_13k_extension_v1.json)
-and [atmosphere acceptance](results/nongrey_t4400_acceptance_v1.json).
-
-The He I failure arises when the source extrapolates its 4471-A profile
-beyond the tabulated electron-density range. Some finite opacity cells also
-contain a small negative contribution from this extrapolation. A separate
-control omits this line at three material temperatures from 10,100 to
-13,150 K, with X = 0.1750 and He3 mass fraction 0.005000. Across all 57 sampled
-states, the Rosseland absorption mean changes by at most 0.06470%.
-This measures sensitivity of the sampled mean; it is not an atmosphere
-accuracy bound or a justification for omitting the line in production.
-The omitted-line 15,000 K table is finite.
-[Sensitivity calculation](results/helium4471_opacity_sensitivity_v1.json),
-[rejected original source rows](results/nongrey_opacity_15000_rejected_v1.json).
-
-Published replacement profiles are being evaluated. The
-[Tremblay et al. (2026) dataset](https://doi.org/10.5281/zenodo.18722143)
-contains 342 simulated profiles and 846 profiles from the accompanying
-semi-analytical calculation. Its simulations use He II perturbers and omit
-line dissolution. The tables include thermal Doppler broadening and extend
-to an electron density of 6.000e17 cm^-3. Their finite wavelength intervals
-must be considered when checking integrated line strengths; the missing
-4471-A area at high density is consistent with its asymptotic far wings.
-The [Gigosos and Gonzalez (2009) tables](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A%2BA/503/293)
-provide a separate comparison of proton and helium-ion motion. Their original
-tables and CDS export agree exactly. Neither dataset has yet been installed
-in the atmosphere calculation. [Source-table audit](results/helium_stark_tables_v1.json).
-
 `CompositionAtmosphereGrid` supplies an atmosphere boundary from independent
 LTE radiative-transfer calculations on a rectangular grid in baryonic H1,
 He3, effective temperature and surface gravity. The five Ember metal
@@ -126,7 +91,7 @@ At 4800 K and log g = 6.2, and at 4700 K and log g = 6.0, setting this depth to
 0.0001 allowed previously oscillating pure-hydrogen columns to converge.
 The independent 4800 K, log g = 6.0 control changed matching temperature by
 0.0001852% and gas pressure by 0.001634%.
-[Source checks and assumptions](results/highg_energy_balance_sept27_v1.json).
+[Source checks and assumptions](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/highg_energy_balance_sept27_v1.json).
 This is a numerical control for source calculations, not an automatic change
 to a running star's atmosphere.
 
@@ -173,7 +138,7 @@ It also accepts interrupted structures accompanied by `checkpoint.json`:
 the reader checks their original input physics, executable/input fingerprint,
 file hashes, grid labels and positive structure. Such a checkpoint makes no
 final flux or convergence claim and cannot supply an imported grid cell.
-The [archived checkpoint regression](results/nongrey_initial_checkpoint.json)
+The [archived checkpoint regression](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/nongrey_initial_checkpoint.json)
 demonstrates this distinction and rejects altered or mislabeled inputs.
 Opacity preparation uses at most four simultaneous source jobs; atmosphere
 generation supports up to eight. Rejections are reported per model and never
@@ -255,7 +220,7 @@ molecules containing an element at this absence encoding (`<=1e-90`).
 Otherwise, RUSSEL's minimum atomic pressure can produce substantial carbon
 molecules in cold hydrogen–helium gas despite the declared absence of carbon.
 The exclusion is independent of temperature and density; ordinary finite-metal
-abundances are unchanged. [Native source checks](results/absent_element_chemistry.json)
+abundances are unchanged. [Native source checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/absent_element_chemistry.json)
 recover the expected neutral H2/He particle mass and preserve warmer opacity
 values to within 5.723e-5 in log opacity. This correction does not validate
 finite-metal chemistry, condensates or arbitrary low-temperature coverage.
@@ -267,7 +232,7 @@ for both line selection and wing extent. Matched spectra at 307.7, 1000 and
 8000 K are unchanged in the tested H/He cases; 207 and 221 K cases are finite.
 The 207 K control also passes with invalid-operation and overflow traps.
 This numerical repair adds no opacity process or lower-temperature CIA data.
-[Source checks](results/cold_opacity_algebra_sept30_v1.json).
+[Source checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_opacity_algebra_sept30_v1.json).
 
 The earlier `DERT=.001` produces a repeating small correction cycle in a
 3000 K/logg5.15 solar-composition model. Reducing the derivative interval
@@ -275,7 +240,7 @@ to `1e-5` converges the retained structure in three iterations: maximum
 temperature correction 4.4e-7, maximum local flux error 8.3e-6. Neither
 the correction criterion nor the independent flux limit is relaxed.
 
-An independent [convection Jacobian check](results/nongrey_convection_jacobian.json)
+An independent [convection Jacobian check](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/nongrey_convection_jacobian.json)
 exposed two errors in RYBENE's interior integral-flux stencil: the diagonal
 used the wrong pair of face derivatives, and the upper-face gradient
 derivative omitted the radiative-loss factor used by the lower face.
@@ -293,7 +258,7 @@ eight iterations. Both final profiles pass the flux and chemistry checks;
 their matching T/Pgas differ by only +0.000165%/-0.000786%. The installed
 family has been reconverged with the corrected source.
 
-The [native opacity derivative check](results/nongrey_opacity_derivative.json)
+The [native opacity derivative check](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/nongrey_opacity_derivative.json)
 finds two further OPACTR errors. The forward opacity differences were divided
 by the temperature at the last depth, rather than at the depth being
 differentiated. The perturbation also left molecular weight and gas pressure
@@ -334,7 +299,7 @@ target-composition structure supplies the initial guess for a separate
 final cell using the canonical family parameters. This refinement changes
 initialization, not the accepted flux law or convergence limits.
 
-The archived [reference depth study](results/nongrey_source_benchmark.json)
+The archived [reference depth study](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/nongrey_source_benchmark.json)
 uses the author's 5500 K, log g=4.5 input and original opacity table. Small
 iteration corrections at 70 and 100 depths coexist with flux errors of
 1.73% and 0.754%; both are rejected. At 200 depths the maximum flux error is
@@ -344,7 +309,7 @@ its T/P state exactly; that statement does not describe the later physical
 Rayleigh fix.
 This is a source regression, not validation of a cool helium atmosphere.
 
-The [dense/sampled opacity comparison](results/nongrey_opacity_sampling.json)
+The [dense/sampled opacity comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/nongrey_opacity_sampling.json)
 covers 2800/6000 K, densities `1e-8`/`1e-5` g/cm³, XH=.55 and X3=.1.
 Across those four states, Rosseland absorption means differ by at most
 0.74%, and Planck absorption means by at most 0.60%. Individual spectral
@@ -354,7 +319,7 @@ atmospheric error bar. Original binary tables, source inputs, logs and hashes
 are archived under `data/atmosphere/sources/nongrey_validation/`; use
 `scripts/compare_nongrey_opacity.py` to repeat the comparison.
 
-The [material interpolation audit](results/nongrey_material_interpolation.json)
+The [material interpolation audit](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/nongrey_material_interpolation.json)
 compares direct source opacities at four independent T/rho states with
 TLUSTY's bilinear interpolation in logarithmic opacity, temperature and
 density. At 2890/4290 K and densities `1.14e-5`/`1.47e-4` g/cm³, the
@@ -370,89 +335,14 @@ exactly; the comparison can be repeated with
 
 ## Computational cost
 
-Atmospheres are precomputed; stellar timesteps interpolate their matching
-states. The first 512-point, 20-Gyr evolution trial takes approximately
-14 seconds of wall time. Rebuilding the atmosphere family is a separate,
-much larger calculation: each of 48 models uses 300 depths and 20,000
-transfer frequencies, with composition-specific opacity tables sampling
-atomic and molecular line lists containing about 26.5 million lines.
-
-Both executables are native ARM64. Ember's C++ Release build explicitly
-targets `apple-m4`, permits fused multiply-add contraction and links
-Accelerate; its current small Henyey blocks use a portable pivoted kernel.
-The Fortran source generators use `-O2` with bounds checks and generic ARM
-targeting. Eight independent atmosphere processes run concurrently; opacity
-generation is capped at four because of its line-list memory footprint.
-These generators currently use neither a GPU nor internal parallel loops.
-
-An [instrumented source replay](results/nongrey_cpu_profile.json), starting
-from an accepted 2800 K/logg5.15 solar-composition atmosphere, measures:
-
-| Phase | Process CPU seconds |
-|---|---:|
-| Initialization | 1.77 |
-| Formal solution, including final diagnostics | 38.69 |
-| Radiative-transfer matrix assembly/elimination | 16.86 |
-| Energy equation and convection | 27.64 |
-| Dense 300-by-300 solve | 0.0033 |
-| Structure update | 1.60 |
-
-Within those phases, molecular chemical equilibrium accounts for 46.79
-seconds (54%) in 8,995 calls. It is included in the table, not an additional
-cost. The replay takes 86.96 wall seconds while other grid jobs run. It
-contains one Newton iteration plus initialization and final checks; these
-fractions are not whole-grid averages. Matching T/Pgas changes by less
-than 1e-9 relative, and all physical acceptance checks pass.
-This timing uses the source preceding the opacity derivative repair; its
-exact source and executable hashes are retained with the result.
-
-The dominant targets are chemistry evaluations, radiative-transfer work
-and convergence. In particular, the Rybicki radiative block repeats the
-same tridiagonal factorization for each temperature-derivative column at
-each frequency. Reusing that factorization is an optimization opportunity;
-the current production source has not been changed for this purpose.
-The three-millisecond dense solve cannot explain the large wall time.
-`scripts/profile_nongrey_source.py` performs the timing in a separate source
-copy; its driver and original diagnostic outputs are archived.
+Atmospheres are computed once and reused across stellar timesteps. Chemistry,
+radiative transfer and convergence dominate source cost. Opacity generation
+is limited to four concurrent jobs because of the line-list memory footprint;
+atmosphere generation supports up to eight. Use fewer workers when sharing
+resources with stellar calculations. `scripts/profile_nongrey_source.py`
+measures source routines in a separate instrumented build.
 
 ## Acceptance and interpolation
-
-The installed `data/atmosphere/nongrey_gs98_z020_tau100.dat` contains all
-48 cells: XH=.45/.7, X3=0/.12, Teff=2600/2800/3000/3200 K and
-log g=4.9/5.15/5.4, at fixed Z=.02 and tau=100. Each uses 300 depths and
-20,000 transfer frequencies. The largest final local flux error is .0391%,
-the largest temperature correction is 9.45e-7, and independent chemical
-density closure is better than 4e-13. Original inputs, outputs, initial
-structures, source receipts and opacity hashes are retained in
-`data/atmosphere/sources/nongrey_gs98_z020/`; offline reimport reproduces
-the installed states. All 24 CTest suites pass; source acceptance now includes
-22 Python cases, including archived starting-structure integrity
-and the complete physical-family reimport.
-
-The [complete-family audit](results/nongrey_family_audit.json) compares
-Ember's EOS with source density at all 48 matching states. Relative density
-differences span -.266% to +1.266%. This measures the atmosphere/interior
-EOS mismatch; it is separate from the source's own chemical closure test.
-The runtime consistently obtains density from Ember's EOS.
-
-The archived [cool source checks](results/nongrey_atmosphere_validation.json)
-include a successful 2800 K, log g=5.15 solar-composition atmosphere and an
-independent XH=.55, X3=.1 calculation. At the solar matching point, increasing
-depths from 300 to 400 changes T/Pgas by 0.00015%/0.00040%; increasing transfer
-frequencies from 20,000 to 30,000 changes them by 0.0058%/0.0365%. These numbers
-describe the matching state, not convergence of every upper layer or of an
-emergent spectrum. At XH=.55, X3=.1, interpolation between the four composition corners
-changes the matching temperature by +0.159% and gas pressure by +0.071%
-relative to the independent source atmosphere. This tests one interior
-composition at a Teff/gravity node; it does not establish an error bound
-throughout the grid.
-
-At XH=.55, X3=.1, Teff=2900 K and logg=5.1, the independent model lies
-between nodes on all four axes. The matching temperature from the 16
-surrounding accepted cells differs by +0.327%, and gas pressure by -0.255%.
-The direct model and all surrounding nodes use the final source repairs
-and DERT=1e-5. This is another local interpolation check; it does not bound
-errors at unsampled compositions or atmospheric parameters.
 
 The importer requires all composition/Teff/gravity cells, archived source
 inputs and outputs, and matching checksums. It checks the requested mixture,
@@ -499,73 +389,6 @@ It scales only the starting luminosity guess; relaxation still solves the
 original energy equations. The previous 0.15 Rsun polytropic guess has
 Teff≈2564 K and can lie below a cool-dwarf grid starting at 2600 K.
 
-The first [coupled non-grey trial](results/evolution_nongrey_m010_20gyr.json)
-uses a complete 24-cell cool subset at 512 stellar mesh points. It reaches
-20 billion years with 17 accepted macrosteps and no retries, remaining fully
-convective. The final state is R=.1257 Rsun, L=.0008154 Lsun,
-Teff=2751 K, XH=.6954 and X3=.004601. The largest recorded luminosity
-and nuclear mass-energy balance errors are 4.7e-9 and 1.5e-8. These are
-conservation diagnostics, not physical error bars. This pilot predates the
-final derivative repairs and remains a historical source control.
-
-The default remains the existing COND-based convective composition
-correction as an established comparison. The installed non-grey grid is
-selected explicitly using the argument above. Synthetic C++ fixtures validate the reader
-and derivatives; they are never installed as physical atmosphere data.
-
-## One-trillion-year stellar comparison
-
-The complete final-source family evolves the 0.1 Msun model to **1e12 yr**
-at 512 mass points. It accepts 906 macrosteps, rejects one attempt and takes
-612.3 wall seconds on the M4 Max. The star remains fully convective throughout.
-Its final central temperature is 5.123 million K and density is
-261.6 g/cm³. Hydrogen reaches .5339, He3 .09509 and He4 .3510
-by baryonic mass. He3 peaks at .1026 near 736.8 billion years.
-Time starts from the specified static XH=.7/X3=0 composition, excluding
-formation and pre-main-sequence evolution.
-
-| Atmosphere, same 512-point interior and time tolerances | R/Rsun at 1e12 yr | L/Lsun | Teff (K) | H1 | He3 |
-|---|---:|---:|---:|---:|---:|
-| COND + convective composition correction | .1435 | .001346 | 2918 | .5326 | .09350 |
-| Composition-dependent non-grey gas grid | .1436 | .001330 | 2909 | .5339 | .09509 |
-
-The new atmosphere changes final radius by +.0201%, luminosity by -1.174%
-and effective temperature by -8.90 K. The largest recorded last-half-step
-luminosity and nuclear mass-energy imbalances are 1.12e-8 and 1.51e-8.
-These check the discrete equations, not accumulated time error. The older
-COND mesh/timestep comparisons do not establish convergence of this new
-512-point track; the atmosphere numerical checks above also remain local.
-
-The [compact reference](results/evolution_nongrey_m010_1tyr.json) retains the
-accepted history, grid/source hashes, timing and direct comparison. The
-[static comparison](results/nongrey_boundary_sensitivity.json) and three
-helium-rich coupled-step checks also pass, including XH=.46/X3=.08 near
-the grid's hydrogen floor. Full stellar profiles and progress logs are in
-the ignored `out/evolution-nongrey-512-1tyr.*` files.
-
-The [final transport audit](results/transport_nongrey_m010_1tyr.json) finds
-zero species spread, a minimum diffusive-to-adiabatic gradient ratio of
-14.70 and maximum estimated local conductive flux fraction of 3.07%.
-Opacity densities remain at least a factor 30 below the source ceiling.
-The plasmon-only loss estimate is 1.49e-8 of surface luminosity; this is
-not a total thermal-neutrino calculation. The [nuclear audit](results/nuclear_nongrey_m010_1tyr.json)
-finds maximum active-layer pp zeta=.0771, within the .2 screening limit,
-and a reduced ppII/pp ratio of 7.26e-5. The previously documented missing
-nuclear channels and screening approximations remain.
-
-```sh
-build/apps/ember-evolve 512 1e12 1e8 10 sfii-svh wd \
-  nongrey:data/atmosphere/nongrey_gs98_z020_tau100.dat \
-  > out/evolution-nongrey-512-1tyr.json
-python3 scripts/plot_nongrey_evolution.py out/evolution-nongrey-512-1tyr.json \
-  out/evolution-extended-512-1tyr.json
-```
-
-Plotting requires matplotlib. The opacity/EOS and atmosphere bounds remain
-strict. XH=.45 is the atmosphere floor: this family is an intermediate
-main-sequence input, not coverage through hydrogen exhaustion, the blueward
-turn or white-dwarf cooling.
-
-![The non-grey and corrected-COND trillion-year tracks](results/evolution_nongrey_m010_1tyr.png)
-
-[Standalone PDF](results/evolution_nongrey_m010_1tyr.pdf).
+Synthetic C++ fixtures test the reader and its derivatives. They are not
+physical atmosphere data. Numerical agreement at sampled matching states
+does not establish a physical uncertainty bound over an entire cooling track.

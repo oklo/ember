@@ -155,20 +155,23 @@
       "encoding": "identity"
     },
     {
-      "path": "provenance.tar.gz",
-      "sha256": "b3e86cebdfd305c9657a37d842ee2e7564b3c370c848cbcf523f7637a5adb6c0",
-      "bytes": 29491060,
-      "original": "Assembled during maintenance; source paths recorded in archive/index",
-      "original_sha256": "b3e86cebdfd305c9657a37d842ee2e7564b3c370c848cbcf523f7637a5adb6c0",
-      "encoding": "identity"
-    },
-    {
       "path": "provenance-index.json",
       "sha256": "3e2f321185a3ac46b6fdb32e991f36a680495ca057110920d59db0663cd2f0eb",
       "bytes": 689913,
       "original": "Assembled during maintenance; source paths recorded in archive/index",
       "original_sha256": "3e2f321185a3ac46b6fdb32e991f36a680495ca057110920d59db0663cd2f0eb",
       "encoding": "identity"
+    }
+  ],
+  "historical_archives": [
+    {
+      "path": "provenance.tar.gz",
+      "sha256": "b3e86cebdfd305c9657a37d842ee2e7564b3c370c848cbcf523f7637a5adb6c0",
+      "bytes": 29491060,
+      "original": "Assembled during maintenance; source paths recorded in archive/index",
+      "original_sha256": "b3e86cebdfd305c9657a37d842ee2e7564b3c370c848cbcf523f7637a5adb6c0",
+      "encoding": "identity",
+      "git_commit": "e8f27e4f1eefdac7f4a25aa3c22a642475afb705"
     },
     {
       "path": "current-source.tar.gz",
@@ -176,7 +179,8 @@
       "bytes": 1486681,
       "original": "Assembled during maintenance; source paths recorded in archive/index",
       "original_sha256": "a1407edb1bfc5160f76440082bda42be9191243ef638cfaa0fb1219bbedb2a75",
-      "encoding": "identity"
+      "encoding": "identity",
+      "git_commit": "e8f27e4f1eefdac7f4a25aa3c22a642475afb705"
     }
   ]
 }

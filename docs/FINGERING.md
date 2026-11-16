@@ -71,7 +71,7 @@ with four 46.28 Myr intervals to within 0.2% of the measured profile changes;
 energy and solid-mass differences are smaller. At helium-4 fractions near
 machine precision, a different derivative treatment is still needed.
 
-[Trace-composition checks](results/trace_buoyancy_roundoff_oct1_v1.json) ·
-[Cold material checks](results/fingering_cold100_oct1_v1.json) ·
-[Oscillatory checks](results/fingering_oscillatory_oct1_v1.json) ·
-[Stationary and conservation checks](results/fingering_two_composition_oct1_v1.json).
+[Trace-composition checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/trace_buoyancy_roundoff_oct1_v1.json) ·
+[Cold material checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/fingering_cold100_oct1_v1.json) ·
+[Oscillatory checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/fingering_oscillatory_oct1_v1.json) ·
+[Stationary and conservation checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/fingering_two_composition_oct1_v1.json).

@@ -34,7 +34,7 @@ Suppressing conduction in the cooler partly ionized layers changes luminosity
 by at most 0.02819% over the completed comparison interval; that control then
 stops at a convective-boundary iteration failure. Its uncompleted interval is
 not counted as evidence. The EOS and cold-atmosphere limitations remain open.
-[Calculations and limits](results/cold_conduction_cooling_sept30_v1.json).
+[Calculations and limits](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/cold_conduction_cooling_sept30_v1.json).
 
 The optional radiative-opacity continuation uses two supported density anchors
 where electron conduction dominates. The selected cooling calculation allows
@@ -50,4 +50,4 @@ states without changing existing supported values. A matched 5 Myr stellar
 interval agrees within 1.208e-11 in logarithmic structure, and the previously
 blocked interval completes with unchanged solver settings and audits.
 Separate EOS refusals and the uncertainty of the conductivity model remain.
-[Checks](results/conductive_opacity_trace70_oct1_v1.json).
+[Checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/conductive_opacity_trace70_oct1_v1.json).

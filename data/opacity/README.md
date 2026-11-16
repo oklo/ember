@@ -43,14 +43,14 @@ temperature row declares the number of valid density entries. Evaluation
 requires all neighboring rows needed for both the opacity and its derivatives.
 It rejects queries involving absent entries. All 33 test suites pass, and a
 512-point stellar control with the original tables reproduces its full output
-exactly. [Code checks](../../docs/results/opacity_density_support_code_v1.json).
+exactly. [Code checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/opacity_density_support_code_v1.json).
 
 The first density extension preserves every original source value, but its
 coarse density spacing gives independent opacity discrepancies up to 4.738%,
 above the 0.5% criterion. Refining to 81 density points reduces the maximum
 to 0.7202%, which still fails. Neither table is selected for stellar evolution.
-[Coarse comparison](../../docs/results/tops_density_extension_source_v1.json),
-[finer comparison](../../docs/results/tops_density_fine_source_v1.json).
+[Coarse comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/tops_density_extension_source_v1.json),
+[finer comparison](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/tops_density_fine_source_v1.json).
 
 A separate narrow density scan finds source jumps up to 0.7637% associated
 with the plasma-cutoff option. Two full spectra are identical with that option
@@ -58,7 +58,7 @@ on and off, while their reported mean opacities differ. Their averaging
 normalization and its effect on radiative transport are under investigation.
 The diagnostic does not justify removing plasma physics or smoothing the
 source values. The [spectral normalization checks](../../docs/PLASMA_OPACITY.md)
-quantify the difference and its fixed-profile transport effect. [Source scan](../../docs/results/tops_density_structure_v1.json).
+quantify the difference and its fixed-profile transport effect. [Source scan](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/tops_density_structure_v1.json).
 
 The source plans are `sources/tops_density_*_specification.json`.
 `fetch_tops_density_plan.py` runs their sequential, resumable requests;

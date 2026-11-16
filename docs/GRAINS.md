@@ -30,7 +30,7 @@ generic silicate substitution or wavelength extrapolation.
 
 ## Checks completed
 
-[Eight independent optical controls](results/grain_mie_v1_audit.json) compare
+[Eight independent optical controls](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/grain_mie_v1_audit.json) compare
 LX-MIE with Optool, covering small and large particles, weak and strong
 absorption, and a nonabsorbing material. The small-particle absorption and
 scattering approach the analytic Rayleigh limit within a fractional difference
@@ -44,7 +44,7 @@ Ember's zero absorption is checked against the exact lossless identity.
 Optool's angular grid was increased from 180 to 1800 points to resolve its
 mean scattering direction. The comparison tolerance was retained.
 
-The [first atmosphere-profile control](results/grain_alumina_profile_v1.json)
+The [first atmosphere-profile control](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/grain_alumina_profile_v1.json)
 uses a 2800 K, log g = 5.15, initially solar-hydrogen gas atmosphere. Its
 equilibrium chemistry contains only alumina on that fixed structure, with a
 maximum condensed mass fraction of 0.0001094. All of those grains are retained

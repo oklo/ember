@@ -7,7 +7,6 @@ out/
 __pycache__/
 # New generated physics tables and raw source archives stay local. Keep the
 # code, source patches, generation specifications and small provenance records.
-# Files already present in published history remain tracked.
 /data/**
 !/data/**/
 !/data/**/README.md
@@ -29,10 +28,14 @@ __pycache__/
 !/data/opacity/cold_dense_hydrogen.dat
 !/data/opacity/cold_dense_hydrogen.json
 
-# Local restart binaries, raw histories and source-experiment recovery files.
-# The report, its compact history CSV, figures and hash manifest are versioned.
-/docs/reports/*/artifacts/
-/docs/results/*.gz
+# Experiment outputs and unreviewed manuscripts do not belong in the package.
+/docs/reports/
+/docs/results/
+/research/record/maintenance/
+/research/record/figures/
+/research/record/*.tar.gz
+/research/**/*.png
+/research/**/*.pdf
 
 # Agent coordination stays local; scientific methods and results belong in docs/.
 /HANDOFF.md

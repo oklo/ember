@@ -5,7 +5,7 @@ For the retained exploratory and reheater studies, start with the
 from compact data without regenerating EOS or atmosphere tables.
 
 The repository contains the solver, offline generators and importers, source
-patches, manifests, compact validation records and test fixtures. Bulk physics
+patches, manifests and test fixtures. Bulk physics
 tables, raw source archives, native histories and executable archives remain
 local. A fresh clone can build the C++ code but cannot reproduce every stellar
 run or table-dependent test without those inputs.
@@ -23,7 +23,7 @@ output or regenerate and validate it before selecting a new table.
 | TOPS opacity compositions | `fetch_tops_composition.py`, `import_tops_composition.py`, `import_tops_mixtures.py` | `audit_opacity_extension.py`, `audit_tops_heldout.py`; [opacity README](../data/opacity/README.md) |
 | AESOPUS low-temperature opacity | `archive_aesopus_mixtures.py`, `import_aesopus.py`, `import_aesopus_mixtures.py` | Original source hashes and unchanged cells; [opacity README](../data/opacity/README.md) |
 | Ioffe conduction | `import_conduction.py`; direct-source reference via `conduction_reference_probe.f90`, `generate_conduction_reference.py` | [conduction README](../data/conduction/README.md), [CONDUCTION.md](CONDUCTION.md) |
-| Microscopic collision response | `build_electron_pair_table.py`, `electron_pair_table.py`, `extend_ion_collision_table.py` | `audit_electron_pair_interpolation.py`; [cold coverage and overlap checks](results/electron_pair_eta4096_oct1_v1.json) |
+| Microscopic collision response | `build_electron_pair_table.py`, `electron_pair_table.py`, `extend_ion_collision_table.py` | `audit_electron_pair_interpolation.py`; [cold coverage and overlap checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/electron_pair_eta4096_oct1_v1.json) |
 | Non-grey gas atmospheres | `prepare_nongrey_sources.py`, `generate_nongrey_grid.py`, `solve_column.py`, `archive_nongrey_grid.py`, `import_nongrey_grid.py`, `run_nongrey_plan.py`, `assemble_nongrey_grid.py` | `audit_nongrey_family.py`, source/chemistry/flux checks; [NONGREY.md](NONGREY.md) |
 | Condensate experiments | `prepare_fastchem_sources.py`, `prepare_condensate_sources.py`, `generate_condensate_opacity.py`, `run_condensate_atmosphere.py`, `generate_condensate_grid.py`, archive/collect scripts | `audit_condensate_atmosphere.py`, `audit_condensate_material.py`, `audit_condensate_interpolation.py`; [FORWARD_EVOLUTION.md](FORWARD_EVOLUTION.md) |
 
@@ -60,13 +60,13 @@ each isotherm in decreasing density. This changes the starting guesses, not the
 source physics or the import checks; failed target states remain flagged.
 `--grid-from` preserves the supplied coordinates, including unequal axis spacing.
 Both choices are recorded, and incompatible cached requests are rejected.
-[Source and cache checks](results/freeeos_temperature_start_oct1_v1.json).
+[Source and cache checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/freeeos_temperature_start_oct1_v1.json).
 
 Retained TOPS replies can supply missing low-hydrogen warm-opacity planes
 without new source requests. `extend_tops_warm_family.py --source-manifest
 SOURCE --warm-manifest WARM --output DIRECTORY` preserves the original axes
 and rows, verifies source checksums and mixtures, and excludes every substituted
-density. The [coverage checks](results/warm_helium_opacity_oct1_v1.json) include
+density. The [coverage checks](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/warm_helium_opacity_oct1_v1.json) include
 stellar queries and the local contribution of radiative heat transport.
 
 TOPS retrieval requires the external service or retained original replies.
@@ -91,11 +91,12 @@ Keep that configuration with its matching inputs and [checkpoint](RESTART.md).
 The November 2026 local cleanup consolidated identical material files into
 `data/retained/sha256/`, with relative links at their original paths. This bulk
 store remains local. Preserve it when copying a local campaign; published
-fixtures remain ordinary files. The research record contains the cleanup receipts.
+fixtures remain ordinary files. The detailed cleanup receipts stay with the local research archive.
 The integrated cooling envelope and some development inputs are not yet public;
 there is no complete downloadable data bundle for the latest calculation.
 
-`docs/results/` retains compact numerical evidence. The working paper includes
-its LaTeX and figure PDFs; some underlying figure data remain local. Comparison
-CSVs under older report dates are retained because analysis scripts use them.
-Superseded papers and figures are available in Git history.
+Generated checks, figures and manuscripts stay outside the package. Links to
+older numerical evidence point to fixed Git revisions. The compact
+[research record](../research/record/README.md) retains selected tracks,
+qualifications and hashes; it does not ship every historical input or output.
+See [testing](../tests/README.md) for installing external validation fixtures.

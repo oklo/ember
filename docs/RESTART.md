@@ -39,7 +39,7 @@ build/apps/ember-evolve 512 2.75e12 1e8 10 sfii-svh wd nongrey:data/atmosphere/n
 
 Source-domain guards still apply. This continuation has now completed under
 the recorded source and executable hashes; see
-[the 2.75-trillion-year result](results/evolution_metal_m010_2750gyr_gas.json).
+[the 2.75-trillion-year result](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/evolution_metal_m010_2750gyr_gas.json).
 Before continuation, the checkpoint-enabled executable reproduced the full
 2.5-trillion-year output byte for byte. Old
 JSON profiles are not native checkpoints: they omit internal logarithms,
@@ -85,7 +85,7 @@ This mode does not prove compatibility between executables. That requires an
 independent trajectory comparison. The actual 3.600–3.605-trillion-year test has
 identical accepted histories and final profiles with the old executable/opacity
 and with the new executable/extended opacity. Its
-[record](results/opacity_extension_restart_overlap_v1.json) preserves hashes.
+[record](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/opacity_extension_restart_overlap_v1.json) preserves hashes.
 The full test suite also rejects changes to old hot or cool entries and verifies
 that the extended calculation subsequently supports ordinary exact restart.
 
@@ -111,7 +111,7 @@ comparison establishes unchanged executable physics: the 512-point,
 year checkpoint gives identical complete JSON output. All 32 CTest suites pass,
 including exact continuation with unvisited added atmosphere rows and rejection
 of changes to retained values or matching depth.
-[Validation record](results/atmosphere_extension_restart_v1.json).
+[Validation record](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/atmosphere_extension_restart_v1.json).
 
 The output identifies the extension and its source files. Subsequent native
 restarts use the new executable and table. This limited procedure does not
@@ -134,7 +134,7 @@ The new source rows require independent thermodynamic checks. The restart
 implementation itself passes all 32 CTest suites, including rejection of
 modified old potentials and masks. Its fixed-input 512-point, 10-billion-year
 output is byte-identical to both preceding checked executables.
-[Implementation validation](results/eos_temperature_extension_restart_v1.json).
+[Implementation validation](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/eos_temperature_extension_restart_v1.json).
 
 Each extension invocation permits only one physical table change. A new
 checkpoint is bound to the new data and executable and supports ordinary
@@ -156,4 +156,4 @@ A separate 512-point, 10-billion-year control reproduces the preceding
 executable's entire JSON output exactly with fixed physical inputs. These
 checks establish restart behavior; an actual density addition still requires
 independent source and interpolation validation.
-[Validation](results/eos_density_extension_restart_v1.json).
+[Validation](https://github.com/oklo/ember/blob/e8f27e4f1eefdac7f4a25aa3c22a642475afb705/docs/results/eos_density_extension_restart_v1.json).

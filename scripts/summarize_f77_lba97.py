@@ -12,20 +12,19 @@ def sha(path):
 
 
 def main():
-    root = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--paper', required=True, type=Path)
     parser.add_argument('--f77-source', required=True, type=Path)
-    parser.add_argument('--history', type=Path,
-                        default=root/'docs/reports/2026-09-10/f77_history.csv')
-    parser.add_argument('--output', type=Path,
-                        default=root/'docs/results/f77_lba97_comparison_v1.json')
+    parser.add_argument('--history', required=True, type=Path)
+    parser.add_argument('--onset', required=True, type=Path,
+                        help='Recorded F77 central-convection transition audit')
+    parser.add_argument('--output', required=True, type=Path)
     args = parser.parse_args()
     provenance_path = args.history.with_name('f77_history_provenance.json')
     provenance = json.loads(provenance_path.read_text())
     if sha(args.history) != provenance['csv_sha256']:
         raise ValueError('history differs from its extraction record')
-    onset_path = root/'docs/results/f77_core_onset_comparison_v1.json'
+    onset_path = args.onset
     onset = json.loads(onset_path.read_text())
     expected = next(v for k, v in onset['input_files_sha256'].items()
                     if k.endswith('/baseline.f'))

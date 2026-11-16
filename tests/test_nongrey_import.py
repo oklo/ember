@@ -758,7 +758,7 @@ class SourceAcceptance(unittest.TestCase):
 
     def test_archived_native_convection_jacobian(self):
         root=Path(__file__).resolve().parents[1]
-        report=json.loads((root/"docs/results/nongrey_convection_jacobian.json").read_text())
+        report=json.loads((root/"tests/data/source_checks/nongrey_convection_jacobian.json").read_text())
         sources=root/"data/atmosphere/sources"
         for name,expected in report["files"].items():
             self.assertEqual(hashlib.sha256((sources/"nongrey_validation"/name).read_bytes()).hexdigest(),expected)
@@ -780,7 +780,7 @@ class SourceAcceptance(unittest.TestCase):
 
     def test_archived_native_opacity_derivative_and_state_restoration(self):
         root=Path(__file__).resolve().parents[1]
-        report=json.loads((root/"docs/results/nongrey_opacity_derivative.json").read_text())
+        report=json.loads((root/"tests/data/source_checks/nongrey_opacity_derivative.json").read_text())
         sources=root/"data/atmosphere/sources/nongrey_validation"
         self.assert_patch_digest(sources.parent/"tlusty208-ember.patch",
                                  report["corrected_patch_sha256"])
@@ -805,7 +805,7 @@ class SourceAcceptance(unittest.TestCase):
     def test_interrupted_checkpoint_is_only_a_verified_initial_guess(self):
         from generate_nongrey_grid import checkpoint_initial_structure
         root=Path(__file__).resolve().parents[1]
-        report=json.loads((root/"docs/results/nongrey_initial_checkpoint.json").read_text())
+        report=json.loads((root/"tests/data/source_checks/nongrey_initial_checkpoint.json").read_text())
         sources=root/"data/atmosphere/sources/nongrey_validation"
         with tempfile.TemporaryDirectory() as temporary:
             d=Path(temporary)

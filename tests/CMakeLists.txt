@@ -146,6 +146,7 @@ target_link_libraries(test_collision_reuse PRIVATE ember)
 set(collision_test_table "${CMAKE_SOURCE_DIR}/data/production/tables/860e8313c3feac9a452073fe753fc9140d9a68cb068d8c294736b931e66007ed.dat")
 if(EXISTS "${collision_test_table}")
   add_test(NAME collision_reuse COMMAND test_collision_reuse "${collision_test_table}")
+  set_tests_properties(collision_reuse PROPERTIES LABELS "material-data")
 endif()
 add_executable(native_heat_probe ../scripts/native_heat_probe.cpp)
 target_link_libraries(native_heat_probe PRIVATE ember)
@@ -268,3 +269,11 @@ ember_test(phase_mobility)
 ember_test(material_eos)
 
 ember_test(opacity_native)
+
+# These tests use generated tables or archived source outputs installed separately.
+set_tests_properties(helmholtz composition_physics nongrey_equilibrium metal_eos coupled_evolution
+  extended_physics convective_atmosphere extended_evolution
+  PROPERTIES LABELS "material-data")
+if(Python3_Interpreter_FOUND)
+  set_tests_properties(nongrey_import evolution_restart PROPERTIES LABELS "material-data")
+endif()
