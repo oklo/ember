@@ -53,9 +53,11 @@ checkpoint and update the study instructions before changing controllers.
 
 Native jobs register their exact argv and PID in `cases/<name>/launch.json`,
 write `completion.json` on exit, and retain the usual `evolution/report.json`,
-`history.jsonl` and checkpoint/group pair. The supervisor reads these artifacts
-instead of trusting a stale progress sentence. The newest case may be a control:
-its age alone does not establish membership in the primary lineage.
+`history.jsonl` and checkpoint/group pair. Set `progress.json`'s `current_case`
+to the primary case name, updating it when the lineage advances. The supervisor
+selects that case only if it has a launch receipt, then reads its native artifacts.
+Without a matching declaration it observes the latest launch. The newest case
+may be a control: its age alone does not establish primary-lineage membership.
 
 `ember_recovery.py` distinguishes input-domain failures, convergence problems,
 conservation failures, segment budgets and process failures. Its recovery order

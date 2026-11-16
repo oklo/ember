@@ -77,7 +77,7 @@ def classify(reason):
     # A rejection wrapper often contains the more informative underlying cause.
     if any(s in text for s in ("outside source", "outside grid", "outside table",
                                "table boundary", "degeneracy range", "source mask",
-                               "outside the", "out of domain", "not covered")):
+                               "outside the", "outside assessed", "out of domain", "not covered")):
         return "table_boundary"
     if any(s in text for s in ("energy audit", "first law", "first-law", "inventory",
                                "conservation", "mass defect", "thermal-reservoir")):
@@ -93,7 +93,7 @@ def classify(reason):
 
 
 def observe(work):
-    """Observe the most recently launched native case, not the oldest failure.
+    """Read the declared primary case, or the latest launch when none is recorded.
 
     A report describes that case only. The agent must verify ancestry before
     promoting it to the primary lineage; control runs can have their own ages.
@@ -105,7 +105,11 @@ def observe(work):
             candidates.append((launch.stat().st_mtime, case))
     if not candidates:
         return {"state": "no_native_case", "fingerprint": "no_native_case"}
-    _, case = max(candidates)
+    _, latest = max(candidates)
+    progress = read_json(work / "progress.json", {})
+    primary = progress.get("current_case") if isinstance(progress, dict) else None
+    # A declaration selects a known launch; it cannot introduce an arbitrary path.
+    case = next((p for _, p in candidates if primary in (p.name, f"cases/{p.name}")), latest)
     evolution = case / "evolution"
     report = read_json(evolution / "report.json", {})
     completion = read_json(case / "completion.json", {})
@@ -124,6 +128,8 @@ def observe(work):
     signature = hashlib.sha256((str(kind) + normalized).encode()).hexdigest()[:16]
     return {
         "case": str(case.relative_to(work)),
+        "selection": "declared_primary" if primary in (case.name, f"cases/{case.name}") else "latest_launch",
+        "latest_case": str(latest.relative_to(work)),
         "state": "needs_review" if reason else "native_case_open",
         "reason": reason,
         "kind": kind,

@@ -183,6 +183,34 @@ class SupervisorTest(unittest.TestCase):
 
     def test_table_error_inside_rejection_is_not_solver_failure(self):
         self.assertEqual(recovery.classify("repeated step rejection: electron density outside pair-table degeneracy range"), "table_boundary")
+        self.assertEqual(recovery.classify("repeated step rejection: quantum ion EOS: outside assessed ionization/quantum range"), "table_boundary")
+
+    def test_later_control_does_not_hide_primary_failure(self):
+        for name, reason, age in [("main", "outside assessed ionization/quantum range", 106e9),
+                                  ("control", "accepted-step budget", 792e6)]:
+            p = self.work / "cases" / name / "evolution"
+            p.mkdir(parents=True)
+            (p.parent / "launch.json").write_text("{}")
+            (p / "report.json").write_text(json.dumps(dict(stop_reason=reason)))
+            (p / "history.jsonl").write_text(json.dumps(dict(years=age)) + "\n")
+            time.sleep(.01)
+        for name in ["main", "cases/main"]:
+            (self.work / "progress.json").write_text(json.dumps(dict(current_case=name)))
+            observed = recovery.observe(self.work)
+            self.assertEqual(observed["case"], "cases/main")
+            self.assertEqual(observed["kind"], "table_boundary")
+            self.assertEqual(observed["accepted"]["years"], 106e9)
+            self.assertEqual(observed["latest_case"], "cases/control")
+
+    def test_unknown_primary_uses_known_launch(self):
+        p = self.work / "cases" / "main" / "evolution"
+        p.mkdir(parents=True)
+        (p.parent / "launch.json").write_text("{}")
+        for name in ["missing", "../../outside"]:
+            (self.work / "progress.json").write_text(json.dumps(dict(current_case=name)))
+            observed = recovery.observe(self.work)
+            self.assertEqual(observed["case"], "cases/main")
+            self.assertEqual(observed["selection"], "latest_launch")
 
     def test_disabled_overflow_is_not_exhausted_subscription(self):
         self.assertIsNone(supervisor.usage_stop_reason(dict(status="allowed", overageStatus="rejected"), None))
