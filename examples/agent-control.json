@@ -1,0 +1,23 @@
+{
+  "model": "opus",
+  "claude": "claude",
+  "session_id": "REPLACE_WITH_UUID",
+  "objective": "Evolve the specified star from its fresh initial model to the validated endpoint in brief.txt.",
+  "reference_root": "/absolute/path/to/ember",
+  "wall_seconds": 86400,
+  "session_wall_seconds": 7200,
+  "max_sessions": 32,
+  "max_workers": 6,
+  "minimum_free_bytes": 16106127360,
+  "max_work_bytes": 4294967296,
+  "poll_seconds": 5,
+  "native_poll_seconds": 30,
+  "diagnosis_seconds": 1800,
+  "handoff_seconds": 60,
+  "completion": {
+    "expected": {"mass_Msun": 0.08, "initial_Z": 0.02, "fresh_hayashi_start": true},
+    "checks": ["fresh_hayashi_ancestry", "energy_checks_passed", "independent_refinement_passed", "cold_boundary_assessed"],
+    "temperature_max_K": 5,
+    "allow_equilibrium": true
+  }
+}

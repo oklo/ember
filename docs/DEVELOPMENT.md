@@ -9,6 +9,7 @@ validity are separate claims.
 | --- | --- |
 | Structural block elimination | `src/henyey.cpp`, [method](HENYEY.md) |
 | Evolution and time-step selection | `src/evolution.cpp`, `src/controller.cpp` |
+| Autonomous scientific recovery | `scripts/ember_supervise.py`, [control protocol](AUTONOMY.md) |
 | Lifetime configuration and restart | `apps/lifetime_driver.cpp`, [configuration](LIFETIME_DRIVER.md) |
 | Material table readers and joins | `src/eos_*.cpp`, `src/opacity_table.cpp`, `include/ember/opacity_radiative.hpp` |
 | Retained study verification and figures | `research/record/reproduce.py` |

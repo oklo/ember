@@ -192,6 +192,8 @@ set_tests_properties(screened_envelope_evolution finite_screened_envelope_evolut
   PROPERTIES TIMEOUT 120 LABELS "material-data;integration")
 find_package(Python3 COMPONENTS Interpreter QUIET)
 if(Python3_Interpreter_FOUND)
+  add_test(NAME agent_supervisor COMMAND ${Python3_EXECUTABLE} -B ${CMAKE_CURRENT_SOURCE_DIR}/test_agent_supervisor.py)
+  set_tests_properties(agent_supervisor PROPERTIES TIMEOUT 90 LABELS "autonomy")
   add_test(NAME aesopus_import COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test_aesopus_import.py)
   add_test(NAME runtime_packaging COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test_runtime_packaging.py)
   add_test(NAME atmosphere_bulk_eos COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test_atmosphere_bulk_eos.py)

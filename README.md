@@ -34,6 +34,7 @@ Stellar runs and table-dependent tests also require the
 all inputs used by the development calculations. The solver uses CPU threads;
 it does not currently use Metal or the GPU.
 
+[Autonomous control](docs/AUTONOMY.md) ·
 [Run configuration](docs/LIFETIME_DRIVER.md) ·
 [Working paper](docs/reports/2026-09-27/ember_status_and_future.pdf) ·
 [Paper source](docs/reports/2026-09-27/README.md) ·
