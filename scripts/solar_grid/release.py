@@ -212,4 +212,8 @@ def expand_plan(root, specs):
             continue
         jobs[check] = dict(base,name=check,after=[assessment,prefix+'-later-evolution-hydrogen-trial'],command=driver+['review'],
             wall_seconds=120, outputs=[str(trial/'review.json')])
+    if 'm06-800-birth-depth10-column' in jobs:
+        from cooling_work import jobs_for_cooling
+        for job in jobs_for_cooling(root,jobs):
+            jobs.setdefault(job['name'],job)
     return list(jobs.values())

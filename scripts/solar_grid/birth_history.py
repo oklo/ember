@@ -85,6 +85,17 @@ def frontier(root, mass):
                     break
                 row = states[-1]
                 candidates.append(dict(row, source=str(history.relative_to(root))))
+            # Advertise completed, audited extensions from the same birth clock.
+            from cooling_interval import BASE, checked_history
+            for colder in [root/BASE, *(root/f'm06/cooling-intervals/band-{i}/native' for i in (1,2))]:
+                if not (colder/'native-review.json').is_file():
+                    break
+                states, _ = checked_history(colder)
+                if not same_restart(row, states[0]):
+                    raise ValueError(f'Cooling interval ancestry differs at {colder}')
+                row = states[-1]
+                candidates.append(dict(row, source=str((colder/'native-review.json').relative_to(root)),
+                    qualification='Native birth clock with measured atmosphere knots and provisional gravity and composition transfer.'))
     review_file = case/'main-sequence-join-review.json'
     track = case/'birth-clock-main-sequence.csv'
     if review_file.is_file() and track.is_file():

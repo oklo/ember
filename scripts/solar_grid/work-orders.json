@@ -5,11 +5,12 @@
       6
     ],
     "kind": "physics",
-    "question": "How well does the adopted cooling clock carry across the measured 850 and 800 K columns?",
-    "criterion": "Review the measured columns, native crossing and reduced elapsed-time discrepancy. Preserve birth and fuel qualifications separately.",
+    "question": "How far can the native cooling clock advance with measured atmosphere knots and acceptable surface transfer?",
+    "criterion": "Compare elapsed time and interior state against the frozen forecast. Choose 25 or 50 K intervals, measure their interiors, then check the final atmosphere at the evolved gravity and composition.",
     "targets": [
       "m06-850-birth-depth10-score",
-      "m06-review-800K-clock-evidence"
+      "m06-review-800K-clock-evidence",
+      "m06-band-3-surface-review"
     ],
     "evidence": "m06/endpoint-review.json"
   },
