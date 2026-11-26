@@ -1,4 +1,5 @@
 """Two local lanes for the true-solar sequence. No provider calls."""
+from functools import lru_cache
 import fcntl
 import json
 import math
@@ -49,6 +50,34 @@ def alternate_birth(m):
             if config.is_file():return config
     return None
 
+
+def stalled_at_atmosphere_edge(evo):
+    attempts = evo / 'attempts.jsonl'
+    if not attempts.is_file():
+        return False
+    def tail(path, count):
+        with path.open('rb') as stream:
+            stream.seek(0, 2)
+            stream.seek(max(0, stream.tell() - 65536))
+            return [json.loads(line) for line in stream.read().splitlines()[1:][-count:]]
+    history = tail(evo / 'history.jsonl', 5)
+    if len(history) < 5:
+        return False
+    temperature = history[-1]['Teff_K']
+    tolerance = 1e-5 * temperature
+    if any(abs(row['Teff_K'] - temperature) > tolerance for row in history):
+        return False
+    rejected_ages = set()
+    for trial in tail(attempts, 24):
+        message = trial.get('message', '')
+        if trial['accepted'] or trial['start_years'] < history[0]['years']:
+            continue
+        if 'pressure-matched atmosphere' in message and 'outside' in message and 'table' in message:
+            match = re.search(r'envelope surface Teff=([\d.eE+-]+)', message)
+            if match and abs(float(match[1]) - temperature) <= tolerance:
+                rejected_ages.add(trial['start_years'])
+    return len(rejected_ages) >= 3
+
 def next_step(m):
     cases=dirs(m)
     if not cases:return 'birth',None
@@ -76,8 +105,14 @@ def next_step(m):
     r=read(p);reason=r['stop_reason'].lower()
     if not (evo/'history.jsonl').exists():return 'inspect initialization',case
     v=last(evo/'history.jsonl')
-    if v.get('Teff_K',math.inf)<=campaign['endpoint_Teff_K']:return 'review 1 K endpoint',case
+    history=evo/'history.jsonl'
+    stat=history.stat()
+    threshold=campaign['endpoint_Teff_K']
+    if 0<v.get('Teff_K',math.inf)<=threshold or crossed_endpoint(history,threshold,stat.st_size,stat.st_mtime_ns):
+        return 'review 1 K endpoint',case
     if not all((evo/f).is_file() for f in ['final.checkpoint','final.checkpoint.lithium']):return 'inspect checkpoint',case
+    if reason in ('cpu budget', 'accepted-step budget', 'repeated step rejection') and stalled_at_atmosphere_edge(evo):
+        return 'check table coverage',case
     if reason in ('cpu budget','accepted-step budget','requested age') and r['accepted_this_invocation']>0:
         j=read(case/'launch.json')
         if r['age_years']-j['start_age_years']>=max(1e-4,1e-8*r['age_years']):return 'continue',case
@@ -95,6 +130,21 @@ def next_step(m):
     if any(x in reason for x in ('convergence','line search','repeated step rejection','thermal reservoir')):
         if not read(case/'launch.json')['short_step']:return 'short-step control',case
     return 'review physics or solver',case
+@lru_cache(maxsize=128)
+def crossed_endpoint(history, threshold, size, modified_ns):
+    # Only finished segments reach this check. File metadata invalidates a
+    # cached answer if a retained history is repaired or replaced.
+    previous = None
+    with history.open() as stream:
+        for line in stream:
+            row = json.loads(line)
+            age, temperature = row['years'], row['Teff_K']
+            if previous is not None and age > previous[0] and previous[1] > threshold >= temperature > 0:
+                return True
+            previous = age, temperature
+    return False
+
+
 def start(m,action,case):
     dest=root/f'm{m:02}'/f's{len(dirs(m)):04}';dest.mkdir(parents=True)
     cfg=(reference/'solar-birth.cfg').read_text() if case is None else (case/'config.txt').read_text()
@@ -139,7 +189,22 @@ def watch():
     handle=(root/'coordinator.lock').open('a')
     try:fcntl.flock(handle,fcntl.LOCK_EX|fcntl.LOCK_NB)
     except BlockingIOError:return
+    from release import expand_plan, routing
+    release_enabled = (root/'release-config.json').is_file()
+    release_config = read(root/'release-config.json') if release_enabled else {}
+    if release_enabled:
+        from release import SPEC, digest
+        if release_config.get('release_sha256') != digest(SPEC):
+            raise ValueError('installed release fingerprint differs from release-config.json')
+    last_report = float('-inf')
+    reporter = None
+    scored_m05 = None
     while True:
+        scorer = root / 'thermal-holdout/m05/score_local_clock.py'
+        finished = tuple(c for c in dirs(5) if (c/'evolution/report.json').is_file())
+        if scorer.exists() and finished != scored_m05:
+            subprocess.run([sys.executable, '-B', str(scorer)], check=False)
+            scored_m05 = finished
         states={}
         for m in masses:
             try:states[m]=next_step(m)
@@ -155,7 +220,11 @@ def watch():
         # Pending evolution takes priority over launching a new research task.
         available=campaign['lanes']-active
         try:
-            repairs,recovery=tick(root,states,available,not hold and not queue)
+            # Reserve a native lane when there is forward work. Count every
+            # already running repair even when dispatch is held.
+            repair_slots = max(0, available - int(bool(queue)))
+            repairs,recovery=tick(root,states,repair_slots,not hold,release_routing=routing if release_enabled else None,
+                                  expand_plan=expand_plan if release_enabled else None)
         except (OSError,ValueError,KeyError,RuntimeError,subprocess.SubprocessError) as error:
             repairs=campaign['lanes']
             recovery={'observation_error':str(error)}
@@ -215,7 +284,12 @@ def watch():
                 print('Grid needs attention. See '+str(path),flush=True)
                 subprocess.Popen(['/usr/bin/osascript','-e','display notification "No further automatic science work is available. See needs-attention.json." with title "Ember solar grid"'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
         else:(root/'needs-attention.json').unlink(missing_ok=True)
-        write(root/'status.json',dict(pid=os.getpid(),updated_unix=time.time(),initial_Z=solar,hold=hold,phase=phase,recovery=recovery,tracks=rows))
+        write(root/'status.json',dict(pid=os.getpid(),updated_unix=time.time(),release=release_config.get('release_sha256'),initial_Z=solar,hold=hold,phase=phase,recovery=recovery,tracks=rows))
+        if (release_enabled and not release_config.get('independent_shepherd')
+                and time.monotonic() - last_report >= 300 and (reporter is None or reporter.poll() is not None)):
+            reporter = subprocess.Popen([sys.executable, '-B', str(scripts/'solar_grid/shepherd.py'), str(root)],
+                                        stdin=subprocess.DEVNULL, start_new_session=True)
+            last_report = time.monotonic()
         if hold=='STOP' and not active:break
         time.sleep(15)
 if __name__=='__main__':watch()

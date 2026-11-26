@@ -9,22 +9,48 @@ import shutil
 def read(path):
     return json.loads(path.read_text())
 
-def seed(directory):
+def seed(directory, alternative=None):
     spec=read(directory/'spec.json')
     suffix=spec['anchor']+spec['tag']+'.json'
     if (directory/('hhe_arm_'+suffix)).exists():return None
     path=directory/('latest_guess_'+suffix)
     start=directory/('start_'+suffix)
+    if alternative:
+        path = Path(alternative['path'])
     if not path.is_file() or not start.is_file():return None
     raw=path.read_bytes()
     g=json.loads(raw);initial=read(start)
-    if g.get('accepted') is not False:return None
+    if alternative:
+        if hashlib.sha256(raw).hexdigest()!=alternative['sha256']:return None
+    elif g.get('accepted') is not False:return None
     n=spec['levels'];p=g['pressure_bar'];t=g['temperature_K']
     if len(p)!=n or len(t)!=n or len(initial['temperature_K'])!=n:return None
     if any(not math.isfinite(x) or x<=0 for x in p+t):return None
     if any(b<=a for a,b in zip(p,p[1:])) or p!=initial['pressure_bar']:return None
-    if t==initial['temperature_K'] or g.get('outer_calls',0)<1:return None
-    top=initial['rcb_guess']
+    if t==initial['temperature_K'] or (not alternative and g.get('outer_calls',0)<1):return None
+    top=alternative['top'] if alternative else initial['rcb_guess']
+    regions=directory/('regions_'+suffix)
+    if not alternative and regions.is_file():
+        # The region search writes this optional trace in place. A CPU-limit
+        # interruption can truncate it while the atomic profile remains usable.
+        try:
+            events=read(regions)
+        except json.JSONDecodeError:
+            events=[]
+        event=events[-1] if events else None
+        if event is not None:
+            # The latest completed flux check selects the next trial boundary.
+            # Its temperature seed can predate that check when the solver is
+            # interrupted before checkpointing the next outer iteration.
+            unstable=event['unstable_radiative_layers']
+            inward=event['inward_convective_levels']
+            if bool(unstable)!=bool(inward):
+                top=unstable[0] if unstable else inward[-1]
+            elif not unstable:
+                top=event['top']
+            else:
+                # A single boundary cannot resolve both instabilities.
+                return None
     if not isinstance(top,int) or not 3<=top<n-1:return None
     return dict(path=str(path),sha256=hashlib.sha256(raw).hexdigest(),
                 profile_sha256=hashlib.sha256(json.dumps([p,t],separators=(',',':')).encode()).hexdigest(),top=top)

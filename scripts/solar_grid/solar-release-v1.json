@@ -1,0 +1,14 @@
+{
+  "release": "solar-v1",
+  "initial_Z": 0.016482259798651158,
+  "endpoint": "First downward crossing of 1 K in flux effective temperature; retain any later recrossings.",
+  "birth": "Relaxed, deuterium-bearing extended initial model, age zero at initial contraction. Preserve isotope abundances, entropy and starting radius in each review.",
+  "stellar_physics": "Use the campaign's documented EOS, opacity, composition transport and nuclear network in their assessed domains. Bind the specific configurations and physics transitions to each endpoint review.",
+  "atmosphere": "Match to an atmosphere at a stated depth and within assessed temperature, gravity and composition coverage. Review overlap and the effect on elapsed cooling time across each change.",
+  "cold_reference": "Isolated stable baryons; adopted screened mixed-fuel pycnonuclear source at nominal normalization, finite hydrogen budget and finite radioactive inventory. Record the source implementation, fuel redistribution, thermal reservoir and surface relation for each segment.",
+  "joins": "Require continuity of age, structure, composition and energy at a native-to-reduced handover, with an elapsed-time comparison in the overlap.",
+  "adjudication": "A domain violation or failed inventory check blocks adoption. A competing uncertain rate or fuel arrangement is reported as a sensitivity. A change to the reference prescription requires a new release or a documented applicability rule.",
+  "discovery": "Retain ordered thermal reversals, luminosity and nuclear fraction, and document available fuel distribution, pressure support and duration before interpreting an abeyant burning phase.",
+  "comparison_archive_sha256": "4554009e70a4f4eb7765dc9125ea9cdd4725359c2a14c35e3a508628681f2805",
+  "comparisons": {"solar_007145": 0.07145, "solar_00715": 0.07150}
+}

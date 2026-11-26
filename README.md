@@ -36,6 +36,7 @@ the full suite, install the [test inputs](tests/README.md) and omit
 all inputs used by the development calculations. The solver uses CPU threads;
 it does not currently use Metal or the GPU.
 
+[Solar evolution grid and comparison tracks](scripts/solar_grid/README.md) ·
 [Autonomous control](docs/AUTONOMY.md) ·
 [Run configuration](docs/LIFETIME_DRIVER.md) ·
 [Physics inputs](docs/DATA_REPRODUCTION.md) ·

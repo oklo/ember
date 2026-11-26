@@ -1,0 +1,154 @@
+[
+  {
+    "id": "m06-cooling-clock",
+    "masses": [
+      6
+    ],
+    "kind": "physics",
+    "question": "How well does the adopted cooling clock carry across the measured 850 and 800 K columns?",
+    "criterion": "Review the measured columns, native crossing and reduced elapsed-time discrepancy. Preserve birth and fuel qualifications separately.",
+    "targets": [
+      "m06-850-birth-depth10-score",
+      "m06-review-800K-clock-evidence"
+    ],
+    "evidence": "m06/endpoint-review.json"
+  },
+  {
+    "id": "shared-cool-atmospheres",
+    "masses": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "kind": "table",
+    "question": "Which parts of the shared 1100 K edge admit a continuation at the actual gravity and mixture?",
+    "criterion": "Measure endpoints and withheld midpoints, run native pilots and verify each mass-specific handoff. Reuse only within the measured domain.",
+    "targets": [
+      "m01-checked-cold-family",
+      "cool-m02-1000-handoff",
+      "cool-m03-1000-handoff",
+      "cool-m04-1000-handoff",
+      "m05-1050-score"
+    ]
+  },
+  {
+    "id": "m08-surface-helium",
+    "masses": [
+      8
+    ],
+    "kind": "table",
+    "question": "Does the measured H/He atmosphere permit crossing the present composition edge?",
+    "criterion": "Require a passing independent column assessment and a checked native continuation.",
+    "targets": [
+      "m08-checked-helium-continuation"
+    ],
+    "gates": {
+      "m08-checked-helium-continuation": [
+        "helium-control-m08/assessment.json",
+        "passes"
+      ]
+    }
+  },
+  {
+    "id": "mixed-star-atmospheres",
+    "masses": [
+      9,
+      10,
+      12,
+      20,
+      30
+    ],
+    "kind": "table",
+    "question": "Can each star advance through the forecast composition edge?",
+    "criterion": "Measure, assess and cross each local composition edge. Use neighboring results only after checking applicability.",
+    "targets": [
+      "m09-hydrogen-edge-pilot",
+      "m10-hydrogen-edge-pilot",
+      "m12-hydrogen-edge-assessment",
+      "m20-hydrogen-edge-pilot",
+      "m30-review-composition-crossing"
+    ],
+    "gates": {
+      "m09-hydrogen-edge-pilot": [
+        "warm-marcs/extended-start-m09/hydrogen-edge-column/assessment.json",
+        "passes"
+      ],
+      "m10-hydrogen-edge-pilot": [
+        "warm-marcs/extended-start-m10/hydrogen-edge-column/assessment.json",
+        "passes"
+      ],
+      "m10-wider-hydrogen-column": [
+        "warm-marcs/extended-start-m10/hydrogen-edge-column/assessment.json",
+        "passes"
+      ],
+      "m20-hydrogen-edge-pilot": [
+        "warm-marcs/extended-start-m20/hydrogen-edge-column/assessment.json",
+        "passes"
+      ],
+      "m30-review-composition-crossing": [
+        "warm-marcs/extended-start-m30/hydrogen-edge-column/assessment.json",
+        "passes"
+      ]
+    }
+  },
+  {
+    "id": "m07-join",
+    "masses": [
+      7
+    ],
+    "kind": "physics",
+    "question": "Does the deuterium-bearing birth clock attach to the conditional cold sequence?",
+    "criterion": "Review the initial boundary, overlap clock and cold source assumptions together.",
+    "targets": [
+      "m07-gravity-control-at-deuterium-depletion",
+      "m07-he3-cold-crossing"
+    ],
+    "evidence": "m07/endpoint-review.json"
+  },
+  {
+    "id": "stellar-evolution",
+    "masses": [
+      11,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "kind": "evolution",
+    "question": "Which retained native H/He edge crossings pass an independent atmosphere assessment at their endpoint?",
+    "criterion": "Check native ancestry, step audits and the measured atmosphere before adding a crossing to the birth history. Prove the workflow at 0.11 before scheduling new columns across the upper grid.",
+    "targets": [
+      "m11-release-edge-review",
+      "m13-release-edge-review",
+      "m14-release-edge-review",
+      "m15-release-edge-review",
+      "m16-release-edge-review",
+      "m17-release-edge-review",
+      "m18-release-edge-review",
+      "m19-release-edge-review",
+      "m21-release-edge-review",
+      "m22-release-edge-review",
+      "m23-release-edge-review",
+      "m24-release-edge-review",
+      "m25-release-edge-review",
+      "m26-release-edge-review",
+      "m27-release-edge-review",
+      "m28-release-edge-review",
+      "m29-release-edge-review"
+    ]
+  }
+]

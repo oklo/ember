@@ -59,6 +59,30 @@ class RecoveryTest(unittest.TestCase):
             save(self.column / 'latest_guess_a_t.json', dict(self.guess, temperature_K=temps))
             self.assertEqual(self.status(), 'failed')
 
+    def test_region_guess_after_interruption(self):
+        from ember_column_restart import seed
+        trace = self.column / 'regions_a_t.json'
+        trace.write_text('[{')
+        self.assertEqual(seed(self.column)['top'], 3)
+        save(trace, [dict(cpu_s=10, top=3, unstable_radiative_layers=[],
+                          inward_convective_levels=[4])])
+        path = self.column / 'latest_guess_a_t.json'
+        events=json.loads(trace.read_text())
+        save(path, dict(self.guess, cpu_seconds=9))
+        self.assertEqual(seed(self.column)['top'], 4)
+        save(trace, events+[dict(cpu_s=12, top=4, unstable_radiative_layers=[3], inward_convective_levels=[])])
+        self.assertEqual(seed(self.column)['top'], 3)
+
+    def test_timeout_after_final_receipt(self):
+        spec=json.loads((self.column/'spec.json').read_bytes())
+        save(self.column/'hhe_arm_a_t.json', dict(spec=spec,quality=dict(usable=True)))
+        result=self.root/'recovery/column/result.json'
+        save(result,dict(status='failed',exit_code=1))
+        self.assertEqual(self.status(), 'failed')
+        save(result,dict(status='failed',exit_code=124))
+        self.assertEqual(self.status(), 'passed')
+        self.assertFalse((self.root/'recovery/column-resume-01').exists())
+
     def test_scientific_failure(self):
         save(self.column / 'hhe_arm_a_t.json', {'quality': {'usable': False}})
         self.assertEqual(self.status(), 'failed')
@@ -70,6 +94,28 @@ class RecoveryTest(unittest.TestCase):
                                         seed=dict(profile_sha256='previous')))
         save(child / 'result.json', dict(status='failed', exit_code=-24))
         self.assertEqual(self.status(), 'failed')
+
+    def test_evolution_shares_lanes_with_column_retry(self):
+        import fcntl
+        active = dict(self.job, name='active')
+        track = dict(name='track', trigger='blocked', command=[sys.executable, '-c', 'pass'],
+                     outputs=[], wall_seconds=5)
+        save(self.root/'recovery-plan.json', [active, self.job, track])
+        d = self.root/'recovery/active'
+        d.mkdir()
+        with (d/'lock').open('a') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX)
+            _, state = tick(self.root, {9: ('blocked', None)}, 2, True)
+            self.assertEqual(state, {'active':'running', 'column':'ready', 'track':'running'})
+            deadline = time.monotonic()+5
+            while not (self.root/'recovery/track/result.json').exists() and time.monotonic()<deadline:
+                time.sleep(.03)
+            _, state = tick(self.root, {9: ('blocked', None)}, 2, True)
+            self.assertEqual(state['track'], 'passed')
+            self.assertEqual(state['column'], 'running')
+            while self.status(allow=False)=='running' and time.monotonic()<deadline:
+                time.sleep(.03)
+            self.assertEqual(self.status(allow=False), 'passed')
 
 
 if __name__ == '__main__':

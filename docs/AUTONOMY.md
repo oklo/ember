@@ -1,5 +1,7 @@
 # Autonomous calculations
 
+For the 30-mass solar grid, use the [release controller and Luna shepherd](../scripts/solar_grid/README.md). The supervisor below operates individual study assignments.
+
 `scripts/ember_supervise.py` keeps an authorized scientific assignment running
 across agent turns. The initial backend is the Claude CLI with a Max subscription;
 it does not fall back to API billing. The supervisor uses Python's standard
