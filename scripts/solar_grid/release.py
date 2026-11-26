@@ -76,7 +76,7 @@ def routing(root, jobs):
         vote = read(preferred)
         state_path = root/'status.json'
         state = read(state_path).get('recovery', {}) if state_path.exists() else {}
-        if (vote.get('model') == 'gpt-6-luna' and vote.get('expires', 0) > time.time()
+        if (vote.get('brief_version') == 6 and vote.get('model') == 'gpt-6-luna' and vote.get('expires', 0) > time.time()
                 and vote.get('release_sha256') == digest(SPEC) and state.get(vote.get('job')) == 'ready'):
             definitions.sort(key=lambda item: item['id'] != vote.get('order'))
             selected = vote.get('job')
@@ -95,6 +95,24 @@ def routing(root, jobs):
     return priorities, gates
 
 
+def thermal_turns(samples, tolerance_K=.1):
+    """Resolved extrema in time order, suppressing sub-tolerance oscillations."""
+    high=low=samples[0]
+    direction=None
+    events=[]
+    for row in samples[1:]:
+        temp=row['Teff_K']
+        if direction!='up' and temp<low['Teff_K']:low=row
+        if direction!='down' and temp>high['Teff_K']:high=row
+        if direction!='up' and temp-low['Teff_K']>tolerance_K:
+            if direction=='down':events.append(dict(kind='minimum',years=low['years'],Teff_K=low['Teff_K']))
+            direction='up';high=row
+        elif direction!='down' and high['Teff_K']-temp>tolerance_K:
+            if direction=='up':events.append(dict(kind='maximum',years=high['years'],Teff_K=high['Teff_K']))
+            direction='down';low=row
+    return events
+
+
 @lru_cache(maxsize=2)
 def comparisons(path, size, mtime_ns):
     spec = read(SPEC)
@@ -107,7 +125,7 @@ def comparisons(path, size, mtime_ns):
             if track['mass_Msun'] != spec['comparisons'][key] or track['Z_over_solar'] != 1:
                 raise ValueError(f'wrong comparison identity: {key}')
             rows[key] = dict(mass_Msun=track['mass_Msun'], last=track['rows'][-1],
-                             rewarming_fraction=track['rewarming_fraction'], scope=track['notes'])
+                             thermal_turns=thermal_turns(track['rows']),rewarming_fraction=track['rewarming_fraction'], scope=track['notes'])
     if rows.keys() != spec['comparisons'].keys():
         raise ValueError('incomplete boundary comparison')
     return rows
@@ -142,7 +160,7 @@ def board(root, status):
             next_action = 'diagnose blocked prerequisites'
         work[order['id']] = dict(order, disposition=disposition, next_action=next_action,
             owners={n: 'recovery/'+n for n in sorted(names) if states.get(n) in ('failed','interrupted','invalid column record')},
-            unfinished_dependencies={n: [k for k in jobs[n].get('after', []) if states.get(k) != 'passed']
+            unfinished_dependencies={n: [k for k in jobs[n].get('after', []) if states.get(k) not in ('passed','interpolated')]
                                      for n in sorted(names) if states.get(n) in ('ready','waiting','running','dependency failed','failed','interrupted','await scientific assessment')},
             ready_columns=sorted(n for n in names if states.get(n)=='ready' and is_column(jobs[n])),
             order_sha256=order_hash(order), target_states=target_states,
@@ -167,7 +185,7 @@ def board(root, status):
     stat = path.stat()
     dispatch_path = root/'dispatch-review.json'
     dispatch = read(dispatch_path) if dispatch_path.exists() else None
-    return dict(dispatch=dispatch, release=read(SPEC)['release'], release_sha256=digest(SPEC), initial_Z=status['initial_Z'],
+    return dict(warm_routes={k:v['superseded_by'] for k,v in jobs.items() if v.get('superseded_by')}, dispatch=dispatch, release=read(SPEC)['release'], release_sha256=digest(SPEC), initial_Z=status['initial_Z'],
                 updated_unix=time.time(), scheduler_heartbeat=status['updated_unix'],
                 hold=status['hold'], phase=status['phase'], work_orders=work, tracks=tracks,
                 lanes=read(root/'campaign.json')['lanes'],
@@ -216,4 +234,6 @@ def expand_plan(root, specs):
         from cooling_work import jobs_for_cooling
         for job in jobs_for_cooling(root,jobs):
             jobs.setdefault(job['name'],job)
+    from atmosphere_work import apply
+    apply(root,jobs)
     return list(jobs.values())

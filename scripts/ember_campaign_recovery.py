@@ -7,6 +7,7 @@ from pathlib import Path
 import signal
 import subprocess
 import sys
+import time
 from ember_column_restart import prepare, retry_job, seed
 
 _workers = {}
@@ -19,6 +20,24 @@ def save(path,value):
     tmp.write_text(json.dumps(value,indent=2)+'\n')
     tmp.replace(path)
 
+def wait_for_column(proc,directory,wall,watch):
+    deadline=time.monotonic()+wall
+    while True:
+        remaining=deadline-time.monotonic()
+        if remaining<=0:raise subprocess.TimeoutExpired(proc.args,wall)
+        try:return proc.wait(timeout=min(30,remaining) if watch else remaining)
+        except subprocess.TimeoutExpired:
+            if not watch:raise
+        try:checkpoint=seed(Path(watch),detached=True)
+        except (OSError,ValueError,KeyError):continue
+        if checkpoint and checkpoint.get('initial_regions') and proc.poll() is None:
+            save(directory/'split-detected.json',checkpoint)
+            try:os.killpg(proc.pid,signal.SIGTERM)
+            except ProcessLookupError:pass
+            try:return proc.wait(timeout=10)
+            except subprocess.TimeoutExpired:raise
+
+
 def worker(directory,plan,lock_fd):
     with (directory/'log').open('a') as log:
         if 'seed' in plan:prepare(plan)
@@ -26,7 +45,9 @@ def worker(directory,plan,lock_fd):
                               cwd=plan.get('cwd'),pass_fds=(lock_fd,),
                               env=dict(os.environ,OMP_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1'))
         try:
-            code=proc.wait(timeout=plan['wall_seconds'])
+            policy=plan.get('resume_column',{})
+            watch=plan.get('split_watch') or (policy.get('directory') if policy.get('detached_solver') else None)
+            code=wait_for_column(proc,directory,plan['wall_seconds'],watch)
         except subprocess.TimeoutExpired:
             os.killpg(proc.pid,signal.SIGKILL)
             proc.wait()
@@ -82,7 +103,8 @@ def column_action(root,job,status):
     record=root/'recovery'/job['name']/'selected-column.json'
     seen=set()
     current=job
-    for number in range(1,policy['max_restarts']+2):
+    maximum=policy['max_restarts']+int(bool(policy.get('detached_solver')))
+    for number in range(1,maximum+2):
         previous=root/'recovery'/current['name']/'result.json'
         if status=='failed':
             if not retryable_column_failure(previous,policy):
@@ -98,17 +120,18 @@ def column_action(root,job,status):
                 record.parent.mkdir(parents=True,exist_ok=True)
                 save(record,dict(directory=str(parent),receipt=str(receipt)))
             return 'passed',None
-        if status not in ('failed','interrupted') or number>policy['max_restarts']:break
+        if status not in ('failed','interrupted') or number>maximum:break
         name=job['name']+f'-resume-{number:02}'
         receipt=root/'recovery'/name/'input.json'
         if receipt.exists():
             # Reconcile the existing child before examining its predecessor again.
             child=load(receipt)
         else:
-            ck=seed(parent)
+            ck=seed(parent,detached=bool(policy.get('detached_solver')))
             if (not ck or ck['profile_sha256'] in seen) and policy.get('alternative_seed'):
                 ck=seed(parent,policy['alternative_seed'])
             if not ck or ck['profile_sha256'] in seen:return status,None
+            if number>policy['max_restarts'] and not ck.get('initial_regions'):return status,None
             child=retry_job(root,job,parent,ck,number)
             return 'ready',child
         seen.add(child['seed']['profile_sha256'])
@@ -140,7 +163,7 @@ def tick(root, states, slots, allow, release_routing=None, expand_plan=None):
     if expand_plan:
         specs = expand_plan(root, specs)
         jobs = {job['name']:job for job in specs}
-    dependencies={key:job.get('after',[]) for key,job in jobs.items()}
+    dependencies={key:job.get('after',[])+job.get('after_attempt',[]) for key,job in jobs.items()}
     unknown={dep for deps in dependencies.values() for dep in deps if dep not in jobs}
     if unknown:
         raise ValueError(f'unknown recovery prerequisites: {sorted(unknown)}')
@@ -159,10 +182,16 @@ def tick(root, states, slots, allow, release_routing=None, expand_plan=None):
         if status=='new':
             deps=[summary[k] for k in job.get('after',[])]
             if any(d in ('failed','interrupted','dependency failed','invalid column record','await scientific assessment') for d in deps):status='dependency failed'
-            elif any(d!='passed' for d in deps):status='waiting'
+            elif any(d not in ('passed','interpolated') for d in deps):status='waiting'
+            elif any(summary[n] in ('waiting','ready','running') for n in job.get('after_attempt',[])):status='waiting'
             elif key in gates and not gate_allows(root, gates[key]):status='await scientific assessment'
             elif not any(s==job['trigger'] for s,_ in states.values()):status='unneeded'
             else:status,action='ready',job
+        if job.get('superseded_by') and status!='running':
+            status,action='routed to warm source',None
+        skip=job.get('interpolate_when')
+        if skip and status in ('ready','unneeded') and gate_allows(root,skip):
+            status,action='interpolated',None
         if action:pending[key]=action
         summary[key]=status
     # Dispatch in the operator's priority order after resolving dependencies.

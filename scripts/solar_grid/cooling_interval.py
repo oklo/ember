@@ -154,7 +154,16 @@ def decide(root, index, case, stage):
     bounds = score['elapsed_error_bracket']
     resolved = bounds is not None and max(map(abs,bounds)) <= LIMITS['elapsed_relative']
     spacing = 50 if passed and resolved and monotone and weak_burning and atmosphere_ok else 25
-    save(stage/'decision.json', dict(edge_K=edge, target_K=edge-spacing, midpoint_K=edge-spacing//2,
+    interpolate=False
+    validation={}
+    if index==2:
+        for study in ('m05','m06','band1'):
+            path=root/'atmosphere-validation'/study/'comparison.json'
+            if path.is_file():
+                validation[study]=dict(passes=read(path)['passes'],sha256=digest(path))
+        interpolate=(len(validation)==3 and all(r['passes'] for r in validation.values()) and
+                     atmosphere_ok and monotone and weak_burning and spacing<=warm-edge)
+    save(stage/'decision.json', dict(interpolate_midpoint=interpolate,validation=validation,edge_K=edge, target_K=edge-spacing, midpoint_K=edge-spacing//2,
         comparison=score, limits=LIMITS, atmosphere_ok=atmosphere_ok, matching_limits=MATCH_LIMITS,
         cooling_without_resolved_reversal=monotone, nuclear_fraction_below_one_tenth=weak_burning,
         reference='native birth clock', previous_case=str(case), seed=previous['segments'][-1]+'/final.checkpoint',
@@ -187,7 +196,13 @@ def prepare(root, index, stage):
             arms=dict(anchor=dict(X=x, He3=h3, He4=h4, Z=z)),
             logg=math.log10(6.67430e-8*float(mass)/(native['radius_Rsun']*6.957e10)**2),
             purpose='Measured cooling interval at the native restart gravity and composition.')
-        shutil.copyfile(template/'solve.py', directory/'solve.py')
+        from ember_convection_seed import neighbor_regions
+        regions=neighbor_regions(read(Path(seed)),spec)
+        driver=template/'solve.py'
+        if regions:
+            spec['initial_regions']=regions
+            driver=root/'cool-m06-850/detached-region/solve.py'
+        shutil.copyfile(driver, directory/'solve.py')
         save(directory/'spec.json', spec)
 
 
@@ -225,6 +240,19 @@ def build_family(root, index, stage):
     from extend_measured_boundary import extend
     d = read(stage/'decision.json')
     source = Path(d['previous_case'])
+    if d.get('interpolate_midpoint'):
+        assert index==2
+        for study,check in d['validation'].items():
+            path=root/'atmosphere-validation'/study/'comparison.json'
+            assert digest(path)==check['sha256'] and read(path)['passes']
+        columns=measurements(root,index,stage,d,[('endpoint','target_K')])
+        end=columns['endpoint']
+        case=stage/'native'
+        extend(source,case,end['spec'],d['target_K'],d['edge_K'],end['measured'])
+        save(case/'reader-check.json',dict(columns=columns,interpolated_midpoint=True,
+            single_interval_accurate=False,validation=d['validation'],
+            note='Bracketed by measured endpoints. Final evolved-surface column remains required.'))
+        return
     columns = measurements(root, index, stage, d, [('midpoint','midpoint_K'), ('endpoint','target_K')])
     mid, end = columns['midpoint'], columns['endpoint']
     # Probe the single-interval prediction at the actual integer midpoint.
@@ -314,6 +342,7 @@ if __name__ == '__main__':
     parser.add_argument('index', type=int, choices=[1,2,3])
     parser.add_argument('action', choices=['freeze','decide','prepare','family','native','verify'])
     args = parser.parse_args()
+    sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
     root = args.root.resolve()
     os.environ['EMBER_GRID_ROOT'] = str(root)
     sys.path.append(str(root/'thermal-holdout/m06'))

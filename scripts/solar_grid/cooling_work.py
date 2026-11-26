@@ -31,7 +31,7 @@ def jobs_for_cooling(root, existing):
         columns = []
         for name in names:
             directory = stage/name
-            policy = dict(template['resume_column'],directory=str(directory))
+            policy = dict(directory=str(directory),python=template['command'][0],cpu_seconds=3600,max_restarts=2)
             columns.append(add(prefix+name,[prepared],
                 [policy['python'],str(directory/'solve.py'),'anchor','spec.json',str(policy['cpu_seconds'])],
                 [directory/f'hhe_arm_anchor_m06_band_{index}_{name}.json'],template['wall_seconds'],

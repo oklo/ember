@@ -12,7 +12,7 @@ import time
 from release import board, read, save
 
 
-BRIEF_VERSION = 5
+BRIEF_VERSION = 6
 MODEL = 'gpt-6-luna'
 
 
@@ -51,6 +51,13 @@ def supervise(root, config, snapshot):
                    occupied_recovery=snapshot['occupied_recovery'], occupied_columns=snapshot['occupied_columns'],
                    actions={k:('review' if not n else 'atmosphere column' if n in work[o]['ready_columns'] else 'evolution or analysis')
                             for k,(o,n) in actions.items()}, work=summary, complete=snapshot['complete'])
+    payload['atmosphere_policy'] = [
+        'A MARCS bottom-temperature estimate above the cold opacity limit routes the column to warm opacities at the actual composition.',
+        'A split convection signature warrants a detached-region seed. A saved iterate is not a measured atmosphere.',
+        'Prioritize the matched native holdouts at 0.05 and 0.06 and the fixed-profile 850 K calibration. Use elapsed crossing time and preserve thermal reversals.',
+        'Only the controller may grant a bounded interpolation interval from the measured holdouts and surface checks.']
+    payload['warm_routes'] = snapshot.get('warm_routes',{})
+    save(out/'brief.json',payload)
     signature = hashlib.sha256(json.dumps(payload,sort_keys=True).encode()).hexdigest()
     path = out / 'luna-calls.json'
     calls = read(path) if path.exists() else []
@@ -128,7 +135,9 @@ def run(root):
         save(root/'release-status.json',snapshot)
         config = root/'shepherd-config.json'
         if config.exists() and read(config).get('enabled') is True:
-            print(supervise(root,read(config),snapshot),flush=True)
+            result=supervise(root,read(config),snapshot)
+            save(out/'health.json',dict(phase='observed',checked=time.time(),scheduler_pid=status['pid'],brief_version=BRIEF_VERSION,model=MODEL,outcome=result if isinstance(result,str) else result.get('action',result.get('error'))))
+            print(result,flush=True)
 
 
 if __name__ == '__main__':
