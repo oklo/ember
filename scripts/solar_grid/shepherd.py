@@ -12,7 +12,7 @@ import time
 from release import board, read, save
 
 
-BRIEF_VERSION = 4
+BRIEF_VERSION = 5
 MODEL = 'gpt-6-luna'
 
 
@@ -41,11 +41,16 @@ def supervise(root, config, snapshot):
                             target_dependencies={n:row['unfinished_dependencies'].get(n,[]) for n in row['targets']},
                             failed_jobs={n:row['owners'][n] for n in blocked[:6]}, total_failed_jobs=len(blocked))
     actions = {key+':'+job:(key,job) for key in choices for job in work[key]['ready']}
+    dispatch = snapshot.get('dispatch')
+    if dispatch and abs(snapshot['scheduler_heartbeat'] - dispatch['observed']) < 45:
+        eligible_jobs = set(dispatch['eligible'])
+        actions = {k:v for k,v in actions.items() if v[1] in eligible_jobs}
     if not actions:
         actions = {key+':review':(key,None) for key in choices}
     payload = dict(brief_version=BRIEF_VERSION, lanes=snapshot['lanes'], occupied_native=snapshot['occupied_native'],
                    occupied_recovery=snapshot['occupied_recovery'], occupied_columns=snapshot['occupied_columns'],
-                   actions=list(actions), work=summary, complete=snapshot['complete'])
+                   actions={k:('review' if not n else 'atmosphere column' if n in work[o]['ready_columns'] else 'evolution or analysis')
+                            for k,(o,n) in actions.items()}, work=summary, complete=snapshot['complete'])
     signature = hashlib.sha256(json.dumps(payload,sort_keys=True).encode()).hexdigest()
     path = out / 'luna-calls.json'
     calls = read(path) if path.exists() else []
@@ -86,7 +91,7 @@ def supervise(root, config, snapshot):
         order, job = actions[vote['action']]
         call.update(completed=True, usage=usage, order=order, job=job, **vote)
         if current(root, snapshot):
-            save(out/'recommendation.json', dict(call, release_sha256=snapshot['release_sha256'], expires=now+3600))
+            save(out/'recommendation.json', dict(call, release_sha256=snapshot['release_sha256'], expires=now+21600))
     except (ValueError, TypeError, OSError, KeyError, subprocess.SubprocessError) as exc:
         call['error'] = type(exc).__name__ + ': ' + str(getattr(exc,'stderr','') or str(exc))[:400]
     save(path, calls)

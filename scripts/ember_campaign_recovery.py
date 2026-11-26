@@ -170,12 +170,16 @@ def tick(root, states, slots, allow, release_routing=None, expand_plan=None):
     active=sum(s=='running' for s in summary.values())
     columns={job['name'] for job in specs if column_job(job)}
     column_running=any(summary[key]=='running' for key in columns)
+    def eligible_now():
+        if not pending:
+            return []
+        non_columns = [name for name in pending if name not in columns]
+        return non_columns if column_running and non_columns else list(pending)
+
+    initial = eligible_now()
+    launched = []
     while allow and pending and active<slots:
-        key=next(iter(pending))
-        if column_running and key in columns:
-            # Give a ready evolution or assessment a lane while a long atmosphere
-            # solve is active. A second column can still use an otherwise idle lane.
-            key=next((name for name in pending if name not in columns),key)
+        key = eligible_now()[0]
         job=pending.pop(key)
         directory=root/'recovery'/job['name']
         directory.mkdir(parents=True,exist_ok=False)
@@ -185,8 +189,17 @@ def tick(root, states, slots, allow, release_routing=None, expand_plan=None):
             child=subprocess.Popen([sys.executable,__file__,str(directory),str(lock.fileno())],
                              pass_fds=(lock.fileno(),),start_new_session=True,stdin=subprocess.DEVNULL)
             _workers[child.pid]=child
+        launched.append(key)
         summary[key]='running';active+=1
         column_running |= key in columns
+    if release_routing:
+        import time
+        save(root/'dispatch-review.json',dict(observed=time.time(), allowed=allow,
+             first_eligible=initial[0] if initial else None, eligible=eligible_now(),
+             launched=launched, occupied_recovery=active, recovery_slots=slots))
+        if launched:
+            with (root/'release-dispatch.jsonl').open('a') as stream:
+                stream.write(json.dumps(dict(at=time.time(), launched=launched))+'\n')
     return active,summary
 
 if __name__=='__main__':

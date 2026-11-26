@@ -74,7 +74,10 @@ def routing(root, jobs):
     selected = None
     if preferred.exists():
         vote = read(preferred)
-        if vote.get('model') == 'gpt-6-luna' and vote.get('expires', 0) > time.time() and vote.get('release_sha256') == digest(SPEC):
+        state_path = root/'status.json'
+        state = read(state_path).get('recovery', {}) if state_path.exists() else {}
+        if (vote.get('model') == 'gpt-6-luna' and vote.get('expires', 0) > time.time()
+                and vote.get('release_sha256') == digest(SPEC) and state.get(vote.get('job')) == 'ready'):
             definitions.sort(key=lambda item: item['id'] != vote.get('order'))
             selected = vote.get('job')
     for index, order in enumerate(definitions):
@@ -162,7 +165,9 @@ def board(root, status):
             work_orders=[k for k,v in work.items() if mass in v['masses']])
     path = HERE.parents[1] / 'research/record/boundary/tracks.json.gz'
     stat = path.stat()
-    return dict(release=read(SPEC)['release'], release_sha256=digest(SPEC), initial_Z=status['initial_Z'],
+    dispatch_path = root/'dispatch-review.json'
+    dispatch = read(dispatch_path) if dispatch_path.exists() else None
+    return dict(dispatch=dispatch, release=read(SPEC)['release'], release_sha256=digest(SPEC), initial_Z=status['initial_Z'],
                 updated_unix=time.time(), scheduler_heartbeat=status['updated_unix'],
                 hold=status['hold'], phase=status['phase'], work_orders=work, tracks=tracks,
                 lanes=read(root/'campaign.json')['lanes'],
